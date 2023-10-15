@@ -2,14 +2,25 @@
   "name": "igua-rpg2",
   "version": "0.1.0",
   "description": "The sequel to IguaRPG",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "parcel --open"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "targets": {
+    "default": {
+      "source": "src/index.html",
+      "publicUrl": "./",
+      "scopeHoist": false,
+      "optimize": false
+    }
+  },
+  "author": "Hubol",
+  "license": "SEE LICENSE IN README.md",
   "devDependencies": {
-    "@hubol/smooch": "file:smooch.tgz"
+    "@hubol/smooch": "file:smooch.tgz",
+    "parcel": "^2.10.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "pixi.js": "^7.3.1"
   }
 }

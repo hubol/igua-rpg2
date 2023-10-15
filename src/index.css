@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: sans-serif;
+    height: 100%;
+    overflow: hidden;
+    --bg-color: #3870A8;
+    --bg-color-dark: #205088;
+}
+
+#gameCanvas {
+    /* see: http://jsfiddle.net/namuol/VAXrL/1459/ */
+    image-rendering: -moz-crisp-edges;
+    image-rendering: pixelated;
+
+    box-shadow: 3vmin 3vmin var(--bg-color-dark);
+}
+
+#startButton {
+    background-color: #C0C0C0;
+    color: black;
+    appearance: unset;
+    display: inline-block;
+    font-weight: bold;
+    max-width: 80vw;
+    font-size: 8vmin;
+    padding: .25em .33em;
+    cursor: pointer;
+    border: 0.1875em outset #E0E0E0;
+    outline: 0;
+
+    box-shadow: 3vmin 3vmin var(--bg-color-dark);
+}
+
+#startButton:hover {
+    filter: brightness(1.025);
+}
+
+#startButton:active {
+    filter: none;
+    border-style: inset;
+    text-indent: 0.1em;
+    box-shadow: 1.5vmin 1.5vmin var(--bg-color-dark);
+    transform: translate(1.5vmin, 1.5vmin);
+}
+
+body {
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+noscript {
+    font-size: 4vw;
+    font-weight: bold;
+    background-color: #d05050;
+    color: #f0f0d0;
+    padding: .1em .2em;
+}
+
+.devMessageContainer {
+    position: fixed;
+    bottom: 8px;
+    left: 8px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+}
+
+.devMessageContainer > * {
+    padding: 16px;
+    margin: 8px;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 4px 4px 4px var(--bg-color-dark);
+}
