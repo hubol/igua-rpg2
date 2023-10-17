@@ -1,3 +1,7 @@
+.vscode/**/*
+!.vscode/**/*.default
+!.vscode/**/README.md
+
 node_modules/
 
 .parcel-cache/

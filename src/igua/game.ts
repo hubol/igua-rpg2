@@ -6,7 +6,7 @@ export function startGame(engine: GameEngine) {
     const ticker = new AsshatTicker();
 
     const g = new Graphics().beginFill(0xff0000).drawRect(0, 0, 16, 16);
-    engine.stage.addChild(g); // Wow...
+    engine.stage.addChild(g);
 
     engine.animator.add(() => {
         ticker.update();
