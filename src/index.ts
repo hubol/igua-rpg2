@@ -37,7 +37,7 @@ window.onload = initialize;
 // window.addEventListener("unhandledrejection", handlePromiseCancellation);
 
 function addGameCanvasToDocument(element: HTMLCanvasElement) {
-    element.id = "gameCanvas";
+    element.id = "game_canvas";
     document.body.appendChild(element);
 
     return element;

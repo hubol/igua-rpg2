@@ -11,15 +11,17 @@ html {
     --bg-color-dark: #205088;
 }
 
-#gameCanvas {
+#game_canvas {
     /* see: http://jsfiddle.net/namuol/VAXrL/1459/ */
     image-rendering: -moz-crisp-edges;
     image-rendering: pixelated;
 
+    cursor: none;
+
     box-shadow: 3vmin 3vmin var(--bg-color-dark);
 }
 
-#startButton {
+#start_button {
     background-color: #C0C0C0;
     color: black;
     appearance: unset;
@@ -35,11 +37,11 @@ html {
     box-shadow: 3vmin 3vmin var(--bg-color-dark);
 }
 
-#startButton:hover {
+#start_button:hover {
     filter: brightness(1.025);
 }
 
-#startButton:active {
+#start_button:active {
     filter: none;
     border-style: inset;
     text-indent: 0.1em;
@@ -64,7 +66,7 @@ noscript {
     padding: .1em .2em;
 }
 
-.devMessageContainer {
+.dev_message_container {
     position: fixed;
     bottom: 8px;
     left: 8px;
@@ -74,7 +76,7 @@ noscript {
     align-items: flex-start;
 }
 
-.devMessageContainer > * {
+.dev_message_container > * {
     padding: 16px;
     margin: 8px;
     background-color: white;
