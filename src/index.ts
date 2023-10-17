@@ -6,9 +6,14 @@ async function initialize()
 {
     try {
         const animator = new Animator(60);
-        const engine = new GameEngine(animator, { width: 256, height: 256 });
+        const engine = new GameEngine(animator, {
+            width: 256,
+            height: 256,
+            eventFeatures: { click: false, globalMove: false, move: false, wheel: false, },
+            eventMode: "none",
+        });
 
-        integralUpscaleCanvas(addGameCanvasToDocument(engine.canvasElement as any))
+        integralUpscaleCanvas(addGameCanvasToDocument(engine.canvasElement))
         animator.start();
 
         const { startGame } = require("./igua/game");
