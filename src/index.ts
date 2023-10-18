@@ -26,8 +26,9 @@ async function initialize()
 }
 
 function showFatalError(error) {
-    const message = typeof error === 'string' ? error : ( error.message ? error.message : JSON.stringify(error) );
-    document.body.innerHTML = `<h1>Fatal Error</h1>
+    const message = typeof error === 'string' ? error : ( error?.message ? error.message : JSON.stringify(error) );
+    document.body.id = 'fatal_error';
+    document.body.innerHTML = `<h1>Error in initialization</h1>
 <h2>${message}</h2>`;
 }
 

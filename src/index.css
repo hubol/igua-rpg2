@@ -49,6 +49,51 @@ html {
     transform: translate(1.5vmin, 1.5vmin);
 }
 
+#fatal_error {
+    background-color: #1E1E1E;
+    color: #20d058;
+
+    font-family: monospace;
+    font-size: 120%;
+
+    padding: 0.8em;
+    animation: fatal_error_glow 2s infinite alternate-reverse;
+}
+
+@keyframes fatal_error_glow {
+    0% {
+        text-shadow: 0 0 0.2em #387526a0;
+    }
+    100% {
+        text-shadow: 0 0 0.7em #387526;
+    }
+}
+
+#fatal_error h1, #fatal_error h2 {
+    opacity: 0;
+    animation: fatal_error_in 0.7s forwards;
+}
+
+#fatal_error h1 {
+    margin-bottom: 1em;
+    animation-delay: 0.2s;
+}
+
+#fatal_error h2 {
+    animation-delay: 0.4s;
+}
+
+@keyframes fatal_error_in {
+    0% {
+        transform: translate(0, 0.5em);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0);
+        opacity: 100%;
+    }
+}
+
 body {
     background-color: var(--bg-color);
     display: flex;
