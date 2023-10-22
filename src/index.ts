@@ -16,6 +16,7 @@ async function initialize()
         integralUpscaleCanvas(addGameCanvasToDocument(engine.canvasElement))
         animator.start();
 
+        require("./lib/extensions");
         const { startGame } = require("./igua/game");
         startGame(engine);
     }
