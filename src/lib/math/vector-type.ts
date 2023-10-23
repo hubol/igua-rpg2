@@ -12,25 +12,24 @@ extendPrototypeAsVector(Vector.prototype);
 export function vnew(x: number, y: number): Vector;
 export function vnew(vector: Vector): Vector;
 export function vnew(xOrVector: number | Vector, y?: number) {
-    return typeof xOrVector === 'number'
-        ? new Vector(xOrVector, y!)
-        : new Vector(xOrVector.x, xOrVector.y);
+    return y === undefined
+        ? new Vector((xOrVector as Vector).x, (xOrVector as Vector).y)
+        : new Vector(xOrVector as number, y!);
 }
 
 export interface Vector {
     x: number;
     y: number;
     vcpy(): Vector;
-    vround(): Vector;
-    add(x: number): Vector;
-    add(x: number, y: number): Vector;
-    add(vector: Vector): Vector;
-    add(vector: Vector, scalar: number): Vector;
-    normalize(): Vector;
-    scale(f: number): Vector;
-    scale(x: number, y: number): Vector;
-    at(vector: Vector): Vector;
-    at(x: number, y: number): Vector;
+    vround(): this;
+    add(x: number, y: number): this;
+    add(vector: Vector): this;
+    add(vector: Vector, scalar: number): this;
+    normalize(): this;
+    scale(f: number): this;
+    scale(x: number, y: number): this;
+    at(vector: Vector): this;
+    at(x: number, y: number): this;
     vlength: number;
 }
 
@@ -39,7 +38,6 @@ export function extendPrototypeAsVector(prototype: unknown) {
     Object.defineProperties(prototype, <Properties>{
         vlength: {
             get: function () {
-                // @ts-ignore
                 return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y,2));
             },
             set: function (l) {
@@ -49,14 +47,14 @@ export function extendPrototypeAsVector(prototype: unknown) {
             configurable: true,
         },
         at: {
-            value: function (x, y) {
-                if (typeof x === "number") {
-                    this.x = x;
+            value: function (xOrVector: Vector | number, y: number) {
+                if (typeof xOrVector === "number") {
+                    this.x = xOrVector;
                     this.y = y;
                 }
                 else {
-                    this.x = x.x;
-                    this.y = x.y;
+                    this.x = xOrVector.x;
+                    this.y = xOrVector.y;
                 }
                 return this;
             },
@@ -65,30 +63,27 @@ export function extendPrototypeAsVector(prototype: unknown) {
             writable: true,
         },
         add: {
-            value: function (...args) {
-                const me = this;
-    
-                if (typeof args[0] === 'object') {
-                    const scalar = args[1] ?? 1;
-                    me.x += (args[0].x ?? 0) * scalar;
-                    me.y += (args[0].y ?? 0) * scalar;
+            value: function (xOrVector: Vector | number, yOrScalar?: number) {
+                if (typeof xOrVector === "number") {
+                    this.x += xOrVector;
+                    this.y += yOrScalar;
                 }
                 else {
-                    me.x += args[0] ?? 0;
-                    me.y += args[1] ?? 0;
+                    const scalar = yOrScalar ?? 1;
+                    this.x += xOrVector.x * scalar;
+                    this.y += xOrVector.y * scalar;
                 }
-                return me;
+                return this;
             },
             enumerable: false,
             configurable: true,
             writable: true,
         },
         scale: {
-            value: function (...args) {
-                const me = this;
-                me.x *= args[0];
-                me.y *= args[1] === undefined ? args[0] : args[1];
-                return me;
+            value: function (xf: number, y?: number) {
+                this.x *= xf;
+                this.y *= y === undefined ? xf : y;
+                return this;
             },
             enumerable: false,
             configurable: true,
@@ -96,7 +91,7 @@ export function extendPrototypeAsVector(prototype: unknown) {
         },
         vcpy: {
             value: function () {
-                return { x: this.x, y: this.y };
+                return vnew(this.x, this.y);
             },
             enumerable: false,
             configurable: true,
