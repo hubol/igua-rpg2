@@ -700,24 +700,6 @@ function PromiseReject(reason) {
   return new DexiePromise(INTERNAL, false, reason);
 }
 
-export function wrap(fn, errorCatcher) {
-  var psd = PSD;
-  return function () {
-    var wasRootExec = beginMicroTickScope(),
-      outerScope = PSD;
-
-    try {
-      switchToZone(psd, true);
-      return fn.apply(this, arguments);
-    } catch (e) {
-      errorCatcher && errorCatcher(e);
-    } finally {
-      switchToZone(outerScope, false);
-      if (wasRootExec) endMicroTickScope();
-    }
-  };
-}
-
 //
 // variables used for native await support
 //
