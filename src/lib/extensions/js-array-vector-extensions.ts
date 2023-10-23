@@ -1,10 +1,10 @@
-import { Vector, extendPrototypeAsVector } from "../math/vector-type";
+import { Vector, defineVectorProperties } from "../math/vector-type";
 
 declare global {
     interface Array<T> extends Vector { }
 }
 
-extendPrototypeAsVector(Array.prototype);
+defineVectorProperties(Array.prototype);
 
 Object.defineProperties(Array.prototype, {
     x: {

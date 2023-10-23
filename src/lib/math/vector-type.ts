@@ -7,7 +7,7 @@ function Vector(x: number, y: number) {
     this.y = y;
 }
 
-extendPrototypeAsVector(Vector.prototype);
+defineVectorProperties(Vector.prototype);
 
 export function vnew(x: number, y: number): Vector;
 export function vnew(vector: Vector): Vector;
@@ -33,7 +33,7 @@ export interface Vector {
     vlength: number;
 }
 
-export function extendPrototypeAsVector(prototype: unknown) {
+export function defineVectorProperties(prototype: unknown) {
     type Properties = Record<keyof Vector, PropertyDescriptor & ThisType<any>>
     Object.defineProperties(prototype, <Properties>{
         vlength: {
