@@ -10,14 +10,10 @@ function createDisplayObject(): DisplayObject {
 
 export function testPixiTickerIntegration() {
     const ticker = new AsshatTicker();
-    const c = new Container()//.withTicker(ticker);
+    const c = new Container().withTicker(ticker);
     const d = createDisplayObject();
     c.addChild(d);
     Assert(c.ticker).toStrictlyBe(ticker);
     Assert(d.ticker).toStrictlyBe(c.ticker);
     Assert(d.ticker).toBeTruthy();
-}
-
-export function test2() {
-    throw new Error();
 }
