@@ -17,25 +17,23 @@ export class LazyTicker implements IAsshatTicker {
 
     add(arg: AsshatTickerFn) {
         if (this._resolved)
-            return this._resolved.add(arg);
+            throw new InvalidLazyTickerAccess(`Attempt to enqueue add() call on already-resolved LazyTicker`, this);
         this._queuedCalls.push({ fn: 'add', arg });
     }
 
     remove(arg: AsshatTickerFn) {
         if (this._resolved)
-            return this._resolved.remove(arg);
+            throw new InvalidLazyTickerAccess(`Attempt to enqueue remove() call on already-resolved LazyTicker`, this);
         this._queuedCalls.push({ fn: 'remove', arg });
     }
 
     update(): void {
-        throw new Error("Not implemented");
+        throw new InvalidLazyTickerAccess(`Attempt to call update() on LazyTicker`, this);
     }
 
     resolve(ticker: AsshatTicker) {
-        if (this._resolved) {
-            console.error(`Attempt to resolve already resolved LazyTicker`, this);
-            return;
-        }
+        if (this._resolved)
+            throw new InvalidLazyTickerAccess(`Attempt to resolve() already-resolved LazyTicker`, this);
 
         for (let i = 0; i < this._queuedCalls.length; i++) {
             const call = this._queuedCalls[i];
@@ -50,12 +48,16 @@ export class LazyTicker implements IAsshatTicker {
     }
 
     addReceiver(receiver: LazyTickerReceiver) {
-        if (this._resolved) {
-            console.error(`Attempt to add receiver to already-resolved LazyTicker`, this, receiver);
-            return;
-        }
+        if (this._resolved)
+            throw new InvalidLazyTickerAccess(`Attempt to addReceiver() to already-resolved LazyTicker`, this);
 
         this._receivers.push(receiver);
+    }
+}
+
+class InvalidLazyTickerAccess extends Error {
+    constructor(message: string, readonly lazyTicker: LazyTicker) {
+        super(message);
     }
 }
 
