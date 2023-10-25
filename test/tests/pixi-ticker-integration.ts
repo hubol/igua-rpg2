@@ -1,12 +1,8 @@
 import "../../src/lib/extensions";
-import { Container, DisplayObject } from "pixi.js";
+import { Container } from "pixi.js";
 import { AsshatTicker } from "../../src/lib/game-engine/asshat-ticker";
 import { Assert } from "../lib/assert";
-
-function createDisplayObject(): DisplayObject {
-    // @ts-ignore
-    return new DisplayObject();
-}
+import { createDisplayObject } from "../lib/create-display-object";
 
 export function childInheritsTicker() {
     const ticker = new AsshatTicker();
