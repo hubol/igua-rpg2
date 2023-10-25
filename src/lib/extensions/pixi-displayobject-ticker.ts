@@ -3,13 +3,11 @@ import { AsshatTicker, IAsshatTicker } from "../game-engine/asshat-ticker";
 import { LazyTicker, isLazyTicker } from "./lazy-ticker";
 
 type StepFn = () => unknown;
-type AsyncFn = () => Promise<unknown>;
 
 declare module "pixi.js" {
     interface DisplayObject {
         readonly ticker: IAsshatTicker;
         step(fn: StepFn): this;
-        async(fn: AsyncFn): this;
     }
 
     interface Container {
@@ -82,6 +80,6 @@ Object.defineProperties(DisplayObject.prototype, {
         configurable: true,
         writable: true,
     },
-})
+});
 
 export default 0;
