@@ -33,3 +33,31 @@ export function childContainerKeepsItsTicker() {
     Assert(cChild.ticker).toStrictlyBe(tickerChild);
     Assert(d.ticker).toStrictlyBe(tickerChild);
 }
+
+export function stepFnIsNotCalledAfterObjectDestroyed() {
+    const ticker = new AsshatTicker();
+
+    let displayObjectSteps = 0;
+
+    const c = new Container().withTicker(ticker);
+    const d = createDisplayObject()
+        .step(() => {
+            displayObjectSteps += 1;
+        });
+
+    c.addChild(d);
+
+    Assert(displayObjectSteps).toStrictlyBe(0);
+
+    ticker.update();
+
+    Assert(displayObjectSteps).toStrictlyBe(1);
+
+    ticker.update();
+
+    Assert(displayObjectSteps).toStrictlyBe(2);
+
+    d.destroy();
+
+    Assert(displayObjectSteps).toStrictlyBe(2);
+}

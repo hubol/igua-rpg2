@@ -35,11 +35,25 @@ Object.defineProperties(DisplayObject.prototype, <DisplayObjectProperties>{
             if (this._ticker)
                 return this._ticker;
 
-            if (this.parent.ticker)
+            if (this.parent?.ticker)
                 return this._ticker = this.parent.ticker;
         },
         enumerable: false,
         configurable: true,
+    },
+    step: {
+        value: function (stepFn: StepFn) {
+            if (this.parent)
+                this.ticker.add(stepFn);
+            else
+                this.on('added', () => this.ticker.add(stepFn));
+            
+            this.on('destroyed', () => this.ticker.remove(stepFn));
+            return this;
+        },
+        enumerable: false,
+        configurable: true,
+        writable: true,
     },
 })
 
