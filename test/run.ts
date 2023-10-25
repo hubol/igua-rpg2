@@ -28,7 +28,8 @@ function logFailedTests() {
     if (!failedTestNames.length)
         return;
 
-    console.log(`${paint.red(`${failedTestNames.length} test(s) failed:`)}
+    console.log(`
+${paint.red(`${failedTestNames.length} test(s) failed:`)}
 ${failedTestNames.map(name => `- ${name}`).join('\n')}`);
 }
 
@@ -40,20 +41,21 @@ async function runTestsInFile(file: string) {
         if (typeof fn !== 'function')
             continue;
 
-        console.log('------------');
         const testName = `${fileName} > ${fn.name}`;
 
         try {
             await fn();
-            console.log(testName + ' ' + paint.bgGreen`PASS`);
+            console.log(paint.bgGreen`PASS` + ' ' + testName);
         }
         catch (e) {
             failedTestNames.push(testName);
-            console.log(testName + ' ' + paint.bgRed`FAIL`);
+            console.log();
+            console.log(paint.red`------------`);
+            console.log(paint.bgRed`FAIL` + ' ' + testName);
             console.log(ErrorPrinter.toPrintable(e));
+            console.log(paint.red`------------`);
+            console.log();
         }
-
-        console.log();
     }
 }
 
