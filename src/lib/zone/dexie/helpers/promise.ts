@@ -710,7 +710,8 @@ var zoneEchoes = 0; // zoneEchoes is a must in order to persist zones between na
 var totalEchoes = 0; // ID counter for micro-tasks. Used to detect possible native await in our Promise.prototype.then.
 
 var zone_id_counter = 0;
-export function newScope(fn, props, a1, a2) {
+export function newScope(fn, props)
+export function newScope(fn, props, a1?, a2?) {
   var parent = PSD,
     psd = Object.create(parent);
   psd.parent = parent;

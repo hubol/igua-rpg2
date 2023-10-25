@@ -1,6 +1,6 @@
 // Lifted from `dexie.js` -- all the @ts-ignore's are because dexie doesn't use ts-strict and has type errors.
 
-import { _global } from "../globals/global.js";
+import { _global } from "../globals/global";
 export const keys = Object.keys;
 export const isArray = Array.isArray;
 if (typeof Promise !== "undefined" && !_global.Promise) {
