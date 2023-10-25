@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "baseUrl": "../",
         "types": [ "node" ]
     },
     "include": [ "../test/", "../src/" ],
