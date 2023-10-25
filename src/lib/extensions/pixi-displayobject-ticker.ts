@@ -19,12 +19,27 @@ declare module "pixi.js" {
 Object.defineProperties(Container.prototype, {
     withTicker: {
         value: function (ticker: AsshatTicker) {
-            this.ticker = ticker;
+            this._ticker = ticker;
             return this;
         },
         enumerable: false,
         configurable: true,
         writable: true,
+    },
+});
+
+type DisplayObjectProperties = Record<keyof DisplayObject, PropertyDescriptor & ThisType<DisplayObject & Record<string, any>>>
+Object.defineProperties(DisplayObject.prototype, <DisplayObjectProperties>{
+    ticker: {
+        get: function () {
+            if (this._ticker)
+                return this._ticker;
+
+            if (this.parent.ticker)
+                return this._ticker = this.parent.ticker;
+        },
+        enumerable: false,
+        configurable: true,
     },
 })
 

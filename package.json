@@ -4,7 +4,7 @@
   "description": "The sequel to IguaRPG",
   "scripts": {
     "serve": "parcel --open",
-    "test": "ts-node test/run.ts",
+    "test": "ts-node --transpileOnly test/run.ts",
     "test:watch": "nodemon --watch src --watch test -e ts,js,json -x npm run test"
   },
   "targets": {
