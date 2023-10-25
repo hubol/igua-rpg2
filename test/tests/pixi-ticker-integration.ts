@@ -1,6 +1,7 @@
-import "../src/lib/extensions";
+import "../../src/lib/extensions";
 import { Container, DisplayObject } from "pixi.js";
-import { AsshatTicker } from "../src/lib/game-engine/asshat-ticker";
+import { AsshatTicker } from "../../src/lib/game-engine/asshat-ticker";
+import { Assert } from "../lib/assert";
 
 function createDisplayObject(): DisplayObject {
     // @ts-ignore
@@ -12,8 +13,11 @@ export function testPixiTickerIntegration() {
     const c = new Container()//.withTicker(ticker);
     const d = createDisplayObject();
     c.addChild(d);
-    if (d.ticker !== c.ticker)
-        console.error('oh no!')
-    else
-        console.log('yay')
+    Assert(c.ticker).toStrictlyBe(ticker);
+    Assert(d.ticker).toStrictlyBe(c.ticker);
+    Assert(d.ticker).toBeTruthy();
+}
+
+export function test2() {
+    throw new Error();
 }

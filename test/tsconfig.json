@@ -1,3 +1,7 @@
 {
-    "include": [ "../test/" ]
+    "compilerOptions": {
+        "types": [ "node" ]
+    },
+    "include": [ "../test/", "../src/" ],
+    "exclude": [ "../src/declarations/parcel.d.ts" ]
 }
