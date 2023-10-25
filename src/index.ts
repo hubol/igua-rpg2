@@ -2,8 +2,7 @@ import { integralUpscaleCanvas } from "./lib/browser/integral-upscale-canvas";
 import { Animator } from "./lib/game-engine/animator";
 import { GameEngine } from "./lib/game-engine/game-engine";
 
-async function initialize()
-{
+async function initialize() {
     try {
         const animator = new Animator(60);
         const engine = new GameEngine(animator, {
