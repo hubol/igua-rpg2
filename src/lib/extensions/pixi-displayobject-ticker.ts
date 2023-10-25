@@ -19,6 +19,7 @@ declare module "pixi.js" {
 
 interface DisplayObjectPrivate {
     _ticker: IAsshatTicker;
+    _receiveResolvedTicker(ticker: AsshatTicker): void;
 }
 
 Object.defineProperties(Container.prototype, {
@@ -49,17 +50,20 @@ Object.defineProperties(DisplayObject.prototype, {
                 const parentTicker = this.parent.ticker;
 
                 if (isLazyTicker(parentTicker)) {
-                    parentTicker.addReceiver(ticker => {
-                        this._ticker = ticker;
-                    });
+                    parentTicker.addReceiver(this);
                 }
 
                 return this._ticker = parentTicker;
             }
 
-            return this._ticker = new LazyTicker(ticker => {
-                this._ticker = ticker;
-            });
+            return this._ticker = new LazyTicker(this);
+        },
+        enumerable: false,
+        configurable: true,
+    },
+    _receiveResolvedTicker: {
+        value: function (this: DisplayObject & DisplayObjectPrivate, ticker: AsshatTicker) {
+            this._ticker = ticker;
         },
         enumerable: false,
         configurable: true,

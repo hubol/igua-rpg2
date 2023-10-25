@@ -41,9 +41,10 @@ export class LazyTicker implements IAsshatTicker {
         }
 
         for (let i = 0; i < this._receivers.length; i++) {
-            this._receivers[i](ticker);
+            this._receivers[i]._receiveResolvedTicker(ticker);
         }
 
+        this._receivers.length = 0;
         this._resolved = ticker;
     }
 
@@ -61,6 +62,8 @@ class InvalidLazyTickerAccess extends Error {
     }
 }
 
-type LazyTickerReceiver = (ticker: AsshatTicker) => void;
+export interface LazyTickerReceiver {
+    _receiveResolvedTicker(ticker: AsshatTicker): void;
+}
 
 export const isLazyTicker = (ticker: IAsshatTicker): ticker is LazyTicker => (ticker as any)._isLazy;
