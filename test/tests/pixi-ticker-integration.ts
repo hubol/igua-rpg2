@@ -61,3 +61,24 @@ export function stepFnIsNotCalledAfterObjectDestroyed() {
 
     Assert(displayObjectSteps).toStrictlyBe(2);
 }
+
+export function displayObjectCanBeAddedToContainerWithoutTicker() {
+    let displayObjectSteps = 0;
+
+    const c = new Container();
+    const d = createDisplayObject()
+        .step(() => {
+            displayObjectSteps += 1;
+        });
+
+    c.addChild(d);
+
+    const ticker = new AsshatTicker();
+    c.withTicker(ticker);
+
+    Assert(displayObjectSteps).toStrictlyBe(0);
+
+    ticker.update();
+
+    Assert(displayObjectSteps).toStrictlyBe(1);
+}

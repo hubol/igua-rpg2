@@ -1,12 +1,13 @@
 import { Container, DisplayObject } from "pixi.js";
-import { AsshatTicker } from "../game-engine/asshat-ticker";
+import { AsshatTicker, IAsshatTicker } from "../game-engine/asshat-ticker";
+import { LazyTicker, isLazyTicker } from "./lazy-ticker";
 
 type StepFn = () => unknown;
 type AsyncFn = () => Promise<unknown>;
 
 declare module "pixi.js" {
     interface DisplayObject {
-        readonly ticker: AsshatTicker;
+        readonly ticker: IAsshatTicker;
         step(fn: StepFn): this;
         async(fn: AsyncFn): this;
     }
@@ -16,9 +17,19 @@ declare module "pixi.js" {
     }
 }
 
+interface DisplayObjectPrivate {
+    _ticker: IAsshatTicker;
+}
+
 Object.defineProperties(Container.prototype, {
     withTicker: {
-        value: function (ticker: AsshatTicker) {
+        value: function (this: Container & DisplayObjectPrivate, ticker: AsshatTicker) {
+            if (this._ticker) {
+                if (isLazyTicker(this._ticker))
+                    this._ticker.resolve(ticker);
+                else
+                    console.warn(`Multiple calls detected to withTicker. This may result in undefined behavior!`);
+            }
             this._ticker = ticker;
             return this;
         },
@@ -28,21 +39,33 @@ Object.defineProperties(Container.prototype, {
     },
 });
 
-type DisplayObjectProperties = Record<keyof DisplayObject, PropertyDescriptor & ThisType<DisplayObject & Record<string, any>>>
-Object.defineProperties(DisplayObject.prototype, <DisplayObjectProperties>{
+Object.defineProperties(DisplayObject.prototype, {
     ticker: {
-        get: function () {
+        get: function (this: DisplayObject & DisplayObjectPrivate) {
             if (this._ticker)
                 return this._ticker;
 
-            if (this.parent?.ticker)
-                return this._ticker = this.parent.ticker;
+            if (this.parent) {
+                const parentTicker = this.parent.ticker;
+
+                if (isLazyTicker(parentTicker)) {
+                    parentTicker.addReceiver(ticker => {
+                        this._ticker = ticker;
+                    });
+                }
+
+                return this._ticker = parentTicker;
+            }
+
+            return this._ticker = new LazyTicker(ticker => {
+                this._ticker = ticker;
+            });
         },
         enumerable: false,
         configurable: true,
     },
     step: {
-        value: function (stepFn: StepFn) {
+        value: function (this: DisplayObject, stepFn: StepFn) {
             if (this.parent)
                 this.ticker.add(stepFn);
             else

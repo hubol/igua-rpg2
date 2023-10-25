@@ -2,21 +2,26 @@ export class EscapeTickerAndExecute {
     constructor(readonly execute: () => void) { }
 }
 
-type AsshatTickerFn = ((...params: any[]) => any) & { _removed?: boolean };
+export type AsshatTickerFn = ((...params: any[]) => any) & { _removed?: boolean };
 
-export class AsshatTicker {
+export interface IAsshatTicker {
+    doNextUpdate: boolean;
+    add(fn: AsshatTickerFn): void;
+    remove(fn: AsshatTickerFn): void;
+    update(): void;
+}
+
+export class AsshatTicker implements IAsshatTicker {
     doNextUpdate = true;
 
-    readonly _callbacks: AsshatTickerFn[] = [];
+    private readonly _callbacks: AsshatTickerFn[] = [];
 
-    add(fn: AsshatTickerFn): this {
+    add(fn: AsshatTickerFn) {
         this._callbacks.push(fn);
-        return this;
     }
 
-    remove(fn: AsshatTickerFn): this {
+    remove(fn: AsshatTickerFn) {
         fn._removed = true;
-        return this;
     }
 
     update(): void {
