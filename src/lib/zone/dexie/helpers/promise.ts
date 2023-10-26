@@ -451,11 +451,16 @@ props(DexiePromise, {
   },
 });
 
+interface Es2020Promise {
+  allSettled: Function;
+  any: Function;
+}
+
 if (NativePromise) {
-  if (NativePromise.allSettled)
+  if ((NativePromise as unknown as Es2020Promise).allSettled)
     setProp(DexiePromise, "allSettled", function () {
       const possiblePromises = getArrayOf
-        .apply(null, arguments)
+        .apply(null, arguments as any)
         .map(onPossibleParallellAsync);
       return new DexiePromise((resolve) => {
         if (possiblePromises.length === 0) resolve([]);
@@ -471,10 +476,10 @@ if (NativePromise) {
         );
       });
     });
-  if (NativePromise.any && typeof AggregateError !== "undefined")
+  if ((NativePromise as unknown as Es2020Promise).any && typeof AggregateError !== "undefined")
     setProp(DexiePromise, "any", function () {
       const possiblePromises = getArrayOf
-        .apply(null, arguments)
+        .apply(null, arguments as any)
         .map(onPossibleParallellAsync);
       return new DexiePromise((resolve, reject) => {
         if (possiblePromises.length === 0) reject(new AggregateError([]));
@@ -780,8 +785,8 @@ export function newScope(fn, props, a1?, a2?) {
         },
         all: DexiePromise.all,
         race: DexiePromise.race,
-        allSettled: DexiePromise.allSettled,
-        any: DexiePromise.any,
+        allSettled: (DexiePromise as unknown as Es2020Promise).allSettled,
+        any: (DexiePromise as unknown as Es2020Promise).any,
         resolve: DexiePromise.resolve,
         reject: DexiePromise.reject,
         nthen: getPatchedPromiseThen(globalEnv.nthen, psd), // native then
