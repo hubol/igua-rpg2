@@ -7,4 +7,18 @@ interface AsshatZoneContext {
     ticker: IAsshatTicker;
 }
 
-export const AsshatZone = new Zone<AsshatZoneContext>('HubolZone');
+class AsshatZoneImpl extends Zone<AsshatZoneContext> {
+    constructor() {
+        super('AsshatZone');
+    }
+
+    run(fn: () => unknown, context: AsshatZoneContext): Promise<void> {
+        return super.run(fn, context).catch(handleAsshatZoneError);
+    }
+}
+
+export const AsshatZone = new AsshatZoneImpl();
+
+function handleAsshatZoneError(e: any) {
+    // TODO check for CancellationException
+}

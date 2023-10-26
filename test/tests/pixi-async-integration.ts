@@ -85,9 +85,10 @@ export async function worksKinda() {
     Assert(phase).toStrictlyBe(3);
 
     
+    d.destroy();
     phase4 = true;
     ticker.update();
 
     await TestPromise.sleep(1);
-    Assert(phase).toStrictlyBe(4);
+    Assert(phase).toStrictlyBe(3);
 }
