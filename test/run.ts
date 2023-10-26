@@ -34,17 +34,18 @@ ${paint.red(`${failedTestNames.length} test(s) failed:`)}
 ${failedTestNames.map(name => `- ${name}`).join('\n')}`);
 }
 
-async function runWithTimeout(fn: Function, timeoutMs: number) {
-    let timedOut = false;
-    const timeout = TestPromise.sleep(timeoutMs)
-        .then(() => timedOut = true);
-    await Promise.race([
-        fn(),
-        timeout,
-    ]);
-    if (timedOut)
-        throw new Error(`Timed out after ${timeoutMs}ms`);
-}
+// Seems buggy due to Dexie... investigate
+// async function runWithTimeout(fn: Function, timeoutMs: number) {
+//     let timedOut = false;
+//     const timeout = TestPromise.sleep(timeoutMs)
+//         .then(() => timedOut = true);
+//     await Promise.race([
+//         fn(),
+//         timeout,
+//     ]);
+//     if (timedOut)
+//         throw new Error(`Timed out after ${timeoutMs}ms`);
+// }
 
 async function runTestsInFile(file: string) {
     const fileName = path.parse(file).base;
@@ -57,7 +58,7 @@ async function runTestsInFile(file: string) {
         const testName = `${fileName} > ${fn.name}`;
 
         try {
-            runWithTimeout(fn, 1000);
+            await fn();
             console.log(paint.bgGreen`PASS` + ' ' + testName);
         }
         catch (e) {
