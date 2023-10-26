@@ -5,6 +5,9 @@ An advantage might be that it seems to support native Promises--which zone.js do
 Rev. 1
 Remove unused exports from the `Dexie.js` modules.
 
+Rev. 2
+Convert all modules to TypeScript.
+
 ------------------------
 
 Set of files lifted from `Dexie.js` to enable async context propagation.
