@@ -128,7 +128,7 @@ export var globalPSD = {
   unhandleds: [],
   onunhandled: globalError,
   pgp: false,
-  env: {},
+  env: <GlobalPsdEnv>{},
   finalize: function () {
     this.unhandleds.forEach((uh) => {
       try {
@@ -153,6 +153,9 @@ type PromiseResolve = (value: PromiseValue | PromiseLike<PromiseValue>) => void;
 type PromiseReject = (reason?: PromiseRejectionReason) => void;
 type PromiseExecutor = (resolve: PromiseResolve, reject: PromiseReject) => void;
 
+// null (=pending), false (=rejected) or true (=resolved)
+type DexiePromiseState = null | false | true;
+
 interface IDexiePromise {
   _listeners: [];
   _lib: boolean;
@@ -160,14 +163,26 @@ interface IDexiePromise {
   _stackHolder: Error;
   _prev: unknown;
   _numPrev: number;
-  _state: unknown;
+  _state: DexiePromiseState;
   _stack: Error;
   _value: PromiseValue;
   _then(onFulfilled: PromiseResolve, onRejected: PromiseReject);
   onuncatched: () => void;
 }
 
-function DexiePromise(this: IDexiePromise, fn: PromiseExecutor, _state?, _value?: PromiseValue) {
+interface DexiePromiseConstructor {
+  new (fn: PromiseExecutor): IDexiePromise;
+  new (fn: PromiseExecutor, _state: DexiePromiseState, _value: PromiseValue): IDexiePromise;
+
+  resolve: typeof Promise['resolve'];
+  all: typeof Promise['all'];
+  race: typeof Promise['race'];
+  // allSettled: typeof Promise['allSettled'];
+  // any: typeof Promise['any'];
+  reject: typeof Promise['reject'];
+}
+
+const DexiePromise: DexiePromiseConstructor = <any>function DexiePromise(this: IDexiePromise, fn: PromiseExecutor, _state?: DexiePromiseState, _value?: PromiseValue) {
   if (typeof this !== "object")
     throw new TypeError("Promises must be constructed via new");
   this._listeners = [];
@@ -193,7 +208,7 @@ function DexiePromise(this: IDexiePromise, fn: PromiseExecutor, _state?, _value?
     if (fn !== INTERNAL) throw new TypeError("Not a function");
     // Private constructor (INTERNAL, state, value).
     // Used internally by Promise.resolve() and Promise.reject().
-    this._state = _state;
+    this._state = _state!;
     this._value = _value;
     if (this._state === false) handleRejection(this, this._value); // Map error, set stack and addPossiblyUnhandledError().
     return;
@@ -901,6 +916,8 @@ function switchToZone(targetZone, bEnteringZone) {
     }
   }
 }
+
+type GlobalPsdEnv = ReturnType<typeof snapShot>;
 
 function snapShot() {
   var GlobalPromise = _global.Promise;
