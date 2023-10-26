@@ -6,7 +6,7 @@ import { wait } from "../../src/lib/game-engine/wait";
 import { Assert } from "../lib/assert";
 import { TestPromise } from "../lib/test-promise";
 
-export function worksReally() {
+export function worksWithoutFlushingPromises() {
     const ticker = new AsshatTicker();
     const c = new Container().withTicker(ticker);
 
@@ -46,7 +46,7 @@ export function worksReally() {
     Assert(phase).toStrictlyBe(4);
 }
 
-export async function worksKinda() {
+export async function worksWithFlushingPromises() {
     const ticker = new AsshatTicker();
     const c = new Container().withTicker(ticker);
 
