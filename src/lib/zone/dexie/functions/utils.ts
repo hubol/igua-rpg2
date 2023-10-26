@@ -72,7 +72,7 @@ export function getPropertyDescriptor(obj, prop) {
 }
 
 // @ts-ignore
-export function tryCatch(fn: (...args: any[]) => void, onerror, args?): void {
+export function tryCatch(fn: (...args: any[]) => void, onerror?, args?): void {
   try {
     fn.apply(null, args);
   } catch (ex) {

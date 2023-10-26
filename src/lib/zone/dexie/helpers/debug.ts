@@ -17,7 +17,7 @@ export var libraryFilter = () => true;
 
 export const NEEDS_THROW_FOR_STACK = !new Error("").stack;
 
-export function getErrorWithStack() {
+export function getErrorWithStack(): Error {
   "use strict";
   if (NEEDS_THROW_FOR_STACK)
     try {
@@ -29,7 +29,7 @@ export function getErrorWithStack() {
       getErrorWithStack.arguments;
       throw new Error(); // Fallback if above line don't throw.
     } catch (e) {
-      return e;
+      return e as Error;
     }
   return new Error();
 }
