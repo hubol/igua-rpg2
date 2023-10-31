@@ -74,14 +74,14 @@ export async function worksWithFlushingPromises() {
     phase1 = true;
     ticker.update();
 
-    await TestPromise.sleep(1);
+    await TestPromise.flush();
     Assert(phase).toStrictlyBe(1);
 
     phase2 = true;
     phase3 = true;
     ticker.update();
 
-    await TestPromise.sleep(1);
+    await TestPromise.flush();
     Assert(phase).toStrictlyBe(3);
 
     
@@ -89,6 +89,54 @@ export async function worksWithFlushingPromises() {
     phase4 = true;
     ticker.update();
 
-    await TestPromise.sleep(1);
+    await TestPromise.flush();
+    Assert(phase).toStrictlyBe(3);
+}
+
+export async function promiseAllWorksWithFlushingPromises() {
+    const ticker = new AsshatTicker();
+    const c = new Container().withTicker(ticker);
+
+    let phase = 0;
+    let phase1 = false;
+    let phase2 = false;
+    let phase3 = false;
+
+    const d = createDisplayObject().async(
+        async () => {
+            await Promise.all([
+                wait(() => phase1),
+                wait(() => phase2),
+            ]);
+            phase = 2;
+            await wait(() => phase3);
+            phase = 3;
+        });
+    
+    c.addChild(d);
+
+    ticker.update();
+    phase1 = true;
+    ticker.update();
+
+    await TestPromise.flush();
+    Assert(phase).toStrictlyBe(0);
+
+    phase2 = true;
+    ticker.update();
+
+    await TestPromise.flush();
+    Assert(phase).toStrictlyBe(2);
+
+    phase3 = true;
+    ticker.update();
+    
+    await TestPromise.flush();
+    Assert(phase).toStrictlyBe(3);
+    
+    d.destroy();
+    ticker.update();
+
+    await TestPromise.flush();
     Assert(phase).toStrictlyBe(3);
 }
