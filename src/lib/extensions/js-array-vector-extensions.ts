@@ -4,7 +4,7 @@ declare global {
     interface Array<T> extends Vector { }
 }
 
-defineVectorProperties(Array.prototype);
+defineVectorProperties(Array.prototype, { omit: [ 'at' ] });
 
 Object.defineProperties(Array.prototype, {
     x: {
