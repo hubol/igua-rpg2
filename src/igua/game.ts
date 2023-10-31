@@ -3,6 +3,7 @@ import { AsshatTicker } from "../lib/game-engine/asshat-ticker";
 import { GameEngine } from "../lib/game-engine/game-engine";
 import { wait } from "../lib/game-engine/wait";
 import { Key, KeyListener } from "../lib/browser/key";
+import { AsshatZoneDiagnostics } from "../lib/game-engine/asshat-zone";
 
 export function startGame(engine: GameEngine) {
     const ticker = new AsshatTicker();
@@ -11,6 +12,7 @@ export function startGame(engine: GameEngine) {
     KeyListener.start();
 
     ticker.add(() => {
+        AsshatZoneDiagnostics.printHandledCancellationErrors();
         KeyListener.advance();
     });
 
@@ -18,6 +20,8 @@ export function startGame(engine: GameEngine) {
         const g = new Graphics().at(i * 2, i * 2).beginFill(0xff0000 + i).drawRect(0, 0, 16, 16)
             .step(() => {
                 g.x = (g.x + 1) % 256;
+                if (g.scale.x !== 1 && Math.random() > 0.95)
+                    g.destroy();
             })
             .async(async () => {
                 while (true) {

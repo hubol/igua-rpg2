@@ -1,4 +1,4 @@
-import { CancellationToken } from "../promise/cancellation-token";
+import { CancellationError, CancellationToken } from "../promise/cancellation-token";
 import { Zone } from "../zone";
 import { IAsshatTicker } from "./asshat-ticker";
 
@@ -19,6 +19,23 @@ class AsshatZoneImpl extends Zone<AsshatZoneContext> {
 
 export const AsshatZone = new AsshatZoneImpl();
 
+let handledCancellationErrorsCount = 0;
+
 function handleAsshatZoneError(e: any) {
-    // TODO check for CancellationException
+    if (e instanceof CancellationError) {
+        handledCancellationErrorsCount += 1;
+        return;
+    }
+
+    console.error(`Unhandled error occurred in AsshatZone`, e);
+}
+
+export const AsshatZoneDiagnostics = {
+    printHandledCancellationErrors() {
+        if (handledCancellationErrorsCount === 0)
+            return;
+    
+        console.debug(`Handled ${handledCancellationErrorsCount} CancellationError(s)`)
+        handledCancellationErrorsCount = 0;
+    }
 }

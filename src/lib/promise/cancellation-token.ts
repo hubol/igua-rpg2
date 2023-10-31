@@ -8,20 +8,19 @@ export class CancellationToken {
         this._isCancelled = true;
     }
 
-    get isCancelled() {
-        return this._isCancelled;
-    }
-
     rejectIfCancelled(reject: (reason?: any) => void) {
-        if (this.isCancelled)
-            reject({ message: "Cancelled by token", cancellationToken: this });
+        if (this._isCancelled) {
+            reject(new CancellationError(this));
+            return true;
+        }
+
+        return false;
     }
 }
 
-export function handlePromiseCancellation(ev: PromiseRejectionEvent) {
-    if (!ev?.reason?.cancellationToken)
-        return;
-
-    console.log(ev.promise, ev.reason);
-    ev.preventDefault();
+export class CancellationError extends Error {
+    constructor(readonly token: CancellationToken) {
+        super('Cancelled by token');
+    }
 }
+

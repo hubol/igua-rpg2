@@ -12,10 +12,8 @@ export function wait(predicate: Predicate): Promise<void> {
 
     return new Promise<void>((resolve, reject) => {
         fn = () => {
-            if (context.cancellationToken.isCancelled) {
-                context.cancellationToken.rejectIfCancelled(reject);
+            if (context.cancellationToken.rejectIfCancelled(reject))
                 return;
-            }
 
             if (predicate())
                 resolve();
