@@ -14,7 +14,7 @@ export class GameEngine {
         readonly animator: Animator,
         rendererOptions: Parameters<typeof autoDetectRenderer<HTMLCanvasElement>>[0]) {
             this._renderer = autoDetectRenderer(rendererOptions);
-            this.render = this._renderer.render.bind(this._renderer);
+            this.render = (displayObject, options) => this._renderer.render(displayObject, options);
             this.canvasElement = this._renderer.view;
             console.log(`GameEngine`, this);
     }
