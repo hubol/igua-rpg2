@@ -15,7 +15,8 @@ async function initialize() {
         integralUpscaleCanvas(addGameCanvasToDocument(engine.canvasElement))
         animator.start();
 
-        require("./lib/extensions");
+        await installExtensions();
+        
         const { startGame } = require("./igua/game");
         startGame(engine);
     }
@@ -23,6 +24,14 @@ async function initialize() {
         console.error(e);
         showFatalError(e);
     }
+}
+
+async function installExtensions() {
+    require("./lib/extensions");
+    // Have observed bizarre behavior with Dexie
+    // (In particular, PSD values seem to be missing)
+    // without "flushing" Promises after requiring extensions...
+    await new Promise(r => setTimeout(r));
 }
 
 function showFatalError(error) {
