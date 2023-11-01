@@ -11,14 +11,14 @@ export class Zone<TContext extends object> {
   private _contextsCreatedCount = 0;
 
   constructor(readonly name: string) {
-
+    console.log(name, this); 
   }
 
   get context() {
     return _contexts[(PSD as any as InternalContext).key] as TContext;
   }
 
-  async run(fn: () => unknown, context: TContext) {
+  run(fn: () => unknown, context: TContext) {
     this._contextsCreatedCount += 1;
     const key = this.name + '_' + this._contextsCreatedCount;
 
@@ -26,9 +26,7 @@ export class Zone<TContext extends object> {
 
     _contexts[key] = context;
     const scope: Promise<void> = newScope(fn, internalContext);
-    await scope;
-    // TODO try/catch ?
-    delete _contexts[key];
+    return scope.finally(() => delete _contexts[key]);
   }
 
 }
