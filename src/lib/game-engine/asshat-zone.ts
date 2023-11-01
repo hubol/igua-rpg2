@@ -1,6 +1,7 @@
 import { CancellationError, CancellationToken } from "../promise/cancellation-token";
 import { Zone } from "../zone";
 import { IAsshatTicker } from "./asshat-ticker";
+import { ErrorReporter } from "./error-reporter";
 
 interface AsshatZoneContext {
     cancellationToken: CancellationToken;
@@ -27,7 +28,7 @@ function handleAsshatZoneError(e: any) {
         return;
     }
 
-    console.error(`Unhandled error occurred in AsshatZone`, e);
+    ErrorReporter.reportSubsystemError('AsshatZone', e);
 }
 
 export const AsshatZoneDiagnostics = {

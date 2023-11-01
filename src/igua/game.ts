@@ -38,8 +38,10 @@ export function startGame(engine: GameEngine) {
         .step(() => {
             if (Key.isDown('ArrowUp'))
                 guy.y -= 4;
-            if (Key.isDown('ArrowDown'))
+            if (Key.isDown('ArrowDown')) {
                 guy.y += 4;
+                throw new Error('hi')
+            }
             if (Key.isDown('ArrowLeft'))
                 guy.x -= 4;
             if (Key.isDown('ArrowRight'))

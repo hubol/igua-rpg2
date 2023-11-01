@@ -1,3 +1,5 @@
+import { ErrorReporter } from "./error-reporter";
+
 export class EscapeTickerAndExecute {
     constructor(readonly execute: () => void) { }
 }
@@ -40,7 +42,7 @@ export class AsshatTicker implements IAsshatTicker {
                 e.execute();
                 return;
             }
-            console.error(`Unhandled error in AsshatTicker.update: ${e}`);
+            ErrorReporter.reportSubsystemError('AsshatTicker.update', e);
         }
     }
 
@@ -62,7 +64,7 @@ export class AsshatTicker implements IAsshatTicker {
             catch (e) {
                 if (e instanceof EscapeTickerAndExecute)
                     throw e;
-                console.error(`Unhandled error while emitting listener`, callback, e);
+                ErrorReporter.reportSubsystemError('AsshatTicker.updateImpl', e, callback);
             }
 
             if (shift)
