@@ -140,7 +140,7 @@ noscript {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.5rem;
 }
 
 #runtime_errors .count {
@@ -154,7 +154,10 @@ noscript {
 
     background-color: #a00000;
     color: white;
+    text-shadow: 0 -1px 0 #400000;
     padding: 0.2rem 0.5rem;
+
+    border-radius: 3px;
 }
 
 #runtime_errors .error.empty {
