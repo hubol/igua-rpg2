@@ -128,3 +128,35 @@ noscript {
     border-radius: 6px;
     box-shadow: 4px 4px 4px var(--bg-color-dark);
 }
+
+#runtime_errors {
+    font-family: monospace;
+    font-size: 120%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+#runtime_errors .count {
+    font-weight: 600;
+}
+
+#runtime_errors .error {
+    display: flex;
+    gap: 0.5rem;
+    cursor: pointer;
+
+    background-color: #a00000;
+    color: white;
+    padding: 0.2rem 0.5rem;
+}
+
+#runtime_errors .error.empty {
+    display: none;
+}

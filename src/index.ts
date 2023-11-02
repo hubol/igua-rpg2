@@ -1,5 +1,7 @@
 import { integralUpscaleCanvas } from "./lib/browser/integral-upscale-canvas";
 import { Animator } from "./lib/game-engine/animator";
+import { createDomErrorAnnouncer } from "./lib/game-engine/dom-error-announcer";
+import { ErrorReporter } from "./lib/game-engine/error-reporter";
 import { GameEngine } from "./lib/game-engine/game-engine";
 
 async function initialize() {
@@ -43,8 +45,10 @@ function showFatalError(error) {
 
 window.onload = initialize;
 
-// window.addEventListener("unhandledrejection", handleIguaPromiseRejection);
-// window.addEventListener("unhandledrejection", handlePromiseCancellation);
+window.addEventListener("unhandledrejection", (e) => ErrorReporter.reportUnhandledError(e.reason));
+window.addEventListener("error", (e) => ErrorReporter.reportUnhandledError(e));
+
+ErrorReporter.announcer = createDomErrorAnnouncer();
 
 function addGameCanvasToDocument(element: HTMLCanvasElement) {
     element.id = "game_canvas";

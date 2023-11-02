@@ -28,6 +28,8 @@ export function startGame(engine: GameEngine) {
                     let ticks = Math.random() * 60 * 4;
                     await wait(() => ticks-- <= 0);
                     g.scale.x = -1 + Math.random() * 2;
+                    if (Math.random() > 0.9)
+                        throw new Error('random');
                 }
             });
 
