@@ -192,3 +192,30 @@ export function multipleChildrenUseStepFn() {
 
     Assert(displayObjectSteps).toStrictlyBe(3);
 }
+
+export function stopsTickingWhenGrandparentIsDestroyed() {
+    let displayObjectSteps = 0;
+
+    const c1 = new Container();
+    const c2 = new Container();
+
+    const d = createDisplayObject()
+        .step(() => {
+            displayObjectSteps += 1;
+        });
+
+    c1.addChild(c2);
+    c2.addChild(d);
+
+    const ticker = new AsshatTicker();
+    c1.withTicker(ticker);
+
+    ticker.update();
+
+    Assert(displayObjectSteps).toStrictlyBe(1);
+
+    c1.destroy();
+    ticker.update();
+
+    Assert(displayObjectSteps).toStrictlyBe(1);
+}

@@ -20,6 +20,9 @@ interface DisplayObjectPrivate {
     _receiveResolvedTicker(ticker: AsshatTicker): void;
 }
 
+const _containerDestroy = Container.prototype.destroy;
+const defaultContainerDestroyOptions = { children: true };
+
 Object.defineProperties(Container.prototype, {
     withTicker: {
         value: function (this: Container & DisplayObjectPrivate, ticker: AsshatTicker) {
@@ -36,6 +39,19 @@ Object.defineProperties(Container.prototype, {
         configurable: true,
         writable: true,
     },
+    // Always destroy children
+    // For now, don't support the other options
+    // Because I have no idea what they do!
+    destroy: {
+        value: function (this: Container, options) {
+            if (options !== undefined && options !== defaultContainerDestroyOptions)
+                throw new Error(`Specifying options to Container.destroy() is not supported! Got: ${JSON.stringify(options)}`);
+            _containerDestroy.call(this, defaultContainerDestroyOptions);
+        },
+        enumerable: false,
+        configurable: true,
+        writable: true,
+    }
 });
 
 Object.defineProperties(DisplayObject.prototype, {
