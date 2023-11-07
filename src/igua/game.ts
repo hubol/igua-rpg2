@@ -1,11 +1,17 @@
 import { Graphics } from "pixi.js";
 import { AsshatTicker } from "../lib/game-engine/asshat-ticker";
-import { GameEngine } from "../lib/game-engine/game-engine";
 import { wait } from "../lib/game-engine/wait";
 import { Key, KeyListener } from "../lib/browser/key";
 import { AsshatZoneDiagnostics } from "../lib/game-engine/asshat-zone";
+import { engine, scene, sceneStack } from "./globals";
 
-export function startGame(engine: GameEngine) {
+export function startGame() {
+    sceneStack.push(initScene, { useGameplay: false });
+}
+
+function initScene() {
+    console.log('Scene', scene.source.name)
+
     const ticker = new AsshatTicker();
     engine.stage.withTicker(ticker);
 

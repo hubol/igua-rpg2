@@ -19,8 +19,8 @@ async function initialize() {
 
         await installExtensions();
         
-        const { startGame } = require("./igua/game");
-        startGame(engine);
+        require("./igua/globals").installGlobals(engine);
+        require("./igua/game").startGame();
     }
     catch (e) {
         console.error(e);

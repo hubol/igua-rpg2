@@ -1,17 +1,18 @@
-export abstract class SceneStack<TSceneApi, TScene> {
+export abstract class SceneStack<TSceneMeta, TSceneInstance> {
 
-    protected readonly scenes: TScene[] = [];
+    protected readonly scenes: TSceneInstance[] = [];
 
-    protected abstract convert(sceneApi: TSceneApi): TScene;
+    protected abstract convert<T>(populateSceneFn: () => T, meta: TSceneMeta): TSceneInstance & { populateScene(): T };
 
-    protected abstract dispose(scene: TScene): void;
+    protected abstract dispose(scene: TSceneInstance): void;
 
     protected abstract onScenesModified(): void;
 
-    push(sceneApi: TSceneApi) {
-        const scene = this.convert(sceneApi);
+    push<T>(populateSceneFn: () => T, meta: TSceneMeta) {
+        const scene = this.convert(populateSceneFn, meta);
         this.scenes.push(scene);
         this.onScenesModified();
+        return scene.populateScene();
     }
 
     pop() {
@@ -21,10 +22,10 @@ export abstract class SceneStack<TSceneApi, TScene> {
         this.onScenesModified();
     }
 
-    replace(sceneApi: TSceneApi) {
+    replace<T>(populateSceneFn: () => T, meta: TSceneMeta) {
         while (this.scenes.length > 0)
             this.pop();
-        this.push(sceneApi);
+        return this.push(populateSceneFn, meta);
     }
 
     toArray() {
