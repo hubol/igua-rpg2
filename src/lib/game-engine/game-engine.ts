@@ -16,6 +16,6 @@ export class GameEngine {
             this._renderer = autoDetectRenderer(rendererOptions);
             this.render = (displayObject, options) => this._renderer.render(displayObject, options);
             this.canvasElement = this._renderer.view;
-            console.log(`GameEngine`, this);
+            console.log(this);
     }
 }

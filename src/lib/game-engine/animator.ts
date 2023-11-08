@@ -8,6 +8,7 @@ export class Animator {
     constructor(readonly targetFps: number) {
         this._targetInterval = 1000 / this.targetFps;
         this._animationFrameCallback = () => this._maybeUpdate();
+        console.log(this);
     }
 
     add(work: Function) {
@@ -45,7 +46,6 @@ export class Animator {
             console.trace(`Attempted to start Animator more than once!`);
             return;
         }
-        console.log('Animator started', this);
         this._then = performance.now();
         this._maybeUpdate();
     }

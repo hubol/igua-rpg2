@@ -10,9 +10,7 @@ const _contexts: Record<string, object> = {};
 export class Zone<TContext extends object> {
   private _contextsCreatedCount = 0;
 
-  constructor(readonly name: string) {
-    console.log(name, this); 
-  }
+  constructor(readonly name: string) { }
 
   get context() {
     return _contexts[(PSD as any as InternalContext).key] as TContext;

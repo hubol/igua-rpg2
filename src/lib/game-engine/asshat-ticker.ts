@@ -18,10 +18,6 @@ export class AsshatTicker implements IAsshatTicker {
 
     private readonly _callbacks: AsshatTickerFn[] = [];
 
-    constructor() {
-        console.log('AsshatTicker created', this);
-    }
-
     add(fn: AsshatTickerFn) {
         this._callbacks.push(fn);
     }

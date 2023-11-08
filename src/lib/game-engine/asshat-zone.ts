@@ -11,6 +11,7 @@ interface AsshatZoneContext {
 class AsshatZoneImpl extends Zone<AsshatZoneContext> {
     constructor() {
         super('AsshatZone');
+        console.log(this);
     }
 
     run(fn: () => unknown, context: AsshatZoneContext): Promise<void> {
