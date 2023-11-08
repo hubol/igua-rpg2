@@ -1,9 +1,7 @@
 import { Graphics } from "pixi.js";
-import { AsshatTicker } from "../lib/game-engine/asshat-ticker";
 import { wait } from "../lib/game-engine/wait";
-import { Key, KeyListener } from "../lib/browser/key";
-import { AsshatZoneDiagnostics } from "../lib/game-engine/asshat-zone";
-import { engine, scene, sceneStack } from "./globals";
+import { Key } from "../lib/browser/key";
+import { scene, sceneStack } from "./globals";
 
 export function startGame() {
     sceneStack.push(initScene, { useGameplay: false });
@@ -11,16 +9,6 @@ export function startGame() {
 
 function initScene() {
     console.log('Scene', scene.source.name)
-
-    const ticker = new AsshatTicker();
-    engine.stage.withTicker(ticker);
-
-    KeyListener.start();
-
-    ticker.add(() => {
-        AsshatZoneDiagnostics.printHandledCancellationErrors();
-        KeyListener.advance();
-    });
 
     for (let i = 0; i < 1280; i++) {
         const g = new Graphics().at(i * 2, i * 2).beginFill(0xff0000 + i).drawRect(0, 0, 16, 16)
@@ -39,7 +27,7 @@ function initScene() {
                 }
             });
 
-        engine.stage.addChild(g);
+        scene.stage.addChild(g);
     }
 
     const guy = new Graphics().at(128, 128).beginFill(0xffff00).drawCircle(0, 0, 16)
@@ -56,10 +44,5 @@ function initScene() {
                 guy.x += 4;
         })
 
-    engine.stage.addChild(guy);
-
-    engine.animator.add(() => {
-        ticker.update();
-        engine.render(engine.stage);
-    });
+    scene.stage.addChild(guy);
 }

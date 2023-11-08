@@ -1,12 +1,25 @@
+import { Container } from "pixi.js";
 import { SceneStack } from "../lib/game-engine/scene-stack";
+import { engine } from "./globals";
+import { AsshatTicker } from "../lib/game-engine/asshat-ticker";
 
 interface IguaSceneMeta {
     useGameplay: false;
 }
 
+let sceneStage: Container;
+
 function createIguaScene(source: Function, meta: IguaSceneMeta) {
+    if (!sceneStage)
+        sceneStage = engine.stage.addChild(new Container());
+
+    const ticker = new AsshatTicker();
+    const stage = sceneStage.addChild(new Container().withTicker(ticker));
+
     return {
         source,
+        stage,
+        ticker,
     }
 }
 
@@ -27,7 +40,7 @@ export class IguaSceneStack extends SceneStack<IguaSceneMeta, IguaScene> {
     }
 
     protected dispose(scene: IguaScene): void {
-        throw new Error("Method not implemented.");
+        scene.stage.destroy();
     }
 
     protected onScenesModified(): void {
