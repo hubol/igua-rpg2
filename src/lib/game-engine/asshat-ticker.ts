@@ -14,6 +14,7 @@ export interface IAsshatTicker {
 }
 
 export class AsshatTicker implements IAsshatTicker {
+    updates = 0;
     doNextUpdate = true;
 
     private readonly _callbacks: AsshatTickerFn[] = [];
@@ -43,6 +44,8 @@ export class AsshatTicker implements IAsshatTicker {
     }
 
     private updateImpl(): void {
+        this.updates += 1;
+
         let i = 0;
         let shift = 0;
         while (i < this._callbacks.length) {
