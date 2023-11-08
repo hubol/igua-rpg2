@@ -42,6 +42,8 @@ function initScene() {
                 guy.x -= 4;
             if (Key.isDown('ArrowRight'))
                 guy.x += 4;
+            if (Key.justWentDown('Space'))
+                sceneStack.push(initScene, { useGameplay: false });
         })
 
     scene.stage.addChild(guy);

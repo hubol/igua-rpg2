@@ -28,6 +28,7 @@ export type IguaScene = ReturnType<typeof createIguaScene>;
 export class IguaSceneStack extends SceneStack<IguaSceneMeta, IguaScene> {
     constructor(private readonly _setScene: (scene: IguaScene) => void) {
         super();
+        console.log(this);
     }
 
     protected convert<T>(populateSceneFn: () => T, meta: IguaSceneMeta) {
@@ -44,6 +45,12 @@ export class IguaSceneStack extends SceneStack<IguaSceneMeta, IguaScene> {
     }
 
     protected onScenesModified(): void {
-        this._setScene(this.scenes.last);
+        for (let i = 0; i < this.scenes.length - 1; i += 1)
+            this.scenes[i].stage.visible = false;
+
+        const scene = this.scenes.last;
+
+        scene.stage.visible = true;
+        this._setScene(scene);
     }
 }
