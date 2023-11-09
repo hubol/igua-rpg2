@@ -163,3 +163,7 @@ noscript {
 #runtime_errors .error.empty {
     display: none;
 }
+
+#runtime_errors .unique_count.empty {
+    display: none;
+}

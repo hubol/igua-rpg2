@@ -7,12 +7,12 @@ export function createDomErrorAnnouncer(): ErrorAnnouncer {
     return {
         onSubsystemError(subsystem: string, error: any, ...context: any[]): void {
             DefaultErrorAnnouncer.onSubsystemError(subsystem, error, ...context);
-            errorRoot.increaseErrorCountForSubsystem(subsystem);
+            errorRoot.increaseErrorCountForSubsystem(subsystem, `${error}`);
         },
     
         onUnhandledError(error: any): void {
             DefaultErrorAnnouncer.onUnhandledError(error);
-            errorRoot.increaseErrorCountForSubsystem('Unhandled');
+            errorRoot.increaseErrorCountForSubsystem('Unhandled', `${error}`);
         }
     }
 }
@@ -33,8 +33,9 @@ function createDomErrorRoot() {
         return domErrors[subsystem];
     }
 
-    const increaseErrorCountForSubsystem = (subsystem: string) => {
+    const increaseErrorCountForSubsystem = (subsystem: string, error: string) => {
         const domError = getDomError(subsystem);
+        domError.updateUniqueErrors(error);
         domError.increaseErrorCount();
     }
 
@@ -55,13 +56,17 @@ function createDomError(subsytem: string) {
     const errorCountEl = document.createElement('div');
     errorCountEl.className = 'count';
 
-    el.append(subsystemEl, errorCountEl);
+    const uniqueErrorCountEl = document.createElement('div');
+    uniqueErrorCountEl.className = 'unique_count';
+
+    el.append(subsystemEl, errorCountEl, uniqueErrorCountEl);
 
     subsystemEl.textContent = subsytem;
     let errorCount = 0;
 
     const clearErrorCount = () => {
         errorCount = 0;
+        uniqueErrors.clear();
         update();
     }
 
@@ -72,13 +77,27 @@ function createDomError(subsytem: string) {
         update();
     }
 
+    const uniqueErrors = new Set<string>();
+
+    const updateUniqueErrors = (error: string) => {
+        if (uniqueErrors.has(error))
+            return;
+        uniqueErrors.add(error);
+        update();
+    }
+
     const update = () => {
         el.classList[errorCount === 0 ? 'add' : 'remove']('empty');
         errorCountEl.textContent = '' + errorCount;
+
+        const uniqueErrorCount = uniqueErrors.size;
+        uniqueErrorCountEl.textContent = uniqueErrorCount <= 1 ? '' : `(${uniqueErrorCount})`
+        uniqueErrorCountEl.classList[uniqueErrorCount <= 1 ? 'add' : 'remove']('empty');
     }
 
     return {
         el,
         increaseErrorCount,
+        updateUniqueErrors,
     }
 }
