@@ -22,15 +22,21 @@ export function showLoadingScreen(engine: GameEngine, progress: JobProgress) {
             if (shouldResolve(unit))
                 return resolve();
 
-            unit = approachLinear(unit, progress.percentage, 1 / 30);
+            unit = approachLinear(unit, progress.percentage, 1 / 60);
 
-            const x = engine.width * unit;
+            bar.clear().lineStyle({ width: 1, color: 0x800000 });
 
-            bar.clear().beginFill(0x800000)
-                .moveTo(0, engine.height)
-                .lineTo(x, engine.height * (1 - unit))
-                .lineTo(x, engine.height)
-                .closePath()
+            const lines = unit * engine.width;
+
+            for (let i = 0; i < lines; i += 1) {
+                const x = (i * 2) % engine.width + (i > engine.width / 2 ? 0 : 1);
+                const y = engine.height - x;
+                bar.moveTo(x, y);
+                bar.lineTo(x, engine.height);
+            }
+
+            if (unit >= 1)
+                bar.moveTo(engine.width, 0).lineTo(engine.width, engine.height);
 
             engine.render(loadingStage);
             requestAnimationFrame(render);
@@ -42,7 +48,7 @@ export function showLoadingScreen(engine: GameEngine, progress: JobProgress) {
 
 function createShouldResolve(progress: JobProgress) {
     if (Environment.isDev)
-        return (unit: number) => progress.completed;
+    return (unit: number) => progress.completed;
 
     return (unit: number) => progress.completed && unit >= 1;
 }
