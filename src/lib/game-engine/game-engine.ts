@@ -8,6 +8,9 @@ export class GameEngine {
     readonly render: HtmlCanvasRenderer['render'];
     readonly canvasElement: HTMLCanvasElement;
 
+    readonly width: number;
+    readonly height: number;
+
     private readonly _renderer: HtmlCanvasRenderer;
 
     constructor(
@@ -16,6 +19,8 @@ export class GameEngine {
             this._renderer = autoDetectRenderer(rendererOptions);
             this.render = (displayObject, options) => this._renderer.render(displayObject, options);
             this.canvasElement = this._renderer.view;
+            this.width = this._renderer.width;
+            this.height = this._renderer.height;
             console.log(this);
     }
 }

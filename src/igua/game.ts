@@ -39,7 +39,7 @@ function initScene() {
                     g.destroy();
                 }
             })
-            .upon(scene.stage);
+            .show(scene.stage);
     }
 
     const guy = new Graphics().at(128, 128).beginFill(0xffff00).drawCircle(0, 0, 16)
@@ -63,5 +63,5 @@ function initScene() {
                     sceneStack.pop());
             }
         })
-        .upon(scene.stage);
+        .show(scene.stage);
 }

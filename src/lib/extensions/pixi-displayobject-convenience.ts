@@ -2,12 +2,12 @@ import { Container, DisplayObject } from "pixi.js";
 
 declare module "pixi.js" {
     interface DisplayObject {
-        upon(container: Container): this;
+        show(container: Container): this;
     }
 }
 
 Object.defineProperties(DisplayObject.prototype, {
-    upon: {
+    show: {
         value: function (this: DisplayObject, container: Container) {
             container.addChild(this);
             return this;
