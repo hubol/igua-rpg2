@@ -18,7 +18,7 @@ html {
 
     cursor: none;
 
-    box-shadow: 3vmin 3vmin var(--bg-color-dark);
+    border-radius: 4px;
 }
 
 #start_button {
