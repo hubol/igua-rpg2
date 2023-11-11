@@ -1,4 +1,5 @@
 import { KeyListener } from "../lib/browser/key";
+import { Animator } from "../lib/game-engine/animator";
 import { AsshatTicker } from "../lib/game-engine/asshat-ticker";
 import { AsshatZoneDiagnostics } from "../lib/game-engine/asshat-zone";
 import { GameEngine } from "../lib/game-engine/game-engine";
@@ -22,7 +23,10 @@ export function installGlobals(_engine: GameEngine) {
         scene?.ticker.update();
     });
 
-    engine.animator.add(() => {
+    const animator = new Animator(60);
+    animator.start();
+
+    animator.add(() => {
         ticker.update();
         engine.render(engine.stage);
     });

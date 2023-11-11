@@ -1,7 +1,6 @@
 import { loadLaunchResources } from "./igua/launch/load-launch-resources";
 import { showLoadingScreen } from "./igua/launch/show-loading-screen";
 import { integralUpscaleCanvas } from "./lib/browser/integral-upscale-canvas";
-import { Animator } from "./lib/game-engine/animator";
 import { createDomErrorAnnouncer } from "./lib/game-engine/dom-error-announcer";
 import { ErrorReporter } from "./lib/game-engine/error-reporter";
 import { GameEngine } from "./lib/game-engine/game-engine";
@@ -9,8 +8,7 @@ import { JobProgress } from "./lib/game-engine/job-progress";
 
 async function initialize() {
     try {
-        const animator = new Animator(60);
-        const engine = new GameEngine(animator, {
+        const engine = new GameEngine({
             width: 256,
             height: 256,
             eventFeatures: { click: false, globalMove: false, move: false, wheel: false, },
@@ -23,7 +21,6 @@ async function initialize() {
         const loadResources = loadLaunchResources(progress);
 
         integralUpscaleCanvas(addGameCanvasToDocument(engine.canvasElement))
-        animator.start();
         await showLoadingScreen(engine, progress);
 
         await loadResources;
