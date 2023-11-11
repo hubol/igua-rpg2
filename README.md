@@ -6,7 +6,7 @@ This is another fangame of [Oddwarg Animal RPG](http://oddwarg.com/index.php?id=
 This is a modern web project. You will need `node` and `npm` to continue.
 
 ## smooch?
-This project is in early stages of development. Eventually, I will be test-driving [smooch](https://github.com/hubol/smooch/tree/feature/v1) with it.
+This project is in early stages of development. Eventually, I will be test-driving [smooch](https://github.com/hubol/smooch/) with it.
 `smooch` will be used to generate code and engine-ready binary resources from assets like images and audio files.
 
 <!-- You will need the Git LFS extension to correctly pull the project's FLAC and WAV files. -->
