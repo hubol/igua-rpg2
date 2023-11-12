@@ -1,5 +1,5 @@
 import { Assets, Rectangle, Texture } from "pixi.js";
-import { GeneratedTextureData } from "./output/textures";
+import { GeneratedTextureData } from "./generated/textures";
 
 type TextureId = keyof typeof GeneratedTextureData['txs'];
 

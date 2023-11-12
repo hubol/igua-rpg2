@@ -3,7 +3,7 @@ import { wait } from "../lib/game-engine/wait";
 import { Key } from "../lib/browser/key";
 import { scene, sceneStack } from "./globals";
 import { EscapeTickerAndExecute } from "../lib/game-engine/asshat-ticker";
-import { Txs } from "../generated/textures";
+import { Txs } from "../assets/textures";
 
 export function startGame() {
     sceneStack.push(initScene, { useGameplay: false });

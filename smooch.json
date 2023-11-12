@@ -4,12 +4,12 @@
 		{
 			"glob": "raw/textures/**/*.png",
 			"atlas": {
-				"directory": "src/generated/output/textures",
+				"directory": "src/assets/generated/textures",
 				"filePrefix": "atlas"
 			},
 			"template": {
-				"out": "src/generated/output/textures/index.ts",
-				"program": "src/generated/template/textures.js"
+				"out": "src/assets/generated/textures/index.ts",
+				"program": "src/assets/template/textures.js"
 			}
 		}
 	],
