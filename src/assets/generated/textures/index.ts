@@ -1,7 +1,7 @@
 
 // This file is generated
 
-const atlases = [ require("./atlas0.png") ];
+const atlases = [ { url: require("./atlas0.png"), texturesCount: 4 } ];
 
 const txs = {
    "IguaRpgTitle": { atlas: 0, x: 0, y: 52, width: 216, height: 60 },

@@ -12,7 +12,7 @@ module.exports = function ({ atlases, textures }, { pascal, noext }) {
     return `
 // This file is generated
 
-const atlases = [ ${atlases.map(x => `require("./${x.fileName}")`).join(', ')} ];
+const atlases = [ ${atlases.map(x => `{ url: require("./${x.fileName}"), texturesCount: ${x.rects.length} }`).join(', ')} ];
 
 const txs = {
 ${textures.map(tx =>

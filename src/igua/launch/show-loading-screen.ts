@@ -48,7 +48,7 @@ export function showLoadingScreen(engine: GameEngine, progress: JobProgress) {
 
 function createShouldResolve(progress: JobProgress) {
     if (Environment.isDev)
-    return (unit: number) => progress.completed;
+        return (unit: number) => progress.completed;
 
     return (unit: number) => progress.completed && unit >= 1;
 }
