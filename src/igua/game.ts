@@ -1,8 +1,9 @@
-import { Graphics } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { wait } from "../lib/game-engine/wait";
 import { Key } from "../lib/browser/key";
 import { scene, sceneStack } from "./globals";
 import { EscapeTickerAndExecute } from "../lib/game-engine/asshat-ticker";
+import { Txs } from "../generated/textures";
 
 export function startGame() {
     sceneStack.push(initScene, { useGameplay: false });
@@ -64,4 +65,8 @@ function initScene() {
             }
         })
         .show(scene.stage);
+
+    new Sprite(Txs.IguaRpgTitle).show(scene.stage);
+    new Sprite(Txs.LockedDoor).at(32, 32).show(scene.stage)
+    new Sprite(Txs.OpenDoor).at(32, 64).show(scene.stage)
 }

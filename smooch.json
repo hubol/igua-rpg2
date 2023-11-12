@@ -1,0 +1,18 @@
+{
+	"$schema": "node_modules/@hubol/smooch/schema.json",
+	"textures": [
+		{
+			"glob": "raw/textures/**/*.png",
+			"atlas": {
+				"directory": "src/generated/output/textures",
+				"filePrefix": "atlas"
+			},
+			"template": {
+				"out": "src/generated/output/textures/index.ts",
+				"program": "src/generated/template/textures.js"
+			}
+		}
+	],
+	"audioFiles": [],
+	"jsonFiles": []
+}
