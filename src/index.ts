@@ -3,12 +3,12 @@ import { showLoadingScreen } from "./igua/launch/show-loading-screen";
 import { integralUpscaleCanvas } from "./lib/browser/integral-upscale-canvas";
 import { createDomErrorAnnouncer } from "./lib/game-engine/dom-error-announcer";
 import { ErrorReporter } from "./lib/game-engine/error-reporter";
-import { GameEngine } from "./lib/game-engine/game-engine";
+import { createPixiRenderer } from "./lib/game-engine/pixi-renderer";
 import { JobProgress } from "./lib/game-engine/job-progress";
 
 async function initialize() {
     try {
-        const engine = new GameEngine({
+        const renderer = createPixiRenderer({
             width: 256,
             height: 256,
             eventFeatures: { click: false, globalMove: false, move: false, wheel: false, },
@@ -20,12 +20,12 @@ async function initialize() {
         const progress = new JobProgress();
         const loadResources = loadLaunchResources(progress);
 
-        integralUpscaleCanvas(addGameCanvasToDocument(engine.canvasElement))
-        await showLoadingScreen(engine, progress);
+        integralUpscaleCanvas(addGameCanvasToDocument(renderer.view))
+        await showLoadingScreen(renderer, progress);
 
         await loadResources;
         
-        require("./igua/globals").installGlobals(engine);
+        require("./igua/globals").installGlobals(renderer);
         require("./igua/game").startGame();
     }
     catch (e) {

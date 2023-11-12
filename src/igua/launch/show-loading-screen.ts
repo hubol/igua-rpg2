@@ -1,10 +1,10 @@
 import { Container, Graphics } from "pixi.js";
 import { JobProgress } from "../../lib/game-engine/job-progress";
-import { GameEngine } from "../../lib/game-engine/game-engine";
 import { Environment } from "../../lib/environment";
 import { approachLinear } from "../../lib/math/number";
+import { PixiRenderer } from "../../lib/game-engine/pixi-renderer";
 
-export function showLoadingScreen(engine: GameEngine, progress: JobProgress) {
+export function showLoadingScreen(renderer: PixiRenderer, progress: JobProgress) {
     let unit = 0;
     const shouldResolve = createShouldResolve(progress);
 
@@ -13,7 +13,7 @@ export function showLoadingScreen(engine: GameEngine, progress: JobProgress) {
 
         new Graphics()
             .beginFill(0xf8d800)
-            .drawRect(0, 0, engine.width, engine.height)
+            .drawRect(0, 0, renderer.width, renderer.height)
             .show(loadingStage);
 
         const bar = new Graphics().show(loadingStage);
@@ -26,19 +26,19 @@ export function showLoadingScreen(engine: GameEngine, progress: JobProgress) {
 
             bar.clear().lineStyle({ width: 1, color: 0x800000 });
 
-            const lines = unit * engine.width;
+            const lines = unit * renderer.width;
 
             for (let i = 0; i < lines; i += 1) {
-                const x = (i * 2) % engine.width + (i > engine.width / 2 ? 0 : 1);
-                const y = engine.height - x;
+                const x = (i * 2) % renderer.width + (i > renderer.width / 2 ? 0 : 1);
+                const y = renderer.height - x;
                 bar.moveTo(x, y);
-                bar.lineTo(x, engine.height);
+                bar.lineTo(x, renderer.height);
             }
 
             if (unit >= 1)
-                bar.moveTo(engine.width, 0).lineTo(engine.width, engine.height);
+                bar.moveTo(renderer.width, 0).lineTo(renderer.width, renderer.height);
 
-            engine.render(loadingStage);
+            renderer.render(loadingStage);
             requestAnimationFrame(render);
         }
 

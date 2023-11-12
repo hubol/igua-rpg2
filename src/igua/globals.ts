@@ -1,17 +1,22 @@
+import { Container } from "pixi.js";
 import { KeyListener } from "../lib/browser/key";
 import { Animator } from "../lib/game-engine/animator";
 import { AsshatTicker } from "../lib/game-engine/asshat-ticker";
 import { AsshatZoneDiagnostics } from "../lib/game-engine/asshat-zone";
-import { GameEngine } from "../lib/game-engine/game-engine";
+import { PixiRenderer } from "../lib/game-engine/pixi-renderer";
+import { IguaLayers } from "./igua-layers";
 import { IguaScene, IguaSceneStack } from "./igua-scene-stack";
 
-export let engine: GameEngine;
+export let renderer: PixiRenderer;
+
+const rootStage = new Container();
+const layers = new IguaLayers(rootStage);
 
 export let scene: IguaScene;
-export const sceneStack = new IguaSceneStack((_scene) => scene = _scene);
+export const sceneStack = new IguaSceneStack(layers, (_scene) => scene = _scene);
 
-export function installGlobals(_engine: GameEngine) {
-    engine = _engine;
+export function installGlobals(_renderer: PixiRenderer) {
+    renderer = _renderer;
 
     const ticker = new AsshatTicker();
 
@@ -28,6 +33,6 @@ export function installGlobals(_engine: GameEngine) {
 
     animator.add(() => {
         ticker.update();
-        engine.render(engine.stage);
+        renderer.render(rootStage);
     });
 }
