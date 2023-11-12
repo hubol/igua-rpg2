@@ -1,4 +1,4 @@
-import { loadLaunchResources } from "./igua/launch/load-launch-resources";
+import { loadLaunchAssets } from "./igua/launch/load-launch-assets";
 import { showLoadingScreen } from "./igua/launch/show-loading-screen";
 import { integralUpscaleCanvas } from "./lib/browser/integral-upscale-canvas";
 import { createDomErrorAnnouncer } from "./lib/game-engine/dom-error-announcer";
@@ -18,12 +18,12 @@ async function initialize() {
         await installExtensions();
 
         const progress = new JobProgress();
-        const loadResources = loadLaunchResources(progress);
+        const loadAssets = loadLaunchAssets(progress);
 
         integralUpscaleCanvas(addGameCanvasToDocument(renderer.view))
         await showLoadingScreen(renderer, progress);
 
-        await loadResources;
+        await loadAssets;
         
         require("./igua/globals").installGlobals(renderer);
         require("./igua/game").startGame();
