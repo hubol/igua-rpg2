@@ -63,10 +63,17 @@ function initScene() {
                 throw new EscapeTickerAndExecute(() =>
                     sceneStack.pop());
             }
+            if (guy.collides(s))
+                s.destroy();
         })
         .show(scene.stage);
 
     new Sprite(Txs.IguaRpgTitle).show(scene.stage);
     new Sprite(Txs.LockedDoor).at(32, 32).show(scene.stage)
-    new Sprite(Txs.OpenDoor).at(32, 64).show(scene.stage)
+
+    const s = new Sprite(Txs.OpenDoor).at(32, 64).show(scene.stage)
+
+    console.log('Graphics.children.length', guy.children.length);
+    console.log('Sprite.children.length', s.children.length);
+    console.log('Sprite.children.length', s.getBounds());
 }
