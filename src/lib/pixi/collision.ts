@@ -17,10 +17,6 @@ export enum FindParam {
 type ResultBuffer = Partial<CollisionResult<Collideable>>;
 
 const _buffer: ResultBuffer = { instances: [] };
-const r1 = new Rectangle();
-const r2 = new Rectangle();
-const r3 = new Rectangle();
-const r4 = new Rectangle();
 
 function clean<TCollideable extends Collideable>(buffer: ResultBuffer) {
     if (buffer.instances)
@@ -34,10 +30,6 @@ function clean<TCollideable extends Collideable>(buffer: ResultBuffer) {
     return buffer as CollisionResult<TCollideable>;
 }
 
-function isDisplayObject(x: any): x is DisplayObject {
-    return x.overlaps;
-}
-
 const SkipUpdate = true;
 
 function rectangleCollidesMany<TCollideable extends Collideable>(
@@ -47,8 +39,19 @@ function rectangleCollidesMany<TCollideable extends Collideable>(
         result: CollisionResult<TCollideable>) {
     for (let i = 0; i < array.length; i += 1) {
         const collideable = array[i];
-        if  ((isDisplayObject(collideable) && collideable.collides(rectangle))
-            || areRectanglesOverlapping(rectangle, collideable as IRectangle)) {
+        if (collideable instanceof DisplayObject) {
+            if (!collideable.destroyed && collideable.collides(rectangle)) {
+                result.collided = true;
+
+                if (param === FindParam.One) {
+                    result.instance = collideable;
+                    break;
+                }
+
+                result.instances.push(collideable);
+            }
+        }
+        else if (areRectanglesOverlapping(rectangle, collideable as IRectangle)) {
                 result.collided = true;
 
                 if (param === FindParam.One) {
@@ -71,9 +74,9 @@ export const Collision = {
             param: FindParam,
             buffer = _buffer) {
         const result = clean<TCollideable>(buffer);
-        displayObject.getBounds(false, r1);
+        const rect = displayObject.getBounds(false, rnew());
 
-        return rectangleCollidesMany(r1, array, param, result);
+        return rectangleCollidesMany(rect, array, param, result);
     },
     containerCollidesMany<TCollideable extends Collideable>(
             container: Container,
@@ -92,8 +95,8 @@ export const Collision = {
                 if (child.constructor === Container)
                     containersToVisit.push(child);
                 else {
-                    child.getBounds(SkipUpdate, r1);
-                    rectangleCollidesMany(r1, array, param, result);
+                    const rect = child.getBounds(SkipUpdate, rnew());
+                    rectangleCollidesMany(rect, array, param, result);
                     if (param === FindParam.One && result.collided)
                         return result;
                 }
@@ -103,20 +106,27 @@ export const Collision = {
         return result;
     },
     displayObjectCollides(displayObject: DisplayObject, rectangle: Collideable) {
-        displayObject.getBounds(SkipUpdate, r2);
+        const rect = displayObject.getBounds(SkipUpdate, rnew());
+        if (!(rectangle instanceof DisplayObject))
+            return areRectanglesOverlapping(rect, rectangle);
+
+        if (rectangle.destroyed)
+            return false;
+
         if (rectangle.constructor === Container)
-            return Collision.containerCollides(rectangle, r2);
-        if (rectangle instanceof DisplayObject)
-            return areRectanglesOverlapping(r2, rectangle.getBounds(SkipUpdate, r1));
-        return areRectanglesOverlapping(r2, rectangle);
+            return Collision.containerCollides(rectangle, rect);
+        return areRectanglesOverlapping(rect, rectangle.getBounds(SkipUpdate, rnew()));
     },
     containerCollides(container: Container, other: Collideable) {
-        container.getBounds(SkipUpdate, r3);
+        if (other instanceof DisplayObject) {
+            if (other.destroyed)
+                return false;
+            other = other.getBounds(SkipUpdate, rnew());
+        }
 
-        if (other instanceof DisplayObject)
-            other = other.getBounds(SkipUpdate, r4);
+        const rect = container.getBounds(SkipUpdate, rnew());
 
-        if (areRectanglesNotOverlapping(r3, other))
+        if (areRectanglesNotOverlapping(rect, other))
             return false;
 
         if (other.constructor === Container) {
@@ -131,6 +141,21 @@ export const Collision = {
 
         return false;
     },
+    recycleRectangles() {
+        rectangleIndex = 0;
+    }
 }
 
 const singleContainer: Container[] = [];
+
+let rectangleIndex = 0;
+const rectangles: Rectangle[] = [];
+
+function rnew() {
+    const rectangle = rectangles[rectangleIndex];
+    if (!rectangle) {
+        return rectangles[rectangleIndex++] = new Rectangle();
+    }
+    rectangleIndex += 1;
+    return rectangle;
+}

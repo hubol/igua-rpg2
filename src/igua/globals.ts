@@ -6,6 +6,7 @@ import { AsshatZoneDiagnostics } from "../lib/game-engine/asshat-zone";
 import { PixiRenderer } from "../lib/game-engine/pixi-renderer";
 import { IguaLayers } from "./igua-layers";
 import { IguaScene, IguaSceneStack } from "./igua-scene-stack";
+import { Collision } from "../lib/pixi/collision";
 
 export let renderer: PixiRenderer;
 
@@ -26,6 +27,7 @@ export function installGlobals(_renderer: PixiRenderer) {
         AsshatZoneDiagnostics.printHandledCancellationErrors();
         KeyListener.advance();
         scene?.ticker.update();
+        Collision.recycleRectangles();
     });
 
     const animator = new Animator(60);

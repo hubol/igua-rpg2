@@ -4,7 +4,7 @@ import { Collideable, Collision, CollisionResult, FindParam } from "../pixi/coll
 declare module "pixi.js" {
     interface DisplayObject {
         collides(target: Collideable): boolean;
-        collidesMany<TCollideable extends Collideable>(array: TCollideable[], result?: {}, param?: FindParam): CollisionResult<TCollideable>;
+        collidesMany<TCollideable extends Collideable>(array: TCollideable[], param?: FindParam, result?: {}): CollisionResult<TCollideable>;
     }
 }
 
@@ -17,7 +17,7 @@ function useDisplayObjectCollision(prototype: any) {
             configurable: true,
         },
         collidesMany: {
-            value: function (this: DisplayObject, array: Collideable[], result?: {}, param?: FindParam) {
+            value: function (this: DisplayObject, array: Collideable[], param?: FindParam, result?: {}) {
                 return Collision.displayObjectCollidesMany(this, array, param ?? FindParam.One, result);
             },
             configurable: true,
