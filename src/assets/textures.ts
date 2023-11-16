@@ -1,4 +1,4 @@
-import { Assets, Rectangle, Texture } from "pixi.js";
+import { Assets, BaseTexture, Rectangle, SCALE_MODES, Texture } from "pixi.js";
 import { GeneratedTextureData } from "./generated/textures";
 import { JobProgress } from "../lib/game-engine/job-progress";
 
@@ -7,6 +7,8 @@ type TextureId = keyof typeof GeneratedTextureData['txs'];
 export const Txs: Record<TextureId, Texture> = <any>{};
 
 export async function loadTextureAssets(progress: JobProgress) {
+    BaseTexture.defaultOptions.scaleMode = SCALE_MODES.NEAREST;
+
     const texturesToLoadCount = Object.keys(GeneratedTextureData.txs).length;
     progress.increaseTotalJobsCount(texturesToLoadCount);
 
