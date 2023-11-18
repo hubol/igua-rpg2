@@ -7,6 +7,7 @@ import { PixiRenderer } from "../lib/game-engine/pixi-renderer";
 import { IguaLayers } from "./igua-layers";
 import { IguaScene, IguaSceneStack } from "./igua-scene-stack";
 import { Collision } from "../lib/pixi/collision";
+import { setDefaultStages } from "../lib/game-engine/default-stages";
 
 export let renderer: PixiRenderer;
 
@@ -36,5 +37,11 @@ export function installGlobals(_renderer: PixiRenderer) {
     animator.add(() => {
         ticker.update();
         renderer.render(rootStage);
+    });
+
+    setDefaultStages({
+        get show() {
+            return scene.stage;
+        }
     });
 }

@@ -1,14 +1,15 @@
-import { Container, DisplayObject } from "pixi.js";
+import { DisplayObject } from "pixi.js";
+import { DefaultStages } from "../game-engine/default-stages";
 
 declare module "pixi.js" {
     interface DisplayObject {
-        show(container: Container): this;
+        show(container?: Container): this;
     }
 }
 
 Object.defineProperties(DisplayObject.prototype, {
     show: {
-        value: function (this: DisplayObject, container: Container) {
+        value: function (this: DisplayObject, container = DefaultStages.show) {
             container.addChild(this);
             return this;
         },

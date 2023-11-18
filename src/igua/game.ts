@@ -72,12 +72,12 @@ function initScene() {
             if (guy.collides(smiley))
                 smiley.destroy();
         })
-        .show(scene.stage);
+        .show();
 
-    const s2 = new Sprite(Txs.IguaRpgTitle).show(scene.stage);
-    const s3 = new Sprite(Txs.LockedDoor).at(32, 32).show(scene.stage)
+    const s2 = new Sprite(Txs.IguaRpgTitle).show();
+    const s3 = new Sprite(Txs.LockedDoor).at(32, 32).show()
 
-    const s = new Sprite(Txs.OpenDoor).at(32, 64).show(scene.stage)
+    const s = new Sprite(Txs.OpenDoor).at(32, 64).show()
 
     const sprites = [ s, s2, s3 ];
 
@@ -87,7 +87,7 @@ function initScene() {
         return s.at(x, y);
     }
 
-    const smiley = new Container().at(90, 180).show(scene.stage);
+    const smiley = new Container().at(90, 180).show();
     smiley.scale.set(3, 2);
     smiley.addChild(p(0, 0), p(0, 50), p(10, 58), p(20, 62), p(30, 62), p(40, 58), p(50, 50), p(50, 0));
 
