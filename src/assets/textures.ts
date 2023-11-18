@@ -22,6 +22,8 @@ export async function loadTextureAssets(progress: JobProgress) {
     for (const [textureId, data] of Object.entries(GeneratedTextureData.txs)) {
         const baseTexture = atlases[data.atlas].baseTexture;
         const frame = new Rectangle(data.x, data.y, data.width, data.height);
-        Txs[textureId] = new Texture(baseTexture, frame);
+        const texture = new Texture(baseTexture, frame);
+        texture.asshatTextureId = textureId;
+        Txs[textureId] = texture;
     }
 }
