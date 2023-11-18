@@ -5,6 +5,7 @@ import { scene, sceneStack } from "./globals";
 import { EscapeTickerAndExecute } from "../lib/game-engine/asshat-ticker";
 import { Txs } from "../assets/textures";
 import { FindParam } from "../lib/pixi/collision";
+import { merge } from "../lib/object/merge";
 
 export function startGame() {
     sceneStack.push(initScene, { useGameplay: false });
@@ -44,7 +45,7 @@ function initScene() {
     //         .show(scene.stage);
     // }
 
-    const guy = new Graphics().at(128, 128).beginFill(0xffff00).drawCircle(0, 0, 16)
+    const guy = merge(new Graphics(), { health: 1, get happiness() { return 100 + this.health; } }).at(128, 128).beginFill(0xffff00).drawCircle(0, 0, 16)
         .step(() => {
             if (Key.isDown('ArrowUp'))
                 guy.y -= 4;
@@ -71,6 +72,8 @@ function initScene() {
                 s.destroy();
             if (guy.collides(smiley))
                 smiley.destroy();
+
+            guy.health += 1;
         })
         .show();
 
@@ -94,4 +97,5 @@ function initScene() {
     console.log('Graphics.children.length', guy.children.length);
     console.log('Sprite.children.length', s.children.length);
     console.log('Sprite.children.length', s.getBounds());
+    console.log('guy', guy);
 }
