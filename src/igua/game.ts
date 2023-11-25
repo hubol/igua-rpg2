@@ -14,36 +14,36 @@ export function startGame() {
 function initScene() {
     console.log('Scene', scene.source.name)
 
-    // for (let i = 0; i < 1280; i++) {
-    //     let destroyedAt = -1;
+    for (let i = 0; i < 1280; i++) {
+        let destroyedAt = -1;
 
-    //     const g = new Graphics().at(i * 2, i * 2).beginFill(0xff0000 + i).drawRect(0, 0, 16, 16)
-    //         .step(() => {
-    //             g.x = (g.x + 1) % 256;
-    //             if (g.scale.x !== 1 && Math.random() > 0.95)
-    //                 g.destroy();
-    //         })
-    //         .async(async () => {
-    //             while (true) {
-    //                 let ticks = Math.random() * 60 * 4;
-    //                 await wait(() => ticks-- <= 0);
-    //                 if (g.destroyed)
-    //                     console.log('Checking g.scale at', scene.ticker.updates, 'destroyed at', destroyedAt);
-    //                 g.scale.x = -1 + Math.random() * 2;
-    //                 if (Math.random() > 0.9)
-    //                     throw new Error('random');
-    //             }
-    //         })
-    //         .async(async () => {
-    //             while (true) {
-    //                 let ticks = Math.random() * 60 * 4;
-    //                 await wait(() => ticks-- <= 0);
-    //                 destroyedAt = scene.ticker.updates;
-    //                 g.destroy();
-    //             }
-    //         })
-    //         .show(scene.stage);
-    // }
+        const g = new Graphics().at(i * 2, i * 2).beginFill(0xff0000 + i).drawRect(0, 0, 16, 16)
+            .step(() => {
+                g.x = (g.x + 1) % 256;
+                if (g.scale.x !== 1 && Math.random() > 0.95)
+                    g.destroy();
+            })
+            .async(async () => {
+                while (true) {
+                    let ticks = Math.random() * 60 * 4;
+                    await wait(() => ticks-- <= 0);
+                    if (g.destroyed)
+                        console.log('Checking g.scale at', scene.ticker.updates, 'destroyed at', destroyedAt);
+                    g.scale.x = -1 + Math.random() * 2;
+                    if (Math.random() > 0.9)
+                        throw new Error('random');
+                }
+            })
+            .async(async () => {
+                while (true) {
+                    let ticks = Math.random() * 60 * 4;
+                    await wait(() => ticks-- <= 0);
+                    destroyedAt = scene.ticker.updates;
+                    g.destroy();
+                }
+            })
+            .show(scene.stage);
+    }
 
     const guy = merge(new Graphics(), { health: 1, get happiness() { return 100 + this.health; } }).at(128, 128).beginFill(0xffff00).drawCircle(0, 0, 16)
         .step(() => {

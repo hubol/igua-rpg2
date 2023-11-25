@@ -1,3 +1,4 @@
+import { AsshatMicrotask, AsshatMicrotasks } from "./asshat-microtasks";
 import { ErrorReporter } from "./error-reporter";
 
 export class EscapeTickerAndExecute {
@@ -9,6 +10,7 @@ export type AsshatTickerFn = ((...params: any[]) => any) & { _removed?: boolean 
 export interface IAsshatTicker {
     doNextUpdate: boolean;
     add(fn: AsshatTickerFn): void;
+    addMicrotask(task: AsshatMicrotask): void;
     remove(fn: AsshatTickerFn): void;
     update(): void;
 }
@@ -18,9 +20,14 @@ export class AsshatTicker implements IAsshatTicker {
     doNextUpdate = true;
 
     private readonly _callbacks: AsshatTickerFn[] = [];
+    private readonly _microtasks = new AsshatMicrotasks();
 
     add(fn: AsshatTickerFn) {
         this._callbacks.push(fn);
+    }
+
+    addMicrotask(task: AsshatMicrotask) {
+        this._microtasks.add(task);
     }
 
     remove(fn: AsshatTickerFn) {
@@ -33,6 +40,7 @@ export class AsshatTicker implements IAsshatTicker {
 
         try {
             this.updateImpl();
+            this._microtasks.tick();
         }
         catch (e) {
             if (e instanceof EscapeTickerAndExecute) {
