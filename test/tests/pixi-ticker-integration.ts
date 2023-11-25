@@ -45,11 +45,11 @@ export function stepFnIsNotCalledAfterObjectDestroyed() {
 
     Assert(displayObjectSteps).toStrictlyBe(0);
 
-    ticker.update();
+    ticker.tick();
 
     Assert(displayObjectSteps).toStrictlyBe(1);
 
-    ticker.update();
+    ticker.tick();
 
     Assert(displayObjectSteps).toStrictlyBe(2);
 
@@ -74,7 +74,7 @@ export function displayObjectCanBeAddedToContainerWithoutTicker() {
 
     Assert(displayObjectSteps).toStrictlyBe(0);
 
-    ticker.update();
+    ticker.tick();
 
     Assert(displayObjectSteps).toStrictlyBe(1);
 }
@@ -95,7 +95,7 @@ export function canAddStepFnAfterAddedToContainer() {
     const ticker = new AsshatTicker();
     c.withTicker(ticker);
 
-    ticker.update();
+    ticker.tick();
 
     Assert(displayObjectSteps).toStrictlyBe(1);
 }
@@ -119,7 +119,7 @@ export function canAddMultipleStepFnsToOneDisplayObject() {
     Assert(displayObjectSteps1).toStrictlyBe(0);
     Assert(displayObjectSteps2).toStrictlyBe(0);
 
-    ticker.update();
+    ticker.tick();
 
     Assert(displayObjectSteps1).toStrictlyBe(1);
     Assert(displayObjectSteps2).toStrictlyBe(1);
@@ -128,7 +128,7 @@ export function canAddMultipleStepFnsToOneDisplayObject() {
 
     Assert((ticker as any)._callbacks.length).toStrictlyBe(2);
 
-    ticker.update();
+    ticker.tick();
 
     Assert((ticker as any)._callbacks.length).toStrictlyBe(0);
 }
@@ -154,7 +154,7 @@ export function childClimbsHierarchyToGetTicker() {
     const ticker = new AsshatTicker();
     c1.withTicker(ticker);
 
-    ticker.update();
+    ticker.tick();
 
     Assert(displayObjectSteps).toStrictlyBe(1);
 }
@@ -188,7 +188,7 @@ export function multipleChildrenUseStepFn() {
 
     c2.addChild(d3);
 
-    ticker.update();
+    ticker.tick();
 
     Assert(displayObjectSteps).toStrictlyBe(3);
 }
@@ -210,12 +210,12 @@ export function stopsTickingWhenGrandparentIsDestroyed() {
     const ticker = new AsshatTicker();
     c1.withTicker(ticker);
 
-    ticker.update();
+    ticker.tick();
 
     Assert(displayObjectSteps).toStrictlyBe(1);
 
     c1.destroy();
-    ticker.update();
+    ticker.tick();
 
     Assert(displayObjectSteps).toStrictlyBe(1);
 }

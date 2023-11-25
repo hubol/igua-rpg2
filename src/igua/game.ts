@@ -28,7 +28,7 @@ function initScene() {
                     let ticks = Math.random() * 60 * 4;
                     await wait(() => ticks-- <= 0);
                     if (g.destroyed)
-                        console.log('Checking g.scale at', scene.ticker.updates, 'destroyed at', destroyedAt);
+                        console.log('Checking g.scale at', scene.ticker.ticks, 'destroyed at', destroyedAt);
                     g.scale.x = -1 + Math.random() * 2;
                     if (Math.random() > 0.9)
                         throw new Error('random');
@@ -38,7 +38,7 @@ function initScene() {
                 while (true) {
                     let ticks = Math.random() * 60 * 4;
                     await wait(() => ticks-- <= 0);
-                    destroyedAt = scene.ticker.updates;
+                    destroyedAt = scene.ticker.ticks;
                     g.destroy();
                 }
             })

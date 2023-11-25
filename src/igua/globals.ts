@@ -27,7 +27,7 @@ export function installGlobals(_renderer: PixiRenderer) {
     ticker.add(() => {
         AsshatZoneDiagnostics.printHandledCancellationErrors();
         KeyListener.advance();
-        scene?.ticker.update();
+        scene?.ticker.tick();
         Collision.recycleRectangles();
     });
 
@@ -35,7 +35,7 @@ export function installGlobals(_renderer: PixiRenderer) {
     animator.start();
 
     animator.add(() => {
-        ticker.update();
+        ticker.tick();
         renderer.render(rootStage);
     });
 

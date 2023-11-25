@@ -34,10 +34,6 @@ export class LazyTicker implements IAsshatTicker {
         this._queuedCalls.push({ fn: 'addMicrotask', arg });
     }
 
-    update(): void {
-        throw new InvalidLazyTickerAccess(`Attempt to call update() on LazyTicker`, this);
-    }
-
     resolve(ticker: AsshatTicker) {
         if (this._resolved)
             throw new InvalidLazyTickerAccess(`Attempt to resolve() already-resolved LazyTicker`, this);

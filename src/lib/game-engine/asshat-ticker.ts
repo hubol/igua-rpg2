@@ -12,11 +12,10 @@ export interface IAsshatTicker {
     add(fn: AsshatTickerFn): void;
     addMicrotask(task: AsshatMicrotask): void;
     remove(fn: AsshatTickerFn): void;
-    update(): void;
 }
 
 export class AsshatTicker implements IAsshatTicker {
-    updates = 0;
+    ticks = 0;
     doNextUpdate = true;
 
     private readonly _callbacks: AsshatTickerFn[] = [];
@@ -34,12 +33,12 @@ export class AsshatTicker implements IAsshatTicker {
         fn._removed = true;
     }
 
-    update(): void {
+    tick() {
         if (!this.doNextUpdate)
             return;
 
         try {
-            this.updateImpl();
+            this.tickImpl();
             this._microtasks.tick();
         }
         catch (e) {
@@ -47,12 +46,12 @@ export class AsshatTicker implements IAsshatTicker {
                 e.execute();
                 return;
             }
-            ErrorReporter.reportSubsystemError('AsshatTicker.update', e);
+            ErrorReporter.reportSubsystemError('AsshatTicker.tick', e);
         }
     }
 
-    private updateImpl(): void {
-        this.updates += 1;
+    private tickImpl() {
+        this.ticks += 1;
 
         let i = 0;
         let shift = 0;
@@ -71,7 +70,7 @@ export class AsshatTicker implements IAsshatTicker {
             catch (e) {
                 if (e instanceof EscapeTickerAndExecute)
                     throw e;
-                ErrorReporter.reportSubsystemError('AsshatTicker.updateImpl', e, callback);
+                ErrorReporter.reportSubsystemError('AsshatTicker.tickImpl', e, callback);
             }
 
             if (shift)

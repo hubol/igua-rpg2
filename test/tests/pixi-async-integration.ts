@@ -32,17 +32,17 @@ export function worksWithoutFlushingPromises() {
     c.addChild(d);
 
     Assert(phase).toStrictlyBe(0);
-    ticker.update();
+    ticker.tick();
     Assert(phase).toStrictlyBe(0);
     phase1 = true;
-    ticker.update();
+    ticker.tick();
     // Assert(phase).toStrictlyBe(1);
     phase2 = true;
     phase3 = true;
-    ticker.update();
+    ticker.tick();
     // Assert(phase).toStrictlyBe(3);
     phase4 = true;
-    ticker.update();
+    ticker.tick();
     Assert(phase).toStrictlyBe(4);
 }
 
@@ -70,16 +70,16 @@ export async function worksWithFlushingPromises() {
     
     c.addChild(d);
 
-    ticker.update();
+    ticker.tick();
     phase1 = true;
-    ticker.update();
+    ticker.tick();
 
     await TestPromise.flush();
     Assert(phase).toStrictlyBe(1);
 
     phase2 = true;
     phase3 = true;
-    ticker.update();
+    ticker.tick();
 
     await TestPromise.flush();
     Assert(phase).toStrictlyBe(3);
@@ -87,7 +87,7 @@ export async function worksWithFlushingPromises() {
     
     d.destroy();
     phase4 = true;
-    ticker.update();
+    ticker.tick();
 
     await TestPromise.flush();
     Assert(phase).toStrictlyBe(3);
@@ -115,27 +115,27 @@ export async function promiseAllWorksWithFlushingPromises() {
     
     c.addChild(d);
 
-    ticker.update();
+    ticker.tick();
     phase1 = true;
-    ticker.update();
+    ticker.tick();
 
     await TestPromise.flush();
     Assert(phase).toStrictlyBe(0);
 
     phase2 = true;
-    ticker.update();
+    ticker.tick();
 
     await TestPromise.flush();
     Assert(phase).toStrictlyBe(2);
 
     phase3 = true;
-    ticker.update();
+    ticker.tick();
     
     await TestPromise.flush();
     Assert(phase).toStrictlyBe(3);
     
     d.destroy();
-    ticker.update();
+    ticker.tick();
 
     await TestPromise.flush();
     Assert(phase).toStrictlyBe(3);
@@ -165,27 +165,27 @@ export async function promiseLazyTickerWithFlushingPromises() {
 
     c.withTicker(ticker);
 
-    ticker.update();
+    ticker.tick();
     phase1 = true;
-    ticker.update();
+    ticker.tick();
 
     await TestPromise.flush();
     Assert(phase).toStrictlyBe(0);
 
     phase2 = true;
-    ticker.update();
+    ticker.tick();
 
     await TestPromise.flush();
     Assert(phase).toStrictlyBe(2);
 
     phase3 = true;
-    ticker.update();
+    ticker.tick();
     
     await TestPromise.flush();
     Assert(phase).toStrictlyBe(3);
     
     d.destroy();
-    ticker.update();
+    ticker.tick();
 
     await TestPromise.flush();
     Assert(phase).toStrictlyBe(3);
