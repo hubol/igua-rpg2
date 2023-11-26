@@ -18,12 +18,12 @@ async function initialize() {
         await installExtensions();
 
         const progress = new JobProgress();
-        const loadAssets = loadLaunchAssets(progress);
 
-        integralUpscaleCanvas(addGameCanvasToDocument(renderer.view))
-        await showLoadingScreen(renderer, progress);
-
-        await loadAssets;
+        integralUpscaleCanvas(addGameCanvasToDocument(renderer.view));
+        await Promise.all([
+            loadLaunchAssets(progress),
+            showLoadingScreen(renderer, progress),
+        ]);
         
         require("./igua/globals").installGlobals(renderer);
         require("./igua/game").startGame();
