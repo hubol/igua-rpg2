@@ -13,6 +13,20 @@
 			}
 		}
 	],
-	"audioFiles": [],
+	"audioFiles": [
+		{
+			"glob": "raw/sounds/**/*.{wav,flac}",
+			"convert": [
+				{
+					"zip": "src/assets/generated/sounds/sounds-ogg.zip",
+					"format": "ogg"
+				}
+			],
+			"template": {
+				"out": "src/assets/generated/sounds/index.ts",
+				"program": "src/assets/template/sounds.js"
+			}
+		}
+	],
 	"jsonFiles": []
 }
