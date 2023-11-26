@@ -4,12 +4,17 @@ import { GeneratedSfxData } from "./generated/sounds";
 
 // @ts-expect-error
 import oggSoundsZipUrl from "./generated/sounds/sounds-ogg.zip";
+import { Capabilities, CapabilitiesError } from "../lib/browser/capabilities";
 
 type SoundId = keyof typeof GeneratedSfxData;
 
 export const Sfx: Record<SoundId, HTMLAudioElement> = <any>{};
 
 export async function loadSoundAssets(progress: JobProgress) {
+    if (!Capabilities.oggSupport)
+        throw new CapabilitiesError(`Your browser does not support the OGG audio format.
+Safari is known to not support this format.`);
+
     const soundsToLoadCount = Object.keys(GeneratedSfxData).length;
     progress.increaseTotalJobsCount(soundsToLoadCount);
 
