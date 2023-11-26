@@ -2,7 +2,7 @@ const rootEl = document.createElement('div');
 rootEl.id = 'toast';
 document.body.appendChild(rootEl);
 
-function show(title: string, description: string) {
+function show(title: string, description: string, durationMs = 5000) {
     const divEl = document.createElement('div');
     divEl.className = "warning_toast";
     divEl.innerHTML = `${warningSvg}
@@ -11,6 +11,12 @@ function show(title: string, description: string) {
     <p class="description">${description}</p>
 </div>`;
     rootEl.appendChild(divEl);
+    setTimeout(() => {
+      divEl.classList.add('out');
+      setTimeout(() => {
+        divEl.remove();
+      }, 2000);
+    }, durationMs);
 }
 
 export const WarningToast = {

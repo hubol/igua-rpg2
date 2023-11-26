@@ -175,7 +175,6 @@ noscript {
     top: 0;
     right: 0;
     padding: 0.5rem;
-    gap: 0.5rem;
 
     display: flex;
     align-items: flex-end;
@@ -183,12 +182,50 @@ noscript {
 }
 
 #toast .warning_toast {
+    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
     background-color: #f8c818;
     padding: 0.5rem 0.75rem;
     border-radius: 3px;
+    position: relative;
+    animation: warning_toast_in 0.3s ease-out;
+    box-sizing: border-box;
+}
+
+#toast .warning_toast.out {
+    animation: warning_toast_out 1.4s ease-out forwards;
+}
+
+@keyframes warning_toast_in {
+    0% {
+        left: calc(0.5rem + 100%);
+    }
+    100% {
+        left: 0;
+    }
+}
+
+@keyframes warning_toast_out {
+    0% {
+        left: 0;
+    }
+    50%, 100% {
+        left: calc(0.5rem + 100%);
+    }
+    50% {
+        max-height: 1000px;
+    }
+    90% {
+        padding: 0.5rem 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+    100% {
+        max-height: 0;
+        padding: 0;
+        margin: 0;
+    }
 }
 
 #toast .message {
