@@ -1,0 +1,75 @@
+name: Build and deploy on push
+on: push
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github
+            src
+            .parcelrc
+            package-lock.json
+            package.json
+            tsconfig.json
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 16
+      
+      - run: npm ci
+
+      - run: npm run build
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: dist
+  
+  deploy-heroku:
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+    steps:
+      - run: >
+          git config --global user.email "hubol.gordon@gmail.com" &&
+          git config --global user.name "hubol"
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_email: hubol.gordon@gmail.com
+          justlogin: true
+      - run: >
+          heroku plugins:install heroku-repo &&
+          heroku repo:reset -a igua-rpg2
+      - run: >
+          git init &&
+          heroku git:remote -a igua-rpg2
+      - uses: actions/download-artifact@v2
+        with:
+          name: build
+      # https://izy.codes/heroku-deploy-static-html-en/
+      - run: >
+          echo '<?php include_once("index.html"); ?>' > index.php &&
+          echo '{}' > composer.json
+      - run: >
+          git add . &&
+          git commit -am "${{ github.event.commits[0].message }}" &&
+          git push heroku master -f
+  
+  cleanup:
+    needs: [ deploy-heroku ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: geekyeggo/delete-artifact@v1
+        with:
+          name: |
+            build
