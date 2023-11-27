@@ -55,6 +55,7 @@ html {
 
     font-family: monospace;
     font-size: 120%;
+    text-align: center;
 
     padding: 0.8em;
     animation: fatal_error_glow 2s infinite alternate-reverse;
