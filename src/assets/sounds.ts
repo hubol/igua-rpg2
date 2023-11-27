@@ -5,10 +5,12 @@ import { GeneratedSfxData } from "./generated/sounds";
 // @ts-expect-error
 import oggSoundsZipUrl from "./generated/sounds/sounds-ogg.zip";
 import { Capabilities, CapabilitiesError } from "../lib/browser/capabilities";
+import { IguaAudio } from "../igua/igua-audio";
+import { Sound } from "../lib/game-engine/sound";
 
 type SoundId = keyof typeof GeneratedSfxData;
 
-export const Sfx: Record<SoundId, HTMLAudioElement> = <any>{};
+export const Sfx: Record<SoundId, Sound> = <any>{};
 
 export async function loadSoundAssets(progress: JobProgress) {
     if (!Capabilities.oggSupport)
@@ -22,15 +24,10 @@ Safari is known to not support this format.`);
 
     await Promise.all(Object.entries(GeneratedSfxData)
         .map(async ([soundId, { ogg }]) => {
-            const audio = document.createElement('audio');
+            const buffer = await entries[ogg].arrayBuffer();
+            const sound = await IguaAudio.createSfx(buffer);
 
-            const blob = await entries[ogg].blob('audio/ogg');
-            const b64 = URL.createObjectURL(blob);
-            // Would prefer srcObject, but it does not have wide support for Blob
-            // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/srcObject
-            audio.src = b64;
-
-            Sfx[soundId] = audio;
+            Sfx[soundId] = sound;
             progress.increaseCompletedJobsCount(1);
         }));
 

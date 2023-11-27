@@ -6,6 +6,8 @@ import { EscapeTickerAndExecute } from "../lib/game-engine/asshat-ticker";
 import { Txs } from "../assets/textures";
 import { FindParam } from "../lib/pixi/collision";
 import { merge } from "../lib/object/merge";
+import { Sfx } from "../assets/sounds";
+import { WarningToast } from "../lib/game-engine/warning-toast";
 
 export function startGame() {
     sceneStack.push(initScene, { useGameplay: false });
@@ -56,6 +58,10 @@ function initScene() {
                 guy.x -= 4;
             if (Key.isDown('ArrowRight'))
                 guy.x += 4;
+            if (Key.justWentDown('ArrowUp')) {
+                WarningToast.show('A sound', 'A sound was just played!');
+                Sfx.BallBounce.with.rate(0.5 + Math.random() * 1.5).play();
+            }
             if (Key.justWentDown('Space')) {
                 throw new EscapeTickerAndExecute(() =>
                     sceneStack.push(initScene, { useGameplay: false }));
