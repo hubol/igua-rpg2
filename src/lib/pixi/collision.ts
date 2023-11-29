@@ -31,7 +31,7 @@ function clean<TCollideable extends Collideable>(buffer: ResultBuffer) {
     return buffer as CollisionResult<TCollideable>;
 }
 
-const SkipUpdate = true;
+const SkipUpdate = false;
 
 export enum Hitbox {
     Default = 0,
