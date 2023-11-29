@@ -1,7 +1,8 @@
 import { Container, DisplayObject, Rectangle } from "pixi.js";
-import { IRectangle, areRectanglesNotOverlapping, areRectanglesOverlapping } from "../math/rectangle";
+import { areRectanglesNotOverlapping, areRectanglesOverlapping } from "../math/rectangle";
+import { Vector, vnew } from "../math/vector-type";
 
-export type Collideable = DisplayObject | Rectangle | IRectangle;
+export type Collideable = DisplayObject | Rectangle;
 
 export interface CollisionResult<TCollideable extends Collideable> {
     collided: boolean;
@@ -31,122 +32,154 @@ function clean<TCollideable extends Collideable>(buffer: ResultBuffer) {
 }
 
 const SkipUpdate = true;
+const DontSkipUpdate = false;
 
-function rectangleCollidesMany<TCollideable extends Collideable>(
-        rectangle: IRectangle,
-        array: TCollideable[],
+export enum Hitbox {
+    Default = 0,
+    Scaled = 1,
+    Children = 2,
+    DisplayObjects = 3,
+}
+
+interface PrivateDisplayObjectHitbox {
+    _hitbox?: Hitbox;
+    _hitboxDisplayObjects?: DisplayObject[];
+    _hitboxScale?: Vector;
+}
+
+function configure(
+    target: DisplayObject & PrivateDisplayObjectHitbox,
+    hitbox: Hitbox,
+    scale_xscale_displayObjects?: number | DisplayObject[],
+    yscale?: number) {
+        target._hitbox = hitbox;
+        if (Array.isArray(scale_xscale_displayObjects)) {
+            target._hitboxDisplayObjects = scale_xscale_displayObjects;
+        }
+        else if (typeof scale_xscale_displayObjects === 'number') {
+            target._hitboxScale = vnew(scale_xscale_displayObjects, typeof yscale === 'number' ? yscale : scale_xscale_displayObjects);
+        }
+}
+
+const sourceGreedyBoundRectangle = new Rectangle();
+const sourceBoundRectangles: Rectangle[] = [];
+const targetBoundRectangles: Rectangle[] = [];
+
+function sourceCollidesWithTargets<TCollideable extends Collideable>(
+        source: CollideableObject,
+        targets: CollideableObject[],
         param: FindParam,
         result: CollisionResult<TCollideable>) {
-    for (let i = 0; i < array.length; i += 1) {
-        const collideable = array[i];
-        if (collideable instanceof DisplayObject) {
-            if (!collideable.destroyed && collideable.collides(rectangle)) {
-                result.collided = true;
+    if (source.destroyed)
+        return result;
 
-                if (param === FindParam.One) {
-                    result.instance = collideable;
-                    break;
+    sourceBoundRectangles.length = 0;
+    const pushedRectangleIndexOuter = rectangleIndex;
+
+    accumulateBoundRectanglesOrNotOverlapping(null, source, sourceBoundRectangles);
+
+    const greedySource = source._hitbox === Hitbox.Children
+        // TODO no idea why update needs to be skipped here for accurate results, or what the cost is
+        ? source.getBounds(DontSkipUpdate, sourceGreedyBoundRectangle)
+        : (sourceBoundRectangles.length === 1 ? sourceBoundRectangles[0] : null);
+
+    for (let i = 0; i < targets.length; i += 1) {
+        if (targets[i].destroyed)
+            continue;
+
+        const pushedRectangleIndexInner = rectangleIndex;
+        targetBoundRectangles.length = 0;
+
+        const notOverlapping = accumulateBoundRectanglesOrNotOverlapping(greedySource, targets[i], targetBoundRectangles);
+        if (!notOverlapping) {
+            let overlapped = false;
+            for (let j = 0; j < sourceBoundRectangles.length; j += 1) {
+                for (let k = 0; k < targetBoundRectangles.length; k += 1) {
+                    if (areRectanglesOverlapping(sourceBoundRectangles[j], targetBoundRectangles[k])) {
+                        result.collided = true;
+
+                        if (param === FindParam.All) {
+                            result.instances.push(targets[i] as any);
+                            overlapped = true;
+                            break;
+                        }
+
+                        result.instance = targets[i] as any;
+                        rectangleIndex = pushedRectangleIndexOuter;
+                        return result;
+                    }
                 }
-
-                result.instances.push(collideable);
+                if (overlapped)
+                    break;
             }
         }
-        else if (areRectanglesOverlapping(rectangle, collideable as IRectangle)) {
-                result.collided = true;
 
-                if (param === FindParam.One) {
-                    result.instance = collideable;
-                    break;
-                }
-
-                result.instances.push(collideable);
-        }
+        rectangleIndex = pushedRectangleIndexInner;
     }
+
+    rectangleIndex = pushedRectangleIndexOuter;
     return result;
 }
 
-const containersToVisit: Container[] = [];
+function accumulateBoundRectanglesOrNotOverlapping(
+    greedySource: Rectangle | null,
+    target: CollideableObject,
+    boundRectangles: Rectangle[]): boolean {
+    if (!target._hitbox || target._hitbox === Hitbox.Scaled) {
+        const bounds = target.getBounds(SkipUpdate, rnew());
+        if (target._hitbox === Hitbox.Scaled) {
+            // TODO do scaling
+        }
+
+        if (greedySource && areRectanglesNotOverlapping(greedySource, bounds)) {
+            return true;
+        }
+
+        boundRectangles[0] = bounds;
+        return false;
+    }
+
+    if (greedySource && target._hitbox === Hitbox.Children && areRectanglesNotOverlapping(greedySource, target.getBounds(SkipUpdate, rnew()))) {
+        return true;
+    }
+
+    const array = target._hitbox === Hitbox.Children ? target.children : target._hitboxDisplayObjects!;
+    for (let i = 0; i < array.length; i += 1)
+        boundRectangles.push(array[i].getBounds(SkipUpdate, rnew()));
+
+    return false;
+}
+
+type CollideableObject = Container & PrivateDisplayObjectHitbox;
+
+const singleItemArray: Collideable[] = [];
 
 export const Collision = {
+    configureDisplayObject(
+        target: DisplayObject,
+        hitbox: Hitbox,
+        scale_xscale_displayObjects?: number | DisplayObject[],
+        yscale?: number) {
+            configure(target, hitbox, scale_xscale_displayObjects, yscale);
+    },
     displayObjectCollidesMany<TCollideable extends Collideable>(
             displayObject: DisplayObject,
             array: TCollideable[],
             param: FindParam,
             buffer = _buffer) {
         const result = clean<TCollideable>(buffer);
-        const rect = displayObject.getBounds(false, rnew());
-
-        return rectangleCollidesMany(rect, array, param, result);
+        return sourceCollidesWithTargets<TCollideable>(displayObject as any, array as any, param, result);
     },
-    containerCollidesMany<TCollideable extends Collideable>(
-            container: Container,
-            array: TCollideable[],
-            param: FindParam,
-            buffer = _buffer) {
-        const result = clean<TCollideable>(buffer);
-
-        containersToVisit.length = 0;
-        containersToVisit.push(container);
-
-        while (containersToVisit.length > 0) {
-            const c = containersToVisit.shift()!;
-            for (let i = 0; i < c.children.length; i += 1) {
-                const child = c.children[i];
-                if (child.constructor === Container)
-                    containersToVisit.push(child);
-                else {
-                    const rect = child.getBounds(SkipUpdate, rnew());
-                    rectangleCollidesMany(rect, array, param, result);
-                    if (param === FindParam.One && result.collided)
-                        return result;
-                }
-            }
-        }
-
-        return result;
-    },
-    displayObjectCollides(displayObject: DisplayObject, rectangle: Collideable) {
-        const rect = displayObject.getBounds(SkipUpdate, rnew());
-        if (!(rectangle instanceof DisplayObject))
-            return areRectanglesOverlapping(rect, rectangle);
-
-        if (rectangle.destroyed)
-            return false;
-
-        if (rectangle.constructor === Container)
-            return Collision.containerCollides(rectangle, rect);
-        return areRectanglesOverlapping(rect, rectangle.getBounds(SkipUpdate, rnew()));
-    },
-    containerCollides(container: Container, other: Collideable) {
-        if (other instanceof DisplayObject) {
-            if (other.destroyed)
-                return false;
-            other = other.getBounds(SkipUpdate, rnew());
-        }
-
-        const rect = container.getBounds(SkipUpdate, rnew());
-
-        if (areRectanglesNotOverlapping(rect, other))
-            return false;
-
-        if (other.constructor === Container) {
-            singleContainer[0] = other;
-            return Collision.containerCollidesMany(container, singleContainer, FindParam.One).collided;
-        }
-
-        for (let i = 0; i < container.children.length; i += 1) {
-            if (container.children[i].collides(other))
-                return true;
-        }
-
-        return false;
+    displayObjectCollides(displayObject: DisplayObject, collideable: Collideable) {
+        const result = clean(_buffer);
+        singleItemArray[0] = collideable;
+        sourceCollidesWithTargets(displayObject as any, singleItemArray as any, FindParam.One, result);
+        return result.collided;
     },
     recycleRectangles() {
         rectangleIndex = 0;
     }
 }
-
-const singleContainer: Container[] = [];
 
 let rectangleIndex = 0;
 const rectangles: Rectangle[] = [];

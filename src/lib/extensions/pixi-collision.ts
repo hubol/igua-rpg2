@@ -1,50 +1,40 @@
-import { Container, DisplayObject, Graphics, Sprite } from "pixi.js";
+import { DisplayObject } from "pixi.js";
 import { Collideable, Collision, CollisionResult, FindParam } from "../pixi/collision";
+import { Hitbox } from "../game-engine/hitbox-mode";
 
 declare module "pixi.js" {
     interface DisplayObject {
+        hitbox(mode: Hitbox.Default): this;
+        hitbox(mode: Hitbox.Scaled, scale: number): this;
+        hitbox(mode: Hitbox.Scaled, xscale: number, yscale: number): this;
+        hitbox(mode: Hitbox.DisplayObjects): this;
+        hitbox(mode: Hitbox.Children): this;
+
         collides(target: Collideable): boolean;
         collidesMany<TCollideable extends Collideable>(array: TCollideable[], param?: FindParam, result?: {}): CollisionResult<TCollideable>;
     }
 }
 
-function useDisplayObjectCollision(prototype: any) {
-    Object.defineProperties(prototype, {
-        collides: {
-            value: function (this: DisplayObject, target: Collideable) {
-                return Collision.displayObjectCollides(this, target);
-            },
-            configurable: true,
+Object.defineProperties(DisplayObject.prototype, {
+    collides: {
+        value: function (this: DisplayObject, target: Collideable) {
+            return Collision.displayObjectCollides(this, target);
         },
-        collidesMany: {
-            value: function (this: DisplayObject, array: Collideable[], param?: FindParam, result?: {}) {
-                return Collision.displayObjectCollidesMany(this, array, param ?? FindParam.One, result);
-            },
-            configurable: true,
+        configurable: true,
+    },
+    collidesMany: {
+        value: function (this: DisplayObject, array: Collideable[], param?: FindParam, result?: {}) {
+            return Collision.displayObjectCollidesMany(this, array, param ?? FindParam.One, result);
         },
-    });
-}
-
-function useContainerCollision(prototype: any) {
-    Object.defineProperties(prototype, {
-        collides: {
-            value: function (this: Container, target: Collideable) {
-                return Collision.containerCollides(this, target);
-            },
-            configurable: true,
+        configurable: true,
+    },
+    hitbox: {
+        value: function (this: DisplayObject, hitbox: Hitbox, scale_xscale_displayObjects?: number | DisplayObject[], yscale?: number) {
+            Collision.configureDisplayObject(this, hitbox, scale_xscale_displayObjects, yscale);
+            return this;
         },
-        collidesMany: {
-            value: function (this: Container, array: Collideable[], result?: {}, param?: FindParam) {
-                return Collision.containerCollidesMany(this, array, param ?? FindParam.One, result);
-            },
-            configurable: true,
-        },
-    });
-}
-
-useDisplayObjectCollision(DisplayObject.prototype);
-useContainerCollision(Container.prototype);
-useDisplayObjectCollision(Sprite.prototype);
-useDisplayObjectCollision(Graphics.prototype);
+        configurable: true,
+    },
+});
 
 export default 0;
