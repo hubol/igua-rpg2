@@ -32,7 +32,6 @@ function clean<TCollideable extends Collideable>(buffer: ResultBuffer) {
 }
 
 const SkipUpdate = true;
-const DontSkipUpdate = false;
 
 export enum Hitbox {
     Default = 0,
@@ -79,8 +78,7 @@ function sourceCollidesWithTargets<TCollideable extends Collideable>(
     accumulateBoundRectanglesOrNotOverlapping(null, source, sourceBoundRectangles);
 
     const greedySource = source._hitbox === Hitbox.Children
-        // TODO no idea why update needs to be skipped here for accurate results, or what the cost is
-        ? source.getBounds(DontSkipUpdate, sourceGreedyBoundRectangle)
+        ? source.getBounds(SkipUpdate, sourceGreedyBoundRectangle)
         : (sourceBoundRectangles.length === 1 ? sourceBoundRectangles[0] : null);
 
     for (let i = 0; i < targets.length; i += 1) {

@@ -1,4 +1,4 @@
-import { Container } from "pixi.js";
+import { Container, Rectangle } from "pixi.js";
 import { KeyListener } from "../lib/browser/key";
 import { Animator } from "../lib/game-engine/animator";
 import { AsshatTicker } from "../lib/game-engine/asshat-ticker";
@@ -24,9 +24,14 @@ export function installGlobals(_renderer: PixiRenderer) {
 
     KeyListener.start();
 
+    const rectangle = new Rectangle();
+
     ticker.add(() => {
         AsshatZoneDiagnostics.printHandledCancellationErrors();
         KeyListener.advance();
+        // TODO need to make a better effort to understand what cost .getBounds has
+        // and how "out of date" bounds data can be
+        scene?.stage.getBounds(false, rectangle);
         scene?.ticker.tick();
         Collision.recycleRectangles();
     });

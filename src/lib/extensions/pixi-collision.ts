@@ -1,13 +1,12 @@
 import { DisplayObject } from "pixi.js";
-import { Collideable, Collision, CollisionResult, FindParam } from "../pixi/collision";
-import { Hitbox } from "../game-engine/hitbox-mode";
+import { Collideable, Collision, CollisionResult, FindParam, Hitbox } from "../pixi/collision";
 
 declare module "pixi.js" {
     interface DisplayObject {
         hitbox(mode: Hitbox.Default): this;
         hitbox(mode: Hitbox.Scaled, scale: number): this;
         hitbox(mode: Hitbox.Scaled, xscale: number, yscale: number): this;
-        hitbox(mode: Hitbox.DisplayObjects): this;
+        hitbox(mode: Hitbox.DisplayObjects, displayObjects: DisplayObject[]): this;
         hitbox(mode: Hitbox.Children): this;
 
         collides(target: Collideable): boolean;

@@ -4,11 +4,10 @@ import { Key } from "../lib/browser/key";
 import { scene, sceneStack } from "./globals";
 import { EscapeTickerAndExecute } from "../lib/game-engine/asshat-ticker";
 import { Txs } from "../assets/textures";
-import { FindParam } from "../lib/pixi/collision";
+import { FindParam, Hitbox } from "../lib/pixi/collision";
 import { merge } from "../lib/object/merge";
 import { Sfx } from "../assets/sounds";
 import { WarningToast } from "../lib/game-engine/warning-toast";
-import { Hitbox } from "../lib/game-engine/hitbox-mode";
 import { container } from "../lib/pixi/container";
 
 export function startGame() {
@@ -52,7 +51,7 @@ function initScene() {
     const ball = new Graphics().beginFill(0xffff00).drawCircle(0, 0, 16);
     const pole = new Graphics().beginFill(0xff0000).drawRect(-2, -54, 4, 54);
 
-    const guy = merge(container(ball, pole).hitbox(Hitbox.Children), { health: 1, get happiness() { return 100 + this.health; } }).at(128, 128)
+    const guy = merge(container(ball, pole).hitbox(Hitbox.DisplayObjects, [ ball, pole ]), { health: 1, get happiness() { return 100 + this.health; } }).at(128, 128)
         .step(() => {
             if (Key.isDown('ArrowUp'))
                 guy.y -= 4;
