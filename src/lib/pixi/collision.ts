@@ -2,7 +2,7 @@ import { Container, DisplayObject, Rectangle } from "pixi.js";
 import { areRectanglesNotOverlapping, areRectanglesOverlapping } from "../math/rectangle";
 import { Vector, vnew } from "../math/vector-type";
 
-interface CollisionResult<TInstance = any> {
+interface CollisionResult<TInstance = DisplayObject> {
     collided: boolean;
     instance: TInstance | null;
     instances: TInstance[];
@@ -62,9 +62,11 @@ const sourceGreedyBoundRectangle = new Rectangle();
 const sourceBoundRectangles: Rectangle[] = [];
 const targetBoundRectangles: Rectangle[] = [];
 
+type Collideable = Container & PrivateDisplayObjectHitbox;
+
 function sourceCollidesWithTargets<TInstance>(
-        source: CollideableObject,
-        targets: CollideableObject[],
+        source: Collideable,
+        targets: Collideable[],
         param: FindParam,
         result: CollisionResult<TInstance>) {
     if (source.destroyed)
@@ -119,7 +121,7 @@ function sourceCollidesWithTargets<TInstance>(
 
 function accumulateBoundRectanglesOrNotOverlapping(
     greedySource: Rectangle | null,
-    target: CollideableObject,
+    target: Collideable,
     boundRectangles: Rectangle[]): boolean {
     if (!target._hitbox || target._hitbox === Hitbox.Scaled) {
         const bounds = target.getBounds(SkipUpdate, rnew());
@@ -146,24 +148,22 @@ function accumulateBoundRectanglesOrNotOverlapping(
     return false;
 }
 
-type CollideableObject = Container & PrivateDisplayObjectHitbox;
-
 const singleItemArray: DisplayObject[] = [];
 
 export const Collision = {
     configureDisplayObject,
-    displayObjectCollidesMany<TCollideable extends DisplayObject>(
+    displayObjectCollidesMany<TDisplayObject extends DisplayObject>(
             displayObject: DisplayObject,
-            array: TCollideable[],
+            array: TDisplayObject[],
             param: FindParam,
             buffer = _buffer) {
-        const result = clean<TCollideable>(buffer);
-        return sourceCollidesWithTargets(displayObject as CollideableObject, array as any[], param, result);
+        const result = clean<TDisplayObject>(buffer);
+        return sourceCollidesWithTargets(displayObject as Collideable, array as DisplayObject[] as Collideable[], param, result);
     },
     displayObjectCollides(displayObject: DisplayObject, collideable: DisplayObject) {
         const result = clean(_buffer);
         singleItemArray[0] = collideable;
-        return sourceCollidesWithTargets(displayObject as CollideableObject, singleItemArray as CollideableObject[], 0, result).collided;
+        return sourceCollidesWithTargets(displayObject as Collideable, singleItemArray as Collideable[], 0, result).collided;
     },
     recycleRectangles() {
         rectangleIndex = 0;
