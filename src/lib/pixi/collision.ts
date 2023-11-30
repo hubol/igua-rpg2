@@ -2,15 +2,15 @@ import { Container, DisplayObject, Rectangle } from "pixi.js";
 import { areRectanglesNotOverlapping, areRectanglesOverlapping } from "../math/rectangle";
 import { Vector, vnew } from "../math/vector-type";
 
-export type Collideable = DisplayObject | Rectangle;
+export type Collideable = DisplayObject;
 
 export interface CollisionResult<TCollideable extends Collideable> {
     collided: boolean;
-    instance: TCollideable;
+    instance: TCollideable | null;
     instances: TCollideable[];
 }
 
-export enum FindParam {
+enum FindParam {
     One = 0,
     All = 1,
 }
@@ -25,7 +25,7 @@ function clean<TCollideable extends Collideable>(buffer: ResultBuffer) {
     else
         buffer.instances = [];
 
-    buffer.instance = undefined;
+    buffer.instance = null;
     buffer.collided = false;
 
     return buffer as CollisionResult<TCollideable>;
@@ -166,13 +166,12 @@ export const Collision = {
             param: FindParam,
             buffer = _buffer) {
         const result = clean<TCollideable>(buffer);
-        return sourceCollidesWithTargets<TCollideable>(displayObject as any, array as any, param, result);
+        return sourceCollidesWithTargets<TCollideable>(displayObject as CollideableObject, array as any[], param, result);
     },
     displayObjectCollides(displayObject: DisplayObject, collideable: Collideable) {
         const result = clean(_buffer);
         singleItemArray[0] = collideable;
-        sourceCollidesWithTargets(displayObject as any, singleItemArray as any, FindParam.One, result);
-        return result.collided;
+        return sourceCollidesWithTargets(displayObject as CollideableObject, singleItemArray as CollideableObject[], 0, result).collided;
     },
     recycleRectangles() {
         rectangleIndex = 0;

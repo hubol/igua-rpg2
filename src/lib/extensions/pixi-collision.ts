@@ -1,5 +1,5 @@
 import { DisplayObject } from "pixi.js";
-import { Collideable, Collision, CollisionResult, FindParam, Hitbox } from "../pixi/collision";
+import { Collideable, Collision, Hitbox } from "../pixi/collision";
 
 declare module "pixi.js" {
     interface DisplayObject {
@@ -10,7 +10,8 @@ declare module "pixi.js" {
         hitbox(mode: Hitbox.Children): this;
 
         collides(target: Collideable): boolean;
-        collidesMany<TCollideable extends Collideable>(array: TCollideable[], param?: FindParam, result?: {}): CollisionResult<TCollideable>;
+        collidesOne<TCollideable extends Collideable>(array: TCollideable[]): TCollideable | null;
+        collidesAll<TCollideable extends Collideable>(array: TCollideable[], result?: {}): TCollideable[];
     }
 }
 
@@ -21,9 +22,15 @@ Object.defineProperties(DisplayObject.prototype, {
         },
         configurable: true,
     },
-    collidesMany: {
-        value: function (this: DisplayObject, array: Collideable[], param?: FindParam, result?: {}) {
-            return Collision.displayObjectCollidesMany(this, array, param ?? FindParam.One, result);
+    collidesOne: {
+        value: function (this: DisplayObject, array: Collideable[]) {
+            return Collision.displayObjectCollidesMany(this, array, 0).instance;
+        },
+        configurable: true,
+    },
+    collidesAll: {
+        value: function (this: DisplayObject, array: Collideable[], result?: {}) {
+            return Collision.displayObjectCollidesMany(this, array, 1, result).instances;
         },
         configurable: true,
     },

@@ -4,7 +4,7 @@ import { Key } from "../lib/browser/key";
 import { scene, sceneStack } from "./globals";
 import { EscapeTickerAndExecute } from "../lib/game-engine/asshat-ticker";
 import { Txs } from "../assets/textures";
-import { FindParam, Hitbox } from "../lib/pixi/collision";
+import { Hitbox } from "../lib/pixi/collision";
 import { merge } from "../lib/object/merge";
 import { Sfx } from "../assets/sounds";
 import { WarningToast } from "../lib/game-engine/warning-toast";
@@ -75,7 +75,7 @@ function initScene() {
                     sceneStack.pop());
             }
             const tint = Math.floor(Math.random() * 0xffffff);
-            for (const collided of guy.collidesMany(sprites, FindParam.All).instances) {
+            for (const collided of guy.collidesAll(sprites)) {
                 collided.tint = tint;
             }
             if (guy.collides(s))
