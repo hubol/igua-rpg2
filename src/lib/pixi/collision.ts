@@ -2,12 +2,10 @@ import { Container, DisplayObject, Rectangle } from "pixi.js";
 import { areRectanglesNotOverlapping, areRectanglesOverlapping } from "../math/rectangle";
 import { Vector, vnew } from "../math/vector-type";
 
-export type Collideable = DisplayObject;
-
-export interface CollisionResult<TCollideable extends Collideable> {
+interface CollisionResult<TInstance = any> {
     collided: boolean;
-    instance: TCollideable | null;
-    instances: TCollideable[];
+    instance: TInstance | null;
+    instances: TInstance[];
 }
 
 enum FindParam {
@@ -15,11 +13,11 @@ enum FindParam {
     All = 1,
 }
 
-type ResultBuffer = Partial<CollisionResult<Collideable>>;
+type ResultBuffer = Partial<CollisionResult>;
 
 const _buffer: ResultBuffer = { instances: [] };
 
-function clean<TCollideable extends Collideable>(buffer: ResultBuffer) {
+function clean<TInstance>(buffer: ResultBuffer) {
     if (buffer.instances)
         buffer.instances.length = 0;
     else
@@ -28,7 +26,7 @@ function clean<TCollideable extends Collideable>(buffer: ResultBuffer) {
     buffer.instance = null;
     buffer.collided = false;
 
-    return buffer as CollisionResult<TCollideable>;
+    return buffer as CollisionResult<TInstance>;
 }
 
 const SkipUpdate = false;
@@ -46,7 +44,7 @@ interface PrivateDisplayObjectHitbox {
     _hitboxScale?: Vector;
 }
 
-function configure(
+function configureDisplayObject(
     target: DisplayObject & PrivateDisplayObjectHitbox,
     hitbox: Hitbox,
     scale_xscale_displayObjects?: number | DisplayObject[],
@@ -64,11 +62,11 @@ const sourceGreedyBoundRectangle = new Rectangle();
 const sourceBoundRectangles: Rectangle[] = [];
 const targetBoundRectangles: Rectangle[] = [];
 
-function sourceCollidesWithTargets<TCollideable extends Collideable>(
+function sourceCollidesWithTargets<TInstance>(
         source: CollideableObject,
         targets: CollideableObject[],
         param: FindParam,
-        result: CollisionResult<TCollideable>) {
+        result: CollisionResult<TInstance>) {
     if (source.destroyed)
         return result;
 
@@ -150,25 +148,19 @@ function accumulateBoundRectanglesOrNotOverlapping(
 
 type CollideableObject = Container & PrivateDisplayObjectHitbox;
 
-const singleItemArray: Collideable[] = [];
+const singleItemArray: DisplayObject[] = [];
 
 export const Collision = {
-    configureDisplayObject(
-        target: DisplayObject,
-        hitbox: Hitbox,
-        scale_xscale_displayObjects?: number | DisplayObject[],
-        yscale?: number) {
-            configure(target, hitbox, scale_xscale_displayObjects, yscale);
-    },
-    displayObjectCollidesMany<TCollideable extends Collideable>(
+    configureDisplayObject,
+    displayObjectCollidesMany<TCollideable extends DisplayObject>(
             displayObject: DisplayObject,
             array: TCollideable[],
             param: FindParam,
             buffer = _buffer) {
         const result = clean<TCollideable>(buffer);
-        return sourceCollidesWithTargets<TCollideable>(displayObject as CollideableObject, array as any[], param, result);
+        return sourceCollidesWithTargets(displayObject as CollideableObject, array as any[], param, result);
     },
-    displayObjectCollides(displayObject: DisplayObject, collideable: Collideable) {
+    displayObjectCollides(displayObject: DisplayObject, collideable: DisplayObject) {
         const result = clean(_buffer);
         singleItemArray[0] = collideable;
         return sourceCollidesWithTargets(displayObject as CollideableObject, singleItemArray as CollideableObject[], 0, result).collided;

@@ -1,5 +1,5 @@
 import { DisplayObject } from "pixi.js";
-import { Collideable, Collision, Hitbox } from "../pixi/collision";
+import { Collision, Hitbox } from "../pixi/collision";
 
 declare module "pixi.js" {
     interface DisplayObject {
@@ -9,27 +9,27 @@ declare module "pixi.js" {
         hitbox(mode: Hitbox.DisplayObjects, displayObjects: DisplayObject[]): this;
         hitbox(mode: Hitbox.Children): this;
 
-        collides(target: Collideable): boolean;
-        collidesOne<TCollideable extends Collideable>(array: TCollideable[]): TCollideable | null;
-        collidesAll<TCollideable extends Collideable>(array: TCollideable[], result?: {}): TCollideable[];
+        collides(target: DisplayObject): boolean;
+        collidesOne<TDisplayObject extends DisplayObject>(array: TDisplayObject[]): TDisplayObject | null;
+        collidesAll<TDisplayObject extends DisplayObject>(array: TDisplayObject[], result?: {}): TDisplayObject[];
     }
 }
 
 Object.defineProperties(DisplayObject.prototype, {
     collides: {
-        value: function (this: DisplayObject, target: Collideable) {
+        value: function (this: DisplayObject, target: DisplayObject) {
             return Collision.displayObjectCollides(this, target);
         },
         configurable: true,
     },
     collidesOne: {
-        value: function (this: DisplayObject, array: Collideable[]) {
+        value: function (this: DisplayObject, array: DisplayObject[]) {
             return Collision.displayObjectCollidesMany(this, array, 0).instance;
         },
         configurable: true,
     },
     collidesAll: {
-        value: function (this: DisplayObject, array: Collideable[], result?: {}) {
+        value: function (this: DisplayObject, array: DisplayObject[], result?: {}) {
             return Collision.displayObjectCollidesMany(this, array, 1, result).instances;
         },
         configurable: true,
