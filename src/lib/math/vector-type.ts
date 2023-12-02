@@ -1,9 +1,7 @@
 import { normalize } from "./vector";
 
-function Vector(x: number, y: number) {
-    // @ts-ignore
+function Vector(this: Vector, x: number, y: number) {
     this.x = x;
-    // @ts-ignore
     this.y = y;
 }
 
