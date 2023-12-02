@@ -4,7 +4,7 @@ import { JobProgress } from "../lib/game-engine/job-progress";
 
 type TextureId = keyof typeof GeneratedTextureData['txs'];
 
-export const Txs: Record<TextureId, Texture> = <any>{};
+export const Tx: Record<TextureId, Texture> = <any>{};
 
 export async function loadTextureAssets(progress: JobProgress) {
     BaseTexture.defaultOptions.scaleMode = SCALE_MODES.NEAREST;
@@ -24,6 +24,6 @@ export async function loadTextureAssets(progress: JobProgress) {
         const frame = new Rectangle(data.x, data.y, data.width, data.height);
         const texture = new Texture(baseTexture, frame);
         texture.asshatTextureId = textureId;
-        Txs[textureId] = texture;
+        Tx[textureId] = texture;
     }
 }

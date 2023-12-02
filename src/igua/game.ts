@@ -3,7 +3,7 @@ import { wait } from "../lib/game-engine/wait";
 import { Key } from "../lib/browser/key";
 import { scene, sceneStack } from "./globals";
 import { EscapeTickerAndExecute } from "../lib/game-engine/asshat-ticker";
-import { Txs } from "../assets/textures";
+import { Tx } from "../assets/textures";
 import { CollisionShape } from "../lib/pixi/collision";
 import { merge } from "../lib/object/merge";
 import { Sfx } from "../assets/sounds";
@@ -91,15 +91,15 @@ function initScene() {
         })
         .show();
 
-    const s2 = new Sprite(Txs.IguaRpgTitle).show();
-    const s3 = new Sprite(Txs.LockedDoor).at(32, 32).show()
+    const s2 = new Sprite(Tx.IguaRpgTitle).show();
+    const s3 = new Sprite(Tx.LockedDoor).at(32, 32).show()
 
-    const s = new Sprite(Txs.OpenDoor).at(32, 64).show()
+    const s = new Sprite(Tx.OpenDoor).at(32, 64).show()
 
     const sprites = [ s, s2, s3 ];
 
     function p(x: number, y: number) {
-        const s = new Sprite(Txs.OpenDoor);
+        const s = new Sprite(Tx.OpenDoor);
         s.scale.set(0.5, 0.5);
         return s.at(x, y);
     }
