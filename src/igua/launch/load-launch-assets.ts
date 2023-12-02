@@ -1,11 +1,11 @@
 import { loadSoundAssets } from "../../assets/sounds";
 import { loadTextureAssets } from "../../assets/textures";
 import { JobProgress } from "../../lib/game-engine/job-progress";
-import { IguaAudio } from "../igua-audio";
+import { IguaAudioInitializer } from "../igua-audio";
 
 export async function loadLaunchAssets(progress: JobProgress) {
     await Promise.all([
-        IguaAudio.initialize(),
+        IguaAudioInitializer.initialize(),
         loadTextureAssets(progress),
         loadSoundAssets(progress),
     ]);

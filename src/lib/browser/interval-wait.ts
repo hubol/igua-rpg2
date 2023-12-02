@@ -1,10 +1,11 @@
 export function intervalWait(predicate: () => boolean) {
+    let interval: number;
+
     return new Promise<void>(resolve => {
-        const interval = setInterval(() => {
-            if (predicate()) {
+        interval = setInterval(() => {
+            if (predicate())
                 resolve();
-                clearInterval(interval);
-            }
         })
     })
+    .finally(() => interval !== undefined && clearInterval(interval));
 }

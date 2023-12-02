@@ -5,7 +5,7 @@ import { GeneratedSfxData } from "./generated/sounds";
 // @ts-expect-error
 import oggSoundsZipUrl from "./generated/sounds/sounds-ogg.zip";
 import { Capabilities, CapabilitiesError } from "../lib/browser/capabilities";
-import { IguaAudio } from "../igua/igua-audio";
+import { IguaAudio, IguaAudioInitializer } from "../igua/igua-audio";
 import { Sound } from "../lib/game-engine/sound";
 import { intervalWait } from "../lib/browser/interval-wait";
 
@@ -23,7 +23,7 @@ Safari is known to not support this format.`);
 
     const entries = (await unzip(oggSoundsZipUrl)).entries;
 
-    await intervalWait(() => IguaAudio.initialized);
+    await intervalWait(() => IguaAudioInitializer.initialized);
 
     await Promise.all(Object.entries(GeneratedSfxData)
         .map(async ([soundId, { ogg }]) => {
