@@ -38,9 +38,25 @@ export class Sound {
     }
 }
 
+type RampableParam = 'rate' | 'gain';
+
 class SoundInstance {
     constructor(private readonly _sourceNode: AudioBufferSourceNode, private readonly _gainNode: GainNode) {
 
+    }
+
+    private _getAudioParam(param: RampableParam) {
+        switch (param) {
+            case "rate":
+                return this._sourceNode.playbackRate;
+            case "gain":
+                return this._gainNode.gain;
+        }
+    }
+
+    linearRamp(param: RampableParam, value: number, durationSeconds: number) {
+        this._getAudioParam(param).linearRampToValueAtTime(value, this._sourceNode.context.currentTime + durationSeconds);
+        return this;
     }
 
     get gain() {
@@ -102,5 +118,4 @@ class SoundWith {
 }
 
 // TODO there's some copy-paste here, maybe there's a way to eliminate it
-// TODO should the linearRamp... methods be exposed by the Sound and SoundInstance classes?
 // TODO could be nice to expose panning as well

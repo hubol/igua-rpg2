@@ -70,6 +70,7 @@ function initScene() {
                 Sfx.BallBounce.with.rate(0.5 + Math.random() * 1.5).play();
             }
             if (Key.justWentDown('Space')) {
+                Sfx.PorkRollEggAndCheese.playInstance().linearRamp('rate', 0.5 + Math.random() * 1.5, 1 + Math.random() * 3);
                 throw new EscapeTickerAndExecute(() =>
                     sceneStack.push(initScene, { useGameplay: false }));
             }

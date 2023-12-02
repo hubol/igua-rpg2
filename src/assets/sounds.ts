@@ -30,6 +30,4 @@ Safari is known to not support this format.`);
             Sfx[soundId] = sound;
             progress.increaseCompletedJobsCount(1);
         }));
-
-    // window.Sfx = Sfx;
 }
