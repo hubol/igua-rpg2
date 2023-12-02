@@ -24,5 +24,8 @@ export const Environment = {
     },
     get isRunningFromItchCdn() {
         return window.location.href.includes('hwcdn');
+    },
+    get requiresUserGestureForSound() {
+        return true; // TODO
     }
 };

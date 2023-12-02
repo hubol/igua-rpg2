@@ -5,6 +5,7 @@ import { createDomErrorAnnouncer } from "./lib/game-engine/dom-error-announcer";
 import { ErrorReporter } from "./lib/game-engine/error-reporter";
 import { createPixiRenderer } from "./lib/game-engine/pixi-renderer";
 import { JobProgress } from "./lib/game-engine/job-progress";
+import { requestUserGestureForAudioContext } from "./lib/game-engine/request-user-gesture-for-audiocontext";
 
 async function initialize() {
     try {
@@ -21,6 +22,7 @@ async function initialize() {
 
         integralUpscaleCanvas(addGameCanvasToDocument(renderer.view));
         await Promise.all([
+            requestUserGestureForAudioContext(),
             loadLaunchAssets(progress),
             showLoadingScreen(renderer, progress),
         ]);
