@@ -4,7 +4,7 @@ import { Key } from "../lib/browser/key";
 import { scene, sceneStack } from "./globals";
 import { EscapeTickerAndExecute } from "../lib/game-engine/asshat-ticker";
 import { Txs } from "../assets/textures";
-import { Hitbox } from "../lib/pixi/collision";
+import { CollisionShape } from "../lib/pixi/collision";
 import { merge } from "../lib/object/merge";
 import { Sfx } from "../assets/sounds";
 import { WarningToast } from "../lib/game-engine/warning-toast";
@@ -51,7 +51,10 @@ function initScene() {
     const ball = new Graphics().beginFill(0xffff00).drawCircle(0, 0, 16);
     const pole = new Graphics().beginFill(0xff0000).drawRect(-2, -54, 4, 54);
 
-    const guy = merge(container(ball, pole).hitbox(Hitbox.DisplayObjects, [ ball, pole ]), { health: 1, get happiness() { return 100 + this.health; } }).at(128, 128)
+    const guy = merge(
+            container(ball, pole).collisionShape(CollisionShape.DisplayObjects, [ ball, pole ]),
+            { health: 1, get happiness() { return 100 + this.health; } })
+        .at(128, 128)
         .step(() => {
             if (Key.isDown('ArrowUp'))
                 guy.y -= 4;
@@ -100,7 +103,7 @@ function initScene() {
         return s.at(x, y);
     }
 
-    const smiley = new Container().hitbox(Hitbox.Children).at(90, 180).show();
+    const smiley = new Container().collisionShape(CollisionShape.Children).at(90, 180).show();
     smiley.scale.set(3, 2);
     smiley.addChild(p(0, 0), p(0, 50), p(10, 58), p(20, 62), p(30, 62), p(40, 58), p(50, 50), p(50, 0));
 

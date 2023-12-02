@@ -1,13 +1,13 @@
 import { DisplayObject } from "pixi.js";
-import { Collision, Hitbox } from "../pixi/collision";
+import { Collision, CollisionShape } from "../pixi/collision";
 
 declare module "pixi.js" {
     interface DisplayObject {
-        hitbox(mode: Hitbox.Default): this;
-        hitbox(mode: Hitbox.Scaled, scale: number): this;
-        hitbox(mode: Hitbox.Scaled, xscale: number, yscale: number): this;
-        hitbox(mode: Hitbox.DisplayObjects, displayObjects: DisplayObject[]): this;
-        hitbox(mode: Hitbox.Children): this;
+        collisionShape(shape: CollisionShape.Default): this;
+        collisionShape(shape: CollisionShape.Scaled, scale: number): this;
+        collisionShape(shape: CollisionShape.Scaled, xscale: number, yscale: number): this;
+        collisionShape(shape: CollisionShape.DisplayObjects, displayObjects: DisplayObject[]): this;
+        collisionShape(shape: CollisionShape.Children): this;
 
         collides(target: DisplayObject): boolean;
         collidesOne<TDisplayObject extends DisplayObject>(array: TDisplayObject[]): TDisplayObject | null;
@@ -34,9 +34,9 @@ Object.defineProperties(DisplayObject.prototype, {
         },
         configurable: true,
     },
-    hitbox: {
-        value: function (this: DisplayObject, hitbox: Hitbox, scale_xscale_displayObjects?: number | DisplayObject[], yscale?: number) {
-            Collision.configureDisplayObject(this, hitbox, scale_xscale_displayObjects, yscale);
+    collisionShape: {
+        value: function (this: DisplayObject, shape: CollisionShape, scale_xscale_displayObjects?: number | DisplayObject[], yscale?: number) {
+            Collision.configureDisplayObject(this, shape, scale_xscale_displayObjects, yscale);
             return this;
         },
         configurable: true,

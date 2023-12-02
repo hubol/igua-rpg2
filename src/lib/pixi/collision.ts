@@ -31,30 +31,30 @@ function clean<TInstance>(buffer: ResultBuffer) {
 
 const SkipUpdate = false;
 
-export enum Hitbox {
+export enum CollisionShape {
     Default = 0,
     Scaled = 1,
     Children = 2,
     DisplayObjects = 3,
 }
 
-interface PrivateDisplayObjectHitbox {
-    _hitbox?: Hitbox;
-    _hitboxDisplayObjects?: DisplayObject[];
-    _hitboxScale?: Vector;
+interface PrivateDisplayObjectCollisionShape {
+    _collisionShape?: CollisionShape;
+    _collisionShapeDisplayObjects?: DisplayObject[];
+    _collisionShapeScale?: Vector;
 }
 
 function configureDisplayObject(
-    target: DisplayObject & PrivateDisplayObjectHitbox,
-    hitbox: Hitbox,
+    target: DisplayObject & PrivateDisplayObjectCollisionShape,
+    shape: CollisionShape,
     scale_xscale_displayObjects?: number | DisplayObject[],
     yscale?: number) {
-        target._hitbox = hitbox;
+        target._collisionShape = shape;
         if (Array.isArray(scale_xscale_displayObjects)) {
-            target._hitboxDisplayObjects = scale_xscale_displayObjects;
+            target._collisionShapeDisplayObjects = scale_xscale_displayObjects;
         }
         else if (typeof scale_xscale_displayObjects === 'number') {
-            target._hitboxScale = vnew(scale_xscale_displayObjects, typeof yscale === 'number' ? yscale : scale_xscale_displayObjects);
+            target._collisionShapeScale = vnew(scale_xscale_displayObjects, typeof yscale === 'number' ? yscale : scale_xscale_displayObjects);
         }
 }
 
@@ -62,7 +62,7 @@ const sourceGreedyBoundRectangle = new Rectangle();
 const sourceBoundRectangles: Rectangle[] = [];
 const targetBoundRectangles: Rectangle[] = [];
 
-type Collideable = Container & PrivateDisplayObjectHitbox;
+type Collideable = Container & PrivateDisplayObjectCollisionShape;
 
 function sourceCollidesWithTargets<TInstance>(
         source: Collideable,
@@ -77,7 +77,7 @@ function sourceCollidesWithTargets<TInstance>(
 
     accumulateBoundRectanglesOrNotOverlapping(null, source, sourceBoundRectangles);
 
-    const greedySource = source._hitbox === Hitbox.Children
+    const greedySource = source._collisionShape === CollisionShape.Children
         ? source.getBounds(SkipUpdate, sourceGreedyBoundRectangle)
         : (sourceBoundRectangles.length === 1 ? sourceBoundRectangles[0] : null);
 
@@ -123,9 +123,9 @@ function accumulateBoundRectanglesOrNotOverlapping(
     greedySource: Rectangle | null,
     target: Collideable,
     boundRectangles: Rectangle[]): boolean {
-    if (!target._hitbox || target._hitbox === Hitbox.Scaled) {
+    if (!target._collisionShape || target._collisionShape === CollisionShape.Scaled) {
         const bounds = target.getBounds(SkipUpdate, rnew());
-        if (target._hitbox === Hitbox.Scaled) {
+        if (target._collisionShape === CollisionShape.Scaled) {
             // TODO do scaling
         }
 
@@ -137,11 +137,11 @@ function accumulateBoundRectanglesOrNotOverlapping(
         return false;
     }
 
-    if (greedySource && target._hitbox === Hitbox.Children && areRectanglesNotOverlapping(greedySource, target.getBounds(SkipUpdate, rnew()))) {
+    if (greedySource && target._collisionShape === CollisionShape.Children && areRectanglesNotOverlapping(greedySource, target.getBounds(SkipUpdate, rnew()))) {
         return true;
     }
 
-    const array = target._hitbox === Hitbox.Children ? target.children : target._hitboxDisplayObjects!;
+    const array = target._collisionShape === CollisionShape.Children ? target.children : target._collisionShapeDisplayObjects!;
     for (let i = 0; i < array.length; i += 1)
         boundRectangles.push(array[i].getBounds(SkipUpdate, rnew()));
 
@@ -153,17 +153,17 @@ const singleItemArray: DisplayObject[] = [];
 export const Collision = {
     configureDisplayObject,
     displayObjectCollidesMany<TDisplayObject extends DisplayObject>(
-            displayObject: DisplayObject,
-            array: TDisplayObject[],
+            source: DisplayObject,
+            targets: TDisplayObject[],
             param: FindParam,
             buffer = _buffer) {
         const result = clean<TDisplayObject>(buffer);
-        return sourceCollidesWithTargets(displayObject as Collideable, array as DisplayObject[] as Collideable[], param, result);
+        return sourceCollidesWithTargets(source as Collideable, targets as DisplayObject[] as Collideable[], param, result);
     },
-    displayObjectCollides(displayObject: DisplayObject, collideable: DisplayObject) {
+    displayObjectCollides(source: DisplayObject, target: DisplayObject) {
         const result = clean(_buffer);
-        singleItemArray[0] = collideable;
-        return sourceCollidesWithTargets(displayObject as Collideable, singleItemArray as Collideable[], 0, result).collided;
+        singleItemArray[0] = target;
+        return sourceCollidesWithTargets(source as Collideable, singleItemArray as Collideable[], 0, result).collided;
     },
     recycleRectangles() {
         rectangleIndex = 0;
