@@ -7,12 +7,15 @@ function Vector(x: number, y: number) {
     this.y = y;
 }
 
+export function vnew(): Vector;
 export function vnew(x: number, y: number): Vector;
 export function vnew(vector: Vector): Vector;
-export function vnew(xOrVector: number | Vector, y?: number) {
+export function vnew(x_vector?: number | Vector, y?: number) {
+    if (x_vector === undefined)
+        return new Vector(0, 0);
     return y === undefined
-        ? new Vector((xOrVector as Vector).x, (xOrVector as Vector).y)
-        : new Vector(xOrVector as number, y!);
+        ? new Vector((x_vector as Vector).x, (x_vector as Vector).y)
+        : new Vector(x_vector as number, y!);
 }
 
 export interface Vector {
@@ -48,14 +51,14 @@ const propertyDefinitions = makePropertyDefinitions({
         configurable: true,
     },
     at: {
-        value: function (this: Vector, xOrVector: Vector | number, y: number) {
-            if (typeof xOrVector === "number") {
-                this.x = xOrVector;
+        value: function (this: Vector, x_vector: Vector | number, y: number) {
+            if (typeof x_vector === "number") {
+                this.x = x_vector;
                 this.y = y;
             }
             else {
-                this.x = xOrVector.x;
-                this.y = xOrVector.y;
+                this.x = x_vector.x;
+                this.y = x_vector.y;
             }
             return this;
         },
@@ -64,15 +67,18 @@ const propertyDefinitions = makePropertyDefinitions({
         writable: true,
     },
     add: {
-        value: function (this: Vector, xOrVector: Vector | number, yOrScalar?: number) {
-            if (typeof xOrVector === "number") {
-                this.x += xOrVector;
-                this.y += yOrScalar!;
+        value: function (this: Vector, x_vector: Vector | number, y_scalar?: number) {
+            if (typeof x_vector === "number") {
+                this.x += x_vector;
+                this.y += y_scalar!;
+            }
+            else if (y_scalar === undefined) {
+                this.x += x_vector.x;
+                this.y += x_vector.y;
             }
             else {
-                const scalar = yOrScalar ?? 1;
-                this.x += xOrVector.x * scalar;
-                this.y += xOrVector.y * scalar;
+                this.x += x_vector.x * y_scalar;
+                this.y += x_vector.y * y_scalar;
             }
             return this;
         },
@@ -81,9 +87,9 @@ const propertyDefinitions = makePropertyDefinitions({
         writable: true,
     },
     scale: {
-        value: function (this: Vector, xf: number, y?: number) {
-            this.x *= xf;
-            this.y *= y === undefined ? xf : y;
+        value: function (this: Vector, x_factor: number, y?: number) {
+            this.x *= x_factor;
+            this.y *= y === undefined ? x_factor : y;
             return this;
         },
         enumerable: false,
