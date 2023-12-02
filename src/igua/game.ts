@@ -9,6 +9,7 @@ import { merge } from "../lib/object/merge";
 import { Sfx } from "../assets/sounds";
 import { WarningToast } from "../lib/game-engine/warning-toast";
 import { container } from "../lib/pixi/container";
+import { PseudoRng, Rng } from "../lib/math/rng";
 
 export function startGame() {
     sceneStack.push(initScene, { useGameplay: false });
@@ -51,6 +52,8 @@ function initScene() {
     const ball = new Graphics().beginFill(0xffff00).drawCircle(0, 0, 16);
     const pole = new Graphics().beginFill(0xff0000).drawRect(-2, -54, 4, 54);
 
+    const prng = new PseudoRng(6924);
+
     const guy = merge(
             container(ball, pole).collisionShape(CollisionShape.DisplayObjects, [ ball, pole ]),
             { health: 1, get happiness() { return 100 + this.health; } })
@@ -65,12 +68,15 @@ function initScene() {
                 guy.x -= 4;
             if (Key.isDown('ArrowRight'))
                 guy.x += 4;
+            if (Key.justWentDown('ArrowDown')) {
+                WarningToast.show(prng.choose('Message 1', 'Message 2', 'Message 3'), 'description');
+            }
             if (Key.justWentDown('ArrowUp')) {
                 WarningToast.show('A sound', 'A sound was just played!');
-                Sfx.BallBounce.with.rate(0.5 + Math.random() * 1.5).play();
+                Sfx.BallBounce.with.rate(Rng.float(0.5, 2)).play();
             }
             if (Key.justWentDown('Space')) {
-                Sfx.PorkRollEggAndCheese.playInstance().linearRamp('rate', 0.5 + Math.random() * 1.5, 1 + Math.random() * 3);
+                Sfx.PorkRollEggAndCheese.with.rate(Rng.float(0.5, 2)).playInstance().linearRamp('rate', Rng.float(0.5, 2), Rng.float(1, 3));
                 throw new EscapeTickerAndExecute(() =>
                     sceneStack.push(initScene, { useGameplay: false }));
             }
