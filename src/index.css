@@ -287,8 +287,18 @@ noscript {
 }
 
 #user_gesture.hide {
-    letter-spacing: -0.3em;
-    transition: opacity 0.5s, letter-spacing 0.5s;
+    opacity: 1;
+    overflow: clip;
+}
+
+#user_gesture span {
+    position: relative;
+    top: 0;
+}
+
+#user_gesture.hide span {
+    top: 1em;
+    transition: top 0.2s linear;
 }
 
 #loading_bar .front {
