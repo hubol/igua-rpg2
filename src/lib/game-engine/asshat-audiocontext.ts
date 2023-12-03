@@ -1,5 +1,6 @@
 import { intervalWait } from "../browser/interval-wait";
 import { Environment } from "../environment";
+import { Force } from "../types/force";
 import { AudioContextSafety } from "./audiocontext-safety";
 
 export let AsshatAudioContext: AudioContext;
@@ -16,13 +17,17 @@ export async function initializeAsshatAudioContext(args: InitializeAsshatAudioCo
         throw new Error('Multiple calls to initializeAsshatAudioContext() detected!');
     called = true;
 
+    let gestureEl = Force<HTMLElement>();
+
     if (Environment.requiresUserGestureForSound) {
-        const gestureEl = args.gestureEl();
+        gestureEl = args.gestureEl();
         await requestUserGestureForAudioContext(gestureEl);
-        await args.cleanup(gestureEl);
     }
 
     AsshatAudioContext = new AudioContext();
+
+    if (gestureEl)
+        await args.cleanup(gestureEl);
 }
 
 async function requestUserGestureForAudioContext(gestureEl: HTMLElement) {

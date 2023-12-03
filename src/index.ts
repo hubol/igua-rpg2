@@ -20,20 +20,23 @@ async function initialize() {
 
         const progress = new JobProgress();
 
-        integralUpscaleCanvas(addGameCanvasToDocument(renderer.view));
         await Promise.all([
             initializeAsshatAudioContext({
                 gestureEl: () => {
-                    const el = document.createElement('div');
-                    el.textContent = 'Please Click';
-                    document.body.appendChild(el);
+                    const el = document.getElementById('user_gesture')!;
+                    el.classList.add('show');
                     return el;
                 },
-                cleanup: (el) => el.remove(),
+                cleanup: (el) => {
+                    el.classList.remove('show');
+                    el.classList.add('hide');
+                }
             }),
             loadLaunchAssets(progress),
-            showLoadingScreen(renderer, progress),
+            showLoadingScreen(progress),
         ]);
+
+        integralUpscaleCanvas(addGameCanvasToDocument(renderer.view));
         
         require("./igua/globals").installGlobals(renderer);
         require("./igua/game").startGame();

@@ -255,3 +255,43 @@ noscript {
     flex-shrink: 0;
     height: 2rem;
 }
+
+#loading {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    justify-content: center;
+    --color: #f8b0b4;
+}
+
+#loading.hide {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+#user_gesture {
+    background: none;
+    border: none;
+    opacity: 0;
+    pointer-events: none;
+    font-size: 10vw;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    color: var(--color);
+}
+
+#user_gesture.show {
+    opacity: 1;
+    cursor: pointer;
+    pointer-events: unset;
+}
+
+#user_gesture.hide {
+    letter-spacing: -0.3em;
+    transition: opacity 0.5s, letter-spacing 0.5s;
+}
+
+#loading_bar .front {
+    background-color: var(--color);
+    height: 1px;
+}

@@ -19,9 +19,11 @@ export async function loadSoundAssets(progress: JobProgress) {
 Safari is known to not support this format.`);
 
     const soundsToLoadCount = Object.keys(GeneratedSfxData).length;
-    progress.increaseTotalJobsCount(soundsToLoadCount);
+    progress.increaseTotalJobsCount(soundsToLoadCount * 2);
 
     const entries = (await unzip(oggSoundsZipUrl)).entries;
+
+    progress.increaseCompletedJobsCount(soundsToLoadCount);
 
     await intervalWait(() => IguaAudioInitializer.initialized);
 
