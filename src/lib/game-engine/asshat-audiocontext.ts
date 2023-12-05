@@ -1,3 +1,4 @@
+import { RequireCapability } from "../browser/capabilities";
 import { intervalWait } from "../browser/interval-wait";
 import { Environment } from "../environment";
 import { Force } from "../types/force";
@@ -16,6 +17,8 @@ export async function initializeAsshatAudioContext(args: InitializeAsshatAudioCo
     if (called)
         throw new Error('Multiple calls to initializeAsshatAudioContext() detected!');
     called = true;
+
+    RequireCapability('webAudio');
 
     let gestureEl = Force<HTMLElement>();
 
