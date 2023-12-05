@@ -302,6 +302,7 @@ noscript {
 }
 
 #loading_bar .front {
+    width: 0px;
     background-color: var(--color);
     height: 1px;
 }
