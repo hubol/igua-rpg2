@@ -26,14 +26,25 @@ module.exports = function ({ atlases, textures }, { pascal, noext }) {
         node(path.map(pascal), object);
     }
 
-    const stringifiedTree = stringifyTree(tree);
+    const stringifiedTree = stringifyTree(tree, 2);
 
     return `
 // This file is generated
 
 const atlases = [ ${atlases.map(x => `{ url: require("./${x.fileName}"), texturesCount: ${x.rects.length} }`).join(', ')} ];
 
-const txs = ${stringifiedTree}
+interface GeneratedTexture {
+    atlas: number;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    subimages?: number;
+}
+
+function txs<T>(tx: (data: GeneratedTexture) => T) {
+    return ${stringifiedTree}
+}
 
 export const GeneratedTextureData = {
     atlases,
@@ -48,7 +59,7 @@ function indentation(level) {
     if (_indentations[level] === undefined) {
         let string = '';
         for (let i = 0; i < level; i += 1) {
-            string += ' ';
+            string += '  ';
         }
         _indentations[level] = string;
     }
@@ -56,12 +67,12 @@ function indentation(level) {
     return _indentations[level];
 }
 
-function stringifyTree(tree, root = true, indent = 0) {
+function stringifyTree(tree, indent = 0, root = true) {
     if (tree._branch || root) {
         const ind = indentation(indent);
         const ind2 = indentation(indent + 1);
         return `{
-${Object.entries(tree).filter(([ key ]) => key !== '_branch').map(([ key, value ]) => `${ind2}"${key}": ${stringifyTree(value, false, indent + 1)},`).join('\n')}
+${Object.entries(tree).filter(([ key ]) => key !== '_branch').map(([ key, value ]) => `${ind2}"${key}": ${stringifyTree(value, indent + 1, false)},`).join('\n')}
 ${ind}}`
     }
 
@@ -69,7 +80,7 @@ ${ind}}`
 }
 
 function stringifyLeaf(object) {
-    return JSON.stringify(object, 0, ' ').replace(newLineRegExp, ' ').replace(objectKeyRegExp, "$1:");
+    return 'tx(' + JSON.stringify(object, 0, ' ').replace(newLineRegExp, ' ').replace(objectKeyRegExp, "$1:") + ')';
 }
 
 const newLineRegExp = /\s+/gm;

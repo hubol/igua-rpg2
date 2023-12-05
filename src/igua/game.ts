@@ -114,6 +114,8 @@ function initScene() {
     smiley.scale.set(3, 2);
     smiley.addChild(p(0, 0), p(0, 50), p(10, 58), p(20, 62), p(30, 62), p(40, 58), p(50, 50), p(50, 0));
 
+    new Sprite(Tx.Iguana.Tail).show();
+
     console.log('Graphics.children.length', guy.children.length);
     console.log('Sprite.children.length', s.children.length);
     console.log('Sprite.children.length', s.getBounds());
