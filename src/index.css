@@ -264,11 +264,6 @@ noscript {
     --color: #f8b0b4;
 }
 
-#loading.hide {
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-
 #user_gesture {
     background: none;
     border: none;
@@ -305,4 +300,10 @@ noscript {
     width: 0px;
     background-color: var(--color);
     height: 1px;
+}
+
+#loading.hide .front {
+    transform-origin: 100% 0%;
+    transform: scaleX(0);
+    transition: transform 0.2s;
 }
