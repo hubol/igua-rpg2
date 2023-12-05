@@ -20,6 +20,15 @@ export const sceneStack = new IguaSceneStack(layers, (_scene) => scene = _scene)
 export function installGlobals(_renderer: PixiRenderer) {
     renderer = _renderer;
 
+    renderer.view.style.opacity = '0';
+
+    const displayCanvas = () => {
+        if (ticker.ticks >= 1) {
+            ticker.remove(displayCanvas);
+            renderer.view.style.opacity = '';
+        }
+    };
+
     const ticker = new AsshatTicker();
 
     KeyListener.start();
@@ -30,6 +39,8 @@ export function installGlobals(_renderer: PixiRenderer) {
         scene?.ticker.tick();
         Collision.recycleRectangles();
     });
+
+    ticker.add(displayCanvas);
 
     const animator = new Animator(60);
     animator.start();

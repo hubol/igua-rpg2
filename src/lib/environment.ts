@@ -26,6 +26,6 @@ export const Environment = {
         return window.location.href.includes('hwcdn');
     },
     get requiresUserGestureForSound() {
-        return true; // TODO
+        return Environment.isProduction && !Environment.isElectron;
     }
 };
