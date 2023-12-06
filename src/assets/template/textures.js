@@ -17,12 +17,15 @@ module.exports = function ({ atlases, textures }, { pascal, noext, format }) {
         const metadata = getMetadata(fileName);
 
         const leafName = metadata ? metadata.name : fileName;
-        const object = { atlas: atlasIndices[tx.atlasFileName], x: tx.x, y: tx.y, width: tx.width, height: tx.height };
+
+        path[path.length - 1] = leafName;
+
+        const id = path.map(pascal).join(".");
+        const object = { id, atlas: atlasIndices[tx.atlasFileName], x: tx.x, y: tx.y, width: tx.width, height: tx.height };
         if (metadata) {
             object.subimages = metadata.subimages;
         }
 
-        path[path.length - 1] = leafName;
         node(path.map(pascal), object);
     }
 
@@ -34,6 +37,7 @@ module.exports = function ({ atlases, textures }, { pascal, noext, format }) {
 const atlases = [ ${atlases.map(x => `{ url: require("./${x.fileName}"), texturesCount: ${x.rects.length} }`).join(', ')} ];
 
 interface GeneratedTexture {
+    id: string;
     atlas: number;
     x: number;
     y: number;
