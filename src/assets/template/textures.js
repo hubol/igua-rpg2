@@ -2,7 +2,7 @@
 @param {import("@hubol/smooch/template-api").TemplateContext.TexturePack} context;
 @param {import("@hubol/smooch/template-api").Utils} utils;
 */
-module.exports = function ({ atlases, textures }, { pascal, noext }) {
+module.exports = function ({ atlases, textures }, { pascal, noext, format }) {
     const atlasIndices = {};
     for (let i = 0; i < atlases.length; i += 1) {
         const atlas = atlases[i];
@@ -28,7 +28,7 @@ module.exports = function ({ atlases, textures }, { pascal, noext }) {
 
     const stringifiedTree = stringifyTree(tree, 2);
 
-    return `
+    const source = `
 // This file is generated
 
 const atlases = [ ${atlases.map(x => `{ url: require("./${x.fileName}"), texturesCount: ${x.rects.length} }`).join(', ')} ];
@@ -51,40 +51,23 @@ export const GeneratedTextureData = {
     txs,
 }
 `;
-}
 
-const _indentations = [];
-
-function indentation(level) {
-    if (_indentations[level] === undefined) {
-        let string = '';
-        for (let i = 0; i < level; i += 1) {
-            string += '  ';
-        }
-        _indentations[level] = string;
-    }
-
-    return _indentations[level];
+    return format(source, { parser: 'typescript', printWidth: 2000 });
 }
 
 function stringifyTree(tree, indent = 0, root = true) {
     if (tree._branch || root) {
-        const ind = indentation(indent);
-        const ind2 = indentation(indent + 1);
         return `{
-${Object.entries(tree).filter(([ key ]) => key !== '_branch').map(([ key, value ]) => `${ind2}"${key}": ${stringifyTree(value, indent + 1, false)},`).join('\n')}
-${ind}}`
+${Object.entries(tree).filter(([ key ]) => key !== '_branch').map(([ key, value ]) => `"${key}": ${stringifyTree(value, indent + 1, false)},`).join('\n')}
+}`
     }
 
     return stringifyLeaf(tree);
 }
 
 function stringifyLeaf(object) {
-    return 'tx(' + JSON.stringify(object, 0, ' ').replace(newLineRegExp, ' ').replace(objectKeyRegExp, "$1:") + ')';
+    return 'tx(' + JSON.stringify(object) + ')';
 }
-
-const newLineRegExp = /\s+/gm;
-const objectKeyRegExp = /"([a-zA-Z0-9]+)":/gm;
 
 function createTree() {
     const tree = { };

@@ -19,7 +19,7 @@
   "author": "Hubol",
   "license": "SEE LICENSE IN README.md",
   "devDependencies": {
-    "@hubol/smooch": "^1.0.0-beta.4",
+    "@hubol/smooch": "^1.0.0-beta.7",
     "@types/node": "^20.8.8",
     "nodemon": "^3.0.1",
     "parcel": "^2.10.0",
