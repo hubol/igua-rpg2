@@ -6,6 +6,11 @@ import { ErrorReporter } from "./lib/game-engine/error-reporter";
 import { createPixiRenderer } from "./lib/game-engine/pixi-renderer";
 import { JobProgress } from "./lib/game-engine/job-progress";
 import { initializeAsshatAudioContext } from "./lib/game-engine/asshat-audiocontext";
+import { Environment } from "./lib/environment";
+
+// https://esbuild.github.io/api/#live-reload
+if (Environment.isDev)
+    new EventSource('/esbuild').addEventListener('change', () => location.reload())
 
 async function initialize() {
     try {

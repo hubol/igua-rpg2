@@ -4,7 +4,7 @@
   "description": "The sequel to IguaRPG",
   "scripts": {
     "build": "parcel build",
-    "serve": "parcel --open",
+    "serve": "esbuild src/index.ts --bundle --loader:.png=file --loader:.zip=file --outdir=public --watch --servedir=public",
     "test": "ts-node --transpileOnly test/run.ts",
     "test:watch": "nodemon --watch src --watch test -e ts,js,json -x npm run test"
   },
@@ -21,6 +21,7 @@
   "devDependencies": {
     "@hubol/smooch": "^1.0.0-beta.7",
     "@types/node": "^20.8.8",
+    "esbuild": "0.19.8",
     "nodemon": "^3.0.1",
     "parcel": "^2.10.0",
     "process": "^0.11.10",
