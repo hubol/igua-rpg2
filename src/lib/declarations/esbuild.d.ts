@@ -1,2 +1,2 @@
 declare function require(...arguments): any;
-declare const process: { env: any };
+declare const IS_PRODUCTION: boolean;

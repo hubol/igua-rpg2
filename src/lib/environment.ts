@@ -3,7 +3,7 @@ import packageJson from '../../package.json'
 export const Environment = {
     get isProduction()
     {
-        return process.env.NODE_ENV === "production";
+        return IS_PRODUCTION;
     },
     get isDev()
     {
