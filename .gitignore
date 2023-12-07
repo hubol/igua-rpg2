@@ -2,6 +2,10 @@
 !.vscode/**/*.default
 !.vscode/**/README.md
 
+public/**/*
+!public/index.html
+!public/index.css
+
 node_modules/
 
 .parcel-cache/
