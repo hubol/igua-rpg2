@@ -9,6 +9,7 @@ html {
     overflow: hidden;
     --bg-color: #3870A8;
     --bg-color-dark: #205088;
+    --loading-color: #f8b0b4;
 }
 
 #game_canvas {
@@ -261,7 +262,7 @@ noscript {
     flex-direction: column;
     width: 80vw;
     justify-content: center;
-    --color: #f8b0b4;
+    --color: var(--loading-color);
 }
 
 #user_gesture {
@@ -296,6 +297,14 @@ noscript {
     transition: top 0.2s linear;
 }
 
+#loading_bar {
+    position: relative;
+}
+
+#loading_bar > * {
+    position: absolute;
+}
+
 #loading_bar .front {
     width: 0px;
     background-color: var(--color);
@@ -307,3 +316,38 @@ noscript {
     transform: scaleX(0);
     transition: transform 0.2s;
 }
+
+/* https://codepen.io/stg/pen/YGRpZJ */
+#preload {
+    width: 100%;
+    height: 1px;
+
+    opacity: 0;
+    transition: opacity 0.25s;
+
+    --ant-width: 1px;
+    --ant-size: 16px;
+
+    --front: var(--loading-color);
+    --back: #00000000;
+    
+    background-size: var(--ant-size) var(--ant-width);
+
+    background-position: 0 0;
+    background-repeat: repeat-x;
+    animation: marching_ants 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+    background-image: 
+      linear-gradient(to right, var(--front) 50%, var(--back) 50%);
+}
+
+@keyframes marching_ants {
+    0% {
+      background-position: 0 0;
+    } 
+    100% {
+      background-position: calc(var(--ant-size) * 2) 0;
+    }
+  }

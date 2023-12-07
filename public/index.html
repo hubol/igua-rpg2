@@ -22,11 +22,13 @@
             <span>Please Click</span>
         </button>
         <div id="loading_bar">
+            <div id="preload"></div>
             <div class="front"></div>
         </div>
     </div>
     <noscript>JavaScript&trade; is required to play this game.</noscript>
 </body>
 
+<script>setTimeout(() => !preload.style.opacity && (preload.style.opacity = '1'), 250)</script>
 <script src="index.js" type="module"></script>
 </html>

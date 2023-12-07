@@ -7,6 +7,9 @@ export async function showLoadingScreen(progress: JobProgress) {
     let unit = 0;
     const shouldResolve = createShouldResolve(progress);
 
+    const preloadEl = document.querySelector<HTMLElement>('#preload')!;
+    preloadEl.style.opacity = '0';
+
     const el = document.querySelector<HTMLElement>('#loading_bar .front')!;
 
     await new Promise<void>(resolve => {
