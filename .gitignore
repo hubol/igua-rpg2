@@ -8,8 +8,5 @@ public/**/*
 
 node_modules/
 
-.parcel-cache/
-dist/
-
 .smooch/
 smooch.tgz
