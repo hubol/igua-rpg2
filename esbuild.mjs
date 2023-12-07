@@ -10,6 +10,7 @@ function options(define = {}) {
         assetNames: 'assets/[name]-[hash]',
         define,
         bundle: true,
+        sourcemap: true,
         loader: {
             '.png': 'file',
             '.zip': 'file',
