@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "description": "The sequel to IguaRPG",
   "scripts": {
-    "build": "parcel build",
-    "serve": "esbuild src/index.ts --bundle --loader:.png=file --loader:.zip=file --outdir=public --watch --servedir=public",
+    "build": "node esbuild.mjs",
+    "serve": "node esbuild.mjs serve",
     "test": "ts-node --transpileOnly test/run.ts",
     "test:watch": "nodemon --watch src --watch test -e ts,js,json -x npm run test"
   },
