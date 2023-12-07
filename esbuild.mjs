@@ -1,14 +1,17 @@
 import { build, context } from 'esbuild';
+import { copyFile, readFile, writeFile } from 'fs/promises';
 
 const serve = process.argv[2] === 'serve';
 
-function options(define = {}) {
+/**
+ * @param {import('esbuild').BuildOptions} overrides 
+ * @returns {import('esbuild').BuildOptions}
+ */
+function options(overrides) {
     /** @type {import('esbuild').BuildOptions} */
     const options = {
         entryPoints: ['src/index.ts'],
-        outdir: 'public',
         assetNames: 'assets/[name]-[hash]',
-        define,
         bundle: true,
         sourcemap: true,
         loader: {
@@ -16,16 +19,35 @@ function options(define = {}) {
             '.zip': 'file',
         },
         logLevel: 'info',
+        ...overrides,
     }
 
     return options;
 }
 
 if (!serve) {
-    await build(options({ IS_PRODUCTION: 'true' }));
+    // Naive cache busting
+    const signature = Date.now();
+
+    await build(options({
+        outdir: 'dist',
+        assetNames: `assets/[name]-${signature}`,
+        entryNames: `[name]-${signature}`,
+        define: { IS_PRODUCTION: 'true' }
+    }));
+
+    const indexHtmlSource = (await readFile('public/index.html', 'utf8'))
+        .replace(/index.css/gm, `index-${signature}.css`)
+        .replace(/index.js/gm, `index-${signature}.js`);
+
+    await writeFile('dist/index.html', indexHtmlSource);
+    await copyFile('public/index.css', `dist/index-${signature}.css`);
 }
 else {
-    const ctx = await context(options({ IS_PRODUCTION: 'false' }));
+    const ctx = await context(options({
+        outdir: 'public',
+        define: { IS_PRODUCTION: 'false' }
+    }));
 
     await ctx.watch();
     await ctx.serve({ servedir: 'public' });
