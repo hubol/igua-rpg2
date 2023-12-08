@@ -26,7 +26,11 @@ module.exports = function ({ atlases, textures }, { pascal, noext, format }) {
             object.subimages = metadata.subimages;
         }
 
-        node(path.map(pascal), object);
+        const call = metadata?.subimages
+            ? serializeCall('txs', { ...object, subimages: metadata.subimages })
+            : serializeCall('tx', object);
+
+        node(path.map(pascal), call);
     }
 
     const stringifiedTree = stringifyTree(tree, 2);
@@ -36,17 +40,20 @@ module.exports = function ({ atlases, textures }, { pascal, noext, format }) {
 
 const atlases = [ ${atlases.map(x => `{ url: require("./${x.fileName}"), texturesCount: ${x.rects.length} }`).join(', ')} ];
 
-interface GeneratedTexture {
+interface TxData {
     id: string;
     atlas: number;
     x: number;
     y: number;
     width: number;
     height: number;
-    subimages?: number;
 }
 
-function txs<T>(tx: (data: GeneratedTexture) => T) {
+interface TxsData extends TxData {
+    subimages: number;
+}
+
+function txs<T>(tx: (data: TxData) => T, txs: (data: TxsData) => T[]) {
     return ${stringifiedTree}
 }
 
@@ -59,6 +66,13 @@ export const GeneratedTextureData = {
     return format(source, { parser: 'typescript', printWidth: 2000 });
 }
 
+function serializeCall(fn, args) {
+    return {
+        fn,
+        args,
+    }
+}
+
 function stringifyTree(tree, indent = 0, root = true) {
     if (tree._branch || root) {
         return `{
@@ -69,8 +83,8 @@ ${Object.entries(tree).filter(([ key ]) => key !== '_branch').map(([ key, value 
     return stringifyLeaf(tree);
 }
 
-function stringifyLeaf(object) {
-    return 'tx(' + JSON.stringify(object) + ')';
+function stringifyLeaf({ fn, args }) {
+    return fn + '(' + JSON.stringify(args) + ')';    
 }
 
 function createTree() {

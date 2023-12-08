@@ -1,10 +1,12 @@
 import { Assets, BaseTexture, Rectangle, SCALE_MODES, Texture } from "pixi.js";
 import { GeneratedTextureData } from "./generated/textures";
 import { JobProgress } from "../lib/game-engine/job-progress";
+import { range } from "../lib/range";
 
 const { txs } = GeneratedTextureData;
 
-type Textures = ReturnType<typeof txs<Texture>>;
+type Txs = typeof txs<Texture>;
+type Textures = ReturnType<Txs>;
 
 export let Tx: Textures = <any>{};
 
@@ -21,11 +23,20 @@ export async function loadTextureAssets(progress: JobProgress) {
                 return texture;
             })));
 
-    Tx = GeneratedTextureData.txs((data) => {
+    const newTx: Parameters<Txs>[0] = (data) => {
         const baseTexture = atlases[data.atlas].baseTexture;
         const frame = new Rectangle(data.x, data.y, data.width, data.height);
         const texture = new Texture(baseTexture, frame);
         texture.asshatTextureId = data.id;
         return texture;
-    });
+    }
+
+    const newTxs: Parameters<Txs>[1] = (data) => {
+        const width = Math.round(data.width / data.subimages);
+        
+        return range(data.subimages)
+            .map(index => newTx({ ...data, x: data.x + index * width, width, id: `${data.id}[${index}]` }));
+    };
+
+    Tx = GeneratedTextureData.txs(newTx, newTxs);
 }
