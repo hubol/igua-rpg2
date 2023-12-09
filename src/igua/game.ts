@@ -5,7 +5,6 @@ import { scene, sceneStack } from "./globals";
 import { EscapeTickerAndExecute } from "../lib/game-engine/asshat-ticker";
 import { Tx } from "../assets/textures";
 import { CollisionShape } from "../lib/pixi/collision";
-import { merge } from "../lib/object/merge";
 import { Sfx } from "../assets/sounds";
 import { WarningToast } from "../lib/game-engine/warning-toast";
 import { container } from "../lib/pixi/container";
@@ -54,9 +53,9 @@ function initScene() {
 
     const prng = new PseudoRng(6924);
 
-    const guy = merge(
-            container(ball, pole).collisionShape(CollisionShape.DisplayObjects, [ ball, pole ]),
-            { health: 1, get happiness() { return 100 + this.health; } })
+    const guy = container(ball, pole)
+        .merge({ health: 1, get happiness() { return 100 + this.health; } })
+        .collisionShape(CollisionShape.DisplayObjects, [ ball, pole ])    
         .at(128, 128)
         .step(() => {
             if (Key.isDown('ArrowUp'))
