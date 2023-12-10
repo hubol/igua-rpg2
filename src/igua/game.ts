@@ -9,13 +9,12 @@ import { Sfx } from "../assets/sounds";
 import { WarningToast } from "../lib/game-engine/warning-toast";
 import { container } from "../lib/pixi/container";
 import { PseudoRng, Rng } from "../lib/math/rng";
-import { TextureProcessing } from "../lib/pixi/texture-processing";
 
 export function startGame() {
     sceneStack.push(initScene, { useGameplay: false });
 }
 
-const TailTextures = TextureProcessing.split(Tx.Iguana.Tail, { width: 28 }).map(TextureProcessing.trimFrame);
+const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });
 
 function initScene() {
     console.log('Scene', scene.source.name)

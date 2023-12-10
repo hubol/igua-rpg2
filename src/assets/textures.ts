@@ -5,7 +5,7 @@ import { AsshatTexture } from "../lib/game-engine/asshat-texture";
 
 const { txs } = GeneratedTextureData;
 
-type Txs = typeof txs<Texture>;
+type Txs = typeof txs<AsshatTexture>;
 type Textures = ReturnType<Txs>;
 
 export let Tx: Textures = <any>{};
