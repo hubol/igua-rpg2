@@ -8,14 +8,6 @@
     "test": "ts-node --transpileOnly test/run.ts",
     "test:watch": "nodemon --watch src --watch test -e ts,js,json -x npm run test"
   },
-  "targets": {
-    "default": {
-      "source": "src/index.html",
-      "publicUrl": "./",
-      "scopeHoist": false,
-      "optimize": false
-    }
-  },
   "author": "Hubol",
   "license": "SEE LICENSE IN README.md",
   "devDependencies": {
