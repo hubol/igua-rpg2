@@ -2,6 +2,7 @@ import { Assets, BaseTexture, Rectangle, SCALE_MODES, Texture } from "pixi.js";
 import { GeneratedTextureData } from "./generated/textures";
 import { JobProgress } from "../lib/game-engine/job-progress";
 import { range } from "../lib/range";
+import { AsshatTexture } from "../lib/game-engine/asshat-texture";
 
 const { txs } = GeneratedTextureData;
 
@@ -26,9 +27,7 @@ export async function loadTextureAssets(progress: JobProgress) {
     const newTx: Parameters<Txs>[0] = (data) => {
         const baseTexture = atlases[data.atlas].baseTexture;
         const frame = new Rectangle(data.x, data.y, data.width, data.height);
-        const texture = new Texture(baseTexture, frame);
-        texture.asshatTextureId = data.id;
-        return texture;
+        return new AsshatTexture(data.id, baseTexture, frame);
     }
 
     const newTxs: Parameters<Txs>[1] = (data) => {
