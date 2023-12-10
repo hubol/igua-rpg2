@@ -123,12 +123,13 @@ function initScene() {
     ];
 
     TailTextures.forEach((tx, i) => {
-        const sp = new Sprite(tx);
-        sp.tint = colors[i % colors.length];
+        const sp = new Sprite(tx).tinted(colors[i % colors.length]);
         const g = new Graphics()
-            .beginFill(0x000000)
+            .beginFill(0x000080)
             .lineStyle({ color: 0xffffff, width: 1, alignment: 1 })
-            .drawRect(sp.anchor.x * -sp.width, sp.anchor.y * -sp.height, sp.width, sp.height);
+            .drawRect(sp.anchor.x * -sp.width, sp.anchor.y * -sp.height, sp.width, sp.height)
+            .tinted(0xffa0a0);
+
         container(g, sp).at(i * 32, 0).show();
     });
 
