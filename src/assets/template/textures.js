@@ -14,7 +14,7 @@ module.exports = function ({ atlases, textures }, { pascal, noext, format }) {
     for (const tx of textures) {
         const path = tx.fileName.split('/').filter(x => !!x);
         const fileName = noext(path[path.length - 1]);
-        const metadata = getMetadata(fileName);
+        const metadata = getMetadata(fileName); // TODO remove probably
 
         const leafName = metadata ? metadata.name : fileName;
 
@@ -22,13 +22,8 @@ module.exports = function ({ atlases, textures }, { pascal, noext, format }) {
 
         const id = path.map(pascal).join(".");
         const object = { id, atlas: atlasIndices[tx.atlasFileName], x: tx.x, y: tx.y, width: tx.width, height: tx.height };
-        if (metadata) {
-            object.subimages = metadata.subimages;
-        }
 
-        const call = metadata?.subimages
-            ? serializeCall('txs', { ...object, subimages: metadata.subimages })
-            : serializeCall('tx', object);
+        const call = serializeCall('tx', object);
 
         node(path.map(pascal), call);
     }
@@ -49,11 +44,7 @@ interface TxData {
     height: number;
 }
 
-interface TxsData extends TxData {
-    subimages: number;
-}
-
-function txs<T>(tx: (data: TxData) => T, txs: (data: TxsData) => T[]) {
+function txs<T>(tx: (data: TxData) => T) {
     return ${stringifiedTree}
 }
 
