@@ -9,10 +9,13 @@ import { Sfx } from "../assets/sounds";
 import { WarningToast } from "../lib/game-engine/warning-toast";
 import { container } from "../lib/pixi/container";
 import { PseudoRng, Rng } from "../lib/math/rng";
+import { TextureProcessing } from "../lib/pixi/texture-processing";
 
 export function startGame() {
     sceneStack.push(initScene, { useGameplay: false });
 }
+
+const TailTextures = TextureProcessing.split(Tx.Iguana.Tail, { width: 28 }).map(TextureProcessing.trimFrame);
 
 function initScene() {
     console.log('Scene', scene.source.name)
@@ -113,7 +116,22 @@ function initScene() {
     smiley.scale.set(3, 2);
     smiley.addChild(p(0, 0), p(0, 50), p(10, 58), p(20, 62), p(30, 62), p(40, 58), p(50, 50), p(50, 0));
 
-    new Sprite(Tx.Iguana.Tail).show();
+    
+    const colors = [
+        0xb81f0a,
+        0xebd82f,
+        0x3939c4,
+    ];
+
+    TailTextures.forEach((tx, i) => {
+        const sp = new Sprite(tx);
+        sp.tint = colors[i % colors.length];
+        const g = new Graphics()
+            .beginFill(0x000000)
+            .lineStyle({ color: 0xffffff, width: 1, alignment: 1 })
+            .drawRect(sp.anchor.x * -sp.width, sp.anchor.y * -sp.height, sp.width, sp.height);
+        container(g, sp).at(i * 32, 0).show();
+    });
 
     console.log('Graphics.children.length', guy.children.length);
     console.log('Sprite.children.length', s.children.length);
