@@ -9,6 +9,9 @@ import { Sfx } from "../assets/sounds";
 import { WarningToast } from "../lib/game-engine/warning-toast";
 import { container } from "../lib/pixi/container";
 import { PseudoRng, Rng } from "../lib/math/rng";
+import { getDefaultLooks } from "./iguana/get-default-looks";
+import { makeIguanaPuppetArgsFromLooks } from "./iguana/make-iguana-puppet-args-from-looks";
+import { iguanaPuppet } from "./iguana/iguana-puppet";
 
 export function startGame() {
     sceneStack.push(initScene, { useGameplay: false });
@@ -132,6 +135,8 @@ function initScene() {
 
         container(g, sp).at(i * 32, 0).show();
     });
+
+    iguanaPuppet(makeIguanaPuppetArgsFromLooks(getDefaultLooks())).at(128, 128).show();
 
     console.log('Graphics.children.length', guy.children.length);
     console.log('Sprite.children.length', s.children.length);
