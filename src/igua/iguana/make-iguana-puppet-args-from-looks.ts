@@ -4,6 +4,7 @@ import { Shapes } from "./shapes";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { renderer } from "../globals";
+import { AdjustColor } from "../../lib/pixi/adjust-color";
 
 export function makeIguanaPuppetArgsFromLooks(looks: Looks) {
     const backLeftFoot = makeFoot(looks.feet, "hind", true);
@@ -26,9 +27,7 @@ export function makeIguanaPuppetArgsFromLooks(looks: Looks) {
 }
 
 function darken(color: number, amount = 0.225) {
-    // TODO impl
-    return color;
-    // return colord(toHexColorString(color)).saturate(0.1).darken(amount).toPixi();
+    return AdjustColor.pixi(color).saturate(0.1).darken(amount).toPixi();
 }
 
 function makeFootTint(color: number, back: boolean) {
