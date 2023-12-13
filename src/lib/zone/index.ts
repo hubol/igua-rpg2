@@ -1,7 +1,4 @@
-// Adapted from
-// https://github.com/vlcn-io/model/blob/7d3850fc5d1f0b2ed52d721edb898fccc21cb90f/ts/packages/zone/src/index.ts
-
-import { newScope, PSD } from "./dexie/helpers/promise";
+import { newScope, PSD } from "./dexie/promise";
 
 type InternalContext = { key: string };
 
