@@ -1,18 +1,18 @@
-import { Graphics, Sprite } from "pixi.js";
+import { ColorSource, Graphics, Sprite } from "pixi.js";
 
 declare module "pixi.js" {
     interface Sprite {
-        tinted(tint: number): this;
+        tinted(tint: ColorSource): this;
     }
 
     interface Graphics {
-        tinted(tint: number): this;
+        tinted(tint: ColorSource): this;
     }
 }
 
 const tintedPropertyDescriptorMap: PropertyDescriptorMap = {
     tinted: {
-        value: function (this: Graphics | Sprite, tint: number) {
+        value: function (this: Graphics | Sprite, tint: ColorSource) {
             this.tint = tint;
             return this;
         }
