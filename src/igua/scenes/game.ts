@@ -15,8 +15,14 @@ import { iguanaPuppet } from "../iguana/iguana-puppet";
 
 const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });
 
+const BigKeyTextures = Tx.BigKey1.split({ count: 3, trimFrame: true });
+
 export function SceneTest() {
     console.log('Scene', scene.source.name);
+
+    for (const tx of BigKeyTextures) {
+        new Sprite(tx).at(128, 128).show();
+    }
 
     // for (let i = 0; i < 1280; i++) {
     //     let destroyedAt = -1;
