@@ -1,5 +1,6 @@
 import { build, context } from 'esbuild';
 import { copyFile, readFile, writeFile } from 'fs/promises';
+import ImportGlobPlugin from 'esbuild-plugin-import-glob';
 
 const serve = process.argv[2] === 'serve';
 
@@ -19,6 +20,9 @@ function options(overrides) {
             '.zip': 'file',
         },
         logLevel: 'info',
+        plugins: [
+            ImportGlobPlugin.default(),
+        ],
         ...overrides,
     }
 
