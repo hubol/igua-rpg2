@@ -139,6 +139,7 @@ export function SceneTest() {
     });
 
     iguanaPuppet(makeIguanaPuppetArgsFromLooks(getDefaultLooks())).at(128, 128).show();
+    iguanaPuppet(makeIguanaPuppetArgsFromLooks(getDefaultLooks())).at(128, 128).flipV().show();
 
     console.log('Graphics.children.length', guy.children.length);
     console.log('Sprite.children.length', s.children.length);
