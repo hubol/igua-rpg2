@@ -1,26 +1,22 @@
 import { Container, Graphics, Sprite } from "pixi.js";
-import { wait } from "../lib/game-engine/wait";
-import { Key } from "../lib/browser/key";
-import { scene, sceneStack } from "./globals";
-import { EscapeTickerAndExecute } from "../lib/game-engine/asshat-ticker";
-import { Tx } from "../assets/textures";
-import { CollisionShape } from "../lib/pixi/collision";
-import { Sfx } from "../assets/sounds";
-import { WarningToast } from "../lib/game-engine/warning-toast";
-import { container } from "../lib/pixi/container";
-import { PseudoRng, Rng } from "../lib/math/rng";
-import { getDefaultLooks } from "./iguana/get-default-looks";
-import { makeIguanaPuppetArgsFromLooks } from "./iguana/make-iguana-puppet-args-from-looks";
-import { iguanaPuppet } from "./iguana/iguana-puppet";
-
-export function startGame() {
-    sceneStack.push(initScene, { useGameplay: false });
-}
+import { wait } from "../../lib/game-engine/wait";
+import { Key } from "../../lib/browser/key";
+import { scene, sceneStack } from "../globals";
+import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
+import { Tx } from "../../assets/textures";
+import { CollisionShape } from "../../lib/pixi/collision";
+import { Sfx } from "../../assets/sounds";
+import { WarningToast } from "../../lib/game-engine/warning-toast";
+import { container } from "../../lib/pixi/container";
+import { PseudoRng, Rng } from "../../lib/math/rng";
+import { getDefaultLooks } from "../iguana/get-default-looks";
+import { makeIguanaPuppetArgsFromLooks } from "../iguana/make-iguana-puppet-args-from-looks";
+import { iguanaPuppet } from "../iguana/iguana-puppet";
 
 const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });
 
-function initScene() {
-    console.log('Scene', scene.source.name)
+export function SceneTest() {
+    console.log('Scene', scene.source.name);
 
     // for (let i = 0; i < 1280; i++) {
     //     let destroyedAt = -1;
@@ -82,7 +78,7 @@ function initScene() {
             if (Key.justWentDown('Space')) {
                 Sfx.PorkRollEggAndCheese.with.rate(Rng.float(0.5, 2)).playInstance().linearRamp('rate', Rng.float(0.5, 2), Rng.float(1, 3));
                 throw new EscapeTickerAndExecute(() =>
-                    sceneStack.push(initScene, { useGameplay: false }));
+                    sceneStack.push(SceneTest, { useGameplay: false }));
             }
             if (Key.justWentDown('Backspace')){
                 throw new EscapeTickerAndExecute(() =>

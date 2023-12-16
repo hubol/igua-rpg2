@@ -1,6 +1,6 @@
-import { Looks } from "./looks";
+import { IguanaLooks } from "./looks";
 
-export function getDefaultLooks(): Looks {
+export function getDefaultLooks(): IguanaLooks.Serializable {
     return {
         head: {
             color: 0xCCAE0A,

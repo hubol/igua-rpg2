@@ -6,7 +6,7 @@ function shape(texture: AsshatTexture, width: number, pixelDefaultAnchor: Vector
     return texture.split({ width, trimFrame: { pixelDefaultAnchor } });
 }
 
-export const Shapes = {
+export const IguanaShapes = {
     Crest: shape(Tx.Iguana.Crest, 16, [10, 10]),
     Eye: shape(Tx.Iguana.Eye, 8, [7, 5]),
     Pupil: shape(Tx.Iguana.Pupil, 8, [6, 4]),

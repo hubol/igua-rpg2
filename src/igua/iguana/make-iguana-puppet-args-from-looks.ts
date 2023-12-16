@@ -1,12 +1,12 @@
 import { RenderTexture, Sprite, Texture } from "pixi.js";
-import { Looks } from "./looks";
-import { Shapes } from "./shapes";
+import { IguanaShapes } from "./shapes";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { renderer } from "../globals";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
+import { IguanaLooks } from "./looks";
 
-export function makeIguanaPuppetArgsFromLooks(looks: Looks) {
+export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
     const backLeftFoot = makeFoot(looks.feet, "hind", true);
     const backRightFoot = makeFoot(looks.feet, "hind", false);
     const frontLeftFoot = makeFoot(looks.feet, "front", true);
@@ -36,18 +36,18 @@ function makeFootTint(color: number, back: boolean) {
     return darken(color);
 }
 
-type Feet = Looks['feet'];
+type Feet = IguanaLooks.Serializable['feet'];
 
 function makeFoot(feet: Feet, key: 'hind' | 'front', back: boolean) {
     const foot = feet[key];
-    const f = new Sprite(Shapes.Foot[foot.shape]);
+    const f = new Sprite(IguanaShapes.Foot[foot.shape]);
     if (back)
         f.pivot.x -= feet.backOffset;
     const gap = (7 + feet.gap) / 2;
     f.pivot.x += key === 'front' ? -Math.ceil(gap) : Math.floor(gap);
     f.tint = makeFootTint(feet.color, back);
     // TODO collision f.ext.precise = true;
-    const clawsShape = Shapes.Claws[foot.claws.shape];
+    const clawsShape = IguanaShapes.Claws[foot.claws.shape];
     const claws = clawsShape ? new Sprite(clawsShape) : undefined;
     if (claws) {
         claws.tint = makeFootTint(feet.clawColor, back);
@@ -65,13 +65,13 @@ function makeFoot(feet: Feet, key: 'hind' | 'front', back: boolean) {
     return f;
 }
 
-type Body = Looks['body'];
+type Body = IguanaLooks.Serializable['body'];
 
 function makeBody(body: Body) {
-    const tail = new Sprite(Shapes.Tail[body.tail.shape]);
+    const tail = new Sprite(IguanaShapes.Tail[body.tail.shape]);
     tail.tint = body.tail.color;
     tail.pivot.set(5, 11).add(body.tail.placement, -1);
-    const torso = new Sprite(Shapes.Torso[0]);
+    const torso = new Sprite(IguanaShapes.Torso[0]);
     torso.tint = body.color;
     torso.pivot.set(-1, 5);
 
@@ -83,7 +83,7 @@ function makeBody(body: Body) {
     // TODO collision
     // c.ext.tail = tail;
 
-    const clubShape = Shapes.Club[body.tail.club.shape];
+    const clubShape = IguanaShapes.Club[body.tail.club.shape];
     if (clubShape) {
         const club = new Sprite(clubShape);
         // TODO collision
@@ -97,15 +97,15 @@ function makeBody(body: Body) {
     return c;
 }
 
-type Head = Looks['head'];
+type Head = IguanaLooks.Serializable['head'];
 
 const mouthAgapeAnimationIndices = [ 1, 0, 2 ];
 
 function makeHead(body: Body, head: Head) {
-    const face = new Sprite(Shapes.Face[0]);
+    const face = new Sprite(IguanaShapes.Face[0]);
     face.tint = head.color;
     const mouths = range(3).map(x => {
-        const sprite = new Sprite(Shapes.Mouth[head.mouth.shape]);
+        const sprite = new Sprite(IguanaShapes.Mouth[head.mouth.shape]);
         sprite.pivot.y = x - 1;
         sprite.tint = head.mouth.color;
         sprite.pivot.add(-13, 1).add(head.mouth.placement, -1);
@@ -140,7 +140,7 @@ function makeHead(body: Body, head: Head) {
     });
     h.agapeUnit = 0;
 
-    const hornShape = Shapes.Horn[head.horn.shape];
+    const hornShape = IguanaShapes.Horn[head.horn.shape];
 
     if (hornShape) {
         const horn = new Sprite(hornShape);
@@ -157,7 +157,7 @@ function makeHead(body: Body, head: Head) {
 type Crest = Head['crest'];
 
 function makeCrest(crest: Crest) {
-    const c = new Sprite(Shapes.Crest[crest.shape]);
+    const c = new Sprite(IguanaShapes.Crest[crest.shape]);
     // TODO collision
     // c.ext.precise = true;
     c.pivot.add(-4, 13).add(crest.placement, -1);
@@ -180,7 +180,7 @@ function makeEyesTexture(eyes: Eyes, mask: boolean) {
     if (eyesTextures[key])
         return eyesTextures[key];
 
-    const leftShape = () => new Sprite(Shapes.Eye[0]);
+    const leftShape = () => new Sprite(IguanaShapes.Eye[0]);
     const rightShape = () => {
         const sprite = leftShape();
         sprite.scale.x = -1;
@@ -188,7 +188,7 @@ function makeEyesTexture(eyes: Eyes, mask: boolean) {
         return sprite;
     };
     const pupil = () => {
-        const sprite = new Sprite(Shapes.Pupil[eyes.pupils.shape]);
+        const sprite = new Sprite(IguanaShapes.Pupil[eyes.pupils.shape]);
         sprite.tint = eyes.pupils.color;
         sprite.visible = !mask;
         return sprite;
