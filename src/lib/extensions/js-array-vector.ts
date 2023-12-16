@@ -14,7 +14,6 @@ Object.defineProperties(Array.prototype, {
         set: function (x) {
             this[0] = x;
         },
-        enumerable: false,
         configurable: true,
     },
     y: {
@@ -24,7 +23,6 @@ Object.defineProperties(Array.prototype, {
         set: function (y) {
             this[1] = y;
         },
-        enumerable: false,
         configurable: true,
     },
     at: {
@@ -38,7 +36,6 @@ Object.defineProperties(Array.prototype, {
             this[1] = y;
             return this;
         },
-        enumerable: false,
         configurable: true,
     }
 });

@@ -12,7 +12,6 @@ Object.defineProperties(Array.prototype, {
         set: function (value) {
             this[this.length - 1] = value;
         },
-        enumerable: false,
         configurable: true,
     },
 });

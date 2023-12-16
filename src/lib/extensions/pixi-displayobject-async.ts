@@ -30,9 +30,7 @@ Object.defineProperties(DisplayObject.prototype, {
 
             return this;
         },
-        enumerable: false,
         configurable: true,
-        writable: true,
     },
 })
 

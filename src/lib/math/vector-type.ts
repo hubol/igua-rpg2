@@ -45,7 +45,6 @@ const propertyDefinitions = makePropertyDefinitions({
         set: function (this: Vector, l) {
             normalize(this).scale(Math.max(0, l));
         },
-        enumerable: false,
         configurable: true,
     },
     at: {
@@ -60,9 +59,7 @@ const propertyDefinitions = makePropertyDefinitions({
             }
             return this;
         },
-        enumerable: false,
         configurable: true,
-        writable: true,
     },
     add: {
         value: function (this: Vector, x_vector: Vector | number, y_scalar?: number) {
@@ -80,9 +77,7 @@ const propertyDefinitions = makePropertyDefinitions({
             }
             return this;
         },
-        enumerable: false,
         configurable: true,
-        writable: true,
     },
     scale: {
         value: function (this: Vector, x_factor: number, y?: number) {
@@ -90,17 +85,13 @@ const propertyDefinitions = makePropertyDefinitions({
             this.y *= y === undefined ? x_factor : y;
             return this;
         },
-        enumerable: false,
         configurable: true,
-        writable: true,
     },
     vcpy: {
         value: function (this: Vector) {
             return vnew(this.x, this.y);
         },
-        enumerable: false,
         configurable: true,
-        writable: true,
     },
     vround: {
         value: function (this: Vector) {
@@ -108,17 +99,13 @@ const propertyDefinitions = makePropertyDefinitions({
             this.y = Math.round(this.y);
             return this;
         },
-        enumerable: false,
         configurable: true,
-        writable: true,
     },
     normalize: {
         value: function (this: Vector) {
             return normalize(this);
         },
-        enumerable: false,
         configurable: true,
-        writable: true,
     }
 })
 

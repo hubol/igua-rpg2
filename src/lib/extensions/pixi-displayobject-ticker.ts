@@ -35,9 +35,7 @@ Object.defineProperties(Container.prototype, {
             this._ticker = ticker;
             return this;
         },
-        enumerable: false,
         configurable: true,
-        writable: true,
     },
     // Always destroy children
     // For now, don't support the other options
@@ -48,9 +46,7 @@ Object.defineProperties(Container.prototype, {
                 throw new Error(`Specifying options to Container.destroy() is not supported! Got: ${JSON.stringify(options)}`);
             _containerDestroy.call(this, defaultContainerDestroyOptions);
         },
-        enumerable: false,
         configurable: true,
-        writable: true,
     }
 });
 
@@ -72,14 +68,12 @@ Object.defineProperties(DisplayObject.prototype, {
 
             return this._ticker = new LazyTicker(this);
         },
-        enumerable: false,
         configurable: true,
     },
     _receiveResolvedTicker: {
         value: function (this: DisplayObject & DisplayObjectPrivate, ticker: AsshatTicker) {
             this._ticker = ticker;
         },
-        enumerable: false,
         configurable: true,
     },
     step: {
@@ -92,9 +86,7 @@ Object.defineProperties(DisplayObject.prototype, {
             this.on('destroyed', () => this.ticker.remove(stepFn));
             return this;
         },
-        enumerable: false,
         configurable: true,
-        writable: true,
     },
 });
 
