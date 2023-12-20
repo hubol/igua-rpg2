@@ -5,29 +5,32 @@ function Vector(this: Vector, x: number, y: number) {
     this.y = y;
 }
 
+interface VectorSimple {
+    x: number;
+    y: number;
+}
+
 export function vnew(): Vector;
 export function vnew(x: number, y: number): Vector;
-export function vnew(vector: Vector): Vector;
-export function vnew(x_vector?: number | Vector, y?: number) {
+export function vnew(vector: VectorSimple): Vector;
+export function vnew(x_vector?: number | VectorSimple, y?: number) {
     if (x_vector === undefined)
         return new Vector(0, 0);
     return y === undefined
-        ? new Vector((x_vector as Vector).x, (x_vector as Vector).y)
+        ? new Vector((x_vector as VectorSimple).x, (x_vector as VectorSimple).y)
         : new Vector(x_vector as number, y!);
 }
 
-export interface Vector {
-    x: number;
-    y: number;
+export interface Vector extends VectorSimple {
     vcpy(): Vector;
     vround(): this;
     add(x: number, y: number): this;
-    add(vector: Vector): this;
-    add(vector: Vector, scalar: number): this;
+    add(vector: VectorSimple): this;
+    add(vector: VectorSimple, scalar: number): this;
     normalize(): this;
     scale(f: number): this;
     scale(x: number, y: number): this;
-    at(vector: Vector): this;
+    at(vector: VectorSimple): this;
     at(x: number, y: number): this;
     vlength: number;
 }
