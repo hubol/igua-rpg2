@@ -3,6 +3,7 @@ import { container } from "../../lib/pixi/container";
 import { vnew } from "../../lib/math/vector-type";
 import { Rng } from "../../lib/math/rng";
 import { objSpriteCopy } from "./copy-sprite";
+import { nlerp } from "../../lib/math/number";
 
 const r = new Rectangle();
 
@@ -20,13 +21,13 @@ export function objEye(
     const pivotSign = eyelidPolar < 0 ? 1 : 0;
 
     const eyelid = new Graphics().beginFill(eyelidTint).drawRect(0, 0, scleraTx.width, scleraTx.height);
-    eyelid.pivot.y = 2 * pivotSign * scleraTx.height;
-    eyelid.at(b.x, b.y);
+    eyelid.pivot.y = pivotSign * scleraTx.height;
+    eyelid.at(b.x, b.y + eyelid.pivot.y);
 
     const c = container(mask, scleraSpr, pupilSpr, eyelid)
         .merge({ closed: 0, look: vnew() })
         .step(() => {
-            eyelid.scale.y = c.closed * pivotSign;
+            eyelid.scale.y = nlerp(Math.abs(eyelidPolar), 1, c.closed);
         })
 
     c.mask = mask;

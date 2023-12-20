@@ -6,6 +6,7 @@ import { renderer } from "../globals";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { IguanaLooks } from "./looks";
 import { objEye, objEyes } from "./eye";
+import { Rng } from "../../lib/math/rng";
 
 export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
     const backLeftFoot = makeFoot(looks.feet, "hind", true);
@@ -230,9 +231,13 @@ function makeEyes(head: Head) {
     const objSclera = () => new Sprite(scleraTx);
     const objPupil = () => new Sprite(IguanaShapes.Pupil[0]).tinted(head.eyes.pupils.color);
 
-    const left = objEye(objSclera(), objPupil(), eyelidTint, 0);
-    const right = objEye(objSclera().flipH(-1), objPupil(), eyelidTint, 0).at(6, 0);
-    return objEyes(left, right).at(12, -8);
+    const left = objEye(objSclera(), objPupil(), eyelidTint, 0.25);
+    const right = objEye(objSclera().flipH(-1), objPupil(), eyelidTint, 0.25).at(6, 0);
+    const eyes = objEyes(left, right).at(12, -8);
+
+    eyes.stepsUntilBlink = Rng.int(40, 120);
+
+    return eyes;
 
     // TODO highly suspect!!!!
 
