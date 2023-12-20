@@ -1,7 +1,7 @@
-import { Container } from "pixi.js";
 import { SceneStack } from "../lib/game-engine/scene-stack";
 import { AsshatTicker } from "../lib/game-engine/asshat-ticker";
 import { IguaLayers } from "./igua-layers";
+import { TickerContainer } from "../lib/game-engine/ticker-container";
 
 interface IguaSceneMeta {
     useGameplay: false;
@@ -9,7 +9,7 @@ interface IguaSceneMeta {
 
 function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMeta) {
     const ticker = new AsshatTicker();
-    const stage = layers.scene.addChild(new Container().withTicker(ticker));
+    const stage = layers.scene.addChild(new TickerContainer(ticker));
 
     return {
         source,

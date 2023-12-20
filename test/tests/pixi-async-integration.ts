@@ -5,10 +5,11 @@ import { createDisplayObject } from "../lib/create-display-object";
 import { wait } from "../../src/lib/game-engine/wait";
 import { Assert } from "../lib/assert";
 import { TestPromise } from "../lib/test-promise";
+import { TickerContainer } from "../../src/lib/game-engine/ticker-container";
 
 export function worksWithoutFlushingPromises() {
     const ticker = new AsshatTicker();
-    const c = new Container().withTicker(ticker);
+    const c = new TickerContainer(ticker);
 
     let phase = 0;
     let phase1 = false;
@@ -48,7 +49,7 @@ export function worksWithoutFlushingPromises() {
 
 export async function worksWithFlushingPromises() {
     const ticker = new AsshatTicker();
-    const c = new Container().withTicker(ticker);
+    const c = new TickerContainer(ticker);
 
     let phase = 0;
     let phase1 = false;
@@ -95,7 +96,7 @@ export async function worksWithFlushingPromises() {
 
 export async function promiseAllWorksWithFlushingPromises() {
     const ticker = new AsshatTicker();
-    const c = new Container().withTicker(ticker);
+    const c = new TickerContainer(ticker);
 
     let phase = 0;
     let phase1 = false;
@@ -143,7 +144,7 @@ export async function promiseAllWorksWithFlushingPromises() {
 
 export async function promiseLazyTickerWithFlushingPromises() {
     const ticker = new AsshatTicker();
-    const c = new Container();
+    const c = new TickerContainer(ticker);
 
     let phase = 0;
     let phase1 = false;
@@ -162,8 +163,6 @@ export async function promiseLazyTickerWithFlushingPromises() {
         });
     
     c.addChild(d);
-
-    c.withTicker(ticker);
 
     ticker.tick();
     phase1 = true;

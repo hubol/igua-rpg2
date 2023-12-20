@@ -3,10 +3,11 @@ import { Container } from "pixi.js";
 import { AsshatTicker } from "../../src/lib/game-engine/asshat-ticker";
 import { Assert } from "../lib/assert";
 import { createDisplayObject } from "../lib/create-display-object";
+import { TickerContainer } from "../../src/lib/game-engine/ticker-container";
 
 export function childInheritsTicker() {
     const ticker = new AsshatTicker();
-    const c = new Container().withTicker(ticker);
+    const c = new TickerContainer(ticker);
     const d = createDisplayObject();
     c.addChild(d);
     Assert(c.ticker).toStrictlyBe(ticker);
@@ -18,8 +19,8 @@ export function childContainerKeepsItsTicker() {
     const tickerParent = new AsshatTicker();
     const tickerChild = new AsshatTicker();
 
-    const cParent = new Container().withTicker(tickerParent);
-    const cChild = new Container().withTicker(tickerChild);
+    const cParent = new TickerContainer(tickerParent);
+    const cChild = new TickerContainer(tickerChild);
     const d = createDisplayObject();
 
     cParent.addChild(cChild);
@@ -30,12 +31,35 @@ export function childContainerKeepsItsTicker() {
     Assert(d.ticker).toStrictlyBe(tickerChild);
 }
 
+export function deepChildContainerFindsItsTicker() {
+    const ticker = new AsshatTicker();
+
+    const c1 = new TickerContainer(ticker);
+
+    const c2 = new Container();
+    const c3 = new Container();
+
+    let count = 0;
+
+    c3.step(() => {
+        count += 1;
+    })
+    
+    c2.addChild(c3);
+    c1.addChild(c2);
+
+    Assert(c3.ticker).toStrictlyBe(ticker);
+
+    ticker.tick();
+    Assert(count).toStrictlyBe(1);
+}
+
 export function stepFnIsNotCalledAfterObjectDestroyed() {
     const ticker = new AsshatTicker();
 
     let displayObjectSteps = 0;
 
-    const c = new Container().withTicker(ticker);
+    const c = new TickerContainer(ticker);
     const d = createDisplayObject()
         .step(() => {
             displayObjectSteps += 1;
@@ -61,16 +85,14 @@ export function stepFnIsNotCalledAfterObjectDestroyed() {
 export function displayObjectCanBeAddedToContainerWithoutTicker() {
     let displayObjectSteps = 0;
 
-    const c = new Container();
+    const ticker = new AsshatTicker();
+    const c = new TickerContainer(ticker);
     const d = createDisplayObject()
         .step(() => {
             displayObjectSteps += 1;
         });
 
     c.addChild(d);
-
-    const ticker = new AsshatTicker();
-    c.withTicker(ticker);
 
     Assert(displayObjectSteps).toStrictlyBe(0);
 
@@ -82,7 +104,8 @@ export function displayObjectCanBeAddedToContainerWithoutTicker() {
 export function canAddStepFnAfterAddedToContainer() {
     let displayObjectSteps = 0;
 
-    const c = new Container();
+    const ticker = new AsshatTicker();
+    const c = new TickerContainer(ticker);
     
     const d = createDisplayObject()
 
@@ -91,9 +114,6 @@ export function canAddStepFnAfterAddedToContainer() {
     d.step(() => {
         displayObjectSteps += 1;
     });
-
-    const ticker = new AsshatTicker();
-    c.withTicker(ticker);
 
     ticker.tick();
 
@@ -105,7 +125,7 @@ export function canAddMultipleStepFnsToOneDisplayObject() {
     let displayObjectSteps2 = 0;
 
     const ticker = new AsshatTicker();
-    const c = new Container().withTicker(ticker);
+    const c = new TickerContainer(ticker);
     const d = createDisplayObject()
         .step(() => {
             displayObjectSteps1 += 1;
@@ -136,7 +156,9 @@ export function canAddMultipleStepFnsToOneDisplayObject() {
 export function childClimbsHierarchyToGetTicker() {
     let displayObjectSteps = 0;
 
-    const c1 = new Container();
+    const ticker = new AsshatTicker();
+
+    const c1 = new TickerContainer(ticker);
     const c2 = new Container();
     const c3 = new Container();
     const c4 = new Container();
@@ -151,9 +173,6 @@ export function childClimbsHierarchyToGetTicker() {
     c3.addChild(c4);
     c4.addChild(d);
 
-    const ticker = new AsshatTicker();
-    c1.withTicker(ticker);
-
     ticker.tick();
 
     Assert(displayObjectSteps).toStrictlyBe(1);
@@ -162,7 +181,8 @@ export function childClimbsHierarchyToGetTicker() {
 export function multipleChildrenUseStepFn() {
     let displayObjectSteps = 0;
 
-    const c1 = new Container();
+    const ticker = new AsshatTicker();
+    const c1 = new TickerContainer(ticker);
     const c2 = new Container();
 
     const d1 = createDisplayObject()
@@ -177,9 +197,6 @@ export function multipleChildrenUseStepFn() {
 
     c1.addChild(d1, c2);
     c2.addChild(d2);
-
-    const ticker = new AsshatTicker();
-    c1.withTicker(ticker);
 
     const d3 = createDisplayObject()
         .step(() => {
@@ -196,7 +213,8 @@ export function multipleChildrenUseStepFn() {
 export function stopsTickingWhenGrandparentIsDestroyed() {
     let displayObjectSteps = 0;
 
-    const c1 = new Container();
+    const ticker = new AsshatTicker();
+    const c1 = new TickerContainer(ticker);
     const c2 = new Container();
 
     const d = createDisplayObject()
@@ -206,9 +224,6 @@ export function stopsTickingWhenGrandparentIsDestroyed() {
 
     c1.addChild(c2);
     c2.addChild(d);
-
-    const ticker = new AsshatTicker();
-    c1.withTicker(ticker);
 
     ticker.tick();
 
