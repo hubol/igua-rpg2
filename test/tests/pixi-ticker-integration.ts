@@ -53,6 +53,29 @@ export function deepChildContainerFindsItsTicker() {
     Assert(c3.ticker).toStrictlyBe(ticker);
 }
 
+export function deepChildContainerFindsItsTickerEvenThoughParentDoesntHaveItWhenAddedAsChild() {
+    const ticker = new AsshatTicker();
+
+    const c1 = new TickerContainer(ticker);
+
+    const c2 = new Container();
+    const c3 = new Container();
+
+    let count = 0;
+    
+    c2.addChild(c3);
+
+    c3.step(() => {
+        count += 1;
+    })
+
+    c1.addChild(c2);
+
+    ticker.tick();
+    Assert(count).toStrictlyBe(1);
+    Assert(c3.ticker).toStrictlyBe(ticker);
+}
+
 export function stepFnIsNotCalledAfterObjectDestroyed() {
     const ticker = new AsshatTicker();
 
