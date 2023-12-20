@@ -12,6 +12,7 @@ import { PseudoRng, Rng } from "../../lib/math/rng";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { makeIguanaPuppetArgsFromLooks } from "../iguana/make-iguana-puppet-args-from-looks";
 import { iguanaPuppet } from "../iguana/iguana-puppet";
+import { TextureToGraphicsConverter } from "../../lib/pixi/texture-to-graphics-converter";
 
 const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });
 
@@ -119,7 +120,6 @@ export function SceneTest() {
     const smiley = new Container().collisionShape(CollisionShape.Children).at(90, 180).show();
     smiley.scale.set(3, 2);
     smiley.addChild(p(0, 0), p(0, 50), p(10, 58), p(20, 62), p(30, 62), p(40, 58), p(50, 50), p(50, 0));
-
     
     const colors = [
         0xb81f0a,
@@ -138,8 +138,14 @@ export function SceneTest() {
         container(g, sp).at(i * 32, 0).show();
     });
 
+    new TextureToGraphicsConverter(TailTextures[1])
+        .convert(new Graphics().beginFill(0x008000).lineStyle({ color: 0xffffff, width: 1, alignment: 1 }))
+        .tinted(0xff0000)
+        .at(200, 200)
+        .show();
+
     iguanaPuppet(makeIguanaPuppetArgsFromLooks(getDefaultLooks())).at(128, 128).show();
-    iguanaPuppet(makeIguanaPuppetArgsFromLooks(getDefaultLooks())).at(128, 128).flipV().show();
+    iguanaPuppet(makeIguanaPuppetArgsFromLooks(getDefaultLooks())).at(164, 128).flipV().show();
 
     console.log('Graphics.children.length', guy.children.length);
     console.log('Sprite.children.length', s.children.length);
