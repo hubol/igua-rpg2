@@ -11,23 +11,25 @@ export function objEye(
         scleraSpr: Sprite,
         pupilSpr: Sprite,
         eyelidTint: number,
-        eyelidPolar: number) {
+        eyelidRestingInteger: number) {
     const scleraTx = scleraSpr.texture;
 
     const mask = objSpriteCopy(scleraSpr);
 
-    const b = mask.getBounds(false, r);
+    const bounds = mask.getBounds(false, r);
     
-    const pivotSign = eyelidPolar < 0 ? 1 : 0;
+    const pivotFactor = eyelidRestingInteger < 0 ? 1 : 0;
 
     const eyelid = new Graphics().beginFill(eyelidTint).drawRect(0, 0, scleraTx.width, scleraTx.height);
-    eyelid.pivot.y = pivotSign * scleraTx.height;
-    eyelid.at(b.x, b.y + eyelid.pivot.y);
+    eyelid.pivot.y = pivotFactor * scleraTx.height;
+    eyelid.at(bounds.x, bounds.y + eyelid.pivot.y);
+
+    const eyelidRestingScale = Math.abs(eyelidRestingInteger) / scleraTx.height;
 
     const c = container(mask, scleraSpr, pupilSpr, eyelid)
         .merge({ closed: 0, look: vnew() })
         .step(() => {
-            eyelid.scale.y = nlerp(Math.abs(eyelidPolar), 1, c.closed);
+            eyelid.scale.y = nlerp(eyelidRestingScale, 1, c.closed);
         })
 
     c.mask = mask;
