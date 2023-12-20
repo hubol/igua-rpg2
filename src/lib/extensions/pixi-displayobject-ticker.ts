@@ -9,34 +9,17 @@ declare module "pixi.js" {
         readonly ticker: IAsshatTicker;
         step(fn: StepFn): this;
     }
-
-    interface Container {
-        withTicker(ticker: AsshatTicker): this;
-    }
 }
 
 interface DisplayObjectPrivate {
-    _ticker: IAsshatTicker;
+    _ticker?: IAsshatTicker;
     _receiveResolvedTicker(ticker: AsshatTicker): void;
 }
 
-const _containerDestroy = Container.prototype.destroy;
+const _container_destroy = Container.prototype.destroy;
 const defaultContainerDestroyOptions = { children: true };
 
 Object.defineProperties(Container.prototype, {
-    withTicker: {
-        value: function (this: Container & DisplayObjectPrivate, ticker: AsshatTicker) {
-            if (this._ticker) {
-                if (isLazyTicker(this._ticker))
-                    this._ticker.resolve(ticker);
-                else
-                    console.warn(`Multiple calls detected to withTicker. This may result in undefined behavior!`);
-            }
-            this._ticker = ticker;
-            return this;
-        },
-        configurable: true,
-    },
     // Always destroy children
     // For now, don't support the other options
     // Because I have no idea what they do!
@@ -44,7 +27,7 @@ Object.defineProperties(Container.prototype, {
         value: function (this: Container, options) {
             if (options !== undefined && options !== defaultContainerDestroyOptions)
                 throw new Error(`Specifying options to Container.destroy() is not supported! Got: ${JSON.stringify(options)}`);
-            _containerDestroy.call(this, defaultContainerDestroyOptions);
+            _container_destroy.call(this, defaultContainerDestroyOptions);
         },
         configurable: true,
     }
@@ -60,13 +43,29 @@ Object.defineProperties(DisplayObject.prototype, {
                 const parentTicker = this.parent.ticker;
 
                 if (isLazyTicker(parentTicker)) {
-                    parentTicker.addReceiver(this);
+                    return parentTicker;
                 }
 
                 return this._ticker = parentTicker;
             }
 
-            return this._ticker = new LazyTicker(this);
+            const lazyTicker = new LazyTicker(this);
+            this.once('added', () => {
+                const parentTicker = this.parent.ticker;
+                if (isLazyTicker(parentTicker)) {
+                    if (!isLazyTicker(this._ticker)) {
+                        throw new Error('Expected a LazyTicker, but got something else!');
+                    }
+
+                    parentTicker.push(this._ticker);
+                    parentTicker.addReceiver(this);
+                    this._ticker = parentTicker;
+                }
+                else {
+                    lazyTicker.resolve(parentTicker as AsshatTicker);
+                }
+            });
+            return this._ticker = lazyTicker;
         },
         configurable: true,
     },
@@ -78,12 +77,8 @@ Object.defineProperties(DisplayObject.prototype, {
     },
     step: {
         value: function (this: DisplayObject, stepFn: StepFn) {
-            if (this.parent)
-                this.ticker.add(stepFn);
-            else
-                this.on('added', () => this.ticker.add(stepFn));
-            
-            this.on('destroyed', () => this.ticker.remove(stepFn));
+            this.ticker.add(stepFn);
+            this.once('destroyed', () => this.ticker.remove(stepFn));
             return this;
         },
         configurable: true,

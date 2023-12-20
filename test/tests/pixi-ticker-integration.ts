@@ -48,10 +48,9 @@ export function deepChildContainerFindsItsTicker() {
     c2.addChild(c3);
     c1.addChild(c2);
 
-    Assert(c3.ticker).toStrictlyBe(ticker);
-
     ticker.tick();
     Assert(count).toStrictlyBe(1);
+    Assert(c3.ticker).toStrictlyBe(ticker);
 }
 
 export function stepFnIsNotCalledAfterObjectDestroyed() {

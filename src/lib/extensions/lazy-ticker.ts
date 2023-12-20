@@ -34,6 +34,10 @@ export class LazyTicker implements IAsshatTicker {
         this._queuedCalls.push({ fn: 'addMicrotask', arg });
     }
 
+    push(lazyTicker: LazyTicker) {
+        this._queuedCalls.push(...lazyTicker._queuedCalls);
+    }
+
     resolve(ticker: AsshatTicker) {
         if (this._resolved)
             throw new InvalidLazyTickerAccess(`Attempt to resolve() already-resolved LazyTicker`, this);
@@ -69,4 +73,4 @@ export interface LazyTickerReceiver {
     _receiveResolvedTicker(ticker: AsshatTicker): void;
 }
 
-export const isLazyTicker = (ticker: IAsshatTicker): ticker is LazyTicker => (ticker as any)._isLazy;
+export const isLazyTicker = (ticker?: IAsshatTicker): ticker is LazyTicker => (ticker as any)?._isLazy;
