@@ -16,12 +16,12 @@ const failedTestNames: string[] = [];
 
 export async function runTests() {
     doGlobalSetup();
-    const filterTestName = getFilterTestName();
+    const filterTestNameFn = getFilterTestNameFn();
 
     const files = findTestFiles();
 
     for (const file of files) {
-        await runTestsInFile(file, filterTestName);
+        await runTestsInFile(file, filterTestNameFn);
     }
 
     logFailedTests();
@@ -53,18 +53,18 @@ ${failedTestNames.map(name => `- ${name}`).join('\n')}`);
 
 type FilterTestNameFn = (name: string) => true;
 
-function getFilterTestName(): FilterTestNameFn {
+function getFilterTestNameFn(): FilterTestNameFn {
     try {
         const module = require("./filter-test-name");
         const fn = Object.values(module).filter(x => typeof x === 'function')[0] as Function;
-        if (!fn)
-            throw new Error();
-        console.log(`Got filterTestName ${fn}`);
-        return fn as any;
+        if (fn) {
+            console.log(`Got filterTestName ${fn}`);
+            return fn as any;
+        }
     }
-    catch (e) {
-        return () => true;
-    }
+    catch (e) { }
+
+    return () => true;
 }
 
 async function runTestsInFile(file: string, filterTestName: FilterTestNameFn) {
