@@ -1,10 +1,7 @@
 import packageJson from '../../package.json'
 
 export const Environment = {
-    get isProduction()
-    {
-        return IS_PRODUCTION;
-    },
+    isProduction: IS_PRODUCTION,
     get isDev()
     {
         return !Environment.isProduction;

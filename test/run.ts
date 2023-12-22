@@ -3,6 +3,7 @@ import * as path from "path";
 import { paint } from "./lib/paint";
 import { ErrorPrinter } from "./lib/error-printer";
 import { TestPromise } from "./lib/test-promise";
+import { doGlobalSetup } from "./global-setup";
 
 function findTestFiles() {
     const directory = path.resolve(__dirname, 'tests/');
@@ -48,6 +49,8 @@ ${failedTestNames.map(name => `- ${name}`).join('\n')}`);
 // }
 
 async function runTestsInFile(file: string) {
+    doGlobalSetup();
+
     const fileName = path.parse(file).base;
 
     const module = require(file);
