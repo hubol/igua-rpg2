@@ -15,10 +15,13 @@ function findTestFiles() {
 const failedTestNames: string[] = [];
 
 export async function runTests() {
+    doGlobalSetup();
+    const filterTestName = getFilterTestName();
+
     const files = findTestFiles();
 
     for (const file of files) {
-        await runTestsInFile(file);
+        await runTestsInFile(file, filterTestName);
     }
 
     logFailedTests();
@@ -48,14 +51,31 @@ ${failedTestNames.map(name => `- ${name}`).join('\n')}`);
 //         throw new Error(`Timed out after ${timeoutMs}ms`);
 // }
 
-async function runTestsInFile(file: string) {
-    doGlobalSetup();
+type FilterTestNameFn = (name: string) => true;
 
+function getFilterTestName(): FilterTestNameFn {
+    try {
+        const module = require("./filter-test-name");
+        const fn = Object.values(module).filter(x => typeof x === 'function')[0] as Function;
+        if (!fn)
+            throw new Error();
+        console.log(`Got filterTestName ${fn}`);
+        return fn as any;
+    }
+    catch (e) {
+        return () => true;
+    }
+}
+
+async function runTestsInFile(file: string, filterTestName: FilterTestNameFn) {
     const fileName = path.parse(file).base;
 
     const module = require(file);
     for (const fn of Object.values(module)) {
         if (typeof fn !== 'function')
+            continue;
+
+        if (!filterTestName(fn.name))
             continue;
 
         const testName = `${fileName} > ${fn.name}`;
