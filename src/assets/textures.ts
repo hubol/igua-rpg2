@@ -1,11 +1,10 @@
 import { Assets, BaseTexture, Rectangle, SCALE_MODES, Texture } from "pixi.js";
 import { GeneratedTextureData } from "./generated/textures";
 import { JobProgress } from "../lib/game-engine/job-progress";
-import { AsshatTexture } from "../lib/game-engine/asshat-texture";
 
 const { txs } = GeneratedTextureData;
 
-type Txs = typeof txs<AsshatTexture>;
+type Txs = typeof txs<Texture>;
 type Textures = ReturnType<Txs>;
 
 export let Tx: Textures = <any>{};
@@ -26,7 +25,9 @@ export async function loadTextureAssets(progress: JobProgress) {
     const newTx: Parameters<Txs>[0] = (data) => {
         const baseTexture = atlases[data.atlas].baseTexture;
         const frame = new Rectangle(data.x, data.y, data.width, data.height);
-        return new AsshatTexture(data.id, baseTexture, frame);
+        const tx = new Texture(baseTexture, frame);
+        tx.id = data.id;
+        return tx;
     }
 
     Tx = GeneratedTextureData.txs(newTx);

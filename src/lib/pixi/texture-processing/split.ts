@@ -21,6 +21,7 @@ TextureProcessing.split = function (texture, { width, count, trimFrame }) {
     for (let i = 0; i < count; i += 1) {
         const frame = new Rectangle(texture.frame.x + i * width, texture.frame.y, width, texture.height);
         const subimageTexture = new Texture(texture.baseTexture, frame);
+        subimageTexture.id = texture.getId() + '[' + i + ']';
         if (trimFrame) {
             subimageTexture.defaultAnchor.at(defaultAnchor);
             TextureProcessing.trimFrame(subimageTexture);

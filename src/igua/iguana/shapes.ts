@@ -1,8 +1,8 @@
+import { Texture } from "pixi.js";
 import { Tx } from "../../assets/textures";
-import { AsshatTexture } from "../../lib/game-engine/asshat-texture";
 import { Vector } from "../../lib/math/vector-type";
 
-function shape(texture: AsshatTexture, width: number, pixelDefaultAnchor: Vector) {
+function shape(texture: Texture, width: number, pixelDefaultAnchor: Vector) {
     return texture.split({ width, trimFrame: { pixelDefaultAnchor } });
 }
 

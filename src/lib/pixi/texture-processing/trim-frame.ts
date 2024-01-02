@@ -21,6 +21,8 @@ TextureProcessing.trimFrame = function trimFrame(texture) {
     const y = originalY - y1;
     texture.defaultAnchor.set(x / width, y / height);
 
+    texture.id = texture.getId() + ' (Trimmed)';
+
     texture[TextureCacheKey] = true;
     return texture;
 }
