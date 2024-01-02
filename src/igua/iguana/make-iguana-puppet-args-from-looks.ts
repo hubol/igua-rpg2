@@ -13,7 +13,7 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
     const frontLeftFoot = makeFoot(looks.feet, "front", true);
     const frontRightFoot = makeFoot(looks.feet, "front", false);
     const body = makeBody(looks.body);
-    const { head, crest, eyes } = makeHead(looks.body, looks.head);
+    const { head, crest, eyes } = objIguanaHead(looks.body, looks.head);
 
     return {
         body,
@@ -102,44 +102,63 @@ type Head = IguanaLooks.Serializable['head'];
 
 const mouthAgapeAnimationIndices = [ 1, 0, 2 ];
 
-function makeHead(body: Body, head: Head) {
+function objIguanaMouth(head: Head) {
+    const flipV = head.mouth.flipV ? -1 : 1;
+
+    const mouths = range(3).map(i => new Sprite(IguanaShapes.Mouth[head.mouth.shape])
+        .tinted(head.mouth.color)
+        .add(13, i - 2).add(head.mouth.placement)
+        .flipV(flipV));
+
+    let agapeUnit = 0;
+
+    const c = container(...mouths)
+        .merge({
+            get agapeUnit() {
+                return agapeUnit;
+            },
+            set agapeUnit(value: number) {
+                agapeUnit = value;
+                const index = Math.floor(Math.max(0, Math.min(2, value * 3)));
+                for (let i = 0; i < mouths.length; i++) {
+                    mouths[mouthAgapeAnimationIndices[i]].visible = index >= i;
+                }
+            },
+            emote: {
+                clear() {
+                    for (let i = 0; i < mouths.length; i++) {
+                        mouths[i].flipV(flipV);
+                    }
+                },
+                happy() {
+                    for (let i = 0; i < mouths.length; i++) {
+                        mouths[i].flipV(1);
+                    }
+                },
+                sad() {
+                    for (let i = 0; i < mouths.length; i++) {
+                        mouths[i].flipV(-1);
+                    }
+                },
+            }
+        });
+
+    c.agapeUnit = 0;
+    return c;
+}
+
+function objIguanaHead(body: Body, head: Head) {
     const face = new Sprite(IguanaShapes.Face[0]);
     face.tint = head.color;
-    const mouths = range(3).map(x => {
-        const sprite = new Sprite(IguanaShapes.Mouth[head.mouth.shape]);
-        sprite.pivot.y = x - 1;
-        sprite.tint = head.mouth.color;
-        sprite.pivot.add(-13, 1).add(head.mouth.placement, -1);
-        // TODO no hacks for mouth
-        // sprite.ext._isMouth = true;
-        // TODO flip vertical
-        // if (head.mouth.flipV)
-        //     flipV(sprite);
-        face.addChild(sprite);
-        return sprite;
-    });
 
-    const crest = makeCrest(head.crest);
+    const mouth = objIguanaMouth(head);
+
+    const crest = objIguanaCrest(head.crest);
 
     const eyes = objIguanaEyes(head);
 
-    // TODO collision
-    // face.ext.precise = true;
-
-    let agapeUnit = 0;
-    const h = container(crest, face, eyes).merge({
-        get agapeUnit() {
-            return agapeUnit;
-        },
-        set agapeUnit(value: number) {
-            agapeUnit = value;
-            const index = Math.floor(Math.max(0, Math.min(2, value * 3)));
-            for (let i = 0; i < mouths.length; i++) {
-                mouths[mouthAgapeAnimationIndices[i]].visible = index >= i;
-            }
-        }
-    });
-    h.agapeUnit = 0;
+    const h = container(crest, face, mouth, eyes)
+        .merge({ mouth });
 
     const hornShape = IguanaShapes.Horn[head.horn.shape];
 
@@ -157,16 +176,13 @@ function makeHead(body: Body, head: Head) {
 
 type Crest = Head['crest'];
 
-function makeCrest(crest: Crest) {
+function objIguanaCrest(crest: Crest) {
     const c = new Sprite(IguanaShapes.Crest[crest.shape]);
-    // TODO collision
-    // c.ext.precise = true;
     c.pivot.add(-4, 13).add(crest.placement, -1);
-    // TODO flip
-    // if (crest.flipV)
-    //     flipV(c);
-    // if (crest.flipH)
-    //     flipH(c);
+    if (crest.flipV)
+        c.flipV(-1);
+    if (crest.flipH)
+        c.flipH(-1);
     c.tint = crest.color;
     return c;
 }
