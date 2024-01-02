@@ -3,7 +3,7 @@ import { Bounds } from "./Bounds.mjs";
 class DisplayObject extends utils.EventEmitter {
   constructor() {
     super(), this.tempDisplayObjectParent = null, this.transform = new Transform(), this.alpha = 1, this.visible = !0, this.renderable = !0, this.cullable = !1, this.cullArea = null, this.parent = null, this.worldAlpha = 1, this._lastSortedIndex = 0, this._zIndex = 0, this.filterArea = null, this.filters = null, this._enabledFilters = null, this._bounds = new Bounds(), this._localBounds = null, this._boundsID = 0, this._boundsRect = null, this._localBoundsRect = null, this._mask = null, this._maskRefCount = 0, this._destroyed = !1, this.isSprite = !1, this.isMask = !1;
-    globalThis.assignDisplayObjectCtorStack?.(this);
+    globalThis.onDisplayObjectConstructed?.(this);
   }
   /**
    * Mixes all enumerable properties and methods from a source object to DisplayObject.

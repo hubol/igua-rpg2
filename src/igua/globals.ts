@@ -8,8 +8,11 @@ import { IguaLayers } from "./igua-layers";
 import { IguaScene, IguaSceneStack } from "./igua-scene-stack";
 import { Collision } from "../lib/pixi/collision";
 import { setDefaultStages } from "../lib/game-engine/default-stages";
+import { devAssignDisplayObjectIdentifiers } from "../lib/pixi/dev-assign-displayobject-identifiers";
 
 export let renderer: PixiRenderer;
+
+globalThis.onDisplayObjectConstructed = devAssignDisplayObjectIdentifiers;
 
 const rootStage = new Container();
 const layers = new IguaLayers(rootStage);
