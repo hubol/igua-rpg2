@@ -5,7 +5,7 @@ export function devAssignDisplayObjectIdentifiers(constructed: DisplayObject) {
     constructed['Stack'] = getDisplayObjectStack(error);
 }
 
-const regex = new RegExp(/(?:Error)?\s+at\s((?:new\s)?[a-zA-Z0-9_\.]*)\s\(.*\)/gm);
+const regex = new RegExp(/(?:Error)?\s+at\s(?:Object\.)?((?:new\s)?[a-zA-Z0-9_\.]*)\s\(.*\)/gm);
 
 function getDisplayObjectStack(e: Error) {
     let current: RegExpExecArray;
