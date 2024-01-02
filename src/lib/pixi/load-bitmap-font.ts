@@ -1,6 +1,10 @@
-import { BitmapFont, Texture } from "pixi.js";
+import { Assets, BitmapFont, Texture } from "pixi.js";
 
-export async function loadBitmapFont(fntUrl: string, texture: Texture) {
-    const fntData = await fetch(fntUrl).then(x => x.text());
+export async function loadBitmapFont(fntUrl: string, textureOrUrl: Texture | string) {
+    const [ fntData, texture ] = await Promise.all([
+        fetch(fntUrl).then(x => x.text()),
+        typeof textureOrUrl === 'string' ? Assets.load<Texture>(textureOrUrl) : textureOrUrl,
+    ]);
+
     return BitmapFont.install(fntData, texture);
 }

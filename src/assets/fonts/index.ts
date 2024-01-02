@@ -1,4 +1,4 @@
-import { Assets, BitmapFont, IBitmapTextStyle, Texture } from "pixi.js";
+import { BitmapFont, IBitmapTextStyle } from "pixi.js";
 import { JobProgress } from "../../lib/game-engine/job-progress";
 import { loadBitmapFont } from "../../lib/pixi/load-bitmap-font";
 import { Force } from "../../lib/types/force";
@@ -38,10 +38,8 @@ export async function loadFontAssets(progress: JobProgress) {
 }
 
 async function loadBitmapFontAndTrackProgress(fntUrl: string, textureUrl: string, progress: JobProgress) {
-    progress.increaseTotalJobsCount(2);
-    const texture = await Assets.load<Texture>(textureUrl);
-    progress.increaseCompletedJobsCount(1);
-    const bitmapFont = await loadBitmapFont(fntUrl, texture);
+    progress.increaseTotalJobsCount(1);
+    const bitmapFont = await loadBitmapFont(fntUrl, textureUrl);
     progress.increaseCompletedJobsCount(1);
     return bitmapFont;
 }
