@@ -1,4 +1,4 @@
-import { Container, DisplayObject, Rectangle } from "pixi.js";
+import { Container, Rectangle } from "pixi.js";
 import { vnew } from "../math/vector-type";
 
 declare module "pixi.js" {
@@ -11,13 +11,13 @@ declare module "pixi.js" {
 Object.defineProperties(Container.prototype, {
     flipH: {
         value: function (this: Container, sign = -1) {
-            return flipXY(this, X, sign);
+            return flipXY(this, 'x', 'a', sign);
         },
         configurable: true,
     },
     flipV: {
         value: function (this: Container, sign = -1) {
-            return flipXY(this, Y, sign);
+            return flipXY(this, 'y', 'd', sign);
         },
         configurable: true,
     },
@@ -27,18 +27,18 @@ const r = new Rectangle();
 const v1 = vnew();
 const v2 = vnew();
 
-const X = 'x';
-const Y = 'y';
-
-function flipXY(sprite: Container, key: 'x' | 'y', sign: number) {
-    const currentSign = Math.sign(sprite.scale[key]);
+function flipXY(c: Container, scaleKey: 'x' | 'y', worldTransformScaleKey: 'a' | 'd', sign: number) {
+    const currentSign = Math.sign(c.scale[scaleKey]);
     if (currentSign === 0 || currentSign === sign)
-        return sprite;
+        return c;
 
-    const ogBounds = v1.at(sprite.getBounds(false, r));
-    sprite.scale[key] *= -1;
-    const bounds = v2.at(sprite.getBounds(false, r));
-    sprite.pivot.add(bounds.add(ogBounds, -1), sign);
+    const worldScale = c.worldTransform[worldTransformScaleKey];
 
-    return sprite;
+    const ogBounds = v1.at(c.getBounds(false, r));
+    c.scale[scaleKey] *= -1;
+    const bounds = v2.at(c.getBounds(false, r));
+
+    c.pivot.add(bounds.add(ogBounds, -1), sign * worldScale);
+
+    return c;
 }
