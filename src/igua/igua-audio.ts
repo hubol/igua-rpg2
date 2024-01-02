@@ -1,10 +1,11 @@
+import { Logging } from "../lib/logging";
 import { intervalWait } from "../lib/browser/interval-wait";
 import { AsshatAudioContext } from "../lib/game-engine/asshat-audiocontext";
 import { Sound } from "../lib/game-engine/sound";
 
 class IguaAudioImpl {
     constructor(private readonly _context: AudioContext) {
-        console.log(this);
+        console.log(...Logging.componentArgs(this));
     }
 
     async createSfx(buffer: ArrayBuffer) {

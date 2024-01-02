@@ -1,3 +1,4 @@
+import { Logging } from "../logging";
 import {Force} from "../types/force";
 
 export class Animator {
@@ -8,7 +9,7 @@ export class Animator {
     constructor(readonly targetFps: number) {
         this._targetInterval = 1000 / this.targetFps;
         this._animationFrameCallback = () => this._maybeUpdate();
-        console.log(this);
+        console.log(...Logging.componentArgs(this));
     }
 
     add(work: Function) {

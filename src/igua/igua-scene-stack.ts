@@ -2,6 +2,7 @@ import { SceneStack } from "../lib/game-engine/scene-stack";
 import { AsshatTicker } from "../lib/game-engine/asshat-ticker";
 import { IguaLayers } from "./igua-layers";
 import { TickerContainer } from "../lib/game-engine/ticker-container";
+import { Logging } from "../lib/logging";
 
 interface IguaSceneMeta {
     useGameplay: false;
@@ -25,7 +26,7 @@ export class IguaSceneStack extends SceneStack<IguaSceneMeta, IguaScene> {
         private readonly _layers: IguaLayers,
         private readonly _setScene: (scene: IguaScene) => void) {
             super();
-            console.log(this);
+            console.log(...Logging.componentArgs(this));
     }
 
     protected convert<T>(populateSceneFn: () => T, meta: IguaSceneMeta) {

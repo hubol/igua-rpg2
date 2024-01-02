@@ -1,3 +1,5 @@
+import { Logging } from "../lib/logging";
+
 const { default: sceneExports } = require(`./scenes/**/*.ts`);
 
 type SceneLibrary = Record<string, () => unknown>;
@@ -6,7 +8,7 @@ let sceneLibrary: SceneLibrary;
 export function findSceneByName(name: string): () => unknown {
     if (!sceneLibrary) {
         sceneLibrary = createSceneLibrary();
-        console.log('SceneLibrary', sceneLibrary);
+        console.log(...Logging.componentArgs('SceneLibrary', sceneLibrary));
     }
 
     const scene = sceneLibrary[name];

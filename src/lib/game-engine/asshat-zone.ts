@@ -1,3 +1,4 @@
+import { Logging } from "../logging";
 import { CancellationError, CancellationToken } from "../promise/cancellation-token";
 import { Zone } from "../zone";
 import { IAsshatTicker } from "./asshat-ticker";
@@ -11,7 +12,7 @@ interface AsshatZoneContext {
 class AsshatZoneImpl extends Zone<AsshatZoneContext> {
     constructor() {
         super('AsshatZone');
-        console.log(this);
+        console.log(...Logging.componentArgs(this));
     }
 
     run(fn: () => unknown, context: AsshatZoneContext): Promise<void> {
