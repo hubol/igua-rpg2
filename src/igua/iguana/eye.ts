@@ -40,6 +40,7 @@ export function objEye(
 type ObjEye = ReturnType<typeof objEye>;
 
 export function objEyes(left: ObjEye, right: ObjEye) {
+    // TODO handle looking in directions!
     const c = container(left, right)
         .merge({ stepsUntilBlink: -1, closed: -1, eyelidMotion: 0, left, right })
         .step(() => {

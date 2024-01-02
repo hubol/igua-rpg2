@@ -1,8 +1,7 @@
-import { RenderTexture, Sprite, Texture } from "pixi.js";
+import { Sprite } from "pixi.js";
 import { IguanaShapes } from "./shapes";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
-import { renderer } from "../globals";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { IguanaLooks } from "./looks";
 import { objEye, objEyes } from "./eye";
@@ -122,7 +121,7 @@ function makeHead(body: Body, head: Head) {
 
     const crest = makeCrest(head.crest);
 
-    const eyes = makeEyes(head);
+    const eyes = objIguanaEyes(head);
 
     // TODO collision
     // face.ext.precise = true;
@@ -172,86 +171,28 @@ function makeCrest(crest: Crest) {
     return c;
 }
 
-type Eyes = Head['eyes'];
+type Eye = Head['eyes']['left'];
 
-const eyesTextures: Record<string, Texture> = {};
+const scleraTx = IguanaShapes.Eye[0];
 
-function makeEyesTexture(eyes: Eyes, mask: boolean) {
-    const key = JSON.stringify({ ...eyes, mask });
+const objIguanaSclera = () => new Sprite(scleraTx);
+const objIguanaPupil = ({ pupil }: Eye) => new Sprite(IguanaShapes.Pupil[pupil.shape]).at(pupil.placement).tinted(pupil.color);
+const objIguanaEye = (eye: Eye) => objEye(
+    objIguanaSclera().flipH(eye.sclera.flipH ? -1 : 1),
+    objIguanaPupil(eye),
+    eye.eyelid.color,
+    eye.eyelid.placement);
 
-    if (eyesTextures[key])
-        return eyesTextures[key];
+function objIguanaEyes(head: Head) {
+    const left = objIguanaEye(head.eyes.left);
+    const right = objIguanaEye(head.eyes.right).at((left.mask! as Sprite).width + head.eyes.gap, 0);
 
-    const leftShape = () => new Sprite(IguanaShapes.Eye[0]);
-    const rightShape = () => {
-        const sprite = leftShape();
-        sprite.scale.x = -1;
-        sprite.pivot.x += eyes.gap;
-        return sprite;
-    };
-    const pupil = () => {
-        const sprite = new Sprite(IguanaShapes.Pupil[eyes.pupils.shape]);
-        sprite.tint = eyes.pupils.color;
-        sprite.visible = !mask;
-        return sprite;
-    };
+    left.y = head.eyes.tilt;
 
-    const leftPupil = pupil();
-    leftPupil.pivot.add(eyes.pupils.placement, -1);
-    leftPupil.mask = leftShape();
-    const rightPupil = pupil();
-    if (eyes.pupils.mirrored) {
-        rightPupil.scale.x *= -1;
-        rightPupil.pivot.x += eyes.gap;
-        rightPupil.pivot.add(eyes.pupils.placement, -1);
-    }
-    else {
-        const fromLeft = leftPupil.getBounds().x - leftPupil.mask.getBounds().x;
-        rightPupil.pivot.x -= eyes.gap + leftPupil.width;
-        rightPupil.pivot.add(-fromLeft, -eyes.pupils.placement.y);
-    }
-    rightPupil.mask = rightShape();
-
-    const c = container(leftShape(), rightShape(), leftPupil.mask, rightPupil.mask, leftPupil, rightPupil);
-    const b = c.getBounds();
-
-    c.pivot.set(b.x, b.y);
-
-    // TODO highly suspect!
-    const renderTexture = RenderTexture.create({ width: c.width, height: c.height });
-    renderer.render(c, { renderTexture });
-
-    return eyesTextures[key] = renderTexture;
-}
-
-function makeEyes(head: Head) {
-    const scleraTx = IguanaShapes.Eye[0];
-    const eyelidTint = darken(head.color, 0.1);
-
-    const objSclera = () => new Sprite(scleraTx);
-    const objPupil = () => new Sprite(IguanaShapes.Pupil[0]).tinted(head.eyes.pupils.color);
-
-    const left = objEye(objSclera(), objPupil(), eyelidTint, 3);
-    const right = objEye(objSclera().flipH(-1), objPupil(), eyelidTint, 3).at(6, 0);
     const eyes = objEyes(left, right).at(12, -8);
 
     eyes.stepsUntilBlink = Rng.int(40, 120);
 
     return eyes;
-
-    // TODO highly suspect!!!!
-
-    // const texture = makeEyesTexture(head.eyes, false);
-    // const maskTexture = makeEyesTexture(head.eyes, true);
-    // const { eyelidsGraphics, eyelidsLine, eyelidsControl } =
-    //     iguanaEyelids(darken(head.color, 0.1), texture.width, texture.height, Math.floor(texture.height / 2));
-
-    // const mask = textureToGraphics(maskTexture);
-    // const eyes = container(mask, Sprite.from(texture), eyelidsGraphics, eyelidsLine);
-    // eyes.mask = mask;
-
-    // eyes.pivot.add(-7, 12).add(head.eyes.placement, -1);
-
-    // return merge(eyes, eyelidsControl) as IguanaEyes;
 }
 

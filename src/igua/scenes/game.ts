@@ -144,7 +144,17 @@ export function SceneTest() {
         .at(200, 200)
         .show();
 
-    iguanaPuppet(makeIguanaPuppetArgsFromLooks(getDefaultLooks())).at(128, 128).show();
+    const looks = getDefaultLooks();
+    // looks.head.eyes.gap = 2;
+    // looks.head.eyes.tilt = 1;
+    looks.head.eyes.left.eyelid.placement = 3;
+    // looks.head.eyes.right.eyelid.placement = 3;
+    looks.head.eyes.right.pupil.shape = 1;
+    looks.head.eyes.left.pupil.shape = 5;
+    looks.head.eyes.left.pupil.color = looks.head.crest.color;
+    looks.head.eyes.left.pupil.placement.x = -2;
+    looks.head.eyes.right.pupil.placement.x = -2;
+    iguanaPuppet(makeIguanaPuppetArgsFromLooks(looks)).at(128, 128).show();
     iguanaPuppet(makeIguanaPuppetArgsFromLooks(getDefaultLooks())).at(164, 128).flipV().show();
 
     console.log('Graphics.children.length', guy.children.length);

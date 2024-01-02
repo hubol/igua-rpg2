@@ -15,6 +15,24 @@ export namespace IguanaLooks {
             }
         });
 
+        const eye = () => ({
+            // TODO does each one need its own placement?
+            sclera: {
+                // TODO sclera shapes
+                flipH: TypedInput.boolean(),
+            },
+            eyelid: {
+                color: TypedInput.color(),
+                placement: TypedInput.integer(-4, 4),
+            },
+            pupil: {
+                shape: TypedInput.choice(IguanaShapes.Pupil),
+                color: TypedInput.color(),
+                placement: TypedInput.vector(-7, -7, 5, 5),
+                flipH: TypedInput.boolean(),
+            }
+        });
+
         return {
             head: {
                 color: TypedInput.color(),
@@ -27,15 +45,12 @@ export namespace IguanaLooks {
                     flipV: TypedInput.boolean(),
                 },
                 eyes: {
+                    // TODO how to handle mirroring?
                     placement: TypedInput.vector(-7, -6, 3, 5),
                     gap: TypedInput.integer(0, 8),
-                    // shape: choice(eyeShapes),
-                    pupils: {
-                        shape: TypedInput.choice(IguanaShapes.Pupil),
-                        color: TypedInput.color(),
-                        placement: TypedInput.vector(-7, -7, 5, 5),
-                        mirrored: TypedInput.boolean(),
-                    },
+                    tilt: TypedInput.integer(-2, 2),
+                    left: eye(),
+                    right: eye(),
                 },
                 horn: {
                     shape: TypedInput.choice(IguanaShapes.Horn, true),

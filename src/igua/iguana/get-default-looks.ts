@@ -15,12 +15,37 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
             eyes: {
                 placement: [0, 0],
                 gap: 1,
-                pupils: {
-                    shape: 0,
-                    color: 0x9957AF,
-                    placement: [0, 0],
-                    mirrored: true,
-                }
+                tilt: 0,
+                left: {
+                    sclera: {
+                        flipH: false,
+                    },
+                    eyelid: {
+                        color: 0xA38A00,
+                        placement: 0,
+                    },
+                    pupil: {
+                        shape: 0,
+                        color: 0x9957AF,
+                        placement: [0, 0],
+                        flipH: false,
+                    }
+                },
+                right: {
+                    sclera: {
+                        flipH: true,
+                    },
+                    eyelid: {
+                        color: 0xA38A00,
+                        placement: 0,
+                    },
+                    pupil: {
+                        shape: 0,
+                        color: 0x9957AF,
+                        placement: [0, 0],
+                        flipH: false,
+                    }
+                },
             },
             horn: {
                 shape: -1,
