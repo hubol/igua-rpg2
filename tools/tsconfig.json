@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "types": [ "node" ]
+    },
+    "include": [ "../test/", "lib/normalize-windows-path-separator.ts" ]
+}

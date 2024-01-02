@@ -6,7 +6,8 @@
     "build": "node esbuild.mjs",
     "serve": "node esbuild.mjs serve",
     "test": "ts-node --transpileOnly test/run.ts",
-    "test:watch": "nodemon --watch src --watch test -e ts,js,json -x npm run test"
+    "test:watch": "nodemon --watch src --watch test -e ts,js,json -x npm run test",
+    "tool": "ts-node tools/run-tool.ts"
   },
   "author": "Hubol",
   "license": "SEE LICENSE IN README.md",

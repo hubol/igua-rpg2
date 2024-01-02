@@ -1,4 +1,4 @@
-import { normalizeWindowsPathSeparator } from "./normalize-windows-path-separator";
+import { normalizeWindowsPathSeparator } from "../../tools/lib/normalize-windows-path-separator";
 
 export class ErrorPrinter {
     private constructor() { }
