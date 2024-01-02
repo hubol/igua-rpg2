@@ -16,6 +16,7 @@ function options(overrides) {
         bundle: true,
         sourcemap: true,
         loader: {
+            '.fnt': 'file',
             '.png': 'file',
             '.zip': 'file',
         },
