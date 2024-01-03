@@ -155,10 +155,19 @@ export function SceneTest() {
     looks.head.eyes.left.pupil.color = looks.head.crest.color;
     looks.head.eyes.left.pupil.placement.x = -2;
     looks.head.eyes.right.pupil.placement.x = -2;
-    iguanaPuppet(makeIguanaPuppetArgsFromLooks(looks)).at(128, 128).show();
+
+    looks.feet.fore.right.color = looks.feet.fore.left.claws.color;
+    looks.feet.fore.right.claws.color = looks.feet.fore.left.color;
+
+    looks.feet.hind.left.color = looks.feet.fore.left.claws.color;
+    looks.feet.hind.left.claws.color = looks.feet.fore.left.color;
+
+    const iguana = makeIguanaPuppetArgsFromLooks(looks).at(128, 128).show();
+    // iguana.isFacingRight = false;
     const head = objIguanaHead(looks.head).at(128, 192).show();
     head.face.eyes.stepsUntilBlink = -1;
-    iguanaPuppet(makeIguanaPuppetArgsFromLooks(getDefaultLooks())).at(164, 128).flipV().show();
+    for (let i = 0; i < 8; i += 1)
+        makeIguanaPuppetArgsFromLooks(getDefaultLooks()).at(164, 128 + i * 8).flipV().show();
 
     objText.Small('Hubol was here\nSwag!', { tint: 0x404080 }).at(65, 65).show();
     objText.Small('Hubol was here\nSwag!', { tint: 0x404080 }).at(65, 64).show();

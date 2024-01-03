@@ -6,50 +6,41 @@ import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { IguanaLooks } from "./looks";
 import { objEye, objEyes } from "./eye";
 import { Rng } from "../../lib/math/rng";
+import { Force } from "../../lib/types/force";
 
 export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
-    const backLeftFoot = makeFoot(looks.feet, "hind", true);
-    const backRightFoot = makeFoot(looks.feet, "hind", false);
-    const frontLeftFoot = makeFoot(looks.feet, "front", true);
-    const frontRightFoot = makeFoot(looks.feet, "front", false);
+    const { back, front, controller } = objIguanaFeet(looks.feet);
     const body = objIguanaBody(looks.body);
     const head = objIguanaHead(looks.head);
+    head.pivot.set(-5, 7);
 
-    return {
-        body,
-        head,
-        backLeftFoot,
-        backRightFoot,
-        frontLeftFoot,
-        frontRightFoot,
-    };
+    const c = container(back, body, head, front)
+        .merge(controller);
+
+    return c;
 }
 
 function darken(color: number, amount = 0.225) {
     return AdjustColor.pixi(color).saturate(0.1).darken(amount).toPixi();
 }
 
-function makeFootTint(color: number, back: boolean) {
-    if (!back)
-        return color;
-    return darken(color);
-}
-
 type Feet = IguanaLooks.Serializable['feet'];
+type Foot = Feet['fore']['left'];
 
-function makeFoot(feet: Feet, key: 'hind' | 'front', back: boolean) {
-    const foot = feet[key];
+function objIguanaFoot(feet: Feet, key1: 'fore' | 'hind', key2: 'left' | 'right', back: boolean) {
+    const foot: Foot = feet[key1][key2];
     const f = new Sprite(IguanaShapes.Foot[foot.shape]);
+
     if (back)
         f.pivot.x -= feet.backOffset;
     const gap = (7 + feet.gap) / 2;
-    f.pivot.x += key === 'front' ? -Math.ceil(gap) : Math.floor(gap);
-    f.tint = makeFootTint(feet.color, back);
-    // TODO collision f.ext.precise = true;
+    f.pivot.x += key1 === 'fore' ? -Math.ceil(gap) : Math.floor(gap);
+
+    f.tint = back ? darken(foot.color) : foot.color;
     const clawsShape = IguanaShapes.Claws[foot.claws.shape];
     const claws = clawsShape ? new Sprite(clawsShape) : undefined;
     if (claws) {
-        claws.tint = makeFootTint(feet.clawColor, back);
+        claws.tint = back ? darken(foot.claws.color) : foot.claws.color;
         claws.pivot.x -= foot.claws.placement;
         f.addChild(claws);
     }
@@ -62,6 +53,52 @@ function makeFoot(feet: Feet, key: 'hind' | 'front', back: boolean) {
         }
     }
     return f;
+}
+
+function objIguanaFeet(feet: Feet) {
+    const backForeLeft = objIguanaFoot(feet, 'fore', 'left', true);
+    const backForeRight = objIguanaFoot(feet, 'fore', 'right', true);
+    const backHindLeft = objIguanaFoot(feet, 'hind', 'left', true);
+    const backHindRight = objIguanaFoot(feet, 'hind', 'right', true);
+
+    const frontForeLeft = objIguanaFoot(feet, 'fore', 'left', false);
+    const frontForeRight = objIguanaFoot(feet, 'fore', 'right', false);
+    const frontHindLeft = objIguanaFoot(feet, 'hind', 'left', false);
+    const frontHindRight = objIguanaFoot(feet, 'hind', 'right', false);
+
+    const back = container(backForeLeft, backForeRight, backHindLeft, backHindRight);
+    const front = container(frontForeLeft, frontForeRight, frontHindLeft, frontHindRight);
+
+    let isFacingRight = Force<boolean>();
+    const controller = {
+        get isFacingRight() {
+            return isFacingRight;
+        },
+
+        set isFacingRight(value) {
+            if (value === isFacingRight)
+                return;
+
+            const not = !value;
+            backForeLeft.visible = value;
+            backForeRight.visible = not;
+            backHindLeft.visible = value;
+            backHindRight.visible = not;
+
+            frontForeLeft.visible = not;
+            frontForeRight.visible = value;
+            frontHindLeft.visible = not;
+            frontHindRight.visible = value;
+        }
+    }
+
+    controller.isFacingRight = true;
+
+    return {
+        back,
+        front,
+        controller,
+    }
 }
 
 type Body = IguanaLooks.Serializable['body'];

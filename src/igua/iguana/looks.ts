@@ -8,9 +8,11 @@ export namespace IguanaLooks {
     export function create() {
         const foot = () => ({
             shape: TypedInput.choice(IguanaShapes.Foot),
+            color: TypedInput.color(),
             flipV: TypedInput.boolean(),
             claws: {
                 shape: TypedInput.choice(IguanaShapes.Claws, true),
+                color: TypedInput.color(),
                 placement: TypedInput.integer(-3, 5),
             }
         });
@@ -79,10 +81,14 @@ export namespace IguanaLooks {
                 }
             },
             feet: {
-                color: TypedInput.color(),
-                clawColor: TypedInput.color(),
-                front: foot(),
-                hind: foot(),
+                fore: {
+                    left: foot(),
+                    right: foot(),
+                },
+                hind: {
+                    left: foot(),
+                    right: foot(),
+                },
                 gap: TypedInput.integer(-1, 8),
                 backOffset: TypedInput.integer(0, 7),
             }

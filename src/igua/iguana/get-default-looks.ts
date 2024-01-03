@@ -74,22 +74,48 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
             }
         },
         feet: {
-            color: 0x0C4CCC,
-            clawColor: 0x92B233,
-            front: {
-                shape: 0,
-                flipV: false,
-                claws: {
+            fore: {
+                left: {
                     shape: 0,
-                    placement: 2,
+                    color: 0x0C4CCC,
+                    flipV: false,
+                    claws: {
+                        color: 0x92B233,
+                        shape: 0,
+                        placement: 2,
+                    }
+                },
+                right: {
+                    shape: 0,
+                    color: 0x0C4CCC,
+                    flipV: false,
+                    claws: {
+                        color: 0x92B233,
+                        shape: 0,
+                        placement: 2,
+                    }
                 }
             },
             hind: {
-                shape: 0,
-                flipV: false,
-                claws: {
+                left: {
                     shape: 0,
-                    placement: 2,
+                    color: 0x0C4CCC,
+                    flipV: false,
+                    claws: {
+                        color: 0x92B233,
+                        shape: 0,
+                        placement: 2,
+                    }
+                },
+                right: {
+                    shape: 0,
+                    color: 0x0C4CCC,
+                    flipV: false,
+                    claws: {
+                        color: 0x92B233,
+                        shape: 0,
+                        placement: 2,
+                    }
                 }
             },
             gap: 2,
