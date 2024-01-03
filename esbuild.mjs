@@ -174,6 +174,7 @@ async function startParcelWatcher(rebuildFn) {
         await subscribe(
             "./src",
             (err, events) => {
+                console.clear();
                 if (err) {
                     console.error("Got error from @parcel/watcher\n", err);
                     return;
