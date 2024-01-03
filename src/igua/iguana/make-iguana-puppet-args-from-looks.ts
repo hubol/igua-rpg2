@@ -13,12 +13,10 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
     const frontLeftFoot = makeFoot(looks.feet, "front", true);
     const frontRightFoot = makeFoot(looks.feet, "front", false);
     const body = makeBody(looks.body);
-    const { head, crest, eyes } = objIguanaHead(looks.body, looks.head);
+    const head = objIguanaHead(looks.head);
 
     return {
         body,
-        crest,
-        eyes,
         head,
         backLeftFoot,
         backRightFoot,
@@ -147,18 +145,14 @@ function objIguanaMouth(head: Head) {
     return c;
 }
 
-function objIguanaHead(body: Body, head: Head) {
-    const face = new Sprite(IguanaShapes.Face[0]);
-    face.tint = head.color;
+function objIguanaHead(head: Head) {
+    const headShape = new Sprite(IguanaShapes.Face[0]);
+    headShape.tint = head.color;
 
     const mouth = objIguanaMouth(head);
-
-    const crest = objIguanaCrest(head.crest);
-
     const eyes = objIguanaEyes(head);
 
-    const h = container(crest, face, mouth, eyes)
-        .merge({ mouth });
+    const face = container(mouth, eyes).merge({ mouth, eyes });
 
     const hornShape = IguanaShapes.Horn[head.horn.shape];
 
@@ -166,12 +160,15 @@ function objIguanaHead(body: Body, head: Head) {
         const horn = new Sprite(hornShape);
         horn.tint = head.horn.color;
         horn.pivot.set(-12, 4).add(head.horn.placement, -1);
-        h.addChild(horn);
+        face.addChild(horn);
     }
 
-    h.pivot.add(body.placement, -1).add(head.placement, -1);
+    const crest = objIguanaCrest(head.crest);
 
-    return { crest, head: h, eyes };
+    const c = container(crest, headShape, face)
+        .merge({ crest, face });
+
+    return c;
 }
 
 type Crest = Head['crest'];

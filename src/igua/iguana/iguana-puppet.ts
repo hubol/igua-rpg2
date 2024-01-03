@@ -11,9 +11,9 @@ export interface IguanaPuppetArgs {
     frontLeftFoot: DisplayObject;
     frontRightFoot: DisplayObject;
     head: DisplayObject;
-    eyes: DisplayObject;
+    // eyes: DisplayObject;
     // eyes: IguanaEyes | DisplayObject;
-    crest: DisplayObject;
+    // crest: DisplayObject;
     moveCrestWhenDucking?: boolean;
     fromLooks?: boolean;
 }
@@ -73,66 +73,18 @@ export function iguanaPuppetNoEngine(args: IguanaPuppetArgs)
         duckUnit: 0,
         hspeed: 0,
         vspeed: 0,
-        canBlink: true,
-        isClosingEyes: false,
-        closedEyesUnit: 0,
         headLiftUnit: 0,
         _forceWalkAnimation: 0,
-        get agapeUnit() {
-            return (args.head as any).agapeUnit;
-        },
-        set agapeUnit(value) {
-            (args.head as any).agapeUnit = value;
-        },
         feet: [ args.backLeftFoot, args.backRightFoot, args.frontLeftFoot, args.frontRightFoot ],
         duckImmediately()
         {
             player.isDucking = true;
             player.duckUnit = 1;
         },
-        closeEyesImmediately()
-        {
-            player.isClosingEyes = true;
-            player.closedEyesUnit = 1;
-        }
     });
 
     innerContainer.addChild(args.backLeftFoot, args.frontLeftFoot, body, args.backRightFoot, args.frontRightFoot);
-    if (!args.fromLooks)
-        player.pivot.set(11, 17);
-    else
-        player.pivot.set(1, -10);
-
-    const canBlink = "closedUnit" in args.eyes;
-
-    if (canBlink)
-    {
-        let ticksUntilBlink = Rng.int(30, 210);
-
-        player.step(() => {
-            if (player.canBlink)
-            {
-                if (ticksUntilBlink-- <= 0) {
-                    ticksUntilBlink = Rng.int(120, 240);
-                    player.isClosingEyes = true;
-                }
-
-                if (player.closedEyesUnit > 1.2 && player.isClosingEyes)
-                {
-                    player.isClosingEyes = false;
-
-                    const bounds = player.getBounds();
-                    // TODO blinking
-                    // if (bounds.x >= 0 && bounds.x <= game.width && bounds.y >= 0 && bounds.y <= game.height)
-                    //     IguanaBlink.play();
-                }
-            }
-            player.closedEyesUnit = approachLinear(player.closedEyesUnit, player.isClosingEyes ? 1.3 : 0, 0.3);
-
-            // TODO fubar
-            // (args.eyes as IguanaEyes).closedUnit = player.closedEyesUnit;
-        });
-    }
+    player.pivot.set(1, -10);
 
     let trip = 0;
     let lastXscale = Force<number>();
