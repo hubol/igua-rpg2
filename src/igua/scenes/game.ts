@@ -10,7 +10,7 @@ import { WarningToast } from "../../lib/game-engine/warning-toast";
 import { container } from "../../lib/pixi/container";
 import { PseudoRng, Rng } from "../../lib/math/rng";
 import { getDefaultLooks } from "../iguana/get-default-looks";
-import { makeIguanaPuppetArgsFromLooks } from "../iguana/make-iguana-puppet-args-from-looks";
+import { makeIguanaPuppetArgsFromLooks, objIguanaHead } from "../iguana/make-iguana-puppet-args-from-looks";
 import { iguanaPuppet } from "../iguana/iguana-puppet";
 import { TextureToGraphicsConverter } from "../../lib/pixi/texture-to-graphics-converter";
 import { objText } from "../../assets/fonts";
@@ -156,8 +156,12 @@ export function SceneTest() {
     looks.head.eyes.left.pupil.placement.x = -2;
     looks.head.eyes.right.pupil.placement.x = -2;
     iguanaPuppet(makeIguanaPuppetArgsFromLooks(looks)).at(128, 128).show();
+    const head = objIguanaHead(looks.head).at(128, 192).show();
+    head.face.eyes.stepsUntilBlink = -1;
     iguanaPuppet(makeIguanaPuppetArgsFromLooks(getDefaultLooks())).at(164, 128).flipV().show();
 
+    objText.Small('Hubol was here\nSwag!', { tint: 0x404080 }).at(65, 65).show();
+    objText.Small('Hubol was here\nSwag!', { tint: 0x404080 }).at(65, 64).show();
     objText.Small('Hubol was here\nSwag!', { tint: 0xffffff }).at(64, 64).show();
     objText.Large('Hubol was here\nSwag!', { tint: 0xff0040 }).at(48, 96).show();
     objText.MediumDigits('0123456789', { tint: 0xdd7e95 }).at(64, 128).show();

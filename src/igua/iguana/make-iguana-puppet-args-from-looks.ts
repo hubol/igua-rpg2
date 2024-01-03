@@ -12,7 +12,7 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
     const backRightFoot = makeFoot(looks.feet, "hind", false);
     const frontLeftFoot = makeFoot(looks.feet, "front", true);
     const frontRightFoot = makeFoot(looks.feet, "front", false);
-    const body = makeBody(looks.body);
+    const body = objIguanaBody(looks.body);
     const head = objIguanaHead(looks.head);
 
     return {
@@ -66,7 +66,7 @@ function makeFoot(feet: Feet, key: 'hind' | 'front', back: boolean) {
 
 type Body = IguanaLooks.Serializable['body'];
 
-function makeBody(body: Body) {
+function objIguanaBody(body: Body) {
     const tail = new Sprite(IguanaShapes.Tail[body.tail.shape]);
     tail.tint = body.tail.color;
     tail.pivot.set(5, 11).add(body.tail.placement, -1);
@@ -74,19 +74,11 @@ function makeBody(body: Body) {
     torso.tint = body.color;
     torso.pivot.set(-1, 5);
 
-    // TODO collision
-    // tail.ext.precise = true;
-    // torso.ext.precise = true;
-
-    const c = container(tail, torso);
-    // TODO collision
-    // c.ext.tail = tail;
+    const c = container(tail, torso).merge({ tail });
 
     const clubShape = IguanaShapes.Club[body.tail.club.shape];
     if (clubShape) {
         const club = new Sprite(clubShape);
-        // TODO collision
-        // club.ext.precise = true;
         club.tint = body.tail.club.color;
         club.pivot.at(tail.pivot).add(-3, 8).add(body.tail.club.placement, -1);
         c.addChild(club);
@@ -145,7 +137,7 @@ function objIguanaMouth(head: Head) {
     return c;
 }
 
-function objIguanaHead(head: Head) {
+export function objIguanaHead(head: Head) {
     const headShape = new Sprite(IguanaShapes.Face[0]);
     headShape.tint = head.color;
 
