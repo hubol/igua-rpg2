@@ -7,7 +7,6 @@ import { IguanaLooks } from "./looks";
 import { objEye, objEyes } from "./eye";
 import { Rng } from "../../lib/math/rng";
 import { Force } from "../../lib/types/force";
-import { vnew } from "../../lib/math/vector-type";
 
 function showPivot<TContainer extends Container>(c: TContainer, color = 0x00ff00) {
     c.addChild(new Graphics().beginFill(color).drawRect(0, 0, 1, 1));
@@ -28,7 +27,7 @@ function compositeBounds(d1: DisplayObject, d2: DisplayObject) {
     return r5;
 }
 
-function getXOffset2(src: DisplayObject | undefined, dst: DisplayObject, bounds?: Rectangle) {
+function getFlippableOffsetX(src: DisplayObject | undefined, dst: DisplayObject, bounds?: Rectangle) {
     const rr1 = src ? src.getBounds(false, r1) : bounds!;
     dst.getBounds(false, r2);
 
@@ -42,41 +41,6 @@ function getXOffset2(src: DisplayObject | undefined, dst: DisplayObject, bounds?
     const c = inside ? Math.abs(mind - maxd) : mind + maxd;
 
     return sign * c;
-
-    console.log(mind, maxd);
-
-    if (maxd > mind)
-        return maxd + mind;
-    return -maxd - mind;
-
-    const min = Math.min(r1.x, r2.x);
-    const srcw = r1.x + r1.width;
-    const dstw = r2.x + r2.width;
-    const max = Math.max(srcw, dstw);
-
-    // if (r1.x > r2.x) {
-    //     const bleed = (r1.x + r1.width) - (r2.x + r2.width);
-    //     const desiredX = r2.x - bleed;
-    //     const diffX = desiredX - r1.x;
-    //     // (r2.x - ((r1.x + r1.width) - (r2.x + r2.width))) - r1.x;
-    //     // (r2.x - ((r1.x + r1.width) - r2.x - r2.width)) - r1.x;
-    //     // (r2.x - ((r1.x + r1.width) - r2.x - r2.width)) - r1.x;
-    //     // (r2.x - r1.x - r1.width + r2.x + r2.width) - r1.x;
-    //     // 2 * r2.x - 2 * r1.x - r1.width + r2.width;
-    //     console.log(src['Stack'], r1.x, r2.x);
-    //     return 2 * r2.x - 2 * r1.x - r1.width + r2.width;
-    // }
-    // const overlap = (r1.x + r1.width) - r2.x;
-    // const desiredX = (r2.x + r2.width) - overlap;
-    // const diffX = desiredX - r1.x
-    // return diffX;
-    // if (r1.x < r2.x)
-    //     return r2.width - (r2.x - r1.x);
-    // return -r2.width;
-    // return (r1.x + r1.width) - r2.x - ((r2.x + r2.width) - r1.x);
-    // return r1.width - 2 * r2.x - r2.width;
-    // return (r1.x + r1.width) - r2.x;
-    // return (r1.x + r1.width) - r2.x;
 }
 
 export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
@@ -85,7 +49,7 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
     const head = objIguanaHead(looks.head);
     head.pivot.set(-5, 7).add(looks.head.placement, -1);
 
-    const headOffset = getXOffset2(head.noggin, body.torso);
+    const headOffset = getFlippableOffsetX(head.noggin, body.torso);
 
     let facing = 1;
 
@@ -319,7 +283,7 @@ export function objIguanaHead(head: Head) {
     const mouth = objIguanaMouth(head);
     const eyes = objIguanaEyes(head);
 
-    const eyesFacingLeftOffset = getXOffset2(undefined, noggin, compositeBounds(eyes.left.shapeObj, eyes.right.shapeObj));
+    const eyesFacingLeftOffset = getFlippableOffsetX(undefined, noggin, compositeBounds(eyes.left.shapeObj, eyes.right.shapeObj));
 
     const hornShape = IguanaShapes.Horn[head.horn.shape];
 
