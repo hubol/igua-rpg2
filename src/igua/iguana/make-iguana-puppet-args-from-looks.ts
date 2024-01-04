@@ -121,6 +121,7 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
 
                 head.isFacingRight = right;
                 feetController.isFacingRight = right;
+                feetController.isTurning = f > 0;
             }
         });
 
@@ -173,8 +174,11 @@ function objIguanaFeet(feet: Feet) {
     const frontHindLeft = objIguanaFoot(feet, 'hind', 'left', false);
     const frontHindRight = objIguanaFoot(feet, 'hind', 'right', false);
 
-    const back = container(backForeLeft, backForeRight, backHindLeft, backHindRight);
-    const front = container(frontForeLeft, frontForeRight, frontHindLeft, frontHindRight);
+    const backTurnContainer = container(backHindLeft, backHindRight);
+    const frontTurnContainer = container(frontForeLeft, frontForeRight);
+
+    const back = container(backForeLeft, backForeRight, backTurnContainer);
+    const front = container(frontTurnContainer, frontHindLeft, frontHindRight);
 
     const foreLeft = backForeLeft.transform.position = frontForeLeft.transform.position;
     const foreRight = backForeRight.transform.position = frontForeRight.transform.position;
@@ -182,6 +186,8 @@ function objIguanaFeet(feet: Feet) {
     const hindRight = backHindRight.transform.position = frontHindRight.transform.position;
 
     let isFacingRight = Force<boolean>();
+    let isTurning = false;
+
     const controller = {
         get isFacingRight() {
             return isFacingRight;
@@ -191,6 +197,7 @@ function objIguanaFeet(feet: Feet) {
             if (value === isFacingRight)
                 return;
 
+            isFacingRight = value;
             const not = !value;
             backForeLeft.visible = value;
             backForeRight.visible = not;
@@ -201,6 +208,19 @@ function objIguanaFeet(feet: Feet) {
             frontForeRight.visible = value;
             frontHindLeft.visible = not;
             frontHindRight.visible = value;
+        },
+
+        get isTurning() {
+            return isTurning;
+        },
+
+        set isTurning(value) {
+            if (value === isTurning)
+                return;
+
+            isTurning = value;
+            frontTurnContainer.x = isTurning ? -2 : 0;
+            backTurnContainer.x = isTurning ? 2 : 0;
         }
     }
 
