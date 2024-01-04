@@ -91,10 +91,7 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
     const head = objIguanaHead(looks.head);
     head.pivot.set(-5, 11);
 
-    // const crestOffset = -getXOffset2(head.noggin, head.crest);
-    const crestOffset = -getXOffset2(head.crest, head.noggin);
-    const faceOffset = -getXOffset2(undefined, head.noggin, compositeBounds(head.face.eyes.left.mask as any, head.face.eyes.right.mask as any));
-    const headOffset = -getXOffset2(head.noggin, body.torso);
+    const headOffset = getXOffset2(head.noggin, body.torso);
 
     let facing = 1;
 
@@ -134,12 +131,13 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
                 body.tail.x = f1 * 2;
                 body.tail.y = -f1;
                 // head.x = right ? -f5 : -headOffset + f5;
-                head.x = right ? 0 : -headOffset - 2;
+                head.x = right ? 0 : headOffset - 2;
                 head.y = f1;
                 // head.face.x = right ? -f1 : -faceOffset + f1;
-                head.face.x = right ? 0 : -faceOffset;
-                head.crest.x = right ? -f3 : -crestOffset + f3;
+                // head.face.x = right ? 0 : -faceOffset;
+                // head.crest.x = right ? -f3 : -crestOffset + f3;
 
+                head.isFacingRight = right;
                 feetController.isFacingRight = right;
             }
         });
@@ -319,21 +317,43 @@ export function objIguanaHead(head: Head) {
     const mouth = objIguanaMouth(head);
     const eyes = objIguanaEyes(head);
 
-    const face = container(mouth, eyes).merge({ mouth, eyes });
+    const eyesFacingLeftOffset = getXOffset2(undefined, noggin, compositeBounds(eyes.left.shapeObj, eyes.right.shapeObj));
 
     const hornShape = IguanaShapes.Horn[head.horn.shape];
+
+    const crest = objIguanaCrest(head.crest);
+
+    const back = container(crest, noggin, mouth);
+    const front = container();
 
     if (hornShape) {
         const horn = new Sprite(hornShape);
         horn.tint = head.horn.color;
         horn.pivot.set(-12, 4).add(head.horn.placement, -1);
-        face.addChild(horn);
+        front.addChild(horn);
     }
 
-    const crest = objIguanaCrest(head.crest);
+    let isFacingRight = true;
 
-    const c = container(crest, noggin, face)
-        .merge({ crest, noggin, face });
+    const inner = container(back, eyes, front);
+
+    const c = container(inner)
+        .merge({ crest, noggin, eyes, mouth })
+        .merge({
+            get isFacingRight() {
+                return isFacingRight;
+            },
+            set isFacingRight(value) {
+                if (isFacingRight === value)
+                    return;
+                isFacingRight = value;
+
+                inner.pivot.x = isFacingRight ? 0 : -noggin.width;
+                eyes.x = isFacingRight ? 0 : eyesFacingLeftOffset - noggin.width;
+                back.scale.x = isFacingRight ? 1 : -1;
+                front.scale.x = isFacingRight ? 1 : -1;
+            }
+        });
 
     return c;
 }

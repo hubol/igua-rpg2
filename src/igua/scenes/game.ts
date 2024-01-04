@@ -151,7 +151,8 @@ export function SceneTest() {
         const looks = getDefaultLooks();
         // looks.head.eyes.gap = 2;
         // looks.head.eyes.tilt = 1;
-        looks.head.eyes.placement.x = 2;
+        looks.head.eyes.placement.x = 0;
+        looks.head.eyes.gap = 2;
         looks.head.eyes.left.eyelid.placement = 3;
         // looks.head.eyes.right.eyelid.placement = 3;
         looks.head.eyes.right.pupil.shape = 1;
@@ -159,6 +160,7 @@ export function SceneTest() {
         looks.head.eyes.left.pupil.color = looks.head.crest.color;
         looks.head.eyes.left.pupil.placement.x = -2;
         looks.head.eyes.right.pupil.placement.x = -2;
+        // looks.head.eyes.placement.x = -3;
 
         looks.head.crest.placement.x = 12;
 
@@ -196,8 +198,14 @@ export function SceneTest() {
     // iguana.feet.hindLeft.x = -1;
     // iguana.isFacingRight = false;
     const looks = getDefaultLooks();
+    looks.head.eyes.gap = 3;
     const head = objIguanaHead(looks.head).at(128, 192).show();
-    head.face.eyes.stepsUntilBlink = -1;
+    // const head2 = objIguanaHead(looks.head).at(128, 192).show();
+    // head2.isFacingRight = false;
+    looks.head.eyes.gap = 3;
+    const head3 = objIguanaHead(looks.head).at(128, 220).show();
+    head3.isFacingRight = false;
+    // head.face.eyes.stepsUntilBlink = -1;
     // for (let i = 0; i < 8; i += 1)
     //     makeIguanaPuppetArgsFromLooks(getDefaultLooks()).at(164, 128 + i * 8).flipV().show();
 
