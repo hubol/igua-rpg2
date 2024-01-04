@@ -163,6 +163,11 @@ export function SceneTest() {
     looks.feet.hind.left.claws.color = looks.feet.fore.left.color;
 
     const iguana = makeIguanaPuppetArgsFromLooks(looks).at(128, 128).show();
+    iguana.body.y = 3;
+    iguana.feet.foreRight.x = 1;
+    iguana.feet.foreLeft.x = 1;
+    iguana.feet.hindRight.x = -1;
+    iguana.feet.hindLeft.x = -1;
     // iguana.isFacingRight = false;
     const head = objIguanaHead(looks.head).at(128, 192).show();
     head.face.eyes.stepsUntilBlink = -1;

@@ -9,12 +9,13 @@ import { Rng } from "../../lib/math/rng";
 import { Force } from "../../lib/types/force";
 
 export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
-    const { back, front, controller } = objIguanaFeet(looks.feet);
+    const { back, front, controller, feet } = objIguanaFeet(looks.feet);
     const body = objIguanaBody(looks.body);
     const head = objIguanaHead(looks.head);
     head.pivot.set(-5, 7);
 
     const c = container(back, body, head, front)
+        .merge({ body, feet })
         .merge(controller);
 
     return c;
@@ -69,6 +70,11 @@ function objIguanaFeet(feet: Feet) {
     const back = container(backForeLeft, backForeRight, backHindLeft, backHindRight);
     const front = container(frontForeLeft, frontForeRight, frontHindLeft, frontHindRight);
 
+    const foreLeft = backForeLeft.transform.position = frontForeLeft.transform.position;
+    const foreRight = backForeRight.transform.position = frontForeRight.transform.position;
+    const hindLeft = backHindLeft.transform.position = frontHindLeft.transform.position;
+    const hindRight = backHindRight.transform.position = frontHindRight.transform.position;
+
     let isFacingRight = Force<boolean>();
     const controller = {
         get isFacingRight() {
@@ -98,6 +104,12 @@ function objIguanaFeet(feet: Feet) {
         back,
         front,
         controller,
+        feet: {
+            foreLeft,
+            foreRight,
+            hindLeft,
+            hindRight,
+        },
     }
 }
 
