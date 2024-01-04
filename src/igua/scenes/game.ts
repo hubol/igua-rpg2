@@ -15,6 +15,7 @@ import { iguanaPuppet } from "../iguana/iguana-puppet";
 import { TextureToGraphicsConverter } from "../../lib/pixi/texture-to-graphics-converter";
 import { objText } from "../../assets/fonts";
 import { sleep } from "../../lib/game-engine/promise/sleep";
+import { IguanaLooks } from "../iguana/looks";
 
 const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });
 
@@ -146,45 +147,57 @@ export function SceneTest() {
         .at(200, 200)
         .show();
 
-    const looks = getDefaultLooks();
-    // looks.head.eyes.gap = 2;
-    // looks.head.eyes.tilt = 1;
-    looks.head.eyes.left.eyelid.placement = 3;
-    // looks.head.eyes.right.eyelid.placement = 3;
-    looks.head.eyes.right.pupil.shape = 1;
-    looks.head.eyes.left.pupil.shape = 5;
-    looks.head.eyes.left.pupil.color = looks.head.crest.color;
-    looks.head.eyes.left.pupil.placement.x = -2;
-    looks.head.eyes.right.pupil.placement.x = -2;
+    const objIguanaPv = (modifyLooksFn: (looks: IguanaLooks.Serializable) => void) => {
+        const looks = getDefaultLooks();
+        // looks.head.eyes.gap = 2;
+        // looks.head.eyes.tilt = 1;
+        looks.head.eyes.placement.x = 2;
+        looks.head.eyes.left.eyelid.placement = 3;
+        // looks.head.eyes.right.eyelid.placement = 3;
+        looks.head.eyes.right.pupil.shape = 1;
+        looks.head.eyes.left.pupil.shape = 5;
+        looks.head.eyes.left.pupil.color = looks.head.crest.color;
+        looks.head.eyes.left.pupil.placement.x = -2;
+        looks.head.eyes.right.pupil.placement.x = -2;
 
-    looks.feet.fore.right.color = looks.feet.fore.left.claws.color;
-    looks.feet.fore.right.claws.color = looks.feet.fore.left.color;
+        looks.head.crest.placement.x = 12;
 
-    looks.feet.hind.left.color = looks.feet.fore.left.claws.color;
-    looks.feet.hind.left.claws.color = looks.feet.fore.left.color;
+        looks.feet.fore.right.color = looks.feet.fore.left.claws.color;
+        looks.feet.fore.right.claws.color = looks.feet.fore.left.color;
 
-    const iguana = makeIguanaPuppetArgsFromLooks(looks).at(128, 128)
-        .async(async () => {
-            while (true) {
-                iguana.facing = Math.sign(iguana.facing);
-                await sleep(1000);
-                iguana.facing *= -1;
-                await sleep(1000);
-                iguana.facing *= 0.5;
-            }
-        });
+        looks.feet.hind.left.color = looks.feet.fore.left.claws.color;
+        looks.feet.hind.left.claws.color = looks.feet.fore.left.color;
 
-    iguana.show();
+        modifyLooksFn(looks);
+
+        const iguana = makeIguanaPuppetArgsFromLooks(looks)
+            .async(async () => {
+                while (true) {
+                    iguana.facing = Math.sign(iguana.facing);
+                    iguana.facing *= -1;
+                    await sleep(700);
+                    iguana.facing *= 0.5;
+                    await sleep(200);
+                }
+            });
+
+        return iguana;
+    }
+
+    objIguanaPv(() => {}).at(80, 180).show();
+    // objIguanaPv((looks) => { looks.head.crest.placement.x = 0; looks.head.eyes.placement.x = 0; }).at(80, 212).show();
+
     // iguana.body.y = 3;
     // iguana.feet.foreRight.x = 1;
     // iguana.feet.foreLeft.x = 1;
     // iguana.feet.hindRight.x = -1;
     // iguana.feet.hindLeft.x = -1;
     // iguana.isFacingRight = false;
+    const looks = getDefaultLooks();
     const head = objIguanaHead(looks.head).at(128, 192).show();
     head.face.eyes.stepsUntilBlink = -1;
-    for (let i = 0; i < 8; i += 1)
-        makeIguanaPuppetArgsFromLooks(getDefaultLooks()).at(164, 128 + i * 8).flipV().show();
+    // for (let i = 0; i < 8; i += 1)
+    //     makeIguanaPuppetArgsFromLooks(getDefaultLooks()).at(164, 128 + i * 8).flipV().show();
 
     objText.Small('Hubol was here\nSwag!', { tint: 0x404080 }).at(65, 65).show();
     objText.Small('Hubol was here\nSwag!', { tint: 0x404080 }).at(65, 64).show();

@@ -16,17 +16,73 @@ function showPivot<TContainer extends Container>(c: TContainer, color = 0x00ff00
 
 const r1 = new Rectangle();
 const r2 = new Rectangle();
+const r3 = new Rectangle();
+const r4 = new Rectangle();
+const r5 = new Rectangle();
 
-function getXOffset(src: DisplayObject, dst: DisplayObject) {
+function getLeftOffset(src: DisplayObject, dst: DisplayObject) {
     src.getBounds(false, r1);
     dst.getBounds(false, r2);
     return r1.x - r2.x;
 }
 
-function getXOffset2(src: DisplayObject, dst: DisplayObject) {
-    src.getBounds(false, r1);
+function compositeBounds(d1: DisplayObject, d2: DisplayObject) {
+    d1.getBounds(false, r3);
+    d2.getBounds(false, r4);
+    r5.x = Math.min(r3.x, r4.x);
+    r5.width = Math.max(r3.x + r3.width, r4.x + r4.width) - r5.x;
+    return r5;
+}
+
+function getXOffset2(src: DisplayObject | undefined, dst: DisplayObject, bounds?: Rectangle) {
+    const rr1 = src ? src.getBounds(false, r1) : bounds!;
     dst.getBounds(false, r2);
-    return r1.x - (r2.x + r2.width);
+
+    const mind = Math.abs(rr1.x - r2.x);
+    const r1x2 = rr1.x + rr1.width;
+    const r2x2 = r2.x + r2.width;
+    const maxd = Math.abs(r1x2 - r2x2);
+
+    const inside = rr1.x >= r2.x && r1x2 <= r2x2;
+    const sign = maxd > mind ? 1 : -1;
+    const c = inside ? Math.abs(mind - maxd) : mind + maxd;
+
+    return sign * c;
+
+    console.log(mind, maxd);
+
+    if (maxd > mind)
+        return maxd + mind;
+    return -maxd - mind;
+
+    const min = Math.min(r1.x, r2.x);
+    const srcw = r1.x + r1.width;
+    const dstw = r2.x + r2.width;
+    const max = Math.max(srcw, dstw);
+
+    // if (r1.x > r2.x) {
+    //     const bleed = (r1.x + r1.width) - (r2.x + r2.width);
+    //     const desiredX = r2.x - bleed;
+    //     const diffX = desiredX - r1.x;
+    //     // (r2.x - ((r1.x + r1.width) - (r2.x + r2.width))) - r1.x;
+    //     // (r2.x - ((r1.x + r1.width) - r2.x - r2.width)) - r1.x;
+    //     // (r2.x - ((r1.x + r1.width) - r2.x - r2.width)) - r1.x;
+    //     // (r2.x - r1.x - r1.width + r2.x + r2.width) - r1.x;
+    //     // 2 * r2.x - 2 * r1.x - r1.width + r2.width;
+    //     console.log(src['Stack'], r1.x, r2.x);
+    //     return 2 * r2.x - 2 * r1.x - r1.width + r2.width;
+    // }
+    // const overlap = (r1.x + r1.width) - r2.x;
+    // const desiredX = (r2.x + r2.width) - overlap;
+    // const diffX = desiredX - r1.x
+    // return diffX;
+    // if (r1.x < r2.x)
+    //     return r2.width - (r2.x - r1.x);
+    // return -r2.width;
+    // return (r1.x + r1.width) - r2.x - ((r2.x + r2.width) - r1.x);
+    // return r1.width - 2 * r2.x - r2.width;
+    // return (r1.x + r1.width) - r2.x;
+    // return (r1.x + r1.width) - r2.x;
 }
 
 export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
@@ -34,18 +90,11 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
     const body = objIguanaBody(looks.body);
     const head = objIguanaHead(looks.head);
     head.pivot.set(-5, 7);
-    // head.pivot.set(0, 7);
 
-    // const headOffset = getXOffset(head.noggin, body.torso) + head.noggin.width;
-    // const headOffset = getXOffset(head.noggin, body.torso) + head.noggin.width + head.pivot.x;
-    const headOffset = -getXOffset2(head.noggin, body.torso) + body.torso.width - head.pivot.x;
-    // console.log(headOffset, head.noggin.width);
-    const crestOffset = getXOffset(head.noggin, head.crest) - head.noggin.width;
-    const faceOffset = getXOffset(head.face.eyes.left.mask as any, head.noggin);
-
-    // showPivot(back, 0xff0000);
-    // showPivot(front);
-    // showPivot(head, 0x0000ff);
+    const headOffset = 0 && -getXOffset2(head.noggin, body.torso);
+    // const crestOffset = -getXOffset2(head.noggin, head.crest);
+    const crestOffset = -getXOffset2(head.crest, head.noggin);
+    const faceOffset = -getXOffset2(undefined, head.noggin, compositeBounds(head.face.eyes.left.mask as any, head.face.eyes.right.mask as any));
 
     let facing = 1;
 
@@ -73,11 +122,18 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
                 // head.pivot.x = Math.abs(head.pivot.x) * -sign;
                 // head.scale.x = sign;
 
-                head.x = right ? 0 : -headOffset;
-                // head.pivot.x = right ? -5 : -8;
-                head.face.x = right ? 0 : -faceOffset;
+                c.pivot.x = right ? 0 : -1;
 
-                head.crest.x = right ? 0 : -crestOffset;
+                const f3 = Math.abs(facing) < 0.75 ? 3 : 0;
+                const f1 = Math.sign(f3);
+                const f5 = f1 * 5;
+                body.tail.x = f1 * 2;
+                body.tail.y = -f1;
+                head.x = right ? -f5 : -headOffset + f5;
+                head.y = f1;
+                // head.face.x = right ? -f1 : -faceOffset + f1;
+                head.face.x = right ? 0 : -faceOffset;
+                head.crest.x = right ? f3 : -crestOffset - f3;
 
                 feetController.isFacingRight = right;
             }
@@ -308,7 +364,8 @@ function objIguanaEyes(head: Head) {
 
     left.y = head.eyes.tilt;
 
-    const eyes = objEyes(left, right).at(12, -8);
+    const eyes = objEyes(left, right);
+    eyes.pivot.at(-12, 8).add(head.eyes.placement, -1);
 
     eyes.stepsUntilBlink = Rng.int(40, 120);
 
