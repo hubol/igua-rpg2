@@ -16,6 +16,7 @@ import { TextureToGraphicsConverter } from "../../lib/pixi/texture-to-graphics-c
 import { objText } from "../../assets/fonts";
 import { sleep } from "../../lib/game-engine/promise/sleep";
 import { IguanaLooks } from "../iguana/looks";
+import { lerp } from "../../lib/game-engine/promise/lerp";
 
 const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });
 
@@ -179,11 +180,8 @@ export function SceneTest() {
         const iguana = makeIguanaPuppetArgsFromLooks(looks)
             .async(async () => {
                 while (true) {
-                    iguana.facing = Math.sign(iguana.facing);
-                    iguana.facing *= -1;
                     await sleep(700);
-                    iguana.facing *= 0.5;
-                    await sleep(200);
+                    await lerp(iguana, 'facing').to(-iguana.facing).over(300);
                 }
             });
 

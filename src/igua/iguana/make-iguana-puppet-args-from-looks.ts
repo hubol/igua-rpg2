@@ -85,7 +85,7 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
 
                 head.isFacingRight = right;
                 feetController.isFacingRight = right;
-                feetController.isTurning = f > 0;
+                feetController.turned = f * 2;
             }
         });
 
@@ -150,7 +150,7 @@ function objIguanaFeet(feet: Feet) {
     const hindRight = backHindRight.transform.position = frontHindRight.transform.position;
 
     let isFacingRight = Force<boolean>();
-    let isTurning = false;
+    let turned = 0;
 
     const controller = {
         get isFacingRight() {
@@ -174,17 +174,18 @@ function objIguanaFeet(feet: Feet) {
             frontHindRight.visible = value;
         },
 
-        get isTurning() {
-            return isTurning;
+        get turned() {
+            return turned;
         },
 
-        set isTurning(value) {
-            if (value === isTurning)
+        set turned(value) {
+            const rounded = Math.round(value);
+            if (rounded === Math.round(turned))
                 return;
 
-            isTurning = value;
-            frontTurnContainer.x = isTurning ? -2 : 0;
-            backTurnContainer.x = isTurning ? 2 : 0;
+            turned = value;
+            frontTurnContainer.x = -rounded;
+            backTurnContainer.x = rounded;
         }
     }
 
