@@ -20,12 +20,6 @@ const r3 = new Rectangle();
 const r4 = new Rectangle();
 const r5 = new Rectangle();
 
-function getLeftOffset(src: DisplayObject, dst: DisplayObject) {
-    src.getBounds(false, r1);
-    dst.getBounds(false, r2);
-    return r1.x - r2.x;
-}
-
 function compositeBounds(d1: DisplayObject, d2: DisplayObject) {
     d1.getBounds(false, r3);
     d2.getBounds(false, r4);
@@ -89,17 +83,13 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
     const { back, front, controller: feetController, feet } = objIguanaFeet(looks.feet);
     const body = objIguanaBody(looks.body);
     const head = objIguanaHead(looks.head);
-    head.pivot.set(-5, 11);
+    head.pivot.set(-5, 7).add(looks.head.placement, -1);
 
     const headOffset = getXOffset2(head.noggin, body.torso);
 
     let facing = 1;
 
-    // head.alpha = 0.5;
-    const body2 = new Sprite(IguanaShapes.Torso[0]).at(1, -5);
-    body2.alpha = 0;
-
-    const c = container(back, body, body2, head, front)
+    const c = container(back, body, head, front)
         .merge({ body, feet })
         .merge({
             get facing() {
@@ -114,28 +104,20 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
                 const right = sign > 0;
 
                 body.scale.x = sign;
-                // back.flipH(sign);
-                // front.flipH(sign);
                 back.scale.x = sign;
                 front.scale.x = sign;
                 back.x = right ? 0 : 1;
                 front.x = right ? 0 : 1;
-                // head.pivot.x = Math.abs(head.pivot.x) * -sign;
-                // head.scale.x = sign;
 
                 c.pivot.x = right ? 0 : -1;
 
-                const f3 = Math.abs(facing) < 0.75 ? 3 : 0;
-                const f1 = Math.sign(f3);
-                const f5 = f1 * 5;
-                body.tail.x = f1 * 2;
-                body.tail.y = -f1;
-                // head.x = right ? -f5 : -headOffset + f5;
-                head.x = right ? 0 : headOffset - 2;
-                head.y = f1;
-                // head.face.x = right ? -f1 : -faceOffset + f1;
-                // head.face.x = right ? 0 : -faceOffset;
-                // head.crest.x = right ? -f3 : -crestOffset + f3;
+                const f = Math.abs(facing) < 0.75 ? 1 : 0;
+
+                body.tail.x = f * 2;
+                body.tail.y = -f;
+                
+                head.x = right ? -f * 4 : headOffset - 2 + f * 4;
+                head.y = f * 2;
 
                 head.isFacingRight = right;
                 feetController.isFacingRight = right;
