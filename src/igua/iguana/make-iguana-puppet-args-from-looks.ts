@@ -1,4 +1,4 @@
-import { Sprite } from "pixi.js";
+import { Container, DisplayObject, Graphics, Rectangle, Sprite } from "pixi.js";
 import { IguanaShapes } from "./shapes";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
@@ -7,16 +7,81 @@ import { IguanaLooks } from "./looks";
 import { objEye, objEyes } from "./eye";
 import { Rng } from "../../lib/math/rng";
 import { Force } from "../../lib/types/force";
+import { vnew } from "../../lib/math/vector-type";
+
+function showPivot<TContainer extends Container>(c: TContainer, color = 0x00ff00) {
+    c.addChild(new Graphics().beginFill(color).drawRect(0, 0, 1, 1));
+    return c;
+}
+
+const r1 = new Rectangle();
+const r2 = new Rectangle();
+
+function getXOffset(src: DisplayObject, dst: DisplayObject) {
+    src.getBounds(false, r1);
+    dst.getBounds(false, r2);
+    return r1.x - r2.x;
+}
+
+function getXOffset2(src: DisplayObject, dst: DisplayObject) {
+    src.getBounds(false, r1);
+    dst.getBounds(false, r2);
+    return r1.x - (r2.x + r2.width);
+}
 
 export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
-    const { back, front, controller, feet } = objIguanaFeet(looks.feet);
+    const { back, front, controller: feetController, feet } = objIguanaFeet(looks.feet);
     const body = objIguanaBody(looks.body);
     const head = objIguanaHead(looks.head);
     head.pivot.set(-5, 7);
+    // head.pivot.set(0, 7);
+
+    // const headOffset = getXOffset(head.noggin, body.torso) + head.noggin.width;
+    // const headOffset = getXOffset(head.noggin, body.torso) + head.noggin.width + head.pivot.x;
+    const headOffset = -getXOffset2(head.noggin, body.torso) + body.torso.width - head.pivot.x;
+    // console.log(headOffset, head.noggin.width);
+    const crestOffset = getXOffset(head.noggin, head.crest) - head.noggin.width;
+    const faceOffset = getXOffset(head.face.eyes.left.mask as any, head.noggin);
+
+    // showPivot(back, 0xff0000);
+    // showPivot(front);
+    // showPivot(head, 0x0000ff);
+
+    let facing = 1;
 
     const c = container(back, body, head, front)
         .merge({ body, feet })
-        .merge(controller);
+        .merge({
+            get facing() {
+                return facing;
+            },
+            set facing(value) {
+                if (value === facing || value === 0)
+                    return;
+
+                facing = value;
+                const sign = Math.sign(facing);
+                const right = sign > 0;
+
+                body.scale.x = sign;
+                // back.flipH(sign);
+                // front.flipH(sign);
+                back.scale.x = sign;
+                front.scale.x = sign;
+                back.x = right ? 0 : 1;
+                front.x = right ? 0 : 1;
+                // head.pivot.x = Math.abs(head.pivot.x) * -sign;
+                // head.scale.x = sign;
+
+                head.x = right ? 0 : -headOffset;
+                // head.pivot.x = right ? -5 : -8;
+                head.face.x = right ? 0 : -faceOffset;
+
+                head.crest.x = right ? 0 : -crestOffset;
+
+                feetController.isFacingRight = right;
+            }
+        });
 
     return c;
 }
@@ -123,7 +188,7 @@ function objIguanaBody(body: Body) {
     torso.tint = body.color;
     torso.pivot.set(-1, 5);
 
-    const c = container(tail, torso).merge({ tail });
+    const c = container(tail, torso).merge({ torso, tail });
 
     const clubShape = IguanaShapes.Club[body.tail.club.shape];
     if (clubShape) {
@@ -187,8 +252,8 @@ function objIguanaMouth(head: Head) {
 }
 
 export function objIguanaHead(head: Head) {
-    const headShape = new Sprite(IguanaShapes.Face[0]);
-    headShape.tint = head.color;
+    const noggin = new Sprite(IguanaShapes.Face[0]);
+    noggin.tint = head.color;
 
     const mouth = objIguanaMouth(head);
     const eyes = objIguanaEyes(head);
@@ -206,8 +271,8 @@ export function objIguanaHead(head: Head) {
 
     const crest = objIguanaCrest(head.crest);
 
-    const c = container(crest, headShape, face)
-        .merge({ crest, face });
+    const c = container(crest, noggin, face)
+        .merge({ crest, noggin, face });
 
     return c;
 }
