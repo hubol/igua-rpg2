@@ -163,7 +163,7 @@ export function SceneTest() {
         looks.head.eyes.right.pupil.placement.x = -2;
         // looks.head.eyes.placement.x = -3;
 
-        looks.head.crest.placement.x = 12;
+        // looks.head.crest.placement.x = 12;
 
         looks.head.placement.y = -5;
 
@@ -181,7 +181,7 @@ export function SceneTest() {
             .async(async () => {
                 while (true) {
                     await sleep(700);
-                    await lerp(iguana, 'facing').to(-iguana.facing).over(300);
+                    await lerp(iguana, 'facing').to(-iguana.facing).over(500);
                 }
             });
 
@@ -214,9 +214,4 @@ export function SceneTest() {
     objText.Small('Hubol was here\nSwag!', { tint: 0xffffff }).at(64, 64).show();
     objText.Large('Hubol was here\nSwag!', { tint: 0xff0040 }).at(48, 96).show();
     objText.MediumDigits('0123456789', { tint: 0xdd7e95 }).at(64, 128).show();
-
-    console.log('Graphics.children.length', guy.children.length);
-    console.log('Sprite.children.length', s.children.length);
-    console.log('Sprite.children.length', s.getBounds());
-    console.log('guy', guy);
 }
