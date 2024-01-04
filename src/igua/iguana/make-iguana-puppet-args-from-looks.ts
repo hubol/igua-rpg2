@@ -89,16 +89,20 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
     const { back, front, controller: feetController, feet } = objIguanaFeet(looks.feet);
     const body = objIguanaBody(looks.body);
     const head = objIguanaHead(looks.head);
-    head.pivot.set(-5, 7);
+    head.pivot.set(-5, 11);
 
-    const headOffset = 0 && -getXOffset2(head.noggin, body.torso);
     // const crestOffset = -getXOffset2(head.noggin, head.crest);
     const crestOffset = -getXOffset2(head.crest, head.noggin);
     const faceOffset = -getXOffset2(undefined, head.noggin, compositeBounds(head.face.eyes.left.mask as any, head.face.eyes.right.mask as any));
+    const headOffset = -getXOffset2(head.noggin, body.torso);
 
     let facing = 1;
 
-    const c = container(back, body, head, front)
+    // head.alpha = 0.5;
+    const body2 = new Sprite(IguanaShapes.Torso[0]).at(1, -5);
+    body2.alpha = 0;
+
+    const c = container(back, body, body2, head, front)
         .merge({ body, feet })
         .merge({
             get facing() {
@@ -129,11 +133,12 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
                 const f5 = f1 * 5;
                 body.tail.x = f1 * 2;
                 body.tail.y = -f1;
-                head.x = right ? -f5 : -headOffset + f5;
+                // head.x = right ? -f5 : -headOffset + f5;
+                head.x = right ? 0 : -headOffset - 2;
                 head.y = f1;
                 // head.face.x = right ? -f1 : -faceOffset + f1;
                 head.face.x = right ? 0 : -faceOffset;
-                head.crest.x = right ? f3 : -crestOffset - f3;
+                head.crest.x = right ? -f3 : -crestOffset + f3;
 
                 feetController.isFacingRight = right;
             }

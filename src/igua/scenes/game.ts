@@ -162,6 +162,8 @@ export function SceneTest() {
 
         looks.head.crest.placement.x = 12;
 
+        looks.feet.gap = 4;
+
         looks.feet.fore.right.color = looks.feet.fore.left.claws.color;
         looks.feet.fore.right.claws.color = looks.feet.fore.left.color;
 
