@@ -75,17 +75,24 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
 
                 c.pivot.x = right ? 0 : -1;
 
-                const f = Math.abs(facing) < 0.75 ? 1 : 0;
+                const abs = Math.abs(facing);
+                let f = 0;
+                if (abs < 0.3)
+                    f = 1.2;
+                else if (abs < 0.6)
+                    f = 1;
+                else if (abs < 0.8)
+                    f = 0.5;
 
-                body.tail.x = f * 2;
-                body.tail.y = -f;
+                body.tail.x = Math.round(f * 2);
+                body.tail.y = Math.round(-f);
                 
-                head.x = right ? -f * 4 : headOffset - 2 + f * 4;
-                head.y = f * 2;
+                head.x = Math.round(right ? -f * 5 : headOffset - 2 + f * 5);
+                head.y = Math.round(f * 2);
 
                 head.isFacingRight = right;
                 feetController.isFacingRight = right;
-                feetController.turned = f * 2;
+                feetController.turned = Math.round(f * 2);
             }
         });
 
