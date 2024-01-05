@@ -22,6 +22,7 @@ class DisplayObjectComponent {
     constructor(readonly obj: DisplayObject) {
         this._nameEl.textContent = getTypeName(obj);
         this._propertiesEl.textContent = getExtendedPropertyKeysString(obj);
+
         const toggleExpand = this.dom("button", undefined, this._buttonsEl);
         toggleExpand.textContent = "Expand";
         toggleExpand.onclick = () => {
@@ -29,6 +30,15 @@ class DisplayObjectComponent {
             toggleExpand.textContent = this.expanded ? "Collapse" : "Expand";
             this.update();
         }
+
+        if (obj['Throwable']) {
+            const getStack = this.dom("button", undefined, this._buttonsEl);
+            getStack.textContent = "Stack";
+            getStack.onclick = () => {
+                throw obj['Throwable'];   
+            }
+        }
+
         this.update();
     }
 
