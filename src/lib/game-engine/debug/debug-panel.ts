@@ -22,7 +22,9 @@ class DisplayObjectComponent {
     private readonly _infoEl = this.div('info');
     private readonly _childrenEl = this.div('children');
 
-    constructor(readonly obj: DisplayObject) {
+    constructor(readonly obj: DisplayObject, readonly index = 0) {
+        if (index % 2 === 1)
+            this.el.className = 'odd';
         this._nameEl.textContent = getTypeName(obj);
         this._propertiesEl.textContent = getExtendedPropertyKeysString(obj);
 
@@ -84,14 +86,13 @@ class DisplayObjectComponent {
         if (this.expanded && childrenHaveChanged(this.obj, this._objectsDisplayed)) {
             this._objectsDisplayed.clear();
 
-            	
             while (this._childrenEl.firstChild) {
                 this._childrenEl.removeChild(this._childrenEl.firstChild);
             }
 
             for (let i = 0; i < this.obj.children!.length; i++) {
                 const child = this.obj.children![i] as DisplayObject;
-                this._childrenEl.appendChild(new DisplayObjectComponent(child).el);
+                this._childrenEl.appendChild(new DisplayObjectComponent(child, this.index + 1).el);
             }
         }
     }

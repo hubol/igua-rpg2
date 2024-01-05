@@ -394,6 +394,10 @@ noscript {
     position: relative;
 }
 
+.debug_panel .odd > .children {
+    border-left-color: rgb(47, 88, 8);
+}
+
 .debug_panel .children > *::before {
     content: '';
     display: inline-block;
@@ -402,6 +406,10 @@ noscript {
     border-top: solid 1px #776100;
     margin-top: 0.5em;
     margin-left: -1em;
+}
+
+.debug_panel .odd > .children > *::before {
+    border-top-color: rgb(47, 88, 8);
 }
 
 .debug_panel .hidden {
