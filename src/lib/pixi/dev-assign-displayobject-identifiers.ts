@@ -5,6 +5,7 @@ export function devAssignDisplayObjectIdentifiers(constructed: DisplayObject) {
     const [ name, stack ] = getDisplayObjectStack(error);
     constructed['Name'] = name;
     constructed['Stack'] = stack;
+    constructed['Throwable'] = error;
 }
 
 const regex = new RegExp(/(?:Error)?\s+at\s(?:Object\.)?((?:new\s)?[a-zA-Z0-9_\.]*)\s\(.*\)/gm);

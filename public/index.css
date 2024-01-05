@@ -410,7 +410,8 @@ noscript {
 
 .debug_panel .buttons {
     margin-left: 1em;
-    display: inline-block;
+    display: inline-flex;
+    gap: 0.8em;
     visibility: hidden;
 }
 
