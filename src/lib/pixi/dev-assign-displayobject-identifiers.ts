@@ -3,31 +3,48 @@ import { DisplayObject } from "pixi.js";
 export function devAssignDisplayObjectIdentifiers(constructed: DisplayObject) {
     const error = new Error();
     const [ name, stack ] = getDisplayObjectStack(error);
+
+    error.stack = stack;
+
     constructed['Name'] = name;
-    constructed['Stack'] = stack;
     constructed['Throwable'] = error;
 }
 
-const regex = new RegExp(/(?:Error)?\s+at\s(?:Object\.)?((?:new\s)?[a-zA-Z0-9_\.]*)\s\(.*\)/gm);
+const matchFnNameRegExp = new RegExp(/\s+at\s(?:Object\.)?((?:new\s)?[a-zA-Z0-9_\.]*)\s\(.*\)/g);
 
 function getDisplayObjectStack(e: Error) {
-    let current: RegExpExecArray;
-    let stack = '';
+    const stack = e.stack!;
+
+    let result = '';
     let name = '';
 
-    while ((current = regex.exec(e.stack!)!) !== null) {
-        const match = current[1];
+    let index = stack.indexOf('\n');
 
-        if (match === 'devAssignDisplayObjectIdentifiers' || match.startsWith('new _') || match === 'container')
-            continue;
+    while (index > -1) {
+        index += 1;
+        matchFnNameRegExp.lastIndex = index;
+        const current = matchFnNameRegExp.exec(stack);
 
-        if (!name && !match.startsWith('new '))
-            name = match;
+        let fnCallLooksUnimportant = false;
 
-        if (stack)
-            stack += ' < ';
-        stack += match;
+        if (current) {
+            const match = current[1];
+
+            if (match === 'devAssignDisplayObjectIdentifiers' || match.startsWith('new _') || match === 'container')
+                fnCallLooksUnimportant = true;
+
+            if (!name && !fnCallLooksUnimportant && !match.startsWith('new '))
+                name = match;
+        }
+
+        const nextIndex = stack.indexOf('\n', index);
+
+        if (!fnCallLooksUnimportant) {
+            result += stack.substring(index, nextIndex === -1 ? undefined : nextIndex + 1);
+        }
+
+        index = nextIndex;
     }
 
-    return [ name, stack ];
+    return [ name ?? '<No name>', result ? 'GetStackError\n' + result : stack ];
 }
