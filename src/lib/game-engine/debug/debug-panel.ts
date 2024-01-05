@@ -1,5 +1,6 @@
 import { BitmapText, Container, DisplayObject, Graphics, Sprite } from "pixi.js";
 import { AdjustColor } from "../../pixi/adjust-color";
+import { Logging } from "../../logging";
 
 export function createDebugPanel(root: Container) {
     const el = document.createElement('div');
@@ -7,6 +8,8 @@ export function createDebugPanel(root: Container) {
     el.appendChild(new DisplayObjectComponent(root).el);
     return el;
 }
+
+let logObjIndex = 0;
 
 class DisplayObjectComponent {
     expanded = false;
@@ -37,6 +40,18 @@ class DisplayObjectComponent {
             getStack.onclick = () => {
                 throw obj['Throwable'];   
             }
+        }
+
+        const logObj = this.dom("button", undefined, this._buttonsEl);
+        logObj.textContent = "Log";
+        logObj.onclick = () => {
+            while (window['obj' + logObjIndex]) {
+                logObjIndex += 1;
+            }
+
+            const key = 'obj' + logObjIndex;
+            window[key] = obj;
+            console.log(...Logging.componentArgs(key, obj));
         }
 
         this.update();
