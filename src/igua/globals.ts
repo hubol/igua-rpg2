@@ -9,6 +9,7 @@ import { IguaScene, IguaSceneStack } from "./igua-scene-stack";
 import { Collision } from "../lib/pixi/collision";
 import { setDefaultStages } from "../lib/game-engine/default-stages";
 import { devAssignDisplayObjectIdentifiers } from "../lib/pixi/dev-assign-displayobject-identifiers";
+import { createDebugPanel } from "../lib/game-engine/debug/debug-panel";
 
 export let renderer: PixiRenderer;
 
@@ -21,6 +22,8 @@ export let scene: IguaScene;
 export const sceneStack = new IguaSceneStack(layers, (_scene) => scene = _scene);
 
 export function installGlobals(_renderer: PixiRenderer) {
+    // document.body.appendChild(createDebugPanel(rootStage));
+
     renderer = _renderer;
 
     renderer.view.style.opacity = '0';

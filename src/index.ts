@@ -76,7 +76,7 @@ ErrorReporter.announcer = createDomErrorAnnouncer();
 
 function addGameCanvasToDocument(element: HTMLCanvasElement) {
     element.id = "game_canvas";
-    document.body.appendChild(element);
+    document.getElementsByTagName('main')[0].appendChild(element);
 
     return element;
 }
