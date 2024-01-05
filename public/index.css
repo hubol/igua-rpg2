@@ -100,10 +100,15 @@ html {
 body {
     background-color: var(--bg-color);
     display: flex;
+    height: 100%;
+}
+
+main {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    flex-grow: 1;
 }
 
 noscript {
@@ -350,4 +355,55 @@ noscript {
     100% {
       background-position: calc(var(--ant-size) * 2) 0;
     }
-  }
+}
+
+.debug_panel {
+    width: calc(100vw - 100vh);
+    background-color: #1E1E1E;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    padding: 1em;
+    overflow-y: scroll;
+}
+
+.color {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.3em;
+    border: solid 1px #808080;
+}
+
+.debug_panel .name {
+    color: rgb(209, 159, 23);
+}
+
+.debug_panel .info {
+    color: rgb(23, 104, 209);
+}
+
+.debug_panel .properties {
+    color: rgb(135, 23, 209);
+    font-style: italic;
+}
+
+.debug_panel .children {
+    margin-top: 0.3em;
+    padding-left: 1em;
+    border-left: solid 1px #776100;
+    position: relative;
+}
+
+.debug_panel .children > *::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    width: 0.8em;
+    border-top: solid 1px #776100;
+    margin-top: 0.5em;
+    margin-left: -1em;
+}
+
+.debug_panel .hidden {
+    display: none;
+}

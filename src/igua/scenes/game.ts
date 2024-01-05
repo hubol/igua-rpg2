@@ -17,6 +17,7 @@ import { objText } from "../../assets/fonts";
 import { sleep } from "../../lib/game-engine/promise/sleep";
 import { IguanaLooks } from "../iguana/looks";
 import { lerp } from "../../lib/game-engine/promise/lerp";
+import { createDebugPanel } from "../../lib/game-engine/debug/debug-panel";
 
 const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });
 
@@ -214,4 +215,6 @@ export function SceneTest() {
     objText.Small('Hubol was here\nSwag!', { tint: 0xffffff }).at(64, 64).show();
     objText.Large('Hubol was here\nSwag!', { tint: 0xff0040 }).at(48, 96).show();
     objText.MediumDigits('0123456789', { tint: 0xdd7e95 }).at(64, 128).show();
+
+    document.body.appendChild(createDebugPanel(scene.stage));
 }
