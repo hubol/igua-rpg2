@@ -368,10 +368,14 @@ noscript {
 
 .color {
     display: inline-block;
-    width: 1em;
-    height: 1em;
+    width: 0.8em;
+    height: 0.8em;
     margin-right: 0.3em;
     border: solid 1px #808080;
+}
+
+.debug_panel .name_container {
+    padding-top: 0.5em;
 }
 
 .debug_panel .name {
@@ -388,7 +392,6 @@ noscript {
 }
 
 .debug_panel .children {
-    margin-top: 0.3em;
     padding-left: 1em;
     border-left: solid 1px #776100;
     position: relative;
@@ -404,7 +407,7 @@ noscript {
     position: absolute;
     width: 0.8em;
     border-top: solid 1px #776100;
-    margin-top: 0.5em;
+    margin-top: 1.1em;
     margin-left: -1em;
 }
 
