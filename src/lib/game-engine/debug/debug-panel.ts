@@ -9,11 +9,12 @@ export function createDebugPanel(root: Container) {
 }
 
 class DisplayObjectComponent {
-    expanded = true;
+    expanded = false;
     readonly el = document.createElement('div');
     private readonly _nameContainerEl = this.div('name_container');
     private readonly _colorEl = this.dom('span', 'color', this._nameContainerEl);
     private readonly _nameEl = this.dom('span', 'name', this._nameContainerEl);
+    private readonly _buttonsEl = this.div('buttons', this._nameContainerEl);
     private readonly _propertiesEl = this.div('properties');
     private readonly _infoEl = this.div('info');
     private readonly _childrenEl = this.div('children');
@@ -21,10 +22,17 @@ class DisplayObjectComponent {
     constructor(readonly obj: DisplayObject) {
         this._nameEl.textContent = getTypeName(obj);
         this._propertiesEl.textContent = getExtendedPropertyKeysString(obj);
+        const toggleExpand = this.dom("button", undefined, this._buttonsEl);
+        toggleExpand.textContent = "Expand";
+        toggleExpand.onclick = () => {
+            this.expanded = !this.expanded;
+            toggleExpand.textContent = this.expanded ? "Collapse" : "Expand";
+            this.update();
+        }
         this.update();
     }
 
-    private div(className?: string, target = this.el) {
+    private div(className?: string, target: HTMLElement = this.el) {
         return this.dom("div", className, target);
     }
 
@@ -50,6 +58,11 @@ class DisplayObjectComponent {
 
         if (this.expanded && childrenHaveChanged(this.obj, this._objectsDisplayed)) {
             this._objectsDisplayed.clear();
+
+            	
+            while (this._childrenEl.firstChild) {
+                this._childrenEl.removeChild(this._childrenEl.firstChild);
+            }
 
             for (let i = 0; i < this.obj.children!.length; i++) {
                 const child = this.obj.children![i] as DisplayObject;
