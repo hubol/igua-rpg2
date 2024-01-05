@@ -10,7 +10,7 @@ export function devAssignDisplayObjectIdentifiers(constructed: DisplayObject) {
     constructed['Throwable'] = error;
 }
 
-const matchFnNameRegExp = new RegExp(/\s+at\s(?:Object\.)?((?:new\s)?[a-zA-Z0-9_\.]*)\s\(.*\)/g);
+const matchFnNameRegExp = new RegExp(/\s+at\s(?:Object\.)?((?:new\s)?[a-zA-Z0-9_\.]*)\s\(.*\)/y);
 
 function getDisplayObjectStack(e: Error) {
     const stack = e.stack!;
@@ -33,8 +33,9 @@ function getDisplayObjectStack(e: Error) {
             if (match === 'devAssignDisplayObjectIdentifiers' || match.startsWith('new _') || match === 'container')
                 fnCallLooksUnimportant = true;
 
-            if (!name && !fnCallLooksUnimportant && !match.startsWith('new '))
-                name = match;
+            if ((!name || name.startsWith('Array.')) && !fnCallLooksUnimportant && !match.startsWith('new ')) {
+                name = match + (name ? ' ' : '') + name;
+            }
         }
 
         const nextIndex = stack.indexOf('\n', index);
