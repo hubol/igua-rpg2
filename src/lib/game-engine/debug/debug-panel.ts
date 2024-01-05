@@ -98,22 +98,6 @@ class DisplayObjectComponent {
     }
 }
 
-function traverseAndUpdate(c: DisplayObjectComponent) {
-
-}
-
-class DisplayObjectStateComponent {
-    readonly el = document.createElement('el');
-
-    constructor() {
-
-    }
-
-    update() {
-
-    }
-}
-
 function childrenHaveChanged(obj: DisplayObject, objectsDisplayed: Set<DisplayObject>) {
     if (!obj.children)
         return false;
