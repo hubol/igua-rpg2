@@ -7,7 +7,7 @@ export function devAssignDisplayObjectIdentifiers(constructed: DisplayObject) {
     error.stack = stack;
 
     constructed['Name'] = name;
-    constructed['Throwable'] = error;
+    constructed['Stack'] = stack;
 }
 
 const matchFnNameRegExp = new RegExp(/\s+at\s(?:Object\.)?((?:new\s)?[a-zA-Z0-9_\.]*)\s\(.*\)/y);

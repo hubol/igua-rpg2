@@ -36,12 +36,10 @@ class DisplayObjectComponent {
             this.update();
         }
 
-        if (obj['Throwable']) {
+        if (obj['Stack']) {
             const getStack = this.dom("button", undefined, this._buttonsEl);
             getStack.textContent = "Stack";
-            getStack.onclick = () => {
-                throw obj['Throwable'];   
-            }
+            getStack.onclick = () => console.warn(obj['Stack']);
         }
 
         const logObj = this.dom("button", undefined, this._buttonsEl);
