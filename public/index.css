@@ -407,3 +407,22 @@ noscript {
 .debug_panel .hidden {
     display: none;
 }
+
+.debug_panel .buttons {
+    margin-left: 1em;
+    display: inline-block;
+    visibility: hidden;
+}
+
+.debug_panel .buttons button {
+    border-radius: 2px;
+    text-decoration: underline;
+    border: none;
+    background: none;
+    color: white;
+    cursor: pointer;
+}
+
+*:hover > .buttons {
+    visibility: visible;
+}
