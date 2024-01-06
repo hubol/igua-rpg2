@@ -1,5 +1,5 @@
 .vscode/**/*
-!.vscode/**/*.default
+!.vscode/**/*.default.*
 !.vscode/**/README.md
 
 dist/
