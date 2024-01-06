@@ -423,7 +423,7 @@ noscript {
     border-top-color: rgb(47, 88, 8);
 }
 
-.debug_panel .hidden {
+.debug_panel .hidden, .debug_panel.hidden {
     display: none;
 }
 
