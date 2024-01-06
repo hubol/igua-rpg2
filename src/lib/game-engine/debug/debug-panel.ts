@@ -14,13 +14,14 @@ let logObjIndex = 0;
 class DisplayObjectComponent {
     expanded = false;
     readonly el = document.createElement('div');
-    private readonly _nameContainerEl = this.div('name_container');
+    private readonly _headerEl = this.div('header');
+    private readonly _nameContainerEl = this.div('name_container', this._headerEl);
     private readonly _colorEl = this.dom('span', 'color', this._nameContainerEl);
     private readonly _nameEl = this.dom('span', 'name', this._nameContainerEl);
     private readonly _typeEl = this.dom('span', 'type', this._nameContainerEl);
     private readonly _buttonsEl = this.div('buttons', this._nameContainerEl);
-    private readonly _propertiesEl = this.div('properties');
-    private readonly _infoEl = this.div('info');
+    private readonly _propertiesEl = this.div('properties', this._headerEl);
+    private readonly _infoEl = this.div('info', this._headerEl);
     private readonly _childrenEl = this.div('children');
 
     constructor(readonly obj: DisplayObject, readonly index = 0) {

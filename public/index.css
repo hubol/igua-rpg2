@@ -375,7 +375,6 @@ noscript {
 }
 
 .debug_panel .name_container {
-    padding-top: 0.5em;
     color: rgb(209, 159, 23);
 }
 
@@ -400,6 +399,7 @@ noscript {
 
 .debug_panel .children {
     padding-left: 1em;
+    padding-top: 0.3em;
     margin-left: 0.2em;
     border-left: solid 1px #776100;
     position: relative;
@@ -415,7 +415,7 @@ noscript {
     position: absolute;
     width: 0.8em;
     border-top: solid 1px #776100;
-    margin-top: 1.1em;
+    margin-top: 0.8em;
     margin-left: -1em;
 }
 
@@ -443,6 +443,19 @@ noscript {
     cursor: pointer;
 }
 
-*:hover > .buttons {
+.debug_panel .header {
+    padding: 0.2em 0 0.2em 0.4em;
+    margin-top: 0.3em;
+}
+
+.debug_panel .children > *:first-child .header {
+    margin-top: 0;
+}
+
+.debug_panel .header:hover {
+    background-color: #ffffff10;
+}
+
+.debug_panel .header:hover .buttons {
     visibility: visible;
 }
