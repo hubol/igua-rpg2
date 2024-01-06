@@ -3,6 +3,7 @@ import { AdjustColor } from "../../pixi/adjust-color";
 import { Logging } from "../../logging";
 import { container } from "../../pixi/container";
 import { Undefined } from "../../types/undefined";
+import { TickerContainer } from "../ticker-container";
 
 export function createDebugPanel(root: Container) {
     if (displayObjectMonitor)
@@ -181,7 +182,7 @@ const getTypeInformationString = (obj: DisplayObject) => {
     if (obj.children) {
         const length = obj.children!.length;
 
-        if (length > 0 || !(obj instanceof Container)) {
+        if (length > 0 || obj.constructor === Container || obj.constructor === TickerContainer) {
             if (length === 1)
                 string += '1 child';
             else
@@ -265,7 +266,3 @@ const getExtendedPropertyKeysString = (() => {
         return string;
     };
 })();
-
-export const DebugPanel = {
-    
-};
