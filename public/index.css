@@ -376,10 +376,17 @@ noscript {
 
 .debug_panel .name_container {
     padding-top: 0.5em;
+    color: rgb(209, 159, 23);
+}
+
+.debug_panel .type {
+    font-size: 75%;
+    opacity: 75%;
 }
 
 .debug_panel .name {
-    color: rgb(209, 159, 23);
+    font-weight: bold;
+    margin-right: 0.5em;
 }
 
 .debug_panel .info {
@@ -393,6 +400,7 @@ noscript {
 
 .debug_panel .children {
     padding-left: 1em;
+    margin-left: 0.2em;
     border-left: solid 1px #776100;
     position: relative;
 }
@@ -420,8 +428,8 @@ noscript {
 }
 
 .debug_panel .buttons {
-    margin-left: 1em;
     display: inline-flex;
+    margin-left: 0.8em;
     gap: 0.8em;
     visibility: hidden;
 }

@@ -17,6 +17,7 @@ class DisplayObjectComponent {
     private readonly _nameContainerEl = this.div('name_container');
     private readonly _colorEl = this.dom('span', 'color', this._nameContainerEl);
     private readonly _nameEl = this.dom('span', 'name', this._nameContainerEl);
+    private readonly _typeEl = this.dom('span', 'type', this._nameContainerEl);
     private readonly _buttonsEl = this.div('buttons', this._nameContainerEl);
     private readonly _propertiesEl = this.div('properties');
     private readonly _infoEl = this.div('info');
@@ -25,7 +26,8 @@ class DisplayObjectComponent {
     constructor(readonly obj: DisplayObject, readonly index = 0) {
         if (index % 2 === 1)
             this.el.className = 'odd';
-        this._nameEl.textContent = getTypeName(obj);
+        this._typeEl.textContent = getType(obj);
+        this._nameEl.textContent = getName(obj);
         this._propertiesEl.textContent = getExtendedPropertyKeysString(obj);
 
         const toggleExpand = this.dom("button", undefined, this._buttonsEl);
@@ -112,7 +114,7 @@ function childrenHaveChanged(obj: DisplayObject, objectsDisplayed: Set<DisplayOb
     return false;
 }
 
-function getFriendlyConstructorName(obj: DisplayObject) {
+function getType(obj: DisplayObject) {
     return constructorName.get(obj.constructor) ?? obj.constructor.name;
 }
 
@@ -122,8 +124,8 @@ constructorName.set(Sprite, 'Sprite');
 constructorName.set(Graphics, 'Graphics');
 constructorName.set(BitmapText, 'BitmapText');
 
-function getTypeName(obj: DisplayObject) {
-    return getFriendlyConstructorName(obj) + ' ' + obj["Name"];
+function getName(obj: DisplayObject) {
+    return obj["Name"] ?? '?';
 }
 
 const getTypeInformationString = (obj: DisplayObject) => {
