@@ -216,5 +216,5 @@ export function SceneTest() {
     objText.Large('Hubol was here\nSwag!', { tint: 0xff0040 }).at(48, 96).show();
     objText.MediumDigits('0123456789', { tint: 0xdd7e95 }).at(64, 128).show();
 
-    document.body.appendChild(createDebugPanel(scene.stage));
+    // document.body.appendChild(createDebugPanel(scene.stage));
 }

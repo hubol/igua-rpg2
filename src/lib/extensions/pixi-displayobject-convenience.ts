@@ -5,12 +5,19 @@ import { merge } from "../object/merge";
 
 declare module "pixi.js" {
     interface DisplayObject {
+        named(name: string): this;
         show(container?: Container): this;
         merge<T extends Pojo>(t: T): this & T;
     }
 }
 
 Object.defineProperties(DisplayObject.prototype, {
+    named: {
+        value: function (this: DisplayObject, name: string) {
+            this['ExplicitName'] = name;
+            return this;
+        },
+    },
     show: {
         value: function (this: DisplayObject, container = DefaultStages.show) {
             container.addChild(this);
