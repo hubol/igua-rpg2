@@ -127,12 +127,12 @@ class DisplayObjectComponent {
         return el;
     }
 
-    private readonly _objectsDisplayed = new Set<DisplayObject>();
-
     static i = 0;
 
-    update() {DisplayObjectComponent.i += 1;
-        console.time('update' + DisplayObjectComponent.i);
+    update() {
+        DisplayObjectComponent.i += 1;
+        const key = 'update' + DisplayObjectComponent.i;
+        console.time(key);
 
         const color = getTintCssColor(this.obj);
         this._colorEl.classList[color ? 'remove' : 'add']('hidden');
@@ -143,9 +143,8 @@ class DisplayObjectComponent {
 
         this._childrenEl.classList[this.expanded ? 'remove' : 'add']('hidden');
 
-        if (this.expanded && childrenHaveChanged(this.obj, this._objectsDisplayed)) {
-            console.timeLog('update' + DisplayObjectComponent.i, 'childrenHaveChanged');
-            this._objectsDisplayed.clear();
+        if (this.expanded) {
+            console.timeLog(key, 'childrenHaveChanged');
 
             while (this._childrenEl.firstChild) {
                 this._childrenEl.removeChild(this._childrenEl.firstChild);
@@ -153,30 +152,13 @@ class DisplayObjectComponent {
 
             for (let i = 0; i < this.obj.children!.length; i++) {
                 const child = this.obj.children![i] as DisplayObject;
-                this._objectsDisplayed.add(child);
                 const component = displayObjects.get(child) ?? new DisplayObjectComponent(child, this.index + 1);
                 this._childrenEl.appendChild(component.el);
             }
         }
 
-        console.timeEnd('update' + DisplayObjectComponent.i);
+        console.timeEnd(key);
     }
-}
-
-function childrenHaveChanged(obj: DisplayObject, objectsDisplayed: Set<DisplayObject>) {
-    if (!obj.children)
-        return false;
-
-    if (objectsDisplayed.size !== obj.children.length)
-        return true;
-
-    for (let i = 0; i < obj.children.length; i++) {
-        const child = obj.children[i] as DisplayObject;
-        if (!objectsDisplayed.has(child))
-            return true;
-    }
-
-    return false;
 }
 
 function getType(obj: DisplayObject) {
