@@ -5,10 +5,14 @@ import { container } from "../../pixi/container";
 import { Undefined } from "../../types/undefined";
 
 export function createDebugPanel(root: Container) {
+    if (displayObjectMonitor)
+        throw new Error("Multiple calls to createDebugPanel() detected!");
+    
+    displayObjectMonitor = objDisplayObjectMonitor().show(root);
+
     const el = document.createElement('div');
     el.className = 'debug_panel';
     el.appendChild(new DisplayObjectComponent(root).el);
-    objDisplayObjectMonitor().show(root);
     return el;
 }
 
@@ -43,6 +47,8 @@ function objDisplayObjectMonitor() {
     return c;
 }
 
+let displayObjectMonitor: ReturnType<typeof objDisplayObjectMonitor>;
+
 let logObjIndex = 0;
 
 class DisplayObjectComponent {
@@ -64,6 +70,14 @@ class DisplayObjectComponent {
         this._typeEl.textContent = getType(obj);
         this._nameEl.textContent = getName(obj);
         this._propertiesEl.textContent = getExtendedPropertyKeysString(obj);
+
+        this._headerEl.onmouseenter = () => {
+            displayObjectMonitor.track(obj);
+        };
+
+        this._headerEl.onmouseleave = () => {
+            displayObjectMonitor.clear(obj);
+        };
 
         const toggleExpand = this.dom("button", undefined, this._buttonsEl);
         toggleExpand.textContent = "Expand";
