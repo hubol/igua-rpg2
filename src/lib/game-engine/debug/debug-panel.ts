@@ -51,7 +51,7 @@ let displayObjectMonitor: ReturnType<typeof objDisplayObjectMonitor>;
 
 let logObjIndex = 0;
 
-const displayObjects = new WeakMap<DisplayObject, DisplayObjectComponent>();
+const displayObjectComponents = new WeakMap<DisplayObject, DisplayObjectComponent>();
 
 class DisplayObjectComponent {
     expanded = false;
@@ -67,7 +67,7 @@ class DisplayObjectComponent {
     private readonly _childrenEl = this.div('children');
 
     constructor(readonly obj: DisplayObject, readonly index = 0) {
-        displayObjects.set(obj, this);
+        displayObjectComponents.set(obj, this);
         if (index % 2 === 1)
             this.el.className = 'odd';
         this._typeEl.textContent = getType(obj);
@@ -108,7 +108,7 @@ class DisplayObjectComponent {
             console.log(...Logging.componentArgs(key, obj));
         }
 
-        obj.once('destroyed', () => displayObjects.delete(obj));
+        obj.once('destroyed', () => displayObjectComponents.delete(obj));
         obj.on('childAdded', () => this.update());
         obj.on('childRemoved', () => this.update());
 
@@ -130,10 +130,6 @@ class DisplayObjectComponent {
     static i = 0;
 
     update() {
-        DisplayObjectComponent.i += 1;
-        const key = 'update' + DisplayObjectComponent.i;
-        console.time(key);
-
         const color = getTintCssColor(this.obj);
         this._colorEl.classList[color ? 'remove' : 'add']('hidden');
         if (color)
@@ -143,21 +139,25 @@ class DisplayObjectComponent {
 
         this._childrenEl.classList[this.expanded ? 'remove' : 'add']('hidden');
 
-        if (this.expanded) {
-            console.timeLog(key, 'childrenHaveChanged');
-
-            while (this._childrenEl.firstChild) {
-                this._childrenEl.removeChild(this._childrenEl.firstChild);
-            }
-
+        if (this.expanded && this.obj.children) {
             for (let i = 0; i < this.obj.children!.length; i++) {
-                const child = this.obj.children![i] as DisplayObject;
-                const component = displayObjects.get(child) ?? new DisplayObjectComponent(child, this.index + 1);
-                this._childrenEl.appendChild(component.el);
+                const childObj = this.obj.children![i] as DisplayObject;
+                const component = displayObjectComponents.get(childObj) ?? new DisplayObjectComponent(childObj, this.index + 1);
+
+                const childNode = this._childrenEl.childNodes[i];
+                if (childNode === component.el)
+                    continue;
+
+                if (component.el.isConnected)
+                    component.el.remove();
+                if (childNode) {
+                    childNode.before(component.el);
+                    childNode.remove();
+                }
+                else
+                    this._childrenEl.appendChild(component.el);
             }
         }
-
-        console.timeEnd(key);
     }
 }
 
@@ -260,7 +260,6 @@ const getExtendedPropertyKeysString = (() => {
                 continue;
             if (string)
                 string += ', ';
-            // string += '"' + key + '"';
             string += key;
         }
         return string;
