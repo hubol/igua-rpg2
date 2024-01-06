@@ -7,7 +7,7 @@ import { Undefined } from "../../types/undefined";
 export function createDebugPanel(root: Container) {
     if (displayObjectMonitor)
         throw new Error("Multiple calls to createDebugPanel() detected!");
-    
+
     displayObjectMonitor = objDisplayObjectMonitor().show(root);
 
     const el = document.createElement('div');
@@ -174,7 +174,7 @@ constructorName.set(Graphics, 'Graphics');
 constructorName.set(BitmapText, 'BitmapText');
 
 function getName(obj: DisplayObject) {
-    return obj["ExplicitName"] ?? obj["Name"] ?? '?';
+    return obj.name ?? obj["Name"] ?? '?';
 }
 
 const getTypeInformationString = (obj: DisplayObject) => {
@@ -252,7 +252,7 @@ const getExtendedPropertyKeysString = (() => {
         "_resolution", "_autoResolution", "_textureCache",
         // Asshat
         "_ticker", "cancellationToken", "_collisionShape", "_collisionShapeDisplayObjects",
-        "Name", "Stack", "ExplicitName",
+        "Name", "Stack",
     ]);
 
     return (obj: DisplayObject) => {

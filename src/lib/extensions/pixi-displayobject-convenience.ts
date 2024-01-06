@@ -14,7 +14,7 @@ declare module "pixi.js" {
 Object.defineProperties(DisplayObject.prototype, {
     named: {
         value: function (this: DisplayObject, name: string) {
-            this['ExplicitName'] = name;
+            this.name = name;
             return this;
         },
     },
