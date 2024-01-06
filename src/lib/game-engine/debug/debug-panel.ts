@@ -12,8 +12,11 @@ export function createDebugPanel(root: Container) {
     displayObjectMonitor = objDisplayObjectMonitor().show(root);
 
     const el = document.createElement('div');
-    el.className = 'debug_panel';
+    el.className = 'debug_panel hidden';
     el.appendChild(new DisplayObjectComponent(root).el);
+
+    document.addEventListener("keydown", ({ code }) => code === 'F9' && el.classList.toggle('hidden'));
+
     return el;
 }
 
