@@ -358,7 +358,8 @@ noscript {
 }
 
 .debug_panel {
-    width: calc(100vw - 100vh);
+    width: 100%;
+    max-width: 700px;
     background-color: #1E1E1E;
     font-family: "JetBrains Mono", monospace;
     font-size: 14px;
@@ -366,7 +367,24 @@ noscript {
     overflow-y: scroll;
 }
 
-.color {
+@media (max-width: 1400px) {
+    .debug_panel {
+        flex-grow: 2;
+    }
+}
+
+@media (max-width: 1200px) {
+    body {
+        flex-direction: column;
+    }
+
+    .debug_panel {
+        max-width: unset;
+        width: unset;
+    }
+}
+
+.debug_panel .color {
     display: inline-block;
     width: 0.8em;
     height: 0.8em;
