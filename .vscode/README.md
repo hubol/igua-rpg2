@@ -9,8 +9,8 @@ Relevant articles:
 - Should I commit the .vscode folder to source control? https://stackoverflow.com/a/57749909
 - IDEs complain about VSCode .json configuration files actually being JSONC https://github.com/microsoft/vscode/issues/189385
 
-## settings.json.default
-The primary motivation for configurations in **settings.json.default** is to ensure that VSCode uses an appropriate version of TypeScript for this project.
+## settings.default.json
+The primary motivation for configurations in **settings.default.json** is to ensure that VSCode uses an appropriate version of TypeScript for this project.
 There is a bizarre PixiJS compilation error that I received when using the VSCode default TypeScript version of 5.0.4.
 
 Relevant articles:
