@@ -36,7 +36,7 @@ function objDisplayObjectMonitor() {
 
     const gfx = new Graphics().step(() => {
         gfx.clear();
-        if (!displayObject)
+        if (!displayObject || displayObject.destroyed)
             return;
 
         displayObject.getBounds(false, r);
