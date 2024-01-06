@@ -36,6 +36,7 @@ export class LazyTicker implements IAsshatTicker {
 
     push(lazyTicker: LazyTicker) {
         this._queuedCalls.push(...lazyTicker._queuedCalls);
+        this._receivers.push(...lazyTicker._receivers);
     }
 
     resolve(ticker: AsshatTicker) {

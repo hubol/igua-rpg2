@@ -1,10 +1,15 @@
 import {RenderTexture, Texture} from "pixi.js";
 import { TextureProcessing } from ".";
 
-const canvas = document.createElement('canvas');
-const context = canvas.getContext('2d', { willReadFrequently: true })!;
+let canvas: HTMLCanvasElement;
+let context: CanvasRenderingContext2D;
 
 TextureProcessing.toRgbaArray = function textureToRgbaArray(texture: Texture) {
+    if (!canvas) {
+        canvas = document.createElement('canvas');
+        context = canvas.getContext('2d', { willReadFrequently: true })!;
+    }
+
     if (texture instanceof RenderTexture) {
         throw new Error('textureToRgbaArray does not support RenderTexture');
     }
