@@ -131,8 +131,6 @@ class DisplayObjectComponent {
         return el;
     }
 
-    static i = 0;
-
     update() {
         const color = getTintCssColor(this.obj);
         this._colorEl.classList[color ? 'remove' : 'add']('hidden');
@@ -148,8 +146,8 @@ class DisplayObjectComponent {
                 while (this._childrenEl.firstChild)
                     this._childrenEl.firstChild.remove();
             }
-            for (let i = 0; i < this.obj.children!.length; i++) {
-                const childObj = this.obj.children![i] as DisplayObject;
+            for (let i = 0; i < this.obj.children.length; i++) {
+                const childObj = this.obj.children[i] as DisplayObject;
                 const component = displayObjectComponents.get(childObj) ?? new DisplayObjectComponent(childObj, this.index + 1);
 
                 const childNode = this._childrenEl.childNodes[i];
