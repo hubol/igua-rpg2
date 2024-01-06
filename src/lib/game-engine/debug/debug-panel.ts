@@ -51,6 +51,8 @@ let displayObjectMonitor: ReturnType<typeof objDisplayObjectMonitor>;
 
 let logObjIndex = 0;
 
+const displayObjects = new WeakMap<DisplayObject, DisplayObjectComponent>();
+
 class DisplayObjectComponent {
     expanded = false;
     readonly el = document.createElement('div');
@@ -65,6 +67,7 @@ class DisplayObjectComponent {
     private readonly _childrenEl = this.div('children');
 
     constructor(readonly obj: DisplayObject, readonly index = 0) {
+        displayObjects.set(obj, this);
         if (index % 2 === 1)
             this.el.className = 'odd';
         this._typeEl.textContent = getType(obj);
@@ -105,6 +108,10 @@ class DisplayObjectComponent {
             console.log(...Logging.componentArgs(key, obj));
         }
 
+        obj.once('destroyed', () => displayObjects.delete(obj));
+        obj.on('childAdded', () => this.update());
+        obj.on('childRemoved', () => this.update());
+
         this.update();
     }
 
@@ -122,7 +129,11 @@ class DisplayObjectComponent {
 
     private readonly _objectsDisplayed = new Set<DisplayObject>();
 
-    update() {
+    static i = 0;
+
+    update() {DisplayObjectComponent.i += 1;
+        console.time('update' + DisplayObjectComponent.i);
+
         const color = getTintCssColor(this.obj);
         this._colorEl.classList[color ? 'remove' : 'add']('hidden');
         if (color)
@@ -133,6 +144,7 @@ class DisplayObjectComponent {
         this._childrenEl.classList[this.expanded ? 'remove' : 'add']('hidden');
 
         if (this.expanded && childrenHaveChanged(this.obj, this._objectsDisplayed)) {
+            console.timeLog('update' + DisplayObjectComponent.i, 'childrenHaveChanged');
             this._objectsDisplayed.clear();
 
             while (this._childrenEl.firstChild) {
@@ -141,9 +153,13 @@ class DisplayObjectComponent {
 
             for (let i = 0; i < this.obj.children!.length; i++) {
                 const child = this.obj.children![i] as DisplayObject;
-                this._childrenEl.appendChild(new DisplayObjectComponent(child, this.index + 1).el);
+                this._objectsDisplayed.add(child);
+                const component = displayObjects.get(child) ?? new DisplayObjectComponent(child, this.index + 1);
+                this._childrenEl.appendChild(component.el);
             }
         }
+
+        console.timeEnd('update' + DisplayObjectComponent.i);
     }
 }
 
