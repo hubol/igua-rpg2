@@ -1,4 +1,3 @@
-import { Container } from "pixi.js";
 import { KeyListener } from "../lib/browser/key";
 import { Animator } from "../lib/game-engine/animator";
 import { AsshatTicker } from "../lib/game-engine/asshat-ticker";
@@ -10,19 +9,21 @@ import { Collision } from "../lib/pixi/collision";
 import { setDefaultStages } from "../lib/game-engine/default-stages";
 import { devAssignDisplayObjectIdentifiers } from "../lib/pixi/dev-assign-displayobject-identifiers";
 import { createDebugPanel } from "../lib/game-engine/debug/debug-panel";
+import { TickerContainer } from "../lib/game-engine/ticker-container";
 
 export let renderer: PixiRenderer;
 
 globalThis.onDisplayObjectConstructed = devAssignDisplayObjectIdentifiers;
 
-const rootStage = new Container();
+const rootTicker = new AsshatTicker();
+const rootStage = new TickerContainer(rootTicker).named("Root");
 const layers = new IguaLayers(rootStage);
 
 export let scene: IguaScene;
 export const sceneStack = new IguaSceneStack(layers, (_scene) => scene = _scene);
 
 export function installGlobals(_renderer: PixiRenderer) {
-    // document.body.appendChild(createDebugPanel(rootStage));
+    document.body.appendChild(createDebugPanel(rootStage));
 
     renderer = _renderer;
 
@@ -43,6 +44,7 @@ export function installGlobals(_renderer: PixiRenderer) {
         AsshatZoneDiagnostics.printHandledCancellationErrors();
         KeyListener.advance();
         scene?.ticker.tick();
+        rootTicker.tick();
         Collision.recycleRectangles();
     });
 

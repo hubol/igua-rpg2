@@ -1,12 +1,46 @@
-import { BitmapText, Container, DisplayObject, Graphics, Sprite } from "pixi.js";
+import { BitmapText, Container, DisplayObject, Graphics, ILineStyleOptions, Rectangle, Sprite } from "pixi.js";
 import { AdjustColor } from "../../pixi/adjust-color";
 import { Logging } from "../../logging";
+import { container } from "../../pixi/container";
+import { Undefined } from "../../types/undefined";
 
 export function createDebugPanel(root: Container) {
     const el = document.createElement('div');
     el.className = 'debug_panel';
     el.appendChild(new DisplayObjectComponent(root).el);
+    objDisplayObjectMonitor().show(root);
     return el;
+}
+
+function objDisplayObjectMonitor() {
+    let displayObject = Undefined<DisplayObject>();
+
+    const c = container().merge({
+        track(obj: DisplayObject) {
+            displayObject = obj;
+        },
+        clear(obj: DisplayObject) {
+            if (displayObject === obj)
+                displayObject = undefined;
+        }
+    });
+
+    const r = new Rectangle();
+
+    const innerStyle: ILineStyleOptions = { width: 1, color: 0xffffff, alignment: 1 };
+    const outerStyle: ILineStyleOptions = { width: 1, color: 0x000000, alignment: 1 };
+
+    const gfx = new Graphics().step(() => {
+        gfx.clear();
+        if (!displayObject)
+            return;
+
+        displayObject.getBounds(false, r);
+        gfx.lineStyle(innerStyle).drawRect(r.x, r.y, r.width, r.height)
+            .lineStyle(outerStyle).drawRect(r.x - 1, r.y - 1, r.width + 2, r.height + 2);
+    }).show(c);
+
+    return c;
 }
 
 let logObjIndex = 0;
@@ -126,7 +160,7 @@ constructorName.set(Graphics, 'Graphics');
 constructorName.set(BitmapText, 'BitmapText');
 
 function getName(obj: DisplayObject) {
-    return obj["Name"] ?? '?';
+    return obj["ExplicitName"] ?? obj["Name"] ?? '?';
 }
 
 const getTypeInformationString = (obj: DisplayObject) => {
@@ -179,7 +213,7 @@ const getExtendedPropertyKeysString = (() => {
         ...Object.keys(new Container()),
         ...Object.keys(new Graphics()),
         ...Object.keys(new Sprite()),
-        "Name", "Stack", "containerUpdateTransform", "getChildByName",
+        "containerUpdateTransform", "getChildByName",
         "displayObjectUpdateTransform", "_cacheAsBitmap", "_cacheData",
         "_cacheAsBitmapResolution", "_cacheAsBitmapMultisample", "_renderCached",
         "_initCachedDisplayObject", "_renderCachedCanvas", "_initCachedDisplayObjectCanvas",
@@ -204,6 +238,7 @@ const getExtendedPropertyKeysString = (() => {
         "_resolution", "_autoResolution", "_textureCache",
         // Asshat
         "_ticker", "cancellationToken", "_collisionShape", "_collisionShapeDisplayObjects",
+        "Name", "Stack", "ExplicitName",
     ]);
 
     return (obj: DisplayObject) => {
