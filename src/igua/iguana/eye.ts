@@ -4,6 +4,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { Rng } from "../../lib/math/rng";
 import { objSpriteCopy } from "./copy-sprite";
 import { nlerp } from "../../lib/math/number";
+import { Integer, Unit } from "../../lib/math/number-alias-types";
 
 const r = new Rectangle();
 
@@ -11,7 +12,7 @@ export function objEye(
         scleraSpr: Sprite,
         pupilSpr: Sprite,
         eyelidTint: number,
-        eyelidRestingInteger: number) {
+        eyelidRestingInteger: Integer) {
     const scleraTx = scleraSpr.texture;
 
     const mask = objSpriteCopy(scleraSpr);
@@ -27,7 +28,7 @@ export function objEye(
     const eyelidRestingScale = Math.abs(eyelidRestingInteger) / scleraTx.height;
 
     const c = container(mask, scleraSpr, pupilSpr, eyelid)
-        .merge({ closed: 0, look: vnew(), shapeObj: mask })
+        .merge({ closed: 0 as Unit, look: vnew(), shapeObj: mask })
         .step(() => {
             eyelid.scale.y = nlerp(eyelidRestingScale, 1, c.closed);
         })
@@ -42,7 +43,7 @@ type ObjEye = ReturnType<typeof objEye>;
 export function objEyes(left: ObjEye, right: ObjEye) {
     // TODO handle looking in directions!
     const c = container(left, right)
-        .merge({ stepsUntilBlink: -1, closed: -1, eyelidMotion: 0, left, right })
+        .merge({ stepsUntilBlink: -1 as Integer, closed: -1 as Unit, eyelidMotion: 0 as Integer, left, right })
         .step(() => {
             if (c.eyelidMotion === 0 && c.stepsUntilBlink > 0) {
                 if (--c.stepsUntilBlink === 0) {

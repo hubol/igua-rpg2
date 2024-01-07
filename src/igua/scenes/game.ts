@@ -10,7 +10,7 @@ import { WarningToast } from "../../lib/game-engine/warning-toast";
 import { container } from "../../lib/pixi/container";
 import { PseudoRng, Rng } from "../../lib/math/rng";
 import { getDefaultLooks } from "../iguana/get-default-looks";
-import { makeIguanaPuppetArgsFromLooks, objIguanaHead } from "../iguana/make-iguana-puppet-args-from-looks";
+import { objIguanaPuppet, objIguanaHead } from "../iguana/make-iguana-puppet-args-from-looks";
 import { iguanaPuppet } from "../iguana/iguana-puppet";
 import { TextureToGraphicsConverter } from "../../lib/pixi/texture-to-graphics-converter";
 import { objText } from "../../assets/fonts";
@@ -178,7 +178,7 @@ export function SceneTest() {
 
         modifyLooksFn(looks);
 
-        const iguana = makeIguanaPuppetArgsFromLooks(looks)
+        const iguana = objIguanaPuppet(looks)
             .async(async () => {
                 while (true) {
                     await sleep(700);

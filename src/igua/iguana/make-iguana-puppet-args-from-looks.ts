@@ -7,6 +7,7 @@ import { IguanaLooks } from "./looks";
 import { objEye, objEyes } from "./eye";
 import { Rng } from "../../lib/math/rng";
 import { Force } from "../../lib/types/force";
+import { Polar, Unit, ZeroOrGreater } from "../../lib/math/number-alias-types";
 
 function showPivot<TContainer extends Container>(c: TContainer, color = 0x00ff00) {
     c.addChild(new Graphics().beginFill(color).drawRect(0, 0, 1, 1));
@@ -43,7 +44,7 @@ function getFlippableOffsetX(src: DisplayObject | undefined, dst: DisplayObject,
     return sign * c;
 }
 
-export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
+export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     const { back, front, controller: feetController, feet } = objIguanaFeet(looks.feet);
     const body = objIguanaBody(looks.body);
     const head = objIguanaHead(looks.head);
@@ -51,7 +52,7 @@ export function makeIguanaPuppetArgsFromLooks(looks: IguanaLooks.Serializable) {
 
     const headOffset = getFlippableOffsetX(head.noggin, body.torso);
 
-    let facing = 1;
+    let facing: Polar = 1;
 
     const c = container(back, body, head, front)
         .merge({ body, feet })
@@ -157,7 +158,7 @@ function objIguanaFeet(feet: Feet) {
     const hindRight = backHindRight.transform.position = frontHindRight.transform.position;
 
     let isFacingRight = Force<boolean>();
-    let turned = 0;
+    let turned: ZeroOrGreater = 0;
 
     const controller = {
         get isFacingRight() {
@@ -247,15 +248,15 @@ function objIguanaMouth(head: Head) {
         .add(13, i - 2).add(head.mouth.placement)
         .flipV(flipV));
 
-    let agapeUnit = 0;
+    let agape: Unit = 0;
 
     const c = container(...mouths)
         .merge({
-            get agapeUnit() {
-                return agapeUnit;
+            get agape() {
+                return agape;
             },
-            set agapeUnit(value: number) {
-                agapeUnit = value;
+            set agape(value) {
+                agape = value;
                 const index = Math.floor(Math.max(0, Math.min(2, value * 3)));
                 for (let i = 0; i < mouths.length; i++) {
                     mouths[mouthAgapeAnimationIndices[i]].visible = index >= i;
@@ -280,7 +281,7 @@ function objIguanaMouth(head: Head) {
             }
         });
 
-    c.agapeUnit = 0;
+    c.agape = 0;
     return c;
 }
 
