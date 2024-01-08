@@ -183,6 +183,9 @@ export function SceneTest() {
                 while (true) {
                     await sleep(700);
                     await lerp(iguana, 'facing').to(-iguana.facing).over(500);
+                    await lerp(iguana, 'ducking').to(1).over(300);
+                    await sleep(200);
+                    await lerp(iguana, 'ducking').to(0).over(300);
                 }
             });
 

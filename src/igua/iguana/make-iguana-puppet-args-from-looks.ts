@@ -53,6 +53,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     const headOffset = getFlippableOffsetX(head.noggin, body.torso);
 
     let facing: Polar = 1;
+    let ducking: Unit = 0;
 
     const c = container(back, body, head, front)
         .merge({ body, feet })
@@ -94,6 +95,17 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
                 head.isFacingRight = right;
                 feetController.isFacingRight = right;
                 feetController.turned = Math.round(f * 2);
+            },
+            get ducking() {
+                return ducking;
+            },
+            set ducking(value) {
+                ducking = value;
+
+                // TODO these values might need to be dynamic based on looks
+                head.y = Math.round(value * 7);
+                body.y = Math.round(value * 3);
+                feetController.spread = ducking;
             }
         });
 
@@ -152,13 +164,17 @@ function objIguanaFeet(feet: Feet) {
     const back = container(backForeLeft, backForeRight, backTurnContainer);
     const front = container(frontTurnContainer, frontHindLeft, frontHindRight);
 
-    const foreLeft = backForeLeft.transform.position = frontForeLeft.transform.position;
-    const foreRight = backForeRight.transform.position = frontForeRight.transform.position;
-    const hindLeft = backHindLeft.transform.position = frontHindLeft.transform.position;
-    const hindRight = backHindRight.transform.position = frontHindRight.transform.position;
+    // TODO this doesn't work
+    // const foreLeft = backForeLeft.transform.position = frontForeLeft.transform.position;
+    // const foreRight = backForeRight.transform.position = frontForeRight.transform.position;
+    // const hindLeft = backHindLeft.transform.position = frontHindLeft.transform.position;
+    // const hindRight = backHindRight.transform.position = frontHindRight.transform.position;
 
     let isFacingRight = Force<boolean>();
     let turned: ZeroOrGreater = 0;
+
+    let spread: Unit = 0;
+    let spreadAppliedValue = 0;
 
     const controller = {
         get isFacingRight() {
@@ -194,6 +210,29 @@ function objIguanaFeet(feet: Feet) {
             turned = value;
             frontTurnContainer.x = -rounded;
             backTurnContainer.x = rounded;
+        },
+
+        get spread() {
+            return spread;
+        },
+
+        set spread(value) {
+            const toApply = Math.round(value * 2);
+            if (toApply === spreadAppliedValue)
+                return;
+            const toApplySqrt = Math.round(Math.sqrt(value) * 2);
+            spreadAppliedValue = toApply;
+            spread = value;
+
+            backForeLeft.x = toApply;
+            backForeRight.x = toApply;
+            backHindLeft.x = -toApply;
+            backHindRight.x = -toApply;
+
+            frontForeLeft.x = toApplySqrt;
+            frontForeRight.x = toApplySqrt;
+            frontHindLeft.x = -toApplySqrt;
+            frontHindRight.x = -toApplySqrt;
         }
     }
 
@@ -204,10 +243,10 @@ function objIguanaFeet(feet: Feet) {
         front,
         controller,
         feet: {
-            foreLeft,
-            foreRight,
-            hindLeft,
-            hindRight,
+            // foreLeft,
+            // foreRight,
+            // hindLeft,
+            // hindRight,
         },
     }
 }
