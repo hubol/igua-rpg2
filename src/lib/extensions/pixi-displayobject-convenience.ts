@@ -1,4 +1,4 @@
-import { DisplayObject } from "pixi.js";
+import { DisplayObject, Rectangle } from "pixi.js";
 import { DefaultStages } from "../game-engine/default-stages";
 import { Pojo } from "../types/pojo";
 import { merge } from "../object/merge";
@@ -8,8 +8,11 @@ declare module "pixi.js" {
         named(name: string): this;
         show(container?: Container): this;
         merge<T extends Pojo>(t: T): this & T;
+        getMaxY(): number;
     }
 }
+
+const r = new Rectangle();
 
 Object.defineProperties(DisplayObject.prototype, {
     named: {
@@ -27,6 +30,11 @@ Object.defineProperties(DisplayObject.prototype, {
     merge: {
         value: function (this: DisplayObject, pojo: Pojo) {
             return merge(this, pojo);
+        }
+    },
+    getMaxY: {
+        value: function (this: DisplayObject) {
+            return this.getBounds(false, r).y + r.height;
         }
     },
 });

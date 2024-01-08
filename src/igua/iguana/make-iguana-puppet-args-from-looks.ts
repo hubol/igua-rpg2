@@ -50,6 +50,12 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     const head = objIguanaHead(looks.head);
     head.pivot.set(-5, 7).add(looks.head.placement, -1);
 
+    const nogginMaxY = head.noggin.getMaxY();
+    const torsoMaxY = body.torso.getMaxY();
+
+    const bodyDuckMaximum = Math.max(1, -torsoMaxY);
+    const headDuckMaximum = bodyDuckMaximum + 2 + Math.max(0, -nogginMaxY - 9);
+
     const headOffset = getFlippableOffsetX(head.noggin, body.torso);
 
     let facing: Polar = 1;
@@ -72,8 +78,6 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
                 body.scale.x = sign;
                 back.scale.x = sign;
                 front.scale.x = sign;
-                back.x = right ? 0 : 1;
-                front.x = right ? 0 : 1;
 
                 c.pivot.x = right ? 0 : -1;
 
@@ -101,10 +105,9 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
             },
             set ducking(value) {
                 ducking = value;
-
-                // TODO these values might need to be dynamic based on looks
-                head.y = Math.round(value * 7);
-                body.y = Math.round(value * 3);
+                
+                head.y = Math.round(value * headDuckMaximum);
+                body.y = Math.round(value * bodyDuckMaximum);
                 feetController.spread = ducking;
             }
         });
@@ -174,7 +177,6 @@ function objIguanaFeet(feet: Feet) {
     let turned: ZeroOrGreater = 0;
 
     let spread: Unit = 0;
-    let spreadAppliedValue = 0;
 
     const controller = {
         get isFacingRight() {
@@ -217,11 +219,10 @@ function objIguanaFeet(feet: Feet) {
         },
 
         set spread(value) {
-            const toApply = Math.round(value * 2);
-            if (toApply === spreadAppliedValue)
+            if (spread === value)
                 return;
+            const toApply = Math.round(value * 2);
             const toApplySqrt = Math.round(Math.sqrt(value) * 2);
-            spreadAppliedValue = toApply;
             spread = value;
 
             backForeLeft.x = toApply;
