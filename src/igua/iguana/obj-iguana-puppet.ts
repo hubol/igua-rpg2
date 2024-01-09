@@ -7,7 +7,7 @@ import { IguanaLooks } from "./looks";
 import { objEye, objEyes } from "./eye";
 import { Rng } from "../../lib/math/rng";
 import { Force } from "../../lib/types/force";
-import { Polar, Unit, ZeroOrGreater } from "../../lib/math/number-alias-types";
+import { Integer, Polar, Unit, ZeroOrGreater } from "../../lib/math/number-alias-types";
 
 function showPivot<TContainer extends Container>(c: TContainer, color = 0x00ff00) {
     c.addChild(new Graphics().beginFill(color).drawRect(0, 0, 1, 1));
@@ -167,12 +167,6 @@ function objIguanaFeet(feet: Feet) {
     const back = container(backForeLeft, backForeRight, backTurnContainer);
     const front = container(frontTurnContainer, frontHindLeft, frontHindRight);
 
-    // TODO this doesn't work
-    // const foreLeft = backForeLeft.transform.position = frontForeLeft.transform.position;
-    // const foreRight = backForeRight.transform.position = frontForeRight.transform.position;
-    // const hindLeft = backHindLeft.transform.position = frontHindLeft.transform.position;
-    // const hindRight = backHindRight.transform.position = frontHindRight.transform.position;
-
     let isFacingRight = Force<boolean>();
     let turned: ZeroOrGreater = 0;
 
@@ -234,7 +228,27 @@ function objIguanaFeet(feet: Feet) {
             frontForeRight.x = toApplySqrt;
             frontHindLeft.x = -toApplySqrt;
             frontHindRight.x = -toApplySqrt;
-        }
+        },
+
+        set foreLeftY(value: Integer) {
+            frontForeLeft.y = value;
+            backForeLeft.y = value;
+        },
+
+        set foreRightY(value: Integer) {
+            frontForeRight.y = value;
+            backForeRight.y = value;
+        },
+
+        set hindLeftY(value: Integer) {
+            frontHindLeft.y = value;
+            backHindLeft.y = value;
+        },
+
+        set hindRightY(value: Integer) {
+            frontHindRight.y = value;
+            backHindRight.y = value;
+        },
     }
 
     controller.isFacingRight = true;
