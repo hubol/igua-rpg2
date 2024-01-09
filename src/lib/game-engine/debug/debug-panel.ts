@@ -5,6 +5,8 @@ import { container } from "../../pixi/container";
 import { Undefined } from "../../types/undefined";
 import { TickerContainer } from "../ticker-container";
 
+const localStorageKey = 'debugPanel_isOpen';
+
 export function createDebugPanel(root: Container) {
     if (displayObjectMonitor)
         throw new Error("Multiple calls to createDebugPanel() detected!");
@@ -12,10 +14,21 @@ export function createDebugPanel(root: Container) {
     displayObjectMonitor = objDisplayObjectMonitor().show(root);
 
     const el = document.createElement('div');
-    el.className = 'debug_panel hidden';
+    el.className = 'debug_panel';
+    if (!localStorage.getItem(localStorageKey))
+        el.classList.add('hidden');
     el.appendChild(new DisplayObjectComponent(root).el);
 
-    document.addEventListener("keydown", ({ code }) => code === 'F9' && el.classList.toggle('hidden'));
+    document.addEventListener("keydown", ({ code }) => {
+        if (code !== 'F9')
+            return;
+
+        el.classList.toggle('hidden');
+        if (el.classList.contains('hidden'))
+            localStorage.removeItem(localStorageKey);
+        else
+            localStorage.setItem(localStorageKey, 'true');
+    });
 
     return el;
 }
