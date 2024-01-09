@@ -10,7 +10,7 @@ import { WarningToast } from "../../lib/game-engine/warning-toast";
 import { container } from "../../lib/pixi/container";
 import { PseudoRng, Rng } from "../../lib/math/rng";
 import { getDefaultLooks } from "../iguana/get-default-looks";
-import { objIguanaPuppet, objIguanaHead } from "../iguana/make-iguana-puppet-args-from-looks";
+import { objIguanaPuppet, objIguanaHead } from "../iguana/obj-iguana-puppet";
 import { iguanaPuppet } from "../iguana/iguana-puppet";
 import { TextureToGraphicsConverter } from "../../lib/pixi/texture-to-graphics-converter";
 import { objText } from "../../assets/fonts";
@@ -151,7 +151,7 @@ export function SceneTest() {
 
     const objIguanaPv = (modifyLooksFn: (looks: IguanaLooks.Serializable) => void) => {
         const looks = getDefaultLooks();
-        // looks.head.eyes.gap = 2;
+        looks.head.eyes.gap = 2;
         // looks.head.eyes.tilt = 1;
         looks.head.eyes.placement.x = 0;
         looks.head.eyes.gap = 2;
@@ -168,7 +168,7 @@ export function SceneTest() {
 
         looks.head.placement.y = -5;
 
-        looks.feet.gap = 4;
+        looks.feet.gap = 3;
 
         looks.feet.fore.right.color = looks.feet.fore.left.claws.color;
         looks.feet.fore.right.claws.color = looks.feet.fore.left.color;
@@ -180,6 +180,7 @@ export function SceneTest() {
 
         const iguana = objIguanaPuppet(looks)
             .async(async () => {
+                // return;
                 while (true) {
                     await sleep(700);
                     await lerp(iguana, 'facing').to(-iguana.facing).over(500);
@@ -192,7 +193,13 @@ export function SceneTest() {
         return iguana;
     }
 
-    objIguanaPv(() => {}).at(80, 180).show();
+    for (let i = 0; i < 3; i++) {
+        const f = i * 40 + 64;
+        const x = f % 256;
+        const y = Math.floor(f / 256) * 40 + 180;
+        objIguanaPv(() => {}).at(x, y).show();
+    }
+    // objIguanaPv(() => {}).at(80, 180).show();
     // objIguanaPv((looks) => { looks.head.crest.placement.x = 0; looks.head.eyes.placement.x = 0; }).at(80, 212).show();
 
     // iguana.body.y = 3;
