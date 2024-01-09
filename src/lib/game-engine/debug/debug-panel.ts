@@ -50,7 +50,6 @@ function objDisplayObjectMonitor() {
 
     const innerStyle: ILineStyleOptions = { width: 1, color: 0xffffff, alignment: 1 };
     const outerStyle: ILineStyleOptions = { width: 1, color: 0x000000, alignment: 1 };
-    const noStyle: ILineStyleOptions = { };
 
     const gfx = new Graphics().step(() => {
         gfx.clear();
@@ -62,8 +61,8 @@ function objDisplayObjectMonitor() {
         displayObject.getBounds(false, r);
         gfx.lineStyle(innerStyle).drawRect(r.x, r.y, r.width, r.height)
             .lineStyle(outerStyle).drawRect(r.x - 1, r.y - 1, r.width + 2, r.height + 2)
-            .lineStyle(noStyle)
-            .beginFill(0x00ff00).drawRect(x, y, 1, 1);
+            .lineStyle(innerStyle)
+            .beginFill(0x000000).drawRect(x, y, 1, 1);
     }).show(c);
 
     return c;
