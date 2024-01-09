@@ -178,28 +178,45 @@ export function SceneTest() {
 
         modifyLooksFn(looks);
 
-        const iguana = objIguanaPuppet(looks)
-            .async(async () => {
-                // return;
-                while (true) {
-                    await sleep(700);
-                    await lerp(iguana, 'facing').to(-iguana.facing).over(500);
-                    await lerp(iguana, 'ducking').to(1).over(300);
-                    await sleep(200);
-                    await lerp(iguana, 'ducking').to(0).over(300);
-                }
-            });
-
-        return iguana;
+        return objIguanaPuppet(looks)
     }
 
-    for (let i = 0; i < 3; i++) {
-        const f = i * 40 + 64;
-        const x = f % 256;
-        const y = Math.floor(f / 256) * 40 + 180;
-        objIguanaPv(() => {}).at(x, y).show();
-    }
-    // objIguanaPv(() => {}).at(80, 180).show();
+    const iguana = objIguanaPv(() => {}).at(80, 180)
+    .async(async () => {
+        // return;
+        while (true) {
+            await sleep(700);
+            await lerp(iguana, 'facing').to(-iguana.facing).over(500);
+            await lerp(iguana, 'ducking').to(1).over(300);
+            await sleep(200);
+            await lerp(iguana, 'ducking').to(0).over(300);
+        }
+    })
+    .show();
+
+    let walking = false;
+
+    const iguana2 = objIguanaPv(() => {}).at(180, 180)
+    .step(() => {
+        if (walking)
+            iguana2.pedometer += 0.12;
+        else
+            iguana2.pedometer = 0;
+    })
+    .async(async () => {
+        while (true) {
+            walking = true;
+            await lerp(iguana2, 'gait').to(1).over(300);
+            await sleep(2_000);
+            await lerp(iguana2, 'facing').to(-iguana2.facing).over(500);
+            await sleep(2_000);
+            await lerp(iguana2, 'gait').to(0).over(300);
+            walking = false;
+            await sleep(500);
+        }
+    })
+
+    iguana2.show();
     // objIguanaPv((looks) => { looks.head.crest.placement.x = 0; looks.head.eyes.placement.x = 0; }).at(80, 212).show();
 
     // iguana.body.y = 3;

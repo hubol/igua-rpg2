@@ -61,7 +61,21 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     let facing: Polar = 1;
     let ducking: Unit = 0;
 
-    const c = container(back, body, head, front)
+    let pedometer: ZeroOrGreater = 0;
+    let gait: Unit = 0;
+
+    const core = container(body, head);
+
+    const updateFeetPositions = () => {
+        const p = -pedometer * Math.PI;
+        feetController.foreLeftY = Math.round(gait * (Math.sin(p) - 1));
+        feetController.foreRightY = Math.round(gait * (Math.sin(p + Math.PI / 2) - 1));
+        feetController.hindLeftY = Math.round(gait * (Math.sin(p + Math.PI) - 1));
+        feetController.hindRightY = Math.round(gait * (Math.sin(p + 3 * Math.PI / 2) - 1));
+        core.y = Math.round(gait * (Math.sin(p / 2) + 1) / 2);
+    };
+
+    const c = container(back, core, front)
         .merge({ body, feet })
         .merge({
             get facing() {
@@ -109,6 +123,24 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
                 head.y = Math.round(value * headDuckMaximum);
                 body.y = Math.round(value * bodyDuckMaximum);
                 feetController.spread = ducking;
+            },
+            get pedometer() {
+                return pedometer;
+            },
+            set pedometer(value) {
+                if (pedometer !== value) {
+                    pedometer = value;
+                    updateFeetPositions();
+                }
+            },
+            get gait() {
+                return gait;
+            },
+            set gait(value) {
+                if (gait !== value) {
+                    gait = value;
+                    updateFeetPositions();
+                }
             }
         });
 
