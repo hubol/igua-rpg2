@@ -9,6 +9,26 @@ You will need the Git LFS extension to correctly pull the project's asset files.
 
 Certain asset and source code files are generated using `@hubol/smooch`.
 
+### Getting started
+
+```npm ci```
+
+Installs the dependencies of the project *exactly* as specified in `package-lock.json`
+
+```npm run tool -- dev-patch-pixi-displayobject-ctor```
+
+Patches some PixiJS code so that stack traces can be collected during development
+
+### Developing
+
+```npx smooch```
+
+Starts `@hubol/smooch`, the tool responsible for monitoring binary assets and turning them into source code
+
+```npm run serve```
+
+Starts the project in development mode
+
 ## Play an alpha?!
 You can play an extremely early version of the game. The most recent commit to the `main` branch of this repository is hosted on Heroku.
 At the time of writing this, the "game" is mostly a sandbox for testing a revamped game engine.
