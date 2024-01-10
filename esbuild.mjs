@@ -64,10 +64,6 @@ else {
 
     await watch(ctx);
     await ctx.serve({ servedir: 'public' });
-    while (true) {
-        await new Promise(r => setTimeout(r, 5_000));
-        await ctx.rebuild();
-    }
 }
 
 /**
