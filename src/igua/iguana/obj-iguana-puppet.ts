@@ -1,4 +1,4 @@
-import { Container, DisplayObject, Graphics, Rectangle, Sprite } from "pixi.js";
+import { DisplayObject, Rectangle, Sprite } from "pixi.js";
 import { IguanaShapes } from "./shapes";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
@@ -8,11 +8,6 @@ import { objEye, objEyes } from "./eye";
 import { Rng } from "../../lib/math/rng";
 import { Force } from "../../lib/types/force";
 import { Integer, Polar, Unit, ZeroOrGreater } from "../../lib/math/number-alias-types";
-
-function showPivot<TContainer extends Container>(c: TContainer, color = 0x00ff00) {
-    c.addChild(new Graphics().beginFill(color).drawRect(0, 0, 1, 1));
-    return c;
-}
 
 const r1 = new Rectangle();
 const r2 = new Rectangle();
@@ -446,7 +441,7 @@ const objIguanaEye = (eye: Eye) => objEye(
 
 function objIguanaEyes(head: Head) {
     const left = objIguanaEye(head.eyes.left);
-    const right = objIguanaEye(head.eyes.right).at((left.mask! as Sprite).width + head.eyes.gap, 0);
+    const right = objIguanaEye(head.eyes.right).at(left.shapeObj.width + head.eyes.gap, 0);
 
     left.y = head.eyes.tilt;
 
