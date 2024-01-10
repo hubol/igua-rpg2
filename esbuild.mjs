@@ -101,10 +101,9 @@ function makeEnqueuedPromiseFn(name, promiseFn) {
             isEnqueued = true;
         }
         
-        await wait(() => !isRunning);
+        await wait(() => !isRunning && (isRunning = true));
 
         console.log(`Running ${name}...`);
-        isRunning = true;
         isEnqueued = false;
 
         try {
