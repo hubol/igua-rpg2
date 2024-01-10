@@ -176,6 +176,8 @@ export function SceneTest() {
         looks.feet.hind.left.color = looks.feet.fore.left.claws.color;
         looks.feet.hind.left.claws.color = looks.feet.fore.left.color;
 
+        // looks.head.horn.shape = 1;
+
         modifyLooksFn(looks);
 
         return objIguanaPuppet(looks)
@@ -196,12 +198,16 @@ export function SceneTest() {
 
     let walking = false;
 
-    const iguana2 = objIguanaPv(() => {}).at(180, 180)
+    scene.stage.x = 0.3;
+
+    const iguana2 = objIguanaPv(() => {}).at(180.5, 180)
     .step(() => {
         if (walking)
             iguana2.pedometer += 0.12;
         else
             iguana2.pedometer = 0;
+
+        iguana2.x += ((walking ? 1 : 0) * iguana2.gait * 0.5 * iguana2.facing);
     })
     .async(async () => {
         while (true) {

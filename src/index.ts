@@ -7,6 +7,7 @@ import { createPixiRenderer } from "./lib/game-engine/pixi-renderer";
 import { JobProgress } from "./lib/game-engine/job-progress";
 import { initializeAsshatAudioContext } from "./lib/game-engine/asshat-audiocontext";
 import { Environment } from "./lib/environment";
+import { settings } from "pixi.js";
 
 // https://esbuild.github.io/api/#live-reload
 if (Environment.isDev)
@@ -14,6 +15,7 @@ if (Environment.isDev)
 
 async function initialize() {
     try {
+        settings.ROUND_PIXELS = true;
         const renderer = createPixiRenderer({
             width: 256,
             height: 256,
