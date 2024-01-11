@@ -221,8 +221,8 @@ export function SceneTest() {
             await sleep(500);
         }
     })
-
-    iguana2.show();
+    .show();
+    
     // objIguanaPv((looks) => { looks.head.crest.placement.x = 0; looks.head.eyes.placement.x = 0; }).at(80, 212).show();
 
     // iguana.body.y = 3;

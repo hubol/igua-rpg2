@@ -9,13 +9,24 @@ interface AsshatZoneContext {
     ticker: IAsshatTicker;
 }
 
+const alwaysPredicate = () => true;
+
 class AsshatZoneImpl extends Zone<AsshatZoneContext> {
     constructor() {
         super('AsshatZone');
         console.log(...Logging.componentArgs(this));
     }
 
-    run(fn: () => unknown, context: AsshatZoneContext): Promise<void> {
+    async run(fn: () => unknown, context: AsshatZoneContext): Promise<void> {
+        await new Promise<void>((resolve, reject) => {
+            context.ticker.addMicrotask({
+                predicate: alwaysPredicate,
+                cancellationToken: context.cancellationToken,
+                resolve,
+                reject,
+            });
+        })
+
         return super.run(fn, context).catch(handleAsshatZoneError);
     }
 }
