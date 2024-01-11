@@ -222,6 +222,35 @@ export function SceneTest() {
         }
     })
     .show();
+
+    const jumperMaxY = 240;
+    const jumperGravity = 0.2;
+    const jumperJumpSpeed = -5;
+
+    let jumperSpeedY = 0;
+    let jumping = false;
+
+    const jumper = objIguanaPv(() => {}).at(32, jumperMaxY)
+    .step(() => {
+        if (jumping) {
+            jumper.y += jumperSpeedY;
+            jumperSpeedY += jumperGravity;
+            if (jumper.y >= jumperMaxY) {
+                jumper.y = jumperMaxY;
+                jumperSpeedY = 0;
+                jumping = false;
+            }
+        }
+    })
+    .async(async () => {
+        while (true) {
+            await sleep(1_000);
+            jumping = true;
+            jumperSpeedY = jumperJumpSpeed;
+            await wait(() => !jumping);
+        }
+    })
+    .show();
     
     // objIguanaPv((looks) => { looks.head.crest.placement.x = 0; looks.head.eyes.placement.x = 0; }).at(80, 212).show();
 
