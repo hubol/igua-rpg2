@@ -167,6 +167,7 @@ export function SceneTest() {
 
         // looks.head.crest.placement.x = 12;
 
+        // looks.head.placement.x = -2;
         looks.head.placement.y = -5;
 
         looks.feet.gap = 3;
@@ -230,6 +231,7 @@ export function SceneTest() {
 
     let jumperSpeedY = 0;
     let jumping = false;
+    let jumperMovingHorizontally = false;
 
     const jumper = objIguanaPv(() => {}).at(32, jumperMaxY)
     .step(() => {
@@ -242,16 +244,21 @@ export function SceneTest() {
                 jumping = false;
             }
         }
+
         jumper.gaitAffectsCore = jumping;
 
         if (jumping) {
-            jumper.gait = 1;
+            // jumper.gait = 0.5;
             jumper.pedometer += 0.05;
         }
         else {
             jumper.gait = 0;
             jumper.pedometer = 0;
         }
+        jumper.feetLifting = approachLinear(jumper.feetLifting, jumping ? -Math.sign(jumperSpeedY) : 0, jumping ? 0.15 : 0.1);
+
+        if (jumping && jumperMovingHorizontally)
+            jumper.x += 1 * jumper.facing;
     })
     .async(async () => {
         while (true) {
@@ -259,6 +266,15 @@ export function SceneTest() {
             jumping = true;
             jumperSpeedY = jumperJumpSpeed;
             await wait(() => !jumping);
+            await sleep(1_000);
+            jumping = true;
+            jumperSpeedY = jumperJumpSpeed;
+            jumperMovingHorizontally = true;
+            await wait(() => !jumping);
+            jumperMovingHorizontally = false;
+            await sleep(1_000);
+            await lerp(jumper, 'facing').to(-jumper.facing).over(500);
+
         }
     })
     .show();

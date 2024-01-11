@@ -59,17 +59,70 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     let pedometer: ZeroOrGreater = 0;
     let gait: Unit = 0;
 
+    let feetLifting: Polar = 0;
+
     let gaitAffectsCore = true;
 
     const core = container(body, head);
 
-    const updateFeetYPositions = () => {
-        const p = -pedometer * Math.PI;
-        feetController.foreLeftY = Math.round(gait * (Math.sin(p) - 1));
-        feetController.foreRightY = Math.round(gait * (Math.sin(p + Math.PI / 2) - 1));
-        feetController.hindLeftY = Math.round(gait * (Math.sin(p + Math.PI) - 1));
-        feetController.hindRightY = Math.round(gait * (Math.sin(p + 3 * Math.PI / 2) - 1));
-        core.y = gaitAffectsCore ? Math.round(gait * (Math.sin(p / 2) + 1) / 2) : 0;
+    const feetLiftMaximum = Math.max(0, bodyDuckMaximum - 1);
+
+    let dirty = false;
+
+    const applyAnimation = () => {
+        if (!dirty)
+            return;
+
+        dirty = false;
+
+        let facingPartialF = 0;
+
+        const facingSign = Math.sign(facing);
+        const facingRight = facingSign > 0;
+
+        // Facing animation
+        {
+            body.scale.x = facingSign;
+            back.scale.x = facingSign;
+            front.scale.x = facingSign;
+
+            c.pivot.x = facingRight ? 0 : -1;
+
+            const abs = Math.abs(facing);
+            
+            if (abs < 0.3)
+                facingPartialF = 1.2;
+            else if (abs < 0.6)
+                facingPartialF = 1;
+            else if (abs < 0.8)
+                facingPartialF = 0.5;
+
+            head.isFacingRight = facingRight;
+            feetController.isFacingRight = facingRight;
+            feetController.turned = Math.round(facingPartialF * 2);
+        }
+
+        // Walking + Jumping + Falling
+        {
+            const feetLifting2 = Math.min(1.25, Math.abs(feetLifting * 1.5)) * Math.sign(feetLifting);
+            const p = -pedometer * Math.PI;
+
+            feetController.foreLeftY = Math.round(gait * (Math.sin(p) - 1) + Math.min(0, feetLifting2 * -feetLiftMaximum));
+            feetController.foreRightY = Math.round(gait * (Math.sin(p + Math.PI / 2) - 1) + Math.min(0, feetLifting * -feetLiftMaximum));
+            feetController.hindLeftY = Math.round(gait * (Math.sin(p + Math.PI) - 1) + Math.min(0, feetLifting * feetLiftMaximum));
+            feetController.hindRightY = Math.round(gait * (Math.sin(p + 3 * Math.PI / 2) - 1) + Math.min(0, feetLifting2 * feetLiftMaximum));
+            core.y = gaitAffectsCore ? Math.round(gait * (Math.sin(p / 2) + 1) / 2) : 0;
+        }
+
+        // Apply
+        body.tail.x = Math.round(facingPartialF * 2);
+        body.tail.y = Math.round(-facingPartialF + (feetLifting > 0 ? 1 : 0));
+        
+        head.x = Math.round(facingRight ? -facingPartialF * 5 : headOffset - 2 + facingPartialF * 5);
+        head.y = Math.round(facingPartialF * 2 + ducking * headDuckMaximum + (feetLifting > 0 ? -1 : 0));
+
+        body.y = Math.round(ducking * bodyDuckMaximum);
+        feetController.spread = ducking;
     };
 
     const c = container(back, core, front)
@@ -79,47 +132,19 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
                 return facing;
             },
             set facing(value) {
-                if (value === facing || value === 0)
-                    return;
-
-                facing = value;
-                const sign = Math.sign(facing);
-                const right = sign > 0;
-
-                body.scale.x = sign;
-                back.scale.x = sign;
-                front.scale.x = sign;
-
-                c.pivot.x = right ? 0 : -1;
-
-                const abs = Math.abs(facing);
-                let f = 0;
-                if (abs < 0.3)
-                    f = 1.2;
-                else if (abs < 0.6)
-                    f = 1;
-                else if (abs < 0.8)
-                    f = 0.5;
-
-                body.tail.x = Math.round(f * 2);
-                body.tail.y = Math.round(-f);
-                
-                head.x = Math.round(right ? -f * 5 : headOffset - 2 + f * 5);
-                head.y = Math.round(f * 2);
-
-                head.isFacingRight = right;
-                feetController.isFacingRight = right;
-                feetController.turned = Math.round(f * 2);
+                if (value !== 0 && value !== facing) {
+                    facing = value;
+                    dirty = true;
+                }
             },
             get ducking() {
                 return ducking;
             },
             set ducking(value) {
-                ducking = value;
-                
-                head.y = Math.round(value * headDuckMaximum);
-                body.y = Math.round(value * bodyDuckMaximum);
-                feetController.spread = ducking;
+                if (value !== ducking) {
+                    ducking = value;
+                    dirty = true;
+                }
             },
             get pedometer() {
                 return pedometer;
@@ -127,7 +152,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
             set pedometer(value) {
                 if (pedometer !== value) {
                     pedometer = value;
-                    updateFeetYPositions();
+                    dirty = true;
                 }
             },
             get gait() {
@@ -136,7 +161,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
             set gait(value) {
                 if (gait !== value) {
                     gait = value;
-                    updateFeetYPositions();
+                    dirty = true;
                 }
             },
             get gaitAffectsCore() {
@@ -145,10 +170,20 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
             set gaitAffectsCore(value) {
                 if (gaitAffectsCore !== value) {
                     gaitAffectsCore = value;
-                    updateFeetYPositions();
+                    dirty = true;
+                }
+            },
+            get feetLifting() {
+                return feetLifting;
+            },
+            set feetLifting(value) {
+                if (feetLifting !== value) {
+                    feetLifting = value;
+                    dirty = true;
                 }
             }
-        });
+        })
+        .step(applyAnimation);
 
     return c;
 }
