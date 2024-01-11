@@ -50,6 +50,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
 
     const bodyDuckMaximum = Math.max(1, -torsoMaxY);
     const headDuckMaximum = bodyDuckMaximum + 2 + Math.max(0, -nogginMaxY - 9);
+    const headRaiseMaximum = (head.noggin.getMaxY() - body.torso.getMinY()) > 1 ? 1 : 0;
 
     const headOffset = getFlippableOffsetX(head.noggin, body.torso);
 
@@ -119,7 +120,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
         body.tail.y = Math.round(-facingPartialF + (feetLifting > 0 ? 1 : 0));
         
         head.x = Math.round(facingRight ? -facingPartialF * 5 : headOffset - 2 + facingPartialF * 5);
-        head.y = Math.round(facingPartialF * 2 + ducking * headDuckMaximum + (feetLifting > 0 ? -1 : 0));
+        head.y = Math.round(facingPartialF * 2 + ducking * headDuckMaximum + (feetLifting > 0 ? -headRaiseMaximum : 0));
 
         body.y = Math.round(ducking * bodyDuckMaximum);
         feetController.spread = ducking;

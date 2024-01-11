@@ -8,6 +8,7 @@ declare module "pixi.js" {
         named(name: string): this;
         show(container?: Container): this;
         merge<T extends Pojo>(t: T): this & T;
+        getMinY(): number;
         getMaxY(): number;
     }
 }
@@ -30,6 +31,11 @@ Object.defineProperties(DisplayObject.prototype, {
     merge: {
         value: function (this: DisplayObject, pojo: Pojo) {
             return merge(this, pojo);
+        }
+    },
+    getMinY: {
+        value: function (this: DisplayObject) {
+            return this.getBounds(false, r).y;
         }
     },
     getMaxY: {
