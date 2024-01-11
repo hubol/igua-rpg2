@@ -18,6 +18,7 @@ import { sleep } from "../../lib/game-engine/promise/sleep";
 import { IguanaLooks } from "../iguana/looks";
 import { lerp } from "../../lib/game-engine/promise/lerp";
 import { createDebugPanel } from "../../lib/game-engine/debug/debug-panel";
+import { approachLinear } from "../../lib/math/number";
 
 const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });
 
@@ -224,8 +225,8 @@ export function SceneTest() {
     .show();
 
     const jumperMaxY = 240;
-    const jumperGravity = 0.2;
-    const jumperJumpSpeed = -5;
+    const jumperGravity = 0.15;
+    const jumperJumpSpeed = -3;
 
     let jumperSpeedY = 0;
     let jumping = false;
@@ -240,6 +241,16 @@ export function SceneTest() {
                 jumperSpeedY = 0;
                 jumping = false;
             }
+        }
+        jumper.gaitAffectsCore = jumping;
+
+        if (jumping) {
+            jumper.gait = 1;
+            jumper.pedometer += 0.05;
+        }
+        else {
+            jumper.gait = 0;
+            jumper.pedometer = 0;
         }
     })
     .async(async () => {

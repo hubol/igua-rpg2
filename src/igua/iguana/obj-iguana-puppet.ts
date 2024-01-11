@@ -59,15 +59,17 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     let pedometer: ZeroOrGreater = 0;
     let gait: Unit = 0;
 
+    let gaitAffectsCore = true;
+
     const core = container(body, head);
 
-    const updateFeetPositions = () => {
+    const updateFeetYPositions = () => {
         const p = -pedometer * Math.PI;
         feetController.foreLeftY = Math.round(gait * (Math.sin(p) - 1));
         feetController.foreRightY = Math.round(gait * (Math.sin(p + Math.PI / 2) - 1));
         feetController.hindLeftY = Math.round(gait * (Math.sin(p + Math.PI) - 1));
         feetController.hindRightY = Math.round(gait * (Math.sin(p + 3 * Math.PI / 2) - 1));
-        core.y = Math.round(gait * (Math.sin(p / 2) + 1) / 2);
+        core.y = gaitAffectsCore ? Math.round(gait * (Math.sin(p / 2) + 1) / 2) : 0;
     };
 
     const c = container(back, core, front)
@@ -125,7 +127,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
             set pedometer(value) {
                 if (pedometer !== value) {
                     pedometer = value;
-                    updateFeetPositions();
+                    updateFeetYPositions();
                 }
             },
             get gait() {
@@ -134,7 +136,16 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
             set gait(value) {
                 if (gait !== value) {
                     gait = value;
-                    updateFeetPositions();
+                    updateFeetYPositions();
+                }
+            },
+            get gaitAffectsCore() {
+                return gaitAffectsCore;
+            },
+            set gaitAffectsCore(value) {
+                if (gaitAffectsCore !== value) {
+                    gaitAffectsCore = value;
+                    updateFeetYPositions();
                 }
             }
         });
