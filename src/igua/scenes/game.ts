@@ -245,7 +245,7 @@ export function SceneTest() {
             }
         }
 
-        jumper.gaitAffectsCore = jumping;
+        jumper.isAirborne = jumping;
 
         if (jumping) {
             // jumper.gait = 0.5;
@@ -255,7 +255,7 @@ export function SceneTest() {
             jumper.gait = 0;
             jumper.pedometer = 0;
         }
-        jumper.feetLifting = approachLinear(jumper.feetLifting, jumping ? -Math.sign(jumperSpeedY) : 0, jumping ? 0.15 : 0.1);
+        jumper.airborneDirectionY = approachLinear(jumper.airborneDirectionY, jumping ? -Math.sign(jumperSpeedY) : 0, jumping ? 0.15 : 0.1);
 
         if (jumping && jumperMovingHorizontally)
             jumper.x += 1 * jumper.facing;
