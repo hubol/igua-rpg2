@@ -49,6 +49,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     const torsoMaxY = body.torso.getMaxY();
 
     const bodyDuckMaximum = Math.max(1, -torsoMaxY);
+    const bodyLandMaximum = bodyDuckMaximum;
     const headDuckMaximum = bodyDuckMaximum + 2 + Math.max(0, -nogginMaxY - 9);
     const headRaiseMaximum = (head.noggin.getMaxY() - body.torso.getMinY()) > 1 ? 1 : 0;
 
@@ -63,6 +64,10 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     let isAirborne = false;
     let airborneDirectionY: Polar = 0;
 
+    let isLanding = false;
+    let landingFrames: Integer = 0;
+    let landingFramesMax = 0;
+
     const core = container(body, head);
 
     const feetLiftMaximum = Math.max(0, bodyDuckMaximum - 1);
@@ -73,7 +78,18 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
         if (!dirty)
             return;
 
-        dirty = false;
+        let landing = 0;
+
+        if (isLanding) {
+            landing = landingFrames / landingFramesMax;
+            landingFrames = Math.max(0, landingFrames - 1);
+            if (landingFrames === 0)
+                isLanding = false;
+            dirty = true;
+        }
+        else {
+            dirty = false;
+        }
 
         let facingPartialF = 0;
 
@@ -105,15 +121,14 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
         const airborne = isAirborne ? airborneDirectionY : 0;
 
         // Walking + Jumping + Falling
+        const p = -pedometer * Math.PI;
         {
             const airborne2 = Math.min(1.25, Math.abs(airborne * 1.5)) * Math.sign(airborne);
-            const p = -pedometer * Math.PI;
 
             feetController.foreLeftY = Math.round(gait * (Math.sin(p) - 1) + Math.min(0, airborne2 * -feetLiftMaximum));
             feetController.foreRightY = Math.round(gait * (Math.sin(p + Math.PI / 2) - 1) + Math.min(0, airborne * -feetLiftMaximum));
             feetController.hindLeftY = Math.round(gait * (Math.sin(p + Math.PI) - 1) + Math.min(0, airborne * feetLiftMaximum));
             feetController.hindRightY = Math.round(gait * (Math.sin(p + 3 * Math.PI / 2) - 1) + Math.min(0, airborne2 * feetLiftMaximum));
-            core.y = isAirborne ? 0 : Math.round(gait * (Math.sin(p / 2) + 1) / 2);
         }
 
         // Apply
@@ -124,6 +139,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
         head.y = Math.round(facingPartialF * 2 + ducking * headDuckMaximum + (airborne > 0 ? -headRaiseMaximum : 0));
 
         body.y = Math.round(ducking * bodyDuckMaximum);
+        core.y = Math.round((isAirborne ? 0 : gait * (Math.sin(p / 2) + 1) / 2) + landing * bodyLandMaximum);
         feetController.spread = ducking;
     };
 
@@ -181,6 +197,17 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
             set airborneDirectionY(value) {
                 if (airborneDirectionY !== value) {
                     airborneDirectionY = value;
+                    dirty = true;
+                }
+            },
+            get landingFrames() {
+                return landingFrames;
+            },
+            set landingFrames(value) {
+                if (value !== 0 && landingFrames !== value) {
+                    landingFrames = value;
+                    landingFramesMax = value;
+                    isLanding = true;
                     dirty = true;
                 }
             }

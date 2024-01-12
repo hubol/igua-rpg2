@@ -240,6 +240,7 @@ export function SceneTest() {
             jumperSpeedY += jumperGravity;
             if (jumper.y >= jumperMaxY) {
                 jumper.y = jumperMaxY;
+                jumper.landingFrames = 10;
                 jumperSpeedY = 0;
                 jumping = false;
             }
