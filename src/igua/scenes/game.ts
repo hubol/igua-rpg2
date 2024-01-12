@@ -305,5 +305,7 @@ export function SceneTest() {
     objText.Large('Hubol was here\nSwag!', { tint: 0xff0040 }).at(48, 96).show();
     objText.MediumDigits('0123456789', { tint: 0xdd7e95 }).at(64, 128).show();
 
+    scene.backgroundTint = 0x181050;
+
     // document.body.appendChild(createDebugPanel(scene.stage));
 }
