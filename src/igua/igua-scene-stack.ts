@@ -22,6 +22,7 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
     const backgroundGfx = new Graphics().tinted(0x000000).beginFill(0xffffff).drawRect(0, 0, 256, 256).show(background);
 
     return {
+        root,
         set backgroundTint(tint: number) {
             backgroundGfx.tint = tint;
         },
@@ -50,19 +51,19 @@ export class IguaSceneStack extends SceneStack<IguaSceneMeta, IguaScene> {
     }
 
     protected dispose(scene: IguaScene): void {
-        scene.stage.destroy();
+        scene.root.destroy();
     }
 
     protected onScenesModified(): void {
         for (let i = 0; i < this.scenes.length - 1; i += 1)
-            this.scenes[i].stage.visible = false;
+            this.scenes[i].root.visible = false;
 
         const scene = this.scenes.last;
 
         if (!scene)
             throw new Error('IguaSceneStack does not support empty stack!');
 
-        scene.stage.visible = true;
+        scene.root.visible = true;
         this._setScene(scene);
     }
 }
