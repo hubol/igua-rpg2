@@ -22,10 +22,11 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
     const backgroundGfx = new Graphics().tinted(0x000000).beginFill(0xffffff).drawRect(0, 0, 256, 256).show(background);
 
     return {
-        root,
         set backgroundTint(tint: number) {
             backgroundGfx.tint = tint;
         },
+        locals: {} as Record<string, any>,
+        root,
         source,
         stage,
         ticker,

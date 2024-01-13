@@ -19,10 +19,13 @@ import { IguanaLooks } from "../iguana/looks";
 import { lerp } from "../../lib/game-engine/promise/lerp";
 import { createDebugPanel } from "../../lib/game-engine/debug/debug-panel";
 import { approachLinear } from "../../lib/math/number";
+import { SceneLocal } from "../core/scene-local";
 
 const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });
 
 const BigKeyTextures = Tx.BigKey1.split({ count: 3, trimFrame: true });
+
+const Score = new SceneLocal(() => ({ current: 0 }));
 
 export function SceneTest() {
     console.log('Scene', scene.source.name);
@@ -101,10 +104,14 @@ export function SceneTest() {
             for (const collided of guy.collidesAll(sprites)) {
                 collided.tint = tint;
             }
-            if (guy.collides(s))
+            if (guy.collides(s)) {
                 s.destroy();
-            if (guy.collides(smiley))
+                Score.value.current += 1;
+            }
+            if (guy.collides(smiley)) {
                 smiley.destroy();
+                Score.value.current += 1;
+            }
 
             guy.health += 1;
         })
@@ -308,5 +315,14 @@ export function SceneTest() {
 
     scene.backgroundTint = 0x181050;
 
+    objScore().at(4, 242).show();
+
     // document.body.appendChild(createDebugPanel(scene.stage));
+}
+
+function objScore() {
+    const score = objText.Large('Score: 0', { tint: 0x00ff00 })
+        .step(() => score.text = `Score: ${Score.value.current}`);
+
+    return score;
 }
