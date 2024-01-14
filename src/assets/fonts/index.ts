@@ -1,8 +1,10 @@
 import { BitmapFont, IBitmapTextStyle } from "pixi.js";
 import { JobProgress } from "../../lib/game-engine/job-progress";
-import { loadBitmapFont } from "../../lib/pixi/load-bitmap-font";
+import { createBitmapFontFactory } from "../../lib/pixi/create-bitmap-font-factory";
 import { Force } from "../../lib/types/force";
 import { BitmapText } from "pixi.js";
+import { Tx } from "../textures";
+import { intervalWait } from "../../lib/browser/interval-wait";
 
 type Style = Partial<Omit<IBitmapTextStyle, "fontName">>;
 
@@ -24,22 +26,29 @@ const Fonts = {
     Diggit: Force<BitmapFont>(),
 };
 
+type TxFontKey = keyof typeof Tx['Font'];
+
 export async function loadFontAssets(progress: JobProgress) {
-    const load = async (fontKey: keyof typeof Fonts, fntUrl: string, textureUrl: string) => {
-        const bitmapFont = await loadBitmapFontAndTrackProgress(fntUrl, textureUrl, progress);
+    const load = async (fontKey: keyof typeof Fonts, fntUrl: string, txFontKey: TxFontKey) => {
+        const bitmapFont = await loadBitmapFontAndTrackProgress(fntUrl, txFontKey, progress);
         Fonts[fontKey] = bitmapFont;
     };
 
     await Promise.all([
-        load("Acrobatix", require("./bitmap/Acrobatix.fnt"), require("./bitmap/Acrobatix.png")),
-        load("Atomix", require("./bitmap/Atomix.fnt"), require("./bitmap/Atomix.png")),
-        load("Diggit", require("./bitmap/Diggit.fnt"), require("./bitmap/Diggit.png")),
+        load("Acrobatix", require("./bitmap/Acrobatix.fnt"), "Acrobatix"),
+        load("Atomix", require("./bitmap/Atomix.fnt"), "Atomix"),
+        load("Diggit", require("./bitmap/Diggit.fnt"), "Diggit"),
     ]);
 }
 
-async function loadBitmapFontAndTrackProgress(fntUrl: string, textureUrl: string, progress: JobProgress) {
+async function loadBitmapFontAndTrackProgress(fntUrl: string, txFontKey: TxFontKey, progress: JobProgress) {
     progress.increaseTotalJobsCount(1);
-    const bitmapFont = await loadBitmapFont(fntUrl, textureUrl);
+
+    const [ bitmapFontFactory ] = await Promise.all([
+        createBitmapFontFactory(fntUrl),
+        intervalWait(() => !!Tx?.Font?.[txFontKey]),
+    ]);
+
     progress.increaseCompletedJobsCount(1);
-    return bitmapFont;
+    return bitmapFontFactory(Tx.Font[txFontKey]);
 }
