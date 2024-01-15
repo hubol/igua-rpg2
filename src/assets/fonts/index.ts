@@ -15,6 +15,9 @@ export const objText = {
     Large(text = '', style: Style = {}) {
         return new BitmapText(text, { fontName: Fonts.Acrobatix.font, ...style });
     },
+    Large2(text = '', style: Style = {}) {
+        return new BitmapText(text, { fontName: Fonts.Erotix.font, ...style });
+    },
     MediumDigits(text = '', style: Style = {}) {
         return new BitmapText(text, { fontName: Fonts.Diggit.font, ...style });
     },
@@ -24,6 +27,7 @@ const Fonts = {
     Acrobatix: Force<BitmapFont>(),
     Atomix: Force<BitmapFont>(),
     Diggit: Force<BitmapFont>(),
+    Erotix: Force<BitmapFont>(),
 };
 
 type TxFontKey = keyof typeof Tx['Font'];
@@ -38,6 +42,7 @@ export async function loadFontAssets(progress: JobProgress) {
         load("Acrobatix", require("./bitmap/Acrobatix.fnt"), "Acrobatix"),
         load("Atomix", require("./bitmap/Atomix.fnt"), "Atomix"),
         load("Diggit", require("./bitmap/Diggit.fnt"), "Diggit"),
+        load("Erotix", require("./bitmap/Erotix.fnt"), "Erotix"),
     ]);
 }
 

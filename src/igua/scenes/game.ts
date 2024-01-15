@@ -310,8 +310,17 @@ export function SceneTest() {
     objText.Small('Hubol was here\nSwag!', { tint: 0x404080 }).at(65, 65).show();
     objText.Small('Hubol was here\nSwag!', { tint: 0x404080 }).at(65, 64).show();
     objText.Small('Hubol was here\nSwag!', { tint: 0xffffff }).at(64, 64).show();
-    objText.Large('Hubol was here\nSwag!', { tint: 0xff0040 }).at(48, 96).show();
+    objText.Large2('Hubol was here\n(Swag!*)...', { tint: 0xff0040 }).at(48, 96).show();
+    objText.Large2('The quick, brown fox jumps over the lazy dog?!', { tint: 0xff8040 }).at(2, 189).show();
     objText.MediumDigits('0123456789', { tint: 0xdd7e95 }).at(64, 128).show();
+
+    // objText.Large2(`nnonnoonoo nnannooaoo nnbnnooboo nncnnoocoo nndnnoodoo nnennooeoo nnfnnoofoo nngnnoogoo nnhnnoohoo nninnooioo nnjnnoojoo nnknnookoo nnlnnooloo nnmnnoomoo nnpnnoopoo nnqnnooqoo nnrnnooroo nnsnnoosoo nntnnootoo nnunnoouoo nnvnnoovoo nnwnnoowoo nnxnnooxoo nnynnooyoo nnznnoozoo
+
+    // HHOHHOOHOO HHAHHOOAOO HHBHHOOBOO HHCHHOOCOO HHDHHOODOO HHEHHOOEOO HHFHHOOFOO HHGHHOOGOO HHIHHOOIOO HHJHHOOJOO HHKHHOOKOO HHLHHOOLOO HHMHHOOMOO HHNHHOONOO HHPHHOOPOO HHQHHOOQOO HHRHHOOROO HHSHHOOSOO HHTHHOOTOO HHUHHOOUOO HHVHHOOVOO HHWHHOOWOO HHXHHOOXOO HHYHHOOYOO HHZHHOOZOO
+    
+    // 008088088 0010088188 0020088288 0030088388 0040088488 0050088588 0060088688 0070088788 0090088988`, { maxWidth: 256 }).show(scene.root);
+
+    // scene.stage.visible = false;
 
     scene.backgroundTint = 0x181050;
 
@@ -321,7 +330,7 @@ export function SceneTest() {
 }
 
 function objScore() {
-    const score = objText.Large('Score: 0', { tint: 0x00ff00 })
+    const score = objText.Large2('Score: 0', { tint: 0x00ff00 })
         .step(() => score.text = `Score: ${Score.value.current}`);
 
     return score;
