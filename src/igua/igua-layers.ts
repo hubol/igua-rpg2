@@ -6,7 +6,7 @@ export class IguaLayers {
     readonly hud: Container;
 
     constructor(private readonly _root: Container) {
-        this.scene = new Container().named("Scene");
+        this.scene = new Container().named("SceneStack");
         this.hud = new Container().named("Hud");
         _root.addChild(this.scene, this.hud);
         console.log(...Logging.componentArgs(this));
