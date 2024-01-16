@@ -307,11 +307,11 @@ export function SceneTest() {
     // for (let i = 0; i < 8; i += 1)
     //     makeIguanaPuppetArgsFromLooks(getDefaultLooks()).at(164, 128 + i * 8).flipV().show();
 
-    objText.Small2('Hubol was here\nSwag!', { tint: 0x404080 }).at(65, 65).show();
-    objText.Small2('Hubol was here\nSwag!', { tint: 0x404080 }).at(65, 64).show();
-    objText.Small2('Hubol was here\nSwag!', { tint: 0xffffff }).at(64, 64).show();
-    objText.Large2Light('Hubol wagged here\n   (Swag!*)...', { tint: 0xff0040 }).at(48, 96).show();
-    const o = objText.Small2(`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`, { tint: 0xff8040, maxWidth: 256 }).at(2, 189).show(scene.root);
+    objText.Small('Hubol was here\nSwag!', { tint: 0x404080 }).at(65, 65).show();
+    objText.Small('Hubol was here\nSwag!', { tint: 0x404080 }).at(65, 64).show();
+    objText.Small('Hubol was here\nSwag!', { tint: 0xffffff }).at(64, 64).show();
+    objText.Large('Hubol wagged here\n   (Swag!*)...', { tint: 0xff0040 }).at(48, 96).show();
+    const o = objText.Small(`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`, { tint: 0xff8040, maxWidth: 256 }).at(2, 189).show(scene.root);
     o.at(0, 0)
     // objText.Small(o.text, { tint: 0xff8040, maxWidth: 256 }).at(0, 128).show(scene.root);
     objText.MediumDigits('0123456789', { tint: 0xdd7e95 }).at(64, 128).show();
@@ -332,7 +332,7 @@ export function SceneTest() {
 }
 
 function objScore() {
-    const score = objText.Large2('Score: 0', { tint: 0x00ff00 })
+    const score = objText.LargeBold('Score: 0', { tint: 0x00ff00 })
         .step(() => score.text = `Score: ${Score.value.current}`);
 
     return score;
