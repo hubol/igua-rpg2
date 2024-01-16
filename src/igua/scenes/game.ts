@@ -326,7 +326,7 @@ export function SceneTest() {
 
     scene.backgroundTint = 0x181050;
 
-    objScore().at(4, 242).show();
+    objScore().at(4, 245).show();
 
     // document.body.appendChild(createDebugPanel(scene.stage));
 }
