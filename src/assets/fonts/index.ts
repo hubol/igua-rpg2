@@ -39,7 +39,7 @@ export async function loadFontAssets(progress: JobProgress) {
     };
 
     await Promise.all([
-        load("Diggit", require("./bitmap/Diggit.fnt"), "Diggit2"),
+        load("Diggit", require("./bitmap/Diggit.fnt"), "Diggit"),
         load("Erotix", require("./bitmap/Erotix.fnt"), "Erotix"),
         load("ErotixLight", require("./bitmap/ErotixLight.fnt"), "ErotixLight"),
         load("Flaccid", require("./bitmap/Flaccid.fnt"), "Flaccid"),

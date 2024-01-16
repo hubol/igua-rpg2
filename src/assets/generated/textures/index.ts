@@ -15,7 +15,7 @@ function txs<T>(tx: (data: TxData) => T) {
   return {
     BigKey1: tx({ id: "BigKey1", atlas: 0, x: 0, y: 113, width: 150, height: 28 }),
     Font: {
-      Diggit2: tx({ id: "Font.Diggit2", atlas: 0, x: 446, y: 42, width: 48, height: 8 }),
+      Diggit: tx({ id: "Font.Diggit", atlas: 0, x: 446, y: 42, width: 48, height: 8 }),
       ErotixLight: tx({ id: "Font.ErotixLight", atlas: 0, x: 217, y: 87, width: 160, height: 34 }),
       Erotix: tx({ id: "Font.Erotix", atlas: 0, x: 217, y: 52, width: 160, height: 34 }),
       Flaccid: tx({ id: "Font.Flaccid", atlas: 0, x: 397, y: 0, width: 102, height: 24 }),
