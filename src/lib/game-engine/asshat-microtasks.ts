@@ -25,6 +25,7 @@ export class AsshatMicrotasks {
             const task = this._tasks[i];
 
             if (task.cancellationToken.rejectIfCancelled(task.reject)) {
+                free(task);
                 shift += 1;
                 i += 1;
                 continue;
@@ -53,6 +54,7 @@ export class AsshatMicrotasks {
             const task = this._tasks[i];
 
             if (task.cancellationToken.rejectIfCancelled(task.reject)) {
+                free(task);
                 shift += 1;
                 i += 1;
                 continue;
@@ -60,6 +62,7 @@ export class AsshatMicrotasks {
 
             if (task._predicatePassed) {
                 task.resolve();
+                free(task);
                 shift += 1;
                 i += 1;
                 continue;
@@ -80,8 +83,37 @@ interface AsshatMicrotaskInternal extends AsshatMicrotask {
 }
 
 export interface AsshatMicrotask {
-    readonly predicate: () => boolean;
-    readonly cancellationToken: CancellationToken;
-    readonly resolve: () => void;
-    readonly reject: (reason: any) => void;
+    readonly __t: unique symbol;
+    predicate: () => boolean;
+    cancellationToken: CancellationToken;
+    resolve: () => void;
+    reject: (reason: any) => void;
+}
+
+function free(task: Partial<AsshatMicrotaskInternal>) {
+    if (freeAsshatMicrotasks.length >= 64)
+        return;
+    delete task.predicate;
+    delete task.cancellationToken;
+    delete task.resolve;
+    delete task.reject;
+    delete task._predicatePassed;
+    freeAsshatMicrotasks.push(task);
+}
+
+const freeAsshatMicrotasks: Partial<AsshatMicrotask>[] = [];
+
+export const AsshatMicrotaskFactory = {
+    create(predicate: () => boolean, cancellationToken: CancellationToken, resolve: () => void, reject: (reason: any) => void): AsshatMicrotask {
+        if (freeAsshatMicrotasks.length > 0) {
+            const task = freeAsshatMicrotasks.pop()! as AsshatMicrotask;
+            task.predicate = predicate;
+            task.cancellationToken = cancellationToken;
+            task.resolve = resolve;
+            task.reject = reject;
+            return task;
+        }
+
+        return { predicate, cancellationToken, resolve, reject, } as AsshatMicrotask;
+    }
 }

@@ -1,6 +1,7 @@
 import { Logging } from "../logging";
 import { CancellationError, CancellationToken } from "../promise/cancellation-token";
 import { Zone } from "../zone";
+import { AsshatMicrotaskFactory } from "./asshat-microtasks";
 import { IAsshatTicker } from "./asshat-ticker";
 import { ErrorReporter } from "./error-reporter";
 
@@ -19,12 +20,8 @@ class AsshatZoneImpl extends Zone<AsshatZoneContext> {
 
     async run(fn: () => unknown, context: AsshatZoneContext): Promise<void> {
         await new Promise<void>((resolve, reject) => {
-            context.ticker.addMicrotask({
-                predicate: alwaysPredicate,
-                cancellationToken: context.cancellationToken,
-                resolve,
-                reject,
-            });
+            const microtask = AsshatMicrotaskFactory.create(alwaysPredicate, context.cancellationToken, resolve, reject);
+            context.ticker.addMicrotask(microtask);
         })
 
         return super.run(fn, context).catch(handleAsshatZoneError);
