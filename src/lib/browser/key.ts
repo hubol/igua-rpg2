@@ -20,7 +20,7 @@ type KeysState = Partial<Record<KeyCode, boolean>>;
 
 export const Key = {
     isDown(key: KeyCode) {
-        return key in currentKeysState && currentKeysState[key];
+        return key in currentKeysState && currentKeysState[key] as boolean;
     },
     isUp(key: KeyCode) {
         return !this.isDown(key);

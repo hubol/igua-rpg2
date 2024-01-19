@@ -3,6 +3,8 @@ import { objText } from "../../assets/fonts";
 import { container } from "../../lib/pixi/container";
 import { approachLinear } from "../../lib/math/number";
 import { layers } from "../globals";
+import { wait } from "../../lib/game-engine/wait";
+import { Key } from "../../lib/browser/key";
 
 const borderColor = 0x00ff00;
 const backgroundColor = 0x005870;
@@ -13,9 +15,7 @@ const height = 67;
 const border = 2;
 const padding = 3;
 
-const r = new Rectangle();
-
-export function objMessageBox(text: string) {
+function objMessageBox(text: string) {
     const gfx = new Graphics()
         .lineStyle({ color: borderColor, alignment: 0, width: border })
         .beginFill(backgroundColor)
@@ -38,14 +38,8 @@ export function objMessageBox(text: string) {
     const c = container(mask, textMasks, gfx, text1, text2)
         .merge({
             dismissAfterFrames: -1,
-            get appeared() {
-                return mask.scale.y >= 1;
-            },
-            set appeared(value) {
-                if (value)
-                    mask.scale.y = 1;
-            },
             set text(value: string) {
+                c.dismissAfterFrames = -1;
                 if (textMasks.y > 0)
                     text1.text = text2.text;
                 text2.text = value;
@@ -63,7 +57,7 @@ export function objMessageBox(text: string) {
             }
 
             if (text2.text) {
-                textMasks.y = approachLinear(textMasks.y, height, 1);
+                textMasks.y = approachLinear(textMasks.y, height, 4);
             }
 
             mask.scale.y = approachLinear(mask.scale.y, dismissing ? 0 : 1, dismissing ? 0.05 : 0.1);
@@ -82,10 +76,15 @@ export function objMessageBox(text: string) {
 
 let instance: ReturnType<typeof objMessageBox> | undefined;
 
-export function show(text: string) {
+export async function show(text: string) {
     if (!instance) {
         instance = objMessageBox(text);
     }
     else
         instance.text = text;
+
+    await wait(() => Key.isUp("KeyP"));
+    await wait(() => Key.isDown("KeyP"));
+
+    instance!.dismissAfterFrames = 1;
 }
