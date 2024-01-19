@@ -1,7 +1,7 @@
 import { Container, Graphics, Sprite } from "pixi.js";
 import { wait } from "../../lib/game-engine/wait";
 import { Key } from "../../lib/browser/key";
-import { scene, sceneStack } from "../globals";
+import { layers, scene, sceneStack } from "../globals";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { Tx } from "../../assets/textures";
 import { CollisionShape } from "../../lib/pixi/collision";
@@ -20,6 +20,7 @@ import { lerp } from "../../lib/game-engine/promise/lerp";
 import { createDebugPanel } from "../../lib/game-engine/debug/debug-panel";
 import { approachLinear } from "../../lib/math/number";
 import { SceneLocal } from "../core/scene-local";
+import { objMessageBox, show } from "../cutscene/show";
 
 const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });
 
@@ -327,6 +328,14 @@ export function SceneTest() {
     scene.backgroundTint = 0x181050;
 
     objScore().at(4, 245).show();
+
+    container().async(async () => {
+        show("Hello everybody!");
+        await wait(() => !!Key.justWentDown("KeyP"));
+        show("You have a supply of potions and medicine. To use something or just check your supply, press U.");
+        await wait(() => !!Key.justWentDown("KeyQ"));
+        show("You can walk with left and right arrows and jump with space bar.");
+    }).show();
 
     // document.body.appendChild(createDebugPanel(scene.stage));
 }

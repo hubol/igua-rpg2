@@ -17,7 +17,7 @@ globalThis.onDisplayObjectConstructed = devAssignDisplayObjectIdentifiers;
 
 const rootTicker = new AsshatTicker();
 const rootStage = new TickerContainer(rootTicker).named("Root");
-const layers = new IguaLayers(rootStage);
+export const layers = new IguaLayers(rootStage);
 
 export let scene: IguaScene;
 export const sceneStack = new IguaSceneStack(layers, (_scene) => scene = _scene);
