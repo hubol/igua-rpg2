@@ -194,7 +194,7 @@ constructorName.set(Graphics, 'Graphics');
 constructorName.set(BitmapText, 'BitmapText');
 
 function getName(obj: DisplayObject) {
-    return obj.name ?? obj["Name"] ?? '?';
+    return (obj.isMask ? '🎭' : '') + (obj.name ?? obj["Name"] ?? '?');
 }
 
 const getTypeInformationString = (obj: DisplayObject) => {
