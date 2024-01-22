@@ -1,5 +1,5 @@
-import { CancellationToken } from "../promise/cancellation-token";
-import { ErrorReporter } from "./error-reporter";
+import { CancellationToken } from "../../promise/cancellation-token";
+import { ErrorReporter } from "../error-reporter";
 
 export class AsshatMicrotasks {
     private readonly _tasks: AsshatMicrotaskInternal[] = [];

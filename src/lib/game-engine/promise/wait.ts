@@ -1,5 +1,5 @@
 import { AsshatMicrotaskFactory } from "./asshat-microtasks";
-import { AsshatZone } from "./asshat-zone";
+import { AsshatZone } from "../asshat-zone";
 
 type Predicate = () => boolean;
 

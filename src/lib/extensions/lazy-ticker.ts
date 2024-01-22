@@ -1,4 +1,4 @@
-import { AsshatMicrotask } from "../game-engine/asshat-microtasks";
+import { AsshatMicrotask } from "../game-engine/promise/asshat-microtasks";
 import { AsshatTicker, AsshatTickerFn, IAsshatTicker } from "../game-engine/asshat-ticker";
 
 type QueuedCall = { fn: 'add' | 'remove'; arg: AsshatTickerFn } | { fn: 'addMicrotask', arg: AsshatMicrotask };

@@ -1,6 +1,6 @@
 import { nlerp } from "../../math/number";
 import { PropertiesLike } from "../../types/properties-like";
-import { wait } from "../wait";
+import { wait } from "./wait";
 
 export function lerp<T>(object: T, key: keyof PropertiesLike<T, number>)
 {

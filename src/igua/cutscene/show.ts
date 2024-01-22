@@ -3,7 +3,7 @@ import { objText } from "../../assets/fonts";
 import { container } from "../../lib/pixi/container";
 import { approachLinear } from "../../lib/math/number";
 import { layers } from "../globals";
-import { wait } from "../../lib/game-engine/wait";
+import { wait } from "../../lib/game-engine/promise/wait";
 import { Key } from "../../lib/browser/key";
 
 const borderColor = 0x00ff00;

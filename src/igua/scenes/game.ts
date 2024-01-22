@@ -1,5 +1,5 @@
 import { Container, Graphics, Sprite } from "pixi.js";
-import { wait } from "../../lib/game-engine/wait";
+import { wait } from "../../lib/game-engine/promise/wait";
 import { Key } from "../../lib/browser/key";
 import { layers, scene, sceneStack } from "../globals";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";

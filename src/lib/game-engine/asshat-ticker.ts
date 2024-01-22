@@ -1,4 +1,4 @@
-import { AsshatMicrotask, AsshatMicrotasks } from "./asshat-microtasks";
+import { AsshatMicrotask, AsshatMicrotasks } from "./promise/asshat-microtasks";
 import { ErrorReporter } from "./error-reporter";
 
 export class EscapeTickerAndExecute {

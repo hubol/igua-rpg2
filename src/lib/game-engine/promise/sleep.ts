@@ -1,4 +1,4 @@
-import { wait } from "../wait";
+import { wait } from "./wait";
 
 export async function sleep(ms: number) {
     if (ms <= 0)
