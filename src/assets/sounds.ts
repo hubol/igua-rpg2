@@ -6,7 +6,7 @@ import { GeneratedSfxData } from "./generated/sounds";
 import oggSoundsZipUrl from "./generated/sounds/sounds-ogg.zip";
 import { RequireCapability } from "../lib/browser/capabilities";
 import { IguaAudio, IguaAudioInitializer } from "../igua/igua-audio";
-import { Sound } from "../lib/game-engine/sound";
+import { Sound } from "../lib/game-engine/audio/sound";
 import { intervalWait } from "../lib/browser/interval-wait";
 
 type SoundId = keyof typeof GeneratedSfxData;

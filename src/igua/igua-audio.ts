@@ -1,7 +1,7 @@
 import { Logging } from "../lib/logging";
 import { intervalWait } from "../lib/browser/interval-wait";
-import { AsshatAudioContext } from "../lib/game-engine/asshat-audiocontext";
-import { Sound } from "../lib/game-engine/sound";
+import { AsshatAudioContext } from "../lib/game-engine/audio/asshat-audiocontext";
+import { Sound } from "../lib/game-engine/audio/sound";
 
 class IguaAudioImpl {
     constructor(private readonly _context: AudioContext) {

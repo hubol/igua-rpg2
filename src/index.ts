@@ -5,7 +5,7 @@ import { createDomErrorAnnouncer } from "./lib/game-engine/dom-error-announcer";
 import { ErrorReporter } from "./lib/game-engine/error-reporter";
 import { createPixiRenderer } from "./lib/game-engine/pixi-renderer";
 import { JobProgress } from "./lib/game-engine/job-progress";
-import { initializeAsshatAudioContext } from "./lib/game-engine/asshat-audiocontext";
+import { initializeAsshatAudioContext } from "./lib/game-engine/audio/asshat-audiocontext";
 import { Environment } from "./lib/environment";
 import { settings } from "pixi.js";
 

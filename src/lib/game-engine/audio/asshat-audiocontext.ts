@@ -1,7 +1,7 @@
-import { RequireCapability } from "../browser/capabilities";
-import { intervalWait } from "../browser/interval-wait";
-import { Environment } from "../environment";
-import { Force } from "../types/force";
+import { RequireCapability } from "../../browser/capabilities";
+import { intervalWait } from "../../browser/interval-wait";
+import { Environment } from "../../environment";
+import { Force } from "../../types/force";
 import { AudioContextSafety } from "./audiocontext-safety";
 
 export let AsshatAudioContext: AudioContext;
