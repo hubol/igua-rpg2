@@ -4,8 +4,7 @@ import { Logging } from "../../logging";
 import { container } from "../../pixi/container";
 import { Undefined } from "../../types/undefined";
 import { TickerContainer } from "../ticker-container";
-
-const localStorageKey = 'debugPanel_isOpen';
+import { createDebugKey } from "./create-debug-key";
 
 export function createDebugPanel(root: Container) {
     if (displayObjectMonitor)
@@ -15,20 +14,9 @@ export function createDebugPanel(root: Container) {
 
     const el = document.createElement('div');
     el.className = 'debug_panel';
-    if (!localStorage.getItem(localStorageKey))
-        el.classList.add('hidden');
     el.appendChild(new DisplayObjectComponent(root).el);
 
-    document.addEventListener("keydown", ({ code }) => {
-        if (code !== 'F9')
-            return;
-
-        el.classList.toggle('hidden');
-        if (el.classList.contains('hidden'))
-            localStorage.removeItem(localStorageKey);
-        else
-            localStorage.setItem(localStorageKey, 'true');
-    });
+    createDebugKey('F9', 'debugPanel_isOpen', x => el.classList[x ? 'remove' : 'add']('hidden'));
 
     return el;
 }

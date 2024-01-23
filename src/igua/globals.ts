@@ -10,6 +10,9 @@ import { setDefaultStages } from "../lib/game-engine/default-stages";
 import { devAssignDisplayObjectIdentifiers } from "../lib/pixi/dev-assign-displayobject-identifiers";
 import { createDebugPanel } from "../lib/game-engine/debug/debug-panel";
 import { TickerContainer } from "../lib/game-engine/ticker-container";
+import { createDebugKey } from "../lib/game-engine/debug/create-debug-key";
+import { IguaAudio } from "./igua-audio";
+import { WarningToast } from "../lib/game-engine/warning-toast";
 
 export let renderer: PixiRenderer;
 
@@ -22,8 +25,17 @@ export const layers = new IguaLayers(rootStage);
 export let scene: IguaScene;
 export const sceneStack = new IguaSceneStack(layers, (_scene) => scene = _scene);
 
-export function installGlobals(_renderer: PixiRenderer) {
+function installDevTools() {
     document.body.appendChild(createDebugPanel(rootStage));
+    createDebugKey('KeyM', 'globalMute', (x, keydown) => {
+        IguaAudio.globalGain = x ? 0 : 1;
+        if (keydown)
+            WarningToast.show(x ? 'Muted' : 'Unmuted', '^_^');
+    });
+}
+
+export function installGlobals(_renderer: PixiRenderer) {
+    installDevTools();
 
     renderer = _renderer;
 
