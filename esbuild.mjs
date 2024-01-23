@@ -17,6 +17,7 @@ function options(overrides) {
         sourcemap: true,
         loader: {
             '.fnt': 'file',
+            '.ogg': 'file',
             '.png': 'file',
             '.zip': 'file',
         },

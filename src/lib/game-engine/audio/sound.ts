@@ -1,11 +1,14 @@
 export class Sound {
     private readonly _gainNode: GainNode;
+    private readonly _context: BaseAudioContext;
+
     rate = 1;
     loop = false;
     with = new SoundWith(this);
 
-    constructor(private readonly _buffer: AudioBuffer, destination: AudioNode, private readonly _context: AudioContext) {
-        this._gainNode = new GainNode(_context);
+    constructor(private readonly _buffer: AudioBuffer, destination: AudioNode) {
+        this._context = destination.context;
+        this._gainNode = new GainNode(this._context);
         this._gainNode.connect(destination);
     }
 
@@ -40,7 +43,7 @@ export class Sound {
 
 type RampableParam = 'rate' | 'gain';
 
-class SoundInstance {
+export class SoundInstance {
     constructor(private readonly _sourceNode: AudioBufferSourceNode, private readonly _gainNode: GainNode) {
 
     }

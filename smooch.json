@@ -26,6 +26,19 @@
 				"out": "src/assets/generated/sounds/index.ts",
 				"program": "src/assets/template/sounds.js"
 			}
+		},
+		{
+			"glob": "raw/music/**/*.{wav,flac}",
+			"convert": [
+				{
+					"directory": "src/assets/generated/music/ogg",
+					"format": "ogg"
+				}
+			],
+			"template": {
+				"out": "src/assets/generated/music/index.ts",
+				"program": "src/assets/template/music.js"
+			}
 		}
 	],
 	"jsonFiles": []

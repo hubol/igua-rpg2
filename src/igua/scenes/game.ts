@@ -21,6 +21,8 @@ import { createDebugPanel } from "../../lib/game-engine/debug/debug-panel";
 import { approachLinear } from "../../lib/math/number";
 import { SceneLocal } from "../core/scene-local";
 import { show } from "../cutscene/show";
+import { Jukebox } from "../igua-audio";
+import { Mzk } from "../../assets/music";
 
 const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });
 
@@ -336,6 +338,8 @@ export function SceneTest() {
         await sleep(1000);
         await show("Bye");
     }).show();
+
+    Jukebox.play(Rng.bool() ? Mzk.Test1 : Mzk.Test2);
 
     // document.body.appendChild(createDebugPanel(scene.stage));
 }
