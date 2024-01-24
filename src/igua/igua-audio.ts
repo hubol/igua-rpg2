@@ -7,6 +7,9 @@ import { Unit } from "../lib/math/number-alias-types";
 
 class IguaAudioImpl {
     private readonly _globalGainNode: GainNode;
+    private readonly _sfxGainNode: GainNode;
+    private readonly _jukeboxGainNode: GainNode;
+
     readonly jukebox: AsshatJukebox;
 
     constructor(private readonly _context: AudioContext) {
@@ -15,14 +18,20 @@ class IguaAudioImpl {
         this._globalGainNode = new GainNode(_context);
         this._globalGainNode.connect(this._context.destination);
 
-        this.jukebox = new AsshatJukebox(this._globalGainNode);
+        this._sfxGainNode = new GainNode(_context);
+        this._sfxGainNode.connect(this._globalGainNode);
+
+        this._jukeboxGainNode = new GainNode(_context);
+        this._jukeboxGainNode.connect(this._globalGainNode);
+
+        this.jukebox = new AsshatJukebox(this._jukeboxGainNode);
     }
 
     async createSfx(buffer: ArrayBuffer) {
         const audio = await this._context.decodeAudioData(buffer);
         // TODO could be routed to special node for environmental effects
         // e.g. reverb, delay
-        return new Sound(audio, this._globalGainNode);
+        return new Sound(audio, this._sfxGainNode);
     }
 
     set globalGain(value: Unit) {
