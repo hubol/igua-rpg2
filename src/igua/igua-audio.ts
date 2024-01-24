@@ -24,7 +24,7 @@ class IguaAudioImpl {
         const delay = new DelayNode(_context, { delayTime: 0.3 });
         delay.connect(this._sfxDelayFeedbackNode);
         this._sfxDelayFeedbackNode.connect(delay);
-        delay.connect(this._context.destination);
+        delay.connect(this._globalGainNode);
 
         this._sfxGainNode = new GainNode(_context);
         this._sfxGainNode.connect(this._globalGainNode);
