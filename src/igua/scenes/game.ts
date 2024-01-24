@@ -339,7 +339,7 @@ export function SceneTest() {
         await show("Bye");
     }).show();
 
-    Jukebox.play(Rng.bool() ? Mzk.Test1 : Mzk.Test2);
+    Jukebox.play(Rng.bool() ? Mzk.Test1 : Mzk.Test2).warm(Mzk.Test1, Mzk.Test2);
 
     // document.body.appendChild(createDebugPanel(scene.stage));
 }

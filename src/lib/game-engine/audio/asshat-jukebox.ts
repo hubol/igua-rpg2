@@ -15,6 +15,7 @@ export class AsshatJukebox {
 
     play(track: MusicTrack) {
         setTimeout(() => this.playAsync(track));
+        return this;
     }
 
     private _latestPlayRequest?: MusicTrack;
@@ -25,6 +26,15 @@ export class AsshatJukebox {
         this._current?.stop();
         if (this._latestPlayRequest == track)
             this._current = sound.with.loop(true).playInstance();
+    }
+
+    async warm(...tracks: MusicTrack[]) {
+        setTimeout(() => this.warmAsync(...tracks));
+        return this;
+    }
+
+    async warmAsync(...tracks: MusicTrack[]) {
+        await Promise.all(tracks.map(x => this._loader.load(x)));
     }
 }
 
