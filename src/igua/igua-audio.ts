@@ -10,6 +10,8 @@ class IguaAudioImpl {
     private readonly _sfxGainNode: GainNode;
     private readonly _jukeboxGainNode: GainNode;
 
+    private readonly _sfxDelayFeedbackNode: GainNode;
+
     readonly jukebox: AsshatJukebox;
 
     constructor(private readonly _context: AudioContext) {
@@ -18,11 +20,20 @@ class IguaAudioImpl {
         this._globalGainNode = new GainNode(_context);
         this._globalGainNode.connect(this._context.destination);
 
+        this._sfxDelayFeedbackNode = new GainNode(_context, { gain: 0 });
+        const delay = new DelayNode(_context, { delayTime: 0.3 });
+        delay.connect(this._sfxDelayFeedbackNode);
+        this._sfxDelayFeedbackNode.connect(delay);
+        delay.connect(this._context.destination);
+
         this._sfxGainNode = new GainNode(_context);
         this._sfxGainNode.connect(this._globalGainNode);
+        this._sfxGainNode.connect(this._sfxDelayFeedbackNode);
 
         this._jukeboxGainNode = new GainNode(_context);
         this._jukeboxGainNode.connect(this._globalGainNode);
+
+        this._jukeboxGainNode.gain.value = 0.2;
 
         this.jukebox = new AsshatJukebox(this._jukeboxGainNode);
     }
@@ -32,6 +43,10 @@ class IguaAudioImpl {
         // TODO could be routed to special node for environmental effects
         // e.g. reverb, delay
         return new Sound(audio, this._sfxGainNode);
+    }
+
+    set sfxDelayFeedback(value: Unit) {
+        this._sfxDelayFeedbackNode.gain.value = value;
     }
 
     set globalGain(value: Unit) {

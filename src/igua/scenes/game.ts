@@ -21,7 +21,7 @@ import { createDebugPanel } from "../../lib/game-engine/debug/debug-panel";
 import { approachLinear } from "../../lib/math/number";
 import { SceneLocal } from "../core/scene-local";
 import { show } from "../cutscene/show";
-import { Jukebox } from "../igua-audio";
+import { IguaAudio, Jukebox } from "../igua-audio";
 import { Mzk } from "../../assets/music";
 
 const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });
@@ -92,10 +92,11 @@ export function SceneTest() {
             }
             if (Key.justWentDown('ArrowUp')) {
                 WarningToast.show('A sound', 'A sound was just played!');
-                Sfx.BallBounce.with.rate(Rng.float(0.5, 2)).play();
+                Sfx.ArrowKnock.with.rate(Rng.float(0.5, 2)).play();
             }
             if (Key.justWentDown('Space')) {
-                Sfx.PorkRollEggAndCheese.with.rate(Rng.float(0.5, 2)).playInstance().linearRamp('rate', Rng.float(0.5, 2), Rng.float(1, 3));
+                IguaAudio.sfxDelayFeedback = Rng.float(0.1, 0.9);
+                Sfx.BallonPop.with.rate(Rng.float(0.5, 2)).playInstance().linearRamp('rate', Rng.float(0.5, 2), Rng.float(1, 3));
                 throw new EscapeTickerAndExecute(() =>
                     sceneStack.push(SceneTest, { useGameplay: false }));
             }
