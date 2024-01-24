@@ -1,3 +1,5 @@
+import { Seconds, Unit } from "../../math/number-alias-types";
+
 export class Sound {
     private readonly _gainNode: GainNode;
     private readonly _context: BaseAudioContext;
@@ -16,18 +18,18 @@ export class Sound {
         return this._gainNode.gain.value;
     }
 
-    set gain(value: number) {
+    set gain(value: Unit) {
         this._gainNode.gain.value = value;
     }
 
-    play() {
+    play(offset?: Seconds) {
         const source = this._createSourceNode();
-        source.start();
+        source.start(undefined, offset);
     }
 
-    playInstance() {
+    playInstance(offset?: Seconds) {
         const source = this._createSourceNode();
-        source.start();
+        source.start(undefined, offset);
         return new SoundInstance(source, this._gainNode);
     }
 
@@ -57,7 +59,7 @@ export class SoundInstance {
         }
     }
 
-    linearRamp(param: RampableParam, value: number, durationSeconds: number) {
+    linearRamp(param: RampableParam, value: number, durationSeconds: Seconds) {
         this._getAudioParam(param).linearRampToValueAtTime(value, this._sourceNode.context.currentTime + durationSeconds);
         return this;
     }
@@ -66,7 +68,7 @@ export class SoundInstance {
         return this._gainNode.gain.value;
     }
 
-    set gain(value: number) {
+    set gain(value: Unit) {
         this._gainNode.gain.value = value;
     }
 
@@ -101,7 +103,7 @@ class SoundWith {
         return this;
     }
 
-    gain(gain: number) {
+    gain(gain: Unit) {
         this._sound.gain = gain;
         return this;
     }
@@ -111,12 +113,12 @@ class SoundWith {
         return this;
     }
 
-    play() {
-        return this._sound.play();
+    play(offset?: Seconds) {
+        return this._sound.play(offset);
     }
 
-    playInstance() {
-        return this._sound.playInstance();
+    playInstance(offset?: Seconds) {
+        return this._sound.playInstance(offset);
     }
 }
 
