@@ -17,10 +17,14 @@ export class AsshatJukebox {
         setTimeout(() => this.playAsync(track));
     }
 
+    private _latestPlayRequest?: MusicTrack;
+
     async playAsync(track: MusicTrack) {
+        this._latestPlayRequest = track;
         const sound = await this._loader.load(track);
         this._current?.stop();
-        this._current = sound.with.loop(true).playInstance();
+        if (this._latestPlayRequest == track)
+            this._current = sound.with.loop(true).playInstance();
     }
 }
 
