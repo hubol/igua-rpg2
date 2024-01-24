@@ -11,7 +11,6 @@ import { container } from "../../lib/pixi/container";
 import { PseudoRng, Rng } from "../../lib/math/rng";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { objIguanaPuppet, objIguanaHead } from "../iguana/obj-iguana-puppet";
-import { iguanaPuppet } from "../iguana/iguana-puppet";
 import { TextureToGraphicsConverter } from "../../lib/pixi/texture-to-graphics-converter";
 import { objText } from "../../assets/fonts";
 import { sleep } from "../../lib/game-engine/promise/sleep";
