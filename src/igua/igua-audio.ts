@@ -4,13 +4,14 @@ import { AsshatAudioContext } from "../lib/game-engine/audio/asshat-audiocontext
 import { Sound } from "../lib/game-engine/audio/sound";
 import { AsshatJukebox } from "../lib/game-engine/audio/asshat-jukebox";
 import { Unit } from "../lib/math/number-alias-types";
+import { StereoDelay } from "../lib/game-engine/audio/stereo-delay";
 
 class IguaAudioImpl {
     private readonly _globalGainNode: GainNode;
     private readonly _sfxGainNode: GainNode;
     private readonly _jukeboxGainNode: GainNode;
 
-    private readonly _sfxDelayFeedbackNode: GainNode;
+    private readonly _stereoDelay: StereoDelay;
 
     readonly jukebox: AsshatJukebox;
 
@@ -20,20 +21,17 @@ class IguaAudioImpl {
         this._globalGainNode = new GainNode(_context);
         this._globalGainNode.connect(this._context.destination);
 
-        this._sfxDelayFeedbackNode = new GainNode(_context, { gain: 0 });
-        const delay = new DelayNode(_context, { delayTime: 0.3 });
-        delay.connect(this._sfxDelayFeedbackNode);
-        this._sfxDelayFeedbackNode.connect(delay);
-        delay.connect(this._globalGainNode);
-
         this._sfxGainNode = new GainNode(_context);
         this._sfxGainNode.connect(this._globalGainNode);
-        this._sfxGainNode.connect(this._sfxDelayFeedbackNode);
+
+        this._stereoDelay = new StereoDelay(this._globalGainNode);
+        this._sfxGainNode.connect(this._stereoDelay.leftInput);
+        this._sfxGainNode.connect(this._stereoDelay.rightInput);
 
         this._jukeboxGainNode = new GainNode(_context);
         this._jukeboxGainNode.connect(this._globalGainNode);
 
-        this._jukeboxGainNode.gain.value = 0.2;
+        this._jukeboxGainNode.gain.value = 0.5;
 
         this.jukebox = new AsshatJukebox(this._jukeboxGainNode);
     }
@@ -46,7 +44,8 @@ class IguaAudioImpl {
     }
 
     set sfxDelayFeedback(value: Unit) {
-        this._sfxDelayFeedbackNode.gain.value = value;
+        this._stereoDelay.leftGain.value = value;
+        this._stereoDelay.rightGain.value = value;
     }
 
     set globalGain(value: Unit) {
