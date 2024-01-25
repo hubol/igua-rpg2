@@ -119,24 +119,6 @@ noscript {
     padding: .1em .2em;
 }
 
-.dev_message_container {
-    position: fixed;
-    bottom: 8px;
-    left: 8px;
-    font-size: 16px;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-start;
-}
-
-.dev_message_container > * {
-    padding: 16px;
-    margin: 8px;
-    background-color: white;
-    border-radius: 6px;
-    box-shadow: 4px 4px 4px var(--bg-color-dark);
-}
-
 #runtime_errors {
     font-family: monospace;
     font-size: 120%;
