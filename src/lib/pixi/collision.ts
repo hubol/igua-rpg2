@@ -66,6 +66,7 @@ type Collideable = Container & PrivateDisplayObjectCollisionShape;
 
 function sourceCollidesWithTargets<TInstance>(
         source: Collideable,
+        sourceOffset: Vector,
         targets: Collideable[],
         param: FindParam,
         result: CollisionResult<TInstance>) {
@@ -77,8 +78,12 @@ function sourceCollidesWithTargets<TInstance>(
 
     accumulateBoundRectanglesOrNotOverlapping(null, source, sourceBoundRectangles);
 
+    for (let i = 0; i < sourceBoundRectangles.length; i += 1) {
+        sourceBoundRectangles[i].add(sourceOffset);
+    }
+
     const greedySource = source._collisionShape === CollisionShape.Children
-        ? source.getBounds(SkipUpdate, sourceGreedyBoundRectangle)
+        ? source.getBounds(SkipUpdate, sourceGreedyBoundRectangle).add(sourceOffset)
         : (sourceBoundRectangles.length === 1 ? sourceBoundRectangles[0] : null);
 
     for (let i = 0; i < targets.length; i += 1) {
@@ -154,16 +159,17 @@ export const Collision = {
     configureDisplayObject,
     displayObjectCollidesMany<TDisplayObject extends DisplayObject>(
             source: DisplayObject,
+            sourceOffset: Vector,
             targets: TDisplayObject[],
             param: FindParam,
             buffer = _buffer) {
         const result = clean<TDisplayObject>(buffer);
-        return sourceCollidesWithTargets(source as Collideable, targets as DisplayObject[] as Collideable[], param, result);
+        return sourceCollidesWithTargets(source as Collideable, sourceOffset, targets as DisplayObject[] as Collideable[], param, result);
     },
-    displayObjectCollides(source: DisplayObject, target: DisplayObject) {
+    displayObjectCollides(source: DisplayObject, sourceOffset: Vector, target: DisplayObject) {
         const result = clean(_buffer);
         singleItemArray[0] = target;
-        return sourceCollidesWithTargets(source as Collideable, singleItemArray as Collideable[], 0, result).collided;
+        return sourceCollidesWithTargets(source as Collideable, sourceOffset, singleItemArray as Collideable[], 0, result).collided;
     },
     recycleRectangles() {
         rectangleIndex = 0;

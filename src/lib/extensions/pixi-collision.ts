@@ -1,5 +1,6 @@
 import { DisplayObject } from "pixi.js";
 import { Collision, CollisionShape } from "../pixi/collision";
+import { Vector, vnew } from "../math/vector-type";
 
 declare module "pixi.js" {
     interface DisplayObject {
@@ -9,28 +10,30 @@ declare module "pixi.js" {
         collisionShape(shape: CollisionShape.DisplayObjects, displayObjects: DisplayObject[]): this;
         collisionShape(shape: CollisionShape.Children): this;
 
-        collides(target: DisplayObject): boolean;
-        collidesOne<TDisplayObject extends DisplayObject>(array: TDisplayObject[]): TDisplayObject | null;
-        collidesAll<TDisplayObject extends DisplayObject>(array: TDisplayObject[], result?: {}): TDisplayObject[];
+        collides(target: DisplayObject, offset?: Vector): boolean;
+        collidesOne<TDisplayObject extends DisplayObject>(array: TDisplayObject[], offset?: Vector): TDisplayObject | null;
+        collidesAll<TDisplayObject extends DisplayObject>(array: TDisplayObject[], offset?: Vector, result?: {}): TDisplayObject[];
     }
 }
 
+const vector0 = vnew();
+
 Object.defineProperties(DisplayObject.prototype, {
     collides: {
-        value: function (this: DisplayObject, target: DisplayObject) {
-            return Collision.displayObjectCollides(this, target);
+        value: function (this: DisplayObject, target: DisplayObject, offset = vector0) {
+            return Collision.displayObjectCollides(this, offset, target);
         },
         configurable: true,
     },
     collidesOne: {
-        value: function (this: DisplayObject, array: DisplayObject[]) {
-            return Collision.displayObjectCollidesMany(this, array, 0).instance;
+        value: function (this: DisplayObject, array: DisplayObject[], offset = vector0) {
+            return Collision.displayObjectCollidesMany(this, offset, array, 0).instance;
         },
         configurable: true,
     },
     collidesAll: {
-        value: function (this: DisplayObject, array: DisplayObject[], result?: {}) {
-            return Collision.displayObjectCollidesMany(this, array, 1, result).instances;
+        value: function (this: DisplayObject, array: DisplayObject[], offset = vector0, result?: {}) {
+            return Collision.displayObjectCollidesMany(this, offset, array, 1, result).instances;
         },
         configurable: true,
     },

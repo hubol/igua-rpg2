@@ -104,7 +104,7 @@ export function SceneTest() {
                     sceneStack.pop());
             }
             const tint = Math.floor(Math.random() * 0xffffff);
-            for (const collided of guy.collidesAll(sprites)) {
+            for (const collided of guy.collidesAll(sprites, [0, -16])) {
                 collided.tint = tint;
             }
             if (guy.collides(s)) {
