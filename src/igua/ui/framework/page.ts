@@ -5,15 +5,7 @@ import { cyclic } from "../../../lib/math/number";
 import { EscapeTickerAndExecute } from "../../../lib/game-engine/asshat-ticker";
 
 export type UiPageState = { selectionIndex: number };
-
-export class UiPageElement extends Container {
-    selected = false;
-
-    constructor(...children: DisplayObject[]) {
-        super();
-        this.addChild(...children);
-    }
-}
+export type UiPageElement = Container & { selected: boolean };
 
 export function objUiPageRouter() {
     function goto(page: UiPage) {
