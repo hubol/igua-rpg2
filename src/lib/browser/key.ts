@@ -16,41 +16,34 @@ const KeyCodes = [ "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowUp",
 
 export type KeyCode = typeof KeyCodes[number];
 
-type KeysState = Partial<Record<KeyCode, boolean>>;
+type KeysState = Partial<Record<KeyCode, number>>;
 
 export const Key = {
     isDown(key: KeyCode) {
-        return key in currentKeysState && currentKeysState[key] as boolean;
+        return (currentKeysState[key]! & 0b101) as unknown as boolean;
     },
     isUp(key: KeyCode) {
         return !this.isDown(key);
     },
     justWentDown(key: KeyCode) {
-        return previouslyUp(key) && this.isDown(key);
+        return (currentKeysState[key]! & 0b100) as unknown as boolean;
     },
     justWentUp(key: KeyCode) {
-        return previouslyDown(key) && this.isUp(key);
+        return (currentKeysState[key]! & 0b010) as unknown as boolean;
     }
 };
 
-function previouslyDown(key: KeyCode) {
-    return key in previousKeysState && previousKeysState[key];
-}
-
-function previouslyUp(key: KeyCode) {
-    return !previouslyDown(key);
-}
-
-let previousKeysState: KeysState = {};
-let currentKeysState: KeysState = {};
-const workingKeysState: KeysState = {};
+const currentKeysState: KeysState = {};
 
 function handleKeyDown(event: KeyboardEvent) {
-    workingKeysState[event.code] = true;
+    if (event.repeat)
+        return;
+    currentKeysState[event.code] |= 0b101;
 }
 
 function handleKeyUp(event: KeyboardEvent) {
-    workingKeysState[event.code] = false;
+    currentKeysState[event.code] |= 0b010;
+    currentKeysState[event.code] &= 0b110;
 }
 
 let startedKeyListener = false;
@@ -60,18 +53,14 @@ export const KeyListener = {
         if (startedKeyListener)
             throw new Error("Cannot start key listener twice!");
         document.addEventListener("keydown", handleKeyDown);
-        document.addEventListener("keypress", handleKeyDown);
         document.addEventListener("keyup", handleKeyUp);
         startedKeyListener = true;
     },
     advance() {
         if (!startedKeyListener)
             throw new Error("Key listener must be started to advance!");
-        const p = previousKeysState;
-        for (const key in p)
-            delete p[key];
-    
-        previousKeysState = currentKeysState;
-        currentKeysState = Object.assign(p, workingKeysState);
+        for (const key in currentKeysState) {
+            currentKeysState[key] &= 0b001;
+        }
     }
 }

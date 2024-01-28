@@ -54,10 +54,10 @@ export function installGlobals(_renderer: PixiRenderer) {
 
     ticker.add(() => {
         AsshatZoneDiagnostics.printHandledCancellationErrors();
-        KeyListener.advance();
         scene?.ticker.tick();
         rootTicker.tick();
         Collision.recycleRectangles();
+        KeyListener.advance();
     });
 
     ticker.add(displayCanvas);
