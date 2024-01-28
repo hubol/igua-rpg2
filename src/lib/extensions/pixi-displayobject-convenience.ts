@@ -1,4 +1,4 @@
-import { DisplayObject, Rectangle } from "pixi.js";
+import { Container, DisplayObject, Rectangle } from "pixi.js";
 import { DefaultStages } from "../game-engine/default-stages";
 import { Pojo } from "../types/pojo";
 import { merge } from "../object/merge";
@@ -10,6 +10,10 @@ declare module "pixi.js" {
         merge<T extends Pojo>(t: T): this & T;
         getMinY(): number;
         getMaxY(): number;
+    }
+
+    interface Container {
+        removeAllChildren();
     }
 }
 
@@ -44,5 +48,21 @@ Object.defineProperties(DisplayObject.prototype, {
         }
     },
 });
+
+const tempDisplayObjects: DisplayObject[] = [];
+
+Object.defineProperties(Container.prototype, {
+    removeAllChildren: {
+        value: function (this: Container) {
+            tempDisplayObjects.length = 0;
+            tempDisplayObjects.push(...this.children);
+            for (let i = 0; i < tempDisplayObjects.length; i++) {
+                tempDisplayObjects[i].destroy();
+            }
+
+            tempDisplayObjects.length = 0;
+        }
+    }
+})
 
 export default 0;

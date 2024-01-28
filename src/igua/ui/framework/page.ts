@@ -1,0 +1,93 @@
+import { Container, DisplayObject } from "pixi.js";
+import { Key } from "../../../lib/browser/key";
+import { container } from "../../../lib/pixi/container";
+import { cyclic } from "../../../lib/math/number";
+import { EscapeTickerAndExecute } from "../../../lib/game-engine/asshat-ticker";
+
+export type UiPageState = { selectionIndex: number };
+
+export class UiPageElement extends Container {
+    selected = false;
+
+    constructor(...children: DisplayObject[]) {
+        super();
+        this.addChild(...children);
+    }
+}
+
+export function objUiPageRouter() {
+    function goto(page: UiPage) {
+        c.removeAllChildren();
+        c.addChild(page);
+    }
+
+    function gotoEscape(page: UiPage) {
+        throw new EscapeTickerAndExecute(() => goto(page));
+    }
+
+    const c = container()
+        .merge({ goto, gotoEscape });
+
+    return c;
+}
+
+export function objUiPage(elements: UiPageElement[], state: UiPageState) {
+    const c = container(...elements).merge({ navigation: true, state });
+    updateSelection();
+
+    function updateSelection() {
+        state.selectionIndex = cyclic(state.selectionIndex, 0, elements.length);
+        elements.forEach((x, i) => x.selected = state.selectionIndex === i)
+    }
+
+    function select(dx: number, dy: number) {
+        const selected = elements[state.selectionIndex];
+        dx = Math.sign(dx) * 16;
+        dy = Math.sign(dy) * 16;
+        let ax = dx;
+        let ay = dy;
+        let d = 0;
+        let fromBehind = false;
+        const dd = Math.abs(dx) + Math.abs(dy);
+        // TODO bizarre value
+        while (d < 600) {
+            const offset = [-ax, -ay];
+            for (let i = 0; i < elements.length; i++) {
+                if (i === state.selectionIndex)
+                    continue;
+                if (elements[i].collides(selected, offset)) {
+                    state.selectionIndex = i;
+                    return;
+                }
+            }
+            ax += dx;
+            ay += dy;
+            d += dd;
+            // TODO constants from screen size
+            if (!fromBehind && d >= 256) {
+                ax = Math.sign(dx) * -256;
+                ay = Math.sign(dy) * -256;
+                fromBehind = true;
+            }
+        }
+    }
+
+    c.step(() => {
+        if (c.navigation) {
+            // TODO use input abstraction
+            if (Key.justWentDown('ArrowUp'))
+                select(0, -1);
+            if (Key.justWentDown('ArrowDown'))
+                select(0, 1);
+            if (Key.justWentDown('ArrowLeft'))
+                select(-1, 0);
+            if (Key.justWentDown('ArrowRight'))
+                select(1, 0);
+        }
+        updateSelection();
+    });
+
+    return c;
+}
+
+export type UiPage = ReturnType<typeof objUiPage>;

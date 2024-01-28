@@ -62,8 +62,8 @@ export class IguaSceneStack extends SceneStack<IguaSceneMeta, IguaScene> {
         const scene = this.scenes.last;
 
         if (!scene)
-            throw new Error('IguaSceneStack does not support empty stack!');
-
+            return;
+        
         scene.root.visible = true;
         this._setScene(scene);
     }
