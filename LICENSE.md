@@ -1,0 +1,1 @@
+This repository is publicly available as a curiosity and learning tool. When using the source code or assets you must credit me publicly. **You may not create commercial works using the source code or assets without my explicit, written permission.**
