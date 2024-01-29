@@ -1,13 +1,12 @@
 import "../../src/lib/extensions";
-import { Container } from "pixi.js";
 import { AsshatTicker } from "../../src/lib/game-engine/asshat-ticker";
 import { createDisplayObject } from "../lib/create-display-object";
-import { wait } from "../../src/lib/game-engine/wait";
 import { Assert } from "../lib/assert";
 import { TestPromise } from "../lib/test-promise";
 import { TickerContainer } from "../../src/lib/game-engine/ticker-container";
+import { wait } from "../../src/lib/game-engine/promise/wait";
 
-export function worksWithoutFlushingPromises() {
+export function requiresFlushingPromises() {
     const ticker = new AsshatTicker();
     const c = new TickerContainer(ticker);
 
@@ -37,14 +36,14 @@ export function worksWithoutFlushingPromises() {
     Assert(phase).toStrictlyBe(0);
     phase1 = true;
     ticker.tick();
-    // Assert(phase).toStrictlyBe(1);
+    Assert(phase).toStrictlyBe(0);
     phase2 = true;
     phase3 = true;
     ticker.tick();
-    // Assert(phase).toStrictlyBe(3);
+    Assert(phase).toStrictlyBe(0);
     phase4 = true;
     ticker.tick();
-    Assert(phase).toStrictlyBe(4);
+    Assert(phase).toStrictlyBe(0);
 }
 
 export async function worksWithFlushingPromises() {
