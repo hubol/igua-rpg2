@@ -60,6 +60,9 @@ html {
 
     padding: 0.8em;
     animation: fatal_error_glow 2s infinite alternate-reverse;
+
+    flex-direction: column;
+    justify-content: center;
 }
 
 @keyframes fatal_error_glow {
