@@ -29,6 +29,10 @@ export class AsshatTicker implements IAsshatTicker {
         this._microtasks.add(task);
     }
 
+    cancelMicrotasks() {
+        this._microtasks.cancel();
+    }
+
     remove(fn: AsshatTickerFn) {
         fn._removed = true;
     }

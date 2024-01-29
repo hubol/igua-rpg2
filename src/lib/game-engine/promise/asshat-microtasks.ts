@@ -18,6 +18,15 @@ export class AsshatMicrotasks {
         }
     }
 
+    cancel() {
+        while (this._tasks.length) {
+            const task = this._tasks.pop()!;
+            task.cancellationToken.cancel();
+            task.cancellationToken.rejectIfCancelled(task.reject);
+            free(task);
+        }
+    }
+
     private _checkPredicates() {
         let i = 0;
         let shift = 0;

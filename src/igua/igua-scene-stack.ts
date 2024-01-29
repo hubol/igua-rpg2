@@ -53,6 +53,7 @@ export class IguaSceneStack extends SceneStack<IguaSceneMeta, IguaScene> {
 
     protected dispose(scene: IguaScene): void {
         scene.root.destroy();
+        scene.ticker.cancelMicrotasks();
     }
 
     protected onScenesModified(): void {
