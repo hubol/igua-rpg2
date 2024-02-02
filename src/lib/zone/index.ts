@@ -2,15 +2,14 @@ import { newScope, PSD } from "./dexie/promise";
 
 type InternalContext = { key: string };
 
-const _contexts: Record<string, object> = {};
-
 export class Zone<TContext extends object> {
   private _contextsCreatedCount = 0;
+  private _contexts: Record<string, object> = {};
 
   constructor(readonly name: string) { }
 
   get context() {
-    return _contexts[(PSD as any as InternalContext).key] as TContext;
+    return this._contexts[(PSD as any as InternalContext).key] as TContext;
   }
 
   run(fn: () => unknown, context: TContext) {
@@ -19,9 +18,9 @@ export class Zone<TContext extends object> {
 
     const internalContext: InternalContext = { key };
 
-    _contexts[key] = context;
+    this._contexts[key] = context;
     const scope: Promise<void> = newScope(fn, internalContext);
-    return scope.finally(() => delete _contexts[key]);
+    return scope.finally(() => delete this._contexts[key]);
   }
 
 }
