@@ -1,7 +1,6 @@
 import { Container, Graphics, Sprite } from "pixi.js";
 import { wait } from "../../lib/game-engine/promise/wait";
-import { Key } from "../../lib/browser/key";
-import { layers, scene, sceneStack } from "../globals";
+import { scene, sceneStack } from "../globals";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { Tx } from "../../assets/textures";
 import { CollisionShape } from "../../lib/pixi/collision";
@@ -16,23 +15,23 @@ import { objText } from "../../assets/fonts";
 import { sleep } from "../../lib/game-engine/promise/sleep";
 import { IguanaLooks } from "../iguana/looks";
 import { lerp } from "../../lib/game-engine/promise/lerp";
-import { createDebugPanel } from "../../lib/game-engine/debug/debug-panel";
 import { approachLinear } from "../../lib/math/number";
 import { SceneLocal } from "../core/scene-local";
 import { show } from "../cutscene/show";
 import { IguaAudio, Jukebox } from "../igua-audio";
 import { Mzk } from "../../assets/music";
+import { Input } from "../core/input";
 
 const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });
 
-const BigKeyTextures = Tx.BigKey1.split({ count: 3, trimFrame: true });
+const BigInputTextures = Tx.BigKey1.split({ count: 3, trimFrame: true });
 
 const Score = new SceneLocal(() => ({ current: 0 }));
 
 export function SceneTest() {
     console.log('Scene', scene.source.name);
 
-    for (const tx of BigKeyTextures) {
+    for (const tx of BigInputTextures) {
         new Sprite(tx).at(128, 128).show();
     }
 
@@ -77,29 +76,29 @@ export function SceneTest() {
         .collisionShape(CollisionShape.DisplayObjects, [ ball, pole ])    
         .at(128, 128)
         .step(() => {
-            if (Key.isDown('ArrowUp'))
+            if (Input.isDown('SelectUp'))
                 guy.y -= 4;
-            if (Key.isDown('ArrowDown')) {
+            if (Input.isDown('SelectDown')) {
                 guy.y += 4;
             }
-            if (Key.isDown('ArrowLeft'))
+            if (Input.isDown('SelectLeft'))
                 guy.x -= 4;
-            if (Key.isDown('ArrowRight'))
+            if (Input.isDown('SelectRight'))
                 guy.x += 4;
-            if (Key.justWentDown('ArrowDown')) {
+            if (Input.justWentDown('SelectDown')) {
                 WarningToast.show(prng.choose('Message 1', 'Message 2', 'Message 3'), 'description');
             }
-            if (Key.justWentDown('ArrowUp')) {
+            if (Input.justWentDown('SelectUp')) {
                 WarningToast.show('A sound', 'A sound was just played!');
                 Sfx.ArrowKnock.with.rate(Rng.float(0.5, 2)).play();
             }
-            if (Key.justWentDown('Space')) {
+            if (Input.justWentDown('CastSpell')) {
                 IguaAudio.sfxDelayFeedback = Rng.float(0.1, 0.9);
                 Sfx.BallonPop.with.rate(Rng.float(0.5, 2)).playInstance().linearRamp('rate', Rng.float(0.5, 2), Rng.float(1, 3));
                 throw new EscapeTickerAndExecute(() =>
                     sceneStack.push(SceneTest, { useGameplay: false }));
             }
-            if (Key.justWentDown('Backspace')){
+            if (Input.justWentDown('MenuEscape')){
                 throw new EscapeTickerAndExecute(() =>
                     sceneStack.pop());
             }

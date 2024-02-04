@@ -1,8 +1,8 @@
-import { Container, DisplayObject } from "pixi.js";
-import { Key } from "../../../lib/browser/key";
+import { Container } from "pixi.js";
 import { container } from "../../../lib/pixi/container";
 import { cyclic } from "../../../lib/math/number";
 import { EscapeTickerAndExecute } from "../../../lib/game-engine/asshat-ticker";
+import { Input } from "../../core/input";
 
 export type UiPageState = { selectionIndex: number };
 export type UiPageElement = Container & { selected: boolean };
@@ -66,14 +66,13 @@ export function objUiPage(elements: UiPageElement[], state: UiPageState) {
 
     c.step(() => {
         if (c.navigation) {
-            // TODO use input abstraction
-            if (Key.justWentDown('ArrowUp'))
+            if (Input.justWentDown('SelectUp'))
                 select(0, -1);
-            if (Key.justWentDown('ArrowDown'))
+            if (Input.justWentDown('SelectDown'))
                 select(0, 1);
-            if (Key.justWentDown('ArrowLeft'))
+            if (Input.justWentDown('SelectLeft'))
                 select(-1, 0);
-            if (Key.justWentDown('ArrowRight'))
+            if (Input.justWentDown('SelectRight'))
                 select(1, 0);
         }
         updateSelection();

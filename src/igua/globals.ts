@@ -1,4 +1,3 @@
-import { KeyListener } from "../lib/browser/key";
 import { Animator } from "../lib/game-engine/animator";
 import { AsshatTicker } from "../lib/game-engine/asshat-ticker";
 import { AsshatZoneDiagnostics } from "../lib/game-engine/asshat-zone";
@@ -13,6 +12,7 @@ import { TickerContainer } from "../lib/game-engine/ticker-container";
 import { createDebugKey } from "../lib/game-engine/debug/create-debug-key";
 import { IguaAudio } from "./igua-audio";
 import { WarningToast } from "../lib/game-engine/warning-toast";
+import { InputPoller } from "./core/input";
 
 export let renderer: PixiRenderer;
 
@@ -50,14 +50,14 @@ export function installGlobals(_renderer: PixiRenderer) {
 
     const ticker = new AsshatTicker();
 
-    KeyListener.start();
+    InputPoller.start();
 
     ticker.add(() => {
         AsshatZoneDiagnostics.printHandledCancellationErrors();
         scene?.ticker.tick();
         rootTicker.tick();
         Collision.recycleRectangles();
-        KeyListener.advance();
+        InputPoller.tick();
     });
 
     ticker.add(displayCanvas);

@@ -1,10 +1,10 @@
-import { Graphics, Rectangle } from "pixi.js";
+import { Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { container } from "../../lib/pixi/container";
 import { approachLinear } from "../../lib/math/number";
 import { layers } from "../globals";
 import { wait } from "../../lib/game-engine/promise/wait";
-import { Key } from "../../lib/browser/key";
+import { Input } from "../core/input";
 
 const borderColor = 0x00ff00;
 const backgroundColor = 0x005870;
@@ -83,8 +83,8 @@ export async function show(text: string) {
     else
         instance.text = text;
 
-    await wait(() => Key.isUp("KeyP"));
-    await wait(() => Key.isDown("KeyP"));
+    await wait(() => Input.isUp("Confirm"));
+    await wait(() => Input.isDown("Confirm"));
 
     instance!.dismissAfterFrames = 1;
 }

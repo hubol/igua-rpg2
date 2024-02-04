@@ -1,7 +1,7 @@
 import { Graphics } from "pixi.js";
-import { Key } from "../../../lib/browser/key";
 import { objText } from "../../../assets/fonts";
 import { container } from "../../../lib/pixi/container";
+import { Input } from "../../core/input";
 
 export function objUiButton(text: string, onPress: () => unknown, width = 96, height = 30) {
     let jigglesOnPress = false;
@@ -50,12 +50,12 @@ export function objUiButton(text: string, onPress: () => unknown, width = 96, he
                 c.pivot.x = 0;
     
             // TODO use input
-            if (c.selected && Key.justWentDown('Space')) {
+            if (c.selected && Input.justWentDown('Confirm')) {
                 c.onPress();
                 if (jigglesOnPress)
                     factor = 8;
             }
-            else if (escapes && Key.justWentDown('Escape')) {
+            else if (escapes && Input.justWentDown('MenuEscape')) {
                 c.onPress();
             }
         });
