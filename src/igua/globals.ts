@@ -25,28 +25,10 @@ export const layers = new IguaLayers(rootStage);
 export let scene: IguaScene;
 export const sceneStack = new IguaSceneStack(layers, (_scene) => scene = _scene);
 
-function installDevTools() {
-    document.body.appendChild(createDebugPanel(rootStage));
-    createDebugKey('KeyM', 'globalMute', (x, keydown) => {
-        IguaAudio.globalGain = x ? 0 : 1;
-        if (keydown)
-            WarningToast.show(x ? 'Muted' : 'Unmuted', '^_^');
-    });
-}
-
 export function installGlobals(_renderer: PixiRenderer) {
     installDevTools();
 
     renderer = _renderer;
-
-    renderer.view.style.opacity = '0';
-
-    const displayCanvas = () => {
-        if (ticker.ticks >= 1) {
-            ticker.remove(displayCanvas);
-            renderer.view.style.opacity = '';
-        }
-    };
 
     const ticker = new AsshatTicker();
 
@@ -60,7 +42,7 @@ export function installGlobals(_renderer: PixiRenderer) {
         InputPoller.tick();
     });
 
-    ticker.add(displayCanvas);
+    preventUnpleasantCanvasFlash(ticker);
 
     const animator = new Animator(60);
     animator.start();
@@ -75,4 +57,26 @@ export function installGlobals(_renderer: PixiRenderer) {
             return scene.stage;
         }
     });
+}
+
+function installDevTools() {
+    document.body.appendChild(createDebugPanel(rootStage));
+    createDebugKey('KeyM', 'globalMute', (x, keydown) => {
+        IguaAudio.globalGain = x ? 0 : 1;
+        if (keydown)
+            WarningToast.show(x ? 'Muted' : 'Unmuted', '^_^');
+    });
+}
+
+function preventUnpleasantCanvasFlash(ticker: AsshatTicker) {
+    renderer.view.style.opacity = '0';
+
+    const displayCanvas = () => {
+        if (ticker.ticks >= 1) {
+            ticker.remove(displayCanvas);
+            renderer.view.style.opacity = '';
+        }
+    };
+
+    ticker.add(displayCanvas);
 }
