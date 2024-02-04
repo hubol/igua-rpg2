@@ -12,7 +12,7 @@ import { TickerContainer } from "../lib/game-engine/ticker-container";
 import { createDebugKey } from "../lib/game-engine/debug/create-debug-key";
 import { IguaAudio } from "./igua-audio";
 import { WarningToast } from "../lib/game-engine/warning-toast";
-import { InputPoller } from "./core/input";
+import { IguaInput } from "./core/input";
 
 export let renderer: PixiRenderer;
 
@@ -25,6 +25,9 @@ export const layers = new IguaLayers(rootStage);
 export let scene: IguaScene;
 export const sceneStack = new IguaSceneStack(layers, (_scene) => scene = _scene);
 
+const iguaInput = new IguaInput();
+export const Input: Pick<IguaInput, 'isDown' | 'isUp' | 'justWentDown' | 'justWentUp'> = iguaInput;
+
 export function installGlobals(_renderer: PixiRenderer) {
     installDevTools();
 
@@ -32,14 +35,14 @@ export function installGlobals(_renderer: PixiRenderer) {
 
     const ticker = new AsshatTicker();
 
-    InputPoller.start();
+    iguaInput.start();
 
     ticker.add(() => {
         AsshatZoneDiagnostics.printHandledCancellationErrors();
         scene?.ticker.tick();
         rootTicker.tick();
         Collision.recycleRectangles();
-        InputPoller.tick();
+        iguaInput.tick();
     });
 
     preventUnpleasantCanvasFlash(ticker);

@@ -2,7 +2,7 @@ import { Container } from "pixi.js";
 import { container } from "../../../lib/pixi/container";
 import { cyclic } from "../../../lib/math/number";
 import { EscapeTickerAndExecute } from "../../../lib/game-engine/asshat-ticker";
-import { Input } from "../../core/input";
+import { Input } from "../../globals";
 
 export type UiPageState = { selectionIndex: number };
 export type UiPageElement = Container & { selected: boolean };

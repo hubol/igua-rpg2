@@ -2,9 +2,8 @@ import { Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { container } from "../../lib/pixi/container";
 import { approachLinear } from "../../lib/math/number";
-import { layers } from "../globals";
+import { Input, layers } from "../globals";
 import { wait } from "../../lib/game-engine/promise/wait";
-import { Input } from "../core/input";
 
 const borderColor = 0x00ff00;
 const backgroundColor = 0x005870;

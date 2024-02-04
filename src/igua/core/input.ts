@@ -23,7 +23,8 @@ const keyboardControls: KeyboardControls<Action> = {
     SelectUp: "ArrowUp"
 }
 
-const input = new AsshatInput<Action>(keyboardControls);
-
-export const Input: Pick<AsshatInput<Action>, 'isDown' | 'isUp' | 'justWentDown' | 'justWentUp'> = input;
-export const InputPoller = input;
+export class IguaInput extends AsshatInput<Action> {
+    constructor() {
+        super(keyboardControls);
+    }
+}

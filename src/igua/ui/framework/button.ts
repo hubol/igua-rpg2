@@ -1,7 +1,7 @@
 import { Graphics } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { container } from "../../../lib/pixi/container";
-import { Input } from "../../core/input";
+import { Input } from "../../globals";
 
 export function objUiButton(text: string, onPress: () => unknown, width = 96, height = 30) {
     let jigglesOnPress = false;

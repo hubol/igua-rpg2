@@ -1,6 +1,6 @@
 import { Container, Graphics, Sprite } from "pixi.js";
 import { wait } from "../../lib/game-engine/promise/wait";
-import { scene, sceneStack } from "../globals";
+import { Input, scene, sceneStack } from "../globals";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { Tx } from "../../assets/textures";
 import { CollisionShape } from "../../lib/pixi/collision";
@@ -20,7 +20,6 @@ import { SceneLocal } from "../core/scene-local";
 import { show } from "../cutscene/show";
 import { IguaAudio, Jukebox } from "../igua-audio";
 import { Mzk } from "../../assets/music";
-import { Input } from "../core/input";
 
 const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });
 
