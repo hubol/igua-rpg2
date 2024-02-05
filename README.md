@@ -36,4 +36,4 @@ At the time of writing this, the "game" is mostly a sandbox for testing a revamp
 
 [Play alpha version on Heroku](https://igua-rpg2-d76be5c97e6f.herokuapp.com/)
 
-**Note:** it may take several seconds for the Heroku App to load, as I have paid for the cheapest tier available.
+**Note:** it may take several seconds for the Heroku app to load, as I have paid for the cheapest tier available.
