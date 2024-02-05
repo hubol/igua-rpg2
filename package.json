@@ -10,7 +10,7 @@
     "tool": "ts-node tools/run-tool.ts"
   },
   "author": "Hubol",
-  "license": "SEE LICENSE IN README.md",
+  "license": "SEE LICENSE IN LICENSE.md",
   "devDependencies": {
     "@hubol/smooch": "^1.0.0-beta.7",
     "@types/node": "^20.8.8",
