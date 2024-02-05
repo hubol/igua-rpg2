@@ -24,27 +24,24 @@ export function prepareGameEngine(renderer: PixiRenderer) {
     setIguaGlobals(renderer, rootStage, iguaInput);
     installDevTools();
 
-    const ticker = new AsshatTicker();
-
     iguaInput.start();
 
-    ticker.add(() => {
+    const flashPreventer = new UnpleasantCanvasFlashPreventer(renderer);
+
+    function gameLoop() {
         AsshatZoneDiagnostics.printHandledCancellationErrors();
         scene?.ticker.tick();
         rootTicker.tick();
         Collision.recycleRectangles();
         iguaInput.tick();
-    });
-
-    preventUnpleasantCanvasFlash(renderer, ticker);
+        flashPreventer.tick();
+        renderer.render(rootStage);
+    }
 
     const animator = new Animator(60);
     animator.start();
 
-    animator.add(() => {
-        ticker.tick();
-        renderer.render(rootStage);
-    });
+    animator.add(gameLoop);
 
     setDefaultStages({
         get show() {
@@ -62,15 +59,21 @@ function installDevTools() {
     });
 }
 
-function preventUnpleasantCanvasFlash(renderer: PixiRenderer, ticker: AsshatTicker) {
-    renderer.view.style.opacity = '0';
+class UnpleasantCanvasFlashPreventer {
+    private _receivedTick = false;
+    private _completed = false;
 
-    const displayCanvas = () => {
-        if (ticker.ticks >= 1) {
-            ticker.remove(displayCanvas);
-            renderer.view.style.opacity = '';
+    constructor(private readonly _renderer: PixiRenderer) {
+        this._renderer.view.style.opacity = '0';
+    }
+
+    tick() {
+        if (this._completed)
+            return;
+        if (!this._receivedTick) {
+            this._renderer.view.style.opacity = '';
+            this._completed = true;
         }
-    };
-
-    ticker.add(displayCanvas);
+        this._receivedTick = true;
+    }
 }
