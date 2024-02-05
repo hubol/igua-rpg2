@@ -45,7 +45,7 @@ async function initialize() {
 
         integralUpscaleCanvas(addGameCanvasToDocument(renderer.view));
         
-        require("./igua/globals").installGlobals(renderer);
+        require("./igua/launch/prepare-game-engine").prepareGameEngine(renderer);
         require("./igua/launch/start-game").startGame();
     }
     catch (e) {
