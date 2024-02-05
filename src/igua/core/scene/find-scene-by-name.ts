@@ -1,6 +1,6 @@
-import { Logging } from "../lib/logging";
+import { Logging } from "../../../lib/logging";
 
-const { default: sceneExports } = require(`./scenes/**/*.ts`);
+const { default: sceneExports } = require(`../../scenes/**/*.ts`);
 
 type SceneLibrary = Record<string, () => unknown>;
 let sceneLibrary: SceneLibrary;

@@ -1,10 +1,10 @@
-import { Logging } from "../lib/logging";
-import { intervalWait } from "../lib/browser/interval-wait";
-import { AsshatAudioContext } from "../lib/game-engine/audio/asshat-audiocontext";
-import { Sound } from "../lib/game-engine/audio/sound";
-import { AsshatJukebox } from "../lib/game-engine/audio/asshat-jukebox";
-import { Unit } from "../lib/math/number-alias-types";
-import { StereoDelay } from "../lib/game-engine/audio/stereo-delay";
+import { Logging } from "../../lib/logging";
+import { intervalWait } from "../../lib/browser/interval-wait";
+import { AsshatAudioContext } from "../../lib/game-engine/audio/asshat-audiocontext";
+import { Sound } from "../../lib/game-engine/audio/sound";
+import { AsshatJukebox } from "../../lib/game-engine/audio/asshat-jukebox";
+import { Unit } from "../../lib/math/number-alias-types";
+import { StereoDelay } from "../../lib/game-engine/audio/stereo-delay";
 
 class IguaAudioImpl {
     private readonly _globalGainNode: GainNode;

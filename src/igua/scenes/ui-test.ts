@@ -1,5 +1,5 @@
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
-import { findSceneByName } from "../find-scene-by-name";
+import { findSceneByName } from "../core/scene/find-scene-by-name";
 import { sceneStack } from "../globals";
 import { objUiButton } from "../ui/framework/button";
 import { objUiPage, objUiPageRouter } from "../ui/framework/page";

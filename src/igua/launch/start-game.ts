@@ -1,4 +1,4 @@
-import { findSceneByName } from "../find-scene-by-name";
+import { findSceneByName } from "../core/scene/find-scene-by-name";
 import { sceneStack } from "../globals";
 
 export function startGame() {

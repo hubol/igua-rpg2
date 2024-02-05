@@ -1,5 +1,5 @@
 import { Container } from "pixi.js";
-import { Logging } from "../lib/logging";
+import { Logging } from "../../lib/logging";
 
 export class IguaLayers {
     readonly scene: Container;

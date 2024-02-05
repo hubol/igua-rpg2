@@ -2,15 +2,15 @@ import { Animator } from "../lib/game-engine/animator";
 import { AsshatTicker } from "../lib/game-engine/asshat-ticker";
 import { AsshatZoneDiagnostics } from "../lib/game-engine/asshat-zone";
 import { PixiRenderer } from "../lib/game-engine/pixi-renderer";
-import { IguaLayers } from "./igua-layers";
-import { IguaScene, IguaSceneStack } from "./igua-scene-stack";
+import { IguaLayers } from "./core/igua-layers";
+import { IguaScene, IguaSceneStack } from "./core/scene/igua-scene-stack";
 import { Collision } from "../lib/pixi/collision";
 import { setDefaultStages } from "../lib/game-engine/default-stages";
 import { devAssignDisplayObjectIdentifiers } from "../lib/pixi/dev-assign-displayobject-identifiers";
 import { createDebugPanel } from "../lib/game-engine/debug/debug-panel";
 import { TickerContainer } from "../lib/game-engine/ticker-container";
 import { createDebugKey } from "../lib/game-engine/debug/create-debug-key";
-import { IguaAudio } from "./igua-audio";
+import { IguaAudio } from "./core/igua-audio";
 import { WarningToast } from "../lib/game-engine/warning-toast";
 import { IguaInput } from "./core/input";
 

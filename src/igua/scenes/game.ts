@@ -16,9 +16,9 @@ import { sleep } from "../../lib/game-engine/promise/sleep";
 import { IguanaLooks } from "../iguana/looks";
 import { lerp } from "../../lib/game-engine/promise/lerp";
 import { approachLinear } from "../../lib/math/number";
-import { SceneLocal } from "../core/scene-local";
+import { SceneLocal } from "../core/scene/scene-local";
 import { show } from "../cutscene/show";
-import { IguaAudio, Jukebox } from "../igua-audio";
+import { IguaAudio, Jukebox } from "../core/igua-audio";
 import { Mzk } from "../../assets/music";
 
 const TailTextures = Tx.Iguana.Tail.split({ width: 28, trimFrame: true });

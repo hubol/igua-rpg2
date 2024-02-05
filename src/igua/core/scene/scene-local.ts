@@ -1,5 +1,5 @@
-import { scene } from "../globals";
-import { IguaScene } from "../igua-scene-stack";
+import { scene } from "../../globals";
+import { IguaScene } from "./igua-scene-stack";
 
 let idSource = 0;
 

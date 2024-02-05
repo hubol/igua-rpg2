@@ -5,7 +5,7 @@ import { GeneratedSfxData } from "./generated/sounds";
 // @ts-expect-error
 import oggSoundsZipUrl from "./generated/sounds/sounds-ogg.zip";
 import { RequireCapability } from "../lib/browser/capabilities";
-import { IguaAudio, IguaAudioInitializer } from "../igua/igua-audio";
+import { IguaAudio, IguaAudioInitializer } from "../igua/core/igua-audio";
 import { Sound } from "../lib/game-engine/audio/sound";
 import { intervalWait } from "../lib/browser/interval-wait";
 
