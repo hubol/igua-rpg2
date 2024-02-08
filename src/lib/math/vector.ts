@@ -16,6 +16,10 @@ export function distance(vec1: Vector, vec2: Vector) {
     return Math.sqrt(Math.pow(vec1.x - vec2.x, 2) + Math.pow(vec1.y - vec2.y, 2));
 }
 
+export function sqDistance(vec1: Vector, vec2: Vector) {
+    return Math.pow(vec1.x - vec2.x, 2) + Math.pow(vec1.y - vec2.y, 2);
+}
+
 export function normalize(vec: Vector) {
     const d = (Math.sqrt(Math.pow(vec.x, 2) + Math.pow(vec.y, 2)));
     if (d === 0) {
