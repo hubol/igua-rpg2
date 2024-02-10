@@ -7,6 +7,7 @@ export enum InputModalityType {
 }
 
 export interface MappedInputModality<TAction extends string> {
+    isCurrent: boolean;
     readonly type: InputModalityType;
     readonly lastEventTimestamp: number;
     isDown(action: TAction): boolean;
@@ -59,11 +60,18 @@ export class AsshatInput<TAction extends string> {
         }
 
         if (modalityWithLatestEventTimestamp !== this._currentModality) {
+            if (this._currentModality)
+                this._currentModality.isCurrent = false;
+
             const fromType = this._currentModality?.type;
             this._currentModality = modalityWithLatestEventTimestamp;
             const toType = this._currentModality?.type;
+
             if (fromType && toType)
                 this.onModalityChanged(fromType, toType);
+
+            if (this._currentModality)
+                this._currentModality.isCurrent = true;
         }
     }
 

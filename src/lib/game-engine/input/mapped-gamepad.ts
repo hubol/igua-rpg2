@@ -10,13 +10,14 @@ export class MappedGamepad<TAction extends string> implements MappedInputModalit
     private readonly _actionIsDown: Record<TAction, boolean>;
     private readonly _copyDownFn: CopyStateFn<Record<TAction, boolean>>;
     private readonly _applyGamepadToInputFn: ApplyGamepadToInputFn<TAction>;
+    isCurrent = false;
 
-    constructor(readonly controls: GamepadControls<TAction>) {
-        this._keys = Object.keys(controls);
+    constructor(private readonly _controls: GamepadControls<TAction>) {
+        this._keys = Object.keys(_controls);
         this._actionWasDown = this._createActionDownRecord();
         this._actionIsDown = this._createActionDownRecord();
         this._copyDownFn = compileCopyStateFn(this._keys);
-        this._applyGamepadToInputFn = compileApplyGamepadToInput(controls, { axisUnitDistance: 0.5, stickDeadZone: 0.3 });
+        this._applyGamepadToInputFn = compileApplyGamepadToInput(_controls, { axisUnitDistance: 0.5, stickDeadZone: 0.3 });
     }
 
     readonly type = InputModalityType.Gamepad;

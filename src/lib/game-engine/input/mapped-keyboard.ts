@@ -7,6 +7,7 @@ export type KeyboardControls<TAction extends string> = {
 
 export class MappedKeyboard<TAction extends string> implements MappedInputModality<TAction> {
     private readonly _keyListener: LimitedKeyListener;
+    isCurrent = false;
 
     readonly type = InputModalityType.Keyboard;
     get lastEventTimestamp() {
@@ -39,7 +40,8 @@ export class MappedKeyboard<TAction extends string> implements MappedInputModali
     }
 
     tick(): void {
-        this._keyListener.tick();
+        if (this.isCurrent)
+            this._keyListener.tick();
     }
 }
 
