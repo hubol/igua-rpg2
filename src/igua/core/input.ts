@@ -28,7 +28,7 @@ const keyboardControls: KeyboardControls<Action> = {
 
 const { button, axis, axisUnit } = GamepadControl;
 
-const defaultGamepadControls: GamepadControls<Action> = {
+const gamepadControls: GamepadControls<Action> = {
     CastSpell: [ button(StandardMapping.Button.Top), button(StandardMapping.Button.BumperRight) ],
     Confirm: [ button(StandardMapping.Button.Bottom) ],
     Duck: [ button(StandardMapping.Button.PadDown), button(StandardMapping.Button.BumperLeft) ],
@@ -47,7 +47,7 @@ const defaultGamepadControls: GamepadControls<Action> = {
 
 export class IguaInput extends AsshatInput<Action> {
     constructor() {
-        super([ new MappedKeyboard(keyboardControls), new MappedGamepad(defaultGamepadControls) ]);
+        super([ new MappedKeyboard(keyboardControls), new MappedGamepad(gamepadControls) ]);
     }
 
     protected onModalityChanged(from: InputModalityType, to: InputModalityType): void {
