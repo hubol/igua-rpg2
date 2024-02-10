@@ -1,6 +1,7 @@
-import { AsshatInput, KeyboardControls } from "../../lib/game-engine/input/asshat-input";
+import { AsshatInput, InputModalityType } from "../../lib/game-engine/input/asshat-input";
 import { GamepadControl, GamepadControls, StandardMapping } from "../../lib/game-engine/input/gamepad-controls";
 import { MappedGamepad } from "../../lib/game-engine/input/mapped-gamepad";
+import { KeyboardControls, MappedKeyboard } from "../../lib/game-engine/input/mapped-keyboard";
 
 const actions = ['MoveLeft', 'MoveRight', 'Duck', 'Jump', 'Interact',
     'InventoryMenuToggle', 'PauseMenuToggle', 'MenuEscape',
@@ -44,10 +45,12 @@ const defaultGamepadControls: GamepadControls<Action> = {
     SelectUp: [ button(StandardMapping.Button.PadUp), axisUnit(StandardMapping.Axis.JoystickLeft, [0, -1]), axisUnit(StandardMapping.Axis.JoystickRight, [0, -1]) ]
 }
 
-new MappedGamepad(defaultGamepadControls, {} as any, {} as any);
-
 export class IguaInput extends AsshatInput<Action> {
     constructor() {
-        super(keyboardControls);
+        super([ new MappedKeyboard(keyboardControls), new MappedGamepad(defaultGamepadControls) ]);
+    }
+
+    protected onModalityChanged(from: InputModalityType, to: InputModalityType): void {
+        // TODO show system message
     }
 }

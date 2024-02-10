@@ -1,36 +1,73 @@
-import { Key, KeyCode, KeyListener } from "../../browser/key";
 import { Logging } from "../../logging";
+import { Undefined } from "../../types/undefined";
 
-export type KeyboardControls<TAction extends string> = {
-    [index in TAction]: KeyCode;
+export enum InputModalityType {
+    Keyboard = 'Keyboard',
+    Gamepad = 'Gamepad',
+}
+
+export interface MappedInputModality<TAction extends string> {
+    readonly type: InputModalityType;
+    readonly lastEventTimestamp: number;
+    isDown(action: TAction): boolean;
+    isUp(action: TAction): boolean;
+    justWentDown(action: TAction): boolean;
+    justWentUp(action: TAction): boolean;
+    start(): void;
+    tick(): void;
 }
 
 export class AsshatInput<TAction extends string> {
-    constructor(readonly keyboardControls: KeyboardControls<TAction>) {
+    private _currentModality?: MappedInputModality<TAction>;
+
+    constructor(private readonly _modalities: MappedInputModality<TAction>[]) {
         console.log(...Logging.componentArgs(this));
     }
 
     isDown(action: TAction) {
-        return Key.isDown(this.keyboardControls[action]);
+        return this._currentModality?.isDown(action) as boolean;
     }
 
     isUp(action: TAction) {
-        return Key.isUp(this.keyboardControls[action]);
+        return this._currentModality?.isUp(action) as boolean;
     }
 
     justWentDown(action: TAction) {
-        return Key.justWentDown(this.keyboardControls[action]);
+        return this._currentModality?.justWentDown(action) as boolean;
     }
 
     justWentUp(action: TAction) {
-        return Key.justWentUp(this.keyboardControls[action]);
+        return this._currentModality?.justWentUp(action) as boolean;
     }
 
     start() {
-        KeyListener.start();
+        for (const modality of this._modalities)
+            modality.start();
     }
 
     tick() {
-        KeyListener.advance();
+        let latestEventTimestamp = -1;
+        let modalityWithLatestEventTimestamp = Undefined<MappedInputModality<TAction>>();
+
+        for (let i = 0; i < this._modalities.length; i++) {
+            const modality = this._modalities[i];
+            modality.tick();
+            if (modality.lastEventTimestamp > latestEventTimestamp) {
+                latestEventTimestamp = modality.lastEventTimestamp;
+                modalityWithLatestEventTimestamp = modality;
+            }
+        }
+
+        if (modalityWithLatestEventTimestamp !== this._currentModality) {
+            const fromType = this._currentModality?.type;
+            this._currentModality = modalityWithLatestEventTimestamp;
+            const toType = this._currentModality?.type;
+            if (fromType && toType)
+                this.onModalityChanged(fromType, toType);
+        }
+    }
+
+    protected onModalityChanged(from: InputModalityType, to: InputModalityType) {
+        
     }
 }

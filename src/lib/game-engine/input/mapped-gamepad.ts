@@ -1,24 +1,29 @@
 import { sqDistance } from "../../math/vector";
 import { vnew } from "../../math/vector-type";
 import { Undefined } from "../../types/undefined";
+import { InputModalityType, MappedInputModality } from "./asshat-input";
 import { GamepadControlType, GamepadControls } from "./gamepad-controls";
 
-export class MappedGamepad<TAction extends string> {
+export class MappedGamepad<TAction extends string> implements MappedInputModality<TAction> {
     private readonly _keys: string[];
     private readonly _actionWasDown: Record<TAction, boolean>;
     private readonly _actionIsDown: Record<TAction, boolean>;
     private readonly _copyDownFn: CopyStateFn<Record<TAction, boolean>>;
     private readonly _applyGamepadToInputFn: ApplyGamepadToInputFn<TAction>;
 
-    constructor(readonly controls: GamepadControls<TAction>, private readonly _onConnected: () => void, private readonly _onButtonPressed: () => void) {
+    constructor(readonly controls: GamepadControls<TAction>) {
         this._keys = Object.keys(controls);
         this._actionWasDown = this._createActionDownRecord();
         this._actionIsDown = this._createActionDownRecord();
         this._copyDownFn = compileCopyStateFn(this._keys);
         this._applyGamepadToInputFn = compileApplyGamepadToInput(controls, { axisUnitDistance: 0.5, stickDeadZone: 0.3 });
-        // TODO check if a gamepad is already available and fire _onConnected,
-        // else subscribe to "gamepadconnected" event
-        // console.log(this._applyGamepadToInputFn);
+    }
+
+    readonly type = InputModalityType.Gamepad;
+    lastEventTimestamp = -1;
+
+    start(): void {
+        // nop
     }
 
     private _createActionDownRecord() {
@@ -42,6 +47,13 @@ export class MappedGamepad<TAction extends string> {
 
         this._copyDownFn(this._actionIsDown, this._actionWasDown);
         this._applyGamepadToInputFn(gamepad, this._actionIsDown);
+
+        for (let i = 0; i < gamepad.buttons.length; i += 1) {
+            if (gamepad.buttons[i].pressed) {
+                this.lastEventTimestamp = performance.now();
+                break;
+            }
+        }
     }
 
     isDown(action: TAction) {
