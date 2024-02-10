@@ -60,7 +60,6 @@ function installDevTools() {
 }
 
 class UnpleasantCanvasFlashPreventer {
-    private _receivedTick = false;
     private _completed = false;
 
     constructor(private readonly _renderer: PixiRenderer) {
@@ -70,10 +69,7 @@ class UnpleasantCanvasFlashPreventer {
     tick() {
         if (this._completed)
             return;
-        if (!this._receivedTick) {
-            this._renderer.view.style.opacity = '';
-            this._completed = true;
-        }
-        this._receivedTick = true;
+        this._renderer.view.style.opacity = '';
+        this._completed = true;
     }
 }
