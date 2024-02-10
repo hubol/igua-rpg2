@@ -75,19 +75,26 @@ export class MappedGamepad<TAction extends string> implements MappedInputModalit
 }
 
 function tryGetGamepad() {
-    const gamepads = navigator.getGamepads();
-    let mostRecentlyPressedGamepad = Undefined<Gamepad>();
-    let maxTimestamp = -1;
+    // navigator.getGamepads() might throw
+    // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getGamepads#exceptions
+    try {
+        const gamepads = navigator.getGamepads();
+        let mostRecentlyPressedGamepad = Undefined<Gamepad>();
+        let maxTimestamp = -1;
 
-    for (let i = 0; i < gamepads.length; i++) {
-        const gamepad = gamepads[i];
-        if (gamepad && gamepad.timestamp > maxTimestamp) {
-            maxTimestamp = gamepad.timestamp;
-            mostRecentlyPressedGamepad = gamepad;
+        for (let i = 0; i < gamepads.length; i++) {
+            const gamepad = gamepads[i];
+            if (gamepad && gamepad.timestamp > maxTimestamp) {
+                maxTimestamp = gamepad.timestamp;
+                mostRecentlyPressedGamepad = gamepad;
+            }
         }
-    }
 
-    return mostRecentlyPressedGamepad;
+        return mostRecentlyPressedGamepad;
+    }
+    catch (e) {
+        return;
+    }
 }
 
 interface GamepadConfig {
