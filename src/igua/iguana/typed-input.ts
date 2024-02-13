@@ -1,7 +1,3 @@
-import { Vector } from "../../lib/math/vector-type";
-
-type Vec = Vector;
-
 export namespace TypedInput {
     export interface Vector {
         minX?: number;
@@ -47,7 +43,7 @@ export namespace TypedInput {
     // Thank you https://github.com/jquense/yup/blob/94cfd11b3f23e10f731efac05c5525829d10ded1/src/index.ts#L40
     export type Output<T> = {
         [k in keyof T]: T[k] extends TypedInput.Vector
-            ? Vec
+            ? { x: number; y: number; }
             : T[k] extends TypedInput.Boolean
             ? boolean
             : T[k] extends TypedInput.Integer | TypedInput.Color
