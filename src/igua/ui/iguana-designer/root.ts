@@ -17,11 +17,11 @@ export const UiIguanaDesignerContext = new SceneLocal(() => ({ looks: getDefault
 export function objUiIguanaDesignerRoot() {
     const c = container();
 
-    const router = objUiPageRouter().show(c);
+    const router = objUiPageRouter().at(2, 2).show(c);
     
     function page1() {
         return objUiPage([
-            objUiButton('Randomize', randomizeIguanaLooks)
+            objUiButton('Randomize', randomizeIguanaLooks).jiggle()
         ],
         { selectionIndex: 0 })
     }
