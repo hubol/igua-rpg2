@@ -15,7 +15,7 @@ export const IguanaShapes = {
     Face: shape(Tx.Iguana.Head, 18, [0, 16]),
     Horn: shape(Tx.Iguana.Horn, 8, [2, 6]),
     Tail: shape(Tx.Iguana.Tail, 28, [17, 17]),
-    Club: shape(Tx.Iguana.Club, 28, [17, 17]),
+    Club: shape(Tx.Iguana.Club, 12, [4, 4]),
     Foot: shape(Tx.Iguana.Foot, 14, [6, 12]),
     Claws: shape(Tx.Iguana.Nails, 10, [6, 6]),
 }
