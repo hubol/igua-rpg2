@@ -14,7 +14,8 @@ import { objUiPage, objUiPageRouter } from "../framework/page";
 
 export const UiIguanaDesignerContext = new SceneLocal(() => ({ looks: getDefaultLooks() }), 'UiIguanaDesignerContext');
 
-export function objUiIguanaDesignerRoot() {
+export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
+    UiIguanaDesignerContext.value.looks = looks;
     const c = container();
 
     const router = objUiPageRouter().at(2, 2).show(c);
