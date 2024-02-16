@@ -5,14 +5,34 @@ import { vnew } from "../../../lib/math/vector-type";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { SceneLocal } from "../../core/scene/scene-local";
+import { ConnectedInput } from "../../iguana/connected-input";
 import { getDefaultLooks } from "../../iguana/get-default-looks";
 import { IguanaLooks } from "../../iguana/looks";
 import { objIguanaPuppet } from "../../iguana/obj-iguana-puppet";
 import { TypedInput } from "../../iguana/typed-input";
 import { objUiButton } from "../framework/button";
 import { objUiPage, objUiPageRouter } from "../framework/page";
+import { objUiCheckboxInput } from "./components/checkbox-input";
 
-export const UiIguanaDesignerContext = new SceneLocal(() => ({ looks: getDefaultLooks() }), 'UiIguanaDesignerContext');
+function context() {
+    let looks = getDefaultLooks();
+    let connectedInput = ConnectedInput.create(IguanaLooks.create(), looks);
+
+    return {
+        get looks() {
+            return looks;
+        },
+        set looks(value: IguanaLooks.Serializable) {
+            looks = value;
+            connectedInput = ConnectedInput.create(IguanaLooks.create(), looks);
+        },
+        get connectedInput() {
+            return connectedInput;
+        }
+    }
+}
+
+export const UiIguanaDesignerContext = new SceneLocal(context, 'UiIguanaDesignerContext');
 
 export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
     UiIguanaDesignerContext.value.looks = looks;
@@ -22,7 +42,8 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
     
     function page1() {
         return objUiPage([
-            objUiButton('Randomize', randomizeIguanaLooks).jiggle()
+            objUiButton('Randomize', randomizeIguanaLooks).jiggle(),
+            objUiCheckboxInput('Mouth flip', UiIguanaDesignerContext.value.connectedInput.head.mouth.flipV).at(0, 60).jiggle(),
         ],
         { selectionIndex: 0 })
     }
