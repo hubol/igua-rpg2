@@ -2,12 +2,12 @@ import { onViewportResize } from "./on-viewport-resize";
 import { Viewport } from "./viewport";
 
 export function integralUpscaleCanvas(canvasElement: HTMLCanvasElement) {
-    const doUpscale = makeDoUpscale(canvasElement);
+    const doUpscale = createDoUpscale(canvasElement);
     doUpscale();
     onViewportResize(doUpscale);
 }
 
-function makeDoUpscale(canvas: HTMLCanvasElement)
+function createDoUpscale(canvas: HTMLCanvasElement)
 {
     let lastSeenViewportMin = -1;
 

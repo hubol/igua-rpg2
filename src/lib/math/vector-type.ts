@@ -36,11 +36,11 @@ export interface Vector extends VectorSimple {
 }
 
 type PropertyDefinitionShape = Partial<Record<keyof Vector, PropertyDescriptor & ThisType<any>>>
-function makePropertyDefinitions<T extends PropertyDefinitionShape>(t: T): T {
+function createPropertyDefinitions<T extends PropertyDefinitionShape>(t: T): T {
     return t;
 }
 
-const propertyDefinitions = makePropertyDefinitions({
+const propertyDefinitions = createPropertyDefinitions({
     vlength: {
         get: function (this: Vector) {
             return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y,2));
