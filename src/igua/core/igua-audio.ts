@@ -38,8 +38,8 @@ class IguaAudioImpl {
 
     async createSfx(buffer: ArrayBuffer) {
         const audio = await this._context.decodeAudioData(buffer);
-        // TODO could be routed to special node for environmental effects
-        // e.g. reverb, delay
+        // TODO should every sound effect be added to this node?
+        // e.g. should UI sounds receive stereo delay?
         return new Sound(audio, this._sfxGainNode);
     }
 

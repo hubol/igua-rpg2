@@ -49,7 +49,6 @@ export function objUiButton(text: string, onPress: () => unknown, width = 96, he
             else
                 c.pivot.x = 0;
     
-            // TODO use input
             if (c.selected && Input.justWentDown('Confirm')) {
                 c.onPress();
                 if (jigglesOnPress)
