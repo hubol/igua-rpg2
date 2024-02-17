@@ -1,6 +1,6 @@
 import { BitmapFont, IBitmapTextStyle } from "pixi.js";
 import { JobProgress } from "../../lib/game-engine/job-progress";
-import { createBitmapFontFactory } from "../../lib/pixi/create-bitmap-font-factory";
+import { createBitmapFontFactory } from "../../lib/pixi/bitmap-font-factory";
 import { Force } from "../../lib/types/force";
 import { BitmapText } from "pixi.js";
 import { Tx } from "../textures";
@@ -49,11 +49,11 @@ export async function loadFontAssets(progress: JobProgress) {
 async function loadBitmapFontAndTrackProgress(fntUrl: string, txFontKey: TxFontKey, progress: JobProgress) {
     progress.increaseTotalJobsCount(1);
 
-    const [ bitmapFontFactory ] = await Promise.all([
+    const [ createBitmapFont ] = await Promise.all([
         createBitmapFontFactory(fntUrl),
         intervalWait(() => !!Tx?.Font?.[txFontKey]),
     ]);
 
     progress.increaseCompletedJobsCount(1);
-    return bitmapFontFactory(Tx.Font[txFontKey]);
+    return createBitmapFont(Tx.Font[txFontKey]);
 }

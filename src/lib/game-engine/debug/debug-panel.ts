@@ -4,7 +4,7 @@ import { Logging } from "../../logging";
 import { container } from "../../pixi/container";
 import { Undefined } from "../../types/undefined";
 import { TickerContainer } from "../ticker-container";
-import { createDebugKey } from "./create-debug-key";
+import { createDebugKey } from "./debug-key";
 
 export function createDebugPanel(root: Container) {
     if (displayObjectMonitor)

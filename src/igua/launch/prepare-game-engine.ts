@@ -1,7 +1,7 @@
 import { Animator } from "../../lib/game-engine/animator";
 import { AsshatTicker } from "../../lib/game-engine/asshat-ticker";
 import { AsshatZoneDiagnostics } from "../../lib/game-engine/asshat-zone";
-import { createDebugKey } from "../../lib/game-engine/debug/create-debug-key";
+import { createDebugKey } from "../../lib/game-engine/debug/debug-key";
 import { createDebugPanel } from "../../lib/game-engine/debug/debug-panel";
 import { setDefaultStages } from "../../lib/game-engine/default-stages";
 import { PixiRenderer } from "../../lib/game-engine/pixi-renderer";
