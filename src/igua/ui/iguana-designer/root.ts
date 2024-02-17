@@ -13,6 +13,7 @@ import { TypedInput } from "../../iguana/typed-input";
 import { objUiButton } from "../framework/button";
 import { objUiPage, objUiPageRouter } from "../framework/page";
 import { objUiCheckboxInput } from "./components/checkbox-input";
+import { objUiSliderInput } from "./components/slider-input";
 
 function context() {
     let looks = getDefaultLooks();
@@ -43,7 +44,8 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
     function page1() {
         return objUiPage([
             objUiButton('Randomize', randomizeIguanaLooks).jiggle(),
-            objUiCheckboxInput('Mouth flip', UiIguanaDesignerContext.value.connectedInput.head.mouth.flipV).at(0, 60).jiggle(),
+            objUiSliderInput('Eye tilt', UiIguanaDesignerContext.value.connectedInput.head.eyes.tilt, UiIguanaDesignerContext.value.connectedInput.head.eyes.tilt).at(0, 40),
+            objUiCheckboxInput('Mouth flip', UiIguanaDesignerContext.value.connectedInput.head.mouth.flipV).at(0, 80).jiggle(),
         ],
         { selectionIndex: 0 })
     }

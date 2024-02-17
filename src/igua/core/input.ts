@@ -7,7 +7,7 @@ const actions = ['MoveLeft', 'MoveRight', 'Duck', 'Jump', 'Interact',
     'InventoryMenuToggle', 'PauseMenuToggle', 'MenuEscape',
     'SelectRight', 'SelectDown', 'SelectLeft', 'SelectUp', 'Confirm', 'CastSpell'] as const;
 
-type Action = typeof actions[number];
+export type Action = typeof actions[number];
 
 const keyboardControls: KeyboardControls<Action> = {
     Confirm: "Space",

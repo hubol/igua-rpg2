@@ -37,7 +37,8 @@ export namespace ConnectedInput {
             }
         });
     }
-    
+
+    // TODO these can probably be removed
     export type Choice<T> = TypedInput.Choice<T> & { value: number };
     export type Vector = TypedInput.Vector & { value: { x: number; y: number; } };
     export type Integer = TypedInput.Integer & { value: number };
