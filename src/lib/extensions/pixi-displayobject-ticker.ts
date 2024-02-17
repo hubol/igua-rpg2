@@ -2,12 +2,10 @@ import { Container, DisplayObject } from "pixi.js";
 import { AsshatTicker, IAsshatTicker } from "../game-engine/asshat-ticker";
 import { LazyTicker, isLazyTicker } from "./lazy-ticker";
 
-type StepFn = () => unknown;
-
 declare module "pixi.js" {
     interface DisplayObject {
         readonly ticker: IAsshatTicker;
-        step(fn: StepFn): this;
+        step(fn: (self: this) => unknown): this;
     }
 }
 
@@ -76,7 +74,9 @@ Object.defineProperties(DisplayObject.prototype, {
         configurable: true,
     },
     step: {
-        value: function (this: DisplayObject, stepFn: StepFn) {
+        value: function (this: DisplayObject, stepFn: (self?: any) => unknown) {
+            if (stepFn.length)
+                stepFn = stepFn.bind(null, this);
             this.ticker.add(stepFn);
             this.once('destroyed', () => this.ticker.remove(stepFn));
             return this;
