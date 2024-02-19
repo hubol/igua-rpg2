@@ -4,10 +4,7 @@ import { container } from "../../lib/pixi/container";
 import { approachLinear } from "../../lib/math/number";
 import { Input, layers } from "../globals";
 import { wait } from "../../lib/game-engine/promise/wait";
-
-const borderColor = 0x00ff00;
-const backgroundColor = 0x005870;
-const textColor = 0xffffff;
+import { UiColor } from "../ui/ui-color";
 
 const width = 220;
 const height = 67;
@@ -16,13 +13,13 @@ const padding = 3;
 
 function objMessageBox(text: string) {
     const gfx = new Graphics()
-        .lineStyle({ color: borderColor, alignment: 0, width: border })
-        .beginFill(backgroundColor)
+        .lineStyle({ color: UiColor.Selection, alignment: 0, width: border })
+        .beginFill(UiColor.Background)
         .drawRect(0, 0, width, height);
 
     const maxWidth = width - padding * 2 - border * 2;
-    const text1 = objText.Large(text, { tint: textColor, maxWidth }).at(border + padding, border + padding);
-    const text2 = objText.Large("", { tint: textColor, maxWidth }).at(text1);
+    const text1 = objText.Large(text, { tint: UiColor.Text, maxWidth }).at(border + padding, border + padding);
+    const text2 = objText.Large("", { tint: UiColor.Text, maxWidth }).at(text1);
 
     const mask = new Graphics().beginFill(0xffffff).drawRect(0, 0, width, height);
     

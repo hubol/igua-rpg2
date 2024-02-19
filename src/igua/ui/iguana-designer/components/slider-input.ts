@@ -2,6 +2,7 @@ import { Graphics } from "pixi.js";
 import { Input } from "../../../globals";
 import { createActionRepeater } from "../../framework/action-repeater";
 import { objText } from "../../../../assets/fonts";
+import { UiColor } from "../../ui-color";
 
 type ActionRepeatAdjustFactors = [ factor0: number, factor1: number, factor2: number ];
 
@@ -53,9 +54,9 @@ export function objUiSliderInput(
         })
         .step(() => {
             const value = binding.value;
-            g.clear().beginFill(0x005870);
+            g.clear().beginFill(UiColor.Background);
             if (g.selected)
-                g.lineStyle(2, 0x00FF00, 1, 0);
+                g.lineStyle(2, UiColor.Selection, 1, 0);
             g.drawRect(0, 0, width, height);
 
             g.lineStyle(0);
@@ -63,9 +64,9 @@ export function objUiSliderInput(
             const length = max - min;
             const unit = (value - min) / length;
 
-            g.beginFill(0x002C38)
+            g.beginFill(UiColor.Shadow)
                 .drawRect(8, height - 12, width - 16, 4)
-                .beginFill(0xFFFFFF)
+                .beginFill(UiColor.Text)
                 .drawRect(8, height - 12, (width - 16) * unit, 4);
         });
 

@@ -2,6 +2,7 @@ import { Graphics } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { container } from "../../../lib/pixi/container";
 import { Input } from "../../globals";
+import { UiColor } from "../ui-color";
 
 export function objUiButton(text: string, onPress: () => unknown, width = 96, height = 30) {
     let jigglesOnPress = false;
@@ -25,9 +26,9 @@ export function objUiButton(text: string, onPress: () => unknown, width = 96, he
 
     let factor = 0;
 
-    const bg = new Graphics().beginFill(0x005870).drawRect(0, 0, width, height);
-    const selection = new Graphics().lineStyle(2, 0x00FF00, 1, 0).drawRect(0, 0, width, height);
-    const font = objText.Large(text).at(32, Math.floor(height / 2) - 4);
+    const bg = new Graphics().beginFill(UiColor.Background).drawRect(0, 0, width, height);
+    const selection = new Graphics().lineStyle(2, UiColor.Selection, 1, 0).drawRect(0, 0, width, height);
+    const font = objText.Large(text, { tint: UiColor.Text }).at(32, Math.floor(height / 2) - 4);
 
     selection.visible = false;
 
