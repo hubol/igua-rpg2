@@ -12,7 +12,7 @@ interface IguaSceneMeta {
 
 function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMeta) {
     const ticker = new AsshatTicker();
-    const root = layers.scene.addChild(new TickerContainer(ticker).named(`Scene: ${source.name}`));
+    const root = layers.scene.addChild(new TickerContainer(ticker, false).named(`Scene: ${source.name}`));
 
     const background = new Container().named("Background");
     const stage = new Container().named("Stage");

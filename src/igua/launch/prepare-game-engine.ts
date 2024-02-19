@@ -16,7 +16,7 @@ import { scene, setIguaGlobals } from "../globals";
 globalThis.onDisplayObjectConstructed = devAssignDisplayObjectIdentifiers;
 
 const rootTicker = new AsshatTicker();
-const rootStage = new TickerContainer(rootTicker).named("Root");
+const rootStage = new TickerContainer(rootTicker, false).named("Root");
 
 const iguaInput = new IguaInput();
 
