@@ -20,7 +20,7 @@ Relevant articles:
 ## tasks.default.json
 It can be nice to have the necessary build tasks start automatically when your IDE opens.
 Another nicety of VSCode tasks is that their terminals are labeled with the task name.
-The configurations in **settings.default.json** start smooch and serve the app locally.
+The configurations in **tasks.default.json** start smooch and serve the app locally.
 Note: these tasks will likely fail without setting up the repository appropriately (e.g. installing npm packages, pulling with Git LFS)
 
 Relevant articles:
