@@ -21,7 +21,13 @@ const rootStage = new TickerContainer(rootTicker, false).named("Root");
 const iguaInput = new IguaInput();
 
 export function prepareGameEngine(renderer: PixiRenderer) {
-    setIguaGlobals(renderer, rootStage, iguaInput);
+    let gameLoopForced = false;
+
+    function forceGameLoop() {
+        gameLoopForced = true;
+    }
+
+    setIguaGlobals(renderer, rootStage, iguaInput, forceGameLoop);
     installDevTools();
 
     iguaInput.start();
@@ -29,12 +35,18 @@ export function prepareGameEngine(renderer: PixiRenderer) {
     const flashPreventer = new UnpleasantCanvasFlashPreventer(renderer);
 
     function gameLoop() {
-        AsshatZoneDiagnostics.printHandledCancellationErrors();
-        scene?.ticker.tick();
-        rootTicker.tick();
-        Collision.recycleRectangles();
-        iguaInput.tick();
-        flashPreventer.tick();
+        do {
+            gameLoopForced = false;
+
+            AsshatZoneDiagnostics.printHandledCancellationErrors();
+            scene?.ticker.tick();
+            rootTicker.tick();
+            Collision.recycleRectangles();
+            iguaInput.tick();
+            flashPreventer.tick();
+        }
+        while (gameLoopForced);
+        
         renderer.render(rootStage);
     }
 

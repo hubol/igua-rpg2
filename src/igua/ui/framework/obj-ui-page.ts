@@ -2,7 +2,7 @@ import { Container } from "pixi.js";
 import { container } from "../../../lib/pixi/container";
 import { cyclic } from "../../../lib/math/number";
 import { EscapeTickerAndExecute } from "../../../lib/game-engine/asshat-ticker";
-import { Input } from "../../globals";
+import { Input, forceGameLoop } from "../../globals";
 
 export type UiPageState = { selectionIndex: number };
 export type UiPageElement = Container & { selected: boolean };
@@ -14,7 +14,10 @@ export function objUiPageRouter() {
     }
 
     function gotoEscape(page: UiPage) {
-        throw new EscapeTickerAndExecute(() => goto(page));
+        throw new EscapeTickerAndExecute(() => {
+            goto(page);
+            forceGameLoop();
+        });
     }
 
     const c = container()
