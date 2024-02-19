@@ -1,6 +1,6 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../../../assets/textures";
-import { objUiButton } from "../../framework/button";
+import { objUiButton } from "../../framework/obj-ui-button";
 import { UiColor } from "../../ui-color";
 
 const [ txCheckbox, txCheckboxFill ] = Tx.Ui.Checkbox.split({ count: 2 });

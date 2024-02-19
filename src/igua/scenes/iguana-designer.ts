@@ -1,5 +1,5 @@
 import { scene } from "../globals";
-import { objUiIguanaDesignerRoot } from "../ui/iguana-designer/root";
+import { objUiIguanaDesignerRoot } from "../ui/iguana-designer/obj-ui-iguana-designer-root";
 
 export function IguanaDesigner() {
     scene.backgroundTint = 0x585080;

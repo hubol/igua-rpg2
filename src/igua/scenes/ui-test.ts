@@ -1,8 +1,8 @@
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { findSceneByName } from "../core/scene/find-scene-by-name";
 import { sceneStack } from "../globals";
-import { objUiButton } from "../ui/framework/button";
-import { objUiPage, objUiPageRouter } from "../ui/framework/page";
+import { objUiButton } from "../ui/framework/obj-ui-button";
+import { objUiPage, objUiPageRouter } from "../ui/framework/obj-ui-page";
 
 export function UiTest() {
     const router = objUiPageRouter().show();

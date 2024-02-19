@@ -4,7 +4,7 @@ import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { IguanaLooks } from "./looks";
-import { objEye, objEyes } from "./eye";
+import { objEye, objEyes } from "./obj-eye";
 import { Rng } from "../../lib/math/rng";
 import { Force } from "../../lib/types/force";
 import { Integer, Polar, Unit, ZeroOrGreater } from "../../lib/math/number-alias-types";

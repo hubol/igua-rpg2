@@ -2,7 +2,7 @@ import { Graphics, Rectangle, Sprite } from "pixi.js";
 import { container } from "../../lib/pixi/container";
 import { vnew } from "../../lib/math/vector-type";
 import { Rng } from "../../lib/math/rng";
-import { objSpriteCopy } from "./copy-sprite";
+import { objSpriteCopy } from "./obj-sprite-copy";
 import { nlerp } from "../../lib/math/number";
 import { Integer, Unit } from "../../lib/math/number-alias-types";
 

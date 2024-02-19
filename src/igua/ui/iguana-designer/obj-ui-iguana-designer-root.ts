@@ -10,10 +10,10 @@ import { getDefaultLooks } from "../../iguana/get-default-looks";
 import { IguanaLooks } from "../../iguana/looks";
 import { objIguanaPuppet } from "../../iguana/obj-iguana-puppet";
 import { TypedInput } from "../../iguana/typed-input";
-import { objUiButton } from "../framework/button";
-import { objUiPage, objUiPageRouter } from "../framework/page";
-import { objUiCheckboxInput } from "./components/checkbox-input";
-import { objUiSliderInput } from "./components/slider-input";
+import { objUiButton } from "../framework/obj-ui-button";
+import { objUiPage, objUiPageRouter } from "../framework/obj-ui-page";
+import { objUiCheckboxInput } from "./components/obj-ui-checkbox-input";
+import { objUiSliderInput } from "./components/obj-ui-slider-input";
 
 function context() {
     let looks = getDefaultLooks();
