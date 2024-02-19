@@ -3,6 +3,7 @@ import { findSceneByName } from "../core/scene/find-scene-by-name";
 import { sceneStack } from "../globals";
 import { objUiButton } from "../ui/framework/obj-ui-button";
 import { objUiPage, objUiPageRouter } from "../ui/framework/obj-ui-page";
+import { objUiCheckboxInput } from "../ui/iguana-designer/components/obj-ui-checkbox-input";
 
 export function UiTest() {
     const router = objUiPageRouter().show();
@@ -21,7 +22,8 @@ export function UiTest() {
         return objUiPage([
             objUiButton('Goto Page 1', () => router.gotoEscape(page1())).escape(),
             objUiButton('Nothing 2', () => console.log('Nothing 2')).at(16, 64),
-            objUiButton('Nothing 3', () => console.log('Nothing 3')).at(16, 128)
+            objUiButton('Nothing 3', () => console.log('Nothing 3')).at(16, 128),
+            objUiCheckboxInput('Test', { value: false }).at(16, 192),
         ],
         { selectionIndex: 1 });
     }
