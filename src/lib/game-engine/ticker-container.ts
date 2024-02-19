@@ -4,8 +4,14 @@ import { AsshatTicker } from "./asshat-ticker";
 export class TickerContainer extends Container {
     constructor(private readonly _ticker: AsshatTicker, startTickingOnceAdded = true) {
         super();
-        if (startTickingOnceAdded)
-            this.once('added', () => this.parent.ticker.add(() => _ticker.tick()));
+        if (startTickingOnceAdded) {
+            const tickFn = () => _ticker.tick();
+            this.once('added', () => {
+                const parent = this.parent;
+                parent.ticker.add(tickFn);
+                this.once('destroyed', () => parent.ticker.remove(tickFn));
+            });
+        }
     }
 
     destroy() {
