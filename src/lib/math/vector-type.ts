@@ -5,7 +5,7 @@ function Vector(this: Vector, x: number, y: number) {
     this.y = y;
 }
 
-interface VectorSimple {
+export interface VectorSimple {
     x: number;
     y: number;
 }

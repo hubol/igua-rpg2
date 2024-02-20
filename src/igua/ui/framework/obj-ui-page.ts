@@ -3,6 +3,7 @@ import { container } from "../../../lib/pixi/container";
 import { cyclic } from "../../../lib/math/number";
 import { EscapeTickerAndExecute } from "../../../lib/game-engine/asshat-ticker";
 import { Input, forceGameLoop } from "../../globals";
+import { Undefined } from "../../../lib/types/undefined";
 
 export type UiPageState = { selectionIndex: number };
 export type UiPageElement = Container & { selected: boolean };
@@ -11,6 +12,7 @@ export function objUiPageRouter() {
     function goto(page: UiPage) {
         c.removeAllChildren();
         c.addChild(page);
+        c.page = page;
     }
 
     function gotoEscape(page: UiPage) {
@@ -21,7 +23,7 @@ export function objUiPageRouter() {
     }
 
     const c = container()
-        .merge({ goto, gotoEscape });
+        .merge({ goto, gotoEscape, page: Undefined<UiPage>() });
 
     return c;
 }

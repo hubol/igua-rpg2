@@ -13,6 +13,7 @@ import { TypedInput } from "../../iguana/typed-input";
 import { objUiButton } from "../framework/obj-ui-button";
 import { objUiPage, objUiPageRouter } from "../framework/obj-ui-page";
 import { objUiCheckboxInput } from "./components/obj-ui-checkbox-input";
+import { objUiPlacementInput } from "./components/obj-ui-placement-input";
 import { objUiSliderInput } from "./components/obj-ui-slider-input";
 
 function context() {
@@ -29,6 +30,10 @@ function context() {
         },
         get connectedInput() {
             return connectedInput;
+        },
+        router: objUiPageRouter(),
+        get page() {
+            return this.router.page;
         }
     }
 }
@@ -36,16 +41,19 @@ function context() {
 export const UiIguanaDesignerContext = new SceneLocal(context, 'UiIguanaDesignerContext');
 
 export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
-    UiIguanaDesignerContext.value.looks = looks;
-    const c = container();
+    const context = UiIguanaDesignerContext.value;
 
-    const router = objUiPageRouter().at(2, 2).show(c);
+    context.looks = looks;
+
+    const c = container();
+    const router = context.router.at(2, 2).show(c);
     
     function page1() {
         return objUiPage([
             objUiButton('Randomize', randomizeIguanaLooks).jiggle(),
-            objUiSliderInput('Eye tilt', UiIguanaDesignerContext.value.connectedInput.head.eyes.tilt, UiIguanaDesignerContext.value.connectedInput.head.eyes.tilt).at(0, 40),
-            objUiCheckboxInput('Mouth flip', UiIguanaDesignerContext.value.connectedInput.head.mouth.flipV).at(0, 80).jiggle(),
+            objUiSliderInput('Eye tilt', context.connectedInput.head.eyes.tilt, context.connectedInput.head.eyes.tilt).at(0, 40),
+            objUiCheckboxInput('Mouth flip', context.connectedInput.head.mouth.flipV).at(0, 80),
+            objUiPlacementInput('Crest position', context.connectedInput.head.crest.placement, context.connectedInput.head.crest.placement).at(0, 120),
         ],
         { selectionIndex: 0 })
     }
