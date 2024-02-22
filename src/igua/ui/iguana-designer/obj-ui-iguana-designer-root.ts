@@ -15,6 +15,7 @@ import { objUiPage, objUiPageRouter } from "../framework/obj-ui-page";
 import { objUiCheckboxInput } from "./components/obj-ui-checkbox-input";
 import { objUiPlacementInput } from "./components/obj-ui-placement-input";
 import { objUiSliderInput } from "./components/obj-ui-slider-input";
+import { objUiTextureChoiceInput } from "./components/obj-ui-texture-choice-input";
 
 function context() {
     let looks = getDefaultLooks();
@@ -51,9 +52,11 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
     function page1() {
         return objUiPage([
             objUiButton('Randomize', randomizeIguanaLooks).jiggle(),
-            objUiSliderInput('Eye tilt', context.connectedInput.head.eyes.tilt, context.connectedInput.head.eyes.tilt).at(0, 40),
-            objUiCheckboxInput('Mouth flip', context.connectedInput.head.mouth.flipV).at(0, 80),
-            objUiPlacementInput('Crest position', context.connectedInput.head.crest.placement, context.connectedInput.head.crest.placement).at(0, 120),
+            objUiSliderInput('Eye tilt', context.connectedInput.head.eyes.tilt, context.connectedInput.head.eyes.tilt).at(0, 33),
+            objUiCheckboxInput('Mouth flip', context.connectedInput.head.mouth.flipV).at(0, 66),
+            objUiPlacementInput('Crest position', context.connectedInput.head.crest.placement, context.connectedInput.head.crest.placement).at(0, 99),
+            objUiTextureChoiceInput(context.connectedInput.head.crest.shape, context.connectedInput.head.crest.shape).at(0, 99 + 33),
+            objUiTextureChoiceInput(context.connectedInput.head.horn.shape, context.connectedInput.head.horn.shape).at(0, 99 + 66),
         ],
         { selectionIndex: 0 })
     }

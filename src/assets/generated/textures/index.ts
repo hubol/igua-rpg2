@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 22 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 23 }];
 
 interface TxData {
   id: string;
@@ -24,7 +24,7 @@ function txs<T>(tx: (data: TxData) => T) {
     Iguana: {
       Club: tx({ id: "Iguana.Club", atlas: 0, x: 439, y: 65, width: 48, height: 12 }),
       Crest: tx({ id: "Iguana.Crest", atlas: 0, x: 397, y: 25, width: 80, height: 16 }),
-      Eye: tx({ id: "Iguana.Eye", atlas: 0, x: 501, y: 72, width: 8, height: 8 }),
+      Eye: tx({ id: "Iguana.Eye", atlas: 0, x: 501, y: 81, width: 8, height: 8 }),
       Foot: tx({ id: "Iguana.Foot", atlas: 0, x: 378, y: 52, width: 126, height: 12 }),
       Head: tx({ id: "Iguana.Head", atlas: 0, x: 403, y: 96, width: 18, height: 18 }),
       Horn: tx({ id: "Iguana.Horn", atlas: 0, x: 422, y: 96, width: 16, height: 8 }),
@@ -39,6 +39,7 @@ function txs<T>(tx: (data: TxData) => T) {
     OversizedAngel: tx({ id: "OversizedAngel", atlas: 0, x: 0, y: 0, width: 396, height: 51 }),
     Ui: {
       Checkbox: tx({ id: "Ui.Checkbox", atlas: 0, x: 378, y: 65, width: 60, height: 30 }),
+      NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 501, y: 72, width: 8, height: 8 }),
       PlacementReticle: tx({ id: "Ui.PlacementReticle", atlas: 0, x: 505, y: 0, width: 6, height: 6 }),
     },
   };
