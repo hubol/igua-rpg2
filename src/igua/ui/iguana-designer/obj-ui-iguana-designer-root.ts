@@ -63,7 +63,7 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
 
     router.goto(page1());
 
-    objIguanaPreview().at(192, 250).show(c);
+    objIguanaPreview().at(160, 250).show(c);
 
     return c;
 }
@@ -128,6 +128,9 @@ function objIguanaPreview() {
                 await lerp(puppet, 'facing').to(-puppet.facing).over(300);
             }
         });
+
+        puppet.scale.set(3);
+
         return puppet;
     }
 
