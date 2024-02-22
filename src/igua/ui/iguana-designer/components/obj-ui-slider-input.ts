@@ -13,8 +13,8 @@ interface Restrictions {
 
 export function objUiSliderInput(
         text: string,
-        { min = -8, max = 8 }: Restrictions,
         binding: { value: number },
+        { min = -8, max = 8 }: Restrictions,
         [factor0, factor1, factor2]: ActionRepeatAdjustFactors = [1, 1, 1],
         width = 96,
         height = 30) {
