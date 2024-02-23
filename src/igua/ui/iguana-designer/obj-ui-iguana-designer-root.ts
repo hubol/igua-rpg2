@@ -13,6 +13,7 @@ import { TypedInput } from "../../iguana/typed-input";
 import { objUiButton } from "../framework/obj-ui-button";
 import { objUiPage, objUiPageRouter } from "../framework/obj-ui-page";
 import { objUiCheckboxInput } from "./components/obj-ui-checkbox-input";
+import { objUiColorInput } from "./components/obj-ui-color-input";
 import { objUiPlacementInput } from "./components/obj-ui-placement-input";
 import { objUiSliderInput } from "./components/obj-ui-slider-input";
 import { objUiTextureChoiceInput } from "./components/obj-ui-texture-choice-input";
@@ -57,6 +58,7 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
             objUiPlacementInput('Crest position', context.connectedInput.head.crest.placement, context.connectedInput.head.crest.placement).at(0, 99),
             objUiTextureChoiceInput(context.connectedInput.head.crest.shape, context.connectedInput.head.crest.shape).at(0, 99 + 33),
             objUiTextureChoiceInput(context.connectedInput.head.horn.shape, context.connectedInput.head.horn.shape).at(0, 99 + 66),
+            objUiColorInput('Head color', context.connectedInput.head.color).at(0, 99 + 99),
         ],
         { selectionIndex: 0 })
     }

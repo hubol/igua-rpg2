@@ -39,6 +39,10 @@ class RngBase {
     choose<T>(...items: T[]): T {
         return items[Math.floor(items.length * this.random())];
     }
+
+    color() {
+        return Math.round(this.random() * 0xffffff);
+    }
 }
 
 // https://github.com/tvalentius/pseudo-random/blob/master/index.js
