@@ -24,7 +24,7 @@ export function objUiColorInput(text: string, binding: { value: number }) {
 }
 
 function objUiColorAdjustPage(binding: { value: number }) {
-    const el: UiPageElement[] = [];
+    const els: UiPageElement[] = [];
     let h: number, s: number, v: number;
 
     function writeColor() {
@@ -74,9 +74,9 @@ function objUiColorAdjustPage(binding: { value: number }) {
         UiIguanaDesignerContext.value.router.push(objUiColorCopyFromPage(binding));
     }
 
-    el.push(objUiSliderInput('Hue', hBinding, { min: 0, max: 359 }, [5, 5, 7]));
-    el.push(objUiSliderInput('Saturation', sBinding, { min: 0, max: 100 }, [2, 2, 2]));
-    el.push(objUiSliderInput('Value', vBinding, { min: 0, max: 100 }, [2, 2, 2]));
+    els.push(objUiSliderInput('Hue', hBinding, { min: 0, max: 359 }, [5, 5, 7]));
+    els.push(objUiSliderInput('Saturation', sBinding, { min: 0, max: 100 }, [2, 2, 2]));
+    els.push(objUiSliderInput('Value', vBinding, { min: 0, max: 100 }, [2, 2, 2]));
 
     const random = objUiButton('Random', () => {
         binding.value = Rng.color();
@@ -85,22 +85,22 @@ function objUiColorAdjustPage(binding: { value: number }) {
         .center()
         .jiggle();
 
-    el.push(random);
-    el.push(objUiButton('Copy From...', gotoCopyFrom).center());
-    el.push(objUiButton('OK', () => UiIguanaDesignerContext.value.router.pop()));
+    els.push(random);
+    els.push(objUiButton('Copy From...', gotoCopyFrom).center());
+    els.push(objUiButton('OK', () => UiIguanaDesignerContext.value.router.pop()));
 
     const dy = 33;
-    el[1].y = dy;
-    el[2].y = dy * 2;
-    el[3].y = dy * 3 + 15;
-    el[4].y = dy * 4 + 15;
-    el[5].y = dy * 5 + 30;
+    els[1].y = dy;
+    els[2].y = dy * 2;
+    els[3].y = dy * 3 + 15;
+    els[4].y = dy * 4 + 15;
+    els[5].y = dy * 5 + 30;
 
-    const page = objUiPage(el, { selectionIndex: 0 });
+    const page = objUiPage(els, { selectionIndex: 0 });
 
     new Graphics()
         .beginFill(0xffffff)
-        .drawRect(el[0].x + 96 + 3, el[0].y, 16, dy * 3 - 3)
+        .drawRect(els[0].x + 96 + 3, els[0].y, 16, dy * 3 - 3)
         .step(gfx => gfx.tint = binding.value)
         .show(page);
 
