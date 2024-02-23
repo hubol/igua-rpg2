@@ -5,6 +5,9 @@ import { UiPageElement, objUiPage } from "../../framework/obj-ui-page";
 import { objUiSliderInput } from "./obj-ui-slider-input";
 import { Rng } from "../../../../lib/math/rng";
 import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
+import { UiColor } from "../../ui-color";
+import { Input } from "../../../globals";
+import { ConnectedInput } from "../../../iguana/connected-input";
 
 function readHsv(binding: { value: number }) {
     return AdjustColor.pixi(binding.value).toHsv();
@@ -68,8 +71,7 @@ function objUiColorAdjustPage(binding: { value: number }) {
     readColor();
 
     function gotoCopyFrom() {
-        // const elements = makeCopyFromPageElements(binding.value, x => binding.value = x);
-        // looksContext.into('Copy', elements);
+        UiIguanaDesignerContext.value.router.push(objUiColorCopyFromPage(binding));
     }
 
     el.push(objUiSliderInput('Hue', hBinding, { min: 0, max: 359 }, [5, 5, 7]));
@@ -105,55 +107,61 @@ function objUiColorAdjustPage(binding: { value: number }) {
     return page;
 }
 
-function copyButton(color: number, onSelect: () => unknown, onPress: () => unknown, w: number, h: number) {
-    // const p = 4;
+function objUiCopyColorButton(color: number, onSelect: () => unknown, onPress: () => unknown, w: number, h: number) {
+    const p = 4;
+    const path = [p, p, p, h - p, w - p, p];
 
-    // const g = merge(new Graphics(), { selected: false }).withStep(() => {
-    //     g
-    //         .clear()
-    //         .beginFill(g.selected ? 0x00FF00 : 0x005870)
-    //         .drawRect(0, 0, w, h)
-    //         .beginFill(color)
-    //         .drawPolygon([p, p, p, h - p, w - p, p]);
+    const g = new Graphics()
+        .merge({ selected: false })
+        .step(() => {
+            g
+                .clear()
+                .beginFill(g.selected ? UiColor.Selection : UiColor.Background)
+                .drawRect(0, 0, w, h)
+                .beginFill(color)
+                .drawPolygon(path);
 
-    //     if (g.selected) {
-    //         onSelect();
-    //         if (Input.justWentDown('Confirm'))
-    //             onPress();
-    //     }
-    // });
+            if (g.selected) {
+                onSelect();
+                if (Input.justWentDown('Confirm'))
+                    onPress();
+            }
+    });
 
-    // return g;
+    return g;
 }
 
-// function makeCopyFromPageElements(currentColor: number, set: (color: number) => unknown): PageElement[] {
-//     const colors = findColorValues(looksContext.inputModel);
-//     const uniqueColors = Array.from(new Set(colors));
+function objUiColorCopyFromPage(binding: { value: number }) {
+    const initialColor = binding.value;
+    const uniqueColors = ConnectedInput.findUniqueColorValues(UiIguanaDesignerContext.value.connectedInput);
 
-//     const elements: PageElement[] = [];
+    const els: UiPageElement[] = [];
 
-//     const w = 30;
-//     const h = 30;
-//     const m = 3;
+    const w = 30;
+    const h = 30;
+    const m = 3;
 
-//     let ax = 0;
-//     let ay = 0;
+    let x = 0;
+    let y = 0;
 
-//     for (let i = 0; i < uniqueColors.length; i++) {
-//         if (i > 0) {
-//             if (ax > 60) {
-//                 ax = 0;
-//                 ay += h + m;
-//             }
-//             else
-//                 ax += w + m;
-//         }
+    let selectionIndex = 0;
 
-//         const c = uniqueColors[i];
-//         const elem = copyButton(c, () => set(c), looksContext.back, w, h).at(ax, ay);
-//         elem.selected = c === currentColor;
-//         elements.push(elem);
-//     }
+    for (let i = 0; i < uniqueColors.length; i++) {
+        if (i > 0) {
+            if (x > 60) {
+                x = 0;
+                y += h + m;
+            }
+            else
+                x += w + m;
+        }
 
-//     return elements;
-// }
+        const c = uniqueColors[i];
+        const elem = objUiCopyColorButton(c, () => binding.value = c, () => UiIguanaDesignerContext.value.router.pop(), w, h).at(x, y);
+        if (c === initialColor)
+            selectionIndex = i;
+        els.push(elem);
+    }
+
+    return objUiPage(els, { selectionIndex });
+}

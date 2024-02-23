@@ -3,19 +3,30 @@ import { TypedInput } from "./typed-input";
 
 export namespace ConnectedInput {
     export function create<TInput>(input: TInput, serializable: TypedInput.Output<TInput>): Type<TInput> {
-        tryConnect(input, serializable);
+        traverse(input, serializable, connect);
         return input as any;
     }
 
-    function tryConnect(input: any, source: any, path: string[] = []) {
+    export function findUniqueColorValues(instance: Type<unknown>) {
+        const set = new Set<number>();
+        traverse(instance, instance, (input: TypedInput.Any & { value: any }) => {
+            if (input.kind === 'color')
+                set.add(input.value);
+        });
+        return Array.from(set);
+    }
+
+    type OnInputFn<T> = (input: T, source: any, path: string[]) => void;
+
+    function traverse<T = TypedInput.Any>(input: any, source: any, onInputFn: OnInputFn<T>, path: string[] = []) {
         if ('kind' in input)
-            return connect(input, source, path);
+            return onInputFn(input, source, path);
 
         if (typeof input !== "object" || Array.isArray(input))
             return;
 
         for (const key in input) {
-            tryConnect(input[key], source, [ ...path, key ]);
+            traverse(input[key], source, onInputFn, [ ...path, key ]);
         }
     }
 
