@@ -38,6 +38,8 @@ function handleAsshatZoneError(e: any) {
         return;
     }
 
+    // TODO should EscapeTickerAndExecute errors be handled here?
+
     ErrorReporter.reportSubsystemError('AsshatZone', e);
 }
 
