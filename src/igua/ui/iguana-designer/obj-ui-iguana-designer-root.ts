@@ -61,7 +61,7 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
         { selectionIndex: 0 })
     }
 
-    router.goto(page1());
+    router.replace(page1());
 
     objIguanaPreview().at(160, 250).show(c);
 

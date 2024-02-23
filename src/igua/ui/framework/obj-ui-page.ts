@@ -1,35 +1,50 @@
 import { Container } from "pixi.js";
 import { container } from "../../../lib/pixi/container";
 import { cyclic } from "../../../lib/math/number";
-import { EscapeTickerAndExecute } from "../../../lib/game-engine/asshat-ticker";
+import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
 import { Input, forceGameLoop } from "../../globals";
-import { Undefined } from "../../../lib/types/undefined";
+import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 
 export type UiPageState = { selectionIndex: number };
 export type UiPageElement = Container & { selected: boolean };
 
 export function objUiPageRouter() {
-    function goto(page: UiPage) {
-        c.removeAllChildren();
+    function replace(page: UiPage) {
+        c.children.last?.destroy();
         c.addChild(page);
-        c.page = page;
+        forceGameLoop();
     }
 
-    function gotoEscape(page: UiPage) {
-        throw new EscapeTickerAndExecute(() => {
-            goto(page);
-            forceGameLoop();
-        });
+    function push(page: UiPage) {
+        c.addChild(page);
+        forceGameLoop();
+    }
+
+    function pop() {
+        c.children.last?.destroy();
+        forceGameLoop();
     }
 
     const c = container()
-        .merge({ goto, gotoEscape, page: Undefined<UiPage>() });
+        .merge({ replace, push, pop, get pages() { return c.children as UiPage[] }, get page() { return c.pages.last; } })
+        .step(() => {
+            for (let i = 0; i < c.children.length; i++)
+                c.children[i].visible = false;
+
+            if (c.page) {
+                c.page.visible = true;
+                c.page._ticker.tick();
+            }
+        });
 
     return c;
 }
 
 export function objUiPage(elements: UiPageElement[], state: UiPageState) {
-    const c = container(...elements).merge({ navigation: true, state });
+    const ticker = new AsshatTicker();
+    const c = new TickerContainer(ticker, false).merge({ navigation: true, state });
+    c.addChild(...elements);
+
     updateSelection();
 
     function updateSelection() {
