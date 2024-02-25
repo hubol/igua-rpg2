@@ -58,14 +58,15 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
             objUiPlacementInput('Crest position', context.connectedInput.head.crest.placement, context.connectedInput.head.crest.placement).at(0, 99),
             objUiTextureChoiceInput(context.connectedInput.head.crest.shape, context.connectedInput.head.crest.shape).at(0, 99 + 33),
             objUiTextureChoiceInput(context.connectedInput.head.horn.shape, context.connectedInput.head.horn.shape).at(0, 99 + 66),
-            objUiColorInput('Head color', context.connectedInput.head.color).at(0, 99 + 99),
+            objUiTextureChoiceInput(context.connectedInput.head.eyes.left.pupil.shape, context.connectedInput.head.eyes.left.pupil.shape).at(0, 99 + 99),
+            objUiColorInput('Head color', context.connectedInput.head.color).at(0, 99 + 99 + 33),
         ],
         { selectionIndex: 0 })
     }
 
     router.replace(page1());
 
-    objIguanaPreview().at(160, 250).show(c);
+    objIguanaPreview().at(160, 200).show(c);
 
     return c;
 }
@@ -111,29 +112,35 @@ function objIguanaPreview() {
     let iguana: ReturnType<typeof objIguanaPreviewInstance>;
 
     function objIguanaPreviewInstance() {
-        const puppet = objIguanaPuppet(UiIguanaDesignerContext.value.looks)
+        const bigPuppet = objIguanaPuppet(UiIguanaDesignerContext.value.looks)
         .step(() => {
-            if (puppet.gait > 0)
-                puppet.pedometer += 0.1;
+            if (bigPuppet.gait > 0)
+                bigPuppet.pedometer += 0.1;
         })
         .async(async () => {
             while (true) {
                 await sleep(1000);
-                await lerp(puppet, 'ducking').to(1).over(300);
+                await lerp(bigPuppet, 'ducking').to(1).over(300);
                 await sleep(1000);
-                await lerp(puppet, 'ducking').to(0).over(300);
+                await lerp(bigPuppet, 'ducking').to(0).over(300);
                 await sleep(1000);
-                await lerp(puppet, 'gait').to(1).over(300);
+                await lerp(bigPuppet, 'gait').to(1).over(300);
                 await sleep(1000);
-                await lerp(puppet, 'gait').to(0).over(300);
-                await sleep(1000);
-                await lerp(puppet, 'facing').to(-puppet.facing).over(300);
+                await lerp(bigPuppet, 'gait').to(0).over(300);
             }
         });
 
-        puppet.scale.set(3);
+        const smallPuppet1 = objIguanaPuppet(UiIguanaDesignerContext.value.looks)
+            .at(-30 + 20, -96);
+        smallPuppet1.facing = -1;
 
-        return puppet;
+        const smallPuppet2 = objIguanaPuppet(UiIguanaDesignerContext.value.looks)
+            .at(64 - 20, -96);
+        smallPuppet2.facing = 1;
+
+        bigPuppet.scale.set(3);
+
+        return container(smallPuppet1, smallPuppet2, bigPuppet);
     }
 
     function getLooksJson() {
