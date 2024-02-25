@@ -30,7 +30,7 @@ export function objEye(
     eyelid.scale.y = eyelidRestingScale;
 
     const c = container(mask, scleraSpr, pupilSpr, eyelid)
-        .merge({ closed: 0 as Unit, look: vnew(), shapeObj: mask })
+        .merge({ closed: 0 as Unit, look: vnew(), pupilSpr, shapeObj: mask })
         .step(() => {
             eyelid.scale.y = Math.round(nlerp(eyelidRestingScale, 1, c.closed) * scleraTx.height) / scleraTx.height;
         })

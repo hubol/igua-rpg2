@@ -483,6 +483,7 @@ export function objIguanaHead(head: Head) {
 
                 inner.pivot.x = isFacingRight ? 0 : -noggin.width;
                 eyes.x = isFacingRight ? 0 : eyesFacingLeftOffset - noggin.width;
+                eyes.isFacingRight = isFacingRight;
                 back.scale.x = isFacingRight ? 1 : -1;
                 front.scale.x = isFacingRight ? 1 : -1;
             }
@@ -520,13 +521,50 @@ function objIguanaEyes(head: Head) {
     const left = objIguanaEye(head.eyes.left);
     const right = objIguanaEye(head.eyes.right).at(left.shapeObj.width + head.eyes.gap, 0);
 
+    const leftOffsetX = getEyeOffsetX(left);
+    const rightOffsetX = getEyeOffsetX(right);
+
     left.y = head.eyes.tilt;
 
-    const eyes = objEyes(left, right);
+    let isFacingRight = true;
+
+    const eyes = objEyes(left, right).merge({
+        get isFacingRight() {
+            return isFacingRight;
+        },
+        set isFacingRight(value) {
+            if (isFacingRight === value)
+                return;
+            isFacingRight = value;
+
+            // TODO should be behind some advanced setting
+            // "Direction-Sensitive Eye Tilt"
+            left.y = isFacingRight ? head.eyes.tilt : 0;
+            right.y = isFacingRight ? 0 : head.eyes.tilt;
+
+            // TODO this will make cross-eyed iguanas look especially stupid
+            // Cross-eyed iguanas should be easy to make
+            // Create some setting to accomodate for this
+            left.pupilSpr.flipH(isFacingRight ? 1 : -1);
+            left.pupilSpr.x = head.eyes.left.pupil.placement.x + (isFacingRight ? 0 : leftOffsetX);
+
+            // TODO this will make cross-eyed iguanas look especially stupid
+            // Cross-eyed iguanas should be easy to make
+            // Create some setting to accomodate for this
+            right.pupilSpr.flipH(isFacingRight ? 1 : -1);
+            right.pupilSpr.x = head.eyes.right.pupil.placement.x + (isFacingRight ? 0 : rightOffsetX);
+        }
+    });
     eyes.pivot.at(-12, 8).add(head.eyes.placement, -1);
 
     eyes.stepsUntilBlink = Rng.int(40, 120);
 
     return eyes;
+}
+
+const r6 = new Rectangle();
+
+function getEyeOffsetX(eyeObj: ReturnType<typeof objIguanaEye>) {
+    return getFlippableOffsetX(eyeObj.pupilSpr, eyeObj.shapeObj, r6);
 }
 
