@@ -10,14 +10,14 @@ declare module "pixi.js" {
 
 Object.defineProperties(Container.prototype, {
     flipH: {
-        value: function (this: Container, sign = -1) {
-            return flipXY(this, 'x', 'a', sign);
+        value: function (this: Container & ContainerPrivate, sign = -1) {
+            return flipXY(this, 'x', '_flipAdjustedPivotX', 'a', sign);
         },
         configurable: true,
     },
     flipV: {
-        value: function (this: Container, sign = -1) {
-            return flipXY(this, 'y', 'd', sign);
+        value: function (this: Container & ContainerPrivate, sign = -1) {
+            return flipXY(this, 'y', '_flipAdjustedPivotY', 'd', sign);
         },
         configurable: true,
     },
@@ -27,7 +27,12 @@ const r = new Rectangle();
 const v1 = vnew();
 const v2 = vnew();
 
-function flipXY(c: Container, scaleKey: 'x' | 'y', worldTransformScaleKey: 'a' | 'd', sign: number) {
+interface ContainerPrivate {
+    _flipAdjustedPivotX: number;
+    _flipAdjustedPivotY: number;
+}
+
+function flipXY(c: Container & ContainerPrivate, scaleKey: 'x' | 'y', adjustedPivotKey: keyof ContainerPrivate, worldTransformScaleKey: 'a' | 'd', sign: number) {
     const currentSign = Math.sign(c.scale[scaleKey]);
     if (currentSign === 0 || currentSign === sign)
         return c;
@@ -35,10 +40,18 @@ function flipXY(c: Container, scaleKey: 'x' | 'y', worldTransformScaleKey: 'a' |
     const worldScale = c.worldTransform[worldTransformScaleKey];
 
     const ogBounds = v1.at(c.getBounds(false, r));
+
+    const adjusted = c[adjustedPivotKey] ?? 0;
+    c.pivot[scaleKey] -= adjusted;
+
     c.scale[scaleKey] *= -1;
     const bounds = v2.at(c.getBounds(false, r));
 
-    c.pivot.add(bounds.add(ogBounds, -1), sign * worldScale);
+    if (worldScale !== 0) {
+        const delta = (bounds[scaleKey] - ogBounds[scaleKey]) * sign / worldScale;
+        c.pivot[scaleKey] += delta;
+        c[adjustedPivotKey] = delta;
+    }
 
     return c;
 }
