@@ -17,7 +17,7 @@ export function objUiColorInput(text: string, binding: { value: number }) {
     const b = objUiButton(text, () => UiIguanaDesignerContext.value.router.push(objUiColorAdjustPage(binding)));
     new Graphics()
         .beginFill(0xffffff)
-        .drawPolygon([4, 4, 4, 26, 26, 4])
+        .drawPolygon(4, 4, 4, 27, 27, 4)
         .step(gfx => gfx.tint = binding.value)
         .show(b);
     return b;
