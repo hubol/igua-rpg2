@@ -56,7 +56,7 @@ export namespace ConnectedInput {
     export type Color = TypedInput.Color & { value: number };
     export type Boolean = TypedInput.Boolean & { value: boolean };
 
-    type Type<T> = {
+    export type Type<T> = {
         [k in keyof T]: T[k] extends TypedInput.Any
             ? T[k] & { value: TypedInput.Output<{ 'k': T[k] }>['k'] }
             : T[k] extends Record<string, unknown>

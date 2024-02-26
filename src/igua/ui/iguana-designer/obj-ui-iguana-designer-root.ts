@@ -12,11 +12,7 @@ import { objIguanaPuppet } from "../../iguana/obj-iguana-puppet";
 import { TypedInput } from "../../iguana/typed-input";
 import { objUiButton } from "../framework/obj-ui-button";
 import { objUiPage, objUiPageRouter } from "../framework/obj-ui-page";
-import { objUiCheckboxInput } from "./components/obj-ui-checkbox-input";
-import { objUiColorInput } from "./components/obj-ui-color-input";
-import { objUiPlacementInput } from "./components/obj-ui-placement-input";
-import { objUiSliderInput } from "./components/obj-ui-slider-input";
-import { objUiTextureChoiceInput } from "./components/obj-ui-texture-choice-input";
+import { objUiConnectedInputNavigationButton } from "./components/obj-ui-connected-input-page";
 
 function context() {
     let looks = getDefaultLooks();
@@ -52,14 +48,10 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
     
     function page1() {
         return objUiPage([
-            objUiButton('Randomize', randomizeIguanaLooks).jiggle(),
-            objUiSliderInput('Eye tilt', context.connectedInput.head.eyes.tilt, context.connectedInput.head.eyes.tilt).at(0, 33),
-            objUiCheckboxInput('Mouth flip', context.connectedInput.head.mouth.flipV).at(0, 66),
-            objUiPlacementInput('Crest position', context.connectedInput.head.crest.placement, context.connectedInput.head.crest.placement).at(0, 99),
-            objUiTextureChoiceInput(context.connectedInput.head.crest.shape, context.connectedInput.head.crest.shape).at(0, 99 + 33),
-            objUiTextureChoiceInput(context.connectedInput.head.horn.shape, context.connectedInput.head.horn.shape).at(0, 99 + 66),
-            objUiTextureChoiceInput(context.connectedInput.head.eyes.left.pupil.shape, context.connectedInput.head.eyes.left.pupil.shape).at(0, 99 + 99),
-            objUiColorInput('Head color', context.connectedInput.head.color).at(0, 99 + 99 + 33),
+            objUiConnectedInputNavigationButton('Head', context.connectedInput.head),
+            objUiConnectedInputNavigationButton('Body', context.connectedInput.body).at(0, 33),
+            objUiConnectedInputNavigationButton('Feet', context.connectedInput.feet).at(0, 66),
+            objUiButton('Randomize', randomizeIguanaLooks).jiggle().at(0, 99),
         ],
         { selectionIndex: 0 })
     }
