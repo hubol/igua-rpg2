@@ -10,6 +10,7 @@ import { objUiTextureChoiceInput } from "./obj-ui-texture-choice-input";
 import { objUiPlacementInput } from "./obj-ui-placement-input";
 import { objUiSliderInput } from "./obj-ui-slider-input";
 import { objUiColorInput } from "./obj-ui-color-input";
+import { StringCase } from "../../../../lib/string-case";
 
 export function objUiConnectedInputPage(title: string, root: ConnectedInput.Type<unknown>) {
     const els = Empty<UiPageElement>();
@@ -30,19 +31,20 @@ export function objUiConnectedInputPage(title: string, root: ConnectedInput.Type
 }
 
 function createInputObj(key: string, input: TypedInput.Any & { value: any }) {
+    const title = StringCase.toEnglish(key);
     switch (input.kind) {
         case "boolean":
-            return objUiCheckboxInput(key, input);
+            return objUiCheckboxInput(title, input);
         case "choice":
             return objUiTextureChoiceInput(input, input as TypedInput.Choice<Texture>);
         case "vector":
-            return objUiPlacementInput(key, input, input);
+            return objUiPlacementInput(title, input, input);
         case "integer":
-            return objUiSliderInput(key, input, input);
+            return objUiSliderInput(title, input, input);
         case "color":
-            return objUiColorInput(key, input);
+            return objUiColorInput(title, input);
     }
-    return objUiConnectedInputNavigationButton(key, input);
+    return objUiConnectedInputNavigationButton(title, input);
 }
 
 export function objUiConnectedInputNavigationButton(title: string, input: ConnectedInput.Type<unknown>) {
