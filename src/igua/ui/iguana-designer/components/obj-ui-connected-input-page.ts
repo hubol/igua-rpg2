@@ -23,7 +23,7 @@ export function objUiConnectedInputPage(title: string, root: ConnectedInput.Type
         y += 33;
     }
 
-    y += 33;
+    y += 12;
     els.push(objUiDesignerButton('Back', () => UiIguanaDesignerContext.value.router.pop()).at(0, y));
 
     return objUiPage(els, { title, selectionIndex: 0 });
