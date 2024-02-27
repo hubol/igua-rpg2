@@ -8,13 +8,14 @@ import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
 import { UiColor } from "../../ui-color";
 import { Input } from "../../../globals";
 import { ConnectedInput } from "../../../iguana/connected-input";
+import { objUiDesignerButton } from "./obj-ui-designer-button";
 
 function readHsv(binding: { value: number }) {
     return AdjustColor.pixi(binding.value).toHsv();
 }
 
 export function objUiColorInput(text: string, binding: { value: number }) {
-    const b = objUiButton(text, () => UiIguanaDesignerContext.value.router.push(objUiColorAdjustPage(binding)));
+    const b = objUiButton(text, () => UiIguanaDesignerContext.value.router.push(objUiColorAdjustPage(text, binding)));
     new Graphics()
         .beginFill(0xffffff)
         .drawPolygon(4, 4, 4, 27, 27, 4)
@@ -23,7 +24,7 @@ export function objUiColorInput(text: string, binding: { value: number }) {
     return b;
 }
 
-function objUiColorAdjustPage(binding: { value: number }) {
+function objUiColorAdjustPage(title: string, binding: { value: number }) {
     const els: UiPageElement[] = [];
     let h: number, s: number, v: number;
 
@@ -87,7 +88,7 @@ function objUiColorAdjustPage(binding: { value: number }) {
 
     els.push(random);
     els.push(objUiButton('Copy From...', gotoCopyFrom).center());
-    els.push(objUiButton('OK', () => UiIguanaDesignerContext.value.router.pop()));
+    els.push(objUiDesignerButton('OK', () => UiIguanaDesignerContext.value.router.pop()));
 
     const dy = 33;
     els[1].y = dy;
@@ -96,7 +97,7 @@ function objUiColorAdjustPage(binding: { value: number }) {
     els[4].y = dy * 4 + 15;
     els[5].y = dy * 5 + 30;
 
-    const page = objUiPage(els, { selectionIndex: 0 });
+    const page = objUiPage(els, { title, selectionIndex: 0 });
 
     new Graphics()
         .beginFill(0xffffff)
@@ -163,5 +164,5 @@ function objUiColorCopyFromPage(binding: { value: number }) {
         els.push(elem);
     }
 
-    return objUiPage(els, { selectionIndex });
+    return objUiPage(els, { selectionIndex, title: 'Copy' });
 }

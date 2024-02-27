@@ -1,3 +1,4 @@
+import { objText } from "../../../assets/fonts";
 import { lerp } from "../../../lib/game-engine/promise/lerp";
 import { sleep } from "../../../lib/game-engine/promise/sleep";
 import { Rng } from "../../../lib/math/rng";
@@ -11,7 +12,8 @@ import { IguanaLooks } from "../../iguana/looks";
 import { objIguanaPuppet } from "../../iguana/obj-iguana-puppet";
 import { TypedInput } from "../../iguana/typed-input";
 import { objUiButton } from "../framework/obj-ui-button";
-import { objUiPage, objUiPageRouter } from "../framework/obj-ui-page";
+import { UiPage, objUiPage, objUiPageRouter } from "../framework/obj-ui-page";
+import { UiColor } from "../ui-color";
 import { objUiConnectedInputNavigationButton } from "./components/obj-ui-connected-input-page";
 
 function context() {
@@ -44,7 +46,8 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
     context.looks = looks;
 
     const c = container();
-    const router = context.router.at(2, 2).show(c);
+    const router = context.router.at(3, 13).show(c);
+    objText.LargeBold('', { tint: UiColor.Hint }).at(3, 3).step(tip => tip.text = getTipText(router.pages)).show(c);
     
     function page1() {
         return objUiPage([
@@ -53,7 +56,7 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
             objUiConnectedInputNavigationButton('Feet', context.connectedInput.feet).at(0, 66),
             objUiButton('Randomize', randomizeIguanaLooks).jiggle().at(0, 99),
         ],
-        { selectionIndex: 0 })
+        { title: 'Choose your looks.', selectionIndex: 0 })
     }
 
     router.replace(page1());
@@ -61,6 +64,21 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
     objIguanaPreview().at(160, 200).show(c);
 
     return c;
+}
+
+function getTipText(pages: UiPage[]) {
+    if (pages.length === 1)
+        return pages[0].title!;
+
+    let text = '';
+    for (let i = 1; i < pages.length; i++) {
+        if (!pages[i].title)
+            break;
+        if (text)
+            text += ' > ';
+        text += pages[i].title;
+    }
+    return text;
 }
 
 function set(destination: any, path: string[], value: any) {

@@ -5,7 +5,7 @@ import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
 import { Input, forceGameLoop } from "../../globals";
 import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 
-export type UiPageState = { selectionIndex: number };
+export type UiPageProps = { title?: string; selectionIndex: number };
 export type UiPageElement = Container & { selected: boolean };
 
 export function objUiPageRouter() {
@@ -40,20 +40,20 @@ export function objUiPageRouter() {
     return c;
 }
 
-export function objUiPage(elements: UiPageElement[], state: UiPageState) {
+export function objUiPage(elements: UiPageElement[], props: UiPageProps) {
     const ticker = new AsshatTicker();
-    const c = new TickerContainer(ticker, false).merge({ navigation: true, state });
+    const c = new TickerContainer(ticker, false).merge({ navigation: true }).merge(props);
     c.addChild(...elements);
 
     updateSelection();
 
     function updateSelection() {
-        state.selectionIndex = cyclic(state.selectionIndex, 0, elements.length);
-        elements.forEach((x, i) => x.selected = state.selectionIndex === i)
+        c.selectionIndex = cyclic(c.selectionIndex, 0, elements.length);
+        elements.forEach((x, i) => x.selected = c.selectionIndex === i)
     }
 
     function select(dx: number, dy: number) {
-        const selected = elements[state.selectionIndex];
+        const selected = elements[c.selectionIndex];
         dx = Math.sign(dx) * 16;
         dy = Math.sign(dy) * 16;
         let ax = dx;
@@ -65,10 +65,10 @@ export function objUiPage(elements: UiPageElement[], state: UiPageState) {
         while (d < 600) {
             const offset = [-ax, -ay];
             for (let i = 0; i < elements.length; i++) {
-                if (i === state.selectionIndex)
+                if (i === c.selectionIndex)
                     continue;
                 if (elements[i].collides(selected, offset)) {
-                    state.selectionIndex = i;
+                    c.selectionIndex = i;
                     return;
                 }
             }

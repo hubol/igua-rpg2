@@ -11,7 +11,7 @@ import { objUiPlacementInput } from "./obj-ui-placement-input";
 import { objUiSliderInput } from "./obj-ui-slider-input";
 import { objUiColorInput } from "./obj-ui-color-input";
 
-export function objUiConnectedInputPage(root: ConnectedInput.Type<unknown>) {
+export function objUiConnectedInputPage(title: string, root: ConnectedInput.Type<unknown>) {
     const els = Empty<UiPageElement>();
 
     let y = 0;
@@ -26,7 +26,7 @@ export function objUiConnectedInputPage(root: ConnectedInput.Type<unknown>) {
     y += 33;
     els.push(objUiDesignerButton('Back', () => UiIguanaDesignerContext.value.router.pop()).at(0, y));
 
-    return objUiPage(els, { selectionIndex: 0 });
+    return objUiPage(els, { title, selectionIndex: 0 });
 }
 
 function createInputObj(key: string, input: TypedInput.Any & { value: any }) {
@@ -45,8 +45,8 @@ function createInputObj(key: string, input: TypedInput.Any & { value: any }) {
     return objUiConnectedInputNavigationButton(key, input);
 }
 
-export function objUiConnectedInputNavigationButton(name: string, input: ConnectedInput.Type<unknown>) {
-    return objUiDesignerButton(name, () => {
-        UiIguanaDesignerContext.value.router.push(objUiConnectedInputPage(input));
+export function objUiConnectedInputNavigationButton(title: string, input: ConnectedInput.Type<unknown>) {
+    return objUiDesignerButton(title, () => {
+        UiIguanaDesignerContext.value.router.push(objUiConnectedInputPage(title, input));
     });
 }
