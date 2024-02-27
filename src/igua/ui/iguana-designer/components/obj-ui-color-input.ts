@@ -72,7 +72,16 @@ function objUiColorAdjustPage(title: string, binding: { value: number }) {
     readColor();
 
     function gotoCopyFrom() {
-        UiIguanaDesignerContext.value.router.push(objUiColorCopyFromPage(binding));
+        const binding2 = {
+            get value() {
+                return binding.value;
+            },
+            set value(value) {
+                binding.value = value;
+                readColor();
+            }
+        }
+        UiIguanaDesignerContext.value.router.push(objUiColorCopyFromPage(binding2));
     }
 
     els.push(objUiSliderInput('Hue', hBinding, { min: 0, max: 359 }, [5, 5, 7]));
