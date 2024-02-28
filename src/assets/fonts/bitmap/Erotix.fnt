@@ -85,3 +85,6 @@ char id=@)  x=123 y=24 width=3  height=9  xoffset=0  yoffset=-1 xadvance=4  page
 char id=@-  x=127 y=28 width=3  height=1  xoffset=0  yoffset=3  xadvance=4  page=0  chnl=15
 char id=@=  x=131 y=27 width=3  height=3  xoffset=0  yoffset=2  xadvance=4  page=0  chnl=15
 char id=@+  x=135 y=27 width=3  height=3  xoffset=0  yoffset=2  xadvance=4  page=0  chnl=15
+
+kerning first=@F second=@e amount=-1
+kerning first=@F second=@o amount=-1
