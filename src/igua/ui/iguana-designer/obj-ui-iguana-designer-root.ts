@@ -31,7 +31,7 @@ function context() {
         get connectedInput() {
             return connectedInput;
         },
-        router: objUiPageRouter(),
+        router: objUiPageRouter({ maxHeight: 240 }),
         get page() {
             return this.router.page;
         }

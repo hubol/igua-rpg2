@@ -6,7 +6,7 @@ import { objUiPage, objUiPageRouter } from "../ui/framework/obj-ui-page";
 import { objUiCheckboxInput } from "../ui/iguana-designer/components/obj-ui-checkbox-input";
 
 export function UiTest() {
-    const router = objUiPageRouter().show();
+    const router = objUiPageRouter({ maxHeight: 256 }).show();
 
     const gotoSceneTest = () => sceneStack.replace(findSceneByName('SceneTest'), { useGameplay: false });
 
@@ -24,7 +24,14 @@ export function UiTest() {
             objUiButton('Goto Page 1', () => router.replace(page1())).escape(),
             objUiButton('Nothing 2', () => console.log('Nothing 2')).at(16, 64),
             objUiButton('Nothing 3', () => console.log('Nothing 3')).at(16, 128),
-            objUiCheckboxInput('Test', { value: false }).at(16, 192),
+            objUiButton('Nothing 4', () => console.log('Nothing 4')).at(16, 128 + 33),
+            objUiButton('Nothing 5', () => console.log('Nothing 5')).at(16, 128 + 66),
+            objUiButton('Nothing 6', () => console.log('Nothing 6')).at(16, 128 + 99),
+            objUiButton('Nothing 7', () => console.log('Nothing 7')).at(16, 128 + 33 + 99),
+            objUiButton('Nothing 8', () => console.log('Nothing 8')).at(16, 128 + 66 + 99),
+            objUiButton('Nothing 9', () => console.log('Nothing 9')).at(16, 128 + 99 + 99),
+            objUiButton('Nothing 10', () => console.log('Nothing 10')).at(16, 128 + 33 + 99 + 99),
+            objUiCheckboxInput('Test', { value: false }).at(16, 128 + 66 + 99 + 99),
         ],
         { selectionIndex: 1 });
     }
