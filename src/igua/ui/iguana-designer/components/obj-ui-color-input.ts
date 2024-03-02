@@ -9,6 +9,8 @@ import { UiColor } from "../../ui-color";
 import { Input } from "../../../globals";
 import { ConnectedInput } from "../../../iguana/connected-input";
 import { objUiDesignerButton } from "./obj-ui-designer-button";
+import { Empty } from "../../../../lib/types/empty";
+import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 
 function readHsv(binding: { value: number }) {
     return AdjustColor.pixi(binding.value).toHsv();
@@ -25,7 +27,7 @@ export function objUiColorInput(text: string, binding: { value: number }) {
 }
 
 function objUiColorAdjustPage(title: string, binding: { value: number }) {
-    const els: UiPageElement[] = [];
+    const els = Empty<UiVerticalLayout.Element>();
     let h: number, s: number, v: number;
 
     function writeColor() {
@@ -95,22 +97,19 @@ function objUiColorAdjustPage(title: string, binding: { value: number }) {
         .center()
         .jiggle();
 
+    els.push(UiVerticalLayout.Separator);
     els.push(random);
     els.push(objUiButton('Copy From...', gotoCopyFrom).center());
+    els.push(UiVerticalLayout.Separator);
     els.push(objUiDesignerButton('OK', () => UiIguanaDesignerContext.value.router.pop()));
 
-    const dy = 33;
-    els[1].y = dy;
-    els[2].y = dy * 2;
-    els[3].y = dy * 3 + 15;
-    els[4].y = dy * 4 + 15;
-    els[5].y = dy * 5 + 30;
+    const applied = UiVerticalLayout.apply(els);
 
-    const page = objUiPage(els, { title, selectionIndex: 0 });
+    const page = objUiPage(applied, { title, selectionIndex: 0 });
 
     new Graphics()
         .beginFill(0xffffff)
-        .drawRect(els[0].x + 96 + 3, els[0].y, 16, dy * 3 - 3)
+        .drawRect(applied[0].x + 96 + 3, applied[0].y, 16, applied[2].y + applied[2].height)
         .step(gfx => gfx.tint = binding.value)
         .show(page);
 

@@ -12,23 +12,21 @@ import { objUiSliderInput } from "./obj-ui-slider-input";
 import { objUiColorInput } from "./obj-ui-color-input";
 import { StringCase } from "../../../../lib/string-case";
 import { objUiIguanaDesignerEyesPage } from "../pages/obj-ui-iguana-designer-eyes-page";
+import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 
 export function objUiConnectedInputPage(title: string, root: ConnectedInput.Type<unknown>) {
-    const els = Empty<UiPageElement>();
-
-    let y = 0;
+    const els = Empty<UiVerticalLayout.Element>();
 
     for (const key in root) {
         const input = root[key];
-        const inputObj = createInputObj(key, input).at(0, y);
+        const inputObj = createInputObj(key, input);
         els.push(inputObj);
-        y += 33;
     }
 
-    y += 12;
-    els.push(objUiDesignerButton('Back', () => UiIguanaDesignerContext.value.router.pop()).at(0, y));
+    els.push(UiVerticalLayout.Separator);
+    els.push(objUiDesignerButton('Back', () => UiIguanaDesignerContext.value.router.pop()));
 
-    return objUiPage(els, { title, selectionIndex: 0 });
+    return objUiPage(UiVerticalLayout.apply(els), { title, selectionIndex: 0 });
 }
 
 function createInputObj(key: string, input: TypedInput.Any & { value: any }) {

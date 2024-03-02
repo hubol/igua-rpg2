@@ -6,3 +6,7 @@ export const UiColor = {
     Danger: 0xD86050,
     Hint: 0xBBBBBB,
 }
+
+export const UiStyle = {
+    Margin: 3,
+}

@@ -3,6 +3,7 @@ import { Input } from "../../../globals";
 import { createActionRepeater } from "../../framework/action-repeater";
 import { objText } from "../../../../assets/fonts";
 import { UiColor } from "../../ui-color";
+import { container } from "../../../../lib/pixi/container";
 
 type ActionRepeatAdjustFactors = [ factor0: number, factor1: number, factor2: number ];
 
@@ -27,10 +28,11 @@ export function objUiSliderInput(
         return factor0;
     }
 
+    const back = new Graphics().beginFill(UiColor.Background).drawRect(0, 0, width, height);
+
     const g = new Graphics()
-        .merge({ selected: false })
         .step(() => {
-            if (!g.selected)
+            if (!c.selected)
                 return;
 
             if (Input.isDown('SelectLeft') && Input.isDown('SelectRight')) {
@@ -54,8 +56,8 @@ export function objUiSliderInput(
         })
         .step(() => {
             const value = binding.value;
-            g.clear().beginFill(UiColor.Background);
-            if (g.selected)
+            g.clear();
+            if (c.selected)
                 g.lineStyle(2, UiColor.Selection, 1, 0);
             g.drawRect(0, 0, width, height);
 
@@ -76,5 +78,8 @@ export function objUiSliderInput(
     const font = objText.Large(text).at(width / 2, 6);
     font.anchor.set(0.5, 0);
     g.addChild(font);
-    return g;
+
+    const c = container(back, g).merge({ selected: false });
+
+    return c;
 }

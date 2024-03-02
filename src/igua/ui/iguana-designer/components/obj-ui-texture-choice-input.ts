@@ -1,40 +1,26 @@
 import { Container, Graphics, Sprite, Texture } from "pixi.js";
 import { Tx } from "../../../../assets/textures";
 import { TypedInput } from "../../../iguana/typed-input";
-import { createActionRepeater } from "../../framework/action-repeater";
 import { Input } from "../../../globals";
 import { cyclic } from "../../../../lib/math/number";
 import { UiColor } from "../../ui-color";
+import { objUiButton } from "../../framework/obj-ui-button";
 
 const NoneChoice = Tx.Ui.NoneChoice.trimmed;
 
 type Restrictions = Omit<TypedInput.Choice<Texture>, 'kind'>;
 
 export function objUiTextureChoiceInput(binding: { value: number }, { allowNone, options }: Restrictions, width = 96, height = 30) {
-    const c = new Container().merge({ selected: false });
-    const g = new Graphics();
+    const buttonObj = objUiButton('', () => {}, width, height);
 
-    // TODO I don't think repeater is necessary here
-    const left = createActionRepeater(g, 'SelectLeft');
-    const right = createActionRepeater(g, 'SelectRight');
-
-    g.step(() => {
-        g.clear().beginFill(UiColor.Background);
-        if (c.selected) {
-            g.lineStyle(2, UiColor.Selection, 1, 0);
-
-            if (Input.isDown('SelectLeft') && Input.isDown('SelectRight')) {
-                left.reset();
-                right.reset();
-            }
-            if (left.justWentDown)
+    buttonObj.step(() => {
+        if (buttonObj.selected) {
+            if (Input.justWentDown('SelectLeft'))
                 binding.value--;
-            else if (right.justWentDown)
+            else if (Input.justWentDown('SelectRight'))
                 binding.value++;
             binding.value = cyclic(binding.value, allowNone ? -1 : 0, options.length);
         }
-
-        g.drawRect(0, 0, width, height);
     });
 
     const maxWidth = Math.max(...options.map(x => x.width), allowNone ? 7 : 5 );
@@ -88,7 +74,7 @@ export function objUiTextureChoiceInput(binding: { value: number }, { allowNone,
 
     choicesContainer.addChild(...choices)
 
-    c.addChild(g, choicesContainer.mask, choicesContainer);
+    buttonObj.addChild(choicesContainer.mask, choicesContainer);
 
-    return c;
+    return buttonObj;
 }

@@ -13,6 +13,7 @@ import { objIguanaPuppet } from "../../iguana/obj-iguana-puppet";
 import { TypedInput } from "../../iguana/typed-input";
 import { objUiButton } from "../framework/obj-ui-button";
 import { UiPage, objUiPage, objUiPageRouter } from "../framework/obj-ui-page";
+import { UiVerticalLayout } from "../framework/ui-vertical-layout";
 import { UiColor } from "../ui-color";
 import { objUiConnectedInputNavigationButton } from "./components/obj-ui-connected-input-page";
 
@@ -50,12 +51,12 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
     objText.LargeBold('', { tint: UiColor.Hint }).at(3, 3).step(tip => tip.text = getTipText(router.pages)).show(c);
     
     function page1() {
-        return objUiPage([
+        return objUiPage(UiVerticalLayout.apply(
             objUiConnectedInputNavigationButton('Head', context.connectedInput.head),
-            objUiConnectedInputNavigationButton('Body', context.connectedInput.body).at(0, 33),
-            objUiConnectedInputNavigationButton('Feet', context.connectedInput.feet).at(0, 66),
-            objUiButton('Randomize', randomizeIguanaLooks).jiggle().at(0, 99),
-        ],
+            objUiConnectedInputNavigationButton('Body', context.connectedInput.body),
+            objUiConnectedInputNavigationButton('Feet', context.connectedInput.feet),
+            UiVerticalLayout.Separator,
+            objUiButton('Randomize', randomizeIguanaLooks).jiggle()),
         { title: 'Choose your looks.', selectionIndex: 0 })
     }
 
