@@ -19,8 +19,8 @@ export function objUiButton(text: string, onPress: () => unknown, width = 96, he
     }
 
     function center() {
-        font.anchor.x = 0.5;
-        font.x = width / 2;
+        textObj.anchor.x = 0.5;
+        textObj.x = width / 2;
         return c;
     }
 
@@ -28,11 +28,11 @@ export function objUiButton(text: string, onPress: () => unknown, width = 96, he
 
     const bg = new Graphics().beginFill(UiColor.Background).drawRect(0, 0, width, height);
     const selection = new Graphics().lineStyle(2, UiColor.Selection, 1, 0).drawRect(0, 0, width, height);
-    const font = objText.Large(text, { tint: UiColor.Text }).at(32, Math.floor(height / 2) - 4);
+    const textObj = objText.Large(text, { tint: UiColor.Text }).at(32, Math.floor(height / 2) - 4);
 
     selection.visible = false;
 
-    const c = container(bg, selection, font)
+    const c = container(bg, selection, textObj)
         .merge({
             get selected() {
                 return selection.visible;
@@ -41,7 +41,7 @@ export function objUiButton(text: string, onPress: () => unknown, width = 96, he
                 selection.visible = value;
             }
         })
-        .merge({ jiggle, onPress, escape, center })
+        .merge({ jiggle, onPress, escape, center, textObj })
         .step(() => {
             if (factor > 0) {
                 c.pivot.x = (factor % 2 === 0 ? 1 : -1) * Math.ceil(factor / 6);

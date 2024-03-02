@@ -1,9 +1,8 @@
 import { Graphics } from "pixi.js";
 import { Input } from "../../../globals";
 import { createActionRepeater } from "../../framework/action-repeater";
-import { objText } from "../../../../assets/fonts";
 import { UiColor } from "../../ui-color";
-import { container } from "../../../../lib/pixi/container";
+import { objUiButton } from "../../framework/obj-ui-button";
 
 type ActionRepeatAdjustFactors = [ factor0: number, factor1: number, factor2: number ];
 
@@ -28,11 +27,11 @@ export function objUiSliderInput(
         return factor0;
     }
 
-    const back = new Graphics().beginFill(UiColor.Background).drawRect(0, 0, width, height);
+    const buttonObj = objUiButton(text, () => {});
 
     const g = new Graphics()
         .step(() => {
-            if (!c.selected)
+            if (!buttonObj.selected)
                 return;
 
             if (Input.isDown('SelectLeft') && Input.isDown('SelectRight')) {
@@ -56,30 +55,23 @@ export function objUiSliderInput(
         })
         .step(() => {
             const value = binding.value;
-            g.clear();
-            if (c.selected)
-                g.lineStyle(2, UiColor.Selection, 1, 0);
-            g.drawRect(0, 0, width, height);
-
-            g.lineStyle(0);
 
             const length = max - min;
             const unit = (value - min) / length;
 
-            g.beginFill(UiColor.Shadow)
-                .drawRect(8, height - 12, width - 16, 4)
-                .beginFill(UiColor.Text)
-                .drawRect(8, height - 12, (width - 16) * unit, 4);
-        });
+            g.clear()
+            .beginFill(UiColor.Shadow)
+            .drawRect(8, height - 12, width - 16, 4)
+            .beginFill(UiColor.Text)
+            .drawRect(8, height - 12, (width - 16) * unit, 4);
+        })
+        .show(buttonObj);
 
     const left = createActionRepeater(g, 'SelectLeft');
     const right = createActionRepeater(g, 'SelectRight');
 
-    const font = objText.Large(text).at(width / 2, 6);
-    font.anchor.set(0.5, 0);
-    g.addChild(font);
+    buttonObj.textObj.at(width / 2, 6);
+    buttonObj.textObj.anchor.set(0.5, 0);
 
-    const c = container(back, g).merge({ selected: false });
-
-    return c;
+    return buttonObj;
 }
