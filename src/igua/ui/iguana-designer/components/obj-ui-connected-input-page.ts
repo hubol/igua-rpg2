@@ -2,7 +2,7 @@ import { Texture } from "pixi.js";
 import { Empty } from "../../../../lib/types/empty";
 import { ConnectedInput } from "../../../iguana/connected-input";
 import { TypedInput } from "../../../iguana/typed-input";
-import { UiPageElement, objUiPage } from "../../framework/obj-ui-page";
+import { UiPage, UiPageElement, objUiPage } from "../../framework/obj-ui-page";
 import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
 import { objUiCheckboxInput } from "./obj-ui-checkbox-input";
 import { objUiDesignerButton } from "./obj-ui-designer-button";
@@ -11,6 +11,7 @@ import { objUiPlacementInput } from "./obj-ui-placement-input";
 import { objUiSliderInput } from "./obj-ui-slider-input";
 import { objUiColorInput } from "./obj-ui-color-input";
 import { StringCase } from "../../../../lib/string-case";
+import { objUiIguanaDesignerEyesPage } from "../pages/obj-ui-iguana-designer-eyes-page";
 
 export function objUiConnectedInputPage(title: string, root: ConnectedInput.Type<unknown>) {
     const els = Empty<UiPageElement>();
@@ -49,6 +50,14 @@ function createInputObj(key: string, input: TypedInput.Any & { value: any }) {
 
 export function objUiConnectedInputNavigationButton(title: string, input: ConnectedInput.Type<unknown>) {
     return objUiDesignerButton(title, () => {
-        UiIguanaDesignerContext.value.router.push(objUiConnectedInputPage(title, input));
+        const page = createConnectedInputPageObj(title, input);
+        UiIguanaDesignerContext.value.router.push(page);
     });
+}
+
+export function createConnectedInputPageObj(title: string, input: ConnectedInput.Type<unknown>): UiPage {
+    const looks = UiIguanaDesignerContext.value.connectedInput;
+    if (input === looks.head.eyes)
+        return objUiIguanaDesignerEyesPage();
+    return objUiConnectedInputPage(title, input);
 }
