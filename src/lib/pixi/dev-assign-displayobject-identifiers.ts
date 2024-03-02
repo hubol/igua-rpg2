@@ -30,7 +30,7 @@ function getDisplayObjectStack(e: Error) {
         if (current) {
             const match = current[1];
 
-            if (match === 'devAssignDisplayObjectIdentifiers' || match.startsWith('new _') || match === 'container')
+            if (match === 'devAssignDisplayObjectIdentifiers' || match.startsWith('new _') || match === 'container' || match === '_Container2' || match === '_Sprite.from')
                 fnCallLooksUnimportant = true;
 
             if ((!name || name.startsWith('Array.')) && !fnCallLooksUnimportant && !match.startsWith('new ')) {
