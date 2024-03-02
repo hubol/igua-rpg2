@@ -41,16 +41,15 @@ export namespace TypedInput {
     export const boolean = (): Boolean => ({ kind: 'boolean' });
 
     // Thank you https://github.com/jquense/yup/blob/94cfd11b3f23e10f731efac05c5525829d10ded1/src/index.ts#L40
-    export type Output<T> = {
+    export type SerializedTree<T> = {
         [k in keyof T]: T[k] extends TypedInput.Any
-            ? OutputInner<T[k]>
+            ? Serialized<T[k]>
             : T[k] extends Record<string, unknown>
-            ? Output<T[k]>
+            ? SerializedTree<T[k]>
             : never;
     };
-
-    // TODO name terrible!!!
-    export type OutputInner<T> = T extends TypedInput.Vector
+    
+    export type Serialized<T> = T extends TypedInput.Vector
         ? { x: number; y: number; }
         : T extends TypedInput.Boolean
         ? boolean

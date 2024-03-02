@@ -3,7 +3,7 @@ import { IguanaShapes } from "./shapes";
 
 export namespace IguanaLooks {
     export type Input = ReturnType<typeof create>;
-    export type Serializable = TypedInput.Output<Input>;
+    export type Serializable = TypedInput.SerializedTree<Input>;
 
     export function create() {
         const foot = () => ({

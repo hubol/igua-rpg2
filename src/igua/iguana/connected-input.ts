@@ -2,12 +2,12 @@ import { merge } from "../../lib/object/merge";
 import { TypedInput } from "./typed-input";
 
 export namespace ConnectedInput {
-    export function create<TInput>(input: TInput, serializable: TypedInput.Output<TInput>): Type<TInput> {
+    export function create<TInput>(input: TInput, serializable: TypedInput.SerializedTree<TInput>): Tree<TInput> {
         traverse(input, serializable, connect);
         return input as any;
     }
 
-    export function findUniqueColorValues(instance: Type<unknown>) {
+    export function findUniqueColorValues(instance: Tree<unknown>) {
         const set = new Set<number>();
         traverse(instance, instance, (input: TypedInput.Any & { value: any }) => {
             if (input.kind === 'color')
@@ -16,12 +16,12 @@ export namespace ConnectedInput {
         return Array.from(set);
     }
 
-    export function join<TInput>(withValues: WithValue<TInput>[]): WithValue<TInput>
-    export function join<TInput>(inputs: ConnectedInput.Type<TInput>[]): ConnectedInput.Type<TInput>
-    export function join<TInput>(inputs: ConnectedInput.Type<TInput>[]): ConnectedInput.Type<TInput> {
+    export function join<TInput>(leaves: Leaf<TInput>[]): Leaf<TInput>
+    export function join<TInput>(trees: Tree<TInput>[]): Tree<TInput>
+    export function join<TInput>(trees: Tree<TInput>[]): Tree<TInput> {
         const output = {};
 
-        const instance = inputs[0];
+        const instance = trees[0];
         if (instance) {
             traverse(instance, instance, (input: TypedInput.Any & { value: any }, _, path) => {
                 let self = output;
@@ -32,7 +32,7 @@ export namespace ConnectedInput {
                     self = self[key];
                 }
 
-                const destinations = inputs
+                const destinations = trees
                     .map(x => indexUntilTail(x, path))
                     .map(x => path.last ? x[path.last] : x);
 
@@ -98,20 +98,13 @@ export namespace ConnectedInput {
         });
     }
 
-    // TODO these can probably be removed
-    export type Choice<T> = TypedInput.Choice<T> & { value: number };
-    export type Vector = TypedInput.Vector & { value: { x: number; y: number; } };
-    export type Integer = TypedInput.Integer & { value: number };
-    export type Color = TypedInput.Color & { value: number };
-    export type Boolean = TypedInput.Boolean & { value: boolean };
+    type Leaf<T> = T extends TypedInput.Any ? (T & { value: TypedInput.Serialized<T> }) : never;
 
-    type WithValue<T> = T extends TypedInput.Any ? (T & { value: TypedInput.OutputInner<T> }) : never;
-
-    export type Type<T> = {
+    export type Tree<T> = {
         [k in keyof T]: T[k] extends TypedInput.Any
-            ? WithValue<T[k]>
+            ? Leaf<T[k]>
             : T[k] extends Record<string, unknown>
-            ? Type<T[k]>
+            ? Tree<T[k]>
             : never;
     };
 }

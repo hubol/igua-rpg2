@@ -16,7 +16,7 @@ import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 import { objUiIguanaDesignerBackButton } from "./obj-ui-iguana-designer-back-button";
 import { objUiIguanaDesignerFeetPage } from "../pages/obj-ui-iguana-designer-feet-page";
 
-export function createUiConnectedInputPageElements(root: ConnectedInput.Type<unknown>) {
+export function createUiConnectedInputPageElements(root: ConnectedInput.Tree<unknown>) {
     const els = Empty<UiPageElement>();
 
     for (const key in root) {
@@ -28,7 +28,7 @@ export function createUiConnectedInputPageElements(root: ConnectedInput.Type<unk
     return els;
 }
 
-function objUiConnectedInputPage(title: string, root: ConnectedInput.Type<unknown>) {
+function objUiConnectedInputPage(title: string, root: ConnectedInput.Tree<unknown>) {
     const els = UiVerticalLayout.apply(
         ...createUiConnectedInputPageElements(root),
         UiVerticalLayout.Separator,
@@ -55,14 +55,14 @@ function createInputObj(key: string, input: TypedInput.Any & { value: any }) {
     return objUiConnectedInputNavigationButton(title, input);
 }
 
-export function objUiConnectedInputNavigationButton(title: string, input: ConnectedInput.Type<unknown>) {
+export function objUiConnectedInputNavigationButton(title: string, input: ConnectedInput.Tree<unknown>) {
     return objUiDesignerButton(title, () => {
         const pageObj = createPageObj(title, input);
         UiIguanaDesignerContext.value.router.push(pageObj);
     });
 }
 
-function createPageObj(title: string, input: ConnectedInput.Type<unknown>): UiPage {
+function createPageObj(title: string, input: ConnectedInput.Tree<unknown>): UiPage {
     const looks = UiIguanaDesignerContext.value.connectedInput;
     if (input === looks.head.eyes)
         return objUiIguanaDesignerEyesPage();
