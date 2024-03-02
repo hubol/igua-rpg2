@@ -15,7 +15,7 @@ import { objUiButton } from "../framework/obj-ui-button";
 import { UiPage, objUiPage, objUiPageRouter } from "../framework/obj-ui-page";
 import { UiVerticalLayout } from "../framework/ui-vertical-layout";
 import { UiColor } from "../ui-color";
-import { objUiConnectedInputNavigationButton } from "./components/obj-ui-connected-input-page";
+import { createUiConnectedInputPageElements } from "./components/obj-ui-connected-input-page";
 
 function context() {
     let looks = getDefaultLooks();
@@ -52,9 +52,7 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
     
     function page1() {
         return objUiPage(UiVerticalLayout.apply(
-            objUiConnectedInputNavigationButton('Head', context.connectedInput.head),
-            objUiConnectedInputNavigationButton('Body', context.connectedInput.body),
-            objUiConnectedInputNavigationButton('Feet', context.connectedInput.feet),
+            ...createUiConnectedInputPageElements(context.connectedInput),
             UiVerticalLayout.Separator,
             objUiButton('Randomize', randomizeIguanaLooks).jiggle()),
         { title: 'Choose your looks.', selectionIndex: 0 })
