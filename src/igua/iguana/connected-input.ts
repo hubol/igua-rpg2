@@ -16,6 +16,55 @@ export namespace ConnectedInput {
         return Array.from(set);
     }
 
+    export function join<TInput>(withValues: WithValue<TInput>[]): WithValue<TInput>
+    export function join<TInput>(inputs: ConnectedInput.Type<TInput>[]): ConnectedInput.Type<TInput>
+    export function join<TInput>(inputs: ConnectedInput.Type<TInput>[]): ConnectedInput.Type<TInput> {
+        const output = {};
+
+        const instance = inputs[0];
+        if (instance) {
+            traverse(instance, instance, (input: TypedInput.Any & { value: any }, _, path) => {
+                let self = output;
+                for (let i = 0; i < path.length; i++) {
+                    const key = path[i];
+                    if (!self[key])
+                        self[key] = {};
+                    self = self[key];
+                }
+
+                const destinations = inputs
+                    .map(x => indexUntilTail(x, path))
+                    .map(x => path.last ? x[path.last] : x);
+
+                merge(self, input);
+                merge(self, {
+                    get value() {
+                        return input.value;
+                    },
+                    set value(x) {
+                        for (let i = 0; i < destinations.length; i++) {
+                            destinations[i].value = x;
+                        }
+                    },
+                    get hasConflict() {
+                        let value;
+                        for (let i = 0; i < destinations.length; i++) {
+                            const thisValue = destinations[i].value;
+                            if (i === 0)
+                                value = thisValue;
+                            else if (thisValue !== value)
+                                return true;
+                        }
+
+                        return false;
+                    }
+                })
+            })
+        }
+
+        return output as any;
+    }
+
     type OnInputFn<T> = (input: T, source: any, path: string[]) => void;
 
     function traverse<T = TypedInput.Any>(input: any, source: any, onInputFn: OnInputFn<T>, path: string[] = []) {
@@ -56,9 +105,11 @@ export namespace ConnectedInput {
     export type Color = TypedInput.Color & { value: number };
     export type Boolean = TypedInput.Boolean & { value: boolean };
 
+    type WithValue<T> = T extends TypedInput.Any ? (T & { value: TypedInput.OutputInner<T> }) : never;
+
     export type Type<T> = {
         [k in keyof T]: T[k] extends TypedInput.Any
-            ? T[k] & { value: TypedInput.Output<{ 'k': T[k] }>['k'] }
+            ? WithValue<T[k]>
             : T[k] extends Record<string, unknown>
             ? Type<T[k]>
             : never;

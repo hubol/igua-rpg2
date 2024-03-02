@@ -14,6 +14,7 @@ import { StringCase } from "../../../../lib/string-case";
 import { objUiIguanaDesignerEyesPage } from "../pages/obj-ui-iguana-designer-eyes-page";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 import { objUiIguanaDesignerBackButton } from "./obj-ui-iguana-designer-back-button";
+import { objUiIguanaDesignerFeetPage } from "../pages/obj-ui-iguana-designer-feet-page";
 
 export function createUiConnectedInputPageElements(root: ConnectedInput.Type<unknown>) {
     const els = Empty<UiPageElement>();
@@ -65,5 +66,7 @@ function createPageObj(title: string, input: ConnectedInput.Type<unknown>): UiPa
     const looks = UiIguanaDesignerContext.value.connectedInput;
     if (input === looks.head.eyes)
         return objUiIguanaDesignerEyesPage();
+        if (input === looks.feet)
+        return objUiIguanaDesignerFeetPage();
     return objUiConnectedInputPage(title, input);
 }
