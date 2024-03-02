@@ -2,7 +2,7 @@ import { Texture } from "pixi.js";
 import { Empty } from "../../../../lib/types/empty";
 import { ConnectedInput } from "../../../iguana/connected-input";
 import { TypedInput } from "../../../iguana/typed-input";
-import { UiPage, UiPageElement, objUiPage } from "../../framework/obj-ui-page";
+import { UiPage, objUiPage } from "../../framework/obj-ui-page";
 import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
 import { objUiCheckboxInput } from "./obj-ui-checkbox-input";
 import { objUiDesignerButton } from "./obj-ui-designer-button";
@@ -13,6 +13,7 @@ import { objUiColorInput } from "./obj-ui-color-input";
 import { StringCase } from "../../../../lib/string-case";
 import { objUiIguanaDesignerEyesPage } from "../pages/obj-ui-iguana-designer-eyes-page";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
+import { objUiIguanaDesignerBackButton } from "./obj-ui-iguana-designer-back-button";
 
 export function objUiConnectedInputPage(title: string, root: ConnectedInput.Type<unknown>) {
     const els = Empty<UiVerticalLayout.Element>();
@@ -24,7 +25,7 @@ export function objUiConnectedInputPage(title: string, root: ConnectedInput.Type
     }
 
     els.push(UiVerticalLayout.Separator);
-    els.push(objUiDesignerButton('Back', () => UiIguanaDesignerContext.value.router.pop()));
+    els.push(objUiIguanaDesignerBackButton('Back'));
 
     return objUiPage(UiVerticalLayout.apply(els), { title, selectionIndex: 0 });
 }

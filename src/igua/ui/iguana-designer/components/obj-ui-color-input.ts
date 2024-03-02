@@ -8,9 +8,9 @@ import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
 import { UiColor } from "../../ui-color";
 import { Input } from "../../../globals";
 import { ConnectedInput } from "../../../iguana/connected-input";
-import { objUiDesignerButton } from "./obj-ui-designer-button";
 import { Empty } from "../../../../lib/types/empty";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
+import { objUiIguanaDesignerBackButton } from "./obj-ui-iguana-designer-back-button";
 
 function readHsv(binding: { value: number }) {
     return AdjustColor.pixi(binding.value).toHsv();
@@ -101,7 +101,7 @@ function objUiColorAdjustPage(title: string, binding: { value: number }) {
     els.push(random);
     els.push(objUiButton('Copy From...', gotoCopyFrom).center());
     els.push(UiVerticalLayout.Separator);
-    els.push(objUiDesignerButton('OK', () => UiIguanaDesignerContext.value.router.pop()));
+    els.push(objUiIguanaDesignerBackButton('OK'));
 
     const applied = UiVerticalLayout.apply(els);
 
