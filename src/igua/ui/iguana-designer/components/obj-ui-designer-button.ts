@@ -40,6 +40,7 @@ const icons = {
     'hind': hindIcon,
     'claws': nailsIcon,
     'ok': checkIcon,
+    'advanced': lightBulbIcon,
     'inspiration': lightBulbIcon,
 }
 
