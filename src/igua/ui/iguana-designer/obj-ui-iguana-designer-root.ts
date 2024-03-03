@@ -12,7 +12,7 @@ import { IguanaLooks } from "../../iguana/looks";
 import { objIguanaPuppet } from "../../iguana/obj-iguana-puppet";
 import { TypedInput } from "../../iguana/typed-input";
 import { objUiButton } from "../framework/obj-ui-button";
-import { UiPage, objUiPage, objUiPageRouter } from "../framework/obj-ui-page";
+import { ObjUiPageRouter, UiPage, objUiPage, objUiPageRouter } from "../framework/obj-ui-page";
 import { UiVerticalLayout } from "../framework/ui-vertical-layout";
 import { UiColor, UiStyle } from "../ui-color";
 import { createUiConnectedInputPageElements } from "./components/obj-ui-connected-input-page";
@@ -49,20 +49,8 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
     const c = container();
     const router = context.router.at(3, 13).show(c);
     objText.LargeBold('', { tint: UiColor.Hint }).at(3, 3).step(tip => tip.text = getTipText(router.pages)).show(c);
-    objText.Large('', { tint: UiColor.Hint })
-    .step(txt => {
-        const selected = router.page?.selected;
-        if (selected && 'note' in selected) {
-            txt.text = selected.note as string;
-            txt.at(router.width + UiStyle.Margin, selected.y).add(router);
-            txt.maxWidth = (256 - UiStyle.Margin) - txt.x;
-        }
-        else if (txt.text)
-            txt.text = '';
-    })
-    .show(c);
     
-    function page1() {
+    function objUiIguanaDesignerRootPage() {
         return objUiPage(UiVerticalLayout.apply(
             ...createUiConnectedInputPageElements(context.connectedInput),
             UiVerticalLayout.Separator,
@@ -70,9 +58,42 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
         { title: 'Choose your looks.', selectionIndex: 0 })
     }
 
-    router.replace(page1());
+    router.replace(objUiIguanaDesignerRootPage());
 
     objIguanaPreview().at(160, 200).show(c);
+    objUiNoteText(router).show(c);
+
+    return c;
+}
+
+function objUiNoteText(router: ObjUiPageRouter) {
+    const c = container();
+
+    const txtBacks = [[1, 0], [0, 1], [-1, 0], [0, -1]].map(v => {
+        const txtBack = objText.Large('', { tint: UiColor.Shadow }).show(c);
+        txtBack.pivot.at(v);
+        return txtBack;
+    })
+
+    objText.Large('', { tint: UiColor.Hint })
+    .step(txt => {
+        const selected = router.page?.selected;
+        if (selected && 'note' in selected) {
+            c.visible = true;
+            txt.text = selected.note as string;
+            txt.at(router.width + UiStyle.Margin, selected.y).add(router);
+            txt.maxWidth = (256 - UiStyle.Margin) - txt.x;
+
+            for (const txtBack of txtBacks) {
+                txtBack.text = txt.text;
+                txtBack.at(txt);
+                txtBack.maxWidth = txt.maxWidth;
+            }
+        }
+        else
+            c.visible = false;
+    })
+    .show(c);
 
     return c;
 }

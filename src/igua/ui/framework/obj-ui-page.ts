@@ -10,6 +10,8 @@ import { Undefined } from "../../../lib/types/undefined";
 export type UiPageProps = { maxHeight?: number; title?: string; selectionIndex: number };
 export type UiPageElement = Container & { selected: boolean };
 
+export type ObjUiPageRouter = ReturnType<typeof objUiPageRouter>;
+
 type UiPageRouterProps = { readonly maxHeight?: number; };
 
 export function objUiPageRouter(props: UiPageRouterProps = {}) {
