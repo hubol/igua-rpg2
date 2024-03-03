@@ -54,7 +54,7 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
         const selected = router.page?.selected;
         if (selected && 'note' in selected) {
             txt.text = selected.note as string;
-            txt.at(selected).add(router).add(selected.width + UiStyle.Margin, 0);
+            txt.at(router.width + UiStyle.Margin, selected.y).add(router);
             txt.maxWidth = (256 - UiStyle.Margin) - txt.x;
         }
         else if (txt.text)
