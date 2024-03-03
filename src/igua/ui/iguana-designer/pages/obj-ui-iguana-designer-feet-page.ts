@@ -45,20 +45,25 @@ function objUiForeHindFeetButton(ordinal: 'fore' | 'hind', feet: ConnectedFeet) 
 }
 
 export function objUiIguanaDesignerFeetPage() {
+    const feet = UiIguanaDesignerContext.value.connectedInput.feet;
+
     const inputs = ConnectedInput.join([
-        getTopLevelInputs(UiIguanaDesignerContext.value.connectedInput.feet.fore.left),
-        getTopLevelInputs(UiIguanaDesignerContext.value.connectedInput.feet.fore.right),
-        getTopLevelInputs(UiIguanaDesignerContext.value.connectedInput.feet.hind.left),
-        getTopLevelInputs(UiIguanaDesignerContext.value.connectedInput.feet.hind.right),
+        getTopLevelInputs(feet.fore.left),
+        getTopLevelInputs(feet.fore.right),
+        getTopLevelInputs(feet.hind.left),
+        getTopLevelInputs(feet.hind.right),
     ]);
 
-    const fore = objUiForeHindFeetButton('fore', UiIguanaDesignerContext.value.connectedInput.feet);
-    const hind = objUiForeHindFeetButton('hind', UiIguanaDesignerContext.value.connectedInput.feet);
+    const fore = objUiForeHindFeetButton('fore', feet);
+    const hind = objUiForeHindFeetButton('hind', feet);
+
+    const { gap, backOffset } = feet;
 
     const els = UiVerticalLayout.apply(
         ...createUiConnectedInputPageElements(inputs),
         fore,
         hind,
+        ...createUiConnectedInputPageElements({ gap, backOffset }),
         UiVerticalLayout.Separator,
         objUiDesignerButton('Advanced', () => UiIguanaDesignerContext.value.router.push(objUiIguanaDesignerFeetAdvancedPage())),
         UiVerticalLayout.Separator,
