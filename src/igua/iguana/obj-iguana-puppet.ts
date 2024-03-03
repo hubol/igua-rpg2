@@ -243,14 +243,6 @@ function objIguanaFoot(feet: Feet, key1: 'fore' | 'hind', key2: 'left' | 'right'
         claws.pivot.x -= foot.claws.placement;
         f.addChild(claws);
     }
-    if (foot.flipV) {
-        f.pivot.y -= f.height;
-        f.scale.y = -1;
-        if (claws) {
-            claws.scale.y = -1;
-            claws.pivot.y -= f.height;
-        }
-    }
     return f;
 }
 

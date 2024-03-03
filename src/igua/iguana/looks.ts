@@ -9,7 +9,6 @@ export namespace IguanaLooks {
         const foot = () => ({
             shape: TypedInput.choice(IguanaShapes.Foot),
             color: TypedInput.color(),
-            flipV: TypedInput.boolean(),
             claws: {
                 shape: TypedInput.choice(IguanaShapes.Claws, true),
                 color: TypedInput.color(),

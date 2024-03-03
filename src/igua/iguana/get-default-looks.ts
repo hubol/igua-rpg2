@@ -78,7 +78,6 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                 left: {
                     shape: 0,
                     color: 0x0C4CCC,
-                    flipV: false,
                     claws: {
                         color: 0x92B233,
                         shape: 0,
@@ -88,7 +87,6 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                 right: {
                     shape: 0,
                     color: 0x0C4CCC,
-                    flipV: false,
                     claws: {
                         color: 0x92B233,
                         shape: 0,
@@ -100,7 +98,6 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                 left: {
                     shape: 0,
                     color: 0x0C4CCC,
-                    flipV: false,
                     claws: {
                         color: 0x92B233,
                         shape: 0,
@@ -110,7 +107,6 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                 right: {
                     shape: 0,
                     color: 0x0C4CCC,
-                    flipV: false,
                     claws: {
                         color: 0x92B233,
                         shape: 0,
