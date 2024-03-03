@@ -2,7 +2,7 @@ import { StringCase } from "../../../../lib/string-case";
 import { ConnectedInput } from "../../../iguana/connected-input";
 import { objUiPage } from "../../framework/obj-ui-page";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
-import { createUiConnectedInputPageElements, objUiConnectedInputPage } from "../components/obj-ui-connected-input-page";
+import { createUiConnectedInputPageElements } from "../components/obj-ui-connected-input-page";
 import { objUiDesignerButton } from "../components/obj-ui-designer-button";
 import { ObjUiDesignerInputBase } from "../components/obj-ui-designer-input-base";
 import { objUiIguanaDesignerBackButton } from "../components/obj-ui-iguana-designer-back-button";
@@ -40,7 +40,21 @@ function objUiForeHindFeetButton(ordinal: 'fore' | 'hind', feet: ConnectedFeet) 
             getForeHindInputs(feet[ordinal]['left']),
             getForeHindInputs(feet[ordinal]['right'])
         ]);
-        const page = objUiConnectedInputPage(title, inputs);
+
+        const [ shape, claws, clawPlacement ] = createUiConnectedInputPageElements(inputs);
+        (shape as ObjUiDesignerInputBase).noteOnConflict = '*Changing this shape will set shape of all feet at once.';
+        (claws as ObjUiDesignerInputBase).noteOnConflict = '*Changing this shape will set shape of all claws at once.';
+        (clawPlacement as ObjUiDesignerInputBase).noteOnConflict = '*Changing this placement will set placement of all claws at once.';
+
+        const els = UiVerticalLayout.apply(
+            shape,
+            claws,
+            clawPlacement,
+            UiVerticalLayout.Separator,
+            objUiIguanaDesignerBackButton('Back'),
+        );
+
+        const page = objUiPage(els, { title, selectionIndex: 0 });
         UiIguanaDesignerContext.value.router.push(page);
     });
 }
@@ -55,14 +69,14 @@ export function objUiIguanaDesignerFeetPage() {
         getTopLevelInputs(feet.hind.right),
     ]);
 
+    const [ color, clawColor ] = createUiConnectedInputPageElements(inputs);
+    (color as ObjUiDesignerInputBase).noteOnConflict = '*Changing this color will set color of all feet at once.';
+    (clawColor as ObjUiDesignerInputBase).noteOnConflict = '*Changing this color will set color of all claws at once.';
+
     const fore = objUiForeHindFeetButton('fore', feet);
     const hind = objUiForeHindFeetButton('hind', feet);
 
     const { gap, backOffset } = feet;
-
-    const [ color, clawColor ] = createUiConnectedInputPageElements(inputs);
-    (color as ObjUiDesignerInputBase).noteOnConflict = '*Changing this color will set color of all feet at once.';
-    (clawColor as ObjUiDesignerInputBase).noteOnConflict = '*Changing this color will set color of all claws at once.';
 
     const els = UiVerticalLayout.apply(
         color,

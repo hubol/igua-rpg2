@@ -2,7 +2,7 @@ import { Graphics } from "pixi.js";
 import { Input } from "../../../globals";
 import { createActionRepeater } from "../../framework/action-repeater";
 import { UiColor } from "../../ui-color";
-import { objUiButton } from "../../framework/obj-ui-button";
+import { objUiDesignerInputBase } from "./obj-ui-designer-input-base";
 
 type ActionRepeatAdjustFactors = [ factor0: number, factor1: number, factor2: number ];
 
@@ -27,7 +27,7 @@ export function objUiSliderInput(
         return factor0;
     }
 
-    const buttonObj = objUiButton(text, () => {});
+    const buttonObj = objUiDesignerInputBase(text, binding, () => {});
 
     const g = new Graphics()
         .step(() => {

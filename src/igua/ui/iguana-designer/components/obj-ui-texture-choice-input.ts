@@ -4,14 +4,14 @@ import { TypedInput } from "../../../iguana/typed-input";
 import { Input } from "../../../globals";
 import { cyclic } from "../../../../lib/math/number";
 import { UiColor } from "../../ui-color";
-import { objUiButton } from "../../framework/obj-ui-button";
+import { objUiDesignerInputBase } from "./obj-ui-designer-input-base";
 
 const NoneChoice = Tx.Ui.NoneChoice.trimmed;
 
 type Restrictions = Omit<TypedInput.Choice<Texture>, 'kind'>;
 
 export function objUiTextureChoiceInput(binding: { value: number }, { allowNone, options }: Restrictions, width = 96, height = 30) {
-    const buttonObj = objUiButton('', () => {}, width, height);
+    const buttonObj = objUiDesignerInputBase('', binding, () => {}, width, height);
 
     buttonObj.step(() => {
         if (buttonObj.selected) {
@@ -19,7 +19,10 @@ export function objUiTextureChoiceInput(binding: { value: number }, { allowNone,
                 binding.value--;
             else if (Input.justWentDown('SelectRight'))
                 binding.value++;
-            binding.value = cyclic(binding.value, allowNone ? -1 : 0, options.length);
+
+            const next = cyclic(binding.value, allowNone ? -1 : 0, options.length);
+            if (next !== binding.value)
+                binding.value = next;
         }
     });
 

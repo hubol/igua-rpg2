@@ -3,17 +3,17 @@ import { VectorSimple, vnew } from "../../../../lib/math/vector-type";
 import { container } from "../../../../lib/pixi/container";
 import { TypedInput } from "../../../iguana/typed-input";
 import { createActionRepeater } from "../../framework/action-repeater";
-import { objUiButton } from "../../framework/obj-ui-button";
 import { Tx } from "../../../../assets/textures";
 import { Input } from "../../../globals";
 import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
 import { UiColor } from "../../ui-color";
+import { objUiDesignerInputBase } from "./obj-ui-designer-input-base";
 
 type Restrictions = Omit<TypedInput.Vector, 'kind'>;
 
 export function objUiPlacementInput(text: string, binding: { value: VectorSimple }, restrictions: Restrictions, width = 96, height = 30) {
     const c = container().merge({ selected: false });
-    const b = objUiButton(text, () => {}, width, height);
+    const b = objUiDesignerInputBase(text, binding, () => {}, width, height);
 
     let inputSelected = false;
 
