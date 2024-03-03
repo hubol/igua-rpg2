@@ -107,4 +107,6 @@ export namespace ConnectedInput {
             ? Tree<T[k]>
             : never;
     };
+
+    export type Binding<T> = { value: T; readonly hasConflict?: boolean; }
 }

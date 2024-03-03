@@ -5,6 +5,7 @@ import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
 import { Input, forceGameLoop } from "../../globals";
 import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 import { UiColor } from "../ui-color";
+import { Undefined } from "../../../lib/types/undefined";
 
 export type UiPageProps = { maxHeight?: number; title?: string; selectionIndex: number };
 export type UiPageElement = Container & { selected: boolean };
@@ -47,7 +48,7 @@ export function objUiPageRouter(props: UiPageRouterProps = {}) {
 
 export function objUiPage(elements: UiPageElement[], props: UiPageProps) {
     const ticker = new AsshatTicker();
-    const c = new TickerContainer(ticker, false).merge({ navigation: true }).merge(props);
+    const c = new TickerContainer(ticker, false).merge({ navigation: true, selected: Undefined<UiPageElement>() }).merge(props);
 
     const maskedObj = container().show(c);
     const elementsObj = container(...elements).show(maskedObj);
@@ -60,11 +61,11 @@ export function objUiPage(elements: UiPageElement[], props: UiPageProps) {
 
     function updateSelection() {
         c.selectionIndex = cyclic(c.selectionIndex, 0, elements.length);
-        elements.forEach((x, i) => x.selected = c.selectionIndex === i)
+        elements.forEach((x, i) => x.selected = c.selectionIndex === i);
+        c.selected = elements[c.selectionIndex];
     }
 
     function select(dx: number, dy: number) {
-        const selected = elements[c.selectionIndex];
         dx = Math.sign(dx) * 16;
         dy = Math.sign(dy) * 16;
         let ax = dx;
@@ -83,7 +84,7 @@ export function objUiPage(elements: UiPageElement[], props: UiPageProps) {
             for (let i = 0; i < elements.length; i++) {
                 if (i === c.selectionIndex)
                     continue;
-                if (elements[i].collides(selected, offset)) {
+                if (!c.selected || elements[i].collides(c.selected, offset)) {
                     c.selectionIndex = i;
                     return;
                 }
@@ -120,12 +121,11 @@ export function objUiPage(elements: UiPageElement[], props: UiPageProps) {
             maskedObj.mask = mask;
             scrollBarObj.visible = true;
 
-            if (elements[c.selectionIndex]) {
-                const el = elements[c.selectionIndex];
+            if (c.selected) {
                 const { y: rootY } = c.getBounds(false, r);
 
                 for (let i = 0; i < 3; i++) {
-                    const bounds = el.getBounds(false, r);
+                    const bounds = c.selected.getBounds(false, r);
                     bounds.y -= rootY;
                     
                     if (bounds.y > c.maxHeight * 0.67 && c.maxHeight + elementsObj.pivot.y < elementsObj.height) {

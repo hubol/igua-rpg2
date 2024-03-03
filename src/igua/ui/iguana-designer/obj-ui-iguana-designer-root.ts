@@ -14,7 +14,7 @@ import { TypedInput } from "../../iguana/typed-input";
 import { objUiButton } from "../framework/obj-ui-button";
 import { UiPage, objUiPage, objUiPageRouter } from "../framework/obj-ui-page";
 import { UiVerticalLayout } from "../framework/ui-vertical-layout";
-import { UiColor } from "../ui-color";
+import { UiColor, UiStyle } from "../ui-color";
 import { createUiConnectedInputPageElements } from "./components/obj-ui-connected-input-page";
 
 function context() {
@@ -49,6 +49,18 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
     const c = container();
     const router = context.router.at(3, 13).show(c);
     objText.LargeBold('', { tint: UiColor.Hint }).at(3, 3).step(tip => tip.text = getTipText(router.pages)).show(c);
+    objText.Large('', { tint: UiColor.Hint })
+    .step(txt => {
+        const selected = router.page?.selected;
+        if (selected && 'note' in selected) {
+            txt.text = selected.note as string;
+            txt.at(selected).add(router).add(selected.width + UiStyle.Margin, 0);
+            txt.maxWidth = (256 - UiStyle.Margin) - txt.x;
+        }
+        else if (txt.text)
+            txt.text = '';
+    })
+    .show(c);
     
     function page1() {
         return objUiPage(UiVerticalLayout.apply(

@@ -12,21 +12,24 @@ import { Empty } from "../../../../lib/types/empty";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 import { objUiIguanaDesignerBackButton } from "./obj-ui-iguana-designer-back-button";
 
-function readHsv(binding: { value: number }) {
+function readHsv(binding: ConnectedInput.Binding<number>) {
     return AdjustColor.pixi(binding.value).toHsv();
 }
 
-export function objUiColorInput(text: string, binding: { value: number }) {
+export function objUiColorInput(text: string, binding: ConnectedInput.Binding<number>) {
     const b = objUiButton(text, () => UiIguanaDesignerContext.value.router.push(objUiColorAdjustPage(text, binding)));
     new Graphics()
         .beginFill(0xffffff)
         .drawPolygon(4, 4, 4, 27, 27, 4)
-        .step(gfx => gfx.tint = binding.value)
+        .step(gfx => {
+            gfx.tint = binding.value;
+            b.note = binding.hasConflict ? '*Changing this color will override differing colors' : '';
+        })
         .show(b);
     return b;
 }
 
-function objUiColorAdjustPage(title: string, binding: { value: number }) {
+function objUiColorAdjustPage(title: string, binding: ConnectedInput.Binding<number>) {
     const els = Empty<UiVerticalLayout.Element>();
     let h: number, s: number, v: number;
 
@@ -140,7 +143,7 @@ function objUiCopyColorButton(color: number, onSelect: () => unknown, onPress: (
     return g;
 }
 
-function objUiColorCopyFromPage(binding: { value: number }) {
+function objUiColorCopyFromPage(binding: ConnectedInput.Binding<number>) {
     const initialColor = binding.value;
     const uniqueColors = ConnectedInput.findUniqueColorValues(UiIguanaDesignerContext.value.connectedInput);
 
