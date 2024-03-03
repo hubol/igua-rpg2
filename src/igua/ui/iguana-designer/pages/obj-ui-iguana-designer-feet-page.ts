@@ -1,7 +1,8 @@
+import { StringCase } from "../../../../lib/string-case";
 import { ConnectedInput } from "../../../iguana/connected-input";
 import { objUiPage } from "../../framework/obj-ui-page";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
-import { createUiConnectedInputPageElements } from "../components/obj-ui-connected-input-page";
+import { createUiConnectedInputPageElements, objUiConnectedInputPage } from "../components/obj-ui-connected-input-page";
 import { objUiDesignerButton } from "../components/obj-ui-designer-button";
 import { objUiIguanaDesignerBackButton } from "../components/obj-ui-iguana-designer-back-button";
 import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
@@ -20,9 +21,27 @@ import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
 // back offset
 // advanced
 
+type ConnectedFeet = typeof UiIguanaDesignerContext['value']['connectedInput']['feet'];
 type ConnectedFoot = typeof UiIguanaDesignerContext['value']['connectedInput']['feet']['fore']['left'];
 function getTopLevelInputs(foot: ConnectedFoot) {
     return { color: foot.color, clawColor: foot.claws.color };
+}
+
+function getForeHindInputs(foot: ConnectedFoot) {
+    return { shape: foot.shape, claws: foot.claws.shape, clawPlacement: foot.claws.placement };
+}
+
+function objUiForeHindFeetButton(ordinal: 'fore' | 'hind', feet: ConnectedFeet) {
+    const title = StringCase.toEnglish(ordinal);
+
+    return objUiDesignerButton(title, () => {
+        const inputs = ConnectedInput.join([
+            getForeHindInputs(feet[ordinal]['left']),
+            getForeHindInputs(feet[ordinal]['right'])
+        ]);
+        const page = objUiConnectedInputPage(title, inputs);
+        UiIguanaDesignerContext.value.router.push(page);
+    });
 }
 
 export function objUiIguanaDesignerFeetPage() {
@@ -33,8 +52,13 @@ export function objUiIguanaDesignerFeetPage() {
         getTopLevelInputs(UiIguanaDesignerContext.value.connectedInput.feet.hind.right),
     ]);
 
+    const fore = objUiForeHindFeetButton('fore', UiIguanaDesignerContext.value.connectedInput.feet);
+    const hind = objUiForeHindFeetButton('hind', UiIguanaDesignerContext.value.connectedInput.feet);
+
     const els = UiVerticalLayout.apply(
         ...createUiConnectedInputPageElements(inputs),
+        fore,
+        hind,
         UiVerticalLayout.Separator,
         objUiDesignerButton('Advanced', () => UiIguanaDesignerContext.value.router.push(objUiIguanaDesignerFeetAdvancedPage())),
         UiVerticalLayout.Separator,

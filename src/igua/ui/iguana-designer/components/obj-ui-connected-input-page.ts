@@ -28,7 +28,7 @@ export function createUiConnectedInputPageElements(root: ConnectedInput.Tree<unk
     return els;
 }
 
-function objUiConnectedInputPage(title: string, root: ConnectedInput.Tree<unknown>) {
+export function objUiConnectedInputPage(title: string, root: ConnectedInput.Tree<unknown>) {
     const els = UiVerticalLayout.apply(
         ...createUiConnectedInputPageElements(root),
         UiVerticalLayout.Separator,
