@@ -4,6 +4,7 @@ import { objUiPage } from "../../framework/obj-ui-page";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 import { createUiConnectedInputPageElements, objUiConnectedInputPage } from "../components/obj-ui-connected-input-page";
 import { objUiDesignerButton } from "../components/obj-ui-designer-button";
+import { ObjUiDesignerInputBase } from "../components/obj-ui-designer-input-base";
 import { objUiIguanaDesignerBackButton } from "../components/obj-ui-iguana-designer-back-button";
 import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
 
@@ -59,8 +60,13 @@ export function objUiIguanaDesignerFeetPage() {
 
     const { gap, backOffset } = feet;
 
+    const [ color, clawColor ] = createUiConnectedInputPageElements(inputs);
+    (color as ObjUiDesignerInputBase).noteOnConflict = '*Changing this color will set color of all feet at once.';
+    (clawColor as ObjUiDesignerInputBase).noteOnConflict = '*Changing this color will set color of all claws at once.';
+
     const els = UiVerticalLayout.apply(
-        ...createUiConnectedInputPageElements(inputs),
+        color,
+        clawColor,
         fore,
         hind,
         ...createUiConnectedInputPageElements({ gap, backOffset }),

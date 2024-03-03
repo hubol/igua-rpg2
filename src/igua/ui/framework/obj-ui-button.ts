@@ -40,7 +40,6 @@ export function objUiButton(text: string, onPress: () => unknown, width = 96, he
             set selected(value) {
                 selection.visible = value;
             },
-            note: '',
         })
         .merge({ jiggle, onPress, escape, center, textObj })
         .step(() => {

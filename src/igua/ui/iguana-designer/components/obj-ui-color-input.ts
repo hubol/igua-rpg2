@@ -11,20 +11,18 @@ import { ConnectedInput } from "../../../iguana/connected-input";
 import { Empty } from "../../../../lib/types/empty";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 import { objUiIguanaDesignerBackButton } from "./obj-ui-iguana-designer-back-button";
+import { objUiDesignerInputBase } from "./obj-ui-designer-input-base";
 
 function readHsv(binding: ConnectedInput.Binding<number>) {
     return AdjustColor.pixi(binding.value).toHsv();
 }
 
 export function objUiColorInput(text: string, binding: ConnectedInput.Binding<number>) {
-    const b = objUiButton(text, () => UiIguanaDesignerContext.value.router.push(objUiColorAdjustPage(text, binding)));
+    const b = objUiDesignerInputBase(text, binding, () => UiIguanaDesignerContext.value.router.push(objUiColorAdjustPage(text, binding)));
     new Graphics()
         .beginFill(0xffffff)
         .drawPolygon(4, 4, 4, 27, 27, 4)
-        .step(gfx => {
-            gfx.tint = binding.value;
-            b.note = binding.hasConflict ? '*Changing this color will override differing colors' : '';
-        })
+        .step(gfx => gfx.tint = binding.value)
         .show(b);
     return b;
 }
