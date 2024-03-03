@@ -128,7 +128,7 @@ export function objUiPage(elements: UiPageElement[], props: UiPageProps) {
                     const bounds = c.selected.getBounds(false, r);
                     bounds.y -= rootY;
                     
-                    if (bounds.y > c.maxHeight * 0.67 && c.maxHeight + elementsObj.pivot.y < elementsObj.height) {
+                    if (bounds.y > c.maxHeight * 0.69 && c.maxHeight + elementsObj.pivot.y < elementsObj.height) {
                         elementsObj.pivot.y += 1;
                     }
 
