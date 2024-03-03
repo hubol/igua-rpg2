@@ -20,7 +20,12 @@ const [
     foreIcon,
     hindIcon,
     nailsIcon,
-    lightBulbIcon] = Tx.Ui.ChooseYourLooksIcons.split({ width: 30 });
+    lightBulbIcon,
+    foreRightIcon,
+    hindRightIcon,
+    foreLeftIcon,
+    hindLeftIcon,
+    ] = Tx.Ui.ChooseYourLooksIcons.split({ width: 30 });
 
 const icons = {
     'head': headIcon,
@@ -42,6 +47,10 @@ const icons = {
     'ok': checkIcon,
     'advanced': lightBulbIcon,
     'inspiration': lightBulbIcon,
+    'fore right': foreRightIcon,
+    'hind right': hindRightIcon,
+    'fore left': foreLeftIcon,
+    'hind left': hindLeftIcon,
 }
 
 function getIcon(text: string) {
