@@ -98,7 +98,7 @@ export namespace ConnectedInput {
         });
     }
 
-    type Leaf<T> = T extends TypedInput.Any ? (T & { value: TypedInput.Serialized<T> }) : never;
+    export type Leaf<T> = T extends TypedInput.Any ? (T & Binding<TypedInput.Serialized<T>>) : never;
 
     export type Tree<T> = {
         [k in keyof T]: T[k] extends TypedInput.Any

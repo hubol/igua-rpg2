@@ -66,7 +66,7 @@ function createPageObj(title: string, input: ConnectedInput.Tree<unknown>): UiPa
     const looks = UiIguanaDesignerContext.value.connectedInput;
     if (input === looks.head.eyes)
         return objUiIguanaDesignerEyesPage();
-        if (input === looks.feet)
+    if (input === looks.feet)
         return objUiIguanaDesignerFeetPage();
     return objUiConnectedInputPage(title, input);
 }

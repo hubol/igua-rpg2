@@ -19,7 +19,7 @@ import { createUiConnectedInputPageElements } from "./components/obj-ui-connecte
 
 function context() {
     let looks = getDefaultLooks();
-    let connectedInput = ConnectedInput.create(IguanaLooks.create(), looks);
+    let connectedInput = createConnectedInput(looks);
 
     return {
         get looks() {
@@ -27,7 +27,7 @@ function context() {
         },
         set looks(value: IguanaLooks.Serializable) {
             looks = value;
-            connectedInput = ConnectedInput.create(IguanaLooks.create(), looks);
+            connectedInput = createConnectedInput(looks);
         },
         get connectedInput() {
             return connectedInput;
@@ -37,6 +37,36 @@ function context() {
             return this.router.page;
         }
     }
+}
+
+function createConnectedInput(looks: IguanaLooks.Serializable) {
+    const connectedInput = ConnectedInput.create(IguanaLooks.create(), looks);
+
+    const color = connectedInput.head.color;
+
+    const colorKeepEyelid: ConnectedInput.Leaf<typeof color> = {
+        kind: 'color',
+        get value() {
+            return color.value;
+        },
+        set value(x) {
+            const leftEyelidColor = UiIguanaDesignerContext.value.connectedInput.head.eyes.left.eyelid.color;
+            const rightEyelidColor = UiIguanaDesignerContext.value.connectedInput.head.eyes.right.eyelid.color;
+
+            const darkenedColor = IguanaLooks.darkenEyelids(UiIguanaDesignerContext.value.connectedInput.head.color.value);
+            const nextDarkenedColor = IguanaLooks.darkenEyelids(x);
+
+            if (leftEyelidColor.value === darkenedColor)
+                leftEyelidColor.value = nextDarkenedColor;
+            if (rightEyelidColor.value === darkenedColor)
+                rightEyelidColor.value = nextDarkenedColor;
+
+            color.value = x;
+        }
+    }
+
+    connectedInput.head.color = colorKeepEyelid;
+    return connectedInput;
 }
 
 export const UiIguanaDesignerContext = new SceneLocal(context, 'UiIguanaDesignerContext');

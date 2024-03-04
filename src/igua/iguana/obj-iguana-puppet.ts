@@ -2,7 +2,6 @@ import { DisplayObject, Rectangle, Sprite } from "pixi.js";
 import { IguanaShapes } from "./shapes";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
-import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { IguanaLooks } from "./looks";
 import { objEye, objEyes } from "./obj-eye";
 import { Rng } from "../../lib/math/rng";
@@ -219,10 +218,6 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     return c;
 }
 
-function darken(color: number, amount = 0.225) {
-    return AdjustColor.pixi(color).saturate(0.1).darken(amount).toPixi();
-}
-
 type Feet = IguanaLooks.Serializable['feet'];
 type Foot = Feet['fore']['left'];
 
@@ -235,11 +230,11 @@ function objIguanaFoot(feet: Feet, key1: 'fore' | 'hind', key2: 'left' | 'right'
     const gap = (7 + feet.gap) / 2;
     f.pivot.x += key1 === 'fore' ? -Math.ceil(gap) : Math.floor(gap);
 
-    f.tint = back ? darken(foot.color) : foot.color;
+    f.tint = back ? IguanaLooks.darkenBackFeet(foot.color) : foot.color;
     const clawsShape = IguanaShapes.Claws[foot.claws.shape];
     const claws = clawsShape ? new Sprite(clawsShape) : undefined;
     if (claws) {
-        claws.tint = back ? darken(foot.claws.color) : foot.claws.color;
+        claws.tint = back ? IguanaLooks.darkenBackFeet(foot.claws.color) : foot.claws.color;
         claws.pivot.x -= foot.claws.placement;
         f.addChild(claws);
     }

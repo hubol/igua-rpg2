@@ -1,5 +1,6 @@
 import { TypedInput } from "./typed-input";
 import { IguanaShapes } from "./shapes";
+import { AdjustColor } from "../../lib/pixi/adjust-color";
 
 export namespace IguanaLooks {
     export type Input = ReturnType<typeof create>;
@@ -92,5 +93,17 @@ export namespace IguanaLooks {
                 backOffset: TypedInput.integer(0, 7),
             }
         }
+    }
+
+    export function darkenBackFeet(color: number) {
+        return darken(color, 0.225);
+    }
+
+    export function darkenEyelids(color: number) {
+        return darken(color, 0.1);
+    }
+
+    function darken(color: number, amount: number) {
+        return AdjustColor.pixi(color).saturate(0.1).darken(amount).toPixi();
     }
 }
