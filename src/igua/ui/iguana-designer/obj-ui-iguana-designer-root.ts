@@ -78,7 +78,7 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
 
     const c = container();
     const router = context.router.at(3, 13).show(c);
-    objText.LargeBold('', { tint: UiColor.Hint }).at(3, 3).step(tip => tip.text = getTipText(router.pages)).show(c);
+    objText.LargeBold('', { tint: UiColor.Hint }).at(3, 3).step(title => title.text = getTitleText(router.pages)).show(c);
     
     function objUiIguanaDesignerRootPage() {
         return objUiPage(UiVerticalLayout.apply(
@@ -128,7 +128,7 @@ function objUiNoteText(router: ObjUiPageRouter) {
     return c;
 }
 
-function getTipText(pages: UiPage[]) {
+function getTitleText(pages: UiPage[]) {
     if (pages.length === 1)
         return pages[0].title!;
 
@@ -140,6 +140,11 @@ function getTipText(pages: UiPage[]) {
             text += ' > ';
         text += pages[i].title;
     }
+
+    if (text.length > 52) {
+        text = '...' + text.substring(text.length - 50);
+    }
+
     return text;
 }
 
