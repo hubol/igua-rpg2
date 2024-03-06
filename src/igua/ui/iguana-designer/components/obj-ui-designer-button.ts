@@ -10,10 +10,10 @@ const [
     backIcon,
     floppyIcon,
     crestIcon,
-    eyesIcon,
+    eyesIconUnused,
     mouthIcon,
     hornIcon,
-    pupilsIcon,
+    pupilsIconUnused,
     torsoIcon,
     tailIcon,
     clubIcon,
@@ -25,7 +25,16 @@ const [
     hindRightIcon,
     foreLeftIcon,
     hindLeftIcon,
-    ] = Tx.Ui.ChooseYourLooksIcons.split({ width: 30 });
+    eyelidIcon,
+    scleraIcon,
+    pupilIcon,
+    eyesIcon,
+    eyelidsIcon,
+    sclerasIcon,
+    pupilsIcon,
+    leftEyeIcon,
+    rightEyeIcon,
+] = Tx.Ui.ChooseYourLooksIcons.split({ width: 30 });
 
 const icons = {
     'head': headIcon,
@@ -51,6 +60,11 @@ const icons = {
     'hind right': hindRightIcon,
     'fore left': foreLeftIcon,
     'hind left': hindLeftIcon,
+    'left eye': leftEyeIcon,
+    'right eye': rightEyeIcon,
+    'sclera': scleraIcon,
+    'eyelid': eyelidIcon,
+    'pupil': pupilIcon,
 }
 
 function getIcon(text: string) {

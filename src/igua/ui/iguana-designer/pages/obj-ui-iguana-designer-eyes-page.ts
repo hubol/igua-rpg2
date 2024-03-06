@@ -39,5 +39,5 @@ function objUiIguanaDesignerEyesAdvancedPage() {
     const eyes = UiIguanaDesignerContext.value.connectedInput.head.eyes;
 
     const { tilt, left, right } = eyes;
-    return objUiConnectedInputPage('Advanced', { tilt, left, right });
+    return objUiConnectedInputPage('Advanced', { tilt, leftEye: left, rightEye: right });
 }
