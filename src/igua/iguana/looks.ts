@@ -18,10 +18,8 @@ export namespace IguanaLooks {
         });
 
         const eye = () => ({
-            // TODO does each one need its own placement?
             sclera: {
                 // TODO sclera shapes
-                flipH: TypedInput.boolean(),
             },
             eyelid: {
                 color: TypedInput.color(),

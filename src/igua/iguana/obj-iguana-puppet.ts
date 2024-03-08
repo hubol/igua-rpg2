@@ -498,15 +498,15 @@ const scleraTx = IguanaShapes.Eye[0];
 
 const objIguanaSclera = () => new Sprite(scleraTx);
 const objIguanaPupil = ({ pupil }: Eye) => new Sprite(IguanaShapes.Pupil[pupil.shape]).at(pupil.placement).tinted(pupil.color);
-const objIguanaEye = (eye: Eye) => objEye(
-    objIguanaSclera().flipH(eye.sclera.flipH ? -1 : 1),
+const objIguanaEye = (eye: Eye, flipH: 1 | -1) => objEye(
+    objIguanaSclera().flipH(flipH),
     objIguanaPupil(eye),
     eye.eyelid.color,
     eye.eyelid.placement);
 
 function objIguanaEyes(head: Head) {
-    const left = objIguanaEye(head.eyes.left);
-    const right = objIguanaEye(head.eyes.right).at(left.shapeObj.width + head.eyes.gap, 0);
+    const left = objIguanaEye(head.eyes.left, 1);
+    const right = objIguanaEye(head.eyes.right, -1).at(left.shapeObj.width + head.eyes.gap, 0);
 
     const leftOffsetX = getEyeOffsetX(left);
     const rightOffsetX = getEyeOffsetX(right);

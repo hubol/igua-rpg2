@@ -18,7 +18,7 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                 tilt: 0,
                 left: {
                     sclera: {
-                        flipH: false,
+                        // TODO shape? color?
                     },
                     eyelid: {
                         color: 0xA38A00,
@@ -33,7 +33,7 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                 },
                 right: {
                     sclera: {
-                        flipH: true,
+                        // TODO shape? color?
                     },
                     eyelid: {
                         color: 0xA38A00,
