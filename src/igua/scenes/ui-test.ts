@@ -1,5 +1,5 @@
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
-import { findSceneByName } from "../core/scene/find-scene-by-name";
+import { SceneLibrary } from "../core/scene/scene-library";
 import { sceneStack } from "../globals";
 import { objUiButton } from "../ui/framework/obj-ui-button";
 import { objUiPage, objUiPageRouter } from "../ui/framework/obj-ui-page";
@@ -8,7 +8,7 @@ import { objUiCheckboxInput } from "../ui/iguana-designer/components/obj-ui-chec
 export function UiTest() {
     const router = objUiPageRouter({ maxHeight: 256 }).show();
 
-    const gotoSceneTest = () => sceneStack.replace(findSceneByName('SceneTest'), { useGameplay: false });
+    const gotoSceneTest = () => sceneStack.replace(SceneLibrary.findByName('SceneTest'), { useGameplay: false });
 
     function page1() {
         return objUiPage([

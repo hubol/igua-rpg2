@@ -1,6 +1,6 @@
-import { findSceneByName } from "../core/scene/find-scene-by-name";
+import { SceneLibrary } from "../core/scene/scene-library";
 import { sceneStack } from "../globals";
 
 export function startGame() {
-    sceneStack.push(findSceneByName('IguanaDesigner'), { useGameplay: false });
+    sceneStack.push(SceneLibrary.findByName('IguanaDesigner'), { useGameplay: false });
 }

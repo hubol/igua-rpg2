@@ -1,15 +1,11 @@
 import { Animator } from "../../lib/game-engine/animator";
 import { AsshatTicker } from "../../lib/game-engine/asshat-ticker";
 import { AsshatZoneDiagnostics } from "../../lib/game-engine/asshat-zone";
-import { createDebugKey } from "../../lib/game-engine/debug/debug-key";
-import { createDebugPanel } from "../../lib/game-engine/debug/debug-panel";
 import { setDefaultStages } from "../../lib/game-engine/default-stages";
 import { PixiRenderer } from "../../lib/game-engine/pixi-renderer";
 import { TickerContainer } from "../../lib/game-engine/ticker-container";
-import { WarningToast } from "../../lib/game-engine/warning-toast";
 import { Collision } from "../../lib/pixi/collision";
 import { devAssignDisplayObjectIdentifiers } from "../../lib/pixi/dev-assign-displayobject-identifiers";
-import { IguaAudio } from "../core/igua-audio";
 import { IguaInput } from "../core/input";
 import { scene, setIguaGlobals } from "../globals";
 
@@ -28,7 +24,6 @@ export function prepareGameEngine(renderer: PixiRenderer) {
     }
 
     setIguaGlobals(renderer, rootStage, iguaInput, forceGameLoop);
-    installDevTools();
 
     iguaInput.start();
 
@@ -59,15 +54,6 @@ export function prepareGameEngine(renderer: PixiRenderer) {
         get show() {
             return scene.stage;
         }
-    });
-}
-
-function installDevTools() {
-    document.body.appendChild(createDebugPanel(rootStage));
-    createDebugKey('KeyM', 'globalMute', (x, keydown) => {
-        IguaAudio.globalGain = x ? 0 : 1;
-        if (keydown)
-            WarningToast.show(x ? 'Muted' : 'Unmuted', '^_^');
     });
 }
 
