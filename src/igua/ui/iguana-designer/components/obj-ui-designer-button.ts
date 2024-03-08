@@ -65,6 +65,7 @@ const icons = {
     'sclera': scleraIcon,
     'eyelid': eyelidIcon,
     'pupil': pupilIcon,
+    'eyelids': eyelidsIcon,
 }
 
 function getIcon(text: string) {

@@ -4,23 +4,8 @@ import { objUiPage } from "../../framework/obj-ui-page";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 import { createUiConnectedInputPageElements } from "../components/obj-ui-connected-input-page";
 import { objUiDesignerButton } from "../components/obj-ui-designer-button";
-import { ObjUiDesignerInputBase } from "../components/obj-ui-designer-input-base";
 import { objUiIguanaDesignerBackButton } from "../components/obj-ui-iguana-designer-back-button";
 import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
-
-// color
-// claw color
-// fore > 
-// 	shape
-// 	claws
-// 	claws placement
-// hind > 
-// 	shape
-// 	claws
-// 	claws placement
-// gap
-// back offset
-// advanced
 
 type ConnectedFeet = typeof UiIguanaDesignerContext['value']['connectedInput']['feet'];
 type ConnectedFoot = typeof UiIguanaDesignerContext['value']['connectedInput']['feet']['fore']['left'];
@@ -42,9 +27,9 @@ function objUiForeHindFeetButton(ordinal: 'fore' | 'hind', feet: ConnectedFeet) 
         ]);
 
         const [ shape, claws, clawPlacement ] = createUiConnectedInputPageElements(inputs);
-        (shape as ObjUiDesignerInputBase).noteOnConflict = '*Changing this shape will set shape of all feet at once.';
-        (claws as ObjUiDesignerInputBase).noteOnConflict = '*Changing this shape will set shape of all claws at once.';
-        (clawPlacement as ObjUiDesignerInputBase).noteOnConflict = '*Changing this placement will set placement of all claws at once.';
+        shape.noteOnConflict = '*Changing this shape will set shape of all feet at once.';
+        claws.noteOnConflict = '*Changing this shape will set shape of all claws at once.';
+        clawPlacement.noteOnConflict = '*Changing this placement will set placement of all claws at once.';
 
         const els = UiVerticalLayout.apply(
             shape,
@@ -70,8 +55,8 @@ export function objUiIguanaDesignerFeetPage() {
     ]);
 
     const [ color, clawColor ] = createUiConnectedInputPageElements(inputs);
-    (color as ObjUiDesignerInputBase).noteOnConflict = '*Changing this color will set color of all feet at once.';
-    (clawColor as ObjUiDesignerInputBase).noteOnConflict = '*Changing this color will set color of all claws at once.';
+    color.noteOnConflict = '*Changing this color will set color of all feet at once.';
+    clawColor.noteOnConflict = '*Changing this color will set color of all claws at once.';
 
     const fore = objUiForeHindFeetButton('fore', feet);
     const hind = objUiForeHindFeetButton('hind', feet);

@@ -15,9 +15,10 @@ import { objUiIguanaDesignerEyesPage } from "../pages/obj-ui-iguana-designer-eye
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 import { objUiIguanaDesignerBackButton } from "./obj-ui-iguana-designer-back-button";
 import { objUiIguanaDesignerFeetPage } from "../pages/obj-ui-iguana-designer-feet-page";
+import { ObjUiDesignerInputBase } from "./obj-ui-designer-input-base";
 
 export function createUiConnectedInputPageElements(root: ConnectedInput.Tree<unknown>) {
-    const els = Empty<UiPageElement>();
+    const els = Empty<UiPageElement & Partial<Pick<ObjUiDesignerInputBase, 'noteOnConflict'>>>();
 
     for (const key in root) {
         const input = root[key];
