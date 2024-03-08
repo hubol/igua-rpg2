@@ -21,6 +21,16 @@ export function objPlayer() {
 ### Name
 Use a function with a **camelCase** name prefixed **obj**.
 
+If defining a type for a Game Object, use a **PascalCase** name prefixed **Obj**:
+```ts
+export type ObjPlayer = ReturnType<typeof objPlayer>;
+```
+
+Recommendation: If storing a reference to a Game Object, use a **camelCase** name postfixed **Obj**:
+```ts
+const playerObj = objPlayer();
+```
+
 ### Organization
 If a module's primary intent is to export a Game Object, the file should have a name prefixed **obj-**.
 
