@@ -2,7 +2,7 @@ import { ConnectedInput } from "../../../iguana/connected-input";
 import { objUiPage } from "../../framework/obj-ui-page";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 import { createUiConnectedInputPageElements, objUiConnectedInputPage } from "../components/obj-ui-connected-input-page";
-import { objUiDesignerButton } from "../components/obj-ui-designer-button";
+import { objUiDesignerNavigationButton } from "../components/obj-ui-designer-button";
 import { objUiIguanaDesignerBackButton } from "../components/obj-ui-iguana-designer-back-button";
 import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
 
@@ -11,27 +11,14 @@ type ConnectedEye = typeof UiIguanaDesignerContext['value']['connectedInput']['h
 export function objUiIguanaDesignerEyesPage() {
     const eyes = UiIguanaDesignerContext.value.connectedInput.head.eyes;
 
-    // const inputs = ConnectedInput.join([
-    //     getTopLevelInputs(feet.fore.left),
-    //     getTopLevelInputs(feet.fore.right),
-    //     getTopLevelInputs(feet.hind.left),
-    //     getTopLevelInputs(feet.hind.right),
-    // ]);
-
-    // const [ color, clawColor ] = createUiConnectedInputPageElements(inputs);
-    // (color as ObjUiDesignerInputBase).noteOnConflict = '*Changing this color will set color of all feet at once.';
-    // (clawColor as ObjUiDesignerInputBase).noteOnConflict = '*Changing this color will set color of all claws at once.';
-
-    // const fore = objUiForeHindFeetButton('fore', feet);
-    // const hind = objUiForeHindFeetButton('hind', feet);
-
     const { placement, gap } = eyes;
 
     const els = UiVerticalLayout.apply(
         ...createUiConnectedInputPageElements({ placement, gap }),
-        objUiDesignerButton('Eyelids', () => UiIguanaDesignerContext.value.router.push(objUiIguanaDesignerEyelidsPage())),
+        objUiDesignerNavigationButton('Eyelids', objUiIguanaDesignerEyelidsPage),
+        objUiDesignerNavigationButton('Pupils', objUiIguanaDesignerPupilsPage),
         UiVerticalLayout.Separator,
-        objUiDesignerButton('Advanced', () => UiIguanaDesignerContext.value.router.push(objUiIguanaDesignerEyesAdvancedPage())),
+        objUiDesignerNavigationButton('Advanced', objUiIguanaDesignerEyesAdvancedPage),
         UiVerticalLayout.Separator,
         objUiIguanaDesignerBackButton('Back'),
     )
@@ -59,6 +46,29 @@ function objUiIguanaDesignerEyelidsPage() {
     const els = UiVerticalLayout.apply(
         colorEl,
         placementEl,
+        UiVerticalLayout.Separator,
+        objUiIguanaDesignerBackButton('Back'),
+    )
+
+    return objUiPage(els, { selectionIndex: 0, title: 'Eyelids' });
+}
+
+function objUiIguanaDesignerPupilsPage() {
+    const eyes = UiIguanaDesignerContext.value.connectedInput.head.eyes;
+
+    const colorInputs = ConnectedInput.join([
+        eyes.left.pupil.color,
+        eyes.right.pupil.color,
+    ]);
+
+    console.log(colorInputs);
+
+    const [ colorEl ] = createUiConnectedInputPageElements({ color: colorInputs });
+
+    colorEl.noteOnConflict = '*Changing this color will set color of both pupils at once.';
+
+    const els = UiVerticalLayout.apply(
+        colorEl,
         UiVerticalLayout.Separator,
         objUiIguanaDesignerBackButton('Back'),
     )

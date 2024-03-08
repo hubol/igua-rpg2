@@ -3,7 +3,7 @@ import { ConnectedInput } from "../../../iguana/connected-input";
 import { objUiPage } from "../../framework/obj-ui-page";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 import { createUiConnectedInputPageElements } from "../components/obj-ui-connected-input-page";
-import { objUiDesignerButton } from "../components/obj-ui-designer-button";
+import { objUiDesignerButton, objUiDesignerNavigationButton } from "../components/obj-ui-designer-button";
 import { objUiIguanaDesignerBackButton } from "../components/obj-ui-iguana-designer-back-button";
 import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
 
@@ -70,7 +70,7 @@ export function objUiIguanaDesignerFeetPage() {
         hind,
         ...createUiConnectedInputPageElements({ gap, backOffset }),
         UiVerticalLayout.Separator,
-        objUiDesignerButton('Advanced', () => UiIguanaDesignerContext.value.router.push(objUiIguanaDesignerFeetAdvancedPage())),
+        objUiDesignerNavigationButton('Advanced', objUiIguanaDesignerFeetAdvancedPage),
         UiVerticalLayout.Separator,
         objUiIguanaDesignerBackButton('Back'),
     )
