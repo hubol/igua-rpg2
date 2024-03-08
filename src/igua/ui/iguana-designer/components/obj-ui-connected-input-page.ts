@@ -2,7 +2,7 @@ import { Texture } from "pixi.js";
 import { Empty } from "../../../../lib/types/empty";
 import { ConnectedInput } from "../../../iguana/connected-input";
 import { TypedInput } from "../../../iguana/typed-input";
-import { UiPage, UiPageElement, objUiPage } from "../../framework/obj-ui-page";
+import { UiPage, ObjUiPageElement, objUiPage } from "../../framework/obj-ui-page";
 import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
 import { objUiCheckboxInput } from "./obj-ui-checkbox-input";
 import { objUiDesignerButton } from "./obj-ui-designer-button";
@@ -18,7 +18,7 @@ import { objUiIguanaDesignerFeetPage } from "../pages/obj-ui-iguana-designer-fee
 import { ObjUiDesignerInputBase } from "./obj-ui-designer-input-base";
 
 export function createUiConnectedInputPageElements(root: ConnectedInput.Tree<unknown>) {
-    const els = Empty<UiPageElement & Partial<Pick<ObjUiDesignerInputBase, 'noteOnConflict'>>>();
+    const els = Empty<ObjUiPageElement & Partial<Pick<ObjUiDesignerInputBase, 'noteOnConflict'>>>();
 
     for (const key in root) {
         const input = root[key];

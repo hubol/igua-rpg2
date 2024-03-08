@@ -1,7 +1,7 @@
 import { Graphics } from "pixi.js";
 import { AdjustColor } from "../../../../lib/pixi/adjust-color";
 import { objUiButton } from "../../framework/obj-ui-button";
-import { UiPageElement, objUiPage } from "../../framework/obj-ui-page";
+import { ObjUiPageElement, objUiPage } from "../../framework/obj-ui-page";
 import { objUiSliderInput } from "./obj-ui-slider-input";
 import { Rng } from "../../../../lib/math/rng";
 import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
@@ -145,7 +145,7 @@ function objUiColorCopyFromPage(binding: ConnectedInput.Binding<number>) {
     const initialColor = binding.value;
     const uniqueColors = ConnectedInput.findUniqueColorValues(UiIguanaDesignerContext.value.connectedInput);
 
-    const els: UiPageElement[] = [];
+    const els: ObjUiPageElement[] = [];
 
     const w = 30;
     const h = 30;

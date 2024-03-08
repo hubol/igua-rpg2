@@ -1,16 +1,16 @@
 import { Empty } from "../../../lib/types/empty";
 import { UiStyle } from "../ui-color";
-import { UiPageElement } from "./obj-ui-page";
+import { ObjUiPageElement } from "./obj-ui-page";
 
 export namespace UiVerticalLayout {
-    export type Element = UiPageElement | typeof UiVerticalLayout.Separator;
+    export type Element = ObjUiPageElement | typeof UiVerticalLayout.Separator;
 
     export const Separator = Symbol('Separator');
 
-    export function apply(elements: Element[]): UiPageElement[]
-    export function apply(...elements: Element[]): UiPageElement[]
+    export function apply(elements: Element[]): ObjUiPageElement[]
+    export function apply(...elements: Element[]): ObjUiPageElement[]
     export function apply(...args) {
-        const els = Empty<UiPageElement>();
+        const els = Empty<ObjUiPageElement>();
 
         const elements: Element[] = Array.isArray(args[0]) ? args[0] : args;
 

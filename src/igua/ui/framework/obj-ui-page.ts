@@ -8,7 +8,7 @@ import { UiColor } from "../ui-color";
 import { Undefined } from "../../../lib/types/undefined";
 
 export type UiPageProps = { maxHeight?: number; title?: string; selectionIndex: number };
-export type UiPageElement = Container & { selected: boolean };
+export type ObjUiPageElement = Container & { selected: boolean };
 
 export type ObjUiPageRouter = ReturnType<typeof objUiPageRouter>;
 
@@ -48,9 +48,9 @@ export function objUiPageRouter(props: UiPageRouterProps = {}) {
     return c;
 }
 
-export function objUiPage(elements: UiPageElement[], props: UiPageProps) {
+export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
     const ticker = new AsshatTicker();
-    const c = new TickerContainer(ticker, false).merge({ navigation: true, selected: Undefined<UiPageElement>() }).merge(props);
+    const c = new TickerContainer(ticker, false).merge({ navigation: true, selected: Undefined<ObjUiPageElement>() }).merge(props);
 
     const maskedObj = container().show(c);
     const elementsObj = container(...elements).show(maskedObj);
