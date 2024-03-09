@@ -360,7 +360,7 @@ function objIguanaFeet(feet: Feet) {
 type Body = IguanaLooks.Serializable['body'];
 
 function objIguanaBody(body: Body) {
-    const tail = new Sprite(IguanaShapes.Tail[body.tail.shape]);
+    const tail = new Sprite(IguanaShapes.Tail.Shapes[body.tail.shape]);
     tail.tint = body.tail.color;
     tail.pivot.set(5, 11).add(body.tail.placement, -1);
     const torso = new Sprite(IguanaShapes.Torso[0]);
@@ -373,7 +373,7 @@ function objIguanaBody(body: Body) {
     if (clubShape) {
         const club = new Sprite(clubShape);
         club.tint = body.tail.club.color;
-        club.pivot.at(tail.pivot).add(-3, 8).add(body.tail.club.placement, -1);
+        club.pivot.at(tail.pivot).add(IguanaShapes.Tail.getClubPlacement(body.tail.shape)).add(body.tail.club.placement, -1);
         c.addChild(club);
     }
 

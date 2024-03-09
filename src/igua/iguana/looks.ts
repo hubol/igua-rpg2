@@ -71,7 +71,7 @@ export namespace IguanaLooks {
                 color: TypedInput.color(),
                 placement: TypedInput.vector(-4, -2, 4, 0),
                 tail: {
-                    shape: TypedInput.choice(IguanaShapes.Tail),
+                    shape: TypedInput.choice(IguanaShapes.Tail.Shapes),
                     color: TypedInput.color(),
                     placement: TypedInput.vector(-8, -7, 4, 5),
                     club: {

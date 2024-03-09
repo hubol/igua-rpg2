@@ -42,30 +42,51 @@ function context() {
 function createConnectedInput(looks: IguanaLooks.Serializable) {
     const connectedInput = ConnectedInput.create(IguanaLooks.create(), looks);
 
-    const color = connectedInput.head.color;
+    {
+        const headColor = connectedInput.head.color;
 
-    const colorKeepEyelid: ConnectedInput.Leaf<typeof color> = {
-        kind: 'color',
-        get value() {
-            return color.value;
-        },
-        set value(x) {
-            const leftEyelidColor = connectedInput.head.eyes.left.eyelid.color;
-            const rightEyelidColor = connectedInput.head.eyes.right.eyelid.color;
+        const headColorKeepEyelidDarkened: ConnectedInput.Leaf<typeof headColor> = {
+            kind: 'color',
+            get value() {
+                return headColor.value;
+            },
+            set value(x) {
+                const leftEyelidColor = connectedInput.head.eyes.left.eyelid.color;
+                const rightEyelidColor = connectedInput.head.eyes.right.eyelid.color;
 
-            const darkenedColor = IguanaLooks.darkenEyelids(connectedInput.head.color.value);
-            const nextDarkenedColor = IguanaLooks.darkenEyelids(x);
+                const darkenedColor = IguanaLooks.darkenEyelids(connectedInput.head.color.value);
+                const nextDarkenedColor = IguanaLooks.darkenEyelids(x);
 
-            if (leftEyelidColor.value === darkenedColor)
-                leftEyelidColor.value = nextDarkenedColor;
-            if (rightEyelidColor.value === darkenedColor)
-                rightEyelidColor.value = nextDarkenedColor;
+                if (leftEyelidColor.value === darkenedColor)
+                    leftEyelidColor.value = nextDarkenedColor;
+                if (rightEyelidColor.value === darkenedColor)
+                    rightEyelidColor.value = nextDarkenedColor;
 
-            color.value = x;
+                headColor.value = x;
+            }
         }
+
+        connectedInput.head.color = headColorKeepEyelidDarkened;
     }
 
-    connectedInput.head.color = colorKeepEyelid;
+    {
+        const tailShape = connectedInput.body.tail.shape;
+
+        const tailShapeResetClubPlacement: ConnectedInput.Leaf<typeof tailShape> = {
+            ...tailShape,
+            get value() {
+                return tailShape.value;
+            },
+            set value(x) {
+                connectedInput.body.tail.club.placement.value.x = 0;
+                connectedInput.body.tail.club.placement.value.y = 0;
+                tailShape.value = x;
+            }
+        }
+
+        connectedInput.body.tail.shape = tailShapeResetClubPlacement;
+    }
+
     return connectedInput;
 }
 
