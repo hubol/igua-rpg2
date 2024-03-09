@@ -8,6 +8,7 @@ import { Input } from "../../../globals";
 import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
 import { UiColor } from "../../ui-color";
 import { objUiDesignerInputBase } from "./obj-ui-designer-input-base";
+import { Sfx } from "../../../../assets/sounds";
 
 type Restrictions = Omit<TypedInput.Vector, 'kind'>;
 
@@ -87,8 +88,7 @@ export function objUiPlacementInput(text: string, binding: { value: VectorSimple
 
         if (c.selected && Input.justWentDown("Confirm")) {
             inputSelected = !inputSelected;
-            // TODO SFX
-            // (inputSelected ? LooksPageInto : LooksPageBack).play();
+            (inputSelected ? Sfx.Ui.NavigateInto : Sfx.Ui.NavigateBack).play();
             if (UiIguanaDesignerContext.value.page)
                 UiIguanaDesignerContext.value.page.navigation = !inputSelected;
         }

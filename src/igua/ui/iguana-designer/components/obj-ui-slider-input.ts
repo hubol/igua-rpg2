@@ -50,8 +50,6 @@ export function objUiSliderInput(
                 return;
 
             binding.value = Math.max(min, Math.min(max, value + adjust));
-
-            // TODO sfx
         })
         .step(() => {
             const value = binding.value;

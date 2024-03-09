@@ -1,4 +1,5 @@
 import { objText } from "../../../assets/fonts";
+import { Sfx } from "../../../assets/sounds";
 import { lerp } from "../../../lib/game-engine/promise/lerp";
 import { sleep } from "../../../lib/game-engine/promise/sleep";
 import { Rng } from "../../../lib/math/rng";
@@ -252,6 +253,8 @@ function objIguanaPreview() {
         if (looksJson === lastLooksJson)
             return;
 
+        if (iguana)
+            Sfx.Ui.Looks.Updated.play();
         iguana?.destroy();
         iguana = objIguanaPreviewInstance().show(c);
         lastLooksJson = looksJson;
