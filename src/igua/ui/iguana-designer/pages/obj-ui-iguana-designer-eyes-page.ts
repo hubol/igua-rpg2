@@ -53,22 +53,26 @@ function objUiIguanaDesignerEyelidsPage() {
     return objUiPage(els, { selectionIndex: 0, title: 'Eyelids' });
 }
 
+function getPupilInputs(eye: ConnectedEye) {
+    return { color: eye.pupil.color, shape: eye.pupil.shape };
+}
+
 function objUiIguanaDesignerPupilsPage() {
     const eyes = UiIguanaDesignerContext.value.connectedInput.head.eyes;
 
-    const colorInputs = ConnectedInput.join([
-        eyes.left.pupil.color,
-        eyes.right.pupil.color,
+    const inputs = ConnectedInput.join([
+        getPupilInputs(eyes.left),
+        getPupilInputs(eyes.right),
     ]);
 
-    console.log(colorInputs);
-
-    const [ colorEl ] = createUiConnectedInputPageElements({ color: colorInputs });
+    const [ colorEl, shapeEl ] = createUiConnectedInputPageElements(inputs);
 
     colorEl.noteOnConflict = '*Changing this color will set color of both pupils at once.';
+    shapeEl.noteOnConflict = '*Changing this shape will set shape of both pupils at once.';
 
     const els = UiVerticalLayout.apply(
         colorEl,
+        shapeEl,
         UiVerticalLayout.Separator,
         objUiIguanaDesignerBackButton('Back'),
     )
