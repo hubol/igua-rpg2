@@ -497,7 +497,7 @@ type Eye = Head['eyes']['left'];
 const scleraTx = IguanaShapes.Eye[0];
 
 const objIguanaSclera = () => new Sprite(scleraTx);
-const objIguanaPupil = ({ pupil }: Eye) => new Sprite(IguanaShapes.Pupil[pupil.shape]).at(pupil.placement).tinted(pupil.color);
+const objIguanaPupil = ({ pupil }: Eye) => new Sprite(IguanaShapes.Pupil[pupil.shape]).flipH(pupil.flipH ? -1 : 1).at(pupil.placement).tinted(pupil.color);
 const objIguanaEye = (eye: Eye, flipH: 1 | -1) => objEye(
     objIguanaSclera().flipH(flipH),
     objIguanaPupil(eye),
@@ -532,13 +532,13 @@ function objIguanaEyes(head: Head) {
             // TODO this will make cross-eyed iguanas look especially stupid
             // Cross-eyed iguanas should be easy to make
             // Create some setting to accomodate for this
-            left.pupilSpr.flipH(isFacingRight ? 1 : -1);
+            left.pupilSpr.flipH((isFacingRight ? 1 : -1) * (head.eyes.left.pupil.flipH ? -1 : 1));
             left.pupilSpr.x = head.eyes.left.pupil.placement.x + (isFacingRight ? 0 : leftOffsetX);
 
             // TODO this will make cross-eyed iguanas look especially stupid
             // Cross-eyed iguanas should be easy to make
             // Create some setting to accomodate for this
-            right.pupilSpr.flipH(isFacingRight ? 1 : -1);
+            right.pupilSpr.flipH((isFacingRight ? 1 : -1) * (head.eyes.right.pupil.flipH ? -1 : 1));
             right.pupilSpr.x = head.eyes.right.pupil.placement.x + (isFacingRight ? 0 : rightOffsetX);
         }
     });
