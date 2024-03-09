@@ -77,7 +77,7 @@ function objUiIguanaDesignerPupilsPage() {
         objUiIguanaDesignerBackButton('Back'),
     )
 
-    return objUiPage(els, { selectionIndex: 0, title: 'Eyelids' });
+    return objUiPage(els, { selectionIndex: 0, title: 'Pupils' });
 }
 
 function objUiIguanaDesignerEyesAdvancedPage() {
