@@ -9,9 +9,12 @@ import { IguaAudio, IguaAudioInitializer } from "../igua/core/igua-audio";
 import { Sound } from "../lib/game-engine/audio/sound";
 import { intervalWait } from "../lib/browser/interval-wait";
 
-type SoundId = keyof typeof GeneratedSfxData;
+const { sfxs } = GeneratedSfxData;
 
-export const Sfx: Record<SoundId, Sound> = <any>{};
+type Sfxs = typeof sfxs<Sound>;
+type Sounds = Awaited<ReturnType<Sfxs>>;
+
+export let Sfx: Sounds = <any>{};
 
 export async function loadSoundAssets(progress: JobProgress) {
     RequireCapability('oggSupport');
@@ -25,12 +28,10 @@ export async function loadSoundAssets(progress: JobProgress) {
 
     await intervalWait(() => IguaAudioInitializer.initialized);
 
-    await Promise.all(Object.entries(GeneratedSfxData)
-        .map(async ([soundId, { ogg }]) => {
-            const buffer = await entries[ogg].arrayBuffer();
-            const sound = await IguaAudio.createSfx(buffer);
-
-            Sfx[soundId] = sound;
-            progress.increaseCompletedJobsCount(1);
-        }));
+    Sfx = await sfxs(async ogg => {
+        const buffer = await entries[ogg].arrayBuffer();
+        const sound = await IguaAudio.createSfx(buffer);
+        progress.increaseCompletedJobsCount(1);
+        return sound;
+    });
 }
