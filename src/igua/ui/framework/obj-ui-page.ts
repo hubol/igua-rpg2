@@ -6,6 +6,7 @@ import { Input, forceGameLoop } from "../../globals";
 import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 import { UiColor } from "../ui-color";
 import { Undefined } from "../../../lib/types/undefined";
+import { Sfx } from "../../../assets/sounds";
 
 export type UiPageProps = { maxHeight?: number; title?: string; selectionIndex: number };
 export type ObjUiPageElement = Container & { selected: boolean };
@@ -16,6 +17,8 @@ type UiPageRouterProps = { readonly maxHeight?: number; };
 
 export function objUiPageRouter(props: UiPageRouterProps = {}) {
     function replace(page: UiPage) {
+        if (c.playSounds && c.page)
+            Sfx.Ui.NavigateInto.play();
         page.maxHeight = props.maxHeight;
         c.children.last?.destroy();
         c.addChild(page);
@@ -23,18 +26,22 @@ export function objUiPageRouter(props: UiPageRouterProps = {}) {
     }
 
     function push(page: UiPage) {
+        if (c.playSounds && c.page)
+            Sfx.Ui.NavigateInto.play();
         page.maxHeight = props.maxHeight;
         c.addChild(page);
         forceGameLoop();
     }
 
     function pop() {
+        if (c.playSounds)
+            Sfx.Ui.NavigateBack.play();
         c.children.last?.destroy();
         forceGameLoop();
     }
 
     const c = container()
-        .merge({ replace, push, pop, get pages() { return c.children as UiPage[] }, get page() { return c.pages.last; } })
+        .merge({ replace, push, pop, get pages() { return c.children as UiPage[] }, get page() { return c.pages.last; }, playSounds: true })
         .step(() => {
             for (let i = 0; i < c.children.length; i++)
                 c.children[i].visible = false;
@@ -50,7 +57,7 @@ export function objUiPageRouter(props: UiPageRouterProps = {}) {
 
 export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
     const ticker = new AsshatTicker();
-    const c = new TickerContainer(ticker, false).merge({ navigation: true, selected: Undefined<ObjUiPageElement>() }).merge(props);
+    const c = new TickerContainer(ticker, false).merge({ navigation: true, selected: Undefined<ObjUiPageElement>(), playSounds: true }).merge(props);
 
     const maskedObj = container().show(c);
     const elementsObj = container(...elements).show(maskedObj);
@@ -68,6 +75,8 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
     }
 
     function select(dx: number, dy: number) {
+        const previousSelectionIndex = c.selectionIndex;
+
         dx = Math.sign(dx) * 16;
         dy = Math.sign(dy) * 16;
         let ax = dx;
@@ -88,6 +97,8 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
                     continue;
                 if (!c.selected || elements[i].collides(c.selected, offset)) {
                     c.selectionIndex = i;
+                    if (c.playSounds && previousSelectionIndex !== c.selectionIndex)
+                        Sfx.Ui.Select.play();
                     return;
                 }
             }

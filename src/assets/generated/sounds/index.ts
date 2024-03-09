@@ -9,7 +9,11 @@ async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
       "ball bounce.ogg",
       "arrow knock.ogg",
       "activate lever.ogg",
+      "ui/select.ogg",
+      "ui/navigate into.ogg",
+      "ui/navigate back.ogg",
       "folder/cast spell hit.ogg",
+      "ui/looks/updated.ogg",
     ].map(sfx),
   );
   return {
@@ -19,8 +23,16 @@ async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
     BallBounce: sounds[3],
     ArrowKnock: sounds[4],
     ActivateLever: sounds[5],
+    Ui: {
+      Select: sounds[6],
+      NavigateInto: sounds[7],
+      NavigateBack: sounds[8],
+      Looks: {
+        Updated: sounds[10],
+      },
+    },
     Folder: {
-      CastSpellHit: sounds[6],
+      CastSpellHit: sounds[9],
     },
   };
 }
