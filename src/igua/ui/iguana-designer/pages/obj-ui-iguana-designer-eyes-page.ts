@@ -70,9 +70,12 @@ function objUiIguanaDesignerPupilsPage() {
     colorEl.noteOnConflict = '*Changing this color will set color of both pupils at once.';
     shapeEl.noteOnConflict = '*Changing this shape will set shape of both pupils at once.';
 
+    const { mirrored, placement } = eyes.pupils;
+
     const els = UiVerticalLayout.apply(
         colorEl,
         shapeEl,
+        ...createUiConnectedInputPageElements({ placement, mirrored }),
         UiVerticalLayout.Separator,
         objUiIguanaDesignerBackButton('Back'),
     )

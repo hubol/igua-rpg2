@@ -28,7 +28,7 @@ export namespace IguanaLooks {
             pupil: {
                 shape: TypedInput.choice(IguanaShapes.Pupil),
                 color: TypedInput.color(),
-                placement: TypedInput.vector(-7, -7, 5, 5),
+                placement: TypedInput.vector(-2, -2, 2, 2),
                 flipH: TypedInput.boolean(),
             }
         });
@@ -45,10 +45,13 @@ export namespace IguanaLooks {
                     flipV: TypedInput.boolean(),
                 },
                 eyes: {
-                    // TODO how to handle mirroring?
                     placement: TypedInput.vector(-7, -6, 3, 5),
                     gap: TypedInput.integer(0, 8),
                     tilt: TypedInput.integer(-2, 2),
+                    pupils: {
+                        placement: TypedInput.vector(-7, -7, 5, 5),
+                        mirrored: TypedInput.boolean(),
+                    },
                     left: eye(),
                     right: eye(),
                 },

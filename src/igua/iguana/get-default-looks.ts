@@ -16,6 +16,10 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                 placement: [0, 0],
                 gap: 1,
                 tilt: 0,
+                pupils: {
+                    mirrored: true,
+                    placement: [0, 0],
+                },
                 left: {
                     sclera: {
                         // TODO shape? color?
