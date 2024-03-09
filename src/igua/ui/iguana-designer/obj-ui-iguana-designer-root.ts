@@ -50,10 +50,10 @@ function createConnectedInput(looks: IguanaLooks.Serializable) {
             return color.value;
         },
         set value(x) {
-            const leftEyelidColor = UiIguanaDesignerContext.value.connectedInput.head.eyes.left.eyelid.color;
-            const rightEyelidColor = UiIguanaDesignerContext.value.connectedInput.head.eyes.right.eyelid.color;
+            const leftEyelidColor = connectedInput.head.eyes.left.eyelid.color;
+            const rightEyelidColor = connectedInput.head.eyes.right.eyelid.color;
 
-            const darkenedColor = IguanaLooks.darkenEyelids(UiIguanaDesignerContext.value.connectedInput.head.color.value);
+            const darkenedColor = IguanaLooks.darkenEyelids(connectedInput.head.color.value);
             const nextDarkenedColor = IguanaLooks.darkenEyelids(x);
 
             if (leftEyelidColor.value === darkenedColor)
