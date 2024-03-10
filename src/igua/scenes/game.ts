@@ -169,8 +169,8 @@ export function SceneTest() {
         looks.head.eyes.right.pupil.shape = 1;
         looks.head.eyes.left.pupil.shape = 5;
         looks.head.eyes.left.pupil.color = looks.head.crest.color;
-        looks.head.eyes.left.pupil.placement.x = -2;
-        looks.head.eyes.right.pupil.placement.x = -2;
+        looks.head.eyes.pupils.mirrored = false;
+        looks.head.eyes.pupils.placement.x = -2;
         // looks.head.eyes.placement.x = -3;
 
         // looks.head.crest.placement.x = 12;
