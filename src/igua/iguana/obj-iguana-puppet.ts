@@ -33,7 +33,10 @@ function getFlippableOffsetX(src: DisplayObject | undefined, dst: DisplayObject,
 
     const inside = rr1.x >= r2.x && r1x2 <= r2x2;
     const sign = maxd > mind ? 1 : -1;
-    const c = inside ? Math.abs(mind - maxd) : mind + maxd;
+    const srcWiderThanDst = rr1.width > r2.width;
+    const c = inside
+        ? Math.abs(mind - maxd)
+        : (srcWiderThanDst ? (mind === maxd ? 0 : -mind - maxd) : mind + maxd);
 
     return sign * c;
 }
@@ -506,7 +509,9 @@ const objIguanaEye = (eye: Eye, pupils: Head['eyes']['pupils'], isLeft: boolean)
         pupilObj.flipH(eye.pupil.flipH ? -1 : 1);
     }
     else {
-        pupilObj.at(eye.pupil.placement).add(-pupils.placement.x, pupils.placement.y).add(pupilObj.width - scleraObj.width, 0);
+        const max = Math.max(pupilObj.width, scleraObj.width);
+        const min = Math.min(pupilObj.width, scleraObj.width);
+        pupilObj.at(eye.pupil.placement).add(-pupils.placement.x, pupils.placement.y).add(min - max, 0);
         pupilObj.flipH(eye.pupil.flipH ? 1 : -1);
     }
 
