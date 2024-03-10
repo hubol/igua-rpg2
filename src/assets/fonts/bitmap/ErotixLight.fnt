@@ -90,6 +90,7 @@ kerning first=@f second=@o amount=-1
 kerning first=@f second=@s amount=-1
 kerning first=@g second=@? amount=-1
 kerning first=@r second=@, amount=-1
+kerning first=@M second=@i amount=-1
 kerning first=@M second=@o amount=-1
 kerning first=@F second=@e amount=-1
 kerning first=@F second=@o amount=-1
