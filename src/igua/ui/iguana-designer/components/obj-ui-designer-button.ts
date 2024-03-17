@@ -75,7 +75,7 @@ function getIcon(text: string) {
 }
 
 export function objUiDesignerButton(text: string, onPress: () => unknown, width = 96, height = 30) {
-    const obj = objUiButton(text, onPress, width, height);
+    const obj = objUiButton(text, onPress, width, height).merge({ note: '' });
 
     const icon = getIcon(text);
     if (icon)

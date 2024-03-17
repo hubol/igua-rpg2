@@ -28,6 +28,8 @@ export namespace TypedInput {
     }
 
     export type Any = Choice<unknown> | Vector | Integer | Color | Boolean;
+
+    export type Kind = Any['kind'];
     
     export const vector = (minX?: number, minY?: number, maxX?: number, maxY?: number): Vector =>
         ({ minX, minY, maxX, maxY, kind: 'vector' });

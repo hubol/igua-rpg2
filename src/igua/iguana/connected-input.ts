@@ -9,11 +9,20 @@ export namespace ConnectedInput {
 
     export function findUniqueColorValues(instance: Tree<unknown>) {
         const set = new Set<number>();
-        traverse(instance, instance, (input: TypedInput.Any & { value: any }) => {
+        traverse(instance, instance, (input: TypedInput.Any & Binding<any>) => {
             if (input.kind === 'color')
                 set.add(input.value);
         });
         return Array.from(set);
+    }
+
+    export function find<T extends TypedInput.Any>(instance: Tree<unknown>, kind: TypedInput.Kind): Leaf<T>[] {
+        const result: Leaf<T>[] = [];
+        traverse(instance, instance, (input: Leaf<T>) => {
+            if (input.kind === kind)
+                result.push(input);
+        });
+        return result;
     }
 
     export function join<TInput>(leaves: Leaf<TInput>[]): Leaf<TInput>
@@ -23,7 +32,7 @@ export namespace ConnectedInput {
 
         const instance = trees[0];
         if (instance) {
-            traverse(instance, instance, (input: TypedInput.Any & { value: any }, _, path) => {
+            traverse(instance, instance, (input: TypedInput.Any & Binding<any>, _, path) => {
                 let self = output;
                 for (let i = 0; i < path.length; i++) {
                     const key = path[i];
