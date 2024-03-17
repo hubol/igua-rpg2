@@ -62,17 +62,38 @@ function getEyelidColorInputs() {
 // ]
 // }
 
-function getMatchingColorConnectedInputs() {
+function getMatchingColorConnectedInputs(): ConnectedInput.Binding<number>[] {
     const tree = UiIguanaDesignerContext.value.connectedInput;
 
-    const matches: Record<number, ConnectedInput.Binding<number>[]> = {};
+    const matches: Record<number, ConnectedInput.Leaf<TypedInput.Color>[]> = {};
 
+    const rawHeadBinding = tree.head.color;
+    const headColor = tree.head.color.value;
     const darkenedHeadColor = IguanaLooks.darkenEyelids(tree.head.color.value);
 
+    const receiveHeadColors: ConnectedInput.Leaf<TypedInput.Color>[] = [];
+    const receiveDarkenedHeadColors: ConnectedInput.Leaf<TypedInput.Color>[] = [];
+
+    const headBinding = {
+        set value(color: number) {
+            rawHeadBinding.value = color;
+            for (const receiveHeadColor of receiveHeadColors)
+                receiveHeadColor.value = color;
+
+            const darkenedColor = IguanaLooks.darkenEyelids(color);
+            for (const receiveDarkenedHeadColor of receiveDarkenedHeadColors)
+                receiveDarkenedHeadColor.value = darkenedColor;
+        }
+    }
+
     for (const input of ConnectedInput.find<TypedInput.Color>(tree, 'color')) {
-        if (input === tree.head.eyes.left.eyelid.color || input === tree.head.eyes.right.eyelid.color) {
-            if (input.value === darkenedHeadColor)
-                continue;
+        if (input.value === headColor) {
+            receiveHeadColors.push(input);
+            continue;
+        }
+        if (input.value === darkenedHeadColor) {
+            receiveDarkenedHeadColors.push(input);
+            continue;
         }
 
         if (!matches[input.value])
@@ -80,7 +101,7 @@ function getMatchingColorConnectedInputs() {
         matches[input.value].push(input);
     }
 
-    return Object.values(matches).map(ConnectedInput.join);
+    return [ ...Object.values(matches).map(ConnectedInput.join) as any, headBinding];
 }
 
 function randomizeColors(colorBindings: ConnectedInput.Binding<number>[]) {
@@ -89,5 +110,5 @@ function randomizeColors(colorBindings: ConnectedInput.Binding<number>[]) {
 }
 
 function objUiIguanaDesignerRandomColorsButton() {
-    return objUiDesignerButton('Random Colors', () => randomizeColors(getMatchingColorConnectedInputs() as any)).center().jiggle();
+    return objUiDesignerButton('Random Colors', () => randomizeColors(getMatchingColorConnectedInputs())).center().jiggle();
 }
