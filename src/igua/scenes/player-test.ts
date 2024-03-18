@@ -1,8 +1,10 @@
+import { Graphics } from "pixi.js";
 import { container } from "../../lib/pixi/container";
 import { objPlayer } from "../objects/obj-player";
 
 export function PlayerTest() {
-    const playerContainer = container().at(0, 128).show();
+    const horizon = new Graphics().beginFill(0x813768).drawRect(0, 0, 256, 256).at(0, 128).show();
+    const playerContainer = container().at(0, horizon.y + 2).show();
     objPlayer(playerLooksJson).show(playerContainer);
 }
 

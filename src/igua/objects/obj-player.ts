@@ -9,6 +9,8 @@ const PlayerConsts = {
     WalkingAcceleration: 0.3,
     WalkingDeceleration: 0.2,
     WalkingTopSpeed: 2,
+    JumpSpeed: -3,
+    Gravity: 0.1,
 }
 
 export function objPlayer(looks: IguanaLooks.Serializable) {
@@ -20,6 +22,9 @@ export function objPlayer(looks: IguanaLooks.Serializable) {
             const moveLeft = Input.isDown('MoveLeft');
             const moveRight = Input.isDown('MoveRight');
             const duck = Input.isDown('Duck');
+
+            // TODO collision system
+            puppet.isOnGround = puppet.y >= 0;
 
             // TODO probably expose so that attackers can see this?
             const isDucking = duck && puppet.isOnGround;
@@ -33,13 +38,32 @@ export function objPlayer(looks: IguanaLooks.Serializable) {
             else if (moveRight)
                 puppet.speed.x = Math.min(puppet.speed.x + PlayerConsts.WalkingDeceleration, PlayerConsts.WalkingTopSpeed);
 
+            if (puppet.isOnGround && Input.justWentDown('Jump')) {
+                puppet.speed.y = PlayerConsts.JumpSpeed;
+            }
+
+            puppet.isAirborne = !puppet.isOnGround;
+
+            if (puppet.isOnGround) {
+                if (puppet.speed.y > 0) {
+                    puppet.landingFrames = 10;
+                    puppet.speed.y = 0;
+                    puppet.y = 0;
+                }
+            }
+            else {
+                puppet.speed.y += PlayerConsts.Gravity;
+            }
+
+            puppet.airborneDirectionY = approachLinear(puppet.airborneDirectionY, -Math.sign(puppet.speed.y), puppet.speed.y > 0 ? 0.1 : 0.25);
+
             if (puppet.speed.x !== 0) {
                 puppet.pedometer += Math.abs(puppet.speed.x * 0.05);
             }
             else if (puppet.gait === 0)
                 puppet.pedometer = 0;
 
-            puppet.gait = approachLinear(puppet.gait, Math.min(Math.abs(puppet.speed.x), 1), 0.15);
+            puppet.gait = approachLinear(puppet.gait, Math.min(puppet.isAirborne ? 0 : Math.abs(puppet.speed.x), 1), 0.15);
 
             if (puppet.speed.x !== 0) {
                 lastNonZeroSpeedXSign = Math.sign(puppet.speed.x);
