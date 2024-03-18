@@ -55,7 +55,7 @@ export function objPlayer(looks: IguanaLooks.Serializable) {
                 puppet.speed.y += PlayerConsts.Gravity;
             }
 
-            puppet.airborneDirectionY = approachLinear(puppet.airborneDirectionY, -Math.sign(puppet.speed.y), puppet.speed.y > 0 ? 0.1 : 0.25);
+            puppet.airborneDirectionY = approachLinear(puppet.airborneDirectionY, -Math.sign(puppet.speed.y), puppet.speed.y > 0 ? 0.075 : 0.25);
 
             if (puppet.speed.x !== 0) {
                 puppet.pedometer += Math.abs(puppet.speed.x * 0.05);
@@ -72,7 +72,7 @@ export function objPlayer(looks: IguanaLooks.Serializable) {
             puppet.facing = approachLinear(
                 puppet.facing,
                 Math.sign(puppet.speed.x) || lastNonZeroSpeedXSign || Math.sign(puppet.facing),
-                Math.max(Math.min(Math.abs(puppet.speed.x * 0.1), 0.5), 0.1));
+                0.1);
 
             puppet.ducking = approachLinear(puppet.ducking, isDucking ? 1 : 0, 0.075);
         })
