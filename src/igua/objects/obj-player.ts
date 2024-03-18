@@ -8,7 +8,7 @@ const PlayerConsts = {
     // TODO probably not constants, probably derived from status
     WalkingAcceleration: 0.3,
     WalkingDeceleration: 0.2,
-    WalkingTopSpeed: 2,
+    WalkingTopSpeed: 2.5,
     JumpSpeed: -3,
     Gravity: 0.1,
 }
@@ -72,7 +72,7 @@ export function objPlayer(looks: IguanaLooks.Serializable) {
             puppet.facing = approachLinear(
                 puppet.facing,
                 Math.sign(puppet.speed.x) || lastNonZeroSpeedXSign || Math.sign(puppet.facing),
-                Math.max(Math.min(Math.abs(puppet.speed.x * 0.05), 0.5), 0.1));
+                Math.max(Math.min(Math.abs(puppet.speed.x * 0.1), 0.5), 0.1));
 
             puppet.ducking = approachLinear(puppet.ducking, isDucking ? 1 : 0, 0.075);
         })

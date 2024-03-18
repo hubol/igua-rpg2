@@ -141,7 +141,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
         head.y = Math.round(facingPartialF * 2 + ducking * headDuckMaximum + (airborne > 0 ? -headRaiseMaximum : 0));
 
         core.y = Math.round(
-            (isAirborne ? 0 : gait * (Math.sin(p / 2) + 1) / 2)
+            (isAirborne ? 0 : gait * (Math.cos(p / 2) + 1) / 2)
             + Math.min(ducking * bodyDuckMaximum + landing * bodyLandMaximum, bodyDuckMaximum)
         );
         feetController.spread = ducking;
