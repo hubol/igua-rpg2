@@ -1,6 +1,5 @@
 import { Texture } from "pixi.js";
 import { Rng } from "../../../../lib/math/rng";
-import { Empty } from "../../../../lib/types/empty";
 import { ConnectedInput } from "../../../iguana/connected-input";
 import { IguanaLooks } from "../../../iguana/looks";
 import { TypedInput } from "../../../iguana/typed-input";
@@ -12,7 +11,8 @@ import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
 
 export function objUiIguanaDesignerInspirationPage() {
     const els = UiVerticalLayout.apply(
-        objUiIguanaDesignerRandomColorsButton(),
+        objUiRandomizerButton('Random Colors', () => randomizeColors(getMatchingColorConnectedInputs())),
+        objUiRandomizerButton('Random Shapes', randomizeMatchingShapeConnectedInputs),
         UiVerticalLayout.Separator,
         objUiIguanaDesignerBackButton('Back'),
     )
@@ -20,47 +20,30 @@ export function objUiIguanaDesignerInspirationPage() {
     return objUiPage(els, { selectionIndex: 0, title: 'Inspiration' });
 }
 
-// function getBasicConnectedInputs(kind: 'choice' | 'color') {
-//     const tree = UiIguanaDesignerContext.value.connectedInput;
-//     return ConnectedInput.find<TypedInput.Choice<Texture>>(tree, kind)
-//         .filter(x =>
-//             x !== tree.head.eyes.left.pupil.shape && x !== tree.head.eyes.right.pupil.shape
-//             && x !== tree.head.eyes.left.pupil.color && x !== tree.head.eyes.right.pupil.color
-
-//             && x !== tree.head.eyes.left.eyelid.color && x !== tree.head.eyes.right.eyelid.color
-
-//             && x !== tree.feet.fore.left.shape && x !== tree.feet.fore.right.shape
-//             && x !== tree.feet.fore.left.color && x !== tree.feet.fore.right.color
-//             && x !== tree.feet.fore.left.claws.shape && x !== tree.feet.fore.right.claws.shape
-//             && x !== tree.feet.fore.left.claws.color && x !== tree.feet.fore.right.claws.color
-            
-//             && x !== tree.feet.hind.left.shape && x !== tree.feet.hind.right.shape
-//             && x !== tree.feet.hind.left.color && x !== tree.feet.hind.right.color
-//             && x !== tree.feet.hind.left.claws.shape && x !== tree.feet.hind.right.claws.shape
-//             && x !== tree.feet.hind.left.claws.color && x !== tree.feet.hind.right.claws.color
-            
-//             && (tree.body.tail.club.shape.value !== -1 || x !== tree.body.tail.club.color)
-//             && (tree.head.horn.shape.value !== -1 || x !== tree.head.horn.color));
-// }
-
-function getEyelidColorInputs() {
+function randomizeMatchingShapeConnectedInputs() {
     const tree = UiIguanaDesignerContext.value.connectedInput;
+    type MatchMap = Record<number, ConnectedInput.Leaf<TypedInput.Choice<Texture>>[]>; 
+    const matches = new Map<readonly Texture[], MatchMap>();
 
-    // const darkenedHeadColor = IguanaLooks.darkenEyelids(tree.head.color.value);
+    for (const input of ConnectedInput.find<TypedInput.Choice<Texture>>(tree, 'choice')) {
+        if (!matches.has(input.options))
+            matches.set(input.options, {});
 
-    return [ ConnectedInput.join([ tree.head.eyes.left.eyelid.color, tree.head.eyes.right.eyelid.color ]) ];
+        const map = matches.get(input.options)!;
+        if (!map[input.value])
+            map[input.value] = [];
+        map[input.value].push(input);
+    }
+
+    for (const matchMaps of matches.values()) {
+        for (const choiceInputs of Object.values(matchMaps)) {
+            const firstChoiceInput = choiceInputs[0];
+            const value = Rng.int(firstChoiceInput.allowNone ? -1 : 0, firstChoiceInput.options.length);
+            for (const choiceInput of choiceInputs)
+                choiceInput.value = value;
+        }
+    }
 }
-
-// function getBasicColorConnectedInputs() {
-//     const tree = UiIguanaDesignerContext.value.connectedInput;
-
-//     return [ ...getBasicConnectedInputs('color'),
-//     ConnectedInput.join([ tree.head.eyes.left.pupil.color, tree.head.eyes.right.pupil.color ]),
-//     ...getEyelidColorInputs(),
-//     ConnectedInput.join([ tree.feet.fore.left.color, tree.feet.fore.right.color, tree.feet.hind.left.color, tree.feet.hind.right.color ]),
-//     ConnectedInput.join([ tree.feet.fore.left.claws.color, tree.feet.fore.right.claws.color, tree.feet.hind.left.claws.color, tree.feet.hind.right.claws.color ]),
-// ]
-// }
 
 function getMatchingColorConnectedInputs(): ConnectedInput.Binding<number>[] {
     const tree = UiIguanaDesignerContext.value.connectedInput;
@@ -101,7 +84,7 @@ function getMatchingColorConnectedInputs(): ConnectedInput.Binding<number>[] {
         matches[input.value].push(input);
     }
 
-    return [ ...Object.values(matches).map(ConnectedInput.join) as any, headBinding];
+    return [ ...Object.values(matches).map(ConnectedInput.join) as ConnectedInput.Leaf<TypedInput.Color>[], headBinding];
 }
 
 function randomizeColors(colorBindings: ConnectedInput.Binding<number>[]) {
@@ -109,6 +92,6 @@ function randomizeColors(colorBindings: ConnectedInput.Binding<number>[]) {
         colorBinding.value = Rng.intc(0xffffff);
 }
 
-function objUiIguanaDesignerRandomColorsButton() {
-    return objUiDesignerButton('Random Colors', () => randomizeColors(getMatchingColorConnectedInputs())).center().jiggle();
+function objUiRandomizerButton(title: string, onPress: () => void) {
+    return objUiDesignerButton(title, onPress).center().jiggle();
 }
