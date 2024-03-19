@@ -12,7 +12,7 @@ import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
 export function objUiIguanaDesignerInspirationPage() {
     const els = UiVerticalLayout.apply(
         objUiRandomizerButton('Random Colors', () => randomizeColors(getMatchingColorConnectedInputs())),
-        objUiRandomizerButton('Random Shapes', randomizeMatchingShapeConnectedInputs),
+        objUiRandomizerButton('Random Shapes', createRandomizeShapes()),
         UiVerticalLayout.Separator,
         objUiIguanaDesignerBackButton('Back'),
     )
@@ -20,7 +20,7 @@ export function objUiIguanaDesignerInspirationPage() {
     return objUiPage(els, { selectionIndex: 0, title: 'Inspiration' });
 }
 
-function randomizeMatchingShapeConnectedInputs() {
+function createRandomizeShapes() {
     const tree = UiIguanaDesignerContext.value.connectedInput;
     type MatchMap = Record<number, ConnectedInput.Leaf<TypedInput.Choice<Texture>>[]>; 
     const matches = new Map<readonly Texture[], MatchMap>();
@@ -35,12 +35,14 @@ function randomizeMatchingShapeConnectedInputs() {
         map[input.value].push(input);
     }
 
-    for (const matchMaps of matches.values()) {
-        for (const choiceInputs of Object.values(matchMaps)) {
-            const firstChoiceInput = choiceInputs[0];
-            const value = Rng.int(firstChoiceInput.allowNone ? -1 : 0, firstChoiceInput.options.length);
-            for (const choiceInput of choiceInputs)
-                choiceInput.value = value;
+    return () => {
+        for (const matchMaps of matches.values()) {
+            for (const choiceInputs of Object.values(matchMaps)) {
+                const firstChoiceInput = choiceInputs[0];
+                const value = Rng.int(firstChoiceInput.allowNone ? -1 : 0, firstChoiceInput.options.length);
+                for (const choiceInput of choiceInputs)
+                    choiceInput.value = value;
+            }
         }
     }
 }
