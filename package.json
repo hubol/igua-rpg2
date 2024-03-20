@@ -5,9 +5,9 @@
   "scripts": {
     "build": "node esbuild.mjs",
     "serve": "node esbuild.mjs serve",
-    "test": "ts-node --transpileOnly test/run.ts",
+    "test": "tsx test/run.ts",
     "test:watch": "nodemon --watch src --watch test -e ts,js,json -x npm run test",
-    "tool": "ts-node tools/run-tool.ts"
+    "tool": "tsx tools/run-tool.ts"
   },
   "author": "Hubol",
   "license": "SEE LICENSE IN LICENSE.md",
@@ -17,7 +17,7 @@
     "esbuild": "0.19.8",
     "esbuild-plugin-import-glob": "^0.1.1",
     "nodemon": "^3.0.1",
-    "ts-node": "^10.9.1",
+    "tsx": "^4.7.1",
     "typescript": "^5.2.2"
   },
   "dependencies": {
