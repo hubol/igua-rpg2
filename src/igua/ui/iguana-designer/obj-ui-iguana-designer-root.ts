@@ -2,16 +2,12 @@ import { objText } from "../../../assets/fonts";
 import { Sfx } from "../../../assets/sounds";
 import { lerp } from "../../../lib/game-engine/promise/lerp";
 import { sleep } from "../../../lib/game-engine/promise/sleep";
-import { Rng } from "../../../lib/math/rng";
-import { vnew } from "../../../lib/math/vector-type";
-import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { SceneLocal } from "../../core/scene/scene-local";
 import { ConnectedInput } from "../../iguana/connected-input";
 import { getDefaultLooks } from "../../iguana/get-default-looks";
 import { IguanaLooks } from "../../iguana/looks";
 import { objIguanaPuppet } from "../../iguana/obj-iguana-puppet";
-import { TypedInput } from "../../iguana/typed-input";
 import { ObjUiPageRouter, UiPage, objUiPage, objUiPageRouter } from "../framework/obj-ui-page";
 import { UiVerticalLayout } from "../framework/ui-vertical-layout";
 import { UiColor, UiStyle } from "../ui-color";
@@ -169,42 +165,6 @@ function getTitleText(pages: UiPage[]) {
     }
 
     return text;
-}
-
-function set(destination: any, path: string[], value: any) {
-    if (!path.length)
-        return;
-
-    let node = destination;
-    for (let i = 0; i < path.length - 1; i++) {
-        node = node[path[i]];
-    }
-
-    node[path.last] = value;
-}
-
-function randomize(schema: TypedInput.Any, value: any, path: string[] = []) {
-    switch (schema.kind) {
-        case "boolean":
-            return set(value, path, Rng.bool());
-        case "choice":
-            return set(value, path, Rng.int(schema.allowNone ? -1 : 0, schema.options.length));
-        case "vector":
-            return set(value, path, vnew(Rng.intc(-2, 2), Rng.intc(-2, 2)));
-        case "integer":
-            return set(value, path, Rng.intc(0, 2));
-        case "color":
-            return set(value, path, AdjustColor.rgb(Rng.float(255), Rng.float(255), Rng.float(255)).toPixi());
-        default:
-            for (const key in schema as any) {
-                randomize(schema[key], value, [...path, key]);
-            }
-    }
-}
-
-function randomizeIguanaLooks() {
-    // Very crude placeholder
-    randomize(IguanaLooks.create() as any, UiIguanaDesignerContext.value.looks);
 }
 
 function objIguanaPreview() {
