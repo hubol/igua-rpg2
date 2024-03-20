@@ -71,7 +71,7 @@ function getMatchingColorConnectedInputs(): ConnectedInput.Binding<number>[] {
         }
     }
 
-    for (const input of ConnectedInput.find<TypedInput.Color>(tree, 'color')) {
+    for (const input of ConnectedInput.find(tree, 'color')) {
         if (input.value === headColor) {
             receiveHeadColors.push(input);
             continue;

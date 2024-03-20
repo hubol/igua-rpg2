@@ -16,9 +16,10 @@ export namespace ConnectedInput {
         return Array.from(set);
     }
 
-    export function find<T extends TypedInput.Any>(instance: Tree<unknown>, kind: TypedInput.Kind): Leaf<T>[] {
-        const result: Leaf<T>[] = [];
-        traverse(instance, instance, (input: Leaf<T>) => {
+    export function find<TShape extends TypedInput.Any, TKind extends TShape['kind'] = TShape['kind'], TLeaf = TShape & { kind: TKind }>(
+            instance: Tree<unknown>, kind: TKind): Leaf<TLeaf>[] {
+        const result: Leaf<TLeaf>[] = [];
+        traverse(instance, instance, (input: Leaf<TLeaf>) => {
             if (input.kind === kind)
                 result.push(input);
         });
