@@ -136,6 +136,8 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
         // Apply
         body.tail.x = Math.round(facingPartialF * 2);
         body.tail.y = Math.round(-facingPartialF + (airborne > 0 ? 1 : 0));
+
+        body.tail.club?.at(body.tail);
         
         head.x = Math.round(facingRight ? -facingPartialF * 5 : headOffset + facingPartialF * 5);
         head.y = Math.round(facingPartialF * 2 + ducking * headDuckMaximum + (airborne > 0 ? -headRaiseMaximum : 0));
@@ -363,25 +365,32 @@ function objIguanaFeet(feet: Feet) {
 type Body = IguanaLooks.Serializable['body'];
 
 function objIguanaBody(body: Body) {
-    const tail = new Sprite(IguanaShapes.Tail.Shapes[body.tail.shape]);
+    const tail = new Sprite(IguanaShapes.Tail.Shapes[body.tail.shape]).merge({ club: objIguanaTailClub(body) });
     tail.tint = body.tail.color;
     tail.pivot.set(5, 11).add(body.tail.placement, -1);
     const torso = new Sprite(IguanaShapes.Torso[0]);
     torso.tint = body.color;
     torso.pivot.set(-1, 5);
 
-    const c = container(tail, torso).merge({ torso, tail });
+    tail.club?.pivot?.add(tail.pivot);
 
-    const clubShape = IguanaShapes.Club[body.tail.club.shape];
-    if (clubShape) {
-        const club = new Sprite(clubShape);
-        club.tint = body.tail.club.color;
-        club.pivot.at(tail.pivot).add(IguanaShapes.Tail.getClubPlacement(body.tail.shape)).add(body.tail.club.placement, -1);
-        c.addChild(club);
-    }
+    const c = container(tail, torso).merge({ torso, tail });
+    tail.club?.show(c);
 
     c.pivot.set(-body.placement.x, -body.placement.y);
     return c;
+}
+
+function objIguanaTailClub(body: Body) {
+    const clubShape = IguanaShapes.Club[body.tail.club.shape];
+    if (!clubShape)
+        return null;
+
+    const club = new Sprite(clubShape);
+    club.tint = body.tail.club.color;
+    club.pivot.at(IguanaShapes.Tail.getClubPlacement(body.tail.shape)).add(body.tail.club.placement, -1);
+    
+    return club;
 }
 
 type Head = IguanaLooks.Serializable['head'];
