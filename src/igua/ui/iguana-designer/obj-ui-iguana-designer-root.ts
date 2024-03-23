@@ -129,7 +129,47 @@ function objUiSavePage() {
     const page = objUiPage([
         objUiButton('Yes', () => {}, width).center().at(gap, 160),
         objUiButton('No', () => UiIguanaDesignerContext.value.router.pop(), width).center().at(width + gap * 2, 160),
-    ], { selectionIndex: -1 }).named('Save');
+    ], { selectionIndex: 1 }).named('Save');
+
+    const getDesiredX = () => {
+        return page.selected!.x + page.selected!.width / 2;
+    }
+
+    const looks = UiIguanaDesignerContext.value.looks;
+
+    let prev = 0;
+    const puppet = objIguanaPuppet(looks).at(128, 157)
+    .step(() => { prev = puppet.x; })
+    .step(() => {
+        const dx = getDesiredX();
+        const diff = dx - puppet.x;
+
+        puppet.facing = approachLinear(puppet.facing, Math.sign(diff || puppet.facing), 0.1);
+        
+        if (diff === 0)
+            return;
+
+        let f = Math.abs(diff) > 8 ? 1 : 0.3;
+        if (Math.sign(puppet.facing) !== Math.sign(diff))
+            f = 0;
+        puppet.x = approachLinear(puppet.x, dx, 4 * f);
+    })
+    .step(() => {
+        const diff = prev - puppet.x;
+        if (diff === 0) {
+            puppet.gait = approachLinear(puppet.gait, 0, 0.3);
+            if (puppet.gait === 0)
+                puppet.pedometer = 0;
+        }
+        puppet.gait = approachLinear(puppet.gait, 1, 0.2);
+        puppet.pedometer += diff / 30;
+    })
+    .show(page);
+
+    puppet.scale.set(2);
+    puppet.x = getDesiredX();
+
+    page.pivot.set(3, 13);
 
     objText.LargeBold('Is this your true self?', { tint: UiColor.Hint }).anchored(0.5, 0).at(128, 64).show(page);
 
@@ -254,6 +294,8 @@ function objIguanaPreview(minX = 102, maxX = 253) {
             c.pivot.x -= diff;
             firstStep = true;
         }
+
+        c.visible = UiIguanaDesignerContext.value.page.name !== 'Save';
     });
 
     return c;
