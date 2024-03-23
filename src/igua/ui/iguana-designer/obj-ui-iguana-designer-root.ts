@@ -2,6 +2,7 @@ import { objText } from "../../../assets/fonts";
 import { Sfx } from "../../../assets/sounds";
 import { lerp } from "../../../lib/game-engine/promise/lerp";
 import { sleep } from "../../../lib/game-engine/promise/sleep";
+import { approachLinear } from "../../../lib/math/number";
 import { container } from "../../../lib/pixi/container";
 import { SceneLocal } from "../../core/scene/scene-local";
 import { ConnectedInput } from "../../iguana/connected-input";
@@ -109,7 +110,7 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
 
     router.replace(objUiIguanaDesignerRootPage());
 
-    objIguanaPreview().at(160, 200).show(c);
+    objIguanaPreview().at(0, 175).show(c);
     objUiNoteText(router).show(c);
 
     return c;
@@ -167,9 +168,11 @@ function getTitleText(pages: UiPage[]) {
     return text;
 }
 
-function objIguanaPreview() {
+function objIguanaPreview(minX = 102, maxX = 253) {
+    const previewCenterX = minX + Math.round((maxX - minX) / 2);
     let lastLooksJson: string;
     let iguana: ReturnType<typeof objIguanaPreviewInstance>;
+    let stepsSinceLastChange = 0;
 
     function objIguanaPreviewInstance() {
         const bigPuppet = objIguanaPuppet(UiIguanaDesignerContext.value.looks)
@@ -190,35 +193,47 @@ function objIguanaPreview() {
             }
         });
 
-        const smallPuppet1 = objIguanaPuppet(UiIguanaDesignerContext.value.looks)
-            .at(-30 + 20, -96);
-        smallPuppet1.facing = -1;
-
-        const smallPuppet2 = objIguanaPuppet(UiIguanaDesignerContext.value.looks)
-            .at(64 - 20, -96);
-        smallPuppet2.facing = 1;
-
         bigPuppet.scale.set(3);
 
-        return container(smallPuppet1, smallPuppet2, bigPuppet);
+        const smallPuppet = objIguanaPuppet(UiIguanaDesignerContext.value.looks)
+        smallPuppet.facing = -1;
+
+        smallPuppet.x = bigPuppet.getBounds().right + smallPuppet.getBounds().left;
+        smallPuppet.y = smallPuppet.height + 3;
+
+        return container(smallPuppet, bigPuppet).merge({ largePreviewObj: bigPuppet });
     }
 
     function getLooksJson() {
         return JSON.stringify(UiIguanaDesignerContext.value.looks);
     }
 
+    let firstStep = false;
+
     const c = container()
     .step(() => {
         const looksJson = getLooksJson();
 
-        if (looksJson === lastLooksJson)
+        if (looksJson === lastLooksJson) {
+            stepsSinceLastChange++;
             return;
+        }
+
+        stepsSinceLastChange = 0;
 
         if (iguana)
             Sfx.Ui.Looks.Updated.play();
         iguana?.destroy();
         iguana = objIguanaPreviewInstance().show(c);
         lastLooksJson = looksJson;
+    })
+    .step(() => {
+        if ((stepsSinceLastChange > 30 || !firstStep) && iguana) {
+            const centerX = iguana.largePreviewObj.getBounds().getCenter().vround().x;
+            const diff = approachLinear(centerX, previewCenterX, firstStep ? 1 : 256) - centerX;
+            c.pivot.x -= diff;
+            firstStep = true;
+        }
     });
 
     return c;
