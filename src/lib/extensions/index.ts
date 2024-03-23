@@ -1,5 +1,6 @@
 import "./js-array";
 import "./js-array-vector";
+import "./pixi-anchored";
 import "./pixi-collision";
 import "./pixi-color";
 import "./pixi-container-flip";
