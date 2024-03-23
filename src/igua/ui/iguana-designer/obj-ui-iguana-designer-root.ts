@@ -9,6 +9,7 @@ import { ConnectedInput } from "../../iguana/connected-input";
 import { getDefaultLooks } from "../../iguana/get-default-looks";
 import { IguanaLooks } from "../../iguana/looks";
 import { objIguanaPuppet } from "../../iguana/obj-iguana-puppet";
+import { objUiButton } from "../framework/obj-ui-button";
 import { ObjUiPageRouter, UiPage, objUiPage, objUiPageRouter } from "../framework/obj-ui-page";
 import { UiVerticalLayout } from "../framework/ui-vertical-layout";
 import { UiColor, UiStyle } from "../ui-color";
@@ -97,6 +98,9 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
     context.looks = looks;
 
     const c = container();
+
+    objIguanaPreview().at(0, 175).show(c);
+
     const router = context.router.at(3, 13).show(c);
     objText.LargeBold('', { tint: UiColor.Hint }).at(3, 3).step(title => title.text = getTitleText(router.pages)).show(c);
     
@@ -104,16 +108,32 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
         return objUiPage(UiVerticalLayout.apply(
             ...createUiConnectedInputPageElements(context.connectedInput),
             UiVerticalLayout.Separator,
-            objUiDesignerNavigationButton('Inspiration', objUiIguanaDesignerInspirationPage)),
+            objUiDesignerNavigationButton('Inspiration', objUiIguanaDesignerInspirationPage),
+            UiVerticalLayout.Separator,
+            objUiDesignerNavigationButton('Done', objUiSavePage),
+            ),
         { title: 'Choose your looks.', selectionIndex: 0 })
     }
 
     router.replace(objUiIguanaDesignerRootPage());
 
-    objIguanaPreview().at(0, 175).show(c);
     objUiNoteText(router).show(c);
 
     return c;
+}
+
+function objUiSavePage() {
+    const width = 96;
+    const gap = Math.floor((256 - (width * 2)) / 3);
+
+    const page = objUiPage([
+        objUiButton('Yes', () => {}, width).center().at(gap, 160),
+        objUiButton('No', () => UiIguanaDesignerContext.value.router.pop(), width).center().at(width + gap * 2, 160),
+    ], { selectionIndex: -1 }).named('Save');
+
+    objText.LargeBold('Is this your true self?', { tint: UiColor.Hint }).anchored(0.5, 0).at(128, 64).show(page);
+
+    return page;
 }
 
 function objUiNoteText(router: ObjUiPageRouter) {
