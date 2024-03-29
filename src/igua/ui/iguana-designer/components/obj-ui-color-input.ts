@@ -173,5 +173,8 @@ function objUiColorCopyFromPage(binding: ConnectedInput.Binding<number>) {
         els.push(elem);
     }
 
-    return objUiPage(els, { selectionIndex, title: 'Copy' });
+    const page = objUiPage(els, { selectionIndex, title: 'Copy' });
+    page.playSounds = false;
+
+    return page;
 }
