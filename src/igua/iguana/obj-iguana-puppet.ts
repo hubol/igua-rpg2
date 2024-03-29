@@ -150,7 +150,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     };
 
     const c = container(back, core, front)
-        .merge({ body, feet })
+        .merge({ head, body, feet })
         .merge({
             get facing() {
                 return facing;
