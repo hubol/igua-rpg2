@@ -41,7 +41,7 @@ export function objUiButton(text: string, onPress: () => unknown, width = 96, he
                 selection.visible = value;
             },
         })
-        .merge({ jiggle, onPress, escape, center, textObj })
+        .merge({ jiggle, onPress, escape, center, textObj, canPress: true })
         .step(() => {
             if (factor > 0) {
                 c.pivot.x = (factor % 2 === 0 ? 1 : -1) * Math.ceil(factor / 6);
@@ -49,6 +49,9 @@ export function objUiButton(text: string, onPress: () => unknown, width = 96, he
             }
             else
                 c.pivot.x = 0;
+
+            if (!c.canPress)
+                return;
     
             if (c.selected && Input.justWentDown('Confirm')) {
                 c.onPress();

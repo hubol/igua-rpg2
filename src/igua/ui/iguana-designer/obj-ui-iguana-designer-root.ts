@@ -2,6 +2,7 @@ import { objText } from "../../../assets/fonts";
 import { Sfx } from "../../../assets/sounds";
 import { lerp } from "../../../lib/game-engine/promise/lerp";
 import { sleep } from "../../../lib/game-engine/promise/sleep";
+import { wait } from "../../../lib/game-engine/promise/wait";
 import { approachLinear } from "../../../lib/math/number";
 import { container } from "../../../lib/pixi/container";
 import { SceneLocal } from "../../core/scene/scene-local";
@@ -126,8 +127,19 @@ function objUiSavePage() {
     const width = 96;
     const gap = Math.floor((256 - (width * 2)) / 3);
 
+    const yesButton = objUiButton('Yes', () => {
+        // TODO confirm sfx?
+        yesButton.canPress = false;
+        yesButton.async(async () => {
+            await wait(() => puppet.atYesButton);
+            await sleep(500);
+            // TODO show transition?
+            page.destroy();
+        });
+    }, width).jiggle().center().at(gap, 160);
+
     const page = objUiPage([
-        objUiButton('Yes', () => {}, width).center().at(gap, 160),
+        yesButton,
         objUiButton('No', () => UiIguanaDesignerContext.value.router.pop(), width).center().at(width + gap * 2, 160),
     ], { selectionIndex: 1 }).named('Save');
 
@@ -139,12 +151,15 @@ function objUiSavePage() {
 
     let prev = 0;
     const puppet = objIguanaPuppet(looks).at(128, 157)
+    .merge({ atYesButton: false })
     .step(() => { prev = puppet.x; })
     .step(() => {
         const dx = getDesiredX();
         const diff = dx - puppet.x;
 
         puppet.facing = approachLinear(puppet.facing, Math.sign(diff || puppet.facing), 0.1);
+
+        puppet.atYesButton = puppet.facing === -1 && diff === 0;
         
         if (diff === 0)
             return;
