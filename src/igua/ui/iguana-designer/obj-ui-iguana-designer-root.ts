@@ -1,3 +1,4 @@
+import { BLEND_MODES } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Sfx } from "../../../assets/sounds";
 import { lerp } from "../../../lib/game-engine/promise/lerp";
@@ -6,6 +7,7 @@ import { wait } from "../../../lib/game-engine/promise/wait";
 import { approachLinear } from "../../../lib/math/number";
 import { container } from "../../../lib/pixi/container";
 import { SceneLocal } from "../../core/scene/scene-local";
+import { layers } from "../../globals";
 import { ConnectedInput } from "../../iguana/connected-input";
 import { getDefaultLooks } from "../../iguana/get-default-looks";
 import { IguanaLooks } from "../../iguana/looks";
@@ -129,12 +131,15 @@ function objUiSavePage() {
 
     const yesButton = objUiButton('Yes', () => {
         // TODO confirm sfx?
+        page.navigation = false;
         yesButton.canPress = false;
         yesButton.async(async () => {
             await wait(() => puppet.atYesButton);
-            await sleep(500);
-            // TODO show transition?
+            layers.solidOverlay.blendMode = BLEND_MODES.SUBTRACT;
+            await layers.solidOverlay.fadeIn(500);
+            // TODO do something else other than destroy the page!
             page.destroy();
+            await layers.solidOverlay.fadeOut(500);
         });
     }, width).jiggle().center().at(gap, 160);
 
