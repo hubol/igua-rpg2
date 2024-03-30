@@ -7,7 +7,7 @@ import { wait } from "../../../lib/game-engine/promise/wait";
 import { approachLinear } from "../../../lib/math/number";
 import { container } from "../../../lib/pixi/container";
 import { SceneLocal } from "../../core/scene/scene-local";
-import { layers } from "../../globals";
+import { Cutscene, layers, sceneStack } from "../../globals";
 import { ConnectedInput } from "../../iguana/connected-input";
 import { getDefaultLooks } from "../../iguana/get-default-looks";
 import { IguanaLooks } from "../../iguana/looks";
@@ -19,6 +19,7 @@ import { UiColor, UiStyle } from "../ui-color";
 import { createUiConnectedInputPageElements } from "./components/obj-ui-connected-input-page";
 import { objUiDesignerNavigationButton } from "./components/obj-ui-designer-button";
 import { objUiIguanaDesignerInspirationPage } from "./pages/obj-ui-iguana-designer-inspiration-page";
+import { PlayerTest } from "../../scenes/player-test";
 
 function context() {
     let looks = getDefaultLooks();
@@ -133,11 +134,12 @@ function objUiSavePage() {
         // TODO confirm sfx?
         page.navigation = false;
         yesButton.canPress = false;
-        yesButton.async(async () => {
+        Cutscene.play(async () => {
             await wait(() => puppet.atYesButton);
             layers.solidOverlay.blendMode = BLEND_MODES.SUBTRACT;
             await layers.solidOverlay.fadeIn(500);
-            // TODO do something else other than destroy the page!
+            const looks = UiIguanaDesignerContext.value.looks;
+            sceneStack.replace(() => PlayerTest(looks), { useGameplay: false });
             page.destroy();
             await layers.solidOverlay.fadeOut(500);
         });
