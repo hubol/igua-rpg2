@@ -2,7 +2,7 @@ import { Container, Graphics, Rectangle } from "pixi.js";
 import { container } from "../../../lib/pixi/container";
 import { cyclic } from "../../../lib/math/number";
 import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
-import { Input, forceGameLoop } from "../../globals";
+import { Input, forceGameLoop, renderer } from "../../globals";
 import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 import { UiColor } from "../ui-color";
 import { Undefined } from "../../../lib/types/undefined";
@@ -64,7 +64,7 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
 
     const scrollBarObj = objScrollBar().show(c);
 
-    const mask = new Graphics().beginFill(0xffffff).drawRect(0, 0, 256, 1).show(maskedObj);
+    const mask = new Graphics().beginFill(0xffffff).drawRect(0, 0, renderer.width, 1).show(maskedObj);
 
     updateSelection();
 
@@ -85,10 +85,10 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
         let fromBehind = false;
         const dd = Math.abs(dx) + Math.abs(dy);
 
-        // TODO still slightly bizarre values
+        const maximumRendererEdge = Math.max(renderer.width, renderer.height);
         const maximumDimension = Math.max(elementsObj.width, elementsObj.height);
-        const maximumTravel = Math.max(600, Math.round(maximumDimension * 2.33));
-        const halfTravel = Math.max(256, maximumDimension);
+        const maximumTravel = Math.max(maximumRendererEdge * 2.33, Math.round(maximumDimension * 2.33));
+        const halfTravel = Math.max(maximumRendererEdge, maximumDimension);
 
         while (d < maximumTravel) {
             const offset = [-ax, -ay];

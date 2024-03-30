@@ -1,6 +1,7 @@
 import { BLEND_MODES, Container, Graphics } from "pixi.js";
 import { Undefined } from "../../../lib/types/undefined";
 import { lerp } from "../../../lib/game-engine/promise/lerp";
+import { renderer } from "../../globals";
 
 export function objSolidOverlay() {
     let dirty = true;
@@ -24,7 +25,7 @@ export function objSolidOverlay() {
                 g.tint = 0xffffff;
                 // REPORTME: It seems like mesh needs to be modified for Pixi to
                 // pick up the change with blend modes / tint?
-                g.clear().beginFill(0xffffff).drawRect(0, 0, 256, 256);
+                g.clear().beginFill(0xffffff).drawRect(0, 0, renderer.width, renderer.height);
                 dirty = false;
             }
         })

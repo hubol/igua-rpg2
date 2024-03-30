@@ -5,6 +5,7 @@ import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 import { Logging } from "../../../lib/logging";
 import { Container, Graphics } from "pixi.js";
 import { merge } from "../../../lib/object/merge";
+import { renderer } from "../../globals";
 
 interface IguaSceneMeta {
     useGameplay: false;
@@ -19,7 +20,7 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
 
     root.addChild(background, stage);
 
-    const backgroundGfx = new Graphics().tinted(0x000000).beginFill(0xffffff).drawRect(0, 0, 256, 256).show(background);
+    const backgroundGfx = new Graphics().tinted(0x000000).beginFill(0xffffff).drawRect(0, 0, renderer.width, renderer.height).show(background);
 
     return {
         set backgroundTint(tint: number) {

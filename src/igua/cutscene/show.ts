@@ -2,7 +2,7 @@ import { Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { container } from "../../lib/pixi/container";
 import { approachLinear } from "../../lib/math/number";
-import { Input, layers } from "../globals";
+import { Input, layers, renderer } from "../globals";
 import { wait } from "../../lib/game-engine/promise/wait";
 import { UiColor } from "../ui/ui-color";
 
@@ -66,7 +66,7 @@ function objMessageBox(text: string) {
     text1.mask = mask1;
     text2.mask = mask2;
 
-    const x = Math.round((256 - width) / 2);
+    const x = Math.round((renderer.width - width) / 2);
     return c.at(x, x).show(layers.hud);
 }
 
