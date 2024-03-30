@@ -4,6 +4,7 @@ import { Zone } from "../zone";
 import { AsshatMicrotaskFactory } from "./promise/asshat-microtasks";
 import { IAsshatTicker } from "./asshat-ticker";
 import { ErrorReporter } from "./error-reporter";
+import { DexiePromise } from "../zone/dexie/promise";
 
 interface AsshatZoneContext {
     cancellationToken: CancellationToken;
@@ -19,12 +20,16 @@ class AsshatZoneImpl extends Zone<AsshatZoneContext> {
     }
 
     async run(fn: () => unknown, context: AsshatZoneContext): Promise<void> {
-        await new Promise<void>((resolve, reject) => {
-            const microtask = AsshatMicrotaskFactory.create(alwaysPredicate, context.cancellationToken, resolve, reject);
-            context.ticker.addMicrotask(microtask);
-        })
-
-        return super.run(fn, context).catch(handleAsshatZoneError);
+        try {
+            await new DexiePromise((resolve, reject) => {
+                const microtask = AsshatMicrotaskFactory.create(alwaysPredicate, context.cancellationToken, resolve as any, reject);
+                context.ticker.addMicrotask(microtask);
+            });
+            await super.run(fn, context);
+        }
+        catch (e) {
+            handleAsshatZoneError(e);
+        }
     }
 }
 

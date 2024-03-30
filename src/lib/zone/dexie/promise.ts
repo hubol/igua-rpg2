@@ -386,7 +386,7 @@ interface DexiePromiseConstructor {
   reject: typeof Promise['reject'];
 }
 
-const DexiePromise: DexiePromiseConstructor = <any>function DexiePromise(this: IDexiePromise, fn: PromiseExecutor, _state?: DexiePromiseState, _value?: PromiseValue) {
+export const DexiePromise: DexiePromiseConstructor = <any>function DexiePromise(this: IDexiePromise, fn: PromiseExecutor, _state?: DexiePromiseState, _value?: PromiseValue) {
   if (typeof this !== "object")
     throw new TypeError("Promises must be constructed via new");
   this._listeners = [];
