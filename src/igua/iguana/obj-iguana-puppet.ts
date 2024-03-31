@@ -137,7 +137,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
         body.tail.x = Math.round(facingPartialF * 2);
         body.tail.y = Math.round(-facingPartialF + (airborne > 0 ? 1 : 0));
 
-        body.tail.club?.at(body.tail);
+        body.tail.club?.at(body.tail.x, body.tail.club.isProbablyAttachedToTail ? body.tail.y : Math.round(-facingPartialF));
         
         head.x = Math.round(facingRight ? -facingPartialF * 5 : headOffset + facingPartialF * 5);
         head.y = Math.round(facingPartialF * 2 + ducking * headDuckMaximum + (airborne > 0 ? -headRaiseMaximum : 0));
@@ -365,7 +365,11 @@ function objIguanaFeet(feet: Feet) {
 type Body = IguanaLooks.Serializable['body'];
 
 function objIguanaBody(body: Body) {
-    const tail = new Sprite(IguanaShapes.Tail.Shapes[body.tail.shape]).merge({ club: objIguanaTailClub(body) });
+    const tailSpr = new Sprite(IguanaShapes.Tail.Shapes[body.tail.shape]);
+    const clubObj = objIguanaTailClub(body);
+
+    const tail = tailSpr
+        .merge({ club: clubObj?.merge({ isProbablyAttachedToTail: clubObj.collides(tailSpr) }) });
     tail.tint = body.tail.color;
     tail.pivot.set(5, 11).add(body.tail.placement, -1);
     const torso = new Sprite(IguanaShapes.Torso[0]);
