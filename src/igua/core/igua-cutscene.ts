@@ -1,28 +1,35 @@
-import { Container } from "pixi.js";
+import { Container, DisplayObject } from "pixi.js";
 import { CancellationError } from "../../lib/promise/cancellation-token";
+import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 
 type CutsceneFn = () => Promise<unknown>;
 
 export class IguaCutscene {
-    private readonly _container: Container;
+    private readonly _container: ReturnType<typeof IguaCutscene._objCutsceneContainer>;
 
     constructor(root: Container) {
-        this._container = new Container().named('IguaCutscene').show(root);
+        this._container = IguaCutscene._objCutsceneContainer().named('IguaCutscene').show(root);
+    }
+
+    private static _objCutsceneContainer() {
+        return new Container<DisplayObject & { fn: CutsceneFn }>();
     }
 
     play(fn: CutsceneFn) {
         if (this.isPlaying) {
-            // TODO warn? abort? error?
+            const context = { requestedCutsceneFn: fn, currentCutsceneFns: this._container.children.map(({ fn }) => fn) };
+            ErrorReporter.reportSubsystemError('IguaCutscene.play', 'Started cutscene while another was playing', context);
         }
         
         const runner = new Container().named('Cutscene Runner')
+            .merge({ fn })
             .async(async () => {
                 try {
                     await fn();
                 }
                 catch (e) {
                     if (!(e instanceof CancellationError))
-                        console.error('Unexpected error while running cutscene', e);
+                        ErrorReporter.reportSubsystemError('IguaCutscene.runner', e);
                 }
                 finally {
                     if (!runner.destroyed)
