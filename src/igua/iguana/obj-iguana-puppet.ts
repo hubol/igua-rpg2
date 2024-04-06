@@ -7,6 +7,7 @@ import { objEye, objEyes } from "./obj-eye";
 import { Rng } from "../../lib/math/rng";
 import { Force } from "../../lib/types/force";
 import { Integer, Polar, Unit, ZeroOrGreater } from "../../lib/math/number-alias-types";
+import { vnew } from "../../lib/math/vector-type";
 
 const r1 = new Rectangle();
 const r2 = new Rectangle();
@@ -364,12 +365,26 @@ function objIguanaFeet(feet: Feet) {
 
 type Body = IguanaLooks.Serializable['body'];
 
+const tailClubOffets = [
+    vnew(),
+    vnew(0, -1),
+    vnew(1, -1),
+    vnew(1, 0),
+    vnew(1, 1),
+    vnew(0, 1),
+    vnew(-1, 1),
+    vnew(-1, 0),
+    vnew(-1, -1),
+];
+
 function objIguanaBody(body: Body) {
     const tailSpr = new Sprite(IguanaShapes.Tail.Shapes[body.tail.shape]);
     const clubObj = objIguanaTailClub(body);
 
     const tail = tailSpr
-        .merge({ club: clubObj?.merge({ isProbablyAttachedToTail: clubObj.collides(tailSpr) }) });
+        .merge({ club: clubObj?.merge({
+            isProbablyAttachedToTail: tailClubOffets.some(offset => clubObj.collides(tailSpr, offset))
+        }) });
     tail.tint = body.tail.color;
     tail.pivot.set(5, 11).add(body.tail.placement, -1);
     const torso = new Sprite(IguanaShapes.Torso[0]);
