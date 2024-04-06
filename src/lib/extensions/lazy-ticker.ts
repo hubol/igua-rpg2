@@ -1,7 +1,7 @@
 import { AsshatMicrotask } from "../game-engine/promise/asshat-microtasks";
 import { AsshatTicker, AsshatTickerFn, IAsshatTicker } from "../game-engine/asshat-ticker";
 
-type QueuedCall = { fn: 'add' | 'remove'; arg: AsshatTickerFn } | { fn: 'addMicrotask', arg: AsshatMicrotask };
+type QueuedCall = { fn: 'add'; arg1: AsshatTickerFn; arg2: number; } | { fn: 'remove'; arg1: AsshatTickerFn } | { fn: 'addMicrotask', arg1: AsshatMicrotask };
 
 export class LazyTicker implements IAsshatTicker {
     readonly _isLazy = true;
@@ -16,22 +16,22 @@ export class LazyTicker implements IAsshatTicker {
         this._receivers = [ receiver ];
     }
 
-    add(arg: AsshatTickerFn) {
+    add(arg1: AsshatTickerFn, arg2: number) {
         if (this._resolved)
             throw new InvalidLazyTickerAccess(`Attempt to enqueue add() call on already-resolved LazyTicker`, this);
-        this._queuedCalls.push({ fn: 'add', arg });
+        this._queuedCalls.push({ fn: 'add', arg1, arg2 });
     }
 
-    remove(arg: AsshatTickerFn) {
+    remove(arg1: AsshatTickerFn) {
         if (this._resolved)
             throw new InvalidLazyTickerAccess(`Attempt to enqueue remove() call on already-resolved LazyTicker`, this);
-        this._queuedCalls.push({ fn: 'remove', arg });
+        this._queuedCalls.push({ fn: 'remove', arg1 });
     }
 
-    addMicrotask(arg: AsshatMicrotask): void {
+    addMicrotask(arg1: AsshatMicrotask): void {
         if (this._resolved)
             throw new InvalidLazyTickerAccess(`Attempt to enqueue addMicrotask() call on already-resolved LazyTicker`, this);
-        this._queuedCalls.push({ fn: 'addMicrotask', arg });
+        this._queuedCalls.push({ fn: 'addMicrotask', arg1 });
     }
 
     push(lazyTicker: LazyTicker) {
@@ -45,7 +45,7 @@ export class LazyTicker implements IAsshatTicker {
 
         for (let i = 0; i < this._queuedCalls.length; i++) {
             const call = this._queuedCalls[i];
-            ticker[call.fn](call.arg as any);
+            ticker[call.fn](call.arg1 as any, (call as any).arg2);
         }
 
         for (let i = 0; i < this._receivers.length; i++) {

@@ -5,7 +5,7 @@ import { LazyTicker, isLazyTicker } from "./lazy-ticker";
 declare module "pixi.js" {
     interface DisplayObject {
         readonly ticker: IAsshatTicker;
-        step(fn: (self: this) => unknown): this;
+        step(fn: (self: this) => unknown, order?: number): this;
     }
 }
 
@@ -74,10 +74,10 @@ Object.defineProperties(DisplayObject.prototype, {
         configurable: true,
     },
     step: {
-        value: function (this: DisplayObject, stepFn: (self?: any) => unknown) {
+        value: function (this: DisplayObject, stepFn: (self?: any) => unknown, order = 0) {
             if (stepFn.length)
                 stepFn = stepFn.bind(null, this);
-            this.ticker.add(stepFn);
+            this.ticker.add(stepFn, order);
             this.once('destroyed', () => this.ticker.remove(stepFn));
             return this;
         },

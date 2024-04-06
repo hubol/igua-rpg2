@@ -168,11 +168,11 @@ export function canAddMultipleStepFnsToOneDisplayObject() {
 
     d.destroy();
 
-    Assert((ticker as any)._callbacks.length).toStrictlyBe(2);
+    Assert((ticker as any)._callbacks[0].length).toStrictlyBe(2);
 
     ticker.tick();
 
-    Assert((ticker as any)._callbacks.length).toStrictlyBe(0);
+    Assert((ticker as any)._callbacks[0].length).toStrictlyBe(0);
 }
 
 export function childClimbsHierarchyToGetTicker() {

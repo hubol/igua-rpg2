@@ -8,7 +8,8 @@ export class TickerContainer extends Container {
             const tickFn = () => _ticker.tick();
             this.once('added', () => {
                 const parent = this.parent;
-                parent.ticker.add(tickFn);
+                // TODO might want to specify order?
+                parent.ticker.add(tickFn, 0);
                 this.once('destroyed', () => parent.ticker.remove(tickFn));
             });
         }
