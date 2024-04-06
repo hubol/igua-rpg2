@@ -23,10 +23,26 @@ function createSceneSwitcherEl() {
 
     const noChoiceString = 'no-choice';
 
-    selectEl.onchange = () => {
-        if (selectEl.value !== noChoiceString)
-            sceneStack.replace(SceneLibrary.findByName(selectEl.value), { useGameplay: false });
-    };
+    let expectClickEvent = false;
+
+    selectEl.addEventListener('change',  () => {
+        expectClickEvent = true;
+        selectEl.blur();
+    });
+
+    selectEl.addEventListener('click', () => {
+        if (expectClickEvent) {
+            if (selectEl.value !== noChoiceString)
+                sceneStack.replace(SceneLibrary.findByName(selectEl.value), { useGameplay: false });
+            expectClickEvent = false;
+        }
+    })
+
+    selectEl.addEventListener('keyup', (e) => {
+        if (e.code === 'Escape') {
+            selectEl.blur();
+        }
+    })
 
     const noChoiceOptionEl = document.createElement('option');
     noChoiceOptionEl.textContent = '<Choose Scene>';
