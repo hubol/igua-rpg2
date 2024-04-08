@@ -6,6 +6,7 @@ import "./pixi-color";
 import "./pixi-container-flip";
 import "./pixi-displayobject-async";
 import "./pixi-displayobject-convenience";
+import "./pixi-displayobject-mixin";
 import "./pixi-displayobject-ticker";
 import "./pixi-rectangle";
 import "./pixi-rounding";
