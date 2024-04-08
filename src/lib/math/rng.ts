@@ -1,3 +1,5 @@
+import { vnew } from "./vector-type";
+
 class RngBase {
     protected random() {
         return Math.random();
@@ -42,6 +44,13 @@ class RngBase {
 
     color() {
         return Math.round(this.random() * 0xffffff);
+    }
+
+    vunit() {
+        const radians = Math.PI * 2 * this.random();
+        const v = vnew(Math.cos(radians), Math.sin(radians));
+        v.vlength = 1;
+        return v;
     }
 }
 
