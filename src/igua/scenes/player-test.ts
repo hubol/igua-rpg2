@@ -1,11 +1,18 @@
-import { Graphics } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { container } from "../../lib/pixi/container";
-import { objPlayer } from "../objects/obj-player";
+import { createPlayerObj } from "../objects/obj-player";
+import { Tx } from "../../assets/textures";
+import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { show } from "../cutscene/show";
 
 export function PlayerTest(looks = playerLooksJson) {
     const horizon = new Graphics().beginFill(0x813768).drawRect(0, 0, 256, 256).at(0, 128).show();
     const playerContainer = container().at(0, horizon.y + 2).show();
-    objPlayer(looks).show(playerContainer);
+    createPlayerObj(looks).show(playerContainer);
+
+    Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
+        await show('Hello!');
+    }).show()
 }
 
 const playerLooksJson = {

@@ -13,7 +13,7 @@ const PlayerConsts = {
     Gravity: 0.1,
 }
 
-export function objPlayer(looks: IguanaLooks.Serializable) {
+function objPlayer(looks: IguanaLooks.Serializable) {
     let lastNonZeroSpeedXSign = 0;
 
     const puppet = objIguanaPuppet(looks)
@@ -81,4 +81,10 @@ export function objPlayer(looks: IguanaLooks.Serializable) {
         });
 
     return puppet;
+}
+
+export let playerObj: ReturnType<typeof objPlayer>;
+
+export function createPlayerObj(looks: IguanaLooks.Serializable) {
+    return playerObj = objPlayer(looks);
 }
