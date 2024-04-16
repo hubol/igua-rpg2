@@ -1,6 +1,6 @@
 import { Logging } from "../logging";
 import { CancellationError, CancellationToken } from "../promise/cancellation-token";
-import { Zone } from "../zone";
+import { Zone } from "../zone/zone";
 import { AsshatMicrotaskFactory } from "./promise/asshat-microtasks";
 import { IAsshatTicker } from "./asshat-ticker";
 import { ErrorReporter } from "./error-reporter";
