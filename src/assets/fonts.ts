@@ -1,10 +1,10 @@
 import { BitmapFont, IBitmapTextStyle } from "pixi.js";
-import { JobProgress } from "../../lib/game-engine/job-progress";
-import { createBitmapFontFactory } from "../../lib/pixi/bitmap-font-factory";
-import { Force } from "../../lib/types/force";
+import { JobProgress } from "../lib/game-engine/job-progress";
+import { createBitmapFontFactory } from "../lib/pixi/bitmap-font-factory";
+import { Force } from "../lib/types/force";
 import { BitmapText } from "pixi.js";
-import { Tx } from "../textures";
-import { intervalWait } from "../../lib/browser/interval-wait";
+import { Tx } from "./textures";
+import { intervalWait } from "../lib/browser/interval-wait";
 
 type Style = Partial<Omit<IBitmapTextStyle, "fontName">>;
 
@@ -39,10 +39,10 @@ export async function loadFontAssets(progress: JobProgress) {
     };
 
     await Promise.all([
-        load("Diggit", require("./bitmap/Diggit.fnt"), "Diggit"),
-        load("Erotix", require("./bitmap/Erotix.fnt"), "Erotix"),
-        load("ErotixLight", require("./bitmap/ErotixLight.fnt"), "ErotixLight"),
-        load("Flaccid", require("./bitmap/Flaccid.fnt"), "Flaccid"),
+        load("Diggit", require("./font-bitmaps/Diggit.fnt"), "Diggit"),
+        load("Erotix", require("./font-bitmaps/Erotix.fnt"), "Erotix"),
+        load("ErotixLight", require("./font-bitmaps/ErotixLight.fnt"), "ErotixLight"),
+        load("Flaccid", require("./font-bitmaps/Flaccid.fnt"), "Flaccid"),
     ]);
 }
 
