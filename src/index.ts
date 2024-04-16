@@ -56,7 +56,7 @@ async function initialize() {
 }
 
 async function installExtensions() {
-    require("./lib/extensions");
+    require("./lib/extensions/-load-extensions");
     // Have observed bizarre behavior with Dexie
     // (In particular, PSD values seem to be missing)
     // without "flushing" Promises after requiring extensions...

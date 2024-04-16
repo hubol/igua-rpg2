@@ -1,4 +1,4 @@
-import "../../src/lib/extensions";
+import "../../src/lib/extensions/-load-extensions";
 import { Container } from "pixi.js";
 import { AsshatTicker } from "../../src/lib/game-engine/asshat-ticker";
 import { Assert } from "../lib/assert";

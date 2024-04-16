@@ -1,4 +1,4 @@
-import "../../src/lib/extensions";
+import "../../src/lib/extensions/-load-extensions";
 import { AsshatTicker } from "../../src/lib/game-engine/asshat-ticker";
 import { createDisplayObject } from "../lib/create-display-object";
 import { Assert } from "../lib/assert";
