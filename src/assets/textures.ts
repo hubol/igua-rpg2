@@ -1,5 +1,5 @@
 import { Assets, BaseTexture, Rectangle, SCALE_MODES, Texture } from "pixi.js";
-import { GeneratedTextureData } from "./generated/textures";
+import { GeneratedTextureData } from "./generated/textures/generated-texture-data";
 import { JobProgress } from "../lib/game-engine/job-progress";
 
 const { txs } = GeneratedTextureData;

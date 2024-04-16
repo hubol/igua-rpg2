@@ -1,6 +1,6 @@
 import { unzip } from "unzipit";
 import { JobProgress } from "../lib/game-engine/job-progress";
-import { GeneratedSfxData } from "./generated/sounds";
+import { GeneratedSfxData } from "./generated/sounds/generated-sfx-data";
 
 // @ts-expect-error
 import oggSoundsZipUrl from "./generated/sounds/sounds-ogg.zip";

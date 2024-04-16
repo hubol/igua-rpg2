@@ -1,4 +1,4 @@
-import { GeneratedMusicData } from "./generated/music";
+import { GeneratedMusicData } from "./generated/music/generated-music-data";
 
 type MusicId = keyof typeof GeneratedMusicData;
 

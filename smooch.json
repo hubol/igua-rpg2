@@ -8,7 +8,7 @@
 				"filePrefix": "atlas"
 			},
 			"template": {
-				"out": "src/assets/generated/textures/index.ts",
+				"out": "src/assets/generated/textures/generated-texture-data.ts",
 				"program": "src/assets/template/textures.js"
 			}
 		}
@@ -23,7 +23,7 @@
 				}
 			],
 			"template": {
-				"out": "src/assets/generated/sounds/index.ts",
+				"out": "src/assets/generated/sounds/generated-sfx-data.ts",
 				"program": "src/assets/template/sounds.js"
 			}
 		},
@@ -36,7 +36,7 @@
 				}
 			],
 			"template": {
-				"out": "src/assets/generated/music/index.ts",
+				"out": "src/assets/generated/music/generated-music-data.ts",
 				"program": "src/assets/template/music.js"
 			}
 		}
