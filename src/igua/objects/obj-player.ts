@@ -1,6 +1,6 @@
 import { approachLinear } from "../../lib/math/number";
 import { vnew } from "../../lib/math/vector-type";
-import { Input } from "../globals";
+import { Cutscene, Input } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 
@@ -18,10 +18,12 @@ function objPlayer(looks: IguanaLooks.Serializable) {
 
     const puppet = objIguanaPuppet(looks)
         .merge({ speed: vnew(), isOnGround: true }) // TODO probably from some physics engine base
+        .merge({ get hasControl() { return !Cutscene.isPlaying; } })
         .step(() => {
-            const moveLeft = Input.isDown('MoveLeft');
-            const moveRight = Input.isDown('MoveRight');
-            const duck = Input.isDown('Duck');
+            const hasControl = puppet.hasControl;
+            const moveLeft = hasControl && Input.isDown('MoveLeft');
+            const moveRight = hasControl && Input.isDown('MoveRight');
+            const duck = hasControl && Input.isDown('Duck');
 
             // TODO collision system
             puppet.isOnGround = puppet.y >= 0;
@@ -38,7 +40,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             else if (moveRight)
                 puppet.speed.x = Math.min(puppet.speed.x + PlayerConsts.WalkingDeceleration, PlayerConsts.WalkingTopSpeed);
 
-            if (puppet.isOnGround && Input.justWentDown('Jump')) {
+            if (puppet.isOnGround && hasControl && Input.justWentDown('Jump')) {
                 puppet.speed.y = PlayerConsts.JumpSpeed;
             }
 
