@@ -4,6 +4,9 @@ import { createPlayerObj } from "../objects/obj-player";
 import { Tx } from "../../assets/textures";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { show } from "../cutscene/show";
+import { objSolidBlock, wallsIterate } from "../objects/obj-wall";
+import { Input } from "../globals";
+import { Rng } from "../../lib/math/rng";
 
 export function PlayerTest(looks = playerLooksJson) {
     const horizon = new Graphics().beginFill(0x813768).drawRect(0, 0, 256, 256).at(0, 128).show();
@@ -13,6 +16,20 @@ export function PlayerTest(looks = playerLooksJson) {
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
         await show('Hello!');
     }).show()
+
+    objSolidBlock().at(128, 100).step(block => {
+        if (Input.isDown('SelectUp'))
+            block.y -= 1;
+
+        if (Input.justWentDown('CastSpell')) {
+            block.x = Rng.int(32, 200);
+            block.y = Rng.int(32, 100);
+            block.width = Rng.int(8, 64);
+            block.height = Rng.int(8, 64);
+        }
+
+        wallsIterate();
+    }).show();
 }
 
 const playerLooksJson = {
