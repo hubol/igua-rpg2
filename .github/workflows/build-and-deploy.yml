@@ -15,6 +15,7 @@ jobs:
           sparse-checkout: |
             public
             src
+            tools
             esbuild.mjs
             package-lock.json
             package.json
