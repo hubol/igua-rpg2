@@ -1,6 +1,8 @@
 import { DisplayObject } from "pixi.js";
 
-type Mixed<TMinimum, TDst, TThis> = TThis extends TMinimum ? TThis & TDst : never;
+type TypeError_ThisDoesNotSufficientlyImplementMinimum = 'This DisplayObject does not sufficiently implement the mixin minimum type';
+
+type Mixed<TMinimum, TDst, TThis> = TThis extends TMinimum ? TThis & TDst : TypeError_ThisDoesNotSufficientlyImplementMinimum;
 
 // https://www.reddit.com/r/typescript/comments/13pyj7b/comment/jldm59b/
 type ExcludeFirstParameter<T extends [p1: unknown, ...pR: unknown[]]> = T extends [infer _First, ...infer Rest] ? Rest : never;
