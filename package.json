@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "The sequel to IguaRPG",
   "scripts": {
+    "postinstall": "npm run patch",
     "build": "node esbuild.mjs",
+    "patch": "npm run tool -- patch-dependencies",
     "serve": "node esbuild.mjs serve",
     "test": "tsx test/run.ts",
     "test:watch": "nodemon --watch src --watch test -e ts,js,json -x npm run test",
