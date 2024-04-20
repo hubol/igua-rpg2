@@ -1,10 +1,13 @@
 import { DisplayObject } from "pixi.js";
 
-type MixinFunctionVarArgs<TSrc extends DisplayObject, TDst extends TSrc, TArgs extends Array<unknown>> = (src: TSrc, ...args: TArgs) => TDst
+type Mixed<TMinimum, TDst, TThis> = TThis extends TMinimum ? TThis & TDst : never;
+
+// https://www.reddit.com/r/typescript/comments/13pyj7b/comment/jldm59b/
+type ExcludeFirstParameter<T extends [p1: unknown, ...pR: unknown[]]> = T extends [infer _First, ...infer Rest] ? Rest : never;
 
 declare module "pixi.js" {
     interface DisplayObject {
-        mixin<TDst extends this, TArgs extends Array<unknown>>(mixin: MixinFunctionVarArgs<this, TDst, TArgs>, ...args: TArgs): this & Omit<TDst, keyof this>;
+        mixin<TArgs extends [src: any, ...rest: any[]], TFn extends (...args: TArgs) => any>(mixin: TFn, ...args: ExcludeFirstParameter<Parameters<TFn>>): Mixed<Parameters<TFn>[0], ReturnType<TFn>, this>;
     }
 }
 
