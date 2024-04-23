@@ -3,6 +3,7 @@ import { Vector } from "../../lib/math/vector-type";
 import { Empty } from "../../lib/types/empty";
 import { SceneLocal } from "../core/scene/scene-local";
 import { Compass } from "../../lib/math/compass";
+import { scene } from "../globals";
 
 interface Wall {
     x: number;
@@ -10,6 +11,7 @@ interface Wall {
     forward: Vector;
     normal: Vector;
     length: number;
+    // TODO determine what properties are necessary
     isGround?: boolean;
     isCeiling?: boolean;
     isWall?: boolean;
@@ -24,7 +26,7 @@ interface WallsProvider {
     walls: Wall[];
 }
 
-export function wallsIterate() {
+function cleanWalls() {
     const walls = LocalWalls.value;
 
     let i = 0;
@@ -42,27 +44,31 @@ export function wallsIterate() {
         if (wall.wallsDirty)
             wall.wallsClean!();
 
-        // TODO do stuff with wall info
-
         if (shift)
             walls[i - shift] = wall;
         i += 1;
     }
 }
 
-export const LocalWalls = new SceneLocal(() => Empty<WallsProvider>(), 'LocalWalls');
+function createLocalWalls() {
+    // TODO enum for stepOrder?!
+    scene.root.step(cleanWalls, 999);
+    return Empty<WallsProvider>();
+}
+
+export const LocalWalls = new SceneLocal(createLocalWalls, 'LocalWalls');
 
 export function objSolidBlock() {
-    const n: Wall = { x: 0, y: 0, forward: Compass.East, normal: Compass.North, length: 1 };
-    const e: Wall = { x: 1, y: 0, forward: Compass.South, normal: Compass.East, length: 1 };
-    const s: Wall = { x: 1, y: 1, forward: Compass.West, normal: Compass.South, length: 1 };
-    const w: Wall = { x: 0, y: 1, forward: Compass.North, normal: Compass.West, length: 1 };
+    const n: Wall = { x: 0, y: 0, forward: Compass.East, normal: Compass.North, length: 1, isGround: true };
+    const e: Wall = { x: 1, y: 0, forward: Compass.South, normal: Compass.East, length: 1, isWall: true };
+    const s: Wall = { x: 1, y: 1, forward: Compass.West, normal: Compass.South, length: 1, isCeiling: true };
+    const w: Wall = { x: 0, y: 1, forward: Compass.North, normal: Compass.West, length: 1, isWall: true };
 
     function wallsClean() {
-        const scaleX = g.transform.scale.x;
-        const scaleY = g.transform.scale.y;
-        const x = g.transform.position.x + Math.max(scaleX, 0);
-        const y = g.transform.position.y + Math.max(scaleY, 0);
+        const scaleX = g.scale.x;
+        const scaleY = g.scale.y;
+        const x = g.x - Math.max(-scaleX, 0);
+        const y = g.y - Math.max(-scaleY, 0);
         const width = Math.abs(scaleX);
         const height = Math.abs(scaleY);
 

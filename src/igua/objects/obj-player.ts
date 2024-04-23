@@ -3,6 +3,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { Cutscene, Input } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
+import { mxnPhysics } from "../mixins/mxn-physics";
 
 const PlayerConsts = {
     // TODO probably not constants, probably derived from status
@@ -17,7 +18,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     let lastNonZeroSpeedXSign = 0;
 
     const puppet = objIguanaPuppet(looks)
-        .merge({ speed: vnew(), isOnGround: true }) // TODO probably from some physics engine base
+        .mixin(mxnPhysics, { gravity: 0.1, physicsRadius: 8, physicsOffset: [0, -10] })
         .merge({ get hasControl() { return !Cutscene.isPlaying; } })
         .step(() => {
             const hasControl = puppet.hasControl;
@@ -26,7 +27,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             const duck = hasControl && Input.isDown('Duck');
 
             // TODO collision system
-            puppet.isOnGround = puppet.y >= 0;
+            // puppet.isOnGround = puppet.y >= 0;
 
             // TODO probably expose so that attackers can see this?
             const isDucking = duck && puppet.isOnGround;
@@ -50,7 +51,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 if (puppet.speed.y > 0) {
                     puppet.landingFrames = 10;
                     puppet.speed.y = 0;
-                    puppet.y = 0;
+                    // puppet.y = 0;
                 }
             }
             else {
@@ -77,9 +78,6 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 0.1);
 
             puppet.ducking = approachLinear(puppet.ducking, isDucking ? 1 : 0, 0.075);
-        })
-        .step(() => {
-            puppet.add(puppet.speed);
         });
 
     return puppet;

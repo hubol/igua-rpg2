@@ -1,17 +1,16 @@
-import { Graphics, Sprite } from "pixi.js";
-import { container } from "../../lib/pixi/container";
+import { Sprite } from "pixi.js";
 import { createPlayerObj } from "../objects/obj-player";
 import { Tx } from "../../assets/textures";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { show } from "../cutscene/show";
-import { objSolidBlock, wallsIterate } from "../objects/obj-wall";
+import { objSolidBlock } from "../objects/obj-wall";
 import { Input } from "../globals";
 import { Rng } from "../../lib/math/rng";
 
 export function PlayerTest(looks = playerLooksJson) {
-    const horizon = new Graphics().beginFill(0x813768).drawRect(0, 0, 256, 256).at(0, 128).show();
-    const playerContainer = container().at(0, horizon.y + 2).show();
-    createPlayerObj(looks).show(playerContainer);
+    const b = objSolidBlock().at(64, 160).show();
+    b.width = 128;
+    b.height = 32;
 
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
         await show('Hello!');
@@ -23,13 +22,13 @@ export function PlayerTest(looks = playerLooksJson) {
 
         if (Input.justWentDown('CastSpell')) {
             block.x = Rng.int(32, 200);
-            block.y = Rng.int(32, 100);
+            block.y = Rng.int(32, 200);
             block.width = Rng.int(8, 64);
             block.height = Rng.int(8, 64);
         }
-
-        wallsIterate();
     }).show();
+
+    createPlayerObj(looks).at(128, 40).show();
 }
 
 const playerLooksJson = {
