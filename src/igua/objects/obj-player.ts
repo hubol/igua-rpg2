@@ -1,5 +1,4 @@
 import { approachLinear } from "../../lib/math/number";
-import { vnew } from "../../lib/math/vector-type";
 import { Cutscene, Input } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
@@ -18,7 +17,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     let lastNonZeroSpeedXSign = 0;
 
     const puppet = objIguanaPuppet(looks)
-        .mixin(mxnPhysics, { gravity: 0.1, physicsRadius: 8, physicsOffset: [0, -10] })
+        .mixin(mxnPhysics, { gravity: 0.1, physicsRadius: 8, physicsOffset: [0, -10], debug: false })
         .merge({ get hasControl() { return !Cutscene.isPlaying; } })
         .step(() => {
             const hasControl = puppet.hasControl;
@@ -48,10 +47,10 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             puppet.isAirborne = !puppet.isOnGround;
 
             if (puppet.isOnGround) {
-                if (puppet.speed.y > 0) {
+                // TODO it is not clear how I am on the ground with > 1.2 speed.y
+                if (puppet.speed.y > 1.2) {
                     puppet.landingFrames = 10;
                     puppet.speed.y = 0;
-                    // puppet.y = 0;
                 }
             }
             else {

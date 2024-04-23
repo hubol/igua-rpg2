@@ -1,4 +1,4 @@
-import { DisplayObject } from "pixi.js";
+import { Container, DisplayObject, Graphics } from "pixi.js";
 import { Vector, vnew } from "../../lib/math/vector-type";
 import { LocalWalls } from "../objects/obj-wall";
 import { dot } from "../../lib/math/vector";
@@ -7,10 +7,15 @@ interface PhysicsArgs {
     gravity: number;
     physicsRadius: number;
     physicsOffset?: Vector;
+    // TODO allow specifying debug color?
+    debug?: boolean;
 }
 
 // TODO should it actually accept + apply gravity?
-export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physicsOffset = vnew() }: PhysicsArgs) {
+export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physicsOffset = vnew(), debug = false }: PhysicsArgs) {
+    if (debug && obj instanceof Container)
+        obj.addChild(new Graphics().step(gfx => gfx.clear().beginFill(0xff0000).drawCircle(physicsOffset.x, physicsOffset.y, physicsRadius)));
+
     return obj
         .merge({ speed: vnew(), gravity, isOnGround: false, physicsRadius, physicsOffset })
         .step(obj => {
@@ -64,9 +69,6 @@ function move(obj: MxnPhysics) {
 
         hspAbs = Math.abs(hsp);
         vspAbs = Math.abs(vsp);
-
-        // const length = Math.min(totalLength, obj.physicsRadius);
-        // totalLength -= length;
     }
 }
 
@@ -74,7 +76,10 @@ const vObjPosition = vnew();
 const v = vnew();
 
 function push(obj: MxnPhysics, correctPosition = true, result = _result) {
-    const xy = vObjPosition.at(obj).add(obj.physicsOffset);
+    const physicsOffsetX = obj.physicsOffset.x;
+    const physicsOffsetY = obj.physicsOffset.y;
+
+    const xy = vObjPosition.at(obj).add(physicsOffsetX, physicsOffsetY);
 
     const speed = obj.speed;
     const radius = obj.physicsRadius;
@@ -95,38 +100,37 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
             const offset = v.at(xy.x - wall.x, xy.y - wall.y);
             const offsetDotNormal = dot(offset, wall.normal);
             const offsetDotForward = dot(offset, wall.forward);
-            // TODO I think there is a long-standing bug here!
-            const alongForward = offsetDotForward > 0 && offsetDotForward < wall.length;
+            const speedDotNormal = dot(speed, wall.normal);
+
+            const alongForward = (offsetDotForward > 0 && offsetDotForward < wall.length)
+                || (offsetDotForward > -radius && offsetDotForward < (wall.length + radius) && offsetDotNormal >= radius * 0.99);
+            
             const absOffsetDotNormal = Math.abs(offsetDotNormal);
 
-            const shouldCorrectPosition = !wall.isPipe
-                || ((speed.y > 0 && offsetDotNormal >= 0) || (speed.y === 0 && offsetDotNormal >= radius * .9))
-                || (wall.normal.x !== 0 && (speed.x !== 0 && Math.sign(wall.normal.x) !== Math.sign(speed.y)));
-            const isGround = wall.isGround && shouldCorrectPosition;
+            // TODO name needs work, value is eerily similar to shouldCorrectPosition
+            const shouldCorrectPosition = alongForward && speedDotNormal < 0 && absOffsetDotNormal < radius;
+            const isOnGround = wall.isGround && alongForward && absOffsetDotNormal <= radius * 1.01 && speedDotNormal <= 0;
 
-            if (alongForward && absOffsetDotNormal < radius + 0.1 && isGround) {
+            if (isOnGround) {
                 result.isOnGround = true;
                 // result.solidNormal = wall.normal;
                 // if (stopIfOnGround)
                 //     break;
             }
 
-            if (shouldCorrectPosition && absOffsetDotNormal < radius) {
-                if (alongForward) {
-                    if (isGround)
-                        result.hitGround = true;
-                    if (wall.isCeiling)
-                        result.hitCeiling = true;
-                    if (wall.isWall)
-                        result.hitWall = true;
+            if (shouldCorrectPosition) {
+                if (isOnGround)
+                    result.hitGround = true;
+                if (wall.isCeiling)
+                    result.hitCeiling = true;
+                if (wall.isWall)
+                    result.hitWall = true;
 
-                    // result.solidNormal = wall.normal;
+                // result.solidNormal = wall.normal;
 
-                    if (correctPosition) {
-                        obj.x = wall.x + wall.forward.x * offsetDotForward + wall.normal.x * radius;
-                        obj.y = wall.y + wall.forward.y * offsetDotForward + wall.normal.y * radius;
-                        obj.add(obj.physicsOffset, -1);
-                    }
+                if (correctPosition) {
+                    obj.x = wall.x + wall.forward.x * offsetDotForward + wall.normal.x * radius - physicsOffsetX;
+                    obj.y = wall.y + wall.forward.y * offsetDotForward + wall.normal.y * radius - physicsOffsetY;
                 }
             }
         }
