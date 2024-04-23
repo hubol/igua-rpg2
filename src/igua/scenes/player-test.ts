@@ -28,7 +28,10 @@ export function PlayerTest(looks = playerLooksJson) {
         }
     }).show();
 
-    createPlayerObj(looks).at(128, 40).show();
+    createPlayerObj(looks).at(128, 40).step(player => {
+        if (player.y > 256 + player.height)
+            player.y = 0;
+    }).show();
 }
 
 const playerLooksJson = {
