@@ -83,6 +83,7 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
 
     const speed = obj.speed;
     const radius = obj.physicsRadius;
+    const radiusLessMaxSpeed = radius - Math.sqrt(radius) - radius * 0.1;
 
     result.isOnGround = false;
     result.hitCeiling = false;
@@ -103,7 +104,7 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
             const speedDotNormal = dot(speed, wall.normal);
 
             const alongForward = (offsetDotForward > 0 && offsetDotForward < wall.length)
-                || (offsetDotForward > -radius && offsetDotForward < (wall.length + radius) && offsetDotNormal >= radius * 0.99);
+                || (offsetDotForward > -radius && offsetDotForward < (wall.length + radius) && offsetDotNormal >= radiusLessMaxSpeed);
             
             const absOffsetDotNormal = Math.abs(offsetDotNormal);
 
