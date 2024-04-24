@@ -17,7 +17,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     let lastNonZeroSpeedXSign = 0;
 
     const puppet = objIguanaPuppet(looks)
-        .mixin(mxnPhysics, { gravity: 0.1, physicsRadius: 8, physicsOffset: [0, -10], debug: false })
+        .mixin(mxnPhysics, { gravity: 0.1, physicsRadius: 7, physicsOffset: [0, -9], debug: false })
         .merge({ get hasControl() { return !Cutscene.isPlaying; } })
         .step(() => {
             const hasControl = puppet.hasControl;
