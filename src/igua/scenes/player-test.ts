@@ -3,7 +3,7 @@ import { createPlayerObj } from "../objects/obj-player";
 import { Tx } from "../../assets/textures";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { show } from "../cutscene/show";
-import { objSolidBlock } from "../objects/obj-wall";
+import { objSolidBlock, objSolidRamp } from "../objects/obj-wall";
 import { Input } from "../globals";
 import { Rng } from "../../lib/math/rng";
 
@@ -11,6 +11,10 @@ export function PlayerTest(looks = playerLooksJson) {
     const b = objSolidBlock().at(64, 160).show();
     b.width = 128;
     b.height = 32;
+
+    const b2 = objSolidBlock().at(56, 256 - 32).show();
+    b2.width = 200;
+    b2.height = 16;
 
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
         await show('Hello!');
@@ -27,6 +31,10 @@ export function PlayerTest(looks = playerLooksJson) {
             block.height = Rng.int(8, 64);
         }
     }).show();
+
+    const ramp = objSolidRamp().at(64 + 128, 100).show();
+    ramp.width = 60;
+    ramp.height = 60;
 
     createPlayerObj(looks).at(128, 40).step(player => {
         if (player.y > 256 + player.height)
