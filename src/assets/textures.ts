@@ -1,4 +1,4 @@
-import { Assets, BaseTexture, Rectangle, SCALE_MODES, Texture } from "pixi.js";
+import { BaseTexture, Rectangle, SCALE_MODES, Texture, loadImageBitmap } from "pixi.js";
 import { GeneratedTextureData } from "./generated/textures/generated-texture-data";
 import { JobProgress } from "../lib/game-engine/job-progress";
 
@@ -17,10 +17,8 @@ export async function loadTextureAssets(progress: JobProgress) {
 
     const atlases = await Promise.all(
         GeneratedTextureData.atlases.map(
-            atlas => Assets.load<Texture>(atlas.url).then(texture => {
-                progress.increaseCompletedJobsCount(atlas.texturesCount);
-                return texture;
-            })));
+            atlas => loadTexture(atlas.url)
+        ));
 
     const newTx: Parameters<Txs>[0] = (data) => {
         const baseTexture = atlases[data.atlas].baseTexture;
@@ -31,4 +29,12 @@ export async function loadTextureAssets(progress: JobProgress) {
     }
 
     Tx = GeneratedTextureData.txs(newTx);
+}
+
+async function loadTexture(url: string) {
+    const bitmap = await loadImageBitmap(url);
+    const base = new BaseTexture(bitmap);
+
+    base.resource.src = url;
+    return new Texture(base);
 }
