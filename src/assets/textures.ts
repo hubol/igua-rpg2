@@ -17,7 +17,7 @@ export async function loadTextureAssets(progress: JobProgress) {
 
     const atlases = await Promise.all(
         GeneratedTextureData.atlases.map(
-            atlas => loadTexture(atlas.url)
+            atlas => loadTexture(atlas.url, progress)
         ));
 
     const newTx: Parameters<Txs>[0] = (data) => {
@@ -31,8 +31,9 @@ export async function loadTextureAssets(progress: JobProgress) {
     Tx = GeneratedTextureData.txs(newTx);
 }
 
-async function loadTexture(url: string) {
+async function loadTexture(url: string, progress: JobProgress) {
     const bitmap = await loadImageBitmap(url);
+    progress.increaseCompletedJobsCount(1);
     const base = new BaseTexture(bitmap);
 
     base.resource.src = url;
