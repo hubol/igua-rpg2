@@ -23,7 +23,9 @@ export function prepareGameEngine(renderer: PixiRenderer) {
         gameLoopForced = true;
     }
 
-    setIguaGlobals(renderer, rootStage, iguaInput, forceGameLoop);
+    const animator = new Animator(60);
+
+    setIguaGlobals(renderer, rootStage, iguaInput, forceGameLoop, animator.start.bind(animator));
 
     iguaInput.start();
 
@@ -44,9 +46,6 @@ export function prepareGameEngine(renderer: PixiRenderer) {
         
         renderer.render(rootStage);
     }
-
-    const animator = new Animator(60);
-    animator.start();
 
     animator.add(gameLoop);
 

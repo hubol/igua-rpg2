@@ -48,6 +48,7 @@ export class Animator {
             return;
         }
         this._then = performance.now();
-        this._maybeUpdate();
+        this._update();
+        requestAnimationFrame(this._animationFrameCallback);
     }
 }

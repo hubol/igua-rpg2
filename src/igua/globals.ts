@@ -12,12 +12,14 @@ export let sceneStack: IguaSceneStack;
 export let Input: Pick<IguaInput, 'isDown' | 'isUp' | 'justWentDown' | 'justWentUp'>;
 export let Cutscene: IguaCutscene;
 export let forceGameLoop: () => void;
+export let startAnimator: () => void;
 
-export function setIguaGlobals(pixiRenderer: PixiRenderer, rootStage: Container, iguaInput: IguaInput, forceGameLoopFn: () => void) {
+export function setIguaGlobals(pixiRenderer: PixiRenderer, rootStage: Container, iguaInput: IguaInput, forceGameLoopFn: () => void, startAnimatorFn: () => void) {
     renderer = pixiRenderer;
     layers = new IguaLayers(rootStage);
     sceneStack = new IguaSceneStack(layers, (_scene) => scene = _scene);
     Input = iguaInput;
     Cutscene = new IguaCutscene(rootStage);
     forceGameLoop = forceGameLoopFn;
+    startAnimator = startAnimatorFn;
 }
