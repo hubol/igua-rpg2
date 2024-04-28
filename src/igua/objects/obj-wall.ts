@@ -53,7 +53,7 @@ function cleanWalls() {
 
 function createLocalWalls() {
     // TODO enum for stepOrder?!
-    scene.root.step(cleanWalls, 999);
+    scene.root.step(() => cleanWalls(), 999);
     return Empty<WallsProvider>();
 }
 

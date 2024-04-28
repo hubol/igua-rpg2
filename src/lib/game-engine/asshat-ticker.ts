@@ -23,6 +23,10 @@ export class AsshatTicker implements IAsshatTicker {
     private readonly _microtasks = new AsshatMicrotasks();
 
     add(fn: AsshatTickerFn, order: number) {
+        if (fn._removed) {
+            ErrorReporter.reportSubsystemError('AsshatTicker.add', 'Adding an already-removed AsshatTickerFn. Did you pass a named function reference directly?', { fn ,order });
+        }
+
         if (!this._callbacks[order]) {
             this._callbacks[order] = [fn];
 
