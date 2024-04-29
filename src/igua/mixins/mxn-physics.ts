@@ -20,7 +20,6 @@ export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physics
     return obj
         .merge({ speed: vnew(), gravity, isOnGround: false, physicsRadius, physicsOffset })
         .step(obj => {
-            obj.speed.y += obj.gravity;
             const event = move(obj);
             onMove?.(event);
         }, 1000)
@@ -48,6 +47,8 @@ function move(obj: MxnPhysics) {
     moveEvent.hitWall = false;
     moveEvent.previousSpeed!.at(obj.speed);
     moveEvent.previousOnGround = obj.isOnGround;
+
+    obj.speed.y += obj.gravity;
 
     // TODO dividing into steps might be overkill, not sure
     while (hspAbs > 0 || vspAbs > 0) {
