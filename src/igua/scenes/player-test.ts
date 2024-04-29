@@ -8,8 +8,8 @@ import { Input } from "../globals";
 import { Rng } from "../../lib/math/rng";
 
 export function PlayerTest(looks = playerLooksJson) {
-    const b = objSolidBlock().at(64, 160).show();
-    b.width = 128;
+    const b = objSolidBlock().at(96, 160).show();
+    b.width = 96;
     b.height = 32;
 
     const b2 = objSolidBlock().at(56, 256 - 32).show();
@@ -36,10 +36,19 @@ export function PlayerTest(looks = playerLooksJson) {
     ramp.width = 60;
     ramp.height = 60;
 
-    createPlayerObj(looks).at(128, 40).step(player => {
-        if (player.y > 256 + player.height)
-            player.y = 0;
-    }).show();
+    const ramp2 = objSolidRamp().at(56, 160).show();
+    ramp2.width = 40;
+    ramp2.height = 40;
+
+    for (let i = 0; i < 1; i++)
+        createPlayerObj(looks).at((256 / 20) * i, 40).step(player => {
+            if (player.y > 256 + player.height)
+                player.y = 0;
+            if (player.x > 256 + player.width)
+                player.x = -player.width;
+            else if (player.x < -player.width)
+                player.x = 256 + player.width;
+        }).show();
 }
 
 const playerLooksJson = {

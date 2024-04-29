@@ -136,13 +136,15 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
             const offsetDotForward = dot(offset, wall.forward);
             const speedDotNormal = dot(speed, wall.normal);
 
-            const alongForward = (offsetDotForward > 0 && offsetDotForward < wall.length)
-                || (offsetDotForward > -radius && offsetDotForward < (wall.length + radius) && offsetDotNormal >= radiusLessMaxSpeed);
+            const onForward = offsetDotForward > 0 && offsetDotForward < wall.length;
+            const alongForward = onForward || (offsetDotForward > -radius && offsetDotForward < (wall.length + radius) && offsetDotNormal >= radiusLessMaxSpeed);
             
             const absOffsetDotNormal = Math.abs(offsetDotNormal);
 
-            // TODO name needs work, value is eerily similar to shouldCorrectPosition
-            const shouldCorrectPosition = alongForward && speedDotNormal < 0 && absOffsetDotNormal < radius;
+            const isGroundSlope = wall.isGround && wall.normal.y !== -1;
+            const attachToGroundSlope = isGroundSlope && onForward && speed.y >= 0 && speed.y <= obj.gravity && Math.sign(speed.x) === Math.sign(wall.normal.x);
+            const minDistanceToCorrect = attachToGroundSlope ? radius * 2 : radius;
+            const shouldCorrectPosition = alongForward && (attachToGroundSlope || speedDotNormal < 0) && absOffsetDotNormal < minDistanceToCorrect;
 
             if (shouldCorrectPosition) {
                 if (wall.isGround)
