@@ -165,7 +165,8 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
                 // result.solidNormal = wall.normal;
 
                 if (correctPosition) {
-                    obj.x = wall.x + wall.forward.x * offsetDotForward + wall.normal.x * radius - physicsOffsetX;
+                    if (!attachToGroundSlope)
+                        obj.x = wall.x + wall.forward.x * offsetDotForward + wall.normal.x * radius - physicsOffsetX;
                     obj.y = wall.y + wall.forward.y * offsetDotForward + wall.normal.y * radius - physicsOffsetY;
                 }
             }
