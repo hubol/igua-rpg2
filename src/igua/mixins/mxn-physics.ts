@@ -28,13 +28,17 @@ export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physics
 export type MxnPhysics = ReturnType<typeof mxnPhysics>;
 
 type MoveEvent = Omit<PushResult, 'isOnGround'> & { previousSpeed: Vector; previousOnGround: boolean; };
-const moveEvent: Partial<MoveEvent> = {
+const moveEvent = {
     previousSpeed: vnew(),
-};
+} as MoveEvent;
 
 function move(obj: MxnPhysics) {
     const radius = obj.physicsRadius;
     const radiusSqrt = Math.sqrt(radius);
+
+    const gravityOnlyStep = obj.speed.x === 0 && obj.speed.y === 0;
+
+    obj.speed.y += obj.gravity;
 
     let hsp = obj.speed.x;
     let vsp = obj.speed.y;
@@ -42,13 +46,14 @@ function move(obj: MxnPhysics) {
     let hspAbs = Math.abs(hsp);
     let vspAbs = Math.abs(vsp);
 
+    const previousX = obj.x;
+    const previousY = obj.y;
+
     moveEvent.hitCeiling = false;
     moveEvent.hitGround = false;
     moveEvent.hitWall = false;
     moveEvent.previousSpeed!.at(obj.speed);
     moveEvent.previousOnGround = obj.isOnGround;
-
-    obj.speed.y += obj.gravity;
 
     // TODO dividing into steps might be overkill, not sure
     while (hspAbs > 0 || vspAbs > 0) {
@@ -73,8 +78,16 @@ function move(obj: MxnPhysics) {
         moveEvent.hitGround ||= r.hitGround;
         moveEvent.hitWall ||= r.hitWall;
 
-        if (vspStep !== 0)
+        if (vspStep !== 0) {
             obj.isOnGround = r.hitGround!;
+            // Crude mechanism to prevent sliding down slopes while standing
+            if (gravityOnlyStep && r.hitGround) {
+                obj.x = previousX;
+                obj.y = previousY;
+                obj.speed.y = 0;
+                return moveEvent;
+            }
+        }
 
         if ((r.hitGround && vspStep > 0) || (r.hitCeiling && vspStep <= 0)) {
             obj.speed.y = 0;
@@ -160,4 +173,4 @@ interface PushResult
     // solidNormal?: Vector;
 }
 
-const _result: Partial<PushResult> = {};
+const _result = {} as PushResult;
