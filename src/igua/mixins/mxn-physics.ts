@@ -137,14 +137,21 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
             const speedDotNormal = dot(speed, wall.normal);
 
             const onForward = offsetDotForward > 0 && offsetDotForward < wall.length;
-            const alongForward = onForward || (offsetDotForward > -radius && offsetDotForward < (wall.length + radius) && offsetDotNormal >= radiusLessMaxSpeed);
+            const onForwardEdge = offsetDotForward > -radius && offsetDotForward < (wall.length + radius) && offsetDotNormal >= radiusLessMaxSpeed;
             
             const absOffsetDotNormal = Math.abs(offsetDotNormal);
 
             const isGroundSlope = wall.isGround && wall.normal.y !== -1;
-            const attachToGroundSlope = isGroundSlope && onForward && speed.y >= 0 && speed.y <= obj.gravity && Math.sign(speed.x) === Math.sign(wall.normal.x);
-            const minDistanceToCorrect = attachToGroundSlope ? radius * 2 : radius;
-            const shouldCorrectPosition = alongForward && (attachToGroundSlope || speedDotNormal < 0) && absOffsetDotNormal < minDistanceToCorrect;
+            const attachToGroundSlope = isGroundSlope
+                && onForward
+                // Jank to try and snap to slopes only when you recently fell off a ground block
+                && speed.y >= 0 && speed.y <= obj.gravity * 4
+                && Math.sign(speed.x) === Math.sign(wall.normal.x)
+                && absOffsetDotNormal < radius * 2;
+            
+            const shouldCorrectPosition = attachToGroundSlope
+                || (onForward && speedDotNormal < 0 && absOffsetDotNormal < radius)
+                || (onForwardEdge && speedDotNormal < 0 && absOffsetDotNormal < radiusLessMaxSpeed);
 
             if (shouldCorrectPosition) {
                 if (wall.isGround)
