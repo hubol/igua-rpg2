@@ -148,9 +148,10 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
                 && speed.y >= 0 && speed.y <= obj.gravity * 4
                 && Math.sign(speed.x) === Math.sign(wall.normal.x)
                 && absOffsetDotNormal < radius * 2;
-            
+
             const shouldCorrectPosition = attachToGroundSlope
                 || (onForward && speedDotNormal < 0 && absOffsetDotNormal < radius)
+                // TODO Very mysterious, please investigate
                 || (onForwardEdge && speedDotNormal < 0 && absOffsetDotNormal < radiusLessMaxSpeed);
 
             if (shouldCorrectPosition) {
