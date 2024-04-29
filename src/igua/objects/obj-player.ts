@@ -17,12 +17,9 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     let lastNonZeroSpeedXSign = 0;
 
     const puppet = objIguanaPuppet(looks)
-        .mixin(mxnPhysics, { gravity: 0.1, physicsRadius: 7, physicsOffset: [0, -9], debug: false, onMove: (event) => {
-            if (event.hitGround && event.previousSpeed.y > 1.2)
+        .mixin(mxnPhysics, { gravity: PlayerConsts.Gravity, physicsRadius: 7, physicsOffset: [0, -9], debug: false, onMove: (event) => {
+            if (event.hitGround && !event.previousOnGround && event.previousSpeed.y > 1.2)
                 puppet.landingFrames = 10;
-            // TODO this definitely should not need to be here
-            if (event.hitGround)
-                puppet.speed.y = 0;
         } })
         .merge({ get hasControl() { return !Cutscene.isPlaying; } })
         .step(() => {
@@ -48,9 +45,6 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             }
 
             puppet.isAirborne = !puppet.isOnGround;
-
-            // TODO should probably be in physics mixin
-            puppet.speed.y += PlayerConsts.Gravity;
 
             puppet.airborneDirectionY = approachLinear(puppet.airborneDirectionY, -Math.sign(puppet.speed.y), puppet.speed.y > 0 ? 0.075 : 0.25);
 

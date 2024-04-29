@@ -20,6 +20,7 @@ export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physics
     return obj
         .merge({ speed: vnew(), gravity, isOnGround: false, physicsRadius, physicsOffset })
         .step(obj => {
+            obj.speed.y += obj.gravity;
             const event = move(obj);
             onMove?.(event);
         }, 1000)
@@ -27,7 +28,7 @@ export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physics
 
 export type MxnPhysics = ReturnType<typeof mxnPhysics>;
 
-type MoveEvent = Omit<PushResult, 'isOnGround'> & { previousSpeed: Vector };
+type MoveEvent = Omit<PushResult, 'isOnGround'> & { previousSpeed: Vector; previousOnGround: boolean; };
 const moveEvent: Partial<MoveEvent> = {
     previousSpeed: vnew(),
 };
@@ -46,6 +47,7 @@ function move(obj: MxnPhysics) {
     moveEvent.hitGround = false;
     moveEvent.hitWall = false;
     moveEvent.previousSpeed!.at(obj.speed);
+    moveEvent.previousOnGround = obj.isOnGround;
 
     // TODO dividing into steps might be overkill, not sure
     while (hspAbs > 0 || vspAbs > 0) {
@@ -70,7 +72,10 @@ function move(obj: MxnPhysics) {
         moveEvent.hitGround ||= r.hitGround;
         moveEvent.hitWall ||= r.hitWall;
 
-        if ((r.hitGround && vsp > 0) || (r.hitCeiling && vsp <= 0)) {
+        if (vspStep !== 0)
+            obj.isOnGround = r.hitGround!;
+
+        if ((r.hitGround && vspStep > 0) || (r.hitCeiling && vspStep <= 0)) {
             obj.speed.y = 0;
             vsp = 0;
         }
@@ -79,8 +84,6 @@ function move(obj: MxnPhysics) {
             obj.speed.x = 0;
             hsp = 0;
         }
-
-        obj.isOnGround = r.isOnGround!;
 
         hspAbs = Math.abs(hsp);
         vspAbs = Math.abs(vsp);
@@ -101,8 +104,7 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
     const speed = obj.speed;
     const radius = obj.physicsRadius;
     const radiusLessMaxSpeed = radius - Math.sqrt(radius) - radius * 0.1;
-
-    result.isOnGround = false;
+    
     result.hitCeiling = false;
     result.hitGround = false;
     result.hitWall = false;
@@ -127,17 +129,9 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
 
             // TODO name needs work, value is eerily similar to shouldCorrectPosition
             const shouldCorrectPosition = alongForward && speedDotNormal < 0 && absOffsetDotNormal < radius;
-            const isOnGround = wall.isGround && alongForward && absOffsetDotNormal <= radius * 1.01 && speedDotNormal <= 0;
-
-            if (isOnGround) {
-                result.isOnGround = true;
-                // result.solidNormal = wall.normal;
-                // if (stopIfOnGround)
-                //     break;
-            }
 
             if (shouldCorrectPosition) {
-                if (isOnGround)
+                if (wall.isGround)
                     result.hitGround = true;
                 if (wall.isCeiling)
                     result.hitCeiling = true;
@@ -159,7 +153,6 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
 
 interface PushResult
 {
-    isOnGround: boolean;
     hitGround: boolean;
     hitCeiling: boolean;
     hitWall: boolean;
