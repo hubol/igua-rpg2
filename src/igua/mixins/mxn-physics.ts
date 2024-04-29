@@ -1,6 +1,6 @@
 import { Container, DisplayObject, Graphics } from "pixi.js";
 import { Vector, vnew } from "../../lib/math/vector-type";
-import { LocalWalls } from "../objects/obj-wall";
+import { LocalTerrain } from "../objects/obj-terrain";
 import { dot } from "../../lib/math/vector";
 
 interface PhysicsArgs {
@@ -123,51 +123,51 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
     result.hitGround = false;
     result.hitWall = false;
 
-    const wallProviders = LocalWalls.value;
-    for (let i = 0; i < wallProviders.length; i++) {
-        const walls = wallProviders[i].walls;
-        for (let j = 0; j < walls.length; j++) {
-            const wall = walls[j];
+    const terrains = LocalTerrain.value;
+    for (let i = 0; i < terrains.length; i++) {
+        const segments = terrains[i].segments;
+        for (let j = 0; j < segments.length; j++) {
+            const segment = segments[j];
 
-            if (wall.active === false)
+            if (segment.active === false)
                 continue;
-            const offset = v.at(xy.x - wall.x, xy.y - wall.y);
-            const offsetDotNormal = dot(offset, wall.normal);
-            const offsetDotForward = dot(offset, wall.forward);
-            const speedDotNormal = dot(speed, wall.normal);
+            const offset = v.at(xy.x - segment.x, xy.y - segment.y);
+            const offsetDotNormal = dot(offset, segment.normal);
+            const offsetDotForward = dot(offset, segment.forward);
+            const speedDotNormal = dot(speed, segment.normal);
 
-            const onForward = offsetDotForward > 0 && offsetDotForward < wall.length;
-            const onForwardEdge = offsetDotForward > -radius && offsetDotForward < (wall.length + radius) && offsetDotNormal >= radiusLessMaxSpeed;
+            const onForward = offsetDotForward > 0 && offsetDotForward < segment.length;
+            const onForwardEdge = offsetDotForward > -radius && offsetDotForward < (segment.length + radius) && offsetDotNormal >= radiusLessMaxSpeed;
             
             const absOffsetDotNormal = Math.abs(offsetDotNormal);
 
-            const isGroundSlope = wall.isGround && wall.normal.y !== -1;
-            const attachToGroundSlope = isGroundSlope
+            const isGroundSlope = segment.isGround && segment.normal.y !== -1;
+            const movingDownSlope = isGroundSlope
                 && onForward
                 // Jank to try and snap to slopes only when you recently fell off a ground block
                 && speed.y >= 0 && speed.y <= obj.gravity * 4
-                && Math.sign(speed.x) === Math.sign(wall.normal.x)
+                && Math.sign(speed.x) === Math.sign(segment.normal.x)
                 && absOffsetDotNormal < radius * 2;
 
-            const shouldCorrectPosition = attachToGroundSlope
+            const shouldCorrectPosition = movingDownSlope
                 || (onForward && speedDotNormal < 0 && absOffsetDotNormal < radius)
                 // TODO Very mysterious, please investigate
                 || (onForwardEdge && speedDotNormal < 0 && absOffsetDotNormal < radiusLessMaxSpeed);
 
             if (shouldCorrectPosition) {
-                if (wall.isGround)
+                if (segment.isGround)
                     result.hitGround = true;
-                if (wall.isCeiling)
+                if (segment.isCeiling)
                     result.hitCeiling = true;
-                if (wall.isWall)
+                if (segment.isWall)
                     result.hitWall = true;
 
                 // result.solidNormal = wall.normal;
 
                 if (correctPosition) {
-                    if (!attachToGroundSlope)
-                        obj.x = wall.x + wall.forward.x * offsetDotForward + wall.normal.x * radius - physicsOffsetX;
-                    obj.y = wall.y + wall.forward.y * offsetDotForward + wall.normal.y * radius - physicsOffsetY;
+                    if (!movingDownSlope)
+                        obj.x = segment.x + segment.forward.x * offsetDotForward + segment.normal.x * radius - physicsOffsetX;
+                    obj.y = segment.y + segment.forward.y * offsetDotForward + segment.normal.y * radius - physicsOffsetY;
                 }
             }
         }

@@ -6,7 +6,7 @@ import { Compass } from "../../lib/math/compass";
 import { scene } from "../globals";
 import { perpendicular } from "../../lib/math/vector";
 
-interface Wall {
+interface TerrainSegment {
     x: number;
     y: number;
     forward: Vector;
@@ -20,21 +20,21 @@ interface Wall {
     active?: boolean;
 }
 
-interface WallsProvider {
+interface Terrain {
     destroyed: boolean;
-    wallsDirty: boolean;
-    wallsClean?: () => void;
-    walls: Wall[];
+    dirty: boolean;
+    clean?: () => void;
+    segments: TerrainSegment[];
 }
 
-function cleanWalls() {
-    const walls = LocalWalls.value;
+function cleanTerrain() {
+    const terrains = LocalTerrain.value;
 
     let i = 0;
     let shift = 0;
 
-    while (i < walls.length) {
-        const wall = walls[i];
+    while (i < terrains.length) {
+        const wall = terrains[i];
 
         if (wall.destroyed) {
             shift += 1;
@@ -42,30 +42,30 @@ function cleanWalls() {
             continue;
         }
 
-        if (wall.wallsDirty)
-            wall.wallsClean!();
+        if (wall.dirty)
+            wall.clean!();
 
         if (shift)
-            walls[i - shift] = wall;
+            terrains[i - shift] = wall;
         i += 1;
     }
 }
 
-function createLocalWalls() {
+function createLocalTerrain() {
     // TODO enum for stepOrder?!
-    scene.root.step(() => cleanWalls(), 999);
-    return Empty<WallsProvider>();
+    scene.root.step(() => cleanTerrain(), 999);
+    return Empty<Terrain>();
 }
 
-export const LocalWalls = new SceneLocal(createLocalWalls, 'LocalWalls');
+export const LocalTerrain = new SceneLocal(createLocalTerrain, 'LocalTerrain');
 
 export function objSolidBlock() {
-    const n: Wall = { x: 0, y: 0, forward: Compass.East, normal: Compass.North, length: 1, isGround: true };
-    const e: Wall = { x: 1, y: 0, forward: Compass.South, normal: Compass.East, length: 1, isWall: true };
-    const s: Wall = { x: 1, y: 1, forward: Compass.West, normal: Compass.South, length: 1, isCeiling: true };
-    const w: Wall = { x: 0, y: 1, forward: Compass.North, normal: Compass.West, length: 1, isWall: true };
+    const n: TerrainSegment = { x: 0, y: 0, forward: Compass.East, normal: Compass.North, length: 1, isGround: true };
+    const e: TerrainSegment = { x: 1, y: 0, forward: Compass.South, normal: Compass.East, length: 1, isWall: true };
+    const s: TerrainSegment = { x: 1, y: 1, forward: Compass.West, normal: Compass.South, length: 1, isCeiling: true };
+    const w: TerrainSegment = { x: 0, y: 1, forward: Compass.North, normal: Compass.West, length: 1, isWall: true };
 
-    function wallsClean() {
+    function clean() {
         const scaleX = g.scale.x;
         const scaleY = g.scale.y;
         const x = g.x - Math.max(-scaleX, 0);
@@ -89,19 +89,19 @@ export function objSolidBlock() {
         w.y = y + height;
         w.length = height;
 
-        g.wallsDirty = false;
+        g.dirty = false;
     }
 
-    const g = new Graphics().merge({ wallsDirty: true, walls: [ n, e, s, w ], wallsClean }).beginFill(0xffffff).drawRect(0, 0, 1, 1);
+    const g = new Graphics().merge({ dirty: true, segments: [ n, e, s, w ], clean }).beginFill(0xffffff).drawRect(0, 0, 1, 1);
 
     const cb = g.transform.position.cb.bind(g.transform);
 
     g.transform.position.cb = g.transform.scale.cb = () => {
-        g.wallsDirty = true;
+        g.dirty = true;
         cb();
     }
 
-    g.once('added', () => LocalWalls.value.push(g));
+    g.once('added', () => LocalTerrain.value.push(g));
 
     return g;
 }
@@ -110,11 +110,11 @@ const v = vnew();
 
 // TODO Messy copy-paste
 export function objSolidRamp() {
-    const ramp: Wall = { x: 0, y: 0, forward: vnew(1, 0), normal: vnew(0, -1), length: 1, isGround: true };
-    const side: Wall = { x: 1, y: 0, forward: Compass.South, normal: Compass.East, length: 1, isWall: true };
-    const flat: Wall = { x: 1, y: 1, forward: Compass.East, normal: Compass.South, length: 1, isCeiling: true };
+    const ramp: TerrainSegment = { x: 0, y: 0, forward: vnew(1, 0), normal: vnew(0, -1), length: 1, isGround: true };
+    const side: TerrainSegment = { x: 1, y: 0, forward: Compass.South, normal: Compass.East, length: 1, isWall: true };
+    const flat: TerrainSegment = { x: 1, y: 1, forward: Compass.East, normal: Compass.South, length: 1, isCeiling: true };
 
-    function wallsClean() {
+    function clean() {
         const scaleX = g.scale.x;
         const scaleY = g.scale.y;
         const x = g.x - Math.max(-scaleX, 0);
@@ -136,19 +136,19 @@ export function objSolidRamp() {
         ramp.normal = perpendicular(ramp.normal.at(scaleX, -scaleY)).normalize();
         ramp.length = v.at(width, height).vlength;
 
-        g.wallsDirty = false;
+        g.dirty = false;
     }
 
-    const g = new Graphics().merge({ wallsDirty: true, walls: [ ramp, side, flat ], wallsClean }).beginFill(0xffffff).drawPolygon([ 0, 1, 1, 1, 1, 0 ]);
+    const g = new Graphics().merge({ dirty: true, segments: [ ramp, side, flat ], clean }).beginFill(0xffffff).drawPolygon([ 0, 1, 1, 1, 1, 0 ]);
 
     const cb = g.transform.position.cb.bind(g.transform);
 
     g.transform.position.cb = g.transform.scale.cb = () => {
-        g.wallsDirty = true;
+        g.dirty = true;
         cb();
     }
 
-    g.once('added', () => LocalWalls.value.push(g));
+    g.once('added', () => LocalTerrain.value.push(g));
 
     return g;
 }
