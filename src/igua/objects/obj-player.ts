@@ -17,16 +17,19 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     let lastNonZeroSpeedXSign = 0;
 
     const puppet = objIguanaPuppet(looks)
-        .mixin(mxnPhysics, { gravity: 0.1, physicsRadius: 7, physicsOffset: [0, -9], debug: false })
+        .mixin(mxnPhysics, { gravity: 0.1, physicsRadius: 7, physicsOffset: [0, -9], debug: false, onMove: (event) => {
+            if (event.hitGround && event.previousSpeed.y > 1.2)
+                puppet.landingFrames = 10;
+            // TODO this definitely should not need to be here
+            if (event.hitGround)
+                puppet.speed.y = 0;
+        } })
         .merge({ get hasControl() { return !Cutscene.isPlaying; } })
         .step(() => {
             const hasControl = puppet.hasControl;
             const moveLeft = hasControl && Input.isDown('MoveLeft');
             const moveRight = hasControl && Input.isDown('MoveRight');
             const duck = hasControl && Input.isDown('Duck');
-
-            // TODO collision system
-            // puppet.isOnGround = puppet.y >= 0;
 
             // TODO probably expose so that attackers can see this?
             const isDucking = duck && puppet.isOnGround;
@@ -46,16 +49,8 @@ function objPlayer(looks: IguanaLooks.Serializable) {
 
             puppet.isAirborne = !puppet.isOnGround;
 
-            if (puppet.isOnGround) {
-                // TODO it is not clear how I am on the ground with > 1.2 speed.y
-                if (puppet.speed.y > 1.2) {
-                    puppet.landingFrames = 10;
-                    puppet.speed.y = 0;
-                }
-            }
-            else {
-                puppet.speed.y += PlayerConsts.Gravity;
-            }
+            // TODO should probably be in physics mixin
+            puppet.speed.y += PlayerConsts.Gravity;
 
             puppet.airborneDirectionY = approachLinear(puppet.airborneDirectionY, -Math.sign(puppet.speed.y), puppet.speed.y > 0 ? 0.075 : 0.25);
 

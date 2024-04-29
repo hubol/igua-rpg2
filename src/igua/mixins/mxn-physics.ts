@@ -7,24 +7,30 @@ interface PhysicsArgs {
     gravity: number;
     physicsRadius: number;
     physicsOffset?: Vector;
+    onMove?: (event: MoveEvent) => void;
     // TODO allow specifying debug color?
     debug?: boolean;
 }
 
 // TODO should it actually accept + apply gravity?
-export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physicsOffset = vnew(), debug = false }: PhysicsArgs) {
+export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physicsOffset = vnew(), debug = false, onMove }: PhysicsArgs) {
     if (debug && obj instanceof Container)
         obj.addChild(new Graphics().step(gfx => gfx.clear().beginFill(0xff0000).drawCircle(physicsOffset.x, physicsOffset.y, physicsRadius)));
 
     return obj
         .merge({ speed: vnew(), gravity, isOnGround: false, physicsRadius, physicsOffset })
         .step(obj => {
-            // TODO some objects need to handle the result from move, how should that happen?
-            move(obj);
+            const event = move(obj);
+            onMove?.(event);
         }, 1000)
 }
 
 export type MxnPhysics = ReturnType<typeof mxnPhysics>;
+
+type MoveEvent = Omit<PushResult, 'isOnGround'> & { previousSpeed: Vector };
+const moveEvent: Partial<MoveEvent> = {
+    previousSpeed: vnew(),
+};
 
 function move(obj: MxnPhysics) {
     const radius = obj.physicsRadius;
@@ -35,6 +41,11 @@ function move(obj: MxnPhysics) {
 
     let hspAbs = Math.abs(hsp);
     let vspAbs = Math.abs(vsp);
+
+    moveEvent.hitCeiling = false;
+    moveEvent.hitGround = false;
+    moveEvent.hitWall = false;
+    moveEvent.previousSpeed!.at(obj.speed);
 
     // TODO dividing into steps might be overkill, not sure
     while (hspAbs > 0 || vspAbs > 0) {
@@ -55,6 +66,10 @@ function move(obj: MxnPhysics) {
 
         const r = push(obj);
 
+        moveEvent.hitCeiling ||= r.hitCeiling;
+        moveEvent.hitGround ||= r.hitGround;
+        moveEvent.hitWall ||= r.hitWall;
+
         if ((r.hitGround && vsp > 0) || (r.hitCeiling && vsp <= 0)) {
             obj.speed.y = 0;
             vsp = 0;
@@ -70,6 +85,8 @@ function move(obj: MxnPhysics) {
         hspAbs = Math.abs(hsp);
         vspAbs = Math.abs(vsp);
     }
+
+    return moveEvent as MoveEvent;
 }
 
 const vObjPosition = vnew();
@@ -142,11 +159,11 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
 
 interface PushResult
 {
-    isOnGround?: boolean;
-    hitGround?: boolean;
-    hitCeiling?: boolean;
-    hitWall?: boolean;
+    isOnGround: boolean;
+    hitGround: boolean;
+    hitCeiling: boolean;
+    hitWall: boolean;
     // solidNormal?: Vector;
 }
 
-const _result: PushResult = {};
+const _result: Partial<PushResult> = {};
