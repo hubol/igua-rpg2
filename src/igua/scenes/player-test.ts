@@ -3,7 +3,7 @@ import { createPlayerObj } from "../objects/obj-player";
 import { Tx } from "../../assets/textures";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { show } from "../cutscene/show";
-import { objSolidBlock, objSolidRamp } from "../objects/obj-wall";
+import { objSolidBlock, objSolidRamp } from "../objects/obj-terrain";
 import { Input } from "../globals";
 import { Rng } from "../../lib/math/rng";
 
@@ -33,12 +33,16 @@ export function PlayerTest(looks = playerLooksJson) {
     }).show();
 
     const ramp = objSolidRamp().at(64 + 128, 100).show();
-    ramp.width = 60;
+    ramp.width = 120;
     ramp.height = 60;
 
     const ramp2 = objSolidRamp().at(56, 160).show();
     ramp2.width = 40;
     ramp2.height = 40;
+
+    const ramp3 = objSolidRamp().at(140, 60).show();
+    ramp3.width = -80;
+    ramp3.height = 40;
 
     for (let i = 0; i < 1; i++)
         createPlayerObj(looks).at((256 / 20) * i, 40).step(player => {
