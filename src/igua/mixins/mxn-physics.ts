@@ -177,7 +177,8 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
                     const offsetDotForwardTimesLength = offsetDotForward * segment.length;
                     if (!movingDownSlope)
                         obj.x = segment.x + segment.forward.x * offsetDotForwardTimesLength + testNormal.x * radius - physicsOffsetX;
-                    obj.y = segment.y + segment.forward.y * offsetDotForwardTimesLength + testNormal.y * radius - physicsOffsetY;
+                    if (!segment.isWall)
+                        obj.y = segment.y + segment.forward.y * offsetDotForwardTimesLength + testNormal.y * radius - physicsOffsetY;
                 }
             }
         }
