@@ -77,16 +77,24 @@ function move(obj: MxnPhysics) {
         hsp = hspSign * Math.max(0, hspAbs - hspLength);
         vsp = vspSign * Math.max(0, vspAbs - vspLength);
 
-        const r = push(obj);
+        const r1 = push(obj, true);
 
-        moveEvent.hitCeiling ||= r.hitCeiling;
-        moveEvent.hitGround ||= r.hitGround;
-        moveEvent.hitWall ||= r.hitWall;
+        moveEvent.hitCeiling ||= r1.hitCeiling;
+        moveEvent.hitGround ||= r1.hitGround;
+        moveEvent.hitWall ||= r1.hitWall;
+        let hitGround = r1.hitGround;
+
+        const r2 = push(obj, false);
+
+        moveEvent.hitCeiling ||= r2.hitCeiling;
+        moveEvent.hitGround ||= r2.hitGround;
+        moveEvent.hitWall ||= r2.hitWall;
+        hitGround ||= r2.hitGround;
 
         if (vspStep !== 0) {
-            obj.isOnGround = r.hitGround!;
+            obj.isOnGround = hitGround;
             // Crude mechanism to prevent sliding down slopes while standing
-            if (gravityOnlyStep && r.hitGround) {
+            if (gravityOnlyStep && hitGround) {
                 obj.x = previousX;
                 obj.y = previousY;
                 obj.speed.y = 0;
@@ -94,12 +102,12 @@ function move(obj: MxnPhysics) {
             }
         }
 
-        if ((r.hitGround && vspStep > 0) || (r.hitCeiling && vspStep <= 0)) {
+        if ((hitGround && vspStep > 0) || (moveEvent.hitCeiling && vspStep <= 0)) {
             obj.speed.y = 0;
             vsp = 0;
         }
 
-        if (r.hitWall) {
+        if (moveEvent.hitWall) {
             obj.speed.x = 0;
             hsp = 0;
         }
@@ -114,7 +122,7 @@ function move(obj: MxnPhysics) {
 const vObjPosition = vnew();
 const v = vnew();
 
-function push(obj: MxnPhysics, correctPosition = true, result = _result) {
+function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, result = _result) {
     const physicsOffsetX = obj.physicsOffset.x;
     const physicsOffsetY = obj.physicsOffset.y;
 
@@ -128,13 +136,15 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
     result.hitGround = false;
     result.hitWall = false;
 
+    const padding = edgesOnly ? 0 : radius;
+
     const terrains = LocalTerrain.value;
     for (let i = 0; i < terrains.length; i++) {
         const segments = terrains[i].segments;
         for (let j = 0; j < segments.length; j++) {
             const segment = segments[j];
 
-            if (segment.active === false)
+            if (segment.active === false || (!edgesOnly && segment.isWall))
                 continue;
 
             const testForward = segment.slope?.forward ?? segment.forward;
@@ -146,10 +156,6 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
             const isGroundSlope = segment.isGround && segment.normal.y !== -1;
             const testNormal = isGroundSlope ? Compass.North : segment.normal;
 
-            const offsetDotTestNormal = dot(offset, testNormal);
-
-            // Give additional padding to ceilings (always) and floors (when above them)
-            const padding = !segment.isWall && (segment.isCeiling || offsetDotTestNormal > 0) ? radius : 0;
             const onForward = offsetDotForward > -padding && offsetDotForward < testLength + padding;
 
             if (!onForward)
