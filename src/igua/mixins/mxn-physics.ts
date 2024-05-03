@@ -2,6 +2,7 @@ import { Container, DisplayObject, Graphics } from "pixi.js";
 import { Vector, vnew } from "../../lib/math/vector-type";
 import { LocalTerrain } from "../objects/obj-terrain";
 import { dot } from "../../lib/math/vector";
+import { Compass } from "../../lib/math/compass";
 
 interface PhysicsArgs {
     gravity: number;
@@ -14,8 +15,11 @@ interface PhysicsArgs {
 
 // TODO should it actually accept + apply gravity?
 export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physicsOffset = vnew(), debug = false, onMove }: PhysicsArgs) {
-    if (debug && obj instanceof Container)
+    if (debug && obj instanceof Container) {
+        for (const child of obj.children)
+            child.alpha = 0.5;
         obj.addChild(new Graphics().step(gfx => gfx.clear().beginFill(0xff0000).drawCircle(physicsOffset.x, physicsOffset.y, physicsRadius)));
+    }
 
     return obj
         .merge({ speed: vnew(), gravity, isOnGround: false, physicsRadius, physicsOffset })
@@ -36,6 +40,7 @@ function move(obj: MxnPhysics) {
     const radius = obj.physicsRadius;
     const radiusSqrt = Math.sqrt(radius);
 
+    const objSpeedYWasNotZero = obj.speed.y !== 0;
     const gravityOnlyStep = obj.speed.x === 0 && obj.speed.y === 0;
 
     obj.speed.y += obj.gravity;
@@ -117,7 +122,7 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
 
     const speed = obj.speed;
     const radius = obj.physicsRadius;
-    const radiusLessMaxSpeed = radius - Math.sqrt(radius) - radius * 0.1;
+    // const radiusLessMaxSpeed = radius - Math.sqrt(radius) - radius * 0.1;
     
     result.hitCeiling = false;
     result.hitGround = false;
@@ -131,28 +136,32 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
 
             if (segment.active === false)
                 continue;
+
+            const testForward = segment.slope?.forward ?? segment.forward;
+            const testLength = segment.slope?.width ?? segment.length;
+
+            const isGroundSlope = segment.isGround && segment.normal.y !== -1;
+
+            const testNormal = isGroundSlope ? Compass.North : segment.normal;
+
             const offset = v.at(xy.x - segment.x, xy.y - segment.y);
             const offsetDotNormal = dot(offset, segment.normal);
-            const offsetDotForward = dot(offset, segment.forward);
+            const offsetDotForward = dot(offset, testForward) / testLength;
             const speedDotNormal = dot(speed, segment.normal);
 
-            const onForward = offsetDotForward > 0 && offsetDotForward < segment.length;
-            const onForwardEdge = offsetDotForward > -radius && offsetDotForward < (segment.length + radius) && offsetDotNormal >= radiusLessMaxSpeed;
+            const onForward = offsetDotForward > 0 && offsetDotForward < 1;
             
             const absOffsetDotNormal = Math.abs(offsetDotNormal);
 
-            const isGroundSlope = segment.isGround && segment.normal.y !== -1;
             const movingDownSlope = isGroundSlope
                 && onForward
                 // Jank to try and snap to slopes only when you recently fell off a ground block
-                && speed.y >= 0 && speed.y <= obj.gravity * 4
+                && speed.y >= 0 && speed.y <= obj.gravity * 2
                 && Math.sign(speed.x) === Math.sign(segment.normal.x)
                 && absOffsetDotNormal < radius * 2;
 
             const shouldCorrectPosition = movingDownSlope
-                || (onForward && speedDotNormal < 0 && absOffsetDotNormal < radius)
-                // TODO Very mysterious, please investigate
-                || (onForwardEdge && speedDotNormal < 0 && absOffsetDotNormal < radiusLessMaxSpeed);
+                || (onForward && speedDotNormal < 0 && absOffsetDotNormal < radius);
 
             if (shouldCorrectPosition) {
                 if (segment.isGround)
@@ -165,9 +174,10 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
                 // result.solidNormal = wall.normal;
 
                 if (correctPosition) {
+                    const offsetDotForwardTimesLength = offsetDotForward * segment.length;
                     if (!movingDownSlope)
-                        obj.x = segment.x + segment.forward.x * offsetDotForward + segment.normal.x * radius - physicsOffsetX;
-                    obj.y = segment.y + segment.forward.y * offsetDotForward + segment.normal.y * radius - physicsOffsetY;
+                        obj.x = segment.x + segment.forward.x * offsetDotForwardTimesLength + testNormal.x * radius - physicsOffsetX;
+                    obj.y = segment.y + segment.forward.y * offsetDotForwardTimesLength + testNormal.y * radius - physicsOffsetY;
                 }
             }
         }

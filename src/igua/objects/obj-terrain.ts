@@ -9,6 +9,10 @@ import { perpendicular } from "../../lib/math/vector";
 interface TerrainSegment {
     x: number;
     y: number;
+    slope?: {
+        forward: Vector;
+        width: number;
+    };
     forward: Vector;
     normal: Vector;
     length: number;
@@ -110,7 +114,7 @@ const v = vnew();
 
 // TODO Messy copy-paste
 export function objSolidRamp() {
-    const ramp: TerrainSegment = { x: 0, y: 0, forward: vnew(1, 0), normal: vnew(0, -1), length: 1, isGround: true };
+    const ramp: TerrainSegment = { x: 0, y: 0, slope: { forward: Compass.East, width: 1 }, forward: vnew(1, 0), normal: vnew(0, -1), length: 1, isGround: true };
     const side: TerrainSegment = { x: 1, y: 0, forward: Compass.South, normal: Compass.East, length: 1, isWall: true };
     const flat: TerrainSegment = { x: 1, y: 1, forward: Compass.East, normal: Compass.South, length: 1, isCeiling: true };
 
@@ -135,6 +139,8 @@ export function objSolidRamp() {
         ramp.forward = ramp.forward.at(scaleX, -scaleY).normalize();
         ramp.normal = perpendicular(ramp.normal.at(scaleX, -scaleY)).normalize();
         ramp.length = v.at(width, height).vlength;
+
+        ramp.slope!.width = width;
 
         g.dirty = false;
     }
