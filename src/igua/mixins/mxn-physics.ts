@@ -140,28 +140,31 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
             const testForward = segment.slope?.forward ?? segment.forward;
             const testLength = segment.slope?.width ?? segment.length;
 
+            const offset = v.at(xy.x - segment.x, xy.y - segment.y);
+            const offsetDotForward = dot(offset, testForward) / testLength;
+
+            const onForward = offsetDotForward > 0 && offsetDotForward < 1;
+
+            if (!onForward)
+                continue;
+
             const isGroundSlope = segment.isGround && segment.normal.y !== -1;
 
             const testNormal = isGroundSlope ? Compass.North : segment.normal;
 
-            const offset = v.at(xy.x - segment.x, xy.y - segment.y);
             const offsetDotNormal = dot(offset, segment.normal);
-            const offsetDotForward = dot(offset, testForward) / testLength;
             const speedDotNormal = dot(speed, segment.normal);
-
-            const onForward = offsetDotForward > 0 && offsetDotForward < 1;
             
             const absOffsetDotNormal = Math.abs(offsetDotNormal);
 
             const movingDownSlope = isGroundSlope
-                && onForward
                 // Jank to try and snap to slopes only when you recently fell off a ground block
                 && speed.y >= 0 && speed.y <= obj.gravity * 2
                 && Math.sign(speed.x) === Math.sign(segment.normal.x)
                 && absOffsetDotNormal < radius * 2;
 
             const shouldCorrectPosition = movingDownSlope
-                || (onForward && speedDotNormal < 0 && absOffsetDotNormal < radius);
+                || (speedDotNormal < 0 && absOffsetDotNormal < radius);
 
             if (shouldCorrectPosition) {
                 if (segment.isGround)
