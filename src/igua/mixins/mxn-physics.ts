@@ -18,7 +18,7 @@ export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physics
     if (debug && obj instanceof Container) {
         for (const child of obj.children)
             child.alpha = 0.5;
-        obj.addChild(new Graphics().step(gfx => gfx.clear().beginFill(0xff0000).drawCircle(physicsOffset.x, physicsOffset.y, physicsRadius)));
+        obj.addChild(new Graphics().step(gfx => gfx.clear().beginFill(0xff0000).drawRect(physicsOffset.x - physicsRadius, physicsOffset.y - physicsRadius, physicsRadius * 2, physicsRadius * 2)));
     }
 
     return obj
@@ -141,16 +141,19 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
             const testLength = segment.slope?.width ?? segment.length;
 
             const offset = v.at(xy.x - segment.x, xy.y - segment.y);
-            const offsetDotForward = dot(offset, testForward) / testLength;
+            const offsetDotForward = dot(offset, testForward);
 
-            const onForward = offsetDotForward > 0 && offsetDotForward < 1;
+            const isGroundSlope = segment.isGround && segment.normal.y !== -1;
+            const testNormal = isGroundSlope ? Compass.North : segment.normal;
+
+            const offsetDotTestNormal = dot(offset, testNormal);
+
+            // Give additional padding to ceilings (always) and floors (when above them)
+            const padding = !segment.isWall && (segment.isCeiling || offsetDotTestNormal > 0) ? radius : 0;
+            const onForward = offsetDotForward > -padding && offsetDotForward < testLength + padding;
 
             if (!onForward)
                 continue;
-
-            const isGroundSlope = segment.isGround && segment.normal.y !== -1;
-
-            const testNormal = isGroundSlope ? Compass.North : segment.normal;
 
             const offsetDotNormal = dot(offset, segment.normal);
             const speedDotNormal = dot(speed, segment.normal);
@@ -168,6 +171,9 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
 
             if (shouldCorrectPosition) {
                 if (segment.isGround)
+                    console.log(offsetDotNormal);
+
+                if (segment.isGround)
                     result.hitGround = true;
                 if (segment.isCeiling)
                     result.hitCeiling = true;
@@ -177,11 +183,13 @@ function push(obj: MxnPhysics, correctPosition = true, result = _result) {
                 // result.solidNormal = wall.normal;
 
                 if (correctPosition) {
-                    const offsetDotForwardTimesLength = offsetDotForward * segment.length;
+                    const normalizedOffsetDotForward = offsetDotForward / testLength;
                     if (!movingDownSlope)
-                        obj.x = segment.x + segment.forward.x * offsetDotForwardTimesLength + testNormal.x * radius - physicsOffsetX;
-                    if (!segment.isWall)
-                        obj.y = segment.y + segment.forward.y * offsetDotForwardTimesLength + testNormal.y * radius - physicsOffsetY;
+                        obj.x = segment.x + segment.forward.x * normalizedOffsetDotForward * segment.length + testNormal.x * radius - physicsOffsetX;
+                    if (!segment.isWall) {
+                        // Clamping is to prevent extension of slopes due to "padding" introduced above
+                        obj.y = segment.y + segment.forward.y * Math.max(0, Math.min(1, normalizedOffsetDotForward)) * segment.length + testNormal.y * radius - physicsOffsetY;
+                    }
                 }
             }
         }

@@ -134,6 +134,7 @@ export function objSolidRamp() {
         side.y = y;
         side.length = height;
 
+        // TODO: ramp y should always be the maximum of the ramp!
         ramp.x = x;
         ramp.y = y + height;
         ramp.forward = ramp.forward.at(scaleX, -scaleY).normalize();
