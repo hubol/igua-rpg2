@@ -1,11 +1,7 @@
 import { Graphics } from "pixi.js";
-import { Vector, vnew } from "../../lib/math/vector-type";
 import { Empty } from "../../lib/types/empty";
 import { SceneLocal } from "../core/scene/scene-local";
-import { Compass } from "../../lib/math/compass";
 import { scene } from "../globals";
-import { perpendicular } from "../../lib/math/vector";
-import { nlerp } from "../../lib/math/number";
 
 interface TerrainSegmentCoordinates {
     x0: number;
@@ -20,24 +16,6 @@ type TerrainSegmentDiscriminator =
     | { isFloor?: false; isCeiling?: false; isWallFacingRight:  true;  isWallFacingLeft?: false; }
     | { isFloor?: false; isCeiling?: false; isWallFacingRight?: false; isWallFacingLeft:  true;  }
 type TerrainSegment = TerrainSegmentCoordinates & TerrainSegmentDiscriminator;
-
-interface TerrainSegment_old {
-    x: number;
-    y: number;
-    slope?: {
-        forward: Vector;
-        width: number;
-    };
-    forward: Vector;
-    normal: Vector;
-    length: number;
-    // TODO determine what properties are necessary
-    isGround?: boolean;
-    isCeiling?: boolean;
-    isWall?: boolean;
-    isPipe?: boolean;
-    active?: boolean;
-}
 
 interface Terrain {
     destroyed: boolean;

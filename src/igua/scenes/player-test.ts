@@ -12,19 +12,19 @@ export function PlayerTest(looks = playerLooksJson) {
     b.width = 96;
     b.height = 32;
 
-    const b7 = objSolidBlock().at(96, 160 - 80).show();
-    b7.width = 96;
-    b7.height = 32;
+    // const b7 = objSolidBlock().at(96, 160 - 80).show();
+    // b7.width = 96;
+    // b7.height = 32;
 
-    // for (let i = 0; i < 2; i++) {
-    //     const b2 = objSolidBlock().at(160, 100 - i * 48).show();
-    //     b2.width = 32;
-    //     b2.height = 48;
-    // }
+    for (let i = 0; i < 8; i++) {
+        const b2 = objSolidBlock().at(160, 160 - i * 12).show();
+        b2.width = 32;
+        b2.height = 12;
+    }
 
-    // const b2 = objSolidBlock().at(56, 256 - 32).show();
-    // b2.width = 200;
-    // b2.height = 16;
+    const b2 = objSolidBlock().at(56, 256 - 32).show();
+    b2.width = 200;
+    b2.height = 16;
 
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
         await show('Hello!');
@@ -42,13 +42,17 @@ export function PlayerTest(looks = playerLooksJson) {
     //     }
     // }).show();
 
-    // const ramp = objSolidRamp().at(64 + 128, 100).show();
-    // ramp.width = 120;
-    // ramp.height = 60;
+    const ramp = objSolidRamp().at(64 + 128, 100).show();
+    ramp.width = 120;
+    ramp.height = 60;
 
     const ramp2 = objSolidRamp().at(56, 160).show();
     ramp2.width = 40;
     ramp2.height = 40;
+
+    const ramp3 = objSolidRamp().at(56 + 40, 160 - 40).show();
+    ramp3.width = 40;
+    ramp3.height = 40;
 
     // const ramp3 = objSolidRamp().at(140, 60).show();
     // ramp3.width = -80;
