@@ -42,7 +42,7 @@ interface TerrainSegment_old {
 interface Terrain {
     destroyed: boolean;
     dirty: boolean;
-    clean?: () => void;
+    clean: () => void;
     segments: TerrainSegment[];
 }
 
@@ -61,8 +61,10 @@ function cleanTerrain() {
             continue;
         }
 
-        if (wall.dirty)
-            wall.clean!();
+        if (wall.dirty) {
+            wall.clean();
+            wall.dirty = false;
+        }
 
         if (shift)
             terrains[i - shift] = wall;
