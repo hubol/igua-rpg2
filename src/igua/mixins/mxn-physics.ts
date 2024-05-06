@@ -202,7 +202,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 
 				const tanA = Math.abs((x1 - x0) / (y1 - y0));
 				const hCat = tanA * halfHeight;
-				const hSnap = Math.abs(speedY);
+				const hSnap = 0;//Math.abs(speedY);
 				
 				if (segment.isWallFacingLeft) {
 					if (speedX >= 0) {
