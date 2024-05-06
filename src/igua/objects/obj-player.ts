@@ -17,7 +17,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     let lastNonZeroSpeedXSign = 0;
 
     const puppet = objIguanaPuppet(looks)
-        .mixin(mxnPhysics, { gravity: PlayerConsts.Gravity, physicsRadius: 7, physicsOffset: [0, -9], debug: false, onMove: (event) => {
+        .mixin(mxnPhysics, { gravity: PlayerConsts.Gravity, physicsRadius: 7, physicsOffset: [0, -9], debug: true, onMove: (event) => {
             if (event.hitGround && !event.previousOnGround && event.previousSpeed.y > 1.2)
                 puppet.landingFrames = 10;
         } })

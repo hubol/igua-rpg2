@@ -12,37 +12,47 @@ export function PlayerTest(looks = playerLooksJson) {
     b.width = 96;
     b.height = 32;
 
-    const b2 = objSolidBlock().at(56, 256 - 32).show();
-    b2.width = 200;
-    b2.height = 16;
+    const b7 = objSolidBlock().at(96, 160 - 80).show();
+    b7.width = 96;
+    b7.height = 32;
+
+    // for (let i = 0; i < 2; i++) {
+    //     const b2 = objSolidBlock().at(160, 100 - i * 48).show();
+    //     b2.width = 32;
+    //     b2.height = 48;
+    // }
+
+    // const b2 = objSolidBlock().at(56, 256 - 32).show();
+    // b2.width = 200;
+    // b2.height = 16;
 
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
         await show('Hello!');
     }).show()
 
-    objSolidBlock().at(128, 100).step(block => {
-        if (Input.isDown('SelectUp'))
-            block.y -= 1;
+    // objSolidBlock().at(128, 100).step(block => {
+    //     if (Input.isDown('SelectUp'))
+    //         block.y -= 1;
 
-        if (Input.justWentDown('CastSpell')) {
-            block.x = Rng.int(32, 200);
-            block.y = Rng.int(32, 200);
-            block.width = Rng.int(8, 64);
-            block.height = Rng.int(8, 64);
-        }
-    }).show();
+    //     if (Input.justWentDown('CastSpell')) {
+    //         block.x = Rng.int(32, 200);
+    //         block.y = Rng.int(32, 200);
+    //         block.width = Rng.int(8, 64);
+    //         block.height = Rng.int(8, 64);
+    //     }
+    // }).show();
 
-    const ramp = objSolidRamp().at(64 + 128, 100).show();
-    ramp.width = 120;
-    ramp.height = 60;
+    // const ramp = objSolidRamp().at(64 + 128, 100).show();
+    // ramp.width = 120;
+    // ramp.height = 60;
 
-    const ramp2 = objSolidRamp().at(56, 160).show();
-    ramp2.width = 40;
-    ramp2.height = 40;
+    // const ramp2 = objSolidRamp().at(56, 160).show();
+    // ramp2.width = 40;
+    // ramp2.height = 40;
 
-    const ramp3 = objSolidRamp().at(140, 60).show();
-    ramp3.width = -80;
-    ramp3.height = 40;
+    // const ramp3 = objSolidRamp().at(140, 60).show();
+    // ramp3.width = -80;
+    // ramp3.height = 40;
 
     for (let i = 0; i < 1; i++)
         createPlayerObj(looks).at((256 / 20) * i, 40).step(player => {
