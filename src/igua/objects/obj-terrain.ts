@@ -165,7 +165,7 @@ class SolidBlockGraphics extends TerrainGraphics {
 
 class SolidRampGraphics extends TerrainGraphics {
     private static readonly _Weights: TerrainSegment[] = [
-        { x0: 0, y0: 1, x1: 0, y1: 0, isFloor: true },
+        { x0: 0, y0: 1, x1: 1, y1: 0, isFloor: true },
         { x0: 1, y0: 0, x1: 1, y1: 1, isWallFacingRight: true },
         { x0: 0, y0: 1, x1: 1, y1: 1, isCeiling: true }
     ];

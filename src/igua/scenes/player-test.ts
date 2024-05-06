@@ -46,9 +46,9 @@ export function PlayerTest(looks = playerLooksJson) {
     // ramp.width = 120;
     // ramp.height = 60;
 
-    // const ramp2 = objSolidRamp().at(56, 160).show();
-    // ramp2.width = 40;
-    // ramp2.height = 40;
+    const ramp2 = objSolidRamp().at(56, 160).show();
+    ramp2.width = 40;
+    ramp2.height = 40;
 
     // const ramp3 = objSolidRamp().at(140, 60).show();
     // ramp3.width = -80;
