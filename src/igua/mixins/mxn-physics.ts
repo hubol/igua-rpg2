@@ -187,7 +187,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 				}
 				else if (speedY >= 0) {
                     const touchY = Math.max(Math.min(y0, y1), y0 + (y1 - y0) * f - vCat);
-                    if (y > touchY - halfHeight - vSnap && y < touchY + halfHeight/* && touchY < floorY*/) {
+                    if (y > touchY - halfHeight - vSnap && y < touchY/* && touchY < floorY*/) {
                         if (correctPosition)
                             obj.y = touchY - halfHeight - physicsOffsetY;
                         // floorY = touchY;
