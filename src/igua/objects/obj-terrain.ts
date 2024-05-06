@@ -5,8 +5,23 @@ import { SceneLocal } from "../core/scene/scene-local";
 import { Compass } from "../../lib/math/compass";
 import { scene } from "../globals";
 import { perpendicular } from "../../lib/math/vector";
+import { nlerp } from "../../lib/math/number";
 
-interface TerrainSegment {
+interface TerrainSegmentCoordinates {
+    x0: number;
+    y0: number;
+    x1: number;
+    y1: number;
+}
+
+type TerrainSegmentDiscriminator =
+      { isFloor:  true;  isCeiling?: false; isWallFacingRight?: false; isWallFacingLeft?: false; }
+    | { isFloor?: false; isCeiling:  true;  isWallFacingRight?: false; isWallFacingLeft?: false; }
+    | { isFloor?: false; isCeiling?: false; isWallFacingRight:  true;  isWallFacingLeft?: false; }
+    | { isFloor?: false; isCeiling?: false; isWallFacingRight?: false; isWallFacingLeft:  true;  }
+type TerrainSegment = TerrainSegmentCoordinates & TerrainSegmentDiscriminator;
+
+interface TerrainSegment_old {
     x: number;
     y: number;
     slope?: {
@@ -55,107 +70,122 @@ function cleanTerrain() {
     }
 }
 
+function objTerrainSegmentDebug() {
+    return new Graphics()
+        .step(gfx => {
+            gfx.clear();
+            for (const terrain of LocalTerrain.value) {
+                for (const segment of terrain.segments) {
+                    let color = 0xff0000;
+                    if (segment.isWallFacingRight)
+                        color = 0xffff00;
+                    if (segment.isCeiling)
+                        color = 0x00ff00;
+                    if (segment.isWallFacingLeft)
+                        color = 0x0000ff;
+
+                    gfx.lineStyle(1, color);
+                    gfx.moveTo(segment.x0, segment.y0);
+                    gfx.lineTo(segment.x1, segment.y1);
+                }
+            }
+        })
+}
+
 function createLocalTerrain() {
     // TODO enum for stepOrder?!
     scene.root.step(() => cleanTerrain(), 999);
+    objTerrainSegmentDebug().show(scene.root);
     return Empty<Terrain>();
 }
 
 export const LocalTerrain = new SceneLocal(createLocalTerrain, 'LocalTerrain');
 
 export function objSolidBlock() {
-    const n: TerrainSegment = { x: 0, y: 0, forward: Compass.East, normal: Compass.North, length: 1, isGround: true };
-    const e: TerrainSegment = { x: 1, y: 0, forward: Compass.South, normal: Compass.East, length: 1, isWall: true };
-    const s: TerrainSegment = { x: 1, y: 1, forward: Compass.West, normal: Compass.South, length: 1, isCeiling: true };
-    const w: TerrainSegment = { x: 0, y: 1, forward: Compass.North, normal: Compass.West, length: 1, isWall: true };
-
-    function clean() {
-        const scaleX = g.scale.x;
-        const scaleY = g.scale.y;
-        const x = g.x - Math.max(-scaleX, 0);
-        const y = g.y - Math.max(-scaleY, 0);
-        const width = Math.abs(scaleX);
-        const height = Math.abs(scaleY);
-
-        n.x = x;
-        n.y = y;
-        n.length = width;
-
-        e.x = x + width;
-        e.y = y;
-        e.length = height;
-
-        s.x = x + width;
-        s.y = y + height;
-        s.length = width;
-
-        w.x = x;
-        w.y = y + height;
-        w.length = height;
-
-        g.dirty = false;
-    }
-
-    const g = new Graphics().merge({ dirty: true, segments: [ n, e, s, w ], clean }).beginFill(0xffffff).drawRect(0, 0, 1, 1);
-
-    const cb = g.transform.position.cb.bind(g.transform);
-
-    g.transform.position.cb = g.transform.scale.cb = () => {
-        g.dirty = true;
-        cb();
-    }
-
-    g.once('added', () => LocalTerrain.value.push(g));
-
-    return g;
+    return new SolidBlockGraphics();
 }
 
-const v = vnew();
-
-// TODO Messy copy-paste
 export function objSolidRamp() {
-    const ramp: TerrainSegment = { x: 0, y: 0, slope: { forward: Compass.East, width: 1 }, forward: vnew(1, 0), normal: vnew(0, -1), length: 1, isGround: true };
-    const side: TerrainSegment = { x: 1, y: 0, forward: Compass.South, normal: Compass.East, length: 1, isWall: true };
-    const flat: TerrainSegment = { x: 1, y: 1, forward: Compass.East, normal: Compass.South, length: 1, isCeiling: true };
+    return new SolidRampGraphics();
+}
 
-    function clean() {
-        const scaleX = g.scale.x;
-        const scaleY = g.scale.y;
-        const x = g.x - Math.max(-scaleX, 0);
-        const y = g.y - Math.max(-scaleY, 0);
-        const width = Math.abs(scaleX);
-        const height = Math.abs(scaleY);
+abstract class TerrainGraphics extends Graphics {
+    dirty = true;
+    segments: TerrainSegment[] = [];
 
-        flat.x = x;
-        flat.y = y + height;
-        flat.length = width;
+    constructor(private readonly _weights: TerrainSegment[]) {
+        super();
 
-        side.x = x + width;
-        side.y = y;
-        side.length = height;
+        for (let i = 0; i < _weights.length; i++)
+            this.segments.push({ ..._weights[i] });
 
-        // TODO: ramp y should always be the maximum of the ramp!
-        ramp.x = x;
-        ramp.y = y + height;
-        ramp.forward = ramp.forward.at(scaleX, -scaleY).normalize();
-        ramp.normal = perpendicular(ramp.normal.at(scaleX, -scaleY)).normalize();
-        ramp.length = v.at(width, height).vlength;
+        const cb = this.transform.position.cb.bind(this.transform);
 
-        ramp.slope!.width = width;
+        this.transform.position.cb = this.transform.scale.cb = () => {
+            this.dirty = true;
+            cb();
+        }
 
-        g.dirty = false;
+        this.once('added', () => LocalTerrain.value.push(this));
     }
 
-    const g = new Graphics().merge({ dirty: true, segments: [ ramp, side, flat ], clean }).beginFill(0xffffff).drawPolygon([ 0, 1, 1, 1, 1, 0 ]);
+    clean() {
+        const scaleX = this.scale.x;
+        const scaleY = this.scale.y;
+        const x0 = this.x - Math.max(-scaleX, 0);
+        const y0 = this.y - Math.max(-scaleY, 0);
+        const x1 = x0 + Math.abs(scaleX);
+        const y1 = y0 + Math.abs(scaleY);
 
-    const cb = g.transform.position.cb.bind(g.transform);
+        for (let i = 0; i < this._weights.length; i++) {
+            const segment = this.segments[i];
+            const weight = this._weights[i];
 
-    g.transform.position.cb = g.transform.scale.cb = () => {
-        g.dirty = true;
-        cb();
+            segment.x0 = weight.x0 ? x1 : x0;
+            segment.x1 = weight.x1 ? x1 : x0;
+            segment.y0 = weight.y0 ? y1 : y0;
+            segment.y1 = weight.y1 ? y1 : y0;
+        }
+    }
+}
+
+class SolidBlockGraphics extends TerrainGraphics {
+    private static readonly _Weights: TerrainSegment[] = [
+        { x0: 0, y0: 0, x1: 1, y1: 0, isFloor: true },
+        { x0: 0, y0: 0, x1: 0, y1: 1, isWallFacingLeft: true },
+        { x0: 1, y0: 0, x1: 1, y1: 1, isWallFacingRight: true },
+        { x0: 0, y0: 1, x1: 1, y1: 1, isCeiling: true }
+    ];
+
+    constructor() {
+        super(SolidBlockGraphics._Weights);
+        this.beginFill(0xffffff).drawRect(0, 0, 1, 1);
+    }
+}
+
+class SolidRampGraphics extends TerrainGraphics {
+    private static readonly _Weights: TerrainSegment[] = [
+        { x0: 0, y0: 1, x1: 0, y1: 0, isFloor: true },
+        { x0: 1, y0: 0, x1: 1, y1: 1, isWallFacingRight: true },
+        { x0: 0, y0: 1, x1: 1, y1: 1, isCeiling: true }
+    ];
+
+    constructor() {
+        super(SolidRampGraphics._Weights);
+        this.beginFill(0xffffff).drawPolygon([ 0, 1, 1, 1, 1, 0 ]);
     }
 
-    g.once('added', () => LocalTerrain.value.push(g));
+    clean() {
+        super.clean();
+        const isWallFacingRight = this.scale.x > 0;
+        this.segments[1].isWallFacingRight = isWallFacingRight;
+        this.segments[1].isWallFacingLeft = !isWallFacingRight;
 
-    return g;
+        const isFloorRamp = this.scale.y > 0;
+        this.segments[0].isFloor = isFloorRamp;
+        this.segments[0].isCeiling = !isFloorRamp;
+
+        this.segments[2].isCeiling = isFloorRamp;
+        this.segments[2].isFloor = !isFloorRamp;
+    }
 }

@@ -126,17 +126,24 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
     const physicsOffsetX = obj.physicsOffset.x;
     const physicsOffsetY = obj.physicsOffset.y;
 
-    const xy = vObjPosition.at(obj).add(physicsOffsetX, physicsOffsetY);
+    // const xy = vObjPosition.at(obj).add(physicsOffsetX, physicsOffsetY);
+    const x = obj.x + physicsOffsetX;
+    const y = obj.y + physicsOffsetY;
 
-    const speed = obj.speed;
-    const radius = obj.physicsRadius;
+    const speedX = obj.speed.x;
+    const speedY = obj.speed.y;
+
+    // const speed = obj.speed;
+    const halfHeight = obj.physicsRadius;
+    const halfWidth = obj.physicsRadius;
     // const radiusLessMaxSpeed = radius - Math.sqrt(radius) - radius * 0.1;
     
     result.hitCeiling = false;
     result.hitGround = false;
     result.hitWall = false;
 
-    const padding = edgesOnly ? 0 : radius;
+    const paddingHorizontal = edgesOnly ? 0 : halfWidth;
+    const paddingVertical = edgesOnly ? 0 : halfHeight;
 
     const terrains = LocalTerrain.value;
     for (let i = 0; i < terrains.length; i++) {
@@ -144,60 +151,111 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
         for (let j = 0; j < segments.length; j++) {
             const segment = segments[j];
 
-            if (segment.active === false || (!edgesOnly && segment.isWall))
-                continue;
+            const x0 = segment.x0;
+            const x1 = segment.x1;
+            const y0 = segment.y0;
+            const y1 = segment.y1;
 
-            const testForward = segment.slope?.forward ?? segment.forward;
-            const testLength = segment.slope?.width ?? segment.length;
+            if (segment.isFloor || segment.isCeiling) {
+                if (x <= x0 - paddingHorizontal || x >= x1 + paddingHorizontal)
+                    continue;
+                const f = (x - x0) / (x1 - x0);
 
-            const offset = v.at(xy.x - segment.x, xy.y - segment.y);
-            const offsetDotForward = dot(offset, testForward);
+				const tanA = Math.abs((y1 - y0) / (x1 - x0));
+				const vCat = tanA * halfHeight;
+				const vSnap = Math.abs(speedX);
 
-            const isGroundSlope = segment.isGround && segment.normal.y !== -1;
-            const testNormal = isGroundSlope ? Compass.North : segment.normal;
+                // console.log(f, tanA, vCat, vSnap);
+				
+				if (segment.isCeiling) {
+					if (speedY <= 0) {
+						// A valid point along this ceiling, where the player could be moved
+						// Smaller of:
+						// Start, end, or
+						// Desired player position along this ceiling
+						const touchY = Math.min(Math.max(y0, y1), y0 + (y1 - y0) * f + vCat);
 
-            const onForward = offsetDotForward > -padding && offsetDotForward < testLength + padding;
-
-            if (!onForward)
-                continue;
-
-            const offsetDotNormal = dot(offset, segment.normal);
-            const speedDotNormal = dot(speed, segment.normal);
-            
-            const absOffsetDotNormal = Math.abs(offsetDotNormal);
-
-            const movingDownSlope = isGroundSlope
-                // Jank to try and snap to slopes only when you recently fell off a ground block
-                && speed.y >= 0 && speed.y <= obj.gravity * 2
-                && Math.sign(speed.x) === Math.sign(segment.normal.x)
-                && absOffsetDotNormal < radius * 2;
-
-            const shouldCorrectPosition = movingDownSlope
-                || (speedDotNormal < 0 && absOffsetDotNormal < radius);
-
-            if (shouldCorrectPosition) {
-                if (segment.isGround)
-                    console.log(offsetDotNormal);
-
-                if (segment.isGround)
-                    result.hitGround = true;
-                if (segment.isCeiling)
-                    result.hitCeiling = true;
-                if (segment.isWall)
-                    result.hitWall = true;
-
-                // result.solidNormal = wall.normal;
-
-                if (correctPosition) {
-                    const normalizedOffsetDotForward = offsetDotForward / testLength;
-                    if (!movingDownSlope)
-                        obj.x = segment.x + segment.forward.x * normalizedOffsetDotForward * segment.length + testNormal.x * radius - physicsOffsetX;
-                    if (!segment.isWall) {
-                        // Clamping is to prevent extension of slopes due to "padding" introduced above
-                        obj.y = segment.y + segment.forward.y * Math.max(0, Math.min(1, normalizedOffsetDotForward)) * segment.length + testNormal.y * radius - physicsOffsetY;
-                    }
-                }
+						// If player Y position is greater than  
+						// the valid point
+						if (y > touchY - halfHeight && y < touchY + halfHeight + vSnap/* && touchY > ceilY*/) {
+                            if (correctPosition)
+							    obj.y = touchY + halfHeight - physicsOffsetY;
+							// ceilY = touchY;
+                            result.hitCeiling = true;
+						}
+					}
+				}
+				else {
+					//floor
+					if (speedY >= 0) {
+						const touchY = Math.max(Math.min(y0, y1), y0 + (y1 - y0) * f - vCat);
+						if (y > touchY - halfHeight - vSnap && y < touchY + halfHeight/* && touchY < floorY*/) {
+                            if (correctPosition)
+							    obj.y = touchY - halfHeight - physicsOffsetY;
+							// floorY = touchY;
+							result.hitGround = true;
+						}
+					}
+				}
             }
+            else {
+                const isWallFacingRight = segment.isWallFacingRight;
+            }
+
+            // if (segment.active === false || (!edgesOnly && segment.isWall))
+            //     continue;
+
+            // const testForward = segment.slope?.forward ?? segment.forward;
+            // const testLength = segment.slope?.width ?? segment.length;
+
+            // const offset = v.at(xy.x - segment.x, xy.y - segment.y);
+            // const offsetDotForward = dot(offset, testForward);
+
+            // const isGroundSlope = segment.isGround && segment.normal.y !== -1;
+            // const testNormal = isGroundSlope ? Compass.North : segment.normal;
+
+            // const onForward = offsetDotForward > -padding && offsetDotForward < testLength + padding;
+
+            // if (!onForward)
+            //     continue;
+
+            // const offsetDotNormal = dot(offset, segment.normal);
+            // const speedDotNormal = dot(speed, segment.normal);
+            
+            // const absOffsetDotNormal = Math.abs(offsetDotNormal);
+
+            // const movingDownSlope = isGroundSlope
+            //     // Jank to try and snap to slopes only when you recently fell off a ground block
+            //     && speed.y >= 0 && speed.y <= obj.gravity * 2
+            //     && Math.sign(speed.x) === Math.sign(segment.normal.x)
+            //     && absOffsetDotNormal < radius * 2;
+
+            // const shouldCorrectPosition = movingDownSlope
+            //     || (speedDotNormal < 0 && absOffsetDotNormal < radius);
+
+            // if (shouldCorrectPosition) {
+            //     // if (segment.isGround)
+            //     //     console.log(offsetDotNormal);
+
+            //     if (segment.isGround)
+            //         result.hitGround = true;
+            //     if (segment.isCeiling)
+            //         result.hitCeiling = true;
+            //     if (segment.isWall)
+            //         result.hitWall = true;
+
+            //     // result.solidNormal = wall.normal;
+
+            //     if (correctPosition) {
+            //         const normalizedOffsetDotForward = offsetDotForward / testLength;
+            //         if (!movingDownSlope)
+            //             obj.x = segment.x + segment.forward.x * normalizedOffsetDotForward * segment.length + testNormal.x * radius - physicsOffsetX;
+            //         if (!segment.isWall) {
+            //             // Clamping is to prevent extension of slopes due to "padding" introduced above
+            //             obj.y = segment.y + segment.forward.y * Math.max(0, Math.min(1, normalizedOffsetDotForward)) * segment.length + testNormal.y * radius - physicsOffsetY;
+            //         }
+            //     }
+            // }
         }
     }
 
