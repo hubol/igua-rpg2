@@ -1,8 +1,6 @@
 import { Container, DisplayObject, Graphics } from "pixi.js";
 import { Vector, vnew } from "../../lib/math/vector-type";
 import { LocalTerrain } from "../objects/obj-terrain";
-import { dot } from "../../lib/math/vector";
-import { Compass } from "../../lib/math/compass";
 
 interface PhysicsArgs {
     gravity: number;
@@ -40,7 +38,6 @@ function move(obj: MxnPhysics) {
     const radius = obj.physicsRadius;
     const radiusSqrt = Math.sqrt(radius);
 
-    const objSpeedYWasNotZero = obj.speed.y !== 0;
     const gravityOnlyStep = obj.speed.x === 0 && obj.speed.y === 0;
 
     obj.speed.y += obj.gravity;
@@ -119,24 +116,18 @@ function move(obj: MxnPhysics) {
     return moveEvent as MoveEvent;
 }
 
-const vObjPosition = vnew();
-const v = vnew();
-
 function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, result = _result) {
     const physicsOffsetX = obj.physicsOffset.x;
     const physicsOffsetY = obj.physicsOffset.y;
 
-    // const xy = vObjPosition.at(obj).add(physicsOffsetX, physicsOffsetY);
     const x = obj.x + physicsOffsetX;
     const y = obj.y + physicsOffsetY;
 
     const speedX = obj.speed.x;
     const speedY = obj.speed.y;
 
-    // const speed = obj.speed;
     const halfHeight = obj.physicsRadius;
     const halfWidth = obj.physicsRadius;
-    // const radiusLessMaxSpeed = radius - Math.sqrt(radius) - radius * 0.1;
     
     result.hitCeiling = false;
     result.hitGround = false;
@@ -156,45 +147,54 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
             const y0 = segment.y0;
             const y1 = segment.y1;
 
+            // The checks against different segments are very similar,
+            // but difficult to unify without costing performance
             if (segment.isFloor || segment.isCeiling) {
+                // Check if the object's position projected against the "forward"
+                // indicates that we are along this segment
+                // (Note: "forward" is inferred totally from the isFloor, isCeiling, etc discriminators)
                 if (x <= x0 - paddingHorizontal || x >= x1 + paddingHorizontal)
                     continue;
+
+                // How far along is the object along this segment
                 const f = (x - x0) / (x1 - x0);
 
 				const tanA = Math.abs((y1 - y0) / (x1 - x0));
 				const vCat = tanA * halfHeight;
-				const vSnap = Math.abs(speedX);
 
-                // console.log(f, tanA, vCat, vSnap);
+                // Enables you to be snapped to the floor while walking down a slope
+                // ...Although this might introduce a strange quirk with running + jumping into ceilings
+				const vSnap = Math.abs(speedX);
 				
 				if (segment.isCeiling) {
 					if (speedY <= 0) {
-						// A valid point along this ceiling, where the player could be moved
-						// Smaller of:
-						// Start, end, or
-						// Desired player position along this ceiling
+                        // Computes the expected Y-coordinate where the object should
+                        // touch this segment at its current X-coordinate
 						const touchY = Math.min(Math.max(y0, y1), y0 + (y1 - y0) * f + vCat);
 
-						// If player Y position is greater than  
-						// the valid point
-						if (y > touchY - halfHeight && y < touchY + halfHeight + vSnap/* && touchY > ceilY*/) {
+						// Snap to the segment only when we are close enough
+						if (y > touchY - halfHeight && y < touchY + halfHeight + vSnap) {
                             if (correctPosition)
 							    obj.y = touchY + halfHeight - physicsOffsetY;
-							// ceilY = touchY;
                             result.hitCeiling = true;
 						}
 					}
 				}
 				else if (speedY >= 0) {
                     const touchY = Math.max(Math.min(y0, y1), y0 + (y1 - y0) * f - vCat);
-                    if (y > touchY - halfHeight - vSnap && y < touchY/* && touchY < floorY*/) {
+
+                    // Note: Oddwarg's condition was
+                    // y > touchY - halfHeight - vSnap && y < touchY + halfHeight
+                    // But it seemed too generous.
+                    if (y > touchY - halfHeight - vSnap && y < touchY) {
                         if (correctPosition)
                             obj.y = touchY - halfHeight - physicsOffsetY;
-                        // floorY = touchY;
                         result.hitGround = true;
                     }
                 }
             }
+            // TODO: Verify if halfHeight should be used for wall segments
+            // I am guessing it is a copy-paste fail
             else {
                 if (y <= y0 - paddingVertical || y >= y1 + paddingVertical)
                     continue;
@@ -202,84 +202,32 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 
 				const tanA = Math.abs((x1 - x0) / (y1 - y0));
 				const hCat = tanA * halfHeight;
+                // Note: Horizontal snap might be useful only for sloped walls
+                // I don't think IguaRPG 2 will have these
+                // With hSnap set to Math.abs(speedY), and with a high enough speedY
+                // It is possible to be snapped to a wall while falling
+                // Even without being anywhere near the wall 
 				const hSnap = 0;//Math.abs(speedY);
 				
 				if (segment.isWallFacingLeft) {
 					if (speedX >= 0) {
 						const touchX = Math.max(Math.min(x0, x1), x0 + (x1 - x0) * f - hCat);
-						if (x > touchX - halfHeight - hSnap && x < touchX + halfHeight/* && touchX < wallL*/) {
+						if (x > touchX - halfHeight - hSnap && x < touchX + halfHeight) {
                             if (correctPosition)
 							    obj.x = touchX - halfHeight - physicsOffsetX;
-							// wallL = touchX;
 							result.hitWall = true;
 						}
 					}
 				}
 				else if (speedX <= 0) {
 					const touchX = Math.min(Math.max(x0, x1), x0 + (x1 - x0) * f + hCat);
-                    if (x > touchX - halfHeight && x < touchX + halfHeight + hSnap/* && touchX > wallR*/) {
+                    if (x > touchX - halfHeight && x < touchX + halfHeight + hSnap) {
                         if (correctPosition)
                             obj.x = touchX + halfHeight - physicsOffsetX;
-                        // wallR = touchX;
                         result.hitWall = true;
                     }
 				}
             }
-
-            // if (segment.active === false || (!edgesOnly && segment.isWall))
-            //     continue;
-
-            // const testForward = segment.slope?.forward ?? segment.forward;
-            // const testLength = segment.slope?.width ?? segment.length;
-
-            // const offset = v.at(xy.x - segment.x, xy.y - segment.y);
-            // const offsetDotForward = dot(offset, testForward);
-
-            // const isGroundSlope = segment.isGround && segment.normal.y !== -1;
-            // const testNormal = isGroundSlope ? Compass.North : segment.normal;
-
-            // const onForward = offsetDotForward > -padding && offsetDotForward < testLength + padding;
-
-            // if (!onForward)
-            //     continue;
-
-            // const offsetDotNormal = dot(offset, segment.normal);
-            // const speedDotNormal = dot(speed, segment.normal);
-            
-            // const absOffsetDotNormal = Math.abs(offsetDotNormal);
-
-            // const movingDownSlope = isGroundSlope
-            //     // Jank to try and snap to slopes only when you recently fell off a ground block
-            //     && speed.y >= 0 && speed.y <= obj.gravity * 2
-            //     && Math.sign(speed.x) === Math.sign(segment.normal.x)
-            //     && absOffsetDotNormal < radius * 2;
-
-            // const shouldCorrectPosition = movingDownSlope
-            //     || (speedDotNormal < 0 && absOffsetDotNormal < radius);
-
-            // if (shouldCorrectPosition) {
-            //     // if (segment.isGround)
-            //     //     console.log(offsetDotNormal);
-
-            //     if (segment.isGround)
-            //         result.hitGround = true;
-            //     if (segment.isCeiling)
-            //         result.hitCeiling = true;
-            //     if (segment.isWall)
-            //         result.hitWall = true;
-
-            //     // result.solidNormal = wall.normal;
-
-            //     if (correctPosition) {
-            //         const normalizedOffsetDotForward = offsetDotForward / testLength;
-            //         if (!movingDownSlope)
-            //             obj.x = segment.x + segment.forward.x * normalizedOffsetDotForward * segment.length + testNormal.x * radius - physicsOffsetX;
-            //         if (!segment.isWall) {
-            //             // Clamping is to prevent extension of slopes due to "padding" introduced above
-            //             obj.y = segment.y + segment.forward.y * Math.max(0, Math.min(1, normalizedOffsetDotForward)) * segment.length + testNormal.y * radius - physicsOffsetY;
-            //         }
-            //     }
-            // }
         }
     }
 
@@ -291,7 +239,6 @@ interface PushResult
     hitGround: boolean;
     hitCeiling: boolean;
     hitWall: boolean;
-    // solidNormal?: Vector;
 }
 
 const _result = {} as PushResult;
