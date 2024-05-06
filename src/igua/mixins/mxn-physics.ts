@@ -143,7 +143,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
     result.hitWall = false;
 
     const paddingHorizontal = edgesOnly ? 0 : halfWidth;
-    const paddingVertical = edgesOnly ? 0 : halfHeight;
+    const paddingVertical = 0;
 
     const terrains = LocalTerrain.value;
     for (let i = 0; i < terrains.length; i++) {
@@ -185,21 +185,45 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 						}
 					}
 				}
-				else {
-					//floor
-					if (speedY >= 0) {
-						const touchY = Math.max(Math.min(y0, y1), y0 + (y1 - y0) * f - vCat);
-						if (y > touchY - halfHeight - vSnap && y < touchY + halfHeight/* && touchY < floorY*/) {
+				else if (speedY >= 0) {
+                    const touchY = Math.max(Math.min(y0, y1), y0 + (y1 - y0) * f - vCat);
+                    if (y > touchY - halfHeight - vSnap && y < touchY + halfHeight/* && touchY < floorY*/) {
+                        if (correctPosition)
+                            obj.y = touchY - halfHeight - physicsOffsetY;
+                        // floorY = touchY;
+                        result.hitGround = true;
+                    }
+                }
+            }
+            else {
+                if (y <= y0 - paddingVertical || y >= y1 + paddingVertical)
+                    continue;
+				const f = (y - y0) / (y1 - y0);
+
+				const tanA = Math.abs((x1 - x0) / (y1 - y0));
+				const hCat = tanA * halfHeight;
+				const hSnap = Math.abs(speedY);
+				
+				if (segment.isWallFacingLeft) {
+					if (speedX >= 0) {
+						const touchX = Math.max(Math.min(x0, x1), x0 + (x1 - x0) * f - hCat);
+						if (x > touchX - halfHeight - hSnap && x < touchX + halfHeight/* && touchX < wallL*/) {
                             if (correctPosition)
-							    obj.y = touchY - halfHeight - physicsOffsetY;
-							// floorY = touchY;
-							result.hitGround = true;
+							    obj.x = touchX - halfHeight - physicsOffsetX;
+							// wallL = touchX;
+							result.hitWall = true;
 						}
 					}
 				}
-            }
-            else {
-                const isWallFacingRight = segment.isWallFacingRight;
+				else if (speedX <= 0) {
+					const touchX = Math.min(Math.max(x0, x1), x0 + (x1 - x0) * f + hCat);
+                    if (x > touchX/* - halfHeight*/ && x < touchX + halfHeight + hSnap/* && touchX > wallR*/) {
+                        if (correctPosition)
+                            obj.x = touchX + halfHeight - physicsOffsetX;
+                        // wallR = touchX;
+                        result.hitWall = true;
+                    }
+				}
             }
 
             // if (segment.active === false || (!edgesOnly && segment.isWall))
