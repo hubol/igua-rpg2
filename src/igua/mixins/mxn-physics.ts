@@ -180,7 +180,10 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 						}
 					}
 				}
-				else if (speedY >= 0) {
+                // Added edgesOnly ||
+                // So that while jumping up a slope, you can still collide with it
+                // It's possible this change should be replicated to the other kinds of segments
+                else if (edgesOnly || speedY > 0) {
                     const touchY = Math.max(Math.min(y0, y1), y0 + (y1 - y0) * f - vCat);
 
                     // Note: Oddwarg's condition was
