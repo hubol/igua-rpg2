@@ -74,6 +74,9 @@ function move(obj: MxnPhysics) {
         hsp = hspSign * Math.max(0, hspAbs - hspLength);
         vsp = vspSign * Math.max(0, vspAbs - vspLength);
 
+        PushWorkingState.floorY = Number.MAX_VALUE;
+        PushWorkingState.ceilY = Number.MIN_VALUE;
+
         const r1 = push(obj, true);
 
         moveEvent.hitCeiling ||= r1.hitCeiling;
@@ -102,6 +105,11 @@ function move(obj: MxnPhysics) {
     }
 
     return moveEvent as MoveEvent;
+}
+
+const PushWorkingState = {
+    floorY: 0,
+    ceilY: 0,
 }
 
 function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, result = _result) {
@@ -164,7 +172,9 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                         // Note: Oddwarg's condition was
                         // y > touchY - halfHeight && y < touchY + halfHeight + vSnap
                         // But it seemed too generous.
-						if (y > touchY && y < touchY + halfHeight + vSnap) {
+						if (y > touchY && y < touchY + halfHeight + vSnap && touchY > PushWorkingState.ceilY) {
+                            PushWorkingState.ceilY = touchY;
+
                             if (correctPosition) {
                                 obj.y = touchY + halfHeight - physicsOffsetY;
                                 obj.speed.y = 0;
@@ -182,7 +192,9 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                     // Note: Oddwarg's condition was
                     // y > touchY - halfHeight - vSnap && y < touchY + halfHeight
                     // But it seemed too generous.
-                    if (y > touchY - halfHeight - vSnap && y < touchY) {
+                    if (y > touchY - halfHeight - vSnap && y < touchY && touchY < PushWorkingState.floorY) {
+                        PushWorkingState.floorY = touchY;
+
                         if (correctPosition) {
                             obj.y = touchY - halfHeight - physicsOffsetY;
                             // e.g. If you are jumping up a slope, only correct position
