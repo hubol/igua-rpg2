@@ -161,9 +161,22 @@ class SolidRampGraphics extends TerrainGraphics {
         this.segments[1].isWallFacingRight = isWallFacingRight;
         this.segments[1].isWallFacingLeft = !isWallFacingRight;
 
+        // TODO I feel like there is a better way to handle scaling...
+
+        if (!isWallFacingRight) {
+            const x0 = this.segments[2].x0;
+            this.segments[1].x0 = x0;
+            this.segments[1].x1 = x0;
+        }
+
         const isFloorRamp = this.scale.y > 0;
         this.segments[0].isFloor = isFloorRamp;
         this.segments[0].isCeiling = !isFloorRamp;
+        if (!isWallFacingRight) {
+            const y0 = this.segments[0].y0;
+            this.segments[0].y0 = this.segments[0].y1;
+            this.segments[0].y1 = y0;
+        }
 
         this.segments[2].isCeiling = isFloorRamp;
         this.segments[2].isFloor = !isFloorRamp;
