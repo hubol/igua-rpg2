@@ -156,14 +156,9 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 
 				const tanA = Math.abs((y1 - y0) / (x1 - x0));
 				const vCat = tanA * halfHeight;
-
-                // Enables you to be snapped to the floor while walking down a slope
-                // ...Although this might introduce a strange quirk with running + jumping into ceilings
-                // obj.speed.y >= 0 check added to allow jumping while walking up slopes
-				const vSnap = obj.speed.y >= 0 ? Math.abs(obj.speed.x) : 0;
 				
 				if (segment.isCeiling) {
-					if (obj.speed.y <= 0) {
+					if ((isSlope && edgesOnly) || obj.speed.y <= 0) {
                         // Computes the expected Y-coordinate where the object should
                         // touch this segment at its current X-coordinate
 						const touchY = Math.min(Math.max(y0, y1), y0 + (y1 - y0) * f + vCat);
@@ -172,12 +167,14 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                         // Note: Oddwarg's condition was
                         // y > touchY - halfHeight && y < touchY + halfHeight + vSnap
                         // But it seemed too generous.
-						if (y > touchY && y < touchY + halfHeight + vSnap && touchY > PushWorkingState.ceilY) {
+                        // There is also no need to vertically snap to the ceiling
+						if (y > touchY && y < touchY + halfHeight && touchY > PushWorkingState.ceilY) {
                             PushWorkingState.ceilY = touchY;
 
                             if (correctPosition) {
                                 obj.y = touchY + halfHeight - physicsOffsetY;
-                                obj.speed.y = 0;
+                                if (obj.speed.y < 0)
+                                    obj.speed.y = 0;
                             }
                             result.hitCeiling = true;
 						}
@@ -189,10 +186,17 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                 else if ((isSlope && edgesOnly) || obj.speed.y >= 0) {
                     const touchY = Math.max(Math.min(y0, y1), y0 + (y1 - y0) * f - vCat);
 
+                    // Slope edges are greedier
+                    const thickSlopeEdge = isSlope && edgesOnly ? halfHeight : 0;
+
+                    // Enables you to be snapped to the floor while walking down a slope
+                    // obj.speed.y >= 0 check added to allow jumping while walking up slopes
+                    const vSnap = obj.speed.y >= 0 ? Math.abs(obj.speed.x) : 0;
+                    
                     // Note: Oddwarg's condition was
                     // y > touchY - halfHeight - vSnap && y < touchY + halfHeight
                     // But it seemed too generous.
-                    if (y > touchY - halfHeight - vSnap && y < touchY && touchY < PushWorkingState.floorY) {
+                    if (y > touchY - halfHeight - vSnap && y < touchY + thickSlopeEdge && touchY < PushWorkingState.floorY) {
                         PushWorkingState.floorY = touchY;
 
                         if (correctPosition) {
