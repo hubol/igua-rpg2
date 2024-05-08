@@ -167,6 +167,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 						if (y > touchY && y < touchY + halfHeight + vSnap) {
                             if (correctPosition) {
                                 obj.y = touchY + halfHeight - physicsOffsetY;
+                                obj.speed.y = 0;
                             }
                             result.hitCeiling = true;
 						}
