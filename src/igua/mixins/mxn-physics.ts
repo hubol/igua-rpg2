@@ -218,17 +218,11 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 
 				const tanA = Math.abs((x1 - x0) / (y1 - y0));
 				const hCat = tanA * halfHeight;
-                // Note: Horizontal snap might be useful only for sloped walls
-                // I don't think IguaRPG 2 will have these
-                // With hSnap set to Math.abs(speedY), and with a high enough speedY
-                // It is possible to be snapped to a wall while falling
-                // Even without being anywhere near the wall 
-				const hSnap = 0;//Math.abs(speedY);
 				
 				if (segment.isWallFacingLeft) {
 					if (obj.speed.x >= 0) {
 						const touchX = Math.max(Math.min(x0, x1), x0 + (x1 - x0) * f - hCat);
-						if (x > touchX - halfHeight - hSnap && x < touchX + halfHeight) {
+						if (x > touchX - halfHeight && x < touchX + halfHeight) {
                             if (correctPosition) {
                                 obj.x = touchX - halfHeight - physicsOffsetX;
                                 obj.speed.x = 0;
@@ -239,7 +233,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 				}
 				else if (obj.speed.x <= 0) {
 					const touchX = Math.min(Math.max(x0, x1), x0 + (x1 - x0) * f + hCat);
-                    if (x > touchX - halfHeight && x < touchX + halfHeight + hSnap) {
+                    if (x > touchX - halfHeight && x < touchX + halfHeight) {
                         if (correctPosition) {
                             obj.x = touchX + halfHeight - physicsOffsetX;
                             obj.speed.x = 0;
