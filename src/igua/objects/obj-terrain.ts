@@ -173,8 +173,10 @@ class SolidRampGraphics extends TerrainGraphics {
         }
 
         const isFloorRamp = this.scale.y > 0;
+
         this.segments[0].isFloor = isFloorRamp;
         this.segments[0].isCeiling = !isFloorRamp;
+
         if (!isWallFacingRight) {
             const y0 = this.segments[0].y0;
             this.segments[0].y0 = this.segments[0].y1;
@@ -183,5 +185,15 @@ class SolidRampGraphics extends TerrainGraphics {
 
         this.segments[2].isCeiling = isFloorRamp;
         this.segments[2].isFloor = !isFloorRamp;
+
+        if (!isFloorRamp) {
+            const yMin = Math.min(this.segments[0].y0, this.segments[0].y1);
+            const y0 = this.segments[0].y0;
+            this.segments[0].y0 = this.segments[0].y1;
+            this.segments[0].y1 = y0;
+
+            this.segments[2].y0 = yMin;
+            this.segments[2].y1 = yMin;
+        }
     }
 }
