@@ -151,7 +151,8 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 
                 // Enables you to be snapped to the floor while walking down a slope
                 // ...Although this might introduce a strange quirk with running + jumping into ceilings
-				const vSnap = Math.abs(obj.speed.x);
+                // obj.speed.y >= 0 check added to allow jumping while walking up slopes
+				const vSnap = obj.speed.y >= 0 ? Math.abs(obj.speed.x) : 0;
 				
 				if (segment.isCeiling) {
 					if (obj.speed.y <= 0) {
@@ -166,7 +167,6 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 						if (y > touchY && y < touchY + halfHeight + vSnap) {
                             if (correctPosition) {
                                 obj.y = touchY + halfHeight - physicsOffsetY;
-                                obj.speed.y = 0;
                             }
                             result.hitCeiling = true;
 						}
@@ -184,7 +184,9 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                     if (y > touchY - halfHeight - vSnap && y < touchY) {
                         if (correctPosition) {
                             obj.y = touchY - halfHeight - physicsOffsetY;
-                            obj.speed.y = 0;
+                            // e.g. If you are jumping up a slope, only correct position
+                            if (obj.speed.y >= 0)
+                                obj.speed.y = 0;
                         }
                         result.hitGround = true;
                     }
