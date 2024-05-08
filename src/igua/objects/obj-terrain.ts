@@ -64,6 +64,9 @@ function objTerrainSegmentDebug() {
                     if (segment.isWallFacingLeft)
                         color = 0x0000ff;
 
+                    if (segment.isCeiling || segment.isFloor)
+                        gfx.lineStyle(0).beginFill(color, 0.5).drawRect(segment.x0 - 1, segment.y0 - 1, 3, 3);
+
                     gfx.lineStyle(1, color);
                     gfx.moveTo(segment.x0, segment.y0);
                     gfx.lineTo(segment.x1, segment.y1);
