@@ -3,7 +3,7 @@ import { createPlayerObj } from "../objects/obj-player";
 import { Tx } from "../../assets/textures";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { show } from "../cutscene/show";
-import { objSolidBlock, objSolidRamp } from "../objects/obj-terrain";
+import { objSolidBlock, objSolidSlope } from "../objects/obj-terrain";
 import { Input } from "../globals";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
@@ -86,8 +86,8 @@ export function PlayerTest(looks = playerLooksJson) {
 function level() {
     const b = container();
     objSolidBlock().at(32, 0).sized(-128, 32).show(b);
-    objSolidRamp().at(32, 32).sized(-64, -32).show(b);
-    objSolidRamp().at(128, 32).sized(32, -32).show(b);
+    objSolidSlope().at(32, 32).sized(-64, -32).show(b);
+    objSolidSlope().at(128, 32).sized(32, -32).show(b);
     objSolidBlock().at(32, 96).sized(128, 32).show(b);
     objSolidBlock().at(160, 0).sized(32, 128).show(b);
 

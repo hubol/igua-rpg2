@@ -209,7 +209,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                 }
             }
             // Note: Some optimizations can be made for walls since IguaRPG 2 has the following assumptions:
-            // - Walls will never be ramps
+            // - Walls will never be slopes
             // - Wall corners should not be processed
             else {
                 if (y <= y0 || y >= y1)

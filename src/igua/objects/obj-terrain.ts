@@ -88,8 +88,8 @@ export function objSolidBlock() {
     return new SolidBlockGraphics();
 }
 
-export function objSolidRamp() {
-    return new SolidRampGraphics();
+export function objSolidSlope() {
+    return new SolidSlopeGraphics();
 }
 
 abstract class TerrainGraphics extends Graphics {
@@ -145,7 +145,7 @@ class SolidBlockGraphics extends TerrainGraphics {
     }
 }
 
-class SolidRampGraphics extends TerrainGraphics {
+class SolidSlopeGraphics extends TerrainGraphics {
     private static readonly _Weights: TerrainSegment[] = [
         { x0: 0, y0: 1, x1: 1, y1: 0, isFloor: true },
         { x0: 1, y0: 0, x1: 1, y1: 1, isWallFacingRight: true },
@@ -153,7 +153,7 @@ class SolidRampGraphics extends TerrainGraphics {
     ];
 
     constructor() {
-        super(SolidRampGraphics._Weights);
+        super(SolidSlopeGraphics._Weights);
         this.beginFill(0xffffff).drawPolygon([ 0, 1, 1, 1, 1, 0 ]);
     }
 
@@ -171,10 +171,10 @@ class SolidRampGraphics extends TerrainGraphics {
             this.segments[1].x1 = x0;
         }
 
-        const isFloorRamp = this.scale.y > 0;
+        const isFloorSlope = this.scale.y > 0;
 
-        this.segments[0].isFloor = isFloorRamp;
-        this.segments[0].isCeiling = !isFloorRamp;
+        this.segments[0].isFloor = isFloorSlope;
+        this.segments[0].isCeiling = !isFloorSlope;
 
         if (!isWallFacingRight) {
             const y0 = this.segments[0].y0;
@@ -182,10 +182,10 @@ class SolidRampGraphics extends TerrainGraphics {
             this.segments[0].y1 = y0;
         }
 
-        this.segments[2].isCeiling = isFloorRamp;
-        this.segments[2].isFloor = !isFloorRamp;
+        this.segments[2].isCeiling = isFloorSlope;
+        this.segments[2].isFloor = !isFloorSlope;
 
-        if (!isFloorRamp) {
+        if (!isFloorSlope) {
             const yMin = Math.min(this.segments[0].y0, this.segments[0].y1);
             const y0 = this.segments[0].y0;
             this.segments[0].y0 = this.segments[0].y1;
