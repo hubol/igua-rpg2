@@ -11,10 +11,10 @@ interface TerrainSegmentCoordinates {
 }
 
 type TerrainSegmentDiscriminator =
-      { isFloor:  true;  isCeiling?: false; isWallFacingRight?: false; isWallFacingLeft?: false; }
-    | { isFloor?: false; isCeiling:  true;  isWallFacingRight?: false; isWallFacingLeft?: false; }
-    | { isFloor?: false; isCeiling?: false; isWallFacingRight:  true;  isWallFacingLeft?: false; }
-    | { isFloor?: false; isCeiling?: false; isWallFacingRight?: false; isWallFacingLeft:  true;  }
+      { isFloor:  true;  isCeiling?: false; isWallFacingRight?: false; isWallFacingLeft?: false; isPipe?: boolean; }
+    | { isFloor?: false; isCeiling:  true;  isWallFacingRight?: false; isWallFacingLeft?: false; isPipe?: false;   }
+    | { isFloor?: false; isCeiling?: false; isWallFacingRight:  true;  isWallFacingLeft?: false; isPipe?: false;   }
+    | { isFloor?: false; isCeiling?: false; isWallFacingRight?: false; isWallFacingLeft:  true;  isPipe?: false;   }
 type TerrainSegment = TerrainSegmentCoordinates & TerrainSegmentDiscriminator;
 
 interface Terrain {
