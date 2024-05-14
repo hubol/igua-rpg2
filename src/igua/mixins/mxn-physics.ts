@@ -127,7 +127,6 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
     result.hitWall = false;
 
     const paddingHorizontal = edgesOnly ? 0 : halfWidth;
-    const paddingVertical = 0;
 
     const terrains = LocalTerrain.value;
     for (let i = 0; i < terrains.length; i++) {
@@ -209,33 +208,21 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                     }
                 }
             }
-            // TODO: Verify if halfHeight should be used for wall segments
-            // I am guessing it is a copy-paste fail
+            // Note: Some optimizations can be made for walls since IguaRPG 2 has the following assumptions:
+            // - Walls will never be ramps
+            // - Wall corners should not be processed
             else {
-                if (y <= y0 - paddingVertical || y >= y1 + paddingVertical)
+                if (y <= y0 || y >= y1)
                     continue;
-				const f = (y - y0) / (y1 - y0);
 
-				const tanA = Math.abs((x1 - x0) / (y1 - y0));
-				const hCat = tanA * halfHeight;
-				
-				if (segment.isWallFacingLeft) {
-					if (obj.speed.x >= 0) {
-						const touchX = Math.max(Math.min(x0, x1), x0 + (x1 - x0) * f - hCat);
-						if (x > touchX - halfHeight && x < touchX + halfHeight) {
-                            if (correctPosition) {
-                                obj.x = touchX - halfHeight - physicsOffsetX;
-                                obj.speed.x = 0;
-                            }
-							result.hitWall = true;
-						}
-					}
-				}
-				else if (obj.speed.x <= 0) {
-					const touchX = Math.min(Math.max(x0, x1), x0 + (x1 - x0) * f + hCat);
-                    if (x > touchX - halfHeight && x < touchX + halfHeight) {
+                if ((segment.isWallFacingLeft && obj.speed.x >= 0) || (segment.isWallFacingRight && obj.speed.x <= 0)) {
+                    const f = (y - y0) / (y1 - y0);
+                    const touchX = Math.max(Math.min(x0, x1), x0 + (x1 - x0) * f);
+
+                    if (x > touchX - halfWidth && x < touchX + halfWidth) {
                         if (correctPosition) {
-                            obj.x = touchX + halfHeight - physicsOffsetX;
+                            const correctPositionOffset = segment.isWallFacingRight ? halfWidth : -halfWidth;
+                            obj.x = touchX + correctPositionOffset - physicsOffsetX;
                             obj.speed.x = 0;
                         }
                         result.hitWall = true;
