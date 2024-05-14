@@ -2,6 +2,7 @@ import { Container, DisplayObject, Rectangle } from "pixi.js";
 import { DefaultStages } from "../game-engine/default-stages";
 import { Pojo } from "../types/pojo";
 import { merge } from "../object/merge";
+import { VectorSimple } from "../math/vector-type";
 
 declare module "pixi.js" {
     interface DisplayObject {
@@ -13,7 +14,9 @@ declare module "pixi.js" {
     }
 
     interface Container {
-        removeAllChildren();
+        sized(vector: VectorSimple);
+        sized(width: number, height: number);
+        removeAllChildren(): this;
     }
 }
 
@@ -61,6 +64,20 @@ Object.defineProperties(Container.prototype, {
             }
 
             tempDisplayObjects.length = 0;
+        }
+    },
+    sized: {
+        value: function (this: Container, width_vector: number | VectorSimple, height?: number) {
+            if (height === undefined) {
+                this.width = (<VectorSimple>width_vector).x;
+                this.height = (<VectorSimple>width_vector).y;
+            }
+            else {
+                this.width = <number>width_vector;
+                this.height = height;
+            }
+
+            return this;
         }
     }
 })
