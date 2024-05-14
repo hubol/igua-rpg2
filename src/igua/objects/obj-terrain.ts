@@ -105,6 +105,7 @@ abstract class TerrainGraphics extends Graphics {
         const cb = this.transform.position.cb.bind(this.transform);
 
         this.transform.position.cb = this.transform.scale.cb = () => {
+            this.pivot.set(this.transform.scale.x < 0 ? 1 : 0, this.transform.scale.y < 0 ? 1 : 0);
             this.dirty = true;
             cb();
         }
@@ -113,12 +114,10 @@ abstract class TerrainGraphics extends Graphics {
     }
 
     clean() {
-        const scaleX = this.scale.x;
-        const scaleY = this.scale.y;
-        const x0 = this.x - Math.max(-scaleX, 0);
-        const y0 = this.y - Math.max(-scaleY, 0);
-        const x1 = x0 + Math.abs(scaleX);
-        const y1 = y0 + Math.abs(scaleY);
+        const x0 = this.x;
+        const y0 = this.y;
+        const x1 = x0 + Math.abs(this.scale.x);
+        const y1 = y0 + Math.abs(this.scale.y);
 
         for (let i = 0; i < this._weights.length; i++) {
             const segment = this.segments[i];

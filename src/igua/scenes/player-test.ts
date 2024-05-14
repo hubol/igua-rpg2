@@ -6,25 +6,26 @@ import { show } from "../cutscene/show";
 import { objSolidBlock, objSolidRamp } from "../objects/obj-terrain";
 import { Input } from "../globals";
 import { Rng } from "../../lib/math/rng";
+import { container } from "../../lib/pixi/container";
 
 export function PlayerTest(looks = playerLooksJson) {
-    const b = objSolidBlock().at(96, 160).show();
-    b.width = 96;
-    b.height = 32;
+    // const b = objSolidBlock().at(96, 160).show();
+    // b.width = 96;
+    // b.height = 32;
 
     // const b7 = objSolidBlock().at(96, 160 - 80).show();
     // b7.width = 96;
     // b7.height = 32;
 
-    for (let i = 0; i < 8; i++) {
-        const b2 = objSolidBlock().at(160, 160 - i * 12).show();
-        b2.width = 32;
-        b2.height = 12;
-    }
+    // for (let i = 0; i < 8; i++) {
+    //     const b2 = objSolidBlock().at(160, 160 - i * 12).show();
+    //     b2.width = 32;
+    //     b2.height = 12;
+    // }
 
-    const b2 = objSolidBlock().at(56, 256 - 32).show();
-    b2.width = 200;
-    b2.height = 16;
+    // const b2 = objSolidBlock().at(56, 256 - 32).show();
+    // b2.width = 200;
+    // b2.height = 16;
 
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
         await show('Hello!');
@@ -42,33 +43,34 @@ export function PlayerTest(looks = playerLooksJson) {
     //     }
     // }).show();
 
-    const ramp = objSolidRamp().at(64 + 128, 100).show();
-    ramp.width = 120;
-    ramp.height = 60;
+    // const ramp = objSolidRamp().at(64 + 128, 100).show();
+    // ramp.width = 120;
+    // ramp.height = 60;
 
-    const ramp2 = objSolidRamp().at(56, 160 + 40).show();
-    ramp2.width = -40;
-    ramp2.height = -40;
+    // const ramp2 = objSolidRamp().at(56, 160 + 40).show();
+    // ramp2.width = -40;
+    // ramp2.height = -40;
 
-    const ramp4 = objSolidRamp().at(56 - 40, 160 - 40).show();
-    ramp4.width = 40;
-    ramp4.height = -40;
+    // const ramp4 = objSolidRamp().at(56 - 40, 160 - 40).show();
+    // ramp4.width = 40;
+    // ramp4.height = -40;
 
-    const ramp5 = objSolidRamp().at(56 + 40, 160 - 120).show();
-    ramp5.width = -40;
-    ramp5.height = 40;
+    // const ramp5 = objSolidRamp().at(56 + 40, 160 - 120).show();
+    // ramp5.width = -40;
+    // ramp5.height = 40;
 
-    const ramp3 = objSolidRamp().at(56 + 40, 160 - 40).show();
-    ramp3.width = 40;
-    ramp3.height = 40;
+    // const ramp3 = objSolidRamp().at(56 + 40, 160 - 40).show();
+    // ramp3.width = 40;
+    // ramp3.height = 40;
 
-    const ramp6 = objSolidRamp().at(56 + 40 - 40, 160 - 40 + 40).show();
-    ramp6.width = 40;
-    ramp6.height = 40;
+    // const ramp6 = objSolidRamp().at(56 + 40 - 40, 160 - 40 + 40).show();
+    // ramp6.width = 40;
+    // ramp6.height = 40;
 
     // const ramp3 = objSolidRamp().at(140, 60).show();
     // ramp3.width = -80;
     // ramp3.height = 40;
+    level();
 
     for (let i = 0; i < 1; i++)
         createPlayerObj(looks).at((256 / 20) * i, 40).step(player => {
@@ -79,6 +81,22 @@ export function PlayerTest(looks = playerLooksJson) {
             else if (player.x < -player.width)
                 player.x = 256 + player.width;
         }).show();
+}
+
+function level() {
+    const b = container();
+    objSolidBlock().at(32, 0).sized(-128, 32).show(b);
+    objSolidRamp().at(32, 32).sized(-64, -32).show(b);
+    objSolidRamp().at(128, 32).sized(32, -32).show(b);
+    objSolidBlock().at(32, 96).sized(128, 32).show(b);
+    objSolidBlock().at(160, 0).sized(32, 128).show(b);
+
+    for (const child of b.children) {
+        child.x += 32;
+        child.y += 64;
+    }
+
+    b.show();
 }
 
 const playerLooksJson = {
