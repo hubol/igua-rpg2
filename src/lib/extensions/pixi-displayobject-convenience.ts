@@ -14,9 +14,9 @@ declare module "pixi.js" {
     }
 
     interface Container {
-        sized(vector: VectorSimple);
-        sized(width: number, height: number);
-        removeAllChildren(): this;
+        sized(vector: VectorSimple): this;
+        sized(width: number, height: number): this;
+        removeAllChildren();
     }
 }
 
