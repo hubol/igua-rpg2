@@ -3,6 +3,11 @@ import { Empty } from "../../lib/types/empty";
 import { SceneLocal } from "../core/scene/scene-local";
 import { scene } from "../globals";
 
+/**
+ * Describes a line segment. Different kinds of terrain segments make certain guarantees:
+ * - `isFloor` or `isCeiling`: `x0` must always be <= `x1`
+ * - `isWallFacingRight` or `isWallFacingLeft`: `y0` must always be <= `y1`
+ */
 interface TerrainSegmentCoordinates {
     x0: number;
     y0: number;
@@ -114,10 +119,18 @@ abstract class TerrainGraphics extends Graphics {
     }
 
     clean() {
-        const x0 = this.x;
-        const y0 = this.y;
-        const x1 = x0 + Math.abs(this.scale.x);
-        const y1 = y0 + Math.abs(this.scale.y);
+        const xMin = this.x;
+        const yMin = this.y;
+        const xMax = xMin + Math.abs(this.scale.x);
+        const yMax = yMin + Math.abs(this.scale.y);
+
+        const hFlip = this.scale.x < 0;
+        const vFlip = this.scale.y < 0;
+
+        const x0 = hFlip ? xMax : xMin;
+        const y0 = vFlip ? yMax : yMin;
+        const x1 = hFlip ? xMin : xMax;
+        const y1 = vFlip ? yMin : yMax;
 
         for (let i = 0; i < this._weights.length; i++) {
             const segment = this.segments[i];
@@ -127,6 +140,24 @@ abstract class TerrainGraphics extends Graphics {
             segment.x1 = weight.x1 ? x1 : x0;
             segment.y0 = weight.y0 ? y1 : y0;
             segment.y1 = weight.y1 ? y1 : y0;
+
+            // Normalize to comply with contract described in `TerrainSegmentCoordinates`
+            if (((weight.isCeiling || weight.isFloor) && segment.x0 > segment.x1)
+                || ((weight.isWallFacingLeft || weight.isWallFacingRight) && segment.y0 > segment.y1)) {
+                const x0p = segment.x0;
+                const y0p = segment.y0;
+
+                segment.x0 = segment.x1;
+                segment.y0 = segment.y1;
+                segment.x1 = x0p;
+                segment.y1 = y0p;
+            }
+
+            segment.isCeiling = (weight.isCeiling && !vFlip) || (weight.isFloor && vFlip);
+            segment.isFloor = (weight.isFloor && !vFlip) || (weight.isCeiling && vFlip);
+
+            segment.isWallFacingLeft = (weight.isWallFacingLeft && !hFlip) || (weight.isWallFacingRight && hFlip);
+            segment.isWallFacingRight = (weight.isWallFacingRight && !hFlip) || (weight.isWallFacingLeft && hFlip);
         }
     }
 }
@@ -155,44 +186,5 @@ class SolidSlopeGraphics extends TerrainGraphics {
     constructor() {
         super(SolidSlopeGraphics._Weights);
         this.beginFill(0xffffff).drawPolygon([ 0, 1, 1, 1, 1, 0 ]);
-    }
-
-    clean() {
-        super.clean();
-        const isWallFacingRight = this.scale.x > 0;
-        this.segments[1].isWallFacingRight = isWallFacingRight;
-        this.segments[1].isWallFacingLeft = !isWallFacingRight;
-
-        // TODO I feel like there is a better way to handle scaling...
-
-        if (!isWallFacingRight) {
-            const x0 = this.segments[2].x0;
-            this.segments[1].x0 = x0;
-            this.segments[1].x1 = x0;
-        }
-
-        const isFloorSlope = this.scale.y > 0;
-
-        this.segments[0].isFloor = isFloorSlope;
-        this.segments[0].isCeiling = !isFloorSlope;
-
-        if (!isWallFacingRight) {
-            const y0 = this.segments[0].y0;
-            this.segments[0].y0 = this.segments[0].y1;
-            this.segments[0].y1 = y0;
-        }
-
-        this.segments[2].isCeiling = isFloorSlope;
-        this.segments[2].isFloor = !isFloorSlope;
-
-        if (!isFloorSlope) {
-            const yMin = Math.min(this.segments[0].y0, this.segments[0].y1);
-            const y0 = this.segments[0].y0;
-            this.segments[0].y0 = this.segments[0].y1;
-            this.segments[0].y1 = y0;
-
-            this.segments[2].y0 = yMin;
-            this.segments[2].y1 = yMin;
-        }
     }
 }
