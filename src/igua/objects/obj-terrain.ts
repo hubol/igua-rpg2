@@ -1,7 +1,8 @@
-import { Graphics } from "pixi.js";
+import { Graphics, Matrix } from "pixi.js";
 import { Empty } from "../../lib/types/empty";
 import { SceneLocal } from "../core/scene/scene-local";
 import { scene } from "../globals";
+import { Tx } from "../../assets/textures";
 
 /**
  * Describes a line segment. Different kinds of terrain segments make certain guarantees:
@@ -97,6 +98,10 @@ export function objSolidSlope() {
     return new SolidSlopeGraphics();
 }
 
+export function objPipe() {
+    return new PipeGraphics();
+}
+
 abstract class TerrainGraphics extends Graphics {
     dirty = true;
     segments: TerrainSegment[] = [];
@@ -110,12 +115,16 @@ abstract class TerrainGraphics extends Graphics {
         const cb = this.transform.position.cb.bind(this.transform);
 
         this.transform.position.cb = this.transform.scale.cb = () => {
-            this.pivot.set(this.transform.scale.x < 0 ? 1 : 0, this.transform.scale.y < 0 ? 1 : 0);
-            this.dirty = true;
+            this.onTransformChanged();    
             cb();
         }
 
         this.once('added', () => LocalTerrain.value.push(this));
+    }
+
+    protected onTransformChanged() {
+        this.pivot.set(this.transform.scale.x < 0 ? 1 : 0, this.transform.scale.y < 0 ? 1 : 0);
+        this.dirty = true;
     }
 
     clean() {
@@ -186,5 +195,30 @@ class SolidSlopeGraphics extends TerrainGraphics {
     constructor() {
         super(SolidSlopeGraphics._Weights);
         this.beginFill(0xffffff).drawPolygon([ 0, 1, 1, 1, 1, 0 ]);
+    }
+}
+
+class PipeGraphics extends TerrainGraphics {
+    private static readonly _Weights: TerrainSegment[] = [
+        { x0: 0, y0: 0, x1: 1, y1: 0, isFloor: true },
+    ];
+
+    private readonly _textureMatrix = new Matrix();
+
+    constructor() {
+        super(PipeGraphics._Weights);
+    }
+
+    onTransformChanged() {
+        super.onTransformChanged();
+        if (this.scale.x === 0 || this.scale.y === 0)
+            return;
+
+        const tx = Tx.Terrain.Pipe.Gray;
+        const yMax = tx.height / this.scale.y;
+        this._textureMatrix.identity();
+        this._textureMatrix.scale(1, 1 / this.scale.y);
+
+        this.clear().beginTextureFill({ texture: tx, matrix: this._textureMatrix }).drawPolygon([0, 0, 1, 0, 1, yMax, 0, yMax]).endFill();
     }
 }

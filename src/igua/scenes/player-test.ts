@@ -3,7 +3,7 @@ import { createPlayerObj } from "../objects/obj-player";
 import { Tx } from "../../assets/textures";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { show } from "../cutscene/show";
-import { objSolidBlock, objSolidSlope } from "../objects/obj-terrain";
+import { objPipe, objSolidBlock, objSolidSlope } from "../objects/obj-terrain";
 import { Input } from "../globals";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
@@ -90,6 +90,8 @@ function level() {
     objSolidSlope().at(128, 32).scaled(32, -32).show(b);
     objSolidBlock().at(32, 96).scaled(128, 32).show(b);
     objSolidBlock().at(160, 0).scaled(32, 128).show(b);
+
+    objPipe().at(0, 48).scaled(32, 32).show(b);
 
     for (const child of b.children) {
         child.x += 32;
