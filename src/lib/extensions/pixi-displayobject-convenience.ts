@@ -7,6 +7,10 @@ import { VectorSimple } from "../math/vector-type";
 declare module "pixi.js" {
     interface DisplayObject {
         named(name: string): this;
+        
+        scaled(vector: VectorSimple): this;
+        scaled(scaleX: number, scaleY: number): this;
+
         show(container?: Container): this;
         merge<T extends Pojo>(t: T): this & T;
         getMinY(): number;
@@ -28,6 +32,16 @@ Object.defineProperties(DisplayObject.prototype, {
             this.name = name;
             return this;
         },
+    },
+    scaled: {
+        value: function (this: Container, scaleX_vector: number | VectorSimple, scaleY?: number) {
+            if (scaleY === undefined)
+                this.transform.scale.set((<VectorSimple>scaleX_vector).x, (<VectorSimple>scaleX_vector).y);
+            else
+                this.transform.scale.set(<number>scaleX_vector, scaleY);
+
+            return this;
+        }
     },
     show: {
         value: function (this: DisplayObject, container = DefaultStages.show) {

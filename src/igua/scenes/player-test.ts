@@ -85,11 +85,11 @@ export function PlayerTest(looks = playerLooksJson) {
 
 function level() {
     const b = container();
-    objSolidBlock().at(32, 0).sized(-128, 32).show(b);
-    objSolidSlope().at(32, 32).sized(-64, -32).show(b);
-    objSolidSlope().at(128, 32).sized(32, -32).show(b);
-    objSolidBlock().at(32, 96).sized(128, 32).show(b);
-    objSolidBlock().at(160, 0).sized(32, 128).show(b);
+    objSolidBlock().at(32, 0).scaled(-128, 32).show(b);
+    objSolidSlope().at(32, 32).scaled(-64, -32).show(b);
+    objSolidSlope().at(128, 32).scaled(32, -32).show(b);
+    objSolidBlock().at(32, 96).scaled(128, 32).show(b);
+    objSolidBlock().at(160, 0).scaled(32, 128).show(b);
 
     for (const child of b.children) {
         child.x += 32;
