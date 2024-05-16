@@ -95,6 +95,14 @@ function level() {
     objPipeSlope().at(192, -16).scaled(48, 48).show(b);
     objPipeSlope().at(192, 16).scaled(80, 80).show(b);
 
+    // objPipeSlope().at(0, 64).scaled(80, 80).show(b);
+    // objPipe().at(80, 64).scaled(48, 48).show(b);
+    // objPipeSlope().at(128, 64).scaled(-80, 80).show(b);
+    // objPipe().at(208, 144).scaled(48, 48).show(b);
+
+    // objPipe().at(200, 96).scaled(96, 48).show(b);
+    // objPipeSlope().at(200, 32).scaled(-80, 80).show(b);
+
     for (const child of b.children) {
         child.x -= 32;
         child.y += 64;

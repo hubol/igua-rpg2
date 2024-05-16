@@ -153,7 +153,12 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 
                 const isSlope = y0 !== y1;
 
-				const tanA = Math.abs((y1 - y0) / (x1 - x0));
+                const tan = (y1 - y0) / (x1 - x0);
+
+                // Note: tan < 0 means "normal" is facing left, tan > 0 means facing right
+                const horizontalSpeedIndicatesClimbingSlope = Math.sign(tan) === -Math.sign(obj.speed.x);
+
+				const tanA = Math.abs(tan);
 				const vCat = tanA * halfHeight;
 				
 				if (segment.isCeiling) {
@@ -179,18 +184,19 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 						}
 					}
 				}
-                // Added edgesOnly (isSlope && edgesOnly) ||
+                // Added edgesOnly (isSlope && edgesOnly && horizontalSpeedIndicatesClimbingSlope) ||
                 // So that while jumping up a slope, you can still collide with it
                 // It's possible this change should be replicated to the other kinds of segments
-                else if ((isSlope && edgesOnly) || obj.speed.y >= 0) {
+                else if ((isSlope && edgesOnly && horizontalSpeedIndicatesClimbingSlope) || obj.speed.y >= 0) {
                     const touchY = Math.max(Math.min(y0, y1), y0 + (y1 - y0) * f - vCat);
 
                     // Slope edges are greedier
-                    const thickSlopeEdge = isSlope && edgesOnly ? halfHeight : 0;
+                    // But not pipe slopes, I guess...
+                    const thickSlopeEdge = isSlope && edgesOnly && !segment.isPipe ? halfHeight : 0;
 
                     // Enables you to be snapped to the floor while walking down a slope
                     // obj.speed.y >= 0 check added to allow jumping while walking up slopes
-                    const vSnap = obj.speed.y >= 0 ? Math.abs(obj.speed.x) : 0;
+                    const vSnap = (obj.speed.y >= 0 && !horizontalSpeedIndicatesClimbingSlope) ? Math.abs(obj.speed.x) : 0;
                     
                     // Note: Oddwarg's condition was
                     // y > touchY - halfHeight - vSnap && y < touchY + halfHeight
