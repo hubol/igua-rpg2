@@ -1,4 +1,4 @@
-import { Graphics, Matrix } from "pixi.js";
+import { DisplayObject, Graphics, Matrix, Mesh, SimpleMesh, WRAP_MODES } from "pixi.js";
 import { Empty } from "../../lib/types/empty";
 import { SceneLocal } from "../core/scene/scene-local";
 import { scene } from "../globals";
@@ -26,6 +26,7 @@ type TerrainSegment = TerrainSegmentCoordinates & TerrainSegmentDiscriminator;
 interface Terrain {
     destroyed: boolean;
     dirty: boolean;
+    // TODO does it need to be on Terrain?
     clean: () => void;
     segments: TerrainSegment[];
 }
@@ -84,7 +85,7 @@ function objTerrainSegmentDebug() {
 function createLocalTerrain() {
     // TODO enum for stepOrder?!
     scene.root.step(() => cleanTerrain(), 999);
-    objTerrainSegmentDebug().show(scene.root);
+    // objTerrainSegmentDebug().show(scene.root);
     return Empty<Terrain>();
 }
 
@@ -99,75 +100,111 @@ export function objSolidSlope() {
 }
 
 export function objPipe() {
-    return new PipeGraphics();
+    return new PipeMesh();
+}
+
+export function objPipeSlope() {
+    return new PipeMesh(PipeMesh.SlopeWeights);
+}
+
+type CleanableTerrainObj = DisplayObject & { weights: TerrainSegment[]; segments: TerrainSegment[] };
+
+function clean(obj: CleanableTerrainObj) {
+    const xMin = obj.x;
+    const yMin = obj.y;
+    const xMax = xMin + Math.abs(obj.scale.x);
+    const yMax = yMin + Math.abs(obj.scale.y);
+
+    const hFlip = obj.scale.x < 0;
+    const vFlip = obj.scale.y < 0;
+
+    const x0 = hFlip ? xMax : xMin;
+    const y0 = vFlip ? yMax : yMin;
+    const x1 = hFlip ? xMin : xMax;
+    const y1 = vFlip ? yMin : yMax;
+
+    for (let i = 0; i < obj.weights.length; i++) {
+        const segment = obj.segments[i];
+        const weight = obj.weights[i];
+
+        segment.x0 = weight.x0 ? x1 : x0;
+        segment.x1 = weight.x1 ? x1 : x0;
+        segment.y0 = weight.y0 ? y1 : y0;
+        segment.y1 = weight.y1 ? y1 : y0;
+
+        // Normalize to comply with contract described in `TerrainSegmentCoordinates`
+        if (((weight.isCeiling || weight.isFloor) && segment.x0 > segment.x1)
+            || ((weight.isWallFacingLeft || weight.isWallFacingRight) && segment.y0 > segment.y1)) {
+            const x0p = segment.x0;
+            const y0p = segment.y0;
+
+            segment.x0 = segment.x1;
+            segment.y0 = segment.y1;
+            segment.x1 = x0p;
+            segment.y1 = y0p;
+        }
+
+        segment.isCeiling = (weight.isCeiling && !vFlip) || (weight.isFloor && vFlip);
+        segment.isFloor = (weight.isFloor && !vFlip) || (weight.isCeiling && vFlip);
+
+        segment.isWallFacingLeft = (weight.isWallFacingLeft && !hFlip) || (weight.isWallFacingRight && hFlip);
+        segment.isWallFacingRight = (weight.isWallFacingRight && !hFlip) || (weight.isWallFacingLeft && hFlip);
+    }
+}
+
+type ObjTerrain = DisplayObject & Terrain & { onTransformChanged(): void; }
+
+function constructTerrain(terrainObj: ObjTerrain, weights: TerrainSegment[]) {
+    for (let i = 0; i < weights.length; i++)
+        terrainObj.segments.push({ ...weights[i] });
+
+    const cb = terrainObj.transform.position.cb.bind(terrainObj.transform);
+
+    terrainObj.transform.position.cb = terrainObj.transform.scale.cb = () => {
+        terrainObj.onTransformChanged();
+        cb();
+    }
+
+    terrainObj.once('added', () => LocalTerrain.value.push(terrainObj));
 }
 
 abstract class TerrainGraphics extends Graphics {
     dirty = true;
     segments: TerrainSegment[] = [];
 
-    constructor(private readonly _weights: TerrainSegment[]) {
+    constructor(readonly weights: TerrainSegment[]) {
         super();
 
-        for (let i = 0; i < _weights.length; i++)
-            this.segments.push({ ..._weights[i] });
-
-        const cb = this.transform.position.cb.bind(this.transform);
-
-        this.transform.position.cb = this.transform.scale.cb = () => {
-            this.onTransformChanged();    
-            cb();
-        }
-
-        this.once('added', () => LocalTerrain.value.push(this));
+        constructTerrain(this, weights);
     }
 
-    protected onTransformChanged() {
+    onTransformChanged() {
         this.pivot.set(this.transform.scale.x < 0 ? 1 : 0, this.transform.scale.y < 0 ? 1 : 0);
         this.dirty = true;
     }
 
     clean() {
-        const xMin = this.x;
-        const yMin = this.y;
-        const xMax = xMin + Math.abs(this.scale.x);
-        const yMax = yMin + Math.abs(this.scale.y);
+        clean(this);
+    }
+}
 
-        const hFlip = this.scale.x < 0;
-        const vFlip = this.scale.y < 0;
+abstract class TerrainMesh extends SimpleMesh {
+    dirty = true;
+    segments: TerrainSegment[] = [];
 
-        const x0 = hFlip ? xMax : xMin;
-        const y0 = vFlip ? yMax : yMin;
-        const x1 = hFlip ? xMin : xMax;
-        const y1 = vFlip ? yMin : yMax;
+    constructor(readonly weights: TerrainSegment[]) {
+        super();
 
-        for (let i = 0; i < this._weights.length; i++) {
-            const segment = this.segments[i];
-            const weight = this._weights[i];
+        constructTerrain(this, weights);
+    }
 
-            segment.x0 = weight.x0 ? x1 : x0;
-            segment.x1 = weight.x1 ? x1 : x0;
-            segment.y0 = weight.y0 ? y1 : y0;
-            segment.y1 = weight.y1 ? y1 : y0;
+    onTransformChanged() {
+        this.pivot.set(this.transform.scale.x < 0 ? 1 : 0, this.transform.scale.y < 0 ? 1 : 0);
+        this.dirty = true;
+    }
 
-            // Normalize to comply with contract described in `TerrainSegmentCoordinates`
-            if (((weight.isCeiling || weight.isFloor) && segment.x0 > segment.x1)
-                || ((weight.isWallFacingLeft || weight.isWallFacingRight) && segment.y0 > segment.y1)) {
-                const x0p = segment.x0;
-                const y0p = segment.y0;
-
-                segment.x0 = segment.x1;
-                segment.y0 = segment.y1;
-                segment.x1 = x0p;
-                segment.y1 = y0p;
-            }
-
-            segment.isCeiling = (weight.isCeiling && !vFlip) || (weight.isFloor && vFlip);
-            segment.isFloor = (weight.isFloor && !vFlip) || (weight.isCeiling && vFlip);
-
-            segment.isWallFacingLeft = (weight.isWallFacingLeft && !hFlip) || (weight.isWallFacingRight && hFlip);
-            segment.isWallFacingRight = (weight.isWallFacingRight && !hFlip) || (weight.isWallFacingLeft && hFlip);
-        }
+    clean() {
+        clean(this);
     }
 }
 
@@ -198,15 +235,19 @@ class SolidSlopeGraphics extends TerrainGraphics {
     }
 }
 
-class PipeGraphics extends TerrainGraphics {
+class PipeMesh extends TerrainMesh {
     private static readonly _Weights: TerrainSegment[] = [
-        { x0: 0, y0: 0, x1: 1, y1: 0, isFloor: true },
+        { x0: 0, y0: 0, x1: 1, y1: 0, isFloor: true, isPipe: true },
     ];
 
-    private readonly _textureMatrix = new Matrix();
+    static readonly SlopeWeights: TerrainSegment[] = [
+        { x0: 0, y0: 1, x1: 1, y1: 0, isFloor: true, isPipe: true },
+    ];
 
-    constructor() {
-        super(PipeGraphics._Weights);
+    constructor(weights = PipeMesh._Weights) {
+        super(weights);
+
+        this.texture = Tx.Terrain.Pipe.Gray;
     }
 
     onTransformChanged() {
@@ -214,11 +255,27 @@ class PipeGraphics extends TerrainGraphics {
         if (this.scale.x === 0 || this.scale.y === 0)
             return;
 
-        const tx = Tx.Terrain.Pipe.Gray;
-        const yMax = tx.height / this.scale.y;
-        this._textureMatrix.identity();
-        this._textureMatrix.scale(1, 1 / this.scale.y);
-
-        this.clear().beginTextureFill({ texture: tx, matrix: this._textureMatrix }).drawPolygon([0, 0, 1, 0, 1, yMax, 0, yMax]).endFill();
+        renderPipeGraphics(this, this.weights[0]);
     }
+}
+
+function renderPipeGraphics(mesh: SimpleMesh, weight: TerrainSegment) {
+    // TODO cleanup
+    const tx = mesh.texture;
+
+    const x0 = weight.x0;
+    const y0 = weight.y0;
+    const dy = 0;
+    const height = tx.height / mesh.scale.y;
+    const x1 = weight.x1;
+    const y1 = weight.y1;
+
+    // TODO probably don't need to generate so much garbage
+    mesh.verticesBuffer.data = new Float32Array([ x0, y0 + dy, x1, y1 + dy, x1, y1 + height + dy, x0, y0 + height + dy]);
+
+    // TODO support tiling textures
+    const uvx = 1;
+
+    mesh.uvBuffer.data = new Float32Array([ 0, 0, uvx, 0, uvx, 1, 0, 1]);
+    mesh.geometry.indexBuffer.data = new Uint16Array([ 0, 1, 3, 1, 2, 3 ]);
 }
