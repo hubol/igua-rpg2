@@ -7,6 +7,7 @@ import { objPipe, objPipeSlope, objSolidBlock, objSolidSlope } from "../objects/
 import { Input } from "../globals";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
+import { NoAtlasTx } from "../../assets/no-atlas-textures";
 
 export function PlayerTest(looks = playerLooksJson) {
     // const b = objSolidBlock().at(96, 160).show();
@@ -93,7 +94,7 @@ function level() {
 
     objPipe().at(192, 112).scaled(48, 48).show(b);
     objPipeSlope().at(192, -16).scaled(48, 48).show(b);
-    objPipeSlope().at(192, 16).scaled(80, 80).show(b);
+    objPipeSlope().at(192, 16).scaled(80, 80).show(b).texture = NoAtlasTx.Placeholder;
 
     // objPipeSlope().at(0, 64).scaled(80, 80).show(b);
     // objPipe().at(80, 64).scaled(48, 48).show(b);

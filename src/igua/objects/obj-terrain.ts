@@ -273,8 +273,7 @@ function renderPipeGraphics(mesh: SimpleMesh, weight: TerrainSegment) {
     // TODO probably don't need to generate so much garbage
     mesh.verticesBuffer.data = new Float32Array([ x0, y0 + dy, x1, y1 + dy, x1, y1 + height + dy, x0, y0 + height + dy]);
 
-    // TODO support tiling textures
-    const uvx = 1;
+    const uvx = tx.baseTexture.wrapMode === WRAP_MODES.REPEAT ? mesh.scale.x / tx.width : 1;
 
     mesh.uvBuffer.data = new Float32Array([ 0, 0, uvx, 0, uvx, 1, 0, 1]);
     mesh.geometry.indexBuffer.data = new Uint16Array([ 0, 1, 3, 1, 2, 3 ]);

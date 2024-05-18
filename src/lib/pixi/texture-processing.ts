@@ -1,4 +1,4 @@
-import { Rectangle, RenderTexture, Texture } from "pixi.js";
+import { BaseTexture, IBaseTextureOptions, Rectangle, RenderTexture, Texture } from "pixi.js";
 import { VectorSimple, vnew } from "../math/vector-type";
 import { Boundaries } from "../math/boundaries";
 import { Empty } from "../types/empty";
@@ -75,8 +75,8 @@ export namespace TextureProcessing {
     
         return texture[TextureCacheKey_OpaquePixelsBoundaries] = { x1, y1, x2, y2 };
     }
-        
-    export function toRgbaArray(texture: Texture) {
+
+    export function toImageData(texture: Texture) {
         if (!canvas) {
             canvas = document.createElement('canvas');
             context = canvas.getContext('2d', { willReadFrequently: true })!;
@@ -101,7 +101,23 @@ export namespace TextureProcessing {
         const dy = -texture.frame.y;
         context.drawImage(image, dx, dy);
     
-        return context.getImageData(0, 0, w, h).data;
+        return context.getImageData(0, 0, w, h);
+    }
+        
+    export function toRgbaArray(texture: Texture) {
+        return toImageData(texture).data;
+    }
+
+    export async function extractFromAtlas(texture: Texture, options?: IBaseTextureOptions) {
+        const data = TextureProcessing.toImageData(texture);
+        const bitmap = await createImageBitmap(data);
+
+        const baseTexture = new BaseTexture(bitmap, options);
+
+        const extractedTexture = new Texture(baseTexture);
+        extractedTexture.id = texture.getId() + ' (Extracted)';
+
+        return extractedTexture;
     }
 
     export function trimFrame(texture: Texture) {

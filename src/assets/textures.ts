@@ -1,6 +1,7 @@
 import { BaseTexture, Rectangle, SCALE_MODES, Texture, loadImageBitmap } from "pixi.js";
 import { GeneratedTextureData } from "./generated/textures/generated-texture-data";
 import { JobProgress } from "../lib/game-engine/job-progress";
+import { loadNoAtlasTextures } from "./no-atlas-textures";
 
 const { txs } = GeneratedTextureData;
 
@@ -29,6 +30,8 @@ export async function loadTextureAssets(progress: JobProgress) {
     }
 
     Tx = GeneratedTextureData.txs(newTx);
+
+    await loadNoAtlasTextures(Tx);
 }
 
 async function loadTexture(url: string, progress: JobProgress) {
