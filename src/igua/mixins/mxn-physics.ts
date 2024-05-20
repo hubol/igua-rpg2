@@ -7,11 +7,9 @@ interface PhysicsArgs {
     physicsRadius: number;
     physicsOffset?: Vector;
     onMove?: (event: MoveEvent) => void;
-    // TODO allow specifying debug color?
     debug?: boolean;
 }
 
-// TODO should it actually accept + apply gravity?
 export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physicsOffset = vnew(), debug = false, onMove }: PhysicsArgs) {
     if (debug && obj instanceof Container) {
         for (const child of obj.children)
@@ -38,8 +36,6 @@ function move(obj: MxnPhysics) {
     const radius = obj.physicsRadius;
     const radiusSqrt = Math.sqrt(radius);
 
-    const gravityOnlyStep = obj.speed.x === 0 && obj.speed.y === 0;
-
     obj.speed.y += obj.gravity;
 
     let hsp = obj.speed.x;
@@ -47,9 +43,6 @@ function move(obj: MxnPhysics) {
 
     let hspAbs = Math.abs(hsp);
     let vspAbs = Math.abs(vsp);
-
-    const previousX = obj.x;
-    const previousY = obj.y;
 
     moveEvent.hitCeiling = false;
     moveEvent.hitGround = false;
