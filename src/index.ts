@@ -8,6 +8,7 @@ import { JobProgress } from "./lib/game-engine/job-progress";
 import { initializeAsshatAudioContext } from "./lib/game-engine/audio/asshat-audiocontext";
 import { Environment } from "./lib/environment";
 import { settings } from "pixi.js";
+import { LevelEditor } from "./lib/game-engine/level-editor/editor";
 
 // https://esbuild.github.io/api/#live-reload
 if (Environment.isDev)
@@ -16,7 +17,7 @@ if (Environment.isDev)
 async function initialize() {
     try {
         settings.ROUND_PIXELS = true;
-        const renderer = createPixiRenderer({
+        const renderer = Environment.isEditor ? LevelEditor.createRenderer() : createPixiRenderer({
             width: 256,
             height: 256,
             eventFeatures: { click: false, globalMove: false, move: false, wheel: false, },

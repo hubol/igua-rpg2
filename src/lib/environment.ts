@@ -6,6 +6,10 @@ export const Environment = {
     {
         return !Environment.isProduction;
     },
+    get isEditor()
+    {
+        return !Environment.isProduction && new URLSearchParams(location.search).has('editor');
+    },
     get isElectron()
     {
         // https://github.com/electron/electron/issues/2288#issuecomment-337858978
