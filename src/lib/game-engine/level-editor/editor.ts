@@ -43,6 +43,9 @@ export class LevelEditor {
     }
 
     static createRenderer() {
+        // TODO definitely doesn't belong here
+        document.querySelector('html')!.classList.add('level_editor');
+
         return createPixiRenderer({
             width: 1920,
             height: 1080,
