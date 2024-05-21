@@ -23,6 +23,15 @@ export class LevelEditor {
     private _displayObjects = new TickerContainer(this._displayObjectsTicker, false).named('LevelEditor._displayObjects');
 
     constructor(readonly map: LevelEntityFactoryMap, readonly root: TickerContainer) {
+        // Extremely crude proof of concept!
+        this.create('Block', 0, 0);
+        const preview = this._displayObjects.children[0];
+        preview.alpha = 0.5;
+
+        document.addEventListener('pointermove', e => {
+            preview.at(e.clientX, e.clientY);
+        })
+
         this._displayObjects.show(root);
     }
 
