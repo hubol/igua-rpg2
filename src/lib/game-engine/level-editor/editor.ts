@@ -55,7 +55,7 @@ export class LevelEditor {
 let uuidPrevious = -1;
 
 function uuid() {
-    const next = Math.max(Math.round(performance.now()) * 10, uuidPrevious + 1);
+    const next = Math.max(Date.now() * 10, uuidPrevious + 1);
     uuidPrevious = next;
     return next;
 }
