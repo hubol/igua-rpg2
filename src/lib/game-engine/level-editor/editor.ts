@@ -12,6 +12,12 @@ interface Entity {
     y: number;
 }
 
+enum Update {
+    Index,
+    Transform,
+    Other,
+}
+
 export class LevelEditor {
     private _entities: Entity[] = [];
 
@@ -22,14 +28,18 @@ export class LevelEditor {
     private _displayObjectsTicker = new AsshatTicker()
     private _displayObjects = new TickerContainer(this._displayObjectsTicker, false).named('LevelEditor._displayObjects');
 
+    private readonly _entityToDisplayObject = new Map<Entity, DisplayObject>();
+
     constructor(readonly map: LevelEntityFactoryMap, readonly root: TickerContainer) {
         // Extremely crude proof of concept!
-        this.create('Block', 0, 0);
+        const entity = this.create('Block', 0, 0);
         const preview = this._displayObjects.children[0];
         preview.alpha = 0.5;
 
         document.addEventListener('pointermove', e => {
-            preview.at(e.clientX, e.clientY);
+            entity.x = e.clientX;
+            entity.y = e.clientY;
+            this.update(entity);
         })
 
         this._displayObjects.show(root);
@@ -40,15 +50,30 @@ export class LevelEditor {
         // TODO scale
         // TODO rotation
         // TODO other properties
-        this._entities.push({
+        const entity: Entity = {
             id: uuid(),
             key,
             x,
             y,
-        });
+        };
+
+        this._entities.push(entity);
 
         const displayObject = this.map[key]();
         displayObject.at(x, y).show(this._displayObjects);
+
+        this._entityToDisplayObject.set(entity, displayObject);
+
+        return entity;
+    }
+
+    update(entity: Entity, type = Update.Transform) {
+        const displayObject = this._entityToDisplayObject.get(entity);
+        if (!displayObject)
+            throw new Error(`Could not find DisplayObject for Entity ${entity.key} ${entity.id}`);
+
+        // TODO use type to determine what parts to update
+        displayObject.at(entity);
     }
 
     static createRenderer() {
