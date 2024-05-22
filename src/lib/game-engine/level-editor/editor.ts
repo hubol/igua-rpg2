@@ -2,6 +2,7 @@ import { Container, DisplayObject } from "pixi.js";
 import { TickerContainer } from "../ticker-container";
 import { AsshatTicker } from "../asshat-ticker";
 import { createPixiRenderer } from "../pixi-renderer";
+import { cyclic } from "../../math/number";
 
 export type LevelDisplayObjectConstructors = Record<string, (...args: any[]) => DisplayObject>;
 
@@ -42,6 +43,19 @@ export class LevelEditor {
         document.addEventListener('pointerdown', e => {
             if (this._brushKind)
                 this.create(this._brushKind, e.clientX, e.clientY);
+        })
+
+        const kinds = Object.keys(displayObjectConstructors);
+
+        // TODO probably won't be wheel in the end
+        document.addEventListener('wheel', e => {
+            const delta = Math.sign(e.deltaY);
+            if (delta === 0)
+                return;
+
+            const index = kinds.indexOf(this._brushKind!);
+            const nextIndex = cyclic(index + delta, 0, kinds.length);
+            this.setBrushKind(kinds[nextIndex]);
         })
 
         this._displayObjects.show(root);
