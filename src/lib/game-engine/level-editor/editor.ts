@@ -28,21 +28,33 @@ export class LevelEditor {
     private _displayObjectsTicker = new AsshatTicker()
     private _displayObjects = new TickerContainer(this._displayObjectsTicker, false).named('LevelEditor._displayObjects');
 
+    private _brushKind?: string;
+    private _brushContainer = new Container().named('LevelEditor._brushContainer');
+
     private readonly _entityToDisplayObject = new Map<Entity, DisplayObject>();
 
     constructor(readonly displayObjectConstructors: LevelDisplayObjectConstructors, readonly root: TickerContainer) {
         // Extremely crude proof of concept!
-        const entity = this.create('Block', 0, 0);
-        const preview = this._displayObjects.children[0];
-        preview.alpha = 0.5;
-
         document.addEventListener('pointermove', e => {
-            entity.x = e.clientX;
-            entity.y = e.clientY;
-            this.update(entity);
+            this._brushContainer.at(e.clientX, e.clientY);
+        })
+
+        document.addEventListener('pointerdown', e => {
+            if (this._brushKind)
+                this.create(this._brushKind, e.clientX, e.clientY);
         })
 
         this._displayObjects.show(root);
+
+        this._brushContainer.alpha = 0.5;
+        this._brushContainer.show(root);
+    }
+
+    setBrushKind(kind: string) {
+        const displayObject = this._constructDisplayObject(kind);
+        this._brushContainer.removeAllChildren();
+        displayObject.show(this._brushContainer);
+        this._brushKind = kind;
     }
 
     create(kind: string, x: number, y: number) {

@@ -9,6 +9,9 @@ export function startGame() {
         sceneStack.push(() => {}, { useGameplay: false });
         const editor = new LevelEditor(IguaLevelFactoryMap, scene.root);
         editor.create('Block', 256, 256);
+        editor.create('Block', 512, 512);
+        editor.setBrushKind('Block');
+        console.log(editor);
     }
     else {
         sceneStack.push(SceneLibrary.findByName('PlayerTest'), { useGameplay: false });
