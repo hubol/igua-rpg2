@@ -32,22 +32,6 @@ export class KeyValueDb<TValue> {
         });
     }
 
-    // toArray() {
-    //     const objectStore = this._createTransactionObjectStore('readonly');
-    //     return new Promise<TValue[]>((resolve, reject) => {
-    //         const objectStoreRequest = objectStore.getAll();
-    //         objectStoreRequest.onsuccess = () => {
-    //             const result: TValue[] = [];
-    //             const values = objectStoreRequest.result.values();
-    //             for (const value of values) {
-    //                 result.push(value[ValuePath]);
-    //             }
-    //             resolve(result);
-    //         };
-    //         objectStoreRequest.onerror = () => reject(objectStoreRequest.error);
-    //     });
-    // }
-
     static async open<TItem>(name: string) {
         const logger = new SubsystemLogger(`KeyValueDb [${name}]`);
 
