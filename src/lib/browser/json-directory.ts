@@ -26,9 +26,9 @@ export class JsonDirectory {
         return new JsonDirectory(handle);
     }
 
-    async read<T>(name: string): Promise<T | null> {
+    async read<T>(path: string): Promise<T | null> {
         try {
-            const handle = await this._handle.getFileHandle(name);
+            const handle = await getFileHandle(this._handle, path, false);
             const file = await handle.getFile();
             return JSON.parse(await file.text());
         }
@@ -37,20 +37,20 @@ export class JsonDirectory {
                 if (e.name === 'NotFoundError')
                     return null;
             }
-            throw new RethrownError(`Failed to read "${name}" as JSON`, e);
+            throw new RethrownError(`Failed to read "${path}" as JSON`, e);
         }
     }
 
-    async write(name: string, value: any) {
+    async write(path: string, value: any) {
         const json = JSON.stringify(value);
 
-        const handle = await this._handle.getFileHandle(name, { create: true });
+        const handle = await getFileHandle(this._handle, path, true);
         const writable = await handle.createWritable();
         try {
             await writable.write(json);
         }
         catch (e) {
-            throw new RethrownError(`Failed to write JSON to "${name}"`, e);
+            throw new RethrownError(`Failed to write JSON to "${path}"`, e);
         }
         finally {
             await writable.close();
@@ -60,6 +60,21 @@ export class JsonDirectory {
     async tree() {
         return buildDirectoryTree(this._handle);
     }
+}
+
+async function getFileHandle(root: FileSystemDirectoryHandle, path: string, create: boolean) {
+    if (path.length === 0)
+        throw new Error(`Path cannot be empty!`);
+
+    const pathParts = path.split('/');
+
+    let current = root;
+    for (let i = 0; i < pathParts.length - 1; i++) {
+        const name = pathParts[i];
+        current = await root.getDirectoryHandle(name, { create });
+    }
+
+    return await current.getFileHandle(pathParts[pathParts.length - 1], { create });
 }
 
 async function buildDirectoryTree(handle: FileSystemDirectoryHandle) {
