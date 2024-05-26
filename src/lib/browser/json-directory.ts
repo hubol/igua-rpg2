@@ -57,14 +57,41 @@ export class JsonDirectory {
         }
     }
 
-    async list() {
-        const entries = this._handle.entries();
-        for await (const entry of entries) {
-            // TODO
-            console.log(entry);
-        }
+    async tree() {
+        return buildDirectoryTree(this._handle);
     }
 }
+
+async function buildDirectoryTree(handle: FileSystemDirectoryHandle) {
+    const tree: DirectoryTreeDirectoryEntry = { name: handle.name, handle, entries: [] };
+    const entries = handle.entries();
+    for await (const [ name, handle ] of entries) {
+        if (handle instanceof FileSystemFileHandle) {
+            tree.entries.push({
+                name,
+                handle
+            });
+        }
+        else {
+            tree.entries.push(await buildDirectoryTree(handle));
+        }
+    }
+
+    return tree;
+}
+
+interface DirectoryTreeFileEntry {
+    name: string;
+    handle: FileSystemFileHandle;
+}
+
+interface DirectoryTreeDirectoryEntry {
+    name: string;
+    handle: FileSystemDirectoryHandle;
+    entries: DirectoryTreeEntry[];
+}
+
+type DirectoryTreeEntry = DirectoryTreeFileEntry | DirectoryTreeDirectoryEntry;
 
 class FsDirectoryHandles {
     private constructor() {}
