@@ -3,7 +3,9 @@ import { TickerContainer } from "../ticker-container";
 import { AsshatTicker } from "../asshat-ticker";
 import { createPixiRenderer } from "../pixi-renderer";
 import { cyclic } from "../../math/number";
+import { JsonDirectory } from "../../browser/json-directory";
 
+// TODO all of these names need TLC
 export type LevelDisplayObjectConstructors = Record<string, (...args: any[]) => DisplayObject>;
 
 interface Entity {
@@ -17,6 +19,10 @@ enum Update {
     Index,
     Transform,
     Other,
+}
+
+interface SaveFile {
+    entities: Entity[];
 }
 
 export class LevelEditor {
@@ -34,7 +40,10 @@ export class LevelEditor {
 
     private readonly _entityToDisplayObject = new Map<Entity, DisplayObject>();
 
-    constructor(readonly displayObjectConstructors: LevelDisplayObjectConstructors, readonly root: TickerContainer) {
+    private constructor(
+        readonly displayObjectConstructors: LevelDisplayObjectConstructors,
+        readonly root: TickerContainer,
+        private readonly _jsonDirectory: JsonDirectory) {
         // Extremely crude proof of concept!
         document.addEventListener('pointermove', e => {
             this._brushContainer.at(e.clientX, e.clientY);
@@ -58,10 +67,32 @@ export class LevelEditor {
             this.setBrushKind(kinds[nextIndex]);
         })
 
+        // More crude stuff
+        document.addEventListener('keydown', e => {
+            if (!e.ctrlKey)
+                return;
+            if (e.key === 's') {
+                e.preventDefault();
+                setTimeout(() => this.save());
+            }
+            if (e.key === 'o') {
+                e.preventDefault();
+                setTimeout(() => this.load());
+            }
+        });
+
         this._displayObjects.show(root);
 
         this._brushContainer.alpha = 0.5;
         this._brushContainer.show(root);
+    }
+
+    static async create(
+        displayObjectConstructors: LevelDisplayObjectConstructors,
+        root: TickerContainer,) {
+        // TODO not sure if literal is ok
+        const jsonDirectory = await JsonDirectory.create('LevelEditor');
+        return new LevelEditor(displayObjectConstructors, root, jsonDirectory);
     }
 
     setBrushKind(kind: string) {
@@ -83,14 +114,19 @@ export class LevelEditor {
             y,
         };
 
-        this._entities.push(entity);
-
-        const displayObject = this._constructDisplayObject(kind);
-        displayObject.at(x, y).show(this._displayObjects);
-
-        this._entityToDisplayObject.set(entity, displayObject);
+        this._trackEntity(entity);
 
         return entity;
+    }
+
+    // TODO name sucks
+    private _trackEntity(entity: Entity) {
+        this._entities.push(entity);
+    
+        const displayObject = this._constructDisplayObject(entity.kind);
+        displayObject.at(entity.x, entity.y).show(this._displayObjects);
+
+        this._entityToDisplayObject.set(entity, displayObject);
     }
 
     update(entity: Entity, type = Update.Transform) {
@@ -100,6 +136,25 @@ export class LevelEditor {
 
         // TODO use type to determine what parts to update
         displayObject.at(entity);
+    }
+
+    async save() {
+        // TODO determine file to write to
+        await this._jsonDirectory.write<SaveFile>('level.json', { entities: this._entities });
+    }
+
+    async load() {
+        // TODO determine file to read from
+        const file = await this._jsonDirectory.read<SaveFile>('level.json');
+        if (!file?.entities) {
+            return;
+        }
+
+        this._entities.length = 0;
+        this._entityToDisplayObject.clear();
+        this._displayObjects.removeAllChildren();
+        for (const entity of file.entities)
+            this._trackEntity(entity);
     }
 
     private _constructDisplayObject(kind: string) {

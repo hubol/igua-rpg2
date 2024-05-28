@@ -1,5 +1,17 @@
 import { RethrownError } from "../rethrown-error";
+import { intervalWait } from "./interval-wait";
 import { KeyValueDb } from "./key-value-db";
+import { UserGesture } from "./user-gesture";
+
+async function waitForUserGesture() {
+    UserGesture.receiveGestures(document.body);
+    await intervalWait(() => UserGesture.hasGestured);
+}
+
+async function waitForGestureShowDirectoryPicker() {
+    await waitForUserGesture();
+    return await showDirectoryPicker({ mode: 'readwrite' });
+}
 
 export class JsonDirectory {
     private constructor(private readonly _handle: FileSystemDirectoryHandle) {
@@ -11,11 +23,12 @@ export class JsonDirectory {
 
         const key = `JsonDirectory.${name}`;
 
-        const handle = (await db.get(key)) ?? await showDirectoryPicker({ mode: 'readwrite' });
+        const handle = (await db.get(key)) ?? await waitForGestureShowDirectoryPicker();
 
         const state = await handle.queryPermission({ mode: 'readwrite' });
 
         if (state === 'prompt') {
+            await waitForUserGesture();
             const requestedState = await handle.requestPermission({ mode: 'readwrite' });
             if (requestedState !== 'granted')
                 throw new Error(`JsonDirectory [${name}]: Did not get [readwrite] permission for FileSystemDirectoryHandle [${handle.name}]`);
@@ -26,7 +39,7 @@ export class JsonDirectory {
         return new JsonDirectory(handle);
     }
 
-    async read<T>(path: string): Promise<T | null> {
+    async read<T = any>(path: string): Promise<T | null> {
         try {
             const handle = await getFileHandle(this._handle, path, false);
             const file = await handle.getFile();
@@ -41,8 +54,9 @@ export class JsonDirectory {
         }
     }
 
-    async write(path: string, value: any) {
-        const json = JSON.stringify(value);
+    async write<T = any>(path: string, value: T) {
+        // TODO should stringify arguments be customizable?
+        const json = JSON.stringify(value, undefined, 2);
 
         const handle = await getFileHandle(this._handle, path, true);
         const writable = await handle.createWritable();
