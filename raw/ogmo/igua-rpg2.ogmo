@@ -1,0 +1,112 @@
+{
+  "name": "IguaRPG 2",
+  "ogmoVersion": "3.4.0-hubol",
+  "levelPaths": ["./levels"],
+  "backgroundColor": "#408000ff",
+  "gridColor": "#3c4049cc",
+  "anglesRadians": true,
+  "directoryDepth": 5,
+  "layerGridDefaultSize": {"x": 8, "y": 8},
+  "levelDefaultSize": {"x": 320, "y": 240},
+  "levelMinSize": {"x": 128, "y": 128},
+  "levelMaxSize": {"x": 4096, "y": 4096},
+  "levelValues": [],
+  "defaultExportMode": ".json",
+  "compactExport": false,
+  "externalScript": "igua-rp2-ogmo.js",
+  "playCommand": "",
+  "entityTags": [],
+  "layers": [
+    {
+      "definition": "entity",
+      "name": "Entities",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "93086020",
+      "requiredTags": [],
+      "excludedTags": []
+    }
+  ],
+  "entities": [
+    {
+      "exportID": "93092164",
+      "name": "Player",
+      "limit": 1,
+      "size": {"x": 16, "y": 16},
+      "origin": {"x": 12, "y": 27},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": true,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "texture": "preview-images/iguana.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAbCAYAAADyBeakAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMjHxIGmVAAABRUlEQVRIS9WWOw7CMAyGOyM2rtGNGzCzcw3EUbpxB0QlVq6QOwU5wpXr2onjlEpEstq0fnz9nabtuoYR+lOk1pDKF8oBcO7L5ojSADYDKQFsAvJziHB9R2pSp4oQz10MGct2nwPgnAepEIXiHGwBowGYQSoBEGgCkQAoJdzPtqUAEL+DKkGvpdyWdaD1MbUmA4HFaFF+rR2iAgCKA7A0Fkpo8ostMUDcL2NEAwg6RyARorRQp/v/AkHlr2rHGkrwgtLbgeukrR2wwzr3CNNesZYauBgpLCzOBYS0X5ghjGpgYRWgGaISBFQQN8CqJ2df21lsy1d0DTUcP2lyCD7V/hxm/xaSUtSn6x+yxF4ySI6mtYn6JAA0b1EaR5PjOS9i8XGzSMk5iMWnqTW8wPA6prbA8TYckuQWn+TrHbQAFC5BaD61EB8Fye3VQQj6XgAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "93117141",
+      "name": "Block",
+      "limit": -1,
+      "size": {"x": 16, "y": 16},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": true,
+      "resizeableY": true,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ]
+    }
+  ],
+  "tilesets": []
+}
