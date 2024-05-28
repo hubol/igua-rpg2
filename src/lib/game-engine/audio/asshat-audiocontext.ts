@@ -1,5 +1,6 @@
 import { RequireCapability } from "../../browser/capabilities";
 import { intervalWait } from "../../browser/interval-wait";
+import { UserGesture } from "../../browser/user-gesture";
 import { Environment } from "../../environment";
 import { Force } from "../../types/force";
 import { AudioContextSafety } from "./audiocontext-safety";
@@ -34,6 +35,6 @@ export async function initializeAsshatAudioContext(args: InitializeAsshatAudioCo
 }
 
 async function requestUserGestureForAudioContext(gestureEl: HTMLElement) {
-    AudioContextSafety.receiveGestures(gestureEl);
+    UserGesture.receiveGestures(gestureEl);
     await intervalWait(() => AudioContextSafety.canAudioContextBeCreated);
 }
