@@ -28,17 +28,6 @@
           "values": {"name": "", "depth": 0}
         },
         {
-          "name": "Player",
-          "id": 1,
-          "_eid": "93092164",
-          "x": 24,
-          "y": 144,
-          "originX": 12,
-          "originY": 27,
-          "flippedX": false,
-          "values": {"name": "", "depth": 0}
-        },
-        {
           "name": "Block",
           "id": 2,
           "_eid": "93117141",
@@ -84,6 +73,17 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Player",
+          "id": 6,
+          "_eid": "93092164",
+          "x": 48,
+          "y": 96,
+          "originX": 12,
+          "originY": 27,
+          "flippedX": false,
           "values": {"name": "", "depth": 0}
         }
       ]
