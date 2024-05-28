@@ -38,7 +38,7 @@ module.exports = function ({ files }, { pascal, noext, format }) {
 
         const resolveEntities = entities.map(entity => ({
             key: getUniqueName(entity),
-            value: `s(r["${entity.name}"], ${JSON.stringify(getSerializableOgmoEntityArgs(entity))})`
+            value: `e(r["${entity.name}"], ${JSON.stringify(getSerializableOgmoEntityArgs(entity))})`
         }))
 
         const obj = {
@@ -55,7 +55,9 @@ module.exports = function ({ files }, { pascal, noext, format }) {
     const source = `
 // This file is generated
 
-import { OgmoResolvers as r, spawn as s } from '../../../igua/ogmo-resolvers';
+import { OgmoFactory } from '../../../igua/ogmo-factory';
+
+const { entityResolvers: r, createEntity: e } = OgmoFactory;
 
 export const Lvl = ${stringifiedTree};
 `;

@@ -3,7 +3,7 @@ import { getDefaultLooks } from "./iguana/get-default-looks";
 import { createPlayerObj } from "./objects/obj-player";
 import { objSolidBlock } from "./objects/obj-terrain";
 
-export const OgmoResolvers = {
+const entityResolvers = {
     'Player': () => createPlayerObj(getDefaultLooks()),
     'Block': objSolidBlock,
 }
@@ -22,7 +22,7 @@ interface OgmoEntityValues {
     depth: number;
 }
 
-export function spawn<TFn extends (...args: any[]) => any>(fn: TFn, entity: OgmoEntity): ReturnType<TFn> {
+function createEntity<TFn extends (...args: any[]) => any>(fn: TFn, entity: OgmoEntity): ReturnType<TFn> {
     const obj: Sprite = fn();
     obj.at(entity);
 
@@ -36,4 +36,9 @@ export function spawn<TFn extends (...args: any[]) => any>(fn: TFn, entity: Ogmo
         obj.show();
 
     return obj as any;
+}
+
+export const OgmoFactory = {
+    entityResolvers,
+    createEntity,
 }
