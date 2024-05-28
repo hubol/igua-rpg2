@@ -41,5 +41,13 @@
 			}
 		}
 	],
-	"jsonFiles": []
+	"jsonFiles": [
+		{
+			"glob": "raw/ogmo/levels/**/*.json",
+			"template": {
+				"out": "src/assets/generated/levels/generated-level-data.ts",
+				"program": "src/assets/template/levels.js"
+			}
+		}
+	]
 }

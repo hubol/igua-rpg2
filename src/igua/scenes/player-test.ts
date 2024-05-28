@@ -8,6 +8,7 @@ import { Input } from "../globals";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
+import { Lvl } from "../../assets/generated/levels/generated-level-data";
 
 export function PlayerTest(looks = playerLooksJson) {
     // const b = objSolidBlock().at(96, 160).show();
@@ -71,17 +72,20 @@ export function PlayerTest(looks = playerLooksJson) {
     // const ramp3 = objSolidRamp().at(140, 60).show();
     // ramp3.width = -80;
     // ramp3.height = 40;
-    level();
 
-    for (let i = 0; i < 1; i++)
-        createPlayerObj(looks).at((256 / 20) * i, 40).step(player => {
-            if (player.y > 256 + player.height)
-                player.y = 0;
-            if (player.x > 256 + player.width)
-                player.x = -player.width;
-            else if (player.x < -player.width)
-                player.x = 256 + player.width;
-        }).show();
+    Lvl.Test.resolve();
+
+    // level();
+
+    // for (let i = 0; i < 1; i++)
+    //     createPlayerObj(looks).at((256 / 20) * i, 40).step(player => {
+    //         if (player.y > 256 + player.height)
+    //             player.y = 0;
+    //         if (player.x > 256 + player.width)
+    //             player.x = -player.width;
+    //         else if (player.x < -player.width)
+    //             player.x = 256 + player.width;
+    //     }).show();
 }
 
 function level() {
