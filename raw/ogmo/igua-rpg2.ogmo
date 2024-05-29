@@ -147,6 +147,88 @@
       ],
       "texture": "preview-images/slope.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURQAAAAAAAKVnuc8AAAACdFJOU/8A5bcwSgAAAAlwSFlzAAAOwgAADsIBFShKgAAAAHhJREFUOE+FykkCgCAMBEH8/6dlKRFQSJ1gOuk6S8FBCg5yPx6Ufjqo/XDQ+v5A3x7I2wM1MyzEwjLTKtNEamwjBeNAeFhf9s7cmV/2h3UgYBwpjW0iVaaZVlgWYmZYqdveD3y/ou7A50/U64Hnv6jnA4+dqAdSugFtuwHxO+a3awAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "95769929",
+      "name": "Pipe",
+      "limit": -1,
+      "size": {"x": 16, "y": 9},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": false,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": true,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "texture": "preview-images/pipe.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJBAMAAADJBLEBAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAMUExURa+vr87Ozo6OjnJyclXLZy0AAAAJcEhZcwAADsIAAA7CARUoSoAAAAAbSURBVBjTY4ADQSjAwoADJShAMIyhAMowNgYAs50G6VIHnQYAAAAASUVORK5CYII="
+    },
+    {
+      "exportID": "95781942",
+      "name": "PipeSlope",
+      "limit": -1,
+      "size": {"x": 32, "y": 32},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": false,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": true,
+      "resizeableY": true,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": true,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "texture": "preview-images/pipe slope.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAoCAMAAACo9wirAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURa+vr87Ozo6OjnJycgAAAOne6qwAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAIlJREFUOE+F08sOwCAIRFFs+f9vLvWNDgMrk3NN2CDKR5JACg+k8MCcBtVJUP2Jg+Zx0P2NguFRMF1xsBwHm8NgdxQ4B4H3Ozj8Ck4/g8uP4HYfAHcB8j2AvgXYVxD4DCIfQeg9iL0FxGvA/A+oW8Ddzpt79r8G1C3gbjtw18wt4K6SuAX9gUf1A9eNESFFsNTLAAAAAElFTkSuQmCC"
     }
   ],
   "tilesets": []
