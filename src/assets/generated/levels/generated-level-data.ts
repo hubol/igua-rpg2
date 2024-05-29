@@ -24,7 +24,7 @@ export const Lvl = {
       TerrainPipeGray_1: d(Tx.Terrain.Pipe.Gray, { x: 136, y: 112, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5 }),
       LockedDoor: d(Tx.LockedDoor, { x: 216, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5 }),
       LockedDoor_1: d(Tx.LockedDoor, { x: 176, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5 }),
-      LockedDoor_2: d(Tx.LockedDoor, { x: 136, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5 }),
+      LockedDoor_2: d(Tx.LockedDoor, { x: 136, y: 136, scaleX: 1, scaleY: 1, rotation: 67.71561384794322, originX: 0.5, originY: 0.5 }),
       Player: e(r["Player"], { x: 48, y: 64, flippedX: false, values: { name: "", depth: 0 } }),
     }),
   },
