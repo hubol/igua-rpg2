@@ -13,7 +13,7 @@
   "levelValues": [],
   "defaultExportMode": ".json",
   "compactExport": false,
-  "externalScript": "igua-rp2-ogmo.js",
+  "externalScript": "igua-rpg2-ogmo.js",
   "playCommand": "",
   "entityTags": ["Terrain"],
   "layers": [
