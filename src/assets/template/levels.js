@@ -1,4 +1,5 @@
 const { serialize, createTree, literal } = require("./serialize-utils");
+const { Cache } = require("./cache");
 
 /**
 @param {import("@hubol/smooch/template-api").TemplateContext.JsonAggregate} context;
@@ -8,6 +9,10 @@ module.exports = function ({ files }, { pascal, noext, format }) {
     const { tree, node } = createTree();
 
     const getSerializableOgmoEntityArgs = ({ name, id, _eid, originX, originY, ...rest }) => rest;
+    const getSerializableOgmoDecalArgs = ({ texture, values, ...rest }) => rest;
+
+    const decalNameCache = new Cache(texture => pascal(noext(texture)));
+    const decalTexturePathCache = new Cache(texture => noext(texture).split("/").map(pascal).join("."));
 
     for (const { fileName, json } of files) {
         const path = fileName.split('/').filter(x => !!x);
@@ -16,15 +21,13 @@ module.exports = function ({ files }, { pascal, noext, format }) {
         const width = json.width;
         const height = json.height;
 
-        // TODO order by depth, layers?!
-
         /** @type Array */
-        const entities = json.layers.flatMap(layer => layer.entities ?? []).reverse();
+        const entities = json.layers.flatMap(layer => layer.entities ?? layer.decals ?? []).reverse();
 
         const encounteredNames = new Set();
 
         const getUniqueName = (entity) => {
-            const base = entity?.values?.name || entity.name;
+            const base = entity.values?.name || entity.name || decalNameCache.get(entity.texture);
             let name = base;
             let suffix = 1;
             while (encounteredNames.has(name)) {
@@ -38,7 +41,9 @@ module.exports = function ({ files }, { pascal, noext, format }) {
 
         const resolveEntities = entities.map(entity => ({
             key: getUniqueName(entity),
-            value: `e(r["${entity.name}"], ${JSON.stringify(getSerializableOgmoEntityArgs(entity))})`
+            value: entity.texture
+                ? `d(Tx.${decalTexturePathCache.get(entity.texture)}, ${JSON.stringify(getSerializableOgmoDecalArgs(entity))})`
+                : `e(r["${entity.name}"], ${JSON.stringify(getSerializableOgmoEntityArgs(entity))})`
         }))
 
         const obj = {
@@ -56,8 +61,9 @@ module.exports = function ({ files }, { pascal, noext, format }) {
 // This file is generated
 
 import { OgmoFactory } from '../../../igua/ogmo-factory';
+import { Tx } from '../../../assets/textures';
 
-const { entityResolvers: r, createEntity: e } = OgmoFactory;
+const { entityResolvers: r, createEntity: e, createDecal: d } = OgmoFactory;
 
 export const Lvl = ${stringifiedTree};
 `;

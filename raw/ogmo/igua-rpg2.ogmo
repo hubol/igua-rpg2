@@ -26,6 +26,19 @@
       "excludedTags": ["Terrain"]
     },
     {
+      "definition": "decal",
+      "name": "TerrainDecals",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "02386446",
+      "folder": "../textures",
+      "includeImageSequence": true,
+      "scaleable": true,
+      "rotatable": true,
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
+      ]
+    },
+    {
       "definition": "entity",
       "name": "TerrainEntities",
       "gridSize": {"x": 8, "y": 8},
