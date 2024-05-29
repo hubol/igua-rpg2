@@ -1,12 +1,14 @@
 import { Sprite } from "pixi.js";
 import { getDefaultLooks } from "./iguana/get-default-looks";
 import { createPlayerObj } from "./objects/obj-player";
-import { objSolidBlock, objSolidSlope } from "./objects/obj-terrain";
+import { objPipe, objPipeSlope, objSolidBlock, objSolidSlope } from "./objects/obj-terrain";
 
 const entityResolvers = {
     'Player': () => createPlayerObj(getDefaultLooks()),
     'Block': objSolidBlock,
     'Slope': objSolidSlope,
+    'Pipe': objPipe,
+    'PipeSlope': objPipeSlope,
 }
 
 interface OgmoEntity {
@@ -29,10 +31,10 @@ function createEntity<TFn extends (...args: any[]) => any>(fn: TFn, entity: Ogmo
     obj.at(entity);
 
     if (entity.width !== undefined)
-        obj.width = entity.width;
+        obj.scale.x = entity.width;
 
     if (entity.height !== undefined)
-        obj.height = entity.height;
+        obj.scale.y = entity.height;
 
     if (entity.flippedX)
         obj.scale.x *= -1;
