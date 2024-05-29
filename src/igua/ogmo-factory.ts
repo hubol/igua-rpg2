@@ -1,4 +1,4 @@
-import { Sprite } from "pixi.js";
+import { Sprite, Texture } from "pixi.js";
 import { getDefaultLooks } from "./iguana/get-default-looks";
 import { createPlayerObj } from "./objects/obj-player";
 import { objPipe, objPipeSlope, objSolidBlock, objSolidSlope } from "./objects/obj-terrain";
@@ -48,7 +48,26 @@ function createEntity<TFn extends (...args: any[]) => any>(fn: TFn, entity: Ogmo
     return obj as any;
 }
 
+interface OgmoDecal {
+    x: number;
+    y: number;
+    scaleX: number;
+    scaleY: number;
+    rotation: number;
+    originX: number;
+    originY: number;
+}
+
+function createDecal(texture: Texture, decal: OgmoDecal) {
+    const spr = Sprite.from(texture).at(decal.x, decal.y);
+    spr.scale.set(decal.scaleX, decal.scaleY);
+    spr.angle = decal.rotation;
+    spr.anchor.set(decal.originX, decal.originY);
+    return spr.show();
+}
+
 export const OgmoFactory = {
     entityResolvers,
     createEntity,
+    createDecal,
 }

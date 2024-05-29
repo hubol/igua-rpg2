@@ -29,6 +29,74 @@
       ]
     },
     {
+      "name": "TerrainDecals",
+      "_eid": "02386446",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 32,
+      "gridCellsY": 32,
+      "decals": [
+        {
+          "x": 136,
+          "y": 136,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "texture": "locked door.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 176,
+          "y": 136,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "texture": "locked door.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 216,
+          "y": 136,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "texture": "locked door.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 136,
+          "y": 112,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "texture": "terrain/pipe/gray.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 176,
+          "y": 112,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "texture": "terrain/pipe/gray.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
+      "folder": "../textures"
+    },
+    {
       "name": "TerrainEntities",
       "_eid": "02302709",
       "offsetX": 0,

@@ -1,8 +1,9 @@
 // This file is generated
 
 import { OgmoFactory } from "../../../igua/ogmo-factory";
+import { Tx } from "../../../assets/textures";
 
-const { entityResolvers: r, createEntity: e } = OgmoFactory;
+const { entityResolvers: r, createEntity: e, createDecal: d } = OgmoFactory;
 
 export const Lvl = {
   Test: {
@@ -19,6 +20,11 @@ export const Lvl = {
       PipeSlope: e(r["PipeSlope"], { x: 152, y: 64, width: 56, height: 56, flippedX: true, values: { name: "", depth: 0 } }),
       Pipe_1: e(r["Pipe"], { x: 64, y: 64, width: 88, values: { name: "", depth: 0 } }),
       Block_5: e(r["Block"], { x: 32, y: 64, width: 32, height: 16, values: { name: "", depth: 0 } }),
+      TerrainPipeGray: d(Tx.Terrain.Pipe.Gray, { x: 176, y: 112, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5 }),
+      TerrainPipeGray_1: d(Tx.Terrain.Pipe.Gray, { x: 136, y: 112, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5 }),
+      LockedDoor: d(Tx.LockedDoor, { x: 216, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5 }),
+      LockedDoor_1: d(Tx.LockedDoor, { x: 176, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5 }),
+      LockedDoor_2: d(Tx.LockedDoor, { x: 136, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5 }),
       Player: e(r["Player"], { x: 48, y: 64, flippedX: false, values: { name: "", depth: 0 } }),
     }),
   },
