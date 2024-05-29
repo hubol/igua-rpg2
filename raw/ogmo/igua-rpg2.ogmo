@@ -4,7 +4,7 @@
   "levelPaths": ["./levels"],
   "backgroundColor": "#408000ff",
   "gridColor": "#3c4049cc",
-  "anglesRadians": true,
+  "anglesRadians": false,
   "directoryDepth": 5,
   "layerGridDefaultSize": {"x": 8, "y": 8},
   "levelDefaultSize": {"x": 256, "y": 256},
