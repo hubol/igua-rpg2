@@ -15,7 +15,7 @@
   "compactExport": false,
   "externalScript": "igua-rp2-ogmo.js",
   "playCommand": "",
-  "entityTags": [],
+  "entityTags": ["Terrain"],
   "layers": [
     {
       "definition": "entity",
@@ -23,6 +23,14 @@
       "gridSize": {"x": 8, "y": 8},
       "exportID": "93086020",
       "requiredTags": [],
+      "excludedTags": ["Terrain"]
+    },
+    {
+      "definition": "entity",
+      "name": "TerrainEntities",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "02302709",
+      "requiredTags": ["Terrain"],
       "excludedTags": []
     }
   ],
@@ -101,7 +109,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": [],
+      "tags": ["Terrain"],
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
@@ -140,7 +148,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": [],
+      "tags": ["Terrain"],
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
@@ -181,7 +189,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": [],
+      "tags": ["Terrain"],
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
@@ -222,7 +230,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": [],
+      "tags": ["Terrain"],
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}

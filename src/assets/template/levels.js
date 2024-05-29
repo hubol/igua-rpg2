@@ -19,7 +19,7 @@ module.exports = function ({ files }, { pascal, noext, format }) {
         // TODO order by depth, layers?!
 
         /** @type Array */
-        const entities = json.layers.flatMap(layer => layer.entities ?? []);
+        const entities = json.layers.flatMap(layer => layer.entities ?? []).reverse();
 
         const encounteredNames = new Set();
 
