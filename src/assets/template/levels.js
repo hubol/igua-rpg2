@@ -49,7 +49,7 @@ module.exports = function ({ files }, { pascal, noext, format }) {
         const obj = {
             width,
             height,
-            resolve: literal(`() => ({ ${resolveEntities.map(({ key, value }) => `"${key}": ${value},`).join('')} })`)
+            createGameObjects: literal(`() => ({ ${resolveEntities.map(({ key, value }) => `"${key}": ${value},`).join('')} })`)
         };
 
         node(path.map(pascal), obj);

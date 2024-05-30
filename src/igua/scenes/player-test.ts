@@ -73,7 +73,7 @@ export function PlayerTest(looks = playerLooksJson) {
     // ramp3.width = -80;
     // ramp3.height = 40;
 
-    Lvl.Test.resolve();
+    Lvl.Test.createGameObjects();
 
     // level();
 
