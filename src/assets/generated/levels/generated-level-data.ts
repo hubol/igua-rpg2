@@ -9,7 +9,7 @@ export const Lvl = {
   Test: {
     width: 256,
     height: 256,
-    resolve: () => ({
+    createGameObjects: () => ({
       Slope: e(r["Slope"], { x: 48, y: 136, width: 64, height: 16, flippedX: true, flippedY: false, values: { name: "", depth: 0 } }),
       Block: e(r["Block"], { x: 16, y: 136, width: 32, height: 16, values: { name: "", depth: 0 } }),
       Block_1: e(r["Block"], { x: 240, y: 16, width: 16, height: 136, values: { name: "", depth: 0 } }),
