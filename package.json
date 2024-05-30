@@ -14,7 +14,7 @@
   "author": "Hubol",
   "license": "SEE LICENSE IN LICENSE.md",
   "devDependencies": {
-    "@hubol/smooch": "^1.0.0-beta.9",
+    "@hubol/smooch": "^1.0.0-beta.10",
     "@types/node": "^20.8.8",
     "esbuild": "0.19.8",
     "esbuild-plugin-import-glob": "^0.1.1",
