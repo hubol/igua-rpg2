@@ -1,5 +1,5 @@
 import { Sprite } from "pixi.js";
-import { createPlayerObj } from "../objects/obj-player";
+import { createPlayerObj, playerObj } from "../objects/obj-player";
 import { Tx } from "../../assets/textures";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { show } from "../cutscene/show";
@@ -98,7 +98,7 @@ function level() {
 
     objPipe().at(192, 112).scaled(48, 48).show(b);
     objPipeSlope().at(192, -16).scaled(48, 48).show(b);
-    objPipeSlope().at(192, 16).scaled(80, 80).show(b).texture = NoAtlasTx.Placeholder;
+    // objPipeSlope().at(192, 16).scaled(80, 80).show(b).texture = NoAtlasTx.Placeholder;
 
     // objPipeSlope().at(0, 64).scaled(80, 80).show(b);
     // objPipe().at(80, 64).scaled(48, 48).show(b);

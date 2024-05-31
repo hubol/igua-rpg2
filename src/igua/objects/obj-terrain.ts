@@ -1,8 +1,8 @@
-import { DisplayObject, Graphics, Matrix, Mesh, SimpleMesh, WRAP_MODES } from "pixi.js";
+import { DisplayObject, Graphics, SimpleMesh, WRAP_MODES } from "pixi.js";
 import { Empty } from "../../lib/types/empty";
 import { SceneLocal } from "../core/scene/scene-local";
 import { scene } from "../globals";
-import { Tx } from "../../assets/textures";
+import { NoAtlasTx } from "../../assets/no-atlas-textures";
 
 /**
  * Describes a line segment. Different kinds of terrain segments make certain guarantees:
@@ -247,7 +247,7 @@ class PipeMesh extends TerrainMesh {
     constructor(weights = PipeMesh._Weights) {
         super(weights);
 
-        this.texture = Tx.Terrain.Pipe.Gray;
+        this.texture = NoAtlasTx.Terrain.Pipe.Gray;
     }
 
     onTransformChanged() {
