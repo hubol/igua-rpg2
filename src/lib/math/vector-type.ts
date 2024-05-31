@@ -1,4 +1,4 @@
-import { normalize } from "./vector";
+import { moveTowards, normalize } from "./vector";
 
 function Vector(this: Vector, x: number, y: number) {
     this.x = x;
@@ -27,6 +27,7 @@ export interface Vector extends VectorSimple {
     add(x: number, y: number): this;
     add(vector: VectorSimple): this;
     add(vector: VectorSimple, scalar: number): this;
+    moveTowards(other: VectorSimple, distance: number): this;
     normalize(): this;
     scale(f: number): this;
     scale(x: number, y: number): this;
@@ -79,6 +80,12 @@ const propertyDefinitions = createPropertyDefinitions({
                 this.y += x_vector.y * y_scalar;
             }
             return this;
+        },
+        configurable: true,
+    },
+    moveTowards: {
+        value: function (this: Vector, other: Vector, distance: number) {
+            return moveTowards(this, other, distance);
         },
         configurable: true,
     },

@@ -6,6 +6,7 @@ import { Logging } from "../../../lib/logging";
 import { Container, Graphics } from "pixi.js";
 import { merge } from "../../../lib/object/merge";
 import { renderer } from "../../globals";
+import { objCamera } from "../../objects/obj-camera";
 
 interface IguaSceneMeta {
     useGameplay: false;
@@ -18,7 +19,9 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
     const background = new Container().named("Background");
     const stage = new Container().named("Stage");
 
-    root.addChild(background, stage);
+    const camera = objCamera();
+
+    root.addChild(background, stage, camera);
 
     const backgroundGfx = new Graphics().tinted(0x000000).beginFill(0xffffff).drawRect(0, 0, renderer.width, renderer.height).show(background);
 
@@ -30,6 +33,7 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
         root,
         source,
         stage,
+        camera,
         ticker,
     }
 }
