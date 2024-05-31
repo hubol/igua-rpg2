@@ -11,22 +11,34 @@ const entityResolvers = {
     'PipeSlope': objPipeSlope,
 }
 
-interface OgmoEntity {
-    x: number;
-    y: number;
-    flippedX?: boolean;
-    flippedY?: boolean;
-    width?: number;
-    height?: number;
-    values: OgmoEntityValues;
+namespace OgmoFactory {
+    export interface Entity {
+        x: number;
+        y: number;
+        flippedX?: boolean;
+        flippedY?: boolean;
+        width?: number;
+        height?: number;
+        values: EntityValues;
+    }    
+
+    interface EntityValues {
+        name: string;
+        depth: number;
+    }
+
+    export interface Decal {
+        x: number;
+        y: number;
+        scaleX: number;
+        scaleY: number;
+        rotation: number;
+        originX: number;
+        originY: number;
+    }
 }
 
-interface OgmoEntityValues {
-    name: string;
-    depth: number;
-}
-
-function createEntity<TFn extends (...args: any[]) => any>(fn: TFn, entity: OgmoEntity): ReturnType<TFn> {
+function createEntity<TFn extends (...args: any[]) => any>(fn: TFn, entity: OgmoFactory.Entity): ReturnType<TFn> {
     const obj: Sprite = fn();
     obj.at(entity);
 
@@ -48,17 +60,7 @@ function createEntity<TFn extends (...args: any[]) => any>(fn: TFn, entity: Ogmo
     return obj as any;
 }
 
-interface OgmoDecal {
-    x: number;
-    y: number;
-    scaleX: number;
-    scaleY: number;
-    rotation: number;
-    originX: number;
-    originY: number;
-}
-
-function createDecal(texture: Texture, decal: OgmoDecal) {
+function createDecal(texture: Texture, decal: OgmoFactory.Decal) {
     const spr = Sprite.from(texture).at(decal.x, decal.y);
     spr.scale.set(decal.scaleX, decal.scaleY);
     spr.angle = decal.rotation;
