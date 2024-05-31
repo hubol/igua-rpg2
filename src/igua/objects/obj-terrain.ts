@@ -275,6 +275,9 @@ function renderPipeGraphics(mesh: SimpleMesh, weight: TerrainSegment) {
 
     const uvx = tx.baseTexture.wrapMode === WRAP_MODES.REPEAT ? mesh.scale.x / tx.width : 1;
 
-    mesh.uvBuffer.data = new Float32Array([ 0, 0, uvx, 0, uvx, 1, 0, 1]);
+    const uvy0 = 0.5 / tx.height;
+    const uvy1 = (tx.height - 0.5) / tx.height;
+
+    mesh.uvBuffer.data = new Float32Array([ 0, uvy0, uvx, uvy0, uvx, uvy1, 0, uvy1]);
     mesh.geometry.indexBuffer.data = new Uint16Array([ 0, 1, 3, 1, 2, 3 ]);
 }
