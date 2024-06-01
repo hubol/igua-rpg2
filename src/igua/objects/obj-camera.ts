@@ -1,10 +1,6 @@
-import { moveTowards } from "../../lib/math/vector";
-import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { renderer, scene } from "../globals";
 import { playerObj } from "./obj-player";
-
-const v = vnew();
 
 export function objCamera() {
     // TODO need way to snap to desired position e.g. on level load
@@ -12,7 +8,7 @@ export function objCamera() {
         // TODO camera behavior should be overrideable
         // e.g. there should be modes other than following the player
         if (!playerObj?.destroyed)
-            self.moveTowards(v.at(playerObj).add(-128, -128), 4);
+            self.at(playerObj).add(-128, -128);
 
         // TODO switch for this?
         self.x = Math.max(0, Math.min(self.x, scene.level.width - renderer.width));
