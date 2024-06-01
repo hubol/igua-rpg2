@@ -18,21 +18,30 @@ export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physics
     }
 
     const positionDecimal = vnew();
-    let setPositionDecimal = false;
+    let setPositionDecimalOnTransformChanged = true;
+
+    const cb = obj.transform.position.cb.bind(obj.transform);
+
+    obj.transform.position.cb = () => {
+        if (setPositionDecimalOnTransformChanged) {
+            positionDecimal.x = obj.transform.position._x;
+            positionDecimal.y = obj.transform.position._y;
+        }
+        cb();
+    }
 
     return obj
         .merge({ speed: vnew(), gravity, isOnGround: false, physicsRadius, physicsOffset })
         .step(obj => {
             // TODO
-            // 1. It seems problematic that physics objects cannot have their position set
-            // 2. Is this even necessary? If so, why?! Why doesn't rounding when rendering work?!
-            if (setPositionDecimal)
-                obj.at(positionDecimal);
+            // Is this even necessary? If so, why?! Why doesn't rounding when rendering work?!
+            setPositionDecimalOnTransformChanged = false;
+            obj.at(positionDecimal);
             const event = move(obj);
             positionDecimal.at(obj.x, obj.y);
-            setPositionDecimal = true;
             obj.x = Math.round(obj.x);
             obj.y = Math.round(obj.y);
+            setPositionDecimalOnTransformChanged = true;
             onMove?.(event);
         }, 1000)
 }
