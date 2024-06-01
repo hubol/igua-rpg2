@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 256,
+  "width": 456,
   "height": 256,
   "offsetX": 0,
   "offsetY": 0,
@@ -12,7 +12,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 32,
+      "gridCellsX": 57,
       "gridCellsY": 32,
       "entities": [
         {
@@ -35,7 +35,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 32,
+      "gridCellsX": 57,
       "gridCellsY": 32,
       "decals": [
         {
@@ -43,7 +43,7 @@
           "y": 136,
           "scaleX": 1,
           "scaleY": 1,
-          "rotation": 67.71561384794322,
+          "rotation": 67.71561384794323,
           "texture": "locked door.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -92,6 +92,50 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
+        },
+        {
+          "x": 360,
+          "y": 184,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "texture": "placeholder.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 384,
+          "y": 184,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "texture": "placeholder.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 408,
+          "y": 184,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "texture": "placeholder.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 432,
+          "y": 184,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "texture": "placeholder.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -103,7 +147,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 32,
+      "gridCellsX": 57,
       "gridCellsY": 32,
       "entities": [
         {
@@ -190,7 +234,7 @@
           "x": 240,
           "y": 16,
           "width": 16,
-          "height": 136,
+          "height": 112,
           "originX": 0,
           "originY": 0,
           "values": {"name": "", "depth": 0}
@@ -217,6 +261,63 @@
           "height": 16,
           "flippedX": true,
           "flippedY": false,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Slope",
+          "id": 10,
+          "_eid": "95675713",
+          "x": 256,
+          "y": 152,
+          "width": 96,
+          "height": 24,
+          "flippedX": true,
+          "flippedY": false,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 11,
+          "_eid": "93117141",
+          "x": 256,
+          "y": 176,
+          "width": 200,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 12,
+          "_eid": "93117141",
+          "x": 256,
+          "y": 0,
+          "width": 200,
+          "height": 96,
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Slope",
+          "id": 13,
+          "_eid": "95675713",
+          "x": 256,
+          "y": 96,
+          "width": 128,
+          "height": 32,
+          "flippedX": true,
+          "flippedY": true,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 14,
+          "_eid": "95769929",
+          "x": 368,
+          "y": 152,
+          "width": 48,
           "values": {"name": "", "depth": 0}
         }
       ]

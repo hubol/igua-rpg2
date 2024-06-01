@@ -1,4 +1,5 @@
 import { Sprite, Texture } from "pixi.js";
+import { scene } from "../globals";
 
 namespace OgmoFactory {
     export interface Entity {
@@ -24,6 +25,11 @@ namespace OgmoFactory {
         rotation: number;
         originX: number;
         originY: number;
+    }
+
+    export interface Level {
+        width: number;
+        height: number;
     }
 }
 
@@ -57,7 +63,16 @@ function createDecal(texture: Texture, decal: OgmoFactory.Decal) {
     return spr.show();
 }
 
+function createLevel<TFn extends (...args: any[]) => any>(level: OgmoFactory.Level, fn: TFn): TFn {
+    return (() => {
+        scene.level.width = level.width;
+        scene.level.height = level.height;
+        return fn();
+    }) as TFn;
+}
+
 export const OgmoFactory = {
     createEntity,
     createDecal,
+    createLevel,
 }

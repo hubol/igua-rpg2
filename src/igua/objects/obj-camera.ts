@@ -1,7 +1,7 @@
 import { moveTowards } from "../../lib/math/vector";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
-import { scene } from "../globals";
+import { renderer, scene } from "../globals";
 import { playerObj } from "./obj-player";
 
 const v = vnew();
@@ -12,9 +12,13 @@ export function objCamera() {
         // TODO camera behavior should be overrideable
         // e.g. there should be modes other than following the player
         if (!playerObj?.destroyed)
-            self.moveTowards(v.at(playerObj).scale(-1).add(128, 128), 4);
+            self.moveTowards(v.at(playerObj).add(-128, -128), 4);
 
-        scene.stage.x = Math.round(self.x);
-        scene.stage.y = Math.round(self.y);
+        // TODO switch for this?
+        self.x = Math.max(0, Math.min(self.x, scene.level.width - renderer.width));
+        self.y = Math.max(0, Math.min(self.y, scene.level.height - renderer.height));
+
+        scene.stage.x = Math.round(-self.x);
+        scene.stage.y = Math.round(-self.y);
     }, 2000)
 }

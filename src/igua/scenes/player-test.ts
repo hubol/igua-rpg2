@@ -9,6 +9,7 @@ import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { sleep } from "../../lib/game-engine/promise/sleep";
 
 export function PlayerTest(looks = playerLooksJson) {
     // const b = objSolidBlock().at(96, 160).show();
@@ -73,7 +74,13 @@ export function PlayerTest(looks = playerLooksJson) {
     // ramp3.width = -80;
     // ramp3.height = 40;
 
-    Lvl.Test.createGameObjects();
+    const { LockedDoor } = Lvl.Test();
+    LockedDoor.async(async () => {
+        while (true) {
+            LockedDoor.add(Rng.vunit().scale(4));
+            await sleep(60);
+        }
+    })
 
     // level();
 

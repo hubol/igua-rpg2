@@ -46,11 +46,8 @@ module.exports = function ({ files }, { pascal, noext, format }) {
                 : `e(r["${entity.name}"], ${JSON.stringify(getSerializableOgmoEntityArgs(entity))})`
         }))
 
-        const obj = {
-            width,
-            height,
-            createGameObjects: literal(`() => ({ ${resolveEntities.map(({ key, value }) => `"${key}": ${value},`).join('')} })`)
-        };
+        const level = { width, height }
+        const obj = literal(`l(${JSON.stringify(level)}, () => ({ ${resolveEntities.map(({ key, value }) => `"${key}": ${value},`).join('')} }))`)
 
         node(path.map(pascal), obj);
     }
@@ -64,7 +61,7 @@ import { OgmoEntityResolvers as r } from '../../../igua/ogmo/entity-resolvers';
 import { OgmoFactory } from '../../../igua/ogmo/factory';
 import { Tx } from '../../../assets/textures';
 
-const { createEntity: e, createDecal: d } = OgmoFactory;
+const { createEntity: e, createDecal: d, createLevel: l } = OgmoFactory;
 
 export const Lvl = ${stringifiedTree};
 `;

@@ -35,6 +35,10 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
         stage,
         camera,
         ticker,
+        level: {
+            width: renderer.width,
+            height: renderer.height,
+        },
     }
 }
 
