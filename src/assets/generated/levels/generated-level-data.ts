@@ -1,9 +1,10 @@
 // This file is generated
 
-import { OgmoFactory } from "../../../igua/ogmo-factory";
+import { OgmoEntityResolvers as r } from "../../../igua/ogmo/entity-resolvers";
+import { OgmoFactory } from "../../../igua/ogmo/factory";
 import { Tx } from "../../../assets/textures";
 
-const { entityResolvers: r, createEntity: e, createDecal: d } = OgmoFactory;
+const { createEntity: e, createDecal: d } = OgmoFactory;
 
 export const Lvl = {
   Test: {

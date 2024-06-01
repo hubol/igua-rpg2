@@ -1,15 +1,4 @@
 import { Sprite, Texture } from "pixi.js";
-import { getDefaultLooks } from "./iguana/get-default-looks";
-import { createPlayerObj } from "./objects/obj-player";
-import { objPipe, objPipeSlope, objSolidBlock, objSolidSlope } from "./objects/obj-terrain";
-
-const entityResolvers = {
-    'Player': () => createPlayerObj(getDefaultLooks()),
-    'Block': objSolidBlock,
-    'Slope': objSolidSlope,
-    'Pipe': objPipe,
-    'PipeSlope': objPipeSlope,
-}
 
 namespace OgmoFactory {
     export interface Entity {
@@ -69,7 +58,6 @@ function createDecal(texture: Texture, decal: OgmoFactory.Decal) {
 }
 
 export const OgmoFactory = {
-    entityResolvers,
     createEntity,
     createDecal,
 }
