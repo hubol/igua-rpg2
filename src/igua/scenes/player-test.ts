@@ -4,12 +4,13 @@ import { Tx } from "../../assets/textures";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { show } from "../cutscene/show";
 import { objPipe, objPipeSlope, objSolidBlock, objSolidSlope } from "../objects/obj-terrain";
-import { Input } from "../globals";
+import { Input, layers, scene } from "../globals";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { sleep } from "../../lib/game-engine/promise/sleep";
+import { objStatusBar } from "../objects/obj-status-bar";
 
 export function PlayerTest(looks = playerLooksJson) {
     // const b = objSolidBlock().at(96, 160).show();
@@ -33,6 +34,50 @@ export function PlayerTest(looks = playerLooksJson) {
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
         await show('Hello!');
     }).show()
+
+    let value = 128;
+
+    const bar = objStatusBar({
+        width: 100,
+        height: 8,
+        maxValue: value,
+        tintBack: 0xff0000,
+        tintFront: 0x0000ff,
+        value,
+        decreases: [
+            { tintBar: 0x800000, },
+            { tintBar: 0x008000, },
+        ],
+        increases: [
+            { tintBar: 0x00ff00, },
+            { tintBar: 0xffff00, },
+        ]
+    })
+    .step(() => {
+        if (Input.justWentDown('CastSpell')) {
+            value = Math.max(0, value + 20);
+            bar.increase(value, 20, 0);
+        }
+        if (playerObj.collides(LockedDoor)) {
+            value = Math.max(0, value - 1);
+            bar.decrease(value, 1, 1);
+        }
+
+        // if (Input.justWentDown('Jump')) {
+        //     value = Math.max(0, value - 5);
+        //     bar.decrease(value, 5, 1);
+        // }
+        // if (Input.justWentDown('InventoryMenuToggle')) {
+        //     value = Math.min(bar.maxValue, value + 20);
+        //     bar.increase(value, 20, 0);
+        // }
+        // if (Input.justWentDown('MoveLeft')) {
+        //     value = Math.min(bar.maxValue, value + 10);
+        //     bar.increase(value, 10, 1);
+        // }
+    }, 3)
+    .at(2, 2)
+    .show(layers.hud);
 
     // objSolidBlock().at(128, 100).step(block => {
     //     if (Input.isDown('SelectUp'))
