@@ -35,10 +35,10 @@ export function PlayerTest(looks = playerLooksJson) {
         await show('Hello!');
     }).show()
 
-    let value = 128;
+    let value = 60;
 
     const bar = objStatusBar({
-        width: 100,
+        width: value,
         height: 8,
         maxValue: value,
         tintBack: 0xff0000,
@@ -76,7 +76,49 @@ export function PlayerTest(looks = playerLooksJson) {
         //     bar.increase(value, 10, 1);
         // }
     }, 3)
-    .at(2, 2)
+    .at(3, 3)
+    .show(layers.hud);
+
+    let emoValue = 20;
+
+    const emoBar = objStatusBar({
+        width: emoValue,
+        height: 8,
+        maxValue: emoValue,
+        tintBack: 0x000000,
+        tintFront: 0x008000,
+        value: emoValue,
+        decreases: [
+            { tintBar: 0x80b000, },
+        ],
+        increases: [
+            { tintBar: 0x00ff00, },
+        ]
+    })
+    .step(() => {
+        if (Input.justWentDown('CastSpell')) {
+            emoValue = Math.max(0, emoValue - 10);
+            emoBar.decrease(emoValue, 10, 0);
+        }
+        // if (playerObj.collides(LockedDoor)) {
+        //     value = Math.max(0, value - 1);
+        //     bar.decrease(value, 1, 1);
+        // }
+
+        // if (Input.justWentDown('Jump')) {
+        //     value = Math.max(0, value - 5);
+        //     bar.decrease(value, 5, 1);
+        // }
+        // if (Input.justWentDown('InventoryMenuToggle')) {
+        //     value = Math.min(bar.maxValue, value + 20);
+        //     bar.increase(value, 20, 0);
+        // }
+        // if (Input.justWentDown('MoveLeft')) {
+        //     value = Math.min(bar.maxValue, value + 10);
+        //     bar.increase(value, 10, 1);
+        // }
+    }, 3)
+    .at(3, 14)
     .show(layers.hud);
 
     // objSolidBlock().at(128, 100).step(block => {

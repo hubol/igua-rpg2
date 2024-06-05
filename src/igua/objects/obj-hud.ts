@@ -3,7 +3,7 @@ import { objText } from "../../assets/fonts";
 import { container } from "../../lib/pixi/container";
 
 function objHud() {
-    const text = objText.Large('You are a gay person', { tint: 0x00ff00 }).at(2, 16);
+    const text = objText.Large('You are a gay person', { tint: 0x00ff00 }).at(3, 24);
 
     return container(text);
 }
