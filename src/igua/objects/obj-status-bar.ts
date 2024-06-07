@@ -2,6 +2,7 @@ import { Graphics } from "pixi.js";
 import { container } from "../../lib/pixi/container";
 import { Force } from "../../lib/types/force";
 import { approachLinear } from "../../lib/math/number";
+import { objText } from "../../assets/fonts";
 
 interface ObjStatusBarConfig {
     value: number;
@@ -14,18 +15,25 @@ interface ObjStatusBarConfig {
     decreases: AdjustmentConfig[];
 }
 
-enum AdjustmentDigitSize {
-    Small,
-    Medium,
-}
+type AdjustmentDigitSize = 'small' | 'medium';
+type AdjustmentDigitAlign = 'left' | 'right';
 
 interface AdjustmentConfig {
     tintBar: number;
-    digit?: {
-        tint: number;
-        size: AdjustmentDigitSize;
-        signed: boolean;
-    }
+    digit?: AdjustmentDigitConfig;
+}
+
+interface AdjustmentDigitConfig {
+    tint: number;
+    size: AdjustmentDigitSize;
+    signed: boolean;
+    align: AdjustmentDigitAlign;
+}
+
+const Consts = {
+    ShowDigitSteps: 60,
+    ShowDecreaseChunkSteps: 15,
+    DigitSpacePixels: 1,
 }
 
 function roundInformatively(value: number, maximum: number) {
@@ -49,7 +57,7 @@ export function objStatusBar(config: ObjStatusBarConfig) {
             tint: config.decreases[index].tintBar,
             value,
             target,
-            life: 15,
+            life: Consts.ShowDecreaseChunkSteps,
         }
     }
 
@@ -63,6 +71,47 @@ export function objStatusBar(config: ObjStatusBarConfig) {
     const decreaseChunks: ReturnType<typeof createDecreaseChunk>[] = [];
     const increaseChunks: ReturnType<typeof createIncreaseChunk>[] = [];
 
+    const createText = (digit: AdjustmentDigitConfig, isPositiveSign: boolean) => {
+        let life = 0;
+        let value = 0;
+        const text = objText[digit.size === 'small' ? 'Small' : 'MediumDigits']('0', { tint: digit.tint })
+            .anchored(digit.align === 'left' ? 0 : 1, 1)
+            .merge({
+                addDelta(delta: number) {
+                    value += delta;
+
+                    if (digit.signed)
+                        text.text = (isPositiveSign ? '+' : '-') + Math.round(value);
+                    else
+                        text.text = '' + Math.round(value);
+
+                    life = Consts.ShowDigitSteps;
+                    text.visible = true;
+                },
+                clear() {
+                    life = 0;
+                    text.visible = false;
+                    value = 0;
+                }
+            })
+            .step(self => {
+                if (life > 0)
+                    life--;
+                self.visible = life > 0;
+                if (!self.visible)
+                    value = 0;
+            }, -1);
+
+        text.visible = false;
+
+        (digit.align === 'left' ? leftAlignedTexts : rightAlignedTexts).push(text);
+
+        return text;
+    }
+
+    const leftAlignedTexts: ReturnType<typeof createText>[] = [];
+    const rightAlignedTexts: ReturnType<typeof createText>[] = [];
+
     const c = container(barsGfx)
     .merge({
         maxValue: config.maxValue,
@@ -72,6 +121,7 @@ export function objStatusBar(config: ObjStatusBarConfig) {
             decreaseChunks.push(createDecreaseChunk(index, trueValue, value));
             trueValue = value;
             frontValue = Math.min(frontValue, trueValue);
+            decreaseTexts[index]?.addDelta(delta);
         },
         increase(value: number, delta: number, index: number) {
             trueValue = value;
@@ -79,6 +129,7 @@ export function objStatusBar(config: ObjStatusBarConfig) {
             for (const chunk of decreaseChunks) {
                 chunk.value = Math.min(chunk.value, trueValue);
             }
+            increaseTexts[index]?.addDelta(delta);
         }
     })
     .step(() => {
@@ -90,6 +141,28 @@ export function objStatusBar(config: ObjStatusBarConfig) {
 
         barsGfx.clear();
         barsGfx.beginFill(config.tintBack).drawRect(0, 0, width, height);
+
+        const textFloor = height;
+
+        {
+            let x = 1;
+            for (let i = 0; i < leftAlignedTexts.length; i++) {
+                const text = leftAlignedTexts[i];
+                text.at(x, textFloor);
+                if (text.visible)
+                    x += text.width + Consts.DigitSpacePixels;
+            }
+        }
+
+        {
+            let x = width;
+            for (let i = 0; i < rightAlignedTexts.length; i++) {
+                const text = rightAlignedTexts[i];
+                text.at(x, textFloor);
+                if (text.visible)
+                    x -= text.width + Consts.DigitSpacePixels;
+            }
+        }
 
         {
             let i = 0;
@@ -145,7 +218,12 @@ export function objStatusBar(config: ObjStatusBarConfig) {
         }
 
         barsGfx.beginFill(c.tintFront).drawRect(0, 0, roundInformatively((frontValue / c.maxValue) * width, width), height);
-    })
+    });
+
+    const increaseTexts = config.increases.map(x => x.digit ? createText(x.digit, true).show(c) : null);
+    const decreaseTexts = config.decreases.map(x => x.digit ? createText(x.digit, false).show(c) : null);
 
     return c;
 }
+
+export type ObjStatusBar = ReturnType<typeof objStatusBar>;

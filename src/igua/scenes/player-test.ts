@@ -39,23 +39,47 @@ export function PlayerTest(looks = playerLooksJson) {
 
     const bar = objStatusBar({
         width: value,
-        height: 8,
+        height: 7,
         maxValue: value,
         tintBack: 0xff0000,
         tintFront: 0x0000ff,
         value,
         decreases: [
-            { tintBar: 0x800000, },
-            { tintBar: 0x008000, },
+            {
+                tintBar: 0x800000,
+                digit: {
+                    signed: false,
+                    size: 'medium',
+                    tint: 0xffffff,
+                    align: 'right',
+                }
+            },
+            { 
+                tintBar: 0x008000,
+                digit: {
+                    signed: false,
+                    size: 'medium',
+                    tint: 0x004000,
+                    align: 'right',
+                }
+            },
         ],
         increases: [
-            { tintBar: 0x00ff00, },
+            {
+                tintBar: 0x00ff00,
+                digit: {
+                    signed: true,
+                    size: 'medium',
+                    tint: 0xffffff,
+                    align: 'left',
+                }
+            },
             { tintBar: 0xffff00, },
         ]
     })
     .step(() => {
         if (Input.justWentDown('CastSpell')) {
-            value = Math.max(0, value + 20);
+            value = Math.min(bar.maxValue, value + 20);
             bar.increase(value, 20, 0);
         }
         if (playerObj.collides(LockedDoor)) {
@@ -67,10 +91,10 @@ export function PlayerTest(looks = playerLooksJson) {
         //     value = Math.max(0, value - 5);
         //     bar.decrease(value, 5, 1);
         // }
-        // if (Input.justWentDown('InventoryMenuToggle')) {
-        //     value = Math.min(bar.maxValue, value + 20);
-        //     bar.increase(value, 20, 0);
-        // }
+        if (Input.justWentDown('InventoryMenuToggle')) {
+            value = Math.max(0, value - 20);
+            bar.decrease(value, 20, 0);
+        }
         // if (Input.justWentDown('MoveLeft')) {
         //     value = Math.min(bar.maxValue, value + 10);
         //     bar.increase(value, 10, 1);
@@ -83,7 +107,7 @@ export function PlayerTest(looks = playerLooksJson) {
 
     const emoBar = objStatusBar({
         width: emoValue,
-        height: 8,
+        height: 7,
         maxValue: emoValue,
         tintBack: 0x000000,
         tintFront: 0x008000,
@@ -118,7 +142,7 @@ export function PlayerTest(looks = playerLooksJson) {
         //     bar.increase(value, 10, 1);
         // }
     }, 3)
-    .at(3, 14)
+    .at(3, 13)
     .show(layers.hud);
 
     // objSolidBlock().at(128, 100).step(block => {
