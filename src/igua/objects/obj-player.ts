@@ -3,6 +3,8 @@ import { Cutscene, Input } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnPhysics } from "../mixins/mxn-physics";
+import { mxnRpgStatus } from "../mixins/mxn-rpg-status";
+import { hudObj } from "./obj-hud";
 
 const PlayerConsts = {
     // TODO probably not constants, probably derived from status
@@ -17,6 +19,18 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     let lastNonZeroSpeedXSign = 0;
 
     const puppet = objIguanaPuppet(looks)
+        // TODO from global state
+        .mixin(mxnRpgStatus, {
+            health: 60,
+            invulnerable: 0,
+            maxHealth: 60,
+            poison: {
+                level: 0,
+                max: 100,
+                value: 0,
+            }
+        }, hudObj.healthBarObj.effects)
+        // TODO some of this can be extracted to a "objIguanaLocomotivePuppet" ?
         .mixin(mxnPhysics, { gravity: PlayerConsts.Gravity, physicsRadius: 7, physicsOffset: [0, -9], debug: false, onMove: (event) => {
             if (event.hitGround && !event.previousOnGround && event.previousSpeed.y > 1.2)
                 puppet.landingFrames = 10;
