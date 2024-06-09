@@ -11,7 +11,6 @@ const PlayerConsts = {
     // TODO probably not constants, probably derived from status
     WalkingAcceleration: 0.3,
     WalkingDeceleration: 0.2,
-    WalkingTopSpeed: 2.5,
     JumpSpeed: -3,
     Gravity: 0.1,
 }
@@ -41,9 +40,9 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 puppet.speed.x = approachLinear(puppet.speed.x, 0, PlayerConsts.WalkingDeceleration);
             }
             else if (moveLeft)
-                puppet.speed.x = Math.max(puppet.speed.x - PlayerConsts.WalkingDeceleration, -PlayerConsts.WalkingTopSpeed);
+                puppet.speed.x = Math.max(puppet.speed.x - PlayerConsts.WalkingDeceleration, -RpgPlayer.WalkingTopSpeed);
             else if (moveRight)
-                puppet.speed.x = Math.min(puppet.speed.x + PlayerConsts.WalkingDeceleration, PlayerConsts.WalkingTopSpeed);
+                puppet.speed.x = Math.min(puppet.speed.x + PlayerConsts.WalkingDeceleration, RpgPlayer.WalkingTopSpeed);
 
             if (puppet.isOnGround && hasControl && Input.justWentDown('Jump')) {
                 puppet.speed.y = PlayerConsts.JumpSpeed;

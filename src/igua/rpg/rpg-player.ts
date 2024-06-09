@@ -1,8 +1,8 @@
 import { RpgProgress } from "./rpg-progress";
 import { RpgStatus } from "./rpg-status";
 
-export namespace RpgPlayer {
-    export const Model = {
+export const RpgPlayer = {
+    Model: {
         get health() {
             return RpgProgress.character.status.health;
         },
@@ -33,5 +33,11 @@ export namespace RpgPlayer {
                 RpgProgress.character.status.poison.value = value;
             }
         }
-    } satisfies RpgStatus.Model
+    } satisfies RpgStatus.Model,
+    get WalkingTopSpeed() {
+        let speed = 2.5;
+        speed += 0.75 * Math.min(1, RpgProgress.character.status.poison.level);
+        speed += 0.5 * Math.max(0, RpgProgress.character.status.poison.level - 1);
+        return speed
+    },
 }
