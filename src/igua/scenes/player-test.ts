@@ -29,6 +29,7 @@ export function PlayerTest(looks = playerLooksJson) {
     playerObj.step(() => {
         if (Input.justWentDown('CastSpell')) {
             playerObj.heal(20);
+            playerObj.poison(20);
         }
         // if (playerObj.collides(LockedDoor) && Rng.float() > 0.9) {
         //     playerObj.poison(10);

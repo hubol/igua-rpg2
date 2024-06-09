@@ -10,13 +10,35 @@ const Consts = {
 }
 
 function objHud() {
-    const healthBarObj = objHealthBar(RpgPlayer.Model.maxHealth, 7, RpgPlayer.Model.health, RpgPlayer.Model.maxHealth).at(3, 3);
-    const poisonBuildUpObj = objPoisonBuildUp().at(3, 13);
+    const x = 3;
+    const healthBarObj = objHealthBar(RpgPlayer.Model.maxHealth, 7, RpgPlayer.Model.health, RpgPlayer.Model.maxHealth).at(x, 3);
+    const poisonBuildUpObj = objPoisonBuildUp().at(x, 0);
+    const poisonLevelObj = objPoisonLevel().at(x, 0);
 
-    return container(healthBarObj, poisonBuildUpObj)
+    const statusObjs = [ poisonLevelObj, poisonBuildUpObj ];
+
+    return container(healthBarObj, ...statusObjs)
         .merge({ healthBarObj })
         .step(() => {
             healthBarObj.width = RpgPlayer.Model.maxHealth;
+            let y = 13;
+            for (const statusObj of statusObjs) {
+                if (!statusObj.visible)
+                    continue;
+                statusObj.y = y;
+                y += statusObj.height;
+            }
+        });
+}
+
+function objPoisonLevel() {
+    return objText.Large('You are poisoned', { tint: Consts.StatusTextTint })
+        .step(text => {
+            const level = RpgPlayer.Model.poison.level;
+            text.visible = level > 0;
+            if (text.visible) {
+                text.text = level > 1 ? ('You are poisoned x' + level) : 'You are poisoned';
+            }
         });
 }
 
@@ -34,6 +56,8 @@ function objPoisonBuildUp() {
         decreases: [ { tintBar: 0x003000 } ],
     }).at(0, 8);
 
+    let visibleSteps = 0;
+
     return container(bar, text)
         .step(self => {
             const nextValue = RpgPlayer.Model.poison.value
@@ -42,7 +66,9 @@ function objPoisonBuildUp() {
             else if (nextValue < value)
                 bar.decrease(nextValue, nextValue - value, 0);
             value = nextValue;
-            self.visible = value > 0;
+            // TODO hack, kinda looks stupid when first poison level builds up
+            visibleSteps = value > 0 ? 2 : (visibleSteps - 1);
+            self.visible = visibleSteps > 0;
         })
 }
 
