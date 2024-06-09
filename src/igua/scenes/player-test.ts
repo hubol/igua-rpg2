@@ -16,49 +16,7 @@ import { RpgProgress } from "../rpg/rpg-progress";
 export function PlayerTest(looks = playerLooksJson) {
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
         await show('Hello!');
-    }).show()
-
-    let emoValue = 20;
-
-    const emoBar = objStatusBar({
-        width: emoValue,
-        height: 7,
-        maxValue: emoValue,
-        tintBack: 0x000000,
-        tintFront: 0x008000,
-        value: emoValue,
-        decreases: [
-            { tintBar: 0x80b000, },
-        ],
-        increases: [
-            { tintBar: 0x00ff00, },
-        ]
-    })
-    .step(() => {
-        if (Input.justWentDown('CastSpell')) {
-            emoValue = Math.max(0, emoValue - 10);
-            emoBar.decrease(emoValue, 10, 0);
-        }
-        // if (playerObj.collides(LockedDoor)) {
-        //     value = Math.max(0, value - 1);
-        //     bar.decrease(value, 1, 1);
-        // }
-
-        // if (Input.justWentDown('Jump')) {
-        //     value = Math.max(0, value - 5);
-        //     bar.decrease(value, 5, 1);
-        // }
-        // if (Input.justWentDown('InventoryMenuToggle')) {
-        //     value = Math.min(bar.maxValue, value + 20);
-        //     bar.increase(value, 20, 0);
-        // }
-        // if (Input.justWentDown('MoveLeft')) {
-        //     value = Math.min(bar.maxValue, value + 10);
-        //     bar.increase(value, 10, 1);
-        // }
-    }, 3)
-    .at(3, 13)
-    .show(layers.hud);
+    }).show();
 
     const { LockedDoor } = Lvl.Test();
     LockedDoor.async(async () => {
@@ -72,6 +30,9 @@ export function PlayerTest(looks = playerLooksJson) {
         if (Input.justWentDown('CastSpell')) {
             playerObj.heal(20);
         }
+        // if (playerObj.collides(LockedDoor) && Rng.float() > 0.9) {
+        //     playerObj.poison(10);
+        // }
         if (playerObj.collides(LockedDoor)) {
             playerObj.poison(1);
         }
