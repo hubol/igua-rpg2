@@ -11,6 +11,7 @@ import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { sleep } from "../../lib/game-engine/promise/sleep";
 import { objStatusBar } from "../objects/obj-status-bar";
+import { RpgProgress } from "../rpg/rpg-progress";
 
 export function PlayerTest(looks = playerLooksJson) {
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
@@ -77,6 +78,8 @@ export function PlayerTest(looks = playerLooksJson) {
         if (Input.justWentDown('InventoryMenuToggle')) {
             playerObj.damage(20);
         }
+        if (Input.justWentDown('Jump'))
+            console.log(JSON.parse(JSON.stringify(RpgProgress)))
     })
 }
 
