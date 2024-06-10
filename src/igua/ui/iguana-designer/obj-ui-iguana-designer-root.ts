@@ -20,6 +20,7 @@ import { createUiConnectedInputPageElements } from "./components/obj-ui-connecte
 import { objUiDesignerNavigationButton } from "./components/obj-ui-designer-button";
 import { objUiIguanaDesignerInspirationPage } from "./pages/obj-ui-iguana-designer-inspiration-page";
 import { PlayerTest } from "../../scenes/player-test";
+import { RpgProgress } from "../../rpg/rpg-progress";
 
 function context() {
     let looks = getDefaultLooks();
@@ -139,7 +140,8 @@ function objUiSavePage() {
             layers.solidOverlay.blendMode = BLEND_MODES.SUBTRACT;
             await layers.solidOverlay.fadeIn(500);
             const looks = UiIguanaDesignerContext.value.looks;
-            sceneStack.replace(() => PlayerTest(looks), { useGameplay: false });
+            RpgProgress.character.looks = looks;
+            sceneStack.replace(PlayerTest, { useGameplay: false });
             page.destroy();
             await layers.solidOverlay.fadeOut(500);
         });

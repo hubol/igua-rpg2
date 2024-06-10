@@ -1,3 +1,5 @@
+import { getDefaultLooks } from "../iguana/get-default-looks";
+
 export const RpgProgress = {
     character: {
         status: {
@@ -10,6 +12,7 @@ export const RpgProgress = {
         },
         attributes: {
             health: 1,
-        }
+        },
+        looks: getDefaultLooks(),
     }
 }

@@ -13,7 +13,7 @@ import { sleep } from "../../lib/game-engine/promise/sleep";
 import { objStatusBar } from "../objects/obj-status-bar";
 import { RpgProgress } from "../rpg/rpg-progress";
 
-export function PlayerTest(looks = playerLooksJson) {
+export function PlayerTest() {
     scene.style.backgroundTint = 0xf0b838;
     scene.style.terrainTint = 0x882818;
 

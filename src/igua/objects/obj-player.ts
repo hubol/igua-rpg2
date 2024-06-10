@@ -5,6 +5,7 @@ import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnPhysics } from "../mixins/mxn-physics";
 import { mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { RpgPlayer } from "../rpg/rpg-player";
+import { RpgProgress } from "../rpg/rpg-progress";
 import { hudObj } from "./obj-hud";
 
 const PlayerConsts = {
@@ -77,6 +78,6 @@ function objPlayer(looks: IguanaLooks.Serializable) {
 
 export let playerObj: ReturnType<typeof objPlayer>;
 
-export function createPlayerObj(looks: IguanaLooks.Serializable) {
+export function createPlayerObj(looks: IguanaLooks.Serializable = RpgProgress.character.looks) {
     return playerObj = objPlayer(looks);
 }
