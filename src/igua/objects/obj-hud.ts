@@ -66,8 +66,8 @@ function objPoisonBuildUp() {
             else if (nextValue < value)
                 bar.decrease(nextValue, nextValue - value, 0);
             value = nextValue;
-            // TODO hack, kinda looks stupid when first poison level builds up
-            visibleSteps = value > 0 ? 2 : (visibleSteps - 1);
+            const maxVisibleSteps = RpgPlayer.Model.poison.level === 0 ? 1 : 2;
+            visibleSteps = value > 0 ? maxVisibleSteps : (visibleSteps - 1);
             self.visible = visibleSteps > 0;
         })
 }
