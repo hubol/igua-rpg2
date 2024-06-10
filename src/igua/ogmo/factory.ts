@@ -35,7 +35,7 @@ namespace OgmoFactory {
 
 function createEntity<TFn extends (...args: any[]) => any>(fn: TFn, entity: OgmoFactory.Entity): ReturnType<TFn> {
     const obj: Sprite = fn();
-    obj.at(entity);
+    obj.add(entity);
 
     if (entity.width !== undefined)
         obj.scale.x = entity.width;
