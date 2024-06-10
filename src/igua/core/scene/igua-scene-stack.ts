@@ -26,9 +26,6 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
     const backgroundGfx = new Graphics().tinted(0x000000).beginFill(0xffffff).drawRect(0, 0, renderer.width, renderer.height).show(background);
 
     return {
-        set backgroundTint(tint: number) {
-            backgroundGfx.tint = tint;
-        },
         locals: {} as Record<string, any>,
         root,
         source,
@@ -39,6 +36,12 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
             width: renderer.width,
             height: renderer.height,
         },
+        style: {
+            set backgroundTint(tint: number) {
+                backgroundGfx.tint = tint;
+            },
+            terrainTint: 0xffffff,
+        }
     }
 }
 

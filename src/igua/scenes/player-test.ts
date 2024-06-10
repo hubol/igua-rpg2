@@ -14,6 +14,9 @@ import { objStatusBar } from "../objects/obj-status-bar";
 import { RpgProgress } from "../rpg/rpg-progress";
 
 export function PlayerTest(looks = playerLooksJson) {
+    scene.style.backgroundTint = 0xf0b838;
+    scene.style.terrainTint = 0x882818;
+
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
         await show('Hello!');
     }).show();

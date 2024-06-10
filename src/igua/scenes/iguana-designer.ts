@@ -3,6 +3,6 @@ import { objUiIguanaDesignerRoot } from "../ui/iguana-designer/obj-ui-iguana-des
 import { UiColor } from "../ui/ui-color";
 
 export function IguanaDesigner() {
-    scene.backgroundTint = UiColor.Shadow;
+    scene.style.backgroundTint = UiColor.Shadow;
     objUiIguanaDesignerRoot().show();
 }
