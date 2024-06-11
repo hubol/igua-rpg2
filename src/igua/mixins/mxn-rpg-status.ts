@@ -4,7 +4,7 @@ import { RpgStatus } from "../rpg/rpg-status";
 export function mxnRpgStatus(obj: DisplayObject, model: RpgStatus.Model, effects: RpgStatus.Effects) {
     let tickCount = 0;
 
-    // TODO death? invulnerability (flash?)?
+    // TODO death?
 
     return obj.merge({
         damage(amount: number) {
@@ -17,5 +17,8 @@ export function mxnRpgStatus(obj: DisplayObject, model: RpgStatus.Model, effects
             RpgStatus.Methods.poison(model, effects, amount);
         }
     })
-    .step(() => RpgStatus.Methods.tick(model, effects, tickCount = (tickCount + 1) % 120))
+    .step(() => {
+        RpgStatus.Methods.tick(model, effects, tickCount = (tickCount + 1) % 120);
+        obj.visible = model.invulnerable > 0 ? !obj.visible : true;
+    })
 }

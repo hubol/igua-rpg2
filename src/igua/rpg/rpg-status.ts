@@ -60,9 +60,9 @@ export namespace RpgStatus {
             effects.tookDamage(model.health, diff, kind);
     
             // TODO
-            // Need to become invulnerable after taking damage
             // Amount of invulnerability might be different
             // from player to enemies
+            model.invulnerable = 60;
         },
     
         heal(model: Model, effects: Effects, amount: number) {
