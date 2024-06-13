@@ -1,6 +1,7 @@
 import { build, context } from 'esbuild';
 import { copyFile, readFile, writeFile } from 'fs/promises';
 import ImportGlobPlugin from 'esbuild-plugin-import-glob';
+import { startParcelWatcher } from './tools/lib/start-parcel-watcher.mjs';
 
 const serve = process.argv[2] === 'serve';
 
@@ -30,14 +31,6 @@ function options(overrides) {
 
     return options;
 }
-
-const trimToRelativePath = (() => {
-    const dirLength = process.cwd().length + 1;
-    /**
-     * @param { string } path
-     */
-    return (path) => path.substring(dirLength);
-})();
 
 if (!serve) {
     // Naive cache busting
@@ -74,7 +67,7 @@ else {
 async function watch(ctx) {
     const rebuildFn = makeEnqueuedPromiseFn("Rebuild", () => ctx.rebuild());
 
-    if (await startParcelWatcher(rebuildFn)) {
+    if (await startParcelWatcher("./src", rebuildFn)) {
         console.log("Started @parcel/watcher");
         await rebuildFn();
     }
@@ -135,54 +128,4 @@ function wait(predicate) {
         });
     })
     .finally(() => clearInterval(interval));
-}
-
-/**
- * 
- * @param {{ path: string, type: string }[]} events 
- */
-function printEvents(events) {
-    const pathsByType = {};
-    for (const { type, path } of events) {
-        if (!pathsByType[type])
-            pathsByType[type] = [];
-
-        pathsByType[type].push(trimToRelativePath(path));
-    }
-
-    const created = pathsByType["create"] ? "create: " + pathsByType["create"].join(", ") + "\n" : "";
-    const updated = pathsByType["update"] ? "update: " + pathsByType["update"].join(", ") + "\n" : "";
-    const deleted = pathsByType["delete"] ? "delete: " + pathsByType["delete"].join(", ") + "\n" : "";
-
-    let body = created + updated + deleted;
-    if (!body)
-        body = "<No events>";
-
-    console.log("Change detected:\n" + body.trim() + "\n");
-}
-
-/**
- * @param {Function} rebuildFn 
- */
-async function startParcelWatcher(rebuildFn) {
-    try {
-        const { subscribe } = await import("./.smooch/native-deps/node_modules/@parcel/watcher/index.js");
-        await subscribe(
-            "./src",
-            (err, events) => {
-                console.clear();
-                if (err) {
-                    console.error("Got error from @parcel/watcher\n", err);
-                    return;
-                }
-
-                printEvents(events);
-                setImmediate(rebuildFn);
-            });
-        return true;
-    }
-    catch (e) {
-        console.warn("Could not start @parcel/watcher. It should have been installed by smooch.\n", e);
-        return false;
-    }
 }

@@ -96,4 +96,6 @@ async function runTestsInFile(file: string, filterTestName: FilterTestNameFn) {
     }
 }
 
-runTests();
+// @ts-ignore
+if (require.main === module)
+    runTests();

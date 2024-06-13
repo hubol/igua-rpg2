@@ -11,7 +11,7 @@ const KeyCodes = [ "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowUp",
     "Period", "Quote", "Semicolon",
     "ShiftLeft", "ShiftRight",
     "Slash", "Space",
-    "Tab"
+    "Tab",
 ] as const;
 
 export type KeyCode = typeof KeyCodes[number];

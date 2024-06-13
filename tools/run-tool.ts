@@ -8,7 +8,8 @@ function getToolFn(name: string) {
         return module.default;
     }
     catch (e) {
-        console.error(`No tool with name ${name}`);
+        console.error(`Failed to start tool "${name}"`);
+        console.error(e);
     }
 }
 
