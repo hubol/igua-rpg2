@@ -40,7 +40,6 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
             set backgroundTint(tint: number) {
                 backgroundGfx.tint = tint;
             },
-            terrainTint: 0xffffff,
         }
     }
 }

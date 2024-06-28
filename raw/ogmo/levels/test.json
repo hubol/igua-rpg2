@@ -4,6 +4,8 @@
   "height": 256,
   "offsetX": 0,
   "offsetY": 0,
+  "values": {"Terrain Color": "#d8795a"},
+  "backgroundColor": "#ecd769",
   "layers": [
     {
       "name": "Entities",
@@ -43,11 +45,12 @@
           "y": 136,
           "scaleX": 1,
           "scaleY": 1,
-          "rotation": 67.71561384794323,
+          "rotation": 0.020627355569633583,
+          "tint": "#ffffff",
           "texture": "locked door.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": "asdf"}
         },
         {
           "x": 176,
@@ -55,10 +58,11 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
+          "tint": "#ffffff",
           "texture": "locked door.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": "zzz"}
         },
         {
           "x": 216,
@@ -66,10 +70,11 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
+          "tint": "#ffffff",
           "texture": "locked door.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": "LockedDoor"}
         },
         {
           "x": 136,
@@ -77,6 +82,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
+          "tint": "#ffffff",
           "texture": "terrain/pipe/gray.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -88,6 +94,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
+          "tint": "#ffffff",
           "texture": "terrain/pipe/gray.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -99,6 +106,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
+          "tint": "#ffffff",
           "texture": "placeholder.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -110,6 +118,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
+          "tint": "#ff0000",
           "texture": "placeholder.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -121,6 +130,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
+          "tint": "#ff0000",
           "texture": "placeholder.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -132,6 +142,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
+          "tint": "#2e3cff",
           "texture": "placeholder.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -160,6 +171,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
+          "tint": "#f56b3d",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -201,6 +213,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
+          "tint": "#d8795a",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -213,6 +226,7 @@
           "height": 240,
           "originX": 0,
           "originY": 0,
+          "tint": "#d8795a",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -225,6 +239,7 @@
           "height": 104,
           "originX": 0,
           "originY": 0,
+          "tint": "#d8795a",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -237,6 +252,7 @@
           "height": 112,
           "originX": 0,
           "originY": 0,
+          "tint": "#d8795a",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -249,6 +265,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
+          "tint": "#d8795a",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -261,6 +278,7 @@
           "height": 16,
           "flippedX": true,
           "flippedY": false,
+          "tint": "#d8795a",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -273,6 +291,7 @@
           "height": 24,
           "flippedX": true,
           "flippedY": false,
+          "tint": "#d8795a",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -285,6 +304,7 @@
           "height": 80,
           "originX": 0,
           "originY": 0,
+          "tint": "#d8795a",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -297,6 +317,7 @@
           "height": 96,
           "originX": 0,
           "originY": 0,
+          "tint": "#d8795a",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -309,6 +330,7 @@
           "height": 32,
           "flippedX": true,
           "flippedY": true,
+          "tint": "#d8795a",
           "values": {"name": "", "depth": 0}
         },
         {

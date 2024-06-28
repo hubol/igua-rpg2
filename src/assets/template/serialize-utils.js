@@ -15,7 +15,7 @@ const DoubleQuoteRegExp = /"/gm;
 const DoubleQuoteSubstitutionRegExp = /@_LITERAL_DQUOTE_@/gm;
 
 function replacer(_, value) {
-    if (value.__isLiteral === LiteralSymbol) {
+    if (value?.__isLiteral === LiteralSymbol) {
         return LiteralTokenStart + value.text.replace(DoubleQuoteRegExp, LiteralTokenDoubleQuote) + LiteralTokenEnd;
     }
 
@@ -25,8 +25,13 @@ function replacer(_, value) {
 const LiteralRegExp = /"@_LITERAL_START_@(.*?)@_LITERAL_END_@"/gm;
 const substituteLiteral = (_, group) => group;
 
-function serialize(value) {
-    const stringified = JSON.stringify(value, replacer, 1);
+/**
+ * @param {any} value 
+ * @param {string | number | undefined} space 
+ * @returns {string}
+ */
+function serialize(value, space = 1) {
+    const stringified = JSON.stringify(value, replacer, space);
     return stringified
         .replace(DoubleQuoteSubstitutionRegExp, '"')
         .replace(LiteralRegExp, substituteLiteral);

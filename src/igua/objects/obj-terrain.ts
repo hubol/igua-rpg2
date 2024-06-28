@@ -176,7 +176,6 @@ abstract class TerrainGraphics extends Graphics {
         super();
 
         constructTerrain(this, weights);
-        this.tint = scene.style.terrainTint;
     }
 
     onTransformChanged() {

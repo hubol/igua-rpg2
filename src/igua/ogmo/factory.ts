@@ -9,6 +9,7 @@ namespace OgmoFactory {
         flippedY?: boolean;
         width?: number;
         height?: number;
+        tint?: number;
         values: EntityValues;
     }    
 
@@ -25,11 +26,13 @@ namespace OgmoFactory {
         rotation: number;
         originX: number;
         originY: number;
+        tint?: number;
     }
 
     export interface Level {
         width: number;
         height: number;
+        backgroundTint: number;
     }
 }
 
@@ -49,6 +52,9 @@ function createEntity<TFn extends (...args: any[]) => any>(fn: TFn, entity: Ogmo
     if (entity.flippedY)
         obj.scale.y *= -1;
 
+    if (entity.tint !== undefined)
+        obj.tint = entity.tint;
+
     if (!obj.parent)
         obj.show();
 
@@ -60,6 +66,10 @@ function createDecal(texture: Texture, decal: OgmoFactory.Decal) {
     spr.scale.set(decal.scaleX, decal.scaleY);
     spr.angle = decal.rotation;
     spr.anchor.set(decal.originX, decal.originY);
+
+    if (decal.tint !== undefined)
+        spr.tint = decal.tint;
+
     return spr.show();
 }
 
@@ -67,6 +77,7 @@ function createLevel<TFn extends (...args: any[]) => any>(level: OgmoFactory.Lev
     return (() => {
         scene.level.width = level.width;
         scene.level.height = level.height;
+        scene.style.backgroundTint = level.backgroundTint;
         return fn();
     }) as TFn;
 }
