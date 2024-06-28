@@ -4,6 +4,7 @@ import { container } from "../../lib/pixi/container";
 import { objHealthBar } from "./obj-health-bar";
 import { RpgPlayer } from "../rpg/rpg-player";
 import { objStatusBar } from "./obj-status-bar";
+import { playerObj } from "./obj-player";
 
 const Consts = {
     StatusTextTint: 0x00ff00,
@@ -19,7 +20,7 @@ function objHud() {
 
     return container(healthBarObj, ...statusObjs)
         .merge({ healthBarObj })
-        .step(() => {
+        .step(self => {
             healthBarObj.width = RpgPlayer.Model.maxHealth;
             let y = 13;
             for (const statusObj of statusObjs) {
@@ -28,6 +29,8 @@ function objHud() {
                 statusObj.y = y;
                 y += statusObj.height;
             }
+            
+            self.visible = !playerObj?.destroyed;
         });
 }
 
