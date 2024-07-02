@@ -7,6 +7,33 @@ import { Tx } from "../../../assets/textures";
 const { createEntity: e, createDecal: d, createLevel: l } = OgmoFactory;
 
 export const Lvl = {
+  Level2: l({ width: 256, height: 320, backgroundTint: 0x408000 }, () => ({
+    Pipe: e(r["Pipe"], { x: 232, y: 160, width: 16, values: { name: "", depth: 0 } }),
+    Pipe_1: e(r["Pipe"], { x: 232, y: 224, width: 16, values: { name: "", depth: 0 } }),
+    Pipe_2: e(r["Pipe"], { x: 152, y: 192, width: 16, values: { name: "", depth: 0 } }),
+    Pipe_3: e(r["Pipe"], { x: 152, y: 128, width: 16, values: { name: "", depth: 0 } }),
+    Pipe_4: e(r["Pipe"], { x: 232, y: 96, width: 16, values: { name: "", depth: 0 } }),
+    Slope: e(r["Slope"], { x: 32, y: 152, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0 }, tint: 0x000000 }),
+    Slope_1: e(r["Slope"], { x: 64, y: 152, width: 32, height: 16, flippedX: true, flippedY: true, values: { name: "", depth: 0 }, tint: 0x000000 }),
+    Block: e(r["Block"], { x: 32, y: 136, width: 64, height: 16, values: { name: "", depth: 0 }, tint: 0x000000 }),
+    Slope_2: e(r["Slope"], { x: 16, y: 40, width: 32, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0 }, tint: 0x000000 }),
+    Slope_3: e(r["Slope"], { x: 16, y: 248, width: 32, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0 }, tint: 0x000000 }),
+    Pipe_5: e(r["Pipe"], { x: 64, y: 64, width: 104, values: { name: "", depth: 0 } }),
+    PipeSlope: e(r["PipeSlope"], { x: 168, y: 64, width: 64, height: 32, flippedX: true, values: { name: "", depth: 0 } }),
+    PipeSlope_1: e(r["PipeSlope"], { x: 168, y: 96, width: 64, height: 32, flippedX: false, values: { name: "", depth: 0 } }),
+    PipeSlope_2: e(r["PipeSlope"], { x: 168, y: 128, width: 64, height: 32, flippedX: true, values: { name: "", depth: 0 } }),
+    PipeSlope_3: e(r["PipeSlope"], { x: 168, y: 160, width: 64, height: 32, flippedX: false, values: { name: "", depth: 0 } }),
+    PipeSlope_4: e(r["PipeSlope"], { x: 168, y: 192, width: 64, height: 32, flippedX: true, values: { name: "", depth: 0 } }),
+    Pipe_6: e(r["Pipe"], { x: 136, y: 256, width: 32, values: { name: "", depth: 0 } }),
+    PipeSlope_5: e(r["PipeSlope"], { x: 168, y: 224, width: 64, height: 32, flippedX: false, values: { name: "", depth: 0 } }),
+    Block_1: e(r["Block"], { x: 0, y: 0, width: 256, height: 40, values: { name: "", depth: 0 }, tint: 0x000000 }),
+    Block_2: e(r["Block"], { x: 240, y: 0, width: 16, height: 280, values: { name: "", depth: 0 }, tint: 0x000000 }),
+    Block_3: e(r["Block"], { x: 0, y: 0, width: 16, height: 280, values: { name: "", depth: 0 }, tint: 0x000000 }),
+    Block_4: e(r["Block"], { x: 0, y: 280, width: 256, height: 40, values: { name: "", depth: 0 }, tint: 0x000000 }),
+    Player: e(r["Player"], { x: 112, y: 280, flippedX: false, values: { name: "", depth: 0 } }),
+    UpperDoor: e(r["Door"], { x: 48, y: 104, values: { sceneName: "LevelTwo", checkpointName: "", name: "UpperDoor", depth: 0 } }),
+    Door: e(r["Door"], { x: 56, y: 248, values: { sceneName: "PlayerTest", checkpointName: "", name: "", depth: 0 } }),
+  })),
   Test: l({ width: 456, height: 256, backgroundTint: 0xecd769 }, () => ({
     Pipe: e(r["Pipe"], { x: 368, y: 152, width: 48, values: { name: "", depth: 0 } }),
     Slope: e(r["Slope"], { x: 256, y: 96, width: 128, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0 }, tint: 0xd8795a }),
@@ -32,6 +59,7 @@ export const Lvl = {
     LockedDoor: d(Tx.LockedDoor, { x: 216, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }),
     zzz: d(Tx.LockedDoor, { x: 176, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }),
     asdf: d(Tx.LockedDoor, { x: 136, y: 136, scaleX: 1, scaleY: 1, rotation: 0.020627355569633583, originX: 0.5, originY: 0.5, tint: 0xffffff }),
+    Door: e(r["Door"], { x: 376, y: 120, values: { sceneName: "LevelTwo", checkpointName: "", name: "", depth: 0 } }),
     Player: e(r["Player"], { x: 48, y: 64, flippedX: false, values: { name: "", depth: 0 } }),
   })),
 };

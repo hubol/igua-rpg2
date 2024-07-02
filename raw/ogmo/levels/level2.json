@@ -1,0 +1,324 @@
+{
+  "ogmoVersion": "3.4.0-hubol",
+  "width": 256,
+  "height": 320,
+  "offsetX": 0,
+  "offsetY": 0,
+  "values": {"Terrain Color": "#000000"},
+  "backgroundColor": "#408000",
+  "layers": [
+    {
+      "name": "Entities",
+      "_eid": "93086020",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 32,
+      "gridCellsY": 40,
+      "entities": [
+        {
+          "name": "Door",
+          "id": 0,
+          "_eid": "88296692",
+          "x": 56,
+          "y": 248,
+          "originX": 0,
+          "originY": 0,
+          "values": {"sceneName": "PlayerTest", "checkpointName": "", "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 2,
+          "_eid": "88296692",
+          "x": 48,
+          "y": 104,
+          "originX": 0,
+          "originY": 0,
+          "values": {"sceneName": "LevelTwo", "checkpointName": "", "name": "UpperDoor", "depth": 0}
+        },
+        {
+          "name": "Player",
+          "id": 3,
+          "_eid": "93092164",
+          "x": 112,
+          "y": 280,
+          "originX": 12,
+          "originY": 25,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "TerrainDecals",
+      "_eid": "02386446",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 32,
+      "gridCellsY": 40,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "TerrainEntities",
+      "_eid": "02302709",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 32,
+      "gridCellsY": 40,
+      "entities": [
+        {
+          "name": "Block",
+          "id": 0,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 280,
+          "width": 256,
+          "height": 40,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 1,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 280,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 2,
+          "_eid": "93117141",
+          "x": 240,
+          "y": 0,
+          "width": 16,
+          "height": 280,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 3,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 0,
+          "width": 256,
+          "height": 40,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PipeSlope",
+          "id": 4,
+          "_eid": "95781942",
+          "x": 168,
+          "y": 224,
+          "width": 64,
+          "height": 32,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 5,
+          "_eid": "95769929",
+          "x": 136,
+          "y": 256,
+          "width": 32,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PipeSlope",
+          "id": 7,
+          "_eid": "95781942",
+          "x": 168,
+          "y": 192,
+          "width": 64,
+          "height": 32,
+          "flippedX": true,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PipeSlope",
+          "id": 8,
+          "_eid": "95781942",
+          "x": 168,
+          "y": 160,
+          "width": 64,
+          "height": 32,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PipeSlope",
+          "id": 9,
+          "_eid": "95781942",
+          "x": 168,
+          "y": 128,
+          "width": 64,
+          "height": 32,
+          "flippedX": true,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PipeSlope",
+          "id": 10,
+          "_eid": "95781942",
+          "x": 168,
+          "y": 96,
+          "width": 64,
+          "height": 32,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PipeSlope",
+          "id": 11,
+          "_eid": "95781942",
+          "x": 168,
+          "y": 64,
+          "width": 64,
+          "height": 32,
+          "flippedX": true,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 12,
+          "_eid": "95769929",
+          "x": 64,
+          "y": 64,
+          "width": 104,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Slope",
+          "id": 13,
+          "_eid": "95675713",
+          "x": 16,
+          "y": 248,
+          "width": 32,
+          "height": 32,
+          "flippedX": true,
+          "flippedY": false,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Slope",
+          "id": 14,
+          "_eid": "95675713",
+          "x": 16,
+          "y": 40,
+          "width": 32,
+          "height": 32,
+          "flippedX": true,
+          "flippedY": true,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 15,
+          "_eid": "93117141",
+          "x": 32,
+          "y": 136,
+          "width": 64,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Slope",
+          "id": 16,
+          "_eid": "95675713",
+          "x": 64,
+          "y": 152,
+          "width": 32,
+          "height": 16,
+          "flippedX": true,
+          "flippedY": true,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Slope",
+          "id": 18,
+          "_eid": "95675713",
+          "x": 32,
+          "y": 152,
+          "width": 32,
+          "height": 16,
+          "flippedX": false,
+          "flippedY": true,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 19,
+          "_eid": "95769929",
+          "x": 232,
+          "y": 96,
+          "width": 16,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 20,
+          "_eid": "95769929",
+          "x": 152,
+          "y": 128,
+          "width": 16,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 21,
+          "_eid": "95769929",
+          "x": 152,
+          "y": 192,
+          "width": 16,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 22,
+          "_eid": "95769929",
+          "x": 232,
+          "y": 224,
+          "width": 16,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 23,
+          "_eid": "95769929",
+          "x": 232,
+          "y": 160,
+          "width": 16,
+          "values": {"name": "", "depth": 0}
+        }
+      ]
+    }
+  ]
+}

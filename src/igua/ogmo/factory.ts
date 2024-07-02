@@ -10,7 +10,7 @@ namespace OgmoFactory {
         width?: number;
         height?: number;
         tint?: number;
-        values: EntityValues;
+        values: EntityValues & Record<string, string | number>;
     }    
 
     interface EntityValues {
@@ -37,7 +37,7 @@ namespace OgmoFactory {
 }
 
 function createEntity<TFn extends (...args: any[]) => any>(fn: TFn, entity: OgmoFactory.Entity): ReturnType<TFn> {
-    const obj: Sprite = fn();
+    const obj: Sprite = fn(entity);
     obj.add(entity);
 
     if (entity.width !== undefined)

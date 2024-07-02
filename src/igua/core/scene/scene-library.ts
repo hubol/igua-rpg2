@@ -10,17 +10,25 @@ function getNames() {
     return Object.keys(sceneLibrary);
 }
 
-function findByName(name: string): () => unknown {
+function maybeFindByName(name: string): (() => unknown) | null {
     ensureSceneLibrary();
 
     const scene = sceneLibrary[name];
     if (scene)
         return scene;
     
-    throw new Error(`Could not find Scene with name ${name}`);
+    return null;
+}
+
+function findByName(name: string): () => unknown {
+    const scene = maybeFindByName(name);
+    if (!scene)
+        throw new Error(`Could not find Scene with name ${name}`);
+    return scene;
 }
 
 export const SceneLibrary = {
+    maybeFindByName,
     findByName,
     getNames,
 }

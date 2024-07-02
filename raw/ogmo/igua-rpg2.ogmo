@@ -258,6 +258,50 @@
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/pipe slope.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAoCAMAAACo9wirAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURa+vr87Ozo6OjnJycgAAAOne6qwAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAIlJREFUOE+F08sOwCAIRFFs+f9vLvWNDgMrk3NN2CDKR5JACg+k8MCcBtVJUP2Jg+Zx0P2NguFRMF1xsBwHm8NgdxQ4B4H3Ozj8Ck4/g8uP4HYfAHcB8j2AvgXYVxD4DCIfQeg9iL0FxGvA/A+oW8Ddzpt79r8G1C3gbjtw18wt4K6SuAX9gUf1A9eNESFFsNTLAAAAAElFTkSuQmCC"
+    },
+    {
+      "exportID": "88296692",
+      "name": "Door",
+      "limit": -1,
+      "size": {"x": 32, "y": 32},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "sceneName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "checkpointName", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/door.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURSUlJQAAAGzL0jIAAAACdFJOU/8A5bcwSgAAAAlwSFlzAAAOwgAADsIBFShKgAAAAFtJREFUOE/tijkOgDAQAzf//zQkHoILR6IIEgVT7OFxNacGPMI/6Q5Bx27kgOjkPlFAaAXEhHgWiI1LsAIYVgCjGZHSjEitvRqPCryBXQWeyFcKnAv+gni/UO0A0d0A72FxCP0AAAAASUVORK5CYII="
     }
   ],
   "tilesets": []

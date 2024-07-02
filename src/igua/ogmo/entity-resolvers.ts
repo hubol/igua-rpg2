@@ -1,3 +1,4 @@
+import { objDoor } from "../objects/obj-door";
 import { createPlayerObj } from "../objects/obj-player";
 import { objPipe, objPipeSlope, objSolidBlock, objSolidSlope } from "../objects/obj-terrain";
 
@@ -7,4 +8,5 @@ export const OgmoEntityResolvers = {
     'Slope': objSolidSlope,
     'Pipe': objPipe,
     'PipeSlope': objPipeSlope,
+    'Door': ({ values: { checkpointName, sceneName } }) => objDoor(sceneName),
 }

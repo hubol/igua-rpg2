@@ -27,6 +27,16 @@
           "originY": 25,
           "flippedX": false,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 28,
+          "_eid": "88296692",
+          "x": 376,
+          "y": 120,
+          "originX": 0,
+          "originY": 0,
+          "values": {"sceneName": "LevelTwo", "checkpointName": "", "name": "", "depth": 0}
         }
       ]
     },
