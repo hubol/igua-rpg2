@@ -37,7 +37,7 @@ module.exports = function ({ files }, { pascal, noext, format }) {
         path[path.length - 1] = noext(path[path.length - 1]);
 
         /** @type Array */
-        const entities = json.layers.flatMap(layer => layer.entities ?? layer.decals ?? []).reverse();
+        const entities = json.layers.reverse().flatMap(layer => layer.entities ?? layer.decals ?? []);
 
         const encounteredNames = new Set();
 

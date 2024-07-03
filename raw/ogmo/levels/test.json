@@ -8,8 +8,8 @@
   "backgroundColor": "#ecd769",
   "layers": [
     {
-      "name": "Entities",
-      "_eid": "93086020",
+      "name": "PlayerEntities",
+      "_eid": "96470627",
       "offsetX": 0,
       "offsetY": 0,
       "gridCellWidth": 8,
@@ -19,7 +19,7 @@
       "entities": [
         {
           "name": "Player",
-          "id": 27,
+          "id": 0,
           "_eid": "93092164",
           "x": 48,
           "y": 64,
@@ -27,7 +27,19 @@
           "originY": 25,
           "flippedX": false,
           "values": {"name": "", "depth": 0}
-        },
+        }
+      ]
+    },
+    {
+      "name": "Entities",
+      "_eid": "93086020",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 57,
+      "gridCellsY": 32,
+      "entities": [
         {
           "name": "Door",
           "id": 28,
@@ -120,10 +132,10 @@
           "texture": "placeholder.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": "Before"}
         },
         {
-          "x": 384,
+          "x": 368,
           "y": 184,
           "scaleX": 1,
           "scaleY": 1,
@@ -132,7 +144,7 @@
           "texture": "placeholder.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": "After"}
         },
         {
           "x": 408,

@@ -4,9 +4,32 @@
   "height": 320,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#000000"},
-  "backgroundColor": "#408000",
+  "values": {"Terrain Color": "#631d1d"},
+  "backgroundColor": "#c0a311",
   "layers": [
+    {
+      "name": "PlayerEntities",
+      "_eid": "96470627",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 32,
+      "gridCellsY": 40,
+      "entities": [
+        {
+          "name": "Player",
+          "id": 0,
+          "_eid": "93092164",
+          "x": 112,
+          "y": 280,
+          "originX": 12,
+          "originY": 25,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
+        }
+      ]
+    },
     {
       "name": "Entities",
       "_eid": "93086020",
@@ -36,17 +59,6 @@
           "originX": 0,
           "originY": 0,
           "values": {"sceneName": "LevelTwo", "checkpointName": "", "name": "UpperDoor", "depth": 0}
-        },
-        {
-          "name": "Player",
-          "id": 3,
-          "_eid": "93092164",
-          "x": 112,
-          "y": 280,
-          "originX": 12,
-          "originY": 25,
-          "flippedX": false,
-          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -82,7 +94,7 @@
           "height": 40,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#631d1d",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -95,7 +107,7 @@
           "height": 280,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#631d1d",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -108,7 +120,7 @@
           "height": 280,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#631d1d",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -121,7 +133,7 @@
           "height": 40,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#631d1d",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -218,7 +230,7 @@
           "height": 32,
           "flippedX": true,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#631d1d",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -231,7 +243,7 @@
           "height": 32,
           "flippedX": true,
           "flippedY": true,
-          "tint": "#000000",
+          "tint": "#631d1d",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -244,7 +256,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#631d1d",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -257,7 +269,7 @@
           "height": 16,
           "flippedX": true,
           "flippedY": true,
-          "tint": "#000000",
+          "tint": "#631d1d",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -270,7 +282,7 @@
           "height": 16,
           "flippedX": false,
           "flippedY": true,
-          "tint": "#000000",
+          "tint": "#631d1d",
           "values": {"name": "", "depth": 0}
         },
         {

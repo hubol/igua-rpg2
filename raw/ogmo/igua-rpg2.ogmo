@@ -17,15 +17,23 @@
   "compactExport": false,
   "externalScript": "igua-rpg2-ogmo.js",
   "playCommand": "",
-  "entityTags": ["Terrain"],
+  "entityTags": ["Terrain", "Player"],
   "layers": [
+    {
+      "definition": "entity",
+      "name": "PlayerEntities",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "96470627",
+      "requiredTags": ["Player"],
+      "excludedTags": []
+    },
     {
       "definition": "entity",
       "name": "Entities",
       "gridSize": {"x": 8, "y": 8},
       "exportID": "93086020",
       "requiredTags": [],
-      "excludedTags": ["Terrain"]
+      "excludedTags": ["Terrain", "Player"]
     },
     {
       "definition": "decal",
@@ -36,7 +44,7 @@
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
       ]
@@ -84,7 +92,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": [],
+      "tags": ["Player"],
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
@@ -299,7 +307,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/door.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURSUlJQAAAGzL0jIAAAACdFJOU/8A5bcwSgAAAAlwSFlzAAAOwgAADsIBFShKgAAAAFtJREFUOE/tijkOgDAQAzf//zQkHoILR6IIEgVT7OFxNacGPMI/6Q5Bx27kgOjkPlFAaAXEhHgWiI1LsAIYVgCjGZHSjEitvRqPCryBXQWeyFcKnAv+gni/UO0A0d0A72FxCP0AAAAASUVORK5CYII="
     }
