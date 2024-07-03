@@ -3,13 +3,13 @@ import { TypedInput } from "./typed-input";
 
 export namespace ConnectedInput {
     export function create<TInput>(input: TInput, serializable: TypedInput.SerializedTree<TInput>): Tree<TInput> {
-        traverse(input, serializable, connect);
+        traverse(input, (input, path) => connect(input, serializable, path));
         return input as any;
     }
 
     export function findUniqueColorValues(instance: Tree<unknown>) {
         const set = new Set<number>();
-        traverse(instance, instance, (input: TypedInput.Any & Binding<any>) => {
+        traverse(instance, (input: TypedInput.Any & Binding<any>) => {
             if (input.kind === 'color')
                 set.add(input.value);
         });
@@ -19,7 +19,7 @@ export namespace ConnectedInput {
     export function find<TShape extends TypedInput.Any, TKind extends TShape['kind'] = TShape['kind'], TLeaf = TShape & { kind: TKind }>(
             instance: Tree<unknown>, kind: TKind): Leaf<TLeaf>[] {
         const result: Leaf<TLeaf>[] = [];
-        traverse(instance, instance, (input: Leaf<TLeaf>) => {
+        traverse(instance, (input: Leaf<TLeaf>) => {
             if (input.kind === kind)
                 result.push(input);
         });
@@ -33,7 +33,7 @@ export namespace ConnectedInput {
 
         const instance = trees[0];
         if (instance) {
-            traverse(instance, instance, (input: TypedInput.Any & Binding<any>, _, path) => {
+            traverse(instance, (input: TypedInput.Any & Binding<any>, path) => {
                 let self = output;
                 for (let i = 0; i < path.length; i++) {
                     const key = path[i];
@@ -75,17 +75,17 @@ export namespace ConnectedInput {
         return output as any;
     }
 
-    type OnInputFn<T> = (input: T, source: any, path: string[]) => void;
+    type OnInputFn<T> = (input: T, path: string[]) => void;
 
-    function traverse<T = TypedInput.Any>(input: any, source: any, onInputFn: OnInputFn<T>, path: string[] = []) {
+    function traverse<T = TypedInput.Any>(input: any, onInputFn: OnInputFn<T>, path: string[] = []) {
         if ('kind' in input)
-            return onInputFn(input, source, path);
+            return onInputFn(input, path);
 
         if (typeof input !== "object" || Array.isArray(input))
             return;
 
         for (const key in input) {
-            traverse(input[key], source, onInputFn, [ ...path, key ]);
+            traverse(input[key], onInputFn, [ ...path, key ]);
         }
     }
 
