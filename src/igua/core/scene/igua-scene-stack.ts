@@ -5,7 +5,7 @@ import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 import { Logging } from "../../../lib/logging";
 import { Container, Graphics } from "pixi.js";
 import { merge } from "../../../lib/object/merge";
-import { renderer } from "../../globals";
+import { forceGameLoop, renderer } from "../../globals";
 import { objCamera } from "../../objects/obj-camera";
 
 interface IguaSceneMeta {
@@ -77,5 +77,6 @@ export class IguaSceneStack extends SceneStack<IguaSceneMeta, IguaScene> {
         
         scene.root.visible = true;
         this._setScene(scene);
+        forceGameLoop();
     }
 }
