@@ -216,7 +216,9 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                     // y > touchY - halfHeight - vSnap && y < touchY + halfHeight
                     // But it seemed too generous.
                     if (y > touchY - halfHeight - vSnap && y < touchY + thickSlopeEdge && touchY < PushWorkingState.floorY) {
-                        PushWorkingState.floorY = touchY;
+                        // Adjusting touchY allows less snapping when climbing pipe "stairwells"
+                        // TODO: Not sure if -halfHeight is correct
+                        PushWorkingState.floorY = touchY + ((segment.isPipe && edgesOnly && isSlope && horizontalSpeedIndicatesClimbingSlope) ? -halfHeight : 0);
 
                         if (correctPosition) {
                             obj.y = touchY - halfHeight - physicsOffsetY;

@@ -284,51 +284,6 @@
           "flippedY": true,
           "tint": "#631d1d",
           "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Pipe",
-          "id": 19,
-          "_eid": "95769929",
-          "x": 232,
-          "y": 96,
-          "width": 16,
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Pipe",
-          "id": 20,
-          "_eid": "95769929",
-          "x": 152,
-          "y": 128,
-          "width": 16,
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Pipe",
-          "id": 21,
-          "_eid": "95769929",
-          "x": 152,
-          "y": 192,
-          "width": 16,
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Pipe",
-          "id": 22,
-          "_eid": "95769929",
-          "x": 232,
-          "y": 224,
-          "width": 16,
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Pipe",
-          "id": 23,
-          "_eid": "95769929",
-          "x": 232,
-          "y": 160,
-          "width": 16,
-          "values": {"name": "", "depth": 0}
         }
       ]
     }
