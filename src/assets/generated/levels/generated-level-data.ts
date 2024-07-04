@@ -55,6 +55,6 @@ export const Lvl = {
     Placeholder: d(Tx.Placeholder, { x: 408, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff0000 }),
     Placeholder_1: d(Tx.Placeholder, { x: 432, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2e3cff }),
     Door: e(r["Door"], { x: 376, y: 120, values: { sceneName: "LevelTwo", checkpointName: "", name: "", depth: 0 } }),
-    Player: e(r["Player"], { x: 48, y: 64, flippedX: false, values: { name: "", depth: 0 } }),
+    Player: e(r["Player"], { x: 48, y: 64, flippedX: true, values: { name: "", depth: 0 } }),
   })),
 };
