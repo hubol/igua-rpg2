@@ -14,5 +14,9 @@ export const RpgProgress = {
             health: 1,
         },
         looks: getDefaultLooks(),
+        position: {
+            sceneName: '',
+            checkpointName: '',
+        }
     }
 }

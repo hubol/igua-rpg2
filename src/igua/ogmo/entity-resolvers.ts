@@ -20,5 +20,5 @@ export const OgmoEntityResolvers = {
     'Slope': objSolidSlope,
     'Pipe': objPipe,
     'PipeSlope': objPipeSlope,
-    'Door': ({ values: { checkpointName, sceneName } }) => objDoor(sceneName),
+    'Door': ({ values: { checkpointName, sceneName } }) => objDoor({ checkpointName, sceneName }),
 } satisfies Record<string, (e: OgmoFactory.Entity) => unknown>

@@ -6,8 +6,14 @@ import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { Cutscene, sceneStack } from "../globals";
 import { show } from "../cutscene/show";
+import { RpgProgress } from "../rpg/rpg-progress";
 
-export function objDoor(sceneName: string) {
+interface ObjDoorArgs {
+    sceneName: string;
+    checkpointName: string;
+}
+
+export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
     let locked = false;
 
     const scene = SceneLibrary.maybeFindByName(sceneName);
@@ -30,7 +36,12 @@ export function objDoor(sceneName: string) {
                 return;
             }
             if (scene)
-                throw new EscapeTickerAndExecute(() => sceneStack.replace(scene, { useGameplay: true }));
+                throw new EscapeTickerAndExecute(() => {
+                    // TODO this all really needs to be encapsulated somewhere
+                    RpgProgress.character.position.sceneName = sceneName;
+                    RpgProgress.character.position.checkpointName = checkpointName;
+                    sceneStack.replace(scene, { useGameplay: true })
+                });
         });
 
     return obj;
