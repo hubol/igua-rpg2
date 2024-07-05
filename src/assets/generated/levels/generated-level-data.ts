@@ -25,7 +25,7 @@ export const Lvl = {
     Block_4: e(r["Block"], { x: 32, y: 136, width: 64, height: 16, values: { name: "", depth: 0 }, tint: 0x631d1d }),
     Slope_2: e(r["Slope"], { x: 64, y: 152, width: 32, height: 16, flippedX: true, flippedY: true, values: { name: "", depth: 0 }, tint: 0x631d1d }),
     Slope_3: e(r["Slope"], { x: 32, y: 152, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0 }, tint: 0x631d1d }),
-    Door: e(r["Door"], { x: 56, y: 248, values: { sceneName: "PlayerTest", checkpointName: "", name: "", depth: 0 } }),
+    Door: e(r["Door"], { x: 56, y: 248, values: { sceneName: "PlayerTest", checkpointName: "FromLevelTwo", name: "", depth: 0 } }),
     UpperDoor: e(r["Door"], { x: 48, y: 104, values: { sceneName: "LevelTwo", checkpointName: "", name: "UpperDoor", depth: 0 } }),
     Player: e(r["Player"], { x: 112, y: 280, flippedX: false, values: { name: "", depth: 0 } }),
   })),
@@ -56,5 +56,6 @@ export const Lvl = {
     Placeholder_1: d(Tx.Placeholder, { x: 432, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2e3cff }),
     Door: e(r["Door"], { x: 376, y: 120, values: { sceneName: "LevelTwo", checkpointName: "", name: "", depth: 0 } }),
     Player: e(r["Player"], { x: 48, y: 64, flippedX: true, values: { name: "", depth: 0 } }),
+    FromLevelTwo: e(r["Checkpoint"], { x: 344, y: 176, flippedX: true, values: { name: "FromLevelTwo", depth: 0 } }),
   })),
 };

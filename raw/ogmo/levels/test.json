@@ -27,6 +27,17 @@
           "originY": 25,
           "flippedX": true,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 1,
+          "_eid": "19953026",
+          "x": 344,
+          "y": 176,
+          "originX": 12,
+          "originY": 25,
+          "flippedX": true,
+          "values": {"name": "FromLevelTwo", "depth": 0}
         }
       ]
     },

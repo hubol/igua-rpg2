@@ -309,13 +309,56 @@
       "tags": [],
       "values": [
         {"name": "sceneName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "checkpointName", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "checkpointName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/door.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURSUlJQAAAGzL0jIAAAACdFJOU/8A5bcwSgAAAAlwSFlzAAAOwgAADsIBFShKgAAAAFtJREFUOE/tijkOgDAQAzf//zQkHoILR6IIEgVT7OFxNacGPMI/6Q5Bx27kgOjkPlFAaAXEhHgWiI1LsAIYVgCjGZHSjEitvRqPCryBXQWeyFcKnAv+gni/UO0A0d0A72FxCP0AAAAASUVORK5CYII="
+    },
+    {
+      "exportID": "19953026",
+      "name": "Checkpoint",
+      "limit": -1,
+      "size": {"x": 33, "y": 27},
+      "origin": {"x": 12, "y": 25},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": true,
+      "canFlipY": false,
+      "flipOnlyScales": true,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["Player"],
+      "values": [
+        {"name": "name", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "texture": "preview-images/checkpoint.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAbCAMAAADF2xaWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJUExURf///wAAAAAAAH5RqV0AAAADdFJOU///ANfKDUEAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACkSURBVDhPvZFbEsUgCEPR/S+6IUQF+rh/N5mplpwyaG1W2bChrdQIBxpSiQAqUogFFKQS0IAsV32PSpQOEWsUAbDyRLBqAKIipBJA9mDRUoMm4yssDEMnkqOHUtcKkvlQDJ1guU92X/9C4MY4zrv91tPr3X7rDwc8xvk/e/CGnOoTMthyov91Blsk+l9nban02CQjyV/ycHKElO9zJEdI/eox5wX+9wOo5YdZ0QAAAABJRU5ErkJggg=="
     }
   ],
   "tilesets": []
