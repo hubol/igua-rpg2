@@ -1,5 +1,6 @@
 import { Sprite, Texture } from "pixi.js";
 import { scene } from "../globals";
+import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 
 export namespace OgmoFactory {
     export interface Entity {
@@ -36,6 +37,11 @@ export namespace OgmoFactory {
     }
 
     export function createEntity<TFn extends (...args: any[]) => any>(fn: TFn, entity: OgmoFactory.Entity): ReturnType<TFn> {
+        if (typeof fn !== 'function') {
+            ErrorReporter.reportSubsystemError('OgmoFactory', 'Received fn argument that is not a function. Is OgmoEntityResolvers up to date?', { fn });
+            return undefined as any;
+        }
+
         const obj: Sprite = fn(entity);
         obj.add(entity);
     
