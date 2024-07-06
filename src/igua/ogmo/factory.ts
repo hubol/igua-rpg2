@@ -1,4 +1,4 @@
-import { Sprite, Texture } from "pixi.js";
+import { DisplayObject, Sprite, Texture } from "pixi.js";
 import { scene } from "../globals";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 
@@ -43,6 +43,10 @@ export namespace OgmoFactory {
         }
 
         const obj: Sprite = fn(entity);
+
+        if (!(obj instanceof DisplayObject))
+            return obj;
+
         obj.add(entity);
     
         if (entity.width !== undefined)
