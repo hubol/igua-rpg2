@@ -95,7 +95,7 @@
           "originX": 0,
           "originY": 0,
           "tint": "#631d1d",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Block",
@@ -108,7 +108,7 @@
           "originX": 0,
           "originY": 0,
           "tint": "#631d1d",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Block",
@@ -121,7 +121,7 @@
           "originX": 0,
           "originY": 0,
           "tint": "#631d1d",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Block",
@@ -134,7 +134,7 @@
           "originX": 0,
           "originY": 0,
           "tint": "#631d1d",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "PipeSlope",
@@ -257,7 +257,7 @@
           "originX": 0,
           "originY": 0,
           "tint": "#631d1d",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Slope",

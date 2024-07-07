@@ -1,7 +1,9 @@
 import { vnew } from "../../lib/math/vector-type";
 import { objDoor } from "../objects/obj-door";
 import { createPlayerObj, playerObj } from "../objects/obj-player";
+import { objSign } from "../objects/obj-sign";
 import { objPipe, objPipeSlope, objSolidBlock, objSolidSlope } from "../objects/obj-terrain";
+import { objWaterDripSource } from "../objects/obj-water-drip-source";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { OgmoFactory } from "./factory";
 
@@ -13,6 +15,8 @@ export const OgmoEntityResolvers = {
     'Pipe': objPipe,
     'PipeSlope': objPipeSlope,
     'Door': ({ values: { checkpointName, sceneName } }) => objDoor({ checkpointName, sceneName }),
+    'WaterDripSource': ({ values: { delayMin, delayMax} }) => objWaterDripSource({ delayMin, delayMax }),
+    'Sign': ({ values }) => objSign(values as any),
 } satisfies Record<string, (e: OgmoFactory.Entity) => unknown>
 
 function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?: string) {

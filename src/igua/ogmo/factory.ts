@@ -17,6 +17,7 @@ export namespace OgmoFactory {
     interface EntityValues {
         name: string;
         depth: number;
+        visible?: boolean;
     }
 
     export interface Decal {
@@ -63,6 +64,9 @@ export namespace OgmoFactory {
     
         if (entity.tint !== undefined)
             obj.tint = entity.tint;
+
+        if (entity.values.visible === false)
+            obj.visible = false;
     
         if (!obj.parent)
             obj.show();
