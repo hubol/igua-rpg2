@@ -6,7 +6,7 @@ import { sleep } from "../../../lib/game-engine/promise/sleep";
 import { wait } from "../../../lib/game-engine/promise/wait";
 import { approachLinear } from "../../../lib/math/number";
 import { container } from "../../../lib/pixi/container";
-import { SceneLocal } from "../../core/scene/scene-local";
+import { SceneLocal } from "../../../lib/game-engine/scene-local";
 import { Cutscene, layers, sceneStack } from "../../globals";
 import { ConnectedInput } from "../../iguana/connected-input";
 import { getDefaultLooks } from "../../iguana/get-default-looks";

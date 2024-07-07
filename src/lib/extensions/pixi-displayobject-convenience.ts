@@ -1,5 +1,5 @@
 import { Container, DisplayObject, Rectangle } from "pixi.js";
-import { DefaultStages } from "../game-engine/default-stages";
+import { EngineConfig } from "../game-engine/engine-config";
 import { Pojo } from "../types/pojo";
 import { merge } from "../object/merge";
 import { VectorSimple } from "../math/vector-type";
@@ -44,7 +44,7 @@ Object.defineProperties(DisplayObject.prototype, {
         }
     },
     show: {
-        value: function (this: DisplayObject, container = DefaultStages.show) {
+        value: function (this: DisplayObject, container = EngineConfig.showDefaultStage) {
             container.addChild(this);
             return this;
         },

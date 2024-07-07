@@ -26,7 +26,6 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
     const backgroundGfx = new Graphics().tinted(0x000000).beginFill(0xffffff).drawRect(0, 0, renderer.width, renderer.height).show(background);
 
     return {
-        locals: {} as Record<string, any>,
         root,
         source,
         stage,

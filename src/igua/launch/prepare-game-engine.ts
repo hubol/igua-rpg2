@@ -1,13 +1,13 @@
 import { Animator } from "../../lib/game-engine/animator";
 import { AsshatTicker } from "../../lib/game-engine/asshat-ticker";
 import { AsshatZoneDiagnostics } from "../../lib/game-engine/asshat-zone";
-import { setDefaultStages } from "../../lib/game-engine/default-stages";
+import { setEngineConfig } from "../../lib/game-engine/engine-config";
 import { PixiRenderer } from "../../lib/game-engine/pixi-renderer";
 import { TickerContainer } from "../../lib/game-engine/ticker-container";
 import { Collision } from "../../lib/pixi/collision";
 import { devAssignDisplayObjectIdentifiers } from "../../lib/pixi/dev-assign-displayobject-identifiers";
 import { IguaInput } from "../core/input";
-import { scene, setIguaGlobals } from "../globals";
+import { scene, sceneStack, setIguaGlobals } from "../globals";
 
 globalThis.onDisplayObjectConstructed = devAssignDisplayObjectIdentifiers;
 
@@ -49,10 +49,11 @@ export function prepareGameEngine(renderer: PixiRenderer) {
 
     animator.add(gameLoop);
 
-    setDefaultStages({
-        get show() {
+    setEngineConfig({
+        get showDefaultStage() {
             return scene.stage;
-        }
+        },
+        sceneStack,
     });
 }
 

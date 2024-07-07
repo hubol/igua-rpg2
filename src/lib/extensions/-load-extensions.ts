@@ -8,6 +8,7 @@ import "./pixi-displayobject-async";
 import "./pixi-displayobject-convenience";
 import "./pixi-displayobject-mixin";
 import "./pixi-displayobject-ticker";
+import "./pixi-displayobject-track";
 import "./pixi-rectangle";
 import "./pixi-rounding";
 import "./pixi-texture";

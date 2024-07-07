@@ -35,4 +35,24 @@ export abstract class SceneStack<TSceneMeta, TSceneInstance> {
     get length() {
         return this.scenes.length;
     }
+
+    get top() {
+        return this.scenes.last;
+    }
+
+    get locals() {
+        const scene = this.top as { __locals__: Record<string, any> } | undefined;
+
+        if (!scene) {
+            throw new Error(`Attempting to access SceneStack.locals when SceneStack.scenes is empty!`);
+        }
+
+        let record = scene['__locals__'];
+        if (!record) {
+            record = {};
+            scene['__locals__'] = record;
+        }
+
+        return record;
+    }
 }

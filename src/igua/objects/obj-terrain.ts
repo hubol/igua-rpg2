@@ -1,6 +1,6 @@
 import { DisplayObject, Graphics, SimpleMesh, WRAP_MODES } from "pixi.js";
 import { Empty } from "../../lib/types/empty";
-import { SceneLocal } from "../core/scene/scene-local";
+import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { scene } from "../globals";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 
