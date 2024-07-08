@@ -12,6 +12,7 @@ export const RpgProgress = {
         },
         attributes: {
             health: 1,
+            intelligence: 0,
         },
         looks: getDefaultLooks(),
         position: {

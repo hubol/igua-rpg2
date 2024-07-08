@@ -441,6 +441,17 @@
           "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
+    },
+    {
+      "name": "BackgroundEntities",
+      "_eid": "41483982",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 57,
+      "gridCellsY": 32,
+      "entities": []
     }
   ]
 }

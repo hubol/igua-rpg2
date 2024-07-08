@@ -30,6 +30,10 @@ export const Lvl = {
     Player: e(r["Player"], { x: 112, y: 280, flippedX: false, values: { name: "", depth: 0 } }),
   })),
   Potter: l({ width: 512, height: 400, backgroundTint: 0x5a2e0c }, () => ({
+    IntelligenceBackground: e(r["IntelligenceBackground"], { x: 400, y: 16, width: 96, height: 336, values: { initialTint: "#d05716", targetTint: "#5a2e0c", min: 1, max: 5, name: "", depth: 0 } }),
+    IntelligenceBackground_1: e(r["IntelligenceBackground"], { x: 200, y: 32, width: 200, height: 56, values: { initialTint: "#d05716", targetTint: "#5a2e0c", min: 1, max: 5, name: "", depth: 0 } }),
+    IntelligenceBackground_2: e(r["IntelligenceBackground"], { x: 376, y: 88, width: 24, height: 24, values: { initialTint: "#d05716", targetTint: "#5a2e0c", min: 1, max: 5, name: "", depth: 0 } }),
+    IntelligenceBackground_3: e(r["IntelligenceBackground"], { x: 80, y: 32, width: 120, height: 32, values: { initialTint: "#d05716", targetTint: "#5a2e0c", min: 1, max: 5, name: "", depth: 0 } }),
     Block: e(r["Block"], { x: 0, y: 0, width: 208, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0xd05716 }),
     Block_1: e(r["Block"], { x: 0, y: 64, width: 40, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0xd05716 }),
     Slope: e(r["Slope"], { x: 40, y: 64, width: 32, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0 }, tint: 0xd05716 }),
