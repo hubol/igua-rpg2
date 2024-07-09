@@ -1,0 +1,6 @@
+import { IguanaLooks } from "./looks";
+
+export const NpcLooks = {
+    MintyJourney: {head:{color:7721690,placement:{x:0,y:-5},crest:{shape:6,color:9354643,placement:{x:7,y:-6},flipV:true,flipH:false},eyes:{placement:{x:0,y:0},gap:1,tilt:0,pupils:{mirrored:false,placement:{x:-3,y:0}},left:{sclera:{},eyelid:{color:1198410,placement:3},pupil:{shape:6,color:7602425,placement:{x:0,y:0},flipH:false}},right:{sclera:{},eyelid:{color:1198410,placement:3},pupil:{shape:6,color:1732979,placement:{x:1,y:1},flipH:false}}},horn:{shape:5,color:7906428,placement:{x:-1,y:-8}},mouth:{shape:1,color:7602425,placement:{x:0,y:0},flipV:false}},body:{color:1198410,placement:{x:0,y:0},tail:{shape:0,color:1732979,placement:{x:0,y:0},club:{shape:2,color:15909212,placement:{x:0,y:1}}}},feet:{fore:{left:{shape:9,color:15909212,claws:{color:1732979,shape:0,placement:2}},right:{shape:9,color:9354643,claws:{color:1732979,shape:0,placement:2}}},hind:{left:{shape:2,color:15909212,claws:{color:1732979,shape:2,placement:2}},right:{shape:2,color:15909212,claws:{color:1732979,shape:2,placement:2}}},gap:4,backOffset:3}},
+
+} satisfies Record<string, IguanaLooks.Serializable>;
