@@ -134,6 +134,17 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
     return c;
 }
 
+function serializeLooksForClipboard(looks: IguanaLooks.Serializable) {
+    return JSON.stringify(looks, (key, value) => {
+        const lower = key.toLocaleLowerCase();
+        if (lower.endsWith('tint') || lower.endsWith('color')) {
+            return '0x' + value.toString(16);
+        }
+
+        return value;
+    }, 0).replace(/\"/g, '');
+}
+
 function objIguanaDesignerDevFeatures() {
     return container().step(() => {
         if (!DevKey.isDown('ControlLeft'))
@@ -141,7 +152,7 @@ function objIguanaDesignerDevFeatures() {
 
         if (DevKey.justWentDown('KeyC')) {
             setTimeout(async () => {
-                const text = JSON.stringify(UiIguanaDesignerContext.value.looks, undefined, 0).replace(/\"/g, '');
+                const text = serializeLooksForClipboard(UiIguanaDesignerContext.value.looks);
                 await navigator.clipboard.writeText(text);
                 Toast.info('Copied', 'Iguana to clipboard');
             })
