@@ -1,3 +1,5 @@
+import { KeyListener } from "../../lib/browser/key-listener";
+import { Environment } from "../../lib/environment";
 import { Animator } from "../../lib/game-engine/animator";
 import { AsshatTicker } from "../../lib/game-engine/asshat-ticker";
 import { AsshatZoneDiagnostics } from "../../lib/game-engine/asshat-zone";
@@ -15,6 +17,7 @@ const rootTicker = new AsshatTicker();
 const rootStage = new TickerContainer(rootTicker, false).named("Root");
 
 const iguaInput = new IguaInput();
+const devKeyListener = new KeyListener();
 
 export function prepareGameEngine(renderer: PixiRenderer) {
     let gameLoopForced = false;
@@ -25,9 +28,11 @@ export function prepareGameEngine(renderer: PixiRenderer) {
 
     const animator = new Animator(60);
 
-    setIguaGlobals(renderer, rootStage, iguaInput, forceGameLoop, animator.start.bind(animator));
+    setIguaGlobals(renderer, rootStage, iguaInput, forceGameLoop, animator.start.bind(animator), devKeyListener);
 
     iguaInput.start();
+    if (Environment.isDev)
+        devKeyListener.start();
 
     const flashPreventer = new UnpleasantCanvasFlashPreventer(renderer);
 
@@ -40,6 +45,8 @@ export function prepareGameEngine(renderer: PixiRenderer) {
             rootTicker.tick();
             Collision.recycleRectangles();
             iguaInput.tick();
+            if (Environment.isDev)
+                devKeyListener.tick();
             flashPreventer.tick();
         }
         while (gameLoopForced);

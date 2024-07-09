@@ -4,6 +4,7 @@ import { IguaScene, IguaSceneStack } from "./core/scene/igua-scene-stack";
 import { IguaInput } from "./core/input";
 import { Container } from "pixi.js";
 import { IguaCutscene } from "./core/igua-cutscene";
+import { KeyListener } from "../lib/browser/key-listener";
 
 export let renderer: PixiRenderer;
 export let layers: IguaLayers;
@@ -13,8 +14,15 @@ export let Input: Pick<IguaInput, 'isDown' | 'isUp' | 'justWentDown' | 'justWent
 export let Cutscene: IguaCutscene;
 export let forceGameLoop: () => void;
 export let startAnimator: () => void;
+export let DevKey: KeyListener;
 
-export function setIguaGlobals(pixiRenderer: PixiRenderer, rootStage: Container, iguaInput: IguaInput, forceGameLoopFn: () => void, startAnimatorFn: () => void) {
+export function setIguaGlobals(
+        pixiRenderer: PixiRenderer,
+        rootStage: Container,
+        iguaInput: IguaInput,
+        forceGameLoopFn: () => void,
+        startAnimatorFn: () => void,
+        devKey: KeyListener) {
     renderer = pixiRenderer;
     layers = new IguaLayers(rootStage);
     sceneStack = new IguaSceneStack(layers, (_scene) => scene = _scene);
@@ -22,4 +30,5 @@ export function setIguaGlobals(pixiRenderer: PixiRenderer, rootStage: Container,
     Cutscene = new IguaCutscene(rootStage);
     forceGameLoop = forceGameLoopFn;
     startAnimator = startAnimatorFn;
+    DevKey = devKey;
 }

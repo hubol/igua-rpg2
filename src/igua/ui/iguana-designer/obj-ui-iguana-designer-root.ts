@@ -7,7 +7,7 @@ import { wait } from "../../../lib/game-engine/promise/wait";
 import { approachLinear } from "../../../lib/math/number";
 import { container } from "../../../lib/pixi/container";
 import { SceneLocal } from "../../../lib/game-engine/scene-local";
-import { Cutscene, layers, sceneStack } from "../../globals";
+import { Cutscene, DevKey, layers, sceneStack } from "../../globals";
 import { ConnectedInput } from "../../iguana/connected-input";
 import { getDefaultLooks } from "../../iguana/get-default-looks";
 import { IguanaLooks } from "../../iguana/looks";
@@ -21,6 +21,8 @@ import { objUiDesignerNavigationButton } from "./components/obj-ui-designer-butt
 import { objUiIguanaDesignerInspirationPage } from "./pages/obj-ui-iguana-designer-inspiration-page";
 import { PlayerTest } from "../../scenes/player-test";
 import { RpgProgress } from "../../rpg/rpg-progress";
+import { Environment } from "../../../lib/environment";
+import { WarningToast } from "../../../lib/game-engine/warning-toast";
 
 function context() {
     let looks = getDefaultLooks();
@@ -124,7 +126,21 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
 
     objUiNoteText(router).show(c);
 
+    if (Environment.isDev)
+        objIguanaDesignerDevFeatures().show(c);
+
     return c;
+}
+
+function objIguanaDesignerDevFeatures() {
+    return container().step(() => {
+        if (DevKey.isDown('ControlLeft') && DevKey.justWentDown('KeyC')) {
+            setTimeout(async () => {
+                await navigator.clipboard.writeText(JSON.stringify(UiIguanaDesignerContext.value.looks, undefined, 0));
+                WarningToast.show('Copied', 'Iguana to clipboard');
+            })
+        }
+    });
 }
 
 function objUiSavePage() {
