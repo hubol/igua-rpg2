@@ -23,6 +23,8 @@ import { PlayerTest } from "../../scenes/player-test";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { Environment } from "../../../lib/environment";
 import { WarningToast } from "../../../lib/game-engine/warning-toast";
+import { merge } from "../../../lib/object/merge";
+import { ClipboardPojo } from "../../../lib/browser/clipboard-pojo";
 
 function context() {
     let looks = getDefaultLooks();
@@ -134,10 +136,22 @@ export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
 
 function objIguanaDesignerDevFeatures() {
     return container().step(() => {
-        if (DevKey.isDown('ControlLeft') && DevKey.justWentDown('KeyC')) {
+        if (!DevKey.isDown('ControlLeft'))
+            return;
+
+        if (DevKey.justWentDown('KeyC')) {
             setTimeout(async () => {
-                await navigator.clipboard.writeText(JSON.stringify(UiIguanaDesignerContext.value.looks, undefined, 0));
+                const text = JSON.stringify(UiIguanaDesignerContext.value.looks, undefined, 0).replace(/\"/g, '');
+                await navigator.clipboard.writeText(text);
                 WarningToast.show('Copied', 'Iguana to clipboard');
+            })
+        }
+
+        if (DevKey.justWentDown('KeyV')) {
+            setTimeout(async () => {
+                const object = await ClipboardPojo.read();
+                WarningToast.show('Pasted', 'Iguana from clipboard');
+                merge(UiIguanaDesignerContext.value.looks, object);
             })
         }
     });
