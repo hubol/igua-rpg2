@@ -174,7 +174,7 @@ noscript {
     flex-direction: column;
 }
 
-#toast .warning_toast {
+#toast .toast {
     margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
@@ -183,15 +183,19 @@ noscript {
     padding: 0.5rem 0.75rem;
     border-radius: 3px;
     position: relative;
-    animation: warning_toast_in 0.3s ease-out;
+    animation: toast_in 0.3s ease-out;
     box-sizing: border-box;
 }
 
-#toast .warning_toast.out {
-    animation: warning_toast_out 1.4s ease-out forwards;
+#toast .toast.info {
+    background-color: #f0ffff;
 }
 
-@keyframes warning_toast_in {
+#toast .toast.out {
+    animation: toast_out 1.4s ease-out forwards;
+}
+
+@keyframes toast_in {
     0% {
         left: calc(0.5rem + 100%);
     }
@@ -200,7 +204,7 @@ noscript {
     }
 }
 
-@keyframes warning_toast_out {
+@keyframes toast_out {
     0% {
         left: 0;
     }
@@ -238,11 +242,15 @@ noscript {
     border-bottom: dashed 1px #E04020;
 }
 
+#toast .info .title {
+    border-bottom-color: #3870A8;
+}
+
 #toast .description {
     font-size: 95%;
 }
 
-#toast svg.warning {
+#toast svg {
     flex-shrink: 0;
     height: 2rem;
 }

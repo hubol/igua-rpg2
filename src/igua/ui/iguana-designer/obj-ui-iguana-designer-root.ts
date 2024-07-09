@@ -22,7 +22,7 @@ import { objUiIguanaDesignerInspirationPage } from "./pages/obj-ui-iguana-design
 import { PlayerTest } from "../../scenes/player-test";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { Environment } from "../../../lib/environment";
-import { WarningToast } from "../../../lib/game-engine/warning-toast";
+import { Toast } from "../../../lib/game-engine/toast";
 import { merge } from "../../../lib/object/merge";
 import { ClipboardPojo } from "../../../lib/browser/clipboard-pojo";
 
@@ -143,14 +143,14 @@ function objIguanaDesignerDevFeatures() {
             setTimeout(async () => {
                 const text = JSON.stringify(UiIguanaDesignerContext.value.looks, undefined, 0).replace(/\"/g, '');
                 await navigator.clipboard.writeText(text);
-                WarningToast.show('Copied', 'Iguana to clipboard');
+                Toast.info('Copied', 'Iguana to clipboard');
             })
         }
 
         if (DevKey.justWentDown('KeyV')) {
             setTimeout(async () => {
                 const object = await ClipboardPojo.read();
-                WarningToast.show('Pasted', 'Iguana from clipboard');
+                Toast.info('Pasted', 'Iguana from clipboard');
                 merge(UiIguanaDesignerContext.value.looks, object);
             })
         }

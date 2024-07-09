@@ -1,6 +1,6 @@
 import { createDebugKey } from "../../lib/game-engine/debug/debug-key";
 import { createDebugPanel } from "../../lib/game-engine/debug/debug-panel";
-import { WarningToast } from "../../lib/game-engine/warning-toast";
+import { Toast } from "../../lib/game-engine/toast";
 import { IguaAudio } from "../core/igua-audio";
 import { SceneLibrary } from "../core/scene/scene-library";
 import { layers, sceneStack } from "../globals";
@@ -11,7 +11,7 @@ export function installDevTools() {
     createDebugKey('KeyM', 'globalMute', (x, keydown) => {
         IguaAudio.globalGain = x ? 0 : 1;
         if (keydown)
-            WarningToast.show(x ? 'Muted' : 'Unmuted', '^_^');
+            Toast.info(x ? 'Muted' : 'Unmuted', '^_^');
     });
 
     const sceneSwitcherEl = createSceneSwitcherEl();

@@ -5,7 +5,7 @@ import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { Tx } from "../../assets/textures";
 import { CollisionShape } from "../../lib/pixi/collision";
 import { Sfx } from "../../assets/sounds";
-import { WarningToast } from "../../lib/game-engine/warning-toast";
+import { Toast } from "../../lib/game-engine/toast";
 import { container } from "../../lib/pixi/container";
 import { PseudoRng, Rng } from "../../lib/math/rng";
 import { getDefaultLooks } from "../iguana/get-default-looks";
@@ -85,10 +85,10 @@ export function SceneTest() {
             if (Input.isDown('SelectRight'))
                 guy.x += 4;
             if (Input.justWentDown('SelectDown')) {
-                WarningToast.show(prng.choose('Message 1', 'Message 2', 'Message 3'), 'description');
+                Toast.info(prng.choose('Message 1', 'Message 2', 'Message 3'), 'description');
             }
             if (Input.justWentDown('SelectUp')) {
-                WarningToast.show('A sound', 'A sound was just played!');
+                Toast.warn('A sound', 'A sound was just played!');
                 Sfx.ArrowKnock.with.rate(Rng.float(0.5, 2)).play();
             }
             if (Input.justWentDown('CastSpell')) {
