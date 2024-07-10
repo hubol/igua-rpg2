@@ -1,0 +1,106 @@
+<style>
+.debug_panel {
+    width: 100%;
+    max-width: 700px;
+    background-color: #1E1E1E;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    padding: 1em;
+    overflow-y: scroll;
+}
+
+.debug_panel .color {
+    display: inline-block;
+    width: 0.8em;
+    height: 0.8em;
+    margin-right: 0.3em;
+    border: solid 1px #808080;
+}
+
+.debug_panel .name_container {
+    color: rgb(209, 159, 23);
+}
+
+.debug_panel .type {
+    font-size: 75%;
+    opacity: 75%;
+}
+
+.debug_panel .name {
+    font-weight: bold;
+    margin-right: 0.5em;
+}
+
+.debug_panel .info {
+    color: rgb(23, 104, 209);
+}
+
+.debug_panel .properties {
+    color: rgb(135, 23, 209);
+    font-style: italic;
+}
+
+.debug_panel .children {
+    padding-left: 1em;
+    padding-top: 0.3em;
+    margin-left: 0.2em;
+    border-left: solid 1px #776100;
+    position: relative;
+}
+
+.debug_panel .odd > .children {
+    border-left-color: rgb(47, 88, 8);
+}
+
+.debug_panel .children > *::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    width: 0.8em;
+    border-top: solid 1px #776100;
+    margin-top: 0.8em;
+    margin-left: -1em;
+}
+
+.debug_panel .odd > .children > *::before {
+    border-top-color: rgb(47, 88, 8);
+}
+
+.debug_panel .hidden, .debug_panel.hidden {
+    display: none;
+}
+
+.debug_panel .buttons {
+    display: inline-flex;
+    margin-left: 0.8em;
+    gap: 0.8em;
+    visibility: hidden;
+}
+
+.debug_panel .buttons button {
+    border-radius: 2px;
+    text-decoration: underline;
+    border: none;
+    background: none;
+    color: white;
+    cursor: pointer;
+}
+
+.debug_panel .header {
+    padding: 0.2em 0 0.2em 0.4em;
+    margin-top: 0.3em;
+}
+
+.debug_panel .children > *:first-child .header {
+    margin-top: 0;
+}
+
+.debug_panel .header:hover {
+    background-color: #ffffff10;
+}
+
+.debug_panel .header:hover .buttons {
+    visibility: visible;
+}
+</style>
+<div class="debug_panel"></div>

@@ -1,3 +1,4 @@
+import { elRuntimeErrorsRoot } from "./elements/el-runtime-errors-root";
 import { DefaultErrorAnnouncer, ErrorAnnouncer } from "./error-reporter";
 
 export function createDomErrorAnnouncer(): ErrorAnnouncer {
@@ -18,8 +19,7 @@ export function createDomErrorAnnouncer(): ErrorAnnouncer {
 }
 
 function createDomErrorRoot() {
-    const el = document.createElement('div');
-    el.id = 'runtime_errors';
+    const el = elRuntimeErrorsRoot();
 
     const domErrors: Record<string, ReturnType<typeof createDomError>> = {};
 

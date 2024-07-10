@@ -21,6 +21,7 @@ function options(overrides) {
             '.ogg': 'file',
             '.png': 'file',
             '.zip': 'file',
+            '.html': 'text',
         },
         logLevel: 'info',
         plugins: [

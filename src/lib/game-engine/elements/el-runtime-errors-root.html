@@ -1,0 +1,41 @@
+<style>
+.runtime_errors {
+    font-family: monospace;
+    font-size: 120%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.runtime_errors .count {
+    font-weight: 600;
+}
+
+.runtime_errors .error {
+    display: flex;
+    gap: 0.5rem;
+    cursor: pointer;
+
+    background-color: #a00000;
+    color: white;
+    text-shadow: 0 -1px 0 #400000;
+    padding: 0.2rem 0.5rem;
+
+    border-radius: 3px;
+}
+
+.runtime_errors .error.empty {
+    display: none;
+}
+
+.runtime_errors .unique_count.empty {
+    display: none;
+}
+</style>
+<div class="runtime_errors"></div>

@@ -1,0 +1,89 @@
+<style>
+.toast {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #f8c818;
+    padding: 0.5rem 0.75rem;
+    border-radius: 3px;
+    position: relative;
+    animation: toast_in 0.3s ease-out;
+    box-sizing: border-box;
+}
+
+.toast.info {
+    background-color: #f0ffff;
+}
+
+.toast.out {
+    animation: toast_out 1.4s ease-out forwards;
+}
+
+@keyframes toast_in {
+    0% {
+        left: calc(0.5rem + 100%);
+    }
+    100% {
+        left: 0;
+    }
+}
+
+@keyframes toast_out {
+    0% {
+        left: 0;
+    }
+    50%, 100% {
+        left: calc(0.5rem + 100%);
+    }
+    50% {
+        max-height: 1000px;
+    }
+    90% {
+        padding: 0.5rem 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+    100% {
+        max-height: 0;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.toast .message {
+    max-width: 25vw;
+}
+
+@media (max-width: 800px) {
+    .toast .message {
+        max-width: unset;
+    }
+}
+
+.toast .title {
+    font-weight: bold;
+    padding-bottom: 0.2rem;
+    margin-bottom: 0.2rem;
+    border-bottom: dashed 1px #E04020;
+}
+
+.toast.info .title {
+    border-bottom-color: #3870A8;
+}
+
+.toast .description {
+    font-size: 95%;
+}
+
+.toast svg {
+    flex-shrink: 0;
+    height: 2rem;
+}
+</style>
+<div class="toast ${type}">
+    ${svg}
+    <div class="message">
+        <p class="title ${type}">${title}</p>
+        <p class="description">${description}</p>
+    </div>
+</div>

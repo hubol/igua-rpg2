@@ -22,34 +22,6 @@ html {
     border-radius: 4px;
 }
 
-#start_button {
-    background-color: #C0C0C0;
-    color: black;
-    appearance: unset;
-    display: inline-block;
-    font-weight: bold;
-    max-width: 80vw;
-    font-size: 8vmin;
-    padding: .25em .33em;
-    cursor: pointer;
-    border: 0.1875em outset #E0E0E0;
-    outline: 0;
-
-    box-shadow: 3vmin 3vmin var(--bg-color-dark);
-}
-
-#start_button:hover {
-    filter: brightness(1.025);
-}
-
-#start_button:active {
-    filter: none;
-    border-style: inset;
-    text-indent: 0.1em;
-    box-shadow: 1.5vmin 1.5vmin var(--bg-color-dark);
-    transform: translate(1.5vmin, 1.5vmin);
-}
-
 #fatal_error {
     background-color: #1E1E1E;
     color: #20d058;
@@ -120,139 +92,6 @@ noscript {
     background-color: #d05050;
     color: #f0f0d0;
     padding: .1em .2em;
-}
-
-#runtime_errors {
-    font-family: monospace;
-    font-size: 120%;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 0.5rem;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-#runtime_errors .count {
-    font-weight: 600;
-}
-
-#runtime_errors .error {
-    display: flex;
-    gap: 0.5rem;
-    cursor: pointer;
-
-    background-color: #a00000;
-    color: white;
-    text-shadow: 0 -1px 0 #400000;
-    padding: 0.2rem 0.5rem;
-
-    border-radius: 3px;
-}
-
-#runtime_errors .error.empty {
-    display: none;
-}
-
-#runtime_errors .unique_count.empty {
-    display: none;
-}
-
-#toast {
-    font-size: 120%;
-
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0.5rem;
-
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
-}
-
-#toast .toast {
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: #f8c818;
-    padding: 0.5rem 0.75rem;
-    border-radius: 3px;
-    position: relative;
-    animation: toast_in 0.3s ease-out;
-    box-sizing: border-box;
-}
-
-#toast .toast.info {
-    background-color: #f0ffff;
-}
-
-#toast .toast.out {
-    animation: toast_out 1.4s ease-out forwards;
-}
-
-@keyframes toast_in {
-    0% {
-        left: calc(0.5rem + 100%);
-    }
-    100% {
-        left: 0;
-    }
-}
-
-@keyframes toast_out {
-    0% {
-        left: 0;
-    }
-    50%, 100% {
-        left: calc(0.5rem + 100%);
-    }
-    50% {
-        max-height: 1000px;
-    }
-    90% {
-        padding: 0.5rem 0.75rem;
-        margin-bottom: 0.5rem;
-    }
-    100% {
-        max-height: 0;
-        padding: 0;
-        margin: 0;
-    }
-}
-
-#toast .message {
-    max-width: 25vw;
-}
-
-@media (max-width: 800px) {
-    #toast .message {
-        max-width: unset;
-    }
-}
-
-#toast .title {
-    font-weight: bold;
-    padding-bottom: 0.2rem;
-    margin-bottom: 0.2rem;
-    border-bottom: dashed 1px #E04020;
-}
-
-#toast .info .title {
-    border-bottom-color: #3870A8;
-}
-
-#toast .description {
-    font-size: 95%;
-}
-
-#toast svg {
-    flex-shrink: 0;
-    height: 2rem;
 }
 
 #loading {
@@ -350,18 +189,8 @@ noscript {
     }
 }
 
-.debug_panel {
-    width: 100%;
-    max-width: 700px;
-    background-color: #1E1E1E;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 14px;
-    padding: 1em;
-    overflow-y: scroll;
-}
-
 @media (max-width: 1400px) {
-    .debug_panel {
+    body .debug_panel {
         flex-grow: 2;
     }
 }
@@ -371,102 +200,8 @@ noscript {
         flex-direction: column;
     }
 
-    .debug_panel {
+    body .debug_panel {
         max-width: unset;
         width: unset;
     }
-}
-
-.debug_panel .color {
-    display: inline-block;
-    width: 0.8em;
-    height: 0.8em;
-    margin-right: 0.3em;
-    border: solid 1px #808080;
-}
-
-.debug_panel .name_container {
-    color: rgb(209, 159, 23);
-}
-
-.debug_panel .type {
-    font-size: 75%;
-    opacity: 75%;
-}
-
-.debug_panel .name {
-    font-weight: bold;
-    margin-right: 0.5em;
-}
-
-.debug_panel .info {
-    color: rgb(23, 104, 209);
-}
-
-.debug_panel .properties {
-    color: rgb(135, 23, 209);
-    font-style: italic;
-}
-
-.debug_panel .children {
-    padding-left: 1em;
-    padding-top: 0.3em;
-    margin-left: 0.2em;
-    border-left: solid 1px #776100;
-    position: relative;
-}
-
-.debug_panel .odd > .children {
-    border-left-color: rgb(47, 88, 8);
-}
-
-.debug_panel .children > *::before {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    width: 0.8em;
-    border-top: solid 1px #776100;
-    margin-top: 0.8em;
-    margin-left: -1em;
-}
-
-.debug_panel .odd > .children > *::before {
-    border-top-color: rgb(47, 88, 8);
-}
-
-.debug_panel .hidden, .debug_panel.hidden {
-    display: none;
-}
-
-.debug_panel .buttons {
-    display: inline-flex;
-    margin-left: 0.8em;
-    gap: 0.8em;
-    visibility: hidden;
-}
-
-.debug_panel .buttons button {
-    border-radius: 2px;
-    text-decoration: underline;
-    border: none;
-    background: none;
-    color: white;
-    cursor: pointer;
-}
-
-.debug_panel .header {
-    padding: 0.2em 0 0.2em 0.4em;
-    margin-top: 0.3em;
-}
-
-.debug_panel .children > *:first-child .header {
-    margin-top: 0;
-}
-
-.debug_panel .header:hover {
-    background-color: #ffffff10;
-}
-
-.debug_panel .header:hover .buttons {
-    visibility: visible;
 }

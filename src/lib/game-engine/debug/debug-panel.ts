@@ -5,6 +5,7 @@ import { container } from "../../pixi/container";
 import { Undefined } from "../../types/undefined";
 import { TickerContainer } from "../ticker-container";
 import { createDebugKey } from "./debug-key";
+import { elDebugPanel } from "../elements/el-debug-panel";
 
 export function createDebugPanel(root: Container) {
     if (displayObjectMonitor)
@@ -12,8 +13,7 @@ export function createDebugPanel(root: Container) {
 
     displayObjectMonitor = objDisplayObjectMonitor().show(root);
 
-    const el = document.createElement('div');
-    el.className = 'debug_panel';
+    const el = elDebugPanel();
     el.appendChild(new DisplayObjectComponent(root).el);
 
     createDebugKey('F9', 'debugPanel_isOpen', x => el.classList[x ? 'remove' : 'add']('hidden'));
