@@ -199,4 +199,7 @@ export const AdjustColor = {
         c.b = src % 256;
         return AdjustColorChainer;
     },
+    hex(src: string) {
+        return this.pixi(Number.parseInt('0x' + src.replaceAll('#', '')));
+    }
 }

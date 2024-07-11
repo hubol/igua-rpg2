@@ -1,0 +1,40 @@
+<style>
+.debug_colors {
+    position: fixed;
+    bottom: 8px;
+    left: 8px;
+    z-index: 1;
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+}
+
+.debug_colors input[type="color"] {
+    cursor: pointer;
+    border: none;
+    width: 32px;
+    height: 32px;
+}
+
+.debug_colors input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.debug_colors input[type="color"]::-webkit-color-swatch {
+    border: none;
+}
+
+.debug_colors.hidden {
+    display: none;
+}
+</style>
+<div class="debug_colors">
+    <input type="color">
+    <input type="color">
+    <input type="color">
+    <input type="color">
+    <input type="color">
+    <input type="color">
+    <input type="color">
+    <input type="color">
+</div>

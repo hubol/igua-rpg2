@@ -1,3 +1,5 @@
+import { Environment } from "../../lib/environment";
+import { DebugColors } from "../../lib/game-engine/debug/debug-colors";
 import { merge } from "../../lib/object/merge";
 import { TypedInput } from "./typed-input";
 
@@ -13,6 +15,12 @@ export namespace ConnectedInput {
             if (input.kind === 'color')
                 set.add(input.value);
         });
+
+        if (Environment.isDev) {
+            for (const color of DebugColors.getPixi())
+                set.add(color);
+        }
+
         return Array.from(set);
     }
 

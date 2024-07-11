@@ -1,5 +1,6 @@
 import { createDebugKey } from "../../lib/game-engine/debug/debug-key";
 import { createDebugPanel } from "../../lib/game-engine/debug/debug-panel";
+import { elDebugColors } from "../../lib/game-engine/elements/el-debug-colors";
 import { Toast } from "../../lib/game-engine/toast";
 import { IguaAudio } from "../core/igua-audio";
 import { SceneLibrary } from "../core/scene/scene-library";
@@ -16,6 +17,8 @@ export function installDevTools() {
 
     const sceneSwitcherEl = createSceneSwitcherEl();
     el.prepend(sceneSwitcherEl);
+
+    document.body.appendChild(elDebugColors());
 }
 
 function createSceneSwitcherEl() {
