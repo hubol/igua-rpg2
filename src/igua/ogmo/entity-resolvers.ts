@@ -1,5 +1,6 @@
 import { vnew } from "../../lib/math/vector-type";
 import { objDoor } from "../objects/obj-door";
+import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { objIntelligenceBackground } from "../objects/obj-intelligence-background";
 import { createPlayerObj, playerObj } from "../objects/obj-player";
 import { objSign } from "../objects/obj-sign";
@@ -20,6 +21,12 @@ export const OgmoEntityResolvers = {
     // TODO as any feels bad, but so does stuff above
     'Sign': ({ values }) => objSign(values as any),
     'IntelligenceBackground': ({ values }) => objIntelligenceBackground(values as any),
+    'IguanaNpc': (entity) => {
+        const obj = objIguanaNpc(entity.values as any);
+        obj.facing = entity.flippedX ? -1 :1;
+        delete entity.flippedX;
+        return obj;
+    },
 } satisfies Record<string, (e: OgmoFactory.Entity) => unknown>
 
 function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?: string) {

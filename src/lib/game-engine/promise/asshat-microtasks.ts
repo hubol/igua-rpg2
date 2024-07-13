@@ -44,7 +44,17 @@ export class AsshatMicrotasks {
                 task._predicatePassed = task.predicate();
             }
             catch (e) {
-                ErrorReporter.reportSubsystemError('AsshatMicrotasks._checkPredicates', e, task);
+                // TODO is this important?
+                if (e instanceof AsshatPredicateRejectError) {
+                    task.reject(e);
+                    // TODO copy-paste looks like shit!!!
+                    free(task);
+                    shift += 1;
+                    i += 1;
+                    continue;
+                }
+                else
+                    ErrorReporter.reportSubsystemError('AsshatMicrotasks._checkPredicates', e, task);
             }
 
             if (shift)
@@ -84,6 +94,12 @@ export class AsshatMicrotasks {
 
         if (shift)
             this._tasks.length -= shift;
+    }
+}
+
+export class AsshatPredicateRejectError extends Error {
+    constructor(message?: string | undefined) {
+        super(message);
     }
 }
 

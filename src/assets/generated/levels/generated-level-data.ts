@@ -135,6 +135,7 @@ export const Lvl = {
     Door: e(r["Door"], { x: 56, y: 112, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }),
     WaterDripSource: e(r["WaterDripSource"], { x: 300, y: 264, values: { delayMin: 1000, delayMax: 6000, name: "", depth: 0 } }),
     Sign: e(r["Sign"], { x: 140, y: 144, values: { title: "Welcome", message: "If you are here to pick up, please wait here. Otherwise please make yourself at home.", name: "", depth: 0 } }),
+    IguanaNpc: e(r["IguanaNpc"], { x: 57, y: 368, flippedX: true, values: { looksName: "", name: "", depth: 0 } }),
     Player: e(r["Player"], { x: 112, y: 144, flippedX: false, values: { name: "", depth: 0 } }),
   })),
   Test: l({ width: 456, height: 256, backgroundTint: 0xecd769 }, () => ({

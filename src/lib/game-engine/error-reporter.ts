@@ -30,6 +30,10 @@ class ErrorReporterImpl {
     reportSubsystemError(subsystem: string, error: any, ...context: any[]) {
         this.announcer.onSubsystemError(subsystem, error, ...context);
     }
+
+    reportDevOnlyState(error: any, ...context: any[]) {
+        this.announcer.onSubsystemError('Dev-Only State', error, ...context);
+    }
 }
 
 export const ErrorReporter = new ErrorReporterImpl();

@@ -5,6 +5,7 @@ import { AsshatMicrotaskFactory } from "./promise/asshat-microtasks";
 import { IAsshatTicker } from "./asshat-ticker";
 import { ErrorReporter } from "./error-reporter";
 import { DexiePromise } from "../zone/dexie/promise";
+import { EngineConfig } from "./engine-config";
 
 interface AsshatZoneContext {
     cancellationToken: CancellationToken;
@@ -18,6 +19,16 @@ class AsshatZoneImpl extends Zone<AsshatZoneContext> {
         super('AsshatZone');
         console.log(...Logging.componentArgs(this));
     }
+
+    get context() {
+        const context = super.context;
+        if (!context) {
+            ErrorReporter.reportDevOnlyState(new Error('AsshatZone.context was falsy, using EngineConfig.showDefaultStage'));
+            return EngineConfig.showDefaultStage as any;
+        }
+
+        return context;
+      }
 
     async run(fn: () => unknown, context: AsshatZoneContext): Promise<void> {
         try {

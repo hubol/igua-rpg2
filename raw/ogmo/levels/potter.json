@@ -69,6 +69,17 @@
           "originX": 0,
           "originY": 16,
           "values": {"title": "Welcome", "message": "If you are here to pick up, please wait here. Otherwise please make yourself at home.", "name": "", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 3,
+          "_eid": "90326278",
+          "x": 57,
+          "y": 368,
+          "originX": 12,
+          "originY": 37,
+          "flippedX": true,
+          "values": {"looksName": "", "name": "", "depth": 0}
         }
       ]
     },

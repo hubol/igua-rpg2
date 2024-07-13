@@ -1,0 +1,19 @@
+import { ErrorReporter } from "../../lib/game-engine/error-reporter";
+import { NpcLooks } from "../iguana/npc-looks";
+import { objIguanaLocomotive } from "./obj-iguana-locomotive";
+
+interface ObjIguanaNpcArgs {
+    looksName: string;
+}
+
+export function objIguanaNpc({ looksName }: ObjIguanaNpcArgs) {
+    let looks = NpcLooks[looksName]
+    if (!looks) {
+        // TODO make special invalid configuration error (see objDoor)
+        ErrorReporter.reportSubsystemError('objIguanaNpc', `NpcLooks "${looksName}" does not exist!`);
+        // TODO Special missingno?
+        looks = NpcLooks.MintyJourney;
+    }
+
+    return objIguanaLocomotive(looks);
+}
