@@ -502,7 +502,51 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true}
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true}
+    },
+    {
+      "exportID": "90326278",
+      "name": "IguanaNpc",
+      "limit": -1,
+      "size": {"x": 33, "y": 39},
+      "origin": {"x": 12, "y": 37},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": true,
+      "canFlipY": false,
+      "flipOnlyScales": true,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "looksName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/npc.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAnCAMAAAC2Y9FAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAhUExURY69k3ikfHXS2hJJShpxc3QA+f////LBXNaSBQQWFwAAABbEpqQAAAALdFJOU/////////////8ASk8B8gAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAN1JREFUOE/d0ksSgzAMA9A0hphy/wNXkRXCJ7DodFUtTLHeDCVDWsdJqTU3AuBfRAWNDEUAkS9FkJd+x+UciiBDkZkXgpuBiP5BqKfIeSBUZ7MYt8IQDooJifoAQhhEBRuRmOdSSsa6lCTQyEC09lmwc06JDIEJkTfhfiQt6/aUs5g1JMwA3Pl27BG0FYTAvotOCCi43wAiUnsKrTswNi04Ma13URfBqWu9i7rIj8Se4AM2W6JSqujvWT9xWy6inxXFMhbuLB4FSRVncxVTmt7LWzUS/9Qn57qCo1jXD1EhIg/U4OGEAAAAAElFTkSuQmCC"
     }
   ],
   "tilesets": []
