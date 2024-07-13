@@ -7,7 +7,7 @@ import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnPhysics } from "../mixins/mxn-physics";
 import { RpgPlayer } from "../rpg/rpg-player";
 
-const LocomotiveIguanaConsts = {
+const IguanaLocomotiveConsts = {
     WalkingAcceleration: 0.3,
     WalkingDeceleration: 0.2,
     WalkingTopSpeed: 2.5,
@@ -26,7 +26,7 @@ const DeceleratingDistanceAtTopSpeed = (function () {
                 while (speed > 0) {
                     if (speed !== absSpeed)
                         deceleratingDistance += speed;
-                    speed -= LocomotiveIguanaConsts.WalkingDeceleration;
+                    speed -= IguanaLocomotiveConsts.WalkingDeceleration;
                 }
 
                 return speedToDecelerationDistance[key] = deceleratingDistance;
@@ -103,12 +103,12 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
     }
 
     const puppet = objIguanaPuppet(looks)
-        .mixin(mxnPhysics, { gravity: LocomotiveIguanaConsts.Gravity, physicsRadius: 7, physicsOffset: [0, -9], debug: false, onMove: (event) => {
+        .mixin(mxnPhysics, { gravity: IguanaLocomotiveConsts.Gravity, physicsRadius: 7, physicsOffset: [0, -9], debug: false, onMove: (event) => {
             if (event.hitGround && !event.previousOnGround && event.previousSpeed.y > 1.2)
                 puppet.landingFrames = 10;
         } })
         .merge({
-            walkingTopSpeed: LocomotiveIguanaConsts.WalkingTopSpeed,
+            walkingTopSpeed: IguanaLocomotiveConsts.WalkingTopSpeed,
             isDucking: false,
             isMovingLeft: false,
             isMovingRight: false,
@@ -120,12 +120,12 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
         })
         .step(() => {
             if ((puppet.isMovingLeft && puppet.isMovingRight) || (!puppet.isMovingLeft && !puppet.isMovingRight) || puppet.isDucking) {
-                puppet.speed.x = approachLinear(puppet.speed.x, 0, LocomotiveIguanaConsts.WalkingDeceleration);
+                puppet.speed.x = approachLinear(puppet.speed.x, 0, IguanaLocomotiveConsts.WalkingDeceleration);
             }
             else if (puppet.isMovingLeft)
-                puppet.speed.x = Math.max(puppet.speed.x - LocomotiveIguanaConsts.WalkingDeceleration, -RpgPlayer.WalkingTopSpeed);
+                puppet.speed.x = Math.max(puppet.speed.x - IguanaLocomotiveConsts.WalkingDeceleration, -RpgPlayer.WalkingTopSpeed);
             else if (puppet.isMovingRight)
-                puppet.speed.x = Math.min(puppet.speed.x + LocomotiveIguanaConsts.WalkingDeceleration, RpgPlayer.WalkingTopSpeed);
+                puppet.speed.x = Math.min(puppet.speed.x + IguanaLocomotiveConsts.WalkingDeceleration, RpgPlayer.WalkingTopSpeed);
 
             puppet.isAirborne = !puppet.isOnGround;
 
