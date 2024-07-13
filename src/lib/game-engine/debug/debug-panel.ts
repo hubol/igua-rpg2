@@ -260,7 +260,7 @@ const getExtendedPropertyKeysString = (() => {
         "_resolution", "_autoResolution", "_textureCache",
         // Asshat
         "_ticker", "cancellationToken", "_collisionShape", "_collisionShapeDisplayObjects",
-        "Name", "Stack",
+        "Name", "Stack", "_cancellationToken",
     ]);
 
     return (obj: DisplayObject) => {

@@ -1,5 +1,6 @@
 import { AsshatMicrotask, AsshatMicrotasks } from "./promise/asshat-microtasks";
 import { ErrorReporter } from "./error-reporter";
+import { ICancellationToken } from "../promise/cancellation-token";
 
 export class EscapeTickerAndExecute {
     constructor(readonly execute: () => void) { }
@@ -9,9 +10,19 @@ export type AsshatTickerFn = ((...params: any[]) => any) & { _removed?: boolean 
 
 export interface IAsshatTicker {
     doNextUpdate: boolean;
-    add(fn: AsshatTickerFn, order: number): void;
+    add(fn: AsshatTaskFn, context: AsshatTaskContext, order: number): void;
     addMicrotask(task: AsshatMicrotask): void;
-    remove(fn: AsshatTickerFn): void;
+}
+
+type AsshatTaskFn = (...params: any[]) => any;
+
+export interface AsshatTaskContext {
+    cancellationToken: ICancellationToken;
+}
+
+interface AsshatTask {
+    fn: AsshatTaskFn;
+    context: AsshatTaskContext;
 }
 
 export class AsshatTicker implements IAsshatTicker {
@@ -19,16 +30,14 @@ export class AsshatTicker implements IAsshatTicker {
     doNextUpdate = true;
 
     private readonly _orders: number[] = [];
-    private readonly _callbacks: Record<number, AsshatTickerFn[]> = {};
+    private readonly _tasks: Record<number, AsshatTask[]> = {};
     private readonly _microtasks = new AsshatMicrotasks();
 
-    add(fn: AsshatTickerFn, order: number) {
-        if (fn._removed) {
-            ErrorReporter.reportSubsystemError('AsshatTicker.add', 'Adding an already-removed AsshatTickerFn. Did you pass a named function reference directly?', { fn ,order });
-        }
+    add(fn: AsshatTaskFn, context: AsshatTaskContext, order: number) {
+        const task = { fn, context };
 
-        if (!this._callbacks[order]) {
-            this._callbacks[order] = [fn];
+        if (!this._tasks[order]) {
+            this._tasks[order] = [task];
 
             // TODO could be binary search if necessary
             for (let i = 0; i < this._orders.length; i++) {
@@ -41,7 +50,7 @@ export class AsshatTicker implements IAsshatTicker {
             this._orders.push(order);
         }
         else 
-            this._callbacks[order].push(fn);
+            this._tasks[order].push(task);
     }
 
     addMicrotask(task: AsshatMicrotask) {
@@ -50,10 +59,6 @@ export class AsshatTicker implements IAsshatTicker {
 
     cancelMicrotasks() {
         this._microtasks.cancel();
-    }
-
-    remove(fn: AsshatTickerFn) {
-        fn._removed = true;
     }
 
     tick() {
@@ -82,33 +87,33 @@ export class AsshatTicker implements IAsshatTicker {
             let i = 0;
             let shift = 0;
 
-            const callbacks = this._callbacks[order];
+            const tasks = this._tasks[order];
 
-            while (i < callbacks.length) {
-                const callback = callbacks[i];
+            while (i < tasks.length) {
+                const task = tasks[i];
 
-                if (callback._removed) {
+                if (task.context.cancellationToken.isCancelled) {
                     shift += 1;
                     i += 1;
                     continue;
                 }
 
                 try {
-                    callback();
+                    task.fn();
                 }
                 catch (e) {
                     if (e instanceof EscapeTickerAndExecute)
                         throw e;
-                    ErrorReporter.reportSubsystemError('AsshatTicker.tickImpl', e, callback);
+                    ErrorReporter.reportSubsystemError('AsshatTicker.tickImpl', e, task);
                 }
 
                 if (shift)
-                    callbacks[i - shift] = callback;
+                    tasks[i - shift] = task;
                 i += 1;
             }
 
             if (shift)
-                callbacks.length -= shift;
+                tasks.length -= shift;
         }
     }
 }

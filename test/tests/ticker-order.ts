@@ -1,5 +1,5 @@
-import { AsshatTicker } from "../../src/lib/game-engine/asshat-ticker";
-import { Undefined } from "../../src/lib/types/undefined";
+import { AsshatTaskContext, AsshatTicker } from "../../src/lib/game-engine/asshat-ticker";
+import { CancellationToken } from "../../src/lib/promise/cancellation-token";
 import { Assert } from "../lib/assert";
 
 export function tickerOrderWorksAsExpected() {
@@ -7,9 +7,11 @@ export function tickerOrderWorksAsExpected() {
 
     const result: number[] = [];
 
-    ticker.add(() => result.push(1), 1);
-    ticker.add(() => result.push(-1), -1);
-    ticker.add(() => result.push(0), 0);
+    const context: AsshatTaskContext = { cancellationToken: new CancellationToken() };
+
+    ticker.add(() => result.push(1), context, 1);
+    ticker.add(() => result.push(-1), context, -1);
+    ticker.add(() => result.push(0), context, 0);
 
     ticker.tick();
 

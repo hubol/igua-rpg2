@@ -18,16 +18,13 @@ Object.defineProperties(DisplayObject.prototype, {
             if (asyncFn.length)
                 asyncFn = asyncFn.bind(null, this);
 
-            if (!this.cancellationToken)
-                this.cancellationToken = new CancellationToken();
+            this.cancellationToken;
 
             // // TODO maybe instead of implicitly waiting on parent, wait on ticker
             if (this.parent)
                 AsshatZone.run(asyncFn, this);
             else
                 this.on('added', () => AsshatZone.run(asyncFn, this));
-            
-            this.on('destroyed', () => this.cancellationToken.cancel());
 
             return this;
         },

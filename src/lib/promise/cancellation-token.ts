@@ -1,15 +1,21 @@
 let _counter = 0;
 
-export class CancellationToken {
-    private _isCancelled = false;
+export interface ICancellationToken {
+    readonly isCancelled: boolean;
+    cancel(): void;
+    rejectIfCancelled(reject: (reason?: any) => void): boolean;
+}
+
+export class CancellationToken implements ICancellationToken {
+    isCancelled = false;
     private readonly _uid = _counter++;
 
     cancel() {
-        this._isCancelled = true;
+        this.isCancelled = true;
     }
 
     rejectIfCancelled(reject: (reason?: any) => void) {
-        if (this._isCancelled) {
+        if (this.isCancelled) {
             reject(new CancellationError(this));
             return true;
         }

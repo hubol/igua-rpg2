@@ -1,7 +1,7 @@
 import { AsshatMicrotask } from "../game-engine/promise/asshat-microtasks";
-import { AsshatTicker, AsshatTickerFn, IAsshatTicker } from "../game-engine/asshat-ticker";
+import { AsshatTaskContext, AsshatTicker, AsshatTickerFn, IAsshatTicker } from "../game-engine/asshat-ticker";
 
-type QueuedCall = { fn: 'add'; arg1: AsshatTickerFn; arg2: number; } | { fn: 'remove'; arg1: AsshatTickerFn } | { fn: 'addMicrotask', arg1: AsshatMicrotask };
+type QueuedCall = { fn: 'add'; arg1: AsshatTickerFn; arg2: AsshatTaskContext; arg3: number; } | { fn: 'addMicrotask', arg1: AsshatMicrotask };
 
 export class LazyTicker implements IAsshatTicker {
     readonly _isLazy = true;
@@ -16,16 +16,10 @@ export class LazyTicker implements IAsshatTicker {
         this._receivers = [ receiver ];
     }
 
-    add(arg1: AsshatTickerFn, arg2: number) {
+    add(arg1: AsshatTickerFn, arg2: AsshatTaskContext, arg3: number) {
         if (this._resolved)
             throw new InvalidLazyTickerAccess(`Attempt to enqueue add() call on already-resolved LazyTicker`, this);
-        this._queuedCalls.push({ fn: 'add', arg1, arg2 });
-    }
-
-    remove(arg1: AsshatTickerFn) {
-        if (this._resolved)
-            throw new InvalidLazyTickerAccess(`Attempt to enqueue remove() call on already-resolved LazyTicker`, this);
-        this._queuedCalls.push({ fn: 'remove', arg1 });
+        this._queuedCalls.push({ fn: 'add', arg1, arg2, arg3 });
     }
 
     addMicrotask(arg1: AsshatMicrotask): void {
@@ -45,7 +39,7 @@ export class LazyTicker implements IAsshatTicker {
 
         for (let i = 0; i < this._queuedCalls.length; i++) {
             const call = this._queuedCalls[i];
-            ticker[call.fn](call.arg1 as any, (call as any).arg2);
+            ticker[call.fn](call.arg1 as any, (call as any).arg2, (call as any).arg3);
         }
 
         for (let i = 0; i < this._receivers.length; i++) {

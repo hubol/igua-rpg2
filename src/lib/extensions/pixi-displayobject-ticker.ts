@@ -1,4 +1,5 @@
 import { Container, DisplayObject } from "pixi.js";
+import { CancellationToken, ICancellationToken } from "../promise/cancellation-token";
 import { AsshatTicker, IAsshatTicker } from "../game-engine/asshat-ticker";
 import { LazyTicker, isLazyTicker } from "./lazy-ticker";
 
@@ -10,6 +11,11 @@ declare module "pixi.js" {
 }
 
 interface DisplayObjectPrivate {
+    parent: DisplayObjectPrivate;
+
+    cancellationToken: ICancellationToken;
+    _cancellationToken?: ICancellationToken;
+
     _ticker?: IAsshatTicker;
     _receiveResolvedTicker(ticker: AsshatTicker): void;
 }
@@ -73,12 +79,28 @@ Object.defineProperties(DisplayObject.prototype, {
         },
         configurable: true,
     },
+    cancellationToken: {
+        get: function (this: DisplayObject & DisplayObjectPrivate) {
+            if (!this._cancellationToken) {
+                this._cancellationToken = new CancellationToken();
+                
+                if (this.destroyed)
+                    this._cancellationToken!.cancel();
+                else
+                    this.on('destroyed', () => this._cancellationToken!.cancel());
+            }
+
+            return this._cancellationToken;
+        }
+    },
     step: {
-        value: function (this: DisplayObject, stepFn: (self?: any) => unknown, order = 0) {
+        value: function (this: DisplayObject & DisplayObjectPrivate, stepFn: (self?: any) => unknown, order = 0) {
             if (stepFn.length)
                 stepFn = stepFn.bind(null, this);
-            this.ticker.add(stepFn, order);
-            this.once('destroyed', () => this.ticker.remove(stepFn));
+
+            this.cancellationToken;
+
+            this.ticker.add(stepFn, this, order);
             return this;
         },
         configurable: true,

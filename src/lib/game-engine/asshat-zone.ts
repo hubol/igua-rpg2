@@ -22,7 +22,7 @@ class AsshatZoneImpl extends Zone<AsshatZoneContext> {
     async run(fn: () => unknown, context: AsshatZoneContext): Promise<void> {
         try {
             await new DexiePromise((resolve, reject) => {
-                const microtask = AsshatMicrotaskFactory.create(alwaysPredicate, context.cancellationToken, resolve as any, reject);
+                const microtask = AsshatMicrotaskFactory.create(alwaysPredicate, context, resolve as any, reject);
                 context.ticker.addMicrotask(microtask);
             });
             await super.run(fn, context);

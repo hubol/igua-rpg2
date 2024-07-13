@@ -21,8 +21,8 @@ export class AsshatMicrotasks {
     cancel() {
         while (this._tasks.length) {
             const task = this._tasks.pop()!;
-            task.cancellationToken.cancel();
-            task.cancellationToken.rejectIfCancelled(task.reject);
+            task.context.cancellationToken.cancel();
+            task.context.cancellationToken.rejectIfCancelled(task.reject);
             free(task);
         }
     }
@@ -33,7 +33,7 @@ export class AsshatMicrotasks {
         while (i < this._tasks.length) {
             const task = this._tasks[i];
 
-            if (task.cancellationToken.rejectIfCancelled(task.reject)) {
+            if (task.context.cancellationToken.rejectIfCancelled(task.reject)) {
                 free(task);
                 shift += 1;
                 i += 1;
@@ -62,7 +62,7 @@ export class AsshatMicrotasks {
         while (i < this._tasks.length) {
             const task = this._tasks[i];
 
-            if (task.cancellationToken.rejectIfCancelled(task.reject)) {
+            if (task.context.cancellationToken.rejectIfCancelled(task.reject)) {
                 free(task);
                 shift += 1;
                 i += 1;
@@ -91,10 +91,14 @@ interface AsshatMicrotaskInternal extends AsshatMicrotask {
     _predicatePassed?: boolean;
 }
 
+interface AsshatMicrotaskContext {
+    cancellationToken: CancellationToken;
+}
+
 export interface AsshatMicrotask {
     readonly __t: unique symbol;
     predicate: () => boolean;
-    cancellationToken: CancellationToken;
+    context: AsshatMicrotaskContext;
     resolve: () => void;
     reject: (reason: any) => void;
 }
@@ -103,7 +107,7 @@ function free(task: Partial<AsshatMicrotaskInternal>) {
     if (freeAsshatMicrotasks.length >= 64)
         return;
     delete task.predicate;
-    delete task.cancellationToken;
+    delete task.context;
     delete task.resolve;
     delete task.reject;
     delete task._predicatePassed;
@@ -113,16 +117,16 @@ function free(task: Partial<AsshatMicrotaskInternal>) {
 const freeAsshatMicrotasks: Partial<AsshatMicrotask>[] = [];
 
 export const AsshatMicrotaskFactory = {
-    create(predicate: () => boolean, cancellationToken: CancellationToken, resolve: () => void, reject: (reason: any) => void): AsshatMicrotask {
+    create(predicate: () => boolean, context: AsshatMicrotaskContext, resolve: () => void, reject: (reason: any) => void): AsshatMicrotask {
         if (freeAsshatMicrotasks.length > 0) {
             const task = freeAsshatMicrotasks.pop()! as AsshatMicrotask;
             task.predicate = predicate;
-            task.cancellationToken = cancellationToken;
+            task.context = context;
             task.resolve = resolve;
             task.reject = reject;
             return task;
         }
 
-        return { predicate, cancellationToken, resolve, reject, } as AsshatMicrotask;
+        return { predicate, context, resolve, reject, } as AsshatMicrotask;
     }
 }
