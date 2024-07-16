@@ -1,6 +1,5 @@
 import { BitmapText, Container, DisplayObject, Graphics, ILineStyleOptions, Rectangle, Sprite } from "pixi.js";
 import { AdjustColor } from "../../pixi/adjust-color";
-import { Logging } from "../../logging";
 import { container } from "../../pixi/container";
 import { Undefined } from "../../types/undefined";
 import { TickerContainer } from "../ticker-container";
@@ -58,8 +57,6 @@ function objDisplayObjectMonitor() {
 
 let displayObjectMonitor: ReturnType<typeof objDisplayObjectMonitor>;
 
-let logObjIndex = 0;
-
 const displayObjectComponents = new WeakMap<DisplayObject, DisplayObjectComponent>();
 
 class DisplayObjectComponent {
@@ -107,15 +104,7 @@ class DisplayObjectComponent {
 
         const logObj = this.dom("button", undefined, this._buttonsEl);
         logObj.textContent = "Log";
-        logObj.onclick = () => {
-            while (window['obj' + logObjIndex]) {
-                logObjIndex += 1;
-            }
-
-            const key = 'obj' + logObjIndex;
-            window[key] = obj;
-            console.log(...Logging.componentArgs(key, obj));
-        }
+        logObj.onclick = () => obj.log();
 
         obj.once('destroyed', () => displayObjectComponents.delete(obj));
         obj.on('childAdded', () => this.update());

@@ -3,10 +3,12 @@ import { EngineConfig } from "../game-engine/engine-config";
 import { Pojo } from "../types/pojo";
 import { merge } from "../object/merge";
 import { VectorSimple } from "../math/vector-type";
+import { Logging } from "../logging";
 
 declare module "pixi.js" {
     interface DisplayObject {
         named(name: string): this;
+        log(key?: string): this;
         
         scaled(vector: VectorSimple): this;
         scaled(scaleX: number, scaleY: number): this;
@@ -24,6 +26,7 @@ declare module "pixi.js" {
     }
 }
 
+let logObjIndex = 0;
 const r = new Rectangle();
 
 Object.defineProperties(DisplayObject.prototype, {
@@ -32,6 +35,22 @@ Object.defineProperties(DisplayObject.prototype, {
             this.name = name;
             return this;
         },
+    },
+    log: {
+        value: function (this: DisplayObject, key?: string) {
+            if (!key) {
+                while (window['obj' + logObjIndex]) {
+                    logObjIndex += 1;
+                }
+    
+                key = 'obj' + logObjIndex;
+            }
+            
+            window[key] = this;
+            console.log(...Logging.componentArgs(key, this));
+
+            return this;
+        }
     },
     scaled: {
         value: function (this: Container, scaleX_vector: number | VectorSimple, scaleY?: number) {
