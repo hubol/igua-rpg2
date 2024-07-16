@@ -25,6 +25,7 @@ import { Environment } from "../../../lib/environment";
 import { Toast } from "../../../lib/game-engine/toast";
 import { merge } from "../../../lib/object/merge";
 import { ClipboardPojo } from "../../../lib/browser/clipboard-pojo";
+import { clone } from "../../../lib/object/clone";
 
 function context() {
     let looks = getDefaultLooks();
@@ -101,10 +102,10 @@ function createConnectedInput(looks: IguanaLooks.Serializable) {
 
 export const UiIguanaDesignerContext = new SceneLocal(context, 'UiIguanaDesignerContext');
 
-export function objUiIguanaDesignerRoot(looks = getDefaultLooks()) {
+export function objUiIguanaDesignerRoot(looks?: IguanaLooks.Serializable) {
     const context = UiIguanaDesignerContext.value;
 
-    context.looks = looks;
+    context.looks = looks ? clone(looks) : getDefaultLooks();
 
     const c = container();
 

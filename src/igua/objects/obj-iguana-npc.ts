@@ -1,5 +1,6 @@
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { NpcLooks } from "../iguana/npc-looks";
+import { mxnIguanaEditable } from "../mixins/mxn-iguana-editable";
 import { objIguanaLocomotive } from "./obj-iguana-locomotive";
 
 interface ObjIguanaNpcArgs {
@@ -15,5 +16,6 @@ export function objIguanaNpc({ looksName }: ObjIguanaNpcArgs) {
         looks = NpcLooks.MintyJourney;
     }
 
-    return objIguanaLocomotive(looks);
+    return objIguanaLocomotive(looks)
+        .mixin(mxnIguanaEditable, looks);
 }

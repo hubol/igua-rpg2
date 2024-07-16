@@ -153,3 +153,5 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
 
     return puppet;
 }
+
+export type ObjIguanaLocomotive = ReturnType<typeof objIguanaLocomotive>;
