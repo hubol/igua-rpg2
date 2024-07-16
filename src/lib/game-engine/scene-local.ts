@@ -18,4 +18,10 @@ export class SceneLocal<TValue> {
 
         return locals[this._uniqueKey] = this._factory();
     }
+
+    destroy() {
+        const sceneStack = EngineConfig.sceneStack;
+        const locals = sceneStack.locals;
+        delete locals[this._uniqueKey];
+    }
 }
