@@ -14,7 +14,11 @@ const IguanaLocomotiveConsts = {
 };
 
 function getDeceleratingDistance(absSpeed: number, deceleration: number) {
-    return absSpeed / deceleration * absSpeed / 2;
+    const count = absSpeed / deceleration + 1;
+    const countCeil = Math.ceil(count);
+    const countError = countCeil - count;
+    const errorCorrection = -countError * deceleration;
+    return countCeil * (absSpeed + errorCorrection) / 2 - errorCorrection;
 }
 
 class WalkToAbortError extends AsshatPredicateRejectError {
