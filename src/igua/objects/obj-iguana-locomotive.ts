@@ -109,9 +109,9 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                 puppet.speed.x = approachLinear(puppet.speed.x, 0, IguanaLocomotiveConsts.WalkingDeceleration);
             }
             else if (puppet.isMovingLeft)
-                puppet.speed.x = Math.max(puppet.speed.x - IguanaLocomotiveConsts.WalkingDeceleration, -puppet.walkingTopSpeed);
+                puppet.speed.x = Math.max(puppet.speed.x - IguanaLocomotiveConsts.WalkingAcceleration, -puppet.walkingTopSpeed);
             else if (puppet.isMovingRight)
-                puppet.speed.x = Math.min(puppet.speed.x + IguanaLocomotiveConsts.WalkingDeceleration, puppet.walkingTopSpeed);
+                puppet.speed.x = Math.min(puppet.speed.x + IguanaLocomotiveConsts.WalkingAcceleration, puppet.walkingTopSpeed);
 
             puppet.isAirborne = !puppet.isOnGround;
 
@@ -123,7 +123,8 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             else if (puppet.gait === 0)
                 puppet.pedometer = 0;
 
-            puppet.gait = approachLinear(puppet.gait, Math.min(puppet.isAirborne ? 0 : Math.abs(puppet.speed.x), 1), 0.15);
+            const gaitFactor = Math.max(0, Math.abs(puppet.speed.x) - IguanaLocomotiveConsts.WalkingAcceleration);
+            puppet.gait = approachLinear(puppet.gait, Math.min(puppet.isAirborne ? 0 : gaitFactor, 1), 0.15);
 
             if (puppet.speed.x !== 0) {
                 lastNonZeroSpeedXSign = Math.sign(puppet.speed.x);
