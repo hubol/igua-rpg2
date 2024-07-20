@@ -53,6 +53,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
     let lastNonZeroSpeedXSign = 0;
 
     let currentWalkToTarget = Undefined<number>();
+    let hitWall = false;
 
     async function walkTo(x: number) {
         puppet.isDucking = false;
@@ -62,6 +63,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
 
         puppet.isBeingPiloted = true;
         currentWalkToTarget = x;
+        hitWall = false;
         const right = puppet.x < x;
 
         try {
@@ -73,7 +75,8 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                     assertWalkToAbortError(
                         currentWalkToTarget !== x
                         || !puppet.isMovingRight
-                        || !puppet.isBeingPiloted)
+                        || !puppet.isBeingPiloted
+                        || hitWall)
                     || puppet.x + puppet.estimatedDecelerationDeltaX >= x);
 
                 puppet.isMovingRight = false;
@@ -86,7 +89,8 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                     assertWalkToAbortError(
                         currentWalkToTarget !== x
                         || !puppet.isMovingLeft
-                        || !puppet.isBeingPiloted)
+                        || !puppet.isBeingPiloted
+                        || hitWall)
                     || puppet.x + puppet.estimatedDecelerationDeltaX <= x);
             }
         }
@@ -106,6 +110,8 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
         .mixin(mxnPhysics, { gravity: IguanaLocomotiveConsts.Gravity, physicsRadius: 7, physicsOffset: [0, -9], debug: false, onMove: (event) => {
             if (event.hitGround && !event.previousOnGround && event.previousSpeed.y > 1.2)
                 puppet.landingFrames = 10;
+            if (event.hitWall)
+                hitWall = true;
         } })
         .merge({
             walkingTopSpeed: IguanaLocomotiveConsts.WalkingTopSpeed,
