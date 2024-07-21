@@ -5,7 +5,7 @@ import { Undefined } from "../../types/undefined";
 import { TickerContainer } from "../ticker-container";
 import { createDebugKey } from "./debug-key";
 import { elDebugPanel } from "../elements/el-debug-panel";
-import { Collision } from "../../pixi/collision";
+import { _Internal_Collision } from "../../pixi/collision";
 
 export function createDebugPanel(root: Container) {
     if (displayObjectMonitor)
@@ -52,7 +52,7 @@ function objDisplayObjectMonitor() {
             .lineStyle(innerStyle)
             .beginFill(0x000000).drawRect(x, y, 1, 1);
 
-        const collisionRectangles = Collision.getCollisionRectangles(displayObject);
+        const collisionRectangles = _Internal_Collision.getCollisionRectangles(displayObject);
         if (!collisionRectangles)
             return;
         

@@ -155,7 +155,7 @@ function accumulateBoundRectanglesOrNotOverlapping(
 
 const singleItemArray: DisplayObject[] = [];
 
-export const Collision = {
+export const _Internal_Collision = {
     configureDisplayObject,
     displayObjectCollidesMany<TDisplayObject extends DisplayObject>(
             source: DisplayObject,
@@ -171,9 +171,6 @@ export const Collision = {
         singleItemArray[0] = target;
         return sourceCollidesWithTargets(source as Collideable, sourceOffset, singleItemArray as Collideable[], 0, result).collided;
     },
-    recycleRectangles() {
-        rectangleIndex = 0;
-    },
     getCollisionRectangles(source: DisplayObject) {
         const collideable = source as Collideable;
         if (!collideable._collisionShape)
@@ -183,6 +180,12 @@ export const Collision = {
         sourceCollidesWithTargets(collideable, vzero, singleItemArray as Collideable[], 0, result);
         return sourceBoundRectangles;
     }
+}
+
+export const Collision = {
+    recycleRectangles() {
+        rectangleIndex = 0;
+    },
 }
 
 const vzero = vnew();
