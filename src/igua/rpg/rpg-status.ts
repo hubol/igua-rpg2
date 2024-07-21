@@ -5,8 +5,9 @@ export namespace RpgStatus {
     
     export interface Model {
         health: number;
-        maxHealth: number;
+        healthMax: number;
         invulnerable: number;
+        invulnerableMax: number;
         poison: {
             level: number;
             value: number;
@@ -59,17 +60,14 @@ export namespace RpgStatus {
     
             effects.tookDamage(model.health, diff, kind);
     
-            // TODO
-            // Amount of invulnerability might be different
-            // from player to enemies
-            model.invulnerable = 60;
+            model.invulnerable = model.invulnerableMax;
         },
     
         heal(model: Model, effects: Effects, amount: number) {
             // TODO warn when amount is not an integer
 
             const previous = model.health;
-            model.health = Math.min(model.maxHealth, model.health + amount);
+            model.health = Math.min(model.healthMax, model.health + amount);
             const diff = model.health - previous;
     
             effects.healed(model.health, diff);

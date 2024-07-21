@@ -15,7 +15,8 @@ export const RpgPlayer = {
         set invulnerable(value) {
             RpgProgress.character.status.invulnverable = value;
         },
-        get maxHealth() {
+        invulnerableMax: 60,
+        get healthMax() {
             return 45 + RpgProgress.character.attributes.health * 5;
         },
         poison: {
