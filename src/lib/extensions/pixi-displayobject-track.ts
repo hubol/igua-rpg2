@@ -1,5 +1,5 @@
 import { DisplayObject } from "pixi.js";
-import { __InstancesInternalApi } from "../game-engine/instances";
+import { _Internal_Instances } from "../game-engine/instances";
 
 declare module "pixi.js" {
     interface DisplayObject {
@@ -11,7 +11,7 @@ Object.defineProperties(DisplayObject.prototype, {
     track: {
         value: function (this: DisplayObject, sourceFn: (...args: any[]) => any) {
             if (!this.destroyed) {
-                const trackedInstances = __InstancesInternalApi.TrackedInstancesSceneLocal.value;
+                const trackedInstances = _Internal_Instances.TrackedInstancesSceneLocal.value;
                 if (this.parent)
                     trackedInstances.add(sourceFn, this);
                 else

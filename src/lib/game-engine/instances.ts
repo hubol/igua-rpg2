@@ -4,10 +4,10 @@ import { SceneLocal } from "./scene-local";
 type Fn = (...args: any[]) => any;
 
 export function Instances<TFn extends Fn>(fn: TFn): ReturnType<TFn>[] {
-    return __InstancesInternalApi.TrackedInstancesSceneLocal.value.get(fn) as any;
+    return _Internal_Instances.TrackedInstancesSceneLocal.value.get(fn) as any;
 }
 
-export namespace __InstancesInternalApi {
+export namespace _Internal_Instances {
     export const TrackedInstancesSceneLocal = new SceneLocal(() => new TrackedInstances(), `TrackedInstances`);
 }
 
