@@ -8,6 +8,7 @@ import { Rng } from "../../lib/math/rng";
 import { Force } from "../../lib/types/force";
 import { Integer, Polar, Unit, ZeroOrGreater } from "../../lib/math/number-alias-types";
 import { vnew } from "../../lib/math/vector-type";
+import { CollisionShape } from "../../lib/pixi/collision";
 
 const r1 = new Rectangle();
 const r2 = new Rectangle();
@@ -151,6 +152,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     };
 
     const c = container(back, core, front)
+        .collisionShape(CollisionShape.DisplayObjects, [ head.crest, head.noggin, body.torso ])
         .merge({ head, body, feet })
         .merge({
             get facing() {

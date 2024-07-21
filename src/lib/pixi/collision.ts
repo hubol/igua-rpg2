@@ -173,8 +173,19 @@ export const Collision = {
     },
     recycleRectangles() {
         rectangleIndex = 0;
+    },
+    getCollisionRectangles(source: DisplayObject) {
+        const collideable = source as Collideable;
+        if (!collideable._collisionShape)
+            return null;
+        const result = clean(_buffer);
+        singleItemArray[0] = DebugCollideable;
+        sourceCollidesWithTargets(collideable, vzero, singleItemArray as Collideable[], 0, result);
+        return sourceBoundRectangles;
     }
 }
+
+const vzero = vnew();
 
 let rectangleIndex = 0;
 const rectangles: Rectangle[] = [];
@@ -187,3 +198,12 @@ function rnew() {
     rectangleIndex += 1;
     return rectangle;
 }
+
+const DebugCollideable: Collideable = (function () {
+    const getBoundsRectangle = new Rectangle(-100_000, -100_000, 0, 0);
+    return {
+        getBounds() {
+            return getBoundsRectangle;
+        }
+    } as any;
+})();

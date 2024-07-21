@@ -5,6 +5,7 @@ import { Undefined } from "../../types/undefined";
 import { TickerContainer } from "../ticker-container";
 import { createDebugKey } from "./debug-key";
 import { elDebugPanel } from "../elements/el-debug-panel";
+import { Collision } from "../../pixi/collision";
 
 export function createDebugPanel(root: Container) {
     if (displayObjectMonitor)
@@ -50,6 +51,16 @@ function objDisplayObjectMonitor() {
             .lineStyle(outerStyle).drawRect(r.x - 1, r.y - 1, r.width + 2, r.height + 2)
             .lineStyle(innerStyle)
             .beginFill(0x000000).drawRect(x, y, 1, 1);
+
+        const collisionRectangles = Collision.getCollisionRectangles(displayObject);
+        if (!collisionRectangles)
+            return;
+        
+        gfx.lineStyle(0).beginFill(0xff0000, 0.3);
+
+        for (const rectangle of collisionRectangles) {
+            gfx.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+        }
     }).show(c);
 
     return c;
