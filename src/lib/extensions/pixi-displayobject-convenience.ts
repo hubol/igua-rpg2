@@ -20,6 +20,8 @@ declare module "pixi.js" {
     }
 
     interface Container {
+        pivoted(vector: VectorSimple): this;
+        pivoted(x: number, y: number): this;
         sized(vector: VectorSimple): this;
         sized(width: number, height: number): this;
         removeAllChildren();
@@ -48,6 +50,16 @@ Object.defineProperties(DisplayObject.prototype, {
             
             window[key] = this;
             console.log(...Logging.componentArgs(key, this));
+
+            return this;
+        }
+    },
+    pivoted: {
+        value: function (this: Container, x_vector: number | VectorSimple, y?: number) {
+            if (y === undefined)
+                this.transform.pivot.set((<VectorSimple>x_vector).x, (<VectorSimple>x_vector).y)
+            else
+                this.transform.pivot.set(<number>x_vector, y);
 
             return this;
         }
