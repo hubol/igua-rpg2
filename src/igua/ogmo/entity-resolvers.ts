@@ -5,6 +5,7 @@ import { objIntelligenceBackground } from "../objects/obj-intelligence-backgroun
 import { createPlayerObj, playerObj } from "../objects/obj-player";
 import { objSign } from "../objects/obj-sign";
 import { objPipe, objPipeSlope, objSolidBlock, objSolidSlope } from "../objects/obj-terrain";
+import { objValuable } from "../objects/obj-valuable";
 import { objWaterDripSource } from "../objects/obj-water-drip-source";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { OgmoFactory } from "./factory";
@@ -27,6 +28,9 @@ export const OgmoEntityResolvers = {
         delete entity.flippedX;
         return obj;
     },
+    'ValuableGreen': () => objValuable('green'),
+    'ValuableOrange': () => objValuable('orange'),
+    'ValuableBlue': () => objValuable('blue'),
 } satisfies Record<string, (e: OgmoFactory.Entity) => unknown>
 
 function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?: string) {

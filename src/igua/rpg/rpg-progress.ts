@@ -2,6 +2,7 @@ import { getDefaultLooks } from "../iguana/get-default-looks";
 
 export const RpgProgress = {
     character: {
+        valuables: 100,
         status: {
             health: 50,
             invulnverable: 0,

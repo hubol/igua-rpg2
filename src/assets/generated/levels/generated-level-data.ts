@@ -136,6 +136,11 @@ export const Lvl = {
     WaterDripSource: e(r["WaterDripSource"], { x: 300, y: 264, values: { delayMin: 1000, delayMax: 6000, name: "", depth: 0 } }),
     Sign: e(r["Sign"], { x: 140, y: 144, values: { title: "Welcome", message: "If you are here to pick up, please wait here. Otherwise please make yourself at home.", name: "", depth: 0 } }),
     IguanaNpc: e(r["IguanaNpc"], { x: 57, y: 368, flippedX: true, values: { looksName: "", name: "", depth: 0 } }),
+    ValuableGreen: e(r["ValuableGreen"], { x: 72, y: 88, values: { name: "", depth: 0 } }),
+    ValuableGreen_1: e(r["ValuableGreen"], { x: 80, y: 96, values: { name: "", depth: 0 } }),
+    ValuableGreen_2: e(r["ValuableGreen"], { x: 64, y: 96, values: { name: "", depth: 0 } }),
+    ValuableOrange: e(r["ValuableOrange"], { x: 288, y: 122, values: { name: "", depth: 0 } }),
+    ValuableBlue: e(r["ValuableBlue"], { x: 311, y: 122, values: { name: "", depth: 0 } }),
     Player: e(r["Player"], { x: 112, y: 144, flippedX: false, values: { name: "", depth: 0 } }),
   })),
   Test: l({ width: 456, height: 256, backgroundTint: 0xecd769 }, () => ({

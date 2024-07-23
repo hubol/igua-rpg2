@@ -80,6 +80,56 @@
           "originY": 37,
           "flippedX": true,
           "values": {"looksName": "", "name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 4,
+          "_eid": "69755853",
+          "x": 72,
+          "y": 88,
+          "originX": 3,
+          "originY": 3,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 5,
+          "_eid": "69755853",
+          "x": 80,
+          "y": 96,
+          "originX": 3,
+          "originY": 3,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 6,
+          "_eid": "69755853",
+          "x": 64,
+          "y": 96,
+          "originX": 3,
+          "originY": 3,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableOrange",
+          "id": 7,
+          "_eid": "69757920",
+          "x": 288,
+          "y": 122,
+          "originX": 8,
+          "originY": 6,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableBlue",
+          "id": 8,
+          "_eid": "69755574",
+          "x": 311,
+          "y": 122,
+          "originX": 8,
+          "originY": 6,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
