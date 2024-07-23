@@ -25,16 +25,18 @@ export function objHud() {
         .step(self => {
             healthBarObj.width = RpgPlayer.Model.healthMax;
             let y = 7;
+            let lastVisibleObj: Container = healthBarObj;
             for (const statusObj of statusObjs) {
                 if (!statusObj.visible)
                     continue;
+                lastVisibleObj = statusObj;
                 y += 3
                 statusObj.y = y;
                 y += statusObj.height + (statusObj['advance'] ?? 0);
             }
             
             self.visible = !playerObj?.destroyed;
-            self.effectiveHeight = self.visible ? self.y + y : 0;
+            self.effectiveHeight = self.visible ? self.y + lastVisibleObj.y + lastVisibleObj.height : 0;
         });
 }
 
