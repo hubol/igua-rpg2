@@ -11,7 +11,7 @@ const Consts = {
     StatusTextTint: 0x00ff00,
 }
 
-function objHud() {
+export function objHud() {
     const healthBarObj = objHealthBar(RpgPlayer.Model.healthMax, 7, RpgPlayer.Model.health, RpgPlayer.Model.healthMax);
     const valuablesInfoObj = objValuablesInfo();
     const poisonBuildUpObj = objPoisonBuildUp();
@@ -21,7 +21,7 @@ function objHud() {
 
     return container(healthBarObj, ...statusObjs)
         .at(3, 3)
-        .merge({ healthBarObj })
+        .merge({ healthBarObj, effectiveHeight: 0 })
         .step(self => {
             healthBarObj.width = RpgPlayer.Model.healthMax;
             let y = 7;
@@ -34,8 +34,11 @@ function objHud() {
             }
             
             self.visible = !playerObj?.destroyed;
+            self.effectiveHeight = self.visible ? self.y + y : 0;
         });
 }
+
+export type ObjHud = ReturnType<typeof objHud>;
 
 function objValuablesInfo() {
     return objText.Large('You have 0 valuables', { tint: Consts.StatusTextTint })
@@ -82,10 +85,4 @@ function objPoisonBuildUp() {
             visibleSteps = value > 0 ? maxVisibleSteps : (visibleSteps - 1);
             self.visible = visibleSteps > 0;
         })
-}
-
-export let hudObj: ReturnType<typeof objHud>;
-
-export function createHudObj(hudLayer: Container) {
-    hudObj = objHud().show(hudLayer);
 }

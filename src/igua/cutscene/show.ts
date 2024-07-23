@@ -67,7 +67,7 @@ function objMessageBox(text: string) {
     text2.mask = mask2;
 
     const x = Math.round((renderer.width - width) / 2);
-    return c.at(x, x).show(layers.hud);
+    return c.at(x, layers.overlay.hud.effectiveHeight).show(layers.overlay.messages);
 }
 
 let instance: ReturnType<typeof objMessageBox> | undefined;

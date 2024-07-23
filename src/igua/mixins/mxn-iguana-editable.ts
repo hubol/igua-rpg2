@@ -15,7 +15,7 @@ export function mxnIguanaEditable(obj: ObjIguanaLocomotive, looks: IguanaLooks.S
                 UiIguanaDesignerContext.destroy();
                 
                 const designer = objUiIguanaDesignerRoot(looks);
-                designer.show(layers.hud);
+                designer.show(layers.overlay.dev);
                 await wait(() => DevKey.justWentDown('Escape'));
                 designer.destroy();
 

@@ -1,21 +1,17 @@
 import { Container } from "pixi.js";
 import { Logging } from "../../lib/logging";
-import { ObjSolidOverlay, objSolidOverlay } from "./scene/obj-solid-overlay";
-import { createHudObj } from "../objects/obj-hud";
+import { Overlay, objOverlay } from "../objects/obj-overlay";
 
 export class IguaLayers {
     readonly scene: Container;
-    readonly hud: Container;
-    readonly solidOverlay: Pick<ObjSolidOverlay, 'fadeIn' | 'fadeOut' | 'tint' | 'blendMode'>;
+    readonly overlay: Overlay;
 
     constructor(private readonly _root: Container) {
         this.scene = new Container().named("SceneStack");
-        this.hud = new Container().named("Hud");
-
-        createHudObj(this.hud);
+        const overlayObj = objOverlay().named("Overlay");
+        this.overlay = overlayObj;
         
-        _root.addChild(this.scene, this.hud);
-        this.solidOverlay = objSolidOverlay().show(_root);
+        _root.addChild(this.scene, overlayObj);
 
         console.log(...Logging.componentArgs(this));
     }

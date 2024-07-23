@@ -179,13 +179,13 @@ function objUiSavePage() {
         yesButton.canPress = false;
         Cutscene.play(async () => {
             await wait(() => puppet.atYesButton);
-            layers.solidOverlay.blendMode = BLEND_MODES.SUBTRACT;
-            await layers.solidOverlay.fadeIn(500);
+            layers.overlay.solid.blendMode = BLEND_MODES.SUBTRACT;
+            await layers.overlay.solid.fadeIn(500);
             const looks = UiIguanaDesignerContext.value.looks;
             RpgProgress.character.looks = looks;
             sceneStack.replace(PlayerTest, { useGameplay: false });
             page.destroy();
-            await layers.solidOverlay.fadeOut(500);
+            await layers.overlay.solid.fadeOut(500);
         });
     }, width).jiggle().center().at(gap, 160);
 
