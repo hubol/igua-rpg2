@@ -5,6 +5,7 @@ import { objHealthBar } from "./obj-health-bar";
 import { RpgPlayer } from "../rpg/rpg-player";
 import { objStatusBar } from "./obj-status-bar";
 import { playerObj } from "./obj-player";
+import { RpgProgress } from "../rpg/rpg-progress";
 
 const Consts = {
     StatusTextTint: 0x00ff00,
@@ -13,29 +14,37 @@ const Consts = {
 function objHud() {
     const x = 3;
     const healthBarObj = objHealthBar(RpgPlayer.Model.healthMax, 7, RpgPlayer.Model.health, RpgPlayer.Model.healthMax).at(x, 3);
+    const valuablesInfoObj = objValuablesInfo().at(x, 0);
     const poisonBuildUpObj = objPoisonBuildUp().at(x, 0);
     const poisonLevelObj = objPoisonLevel().at(x, 0);
 
-    const statusObjs = [ poisonLevelObj, poisonBuildUpObj ];
+    const statusObjs = [ valuablesInfoObj, poisonLevelObj, poisonBuildUpObj ];
 
     return container(healthBarObj, ...statusObjs)
         .merge({ healthBarObj })
         .step(self => {
             healthBarObj.width = RpgPlayer.Model.healthMax;
-            let y = 13;
+            let y = 10;
             for (const statusObj of statusObjs) {
                 if (!statusObj.visible)
                     continue;
+                y += 3
                 statusObj.y = y;
-                y += statusObj.height;
+                y += statusObj.height + (statusObj['advance'] ?? 0);
             }
             
             self.visible = !playerObj?.destroyed;
         });
 }
 
+function objValuablesInfo() {
+    return objText.Large('You have 0 valuables', { tint: Consts.StatusTextTint })
+        .step(text => text.text = RpgProgress.character.valuables === 1 ? 'You have 1 valuable' : `You have ${RpgProgress.character.valuables} valuables`)
+}
+
 function objPoisonLevel() {
     return objText.Large('You are poisoned', { tint: Consts.StatusTextTint })
+        .merge({ advance: -3 })
         .step(text => {
             const level = RpgPlayer.Model.poison.level;
             text.visible = level > 0;
