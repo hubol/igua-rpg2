@@ -12,19 +12,19 @@ const Consts = {
 }
 
 function objHud() {
-    const x = 3;
-    const healthBarObj = objHealthBar(RpgPlayer.Model.healthMax, 7, RpgPlayer.Model.health, RpgPlayer.Model.healthMax).at(x, 3);
-    const valuablesInfoObj = objValuablesInfo().at(x, 0);
-    const poisonBuildUpObj = objPoisonBuildUp().at(x, 0);
-    const poisonLevelObj = objPoisonLevel().at(x, 0);
+    const healthBarObj = objHealthBar(RpgPlayer.Model.healthMax, 7, RpgPlayer.Model.health, RpgPlayer.Model.healthMax);
+    const valuablesInfoObj = objValuablesInfo();
+    const poisonBuildUpObj = objPoisonBuildUp();
+    const poisonLevelObj = objPoisonLevel();
 
     const statusObjs = [ valuablesInfoObj, poisonLevelObj, poisonBuildUpObj ];
 
     return container(healthBarObj, ...statusObjs)
+        .at(3, 3)
         .merge({ healthBarObj })
         .step(self => {
             healthBarObj.width = RpgPlayer.Model.healthMax;
-            let y = 10;
+            let y = 7;
             for (const statusObj of statusObjs) {
                 if (!statusObj.visible)
                     continue;
