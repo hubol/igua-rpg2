@@ -130,6 +130,156 @@
           "originX": 8,
           "originY": 6,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableOrange",
+          "id": 9,
+          "_eid": "69757920",
+          "x": 272,
+          "y": 112,
+          "originX": 8,
+          "originY": 6,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableOrange",
+          "id": 10,
+          "_eid": "69757920",
+          "x": 328,
+          "y": 112,
+          "originX": 8,
+          "originY": 6,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableOrange",
+          "id": 11,
+          "_eid": "69757920",
+          "x": 362,
+          "y": 155,
+          "originX": 8,
+          "originY": 6,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableOrange",
+          "id": 12,
+          "_eid": "69757920",
+          "x": 373,
+          "y": 168,
+          "originX": 8,
+          "originY": 6,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableOrange",
+          "id": 13,
+          "_eid": "69757920",
+          "x": 362,
+          "y": 182,
+          "originX": 8,
+          "originY": 6,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableOrange",
+          "id": 14,
+          "_eid": "69757920",
+          "x": 373,
+          "y": 195,
+          "originX": 8,
+          "originY": 6,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 15,
+          "_eid": "69755853",
+          "x": 88,
+          "y": 88,
+          "originX": 3,
+          "originY": 3,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 16,
+          "_eid": "69755853",
+          "x": 96,
+          "y": 96,
+          "originX": 3,
+          "originY": 3,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 17,
+          "_eid": "69755853",
+          "x": 104,
+          "y": 88,
+          "originX": 3,
+          "originY": 3,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 18,
+          "_eid": "69755853",
+          "x": 112,
+          "y": 96,
+          "originX": 3,
+          "originY": 3,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 19,
+          "_eid": "69755853",
+          "x": 120,
+          "y": 88,
+          "originX": 3,
+          "originY": 3,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 20,
+          "_eid": "69755853",
+          "x": 104,
+          "y": 104,
+          "originX": 3,
+          "originY": 3,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 21,
+          "_eid": "69755853",
+          "x": 88,
+          "y": 104,
+          "originX": 3,
+          "originY": 3,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 22,
+          "_eid": "69755853",
+          "x": 72,
+          "y": 104,
+          "originX": 3,
+          "originY": 3,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 23,
+          "_eid": "69755853",
+          "x": 56,
+          "y": 104,
+          "originX": 3,
+          "originY": 3,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
