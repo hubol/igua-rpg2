@@ -41,7 +41,7 @@ function txs<T>(tx: (data: TxData) => T) {
       Foot: tx({ id: "Iguana.Foot", atlas: 0, x: 765, y: 31, width: 140, height: 12 }),
       Head: tx({ id: "Iguana.Head", atlas: 0, x: 807, y: 100, width: 18, height: 18 }),
       Horn: tx({ id: "Iguana.Horn", atlas: 0, x: 743, y: 67, width: 48, height: 8 }),
-      Mouth: tx({ id: "Iguana.Mouth", atlas: 0, x: 322, y: 83, width: 60, height: 8 }),
+      Mouth: tx({ id: "Iguana.Mouth", atlas: 0, x: 322, y: 83, width: 72, height: 8 }),
       Nails: tx({ id: "Iguana.Nails", atlas: 0, x: 992, y: 19, width: 30, height: 6 }),
       Pupil: tx({ id: "Iguana.Pupil", atlas: 0, x: 906, y: 56, width: 96, height: 8 }),
       Tail: tx({ id: "Iguana.Tail", atlas: 0, x: 765, y: 44, width: 140, height: 22 }),
@@ -70,7 +70,7 @@ function txs<T>(tx: (data: TxData) => T) {
     },
     Terrain: {
       Pipe: {
-        Gray: tx({ id: "Terrain.Pipe.Gray", atlas: 0, x: 1023, y: 19, width: 1, height: 9 }),
+        Gray: tx({ id: "Terrain.Pipe.Gray", atlas: 0, x: 395, y: 83, width: 1, height: 9 }),
       },
     },
     Ui: {
