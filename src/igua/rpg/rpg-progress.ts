@@ -1,24 +1,38 @@
+import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 
-export const RpgProgress = {
-    character: {
-        valuables: 100,
-        status: {
-            health: 50,
-            invulnverable: 0,
-            poison: {
-                level: 0,
-                value: 0,
+function getInitialRpgProgress() {
+    return {
+        character: {
+            valuables: 100,
+            status: {
+                health: 50,
+                invulnverable: 0,
+                poison: {
+                    level: 0,
+                    value: 0,
+                }
+            },
+            attributes: {
+                health: 1,
+                intelligence: 0,
+            },
+            looks: getDefaultLooks(),
+            position: {
+                sceneName: '',
+                checkpointName: '',
             }
         },
-        attributes: {
-            health: 1,
-            intelligence: 0,
+        flags: {
+            test: false,
         },
-        looks: getDefaultLooks(),
-        position: {
-            sceneName: '',
-            checkpointName: '',
+        uids: {
+            valuables: new Set<number>(),
         }
-    }
+    };
 }
+
+export const RpgProgress = getInitialRpgProgress();
+
+export type RpgProgressUids = keyof typeof RpgProgress['uids'];
+export type RpgProgressFlags = DeepKeyOf.Leaves<typeof RpgProgress['flags']>;
