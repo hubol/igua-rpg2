@@ -6,6 +6,7 @@ export namespace OgmoFactory {
     export interface Entity {
         x: number;
         y: number;
+        uid?: number;
         flippedX?: boolean;
         flippedY?: boolean;
         width?: number;

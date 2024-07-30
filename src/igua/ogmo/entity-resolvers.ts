@@ -28,9 +28,9 @@ export const OgmoEntityResolvers = {
         delete entity.flippedX;
         return obj;
     },
-    'ValuableGreen': () => objValuable('green'),
-    'ValuableOrange': () => objValuable('orange'),
-    'ValuableBlue': () => objValuable('blue'),
+    'ValuableGreen': ({ uid }) => objValuable('green', uid),
+    'ValuableOrange': ({ uid }) => objValuable('orange', uid),
+    'ValuableBlue': ({ uid }) => objValuable('blue', uid),
 } satisfies Record<string, (e: OgmoFactory.Entity) => unknown>
 
 function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?: string) {
