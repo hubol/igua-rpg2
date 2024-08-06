@@ -29,6 +29,10 @@ export const Lvl = {
     WaterDripSource_3: e(r["WaterDripSource"], { x: 848, y: 408, values: { delayMin: 0, delayMax: 1000, name: "", depth: 0 } }),
     WaterDripSource_4: e(r["WaterDripSource"], { x: 840, y: 408, values: { delayMin: 0, delayMax: 1000, name: "", depth: 0 } }),
     WaterDripSource_5: e(r["WaterDripSource"], { x: 952, y: 408, values: { delayMin: 0, delayMax: 1000, name: "", depth: 0 } }),
+    NpcSatisfier: e(r["IguanaNpc"], { x: 824, y: 472, flippedX: false, values: { looksName: "Satisfier", name: "NpcSatisfier", depth: 0 } }),
+    NpcGoldilocks: e(r["IguanaNpc"], { x: 944, y: 400, flippedX: true, values: { looksName: "Goldilocks", name: "NpcGoldilocks", depth: 0 } }),
+    ValuableOrange: e(r["ValuableOrange"], { x: 864, y: 456, uid: 172291941893700, values: { name: "", depth: 0 } }),
+    ValuableOrange_1: e(r["ValuableOrange"], { x: 904, y: 384, uid: 172291942149901, values: { name: "", depth: 0 } }),
     Player: e(r["Player"], { x: 936, y: 472, flippedX: false, values: { name: "", depth: 0 } }),
   })),
   Level2: l({ width: 256, height: 320, backgroundTint: 0xc0a311 }, () => ({

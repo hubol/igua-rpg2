@@ -109,6 +109,50 @@
           "originX": 2,
           "originY": 0,
           "values": {"delayMin": 0, "delayMax": 1000, "name": "", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 7,
+          "_eid": "90326278",
+          "x": 824,
+          "y": 472,
+          "originX": 12,
+          "originY": 37,
+          "flippedX": false,
+          "values": {"looksName": "Satisfier", "name": "NpcSatisfier", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 8,
+          "_eid": "90326278",
+          "x": 944,
+          "y": 400,
+          "originX": 12,
+          "originY": 37,
+          "flippedX": true,
+          "values": {"looksName": "Goldilocks", "name": "NpcGoldilocks", "depth": 0}
+        },
+        {
+          "name": "ValuableOrange",
+          "id": 9,
+          "_eid": "69757920",
+          "x": 864,
+          "y": 456,
+          "originX": 8,
+          "originY": 6,
+          "uid": 172291941893700,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableOrange",
+          "id": 10,
+          "_eid": "69757920",
+          "x": 904,
+          "y": 384,
+          "originX": 8,
+          "originY": 6,
+          "uid": 172291942149901,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
