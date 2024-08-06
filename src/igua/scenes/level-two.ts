@@ -2,6 +2,8 @@ import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { show } from "../cutscene/show";
 import { Input, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { objAngelBouncing } from "../objects/enemies/obj-angel-bouncing";
+import { playerObj } from "../objects/obj-player";
 import { RpgProgress } from "../rpg/rpg-progress";
 
 export function LevelTwo() {
@@ -14,5 +16,7 @@ export function LevelTwo() {
         await show("Go away!");
         await level.IguanaNpc.walkTo(level.IguanaNpc.x + 100);
     });
+
+    objAngelBouncing().at(playerObj).add(40, -16).show();
     // level.UpperDoor.locked = true;
 }
