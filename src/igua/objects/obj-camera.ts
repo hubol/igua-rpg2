@@ -7,7 +7,7 @@ export function objCamera() {
     return container().step(self => {
         // TODO camera behavior should be overrideable
         // e.g. there should be modes other than following the player
-        if (!playerObj?.destroyed)
+        if (playerObj && !playerObj.destroyed)
             self.at(playerObj).add(-128, -128);
 
         // TODO switch for this?
