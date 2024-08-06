@@ -132,7 +132,7 @@ export const Lvl = {
     StoneRockLargeShaded_4: d(Tx.Stone.RockLargeShaded, { x: 176, y: 32, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }),
     StoneRockLargeShaded_5: d(Tx.Stone.RockLargeShaded, { x: 152, y: 40, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }),
     MetalPipeDarkBroken: d(Tx.Metal.PipeDarkBroken, { x: 301, y: 260, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }),
-    Door: e(r["Door"], { x: 56, y: 112, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }),
+    Door: e(r["Door"], { x: 56, y: 112, values: { sceneName: "PlayerTest", checkpointName: "FromLevelTwo", name: "", depth: 0 } }),
     WaterDripSource: e(r["WaterDripSource"], { x: 300, y: 264, values: { delayMin: 1000, delayMax: 6000, name: "", depth: 0 } }),
     Sign: e(r["Sign"], { x: 140, y: 144, values: { title: "Welcome", message: "If you are here to pick up, please wait here. Otherwise please make yourself at home.", name: "", depth: 0 } }),
     IguanaNpc: e(r["IguanaNpc"], { x: 57, y: 368, flippedX: true, values: { looksName: "", name: "", depth: 0 } }),

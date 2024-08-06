@@ -48,7 +48,7 @@
           "y": 112,
           "originX": 0,
           "originY": 0,
-          "values": {"sceneName": "", "checkpointName": "", "name": "", "depth": 0}
+          "values": {"sceneName": "PlayerTest", "checkpointName": "FromLevelTwo", "name": "", "depth": 0}
         },
         {
           "name": "WaterDripSource",
