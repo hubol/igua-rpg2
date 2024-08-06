@@ -35,7 +35,10 @@ export function objHud() {
                 y += statusObj.height + (statusObj['advance'] ?? 0);
             }
             
-            self.visible = !playerObj?.destroyed;
+            if (!playerObj)
+                self.visible = false;
+            else
+                self.visible = !playerObj.destroyed;
             self.effectiveHeight = self.visible ? self.y + lastVisibleObj.y + lastVisibleObj.height : 0;
         });
 }
