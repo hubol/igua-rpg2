@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 456,
+  "width": 632,
   "height": 256,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 57,
+      "gridCellsX": 79,
       "gridCellsY": 32,
       "entities": [
         {
@@ -48,7 +48,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 57,
+      "gridCellsX": 79,
       "gridCellsY": 32,
       "entities": [
         {
@@ -70,7 +70,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 57,
+      "gridCellsX": 79,
       "gridCellsY": 32,
       "decals": [
         {
@@ -191,7 +191,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 57,
+      "gridCellsX": 79,
       "gridCellsY": 32,
       "entities": [
         {
@@ -439,6 +439,97 @@
           "originY": 0,
           "tint": "#d8795a",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 21,
+          "_eid": "93117141",
+          "x": 456,
+          "y": 0,
+          "width": 176,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#d8795a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 22,
+          "_eid": "93117141",
+          "x": 456,
+          "y": 208,
+          "width": 176,
+          "height": 48,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#d8795a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 23,
+          "_eid": "93117141",
+          "x": 616,
+          "y": 32,
+          "width": 16,
+          "height": 176,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#d8795a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 24,
+          "_eid": "95675713",
+          "x": 456,
+          "y": 176,
+          "width": 32,
+          "height": 32,
+          "flippedX": true,
+          "flippedY": false,
+          "tint": "#d8795a",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Slope",
+          "id": 25,
+          "_eid": "95675713",
+          "x": 456,
+          "y": 32,
+          "width": 32,
+          "height": 32,
+          "flippedX": true,
+          "flippedY": true,
+          "tint": "#d8795a",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Slope",
+          "id": 26,
+          "_eid": "95675713",
+          "x": 584,
+          "y": 176,
+          "width": 32,
+          "height": 32,
+          "flippedX": false,
+          "flippedY": false,
+          "tint": "#d8795a",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Slope",
+          "id": 27,
+          "_eid": "95675713",
+          "x": 584,
+          "y": 32,
+          "width": 32,
+          "height": 32,
+          "flippedX": false,
+          "flippedY": true,
+          "tint": "#d8795a",
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -449,7 +540,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 57,
+      "gridCellsX": 79,
       "gridCellsY": 32,
       "entities": []
     }

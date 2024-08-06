@@ -7,6 +7,30 @@ import { Tx } from "../../../assets/textures";
 const { createEntity: e, createDecal: d, createLevel: l } = OgmoFactory;
 
 export const Lvl = {
+  Forest: l({ width: 1296, height: 576, backgroundTint: 0x86bafe }, () => ({
+    Block: e(r["Block"], { x: 792, y: 472, width: 248, height: 104, values: { name: "", depth: 0, visible: true }, tint: 0x432f93 }),
+    Slope: e(r["Slope"], { x: 1040, y: 440, width: 32, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0 }, tint: 0x432f93 }),
+    Slope_1: e(r["Slope"], { x: 1040, y: 472, width: 32, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0 }, tint: 0x432f93 }),
+    Slope_2: e(r["Slope"], { x: 1072, y: 408, width: 32, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0 }, tint: 0x432f93 }),
+    Slope_3: e(r["Slope"], { x: 1072, y: 440, width: 32, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0 }, tint: 0x432f93 }),
+    Slope_4: e(r["Slope"], { x: 1104, y: 376, width: 32, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0 }, tint: 0x432f93 }),
+    Slope_5: e(r["Slope"], { x: 1104, y: 408, width: 32, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0 }, tint: 0x432f93 }),
+    Slope_6: e(r["Slope"], { x: 1136, y: 344, width: 32, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0 }, tint: 0x432f93 }),
+    Slope_7: e(r["Slope"], { x: 1136, y: 376, width: 32, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0 }, tint: 0x432f93 }),
+    Slope_8: e(r["Slope"], { x: 728, y: 504, width: 32, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0 }, tint: 0x432f93 }),
+    Slope_9: e(r["Slope"], { x: 728, y: 536, width: 32, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0 }, tint: 0x432f93 }),
+    Slope_10: e(r["Slope"], { x: 760, y: 472, width: 32, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0 }, tint: 0x432f93 }),
+    Slope_11: e(r["Slope"], { x: 760, y: 504, width: 32, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0 }, tint: 0x432f93 }),
+    Pipe: e(r["Pipe"], { x: 816, y: 400, width: 144, values: { name: "", depth: 0 } }),
+    Sign: e(r["Sign"], { x: 968, y: 472, values: { title: "Forest", message: "Welcome to the forbidden forest.", name: "", depth: 0 } }),
+    WaterDripSource: e(r["WaterDripSource"], { x: 912, y: 408, values: { delayMin: 0, delayMax: 1000, name: "", depth: 0 } }),
+    WaterDripSource_1: e(r["WaterDripSource"], { x: 896, y: 408, values: { delayMin: 0, delayMax: 1000, name: "", depth: 0 } }),
+    WaterDripSource_2: e(r["WaterDripSource"], { x: 888, y: 408, values: { delayMin: 0, delayMax: 1000, name: "", depth: 0 } }),
+    WaterDripSource_3: e(r["WaterDripSource"], { x: 848, y: 408, values: { delayMin: 0, delayMax: 1000, name: "", depth: 0 } }),
+    WaterDripSource_4: e(r["WaterDripSource"], { x: 840, y: 408, values: { delayMin: 0, delayMax: 1000, name: "", depth: 0 } }),
+    WaterDripSource_5: e(r["WaterDripSource"], { x: 952, y: 408, values: { delayMin: 0, delayMax: 1000, name: "", depth: 0 } }),
+    Player: e(r["Player"], { x: 936, y: 472, flippedX: false, values: { name: "", depth: 0 } }),
+  })),
   Level2: l({ width: 256, height: 320, backgroundTint: 0xc0a311 }, () => ({
     Block: e(r["Block"], { x: 0, y: 280, width: 256, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x631d1d }),
     Block_1: e(r["Block"], { x: 0, y: 0, width: 16, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x631d1d }),
@@ -158,7 +182,7 @@ export const Lvl = {
     ValuableGreen_11: e(r["ValuableGreen"], { x: 56, y: 104, uid: 172222919427218, values: { name: "", depth: 0 } }),
     Player: e(r["Player"], { x: 112, y: 144, flippedX: false, values: { name: "", depth: 0 } }),
   })),
-  Test: l({ width: 456, height: 256, backgroundTint: 0xecd769 }, () => ({
+  Test: l({ width: 632, height: 256, backgroundTint: 0xecd769 }, () => ({
     Block: e(r["Block"], { x: 32, y: 64, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xf56b3d }),
     Pipe: e(r["Pipe"], { x: 64, y: 64, width: 88, values: { name: "", depth: 0 } }),
     PipeSlope: e(r["PipeSlope"], { x: 152, y: 64, width: 56, height: 56, flippedX: true, values: { name: "", depth: 0 } }),
@@ -179,6 +203,13 @@ export const Lvl = {
     Slope_5: e(r["Slope"], { x: 136, y: 16, width: 16, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0 }, tint: 0xd8795a }),
     Slope_6: e(r["Slope"], { x: 168, y: 16, width: 16, height: 16, flippedX: true, flippedY: true, values: { name: "", depth: 0 }, tint: 0xd8795a }),
     Block_8: e(r["Block"], { x: 152, y: 16, width: 16, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xd8795a }),
+    Block_9: e(r["Block"], { x: 456, y: 0, width: 176, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0xd8795a }),
+    Block_10: e(r["Block"], { x: 456, y: 208, width: 176, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0xd8795a }),
+    Block_11: e(r["Block"], { x: 616, y: 32, width: 16, height: 176, values: { name: "", depth: 0, visible: true }, tint: 0xd8795a }),
+    Slope_7: e(r["Slope"], { x: 456, y: 176, width: 32, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0 }, tint: 0xd8795a }),
+    Slope_8: e(r["Slope"], { x: 456, y: 32, width: 32, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0 }, tint: 0xd8795a }),
+    Slope_9: e(r["Slope"], { x: 584, y: 176, width: 32, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0 }, tint: 0xd8795a }),
+    Slope_10: e(r["Slope"], { x: 584, y: 32, width: 32, height: 32, flippedX: false, flippedY: true, values: { name: "", depth: 0 }, tint: 0xd8795a }),
     asdf: d(Tx.LockedDoor, { x: 136, y: 136, scaleX: 1, scaleY: 1, rotation: 0.020627355569633583, originX: 0.5, originY: 0.5, tint: 0xffffff }),
     zzz: d(Tx.LockedDoor, { x: 176, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }),
     LockedDoor: d(Tx.LockedDoor, { x: 216, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }),
