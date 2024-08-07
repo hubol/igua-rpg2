@@ -5,36 +5,29 @@ import { VectorSimple, vnew } from "../../lib/math/vector-type";
 import { objValuableSparkle } from "./effects/obj-valuable-sparkle";
 import { Rng } from "../../lib/math/rng";
 import { mxnCollectible } from "../mixins/mxn-collectible";
-
-type ValuableType = 'green' | 'orange' | 'blue';
+import { RpgEconomy } from "../rpg/rpg-economy";
 
 interface ValuableConfig {
     texture: Texture;
-    value: number;
     sparkle: { offsets: VectorSimple[]; }
     // TODO sfx?!
 }
 
-// TODO note: values might come from NG+ levels
-// Or there may need to be more valuable types
-const valuableConfigs: Record<ValuableType, ValuableConfig> = {
+const valuableConfigs: Record<RpgEconomy.Currency.Type, ValuableConfig> = {
     green: {
         texture: Tx.Collectibles.ValuableGreen,
-        value: 1,
         sparkle: {
             offsets: [ vnew() ],
         }
     },
     orange: {
         texture: Tx.Collectibles.ValuableOrange,
-        value: 5,
         sparkle: {
             offsets: [ vnew(0, 3), vnew(-5, -4), vnew(4, -5) ],
         }
     },
     blue: {
         texture: Tx.Collectibles.ValuableBlue,
-        value: 15,
         sparkle: {
             offsets: [ vnew(0, 3), vnew(-4, -5), vnew(5, -4) ],
         }
@@ -42,7 +35,7 @@ const valuableConfigs: Record<ValuableType, ValuableConfig> = {
 }
 
 // TODO flag id argument for valuables placed in levels
-export function objValuable(type: ValuableType, uid?: number) {
+export function objValuable(type: RpgEconomy.Currency.Type, uid?: number) {
     const config = valuableConfigs[type];
     return Sprite.from(config.texture)
         .anchored(0.5, 0.5)
@@ -55,6 +48,6 @@ export function objValuable(type: ValuableType, uid?: number) {
                 .at(self).add(offset).show(self.parent);
                 sparkle.index = Rng.float(1, 3);
             }
-            RpgProgress.character.valuables += config.value;
+            RpgProgress.character.valuables += RpgEconomy.Currency.Values[type];
         })
 }
