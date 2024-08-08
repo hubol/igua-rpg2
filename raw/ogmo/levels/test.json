@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 632,
+  "width": 824,
   "height": 256,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 79,
+      "gridCellsX": 103,
       "gridCellsY": 32,
       "entities": [
         {
@@ -48,7 +48,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 79,
+      "gridCellsX": 103,
       "gridCellsY": 32,
       "entities": [
         {
@@ -70,7 +70,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 79,
+      "gridCellsX": 103,
       "gridCellsY": 32,
       "decals": [
         {
@@ -191,7 +191,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 79,
+      "gridCellsX": 103,
       "gridCellsY": 32,
       "entities": [
         {
@@ -446,7 +446,7 @@
           "_eid": "93117141",
           "x": 456,
           "y": 0,
-          "width": 176,
+          "width": 368,
           "height": 32,
           "originX": 0,
           "originY": 0,
@@ -459,7 +459,7 @@
           "_eid": "93117141",
           "x": 456,
           "y": 208,
-          "width": 176,
+          "width": 368,
           "height": 48,
           "originX": 0,
           "originY": 0,
@@ -470,7 +470,7 @@
           "name": "Block",
           "id": 23,
           "_eid": "93117141",
-          "x": 616,
+          "x": 808,
           "y": 32,
           "width": 16,
           "height": 176,
@@ -509,7 +509,7 @@
           "name": "Slope",
           "id": 26,
           "_eid": "95675713",
-          "x": 584,
+          "x": 776,
           "y": 176,
           "width": 32,
           "height": 32,
@@ -522,7 +522,7 @@
           "name": "Slope",
           "id": 27,
           "_eid": "95675713",
-          "x": 584,
+          "x": 776,
           "y": 32,
           "width": 32,
           "height": 32,
@@ -540,7 +540,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 79,
+      "gridCellsX": 103,
       "gridCellsY": 32,
       "entities": []
     }
