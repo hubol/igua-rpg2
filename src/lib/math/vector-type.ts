@@ -24,6 +24,7 @@ export function vnew(x_vector?: number | VectorSimple, y?: number) {
 export interface Vector extends VectorSimple {
     vcpy(): Vector;
     vround(): this;
+    vclamp(length: number): this;
     add(x: number, y: number): this;
     add(vector: VectorSimple): this;
     add(vector: VectorSimple, scalar: number): this;
@@ -100,6 +101,14 @@ const propertyDefinitions = createPropertyDefinitions({
     vcpy: {
         value: function (this: Vector) {
             return vnew(this.x, this.y);
+        },
+        configurable: true,
+    },
+    vclamp: {
+        value: function (this: Vector, length: number) {
+            if (this.vlength > length)
+                return this.normalize().scale(length);
+            return this;
         },
         configurable: true,
     },
