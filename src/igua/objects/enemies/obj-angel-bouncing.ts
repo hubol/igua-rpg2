@@ -140,7 +140,7 @@ export function objAngelBouncing() {
         if (playerObj.collides(mask))
             self.damage(10);
         else if (playerObj.collides(spikeBall))
-            playerObj.damage(10);
+            self.strikePlayer(10);
 
     }, 1001)
 

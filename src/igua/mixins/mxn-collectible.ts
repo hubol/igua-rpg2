@@ -42,11 +42,12 @@ export function mxnCollectible(obj: DisplayObject, args: MxnCollectibleArgs) {
 
     const collectible = obj
     .dispatches<'collected'>()
-    .step(() => {
+    .merge({ collectable: true })
+    .step(self => {
             if (initialCollected)
                 return obj.destroy();
 
-            if (playerObj.hasControl && playerObj.collides(obj)) {
+            if (self.collectable && playerObj.hasControl && playerObj.collides(obj)) {
                 collect(args);
                 collectible.dispatch('collected');
                 obj.destroy();

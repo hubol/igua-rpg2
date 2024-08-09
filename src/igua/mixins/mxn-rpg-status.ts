@@ -4,7 +4,7 @@ import { RpgStatus } from "../rpg/rpg-status";
 export function mxnRpgStatus(obj: DisplayObject, model: RpgStatus.Model, effects: RpgStatus.Effects) {
     let tickCount = 0;
 
-    // TODO death?
+    // TODO death via dispatch?
 
     return obj.merge({
         damage(amount: number) {

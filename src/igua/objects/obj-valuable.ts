@@ -34,8 +34,9 @@ const valuableConfigs: Record<RpgEconomy.Currency.Type, ValuableConfig> = {
     },
 }
 
-// TODO flag id argument for valuables placed in levels
 export function objValuable(type: RpgEconomy.Currency.Type, uid?: number) {
+    let collectableAfterSteps = 3;
+
     const config = valuableConfigs[type];
     return Sprite.from(config.texture)
         .anchored(0.5, 0.5)
@@ -50,4 +51,5 @@ export function objValuable(type: RpgEconomy.Currency.Type, uid?: number) {
             }
             RpgProgress.character.valuables += RpgEconomy.Currency.Values[type];
         })
+        .step(self => self.collectable = collectableAfterSteps-- <= 0);
 }

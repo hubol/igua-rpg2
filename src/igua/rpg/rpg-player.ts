@@ -2,6 +2,7 @@ import { RpgProgress } from "./rpg-progress";
 import { RpgStatus } from "./rpg-status";
 
 export const RpgPlayer = {
+    // TODO this maybe should be called Status
     Model: {
         get health() {
             return RpgProgress.character.status.health;

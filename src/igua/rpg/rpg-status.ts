@@ -41,6 +41,7 @@ export namespace RpgStatus {
             model.invulnerable = Math.max(0, model.invulnerable - 1);
         },
     
+        // TODO I think API of damage methods should pass ALL damage types, build ups
         damage(model: Model, effects: Effects, amount: number, kind = DamageKind.Physical) {
             // TODO should resistances to damage be factored here?
             // Or should that be computed in a previous step?
