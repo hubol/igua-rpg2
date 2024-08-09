@@ -1,38 +1,10 @@
 import { DisplayObject } from "pixi.js";
 import { RpgStatus } from "../rpg/rpg-status";
-import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { mxnRpgStatus } from "./mxn-rpg-status";
 import { RpgLoot } from "../rpg/rpg-loot";
 import { RpgEnemy } from "../rpg/rpg-enemy";
 import { objLootDrop } from "../objects/obj-loot-drop";
-
-// const EnemyRpgStatusEffects = new SceneLocal<RpgStatus.Effects>(() => {
-//     return {
-//         healed(value, delta) {
-//             // TODO implement
-//         },
-//         tookDamage(value, delta, kind) {
-//             // TODO implement
-//         },
-//     }
-// }, 'EnemyRpgStatusEffects');
-
-class EnemyRpgStatusEffects implements RpgStatus.Effects {
-    constructor(private readonly _onDied: () => void) {
-
-    }
-
-    healed(value: number, delta: number): void {
-        // TODO impl, likely call to some SceneLocal to render health bar
-    }
-
-    tookDamage(value: number, delta: number, kind: RpgStatus.DamageKind): void {
-        // TODO impl, likely call to some SceneLocal to render health bar
-        // Feels like RpgStatus.Effects should have a died() method?!
-        if (value === 0)
-            this._onDied();
-    }
-}
+import { layers } from "../globals";
 
 export function mxnEnemy(obj: DisplayObject) {
     // TODO config probably comes from args!!
@@ -61,16 +33,7 @@ export function mxnEnemy(obj: DisplayObject) {
         shameCount: 0,
     }
 
-    // TODO needs more than just destroy
-    // Particle effects
-    // Loot
-    // Might need to be overrideable too, actually
-    // Thinking about the dassmann fight from igua 1
-    const effects = new EnemyRpgStatusEffects(() => {
-        const drop = RpgLoot.Methods.drop(loot, enemy);
-        objLootDrop(drop).at(obj).show(obj.parent);
-        obj.destroy();
-    });
+    const effects = layers.overlay.enemyHealthBars.getRpgStatusEffects(obj, status);
 
     // TODO should it expose a way to register hitboxes/hurtboxes
     // Or should that be another mixin?
@@ -78,6 +41,15 @@ export function mxnEnemy(obj: DisplayObject) {
     // TODO maybe exposes a way to create projectiles associated with this enemy?
 
     const enemyObj = obj.mixin(mxnRpgStatus, status, effects)
+        // TODO needs more
+        // Particle effects
+        // Might need to be overrideable too, actually
+        // Thinking about the dassmann fight from igua 1
+        .handles('rpgStatus.died', () => {
+            const drop = RpgLoot.Methods.drop(loot, enemy);
+            objLootDrop(drop).at(obj).show(obj.parent);
+            obj.destroy();
+        })
         .merge({
             // TODO needs other damage types!!
             // Maybe it's time for a RpgAttack.Model ?!
