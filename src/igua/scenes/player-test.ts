@@ -13,13 +13,22 @@ import { sleep } from "../../lib/game-engine/promise/sleep";
 import { objStatusBar } from "../objects/obj-status-bar";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { objAngelBouncing } from "../objects/enemies/obj-angel-bouncing";
+import { Instances } from "../../lib/game-engine/instances";
+import { objWaterDripSource } from "../objects/obj-water-drip-source";
 
 export function PlayerTest() {
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
         await show('Hello!');
     }).show();
 
-    const { LockedDoor } = Lvl.Test();
+    const level = Lvl.Test();
+
+    for (const dripSource of Instances(objWaterDripSource)) {
+        dripSource.poison = true;
+    }
+
+    const { LockedDoor } = level;
+
     LockedDoor.async(async () => {
         while (true) {
             LockedDoor.add(Rng.vunit().scale(4));

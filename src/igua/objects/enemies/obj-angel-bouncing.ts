@@ -34,7 +34,7 @@ export function objAngelBouncing() {
 
     let appliedOpaqueTint = false;
     const obj = container(graphics, spikeBall, hatSprite, sprite, mask)
-    .mixin(mxnEnemy)
+    .mixin(mxnEnemy, { hurtboxes: [ mask ] })
     .mixin(mxnPhysics, { gravity: 0.25, physicsRadius: 8, physicsOffset: vnew(), onMove(event) {
         // TODO in igua 1, some wouldn't bounce
         if (event.hitWall)

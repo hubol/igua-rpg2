@@ -6,7 +6,11 @@ import { RpgEnemy } from "../rpg/rpg-enemy";
 import { objLootDrop } from "../objects/obj-loot-drop";
 import { layers } from "../globals";
 
-export function mxnEnemy(obj: DisplayObject) {
+interface MxnEnemyArgs {
+    hurtboxes: DisplayObject[];
+}
+
+export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
     // TODO config probably comes from args!!
     const status: RpgStatus.Model = {
         health: 30,
@@ -40,7 +44,7 @@ export function mxnEnemy(obj: DisplayObject) {
 
     // TODO maybe exposes a way to create projectiles associated with this enemy?
 
-    const enemyObj = obj.mixin(mxnRpgStatus, status, effects)
+    const enemyObj = obj.mixin(mxnRpgStatus, { status, effects, hurtboxes: args.hurtboxes })
         // TODO needs more
         // Particle effects
         // Might need to be overrideable too, actually

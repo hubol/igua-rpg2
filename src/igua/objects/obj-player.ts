@@ -14,8 +14,10 @@ const PlayerConsts = {
 }
 
 function objPlayer(looks: IguanaLooks.Serializable) {
-    const puppet = objIguanaLocomotive(looks)
-        .mixin(mxnRpgStatus, RpgPlayer.Model, layers.overlay.hud.healthBarObj.effects)
+    const iguanaLocomotiveObj = objIguanaLocomotive(looks);
+
+    const puppet = iguanaLocomotiveObj
+        .mixin(mxnRpgStatus, { status: RpgPlayer.Model, effects: layers.overlay.hud.healthBarObj.effects, hurtboxes: [ iguanaLocomotiveObj ] })
         .merge({ get hasControl() { return !Cutscene.isPlaying; }, get walkingTopSpeed() { return RpgPlayer.WalkingTopSpeed; } })
         .step(() => {
             if (puppet.isBeingPiloted)
