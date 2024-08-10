@@ -60,6 +60,96 @@
           "originX": 0,
           "originY": 0,
           "values": {"sceneName": "LevelTwo", "checkpointName": "", "name": "", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 29,
+          "_eid": "38869661",
+          "x": 520,
+          "y": 32,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 100, "delayMax": 200, "name": "", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 30,
+          "_eid": "38869661",
+          "x": 536,
+          "y": 32,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 100, "delayMax": 200, "name": "", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 31,
+          "_eid": "38869661",
+          "x": 552,
+          "y": 32,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 100, "delayMax": 200, "name": "", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 32,
+          "_eid": "38869661",
+          "x": 568,
+          "y": 32,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 100, "delayMax": 200, "name": "", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 33,
+          "_eid": "38869661",
+          "x": 584,
+          "y": 32,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 100, "delayMax": 200, "name": "", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 34,
+          "_eid": "38869661",
+          "x": 600,
+          "y": 32,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 100, "delayMax": 200, "name": "", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 35,
+          "_eid": "38869661",
+          "x": 616,
+          "y": 32,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 100, "delayMax": 200, "name": "", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 36,
+          "_eid": "38869661",
+          "x": 632,
+          "y": 32,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 100, "delayMax": 200, "name": "", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 37,
+          "_eid": "38869661",
+          "x": 648,
+          "y": 32,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 100, "delayMax": 200, "name": "", "depth": 0}
         }
       ]
     },
