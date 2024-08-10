@@ -1,6 +1,7 @@
 import { Container, DisplayObject, Graphics } from "pixi.js";
 import { Vector, vnew } from "../../lib/math/vector-type";
 import { LocalTerrain } from "../objects/obj-terrain";
+import { StepOrder } from "../objects/step-order";
 
 interface PhysicsArgs {
     gravity: number;
@@ -43,7 +44,7 @@ export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physics
             obj.y = Math.round(obj.y);
             setPositionDecimalOnTransformChanged = true;
             onMove?.(event);
-        }, 1000)
+        }, StepOrder.Physics)
 }
 
 export type MxnPhysics = ReturnType<typeof mxnPhysics>;

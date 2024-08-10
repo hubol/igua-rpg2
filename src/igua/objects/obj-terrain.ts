@@ -3,6 +3,7 @@ import { Empty } from "../../lib/types/empty";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { scene } from "../globals";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
+import { StepOrder } from "./step-order";
 
 /**
  * Describes a line segment. Different kinds of terrain segments make certain guarantees:
@@ -83,8 +84,7 @@ function objTerrainSegmentDebug() {
 }
 
 function createLocalTerrain() {
-    // TODO enum for stepOrder?!
-    scene.root.step(() => cleanTerrain(), 999);
+    scene.root.step(() => cleanTerrain(), StepOrder.TerrainClean);
     // objTerrainSegmentDebug().show(scene.root);
     return Empty<Terrain>();
 }

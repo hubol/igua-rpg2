@@ -1,6 +1,7 @@
 import { container } from "../../lib/pixi/container";
 import { renderer, scene } from "../globals";
 import { playerObj } from "./obj-player";
+import { StepOrder } from "./step-order";
 
 export function objCamera() {
     // TODO need way to snap to desired position e.g. on level load
@@ -16,5 +17,5 @@ export function objCamera() {
 
         scene.stage.x = Math.round(-self.x);
         scene.stage.y = Math.round(-self.y);
-    }, 2000)
+    }, StepOrder.Camera)
 }
