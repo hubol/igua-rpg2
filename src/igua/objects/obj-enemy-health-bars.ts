@@ -53,7 +53,8 @@ function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model) {
 
             if (!obj.destroyed) {
                 obj.getBounds(false, r);
-                vworld.at(r).add(scene.camera);
+                // TODO it might be necessary to pass a "head" to place the healthbar over!
+                vworld.at(r).add(Math.round(r.width / 2), 0).add(scene.camera);
             }
 
             self.at(vworld).add(scene.camera, -1).add(-Math.round(self.width / 2), -self.height - 1);
