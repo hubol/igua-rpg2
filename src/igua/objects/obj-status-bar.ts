@@ -114,16 +114,19 @@ export function objStatusBar(config: ObjStatusBarConfig) {
 
     const c = container(barsGfx)
     .merge({
+        stepsSinceChange: 0,
         maxValue: config.maxValue,
         width: config.width,
         tintFront: config.tintFront,
         decrease(value: number, delta: number, index: number) {
+            c.stepsSinceChange = 0;
             decreaseChunks.push(createDecreaseChunk(index, trueValue, value));
             trueValue = value;
             frontValue = Math.min(frontValue, trueValue);
             decreaseTexts[index]?.addDelta(delta);
         },
         increase(value: number, delta: number, index: number) {
+            c.stepsSinceChange = 0;
             trueValue = value;
             increaseChunks.unshift(createIncreaseChunk(index, value));
             for (const chunk of decreaseChunks) {
@@ -133,6 +136,7 @@ export function objStatusBar(config: ObjStatusBarConfig) {
         }
     })
     .step(() => {
+        c.stepsSinceChange++;
         const width = c.width;
         const height = config.height;
 

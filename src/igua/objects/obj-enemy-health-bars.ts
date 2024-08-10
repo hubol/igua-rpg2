@@ -1,15 +1,17 @@
-import { DisplayObject } from "pixi.js";
+import { DisplayObject, Rectangle } from "pixi.js";
 import { container } from "../../lib/pixi/container";
 import { Undefined } from "../../lib/types/undefined";
 import { RpgStatus } from "../rpg/rpg-status";
 import { objHealthBar } from "./obj-health-bar";
+import { vnew } from "../../lib/math/vector-type";
+import { scene } from "../globals";
 
 export function objEnemyHealthBars() {
     const getRpgStatusEffects = (obj: DisplayObject, status: RpgStatus.Model): RpgStatus.Effects => {
         let healthBarObj = Undefined<ObjEnemyHealthBar>();
 
         const ensureHealthBarObj = () => {
-            if (!healthBarObj)
+            if (!healthBarObj || healthBarObj.destroyed)
                 healthBarObj = objEnemyHealthBar(obj, status).show(c);
             return healthBarObj;
         }
@@ -32,11 +34,29 @@ export function objEnemyHealthBars() {
     return c;
 }
 
+const r = new Rectangle();
+
 function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model) {
-    return objHealthBar(32, 7, status.health, status.healthMax)
+    let parent = obj.parent;
+    const vworld = vnew();
+
+    return objHealthBar(32, 7, status.healthMax, status.healthMax)
         .step(self => {
-            if (obj.parent?.destroyed)
+            if (!parent)
+                parent = obj.parent;
+            if (parent.destroyed)
                 return self.destroy();
+            // TODO should be a cuter in/out animation
+            self.visible = self.stepsSinceChange < 60;
+            if (!self.visible && obj.destroyed)
+                return self.destroy();
+
+            if (!obj.destroyed) {
+                obj.getBounds(false, r);
+                vworld.at(r).add(scene.camera);
+            }
+
+            self.at(vworld).add(scene.camera, -1).add(-Math.round(self.width / 2), -self.height - 1);
         })
 }
 
