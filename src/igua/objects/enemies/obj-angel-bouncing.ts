@@ -8,8 +8,14 @@ import { mxnPhysics } from "../../mixins/mxn-physics";
 import { vnew } from "../../../lib/math/vector-type";
 import { playerObj } from "../obj-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { RpgPlayer } from "../../rpg/rpg-player";
+import { RpgAttack } from "../../rpg/rpg-attack";
 
 const clownTxs = Tx.Enemy.CommonClown.split({ count: 2 });
+
+const atkSpikeBall = RpgAttack.create({
+    physical: 10,
+})
 
 export function objAngelBouncing() {
     // const obj = merge(new Container(), { hspeed, vspeed: 0, portal, dangerous, bounceAgainstWall, limitedRangeEnabled });
@@ -138,9 +144,9 @@ export function objAngelBouncing() {
         })
     .step(self => {
         if (playerObj.collides(mask))
-            self.damage(10);
+            self.damage(RpgPlayer.MeleeAttack);
         else if (playerObj.collides(spikeBall))
-            self.strikePlayer(10);
+            self.strikePlayer(atkSpikeBall);
 
     }, 1001)
 

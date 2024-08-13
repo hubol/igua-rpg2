@@ -1,5 +1,6 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { playerObj } from "../objects/obj-player";
+import { RpgAttack } from "./rpg-attack";
 import { RpgPlayer } from "./rpg-player";
 
 export namespace RpgEnemy {
@@ -10,23 +11,14 @@ export namespace RpgEnemy {
     }
 
     export const Methods = {
-        strikePlayer(model: Model, poison: Integer, physical: Integer, emotional: Integer) {
+        strikePlayer(model: Model, attack: RpgAttack.Model) {
             if (!playerObj)
                 return;
 
-            // TODO not sure if shameCount should increase when player is invulnerable
-            // Or if a "slow poison" should increase the shameCount
-            // Maybe shameCount should only increase when the player was previously vulnerable and becomes invulnerable
-            // But capture that in a cooler way
+            // TODO not sure if a "slow poison" should increase the shameCount
             
-            // TODO feels bad!!! Fix!!!
-            const wasInvulnerable = RpgPlayer.Model.invulnerable > 0;
-
-            // TODO use poison, physical, emotional
-            playerObj.damage(physical);
-
-            // TODO feels bad!!!! Should come from result of damage, I think!!!
-            if (!wasInvulnerable && RpgPlayer.Model.invulnerable > 0)
+            const result = playerObj.damage(attack);
+            if (!result.rejected && result.damaged)
                 model.shameCount++;
         }
     }

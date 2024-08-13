@@ -16,6 +16,7 @@ function getInitialRpgProgress() {
             attributes: {
                 health: 1,
                 intelligence: 0,
+                strength: 1,
             },
             looks: getDefaultLooks(),
             position: {

@@ -5,6 +5,8 @@ import { RpgLoot } from "../rpg/rpg-loot";
 import { RpgEnemy } from "../rpg/rpg-enemy";
 import { objLootDrop } from "../objects/obj-loot-drop";
 import { layers } from "../globals";
+import { RpgFaction } from "../rpg/rpg-faction";
+import { RpgAttack } from "../rpg/rpg-attack";
 
 interface MxnEnemyArgs {
     hurtboxes: DisplayObject[];
@@ -21,6 +23,10 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
             level: 0,
             max: 100,
             value: 0,
+        },
+        faction: RpgFaction.Enemy,
+        quirks: {
+            emotionalDamageIsFatal: false,
         }
     };
 
@@ -57,8 +63,8 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         .merge({
             // TODO needs other damage types!!
             // Maybe it's time for a RpgAttack.Model ?!
-            strikePlayer(damage: number) {
-                RpgEnemy.Methods.strikePlayer(enemy, 0, damage, 0);
+            strikePlayer(attack: RpgAttack.Model) {
+                RpgEnemy.Methods.strikePlayer(enemy, attack);
             }
         });
 

@@ -1,3 +1,5 @@
+import { RpgAttack } from "./rpg-attack";
+import { RpgFaction } from "./rpg-faction";
 import { RpgProgress } from "./rpg-progress";
 import { RpgStatus } from "./rpg-status";
 
@@ -34,7 +36,11 @@ export const RpgPlayer = {
             set value(value) {
                 RpgProgress.character.status.poison.value = value;
             }
-        }
+        },
+        faction: RpgFaction.Player,
+        quirks: {
+            emotionalDamageIsFatal: true,
+        },
     } satisfies RpgStatus.Model,
     get WalkingTopSpeed() {
         let speed = 2.5;
@@ -42,4 +48,12 @@ export const RpgPlayer = {
         speed += 0.5 * Math.max(0, RpgProgress.character.status.poison.level - 1);
         return speed
     },
+    MeleeAttack: {
+        emotional: 0,
+        get physical() {
+            return 5 + RpgProgress.character.attributes.strength * 5;
+        },
+        poison: 0,
+        versus: RpgFaction.Enemy,
+    } satisfies RpgAttack.Model,
 }

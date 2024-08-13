@@ -1,9 +1,13 @@
+import { RpgAttack } from "./rpg-attack";
+import { RpgFaction } from "./rpg-faction";
+
 export namespace RpgStatus {
     const Consts = {
         FullyPoisonedHealth: 5,
     }
     
     export interface Model {
+        faction: RpgFaction;
         health: number;
         healthMax: number;
         invulnerable: number;
@@ -12,7 +16,10 @@ export namespace RpgStatus {
             level: number;
             value: number;
             max: number;
-        }
+        };
+        quirks: {
+            emotionalDamageIsFatal: boolean;
+        };
     }
     
     export enum DamageKind {
@@ -24,7 +31,23 @@ export namespace RpgStatus {
     export interface Effects {
         healed(value: number, delta: number): void;
         tookDamage(value: number, delta: number, kind: DamageKind): void;
+        // TODO IDK!!! I think died() needs to be here!!
     }
+
+    interface DamageAccepted {
+        rejected: false;
+        ailments?: boolean;
+        damaged?: boolean;
+        died?: boolean;
+    }
+
+    interface DamageRejected {
+        rejected: true;
+        wrongFaction?: boolean;
+        invulnerable?: boolean;
+    }
+
+    type DamageResult = DamageAccepted | DamageRejected;
     
     export const Methods = {
         tick(model: Model, effects: Effects, count: number) {
@@ -42,26 +65,53 @@ export namespace RpgStatus {
         },
     
         // TODO I think API of damage methods should pass ALL damage types, build ups
-        damage(model: Model, effects: Effects, amount: number, kind = DamageKind.Physical) {
+        damage(model: Model, effects: Effects, attack: RpgAttack.Model): DamageResult {
+            if (attack.versus !== RpgFaction.Anyone && attack.versus !== model.faction)
+                return { rejected: true, wrongFaction: true };
+
+            const ailments = attack.poison > 0;
+
+            model.poison.value += attack.poison;
+            if (model.poison.value >= model.poison.max) {
+                model.poison.value = 0;
+                model.poison.level += 1;
+            }
+
             // TODO should resistances to damage be factored here?
             // Or should that be computed in a previous step?
 
             // TODO warn when amount is not an integer
 
+            if (attack.physical === 0 && attack.emotional === 0)
+                return { rejected: false, ailments };
+
             if (model.invulnerable > 0)
-                return;
-    
-            // TODO
-            // Emotional damage should not kill enemies
-            // But can kill player
-    
-            const previous = model.health;
-            model.health = Math.max(0, model.health - amount);
-            const diff = previous - model.health;
-    
-            effects.tookDamage(model.health, diff, kind);
+                return { rejected: true, invulnerable: true }
+
+            let damaged = false;
+
+            {
+                const previous = model.health;
+                const min = model.quirks.emotionalDamageIsFatal ? 0 : 1;
+                model.health = Math.max(min, model.health - attack.emotional);
+                const diff = previous - model.health;
+                damaged ||= diff > 0;
+        
+                effects.tookDamage(model.health, diff, DamageKind.Emotional);
+            }
+
+            {
+                const previous = model.health;
+                model.health = Math.max(0, model.health - attack.physical);
+                const diff = previous - model.health;
+                damaged ||= diff > 0;
+        
+                effects.tookDamage(model.health, diff, DamageKind.Physical);
+            }
     
             model.invulnerable = model.invulnerableMax;
+
+            return { rejected: false, ailments, damaged, died: damaged && model.health <= 0 };
         },
     
         heal(model: Model, effects: Effects, amount: number) {
@@ -73,15 +123,5 @@ export namespace RpgStatus {
     
             effects.healed(model.health, diff);
         },
-    
-        poison(model: Model, effects: Effects, amount: number) {
-            // TODO warn when amount is not an integer
-
-            model.poison.value += amount;
-            if (model.poison.value >= model.poison.max) {
-                model.poison.value = 0;
-                model.poison.level += 1;
-            }
-        }
     }
 }
