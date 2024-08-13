@@ -59,7 +59,7 @@
           "y": 120,
           "originX": 0,
           "originY": 0,
-          "values": {"sceneName": "LevelTwo", "checkpointName": "", "name": "", "depth": 0}
+          "values": {"sceneName": "scnPotteryHouse", "checkpointName": "", "name": "", "depth": 0}
         },
         {
           "name": "WaterDripSource",
