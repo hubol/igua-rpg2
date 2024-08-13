@@ -20,7 +20,7 @@ export function LevelTwo() {
         await level.IguanaNpc.walkTo(level.IguanaNpc.x + 100);
     });
 
-    objAngelBouncing().at(playerObj).add(40, -16).show();
+    objAngelBouncing().at(playerObj).add(40, -16).show().handles('mxnEnemy.died', () => level.PotteryBodyYellow.alpha = 0.5);
     // level.UpperDoor.locked = true;
 
     container().async(async self => {

@@ -51,6 +51,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         // Thinking about the dassmann fight from igua 1
         const drop = RpgLoot.Methods.drop(loot, enemy);
         objLootDrop(drop).at(obj).show(obj.parent);
+        enemyObj.dispatch('mxnEnemy.died');
         obj.destroy();
     }
 
@@ -64,6 +65,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
     // TODO maybe exposes a way to create projectiles associated with this enemy?
 
     const enemyObj = obj.mixin(mxnRpgStatus, { status, effects, hurtboxes: args.hurtboxes })
+        .dispatches<'mxnEnemy.died'>()
         .merge({
             strikePlayer(attack: RpgAttack.Model) {
                 RpgEnemy.Methods.strikePlayer(enemy, attack);
