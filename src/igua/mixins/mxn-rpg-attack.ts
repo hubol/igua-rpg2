@@ -4,21 +4,21 @@ import { mxnRpgStatus } from "./mxn-rpg-status";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgEnemy } from "../rpg/rpg-enemy";
 
-interface MxnProjectileArgs {
+interface MxnRpgAttackArgs {
     attack: RpgAttack.Model;
     enemy?: RpgEnemy.Model;
 }
 
-export function mxnProjectile(obj: DisplayObject, args: MxnProjectileArgs) {
+export function mxnRpgAttack(obj: DisplayObject, args: MxnRpgAttackArgs) {
     return obj
-    .dispatches<'hit'>()
+    .dispatches<'mxnRpgAttack.hit'>()
     .step(self => {
         for (const instance of Instances(mxnRpgStatus)) {
             // TODO filter by faction here pls
             if (obj.collidesOne(instance.hurtboxes)) {
                 const result = instance.damage(args.attack, args.enemy);
                 if (!result.rejected)
-                    self.dispatch('hit');
+                    self.dispatch('mxnRpgAttack.hit');
                 if (self.destroyed)
                     return;
             }       

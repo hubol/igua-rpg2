@@ -6,7 +6,7 @@ import { sleep } from "../../lib/game-engine/promise/sleep";
 import { Rng } from "../../lib/math/rng";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgFaction } from "../rpg/rpg-faction";
-import { mxnProjectile } from "../mixins/mxn-projectile";
+import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 
 interface ObjWaterDripSourceArgs {
     delayMin: number;
@@ -38,8 +38,10 @@ function objWaterDrip(poison: boolean) {
                 // TODO drip sfx
             }
         } })
-        .mixin(mxnProjectile, { attack: atkPoisonDrip })
-        .handles('hit', self => self.destroy());
+
+    if (poison)
+        obj.mixin(mxnRpgAttack, { attack: atkPoisonDrip })
+        .handles('mxnRpgAttack.hit', self => self.destroy());
 
     return obj;
 }

@@ -11,7 +11,7 @@ import { RpgProgress } from "../rpg/rpg-progress";
 import { objAngelBouncing } from "../objects/enemies/obj-angel-bouncing";
 import { Instances } from "../../lib/game-engine/instances";
 import { objWaterDripSource } from "../objects/obj-water-drip-source";
-import { mxnProjectile } from "../mixins/mxn-projectile";
+import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgFaction } from "../rpg/rpg-faction";
 
@@ -34,7 +34,7 @@ export function PlayerTest() {
             await sleep(60);
         }
     })
-    .mixin(mxnProjectile, { attack: RpgAttack.create({ poison: 1, versus: RpgFaction.Anyone }) });
+    .mixin(mxnRpgAttack, { attack: RpgAttack.create({ poison: 1, versus: RpgFaction.Anyone }) });
 
     playerObj.step(() => {
         if (Input.justWentDown('Jump'))
