@@ -7,6 +7,7 @@ import { objLootDrop } from "../objects/obj-loot-drop";
 import { layers } from "../globals";
 import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgAttack } from "../rpg/rpg-attack";
+import { merge } from "../../lib/object/merge";
 
 interface MxnEnemyArgs {
     hurtboxes: DisplayObject[];
@@ -43,7 +44,19 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         shameCount: 0,
     }
 
-    const effects = layers.overlay.enemyHealthBars.getRpgStatusEffects(obj, status);
+    const died = () => {
+        // TODO needs more
+        // Particle effects
+        // Might need to be overrideable too, actually
+        // Thinking about the dassmann fight from igua 1
+        const drop = RpgLoot.Methods.drop(loot, enemy);
+        objLootDrop(drop).at(obj).show(obj.parent);
+        obj.destroy();
+    }
+
+    const effects: RpgStatus.Effects = merge(
+        { died },
+        layers.overlay.enemyHealthBars.getRpgStatusEffects(obj, status));
 
     // TODO should it expose a way to register hitboxes/hurtboxes
     // Or should that be another mixin?
@@ -51,18 +64,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
     // TODO maybe exposes a way to create projectiles associated with this enemy?
 
     const enemyObj = obj.mixin(mxnRpgStatus, { status, effects, hurtboxes: args.hurtboxes })
-        // TODO needs more
-        // Particle effects
-        // Might need to be overrideable too, actually
-        // Thinking about the dassmann fight from igua 1
-        .handles('rpgStatus.died', () => {
-            const drop = RpgLoot.Methods.drop(loot, enemy);
-            objLootDrop(drop).at(obj).show(obj.parent);
-            obj.destroy();
-        })
         .merge({
-            // TODO needs other damage types!!
-            // Maybe it's time for a RpgAttack.Model ?!
             strikePlayer(attack: RpgAttack.Model) {
                 RpgEnemy.Methods.strikePlayer(enemy, attack);
             }

@@ -7,7 +7,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { scene } from "../globals";
 
 export function objEnemyHealthBars() {
-    const getRpgStatusEffects = (obj: DisplayObject, status: RpgStatus.Model): RpgStatus.Effects => {
+    const getRpgStatusEffects = (obj: DisplayObject, status: RpgStatus.Model): Omit<RpgStatus.Effects, 'died'> => {
         let healthBarObj = Undefined<ObjEnemyHealthBar>();
 
         const ensureHealthBarObj = () => {

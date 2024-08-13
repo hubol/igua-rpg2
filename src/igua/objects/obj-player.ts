@@ -1,8 +1,10 @@
+import { merge } from "../../lib/object/merge";
 import { Cutscene, Input, layers } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { RpgPlayer } from "../rpg/rpg-player";
 import { RpgProgress } from "../rpg/rpg-progress";
+import { RpgStatus } from "../rpg/rpg-status";
 import { objIguanaLocomotive } from "./obj-iguana-locomotive";
 
 const PlayerConsts = {
@@ -16,8 +18,14 @@ const PlayerConsts = {
 function objPlayer(looks: IguanaLooks.Serializable) {
     const iguanaLocomotiveObj = objIguanaLocomotive(looks);
 
+    const died = () => {}
+
+    const effects: RpgStatus.Effects = merge(
+        { died },
+        layers.overlay.hud.healthBarObj.effects);
+
     const puppet = iguanaLocomotiveObj
-        .mixin(mxnRpgStatus, { status: RpgPlayer.Model, effects: layers.overlay.hud.healthBarObj.effects, hurtboxes: [ iguanaLocomotiveObj ] })
+        .mixin(mxnRpgStatus, { status: RpgPlayer.Model, effects, hurtboxes: [ iguanaLocomotiveObj ] })
         .merge({ get hasControl() { return !Cutscene.isPlaying; }, get walkingTopSpeed() { return RpgPlayer.WalkingTopSpeed; } })
         .step(() => {
             if (puppet.isBeingPiloted)

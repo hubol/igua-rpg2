@@ -31,14 +31,13 @@ export namespace RpgStatus {
     export interface Effects {
         healed(value: number, delta: number): void;
         tookDamage(value: number, delta: number, kind: DamageKind): void;
-        // TODO IDK!!! I think died() needs to be here!!
+        died(): void;
     }
 
     interface DamageAccepted {
         rejected: false;
         ailments?: boolean;
         damaged?: boolean;
-        died?: boolean;
     }
 
     interface DamageRejected {
@@ -111,7 +110,10 @@ export namespace RpgStatus {
     
             model.invulnerable = model.invulnerableMax;
 
-            return { rejected: false, ailments, damaged, died: damaged && model.health <= 0 };
+            if (damaged && model.health <= 0)
+                effects.died();
+
+            return { rejected: false, ailments, damaged };
         },
     
         heal(model: Model, effects: Effects, amount: number) {

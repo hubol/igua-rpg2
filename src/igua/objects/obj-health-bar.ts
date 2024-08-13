@@ -56,7 +56,7 @@ export function objHealthBar(width: number, height: number, value: number, maxVa
             tookDamage(value, delta, kind) {
                 bar.decrease(value, Math.abs(delta), DamageIndex[kind]);
             },
-        } satisfies RpgStatus.Effects
+        } satisfies Omit<RpgStatus.Effects, 'died'>
     })
 
     return bar;

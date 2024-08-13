@@ -16,19 +16,12 @@ export function mxnRpgStatus(obj: DisplayObject, args: MxnRpgStatusArgs) {
     .merge({ hurtboxes: args.hurtboxes })
     .merge({
         damage(attack: RpgAttack.Model) {
-            const result = RpgStatus.Methods.damage(args.status, args.effects, attack);
-            // TODO feels weird, should maybe be part of return value of damage?
-            // Or should be part of effects, I think!
-            if (!result.rejected && result.died)
-                rpgStatusObj.dispatch('rpgStatus.died');
-
-            return result;
+            return RpgStatus.Methods.damage(args.status, args.effects, attack);
         },
         heal(amount: number) {
             RpgStatus.Methods.heal(args.status, args.effects, amount);
         },
     })
-    .dispatches<'rpgStatus.died'>()
     .step(() => {
         RpgStatus.Methods.tick(args.status, args.effects, tickCount = (tickCount + 1) % 120);
         obj.visible = args.status.invulnerable > 0 ? !obj.visible : true;
