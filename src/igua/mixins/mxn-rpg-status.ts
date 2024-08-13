@@ -1,6 +1,7 @@
 import { DisplayObject } from "pixi.js";
 import { RpgStatus } from "../rpg/rpg-status";
 import { RpgAttack } from "../rpg/rpg-attack";
+import { RpgEnemy } from "../rpg/rpg-enemy";
 
 interface MxnRpgStatusArgs {
     status: RpgStatus.Model;
@@ -13,10 +14,10 @@ export function mxnRpgStatus(obj: DisplayObject, args: MxnRpgStatusArgs) {
 
     const rpgStatusObj = obj
     .track(mxnRpgStatus)
-    .merge({ hurtboxes: args.hurtboxes })
+    .merge(args)
     .merge({
-        damage(attack: RpgAttack.Model) {
-            return RpgStatus.Methods.damage(args.status, args.effects, attack);
+        damage(attack: RpgAttack.Model, attacker?: RpgEnemy.Model) {
+            return RpgStatus.Methods.damage(args.status, args.effects, attack, attacker);
         },
         heal(amount: number) {
             RpgStatus.Methods.heal(args.status, args.effects, amount);

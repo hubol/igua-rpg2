@@ -40,6 +40,7 @@ export const RpgPlayer = {
         faction: RpgFaction.Player,
         quirks: {
             emotionalDamageIsFatal: true,
+            incrementsAttackerPrideOnDamage: true,
         },
     } satisfies RpgStatus.Model,
     get WalkingTopSpeed() {

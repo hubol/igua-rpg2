@@ -8,6 +8,7 @@ import { layers } from "../globals";
 import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { merge } from "../../lib/object/merge";
+import { playerObj } from "../objects/obj-player";
 
 interface MxnEnemyArgs {
     hurtboxes: DisplayObject[];
@@ -28,6 +29,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         faction: RpgFaction.Enemy,
         quirks: {
             emotionalDamageIsFatal: false,
+            incrementsAttackerPrideOnDamage: false,
         }
     };
 
@@ -36,12 +38,12 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         valuables: {
             max: 7,
             min: 2,
-            deltaShame: -3,
+            deltaPride: -3,
         }
     };
 
     const enemy: RpgEnemy.Model = {
-        shameCount: 0,
+        pride: 0,
     }
 
     const died = () => {
@@ -68,7 +70,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         .dispatches<'mxnEnemy.died'>()
         .merge({
             strikePlayer(attack: RpgAttack.Model) {
-                RpgEnemy.Methods.strikePlayer(enemy, attack);
+                playerObj.damage(attack, enemy);
             }
         });
 

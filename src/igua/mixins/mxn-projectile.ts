@@ -16,7 +16,7 @@ export function mxnProjectile(obj: DisplayObject, args: MxnProjectileArgs) {
         for (const instance of Instances(mxnRpgStatus)) {
             // TODO filter by faction here pls
             if (obj.collidesOne(instance.hurtboxes)) {
-                const result = instance.damage(args.attack);
+                const result = instance.damage(args.attack, args.enemy);
                 if (!result.rejected)
                     self.dispatch('hit');
                 if (self.destroyed)

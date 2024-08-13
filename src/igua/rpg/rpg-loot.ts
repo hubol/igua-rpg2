@@ -6,7 +6,7 @@ export namespace RpgLoot {
         valuables: {
             min: Integer;
             max: Integer;
-            deltaShame: Integer;
+            deltaPride: Integer;
         }
     }
 
@@ -23,12 +23,12 @@ export namespace RpgLoot {
     }
 
     function computeValuables(valuables: Model['valuables'], enemy: RpgEnemy.Model): Integer {
-        if (valuables.deltaShame === 0)
+        if (valuables.deltaPride === 0)
             return Math.max(valuables.max, valuables.min);
 
-        const delta = valuables.deltaShame * enemy.shameCount;
+        const delta = valuables.deltaPride * enemy.pride;
 
-        return valuables.deltaShame < 0
+        return valuables.deltaPride < 0
             ? Math.max(valuables.min, valuables.max + delta)
             : Math.min(valuables.max, valuables.min + delta);
     }

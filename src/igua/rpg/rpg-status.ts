@@ -1,4 +1,5 @@
 import { RpgAttack } from "./rpg-attack";
+import { RpgEnemy } from "./rpg-enemy";
 import { RpgFaction } from "./rpg-faction";
 
 export namespace RpgStatus {
@@ -18,6 +19,7 @@ export namespace RpgStatus {
             max: number;
         };
         quirks: {
+            incrementsAttackerPrideOnDamage: boolean;
             emotionalDamageIsFatal: boolean;
         };
     }
@@ -63,8 +65,7 @@ export namespace RpgStatus {
             model.invulnerable = Math.max(0, model.invulnerable - 1);
         },
     
-        // TODO I think API of damage methods should pass ALL damage types, build ups
-        damage(model: Model, effects: Effects, attack: RpgAttack.Model): DamageResult {
+        damage(model: Model, effects: Effects, attack: RpgAttack.Model, attacker?: RpgEnemy.Model): DamageResult {
             if (attack.versus !== RpgFaction.Anyone && attack.versus !== model.faction)
                 return { rejected: true, wrongFaction: true };
 
@@ -112,6 +113,9 @@ export namespace RpgStatus {
 
             if (damaged && model.health <= 0)
                 effects.died();
+
+            if (damaged && attacker && model.quirks.incrementsAttackerPrideOnDamage)
+                attacker.pride++;
 
             return { rejected: false, ailments, damaged };
         },
