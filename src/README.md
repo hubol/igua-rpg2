@@ -41,10 +41,10 @@ Scenes can place Game Objects on one or more of the current "stages". Scenes may
 They are somewhat of an analog to Game Maker's "Room" concept.
 
 ### Name
-Use a function with a **PascalCase** name.
+Use a function with a **camelCase** name prefixed **scn**.
 
 ### Organization
-Place the module exporting the Scene in the **igua/scenes/** directory.
+Place the module exporting the Scene in the **igua/scenes/** directory. The file should have a name prefixed **scn-**.
 
 
 ## Global Services

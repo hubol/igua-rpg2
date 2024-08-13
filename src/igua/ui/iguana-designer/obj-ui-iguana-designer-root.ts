@@ -19,7 +19,7 @@ import { UiColor, UiStyle } from "../ui-color";
 import { createUiConnectedInputPageElements } from "./components/obj-ui-connected-input-page";
 import { objUiDesignerNavigationButton } from "./components/obj-ui-designer-button";
 import { objUiIguanaDesignerInspirationPage } from "./pages/obj-ui-iguana-designer-inspiration-page";
-import { PlayerTest } from "../../scenes/player-test";
+import { scnPlayerTest } from "../../scenes/scn-player-test";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { Environment } from "../../../lib/environment";
 import { Toast } from "../../../lib/game-engine/toast";
@@ -183,7 +183,7 @@ function objUiSavePage() {
             await layers.overlay.solid.fadeIn(500);
             const looks = UiIguanaDesignerContext.value.looks;
             RpgProgress.character.looks = looks;
-            sceneStack.replace(PlayerTest, { useGameplay: false });
+            sceneStack.replace(scnPlayerTest, { useGameplay: false });
             page.destroy();
             await layers.overlay.solid.fadeOut(500);
         });

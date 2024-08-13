@@ -15,7 +15,7 @@ import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgFaction } from "../rpg/rpg-faction";
 
-export function PlayerTest() {
+export function scnPlayerTest() {
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
         await show('Hello!');
     }).show();

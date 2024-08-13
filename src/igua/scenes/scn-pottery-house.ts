@@ -9,7 +9,7 @@ import { playerObj } from "../objects/obj-player";
 import { objValuableTrove } from "../objects/obj-valuable-trove";
 import { RpgProgress } from "../rpg/rpg-progress";
 
-export function LevelTwo() {
+export function scnPotteryHouse() {
     const level = Lvl.Potter();
     scene.stage.step(() => {
         if (Input.justWentDown('CastSpell'))
