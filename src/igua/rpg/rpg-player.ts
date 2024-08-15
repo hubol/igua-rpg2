@@ -23,13 +23,14 @@ export const RpgPlayer = {
             return 45 + RpgProgress.character.attributes.health * 5;
         },
         poison: {
+            immune: false,
+            max: 100,
             get level() {
                 return RpgProgress.character.status.poison.level;
             },
             set level(value) {
                 RpgProgress.character.status.poison.level = value;
             },
-            max: 100,
             get value() {
                 return RpgProgress.character.status.poison.value;
             },

@@ -14,6 +14,7 @@ export namespace RpgStatus {
         invulnerable: number;
         invulnerableMax: number;
         poison: {
+            immune: boolean;
             level: number;
             value: number;
             max: number;
@@ -71,10 +72,12 @@ export namespace RpgStatus {
 
             const ailments = attack.poison > 0;
 
-            model.poison.value += attack.poison;
-            if (model.poison.value >= model.poison.max) {
-                model.poison.value = 0;
-                model.poison.level += 1;
+            if (!model.poison.immune) {
+                model.poison.value += attack.poison;
+                if (model.poison.value >= model.poison.max) {
+                    model.poison.value = 0;
+                    model.poison.level += 1;
+                }
             }
 
             // TODO should resistances to damage be factored here?

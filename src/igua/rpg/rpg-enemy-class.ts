@@ -21,6 +21,7 @@ export namespace RpgEnemyClass {
                     value: status?.poison?.value ?? 0,
                     max: status?.poison?.max ?? 100,
                     level: status?.poison?.level ?? 0,
+                    immune: status?.poison?.immune ?? false,
                 },
                 quirks: {
                     emotionalDamageIsFatal: status?.quirks?.emotionalDamageIsFatal ?? false,
