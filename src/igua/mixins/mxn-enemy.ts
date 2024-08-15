@@ -5,56 +5,19 @@ import { RpgLoot } from "../rpg/rpg-loot";
 import { RpgEnemy } from "../rpg/rpg-enemy";
 import { objLootDrop } from "../objects/obj-loot-drop";
 import { layers } from "../globals";
-import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { merge } from "../../lib/object/merge";
 import { playerObj } from "../objects/obj-player";
-import { DeepPartial } from "../../lib/types/deep-partial";
 import { clone } from "../../lib/object/clone";
+import { RpgEnemyClass } from "../rpg/rpg-enemy-class";
 
 interface MxnEnemyArgs {
     hurtboxes: DisplayObject[];
-    data: MxnEnemyData.Model;
-}
-
-// TODO should this be closer to the Rpg level?
-export namespace MxnEnemyData {
-    export interface Model {
-        status: RpgStatus.Model;
-        loot: RpgLoot.Model;
-    }
-
-    export function create({ status, loot }: DeepPartial<Model>): Model {
-        return {
-            status: {
-                health: status?.health ?? status?.healthMax ?? 30,
-                healthMax: status?.healthMax ?? status?.health ?? 30,
-                invulnerable: status?.invulnerable ?? 0,
-                invulnerableMax: status?.invulnerableMax ?? 15,
-                faction: status?.faction ?? RpgFaction.Enemy,
-                poison: {
-                    value: status?.poison?.value ?? 0,
-                    max: status?.poison?.max ?? 100,
-                    level: status?.poison?.level ?? 0,
-                },
-                quirks: {
-                    emotionalDamageIsFatal: status?.quirks?.emotionalDamageIsFatal ?? false,
-                    incrementsAttackerPrideOnDamage: status?.quirks?.incrementsAttackerPrideOnDamage ?? false,
-                },
-            },
-            loot: {
-                valuables: {
-                    min: loot?.valuables?.min ?? 1,
-                    max: loot?.valuables?.max ?? 2,
-                    deltaPride: loot?.valuables?.deltaPride ?? -1,
-                }
-            }
-        }
-    }
+    class: RpgEnemyClass.Model;
 }
 
 export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
-    const { status, loot } = clone(args.data);
+    const { status, loot } = clone(args.class);
 
     const enemy: RpgEnemy.Model = {
         pride: 0,
