@@ -7,7 +7,7 @@ import { container } from "../../../lib/pixi/container";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { vnew } from "../../../lib/math/vector-type";
 import { playerObj } from "../obj-player";
-import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { MxnEnemyData, mxnEnemy } from "../../mixins/mxn-enemy";
 import { RpgPlayer } from "../../rpg/rpg-player";
 import { RpgAttack } from "../../rpg/rpg-attack";
 
@@ -15,6 +15,20 @@ const clownTxs = Tx.Enemy.CommonClown.split({ count: 2 });
 
 const atkSpikeBall = RpgAttack.create({
     physical: 10,
+})
+
+// TODO devise naming convention
+const datAngelBouncing = MxnEnemyData.create({
+    status: {
+        healthMax: 30,
+    },
+    loot: {
+        valuables: {
+            max: 7,
+            min: 2,
+            deltaPride: -3,
+        }
+    }
 })
 
 export function objAngelBouncing() {
@@ -40,7 +54,7 @@ export function objAngelBouncing() {
 
     let appliedOpaqueTint = false;
     const obj = container(graphics, spikeBall, hatSprite, sprite, mask)
-    .mixin(mxnEnemy, { hurtboxes: [ mask ] })
+    .mixin(mxnEnemy, { hurtboxes: [ mask ], data: datAngelBouncing })
     .mixin(mxnPhysics, { gravity: 0.25, physicsRadius: 8, physicsOffset: vnew(), onMove(event) {
         // TODO in igua 1, some wouldn't bounce
         if (event.hitWall)

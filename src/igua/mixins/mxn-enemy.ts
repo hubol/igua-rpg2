@@ -9,38 +9,52 @@ import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { merge } from "../../lib/object/merge";
 import { playerObj } from "../objects/obj-player";
+import { DeepPartial } from "../../lib/types/deep-partial";
+import { clone } from "../../lib/object/clone";
 
 interface MxnEnemyArgs {
     hurtboxes: DisplayObject[];
+    data: MxnEnemyData.Model;
+}
+
+// TODO should this be closer to the Rpg level?
+export namespace MxnEnemyData {
+    export interface Model {
+        status: RpgStatus.Model;
+        loot: RpgLoot.Model;
+    }
+
+    export function create({ status, loot }: DeepPartial<Model>): Model {
+        return {
+            status: {
+                health: status?.health ?? status?.healthMax ?? 30,
+                healthMax: status?.healthMax ?? status?.health ?? 30,
+                invulnerable: status?.invulnerable ?? 0,
+                invulnerableMax: status?.invulnerableMax ?? 15,
+                faction: status?.faction ?? RpgFaction.Enemy,
+                poison: {
+                    value: status?.poison?.value ?? 0,
+                    max: status?.poison?.max ?? 100,
+                    level: status?.poison?.level ?? 0,
+                },
+                quirks: {
+                    emotionalDamageIsFatal: status?.quirks?.emotionalDamageIsFatal ?? false,
+                    incrementsAttackerPrideOnDamage: status?.quirks?.incrementsAttackerPrideOnDamage ?? false,
+                },
+            },
+            loot: {
+                valuables: {
+                    min: loot?.valuables?.min ?? 1,
+                    max: loot?.valuables?.max ?? 2,
+                    deltaPride: loot?.valuables?.deltaPride ?? -1,
+                }
+            }
+        }
+    }
 }
 
 export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
-    // TODO config probably comes from args!!
-    const status: RpgStatus.Model = {
-        health: 30,
-        healthMax: 30,
-        invulnerable: 0,
-        invulnerableMax: 15,
-        poison: {
-            level: 0,
-            max: 100,
-            value: 0,
-        },
-        faction: RpgFaction.Enemy,
-        quirks: {
-            emotionalDamageIsFatal: false,
-            incrementsAttackerPrideOnDamage: false,
-        }
-    };
-
-    // TODO this should also come from args
-    const loot: RpgLoot.Model = {
-        valuables: {
-            max: 7,
-            min: 2,
-            deltaPride: -3,
-        }
-    };
+    const { status, loot } = clone(args.data);
 
     const enemy: RpgEnemy.Model = {
         pride: 0,
