@@ -46,6 +46,12 @@ async function initialize() {
         integralUpscaleCanvas(addGameCanvasToDocument(renderer.view));
         
         require("./igua/launch/prepare-game-engine").prepareGameEngine(renderer);
+
+        if (Environment.isOgmoExternalProvider) {
+            require("./igua/ogmo/external-provider").provide();
+            return;
+        }
+
         require("./igua/launch/install-dev-tools").installDevTools();
         require("./igua/launch/start-game").startGame();
     }

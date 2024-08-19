@@ -24,5 +24,9 @@ export const Environment = {
     },
     get requiresUserGestureForSound() {
         return Environment.isProduction && !Environment.isElectron;
+    },
+    get isOgmoExternalProvider() {
+        const params = new URLSearchParams(window.location.search);
+        return params.has('ogmoExternalProvider');
     }
 };
