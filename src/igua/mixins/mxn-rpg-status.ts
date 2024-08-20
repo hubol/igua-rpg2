@@ -2,6 +2,8 @@ import { DisplayObject } from "pixi.js";
 import { RpgStatus } from "../rpg/rpg-status";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgEnemy } from "../rpg/rpg-enemy";
+import { mxnDripping } from "./mxn-dripping";
+import { approachLinear } from "../../lib/math/number";
 
 interface MxnRpgStatusArgs {
     status: RpgStatus.Model;
@@ -14,6 +16,7 @@ export function mxnRpgStatus(obj: DisplayObject, args: MxnRpgStatusArgs) {
 
     const rpgStatusObj = obj
     .track(mxnRpgStatus)
+    .mixin(mxnDripping)
     .merge(args)
     .merge({
         damage(attack: RpgAttack.Model, attacker?: RpgEnemy.Model) {
@@ -23,10 +26,28 @@ export function mxnRpgStatus(obj: DisplayObject, args: MxnRpgStatusArgs) {
             RpgStatus.Methods.heal(args.status, args.effects, amount);
         },
     })
-    .step(() => {
+    .step(self => {
         RpgStatus.Methods.tick(args.status, args.effects, tickCount = (tickCount + 1) % 120);
         obj.visible = args.status.invulnerable > 0 ? !obj.visible : true;
+        self.dripsPerFrame = approachLinear(
+            self.dripsPerFrame,
+            getTargetDripsPerFrame(args.status.wetness.value),
+            0.025);
     })
 
     return rpgStatusObj;
+}
+
+function getTargetDripsPerFrame(wetness: number) {
+    if (wetness > 90)
+        return 0.25;
+    if (wetness > 75)
+        return 0.5;
+    if (wetness > 50)
+        return 0.3;
+    if (wetness > 25)
+        return 0.1;
+    if (wetness > 10)
+        return 0.05;
+    return 0;
 }

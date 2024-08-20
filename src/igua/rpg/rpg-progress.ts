@@ -11,7 +11,10 @@ function getInitialRpgProgress() {
                 poison: {
                     level: 0,
                     value: 0,
-                }
+                },
+                wetness: {
+                    value: 0,
+                },
             },
             attributes: {
                 health: 1,

@@ -38,6 +38,15 @@ export const RpgPlayer = {
                 RpgProgress.character.status.poison.value = value;
             }
         },
+        wetness: {
+            get value() {
+                return RpgProgress.character.status.wetness.value;
+            },
+            set value(value) {
+                RpgProgress.character.status.wetness.value = value;
+            },
+            max: 100,
+        },
         faction: RpgFaction.Player,
         quirks: {
             emotionalDamageIsFatal: true,
@@ -56,6 +65,7 @@ export const RpgPlayer = {
             return 5 + RpgProgress.character.attributes.strength * 5;
         },
         poison: 0,
+        wetness: 0,
         versus: RpgFaction.Enemy,
     } satisfies RpgAttack.Model,
 }

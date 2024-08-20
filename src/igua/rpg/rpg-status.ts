@@ -1,3 +1,4 @@
+import { Integer } from "../../lib/math/number-alias-types";
 import { RpgAttack } from "./rpg-attack";
 import { RpgEnemy } from "./rpg-enemy";
 import { RpgFaction } from "./rpg-faction";
@@ -18,6 +19,10 @@ export namespace RpgStatus {
             level: number;
             value: number;
             max: number;
+        };
+        wetness: {
+            value: Integer;
+            max: Integer;
         };
         quirks: {
             incrementsAttackerPrideOnDamage: boolean;
@@ -63,6 +68,9 @@ export namespace RpgStatus {
             if (count % 15 === 0) {
                 model.poison.value = Math.max(0, model.poison.value - 1);
             }
+            if (count % 4 === 0) {
+                model.wetness.value = Math.max(0, model.wetness.value - 1);
+            }
             model.invulnerable = Math.max(0, model.invulnerable - 1);
         },
     
@@ -70,7 +78,7 @@ export namespace RpgStatus {
             if (attack.versus !== RpgFaction.Anyone && attack.versus !== model.faction)
                 return { rejected: true, wrongFaction: true };
 
-            const ailments = attack.poison > 0;
+            const ailments = attack.poison > 0 || attack.wetness > 0;
 
             if (!model.poison.immune) {
                 model.poison.value += attack.poison;
@@ -79,6 +87,8 @@ export namespace RpgStatus {
                     model.poison.level += 1;
                 }
             }
+
+            model.wetness.value = Math.min(model.wetness.value + attack.wetness, model.wetness.max);
 
             // TODO should resistances to damage be factored here?
             // Or should that be computed in a previous step?

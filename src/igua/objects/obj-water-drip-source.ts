@@ -20,18 +20,32 @@ export function objWaterDripSource({ delayMin, delayMax }: ObjWaterDripSourceArg
         .async(async self => {
             while (true) {
                 await sleep(Rng.intc(delayMin, delayMax));
-                objWaterDrip(self.poison).at(self).show(self.parent);
+                objWaterDrip(self.poison ? atkPoisonDrip : atkDrip).at(self).show(self.parent);
             }
         })
 }
 
 const atkPoisonDrip = RpgAttack.create({
+    wetness: 5,
     poison: 5,
     versus: RpgFaction.Anyone,
 });
 
-function objWaterDrip(poison: boolean) {
-    const obj = Sprite.from(poison ? Tx.Effects.PoisonDripSmall : Tx.Effects.WaterDripSmall)
+const atkDrip = RpgAttack.create({
+    wetness: 5,
+    versus: RpgFaction.Anyone,
+});
+
+function getTx(attack: RpgAttack.Model | null) {
+    if (attack == null)
+        return Tx.Effects.WaterDripXsmall;
+    if (attack.poison)
+        return Tx.Effects.PoisonDripSmall;
+    return Tx.Effects.WaterDripSmall;
+}
+
+export function objWaterDrip(attack: RpgAttack.Model | null) {
+    const obj = Sprite.from(getTx(attack))
         .mixin(mxnPhysics, { gravity: 0.05, physicsRadius: 4, physicsOffset: [0, -2], onMove: (ev) => {
             if (ev.hitGround) {
                 obj.destroy();
@@ -39,8 +53,8 @@ function objWaterDrip(poison: boolean) {
             }
         } })
 
-    if (poison)
-        obj.mixin(mxnRpgAttack, { attack: atkPoisonDrip })
+    if (attack)
+        obj.mixin(mxnRpgAttack, { attack })
         .handles('mxnRpgAttack.hit', self => self.destroy());
 
     return obj;

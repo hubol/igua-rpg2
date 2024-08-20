@@ -23,6 +23,10 @@ export namespace RpgEnemyClass {
                     level: status?.poison?.level ?? 0,
                     immune: status?.poison?.immune ?? false,
                 },
+                wetness: {
+                    value: status?.wetness?.value ?? 0,
+                    max: status?.wetness?.max ?? 100,
+                },
                 quirks: {
                     emotionalDamageIsFatal: status?.quirks?.emotionalDamageIsFatal ?? false,
                     incrementsAttackerPrideOnDamage: status?.quirks?.incrementsAttackerPrideOnDamage ?? false,

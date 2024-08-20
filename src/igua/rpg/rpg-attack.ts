@@ -6,6 +6,7 @@ export namespace RpgAttack {
         physical: Integer;
         emotional: Integer;
         poison: Integer;
+        wetness: Integer;
         versus: RpgFaction;
     }
 
@@ -14,6 +15,7 @@ export namespace RpgAttack {
             physical: model.physical ?? 0,
             emotional: model.emotional ?? 0,
             poison: model.poison ?? 0,
+            wetness: model.wetness ?? 0,
             versus: model.versus ?? RpgFaction.Player,
         }
     }
