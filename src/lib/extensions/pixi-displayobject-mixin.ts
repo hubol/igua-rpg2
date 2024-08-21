@@ -10,13 +10,26 @@ type ExcludeFirstParameter<T extends [p1: unknown, ...pR: unknown[]]> = T extend
 declare module "pixi.js" {
     interface DisplayObject {
         mixin<TArgs extends [src: any, ...rest: any[]], TFn extends (...args: TArgs) => any>(mixin: TFn, ...args: ExcludeFirstParameter<Parameters<TFn>>): Mixed<Parameters<TFn>[0], ReturnType<TFn>, this>;
+        is<TFn extends (...args: any) => any>(mixin: TFn): this is ReturnType<TFn>;
     }
+}
+
+interface DisplayObjectPrivate {
+    _mixins?: Set<(...args: any) => any>;
 }
 
 Object.defineProperties(DisplayObject.prototype, {
     mixin: {
-        value: function (this: DisplayObject, mixin: (d: DisplayObject, ...rest: any[]) => unknown, arg1: any, arg2: any, arg3: any) {
+        value: function (this: DisplayObject & DisplayObjectPrivate, mixin: (d: DisplayObject, ...rest: any[]) => unknown, arg1: any, arg2: any, arg3: any) {
+            if (!this._mixins)
+                this._mixins = new Set();
+            this._mixins.add(mixin);
             return mixin(this, arg1, arg2, arg3);
         }
     },
+    is: {
+        value: function (this: DisplayObject & DisplayObjectPrivate, mixin: (...args: any) => any) {
+            return this._mixins ? this._mixins.has(mixin) : false;
+        }
+    }
 });
