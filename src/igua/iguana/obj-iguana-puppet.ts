@@ -44,7 +44,7 @@ function getFlippableOffsetX(src: DisplayObject | undefined, dst: DisplayObject,
 }
 
 export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
-    const { back, front, controller: feetController, feet } = objIguanaFeet(looks.feet);
+    const { back, front, controller: feetController, feet, shapes: feetShapes } = objIguanaFeet(looks.feet);
     const body = objIguanaBody(looks.body);
     const head = objIguanaHead(looks.head);
     head.pivot.set(-5, 7).add(looks.head.placement, -1);
@@ -152,7 +152,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     };
 
     const c = container(back, core, front)
-        .collisionShape(CollisionShape.DisplayObjects, [ head.crest, head.noggin, body.torso ])
+        .collisionShape(CollisionShape.DisplayObjects, [ head.crest, head.noggin, body.torso, ...feetShapes ])
         .merge({ head, body, feet })
         .merge({
             get facing() {
@@ -356,6 +356,7 @@ function objIguanaFeet(feet: Feet) {
         back,
         front,
         controller,
+        shapes: [ frontForeLeft, frontForeRight, frontHindLeft, frontHindRight ],
         feet: {
             // foreLeft,
             // foreRight,

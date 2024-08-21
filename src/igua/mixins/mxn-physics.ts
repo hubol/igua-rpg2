@@ -2,16 +2,24 @@ import { Container, DisplayObject, Graphics } from "pixi.js";
 import { Vector, vnew } from "../../lib/math/vector-type";
 import { LocalTerrain } from "../objects/obj-terrain";
 import { StepOrder } from "../objects/step-order";
+import { Instances } from "../../lib/game-engine/instances";
+import { mxnPhysicsCollideable } from "./mxn-physics-collideable";
+
+export enum PhysicsFaction {
+    Player = 1,
+    Enemy = 1 << 1,
+}
 
 interface PhysicsArgs {
     gravity: number;
     physicsRadius: number;
+    physicsFaction?: PhysicsFaction | null;
     physicsOffset?: Vector;
     onMove?: (event: MoveEvent) => void;
     debug?: boolean;
 }
 
-export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physicsOffset = vnew(), debug = false, onMove }: PhysicsArgs) {
+export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physicsFaction = null, physicsOffset = vnew(), debug = false, onMove }: PhysicsArgs) {
     if (debug && obj instanceof Container) {
         for (const child of obj.children)
             child.alpha = 0.5;
@@ -32,7 +40,7 @@ export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physics
     }
 
     return obj
-        .merge({ speed: vnew(), gravity, isOnGround: false, physicsRadius, physicsOffset })
+        .merge({ speed: vnew(), gravity, isOnGround: false, physicsRadius, physicsFaction, physicsOffset })
         .step(obj => {
             // TODO
             // Is this even necessary? If so, why?! Why doesn't rounding when rendering work?!
@@ -54,6 +62,16 @@ const moveEvent = {
     previousSpeed: vnew(),
 } as MoveEvent;
 
+interface CollideEvent {
+    obj: MxnPhysics;
+    previousSpeed: Vector;
+    previousOnGround: boolean;
+}
+
+const collideEvent = {
+    previousSpeed: vnew(),
+} as CollideEvent;
+
 function move(obj: MxnPhysics) {
     const radius = obj.physicsRadius;
     const radiusSqrt = Math.sqrt(radius);
@@ -71,6 +89,12 @@ function move(obj: MxnPhysics) {
     moveEvent.hitWall = false;
     moveEvent.previousSpeed!.at(obj.speed);
     moveEvent.previousOnGround = obj.isOnGround;
+
+    collideEvent.obj = obj;
+    collideEvent.previousSpeed.at(obj.speed);
+    collideEvent.previousOnGround = obj.isOnGround;
+
+    runCollisions(obj);
 
     // TODO dividing into steps might be overkill, not sure
     while (hspAbs > 0 || vspAbs > 0) {
@@ -106,6 +130,8 @@ function move(obj: MxnPhysics) {
         moveEvent.hitWall ||= r2.hitWall;
         hitGround ||= r2.hitGround;
 
+        runCollisions(obj);
+
         if (vspStep !== 0)
             obj.isOnGround = hitGround;
 
@@ -120,6 +146,17 @@ function move(obj: MxnPhysics) {
     }
 
     return moveEvent as MoveEvent;
+}
+
+// TODO name horrible
+function runCollisions(obj: MxnPhysics) {
+    if (obj.physicsFaction !== null) {
+        for (const collideable of Instances(mxnPhysicsCollideable)) {
+            // TODO should multiple collisions with one instance be prevented?
+            if (collideable.receivesPhysicsFaction & obj.physicsFaction && collideable.collides(obj))
+                collideable.onPhysicsCollision(collideEvent);
+        }
+    }
 }
 
 const PushWorkingState = {

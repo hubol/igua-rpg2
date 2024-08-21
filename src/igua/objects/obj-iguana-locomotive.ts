@@ -4,7 +4,7 @@ import { approachLinear } from "../../lib/math/number";
 import { Undefined } from "../../lib/types/undefined";
 import { IguanaLooks } from "../iguana/looks";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
-import { mxnPhysics } from "../mixins/mxn-physics";
+import { PhysicsFaction, mxnPhysics } from "../mixins/mxn-physics";
 
 const IguanaLocomotiveConsts = {
     WalkingAcceleration: 0.3,
@@ -91,7 +91,8 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
     }
 
     const puppet = objIguanaPuppet(looks)
-        .mixin(mxnPhysics, { gravity: IguanaLocomotiveConsts.Gravity, physicsRadius: 7, physicsOffset: [0, -9], debug: false, onMove: (event) => {
+        // TODO not sure if that is the correct physics faction...
+        .mixin(mxnPhysics, { gravity: IguanaLocomotiveConsts.Gravity, physicsFaction: PhysicsFaction.Player, physicsRadius: 7, physicsOffset: [0, -9], debug: false, onMove: (event) => {
             if (event.hitGround && !event.previousOnGround && event.previousSpeed.y > 1.2)
                 puppet.landingFrames = 10;
             if (event.hitWall)

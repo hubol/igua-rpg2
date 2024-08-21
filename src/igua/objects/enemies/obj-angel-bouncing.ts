@@ -4,7 +4,7 @@ import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { nlerp } from "../../../lib/math/number";
 import { container } from "../../../lib/pixi/container";
-import { mxnPhysics } from "../../mixins/mxn-physics";
+import { PhysicsFaction, mxnPhysics } from "../../mixins/mxn-physics";
 import { vnew } from "../../../lib/math/vector-type";
 import { playerObj } from "../obj-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
@@ -56,7 +56,7 @@ export function objAngelBouncing() {
     let appliedOpaqueTint = false;
     const obj = container(graphics, spikeBall, hatSprite, sprite, mask)
     .mixin(mxnEnemy, { hurtboxes: [ mask ], class: clsAngelBouncing })
-    .mixin(mxnPhysics, { gravity: 0.25, physicsRadius: 8, physicsOffset: vnew(), onMove(event) {
+    .mixin(mxnPhysics, { gravity: 0.25, physicsRadius: 8, physicsFaction: PhysicsFaction.Enemy, physicsOffset: vnew(), onMove(event) {
         // TODO in igua 1, some wouldn't bounce
         if (event.hitWall)
             obj.speed.x = -event.previousSpeed.x; // TODO might be nice to get the normal

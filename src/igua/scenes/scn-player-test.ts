@@ -14,6 +14,7 @@ import { objWaterDripSource } from "../objects/obj-water-drip-source";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgFaction } from "../rpg/rpg-faction";
+import { objPuddle } from "../objects/nature/obj-puddle";
 
 export function scnPlayerTest() {
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
@@ -26,7 +27,7 @@ export function scnPlayerTest() {
         dripSource.poison = true;
     }
 
-    const { LockedDoor } = level;
+    const { LockedDoor, asdf } = level;
 
     LockedDoor.async(async () => {
         while (true) {
@@ -42,4 +43,13 @@ export function scnPlayerTest() {
     })
 
     objAngelBouncing().at(playerObj).add(40, -16).show();
+
+    {
+        const x = asdf.x - 16;
+        const y = asdf.y + 16;
+        const width = LockedDoor.x + 16 - x;
+        const height = 3;
+
+        objPuddle(width, height).at(x, y).show();
+    }
 }
