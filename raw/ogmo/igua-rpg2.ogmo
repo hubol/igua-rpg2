@@ -17,8 +17,16 @@
   "compactExport": false,
   "externalScript": "igua-rpg2-ogmo.js",
   "playCommand": "",
-  "entityTags": ["Terrain", "Player"],
+  "entityTags": ["Terrain", "Player", "Front"],
   "layers": [
+    {
+      "definition": "entity",
+      "name": "FrontEntities",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "55690179",
+      "requiredTags": ["Front"],
+      "excludedTags": []
+    },
     {
       "definition": "entity",
       "name": "PlayerEntities",
@@ -690,6 +698,50 @@
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "../textures/collectibles/valuable blue.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAANCAMAAAB4p3UoAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAVUExURQDA2Jjg4Kjw8ADg2ACo2P///wAAALolqk8AAAAHdFJOU////////wAaSwNGAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAWUlEQVQYV13OAQ7AIAgDQArY/z95Rbstm4kJPQkYZMwBkFlViozujlAAVq6ahldyqe0j01ORedCswJ9oMgG92GY1hx5Rmkt4g35joWXXR7jllBZqiqtbaCAvHRADALH7B+AAAAAASUVORK5CYII="
+    },
+    {
+      "exportID": "55698237",
+      "name": "Puddle",
+      "limit": -1,
+      "size": {"x": 16, "y": 8},
+      "origin": {"x": 0, "y": 1},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": true,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["Front"],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "tintable": {"enabled": true, "defaultTint": "#68a8d0", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/puddle.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAICAYAAADwdn+XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAXSURBVChTY/wPBAwUACYoPQqGMGBgAAAWAAQAN4OVaAAAAABJRU5ErkJggg=="
     }
   ],
   "tilesets": []

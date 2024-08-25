@@ -14,8 +14,21 @@ const atkSplash = RpgAttack.create({
     wetness: 10,
 })
 
-export function objPuddle(width: number, height: number) {
-    const gfx = new Graphics().beginFill(0x67A5CE)
+const atkSplashPoison = RpgAttack.create({
+    wetness: 10,
+    poison: 5,
+})
+
+export function objPuddle(width: number, tint = 0x68A8D0) {
+    return objPuddleBase(width, 3, tint, atkSplash);
+}
+
+export function objPuddlePoison(width: number, tint = 0x80B020) {
+    return objPuddleBase(width, 3, tint, atkSplashPoison);
+}
+
+function objPuddleBase(width: number, height: number, tint: Integer, attack: RpgAttack.Model) {
+    const gfx = new Graphics().beginFill(tint)
     .drawRect(0, -1, width, height);
 
     const effectCooldowns = new Map<object, Integer>();
@@ -24,10 +37,10 @@ export function objPuddle(width: number, height: number) {
     .collisionShape(CollisionShape.DisplayObjects, [ gfx ])
     .mixin(mxnPhysicsCollideable, { receivesPhysicsFaction: ReceivesPhysicsFaction.Any, onPhysicsCollision(event) {
         if (event.obj.is(mxnRpgStatus))
-            event.obj.damage(atkSplash);
+            event.obj.damage(attack);
 
         if ((event.previousSpeed.y < 0) || (!event.previousOnGround && event.previousSpeed.y > 0)) {
-            objUpwardSplash().tinted(0x67A5CE).at(event.obj.x - c.x, 1).show(c);
+            objUpwardSplash().tinted(tint).at(event.obj.x - c.x, 1).show(c);
             return;   
         }
 
@@ -42,7 +55,7 @@ export function objPuddle(width: number, height: number) {
             objSideSplash(
                 Math.sign(event.previousSpeed.x) * Math.min(Math.abs(event.previousSpeed.x / 2), 2),
                 width)
-            .tinted(0x67A5CE)
+            .tinted(tint)
             .at(event.obj.x - c.x, Rng.intc(-1, 1)).show(c);
     }, })
     .step(() => {

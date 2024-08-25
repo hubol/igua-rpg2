@@ -8,6 +8,30 @@
   "backgroundColor": "#ecd769",
   "layers": [
     {
+      "name": "FrontEntities",
+      "_eid": "55690179",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 103,
+      "gridCellsY": 32,
+      "entities": [
+        {
+          "name": "Puddle",
+          "id": 0,
+          "_eid": "55698237",
+          "x": 116,
+          "y": 152,
+          "width": 120,
+          "originX": 0,
+          "originY": 1,
+          "tint": "#68a8d0",
+          "values": {"name": "", "depth": 0}
+        }
+      ]
+    },
+    {
       "name": "PlayerEntities",
       "_eid": "96470627",
       "offsetX": 0,

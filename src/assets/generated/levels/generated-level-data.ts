@@ -34,6 +34,7 @@ export const Lvl = {
     ValuableOrange: e(r["ValuableOrange"], { x: 864, y: 456, uid: 172291941893700, values: { name: "", depth: 0 } }),
     ValuableOrange_1: e(r["ValuableOrange"], { x: 904, y: 384, uid: 172291942149901, values: { name: "", depth: 0 } }),
     Player: e(r["Player"], { x: 936, y: 472, flippedX: false, values: { name: "", depth: 0 } }),
+    Puddle: e(r["Puddle"], { x: 824, y: 472, width: 128, values: { name: "", depth: 0 }, tint: 0x68a8d0 }),
   })),
   Level2: l({ width: 256, height: 320, backgroundTint: 0xc0a311 }, () => ({
     Block: e(r["Block"], { x: 0, y: 280, width: 256, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x631d1d }),
@@ -235,5 +236,6 @@ export const Lvl = {
     WaterDripSource_8: e(r["WaterDripSource"], { x: 648, y: 32, values: { delayMin: 100, delayMax: 200, name: "", depth: 0 } }),
     Player: e(r["Player"], { x: 72, y: 64, flippedX: true, values: { name: "", depth: 0 } }),
     FromLevelTwo: e(r["Checkpoint"], { x: 344, y: 176, flippedX: true, values: { name: "FromLevelTwo", depth: 0 } }),
+    Puddle: e(r["Puddle"], { x: 116, y: 152, width: 120, values: { name: "", depth: 0 }, tint: 0x68a8d0 }),
   })),
 };

@@ -1,4 +1,5 @@
 import { vnew } from "../../lib/math/vector-type";
+import { objPuddle } from "../objects/nature/obj-puddle";
 import { objDoor } from "../objects/obj-door";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { objIntelligenceBackground } from "../objects/obj-intelligence-background";
@@ -24,6 +25,7 @@ export const OgmoEntityResolvers = {
     'IntelligenceBackground': ({ values }) => objIntelligenceBackground(values as any),
     'IguanaNpc': (entity) => {
         const obj = objIguanaNpc(entity.values as any);
+        obj.y = 2;
         obj.facing = entity.flippedX ? -1 :1;
         delete entity.flippedX;
         return obj;
@@ -31,6 +33,11 @@ export const OgmoEntityResolvers = {
     'ValuableGreen': ({ uid }) => objValuable('green', uid),
     'ValuableOrange': ({ uid }) => objValuable('orange', uid),
     'ValuableBlue': ({ uid }) => objValuable('blue', uid),
+    'Puddle': (entity) => {
+        const obj = objPuddle(entity.width!, entity.tint);
+        delete entity.width;
+        return obj;
+    },
 } satisfies Record<string, (e: OgmoFactory.Entity) => unknown>
 
 function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?: string) {

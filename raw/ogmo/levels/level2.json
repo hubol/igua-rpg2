@@ -8,6 +8,17 @@
   "backgroundColor": "#c0a311",
   "layers": [
     {
+      "name": "FrontEntities",
+      "_eid": "55690179",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 32,
+      "gridCellsY": 40,
+      "entities": []
+    },
+    {
       "name": "PlayerEntities",
       "_eid": "96470627",
       "offsetX": 0,
