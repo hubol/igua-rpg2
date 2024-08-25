@@ -4,6 +4,7 @@ import { elDebugColors } from "../../lib/game-engine/elements/el-debug-colors";
 import { Toast } from "../../lib/game-engine/toast";
 import { IguaAudio } from "../core/igua-audio";
 import { SceneLibrary } from "../core/scene/scene-library";
+import { DevStartScene } from "../dev/dev-start-scene";
 import { layers, sceneStack } from "../globals";
 
 export function installDevTools() {
@@ -36,7 +37,7 @@ function createSceneSwitcherEl() {
     selectEl.addEventListener('click', () => {
         if (expectClickEvent) {
             if (selectEl.value !== noChoiceString)
-                sceneStack.replace(SceneLibrary.findByName(selectEl.value), { useGameplay: false });
+                onChange(selectEl.value);
             expectClickEvent = false;
         }
     })
@@ -46,6 +47,11 @@ function createSceneSwitcherEl() {
             selectEl.blur();
         }
     })
+
+    const onChange = (sceneName: string) => {
+        sceneStack.replace(SceneLibrary.findByName(sceneName), { useGameplay: false });
+        DevStartScene.name = sceneName;
+    }
 
     const noChoiceOptionEl = document.createElement('option');
     noChoiceOptionEl.textContent = '<Choose Scene>';
