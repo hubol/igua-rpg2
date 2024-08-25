@@ -76,6 +76,8 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                         || !puppet.isBeingPiloted
                         || hitWall)
                     || puppet.x + puppet.estimatedDecelerationDeltaX <= x);
+
+                puppet.isMovingLeft = false;
             }
         }
         catch (e) {
