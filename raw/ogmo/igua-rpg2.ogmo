@@ -52,7 +52,7 @@
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
       ]
@@ -72,6 +72,20 @@
       "exportID": "41483982",
       "requiredTags": [],
       "excludedTags": ["Terrain", "Player"]
+    },
+    {
+      "definition": "decal",
+      "name": "BackgroundDecals",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "64691217",
+      "folder": "../textures",
+      "includeImageSequence": true,
+      "scaleable": true,
+      "rotatable": true,
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
+      ]
     }
   ],
   "entities": [
@@ -739,9 +753,9 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
-      "tintable": {"enabled": true, "defaultTint": "#68a8d0", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#68a8d0", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/puddle.png",
-      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAICAYAAADwdn+XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAXSURBVChTY/wPBAwUACYoPQqGMGBgAAAWAAQAN4OVaAAAAABJRU5ErkJggg=="
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAICAYAAADwdn+XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAbSURBVChTY/wPBAwUACYoTTag2IBRQDFgYAAAGQwEAsnlJ7IAAAAASUVORK5CYII="
     }
   ],
   "tilesets": []

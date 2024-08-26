@@ -308,6 +308,18 @@
       "gridCellsX": 32,
       "gridCellsY": 40,
       "entities": []
+    },
+    {
+      "name": "BackgroundDecals",
+      "_eid": "64691217",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 32,
+      "gridCellsY": 40,
+      "decals": [],
+      "folder": "../textures"
     }
   ]
 }
