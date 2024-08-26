@@ -2,8 +2,6 @@ import { Container, DisplayObject, Graphics } from "pixi.js";
 import { Vector, vnew } from "../../lib/math/vector-type";
 import { LocalTerrain } from "../objects/obj-terrain";
 import { StepOrder } from "../objects/step-order";
-import { Instances } from "../../lib/game-engine/instances";
-import { mxnPhysicsCollideable } from "./mxn-physics-collideable";
 
 export enum PhysicsFaction {
     Player = 1,
@@ -40,6 +38,7 @@ export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physics
     }
 
     return obj
+        .track(mxnPhysics)
         .merge({ speed: vnew(), gravity, isOnGround: false, physicsRadius, physicsFaction, physicsOffset })
         .step(obj => {
             // TODO
@@ -94,8 +93,6 @@ function move(obj: MxnPhysics) {
     collideEvent.previousSpeed.at(obj.speed);
     collideEvent.previousOnGround = obj.isOnGround;
 
-    runCollisions(obj);
-
     // TODO dividing into steps might be overkill, not sure
     while (hspAbs > 0 || vspAbs > 0) {
         const hspSign = Math.sign(hsp);
@@ -130,8 +127,6 @@ function move(obj: MxnPhysics) {
         moveEvent.hitWall ||= r2.hitWall;
         hitGround ||= r2.hitGround;
 
-        runCollisions(obj);
-
         if (vspStep !== 0)
             obj.isOnGround = hitGround;
 
@@ -146,17 +141,6 @@ function move(obj: MxnPhysics) {
     }
 
     return moveEvent as MoveEvent;
-}
-
-// TODO name horrible
-function runCollisions(obj: MxnPhysics) {
-    if (obj.physicsFaction !== null) {
-        for (const collideable of Instances(mxnPhysicsCollideable)) {
-            // TODO should multiple collisions with one instance be prevented?
-            if (collideable.receivesPhysicsFaction & obj.physicsFaction && collideable.collides(obj))
-                collideable.onPhysicsCollision(collideEvent);
-        }
-    }
 }
 
 const PushWorkingState = {

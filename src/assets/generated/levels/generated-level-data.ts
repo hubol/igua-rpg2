@@ -245,5 +245,6 @@ export const Lvl = {
     Player: e(r["Player"], { x: 72, y: 64, flippedX: true, values: { name: "", depth: 0 } }),
     FromLevelTwo: e(r["Checkpoint"], { x: 344, y: 176, flippedX: true, values: { name: "FromLevelTwo", depth: 0 } }),
     Puddle: e(r["Puddle"], { x: 116, y: 152, width: 120, values: { name: "", depth: 0 }, tint: 0x68a8d0 }),
+    Puddle_1: e(r["Puddle"], { x: 584, y: 208, width: 184, values: { name: "", depth: 0 }, tint: 0x68a8d0 }),
   })),
 };

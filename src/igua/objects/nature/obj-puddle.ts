@@ -1,5 +1,4 @@
 import { Graphics } from "pixi.js";
-import { ReceivesPhysicsFaction, mxnPhysicsCollideable } from "../../mixins/mxn-physics-collideable";
 import { mxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { container } from "../../../lib/pixi/container";
@@ -9,6 +8,9 @@ import { Rng } from "../../../lib/math/rng";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { approachLinear } from "../../../lib/math/number";
+import { StepOrder } from "../step-order";
+import { Instances } from "../../../lib/game-engine/instances";
+import { MxnPhysics, mxnPhysics } from "../../mixins/mxn-physics";
 
 const atkSplash = RpgAttack.create({
     wetness: 10,
@@ -27,43 +29,55 @@ export function objPuddlePoison(width: number, tint = 0x80B020) {
     return objPuddleBase(width, 3, tint, atkSplashPoison);
 }
 
+const filterFn = (item: MxnPhysics) => item.physicsFaction as unknown as boolean;
+
 function objPuddleBase(width: number, height: number, tint: Integer, attack: RpgAttack.Model) {
+    let stepCount = 0;
+
     const gfx = new Graphics().beginFill(tint)
     .drawRect(0, -1, width, height);
 
-    const effectCooldowns = new Map<object, Integer>();
+    const sideStepCounts = new WeakMap<object, Integer>();
+    const upwardStepCounts = new WeakMap<object, Integer>();
 
     const c = container(gfx)
     .collisionShape(CollisionShape.DisplayObjects, [ gfx ])
-    .mixin(mxnPhysicsCollideable, { receivesPhysicsFaction: ReceivesPhysicsFaction.Any, onPhysicsCollision(event) {
-        if (event.obj.is(mxnRpgStatus))
-            event.obj.damage(attack);
-
-        if ((event.previousSpeed.y < 0) || (!event.previousOnGround && event.previousSpeed.y > 0)) {
-            objUpwardSplash().tinted(tint).at(event.obj.x - c.x, 1).show(c);
-            return;   
-        }
-
-        const cooldown = effectCooldowns.get(event.obj);
-
-        if (!cooldown)
-            effectCooldowns.set(event.obj, 5);
-        else
-            return;
-
-        if (event.previousOnGround && event.previousSpeed.x !== 0)
-            objSideSplash(
-                Math.sign(event.previousSpeed.x) * Math.min(Math.abs(event.previousSpeed.x / 2), 2),
-                width)
-            .tinted(tint)
-            .at(event.obj.x - c.x, Rng.intc(-1, 1)).show(c);
-    }, })
     .step(() => {
-        for (const [ obj, value ] of effectCooldowns) {
-            if (value > 0)
-                effectCooldowns.set(obj, value - 1);
+        stepCount++;
+
+        const instances = Instances(mxnPhysics, filterFn);
+        for (const obj of instances) {
+            if (!obj.collides(c, obj.speed.y < 0 ? undefined : obj.speed))
+                continue;
+
+            if (obj.is(mxnRpgStatus))
+                obj.damage(attack);
+    
+            if ((obj.speed.y < 0) || (!obj.isOnGround && obj.speed.y > 0)) {
+                const upwardStepCount = upwardStepCounts.get(obj);
+
+                if (!upwardStepCount || stepCount - upwardStepCount >= 5) {
+                    upwardStepCounts.set(obj, stepCount);
+                    objUpwardSplash().tinted(tint).at(obj.x - c.x, 1).show(c);
+                    continue;
+                }
+            }
+    
+            const sideStepCount = sideStepCounts.get(obj);
+
+            if (!sideStepCount || stepCount - sideStepCount >= 5)
+                sideStepCounts.set(obj, stepCount);
+            else
+                continue;
+    
+            if (obj.isOnGround && obj.speed.x !== 0)
+                objSideSplash(
+                    Math.sign(obj.speed.x) * Math.min(Math.abs(obj.speed.x / 2), 2),
+                    width)
+                .tinted(tint)
+                .at(obj.x - c.x, Rng.intc(-1, 1)).show(c);
         }
-    })
+    }, StepOrder.Physics - 1);
 
     return c;
 }
