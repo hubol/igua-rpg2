@@ -14,8 +14,12 @@ import { objWaterDripSource } from "../objects/obj-water-drip-source";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgFaction } from "../rpg/rpg-faction";
+import { Jukebox } from "../core/igua-audio";
+import { Mzk } from "../../assets/music";
 
 export function scnPlayerTest() {
+    Jukebox.play(Mzk.Covid_19);
+
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
         await show('Hello!');
     }).show();

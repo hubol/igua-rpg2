@@ -1,8 +1,7 @@
 import { intervalWait } from "../../browser/interval-wait";
 import { Sound, SoundInstance } from "./sound";
 
-type Url = string;
-type MusicTrack = Url;
+export type MusicTrack = string & { readonly __t: unique symbol; };
 
 // TODO generics?
 export class AsshatJukebox {
@@ -39,14 +38,14 @@ export class AsshatJukebox {
 }
 
 class MusicTrackLoader {
-    private readonly _loaded: Record<Url, Sound> = {};
-    private readonly _loading = new Set<Url>();
+    private readonly _loaded: Record<MusicTrack, Sound> = {};
+    private readonly _loading = new Set<MusicTrack>();
 
     constructor(private readonly _destination: AudioNode) {
 
     }
 
-    async load(track: Url) {
+    async load(track: MusicTrack) {
         if (this._loaded[track])
             return this._loaded[track];
 

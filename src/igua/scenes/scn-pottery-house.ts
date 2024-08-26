@@ -1,6 +1,8 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { sleep } from "../../lib/game-engine/promise/sleep";
 import { container } from "../../lib/pixi/container";
+import { Jukebox } from "../core/igua-audio";
 import { show } from "../cutscene/show";
 import { Input, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -10,6 +12,8 @@ import { objValuableTrove } from "../objects/obj-valuable-trove";
 import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnPotteryHouse() {
+    Jukebox.play(Mzk.BigLove);
+
     const level = Lvl.Potter();
     scene.stage.step(() => {
         if (Input.justWentDown('CastSpell'))
