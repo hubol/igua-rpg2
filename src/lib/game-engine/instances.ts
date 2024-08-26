@@ -3,6 +3,8 @@ import { SceneLocal } from "./scene-local";
 
 type Fn = (...args: any[]) => any;
 
+const filteredItems: any[] = [];
+
 /**
  * Utility for finding game objects that called `.track()` with the specified function `fn`.
  * 
@@ -12,8 +14,19 @@ type Fn = (...args: any[]) => any;
  * However, if while iterating the list, you destroy game objects in the list;
  * they will continue to exist in the list.
  */
-export function Instances<TFn extends Fn>(fn: TFn): ReturnType<TFn>[] {
-    return _Internal_Instances.TrackedInstancesSceneLocal.value.get(fn).array() as any;
+export function Instances<TFn extends Fn>(fn: TFn): ReturnType<TFn>[]
+export function Instances<TFn extends Fn>(fn: TFn, filter: (item: ReturnType<TFn>) => boolean): ReturnType<TFn>[]
+export function Instances<TFn extends Fn>(fn: TFn, filter?: (item: ReturnType<TFn>) => boolean): ReturnType<TFn>[] {
+    const items = _Internal_Instances.TrackedInstancesSceneLocal.value.get(fn).array();
+    if (!filter)
+        return items as any;
+    filteredItems.length = 0;
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        if (filter(item as any))
+            filteredItems.push(item);
+    }
+    return filteredItems;
 }
 
 export namespace _Internal_Instances {
