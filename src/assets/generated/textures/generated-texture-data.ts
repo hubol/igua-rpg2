@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 50 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 51 }];
 
 interface TxData {
   id: string;
@@ -24,8 +24,8 @@ function txs<T>(tx: (data: TxData) => T) {
       SplashMedium: tx({ id: "Effects.SplashMedium", atlas: 0, x: 931, y: 9, width: 48, height: 16 }),
       SplashSmall: tx({ id: "Effects.SplashSmall", atlas: 0, x: 931, y: 0, width: 64, height: 8 }),
       ValuableSparkle: tx({ id: "Effects.ValuableSparkle", atlas: 0, x: 980, y: 9, width: 35, height: 7 }),
-      WaterDripSmall: tx({ id: "Effects.WaterDripSmall", atlas: 0, x: 1009, y: 27, width: 1, height: 2 }),
-      WaterDripXsmall: tx({ id: "Effects.WaterDripXsmall", atlas: 0, x: 1009, y: 30, width: 1, height: 2 }),
+      WaterDripSmall: tx({ id: "Effects.WaterDripSmall", atlas: 0, x: 1020, y: 62, width: 1, height: 2 }),
+      WaterDripXsmall: tx({ id: "Effects.WaterDripXsmall", atlas: 0, x: 1009, y: 27, width: 1, height: 2 }),
     },
     Enemy: {
       CommonClown: tx({ id: "Enemy.CommonClown", atlas: 0, x: 743, y: 67, width: 44, height: 32 }),
@@ -51,21 +51,24 @@ function txs<T>(tx: (data: TxData) => T) {
       Tail: tx({ id: "Iguana.Tail", atlas: 0, x: 765, y: 44, width: 140, height: 22 }),
       Torso: tx({ id: "Iguana.Torso", atlas: 0, x: 647, y: 77, width: 24, height: 24 }),
     },
+    Light: {
+      ShadowIrregularSmall: tx({ id: "Light.ShadowIrregularSmall", atlas: 0, x: 1003, y: 56, width: 16, height: 8 }),
+    },
     LockedDoor: tx({ id: "LockedDoor", atlas: 0, x: 788, y: 94, width: 30, height: 32 }),
     Metal: {
-      PipeDarkBroken: tx({ id: "Metal.PipeDarkBroken", atlas: 0, x: 738, y: 77, width: 4, height: 12 }),
+      PipeDarkBroken: tx({ id: "Metal.PipeDarkBroken", atlas: 0, x: 1020, y: 49, width: 4, height: 12 }),
     },
     OpenDoor: tx({ id: "OpenDoor", atlas: 0, x: 852, y: 67, width: 30, height: 32 }),
     OversizedAngel: tx({ id: "OversizedAngel", atlas: 0, x: 0, y: 31, width: 396, height: 51 }),
-    Placeholder: tx({ id: "Placeholder", atlas: 0, x: 1009, y: 49, width: 14, height: 14 }),
+    Placeholder: tx({ id: "Placeholder", atlas: 0, x: 708, y: 77, width: 14, height: 14 }),
     Pottery: {
       BodyGreen: tx({ id: "Pottery.BodyGreen", atlas: 0, x: 931, y: 26, width: 20, height: 4 }),
       BodyRed: tx({ id: "Pottery.BodyRed", atlas: 0, x: 973, y: 26, width: 14, height: 4 }),
       BodyYellow: tx({ id: "Pottery.BodyYellow", atlas: 0, x: 952, y: 26, width: 20, height: 4 }),
-      HangerTriangle: tx({ id: "Pottery.HangerTriangle", atlas: 0, x: 708, y: 77, width: 14, height: 14 }),
+      HangerTriangle: tx({ id: "Pottery.HangerTriangle", atlas: 0, x: 723, y: 77, width: 14, height: 14 }),
       HeadGreen: tx({ id: "Pottery.HeadGreen", atlas: 0, x: 996, y: 0, width: 14, height: 8 }),
-      HeadRed: tx({ id: "Pottery.HeadRed", atlas: 0, x: 723, y: 77, width: 14, height: 8 }),
-      HeadYellow: tx({ id: "Pottery.HeadYellow", atlas: 0, x: 723, y: 86, width: 14, height: 8 }),
+      HeadRed: tx({ id: "Pottery.HeadRed", atlas: 0, x: 672, y: 91, width: 14, height: 8 }),
+      HeadYellow: tx({ id: "Pottery.HeadYellow", atlas: 0, x: 687, y: 91, width: 14, height: 8 }),
       PlantBushRed: tx({ id: "Pottery.PlantBushRed", atlas: 0, x: 883, y: 86, width: 18, height: 10 }),
       PlantReed: tx({ id: "Pottery.PlantReed", atlas: 0, x: 1011, y: 17, width: 10, height: 16 }),
     },
