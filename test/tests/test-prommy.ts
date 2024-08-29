@@ -9,35 +9,58 @@ export async function testPrommy() {
 
     let loop1Finished = false;
     let loop2Finished = false;
+    let loop3Finished = false;
 
-    const loop1 = new Prommy(async (resolve) => {
+    const loop1 = Prommy.createRoot(async () => {
         for (let i = 0; i < 8; i++) {
             Assert(PrommyContext.current()).toStrictlyBe('loop1');
             await sleep(50);
             Assert(PrommyContext.current()).toStrictlyBe('loop1');
         }
         loop1Finished = true;
-        resolve('loop1_Result');
+        return 'loop1_Result';
     }, 'loop1');
 
-    const loop2 = new Prommy(async (resolve) => {
+    const loop2 = Prommy.createRoot(async () => {
         for (let i = 0; i < 8; i++) {
             Assert(PrommyContext.current()).toStrictlyBe('loop2');
             await sleep(90);
+            if (i === 4) {
+                loop3 = Prommy.createRoot(async () => {
+                    for (let i = 0; i < 8; i++) {
+                        Assert(PrommyContext.current()).toStrictlyBe('loop3');
+                        await sleep(90);
+                        Assert(PrommyContext.current()).toStrictlyBe('loop3');
+                    }
+                    loop3Finished = true;
+                    return 'loop3_Result';
+                }, 'loop3');
+            }
             Assert(PrommyContext.current()).toStrictlyBe('loop2');
         }
         loop2Finished = true;
-        resolve('loop2_Result');
+        return 'loop2_Result';
     }, 'loop2');
 
-    const results = await Promise.all([ loop1, loop2 ])
+    let loop3: Prommy<string>;
+
+    Assert(PrommyContext.current()).toStrictlyBe(undefined);
+
+    const results = await Promise.all([ loop1, loop2 ]);
 
     Assert(results[0]).toStrictlyBe('loop1_Result');
     Assert(results[1]).toStrictlyBe('loop2_Result');
 
+    Assert(PrommyContext.current()).toStrictlyBe(undefined);
+
+    console.log('awaited now');
+    Assert(await loop3).toStrictlyBe('loop3_Result');
+
     Assert(loop1Finished).toBeTruthy();
     Assert(loop2Finished).toBeTruthy();
+    Assert(loop3Finished).toBeTruthy();
 
+    console.log('asserting now');
     Assert(PrommyContext.current()).toStrictlyBe(undefined);
 }
 

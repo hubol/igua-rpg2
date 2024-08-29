@@ -1,6 +1,10 @@
 // new <T>(executor: (resolve: (value: T | PromiseLike<T>) => void, reject: (reason?: any) => void) => void): Promise<T>;
 
-const clearContext = () => _currentContext = undefined;
+// const clearContext = () => _currentContext = undefined;
+const clearContext = () => {
+    console.log('clearContext');
+    _currentContext = undefined;
+};
 
 export class Prommy<T> implements PromiseLike<T> {
     private readonly _context: any;
@@ -10,46 +14,54 @@ export class Prommy<T> implements PromiseLike<T> {
         executor: (resolve: (value: T | PromiseLike<T>) => void, reject: (reason?: any) => void) => void,
         context = _currentContext,
     ) {
+        const contextToRestore = _currentContext;
+
         this._promise = new Promise<T>((resolve, reject) => {
-            _currentContext = context;
+            setContext(context, 'new Promise');
             executor(resolve, reject);
         })
-        .finally(clearContext);
-        // this._promise = typeof executor === 'function' ? new Promise((resolve, reject) => {
-        //     _currentContext = context;
-        //     executor(resolve, reject);
-        // }) : executor;
+        .finally(() => setContext(undefined, 'new Promise.finally'));
         this._context = context;
+
+        setContext(contextToRestore, 'Restored');
+    }
+
+    static createRoot<T>(executor: () => PromiseLike<T>, context: any) {
+        return new Prommy<T>((resolve, reject) => executor().then(resolve, reject), context);
+        // return new Prommy<T>(async (resolve, reject) => {
+        //     try {
+        //         _currentContext = context;
+        //         resolve(await executor());    
+        //     }
+        //     catch (e) {
+        //         reject(e);
+        //     }
+        // }, null)
     }
 
     then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | null | undefined, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null | undefined): PromiseLike<TResult1 | TResult2> {
         // @ts-expect-error
         this._promise = this._promise.then(
             onfulfilled && ((value) => {
-                _currentContext = this._context;
+                setContext(this._context, 'onfulfilled');
                 const result = onfulfilled(value);
+                // console.log(result)
                 return result;
             }),
             onrejected && ((reason) => {
-                _currentContext = this._context;
+                setContext(this._context, 'onrejected');
                 const result = onrejected(reason);
                 return result;
             }))
-            .finally(clearContext);
+            .finally(() => setContext(undefined, 'this._promise.then.finally'));
         
         return this as any;
-        // const promise = this._promise.then(
-        //     onfulfilled && ((value) => {
-        //         _currentContext = this._context;
-        //         return onfulfilled(value);
-        //     }),
-        //     onrejected && ((reason) => {
-        //         _currentContext = this._context;
-        //         return onrejected(reason);
-        //     }))
-        
-        // return new Prommy(promise as any, this._context);
     }
+}
+
+function setContext(context: any, debug: string) {
+    console.log(debug, _currentContext, '->', context);
+    _currentContext = context;
 }
 
 let _currentContext: any;
