@@ -33,8 +33,13 @@ function assertWalkToAbortError(assertion: boolean): false {
     return assertion;
 }
 
+export enum ObjIguanaLocomotiveAutoFacingMode {
+    CheckMoving,
+    CheckSpeedX,
+}
+
 export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
-    let lastNonZeroSpeedXSign = 0;
+    let autoFacingTarget = 0;
 
     let currentWalkToTarget = Undefined<number>();
     let hitWall = false;
@@ -110,6 +115,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                 return Math.sign(puppet.speed.x) * getDeceleratingDistance(Math.abs(puppet.speed.x), IguanaLocomotiveConsts.WalkingDeceleration);
             },
             walkTo,
+            autoFacingMode: ObjIguanaLocomotiveAutoFacingMode.CheckSpeedX,
         })
         .step(() => {
             if ((puppet.isMovingLeft && puppet.isMovingRight) || (!puppet.isMovingLeft && !puppet.isMovingRight) || puppet.isDucking) {
@@ -134,12 +140,17 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             puppet.gait = approachLinear(puppet.gait, Math.min(puppet.isAirborne ? 0 : gaitFactor, 1), 0.15);
 
             if (puppet.speed.x !== 0) {
-                lastNonZeroSpeedXSign = Math.sign(puppet.speed.x);
+                if (puppet.autoFacingMode === ObjIguanaLocomotiveAutoFacingMode.CheckSpeedX)
+                    autoFacingTarget = Math.sign(puppet.speed.x);
+                else if (puppet.isMovingLeft && puppet.speed.x < 0)
+                    autoFacingTarget = -1;
+                else if (puppet.isMovingRight && puppet.speed.x > 0)
+                    autoFacingTarget = 1;
             }
 
             puppet.facing = approachLinear(
                 puppet.facing,
-                Math.sign(puppet.speed.x) || lastNonZeroSpeedXSign || Math.sign(puppet.facing),
+                autoFacingTarget || Math.sign(puppet.facing),
                 0.1);
 
             puppet.ducking = approachLinear(puppet.ducking, puppet.isDucking ? 1 : 0, 0.075);
