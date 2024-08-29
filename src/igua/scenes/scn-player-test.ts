@@ -40,10 +40,5 @@ export function scnPlayerTest() {
     })
     .mixin(mxnRpgAttack, { attack: RpgAttack.create({ poison: 1, versus: RpgFaction.Anyone }) });
 
-    playerObj.step(() => {
-        if (Input.justWentDown('Jump'))
-            console.log(JSON.parse(JSON.stringify(RpgProgress)))
-    })
-
     objAngelBouncing().at(playerObj).add(40, -16).show();
 }
