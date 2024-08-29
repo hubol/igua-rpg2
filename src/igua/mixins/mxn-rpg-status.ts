@@ -38,6 +38,8 @@ export function mxnRpgStatus(obj: DisplayObject, args: MxnRpgStatusArgs) {
     return rpgStatusObj;
 }
 
+export type MxnRpgStatus = ReturnType<typeof mxnRpgStatus>;
+
 function getTargetDripsPerFrame(wetness: number) {
     if (wetness > 90)
         return 0.25;

@@ -158,9 +158,7 @@ export function objAngelBouncing() {
         //     teleportToTheRoomOfDoors();
         })
     .step(self => {
-        if (playerObj.collides(mask))
-            self.damage(RpgPlayer.MeleeAttack);
-        else if (playerObj.collides(spikeBall))
+        if (playerObj.collides(spikeBall))
             self.strikePlayer(atkSpikeBall);
 
     }, 1001)

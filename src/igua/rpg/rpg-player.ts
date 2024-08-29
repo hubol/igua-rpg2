@@ -53,6 +53,9 @@ export const RpgPlayer = {
             incrementsAttackerPrideOnDamage: true,
         },
     } satisfies RpgStatus.Model,
+    get BouncingMinSpeed() {
+        return Math.min(4, 2.5 + RpgProgress.character.status.poison.level * 0.25);
+    },
     get WalkingTopSpeed() {
         let speed = 2.5;
         speed += 0.75 * Math.min(1, RpgProgress.character.status.poison.level);
