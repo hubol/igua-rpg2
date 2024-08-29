@@ -1,5 +1,5 @@
 import { Container, DisplayObject, Graphics } from "pixi.js";
-import { Vector, vnew } from "../../lib/math/vector-type";
+import { Vector, VectorSimple, vnew } from "../../lib/math/vector-type";
 import { LocalTerrain } from "../objects/obj-terrain";
 import { StepOrder } from "../objects/step-order";
 
@@ -61,21 +61,43 @@ const moveEvent = {
     previousSpeed: vnew(),
 } as MoveEvent;
 
-interface CollideEvent {
-    obj: MxnPhysics;
-    previousSpeed: Vector;
-    previousOnGround: boolean;
+function move(obj: MxnPhysics) {
+    obj.speed.y += obj.gravity;
+    return applySpeedInSteps(obj);
 }
 
-const collideEvent = {
-    previousSpeed: vnew(),
-} as CollideEvent;
+interface ForceEvent {
+    stopped: boolean;
+}
 
-function move(obj: MxnPhysics) {
+const _forceEvent: ForceEvent = { stopped: false };
+
+export function force(obj: MxnPhysics, vector: VectorSimple) {
+    _forceEvent.stopped = false;
+
+    // Speed to restore
+    // push() will affect obj.speed
+    // Yes, it is strange...
+    // TODO shouldn't be necessary
+    const speedX = obj.speed.x;
+    const speedY = obj.speed.y;
+
+    obj.speed.x = vector.x;
+    obj.speed.y = vector.y;
+
+    applySpeedInSteps(obj);
+    _forceEvent.stopped = obj.speed.x === 0 && obj.speed.y === 0;
+
+    // Popped
+    obj.speed.x = speedX;
+    obj.speed.y = speedY;
+
+    return _forceEvent;
+}
+
+function applySpeedInSteps(obj: MxnPhysics) {
     const radius = obj.physicsRadius;
     const radiusSqrt = Math.sqrt(radius);
-
-    obj.speed.y += obj.gravity;
 
     let hsp = obj.speed.x;
     let vsp = obj.speed.y;
@@ -88,10 +110,6 @@ function move(obj: MxnPhysics) {
     moveEvent.hitWall = false;
     moveEvent.previousSpeed!.at(obj.speed);
     moveEvent.previousOnGround = obj.isOnGround;
-
-    collideEvent.obj = obj;
-    collideEvent.previousSpeed.at(obj.speed);
-    collideEvent.previousOnGround = obj.isOnGround;
 
     // TODO dividing into steps might be overkill, not sure
     while (hspAbs > 0 || vspAbs > 0) {
@@ -140,7 +158,7 @@ function move(obj: MxnPhysics) {
         vspAbs = Math.abs(vsp);
     }
 
-    return moveEvent as MoveEvent;
+    return moveEvent;
 }
 
 const PushWorkingState = {
