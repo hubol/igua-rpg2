@@ -53,15 +53,12 @@ export async function testPrommy() {
 
     Assert(PrommyContext.current()).toStrictlyBe(undefined);
 
-    console.log('awaited now vv');
     Assert(await loop3).toStrictlyBe('loop3_Result');
-    console.log('awaited now ^^');
 
     Assert(loop1Finished).toBeTruthy();
     Assert(loop2Finished).toBeTruthy();
     Assert(loop3Finished).toBeTruthy();
 
-    console.log('asserting now');
     Assert(PrommyContext.current()).toStrictlyBe(undefined);
 }
 
