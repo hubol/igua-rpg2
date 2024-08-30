@@ -44,6 +44,9 @@ export class Prommy<T> implements PromiseLike<T> {
             onrejected && ((reason) => {
                 _currentContext = this._context;
                 const result = onrejected(reason);
+
+                if (this._rootFulfilled)
+                    _currentContext = undefined;
                 return result;
             }))
             .finally(clearCurrentContext);

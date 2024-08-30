@@ -62,6 +62,21 @@ export async function testPrommy() {
     Assert(PrommyContext.current()).toStrictlyBe(undefined);
 }
 
+export async function testPrommyThrowingDoesNotBleedContext() {
+    try {
+        await Prommy.createRoot(async () => {
+            await sleep(40);
+            throw new Error('wtf!!!');
+        }, 'asdf');
+
+        Assert(false).toBeTruthy();
+    }
+    catch (e) {
+        Assert(e.message).toStrictlyBe('wtf!!!');
+        Assert(PrommyContext.current()).toStrictlyBe(undefined);
+    }
+}
+
 function sleep(ms: number, context?: string) {
     return new Prommy(resolve => setTimeout(resolve, ms), context);
 }
