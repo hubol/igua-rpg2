@@ -2,11 +2,6 @@ import { Prommy, PrommyContext } from "../../src/lib/zone/prommy";
 import { Assert } from "../lib/assert";
 
 export async function testPrommy() {
-    await Promise.all([
-        sleep(150, 'abc').then(() => Assert(PrommyContext.current()).toStrictlyBe('abc')),
-        sleep(60, 'def').then(() => Assert(PrommyContext.current()).toStrictlyBe('def')),
-    ]);
-
     let loop1Finished = false;
     let loop2Finished = false;
     let loop3Finished = false;

@@ -1,5 +1,3 @@
-const clearCurrentContext = () => _currentContext = undefined;
-
 export class Prommy<T> implements PromiseLike<T> {
     private readonly _context: any;
     private _promise: Promise<T>;
@@ -48,8 +46,7 @@ export class Prommy<T> implements PromiseLike<T> {
                 if (this._rootFulfilled)
                     _currentContext = undefined;
                 return result;
-            }))
-            .finally(clearCurrentContext);
+            }));
         
         return this as any;
     }
