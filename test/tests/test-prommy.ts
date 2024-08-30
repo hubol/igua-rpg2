@@ -72,6 +72,6 @@ export async function testPrommyThrowingDoesNotBleedContext() {
     }
 }
 
-function sleep(ms: number, context?: string) {
-    return new Prommy(resolve => setTimeout(resolve, ms), context);
+function sleep(ms: number) {
+    return new Prommy(resolve => setTimeout(resolve, ms));
 }
