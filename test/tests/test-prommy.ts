@@ -72,6 +72,46 @@ export async function testPrommyThrowingDoesNotBleedContext() {
     }
 }
 
+export async function testPrommyAll() {
+    const root1 = Prommy.createRoot(async () => {
+        await Promise.all([
+            sleep(30).then(() => Assert(PrommyContext.current()).toStrictlyBe('root1')),
+            sleep(90).then(() => Assert(PrommyContext.current()).toStrictlyBe('root1')),
+            sleep(60).then(() => Assert(PrommyContext.current()).toStrictlyBe('root1')),
+        ])
+    }, 'root1');
+
+    const root2 = Prommy.createRoot(async () => {
+        await Promise.all([
+            sleep(30).then(() => Assert(PrommyContext.current()).toStrictlyBe('root2')),
+            sleep(90).then(() => Assert(PrommyContext.current()).toStrictlyBe('root2')),
+            sleep(60).then(() => Assert(PrommyContext.current()).toStrictlyBe('root2')),
+        ])
+    }, 'root2');
+
+    await Promise.all([ root1, root2 ]);
+}
+
+export async function testPrommyRace() {
+    const root1 = Prommy.createRoot(async () => {
+        await Promise.race([
+            sleep(30).then(() => Assert(PrommyContext.current()).toStrictlyBe('root1')),
+            sleep(90).then(() => Assert(PrommyContext.current()).toStrictlyBe('root1')),
+            sleep(60).then(() => Assert(PrommyContext.current()).toStrictlyBe('root1')),
+        ])
+    }, 'root1');
+
+    const root2 = Prommy.createRoot(async () => {
+        await Promise.race([
+            sleep(30).then(() => Assert(PrommyContext.current()).toStrictlyBe('root2')),
+            sleep(90).then(() => Assert(PrommyContext.current()).toStrictlyBe('root2')),
+            sleep(60).then(() => Assert(PrommyContext.current()).toStrictlyBe('root2')),
+        ])
+    }, 'root2');
+
+    await Promise.all([ root1, root2 ]);
+}
+
 function sleep(ms: number) {
     return new Prommy(resolve => setTimeout(resolve, ms));
 }
