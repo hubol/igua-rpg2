@@ -28,6 +28,11 @@ export function prepareGameEngine(renderer: PixiRenderer) {
 
     const animator = new Animator(60);
 
+    const immediates: ((...args: any[]) => any)[] = [];
+    globalThis.setImmediate = function setImmediate(fn: (...args: any[]) => any) {
+        immediates.push(fn);
+    }
+
     setIguaGlobals(renderer, rootStage, iguaInput, forceGameLoop, animator.start.bind(animator), devKeyListener);
 
     iguaInput.start();
@@ -48,6 +53,10 @@ export function prepareGameEngine(renderer: PixiRenderer) {
             if (Environment.isDev)
                 devKeyListener.tick();
             flashPreventer.tick();
+
+            while (immediates.length) {
+                immediates.shift()!();
+            }
         }
         while (gameLoopForced);
         

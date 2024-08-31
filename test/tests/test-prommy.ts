@@ -1,5 +1,113 @@
 import { Prommy, PrommyContext } from "../../src/lib/zone/prommy";
 import { Assert } from "../lib/assert";
+import { TestPromise } from "../lib/test-promise";
+
+export async function testPrommyTickingThrowing() {
+    let loop1Finished = false;
+    let loop2Finished = false;
+    let loop3Finished = false;
+
+    Prommy.createRoot(async () => {
+        1;
+        for (let i = 0; i < 8; i++) {
+            Assert(PrommyContext.current()).toStrictlyBe('loop1');
+            await ticks(2);
+            if (i === 2) {
+                Prommy.createRoot(async () => {
+                    3;
+                    for (let i = 0; i < 8; i++) {
+                        Assert(PrommyContext.current()).toStrictlyBe('loop3');
+                        await ticks(3);
+                        Assert(PrommyContext.current()).toStrictlyBe('loop3');
+                        await ticks(3);
+                        Assert(PrommyContext.current()).toStrictlyBe('loop3');
+                        await ticks(3);
+                        Assert(PrommyContext.current()).toStrictlyBe('loop3');
+                    }
+                    loop3Finished = true;
+                }, 'loop3');
+            }
+            if (i === 4)
+                throw new Error('get me out');
+            console.log(PrommyContext.current(), 'shouldBe', 'loop1')
+            Assert(PrommyContext.current()).toStrictlyBe('loop1');
+        }
+        loop1Finished = true;
+    }, 'loop1');
+
+    Prommy.createRoot(async () => {
+        2;
+        for (let i = 0; i < 8; i++) {
+            Assert(PrommyContext.current()).toStrictlyBe('loop2');
+            await ticks(3);
+            Assert(PrommyContext.current()).toStrictlyBe('loop2');
+        }
+        loop2Finished = true;
+    }, 'loop2');
+
+    Assert(PrommyContext.current()).toStrictlyBe(undefined);
+
+    for (let i = 0; i < 200; i++) {
+        // Assert(PrommyContext.current()).toStrictlyBe(undefined);
+
+        tick();
+        await TestPromise.flush();
+
+        // Assert(PrommyContext.current()).toStrictlyBe(undefined);
+    }
+
+    // Assert(PrommyContext.current()).toStrictlyBe(undefined);
+
+    Assert(!loop1Finished).toBeTruthy();
+    Assert(loop2Finished).toBeTruthy();
+    Assert(loop3Finished).toBeTruthy();
+
+    // Assert(PrommyContext.current()).toStrictlyBe(undefined);
+}
+
+export async function testPrommyTicking() {
+    let loop1Finished = false;
+    let loop2Finished = false;
+
+    Prommy.createRoot(async () => {
+        1;
+        for (let i = 0; i < 8; i++) {
+            Assert(PrommyContext.current()).toStrictlyBe('loop1');
+            await ticks(1);
+            console.log(PrommyContext.current(), 'shouldBe', 'loop1')
+            Assert(PrommyContext.current()).toStrictlyBe('loop1');
+        }
+        loop1Finished = true;
+    }, 'loop1');
+
+    Prommy.createRoot(async () => {
+        2;
+        for (let i = 0; i < 8; i++) {
+            Assert(PrommyContext.current()).toStrictlyBe('loop2');
+            await ticks(1);
+            Assert(PrommyContext.current()).toStrictlyBe('loop2');
+        }
+        loop2Finished = true;
+    }, 'loop2');
+
+    Assert(PrommyContext.current()).toStrictlyBe(undefined);
+
+    for (let i = 0; i < 200; i++) {
+        // Assert(PrommyContext.current()).toStrictlyBe(undefined);
+
+        tick();
+        await TestPromise.flush();
+
+        // Assert(PrommyContext.current()).toStrictlyBe(undefined);
+    }
+
+    // Assert(PrommyContext.current()).toStrictlyBe(undefined);
+
+    Assert(loop1Finished).toBeTruthy();
+    Assert(loop2Finished).toBeTruthy();
+
+    // Assert(PrommyContext.current()).toStrictlyBe(undefined);
+}
 
 export async function testPrommy() {
     let loop1Finished = false;
@@ -114,4 +222,25 @@ export async function testPrommyRace() {
 
 function sleep(ms: number) {
     return new Prommy(resolve => setTimeout(resolve, ms));
+}
+
+function tick() {
+    const entries = tickMap.entries();
+    for (const [resolve, count] of entries) {
+        if (count - 1 <= 0) {
+            resolve();
+            tickMap.delete(resolve);
+        }
+        else {
+            tickMap.set(resolve, count - 1);
+        }
+    }
+}
+
+const tickMap: Map<Function, number> = new Map();
+
+function ticks(count: number) {
+    return new Prommy(resolve => {
+        tickMap.set(resolve, count);
+    });
 }

@@ -7,6 +7,7 @@ import { Rng } from "../../lib/math/rng";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgFaction } from "../rpg/rpg-faction";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
+import { PrommyContext } from "../../lib/zone/prommy";
 
 interface ObjWaterDripSourceArgs {
     delayMin: number;
@@ -19,6 +20,7 @@ export function objWaterDripSource({ delayMin, delayMax }: ObjWaterDripSourceArg
         .merge({ poison: false })
         .async(async self => {
             while (true) {
+                console.log('asyncWaterDripSource', PrommyContext.current().Name);
                 await sleep(Rng.intc(delayMin, delayMax));
                 objWaterDrip(self.poison ? atkPoisonDrip : atkDrip).at(self).show(self.parent);
             }

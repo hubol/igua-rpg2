@@ -1,11 +1,10 @@
 import { Logging } from "../logging";
 import { CancellationError, CancellationToken } from "../promise/cancellation-token";
-import { Zone } from "../zone/zone";
 import { AsshatMicrotaskFactory } from "./promise/asshat-microtasks";
 import { IAsshatTicker } from "./asshat-ticker";
 import { ErrorReporter } from "./error-reporter";
-import { DexiePromise } from "../zone/dexie/promise";
 import { EngineConfig } from "./engine-config";
+import { Prommy, PrommyContext } from "../zone/prommy";
 
 interface AsshatZoneContext {
     cancellationToken: CancellationToken;
@@ -14,14 +13,13 @@ interface AsshatZoneContext {
 
 const alwaysPredicate = () => true;
 
-class AsshatZoneImpl extends Zone<AsshatZoneContext> {
+class AsshatZoneImpl {
     constructor() {
-        super('AsshatZone');
         console.log(...Logging.componentArgs(this));
     }
 
     get context() {
-        const context = super.context;
+        const context = PrommyContext.current();
         if (!context) {
             ErrorReporter.reportDevOnlyState(new Error('AsshatZone.context was falsy, using EngineConfig.showDefaultStage'));
             return EngineConfig.showDefaultStage as any;
@@ -30,17 +28,25 @@ class AsshatZoneImpl extends Zone<AsshatZoneContext> {
         return context;
       }
 
-    async run(fn: () => unknown, context: AsshatZoneContext): Promise<void> {
-        try {
-            await new DexiePromise((resolve, reject) => {
-                const microtask = AsshatMicrotaskFactory.create(alwaysPredicate, context, resolve as any, reject);
-                context.ticker.addMicrotask(microtask);
-            });
-            await super.run(fn, context);
-        }
-        catch (e) {
-            handleAsshatZoneError(e);
-        }
+    run(fn: () => unknown, context: AsshatZoneContext) {
+        return Prommy.createRoot<void>(async () => {
+            try {
+                await new Prommy<void>((resolve, reject) => {
+                    const microtask = AsshatMicrotaskFactory.create(alwaysPredicate, context, resolve as any, reject);
+                    context.ticker.addMicrotask(microtask);
+                });
+                await fn();
+            }
+            catch (e) {
+                handleAsshatZoneError(e);
+            }
+        }, context)
+        // return new Promise<void>((resolve, reject) => {
+        //     const microtask = AsshatMicrotaskFactory.create(alwaysPredicate, context, resolve as any, reject);
+        //     context.ticker.addMicrotask(microtask);
+        // })
+        // .then(() => Prommy.createRoot<void>(fn as any, context))
+        // .catch(handleAsshatZoneError)
     }
 }
 
