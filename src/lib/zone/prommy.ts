@@ -1,6 +1,5 @@
-function asap(fn: () => void) {
-    Promise.resolve().then(fn);
-}
+globalThis.$prommyResult = undefined;
+globalThis.$prommyPop = applyStack;
 
 export class PrommyRoot {
     private readonly _context: any;
@@ -56,11 +55,7 @@ export class Prommy<T> implements PromiseLike<T> {
         const nextPromise = this._promise.then(
             onfulfilled && (function() {
                 modifyRootStack(context, `${nextPromise._name} PUSH`);
-                onfulfilled()
-                // TODO doesn't work in engine...
-                // Only passes tests...
-                // Might be related to how requestAnimationFrame works with ticks?
-                asap(() => modifyRootStack(undefined, `${nextPromise._name} asap POP`));
+                onfulfilled();
             }),
             onrejected)
 
@@ -79,15 +74,19 @@ let thenIds = 0;
 let ids = 0;
 let rootIds = 0;
 
-function modifyRootStack(root?: PrommyRoot, debug: string) {
+function modifyRootStack(root: PrommyRoot, debug: string) {
+    _rootStack.push(root);
+
+    const context = root._context;
+    const name = context.name ?? context.Name ?? context;
+    console.log(debug + '; Stack Length: ' + _rootStack.length, '->', name);
+}
+
+export function applyStack() {
     const prev = PrommyContext.currentName();
+    _appliedRoot = _rootStack.shift();
 
-    if (root === undefined)
-        _rootStack.shift();
-    else
-        _rootStack.push(root);
-
-    console.log(debug, prev, '->', PrommyContext.currentName());
+    console.log('Applied stack', prev, '->', PrommyContext.currentName());
 }
 
 function forceRoot(root?: PrommyRoot, debug: string) {
@@ -98,6 +97,7 @@ function forceRoot(root?: PrommyRoot, debug: string) {
 }
 
 let _forcedRoot: PrommyRoot | undefined;
+let _appliedRoot: PrommyRoot;
 let _rootStack: PrommyRoot[] = [];
 
 export class PrommyContext {
@@ -106,18 +106,18 @@ export class PrommyContext {
     }
 
     static currentName(): string {
-        return this.currentInternal()?._context?.name ?? this.currentInternal()?._context;
+        return this.currentInternal()?._context?.name ?? this.currentInternal()?._context?.Name ?? this.currentInternal()?._context;
     }
 
     static currentInternal(): PrommyRoot {
         if (_forcedRoot)
             return _forcedRoot;
-        return _rootStack[0];
+        return _appliedRoot;
     }
 
     static current<TContext = any>(): TContext {
         if (_forcedRoot)
             return _forcedRoot?._context;
-        return _rootStack[0]?._context;
+        return _appliedRoot._context;
     }
 }

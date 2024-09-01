@@ -2,6 +2,7 @@ import { build, context } from 'esbuild';
 import { copyFile, readFile, writeFile } from 'fs/promises';
 import ImportGlobPlugin from 'esbuild-plugin-import-glob';
 import { startParcelWatcher } from './tools/lib/start-parcel-watcher.mjs';
+import { prommyPlugin } from './esbuild.prommy-plugin.mjs';
 
 const serve = process.argv[2] === 'serve';
 
@@ -26,6 +27,7 @@ function options(overrides) {
         logLevel: 'info',
         plugins: [
             ImportGlobPlugin.default(),
+            prommyPlugin,
         ],
         ...overrides,
     }
