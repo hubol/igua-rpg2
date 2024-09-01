@@ -1,5 +1,11 @@
-import path from 'path';
 import ts from 'typescript';
+
+// What the hell is this?!
+// This takes await expressions where the operand is a Prommy
+// e.g.
+// await sleep(32)
+// And transforms them into
+// ($prommyResult = await sleep(32), $prommyPop(), $prommyResult)
 
 const Consts = {
     PopFunctionName: '$prommyPop',
@@ -8,6 +14,8 @@ const Consts = {
 }
 
 const Ts = {
+    /** @type {import("typescript").WatchOfConfigFile<import("typescript").BuilderProgram>} */
+    watch: undefined,
     /** @type {import("typescript").Program} */
     program: undefined,
     /** @type {import("typescript").TypeChecker} */
@@ -20,7 +28,7 @@ const Ts = {
  * @param {import("typescript").NodeFactory} factory 
  * @returns 
  */
-function createFunctionCall(factory) {
+function createPopFunctionCall(factory) {
     return factory.createCallExpression(
         factory.createIdentifier(Consts.PopFunctionName),
         undefined,
@@ -33,15 +41,14 @@ function createFunctionCall(factory) {
  * @param {import("typescript").AwaitExpression} awaitExpr 
  * @returns 
  */
-function createAwaitReplacement(factory, awaitExpr) {
+function createPoppingAwaitExpression(factory, awaitExpr) {
     const resultVariable = factory.createIdentifier(Consts.ResultIdentifier);
     const assignment = factory.createAssignment(resultVariable, awaitExpr);
 
-    // Create the replacement expression: (result = <await expression>, someFunctionCall(), result)
     return factory.createParenthesizedExpression(
         factory.createCommaListExpression([
             assignment,
-            createFunctionCall(factory),
+            createPopFunctionCall(factory),
             resultVariable
         ])
     );
@@ -92,7 +99,7 @@ const transformSourceFile = (context) => (sourceFile) => {
             const type = Ts.checker.getTypeAtLocation(expression);
 
             if (isPrommyOrPromiseOfPrommy(type)) {
-                return createAwaitReplacement(factory, node);
+                return createPoppingAwaitExpression(factory, node);
             }
         }
         return ts.visitEachChild(node, visitor, context);
@@ -118,10 +125,11 @@ function normalizeWindowsPathSeparator(path) {
  */
 export function transformFile(fileName) {
     fileName = normalizeWindowsPathSeparator(fileName);
-    
-    for (const sourceFile of Ts.program.getSourceFiles()) {
-        sourceFile.fileName = normalizeWindowsPathSeparator(sourceFile.fileName);
-    }
+
+    if (transformedTextCache.has(fileName))
+        return transformedTextCache.get(fileName);
+
+    console.log('Transforming ' + fileName);
     
     const sourceFile = Ts.program.getSourceFiles().find(sf => fileName.includes(sf.fileName));
 
@@ -130,18 +138,65 @@ export function transformFile(fileName) {
 
     const result = ts.transform(sourceFile, [transformSourceFile]);
 
-    return Ts.printer.printFile(result.transformed[0]);
+    const newSourceText = Ts.printer.printFile(result.transformed[0]);
+    transformedTextCache.set(fileName, newSourceText);
 }
-
-const tsconfigPath = './tsconfig.json';
-const tsconfig = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
-if (tsconfig.error) {
-    throw new Error(`Failed to read tsconfig.json: ${tsconfig.error.messageText}`);
-}
-
-const parsedTsConfig = ts.parseJsonConfigFileContent(tsconfig.config, ts.sys, path.dirname(tsconfigPath));
 
 export function initializeTs() {
-    Ts.program = ts.createProgram(parsedTsConfig.fileNames, parsedTsConfig.options);
+    Ts.program = Ts.watch.getProgram().getProgram();
     Ts.checker = Ts.program.getTypeChecker();
 }
+
+const configPath = ts.findConfigFile(
+    /*searchPath*/ "./",
+    ts.sys.fileExists,
+    "tsconfig.json"
+);
+if (!configPath) {
+    throw new Error("Could not find a valid 'tsconfig.json'.");
+}
+
+const EmitResult = Object.seal({
+    emitSkipped: true,
+    diagnostics: [],
+})
+
+const transformedTextCache = new Map();
+
+// Creates a BuilderProgram that returns a nonstandard Program
+// It captures calls to emit to expire the transformedTextCache
+// Also it normalizes source file file names
+const fubarBuilderProgram = (...args) => {
+    const builderProgram = ts.createEmitAndSemanticDiagnosticsBuilderProgram(...args);
+    const _getProgram = builderProgram.getProgram;
+    builderProgram.getProgram = (...args) => {
+        const program = _getProgram(...args);
+        program.emit = ({ fileName }) => {
+            transformedTextCache.delete(fileName);
+            return EmitResult;
+        }
+
+        for (const sourceFile of program.getSourceFiles()) {
+            sourceFile.fileName = normalizeWindowsPathSeparator(sourceFile.fileName);
+        }
+
+        return program;
+    }
+
+    return builderProgram;
+}
+
+const host = ts.createWatchCompilerHost(
+    configPath,
+    {},
+    ts.sys,
+    fubarBuilderProgram,
+    () => {},
+    () => {},
+);
+
+// Only observed this being called when incremental was true
+// But maybe it's best to log it for now...
+host.writeFile = (...args) => console.log('Not writing file', args[0]);
+
+Ts.watch = ts.createWatchProgram(host);

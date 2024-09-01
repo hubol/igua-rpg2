@@ -4,15 +4,14 @@ import { transformFile, initializeTs } from './esbuild.prommy.mjs'
 export const prommyPlugin = {
     name: 'prommy',
     setup(build) {
-      build.onStart(initializeTs);
-      build.onLoad({ filter: /\.ts$/ }, async (args) => {
-        const contents = transformFile(args.path);
-        console.log('Transformed', args.path);
+        build.onStart(initializeTs);
+        build.onLoad({ filter: /\.ts$/ }, async ({ path }) => {
+            const contents = transformFile(path);
 
-        return {
-          contents,
-          loader: 'ts',
-        }
-      })
+            return {
+            contents,
+            loader: 'ts',
+            }
+        })
     },
-  }
+}
