@@ -10,14 +10,12 @@ export class PrommyRoot {
     constructor(executor: () => Promise<unknown>, context: any) {
         this._name = `PrommyRoot ${rootIds++} (${executor.toString().substring(0, 12)})`;
         this._context = context;
-        setContext3(this, 'new PrommyRoot');
+        forceRoot(this, 'new PrommyRoot');
 
         // TODO figure out error handling
         this._promise = executor().catch(e => {});
 
-        setContext3(undefined, 'new PrommyRoot POP')
-
-        // setContext2(undefined, 'new PrommyRoot POP');
+        forceRoot(undefined, 'new PrommyRoot POP')
     }
 }
 
@@ -30,9 +28,6 @@ export class Prommy<T> implements PromiseLike<T> {
         context = PrommyContext.currentInternal(),
         info = executor.toString().substring(0, 16),
     ) {
-        if (!context)
-            console.error('No context!');
-
         let name = context?._name ?? '';
 
         if (name)
@@ -42,25 +37,16 @@ export class Prommy<T> implements PromiseLike<T> {
 
         console.log(`Prommy.constructor -- new Promise: ${name}`);
 
+        // TODO need error handling?
         this._promise = new Promise(executor);
-        // .finally(() => {
-        //     setContext2(undefined, 'wtf');
-        // })
 
         this._promise._name = name;
 
-        // if (root) {
-        //     this._promise = this._promise.finally(() => this._rootFulfilled = true);
-        // }
-
         this._context = context;
-
-        // setContext2(undefined, 'Restored');
     }
 
     static createRoot<T>(executor: () => Promise<T>, context: any) {
         return new PrommyRoot(executor, context);
-        // return new Prommy<T>((resolve, reject) => executor().then(resolve, reject), context, true, executor.toString().substring(0, 16));
     }
 
     then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | null | undefined, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null | undefined): PromiseLike<TResult1 | TResult2> {
@@ -69,18 +55,14 @@ export class Prommy<T> implements PromiseLike<T> {
 
         const nextPromise = this._promise.then(
             onfulfilled && (function() {
-                asap(() => {
-                    setContext2(context, `${nextPromise._name} PUSH`);
-                    onfulfilled()
-                    // TODO doesn't work in engine...
-                    // Only passes tests...
-                    // Might be related to how requestAnimationFrame works with ticks?
-                    asap(() => setContext2(undefined, `${nextPromise._name} asap POP`));
-                });
+                modifyRootStack(context, `${nextPromise._name} PUSH`);
+                onfulfilled()
+                // TODO doesn't work in engine...
+                // Only passes tests...
+                // Might be related to how requestAnimationFrame works with ticks?
+                asap(() => modifyRootStack(undefined, `${nextPromise._name} asap POP`));
             }),
             onrejected)
-            // .then(y => console.log('y', y))
-            // .finally(x => console.log('x', x))
 
         nextPromise._name = `${parent._name} > [Then ${thenIds++}]`;
 
@@ -97,33 +79,26 @@ let thenIds = 0;
 let ids = 0;
 let rootIds = 0;
 
-function setContext2(context?: PrommyRoot, debug: string) {
+function modifyRootStack(root?: PrommyRoot, debug: string) {
     const prev = PrommyContext.currentName();
-    if (context === undefined)
-        _currentContexts.shift();
+
+    if (root === undefined)
+        _rootStack.shift();
     else
-        _currentContexts.push(context);
+        _rootStack.push(root);
 
     console.log(debug, prev, '->', PrommyContext.currentName());
-    // console.log(debug, PrommyContext.current(), '->', context);
-    // _currentContext = context;
-    // _currentContext = context;
 }
 
-function setContext3(context?: PrommyRoot, debug: string) {
+function forceRoot(root?: PrommyRoot, debug: string) {
     const prev = PrommyContext.currentName();
-    forcedSyncContext = context;
+    _forcedRoot = root;
 
     console.log(debug, prev, '->', PrommyContext.currentName());
-    // console.log(debug, PrommyContext.current(), '->', context);
-    // _currentContext = context;
-    // _currentContext = context;
 }
 
-let forcedSyncContext: PrommyRoot | undefined;
-
-let _currentContexts: PrommyRoot[] = [];
-// let _currentContext: PrommyRoot;
+let _forcedRoot: PrommyRoot | undefined;
+let _rootStack: PrommyRoot[] = [];
 
 export class PrommyContext {
     private constructor() {
@@ -135,16 +110,14 @@ export class PrommyContext {
     }
 
     static currentInternal(): PrommyRoot {
-        if (forcedSyncContext)
-            return forcedSyncContext;
-        // return _currentContext;
-        return _currentContexts[0];
+        if (_forcedRoot)
+            return _forcedRoot;
+        return _rootStack[0];
     }
 
     static current<TContext = any>(): TContext {
-        if (forcedSyncContext)
-            return forcedSyncContext?._context;
-        // return _currentContext?._context;
-        return _currentContexts[0]?._context;
+        if (_forcedRoot)
+            return _forcedRoot?._context;
+        return _rootStack[0]?._context;
     }
 }
