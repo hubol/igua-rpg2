@@ -272,11 +272,7 @@ export async function asyncPrommyContext2() {
             obj4 = objIsolatedContext(15);
         }
 
-        // if (PrommyContext.current()) {
-        //     console.log(PrommyContext.current()?.name);
-        //     console.log(obj2.destroyed);
-        // }
-        // Assert(PrommyContext.current()).toStrictlyBe(undefined);
+        Assert(PrommyContext.current()).toStrictlyBe(undefined);
 
         ticker.tick();
         await TestPromise.flush();
@@ -287,5 +283,3 @@ export async function asyncPrommyContext2() {
     Assert(obj2.steps).toStrictlyBe(30);
     Assert(obj1.steps).toStrictlyBe(40);
 }
-// TODO test siblings with async
-// against prommy

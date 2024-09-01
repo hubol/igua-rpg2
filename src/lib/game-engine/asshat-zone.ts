@@ -29,7 +29,7 @@ class AsshatZoneImpl {
       }
 
     run(fn: () => unknown, context: AsshatZoneContext) {
-        return Prommy.createRoot<void>(async () => {
+        Prommy.createRoot<void>(async () => {
             try {
                 await new Prommy<void>((resolve, reject) => {
                     const microtask = AsshatMicrotaskFactory.create(alwaysPredicate, context, resolve as any, reject);
@@ -41,12 +41,6 @@ class AsshatZoneImpl {
                 handleAsshatZoneError(e);
             }
         }, context)
-        // return new Promise<void>((resolve, reject) => {
-        //     const microtask = AsshatMicrotaskFactory.create(alwaysPredicate, context, resolve as any, reject);
-        //     context.ticker.addMicrotask(microtask);
-        // })
-        // .then(() => Prommy.createRoot<void>(fn as any, context))
-        // .catch(handleAsshatZoneError)
     }
 }
 
