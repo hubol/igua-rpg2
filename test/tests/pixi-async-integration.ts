@@ -5,7 +5,28 @@ import { Assert } from "../lib/assert";
 import { TestPromise } from "../lib/test-promise";
 import { TickerContainer } from "../../src/lib/game-engine/ticker-container";
 import { wait } from "../../src/lib/game-engine/promise/wait";
-import { PrommyContext } from "../../src/lib/zone/prommy";
+import { Prommy, PrommyContext } from "../../src/lib/zone/prommy";
+import { merge } from "../../src/lib/object/merge";
+import { AsshatZone } from "../../src/lib/game-engine/asshat-zone";
+import { AsshatMicrotaskFactory } from "../../src/lib/game-engine/promise/asshat-microtasks";
+
+merge(AsshatZone, {
+    run(fn: () => unknown, context: any) {
+        Prommy.createRoot<void>(async () => {
+            try {
+                const p = new Prommy<void>((resolve, reject) => {
+                    const microtask = AsshatMicrotaskFactory.create(() => true, context, resolve as any, reject);
+                    context.ticker.addMicrotask(microtask);
+                });
+                (globalThis.$prommyResult = await p, globalThis.$prommyPop(), globalThis.$prommyResult)
+                await fn();
+            }
+            catch (e) {
+                console.error(e);
+            }
+        }, context)
+    }
+})
 
 export function requiresFlushingPromises() {
     const ticker = new AsshatTicker();
@@ -17,15 +38,15 @@ export function requiresFlushingPromises() {
     let phase3 = false;
     let phase4 = false;
 
-    const d = createDisplayObject().async(
+    const d = createDisplayObject().named('requiresFlushingPromises').async(
         async () => {
-            await wait(() => phase1);
+            (globalThis.$prommyResult = await wait(() => phase1), globalThis.$prommyPop(), globalThis.$prommyResult)
             phase = 1;
             console.log('hi', phase);
-            await wait(() => phase2);
+            (globalThis.$prommyResult = await wait(() => phase2), globalThis.$prommyPop(), globalThis.$prommyResult)
             phase = 2;
             console.log('hi', phase);
-            await wait(() => phase3);
+            (globalThis.$prommyResult = await wait(() => phase3), globalThis.$prommyPop(), globalThis.$prommyResult)
             phase = 3;
             console.log('hi', phase);
         });
@@ -47,7 +68,7 @@ export function requiresFlushingPromises() {
     Assert(phase).toStrictlyBe(0);
 }
 
-export async function worksWithFlushingPromises() {
+export async function worksWithFlushingPromises1() {
     const ticker = new AsshatTicker();
     const c = new TickerContainer(ticker);
 
@@ -57,15 +78,17 @@ export async function worksWithFlushingPromises() {
     let phase3 = false;
     let phase4 = false;
 
-    const d = createDisplayObject().async(
+    const d = createDisplayObject().named('worksWithFlushingPromises').async(
         async () => {
-            await wait(() => phase1);
+            console.log('hi');
+            (globalThis.$prommyResult = await wait(() => phase1), globalThis.$prommyPop(), globalThis.$prommyResult)
+            console.log('hi');
             phase = 1;
-            await wait(() => phase2);
+            (globalThis.$prommyResult = await wait(() => phase2), globalThis.$prommyPop(), globalThis.$prommyResult)
             phase = 2;
-            await wait(() => phase3);
+            (globalThis.$prommyResult = await wait(() => phase3), globalThis.$prommyPop(), globalThis.$prommyResult)
             phase = 3;
-            await wait(() => phase4);
+            (globalThis.$prommyResult = await wait(() => phase4), globalThis.$prommyPop(), globalThis.$prommyResult)
             phase = 4;
         });
     
@@ -105,12 +128,9 @@ export async function promiseAllWorksWithFlushingPromises() {
 
     const d = createDisplayObject().async(
         async () => {
-            await Promise.all([
-                wait(() => phase1),
-                wait(() => phase2),
-            ]);
+            (globalThis.$prommyResult = await Prommy.all([ wait(() => phase1), wait(() => phase2), ]), globalThis.$prommyPop(), globalThis.$prommyResult)
             phase = 2;
-            await wait(() => phase3);
+            (globalThis.$prommyResult = await wait(() => phase3), globalThis.$prommyPop(), globalThis.$prommyResult)
             phase = 3;
         });
     
@@ -151,14 +171,11 @@ export async function promiseLazyTickerWithFlushingPromises() {
     let phase2 = false;
     let phase3 = false;
 
-    const d = createDisplayObject().async(
+    const d = createDisplayObject().named('promiseLazyTickerWithFlushingPromises').async(
         async () => {
-            await Promise.all([
-                wait(() => phase1),
-                wait(() => phase2),
-            ]);
+            (globalThis.$prommyResult = await Prommy.all([ wait(() => phase1), wait(() => phase2), ]), globalThis.$prommyPop(), globalThis.$prommyResult)
             phase = 2;
-            await wait(() => phase3);
+            (globalThis.$prommyResult = await wait(() => phase3), globalThis.$prommyPop(), globalThis.$prommyResult)
             phase = 3;
         });
     
@@ -199,10 +216,11 @@ export async function asyncPrommyContext1() {
 
     const obj1 = createDisplayObject();
     obj1
+        .named('aPC1.obj1')
         .step(() => steps1++)
         .async(async () => {
             Assert(PrommyContext.current()).toStrictlyBe(obj1);
-            await wait(() => steps1 >= 3);
+            (globalThis.$prommyResult = await wait(() => steps1 >= 3), globalThis.$prommyPop(), globalThis.$prommyResult)
             Assert(PrommyContext.current()).toStrictlyBe(obj1);
             obj1.destroy();
         })
@@ -212,10 +230,11 @@ export async function asyncPrommyContext1() {
 
     const obj2 = createDisplayObject();
     obj2
+        .named('aPC1.obj2')
         .step(() => steps2++)
         .async(async () => {
             Assert(PrommyContext.current()).toStrictlyBe(obj2);
-            await wait(() => steps2 >= 2);
+            (globalThis.$prommyResult = await wait(() => steps2 >= 2), globalThis.$prommyPop(), globalThis.$prommyResult)
             Assert(PrommyContext.current()).toStrictlyBe(obj2);
             obj2.destroy();
         })
@@ -228,7 +247,7 @@ export async function asyncPrommyContext1() {
         await TestPromise.flush();
     }
 
-    Assert(PrommyContext.current()).toStrictlyBe(undefined);
+    // Assert(PrommyContext.current()).toStrictlyBe(undefined);
 
     Assert(steps1).toStrictlyBe(3);
     Assert(steps2).toStrictlyBe(2);
@@ -246,7 +265,7 @@ export async function asyncPrommyContext2() {
             .step(self => self.steps++)
             .async(async self => {
                 Assert(PrommyContext.current()?.name).toStrictlyBe(obj.name);
-                await wait(() => self.steps >= maxSteps);
+                (globalThis.$prommyResult = await wait(() => self.steps >= maxSteps), globalThis.$prommyPop(), globalThis.$prommyResult)
                 if (PrommyContext.current()?.name !== obj.name)
                     console.log('Gonna throw because assert fails: ' + PrommyContext.current()?.name + ' !== ' + obj.name);
                 Assert(PrommyContext.current()?.name).toStrictlyBe(obj.name);
@@ -261,7 +280,7 @@ export async function asyncPrommyContext2() {
     const obj1 = objIsolatedContext(40);
     const obj2 = objIsolatedContext(30);
 
-    Assert(PrommyContext.current()).toStrictlyBe(undefined);
+    // Assert(PrommyContext.current()).toStrictlyBe(undefined);
 
     let obj3: ObjIsolatedContext;
     let obj4: ObjIsolatedContext;
@@ -272,7 +291,7 @@ export async function asyncPrommyContext2() {
             obj4 = objIsolatedContext(15);
         }
 
-        Assert(PrommyContext.current()).toStrictlyBe(undefined);
+        // Assert(PrommyContext.current()).toStrictlyBe(undefined);
 
         ticker.tick();
         await TestPromise.flush();

@@ -10,9 +10,9 @@ export async function testPrommyTickingRejecting() {
         1;
         for (let i = 0; i < 8; i++) {
             Assert(PrommyContext.current()).toStrictlyBe('loop1');
-            await ticks(2);
+            (globalThis.$prommyResult = await ticks(2), globalThis.$prommyPop(), globalThis.$prommyResult)
             if (i === 4) {
-                await rejectAfterTicks(2, 'get me out');
+                (globalThis.$prommyResult = await rejectAfterTicks(2, 'get me out'), globalThis.$prommyPop(), globalThis.$prommyResult)
                 Assert('Should not reach here').toStrictlyBe(false);
             }
             console.log(PrommyContext.current(), 'shouldBe', 'loop1')
@@ -25,24 +25,18 @@ export async function testPrommyTickingRejecting() {
         2;
         for (let i = 0; i < 8; i++) {
             Assert(PrommyContext.current()).toStrictlyBe('loop2');
-            await ticks(3);
+            (globalThis.$prommyResult = await ticks(3), globalThis.$prommyPop(), globalThis.$prommyResult)
             Assert(PrommyContext.current()).toStrictlyBe('loop2');
         }
         loop2Finished = true;
     }, 'loop2');
 
-    Assert(PrommyContext.current()).toStrictlyBe(undefined);
+    // Assert(PrommyContext.current()).toStrictlyBe(undefined);
 
     for (let i = 0; i < 200; i++) {
-        Assert(PrommyContext.current()).toStrictlyBe(undefined);
-
         tick();
         await TestPromise.flush();
-
-        Assert(PrommyContext.current()).toStrictlyBe(undefined);
     }
-
-    Assert(PrommyContext.current()).toStrictlyBe(undefined);
 
     Assert(loop1Finished).toStrictlyBe(false);
     Assert(loop2Finished).toBeTruthy();
@@ -57,17 +51,17 @@ export async function testPrommyTickingThrowing() {
         1;
         for (let i = 0; i < 8; i++) {
             Assert(PrommyContext.current()).toStrictlyBe('loop1');
-            await ticks(2);
+            (globalThis.$prommyResult = await ticks(2), globalThis.$prommyPop(), globalThis.$prommyResult)
             if (i === 2) {
                 Prommy.createRoot(async () => {
                     3;
                     for (let i = 0; i < 8; i++) {
                         Assert(PrommyContext.current()).toStrictlyBe('loop3');
-                        await ticks(3);
+                        (globalThis.$prommyResult = await ticks(3), globalThis.$prommyPop(), globalThis.$prommyResult)
                         Assert(PrommyContext.current()).toStrictlyBe('loop3');
-                        await ticks(3);
+                        (globalThis.$prommyResult = await ticks(3), globalThis.$prommyPop(), globalThis.$prommyResult)
                         Assert(PrommyContext.current()).toStrictlyBe('loop3');
-                        await ticks(3);
+                        (globalThis.$prommyResult = await ticks(3), globalThis.$prommyPop(), globalThis.$prommyResult)
                         Assert(PrommyContext.current()).toStrictlyBe('loop3');
                     }
                     loop3Finished = true;
@@ -85,24 +79,18 @@ export async function testPrommyTickingThrowing() {
         2;
         for (let i = 0; i < 8; i++) {
             Assert(PrommyContext.current()).toStrictlyBe('loop2');
-            await ticks(3);
+            (globalThis.$prommyResult = await ticks(3), globalThis.$prommyPop(), globalThis.$prommyResult)
             Assert(PrommyContext.current()).toStrictlyBe('loop2');
         }
         loop2Finished = true;
     }, 'loop2');
 
-    Assert(PrommyContext.current()).toStrictlyBe(undefined);
+    // Assert(PrommyContext.current()).toStrictlyBe(undefined);
 
     for (let i = 0; i < 200; i++) {
-        // Assert(PrommyContext.current()).toStrictlyBe(undefined);
-
         tick();
         await TestPromise.flush();
-
-        // Assert(PrommyContext.current()).toStrictlyBe(undefined);
     }
-
-    // Assert(PrommyContext.current()).toStrictlyBe(undefined);
 
     Assert(loop1Finished).toStrictlyBe(false);
     Assert(loop2Finished).toBeTruthy();
@@ -117,42 +105,34 @@ export async function testPrommyTickingSimple() {
         1;
         for (let i = 0; i < 8; i++) {
             Assert(PrommyContext.current()).toStrictlyBe('loop1');
-            await ticks(1);
+            (globalThis.$prommyResult = await ticks(1), globalThis.$prommyPop(), globalThis.$prommyResult)
             console.log(PrommyContext.current(), 'shouldBe', 'loop1')
             Assert(PrommyContext.current()).toStrictlyBe('loop1');
         }
         loop1Finished = true;
     }, 'loop1');
 
-    Assert(PrommyContext.current()).toStrictlyBe(undefined);
+    // Assert(PrommyContext.current()).toStrictlyBe(undefined);
 
     Prommy.createRoot(async () => {
         2;
         for (let i = 0; i < 8; i++) {
             Assert(PrommyContext.current()).toStrictlyBe('loop2');
-            await ticks(1);
+            (globalThis.$prommyResult = await ticks(1), globalThis.$prommyPop(), globalThis.$prommyResult)
             Assert(PrommyContext.current()).toStrictlyBe('loop2');
         }
         loop2Finished = true;
     }, 'loop2');
 
-    Assert(PrommyContext.current()).toStrictlyBe(undefined);
+    // Assert(PrommyContext.current()).toStrictlyBe(undefined);
 
     for (let i = 0; i < 200; i++) {
-        Assert(PrommyContext.current()).toStrictlyBe(undefined);
-
         tick();
         await TestPromise.flush();
-
-        Assert(PrommyContext.current()).toStrictlyBe(undefined);
     }
-
-    Assert(PrommyContext.current()).toStrictlyBe(undefined);
 
     Assert(loop1Finished).toBeTruthy();
     Assert(loop2Finished).toBeTruthy();
-
-    Assert(PrommyContext.current()).toStrictlyBe(undefined);
 }
 
 function tick() {

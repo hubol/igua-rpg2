@@ -20,10 +20,11 @@ export class PrommyRoot {
 
 export class Prommy<T> implements PromiseLike<T> {
     private readonly _context: PrommyRoot;
+    private _notAwaited = false;
     private _promise: Promise<T>;
 
     constructor(
-        executor: (resolve: (value: T | PromiseLike<T>) => void, reject: (reason?: any) => void) => void,
+        executor: Promise<T> | ((resolve: (value: T | PromiseLike<T>) => void, reject: (reason?: any) => void) => void),
         context = PrommyContext.currentInternal(),
         info = executor.toString().substring(0, 16),
     ) {
@@ -37,25 +38,48 @@ export class Prommy<T> implements PromiseLike<T> {
         console.log(`Prommy.constructor -- new Promise: ${name}`);
 
         // TODO need error handling?
-        this._promise = new Promise(executor);
+        this._promise = typeof executor === 'function' ? new Promise(executor) : executor;
 
         this._promise._name = name;
 
         this._context = context;
     }
 
+    static all<T extends readonly Prommy<unknown>[]>(values: T): Prommy<{ -readonly [P in keyof T]: Awaited<T[P]> }> {
+        for (const value of values)
+            value._notAwaited = true;
+        return new Prommy(Promise.all(values));
+    }
+
+    static resolve<T>(value: T): Prommy<T>
+    static resolve(): Prommy<void>
+    static resolve<T>(value?: T) {
+        return new Prommy(Promise.resolve(value));
+    }
+
     static createRoot<T>(executor: () => Promise<T>, context: any) {
         return new PrommyRoot(executor, context);
     }
 
+    and<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | null | undefined, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null | undefined): Prommy<TResult1 | TResult2> {
+        this._notAwaited = true;
+        return this.then(onfulfilled, onrejected);
+    }
+
+    /**
+     * @deprecated
+     */
     then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | null | undefined, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null | undefined): PromiseLike<TResult1 | TResult2> {
         const parent = this._promise;
         const context = this._context;
 
         const nextPromise = this._promise.then(
-            onfulfilled && (function() {
-                modifyRootStack(context, `${nextPromise._name} PUSH`);
-                onfulfilled();
+            onfulfilled && ((value) => {
+                if (this._notAwaited)
+                    softApply(context);
+                else
+                    modifyRootStack(context, `${nextPromise._name} PUSH`);
+                onfulfilled(value);
             }),
             onrejected)
 
@@ -86,7 +110,14 @@ export function applyStack() {
     const prev = PrommyContext.currentName();
     _appliedRoot = _rootStack.shift();
 
-    console.log('Applied stack', prev, '->', PrommyContext.currentName());
+    console.log('Applied stack', prev, '->', PrommyContext.currentName(), '; Stack Length: ' + _rootStack.length);
+}
+
+function softApply(root: PrommyRoot) {
+    const prev = PrommyContext.currentName();
+    _appliedRoot = root;
+
+    console.log('Soft applied', prev, '->', PrommyContext.currentName(), '; Stack Length: ' + _rootStack.length);
 }
 
 function forceRoot(root?: PrommyRoot, debug: string) {
@@ -118,6 +149,6 @@ export class PrommyContext {
     static current<TContext = any>(): TContext {
         if (_forcedRoot)
             return _forcedRoot?._context;
-        return _appliedRoot._context;
+        return _appliedRoot?._context;
     }
 }
