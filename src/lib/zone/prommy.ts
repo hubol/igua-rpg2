@@ -94,6 +94,8 @@ export class Prommy<T> implements PromiseLike<T> {
     }
 }
 
+globalThis.Prommy = Prommy;
+
 let thenIds = 0;
 let ids = 0;
 let rootIds = 0;
@@ -101,8 +103,8 @@ let rootIds = 0;
 function modifyRootStack(root: PrommyRoot, debug: string) {
     _rootStack.push(root);
 
-    const context = root._context;
-    const name = context.name ?? context.Name ?? context;
+    const context = root?._context;
+    const name = context?.name ?? context?.Name ?? context;
     console.log(debug + '; Stack Length: ' + _rootStack.length, '->', name);
 }
 
@@ -150,5 +152,9 @@ export class PrommyContext {
         if (_forcedRoot)
             return _forcedRoot?._context;
         return _appliedRoot?._context;
+    }
+
+    static get _internalStackLength() {
+        return _rootStack.length;
     }
 }

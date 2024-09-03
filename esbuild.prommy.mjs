@@ -55,6 +55,30 @@ function createPoppingAwaitExpression(factory, awaitExpr) {
 }
 
 /**
+ * @param {import("typescript").NodeFactory} factory 
+ * @param {import("typescript").AwaitExpression} awaitExpr 
+ * @returns 
+ */
+function createPoppingAwaitExpressionOfWrappedPrommy(factory, awaitExpr) {
+    const resultVariable = factory.createIdentifier(Consts.ResultIdentifier);
+
+    const promise = awaitExpr.expression;
+    const constructed = factory.createNewExpression(factory.createIdentifier(Consts.PrommyType), undefined, [ promise ])
+    const awaited = factory.createAwaitExpression(constructed);
+
+    const assignment = factory.createAssignment(resultVariable, awaited);
+
+
+    return factory.createParenthesizedExpression(
+        factory.createCommaListExpression([
+            assignment,
+            createPopFunctionCall(factory),
+            resultVariable
+        ])
+    );
+}
+
+/**
  * 
  * @param {import("typescript").Type} type 
  */
@@ -97,6 +121,10 @@ const transformSourceFile = (context) => (sourceFile) => {
         if (ts.isAwaitExpression(node)) {
             const expression = node.expression;
             const type = Ts.checker.getTypeAtLocation(expression);
+
+            if (type.symbol?.name === 'Promise') {
+                return createPoppingAwaitExpressionOfWrappedPrommy(factory, node);
+            }
 
             if (isPrommyOrPromiseOfPrommy(type)) {
                 return createPoppingAwaitExpression(factory, node);
