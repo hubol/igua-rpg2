@@ -27,9 +27,7 @@ const Ts = {
  * @param {import("typescript").Node} node
  */
 function isFunctionDeclarationReturningPromise(node) {
-    // It seems like functiondeclaration covers arrowfunction :-)
-    // if (ts.isFunctionDeclaration(node) || ts.isArrowFunction(node))
-    if (ts.isFunctionDeclaration(node))
+    if (ts.isFunctionDeclaration(node) || ts.isArrowFunction(node))
         return doesNodeReturnPromise(node);
 
     return false;
@@ -56,7 +54,7 @@ function doesNodeReturnPromise(node) {
  */
 function oneSignatureHasContextParameter(node) {
     const type = Ts.checker.getTypeAtLocation(node);
-    return type.callSignatures.some(signature => signature.parameters.some(parameter => parameter.name === Consts.ContextParameterName));
+    return type.getCallSignatures().some(signature => signature.parameters.some(parameter => parameter.name === Consts.ContextParameterName));
 }
 
 /**
@@ -110,8 +108,8 @@ function createCallExpressionWithPartiallyAppliedArguments(factory, node) {
         const provideableParametersLength = getLengthOfLongestParameterList(parameter.valueDeclaration);
         const receivableParametersLength = getLengthOfLongestParameterList(argument);
 
-        const argCount = Math.min(provideableParametersLength, receivableParametersLength);
-        const undefinedCount = receivableParametersLength - argCount;
+        const argCount = assertNonNegative(Math.min(provideableParametersLength, receivableParametersLength), parameter.valueDeclaration);
+        const undefinedCount = Math.max(0, receivableParametersLength - argCount);
 
         argumentsArray.push(createArrowFunctionCallingWithContextAndSpreadArgs(factory, argument, { argCount, undefinedCount }));
     }
@@ -237,10 +235,34 @@ function isIdentiferThatReturnsPromise(node) {
  * @param {import("typescript").CallExpression} node
  */
 function createCallExpressionWithContextParameter(factory, node) {
+    const length = getLengthOfLongestParameterList(node.expression);
+    const undefinedCount = assertNonNegative(length - node.arguments.length, node);
+
     return factory.createCallExpression(
         node.expression,
         node.typeArguments,
-        [ ...node.arguments, factory.createIdentifier(Consts.ContextParameterName) ]);
+        [
+            ...node.arguments,
+            ...range(undefinedCount).map(() => factory.createIdentifier('undefined')),
+            factory.createIdentifier(Consts.ContextParameterName)
+        ]);
+}
+
+
+/**
+ * @param {number} value 
+ * @param {import("typescript").Node} node
+ */
+function assertNonNegative(value, node) {
+    if (value < 0) {
+        console.warn(`Expected a non-zero number. Got: ${value}. Node:
+${node.getFullText()}
+in
+${node.getSourceFile().fileName}`)
+        return 0;
+    }
+
+    return value;
 }
 
 /**
