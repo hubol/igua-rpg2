@@ -9,6 +9,7 @@ import ts from 'typescript';
 
 const Consts = {
     ContextParameterName: '$c',
+    ArgsParameterName: '$args',
     PopFunctionName: '$prommyPop',
     ResultIdentifier: '$prommyResult',
     PrommyType: 'Prommy',
@@ -114,12 +115,23 @@ function isPrommyOrPromiseOfPrommy(type) {
  * @param {import("typescript").Node} node
  */
 function isFunctionDeclarationReturningPromise(node) {
-    if (ts.isFunctionDeclaration(node) || ts.isArrowFunction(node)) {
-        const type = Ts.checker.getTypeAtLocation(node);
-        for (const signature of type.getCallSignatures()) {
-            if (signature.resolvedReturnType.symbol?.name === 'Promise') {
-                return true;
-            }
+    // It seems like functiondeclaration covers arrowfunction :-)
+    // if (ts.isFunctionDeclaration(node) || ts.isArrowFunction(node))
+    if (ts.isFunctionDeclaration(node))
+        return doesNodeReturnPromise(node);
+
+    return false;
+}
+
+/**
+ * 
+ * @param {import("typescript").Node} node
+ */
+function doesNodeReturnPromise(node) {
+    const type = Ts.checker.getTypeAtLocation(node);
+    for (const signature of type.getCallSignatures()) {
+        if (signature.resolvedReturnType.symbol?.name === 'Promise') {
+            return true;
         }
     }
 
@@ -161,11 +173,78 @@ function createFunctionDeclarationWithContextParameter(factory, node) {
     )
 }
 
-const results = {
-    callChains: [],
-    callExpressions: [],
-    callLikeExpressions: [],
-    callOrNewExpressions: [],
+/** @param {import("typescript").NodeFactory} factory  */
+function createContextIdentifier(factory) {
+    return factory.createIdentifier(Consts.ContextParameterName);
+}
+
+/**
+ * @param {import("typescript").NodeFactory} factory 
+ * @param {import("typescript").CallExpression} node
+ */
+function createCallExpressionWithPartiallyAppliedArguments(factory, node) {
+    /** @type {import("typescript").Expression[]} */
+    const argumentsArray = [];
+
+    for (let i = 0; i < node.arguments.length; i++) {
+        const argument = node.arguments[i];
+        if (!isIdentiferThatReturnsPromise(argument)) {
+            argumentsArray.push(argument);
+            continue;
+        }
+        argumentsArray.push(createArrowFunctionCallingWithContextAndSpreadArgs(factory, argument));
+    }
+    
+    return factory.createCallExpression(
+        node.expression,
+        node.typeArguments,
+        argumentsArray,
+    );
+}
+
+/**
+ * @param {import("typescript").NodeFactory} factory 
+ * @param {import("typescript").Identifier} node
+ */
+function createArrowFunctionCallingWithContextAndSpreadArgs(factory, node) {
+    return factory.createArrowFunction(
+        undefined,
+        undefined,
+        [
+            factory.createParameterDeclaration(
+                undefined,
+                factory.createToken(ts.SyntaxKind.DotDotDotToken),
+                Consts.ArgsParameterName)
+        ],
+        undefined,
+        factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
+        factory.createCallExpression(
+            node,
+            undefined,
+            [
+                createContextIdentifier(factory),
+                factory.createSpreadElement(factory.createIdentifier(Consts.ArgsParameterName))
+            ]))
+}
+
+/**
+ * @param {import("typescript").Node} node
+ */
+function getLengthOfLongestParameterList(node) {
+    const type = Ts.checker.getTypeAtLocation(node);
+
+    let length = 0;
+
+    for (const signature of type.getCallSignatures()) {
+        let thisLength = 0;
+        for (const parameter of signature.parameters) {
+            if (parameter.name !== Consts.ContextParameterName)
+                thisLength++;
+        }
+        length = Math.max(length, thisLength);
+    }
+
+    return length;
 }
 
 const promiseMethods = new Set([ 'then', 'catch', 'finally' ]);
@@ -187,6 +266,32 @@ function isInvocationOfFunctionThatReturnsPromise(node) {
     }
 
     return false;
+}
+
+/**
+ * 
+ * @param {import("typescript").Node} node
+ */
+function isCallExpressionWithFunctionThatReturnsPromiseAsArgument(node) {
+    if (ts.isCallExpression(node)) {
+        for (const argument of node.arguments) {
+            if (isIdentiferThatReturnsPromise(argument))
+                return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * 
+ * @param {import("typescript").Node} node
+ */
+function isIdentiferThatReturnsPromise(node) {
+    if (!ts.isIdentifier(node))
+        return false;
+
+    return doesNodeReturnPromise(node);
 }
 
 /**
@@ -215,6 +320,10 @@ const transformSourceFile = (context) => (sourceFile) => {
     function visitor(node) {
         if (isInvocationOfFunctionThatReturnsPromise(node)) {
             return ts.visitEachChild(createCallExpressionWithContextParameter(factory, node), visitor, context);
+        }
+
+        if (isCallExpressionWithFunctionThatReturnsPromiseAsArgument(node)) {
+            return ts.visitEachChild(createCallExpressionWithPartiallyAppliedArguments(factory, node), visitor, context);
         }
 
         if (isFunctionDeclarationReturningPromise(node)) {
