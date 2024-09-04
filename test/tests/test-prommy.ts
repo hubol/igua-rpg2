@@ -1,6 +1,8 @@
-import { Prommy, PrommyContext } from "../../src/lib/zone/prommy";
+import { Prommy, PrommyContext, _Internal_Prommy, installPrommy } from "../../src/lib/zone/prommy";
 import { Assert } from "../lib/assert";
 import { TestPromise } from "../lib/test-promise";
+
+const { $p } = installPrommy();
 
 export async function testPrommyTickingRejecting() {
     let loop1Finished = false;
@@ -10,9 +12,9 @@ export async function testPrommyTickingRejecting() {
         1;
         for (let i = 0; i < 8; i++) {
             Assert(PrommyContext.current()).toStrictlyBe('loop1');
-            (globalThis.$prommyResult = await ticks(2), globalThis.$prommyPop(), globalThis.$prommyResult)
+            $p.$pop(await $p.$push(ticks(2)));
             if (i === 4) {
-                (globalThis.$prommyResult = await rejectAfterTicks(2, 'get me out'), globalThis.$prommyPop(), globalThis.$prommyResult)
+                $p.$pop(await $p.$push(rejectAfterTicks(2, 'get me out')));
                 Assert('Should not reach here').toStrictlyBe(false);
             }
             console.log(PrommyContext.current(), 'shouldBe', 'loop1')
@@ -25,7 +27,7 @@ export async function testPrommyTickingRejecting() {
         2;
         for (let i = 0; i < 8; i++) {
             Assert(PrommyContext.current()).toStrictlyBe('loop2');
-            (globalThis.$prommyResult = await ticks(3), globalThis.$prommyPop(), globalThis.$prommyResult)
+            $p.$pop(await $p.$push(ticks(3)));
             Assert(PrommyContext.current()).toStrictlyBe('loop2');
         }
         loop2Finished = true;
@@ -44,6 +46,7 @@ export async function testPrommyTickingRejecting() {
 
 export async function testPrommyTickingThrowing() {
     let loop1Finished = false;
+    let loop1Partial = false;
     let loop2Finished = false;
     let loop3Finished = false;
 
@@ -51,24 +54,26 @@ export async function testPrommyTickingThrowing() {
         1;
         for (let i = 0; i < 8; i++) {
             Assert(PrommyContext.current()).toStrictlyBe('loop1');
-            (globalThis.$prommyResult = await ticks(2), globalThis.$prommyPop(), globalThis.$prommyResult)
+            $p.$pop(await $p.$push(ticks(2)));
             if (i === 2) {
                 Prommy.createRoot(async () => {
                     3;
                     for (let i = 0; i < 8; i++) {
                         Assert(PrommyContext.current()).toStrictlyBe('loop3');
-                        (globalThis.$prommyResult = await ticks(3), globalThis.$prommyPop(), globalThis.$prommyResult)
+                        $p.$pop(await $p.$push(ticks(3)));
                         Assert(PrommyContext.current()).toStrictlyBe('loop3');
-                        (globalThis.$prommyResult = await ticks(3), globalThis.$prommyPop(), globalThis.$prommyResult)
+                        $p.$pop(await $p.$push(ticks(3)));
                         Assert(PrommyContext.current()).toStrictlyBe('loop3');
-                        (globalThis.$prommyResult = await ticks(3), globalThis.$prommyPop(), globalThis.$prommyResult)
+                        $p.$pop(await $p.$push(ticks(3)));
                         Assert(PrommyContext.current()).toStrictlyBe('loop3');
                     }
                     loop3Finished = true;
                 }, 'loop3');
             }
-            if (i === 4)
+            if (i === 4) {
+                loop1Partial = true;
                 throw new Error('get me out');
+            }
             console.log(PrommyContext.current(), 'shouldBe', 'loop1')
             Assert(PrommyContext.current()).toStrictlyBe('loop1');
         }
@@ -79,7 +84,7 @@ export async function testPrommyTickingThrowing() {
         2;
         for (let i = 0; i < 8; i++) {
             Assert(PrommyContext.current()).toStrictlyBe('loop2');
-            (globalThis.$prommyResult = await ticks(3), globalThis.$prommyPop(), globalThis.$prommyResult)
+            $p.$pop(await $p.$push(ticks(3)));
             Assert(PrommyContext.current()).toStrictlyBe('loop2');
         }
         loop2Finished = true;
@@ -93,6 +98,7 @@ export async function testPrommyTickingThrowing() {
     }
 
     Assert(loop1Finished).toStrictlyBe(false);
+    Assert(loop1Partial).toBeTruthy();
     Assert(loop2Finished).toBeTruthy();
     Assert(loop3Finished).toBeTruthy();
 }
@@ -105,7 +111,7 @@ export async function testPrommyTickingSimple() {
         1;
         for (let i = 0; i < 8; i++) {
             Assert(PrommyContext.current()).toStrictlyBe('loop1');
-            (globalThis.$prommyResult = await ticks(1), globalThis.$prommyPop(), globalThis.$prommyResult)
+            $p.$pop(await $p.$push(ticks(1)));
             console.log(PrommyContext.current(), 'shouldBe', 'loop1')
             Assert(PrommyContext.current()).toStrictlyBe('loop1');
         }
@@ -118,7 +124,7 @@ export async function testPrommyTickingSimple() {
         2;
         for (let i = 0; i < 8; i++) {
             Assert(PrommyContext.current()).toStrictlyBe('loop2');
-            (globalThis.$prommyResult = await ticks(1), globalThis.$prommyPop(), globalThis.$prommyResult)
+            $p.$pop(await $p.$push(ticks(1)));
             Assert(PrommyContext.current()).toStrictlyBe('loop2');
         }
         loop2Finished = true;
@@ -151,13 +157,13 @@ function tick() {
 const tickMap: Map<Function, number> = new Map();
 
 function ticks(count: number) {
-    return new Prommy(resolve => {
+    return _Internal_Prommy.create(resolve => {
         tickMap.set(resolve, count);
     });
 }
 
 function rejectAfterTicks(count: number, message: string) {
-    return new Prommy((resolve, reject) => {
+    return _Internal_Prommy.create((resolve, reject) => {
         tickMap.set(() => reject(message), count);
     });
 }
