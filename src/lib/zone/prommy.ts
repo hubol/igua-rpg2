@@ -4,20 +4,19 @@ import { ForceAliasType } from "../types/force-alias-type";
 
 const PrommyGlobal = {
     $root: Force<PrommyRoot>(),
-    $push,
+    $push: $push as any as (p: PromiseLike<unknown>) => PromiseLike<unknown>,
     $pop,
 }
 
 let installed = false;
 
 export function installPrommy() {
-    if (installed)
-        return;
+    if (!installed) {
+        installed = true;
 
-    installed = true;
-
-    globalThis.$p = PrommyGlobal;
-    redefinePromise();
+        globalThis.$p = PrommyGlobal;
+        redefinePromise();
+    }
 
     return { $p: PrommyGlobal };
 }
@@ -25,10 +24,6 @@ export function installPrommy() {
 export const Prommy = {
     createRoot,
     create,
-}
-
-export const _Internal_Prommy = {
-    create: create as <T> (...args: Parameters<typeof create<T>>) => Prommy<T> & PrivatePromise,
 }
 
 function createRoot<T>(executor: () => Promise<T>, context: any) {
@@ -46,7 +41,6 @@ function create<T>(executor: (resolve: (value: T | PromiseLike<T>) => void, reje
 interface PrivatePromise {
     $isPromise?: true;
     $root: PrommyRoot;
-    $pushed?: boolean;
 }
 
 // TODO it may be possible to modify the prototype constructor
@@ -71,31 +65,36 @@ const Promise_resolve = Promise.resolve;
 const Promise_reject = Promise.reject;
 
 function redefinePromise() {
-    // globalThis.Promise = function (this: Promise<unknown> & PrivatePromise, executor) {
-    //     const p = new Promise_ctor(executor) as Promise<unknown> & PrivatePromise;
-    //     p.$root = PrommyGlobal.$root;
-    //     return p;
-    // } as any;
+    globalThis.Promise = function (this: Promise<unknown> & PrivatePromise, executor) {
+        const p = new Promise_ctor(executor) as Promise<unknown> & PrivatePromise;
+        p.$root = PrommyGlobal.$root;
+        return p;
+    } as any;
+
+    new Promise(() => {}).finally()
 
     Object.defineProperties(Promise.prototype, {
         then: {
             value: function (this: Promise<unknown> & PrivatePromise, onfulfilled?, onrejected?) {
-                return Promise_then.call(this,
+                const p = Promise_then.call(this,
                     onfulfilled && ((value) => {
-                        PrommyGlobal.$root = this.$root;
+                        debugSetGlobal(this.$root, 'Promise.then.onfulfilled');
+                        // PrommyGlobal.$root = this.$root;
                         const result = onfulfilled(value);
                         if (isPromise(result)) {
                             result.$root = this.$root;
                         }
                         else if (isPromiseLike(result)) {
                             // TODO I think a Prommy can be constructed from it
-                            console.error("Don't know how to handle this case!");
+                            console.error("then: Don't know how to handle this case!");
                         }
     
                         return result;
                     }),
                     // TODO not sure if this is correct
-                    onrejected);
+                    onrejected) as Promise<unknown> & PrivatePromise;
+                p.$root = this.$root;
+                return p;
             },
             configurable: true,
         },
@@ -153,7 +152,7 @@ function isAwaitedPrommyResult(value: any): value is AwaitedPrommyResult {
 
 function $pop(awaitedResult: unknown) {
     if (isAwaitedPrommyResult(awaitedResult)) {
-        PrommyGlobal.$root = awaitedResult.$root;
+        debugSetGlobal(awaitedResult.$root, '$pop.isAwaitedPrommyResult');
         return awaitedResult.$value;
     }
 
@@ -163,14 +162,15 @@ function $pop(awaitedResult: unknown) {
 }
 
 function $push(promise: PromiseLike<unknown> & PrivatePromise) {
-    if (promise.$pushed)
-        return promise;
     if (!isPromise(promise)) {
         // TODO I think a Prommy can be constructed from it
-        console.error("Don't know how to handle this case!");
+        console.error("$push: Don't know how to handle this case!");
     }
-    const p = Promise_then.call(promise, $value => ({ $value, $root: promise.$root })) as Promise<unknown> & PrivatePromise;
-    p.$pushed = true;
+    const $root = promise.$root || PrommyGlobal.$root || null;
+    promise.$root = $root;
+    debugSetGlobal($root, '$push');
+    const p = promise.then($value => ({ $value, $root })) as Promise<unknown> & PrivatePromise;
+    p.$root = $root;
     return p;
 }
 
@@ -186,9 +186,9 @@ export class PrommyRoot {
         this.context = context;
 
         const previous = PrommyGlobal.$root;
-        PrommyGlobal.$root = this;
-        this._promise = executor().catch(e => {});
-        PrommyGlobal.$root = previous;
+        debugSetGlobal(this, 'new PrommyRoot push');
+        this._promise = executor().catch(console.error);
+        debugSetGlobal(previous, 'new PrommyRoot pop');
     }
 }
 
@@ -198,4 +198,9 @@ export const PrommyContext = {
     current() {
         return PrommyGlobal.$root.context;
     }
+}
+
+function debugSetGlobal(root: PrommyRoot, info: string) {
+    console.log('-->', root?.context || null, ':', info);
+    PrommyGlobal.$root = root;
 }

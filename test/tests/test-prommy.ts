@@ -1,4 +1,4 @@
-import { Prommy, PrommyContext, _Internal_Prommy, installPrommy } from "../../src/lib/zone/prommy";
+import { Prommy, PrommyContext, installPrommy } from "../../src/lib/zone/prommy";
 import { Assert } from "../lib/assert";
 import { TestPromise } from "../lib/test-promise";
 
@@ -157,13 +157,13 @@ function tick() {
 const tickMap: Map<Function, number> = new Map();
 
 function ticks(count: number) {
-    return _Internal_Prommy.create(resolve => {
+    return Prommy.create(resolve => {
         tickMap.set(resolve, count);
     });
 }
 
 function rejectAfterTicks(count: number, message: string) {
-    return _Internal_Prommy.create((resolve, reject) => {
+    return Prommy.create((resolve, reject) => {
         tickMap.set(() => reject(message), count);
     });
 }

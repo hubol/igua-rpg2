@@ -1,20 +1,68 @@
-import { Prommy, PrommyContext } from "../../src/lib/zone/prommy";
+import { Prommy, PrommyContext, installPrommy } from "../../src/lib/zone/prommy";
 import { Assert } from "../lib/assert";
 import { TestPromise } from "../lib/test-promise";
 
-export async function morePrommyAndChainingWorks() {
+const { $p } = installPrommy();
 
+export async function morePrommyThenChainingWorks() {
+    const events: string[] = [];
+
+    Prommy.createRoot(async () => {
+        Assert(PrommyContext.current()).toStrictlyBe('rootA');
+        $p.$pop(await $p.$push(asyncFunction().then(() => {
+            Assert(PrommyContext.current()).toStrictlyBe('rootA');
+            events.push('a');
+        })));
+        Assert(PrommyContext.current()).toStrictlyBe('rootA');
+        $p.$pop(await $p.$push(asyncFunction().then(() => {
+            Assert(PrommyContext.current()).toStrictlyBe('rootA');
+            events.push('c');
+        }).then(() => {
+            Assert(PrommyContext.current()).toStrictlyBe('rootA');
+            return ticks(10);
+        })));
+        Assert(PrommyContext.current()).toStrictlyBe('rootA');
+        events.push('e');
+    }, 'rootA');
+
+    Prommy.createRoot(async () => {
+        Assert(PrommyContext.current()).toStrictlyBe('rootB');
+        $p.$pop(await $p.$push(asyncFunction().then(() => {
+            Assert(PrommyContext.current()).toStrictlyBe('rootB');
+            return ticks(2);
+        }).then(() => events.push('b'))));
+        Assert(PrommyContext.current()).toStrictlyBe('rootB');
+        $p.$pop(await $p.$push(asyncFunction()));
+        Assert(PrommyContext.current()).toStrictlyBe('rootB');
+        events.push('d');
+    }, 'rootB');
+
+    for (let i = 0; i < 30; i++) {
+        tick();
+        await TestPromise.flush();
+    }
+
+    Assert(events.length).toStrictlyBe(5);
+    Assert(events[0]).toStrictlyBe('a');
+    Assert(events[1]).toStrictlyBe('b');
+    Assert(events[2]).toStrictlyBe('c');
+    Assert(events[3]).toStrictlyBe('d');
+    Assert(events[4]).toStrictlyBe('e');
 }
 
 export async function morePrommyAllWorks() {
 
 }
 
-async function returnsPromisePrommy() {
-    console.log('a');
-    (globalThis.$prommyResult = await ticks(2), globalThis.$prommyPop(), globalThis.$prommyResult)
-    console.log('b');
-    (globalThis.$prommyResult = await ticks(2), globalThis.$prommyPop(), globalThis.$prommyResult)
+async function asyncFunction() {
+    const initialContext = PrommyContext.current();
+    console.log(initialContext);
+    Assert(PrommyContext.current()).toBeTruthy();
+    $p.$pop(await $p.$push(ticks(2)));
+    Assert(PrommyContext.current()).toStrictlyBe(initialContext);
+    $p.$pop(await $p.$push(ticks(2)));
+    Assert(PrommyContext.current()).toStrictlyBe(initialContext);
+    return 3;
 }
 
 export async function morePrommyUtilityFunctionWorks() {
@@ -23,10 +71,9 @@ export async function morePrommyUtilityFunctionWorks() {
 
     Prommy.createRoot(async () => {
         Assert(PrommyContext.current()).toStrictlyBe('root1');
-        (globalThis.$prommyResult = await new Prommy(returnsPromisePrommy()), globalThis.$prommyPop(), globalThis.$prommyResult)
-        // await returnsPromisePrommy();
+        $p.$pop(await $p.$push(asyncFunction()));
         Assert(PrommyContext.current()).toStrictlyBe('root1');
-        (globalThis.$prommyResult = await new Prommy(returnsPromisePrommy()), globalThis.$prommyPop(), globalThis.$prommyResult)
+        $p.$pop(await $p.$push(asyncFunction()));
         Assert(PrommyContext.current()).toStrictlyBe('root1');
         finished1 = true;
     }, 'root1');
@@ -34,9 +81,9 @@ export async function morePrommyUtilityFunctionWorks() {
     Prommy.createRoot(async () => {
         Assert(PrommyContext.current()).toStrictlyBe('root2');
         // TODO this transformation needs to happen in TSvvvvvvvv
-        (globalThis.$prommyResult = await new Prommy(returnsPromisePrommy()), globalThis.$prommyPop(), globalThis.$prommyResult)
+        $p.$pop(await $p.$push(asyncFunction()));
         Assert(PrommyContext.current()).toStrictlyBe('root2');
-        (globalThis.$prommyResult = await new Prommy(returnsPromisePrommy()), globalThis.$prommyPop(), globalThis.$prommyResult)
+        $p.$pop(await $p.$push(asyncFunction()));
         Assert(PrommyContext.current()).toStrictlyBe('root2');
         finished2 = true;
     }, 'root2');
@@ -48,7 +95,6 @@ export async function morePrommyUtilityFunctionWorks() {
 
     Assert(finished1).toBeTruthy();
     Assert(finished2).toBeTruthy();
-    Assert(PrommyContext._internalStackLength).toStrictlyBe(0);
 }
 
 function tick() {
@@ -67,7 +113,7 @@ function tick() {
 const tickMap: Map<Function, number> = new Map();
 
 function ticks(count: number) {
-    return new Prommy(resolve => {
-        tickMap.set(resolve, count);
+    return Prommy.create(resolve => {
+        tickMap.set(() => resolve(count), count);
     });
 }
