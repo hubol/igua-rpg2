@@ -10,9 +10,6 @@ import ts from 'typescript';
 const Consts = {
     ContextParameterName: '$c',
     ArgsParameterName: '$args',
-    PopFunctionName: '$prommyPop',
-    ResultIdentifier: '$prommyResult',
-    PrommyType: 'Prommy',
 }
 
 const Ts = {
@@ -23,91 +20,6 @@ const Ts = {
     /** @type {import("typescript").TypeChecker} */
     checker: undefined,
     printer: ts.createPrinter(),
-}
-
-/**
- * 
- * @param {import("typescript").NodeFactory} factory 
- * @returns 
- */
-function createPopFunctionCall(factory) {
-    return factory.createCallExpression(
-        factory.createIdentifier(Consts.PopFunctionName),
-        undefined,
-        []
-    );
-}
-
-/**
- * @param {import("typescript").NodeFactory} factory 
- * @param {import("typescript").AwaitExpression} awaitExpr 
- * @returns 
- */
-function createPoppingAwaitExpression(factory, awaitExpr) {
-    const resultVariable = factory.createIdentifier(Consts.ResultIdentifier);
-    const assignment = factory.createAssignment(resultVariable, awaitExpr);
-
-    return factory.createParenthesizedExpression(
-        factory.createCommaListExpression([
-            assignment,
-            createPopFunctionCall(factory),
-            resultVariable
-        ])
-    );
-}
-
-/**
- * @param {import("typescript").NodeFactory} factory 
- * @param {import("typescript").AwaitExpression} awaitExpr 
- * @returns 
- */
-function createPoppingAwaitExpressionOfWrappedPrommy(factory, awaitExpr) {
-    const resultVariable = factory.createIdentifier(Consts.ResultIdentifier);
-
-    const promise = awaitExpr.expression;
-    const constructed = factory.createNewExpression(factory.createIdentifier(Consts.PrommyType), undefined, [ promise ])
-    const awaited = factory.createAwaitExpression(constructed);
-
-    const assignment = factory.createAssignment(resultVariable, awaited);
-
-
-    return factory.createParenthesizedExpression(
-        factory.createCommaListExpression([
-            assignment,
-            createPopFunctionCall(factory),
-            resultVariable
-        ])
-    );
-}
-
-/**
- * 
- * @param {import("typescript").Type} type 
- */
-function isPrommyOrPromiseOfPrommy(type) {
-    // Check if the type itself is Prommy
-    if (type.symbol && type.symbol.name === Consts.PrommyType) {
-        return true;
-    }
-
-    // Check if the type is Promise<T>
-    if (type.symbol && type.symbol.name === 'Promise') {
-        const typeArguments = type.aliasTypeArguments;
-        if (typeArguments && typeArguments.length > 0) {
-            const innerType = typeArguments[0];
-            if (isPrommyOrPromiseOfPrommy(innerType)) {
-                return true;
-            }
-        }
-    }
-
-    // Check if the type is a union type containing Prommy
-    if (type.flags & ts.TypeFlags.Union) {
-        const unionTypes = type.types;
-        return unionTypes.some(unionType => isPrommyOrPromiseOfPrommy(unionType));
-    }
-
-    return false;
 }
 
 /**
@@ -332,18 +244,6 @@ const transformSourceFile = (context) => (sourceFile) => {
                 return ts.visitEachChild(createFunctionDeclarationWithContextParameter(factory, node), visitor, context);
         }
 
-        if (ts.isAwaitExpression(node)) {
-            const expression = node.expression;
-            const type = Ts.checker.getTypeAtLocation(expression);
-
-            // if (type.symbol?.name === 'Promise') {
-            //     return ts.visitEachChild(createPoppingAwaitExpressionOfWrappedPrommy(factory, node), visitor, context);
-            // }
-
-            // if (isPrommyOrPromiseOfPrommy(type)) {
-            //     return createPoppingAwaitExpression(factory, node);
-            // }
-        }
         return ts.visitEachChild(node, visitor, context);
     }
 
