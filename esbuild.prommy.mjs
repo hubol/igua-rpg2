@@ -8,6 +8,7 @@ import ts from 'typescript';
 // ($prommyResult = await sleep(32), $prommyPop(), $prommyResult)
 
 const Consts = {
+    ContextParameterName: '$c',
     PopFunctionName: '$prommyPop',
     ResultIdentifier: '$prommyResult',
     PrommyType: 'Prommy',
@@ -110,25 +111,129 @@ function isPrommyOrPromiseOfPrommy(type) {
 
 /**
  * 
+ * @param {import("typescript").Node} node
+ */
+function isFunctionDeclarationReturningPromise(node) {
+    if (ts.isFunctionDeclaration(node) || ts.isArrowFunction(node)) {
+        const type = Ts.checker.getTypeAtLocation(node);
+        for (const signature of type.getCallSignatures()) {
+            if (signature.resolvedReturnType.symbol?.name === 'Promise') {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+/**
+ * 
+ * @param {import("typescript").Node} node
+ */
+function oneSignatureHasContextParameter(node) {
+    const type = Ts.checker.getTypeAtLocation(node);
+    return type.callSignatures.some(signature => signature.parameters.some(parameter => parameter.name === Consts.ContextParameterName));
+}
+
+/**
+ * @param {import("typescript").NodeFactory} factory 
+ * @param {import("typescript").Node} node
+ */
+function createFunctionDeclarationWithContextParameter(factory, node) {
+    if (ts.isFunctionDeclaration(node)) {
+        return factory.createFunctionDeclaration(
+            node.modifiers,
+            node.asteriskToken,
+            node.name,
+            node.typeParameters,
+            [ ...node.parameters, factory.createParameterDeclaration(undefined, undefined, '$c') ],
+            node.type,
+            node.body);
+    }
+
+    return factory.createArrowFunction(
+        node.modifiers,
+        node.typeParameters,
+        [ ...node.parameters, factory.createParameterDeclaration(undefined, undefined, '$c') ],
+        node.type,
+        node.equalsGreaterThanToken,
+        node.body,
+    )
+}
+
+const results = {
+    callChains: [],
+    callExpressions: [],
+    callLikeExpressions: [],
+    callOrNewExpressions: [],
+}
+
+const promiseMethods = new Set([ 'then', 'catch', 'finally' ]);
+
+/**
+ * 
+ * @param {import("typescript").Node} node
+ */
+function isInvocationOfFunctionThatReturnsPromise(node) {
+    if (ts.isCallExpression(node)) {
+        const expressionSymbol = Ts.checker.getTypeAtLocation(node.expression).symbol;
+
+        if (promiseMethods.has(expressionSymbol?.name))
+            return false;
+        if (expressionSymbol?.parent?.name === 'PromiseConstructor')
+            return false;
+        if (Ts.checker.getTypeAtLocation(node).symbol?.name === 'Promise')
+            return true;
+    }
+
+    return false;
+}
+
+/**
+ * @param {import("typescript").NodeFactory} factory 
+ * @param {import("typescript").CallExpression} node
+ */
+function createCallExpressionWithContextParameter(factory, node) {
+    return factory.createCallExpression(
+        node.expression,
+        node.typeArguments,
+        [ ...node.arguments, factory.createIdentifier(Consts.ContextParameterName) ]);
+}
+
+/**
+ * 
  * @param {import("typescript").TransformationContext} context 
  * @returns 
  */
 const transformSourceFile = (context) => (sourceFile) => {
     const { factory } = context;
 
-    // A visitor function to traverse the AST
+    /**
+     * 
+     * @param {import("typescript").Node} node
+     */
     function visitor(node) {
+        if (isInvocationOfFunctionThatReturnsPromise(node)) {
+            return ts.visitEachChild(createCallExpressionWithContextParameter(factory, node), visitor, context);
+        }
+
+        if (isFunctionDeclarationReturningPromise(node)) {
+            const acceptsContextArgument = oneSignatureHasContextParameter(node);
+            if (!acceptsContextArgument)
+                return ts.visitEachChild(createFunctionDeclarationWithContextParameter(factory, node), visitor, context);
+        }
+
         if (ts.isAwaitExpression(node)) {
             const expression = node.expression;
             const type = Ts.checker.getTypeAtLocation(expression);
 
-            if (type.symbol?.name === 'Promise') {
-                return createPoppingAwaitExpressionOfWrappedPrommy(factory, node);
-            }
+            // if (type.symbol?.name === 'Promise') {
+            //     return ts.visitEachChild(createPoppingAwaitExpressionOfWrappedPrommy(factory, node), visitor, context);
+            // }
 
-            if (isPrommyOrPromiseOfPrommy(type)) {
-                return createPoppingAwaitExpression(factory, node);
-            }
+            // if (isPrommyOrPromiseOfPrommy(type)) {
+            //     return createPoppingAwaitExpression(factory, node);
+            // }
         }
         return ts.visitEachChild(node, visitor, context);
     }
@@ -168,6 +273,8 @@ export function transformFile(fileName) {
 
     const newSourceText = Ts.printer.printFile(result.transformed[0]);
     transformedTextCache.set(fileName, newSourceText);
+
+    return newSourceText;
 }
 
 export function initializeTs() {
