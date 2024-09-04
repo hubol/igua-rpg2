@@ -9,7 +9,7 @@ import ts from 'typescript';
 
 const Consts = {
     ContextParameterName: '$c',
-    ArgsParameterName: '$args',
+    ArgParameterNamePrefix: '$arg',
 }
 
 const Ts = {
@@ -97,6 +97,7 @@ function createContextIdentifier(factory) {
 function createCallExpressionWithPartiallyAppliedArguments(factory, node) {
     /** @type {import("typescript").Expression[]} */
     const argumentsArray = [];
+    const parameters = Ts.checker.getResolvedSignature(node).parameters;
 
     for (let i = 0; i < node.arguments.length; i++) {
         const argument = node.arguments[i];
@@ -104,7 +105,15 @@ function createCallExpressionWithPartiallyAppliedArguments(factory, node) {
             argumentsArray.push(argument);
             continue;
         }
-        argumentsArray.push(createArrowFunctionCallingWithContextAndSpreadArgs(factory, argument));
+
+        const parameter = parameters[i];
+        const provideableParametersLength = getLengthOfLongestParameterList(parameter.valueDeclaration);
+        const receivableParametersLength = getLengthOfLongestParameterList(argument);
+
+        const argCount = Math.min(provideableParametersLength, receivableParametersLength);
+        const undefinedCount = receivableParametersLength - argCount;
+
+        argumentsArray.push(createArrowFunctionCallingWithContextAndSpreadArgs(factory, argument, { argCount, undefinedCount }));
     }
     
     return factory.createCallExpression(
@@ -114,28 +123,43 @@ function createCallExpressionWithPartiallyAppliedArguments(factory, node) {
     );
 }
 
+function createArgParameterName(index) {
+    return Consts.ArgParameterNamePrefix + index;
+}
+
+function range(x) {
+    return [...new Array(x)].map((_, i) => i);
+}
+
+
 /**
  * @param {import("typescript").NodeFactory} factory 
  * @param {import("typescript").Identifier} node
+ * @param {{ argCount: number, undefinedCount: number }} args
  */
-function createArrowFunctionCallingWithContextAndSpreadArgs(factory, node) {
+function createArrowFunctionCallingWithContextAndSpreadArgs(factory, node, args) {
     return factory.createArrowFunction(
         undefined,
         undefined,
-        [
+        range(args.argCount).map(i =>
             factory.createParameterDeclaration(
                 undefined,
-                factory.createToken(ts.SyntaxKind.DotDotDotToken),
-                Consts.ArgsParameterName)
-        ],
+                undefined,
+                createArgParameterName(i))
+        ),
         undefined,
         factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
         factory.createCallExpression(
             node,
             undefined,
             [
+                ...range(args.argCount).map(i =>
+                    factory.createIdentifier(createArgParameterName(i))
+                ),
+                ...range(args.undefinedCount).map(() =>
+                    factory.createIdentifier('undefined')
+                ),
                 createContextIdentifier(factory),
-                factory.createSpreadElement(factory.createIdentifier(Consts.ArgsParameterName))
             ]))
 }
 
@@ -145,9 +169,11 @@ function createArrowFunctionCallingWithContextAndSpreadArgs(factory, node) {
 function getLengthOfLongestParameterList(node) {
     const type = Ts.checker.getTypeAtLocation(node);
 
+    const signatures = type.isUnion() ? type.types.flatMap(union => union.getCallSignatures()) : type.getCallSignatures();
+
     let length = 0;
 
-    for (const signature of type.getCallSignatures()) {
+    for (const signature of signatures) {
         let thisLength = 0;
         for (const parameter of signature.parameters) {
             if (parameter.name !== Consts.ContextParameterName)

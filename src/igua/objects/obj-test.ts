@@ -1,7 +1,7 @@
 import { wait } from "../../lib/game-engine/promise/wait";
 import { container } from "../../lib/pixi/container";
 
-async function myAsyncFunction() {
+async function myAsyncFunction(value?) {
 
 }
 
