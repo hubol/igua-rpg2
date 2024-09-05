@@ -1,9 +1,11 @@
 import { Container } from "pixi.js";
 import { SceneStack } from "./scene-stack";
+import { AsshatZoneContext } from "./asshat-zone";
 
 interface EngineConfigType {
     readonly sceneStack: SceneStack<unknown, unknown>;
     readonly showDefaultStage: Container;
+    readonly assertFailedAsshatZoneContext: AsshatZoneContext;
 }
 
 export function setEngineConfig(engineConfig: EngineConfigType) {
@@ -18,5 +20,9 @@ export let EngineConfig: EngineConfigType = {
     get showDefaultStage() {
         throw new Error('EngineConfig.showDefaultStage is not implemented!');
         return undefined as any;
-    }
+    },
+    get assertFailedAsshatZoneContext() {
+        throw new Error('EngineConfig.assertFailedAsshatZoneContext is not implemented!');
+        return undefined as any;
+    },
 }

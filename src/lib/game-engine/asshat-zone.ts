@@ -3,10 +3,24 @@ import { CancellationError, CancellationToken } from "../promise/cancellation-to
 import { AsshatMicrotaskFactory } from "./promise/asshat-microtasks";
 import { IAsshatTicker } from "./asshat-ticker";
 import { ErrorReporter } from "./error-reporter";
+import { EngineConfig } from "./engine-config";
+import { PrommyRuntime } from "../zone/prommy";
 
-interface AsshatZoneContext {
+export interface AsshatZoneContext {
     cancellationToken: CancellationToken;
     ticker: IAsshatTicker;
+}
+
+export function assertAsshatZoneContext($c?: AsshatZoneContext) {
+    if (!$c) {
+        ErrorReporter.reportDevOnlyState(new Error('$c was falsy, somewhere in the stack $c was not passed'));
+        return EngineConfig.assertFailedAsshatZoneContext;
+    }
+    if (PrommyRuntime.isDefaultContext($c)) {
+        ErrorReporter.reportDevOnlyState(new Error('$c was the default context, somewhere in the stack a function did not have a $c parameter and passed globalThis.$c'));
+        return EngineConfig.assertFailedAsshatZoneContext;
+    }
+    return $c;
 }
 
 const alwaysPredicate = () => true;

@@ -1,4 +1,4 @@
-import { CancellationToken } from "../../promise/cancellation-token";
+import { AsshatZoneContext } from "../asshat-zone";
 import { ErrorReporter } from "../error-reporter";
 
 export class AsshatMicrotasks {
@@ -107,9 +107,7 @@ interface AsshatMicrotaskInternal extends AsshatMicrotask {
     _predicatePassed?: boolean;
 }
 
-interface AsshatMicrotaskContext {
-    cancellationToken: CancellationToken;
-}
+type AsshatMicrotaskContext = Pick<AsshatZoneContext, 'cancellationToken'>
 
 export interface AsshatMicrotask {
     readonly __t: unique symbol;

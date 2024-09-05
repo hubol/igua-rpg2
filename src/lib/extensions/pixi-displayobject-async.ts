@@ -1,6 +1,6 @@
 import { DisplayObject } from "pixi.js";
 import { CancellationToken } from "../promise/cancellation-token";
-import { AsshatZone } from "../game-engine/asshat-zone";
+import { AsshatZone, AsshatZoneContext } from "../game-engine/asshat-zone";
 
 declare module "pixi.js" {
     interface DisplayObject {
@@ -14,7 +14,9 @@ interface DisplayObjectPrivate {
 
 Object.defineProperties(DisplayObject.prototype, {
     async: {
-        value: function (this: DisplayObject & DisplayObjectPrivate, asyncFn: (self?: any, $c?: any) => unknown) {
+        value: function (
+                this: DisplayObject & DisplayObjectPrivate,
+                asyncFn: (self?: DisplayObject & DisplayObjectPrivate, $c?: AsshatZoneContext) => unknown) {
             if (asyncFn.length)
                 asyncFn = asyncFn.bind(null, this, this);
 

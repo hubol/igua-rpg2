@@ -61,6 +61,9 @@ export function prepareGameEngine(renderer: PixiRenderer) {
             return scene.stage;
         },
         sceneStack,
+        get assertFailedAsshatZoneContext() {
+            return scene.stage as any;
+        },
     });
 }
 
