@@ -52,6 +52,7 @@ if (!serve) {
 
     await writeFile('dist/index.html', indexHtmlSource);
     await copyFile('public/index.css', `dist/index-${signature}.css`);
+    process.exit(0);
 }
 else {
     const ctx = await context(options({
