@@ -225,8 +225,6 @@ function getLengthOfLongestParameterList(node) {
     return length;
 }
 
-const promiseMethods = new Set([ 'then', 'catch', 'finally' ]);
-
 /**
  * 
  * @param {import("typescript").Node} node
@@ -244,10 +242,6 @@ function isInvocationOfHubolMadeFunctionThatReturnsPromise(node) {
             }
         }
 
-        if (promiseMethods.has(expressionSymbol?.name))
-            return false;
-        if (expressionSymbol?.parent?.name === 'PromiseConstructor')
-            return false;
         if (Ts.checker.getTypeAtLocation(node).symbol?.name === 'Promise')
             return true;
     }
