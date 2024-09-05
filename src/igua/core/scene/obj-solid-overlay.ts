@@ -13,7 +13,6 @@ export function objSolidOverlay() {
             dirty = true;
             await lerp(g, 'alpha').to(value).over(ms);
             c.destroy();
-            console.log('c.destroy()');
         })
         .show(g);
         return new Promise<void>(r => container!.once('destroyed', r));

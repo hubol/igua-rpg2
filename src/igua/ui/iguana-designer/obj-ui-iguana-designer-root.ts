@@ -306,7 +306,7 @@ function objIguanaPreview(minX = 102, maxX = 253) {
             if (bigPuppet.gait > 0)
                 bigPuppet.pedometer += 0.1;
         })
-        .async(async ($c) => {
+        .async(async () => {
             while (true) {
                 await sleep(1000);
                 await lerp(bigPuppet, 'ducking').to(1).over(300);

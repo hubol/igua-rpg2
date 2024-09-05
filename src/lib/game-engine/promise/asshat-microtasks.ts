@@ -34,7 +34,6 @@ export class AsshatMicrotasks {
             const task = this._tasks[i];
 
             if (task.context.cancellationToken.rejectIfCancelled(task.reject)) {
-                console.log(task.context);
                 free(task);
                 shift += 1;
                 i += 1;
