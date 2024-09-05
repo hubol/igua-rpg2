@@ -26,7 +26,6 @@ import { Toast } from "../../../lib/game-engine/toast";
 import { merge } from "../../../lib/object/merge";
 import { ClipboardPojo } from "../../../lib/browser/clipboard-pojo";
 import { clone } from "../../../lib/object/clone";
-import { PrommyContext } from "../../../lib/zone/prommy";
 
 function context() {
     let looks = getDefaultLooks();
@@ -184,12 +183,9 @@ function objUiSavePage() {
             await layers.overlay.solid.fadeIn(500);
             const looks = UiIguanaDesignerContext.value.looks;
             RpgProgress.character.looks = looks;
-            console.log('after fadein', PrommyContext.current());
             sceneStack.replace(scnPlayerTest, { useGameplay: false });
             page.destroy();
             await layers.overlay.solid.fadeOut(500);
-            console.log('before fadeout', PrommyContext.current());
-            console.log('fadeOut done');
         });
     }, width).jiggle().center().at(gap, 160);
 

@@ -14,9 +14,9 @@ interface DisplayObjectPrivate {
 
 Object.defineProperties(DisplayObject.prototype, {
     async: {
-        value: function (this: DisplayObject & DisplayObjectPrivate, asyncFn: (self?: any) => Promise<unknown>) {
+        value: function (this: DisplayObject & DisplayObjectPrivate, asyncFn: (self?: any, c?: any) => unknown) {
             if (asyncFn.length)
-                asyncFn = asyncFn.bind(null, this);
+                asyncFn = asyncFn.bind(null, this, this);
 
             this.cancellationToken;
 

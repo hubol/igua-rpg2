@@ -2,7 +2,6 @@ import { BLEND_MODES, Container, Graphics } from "pixi.js";
 import { Undefined } from "../../../lib/types/undefined";
 import { lerp } from "../../../lib/game-engine/promise/lerp";
 import { renderer } from "../../globals";
-import { Prommy } from "../../../lib/zone/prommy";
 
 export function objSolidOverlay() {
     let dirty = true;
@@ -17,7 +16,7 @@ export function objSolidOverlay() {
             console.log('c.destroy()');
         })
         .show(g);
-        return new Prommy<void>(r => container!.once('destroyed', r));
+        return new Promise<void>(r => container!.once('destroyed', r));
     }
 
     const g = new Graphics()

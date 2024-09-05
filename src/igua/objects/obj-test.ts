@@ -6,13 +6,15 @@ async function myAsyncFunction(value?) {
 }
 
 export function objTest() {
-    const b = myAsyncFunction;
+    const data = {} as ImageData;
+    const b = createImageBitmap;
 
     return container()
         .async(async () => {
-            await wait(() => true);
-            await myAsyncFunction().then(myAsyncFunction); // Tricky case!
-            await myAsyncFunction().then(b); // Also tricky case
-            await Promise.all([myAsyncFunction()]);
+            // await createImageBitmap(data);
+            // await wait(() => true);
+            // await myAsyncFunction().then(myAsyncFunction); // Tricky case!
+            await myAsyncFunction().then(() => b(data)); // Also tricky case
+            // await Promise.all([myAsyncFunction()]);
         })
 }

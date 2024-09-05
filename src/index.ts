@@ -1,4 +1,7 @@
-import "./lib/zone/prommy";
+import { PrommyRuntime } from "./lib/zone/prommy";
+
+PrommyRuntime.install();
+
 import { loadLaunchAssets } from "./igua/launch/load-launch-assets";
 import { showLoadingScreen } from "./igua/launch/show-loading-screen";
 import { integralUpscaleCanvas } from "./lib/browser/integral-upscale-canvas";

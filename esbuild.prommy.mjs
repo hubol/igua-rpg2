@@ -25,9 +25,31 @@ const Ts = {
  * @param {import("typescript").Node} node
  */
 function isFunctionDeclarationReturningPromise(node) {
+    if (isFromNodeModules(node.parent?.expression))
+        return false;
+
     if (ts.isFunctionDeclaration(node) || ts.isArrowFunction(node))
         return doesNodeReturnPromise(node);
 
+    return false;
+}
+
+/**
+ * 
+ * @param {import("typescript").Node} node
+ */
+function isFromNodeModules(node) {
+    if (!node)
+        return false;
+    const declarations = Ts.checker.getSymbolAtLocation(node)?.getDeclarations();
+
+    if (!declarations)
+        return false;
+
+    for (const declaration of declarations) {
+        if (declaration.getSourceFile().fileName.includes('node_modules'))
+            return true;
+    }
     return false;
 }
 
@@ -187,9 +209,9 @@ const promiseMethods = new Set([ 'then', 'catch', 'finally' ]);
  * 
  * @param {import("typescript").Node} node
  */
-function isInvocationOfFunctionThatReturnsPromise(node) {
-    if (ts.isCallExpression(node)) {
-        const expressionSymbol = Ts.checker.getTypeAtLocation(node.expression).symbol;
+function isInvocationOfHubolMadeFunctionThatReturnsPromise(node) {
+    if (ts.isCallExpression(node) && !isFromNodeModules(node.expression)) {
+        const expressionSymbol = Ts.checker.getSymbolAtLocation(node.expression);
 
         if (promiseMethods.has(expressionSymbol?.name))
             return false;
@@ -276,7 +298,7 @@ const transformSourceFile = (context) => (sourceFile) => {
      * @param {import("typescript").Node} node
      */
     function visitor(node) {
-        if (isInvocationOfFunctionThatReturnsPromise(node)) {
+        if (isInvocationOfHubolMadeFunctionThatReturnsPromise(node)) {
             return ts.visitEachChild(createCallExpressionWithContextParameter(factory, node), visitor, context);
         }
 
