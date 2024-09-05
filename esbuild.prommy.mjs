@@ -373,6 +373,9 @@ export function transformFile(fileName) {
 
     const result = ts.transform(sourceFile, [transformSourceFile]);
 
+    // Printing the new AST will destroy whitespace
+    // This guy has a crude idea to fix that: https://stackoverflow.com/a/58382419
+    // GitHub: https://github.com/Serj-Tm/ts-empty-line-encoder/blob/master/encoder.ts
     const newSourceText = Ts.printer.printFile(result.transformed[0]);
     transformedTextCache.set(fileName, newSourceText);
 
