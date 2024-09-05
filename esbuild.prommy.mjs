@@ -1,11 +1,9 @@
 import ts from 'typescript';
 
 // What the hell is this?!
-// This takes await expressions where the operand is a Prommy
-// e.g.
-// await sleep(32)
-// And transforms them into
-// ($prommyResult = await sleep(32), $prommyPop(), $prommyResult)
+// This finds all functions that return Promises and adds a $c parameter
+// Used for passing context
+// Then, it finds usages of functions that return Promises and adds a corresponding $c argument
 
 const Consts = {
     ContextParameterName: '$c',
@@ -40,7 +38,7 @@ function isFunctionDeclarationReturningPromise(node) {
 function doesNodeReturnPromise(node) {
     const type = Ts.checker.getTypeAtLocation(node);
     for (const signature of type.getCallSignatures()) {
-        if (signature.resolvedReturnType.symbol?.name === 'Promise') {
+        if (signature.getReturnType().symbol?.name === 'Promise') {
             return true;
         }
     }
