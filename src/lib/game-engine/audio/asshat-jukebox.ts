@@ -27,11 +27,13 @@ export class AsshatJukebox {
             this._current = sound.with.loop(true).playInstance();
     }
 
+    /** @noprommy */
     async warm(...tracks: MusicTrack[]) {
         setTimeout(() => this.warmAsync(...tracks));
         return this;
     }
 
+    /** @noprommy */
     async warmAsync(...tracks: MusicTrack[]) {
         await Promise.all(tracks.map(x => this._loader.load(x)));
     }

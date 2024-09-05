@@ -8,6 +8,7 @@ import ts from 'typescript';
 const Consts = {
     ContextParameterName: '$c',
     ArgParameterNamePrefix: '$arg',
+    DontAddParameterJSDocTag: 'noprommy',
 }
 
 const Ts = {
@@ -28,7 +29,13 @@ function isFunctionDeclarationReturningPromise(node) {
     if (isFromNodeModules(node.parent?.expression))
         return false;
 
-    if (ts.isFunctionDeclaration(node) || ts.isArrowFunction(node))
+    const tags = ts.getJSDocTags(node);
+    for (const tag of tags) {
+        if (tag.tagName.getText() === Consts.DontAddParameterJSDocTag)
+            return false;
+    }
+
+    if (ts.isFunctionDeclaration(node) || ts.isArrowFunction(node) || ts.isMethodDeclaration(node))
         return doesNodeReturnPromise(node);
 
     return false;
@@ -91,6 +98,21 @@ function createFunctionDeclarationWithContextParameter(factory, node) {
             [ ...node.parameters, factory.createParameterDeclaration(undefined, undefined, '$c') ],
             node.type,
             node.body);
+    }
+
+    if (ts.isMethodDeclaration(node)) {
+        /** @type {import("typescript").MethodDeclaration} */
+        const method = node;
+        return factory.createMethodDeclaration(
+            method.modifiers,
+            method.asteriskToken,
+            method.name,
+            method.questionToken,
+            method.typeParameters,
+            [ ...method.parameters, factory.createParameterDeclaration(undefined, undefined, '$c') ],
+            method.type,
+            method.body,
+        );
     }
 
     return factory.createArrowFunction(
@@ -212,6 +234,15 @@ const promiseMethods = new Set([ 'then', 'catch', 'finally' ]);
 function isInvocationOfHubolMadeFunctionThatReturnsPromise(node) {
     if (ts.isCallExpression(node) && !isFromNodeModules(node.expression)) {
         const expressionSymbol = Ts.checker.getSymbolAtLocation(node.expression);
+
+        const tags = expressionSymbol?.getJsDocTags();
+
+        if (tags) {
+            for (const tag of tags) {
+                if (tag.name === Consts.DontAddParameterJSDocTag)
+                    return false;
+            }
+        }
 
         if (promiseMethods.has(expressionSymbol?.name))
             return false;

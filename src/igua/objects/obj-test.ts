@@ -1,8 +1,10 @@
-import { wait } from "../../lib/game-engine/promise/wait";
 import { container } from "../../lib/pixi/container";
 
+/** @noprommy */
 async function myAsyncFunction(value?) {
+    async function innerFunction() {
 
+    }
 }
 
 export function objTest() {
