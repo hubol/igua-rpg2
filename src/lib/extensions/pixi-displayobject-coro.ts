@@ -20,10 +20,26 @@ Object.defineProperties(DisplayObject.prototype, {
 
             this.cancellationToken;
 
-            this.ticker.add(
-                Coro.runner.bind(null, generator, null),
-                this,
-                order);
+            let done = false;
+            let predicate: RoutinePredicate | null = null;
+
+            this.ticker.add(() => {
+                if (done)
+                    return;
+
+                if (predicate === null) {
+                    const next = generator.next();
+                    if (next.done) {
+                        done = true;
+                        return;
+                    }
+
+                    predicate = next.value as RoutinePredicate;
+                }
+
+                if (predicate())
+                    predicate = null;
+            }, this, order);
 
             return this;
         },
