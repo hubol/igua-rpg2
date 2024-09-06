@@ -2,8 +2,8 @@ import "../../src/lib/extensions/-load-extensions";
 import { AsshatTicker } from "../../src/lib/game-engine/asshat-ticker";
 import { createDisplayObject } from "../lib/create-display-object";
 import { Assert } from "../lib/assert";
-import { TestPromise } from "../lib/test-promise";
 import { TickerContainer } from "../../src/lib/game-engine/ticker-container";
+import { Coro } from "../../src/lib/game-engine/routines/coro";
 
 export function coroWorks() {
     const ticker = new AsshatTicker();
@@ -48,7 +48,7 @@ export function coroWorks() {
     Assert(phase).toStrictlyBe(3);
 }
 
-export async function promiseAllWorksWithFlushingPromises() {
+export function coroAllWorks() {
     const ticker = new AsshatTicker();
     const c = new TickerContainer(ticker);
 
@@ -57,89 +57,37 @@ export async function promiseAllWorksWithFlushingPromises() {
     let phase2 = false;
     let phase3 = false;
 
-    const d = createDisplayObject().async(
-        async () => {
-            await Promise.all([
-                wait(() => phase1),
-                wait(() => phase2),
+    const d = createDisplayObject().coro(
+        function* () {
+            // TODO assert on return values!!
+            yield* Coro.all([
+                () => phase1,
+                () => phase2,
             ]);
             phase = 2;
-            await wait(() => phase3);
+            yield () => phase3;
             phase = 3;
         });
     
     c.addChild(d);
 
-    ticker.tick();
     phase1 = true;
     ticker.tick();
 
-    await TestPromise.flush();
     Assert(phase).toStrictlyBe(0);
 
     phase2 = true;
     ticker.tick();
 
-    await TestPromise.flush();
     Assert(phase).toStrictlyBe(2);
 
     phase3 = true;
     ticker.tick();
     
-    await TestPromise.flush();
     Assert(phase).toStrictlyBe(3);
     
     d.destroy();
     ticker.tick();
 
-    await TestPromise.flush();
-    Assert(phase).toStrictlyBe(3);
-}
-
-export async function promiseLazyTickerWithFlushingPromises() {
-    const ticker = new AsshatTicker();
-    const c = new TickerContainer(ticker);
-
-    let phase = 0;
-    let phase1 = false;
-    let phase2 = false;
-    let phase3 = false;
-
-    const d = createDisplayObject().async(
-        async () => {
-            await Promise.all([
-                wait(() => phase1),
-                wait(() => phase2),
-            ]);
-            phase = 2;
-            await wait(() => phase3);
-            phase = 3;
-        });
-    
-    c.addChild(d);
-
-    ticker.tick();
-    phase1 = true;
-    ticker.tick();
-
-    await TestPromise.flush();
-    Assert(phase).toStrictlyBe(0);
-
-    phase2 = true;
-    ticker.tick();
-
-    await TestPromise.flush();
-    Assert(phase).toStrictlyBe(2);
-
-    phase3 = true;
-    ticker.tick();
-    
-    await TestPromise.flush();
-    Assert(phase).toStrictlyBe(3);
-    
-    d.destroy();
-    ticker.tick();
-
-    await TestPromise.flush();
     Assert(phase).toStrictlyBe(3);
 }
