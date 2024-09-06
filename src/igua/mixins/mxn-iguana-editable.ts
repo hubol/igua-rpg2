@@ -11,12 +11,12 @@ export function mxnIguanaEditable(obj: ObjIguanaLocomotive, looks: IguanaLooks.S
         return obj;
     return obj.step(self => {
         if (playerObj.collides(self) && playerObj.hasControl && DevKey.isDown('ControlLeft') && DevKey.justWentDown('Slash'))
-            Cutscene.play(async () => {
+            Cutscene.play(function* () {
                 UiIguanaDesignerContext.destroy();
                 
                 const designer = objUiIguanaDesignerRoot(looks);
                 designer.show(layers.overlay.dev);
-                await wait(() => DevKey.justWentDown('Escape'));
+                yield* wait(() => DevKey.justWentDown('Escape'));
                 designer.destroy();
 
                 const nextLooks = UiIguanaDesignerContext.value.looks;

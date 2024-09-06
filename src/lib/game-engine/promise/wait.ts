@@ -1,16 +1,11 @@
-import { AsshatMicrotaskFactory } from "./asshat-microtasks";
-import { AsshatZone } from "../asshat-zone";
+import { RoutineGenerator } from "../../generators/routine-generator";
 
 type Predicate = () => boolean;
 
-export function wait(predicate: Predicate): Promise<void> {
+export function* wait(predicate: Predicate): RoutineGenerator<void> {
+    while (!predicate())
+        yield;
+
     if (predicate())
-        return Promise.resolve();
-
-    const context = AsshatZone.context;
-
-    return new Promise<void>((resolve, reject) => {
-        const microtask = AsshatMicrotaskFactory.create(predicate, context, resolve, reject);
-        context.ticker.addMicrotask(microtask);
-    });
+        return;
 }

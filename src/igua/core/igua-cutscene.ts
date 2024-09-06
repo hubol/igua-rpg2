@@ -1,8 +1,9 @@
 import { Container, DisplayObject } from "pixi.js";
 import { CancellationError } from "../../lib/promise/cancellation-token";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
+import { RoutineGenerator } from "../../lib/generators/routine-generator";
 
-type CutsceneFn = () => Promise<unknown>;
+type CutsceneFn = () => RoutineGenerator;
 
 export class IguaCutscene {
     private readonly _container: ReturnType<typeof IguaCutscene._objCutsceneContainer>;
@@ -23,9 +24,9 @@ export class IguaCutscene {
         
         const runner = new Container().named('Cutscene Runner')
             .merge({ fn })
-            .async(async () => {
+            .async(function* () {
                 try {
-                    await fn();
+                    yield* fn();
                 }
                 catch (e) {
                     if (!(e instanceof CancellationError))

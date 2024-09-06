@@ -2,20 +2,21 @@ import { BLEND_MODES, Container, Graphics } from "pixi.js";
 import { Undefined } from "../../../lib/types/undefined";
 import { lerp } from "../../../lib/game-engine/promise/lerp";
 import { renderer } from "../../globals";
+import { resolve } from "../../../lib/generators/resolve";
 
 export function objSolidOverlay() {
     let dirty = true;
     let container = Undefined<Container>();
 
-    function fade(value: number, ms: number) {
+    function* fade(value: number, ms: number) {
         container?.destroy();
-        container = new Container().async(async c => {
+        container = new Container().async(function* (c) {
             dirty = true;
-            await lerp(g, 'alpha').to(value).over(ms);
+            yield* lerp(g, 'alpha').to(value).over(ms);
             c.destroy();
         })
         .show(g);
-        return new Promise<void>(r => container!.once('destroyed', r));
+        yield* resolve(r => container!.once('destroyed', r));
     }
 
     const g = new Graphics()

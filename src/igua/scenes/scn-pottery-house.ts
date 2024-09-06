@@ -14,8 +14,8 @@ export function scnPotteryHouse() {
         if (Input.justWentDown('CastSpell'))
             RpgProgress.character.attributes.intelligence += 1;
     })
-    level.IguanaNpc.mixin(mxnCutscene, async () => {
-        await show("Go away!");
-        await level.IguanaNpc.walkTo(level.IguanaNpc.x + 100);
+    level.IguanaNpc.mixin(mxnCutscene, function* () {
+        yield* show("Go away!");
+        yield* level.IguanaNpc.walkTo(level.IguanaNpc.x + 100);
     });
 }

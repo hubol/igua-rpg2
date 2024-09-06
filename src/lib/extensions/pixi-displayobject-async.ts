@@ -1,10 +1,10 @@
 import { DisplayObject } from "pixi.js";
 import { CancellationToken } from "../promise/cancellation-token";
-import { AsshatZone } from "../game-engine/asshat-zone";
+import { RoutineGenerator } from "../generators/routine-generator";
 
 declare module "pixi.js" {
     interface DisplayObject {
-        async(fn: (self: this) => Promise<unknown>): this;
+        async(fn: (self: this) => RoutineGenerator, order?: number): this;
     }
 }
 
@@ -14,17 +14,18 @@ interface DisplayObjectPrivate {
 
 Object.defineProperties(DisplayObject.prototype, {
     async: {
-        value: function (this: DisplayObject & DisplayObjectPrivate, asyncFn: (self?: any) => Promise<unknown>) {
-            if (asyncFn.length)
-                asyncFn = asyncFn.bind(null, this);
+        value: function (this: DisplayObject & DisplayObjectPrivate, generatorFn: (self: any) => RoutineGenerator, order = 0) {
+            const generator = generatorFn(this);
 
             this.cancellationToken;
 
-            // // TODO maybe instead of implicitly waiting on parent, wait on ticker
-            if (this.parent)
-                AsshatZone.run(asyncFn, this);
-            else
-                this.on('added', () => AsshatZone.run(asyncFn, this));
+            let done = false;
+            this.ticker.add(() => {
+                if (done)
+                    return;
+                if (generator.next().done)
+                    done = true;
+            }, this, order);
 
             return this;
         },
