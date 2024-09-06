@@ -4,31 +4,32 @@ export namespace Coro {
     export type Predicate = () => boolean;
     export type Type<T = unknown> = Generator<Predicate, T, unknown>;
 
-    interface PrivateGenerator {
-        __done__?: boolean;
+    interface RunnerState {
+        predicate: Predicate | null;
+        done: boolean;
     }
 
-    export const runner = (generator: Type, predicate: Predicate | null) => {
-        if ((generator as PrivateGenerator).__done__)
+    export const runner = (generator: Type, state: RunnerState) => {
+        if (state.done)
             return;
 
         for (let i = 0; i < 256; i++) {
-            if (predicate === null) {
+            if (state.predicate === null) {
                 const next = generator.next();
                 if (next.done) {
-                    (generator as PrivateGenerator).__done__ = true;
+                    state.done = true;
                     return;
                 }
                 
-                predicate = next.value as Predicate;
+                state.predicate = next.value;
             }
     
-            if (predicate())
-                predicate = null;
+            if (state.predicate())
+                state.predicate = null;
             else
                 return;
         }
 
-        ErrorReporter.reportDevOnlyState(new Error(`Possible infinite coro loop detected!`), generator, predicate);
+        ErrorReporter.reportDevOnlyState(new Error(`Possible infinite coro loop detected!`), generator, state.predicate);
     }
 }
