@@ -177,7 +177,7 @@ function objUiSavePage() {
         page.navigation = false;
         yesButton.canPress = false;
         Cutscene.play(function* () {
-            () => puppet.atYesButton;
+            yield () => puppet.atYesButton;
             layers.overlay.solid.blendMode = BLEND_MODES.SUBTRACT;
             yield layers.overlay.solid.fadeIn(500);
             const looks = UiIguanaDesignerContext.value.looks;
