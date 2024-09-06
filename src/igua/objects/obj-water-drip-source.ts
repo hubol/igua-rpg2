@@ -2,7 +2,7 @@ import { Sprite } from "pixi.js";
 import { container } from "../../lib/pixi/container";
 import { Tx } from "../../assets/textures";
 import { mxnPhysics } from "../mixins/mxn-physics";
-import { sleep } from "../../lib/game-engine/promise/sleep";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgFaction } from "../rpg/rpg-faction";

@@ -1,7 +1,7 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../assets/textures";
 import { Input, scene } from "../globals";
-import { sleep } from "../../lib/game-engine/promise/sleep";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Sfx } from "../../assets/sounds";
 
 export function scnPrommyDemo() {

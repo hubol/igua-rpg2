@@ -1,6 +1,6 @@
 import { DisplayObject } from "pixi.js";
 import { CancellationToken } from "../promise/cancellation-token";
-import { RoutineGenerator, RoutinePredicate } from "../generators/routine-generator";
+import { RoutineGenerator, RoutinePredicate } from "../game-engine/routines/routine-generator";
 
 declare module "pixi.js" {
     interface DisplayObject {
