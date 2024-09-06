@@ -1,4 +1,3 @@
-import { throws } from "../../lib/generators/throws";
 import { approachLinear } from "../../lib/math/number";
 import { Undefined } from "../../lib/types/undefined";
 import { IguanaLooks } from "../iguana/looks";
@@ -18,18 +17,6 @@ function getDeceleratingDistance(absSpeed: number, deceleration: number) {
     const countError = countCeil - count;
     const errorCorrection = -countError * deceleration;
     return countCeil * (absSpeed + errorCorrection) / 2 - errorCorrection;
-}
-
-class WalkToAbortError extends Error {
-    constructor() {
-        super('WalkTo aborted');
-    }
-}
-
-function assertWalkToAbortError(assertion: boolean): false {
-    if (assertion)
-        throw new WalkToAbortError();
-    return assertion;
 }
 
 export enum ObjIguanaLocomotiveAutoFacingMode {
@@ -54,42 +41,47 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
         hitWall = false;
         const right = puppet.x < x;
 
-        try {
-            if (right) {
-                puppet.isMovingLeft = false;
-                puppet.isMovingRight = true;
-    
-                yield* throws(() =>
-                    assertWalkToAbortError(
-                        currentWalkToTarget !== x
-                        || !puppet.isMovingRight
-                        || !puppet.isBeingPiloted
-                        || hitWall)
-                    || puppet.x + puppet.estimatedDecelerationDeltaX >= x);
+        if (right) {
+            puppet.isMovingLeft = false;
+            puppet.isMovingRight = true;
 
-                puppet.isMovingRight = false;
-            }
-            else {
-                puppet.isMovingRight = false;
-                puppet.isMovingLeft = true;
-    
-                yield* throws(() =>
-                    assertWalkToAbortError(
-                        currentWalkToTarget !== x
-                        || !puppet.isMovingLeft
-                        || !puppet.isBeingPiloted
-                        || hitWall)
-                    || puppet.x + puppet.estimatedDecelerationDeltaX <= x);
+            let abort = false;
 
-                puppet.isMovingLeft = false;
-            }
+            yield () =>
+                (abort = (
+                    currentWalkToTarget !== x
+                    || !puppet.isMovingRight
+                    || !puppet.isBeingPiloted
+                    // TODO: This is a bug
+                    // When you hit a wall, it should probably not count as abort!
+                    || hitWall))
+                || puppet.x + puppet.estimatedDecelerationDeltaX >= x;
+
+            if (abort)
+                return;
+
+            puppet.isMovingRight = false;
         }
-        catch (e) {
-            if (e instanceof WalkToAbortError) {
-                return;       
-            }
+        else {
+            puppet.isMovingRight = false;
+            puppet.isMovingLeft = true;
 
-            throw e;
+            let abort = false;
+
+            yield () =>
+                (abort = (
+                    currentWalkToTarget !== x
+                    || !puppet.isMovingLeft
+                    || !puppet.isBeingPiloted
+                    // TODO: This is a bug
+                    // When you hit a wall, it should probably not count as abort!
+                    || hitWall))
+                || puppet.x + puppet.estimatedDecelerationDeltaX <= x;
+
+            if (abort)
+                return
+
+            puppet.isMovingLeft = false;
         }
 
         puppet.isBeingPiloted = false;
