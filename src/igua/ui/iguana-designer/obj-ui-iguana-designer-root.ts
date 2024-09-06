@@ -3,7 +3,6 @@ import { objText } from "../../../assets/fonts";
 import { Sfx } from "../../../assets/sounds";
 import { lerp } from "../../../lib/game-engine/promise/lerp";
 import { sleep } from "../../../lib/game-engine/promise/sleep";
-import { wait } from "../../../lib/game-engine/promise/wait";
 import { approachLinear } from "../../../lib/math/number";
 import { container } from "../../../lib/pixi/container";
 import { SceneLocal } from "../../../lib/game-engine/scene-local";
@@ -178,14 +177,14 @@ function objUiSavePage() {
         page.navigation = false;
         yesButton.canPress = false;
         Cutscene.play(function* () {
-            yield* wait(() => puppet.atYesButton);
+            () => puppet.atYesButton;
             layers.overlay.solid.blendMode = BLEND_MODES.SUBTRACT;
-            yield* layers.overlay.solid.fadeIn(500);
+            yield layers.overlay.solid.fadeIn(500);
             const looks = UiIguanaDesignerContext.value.looks;
             RpgProgress.character.looks = looks;
             sceneStack.replace(scnPlayerTest, { useGameplay: false });
             page.destroy();
-            yield* layers.overlay.solid.fadeOut(500);
+            yield layers.overlay.solid.fadeOut(500);
         });
     }, width).jiggle().center().at(gap, 160);
 
@@ -308,14 +307,14 @@ function objIguanaPreview(minX = 102, maxX = 253) {
         })
         .async(function* () {
             while (true) {
-                yield* sleep(1000);
-                yield* lerp(bigPuppet, 'ducking').to(1).over(300);
-                yield* sleep(1000);
-                yield* lerp(bigPuppet, 'ducking').to(0).over(300);
-                yield* sleep(1000);
-                yield* lerp(bigPuppet, 'gait').to(1).over(300);
-                yield* sleep(1000);
-                yield* lerp(bigPuppet, 'gait').to(0).over(300);
+                yield sleep(1000);
+                yield lerp(bigPuppet, 'ducking').to(1).over(300);
+                yield sleep(1000);
+                yield lerp(bigPuppet, 'ducking').to(0).over(300);
+                yield sleep(1000);
+                yield lerp(bigPuppet, 'gait').to(1).over(300);
+                yield sleep(1000);
+                yield lerp(bigPuppet, 'gait').to(0).over(300);
             }
         });
 

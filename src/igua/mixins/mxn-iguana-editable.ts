@@ -1,5 +1,4 @@
 import { Environment } from "../../lib/environment";
-import { wait } from "../../lib/game-engine/promise/wait";
 import { Cutscene, DevKey, layers } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { ObjIguanaLocomotive, objIguanaLocomotive } from "../objects/obj-iguana-locomotive";
@@ -16,7 +15,7 @@ export function mxnIguanaEditable(obj: ObjIguanaLocomotive, looks: IguanaLooks.S
                 
                 const designer = objUiIguanaDesignerRoot(looks);
                 designer.show(layers.overlay.dev);
-                yield* wait(() => DevKey.justWentDown('Escape'));
+                yield () => DevKey.justWentDown('Escape');
                 designer.destroy();
 
                 const nextLooks = UiIguanaDesignerContext.value.looks;

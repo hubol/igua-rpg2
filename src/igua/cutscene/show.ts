@@ -3,7 +3,6 @@ import { objText } from "../../assets/fonts";
 import { container } from "../../lib/pixi/container";
 import { approachLinear } from "../../lib/math/number";
 import { Input, layers, renderer } from "../globals";
-import { wait } from "../../lib/game-engine/promise/wait";
 import { UiColor } from "../ui/ui-color";
 
 const width = 220;
@@ -79,8 +78,8 @@ export function* show(text: string) {
     else
         instance.text = text;
 
-    yield* wait(() => Input.isUp("Confirm"));
-    yield* wait(() => Input.isDown("Confirm"));
+    yield () => Input.isUp("Confirm");
+    yield () => Input.isDown("Confirm");
 
     instance!.dismissAfterFrames = 1;
 }

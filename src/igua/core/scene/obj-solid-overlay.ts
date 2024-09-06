@@ -8,15 +8,15 @@ export function objSolidOverlay() {
     let dirty = true;
     let container = Undefined<Container>();
 
-    function* fade(value: number, ms: number) {
+    function fade(value: number, ms: number) {
         container?.destroy();
         container = new Container().async(function* (c) {
             dirty = true;
-            yield* lerp(g, 'alpha').to(value).over(ms);
+            yield lerp(g, 'alpha').to(value).over(ms);
             c.destroy();
         })
         .show(g);
-        yield* resolve(r => container!.once('destroyed', r));
+        return resolve(r => container!.once('destroyed', r));
     }
 
     const g = new Graphics()

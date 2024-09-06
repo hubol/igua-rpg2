@@ -35,7 +35,7 @@ export function scnPlayerTest() {
     LockedDoor.async(function* () {
         while (true) {
             LockedDoor.add(Rng.vunit().scale(4));
-            yield* sleep(60);
+            yield sleep(60);
         }
     })
     .mixin(mxnRpgAttack, { attack: RpgAttack.create({ poison: 1, versus: RpgFaction.Anyone }) });
