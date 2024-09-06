@@ -10,7 +10,7 @@ export function objSolidOverlay() {
 
     function fade(value: number, ms: number) {
         container?.destroy();
-        container = new Container().async(function* (c) {
+        container = new Container().coro(function* (c) {
             dirty = true;
             yield lerp(g, 'alpha').to(value).over(ms);
             c.destroy();

@@ -11,7 +11,7 @@ export function scnPrommyDemo() {
     .step(self => {
         self.pivot.y = Math.sin(scene.ticker.ticks * 0.1) * 2;
     })
-    .async(function* () {
+    .coro(function* () {
         while (true) {
             yield sleep(300);
             Sfx.BallBounce.playInstance().rate = 1 + Math.random();

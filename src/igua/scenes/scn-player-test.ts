@@ -32,7 +32,7 @@ export function scnPlayerTest() {
 
     const { LockedDoor } = level;
 
-    LockedDoor.async(function* () {
+    LockedDoor.coro(function* () {
         while (true) {
             LockedDoor.add(Rng.vunit().scale(4));
             yield sleep(60);
