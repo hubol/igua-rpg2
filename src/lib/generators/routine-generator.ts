@@ -1,1 +1,2 @@
-export type RoutineGenerator<T = unknown> = Generator<undefined, T, unknown>
+export type RoutinePredicate = () => boolean;
+export type RoutineGenerator<T = unknown> = Generator<RoutinePredicate, T, unknown>;

@@ -13,7 +13,7 @@ export function scnPrommyDemo() {
     })
     .async(function* () {
         while (true) {
-            yield* sleep(300);
+            yield sleep(300);
             Sfx.BallBounce.playInstance().rate = 1 + Math.random();
         }
     })

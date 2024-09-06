@@ -1,6 +1,6 @@
 import { DisplayObject } from "pixi.js";
 import { CancellationToken } from "../promise/cancellation-token";
-import { RoutineGenerator } from "../generators/routine-generator";
+import { RoutineGenerator, RoutinePredicate } from "../generators/routine-generator";
 
 declare module "pixi.js" {
     interface DisplayObject {
@@ -20,11 +20,24 @@ Object.defineProperties(DisplayObject.prototype, {
             this.cancellationToken;
 
             let done = false;
+            let predicate: RoutinePredicate | null = null;
+
             this.ticker.add(() => {
                 if (done)
                     return;
-                if (generator.next().done)
-                    done = true;
+
+                if (predicate === null) {
+                    const next = generator.next();
+                    if (next.done) {
+                        done = true;
+                        return;
+                    }
+                    
+                    predicate = next.value as RoutinePredicate;
+                }
+
+                if (predicate())
+                    predicate = null;
             }, this, order);
 
             return this;
