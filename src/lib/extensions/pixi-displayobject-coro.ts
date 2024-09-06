@@ -1,6 +1,6 @@
 import { DisplayObject } from "pixi.js";
 import { CancellationToken } from "../promise/cancellation-token";
-import { RoutineGenerator, RoutinePredicate } from "../game-engine/routines/routine-generator";
+import { RoutineGenerator } from "../game-engine/routines/routine-generator";
 import { Coro } from "../game-engine/routines/coro";
 
 declare module "pixi.js" {
@@ -20,26 +20,10 @@ Object.defineProperties(DisplayObject.prototype, {
 
             this.cancellationToken;
 
-            let done = false;
-            let predicate: RoutinePredicate | null = null;
-
-            this.ticker.add(() => {
-                if (done)
-                    return;
-
-                if (predicate === null) {
-                    const next = generator.next();
-                    if (next.done) {
-                        done = true;
-                        return;
-                    }
-
-                    predicate = next.value as RoutinePredicate;
-                }
-
-                if (predicate())
-                    predicate = null;
-            }, this, order);
+            this.ticker.add(
+                Coro.runner.bind(null, generator, { predicate: null, done: false }),
+                this,
+                order);
 
             return this;
         },
