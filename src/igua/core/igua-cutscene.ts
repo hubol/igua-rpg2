@@ -24,7 +24,7 @@ export class IguaCutscene {
         
         const runner = new Container().named('Cutscene Runner')
             .merge({ fn })
-            .async(function* () {
+            .coro(function* () {
                 try {
                     yield* fn();
                 }

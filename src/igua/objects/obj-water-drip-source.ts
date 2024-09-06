@@ -17,7 +17,7 @@ export function objWaterDripSource({ delayMin, delayMax }: ObjWaterDripSourceArg
     return container()
         .track(objWaterDripSource)
         .merge({ poison: false })
-        .async(function* (self) {
+        .coro(function* (self) {
             while (true) {
                 yield sleep(Rng.intc(delayMin, delayMax));
                 objWaterDrip(self.poison ? atkPoisonDrip : atkDrip).at(self).show(self.parent);
