@@ -1,4 +1,3 @@
-import { AsshatMicrotask, AsshatMicrotasks } from "./promise/asshat-microtasks";
 import { ErrorReporter } from "./error-reporter";
 import { ICancellationToken } from "../promise/cancellation-token";
 
@@ -11,7 +10,6 @@ export type AsshatTickerFn = ((...params: any[]) => any) & { _removed?: boolean 
 export interface IAsshatTicker {
     doNextUpdate: boolean;
     add(fn: AsshatTaskFn, context: AsshatTaskContext, order: number): void;
-    addMicrotask(task: AsshatMicrotask): void;
 }
 
 type AsshatTaskFn = (...params: any[]) => any;
@@ -31,7 +29,6 @@ export class AsshatTicker implements IAsshatTicker {
 
     private readonly _orders: number[] = [];
     private readonly _tasks: Record<number, AsshatTask[]> = {};
-    private readonly _microtasks = new AsshatMicrotasks();
 
     add(fn: AsshatTaskFn, context: AsshatTaskContext, order: number) {
         const task = { fn, context };
@@ -53,21 +50,12 @@ export class AsshatTicker implements IAsshatTicker {
             this._tasks[order].push(task);
     }
 
-    addMicrotask(task: AsshatMicrotask) {
-        this._microtasks.add(task);
-    }
-
-    cancelMicrotasks() {
-        this._microtasks.cancel();
-    }
-
     tick() {
         if (!this.doNextUpdate)
             return;
 
         try {
             this.tickImpl();
-            this._microtasks.tick();
         }
         catch (e) {
             if (e instanceof EscapeTickerAndExecute) {

@@ -2,7 +2,6 @@ import { KeyListener } from "../../lib/browser/key-listener";
 import { Environment } from "../../lib/environment";
 import { Animator } from "../../lib/game-engine/animator";
 import { AsshatTicker } from "../../lib/game-engine/asshat-ticker";
-import { AsshatZoneDiagnostics } from "../../lib/game-engine/asshat-zone";
 import { setEngineConfig } from "../../lib/game-engine/engine-config";
 import { PixiRenderer } from "../../lib/game-engine/pixi-renderer";
 import { TickerContainer } from "../../lib/game-engine/ticker-container";
@@ -40,7 +39,6 @@ export function prepareGameEngine(renderer: PixiRenderer) {
         do {
             gameLoopForced = false;
 
-            AsshatZoneDiagnostics.printHandledCancellationErrors();
             scene?.ticker.tick();
             rootTicker.tick();
             Collision.recycleRectangles();

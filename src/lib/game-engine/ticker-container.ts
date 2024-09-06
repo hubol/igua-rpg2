@@ -18,6 +18,5 @@ export class TickerContainer extends Container {
 
     destroy() {
         super.destroy();
-        this._ticker.cancelMicrotasks();
     }
 }
