@@ -1,0 +1,1 @@
+export type RoutineGenerator<T = unknown> = Generator<undefined, T, unknown>

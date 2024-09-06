@@ -44,7 +44,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
     let currentWalkToTarget = Undefined<number>();
     let hitWall = false;
 
-    async function walkTo(x: number) {
+    function* walkTo(x: number) {
         puppet.isDucking = false;
 
         if (Math.abs(puppet.x - x) < 3)
@@ -60,7 +60,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                 puppet.isMovingLeft = false;
                 puppet.isMovingRight = true;
     
-                await wait(() =>
+                yield* wait(() =>
                     assertWalkToAbortError(
                         currentWalkToTarget !== x
                         || !puppet.isMovingRight
@@ -74,7 +74,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                 puppet.isMovingRight = false;
                 puppet.isMovingLeft = true;
     
-                await wait(() =>
+                yield* wait(() =>
                     assertWalkToAbortError(
                         currentWalkToTarget !== x
                         || !puppet.isMovingLeft

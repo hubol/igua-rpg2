@@ -20,8 +20,8 @@ import { Mzk } from "../../assets/music";
 export function scnPlayerTest() {
     Jukebox.play(Mzk.Covid_19);
 
-    Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, async () => {
-        await show('Hello!');
+    Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, function* () {
+        yield* show('Hello!');
     }).show();
 
     const level = Lvl.Test();
@@ -32,10 +32,10 @@ export function scnPlayerTest() {
 
     const { LockedDoor } = level;
 
-    LockedDoor.async(async () => {
+    LockedDoor.async(function* () {
         while (true) {
             LockedDoor.add(Rng.vunit().scale(4));
-            await sleep(60);
+            yield* sleep(60);
         }
     })
     .mixin(mxnRpgAttack, { attack: RpgAttack.create({ poison: 1, versus: RpgFaction.Anyone }) });

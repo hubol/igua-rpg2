@@ -177,15 +177,15 @@ function objUiSavePage() {
         // TODO confirm sfx?
         page.navigation = false;
         yesButton.canPress = false;
-        Cutscene.play(async () => {
-            await wait(() => puppet.atYesButton);
+        Cutscene.play(function* () {
+            yield* wait(() => puppet.atYesButton);
             layers.overlay.solid.blendMode = BLEND_MODES.SUBTRACT;
-            await layers.overlay.solid.fadeIn(500);
+            yield* layers.overlay.solid.fadeIn(500);
             const looks = UiIguanaDesignerContext.value.looks;
             RpgProgress.character.looks = looks;
             sceneStack.replace(scnPlayerTest, { useGameplay: false });
             page.destroy();
-            await layers.overlay.solid.fadeOut(500);
+            yield* layers.overlay.solid.fadeOut(500);
         });
     }, width).jiggle().center().at(gap, 160);
 
@@ -306,16 +306,16 @@ function objIguanaPreview(minX = 102, maxX = 253) {
             if (bigPuppet.gait > 0)
                 bigPuppet.pedometer += 0.1;
         })
-        .async(async () => {
+        .async(function* () {
             while (true) {
-                await sleep(1000);
-                await lerp(bigPuppet, 'ducking').to(1).over(300);
-                await sleep(1000);
-                await lerp(bigPuppet, 'ducking').to(0).over(300);
-                await sleep(1000);
-                await lerp(bigPuppet, 'gait').to(1).over(300);
-                await sleep(1000);
-                await lerp(bigPuppet, 'gait').to(0).over(300);
+                yield* sleep(1000);
+                yield* lerp(bigPuppet, 'ducking').to(1).over(300);
+                yield* sleep(1000);
+                yield* lerp(bigPuppet, 'ducking').to(0).over(300);
+                yield* sleep(1000);
+                yield* lerp(bigPuppet, 'gait').to(1).over(300);
+                yield* sleep(1000);
+                yield* lerp(bigPuppet, 'gait').to(0).over(300);
             }
         });
 

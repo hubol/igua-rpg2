@@ -72,15 +72,15 @@ function objMessageBox(text: string) {
 
 let instance: ReturnType<typeof objMessageBox> | undefined;
 
-export async function show(text: string) {
+export function* show(text: string) {
     if (!instance) {
         instance = objMessageBox(text);
     }
     else
         instance.text = text;
 
-    await wait(() => Input.isUp("Confirm"));
-    await wait(() => Input.isDown("Confirm"));
+    yield* wait(() => Input.isUp("Confirm"));
+    yield* wait(() => Input.isDown("Confirm"));
 
     instance!.dismissAfterFrames = 1;
 }

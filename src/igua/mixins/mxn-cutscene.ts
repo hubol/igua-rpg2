@@ -1,8 +1,9 @@
 import { DisplayObject } from "pixi.js";
 import { mxnInteract } from "./mxn-interact";
 import { Cutscene } from "../globals";
+import { RoutineGenerator } from "../../lib/generators/routine-generator";
 
-export function mxnCutscene<TObj extends DisplayObject>(obj: TObj, cutsceneFn: () => Promise<unknown>) {
+export function mxnCutscene<TObj extends DisplayObject>(obj: TObj, cutsceneFn: () => RoutineGenerator) {
     return obj.mixin(mxnInteract, () => {
         Cutscene.play(cutsceneFn);
     })
