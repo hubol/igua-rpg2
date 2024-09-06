@@ -1,4 +1,4 @@
-import { AsshatPredicateRejectError } from "../../lib/game-engine/promise/asshat-microtasks";
+import { throws } from "../../lib/generators/throws";
 import { approachLinear } from "../../lib/math/number";
 import { Undefined } from "../../lib/types/undefined";
 import { IguanaLooks } from "../iguana/looks";
@@ -20,7 +20,7 @@ function getDeceleratingDistance(absSpeed: number, deceleration: number) {
     return countCeil * (absSpeed + errorCorrection) / 2 - errorCorrection;
 }
 
-class WalkToAbortError extends AsshatPredicateRejectError {
+class WalkToAbortError extends Error {
     constructor() {
         super('WalkTo aborted');
     }
@@ -59,13 +59,13 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                 puppet.isMovingLeft = false;
                 puppet.isMovingRight = true;
     
-                yield () =>
+                yield* throws(() =>
                     assertWalkToAbortError(
                         currentWalkToTarget !== x
                         || !puppet.isMovingRight
                         || !puppet.isBeingPiloted
                         || hitWall)
-                    || puppet.x + puppet.estimatedDecelerationDeltaX >= x;
+                    || puppet.x + puppet.estimatedDecelerationDeltaX >= x);
 
                 puppet.isMovingRight = false;
             }
@@ -73,13 +73,13 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                 puppet.isMovingRight = false;
                 puppet.isMovingLeft = true;
     
-                yield () =>
+                yield* throws(() =>
                     assertWalkToAbortError(
                         currentWalkToTarget !== x
                         || !puppet.isMovingLeft
                         || !puppet.isBeingPiloted
                         || hitWall)
-                    || puppet.x + puppet.estimatedDecelerationDeltaX <= x;
+                    || puppet.x + puppet.estimatedDecelerationDeltaX <= x);
 
                 puppet.isMovingLeft = false;
             }
