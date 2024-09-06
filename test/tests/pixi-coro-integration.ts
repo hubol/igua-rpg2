@@ -57,13 +57,22 @@ export function coroAllWorks() {
     let phase2 = false;
     let phase3 = false;
 
+    let waitForPhase2Result = undefined;
+
+    function* waitForPhase2() {
+        yield () => phase2;
+        return 'hamburger';
+    }
+
     const d = createDisplayObject().coro(
         function* () {
-            // TODO assert on return values!!
-            yield* Coro.all([
+            const [_, result2] = yield* Coro.all([
                 () => phase1,
-                () => phase2,
+                waitForPhase2(),
             ]);
+
+            waitForPhase2Result = result2;
+
             phase = 2;
             yield () => phase3;
             phase = 3;
@@ -90,4 +99,6 @@ export function coroAllWorks() {
     ticker.tick();
 
     Assert(phase).toStrictlyBe(3);
+
+    Assert(waitForPhase2Result).toStrictlyBe('hamburger');
 }

@@ -4,13 +4,24 @@ export namespace Coro {
     export type Predicate = () => boolean;
     export type Type<T = unknown> = Generator<Predicate, T, unknown>;
 
-    // TODO return value could go here!!
-    interface RunnerState {
+    const unsetReturnResult: unique symbol = Symbol('Coro.unsetReturnResult');
+    type UnsetReturnResult = typeof unsetReturnResult;
+
+    interface RunnerState<T> {
         predicate: Predicate | null;
         done: boolean;
+        returnResult: T | UnsetReturnResult;
     }
 
-    export const runner = (generator: Type, state: RunnerState) => {
+    export function createRunnerState<T>(): RunnerState<T> {
+        return {
+            predicate: null,
+            done: false,
+            returnResult: unsetReturnResult
+        };
+    }
+
+    export const runner = <T = unknown> (generator: Type<T>, state: RunnerState<T>) => {
         if (state.done)
             return true;
 
@@ -18,6 +29,7 @@ export namespace Coro {
             if (state.predicate === null) {
                 const next = generator.next();
                 if (next.done) {
+                    state.returnResult = next.value;
                     state.done = true;
                     return true;
                 }
@@ -42,17 +54,20 @@ export namespace Coro {
         const completedIndices: boolean[] = [];
         const results: any[] = [];
         const predicates: Predicate[] = [];
+        const runnerStates: RunnerState<unknown>[] = [];
 
         const length = values.length;
         let toCompleteCount = length;
 
         for (let i = 0; i < length; i++) {
             const value = values[i];
-            const predicate = isCoroType(value)
-                ? runner.bind(null, value, { predicate: null, done: false })
-                : value;
-
-            predicates.push(predicate);
+            if (isCoroType(value)) {
+                const runnerState = createRunnerState();
+                runnerStates[i] = runnerState;
+                predicates.push(runner.bind(null, value, runnerState));
+            }
+            else
+                predicates.push(value);
         }
 
         yield () => {
@@ -60,7 +75,7 @@ export namespace Coro {
                 if (completedIndices[i])
                     continue;
                 if (predicates[i]()) {
-                    // TODO add to results
+                    results[i] = runnerStates[i]?.returnResult;
                     completedIndices[i] = true;
                     toCompleteCount--;
                 }
@@ -68,7 +83,6 @@ export namespace Coro {
             return toCompleteCount <= 0;
         }
 
-        // TODO
         return results as any;
     }
 
