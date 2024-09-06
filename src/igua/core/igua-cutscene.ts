@@ -1,7 +1,7 @@
 import { Container, DisplayObject } from "pixi.js";
 import { CancellationError } from "../../lib/promise/cancellation-token";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
-import { RoutineGenerator } from "../../lib/generators/routine-generator";
+import { RoutineGenerator } from "../../lib/game-engine/routines/routine-generator";
 
 type CutsceneFn = () => RoutineGenerator;
 

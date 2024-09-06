@@ -6,7 +6,7 @@ import { show } from "../cutscene/show";
 import { Input } from "../globals";
 import { Rng } from "../../lib/math/rng";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
-import { sleep } from "../../lib/game-engine/promise/sleep";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { objAngelBouncing } from "../objects/enemies/obj-angel-bouncing";
 import { Instances } from "../../lib/game-engine/instances";

@@ -1,8 +1,8 @@
 import { BLEND_MODES, Container, Graphics } from "pixi.js";
 import { Undefined } from "../../../lib/types/undefined";
-import { lerp } from "../../../lib/game-engine/promise/lerp";
+import { lerp } from "../../../lib/game-engine/routines/lerp";
 import { renderer } from "../../globals";
-import { resolve } from "../../../lib/generators/resolve";
+import { resolve } from "../../../lib/game-engine/routines/resolve";
 
 export function objSolidOverlay() {
     let dirty = true;

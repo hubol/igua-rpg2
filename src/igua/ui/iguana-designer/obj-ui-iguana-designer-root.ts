@@ -1,8 +1,8 @@
 import { BLEND_MODES } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Sfx } from "../../../assets/sounds";
-import { lerp } from "../../../lib/game-engine/promise/lerp";
-import { sleep } from "../../../lib/game-engine/promise/sleep";
+import { lerp } from "../../../lib/game-engine/routines/lerp";
+import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { container } from "../../../lib/pixi/container";
 import { SceneLocal } from "../../../lib/game-engine/scene-local";
