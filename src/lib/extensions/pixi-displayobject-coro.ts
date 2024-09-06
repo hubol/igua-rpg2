@@ -21,7 +21,7 @@ Object.defineProperties(DisplayObject.prototype, {
             this.cancellationToken;
 
             this.ticker.add(
-                Coro.runner.bind(null, generator, { predicate: null, done: false }),
+                Coro.runner.bind(null, generator, Coro.createRunnerState()),
                 this,
                 order);
 
