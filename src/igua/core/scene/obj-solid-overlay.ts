@@ -2,7 +2,7 @@ import { BLEND_MODES, Container, Graphics } from "pixi.js";
 import { Undefined } from "../../../lib/types/undefined";
 import { lerp } from "../../../lib/game-engine/routines/lerp";
 import { renderer } from "../../globals";
-import { resolve } from "../../../lib/game-engine/routines/resolve";
+import { Coro } from "../../../lib/game-engine/routines/coro";
 
 export function objSolidOverlay() {
     let dirty = true;
@@ -16,7 +16,7 @@ export function objSolidOverlay() {
             c.destroy();
         })
         .show(g);
-        return resolve(r => container!.once('destroyed', r));
+        return Coro.resolve(r => container!.once('destroyed', r));
     }
 
     const g = new Graphics()
