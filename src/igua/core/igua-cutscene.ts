@@ -1,9 +1,9 @@
 import { Container, DisplayObject } from "pixi.js";
 import { CancellationError } from "../../lib/promise/cancellation-token";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
-import { RoutineGenerator } from "../../lib/game-engine/routines/routine-generator";
+import { Coro } from "../../lib/game-engine/routines/coro";
 
-type CutsceneFn = () => RoutineGenerator;
+type CutsceneFn = () => Coro.Type;
 
 export class IguaCutscene {
     private readonly _container: ReturnType<typeof IguaCutscene._objCutsceneContainer>;

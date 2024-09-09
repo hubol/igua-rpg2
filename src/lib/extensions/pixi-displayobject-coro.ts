@@ -1,11 +1,10 @@
 import { DisplayObject } from "pixi.js";
 import { CancellationToken } from "../promise/cancellation-token";
-import { RoutineGenerator } from "../game-engine/routines/routine-generator";
 import { Coro } from "../game-engine/routines/coro";
 
 declare module "pixi.js" {
     interface DisplayObject {
-        coro(fn: (self: this) => RoutineGenerator, order?: number): this;
+        coro(fn: (self: this) => Coro.Type, order?: number): this;
     }
 }
 
@@ -15,7 +14,7 @@ interface DisplayObjectPrivate {
 
 Object.defineProperties(DisplayObject.prototype, {
     coro: {
-        value: function (this: DisplayObject & DisplayObjectPrivate, generatorFn: (self: any) => RoutineGenerator, order = 0) {
+        value: function (this: DisplayObject & DisplayObjectPrivate, generatorFn: (self: any) => Coro.Type, order = 0) {
             const generator = generatorFn(this);
 
             this.cancellationToken;

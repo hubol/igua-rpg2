@@ -47,7 +47,6 @@ export namespace Coro {
         return false;
     }
 
-    // TODO name
     type ReturnedByGenerator<T> = T extends Coro.Type<infer U> ? U : never
 
     export function* all<T extends readonly (Coro.Type | Predicate)[] | []>(values: T): Coro.Type<{ -readonly [P in keyof T]: ReturnedByGenerator<T[P]> }> {
@@ -84,6 +83,34 @@ export namespace Coro {
         }
 
         return results as any;
+    }
+
+    /** Re-throws any exceptions thrown by the given predicate at the yield site of this Generator.
+     * 
+     * Usefulness is questionable.
+     */
+    export function* throws(predicate: Predicate): Type<void> {
+        let reason: Error | null = null;
+        yield () => {
+            try {
+                return predicate();
+            }
+            catch (e) {
+                reason = e as Error;
+                return true;
+            }
+        };
+        if (reason)
+            throw reason;
+    }
+    
+    type Executor = (resolve: () => void) => unknown
+
+    /** Creates a Coro.Predicate from a "Promise-style" executor */
+    export function resolve(executor: Executor): Predicate {
+        let resolved = false;
+        executor(() => resolved = true);
+        return () => resolved;
     }
 
     function isCoroType(value: Coro.Type | Predicate): value is Coro.Type {
