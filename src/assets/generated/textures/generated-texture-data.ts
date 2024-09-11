@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 56 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 58 }];
 
 interface TxData {
   id: string;
@@ -24,8 +24,8 @@ function txs<T>(tx: (data: TxData) => T) {
       SplashMedium: tx({ id: "Effects.SplashMedium", atlas: 0, x: 971, y: 65, width: 48, height: 16 }),
       SplashSmall: tx({ id: "Effects.SplashSmall", atlas: 0, x: 931, y: 0, width: 64, height: 8 }),
       ValuableSparkle: tx({ id: "Effects.ValuableSparkle", atlas: 0, x: 986, y: 9, width: 35, height: 7 }),
-      WaterDripSmall: tx({ id: "Effects.WaterDripSmall", atlas: 0, x: 1023, y: 107, width: 1, height: 2 }),
-      WaterDripXsmall: tx({ id: "Effects.WaterDripXsmall", atlas: 0, x: 1023, y: 3, width: 1, height: 2 }),
+      WaterDripSmall: tx({ id: "Effects.WaterDripSmall", atlas: 0, x: 1016, y: 121, width: 1, height: 2 }),
+      WaterDripXsmall: tx({ id: "Effects.WaterDripXsmall", atlas: 0, x: 1023, y: 114, width: 1, height: 2 }),
     },
     Enemy: {
       CommonClown: tx({ id: "Enemy.CommonClown", atlas: 0, x: 971, y: 91, width: 44, height: 32 }),
@@ -78,9 +78,11 @@ function txs<T>(tx: (data: TxData) => T) {
       Square32: tx({ id: "Shapes.Square32", atlas: 0, x: 829, y: 100, width: 32, height: 32 }),
     },
     Stone: {
+      BrickIrregular1: tx({ id: "Stone.BrickIrregular1", atlas: 0, x: 895, y: 99, width: 10, height: 7 }),
       BrickRegular: tx({ id: "Stone.BrickRegular", atlas: 0, x: 887, y: 130, width: 22, height: 13 }),
       IrregularWall: tx({ id: "Stone.IrregularWall", atlas: 0, x: 804, y: 67, width: 24, height: 34 }),
       RockLargeShaded: tx({ id: "Stone.RockLargeShaded", atlas: 0, x: 971, y: 124, width: 38, height: 26 }),
+      RockSmallShaded1: tx({ id: "Stone.RockSmallShaded1", atlas: 0, x: 1016, y: 107, width: 7, height: 6 }),
     },
     Terrain: {
       Grass: {
@@ -94,7 +96,7 @@ function txs<T>(tx: (data: TxData) => T) {
       Checkbox: tx({ id: "Ui.Checkbox", atlas: 0, x: 743, y: 67, width: 60, height: 30 }),
       ChooseYourLooksIcons: tx({ id: "Ui.ChooseYourLooksIcons", atlas: 0, x: 0, y: 0, width: 930, height: 30 }),
       NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 1016, y: 91, width: 8, height: 8 }),
-      PlacementReticle: tx({ id: "Ui.PlacementReticle", atlas: 0, x: 1016, y: 107, width: 6, height: 6 }),
+      PlacementReticle: tx({ id: "Ui.PlacementReticle", atlas: 0, x: 1016, y: 114, width: 6, height: 6 }),
     },
     Wood: {
       Sign: tx({ id: "Wood.Sign", atlas: 0, x: 862, y: 100, width: 32, height: 18 }),

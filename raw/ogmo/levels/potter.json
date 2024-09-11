@@ -59,7 +59,7 @@
           "y": 112,
           "originX": 0,
           "originY": 0,
-          "values": {"sceneName": "scnPlayerTest", "checkpointName": "FromLevelTwo", "name": "", "depth": 0}
+          "values": {"sceneName": "scnBallTown", "checkpointName": "FromPotteryHouse", "name": "", "depth": 0}
         },
         {
           "name": "WaterDripSource",
