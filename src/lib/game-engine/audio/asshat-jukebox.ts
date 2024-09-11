@@ -3,10 +3,15 @@ import { Sound, SoundInstance } from "./sound";
 
 export type MusicTrack = string & { readonly __t: unique symbol; };
 
+interface NowPlaying {
+    track: MusicTrack;
+    instance: SoundInstance;
+}
+
 // TODO generics?
 export class AsshatJukebox {
     private readonly _loader: MusicTrackLoader;
-    private _current?: SoundInstance;
+    private _nowPlaying?: NowPlaying;
 
     constructor(private readonly _destination: AudioNode) {
         this._loader = new MusicTrackLoader(_destination);
@@ -21,13 +26,17 @@ export class AsshatJukebox {
 
     async playAsync(track: MusicTrack) {
         this._latestPlayRequest = track;
+        if (this._nowPlaying?.track === track)
+            return;
         const sound = await this._loader.load(track);
-        this._current?.stop();
-        if (this._latestPlayRequest == track)
-            this._current = sound.with.loop(true).playInstance();
+        if (this._latestPlayRequest === track) {
+            this._nowPlaying?.instance?.stop();
+            const instance = sound.with.loop(true).playInstance();
+            this._nowPlaying = { track, instance };
+        }
     }
 
-    async warm(...tracks: MusicTrack[]) {
+    warm(...tracks: MusicTrack[]) {
         setTimeout(() => this.warmAsync(...tracks));
         return this;
     }
