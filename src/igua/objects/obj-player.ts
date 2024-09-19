@@ -12,6 +12,8 @@ import { RpgStatus } from "../rpg/rpg-status";
 import { ObjIguanaLocomotive, ObjIguanaLocomotiveAutoFacingMode, objIguanaLocomotive } from "./obj-iguana-locomotive";
 import { StepOrder } from "./step-order";
 import { force } from "../mixins/mxn-physics";
+import { Rng } from "../../lib/math/rng";
+import { Sfx } from "../../assets/sounds";
 
 const PlayerConsts = {
     // TODO probably not constants, probably derived from status
@@ -57,6 +59,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             for (const instance of Instances(mxnRpgStatus, filterVulnerableObjs)) {
                 const hurtbox = puppet.collidesOne(instance.hurtboxes);
                 if (hurtbox) {
+                    Rng.choose(Sfx.Impact.VsEnemyPhysical_0, Sfx.Impact.VsEnemyPhysical_1, Sfx.Impact.VsEnemyPhysical_2).play();
                     bounceIguanaOffObject(puppet, hurtbox);
                     instance.damage(RpgPlayer.MeleeAttack);
                 }       
