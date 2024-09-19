@@ -8,7 +8,7 @@ const IguanaLocomotiveConsts = {
     WalkingAcceleration: 0.3,
     WalkingDeceleration: 0.2,
     WalkingTopSpeed: 2.5,
-    Gravity: 0.1,
+    Gravity: 0.15,
 };
 
 function getDeceleratingDistance(absSpeed: number, deceleration: number) {

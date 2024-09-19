@@ -18,13 +18,16 @@ const PlayerConsts = {
     WalkingAcceleration: 0.3,
     WalkingDeceleration: 0.2,
     JumpSpeed: -3,
-    Gravity: 0.1,
+    VariableJumpSpeedMaximum: -1.5,
+    VariableJumpDelta: -0.095,
+    Gravity: 0.15,
 }
 
 const filterVulnerableObjs = (obj: MxnRpgStatus) => obj.status.faction !== RpgFaction.Player;
 
 function objPlayer(looks: IguanaLooks.Serializable) {
     const iguanaLocomotiveObj = objIguanaLocomotive(looks);
+    iguanaLocomotiveObj.gravity = PlayerConsts.Gravity;
 
     const died = () => {}
 
@@ -43,6 +46,9 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             puppet.isMovingRight = hasControl && Input.isDown('MoveRight');
             puppet.isDucking = hasControl && puppet.isOnGround && Input.isDown('Duck');
             
+            if (hasControl && !puppet.isOnGround && puppet.speed.y < PlayerConsts.VariableJumpSpeedMaximum && Input.isDown('Jump')) {
+                puppet.speed.y += PlayerConsts.VariableJumpDelta;
+            }
             if (hasControl && puppet.isOnGround && Input.justWentDown('Jump')) {
                 puppet.speed.y = PlayerConsts.JumpSpeed;
             }
