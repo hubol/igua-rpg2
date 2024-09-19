@@ -351,7 +351,7 @@ export const Lvl = {
     WaterDripSource_6: e(r["WaterDripSource"], { x: 616, y: 32, values: { delayMin: 100, delayMax: 200, name: "", depth: 0 } }),
     WaterDripSource_7: e(r["WaterDripSource"], { x: 632, y: 32, values: { delayMin: 100, delayMax: 200, name: "", depth: 0 } }),
     WaterDripSource_8: e(r["WaterDripSource"], { x: 648, y: 32, values: { delayMin: 100, delayMax: 200, name: "", depth: 0 } }),
-    Player: e(r["Player"], { x: 72, y: 64, flippedX: true, values: { name: "", depth: 0 } }),
+    Player: e(r["Player"], { x: 528, y: 208, flippedX: true, values: { name: "", depth: 0 } }),
     FromLevelTwo: e(r["Checkpoint"], { x: 344, y: 176, flippedX: true, values: { name: "FromLevelTwo", depth: 0 } }),
     Puddle: e(r["Puddle"], { x: 116, y: 152, width: 120, values: { name: "", depth: 0 }, tint: 0x68a8d0 }),
     Puddle_1: e(r["Puddle"], { x: 584, y: 208, width: 184, values: { name: "", depth: 0 }, tint: 0x68a8d0 }),
