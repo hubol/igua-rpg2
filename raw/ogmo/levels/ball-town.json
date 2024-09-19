@@ -91,6 +91,17 @@
           "originX": 0,
           "originY": 16,
           "values": {"title": "Balls", "message": "Welcome to the ball town.", "name": "", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 5,
+          "_eid": "90326278",
+          "x": 152,
+          "y": 120,
+          "originX": 12,
+          "originY": 37,
+          "flippedX": false,
+          "values": {"looksName": "", "name": "", "depth": 0}
         }
       ]
     },
@@ -1061,6 +1072,15 @@
           "y": 120,
           "width": 88,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 11,
+          "_eid": "95769929",
+          "x": 104,
+          "y": 168,
+          "width": 32,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -1085,6 +1105,18 @@
       "gridCellsX": 64,
       "gridCellsY": 133,
       "decals": [
+        {
+          "x": 400,
+          "y": 192,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "wood/measuring stick.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
         {
           "x": 248,
           "y": 200,
@@ -1287,6 +1319,18 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 120,
+          "y": 176,
+          "scaleX": 1,
+          "scaleY": 1.4,
+          "rotation": -45,
+          "tint": "#252525",
+          "texture": "shapes/line vertical16.png",
+          "originX": 0,
+          "originY": 0,
           "values": {"name": ""}
         }
       ],
