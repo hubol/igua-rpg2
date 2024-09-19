@@ -16,5 +16,6 @@ export const GeneratedMusicData = {
    "RochesterDetour": { ogg: require("./ogg/rochester-detour.ogg") },
    "Roundabout": { ogg: require("./ogg/roundabout.ogg") },
    "SharedBaby": { ogg: require("./ogg/shared-baby.ogg") },
+   "TrashDay": { ogg: require("./ogg/trash-day.ogg") },
    "WondrousAmerica": { ogg: require("./ogg/wondrous-america.ogg") }
 }
