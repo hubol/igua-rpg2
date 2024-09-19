@@ -93,7 +93,13 @@ const bounceIguanaOffObject = function() {
     }
 }()
 
-export let playerObj: ReturnType<typeof objPlayer>;
+type ObjPlayer = ReturnType<typeof objPlayer>;
+
+export function isPlayerObj(obj: DisplayObject): obj is ObjPlayer {
+    return obj === playerObj;
+}
+
+export let playerObj: ObjPlayer;
 
 export function createPlayerObj(looks: IguanaLooks.Serializable = RpgProgress.character.looks) {
     return playerObj = objPlayer(looks);
