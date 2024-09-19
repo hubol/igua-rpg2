@@ -1,4 +1,4 @@
-import { BaseTexture, Rectangle, SCALE_MODES, Texture, loadImageBitmap } from "pixi.js";
+import { BaseTexture, FORMATS, IBaseTextureOptions, MIPMAP_MODES, MSAA_QUALITY, Rectangle, SCALE_MODES, TARGETS, Texture, loadImageBitmap } from "pixi.js";
 import { GeneratedTextureData } from "./generated/textures/generated-texture-data";
 import { JobProgress } from "../lib/game-engine/job-progress";
 import { loadNoAtlasTextures } from "./no-atlas-textures";
@@ -34,10 +34,17 @@ export async function loadTextureAssets(progress: JobProgress) {
     await loadNoAtlasTextures(Tx);
 }
 
+const textureOptions: IBaseTextureOptions = {
+    mipmap: MIPMAP_MODES.OFF,
+    scaleMode: SCALE_MODES.NEAREST,
+    multisample: MSAA_QUALITY.NONE,
+    anisotropicLevel: 0,
+}
+
 async function loadTexture(url: string, progress: JobProgress) {
     const bitmap = await loadImageBitmap(url);
     progress.increaseCompletedJobsCount(1);
-    const base = new BaseTexture(bitmap);
+    const base = new BaseTexture(bitmap, textureOptions);
 
     base.resource.src = url;
     return new Texture(base);
