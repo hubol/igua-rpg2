@@ -18,6 +18,8 @@ async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
       "impact/vs enemy physical 0.ogg",
       "impact/vs enemy physical 1.ogg",
       "impact/vs enemy physical 2.ogg",
+      "interact/door open0.ogg",
+      "interact/door open1.ogg",
       "pork roll egg and cheese.ogg",
       "ui/looks/updated.ogg",
       "ui/navigate back.ogg",
@@ -49,14 +51,18 @@ async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
       VsEnemyPhysical_1: sounds[13],
       VsEnemyPhysical_2: sounds[14],
     },
-    PorkRollEggAndCheese: sounds[15],
+    Interact: {
+      DoorOpen0: sounds[15],
+      DoorOpen1: sounds[16],
+    },
+    PorkRollEggAndCheese: sounds[17],
     Ui: {
       Looks: {
-        Updated: sounds[16],
+        Updated: sounds[18],
       },
-      NavigateBack: sounds[17],
-      NavigateInto: sounds[18],
-      Select: sounds[19],
+      NavigateBack: sounds[19],
+      NavigateInto: sounds[20],
+      Select: sounds[21],
     },
   };
 }

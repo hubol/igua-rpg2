@@ -7,6 +7,8 @@ import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { Cutscene, sceneStack } from "../globals";
 import { show } from "../cutscene/show";
 import { RpgProgress } from "../rpg/rpg-progress";
+import { Sfx } from "../../assets/sounds";
+import { Rng } from "../../lib/math/rng";
 
 interface ObjDoorArgs {
     sceneName: string;
@@ -37,6 +39,7 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
             }
             if (scene)
                 throw new EscapeTickerAndExecute(() => {
+                    Rng.choose(Sfx.Interact.DoorOpen0, Sfx.Interact.DoorOpen1).play();
                     // TODO this all really needs to be encapsulated somewhere
                     RpgProgress.character.position.sceneName = sceneName;
                     RpgProgress.character.position.checkpointName = checkpointName;
