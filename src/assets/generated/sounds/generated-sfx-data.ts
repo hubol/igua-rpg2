@@ -9,6 +9,7 @@ async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
       "ballon pop.ogg",
       "beep tiny.ogg",
       "folder/cast spell hit.ogg",
+      "impact/defeat enemy.ogg",
       "impact/vs enemy physical 0.ogg",
       "impact/vs enemy physical 1.ogg",
       "impact/vs enemy physical 2.ogg",
@@ -29,18 +30,19 @@ async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
       CastSpellHit: sounds[5],
     },
     Impact: {
-      VsEnemyPhysical_0: sounds[6],
-      VsEnemyPhysical_1: sounds[7],
-      VsEnemyPhysical_2: sounds[8],
+      DefeatEnemy: sounds[6],
+      VsEnemyPhysical_0: sounds[7],
+      VsEnemyPhysical_1: sounds[8],
+      VsEnemyPhysical_2: sounds[9],
     },
-    PorkRollEggAndCheese: sounds[9],
+    PorkRollEggAndCheese: sounds[10],
     Ui: {
       Looks: {
-        Updated: sounds[10],
+        Updated: sounds[11],
       },
-      NavigateBack: sounds[11],
-      NavigateInto: sounds[12],
-      Select: sounds[13],
+      NavigateBack: sounds[12],
+      NavigateInto: sounds[13],
+      Select: sounds[14],
     },
   };
 }

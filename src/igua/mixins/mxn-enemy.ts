@@ -10,6 +10,7 @@ import { merge } from "../../lib/object/merge";
 import { playerObj } from "../objects/obj-player";
 import { clone } from "../../lib/object/clone";
 import { RpgEnemyClass } from "../rpg/rpg-enemy-class";
+import { Sfx } from "../../assets/sounds";
 
 interface MxnEnemyArgs {
     hurtboxes: DisplayObject[];
@@ -28,6 +29,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         // Particle effects
         // Might need to be overrideable too, actually
         // Thinking about the dassmann fight from igua 1
+        Sfx.Impact.DefeatEnemy.play();
         const drop = RpgLoot.Methods.drop(loot, enemy);
         objLootDrop(drop).at(obj).show(obj.parent);
         enemyObj.dispatch('mxnEnemy.died');

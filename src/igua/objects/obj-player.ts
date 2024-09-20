@@ -59,9 +59,10 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             for (const instance of Instances(mxnRpgStatus, filterVulnerableObjs)) {
                 const hurtbox = puppet.collidesOne(instance.hurtboxes);
                 if (hurtbox) {
-                    Rng.choose(Sfx.Impact.VsEnemyPhysical_0, Sfx.Impact.VsEnemyPhysical_1, Sfx.Impact.VsEnemyPhysical_2).play();
                     bounceIguanaOffObject(puppet, hurtbox);
-                    instance.damage(RpgPlayer.MeleeAttack);
+                    const result = instance.damage(RpgPlayer.MeleeAttack);
+                    if (!result.rejected)
+                        Rng.choose(Sfx.Impact.VsEnemyPhysical_0, Sfx.Impact.VsEnemyPhysical_1, Sfx.Impact.VsEnemyPhysical_2).play();
                 }       
             }
         }, StepOrder.Physics + 1);
