@@ -3,24 +3,17 @@
 async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
   const sounds = await Promise.all(
     [
-      "activate lever.ogg",
-      "arrow knock.ogg",
-      "ball bounce.ogg",
-      "ballon pop.ogg",
-      "beep tiny.ogg",
       "collect/valuable1.ogg",
       "collect/valuable15.ogg",
       "collect/valuable5.ogg",
       "fluid/splash small.ogg",
       "fluid/splash tiny.ogg",
-      "folder/cast spell hit.ogg",
       "impact/defeat enemy.ogg",
       "impact/vs enemy physical 0.ogg",
       "impact/vs enemy physical 1.ogg",
       "impact/vs enemy physical 2.ogg",
       "interact/door open0.ogg",
       "interact/door open1.ogg",
-      "pork roll egg and cheese.ogg",
       "ui/looks/updated.ogg",
       "ui/navigate back.ogg",
       "ui/navigate into.ogg",
@@ -28,41 +21,32 @@ async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
     ].map(sfx),
   );
   return {
-    ActivateLever: sounds[0],
-    ArrowKnock: sounds[1],
-    BallBounce: sounds[2],
-    BallonPop: sounds[3],
-    BeepTiny: sounds[4],
     Collect: {
-      Valuable1: sounds[5],
-      Valuable15: sounds[6],
-      Valuable5: sounds[7],
+      Valuable1: sounds[0],
+      Valuable15: sounds[1],
+      Valuable5: sounds[2],
     },
     Fluid: {
-      SplashSmall: sounds[8],
-      SplashTiny: sounds[9],
-    },
-    Folder: {
-      CastSpellHit: sounds[10],
+      SplashSmall: sounds[3],
+      SplashTiny: sounds[4],
     },
     Impact: {
-      DefeatEnemy: sounds[11],
-      VsEnemyPhysical_0: sounds[12],
-      VsEnemyPhysical_1: sounds[13],
-      VsEnemyPhysical_2: sounds[14],
+      DefeatEnemy: sounds[5],
+      VsEnemyPhysical_0: sounds[6],
+      VsEnemyPhysical_1: sounds[7],
+      VsEnemyPhysical_2: sounds[8],
     },
     Interact: {
-      DoorOpen0: sounds[15],
-      DoorOpen1: sounds[16],
+      DoorOpen0: sounds[9],
+      DoorOpen1: sounds[10],
     },
-    PorkRollEggAndCheese: sounds[17],
     Ui: {
       Looks: {
-        Updated: sounds[18],
+        Updated: sounds[11],
       },
-      NavigateBack: sounds[19],
-      NavigateInto: sounds[20],
-      Select: sounds[21],
+      NavigateBack: sounds[12],
+      NavigateInto: sounds[13],
+      Select: sounds[14],
     },
   };
 }

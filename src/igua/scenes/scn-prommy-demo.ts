@@ -14,7 +14,7 @@ export function scnPrommyDemo() {
     .coro(function* () {
         while (true) {
             yield sleep(300);
-            Sfx.BallBounce.playInstance().rate = 1 + Math.random();
+            Sfx.Collect.Valuable1.playInstance().rate = 1 + Math.random();
         }
     })
     .at(128, 128)
