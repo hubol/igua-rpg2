@@ -11,6 +11,8 @@ async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
       "collect/valuable1.ogg",
       "collect/valuable15.ogg",
       "collect/valuable5.ogg",
+      "fluid/splash small.ogg",
+      "fluid/splash tiny.ogg",
       "folder/cast spell hit.ogg",
       "impact/defeat enemy.ogg",
       "impact/vs enemy physical 0.ogg",
@@ -34,23 +36,27 @@ async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
       Valuable15: sounds[6],
       Valuable5: sounds[7],
     },
+    Fluid: {
+      SplashSmall: sounds[8],
+      SplashTiny: sounds[9],
+    },
     Folder: {
-      CastSpellHit: sounds[8],
+      CastSpellHit: sounds[10],
     },
     Impact: {
-      DefeatEnemy: sounds[9],
-      VsEnemyPhysical_0: sounds[10],
-      VsEnemyPhysical_1: sounds[11],
-      VsEnemyPhysical_2: sounds[12],
+      DefeatEnemy: sounds[11],
+      VsEnemyPhysical_0: sounds[12],
+      VsEnemyPhysical_1: sounds[13],
+      VsEnemyPhysical_2: sounds[14],
     },
-    PorkRollEggAndCheese: sounds[13],
+    PorkRollEggAndCheese: sounds[15],
     Ui: {
       Looks: {
-        Updated: sounds[14],
+        Updated: sounds[16],
       },
-      NavigateBack: sounds[15],
-      NavigateInto: sounds[16],
-      Select: sounds[17],
+      NavigateBack: sounds[17],
+      NavigateInto: sounds[18],
+      Select: sounds[19],
     },
   };
 }

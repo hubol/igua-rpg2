@@ -11,6 +11,8 @@ import { approachLinear } from "../../../lib/math/number";
 import { StepOrder } from "../step-order";
 import { Instances } from "../../../lib/game-engine/instances";
 import { MxnPhysics, mxnPhysics } from "../../mixins/mxn-physics";
+import { Sfx } from "../../../assets/sounds";
+import { scene } from "../../globals";
 
 const atkSplash = RpgAttack.create({
     wetness: 10,
@@ -86,11 +88,15 @@ const txsUpwardSplash = Tx.Effects.SplashMedium.split({ count: 3 });
 const txsSideSplash = Tx.Effects.SplashSmall.split({ count: 4 });
 
 function objUpwardSplash() {
+    Sfx.Fluid.SplashSmall.with.rate(Rng.float(0.95, 1.05)).play();
     return objEphemeralSprite(txsUpwardSplash, Rng.float(0.15, 0.25))
         .anchored(0.5, 1);
 }
 
 function objSideSplash(speed: number, max: number) {
+    const f = Math.sin(speed * scene.ticker.ticks * 0.05) * 0.2;
+    const rate = f + Math.max(0.4, Math.min(0.8, Math.abs(speed / 2)));
+    Sfx.Fluid.SplashTiny.with.rate(rate * 0.9).play();
     let steps = 0;
     return objEphemeralSprite(txsSideSplash, Rng.float(0.15, 0.25))
         .scaled(Math.sign(speed), 1)
