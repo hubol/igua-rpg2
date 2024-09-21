@@ -81,5 +81,4 @@ export function createDebugPanel() { }
 For some systems, it feels more natural to use classes. There is no ban on using classes or any typical OOP features e.g. `abstract`, `protected`, and `private` modifiers.
 
 ## Formatting
-JavaScript offers too many ways to accomplish simple things. Linters are annoying to maintain, annoying to configure and plugin, heavy to download, and heavy to execute.
-Once a linter is introduced to the project, commits will become confusingly bloated. For now, I am formatting code manually.
+I am using `dprint` for formatting. `prettier` is too opinionated and `ESLint` has an embarrassing footprint.
