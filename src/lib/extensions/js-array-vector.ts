@@ -1,10 +1,10 @@
 import { Vector, defineVectorProperties } from "../math/vector-type";
 
 declare global {
-    interface Array<T> extends Vector { }
+    interface Array<T> extends Vector {}
 }
 
-defineVectorProperties(Array.prototype, { omit: [ 'at' ] });
+defineVectorProperties(Array.prototype, { omit: ["at"] });
 
 Object.defineProperties(Array.prototype, {
     x: {
@@ -37,5 +37,5 @@ Object.defineProperties(Array.prototype, {
             return this;
         },
         configurable: true,
-    }
+    },
 });

@@ -10,8 +10,9 @@ import { Environment } from "./lib/environment";
 import { settings } from "pixi.js";
 
 // https://esbuild.github.io/api/#live-reload
-if (Environment.isDev)
-    new EventSource('/esbuild').addEventListener('change', () => location.reload())
+if (Environment.isDev) {
+    new EventSource("/esbuild").addEventListener("change", () => location.reload());
+}
 
 async function initialize() {
     try {
@@ -19,7 +20,7 @@ async function initialize() {
         const renderer = createPixiRenderer({
             width: 256,
             height: 256,
-            eventFeatures: { click: false, globalMove: false, move: false, wheel: false, },
+            eventFeatures: { click: false, globalMove: false, move: false, wheel: false },
             eventMode: "none",
         });
 
@@ -30,21 +31,21 @@ async function initialize() {
         await Promise.all([
             initializeAsshatAudioContext({
                 gestureEl: () => {
-                    const el = document.getElementById('user_gesture')!;
-                    el.classList.add('show');
+                    const el = document.getElementById("user_gesture")!;
+                    el.classList.add("show");
                     return el;
                 },
                 cleanup: (el) => {
-                    el.classList.remove('show');
-                    el.classList.add('hide');
-                }
+                    el.classList.remove("show");
+                    el.classList.add("hide");
+                },
             }),
             loadLaunchAssets(progress),
             showLoadingScreen(progress),
         ]);
 
         integralUpscaleCanvas(addGameCanvasToDocument(renderer.view));
-        
+
         require("./igua/launch/prepare-game-engine").prepareGameEngine(renderer);
         require("./igua/launch/install-dev-tools").installDevTools();
         require("./igua/launch/start-game").startGame();
@@ -64,8 +65,8 @@ async function installExtensions() {
 }
 
 function showFatalError(error) {
-    const message = typeof error === 'string' ? error : ( error?.message ? error.message : JSON.stringify(error) );
-    document.body.id = 'fatal_error';
+    const message = typeof error === "string" ? error : (error?.message ? error.message : JSON.stringify(error));
+    document.body.id = "fatal_error";
     document.body.innerHTML = `<h1>Error in initialization</h1>
 <h2>${message}</h2>`;
 }
@@ -79,7 +80,7 @@ ErrorReporter.announcer = createDomErrorAnnouncer();
 
 function addGameCanvasToDocument(element: HTMLCanvasElement) {
     element.id = "game_canvas";
-    document.getElementsByTagName('main')[0].appendChild(element);
+    document.getElementsByTagName("main")[0].appendChild(element);
 
     return element;
 }

@@ -15,9 +15,9 @@ const tintedPropertyDescriptorMap: PropertyDescriptorMap = {
         value: function (this: Graphics | Sprite, tint: ColorSource) {
             this.tint = tint;
             return this;
-        }
-    }
-}
+        },
+    },
+};
 
 Object.defineProperties(Graphics.prototype, {
     ...tintedPropertyDescriptorMap,

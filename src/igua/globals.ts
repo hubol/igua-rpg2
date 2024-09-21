@@ -10,19 +10,20 @@ export let renderer: PixiRenderer;
 export let layers: IguaLayers;
 export let scene: IguaScene;
 export let sceneStack: IguaSceneStack;
-export let Input: Pick<IguaInput, 'isDown' | 'isUp' | 'justWentDown' | 'justWentUp'>;
+export let Input: Pick<IguaInput, "isDown" | "isUp" | "justWentDown" | "justWentUp">;
 export let Cutscene: IguaCutscene;
 export let forceGameLoop: () => void;
 export let startAnimator: () => void;
 export let DevKey: KeyListener;
 
 export function setIguaGlobals(
-        pixiRenderer: PixiRenderer,
-        rootStage: Container,
-        iguaInput: IguaInput,
-        forceGameLoopFn: () => void,
-        startAnimatorFn: () => void,
-        devKey: KeyListener) {
+    pixiRenderer: PixiRenderer,
+    rootStage: Container,
+    iguaInput: IguaInput,
+    forceGameLoopFn: () => void,
+    startAnimatorFn: () => void,
+    devKey: KeyListener,
+) {
     renderer = pixiRenderer;
     layers = new IguaLayers(rootStage);
     sceneStack = new IguaSceneStack(layers, (_scene) => scene = _scene);

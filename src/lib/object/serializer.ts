@@ -1,4 +1,4 @@
-const SetPrefix = '@__Set__@';
+const SetPrefix = "@__Set__@";
 
 function replacer(this: any, key: string, value: any) {
     if (value instanceof Set) {
@@ -9,9 +9,10 @@ function replacer(this: any, key: string, value: any) {
 }
 
 function reviver(this: any, key: string, value: any) {
-    if (typeof value === 'string') {
-        if (value.startsWith(SetPrefix))
+    if (typeof value === "string") {
+        if (value.startsWith(SetPrefix)) {
             return new Set(JSON.parse(value.substring(SetPrefix.length)));
+        }
     }
 
     return value;
@@ -28,4 +29,4 @@ function deserialize<T>(text: string): T {
 export const Serializer = {
     serialize,
     deserialize,
-}
+};

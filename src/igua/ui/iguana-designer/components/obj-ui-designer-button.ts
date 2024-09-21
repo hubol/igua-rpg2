@@ -39,51 +39,52 @@ const [
 ] = Tx.Ui.ChooseYourLooksIcons.split({ width: 30 });
 
 const icons = {
-    'head': headIcon,
-    'body': bodyIcon,
-    'feet': feetIcon,
-    'done': floppyIcon,
-    'back': backIcon,
-    'crest': crestIcon,
-    'eyes': eyesIcon,
-    'mouth': mouthIcon,
-    'horn': hornIcon,
-    'pupils': pupilsIcon,
-    'torso': torsoIcon,
-    'tail': tailIcon,
-    'club': clubIcon,
-    'fore': foreIcon,
-    'hind': hindIcon,
-    'claws': nailsIcon,
-    'ok': checkIcon,
-    'advanced': lightBulbIcon,
-    'inspiration': lightBulbIcon,
-    'fore right': foreRightIcon,
-    'hind right': hindRightIcon,
-    'fore left': foreLeftIcon,
-    'hind left': hindLeftIcon,
-    'left eye': leftEyeIcon,
-    'right eye': rightEyeIcon,
-    'sclera': scleraIcon,
-    'eyelid': eyelidIcon,
-    'pupil': pupilIcon,
-    'eyelids': eyelidsIcon,
-}
+    "head": headIcon,
+    "body": bodyIcon,
+    "feet": feetIcon,
+    "done": floppyIcon,
+    "back": backIcon,
+    "crest": crestIcon,
+    "eyes": eyesIcon,
+    "mouth": mouthIcon,
+    "horn": hornIcon,
+    "pupils": pupilsIcon,
+    "torso": torsoIcon,
+    "tail": tailIcon,
+    "club": clubIcon,
+    "fore": foreIcon,
+    "hind": hindIcon,
+    "claws": nailsIcon,
+    "ok": checkIcon,
+    "advanced": lightBulbIcon,
+    "inspiration": lightBulbIcon,
+    "fore right": foreRightIcon,
+    "hind right": hindRightIcon,
+    "fore left": foreLeftIcon,
+    "hind left": hindLeftIcon,
+    "left eye": leftEyeIcon,
+    "right eye": rightEyeIcon,
+    "sclera": scleraIcon,
+    "eyelid": eyelidIcon,
+    "pupil": pupilIcon,
+    "eyelids": eyelidsIcon,
+};
 
 function getIcon(text: string) {
     return icons[text.toLowerCase()];
 }
 
 export function objUiDesignerButton(text: string, onPress: () => unknown, width = 96, height = 30) {
-    const obj = objUiButton(text, onPress, width, height).merge({ note: '' });
+    const obj = objUiButton(text, onPress, width, height).merge({ note: "" });
 
     const icon = getIcon(text);
-    if (icon)
+    if (icon) {
         obj.addChild(Sprite.from(icon));
+    }
 
     return obj;
 }
 
 export function objUiDesignerNavigationButton(text: string, createPageFn: () => UiPage) {
-    return objUiDesignerButton(text, () => UiIguanaDesignerContext.value.router.push(createPageFn()))
+    return objUiDesignerButton(text, () => UiIguanaDesignerContext.value.router.push(createPageFn()));
 }

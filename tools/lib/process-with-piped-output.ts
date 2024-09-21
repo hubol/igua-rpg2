@@ -2,7 +2,6 @@ import { spawn } from "child_process";
 
 export class ProcessWithPipedOutput {
     private constructor() {
-
     }
 
     static run(...args: Parameters<typeof spawn>) {
@@ -12,7 +11,7 @@ export class ProcessWithPipedOutput {
             child.stdout.pipe(process.stdout);
             child.stderr.pipe(process.stderr);
 
-            child.on('close', resolve);
+            child.on("close", resolve);
         });
     }
 }

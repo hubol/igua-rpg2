@@ -36,7 +36,7 @@ export const RpgPlayer = {
             },
             set value(value) {
                 RpgProgress.character.status.poison.value = value;
-            }
+            },
         },
         wetness: {
             get value() {
@@ -60,7 +60,7 @@ export const RpgPlayer = {
         let speed = 2.5;
         speed += 0.75 * Math.min(1, RpgProgress.character.status.poison.level);
         speed += 0.5 * Math.max(0, RpgProgress.character.status.poison.level - 1);
-        return speed
+        return speed;
     },
     MeleeAttack: {
         emotional: 0,
@@ -71,4 +71,4 @@ export const RpgPlayer = {
         wetness: 0,
         versus: RpgFaction.Enemy,
     } satisfies RpgAttack.Model,
-}
+};

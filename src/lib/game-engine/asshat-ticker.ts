@@ -2,7 +2,7 @@ import { ErrorReporter } from "./error-reporter";
 import { ICancellationToken } from "../promise/cancellation-token";
 
 export class EscapeTickerAndExecute {
-    constructor(readonly execute: () => void) { }
+    constructor(readonly execute: () => void) {}
 }
 
 export type AsshatTickerFn = ((...params: any[]) => any) & { _removed?: boolean };
@@ -46,13 +46,15 @@ export class AsshatTicker implements IAsshatTicker {
 
             this._orders.push(order);
         }
-        else 
+        else {
             this._tasks[order].push(task);
+        }
     }
 
     tick() {
-        if (!this.doNextUpdate)
+        if (!this.doNextUpdate) {
             return;
+        }
 
         try {
             this.tickImpl();
@@ -62,7 +64,7 @@ export class AsshatTicker implements IAsshatTicker {
                 e.execute();
                 return;
             }
-            ErrorReporter.reportSubsystemError('AsshatTicker.tick', e);
+            ErrorReporter.reportSubsystemError("AsshatTicker.tick", e);
         }
     }
 
@@ -90,18 +92,21 @@ export class AsshatTicker implements IAsshatTicker {
                     task.fn();
                 }
                 catch (e) {
-                    if (e instanceof EscapeTickerAndExecute)
+                    if (e instanceof EscapeTickerAndExecute) {
                         throw e;
-                    ErrorReporter.reportSubsystemError('AsshatTicker.tickImpl', e, task);
+                    }
+                    ErrorReporter.reportSubsystemError("AsshatTicker.tickImpl", e, task);
                 }
 
-                if (shift)
+                if (shift) {
                     tasks[i - shift] = task;
+                }
                 i += 1;
             }
 
-            if (shift)
+            if (shift) {
                 tasks.length -= shift;
+            }
         }
     }
 }

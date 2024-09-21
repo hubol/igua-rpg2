@@ -3,9 +3,10 @@ export function intervalWait(predicate: () => boolean) {
 
     return new Promise<void>(resolve => {
         interval = setInterval(() => {
-            if (predicate())
+            if (predicate()) {
                 resolve();
-        })
+            }
+        });
     })
-    .finally(() => interval !== undefined && clearInterval(interval));
+        .finally(() => interval !== undefined && clearInterval(interval));
 }

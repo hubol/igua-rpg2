@@ -1,6 +1,6 @@
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { container } from "../../lib/pixi/container";
-import { RpgEconomy } from "../rpg/rpg-economy"
+import { RpgEconomy } from "../rpg/rpg-economy";
 import { objValuable } from "./obj-valuable";
 
 type Counts = Record<RpgEconomy.Currency.Type, number>;
@@ -15,8 +15,9 @@ function solveCounts(total: number) {
         total -= count * value;
     }
 
-    if (total !== 0)
-        ErrorReporter.reportDevOnlyState('Did not solveCounts as expected', { total, result });
+    if (total !== 0) {
+        ErrorReporter.reportDevOnlyState("Did not solveCounts as expected", { total, result });
+    }
 
     return result;
 }
@@ -33,14 +34,18 @@ function solveTiers(count: number): Tiers {
     let i = 1;
 
     while (sum < count) {
-        if (i === 1)
+        if (i === 1) {
             ones += 2;
-        else if (i === 2)
+        }
+        else if (i === 2) {
             twos += 2;
-        else if (i === 3)
+        }
+        else if (i === 3) {
             threes += 2;
-        else if (i === 4)
+        }
+        else if (i === 4) {
             fours += 2;
+        }
 
         sum += i * 2;
 
@@ -71,21 +76,25 @@ function solveTiers(count: number): Tiers {
         if (fours > 0) {
             fours -= 1;
         }
-        else
+        else {
             twos -= 2;
+        }
     }
     else if (error === 3) {
-        if (threes > 0)
+        if (threes > 0) {
             threes -= 1;
+        }
         else {
             twos -= 1;
             ones -= 1;
         }
     }
-    else if (error === 2)
+    else if (error === 2) {
         twos -= 1;
-    else if (error === 1)
+    }
+    else if (error === 1) {
         ones -= 1;
+    }
 
     if (threes % 2 === 1) {
         if (ones === 1) {
@@ -135,17 +144,21 @@ function solveTiers(count: number): Tiers {
         threes -= 1;
     }
 
-    for (let i = 0; i < fours; i++)
-        tiers[i % 2 === 0 ? 'push' : 'unshift'](4);
+    for (let i = 0; i < fours; i++) {
+        tiers[i % 2 === 0 ? "push" : "unshift"](4);
+    }
 
-    for (let i = 0; i < threes; i++)
-        tiers[i % 2 === 0 ? 'push' : 'unshift'](3);
+    for (let i = 0; i < threes; i++) {
+        tiers[i % 2 === 0 ? "push" : "unshift"](3);
+    }
 
-    for (let i = 0; i < twos; i++)
-        tiers[i % 2 === 0 ? 'push' : 'unshift'](2);
+    for (let i = 0; i < twos; i++) {
+        tiers[i % 2 === 0 ? "push" : "unshift"](2);
+    }
 
-    for (let i = 0; i < ones; i++)
-        tiers[i % 2 === 0 ? 'push' : 'unshift'](1);
+    for (let i = 0; i < ones; i++) {
+        tiers[i % 2 === 0 ? "push" : "unshift"](1);
+    }
 
     return tiers;
 }
@@ -154,8 +167,8 @@ type Layout = RpgEconomy.Currency.Type[][];
 
 function solveLayout(counts: Counts, tiers: Tiers) {
     const sortedCounts = Object.entries(counts)
-    .map(([ type, value ]) => ({ type: type as RpgEconomy.Currency.Type, value }))
-    .sort((a, b) => b.value - a.value);
+        .map(([type, value]) => ({ type: type as RpgEconomy.Currency.Type, value }))
+        .sort((a, b) => b.value - a.value);
 
     const layout: Layout = tiers.map(() => []);
 
@@ -170,10 +183,12 @@ function solveLayout(counts: Counts, tiers: Tiers) {
             count.value -= 1;
             layout[index].push(count.type);
             if (layout[index].length >= tiers[index]) {
-                if (useMin)
+                if (useMin) {
                     min += 1;
-                else
+                }
+                else {
                     max -= 1;
+                }
             }
             useMin = !useMin;
         }

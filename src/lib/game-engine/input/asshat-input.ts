@@ -2,8 +2,8 @@ import { Logging } from "../../logging";
 import { Undefined } from "../../types/undefined";
 
 export enum InputModalityType {
-    Keyboard = 'Keyboard',
-    Gamepad = 'Gamepad',
+    Keyboard = "Keyboard",
+    Gamepad = "Gamepad",
 }
 
 export interface MappedInputModality<TAction extends string> {
@@ -42,8 +42,9 @@ export class AsshatInput<TAction extends string> {
     }
 
     start() {
-        for (const modality of this._modalities)
+        for (const modality of this._modalities) {
             modality.start();
+        }
     }
 
     tick() {
@@ -60,22 +61,24 @@ export class AsshatInput<TAction extends string> {
         }
 
         if (modalityWithLatestEventTimestamp !== this._currentModality) {
-            if (this._currentModality)
+            if (this._currentModality) {
                 this._currentModality.isCurrent = false;
+            }
 
             const fromType = this._currentModality?.type;
             this._currentModality = modalityWithLatestEventTimestamp;
             const toType = this._currentModality?.type;
 
-            if (fromType && toType)
+            if (fromType && toType) {
                 this.onModalityChanged(fromType, toType);
+            }
 
-            if (this._currentModality)
+            if (this._currentModality) {
                 this._currentModality.isCurrent = true;
+            }
         }
     }
 
     protected onModalityChanged(from: InputModalityType, to: InputModalityType) {
-        
     }
 }

@@ -1,7 +1,7 @@
 import { intervalWait } from "../../browser/interval-wait";
 import { Sound, SoundInstance } from "./sound";
 
-export type MusicTrack = string & { readonly __t: unique symbol; };
+export type MusicTrack = string & { readonly __t: unique symbol };
 
 interface NowPlaying {
     track: MusicTrack;
@@ -26,8 +26,9 @@ export class AsshatJukebox {
 
     async playAsync(track: MusicTrack) {
         this._latestPlayRequest = track;
-        if (this._nowPlaying?.track === track)
+        if (this._nowPlaying?.track === track) {
             return;
+        }
         const sound = await this._loader.load(track);
         if (this._latestPlayRequest === track) {
             this._nowPlaying?.instance?.stop();
@@ -51,12 +52,12 @@ class MusicTrackLoader {
     private readonly _loading = new Set<MusicTrack>();
 
     constructor(private readonly _destination: AudioNode) {
-
     }
 
     async load(track: MusicTrack) {
-        if (this._loaded[track])
+        if (this._loaded[track]) {
             return this._loaded[track];
+        }
 
         if (!this._loading.has(track)) {
             this._loading.add(track);

@@ -8,7 +8,7 @@ const { txs } = GeneratedTextureData;
 type Txs = typeof txs<Texture>;
 type Textures = ReturnType<Txs>;
 
-export let Tx: Textures = <any>{};
+export let Tx: Textures = <any> {};
 
 export async function loadTextureAssets(progress: JobProgress) {
     BaseTexture.defaultOptions.scaleMode = SCALE_MODES.NEAREST;
@@ -18,8 +18,9 @@ export async function loadTextureAssets(progress: JobProgress) {
 
     const atlases = await Promise.all(
         GeneratedTextureData.atlases.map(
-            atlas => loadTexture(atlas.url, progress)
-        ));
+            atlas => loadTexture(atlas.url, progress),
+        ),
+    );
 
     const newTx: Parameters<Txs>[0] = (data) => {
         const baseTexture = atlases[data.atlas].baseTexture;
@@ -27,7 +28,7 @@ export async function loadTextureAssets(progress: JobProgress) {
         const tx = new Texture(baseTexture, frame);
         tx.id = data.id;
         return tx;
-    }
+    };
 
     Tx = GeneratedTextureData.txs(newTx);
 
@@ -39,7 +40,7 @@ const textureOptions: IBaseTextureOptions = {
     scaleMode: SCALE_MODES.NEAREST,
     multisample: MSAA_QUALITY.NONE,
     anisotropicLevel: 0,
-}
+};
 
 async function loadTexture(url: string, progress: JobProgress) {
     const bitmap = await loadImageBitmap(url);

@@ -1,4 +1,4 @@
-import {nlerp} from "./number";
+import { nlerp } from "./number";
 import { Vector, VectorSimple } from "./vector-type";
 
 export function perpendicular(vec: Vector) {
@@ -21,11 +21,12 @@ export function sqDistance(vec1: VectorSimple, vec2: VectorSimple) {
 }
 
 export function normalize(vec: Vector) {
-    const d = (Math.sqrt(Math.pow(vec.x, 2) + Math.pow(vec.y, 2)));
+    const d = Math.sqrt(Math.pow(vec.x, 2) + Math.pow(vec.y, 2));
     if (d === 0) {
         vec.x = 1;
         vec.y = 0;
-    } else {
+    }
+    else {
         vec.x /= d;
         vec.y /= d;
     }
@@ -40,18 +41,18 @@ export function vlerp(a: Vector, b: VectorSimple, factor: number): Vector {
 }
 
 export function moveTowards(a: Vector, b: VectorSimple, d: number) {
-    if(d <= 0)
-        return a;
-    const sp = distance(a, b);
-    if (sp<=d)
-    {
-        a.x=b.x;
-        a.y=b.y;
+    if (d <= 0) {
         return a;
     }
-    d=d/sp;
-    a.x=a.x*(1-d)+b.x*(d);
-    a.y=a.y*(1-d)+b.y*(d);
+    const sp = distance(a, b);
+    if (sp <= d) {
+        a.x = b.x;
+        a.y = b.y;
+        return a;
+    }
+    d = d / sp;
+    a.x = a.x * (1 - d) + b.x * d;
+    a.y = a.y * (1 - d) + b.y * d;
     return a;
 }
 

@@ -43,11 +43,10 @@ export class Sound {
     }
 }
 
-type RampableParam = 'rate' | 'gain';
+type RampableParam = "rate" | "gain";
 
 export class SoundInstance {
     constructor(private readonly _sourceNode: AudioBufferSourceNode, private readonly _gainNode: GainNode) {
-
     }
 
     private _getAudioParam(param: RampableParam) {
@@ -60,7 +59,10 @@ export class SoundInstance {
     }
 
     linearRamp(param: RampableParam, value: number, durationSeconds: Seconds) {
-        this._getAudioParam(param).linearRampToValueAtTime(value, this._sourceNode.context.currentTime + durationSeconds);
+        this._getAudioParam(param).linearRampToValueAtTime(
+            value,
+            this._sourceNode.context.currentTime + durationSeconds,
+        );
         return this;
     }
 
@@ -95,7 +97,6 @@ export class SoundInstance {
 
 class SoundWith {
     constructor(private readonly _sound: Sound) {
-
     }
 
     rate(rate: number) {

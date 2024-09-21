@@ -17,6 +17,6 @@ export namespace RpgAttack {
             poison: model.poison ?? 0,
             wetness: model.wetness ?? 0,
             versus: model.versus ?? RpgFaction.Player,
-        }
+        };
     }
 }

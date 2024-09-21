@@ -43,8 +43,8 @@ export function deepChildContainerFindsItsTicker() {
 
     c3.step(() => {
         count += 1;
-    })
-    
+    });
+
     c2.addChild(c3);
     c1.addChild(c2);
 
@@ -62,12 +62,12 @@ export function deepChildContainerFindsItsTickerEvenThoughParentDoesntHaveItWhen
     const c3 = new Container();
 
     let count = 0;
-    
+
     c2.addChild(c3);
 
     c3.step(() => {
         count += 1;
-    })
+    });
 
     c1.addChild(c2);
 
@@ -128,8 +128,8 @@ export function canAddStepFnAfterAddedToContainer() {
 
     const ticker = new AsshatTicker();
     const c = new TickerContainer(ticker);
-    
-    const d = createDisplayObject()
+
+    const d = createDisplayObject();
 
     c.addChild(d);
 

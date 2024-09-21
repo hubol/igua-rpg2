@@ -11,9 +11,10 @@ export function scnPotteryHouse() {
 
     const level = Lvl.Potter();
     scene.stage.step(() => {
-        if (Input.justWentDown('CastSpell'))
+        if (Input.justWentDown("CastSpell")) {
             RpgProgress.character.attributes.intelligence += 1;
-    })
+        }
+    });
     level.IguanaNpc.mixin(mxnCutscene, function* () {
         yield* show("Go away!");
         yield* level.IguanaNpc.walkTo(level.IguanaNpc.x + 100);

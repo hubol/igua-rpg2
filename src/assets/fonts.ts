@@ -9,16 +9,16 @@ import { intervalWait } from "../lib/browser/interval-wait";
 type Style = Partial<Omit<IBitmapTextStyle, "fontName">>;
 
 export const objText = {
-    Small(text = '', style: Style = {}) {
+    Small(text = "", style: Style = {}) {
         return new BitmapText(text, { fontName: Fonts.Flaccid.font, ...style });
     },
-    MediumDigits(text = '', style: Style = {}) {
+    MediumDigits(text = "", style: Style = {}) {
         return new BitmapText(text, { fontName: Fonts.Diggit.font, ...style });
     },
-    Large(text = '', style: Style = {}) {
+    Large(text = "", style: Style = {}) {
         return new BitmapText(text, { fontName: Fonts.ErotixLight.font, ...style });
     },
-    LargeBold(text = '', style: Style = {}) {
+    LargeBold(text = "", style: Style = {}) {
         return new BitmapText(text, { fontName: Fonts.Erotix.font, ...style });
     },
 };
@@ -30,7 +30,7 @@ const Fonts = {
     Flaccid: Force<BitmapFont>(),
 };
 
-type TxFontKey = keyof typeof Tx['Font'];
+type TxFontKey = keyof typeof Tx["Font"];
 
 export async function loadFontAssets(progress: JobProgress) {
     const load = async (fontKey: keyof typeof Fonts, fntUrl: string, txFontKey: TxFontKey) => {
@@ -49,7 +49,7 @@ export async function loadFontAssets(progress: JobProgress) {
 async function loadBitmapFontAndTrackProgress(fntUrl: string, txFontKey: TxFontKey, progress: JobProgress) {
     progress.increaseTotalJobsCount(1);
 
-    const [ createBitmapFont ] = await Promise.all([
+    const [createBitmapFont] = await Promise.all([
         createBitmapFontFactory(fntUrl),
         intervalWait(() => !!Tx?.Font?.[txFontKey]),
     ]);

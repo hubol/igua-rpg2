@@ -19,8 +19,9 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
     let locked = false;
 
     const scene = SceneLibrary.maybeFindByName(sceneName);
-    if (!scene)
-        ErrorReporter.reportSubsystemError('objDoor', `Scene with name "${sceneName}" does not exist!`);
+    if (!scene) {
+        ErrorReporter.reportSubsystemError("objDoor", `Scene with name "${sceneName}" does not exist!`);
+    }
 
     const obj = Sprite.from(Tx.OpenDoor)
         .merge({
@@ -30,21 +31,22 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
             set locked(value) {
                 locked = value;
                 obj.texture = locked ? Tx.LockedDoor : Tx.OpenDoor;
-            }
+            },
         })
         .mixin(mxnInteract, () => {
             if (obj.locked) {
                 Cutscene.play(() => show("Closed."));
                 return;
             }
-            if (scene)
+            if (scene) {
                 throw new EscapeTickerAndExecute(() => {
                     Rng.choose(Sfx.Interact.DoorOpen0, Sfx.Interact.DoorOpen1).play();
                     // TODO this all really needs to be encapsulated somewhere
                     RpgProgress.character.position.sceneName = sceneName;
                     RpgProgress.character.position.checkpointName = checkpointName;
-                    sceneStack.replace(scene, { useGameplay: true })
+                    sceneStack.replace(scene, { useGameplay: true });
                 });
+            }
         });
 
     return obj;

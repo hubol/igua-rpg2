@@ -14,8 +14,9 @@ export function vnew(): Vector;
 export function vnew(x: number, y: number): Vector;
 export function vnew(vector: VectorSimple): Vector;
 export function vnew(x_vector?: number | VectorSimple, y?: number) {
-    if (x_vector === undefined)
+    if (x_vector === undefined) {
         return new Vector(0, 0);
+    }
     return y === undefined
         ? new Vector((x_vector as VectorSimple).x, (x_vector as VectorSimple).y)
         : new Vector(x_vector as number, y!);
@@ -37,7 +38,7 @@ export interface Vector extends VectorSimple {
     vlength: number;
 }
 
-type PropertyDefinitionShape = Partial<Record<keyof Vector, PropertyDescriptor & ThisType<any>>>
+type PropertyDefinitionShape = Partial<Record<keyof Vector, PropertyDescriptor & ThisType<any>>>;
 function createPropertyDefinitions<T extends PropertyDefinitionShape>(t: T): T {
     return t;
 }
@@ -45,7 +46,7 @@ function createPropertyDefinitions<T extends PropertyDefinitionShape>(t: T): T {
 const propertyDefinitions = createPropertyDefinitions({
     vlength: {
         get: function (this: Vector) {
-            return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y,2));
+            return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
         },
         set: function (this: Vector, l) {
             normalize(this).scale(Math.max(0, l));
@@ -106,8 +107,9 @@ const propertyDefinitions = createPropertyDefinitions({
     },
     vclamp: {
         value: function (this: Vector, length: number) {
-            if (this.vlength > length)
+            if (this.vlength > length) {
                 return this.normalize().scale(length);
+            }
             return this;
         },
         configurable: true,
@@ -125,8 +127,8 @@ const propertyDefinitions = createPropertyDefinitions({
             return normalize(this);
         },
         configurable: true,
-    }
-})
+    },
+});
 
 type VectorProperty = keyof typeof propertyDefinitions;
 
@@ -136,10 +138,11 @@ interface DefineVectorPropertiesArgs {
 
 export function defineVectorProperties(prototype: unknown, { omit = [] }: Partial<DefineVectorPropertiesArgs> = {}) {
     const omitSet = new Set(omit);
-    const myProperties = { };
+    const myProperties = {};
     for (const key in propertyDefinitions) {
-        if (omitSet.has(key as VectorProperty))
+        if (omitSet.has(key as VectorProperty)) {
             continue;
+        }
         myProperties[key] = propertyDefinitions[key];
     }
 

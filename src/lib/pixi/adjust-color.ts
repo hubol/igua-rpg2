@@ -21,21 +21,22 @@ interface WorkingColor {
     l: Float100;
 }
 
-const rgbBuffer = { r: 0, g: 0, b: 0 }
+const rgbBuffer = { r: 0, g: 0, b: 0 };
 type RgbBuffer = typeof rgbBuffer;
 
-const hsvBuffer = { h: 0, s: 0, v: 0 }
+const hsvBuffer = { h: 0, s: 0, v: 0 };
 type HsvBuffer = typeof hsvBuffer;
 
 function ensureHsv() {
-    if (c.hsv)
+    if (c.hsv) {
         return;
+    }
 
     if (c.hsl) {
         // https://github.com/omgovich/colord/blob/3f859e03b0ca622eb15480f611371a0f15c9427f/src/colorModels/hsl.ts#L33-L42
         const s = c.s * ((c.l < 50 ? c.l : 100 - c.l) / 100);
 
-        c.s = s > 0 ? ((2 * s) / (c.l + s)) * 100 : 0; 
+        c.s = s > 0 ? ((2 * s) / (c.l + s)) * 100 : 0;
         c.v = c.l + s;
     }
     else if (c.rgb) {
@@ -45,10 +46,10 @@ function ensureHsv() {
 
         const hh = delta
             ? max === c.r
-            ? (c.g - c.b) / delta
-            : max === c.g
-            ? 2 + (c.b - c.r) / delta
-            : 4 + (c.r - c.g) / delta
+                ? (c.g - c.b) / delta
+                : max === c.g
+                ? 2 + (c.b - c.r) / delta
+                : 4 + (c.r - c.g) / delta
             : 0;
 
         c.h = 60 * (hh < 0 ? hh + 6 : hh);
@@ -61,8 +62,9 @@ function ensureHsv() {
 }
 
 function ensureHsl() {
-    if (c.hsl)
+    if (c.hsl) {
         return;
+    }
 
     ensureHsv();
 
@@ -79,8 +81,9 @@ function ensureHsl() {
 const matrix: number[] = [];
 
 function ensureRgb() {
-    if (c.rgb)
+    if (c.rgb) {
         return;
+    }
 
     ensureHsv();
 
@@ -142,25 +145,25 @@ const AdjustColorChainer = {
     toRgb(buffer: {} = rgbBuffer) {
         ensureRgb();
 
-        (<RgbBuffer>buffer).r = c.r;
-        (<RgbBuffer>buffer).g = c.g;
-        (<RgbBuffer>buffer).b = c.b;
+        (<RgbBuffer> buffer).r = c.r;
+        (<RgbBuffer> buffer).g = c.g;
+        (<RgbBuffer> buffer).b = c.b;
         return buffer as RgbBuffer;
     },
     toHsv(buffer: {} = hsvBuffer) {
         ensureHsv();
 
-        (<HsvBuffer>buffer).h = c.h;
-        (<HsvBuffer>buffer).s = c.s;
-        (<HsvBuffer>buffer).v = c.v;
+        (<HsvBuffer> buffer).h = c.h;
+        (<HsvBuffer> buffer).s = c.s;
+        (<HsvBuffer> buffer).v = c.v;
         return buffer as HsvBuffer;
     },
     toPixi() {
         ensureRgb();
 
         return Math.round(c.r) * 65536 + Math.round(c.g) * 256 + Math.round(c.b);
-    }
-}
+    },
+};
 
 export const AdjustColor = {
     rgb(r: Float255, g: Float255, b: Float255) {
@@ -200,6 +203,6 @@ export const AdjustColor = {
         return AdjustColorChainer;
     },
     hex(src: string) {
-        return this.pixi(Number.parseInt('0x' + src.replaceAll('#', '')));
-    }
-}
+        return this.pixi(Number.parseInt("0x" + src.replaceAll("#", "")));
+    },
+};

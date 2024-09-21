@@ -10,7 +10,7 @@ export class IguaLayers {
         this.scene = new Container().named("SceneStack");
         const overlayObj = objOverlay().named("Overlay");
         this.overlay = overlayObj;
-        
+
         _root.addChild(this.scene, overlayObj);
 
         console.log(...Logging.componentArgs(this));

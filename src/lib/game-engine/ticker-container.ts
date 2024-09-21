@@ -6,7 +6,7 @@ export class TickerContainer extends Container {
         super();
         if (startTickingOnceAdded) {
             const tickFn = () => _ticker.tick();
-            this.once('added', () => {
+            this.once("added", () => {
                 const parent = this.parent;
                 // TODO sucks
                 (this as any).cancellationToken;

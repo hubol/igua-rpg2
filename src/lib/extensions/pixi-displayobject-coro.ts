@@ -22,12 +22,13 @@ Object.defineProperties(DisplayObject.prototype, {
             this.ticker.add(
                 Coro.runner.bind(null, generator, Coro.createRunnerState()),
                 this,
-                order);
+                order,
+            );
 
             return this;
         },
         configurable: true,
     },
-})
+});
 
 export default 0;

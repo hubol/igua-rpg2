@@ -9,16 +9,17 @@ import { Integer, Unit } from "../../lib/math/number-alias-types";
 const r = new Rectangle();
 
 export function objEye(
-        scleraSpr: Sprite,
-        pupilSpr: Sprite,
-        eyelidTint: number,
-        eyelidRestingInteger: Integer) {
+    scleraSpr: Sprite,
+    pupilSpr: Sprite,
+    eyelidTint: number,
+    eyelidRestingInteger: Integer,
+) {
     const scleraTx = scleraSpr.texture;
 
     const mask = objSpriteCopy(scleraSpr);
 
     const bounds = mask.getBounds(false, r);
-    
+
     const pivotFactor = eyelidRestingInteger < 0 ? 1 : 0;
 
     const eyelid = new Graphics().beginFill(eyelidTint).drawRect(0, 0, scleraTx.width, scleraTx.height);
@@ -33,7 +34,7 @@ export function objEye(
         .merge({ closed: 0 as Unit, look: vnew(), pupilSpr, shapeObj: mask })
         .step(() => {
             eyelid.scale.y = Math.round(nlerp(eyelidRestingScale, 1, c.closed) * scleraTx.height) / scleraTx.height;
-        })
+        });
 
     c.mask = mask;
 
@@ -61,10 +62,12 @@ export function objEyes(left: ObjEye, right: ObjEye) {
 
             if (c.eyelidMotion !== 0) {
                 c.closed = Math.max(0, Math.min(1, c.closed + c.eyelidMotion * 0.2));
-                if (c.closed === 1 && c.eyelidMotion > 0)
+                if (c.closed === 1 && c.eyelidMotion > 0) {
                     c.eyelidMotion = -1;
-                if (c.closed === 0 && c.eyelidMotion < 0)
+                }
+                if (c.closed === 0 && c.eyelidMotion < 0) {
                     c.eyelidMotion = 0;
+                }
             }
         });
 

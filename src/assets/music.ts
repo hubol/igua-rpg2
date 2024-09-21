@@ -3,7 +3,8 @@ import { GeneratedMusicData } from "./generated/music/generated-music-data";
 
 type MusicId = keyof typeof GeneratedMusicData;
 
-export const Mzk: Record<MusicId, MusicTrack> = <any>{};
+export const Mzk: Record<MusicId, MusicTrack> = <any> {};
 
-for (const key in GeneratedMusicData)
+for (const key in GeneratedMusicData) {
     Mzk[key] = GeneratedMusicData[key].ogg;
+}

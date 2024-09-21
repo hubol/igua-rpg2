@@ -12,11 +12,11 @@ export function setEngineConfig(engineConfig: EngineConfigType) {
 
 export let EngineConfig: EngineConfigType = {
     get sceneStack() {
-        throw new Error('EngineConfig.sceneStack is not implemented!');
+        throw new Error("EngineConfig.sceneStack is not implemented!");
         return undefined as any;
     },
     get showDefaultStage() {
-        throw new Error('EngineConfig.showDefaultStage is not implemented!');
+        throw new Error("EngineConfig.showDefaultStage is not implemented!");
         return undefined as any;
-    }
-}
+    },
+};

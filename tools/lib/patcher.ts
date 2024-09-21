@@ -11,7 +11,6 @@ export interface PatcherConfig {
 
 export class Patcher {
     constructor(private readonly _config: PatcherConfig) {
-
     }
 
     patch() {

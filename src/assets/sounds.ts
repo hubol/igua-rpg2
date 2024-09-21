@@ -14,10 +14,10 @@ const { sfxs } = GeneratedSfxData;
 type Sfxs = typeof sfxs<Sound>;
 type Sounds = Awaited<ReturnType<Sfxs>>;
 
-export let Sfx: Sounds = <any>{};
+export let Sfx: Sounds = <any> {};
 
 export async function loadSoundAssets(progress: JobProgress) {
-    RequireCapability('oggSupport');
+    RequireCapability("oggSupport");
 
     const soundsToLoadCount = Object.keys(GeneratedSfxData).length;
     progress.increaseTotalJobsCount(soundsToLoadCount * 2);

@@ -11,17 +11,17 @@ declare module "pixi.js" {
 Object.defineProperties(Container.prototype, {
     flipH: {
         value: function (this: Container & ContainerPrivate, sign = -1) {
-            return flipXY(this, 'x', '_flipAdjustedPivotX', 'a', sign);
+            return flipXY(this, "x", "_flipAdjustedPivotX", "a", sign);
         },
         configurable: true,
     },
     flipV: {
         value: function (this: Container & ContainerPrivate, sign = -1) {
-            return flipXY(this, 'y', '_flipAdjustedPivotY', 'd', sign);
+            return flipXY(this, "y", "_flipAdjustedPivotY", "d", sign);
         },
         configurable: true,
     },
-})
+});
 
 const r = new Rectangle();
 const v1 = vnew();
@@ -32,10 +32,17 @@ interface ContainerPrivate {
     _flipAdjustedPivotY: number;
 }
 
-function flipXY(c: Container & ContainerPrivate, scaleKey: 'x' | 'y', adjustedPivotKey: keyof ContainerPrivate, worldTransformScaleKey: 'a' | 'd', sign: number) {
+function flipXY(
+    c: Container & ContainerPrivate,
+    scaleKey: "x" | "y",
+    adjustedPivotKey: keyof ContainerPrivate,
+    worldTransformScaleKey: "a" | "d",
+    sign: number,
+) {
     const currentSign = Math.sign(c.scale[scaleKey]);
-    if (currentSign === 0 || currentSign === sign)
+    if (currentSign === 0 || currentSign === sign) {
         return c;
+    }
 
     const worldScale = c.worldTransform[worldTransformScaleKey];
 

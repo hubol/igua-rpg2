@@ -14,14 +14,16 @@ export function createActionRepeater(o: DisplayObject, action: Action) {
     }
 
     o.step(() => {
-        if (!Input.isDown(action))
+        if (!Input.isDown(action)) {
             reset();
+        }
         else {
             keyDownFor++;
             justWentDown = keyDownFor === 1
                 || (keyDownFor % 2 === 0 && keyDownFor > 15);
-            if (justWentDown)
+            if (justWentDown) {
                 repeats++;
+            }
         }
     });
 
@@ -32,6 +34,6 @@ export function createActionRepeater(o: DisplayObject, action: Action) {
         get repeats() {
             return repeats;
         },
-        reset
-    }
+        reset,
+    };
 }

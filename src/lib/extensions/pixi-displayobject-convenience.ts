@@ -9,7 +9,7 @@ declare module "pixi.js" {
     interface DisplayObject {
         named(name: string): this;
         log(key?: string): this;
-        
+
         scaled(vector: VectorSimple): this;
         scaled(scaleX: number, scaleY: number): this;
 
@@ -41,38 +41,42 @@ Object.defineProperties(DisplayObject.prototype, {
     log: {
         value: function (this: DisplayObject, key?: string) {
             if (!key) {
-                while (window['obj' + logObjIndex]) {
+                while (window["obj" + logObjIndex]) {
                     logObjIndex += 1;
                 }
-    
-                key = 'obj' + logObjIndex;
+
+                key = "obj" + logObjIndex;
             }
-            
+
             window[key] = this;
             console.log(...Logging.componentArgs(key, this));
 
             return this;
-        }
+        },
     },
     pivoted: {
         value: function (this: Container, x_vector: number | VectorSimple, y?: number) {
-            if (y === undefined)
-                this.transform.pivot.set((<VectorSimple>x_vector).x, (<VectorSimple>x_vector).y)
-            else
-                this.transform.pivot.set(<number>x_vector, y);
+            if (y === undefined) {
+                this.transform.pivot.set((<VectorSimple> x_vector).x, (<VectorSimple> x_vector).y);
+            }
+            else {
+                this.transform.pivot.set(<number> x_vector, y);
+            }
 
             return this;
-        }
+        },
     },
     scaled: {
         value: function (this: Container, scaleX_vector: number | VectorSimple, scaleY?: number) {
-            if (scaleY === undefined)
-                this.transform.scale.set((<VectorSimple>scaleX_vector).x, (<VectorSimple>scaleX_vector).y);
-            else
-                this.transform.scale.set(<number>scaleX_vector, scaleY);
+            if (scaleY === undefined) {
+                this.transform.scale.set((<VectorSimple> scaleX_vector).x, (<VectorSimple> scaleX_vector).y);
+            }
+            else {
+                this.transform.scale.set(<number> scaleX_vector, scaleY);
+            }
 
             return this;
-        }
+        },
     },
     show: {
         value: function (this: DisplayObject, container = EngineConfig.showDefaultStage) {
@@ -83,17 +87,17 @@ Object.defineProperties(DisplayObject.prototype, {
     merge: {
         value: function (this: DisplayObject, pojo: Pojo) {
             return merge(this, pojo);
-        }
+        },
     },
     getMinY: {
         value: function (this: DisplayObject) {
             return this.getBounds(false, r).y;
-        }
+        },
     },
     getMaxY: {
         value: function (this: DisplayObject) {
             return this.getBounds(false, r).y + r.height;
-        }
+        },
     },
 });
 
@@ -109,22 +113,22 @@ Object.defineProperties(Container.prototype, {
             }
 
             tempDisplayObjects.length = 0;
-        }
+        },
     },
     sized: {
         value: function (this: Container, width_vector: number | VectorSimple, height?: number) {
             if (height === undefined) {
-                this.width = (<VectorSimple>width_vector).x;
-                this.height = (<VectorSimple>width_vector).y;
+                this.width = (<VectorSimple> width_vector).x;
+                this.height = (<VectorSimple> width_vector).y;
             }
             else {
-                this.width = <number>width_vector;
+                this.width = <number> width_vector;
                 this.height = height;
             }
 
             return this;
-        }
-    }
-})
+        },
+    },
+});
 
 export default 0;

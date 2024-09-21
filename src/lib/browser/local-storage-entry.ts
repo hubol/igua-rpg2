@@ -1,12 +1,13 @@
 import { Serializer } from "../object/serializer";
 
 export class LocalStorageEntry<T> {
-    constructor(readonly key: string) { }
+    constructor(readonly key: string) {}
 
     get value(): T | undefined {
         const value = localStorage.getItem(this.key);
-        if (value)
+        if (value) {
             return Serializer.deserialize(value);
+        }
     }
 
     set value(value: T) {

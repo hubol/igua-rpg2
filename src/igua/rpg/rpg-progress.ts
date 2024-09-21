@@ -23,20 +23,20 @@ function getInitialRpgProgress() {
             },
             looks: getDefaultLooks(),
             position: {
-                sceneName: '',
-                checkpointName: '',
-            }
+                sceneName: "",
+                checkpointName: "",
+            },
         },
         flags: {
             test: false,
         },
         uids: {
             valuables: new Set<number>(),
-        }
+        },
     };
 }
 
 export const RpgProgress = getInitialRpgProgress();
 
-export type RpgProgressUids = keyof typeof RpgProgress['uids'];
-export type RpgProgressFlags = DeepKeyOf.Leaves<typeof RpgProgress['flags']>;
+export type RpgProgressUids = keyof typeof RpgProgress["uids"];
+export type RpgProgressFlags = DeepKeyOf.Leaves<typeof RpgProgress["flags"]>;

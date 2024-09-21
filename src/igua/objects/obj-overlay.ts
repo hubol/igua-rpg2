@@ -16,9 +16,9 @@ export function objOverlay() {
             hud: hudObj as Omit<ObjHud, keyof Container>,
             messages,
             dev,
-            solid: solidObj as Pick<ObjSolidOverlay, 'fadeIn' | 'fadeOut' | 'tint' | 'blendMode'>,
-            enemyHealthBars: enemyHealthBarsObj as Pick<ObjEnemyHealthBars, 'getRpgStatusEffects'>,
-        })
+            solid: solidObj as Pick<ObjSolidOverlay, "fadeIn" | "fadeOut" | "tint" | "blendMode">,
+            enemyHealthBars: enemyHealthBarsObj as Pick<ObjEnemyHealthBars, "getRpgStatusEffects">,
+        });
 }
 
 type ObjOverlay = ReturnType<typeof objOverlay>;

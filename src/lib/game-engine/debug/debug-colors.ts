@@ -1,14 +1,15 @@
 import { LocalStorageEntry } from "../../browser/local-storage-entry";
 import { AdjustColor } from "../../pixi/adjust-color";
 
-const debugColorsLocalStorage = new LocalStorageEntry<string[]>('debugColors');
+const debugColorsLocalStorage = new LocalStorageEntry<string[]>("debugColors");
 let debugColors: string[] = [];
 
 export const DebugColors = {
     get() {
         const value = debugColorsLocalStorage.value;
-        if (value)
+        if (value) {
             debugColors = value;
+        }
         return debugColors;
     },
     getPixi() {
@@ -18,4 +19,4 @@ export const DebugColors = {
         debugColors[index] = value;
         debugColorsLocalStorage.value = debugColors;
     },
-}
+};

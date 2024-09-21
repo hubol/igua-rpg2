@@ -22,7 +22,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
 
     const enemy: RpgEnemy.Model = {
         pride: 0,
-    }
+    };
 
     const died = () => {
         // TODO needs more
@@ -32,13 +32,14 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         Sfx.Impact.DefeatEnemy.play();
         const drop = RpgLoot.Methods.drop(loot, enemy);
         objLootDrop(drop).at(obj).show(obj.parent);
-        enemyObj.dispatch('mxnEnemy.died');
+        enemyObj.dispatch("mxnEnemy.died");
         obj.destroy();
-    }
+    };
 
     const effects: RpgStatus.Effects = merge(
         { died },
-        layers.overlay.enemyHealthBars.getRpgStatusEffects(obj, status));
+        layers.overlay.enemyHealthBars.getRpgStatusEffects(obj, status),
+    );
 
     // TODO should it expose a way to register hitboxes/hurtboxes
     // Or should that be another mixin?
@@ -46,11 +47,11 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
     // TODO maybe exposes a way to create projectiles associated with this enemy?
 
     const enemyObj = obj.mixin(mxnRpgStatus, { status, effects, hurtboxes: args.hurtboxes })
-        .dispatches<'mxnEnemy.died'>()
+        .dispatches<"mxnEnemy.died">()
         .merge({
             strikePlayer(attack: RpgAttack.Model) {
                 playerObj.damage(attack, enemy);
-            }
+            },
         });
 
     return enemyObj;

@@ -2,18 +2,18 @@ import { Vector } from "../../math/vector-type";
 
 export type GamepadControls<TAction extends string> = {
     [index in TAction]: GamepadControlType[];
-}
+};
 
 function button(index: number) {
-    return { index, kind: 'button' as const };
+    return { index, kind: "button" as const };
 }
 
 function axis(index: number, sign: 1 | -1) {
-    return { index, sign, kind: 'axis' as const };
+    return { index, sign, kind: "axis" as const };
 }
 
 function axisUnit(indices: number[], unit: Vector) {
-    return { indices, unit, kind: 'axisUnit' as const };
+    return { indices, unit, kind: "axisUnit" as const };
 }
 
 type ButtonControl = ReturnType<typeof button>;
@@ -54,5 +54,5 @@ export const StandardMapping = {
         JoystickRightVertical: 3,
         JoystickLeft: [0, 1],
         JoystickRight: [2, 3],
-    }
+    },
 };

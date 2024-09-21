@@ -1,5 +1,5 @@
 import { Logging } from "../logging";
-import {Force} from "../types/force";
+import { Force } from "../types/force";
 
 export class Animator {
     private readonly _work: Function[] = [];
@@ -38,8 +38,9 @@ export class Animator {
     }
 
     private _update() {
-        for (const work of this._work)
+        for (const work of this._work) {
             work();
+        }
     }
 
     start() {

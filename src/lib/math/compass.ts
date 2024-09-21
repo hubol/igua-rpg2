@@ -9,4 +9,4 @@ export const Compass = {
     SouthWest: Object.freeze(vnew(-1, 1)),
     West: Object.freeze(vnew(-1, 0)),
     NorthWest: Object.freeze(vnew(-1, -1)),
-}
+};

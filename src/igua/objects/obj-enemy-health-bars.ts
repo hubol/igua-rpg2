@@ -7,14 +7,15 @@ import { vnew } from "../../lib/math/vector-type";
 import { scene } from "../globals";
 
 export function objEnemyHealthBars() {
-    const getRpgStatusEffects = (obj: DisplayObject, status: RpgStatus.Model): Omit<RpgStatus.Effects, 'died'> => {
+    const getRpgStatusEffects = (obj: DisplayObject, status: RpgStatus.Model): Omit<RpgStatus.Effects, "died"> => {
         let healthBarObj = Undefined<ObjEnemyHealthBar>();
 
         const ensureHealthBarObj = () => {
-            if (!healthBarObj || healthBarObj.destroyed)
+            if (!healthBarObj || healthBarObj.destroyed) {
                 healthBarObj = objEnemyHealthBar(obj, status).show(c);
+            }
             return healthBarObj;
-        }
+        };
 
         return {
             healed(value, delta) {
@@ -23,10 +24,10 @@ export function objEnemyHealthBars() {
             tookDamage(value, delta, kind) {
                 ensureHealthBarObj().effects.tookDamage(value, delta, kind);
             },
-        }
-    }
+        };
+    };
 
-    const c = container().named('EnemyHealthBars')
+    const c = container().named("EnemyHealthBars")
         .merge({
             getRpgStatusEffects,
         });
@@ -42,14 +43,17 @@ function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model) {
 
     return objHealthBar(32, 7, status.healthMax, status.healthMax)
         .step(self => {
-            if (!parent)
+            if (!parent) {
                 parent = obj.parent;
-            if (parent.destroyed)
+            }
+            if (parent.destroyed) {
                 return self.destroy();
+            }
             // TODO should be a cuter in/out animation
             self.visible = self.stepsSinceChange < 60;
-            if (!self.visible && obj.destroyed)
+            if (!self.visible && obj.destroyed) {
                 return self.destroy();
+            }
 
             if (!obj.destroyed) {
                 obj.getBounds(false, r);
@@ -58,7 +62,7 @@ function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model) {
             }
 
             self.at(vworld).add(scene.camera, -1).add(-Math.round(self.width / 2), -self.height - 1);
-        })
+        });
 }
 
 type ObjEnemyHealthBar = ReturnType<typeof objEnemyHealthBar>;

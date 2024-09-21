@@ -29,19 +29,23 @@ Object.defineProperties(Container.prototype, {
     // Because I have no idea what they do!
     destroy: {
         value: function (this: Container, options) {
-            if (options !== undefined && options !== defaultContainerDestroyOptions)
-                throw new Error(`Specifying options to Container.destroy() is not supported! Got: ${JSON.stringify(options)}`);
+            if (options !== undefined && options !== defaultContainerDestroyOptions) {
+                throw new Error(
+                    `Specifying options to Container.destroy() is not supported! Got: ${JSON.stringify(options)}`,
+                );
+            }
             _container_destroy.call(this, defaultContainerDestroyOptions);
         },
         configurable: true,
-    }
+    },
 });
 
 Object.defineProperties(DisplayObject.prototype, {
     ticker: {
         get: function (this: DisplayObject & DisplayObjectPrivate) {
-            if (this._ticker)
+            if (this._ticker) {
                 return this._ticker;
+            }
 
             if (this.parent) {
                 const parentTicker = this.parent.ticker;
@@ -54,11 +58,11 @@ Object.defineProperties(DisplayObject.prototype, {
             }
 
             const lazyTicker = new LazyTicker(this);
-            this.once('added', () => {
+            this.once("added", () => {
                 const parentTicker = this.parent.ticker;
                 if (isLazyTicker(parentTicker)) {
                     if (!isLazyTicker(this._ticker)) {
-                        throw new Error('Expected a LazyTicker, but got something else!');
+                        throw new Error("Expected a LazyTicker, but got something else!");
                     }
 
                     parentTicker.push(this._ticker);
@@ -83,20 +87,23 @@ Object.defineProperties(DisplayObject.prototype, {
         get: function (this: DisplayObject & DisplayObjectPrivate) {
             if (!this._cancellationToken) {
                 this._cancellationToken = new CancellationToken();
-                
-                if (this.destroyed)
+
+                if (this.destroyed) {
                     this._cancellationToken!.cancel();
-                else
-                    this.on('destroyed', () => this._cancellationToken!.cancel());
+                }
+                else {
+                    this.on("destroyed", () => this._cancellationToken!.cancel());
+                }
             }
 
             return this._cancellationToken;
-        }
+        },
     },
     step: {
         value: function (this: DisplayObject & DisplayObjectPrivate, stepFn: (self?: any) => unknown, order = 0) {
-            if (stepFn.length)
+            if (stepFn.length) {
                 stepFn = stepFn.bind(null, this);
+            }
 
             this.cancellationToken;
 

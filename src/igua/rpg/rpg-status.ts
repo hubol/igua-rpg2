@@ -6,8 +6,8 @@ import { RpgFaction } from "./rpg-faction";
 export namespace RpgStatus {
     const Consts = {
         FullyPoisonedHealth: 5,
-    }
-    
+    };
+
     export interface Model {
         faction: RpgFaction;
         health: number;
@@ -29,13 +29,13 @@ export namespace RpgStatus {
             emotionalDamageIsFatal: boolean;
         };
     }
-    
+
     export enum DamageKind {
         Physical,
         Poison,
         Emotional,
     }
-    
+
     export interface Effects {
         healed(value: number, delta: number): void;
         tookDamage(value: number, delta: number, kind: DamageKind): void;
@@ -55,7 +55,7 @@ export namespace RpgStatus {
     }
 
     type DamageResult = DamageAccepted | DamageRejected;
-    
+
     export const Methods = {
         tick(model: Model, effects: Effects, count: number) {
             if (count % 120 === 0 && model.health > Consts.FullyPoisonedHealth && model.poison.level > 0) {
@@ -73,10 +73,11 @@ export namespace RpgStatus {
             }
             model.invulnerable = Math.max(0, model.invulnerable - 1);
         },
-    
+
         damage(model: Model, effects: Effects, attack: RpgAttack.Model, attacker?: RpgEnemy.Model): DamageResult {
-            if (attack.versus !== RpgFaction.Anyone && attack.versus !== model.faction)
+            if (attack.versus !== RpgFaction.Anyone && attack.versus !== model.faction) {
                 return { rejected: true, wrongFaction: true };
+            }
 
             const ailments = attack.poison > 0 || attack.wetness > 0;
 
@@ -95,11 +96,13 @@ export namespace RpgStatus {
 
             // TODO warn when amount is not an integer
 
-            if (attack.physical === 0 && attack.emotional === 0)
+            if (attack.physical === 0 && attack.emotional === 0) {
                 return { rejected: false, ailments };
+            }
 
-            if (model.invulnerable > 0)
-                return { rejected: true, invulnerable: true }
+            if (model.invulnerable > 0) {
+                return { rejected: true, invulnerable: true };
+            }
 
             let damaged = false;
 
@@ -109,7 +112,7 @@ export namespace RpgStatus {
                 model.health = Math.max(min, model.health - attack.emotional);
                 const diff = previous - model.health;
                 damaged ||= diff > 0;
-        
+
                 effects.tookDamage(model.health, diff, DamageKind.Emotional);
             }
 
@@ -118,29 +121,31 @@ export namespace RpgStatus {
                 model.health = Math.max(0, model.health - attack.physical);
                 const diff = previous - model.health;
                 damaged ||= diff > 0;
-        
+
                 effects.tookDamage(model.health, diff, DamageKind.Physical);
             }
-    
+
             model.invulnerable = model.invulnerableMax;
 
-            if (damaged && model.health <= 0)
+            if (damaged && model.health <= 0) {
                 effects.died();
+            }
 
-            if (damaged && attacker && model.quirks.incrementsAttackerPrideOnDamage)
+            if (damaged && attacker && model.quirks.incrementsAttackerPrideOnDamage) {
                 attacker.pride++;
+            }
 
             return { rejected: false, ailments, damaged };
         },
-    
+
         heal(model: Model, effects: Effects, amount: number) {
             // TODO warn when amount is not an integer
 
             const previous = model.health;
             model.health = Math.min(model.healthMax, model.health + amount);
             const diff = model.health - previous;
-    
+
             effects.healed(model.health, diff);
         },
-    }
+    };
 }

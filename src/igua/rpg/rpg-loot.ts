@@ -7,7 +7,7 @@ export namespace RpgLoot {
             min: Integer;
             max: Integer;
             deltaPride: Integer;
-        }
+        };
     }
 
     export interface Drop {
@@ -19,12 +19,13 @@ export namespace RpgLoot {
             return {
                 valuables: computeValuables(model.valuables, enemy),
             };
-        }
-    }
+        },
+    };
 
-    function computeValuables(valuables: Model['valuables'], enemy: RpgEnemy.Model): Integer {
-        if (valuables.deltaPride === 0)
+    function computeValuables(valuables: Model["valuables"], enemy: RpgEnemy.Model): Integer {
+        if (valuables.deltaPride === 0) {
             return Math.max(valuables.max, valuables.min);
+        }
 
         const delta = valuables.deltaPride * enemy.pride;
 

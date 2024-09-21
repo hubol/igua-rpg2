@@ -12,14 +12,16 @@ Object.defineProperties(DisplayObject.prototype, {
         value: function (this: DisplayObject, sourceFn: (...args: any[]) => any) {
             if (!this.destroyed) {
                 const trackedInstances = _Internal_Instances.TrackedInstancesSceneLocal.value;
-                if (this.parent)
+                if (this.parent) {
                     trackedInstances.add(sourceFn, this);
-                else
-                    this.once('added', () => trackedInstances.add(sourceFn, this));
-                this.once('destroyed', () => trackedInstances.remove(sourceFn, this));
+                }
+                else {
+                    this.once("added", () => trackedInstances.add(sourceFn, this));
+                }
+                this.once("destroyed", () => trackedInstances.remove(sourceFn, this));
             }
-            
+
             return this;
-        }
+        },
     },
 });

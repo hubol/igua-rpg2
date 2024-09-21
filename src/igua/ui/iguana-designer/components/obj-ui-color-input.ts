@@ -18,7 +18,11 @@ function readHsv(binding: ConnectedInput.Binding<number>) {
 }
 
 export function objUiColorInput(text: string, binding: ConnectedInput.Binding<number>) {
-    const b = objUiDesignerInputBase(text, binding, () => UiIguanaDesignerContext.value.router.push(objUiColorAdjustPage(text, binding)));
+    const b = objUiDesignerInputBase(
+        text,
+        binding,
+        () => UiIguanaDesignerContext.value.router.push(objUiColorAdjustPage(text, binding)),
+    );
     new Graphics()
         .beginFill(0xffffff)
         .drawPolygon(4, 4, 4, 27, 27, 4)
@@ -42,8 +46,8 @@ function objUiColorAdjustPage(title: string, binding: ConnectedInput.Binding<num
         set value(x) {
             h = x;
             writeColor();
-        }
-    }
+        },
+    };
 
     const sBinding = {
         get value() {
@@ -52,8 +56,8 @@ function objUiColorAdjustPage(title: string, binding: ConnectedInput.Binding<num
         set value(x) {
             s = x;
             writeColor();
-        }
-    }
+        },
+    };
 
     const vBinding = {
         get value() {
@@ -62,8 +66,8 @@ function objUiColorAdjustPage(title: string, binding: ConnectedInput.Binding<num
         set value(x) {
             v = x;
             writeColor();
-        }
-    }
+        },
+    };
 
     function readColor() {
         const hsv = readHsv(binding);
@@ -82,16 +86,16 @@ function objUiColorAdjustPage(title: string, binding: ConnectedInput.Binding<num
             set value(value) {
                 binding.value = value;
                 readColor();
-            }
-        }
+            },
+        };
         UiIguanaDesignerContext.value.router.push(objUiColorCopyFromPage(binding2));
     }
 
-    els.push(objUiSliderInput('Hue', hBinding, { min: 0, max: 359 }, [5, 5, 7]));
-    els.push(objUiSliderInput('Saturation', sBinding, { min: 0, max: 100 }, [2, 2, 2]));
-    els.push(objUiSliderInput('Value', vBinding, { min: 0, max: 100 }, [2, 2, 2]));
+    els.push(objUiSliderInput("Hue", hBinding, { min: 0, max: 359 }, [5, 5, 7]));
+    els.push(objUiSliderInput("Saturation", sBinding, { min: 0, max: 100 }, [2, 2, 2]));
+    els.push(objUiSliderInput("Value", vBinding, { min: 0, max: 100 }, [2, 2, 2]));
 
-    const random = objUiButton('Random', () => {
+    const random = objUiButton("Random", () => {
         binding.value = Rng.color();
         readColor();
     })
@@ -100,9 +104,9 @@ function objUiColorAdjustPage(title: string, binding: ConnectedInput.Binding<num
 
     els.push(UiVerticalLayout.Separator);
     els.push(random);
-    els.push(objUiButton('Copy From...', gotoCopyFrom).center());
+    els.push(objUiButton("Copy From...", gotoCopyFrom).center());
     els.push(UiVerticalLayout.Separator);
-    els.push(objUiIguanaDesignerBackButton('OK'));
+    els.push(objUiIguanaDesignerBackButton("OK"));
 
     const applied = UiVerticalLayout.apply(els);
 
@@ -133,10 +137,11 @@ function objUiCopyColorButton(color: number, onSelect: () => unknown, onPress: (
 
             if (g.selected) {
                 onSelect();
-                if (Input.justWentDown('Confirm'))
+                if (Input.justWentDown("Confirm")) {
                     onPress();
+                }
             }
-    });
+        });
 
     return g;
 }
@@ -162,18 +167,26 @@ function objUiColorCopyFromPage(binding: ConnectedInput.Binding<number>) {
                 x = 0;
                 y += h + m;
             }
-            else
+            else {
                 x += w + m;
+            }
         }
 
         const c = uniqueColors[i];
-        const elem = objUiCopyColorButton(c, () => binding.value = c, () => UiIguanaDesignerContext.value.router.pop(), w, h).at(x, y);
-        if (c === initialColor)
+        const elem = objUiCopyColorButton(
+            c,
+            () => binding.value = c,
+            () => UiIguanaDesignerContext.value.router.pop(),
+            w,
+            h,
+        ).at(x, y);
+        if (c === initialColor) {
             selectionIndex = i;
+        }
         els.push(elem);
     }
 
-    const page = objUiPage(els, { selectionIndex, title: 'Copy' });
+    const page = objUiPage(els, { selectionIndex, title: "Copy" });
     page.playSounds = false;
 
     return page;

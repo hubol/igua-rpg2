@@ -13,12 +13,13 @@ export type ObjUiPageElement = Container & { selected: boolean };
 
 export type ObjUiPageRouter = ReturnType<typeof objUiPageRouter>;
 
-type UiPageRouterProps = { readonly maxHeight?: number; };
+type UiPageRouterProps = { readonly maxHeight?: number };
 
 export function objUiPageRouter(props: UiPageRouterProps = {}) {
     function replace(page: UiPage) {
-        if (c.playSounds && c.page)
+        if (c.playSounds && c.page) {
             Sfx.Ui.NavigateInto.play();
+        }
         page.maxHeight = props.maxHeight;
         c.children.last?.destroy();
         c.addChild(page);
@@ -26,25 +27,39 @@ export function objUiPageRouter(props: UiPageRouterProps = {}) {
     }
 
     function push(page: UiPage) {
-        if (c.playSounds && c.page)
+        if (c.playSounds && c.page) {
             Sfx.Ui.NavigateInto.play();
+        }
         page.maxHeight = props.maxHeight;
         c.addChild(page);
         forceGameLoop();
     }
 
     function pop() {
-        if (c.playSounds)
+        if (c.playSounds) {
             Sfx.Ui.NavigateBack.play();
+        }
         c.children.last?.destroy();
         forceGameLoop();
     }
 
     const c = container()
-        .merge({ replace, push, pop, get pages() { return c.children as UiPage[] }, get page() { return c.pages.last; }, playSounds: true })
+        .merge({
+            replace,
+            push,
+            pop,
+            get pages() {
+                return c.children as UiPage[];
+            },
+            get page() {
+                return c.pages.last;
+            },
+            playSounds: true,
+        })
         .step(() => {
-            for (let i = 0; i < c.children.length; i++)
+            for (let i = 0; i < c.children.length; i++) {
                 c.children[i].visible = false;
+            }
 
             if (c.page) {
                 c.page.visible = true;
@@ -57,7 +72,11 @@ export function objUiPageRouter(props: UiPageRouterProps = {}) {
 
 export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
     const ticker = new AsshatTicker();
-    const c = new TickerContainer(ticker, false).merge({ navigation: true, selected: Undefined<ObjUiPageElement>(), playSounds: true }).merge(props);
+    const c = new TickerContainer(ticker, false).merge({
+        navigation: true,
+        selected: Undefined<ObjUiPageElement>(),
+        playSounds: true,
+    }).merge(props);
 
     const maskedObj = container().show(c);
     const elementsObj = container(...elements).show(maskedObj);
@@ -93,12 +112,14 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
         while (d < maximumTravel) {
             const offset = [-ax, -ay];
             for (let i = 0; i < elements.length; i++) {
-                if (i === c.selectionIndex)
+                if (i === c.selectionIndex) {
                     continue;
+                }
                 if (!c.selected || elements[i].collides(c.selected, offset)) {
                     c.selectionIndex = i;
-                    if (c.playSounds && previousSelectionIndex !== c.selectionIndex)
+                    if (c.playSounds && previousSelectionIndex !== c.selectionIndex) {
                         Sfx.Ui.Select.play();
+                    }
                     return;
                 }
             }
@@ -116,14 +137,18 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
 
     c.step(() => {
         if (c.navigation) {
-            if (Input.justWentDown('SelectUp'))
+            if (Input.justWentDown("SelectUp")) {
                 select(0, -1);
-            if (Input.justWentDown('SelectDown'))
+            }
+            if (Input.justWentDown("SelectDown")) {
                 select(0, 1);
-            if (Input.justWentDown('SelectLeft'))
+            }
+            if (Input.justWentDown("SelectLeft")) {
                 select(-1, 0);
-            if (Input.justWentDown('SelectRight'))
+            }
+            if (Input.justWentDown("SelectRight")) {
                 select(1, 0);
+            }
         }
         updateSelection();
         if (c.maxHeight && elementsObj.height > c.maxHeight) {
@@ -140,7 +165,7 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
                 for (let i = 0; i < 3; i++) {
                     const bounds = c.selected.getBounds(false, r);
                     bounds.y -= rootY;
-                    
+
                     if (bounds.y > c.maxHeight * 0.69 && c.maxHeight + elementsObj.pivot.y < elementsObj.height) {
                         elementsObj.pivot.y += 1;
                     }
@@ -172,8 +197,8 @@ function objScrollBar() {
         const start = bar.start * bar.size;
         const end = bar.end * bar.size;
         bar.clear()
-        .beginFill(UiColor.Background).drawRect(0, 0, 3, bar.size)
-        .beginFill(UiColor.Hint).drawRect(0, start, 3, end - start);
+            .beginFill(UiColor.Background).drawRect(0, 0, 3, bar.size)
+            .beginFill(UiColor.Hint).drawRect(0, start, 3, end - start);
     });
 }
 

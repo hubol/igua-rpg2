@@ -1,0 +1,23 @@
+{
+  "typescript": {
+    "indentWidth": 4,
+    "importDeclaration.forceSingleLine": true,
+    "module.sortImportDeclarations": "maintain",
+    "importDeclaration.sortNamedImports": "maintain",
+    "importDeclaration.sortTypeOnlyImports": "none",
+    "nextControlFlowPosition": "nextLine",
+    "functionExpression.spaceBeforeParentheses": true
+  },
+  "includes": [
+    "src/**/*.ts",
+    "test/**/*.ts",
+    "tools/**/*.ts",
+  ],
+  "excludes": [
+    "**/generated",
+    "**/node_modules",
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/typescript-0.93.0.wasm"
+  ]
+}

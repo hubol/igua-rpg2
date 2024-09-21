@@ -6,8 +6,9 @@ export function objEphemeralSprite(txs: Texture[], speed: number) {
         .step(self => {
             self.index += self.speed;
             const index = Math.floor(self.index);
-            if (index >= txs.length)
+            if (index >= txs.length) {
                 return self.destroy();
+            }
             self.texture = txs[index];
         });
 }

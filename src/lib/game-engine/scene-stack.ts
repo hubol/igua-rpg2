@@ -1,5 +1,4 @@
 export abstract class SceneStack<TSceneMeta, TSceneInstance> {
-
     protected readonly scenes: TSceneInstance[] = [];
 
     protected abstract convert<T>(populateSceneFn: () => T, meta: TSceneMeta): TSceneInstance & { populateScene(): T };
@@ -17,14 +16,16 @@ export abstract class SceneStack<TSceneMeta, TSceneInstance> {
 
     pop() {
         const popped = this.scenes.pop();
-        if (popped)
+        if (popped) {
             this.dispose(popped);
+        }
         this.onScenesModified();
     }
 
     replace<T>(populateSceneFn: () => T, meta: TSceneMeta) {
-        while (this.scenes.length > 0)
+        while (this.scenes.length > 0) {
             this.pop();
+        }
         return this.push(populateSceneFn, meta);
     }
 
@@ -47,10 +48,10 @@ export abstract class SceneStack<TSceneMeta, TSceneInstance> {
             throw new Error(`Attempting to access SceneStack.locals when SceneStack.scenes is empty!`);
         }
 
-        let record = scene['__locals__'];
+        let record = scene["__locals__"];
         if (!record) {
             record = {};
-            scene['__locals__'] = record;
+            scene["__locals__"] = record;
         }
 
         return record;

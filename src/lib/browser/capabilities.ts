@@ -1,13 +1,14 @@
 let oggSupport: boolean;
 
 function getOggSupport() {
-    if (oggSupport !== undefined)
+    if (oggSupport !== undefined) {
         return oggSupport;
+    }
 
     // https://stackoverflow.com/a/1514759
-    const audioEl = document.createElement('audio');
-    return oggSupport = typeof audioEl.canPlayType === "function" &&
-        audioEl.canPlayType("audio/ogg") !== "";
+    const audioEl = document.createElement("audio");
+    return oggSupport = typeof audioEl.canPlayType === "function"
+        && audioEl.canPlayType("audio/ogg") !== "";
 }
 
 export const Capabilities = {
@@ -16,8 +17,8 @@ export const Capabilities = {
     },
     get webAudio() {
         return "AudioContext" in window;
-    }
-}
+    },
+};
 
 type Capability = keyof typeof Capabilities;
 const capabilitiesErrorMessage: Record<Capability, string> = {
@@ -33,6 +34,7 @@ export class CapabilitiesError extends Error {
 }
 
 export function RequireCapability(capability: Capability) {
-    if (!Capabilities[capability])
+    if (!Capabilities[capability]) {
         throw new CapabilitiesError(capabilitiesErrorMessage[capability]);
+    }
 }

@@ -15,25 +15,26 @@ export function mxnRpgStatus(obj: DisplayObject, args: MxnRpgStatusArgs) {
     let tickCount = 0;
 
     const rpgStatusObj = obj
-    .track(mxnRpgStatus)
-    .mixin(mxnDripping)
-    .merge(args)
-    .merge({
-        damage(attack: RpgAttack.Model, attacker?: RpgEnemy.Model) {
-            return RpgStatus.Methods.damage(args.status, args.effects, attack, attacker);
-        },
-        heal(amount: number) {
-            RpgStatus.Methods.heal(args.status, args.effects, amount);
-        },
-    })
-    .step(self => {
-        RpgStatus.Methods.tick(args.status, args.effects, tickCount = (tickCount + 1) % 120);
-        obj.visible = args.status.invulnerable > 0 ? !obj.visible : true;
-        self.dripsPerFrame = approachLinear(
-            self.dripsPerFrame,
-            getTargetDripsPerFrame(args.status.wetness.value),
-            0.025);
-    })
+        .track(mxnRpgStatus)
+        .mixin(mxnDripping)
+        .merge(args)
+        .merge({
+            damage(attack: RpgAttack.Model, attacker?: RpgEnemy.Model) {
+                return RpgStatus.Methods.damage(args.status, args.effects, attack, attacker);
+            },
+            heal(amount: number) {
+                RpgStatus.Methods.heal(args.status, args.effects, amount);
+            },
+        })
+        .step(self => {
+            RpgStatus.Methods.tick(args.status, args.effects, tickCount = (tickCount + 1) % 120);
+            obj.visible = args.status.invulnerable > 0 ? !obj.visible : true;
+            self.dripsPerFrame = approachLinear(
+                self.dripsPerFrame,
+                getTargetDripsPerFrame(args.status.wetness.value),
+                0.025,
+            );
+        });
 
     return rpgStatusObj;
 }
@@ -41,15 +42,20 @@ export function mxnRpgStatus(obj: DisplayObject, args: MxnRpgStatusArgs) {
 export type MxnRpgStatus = ReturnType<typeof mxnRpgStatus>;
 
 function getTargetDripsPerFrame(wetness: number) {
-    if (wetness > 90)
+    if (wetness > 90) {
         return 0.25;
-    if (wetness > 75)
+    }
+    if (wetness > 75) {
         return 0.5;
-    if (wetness > 50)
+    }
+    if (wetness > 50) {
         return 0.3;
-    if (wetness > 25)
+    }
+    if (wetness > 25) {
         return 0.1;
-    if (wetness > 10)
+    }
+    if (wetness > 10) {
         return 0.05;
+    }
     return 0;
 }

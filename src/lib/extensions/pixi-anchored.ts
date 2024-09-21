@@ -7,11 +7,11 @@ interface Anchorable {
 }
 
 declare module "pixi.js" {
-    interface Sprite extends Anchorable { }
-    interface BitmapText extends Anchorable { }
+    interface Sprite extends Anchorable {}
+    interface BitmapText extends Anchorable {}
 }
 
-for (const proto of [ BitmapText.prototype, Sprite.prototype ]) {
+for (const proto of [BitmapText.prototype, Sprite.prototype]) {
     Object.defineProperties(proto, {
         anchored: {
             value: function (this: { anchor: ObservablePoint }, x_vector: VectorSimple | number, y: number) {
@@ -27,5 +27,5 @@ for (const proto of [ BitmapText.prototype, Sprite.prototype ]) {
             },
             configurable: true,
         },
-    })
+    });
 }

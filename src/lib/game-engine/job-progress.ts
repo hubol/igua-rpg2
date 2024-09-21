@@ -20,10 +20,12 @@ export class JobProgress {
     }
 
     get percentage() {
-        if (this._completed)
+        if (this._completed) {
             return 1;
-        if (this._totalJobsCount === 0)
+        }
+        if (this._totalJobsCount === 0) {
             return 0;
+        }
         return Math.min(0.9, this._completedJobsCount / this._totalJobsCount);
     }
 }

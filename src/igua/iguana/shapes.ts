@@ -21,7 +21,7 @@ function getClubPlacement(tailShapeIndex: number) {
 const Tail = {
     Shapes: shape(Tx.Iguana.Tail, 28, [17, 17]),
     getClubPlacement,
-}
+};
 
 export const IguanaShapes = {
     Crest: shape(Tx.Iguana.Crest, 16, [10, 10]),
@@ -35,4 +35,4 @@ export const IguanaShapes = {
     Club: shape(Tx.Iguana.Club, 12, [4, 4]),
     Foot: shape(Tx.Iguana.Foot, 14, [6, 12]),
     Claws: shape(Tx.Iguana.Nails, 10, [6, 6]),
-}
+};

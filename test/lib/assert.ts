@@ -5,50 +5,53 @@ export function Assert(value: unknown) {
 }
 
 function stringify(value: unknown) {
-    if (value === undefined)
-        return '<Undefined>';
+    if (value === undefined) {
+        return "<Undefined>";
+    }
 
-    if (value === null)
-        return '<Null>';
+    if (value === null) {
+        return "<Null>";
+    }
 
-    if (typeof value === 'function')
+    if (typeof value === "function") {
         return `Function ${value}()`;
+    }
 
-    let json = '';
+    let json = "";
     try {
         json = JSON.stringify(value, undefined, 2);
     }
     catch {
-        
     }
 
-    const prefix = typeof value === 'object' && value.constructor !== Object ? value.constructor.name : '';
+    const prefix = typeof value === "object" && value.constructor !== Object ? value.constructor.name : "";
 
-    return [prefix, json].join(' ').trim();
+    return [prefix, json].join(" ").trim();
 }
 
 class AssertBuilder {
     constructor(private readonly value: unknown) {
-
     }
 
     toStrictlyBe(expected: unknown) {
-        if (this.value === expected)
+        if (this.value === expected) {
             return;
+        }
 
         const valueJson = stringify(this.value);
         const expectedJson = stringify(expected);
 
-            throw new AssertError(`
+        throw new AssertError(`
 Expected
 ${paint.red(valueJson)}
 to be strictly equal to:
-${paint.gray(expectedJson)}`)
+${paint.gray(expectedJson)}`);
     }
 
     toBeTruthy() {
-        if (!this.value)
-            throw new AssertError(`Expected ${paint.red(stringify(this.value))} to be truthy`)
+        if (!this.value) {
+            throw new AssertError(`Expected ${paint.red(stringify(this.value))} to be truthy`);
+        }
     }
 }
 

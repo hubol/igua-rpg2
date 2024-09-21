@@ -30,8 +30,9 @@ export function prepareGameEngine(renderer: PixiRenderer) {
     setIguaGlobals(renderer, rootStage, iguaInput, forceGameLoop, animator.start.bind(animator), devKeyListener);
 
     iguaInput.start();
-    if (Environment.isDev)
+    if (Environment.isDev) {
         devKeyListener.start();
+    }
 
     const flashPreventer = new UnpleasantCanvasFlashPreventer(renderer);
 
@@ -43,12 +44,13 @@ export function prepareGameEngine(renderer: PixiRenderer) {
             rootTicker.tick();
             Collision.recycleRectangles();
             iguaInput.tick();
-            if (Environment.isDev)
+            if (Environment.isDev) {
                 devKeyListener.tick();
+            }
             flashPreventer.tick();
         }
         while (gameLoopForced);
-        
+
         renderer.render(rootStage);
     }
 
@@ -66,13 +68,14 @@ class UnpleasantCanvasFlashPreventer {
     private _completed = false;
 
     constructor(private readonly _renderer: PixiRenderer) {
-        this._renderer.view.style.opacity = '0';
+        this._renderer.view.style.opacity = "0";
     }
 
     tick() {
-        if (this._completed)
+        if (this._completed) {
             return;
-        this._renderer.view.style.opacity = '';
+        }
+        this._renderer.view.style.opacity = "";
         this._completed = true;
     }
 }

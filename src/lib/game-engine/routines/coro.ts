@@ -4,7 +4,7 @@ export namespace Coro {
     export type Predicate = () => boolean;
     export type Type<T = unknown> = Generator<Predicate, T, unknown>;
 
-    const unsetReturnResult: unique symbol = Symbol('Coro.unsetReturnResult');
+    const unsetReturnResult: unique symbol = Symbol("Coro.unsetReturnResult");
     type UnsetReturnResult = typeof unsetReturnResult;
 
     interface RunnerState<T> {
@@ -17,13 +17,14 @@ export namespace Coro {
         return {
             predicate: null,
             done: false,
-            returnResult: unsetReturnResult
+            returnResult: unsetReturnResult,
         };
     }
 
-    export const runner = <T = unknown> (generator: Type<T>, state: RunnerState<T>) => {
-        if (state.done)
+    export const runner = <T = unknown>(generator: Type<T>, state: RunnerState<T>) => {
+        if (state.done) {
             return true;
+        }
 
         for (let i = 0; i < 256; i++) {
             if (state.predicate === null) {
@@ -33,23 +34,31 @@ export namespace Coro {
                     state.done = true;
                     return true;
                 }
-                
+
                 state.predicate = next.value;
             }
-    
-            if (state.predicate())
+
+            if (state.predicate()) {
                 state.predicate = null;
-            else
+            }
+            else {
                 return false;
+            }
         }
 
-        ErrorReporter.reportDevOnlyState(new Error(`Possible infinite coro loop detected!`), generator, state.predicate);
+        ErrorReporter.reportDevOnlyState(
+            new Error(`Possible infinite coro loop detected!`),
+            generator,
+            state.predicate,
+        );
         return false;
-    }
+    };
 
-    type ReturnedByGenerator<T> = T extends Coro.Type<infer U> ? U : never
+    type ReturnedByGenerator<T> = T extends Coro.Type<infer U> ? U : never;
 
-    export function* all<T extends readonly (Coro.Type | Predicate)[] | []>(values: T): Coro.Type<{ -readonly [P in keyof T]: ReturnedByGenerator<T[P]> }> {
+    export function* all<T extends readonly (Coro.Type | Predicate)[] | []>(
+        values: T,
+    ): Coro.Type<{ -readonly [P in keyof T]: ReturnedByGenerator<T[P]> }> {
         const completedIndices: boolean[] = [];
         const results: any[] = [];
         const predicates: Predicate[] = [];
@@ -65,14 +74,16 @@ export namespace Coro {
                 runnerStates[i] = runnerState;
                 predicates.push(runner.bind(null, value, runnerState));
             }
-            else
+            else {
                 predicates.push(value);
+            }
         }
 
         yield () => {
             for (let i = 0; i < length; i++) {
-                if (completedIndices[i])
+                if (completedIndices[i]) {
                     continue;
+                }
                 if (predicates[i]()) {
                     results[i] = runnerStates[i]?.returnResult;
                     completedIndices[i] = true;
@@ -80,13 +91,13 @@ export namespace Coro {
                 }
             }
             return toCompleteCount <= 0;
-        }
+        };
 
         return results as any;
     }
 
     /** Re-throws any exceptions thrown by the given predicate at the yield site of this Generator.
-     * 
+     *
      * Usefulness is questionable.
      */
     export function* throws(predicate: Predicate): Type<void> {
@@ -100,11 +111,12 @@ export namespace Coro {
                 return true;
             }
         };
-        if (reason)
+        if (reason) {
             throw reason;
+        }
     }
-    
-    type Executor = (resolve: () => void) => unknown
+
+    type Executor = (resolve: () => void) => unknown;
 
     /** Creates a Coro.Predicate from a "Promise-style" executor */
     export function resolve(executor: Executor): Predicate {
@@ -114,6 +126,6 @@ export namespace Coro {
     }
 
     function isCoroType(value: Coro.Type | Predicate): value is Coro.Type {
-        return value['next'];
+        return value["next"];
     }
 }

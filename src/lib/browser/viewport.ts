@@ -10,5 +10,5 @@ export const Viewport = {
     },
     get max() {
         return Math.max(this.width, this.height);
-    }
+    },
 };

@@ -11,8 +11,15 @@ declare module "pixi.js" {
         collisionShape(shape: CollisionShape.Children): this;
 
         collides(target: DisplayObject, offset?: Vector): boolean;
-        collidesOne<TDisplayObject extends DisplayObject>(array: TDisplayObject[], offset?: Vector): TDisplayObject | null;
-        collidesAll<TDisplayObject extends DisplayObject>(array: TDisplayObject[], offset?: Vector, result?: {}): TDisplayObject[];
+        collidesOne<TDisplayObject extends DisplayObject>(
+            array: TDisplayObject[],
+            offset?: Vector,
+        ): TDisplayObject | null;
+        collidesAll<TDisplayObject extends DisplayObject>(
+            array: TDisplayObject[],
+            offset?: Vector,
+            result?: {},
+        ): TDisplayObject[];
     }
 }
 
@@ -38,7 +45,12 @@ Object.defineProperties(DisplayObject.prototype, {
         configurable: true,
     },
     collisionShape: {
-        value: function (this: DisplayObject, shape: CollisionShape, scale_xscale_displayObjects?: number | DisplayObject[], yscale?: number) {
+        value: function (
+            this: DisplayObject,
+            shape: CollisionShape,
+            scale_xscale_displayObjects?: number | DisplayObject[],
+            yscale?: number,
+        ) {
             _Internal_Collision.configureDisplayObject(this, shape, scale_xscale_displayObjects, yscale);
             return this;
         },

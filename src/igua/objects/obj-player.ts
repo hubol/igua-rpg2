@@ -23,7 +23,7 @@ const PlayerConsts = {
     VariableJumpSpeedMaximum: -1.5,
     VariableJumpDelta: -0.095,
     Gravity: 0.15,
-}
+};
 
 const filterVulnerableObjs = (obj: MxnRpgStatus) => obj.status.faction !== RpgFaction.Player;
 
@@ -31,27 +31,39 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     const iguanaLocomotiveObj = objIguanaLocomotive(looks);
     iguanaLocomotiveObj.gravity = PlayerConsts.Gravity;
 
-    const died = () => {}
+    const died = () => {};
 
     const effects: RpgStatus.Effects = merge(
         { died },
-        layers.overlay.hud.healthBarObj.effects);
+        layers.overlay.hud.healthBarObj.effects,
+    );
 
     const puppet = iguanaLocomotiveObj
-        .mixin(mxnRpgStatus, { status: RpgPlayer.Model, effects, hurtboxes: [ iguanaLocomotiveObj ] })
-        .merge({ get hasControl() { return !Cutscene.isPlaying; }, get walkingTopSpeed() { return RpgPlayer.WalkingTopSpeed; } })
+        .mixin(mxnRpgStatus, { status: RpgPlayer.Model, effects, hurtboxes: [iguanaLocomotiveObj] })
+        .merge({
+            get hasControl() {
+                return !Cutscene.isPlaying;
+            },
+            get walkingTopSpeed() {
+                return RpgPlayer.WalkingTopSpeed;
+            },
+        })
         .step(() => {
-            if (puppet.isBeingPiloted)
+            if (puppet.isBeingPiloted) {
                 return;
+            }
             const hasControl = puppet.hasControl;
-            puppet.isMovingLeft = hasControl && Input.isDown('MoveLeft');
-            puppet.isMovingRight = hasControl && Input.isDown('MoveRight');
-            puppet.isDucking = hasControl && puppet.isOnGround && Input.isDown('Duck');
-            
-            if (hasControl && !puppet.isOnGround && puppet.speed.y < PlayerConsts.VariableJumpSpeedMaximum && Input.isDown('Jump')) {
+            puppet.isMovingLeft = hasControl && Input.isDown("MoveLeft");
+            puppet.isMovingRight = hasControl && Input.isDown("MoveRight");
+            puppet.isDucking = hasControl && puppet.isOnGround && Input.isDown("Duck");
+
+            if (
+                hasControl && !puppet.isOnGround && puppet.speed.y < PlayerConsts.VariableJumpSpeedMaximum
+                && Input.isDown("Jump")
+            ) {
                 puppet.speed.y += PlayerConsts.VariableJumpDelta;
             }
-            if (hasControl && puppet.isOnGround && Input.justWentDown('Jump')) {
+            if (hasControl && puppet.isOnGround && Input.justWentDown("Jump")) {
                 puppet.speed.y = PlayerConsts.JumpSpeed;
             }
         })
@@ -61,9 +73,14 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 if (hurtbox) {
                     bounceIguanaOffObject(puppet, hurtbox);
                     const result = instance.damage(RpgPlayer.MeleeAttack);
-                    if (!result.rejected)
-                        Rng.choose(Sfx.Impact.VsEnemyPhysical_0, Sfx.Impact.VsEnemyPhysical_1, Sfx.Impact.VsEnemyPhysical_2).play();
-                }       
+                    if (!result.rejected) {
+                        Rng.choose(
+                            Sfx.Impact.VsEnemyPhysical_0,
+                            Sfx.Impact.VsEnemyPhysical_1,
+                            Sfx.Impact.VsEnemyPhysical_2,
+                        ).play();
+                    }
+                }
             }
         }, StepOrder.Physics + 1);
 
@@ -72,13 +89,13 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     return puppet;
 }
 
-const bounceIguanaOffObject = function() {
+const bounceIguanaOffObject = function () {
     const hurtboxBounds = new Rectangle();
     const torsoBounds = new Rectangle();
     const vcenter = vnew();
     const vforce = vnew();
 
-    return function bounceIguanaOffObject(iguana: ObjIguanaLocomotive, obj: DisplayObject) {
+    return function bounceIguanaOffObject (iguana: ObjIguanaLocomotive, obj: DisplayObject) {
         obj.getBounds(true, hurtboxBounds);
         iguana.body.torso.getBounds(false, torsoBounds);
 
@@ -97,11 +114,12 @@ const bounceIguanaOffObject = function() {
         let iter = 0;
         // TODO pretty arbitrary condition
         while (iter++ < 2 && iguana.collides(obj)) {
-            if (force(iguana, vforce.scale(3)).stopped)
+            if (force(iguana, vforce.scale(3)).stopped) {
                 break;
+            }
         }
-    }
-}()
+    };
+}();
 
 type ObjPlayer = ReturnType<typeof objPlayer>;
 

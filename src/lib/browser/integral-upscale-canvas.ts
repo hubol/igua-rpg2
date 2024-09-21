@@ -7,13 +7,13 @@ export function integralUpscaleCanvas(canvasElement: HTMLCanvasElement) {
     onViewportResize(doUpscale);
 }
 
-function createDoUpscale(canvas: HTMLCanvasElement)
-{
+function createDoUpscale(canvas: HTMLCanvasElement) {
     let lastSeenViewportMin = -1;
 
-    return function() {
-        if (Viewport.min === lastSeenViewportMin)
+    return function () {
+        if (Viewport.min === lastSeenViewportMin) {
             return;
+        }
 
         const padding = 20;
         const availableWidth = Viewport.width - padding;
@@ -34,11 +34,12 @@ function createDoUpscale(canvas: HTMLCanvasElement)
         canvas.style.width = `${width}px`;
         canvas.style.height = `${height}px`;
         lastSeenViewportMin = Viewport.min;
-    }
+    };
 }
 
 function getIntegralScale(linearScale: number) {
-    if (window.devicePixelRatio > 0)
+    if (window.devicePixelRatio > 0) {
         return Math.max(1, Math.floor(linearScale * window.devicePixelRatio)) / window.devicePixelRatio;
+    }
     return Math.max(1, Math.floor(linearScale));
 }

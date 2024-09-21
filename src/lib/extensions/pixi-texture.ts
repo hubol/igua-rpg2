@@ -19,7 +19,7 @@ interface TexturePrivate {
 Object.defineProperties(Texture.prototype, {
     getId: {
         value: function (this: Texture) {
-            return this.id ?? '<No Id>';
+            return this.id ?? "<No Id>";
         },
         configurable: true,
     },
@@ -32,7 +32,15 @@ Object.defineProperties(Texture.prototype, {
     trimmed: {
         get: function (this: Texture & TexturePrivate) {
             if (!this._trimmedTexture) {
-                const texture = new Texture(this.baseTexture, this.frame, this.orig, this.trim, this.rotate, this.defaultAnchor, this.defaultBorders);
+                const texture = new Texture(
+                    this.baseTexture,
+                    this.frame,
+                    this.orig,
+                    this.trim,
+                    this.rotate,
+                    this.defaultAnchor,
+                    this.defaultBorders,
+                );
                 texture.id = this.getId();
                 this._trimmedTexture = TextureProcessing.trimFrame(texture);
             }
@@ -40,5 +48,5 @@ Object.defineProperties(Texture.prototype, {
             return this._trimmedTexture;
         },
         configurable: true,
-    }
+    },
 });

@@ -14,8 +14,8 @@ export function grandchildStopsTicking() {
     const c1 = new Container();
     const c2 = new Container();
     const d = createDisplayObject()
-    .step(() => ticks += 1)
-    .show(c2);
+        .step(() => ticks += 1)
+        .show(c2);
 
     c2.show(c1);
     c1.show(tc);

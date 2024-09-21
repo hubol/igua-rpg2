@@ -18,7 +18,7 @@ import { objUiIguanaDesignerFeetPage } from "../pages/obj-ui-iguana-designer-fee
 import { ObjUiDesignerInputBase } from "./obj-ui-designer-input-base";
 
 export function createUiConnectedInputPageElements(root: ConnectedInput.Tree<unknown>) {
-    const els = Empty<ObjUiPageElement & Partial<Pick<ObjUiDesignerInputBase, 'noteOnConflict'>>>();
+    const els = Empty<ObjUiPageElement & Partial<Pick<ObjUiDesignerInputBase, "noteOnConflict">>>();
 
     for (const key in root) {
         const input = root[key];
@@ -33,8 +33,8 @@ export function objUiConnectedInputPage(title: string, root: ConnectedInput.Tree
     const els = UiVerticalLayout.apply(
         ...createUiConnectedInputPageElements(root),
         UiVerticalLayout.Separator,
-        objUiIguanaDesignerBackButton('Back'),
-    )
+        objUiIguanaDesignerBackButton("Back"),
+    );
 
     return objUiPage(els, { title, selectionIndex: 0 });
 }
@@ -65,9 +65,11 @@ export function objUiConnectedInputNavigationButton(title: string, input: Connec
 
 function createPageObj(title: string, input: ConnectedInput.Tree<unknown>): UiPage {
     const looks = UiIguanaDesignerContext.value.connectedInput;
-    if (input === looks.head.eyes)
+    if (input === looks.head.eyes) {
         return objUiIguanaDesignerEyesPage();
-    if (input === looks.feet)
+    }
+    if (input === looks.feet) {
         return objUiIguanaDesignerFeetPage();
+    }
     return objUiConnectedInputPage(title, input);
 }

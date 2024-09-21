@@ -21,7 +21,7 @@ export function scnPlayerTest() {
     Jukebox.play(Mzk.Covid_19);
 
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, function* () {
-        yield* show('Hello!');
+        yield* show("Hello!");
     }).show();
 
     const level = Lvl.Test();
@@ -38,7 +38,7 @@ export function scnPlayerTest() {
             yield sleep(60);
         }
     })
-    .mixin(mxnRpgAttack, { attack: RpgAttack.create({ poison: 1, versus: RpgFaction.Anyone }) });
+        .mixin(mxnRpgAttack, { attack: RpgAttack.create({ poison: 1, versus: RpgFaction.Anyone }) });
 
     objAngelBouncing().at(playerObj).add(40, -16).show();
 }

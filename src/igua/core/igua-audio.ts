@@ -64,5 +64,5 @@ export const IguaAudioInitializer = {
     },
     get initialized() {
         return !!IguaAudio;
-    }
-}
+    },
+};

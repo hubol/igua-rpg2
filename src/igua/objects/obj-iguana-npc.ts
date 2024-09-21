@@ -8,10 +8,10 @@ interface ObjIguanaNpcArgs {
 }
 
 export function objIguanaNpc({ looksName }: ObjIguanaNpcArgs) {
-    let looks = NpcLooks[looksName]
+    let looks = NpcLooks[looksName];
     if (!looks) {
         // TODO make special invalid configuration error (see objDoor)
-        ErrorReporter.reportSubsystemError('objIguanaNpc', `NpcLooks "${looksName}" does not exist!`);
+        ErrorReporter.reportSubsystemError("objIguanaNpc", `NpcLooks "${looksName}" does not exist!`);
         // TODO Special missingno?
         looks = NpcLooks.MintyJourney;
     }

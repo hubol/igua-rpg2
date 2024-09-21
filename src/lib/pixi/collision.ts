@@ -18,10 +18,12 @@ type ResultBuffer = Partial<CollisionResult>;
 const _buffer: ResultBuffer = { instances: [] };
 
 function clean<TInstance>(buffer: ResultBuffer) {
-    if (buffer.instances)
+    if (buffer.instances) {
         buffer.instances.length = 0;
-    else
+    }
+    else {
         buffer.instances = [];
+    }
 
     buffer.instance = null;
     buffer.collided = false;
@@ -48,14 +50,18 @@ function configureDisplayObject(
     target: DisplayObject & PrivateDisplayObjectCollisionShape,
     shape: CollisionShape,
     scale_xscale_displayObjects?: number | DisplayObject[],
-    yscale?: number) {
-        target._collisionShape = shape;
-        if (Array.isArray(scale_xscale_displayObjects)) {
-            target._collisionShapeDisplayObjects = scale_xscale_displayObjects;
-        }
-        else if (typeof scale_xscale_displayObjects === 'number') {
-            target._collisionShapeScale = vnew(scale_xscale_displayObjects, typeof yscale === 'number' ? yscale : scale_xscale_displayObjects);
-        }
+    yscale?: number,
+) {
+    target._collisionShape = shape;
+    if (Array.isArray(scale_xscale_displayObjects)) {
+        target._collisionShapeDisplayObjects = scale_xscale_displayObjects;
+    }
+    else if (typeof scale_xscale_displayObjects === "number") {
+        target._collisionShapeScale = vnew(
+            scale_xscale_displayObjects,
+            typeof yscale === "number" ? yscale : scale_xscale_displayObjects,
+        );
+    }
 }
 
 const sourceGreedyBoundRectangle = new Rectangle();
@@ -65,13 +71,15 @@ const targetBoundRectangles: Rectangle[] = [];
 type Collideable = Container & PrivateDisplayObjectCollisionShape;
 
 function sourceCollidesWithTargets<TInstance>(
-        source: Collideable,
-        sourceOffset: Vector,
-        targets: Collideable[],
-        param: FindParam,
-        result: CollisionResult<TInstance>) {
-    if (source.destroyed)
+    source: Collideable,
+    sourceOffset: Vector,
+    targets: Collideable[],
+    param: FindParam,
+    result: CollisionResult<TInstance>,
+) {
+    if (source.destroyed) {
         return result;
+    }
 
     sourceBoundRectangles.length = 0;
     const pushedRectangleIndexOuter = rectangleIndex;
@@ -87,13 +95,18 @@ function sourceCollidesWithTargets<TInstance>(
         : (sourceBoundRectangles.length === 1 ? sourceBoundRectangles[0] : null);
 
     for (let i = 0; i < targets.length; i += 1) {
-        if (targets[i].destroyed)
+        if (targets[i].destroyed) {
             continue;
+        }
 
         const pushedRectangleIndexInner = rectangleIndex;
         targetBoundRectangles.length = 0;
 
-        const notOverlapping = accumulateBoundRectanglesOrNotOverlapping(greedySource, targets[i], targetBoundRectangles);
+        const notOverlapping = accumulateBoundRectanglesOrNotOverlapping(
+            greedySource,
+            targets[i],
+            targetBoundRectangles,
+        );
         if (!notOverlapping) {
             let overlapped = false;
             for (let j = 0; j < sourceBoundRectangles.length; j += 1) {
@@ -112,8 +125,9 @@ function sourceCollidesWithTargets<TInstance>(
                         return result;
                     }
                 }
-                if (overlapped)
+                if (overlapped) {
                     break;
+                }
             }
         }
 
@@ -127,7 +141,8 @@ function sourceCollidesWithTargets<TInstance>(
 function accumulateBoundRectanglesOrNotOverlapping(
     greedySource: Rectangle | null,
     target: Collideable,
-    boundRectangles: Rectangle[]): boolean {
+    boundRectangles: Rectangle[],
+): boolean {
     if (!target._collisionShape || target._collisionShape === CollisionShape.Scaled) {
         const bounds = target.getBounds(SkipUpdate, rnew());
         if (target._collisionShape === CollisionShape.Scaled) {
@@ -142,13 +157,19 @@ function accumulateBoundRectanglesOrNotOverlapping(
         return false;
     }
 
-    if (greedySource && target._collisionShape === CollisionShape.Children && areRectanglesNotOverlapping(greedySource, target.getBounds(SkipUpdate, rnew()))) {
+    if (
+        greedySource && target._collisionShape === CollisionShape.Children
+        && areRectanglesNotOverlapping(greedySource, target.getBounds(SkipUpdate, rnew()))
+    ) {
         return true;
     }
 
-    const array = target._collisionShape === CollisionShape.Children ? target.children : target._collisionShapeDisplayObjects!;
-    for (let i = 0; i < array.length; i += 1)
+    const array = target._collisionShape === CollisionShape.Children
+        ? target.children
+        : target._collisionShapeDisplayObjects!;
+    for (let i = 0; i < array.length; i += 1) {
         boundRectangles.push(array[i].getBounds(SkipUpdate, rnew()));
+    }
 
     return false;
 }
@@ -158,35 +179,49 @@ const singleItemArray: DisplayObject[] = [];
 export const _Internal_Collision = {
     configureDisplayObject,
     displayObjectCollidesMany<TDisplayObject extends DisplayObject>(
-            source: DisplayObject,
-            sourceOffset: Vector,
-            targets: TDisplayObject[],
-            param: FindParam,
-            buffer = _buffer) {
+        source: DisplayObject,
+        sourceOffset: Vector,
+        targets: TDisplayObject[],
+        param: FindParam,
+        buffer = _buffer,
+    ) {
         const result = clean<TDisplayObject>(buffer);
-        return sourceCollidesWithTargets(source as Collideable, sourceOffset, targets as DisplayObject[] as Collideable[], param, result);
+        return sourceCollidesWithTargets(
+            source as Collideable,
+            sourceOffset,
+            targets as DisplayObject[] as Collideable[],
+            param,
+            result,
+        );
     },
     displayObjectCollides(source: DisplayObject, sourceOffset: Vector, target: DisplayObject) {
         const result = clean(_buffer);
         singleItemArray[0] = target;
-        return sourceCollidesWithTargets(source as Collideable, sourceOffset, singleItemArray as Collideable[], 0, result).collided;
+        return sourceCollidesWithTargets(
+            source as Collideable,
+            sourceOffset,
+            singleItemArray as Collideable[],
+            0,
+            result,
+        ).collided;
     },
     getCollisionRectangles(source: DisplayObject) {
         const collideable = source as Collideable;
-        if (!collideable._collisionShape)
+        if (!collideable._collisionShape) {
             return null;
+        }
         const result = clean(_buffer);
         singleItemArray[0] = DebugCollideable;
         sourceCollidesWithTargets(collideable, vzero, singleItemArray as Collideable[], 0, result);
         return sourceBoundRectangles;
-    }
-}
+    },
+};
 
 export const Collision = {
     recycleRectangles() {
         rectangleIndex = 0;
     },
-}
+};
 
 const vzero = vnew();
 
@@ -207,6 +242,6 @@ const DebugCollideable: Collideable = (function () {
     return {
         getBounds() {
             return getBoundsRectangle;
-        }
+        },
     } as any;
 })();

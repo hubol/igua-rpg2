@@ -21,7 +21,7 @@ function objMessageBox(text: string) {
     const text2 = objText.Large("", { tint: UiColor.Text, maxWidth }).at(text1);
 
     const mask = new Graphics().beginFill(0xffffff).drawRect(0, 0, width, height);
-    
+
     const mask1 = new Graphics().beginFill(0xffffff).drawRect(0, 0, width, height);
     const mask2 = new Graphics().beginFill(0xffffff).drawRect(0, -height, width, height);
     const textMasks = container(mask1, mask2);
@@ -35,19 +35,21 @@ function objMessageBox(text: string) {
             dismissAfterFrames: -1,
             set text(value: string) {
                 c.dismissAfterFrames = -1;
-                if (textMasks.y > 0)
+                if (textMasks.y > 0) {
                     text1.text = text2.text;
+                }
                 text2.text = value;
                 textMasks.y = 0;
-            }
+            },
         })
         .step(() => {
             if (c.dismissAfterFrames > 0) {
                 c.dismissAfterFrames--;
                 if (c.dismissAfterFrames === 0) {
                     dismissing = true;
-                    if (instance === c)
+                    if (instance === c) {
                         instance = undefined;
+                    }
                 }
             }
 
@@ -75,8 +77,9 @@ export function* show(text: string) {
     if (!instance) {
         instance = objMessageBox(text);
     }
-    else
+    else {
         instance.text = text;
+    }
 
     yield () => Input.isUp("Confirm");
     yield () => Input.isDown("Confirm");

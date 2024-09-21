@@ -1,4 +1,4 @@
-type ForceAliasName<T> = T & { readonly __t?: unique symbol; };
+type ForceAliasName<T> = T & { readonly __t?: unique symbol };
 
 export type Polar = ForceAliasName<number>;
 export type Unit = ForceAliasName<number>;

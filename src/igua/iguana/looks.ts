@@ -14,7 +14,7 @@ export namespace IguanaLooks {
                 shape: TypedInput.choice(IguanaShapes.Claws, true),
                 color: TypedInput.color(),
                 placement: TypedInput.integer(-3, 5),
-            }
+            },
         });
 
         const eye = () => ({
@@ -30,7 +30,7 @@ export namespace IguanaLooks {
                 color: TypedInput.color(),
                 placement: TypedInput.vector(-2, -2, 2, 2),
                 flipH: TypedInput.boolean(),
-            }
+            },
         });
 
         return {
@@ -78,8 +78,8 @@ export namespace IguanaLooks {
                         shape: TypedInput.choice(IguanaShapes.Club, true),
                         color: TypedInput.color(),
                         placement: TypedInput.vector(),
-                    }
-                }
+                    },
+                },
             },
             feet: {
                 fore: {
@@ -92,8 +92,8 @@ export namespace IguanaLooks {
                 },
                 gap: TypedInput.integer(-1, 8),
                 backOffset: TypedInput.integer(0, 7),
-            }
-        }
+            },
+        };
     }
 
     export function darkenBackFeet(color: number) {

@@ -8,25 +8,33 @@ import { objUiDesignerInputBase } from "./obj-ui-designer-input-base";
 
 const NoneChoice = Tx.Ui.NoneChoice.trimmed;
 
-type Restrictions = Omit<TypedInput.Choice<Texture>, 'kind'>;
+type Restrictions = Omit<TypedInput.Choice<Texture>, "kind">;
 
-export function objUiTextureChoiceInput(binding: { value: number }, { allowNone, options }: Restrictions, width = 96, height = 30) {
-    const buttonObj = objUiDesignerInputBase('', binding, () => {}, width, height);
+export function objUiTextureChoiceInput(
+    binding: { value: number },
+    { allowNone, options }: Restrictions,
+    width = 96,
+    height = 30,
+) {
+    const buttonObj = objUiDesignerInputBase("", binding, () => {}, width, height);
 
     buttonObj.step(() => {
         if (buttonObj.selected) {
-            if (Input.justWentDown('SelectLeft'))
+            if (Input.justWentDown("SelectLeft")) {
                 binding.value--;
-            else if (Input.justWentDown('SelectRight'))
+            }
+            else if (Input.justWentDown("SelectRight")) {
                 binding.value++;
+            }
 
             const next = cyclic(binding.value, allowNone ? -1 : 0, options.length);
-            if (next !== binding.value)
+            if (next !== binding.value) {
                 binding.value = next;
+            }
         }
     });
 
-    const maxWidth = Math.max(...options.map(x => x.width), allowNone ? 7 : 5 );
+    const maxWidth = Math.max(...options.map(x => x.width), allowNone ? 7 : 5);
     const maxHeight = Math.max(...options.map(x => x.height), allowNone ? 7 : 5);
 
     let choiceCount = 0;
@@ -53,10 +61,12 @@ export function objUiTextureChoiceInput(binding: { value: number }, { allowNone,
                     const left = keepInsideLeft.getBounds().x;
                     const right = rightBounds.x + rightBounds.width;
 
-                    if (left < maxWidth / 2)
+                    if (left < maxWidth / 2) {
                         choicesContainer.x += 3;
-                    else if (right > 94)
+                    }
+                    else if (right > 94) {
                         choicesContainer.x -= 3;
+                    }
                 }
 
                 firstTime = false;
@@ -69,13 +79,14 @@ export function objUiTextureChoiceInput(binding: { value: number }, { allowNone,
     choicesContainer.mask = new Graphics().beginFill(0xffffff).drawRect(2, 2, width - 4, height - 4);
 
     choicesContainer.y = 15;
-    if (maxWidth < 15 && maxHeight < 15)
+    if (maxWidth < 15 && maxHeight < 15) {
         choicesContainer.scale.set(2, 2);
+    }
 
     const choices = (allowNone ? [NoneChoice, ...options] : options)
-        .map((x, i) => choice(x, allowNone ? i - 1 : i))
+        .map((x, i) => choice(x, allowNone ? i - 1 : i));
 
-    choicesContainer.addChild(...choices)
+    choicesContainer.addChild(...choices);
 
     buttonObj.addChild(choicesContainer.mask, choicesContainer);
 

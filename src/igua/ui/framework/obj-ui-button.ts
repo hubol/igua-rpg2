@@ -47,18 +47,21 @@ export function objUiButton(text: string, onPress: () => unknown, width = 96, he
                 c.pivot.x = (factor % 2 === 0 ? 1 : -1) * Math.ceil(factor / 6);
                 factor--;
             }
-            else
+            else {
                 c.pivot.x = 0;
-
-            if (!c.canPress)
-                return;
-    
-            if (c.selected && Input.justWentDown('Confirm')) {
-                c.onPress();
-                if (jigglesOnPress)
-                    factor = 8;
             }
-            else if (escapes && Input.justWentDown('MenuEscape')) {
+
+            if (!c.canPress) {
+                return;
+            }
+
+            if (c.selected && Input.justWentDown("Confirm")) {
+                c.onPress();
+                if (jigglesOnPress) {
+                    factor = 8;
+                }
+            }
+            else if (escapes && Input.justWentDown("MenuEscape")) {
                 c.onPress();
             }
         });

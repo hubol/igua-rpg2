@@ -8,8 +8,9 @@ export function objCamera() {
     return container().step(self => {
         // TODO camera behavior should be overrideable
         // e.g. there should be modes other than following the player
-        if (playerObj && !playerObj.destroyed)
+        if (playerObj && !playerObj.destroyed) {
             self.at(playerObj).add(-128, -128);
+        }
 
         // TODO switch for this?
         self.x = Math.max(0, Math.min(self.x, scene.level.width - renderer.width));
@@ -17,5 +18,5 @@ export function objCamera() {
 
         scene.stage.x = Math.round(-self.x);
         scene.stage.y = Math.round(-self.y);
-    }, StepOrder.Camera)
+    }, StepOrder.Camera);
 }

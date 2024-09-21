@@ -37,8 +37,8 @@ export namespace RpgEnemyClass {
                     min: loot?.valuables?.min ?? 1,
                     max: loot?.valuables?.max ?? 2,
                     deltaPride: loot?.valuables?.deltaPride ?? -1,
-                }
-            }
-        }
+                },
+            },
+        };
     }
 }

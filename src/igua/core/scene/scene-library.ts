@@ -14,16 +14,18 @@ function maybeFindByName(name: string): (() => unknown) | null {
     ensureSceneLibrary();
 
     const scene = sceneLibrary[name];
-    if (scene)
+    if (scene) {
         return scene;
-    
+    }
+
     return null;
 }
 
 function findByName(name: string): () => unknown {
     const scene = maybeFindByName(name);
-    if (!scene)
+    if (!scene) {
         throw new Error(`Could not find Scene with name ${name}`);
+    }
     return scene;
 }
 
@@ -31,14 +33,15 @@ export const SceneLibrary = {
     maybeFindByName,
     findByName,
     getNames,
-}
+};
 
 function ensureSceneLibrary() {
-    if (sceneLibrary)
+    if (sceneLibrary) {
         return;
-    
+    }
+
     sceneLibrary = createSceneLibrary();
-    console.log(...Logging.componentArgs('SceneLibrary', sceneLibrary));
+    console.log(...Logging.componentArgs("SceneLibrary", sceneLibrary));
 }
 
 function createSceneLibrary(): SceneLibraryImpl {
@@ -46,8 +49,9 @@ function createSceneLibrary(): SceneLibraryImpl {
     for (const exports of sceneExports) {
         for (const key in exports) {
             const fn = exports[key];
-            if (typeof fn === 'function')
+            if (typeof fn === "function") {
                 sceneLibrary[key] = fn;
+            }
         }
     }
 

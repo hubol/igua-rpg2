@@ -1,3 +1,5 @@
+// dprint-ignore-file
+
 import { IguanaLooks } from "./looks";
 
 export const NpcLooks = {

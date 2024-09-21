@@ -7,24 +7,26 @@ const filteredItems: any[] = [];
 
 /**
  * Utility for finding game objects that called `.track()` with the specified function `fn`.
- * 
+ *
  * `Instances()` makes the guarantee that, once called, it will contain the latest tracked objects
  * and it will not contain any destroyed objects.
- * 
+ *
  * However, if while iterating the list, you destroy game objects in the list;
  * they will continue to exist in the list.
  */
-export function Instances<TFn extends Fn>(fn: TFn): ReturnType<TFn>[]
-export function Instances<TFn extends Fn>(fn: TFn, filter: (item: ReturnType<TFn>) => boolean): ReturnType<TFn>[]
+export function Instances<TFn extends Fn>(fn: TFn): ReturnType<TFn>[];
+export function Instances<TFn extends Fn>(fn: TFn, filter: (item: ReturnType<TFn>) => boolean): ReturnType<TFn>[];
 export function Instances<TFn extends Fn>(fn: TFn, filter?: (item: ReturnType<TFn>) => boolean): ReturnType<TFn>[] {
     const items = _Internal_Instances.TrackedInstancesSceneLocal.value.get(fn).array();
-    if (!filter)
+    if (!filter) {
         return items as any;
+    }
     filteredItems.length = 0;
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
-        if (filter(item as any))
+        if (filter(item as any)) {
             filteredItems.push(item);
+        }
     }
     return filteredItems;
 }

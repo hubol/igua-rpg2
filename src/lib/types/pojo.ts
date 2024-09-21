@@ -4,4 +4,4 @@ export type Pojo = Record<string, any> & {
     _x?: undefined; // PixiJS ObservablePoint
     _bounds?: undefined; // PixiJS DisplayObject
     _parentID?: undefined; // PixiJS Transform
-}
+};

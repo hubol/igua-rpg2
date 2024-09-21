@@ -14,11 +14,12 @@ interface InitializeAsshatAudioContextArgs {
 }
 
 export async function initializeAsshatAudioContext(args: InitializeAsshatAudioContextArgs) {
-    if (called)
-        throw new Error('Multiple calls to initializeAsshatAudioContext() detected!');
+    if (called) {
+        throw new Error("Multiple calls to initializeAsshatAudioContext() detected!");
+    }
     called = true;
 
-    RequireCapability('webAudio');
+    RequireCapability("webAudio");
 
     let gestureEl = Force<HTMLElement>();
 
@@ -29,8 +30,9 @@ export async function initializeAsshatAudioContext(args: InitializeAsshatAudioCo
 
     AsshatAudioContext = new AudioContext();
 
-    if (gestureEl)
+    if (gestureEl) {
         await args.cleanup(gestureEl);
+    }
 }
 
 async function requestUserGestureForAudioContext(gestureEl: HTMLElement) {

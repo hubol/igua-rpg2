@@ -1,27 +1,28 @@
-import { elHubol } from './lib/el-hubol';
-import html from './el-toast.html';
+import { elHubol } from "./lib/el-hubol";
+import html from "./el-toast.html";
 
-export function elToast(title: string, description: string, type: 'warn' | 'info', durationMs: number) {
+export function elToast(title: string, description: string, type: "warn" | "info", durationMs: number) {
     const context = {
         title,
         description,
         type,
-        svg: type === 'warn' ? warningSvg : infoSvg,
-    }
+        svg: type === "warn" ? warningSvg : infoSvg,
+    };
 
     const el = elHubol(html, context);
 
     setTimeout(() => {
-        el.classList.add('out');
+        el.classList.add("out");
         setTimeout(() => {
-          el.remove();
+            el.remove();
         }, 2000);
-      }, durationMs);
+    }, durationMs);
 
     return el;
 }
 
-const warningSvg = `<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 44 35.6">
+const warningSvg =
+    `<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 44 35.6">
   <defs>
     <style>
       .cls-2 {
@@ -65,7 +66,8 @@ const warningSvg = `<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" 
   </g>
 </svg>`;
 
-const infoSvg = `<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 44 39.63">
+const infoSvg =
+    `<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 44 39.63">
   <defs>
     <style>
       .cls-1 {

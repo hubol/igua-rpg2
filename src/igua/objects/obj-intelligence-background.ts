@@ -42,9 +42,12 @@ const matchPoundSign = /#/g;
 // TODO does not belong here!
 // I feel like it belongs in the levels template file
 function toPixiColor(hex: string) {
-    return Number.parseInt('0x' + hex.replace(matchPoundSign, ''));
+    return Number.parseInt("0x" + hex.replace(matchPoundSign, ""));
 }
 
 function getLerpFactor(min: number, max: number) {
-    return Math.min(1, Math.max(0, RpgProgress.character.attributes.intelligence - min + 1) / Math.max(1, max - min + 1))
+    return Math.min(
+        1,
+        Math.max(0, RpgProgress.character.attributes.intelligence - min + 1) / Math.max(1, max - min + 1),
+    );
 }

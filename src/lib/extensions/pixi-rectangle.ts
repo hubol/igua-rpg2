@@ -15,5 +15,5 @@ Object.defineProperties(Rectangle.prototype, {
             return v.at(this.x + this.width / 2, this.y + this.height / 2);
         },
         configurable: true,
-    }
+    },
 });

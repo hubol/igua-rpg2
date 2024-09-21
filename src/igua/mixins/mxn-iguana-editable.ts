@@ -6,16 +6,20 @@ import { playerObj } from "../objects/obj-player";
 import { UiIguanaDesignerContext, objUiIguanaDesignerRoot } from "../ui/iguana-designer/obj-ui-iguana-designer-root";
 
 export function mxnIguanaEditable(obj: ObjIguanaLocomotive, looks: IguanaLooks.Serializable) {
-    if (!Environment.isDev)
+    if (!Environment.isDev) {
         return obj;
+    }
     return obj.step(self => {
-        if (playerObj.collides(self) && playerObj.hasControl && DevKey.isDown('ControlLeft') && DevKey.justWentDown('Slash'))
+        if (
+            playerObj.collides(self) && playerObj.hasControl && DevKey.isDown("ControlLeft")
+            && DevKey.justWentDown("Slash")
+        ) {
             Cutscene.play(function* () {
                 UiIguanaDesignerContext.destroy();
-                
+
                 const designer = objUiIguanaDesignerRoot(looks);
                 designer.show(layers.overlay.dev);
-                yield () => DevKey.justWentDown('Escape');
+                yield () => DevKey.justWentDown("Escape");
                 designer.destroy();
 
                 const nextLooks = UiIguanaDesignerContext.value.looks;
@@ -25,6 +29,7 @@ export function mxnIguanaEditable(obj: ObjIguanaLocomotive, looks: IguanaLooks.S
 
                 self.parent.addChildAt(iguana, self.parent.getChildIndex(self));
                 self.destroy();
-        });
+            });
+        }
     });
 }

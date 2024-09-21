@@ -25,8 +25,9 @@ export function coroWorks() {
             phase = 3;
             yield () => phase4;
             phase = 4;
-        });
-    
+        },
+    );
+
     c.addChild(d);
 
     phase1 = true;
@@ -40,7 +41,6 @@ export function coroWorks() {
 
     Assert(phase).toStrictlyBe(3);
 
-    
     d.destroy();
     phase4 = true;
     ticker.tick();
@@ -61,7 +61,7 @@ export function coroAllWorks() {
 
     function* waitForPhase2() {
         yield () => phase2;
-        return 'hamburger';
+        return "hamburger";
     }
 
     const d = createDisplayObject().coro(
@@ -76,8 +76,9 @@ export function coroAllWorks() {
             phase = 2;
             yield () => phase3;
             phase = 3;
-        });
-    
+        },
+    );
+
     c.addChild(d);
 
     phase1 = true;
@@ -92,13 +93,13 @@ export function coroAllWorks() {
 
     phase3 = true;
     ticker.tick();
-    
+
     Assert(phase).toStrictlyBe(3);
-    
+
     d.destroy();
     ticker.tick();
 
     Assert(phase).toStrictlyBe(3);
 
-    Assert(waitForPhase2Result).toStrictlyBe('hamburger');
+    Assert(waitForPhase2Result).toStrictlyBe("hamburger");
 }

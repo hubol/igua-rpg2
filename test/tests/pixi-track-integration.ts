@@ -14,18 +14,15 @@ function objTest2() {
 }
 
 class TestSceneStack extends SceneStack<{}, {}> {
-    protected convert<T>(populateSceneFn: () => T, meta: {}): { populateScene(): T; } {
+    protected convert<T>(populateSceneFn: () => T, meta: {}): { populateScene(): T } {
         return {
             populateScene: populateSceneFn,
         };
     }
     protected dispose(scene: {}): void {
-        
     }
     protected onScenesModified(): void {
-        
     }
-
 }
 
 function configureEngine() {
@@ -51,8 +48,9 @@ export function trackedInstancesRemovedWhenDestroyed() {
     const testObjs = range(10).map(() => objTest().show());
     Assert(Instances(objTest).length).toStrictlyBe(10);
     for (let i = 0; i < testObjs.length; i++) {
-        if (i !== 5)
+        if (i !== 5) {
             testObjs[i].destroy();
+        }
     }
     Assert(Instances(objTest).length).toStrictlyBe(1);
     Assert(Instances(objTest)[0]).toStrictlyBe(testObjs[5]);

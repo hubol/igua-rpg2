@@ -12,11 +12,11 @@ export function objSolidOverlay() {
         container?.destroy();
         container = new Container().coro(function* (c) {
             dirty = true;
-            yield lerp(g, 'alpha').to(value).over(ms);
+            yield lerp(g, "alpha").to(value).over(ms);
             c.destroy();
         })
-        .show(g);
-        return Coro.resolve(r => container!.once('destroyed', r));
+            .show(g);
+        return Coro.resolve(r => container!.once("destroyed", r));
     }
 
     const g = new Graphics()

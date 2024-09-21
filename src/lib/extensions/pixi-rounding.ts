@@ -1,4 +1,4 @@
-import {Sprite, Mesh, Graphics, FilterSystem, Matrix, ISpriteMaskTarget, ObservablePoint, GraphicsGeometry} from "pixi.js";
+import { Sprite, Mesh, Graphics, FilterSystem, Matrix, ISpriteMaskTarget, ObservablePoint, GraphicsGeometry } from "pixi.js";
 
 type Public<T, TPrivate> = Omit<T, keyof TPrivate> & TPrivate;
 
@@ -13,12 +13,10 @@ interface GraphicsPrivate {
 
 // Without this, the slopes will look bad
 // @ts-expect-error
-Graphics.prototype.calculateVertices = function (this: Public<Graphics, GraphicsPrivate>)
-{
+Graphics.prototype.calculateVertices = function (this: Public<Graphics, GraphicsPrivate>) {
     const wtID = this.transform._worldID;
 
-    if (this._transformID === wtID)
-    {
+    if (this._transformID === wtID) {
         return;
     }
 
@@ -32,20 +30,19 @@ Graphics.prototype.calculateVertices = function (this: Public<Graphics, Graphics
     const tx = Math.round(wt.tx);
     const ty = Math.round(wt.ty);
 
-    const data = this._geometry.points;// batch.vertexDataOriginal;
+    const data = this._geometry.points; // batch.vertexDataOriginal;
     const vertexData = this.vertexData;
 
     let count = 0;
 
-    for (let i = 0; i < data.length; i += 2)
-    {
+    for (let i = 0; i < data.length; i += 2) {
         const x = data[i];
         const y = data[i + 1];
 
         vertexData[count++] = (a * x) + (c * y) + tx;
         vertexData[count++] = (d * y) + (b * x) + ty;
     }
-}
+};
 
 interface SpritePrivate {
     _anchor: ObservablePoint;
@@ -56,7 +53,7 @@ interface SpritePrivate {
 }
 
 // Sprites will rudely resize without this
-Sprite.prototype.calculateVertices = function calculateVertices(this: Public<Sprite, SpritePrivate>) {
+Sprite.prototype.calculateVertices = function calculateVertices (this: Public<Sprite, SpritePrivate>) {
     const texture = this._texture;
 
     if (this._transformID === this.transform._worldID && this._textureID === texture._updateID) {
@@ -98,7 +95,8 @@ Sprite.prototype.calculateVertices = function calculateVertices(this: Public<Spr
 
         h1 = trim.y - (anchor._y * orig.height);
         h0 = trim.height;
-    } else {
+    }
+    else {
         w1 = -anchor._x * orig.width;
         w0 = orig.width;
 
@@ -137,7 +135,7 @@ Sprite.prototype.calculateVertices = function calculateVertices(this: Public<Spr
     // xy
     vertexData[6] = (a * w1) + (c * h0) + tx;
     vertexData[7] = (d * h0) + (b * w1) + ty;
-}
+};
 
 interface MeshPrivate {
     _roundPixels: boolean;
@@ -147,8 +145,7 @@ interface MeshPrivate {
 }
 
 // Seems necessary for BitmapText meshes (?)
-Mesh.prototype.calculateVertices = function calculateVertices(this: Public<Mesh, MeshPrivate>)
-{
+Mesh.prototype.calculateVertices = function calculateVertices (this: Public<Mesh, MeshPrivate>) {
     const geometry = this.geometry;
     const verticesBuffer = geometry.buffers[0];
     const vertices = verticesBuffer.data;
@@ -185,7 +182,7 @@ Mesh.prototype.calculateVertices = function calculateVertices(this: Public<Mesh,
     const vertexData = this.vertexData;
 
     for (let i = 0; i < vertexData.length / 2; i++) {
-        let x = vertices[(i * 2)];
+        let x = vertices[i * 2];
         let y = vertices[(i * 2) + 1];
 
         if (this._roundPixels) {
@@ -193,20 +190,29 @@ Mesh.prototype.calculateVertices = function calculateVertices(this: Public<Mesh,
             y = Math.round(y * sy) / sy;
         }
 
-        vertexData[(i * 2)] = (a * x) + (c * y) + tx;
+        vertexData[i * 2] = (a * x) + (c * y) + tx;
         vertexData[(i * 2) + 1] = (b * x) + (d * y) + ty;
     }
 
     this.vertexDirty = vertexDirtyId;
-}
+};
 
 // Be sure to round masks that are Sprites
-FilterSystem.prototype.calculateSpriteMatrix = function calculateSpriteMatrix(this: FilterSystem, outputMatrix: Matrix, sprite: ISpriteMaskTarget): Matrix
-{
+FilterSystem.prototype.calculateSpriteMatrix = function calculateSpriteMatrix (
+    this: FilterSystem,
+    outputMatrix: Matrix,
+    sprite: ISpriteMaskTarget,
+): Matrix {
     const { sourceFrame, destinationFrame } = this.activeState;
     const { orig } = sprite._texture;
-    const mappedMatrix = outputMatrix.set(destinationFrame.width, 0, 0,
-        destinationFrame.height, sourceFrame.x, sourceFrame.y);
+    const mappedMatrix = outputMatrix.set(
+        destinationFrame.width,
+        0,
+        0,
+        destinationFrame.height,
+        sourceFrame.x,
+        sourceFrame.y,
+    );
     const worldTransform = sprite.worldTransform.copyTo(Matrix.TEMP_MATRIX);
 
     // This was not rounded before
@@ -219,4 +225,4 @@ FilterSystem.prototype.calculateSpriteMatrix = function calculateSpriteMatrix(th
     mappedMatrix.translate(sprite.anchor.x, sprite.anchor.y);
 
     return mappedMatrix;
-}
+};

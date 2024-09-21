@@ -33,7 +33,7 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                         color: 0x9957AF,
                         placement: { x: 0, y: 0 },
                         flipH: false,
-                    }
+                    },
                 },
                 right: {
                     sclera: {
@@ -48,13 +48,13 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                         color: 0x9957AF,
                         placement: { x: 0, y: 0 },
                         flipH: false,
-                    }
+                    },
                 },
             },
             horn: {
                 shape: -1,
                 color: 0xCC2C42,
-                placement: { x: 0, y: 0 }
+                placement: { x: 0, y: 0 },
             },
             mouth: {
                 shape: 0,
@@ -74,8 +74,8 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                     shape: -1,
                     color: 0x0C4CCC,
                     placement: { x: 0, y: 0 },
-                }
-            }
+                },
+            },
         },
         feet: {
             fore: {
@@ -86,7 +86,7 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                         color: 0x92B233,
                         shape: 0,
                         placement: 2,
-                    }
+                    },
                 },
                 right: {
                     shape: 0,
@@ -95,8 +95,8 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                         color: 0x92B233,
                         shape: 0,
                         placement: 2,
-                    }
-                }
+                    },
+                },
             },
             hind: {
                 left: {
@@ -106,7 +106,7 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                         color: 0x92B233,
                         shape: 0,
                         placement: 2,
-                    }
+                    },
                 },
                 right: {
                     shape: 0,
@@ -115,12 +115,11 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                         color: 0x92B233,
                         shape: 0,
                         placement: 2,
-                    }
-                }
+                    },
+                },
             },
             gap: 2,
-            backOffset: 3
-        }
-
-    }
+            backOffset: 3,
+        },
+    };
 }

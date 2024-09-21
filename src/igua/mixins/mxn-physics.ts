@@ -17,11 +17,24 @@ interface PhysicsArgs {
     debug?: boolean;
 }
 
-export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physicsFaction = null, physicsOffset = vnew(), debug = false, onMove }: PhysicsArgs) {
+export function mxnPhysics(
+    obj: DisplayObject,
+    { gravity, physicsRadius, physicsFaction = null, physicsOffset = vnew(), debug = false, onMove }: PhysicsArgs,
+) {
     if (debug && obj instanceof Container) {
-        for (const child of obj.children)
+        for (const child of obj.children) {
             child.alpha = 0.5;
-        obj.addChild(new Graphics().step(gfx => gfx.clear().beginFill(0xff0000).drawRect(physicsOffset.x - physicsRadius, physicsOffset.y - physicsRadius, physicsRadius * 2, physicsRadius * 2)));
+        }
+        obj.addChild(
+            new Graphics().step(gfx =>
+                gfx.clear().beginFill(0xff0000).drawRect(
+                    physicsOffset.x - physicsRadius,
+                    physicsOffset.y - physicsRadius,
+                    physicsRadius * 2,
+                    physicsRadius * 2,
+                )
+            ),
+        );
     }
 
     const positionDecimal = vnew();
@@ -35,7 +48,7 @@ export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physics
             positionDecimal.y = obj.transform.position._y;
         }
         cb();
-    }
+    };
 
     return obj
         .track(mxnPhysics)
@@ -51,12 +64,12 @@ export function mxnPhysics(obj: DisplayObject, { gravity, physicsRadius, physics
             obj.y = Math.round(obj.y);
             setPositionDecimalOnTransformChanged = true;
             onMove?.(event);
-        }, StepOrder.Physics)
+        }, StepOrder.Physics);
 }
 
 export type MxnPhysics = ReturnType<typeof mxnPhysics>;
 
-type MoveEvent = Omit<PushResult, 'isOnGround'> & { previousSpeed: Vector; previousOnGround: boolean; };
+type MoveEvent = Omit<PushResult, "isOnGround"> & { previousSpeed: Vector; previousOnGround: boolean };
 const moveEvent = {
     previousSpeed: vnew(),
 } as MoveEvent;
@@ -145,14 +158,17 @@ function applySpeedInSteps(obj: MxnPhysics) {
         moveEvent.hitWall ||= r2.hitWall;
         hitGround ||= r2.hitGround;
 
-        if (vspStep !== 0)
+        if (vspStep !== 0) {
             obj.isOnGround = hitGround;
+        }
 
-        if (obj.speed.x === 0)
+        if (obj.speed.x === 0) {
             hsp = 0;
+        }
 
-        if (obj.speed.y === 0)
+        if (obj.speed.y === 0) {
             vsp = 0;
+        }
 
         hspAbs = Math.abs(hsp);
         vspAbs = Math.abs(vsp);
@@ -164,7 +180,7 @@ function applySpeedInSteps(obj: MxnPhysics) {
 const PushWorkingState = {
     floorY: 0,
     ceilY: 0,
-}
+};
 
 function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, result = _result) {
     const physicsOffsetX = obj.physicsOffset.x;
@@ -175,7 +191,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 
     const halfHeight = obj.physicsRadius;
     const halfWidth = obj.physicsRadius;
-    
+
     result.hitCeiling = false;
     result.hitGround = false;
     result.hitWall = false;
@@ -199,8 +215,9 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                 // Check if the object's position projected against the "forward"
                 // indicates that we are along this segment
                 // (Note: "forward" is inferred totally from the isFloor, isCeiling, etc discriminators)
-                if (x <= x0 - paddingHorizontal || x >= x1 + paddingHorizontal)
+                if (x <= x0 - paddingHorizontal || x >= x1 + paddingHorizontal) {
                     continue;
+                }
 
                 // How far along is the object along this segment
                 const f = (x - x0) / (x1 - x0);
@@ -212,37 +229,38 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                 // Note: tan < 0 means "normal" is facing left, tan > 0 means facing right
                 const horizontalSpeedIndicatesClimbingSlope = Math.sign(tan) === -Math.sign(obj.speed.x);
 
-				const tanA = Math.abs(tan);
-				const vCat = tanA * halfHeight;
-				
-				if (segment.isCeiling) {
+                const tanA = Math.abs(tan);
+                const vCat = tanA * halfHeight;
+
+                if (segment.isCeiling) {
                     // Previously, the statements here were guarded by a check to determine
                     // whether the physics object was moving down OR the segment was a slope
                     // (See Git history for fewer lies)
                     // This was not sufficient to keep the physics object out of ceiling slopes
                     // that overlapped with other ceilings
-					{
+                    {
                         // Computes the expected Y-coordinate where the object should
                         // touch this segment at its current X-coordinate
-						const touchY = Math.min(Math.max(y0, y1), y0 + (y1 - y0) * f + vCat);
+                        const touchY = Math.min(Math.max(y0, y1), y0 + (y1 - y0) * f + vCat);
 
-						// Snap to the segment only when we are close enough
+                        // Snap to the segment only when we are close enough
                         // Note: Oddwarg's condition was
                         // y > touchY - halfHeight && y < touchY + halfHeight + vSnap
                         // But it seemed too generous.
                         // There is also no need to vertically snap to the ceiling
-						if (y > touchY && y < touchY + halfHeight && touchY > PushWorkingState.ceilY) {
+                        if (y > touchY && y < touchY + halfHeight && touchY > PushWorkingState.ceilY) {
                             PushWorkingState.ceilY = touchY;
 
                             if (correctPosition) {
                                 obj.y = touchY + halfHeight - physicsOffsetY;
-                                if (obj.speed.y < 0)
+                                if (obj.speed.y < 0) {
                                     obj.speed.y = 0;
+                                }
                             }
                             result.hitCeiling = true;
-						}
-					}
-				}
+                        }
+                    }
+                }
                 // Added edgesOnly (isSlope && edgesOnly && horizontalSpeedIndicatesClimbingSlope) ||
                 // So that while jumping up a slope, you can still collide with it
                 // It's possible this change should be replicated to the other kinds of segments
@@ -255,21 +273,30 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 
                     // Enables you to be snapped to the floor while walking down a slope
                     // obj.speed.y >= 0 check added to allow jumping while walking up slopes
-                    const vSnap = (obj.speed.y >= 0 && !horizontalSpeedIndicatesClimbingSlope) ? Math.abs(obj.speed.x) : 0;
-                    
+                    const vSnap = (obj.speed.y >= 0 && !horizontalSpeedIndicatesClimbingSlope)
+                        ? Math.abs(obj.speed.x)
+                        : 0;
+
                     // Note: Oddwarg's condition was
                     // y > touchY - halfHeight - vSnap && y < touchY + halfHeight
                     // But it seemed too generous.
-                    if (y > touchY - halfHeight - vSnap && y < touchY + thickSlopeEdge && touchY < PushWorkingState.floorY) {
+                    if (
+                        y > touchY - halfHeight - vSnap && y < touchY + thickSlopeEdge
+                        && touchY < PushWorkingState.floorY
+                    ) {
                         // Adjusting touchY allows less snapping when climbing pipe "stairwells"
                         // TODO: Not sure if -halfHeight is correct
-                        PushWorkingState.floorY = touchY + ((segment.isPipe && edgesOnly && isSlope && horizontalSpeedIndicatesClimbingSlope) ? -halfHeight : 0);
+                        PushWorkingState.floorY = touchY
+                            + ((segment.isPipe && edgesOnly && isSlope && horizontalSpeedIndicatesClimbingSlope)
+                                ? -halfHeight
+                                : 0);
 
                         if (correctPosition) {
                             obj.y = touchY - halfHeight - physicsOffsetY;
                             // e.g. If you are jumping up a slope, only correct position
-                            if (obj.speed.y >= 0)
+                            if (obj.speed.y >= 0) {
                                 obj.speed.y = 0;
+                            }
                         }
                         result.hitGround = true;
                     }
@@ -279,8 +306,9 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
             // - Walls will never be slopes
             // - Wall corners should not be processed
             else {
-                if (y <= y0 || y >= y1)
+                if (y <= y0 || y >= y1) {
                     continue;
+                }
 
                 if ((segment.isWallFacingLeft && obj.speed.x >= 0) || (segment.isWallFacingRight && obj.speed.x <= 0)) {
                     const f = (y - y0) / (y1 - y0);
@@ -294,7 +322,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                         }
                         result.hitWall = true;
                     }
-				}
+                }
             }
         }
     }
@@ -302,8 +330,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
     return result;
 }
 
-interface PushResult
-{
+interface PushResult {
     hitGround: boolean;
     hitCeiling: boolean;
     hitWall: boolean;

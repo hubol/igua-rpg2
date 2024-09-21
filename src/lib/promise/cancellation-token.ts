@@ -26,7 +26,6 @@ export class CancellationToken implements ICancellationToken {
 
 export class CancellationError extends Error {
     constructor(readonly token: CancellationToken) {
-        super('Cancelled by token');
+        super("Cancelled by token");
     }
 }
-

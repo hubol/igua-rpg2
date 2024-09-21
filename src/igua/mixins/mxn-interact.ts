@@ -4,7 +4,8 @@ import { Input } from "../globals";
 
 export function mxnInteract<TObj extends DisplayObject>(obj: TObj, interactFn: () => void) {
     return obj.step(() => {
-        if (playerObj.hasControl && Input.justWentDown('Interact') && playerObj.collides(obj))
+        if (playerObj.hasControl && Input.justWentDown("Interact") && playerObj.collides(obj)) {
             interactFn();
-    })
+        }
+    });
 }

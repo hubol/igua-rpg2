@@ -19,13 +19,13 @@ async function createNoAtlasTx(tx: typeof Tx) {
         Terrain: {
             Pipe: {
                 Gray: await repeat(tx.Terrain.Pipe.Gray),
-            }
+            },
         },
-    }
+    };
 }
 
 function repeat(tx: Texture) {
-    return TextureProcessing.extractFromAtlas(tx, { wrapMode: WRAP_MODES.REPEAT })
+    return TextureProcessing.extractFromAtlas(tx, { wrapMode: WRAP_MODES.REPEAT });
 }
 
 export async function loadNoAtlasTextures(tx: typeof Tx) {

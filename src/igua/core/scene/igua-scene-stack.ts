@@ -23,7 +23,12 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
 
     root.addChild(background, stage, camera);
 
-    const backgroundGfx = new Graphics().tinted(0x000000).beginFill(0xffffff).drawRect(0, 0, renderer.width, renderer.height).show(background);
+    const backgroundGfx = new Graphics().tinted(0x000000).beginFill(0xffffff).drawRect(
+        0,
+        0,
+        renderer.width,
+        renderer.height,
+    ).show(background);
 
     return {
         root,
@@ -39,8 +44,8 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
             set backgroundTint(tint: number) {
                 backgroundGfx.tint = tint;
             },
-        }
-    }
+        },
+    };
 }
 
 export type IguaScene = ReturnType<typeof createIguaScene>;
@@ -48,9 +53,10 @@ export type IguaScene = ReturnType<typeof createIguaScene>;
 export class IguaSceneStack extends SceneStack<IguaSceneMeta, IguaScene> {
     constructor(
         private readonly _layers: IguaLayers,
-        private readonly _setScene: (scene: IguaScene) => void) {
-            super();
-            console.log(...Logging.componentArgs(this));
+        private readonly _setScene: (scene: IguaScene) => void,
+    ) {
+        super();
+        console.log(...Logging.componentArgs(this));
     }
 
     protected convert<T>(populateSceneFn: () => T, meta: IguaSceneMeta) {
@@ -66,14 +72,16 @@ export class IguaSceneStack extends SceneStack<IguaSceneMeta, IguaScene> {
     }
 
     protected onScenesModified(): void {
-        for (let i = 0; i < this.scenes.length - 1; i += 1)
+        for (let i = 0; i < this.scenes.length - 1; i += 1) {
             this.scenes[i].root.visible = false;
+        }
 
         const scene = this.scenes.last;
 
-        if (!scene)
+        if (!scene) {
             return;
-        
+        }
+
         scene.root.visible = true;
         this._setScene(scene);
         forceGameLoop();

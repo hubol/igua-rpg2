@@ -27,10 +27,12 @@ class RngBase {
     float(max: number): number;
     float(min: number, max: number): number;
     float(min_max?: number, max?: number) {
-        if (min_max === undefined)
+        if (min_max === undefined) {
             return this.random();
-        if (max === undefined)
+        }
+        if (max === undefined) {
             return this.random() * min_max;
+        }
         return min_max + this.random() * (max - min_max);
     }
 
