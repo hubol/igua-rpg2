@@ -16,11 +16,14 @@ export function mxnRpgStatus(obj: DisplayObject, args: MxnRpgStatusArgs) {
 
     const rpgStatusObj = obj
         .track(mxnRpgStatus)
+        .dispatchesValue<"damaged", RpgStatus.DamageResult>()
         .mixin(mxnDripping)
         .merge(args)
         .merge({
             damage(attack: RpgAttack.Model, attacker?: RpgEnemy.Model) {
-                return RpgStatus.Methods.damage(args.status, args.effects, attack, attacker);
+                const result = RpgStatus.Methods.damage(args.status, args.effects, attack, attacker);
+                rpgStatusObj.dispatch("damaged", result);
+                return result;
             },
             heal(amount: number) {
                 RpgStatus.Methods.heal(args.status, args.effects, amount);

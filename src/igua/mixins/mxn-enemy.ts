@@ -11,6 +11,7 @@ import { playerObj } from "../objects/obj-player";
 import { clone } from "../../lib/object/clone";
 import { RpgEnemyClass } from "../rpg/rpg-enemy-class";
 import { Sfx } from "../../assets/sounds";
+import { Rng } from "../../lib/math/rng";
 
 interface MxnEnemyArgs {
     hurtboxes: DisplayObject[];
@@ -48,6 +49,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
 
     const enemyObj = obj.mixin(mxnRpgStatus, { status, effects, hurtboxes: args.hurtboxes })
         .dispatches<"mxnEnemy.died">()
+        .handles("damaged", defaultDamagedHandler)
         .merge({
             strikePlayer(attack: RpgAttack.Model) {
                 playerObj.damage(attack, enemy);
@@ -55,6 +57,16 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         });
 
     return enemyObj;
+}
+
+function defaultDamagedHandler(_: unknown, result: DamageResult) {
+    if (!result.rejected && result.damaged) {
+        Rng.choose(
+            Sfx.Impact.VsEnemyPhysical_0,
+            Sfx.Impact.VsEnemyPhysical_1,
+            Sfx.Impact.VsEnemyPhysical_2,
+        ).play();
+    }
 }
 
 export type MxnEnemy = ReturnType<typeof mxnEnemy>;

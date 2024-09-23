@@ -12,7 +12,6 @@ import { RpgStatus } from "../rpg/rpg-status";
 import { ObjIguanaLocomotive, ObjIguanaLocomotiveAutoFacingMode, objIguanaLocomotive } from "./obj-iguana-locomotive";
 import { StepOrder } from "./step-order";
 import { force } from "../mixins/mxn-physics";
-import { Rng } from "../../lib/math/rng";
 import { Sfx } from "../../assets/sounds";
 
 const PlayerConsts = {
@@ -40,6 +39,11 @@ function objPlayer(looks: IguanaLooks.Serializable) {
 
     const puppet = iguanaLocomotiveObj
         .mixin(mxnRpgStatus, { status: RpgPlayer.Model, effects, hurtboxes: [iguanaLocomotiveObj] })
+        .handles("damaged", (_, result) => {
+            if (!result.rejected && result.damaged) {
+                Sfx.Impact.VsPlayerPhysical.play();
+            }
+        })
         .merge({
             get hasControl() {
                 return !Cutscene.isPlaying;
@@ -73,13 +77,6 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 if (hurtbox) {
                     bounceIguanaOffObject(puppet, hurtbox);
                     const result = instance.damage(RpgPlayer.MeleeAttack);
-                    if (!result.rejected) {
-                        Rng.choose(
-                            Sfx.Impact.VsEnemyPhysical_0,
-                            Sfx.Impact.VsEnemyPhysical_1,
-                            Sfx.Impact.VsEnemyPhysical_2,
-                        ).play();
-                    }
                 }
             }
         }, StepOrder.Physics + 1);

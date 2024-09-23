@@ -1,13 +1,19 @@
 import { DisplayObject } from "pixi.js";
 
-interface DispatchingDisplayObject<TEvent extends string> {
+interface DisplayObjectDispatcher<TEvent extends string> {
     dispatch(event: TEvent): void;
     handles(event: TEvent, fn: (self: this) => unknown): this;
 }
 
+interface DisplayObjectValueDispatcher<TEvent extends string, TValue> {
+    dispatch(event: TEvent, value: TValue): void;
+    handles(event: TEvent, fn: (self: this, arg: TValue) => unknown): this;
+}
+
 declare module "pixi.js" {
     interface DisplayObject {
-        dispatches<TEvent extends string>(): this & DispatchingDisplayObject<TEvent>;
+        dispatches<TEvent extends string>(): this & DisplayObjectDispatcher<TEvent>;
+        dispatchesValue<TEvent extends string, TValue>(): this & DisplayObjectValueDispatcher<TEvent, TValue>;
     }
 }
 
@@ -18,9 +24,15 @@ Object.defineProperties(DisplayObject.prototype, {
         },
         configurable: true,
     },
+    dispatchesValue: {
+        value: function (this: DisplayObject) {
+            return this;
+        },
+        configurable: true,
+    },
     dispatch: {
-        value: function (this: DisplayObject, event: string) {
-            this.emit(event, this);
+        value: function (this: DisplayObject, event: string, value: unknown) {
+            this.emit(event, this, value);
         },
         configurable: true,
     },

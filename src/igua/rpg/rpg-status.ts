@@ -54,7 +54,7 @@ export namespace RpgStatus {
         invulnerable?: boolean;
     }
 
-    type DamageResult = DamageAccepted | DamageRejected;
+    export type DamageResult = DamageAccepted | DamageRejected;
 
     export const Methods = {
         tick(model: Model, effects: Effects, count: number) {
