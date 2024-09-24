@@ -59,7 +59,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
     return enemyObj;
 }
 
-function defaultDamagedHandler(_: unknown, result: DamageResult) {
+function defaultDamagedHandler(_: unknown, result: RpgStatus.DamageResult) {
     if (!result.rejected && result.damaged) {
         Rng.choose(
             Sfx.Impact.VsEnemyPhysical_0,
