@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 59 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 60 }];
 
 interface TxData {
   id: string;
@@ -15,6 +15,7 @@ function txs<T>(tx: (data: TxData) => T) {
   return {
     BigKey1: tx({ id: "BigKey1", atlas: 0, x: 614, y: 31, width: 150, height: 28 }),
     Collectibles: {
+      BallRed: tx({ id: "Collectibles.BallRed", atlas: 0, x: 1016, y: 91, width: 8, height: 8 }),
       ValuableBlue: tx({ id: "Collectibles.ValuableBlue", atlas: 0, x: 999, y: 133, width: 17, height: 13 }),
       ValuableGreen: tx({ id: "Collectibles.ValuableGreen", atlas: 0, x: 1001, y: 23, width: 7, height: 6 }),
       ValuableOrange: tx({ id: "Collectibles.ValuableOrange", atlas: 0, x: 980, y: 144, width: 17, height: 13 }),
@@ -41,7 +42,7 @@ function txs<T>(tx: (data: TxData) => T) {
     Iguana: {
       Club: tx({ id: "Iguana.Club", atlas: 0, x: 931, y: 18, width: 48, height: 12 }),
       Crest: tx({ id: "Iguana.Crest", atlas: 0, x: 614, y: 60, width: 128, height: 16 }),
-      Eye: tx({ id: "Iguana.Eye", atlas: 0, x: 1016, y: 91, width: 8, height: 8 }),
+      Eye: tx({ id: "Iguana.Eye", atlas: 0, x: 1012, y: 124, width: 8, height: 8 }),
       Foot: tx({ id: "Iguana.Foot", atlas: 0, x: 765, y: 31, width: 140, height: 12 }),
       Head: tx({ id: "Iguana.Head", atlas: 0, x: 961, y: 133, width: 18, height: 18 }),
       Horn: tx({ id: "Iguana.Horn", atlas: 0, x: 971, y: 82, width: 48, height: 8 }),
@@ -95,7 +96,7 @@ function txs<T>(tx: (data: TxData) => T) {
     Ui: {
       Checkbox: tx({ id: "Ui.Checkbox", atlas: 0, x: 743, y: 67, width: 60, height: 30 }),
       ChooseYourLooksIcons: tx({ id: "Ui.ChooseYourLooksIcons", atlas: 0, x: 0, y: 0, width: 930, height: 30 }),
-      NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 1012, y: 124, width: 8, height: 8 }),
+      NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 1016, y: 100, width: 8, height: 8 }),
       PlacementReticle: tx({ id: "Ui.PlacementReticle", atlas: 0, x: 1018, y: 0, width: 6, height: 6 }),
     },
     Wood: {
