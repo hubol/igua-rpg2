@@ -336,6 +336,7 @@ function objIguanaPreview(minX = 102, maxX = 253) {
                 }
             });
 
+        bigPuppet.playSfx = false;
         bigPuppet.scale.set(3);
 
         const smallPuppet = objIguanaPuppet(UiIguanaDesignerContext.value.looks);

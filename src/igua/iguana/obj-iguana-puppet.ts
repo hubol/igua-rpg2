@@ -9,6 +9,7 @@ import { Force } from "../../lib/types/force";
 import { Integer, Polar, Unit, ZeroOrGreater } from "../../lib/math/number-alias-types";
 import { vnew } from "../../lib/math/vector-type";
 import { CollisionShape } from "../../lib/pixi/collision";
+import { Sfx } from "../../assets/sounds";
 
 const r1 = new Rectangle();
 const r2 = new Rectangle();
@@ -77,6 +78,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     const feetLiftMaximum = Math.max(0, bodyDuckMaximum - 1);
 
     let dirty = false;
+    let sinceStepSoundEffectFrames = 0;
 
     const applyAnimation = () => {
         if (!dirty) {
@@ -130,9 +132,14 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
         const airborne = isAirborne ? airborneDirectionY : 0;
 
         // Walking + Jumping + Falling
-        const p = -pedometer * Math.PI;
+        const p = -pedometer * Math.PI * 0.75;
         {
             const airborne2 = Math.min(1.25, Math.abs(airborne * 1.5)) * Math.sign(airborne);
+
+            const prevForeLeftY = feetController.foreLeftY;
+            const prevForeRightY = feetController.foreRightY;
+            const prevHindLeftY = feetController.hindLeftY;
+            const prevHindRightY = feetController.hindRightY;
 
             feetController.foreLeftY = Math.round(gait * (Math.sin(p) - 1) + Math.min(0, airborne2 * -feetLiftMaximum));
             feetController.foreRightY = Math.round(
@@ -144,6 +151,29 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
             feetController.hindRightY = Math.round(
                 gait * (Math.sin(p + 3 * Math.PI / 2) - 1) + Math.min(0, airborne2 * feetLiftMaximum),
             );
+
+            sinceStepSoundEffectFrames++;
+
+            // TODO terrain sound effect palette should be configurable somehow!
+            // TODO don't play when offscreen!
+            if (!isAirborne && c.playSfx && sinceStepSoundEffectFrames > 3) {
+                if (prevForeLeftY < 0 && feetController.foreLeftY === 0) {
+                    Sfx.Terrain.EarthStep0.play();
+                    sinceStepSoundEffectFrames = 0;
+                }
+                else if (prevForeRightY < 0 && feetController.foreRightY === 0) {
+                    Sfx.Terrain.EarthStep1.play();
+                    sinceStepSoundEffectFrames = 0;
+                }
+                else if (prevHindLeftY < 0 && feetController.hindLeftY === 0) {
+                    Sfx.Terrain.EarthStep2.play();
+                    sinceStepSoundEffectFrames = 0;
+                }
+                else if (prevHindRightY < 0 && feetController.hindRightY === 0) {
+                    Sfx.Terrain.EarthStep3.play();
+                    sinceStepSoundEffectFrames = 0;
+                }
+            }
         }
 
         // Apply
@@ -234,6 +264,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
                     dirty = true;
                 }
             },
+            playSfx: true,
         })
         .step(applyAnimation);
 
@@ -347,9 +378,17 @@ function objIguanaFeet(feet: Feet) {
             frontHindRight.x = -toApplySqrt;
         },
 
+        get foreLeftY() {
+            return frontForeLeft.y;
+        },
+
         set foreLeftY(value: Integer) {
             frontForeLeft.y = value;
             backForeLeft.y = value;
+        },
+
+        get foreRightY() {
+            return frontForeRight.y;
         },
 
         set foreRightY(value: Integer) {
@@ -357,9 +396,17 @@ function objIguanaFeet(feet: Feet) {
             backForeRight.y = value;
         },
 
+        get hindLeftY() {
+            return frontHindLeft.y;
+        },
+
         set hindLeftY(value: Integer) {
             frontHindLeft.y = value;
             backHindLeft.y = value;
+        },
+
+        get hindRightY() {
+            return frontHindRight.y;
         },
 
         set hindRightY(value: Integer) {
