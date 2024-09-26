@@ -41,9 +41,9 @@ async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
     },
     Impact: {
       DefeatEnemy: sounds[5],
-      VsEnemyPhysical_0: sounds[6],
-      VsEnemyPhysical_1: sounds[7],
-      VsEnemyPhysical_2: sounds[8],
+      VsEnemyPhysical0: sounds[6],
+      VsEnemyPhysical1: sounds[7],
+      VsEnemyPhysical2: sounds[8],
       VsPlayerPhysical: sounds[9],
     },
     Interact: {
