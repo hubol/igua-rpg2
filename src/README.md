@@ -10,10 +10,11 @@ Game Objects are PixiJS `DisplayObject`s enriched with behavior. They are create
 export function objPlayer() {
     const p = new Graphics().drawRect(0, 0, 16, 16)
         .step(() => {
-            if (Input.justWentDown('MoveRight'))
+            if (Input.justWentDown("MoveRight")) {
                 p.x += 1;
+            }
         });
-    
+
     return p;
 }
 ```
