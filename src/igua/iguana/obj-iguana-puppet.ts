@@ -9,7 +9,7 @@ import { Force } from "../../lib/types/force";
 import { Integer, Polar, Unit, ZeroOrGreater } from "../../lib/math/number-alias-types";
 import { vnew } from "../../lib/math/vector-type";
 import { CollisionShape } from "../../lib/pixi/collision";
-import { Sfx } from "../../assets/sounds";
+import { Material, Materials } from "../systems/materials";
 
 const r1 = new Rectangle();
 const r2 = new Rectangle();
@@ -154,23 +154,22 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
 
             sinceStepSoundEffectFrames++;
 
-            // TODO terrain sound effect palette should be configurable somehow!
             // TODO don't play when offscreen!
             if (!isAirborne && c.playSfx && sinceStepSoundEffectFrames > 3) {
                 if (prevForeLeftY < 0 && feetController.foreLeftY === 0) {
-                    Sfx.Terrain.EarthStep0.play();
+                    Materials[c.groundMaterial].stepSound0.play();
                     sinceStepSoundEffectFrames = 0;
                 }
                 else if (prevForeRightY < 0 && feetController.foreRightY === 0) {
-                    Sfx.Terrain.EarthStep1.play();
+                    Materials[c.groundMaterial].stepSound1.play();
                     sinceStepSoundEffectFrames = 0;
                 }
                 else if (prevHindLeftY < 0 && feetController.hindLeftY === 0) {
-                    Sfx.Terrain.EarthStep2.play();
+                    Materials[c.groundMaterial].stepSound2.play();
                     sinceStepSoundEffectFrames = 0;
                 }
                 else if (prevHindRightY < 0 && feetController.hindRightY === 0) {
-                    Sfx.Terrain.EarthStep3.play();
+                    Materials[c.groundMaterial].stepSound3.play();
                     sinceStepSoundEffectFrames = 0;
                 }
             }
@@ -265,6 +264,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
                 }
             },
             playSfx: true,
+            groundMaterial: Material.Earth,
         })
         .step(applyAnimation);
 
