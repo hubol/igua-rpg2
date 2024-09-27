@@ -4,6 +4,7 @@ import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { scene } from "../globals";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { StepOrder } from "./step-order";
+import { Material } from "../systems/materials";
 
 /**
  * Describes a line segment. Different kinds of terrain segments make certain guarantees:
@@ -25,6 +26,7 @@ type TerrainSegmentDiscriminator =
 type TerrainSegment = TerrainSegmentCoordinates & TerrainSegmentDiscriminator;
 
 interface Terrain {
+    iguaMaterial: Material;
     destroyed: boolean;
     dirty: boolean;
     // TODO does it need to be on Terrain?
@@ -180,7 +182,7 @@ abstract class TerrainGraphics extends Graphics {
     dirty = true;
     segments: TerrainSegment[] = [];
 
-    constructor(readonly weights: TerrainSegment[]) {
+    constructor(readonly weights: TerrainSegment[], readonly iguaMaterial: Material) {
         super();
 
         constructTerrain(this, weights);
@@ -200,7 +202,7 @@ abstract class TerrainMesh extends SimpleMesh {
     dirty = true;
     segments: TerrainSegment[] = [];
 
-    constructor(readonly weights: TerrainSegment[]) {
+    constructor(readonly weights: TerrainSegment[], readonly iguaMaterial: Material) {
         super();
 
         constructTerrain(this, weights);
@@ -225,7 +227,7 @@ class SolidBlockGraphics extends TerrainGraphics {
     ];
 
     constructor() {
-        super(SolidBlockGraphics._Weights);
+        super(SolidBlockGraphics._Weights, Material.Earth);
         this.beginFill(0xffffff).drawRect(0, 0, 1, 1);
     }
 }
@@ -238,7 +240,7 @@ class SolidSlopeGraphics extends TerrainGraphics {
     ];
 
     constructor() {
-        super(SolidSlopeGraphics._Weights);
+        super(SolidSlopeGraphics._Weights, Material.Earth);
         this.beginFill(0xffffff).drawPolygon([0, 1, 1, 1, 1, 0]);
     }
 }
@@ -253,7 +255,7 @@ class PipeMesh extends TerrainMesh {
     ];
 
     constructor(weights = PipeMesh._Weights) {
-        super(weights);
+        super(weights, Material.Metal);
 
         this.texture = NoAtlasTx.Terrain.Pipe.Gray;
     }

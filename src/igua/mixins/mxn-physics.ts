@@ -2,6 +2,7 @@ import { Container, DisplayObject, Graphics } from "pixi.js";
 import { Vector, VectorSimple, vnew } from "../../lib/math/vector-type";
 import { LocalTerrain } from "../objects/obj-terrain";
 import { StepOrder } from "../objects/step-order";
+import { Material } from "../systems/materials";
 
 export enum PhysicsFaction {
     Player = 1,
@@ -52,7 +53,15 @@ export function mxnPhysics(
 
     return obj
         .track(mxnPhysics)
-        .merge({ speed: vnew(), gravity, isOnGround: false, physicsRadius, physicsFaction, physicsOffset })
+        .merge({
+            speed: vnew(),
+            gravity,
+            isOnGround: false,
+            physicsRadius,
+            physicsFaction,
+            physicsOffset,
+            groundMaterial: Material.Earth,
+        })
         .step(obj => {
             // TODO
             // Is this even necessary? If so, why?! Why doesn't rounding when rendering work?!
@@ -69,7 +78,14 @@ export function mxnPhysics(
 
 export type MxnPhysics = ReturnType<typeof mxnPhysics>;
 
-type MoveEvent = Omit<PushResult, "isOnGround"> & { previousSpeed: Vector; previousOnGround: boolean };
+interface MoveEvent {
+    hitGround: boolean;
+    hitCeiling: boolean;
+    hitWall: boolean;
+    previousSpeed: Vector;
+    previousOnGround: boolean;
+}
+
 const moveEvent = {
     previousSpeed: vnew(),
 } as MoveEvent;
@@ -150,6 +166,7 @@ function applySpeedInSteps(obj: MxnPhysics) {
         moveEvent.hitGround ||= r1.hitGround;
         moveEvent.hitWall ||= r1.hitWall;
         let hitGround = r1.hitGround;
+        let hitMaterial = r1.hitMaterial;
 
         const r2 = push(obj, false);
 
@@ -157,9 +174,13 @@ function applySpeedInSteps(obj: MxnPhysics) {
         moveEvent.hitGround ||= r2.hitGround;
         moveEvent.hitWall ||= r2.hitWall;
         hitGround ||= r2.hitGround;
+        hitMaterial ||= r2.hitMaterial;
 
         if (vspStep !== 0) {
             obj.isOnGround = hitGround;
+            if (hitMaterial) {
+                obj.groundMaterial = hitMaterial;
+            }
         }
 
         if (obj.speed.x === 0) {
@@ -195,12 +216,14 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
     result.hitCeiling = false;
     result.hitGround = false;
     result.hitWall = false;
+    result.hitMaterial = undefined;
 
     const paddingHorizontal = edgesOnly ? 0 : halfWidth;
 
     const terrains = LocalTerrain.value;
     for (let i = 0; i < terrains.length; i++) {
-        const segments = terrains[i].segments;
+        const terrain = terrains[i];
+        const segments = terrain.segments;
         for (let j = 0; j < segments.length; j++) {
             const segment = segments[j];
 
@@ -258,6 +281,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                                 }
                             }
                             result.hitCeiling = true;
+                            result.hitMaterial = terrain.iguaMaterial;
                         }
                     }
                 }
@@ -299,6 +323,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                             }
                         }
                         result.hitGround = true;
+                        result.hitMaterial = terrain.iguaMaterial;
                     }
                 }
             }
@@ -321,6 +346,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                             obj.speed.x = 0;
                         }
                         result.hitWall = true;
+                        result.hitMaterial = terrain.iguaMaterial;
                     }
                 }
             }
@@ -334,6 +360,7 @@ interface PushResult {
     hitGround: boolean;
     hitCeiling: boolean;
     hitWall: boolean;
+    hitMaterial?: Material;
 }
 
 const _result = {} as PushResult;

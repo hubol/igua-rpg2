@@ -9,8 +9,8 @@ interface MaterialProperties {
 }
 
 export enum Material {
-    Earth,
-    Metal,
+    Earth = 1,
+    Metal = 2,
 }
 
 export const Materials = {
