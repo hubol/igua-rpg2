@@ -4,6 +4,7 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { show } from "../cutscene/show";
 import { objText } from "../../assets/fonts";
 import { container } from "../../lib/pixi/container";
+import { Sfx } from "../../assets/sounds";
 
 interface ObjSignArgs {
     title: string;
@@ -15,6 +16,9 @@ export function objSign({ title, message }: ObjSignArgs) {
     const text = objText.Small(title, { tint: 0x896037 }).at(1, 1);
 
     return container(spr, text)
-        .mixin(mxnCutscene, () => show(message))
+        .mixin(mxnCutscene, () => {
+            Sfx.Interact.SignRead.play();
+            return show(message);
+        })
         .at(0, -16);
 }
