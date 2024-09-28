@@ -11,6 +11,8 @@ import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { RpgPlayer } from "../../rpg/rpg-player";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyClass } from "../../rpg/rpg-enemy-class";
+import { mxnSpatialAudio } from "../../mixins/mxn-spatial-audio";
+import { Sfx } from "../../../assets/sounds";
 
 const clownTxs = Tx.Enemy.CommonClown.split({ count: 2 });
 
@@ -67,6 +69,7 @@ export function objAngelBouncing() {
                     obj.speed.x = -event.previousSpeed.x; // TODO might be nice to get the normal
                 }
                 if (event.hitGround && !event.previousOnGround) {
+                    obj.play(Sfx.Impact.BouncingEnemyLand);
                     obj.speed.y = -6;
 
                     // TODO play sound if on screen
@@ -84,6 +87,7 @@ export function objAngelBouncing() {
                 }
             },
         })
+        .mixin(mxnSpatialAudio)
         .step(() => {
             // if (obj.portal && !appliedOpaqueTint) {
             //     obj.opaqueTint = 0x20A090;
