@@ -13,6 +13,7 @@ import { Instances } from "../../../lib/game-engine/instances";
 import { MxnPhysics, mxnPhysics } from "../../mixins/mxn-physics";
 import { Sfx } from "../../../assets/sounds";
 import { scene } from "../../globals";
+import { mxnSpatialAudio } from "../../mixins/mxn-spatial-audio";
 
 const atkSplash = RpgAttack.create({
     wetness: 10,
@@ -94,9 +95,12 @@ const txsUpwardSplash = Tx.Effects.SplashMedium.split({ count: 3 });
 const txsSideSplash = Tx.Effects.SplashSmall.split({ count: 4 });
 
 function objUpwardSplash() {
-    Sfx.Fluid.SplashSmall.with.rate(Rng.float(0.95, 1.05)).play();
     return objEphemeralSprite(txsUpwardSplash, Rng.float(0.15, 0.25))
-        .anchored(0.5, 1);
+        .mixin(mxnSpatialAudio)
+        .anchored(0.5, 1)
+        .coro(function* (self) {
+            self.play(Sfx.Fluid.SplashSmall.with.rate(Rng.float(0.95, 1.05)));
+        });
 }
 
 function objSideSplash(speed: number, max: number) {
