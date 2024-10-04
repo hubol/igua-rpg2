@@ -5,7 +5,7 @@ export const GeneratedMusicData = {
    "BigLove": { ogg: require("./ogg/big-love.ogg") },
    "BreadCrumbPool": { ogg: require("./ogg/bread-crumb-pool.ogg") },
    "CedarWorld": { ogg: require("./ogg/cedar-world.ogg") },
-   "Covid_19": { ogg: require("./ogg/covid-19.ogg") },
+   "Covid19": { ogg: require("./ogg/covid-19.ogg") },
    "FirstSong": { ogg: require("./ogg/first-song.ogg") },
    "GolfResort": { ogg: require("./ogg/golf-resort.ogg") },
    "HomeFine": { ogg: require("./ogg/home-fine.ogg") },

@@ -18,7 +18,7 @@ import { Jukebox } from "../core/igua-audio";
 import { Mzk } from "../../assets/music";
 
 export function scnPlayerTest() {
-    Jukebox.play(Mzk.Covid_19);
+    Jukebox.play(Mzk.Covid19);
 
     Sprite.from(Tx.Placeholder).at(128, 128 - 14).mixin(mxnCutscene, function* () {
         yield* show("Hello!");
