@@ -67,7 +67,7 @@ module.exports = function ({ files }, { pascal, noext, format }) {
         node(path.map(pascal), obj);
     }
 
-    const stringifiedTree = serialize(tree).replace(/\\n/g, '\n');
+    const stringifiedTree = serialize(tree);
 
     const source = `
 // This file is generated

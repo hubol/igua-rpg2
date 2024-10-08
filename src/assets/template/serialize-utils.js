@@ -25,6 +25,8 @@ function replacer(_, value) {
 const LiteralRegExp = /"@_LITERAL_START_@(.*?)@_LITERAL_END_@"/gm;
 const substituteLiteral = (_, group) => group;
 
+const DoubleBackSlashRegExp = /\\\\/gm;
+
 /**
  * @param {any} value 
  * @param {string | number | undefined} space 
@@ -34,7 +36,8 @@ function serialize(value, space = 1) {
     const stringified = JSON.stringify(value, replacer, space);
     return stringified
         .replace(DoubleQuoteSubstitutionRegExp, '"')
-        .replace(LiteralRegExp, substituteLiteral);
+        .replace(LiteralRegExp, substituteLiteral)
+        .replace(DoubleBackSlashRegExp, '\\');
 }
 
 function createTree() {
