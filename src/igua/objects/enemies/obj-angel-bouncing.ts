@@ -37,8 +37,7 @@ const clsAngelBouncing = RpgEnemyClass.create({
 export function objAngelBouncing() {
     // const obj = merge(new Container(), { hspeed, vspeed: 0, portal, dangerous, bounceAgainstWall, limitedRangeEnabled });
     // container.ext.isHatParent = true;
-    const mask = new Graphics().beginFill(0x000000).drawRect(0, 0, 18, 15).at(-9, -16);
-    mask.visible = false; // TODO .invisible()
+    const mask = new Graphics().beginFill(0x000000).drawRect(0, 0, 18, 15).at(-9, -16).invisible();
     // const hatSprite = hat(Sprite.from(clownTxs[0]), 0.8);
     const hatSprite = Sprite.from(clownTxs[0]);
     const sprite = Sprite.from(clownTxs[1]);

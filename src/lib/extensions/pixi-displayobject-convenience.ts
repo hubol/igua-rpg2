@@ -17,6 +17,8 @@ declare module "pixi.js" {
         merge<T extends Pojo>(t: T): this & T;
         getMinY(): number;
         getMaxY(): number;
+
+        invisible(): this;
     }
 
     interface Container {
@@ -97,6 +99,12 @@ Object.defineProperties(DisplayObject.prototype, {
     getMaxY: {
         value: function (this: DisplayObject) {
             return this.getBounds(false, r).y + r.height;
+        },
+    },
+    invisible: {
+        value: function (this: DisplayObject) {
+            this.visible = false;
+            return this;
         },
     },
 });
