@@ -49,5 +49,11 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
             }
         });
 
+    const seed = (sceneName.charCodeAt(sceneName.length - 1) || 0)
+        + (checkpointName.charCodeAt(checkpointName.length - 1) || 0);
+    if (seed % 2 === 0) {
+        obj.flipH();
+    }
+
     return obj;
 }
