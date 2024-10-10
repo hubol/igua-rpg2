@@ -48,7 +48,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     const { back, front, controller: feetController, feet } = objIguanaFeet(looks.feet);
     const body = objIguanaBody(looks.body);
     const head = objIguanaHead(looks.head);
-    head.pivot.set(-5, 7).add(looks.head.placement, -1);
+    head.pivot.set(-10, 14).add(looks.head.placement, -2);
 
     const nogginMaxY = head.noggin.getMaxY();
     const torsoMaxY = body.torso.getMaxY();
@@ -141,15 +141,17 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
             const prevHindLeftY = feetController.hindLeftY;
             const prevHindRightY = feetController.hindRightY;
 
-            feetController.foreLeftY = Math.round(gait * (Math.sin(p) - 1) + Math.min(0, airborne2 * -feetLiftMaximum));
+            feetController.foreLeftY = Math.round(
+                gait * (Math.sin(p) - 1) * 2 + Math.min(0, airborne2 * -feetLiftMaximum),
+            );
             feetController.foreRightY = Math.round(
-                gait * (Math.sin(p + Math.PI / 2) - 1) + Math.min(0, airborne * -feetLiftMaximum),
+                gait * (Math.sin(p + Math.PI / 2) - 1) * 2 + Math.min(0, airborne * -feetLiftMaximum),
             );
             feetController.hindLeftY = Math.round(
-                gait * (Math.sin(p + Math.PI) - 1) + Math.min(0, airborne * feetLiftMaximum),
+                gait * (Math.sin(p + Math.PI) - 1) * 2 + Math.min(0, airborne * feetLiftMaximum),
             );
             feetController.hindRightY = Math.round(
-                gait * (Math.sin(p + 3 * Math.PI / 2) - 1) + Math.min(0, airborne2 * feetLiftMaximum),
+                gait * (Math.sin(p + 3 * Math.PI / 2) - 1) * 2 + Math.min(0, airborne2 * feetLiftMaximum),
             );
 
             sinceStepSoundEffectFrames++;
@@ -279,9 +281,9 @@ function objIguanaFoot(feet: Feet, key1: "fore" | "hind", key2: "left" | "right"
     const f = new Sprite(IguanaShapes.Foot[foot.shape]);
 
     if (back) {
-        f.pivot.x -= feet.backOffset;
+        f.pivot.x -= feet.backOffset * 2;
     }
-    const gap = (7 + feet.gap) / 2;
+    const gap = 7 + feet.gap;
     f.pivot.x += key1 === "fore" ? -Math.ceil(gap) : Math.floor(gap);
 
     f.tint = back ? IguanaLooks.darkenBackFeet(foot.color) : foot.color;
@@ -289,9 +291,14 @@ function objIguanaFoot(feet: Feet, key1: "fore" | "hind", key2: "left" | "right"
     const claws = clawsShape ? new Sprite(clawsShape) : undefined;
     if (claws) {
         claws.tint = back ? IguanaLooks.darkenBackFeet(foot.claws.color) : foot.claws.color;
-        claws.pivot.x -= foot.claws.placement;
+        claws.pivot.x -= foot.claws.placement * 2;
         f.addChild(claws);
     }
+
+    if (back) {
+        f.pivot.y = 1;
+    }
+
     return f;
 }
 
@@ -452,17 +459,17 @@ function objIguanaBody(body: Body) {
             }),
         });
     tail.tint = body.tail.color;
-    tail.pivot.set(5, 11).add(body.tail.placement, -1);
+    tail.pivot.set(10, 22).add(body.tail.placement, -2);
     const torso = new Sprite(IguanaShapes.Torso[0]);
     torso.tint = body.color;
-    torso.pivot.set(-1, 5);
+    torso.pivot.set(-2, 10);
 
     tail.club?.pivot?.add(tail.pivot);
 
     const c = container(tail, torso).merge({ torso, tail });
     tail.club?.show(c);
 
-    c.pivot.set(-body.placement.x, -body.placement.y);
+    c.pivot.set(-body.placement.x * 2, -body.placement.y * 2);
     return c;
 }
 
@@ -489,7 +496,7 @@ function objIguanaMouth(head: Head) {
     const mouths = range(3).map(i =>
         new Sprite(IguanaShapes.Mouth[head.mouth.shape])
             .tinted(head.mouth.color)
-            .add(13, i - 2).add(head.mouth.placement)
+            .add(26, i - 2).add(head.mouth.placement, 2)
             .flipV(flipV)
     );
 
@@ -553,7 +560,7 @@ export function objIguanaHead(head: Head) {
     if (hornShape) {
         const horn = new Sprite(hornShape);
         horn.tint = head.horn.color;
-        horn.pivot.set(-12, 4).add(head.horn.placement, -1);
+        horn.pivot.set(-24, 8).add(head.horn.placement, -2);
         front.addChild(horn);
     }
 
@@ -588,7 +595,7 @@ type Crest = Head["crest"];
 
 function objIguanaCrest(crest: Crest) {
     const c = new Sprite(IguanaShapes.Crest[crest.shape]);
-    c.pivot.add(-4, 13).add(crest.placement, -1);
+    c.pivot.add(-8, 26).add(crest.placement, -2);
     if (crest.flipV) {
         c.flipV(-1);
     }
@@ -629,7 +636,10 @@ const objIguanaEye = (eye: Eye, pupils: Head["eyes"]["pupils"], isLeft: boolean)
 
 function objIguanaEyes(head: Head) {
     const left = objIguanaEye(head.eyes.left, head.eyes.pupils, true);
-    const right = objIguanaEye(head.eyes.right, head.eyes.pupils, false).at(left.shapeObj.width + head.eyes.gap, 0);
+    const right = objIguanaEye(head.eyes.right, head.eyes.pupils, false).at(
+        left.shapeObj.width + head.eyes.gap * 2,
+        0,
+    );
 
     const leftPupilScaleX = left.pupilSpr.scale.x;
     const rightPupilScaleX = right.pupilSpr.scale.x;
@@ -667,7 +677,7 @@ function objIguanaEyes(head: Head) {
             }
         },
     });
-    eyes.pivot.at(-12, 8).add(head.eyes.placement, -1);
+    eyes.pivot.at(-24, 16).add(head.eyes.placement, -2);
 
     eyes.stepsUntilBlink = Rng.int(40, 120);
 

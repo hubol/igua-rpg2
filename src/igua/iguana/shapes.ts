@@ -7,11 +7,11 @@ function shape(texture: Texture, width: number, pixelDefaultAnchor: Vector) {
 }
 
 const tailClubPlacements: VectorSimple[] = [
-    [-3, 8],
-    [3, 17],
-    [-6, 11],
-    [-2, 10],
-    [18, 1],
+    [-6, 16],
+    [6, 34],
+    [-12, 22],
+    [-4, 20],
+    [36, 2],
 ];
 
 function getClubPlacement(tailShapeIndex: number) {
@@ -19,20 +19,20 @@ function getClubPlacement(tailShapeIndex: number) {
 }
 
 const Tail = {
-    Shapes: shape(Tx.Iguana.Tail, 28, [17, 17]),
+    Shapes: shape(Tx.Iguana.Tail, 56, [34, 34]),
     getClubPlacement,
 };
 
 export const IguanaShapes = {
-    Crest: shape(Tx.Iguana.Crest, 16, [10, 10]),
-    Eye: shape(Tx.Iguana.Eye, 8, [7, 5]),
-    Pupil: shape(Tx.Iguana.Pupil, 8, [6, 4]),
-    Mouth: shape(Tx.Iguana.Mouth, 12, [7, 7]),
-    Torso: shape(Tx.Iguana.Torso, 24, [12, 17]),
-    Face: shape(Tx.Iguana.Head, 18, [0, 16]),
-    Horn: shape(Tx.Iguana.Horn, 8, [2, 6]),
+    Crest: shape(Tx.Iguana.Crest, 32, [20, 20]),
+    Eye: shape(Tx.Iguana.Eye, 16, [14, 10]),
+    Pupil: shape(Tx.Iguana.Pupil, 16, [12, 8]),
+    Mouth: shape(Tx.Iguana.Mouth, 24, [14, 15]),
+    Torso: shape(Tx.Iguana.Torso, 48, [24, 34]),
+    Face: shape(Tx.Iguana.Head, 36, [0, 32]),
+    Horn: shape(Tx.Iguana.Horn, 16, [4, 12]),
     Tail,
-    Club: shape(Tx.Iguana.Club, 12, [4, 4]),
-    Foot: shape(Tx.Iguana.Foot, 14, [6, 12]),
-    Claws: shape(Tx.Iguana.Nails, 10, [6, 6]),
+    Club: shape(Tx.Iguana.Club, 24, [8, 8]),
+    Foot: shape(Tx.Iguana.Foot, 28, [12, 24]),
+    Claws: shape(Tx.Iguana.Nails, 20, [12, 12]),
 };
