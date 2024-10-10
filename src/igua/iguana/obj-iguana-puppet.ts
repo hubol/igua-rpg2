@@ -141,17 +141,19 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
             const prevHindLeftY = feetController.hindLeftY;
             const prevHindRightY = feetController.hindRightY;
 
+            const g = Math.round(gait * 2) / 2;
+
             feetController.foreLeftY = Math.round(
-                gait * (Math.sin(p) - 1) * 2 + Math.min(0, airborne2 * -feetLiftMaximum),
+                g * Math.round(Math.sin(p) - 1) * 2 + Math.min(0, airborne2 * -feetLiftMaximum),
             );
             feetController.foreRightY = Math.round(
-                gait * (Math.sin(p + Math.PI / 2) - 1) * 2 + Math.min(0, airborne * -feetLiftMaximum),
+                g * Math.round(Math.sin(p + Math.PI / 2) - 1) * 2 + Math.min(0, airborne * -feetLiftMaximum),
             );
             feetController.hindLeftY = Math.round(
-                gait * (Math.sin(p + Math.PI) - 1) * 2 + Math.min(0, airborne * feetLiftMaximum),
+                g * Math.round(Math.sin(p + Math.PI) - 1) * 2 + Math.min(0, airborne * feetLiftMaximum),
             );
             feetController.hindRightY = Math.round(
-                gait * (Math.sin(p + 3 * Math.PI / 2) - 1) * 2 + Math.min(0, airborne2 * feetLiftMaximum),
+                g * Math.round(Math.sin(p + 3 * Math.PI / 2) - 1) * 2 + Math.min(0, airborne2 * feetLiftMaximum),
             );
 
             sinceStepSoundEffectFrames++;
@@ -370,8 +372,8 @@ function objIguanaFeet(feet: Feet) {
             if (spread === value) {
                 return;
             }
-            const toApply = Math.round(value * 2);
-            const toApplySqrt = Math.round(Math.sqrt(value) * 2);
+            const toApply = Math.round(value * 5);
+            const toApplySqrt = Math.round(Math.sqrt(value) * 5);
             spread = value;
 
             backForeLeft.x = toApply;

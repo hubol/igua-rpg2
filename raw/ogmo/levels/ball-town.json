@@ -67,7 +67,7 @@
           "id": 0,
           "_eid": "88296692",
           "x": 224,
-          "y": 224,
+          "y": 208,
           "originX": 0,
           "originY": 0,
           "values": {"sceneName": "scnPotteryHouse", "checkpointName": "", "name": "", "depth": 0}
@@ -76,8 +76,8 @@
           "name": "Door",
           "id": 1,
           "_eid": "88296692",
-          "x": 232,
-          "y": 144,
+          "x": 234,
+          "y": 128,
           "originX": 0,
           "originY": 0,
           "values": {"sceneName": "", "checkpointName": "", "name": "", "depth": 0}
@@ -1130,18 +1130,6 @@
           "values": {"name": ""}
         },
         {
-          "x": 248,
-          "y": 248,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#d84830",
-          "texture": "shapes/circle64.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
           "x": 296,
           "y": 216,
           "scaleX": 0.75,
@@ -1250,10 +1238,10 @@
           "values": {"name": ""}
         },
         {
-          "x": 248,
-          "y": 160,
-          "scaleX": 1,
-          "scaleY": 1,
+          "x": 249,
+          "y": 153,
+          "scaleX": 1.4,
+          "scaleY": 1.4,
           "rotation": 0,
           "tint": "#d84830",
           "texture": "shapes/circle64.png",
@@ -1331,6 +1319,18 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0,
           "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 249,
+          "y": 225,
+          "scaleX": 1.4,
+          "scaleY": 1.4,
+          "rotation": 0,
+          "tint": "#b82828",
+          "texture": "shapes/circle64.png",
+          "originX": 0.5,
+          "originY": 0.5,
           "values": {"name": ""}
         }
       ],

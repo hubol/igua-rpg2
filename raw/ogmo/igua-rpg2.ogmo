@@ -52,7 +52,7 @@
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
       ]
@@ -82,7 +82,7 @@
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
       ]
@@ -312,7 +312,7 @@
       "exportID": "88296692",
       "name": "Door",
       "limit": -1,
-      "size": {"x": 32, "y": 32},
+      "size": {"x": 45, "y": 48},
       "origin": {"x": 0, "y": 0},
       "originAnchored": true,
       "shape": {
@@ -350,9 +350,9 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/door.png",
-      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURSUlJQAAAGzL0jIAAAACdFJOU/8A5bcwSgAAAAlwSFlzAAAOwgAADsIBFShKgAAAAFtJREFUOE/tijkOgDAQAzf//zQkHoILR6IIEgVT7OFxNacGPMI/6Q5Bx27kgOjkPlFAaAXEhHgWiI1LsAIYVgCjGZHSjEitvRqPCryBXQWeyFcKnAv+gni/UO0A0d0A72FxCP0AAAAASUVORK5CYII="
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAwCAYAAACFUvPfAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAADZSURBVGhD7ZhRDoQgDERx78L9D8RhdqOxhiUNBdGRMX0/+gXPyaQEl3ARMcbv/lolpTS85/ACrbIaZz9gSHpEOKdX/pT0VbIlrfLd0ncJCy3iXdJ3CwuW+Gd/miCFrb2akkYJ59TSbk4aTS2oaaVrmPV4oho5Wk3elfTTCQta0qr0LMJCKU5Zj3dIz1YNDa8Hij9phmqseD1QUEiXtT1OGoY+y8lIVQ8JlrfTLKNO8OmBwqVRuDQKTmm2Gb3i9UBBKW3+C54RrwcKl0bh0ii2261ftwAQSofwA1U0PqAY0jauAAAAAElFTkSuQmCC"
     },
     {
       "exportID": "19953026",
