@@ -1,8 +1,9 @@
-import { Graphics } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { container } from "../../lib/pixi/container";
 import { Force } from "../../lib/types/force";
 import { approachLinear } from "../../lib/math/number";
 import { objText } from "../../assets/fonts";
+import { Tx } from "../../assets/textures";
 
 interface ObjStatusBarConfig {
     value: number;
@@ -251,6 +252,10 @@ export function objStatusBar(config: ObjStatusBarConfig) {
                 height,
             );
         });
+
+    if (config.height === 7) {
+        barsGfx.mask = Sprite.from(Tx.Ui.HorizontalBar9).show(c);
+    }
 
     const increaseTexts = config.increases.map(x => x.digit ? createText(x.digit, true).show(c) : null);
     const decreaseTexts = config.decreases.map(x => x.digit ? createText(x.digit, false).show(c) : null);
