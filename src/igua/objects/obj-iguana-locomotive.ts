@@ -94,8 +94,8 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
         .mixin(mxnPhysics, {
             gravity: IguanaLocomotiveConsts.Gravity,
             physicsFaction: PhysicsFaction.Player,
-            physicsRadius: 7,
-            physicsOffset: [0, -9],
+            physicsRadius: 14,
+            physicsOffset: [0, -18],
             debug: false,
             onMove: (event) => {
                 if (event.hitGround && !event.previousOnGround && event.previousSpeed.y > 1.2) {

@@ -56,7 +56,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     const bodyDuckMaximum = Math.max(1, -torsoMaxY);
     const bodyLandMaximum = bodyDuckMaximum;
     const headDuckMaximum = 2 + Math.max(0, -nogginMaxY - 9);
-    const headRaiseMaximum = (head.noggin.getMaxY() - body.torso.getMinY()) > 1 ? 1 : 0;
+    const headRaiseMaximum = (head.noggin.getMaxY() - body.torso.getMinY()) > 2 ? 2 : 0;
 
     const headOffset = getFlippableOffsetX(head.noggin, body.torso) - 2 + body.pivot.x * 2;
 
@@ -179,20 +179,27 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
             }
         }
 
+        const bodyGait = isAirborne ? 0 : gait;
+
         // Apply
         body.tail.x = Math.round(facingPartialF * 2);
-        body.tail.y = Math.round(-facingPartialF + (airborne > 0 ? 1 : 0));
+        body.tail.y = Math.round(-facingPartialF + (airborne > 0 ? 2 : 0) + (bodyGait * Math.cos(p / 2 + 2)));
 
         body.tail.club?.at(
             body.tail.x,
             body.tail.club.isProbablyAttachedToTail ? body.tail.y : Math.round(-facingPartialF),
         );
 
+        const d = Math.round((1 - Math.sqrt(1 - ducking)) * 3) / 3;
+
         head.x = Math.round(facingRight ? -facingPartialF * 5 : headOffset + facingPartialF * 5);
-        head.y = Math.round(facingPartialF * 2 + ducking * headDuckMaximum + (airborne > 0 ? -headRaiseMaximum : 0));
+        head.y = Math.round(
+            (bodyGait * (Math.cos(p / 2 + 1) - 1)) + facingPartialF * 2 + d * headDuckMaximum
+                + (airborne > 0 ? -headRaiseMaximum : 0),
+        );
 
         core.y = Math.round(
-            (isAirborne ? 0 : gait * (Math.cos(p / 2) + 1) / 2)
+            (bodyGait * (Math.cos(p / 2) + 1) / 2)
                 + Math.min(Math.max(ducking * bodyDuckMaximum, landing * bodyLandMaximum), bodyDuckMaximum),
         );
         feetController.spread = ducking;
@@ -372,8 +379,8 @@ function objIguanaFeet(feet: Feet) {
             if (spread === value) {
                 return;
             }
-            const toApply = Math.round(value * 5);
-            const toApplySqrt = Math.round(Math.sqrt(value) * 5);
+            const toApply = Math.round(value * 3) * 2;
+            const toApplySqrt = Math.round(Math.sqrt(value) * 3) * 2;
             spread = value;
 
             backForeLeft.x = toApply;
