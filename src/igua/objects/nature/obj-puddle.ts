@@ -25,11 +25,11 @@ const atkSplashPoison = RpgAttack.create({
 });
 
 export function objPuddle(width: number, tint = 0x68A8D0) {
-    return objPuddleBase(width, 3, tint, atkSplash);
+    return objPuddleBase(width, 6, tint, atkSplash);
 }
 
 export function objPuddlePoison(width: number, tint = 0x80B020) {
-    return objPuddleBase(width, 3, tint, atkSplashPoison);
+    return objPuddleBase(width, 6, tint, atkSplashPoison);
 }
 
 const filterFn = (item: MxnPhysics) => item.physicsFaction as unknown as boolean;

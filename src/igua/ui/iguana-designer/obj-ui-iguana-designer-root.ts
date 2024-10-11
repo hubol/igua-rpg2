@@ -6,7 +6,7 @@ import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { container } from "../../../lib/pixi/container";
 import { SceneLocal } from "../../../lib/game-engine/scene-local";
-import { Cutscene, DevKey, layers, sceneStack } from "../../globals";
+import { Cutscene, DevKey, layers, renderer, sceneStack } from "../../globals";
 import { ConnectedInput } from "../../iguana/connected-input";
 import { getDefaultLooks } from "../../iguana/get-default-looks";
 import { IguanaLooks } from "../../iguana/looks";
@@ -177,8 +177,8 @@ function objIguanaDesignerDevFeatures() {
 }
 
 function objUiSavePage() {
+    const horizontalMargin = 140;
     const width = 96;
-    const gap = Math.floor((256 - (width * 2)) / 3);
 
     const yesButton = objUiButton("Yes", () => {
         // TODO confirm sfx?
@@ -194,11 +194,14 @@ function objUiSavePage() {
             page.destroy();
             yield layers.overlay.solid.fadeOut(500);
         });
-    }, width).jiggle().center().at(gap, 160);
+    }, width).jiggle().center().at(horizontalMargin, 160);
 
     const page = objUiPage([
         yesButton,
-        objUiButton("No", () => UiIguanaDesignerContext.value.router.pop(), width).center().at(width + gap * 2, 160),
+        objUiButton("No", () => UiIguanaDesignerContext.value.router.pop(), width).center().at(
+            renderer.width - horizontalMargin - width,
+            160,
+        ),
     ], { selectionIndex: 1 }).named("Save");
 
     const getDesiredX = () => {
@@ -208,7 +211,7 @@ function objUiSavePage() {
     const looks = UiIguanaDesignerContext.value.looks;
 
     let prev = 0;
-    const puppet = objIguanaPuppet(looks).at(128, 157)
+    const puppet = objIguanaPuppet(looks).at(renderer.width / 2, 157)
         .merge({ atYesButton: false })
         .step(() => {
             prev = puppet.x;
@@ -244,12 +247,12 @@ function objUiSavePage() {
         })
         .show(page);
 
-    puppet.scale.set(2);
     puppet.x = getDesiredX();
 
-    page.pivot.set(3, 13);
+    page.pivot.set(3, -8);
 
-    objText.LargeBold("Is this your true self?", { tint: UiColor.Hint }).anchored(0.5, 0).at(128, 64).show(page);
+    objText.LargeBold("Is this your true self?", { tint: UiColor.Hint }).anchored(0.5, 0).at(renderer.width / 2, 64)
+        .show(page);
 
     return page;
 }
