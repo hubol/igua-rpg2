@@ -203,6 +203,7 @@ export const Lvl = {
     TerrainGrassLoops_8: d(Tx.Terrain.Grass.Loops, { x: 414, y: 374, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff8787 }),
     TerrainEarthAsterisk_7: d(Tx.Terrain.Earth.Asterisk, { x: 342, y: 381, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5b497e }),
     Player: e(r["Player"], { x: 64, y: 232, flippedX: false, values: { name: "", depth: 0 } }),
+    Puddle: e(r["Puddle"], { x: 384, y: 168, width: 56, values: { name: "", depth: 0 }, tint: 0x68a8d0 }),
   })),
   Forest: l({ width: 1296, height: 576, backgroundTint: 0x86bafe }, () => ({
     Block: e(r["Block"], { x: 792, y: 472, width: 248, height: 104, values: { name: "", depth: 0, visible: true }, tint: 0x432f93 }),
