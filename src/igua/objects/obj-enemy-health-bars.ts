@@ -41,7 +41,7 @@ function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model) {
     let parent = obj.parent;
     const vworld = vnew();
 
-    return objHealthBar(32, 7, status.healthMax, status.healthMax)
+    return objHealthBar(32, 9, status.healthMax, status.healthMax)
         .step(self => {
             if (!parent) {
                 parent = obj.parent;

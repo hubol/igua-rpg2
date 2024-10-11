@@ -12,7 +12,7 @@ const Consts = {
 };
 
 export function objHud() {
-    const healthBarObj = objHealthBar(RpgPlayer.Model.healthMax, 7, RpgPlayer.Model.health, RpgPlayer.Model.healthMax);
+    const healthBarObj = objHealthBar(RpgPlayer.Model.healthMax, 9, RpgPlayer.Model.health, RpgPlayer.Model.healthMax);
     const valuablesInfoObj = objValuablesInfo();
     const poisonBuildUpObj = objPoisonBuildUp();
     const poisonLevelObj = objPoisonLevel();
