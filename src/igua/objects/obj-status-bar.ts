@@ -153,7 +153,8 @@ export function objStatusBar(config: ObjStatusBarConfig) {
             barsGfx.clear();
             barsGfx.beginFill(config.tintBack).drawRect(0, 0, width, height);
 
-            const textFloor = height;
+            // TODO kind of a hack for the new messy style
+            const textFloor = height - 2;
 
             {
                 let x = 1;
@@ -253,7 +254,8 @@ export function objStatusBar(config: ObjStatusBarConfig) {
             );
         });
 
-    if (config.height === 7) {
+    // TODO kind of a hack for the new messy style
+    if (config.height === 9) {
         barsGfx.mask = Sprite.from(Tx.Ui.HorizontalBar9).show(c);
     }
 
