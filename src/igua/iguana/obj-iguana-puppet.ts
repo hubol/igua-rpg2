@@ -179,7 +179,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
             }
         }
 
-        const bodyGait = isAirborne ? 0 : gait;
+        const bodyGait = (isAirborne || Math.abs(facing) !== 1) ? 0 : gait;
 
         // Apply
         body.tail.x = Math.round(facingPartialF * 2);
