@@ -68,7 +68,7 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
             placement: { x: 0, y: 0 },
             tail: {
                 shape: 0,
-                color: 0xCC70BB,
+                color: 0x9957AF,
                 placement: { x: 0, y: 0 },
                 club: {
                     shape: -1,

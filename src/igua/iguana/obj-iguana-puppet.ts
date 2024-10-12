@@ -58,7 +58,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     const headDuckMaximum = 2 + Math.max(0, -nogginMaxY - 9);
     const headRaiseMaximum = (head.noggin.getMaxY() - body.torso.getMinY()) > 2 ? 2 : 0;
 
-    const headOffset = getFlippableOffsetX(head.noggin, body.torso) - 2 + body.pivot.x * 2;
+    const headOffset = getFlippableOffsetX(head.noggin, body.torso) - 4 + body.pivot.x * 2;
 
     let facing: Polar = 1;
     let ducking: Unit = 0;
@@ -505,7 +505,7 @@ function objIguanaMouth(head: Head) {
     const mouths = range(3).map(i =>
         new Sprite(IguanaShapes.Mouth[head.mouth.shape])
             .tinted(head.mouth.color)
-            .add(20, i - 2).add(head.mouth.placement, 2)
+            .add(20, i - 2).add(head.mouth.placement)
             .flipV(flipV)
     );
 
@@ -604,7 +604,7 @@ type Crest = Head["crest"];
 
 function objIguanaCrest(crest: Crest) {
     const c = new Sprite(IguanaShapes.Crest[crest.shape]);
-    c.pivot.add(-6, 19).add(crest.placement, -1);
+    c.pivot.add(-6, 17).add(crest.placement, -1);
     if (crest.flipV) {
         c.flipV(-1);
     }
