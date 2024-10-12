@@ -1,17 +1,21 @@
 import { TypedInput } from "./typed-input";
-import { IguanaShapes } from "./shapes";
+import { IguanaShape, IguanaShapes } from "./shapes";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 
 export namespace IguanaLooks {
     export type Input = ReturnType<typeof create>;
     export type Serializable = TypedInput.SerializedTree<Input>;
 
+    function shapeChoice(shape: IguanaShape[], allowNone?: boolean) {
+        return TypedInput.choice(shape.map(x => x.Tx), allowNone);
+    }
+
     export function create() {
         const foot = () => ({
-            shape: TypedInput.choice(IguanaShapes.Foot),
+            shape: shapeChoice(IguanaShapes.Foot),
             color: TypedInput.color(),
             claws: {
-                shape: TypedInput.choice(IguanaShapes.Claws, true),
+                shape: shapeChoice(IguanaShapes.Claws, true),
                 color: TypedInput.color(),
                 placement: TypedInput.integer(-3, 5),
             },
@@ -26,7 +30,7 @@ export namespace IguanaLooks {
                 placement: TypedInput.integer(-4, 4),
             },
             pupil: {
-                shape: TypedInput.choice(IguanaShapes.Pupil),
+                shape: shapeChoice(IguanaShapes.Pupil),
                 color: TypedInput.color(),
                 placement: TypedInput.vector(-2, -2, 2, 2),
                 flipH: TypedInput.boolean(),
@@ -38,7 +42,7 @@ export namespace IguanaLooks {
                 color: TypedInput.color(),
                 placement: TypedInput.vector(-5, -8, 5, 2),
                 crest: {
-                    shape: TypedInput.choice(IguanaShapes.Crest),
+                    shape: shapeChoice(IguanaShapes.Crest),
                     color: TypedInput.color(),
                     placement: TypedInput.vector(),
                     flipH: TypedInput.boolean(),
@@ -56,12 +60,12 @@ export namespace IguanaLooks {
                     right: eye(),
                 },
                 horn: {
-                    shape: TypedInput.choice(IguanaShapes.Horn, true),
+                    shape: shapeChoice(IguanaShapes.Horn, true),
                     color: TypedInput.color(),
                     placement: TypedInput.vector(-12, -10, 6, 4),
                 },
                 mouth: {
-                    shape: TypedInput.choice(IguanaShapes.Mouth),
+                    shape: shapeChoice(IguanaShapes.Mouth),
                     color: TypedInput.color(),
                     placement: TypedInput.vector(-8, -5, 4, 4),
                     flipV: TypedInput.boolean(),
@@ -71,11 +75,11 @@ export namespace IguanaLooks {
                 color: TypedInput.color(),
                 placement: TypedInput.vector(-4, -2, 4, 0),
                 tail: {
-                    shape: TypedInput.choice(IguanaShapes.Tail.Shapes),
+                    shape: shapeChoice(IguanaShapes.Tail.Shapes),
                     color: TypedInput.color(),
                     placement: TypedInput.vector(-8, -7, 4, 5),
                     club: {
-                        shape: TypedInput.choice(IguanaShapes.Club, true),
+                        shape: shapeChoice(IguanaShapes.Club, true),
                         color: TypedInput.color(),
                         placement: TypedInput.vector(),
                     },
