@@ -1,5 +1,5 @@
 import { DisplayObject, Rectangle, Sprite } from "pixi.js";
-import { IguanaShapes } from "./shapes";
+import { IguanaShape, IguanaShapes } from "./shapes";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { IguanaLooks } from "./looks";
@@ -10,6 +10,7 @@ import { Integer, Polar, Unit, ZeroOrGreater } from "../../lib/math/number-alias
 import { vnew } from "../../lib/math/vector-type";
 import { CollisionShape } from "../../lib/pixi/collision";
 import { Material, Materials } from "../systems/materials";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 
 const r1 = new Rectangle();
 const r2 = new Rectangle();
@@ -45,6 +46,9 @@ function getFlippableOffsetX(src: DisplayObject | undefined, dst: DisplayObject,
 }
 
 export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
+    const iguanaSprites: IguanaSprite[] = [];
+    IguanaSprite.resetList();
+
     const { back, front, controller: feetController, feet } = objIguanaFeet(looks.feet);
     const body = objIguanaBody(looks.body);
     const head = objIguanaHead(looks.head);
@@ -205,6 +209,8 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
         feetController.spread = ducking;
     };
 
+    let boil = -1000;
+
     const c = container(back, core, front)
         .collisionShape(CollisionShape.DisplayObjects, [head.crest, head.noggin, body.torso, ...feet.shapes])
         .merge({ head, body, feet })
@@ -277,7 +283,23 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
             playSfx: true,
             groundMaterial: Material.Earth,
         })
-        .step(applyAnimation);
+        .step(applyAnimation)
+        .coro(function* () {
+            while (true) {
+                for (let i = 0; i < iguanaSprites.length; i++) {
+                    iguanaSprites[i].setBoiled(Rng.bool());
+                    if (Rng.bool()) {
+                        yield sleep(20);
+                    }
+                }
+
+                yield sleep(40);
+            }
+        });
+
+    for (const sprite of IguanaSprite.getList()) {
+        iguanaSprites.push(sprite);
+    }
 
     return c;
 }
@@ -287,7 +309,7 @@ type Foot = Feet["fore"]["left"];
 
 function objIguanaFoot(feet: Feet, key1: "fore" | "hind", key2: "left" | "right", back: boolean) {
     const foot: Foot = feet[key1][key2];
-    const f = new Sprite(IguanaShapes.Foot[foot.shape]);
+    const f = new IguanaSprite(IguanaShapes.Foot[foot.shape]);
 
     if (back) {
         f.pivot.x -= feet.backOffset * 2;
@@ -296,8 +318,10 @@ function objIguanaFoot(feet: Feet, key1: "fore" | "hind", key2: "left" | "right"
     f.pivot.x += key1 === "fore" ? -Math.ceil(gap) : Math.floor(gap);
 
     f.tint = back ? IguanaLooks.darkenBackFeet(foot.color) : foot.color;
-    const clawsShape = IguanaShapes.Claws[foot.claws.shape];
-    const claws = clawsShape ? new Sprite(clawsShape) : undefined;
+    const clawShape = IguanaShapes.Claws[foot.claws.shape];
+    const claws = clawShape
+        ? new IguanaSprite(clawShape)
+        : undefined;
     if (claws) {
         claws.tint = back ? IguanaLooks.darkenBackFeet(foot.claws.color) : foot.claws.color;
         claws.pivot.x -= foot.claws.placement * 2;
@@ -458,7 +482,7 @@ const tailClubOffets = [
 ];
 
 function objIguanaBody(body: Body) {
-    const tailSpr = new Sprite(IguanaShapes.Tail.Shapes[body.tail.shape]);
+    const tailSpr = new IguanaSprite(IguanaShapes.Tail.Shapes[body.tail.shape]);
     const clubObj = objIguanaTailClub(body);
 
     const tail = tailSpr
@@ -469,7 +493,7 @@ function objIguanaBody(body: Body) {
         });
     tail.tint = body.tail.color;
     tail.pivot.set(8, 17).add(body.tail.placement, -1);
-    const torso = new Sprite(IguanaShapes.Torso[0]);
+    const torso = new IguanaSprite(IguanaShapes.Torso[0]);
     torso.tint = body.color;
     torso.pivot.set(-2, 8);
 
@@ -488,7 +512,7 @@ function objIguanaTailClub(body: Body) {
         return null;
     }
 
-    const club = new Sprite(clubShape);
+    const club = new IguanaSprite(clubShape);
     club.tint = body.tail.club.color;
     club.pivot.at(IguanaShapes.Tail.getClubPlacement(body.tail.shape)).add(body.tail.club.placement, -1);
 
@@ -503,7 +527,7 @@ function objIguanaMouth(head: Head) {
     const flipV = head.mouth.flipV ? -1 : 1;
 
     const mouths = range(3).map(i =>
-        new Sprite(IguanaShapes.Mouth[head.mouth.shape])
+        new IguanaSprite(IguanaShapes.Mouth[head.mouth.shape])
             .tinted(head.mouth.color)
             .add(20, i - 2).add(head.mouth.placement)
             .flipV(flipV)
@@ -547,7 +571,7 @@ function objIguanaMouth(head: Head) {
 }
 
 export function objIguanaHead(head: Head) {
-    const noggin = new Sprite(IguanaShapes.Face[0]);
+    const noggin = new IguanaSprite(IguanaShapes.Face[0]);
     noggin.tint = head.color;
 
     const mouth = objIguanaMouth(head);
@@ -567,7 +591,7 @@ export function objIguanaHead(head: Head) {
     const front = container();
 
     if (hornShape) {
-        const horn = new Sprite(hornShape);
+        const horn = new IguanaSprite(hornShape);
         horn.tint = head.horn.color;
         horn.pivot.set(-19, 6).add(head.horn.placement, -1);
         front.addChild(horn);
@@ -603,7 +627,7 @@ export function objIguanaHead(head: Head) {
 type Crest = Head["crest"];
 
 function objIguanaCrest(crest: Crest) {
-    const c = new Sprite(IguanaShapes.Crest[crest.shape]);
+    const c = new IguanaSprite(IguanaShapes.Crest[crest.shape]);
     c.pivot.add(-6, 17).add(crest.placement, -1);
     if (crest.flipV) {
         c.flipV(-1);
@@ -619,11 +643,11 @@ type Eye = Head["eyes"]["left"];
 
 const scleraTx = IguanaShapes.Eye[0];
 
-const objIguanaSclera = () => new Sprite(scleraTx);
+const objIguanaSclera = () => new IguanaSprite(scleraTx);
 
 const objIguanaEye = (eye: Eye, pupils: Head["eyes"]["pupils"], isLeft: boolean) => {
     const scleraObj = objIguanaSclera().flipH(isLeft ? 1 : -1);
-    const pupilObj = new Sprite(IguanaShapes.Pupil[eye.pupil.shape]).tinted(eye.pupil.color);
+    const pupilObj = new IguanaSprite(IguanaShapes.Pupil[eye.pupil.shape]).tinted(eye.pupil.color);
     if (isLeft || !pupils.mirrored) {
         pupilObj.at(eye.pupil.placement).add(pupils.placement);
         pupilObj.flipH(eye.pupil.flipH ? -1 : 1);
@@ -691,6 +715,40 @@ function objIguanaEyes(head: Head) {
     eyes.stepsUntilBlink = Rng.int(40, 120);
 
     return eyes;
+}
+
+class IguanaSprite extends Sprite {
+    private static readonly _list: IguanaSprite[] = [];
+
+    static resetList() {
+        this._list.length = 0;
+    }
+
+    static getList() {
+        return this._list;
+    }
+
+    private _boiled = false;
+
+    constructor(readonly shape: IguanaShape) {
+        super(shape.Tx);
+        IguanaSprite._list.push(this);
+    }
+
+    setBoiled(value: boolean) {
+        if (value === this._boiled) {
+            return;
+        }
+
+        if (value) {
+            this.texture = this.shape.BoiledTx;
+            this._boiled = true;
+        }
+        else {
+            this.texture = this.shape.Tx;
+            this._boiled = false;
+        }
+    }
 }
 
 const r6 = new Rectangle();
