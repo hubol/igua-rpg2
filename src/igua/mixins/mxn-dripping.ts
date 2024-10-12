@@ -50,7 +50,7 @@ function getRandomDeepChild(obj: Container) {
                 continue;
             }
             if (!obj2.children?.length) {
-                return obj2;
+                return obj;
             }
             obj = obj2 as Container;
             continue loop;
