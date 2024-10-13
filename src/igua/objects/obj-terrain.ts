@@ -1,10 +1,14 @@
-import { DisplayObject, Graphics, SimpleMesh, WRAP_MODES } from "pixi.js";
+import { BLEND_MODES, DisplayObject, Graphics, SimpleMesh, Sprite, WRAP_MODES } from "pixi.js";
 import { Empty } from "../../lib/types/empty";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { scene } from "../globals";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { StepOrder } from "./step-order";
 import { Material } from "../systems/materials";
+import { container } from "../../lib/pixi/container";
+import { Tx } from "../../assets/textures";
+import { playerObj } from "./obj-player";
+import { mxnBoilMirrorRotate } from "../mixins/mxn-boil-mirror-rotate";
 
 /**
  * Describes a line segment. Different kinds of terrain segments make certain guarantees:
@@ -98,20 +102,36 @@ function createLocalTerrain() {
 
 export const LocalTerrain = new SceneLocal(createLocalTerrain, "LocalTerrain");
 
+const LocalTerrainObj = new SceneLocal(() => {
+    // TODO renderable hack is weird, PixiJS sucks
+    const obj = container().step(self => self.renderable = true, 100).show();
+
+    // TODO other iguanas should receive shadows!
+    const shadowObj = Sprite.from(Tx.Light.ShadowIguana).anchored(0.5, 0.5).step(
+        self => playerObj?.position && self.at(playerObj.position).add(0, -1),
+        StepOrder.Camera - 1,
+    ).mixin(mxnBoilMirrorRotate).show();
+
+    shadowObj.blendMode = BLEND_MODES.MULTIPLY;
+    shadowObj.mask = obj;
+
+    return obj;
+}, "LocalTerrainObj");
+
 export function objSolidBlock() {
-    return new SolidBlockGraphics();
+    return new SolidBlockGraphics().show(LocalTerrainObj.value);
 }
 
 export function objSolidSlope() {
-    return new SolidSlopeGraphics();
+    return new SolidSlopeGraphics().show(LocalTerrainObj.value);
 }
 
 export function objPipe() {
-    return new PipeMesh();
+    return new PipeMesh().show(LocalTerrainObj.value);
 }
 
 export function objPipeSlope() {
-    return new PipeMesh(PipeMesh.SlopeWeights);
+    return new PipeMesh(PipeMesh.SlopeWeights).show(LocalTerrainObj.value);
 }
 
 type CleanableTerrainObj = DisplayObject & { weights: TerrainSegment[]; segments: TerrainSegment[] };
