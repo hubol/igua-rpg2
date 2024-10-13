@@ -114,7 +114,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
             back.scale.x = facingSign;
             front.scale.x = facingSign;
 
-            c.pivot.x = facingRight ? 0 : -1;
+            c.pivot.x = facingRight ? 4 : -3;
 
             const abs = Math.abs(facing);
 
@@ -208,8 +208,6 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
         );
         feetController.spread = ducking;
     };
-
-    let boil = -1000;
 
     const c = container(back, core, front)
         .collisionShape(CollisionShape.DisplayObjects, [head.crest, head.noggin, body.torso, ...feet.shapes])
