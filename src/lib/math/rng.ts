@@ -23,6 +23,10 @@ class RngBase {
         return min_max + Math.round(this.random() * (max - min_max));
     }
 
+    intp(): number {
+        return this.random() > 0.5 ? 1 : -1;
+    }
+
     float(): number;
     float(max: number): number;
     float(min: number, max: number): number;
