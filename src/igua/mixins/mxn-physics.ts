@@ -1,6 +1,6 @@
 import { Container, DisplayObject, Graphics } from "pixi.js";
 import { Vector, VectorSimple, vnew } from "../../lib/math/vector-type";
-import { LocalTerrain } from "../objects/obj-terrain";
+import { CtxTerrain } from "../objects/obj-terrain";
 import { StepOrder } from "../objects/step-order";
 import { Material } from "../systems/materials";
 
@@ -220,7 +220,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 
     const paddingHorizontal = edgesOnly ? 0 : halfWidth;
 
-    const terrains = LocalTerrain.value;
+    const terrains = CtxTerrain.value;
     for (let i = 0; i < terrains.length; i++) {
         const terrain = terrains[i];
         const segments = terrain.segments;

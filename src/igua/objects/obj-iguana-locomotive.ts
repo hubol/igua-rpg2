@@ -3,6 +3,7 @@ import { Undefined } from "../../lib/types/undefined";
 import { IguanaLooks } from "../iguana/looks";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { PhysicsFaction, mxnPhysics } from "../mixins/mxn-physics";
+import { mxnShadowFloor } from "../mixins/mxn-shadow-floor";
 
 const IguanaLocomotiveConsts = {
     WalkingAcceleration: 0.3,
@@ -106,6 +107,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                 }
             },
         })
+        .mixin(mxnShadowFloor, { offset: [0, -1] })
         .merge({
             walkingTopSpeed: IguanaLocomotiveConsts.WalkingTopSpeed,
             isDucking: false,
