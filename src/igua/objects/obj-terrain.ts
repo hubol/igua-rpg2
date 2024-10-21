@@ -39,7 +39,7 @@ interface Terrain {
 }
 
 function cleanTerrain() {
-    const terrains = LocalTerrain.value;
+    const terrains = CtxTerrain.value;
 
     let i = 0;
     let shift = 0;
@@ -69,7 +69,7 @@ function objTerrainSegmentDebug() {
     return new Graphics()
         .step(gfx => {
             gfx.clear();
-            for (const terrain of LocalTerrain.value) {
+            for (const terrain of CtxTerrain.value) {
                 for (const segment of terrain.segments) {
                     let color = 0xff0000;
                     if (segment.isWallFacingRight) {
@@ -100,38 +100,27 @@ function createLocalTerrain() {
     return Empty<Terrain>();
 }
 
-export const LocalTerrain = new SceneLocal(createLocalTerrain, "LocalTerrain");
+export const CtxTerrain = new SceneLocal(createLocalTerrain, "CtxTerrain");
 
-const LocalTerrainObj = new SceneLocal(() => {
+export const CtxTerrainObj = new SceneLocal(() => {
     // TODO renderable hack is weird, PixiJS sucks
-    const obj = container().step(self => self.renderable = true, 100).show();
-
-    // TODO other iguanas should receive shadows!
-    const shadowObj = Sprite.from(Tx.Light.ShadowIguana).anchored(0.5, 0.5).step(
-        self => playerObj?.position && self.at(playerObj.position).add(0, -1),
-        StepOrder.Camera - 1,
-    ).mixin(mxnBoilMirrorRotate).show();
-
-    shadowObj.blendMode = BLEND_MODES.MULTIPLY;
-    shadowObj.mask = obj;
-
-    return obj;
-}, "LocalTerrainObj");
+    return container().step(self => self.renderable = true).show();
+}, "CtxTerrainObj");
 
 export function objSolidBlock() {
-    return new SolidBlockGraphics().show(LocalTerrainObj.value);
+    return new SolidBlockGraphics().show(CtxTerrainObj.value);
 }
 
 export function objSolidSlope() {
-    return new SolidSlopeGraphics().show(LocalTerrainObj.value);
+    return new SolidSlopeGraphics().show(CtxTerrainObj.value);
 }
 
 export function objPipe() {
-    return new PipeMesh().show(LocalTerrainObj.value);
+    return new PipeMesh().show(CtxTerrainObj.value);
 }
 
 export function objPipeSlope() {
-    return new PipeMesh(PipeMesh.SlopeWeights).show(LocalTerrainObj.value);
+    return new PipeMesh(PipeMesh.SlopeWeights).show(CtxTerrainObj.value);
 }
 
 type CleanableTerrainObj = DisplayObject & { weights: TerrainSegment[]; segments: TerrainSegment[] };
@@ -195,7 +184,7 @@ function constructTerrain(terrainObj: ObjTerrain, weights: TerrainSegment[]) {
         cb();
     };
 
-    terrainObj.once("added", () => LocalTerrain.value.push(terrainObj));
+    terrainObj.once("added", () => CtxTerrain.value.push(terrainObj));
 }
 
 abstract class TerrainGraphics extends Graphics {
