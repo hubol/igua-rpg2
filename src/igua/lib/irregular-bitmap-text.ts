@@ -9,7 +9,7 @@ interface IrregularBitmapFont {
     chars: Record<string, IrregularBitmapFontCharacter>;
 }
 
-const irregularBitmapFonts = new WeakMap<BitmapFont, IrregularBitmapFont>();
+const irregularBitmapFonts = new Map<BitmapFont, IrregularBitmapFont>();
 
 function createIrregularBitmapFont(font: BitmapFont): IrregularBitmapFont {
     const oldIrregularBitmapFont = irregularBitmapFonts.get(font);

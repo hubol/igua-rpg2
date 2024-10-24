@@ -1,13 +1,27 @@
 import { TypedInput } from "./typed-input";
 import { IguanaShape, IguanaShapes } from "./shapes";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
+import { Texture } from "pixi.js";
 
 export namespace IguanaLooks {
     export type Input = ReturnType<typeof create>;
     export type Serializable = TypedInput.SerializedTree<Input>;
 
-    function shapeChoice(shape: IguanaShape[], allowNone?: boolean) {
-        return TypedInput.choice(shape.map(x => x.Tx), allowNone);
+    const shapeTextures = new Map<IguanaShape[], Texture[]>();
+
+    function getShapeTextures(shapes: IguanaShape[]) {
+        const oldTextures = shapeTextures.get(shapes);
+        if (oldTextures) {
+            return oldTextures;
+        }
+
+        const textures = shapes.map(x => x.Tx);
+        shapeTextures.set(shapes, textures);
+        return textures;
+    }
+
+    function shapeChoice(shapes: IguanaShape[], allowNone?: boolean) {
+        return TypedInput.choice(getShapeTextures(shapes), allowNone);
     }
 
     export function create() {
