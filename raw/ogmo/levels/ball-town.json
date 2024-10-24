@@ -94,12 +94,12 @@
         },
         {
           "name": "IguanaNpc",
-          "id": 5,
+          "id": 6,
           "_eid": "90326278",
           "x": 152,
           "y": 120,
-          "originX": 12,
-          "originY": 37,
+          "originX": 20,
+          "originY": 53,
           "flippedX": false,
           "values": {"looksName": "", "name": "", "depth": 0}
         }
