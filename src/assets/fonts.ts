@@ -5,6 +5,7 @@ import { Force } from "../lib/types/force";
 import { BitmapText } from "pixi.js";
 import { Tx } from "./textures";
 import { intervalWait } from "../lib/browser/interval-wait";
+import { IrregularBitmapText } from "../igua/lib/irregular-bitmap-text";
 
 type Style = Partial<Omit<IBitmapTextStyle, "fontName">>;
 
@@ -16,10 +17,10 @@ export const objText = {
         return new BitmapText(text, { fontName: Fonts.Diggit.font, ...style });
     },
     Large(text = "", style: Style = {}) {
-        return new BitmapText(text, { fontName: Fonts.ErotixLight.font, ...style });
+        return new IrregularBitmapText(text, { fontName: Fonts.ErotixLight.font, ...style });
     },
     LargeBold(text = "", style: Style = {}) {
-        return new BitmapText(text, { fontName: Fonts.Erotix.font, ...style });
+        return new IrregularBitmapText(text, { fontName: Fonts.Erotix.font, ...style });
     },
 };
 

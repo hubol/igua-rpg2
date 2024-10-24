@@ -112,7 +112,7 @@ export function objUiIguanaDesignerRoot(looks?: IguanaLooks.Serializable) {
 
     objIguanaPreview().at(0, 175).show(c);
 
-    const router = context.router.at(3, 13).show(c);
+    const router = context.router.at(3, 14).show(c);
     objText.LargeBold("", { tint: UiColor.Hint }).at(3, 3).step(title => title.text = getTitleText(router.pages)).show(
         c,
     );
