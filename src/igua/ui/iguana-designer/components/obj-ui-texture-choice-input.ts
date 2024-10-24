@@ -54,7 +54,7 @@ export function objUiTextureChoiceInput(
                 const keepInsideLeft = choicesContainer.children[childrenIndex - 1] ?? s;
                 const keepInsideRight = choicesContainer.children[childrenIndex + 1] ?? s;
 
-                let iterations = firstTime ? 30 : 1;
+                let iterations = firstTime ? 30 : 2;
 
                 while (iterations-- > 0) {
                     const rightBounds = keepInsideRight.getBounds();
@@ -62,10 +62,10 @@ export function objUiTextureChoiceInput(
                     const right = rightBounds.x + rightBounds.width;
 
                     if (left < maxWidth / 2) {
-                        choicesContainer.x += 3;
+                        choicesContainer.x += 2;
                     }
                     else if (right > 94) {
-                        choicesContainer.x -= 3;
+                        choicesContainer.x -= 2;
                     }
                 }
 
