@@ -25,8 +25,11 @@ export const OgmoEntityResolvers = {
     "IntelligenceBackground": ({ values }) => objIntelligenceBackground(values as any),
     "IguanaNpc": (entity) => {
         const obj = objIguanaNpc(entity.values as any);
-        obj.y = 2;
+        obj.y = 3;
         obj.facing = entity.flippedX ? -1 : 1;
+        if (entity.flippedX) {
+            obj.x = 1;
+        }
         delete entity.flippedX;
         return obj;
     },
@@ -41,7 +44,7 @@ export const OgmoEntityResolvers = {
 } satisfies Record<string, (e: OgmoFactory.Entity) => unknown>;
 
 function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?: string) {
-    const pos = vnew(entity).add(entity.flippedX ? 1 : -2, 2);
+    const pos = vnew(entity).add(entity.flippedX ? 1 : -2, 3);
 
     let justCreated = false;
     if (!playerObj || playerObj.destroyed) {
