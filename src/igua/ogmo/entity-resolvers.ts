@@ -1,5 +1,7 @@
+import { Instances } from "../../lib/game-engine/instances";
 import { vnew } from "../../lib/math/vector-type";
 import { objPuddle } from "../objects/nature/obj-puddle";
+import { objCheckpoint } from "../objects/obj-checkpoint";
 import { objDoor } from "../objects/obj-door";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { objIntelligenceBackground } from "../objects/obj-intelligence-background";
@@ -44,18 +46,23 @@ export const OgmoEntityResolvers = {
 } satisfies Record<string, (e: OgmoFactory.Entity) => unknown>;
 
 function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?: string) {
-    const pos = vnew(entity).add(entity.flippedX ? 1 : -2, 3);
+    const pos = vnew(entity).add(entity.flippedX ? 3 : -2, 3);
+    const facing = entity.flippedX ? -1 : 1;
 
-    let justCreated = false;
     if (!playerObj || playerObj.destroyed) {
         createPlayerObj().show();
-        justCreated = true;
     }
 
-    if ((justCreated && !checkpointName) || (checkpointName === RpgProgress.character.position.checkpointName)) {
-        playerObj.at(pos);
-        playerObj.facing = entity.flippedX ? -1 : 1;
+    if (checkpointName) {
+        objCheckpoint(checkpointName, facing).at(pos).show();
     }
+
+    const checkpointObj = Instances(objCheckpoint).find(x =>
+        x.checkpointName === RpgProgress.character.position.checkpointName
+    );
+
+    playerObj.at(checkpointObj ? checkpointObj : pos);
+    playerObj.facing = checkpointObj ? checkpointObj.facing : facing;
 
     return pos;
 }

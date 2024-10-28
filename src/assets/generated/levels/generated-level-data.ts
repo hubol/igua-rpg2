@@ -110,9 +110,9 @@ export const Lvl = {
     Door: e(r["Door"], { x: 224, y: 208, values: { sceneName: "scnPotteryHouse", checkpointName: "", name: "", depth: 0 } }),
     Door_1: e(r["Door"], { x: 234, y: 128, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }),
     Sign: e(r["Sign"], { x: 88, y: 256, values: { title: "Balls", message: "Welcome to the ball town.", name: "", depth: 0 } }),
-    IguanaNpc: e(r["IguanaNpc"], { x: 152, y: 120, flippedX: false, values: { looksName: "", name: "", depth: 0 } }),
-    Player: e(r["Player"], { x: 144, y: 256, flippedX: false, values: { name: "", depth: 0 } }),
-    FromPotteryHouse: e(r["Checkpoint"], { x: 200, y: 256, flippedX: true, values: { name: "FromPotteryHouse", depth: 0 } }),
+    IguanaNpc: e(r["IguanaNpc"], { x: 176, y: 120, flippedX: true, values: { looksName: "", name: "", depth: 0 } }),
+    FromPotteryHouse: e(r["Checkpoint"], { x: 199, y: 242, flippedX: true, values: { name: "FromPotteryHouse", depth: 0 } }),
+    Player: e(r["Player"], { x: 152, y: 256, flippedX: false, values: { name: "", depth: 0 } }),
   })),
   Experiment: l({ width: 728, height: 544, backgroundTint: 0x520e1a }, () => ({
     SkyCloud0: d(Tx.Sky.Cloud0, { x: 128, y: 88, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }),

@@ -93,8 +93,8 @@
       "exportID": "93092164",
       "name": "Player",
       "limit": 1,
-      "size": {"x": 33, "y": 27},
-      "origin": {"x": 12, "y": 25},
+      "size": {"x": 51, "y": 42},
+      "origin": {"x": 22, "y": 39},
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
@@ -358,8 +358,8 @@
       "exportID": "19953026",
       "name": "Checkpoint",
       "limit": -1,
-      "size": {"x": 33, "y": 27},
-      "origin": {"x": 12, "y": 25},
+      "size": {"x": 51, "y": 42},
+      "origin": {"x": 22, "y": 39},
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
@@ -394,7 +394,7 @@
         {"name": "name", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/checkpoint.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAqCAYAAAAeeGN5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIESURBVGhD3Zc9UsQwDIWTXIKLcAJKWmoKWg5BwSFoKahpKTkBF+EUy7zFb0fryFaylvKz3wyIiRxbz5Ll0EXy+vR5+Pl+O9Cmx2EMybpCAfePv93Xx01HGy3IXQwClgI0QRCahrviKsYSIm2EoD7ZZlhCCFaCwCW5/+X9wS2GkDOzFi5iWg52y7s5LimWAc0ts6n+27tnM1aXzDAAWC4ug/TwY8OsplEUw4uONj1WwcIMJNrW4hmJoYB8otrOoAS0hSOtJuhMDAZYE5UEWe9F2FzQ6VDRgUESvCihX7sfuBmS0vvEw8/mcMyMljILLUNTOk4kZjdDgPLHurHh97zVp8BkDLWslIKaEuzSgsAxM6xDWNZoXqs5c4K15vfyDxyg2UvOkqQ0b4QFgzWwhdq83hb02gUpLTuUNW5tizj7vJTglGCgZIt+brjZmvfEQFV7RcZ/XZnBL6pDPbJGZa2yTrfmz++6U2Y4cC9WOx5nD7befmFrXx4jx1YFTWlUqpj05xFMJMHkkla/5wfpqJst+bXrvdb1teacJbITsUYxM7LWWec8jKDV3/rvhUZ1d7AgA4iynp9T5kReglhWpfk8ys5sANrCl1i0/NrGeFDdDV6gEiwu8fS3llwxM/nluQStTUEVs4YQD8wzsydWu2dK/hbUAze3HaOtsllMGQ/reb/803V/QWIoUM387UgAAAAASUVORK5CYII="
     },
@@ -541,7 +541,7 @@
       "name": "IguanaNpc",
       "limit": -1,
       "size": {"x": 50, "y": 55},
-      "origin": {"x": 20, "y": 53},
+      "origin": {"x": 20, "y": 52},
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
@@ -577,7 +577,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/npc.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAA3CAYAAABO8hkCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMiSURBVGhD7ZoxaxRBFIBnI4qVRUAEEUwlUeH8CRYKemJhZ2EQxMLKoDFqipQpIsZTtLIQQWJhZyEqiIXgH/BEDVoYQQ1apLASRNZ7m/fOmdk3szOzs3ubcB8s+27u9jLfvDczu0cSMWA6L++kGIqpQ+eD+zNQEVmCCJUZwXPtcBJlGJhIbIYiTWMo0jSGIk2jcSLy/jKzOOu819S6s/tsgrDDk8j8xFxhPxtbWr6ZaWxGgJ8rPzBS4TK0YSZ7rRkB5KysbD+CEc+m7gOMVLiM1C4CXO5+dCoxTsQ08WsVcRUgdJG/rdMYCXG9tUfpe20ivhL3rl7ASIiz125hpLavPnva738tImUkCJDh2kmmcasW11kbo+1j2SBVnhHfbKSt3Rj15kG6BSMhrrz9JB7ev4uv/vOtsyCSHsaM7Lx4KZUPbK4UWcKHtEdOxNTxECHfbJRBEXHpqK9MXfRFfDro+ll9ra+STCRklF2uGVhpcXy/eSPRD2hfOsHfmZYh6X7BSAVWLODUmXPZWQfeH7GNLHVahyR+vZqwjnhIaZEMLb0kQegy8D78nSRERBbYdnDR2tk6ygtECktLR89CFVkBbHuKsmni91tFQhaBmHAyJkFraQFUXnBPszwzmrVxQInRfQ+HfAfrCnWa5o3+Ws62VeT30geM1rCJjM2vYmSmjAzBSQBeIgAn4yIhEyJEmOZc1sjJcBKELOMrIeMjVLRosCI2CQJkykgQ8lNeGbJVy7Rf2IghEZPc8uuSjSbSFwnJSpNQMgIyW8f34qv1xYYpLbacbDt0TGKtWEAuI+sVViTWSM1Ot7OD43X7BUZxqCwjJgEgtgRgFIGdmw5fXCXe394cbS6yJWR6WHLZzU0SR99NYaSyb/JPlDLOZcT2xBeSnbrIjUbRoyvw9c0jjFSe7+9glMeUEaJsZoIm+64DJzFyByRtomXnS/CqxckUjTrAybTm1kq2jEy05Rc6YxtxYOHJcnY2fQ6+I1QmJ1L0O9X44x0YCXH482R2phF1BYRIRr82dK5YL9InPknAL40U67f/pn8KoGxMHx/L4riPDUL8AxUIckKyIap8AAAAAElFTkSuQmCC"
     },
