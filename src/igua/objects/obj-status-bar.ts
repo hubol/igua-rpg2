@@ -1,9 +1,11 @@
-import { Graphics, Sprite } from "pixi.js";
+import { Graphics, Sprite, Texture } from "pixi.js";
 import { container } from "../../lib/pixi/container";
 import { Force } from "../../lib/types/force";
 import { approachLinear } from "../../lib/math/number";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
+import { TextureProcessing } from "../../lib/pixi/texture-processing";
+import { Undefined } from "../../lib/types/undefined";
 
 interface ObjStatusBarConfig {
     value: number;
@@ -46,6 +48,20 @@ function roundInformatively(value: number, maximum: number) {
     }
     return Math.max(1, Math.min(Math.round(value), maximum - 1));
 }
+
+function createMessyTx(tx: Texture) {
+    const yMaximums = TextureProcessing.getOpaquePixelsYMaximums(tx);
+    return {
+        tx,
+        yMaximums,
+    };
+}
+
+type MessyTx = ReturnType<typeof createMessyTx>;
+
+const messyTxs: Record<number, MessyTx> = {
+    9: createMessyTx(Tx.Ui.HorizontalBar9),
+};
 
 export function objStatusBar(config: ObjStatusBarConfig) {
     let frontValue = config.value;
@@ -119,6 +135,12 @@ export function objStatusBar(config: ObjStatusBarConfig) {
     const leftAlignedTexts: ReturnType<typeof createText>[] = [];
     const rightAlignedTexts: ReturnType<typeof createText>[] = [];
 
+    const messyTx = Undefined(messyTxs[config.height]);
+
+    const getTextFloor = messyTx
+        ? (x: number) => messyTx.yMaximums[x] === null ? messyTx.tx.height : (messyTx.yMaximums[x]! + 1)
+        : () => config.height;
+
     const c = container(barsGfx)
         .merge({
             stepsSinceChange: 0,
@@ -153,14 +175,11 @@ export function objStatusBar(config: ObjStatusBarConfig) {
             barsGfx.clear();
             barsGfx.beginFill(config.tintBack).drawRect(0, 0, width, height);
 
-            // TODO kind of a hack for the new messy style
-            const textFloor = height - 2;
-
             {
                 let x = 1;
                 for (let i = 0; i < leftAlignedTexts.length; i++) {
                     const text = leftAlignedTexts[i];
-                    text.at(x, textFloor);
+                    text.at(x, getTextFloor(x));
                     if (text.visible) {
                         x += text.width + Consts.DigitSpacePixels;
                     }
@@ -171,7 +190,7 @@ export function objStatusBar(config: ObjStatusBarConfig) {
                 let x = width;
                 for (let i = 0; i < rightAlignedTexts.length; i++) {
                     const text = rightAlignedTexts[i];
-                    text.at(x, textFloor);
+                    text.at(x, getTextFloor(x));
                     if (text.visible) {
                         x -= text.width + Consts.DigitSpacePixels;
                     }

@@ -2,9 +2,11 @@ import { BaseTexture, IBaseTextureOptions, Rectangle, RenderTexture, Texture } f
 import { VectorSimple, vnew } from "../math/vector-type";
 import { Boundaries } from "../math/boundaries";
 import { Empty } from "../types/empty";
+import { Integer } from "../math/number-alias-types";
 
 const TextureCacheKey_TrimmedFrame = "__trimmedFrame";
 const TextureCacheKey_OpaquePixelsBoundaries = "__opaquePixelsBoundaries";
+const TextureCacheKey_OpaquePixelsYMaximums = "__opaquePixelsYMaximums";
 
 const defaultAnchor = vnew();
 
@@ -81,6 +83,39 @@ export namespace TextureProcessing {
         }
 
         return texture[TextureCacheKey_OpaquePixelsBoundaries] = { x1, y1, x2, y2 };
+    }
+
+    type Maximums = Array<Integer | null>;
+
+    export function getOpaquePixelsYMaximums(texture: Texture) {
+        const oldMaximums: Maximums = texture[TextureCacheKey_OpaquePixelsYMaximums];
+        if (oldMaximums) {
+            return oldMaximums;
+        }
+
+        const maximums: Maximums = [];
+
+        const w = texture.width;
+        const h = texture.height;
+
+        const data = TextureProcessing.toRgbaArray(texture);
+
+        for (let x = 0; x < w; x++) {
+            let result: Integer | null = null;
+
+            for (let y = h; y >= 0; y--) {
+                const i = y * w + x;
+                const a = data[i * 4 + 3];
+                if (a >= 1) {
+                    result = y;
+                    break;
+                }
+            }
+
+            maximums.push(result);
+        }
+
+        return texture[TextureCacheKey_OpaquePixelsBoundaries] = maximums;
     }
 
     export function toImageData(texture: Texture) {
