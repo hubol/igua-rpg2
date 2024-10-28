@@ -1,3 +1,3 @@
-export function Undefined<T>(): undefined | T {
-    return undefined;
+export function Undefined<T>(t?: T): undefined | T {
+    return t;
 }
