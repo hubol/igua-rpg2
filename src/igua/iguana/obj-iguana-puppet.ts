@@ -81,7 +81,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
 
     const feetLiftMaximum = Math.max(0, bodyDuckMaximum - 1);
 
-    let dirty = false;
+    let dirty = true;
     let sinceStepSoundEffectFrames = 0;
 
     const applyAnimation = () => {
