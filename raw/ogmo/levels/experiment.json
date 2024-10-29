@@ -63,7 +63,18 @@
       "gridCellHeight": 8,
       "gridCellsX": 91,
       "gridCellsY": 68,
-      "entities": []
+      "entities": [
+        {
+          "name": "Sign",
+          "id": 0,
+          "_eid": "39046554",
+          "x": 192,
+          "y": 141,
+          "originX": 0,
+          "originY": 23,
+          "values": {"title": "Outskirts", "message": "The outskirts of town.", "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "TerrainDecals",

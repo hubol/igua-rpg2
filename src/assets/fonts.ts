@@ -11,7 +11,7 @@ type Style = Partial<Omit<IBitmapTextStyle, "fontName">>;
 
 export const objText = {
     Small(text = "", style: Style = {}) {
-        return new BitmapText(text, { fontName: Fonts.Flaccid.font, ...style });
+        return new IrregularBitmapText(text, { fontName: Fonts.Flaccid.font, ...style });
     },
     MediumDigits(text = "", style: Style = {}) {
         return new BitmapText(text, { fontName: Fonts.Diggit.font, ...style });
