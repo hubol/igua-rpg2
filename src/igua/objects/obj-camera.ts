@@ -18,5 +18,8 @@ export function objCamera() {
 
         scene.stage.x = Math.round(-self.x);
         scene.stage.y = Math.round(-self.y);
+
+        scene.parallaxStage.x = Math.round(-self.x * 0.8);
+        scene.parallaxStage.y = Math.round(-self.y * 0.8);
     }, StepOrder.Camera);
 }

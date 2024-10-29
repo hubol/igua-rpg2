@@ -1,6 +1,7 @@
 import { DisplayObject, Sprite, Texture } from "pixi.js";
 import { scene } from "../globals";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
+import { ogmoAddToLayer } from "./add-to-layer";
 
 export namespace OgmoFactory {
     export interface Entity {
@@ -41,6 +42,7 @@ export namespace OgmoFactory {
     export function createEntity<TFn extends (...args: any[]) => any>(
         fn: TFn,
         entity: OgmoFactory.Entity,
+        layerName: string,
     ): ReturnType<TFn> {
         if (typeof fn !== "function") {
             ErrorReporter.reportSubsystemError(
@@ -83,14 +85,12 @@ export namespace OgmoFactory {
             obj.visible = false;
         }
 
-        if (!obj.parent) {
-            obj.show();
-        }
+        ogmoAddToLayer(obj, layerName);
 
         return obj as any;
     }
 
-    export function createDecal(texture: Texture, decal: OgmoFactory.Decal) {
+    export function createDecal(texture: Texture, decal: OgmoFactory.Decal, layerName: string) {
         const spr = Sprite.from(texture).at(decal.x, decal.y);
         spr.scale.set(decal.scaleX, decal.scaleY);
         spr.angle = decal.rotation;
@@ -100,7 +100,9 @@ export namespace OgmoFactory {
             spr.tint = decal.tint;
         }
 
-        return spr.show();
+        ogmoAddToLayer(spr, layerName);
+
+        return spr;
     }
 
     export function createLevel<TFn extends (...args: any[]) => any>(level: OgmoFactory.Level, fn: TFn): TFn {
