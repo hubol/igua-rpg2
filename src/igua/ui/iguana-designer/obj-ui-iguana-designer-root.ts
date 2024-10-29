@@ -41,7 +41,7 @@ function context() {
         get connectedInput() {
             return connectedInput;
         },
-        router: objUiPageRouter({ maxHeight: 240 }),
+        router: objUiPageRouter({ maxHeight: 263 }),
         get page() {
             return this.router.page;
         },
@@ -248,8 +248,6 @@ function objUiSavePage() {
         .show(page);
 
     puppet.x = getDesiredX();
-
-    page.pivot.set(3, -8);
 
     objText.LargeBold("Is this your true self?", { tint: UiColor.Hint }).anchored(0.5, 0).at(renderer.width / 2, 64)
         .show(page);
