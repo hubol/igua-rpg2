@@ -17,11 +17,12 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
     const root = layers.scene.addChild(new TickerContainer(ticker, false).named(`Scene: ${source.name}`));
 
     const background = new Container().named("Background");
+    const parallaxStage = new Container().named("Parallax Stage");
     const stage = new Container().named("Stage");
 
     const camera = objCamera();
 
-    root.addChild(background, stage, camera);
+    root.addChild(background, parallaxStage, stage, camera);
 
     const backgroundGfx = new Graphics().tinted(0x000000).beginFill(0xffffff).drawRect(
         0,
@@ -33,6 +34,7 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
     return {
         root,
         source,
+        parallaxStage,
         stage,
         camera,
         ticker,

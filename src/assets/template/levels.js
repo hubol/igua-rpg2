@@ -19,8 +19,8 @@ const getSerializableTint = (tint) => {
     return literal('0x' + tint);
 }
 
-const getSerializableOgmoEntityArgs = ({ name, id, _eid, originX, originY, tint, ...rest }) => ({ ...rest, tint: getSerializableTint(tint) });
-const getSerializableOgmoDecalArgs = ({ texture, values, tint, ...rest }) => ({ ...rest, tint: getSerializableTint(tint) });
+const getSerializableOgmoEntityArgs = ({ layerName, name, id, _eid, originX, originY, tint, ...rest }) => ({ ...rest, tint: getSerializableTint(tint) });
+const getSerializableOgmoDecalArgs = ({ layerName, texture, values, tint, ...rest }) => ({ ...rest, tint: getSerializableTint(tint) });
 
 /**
 @param {import("@hubol/smooch/template-api").TemplateContext.JsonAggregate} context;
@@ -37,7 +37,7 @@ module.exports = function ({ files }, { pascal, noext, format }) {
         path[path.length - 1] = noext(path[path.length - 1]);
 
         /** @type Array */
-        const entities = json.layers.reverse().flatMap(layer => layer.entities ?? layer.decals ?? []);
+        const entities = json.layers.reverse().flatMap(layer => (layer.entities ?? layer.decals ?? []).map(obj => ({ ...obj, layerName: layer.name })));
 
         const encounteredNames = new Set();
 
@@ -57,8 +57,8 @@ module.exports = function ({ files }, { pascal, noext, format }) {
         const resolveEntities = entities.map(entity => ({
             key: getUniqueName(entity),
             value: entity.texture
-                ? `d(Tx.${decalTexturePathCache.get(entity.texture)}, ${serialize(getSerializableOgmoDecalArgs(entity), 0)})`
-                : `e(r["${entity.name}"], ${serialize(getSerializableOgmoEntityArgs(entity), 0)})`
+                ? `d(Tx.${decalTexturePathCache.get(entity.texture)}, ${serialize(getSerializableOgmoDecalArgs(entity), 0)}, "${entity.layerName}")`
+                : `e(r["${entity.name}"], ${serialize(getSerializableOgmoEntityArgs(entity), 0)}, "${entity.layerName}")`
         }))
 
         const level = { width: json.width, height: json.height, backgroundTint: getSerializableTint(json.backgroundColor) }
