@@ -25,6 +25,7 @@ import { Toast } from "../../../lib/game-engine/toast";
 import { merge } from "../../../lib/object/merge";
 import { ClipboardPojo } from "../../../lib/browser/clipboard-pojo";
 import { clone } from "../../../lib/object/clone";
+import { mxnBoilSeed } from "../../mixins/mxn-boil-seed";
 
 function context() {
     let looks = getDefaultLooks();
@@ -250,6 +251,7 @@ function objUiSavePage() {
     puppet.x = getDesiredX();
 
     objText.LargeBold("Is this your true self?", { tint: UiColor.Hint }).anchored(0.5, 0).at(renderer.width / 2, 64)
+        .mixin(mxnBoilSeed)
         .show(page);
 
     return page;
