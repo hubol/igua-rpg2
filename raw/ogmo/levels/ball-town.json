@@ -83,16 +83,6 @@
           "values": {"sceneName": "", "checkpointName": "", "name": "", "depth": 0}
         },
         {
-          "name": "Sign",
-          "id": 4,
-          "_eid": "39046554",
-          "x": 88,
-          "y": 256,
-          "originX": 0,
-          "originY": 16,
-          "values": {"title": "Balls", "message": "Welcome to the ball town.", "name": "", "depth": 0}
-        },
-        {
           "name": "IguanaNpc",
           "id": 7,
           "_eid": "90326278",
