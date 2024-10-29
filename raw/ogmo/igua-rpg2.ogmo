@@ -20,6 +20,18 @@
   "entityTags": ["Terrain", "Player", "Front"],
   "layers": [
     {
+      "definition": "decal",
+      "name": "FrontDecals",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "17577176",
+      "folder": "../textures",
+      "includeImageSequence": true,
+      "scaleable": true,
+      "rotatable": true,
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "values": []
+    },
+    {
       "definition": "entity",
       "name": "FrontEntities",
       "gridSize": {"x": 8, "y": 8},
@@ -82,7 +94,7 @@
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
       ]
@@ -96,7 +108,7 @@
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "values": []
     }
   ],

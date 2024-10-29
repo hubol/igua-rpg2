@@ -8,6 +8,163 @@
   "backgroundColor": "#520e1a",
   "layers": [
     {
+      "name": "FrontDecals",
+      "_eid": "17577176",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 113,
+      "gridCellsY": 68,
+      "decals": [
+        {
+          "x": 161,
+          "y": 231,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 99,
+          "y": 231,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#779962",
+          "texture": "foliage/small.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 78,
+          "y": 233,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 236,
+          "y": 158,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#67924d",
+          "texture": "foliage/leaves medium0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 207,
+          "y": 174,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ced57f",
+          "texture": "foliage/leaves medium0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 204,
+          "y": 160,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#67924d",
+          "texture": "terrain/earth/asterisk.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 233,
+          "y": 146,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ced57f",
+          "texture": "terrain/earth/asterisk.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 209,
+          "y": 183,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "pottery/ball0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 576,
+          "y": 160,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffae64",
+          "texture": "foliage/medium0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 439,
+          "y": 198,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#516d50",
+          "texture": "foliage/small.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 427,
+          "y": 200,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#516d50",
+          "texture": "foliage/small.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 351,
+          "y": 196,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#779962",
+          "texture": "foliage/small.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
+      "folder": "../textures"
+    },
+    {
       "name": "FrontEntities",
       "_eid": "55690179",
       "offsetX": 0,
@@ -255,48 +412,12 @@
           "values": {"name": ""}
         },
         {
-          "x": 427,
-          "y": 194,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#516d50",
-          "texture": "foliage/small.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 439,
-          "y": 195,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#516d50",
-          "texture": "foliage/small.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
           "x": 340,
           "y": 194,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
           "tint": "#516d50",
-          "texture": "foliage/small.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 351,
-          "y": 196,
-          "scaleX": -1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#779962",
           "texture": "foliage/small.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -411,36 +532,12 @@
           "values": {"name": ""}
         },
         {
-          "x": 395,
-          "y": 196,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "stone/rock0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
           "x": 557,
           "y": 155,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
           "tint": "#ffd464",
-          "texture": "foliage/medium0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 573,
-          "y": 155,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffae64",
           "texture": "foliage/medium0.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -687,18 +784,6 @@
           "values": {"name": ""}
         },
         {
-          "x": 100,
-          "y": 228,
-          "scaleX": -1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#779962",
-          "texture": "foliage/small.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
           "x": 111,
           "y": 226,
           "scaleX": 1,
@@ -795,18 +880,6 @@
           "values": {"name": ""}
         },
         {
-          "x": 209,
-          "y": 183,
-          "scaleX": -1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "pottery/ball0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
           "x": 536,
           "y": 401,
           "scaleX": 1,
@@ -886,30 +959,6 @@
           "rotation": 0,
           "tint": "#516d50",
           "texture": "foliage/small.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 78,
-          "y": 233,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "stone/rock0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 161,
-          "y": 231,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1623,18 +1672,6 @@
           "values": {"name": ""}
         },
         {
-          "x": 207,
-          "y": 174,
-          "scaleX": -1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ced57f",
-          "texture": "foliage/leaves medium0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
           "x": 216,
           "y": 142,
           "scaleX": 1,
@@ -1642,42 +1679,6 @@
           "rotation": 0,
           "tint": "#ced57f",
           "texture": "foliage/leaves medium0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 236,
-          "y": 158,
-          "scaleX": -1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#67924d",
-          "texture": "foliage/leaves medium0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 204,
-          "y": 160,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#67924d",
-          "texture": "terrain/earth/asterisk.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 233,
-          "y": 146,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ced57f",
-          "texture": "terrain/earth/asterisk.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1849,6 +1850,30 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
+        },
+        {
+          "x": 405,
+          "y": 196,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 384,
+          "y": 193,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -1863,54 +1888,10 @@
       "gridCellsX": 113,
       "gridCellsY": 68,
       "decals": [
-        {
-          "x": 304,
-          "y": 88,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "sky/cloud0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 595,
-          "y": 163,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "sky/cloud0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 875,
-          "y": 58,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "sky/cloud0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 879,
-          "y": 296,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "sky/cloud0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
+        {"x": 304, "y": 88, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#ffffff", "texture": "sky/cloud0.png", "originX": 0.5, "originY": 0.5},
+        {"x": 595, "y": 163, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#ffffff", "texture": "sky/cloud0.png", "originX": 0.5, "originY": 0.5},
+        {"x": 875, "y": 58, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#ffffff", "texture": "sky/cloud0.png", "originX": 0.5, "originY": 0.5},
+        {"x": 879, "y": 296, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#ffffff", "texture": "sky/cloud0.png", "originX": 0.5, "originY": 0.5},
         {"x": 413, "y": 91, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#ffcccf", "texture": "terrain/earth/loop.png", "originX": 0.5, "originY": 0.5},
         {"x": 813, "y": 43, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#ffcccf", "texture": "terrain/earth/loop.png", "originX": 0.5, "originY": 0.5},
         {"x": 754, "y": 62, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#ffcccf", "texture": "terrain/earth/loop.png", "originX": 0.5, "originY": 0.5},
