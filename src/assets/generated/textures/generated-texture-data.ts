@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 89 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 91 }];
 
 interface TxData {
   id: string;
@@ -30,7 +30,7 @@ function txs<T>(tx: (data: TxData) => T) {
     },
     Enemy: {
       CommonClown: tx({ id: "Enemy.CommonClown", atlas: 0, x: 89, y: 242, width: 44, height: 32 }),
-      SpikeBall: tx({ id: "Enemy.SpikeBall", atlas: 0, x: 443, y: 152, width: 14, height: 14 }),
+      SpikeBall: tx({ id: "Enemy.SpikeBall", atlas: 0, x: 426, y: 161, width: 14, height: 14 }),
     },
     Foliage: {
       LeavesMedium0: tx({ id: "Foliage.LeavesMedium0", atlas: 0, x: 0, y: 202, width: 42, height: 60 }),
@@ -82,23 +82,24 @@ function txs<T>(tx: (data: TxData) => T) {
     },
     OpenDoor: tx({ id: "OpenDoor", atlas: 0, x: 257, y: 218, width: 45, height: 48 }),
     OversizedAngel: tx({ id: "OversizedAngel", atlas: 0, x: 501, y: 31, width: 396, height: 51 }),
-    Placeholder: tx({ id: "Placeholder", atlas: 0, x: 426, y: 161, width: 14, height: 14 }),
+    Placeholder: tx({ id: "Placeholder", atlas: 0, x: 408, y: 166, width: 14, height: 14 }),
     Pottery: {
       Ball0: tx({ id: "Pottery.Ball0", atlas: 0, x: 583, y: 146, width: 21, height: 20 }),
       BodyGreen: tx({ id: "Pottery.BodyGreen", atlas: 0, x: 113, y: 275, width: 20, height: 4 }),
       BodyRed: tx({ id: "Pottery.BodyRed", atlas: 0, x: 242, y: 247, width: 14, height: 4 }),
       BodyYellow: tx({ id: "Pottery.BodyYellow", atlas: 0, x: 113, y: 280, width: 20, height: 4 }),
       Figure0: tx({ id: "Pottery.Figure0", atlas: 0, x: 147, y: 212, width: 48, height: 37 }),
-      HangerTriangle: tx({ id: "Pottery.HangerTriangle", atlas: 0, x: 408, y: 166, width: 14, height: 14 }),
-      HeadGreen: tx({ id: "Pottery.HeadGreen", atlas: 0, x: 458, y: 152, width: 14, height: 8 }),
-      HeadRed: tx({ id: "Pottery.HeadRed", atlas: 0, x: 473, y: 152, width: 14, height: 8 }),
-      HeadYellow: tx({ id: "Pottery.HeadYellow", atlas: 0, x: 488, y: 152, width: 14, height: 8 }),
+      HangerTriangle: tx({ id: "Pottery.HangerTriangle", atlas: 0, x: 460, y: 152, width: 14, height: 14 }),
+      HeadGreen: tx({ id: "Pottery.HeadGreen", atlas: 0, x: 475, y: 152, width: 14, height: 8 }),
+      HeadRed: tx({ id: "Pottery.HeadRed", atlas: 0, x: 490, y: 152, width: 14, height: 8 }),
+      HeadYellow: tx({ id: "Pottery.HeadYellow", atlas: 0, x: 505, y: 152, width: 14, height: 8 }),
       PlantBushRed: tx({ id: "Pottery.PlantBushRed", atlas: 0, x: 692, y: 117, width: 18, height: 10 }),
       PlantReed: tx({ id: "Pottery.PlantReed", atlas: 0, x: 303, y: 218, width: 10, height: 16 }),
       Plant0: tx({ id: "Pottery.Plant0", atlas: 0, x: 208, y: 197, width: 48, height: 49 }),
     },
     Shapes: {
       Circle64: tx({ id: "Shapes.Circle64", atlas: 0, x: 73, y: 177, width: 64, height: 64 }),
+      DitherSquare16: tx({ id: "Shapes.DitherSquare16", atlas: 0, x: 443, y: 152, width: 16, height: 16 }),
       LineVertical16: tx({ id: "Shapes.LineVertical16", atlas: 0, x: 370, y: 156, width: 1, height: 16 }),
       Square32: tx({ id: "Shapes.Square32", atlas: 0, x: 37, y: 288, width: 32, height: 32 }),
     },
@@ -116,6 +117,7 @@ function txs<T>(tx: (data: TxData) => T) {
     Terrain: {
       Earth: {
         Asterisk: tx({ id: "Terrain.Earth.Asterisk", atlas: 0, x: 1001, y: 44, width: 21, height: 24 }),
+        CrackSmall0: tx({ id: "Terrain.Earth.CrackSmall0", atlas: 0, x: 28, y: 300, width: 8, height: 4 }),
         Loop: tx({ id: "Terrain.Earth.Loop", atlas: 0, x: 1007, y: 24, width: 17, height: 18 }),
         Mass0: tx({ id: "Terrain.Earth.Mass0", atlas: 0, x: 881, y: 83, width: 137, height: 81 }),
         Spots: tx({ id: "Terrain.Earth.Spots", atlas: 0, x: 931, y: 0, width: 86, height: 23 }),
@@ -133,7 +135,7 @@ function txs<T>(tx: (data: TxData) => T) {
       Checkbox: tx({ id: "Ui.Checkbox", atlas: 0, x: 147, y: 181, width: 60, height: 30 }),
       ChooseYourLooksIcons: tx({ id: "Ui.ChooseYourLooksIcons", atlas: 0, x: 0, y: 0, width: 930, height: 30 }),
       HorizontalBar9: tx({ id: "Ui.HorizontalBar9", atlas: 0, x: 0, y: 31, width: 500, height: 9 }),
-      NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 28, y: 300, width: 8, height: 8 }),
+      NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 363, y: 197, width: 8, height: 8 }),
       PlacementReticle: tx({ id: "Ui.PlacementReticle", atlas: 0, x: 208, y: 181, width: 6, height: 6 }),
     },
     Wood: {
