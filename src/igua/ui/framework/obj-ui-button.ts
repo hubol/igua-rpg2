@@ -3,13 +3,20 @@ import { objText } from "../../../assets/fonts";
 import { container } from "../../../lib/pixi/container";
 import { Input } from "../../globals";
 import { UiColor } from "../ui-color";
+import { Rng } from "../../../lib/math/rng";
 
 export function objUiButton(text: string, onPress: () => unknown, width = 96, height = 30) {
     let jigglesOnPress = false;
+    let irregulatesOnPress = false;
     let escapes = false;
 
     function jiggle() {
         jigglesOnPress = true;
+        return c;
+    }
+
+    function irregulate() {
+        irregulatesOnPress = true;
         return c;
     }
 
@@ -41,7 +48,7 @@ export function objUiButton(text: string, onPress: () => unknown, width = 96, he
                 selection.visible = value;
             },
         })
-        .merge({ jiggle, onPress, escape, center, textObj, canPress: true })
+        .merge({ jiggle, irregulate, onPress, escape, center, textObj, canPress: true })
         .step(() => {
             if (factor > 0) {
                 c.pivot.x = (factor % 2 === 0 ? 1 : -1) * Math.ceil(factor / 6);
@@ -59,6 +66,9 @@ export function objUiButton(text: string, onPress: () => unknown, width = 96, he
                 c.onPress();
                 if (jigglesOnPress) {
                     factor = 8;
+                }
+                if (irregulatesOnPress) {
+                    textObj.seed = Rng.int(100000);
                 }
             }
             else if (escapes && Input.justWentDown("MenuEscape")) {
