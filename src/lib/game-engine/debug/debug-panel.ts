@@ -6,6 +6,7 @@ import { TickerContainer } from "../ticker-container";
 import { createDebugKey } from "./debug-key";
 import { elDebugPanel } from "../elements/el-debug-panel";
 import { _Internal_Collision } from "../../pixi/collision";
+import { forceViewportResize } from "../../browser/on-viewport-resize";
 
 export function createDebugPanel(root: Container) {
     if (displayObjectMonitor) {
@@ -17,7 +18,10 @@ export function createDebugPanel(root: Container) {
     const el = elDebugPanel();
     el.appendChild(new DisplayObjectComponent(root).el);
 
-    createDebugKey("F9", "debugPanel_isOpen", x => el.classList[x ? "remove" : "add"]("hidden"));
+    createDebugKey("F9", "debugPanel_isOpen", x => {
+        el.classList[x ? "remove" : "add"]("hidden");
+        forceViewportResize();
+    });
 
     return el;
 }

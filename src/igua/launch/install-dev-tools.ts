@@ -1,3 +1,4 @@
+import { forceViewportResize } from "../../lib/browser/on-viewport-resize";
 import { createDebugKey } from "../../lib/game-engine/debug/debug-key";
 import { createDebugPanel } from "../../lib/game-engine/debug/debug-panel";
 import { elDebugColors } from "../../lib/game-engine/elements/el-debug-colors";
@@ -21,6 +22,10 @@ export function installDevTools() {
     el.prepend(sceneSwitcherEl);
 
     document.body.appendChild(elDebugColors());
+
+    // Crude. Effectively notifies the canvas upscaler that the
+    // "viewport" has changed. Feels bad.
+    forceViewportResize();
 }
 
 function createSceneSwitcherEl() {

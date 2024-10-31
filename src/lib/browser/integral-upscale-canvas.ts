@@ -1,3 +1,5 @@
+import { Environment } from "../environment";
+import { Null } from "../types/null";
 import { onViewportResize } from "./on-viewport-resize";
 import { Viewport } from "./viewport";
 
@@ -8,16 +10,16 @@ export function integralUpscaleCanvas(canvasElement: HTMLCanvasElement) {
 }
 
 function createDoUpscale(canvas: HTMLCanvasElement) {
-    let lastSeenViewportMin = -1;
+    let appliedWidth = Null<number>();
+    let appliedHeight = Null<number>();
 
     return function () {
-        if (Viewport.min === lastSeenViewportMin) {
-            return;
-        }
-
         const padding = 20;
-        const availableWidth = Viewport.width - padding;
-        const availableHeight = Viewport.height - padding;
+
+        const container = Environment.isDev ? canvas.parentElement!.getBoundingClientRect() : Viewport;
+
+        const availableWidth = container.width - padding;
+        const availableHeight = container.height - padding;
 
         const availableAspectRatio = availableWidth / availableHeight;
         const naturalAspectRatio = canvas.width / canvas.height;
@@ -31,9 +33,14 @@ function createDoUpscale(canvas: HTMLCanvasElement) {
         const width = scale * canvas.width;
         const height = scale * canvas.height;
 
+        if (appliedWidth === width && appliedHeight === height) {
+            return;
+        }
+
         canvas.style.width = `${width}px`;
         canvas.style.height = `${height}px`;
-        lastSeenViewportMin = Viewport.min;
+        appliedWidth = width;
+        appliedHeight = height;
     };
 }
 
