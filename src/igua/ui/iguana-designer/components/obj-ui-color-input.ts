@@ -100,7 +100,8 @@ function objUiColorAdjustPage(title: string, binding: ConnectedInput.Binding<num
         readColor();
     })
         .center()
-        .jiggle();
+        .jiggle()
+        .irregulate();
 
     els.push(UiVerticalLayout.Separator);
     els.push(random);

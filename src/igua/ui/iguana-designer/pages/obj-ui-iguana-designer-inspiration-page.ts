@@ -102,5 +102,5 @@ function randomizeColors(colorBindings: ConnectedInput.Binding<number>[]) {
 }
 
 function objUiRandomizerButton(title: string, onPress: () => void) {
-    return objUiDesignerButton(title, onPress).center().jiggle();
+    return objUiDesignerButton(title, onPress).center().jiggle().irregulate();
 }
