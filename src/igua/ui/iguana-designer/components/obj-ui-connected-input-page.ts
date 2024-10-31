@@ -3,7 +3,7 @@ import { Empty } from "../../../../lib/types/empty";
 import { ConnectedInput } from "../../../iguana/connected-input";
 import { TypedInput } from "../../../iguana/typed-input";
 import { UiPage, ObjUiPageElement, objUiPage } from "../../framework/obj-ui-page";
-import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
+import { CtxUiIguanaDesigner } from "../obj-ui-iguana-designer-root";
 import { objUiCheckboxInput } from "./obj-ui-checkbox-input";
 import { objUiDesignerButton } from "./obj-ui-designer-button";
 import { objUiTextureChoiceInput } from "./obj-ui-texture-choice-input";
@@ -59,12 +59,12 @@ function createInputObj(key: string, input: TypedInput.Any & { value: any }) {
 export function objUiConnectedInputNavigationButton(title: string, input: ConnectedInput.Tree<unknown>) {
     return objUiDesignerButton(title, () => {
         const pageObj = createPageObj(title, input);
-        UiIguanaDesignerContext.value.router.push(pageObj);
+        CtxUiIguanaDesigner.value.router.push(pageObj);
     });
 }
 
 function createPageObj(title: string, input: ConnectedInput.Tree<unknown>): UiPage {
-    const looks = UiIguanaDesignerContext.value.connectedInput;
+    const looks = CtxUiIguanaDesigner.value.connectedInput;
     if (input === looks.head.eyes) {
         return objUiIguanaDesignerEyesPage();
     }

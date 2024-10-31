@@ -4,7 +4,7 @@ import { objUiButton } from "../../framework/obj-ui-button";
 import { ObjUiPageElement, objUiPage } from "../../framework/obj-ui-page";
 import { objUiSliderInput } from "./obj-ui-slider-input";
 import { Rng } from "../../../../lib/math/rng";
-import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
+import { CtxUiIguanaDesigner } from "../obj-ui-iguana-designer-root";
 import { UiColor } from "../../ui-color";
 import { Input } from "../../../globals";
 import { ConnectedInput } from "../../../iguana/connected-input";
@@ -21,7 +21,7 @@ export function objUiColorInput(text: string, binding: ConnectedInput.Binding<nu
     const b = objUiDesignerInputBase(
         text,
         binding,
-        () => UiIguanaDesignerContext.value.router.push(objUiColorAdjustPage(text, binding)),
+        () => CtxUiIguanaDesigner.value.router.push(objUiColorAdjustPage(text, binding)),
     );
     new Graphics()
         .beginFill(0xffffff)
@@ -88,7 +88,7 @@ function objUiColorAdjustPage(title: string, binding: ConnectedInput.Binding<num
                 readColor();
             },
         };
-        UiIguanaDesignerContext.value.router.push(objUiColorCopyFromPage(binding2));
+        CtxUiIguanaDesigner.value.router.push(objUiColorCopyFromPage(binding2));
     }
 
     els.push(objUiSliderInput("Hue", hBinding, { min: 0, max: 359 }, [5, 5, 7]));
@@ -148,7 +148,7 @@ function objUiCopyColorButton(color: number, onSelect: () => unknown, onPress: (
 
 function objUiColorCopyFromPage(binding: ConnectedInput.Binding<number>) {
     const initialColor = binding.value;
-    const uniqueColors = ConnectedInput.findUniqueColorValues(UiIguanaDesignerContext.value.connectedInput);
+    const uniqueColors = ConnectedInput.findUniqueColorValues(CtxUiIguanaDesigner.value.connectedInput);
 
     const els: ObjUiPageElement[] = [];
 
@@ -176,7 +176,7 @@ function objUiColorCopyFromPage(binding: ConnectedInput.Binding<number>) {
         const elem = objUiCopyColorButton(
             c,
             () => binding.value = c,
-            () => UiIguanaDesignerContext.value.router.pop(),
+            () => CtxUiIguanaDesigner.value.router.pop(),
             w,
             h,
         ).at(x, y);

@@ -2,7 +2,7 @@ import { Sprite } from "pixi.js";
 import { Tx } from "../../../../assets/textures";
 import { objUiButton } from "../../framework/obj-ui-button";
 import { UiPage } from "../../framework/obj-ui-page";
-import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
+import { CtxUiIguanaDesigner } from "../obj-ui-iguana-designer-root";
 
 const [
     headIcon,
@@ -86,5 +86,5 @@ export function objUiDesignerButton(text: string, onPress: () => unknown, width 
 }
 
 export function objUiDesignerNavigationButton(text: string, createPageFn: () => UiPage) {
-    return objUiDesignerButton(text, () => UiIguanaDesignerContext.value.router.push(createPageFn()));
+    return objUiDesignerButton(text, () => CtxUiIguanaDesigner.value.router.push(createPageFn()));
 }

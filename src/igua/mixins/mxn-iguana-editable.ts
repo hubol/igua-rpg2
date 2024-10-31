@@ -3,7 +3,7 @@ import { Cutscene, DevKey, layers } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { ObjIguanaLocomotive, objIguanaLocomotive } from "../objects/obj-iguana-locomotive";
 import { playerObj } from "../objects/obj-player";
-import { UiIguanaDesignerContext, objUiIguanaDesignerRoot } from "../ui/iguana-designer/obj-ui-iguana-designer-root";
+import { CtxUiIguanaDesigner, objUiIguanaDesignerRoot } from "../ui/iguana-designer/obj-ui-iguana-designer-root";
 
 export function mxnIguanaEditable(obj: ObjIguanaLocomotive, looks: IguanaLooks.Serializable) {
     if (!Environment.isDev) {
@@ -15,14 +15,14 @@ export function mxnIguanaEditable(obj: ObjIguanaLocomotive, looks: IguanaLooks.S
             && DevKey.justWentDown("Slash")
         ) {
             Cutscene.play(function* () {
-                UiIguanaDesignerContext.destroy();
+                CtxUiIguanaDesigner.destroy();
 
-                const designer = objUiIguanaDesignerRoot(looks);
+                const designer = objUiIguanaDesignerRoot({ leftFacingPreviewPosition: [400, 240] }, looks);
                 designer.show(layers.overlay.dev);
                 yield () => DevKey.justWentDown("Escape");
                 designer.destroy();
 
-                const nextLooks = UiIguanaDesignerContext.value.looks;
+                const nextLooks = CtxUiIguanaDesigner.value.looks;
                 const iguana = objIguanaLocomotive(nextLooks)
                     .mixin(mxnIguanaEditable, nextLooks)
                     .at(self);

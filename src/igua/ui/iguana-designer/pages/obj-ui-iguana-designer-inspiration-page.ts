@@ -7,7 +7,7 @@ import { objUiPage } from "../../framework/obj-ui-page";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 import { objUiDesignerButton } from "../components/obj-ui-designer-button";
 import { objUiIguanaDesignerBackButton } from "../components/obj-ui-iguana-designer-back-button";
-import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
+import { CtxUiIguanaDesigner } from "../obj-ui-iguana-designer-root";
 
 export function objUiIguanaDesignerInspirationPage() {
     const els = UiVerticalLayout.apply(
@@ -21,7 +21,7 @@ export function objUiIguanaDesignerInspirationPage() {
 }
 
 function createRandomizeShapes() {
-    const tree = UiIguanaDesignerContext.value.connectedInput;
+    const tree = CtxUiIguanaDesigner.value.connectedInput;
     type MatchMap = Record<number, ConnectedInput.Leaf<TypedInput.Choice<Texture>>[]>;
     const matches = new Map<readonly Texture[], MatchMap>();
 
@@ -51,7 +51,7 @@ function createRandomizeShapes() {
 }
 
 function getMatchingColorConnectedInputs(): ConnectedInput.Binding<number>[] {
-    const tree = UiIguanaDesignerContext.value.connectedInput;
+    const tree = CtxUiIguanaDesigner.value.connectedInput;
 
     const matches: Record<number, ConnectedInput.Leaf<TypedInput.Color>[]> = {};
 

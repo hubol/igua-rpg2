@@ -5,7 +5,7 @@ import { TypedInput } from "../../../iguana/typed-input";
 import { createActionRepeater } from "../../framework/action-repeater";
 import { Tx } from "../../../../assets/textures";
 import { Input } from "../../../globals";
-import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
+import { CtxUiIguanaDesigner } from "../obj-ui-iguana-designer-root";
 import { UiColor } from "../../ui-color";
 import { objUiDesignerInputBase } from "./obj-ui-designer-input-base";
 import { Sfx } from "../../../../assets/sounds";
@@ -101,8 +101,8 @@ export function objUiPlacementInput(
         if (c.selected && Input.justWentDown("Confirm")) {
             inputSelected = !inputSelected;
             (inputSelected ? Sfx.Ui.NavigateInto : Sfx.Ui.NavigateBack).play();
-            if (UiIguanaDesignerContext.value.page) {
-                UiIguanaDesignerContext.value.page.navigation = !inputSelected;
+            if (CtxUiIguanaDesigner.value.page) {
+                CtxUiIguanaDesigner.value.page.navigation = !inputSelected;
             }
         }
 

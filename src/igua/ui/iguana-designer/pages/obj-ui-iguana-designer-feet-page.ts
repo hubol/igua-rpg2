@@ -5,10 +5,10 @@ import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 import { createUiConnectedInputPageElements } from "../components/obj-ui-connected-input-page";
 import { objUiDesignerButton, objUiDesignerNavigationButton } from "../components/obj-ui-designer-button";
 import { objUiIguanaDesignerBackButton } from "../components/obj-ui-iguana-designer-back-button";
-import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
+import { CtxUiIguanaDesigner } from "../obj-ui-iguana-designer-root";
 
-type ConnectedFeet = typeof UiIguanaDesignerContext["value"]["connectedInput"]["feet"];
-type ConnectedFoot = typeof UiIguanaDesignerContext["value"]["connectedInput"]["feet"]["fore"]["left"];
+type ConnectedFeet = typeof CtxUiIguanaDesigner["value"]["connectedInput"]["feet"];
+type ConnectedFoot = typeof CtxUiIguanaDesigner["value"]["connectedInput"]["feet"]["fore"]["left"];
 function getTopLevelInputs(foot: ConnectedFoot) {
     return { color: foot.color, clawColor: foot.claws.color };
 }
@@ -40,12 +40,12 @@ function objUiForeHindFeetButton(ordinal: "fore" | "hind", feet: ConnectedFeet) 
         );
 
         const page = objUiPage(els, { title, selectionIndex: 0 });
-        UiIguanaDesignerContext.value.router.push(page);
+        CtxUiIguanaDesigner.value.router.push(page);
     });
 }
 
 export function objUiIguanaDesignerFeetPage() {
-    const feet = UiIguanaDesignerContext.value.connectedInput.feet;
+    const feet = CtxUiIguanaDesigner.value.connectedInput.feet;
 
     const inputs = ConnectedInput.join([
         getTopLevelInputs(feet.fore.left),
@@ -80,15 +80,15 @@ export function objUiIguanaDesignerFeetPage() {
 
 function objUiIguanaDesignerFeetAdvancedPage() {
     const els = UiVerticalLayout.apply(
-        objUiIguanaDesignerFootAdvancedButton("Fore Left", UiIguanaDesignerContext.value.connectedInput.feet.fore.left),
+        objUiIguanaDesignerFootAdvancedButton("Fore Left", CtxUiIguanaDesigner.value.connectedInput.feet.fore.left),
         objUiIguanaDesignerFootAdvancedButton(
             "Fore Right",
-            UiIguanaDesignerContext.value.connectedInput.feet.fore.right,
+            CtxUiIguanaDesigner.value.connectedInput.feet.fore.right,
         ),
-        objUiIguanaDesignerFootAdvancedButton("Hind Left", UiIguanaDesignerContext.value.connectedInput.feet.hind.left),
+        objUiIguanaDesignerFootAdvancedButton("Hind Left", CtxUiIguanaDesigner.value.connectedInput.feet.hind.left),
         objUiIguanaDesignerFootAdvancedButton(
             "Hind Right",
-            UiIguanaDesignerContext.value.connectedInput.feet.hind.right,
+            CtxUiIguanaDesigner.value.connectedInput.feet.hind.right,
         ),
         UiVerticalLayout.Separator,
         objUiIguanaDesignerBackButton("Back"),
@@ -100,7 +100,7 @@ function objUiIguanaDesignerFeetAdvancedPage() {
 function objUiIguanaDesignerFootAdvancedButton(title: string, foot: ConnectedFoot) {
     return objUiDesignerButton(
         title,
-        () => UiIguanaDesignerContext.value.router.push(objUiIguanaDesignerFootAdvancedPage(title, foot)),
+        () => CtxUiIguanaDesigner.value.router.push(objUiIguanaDesignerFootAdvancedPage(title, foot)),
     );
 }
 
