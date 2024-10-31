@@ -26,12 +26,19 @@ import { merge } from "../../../lib/object/merge";
 import { ClipboardPojo } from "../../../lib/browser/clipboard-pojo";
 import { clone } from "../../../lib/object/clone";
 import { mxnBoilSeed } from "../../mixins/mxn-boil-seed";
+import { VectorSimple } from "../../../lib/math/vector-type";
+import { Force } from "../../../lib/types/force";
+
+interface Layout {
+    leftFacingPreviewPosition: VectorSimple;
+}
 
 function context() {
     let looks = getDefaultLooks();
     let connectedInput = createConnectedInput(looks);
 
     return {
+        layout: Force<Layout>(),
         get looks() {
             return looks;
         },
@@ -102,16 +109,17 @@ function createConnectedInput(looks: IguanaLooks.Serializable) {
     return connectedInput;
 }
 
-export const UiIguanaDesignerContext = new SceneLocal(context, "UiIguanaDesignerContext");
+export const CtxUiIguanaDesigner = new SceneLocal(context, "UiIguanaDesignerContext");
 
-export function objUiIguanaDesignerRoot(looks?: IguanaLooks.Serializable) {
-    const context = UiIguanaDesignerContext.value;
+export function objUiIguanaDesignerRoot(layout: Layout, looks?: IguanaLooks.Serializable) {
+    const context = CtxUiIguanaDesigner.value;
 
+    context.layout = layout;
     context.looks = looks ? clone(looks) : getDefaultLooks();
 
     const c = container();
 
-    objIguanaPreview().at(0, 175).show(c);
+    objIguanaPreview().show(c);
 
     const router = context.router.at(3, 14).show(c);
     objText.LargeBold("", { tint: UiColor.Hint }).at(3, 3).step(title => title.text = getTitleText(router.pages)).show(
@@ -161,7 +169,7 @@ function objIguanaDesignerDevFeatures() {
 
         if (DevKey.justWentDown("KeyC")) {
             setTimeout(async () => {
-                const text = serializeLooksForClipboard(UiIguanaDesignerContext.value.looks);
+                const text = serializeLooksForClipboard(CtxUiIguanaDesigner.value.looks);
                 await navigator.clipboard.writeText(text);
                 Toast.info("Copied", "Iguana to clipboard");
             });
@@ -171,7 +179,7 @@ function objIguanaDesignerDevFeatures() {
             setTimeout(async () => {
                 const object = await ClipboardPojo.read();
                 Toast.info("Pasted", "Iguana from clipboard");
-                merge(UiIguanaDesignerContext.value.looks, object);
+                merge(CtxUiIguanaDesigner.value.looks, object);
             });
         }
     });
@@ -189,7 +197,7 @@ function objUiSavePage() {
             yield () => puppet.atYesButton;
             layers.overlay.solid.blendMode = BLEND_MODES.SUBTRACT;
             yield layers.overlay.solid.fadeIn(500);
-            const looks = UiIguanaDesignerContext.value.looks;
+            const looks = CtxUiIguanaDesigner.value.looks;
             RpgProgress.character.looks = looks;
             sceneStack.replace(scnPlayerTest, { useGameplay: false });
             page.destroy();
@@ -199,7 +207,7 @@ function objUiSavePage() {
 
     const page = objUiPage([
         yesButton,
-        objUiButton("No", () => UiIguanaDesignerContext.value.router.pop(), width).center().at(
+        objUiButton("No", () => CtxUiIguanaDesigner.value.router.pop(), width).center().at(
             renderer.width - horizontalMargin - width,
             160,
         ),
@@ -209,7 +217,7 @@ function objUiSavePage() {
         return page.selected!.x + page.selected!.width / 2;
     };
 
-    const looks = UiIguanaDesignerContext.value.looks;
+    const looks = CtxUiIguanaDesigner.value.looks;
 
     let prev = 0;
     const puppet = objIguanaPuppet(looks).at(renderer.width / 2, 157)
@@ -313,14 +321,13 @@ function getTitleText(pages: UiPage[]) {
     return text;
 }
 
-function objIguanaPreview(minX = 102, maxX = 253) {
-    const previewCenterX = minX + Math.round((maxX - minX) / 2);
+function objIguanaPreview() {
     let lastLooksJson: string;
     let iguana: ReturnType<typeof objIguanaPreviewInstance>;
     let stepsSinceLastChange = 0;
 
     function objIguanaPreviewInstance() {
-        const bigPuppet = objIguanaPuppet(UiIguanaDesignerContext.value.looks)
+        const bigPuppet = objIguanaPuppet(CtxUiIguanaDesigner.value.looks)
             .step(() => {
                 if (bigPuppet.gait > 0) {
                     bigPuppet.pedometer += 0.1;
@@ -342,20 +349,19 @@ function objIguanaPreview(minX = 102, maxX = 253) {
         bigPuppet.playSfx = false;
         bigPuppet.scale.set(3);
 
-        const smallPuppet = objIguanaPuppet(UiIguanaDesignerContext.value.looks);
+        bigPuppet.at(309, 200);
+
+        const smallPuppet = objIguanaPuppet(CtxUiIguanaDesigner.value.looks);
         smallPuppet.facing = -1;
 
-        smallPuppet.x = bigPuppet.getBounds().right + smallPuppet.getBounds().left;
-        smallPuppet.y = smallPuppet.height + 3;
+        smallPuppet.at(CtxUiIguanaDesigner.value.layout.leftFacingPreviewPosition);
 
         return container(smallPuppet, bigPuppet).merge({ largePreviewObj: bigPuppet });
     }
 
     function getLooksJson() {
-        return JSON.stringify(UiIguanaDesignerContext.value.looks);
+        return JSON.stringify(CtxUiIguanaDesigner.value.looks);
     }
-
-    let firstStep = false;
 
     const c = container()
         .step(() => {
@@ -376,14 +382,7 @@ function objIguanaPreview(minX = 102, maxX = 253) {
             lastLooksJson = looksJson;
         })
         .step(() => {
-            if ((stepsSinceLastChange > 30 || !firstStep) && iguana) {
-                const centerX = iguana.largePreviewObj.getBounds().getCenter().vround().x;
-                const diff = approachLinear(centerX, previewCenterX, firstStep ? 1 : 256) - centerX;
-                c.pivot.x -= diff;
-                firstStep = true;
-            }
-
-            c.visible = UiIguanaDesignerContext.value.page.name !== "Save";
+            c.visible = CtxUiIguanaDesigner.value.page.name !== "Save";
         });
 
     return c;

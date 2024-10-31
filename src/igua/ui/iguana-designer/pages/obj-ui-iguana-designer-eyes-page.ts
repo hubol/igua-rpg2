@@ -4,12 +4,12 @@ import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 import { createUiConnectedInputPageElements, objUiConnectedInputPage } from "../components/obj-ui-connected-input-page";
 import { objUiDesignerNavigationButton } from "../components/obj-ui-designer-button";
 import { objUiIguanaDesignerBackButton } from "../components/obj-ui-iguana-designer-back-button";
-import { UiIguanaDesignerContext } from "../obj-ui-iguana-designer-root";
+import { CtxUiIguanaDesigner } from "../obj-ui-iguana-designer-root";
 
-type ConnectedEye = typeof UiIguanaDesignerContext["value"]["connectedInput"]["head"]["eyes"]["left"];
+type ConnectedEye = typeof CtxUiIguanaDesigner["value"]["connectedInput"]["head"]["eyes"]["left"];
 
 export function objUiIguanaDesignerEyesPage() {
-    const eyes = UiIguanaDesignerContext.value.connectedInput.head.eyes;
+    const eyes = CtxUiIguanaDesigner.value.connectedInput.head.eyes;
 
     const { placement, gap } = eyes;
 
@@ -31,7 +31,7 @@ function getEyelidInputs(eye: ConnectedEye) {
 }
 
 function objUiIguanaDesignerEyelidsPage() {
-    const eyes = UiIguanaDesignerContext.value.connectedInput.head.eyes;
+    const eyes = CtxUiIguanaDesigner.value.connectedInput.head.eyes;
 
     const inputs = ConnectedInput.join([
         getEyelidInputs(eyes.left),
@@ -58,7 +58,7 @@ function getPupilInputs(eye: ConnectedEye) {
 }
 
 function objUiIguanaDesignerPupilsPage() {
-    const eyes = UiIguanaDesignerContext.value.connectedInput.head.eyes;
+    const eyes = CtxUiIguanaDesigner.value.connectedInput.head.eyes;
 
     const inputs = ConnectedInput.join([
         getPupilInputs(eyes.left),
@@ -84,7 +84,7 @@ function objUiIguanaDesignerPupilsPage() {
 }
 
 function objUiIguanaDesignerEyesAdvancedPage() {
-    const eyes = UiIguanaDesignerContext.value.connectedInput.head.eyes;
+    const eyes = CtxUiIguanaDesigner.value.connectedInput.head.eyes;
 
     const { tilt, left, right } = eyes;
     return objUiConnectedInputPage("Advanced", { tilt, leftEye: left, rightEye: right });

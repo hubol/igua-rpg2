@@ -1,8 +1,7 @@
-import { scene } from "../globals";
+import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { objUiIguanaDesignerRoot } from "../ui/iguana-designer/obj-ui-iguana-designer-root";
-import { UiColor } from "../ui/ui-color";
 
 export function scnIguanaDesigner() {
-    scene.style.backgroundTint = UiColor.Shadow;
-    objUiIguanaDesignerRoot().show();
+    const { LightShadowIrregularSmall } = Lvl.MenuIguanaDesigner();
+    objUiIguanaDesignerRoot({ leftFacingPreviewPosition: LightShadowIrregularSmall }).show();
 }
