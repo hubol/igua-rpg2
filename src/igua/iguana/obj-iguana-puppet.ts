@@ -746,6 +746,8 @@ class IguanaSprite extends Sprite {
             this.texture = this.shape.Tx;
             this._boiled = false;
         }
+
+        this.anchor.at(this.texture.defaultAnchor);
     }
 }
 
