@@ -310,7 +310,7 @@ function objIguanaFoot(feet: Feet, key1: "fore" | "hind", key2: "left" | "right"
     const f = new IguanaSprite(IguanaShapes.Foot[foot.shape]);
 
     if (back) {
-        f.pivot.x -= feet.backOffset * 2;
+        f.pivot.x -= feet.backOffset;
     }
     const gap = (11 + feet.gap) / 2;
     f.pivot.x += key1 === "fore" ? -Math.ceil(gap) : Math.floor(gap);
@@ -322,7 +322,7 @@ function objIguanaFoot(feet: Feet, key1: "fore" | "hind", key2: "left" | "right"
         : undefined;
     if (claws) {
         claws.tint = back ? IguanaLooks.darkenBackFeet(foot.claws.color) : foot.claws.color;
-        claws.pivot.x -= foot.claws.placement * 2;
+        claws.pivot.x -= foot.claws.placement;
         f.addChild(claws);
     }
 
@@ -500,7 +500,7 @@ function objIguanaBody(body: Body) {
     const c = container(tail, torso).merge({ torso, tail });
     tail.club?.show(c);
 
-    c.pivot.set(-body.placement.x * 2, -body.placement.y * 2);
+    c.pivot.set(-body.placement.x, -body.placement.y);
     return c;
 }
 
