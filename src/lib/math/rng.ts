@@ -58,6 +58,19 @@ class RngBase {
         v.vlength = 1;
         return v;
     }
+
+    // Thank you
+    // https://stackoverflow.com/a/12646864
+    shuffle<T>(array: T[]) {
+        for (let i = array.length - 1; i >= 0; i--) {
+            const j = Math.floor(this.random() * (i + 1));
+            const temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+
+        return array;
+    }
 }
 
 // https://github.com/tvalentius/pseudo-random/blob/master/index.js
