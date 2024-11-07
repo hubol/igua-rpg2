@@ -31,7 +31,7 @@ export namespace IguanaLooks {
             claws: {
                 shape: shapeChoice(IguanaShapes.Claws, true),
                 color: TypedInput.color(),
-                placement: TypedInput.integer(-3, 5),
+                placement: TypedInput.integer(-3, 6),
             },
         });
 
