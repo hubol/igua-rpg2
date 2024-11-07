@@ -1,7 +1,8 @@
-import { DisplayObject, Sprite, Texture } from "pixi.js";
+import { Container, DisplayObject, Sprite, Texture } from "pixi.js";
 import { scene } from "../globals";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { ogmoAddToLayer } from "./add-to-layer";
+import { container } from "../../lib/pixi/container";
 
 export namespace OgmoFactory {
     export interface Entity {
@@ -30,6 +31,7 @@ export namespace OgmoFactory {
         rotation: number;
         originX: number;
         originY: number;
+        groupName?: string;
         tint?: number;
     }
 
@@ -90,6 +92,8 @@ export namespace OgmoFactory {
         return obj as any;
     }
 
+    const decalGroups = new Map<string, Container>();
+
     export function createDecal(texture: Texture, decal: OgmoFactory.Decal, layerName: string) {
         const spr = Sprite.from(texture).at(decal.x, decal.y);
         spr.scale.set(decal.scaleX, decal.scaleY);
@@ -100,9 +104,40 @@ export namespace OgmoFactory {
             spr.tint = decal.tint;
         }
 
+        if (decal.groupName) {
+            const decalGroup = decalGroups.get(decal.groupName);
+            if (!decalGroup) {
+                // TODO plz figure out how to classify error severity
+                ErrorReporter.reportSubsystemError(
+                    "createDecal",
+                    new Error(`Could not find Decal Group with name: ${decal.groupName}`),
+                );
+            }
+            else {
+                decalGroup.addChild(spr);
+            }
+        }
+
         ogmoAddToLayer(spr, layerName);
 
         return spr;
+    }
+
+    export function createDecalGroup(groupName: string, layerName: string) {
+        const obj = container().named(`Decal Group: ${groupName}`).merge({ groupName });
+
+        if (decalGroups.has(groupName)) {
+            ErrorReporter.reportSubsystemError(
+                "createDecalGroup",
+                new Error(`createDecalGroup called when decalGroup already exists with groupName: ${groupName}`),
+                { decalGroup: decalGroups.get(groupName) },
+            );
+        }
+        decalGroups.set(groupName, obj);
+
+        ogmoAddToLayer(obj, layerName);
+
+        return obj;
     }
 
     export function createLevel<TFn extends (...args: any[]) => any>(level: OgmoFactory.Level, fn: TFn): TFn {
@@ -110,7 +145,10 @@ export namespace OgmoFactory {
             scene.level.width = level.width;
             scene.level.height = level.height;
             scene.style.backgroundTint = level.backgroundTint;
-            return fn();
+            decalGroups.clear();
+            const result = fn();
+            decalGroups.clear();
+            return result;
         }) as TFn;
     }
 }

@@ -4,7 +4,7 @@ import { OgmoEntityResolvers as r } from "../../../igua/ogmo/entity-resolvers";
 import { OgmoFactory } from "../../../igua/ogmo/factory";
 import { Tx } from "../../../assets/textures";
 
-const { createEntity: e, createDecal: d, createLevel: l } = OgmoFactory;
+const { createEntity: e, createDecal: d, createLevel: l, createDecalGroup: dg } = OgmoFactory;
 
 export const Lvl = {
   BallTown: l({ width: 512, height: 1064, backgroundTint: 0x184880 }, () => ({
@@ -364,6 +364,20 @@ export const Lvl = {
     FoliageMedium0_1: d(Tx.Foliage.Medium0, { x: 236, y: 211, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2c451e }, "TerrainDecals"),
     FoliageMedium0_2: d(Tx.Foliage.Medium0, { x: 357, y: 189, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2c451e }, "TerrainDecals"),
     FoliageMedium0_3: d(Tx.Foliage.Medium0, { x: 409, y: 219, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x1b2714 }, "TerrainDecals"),
+    Group1: dg("Group 1", "TerrainDecals"),
+    ShapesCircle64: d(Tx.Shapes.Circle64, { x: 216, y: 88, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0xffffff }, "TerrainDecals"),
+    ShapesCircle64_1: d(Tx.Shapes.Circle64, { x: 248, y: 56, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0xffffff }, "TerrainDecals"),
+    ShapesCircle64_2: d(Tx.Shapes.Circle64, { x: 288, y: 64, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0xffffff }, "TerrainDecals"),
+    ShapesCircle64_3: d(Tx.Shapes.Circle64, { x: 336, y: 72, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0xffffff }, "TerrainDecals"),
+    ShapesCircle64_4: d(Tx.Shapes.Circle64, { x: 376, y: 96, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0xffffff }, "TerrainDecals"),
+    ShapesCircle64_5: d(Tx.Shapes.Circle64, { x: 256, y: 104, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0xffffff }, "TerrainDecals"),
+    ShapesCircle64_6: d(Tx.Shapes.Circle64, { x: 304, y: 112, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0xffffff }, "TerrainDecals"),
+    ShapesCircle64_7: d(Tx.Shapes.Circle64, { x: 336, y: 104, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0xffffff }, "TerrainDecals"),
+    TerrainGrassLoops: d(Tx.Terrain.Grass.Loops, { x: 220, y: 53, scaleX: 1, scaleY: 1, rotation: -16.31792928278778, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0xffffff }, "TerrainDecals"),
+    TerrainGrassLoops_1: d(Tx.Terrain.Grass.Loops, { x: 288, y: 129, scaleX: 1, scaleY: 1, rotation: -16.31792928278778, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0xffffff }, "TerrainDecals"),
+    TerrainGrassLoops_2: d(Tx.Terrain.Grass.Loops, { x: 361, y: 65, scaleX: 1, scaleY: 1, rotation: -2.4455050903193905, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0xffffff }, "TerrainDecals"),
+    TerrainEarthAsterisk_3: d(Tx.Terrain.Earth.Asterisk, { x: 376, y: 144, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0xffffff }, "TerrainDecals"),
+    TerrainEarthAsterisk_4: d(Tx.Terrain.Earth.Asterisk, { x: 400, y: 168, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0xffffff }, "TerrainDecals"),
   })),
   Potter: l({ width: 512, height: 400, backgroundTint: 0x5a2e0c }, () => ({
     StoneIrregularWall: d(Tx.Stone.IrregularWall, { x: 141, y: 78, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e2109 }, "BackgroundDecals"),
