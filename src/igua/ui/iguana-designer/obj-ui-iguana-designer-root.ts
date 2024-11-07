@@ -349,7 +349,7 @@ function objIguanaPreview() {
         bigPuppet.playSfx = false;
         bigPuppet.scale.set(3);
 
-        bigPuppet.at(309, 200);
+        bigPuppet.at(280, 183);
 
         const smallPuppet = objIguanaPuppet(CtxUiIguanaDesigner.value.looks);
         smallPuppet.facing = -1;
