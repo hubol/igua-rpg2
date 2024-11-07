@@ -18,7 +18,6 @@ import { UiColor, UiStyle } from "../ui-color";
 import { createUiConnectedInputPageElements } from "./components/obj-ui-connected-input-page";
 import { objUiDesignerNavigationButton } from "./components/obj-ui-designer-button";
 import { objUiIguanaDesignerInspirationPage } from "./pages/obj-ui-iguana-designer-inspiration-page";
-import { scnPlayerTest } from "../../scenes/scn-player-test";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { Environment } from "../../../lib/environment";
 import { Toast } from "../../../lib/game-engine/toast";
@@ -28,6 +27,7 @@ import { clone } from "../../../lib/object/clone";
 import { mxnBoilSeed } from "../../mixins/mxn-boil-seed";
 import { VectorSimple } from "../../../lib/math/vector-type";
 import { Force } from "../../../lib/types/force";
+import { scnExperiment } from "../../scenes/scn-experiment";
 
 interface Layout {
     leftFacingPreviewPosition: VectorSimple;
@@ -198,11 +198,12 @@ function objUiSavePage() {
         yesButton.canPress = false;
         Cutscene.play(function* () {
             yield () => puppet.atYesButton;
+            // TODO this stuff should probably be pulled out
             layers.overlay.solid.blendMode = BLEND_MODES.SUBTRACT;
             yield layers.overlay.solid.fadeIn(500);
             const looks = CtxUiIguanaDesigner.value.looks;
             RpgProgress.character.looks = looks;
-            sceneStack.replace(scnPlayerTest, { useGameplay: false });
+            sceneStack.replace(scnExperiment, { useGameplay: false });
             page.destroy();
             yield layers.overlay.solid.fadeOut(500);
         });

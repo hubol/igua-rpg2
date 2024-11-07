@@ -1,11 +1,15 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { PseudoRng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
+import { Jukebox } from "../core/igua-audio";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { CtxUiIguanaDesigner, objUiIguanaDesignerRoot } from "../ui/iguana-designer/obj-ui-iguana-designer-root";
 
 export function scnIguanaDesigner() {
+    Jukebox.play(Mzk.FirstSong);
+
     const { LightShadowIrregularSmall, Group1 } = Lvl.MenuIguanaDesigner();
     Group1.children.forEach(x => x.mixin(mxnBoilPivot));
     objUiIguanaDesignerRoot({ leftFacingPreviewPosition: LightShadowIrregularSmall }).show();
