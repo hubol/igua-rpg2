@@ -20,7 +20,7 @@ const getSerializableTint = (tint) => {
 }
 
 const getSerializableOgmoEntityArgs = ({ layerName, name, id, _eid, originX, originY, tint, ...rest }) => ({ ...rest, tint: getSerializableTint(tint) });
-const getSerializableOgmoDecalArgs = ({ layerName, texture, values, tint, ...rest }) => ({ ...rest, tint: getSerializableTint(tint) });
+const getSerializableOgmoDecalArgs = ({ layerName, texture, values, tint, decal, groupName, ...rest }) => ({ ...rest, ...(groupName ? { groupName } : {}), tint: getSerializableTint(tint) });
 
 /**
 @param {import("@hubol/smooch/template-api").TemplateContext.JsonAggregate} context;
@@ -54,12 +54,32 @@ module.exports = function ({ files }, { pascal, noext, format }) {
             return name;
         }
 
-        const resolveEntities = entities.map(entity => ({
-            key: getUniqueName(entity),
-            value: entity.texture
-                ? `d(Tx.${decalTexturePathCache.get(entity.texture)}, ${serialize(getSerializableOgmoDecalArgs(entity), 0)}, "${entity.layerName}")`
-                : `e(r["${entity.name}"], ${serialize(getSerializableOgmoEntityArgs(entity), 0)}, "${entity.layerName}")`
-        }))
+        const resolvedGroupNames = new Set();
+
+        const resolveEntities = entities.flatMap(entity => {
+            const resolvedEntity = {
+                key: getUniqueName(entity),
+                value: entity.texture
+                    ? `d(Tx.${decalTexturePathCache.get(entity.texture)}, ${serialize(getSerializableOgmoDecalArgs(entity), 0)}, "${entity.layerName}")`
+                    : `e(r["${entity.name}"], ${serialize(getSerializableOgmoEntityArgs(entity), 0)}, "${entity.layerName}")`,
+            };
+
+            if (!entity.texture || !entity.groupName || resolvedGroupNames.has(entity.groupName)) {
+                return [resolvedEntity];
+            }
+
+            const resolvedGroup = {
+                key: getUniqueName({ name: pascal(entity.groupName) }),
+                value: `dg("${entity.groupName}", "${entity.layerName}")`,
+            };
+
+            resolvedGroupNames.add(entity.groupName);
+
+            return [
+                resolvedGroup,
+                resolvedEntity,
+            ];
+        });
 
         const level = { width: json.width, height: json.height, backgroundTint: getSerializableTint(json.backgroundColor) }
         const obj = literal(`l(${serialize(level, 0)}, () => ({ ${resolveEntities.map(({ key, value }) => `"${key}": ${value},`).join('')} }))`)
@@ -76,7 +96,7 @@ import { OgmoEntityResolvers as r } from '../../../igua/ogmo/entity-resolvers';
 import { OgmoFactory } from '../../../igua/ogmo/factory';
 import { Tx } from '../../../assets/textures';
 
-const { createEntity: e, createDecal: d, createLevel: l } = OgmoFactory;
+const { createEntity: e, createDecal: d, createLevel: l, createDecalGroup: dg } = OgmoFactory;
 
 export const Lvl = ${stringifiedTree};
 `;
