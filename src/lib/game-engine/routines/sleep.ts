@@ -4,3 +4,7 @@ export function sleep(ms: number) {
     ms *= 0.06;
     return () => --ms <= 0;
 }
+
+export function sleepf(frames: number) {
+    return () => frames-- <= 0;
+}
