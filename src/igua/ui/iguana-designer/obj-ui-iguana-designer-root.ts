@@ -53,6 +53,9 @@ function context() {
         get page() {
             return this.router.page;
         },
+        get isViewingConfirmPage() {
+            return this.page.name === "Save";
+        },
     };
 }
 
@@ -382,7 +385,7 @@ function objIguanaPreview() {
             lastLooksJson = looksJson;
         })
         .step(() => {
-            c.visible = CtxUiIguanaDesigner.value.page.name !== "Save";
+            c.visible = !CtxUiIguanaDesigner.value.isViewingConfirmPage;
         });
 
     return c;
