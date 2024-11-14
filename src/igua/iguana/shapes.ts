@@ -20,7 +20,7 @@ export type IguanaShape = ReturnType<typeof shape>[0];
 const tailClubPlacements: VectorSimple[] = [
     [-4, 12],
     [4, 25],
-    [-12, 16],
+    [-8, 15],
     [-3, 15],
     [27, 1],
 ];
