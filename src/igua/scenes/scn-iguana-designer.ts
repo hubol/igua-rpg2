@@ -16,11 +16,12 @@ export function scnIguanaDesigner() {
     Group1.children.forEach(x => x.mixin(mxnBoilPivot));
     objUiIguanaDesignerRoot({ leftFacingPreviewPosition: LightShadowIrregularSmall }).show();
 
-    const objs = new PseudoRng(69).shuffle([
+    const rng = new PseudoRng(69);
+    const objs = rng.shuffle([
         LightShadowIrregularSmall,
         ...Group1.children,
     ])
-        .map(obj => obj.mixin(mxnFliesAway));
+        .map(obj => obj.mixin(mxnHides, rng));
 
     // TODO should there be a "fiber" abstraction
     // so that you don't have to write container().coro().show() ?
@@ -28,14 +29,14 @@ export function scnIguanaDesigner() {
         while (true) {
             yield () => CtxUiIguanaDesigner.value.isViewingConfirmPage;
             for (let i = 0; i < objs.length; i++) {
-                objs[i].isFlyingAway = true;
+                objs[i].isHiding = true;
                 if (i % 3 !== 2) {
                     yield sleepf(1);
                 }
             }
             yield () => !CtxUiIguanaDesigner.value.isViewingConfirmPage;
             for (let i = objs.length - 1; i >= 0; i--) {
-                objs[i].isFlyingAway = false;
+                objs[i].isHiding = false;
                 if (i % 3 !== 2) {
                     yield sleepf(1);
                 }
@@ -45,13 +46,16 @@ export function scnIguanaDesigner() {
         .show();
 }
 
-function mxnFliesAway(obj: DisplayObject) {
-    const y = obj.y;
-    let virtualY = y;
+function mxnHides(obj: DisplayObject, rng: PseudoRng) {
+    const scale = obj.scale.vcpy();
+    let factor = 1;
+    const delta = rng.float(0.05, .15);
+    const resolution = rng.intc(2, 32);
 
-    return obj.merge({ isFlyingAway: false })
+    return obj.merge({ isHiding: false })
         .step(self => {
-            virtualY = approachLinear(virtualY, self.isFlyingAway ? -64 : y, 12);
-            self.y = virtualY;
+            factor = approachLinear(factor, self.isHiding ? 0 : 1, delta);
+            const r = Math.round(factor * resolution) / resolution;
+            self.scale.set(scale.x * r, scale.y * r);
         });
 }
