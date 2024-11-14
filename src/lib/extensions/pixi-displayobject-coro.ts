@@ -22,6 +22,7 @@ Object.defineProperties(DisplayObject.prototype, {
             this.ticker.add({
                 context: this,
                 fn: Coro.runner.bind(null, generator, Coro.createRunnerState()),
+                isCompleteWhenFnResultIsTruthy: true,
             }, order);
 
             return this;

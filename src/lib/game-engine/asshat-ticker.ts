@@ -21,6 +21,7 @@ export interface AsshatTaskContext {
 export interface AsshatTask {
     fn: AsshatTaskFn;
     context: AsshatTaskContext;
+    isCompleteWhenFnResultIsTruthy?: boolean;
 }
 
 export class AsshatTicker implements IAsshatTicker {
@@ -87,7 +88,12 @@ export class AsshatTicker implements IAsshatTicker {
                 }
 
                 try {
-                    task.fn();
+                    const result = task.fn();
+                    if (result && task.isCompleteWhenFnResultIsTruthy) {
+                        shift += 1;
+                        i += 1;
+                        continue;
+                    }
                 }
                 catch (e) {
                     if (e instanceof EscapeTickerAndExecute) {
