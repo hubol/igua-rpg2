@@ -3,11 +3,11 @@ import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { PseudoRng } from "../../lib/math/rng";
-import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { CtxUiIguanaDesigner, objUiIguanaDesignerRoot } from "../ui/iguana-designer/obj-ui-iguana-designer-root";
 import { approachLinear } from "../../lib/math/number";
+import { scene } from "../globals";
 
 export function scnIguanaDesigner() {
     Jukebox.play(Mzk.FirstSong);
@@ -23,9 +23,7 @@ export function scnIguanaDesigner() {
     ])
         .map(obj => obj.mixin(mxnHides, rng));
 
-    // TODO should there be a "fiber" abstraction
-    // so that you don't have to write container().coro().show() ?
-    container().coro(function* () {
+    scene.stage.coro(function* () {
         while (true) {
             yield () => CtxUiIguanaDesigner.value.isViewingConfirmPage;
             for (let i = 0; i < objs.length; i++) {
@@ -42,8 +40,7 @@ export function scnIguanaDesigner() {
                 }
             }
         }
-    })
-        .show();
+    });
 }
 
 function mxnHides(obj: DisplayObject, rng: PseudoRng) {
