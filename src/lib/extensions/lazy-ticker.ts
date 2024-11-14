@@ -1,6 +1,6 @@
-import { AsshatTaskContext, AsshatTicker, AsshatTickerFn, IAsshatTicker } from "../game-engine/asshat-ticker";
+import { AsshatTask, AsshatTicker, IAsshatTicker } from "../game-engine/asshat-ticker";
 
-type QueuedCall = { fn: "add"; arg1: AsshatTickerFn; arg2: AsshatTaskContext; arg3: number };
+type QueuedCall = { fn: "add"; arg0: AsshatTask; arg1: number };
 
 export class LazyTicker implements IAsshatTicker {
     readonly _isLazy = true;
@@ -15,11 +15,11 @@ export class LazyTicker implements IAsshatTicker {
         this._receivers = [receiver];
     }
 
-    add(arg1: AsshatTickerFn, arg2: AsshatTaskContext, arg3: number) {
+    add(arg0: AsshatTask, arg1: number) {
         if (this._resolved) {
             throw new InvalidLazyTickerAccess(`Attempt to enqueue add() call on already-resolved LazyTicker`, this);
         }
-        this._queuedCalls.push({ fn: "add", arg1, arg2, arg3 });
+        this._queuedCalls.push({ fn: "add", arg0, arg1 });
     }
 
     push(lazyTicker: LazyTicker) {
@@ -34,7 +34,7 @@ export class LazyTicker implements IAsshatTicker {
 
         for (let i = 0; i < this._queuedCalls.length; i++) {
             const call = this._queuedCalls[i];
-            ticker[call.fn](call.arg1 as any, (call as any).arg2, (call as any).arg3);
+            ticker[call.fn](call.arg0, call.arg1);
         }
 
         for (let i = 0; i < this._receivers.length; i++) {

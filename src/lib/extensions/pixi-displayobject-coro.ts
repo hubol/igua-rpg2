@@ -19,11 +19,10 @@ Object.defineProperties(DisplayObject.prototype, {
 
             this.cancellationToken;
 
-            this.ticker.add(
-                Coro.runner.bind(null, generator, Coro.createRunnerState()),
-                this,
-                order,
-            );
+            this.ticker.add({
+                context: this,
+                fn: Coro.runner.bind(null, generator, Coro.createRunnerState()),
+            }, order);
 
             return this;
         },

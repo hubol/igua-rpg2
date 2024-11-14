@@ -9,7 +9,7 @@ export type AsshatTickerFn = ((...params: any[]) => any) & { _removed?: boolean 
 
 export interface IAsshatTicker {
     doNextUpdate: boolean;
-    add(fn: AsshatTaskFn, context: AsshatTaskContext, order: number): void;
+    add(task: AsshatTask, order: number): void;
 }
 
 type AsshatTaskFn = (...params: any[]) => any;
@@ -18,7 +18,7 @@ export interface AsshatTaskContext {
     cancellationToken: ICancellationToken;
 }
 
-interface AsshatTask {
+export interface AsshatTask {
     fn: AsshatTaskFn;
     context: AsshatTaskContext;
 }
@@ -30,9 +30,7 @@ export class AsshatTicker implements IAsshatTicker {
     private readonly _orders: number[] = [];
     private readonly _tasks: Record<number, AsshatTask[]> = {};
 
-    add(fn: AsshatTaskFn, context: AsshatTaskContext, order: number) {
-        const task = { fn, context };
-
+    add(task: AsshatTask, order: number) {
         if (!this._tasks[order]) {
             this._tasks[order] = [task];
 

@@ -107,7 +107,7 @@ Object.defineProperties(DisplayObject.prototype, {
 
             this.cancellationToken;
 
-            this.ticker.add(stepFn, this, order);
+            this.ticker.add({ context: this, fn: stepFn }, order);
             return this;
         },
         configurable: true,

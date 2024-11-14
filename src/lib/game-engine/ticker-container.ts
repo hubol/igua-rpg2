@@ -1,5 +1,5 @@
 import { Container } from "pixi.js";
-import { AsshatTicker } from "./asshat-ticker";
+import { AsshatTaskContext, AsshatTicker } from "./asshat-ticker";
 
 export class TickerContainer extends Container {
     constructor(readonly _ticker: AsshatTicker, startTickingOnceAdded = true) {
@@ -11,7 +11,10 @@ export class TickerContainer extends Container {
                 // TODO sucks
                 (this as any).cancellationToken;
                 // TODO might want to specify order?
-                parent.ticker.add(tickFn, this as any, 0);
+                parent.ticker.add({
+                    fn: tickFn,
+                    context: this as unknown as AsshatTaskContext,
+                }, 0);
             });
         }
     }

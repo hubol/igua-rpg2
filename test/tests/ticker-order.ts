@@ -9,9 +9,9 @@ export function tickerOrderWorksAsExpected() {
 
     const context: AsshatTaskContext = { cancellationToken: new CancellationToken() };
 
-    ticker.add(() => result.push(1), context, 1);
-    ticker.add(() => result.push(-1), context, -1);
-    ticker.add(() => result.push(0), context, 0);
+    ticker.add({ fn: () => result.push(1), context }, 1);
+    ticker.add({ fn: () => result.push(-1), context }, -1);
+    ticker.add({ fn: () => result.push(0), context }, 0);
 
     ticker.tick();
 
