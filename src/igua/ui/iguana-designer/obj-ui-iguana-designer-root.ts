@@ -318,10 +318,6 @@ function getTitleText(pages: UiPage[]) {
         text += pages[i].title;
     }
 
-    if (text.length > 52) {
-        text = "..." + text.substring(text.length - 50);
-    }
-
     return text;
 }
 
