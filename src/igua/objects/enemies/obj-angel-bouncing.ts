@@ -55,7 +55,7 @@ export function objAngelBouncing() {
 
     let appliedOpaqueTint = false;
     const obj = container(graphics, spikeBall, hatSprite, sprite, mask)
-        .mixin(mxnEnemy, { hurtboxes: [mask], class: rnkAngelBouncing })
+        .mixin(mxnEnemy, { hurtboxes: [mask], rank: rnkAngelBouncing })
         .mixin(mxnPhysics, {
             gravity: 0.25,
             physicsRadius: 8,

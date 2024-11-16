@@ -15,11 +15,11 @@ import { Rng } from "../../lib/math/rng";
 
 interface MxnEnemyArgs {
     hurtboxes: DisplayObject[];
-    class: RpgEnemyRank.Model;
+    rank: RpgEnemyRank.Model;
 }
 
 export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
-    const { status, loot } = clone(args.class);
+    const { status, loot } = clone(args.rank);
 
     const enemy: RpgEnemy.Model = {
         pride: 0,
