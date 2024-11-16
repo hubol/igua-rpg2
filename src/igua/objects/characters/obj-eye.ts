@@ -73,3 +73,5 @@ export function objEyes(left: ObjEye, right: ObjEye) {
 
     return c;
 }
+
+export type ObjEyes = ReturnType<typeof objEyes>;
