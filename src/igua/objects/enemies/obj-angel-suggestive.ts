@@ -1,14 +1,18 @@
-import { Sprite } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { objAngelEyes } from "./obj-angel-eyes";
 import { container } from "../../../lib/pixi/container";
-import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
+import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
+import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { mxnEnemy } from "../../mixins/mxn-enemy";
 
 const [txGear, txGearHighlight] = Tx.Enemy.Suggestive.Gear.split({ count: 2 });
 const [txMouth, txMouthAgape] = Tx.Enemy.Suggestive.Mouth.split({ count: 2 });
+
+const rnkAngelSuggestive = RpgEnemyRank.create({});
 
 function objAngelSuggestiveGear(tint: Integer) {
     const ax = 8.5 / 16;
@@ -69,7 +73,7 @@ function objAngelSuggestiveFace() {
 
     const spr = Sprite.from(Tx.Enemy.Suggestive.Face).tinted(0xCEBD00).anchored(0.5, 0.5);
 
-    return container(spr, eyesObj, mouthObj);
+    return container(spr, eyesObj, mouthObj).merge({ mouthObj });
 }
 
 export function objAngelSuggestive() {
@@ -81,10 +85,22 @@ export function objAngelSuggestive() {
     )
         .mixin(mxnBoilMirrorRotate);
 
+    const hurtbox0 = new Graphics().beginFill(0).drawRect(-25, -11, 50, 25).invisible();
+    const hurtbox1 = new Graphics().beginFill(0xff0000).drawRect(-11, -35, 17, 30).invisible();
+
     return container(
         Sprite.from(Tx.Enemy.Suggestive.Body).anchored(0.5, 0.7),
         faceObj,
         irregularShadowObj,
         objAngelSuggestiveGears().at(24, -5),
-    );
+        hurtbox0,
+        hurtbox1,
+    )
+        .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0, hurtbox1] })
+        .coro(function* () {
+            while (true) {
+                yield sleep(1000);
+                faceObj.mouthObj.agape = !faceObj.mouthObj.agape;
+            }
+        });
 }
