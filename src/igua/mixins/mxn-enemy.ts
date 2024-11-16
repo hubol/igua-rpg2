@@ -9,13 +9,13 @@ import { RpgAttack } from "../rpg/rpg-attack";
 import { merge } from "../../lib/object/merge";
 import { playerObj } from "../objects/obj-player";
 import { clone } from "../../lib/object/clone";
-import { RpgEnemyClass } from "../rpg/rpg-enemy-class";
+import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { Sfx } from "../../assets/sounds";
 import { Rng } from "../../lib/math/rng";
 
 interface MxnEnemyArgs {
     hurtboxes: DisplayObject[];
-    class: RpgEnemyClass.Model;
+    class: RpgEnemyRank.Model;
 }
 
 export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {

@@ -3,7 +3,7 @@ import { RpgFaction } from "./rpg-faction";
 import { RpgLoot } from "./rpg-loot";
 import { RpgStatus } from "./rpg-status";
 
-export namespace RpgEnemyClass {
+export namespace RpgEnemyRank {
     export interface Model {
         status: RpgStatus.Model;
         loot: RpgLoot.Model;

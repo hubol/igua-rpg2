@@ -10,7 +10,7 @@ import { playerObj } from "../obj-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { RpgPlayer } from "../../rpg/rpg-player";
 import { RpgAttack } from "../../rpg/rpg-attack";
-import { RpgEnemyClass } from "../../rpg/rpg-enemy-class";
+import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { mxnSpatialAudio } from "../../mixins/mxn-spatial-audio";
 import { Sfx } from "../../../assets/sounds";
 
@@ -20,8 +20,7 @@ const atkSpikeBall = RpgAttack.create({
     physical: 10,
 });
 
-// TODO devise naming convention
-const clsAngelBouncing = RpgEnemyClass.create({
+const rnkAngelBouncing = RpgEnemyRank.create({
     status: {
         healthMax: 30,
     },
@@ -56,7 +55,7 @@ export function objAngelBouncing() {
 
     let appliedOpaqueTint = false;
     const obj = container(graphics, spikeBall, hatSprite, sprite, mask)
-        .mixin(mxnEnemy, { hurtboxes: [mask], class: clsAngelBouncing })
+        .mixin(mxnEnemy, { hurtboxes: [mask], class: rnkAngelBouncing })
         .mixin(mxnPhysics, {
             gravity: 0.25,
             physicsRadius: 8,
