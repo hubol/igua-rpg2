@@ -8,6 +8,7 @@ import { Integer } from "../../../lib/math/number-alias-types";
 import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
 
 const [txGear, txGearHighlight] = Tx.Enemy.Suggestive.Gear.split({ count: 2 });
+const [txMouth, txMouthAgape] = Tx.Enemy.Suggestive.Mouth.split({ count: 2 });
 
 function objAngelSuggestiveGear(tint: Integer) {
     const ax = 8.5 / 16;
@@ -54,9 +55,21 @@ function objAngelSuggestiveFace() {
         sclerasMirrored: true,
     });
 
+    let agape = false;
+
+    const mouthObj = Sprite.from(txMouth).anchored(0.5, 0.5).at(0, 9).merge({
+        get agape() {
+            return agape;
+        },
+        set agape(value) {
+            agape = value;
+            mouthObj.texture = value ? txMouthAgape : txMouth;
+        },
+    });
+
     const spr = Sprite.from(Tx.Enemy.Suggestive.Face).tinted(0xCEBD00).anchored(0.5, 0.5);
 
-    return container(spr, eyesObj);
+    return container(spr, eyesObj, mouthObj);
 }
 
 export function objAngelSuggestive() {
