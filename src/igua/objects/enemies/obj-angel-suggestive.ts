@@ -8,7 +8,9 @@ import { Integer } from "../../../lib/math/number-alias-types";
 import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
-import { approachLinear } from "../../../lib/math/number";
+import { approachLinear, nlerp } from "../../../lib/math/number";
+import { scene } from "../../globals";
+import { lerp } from "../../../lib/game-engine/routines/lerp";
 
 const themes = {
     Common: {
@@ -26,6 +28,8 @@ type Theme = typeof themes[keyof typeof themes];
 
 const [txGear, txGearHighlight] = Tx.Enemy.Suggestive.Gear.split({ count: 2 });
 const [txMouth, txMouthPartiallyAgape, txMouthAgape] = Tx.Enemy.Suggestive.Mouth.split({ count: 3 });
+const [txBody, txBulgeSmall, txBulgeMedium, txBulgeLarge, txBulgeBursting, txBulgeBursted, txBulgeRecovering] = Tx
+    .Enemy.Suggestive.Body2.split({ count: 7 });
 
 const rnkAngelSuggestive = RpgEnemyRank.create({});
 
@@ -106,6 +110,58 @@ function objAngelSuggestiveFace(theme: Theme) {
     return container(spr, eyesObj, mouthObj).merge({ mouthObj });
 }
 
+type BulgePhase = "inflating" | "bursting" | "recovering";
+
+function objAngelSuggestiveBody() {
+    const bodySpr = Sprite.from(txBody);
+    const bulge = {
+        phase: "inflating" as BulgePhase,
+        unit: 0,
+    };
+
+    const bulgeSpr = Sprite.from(txBulgeSmall)
+        .step(() => {
+            if (bulge.phase === "inflating") {
+                bulgeSpr.pivot.x = 0;
+                bulgeSpr.pivot.y = 0;
+
+                if (bulge.unit < 0.2) {
+                    bulgeSpr.y = Math.round(nlerp(0, -6, bulge.unit / 0.2));
+                    bulgeSpr.texture = txBulgeSmall;
+                }
+                else if (bulge.unit < 0.8) {
+                    bulgeSpr.y = Math.round(nlerp(0, -6, (bulge.unit - 0.2) / 0.6));
+                    bulgeSpr.texture = txBulgeMedium;
+                }
+                else {
+                    bulgeSpr.y = 0;
+                    bulgeSpr.texture = txBulgeLarge;
+                }
+            }
+            else if (bulge.phase === "bursting") {
+                bulgeSpr.texture = txBulgeBursting;
+                bulgeSpr.y = 0;
+                const fx = bulge.unit > 0.5 ? 4 : 6;
+                const fy = bulge.unit > 0.5 ? 3 : 5;
+
+                const f2x = bulge.unit > 0.8 ? 3 : 2;
+                const f2y = bulge.unit > 0.9 ? 2 : 1;
+
+                bulgeSpr.pivot.x = Math.round(scene.ticker.ticks / fx) % f2x;
+                bulgeSpr.pivot.y = Math.round(scene.ticker.ticks / fy) % f2y;
+            }
+            else if (bulge.phase === "recovering") {
+                bulgeSpr.pivot.x = 0;
+                bulgeSpr.pivot.y = 0;
+
+                bulgeSpr.texture = bulge.unit < 0.5 ? txBulgeBursted : txBulgeRecovering;
+                bulgeSpr.y = Math.round(bulge.unit * 20);
+            }
+        });
+
+    return container(bulgeSpr, bodySpr).merge({ bulge });
+}
+
 export function objAngelSuggestive() {
     const theme = themes.Common;
 
@@ -120,8 +176,10 @@ export function objAngelSuggestive() {
     const hurtbox0 = new Graphics().beginFill(0).drawRect(-30, -11, 60, 25).invisible();
     const hurtbox1 = new Graphics().beginFill(0xff0000).drawRect(-11, -35, 17, 30).invisible();
 
+    const bodyObj = objAngelSuggestiveBody().pivoted(36, 46);
+
     return container(
-        Sprite.from(Tx.Enemy.Suggestive.Body).anchored(0.5, 0.7),
+        bodyObj,
         faceObj,
         irregularShadowObj,
         objAngelSuggestiveGears(theme).at(24, -5),
@@ -133,6 +191,22 @@ export function objAngelSuggestive() {
             while (true) {
                 yield sleep(1000);
                 faceObj.mouthObj.agape = !faceObj.mouthObj.agape;
+            }
+        })
+        .coro(function* () {
+            while (true) {
+                bodyObj.bulge.phase = "inflating";
+                bodyObj.bulge.unit = 0;
+                yield lerp(bodyObj.bulge, "unit").to(1).over(1000);
+                yield sleep(500);
+                bodyObj.bulge.phase = "bursting";
+                bodyObj.bulge.unit = 0;
+                yield lerp(bodyObj.bulge, "unit").to(1).over(1000);
+                yield sleep(500);
+                bodyObj.bulge.phase = "recovering";
+                bodyObj.bulge.unit = 0;
+                yield sleep(500);
+                yield lerp(bodyObj.bulge, "unit").to(1).over(1000);
             }
         });
 }
