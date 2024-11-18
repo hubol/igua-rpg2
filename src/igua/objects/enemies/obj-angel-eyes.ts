@@ -26,8 +26,8 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
     const leftPupilPositionConfig = getPupilPositionConfig("left", args);
     const rightPupilPositionConfig = getPupilPositionConfig("right", args);
 
-    const leftPupilObj = Sprite.from(args.pupilTx).tinted(0x000080).anchored(0.5, 0.5).at(leftPupilPositionConfig.rest);
-    const rightPupilObj = Sprite.from(args.pupilTx).tinted(0x0000a0).anchored(0.5, 0.5).at(
+    const leftPupilObj = Sprite.from(args.pupilTx).anchored(0.5, 0.5).at(leftPupilPositionConfig.rest);
+    const rightPupilObj = Sprite.from(args.pupilTx).anchored(0.5, 0.5).at(
         rightPupilPositionConfig.rest,
     );
 
