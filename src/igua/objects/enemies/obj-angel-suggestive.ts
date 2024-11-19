@@ -37,7 +37,7 @@ const [
     txBulgeSkinny,
     txBulgeSkinnyReducedHighlight,
 ] = Tx
-    .Enemy.Suggestive.Body2.split({ count: 7 });
+    .Enemy.Suggestive.Body.split({ count: 7 });
 
 const rnkAngelSuggestive = RpgEnemyRank.create({});
 
