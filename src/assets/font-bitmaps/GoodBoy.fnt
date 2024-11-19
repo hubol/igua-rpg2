@@ -1,0 +1,33 @@
+info face="Good Boy" size=16 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=0 aa=1 padding=0,0,0,0 spacing=1,1 outline=0
+common lineHeight=16 base=10 scaleW=256 scaleH=128 pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0
+page id=0 file="good boy.png"
+info NeedsPreprocessing
+chars count=200
+char id=32  x=0   y=0  width=3  height=1  xoffset=0  yoffset=6  xadvance=3  page=0  chnl=15
+char id=@a  x=1   y=6  width=9  height=10  xoffset=0  yoffset=6  xadvance=10  page=0  chnl=15
+char id=@b  x=11   y=0  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@c  x=21   y=8  width=7  height=8  xoffset=0  yoffset=8  xadvance=8  page=0  chnl=15
+char id=@d  x=29   y=0  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@e  x=39   y=8  width=7  height=8  xoffset=0  yoffset=8  xadvance=8  page=0  chnl=15
+char id=@f  x=47   y=0  width=7  height=16  xoffset=0  yoffset=0  xadvance=8  page=0  chnl=15
+char id=@g  x=55   y=7  width=9  height=14  xoffset=0  yoffset=7  xadvance=10  page=0  chnl=15
+char id=@h  x=65   y=0  width=8  height=16  xoffset=0  yoffset=0  xadvance=9  page=0  chnl=15
+char id=@i  x=74   y=6  width=3  height=10  xoffset=0  yoffset=6  xadvance=4  page=0  chnl=15
+char id=@j  x=78   y=6  width=6  height=15  xoffset=0  yoffset=6  xadvance=7  page=0  chnl=15
+char id=@k  x=85   y=0  width=8  height=16  xoffset=0  yoffset=0  xadvance=9  page=0  chnl=15
+char id=@l  x=94   y=0  width=2  height=16  xoffset=0  yoffset=0  xadvance=3  page=0  chnl=15
+char id=@m  x=97   y=7  width=12  height=9  xoffset=0  yoffset=7  xadvance=13  page=0  chnl=15
+char id=@n  x=110   y=7  width=8  height=9  xoffset=0  yoffset=7  xadvance=9  page=0  chnl=15
+char id=@o  x=119   y=8  width=8  height=8  xoffset=0  yoffset=8  xadvance=9  page=0  chnl=15
+char id=@p  x=128   y=7  width=9  height=14  xoffset=0  yoffset=7  xadvance=10  page=0  chnl=15
+char id=@q  x=138   y=7  width=9  height=14  xoffset=0  yoffset=7  xadvance=10  page=0  chnl=15
+char id=@r  x=148   y=7  width=7  height=9  xoffset=0  yoffset=7  xadvance=8  page=0  chnl=15
+char id=@s  x=156   y=7  width=6  height=9  xoffset=0  yoffset=7  xadvance=7  page=0  chnl=15
+char id=@t  x=163   y=0  width=5  height=16  xoffset=0  yoffset=0  xadvance=6  page=0  chnl=15
+char id=@u  x=169   y=7  width=9  height=9  xoffset=0  yoffset=7  xadvance=10  page=0  chnl=15
+char id=@v  x=178   y=7  width=8  height=9  xoffset=0  yoffset=7  xadvance=9  page=0  chnl=15
+char id=@w  x=187   y=7  width=12  height=9  xoffset=0  yoffset=7  xadvance=13  page=0  chnl=15
+char id=@x  x=200   y=7  width=9  height=9  xoffset=0  yoffset=7  xadvance=10  page=0  chnl=15
+char id=@y  x=210   y=7  width=8  height=14  xoffset=0  yoffset=7  xadvance=9  page=0  chnl=15
+char id=@z  x=219   y=7  width=7  height=8  xoffset=0  yoffset=8  xadvance=8  page=0  chnl=15
+char id=@-  x=227   y=8  width=6  height=1  xoffset=0  yoffset=8  xadvance=7  page=0  chnl=15
