@@ -1,4 +1,4 @@
-import { Graphics, Sprite } from "pixi.js";
+import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { objAngelEyes } from "./obj-angel-eyes";
 import { container } from "../../../lib/pixi/container";
@@ -11,6 +11,7 @@ import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { approachLinear, nlerp } from "../../../lib/math/number";
 import { scene } from "../../globals";
 import { lerp } from "../../../lib/game-engine/routines/lerp";
+import { objAngelPlantLegs } from "./obj-angel-plant-legs";
 
 const themes = {
     Common: {
@@ -226,7 +227,7 @@ export function objAngelSuggestive() {
 
     const bodyObj = objAngelSuggestiveBody().pivoted(36, 46);
 
-    return container(
+    const actualHeadObj = container(
         bodyObj,
         faceObj,
         irregularShadowObj,
@@ -234,7 +235,6 @@ export function objAngelSuggestive() {
         hurtbox0,
         hurtbox1,
     )
-        .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0, hurtbox1] })
         .coro(function* () {
             while (true) {
                 yield sleep(1000);
@@ -256,4 +256,10 @@ export function objAngelSuggestive() {
                 yield lerp(bodyObj.bulge, "unit").to(1).over(1000);
             }
         });
+
+    return container(
+        objAngelPlantLegs({ objToBounce: actualHeadObj }).pivoted(18, -17),
+        actualHeadObj,
+    )
+        .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0, hurtbox1] });
 }
