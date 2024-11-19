@@ -139,7 +139,7 @@ function objAngelSuggestiveBody() {
                 }
             }
             else if (bulge.phase === "bursting") {
-                bulgeSpr.texture = txBulgeBursting;
+                bulgeSpr.texture = bulge.unit > 0.2 ? txBulgeBursting : txBulgeLarge;
                 bulgeSpr.y = 0;
                 const fx = bulge.unit > 0.5 ? 4 : 6;
                 const fy = bulge.unit > 0.5 ? 3 : 5;
