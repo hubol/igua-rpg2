@@ -28,7 +28,15 @@ type Theme = typeof themes[keyof typeof themes];
 
 const [txGear, txGearHighlight] = Tx.Enemy.Suggestive.Gear.split({ count: 2 });
 const [txMouth, txMouthPartiallyAgape, txMouthAgape] = Tx.Enemy.Suggestive.Mouth.split({ count: 3 });
-const [txBody, txBulgeSmall, txBulgeMedium, txBulgeLarge, txBulgeBursting, txBulgeBursted, txBulgeRecovering] = Tx
+const [
+    txBody,
+    txBulgeSmall,
+    txBulgeMedium,
+    txBulgeLarge,
+    txBulgeBursting,
+    txBulgeSkinny,
+    txBulgeSkinnyReducedHighlight,
+] = Tx
     .Enemy.Suggestive.Body2.split({ count: 7 });
 
 const rnkAngelSuggestive = RpgEnemyRank.create({});
@@ -119,9 +127,16 @@ function objAngelSuggestiveBody() {
         unit: 0,
     };
 
+    const bulgeLeftSpr = Sprite.from(txBulgeLarge).anchored(39 / 72, 29 / 64);
+    const bulgeRightSpr = Sprite.from(txBulgeLarge).anchored(39 / 72, 29 / 64);
+
     const bulgeSpr = Sprite.from(txBulgeSmall)
         .step(() => {
             if (bulge.phase === "inflating") {
+                bulgeLeftSpr.visible = false;
+                bulgeRightSpr.visible = false;
+                bulgeSpr.visible = true;
+
                 bulgeSpr.pivot.x = 0;
                 bulgeSpr.pivot.y = 0;
 
@@ -139,6 +154,10 @@ function objAngelSuggestiveBody() {
                 }
             }
             else if (bulge.phase === "bursting") {
+                bulgeLeftSpr.visible = false;
+                bulgeRightSpr.visible = false;
+                bulgeSpr.visible = true;
+
                 bulgeSpr.texture = bulge.unit > 0.2 ? txBulgeBursting : txBulgeLarge;
                 bulgeSpr.y = 0;
                 const fx = bulge.unit > 0.5 ? 4 : 6;
@@ -151,15 +170,39 @@ function objAngelSuggestiveBody() {
                 bulgeSpr.pivot.y = Math.round(scene.ticker.ticks / fy) % f2y;
             }
             else if (bulge.phase === "recovering") {
-                bulgeSpr.pivot.x = 0;
-                bulgeSpr.pivot.y = 0;
+                bulgeLeftSpr.visible = true;
+                bulgeRightSpr.visible = true;
+                bulgeSpr.visible = false;
 
-                bulgeSpr.texture = bulge.unit < 0.5 ? txBulgeBursted : txBulgeRecovering;
-                bulgeSpr.y = Math.round(bulge.unit * 20);
+                const tx = bulge.unit > 0.5 ? txBulgeSkinnyReducedHighlight : txBulgeSkinny;
+                bulgeLeftSpr.texture = tx;
+                bulgeRightSpr.texture = tx;
+
+                if (bulge.unit < 0.2) {
+                    const f = bulge.unit / 0.2;
+                    bulgeLeftSpr.x = nlerp(-2, -26, f);
+                    bulgeRightSpr.x = nlerp(2, 26, f);
+                    bulgeLeftSpr.y = f * f * 8;
+                    bulgeRightSpr.y = f * f * 8;
+                    bulgeLeftSpr.angle = -15;
+                    bulgeRightSpr.angle = 30;
+                }
+                else {
+                    const f = (bulge.unit - 0.2) / 0.8;
+                    bulgeLeftSpr.x = nlerp(-25, 0, f * f);
+                    bulgeRightSpr.x = nlerp(25, 0, f * f);
+                    bulgeLeftSpr.y = 8 + f * 8;
+                    bulgeRightSpr.y = 8 + f * f * 10;
+                    bulgeLeftSpr.angle = (1 - (f * f)) * -15;
+                    bulgeRightSpr.angle = (1 - f) * 30;
+                }
+
+                bulgeLeftSpr.add(39, 29);
+                bulgeRightSpr.add(39, 29);
             }
         });
 
-    return container(bulgeSpr, bodySpr).merge({ bulge });
+    return container(bulgeLeftSpr, bulgeRightSpr, bulgeSpr, bodySpr).merge({ bulge });
 }
 
 export function objAngelSuggestive() {
@@ -205,7 +248,6 @@ export function objAngelSuggestive() {
                 yield sleep(500);
                 bodyObj.bulge.phase = "recovering";
                 bodyObj.bulge.unit = 0;
-                yield sleep(500);
                 yield lerp(bodyObj.bulge, "unit").to(1).over(1000);
             }
         });
