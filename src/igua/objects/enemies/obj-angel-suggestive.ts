@@ -199,6 +199,11 @@ function objAngelSuggestiveBody() {
 
                 bulgeLeftSpr.add(39, 29);
                 bulgeRightSpr.add(39, 29);
+
+                bulgeLeftSpr.position.scale(0.5).vround().scale(2);
+                bulgeRightSpr.position.scale(0.5).vround().scale(2);
+                bulgeLeftSpr.angle = Math.round(bulgeLeftSpr.angle / 5) * 5;
+                bulgeRightSpr.angle = Math.round(bulgeRightSpr.angle / 5) * 5;
             }
         });
 
