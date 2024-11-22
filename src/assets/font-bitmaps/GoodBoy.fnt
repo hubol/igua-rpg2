@@ -62,6 +62,35 @@ char id=@,  x=10    y=49  width=2  height=18  xoffset=0  yoffset=0  xadvance=3  
 char id=@!  x=13    y=49  width=1  height=16  xoffset=0  yoffset=0  xadvance=2  page=0  chnl=15
 char id=@?  x=16    y=49  width=7  height=16  xoffset=0  yoffset=0  xadvance=8  page=0  chnl=15
 char id=@'  x=24    y=49  width=1  height=2   xoffset=0  yoffset=0  xadvance=2  page=0  chnl=15
+char id=@"  x=26    y=49  width=3  height=2   xoffset=0  yoffset=0  xadvance=4  page=0  chnl=15
+char id=@0  x=37    y=49  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@1  x=47    y=49  width=4  height=16  xoffset=0  yoffset=0  xadvance=5  page=0  chnl=15
+char id=@2  x=52    y=49  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@3  x=62    y=49  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@4  x=72    y=49  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@5  x=82    y=49  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@6  x=92    y=49  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@7  x=102   y=49  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@8  x=112   y=49  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@9  x=122   y=49  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@:  x=132   y=49  width=1  height=16  xoffset=0  yoffset=0  xadvance=2  page=0  chnl=15
+char id=@;  x=134   y=49  width=2  height=16  xoffset=0  yoffset=0  xadvance=3  page=0  chnl=15
+
+kerning first=@3 second=@, amount=-1
+kerning first=@4 second=@, amount=-1
+kerning first=@5 second=@, amount=-1
+kerning first=@6 second=@, amount=-1
+kerning first=@7 second=@, amount=-2
+kerning first=@8 second=@, amount=-1
+kerning first=@9 second=@, amount=-1
+
+kerning first=@3 second=@. amount=-1
+kerning first=@4 second=@. amount=-1
+kerning first=@5 second=@. amount=-1
+kerning first=@6 second=@. amount=-1
+kerning first=@7 second=@. amount=-2
+kerning first=@8 second=@. amount=-1
+kerning first=@9 second=@. amount=-1
 
 kerning first=@a second=@v amount=-1
 kerning first=@f second=@o amount=-2
