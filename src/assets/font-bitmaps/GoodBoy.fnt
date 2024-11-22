@@ -1,9 +1,9 @@
 info face="Good Boy" size=16 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=0 aa=1 padding=0,0,0,0 spacing=1,1 outline=0
-common lineHeight=16 base=10 scaleW=256 scaleH=128 pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0
+common lineHeight=22 base=10 scaleW=256 scaleH=128 pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0
 page id=0 file="good boy.png"
 info NeedsPreprocessing
 chars count=200
-char id=32  x=0   y=0  width=3  height=1  xoffset=0  yoffset=6  xadvance=3  page=0  chnl=15
+char id=32  x=0   y=0  width=0  height=0  xoffset=0  yoffset=6  xadvance=4  page=0  chnl=15
 char id=@a  x=1   y=6  width=9  height=10  xoffset=0  yoffset=6  xadvance=10  page=0  chnl=15
 char id=@b  x=11   y=0  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
 char id=@c  x=21   y=8  width=7  height=8  xoffset=0  yoffset=8  xadvance=8  page=0  chnl=15
@@ -31,3 +31,42 @@ char id=@x  x=200   y=7  width=9  height=9  xoffset=0  yoffset=7  xadvance=10  p
 char id=@y  x=210   y=7  width=8  height=14  xoffset=0  yoffset=7  xadvance=9  page=0  chnl=15
 char id=@z  x=219   y=7  width=7  height=8  xoffset=0  yoffset=8  xadvance=8  page=0  chnl=15
 char id=@-  x=227   y=8  width=6  height=1  xoffset=0  yoffset=8  xadvance=7  page=0  chnl=15
+char id=@A  x=0   y=26  width=10  height=16  xoffset=0  yoffset=0  xadvance=11  page=0  chnl=15
+char id=@B  x=11   y=26  width=8  height=16  xoffset=0  yoffset=0  xadvance=9  page=0  chnl=15
+char id=@C  x=20   y=26  width=8  height=16  xoffset=0  yoffset=0  xadvance=9  page=0  chnl=15
+char id=@D  x=29   y=26  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@E  x=39   y=26  width=7  height=16  xoffset=0  yoffset=0  xadvance=8  page=0  chnl=15
+char id=@F  x=47   y=26  width=7  height=16  xoffset=0  yoffset=0  xadvance=8  page=0  chnl=15
+char id=@G  x=55   y=26  width=8  height=16  xoffset=0  yoffset=0  xadvance=9  page=0  chnl=15
+char id=@H  x=64   y=26  width=7  height=16  xoffset=0  yoffset=0  xadvance=8  page=0  chnl=15
+char id=@I  x=72   y=26  width=1  height=16  xoffset=0  yoffset=0  xadvance=2  page=0  chnl=15
+char id=@J  x=74   y=26  width=8  height=16  xoffset=0  yoffset=0  xadvance=9  page=0  chnl=15
+char id=@K  x=83   y=26  width=7  height=16  xoffset=0  yoffset=0  xadvance=8  page=0  chnl=15
+char id=@L  x=91   y=26  width=6  height=16  xoffset=0  yoffset=0  xadvance=7  page=0  chnl=15
+char id=@M  x=98   y=26  width=11 height=16  xoffset=0  yoffset=0  xadvance=12  page=0  chnl=15
+char id=@N  x=110   y=26  width=8  height=16  xoffset=0  yoffset=0  xadvance=9  page=0  chnl=15
+char id=@O  x=119   y=26  width=10  height=16  xoffset=0  yoffset=0  xadvance=11  page=0  chnl=15
+char id=@P  x=130   y=26  width=7  height=16  xoffset=0  yoffset=0  xadvance=8  page=0  chnl=15
+char id=@Q  x=138   y=26  width=10  height=16  xoffset=0  yoffset=0  xadvance=11  page=0  chnl=15
+char id=@R  x=149   y=26  width=7  height=16  xoffset=0  yoffset=0  xadvance=8  page=0  chnl=15
+char id=@S  x=157   y=26  width=8  height=16  xoffset=0  yoffset=0  xadvance=9  page=0  chnl=15
+char id=@T  x=166   y=26  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@U  x=176   y=26  width=8  height=16  xoffset=0  yoffset=0  xadvance=9  page=0  chnl=15
+char id=@V  x=185   y=26  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@W  x=195   y=26  width=15  height=16  xoffset=0  yoffset=0  xadvance=16  page=0  chnl=15
+char id=@X  x=211   y=26  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
+char id=@Y  x=221   y=26  width=7  height=16  xoffset=0  yoffset=0  xadvance=8  page=0  chnl=15
+char id=@Z  x=0     y=49  width=7  height=16  xoffset=0  yoffset=0  xadvance=8  page=0  chnl=15
+char id=@.  x=8     y=49  width=1  height=16  xoffset=0  yoffset=0  xadvance=2  page=0  chnl=15
+char id=@,  x=10    y=49  width=2  height=18  xoffset=0  yoffset=0  xadvance=3  page=0  chnl=15
+char id=@!  x=13    y=49  width=1  height=16  xoffset=0  yoffset=0  xadvance=2  page=0  chnl=15
+char id=@?  x=16    y=49  width=7  height=16  xoffset=0  yoffset=0  xadvance=8  page=0  chnl=15
+char id=@'  x=24    y=49  width=1  height=2   xoffset=0  yoffset=0  xadvance=2  page=0  chnl=15
+
+kerning first=@a second=@v amount=-1
+kerning first=@f second=@o amount=-2
+kerning first=@F second=@i amount=-1
+kerning first=@T second=@a amount=-3
+kerning first=@T second=@e amount=-3
+kerning first=@T second=@o amount=-3
+kerning first=@W second=@o amount=-1
