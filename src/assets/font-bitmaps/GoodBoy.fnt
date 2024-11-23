@@ -61,8 +61,8 @@ char id=@.  x=8     y=49  width=1  height=16  xoffset=0  yoffset=0  xadvance=2  
 char id=@,  x=10    y=49  width=2  height=18  xoffset=0  yoffset=0  xadvance=3  page=0  chnl=15
 char id=@!  x=13    y=49  width=1  height=16  xoffset=0  yoffset=0  xadvance=2  page=0  chnl=15
 char id=@?  x=16    y=49  width=7  height=16  xoffset=0  yoffset=0  xadvance=8  page=0  chnl=15
-char id=@'  x=24    y=49  width=1  height=2   xoffset=0  yoffset=0  xadvance=2  page=0  chnl=15
-char id=@"  x=26    y=49  width=3  height=2   xoffset=0  yoffset=0  xadvance=4  page=0  chnl=15
+char id=@'  x=24    y=49  width=1  height=2   xoffset=0  yoffset=5  xadvance=2  page=0  chnl=15
+char id=@"  x=26    y=49  width=3  height=2   xoffset=0  yoffset=1  xadvance=4  page=0  chnl=15
 char id=@0  x=37    y=49  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
 char id=@1  x=47    y=49  width=4  height=16  xoffset=0  yoffset=0  xadvance=5  page=0  chnl=15
 char id=@2  x=52    y=49  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
@@ -75,6 +75,8 @@ char id=@8  x=112   y=49  width=9  height=16  xoffset=0  yoffset=0  xadvance=10 
 char id=@9  x=122   y=49  width=9  height=16  xoffset=0  yoffset=0  xadvance=10  page=0  chnl=15
 char id=@:  x=132   y=49  width=1  height=16  xoffset=0  yoffset=0  xadvance=2  page=0  chnl=15
 char id=@;  x=134   y=49  width=2  height=16  xoffset=0  yoffset=0  xadvance=3  page=0  chnl=15
+
+kerning first=@9 second=@7 amount=-1
 
 kerning first=@3 second=@, amount=-1
 kerning first=@4 second=@, amount=-1
@@ -92,35 +94,85 @@ kerning first=@7 second=@. amount=-2
 kerning first=@8 second=@. amount=-1
 kerning first=@9 second=@. amount=-1
 
+kerning first=@a second=@c amount=-1
+kerning first=@a second=@d amount=-1
+kerning first=@a second=@g amount=-1
+kerning first=@a second=@j amount=-4
+kerning first=@a second=@p amount=-1
+kerning first=@a second=@s amount=-1
 kerning first=@a second=@t amount=-1
+kerning first=@a second=@u amount=-1
 kerning first=@a second=@v amount=-1
 kerning first=@a second=@w amount=-1
+kerning first=@b second=@u amount=-1
+kerning first=@d second=@a amount=-1
+kerning first=@d second=@e amount=-1
 kerning first=@d second=@o amount=-1
+kerning first=@d second=@u amount=-1
+kerning first=@e second=@j amount=-4
+kerning first=@f second=@e amount=-3
+kerning first=@f second=@i amount=-2
+kerning first=@f second=@f amount=-1
 kerning first=@f second=@o amount=-2
+kerning first=@f second=@r amount=-2
+kerning first=@f second=@u amount=-2
+kerning first=@g second=@e amount=-1
+kerning first=@g second=@g amount=-1
 kerning first=@i second=@p amount=-1
+kerning first=@i second=@s amount=-1
+kerning first=@i second=@t amount=-1
+kerning first=@i second=@v amount=-1
+kerning first=@k second=@e amount=-1
+kerning first=@k second=@y amount=-1
+kerning first=@o second=@j amount=-4
+kerning first=@o second=@p amount=-1
+kerning first=@o second=@u amount=-1
 kerning first=@o second=@v amount=-1
 kerning first=@o second=@w amount=-1
+kerning first=@p second=@p amount=-1
+kerning first=@p second=@y amount=-1
+kerning first=@u second=@a amount=-1
+kerning first=@u second=@g amount=-1
+kerning first=@u second=@p amount=-1
 kerning first=@u second=@t amount=-1
 kerning first=@u second=@w amount=-1
+kerning first=@w second=@h amount=-1
 
 kerning first=@F second=@a amount=-1
+kerning first=@F second=@e amount=-1
 kerning first=@F second=@i amount=-1
 kerning first=@F second=@o amount=-1
+kerning first=@F second=@r amount=-1
 kerning first=@J second=@i amount=-1
 kerning first=@J second=@o amount=-1
 kerning first=@J second=@u amount=-1
 kerning first=@L second=@a amount=-1
 kerning first=@L second=@e amount=-1
 kerning first=@L second=@u amount=-1
+kerning first=@P second=@a amount=-1
+kerning first=@P second=@e amount=-2
+kerning first=@P second=@o amount=-2
+kerning first=@P second=@u amount=-1
 kerning first=@T second=@a amount=-3
 kerning first=@T second=@e amount=-3
+kerning first=@T second=@i amount=-2
 kerning first=@T second=@o amount=-3
+kerning first=@T second=@r amount=-3
+kerning first=@T second=@u amount=-3
+kerning first=@T second=@w amount=-3
 kerning first=@V second=@e amount=-1
+kerning first=@W second=@e amount=-1
 kerning first=@W second=@o amount=-1
 kerning first=@W second=@u amount=-1
+kerning first=@Y second=@a amount=-1
 
 kerning first=@g second=@? amount=-1
+kerning first=@k second=@" amount=-1
+kerning first=@n second=@' amount=-1
+kerning first=@u second=@' amount=-1
 
 kerning first=@- second=@f amount=-1
+kerning first=@- second=@T amount=-3
 
 kerning first=@" second=@, amount=-1
+kerning first=@" second=@A amount=-3
