@@ -11,6 +11,6 @@ export function scnExperiment() {
 
     objAngelSuggestive().at([128, -128].add(playerObj)).show();
 
-    objText.Tall(`Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit.
+    objText.Tall(`Lorem Ipsum: Dolor Sit Amet; Consectetur Adipiscing Elit.
 Vivamus Wulputate Neque Et Velit Pellentesque Dignissim.`).at(256, 256).show();
 }
