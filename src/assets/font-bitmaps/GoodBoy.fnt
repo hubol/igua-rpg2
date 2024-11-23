@@ -101,6 +101,7 @@ kerning first=@o second=@w amount=-1
 kerning first=@F second=@i amount=-1
 kerning first=@F second=@o amount=-1
 kerning first=@J second=@u amount=-1
+kerning first=@L second=@a amount=-1
 kerning first=@T second=@a amount=-3
 kerning first=@T second=@e amount=-3
 kerning first=@T second=@o amount=-3
