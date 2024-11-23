@@ -27,7 +27,7 @@ char id=@t  x=163   y=0  width=5  height=16  xoffset=0  yoffset=0  xadvance=6  p
 char id=@u  x=169   y=7  width=9  height=9  xoffset=0  yoffset=7  xadvance=10  page=0  chnl=15
 char id=@v  x=178   y=7  width=8  height=9  xoffset=0  yoffset=7  xadvance=9  page=0  chnl=15
 char id=@w  x=187   y=7  width=12  height=9  xoffset=0  yoffset=7  xadvance=13  page=0  chnl=15
-char id=@x  x=200   y=7  width=9  height=9  xoffset=0  yoffset=7  xadvance=10  page=0  chnl=15
+char id=@x  x=200   y=7  width=8  height=9  xoffset=0  yoffset=7  xadvance=9  page=0  chnl=15
 char id=@y  x=210   y=7  width=8  height=14  xoffset=0  yoffset=7  xadvance=9  page=0  chnl=15
 char id=@z  x=219   y=7  width=7  height=8  xoffset=0  yoffset=8  xadvance=8  page=0  chnl=15
 char id=@-  x=227   y=8  width=6  height=1  xoffset=0  yoffset=8  xadvance=7  page=0  chnl=15
@@ -93,9 +93,19 @@ kerning first=@8 second=@. amount=-1
 kerning first=@9 second=@. amount=-1
 
 kerning first=@a second=@v amount=-1
+kerning first=@d second=@o amount=-1
 kerning first=@f second=@o amount=-2
+kerning first=@o second=@v amount=-1
+kerning first=@o second=@w amount=-1
+
 kerning first=@F second=@i amount=-1
 kerning first=@T second=@a amount=-3
 kerning first=@T second=@e amount=-3
 kerning first=@T second=@o amount=-3
 kerning first=@W second=@o amount=-1
+
+kerning first=@g second=@? amount=-1
+
+kerning first=@- second=@f amount=-1
+
+kerning first=@" second=@, amount=-1
