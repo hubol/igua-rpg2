@@ -114,7 +114,9 @@ function objAngelSuggestiveFace(theme: Theme) {
             }
         });
 
-    const spr = Sprite.from(Tx.Enemy.Suggestive.Face).tinted(theme.faceTint).anchored(0.5, 0.5);
+    const spr = Sprite.from(Tx.Enemy.Suggestive.Face).tinted(theme.faceTint).anchored(0.5, 0.5).mixin(
+        mxnBoilMirrorRotate,
+    );
 
     return container(spr, eyesObj, mouthObj).merge({ mouthObj });
 }
