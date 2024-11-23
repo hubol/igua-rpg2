@@ -11,6 +11,6 @@ export function scnExperiment() {
 
     objAngelSuggestive().at([128, -128].add(playerObj)).show();
 
-    objText.Tall(`The quick brown-fox jumps over the "brown", lazy dog?!...
-THE QUICK BROWN FOX JUMPS OVER THE BROWN, LAZY DOG?!`).at(256, 256).show();
+    objText.Tall(`Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit.
+Vivamus Wulputate Neque Et Velit Pellentesque Dignissim.`).at(256, 256).show();
 }
