@@ -92,20 +92,32 @@ kerning first=@7 second=@. amount=-2
 kerning first=@8 second=@. amount=-1
 kerning first=@9 second=@. amount=-1
 
+kerning first=@a second=@t amount=-1
 kerning first=@a second=@v amount=-1
+kerning first=@a second=@w amount=-1
 kerning first=@d second=@o amount=-1
 kerning first=@f second=@o amount=-2
+kerning first=@i second=@p amount=-1
 kerning first=@o second=@v amount=-1
 kerning first=@o second=@w amount=-1
+kerning first=@u second=@t amount=-1
+kerning first=@u second=@w amount=-1
 
+kerning first=@F second=@a amount=-1
 kerning first=@F second=@i amount=-1
 kerning first=@F second=@o amount=-1
+kerning first=@J second=@i amount=-1
+kerning first=@J second=@o amount=-1
 kerning first=@J second=@u amount=-1
 kerning first=@L second=@a amount=-1
+kerning first=@L second=@e amount=-1
+kerning first=@L second=@u amount=-1
 kerning first=@T second=@a amount=-3
 kerning first=@T second=@e amount=-3
 kerning first=@T second=@o amount=-3
+kerning first=@V second=@e amount=-1
 kerning first=@W second=@o amount=-1
+kerning first=@W second=@u amount=-1
 
 kerning first=@g second=@? amount=-1
 
