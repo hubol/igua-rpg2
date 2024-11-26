@@ -229,7 +229,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 248,
@@ -242,7 +242,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 288,
@@ -255,7 +255,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 336,
@@ -268,7 +268,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 376,
@@ -281,7 +281,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 256,
@@ -294,7 +294,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 304,
@@ -307,7 +307,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 336,
@@ -320,7 +320,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 220,
@@ -333,7 +333,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 296,
@@ -346,7 +346,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 361,
@@ -359,7 +359,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 377,
@@ -372,7 +372,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 391,
@@ -385,7 +385,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 232,
@@ -398,7 +398,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 280,
@@ -411,7 +411,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 328,
@@ -424,7 +424,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 256,
@@ -437,7 +437,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 320,
@@ -450,7 +450,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 208,
@@ -463,7 +463,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 349,
@@ -476,7 +476,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 352,
@@ -489,7 +489,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         },
         {
           "x": 408,
@@ -502,7 +502,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": "Group 1"
+          "groupName": "ThoughtBubbleGroup"
         }
       ],
       "folder": "../textures"

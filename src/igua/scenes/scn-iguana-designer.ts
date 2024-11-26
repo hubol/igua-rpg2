@@ -12,14 +12,14 @@ import { scene } from "../globals";
 export function scnIguanaDesigner() {
     Jukebox.play(Mzk.FirstSong);
 
-    const { LightShadowIrregularSmall, Group1 } = Lvl.MenuIguanaDesigner();
-    Group1.children.forEach(x => x.mixin(mxnBoilPivot));
+    const { LightShadowIrregularSmall, ThoughtBubbleGroup } = Lvl.MenuIguanaDesigner();
+    ThoughtBubbleGroup.children.forEach(x => x.mixin(mxnBoilPivot));
     objUiIguanaDesignerRoot({ leftFacingPreviewPosition: LightShadowIrregularSmall }).show();
 
     const rng = new PseudoRng(69);
     const objs = rng.shuffle([
         LightShadowIrregularSmall,
-        ...Group1.children,
+        ...ThoughtBubbleGroup.children,
     ])
         .map(obj => obj.mixin(mxnHides, rng));
 
