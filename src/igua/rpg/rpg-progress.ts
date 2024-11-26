@@ -1,11 +1,13 @@
 import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { getDefaultLooks } from "../iguana/get-default-looks";
+import { RpgPocket } from "./rpg-pocket";
 
 function getInitialRpgProgress() {
     return {
         character: {
             inventory: {
                 valuables: 100,
+                pocket: RpgPocket.create(),
             },
             status: {
                 health: 50,
