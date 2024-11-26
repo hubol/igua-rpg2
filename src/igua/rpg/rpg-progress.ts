@@ -4,7 +4,9 @@ import { getDefaultLooks } from "../iguana/get-default-looks";
 function getInitialRpgProgress() {
     return {
         character: {
-            valuables: 100,
+            inventory: {
+                valuables: 100,
+            },
             status: {
                 health: 50,
                 invulnverable: 0,

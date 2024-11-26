@@ -51,9 +51,9 @@ export type ObjHud = ReturnType<typeof objHud>;
 function objValuablesInfo() {
     return objText.Large("You have 0 valuables", { tint: Consts.StatusTextTint })
         .step(text =>
-            text.text = RpgProgress.character.valuables === 1
+            text.text = RpgProgress.character.inventory.valuables === 1
                 ? "You have 1 valuable"
-                : `You have ${RpgProgress.character.valuables} valuables`
+                : `You have ${RpgProgress.character.inventory.valuables} valuables`
         );
 }
 

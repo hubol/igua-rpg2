@@ -53,7 +53,7 @@ export function objValuable(type: RpgEconomy.Currency.Type, uid?: number) {
                     .at(self).add(offset).show(self.parent);
                 sparkle.index = Rng.float(1, 3);
             }
-            RpgProgress.character.valuables += RpgEconomy.Currency.Values[type];
+            RpgProgress.character.inventory.valuables += RpgEconomy.Currency.Values[type];
         })
         .step(self => self.collectable = collectableAfterSteps-- <= 0);
 }
