@@ -30,50 +30,16 @@
         {"x": 619, "y": 200, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#516d50", "texture": "foliage/small.png", "originX": 0.5, "originY": 0.5, "groupName": null},
         {"x": 543, "y": 196, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#779962", "texture": "foliage/small.png", "originX": 0.5, "originY": 0.5, "groupName": null},
         {"x": 270, "y": 231, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#a0a0a0", "texture": "terrain/earth/crack small0.png", "originX": 0.5, "originY": 0.5, "groupName": null},
-        {
-          "x": 187,
-          "y": 220,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffd464",
-          "texture": "foliage/medium0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 409,
-          "y": 510,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#98ba60",
-          "texture": "foliage/small.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 422,
-          "y": 513,
-          "scaleX": -1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#98ba60",
-          "texture": "foliage/small.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {"x": 416, "y": 464, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#40743b", "texture": "foliage/vine0.png", "originX": 0.5, "originY": 0.5},
-        {"x": 466, "y": 459, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#98ba60", "texture": "foliage/vine0.png", "originX": 0.5, "originY": 0.5},
-        {"x": 482, "y": 464, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#40743b", "texture": "foliage/vine0.png", "originX": 0.5, "originY": 0.5},
-        {"x": 467, "y": 472, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#98ba60", "texture": "foliage/vine1.png", "originX": 0.5, "originY": 0.5},
-        {"x": 485, "y": 481, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#40743b", "texture": "foliage/vine1.png", "originX": 0.5, "originY": 0.5},
-        {"x": 429, "y": 467, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#98ba60", "texture": "foliage/vine1.png", "originX": 0.5, "originY": 0.5},
-        {"x": 415, "y": 481, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#40743b", "texture": "foliage/vine1.png", "originX": 0.5, "originY": 0.5}
+        {"x": 187, "y": 220, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#ffd464", "texture": "foliage/medium0.png", "originX": 0.5, "originY": 0.5, "groupName": null},
+        {"x": 409, "y": 510, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#98ba60", "texture": "foliage/small.png", "originX": 0.5, "originY": 0.5, "groupName": null},
+        {"x": 422, "y": 513, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#98ba60", "texture": "foliage/small.png", "originX": 0.5, "originY": 0.5, "groupName": null},
+        {"x": 416, "y": 464, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#40743b", "texture": "foliage/vine0.png", "originX": 0.5, "originY": 0.5, "groupName": null},
+        {"x": 466, "y": 459, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#98ba60", "texture": "foliage/vine0.png", "originX": 0.5, "originY": 0.5, "groupName": null},
+        {"x": 482, "y": 464, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#40743b", "texture": "foliage/vine0.png", "originX": 0.5, "originY": 0.5, "groupName": null},
+        {"x": 467, "y": 472, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#98ba60", "texture": "foliage/vine1.png", "originX": 0.5, "originY": 0.5, "groupName": null},
+        {"x": 485, "y": 481, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#40743b", "texture": "foliage/vine1.png", "originX": 0.5, "originY": 0.5, "groupName": null},
+        {"x": 429, "y": 467, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#98ba60", "texture": "foliage/vine1.png", "originX": 0.5, "originY": 0.5, "groupName": null},
+        {"x": 415, "y": 481, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#40743b", "texture": "foliage/vine1.png", "originX": 0.5, "originY": 0.5, "groupName": null}
       ],
       "folder": "../textures"
     },
@@ -265,7 +231,8 @@
           "texture": "esoteric/decoration/seed bag.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 155,
@@ -1239,7 +1206,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 760,
@@ -1251,7 +1219,8 @@
           "texture": "shapes/dither square16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 783,
@@ -1263,7 +1232,8 @@
           "texture": "shapes/dither square16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 22,
@@ -1587,7 +1557,8 @@
           "texture": "foliage/vine1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 918,
@@ -1599,7 +1570,8 @@
           "texture": "foliage/vine1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 634,
@@ -1611,7 +1583,8 @@
           "texture": "foliage/vine0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 603,
@@ -1623,7 +1596,8 @@
           "texture": "foliage/small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 740,
@@ -1635,7 +1609,8 @@
           "texture": "fiber/rope frame.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 812,
@@ -1647,7 +1622,8 @@
           "texture": "fiber/rope frame.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 949,
@@ -1659,7 +1635,8 @@
           "texture": "fiber/rope frame.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 949,
@@ -1671,7 +1648,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 741,
@@ -1683,7 +1661,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 621,
@@ -1695,7 +1674,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 917,
@@ -1707,7 +1687,8 @@
           "texture": "foliage/vine0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 812,
@@ -1719,7 +1700,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 909,
@@ -1731,7 +1713,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 911,
@@ -1743,7 +1726,8 @@
           "texture": "foliage/vine1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 909,
@@ -1755,7 +1739,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 958,
@@ -1767,7 +1752,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 862,
@@ -1779,7 +1765,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 961,
@@ -1791,7 +1778,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 433,
@@ -1855,7 +1843,8 @@
           "texture": "foliage/medium0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 456,
@@ -1867,7 +1856,8 @@
           "texture": "foliage/small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 490,
@@ -1879,9 +1869,22 @@
           "texture": "foliage/small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
-        {"x": 448, "y": 434, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#7a2534", "texture": "esoteric/message/farmer.png", "originX": 0.5, "originY": 0.5},
+        {
+          "x": 448,
+          "y": 434,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a2534",
+          "texture": "esoteric/message/farmer.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
         {
           "x": 369,
           "y": 500,
@@ -2400,7 +2403,8 @@
           "texture": "terrain/earth/asterisk.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 824,
@@ -2412,7 +2416,8 @@
           "texture": "terrain/earth/asterisk.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 788,
@@ -2424,7 +2429,8 @@
           "texture": "terrain/earth/asterisk.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 755,
@@ -2436,7 +2442,8 @@
           "texture": "terrain/earth/asterisk.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 386,
@@ -3137,7 +3144,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 266,
@@ -3149,7 +3157,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 237,
@@ -3239,7 +3248,8 @@
           "texture": "fiber/rope frame.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 908,
@@ -3251,7 +3261,8 @@
           "texture": "fiber/rope frame.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 440,
@@ -3263,7 +3274,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 503,
@@ -3288,7 +3300,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 302,
@@ -3300,7 +3313,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 181,
@@ -3312,7 +3326,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 768,
@@ -3324,7 +3339,8 @@
           "texture": "stone/rock large shaded.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 803,
@@ -3336,7 +3352,8 @@
           "texture": "stone/rock large shaded.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 791,
@@ -3348,7 +3365,8 @@
           "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 779,
@@ -3360,7 +3378,8 @@
           "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 764,
@@ -3372,7 +3391,8 @@
           "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 807,
@@ -3384,7 +3404,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 785,
@@ -3396,7 +3417,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 742,
@@ -3408,7 +3430,8 @@
           "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 827,
@@ -3420,19 +3443,21 @@
           "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
-          "x": 822,
-          "y": 330,
+          "x": 851,
+          "y": 341,
           "scaleX": 1,
           "scaleY": 1,
-          "rotation": 35.098332215746055,
+          "rotation": 35,
           "tint": "#ffffff",
           "texture": "esoteric/decoration/picaxe giant.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
+          "originX": 0.9,
+          "originY": 0.375,
+          "values": {"name": "MinerPicaxe"},
+          "groupName": null
         },
         {
           "x": 864,
@@ -3444,7 +3469,20 @@
           "texture": "esoteric/message/miner.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 796,
+          "y": 353,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#8e8d7d",
+          "texture": "effects/burst 32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "MinerPicaxeBurst"}
         }
       ],
       "folder": "../textures"
@@ -3459,8 +3497,8 @@
       "gridCellsX": 137,
       "gridCellsY": 68,
       "decals": [
-        {"x": 352, "y": 56, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#7a2534", "texture": "shapes/circle irregular72.png", "originX": 0.5, "originY": 0.5},
-        {"x": 208, "y": 120, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#7a2534", "texture": "shapes/circle irregular72.png", "originX": 0.5, "originY": 0.5},
+        {"x": 352, "y": 56, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#7a2534", "texture": "shapes/circle irregular72.png", "originX": 0.5, "originY": 0.5, "groupName": null},
+        {"x": 208, "y": 120, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#7a2534", "texture": "shapes/circle irregular72.png", "originX": 0.5, "originY": 0.5, "groupName": null},
         {"x": 496, "y": 88, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#ffffff", "texture": "sky/cloud0.png", "originX": 0.5, "originY": 0.5, "groupName": null},
         {"x": 787, "y": 163, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#ffffff", "texture": "sky/cloud0.png", "originX": 0.5, "originY": 0.5, "groupName": null},
         {"x": 1067, "y": 58, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#ffffff", "texture": "sky/cloud0.png", "originX": 0.5, "originY": 0.5, "groupName": null},
@@ -3472,7 +3510,7 @@
         {"x": 1005, "y": 283, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#ffcccf", "texture": "terrain/earth/loop.png", "originX": 0.5, "originY": 0.5, "groupName": null},
         {"x": 1083, "y": 311, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#ffcccf", "texture": "terrain/earth/loop.png", "originX": 0.5, "originY": 0.5, "groupName": null},
         {"x": 72, "y": 96, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#ffffff", "texture": "sky/cloud0.png", "originX": 0.5, "originY": 0.5, "groupName": null},
-        {"x": 296, "y": 24, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#7a2534", "texture": "shapes/circle irregular72.png", "originX": 0.5, "originY": 0.5},
+        {"x": 296, "y": 24, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#7a2534", "texture": "shapes/circle irregular72.png", "originX": 0.5, "originY": 0.5, "groupName": null},
         {"x": 575, "y": 480, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#ffffff", "texture": "sky/cloud0.png", "originX": 0.5, "originY": 0.5, "groupName": null}
       ],
       "folder": "../textures"

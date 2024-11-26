@@ -1,8 +1,18 @@
 import { nlerp } from "../../math/number";
 import { PropertiesLike } from "../../types/properties-like";
 
-export function lerp<T>(object: T, key: keyof PropertiesLike<T, number>) {
-    return {
+export const lerp = _interp(nlerp);
+
+export const interp = {
+    steps(count: number) {
+        return _interp((start, target, factor) => nlerp(start, target, Math.floor(factor * count) / count));
+    },
+};
+
+type InterpFn = (start: number, target: number, factor: number) => number;
+
+function _interp(fn: InterpFn) {
+    return <T>(object: T, key: keyof PropertiesLike<T, number>) => ({
         to(target: number) {
             return {
                 over(ms: number) {
@@ -16,12 +26,12 @@ export function lerp<T>(object: T, key: keyof PropertiesLike<T, number>) {
                         const factor = Math.min(currentMs / ms, 1);
 
                         /// @ts-expect-error
-                        object[key] = nlerp(start, target, factor);
+                        object[key] = fn(start, target, factor);
 
                         return factor >= 1;
                     };
                 },
             };
         },
-    };
+    });
 }
