@@ -57,3 +57,5 @@ export function objValuable(type: RpgEconomy.Currency.Type, uid?: number) {
         })
         .step(self => self.collectable = collectableAfterSteps-- <= 0);
 }
+
+export type ObjValuable = ReturnType<typeof objValuable>;
