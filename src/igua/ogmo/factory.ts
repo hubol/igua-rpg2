@@ -49,7 +49,7 @@ export namespace OgmoFactory {
         if (typeof fn !== "function") {
             ErrorReporter.reportSubsystemError(
                 "OgmoFactory",
-                "Received fn argument that is not a function. Is OgmoEntityResolvers up to date?",
+                new Error("Received fn argument that is not a function. Is OgmoEntityResolvers up to date?"),
                 { fn },
             );
             return undefined as any;

@@ -28,10 +28,12 @@ class ErrorReporterImpl {
         }
     }
 
+    // TODO I don't think error should be any, should probably be Error
     reportSubsystemError(subsystem: string, error: any, ...context: any[]) {
         this.announcer.onSubsystemError(subsystem, error, ...context);
     }
 
+    // TODO I don't think error should be any, should probably be Error
     reportDevOnlyState(error: any, ...context: any[]) {
         this.announcer.onSubsystemError("Dev-Only State", error, ...context);
     }
