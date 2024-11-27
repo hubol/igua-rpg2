@@ -43,6 +43,7 @@ export const OgmoEntityResolvers = {
         delete entity.width;
         return obj;
     },
+    "Marker": (entity) => vnew(entity),
 } satisfies Record<string, (e: OgmoFactory.Entity) => unknown>;
 
 function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?: string) {
