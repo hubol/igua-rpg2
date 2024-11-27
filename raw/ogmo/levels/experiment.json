@@ -8,6 +8,48 @@
   "backgroundColor": "#520e1a",
   "layers": [
     {
+      "name": "MarkerEntities",
+      "_eid": "73166939",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 137,
+      "gridCellsY": 68,
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 812,
+          "y": 337,
+          "originX": 8,
+          "originY": 8,
+          "values": {"name": "MinerValuable2", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 1,
+          "_eid": "73148747",
+          "x": 782,
+          "y": 323,
+          "originX": 8,
+          "originY": 8,
+          "values": {"name": "MinerValuable1", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 2,
+          "_eid": "73148747",
+          "x": 755,
+          "y": 339,
+          "originX": 8,
+          "originY": 8,
+          "values": {"name": "MinerValuable0", "depth": 0}
+        }
+      ]
+    },
+    {
       "name": "FrontDecals",
       "_eid": "17577176",
       "offsetX": 0,
@@ -111,39 +153,6 @@
           "values": {"title": "Outskirts", "message": "The outskirts of town.", "name": "", "depth": 0}
         },
         {
-          "name": "ValuableOrange",
-          "id": 10,
-          "_eid": "69757920",
-          "x": 756,
-          "y": 338,
-          "originX": 8,
-          "originY": 6,
-          "uid": 173260335950100,
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "ValuableOrange",
-          "id": 11,
-          "_eid": "69757920",
-          "x": 806,
-          "y": 341,
-          "originX": 8,
-          "originY": 6,
-          "uid": 173260335990201,
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "ValuableOrange",
-          "id": 12,
-          "_eid": "69757920",
-          "x": 781,
-          "y": 325,
-          "originX": 8,
-          "originY": 6,
-          "uid": 173260336132502,
-          "values": {"name": "", "depth": 0}
-        },
-        {
           "name": "IguanaNpc",
           "id": 19,
           "_eid": "90326278",
@@ -244,7 +253,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 800,
@@ -269,7 +279,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 743,
@@ -281,7 +292,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 509,
@@ -1970,7 +1982,8 @@
           "texture": "shapes/arc 24.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 910,
@@ -1982,7 +1995,8 @@
           "texture": "shapes/arc 24.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 835,
@@ -1994,7 +2008,8 @@
           "texture": "shapes/arc 24.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 741,
@@ -2006,7 +2021,8 @@
           "texture": "shapes/arc 24.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 550,
@@ -2018,7 +2034,8 @@
           "texture": "foliage/medium0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 563,
@@ -2030,7 +2047,8 @@
           "texture": "foliage/small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 535,
@@ -2042,7 +2060,8 @@
           "texture": "foliage/small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 524,
@@ -2054,7 +2073,8 @@
           "texture": "foliage/small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 524,
@@ -2066,7 +2086,8 @@
           "texture": "foliage/flower 14.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 563,
@@ -2078,7 +2099,8 @@
           "texture": "foliage/flower 14.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 531,
@@ -2090,7 +2112,8 @@
           "texture": "foliage/flower 14.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 813,
@@ -2102,7 +2125,8 @@
           "texture": "foliage/flower 14.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 107,
@@ -2114,7 +2138,8 @@
           "texture": "foliage/flower 14.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -3661,7 +3686,8 @@
           "texture": "effects/burst 32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "MinerPicaxeBurst"}
+          "values": {"name": "MinerPicaxeBurst"},
+          "groupName": null
         },
         {
           "x": 500,
@@ -3673,7 +3699,8 @@
           "texture": "shapes/arc 24.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 468,
@@ -3685,7 +3712,8 @@
           "texture": "shapes/arc 24.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 444,
@@ -3697,7 +3725,8 @@
           "texture": "shapes/arc 24.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 312,
@@ -3709,7 +3738,8 @@
           "texture": "foliage/vine1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 297,
@@ -3721,7 +3751,8 @@
           "texture": "foliage/vine1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 446,
@@ -3733,7 +3764,8 @@
           "texture": "foliage/vine1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 478,
@@ -3745,7 +3777,8 @@
           "texture": "foliage/vine1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

@@ -8,6 +8,29 @@
   "backgroundColor": "#86bafe",
   "layers": [
     {
+      "name": "MarkerEntities",
+      "_eid": "73166939",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 162,
+      "gridCellsY": 72,
+      "entities": []
+    },
+    {
+      "name": "FrontDecals",
+      "_eid": "17577176",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 162,
+      "gridCellsY": 72,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
       "name": "FrontEntities",
       "_eid": "55690179",
       "offsetX": 0,
@@ -500,6 +523,18 @@
     {
       "name": "BackgroundDecals",
       "_eid": "64691217",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 162,
+      "gridCellsY": 72,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxDecals",
+      "_eid": "17093961",
       "offsetX": 0,
       "offsetY": 0,
       "gridCellWidth": 8,

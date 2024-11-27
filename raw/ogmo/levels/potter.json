@@ -8,6 +8,29 @@
   "backgroundColor": "#5a2e0c",
   "layers": [
     {
+      "name": "MarkerEntities",
+      "_eid": "73166939",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 50,
+      "entities": []
+    },
+    {
+      "name": "FrontDecals",
+      "_eid": "17577176",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 50,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
       "name": "FrontEntities",
       "_eid": "55690179",
       "offsetX": 0,
@@ -114,7 +137,8 @@
           "texture": "pottery/head green.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 211,
@@ -126,7 +150,8 @@
           "texture": "pottery/head yellow.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 212,
@@ -138,7 +163,8 @@
           "texture": "pottery/head green.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 213,
@@ -150,7 +176,8 @@
           "texture": "pottery/head green.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 235,
@@ -162,7 +189,8 @@
           "texture": "pottery/head green.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 234,
@@ -174,7 +202,8 @@
           "texture": "pottery/head yellow.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 233,
@@ -186,7 +215,8 @@
           "texture": "pottery/head yellow.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 234,
@@ -198,7 +228,8 @@
           "texture": "pottery/head yellow.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 256,
@@ -210,7 +241,8 @@
           "texture": "pottery/head red.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 255,
@@ -222,7 +254,8 @@
           "texture": "pottery/plant bush red.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 156,
@@ -234,7 +267,8 @@
           "texture": "pottery/hanger triangle.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 156,
@@ -246,7 +280,8 @@
           "texture": "pottery/head green.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 155,
@@ -258,7 +293,8 @@
           "texture": "pottery/plant bush red.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 156,
@@ -270,7 +306,8 @@
           "texture": "pottery/hanger triangle.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 156,
@@ -282,7 +319,8 @@
           "texture": "pottery/head yellow.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 156,
@@ -294,7 +332,8 @@
           "texture": "pottery/plant bush red.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 300,
@@ -306,7 +345,8 @@
           "texture": "pottery/body yellow.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 302,
@@ -318,7 +358,8 @@
           "texture": "pottery/head red.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 302,
@@ -330,7 +371,8 @@
           "texture": "pottery/plant reed.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 320,
@@ -342,7 +384,8 @@
           "texture": "pottery/head red.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 319,
@@ -354,7 +397,8 @@
           "texture": "pottery/head red.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 320,
@@ -366,7 +410,8 @@
           "texture": "pottery/head red.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 256,
@@ -378,7 +423,8 @@
           "texture": "stone/rock large shaded.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 280,
@@ -390,7 +436,8 @@
           "texture": "stone/rock large shaded.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 48,
@@ -402,7 +449,8 @@
           "texture": "stone/rock large shaded.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 72,
@@ -414,7 +462,8 @@
           "texture": "stone/rock large shaded.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 176,
@@ -426,7 +475,8 @@
           "texture": "stone/rock large shaded.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 152,
@@ -438,7 +488,8 @@
           "texture": "stone/rock large shaded.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 301,
@@ -450,7 +501,8 @@
           "texture": "metal/pipe dark broken.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -1444,7 +1496,8 @@
           "texture": "stone/irregular wall.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 121,
@@ -1456,7 +1509,8 @@
           "texture": "stone/irregular wall.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 105,
@@ -1468,7 +1522,8 @@
           "texture": "stone/irregular wall.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 84,
@@ -1480,7 +1535,8 @@
           "texture": "stone/irregular wall.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 90,
@@ -1492,7 +1548,8 @@
           "texture": "stone/irregular wall.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 96,
@@ -1504,7 +1561,8 @@
           "texture": "stone/irregular wall.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 62,
@@ -1516,7 +1574,8 @@
           "texture": "stone/irregular wall.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 42,
@@ -1528,7 +1587,8 @@
           "texture": "stone/irregular wall.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 117,
@@ -1540,7 +1600,8 @@
           "texture": "stone/irregular wall.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 40,
@@ -1552,7 +1613,8 @@
           "texture": "stone/irregular wall.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 150,
@@ -1564,7 +1626,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 155,
@@ -1576,7 +1639,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 145,
@@ -1588,7 +1652,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 162,
@@ -1600,7 +1665,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 215,
@@ -1612,7 +1678,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 249,
@@ -1624,7 +1691,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 307,
@@ -1636,7 +1704,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 326,
@@ -1648,7 +1717,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 219,
@@ -1660,7 +1730,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 241,
@@ -1672,7 +1743,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 241,
@@ -1684,7 +1756,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 326,
@@ -1696,7 +1769,8 @@
           "texture": "light/shadow irregular small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 301,
@@ -1708,7 +1782,8 @@
           "texture": "stone/irregular wall.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 285,
@@ -1720,7 +1795,8 @@
           "texture": "stone/irregular wall.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 301,
@@ -1732,7 +1808,8 @@
           "texture": "stone/irregular wall.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 318,
@@ -1744,9 +1821,22 @@
           "texture": "stone/irregular wall.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxDecals",
+      "_eid": "17093961",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 50,
+      "decals": [],
       "folder": "../textures"
     }
   ]

@@ -8,6 +8,29 @@
   "backgroundColor": "#ecd769",
   "layers": [
     {
+      "name": "MarkerEntities",
+      "_eid": "73166939",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 103,
+      "gridCellsY": 32,
+      "entities": []
+    },
+    {
+      "name": "FrontDecals",
+      "_eid": "17577176",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 103,
+      "gridCellsY": 32,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
       "name": "FrontEntities",
       "_eid": "55690179",
       "offsetX": 0,
@@ -209,7 +232,8 @@
           "texture": "locked door.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "asdf"}
+          "values": {"name": "asdf"},
+          "groupName": null
         },
         {
           "x": 176,
@@ -221,7 +245,8 @@
           "texture": "locked door.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "zzz"}
+          "values": {"name": "zzz"},
+          "groupName": null
         },
         {
           "x": 216,
@@ -233,7 +258,8 @@
           "texture": "locked door.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "LockedDoor"}
+          "values": {"name": "LockedDoor"},
+          "groupName": null
         },
         {
           "x": 136,
@@ -245,7 +271,8 @@
           "texture": "terrain/pipe/gray.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 176,
@@ -257,7 +284,8 @@
           "texture": "terrain/pipe/gray.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 360,
@@ -269,7 +297,8 @@
           "texture": "placeholder.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "Before"}
+          "values": {"name": "Before"},
+          "groupName": null
         },
         {
           "x": 368,
@@ -281,7 +310,8 @@
           "texture": "placeholder.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "After"}
+          "values": {"name": "After"},
+          "groupName": null
         },
         {
           "x": 408,
@@ -293,7 +323,8 @@
           "texture": "placeholder.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 432,
@@ -305,7 +336,8 @@
           "texture": "placeholder.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -673,6 +705,18 @@
     {
       "name": "BackgroundDecals",
       "_eid": "64691217",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 103,
+      "gridCellsY": 32,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxDecals",
+      "_eid": "17093961",
       "offsetX": 0,
       "offsetY": 0,
       "gridCellWidth": 8,

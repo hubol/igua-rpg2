@@ -17,8 +17,16 @@
   "compactExport": false,
   "externalScript": "igua-rpg2-ogmo.js",
   "playCommand": "",
-  "entityTags": ["Terrain", "Player", "Front"],
+  "entityTags": ["Terrain", "Player", "Front", "Marker"],
   "layers": [
+    {
+      "definition": "entity",
+      "name": "MarkerEntities",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "73166939",
+      "requiredTags": ["Marker"],
+      "excludedTags": []
+    },
     {
       "definition": "decal",
       "name": "FrontDecals",
@@ -28,7 +36,7 @@
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": false},
       "values": []
     },
     {
@@ -53,7 +61,7 @@
       "gridSize": {"x": 8, "y": 8},
       "exportID": "93086020",
       "requiredTags": [],
-      "excludedTags": ["Terrain", "Player"]
+      "excludedTags": ["Terrain", "Player", "Marker"]
     },
     {
       "definition": "decal",
@@ -286,7 +294,7 @@
       ],
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/pipe.png",
-      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJBAMAAADJBLEBAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAMUExURa+vr87Ozo6OjnJyclXLZy0AAAAJcEhZcwAADsIAAA7CARUoSoAAAAAbSURBVBjTY4ADQSjAwoADJShAMIyhAMowNgYAs50G6VIHnQYAAAAASUVORK5CYII="
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAAmSURBVChTY1y/fv1/BgoAE5QmGzD29fVR5IKB98LAh8FAe4GBAQBQ2gt5H0/w0QAAAABJRU5ErkJggg=="
     },
     {
       "exportID": "95781942",
@@ -780,6 +788,50 @@
       "tintable": {"enabled": true, "defaultTint": "#68a8d0", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/puddle.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAICAYAAADwdn+XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAbSURBVChTY/wPBAwUACYoTTag2IBRQDFgYAAAGQwEAsnlJ7IAAAAASUVORK5CYII="
+    },
+    {
+      "exportID": "73148747",
+      "name": "Marker",
+      "limit": -1,
+      "size": {"x": 17, "y": 17},
+      "origin": {"x": 8, "y": 8},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["Marker"],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "tintable": {"enabled": false, "defaultTint": "#00ff00", "rgbLevelValueName": null, "useDefaultTint": false},
+      "texture": "preview-images/marker.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAACPSURBVDhPlZIBEoAgCASp///ZupACAaGdqUY5Nmw6iGjcl4B1l7fvfO5Y8pYW7hiqZ0qEnogFChnfFng3OlqY08FKlNZ1CGTB7QtWCfAN+wlDCbAiIRCATAK2R9Bkkl+T2P+EiSZgeN/pV0l8hEJky5HgI61LqBIIYQ6PrkBweftNagGw3+gGSz9Hj9lHdAGmNTcKNB9gZQAAAABJRU5ErkJggg=="
     }
   ],
   "tilesets": []
