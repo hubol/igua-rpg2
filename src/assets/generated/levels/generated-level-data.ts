@@ -438,6 +438,7 @@ export const Lvl = {
     MinerValuable2: e(r["Marker"], { x: 812, y: 337, values: { name: "MinerValuable2", depth: 0 } }, "MarkerEntities"),
     MinerValuable1: e(r["Marker"], { x: 782, y: 323, values: { name: "MinerValuable1", depth: 0 } }, "MarkerEntities"),
     MinerValuable0: e(r["Marker"], { x: 755, y: 339, values: { name: "MinerValuable0", depth: 0 } }, "MarkerEntities"),
+    PickaxeHitbox: e(r["Region"], { x: 792, y: 315, width: 8, height: 40, values: { name: "PickaxeHitbox", depth: 0 } }, "MarkerEntities"),
   })),
   Forest: l({ width: 1296, height: 576, backgroundTint: 0x86bafe }, () => ({
     Block: e(r["Block"], { x: 792, y: 472, width: 248, height: 104, values: { name: "", depth: 0, visible: true }, tint: 0x432f93 }, "TerrainEntities"),

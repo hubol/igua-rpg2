@@ -1,3 +1,4 @@
+import { Graphics } from "pixi.js";
 import { Instances } from "../../lib/game-engine/instances";
 import { vnew } from "../../lib/math/vector-type";
 import { objPuddle } from "../objects/nature/obj-puddle";
@@ -44,6 +45,7 @@ export const OgmoEntityResolvers = {
         return obj;
     },
     "Marker": (entity) => vnew(entity),
+    "Region": () => new Graphics().beginFill(0x00ff00).drawRect(0, 0, 1, 1).invisible(),
 } satisfies Record<string, (e: OgmoFactory.Entity) => unknown>;
 
 function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?: string) {

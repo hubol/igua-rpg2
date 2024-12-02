@@ -12,7 +12,12 @@ interface MxnRpgAttackArgs {
 export function mxnRpgAttack(obj: DisplayObject, args: MxnRpgAttackArgs) {
     return obj
         .dispatches<"mxnRpgAttack.hit">()
+        .merge({ isAttackActive: true })
         .step(self => {
+            if (!self.isAttackActive) {
+                return;
+            }
+
             for (const instance of Instances(mxnRpgStatus)) {
                 // TODO filter by faction here pls
                 if (obj.collidesOne(instance.hurtboxes)) {
