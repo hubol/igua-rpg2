@@ -75,13 +75,11 @@
         {"x": 187, "y": 220, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#ffd464", "texture": "foliage/medium0.png", "originX": 0.5, "originY": 0.5, "groupName": null},
         {"x": 409, "y": 510, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#98ba60", "texture": "foliage/small.png", "originX": 0.5, "originY": 0.5, "groupName": null},
         {"x": 422, "y": 513, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#98ba60", "texture": "foliage/small.png", "originX": 0.5, "originY": 0.5, "groupName": null},
-        {"x": 416, "y": 464, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#40743b", "texture": "foliage/vine0.png", "originX": 0.5, "originY": 0.5, "groupName": null},
         {"x": 466, "y": 459, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#98ba60", "texture": "foliage/vine0.png", "originX": 0.5, "originY": 0.5, "groupName": null},
         {"x": 482, "y": 464, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#40743b", "texture": "foliage/vine0.png", "originX": 0.5, "originY": 0.5, "groupName": null},
         {"x": 467, "y": 472, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#98ba60", "texture": "foliage/vine1.png", "originX": 0.5, "originY": 0.5, "groupName": null},
         {"x": 485, "y": 481, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#40743b", "texture": "foliage/vine1.png", "originX": 0.5, "originY": 0.5, "groupName": null},
-        {"x": 429, "y": 467, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#98ba60", "texture": "foliage/vine1.png", "originX": 0.5, "originY": 0.5, "groupName": null},
-        {"x": 415, "y": 481, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#40743b", "texture": "foliage/vine1.png", "originX": 0.5, "originY": 0.5, "groupName": null}
+        {"x": 429, "y": 467, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#98ba60", "texture": "foliage/vine1.png", "originX": 0.5, "originY": 0.5, "groupName": null}
       ],
       "folder": "../textures"
     },
@@ -161,7 +159,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": false,
-          "values": {"looksName": "", "name": "", "depth": 0}
+          "values": {"looksName": "Farmer", "name": "", "depth": 0}
         },
         {
           "name": "ValuableBlue",
@@ -2153,7 +2151,9 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
-        }
+        },
+        {"x": 415, "y": 481, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#40743b", "texture": "foliage/vine1.png", "originX": 0.5, "originY": 0.5, "groupName": null},
+        {"x": 416, "y": 464, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#40743b", "texture": "foliage/vine0.png", "originX": 0.5, "originY": 0.5, "groupName": null}
       ],
       "folder": "../textures"
     },
