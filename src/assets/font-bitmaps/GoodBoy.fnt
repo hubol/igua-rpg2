@@ -180,3 +180,5 @@ kerning first=@- second=@T amount=-3
 
 kerning first=@" second=@, amount=-1
 kerning first=@" second=@A amount=-3
+
+kerning first=@( second=@) amount=1
