@@ -2140,6 +2140,19 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 791,
+          "y": 372,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -3554,19 +3567,6 @@
           "rotation": 0,
           "tint": "#ffffff",
           "texture": "stone/rock large shaded.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 791,
-          "y": 372,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
