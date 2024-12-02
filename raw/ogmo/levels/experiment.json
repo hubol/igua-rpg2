@@ -211,12 +211,12 @@
           "name": "IguanaNpc",
           "id": 24,
           "_eid": "90326278",
-          "x": 864,
+          "x": 886,
           "y": 376,
           "originX": 20,
           "originY": 52,
           "flippedX": true,
-          "values": {"looksName": "", "name": "", "depth": 0}
+          "values": {"looksName": "Miner", "name": "", "depth": 0}
         }
       ]
     },
@@ -3651,11 +3651,11 @@
           "groupName": null
         },
         {
-          "x": 851,
-          "y": 341,
+          "x": 852,
+          "y": 350,
           "scaleX": 1,
           "scaleY": 1,
-          "rotation": 35,
+          "rotation": 45,
           "tint": "#ffffff",
           "texture": "esoteric/decoration/picaxe giant.png",
           "originX": 0.9,

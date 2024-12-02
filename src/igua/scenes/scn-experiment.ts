@@ -22,11 +22,13 @@ export function scnExperiment() {
     lvl.MinerPicaxe
         .mixin(mxnSpatialAudio)
         .coro(function* (self) {
+            const initialAngle = self.angle;
+
             while (true) {
                 yield interp.steps(4)(self, "angle").to(135).over(1000);
                 yield () => !valuableSpawnerObj.isFull;
                 yield sleep(250);
-                yield interp.steps(4)(self, "angle").to(35).over(300);
+                yield interp.steps(4)(self, "angle").to(initialAngle).over(300);
                 self.play(Sfx.Impact.PickaxeRock.with.rate(Rng.float(0.9, 1.1)));
                 lvl.MinerPicaxeBurst.visible = true;
                 yield sleep(125);
