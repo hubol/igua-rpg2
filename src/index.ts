@@ -26,7 +26,7 @@ async function initialize() {
         });
         setCurrentPixiRenderer(renderer);
 
-        await installExtensions();
+        installExtensions();
 
         const progress = new JobProgress();
 
@@ -58,12 +58,8 @@ async function initialize() {
     }
 }
 
-async function installExtensions() {
+function installExtensions() {
     require("./lib/extensions/-load-extensions");
-    // Have observed bizarre behavior with Dexie
-    // (In particular, PSD values seem to be missing)
-    // without "flushing" Promises after requiring extensions...
-    await new Promise(r => setTimeout(r));
 }
 
 function showFatalError(error) {
