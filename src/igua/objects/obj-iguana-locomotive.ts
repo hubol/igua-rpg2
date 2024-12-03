@@ -52,10 +52,8 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             yield () =>
                 (abort = currentWalkToTarget !== x
                     || !puppet.isMovingRight
-                    || !puppet.isBeingPiloted
-                    // TODO: This is a bug
-                    // When you hit a wall, it should probably not count as abort!
-                    || hitWall)
+                    || !puppet.isBeingPiloted)
+                || hitWall
                 || puppet.x + puppet.estimatedDecelerationDeltaX >= x;
 
             if (abort) {
@@ -73,10 +71,8 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             yield () =>
                 (abort = currentWalkToTarget !== x
                     || !puppet.isMovingLeft
-                    || !puppet.isBeingPiloted
-                    // TODO: This is a bug
-                    // When you hit a wall, it should probably not count as abort!
-                    || hitWall)
+                    || !puppet.isBeingPiloted)
+                || hitWall
                 || puppet.x + puppet.estimatedDecelerationDeltaX <= x;
 
             if (abort) {
