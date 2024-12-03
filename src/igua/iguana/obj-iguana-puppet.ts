@@ -11,6 +11,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { CollisionShape } from "../../lib/pixi/collision";
 import { Material, Materials } from "../systems/materials";
 import { sleep } from "../../lib/game-engine/routines/sleep";
+import { mxnSpatialAudio } from "../mixins/mxn-spatial-audio";
 
 const r1 = new Rectangle();
 const r2 = new Rectangle();
@@ -162,22 +163,21 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
 
             sinceStepSoundEffectFrames++;
 
-            // TODO don't play when offscreen!
             if (!isAirborne && c.playSfx && sinceStepSoundEffectFrames > 3) {
                 if (prevForeLeftY < 0 && feetController.foreLeftY === 0) {
-                    Materials[c.groundMaterial].stepSound0.play();
+                    c.play(Materials[c.groundMaterial].stepSound0);
                     sinceStepSoundEffectFrames = 0;
                 }
                 else if (prevForeRightY < 0 && feetController.foreRightY === 0) {
-                    Materials[c.groundMaterial].stepSound1.play();
+                    c.play(Materials[c.groundMaterial].stepSound1);
                     sinceStepSoundEffectFrames = 0;
                 }
                 else if (prevHindLeftY < 0 && feetController.hindLeftY === 0) {
-                    Materials[c.groundMaterial].stepSound2.play();
+                    c.play(Materials[c.groundMaterial].stepSound2);
                     sinceStepSoundEffectFrames = 0;
                 }
                 else if (prevHindRightY < 0 && feetController.hindRightY === 0) {
-                    Materials[c.groundMaterial].stepSound3.play();
+                    c.play(Materials[c.groundMaterial].stepSound3);
                     sinceStepSoundEffectFrames = 0;
                 }
             }
@@ -211,6 +211,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
 
     const c = container(back, core, front)
         .collisionShape(CollisionShape.DisplayObjects, [head.crest, head.noggin, body.torso, ...feet.shapes])
+        .mixin(mxnSpatialAudio)
         .merge({ head, body, feet })
         .merge({
             get facing() {
