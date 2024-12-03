@@ -27,7 +27,7 @@ export async function showLoadingScreen(progress: JobProgress) {
         render();
     });
 
-    const loadingEl = document.getElementById("loading")!;
+    const loadingEl = document.querySelector<HTMLElement>("#loading")!;
 
     if (!Environment.isDev) {
         loadingEl.classList.add("hide");
