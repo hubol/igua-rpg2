@@ -2,7 +2,8 @@ import { Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { container } from "../../lib/pixi/container";
 import { approachLinear } from "../../lib/math/number";
-import { Input, layers, renderer } from "../globals";
+import { renderer } from "../current-pixi-renderer";
+import { Input, layers } from "../globals";
 import { UiColor } from "../ui/ui-color";
 
 const width = 220;

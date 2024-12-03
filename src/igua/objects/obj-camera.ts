@@ -1,5 +1,6 @@
 import { container } from "../../lib/pixi/container";
-import { renderer, scene } from "../globals";
+import { renderer } from "../current-pixi-renderer";
+import { scene } from "../globals";
 import { playerObj } from "./obj-player";
 import { StepOrder } from "./step-order";
 

@@ -8,6 +8,7 @@ import { JobProgress } from "./lib/game-engine/job-progress";
 import { initializeAsshatAudioContext } from "./lib/game-engine/audio/asshat-audiocontext";
 import { Environment } from "./lib/environment";
 import { settings } from "pixi.js";
+import { setCurrentPixiRenderer } from "./igua/current-pixi-renderer";
 
 // https://esbuild.github.io/api/#live-reload
 if (Environment.isDev) {
@@ -23,6 +24,7 @@ async function initialize() {
             eventFeatures: { click: false, globalMove: false, move: false, wheel: false },
             eventMode: "none",
         });
+        setCurrentPixiRenderer(renderer);
 
         await installExtensions();
 

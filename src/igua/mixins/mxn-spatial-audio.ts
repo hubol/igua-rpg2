@@ -1,7 +1,7 @@
 import { DisplayObject, Rectangle } from "pixi.js";
 import { Sound, SoundWith } from "../../lib/game-engine/audio/sound";
 import { IRectangle, areRectanglesOverlapping } from "../../lib/math/rectangle";
-import { renderer } from "../globals";
+import { renderer } from "../current-pixi-renderer";
 import { nlerp } from "../../lib/math/number";
 
 const audibleRectangle: IRectangle = {

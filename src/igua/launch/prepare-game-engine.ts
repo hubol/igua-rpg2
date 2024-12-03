@@ -27,7 +27,7 @@ export function prepareGameEngine(renderer: PixiRenderer) {
 
     const animator = new Animator(60);
 
-    setIguaGlobals(renderer, rootStage, iguaInput, forceGameLoop, animator.start.bind(animator), devKeyListener);
+    setIguaGlobals(rootStage, iguaInput, forceGameLoop, animator.start.bind(animator), devKeyListener);
 
     iguaInput.start();
     if (Environment.isDev) {

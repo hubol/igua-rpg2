@@ -5,7 +5,8 @@ import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 import { Logging } from "../../../lib/logging";
 import { Container, Graphics } from "pixi.js";
 import { merge } from "../../../lib/object/merge";
-import { forceGameLoop, renderer } from "../../globals";
+import { renderer } from "../../current-pixi-renderer";
+import { forceGameLoop } from "../../globals";
 import { objCamera } from "../../objects/obj-camera";
 
 interface IguaSceneMeta {
