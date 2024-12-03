@@ -1,6 +1,6 @@
 import { BLEND_MODES, Container, Graphics } from "pixi.js";
 import { Undefined } from "../../../lib/types/undefined";
-import { lerp } from "../../../lib/game-engine/routines/lerp";
+import { interp } from "../../../lib/game-engine/routines/interp";
 import { renderer } from "../../globals";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 
@@ -12,7 +12,7 @@ export function objSolidOverlay() {
         container?.destroy();
         container = new Container().coro(function* (c) {
             dirty = true;
-            yield lerp(g, "alpha").to(value).over(ms);
+            yield interp(g, "alpha").to(value).over(ms);
             c.destroy();
         })
             .show(g);

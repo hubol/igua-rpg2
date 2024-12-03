@@ -1,7 +1,7 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
-import { interp } from "../../lib/game-engine/routines/lerp";
+import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { Jukebox } from "../core/igua-audio";
@@ -34,10 +34,10 @@ export function scnExperiment() {
             const initialAngle = self.angle;
 
             while (true) {
-                yield interp.steps(4)(self, "angle").to(135).over(1000);
+                yield interp(self, "angle").steps(4).to(135).over(1000);
                 yield () => !valuableSpawnerObj.isFull;
                 yield sleep(250);
-                yield interp.steps(4)(self, "angle").to(initialAngle).over(300);
+                yield interp(self, "angle").steps(4).to(initialAngle).over(300);
                 pickaxeAttackObj.isAttackActive = true;
                 self.play(Sfx.Impact.PickaxeRock.with.rate(Rng.float(0.9, 1.1)));
                 lvl.MinerPicaxeBurst.visible = true;

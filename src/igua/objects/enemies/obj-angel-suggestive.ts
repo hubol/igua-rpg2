@@ -10,7 +10,7 @@ import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { approachLinear, nlerp } from "../../../lib/math/number";
 import { scene } from "../../globals";
-import { lerp } from "../../../lib/game-engine/routines/lerp";
+import { interp } from "../../../lib/game-engine/routines/interp";
 import { objAngelPlantLegs } from "./obj-angel-plant-legs";
 
 const themes = {
@@ -247,15 +247,15 @@ export function objAngelSuggestive() {
             while (true) {
                 bodyObj.bulge.phase = "inflating";
                 bodyObj.bulge.unit = 0;
-                yield lerp(bodyObj.bulge, "unit").to(1).over(1000);
+                yield interp(bodyObj.bulge, "unit").to(1).over(1000);
                 yield sleep(500);
                 bodyObj.bulge.phase = "bursting";
                 bodyObj.bulge.unit = 0;
-                yield lerp(bodyObj.bulge, "unit").to(1).over(1000);
+                yield interp(bodyObj.bulge, "unit").to(1).over(1000);
                 yield sleep(500);
                 bodyObj.bulge.phase = "recovering";
                 bodyObj.bulge.unit = 0;
-                yield lerp(bodyObj.bulge, "unit").to(1).over(1000);
+                yield interp(bodyObj.bulge, "unit").to(1).over(1000);
             }
         });
 

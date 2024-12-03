@@ -1,7 +1,7 @@
 import { BLEND_MODES } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Sfx } from "../../../assets/sounds";
-import { lerp } from "../../../lib/game-engine/routines/lerp";
+import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { container } from "../../../lib/pixi/container";
@@ -336,13 +336,13 @@ function objIguanaPreview() {
             .coro(function* () {
                 while (true) {
                     yield sleep(1000);
-                    yield lerp(bigPuppet, "ducking").to(1).over(300);
+                    yield interp(bigPuppet, "ducking").to(1).over(300);
                     yield sleep(1000);
-                    yield lerp(bigPuppet, "ducking").to(0).over(300);
+                    yield interp(bigPuppet, "ducking").to(0).over(300);
                     yield sleep(1000);
-                    yield lerp(bigPuppet, "gait").to(1).over(300);
+                    yield interp(bigPuppet, "gait").to(1).over(300);
                     yield sleep(1000);
-                    yield lerp(bigPuppet, "gait").to(0).over(300);
+                    yield interp(bigPuppet, "gait").to(0).over(300);
                 }
             });
 
