@@ -16,6 +16,7 @@ import { Rng } from "../../lib/math/rng";
 interface MxnEnemyArgs {
     hurtboxes: DisplayObject[];
     rank: RpgEnemyRank.Model;
+    healthbarAnchorObj?: DisplayObject;
 }
 
 export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
@@ -39,7 +40,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
 
     const effects: RpgStatus.Effects = merge(
         { died },
-        layers.overlay.enemyHealthBars.getRpgStatusEffects(obj, status),
+        layers.overlay.enemyHealthBars.getRpgStatusEffects(args.healthbarAnchorObj ?? obj, status),
     );
 
     // TODO should it expose a way to register hitboxes/hurtboxes

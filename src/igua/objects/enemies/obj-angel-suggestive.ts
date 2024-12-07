@@ -229,6 +229,8 @@ export function objAngelSuggestive() {
 
     const bodyObj = objAngelSuggestiveBody().pivoted(36, 46);
 
+    const healthbarAnchorObj = new Graphics().beginFill(0xff0000).drawRect(-11, -45, 17, 30).invisible();
+
     const actualHeadObj = container(
         bodyObj,
         faceObj,
@@ -262,6 +264,7 @@ export function objAngelSuggestive() {
     return container(
         objAngelPlantLegs({ objToBounce: actualHeadObj }).pivoted(18, -17),
         actualHeadObj,
+        healthbarAnchorObj,
     )
-        .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0, hurtbox1] });
+        .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0, hurtbox1], healthbarAnchorObj });
 }
