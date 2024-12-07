@@ -55,11 +55,12 @@ export type ObjHud = ReturnType<typeof objHud>;
 
 function objValuablesInfo() {
     return objText.Large("You have 0 valuables", { tint: Consts.StatusTextTint })
-        .step(text =>
+        .step(text => {
+            text.seed = RpgProgress.character.inventory.valuables + 64;
             text.text = RpgProgress.character.inventory.valuables === 1
                 ? "You have 1 valuable"
-                : `You have ${RpgProgress.character.inventory.valuables} valuables`
-        );
+                : `You have ${RpgProgress.character.inventory.valuables} valuables`;
+        });
 }
 
 function objPoisonLevel() {
