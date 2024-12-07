@@ -32,6 +32,7 @@ export namespace RpgEnemyRank {
                     emotionalDamageIsFatal: status?.quirks?.emotionalDamageIsFatal ?? false,
                     incrementsAttackerPrideOnDamage: status?.quirks?.incrementsAttackerPrideOnDamage ?? false,
                     roundReceivedDamageUp: status?.quirks?.roundReceivedDamageUp ?? true,
+                    guardedDamageIsFatal: status?.quirks?.guardedDamageIsFatal ?? true,
                 },
                 defenses: {
                     physical: status?.defenses?.physical ?? 0,

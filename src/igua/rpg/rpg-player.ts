@@ -59,6 +59,7 @@ export const RpgPlayer = {
             emotionalDamageIsFatal: true,
             incrementsAttackerPrideOnDamage: true,
             roundReceivedDamageUp: false,
+            guardedDamageIsFatal: false,
         },
     } satisfies RpgStatus.Model,
     get BouncingMinSpeed() {

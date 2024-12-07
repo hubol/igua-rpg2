@@ -35,6 +35,7 @@ export namespace RpgStatus {
             incrementsAttackerPrideOnDamage: boolean;
             emotionalDamageIsFatal: boolean;
             roundReceivedDamageUp: boolean;
+            guardedDamageIsFatal: boolean;
         };
     }
 
@@ -112,11 +113,13 @@ export namespace RpgStatus {
                 return { rejected: true, invulnerable: true };
             }
 
+            const minimumHealthAfterDamage =
+                (!model.quirks.guardedDamageIsFatal && model.isGuarding && model.health > 1) ? 1 : 0;
             let damaged = false;
 
             {
                 const previous = model.health;
-                const min = model.quirks.emotionalDamageIsFatal ? 0 : 1;
+                const min = model.quirks.emotionalDamageIsFatal ? minimumHealthAfterDamage : 1;
                 model.health = Math.max(min, model.health - attack.emotional);
                 const diff = previous - model.health;
                 damaged ||= diff > 0;
@@ -134,7 +137,7 @@ export namespace RpgStatus {
                         attack.physical * ((100 - defense) / 100),
                     ),
                 );
-                model.health = Math.max(0, model.health - damage);
+                model.health = Math.max(minimumHealthAfterDamage, model.health - damage);
                 const diff = previous - model.health;
                 damaged ||= diff > 0;
 
