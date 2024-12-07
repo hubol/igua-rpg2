@@ -1,4 +1,4 @@
-import { Integer } from "../../lib/math/number-alias-types";
+import { Integer, PercentAsInteger } from "../../lib/math/number-alias-types";
 import { RpgAttack } from "./rpg-attack";
 import { RpgEnemy } from "./rpg-enemy";
 import { RpgFaction } from "./rpg-faction";
@@ -14,6 +14,7 @@ export namespace RpgStatus {
         healthMax: number;
         invulnerable: number;
         invulnerableMax: number;
+        isGuarding: boolean;
         poison: {
             immune: boolean;
             level: number;
@@ -24,9 +25,16 @@ export namespace RpgStatus {
             value: Integer;
             max: Integer;
         };
+        guardingDefenses: {
+            physical: PercentAsInteger;
+        };
+        defenses: {
+            physical: PercentAsInteger;
+        };
         quirks: {
             incrementsAttackerPrideOnDamage: boolean;
             emotionalDamageIsFatal: boolean;
+            roundReceivedDamageUp: boolean;
         };
     }
 
@@ -118,7 +126,15 @@ export namespace RpgStatus {
 
             {
                 const previous = model.health;
-                model.health = Math.max(0, model.health - attack.physical);
+                const defense: PercentAsInteger = model.defenses.physical
+                    + (model.isGuarding ? model.guardingDefenses.physical : 0);
+                const damage = Math.max(
+                    0,
+                    Math[model.quirks.roundReceivedDamageUp ? "ceil" : "floor"](
+                        attack.physical * ((100 - defense) / 100),
+                    ),
+                );
+                model.health = Math.max(0, model.health - damage);
                 const diff = previous - model.health;
                 damaged ||= diff > 0;
 

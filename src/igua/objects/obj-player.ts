@@ -41,6 +41,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
         .mixin(mxnRpgStatus, { status: RpgPlayer.Model, effects, hurtboxes: [iguanaLocomotiveObj] })
         .handles("damaged", (_, result) => {
             if (!result.rejected && result.damaged) {
+                // TODO different sound effect for ducked/defended damage?
                 Sfx.Impact.VsPlayerPhysical.play();
             }
         })
@@ -60,6 +61,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             puppet.isMovingLeft = hasControl && Input.isDown("MoveLeft");
             puppet.isMovingRight = hasControl && Input.isDown("MoveRight");
             puppet.isDucking = hasControl && puppet.isOnGround && Input.isDown("Duck");
+            RpgPlayer.Model.isGuarding = puppet.isDucking;
 
             if (
                 hasControl && !puppet.isOnGround && puppet.speed.y < PlayerConsts.VariableJumpSpeedMaximum

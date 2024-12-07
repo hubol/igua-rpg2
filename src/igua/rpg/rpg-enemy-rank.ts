@@ -16,6 +16,7 @@ export namespace RpgEnemyRank {
                 healthMax: status?.healthMax ?? status?.health ?? 30,
                 invulnerable: status?.invulnerable ?? 0,
                 invulnerableMax: status?.invulnerableMax ?? 15,
+                isGuarding: false,
                 faction: status?.faction ?? RpgFaction.Enemy,
                 poison: {
                     value: status?.poison?.value ?? 0,
@@ -30,6 +31,13 @@ export namespace RpgEnemyRank {
                 quirks: {
                     emotionalDamageIsFatal: status?.quirks?.emotionalDamageIsFatal ?? false,
                     incrementsAttackerPrideOnDamage: status?.quirks?.incrementsAttackerPrideOnDamage ?? false,
+                    roundReceivedDamageUp: status?.quirks?.roundReceivedDamageUp ?? true,
+                },
+                defenses: {
+                    physical: status?.defenses?.physical ?? 0,
+                },
+                guardingDefenses: {
+                    physical: status?.defenses?.physical ?? 0,
                 },
             },
             loot: {
