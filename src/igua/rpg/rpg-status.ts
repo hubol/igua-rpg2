@@ -83,22 +83,27 @@ export namespace RpgStatus {
             model.invulnerable = Math.max(0, model.invulnerable - 1);
         },
 
-        damage(model: Model, effects: Effects, attack: RpgAttack.Model, attacker?: RpgEnemy.Model): DamageResult {
-            if (attack.versus !== RpgFaction.Anyone && attack.versus !== model.faction) {
+        damage(
+            target: Model,
+            targetEffects: Effects,
+            attack: RpgAttack.Model,
+            attacker?: RpgEnemy.Model,
+        ): DamageResult {
+            if (attack.versus !== RpgFaction.Anyone && attack.versus !== target.faction) {
                 return { rejected: true, wrongFaction: true };
             }
 
             const ailments = attack.poison > 0 || attack.wetness > 0;
 
-            if (!model.poison.immune) {
-                model.poison.value += attack.poison;
-                if (model.poison.value >= model.poison.max) {
-                    model.poison.value = 0;
-                    model.poison.level += 1;
+            if (!target.poison.immune) {
+                target.poison.value += attack.poison;
+                if (target.poison.value >= target.poison.max) {
+                    target.poison.value = 0;
+                    target.poison.level += 1;
                 }
             }
 
-            model.wetness.value = Math.min(model.wetness.value + attack.wetness, model.wetness.max);
+            target.wetness.value = Math.min(target.wetness.value + attack.wetness, target.wetness.max);
 
             // TODO warn when amount is not an integer
 
@@ -106,41 +111,41 @@ export namespace RpgStatus {
                 return { rejected: false, ailments };
             }
 
-            if (model.invulnerable > 0) {
+            if (target.invulnerable > 0) {
                 return { rejected: true, invulnerable: true };
             }
 
-            const canBeFatal = model.quirks.guardedDamageIsFatal || model.health <= 1;
+            const canBeFatal = target.quirks.guardedDamageIsFatal || target.health <= 1;
 
             const tookEmotionalDamage = takeDamage(
                 attack.emotional,
                 DamageKind.Emotional,
-                canBeFatal && model.quirks.emotionalDamageIsFatal,
+                canBeFatal && target.quirks.emotionalDamageIsFatal,
                 // TODO emotional defense
                 0,
                 0,
-                model,
-                effects,
+                target,
+                targetEffects,
             );
 
             const tookPhysicalDamage = takeDamage(
                 attack.physical,
                 DamageKind.Physical,
                 canBeFatal,
-                model.defenses.physical,
-                model.guardingDefenses.physical,
-                model,
-                effects,
+                target.defenses.physical,
+                target.guardingDefenses.physical,
+                target,
+                targetEffects,
             );
 
             const damaged = tookEmotionalDamage || tookPhysicalDamage;
-            model.invulnerable = model.invulnerableMax;
+            target.invulnerable = target.invulnerableMax;
 
-            if (damaged && model.health <= 0) {
-                effects.died();
+            if (damaged && target.health <= 0) {
+                targetEffects.died();
             }
 
-            if (damaged && attacker && model.quirks.incrementsAttackerPrideOnDamage) {
+            if (damaged && attacker && target.quirks.incrementsAttackerPrideOnDamage) {
                 attacker.pride++;
             }
 
