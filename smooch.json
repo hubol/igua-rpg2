@@ -1,5 +1,8 @@
 {
 	"$schema": "node_modules/@hubol/smooch/schema.json",
+	"global": {
+		"endOfLineSequence": "os"
+	},
 	"textures": [
 		{
 			"glob": "raw/textures/**/*.png",
