@@ -38,7 +38,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     );
 
     const puppet = iguanaLocomotiveObj
-        .mixin(mxnRpgStatus, { status: RpgPlayer.Model, effects, hurtboxes: [iguanaLocomotiveObj] })
+        .mixin(mxnRpgStatus, { status: RpgPlayer.status, effects, hurtboxes: [iguanaLocomotiveObj] })
         .handles("damaged", (_, result) => {
             if (!result.rejected && result.damaged) {
                 // TODO different sound effect for ducked/defended damage?
@@ -50,7 +50,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 return !Cutscene.isPlaying;
             },
             get walkingTopSpeed() {
-                return RpgPlayer.WalkingTopSpeed;
+                return RpgPlayer.motion.walkingTopSpeed;
             },
         })
         .step(() => {
@@ -61,7 +61,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             puppet.isMovingLeft = hasControl && Input.isDown("MoveLeft");
             puppet.isMovingRight = hasControl && Input.isDown("MoveRight");
             puppet.isDucking = hasControl && puppet.isOnGround && Input.isDown("Duck");
-            RpgPlayer.Model.isGuarding = puppet.isDucking;
+            RpgPlayer.status.isGuarding = puppet.isDucking;
 
             if (
                 hasControl && !puppet.isOnGround && puppet.speed.y < PlayerConsts.VariableJumpSpeedMaximum
@@ -78,7 +78,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 const hurtbox = puppet.collidesOne(instance.hurtboxes);
                 if (hurtbox) {
                     bounceIguanaOffObject(puppet, hurtbox);
-                    const result = instance.damage(RpgPlayer.MeleeAttack);
+                    const result = instance.damage(RpgPlayer.meleeAttack);
                 }
             }
         }, StepOrder.Physics + 1);
@@ -107,7 +107,7 @@ const bounceIguanaOffObject = function () {
 
         vforce.at(pushx, pushy).normalize();
 
-        const length = Math.max(RpgPlayer.BouncingMinSpeed, iguana.speed.vlength);
+        const length = Math.max(RpgPlayer.motion.bouncingMinSpeed, iguana.speed.vlength);
         iguana.speed.at(vforce).scale(length);
 
         let iter = 0;

@@ -12,7 +12,12 @@ const Consts = {
 };
 
 export function objHud() {
-    const healthBarObj = objHealthBar(RpgPlayer.Model.healthMax, 9, RpgPlayer.Model.health, RpgPlayer.Model.healthMax);
+    const healthBarObj = objHealthBar(
+        RpgPlayer.status.healthMax,
+        9,
+        RpgPlayer.status.health,
+        RpgPlayer.status.healthMax,
+    );
     const valuablesInfoObj = objValuablesInfo();
     const poisonBuildUpObj = objPoisonBuildUp();
     const poisonLevelObj = objPoisonLevel();
@@ -23,7 +28,7 @@ export function objHud() {
         .at(3, 3)
         .merge({ healthBarObj, effectiveHeight: 0 })
         .step(self => {
-            healthBarObj.width = RpgPlayer.Model.healthMax;
+            healthBarObj.width = RpgPlayer.status.healthMax;
             let y = 7;
             let lastVisibleObj: Container = healthBarObj;
             for (const statusObj of statusObjs) {
@@ -61,7 +66,7 @@ function objPoisonLevel() {
     return objText.Large("You are poisoned", { tint: Consts.StatusTextTint })
         .merge({ advance: -3 })
         .step(text => {
-            const level = RpgPlayer.Model.poison.level;
+            const level = RpgPlayer.status.poison.level;
             text.visible = level > 0;
             if (text.visible) {
                 text.text = level > 1 ? ("You are poisoned x" + level) : "You are poisoned";
@@ -70,13 +75,13 @@ function objPoisonLevel() {
 }
 
 function objPoisonBuildUp() {
-    let value = RpgPlayer.Model.poison.value;
+    let value = RpgPlayer.status.poison.value;
     const text = objText.Large("Poison is building...", { tint: Consts.StatusTextTint });
     const bar = objStatusBar({
         height: 1,
         width: 85,
         value,
-        maxValue: RpgPlayer.Model.poison.max,
+        maxValue: RpgPlayer.status.poison.max,
         tintBack: 0x003000,
         tintFront: 0x008000,
         increases: [{ tintBar: 0x00ff00 }],
@@ -87,7 +92,7 @@ function objPoisonBuildUp() {
 
     return container(bar, text)
         .step(self => {
-            const nextValue = RpgPlayer.Model.poison.value;
+            const nextValue = RpgPlayer.status.poison.value;
             if (nextValue > value) {
                 bar.increase(nextValue, nextValue - value, 0);
             }
@@ -95,7 +100,7 @@ function objPoisonBuildUp() {
                 bar.decrease(nextValue, nextValue - value, 0);
             }
             value = nextValue;
-            const maxVisibleSteps = RpgPlayer.Model.poison.level === 0 ? 1 : 2;
+            const maxVisibleSteps = RpgPlayer.status.poison.level === 0 ? 1 : 2;
             visibleSteps = value > 0 ? maxVisibleSteps : (visibleSteps - 1);
             self.visible = visibleSteps > 0;
         });

@@ -4,8 +4,7 @@ import { RpgProgress } from "./rpg-progress";
 import { RpgStatus } from "./rpg-status";
 
 export const RpgPlayer = {
-    // TODO this maybe should be called Status
-    Model: {
+    status: {
         get health() {
             return RpgProgress.character.status.health;
         },
@@ -62,16 +61,18 @@ export const RpgPlayer = {
             guardedDamageIsFatal: false,
         },
     } satisfies RpgStatus.Model,
-    get BouncingMinSpeed() {
-        return Math.min(4, 2.5 + RpgProgress.character.status.poison.level * 0.25);
+    motion: {
+        get bouncingMinSpeed() {
+            return Math.min(4, 2.5 + RpgProgress.character.status.poison.level * 0.25);
+        },
+        get walkingTopSpeed() {
+            let speed = 2.5;
+            speed += 0.75 * Math.min(1, RpgProgress.character.status.poison.level);
+            speed += 0.5 * Math.max(0, RpgProgress.character.status.poison.level - 1);
+            return speed;
+        },
     },
-    get WalkingTopSpeed() {
-        let speed = 2.5;
-        speed += 0.75 * Math.min(1, RpgProgress.character.status.poison.level);
-        speed += 0.5 * Math.max(0, RpgProgress.character.status.poison.level - 1);
-        return speed;
-    },
-    MeleeAttack: {
+    meleeAttack: RpgAttack.create({
         emotional: 0,
         get physical() {
             return 5 + RpgProgress.character.attributes.strength * 5;
@@ -79,5 +80,5 @@ export const RpgPlayer = {
         poison: 0,
         wetness: 0,
         versus: RpgFaction.Enemy,
-    } satisfies RpgAttack.Model,
+    }),
 };
