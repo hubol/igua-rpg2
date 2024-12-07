@@ -100,9 +100,6 @@ export namespace RpgStatus {
 
             model.wetness.value = Math.min(model.wetness.value + attack.wetness, model.wetness.max);
 
-            // TODO should resistances to damage be factored here?
-            // Or should that be computed in a previous step?
-
             // TODO warn when amount is not an integer
 
             if (attack.physical === 0 && attack.emotional === 0) {
@@ -113,37 +110,30 @@ export namespace RpgStatus {
                 return { rejected: true, invulnerable: true };
             }
 
-            const minimumHealthAfterDamage =
-                (!model.quirks.guardedDamageIsFatal && model.isGuarding && model.health > 1) ? 1 : 0;
-            let damaged = false;
+            const canBeFatal = model.quirks.guardedDamageIsFatal || model.health <= 1;
 
-            {
-                const previous = model.health;
-                const min = model.quirks.emotionalDamageIsFatal ? minimumHealthAfterDamage : 1;
-                model.health = Math.max(min, model.health - attack.emotional);
-                const diff = previous - model.health;
-                damaged ||= diff > 0;
+            const tookEmotionalDamage = takeDamage(
+                attack.emotional,
+                DamageKind.Emotional,
+                canBeFatal && model.quirks.emotionalDamageIsFatal,
+                // TODO emotional defense
+                0,
+                0,
+                model,
+                effects,
+            );
 
-                effects.tookDamage(model.health, diff, DamageKind.Emotional);
-            }
+            const tookPhysicalDamage = takeDamage(
+                attack.physical,
+                DamageKind.Physical,
+                canBeFatal,
+                model.defenses.physical,
+                model.guardingDefenses.physical,
+                model,
+                effects,
+            );
 
-            {
-                const previous = model.health;
-                const defense: PercentAsInteger = model.defenses.physical
-                    + (model.isGuarding ? model.guardingDefenses.physical : 0);
-                const damage = Math.max(
-                    0,
-                    Math[model.quirks.roundReceivedDamageUp ? "ceil" : "floor"](
-                        attack.physical * ((100 - defense) / 100),
-                    ),
-                );
-                model.health = Math.max(minimumHealthAfterDamage, model.health - damage);
-                const diff = previous - model.health;
-                damaged ||= diff > 0;
-
-                effects.tookDamage(model.health, diff, DamageKind.Physical);
-            }
-
+            const damaged = tookEmotionalDamage || tookPhysicalDamage;
             model.invulnerable = model.invulnerableMax;
 
             if (damaged && model.health <= 0) {
@@ -167,4 +157,36 @@ export namespace RpgStatus {
             effects.healed(model.health, diff);
         },
     };
+
+    function takeDamage(
+        amount: Integer,
+        kind: DamageKind,
+        canBeFatal: boolean,
+        defense: PercentAsInteger,
+        guardingDefense: PercentAsInteger,
+        target: Model,
+        targetEffects: Effects,
+    ) {
+        const previous = target.health;
+        const totalDefense: PercentAsInteger = defense
+            + (target.isGuarding ? guardingDefense : 0);
+
+        const minimumDamage = totalDefense >= 100 ? 0 : Math.sign(amount);
+
+        const damage = Math.max(
+            minimumDamage,
+            Math[target.quirks.roundReceivedDamageUp ? "ceil" : "floor"](
+                amount * ((100 - totalDefense) / 100),
+            ),
+        );
+
+        const minimumHealthAfterDamage = Math.min(canBeFatal ? 0 : 1, target.health);
+
+        target.health = Math.max(minimumHealthAfterDamage, target.health - damage);
+        const diff = previous - target.health;
+
+        targetEffects.tookDamage(target.health, diff, kind);
+
+        return diff > 0;
+    }
 }
