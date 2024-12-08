@@ -1,6 +1,6 @@
 import { Container } from "pixi.js";
 import { Logging } from "../../lib/logging";
-import { Overlay, objOverlay } from "../objects/obj-overlay";
+import { Overlay, objOverlay } from "../objects/overlay/obj-overlay";
 
 export class IguaLayers {
     readonly scene: Container;

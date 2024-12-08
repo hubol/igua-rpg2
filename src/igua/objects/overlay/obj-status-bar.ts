@@ -1,11 +1,11 @@
 import { Graphics, Sprite, Texture } from "pixi.js";
-import { container } from "../../lib/pixi/container";
-import { Force } from "../../lib/types/force";
-import { approachLinear } from "../../lib/math/number";
-import { objText } from "../../assets/fonts";
-import { Tx } from "../../assets/textures";
-import { TextureProcessing } from "../../lib/pixi/texture-processing";
-import { Undefined } from "../../lib/types/undefined";
+import { container } from "../../../lib/pixi/container";
+import { Force } from "../../../lib/types/force";
+import { approachLinear } from "../../../lib/math/number";
+import { objText } from "../../../assets/fonts";
+import { Tx } from "../../../assets/textures";
+import { TextureProcessing } from "../../../lib/pixi/texture-processing";
+import { Undefined } from "../../../lib/types/undefined";
 
 interface ObjStatusBarConfig {
     value: number;

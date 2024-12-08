@@ -1,11 +1,11 @@
 import { Container } from "pixi.js";
-import { objText } from "../../assets/fonts";
-import { container } from "../../lib/pixi/container";
+import { objText } from "../../../assets/fonts";
+import { container } from "../../../lib/pixi/container";
 import { objHealthBar } from "./obj-health-bar";
-import { RpgPlayer } from "../rpg/rpg-player";
+import { RpgPlayer } from "../../rpg/rpg-player";
 import { objStatusBar } from "./obj-status-bar";
-import { playerObj } from "./obj-player";
-import { RpgProgress } from "../rpg/rpg-progress";
+import { playerObj } from "../obj-player";
+import { RpgProgress } from "../../rpg/rpg-progress";
 
 const Consts = {
     StatusTextTint: 0x00ff00,

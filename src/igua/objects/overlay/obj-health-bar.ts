@@ -1,4 +1,4 @@
-import { RpgStatus } from "../rpg/rpg-status";
+import { RpgStatus } from "../../rpg/rpg-status";
 import { objStatusBar } from "./obj-status-bar";
 
 const DamageIndex = {
