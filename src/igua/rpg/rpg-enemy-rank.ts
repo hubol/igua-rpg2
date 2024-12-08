@@ -18,6 +18,7 @@ export namespace RpgEnemyRank {
                 invulnerableMax: status?.invulnerableMax ?? 15,
                 isGuarding: false,
                 faction: status?.faction ?? RpgFaction.Enemy,
+                pride: status?.pride ?? 0,
                 poison: {
                     value: status?.poison?.value ?? 0,
                     max: status?.poison?.max ?? 100,

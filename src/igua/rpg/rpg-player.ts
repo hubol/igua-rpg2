@@ -22,6 +22,7 @@ export const RpgPlayer = {
         get healthMax() {
             return 45 + RpgProgress.character.attributes.health * 5;
         },
+        pride: 0,
         poison: {
             immune: false,
             max: 100,

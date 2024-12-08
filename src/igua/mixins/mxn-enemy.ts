@@ -2,7 +2,6 @@ import { DisplayObject } from "pixi.js";
 import { RpgStatus } from "../rpg/rpg-status";
 import { mxnRpgStatus } from "./mxn-rpg-status";
 import { RpgLoot } from "../rpg/rpg-loot";
-import { RpgEnemy } from "../rpg/rpg-enemy";
 import { objLootDrop } from "../objects/obj-loot-drop";
 import { layers } from "../globals";
 import { RpgAttack } from "../rpg/rpg-attack";
@@ -22,17 +21,13 @@ interface MxnEnemyArgs {
 export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
     const { status, loot } = clone(args.rank);
 
-    const enemy: RpgEnemy.Model = {
-        pride: 0,
-    };
-
     const died = () => {
         // TODO needs more
         // Particle effects
         // Might need to be overrideable too, actually
         // Thinking about the dassmann fight from igua 1
         Sfx.Impact.DefeatEnemy.play();
-        const drop = RpgLoot.Methods.drop(loot, enemy);
+        const drop = RpgLoot.Methods.drop(loot, status);
         objLootDrop(drop).at(obj).show(obj.parent);
         enemyObj.dispatch("mxnEnemy.died");
         obj.destroy();
@@ -53,7 +48,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         .handles("damaged", defaultDamagedHandler)
         .merge({
             strikePlayer(attack: RpgAttack.Model) {
-                playerObj.damage(attack, enemy);
+                playerObj.damage(attack, status);
             },
         });
 

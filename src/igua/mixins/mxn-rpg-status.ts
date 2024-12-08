@@ -1,7 +1,6 @@
 import { DisplayObject } from "pixi.js";
 import { RpgStatus } from "../rpg/rpg-status";
 import { RpgAttack } from "../rpg/rpg-attack";
-import { RpgEnemy } from "../rpg/rpg-enemy";
 import { mxnDripping } from "./mxn-dripping";
 import { approachLinear } from "../../lib/math/number";
 
@@ -20,7 +19,7 @@ export function mxnRpgStatus(obj: DisplayObject, args: MxnRpgStatusArgs) {
         .mixin(mxnDripping)
         .merge(args)
         .merge({
-            damage(attack: RpgAttack.Model, attacker?: RpgEnemy.Model) {
+            damage(attack: RpgAttack.Model, attacker?: RpgStatus.Model) {
                 const result = RpgStatus.Methods.damage(args.status, args.effects, attack, attacker);
                 rpgStatusObj.dispatch("damaged", result);
                 return result;

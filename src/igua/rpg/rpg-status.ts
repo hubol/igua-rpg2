@@ -1,6 +1,5 @@
 import { Integer, PercentAsInteger } from "../../lib/math/number-alias-types";
 import { RpgAttack } from "./rpg-attack";
-import { RpgEnemy } from "./rpg-enemy";
 import { RpgFaction } from "./rpg-faction";
 
 export namespace RpgStatus {
@@ -14,6 +13,7 @@ export namespace RpgStatus {
         healthMax: number;
         invulnerable: number;
         invulnerableMax: number;
+        pride: number;
         isGuarding: boolean;
         poison: {
             immune: boolean;
@@ -87,7 +87,7 @@ export namespace RpgStatus {
             target: Model,
             targetEffects: Effects,
             attack: RpgAttack.Model,
-            attacker?: RpgEnemy.Model,
+            attacker?: RpgStatus.Model,
         ): DamageResult {
             if (attack.versus !== RpgFaction.Anyone && attack.versus !== target.faction) {
                 return { rejected: true, wrongFaction: true };

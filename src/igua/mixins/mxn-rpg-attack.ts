@@ -2,11 +2,11 @@ import { DisplayObject } from "pixi.js";
 import { Instances } from "../../lib/game-engine/instances";
 import { mxnRpgStatus } from "./mxn-rpg-status";
 import { RpgAttack } from "../rpg/rpg-attack";
-import { RpgEnemy } from "../rpg/rpg-enemy";
+import { RpgStatus } from "../rpg/rpg-status";
 
 interface MxnRpgAttackArgs {
     attack: RpgAttack.Model;
-    enemy?: RpgEnemy.Model;
+    attacker?: RpgStatus.Model;
 }
 
 export function mxnRpgAttack(obj: DisplayObject, args: MxnRpgAttackArgs) {
@@ -21,7 +21,7 @@ export function mxnRpgAttack(obj: DisplayObject, args: MxnRpgAttackArgs) {
             for (const instance of Instances(mxnRpgStatus)) {
                 // TODO filter by faction here pls
                 if (obj.collidesOne(instance.hurtboxes)) {
-                    const result = instance.damage(args.attack, args.enemy);
+                    const result = instance.damage(args.attack, args.attacker);
                     if (!result.rejected) {
                         self.dispatch("mxnRpgAttack.hit");
                     }
