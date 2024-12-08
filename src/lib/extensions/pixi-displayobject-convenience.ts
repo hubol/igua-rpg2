@@ -26,7 +26,7 @@ declare module "pixi.js" {
         pivoted(x: number, y: number): this;
         sized(vector: VectorSimple): this;
         sized(width: number, height: number): this;
-        removeAllChildren();
+        removeAllChildren(): void;
     }
 }
 
