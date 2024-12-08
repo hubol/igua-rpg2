@@ -34,8 +34,6 @@ export function prepareGameEngine(renderer: PixiRenderer) {
         devKeyListener.start();
     }
 
-    const flashPreventer = new UnpleasantCanvasFlashPreventer(renderer);
-
     function gameLoop() {
         do {
             gameLoopForced = false;
@@ -47,7 +45,6 @@ export function prepareGameEngine(renderer: PixiRenderer) {
             if (Environment.isDev) {
                 devKeyListener.tick();
             }
-            flashPreventer.tick();
         }
         while (gameLoopForced);
 
@@ -62,20 +59,4 @@ export function prepareGameEngine(renderer: PixiRenderer) {
         },
         sceneStack,
     });
-}
-
-class UnpleasantCanvasFlashPreventer {
-    private _completed = false;
-
-    constructor(private readonly _renderer: PixiRenderer) {
-        this._renderer.view.style.opacity = "0";
-    }
-
-    tick() {
-        if (this._completed) {
-            return;
-        }
-        this._renderer.view.style.opacity = "";
-        this._completed = true;
-    }
 }
