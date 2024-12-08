@@ -3,6 +3,7 @@ import { container } from "../../lib/pixi/container";
 import { ObjSolidOverlay, objSolidOverlay } from "../core/scene/obj-solid-overlay";
 import { ObjHud, objHud } from "./obj-hud";
 import { ObjEnemyHealthBars, objEnemyHealthBars } from "./obj-enemy-health-bars";
+import { ObjSystemMessage, objSystemMessage } from "./overlay/obj-system-message";
 
 export function objOverlay() {
     const hudObj = objHud();
@@ -10,14 +11,16 @@ export function objOverlay() {
     const messages = container().named("Messages").step(self => self.y = hudObj.effectiveHeight + 3, 1);
     const dev = container().named("Dev");
     const solidObj = objSolidOverlay();
+    const systemMessageObj = objSystemMessage();
 
-    return container(hudObj, enemyHealthBarsObj, messages, solidObj, dev)
+    return container(hudObj, enemyHealthBarsObj, messages, solidObj, systemMessageObj, dev)
         .merge({
             hud: hudObj as Omit<ObjHud, keyof Container>,
             messages,
             dev,
             solid: solidObj as Pick<ObjSolidOverlay, "fadeIn" | "fadeOut" | "tint" | "blendMode">,
             enemyHealthBars: enemyHealthBarsObj as Pick<ObjEnemyHealthBars, "getRpgStatusEffects">,
+            systemMessage: systemMessageObj as Pick<ObjSystemMessage, "setMessage">,
         });
 }
 

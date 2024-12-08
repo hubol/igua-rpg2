@@ -2,6 +2,7 @@ import { AsshatInput, InputModalityType } from "../../lib/game-engine/input/assh
 import { GamepadControl, GamepadControls, StandardMapping } from "../../lib/game-engine/input/gamepad-controls";
 import { MappedGamepad } from "../../lib/game-engine/input/mapped-gamepad";
 import { KeyboardControls, MappedKeyboard } from "../../lib/game-engine/input/mapped-keyboard";
+import { layers } from "../globals";
 
 const actions = [
     "MoveLeft",
@@ -82,12 +83,17 @@ const gamepadControls: GamepadControls<Action> = {
     ],
 };
 
+const message = {
+    [InputModalityType.Keyboard]: "Using keyboard controls",
+    [InputModalityType.Gamepad]: "Using gamepad controls",
+};
+
 export class IguaInput extends AsshatInput<Action> {
     constructor() {
         super([new MappedKeyboard(keyboardControls), new MappedGamepad(gamepadControls)]);
     }
 
     protected onModalityChanged(from: InputModalityType, to: InputModalityType): void {
-        // TODO show system message
+        layers.overlay.systemMessage.setMessage(message[to]);
     }
 }
