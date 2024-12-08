@@ -6,6 +6,8 @@ import { objHealthBar } from "./obj-health-bar";
 import { vnew } from "../../lib/math/vector-type";
 import { scene } from "../globals";
 import { mxnOnSceneChange } from "../mixins/mxn-on-scene-change";
+import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { playerObj } from "./obj-player";
 
 export function objEnemyHealthBars() {
     const getRpgStatusEffects = (obj: DisplayObject, status: RpgStatus.Model): Omit<RpgStatus.Effects, "died"> => {
@@ -37,6 +39,7 @@ export function objEnemyHealthBars() {
 }
 
 const r = new Rectangle();
+const v = vnew();
 
 function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model) {
     const vworld = vnew();
@@ -56,7 +59,21 @@ function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model) {
 
             self.at(vworld).add(scene.camera, -1).add(-Math.round(self.width / 2), -self.height - 1);
         })
-        .mixin(mxnOnSceneChange, (self) => self.destroy());
+        .mixin(mxnOnSceneChange, (self) => self.destroy())
+        .coro(function* (self) {
+            while (true) {
+                yield () => self.stepsSinceChange < 2;
+                v.at(vworld).add(playerObj, -1).normalize();
+                const pivotProperty = Math.abs(v.x) > Math.abs(v.y) ? "x" : "y";
+                self.pivot[pivotProperty] = -3;
+                yield sleepf(1);
+                self.pivot[pivotProperty] = 2;
+                yield sleepf(4);
+                self.pivot[pivotProperty] = -1;
+                yield sleepf(5);
+                self.pivot[pivotProperty] = 0;
+            }
+        });
 }
 
 type ObjEnemyHealthBar = ReturnType<typeof objEnemyHealthBar>;
