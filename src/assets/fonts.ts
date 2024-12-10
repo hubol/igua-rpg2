@@ -1,11 +1,16 @@
 import { BitmapFont, IBitmapTextStyle } from "pixi.js";
 import { JobProgress } from "../lib/game-engine/job-progress";
-import { createBitmapFontFactory } from "../lib/pixi/bitmap-font-factory";
 import { Force } from "../lib/types/force";
 import { BitmapText } from "pixi.js";
 import { Tx } from "./textures";
 import { intervalWait } from "../lib/browser/interval-wait";
 import { IrregularBitmapText } from "../igua/lib/irregular-bitmap-text";
+import { BitmapFontFactory } from "../lib/pixi/bitmap-font-factory";
+import { fntErotix } from "./bitmap-fonts/fnt-erotix";
+import { fntDiggit } from "./bitmap-fonts/fnt-diggit";
+import { fntErotixLight } from "./bitmap-fonts/fnt-erotix-light";
+import { fntFlaccid } from "./bitmap-fonts/fnt-flaccid";
+import { fntGoodBoy } from "./bitmap-fonts/fnt-good-boy";
 
 type Style = Partial<Omit<IBitmapTextStyle, "fontName">>;
 
@@ -38,28 +43,20 @@ const Fonts = {
 type TxFontKey = keyof typeof Tx["Font"];
 
 export async function loadFontAssets(progress: JobProgress) {
-    const load = async (fontKey: keyof typeof Fonts, fntUrl: string, txFontKey: TxFontKey) => {
-        const bitmapFont = await loadBitmapFontAndTrackProgress(fntUrl, txFontKey, progress);
-        Fonts[fontKey] = bitmapFont;
+    const load = async (fontKey: keyof typeof Fonts, createBitmapFont: BitmapFontFactory, txFontKey: TxFontKey) => {
+        progress.increaseTotalJobsCount(1);
+
+        await intervalWait(() => !!Tx?.Font?.[txFontKey]);
+
+        Fonts[fontKey] = createBitmapFont(Tx.Font[txFontKey]);
+        progress.increaseCompletedJobsCount(1);
     };
 
     await Promise.all([
-        load("Diggit", require("./font-bitmaps/Diggit.fnt"), "Diggit"),
-        load("Erotix", require("./font-bitmaps/Erotix.fnt"), "Erotix"),
-        load("ErotixLight", require("./font-bitmaps/ErotixLight.fnt"), "ErotixLight"),
-        load("Flaccid", require("./font-bitmaps/Flaccid.fnt"), "Flaccid"),
-        load("GoodBoy", require("./font-bitmaps/GoodBoy.fnt"), "GoodBoy"),
+        load("Diggit", fntDiggit, "Diggit"),
+        load("Erotix", fntErotix, "Erotix"),
+        load("ErotixLight", fntErotixLight, "ErotixLight"),
+        load("Flaccid", fntFlaccid, "Flaccid"),
+        load("GoodBoy", fntGoodBoy, "GoodBoy"),
     ]);
-}
-
-async function loadBitmapFontAndTrackProgress(fntUrl: string, txFontKey: TxFontKey, progress: JobProgress) {
-    progress.increaseTotalJobsCount(1);
-
-    const [createBitmapFont] = await Promise.all([
-        createBitmapFontFactory(fntUrl),
-        intervalWait(() => !!Tx?.Font?.[txFontKey]),
-    ]);
-
-    progress.increaseCompletedJobsCount(1);
-    return createBitmapFont(Tx.Font[txFontKey]);
 }
