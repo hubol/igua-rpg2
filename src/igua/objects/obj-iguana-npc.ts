@@ -4,7 +4,7 @@ import { mxnIguanaEditable } from "../mixins/mxn-iguana-editable";
 import { objIguanaLocomotive } from "./obj-iguana-locomotive";
 
 interface ObjIguanaNpcArgs {
-    looksName: string;
+    looksName: keyof typeof NpcLooks;
 }
 
 export function objIguanaNpc({ looksName }: ObjIguanaNpcArgs) {

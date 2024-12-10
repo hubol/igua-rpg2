@@ -4,12 +4,14 @@ import { scene } from "../globals";
 import { playerObj } from "./obj-player";
 import { StepOrder } from "./step-order";
 
+type CameraMode = "follow-player" | "controlled";
+
 export function objCamera() {
     // TODO need way to snap to desired position e.g. on level load
-    return container().step(self => {
+    return container().merge({ mode: <CameraMode> "follow-player" }).step(self => {
         // TODO camera behavior should be overrideable
         // e.g. there should be modes other than following the player
-        if (playerObj && !playerObj.destroyed) {
+        if (self.mode === "follow-player" && playerObj && !playerObj.destroyed) {
             self.at(playerObj).add(-renderer.width / 2, -renderer.height / 2);
         }
 

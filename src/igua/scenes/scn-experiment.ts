@@ -5,9 +5,12 @@ import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { Jukebox } from "../core/igua-audio";
+import { scene } from "../globals";
+import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { mxnSpatialAudio } from "../mixins/mxn-spatial-audio";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
+import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
 import { objValuableSpawner } from "../objects/obj-valuable-spawner";
 import { RpgAttack } from "../rpg/rpg-attack";
@@ -49,4 +52,17 @@ export function scnExperiment() {
                 yield sleep(250);
             }
         });
+
+    lvl.FarmerNpc.mixin(mxnCutscene, function* () {
+        scene.camera.mode = "controlled";
+        scene.camera.at(lvl.FarmingRegion);
+
+        // TODO could add that .behind()
+        // Or should I figure out layering technology
+        const npcObj = objIguanaNpc({ looksName: "Farmer" }).at(lvl.FarmerAppearMarker).show();
+        yield* npcObj.walkTo(lvl.FarmerMoveToMarker.x);
+
+        // TODO should this happen automatically at the end of cutscenes?
+        scene.camera.mode = "follow-player";
+    });
 }
