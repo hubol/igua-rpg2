@@ -20,11 +20,10 @@ interface CreateBitmapFontFactoryArgs<TCharacters extends CharactersData> {
     kernings: Array<[first: keyof TCharacters, second: keyof TCharacters, amount: Integer]>;
 }
 
-export type BitmapFontFactory = (texture: Texture) => BitmapFont;
-
-export function createBitmapFontFactory<TCharacters extends CharactersData>(
+export function createBitmapFont<TCharacters extends CharactersData>(
+    texture: Texture,
     args: CreateBitmapFontFactoryArgs<TCharacters>,
-): BitmapFontFactory {
+) {
     const data = new BitmapFontData();
     data.common = [{ lineHeight: args.lineHeight }];
     data.info = [{ face: args.name, size: args.size }];
@@ -46,5 +45,5 @@ export function createBitmapFontFactory<TCharacters extends CharactersData>(
         amount,
     }));
 
-    return (texture: Texture) => BitmapFont.install(data, texture);
+    return BitmapFont.install(data, texture);
 }

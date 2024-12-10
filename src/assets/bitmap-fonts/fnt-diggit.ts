@@ -1,6 +1,7 @@
-import { createBitmapFontFactory } from "../../lib/pixi/bitmap-font-factory";
+import { createBitmapFont } from "../../lib/pixi/create-bitmap-font";
+import { Tx } from "../textures";
 
-export const fntDiggit = createBitmapFontFactory({
+export const fntDiggit = createBitmapFont(Tx.Font.Diggit, {
     name: "Diggit",
     size: 5,
     lineHeight: 6,

@@ -1,6 +1,7 @@
-import { createBitmapFontFactory } from "../../lib/pixi/bitmap-font-factory";
+import { createBitmapFont } from "../../lib/pixi/create-bitmap-font";
+import { Tx } from "../textures";
 
-export const fntErotix = createBitmapFontFactory({
+export const fntErotix = createBitmapFont(Tx.Font.Erotix, {
     name: "Erotix",
     size: 12,
     lineHeight: 12,

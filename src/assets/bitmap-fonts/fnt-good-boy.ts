@@ -1,6 +1,7 @@
-import { createBitmapFontFactory } from "../../lib/pixi/bitmap-font-factory";
+import { createBitmapFont } from "../../lib/pixi/create-bitmap-font";
+import { Tx } from "../textures";
 
-export const fntGoodBoy = createBitmapFontFactory({
+export const fntGoodBoy = createBitmapFont(Tx.Font.GoodBoy, {
     name: "Good Boy",
     size: 16,
     lineHeight: 22,

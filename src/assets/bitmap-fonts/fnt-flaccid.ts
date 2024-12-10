@@ -1,6 +1,7 @@
-import { createBitmapFontFactory } from "../../lib/pixi/bitmap-font-factory";
+import { createBitmapFont } from "../../lib/pixi/create-bitmap-font";
+import { Tx } from "../textures";
 
-export const fntFlaccid = createBitmapFontFactory({
+export const fntFlaccid = createBitmapFont(Tx.Font.Flaccid, {
     name: "Flaccid",
     size: 12,
     lineHeight: 6,
