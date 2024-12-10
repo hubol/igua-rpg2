@@ -161,6 +161,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
+      "isRegion": false,
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": false},
       "texture": "preview-images/iguana.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAqCAYAAAAeeGN5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKCSURBVGhD3Ze9LwRBFMD3rkSj1IpKdHdKIhIViY+GRM21/gaFWotKIUHhEJ1ERKU4najEXyDRoD33xjzm5mbmzcebPfFLLvt2dnZ2fvNmZ/YqRUZaE7NtGQrqjzdZn5elcV1CJacQe8MuEZUcUqwN+oog3EJsjYWKIJxCVXn8F7CMSmxWEK7s9Fdm+14GNPWVT7Kv/ZEJkNBxSVkv7K02uzrYOFm21vWWSZDQMUn1FOgSOjYpUihQpLb8IaOieGgOyqi7vNJBhoKu1YwSAXzq9JAgAuC5Xt7uIEPBj0xIJ011uVYkvcMUqpCQiRltbyHG94RCPNwlY3pHsL7XohAgg1nZXzsXR5Xa6nrxcHIkz37ZPF4SR3h/qqEigEsCEVkqMStA9OeMj1DZiA7FZMeX1tmAtW0d18sPy7PrOjnNUgkR4aBCyWBmWlvX4R2bXpSBP6bRt22aCFyHLwJSpjYyJKNIEoVUEUS/jp82TplkESBCJhSUqdpecBYR4O5CBuGY9hVALVc/OI1LM5tIIqaNEs6h3ISQyb5nJGRHFdJF9L8BPZnJlhUGIZcI0FUAi0EpUyxhUTBJID0XovaTWAKkXBJIf2U61HfnyE76YmyoLCFOESD6q/kvYh2Z3NnhzgrQl8xMXp4WldEN9sFyjo6anZnnYXG8HXsTRx9M94CISvvlgC1DZEMghJ1CfIT0e96v6uJZtoxwSJHTTO8UYCqjGFpoteEnT7PgHA3q4R9PezL6ZXC8ISMzpnuQ1OxYb/YdRbVzlAiSS8g4zUKmAwr4igBq3fmppozSiVqadza/O4NHH6i6HFKl7zOqFGdWgGAZ0whT89x2z9Xhq/hhnLYAFMUXU801m+qL9IoAAAAASUVORK5CYII="
@@ -206,6 +207,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100},
         {"name": "visible", "definition": "Boolean", "display": 0, "defaults": true}
       ],
+      "isRegion": false,
       "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "Terrain Color", "useDefaultTint": false}
     },
     {
@@ -248,6 +250,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
+      "isRegion": false,
       "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "Terrain Color", "useDefaultTint": false},
       "texture": "preview-images/slope.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURf///wAAAFXC034AAAACdFJOU/8A5bcwSgAAAAlwSFlzAAAOwQAADsEBuJFr7QAAAHhJREFUOE+FykkCgCAMBEH8/6dlKRFQSJ1gOuk6S8FBCg5yPx6Ufjqo/XDQ+v5A3x7I2wM1MyzEwjLTKtNEamwjBeNAeFhf9s7cmV/2h3UgYBwpjW0iVaaZVlgWYmZYqdveD3y/ou7A50/U64Hnv6jnA4+dqAdSugFtuwHxO+a3awAAAABJRU5ErkJggg=="
@@ -292,6 +295,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
+      "isRegion": false,
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/pipe.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAAmSURBVChTY1y/fv1/BgoAE5QmGzD29fVR5IKB98LAh8FAe4GBAQBQ2gt5H0/w0QAAAABJRU5ErkJggg=="
@@ -336,6 +340,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
+      "isRegion": false,
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/pipe slope.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAoCAMAAACo9wirAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURa+vr87Ozo6OjnJycgAAAOne6qwAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAIlJREFUOE+F08sOwCAIRFFs+f9vLvWNDgMrk3NN2CDKR5JACg+k8MCcBtVJUP2Jg+Zx0P2NguFRMF1xsBwHm8NgdxQ4B4H3Ozj8Ck4/g8uP4HYfAHcB8j2AvgXYVxD4DCIfQeg9iL0FxGvA/A+oW8Ddzpt79r8G1C3gbjtw18wt4K6SuAX9gUf1A9eNESFFsNTLAAAAAElFTkSuQmCC"
@@ -382,6 +387,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
+      "isRegion": false,
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/door.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAwCAYAAACFUvPfAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAADZSURBVGhD7ZhRDoQgDERx78L9D8RhdqOxhiUNBdGRMX0/+gXPyaQEl3ARMcbv/lolpTS85/ACrbIaZz9gSHpEOKdX/pT0VbIlrfLd0ncJCy3iXdJ3CwuW+Gd/miCFrb2akkYJ59TSbk4aTS2oaaVrmPV4oho5Wk3elfTTCQta0qr0LMJCKU5Zj3dIz1YNDa8Hij9phmqseD1QUEiXtT1OGoY+y8lIVQ8JlrfTLKNO8OmBwqVRuDQKTmm2Gb3i9UBBKW3+C54RrwcKl0bh0ii2261ftwAQSofwA1U0PqAY0jauAAAAAElFTkSuQmCC"
@@ -426,6 +432,7 @@
         {"name": "name", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
+      "isRegion": false,
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/checkpoint.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAqCAYAAAAeeGN5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIESURBVGhD3Zc9UsQwDIWTXIKLcAJKWmoKWg5BwSFoKahpKTkBF+EUy7zFb0fryFaylvKz3wyIiRxbz5Ll0EXy+vR5+Pl+O9Cmx2EMybpCAfePv93Xx01HGy3IXQwClgI0QRCahrviKsYSIm2EoD7ZZlhCCFaCwCW5/+X9wS2GkDOzFi5iWg52y7s5LimWAc0ts6n+27tnM1aXzDAAWC4ug/TwY8OsplEUw4uONj1WwcIMJNrW4hmJoYB8otrOoAS0hSOtJuhMDAZYE5UEWe9F2FzQ6VDRgUESvCihX7sfuBmS0vvEw8/mcMyMljILLUNTOk4kZjdDgPLHurHh97zVp8BkDLWslIKaEuzSgsAxM6xDWNZoXqs5c4K15vfyDxyg2UvOkqQ0b4QFgzWwhdq83hb02gUpLTuUNW5tizj7vJTglGCgZIt+brjZmvfEQFV7RcZ/XZnBL6pDPbJGZa2yTrfmz++6U2Y4cC9WOx5nD7befmFrXx4jx1YFTWlUqpj05xFMJMHkkla/5wfpqJst+bXrvdb1teacJbITsUYxM7LWWec8jKDV3/rvhUZ1d7AgA4iynp9T5kReglhWpfk8ys5sANrCl1i0/NrGeFDdDV6gEiwu8fS3llwxM/nluQStTUEVs4YQD8wzsydWu2dK/hbUAze3HaOtsllMGQ/reb/803V/QWIoUM387UgAAAAASUVORK5CYII="
@@ -472,6 +479,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
+      "isRegion": false,
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/drip source.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAGCAYAAAAL+1RLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAnSURBVBhXY4ABh6nn/kOZDExQGgUwgghkVQeyjRgZkQVggFjtRowAHpMNTLrbmowAAAAASUVORK5CYII="
@@ -518,6 +526,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
+      "isRegion": false,
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/sign.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAdCAYAAADoxT9SAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFPSURBVFhHY2SgIliR5/8fyqQriJi0kRHukYFyBCXA1kcGymJgAHuEFp4QFxaAskgDapY8UBYqeKgMZaABnecsYJppoGJCio8LKyYXMNLbIzJCvFAWdqBoxQ9loQJcMSJ/F0Iz7m+MJ+iRl28/QFmUAUKegAFSPPNv8UeGJ+8+MzBB+UMCgEIfhkEeAGEYoGvSIjZGSAWgGKF7HsEFyPUkyBMgMKSSFjIAeQDmCRAYNDFCKRiyMYIOiCp+qQWoVYxjA8MnRkbzyCADIydpvfz4FcpCBeL83FAWbQCp3QCCMQJyMDY82MCwyew08QioDw1lkgRa/QxR3KKsIAdl4QfwPjsxnrn74BGUBQHVm85TdeACBNA9AgLE2kNQETbDQWCweWRQFb88gsIYmFgwcipEbKEEwoMNjJwYGSqA6JJnYrwLSomSv3AP1Ust8gEDAwBIVG4j090eZwAAAABJRU5ErkJggg=="
@@ -566,6 +575,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
+      "isRegion": false,
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true}
     },
     {
@@ -609,6 +619,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
+      "isRegion": false,
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/npc.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAA3CAYAAABO8hkCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMiSURBVGhD7ZoxaxRBFIBnI4qVRUAEEUwlUeH8CRYKemJhZ2EQxMLKoDFqipQpIsZTtLIQQWJhZyEqiIXgH/BEDVoYQQ1apLASRNZ7m/fOmdk3szOzs3ubcB8s+27u9jLfvDczu0cSMWA6L++kGIqpQ+eD+zNQEVmCCJUZwXPtcBJlGJhIbIYiTWMo0jSGIk2jcSLy/jKzOOu819S6s/tsgrDDk8j8xFxhPxtbWr6ZaWxGgJ8rPzBS4TK0YSZ7rRkB5KysbD+CEc+m7gOMVLiM1C4CXO5+dCoxTsQ08WsVcRUgdJG/rdMYCXG9tUfpe20ivhL3rl7ASIiz125hpLavPnva738tImUkCJDh2kmmcasW11kbo+1j2SBVnhHfbKSt3Rj15kG6BSMhrrz9JB7ev4uv/vOtsyCSHsaM7Lx4KZUPbK4UWcKHtEdOxNTxECHfbJRBEXHpqK9MXfRFfDro+ll9ra+STCRklF2uGVhpcXy/eSPRD2hfOsHfmZYh6X7BSAVWLODUmXPZWQfeH7GNLHVahyR+vZqwjnhIaZEMLb0kQegy8D78nSRERBbYdnDR2tk6ygtECktLR89CFVkBbHuKsmni91tFQhaBmHAyJkFraQFUXnBPszwzmrVxQInRfQ+HfAfrCnWa5o3+Ws62VeT30geM1rCJjM2vYmSmjAzBSQBeIgAn4yIhEyJEmOZc1sjJcBKELOMrIeMjVLRosCI2CQJkykgQ8lNeGbJVy7Rf2IghEZPc8uuSjSbSFwnJSpNQMgIyW8f34qv1xYYpLbacbDt0TGKtWEAuI+sVViTWSM1Ot7OD43X7BUZxqCwjJgEgtgRgFIGdmw5fXCXe394cbS6yJWR6WHLZzU0SR99NYaSyb/JPlDLOZcT2xBeSnbrIjUbRoyvw9c0jjFSe7+9glMeUEaJsZoIm+64DJzFyByRtomXnS/CqxckUjTrAybTm1kq2jEy05Rc6YxtxYOHJcnY2fQ6+I1QmJ1L0O9X44x0YCXH482R2phF1BYRIRr82dK5YL9InPknAL40U67f/pn8KoGxMHx/L4riPDUL8AxUIckKyIap8AAAAAElFTkSuQmCC"
@@ -653,6 +664,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
+      "isRegion": false,
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "../textures/collectibles/valuable green.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAGCAMAAAA40HREAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAASUExURRjIkMjgkPDgkBjgkBiokAAAAPluvnIAAAAGdFJOU///////ALO/pL8AAAAJcEhZcwAADsIAAA7CARUoSoAAAAAlSURBVBhXFcZBAgAABITAsP3/y7jUIFTPNcyBJiewHqJD/Bt1AQlrAHueldyiAAAAAElFTkSuQmCC"
@@ -697,6 +709,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
+      "isRegion": false,
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "../textures/collectibles/valuable orange.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAANCAMAAAB4p3UoAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAVUExURfCAMPDQMPDoWPCwMPBIMP///wAAAFDQncMAAAAHdFJOU////////wAaSwNGAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAWUlEQVQYV13OAQ7AIAgDQArY/z95Rbstm4kJPQkYZMwBkFlViozujlAAVq6ahldyqe0j01ORedCswJ9oMgG92GY1hx5Rmkt4g35joWXXR7jllBZqiqtbaCAvHRADALH7B+AAAAAASUVORK5CYII="
@@ -741,6 +754,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
+      "isRegion": false,
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "../textures/collectibles/valuable blue.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAANCAMAAAB4p3UoAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAVUExURQDA2Jjg4Kjw8ADg2ACo2P///wAAALolqk8AAAAHdFJOU////////wAaSwNGAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAWUlEQVQYV13OAQ7AIAgDQArY/z95Rbstm4kJPQkYZMwBkFlViozujlAAVq6ahldyqe0j01ORedCswJ9oMgG92GY1hx5Rmkt4g35joWXXR7jllBZqiqtbaCAvHRADALH7B+AAAAAASUVORK5CYII="
@@ -785,6 +799,7 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
+      "isRegion": false,
       "tintable": {"enabled": true, "defaultTint": "#68a8d0", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/puddle.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAICAYAAADwdn+XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAbSURBVChTY/wPBAwUACYoTTag2IBRQDFgYAAAGQwEAsnlJ7IAAAAASUVORK5CYII="
@@ -829,9 +844,10 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
-      "tintable": {"enabled": false, "defaultTint": "#00ff00", "rgbLevelValueName": "", "useDefaultTint": false},
+      "isRegion": false,
+      "tintable": {"enabled": true, "defaultTint": "#00ff00", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/marker.png",
-      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAACPSURBVDhPlZIBEoAgCASp///ZupACAaGdqUY5Nmw6iGjcl4B1l7fvfO5Y8pYW7hiqZ0qEnogFChnfFng3OlqY08FKlNZ1CGTB7QtWCfAN+wlDCbAiIRCATAK2R9Bkkl+T2P+EiSZgeN/pV0l8hEJky5HgI61LqBIIYQ6PrkBweftNagGw3+gGSz9Hj9lHdAGmNTcKNB9gZQAAAABJRU5ErkJggg=="
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAACZSURBVDhPlZIBEoAgCASx///ZPBQDBaWdUVOPHWoqRFTbELDPMuseTLVWHnjElKDFZ02XCEkRCzTSvrkohY+9V3NzOngThfc6BKJgKACrBGwFJwHwJMCIBE8AIgnYOsLCm4VI8qsT858MvA6Ycb7ZV4knaMtZpFtzBbzphPcSugkEN4c5KxC2vPkmCQFoMRvB7tPeBZpRR/QC+6xtAAiXvLgAAAAASUVORK5CYII="
     },
     {
       "exportID": "11908607",
@@ -873,7 +889,8 @@
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "isRegion": true,
+      "tintable": {"enabled": true, "defaultTint": "#00ff00", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/region.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABPSURBVFhH7dcxCgAgDATB0///WSOKQuxzzS4Ipsq0aZJGPFsb4CLE9gdYv8rOzgyoYtydfc++AAAAAAAAAAAAAAAAACBfRnV9p5mjC7AlTcXvEDMTrZ50AAAAAElFTkSuQmCC"
     }

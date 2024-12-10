@@ -25,6 +25,7 @@
           "y": 337,
           "originX": 8,
           "originY": 8,
+          "tint": "#00ff00",
           "values": {"name": "MinerValuable2", "depth": 0}
         },
         {
@@ -35,6 +36,7 @@
           "y": 323,
           "originX": 8,
           "originY": 8,
+          "tint": "#00ff00",
           "values": {"name": "MinerValuable1", "depth": 0}
         },
         {
@@ -45,6 +47,7 @@
           "y": 339,
           "originX": 8,
           "originY": 8,
+          "tint": "#00ff00",
           "values": {"name": "MinerValuable0", "depth": 0}
         },
         {
@@ -57,6 +60,7 @@
           "height": 40,
           "originX": 0,
           "originY": 0,
+          "tint": "#ff0000",
           "values": {"name": "PickaxeHitbox", "depth": 0}
         }
       ]
