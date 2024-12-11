@@ -30,6 +30,9 @@ export class AsshatInput<TAction extends string> {
     }
 
     isUp(action: TAction) {
+        if (!this._currentModality) {
+            return true;
+        }
         return this._currentModality?.isUp(action) as boolean;
     }
 
