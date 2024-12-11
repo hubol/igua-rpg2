@@ -1,4 +1,4 @@
-import { Container, DisplayObject, Rectangle } from "pixi.js";
+import { Container, DisplayObject, Filter, Rectangle } from "pixi.js";
 import { EngineConfig } from "../game-engine/engine-config";
 import { Pojo } from "../types/pojo";
 import { merge } from "../object/merge";
@@ -12,6 +12,8 @@ declare module "pixi.js" {
 
         scaled(vector: VectorSimple): this;
         scaled(scaleX: number, scaleY: number): this;
+
+        filtered(filter: Filter): this;
 
         show(container?: Container): this;
         merge<T extends Pojo>(t: T): this & T;
@@ -77,6 +79,15 @@ Object.defineProperties(DisplayObject.prototype, {
                 this.transform.scale.set(<number> scaleX_vector, scaleY);
             }
 
+            return this;
+        },
+    },
+    filtered: {
+        value: function (this: DisplayObject, filter: Filter) {
+            if (!this.filters) {
+                this.filters = [];
+            }
+            this.filters.push(filter);
             return this;
         },
     },
