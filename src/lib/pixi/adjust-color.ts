@@ -21,10 +21,10 @@ interface WorkingColor {
     l: Float100;
 }
 
-const rgbBuffer = { r: 0, g: 0, b: 0 };
+const rgbBuffer = { r: 0 as Float255, g: 0 as Float255, b: 0 as Float255 };
 type RgbBuffer = typeof rgbBuffer;
 
-const hsvBuffer = { h: 0, s: 0, v: 0 };
+const hsvBuffer = { h: 0 as FloatDegrees, s: 0 as Float100, v: 0 as Float100 };
 type HsvBuffer = typeof hsvBuffer;
 
 function ensureHsv() {
@@ -111,11 +111,13 @@ function ensureRgb() {
     c.rgb = true;
 }
 
-type Float1 = number;
-type Float255 = number;
-type Float100 = number;
-type FloatDegrees = number;
-type PixiColor = number;
+type ForceAliasName<T> = T & { readonly __t?: unique symbol };
+
+type Float1 = ForceAliasName<number>;
+type Float255 = ForceAliasName<number>;
+type Float100 = ForceAliasName<number>;
+type FloatDegrees = ForceAliasName<number>;
+type PixiColor = ForceAliasName<number>;
 
 const AdjustColorChainer = {
     saturate(amount: Float1) {
