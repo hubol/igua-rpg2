@@ -1,4 +1,4 @@
-import { Container, DisplayObject, Filter, Rectangle } from "pixi.js";
+import { Container, DisplayObject, Filter, MaskData, Rectangle } from "pixi.js";
 import { EngineConfig } from "../game-engine/engine-config";
 import { Pojo } from "../types/pojo";
 import { merge } from "../object/merge";
@@ -21,6 +21,8 @@ declare module "pixi.js" {
         getMaxY(): number;
 
         invisible(): this;
+
+        masked(value: Container | MaskData | null): this;
     }
 
     interface Container {
@@ -115,6 +117,12 @@ Object.defineProperties(DisplayObject.prototype, {
     invisible: {
         value: function (this: DisplayObject) {
             this.visible = false;
+            return this;
+        },
+    },
+    masked: {
+        value: function (this: DisplayObject, mask: Container | MaskData | null) {
+            this.mask = mask;
             return this;
         },
     },
