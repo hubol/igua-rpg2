@@ -56,7 +56,7 @@ export namespace Coro {
 
     type ReturnedByGenerator<T> = T extends Coro.Type<infer U> ? U : never;
 
-    export function* all<T extends readonly (Coro.Type | Predicate)[] | []>(
+    export function* all<T extends ReadonlyArray<Coro.Type | Predicate> | []>(
         values: T,
     ): Coro.Type<{ -readonly [P in keyof T]: ReturnedByGenerator<T[P]> }> {
         const completedIndices: boolean[] = [];
@@ -94,6 +94,17 @@ export namespace Coro {
         };
 
         return results as any;
+    }
+
+    export function* chain(coros: ReadonlyArray<Coro.Type | Predicate>): Coro.Type<void> {
+        for (const coro of coros) {
+            if (isCoroType(coro)) {
+                yield* coro;
+            }
+            else {
+                yield coro;
+            }
+        }
     }
 
     /** Re-throws any exceptions thrown by the given predicate at the yield site of this Generator.
