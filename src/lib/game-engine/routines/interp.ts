@@ -1,5 +1,8 @@
 import { nlerp } from "../../math/number";
+import { Unit } from "../../math/number-alias-types";
 import { PropertiesLike } from "../../types/properties-like";
+
+type FactorFn = (factor: Unit) => Unit;
 
 export function interp<T>(object: T, key: keyof PropertiesLike<T, number>) {
     return {
@@ -8,8 +11,14 @@ export function interp<T>(object: T, key: keyof PropertiesLike<T, number>) {
                 to: toFn(
                     object,
                     key,
-                    (start, target, factor) => nlerp(start, target, Math.floor(factor * count) / count),
+                    nlerp,
+                    (factor) => Math.floor(factor * count) / count,
                 ),
+            };
+        },
+        factor: (factorFn: FactorFn) => {
+            return {
+                to: toFn(object, key, nlerp, factorFn),
             };
         },
         to: toFn(object, key, nlerp),
@@ -18,7 +27,7 @@ export function interp<T>(object: T, key: keyof PropertiesLike<T, number>) {
 
 type InterpFn = (start: number, target: number, factor: number) => number;
 
-function toFn<T>(object: T, key: keyof PropertiesLike<T, number>, fn: InterpFn) {
+function toFn<T>(object: T, key: keyof PropertiesLike<T, number>, interpFn: InterpFn, factorFn?: FactorFn) {
     return (target: number) => ({
         over: (ms: number) => {
             let currentTick = 0;
@@ -28,10 +37,14 @@ function toFn<T>(object: T, key: keyof PropertiesLike<T, number>, fn: InterpFn) 
                 currentTick++;
                 // TODO Fixed FPS
                 const currentMs = (currentTick * 1000) / 60;
-                const factor = Math.min(currentMs / ms, 1);
+                let factor = Math.min(currentMs / ms, 1);
+
+                if (factorFn) {
+                    factor = factorFn(factor);
+                }
 
                 /// @ts-expect-error
-                object[key] = fn(start, target, factor);
+                object[key] = interpFn(start, target, factor);
 
                 return factor >= 1;
             };
