@@ -9,14 +9,16 @@ export function objSolidOverlay() {
     let container = Undefined<Container>();
 
     function fade(value: number, ms: number) {
-        container?.destroy();
-        container = new Container().coro(function* (c) {
-            dirty = true;
-            yield interp(g, "alpha").to(value).over(ms);
-            c.destroy();
-        })
-            .show(g);
-        return Coro.resolve(r => container!.once("destroyed", r));
+        return Coro.resolve(r => {
+            container?.destroy();
+            container = new Container().coro(function* (c) {
+                dirty = true;
+                yield interp(g, "alpha").to(value).over(ms);
+                c.destroy();
+            })
+                .once("destroyed", r)
+                .show(g);
+        });
     }
 
     const g = new Graphics()

@@ -129,11 +129,21 @@ export namespace Coro {
 
     type Executor = (resolve: () => void) => unknown;
 
-    /** Creates a Coro.Predicate from a "Promise-style" executor */
+    /** Creates a Coro.Predicate from a "Promise-style" executor
+     * Note: Has an interesting quirk where the executor will not be called
+     * until the next iteration of the Coro runner.
+     * This seemed desirable.
+     */
     export function resolve(executor: Executor): Predicate {
         let resolved = false;
-        executor(() => resolved = true);
-        return () => resolved;
+        let executed = false;
+        return () => {
+            if (!executed) {
+                executor(() => resolved = true);
+                executed = true;
+            }
+            return resolved;
+        };
     }
 
     function isCoroType(value: Coro.Type | Predicate): value is Coro.Type {
