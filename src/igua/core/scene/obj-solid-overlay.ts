@@ -5,33 +5,28 @@ import { renderer } from "../../current-pixi-renderer";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 
 export function objSolidOverlay() {
-    let dirty = true;
     let container = Undefined<Container>();
 
     function fade(value: number, ms: number) {
         return Coro.resolve(r => {
             container?.destroy();
             container = new Container().coro(function* (c) {
-                dirty = true;
+                g.clear().beginFill(0xffffff).drawRect(0, 0, renderer.width, renderer.height);
+
                 yield interp(g, "alpha").to(value).over(ms);
                 c.destroy();
+
+                if (value === 0) {
+                    g.blendMode = BLEND_MODES.NORMAL;
+                    g.tint = 0xffffff;
+                }
             })
-                .once("destroyed", r)
+                .on("destroyed", r)
                 .show(g);
         });
     }
 
     const g = new Graphics()
-        .step(() => {
-            if (dirty && g.alpha === 0) {
-                g.blendMode = BLEND_MODES.NORMAL;
-                g.tint = 0xffffff;
-                // REPORTME: It seems like mesh needs to be modified for Pixi to
-                // pick up the change with blend modes / tint?
-                g.clear().beginFill(0xffffff).drawRect(0, 0, renderer.width, renderer.height);
-                dirty = false;
-            }
-        })
         .merge({
             fadeIn(ms: number) {
                 return fade(1, ms);
