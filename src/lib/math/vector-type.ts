@@ -34,6 +34,7 @@ export interface Vector extends VectorSimple {
     scale(f: number): this;
     scale(x: number, y: number): this;
     at(vector: VectorSimple): this;
+    at(vector: VectorSimple, scalar: number): this;
     at(x: number, y: number): this;
     vlength: number;
 }
@@ -54,14 +55,20 @@ const propertyDefinitions = createPropertyDefinitions({
         configurable: true,
     },
     at: {
-        value: function (this: Vector, x_vector: Vector | number, y: number) {
+        value: function (this: Vector, x_vector: Vector | number, y_scalar?: number) {
             if (typeof x_vector === "number") {
                 this.x = x_vector;
-                this.y = y;
+                this.y = y_scalar!;
             }
             else {
-                this.x = x_vector.x;
-                this.y = x_vector.y;
+                if (y_scalar === undefined) {
+                    this.x = x_vector.x;
+                    this.y = x_vector.y;
+                }
+                else {
+                    this.x = x_vector.x * y_scalar;
+                    this.y = x_vector.y * y_scalar;
+                }
             }
             return this;
         },
