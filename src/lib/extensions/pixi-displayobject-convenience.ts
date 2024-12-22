@@ -23,6 +23,7 @@ declare module "pixi.js" {
         invisible(): this;
 
         masked(value: Container | MaskData | null): this;
+        zIndexed(value: number): this;
     }
 
     interface Container {
@@ -30,6 +31,7 @@ declare module "pixi.js" {
         pivoted(x: number, y: number): this;
         sized(vector: VectorSimple): this;
         sized(width: number, height: number): this;
+        autoSorted(): this;
         removeAllChildren(): void;
     }
 }
@@ -126,6 +128,12 @@ Object.defineProperties(DisplayObject.prototype, {
             return this;
         },
     },
+    zIndexed: {
+        value: function (this: DisplayObject, zIndex: number) {
+            this.zIndex = zIndex;
+            return this;
+        },
+    },
 });
 
 const tempDisplayObjects: DisplayObject[] = [];
@@ -152,6 +160,13 @@ Object.defineProperties(Container.prototype, {
                 this.width = <number> width_vector;
                 this.height = height;
             }
+
+            return this;
+        },
+    },
+    autoSorted: {
+        value: function (this: Container) {
+            this.sortableChildren = true;
 
             return this;
         },
