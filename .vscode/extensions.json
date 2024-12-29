@@ -1,0 +1,7 @@
+// Recommend the dprint extension for automatic formatting on save
+
+{
+    "recommendations": [
+        "dprint.dprint"
+    ]
+}

@@ -1,0 +1,21 @@
+// The primary motivation for this configuration is to ensure that VSCode uses an appropriate version of TypeScript for this project.
+// There is a bizarre PixiJS compilation error that I received when using the VSCode default TypeScript version of 5.0.4.
+// In addition, this configures the dprint extension to format on save. Convenient!
+
+// Relevant articles:
+// - Ensuring VSCode uses the workspace's TypeScript version https://stackoverflow.com/a/75357623
+// - Bizarre PixiJS compilation error https://github.com/pixijs/pixijs/issues/9747
+
+{
+  "[typescript]": {
+      "editor.defaultFormatter": "dprint.dprint",
+      "editor.formatOnSave": true
+  },
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "search.exclude": {
+    "**/.smooch": true,
+    "**/dist": true,
+    "**/node_modules": true
+  }
+}

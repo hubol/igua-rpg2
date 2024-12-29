@@ -1,3 +1,12 @@
+// It can be nice to have the necessary build tasks start automatically when your IDE opens.
+// Another nicety of VSCode tasks is that their terminals are labeled with the task name.
+// The configurations here start smooch and serve the app locally.
+// Note: these tasks will likely fail without setting up the repository appropriately (e.g. installing npm packages, pulling with Git LFS)
+
+// Relevant articles:
+// - Automating task to run on startup in VSCode https://sdivakarrajesh.medium.com/automating-task-to-run-on-startup-in-vscode-fe30d7f99454
+// - Custom tasks https://code.visualstudio.com/docs/editor/tasks#_custom-tasks
+
 {
     "version": "2.0.0",
     "tasks": [

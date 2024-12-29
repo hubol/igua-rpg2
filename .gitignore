@@ -1,7 +1,3 @@
-.vscode/**/*
-!.vscode/**/*.default.*
-!.vscode/**/README.md
-
 dist/
 
 public/**/*
