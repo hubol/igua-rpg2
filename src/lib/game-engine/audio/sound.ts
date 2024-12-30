@@ -73,7 +73,7 @@ export class SoundInstance {
         // Observed this approach in HowlerJS as well
         // https://github.com/goldfire/howler.js/blob/a2a47933f1ffcee659e4939a65e075fa7f25706c/src/howler.core.js#L1336-L1337
         audioParam.setValueAtTime(currentValue, currentTime);
-        this._getAudioParam(param).linearRampToValueAtTime(
+        audioParam.linearRampToValueAtTime(
             value,
             currentTime + durationSeconds,
         );
