@@ -10,6 +10,7 @@ export const GeneratedMusicData = {
    "FirstSong": { ogg: require("./ogg/first-song.ogg") },
    "GolfResort": { ogg: require("./ogg/golf-resort.ogg") },
    "HomeFine": { ogg: require("./ogg/home-fine.ogg") },
+   "HomosexualFeet": { ogg: require("./ogg/homosexual-feet.ogg") },
    "InvisibleTape": { ogg: require("./ogg/invisible-tape.ogg") },
    "OpenWound": { ogg: require("./ogg/open-wound.ogg") },
    "PerishInstrument": { ogg: require("./ogg/perish-instrument.ogg") },
