@@ -63,9 +63,19 @@ export class SoundInstance {
     }
 
     linearRamp(param: RampableParam, value: number, durationSeconds: Seconds) {
+        const audioParam = this._getAudioParam(param);
+        const currentValue = audioParam.value;
+        const currentTime = this._sourceNode.context.currentTime;
+
+        // Doesn't totally make sense to me
+        // But without this, nodes with multiple automations applied
+        // Will not sound as expected
+        // Observed this approach in HowlerJS as well
+        // https://github.com/goldfire/howler.js/blob/a2a47933f1ffcee659e4939a65e075fa7f25706c/src/howler.core.js#L1336-L1337
+        audioParam.setValueAtTime(currentValue, currentTime);
         this._getAudioParam(param).linearRampToValueAtTime(
             value,
-            this._sourceNode.context.currentTime + durationSeconds,
+            currentTime + durationSeconds,
         );
         return this;
     }
