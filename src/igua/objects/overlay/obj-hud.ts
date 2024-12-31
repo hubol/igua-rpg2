@@ -1,4 +1,4 @@
-import { Container } from "pixi.js";
+import { Container, Graphics } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { container } from "../../../lib/pixi/container";
 import { objHealthBar } from "./obj-health-bar";
@@ -6,6 +6,9 @@ import { RpgPlayer } from "../../rpg/rpg-player";
 import { objStatusBar } from "./obj-status-bar";
 import { playerObj } from "../obj-player";
 import { RpgProgress } from "../../rpg/rpg-progress";
+import { renderer } from "../../current-pixi-renderer";
+import { Cutscene } from "../../globals";
+import { factor, interp } from "../../../lib/game-engine/routines/interp";
 
 const Consts = {
     StatusTextTint: 0x00ff00,
@@ -24,7 +27,7 @@ export function objHud() {
 
     const statusObjs = [valuablesInfoObj, poisonLevelObj, poisonBuildUpObj];
 
-    return container(healthBarObj, ...statusObjs)
+    return container(objCutsceneIndicator().at(-3, -3), healthBarObj, ...statusObjs)
         .at(3, 3)
         .merge({ healthBarObj, effectiveHeight: 0 })
         .step(self => {
@@ -52,6 +55,21 @@ export function objHud() {
 }
 
 export type ObjHud = ReturnType<typeof objHud>;
+
+function objCutsceneIndicator() {
+    return new Graphics().beginFill(0x101010).drawRect(0, renderer.height - 12, renderer.width, 12).coro(
+        function* (self) {
+            while (true) {
+                self.scale.x = 0;
+                self.pivot.x = 0;
+                yield () => Cutscene.isPlaying;
+                yield interp(self.scale, "x").factor(factor.sine).to(1).over(250);
+                yield () => !Cutscene.isPlaying;
+                yield interp(self.pivot, "x").steps(16).to(-renderer.width).over(300);
+            }
+        },
+    );
+}
 
 function objValuablesInfo() {
     return objText.Large("You have 0 valuables", { tint: Consts.StatusTextTint })
