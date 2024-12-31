@@ -44,6 +44,9 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
             height: renderer.height,
         },
         style: {
+            get backgroundTint() {
+                return backgroundGfx.tint as number;
+            },
             set backgroundTint(tint: number) {
                 backgroundGfx.tint = tint;
             },
