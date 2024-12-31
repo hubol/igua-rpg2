@@ -74,7 +74,7 @@ function objMessageBox(text: string) {
 
 let instance: ReturnType<typeof objMessageBox> | undefined;
 
-export function* show(text: string) {
+function* showOneMessage(text: string) {
     if (!instance) {
         instance = objMessageBox(text);
     }
@@ -86,4 +86,10 @@ export function* show(text: string) {
     yield () => Input.isDown("Confirm");
 
     instance!.dismissAfterFrames = 1;
+}
+
+export function* show(text: string, ...moreText: string[]) {
+    for (const messageText of [text, ...moreText]) {
+        yield* showOneMessage(messageText);
+    }
 }

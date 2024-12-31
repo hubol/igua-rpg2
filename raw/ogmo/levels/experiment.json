@@ -265,7 +265,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": true,
-          "values": {"looksName": "Miner", "name": "", "depth": 0}
+          "values": {"looksName": "Miner", "name": "MinerNpc", "depth": 0}
         }
       ]
     },
@@ -3854,6 +3854,32 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 880,
+          "y": 312,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffe5e5",
+          "texture": "esoteric/decoration/bandage.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MinerPicaxeBrokenBandages"
+        },
+        {
+          "x": 879,
+          "y": 312,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#ffffff",
+          "texture": "esoteric/decoration/bandage.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MinerPicaxeBrokenBandages"
         }
       ],
       "folder": "../textures"

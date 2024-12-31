@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 111 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 112 }];
 
 interface TxData {
   id: string;
@@ -44,6 +44,7 @@ function txs<T>(tx: (data: TxData) => T) {
     },
     Esoteric: {
       Decoration: {
+        Bandage: tx({ id: "Esoteric.Decoration.Bandage", atlas: 0, x: 549, y: 248, width: 12, height: 26 }),
         PicaxeGiant: tx({ id: "Esoteric.Decoration.PicaxeGiant", atlas: 0, x: 918, y: 272, width: 72, height: 69 }),
         SeedBag: tx({ id: "Esoteric.Decoration.SeedBag", atlas: 0, x: 991, y: 291, width: 32, height: 31 }),
       },
@@ -89,7 +90,7 @@ function txs<T>(tx: (data: TxData) => T) {
       },
       Club: tx({ id: "Iguana.Club", atlas: 0, x: 330, y: 218, width: 72, height: 18 }),
       Crest: tx({ id: "Iguana.Crest", atlas: 0, x: 848, y: 154, width: 168, height: 24 }),
-      Eye: tx({ id: "Iguana.Eye", atlas: 0, x: 549, y: 248, width: 12, height: 12 }),
+      Eye: tx({ id: "Iguana.Eye", atlas: 0, x: 549, y: 275, width: 12, height: 12 }),
       Foot: tx({ id: "Iguana.Foot", atlas: 0, x: 468, y: 147, width: 210, height: 18 }),
       Head: tx({ id: "Iguana.Head", atlas: 0, x: 697, y: 322, width: 27, height: 27 }),
       Horn: tx({ id: "Iguana.Horn", atlas: 0, x: 403, y: 233, width: 72, height: 12 }),

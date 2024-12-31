@@ -32,6 +32,11 @@ function getInitialRpgProgress() {
             },
         },
         flags: {
+            outskirts: {
+                miner: {
+                    picaxeHealth: 10,
+                },
+            },
             test: false,
         },
         uids: {
@@ -43,4 +48,5 @@ function getInitialRpgProgress() {
 export const RpgProgress = getInitialRpgProgress();
 
 export type RpgProgressUids = keyof typeof RpgProgress["uids"];
+// TODO I think some places already expect flags to only be booleans :-X
 export type RpgProgressFlags = DeepKeyOf.Leaves<typeof RpgProgress["flags"]>;
