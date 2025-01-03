@@ -5,6 +5,8 @@ import { CollisionShape } from "../../../lib/pixi/collision";
 import { mxnSpatialAudio } from "../../mixins/mxn-spatial-audio";
 import { Sfx } from "../../../assets/sounds";
 import { Rng } from "../../../lib/math/rng";
+import { objFxBurstRound24 } from "../effects/obj-fx-burst-round-24";
+import { objFxBurst32 } from "../effects/obj-fx-burst-32";
 
 export function objSpikedCanonball() {
     return Sprite.from(Tx.Enemy.SpikeBall)
@@ -17,6 +19,7 @@ export function objSpikedCanonball() {
             yield () => self.speed.y > 0;
             const speedX = self.speed.x;
             yield () => self.speed.y === 0;
+            objFxBurst32().at(self).add(0, 8).show(self.parent);
             self.play(Sfx.Impact.SpikedCanonballLand.with.rate(Rng.float(0.9, 1.1)));
             self.speed.y = -2;
             self.speed.x = speedX * 0.3;
