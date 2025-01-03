@@ -18,6 +18,8 @@ import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgStatus } from "../../rpg/rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { playerObj } from "../obj-player";
+import { mxnSpatialAudio } from "../../mixins/mxn-spatial-audio";
+import { Sfx } from "../../../assets/sounds";
 
 const themes = {
     Common: {
@@ -239,7 +241,6 @@ export function objAngelSuggestive() {
         .mixin(mxnBoilMirrorRotate);
 
     const hurtbox0 = new Graphics().beginFill(0).drawRect(-30, -11, 60, 25).invisible();
-    const hurtbox1 = new Graphics().beginFill(0xff0000).drawRect(-11, -35, 17, 30).invisible();
 
     const bodyObj = objAngelSuggestiveBody().pivoted(36, 46);
 
@@ -251,7 +252,6 @@ export function objAngelSuggestive() {
         irregularShadowObj,
         objAngelSuggestiveGears(theme).at(24, -5),
         hurtbox0,
-        hurtbox1,
     )
         .coro(function* () {
             while (true) {
@@ -269,6 +269,7 @@ export function objAngelSuggestive() {
                 bodyObj.bulge.unit = 0;
                 yield interp(bodyObj.bulge, "unit").to(1).over(1000);
                 yield sleep(500);
+                enemyObj.play(Sfx.Enemy.Suggestive.Flick.with.rate(Rng.float(0.9, 1.1)));
                 const canonballObj = objAngelSuggestiveSpikedCanonball(enemyObj.status).at(enemyObj).show();
                 // TODO I think there should be some kind of "player sight" mixin
                 // That could provide this info to enemies!
@@ -285,7 +286,8 @@ export function objAngelSuggestive() {
         actualHeadObj,
         healthbarAnchorObj,
     )
-        .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0, hurtbox1], healthbarAnchorObj });
+        .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0], healthbarAnchorObj })
+        .mixin(mxnSpatialAudio);
 
     return enemyObj;
 }
