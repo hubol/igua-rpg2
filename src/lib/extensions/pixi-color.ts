@@ -2,11 +2,11 @@ import { ColorSource, Graphics, Sprite } from "pixi.js";
 
 declare module "pixi.js" {
     interface Sprite {
-        tinted(tint: ColorSource): this;
+        tinted(tint: number): this;
     }
 
     interface Graphics {
-        tinted(tint: ColorSource): this;
+        tinted(tint: number): this;
     }
 }
 
