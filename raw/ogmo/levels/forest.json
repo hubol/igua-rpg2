@@ -166,7 +166,7 @@
           "originX": 12,
           "originY": 37,
           "flippedX": false,
-          "values": {"looksName": "Satisfier", "name": "NpcSatisfier", "depth": 0}
+          "values": {"personaName": "", "name": "NpcSatisfier", "depth": 0}
         },
         {
           "name": "IguanaNpc",
@@ -177,7 +177,7 @@
           "originX": 12,
           "originY": 37,
           "flippedX": true,
-          "values": {"looksName": "Goldilocks", "name": "NpcGoldilocks", "depth": 0}
+          "values": {"personaName": "", "name": "NpcGoldilocks", "depth": 0}
         },
         {
           "name": "ValuableOrange",

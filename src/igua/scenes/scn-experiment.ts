@@ -32,7 +32,7 @@ export function scnExperiment() {
 
         // TODO could add that .behind()
         // Or should I figure out layering technology
-        const npcObj = objIguanaNpc({ looksName: "Farmer" }).at(lvl.FarmerAppearMarker).show();
+        const npcObj = objIguanaNpc({ personaName: "BalltownOutskirtsFarmer" }).at(lvl.FarmerAppearMarker).show();
         yield* npcObj.walkTo(lvl.FarmerMoveToMarker.x);
 
         // TODO should this happen automatically at the end of cutscenes?

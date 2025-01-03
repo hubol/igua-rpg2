@@ -1,6 +1,6 @@
 // dprint-ignore-file
 
-import { IguanaLooks } from "./looks";
+import { IguanaLooks } from "../iguana/looks";
 
 export const NpcLooks = {
     MintyJourney: {head:{color:0x75d2da,placement:{x:0,y:-5},crest:{shape:6,color:0x8ebd93,placement:{x:7,y:-6},flipV:true,flipH:false},eyes:{placement:{x:0,y:0},gap:1,tilt:0,pupils:{mirrored:false,placement:{x:-3,y:0}},left:{sclera:{},eyelid:{color:0x12494a,placement:3},pupil:{shape:6,color:0x7400f9,placement:{x:0,y:0},flipH:false}},right:{sclera:{},eyelid:{color:0x12494a,placement:3},pupil:{shape:6,color:0x1a7173,placement:{x:1,y:1},flipH:false}}},horn:{shape:5,color:0x78a47c,placement:{x:-3,y:-12}},mouth:{shape:1,color:0x7400f9,placement:{x:0,y:0},flipV:false}},body:{color:0x12494a,placement:{x:0,y:0},tail:{shape:0,color:0x1a7173,placement:{x:0,y:0},club:{shape:2,color:0xf2c15c,placement:{x:0,y:1}}}},feet:{fore:{left:{shape:9,color:0xf2c15c,claws:{color:0x1a7173,shape:0,placement:4}},right:{shape:9,color:0x8ebd93,claws:{color:0x1a7173,shape:0,placement:4}}},hind:{left:{shape:2,color:0xf2c15c,claws:{color:0x1a7173,shape:2,placement:2}},right:{shape:2,color:0xf2c15c,claws:{color:0x1a7173,shape:2,placement:2}}},gap:4,backOffset:3}},

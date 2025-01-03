@@ -210,7 +210,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": false,
-          "values": {"looksName": "Farmer", "name": "FarmerNpc", "depth": 0}
+          "values": {"personaName": "BalltownOutskirtsFarmer", "name": "FarmerNpc", "depth": 0}
         },
         {
           "name": "ValuableBlue",
@@ -265,7 +265,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": true,
-          "values": {"looksName": "Miner", "name": "MinerNpc", "depth": 0}
+          "values": {"personaName": "BalltownOutskirtsMiner", "name": "MinerNpc", "depth": 0}
         }
       ]
     },
