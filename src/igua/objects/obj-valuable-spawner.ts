@@ -1,5 +1,7 @@
+import { Rng } from "../../lib/math/rng";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
+import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { ObjValuable, objValuable } from "./obj-valuable";
 
 // TODO does this need to be an object?
@@ -11,13 +13,23 @@ export function objValuableSpawner(positions: VectorSimple[]) {
     return container()
         .merge({
             // TODO support type passed in
-            spawn() {
+            spawn(strategy: "first" | "random" = "random") {
                 let index = -1;
                 if (valuables.length < positions.length) {
                     index = valuables.length;
                 }
-                else {
+                else if (strategy === "first") {
                     index = valuables.findIndex(item => item === null);
+                }
+                else {
+                    const offset = Rng.int(valuables.length);
+                    for (let i = 0; i < valuables.length; i++) {
+                        const indexToCheck = (offset + i) % valuables.length;
+                        if (valuables[indexToCheck] === null) {
+                            index = indexToCheck;
+                            break;
+                        }
+                    }
                 }
 
                 if (index === -1) {
@@ -25,7 +37,10 @@ export function objValuableSpawner(positions: VectorSimple[]) {
                 }
 
                 // TODO orange from arg
-                const valuableObj = objValuable("orange").handles("collected", () => collectedCount++)
+                const valuableObj = objValuable("orange").mixin(mxnNudgeAppear).handles(
+                    "collected",
+                    () => collectedCount++,
+                )
                     .on("destroyed", () => {
                         if (valuables[index] === valuableObj) {
                             valuables[index] = null;

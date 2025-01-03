@@ -1,7 +1,11 @@
+import { DisplayObject } from "pixi.js";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { container } from "../../lib/pixi/container";
+import { Empty } from "../../lib/types/empty";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { objValuable } from "./obj-valuable";
+import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 
 type Counts = Record<RpgEconomy.Currency.Type, number>;
 
@@ -200,7 +204,7 @@ function solveLayout(counts: Counts, tiers: Tiers) {
 const hMargin = 18;
 const vMargin = 13;
 
-export function objValuableTrove(total: number) {
+export function objValuableTrove(total: number, animation: "animated" | "instant" = "animated") {
     const counts = solveCounts(total);
     const count = Object.values(counts).reduce((sum, current) => sum + current, 0);
     const tiers = solveTiers(count);
@@ -208,15 +212,29 @@ export function objValuableTrove(total: number) {
 
     const c = container();
 
+    const valuableObjs = Empty<DisplayObject>();
+
     let y = (tiers.length - 1) * vMargin / -2;
     for (const row of layout) {
         const rowCount = row.length;
         let x = (rowCount - 1) * hMargin / -2;
         for (let i = 0; i < rowCount; i++) {
-            objValuable(row[i]).at(x, y).vround().show(c);
+            valuableObjs.push(objValuable(row[i]).at(x, y).vround());
             x += hMargin;
         }
         y += vMargin;
+    }
+
+    if (animation === "instant") {
+        c.addChild(...valuableObjs);
+    }
+    else {
+        c.coro(function* () {
+            for (const valuableObj of valuableObjs) {
+                valuableObj.mixin(mxnNudgeAppear).show(c);
+                yield sleepf(2);
+            }
+        });
     }
 
     return c;
