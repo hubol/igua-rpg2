@@ -52,12 +52,12 @@ export function objWaterDrip(attack: RpgAttack.Model | null) {
             gravity: 0.05,
             physicsRadius: 4,
             physicsOffset: [0, -4],
-            onMove: (ev) => {
-                if (ev.hitGround) {
-                    obj.destroy();
-                    // TODO drip sfx
-                }
-            },
+        })
+        .handles("moved", (self, ev) => {
+            if (ev.hitGround) {
+                obj.destroy();
+                // TODO drip sfx
+            }
         });
 
     if (attack) {

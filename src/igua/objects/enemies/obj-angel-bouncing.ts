@@ -61,31 +61,30 @@ export function objAngelBouncing() {
             physicsRadius: 8,
             physicsFaction: PhysicsFaction.Enemy,
             physicsOffset: vnew(),
-            onMove(event) {
-                // TODO in igua 1, some wouldn't bounce
-                if (event.hitWall) {
-                    obj.speed.x = -event.previousSpeed.x; // TODO might be nice to get the normal
-                }
-                if (event.hitGround && !event.previousOnGround) {
-                    obj.play(Sfx.Impact.BouncingEnemyLand);
-                    obj.speed.y = -6;
-
-                    // TODO play sound if on screen
-
-                    // TODO speed change near death
-
-                    // obj.vspeed = health.nearDeath ? -9 : -6;
-
-                    // TODO can also flip horizontally if "leashed"
-
-                    // if (!obj.limitedRangeEnabled)
-                    //     return;
-                    // if ((distanceTraveled > 128 && obj.hspeed > 0) || (distanceTraveled <= 0 && obj.hspeed < 0))
-                    //     obj.hspeed *= -1;
-                }
-            },
         })
         .mixin(mxnSpatialAudio)
+        .handles("moved", (obj, event) => {
+            if (event.hitWall) {
+                obj.speed.x = -event.previousSpeed.x; // TODO might be nice to get the normal
+            }
+            if (event.hitGround && !event.previousOnGround) {
+                obj.play(Sfx.Impact.BouncingEnemyLand);
+                obj.speed.y = -6;
+
+                // TODO play sound if on screen
+
+                // TODO speed change near death
+
+                // obj.vspeed = health.nearDeath ? -9 : -6;
+
+                // TODO can also flip horizontally if "leashed"
+
+                // if (!obj.limitedRangeEnabled)
+                //     return;
+                // if ((distanceTraveled > 128 && obj.hspeed > 0) || (distanceTraveled <= 0 && obj.hspeed < 0))
+                //     obj.hspeed *= -1;
+            }
+        })
         .step(() => {
             // if (obj.portal && !appliedOpaqueTint) {
             //     obj.opaqueTint = 0x20A090;

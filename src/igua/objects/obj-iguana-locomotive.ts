@@ -94,14 +94,14 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             physicsRadius: 10,
             physicsOffset: [0, -13],
             debug: false,
-            onMove: (event) => {
-                if (event.hitGround && !event.previousOnGround && event.previousSpeed.y > 1.2) {
-                    puppet.landingFrames = 10;
-                }
-                if (event.hitWall) {
-                    hitWall = true;
-                }
-            },
+        })
+        .handles("moved", (self, event) => {
+            if (event.hitGround && !event.previousOnGround && event.previousSpeed.y > 1.2) {
+                self.landingFrames = 10;
+            }
+            if (event.hitWall) {
+                hitWall = true;
+            }
         })
         .mixin(mxnShadowFloor, { offset: [0, -1] })
         .merge({

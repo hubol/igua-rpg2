@@ -115,7 +115,7 @@ export namespace RpgStatus {
                 return { rejected: true, invulnerable: true };
             }
 
-            const canBeFatal = target.quirks.guardedDamageIsFatal || target.health <= 1;
+            const canBeFatal = !target.isGuarding || target.quirks.guardedDamageIsFatal || target.health <= 1;
 
             const tookEmotionalDamage = takeDamage(
                 attack.emotional,

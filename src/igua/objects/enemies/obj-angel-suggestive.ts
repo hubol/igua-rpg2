@@ -12,6 +12,12 @@ import { approachLinear, nlerp } from "../../../lib/math/number";
 import { scene } from "../../globals";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { objAngelPlantLegs } from "./obj-angel-plant-legs";
+import { objSpikedCanonball } from "../projectiles/obj-spiked-canonball";
+import { mxnStopAndDieWhenHitGround } from "../../mixins/mxn-stop-and-die-when-hit-ground";
+import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
+import { RpgStatus } from "../../rpg/rpg-status";
+import { RpgAttack } from "../../rpg/rpg-attack";
+import { playerObj } from "../obj-player";
 
 const themes = {
     Common: {
@@ -40,7 +46,15 @@ const [
 ] = Tx
     .Enemy.Suggestive.Body.split({ count: 7 });
 
-const rnkAngelSuggestive = RpgEnemyRank.create({});
+const rnkAngelSuggestive = RpgEnemyRank.create({
+    loot: {
+        valuables: {
+            max: 8,
+            min: 2,
+            deltaPride: -3,
+        },
+    },
+});
 
 function objAngelSuggestiveGear(tint: Integer) {
     const ax = 8.5 / 16;
@@ -255,16 +269,33 @@ export function objAngelSuggestive() {
                 bodyObj.bulge.unit = 0;
                 yield interp(bodyObj.bulge, "unit").to(1).over(1000);
                 yield sleep(500);
+                const canonballObj = objAngelSuggestiveSpikedCanonball(enemyObj.status).at(enemyObj).show();
+                // TODO I think there should be some kind of "player sight" mixin
+                // That could provide this info to enemies!
+                canonballObj.speed.x = playerObj.x > enemyObj.x ? 2 : -2;
+                canonballObj.speed.y = -8;
                 bodyObj.bulge.phase = "recovering";
                 bodyObj.bulge.unit = 0;
                 yield interp(bodyObj.bulge, "unit").to(1).over(1000);
             }
         });
 
-    return container(
+    const enemyObj = container(
         objAngelPlantLegs({ objToBounce: actualHeadObj }).pivoted(18, -17),
         actualHeadObj,
         healthbarAnchorObj,
     )
         .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0, hurtbox1], healthbarAnchorObj });
+
+    return enemyObj;
+}
+
+const atkAngelSuggestiveSpikedCanonball = RpgAttack.create({
+    physical: 30,
+});
+
+function objAngelSuggestiveSpikedCanonball(status: RpgStatus.Model) {
+    return objSpikedCanonball()
+        .mixin(mxnRpgAttack, { attack: atkAngelSuggestiveSpikedCanonball, attacker: status })
+        .mixin(mxnStopAndDieWhenHitGround);
 }

@@ -14,13 +14,12 @@ interface PhysicsArgs {
     physicsRadius: number;
     physicsFaction?: PhysicsFaction | null;
     physicsOffset?: Vector;
-    onMove?: (event: MoveEvent) => void;
     debug?: boolean;
 }
 
 export function mxnPhysics(
     obj: DisplayObject,
-    { gravity, physicsRadius, physicsFaction = null, physicsOffset = vnew(), debug = false, onMove }: PhysicsArgs,
+    { gravity, physicsRadius, physicsFaction = null, physicsOffset = vnew(), debug = false }: PhysicsArgs,
 ) {
     if (debug && obj instanceof Container) {
         for (const child of obj.children) {
@@ -62,6 +61,7 @@ export function mxnPhysics(
             physicsOffset,
             groundMaterial: Material.Earth,
         })
+        .dispatchesValue<"moved", MoveEvent>()
         .step(obj => {
             // TODO
             // Is this even necessary? If so, why?! Why doesn't rounding when rendering work?!
@@ -72,7 +72,7 @@ export function mxnPhysics(
             obj.x = Math.round(obj.x);
             obj.y = Math.round(obj.y);
             setPositionDecimalOnTransformChanged = true;
-            onMove?.(event);
+            obj.dispatch("moved", event);
         }, StepOrder.Physics);
 }
 
