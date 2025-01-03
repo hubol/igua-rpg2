@@ -25,9 +25,15 @@ export function scnExperiment() {
     objAngelSuggestive().at([128, -128].add(playerObj)).show();
 
     enrichMiner(lvl);
+    enrichFarmer(lvl);
+}
 
+function enrichFarmer(lvl: ReturnType<typeof Lvl["Experiment"]>) {
     lvl.FarmerNpc.mixin(mxnCutscene, function* () {
         scene.camera.mode = "controlled";
+
+        yield* show("I should replant the ballfruit? Sure.");
+
         scene.camera.at(lvl.FarmingRegion);
 
         // TODO could add that .behind()
