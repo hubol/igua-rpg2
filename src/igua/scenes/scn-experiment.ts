@@ -22,7 +22,7 @@ export function scnExperiment() {
     Jukebox.play(Mzk.TrashDay);
     const lvl = Lvl.Experiment();
 
-    objAngelSuggestive().at([128, -128].add(playerObj)).show();
+    objAngelSuggestive().at(lvl.EnemyDemoMarker).show();
 
     enrichMiner(lvl);
     enrichFarmer(lvl);

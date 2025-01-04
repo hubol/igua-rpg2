@@ -1,0 +1,76 @@
+import { Graphics } from "pixi.js";
+import { OgmoFactory } from "../ogmo/factory";
+import { playerObj } from "./obj-player";
+import { Cutscene, sceneStack } from "../globals";
+import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { SceneLibrary } from "../core/scene/scene-library";
+import { ErrorReporter } from "../../lib/game-engine/error-reporter";
+import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
+import { RpgProgress } from "../rpg/rpg-progress";
+
+// TODO vertical
+type Orientation = "horizontal";
+
+export function objGate(ogmoEntity: OgmoFactory.Entity, orientation: Orientation) {
+    const gfx = new Graphics().beginFill(0xffffff).drawRect(0, 0, 1, 1).scaled(64, 1);
+    if (ogmoEntity.flippedX) {
+        gfx.pivot.x = 1;
+    }
+
+    const { sceneName, checkpointName } = ogmoEntity.values;
+
+    const forward = getForward(ogmoEntity, orientation);
+    const predicate = forwardPredicates[forward];
+    const pilotFn = forwardPilotFns[forward];
+
+    // TODO copy-paste sucks!
+    const scene = SceneLibrary.maybeFindByName(sceneName);
+    if (!scene) {
+        ErrorReporter.reportSubsystemError("objDoor", `Scene with name "${sceneName}" does not exist!`);
+    }
+    else {
+        gfx.coro(function* (self) {
+            yield () => playerObj.hasControl && predicate() && self.collides(playerObj);
+            // TODO is this really a cutscene?
+            // Should it be interruptible?! Scary.
+            // Either way, probably don't want the letterbox to appear!
+            Cutscene.play(function* () {
+                playerObj.isBeingPiloted = true;
+                playerObj.isDucking = false;
+                playerObj.isMovingLeft = false;
+                playerObj.isMovingRight = false;
+                pilotFn();
+                yield sleepf(20);
+                // TODO this all really needs to be encapsulated somewhere!!!!!!!!!!!!!!!
+                RpgProgress.character.position.sceneName = sceneName;
+                RpgProgress.character.position.checkpointName = checkpointName;
+                sceneStack.replace(scene, { useGameplay: true });
+            });
+        });
+    }
+
+    return gfx.invisible();
+}
+
+function getForward(ogmo: OgmoFactory.Entity, orientation: Orientation) {
+    if (orientation === "horizontal") {
+        return ogmo.flippedX ? "left" : "right";
+    }
+    return ogmo.flippedY ? "up" : "down";
+}
+
+type Forward = ReturnType<typeof getForward>;
+
+const forwardPredicates: Record<Forward, () => boolean> = {
+    left: () => playerObj.speed.x < 0,
+    right: () => playerObj.speed.x > 0,
+    up: () => playerObj.speed.y < 0,
+    down: () => playerObj.speed.y > 0,
+};
+
+const forwardPilotFns: Record<Forward, () => void> = {
+    left: () => playerObj.isMovingLeft = true,
+    right: () => playerObj.isMovingRight = true,
+    up: () => playerObj.gravity = 0,
+    down: () => {},
+};

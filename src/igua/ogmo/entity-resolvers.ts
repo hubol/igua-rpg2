@@ -13,6 +13,7 @@ import { objValuable } from "../objects/obj-valuable";
 import { objWaterDripSource } from "../objects/obj-water-drip-source";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { OgmoFactory } from "./factory";
+import { objGate } from "../objects/obj-gate";
 
 export const OgmoEntityResolvers = {
     "Player": (entity) => createOrConfigurePlayerObj(entity),
@@ -46,6 +47,7 @@ export const OgmoEntityResolvers = {
     },
     "Marker": (entity) => vnew(entity),
     "Region": () => new Graphics().beginFill(0x00ff00).drawRect(0, 0, 1, 1).invisible(),
+    "GateHorizontal": (entity) => objGate(entity, "horizontal"),
 } satisfies Record<string, (e: OgmoFactory.Entity) => unknown>;
 
 function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?: string) {
