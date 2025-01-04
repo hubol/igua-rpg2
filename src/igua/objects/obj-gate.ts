@@ -1,12 +1,9 @@
 import { Graphics } from "pixi.js";
 import { OgmoFactory } from "../ogmo/factory";
 import { playerObj } from "./obj-player";
-import { Cutscene, sceneStack } from "../globals";
+import { Cutscene } from "../globals";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
-import { SceneLibrary } from "../core/scene/scene-library";
-import { ErrorReporter } from "../../lib/game-engine/error-reporter";
-import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
-import { RpgProgress } from "../rpg/rpg-progress";
+import { SceneChanger } from "../systems/scene-changer";
 
 // TODO vertical
 type Orientation = "horizontal";
@@ -23,16 +20,13 @@ export function objGate(ogmoEntity: OgmoFactory.Entity, orientation: Orientation
     const predicate = forwardPredicates[forward];
     const pilotFn = forwardPilotFns[forward];
 
-    // TODO copy-paste sucks!
-    const scene = SceneLibrary.maybeFindByName(sceneName);
-    if (!scene) {
-        ErrorReporter.reportSubsystemError("objDoor", `Scene with name "${sceneName}" does not exist!`);
-    }
-    else {
+    const sceneChanger = SceneChanger.create({ sceneName, checkpointName });
+
+    if (sceneChanger) {
         gfx.coro(function* (self) {
             yield () => playerObj.hasControl && predicate() && self.collides(playerObj);
             // TODO is this really a cutscene?
-            // Should it be interruptible?! Scary.
+            // Cutscenes are (thankfully?) not interruptible.
             // Either way, probably don't want the letterbox to appear!
             Cutscene.play(function* () {
                 playerObj.isBeingPiloted = true;
@@ -41,10 +35,8 @@ export function objGate(ogmoEntity: OgmoFactory.Entity, orientation: Orientation
                 playerObj.isMovingRight = false;
                 pilotFn();
                 yield sleepf(20);
-                // TODO this all really needs to be encapsulated somewhere!!!!!!!!!!!!!!!
-                RpgProgress.character.position.sceneName = sceneName;
-                RpgProgress.character.position.checkpointName = checkpointName;
-                sceneStack.replace(scene, { useGameplay: true });
+                // TODO need to escape ticker and execute?
+                sceneChanger.changeScene();
             });
         });
     }

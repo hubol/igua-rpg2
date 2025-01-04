@@ -1,14 +1,12 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../assets/textures";
 import { mxnInteract } from "../mixins/mxn-interact";
-import { SceneLibrary } from "../core/scene/scene-library";
-import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
-import { Cutscene, sceneStack } from "../globals";
+import { Cutscene } from "../globals";
 import { show } from "../cutscene/show";
-import { RpgProgress } from "../rpg/rpg-progress";
 import { Sfx } from "../../assets/sounds";
 import { Rng } from "../../lib/math/rng";
+import { SceneChanger } from "../systems/scene-changer";
 
 interface ObjDoorArgs {
     sceneName: string;
@@ -18,10 +16,7 @@ interface ObjDoorArgs {
 export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
     let locked = false;
 
-    const scene = SceneLibrary.maybeFindByName(sceneName);
-    if (!scene) {
-        ErrorReporter.reportSubsystemError("objDoor", `Scene with name "${sceneName}" does not exist!`);
-    }
+    const sceneChanger = SceneChanger.create({ sceneName, checkpointName });
 
     const obj = Sprite.from(Tx.OpenDoor)
         .merge({
@@ -38,13 +33,10 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
                 Cutscene.play(() => show("Closed."));
                 return;
             }
-            if (scene) {
+            if (sceneChanger) {
                 throw new EscapeTickerAndExecute(() => {
                     Rng.choose(Sfx.Interact.DoorOpen0, Sfx.Interact.DoorOpen1).play();
-                    // TODO this all really needs to be encapsulated somewhere
-                    RpgProgress.character.position.sceneName = sceneName;
-                    RpgProgress.character.position.checkpointName = checkpointName;
-                    sceneStack.replace(scene, { useGameplay: true });
+                    sceneChanger.changeScene();
                 });
             }
         });
