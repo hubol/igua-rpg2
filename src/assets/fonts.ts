@@ -10,23 +10,22 @@ import { fntGoodBoy } from "./bitmap-fonts/fnt-good-boy";
 type Style = Partial<Omit<IBitmapTextStyle, "fontName">>;
 
 export const objText = {
-    Small(text = "", style: Style = {}) {
+    XSmallIrregular(text = "", style: Style = {}) {
         return new IrregularBitmapText(text, { fontName: fntFlaccid.font, ...style });
     },
-    MediumDigits(text = "", style: Style = {}) {
+    SmallDigits(text = "", style: Style = {}) {
         return new BitmapText(text, { fontName: fntDiggit.font, ...style });
     },
-    Large(text = "", style: Style = {}) {
+    MediumIrregular(text = "", style: Style = {}) {
         return new IrregularBitmapText(text, { fontName: fntErotixLight.font, ...style });
     },
-    // TODO rename ^ LargeIrregular
-    LargeRegular(text = "", style: Style = {}) {
+    Medium(text = "", style: Style = {}) {
         return new BitmapText(text, { fontName: fntErotixLight.font, ...style });
     },
-    LargeBold(text = "", style: Style = {}) {
+    MediumBoldIrregular(text = "", style: Style = {}) {
         return new IrregularBitmapText(text, { fontName: fntErotix.font, ...style });
     },
-    Tall(text = "", style: Style = {}) {
+    Large(text = "", style: Style = {}) {
         return new BitmapText(text, { fontName: fntGoodBoy.font, ...style });
     },
 };

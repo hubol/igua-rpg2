@@ -72,7 +72,7 @@ function objCutsceneIndicator() {
 }
 
 function objValuablesInfo() {
-    return objText.Large("You have 0 valuables", { tint: Consts.StatusTextTint })
+    return objText.MediumIrregular("You have 0 valuables", { tint: Consts.StatusTextTint })
         .step(text => {
             text.seed = RpgProgress.character.inventory.valuables + 64;
             text.text = RpgProgress.character.inventory.valuables === 1
@@ -82,7 +82,7 @@ function objValuablesInfo() {
 }
 
 function objPoisonLevel() {
-    return objText.Large("You are poisoned", { tint: Consts.StatusTextTint })
+    return objText.MediumIrregular("You are poisoned", { tint: Consts.StatusTextTint })
         .merge({ advance: -3 })
         .step(text => {
             const level = RpgPlayer.status.poison.level;
@@ -95,7 +95,7 @@ function objPoisonLevel() {
 
 function objPoisonBuildUp() {
     let value = RpgPlayer.status.poison.value;
-    const text = objText.Large("Poison is building...", { tint: Consts.StatusTextTint });
+    const text = objText.MediumIrregular("Poison is building...", { tint: Consts.StatusTextTint });
     const bar = objStatusBar({
         height: 1,
         width: 85,

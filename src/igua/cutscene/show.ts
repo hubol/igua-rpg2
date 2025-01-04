@@ -32,7 +32,7 @@ function objSpeakerMessageBox(speaker: DisplayObject | null) {
             yield sleepf(4);
             spr.texture = txSpeakBox;
             yield sleepf(4);
-            const nameTextObj = objText.LargeBold(name);
+            const nameTextObj = objText.MediumBoldIrregular(name);
             const nameObj = container(
                 new Graphics().beginFill(colorSecondary).drawRect(-4, -3, nameTextObj.width + 8, 13).mixin(
                     mxnBoilPivot,
@@ -42,7 +42,7 @@ function objSpeakerMessageBox(speaker: DisplayObject | null) {
 
             yield sleepf(4);
             state.isReadyToReceiveText = true;
-            const textObj = objText.LargeRegular("", { maxWidth: 224 }).step(textObj => textObj.text = state.text).at(
+            const textObj = objText.Medium("", { maxWidth: 224 }).step(textObj => textObj.text = state.text).at(
                 28,
                 41,
             ).show(self);

@@ -126,7 +126,9 @@ export function objUiIguanaDesignerRoot(layout: Layout, looks?: IguanaLooks.Seri
     objIguanaPreview().show(c);
 
     const router = context.router.at(3, 14).show(c);
-    objText.LargeBold("", { tint: UiColor.Hint }).at(3, 3).step(title => title.text = getTitleText(router.pages)).show(
+    objText.MediumBoldIrregular("", { tint: UiColor.Hint }).at(3, 3).step(title =>
+        title.text = getTitleText(router.pages)
+    ).show(
         c,
     );
 
@@ -263,7 +265,10 @@ function objUiSavePage() {
 
     puppet.x = getDesiredX();
 
-    objText.LargeBold("Is this your true self?", { tint: UiColor.Hint }).anchored(0.5, 0).at(renderer.width / 2, 64)
+    objText.MediumBoldIrregular("Is this your true self?", { tint: UiColor.Hint }).anchored(0.5, 0).at(
+        renderer.width / 2,
+        64,
+    )
         .mixin(mxnBoilSeed)
         .show(page);
 
@@ -274,12 +279,12 @@ function objUiNoteText(router: ObjUiPageRouter) {
     const c = container();
 
     const txtBacks = [[1, 0], [0, 1], [-1, 0], [0, -1]].map(v => {
-        const txtBack = objText.Large("", { tint: UiColor.Shadow }).show(c);
+        const txtBack = objText.MediumIrregular("", { tint: UiColor.Shadow }).show(c);
         txtBack.pivot.at(v);
         return txtBack;
     });
 
-    objText.Large("", { tint: UiColor.Hint })
+    objText.MediumIrregular("", { tint: UiColor.Hint })
         .step(txt => {
             const selected = router.page?.selected;
             if (selected && "note" in selected) {

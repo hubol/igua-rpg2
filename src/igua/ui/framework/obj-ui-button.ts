@@ -35,7 +35,7 @@ export function objUiButton(text: string, onPress: () => unknown, width = 96, he
 
     const bg = new Graphics().beginFill(UiColor.Background).drawRect(0, 0, width, height);
     const selection = new Graphics().lineStyle(2, UiColor.Selection, 1, 0).drawRect(0, 0, width, height);
-    const textObj = objText.Large(text, { tint: UiColor.Text }).at(32, Math.floor(height / 2) - 4);
+    const textObj = objText.MediumIrregular(text, { tint: UiColor.Text }).at(32, Math.floor(height / 2) - 4);
 
     selection.visible = false;
 

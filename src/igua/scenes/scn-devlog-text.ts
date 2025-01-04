@@ -15,11 +15,11 @@ export function scnDevlogText() {
     const seed1 = title.charCodeAt(1) * 1357;
     const seed2 = date.charCodeAt(1) * 1234;
 
-    const bg1 = objText.Tall(title, { tint: 0x000000 }).scaled(3, 3).at(32, 880 - 19).show(c);
-    const bg2 = objText.Large(date, { tint: 0x000000 }).scaled(3, 3).at(32, 930).show(c);
+    const bg1 = objText.Large(title, { tint: 0x000000 }).scaled(3, 3).at(32, 880 - 19).show(c);
+    const bg2 = objText.MediumIrregular(date, { tint: 0x000000 }).scaled(3, 3).at(32, 930).show(c);
 
-    const text1 = objText.Tall(title).scaled(bg1.scale).at(bg1.vcpy().add(bg1.scale, -1)).show(c);
-    const text2 = objText.Large(date).scaled(bg2.scale).at(bg2.vcpy().add(bg2.scale, -1)).show(c);
+    const text1 = objText.Large(title).scaled(bg1.scale).at(bg1.vcpy().add(bg1.scale, -1)).show(c);
+    const text2 = objText.MediumIrregular(date).scaled(bg2.scale).at(bg2.vcpy().add(bg2.scale, -1)).show(c);
 
     const dateTextBounds = text2.getBounds();
     const titleTextBounds = text1.getBounds();

@@ -14,7 +14,7 @@ interface ObjSignArgs {
 
 export function objSign({ title, message }: ObjSignArgs) {
     const spr = Sprite.from(Tx.Wood.Sign);
-    const text = objText.Small(title, { tint: 0x854E31 }).anchored(0.5, 0.5).at(25, 11);
+    const text = objText.XSmallIrregular(title, { tint: 0x854E31 }).anchored(0.5, 0.5).at(25, 11);
 
     return container(spr, text)
         .mixin(mxnCutscene, () => {

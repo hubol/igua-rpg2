@@ -9,7 +9,7 @@ export function objSystemMessage() {
 
     function setMessage(text: string) {
         c.removeAllChildren();
-        objText.Large(text).anchored(0, 1).coro(function* (self) {
+        objText.MediumIrregular(text).anchored(0, 1).coro(function* (self) {
             const yStart = self.y;
             yield interp(self, "y").steps(4).to(0).over(125);
             yield sleep(1500);
