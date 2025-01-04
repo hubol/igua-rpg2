@@ -1,7 +1,7 @@
 import { Container, DisplayObject } from "pixi.js";
-import { CancellationError } from "../../lib/promise/cancellation-token";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { Coro } from "../../lib/game-engine/routines/coro";
+import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 
 type CutsceneFn = () => Coro.Type;
 
@@ -36,9 +36,11 @@ export class IguaCutscene {
                     yield* fn();
                 }
                 catch (e) {
-                    if (!(e instanceof CancellationError)) {
-                        ErrorReporter.reportSubsystemError("IguaCutscene.runner", e);
+                    if (e instanceof EscapeTickerAndExecute) {
+                        throw e;
                     }
+
+                    ErrorReporter.reportSubsystemError("IguaCutscene.runner", e);
                 }
                 finally {
                     if (!runner.destroyed) {
