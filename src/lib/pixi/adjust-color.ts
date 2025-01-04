@@ -4,6 +4,8 @@
 // This is certainly an example of premature optimization
 // But it was fun to make!
 
+import { DegreesFloat, RgbInt } from "../math/number-alias-types";
+
 // ^_^
 
 const c: WorkingColor = {} as any;
@@ -15,7 +17,7 @@ interface WorkingColor {
     r: Float255;
     g: Float255;
     b: Float255;
-    h: FloatDegrees;
+    h: DegreesFloat;
     s: Float100;
     v: Float100;
     l: Float100;
@@ -24,7 +26,7 @@ interface WorkingColor {
 const rgbBuffer = { r: 0 as Float255, g: 0 as Float255, b: 0 as Float255 };
 type RgbBuffer = typeof rgbBuffer;
 
-const hsvBuffer = { h: 0 as FloatDegrees, s: 0 as Float100, v: 0 as Float100 };
+const hsvBuffer = { h: 0 as DegreesFloat, s: 0 as Float100, v: 0 as Float100 };
 type HsvBuffer = typeof hsvBuffer;
 
 function ensureHsv() {
@@ -116,8 +118,6 @@ type ForceAliasName<T> = T & { readonly __t?: unique symbol };
 type Float1 = ForceAliasName<number>;
 type Float255 = ForceAliasName<number>;
 type Float100 = ForceAliasName<number>;
-type FloatDegrees = ForceAliasName<number>;
-type PixiColor = ForceAliasName<number>;
 
 const AdjustColorChainer = {
     saturate(amount: Float1) {
@@ -160,7 +160,7 @@ const AdjustColorChainer = {
         (<HsvBuffer> buffer).v = c.v;
         return buffer as HsvBuffer;
     },
-    toPixi() {
+    toPixi(): RgbInt {
         ensureRgb();
 
         return Math.round(c.r) * 65536 + Math.round(c.g) * 256 + Math.round(c.b);
@@ -177,7 +177,7 @@ export const AdjustColor = {
         c.b = b;
         return AdjustColorChainer;
     },
-    hsv(h: FloatDegrees, s: Float100, v: Float100) {
+    hsv(h: DegreesFloat, s: Float100, v: Float100) {
         c.rgb = false;
         c.hsv = true;
         c.hsl = false;
@@ -186,7 +186,7 @@ export const AdjustColor = {
         c.v = v;
         return AdjustColorChainer;
     },
-    hsl(h: FloatDegrees, s: Float100, l: Float100) {
+    hsl(h: DegreesFloat, s: Float100, l: Float100) {
         c.rgb = false;
         c.hsv = false;
         c.hsl = true;
@@ -195,7 +195,7 @@ export const AdjustColor = {
         c.l = l;
         return AdjustColorChainer;
     },
-    pixi(src: PixiColor) {
+    pixi(src: RgbInt) {
         c.rgb = true;
         c.hsv = false;
         c.hsl = false;

@@ -1,5 +1,7 @@
+import { getColorWithHighestContrast } from "../../lib/color/get-color-with-highest-contrast";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { NpcPersonas } from "../data/npc-personas";
+import { IguanaLooks } from "../iguana/looks";
 import { mxnIguanaEditable } from "../mixins/mxn-iguana-editable";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objIguanaLocomotive } from "./obj-iguana-locomotive";
@@ -18,5 +20,16 @@ export function objIguanaNpc({ personaName }: ObjIguanaNpcArgs) {
 
     return objIguanaLocomotive(persona.looks)
         .mixin(mxnIguanaEditable, persona.looks)
-        .mixin(mxnSpeaker, { name: persona.name, color: persona.looks.head.color });
+        .mixin(mxnSpeaker, { name: persona.name, ...getSpeakerColors(persona.looks) });
+}
+
+function getSpeakerColors(looks: IguanaLooks.Serializable) {
+    return {
+        colorPrimary: looks.head.color,
+        colorSecondary: getColorWithHighestContrast(looks.head.color, [
+            looks.body.color,
+            looks.body.tail.color,
+            looks.head.crest.color,
+        ]),
+    };
 }

@@ -1,4 +1,4 @@
-import { DisplayObject, Sprite } from "pixi.js";
+import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
@@ -13,7 +13,8 @@ import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 const [txSpeakBox, txSpeakBoxOutline, txSpeakBoxTail] = Tx.Ui.Dialog.SpeakBox.split({ count: 3 });
 
 function objSpeakerMessageBox(speaker: DisplayObject | null) {
-    const color = speaker?.is(mxnSpeaker) ? speaker.speaker.color : 0x600000;
+    const colorPrimary = speaker?.is(mxnSpeaker) ? speaker.speaker.colorPrimary : 0x600000;
+    const colorSecondary = speaker?.is(mxnSpeaker) ? speaker.speaker.colorSecondary : 0x400000;
     const name = speaker?.is(mxnSpeaker) ? speaker.speaker.name : "???";
 
     const state = {
@@ -25,20 +26,31 @@ function objSpeakerMessageBox(speaker: DisplayObject | null) {
 
     return container().merge({ state }).coro(
         function* (self) {
-            const spr = Sprite.from(txSpeakBoxOutline).tinted(color).show(
+            const spr = Sprite.from(txSpeakBoxOutline).tinted(colorPrimary).show(
                 container().mixin(mxnBoilPivot).show(self),
             );
             yield sleepf(4);
             spr.texture = txSpeakBox;
+            yield sleepf(4);
+            const nameTextObj = objText.LargeBold(name);
+            const nameObj = container(
+                new Graphics().beginFill(colorSecondary).drawRect(-4, -3, nameTextObj.width + 8, 13).mixin(
+                    mxnBoilPivot,
+                ),
+                nameTextObj,
+            ).at(37, 26).show(self);
+
             yield sleepf(4);
             state.isReadyToReceiveText = true;
             const textObj = objText.LargeRegular("", { maxWidth: 224 }).step(textObj => textObj.text = state.text).at(
                 28,
                 41,
             ).show(self);
+
             yield holdf(() => state.mayBeDestroyed, 2);
             textObj.destroy();
             yield sleepf(4);
+            nameObj.destroy();
             spr.texture = txSpeakBoxOutline;
             yield sleepf(4);
             self.destroy();
