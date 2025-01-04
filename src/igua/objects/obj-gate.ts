@@ -12,7 +12,7 @@ import { RpgProgress } from "../rpg/rpg-progress";
 type Orientation = "horizontal";
 
 export function objGate(ogmoEntity: OgmoFactory.Entity, orientation: Orientation) {
-    const gfx = new Graphics().beginFill(0xffffff).drawRect(0, 0, 1, 1).scaled(64, 1);
+    const gfx = new Graphics().beginFill(0xffffff).drawRect(0, 0, 1, 1).scaled(96, 1);
     if (ogmoEntity.flippedX) {
         gfx.pivot.x = 1;
     }
