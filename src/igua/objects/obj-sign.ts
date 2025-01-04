@@ -5,6 +5,7 @@ import { show } from "../cutscene/show";
 import { objText } from "../../assets/fonts";
 import { container } from "../../lib/pixi/container";
 import { Sfx } from "../../assets/sounds";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 
 interface ObjSignArgs {
     title: string;
@@ -20,5 +21,6 @@ export function objSign({ title, message }: ObjSignArgs) {
             Sfx.Interact.SignRead.play();
             return show(message);
         })
+        .mixin(mxnSpeaker, { name: "Sign", colorPrimary: 0x600000, colorSecondary: 0x400000 })
         .at(0, -23);
 }
