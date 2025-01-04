@@ -19,6 +19,10 @@ export const objText = {
     Large(text = "", style: Style = {}) {
         return new IrregularBitmapText(text, { fontName: fntErotixLight.font, ...style });
     },
+    // TODO rename ^ LargeIrregular
+    LargeRegular(text = "", style: Style = {}) {
+        return new BitmapText(text, { fontName: fntErotixLight.font, ...style });
+    },
     LargeBold(text = "", style: Style = {}) {
         return new IrregularBitmapText(text, { fontName: fntErotix.font, ...style });
     },

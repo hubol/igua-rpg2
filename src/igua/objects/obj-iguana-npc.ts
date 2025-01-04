@@ -1,6 +1,7 @@
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { NpcPersonas } from "../data/npc-personas";
 import { mxnIguanaEditable } from "../mixins/mxn-iguana-editable";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objIguanaLocomotive } from "./obj-iguana-locomotive";
 
 interface ObjIguanaNpcArgs {
@@ -16,5 +17,6 @@ export function objIguanaNpc({ personaName }: ObjIguanaNpcArgs) {
     }
 
     return objIguanaLocomotive(persona.looks)
-        .mixin(mxnIguanaEditable, persona.looks);
+        .mixin(mxnIguanaEditable, persona.looks)
+        .mixin(mxnSpeaker, { name: persona.name, color: persona.looks.head.color });
 }

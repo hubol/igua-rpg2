@@ -1,92 +1,87 @@
-import { Graphics } from "pixi.js";
+import { DisplayObject, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { container } from "../../lib/pixi/container";
-import { approachLinear } from "../../lib/math/number";
 import { renderer } from "../current-pixi-renderer";
 import { Input, layers } from "../globals";
-import { UiColor } from "../ui/ui-color";
+import { Null } from "../../lib/types/null";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { Tx } from "../../assets/textures";
+import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { holdf } from "../../lib/game-engine/routines/hold";
+import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 
-const width = 220;
-const height = 67;
-const border = 2;
-const padding = 3;
+const [txSpeakBox, txSpeakBoxOutline, txSpeakBoxTail] = Tx.Ui.Dialog.SpeakBox.split({ count: 3 });
 
-function objMessageBox(text: string) {
-    const gfx = new Graphics()
-        .lineStyle({ color: UiColor.Selection, alignment: 0, width: border })
-        .beginFill(UiColor.Background)
-        .drawRect(0, 0, width, height);
+function objSpeakerMessageBox(speaker: DisplayObject | null) {
+    const color = speaker?.is(mxnSpeaker) ? speaker.speaker.color : 0x600000;
+    const name = speaker?.is(mxnSpeaker) ? speaker.speaker.name : "???";
 
-    const maxWidth = width - padding * 2 - border * 2;
-    const text1 = objText.Large(text, { tint: UiColor.Text, maxWidth }).at(border + padding, border + padding);
-    const text2 = objText.Large("", { tint: UiColor.Text, maxWidth }).at(text1);
+    const state = {
+        speaker,
+        isReadyToReceiveText: false,
+        text: "",
+        mayBeDestroyed: false,
+    };
 
-    const mask = new Graphics().beginFill(0xffffff).drawRect(0, 0, width, height);
-
-    const mask1 = new Graphics().beginFill(0xffffff).drawRect(0, 0, width, height);
-    const mask2 = new Graphics().beginFill(0xffffff).drawRect(0, -height, width, height);
-    const textMasks = container(mask1, mask2);
-
-    let dismissing = false;
-
-    mask.scale.y = 0;
-
-    const c = container(mask, textMasks, gfx, text1, text2)
-        .merge({
-            dismissAfterFrames: -1,
-            set text(value: string) {
-                c.dismissAfterFrames = -1;
-                if (textMasks.y > 0) {
-                    text1.text = text2.text;
-                }
-                text2.text = value;
-                textMasks.y = 0;
-            },
-        })
-        .step(() => {
-            if (c.dismissAfterFrames > 0) {
-                c.dismissAfterFrames--;
-                if (c.dismissAfterFrames === 0) {
-                    dismissing = true;
-                    if (instance === c) {
-                        instance = undefined;
-                    }
-                }
-            }
-
-            if (text2.text) {
-                textMasks.y = approachLinear(textMasks.y, height, 4);
-            }
-
-            mask.scale.y = approachLinear(mask.scale.y, dismissing ? 0 : 1, dismissing ? 0.05 : 0.1);
-            if (dismissing && mask.scale.y === 0) {
-                c.destroy();
-            }
-        });
-
-    c.mask = mask;
-    text1.mask = mask1;
-    text2.mask = mask2;
-
-    const x = Math.round((renderer.width - width) / 2);
-    return c.at(x, 0).show(layers.overlay.messages);
+    return container().merge({ state }).coro(
+        function* (self) {
+            const spr = Sprite.from(txSpeakBoxOutline).tinted(color).show(
+                container().mixin(mxnBoilPivot).show(self),
+            );
+            yield sleepf(4);
+            spr.texture = txSpeakBox;
+            yield sleepf(4);
+            state.isReadyToReceiveText = true;
+            const textObj = objText.LargeRegular("", { maxWidth: 224 }).step(textObj => textObj.text = state.text).at(
+                28,
+                41,
+            ).show(self);
+            yield holdf(() => state.mayBeDestroyed, 2);
+            textObj.destroy();
+            yield sleepf(4);
+            spr.texture = txSpeakBoxOutline;
+            yield sleepf(4);
+            self.destroy();
+        },
+    )
+        .at(Math.round((renderer.width - txSpeakBox.width) / 2), -31)
+        .show(layers.overlay.messages);
 }
 
-let instance: ReturnType<typeof objMessageBox> | undefined;
+let instance = Null<ReturnType<typeof objSpeakerMessageBox>>();
 
 function* showOneMessage(text: string) {
-    if (!instance) {
-        instance = objMessageBox(text);
+    const currentSpeaker = CtxShow.speaker?.destroyed ? null : CtxShow.speaker;
+    let currentInstance = instance?.destroyed ? null : instance;
+
+    if (currentInstance) {
+        if (currentInstance.state.speaker === currentSpeaker) {
+            currentInstance.state.mayBeDestroyed = false;
+        }
+        else {
+            currentInstance.state.mayBeDestroyed = true;
+            yield () => currentInstance!.destroyed;
+            currentInstance = null;
+        }
     }
-    else {
-        instance.text = text;
+
+    if (!currentInstance) {
+        currentInstance = objSpeakerMessageBox(currentSpeaker);
     }
+
+    yield () => currentInstance!.state.isReadyToReceiveText;
+    currentInstance.state.text = text;
 
     yield () => Input.isUp("Confirm");
     yield () => Input.isDown("Confirm");
 
-    instance!.dismissAfterFrames = 1;
+    currentInstance.state.mayBeDestroyed = true;
+    instance = currentInstance;
 }
+
+export const CtxShow = {
+    speaker: Null<DisplayObject>(),
+};
 
 export function* show(text: string, ...moreText: string[]) {
     for (const messageText of [text, ...moreText]) {
