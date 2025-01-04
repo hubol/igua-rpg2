@@ -8,7 +8,7 @@
   "directoryDepth": 5,
   "layerGridDefaultSize": {"x": 8, "y": 8},
   "levelDefaultSize": {"x": 256, "y": 256},
-  "levelMinSize": {"x": 256, "y": 256},
+  "levelMinSize": {"x": 500, "y": 280},
   "levelMaxSize": {"x": 4096, "y": 4096},
   "levelValues": [
     {"name": "Terrain Color", "definition": "RGB", "display": 0, "defaults": "#000000"}
@@ -620,7 +620,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/npc.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAA3CAYAAABO8hkCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMiSURBVGhD7ZoxaxRBFIBnI4qVRUAEEUwlUeH8CRYKemJhZ2EQxMLKoDFqipQpIsZTtLIQQWJhZyEqiIXgH/BEDVoYQQ1apLASRNZ7m/fOmdk3szOzs3ubcB8s+27u9jLfvDczu0cSMWA6L++kGIqpQ+eD+zNQEVmCCJUZwXPtcBJlGJhIbIYiTWMo0jSGIk2jcSLy/jKzOOu819S6s/tsgrDDk8j8xFxhPxtbWr6ZaWxGgJ8rPzBS4TK0YSZ7rRkB5KysbD+CEc+m7gOMVLiM1C4CXO5+dCoxTsQ08WsVcRUgdJG/rdMYCXG9tUfpe20ivhL3rl7ASIiz125hpLavPnva738tImUkCJDh2kmmcasW11kbo+1j2SBVnhHfbKSt3Rj15kG6BSMhrrz9JB7ev4uv/vOtsyCSHsaM7Lx4KZUPbK4UWcKHtEdOxNTxECHfbJRBEXHpqK9MXfRFfDro+ll9ra+STCRklF2uGVhpcXy/eSPRD2hfOsHfmZYh6X7BSAVWLODUmXPZWQfeH7GNLHVahyR+vZqwjnhIaZEMLb0kQegy8D78nSRERBbYdnDR2tk6ygtECktLR89CFVkBbHuKsmni91tFQhaBmHAyJkFraQFUXnBPszwzmrVxQInRfQ+HfAfrCnWa5o3+Ws62VeT30geM1rCJjM2vYmSmjAzBSQBeIgAn4yIhEyJEmOZc1sjJcBKELOMrIeMjVLRosCI2CQJkykgQ8lNeGbJVy7Rf2IghEZPc8uuSjSbSFwnJSpNQMgIyW8f34qv1xYYpLbacbDt0TGKtWEAuI+sVViTWSM1Ot7OD43X7BUZxqCwjJgEgtgRgFIGdmw5fXCXe394cbS6yJWR6WHLZzU0SR99NYaSyb/JPlDLOZcT2xBeSnbrIjUbRoyvw9c0jjFSe7+9glMeUEaJsZoIm+64DJzFyByRtomXnS/CqxckUjTrAybTm1kq2jEy05Rc6YxtxYOHJcnY2fQ6+I1QmJ1L0O9X44x0YCXH482R2phF1BYRIRr82dK5YL9InPknAL40U67f/pn8KoGxMHx/L4riPDUL8AxUIckKyIap8AAAAAElFTkSuQmCC"
     },
