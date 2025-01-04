@@ -93,7 +93,7 @@ export function objStatusBar(config: ObjStatusBarConfig) {
     const createText = (digit: AdjustmentDigitConfig, isPositiveSign: boolean) => {
         let life = 0;
         let value = 0;
-        const text = objText[digit.size === "small" ? "Small" : "MediumDigits"]("0", { tint: digit.tint })
+        const text = objText[digit.size === "small" ? "XSmallIrregular" : "SmallDigits"]("0", { tint: digit.tint })
             .anchored(digit.align === "left" ? 0 : 1, 1)
             .merge({
                 addDelta(delta: number) {
