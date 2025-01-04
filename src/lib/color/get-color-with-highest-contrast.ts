@@ -10,8 +10,9 @@ export function getColorWithHighestContrast(rgb: RgbInt, rgbOptions: RgbInt[]) {
 
     for (const rgbOption of rgbOptions) {
         const hsv = AdjustColor.pixi(rgbOption).toHsv();
-        const differential = degDifference(hsv.h, h) + Math.abs(hsv.s - s) + Math.abs(hsv.v - v);
+        const differential = (degDifference(hsv.h, h) / 3.6) + Math.abs(hsv.s - s) + Math.abs(hsv.v - v);
         if (differential > highestContrastDifferential) {
+            highestContrastDifferential = differential;
             highestContrastRgb = rgbOption;
         }
     }
