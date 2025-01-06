@@ -5,7 +5,7 @@
   "offsetX": 0,
   "offsetY": 0,
   "values": {"Terrain Color": "#000000"},
-  "backgroundColor": "#408000",
+  "backgroundColor": "#dcc132",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -21,7 +21,7 @@
           "name": "GateHorizontal",
           "id": 0,
           "_eid": "97593426",
-          "x": 880,
+          "x": 896,
           "y": 120,
           "height": 128,
           "originX": 0,
@@ -40,7 +40,20 @@
       "gridCellHeight": 8,
       "gridCellsX": 118,
       "gridCellsY": 54,
-      "decals": [],
+      "decals": [
+        {
+          "x": 879,
+          "y": 250,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -99,7 +112,18 @@
       "gridCellHeight": 8,
       "gridCellsX": 118,
       "gridCellsY": 54,
-      "entities": []
+      "entities": [
+        {
+          "name": "Sign",
+          "id": 0,
+          "_eid": "39046554",
+          "x": 720,
+          "y": 245,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "Town", "message": "Welcome to New Balltown.", "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "TerrainDecals",
@@ -110,7 +134,155 @@
       "gridCellHeight": 8,
       "gridCellsX": 118,
       "gridCellsY": 54,
-      "decals": [],
+      "decals": [
+        {
+          "x": 839,
+          "y": 329,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ff8787",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 791,
+          "y": 289,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 81.19844589234637,
+          "tint": "#ff8787",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 927,
+          "y": 353,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 45,
+          "tint": "#ff8787",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 807,
+          "y": 249,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ff8787",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 903,
+          "y": 249,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ff8787",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 816,
+          "y": 272,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#c14141",
+          "texture": "terrain/earth/asterisk.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 920,
+          "y": 312,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#c14141",
+          "texture": "terrain/earth/asterisk.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 914,
+          "y": 242,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#779962",
+          "texture": "foliage/small.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 892,
+          "y": 242,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#516d50",
+          "texture": "foliage/small.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 891,
+          "y": 235,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#d54430",
+          "texture": "foliage/flower 14.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 869,
+          "y": 247,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 907,
+          "y": 248,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -133,7 +305,7 @@
           "height": 184,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -146,7 +318,7 @@
           "height": 32,
           "flippedX": true,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -159,7 +331,7 @@
           "height": 32,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -172,7 +344,7 @@
           "height": 32,
           "flippedX": true,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -185,7 +357,7 @@
           "height": 32,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -198,7 +370,7 @@
           "height": 32,
           "flippedX": true,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -211,7 +383,7 @@
           "height": 32,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -224,7 +396,7 @@
           "height": 32,
           "flippedX": false,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -237,7 +409,7 @@
           "height": 32,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -250,7 +422,7 @@
           "height": 32,
           "flippedX": false,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -263,7 +435,7 @@
           "height": 32,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -276,7 +448,7 @@
           "height": 32,
           "flippedX": false,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -289,7 +461,7 @@
           "height": 32,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -302,7 +474,7 @@
           "height": 32,
           "flippedX": true,
           "flippedY": true,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -315,7 +487,7 @@
           "height": 32,
           "flippedX": true,
           "flippedY": true,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -328,7 +500,7 @@
           "height": 184,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -341,7 +513,7 @@
           "height": 16,
           "flippedX": false,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -354,7 +526,7 @@
           "height": 16,
           "flippedX": true,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0}
         },
         {
@@ -367,8 +539,47 @@
           "height": 208,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#294988",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 20,
+          "_eid": "93117141",
+          "x": 792,
+          "y": 248,
+          "width": 144,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ff8787",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 21,
+          "_eid": "95675713",
+          "x": 904,
+          "y": 328,
+          "width": 32,
+          "height": 32,
+          "flippedX": false,
+          "flippedY": true,
+          "tint": "#ff8787",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Slope",
+          "id": 22,
+          "_eid": "95675713",
+          "x": 760,
+          "y": 248,
+          "width": 32,
+          "height": 32,
+          "flippedX": false,
+          "flippedY": true,
+          "tint": "#ff8787",
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -392,7 +603,21 @@
       "gridCellHeight": 8,
       "gridCellsX": 118,
       "gridCellsY": 54,
-      "decals": [],
+      "decals": [
+        {
+          "x": 904,
+          "y": 243,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#779962",
+          "texture": "foliage/small.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -404,7 +629,13 @@
       "gridCellHeight": 8,
       "gridCellsX": 118,
       "gridCellsY": 54,
-      "decals": [],
+      "decals": [
+        {"x": 776, "y": 208, "scaleX": -2, "scaleY": -2, "rotation": 90, "tint": "#c44b17", "texture": "sky/cloud0.png", "originX": 0.5, "originY": 0.5, "groupName": "OutskirtsSeam"},
+        {"x": 816, "y": 184, "scaleX": 2, "scaleY": -2, "rotation": 90, "tint": "#520e1a", "texture": "sky/cloud0.png", "originX": 0.5, "originY": 0.5, "groupName": "OutskirtsSeam"},
+        {"x": 764, "y": 151, "scaleX": 1, "scaleY": 1, "rotation": 90, "tint": "#c44b17", "texture": "terrain/grass/jagged.png", "originX": 0.5, "originY": 0.5, "groupName": "OutskirtsSeam"},
+        {"x": 780, "y": -1, "scaleX": -1, "scaleY": 1, "rotation": 110, "tint": "#c44b17", "texture": "terrain/grass/jagged.png", "originX": 0.5, "originY": 0.5, "groupName": "OutskirtsSeam"},
+        {"x": 745, "y": 70, "scaleX": 1, "scaleY": 1, "rotation": 90, "tint": "#c44b17", "texture": "terrain/grass/jagged.png", "originX": 0.5, "originY": 0.5, "groupName": "OutskirtsSeam"}
+      ],
       "folder": "../textures"
     }
   ]
