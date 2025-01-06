@@ -22,10 +22,10 @@ export function objValuableSpawner(positions: VectorSimple[]) {
                     index = valuables.findIndex(item => item === null);
                 }
                 else {
-                    const offset = Rng.int(valuables.length);
-                    for (let i = 0; i < valuables.length; i++) {
-                        const indexToCheck = (offset + i) % valuables.length;
-                        if (valuables[indexToCheck] === null) {
+                    const offset = Rng.int(positions.length);
+                    for (let i = 0; i < positions.length; i++) {
+                        const indexToCheck = (offset + i) % positions.length;
+                        if (!valuables[indexToCheck]) {
                             index = indexToCheck;
                             break;
                         }
