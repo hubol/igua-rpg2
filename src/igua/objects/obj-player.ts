@@ -2,7 +2,7 @@ import { DisplayObject, Rectangle } from "pixi.js";
 import { Instances } from "../../lib/game-engine/instances";
 import { vnew } from "../../lib/math/vector-type";
 import { merge } from "../../lib/object/merge";
-import { Cutscene, Input, layers } from "../globals";
+import { Cutscene, Input, layers, scene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { MxnRpgStatus, mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { RpgFaction } from "../rpg/rpg-faction";
@@ -13,6 +13,7 @@ import { ObjIguanaLocomotive, ObjIguanaLocomotiveAutoFacingMode, objIguanaLocomo
 import { StepOrder } from "./step-order";
 import { force } from "../mixins/mxn-physics";
 import { Sfx } from "../../assets/sounds";
+import { CtxGate } from "./obj-gate";
 
 const PlayerConsts = {
     // TODO probably not constants, probably derived from status
@@ -39,6 +40,19 @@ function objPlayer(looks: IguanaLooks.Serializable) {
 
     const puppet = iguanaLocomotiveObj
         .mixin(mxnRpgStatus, { status: RpgPlayer.status, effects, hurtboxes: [iguanaLocomotiveObj] })
+        .handles("moved", () => {
+            if (CtxGate.value.isGateTransitionActive) {
+                return;
+            }
+
+            const xPrevious = puppet.x;
+            puppet.x = Math.max(24, Math.min(puppet.x, scene.level.width - 24));
+            if (puppet.x !== xPrevious) {
+                puppet.speed.x = 0;
+                puppet.pedometer = 0;
+                puppet.gait = 0;
+            }
+        })
         .handles("damaged", (_, result) => {
             if (!result.rejected && result.damaged) {
                 // TODO different sound effect for ducked/defended damage?

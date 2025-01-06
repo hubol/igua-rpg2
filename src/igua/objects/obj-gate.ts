@@ -4,6 +4,9 @@ import { playerObj } from "./obj-player";
 import { Cutscene } from "../globals";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { SceneChanger } from "../systems/scene-changer";
+import { SceneLocal } from "../../lib/game-engine/scene-local";
+
+export const CtxGate = new SceneLocal(() => ({ isGateTransitionActive: false }), "CtxGate");
 
 // TODO vertical
 type Orientation = "horizontal";
@@ -29,6 +32,7 @@ export function objGate(ogmoEntity: OgmoFactory.Entity, orientation: Orientation
             // Cutscenes are (thankfully?) not interruptible.
             // Either way, probably don't want the letterbox to appear!
             Cutscene.play(function* () {
+                CtxGate.value.isGateTransitionActive = true;
                 playerObj.isBeingPiloted = true;
                 playerObj.isDucking = false;
                 playerObj.isMovingLeft = false;
