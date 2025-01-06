@@ -41,7 +41,7 @@ export function objGate(ogmoEntity: OgmoFactory.Entity, orientation: Orientation
                 yield sleepf(20);
                 // TODO need to escape ticker and execute?
                 sceneChanger.changeScene();
-            });
+            }, { letterbox: false });
         });
     }
 

@@ -27,7 +27,7 @@ export function objHud() {
 
     const statusObjs = [valuablesInfoObj, poisonLevelObj, poisonBuildUpObj];
 
-    return container(objCutsceneIndicator().at(-3, -3), healthBarObj, ...statusObjs)
+    return container(objCutsceneLetterbox().at(-3, -3), healthBarObj, ...statusObjs)
         .at(3, 3)
         .merge({ healthBarObj, effectiveHeight: 0 })
         .step(self => {
@@ -56,15 +56,15 @@ export function objHud() {
 
 export type ObjHud = ReturnType<typeof objHud>;
 
-function objCutsceneIndicator() {
+function objCutsceneLetterbox() {
     return new Graphics().beginFill(0x101010).drawRect(0, renderer.height - 12, renderer.width, 12).coro(
         function* (self) {
             while (true) {
                 self.scale.x = 0;
                 self.pivot.x = 0;
-                yield () => Cutscene.isPlaying;
+                yield () => Boolean(Cutscene.current) && Cutscene.current!.attributes.letterbox;
                 yield interp(self.scale, "x").factor(factor.sine).to(1).over(250);
-                yield () => !Cutscene.isPlaying;
+                yield () => !Cutscene.current?.attributes?.letterbox;
                 yield interp(self.pivot, "x").steps(16).to(-renderer.width).over(300);
             }
         },

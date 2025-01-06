@@ -5,6 +5,12 @@ import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 
 type CutsceneFn = () => Coro.Type;
 
+const defaultCutsceneAttributes = {
+    letterbox: true,
+};
+
+type CutsceneAttributes = typeof defaultCutsceneAttributes;
+
 export class IguaCutscene {
     private readonly _container: ReturnType<typeof IguaCutscene._objCutsceneContainer>;
 
@@ -13,10 +19,10 @@ export class IguaCutscene {
     }
 
     private static _objCutsceneContainer() {
-        return new Container<DisplayObject & { fn: CutsceneFn }>();
+        return new Container<DisplayObject & { fn: CutsceneFn; attributes: CutsceneAttributes }>();
     }
 
-    play(fn: CutsceneFn) {
+    play(fn: CutsceneFn, attributes?: Partial<CutsceneAttributes>) {
         if (this.isPlaying) {
             const context = {
                 requestedCutsceneFn: fn,
@@ -30,7 +36,7 @@ export class IguaCutscene {
         }
 
         const runner = new Container().named("Cutscene Runner")
-            .merge({ fn })
+            .merge({ fn, attributes: { ...defaultCutsceneAttributes, ...attributes } })
             .coro(function* () {
                 try {
                     yield* fn();
@@ -53,5 +59,9 @@ export class IguaCutscene {
 
     get isPlaying() {
         return this._container.children.length > 0;
+    }
+
+    get current(): { attributes: CutsceneAttributes } | null {
+        return this._container.children.last ?? null;
     }
 }
