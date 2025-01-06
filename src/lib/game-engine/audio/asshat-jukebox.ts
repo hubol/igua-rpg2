@@ -1,4 +1,6 @@
 import { intervalWait } from "../../browser/interval-wait";
+import { timeoutSleep } from "../../browser/timeout-sleep";
+import { Milliseconds } from "../../math/number-alias-types";
 import { Sound, SoundInstance } from "./sound";
 
 export type MusicTrack = string & { readonly __t: unique symbol };
@@ -17,19 +19,26 @@ export class AsshatJukebox {
         this._loader = new MusicTrackLoader(_destination);
     }
 
-    play(track: MusicTrack) {
-        setTimeout(() => this.playAsync(track));
+    play(track: MusicTrack, fadeOutMs: Milliseconds = 1000) {
+        setTimeout(() => this.playAsync(track, fadeOutMs));
         return this;
     }
 
     private _latestPlayRequest?: MusicTrack;
 
-    async playAsync(track: MusicTrack) {
+    async playAsync(track: MusicTrack, fadeOutMs: Milliseconds = 1000) {
         this._latestPlayRequest = track;
         if (this._nowPlaying?.track === track) {
+            this._nowPlaying.instance.linearRamp("gain", 1, 1);
             return;
         }
-        const sound = await this._loader.load(track);
+        if (this._nowPlaying) {
+            this._nowPlaying.instance.linearRamp("gain", 0, fadeOutMs / 1000);
+        }
+        const [sound] = await Promise.all([
+            this._loader.load(track),
+            ...this._nowPlaying ? [timeoutSleep(fadeOutMs)] : [],
+        ]);
         if (this._latestPlayRequest === track) {
             this._nowPlaying?.instance?.stop();
             const instance = sound.with.loop(true).playInstance();
