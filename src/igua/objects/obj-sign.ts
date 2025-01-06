@@ -22,5 +22,5 @@ export function objSign({ title, message }: ObjSignArgs) {
             return show(message);
         })
         .mixin(mxnSpeaker, { name: "Sign", colorPrimary: 0x600000, colorSecondary: 0x400000 })
-        .at(0, -23);
+        .at(0, -26);
 }

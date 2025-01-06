@@ -226,16 +226,6 @@
       "gridCellsY": 68,
       "entities": [
         {
-          "name": "Sign",
-          "id": 0,
-          "_eid": "39046554",
-          "x": 640,
-          "y": 141,
-          "originX": 0,
-          "originY": 23,
-          "values": {"title": "Outskirts", "message": "The outskirts of town.", "name": "", "depth": 0}
-        },
-        {
           "name": "IguanaNpc",
           "id": 19,
           "_eid": "90326278",
@@ -300,6 +290,16 @@
           "originY": 52,
           "flippedX": true,
           "values": {"personaName": "BalltownOutskirtsMiner", "name": "MinerNpc", "depth": 0}
+        },
+        {
+          "name": "Sign",
+          "id": 26,
+          "_eid": "39046554",
+          "x": 640,
+          "y": 144,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "Outskirts", "message": "The outskirts of town.", "name": "", "depth": 0}
         }
       ]
     },
