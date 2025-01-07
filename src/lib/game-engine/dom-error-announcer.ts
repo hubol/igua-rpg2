@@ -1,40 +1,39 @@
 import { elRuntimeErrorsRoot } from "./elements/el-runtime-errors-root";
-import { DefaultErrorAnnouncer, ErrorAnnouncer } from "./error-reporter";
+import { DefaultErrorAnnouncer, ErrorAnnouncer, ReportedErrorNature } from "./error-reporter";
 
-export function createDomErrorAnnouncer(): ErrorAnnouncer {
-    const errorRoot = createDomErrorRoot();
-    document.body.appendChild(errorRoot.el);
+export class DomErrorAnnouncer implements ErrorAnnouncer {
+    readonly errorRoot = createDomErrorRoot();
 
-    return {
-        onSubsystemError(subsystem: string, error: any, ...context: any[]): void {
-            DefaultErrorAnnouncer.onSubsystemError(subsystem, error, ...context);
-            errorRoot.increaseErrorCountForSubsystem(subsystem, `${error}`);
-        },
+    constructor() {
+        document.body.appendChild(this.errorRoot.el);
+    }
 
-        onUnhandledError(error: any): void {
-            DefaultErrorAnnouncer.onUnhandledError(error);
-            errorRoot.increaseErrorCountForSubsystem("Unhandled", `${error}`);
-        },
-    };
+    onError(nature: ReportedErrorNature, subsystem: string, error: any, ...context: any[]): void {
+        DefaultErrorAnnouncer.onError(nature, subsystem, error, ...context);
+        this.errorRoot.increaseErrorCountForSubsystem(nature, subsystem, `${error}`);
+    }
 }
 
 function createDomErrorRoot() {
     const el = elRuntimeErrorsRoot();
 
-    const domErrors: Record<string, ReturnType<typeof createDomError>> = {};
+    const domErrors: Record<string, Record<ReportedErrorNature, ReturnType<typeof createDomError>>> = {};
 
-    const getDomError = (subsystem: string) => {
-        if (!domErrors[subsystem]) {
-            const domError = createDomError(subsystem);
+    const getDomError = (nature: ReportedErrorNature, subsystem: string) => {
+        if (!domErrors[subsystem]?.[nature]) {
+            if (!domErrors[subsystem]) {
+                domErrors[subsystem] = {} as any;
+            }
+            const domError = createDomError(nature, subsystem);
             el.appendChild(domError.el);
-            domErrors[subsystem] = domError;
+            domErrors[subsystem][nature] = domError;
         }
 
-        return domErrors[subsystem];
+        return domErrors[subsystem][nature];
     };
 
-    const increaseErrorCountForSubsystem = (subsystem: string, error: string) => {
-        const domError = getDomError(subsystem);
+    const increaseErrorCountForSubsystem = (nature: ReportedErrorNature, subsystem: string, error: string) => {
+        const domError = getDomError(nature, subsystem);
         domError.updateUniqueErrors(error);
         domError.increaseErrorCount();
     };
@@ -45,10 +44,15 @@ function createDomErrorRoot() {
     };
 }
 
-function createDomError(subsytem: string) {
+function createDomError(nature: ReportedErrorNature, subsytem: string) {
     const el = document.createElement("div");
 
     el.className = "error";
+    el.dataset.nature = nature;
+
+    const natureEl = document.createElement("div");
+    natureEl.className = "nature";
+    natureEl.textContent = nature;
 
     const subsystemEl = document.createElement("div");
     subsystemEl.className = "subsystem";
@@ -59,7 +63,7 @@ function createDomError(subsytem: string) {
     const uniqueErrorCountEl = document.createElement("div");
     uniqueErrorCountEl.className = "unique_count";
 
-    el.append(subsystemEl, errorCountEl, uniqueErrorCountEl);
+    el.append(natureEl, subsystemEl, errorCountEl, uniqueErrorCountEl);
 
     subsystemEl.textContent = subsytem;
     let errorCount = 0;

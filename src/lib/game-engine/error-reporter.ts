@@ -1,9 +1,14 @@
+export enum ReportedErrorNature {
+    Misconfigured = "Misconfigured",
+    AssertFailed = "AssertFailed",
+    ContractViolated = "ContractViolated",
+    Unexpected = "Unexpected",
+    Unhandled = "Unhandled",
+}
+
 const defaultErrorAnnouncer = {
-    onUnhandledError(error: any) {
-        console.error("Unhandled error\n\n", error);
-    },
-    onSubsystemError(subsystem: string, error: any, ...context: any[]) {
-        const args = ["Error in " + subsystem + "\n\n", error];
+    onError(nature: ReportedErrorNature, source: string, error: any, ...context: any[]) {
+        const args = [nature + " Error in " + source + "\n\n", error];
         if (context.length) {
             args.push("\n\nContext:\n", ...context);
         }
@@ -19,9 +24,9 @@ export const DefaultErrorAnnouncer: ErrorAnnouncer = defaultErrorAnnouncer;
 class ErrorReporterImpl {
     announcer: ErrorAnnouncer = defaultErrorAnnouncer;
 
-    reportUnhandledError(error: any) {
+    reportUnhandledError(source: string, error: any) {
         try {
-            this.announcer.onUnhandledError(error);
+            this.announcer.onError(ReportedErrorNature.Unhandled, source, error);
         }
         catch (e) {
             console.error("Unexpected error while reporting unhandled error to announcer!");
@@ -29,19 +34,19 @@ class ErrorReporterImpl {
     }
 
     reportMisconfigurationError(subsystem: string, error: Error, ...context: any[]) {
-        this.announcer.onSubsystemError(subsystem, error, ...context);
+        this.announcer.onError(ReportedErrorNature.Misconfigured, subsystem, error, ...context);
     }
 
     reportAssertError(subsystem: string, error: Error, ...context: any[]) {
-        this.announcer.onSubsystemError(subsystem, error, ...context);
+        this.announcer.onError(ReportedErrorNature.AssertFailed, subsystem, error, ...context);
     }
 
     reportContractViolationError(subsystem: string, error: Error, ...context: any[]) {
-        this.announcer.onSubsystemError(subsystem, error, ...context);
+        this.announcer.onError(ReportedErrorNature.ContractViolated, subsystem, error, ...context);
     }
 
     reportUnexpectedError(subsystem: string, error: Error, ...context: any[]) {
-        this.announcer.onSubsystemError(subsystem, error, ...context);
+        this.announcer.onError(ReportedErrorNature.Unexpected, subsystem, error, ...context);
     }
 }
 

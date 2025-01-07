@@ -1,7 +1,6 @@
 import { loadLaunchAssets } from "./igua/launch/load-launch-assets";
 import { showLoadingScreen } from "./igua/launch/show-loading-screen";
 import { integralUpscaleCanvas } from "./lib/browser/integral-upscale-canvas";
-import { createDomErrorAnnouncer } from "./lib/game-engine/dom-error-announcer";
 import { ErrorReporter } from "./lib/game-engine/error-reporter";
 import { createPixiRenderer } from "./lib/game-engine/pixi-renderer";
 import { JobProgress } from "./lib/game-engine/job-progress";
@@ -9,6 +8,7 @@ import { initializeAsshatAudioContext } from "./lib/game-engine/audio/asshat-aud
 import { Environment } from "./lib/environment";
 import { settings } from "pixi.js";
 import { setCurrentPixiRenderer } from "./igua/current-pixi-renderer";
+import { DomErrorAnnouncer } from "./lib/game-engine/dom-error-announcer";
 
 // https://esbuild.github.io/api/#live-reload
 if (Environment.isDev) {
@@ -71,10 +71,13 @@ function showFatalError(error) {
 
 window.onload = initialize;
 
-window.addEventListener("unhandledrejection", (e) => ErrorReporter.reportUnhandledError(e.reason));
-window.addEventListener("error", (e) => ErrorReporter.reportUnhandledError(e));
+window.addEventListener(
+    "unhandledrejection",
+    (e) => ErrorReporter.reportUnhandledError("window.on('unhandledrejection')", e.reason),
+);
+window.addEventListener("error", (e) => ErrorReporter.reportUnhandledError("window.on('error')", e));
 
-ErrorReporter.announcer = createDomErrorAnnouncer();
+ErrorReporter.announcer = new DomErrorAnnouncer();
 
 function addGameCanvasToDocument(element: HTMLCanvasElement) {
     element.id = "game_canvas";
