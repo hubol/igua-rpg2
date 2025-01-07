@@ -92,6 +92,7 @@ function createDomError(nature: ReportedErrorNature, subsytem: string) {
     };
 
     const update = () => {
+        el.title = [...uniqueErrors].join("\n");
         el.classList[errorCount === 0 ? "add" : "remove"]("empty");
         errorCountEl.textContent = "" + errorCount;
 
