@@ -25,7 +25,7 @@ export class SceneChanger {
     static create({ sceneName, checkpointName }: CreateArgs) {
         const scene = SceneLibrary.maybeFindByName(sceneName);
         if (!scene) {
-            ErrorReporter.reportSubsystemError(
+            ErrorReporter.reportContractViolationError(
                 "SceneChanger.create",
                 new Error(`Scene with name "${sceneName}" does not exist!`),
             );

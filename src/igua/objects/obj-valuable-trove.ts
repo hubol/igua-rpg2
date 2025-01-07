@@ -20,7 +20,7 @@ function solveCounts(total: number) {
     }
 
     if (total !== 0) {
-        ErrorReporter.reportDevOnlyState("Did not solveCounts as expected", { total, result });
+        ErrorReporter.reportAssertError("solveCounts", new Error("Did not solveCounts as expected"), { total, result });
     }
 
     return result;

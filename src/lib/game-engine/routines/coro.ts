@@ -46,7 +46,8 @@ export namespace Coro {
             }
         }
 
-        ErrorReporter.reportDevOnlyState(
+        ErrorReporter.reportContractViolationError(
+            "Coro.runner",
             new Error(`Possible infinite coro loop detected!`),
             generator,
             state.predicate,

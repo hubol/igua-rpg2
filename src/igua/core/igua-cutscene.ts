@@ -28,9 +28,9 @@ export class IguaCutscene {
                 requestedCutsceneFn: fn,
                 currentCutsceneFns: this._container.children.map(({ fn }) => fn),
             };
-            ErrorReporter.reportSubsystemError(
+            ErrorReporter.reportContractViolationError(
                 "IguaCutscene.play",
-                "Started cutscene while another was playing",
+                new Error("Started cutscene while another was playing"),
                 context,
             );
         }
@@ -46,7 +46,7 @@ export class IguaCutscene {
                         throw e;
                     }
 
-                    ErrorReporter.reportSubsystemError("IguaCutscene.runner", e);
+                    ErrorReporter.reportUnexpectedError("IguaCutscene.runner", e as Error);
                 }
                 finally {
                     if (!runner.destroyed) {

@@ -63,7 +63,7 @@ export class AsshatTicker implements IAsshatTicker {
                 e.execute();
                 return;
             }
-            ErrorReporter.reportSubsystemError("AsshatTicker.tick", e);
+            ErrorReporter.reportUnexpectedError("AsshatTicker.tick", e as Error);
         }
     }
 
@@ -99,7 +99,7 @@ export class AsshatTicker implements IAsshatTicker {
                     if (e instanceof EscapeTickerAndExecute) {
                         throw e;
                     }
-                    ErrorReporter.reportSubsystemError("AsshatTicker.tickImpl", e, task);
+                    ErrorReporter.reportUnexpectedError("AsshatTicker.tickImpl", e as Error, task);
                 }
 
                 if (shift) {

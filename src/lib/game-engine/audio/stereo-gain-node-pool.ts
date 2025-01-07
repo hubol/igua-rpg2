@@ -64,7 +64,8 @@ export class StereoGainNode {
 
     setSource(sourceNode: AudioBufferSourceNode) {
         if (this._isDisposed) {
-            ErrorReporter.reportDevOnlyState(
+            ErrorReporter.reportContractViolationError(
+                "StereoGainNode",
                 new Error("Called StereoGainNodePair.setSource() when _isDisposed is true!"),
                 { sourceNode },
             );

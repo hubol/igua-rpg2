@@ -13,8 +13,10 @@ interface ObjIguanaNpcArgs {
 export function objIguanaNpc({ personaName }: ObjIguanaNpcArgs) {
     let persona = NpcPersonas[personaName];
     if (!persona) {
-        // TODO make special invalid configuration error (see objDoor)
-        ErrorReporter.reportSubsystemError("objIguanaNpc", `NpcPersona "${personaName}" does not exist!`);
+        ErrorReporter.reportMisconfigurationError(
+            "objIguanaNpc",
+            new Error(`NpcPersona "${personaName}" does not exist!`),
+        );
         persona = NpcPersonas.__Unknown__;
     }
 

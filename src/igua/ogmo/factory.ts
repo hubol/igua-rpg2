@@ -47,7 +47,7 @@ export namespace OgmoFactory {
         layerName: string,
     ): ReturnType<TFn> {
         if (typeof fn !== "function") {
-            ErrorReporter.reportSubsystemError(
+            ErrorReporter.reportContractViolationError(
                 "OgmoFactory",
                 new Error("Received fn argument that is not a function. Is OgmoEntityResolvers up to date?"),
                 { fn },
@@ -107,8 +107,7 @@ export namespace OgmoFactory {
         if (decal.groupName) {
             const decalGroup = decalGroups.get(decal.groupName);
             if (!decalGroup) {
-                // TODO plz figure out how to classify error severity
-                ErrorReporter.reportSubsystemError(
+                ErrorReporter.reportContractViolationError(
                     "createDecal",
                     new Error(`Could not find Decal Group with name: ${decal.groupName}`),
                 );
@@ -127,7 +126,7 @@ export namespace OgmoFactory {
         const obj = container().named(`Decal Group: ${groupName}`).merge({ groupName });
 
         if (decalGroups.has(groupName)) {
-            ErrorReporter.reportSubsystemError(
+            ErrorReporter.reportContractViolationError(
                 "createDecalGroup",
                 new Error(`createDecalGroup called when decalGroup already exists with groupName: ${groupName}`),
                 { decalGroup: decalGroups.get(groupName) },
