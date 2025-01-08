@@ -39,6 +39,9 @@ export function objPocketableItem(item: RpgPocket.Item) {
                     }
                 }
             });
+        // TODO SFX, VFX
+        // Bounce is kind of bad
+        // Really need to figure out a smart way to compute this for many situations...
         physicsObj.speed.at(playerObj.speed);
         if (physicsObj.speed.x === 0) {
             physicsObj.speed.x = Rng.intp();
