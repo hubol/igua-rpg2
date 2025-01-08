@@ -37,7 +37,7 @@ export function mxnPhysics(
         );
     }
 
-    const positionDecimal = vnew();
+    const positionDecimal = obj.vcpy();
     let setPositionDecimalOnTransformChanged = true;
 
     const cb = obj.transform.position.cb.bind(obj.transform);
