@@ -14,6 +14,7 @@ import { objWaterDripSource } from "../objects/obj-water-drip-source";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { OgmoFactory } from "./factory";
 import { objGate } from "../objects/obj-gate";
+import { objPocketableItemSpawner } from "../objects/obj-pocketable-item-spawner";
 
 export const OgmoEntityResolvers = {
     "Player": (entity) => createOrConfigurePlayerObj(entity),
@@ -48,6 +49,8 @@ export const OgmoEntityResolvers = {
     "Marker": (entity) => vnew(entity),
     "Region": () => new Graphics().beginFill(0x00ff00).drawRect(0, 0, 1, 1).invisible(),
     "GateHorizontal": (entity) => objGate(entity, "horizontal"),
+    // TODO somehow configure item to spawn
+    "PocketableItemA": (entity) => objPocketableItemSpawner(vnew(entity)).at(entity, -1),
 } satisfies Record<string, (e: OgmoFactory.Entity) => unknown>;
 
 function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?: string) {

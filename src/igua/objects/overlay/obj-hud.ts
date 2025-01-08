@@ -9,6 +9,7 @@ import { RpgProgress } from "../../rpg/rpg-progress";
 import { renderer } from "../../current-pixi-renderer";
 import { Cutscene } from "../../globals";
 import { factor, interp } from "../../../lib/game-engine/routines/interp";
+import { DataPocketItem } from "../../data/data-pocket-item";
 
 const Consts = {
     StatusTextTint: 0x00ff00,
@@ -25,7 +26,7 @@ export function objHud() {
     const poisonBuildUpObj = objPoisonBuildUp();
     const poisonLevelObj = objPoisonLevel();
 
-    const statusObjs = [valuablesInfoObj, poisonLevelObj, poisonBuildUpObj];
+    const statusObjs = [valuablesInfoObj, objPocketInfo(), poisonLevelObj, poisonBuildUpObj];
 
     return container(objCutsceneLetterbox().at(-3, -3), healthBarObj, ...statusObjs)
         .at(3, 3)
@@ -69,6 +70,19 @@ function objCutsceneLetterbox() {
             }
         },
     );
+}
+
+function objPocketInfo() {
+    return objText.MediumIrregular("", { tint: Consts.StatusTextTint }).invisible()
+        .step(self => {
+            const slot = RpgProgress.character.inventory.pocket.slots[0];
+            // TODO multiple slots lol
+            self.visible = slot.count > 0;
+            if (self.visible) {
+                self.text = "Your pocket has " + DataPocketItem[slot.item!].name + "x" + slot.count;
+                self.seed = slot.count + 80_000;
+            }
+        });
 }
 
 function objValuablesInfo() {

@@ -527,7 +527,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/sign.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAdCAYAAADoxT9SAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFPSURBVFhHY2SgIliR5/8fyqQriJi0kRHukYFyBCXA1kcGymJgAHuEFp4QFxaAskgDapY8UBYqeKgMZaABnecsYJppoGJCio8LKyYXMNLbIzJCvFAWdqBoxQ9loQJcMSJ/F0Iz7m+MJ+iRl28/QFmUAUKegAFSPPNv8UeGJ+8+MzBB+UMCgEIfhkEeAGEYoGvSIjZGSAWgGKF7HsEFyPUkyBMgMKSSFjIAeQDmCRAYNDFCKRiyMYIOiCp+qQWoVYxjA8MnRkbzyCADIydpvfz4FcpCBeL83FAWbQCp3QCCMQJyMDY82MCwyew08QioDw1lkgRa/QxR3KKsIAdl4QfwPjsxnrn74BGUBQHVm85TdeACBNA9AgLE2kNQETbDQWCweWRQFb88gsIYmFgwcipEbKEEwoMNjJwYGSqA6JJnYrwLSomSv3AP1Ust8gEDAwBIVG4j090eZwAAAABJRU5ErkJggg=="
     },
@@ -940,6 +940,51 @@
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/gate horizontal.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAACACAYAAAD03Gy6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAPlSURBVHhe7ZhRjtswDESzPUm/e4Wev1fY796kDZ1ISCQFMKUhCcrzAGcRY5Nnc0wq9tftdvt330gQRwA/f38/3hFX/v75dfyVAKQLuDlupeY/7i+vSEdws98qbQDEmaUApI3K9tzlyg5+WAdEFaGQ1Q8dQQxB74evAQxB518K4P479ku259uKVxF28EM6ILIIQmY/bAQxhDk/dA34dBBehcjohy/Co4PwJJtf/lkSkg+W9wcWV43m4Db315p3HSBiC/lZruaHjyCioxtBbfqatn1l9nsu4q81l51vAcjLKqiTmCWBv9YcPoJauTfZ/NAARnLPqy+jHxYAiz/nN/sV5HnyI7L4IQG06XuffGa/WQeQc8ADyNL6Vsz4y613t4gQM2rNOYKCYQDBMIBgGEAwDCAYBhAMAwiGAQTDAIJhAMEsBSC302V77nJlBz+sA6KKUMjqh44ghqD3w9cAhqDzLwUgz75Hz7+9irCDH9IBkUUQMvthI4ghzPmha8Cng/AqREY/fBEeHYQn2fzyz5KQfLC8P7C4ajQHt7m/1rzrABFbyM9yNT98BBEd3Qhq09e07Suz33MRf6257HwLQF5WQZ3ELAn8tebwEdTKvcnmhwYwkntefRn9sABY/Dm/2a8gz5MfkcUPCaBN3/vkM/vNOoCcAx5Alta3YsZfbr27RYSYUWvOERQMAwiGAQTDAIJhAMEwgGAYQDAMIBgGEAwDCGYpALmdLttzlys7+GEdEFWEQlY/dAQxBL0fvgYwBJ1/KQB59j16/u1VhB38kA6ILIKQ2Q8bQQxhzg9dAz4dhFchMvrhi/DoIDzJ5pd/loTkg+X9gcVVozm4zf215l0HiNhCfpar+eEjiOjoRlCbvqZtX5n9nov4a81l51sA8rIK6iRmSeCvNYePoFbuTTY/NICR3PPqy+iHBcDiz/nNfgV5nvyILH5IAG363ief2W/WAeQc8ACytL4VM/5y690tIsSMWnOOoGAYQDAMIBgGEAwDCIYBBMMAgmEAwTCAYBhAMEsByO102Z67XNnBD+uAqCIUsvqhI4gh6P3wNYAh6PxLAciz79Hzb68i7OCHdEBkEYTMftgIYghzfuga8OkgvAqR0Q9fhEcH4Uk2v/yzJCQfLO8PLK4azcFt7q817zpAxBbys1zNDx9BREc3gtr0NW37yuz3XMRfay473wKQl1VQJzFLAn+tOXwEtXJvsvmhAYzknldfRj8sABZ/zm/2K8jz5Edk8UMCaNP3PvnMfrMOIOeAB5Cl9a2Y8Zdb724RIWbUmnMEBcMAgmkDKKOIm+1WkQXjeC5B/Lkv2I8AHm+JP7fbf1JOtgXscPzRAAAAAElFTkSuQmCC"
+    },
+    {
+      "exportID": "30330516",
+      "name": "PocketableItemA",
+      "limit": -1,
+      "size": {"x": 24, "y": 24},
+      "origin": {"x": 12, "y": 12},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/pocket item a.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADdSURBVEhLvZSBDcIwDAQDU5RVYDBWoIMxC2OAvtJXH+M4Dig9qW3cfv12kva0PK7vMpEzTq/7czuUVmyvAGO9r/FmAC7rrRJ5sYd9xjGvu0GUxGK10btVBwRjfYkx0Zgafa5MX+TKgFV71bS6YAfAxmCfIgUiCnUMbExTryjgGkQgkSaDmVc5GTawHYBWcvB3Bz2O+VVkGa0epA008YhJysBLmDXpGmgiu4MyJukp0sTRtrSEBpkKe5rmNs3OMRj+0EaSg0j/1YGKM3Pd0zfXILuQPV16F/3K5H9RKR+h7Jp3nTaEQwAAAABJRU5ErkJggg=="
     }
   ],
   "tilesets": []
