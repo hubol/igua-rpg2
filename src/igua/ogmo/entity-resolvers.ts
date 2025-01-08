@@ -15,6 +15,7 @@ import { RpgProgress } from "../rpg/rpg-progress";
 import { OgmoFactory } from "./factory";
 import { objGate } from "../objects/obj-gate";
 import { objPocketableItemSpawner } from "../objects/obj-pocketable-item-spawner";
+import { RpgPocket } from "../rpg/rpg-pocket";
 
 export const OgmoEntityResolvers = {
     "Player": (entity) => createOrConfigurePlayerObj(entity),
@@ -50,7 +51,8 @@ export const OgmoEntityResolvers = {
     "Region": () => new Graphics().beginFill(0x00ff00).drawRect(0, 0, 1, 1).invisible(),
     "GateHorizontal": (entity) => objGate(entity, "horizontal"),
     // TODO somehow configure item to spawn
-    "PocketableItemA": (entity) => objPocketableItemSpawner(vnew(entity)).at(entity, -1),
+    "PocketableItemA": (entity) => objPocketableItemSpawner(vnew(entity), RpgPocket.Item.BallFruitTypeA).at(entity, -1),
+    "PocketableItemB": (entity) => objPocketableItemSpawner(vnew(entity), RpgPocket.Item.BallFruitTypeB).at(entity, -1),
 } satisfies Record<string, (e: OgmoFactory.Entity) => unknown>;
 
 function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?: string) {

@@ -985,6 +985,51 @@
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/pocket item a.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADdSURBVEhLvZSBDcIwDAQDU5RVYDBWoIMxC2OAvtJXH+M4Dig9qW3cfv12kva0PK7vMpEzTq/7czuUVmyvAGO9r/FmAC7rrRJ5sYd9xjGvu0GUxGK10btVBwRjfYkx0Zgafa5MX+TKgFV71bS6YAfAxmCfIgUiCnUMbExTryjgGkQgkSaDmVc5GTawHYBWcvB3Bz2O+VVkGa0epA008YhJysBLmDXpGmgiu4MyJukp0sTRtrSEBpkKe5rmNs3OMRj+0EaSg0j/1YGKM3Pd0zfXILuQPV16F/3K5H9RKR+h7Jp3nTaEQwAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "30599782",
+      "name": "PocketableItemB",
+      "limit": -1,
+      "size": {"x": 24, "y": 24},
+      "origin": {"x": 12, "y": 12},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/pocket item b.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADQSURBVEhLvZOLDYMwDERDF+ly7VRdrp2E6pAOXSzHMXLTJ0FiYnz+wPZ+tL0t5Ibb/bUflzKy7Qqw1+dqHwLg89w6J8/2sGfccz0FoiAW6xu921VAsNeXaBO16aPnyvIhdwLM2stmVAUrANYGZ4sUONFR98DaFPWSAq5ABAJpMIh5mZPLArYCMAoOyhXM+O9XNCLKOGoPCAWyrYhE0gJeEJ6XhxwFn/GT/yCiNINZcHC5AiXTplQFNlMbuDxkCwJm2gOW/welGYBZJWEFdVr7AvoDojLY+AjxAAAAAElFTkSuQmCC"
     }
   ],
   "tilesets": []

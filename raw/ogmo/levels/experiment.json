@@ -312,30 +312,10 @@
         },
         {
           "name": "PocketableItemA",
-          "id": 28,
-          "_eid": "30330516",
-          "x": 480,
-          "y": 184,
-          "originX": 12,
-          "originY": 12,
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "PocketableItemA",
           "id": 29,
           "_eid": "30330516",
           "x": 528,
           "y": 96,
-          "originX": 12,
-          "originY": 12,
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "PocketableItemA",
-          "id": 30,
-          "_eid": "30330516",
-          "x": 723,
-          "y": 138,
           "originX": 12,
           "originY": 12,
           "values": {"name": "", "depth": 0}
@@ -352,20 +332,40 @@
         },
         {
           "name": "PocketableItemA",
-          "id": 32,
+          "id": 33,
           "_eid": "30330516",
-          "x": 722,
-          "y": 105,
+          "x": 721,
+          "y": 87,
           "originX": 12,
           "originY": 12,
           "values": {"name": "", "depth": 0}
         },
         {
-          "name": "PocketableItemA",
-          "id": 33,
-          "_eid": "30330516",
-          "x": 721,
-          "y": 87,
+          "name": "PocketableItemB",
+          "id": 34,
+          "_eid": "30599782",
+          "x": 480,
+          "y": 183,
+          "originX": 12,
+          "originY": 12,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PocketableItemB",
+          "id": 35,
+          "_eid": "30599782",
+          "x": 724,
+          "y": 138,
+          "originX": 12,
+          "originY": 12,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PocketableItemB",
+          "id": 36,
+          "_eid": "30599782",
+          "x": 723,
+          "y": 103,
           "originX": 12,
           "originY": 12,
           "values": {"name": "", "depth": 0}

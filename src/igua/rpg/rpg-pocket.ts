@@ -1,6 +1,8 @@
 export namespace RpgPocket {
+    // TODO feel like this belongs in the data directory
     export enum Item {
         BallFruitTypeA = "BallFruitTypeA",
+        BallFruitTypeB = "BallFruitTypeB",
     }
 
     export interface Slot {
