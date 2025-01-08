@@ -8,11 +8,13 @@ import { DataPocketItem } from "../data/data-pocket-item";
 import { approachLinear } from "../../lib/math/number";
 import { holdf } from "../../lib/game-engine/routines/hold";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { scene } from "../globals";
 
 export function objPocketableItem(item: RpgPocket.Item) {
     const tx = DataPocketItem[item].texture;
-    return Sprite.from(tx).anchored(0.5, 0.5).coro(function* (self) {
+    return Sprite.from(tx).merge({ freed: false }).anchored(0.5, 0.5).coro(function* (self) {
         yield () => (playerObj.speed.x !== 0 || playerObj.speed.y !== 0) && self.collides(playerObj);
+        self.freed = true;
 
         let virtualAngle = 0;
 

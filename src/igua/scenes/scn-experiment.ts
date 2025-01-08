@@ -1,21 +1,26 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
-import { interp } from "../../lib/game-engine/routines/interp";
-import { sleep } from "../../lib/game-engine/routines/sleep";
+import { Instances } from "../../lib/game-engine/instances";
+import { interp, interpvr } from "../../lib/game-engine/routines/interp";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { Jukebox } from "../core/igua-audio";
 import { show } from "../cutscene/show";
-import { Cutscene, scene } from "../globals";
+import { Cutscene, Input, scene } from "../globals";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { mxnSpatialAudio } from "../mixins/mxn-spatial-audio";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
+import { ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
+import { objPocketableItemSpawner } from "../objects/obj-pocketable-item-spawner";
 import { objValuableSpawner } from "../objects/obj-valuable-spawner";
 import { RpgAttack } from "../rpg/rpg-attack";
+import { RpgPocket } from "../rpg/rpg-pocket";
 import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnExperiment() {
@@ -28,21 +33,64 @@ export function scnExperiment() {
     enrichFarmer(lvl);
 }
 
+function* leftOrRight() {
+    let left = 0;
+    let right = 0;
+
+    yield () => {
+        if (Input.isDown("SelectLeft") && Input.isDown("SelectRight")) {
+            left = 0;
+            right = 0;
+        }
+        else if (Input.isDown("SelectLeft")) {
+            left++;
+            right = 0;
+        }
+        else if (Input.isDown("SelectRight")) {
+            left = 0;
+            right++;
+        }
+        return left > 5 || right > 5;
+    };
+
+    return left > 5 ? "left" : "right";
+}
+
 function enrichFarmer(lvl: ReturnType<typeof Lvl["Experiment"]>) {
+    const startingPosition = lvl.FarmerNpc.vcpy();
+
     lvl.FarmerNpc.mixin(mxnCutscene, function* () {
         scene.camera.mode = "controlled";
 
-        yield* show("I should replant the ballfruit? Sure.");
+        yield* show(
+            "I should replant the ballfruit? Sure.",
+            "What ballfruit do you want? Hold left for Type A and hold right for Type B",
+        );
 
-        scene.camera.at(lvl.FarmingRegion);
+        const choice = yield* leftOrRight();
+        const choicePocketItem = choice === "left" ? RpgPocket.Item.BallFruitTypeA : RpgPocket.Item.BallFruitTypeB;
 
-        // TODO could add that .behind()
-        // Or should I figure out layering technology
-        const npcObj = objIguanaNpc({ personaName: "BalltownOutskirtsFarmer" }).at(lvl.FarmerAppearMarker).show();
-        yield* npcObj.walkTo(lvl.FarmerMoveToMarker.x);
+        yield* show((choice === "left" ? "Type A" : "Type B") + ", got it.");
+
+        yield interpvr(scene.camera).to(lvl.FarmingRegion).over(1000);
+
+        lvl.FarmerNpc.at(lvl.FarmerAppearMarker).show();
+        yield* lvl.FarmerNpc.walkTo(lvl.FarmerMoveToMarker.x);
+
+        for (const spawnerObj of Instances(objPocketableItemSpawner)) {
+            const maybeObj = spawnerObj.spawn(choicePocketItem);
+            if (maybeObj) {
+                maybeObj.mixin(mxnNudgeAppear);
+                yield sleepf(5);
+            }
+        }
+
+        yield sleep(1500);
 
         // TODO should this happen automatically at the end of cutscenes?
         scene.camera.mode = "follow-player";
+        lvl.FarmerNpc.at(startingPosition);
+        // TODO how to make him flip back right?! lol
     });
 }
 
