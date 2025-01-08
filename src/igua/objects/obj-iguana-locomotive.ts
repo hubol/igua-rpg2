@@ -84,6 +84,8 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
 
         puppet.isBeingPiloted = false;
         currentWalkToTarget = undefined;
+
+        yield () => puppet.speed.x === 0;
     }
 
     const puppet = objIguanaPuppet(looks)
