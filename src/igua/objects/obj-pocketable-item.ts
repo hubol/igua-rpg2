@@ -28,6 +28,11 @@ export function objPocketableItem(item: RpgPocket.Item) {
                 self.angle = Math.round(virtualAngle / 45) * 45;
                 self.speed.x *= 0.998;
                 self.speed.x = approachLinear(self.speed.x, 0, 0.003);
+
+                // TODO should be a mixin probably
+                if (self.y >= scene.level.height + 100) {
+                    self.destroy();
+                }
             })
             .handles("moved", (_, e) => {
                 if (e.previousOnGround) {
