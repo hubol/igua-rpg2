@@ -9,6 +9,7 @@ import { approachLinear } from "../../lib/math/number";
 import { holdf } from "../../lib/game-engine/routines/hold";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { scene } from "../globals";
+import { objPocketCollectNotification } from "./pocket/obj-pocket-collect-notification";
 
 export function objPocketableItem(item: RpgPocket.Item) {
     const tx = DataPocketItem[item].texture;
@@ -63,7 +64,8 @@ export function objPocketableItem(item: RpgPocket.Item) {
         physicsObj.alpha = 1;
 
         yield () => self.collides(playerObj);
-        RpgPocket.Methods.receive(RpgProgress.character.inventory.pocket, item);
+        const result = RpgPocket.Methods.receive(RpgProgress.character.inventory.pocket, item);
+        objPocketCollectNotification(result).at(self).show();
         self.destroy();
     });
 }

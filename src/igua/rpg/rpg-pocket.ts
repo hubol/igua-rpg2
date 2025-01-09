@@ -31,8 +31,11 @@ export namespace RpgPocket {
         receive(model: Model, item: Item) {
             // TODO assert model, item are valid
 
-            const slot = model.slots[model.nextSlotIndex];
-            if (slot.item === null || slot.item !== item) {
+            const index = model.nextSlotIndex;
+            const slot = model.slots[index];
+            const reset = slot.item !== null && slot.item !== item;
+
+            if (slot.item === null || reset) {
                 slot.item = item;
                 slot.count = 1;
             }
@@ -40,9 +43,15 @@ export namespace RpgPocket {
                 slot.count += 1;
             }
 
-            model.nextSlotIndex = (model.nextSlotIndex + 1) % model.slots.length;
+            model.nextSlotIndex = (index + 1) % model.slots.length;
 
-            // TODO return result for consumer?
+            return {
+                index,
+                reset,
+                count: slot.count,
+            };
         },
     };
+
+    export type ReceiveResult = ReturnType<typeof Methods["receive"]>;
 }
