@@ -18,7 +18,7 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
 
     const sceneChanger = SceneChanger.create({ sceneName, checkpointName });
 
-    const obj = Sprite.from(Tx.OpenDoor)
+    const obj = Sprite.from(Tx.Door.NormalOpen)
         .merge({
             get locked() {
                 return locked;

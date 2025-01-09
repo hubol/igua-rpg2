@@ -9,5 +9,6 @@ interface NpcPersona {
 export const NpcPersonas = {
     BalltownOutskirtsMiner: { name: "Dante", looks: NpcLooks.Miner },
     BalltownOutskirtsFarmer: { name: "Lars", looks: NpcLooks.Farmer },
+    NewBalltownBallFruitFanatic: { name: "Marf", looks: NpcLooks.BallFruitFanatic },
     __Unknown__: { name: "???", looks: NpcLooks.MintyJourney },
 } satisfies Record<string, NpcPersona>;

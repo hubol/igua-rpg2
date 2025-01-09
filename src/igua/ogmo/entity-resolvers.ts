@@ -24,7 +24,7 @@ export const OgmoEntityResolvers = {
     "Slope": objSolidSlope,
     "Pipe": objPipe,
     "PipeSlope": objPipeSlope,
-    "Door": ({ values: { checkpointName, sceneName } }) => objDoor({ checkpointName, sceneName }),
+    "Door": ({ values: { checkpointName, sceneName } }) => objDoor({ checkpointName, sceneName }).at(0, 2),
     "WaterDripSource": ({ values: { delayMin, delayMax } }) => objWaterDripSource({ delayMin, delayMax }),
     // TODO as any feels bad, but so does stuff above
     "Sign": ({ values }) => objSign(values as any),
@@ -59,7 +59,9 @@ function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?:
     const pos = vnew(entity).add(entity.flippedX ? 3 : -2, 3);
     const facing = entity.flippedX ? -1 : 1;
 
-    if (!playerObj || playerObj.destroyed) {
+    const mustCreatePlayer = !playerObj || playerObj.destroyed;
+
+    if (mustCreatePlayer) {
         createPlayerObj().show();
     }
 
@@ -71,8 +73,10 @@ function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?:
         x.checkpointName === RpgProgress.character.position.checkpointName
     );
 
-    playerObj.at(checkpointObj ? checkpointObj : pos);
-    playerObj.facing = checkpointObj ? checkpointObj.facing : facing;
+    if (checkpointObj || !checkpointName || mustCreatePlayer) {
+        playerObj.at(checkpointObj ? checkpointObj : pos);
+        playerObj.facing = checkpointObj ? checkpointObj.facing : facing;
+    }
 
     return pos;
 }

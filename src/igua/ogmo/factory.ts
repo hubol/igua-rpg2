@@ -123,7 +123,7 @@ export namespace OgmoFactory {
     }
 
     export function createDecalGroup(groupName: string, layerName: string) {
-        const obj = container().named(`Decal Group: ${groupName}`).merge({ groupName });
+        const obj = (container() as Container<Sprite>).named(`Decal Group: ${groupName}`).merge({ groupName });
 
         if (decalGroups.has(groupName)) {
             ErrorReporter.reportContractViolationError(

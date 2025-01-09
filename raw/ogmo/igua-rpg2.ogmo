@@ -349,8 +349,8 @@
       "exportID": "88296692",
       "name": "Door",
       "limit": -1,
-      "size": {"x": 45, "y": 48},
-      "origin": {"x": 0, "y": 0},
+      "size": {"x": 34, "y": 48},
+      "origin": {"x": 0, "y": -2},
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
@@ -388,9 +388,9 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/door.png",
-      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAwCAYAAACFUvPfAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAADZSURBVGhD7ZhRDoQgDERx78L9D8RhdqOxhiUNBdGRMX0/+gXPyaQEl3ARMcbv/lolpTS85/ACrbIaZz9gSHpEOKdX/pT0VbIlrfLd0ncJCy3iXdJ3CwuW+Gd/miCFrb2akkYJ59TSbk4aTS2oaaVrmPV4oho5Wk3elfTTCQta0qr0LMJCKU5Zj3dIz1YNDa8Hij9phmqseD1QUEiXtT1OGoY+y8lIVQ8JlrfTLKNO8OmBwqVRuDQKTmm2Gb3i9UBBKW3+C54RrwcKl0bh0ii2261ftwAQSofwA1U0PqAY0jauAAAAAElFTkSuQmCC"
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAuCAYAAABNhcu5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAABKSURBVFhH7c6hAYAADMCwwS/7/0QwGPoAiMTU9tjda37gfPo5I2WkjJSRMlJGykgZKSNlpIyUkTJSRspIGSkjZaSMlJEyUkbeZm60VQHKmVU0iQAAAABJRU5ErkJggg=="
     },
     {
       "exportID": "19953026",
@@ -982,7 +982,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/pocket item a.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADdSURBVEhLvZSBDcIwDAQDU5RVYDBWoIMxC2OAvtJXH+M4Dig9qW3cfv12kva0PK7vMpEzTq/7czuUVmyvAGO9r/FmAC7rrRJ5sYd9xjGvu0GUxGK10btVBwRjfYkx0Zgafa5MX+TKgFV71bS6YAfAxmCfIgUiCnUMbExTryjgGkQgkSaDmVc5GTawHYBWcvB3Bz2O+VVkGa0epA008YhJysBLmDXpGmgiu4MyJukp0sTRtrSEBpkKe5rmNs3OMRj+0EaSg0j/1YGKM3Pd0zfXILuQPV16F/3K5H9RKR+h7Jp3nTaEQwAAAABJRU5ErkJggg=="
     },
@@ -1027,7 +1027,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/pocket item b.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADQSURBVEhLvZOLDYMwDERDF+ly7VRdrp2E6pAOXSzHMXLTJ0FiYnz+wPZ+tL0t5Ibb/bUflzKy7Qqw1+dqHwLg89w6J8/2sGfccz0FoiAW6xu921VAsNeXaBO16aPnyvIhdwLM2stmVAUrANYGZ4sUONFR98DaFPWSAq5ABAJpMIh5mZPLArYCMAoOyhXM+O9XNCLKOGoPCAWyrYhE0gJeEJ6XhxwFn/GT/yCiNINZcHC5AiXTplQFNlMbuDxkCwJm2gOW/welGYBZJWEFdVr7AvoDojLY+AjxAAAAAElFTkSuQmCC"
     }
