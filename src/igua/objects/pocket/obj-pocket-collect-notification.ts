@@ -7,10 +7,17 @@ import { objText } from "../../../assets/fonts";
 import { mxnFxTintRotate } from "../../mixins/effects/mxn-fx-tint-rotate";
 import { interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { Sfx } from "../../../assets/sounds";
 
 const [txPocket, txReset] = Tx.Ui.Pocket.CollectNotification.split({ count: 2 });
 
 export function objPocketCollectNotification(receive: RpgPocket.ReceiveResult) {
+    if (receive.reset) {
+        Sfx.Collect.PocketReset.play();
+    }
+    else {
+        Sfx.Collect.PocketIncrease.with.rate(1 + (receive.count - 1) * 0.05).play();
+    }
     // TODO sfx!
     Instances(objPocketCollectNotification).forEach(x => x.destroy());
     return container(

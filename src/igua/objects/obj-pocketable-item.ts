@@ -10,11 +10,14 @@ import { holdf } from "../../lib/game-engine/routines/hold";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { scene } from "../globals";
 import { objPocketCollectNotification } from "./pocket/obj-pocket-collect-notification";
+import { mxnSpatialAudio } from "../mixins/mxn-spatial-audio";
+import { Sfx } from "../../assets/sounds";
 
 export function objPocketableItem(item: RpgPocket.Item) {
     const tx = DataPocketItem[item].texture;
     return Sprite.from(tx).merge({ freed: false }).anchored(0.5, 0.5).coro(function* (self) {
         yield () => (playerObj.speed.x !== 0 || playerObj.speed.y !== 0) && self.collides(playerObj);
+        Sfx.Impact.PocketableItemFree.with.rate(Rng.float(0.9, 1.1)).play();
         self.freed = true;
 
         let virtualAngle = 0;
@@ -24,6 +27,7 @@ export function objPocketableItem(item: RpgPocket.Item) {
             physicsRadius: Math.floor(tx.height * 0.3),
             physicsOffset: [0, 1],
         })
+            .mixin(mxnSpatialAudio)
             .step(self => {
                 virtualAngle += self.speed.x * 2;
                 self.angle = Math.round(virtualAngle / 45) * 45;
@@ -35,15 +39,16 @@ export function objPocketableItem(item: RpgPocket.Item) {
                     self.destroy();
                 }
             })
-            .handles("moved", (_, e) => {
+            .handles("moved", (obj, e) => {
                 if (e.previousOnGround) {
                     return;
                 }
 
                 if (e.hitGround) {
-                    physicsObj.speed.y = Math.abs(e.previousSpeed.y) * -0.8;
-                    if (physicsObj.speed.y > -0.5) {
-                        physicsObj.speed.y = 0;
+                    obj.play(getBounceSfxToPlay(e.previousSpeed.y).with.rate(Rng.float(0.9, 1.1)));
+                    obj.speed.y = Math.abs(e.previousSpeed.y) * -0.8;
+                    if (obj.speed.y > -0.5) {
+                        obj.speed.y = 0;
                     }
                 }
             });
@@ -68,4 +73,14 @@ export function objPocketableItem(item: RpgPocket.Item) {
         objPocketCollectNotification(result).at(self).show();
         self.destroy();
     });
+}
+
+function getBounceSfxToPlay(vspeed: number) {
+    if (vspeed > 5) {
+        return Sfx.Impact.PocketableItemBounceHard;
+    }
+    else if (vspeed > 2) {
+        return Sfx.Impact.PocketableItemBounceMedium;
+    }
+    return Sfx.Impact.PocketableItemBounceSoft;
 }
