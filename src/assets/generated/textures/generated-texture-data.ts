@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 137 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 139 }];
 
 interface TxData {
   id: string;
@@ -103,7 +103,7 @@ function txs<T>(tx: (data: TxData) => T) {
       },
       Club: tx({ id: "Iguana.Club", atlas: 0, x: 652, y: 348, width: 72, height: 18 }),
       Crest: tx({ id: "Iguana.Crest", atlas: 0, x: 841, y: 56, width: 168, height: 24 }),
-      Eye: tx({ id: "Iguana.Eye", atlas: 0, x: 1006, y: 382, width: 12, height: 12 }),
+      Eye: tx({ id: "Iguana.Eye", atlas: 0, x: 1006, y: 237, width: 12, height: 12 }),
       Foot: tx({ id: "Iguana.Foot", atlas: 0, x: 468, y: 244, width: 210, height: 18 }),
       Head: tx({ id: "Iguana.Head", atlas: 0, x: 898, y: 469, width: 27, height: 27 }),
       Horn: tx({ id: "Iguana.Horn", atlas: 0, x: 504, y: 367, width: 72, height: 12 }),
@@ -116,7 +116,7 @@ function txs<T>(tx: (data: TxData) => T) {
     Light: {
       AuraIrregular40: tx({ id: "Light.AuraIrregular40", atlas: 0, x: 943, y: 395, width: 44, height: 42 }),
       ShadowIguana: tx({ id: "Light.ShadowIguana", atlas: 0, x: 841, y: 116, width: 48, height: 10 }),
-      ShadowIrregularSmallRound: tx({ id: "Light.ShadowIrregularSmallRound", atlas: 0, x: 1006, y: 237, width: 12, height: 10 }),
+      ShadowIrregularSmallRound: tx({ id: "Light.ShadowIrregularSmallRound", atlas: 0, x: 949, y: 494, width: 12, height: 10 }),
       ShadowIrregularSmall: tx({ id: "Light.ShadowIrregularSmall", atlas: 0, x: 1006, y: 228, width: 16, height: 8 }),
     },
     LockedDoor: tx({ id: "LockedDoor", atlas: 0, x: 991, y: 283, width: 30, height: 32 }),
@@ -182,6 +182,8 @@ function txs<T>(tx: (data: TxData) => T) {
     },
     Town: {
       Ball: {
+        Ball0: tx({ id: "Town.Ball.Ball0", atlas: 0, x: 962, y: 494, width: 12, height: 12 }),
+        Ball1: tx({ id: "Town.Ball.Ball1", atlas: 0, x: 1006, y: 382, width: 14, height: 12 }),
         Brick0: tx({ id: "Town.Ball.Brick0", atlas: 0, x: 742, y: 458, width: 36, height: 30 }),
         Brick1: tx({ id: "Town.Ball.Brick1", atlas: 0, x: 828, y: 452, width: 36, height: 20 }),
         Frame: tx({ id: "Town.Ball.Frame", atlas: 0, x: 812, y: 395, width: 50, height: 56 }),
