@@ -9,6 +9,7 @@ import { Tx } from "../../assets/textures";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { holdf } from "../../lib/game-engine/routines/hold";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
+import { SubjectiveColorAnalyzer } from "../../lib/color/subjective-color-analyzer";
 
 const [txSpeakBox, txSpeakBoxOutline, txSpeakBoxTail] = Tx.Ui.Dialog.SpeakBox.split({ count: 3 });
 
@@ -32,7 +33,9 @@ function objSpeakerMessageBox(speaker: DisplayObject | null) {
             yield sleepf(4);
             spr.texture = txSpeakBox;
             yield sleepf(4);
-            const nameTextObj = objText.MediumBoldIrregular(name);
+            const nameTextObj = objText.MediumBoldIrregular(name, {
+                tint: SubjectiveColorAnalyzer.getPreferredTextColor(colorSecondary),
+            });
             const nameObj = container(
                 new Graphics().beginFill(colorSecondary).drawRect(-4, -3, nameTextObj.width + 8, 13).mixin(
                     mxnBoilPivot,
@@ -42,7 +45,10 @@ function objSpeakerMessageBox(speaker: DisplayObject | null) {
 
             yield sleepf(4);
             state.isReadyToReceiveText = true;
-            const textObj = objText.Medium("", { maxWidth: 224 }).step(textObj => textObj.text = state.text).at(
+            const textObj = objText.Medium("", {
+                maxWidth: 224,
+                tint: SubjectiveColorAnalyzer.getPreferredTextColor(colorPrimary),
+            }).step(textObj => textObj.text = state.text).at(
                 28,
                 41,
             ).show(self);
