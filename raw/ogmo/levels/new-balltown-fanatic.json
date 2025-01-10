@@ -524,6 +524,71 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": "Group 1"
+        },
+        {
+          "x": 183,
+          "y": 23,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#478f79",
+          "texture": "town/ball/symbols/p.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "SecretSymbols"
+        },
+        {
+          "x": 213,
+          "y": 24,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#478f79",
+          "texture": "town/ball/symbols/circle.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "SecretSymbols"
+        },
+        {
+          "x": 251,
+          "y": 24,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#478f79",
+          "texture": "town/ball/symbols/circle.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "SecretSymbols"
+        },
+        {
+          "x": 287,
+          "y": 24,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#478f79",
+          "texture": "town/ball/symbols/p.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "SecretSymbols"
+        },
+        {
+          "x": 325,
+          "y": 25,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#478f79",
+          "texture": "town/ball/symbols/star.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "SecretSymbols"
         }
       ],
       "folder": "../textures"

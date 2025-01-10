@@ -36,6 +36,7 @@ function getInitialRpgProgress() {
             newBalltown: {
                 ballFruitFanatic: {
                     typePreference: Null<RpgPocket.Item>(),
+                    succesfulDeliveriesCount: 0,
                 },
             },
             outskirts: {

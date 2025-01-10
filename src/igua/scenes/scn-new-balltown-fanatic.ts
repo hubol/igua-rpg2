@@ -8,16 +8,34 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { show } from "../cutscene/show";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { RpgPocket } from "../rpg/rpg-pocket";
+import { interpv } from "../../lib/game-engine/routines/interp";
 
 export function scnNewBalltownFanatic() {
     Jukebox.play(Mzk.CedarWorld);
     const lvl = Lvl.NewBalltownFanatic();
     lvl.FurnitureChandelier.mixin(mxnBoilPivot);
     lvl.ChandelierLights.children.forEach(x => x.mixin(mxnBoilMirrorRotate).blendMode = BLEND_MODES.ADD);
-    enrichBallFruitFanatic(lvl);
+    enrichBallFruitFanaticNpc(lvl);
+    enrichSecretSymbols(lvl);
 }
 
-function enrichBallFruitFanatic(lvl: ReturnType<typeof Lvl["NewBalltownFanatic"]>) {
+function enrichSecretSymbols(lvl: ReturnType<typeof Lvl["NewBalltownFanatic"]>) {
+    const { ballFruitFanatic } = RpgProgress.flags.newBalltown;
+
+    lvl.SecretSymbols.children.forEach((obj, i) => {
+        if (ballFruitFanatic.succesfulDeliveriesCount > i) {
+            return;
+        }
+        obj.invisible().coro(function* () {
+            yield () => ballFruitFanatic.succesfulDeliveriesCount > i;
+            obj.visible = true;
+            obj.scale.set(0, 0);
+            yield interpv(obj.scale).steps(4).to(1, 1).over(300);
+        });
+    });
+}
+
+function enrichBallFruitFanaticNpc(lvl: ReturnType<typeof Lvl["NewBalltownFanatic"]>) {
     lvl.BallFruitFanaticNpc.mixin(mxnCutscene, function* () {
         const typePreference = RpgProgress.flags.newBalltown.ballFruitFanatic.typePreference;
 
@@ -60,6 +78,7 @@ function enrichBallFruitFanatic(lvl: ReturnType<typeof Lvl["NewBalltownFanatic"]
                     10,
                 );
                 RpgProgress.character.inventory.valuables += 50;
+                RpgProgress.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount++;
                 return;
             }
 
