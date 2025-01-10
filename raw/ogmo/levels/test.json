@@ -372,7 +372,7 @@
           "x": 64,
           "y": 64,
           "width": 88,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "PipeSlope",
@@ -392,7 +392,7 @@
           "x": 208,
           "y": 120,
           "width": 32,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Block",
@@ -531,7 +531,7 @@
           "x": 368,
           "y": 152,
           "width": 48,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Slope",

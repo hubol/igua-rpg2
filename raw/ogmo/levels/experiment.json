@@ -2266,7 +2266,8 @@
           "texture": "shapes/confetti32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -2418,7 +2419,7 @@
           "x": 600,
           "y": 144,
           "width": 136,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Block",
@@ -2492,7 +2493,7 @@
           "x": 968,
           "y": 200,
           "width": 40,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Pipe",
@@ -2501,7 +2502,7 @@
           "x": 1016,
           "y": 248,
           "width": 40,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Pipe",
@@ -2510,7 +2511,7 @@
           "x": 968,
           "y": 376,
           "width": 40,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Pipe",
@@ -2519,7 +2520,7 @@
           "x": 1016,
           "y": 312,
           "width": 40,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Block",
@@ -2606,7 +2607,7 @@
           "x": 144,
           "y": 168,
           "width": 168,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Slope",
@@ -2628,7 +2629,7 @@
           "x": 1008,
           "y": 440,
           "width": 40,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Pipe",
@@ -2637,7 +2638,7 @@
           "x": 872,
           "y": 472,
           "width": 40,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Pipe",
@@ -2646,7 +2647,7 @@
           "x": 800,
           "y": 512,
           "width": 40,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Pipe",
@@ -2655,7 +2656,7 @@
           "x": 680,
           "y": 488,
           "width": 40,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Pipe",
@@ -2664,7 +2665,7 @@
           "x": 584,
           "y": 512,
           "width": 24,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Pipe",
@@ -2673,7 +2674,7 @@
           "x": 968,
           "y": 504,
           "width": 40,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Block",

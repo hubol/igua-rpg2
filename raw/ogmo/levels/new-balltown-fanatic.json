@@ -500,19 +500,6 @@
           "groupName": "Group 1"
         },
         {
-          "x": 123,
-          "y": 16,
-          "scaleX": -1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#081d16",
-          "texture": "town/ball/brick0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": "Group 1"
-        },
-        {
           "x": 435,
           "y": 236,
           "scaleX": -1,
@@ -526,75 +513,10 @@
           "groupName": "Group 1"
         },
         {
-          "x": 45,
-          "y": 176,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#081d16",
-          "texture": "town/ball/brick1.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": "Group 1"
-        },
-        {
-          "x": 64,
-          "y": 110,
-          "scaleX": -1,
-          "scaleY": -1,
-          "rotation": 0,
-          "tint": "#081d16",
-          "texture": "town/ball/brick1.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": "Group 1"
-        },
-        {
           "x": 255,
           "y": 261,
           "scaleX": 1,
           "scaleY": 1,
-          "rotation": 0,
-          "tint": "#081d16",
-          "texture": "town/ball/brick1.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": "Group 1"
-        },
-        {
-          "x": 216,
-          "y": 2,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#081d16",
-          "texture": "town/ball/brick1.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": "Group 1"
-        },
-        {
-          "x": 427,
-          "y": 35,
-          "scaleX": 1,
-          "scaleY": -1,
-          "rotation": 0,
-          "tint": "#081d16",
-          "texture": "town/ball/brick0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": "Group 1"
-        },
-        {
-          "x": 476,
-          "y": 117,
-          "scaleX": 1,
-          "scaleY": -1,
           "rotation": 0,
           "tint": "#081d16",
           "texture": "town/ball/brick1.png",
@@ -693,6 +615,33 @@
           "flippedY": true,
           "tint": "#14372c",
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 12,
+          "_eid": "95769929",
+          "x": 213,
+          "y": 113,
+          "width": 88,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 13,
+          "_eid": "95769929",
+          "x": 167,
+          "y": 181,
+          "width": 56,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 14,
+          "_eid": "95769929",
+          "x": 347,
+          "y": 180,
+          "width": 56,
+          "values": {"name": "", "visible": false, "depth": 0}
         }
       ]
     },
@@ -909,7 +858,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 178,
@@ -921,7 +871,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 110,
@@ -933,7 +884,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 212,
@@ -945,7 +897,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 216,
@@ -957,7 +910,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 337,
@@ -969,7 +923,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 329,
@@ -981,7 +936,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 271,
@@ -993,7 +949,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 279,
@@ -1005,7 +962,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 398,
@@ -1017,7 +975,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

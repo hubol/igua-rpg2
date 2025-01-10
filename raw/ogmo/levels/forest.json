@@ -401,7 +401,7 @@
           "x": 816,
           "y": 400,
           "width": 144,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
         },
         {
           "name": "Slope",
