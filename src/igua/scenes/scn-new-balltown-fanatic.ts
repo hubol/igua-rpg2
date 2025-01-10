@@ -9,6 +9,7 @@ import { show } from "../cutscene/show";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { RpgPocket } from "../rpg/rpg-pocket";
 import { interpv } from "../../lib/game-engine/routines/interp";
+import { rewardValuables } from "../objects/obj-valuable-trove";
 
 export function scnNewBalltownFanatic() {
     Jukebox.play(Mzk.CedarWorld);
@@ -77,7 +78,7 @@ function enrichBallFruitFanaticNpc(lvl: ReturnType<typeof Lvl["NewBalltownFanati
                     typePreference,
                     10,
                 );
-                RpgProgress.character.inventory.valuables += 50;
+                yield* rewardValuables(50, lvl.BallFruitFanaticNpc);
                 RpgProgress.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount++;
                 return;
             }
