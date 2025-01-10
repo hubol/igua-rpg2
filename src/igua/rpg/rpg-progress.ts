@@ -1,4 +1,5 @@
 import { DeepKeyOf } from "../../lib/types/deep-keyof";
+import { Null } from "../../lib/types/null";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { RpgPocket } from "./rpg-pocket";
 
@@ -32,6 +33,11 @@ function getInitialRpgProgress() {
             },
         },
         flags: {
+            newBalltown: {
+                ballFruitFanatic: {
+                    typePreference: Null<RpgPocket.Item>(),
+                },
+            },
             outskirts: {
                 miner: {
                     picaxeHealth: 10,

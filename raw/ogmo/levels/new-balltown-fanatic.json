@@ -88,7 +88,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": true,
-          "values": {"personaName": "NewBalltownBallFruitFanatic", "name": "", "depth": 0}
+          "values": {"personaName": "NewBalltownBallFruitFanatic", "name": "BallFruitFanaticNpc", "depth": 0}
         },
         {
           "name": "Door",

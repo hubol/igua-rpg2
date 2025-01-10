@@ -621,7 +621,7 @@ export const Lvl = {
     TownBallBrick0_3: d(Tx.Town.Ball.Brick0, { x: 121, y: 236, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0x081d16 }, "TerrainDecals"),
     TownBallBrick0_4: d(Tx.Town.Ball.Brick0, { x: 435, y: 236, scaleX: -1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0x081d16 }, "TerrainDecals"),
     TownBallBrick1_4: d(Tx.Town.Ball.Brick1, { x: 255, y: 261, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0x081d16 }, "TerrainDecals"),
-    IguanaNpc: e(r["IguanaNpc"], { x: 352, y: 200, flippedX: true, values: { personaName: "NewBalltownBallFruitFanatic", name: "", depth: 0 } }, "Entities"),
+    BallFruitFanaticNpc: e(r["IguanaNpc"], { x: 352, y: 200, flippedX: true, values: { personaName: "NewBalltownBallFruitFanatic", name: "BallFruitFanaticNpc", depth: 0 } }, "Entities"),
     Door: e(r["Door"], { x: 112, y: 152, values: { sceneName: "scnNewBalltown", checkpointName: "fromFanatic", name: "", depth: 0 } }, "Entities"),
     WaterDripSource: e(r["WaterDripSource"], { x: 192, y: 174, values: { delayMin: 6000, delayMax: 24000, name: "", depth: 0 } }, "Entities"),
     Player: e(r["Player"], { x: 184, y: 200, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),

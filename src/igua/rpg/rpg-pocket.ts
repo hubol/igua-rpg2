@@ -1,3 +1,5 @@
+import { ErrorReporter } from "../../lib/game-engine/error-reporter";
+
 export namespace RpgPocket {
     // TODO feel like this belongs in the data directory
     export enum Item {
@@ -50,6 +52,34 @@ export namespace RpgPocket {
                 reset,
                 count: slot.count,
             };
+        },
+        has(model: Model, item: Item, count: number) {
+            for (const slot of model.slots) {
+                if (slot.item === item) {
+                    count -= slot.count;
+                }
+            }
+
+            return count <= 0;
+        },
+        remove(model: Model, item: Item, count: number) {
+            for (const slot of model.slots) {
+                if (slot.item === item) {
+                    const amountToTakeFromSlot = Math.min(count, slot.count);
+                    slot.count -= amountToTakeFromSlot;
+                    count -= amountToTakeFromSlot;
+                }
+                if (count < 0) {
+                    ErrorReporter.reportAssertError(
+                        "RpgPocket.Methods.remove",
+                        new Error(`count should not be < 0, got ${count}`),
+                        { model, item, count },
+                    );
+                }
+                else if (count === 0) {
+                    return;
+                }
+            }
         },
     };
 
