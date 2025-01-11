@@ -1,6 +1,6 @@
-type ForceAliasName<T> = T & { readonly __t?: unique symbol };
+import { ForceAliasType } from "../types/force-alias-type";
 
-type CamelCase = ForceAliasName<string>;
+type CamelCase = ForceAliasType<string>;
 
 function toEnglish(camel: CamelCase) {
     if (!camel) {
@@ -20,6 +20,6 @@ function toEnglish(camel: CamelCase) {
     return result;
 }
 
-export const StringCase = {
+export const StringTransform = {
     toEnglish,
 };

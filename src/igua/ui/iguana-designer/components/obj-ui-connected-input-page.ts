@@ -10,12 +10,12 @@ import { objUiTextureChoiceInput } from "./obj-ui-texture-choice-input";
 import { objUiPlacementInput } from "./obj-ui-placement-input";
 import { objUiSliderInput } from "./obj-ui-slider-input";
 import { objUiColorInput } from "./obj-ui-color-input";
-import { StringCase } from "../../../../lib/string-case";
 import { objUiIguanaDesignerEyesPage } from "../pages/obj-ui-iguana-designer-eyes-page";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 import { objUiIguanaDesignerBackButton } from "./obj-ui-iguana-designer-back-button";
 import { objUiIguanaDesignerFeetPage } from "../pages/obj-ui-iguana-designer-feet-page";
 import { ObjUiDesignerInputBase } from "./obj-ui-designer-input-base";
+import { StringTransform } from "../../../../lib/string/string-transform";
 
 export function createUiConnectedInputPageElements(root: ConnectedInput.Tree<unknown>) {
     const els = Empty<ObjUiPageElement & Partial<Pick<ObjUiDesignerInputBase, "noteOnConflict">>>();
@@ -40,7 +40,7 @@ export function objUiConnectedInputPage(title: string, root: ConnectedInput.Tree
 }
 
 function createInputObj(key: string, input: TypedInput.Any & { value: any }) {
-    const title = StringCase.toEnglish(key);
+    const title = StringTransform.toEnglish(key);
     switch (input.kind) {
         case "boolean":
             return objUiCheckboxInput(title, input);

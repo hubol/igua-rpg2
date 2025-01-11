@@ -3,6 +3,7 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { approachLinear, nlerp } from "../../lib/math/number";
+import { StringConvert } from "../../lib/string/string-convert";
 
 interface ObjIntelligenceBackgroundArgs {
     initialTint: string;
@@ -12,8 +13,8 @@ interface ObjIntelligenceBackgroundArgs {
 }
 
 export function objIntelligenceBackground({ initialTint, targetTint, min, max }: ObjIntelligenceBackgroundArgs) {
-    const initialRgb = AdjustColor.pixi(toPixiColor(initialTint)).toRgb({});
-    const targetRgb = AdjustColor.pixi(toPixiColor(targetTint)).toRgb({});
+    const initialRgb = AdjustColor.pixi(StringConvert.toRgbInt(initialTint)).toRgb({});
+    const targetRgb = AdjustColor.pixi(StringConvert.toRgbInt(targetTint)).toRgb({});
     const blendedRgb = { r: 0, g: 0, b: 0 };
 
     let factor = getLerpFactor(min, max);
@@ -35,14 +36,6 @@ export function objIntelligenceBackground({ initialTint, targetTint, min, max }:
             }
         })
         .tinted(getTint());
-}
-
-const matchPoundSign = /#/g;
-
-// TODO does not belong here!
-// I feel like it belongs in the levels template file
-function toPixiColor(hex: string) {
-    return Number.parseInt("0x" + hex.replace(matchPoundSign, ""));
 }
 
 function getLerpFactor(min: number, max: number) {

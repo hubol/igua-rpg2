@@ -1,4 +1,4 @@
-import { StringCase } from "../../../../lib/string-case";
+import { StringTransform } from "../../../../lib/string/string-transform";
 import { ConnectedInput } from "../../../iguana/connected-input";
 import { objUiPage } from "../../framework/obj-ui-page";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
@@ -18,7 +18,7 @@ function getForeHindInputs(foot: ConnectedFoot) {
 }
 
 function objUiForeHindFeetButton(ordinal: "fore" | "hind", feet: ConnectedFeet) {
-    const title = StringCase.toEnglish(ordinal);
+    const title = StringTransform.toEnglish(ordinal);
 
     return objUiDesignerButton(title, () => {
         const inputs = ConnectedInput.join([

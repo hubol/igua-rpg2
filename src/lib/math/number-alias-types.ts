@@ -1,13 +1,13 @@
-type ForceAliasName<T> = T & { readonly __t?: unique symbol };
+import { ForceAliasType } from "../types/force-alias-type";
 
-export type Polar = ForceAliasName<number>;
-export type Unit = ForceAliasName<number>;
-export type Integer = ForceAliasName<number>;
-export type ZeroOrGreater = ForceAliasName<number>;
+export type Polar = ForceAliasType<number>;
+export type Unit = ForceAliasType<number>;
+export type Integer = ForceAliasType<number>;
+export type ZeroOrGreater = ForceAliasType<number>;
 
-export type Seconds = ForceAliasName<number>;
-export type Milliseconds = ForceAliasName<number>;
-export type PercentAsInteger = ForceAliasName<number>;
-export type RgbInt = ForceAliasName<number>;
-export type DegreesFloat = ForceAliasName<number>;
+export type Seconds = ForceAliasType<number>;
+export type Milliseconds = ForceAliasType<number>;
+export type PercentAsInteger = ForceAliasType<number>;
+export type RgbInt = ForceAliasType<number>;
+export type DegreesFloat = ForceAliasType<number>;
 // TODO use Int names ^^^
