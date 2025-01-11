@@ -1,3 +1,4 @@
+import { Sfx } from "../../assets/sounds";
 import { SubjectiveColorAnalyzer } from "../../lib/color/subjective-color-analyzer";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { interp } from "../../lib/game-engine/routines/interp";
@@ -37,6 +38,7 @@ export function objIguanaNpc({ personaName }: ObjIguanaNpcArgs) {
                 const count = Rng.intc(2, 4);
                 for (let i = 0; i < count; i++) {
                     yield interp(self.head.mouth, "agape").to(1).over(Rng.float(150, 225));
+                    Sfx.Iguana.Speak0.with.rate(Rng.float(0.8, 1.2)).play();
                     yield interp(self.head.mouth, "agape").to(0).over(Rng.float(100, 150));
                     if (!isSpeaking) {
                         break;
