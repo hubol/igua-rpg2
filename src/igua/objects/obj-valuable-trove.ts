@@ -1,36 +1,11 @@
 import { DisplayObject } from "pixi.js";
-import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { container } from "../../lib/pixi/container";
 import { Empty } from "../../lib/types/empty";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { objValuable } from "./obj-valuable";
-import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
+import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
-import { VectorSimple } from "../../lib/math/vector-type";
-import { range } from "../../lib/range";
-import { Rng } from "../../lib/math/rng";
-import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
-import { playerObj } from "./obj-player";
-import { Coro } from "../../lib/game-engine/routines/coro";
-
-type Counts = Record<RpgEconomy.Currency.Type, number>;
-
-function solveCounts(total: number) {
-    const result: Counts = {} as any;
-
-    for (const type of RpgEconomy.Currency.DescendingTypes) {
-        const value = RpgEconomy.Currency.Values[type];
-        const count = Math.floor(total / value);
-        result[type] = count;
-        total -= count * value;
-    }
-
-    if (total !== 0) {
-        ErrorReporter.reportAssertError("solveCounts", new Error("Did not solveCounts as expected"), { total, result });
-    }
-
-    return result;
-}
+import { ValuableChangeMaker } from "../systems/valuable-change-maker";
 
 type Tiers = number[];
 
@@ -175,7 +150,7 @@ function solveTiers(count: number): Tiers {
 
 type Layout = RpgEconomy.Currency.Type[][];
 
-function solveLayout(counts: Counts, tiers: Tiers) {
+function solveLayout(counts: ValuableChangeMaker.Counts, tiers: Tiers) {
     const sortedCounts = Object.entries(counts)
         .map(([type, value]) => ({ type: type as RpgEconomy.Currency.Type, value }))
         .sort((a, b) => b.value - a.value);
@@ -211,7 +186,7 @@ const hMargin = 18;
 const vMargin = 13;
 
 export function objValuableTrove(total: number, animation: "animated" | "instant" = "animated") {
-    const counts = solveCounts(total);
+    const counts = ValuableChangeMaker.solveCounts(total);
     const count = Object.values(counts).reduce((sum, current) => sum + current, 0);
     const tiers = solveTiers(count);
     const layout = solveLayout(counts, tiers);
@@ -244,50 +219,4 @@ export function objValuableTrove(total: number, animation: "animated" | "instant
     }
 
     return c;
-}
-
-// TODO not sure if this belongs here.
-// What about the cutscene directory?
-export function* rewardValuables(total: number, startPosition: VectorSimple) {
-    const counts = solveCounts(total);
-    const currencyToSpawn = Rng.shuffle(
-        Object.entries(counts).flatMap(([currencyType, count]) =>
-            range(count).map(() => currencyType as RpgEconomy.Currency.Type)
-        ),
-    );
-
-    let ms = 250;
-    let atThresholdCount = 0;
-
-    for (const currency of currencyToSpawn) {
-        objValuable(currency).at(startPosition).scaled(0, 0).coro(moveTowardsPlayer).show();
-        yield sleep(ms);
-
-        if (atThresholdCount > 50) {
-            ms = Math.max(70, ms - 1);
-        }
-        else if (ms === 100) {
-            atThresholdCount++;
-        }
-        else {
-            ms = Math.max(100, ms - 6);
-        }
-    }
-    yield sleep(800 - ms);
-}
-
-function* moveTowardsPlayer(obj: ReturnType<typeof objValuable>) {
-    let steps = Rng.int(0, 1000);
-    const wiggle = container().step(() => obj.pivot.x = Math.round(Math.sin(steps++ * 0.2) * 4)).show(obj);
-
-    yield* Coro.all([
-        interpv(obj.scale).steps(3).to(1, 1).over(100),
-        interpvr(obj).factor(factor.sine).translate(0, -100).over(500),
-    ]);
-
-    wiggle.destroy();
-
-    obj.collectableOnlyIfPlayerHasControl = false;
-
-    yield interpvr(obj).factor(factor.sine).to(playerObj).over(300);
 }
