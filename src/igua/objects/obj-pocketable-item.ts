@@ -53,7 +53,7 @@ export function objPocketableItem(item: RpgPocket.Item) {
                     }
                 }
             });
-        // TODO SFX, VFX
+        // TODO VFX
         // Bounce is kind of bad
         // Really need to figure out a smart way to compute this for many situations...
         physicsObj.speed.at(playerObj.speed);
@@ -69,7 +69,7 @@ export function objPocketableItem(item: RpgPocket.Item) {
         yield holdf(() => physicsObj.isOnGround, 3);
         physicsObj.alpha = 1;
 
-        yield () => self.collides(playerObj);
+        yield () => playerObj.hasControl && self.collides(playerObj);
         const result = RpgPocket.Methods.receive(RpgProgress.character.inventory.pocket, item);
         objPocketCollectNotification(result).at(self).show();
         self.destroy();
