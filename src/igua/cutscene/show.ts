@@ -62,7 +62,7 @@ function objSpeakerMessageBox(speaker: DisplayObject | null) {
             self.destroy();
         },
     )
-        .at(Math.round((renderer.width - txSpeakBox.width) / 2), -31)
+        .at(Math.round((renderer.width - txSpeakBox.width) / 2), -24)
         .show(layers.overlay.messages);
 }
 
