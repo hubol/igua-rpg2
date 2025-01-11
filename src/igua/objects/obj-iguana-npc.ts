@@ -1,5 +1,7 @@
 import { SubjectiveColorAnalyzer } from "../../lib/color/subjective-color-analyzer";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
+import { interp } from "../../lib/game-engine/routines/interp";
+import { Rng } from "../../lib/math/rng";
 import { NpcPersonas } from "../data/npc-personas";
 import { IguanaLooks } from "../iguana/looks";
 import { mxnIguanaEditable } from "../mixins/mxn-iguana-editable";
@@ -20,9 +22,35 @@ export function objIguanaNpc({ personaName }: ObjIguanaNpcArgs) {
         persona = NpcPersonas.__Unknown__;
     }
 
+    let speakingStartedCount = 0;
+    let isSpeaking = false;
+
     return objIguanaLocomotive(persona.looks)
         .mixin(mxnIguanaEditable, persona.looks)
-        .mixin(mxnSpeaker, { name: persona.name, ...getSpeakerColors(persona.looks) });
+        .mixin(mxnSpeaker, { name: persona.name, ...getSpeakerColors(persona.looks) })
+        .coro(function* (self) {
+            let speakingHandledCount = 0;
+
+            while (true) {
+                yield () => isSpeaking && speakingStartedCount > speakingHandledCount;
+                speakingStartedCount = speakingHandledCount;
+                const count = Rng.intc(2, 4);
+                for (let i = 0; i < count; i++) {
+                    yield interp(self.head.mouth, "agape").to(1).over(Rng.float(150, 225));
+                    yield interp(self.head.mouth, "agape").to(0).over(Rng.float(100, 150));
+                    if (!isSpeaking) {
+                        break;
+                    }
+                }
+            }
+        })
+        .handles("mxnSpeaker.speakingStarted", () => {
+            speakingStartedCount++;
+            isSpeaking = true;
+        })
+        .handles("mxnSpeaker.speakingEnded", () => {
+            isSpeaking = false;
+        });
 }
 
 function getSpeakerColors(looks: IguanaLooks.Serializable) {

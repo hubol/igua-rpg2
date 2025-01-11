@@ -8,5 +8,7 @@ interface MxnSpeakerArgs {
 }
 
 export function mxnSpeaker(obj: DisplayObject, speaker: MxnSpeakerArgs) {
-    return obj.merge({ speaker });
+    return obj.merge({ speaker })
+        .dispatches<"mxnSpeaker.speakingStarted">()
+        .dispatches<"mxnSpeaker.speakingEnded">();
 }

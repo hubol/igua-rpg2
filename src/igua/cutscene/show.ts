@@ -87,11 +87,19 @@ function* showOneMessage(text: string) {
         currentInstance = objSpeakerMessageBox(currentSpeaker);
     }
 
+    if (currentSpeaker?.is(mxnSpeaker)) {
+        currentSpeaker.dispatch("mxnSpeaker.speakingStarted");
+    }
+
     yield () => currentInstance!.state.isReadyToReceiveText;
     currentInstance.state.text = text;
 
     yield () => Input.isUp("Confirm");
     yield () => Input.isDown("Confirm");
+
+    if (currentSpeaker?.is(mxnSpeaker)) {
+        currentSpeaker.dispatch("mxnSpeaker.speakingEnded");
+    }
 
     currentInstance.state.mayBeDestroyed = true;
     instance = currentInstance;
