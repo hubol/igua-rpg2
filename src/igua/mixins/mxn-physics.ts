@@ -7,6 +7,7 @@ import { Material } from "../systems/materials";
 export enum PhysicsFaction {
     Player = 1,
     Enemy = 1 << 1,
+    Environment = 1 << 2,
 }
 
 interface PhysicsArgs {

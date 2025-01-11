@@ -1,7 +1,7 @@
 import { Sprite } from "pixi.js";
 import { RpgPocket } from "../rpg/rpg-pocket";
 import { playerObj } from "./obj-player";
-import { mxnPhysics } from "../mixins/mxn-physics";
+import { PhysicsFaction, mxnPhysics } from "../mixins/mxn-physics";
 import { Rng } from "../../lib/math/rng";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { DataPocketItem } from "../data/data-pocket-item";
@@ -26,6 +26,7 @@ export function objPocketableItem(item: RpgPocket.Item) {
             gravity: 0.3,
             physicsRadius: Math.floor(tx.height * 0.3),
             physicsOffset: [0, 1],
+            physicsFaction: PhysicsFaction.Environment,
         })
             .mixin(mxnSpatialAudio)
             .step(self => {
