@@ -57,6 +57,36 @@ export namespace Coro {
 
     type ReturnedByGenerator<T> = T extends Coro.Type<infer U> ? U : never;
 
+    /**
+     * Something of an analog to Promise.race, with dramatically different implementations.
+     * When *any* one of the supplied predicates returns true or Coros completes, then this Coro completes.
+     * @param values
+     */
+    export function* race(values: ReadonlyArray<Coro.Type | Predicate>): Coro.Type<void> {
+        const length = values.length;
+        const predicates: Predicate[] = [];
+
+        for (let i = 0; i < length; i++) {
+            const value = values[i];
+            if (isCoroType(value)) {
+                predicates.push(runner.bind(null, value, createRunnerState()));
+            }
+            else {
+                predicates.push(value);
+            }
+        }
+
+        yield () => {
+            for (let i = 0; i < length; i++) {
+                if (predicates[i]()) {
+                    return true;
+                }
+            }
+
+            return false;
+        };
+    }
+
     export function* all<T extends ReadonlyArray<Coro.Type | Predicate> | []>(
         values: T,
     ): Coro.Type<{ -readonly [P in keyof T]: ReturnedByGenerator<T[P]> }> {
