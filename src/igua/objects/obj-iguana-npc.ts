@@ -1,4 +1,4 @@
-import { getColorWithHighestContrast } from "../../lib/color/get-color-with-highest-contrast";
+import { SubjectiveColorAnalyzer } from "../../lib/color/subjective-color-analyzer";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { NpcPersonas } from "../data/npc-personas";
 import { IguanaLooks } from "../iguana/looks";
@@ -28,7 +28,7 @@ export function objIguanaNpc({ personaName }: ObjIguanaNpcArgs) {
 function getSpeakerColors(looks: IguanaLooks.Serializable) {
     return {
         colorPrimary: looks.head.color,
-        colorSecondary: getColorWithHighestContrast(looks.head.color, [
+        colorSecondary: SubjectiveColorAnalyzer.getColorWithHighestContrast(looks.head.color, [
             looks.body.color,
             looks.body.tail.color,
             looks.head.crest.color,
