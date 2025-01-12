@@ -70,6 +70,18 @@
       ]
     },
     {
+      "name": "AboveEntitiesDecals",
+      "_eid": "63753160",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
       "name": "Entities",
       "_eid": "93086020",
       "offsetX": 0,
@@ -589,6 +601,18 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": "SecretSymbols"
+        },
+        {
+          "x": 180,
+          "y": 176,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffbd07",
+          "texture": "shapes/x 10.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
