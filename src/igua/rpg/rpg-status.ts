@@ -1,3 +1,4 @@
+import { blendColorDelta } from "../../lib/color/blend-color";
 import { Integer, PercentAsInteger, RgbInt } from "../../lib/math/number-alias-types";
 import { RpgAttack } from "./rpg-attack";
 import { RpgFaction } from "./rpg-faction";
@@ -108,7 +109,9 @@ export namespace RpgStatus {
                 if (target.wetness.value === 0) {
                     target.wetness.tint = attack.wetness.tint;
                 }
-                // TODO blend?
+                else {
+                    target.wetness.tint = blendColorDelta(target.wetness.tint, attack.wetness.tint, 4);
+                }
             }
             target.wetness.value = Math.min(target.wetness.value + attack.wetness.value, target.wetness.max);
 

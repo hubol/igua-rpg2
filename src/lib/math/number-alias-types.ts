@@ -4,6 +4,7 @@ export type Polar = ForceAliasType<number>;
 export type Unit = ForceAliasType<number>;
 export type Integer = ForceAliasType<number>;
 export type ZeroOrGreater = ForceAliasType<number>;
+export type Float255 = ForceAliasType<number>;
 
 export type Seconds = ForceAliasType<number>;
 export type Milliseconds = ForceAliasType<number>;

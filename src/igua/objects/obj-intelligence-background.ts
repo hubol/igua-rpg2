@@ -1,9 +1,9 @@
-import { Color, Graphics } from "pixi.js";
+import { Graphics } from "pixi.js";
 import { Integer } from "../../lib/math/number-alias-types";
-import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { RpgProgress } from "../rpg/rpg-progress";
-import { approachLinear, nlerp } from "../../lib/math/number";
+import { approachLinear } from "../../lib/math/number";
 import { StringConvert } from "../../lib/string/string-convert";
+import { blendColor } from "../../lib/color/blend-color";
 
 interface ObjIntelligenceBackgroundArgs {
     initialTint: string;
@@ -13,18 +13,13 @@ interface ObjIntelligenceBackgroundArgs {
 }
 
 export function objIntelligenceBackground({ initialTint, targetTint, min, max }: ObjIntelligenceBackgroundArgs) {
-    const initialRgb = AdjustColor.pixi(StringConvert.toRgbInt(initialTint)).toRgb({});
-    const targetRgb = AdjustColor.pixi(StringConvert.toRgbInt(targetTint)).toRgb({});
-    const blendedRgb = { r: 0, g: 0, b: 0 };
+    const start = StringConvert.toRgbInt(initialTint);
+    const end = StringConvert.toRgbInt(targetTint);
 
     let factor = getLerpFactor(min, max);
 
-    // TODO this should be extracted somewhere
     function getTint() {
-        blendedRgb.r = nlerp(initialRgb.r, targetRgb.r, factor);
-        blendedRgb.g = nlerp(initialRgb.g, targetRgb.g, factor);
-        blendedRgb.b = nlerp(initialRgb.b, targetRgb.b, factor);
-        return AdjustColor.rgb(blendedRgb.r, blendedRgb.g, blendedRgb.b).toPixi();
+        return blendColor(start, end, factor);
     }
 
     return new Graphics().beginFill(0xffffff).drawRect(0, 0, 1, 1)

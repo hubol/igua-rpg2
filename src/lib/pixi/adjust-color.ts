@@ -4,7 +4,7 @@
 // This is certainly an example of premature optimization
 // But it was fun to make!
 
-import { DegreesFloat, RgbInt } from "../math/number-alias-types";
+import { DegreesFloat, Float255, RgbInt } from "../math/number-alias-types";
 
 // ^_^
 
@@ -116,7 +116,6 @@ function ensureRgb() {
 type ForceAliasName<T> = T & { readonly __t?: unique symbol };
 
 type Float1 = ForceAliasName<number>;
-type Float255 = ForceAliasName<number>;
 type Float100 = ForceAliasName<number>;
 
 const AdjustColorChainer = {
