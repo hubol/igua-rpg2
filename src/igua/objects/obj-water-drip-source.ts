@@ -26,28 +26,29 @@ export function objWaterDripSource({ delayMin, delayMax }: ObjWaterDripSourceArg
 }
 
 const atkPoisonDrip = RpgAttack.create({
-    wetness: 5,
+    wetness: {
+        tint: 0x80B020,
+        value: 5,
+    },
     poison: 5,
     versus: RpgFaction.Anyone,
 });
 
 const atkDrip = RpgAttack.create({
-    wetness: 5,
+    wetness: {
+        tint: 0x68A8D0,
+        value: 5,
+    },
     versus: RpgFaction.Anyone,
 });
 
 function getTx(attack: RpgAttack.Model | null) {
-    if (attack == null) {
-        return Tx.Effects.WaterDripXsmall;
-    }
-    if (attack.poison) {
-        return Tx.Effects.PoisonDripSmall;
-    }
-    return Tx.Effects.WaterDripSmall;
+    return attack == null ? Tx.Effects.WaterDripXsmall : Tx.Effects.WaterDripSmall;
 }
 
 export function objWaterDrip(attack: RpgAttack.Model | null) {
     const obj = Sprite.from(getTx(attack))
+        .tinted(attack?.wetness?.tint ?? 0x68A8D0)
         .mixin(mxnPhysics, {
             gravity: 0.05,
             physicsRadius: 4,

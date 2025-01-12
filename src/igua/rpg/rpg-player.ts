@@ -40,6 +40,7 @@ export const RpgPlayer = {
             },
         },
         wetness: {
+            tint: 0xffffff,
             get value() {
                 return RpgProgress.character.status.wetness.value;
             },
@@ -79,7 +80,6 @@ export const RpgPlayer = {
             return 5 + RpgProgress.character.attributes.strength * 5;
         },
         poison: 0,
-        wetness: 0,
         versus: RpgFaction.Enemy,
     }),
 };

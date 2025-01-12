@@ -15,21 +15,35 @@ import { Sfx } from "../../../assets/sounds";
 import { scene } from "../../globals";
 import { mxnSpatialAudio } from "../../mixins/mxn-spatial-audio";
 
-const atkSplash = RpgAttack.create({
-    wetness: 10,
-});
-
-const atkSplashPoison = RpgAttack.create({
-    wetness: 10,
-    poison: 5,
-});
-
 export function objPuddle(width: number, tint = 0x68A8D0) {
-    return objPuddleBase(width, 6, tint, atkSplash);
+    const attack = RpgAttack.create({
+        wetness: {
+            value: 10,
+            tint,
+        },
+    });
+    return objPuddleBase(
+        width,
+        6,
+        tint,
+        attack,
+    );
 }
 
 export function objPuddlePoison(width: number, tint = 0x80B020) {
-    return objPuddleBase(width, 6, tint, atkSplashPoison);
+    const attack = RpgAttack.create({
+        wetness: {
+            value: 10,
+            tint,
+        },
+        poison: 5,
+    });
+    return objPuddleBase(
+        width,
+        6,
+        tint,
+        attack,
+    );
 }
 
 const filterFn = (item: MxnPhysics) => item.physicsFaction as unknown as boolean;

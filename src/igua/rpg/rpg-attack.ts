@@ -1,4 +1,5 @@
-import { Integer } from "../../lib/math/number-alias-types";
+import { Integer, RgbInt } from "../../lib/math/number-alias-types";
+import { DeepPartial } from "../../lib/types/deep-partial";
 import { RpgFaction } from "./rpg-faction";
 
 export namespace RpgAttack {
@@ -6,16 +7,19 @@ export namespace RpgAttack {
         physical: Integer;
         emotional: Integer;
         poison: Integer;
-        wetness: Integer;
+        wetness: {
+            value: Integer;
+            tint: RgbInt;
+        };
         versus: RpgFaction;
     }
 
-    export function create(model: Partial<Model>): Model {
+    export function create(model: DeepPartial<Model>): Model {
         return {
             physical: model.physical ?? 0,
             emotional: model.emotional ?? 0,
             poison: model.poison ?? 0,
-            wetness: model.wetness ?? 0,
+            wetness: { value: model.wetness?.value ?? 0, tint: model.wetness?.tint ?? 0xffffff },
             versus: model.versus ?? RpgFaction.Player,
         };
     }

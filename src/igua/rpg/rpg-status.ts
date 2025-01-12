@@ -1,4 +1,4 @@
-import { Integer, PercentAsInteger } from "../../lib/math/number-alias-types";
+import { Integer, PercentAsInteger, RgbInt } from "../../lib/math/number-alias-types";
 import { RpgAttack } from "./rpg-attack";
 import { RpgFaction } from "./rpg-faction";
 
@@ -22,6 +22,7 @@ export namespace RpgStatus {
             max: number;
         };
         wetness: {
+            tint: RgbInt;
             value: Integer;
             max: Integer;
         };
@@ -93,7 +94,7 @@ export namespace RpgStatus {
                 return { rejected: true, wrongFaction: true };
             }
 
-            const ailments = attack.poison > 0 || attack.wetness > 0;
+            const ailments = attack.poison > 0 || attack.wetness.value > 0;
 
             if (!target.poison.immune) {
                 target.poison.value += attack.poison;
@@ -103,7 +104,13 @@ export namespace RpgStatus {
                 }
             }
 
-            target.wetness.value = Math.min(target.wetness.value + attack.wetness, target.wetness.max);
+            if (attack.wetness.value > 0) {
+                if (target.wetness.value === 0) {
+                    target.wetness.tint = attack.wetness.tint;
+                }
+                // TODO blend?
+            }
+            target.wetness.value = Math.min(target.wetness.value + attack.wetness.value, target.wetness.max);
 
             // TODO warn when amount is not an integer
 

@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 145 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 144 }];
 
 interface TxData {
   id: string;
@@ -28,11 +28,10 @@ function txs<T>(tx: (data: TxData) => T) {
     Effects: {
       Burst32: tx({ id: "Effects.Burst32", atlas: 0, x: 991, y: 251, width: 32, height: 22 }),
       BurstRound24: tx({ id: "Effects.BurstRound24", atlas: 0, x: 595, y: 323, width: 72, height: 24 }),
-      PoisonDripSmall: tx({ id: "Effects.PoisonDripSmall", atlas: 0, x: 504, y: 344, width: 1, height: 2 }),
       SplashMedium: tx({ id: "Effects.SplashMedium", atlas: 0, x: 506, y: 329, width: 72, height: 24 }),
       SplashSmall: tx({ id: "Effects.SplashSmall", atlas: 0, x: 738, y: 286, width: 96, height: 12 }),
       ValuableSparkle: tx({ id: "Effects.ValuableSparkle", atlas: 0, x: 431, y: 280, width: 35, height: 7 }),
-      WaterDripSmall: tx({ id: "Effects.WaterDripSmall", atlas: 0, x: 577, y: 354, width: 1, height: 2 }),
+      WaterDripSmall: tx({ id: "Effects.WaterDripSmall", atlas: 0, x: 504, y: 344, width: 1, height: 2 }),
       WaterDripXsmall: tx({ id: "Effects.WaterDripXsmall", atlas: 0, x: 939, y: 428, width: 3, height: 5 }),
     },
     Enemy: {

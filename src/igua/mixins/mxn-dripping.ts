@@ -13,7 +13,7 @@ export function mxnDripping(obj: DisplayObject) {
     let dripUnit = 0;
 
     return obj
-        .merge({ dripsPerFrame: 0 })
+        .merge({ dripsPerFrame: 0, dripsTint: 0x68A8D0 })
         .step(self => {
             dripUnit += self.dripsPerFrame;
             while (dripUnit >= 1) {
@@ -21,6 +21,7 @@ export function mxnDripping(obj: DisplayObject) {
                 const bounds = box.getBounds(false, r);
                 const point = self.getGlobalPosition(p, false);
                 const dripObj = objWaterDrip(null)
+                    .tinted(self.dripsTint)
                     .mixin(mxnDestroyAfterSteps, 30)
                     .at(point).at(self).add(bounds).add(point, -1).add(Rng.int(bounds.width), 0)
                     .show(self.parent);

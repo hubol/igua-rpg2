@@ -26,6 +26,7 @@ export namespace RpgEnemyRank {
                     immune: status?.poison?.immune ?? false,
                 },
                 wetness: {
+                    tint: 0xffffff,
                     value: status?.wetness?.value ?? 0,
                     max: status?.wetness?.max ?? 100,
                 },
