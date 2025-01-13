@@ -18,7 +18,7 @@ import { mxnSpatialAudio } from "../../mixins/mxn-spatial-audio";
 export function objPuddle(width: number, tint = 0x68A8D0) {
     const attack = RpgAttack.create({
         wetness: {
-            value: 10,
+            value: 2,
             tint,
         },
     });
@@ -33,7 +33,7 @@ export function objPuddle(width: number, tint = 0x68A8D0) {
 export function objPuddlePoison(width: number, tint = 0x80B020) {
     const attack = RpgAttack.create({
         wetness: {
-            value: 10,
+            value: 2,
             tint,
         },
         poison: 5,
@@ -57,6 +57,14 @@ function objPuddleBase(width: number, height: number, tint: Integer, attack: Rpg
     const sideStepCounts = new WeakMap<object, Integer>();
     const upwardStepCounts = new WeakMap<object, Integer>();
 
+    const bigAttack = RpgAttack.create({
+        ...attack,
+        wetness: {
+            ...attack.wetness,
+            value: 30,
+        },
+    });
+
     const c = container(gfx)
         .collisionShape(CollisionShape.DisplayObjects, [gfx])
         .step(() => {
@@ -64,12 +72,12 @@ function objPuddleBase(width: number, height: number, tint: Integer, attack: Rpg
 
             const instances = Instances(mxnPhysics, filterFn);
             for (const obj of instances) {
-                if (!obj.collides(c, obj.speed.y < 0 ? undefined : obj.speed)) {
+                if (obj.speed.isZero || !obj.collides(c, obj.speed.y < 0 ? undefined : obj.speed)) {
                     continue;
                 }
 
                 if (obj.is(mxnRpgStatus)) {
-                    obj.damage(attack);
+                    obj.damage(Math.abs(obj.speed.y) > 2 ? bigAttack : attack);
                 }
 
                 if ((obj.speed.y < 0) || (!obj.isOnGround && obj.speed.y > 0)) {
