@@ -37,6 +37,7 @@ export interface Vector extends VectorSimple {
     at(vector: VectorSimple, scalar: number): this;
     at(x: number, y: number): this;
     vlength: number;
+    readonly isZero: boolean;
 }
 
 type PropertyDefinitionShape = Partial<Record<keyof Vector, PropertyDescriptor & ThisType<any>>>;
@@ -51,6 +52,12 @@ const propertyDefinitions = createPropertyDefinitions({
         },
         set: function (this: Vector, l) {
             normalize(this).scale(Math.max(0, l));
+        },
+        configurable: true,
+    },
+    isZero: {
+        get: function (this: Vector) {
+            return this.x === 0 && this.y === 0;
         },
         configurable: true,
     },
