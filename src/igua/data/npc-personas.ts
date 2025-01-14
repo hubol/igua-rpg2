@@ -10,5 +10,6 @@ export const NpcPersonas = {
     BalltownOutskirtsMiner: { name: "Dante", looks: NpcLooks.Miner },
     BalltownOutskirtsFarmer: { name: "Lars", looks: NpcLooks.Farmer },
     NewBalltownBallFruitFanatic: { name: "Marf", looks: NpcLooks.BallFruitFanatic },
+    NewBalltownArmorer: { name: "Trav", looks: NpcLooks.Dizzy },
     __Unknown__: { name: "???", looks: NpcLooks.MintyJourney },
 } satisfies Record<string, NpcPersona>;

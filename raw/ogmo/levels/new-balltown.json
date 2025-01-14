@@ -118,6 +118,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromFanatic", "depth": 0}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 2,
+          "_eid": "19953026",
+          "x": 552,
+          "y": 208,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromArmorer", "depth": 0}
         }
       ]
     },
@@ -178,7 +189,7 @@
           "y": 160,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "", "checkpointName": "", "name": "", "depth": 0}
+          "values": {"sceneName": "scnNewBalltownArmorer", "checkpointName": "", "name": "", "depth": 0}
         }
       ]
     },
