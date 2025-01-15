@@ -243,6 +243,8 @@ export function* ask(question: string, ...options: string[]): Coro.Type<any> {
 
     const { currentSpeaker, currentSpeakerMessageBoxObj } = yield* startSpeaking(question);
 
+    yield () => Input.isUp("Confirm");
+
     const optionsObj = objQuestionOptionBoxes(currentSpeaker, options);
     yield () => optionsObj.state.confirmedIndex >= 0;
 
