@@ -9,7 +9,7 @@ import { UiColor } from "../ui-color";
 import { Undefined } from "../../../lib/types/undefined";
 import { Sfx } from "../../../assets/sounds";
 
-export type UiPageProps = { maxHeight?: number; title?: string; selectionIndex: number };
+export type UiPageProps = { maxHeight?: number; title?: string; selectionIndex: number; startTicking?: boolean };
 export type ObjUiPageElement = Container & { selected: boolean };
 
 export type ObjUiPageRouter = ReturnType<typeof objUiPageRouter>;
@@ -73,7 +73,7 @@ export function objUiPageRouter(props: UiPageRouterProps = {}) {
 
 export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
     const ticker = new AsshatTicker();
-    const c = new TickerContainer(ticker, false).merge({
+    const c = new TickerContainer(ticker, props.startTicking ?? false).merge({
         navigation: true,
         selected: Undefined<ObjUiPageElement>(),
         playSounds: true,
@@ -94,6 +94,7 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
         c.selected = elements[c.selectionIndex];
     }
 
+    // TODO i wonder if the selection stuff could be extracted to a mixin...
     function select(dx: number, dy: number) {
         const previousSelectionIndex = c.selectionIndex;
 
