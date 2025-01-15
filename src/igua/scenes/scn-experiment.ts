@@ -6,17 +6,14 @@ import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { Jukebox } from "../core/igua-audio";
-import { show } from "../cutscene/show";
-import { Cutscene, Input, scene } from "../globals";
+import { ask, show } from "../cutscene/show";
+import { Cutscene, scene } from "../globals";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { mxnSpatialAudio } from "../mixins/mxn-spatial-audio";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
-import { ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
-import { objIguanaNpc } from "../objects/obj-iguana-npc";
-import { playerObj } from "../objects/obj-player";
 import { objPocketableItemSpawner } from "../objects/obj-pocketable-item-spawner";
 import { objValuableSpawner } from "../objects/obj-valuable-spawner";
 import { RpgAttack } from "../rpg/rpg-attack";
@@ -33,48 +30,22 @@ export function scnExperiment() {
     enrichFarmer(lvl);
 }
 
-function* leftOrRight() {
-    let left = 0;
-    let right = 0;
-
-    yield () => {
-        if (Input.isDown("SelectLeft") && Input.isDown("SelectRight")) {
-            left = 0;
-            right = 0;
-        }
-        else if (Input.isDown("SelectLeft")) {
-            left++;
-            right = 0;
-        }
-        else if (Input.isDown("SelectRight")) {
-            left = 0;
-            right++;
-        }
-        return left > 5 || right > 5;
-    };
-
-    return left > 5 ? "left" : "right";
-}
-
 function enrichFarmer(lvl: ReturnType<typeof Lvl["Experiment"]>) {
     const startingPosition = lvl.FarmerNpc.vcpy();
 
     lvl.FarmerNpc.mixin(mxnCutscene, function* () {
         scene.camera.mode = "controlled";
 
-        yield* show(
-            "I should replant the ballfruit? Sure.",
-            "What ballfruit do you want? Hold left for Type A and hold right for Type B",
-        );
+        yield* show("I should replant the ballfruit? Sure.");
 
-        const choice = yield* leftOrRight();
-        const choicePocketItem = choice === "left" ? RpgPocket.Item.BallFruitTypeA : RpgPocket.Item.BallFruitTypeB;
+        const choice = yield* ask("What ballfruit do you want? Choose wisely.", "Type A", "Type B");
+        const choicePocketItem = choice === 0 ? RpgPocket.Item.BallFruitTypeA : RpgPocket.Item.BallFruitTypeB;
 
-        yield* show((choice === "left" ? "Type A" : "Type B") + ", got it.");
+        yield* show((choice === 0 ? "Type A" : "Type B") + ", got it.");
 
         yield interpvr(scene.camera).to(lvl.FarmingRegion).over(1000);
 
-        lvl.FarmerNpc.at(lvl.FarmerAppearMarker).show();
+        lvl.FarmerNpc.at(lvl.FarmerAppearMarker);
         yield* lvl.FarmerNpc.walkTo(lvl.FarmerMoveToMarker.x);
 
         for (const spawnerObj of Instances(objPocketableItemSpawner)) {
