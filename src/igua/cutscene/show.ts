@@ -88,57 +88,56 @@ function objSpeakerMessageBox(speaker: DisplayObject | null) {
 }
 
 type ObjSpeakerMessageBox = ReturnType<typeof objSpeakerMessageBox>;
-let instance = Null<ObjSpeakerMessageBox>();
+let speakerMessageBoxObj = Null<ObjSpeakerMessageBox>();
 
 function* showOneMessage(text: string) {
-    const { currentSpeaker, currentInstance } = yield* startSpeaking(text);
+    const { currentSpeaker, currentSpeakerMessageBoxObj } = yield* startSpeaking(text);
 
     yield () => Input.isUp("Confirm");
     yield () => Input.isDown("Confirm");
 
-    endSpeaking(currentSpeaker, currentInstance);
+    endSpeaking(currentSpeaker, currentSpeakerMessageBoxObj);
 }
 
 export const CtxShow = {
     speaker: Null<DisplayObject>(),
 };
 
-function endSpeaking(currentSpeaker: DisplayObject | null, currentInstance: ObjSpeakerMessageBox) {
+function endSpeaking(currentSpeaker: DisplayObject | null, currentSpeakerMessageBoxObj: ObjSpeakerMessageBox) {
     if (currentSpeaker?.is(mxnSpeaker)) {
         currentSpeaker.dispatch("mxnSpeaker.speakingEnded");
     }
 
-    currentInstance.state.mayBeDestroyed = true;
-    instance = currentInstance;
+    currentSpeakerMessageBoxObj.state.mayBeDestroyed = true;
+    speakerMessageBoxObj = currentSpeakerMessageBoxObj;
 }
 
 function* startSpeaking(text: string) {
     const currentSpeaker = CtxShow.speaker?.destroyed ? null : CtxShow.speaker;
-    let currentInstance = instance?.destroyed ? null : instance;
+    let currentSpeakerMessageBoxObj = speakerMessageBoxObj?.destroyed ? null : speakerMessageBoxObj;
 
-    if (currentInstance) {
-        if (currentInstance.state.speaker === currentSpeaker) {
-            currentInstance.state.mayBeDestroyed = false;
+    if (currentSpeakerMessageBoxObj) {
+        if (currentSpeakerMessageBoxObj.state.speaker === currentSpeaker) {
+            currentSpeakerMessageBoxObj.state.mayBeDestroyed = false;
         }
         else {
-            currentInstance.state.mayBeDestroyed = true;
-            yield () => currentInstance!.destroyed;
-            currentInstance = null;
+            currentSpeakerMessageBoxObj.state.mayBeDestroyed = true;
+            yield () => currentSpeakerMessageBoxObj!.destroyed;
+            currentSpeakerMessageBoxObj = null;
         }
     }
 
-    if (!currentInstance) {
-        currentInstance = objSpeakerMessageBox(currentSpeaker);
+    if (!currentSpeakerMessageBoxObj) {
+        currentSpeakerMessageBoxObj = objSpeakerMessageBox(currentSpeaker);
     }
 
     if (currentSpeaker?.is(mxnSpeaker)) {
         currentSpeaker.dispatch("mxnSpeaker.speakingStarted");
     }
 
-    yield () => currentInstance!.state.isReadyToReceiveText;
-    currentInstance.state.text = text;
-    // TODO shitty names
-    return { currentSpeaker, currentInstance };
+    yield () => currentSpeakerMessageBoxObj!.state.isReadyToReceiveText;
+    currentSpeakerMessageBoxObj.state.text = text;
+    return { currentSpeaker, currentSpeakerMessageBoxObj };
 }
 
 export function* show(text: string, ...moreText: string[]) {
@@ -149,7 +148,7 @@ export function* show(text: string, ...moreText: string[]) {
 
 const [txQuestionOptionBox, txQuestionOptionSelected] = Tx.Ui.Dialog.QuestionOption.split({ count: 2 });
 
-function objQuestionOption(text: string, color: RgbInt, textColor: RgbInt) {
+function objQuestionOptionBox(text: string, color: RgbInt, textColor: RgbInt) {
     const hitbox = new Graphics().beginFill(0xff0000).invisible().drawRect(6, 4, 112, 32);
 
     const obj = container(hitbox)
@@ -175,8 +174,7 @@ function objQuestionOption(text: string, color: RgbInt, textColor: RgbInt) {
     return obj;
 }
 
-// TODO align name with messagebox
-function objQuestionOptions(speaker: DisplayObject | null, options: string[]) {
+function objQuestionOptionBoxes(speaker: DisplayObject | null, options: string[]) {
     const colors = getMessageBoxColors(speaker);
     const state = { confirmedIndex: -1 };
 
@@ -185,7 +183,7 @@ function objQuestionOptions(speaker: DisplayObject | null, options: string[]) {
         if (index === options.length - 1 && options.length % 2 === 1) {
             position.x += 70;
         }
-        return objQuestionOption(option, colors.secondary, colors.textSecondary).at(position);
+        return objQuestionOptionBox(option, colors.secondary, colors.textSecondary).at(position);
     });
 
     const pageObj = objUiPage(
@@ -243,14 +241,14 @@ export function* ask(question: string, ...options: string[]): Coro.Type<any> {
         options = ["Yes", "No"];
     }
 
-    const { currentSpeaker, currentInstance } = yield* startSpeaking(question);
+    const { currentSpeaker, currentSpeakerMessageBoxObj } = yield* startSpeaking(question);
 
-    const optionsObj = objQuestionOptions(currentSpeaker, options);
+    const optionsObj = objQuestionOptionBoxes(currentSpeaker, options);
     yield () => optionsObj.state.confirmedIndex >= 0;
 
     optionsObj.destroy();
 
-    endSpeaking(currentSpeaker, currentInstance);
+    endSpeaking(currentSpeaker, currentSpeakerMessageBoxObj);
 
     if (isYesNo) {
         return optionsObj.state.confirmedIndex === 0;
