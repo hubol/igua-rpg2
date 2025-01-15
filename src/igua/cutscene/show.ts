@@ -6,7 +6,7 @@ import { Input, layers, scene } from "../globals";
 import { Null } from "../../lib/types/null";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Tx } from "../../assets/textures";
-import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { holdf } from "../../lib/game-engine/routines/hold";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { SubjectiveColorAnalyzer } from "../../lib/color/subjective-color-analyzer";
@@ -19,6 +19,7 @@ import { mxnBoilMirrorRotate } from "../mixins/mxn-boil-mirror-rotate";
 import { CollisionShape } from "../../lib/pixi/collision";
 import { fntErotix } from "../../assets/bitmap-fonts/fnt-erotix";
 import { fntErotixLight } from "../../assets/bitmap-fonts/fnt-erotix-light";
+import { interpvr } from "../../lib/game-engine/routines/interp";
 
 const [txSpeakBox, txSpeakBoxOutline, txSpeakBoxTail] = Tx.Ui.Dialog.SpeakBox.split({ count: 3 });
 
@@ -179,21 +180,40 @@ function objQuestionOptions(speaker: DisplayObject | null, options: string[]) {
     const colors = getMessageBoxColors(speaker);
     const state = { confirmedIndex: -1 };
 
+    const optionObjs = options.map((option, index) => {
+        const position = vnew((index % 2) * 140, Math.floor(index / 2) * 45);
+        if (index === options.length - 1 && options.length % 2 === 1) {
+            position.x += 70;
+        }
+        return objQuestionOption(option, colors.secondary, colors.textSecondary).at(position);
+    });
+
     const pageObj = objUiPage(
-        options.map((option, index) => {
-            const position = vnew((index % 2) * 140, Math.floor(index / 2) * 45);
-            if (index === options.length - 1 && options.length % 2 === 1) {
-                position.x += 70;
-            }
-            return objQuestionOption(option, colors.secondary, colors.textSecondary).at(position);
-        }),
+        optionObjs,
         { selectionIndex: 0, startTicking: true },
     )
         .coro(function* (self) {
             yield () => self.selectionIndex >= 0 && Input.isDown("Confirm");
             yield () => Input.isUp("Confirm");
+
             // TODO assert self.selectionIndex >= 0
-            state.confirmedIndex = self.selectionIndex;
+            self.navigation = false;
+            const confirmedIndex = self.selectionIndex;
+
+            const translateX = confirmedIndex % 2 === 0 ? renderer.width : -renderer.width;
+            yield* Coro.all(
+                [
+                    ...optionObjs.flatMap((optionObj, index) =>
+                        index === confirmedIndex ? [] : [interpvr(optionObj).translate(translateX, 0).over(500)]
+                    ),
+                    Coro.chain([
+                        sleep(250),
+                        interpvr(optionObjs[confirmedIndex]).translate(0, -renderer.height).over(500),
+                    ]),
+                ],
+            );
+
+            state.confirmedIndex = confirmedIndex;
         });
 
     const offset = vnew(64, 20);
@@ -207,7 +227,7 @@ function objQuestionOptions(speaker: DisplayObject | null, options: string[]) {
                     if (!pageObj.selected) {
                         return;
                     }
-                    self.scale.set(Input.isDown("Confirm") ? 0.9 : 1);
+                    self.scale.set(pageObj.navigation && Input.isDown("Confirm") ? 0.9 : 1);
                     self.moveTowards(v.at(offset).add(pageObj.selected), 8);
                 },
             ),
@@ -228,7 +248,7 @@ export function* ask(question: string, ...options: string[]): Coro.Type<any> {
     const optionsObj = objQuestionOptions(currentSpeaker, options);
     yield () => optionsObj.state.confirmedIndex >= 0;
 
-    optionsObj.destroy(); // TODO cute animation
+    optionsObj.destroy();
 
     endSpeaking(currentSpeaker, currentInstance);
 
