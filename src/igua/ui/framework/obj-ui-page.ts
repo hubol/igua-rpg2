@@ -87,6 +87,7 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
     const mask = new Graphics().beginFill(0xffffff).drawRect(0, 0, renderer.width, 1).show(maskedObj);
 
     updateSelection();
+    let previousSelectionIndex = c.selectionIndex;
 
     function updateSelection() {
         c.selectionIndex = cyclic(c.selectionIndex, 0, elements.length);
@@ -96,8 +97,6 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
 
     // TODO i wonder if the selection stuff could be extracted to a mixin...
     function select(dx: number, dy: number) {
-        const previousSelectionIndex = c.selectionIndex;
-
         dx = Math.sign(dx) * 16;
         dy = Math.sign(dy) * 16;
         let ax = dx;
@@ -113,18 +112,32 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
 
         while (d < maximumTravel) {
             const offset = [-ax, -ay];
+            const collidedIndices: number[] = [];
+
             for (let i = 0; i < elements.length; i++) {
                 if (i === c.selectionIndex) {
                     continue;
                 }
                 if (!c.selected || elements[i].collides(c.selected, offset)) {
-                    c.selectionIndex = i;
-                    if (c.playSounds && previousSelectionIndex !== c.selectionIndex) {
-                        Sfx.Ui.Select.play();
-                    }
-                    return;
+                    collidedIndices.push(i);
                 }
             }
+
+            if (collidedIndices.length > 0) {
+                let nextSelectionIndex = collidedIndices[0];
+                // Handle the ambiguous collision by preferring the index we were at previously
+                if (collidedIndices.length > 1 && collidedIndices.includes(previousSelectionIndex)) {
+                    nextSelectionIndex = previousSelectionIndex;
+                }
+
+                if (c.playSounds && nextSelectionIndex !== c.selectionIndex) {
+                    previousSelectionIndex = c.selectionIndex;
+                    Sfx.Ui.Select.play();
+                }
+                c.selectionIndex = nextSelectionIndex;
+                return;
+            }
+
             ax += dx;
             ay += dy;
             d += dd;
