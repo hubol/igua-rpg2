@@ -1,6 +1,8 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Sfx } from "../../assets/sounds";
 import { factor, interp } from "../../lib/game-engine/routines/interp";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { Jukebox } from "../core/igua-audio";
 import { ask, show } from "../cutscene/show";
@@ -76,8 +78,14 @@ Need at least 150`);
                 "n",
             )) === 0
         ) {
-            RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits += RpgProgress.character.status.wetness.value;
+            RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits = Math.min(
+                RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits
+                    + RpgProgress.character.status.wetness.value,
+                maximumMoistureUnits,
+            );
             RpgProgress.character.status.wetness.value = 0;
+            Sfx.Fluid.Slurp.play();
+            yield sleep(1000);
         }
     });
 }
