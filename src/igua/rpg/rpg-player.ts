@@ -40,7 +40,12 @@ export const RpgPlayer = {
             },
         },
         wetness: {
-            tint: 0xffffff,
+            get tint() {
+                return RpgProgress.character.status.wetness.tint;
+            },
+            set tint(value) {
+                RpgProgress.character.status.wetness.tint = value;
+            },
             get value() {
                 return RpgProgress.character.status.wetness.value;
             },

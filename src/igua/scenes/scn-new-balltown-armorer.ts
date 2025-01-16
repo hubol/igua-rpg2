@@ -1,13 +1,17 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { Jukebox } from "../core/igua-audio";
 import { ask, show } from "../cutscene/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltownArmorer() {
     Jukebox.play(Mzk.GolfResort);
     const lvl = Lvl.NewBalltownArmorer();
     enrichArmorer(lvl);
+    enrichAquarium(lvl);
 }
 
 function enrichArmorer(lvl: ReturnType<typeof Lvl["NewBalltownArmorer"]>) {
@@ -21,6 +25,41 @@ function enrichArmorer(lvl: ReturnType<typeof Lvl["NewBalltownArmorer"]>) {
         }
         else if (result === 2) {
             yield* show("You are judgmental, and in many ways a bitch.");
+        }
+    });
+}
+
+function enrichAquarium(lvl: ReturnType<typeof Lvl["NewBalltownArmorer"]>) {
+    lvl.AquariumWaterIntake.mixin(mxnSpeaker, {
+        colorPrimary: 0x0B4FA8,
+        colorSecondary: 0x0BC6A8,
+        name: "Automated Water Intake",
+    }).mixin(mxnCutscene, function* () {
+        if (RpgProgress.character.status.wetness.value === 0) {
+            yield* show(`--Water analysis
+No moisture detected.`);
+            return;
+        }
+        yield* show(`--Water analysis
+${RpgProgress.character.status.wetness.value} moisture units detected.`);
+
+        const purity = Math.round(AdjustColor.pixi(RpgProgress.character.status.wetness.tint).toRgb().b);
+
+        yield* show(`--Purity analysis
+Got ${purity}
+Need at least 150`);
+
+        if (purity < 150) {
+            return;
+        }
+
+        if (
+            (yield* ask(
+                `Sure you want to deposit ${RpgProgress.character.status.wetness.value} moisture unit(s) with purity ${purity}?`,
+                "y",
+                "n",
+            )) === 0
+        ) {
         }
     });
 }

@@ -18,6 +18,7 @@ function getInitialRpgProgress() {
                     value: 0,
                 },
                 wetness: {
+                    tint: 0xffffff,
                     value: 0,
                 },
             },
