@@ -142,14 +142,14 @@
       "decals": [
         {
           "x": 302,
-          "y": 89,
+          "y": 121,
           "scaleX": 2.25,
           "scaleY": 1,
           "rotation": 0,
           "tint": "#88cdff",
           "texture": "shapes/square32.png",
           "originX": 0,
-          "originY": 0,
+          "originY": 1,
           "values": {"name": "AquariumWaterLine"}
         },
         {

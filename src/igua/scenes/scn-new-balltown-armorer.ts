@@ -1,5 +1,6 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { factor, interp } from "../../lib/game-engine/routines/interp";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { Jukebox } from "../core/igua-audio";
 import { ask, show } from "../cutscene/show";
@@ -30,6 +31,21 @@ function enrichArmorer(lvl: ReturnType<typeof Lvl["NewBalltownArmorer"]>) {
 }
 
 function enrichAquarium(lvl: ReturnType<typeof Lvl["NewBalltownArmorer"]>) {
+    const maximumMoistureUnits = 300;
+
+    lvl.AquariumWaterLine.merge({ observedMoistureUnits: RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits })
+        .step(self => {
+            self.scale.y = Math.min(1, self.observedMoistureUnits / maximumMoistureUnits);
+        })
+        .coro(function* (self) {
+            while (true) {
+                yield () => RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits !== self.observedMoistureUnits;
+                yield interp(self, "observedMoistureUnits").factor(factor.sine).to(
+                    RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits,
+                ).over(1000);
+            }
+        });
+
     lvl.AquariumWaterIntake.mixin(mxnSpeaker, {
         colorPrimary: 0x0B4FA8,
         colorSecondary: 0x0BC6A8,
@@ -60,6 +76,8 @@ Need at least 150`);
                 "n",
             )) === 0
         ) {
+            RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits += RpgProgress.character.status.wetness.value;
+            RpgProgress.character.status.wetness.value = 0;
         }
     });
 }

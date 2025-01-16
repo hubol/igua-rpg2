@@ -472,7 +472,7 @@ export const Lvl = {
     Pipe: e(r["Pipe"], { x: 360, y: 200, width: 24, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
     Pipe_1: e(r["Pipe"], { x: 355, y: 215, width: 24, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
     Pipe_2: e(r["Pipe"], { x: 296, y: 136, width: 88, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
-    AquariumWaterLine: d(Tx.Shapes.Square32, { x: 302, y: 89, scaleX: 2.25, scaleY: 1, rotation: 0, originX: 0, originY: 0, tint: 0x88cdff }, "TerrainDecals"),
+    AquariumWaterLine: d(Tx.Shapes.Square32, { x: 302, y: 121, scaleX: 2.25, scaleY: 1, rotation: 0, originX: 0, originY: 1, tint: 0x88cdff }, "TerrainDecals"),
     FurnitureAquariumSand: d(Tx.Furniture.Aquarium.Sand, { x: 339, y: 122, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xcbb499 }, "TerrainDecals"),
     ShapesSquare32_5: d(Tx.Shapes.Square32, { x: -68, y: 0, scaleX: 5.8, scaleY: 9.3, rotation: 0, originX: 0, originY: 0, tint: 0x3b2166 }, "TerrainDecals"),
     ShapesSquare32_6: d(Tx.Shapes.Square32, { x: 395, y: -5, scaleX: 5.8, scaleY: 9.3, rotation: 0, originX: 0, originY: 0, tint: 0x3b2166 }, "TerrainDecals"),
