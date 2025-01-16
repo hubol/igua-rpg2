@@ -1,3 +1,4 @@
+import { BLEND_MODES } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
@@ -50,7 +51,8 @@ function enrichAquarium(lvl: ReturnType<typeof Lvl["NewBalltownArmorer"]>) {
             }
         });
 
-    console.log(StringFromNumber);
+    lvl.AquariumWaterLineFront.step(self => self.scale.y = lvl.AquariumWaterLine.scale.y).blendMode =
+        BLEND_MODES.MULTIPLY;
 
     lvl.AquariumWaterIntake.mixin(mxnSpeaker, {
         colorPrimary: 0x0B4FA8,

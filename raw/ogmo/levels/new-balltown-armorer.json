@@ -141,6 +141,18 @@
       "gridCellsY": 35,
       "decals": [
         {
+          "x": 342,
+          "y": 139,
+          "scaleX": 12,
+          "scaleY": 1.7,
+          "rotation": 0,
+          "tint": "#6a6a6a",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
           "x": 302,
           "y": 121,
           "scaleX": 2.25,
@@ -1553,6 +1565,30 @@
           "values": {"name": ""}
         },
         {
+          "x": 355,
+          "y": 100,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ff8bc9",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 366,
+          "y": 109,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ff8bc9",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
           "x": 320,
           "y": 123,
           "scaleX": 1,
@@ -1563,6 +1599,18 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
+        },
+        {
+          "x": 305,
+          "y": 126,
+          "scaleX": 2.05,
+          "scaleY": 0.2,
+          "rotation": 0,
+          "tint": "#a5c4ff",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 1,
+          "values": {"name": "AquariumWaterLineFront"}
         },
         {
           "x": 339,
@@ -1608,6 +1656,30 @@
           "rotation": 0,
           "tint": "#0b4fa8",
           "texture": "shapes/square irregular 10.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 372,
+          "y": 126,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 305,
+          "y": 90,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -2688,6 +2760,30 @@
           "originY": 0,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 356,
+          "y": 117,
+          "scaleX": 3.2,
+          "scaleY": 3.7,
+          "rotation": 0,
+          "tint": "#364519",
+          "texture": "town/ball/ball0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 347,
+          "y": 118,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#364519",
+          "texture": "furniture/aquarium/sand.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
