@@ -4,6 +4,7 @@ import { Sfx } from "../../assets/sounds";
 import { factor, interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
+import { StringFromNumber } from "../../lib/string/string-from-number";
 import { Jukebox } from "../core/igua-audio";
 import { ask, show } from "../cutscene/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -33,59 +34,63 @@ function enrichArmorer(lvl: ReturnType<typeof Lvl["NewBalltownArmorer"]>) {
 }
 
 function enrichAquarium(lvl: ReturnType<typeof Lvl["NewBalltownArmorer"]>) {
+    const { aquarium } = RpgProgress.flags.newBalltown.armorer;
+    const { wetness } = RpgProgress.character.status;
+
     const maximumMoistureUnits = 300;
 
-    lvl.AquariumWaterLine.merge({ observedMoistureUnits: RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits })
+    lvl.AquariumWaterLine.merge({ observedMoistureUnits: aquarium.moistureUnits })
         .step(self => {
             self.scale.y = Math.min(1, self.observedMoistureUnits / maximumMoistureUnits);
         })
         .coro(function* (self) {
             while (true) {
-                yield () => RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits !== self.observedMoistureUnits;
-                yield interp(self, "observedMoistureUnits").factor(factor.sine).to(
-                    RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits,
-                ).over(1000);
+                yield () => aquarium.moistureUnits !== self.observedMoistureUnits;
+                yield interp(self, "observedMoistureUnits").factor(factor.sine).to(aquarium.moistureUnits).over(1000);
             }
         });
+
+    console.log(StringFromNumber);
 
     lvl.AquariumWaterIntake.mixin(mxnSpeaker, {
         colorPrimary: 0x0B4FA8,
         colorSecondary: 0x0BC6A8,
         name: "Automated Water Intake",
     }).mixin(mxnCutscene, function* () {
-        if (RpgProgress.character.status.wetness.value === 0) {
-            yield* show(`--Water analysis
+        if (aquarium.moistureUnits < maximumMoistureUnits) {
+            if (wetness.value === 0) {
+                yield* show(`--Water analysis
 No moisture detected.`);
-            return;
-        }
-        yield* show(`--Water analysis
-${RpgProgress.character.status.wetness.value} moisture units detected.`);
+                return;
+            }
+            yield* show(`--Water analysis
+${wetness.value} moisture unit(s) detected.`);
 
-        const purity = Math.round(AdjustColor.pixi(RpgProgress.character.status.wetness.tint).toRgb().b);
+            const purity = Math.round(AdjustColor.pixi(wetness.tint).toRgb().b);
 
-        yield* show(`--Purity analysis
+            yield* show(`--Purity analysis
 Got ${purity}
 Need at least 150`);
 
-        if (purity < 150) {
-            return;
+            if (purity < 150) {
+                return;
+            }
+
+            if (
+                (yield* ask(
+                    `Sure you want to deposit ${wetness.value} moisture unit(s) with purity ${purity}?`,
+                    "y",
+                    "n",
+                )) === 0
+            ) {
+                aquarium.moistureUnits = Math.min(aquarium.moistureUnits + wetness.value, maximumMoistureUnits);
+                wetness.value = 0;
+                Sfx.Fluid.Slurp.play();
+                yield sleep(1000);
+            }
         }
 
-        if (
-            (yield* ask(
-                `Sure you want to deposit ${RpgProgress.character.status.wetness.value} moisture unit(s) with purity ${purity}?`,
-                "y",
-                "n",
-            )) === 0
-        ) {
-            RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits = Math.min(
-                RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits
-                    + RpgProgress.character.status.wetness.value,
-                maximumMoistureUnits,
-            );
-            RpgProgress.character.status.wetness.value = 0;
-            Sfx.Fluid.Slurp.play();
-            yield sleep(1000);
-        }
+        yield* show(`--Fill analysis
+at ${StringFromNumber.getPercentageNoDecimal(aquarium.moistureUnits, maximumMoistureUnits)} capacity`);
     });
 }
