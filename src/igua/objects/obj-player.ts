@@ -61,6 +61,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
         })
         .merge({
             get hasControl() {
+                // TODO I sometimes wonder if this belongs closer to the RPG layer
                 return !Cutscene.isPlaying;
             },
             get walkingTopSpeed() {
@@ -76,6 +77,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             puppet.isMovingRight = hasControl && Input.isDown("MoveRight");
             puppet.isDucking = hasControl && puppet.isOnGround && Input.isDown("Duck");
             RpgPlayer.status.isGuarding = puppet.isDucking;
+            RpgPlayer.status.recoveries.wetness = hasControl ? 1 : 0;
 
             if (
                 hasControl && !puppet.isOnGround && puppet.speed.y < PlayerConsts.VariableJumpSpeedMaximum

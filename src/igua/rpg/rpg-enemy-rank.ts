@@ -42,6 +42,9 @@ export namespace RpgEnemyRank {
                 guardingDefenses: {
                     physical: status?.defenses?.physical ?? 0,
                 },
+                recoveries: {
+                    wetness: 1,
+                },
             },
             loot: {
                 valuables: {

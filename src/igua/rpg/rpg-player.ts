@@ -60,6 +60,9 @@ export const RpgPlayer = {
         defenses: {
             physical: 0,
         },
+        recoveries: {
+            wetness: 1,
+        },
         faction: RpgFaction.Player,
         quirks: {
             emotionalDamageIsFatal: true,

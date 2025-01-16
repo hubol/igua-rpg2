@@ -33,6 +33,9 @@ export namespace RpgStatus {
         defenses: {
             physical: PercentAsInteger;
         };
+        recoveries: {
+            wetness: Integer;
+        };
         quirks: {
             incrementsAttackerPrideOnDamage: boolean;
             emotionalDamageIsFatal: boolean;
@@ -80,7 +83,7 @@ export namespace RpgStatus {
                 model.poison.value = Math.max(0, model.poison.value - 1);
             }
             if (count % 4 === 0) {
-                model.wetness.value = Math.max(0, model.wetness.value - 1);
+                model.wetness.value = Math.max(0, model.wetness.value - model.recoveries.wetness);
             }
             model.invulnerable = Math.max(0, model.invulnerable - 1);
         },

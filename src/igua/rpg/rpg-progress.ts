@@ -35,6 +35,11 @@ function getInitialRpgProgress() {
         },
         flags: {
             newBalltown: {
+                armorer: {
+                    aquarium: {
+                        moistureUnits: 0,
+                    },
+                },
                 ballFruitFanatic: {
                     typePreference: Null<RpgPocket.Item>(),
                     succesfulDeliveriesCount: 0,
