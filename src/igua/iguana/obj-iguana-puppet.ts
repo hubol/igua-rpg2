@@ -584,9 +584,9 @@ export function objIguanaHead(head: Head) {
 
     const hornShape = IguanaShapes.Horn[head.horn.shape];
 
-    const crest = objIguanaCrest(head.crest);
+    const crest = container(objIguanaCrest(head.crest));
 
-    const back = container(crest, noggin, mouth);
+    const back = container(noggin, mouth);
     const front = container();
 
     if (hornShape) {
@@ -599,6 +599,8 @@ export function objIguanaHead(head: Head) {
     let isFacingRight = true;
 
     const inner = container(back, eyes, front);
+
+    inner.addChildAt(crest, head.crest.behind ? 0 : 3);
 
     const c = container(inner)
         .merge({ crest, noggin, eyes, mouth })
@@ -616,6 +618,7 @@ export function objIguanaHead(head: Head) {
                 eyes.x = isFacingRight ? 0 : eyesFacingLeftOffset - noggin.width;
                 eyes.isFacingRight = isFacingRight;
                 back.scale.x = isFacingRight ? 1 : -1;
+                crest.scale.x = isFacingRight ? 1 : -1;
                 front.scale.x = isFacingRight ? 1 : -1;
             },
         });

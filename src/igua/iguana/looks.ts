@@ -61,6 +61,7 @@ export namespace IguanaLooks {
                     placement: TypedInput.vector(),
                     flipH: TypedInput.boolean(),
                     flipV: TypedInput.boolean(),
+                    behind: TypedInput.boolean(),
                 },
                 eyes: {
                     placement: TypedInput.vector(-7, -6, 3, 5),

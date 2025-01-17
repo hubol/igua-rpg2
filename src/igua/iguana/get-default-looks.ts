@@ -11,6 +11,7 @@ export function getDefaultLooks(): IguanaLooks.Serializable {
                 placement: { x: 0, y: 0 },
                 flipV: false,
                 flipH: false,
+                behind: true,
             },
             eyes: {
                 placement: { x: 0, y: 0 },
