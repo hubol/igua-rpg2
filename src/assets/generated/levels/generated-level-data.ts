@@ -1030,6 +1030,7 @@ export const Lvl = {
     Door: e(r["Door"], { x: 1456, y: 96, values: { sceneName: "scnNewBalltownFanatic", checkpointName: "", name: "", depth: 0 } }, "Entities"),
     Door_1: e(r["Door"], { x: 1280, y: 160, values: { sceneName: "scnNewBalltownArmorer", checkpointName: "", name: "", depth: 0 } }, "Entities"),
     Door_2: e(r["Door"], { x: 280, y: 160, values: { sceneName: "scnNewBalltownFishmonger", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+    OliveFanatic: e(r["IguanaNpc"], { x: 384, y: 296, flippedX: false, values: { personaName: "NewBalltownOliveFanatic", name: "OliveFanatic", depth: 0 } }, "Entities"),
     TerrainEarthExposedDirt_3: d(Tx.Terrain.Earth.ExposedDirt, { x: 1300, y: 210, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x705031 }, "AboveEntitiesDecals"),
     StoneRockSmallShaded1_6: d(Tx.Stone.RockSmallShaded1, { x: 1276, y: 206, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
     StoneRockSmallShaded1_7: d(Tx.Stone.RockSmallShaded1, { x: 1323, y: 206, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),

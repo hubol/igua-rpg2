@@ -12,5 +12,6 @@ export const NpcPersonas = {
     NewBalltownBallFruitFanatic: { name: "Marf", looks: NpcLooks.BallFruitFanatic },
     NewBalltownArmorer: { name: "Trav", looks: NpcLooks.Dizzy },
     NewBalltownFishmonger: { name: "Pop", looks: NpcLooks.Nerd },
+    NewBalltownOliveFanatic: { name: "Oly", looks: NpcLooks.LivingOlive },
     __Unknown__: { name: "???", looks: NpcLooks.MintyJourney },
 } satisfies Record<string, NpcPersona>;
