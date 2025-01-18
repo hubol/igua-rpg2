@@ -32,6 +32,8 @@ module.exports = function ({ files }, { pascal, noext, format }) {
     const decalNameCache = new Cache(texture => pascal(noext(texture)));
     const decalTexturePathCache = new Cache(texture => noext(texture).split("/").map(pascal).join("."));
 
+    const types = [];
+
     for (const { fileName, json } of files) {
         const path = fileName.split('/').filter(x => !!x);
         path[path.length - 1] = noext(path[path.length - 1]);
@@ -84,7 +86,9 @@ module.exports = function ({ files }, { pascal, noext, format }) {
         const level = { width: json.width, height: json.height, backgroundTint: getSerializableTint(json.backgroundColor) }
         const obj = literal(`l(${serialize(level, 0)}, () => ({ ${resolveEntities.map(({ key, value }) => `"${key}": ${value},`).join('')} }))`)
 
-        node(path.map(pascal), obj);
+        const pascalPath = path.map(pascal);
+        node(pascalPath, obj);
+        types.push(`export type ${pascalPath.join('_')} = ReturnType<typeof Lvl${pascalPath.map(pathNode => `["${pathNode}"]`).join("")}>;`)
     }
 
     const stringifiedTree = serialize(tree);
@@ -99,6 +103,10 @@ import { Tx } from '../../../assets/textures';
 const { createEntity: e, createDecal: d, createLevel: l, createDecalGroup: dg } = OgmoFactory;
 
 export const Lvl = ${stringifiedTree};
+
+export namespace LvlType {
+${types.join('\n')}
+}
 `;
 
     return format(source, { parser: 'typescript', printWidth: 500 });
