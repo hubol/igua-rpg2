@@ -98,7 +98,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             }
         }, StepOrder.Physics + 1);
 
-    puppet.autoFacingMode = ObjIguanaLocomotiveAutoFacingMode.CheckMoving;
+    puppet.auto.facingMode = ObjIguanaLocomotiveAutoFacingMode.CheckMoving;
 
     return puppet;
 }

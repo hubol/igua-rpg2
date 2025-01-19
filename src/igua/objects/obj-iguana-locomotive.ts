@@ -88,6 +88,11 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
         yield () => puppet.speed.x === 0;
     }
 
+    const auto = {
+        duckingSpeed: 0.075,
+        facingMode: ObjIguanaLocomotiveAutoFacingMode.CheckSpeedX,
+    };
+
     const puppet = objIguanaPuppet(looks)
         // TODO not sure if that is the correct physics faction...
         .mixin(mxnPhysics, {
@@ -117,7 +122,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                     * getDeceleratingDistance(Math.abs(puppet.speed.x), IguanaLocomotiveConsts.WalkingDeceleration);
             },
             walkTo,
-            autoFacingMode: ObjIguanaLocomotiveAutoFacingMode.CheckSpeedX,
+            auto,
         })
         .step(() => {
             if (
@@ -158,7 +163,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             puppet.gait = approachLinear(puppet.gait, Math.min(puppet.isAirborne ? 0 : gaitFactor, 1), 0.15);
 
             if (puppet.speed.x !== 0) {
-                if (puppet.autoFacingMode === ObjIguanaLocomotiveAutoFacingMode.CheckSpeedX) {
+                if (puppet.auto.facingMode === ObjIguanaLocomotiveAutoFacingMode.CheckSpeedX) {
                     autoFacingTarget = Math.sign(puppet.speed.x);
                 }
                 else if (puppet.isMovingLeft && puppet.speed.x < 0) {
@@ -175,7 +180,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                 0.1,
             );
 
-            puppet.ducking = approachLinear(puppet.ducking, puppet.isDucking ? 1 : 0, 0.075);
+            puppet.ducking = approachLinear(puppet.ducking, puppet.isDucking ? 1 : 0, auto.duckingSpeed);
         }, 1);
 
     return puppet;

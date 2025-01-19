@@ -37,5 +37,9 @@ function enrichOliveFanatic(lvl: LvlType.NewBalltown) {
         }
         lvl.OliveFanatic.isDucking = true;
         yield sleep(500);
-    }).isDucking = true;
+    });
+
+    lvl.OliveFanatic.isDucking = true;
+    lvl.OliveFanatic.ducking = 1;
+    lvl.OliveFanatic.auto.duckingSpeed *= 0.5;
 }
