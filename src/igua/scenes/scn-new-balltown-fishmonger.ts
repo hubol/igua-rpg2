@@ -1,4 +1,4 @@
-import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
 import { ask, show } from "../cutscene/show";
@@ -13,7 +13,7 @@ export function scnNewBalltownFishmonger() {
     enrichFishmonger(lvl);
 }
 
-function enrichAquarium(lvl: ReturnType<typeof Lvl["NewBalltownFishmonger"]>) {
+function enrichAquarium(lvl: LvlType.NewBalltownFishmonger) {
     for (const fishMarker of [lvl.Fish0, lvl.Fish1, lvl.Fish2]) {
         objFish(fishMarker.x * 9999 + fishMarker.y * 8888 + 800_903).at(fishMarker).show();
     }
@@ -21,7 +21,7 @@ function enrichAquarium(lvl: ReturnType<typeof Lvl["NewBalltownFishmonger"]>) {
     lvl.WaterLineTop.mixin(mxnBoilPivot);
 }
 
-function enrichFishmonger(lvl: ReturnType<typeof Lvl["NewBalltownFishmonger"]>) {
+function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
     lvl.Fishmonger.mixin(mxnCutscene, function* () {
         yield* show("Hello! I deal in fish.");
         const result = yield* ask("Can I help you somehow?", "Favorite fish aspect", "Fish delivery", "No");

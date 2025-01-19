@@ -1,4 +1,4 @@
-import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Instances } from "../../lib/game-engine/instances";
@@ -30,7 +30,7 @@ export function scnExperiment() {
     enrichFarmer(lvl);
 }
 
-function enrichFarmer(lvl: ReturnType<typeof Lvl["Experiment"]>) {
+function enrichFarmer(lvl: LvlType.Experiment) {
     const startingPosition = lvl.FarmerNpc.vcpy();
 
     lvl.FarmerNpc.mixin(mxnCutscene, function* () {
@@ -69,7 +69,7 @@ const atkPickaxe = RpgAttack.create({
     physical: 25,
 });
 
-function enrichMiner(lvl: ReturnType<typeof Lvl["Experiment"]>) {
+function enrichMiner(lvl: LvlType.Experiment) {
     const valuableSpawnerObj = objValuableSpawner([lvl.MinerValuable0, lvl.MinerValuable1, lvl.MinerValuable2]);
 
     const pickaxeAttackObj = lvl.PickaxeHitbox.mixin(mxnRpgAttack, { attack: atkPickaxe });

@@ -1,5 +1,5 @@
 import { BLEND_MODES } from "pixi.js";
-import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
@@ -20,7 +20,7 @@ export function scnNewBalltownFanatic() {
     enrichSecretSymbols(lvl);
 }
 
-function enrichSecretSymbols(lvl: ReturnType<typeof Lvl["NewBalltownFanatic"]>) {
+function enrichSecretSymbols(lvl: LvlType.NewBalltownFanatic) {
     const { ballFruitFanatic } = RpgProgress.flags.newBalltown;
 
     lvl.SecretSymbols.children.forEach((obj, i) => {
@@ -36,7 +36,7 @@ function enrichSecretSymbols(lvl: ReturnType<typeof Lvl["NewBalltownFanatic"]>) 
     });
 }
 
-function enrichBallFruitFanaticNpc(lvl: ReturnType<typeof Lvl["NewBalltownFanatic"]>) {
+function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
     lvl.BallFruitFanaticNpc.mixin(mxnCutscene, function* () {
         const typePreference = RpgProgress.flags.newBalltown.ballFruitFanatic.typePreference;
 

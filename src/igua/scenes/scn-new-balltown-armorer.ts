@@ -1,5 +1,5 @@
 import { BLEND_MODES } from "pixi.js";
-import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { factor, interp } from "../../lib/game-engine/routines/interp";
@@ -19,7 +19,7 @@ export function scnNewBalltownArmorer() {
     enrichAquarium(lvl);
 }
 
-function enrichArmorer(lvl: ReturnType<typeof Lvl["NewBalltownArmorer"]>) {
+function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
     lvl.IguanaNpc.mixin(mxnCutscene, function* () {
         const result = yield* ask("What's going on?", "About zinc", "About fishtank", "Muddy house");
         if (result === 0) {
@@ -34,7 +34,7 @@ function enrichArmorer(lvl: ReturnType<typeof Lvl["NewBalltownArmorer"]>) {
     });
 }
 
-function enrichAquarium(lvl: ReturnType<typeof Lvl["NewBalltownArmorer"]>) {
+function enrichAquarium(lvl: LvlType.NewBalltownArmorer) {
     const { aquarium } = RpgProgress.flags.newBalltown.armorer;
     const { wetness } = RpgProgress.character.status;
 
