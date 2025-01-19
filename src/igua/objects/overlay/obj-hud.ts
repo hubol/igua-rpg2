@@ -1,4 +1,4 @@
-import { Container, Graphics } from "pixi.js";
+import { Container, Graphics, Rectangle, Sprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { container } from "../../../lib/pixi/container";
 import { objHealthBar } from "./obj-health-bar";
@@ -10,6 +10,8 @@ import { renderer } from "../../current-pixi-renderer";
 import { Cutscene } from "../../globals";
 import { factor, interp } from "../../../lib/game-engine/routines/interp";
 import { DataPocketItem } from "../../data/data-pocket-item";
+import { Tx } from "../../../assets/textures";
+import { CtxInteract } from "../../mixins/mxn-interact";
 
 const Consts = {
     StatusTextTint: 0x00ff00,
@@ -28,7 +30,8 @@ export function objHud() {
 
     const statusObjs = [valuablesInfoObj, objPocketInfo(), poisonLevelObj, poisonBuildUpObj];
 
-    return container(objCutsceneLetterbox().at(-3, -3), healthBarObj, ...statusObjs)
+    // TODO the offsets suck!
+    return container(objCutsceneLetterbox().at(-3, -3), healthBarObj, ...statusObjs, objInteractIndicator().at(-3, -3))
         .at(3, 3)
         .merge({ healthBarObj, effectiveHeight: 0 })
         .step(self => {
@@ -53,6 +56,24 @@ export function objHud() {
             }
             self.effectiveHeight = self.visible ? self.y + lastVisibleObj.y + lastVisibleObj.height : 0;
         });
+}
+
+const r = new Rectangle();
+
+function objInteractIndicator() {
+    return container(
+        Sprite.from(Tx.Terrain.Earth.Asterisk).anchored(0.5, 1).step(self => {
+            const interactObj = CtxInteract.value.highestScoreInteractObj;
+            if (!interactObj || !playerObj.hasControl) {
+                self.visible = false;
+                return;
+            }
+
+            self.visible = true;
+            (interactObj.interact.hotspotObj ?? interactObj).getBounds(false, r);
+            self.at(r.x + r.width / 2, r.y).vround();
+        }),
+    );
 }
 
 export type ObjHud = ReturnType<typeof objHud>;
