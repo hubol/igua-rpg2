@@ -1,4 +1,4 @@
-import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
@@ -11,7 +11,7 @@ export function scnNewBalltown() {
     enrichOliveFanatic(lvl);
 }
 
-function enrichOliveFanatic(lvl: ReturnType<typeof Lvl["NewBalltown"]>) {
+function enrichOliveFanatic(lvl: LvlType.NewBalltown) {
     lvl.OliveFanatic.mixin(mxnCutscene, function* () {
         lvl.OliveFanatic.isDucking = false;
         yield sleep(500);
