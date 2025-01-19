@@ -10,7 +10,6 @@ import { renderer } from "../../current-pixi-renderer";
 import { Cutscene } from "../../globals";
 import { factor, interp } from "../../../lib/game-engine/routines/interp";
 import { DataPocketItem } from "../../data/data-pocket-item";
-import { Tx } from "../../../assets/textures";
 import { CtxInteract } from "../../mixins/mxn-interact";
 
 const Consts = {
@@ -62,17 +61,24 @@ const r = new Rectangle();
 
 function objInteractIndicator() {
     return container(
-        Sprite.from(Tx.Terrain.Earth.Asterisk).anchored(0.5, 1).step(self => {
-            const interactObj = CtxInteract.value.highestScoreInteractObj;
-            if (!interactObj || !playerObj.hasControl) {
-                self.visible = false;
-                return;
-            }
+        container(
+            objText.Large("?", { tint: 0x000000 }).at(1, 1),
+            objText.Large("?", { tint: 0xffffff }),
+        )
+            .pivoted(3, 20)
+            .step(
+                self => {
+                    const interactObj = CtxInteract.value.highestScoreInteractObj;
+                    if (!interactObj || !playerObj.hasControl) {
+                        self.visible = false;
+                        return;
+                    }
 
-            self.visible = true;
-            (interactObj.interact.hotspotObj ?? interactObj).getBounds(false, r);
-            self.at(r.x + r.width / 2, r.y).vround();
-        }),
+                    self.visible = true;
+                    (interactObj.interact.hotspotObj ?? interactObj).getBounds(false, r);
+                    self.at(r.x + r.width / 2, r.y).vround();
+                },
+            ),
     );
 }
 
