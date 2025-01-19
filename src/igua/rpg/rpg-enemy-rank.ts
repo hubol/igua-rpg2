@@ -35,6 +35,9 @@ export namespace RpgEnemyRank {
                     incrementsAttackerPrideOnDamage: status?.quirks?.incrementsAttackerPrideOnDamage ?? false,
                     roundReceivedDamageUp: status?.quirks?.roundReceivedDamageUp ?? true,
                     guardedDamageIsFatal: status?.quirks?.guardedDamageIsFatal ?? true,
+                    ailmentsRecoverWhileCutsceneIsPlaying: status?.quirks?.ailmentsRecoverWhileCutsceneIsPlaying
+                        ?? true,
+                    receivesDamageWhileCutsceneIsPlaying: status?.quirks?.receivesDamageWhileCutsceneIsPlaying ?? true,
                 },
                 defenses: {
                     physical: status?.defenses?.physical ?? 0,

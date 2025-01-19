@@ -69,6 +69,8 @@ export const RpgPlayer = {
             incrementsAttackerPrideOnDamage: true,
             roundReceivedDamageUp: false,
             guardedDamageIsFatal: false,
+            ailmentsRecoverWhileCutsceneIsPlaying: false,
+            receivesDamageWhileCutsceneIsPlaying: false,
         },
     } satisfies RpgStatus.Model,
     motion: {

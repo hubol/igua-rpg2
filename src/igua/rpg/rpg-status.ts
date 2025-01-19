@@ -1,6 +1,7 @@
 import { blendColorDelta } from "../../lib/color/blend-color";
 import { Integer, PercentAsInteger, RgbInt } from "../../lib/math/number-alias-types";
 import { RpgAttack } from "./rpg-attack";
+import { RpgCutscene } from "./rpg-cutscene";
 import { RpgFaction } from "./rpg-faction";
 
 export namespace RpgStatus {
@@ -37,6 +38,8 @@ export namespace RpgStatus {
             wetness: Integer;
         };
         quirks: {
+            ailmentsRecoverWhileCutsceneIsPlaying: boolean;
+            receivesDamageWhileCutsceneIsPlaying: boolean;
             incrementsAttackerPrideOnDamage: boolean;
             emotionalDamageIsFatal: boolean;
             roundReceivedDamageUp: boolean;
@@ -66,12 +69,19 @@ export namespace RpgStatus {
         rejected: true;
         wrongFaction?: boolean;
         invulnerable?: boolean;
+        doesntReceiveDamageWhileCutsceneIsPlaying?: boolean;
     }
 
     export type DamageResult = DamageAccepted | DamageRejected;
 
     export const Methods = {
         tick(model: Model, effects: Effects, count: number) {
+            model.invulnerable = Math.max(0, model.invulnerable - 1);
+
+            if (RpgCutscene.isPlaying && !model.quirks.ailmentsRecoverWhileCutsceneIsPlaying) {
+                return;
+            }
+
             if (count % 120 === 0 && model.health > Consts.FullyPoisonedHealth && model.poison.level > 0) {
                 const previous = model.health;
                 model.health = Math.max(Consts.FullyPoisonedHealth, model.health - model.poison.level);
@@ -85,7 +95,6 @@ export namespace RpgStatus {
             if (count % 4 === 0) {
                 model.wetness.value = Math.max(0, model.wetness.value - model.recoveries.wetness);
             }
-            model.invulnerable = Math.max(0, model.invulnerable - 1);
         },
 
         damage(
@@ -94,6 +103,10 @@ export namespace RpgStatus {
             attack: RpgAttack.Model,
             attacker?: RpgStatus.Model,
         ): DamageResult {
+            if (RpgCutscene.isPlaying && !target.quirks.receivesDamageWhileCutsceneIsPlaying) {
+                return { rejected: true, doesntReceiveDamageWhileCutsceneIsPlaying: true };
+            }
+
             if (attack.versus !== RpgFaction.Anyone && attack.versus !== target.faction) {
                 return { rejected: true, wrongFaction: true };
             }
