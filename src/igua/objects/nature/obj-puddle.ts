@@ -108,7 +108,7 @@ function objPuddleBase(width: number, height: number, tint: Integer, attack: Rpg
                         .at(obj.x - c.x, Rng.intc(-1, 1)).show(c);
                 }
             }
-        }, StepOrder.Physics - 1);
+        }, -10);
 
     return c;
 }
