@@ -13,7 +13,7 @@ export const CtxInteract = new SceneLocal(() => {
 
     scene.stage
         .step(() => {
-            if (ctx.highestScoreInteractObj && Input.justWentDown("Interact")) {
+            if (ctx.highestScoreInteractObj && playerObj.hasControl && Input.justWentDown("Interact")) {
                 ctx.highestScoreInteractObj.interact.onInteract();
             }
         }, -1)
