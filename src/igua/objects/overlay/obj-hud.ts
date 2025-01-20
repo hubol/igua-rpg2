@@ -11,6 +11,8 @@ import { Cutscene } from "../../globals";
 import { factor, interp } from "../../../lib/game-engine/routines/interp";
 import { DataPocketItem } from "../../data/data-pocket-item";
 import { CtxInteract } from "../../mixins/mxn-interact";
+import { mxnHasHead } from "../../mixins/mxn-has-head";
+import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 
 const Consts = {
     StatusTextTint: 0x00ff00,
@@ -75,11 +77,13 @@ function objInteractIndicator() {
                     }
 
                     self.visible = true;
-                    (interactObj.interact.hotspotObj ?? interactObj).getBounds(false, r);
+                    (interactObj.interact.hotspotObj
+                        ?? (interactObj.is(mxnHasHead) ? interactObj.mxnHead.obj : interactObj)).getBounds(false, r);
                     self.at(r.x + r.width / 2, r.y).vround();
                 },
             ),
-    );
+    )
+        .mixin(mxnBoilPivot);
 }
 
 export type ObjHud = ReturnType<typeof objHud>;

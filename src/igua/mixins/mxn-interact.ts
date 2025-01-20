@@ -4,6 +4,7 @@ import { Null } from "../../lib/types/null";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { Input, scene } from "../globals";
 import { Instances } from "../../lib/game-engine/instances";
+import { mxnHasHead } from "./mxn-has-head";
 
 export const CtxInteract = new SceneLocal(() => {
     const ctx = {
@@ -40,6 +41,10 @@ function getPlayerOverlapScore(interactObj: MxnInteract) {
 
     if (!playerObj.head.collides(interactObj)) {
         return 1;
+    }
+
+    if (interactObj.is(mxnHasHead) && interactObj.mxnHead.obj.collides(playerObj)) {
+        return 2;
     }
 
     return interactObj.interact.hotspotObj?.collides(playerObj.head) ? 2 : 1;

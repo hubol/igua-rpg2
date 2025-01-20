@@ -12,6 +12,7 @@ import { CollisionShape } from "../../lib/pixi/collision";
 import { Material, Materials } from "../systems/materials";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { mxnSpatialAudio } from "../mixins/mxn-spatial-audio";
+import { mxnHasHead } from "../mixins/mxn-has-head";
 
 const r1 = new Rectangle();
 const r2 = new Rectangle();
@@ -212,6 +213,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     const c = container(back, core, front)
         .collisionShape(CollisionShape.DisplayObjects, [head.crest, head.noggin, body.torso, ...feet.shapes])
         .mixin(mxnSpatialAudio)
+        .mixin(mxnHasHead, { obj: head.noggin })
         .merge({ head, body, feet })
         .merge({
             get facing() {
