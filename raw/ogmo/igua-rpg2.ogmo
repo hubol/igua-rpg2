@@ -64,7 +64,7 @@
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "values": []
     },
     {
@@ -84,7 +84,7 @@
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
       ]
@@ -260,7 +260,8 @@
       "tags": ["Terrain"],
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100},
+        {"name": "visible", "definition": "Boolean", "display": 0, "defaults": true}
       ],
       "isRegion": false,
       "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "Terrain Color", "useDefaultTint": false},
@@ -815,7 +816,7 @@
       "isRegion": false,
       "tintable": {"enabled": true, "defaultTint": "#68a8d0", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/puddle.png",
-      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAICAYAAADwdn+XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAbSURBVChTY/wPBAwUACYoTTag2IBRQDFgYAAAGQwEAsnlJ7IAAAAASUVORK5CYII="
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAICAYAAADwdn+XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAZSURBVChTY/wPBAwUACYoTTYYNWDgAQMDAB8kBAj1akM5AAAAAElFTkSuQmCC"
     },
     {
       "exportID": "73148747",

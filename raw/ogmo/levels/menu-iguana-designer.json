@@ -564,7 +564,7 @@
           "flippedX": false,
           "flippedY": false,
           "tint": "#001c28",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Block",
@@ -590,7 +590,7 @@
           "flippedX": true,
           "flippedY": false,
           "tint": "#001c28",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Block",
@@ -616,7 +616,7 @@
           "flippedX": true,
           "flippedY": false,
           "tint": "#001c28",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Block",

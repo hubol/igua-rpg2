@@ -150,7 +150,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 302,
@@ -162,7 +163,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 1,
-          "values": {"name": "AquariumWaterLine"}
+          "values": {"name": "AquariumWaterLine"},
+          "groupName": null
         },
         {
           "x": 339,
@@ -174,7 +176,8 @@
           "texture": "furniture/aquarium/sand.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": -68,
@@ -1538,7 +1541,8 @@
           "texture": "furniture/aquarium/coral.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 345,
@@ -1550,7 +1554,8 @@
           "texture": "foliage/small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 362,
@@ -1562,7 +1567,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 355,
@@ -1574,7 +1580,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 366,
@@ -1586,7 +1593,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 320,
@@ -1598,7 +1606,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 305,
@@ -1610,7 +1619,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 1,
-          "values": {"name": "AquariumWaterLineFront"}
+          "values": {"name": "AquariumWaterLineFront"},
+          "groupName": null
         },
         {
           "x": 339,
@@ -1622,7 +1632,8 @@
           "texture": "furniture/aquarium/box76x46.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 301,
@@ -1634,7 +1645,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 320,
@@ -1646,7 +1658,8 @@
           "texture": "furniture/aquarium/water intake.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "AquariumWaterIntake"}
+          "values": {"name": "AquariumWaterIntake"},
+          "groupName": null
         },
         {
           "x": 356,
@@ -1658,7 +1671,8 @@
           "texture": "shapes/square irregular 10.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 372,
@@ -1670,7 +1684,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 305,
@@ -1682,7 +1697,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -1760,7 +1776,7 @@
           "flippedX": false,
           "flippedY": true,
           "tint": "#8966ad",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Slope",
@@ -1773,7 +1789,7 @@
           "flippedX": true,
           "flippedY": true,
           "tint": "#8966ad",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Block",
@@ -2771,7 +2787,8 @@
           "texture": "town/ball/ball0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 347,
@@ -2783,7 +2800,8 @@
           "texture": "furniture/aquarium/sand.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

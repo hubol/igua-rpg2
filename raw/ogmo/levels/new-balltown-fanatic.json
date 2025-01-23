@@ -612,7 +612,8 @@
           "texture": "shapes/x 10.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -690,7 +691,7 @@
           "flippedX": true,
           "flippedY": true,
           "tint": "#14372c",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Slope",
@@ -703,7 +704,7 @@
           "flippedX": false,
           "flippedY": true,
           "tint": "#14372c",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Pipe",

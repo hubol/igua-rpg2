@@ -2318,7 +2318,7 @@
           "flippedX": false,
           "flippedY": false,
           "tint": "#ff8787",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Block",
@@ -2344,7 +2344,7 @@
           "flippedX": false,
           "flippedY": false,
           "tint": "#ff8787",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Block",
@@ -2370,7 +2370,7 @@
           "flippedX": true,
           "flippedY": true,
           "tint": "#ff8787",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Slope",
@@ -2383,7 +2383,7 @@
           "flippedX": true,
           "flippedY": false,
           "tint": "#ff8787",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Block",
@@ -2422,7 +2422,7 @@
           "flippedX": true,
           "flippedY": true,
           "tint": "#ff8787",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Pipe",
@@ -2470,7 +2470,7 @@
           "flippedX": false,
           "flippedY": true,
           "tint": "#ff8787",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Slope",
@@ -2483,7 +2483,7 @@
           "flippedX": false,
           "flippedY": true,
           "tint": "#ff8787",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Slope",
@@ -2496,7 +2496,7 @@
           "flippedX": false,
           "flippedY": true,
           "tint": "#ff8787",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Pipe",
@@ -2558,7 +2558,7 @@
           "flippedX": true,
           "flippedY": true,
           "tint": "#ff8787",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Slope",
@@ -2571,7 +2571,7 @@
           "flippedX": false,
           "flippedY": true,
           "tint": "#ff8787",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Slope",
@@ -2584,7 +2584,7 @@
           "flippedX": true,
           "flippedY": true,
           "tint": "#ff8787",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Slope",
@@ -2597,7 +2597,7 @@
           "flippedX": false,
           "flippedY": true,
           "tint": "#ff8787",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Slope",
@@ -2610,7 +2610,7 @@
           "flippedX": true,
           "flippedY": true,
           "tint": "#ff8787",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Pipe",
@@ -2632,7 +2632,7 @@
           "flippedX": true,
           "flippedY": false,
           "tint": "#ff8787",
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Pipe",
