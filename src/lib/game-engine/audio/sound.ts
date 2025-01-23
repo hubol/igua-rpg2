@@ -9,7 +9,16 @@ export class Sound {
     pan = 0;
     rate = 1;
     loop = false;
-    with = new SoundWith(this);
+
+    private readonly _with = new SoundWith(this);
+
+    get with() {
+        this.gain = 1;
+        this.pan = 0;
+        this.rate = 1;
+        this.loop = false;
+        return this._with;
+    }
 
     constructor(private readonly _buffer: AudioBuffer, destination: AudioNode) {
         this._context = destination.context;
