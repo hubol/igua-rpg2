@@ -1,4 +1,4 @@
-import { Container, Graphics, Rectangle, Sprite } from "pixi.js";
+import { Container, DisplayObject, Graphics, Rectangle, Sprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { container } from "../../../lib/pixi/container";
 import { objHealthBar } from "./obj-health-bar";
@@ -12,7 +12,9 @@ import { factor, interp } from "../../../lib/game-engine/routines/interp";
 import { DataPocketItem } from "../../data/data-pocket-item";
 import { CtxInteract } from "../../mixins/mxn-interact";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
-import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
+import { Tx } from "../../../assets/textures";
+import { Null } from "../../../lib/types/null";
+import { approachLinear } from "../../../lib/math/number";
 
 const Consts = {
     StatusTextTint: 0x00ff00,
@@ -60,28 +62,38 @@ export function objHud() {
 const r = new Rectangle();
 
 function objInteractIndicator() {
+    let previousInteractObj = Null<DisplayObject>();
+    let updatedOffsetY = 0;
+
     return container(
         container(
-            objText.Large("?", { tint: 0x000000 }).at(1, 1),
-            objText.Large("?", { tint: 0xffffff }),
+            Sprite.from(Tx.Ui.InteractionIndicator).tinted(0x000000).at(1, 2),
+            Sprite.from(Tx.Ui.InteractionIndicator),
         )
-            .pivoted(3, 20)
+            .pivoted(12, 23)
             .step(
                 self => {
-                    const interactObj = CtxInteract.value.highestScoreInteractObj;
-                    if (!interactObj || !playerObj.hasControl) {
+                    const interactObj = playerObj.hasControl ? CtxInteract.value.highestScoreInteractObj : null;
+
+                    if (interactObj !== previousInteractObj) {
+                        updatedOffsetY = 4;
+                        previousInteractObj = interactObj;
+                    }
+
+                    if (!interactObj) {
                         self.visible = false;
                         return;
                     }
 
+                    updatedOffsetY = approachLinear(updatedOffsetY, 0, 0.75);
+
                     self.visible = true;
                     (interactObj.interact.hotspotObj
                         ?? (interactObj.is(mxnHasHead) ? interactObj.mxnHead.obj : interactObj)).getBounds(false, r);
-                    self.at(r.x + r.width / 2, r.y).vround();
+                    self.at(r.x + r.width / 2, r.y + updatedOffsetY).vround();
                 },
             ),
-    )
-        .mixin(mxnBoilPivot);
+    );
 }
 
 export type ObjHud = ReturnType<typeof objHud>;
