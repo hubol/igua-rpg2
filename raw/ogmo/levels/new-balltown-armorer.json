@@ -91,9 +91,45 @@
       "gridCellsX": 64,
       "gridCellsY": 35,
       "decals": [
-        {"x": 177, "y": 234, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#705031", "texture": "terrain/earth/exposed dirt.png", "originX": 0.5, "originY": 0.5, "groupName": null},
-        {"x": 278, "y": 234, "scaleX": 1, "scaleY": -1, "rotation": 0, "tint": "#705031", "texture": "terrain/earth/exposed dirt.png", "originX": 0.5, "originY": 0.5, "groupName": null},
-        {"x": 364, "y": 235, "scaleX": -1, "scaleY": 1, "rotation": 0, "tint": "#705031", "texture": "terrain/earth/exposed dirt.png", "originX": 0.5, "originY": 0.5, "groupName": null}
+        {
+          "x": 177,
+          "y": 234,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#705031",
+          "texture": "terrain/earth/exposed dirt.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 278,
+          "y": 234,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#705031",
+          "texture": "terrain/earth/exposed dirt.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 364,
+          "y": 235,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#705031",
+          "texture": "terrain/earth/exposed dirt.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        }
       ],
       "folder": "../textures"
     },

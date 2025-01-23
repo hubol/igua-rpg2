@@ -1088,6 +1088,7 @@ export const Lvl = {
     TerrainEarthLoop_1: d(Tx.Terrain.Earth.Loop, { x: 338, y: 340, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x8fbe60 }, "AboveEntitiesDecals"),
     TerrainEarthLoop_2: d(Tx.Terrain.Earth.Loop, { x: 314, y: 341, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x8fbe60 }, "AboveEntitiesDecals"),
     TerrainEarthLoop_3: d(Tx.Terrain.Earth.Loop, { x: 208, y: 341, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x8fbe60 }, "AboveEntitiesDecals"),
+    DiceBlock: d(Tx.Town.Ball.Dice, { x: 837, y: 181, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x578a49 }, "AboveEntitiesDecals"),
     Player: e(r["Player"], { x: 1552, y: 448, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
     fromFanatic: e(r["Checkpoint"], { x: 1424, y: 264, flippedX: true, values: { name: "fromFanatic", depth: 0 } }, "PlayerEntities"),
     fromArmorer: e(r["Checkpoint"], { x: 1264, y: 328, flippedX: true, values: { name: "fromArmorer", depth: 0 } }, "PlayerEntities"),
