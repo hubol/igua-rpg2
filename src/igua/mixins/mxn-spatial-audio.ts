@@ -22,9 +22,8 @@ export function mxnSpatialAudio(obj: DisplayObject) {
     return obj.merge({
         play(sound: Sound | SoundWith) {
             const soundWith = "with" in sound ? sound.with : sound;
-            // TODO should it return an instance?
-            const bounds = obj.getBounds(true, r);
-            if (areRectanglesOverlapping(obj.getBounds(true, r), audibleRectangle)) {
+            const bounds = obj.getBounds(false, r);
+            if (areRectanglesOverlapping(bounds, audibleRectangle)) {
                 const center = bounds.getCenter();
                 soundWith.pan(Math.max(
                     -0.9,
