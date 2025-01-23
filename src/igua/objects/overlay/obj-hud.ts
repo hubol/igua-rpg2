@@ -31,9 +31,7 @@ export function objHud() {
 
     const statusObjs = [valuablesInfoObj, objPocketInfo(), poisonLevelObj, poisonBuildUpObj];
 
-    // TODO the offsets suck!
-    return container(objCutsceneLetterbox().at(-3, -3), healthBarObj, ...statusObjs, objInteractIndicator().at(-3, -3))
-        .at(3, 3)
+    return container(objCutsceneLetterbox(), container(healthBarObj, ...statusObjs).at(3, 3), objInteractIndicator())
         .merge({ healthBarObj, effectiveHeight: 0 })
         .step(self => {
             healthBarObj.width = RpgPlayer.status.healthMax;
