@@ -1,7 +1,10 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
-import { sleep } from "../../lib/game-engine/routines/sleep";
+import { Sfx } from "../../assets/sounds";
+import { interp, interpvr } from "../../lib/game-engine/routines/interp";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
+import { container } from "../../lib/pixi/container";
 import { Empty } from "../../lib/types/empty";
 import { Jukebox } from "../core/igua-audio";
 import { rewardValuables } from "../cutscene/reward-valuables";
@@ -97,9 +100,31 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
 
             yield sleep(500);
 
-            yield* show("Rolling the dice...");
+            yield* show(`Rolling the dice... Let's see that ${guess + 1}!`);
 
-            yield sleep(500);
+            Sfx.Enemy.Suggestive.Flick.play();
+            yield interpvr(lvl.DiceBlock).translate(0, -50).over(200);
+            lvl.DiceBlock.angle = 0;
+            const tuneObj = container().coro(function* () {
+                while (true) {
+                    Sfx.Interact.SignRead.with.gain(0.3).rate(Rng.float(1.2, 1.8)).play();
+                    yield sleepf(8);
+                }
+            }).show();
+            yield interp(lvl.DiceBlock, "angle").steps(16).to(720).over(1000);
+            tuneObj.destroy();
+            yield sleep(250);
+            yield interpvr(lvl.DiceBlock).translate(0, 50).over(150);
+            Sfx.Impact.PocketableItemBounceHard.with.rate(Rng.float(0.9, 1.1)).play();
+            yield interpvr(lvl.DiceBlock).translate(0, -25).over(200);
+            yield interpvr(lvl.DiceBlock).steps(5).translate(0, 25).over(200);
+            Sfx.Impact.PocketableItemBounceMedium.with.rate(Rng.float(0.9, 1.1)).play();
+            yield interpvr(lvl.DiceBlock).steps(4).translate(0, -10).over(200);
+            yield sleep(50);
+            yield interpvr(lvl.DiceBlock).steps(3).translate(0, 10).over(200);
+            Sfx.Impact.PocketableItemBounceSoft.with.rate(Rng.float(0.9, 1.1)).play();
+
+            yield sleep(250);
 
             const roll = Rng.int(6);
             yield* show(`It's a ${roll + 1}.`);
