@@ -10,6 +10,7 @@ import { Jukebox } from "../core/igua-audio";
 import { rewardValuables } from "../cutscene/reward-valuables";
 import { ask, show } from "../cutscene/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltown() {
@@ -71,7 +72,7 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
             "The New Balltown committee recently ruled that gambling in the town square was OK depending on the vibes.",
         );
         if (yield* ask("Want to play a dice game?")) {
-            if (RpgProgress.character.inventory.valuables === 0) {
+            if (RpgPlayerWallet.isEmpty()) {
                 yield* show("Oh... you don't have any valuables...", "Let's play when you find some!");
                 return;
             }
@@ -96,7 +97,7 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
 
             yield* show(`Okay. I'll take your ${riskedValue === 1 ? "valuable" : "valuables"} now.`);
             // TODO sfx, vfx for take money
-            RpgProgress.character.inventory.valuables -= riskedValue;
+            RpgPlayerWallet.spendValuables(riskedValue, "gambling");
 
             yield sleep(500);
 
@@ -132,7 +133,7 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
             if (roll === guess) {
                 const prize = riskedValue * 5;
                 yield* show("Nice guess!", `You win ${prize} valuables!`);
-                yield* rewardValuables(prize, lvl.Croupier);
+                yield* rewardValuables(prize, lvl.Croupier, "gambling");
             }
             else {
                 yield* show("Sorry, you lost. You can always try again!");

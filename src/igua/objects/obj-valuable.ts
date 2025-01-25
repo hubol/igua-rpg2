@@ -1,6 +1,5 @@
 import { Sprite, Texture } from "pixi.js";
 import { Tx } from "../../assets/textures";
-import { RpgProgress } from "../rpg/rpg-progress";
 import { VectorSimple, vnew } from "../../lib/math/vector-type";
 import { objValuableSparkle } from "./effects/obj-valuable-sparkle";
 import { Rng } from "../../lib/math/rng";
@@ -8,6 +7,7 @@ import { mxnCollectible } from "../mixins/mxn-collectible";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { Sound } from "../../lib/game-engine/audio/sound";
 import { Sfx } from "../../assets/sounds";
+import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 
 interface ValuableConfig {
     texture: Texture;
@@ -39,7 +39,11 @@ const valuableConfigs: Record<RpgEconomy.Currency.Type, ValuableConfig> = {
     },
 };
 
-export function objValuable(type: RpgEconomy.Currency.Type, uid?: number) {
+export function objValuable(
+    type: RpgEconomy.Currency.Type,
+    uid?: number,
+    incomeSource: RpgPlayerWallet.IncomeSource = "default",
+) {
     let collectableAfterSteps = 3;
 
     const config = valuableConfigs[type];
@@ -53,7 +57,7 @@ export function objValuable(type: RpgEconomy.Currency.Type, uid?: number) {
                     .at(self).add(offset).show(self.parent);
                 sparkle.index = Rng.float(1, 3);
             }
-            RpgProgress.character.inventory.valuables += RpgEconomy.Currency.Values[type];
+            RpgPlayerWallet.receiveValuables(RpgEconomy.Currency.Values[type], incomeSource);
         })
         .step(self => self.collectable = collectableAfterSteps-- <= 0);
 }

@@ -9,8 +9,13 @@ import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp
 import { playerObj } from "../objects/obj-player";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { ValuableChangeMaker } from "../systems/valuable-change-maker";
+import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 
-export function* rewardValuables(total: number, startPosition: VectorSimple) {
+export function* rewardValuables(
+    total: number,
+    startPosition: VectorSimple,
+    incomeSource: RpgPlayerWallet.IncomeSource = "default",
+) {
     const counts = ValuableChangeMaker.solveCounts(total);
     const currencyToSpawn = Rng.shuffle(
         Object.entries(counts).flatMap(([currencyType, count]) =>
@@ -22,7 +27,7 @@ export function* rewardValuables(total: number, startPosition: VectorSimple) {
     let atThresholdCount = 0;
 
     for (const currency of currencyToSpawn) {
-        objValuable(currency).at(startPosition).scaled(0, 0).coro(moveTowardsPlayer).show();
+        objValuable(currency, undefined, incomeSource).at(startPosition).scaled(0, 0).coro(moveTowardsPlayer).show();
         yield sleep(ms);
 
         if (atThresholdCount > 50) {

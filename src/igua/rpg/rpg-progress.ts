@@ -27,6 +27,9 @@ function getInitialRpgProgress() {
                 intelligence: 0,
                 strength: 1,
             },
+            experience: {
+                gambling: 0,
+            },
             looks: getDefaultLooks(),
             position: {
                 sceneName: "",
