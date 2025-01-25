@@ -138,7 +138,7 @@ const txsExperienceIncrement = Tx.Ui.Experience.Increment.split({ width: 44 });
 function objExperienceIncrement(index: number, amount: number) {
     return container(
         Sprite.from(txsExperienceIncrement[index]).anchored(1, 1),
-        objText.Large(`+${amount} XP`, { tint: 0x000000 }).anchored(1, 0.5).at(-46, -13),
+        objText.Large(`+${amount} XP`, { tint: 0x00ff00 }).anchored(1, 0.5).at(-46, -13),
     )
         .coro(function* (self) {
             const width = self.width;
