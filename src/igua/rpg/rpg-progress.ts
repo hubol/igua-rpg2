@@ -1,5 +1,7 @@
 import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { Null } from "../../lib/types/null";
+import { PropertiesLike } from "../../lib/types/properties-like";
+import { NpcPersonaInternalName } from "../data/npc-personas";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { RpgPocket } from "./rpg-pocket";
 
@@ -29,6 +31,7 @@ function getInitialRpgProgress() {
             },
             experience: {
                 gambling: 0,
+                social: 0,
             },
             looks: getDefaultLooks(),
             position: {
@@ -56,6 +59,7 @@ function getInitialRpgProgress() {
             test: false,
         },
         uids: {
+            metNpcs: new Set<NpcPersonaInternalName>(),
             valuables: new Set<number>(),
         },
     };
@@ -63,6 +67,6 @@ function getInitialRpgProgress() {
 
 export const RpgProgress = getInitialRpgProgress();
 
-export type RpgProgressUids = keyof typeof RpgProgress["uids"];
+export type RpgProgressUids = keyof PropertiesLike<typeof RpgProgress["uids"], Set<number>>;
 // TODO I think some places already expect flags to only be booleans :-X
 export type RpgProgressFlags = DeepKeyOf.Leaves<typeof RpgProgress["flags"]>;

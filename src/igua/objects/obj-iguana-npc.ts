@@ -7,6 +7,7 @@ import { NpcPersonas } from "../data/npc-personas";
 import { IguanaLooks } from "../iguana/looks";
 import { mxnIguanaEditable } from "../mixins/mxn-iguana-editable";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { objIguanaLocomotive } from "./obj-iguana-locomotive";
 
 interface ObjIguanaNpcArgs {
@@ -48,6 +49,7 @@ export function objIguanaNpc({ personaName }: ObjIguanaNpcArgs) {
             }
         })
         .handles("mxnSpeaker.speakingStarted", () => {
+            RpgExperienceRewarder.social.onSpeakWithNpc(persona.internalName);
             speakingStartedCount++;
             isSpeaking = true;
         })
