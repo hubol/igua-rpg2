@@ -8,13 +8,14 @@ import { playerObj } from "../obj-player";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { renderer } from "../../current-pixi-renderer";
 import { Cutscene } from "../../globals";
-import { factor, interp } from "../../../lib/game-engine/routines/interp";
+import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
 import { DataPocketItem } from "../../data/data-pocket-item";
 import { CtxInteract } from "../../mixins/mxn-interact";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { Tx } from "../../../assets/textures";
 import { Null } from "../../../lib/types/null";
 import { approachLinear } from "../../../lib/math/number";
+import { sleep } from "../../../lib/game-engine/routines/sleep";
 
 const Consts = {
     StatusTextTint: 0x00ff00,
@@ -33,7 +34,12 @@ export function objHud() {
 
     const statusObjs = [valuablesInfoObj, objPocketInfo(), poisonLevelObj, poisonBuildUpObj];
 
-    return container(objCutsceneLetterbox(), container(healthBarObj, ...statusObjs).at(3, 3), objInteractIndicator())
+    return container(
+        objCutsceneLetterbox(),
+        container(healthBarObj, ...statusObjs).at(3, 3),
+        objInteractIndicator(),
+        objExperienceIndicator(),
+    )
         .merge({ healthBarObj, effectiveHeight: 0 })
         .step(self => {
             healthBarObj.width = RpgPlayer.status.healthMax;
@@ -94,6 +100,54 @@ function objInteractIndicator() {
                 },
             ),
     );
+}
+
+function objExperienceIndicator() {
+    const obj = container().at(renderer.width - 4, renderer.height - 4);
+
+    const configs: Array<[experienceKey: keyof typeof RpgProgress["character"]["experience"], textureIndex: number]> = [
+        ["gambling", 4],
+        ["social", 3],
+    ];
+
+    for (const [experienceKey, textureIndex] of configs) {
+        obj.coro(function* () {
+            let previous = RpgProgress.character.experience[experienceKey];
+
+            while (true) {
+                yield () =>
+                    !Boolean(Cutscene.current) && Cutscene.sinceCutsceneStepsCount > 15
+                    && previous !== RpgProgress.character.experience[experienceKey];
+                const next = RpgProgress.character.experience[experienceKey];
+                const diff = next - previous;
+                previous = next;
+                const bounds = obj.getBounds(false, r);
+                objExperienceIncrement(textureIndex, diff).show(obj).at(
+                    0,
+                    -bounds.height + Math.sign(bounds.height) * -4,
+                );
+            }
+        });
+    }
+
+    return obj;
+}
+
+const txsExperienceIncrement = Tx.Ui.Experience.Increment.split({ width: 44 });
+
+function objExperienceIncrement(index: number, amount: number) {
+    return container(
+        Sprite.from(txsExperienceIncrement[index]).anchored(1, 1),
+        objText.Large(`+${amount} XP`, { tint: 0x000000 }).anchored(1, 0.5).at(-46, -13),
+    )
+        .coro(function* (self) {
+            const width = self.width;
+            self.pivot.x = -width;
+            yield interpvr(self.pivot).factor(factor.sine).to(0, 0).over(500);
+            yield sleep(1500);
+            yield interpvr(self.pivot).factor(factor.sine).to(-width, 0).over(500);
+            self.destroy();
+        });
 }
 
 export type ObjHud = ReturnType<typeof objHud>;

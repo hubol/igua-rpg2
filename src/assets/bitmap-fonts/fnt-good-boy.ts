@@ -80,6 +80,7 @@ export const fntGoodBoy = createBitmapFont(Tx.Font.GoodBoy, {
         ";": { x: 134, y: 49, w: 2, h: 16, xadv: 3, yoff: 1 },
         "(": { x: 142, y: 47, w: 4, h: 19, xadv: 4, yoff: -1 },
         ")": { x: 150, y: 47, w: 4, h: 19, xadv: 5, yoff: -1 },
+        "+": { x: 157, y: 52, w: 9, h: 9, xadv: 10, yoff: 4 },
     },
     kernings: [
         ["9", "7", -1],
