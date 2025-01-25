@@ -5,6 +5,9 @@ import { merge } from "../object/merge";
 import { VectorSimple } from "../math/vector-type";
 import { Logging } from "../logging";
 
+type TypeError_ThisDoesNotSufficientlyImplementContainerChildrenType =
+    "This DisplayObject does not sufficiently implement the Container's children type";
+
 declare module "pixi.js" {
     interface DisplayObject {
         named(name: string): this;
@@ -15,7 +18,11 @@ declare module "pixi.js" {
 
         filtered(filter: Filter): this;
 
-        show(container?: Container): this;
+        show<TContainer extends Container>(
+            container?: TContainer,
+        ): TContainer extends Container<infer TChildren>
+            ? (this extends TChildren ? this : TypeError_ThisDoesNotSufficientlyImplementContainerChildrenType)
+            : never;
         merge<T extends Pojo>(t: T): this & T;
         getMinY(): number;
         getMaxY(): number;
