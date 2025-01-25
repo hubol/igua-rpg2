@@ -19,9 +19,9 @@ const npcPersonas = [
     { internalName: "__Unknown__", job: "???", name: "???", looks: NpcLooks.MintyJourney },
 ] as const satisfies readonly NpcPersona[];
 
-type InternalPersonaName = typeof npcPersonas[number]["internalName"];
+export type NpcPersonaInternalName = typeof npcPersonas[number]["internalName"];
 
 export const NpcPersonas = npcPersonas.reduce((obj, npcPersona) => {
     obj[npcPersona.internalName] = npcPersona;
     return obj;
-}, {} as Record<InternalPersonaName, NpcPersona>);
+}, {} as Record<NpcPersonaInternalName, Omit<NpcPersona, "internalName"> & { internalName: NpcPersonaInternalName }>);
