@@ -19,7 +19,20 @@ export class IguaCutscene {
     }
 
     private static _objCutsceneContainer() {
-        return new Container<DisplayObject & { fn: CutsceneFn; attributes: CutsceneAttributes }>();
+        return new Container<DisplayObject & { fn: CutsceneFn; attributes: CutsceneAttributes }>()
+            .merge({ sinceCutsceneStepsCount: 0 })
+            .step(self => {
+                if (self.children.length) {
+                    self.sinceCutsceneStepsCount = 0;
+                }
+                else {
+                    self.sinceCutsceneStepsCount++;
+                }
+            });
+    }
+
+    get sinceCutsceneStepsCount() {
+        return this._container.sinceCutsceneStepsCount;
     }
 
     play(fn: CutsceneFn, attributes?: Partial<CutsceneAttributes>) {
