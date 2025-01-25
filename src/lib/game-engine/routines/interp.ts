@@ -8,27 +8,32 @@ import { Coro } from "./coro";
 
 type FactorFn = (factor: Unit) => Unit;
 
-export function interp<T>(object: T, key: keyof PropertiesLike<T, number>) {
+export function interp<T>(object: T, key: keyof PropertiesLike<T, number>, round = false) {
     return {
         steps: (count: number) => {
             return {
                 to: toFn(
                     object,
                     key,
+                    round,
                     (factor) => Math.floor(factor * count) / count,
                 ),
             };
         },
         factor: (factorFn: FactorFn) => {
             return {
-                to: toFn(object, key, factorFn),
+                to: toFn(object, key, round, factorFn),
             };
         },
-        to: toFn(object, key),
+        to: toFn(object, key, round),
     };
 }
 
-function toFn<T>(object: T, key: keyof PropertiesLike<T, number>, factorFn?: FactorFn) {
+export function interpr<T>(object: T, key: keyof PropertiesLike<T, number>) {
+    return interp(object, key, true);
+}
+
+function toFn<T>(object: T, key: keyof PropertiesLike<T, number>, round: boolean, factorFn?: FactorFn) {
     return (target: number) => ({
         over: (ms: number) => {
             let currentTick = 0;
@@ -47,7 +52,14 @@ function toFn<T>(object: T, key: keyof PropertiesLike<T, number>, factorFn?: Fac
                     factor = factorFn(factor);
                 }
 
-                (object[key] as number) = nlerp(start, target, factor);
+                const value = nlerp(start, target, factor);
+
+                if (round) {
+                    (object[key] as number) = Math.round(value);
+                }
+                else {
+                    (object[key] as number) = value;
+                }
 
                 return factor >= 1;
             };
