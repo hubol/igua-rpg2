@@ -16,6 +16,8 @@ import { Tx } from "../../../assets/textures";
 import { Null } from "../../../lib/types/null";
 import { approachLinear } from "../../../lib/math/number";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
+import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
 
 const Consts = {
     StatusTextTint: 0x00ff00,
@@ -102,15 +104,21 @@ function objInteractIndicator() {
     );
 }
 
+type ExperienceIndicatorConfig = [
+    experienceKey: keyof typeof RpgProgress["character"]["experience"],
+    textureIndex: Integer,
+    bgTint: RgbInt,
+];
+
+const experienceIndicatorConfigs: Array<ExperienceIndicatorConfig> = [
+    ["gambling", 4, 0xEABB00],
+    ["social", 3, 0x19A859],
+];
+
 function objExperienceIndicator() {
     const obj = container().at(renderer.width - 4, renderer.height - 4);
 
-    const configs: Array<[experienceKey: keyof typeof RpgProgress["character"]["experience"], textureIndex: number]> = [
-        ["gambling", 4],
-        ["social", 3],
-    ];
-
-    for (const [experienceKey, textureIndex] of configs) {
+    for (const [experienceKey, textureIndex, bgTint] of experienceIndicatorConfigs) {
         obj.coro(function* () {
             let previous = RpgProgress.character.experience[experienceKey];
 
@@ -122,7 +130,7 @@ function objExperienceIndicator() {
                 const diff = next - previous;
                 previous = next;
                 const bounds = obj.getBounds(false, r);
-                objExperienceIncrement(textureIndex, diff).show(obj).at(
+                objExperienceIncrement(textureIndex, bgTint, diff).show(obj).at(
                     0,
                     -bounds.height + Math.sign(bounds.height) * -4,
                 );
@@ -135,10 +143,16 @@ function objExperienceIndicator() {
 
 const txsExperienceIncrement = Tx.Ui.Experience.Increment.split({ width: 44 });
 
-function objExperienceIncrement(index: number, amount: number) {
+function objExperienceIncrement(index: number, bgTint: RgbInt, amount: number) {
+    const textObj = objText.Large(`+${amount} XP`, { tint: 0x000000 }).anchored(1, 0.5).at(-46, -13);
+
     return container(
+        Sprite.from(Tx.Ui.Experience.IncrementBg).mixin(mxnBoilMirrorRotate).tinted(bgTint).anchored(0.5, 0.5).at(
+            Math.round(Tx.Ui.Experience.IncrementBg.width / 2 - 50 - textObj.width),
+            -16,
+        ),
         Sprite.from(txsExperienceIncrement[index]).anchored(1, 1),
-        objText.Large(`+${amount} XP`, { tint: 0x00ff00 }).anchored(1, 0.5).at(-46, -13),
+        textObj,
     )
         .coro(function* (self) {
             const width = self.width;
