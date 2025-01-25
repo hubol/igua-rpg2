@@ -5,10 +5,10 @@ import { objHealthBar } from "./obj-health-bar";
 import { RpgPlayer } from "../../rpg/rpg-player";
 import { objStatusBar } from "./obj-status-bar";
 import { playerObj } from "../obj-player";
-import { RpgProgress } from "../../rpg/rpg-progress";
+import { RpgProgress, RpgProgressExperience } from "../../rpg/rpg-progress";
 import { renderer } from "../../current-pixi-renderer";
 import { Cutscene } from "../../globals";
-import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
+import { factor, interp, interpr, interpvr } from "../../../lib/game-engine/routines/interp";
 import { DataPocketItem } from "../../data/data-pocket-item";
 import { CtxInteract } from "../../mixins/mxn-interact";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
@@ -105,7 +105,7 @@ function objInteractIndicator() {
 }
 
 type ExperienceIndicatorConfig = [
-    experienceKey: keyof typeof RpgProgress["character"]["experience"],
+    experienceKey: RpgProgressExperience,
     textureIndex: Integer,
     bgTint: RgbInt,
 ];
@@ -116,24 +116,25 @@ const experienceIndicatorConfigs: Array<ExperienceIndicatorConfig> = [
 ];
 
 function objExperienceIndicator() {
-    const obj = container().at(renderer.width - 4, renderer.height - 4);
+    const obj = container<ObjExperienceIncrement>().at(renderer.width - 4, renderer.height - 4);
 
-    for (const [experienceKey, textureIndex, bgTint] of experienceIndicatorConfigs) {
+    for (const [experience, textureIndex, bgTint] of experienceIndicatorConfigs) {
         obj.coro(function* () {
-            let previous = RpgProgress.character.experience[experienceKey];
+            let previous = RpgProgress.character.experience[experience];
 
             while (true) {
                 yield () =>
                     !Boolean(Cutscene.current) && Cutscene.sinceCutsceneStepsCount > 15
-                    && previous !== RpgProgress.character.experience[experienceKey];
-                const next = RpgProgress.character.experience[experienceKey];
+                    && previous !== RpgProgress.character.experience[experience];
+                // TODO update existing increment indicator if possible!
+                const next = RpgProgress.character.experience[experience];
                 const diff = next - previous;
-                previous = next;
                 const bounds = obj.getBounds(false, r);
-                objExperienceIncrement(textureIndex, bgTint, diff).show(obj).at(
+                objExperienceIncrement(experience, textureIndex, bgTint, previous, diff, next).show(obj).at(
                     0,
                     -bounds.height + Math.sign(bounds.height) * -4,
                 );
+                previous = next;
             }
         });
     }
@@ -143,26 +144,52 @@ function objExperienceIndicator() {
 
 const txsExperienceIncrement = Tx.Ui.Experience.Increment.split({ width: 44 });
 
-function objExperienceIncrement(index: number, bgTint: RgbInt, amount: number) {
-    const textObj = objText.Large(`+${amount} XP`, { tint: 0x000000 }).anchored(1, 0.5).at(-46, -13);
+function objExperienceIncrement(
+    experience: RpgProgressExperience,
+    index: number,
+    bgTint: RgbInt,
+    start: number,
+    delta: number,
+    target: number,
+) {
+    const state = { value: start };
+    const totalTextObj = objText.Large("", { tint: 0x000000 }).anchored(1, 0.5).at(-46, -15);
+    const deltaTextObj = objText.SmallDigits("", { tint: 0x000000 }).anchored(1, 0.5).at(-68, -6);
+
+    const bgObj = Sprite.from(Tx.Ui.Experience.IncrementBg).mixin(mxnBoilMirrorRotate).tinted(bgTint).anchored(0.5, 0.5)
+        .at(
+            0,
+            -16,
+        );
 
     return container(
-        Sprite.from(Tx.Ui.Experience.IncrementBg).mixin(mxnBoilMirrorRotate).tinted(bgTint).anchored(0.5, 0.5).at(
-            Math.round(Tx.Ui.Experience.IncrementBg.width / 2 - 50 - textObj.width),
-            -16,
-        ),
+        bgObj,
         Sprite.from(txsExperienceIncrement[index]).anchored(1, 1),
-        textObj,
+        totalTextObj,
+        deltaTextObj,
     )
+        .merge({ experience, target, delta })
+        .step((self) => {
+            totalTextObj.text = `${state.value} XP`;
+            deltaTextObj.text = `+${self.delta}`;
+            bgObj.x = Math.round(
+                Tx.Ui.Experience.IncrementBg.width / 2 - Math.max(totalTextObj.width + 50, deltaTextObj.width + 72),
+            );
+        })
         .coro(function* (self) {
             const width = self.width;
             self.pivot.x = -width;
             yield interpvr(self.pivot).factor(factor.sine).to(0, 0).over(500);
-            yield sleep(1500);
+            while (self.target !== state.value) {
+                yield interpr(state, "value").to(self.target).over(500);
+                yield sleep(1500);
+            }
             yield interpvr(self.pivot).factor(factor.sine).to(-width, 0).over(500);
             self.destroy();
         });
 }
+
+type ObjExperienceIncrement = ReturnType<typeof objExperienceIncrement>;
 
 export type ObjHud = ReturnType<typeof objHud>;
 

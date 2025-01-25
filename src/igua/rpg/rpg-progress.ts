@@ -67,6 +67,9 @@ function getInitialRpgProgress() {
 
 export const RpgProgress = getInitialRpgProgress();
 
+export type RpgProgressExperience = keyof typeof RpgProgress["character"]["experience"];
+
+// TODO not sure if these should be plural
 export type RpgProgressUids = keyof PropertiesLike<typeof RpgProgress["uids"], Set<number>>;
 // TODO I think some places already expect flags to only be booleans :-X
 export type RpgProgressFlags = DeepKeyOf.Leaves<typeof RpgProgress["flags"]>;
