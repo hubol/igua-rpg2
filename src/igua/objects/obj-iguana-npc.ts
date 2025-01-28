@@ -4,10 +4,12 @@ import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { Rng } from "../../lib/math/rng";
 import { NpcPersonas } from "../data/npc-personas";
+import { Cutscene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { mxnIguanaEditable } from "../mixins/mxn-iguana-editable";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
+import { RpgProgress } from "../rpg/rpg-progress";
 import { objIguanaLocomotive } from "./obj-iguana-locomotive";
 
 interface ObjIguanaNpcArgs {
@@ -49,7 +51,11 @@ export function objIguanaNpc({ personaName }: ObjIguanaNpcArgs) {
             }
         })
         .handles("mxnSpeaker.speakingStarted", () => {
-            RpgExperienceRewarder.social.onSpeakWithNpc(persona.internalName);
+            if (Cutscene.current && !Cutscene.current.attributes.npcNamesSpoken.has(persona.internalName)) {
+                RpgExperienceRewarder.social.onSpeakWithNpc(!RpgProgress.uids.metNpcs.has(persona.internalName));
+                RpgProgress.uids.metNpcs.add(persona.internalName);
+                Cutscene.current.attributes.npcNamesSpoken.add(persona.internalName);
+            }
             speakingStartedCount++;
             isSpeaking = true;
         })

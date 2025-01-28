@@ -2,14 +2,18 @@ import { Container, DisplayObject } from "pixi.js";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
+import { NpcPersonaInternalName } from "../data/npc-personas";
 
 type CutsceneFn = () => Coro.Type;
 
-const defaultCutsceneAttributes = {
-    letterbox: true,
-};
+function getDefaultCutsceneAttributes() {
+    return {
+        letterbox: true,
+        npcNamesSpoken: new Set<NpcPersonaInternalName>(),
+    };
+}
 
-type CutsceneAttributes = typeof defaultCutsceneAttributes;
+type CutsceneAttributes = ReturnType<typeof getDefaultCutsceneAttributes>;
 
 export class IguaCutscene {
     private readonly _container: ReturnType<typeof IguaCutscene._objCutsceneContainer>;
@@ -49,7 +53,7 @@ export class IguaCutscene {
         }
 
         const runner = new Container().named("Cutscene Runner")
-            .merge({ fn, attributes: { ...defaultCutsceneAttributes, ...attributes } })
+            .merge({ fn, attributes: { ...getDefaultCutsceneAttributes(), ...attributes } })
             .coro(function* () {
                 try {
                     yield* fn();

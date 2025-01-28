@@ -12,13 +12,8 @@ export const RpgExperienceRewarder = {
         },
     },
     social: {
-        onSpeakWithNpc(name: NpcPersonaInternalName) {
-            if (RpgProgress.uids.metNpcs.has(name)) {
-                return;
-            }
-
-            RpgProgress.uids.metNpcs.add(name);
-            RpgProgress.character.experience.social += 1;
+        onSpeakWithNpc(isFirstTimeSpeaking: boolean) {
+            RpgProgress.character.experience.social += isFirstTimeSpeaking ? 10 : 1;
         },
     },
 };

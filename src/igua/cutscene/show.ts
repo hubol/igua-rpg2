@@ -99,6 +99,7 @@ function* showOneMessage(text: string) {
     endSpeaking(currentSpeaker, currentSpeakerMessageBoxObj);
 }
 
+// TODO feels like this shit should be in Cutscene.current tbh
 export const CtxShow = {
     speaker: Null<DisplayObject>(),
 };
