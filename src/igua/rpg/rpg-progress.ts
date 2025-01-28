@@ -31,6 +31,7 @@ function getInitialRpgProgress() {
             },
             experience: {
                 gambling: 0,
+                pocket: 0,
                 social: 0,
             },
             looks: getDefaultLooks(),

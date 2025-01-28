@@ -1,4 +1,5 @@
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
+import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 
 export namespace RpgPocket {
     // TODO feel like this belongs in the data directory
@@ -65,9 +66,11 @@ export namespace RpgPocket {
         remove(model: Model, item: Item, count: number) {
             for (const slot of model.slots) {
                 if (slot.item === item) {
-                    const amountToTakeFromSlot = Math.min(count, slot.count);
-                    slot.count -= amountToTakeFromSlot;
-                    count -= amountToTakeFromSlot;
+                    const countToTakeFromSlot = Math.min(count, slot.count);
+                    slot.count -= countToTakeFromSlot;
+                    count -= countToTakeFromSlot;
+                    // TODO feels a little crude to have an effect here
+                    RpgExperienceRewarder.pocket.onRemoveItems(countToTakeFromSlot);
                 }
                 if (count < 0) {
                     ErrorReporter.reportAssertError(

@@ -113,6 +113,7 @@ type ExperienceIndicatorConfig = [
 const experienceIndicatorConfigs: Array<ExperienceIndicatorConfig> = [
     ["gambling", 4, 0xEABB00],
     ["social", 3, 0x19A859],
+    ["pocket", 2, 0xEABB00],
 ];
 
 function objExperienceIndicator() {

@@ -11,6 +11,11 @@ export const RpgExperienceRewarder = {
             RpgProgress.character.experience.gambling += prize;
         },
     },
+    pocket: {
+        onRemoveItems(count: Integer) {
+            RpgProgress.character.experience.pocket += count;
+        },
+    },
     social: {
         onSpeakWithNpc(isFirstTimeSpeaking: boolean) {
             RpgProgress.character.experience.social += isFirstTimeSpeaking ? 10 : 1;
