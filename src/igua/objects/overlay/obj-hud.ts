@@ -18,6 +18,7 @@ import { approachLinear } from "../../../lib/math/number";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
 import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
+import { Coro } from "../../../lib/game-engine/routines/coro";
 
 const Consts = {
     StatusTextTint: 0x00ff00,
@@ -114,6 +115,7 @@ const experienceIndicatorConfigs: Array<ExperienceIndicatorConfig> = [
     ["gambling", 4, 0xEABB00],
     ["social", 3, 0x19A859],
     ["pocket", 2, 0xEABB00],
+    ["combat", 1, 0x19A859],
 ];
 
 function objExperienceIndicator() {
@@ -127,9 +129,18 @@ function objExperienceIndicator() {
                 yield () =>
                     !Boolean(Cutscene.current) && Cutscene.sinceCutsceneStepsCount > 15
                     && previous !== RpgProgress.character.experience[experience];
-                // TODO update existing increment indicator if possible!
                 const next = RpgProgress.character.experience[experience];
                 const diff = next - previous;
+
+                const existingIncrementObj = obj.children.find(x => x.experience === experience && x.canBeUpdated);
+
+                if (existingIncrementObj) {
+                    existingIncrementObj.target = next;
+                    existingIncrementObj.delta += diff;
+                    previous = next;
+                    continue;
+                }
+
                 const bounds = obj.getBounds(false, r);
                 objExperienceIncrement(experience, textureIndex, bgTint, previous, diff, next).show(obj).at(
                     0,
@@ -169,7 +180,7 @@ function objExperienceIncrement(
         totalTextObj,
         deltaTextObj,
     )
-        .merge({ experience, target, delta })
+        .merge({ experience, target, delta, canBeUpdated: true })
         .step((self) => {
             totalTextObj.text = `${state.value} XP`;
             deltaTextObj.text = `+${self.delta}`;
@@ -183,8 +194,12 @@ function objExperienceIncrement(
             yield interpvr(self.pivot).factor(factor.sine).to(0, 0).over(500);
             while (self.target !== state.value) {
                 yield interpr(state, "value").to(self.target).over(500);
-                yield sleep(1500);
+                yield* Coro.race([
+                    () => self.target !== state.value,
+                    sleep(1500),
+                ]);
             }
+            self.canBeUpdated = false;
             yield interpvr(self.pivot).factor(factor.sine).to(-width, 0).over(500);
             self.destroy();
         });

@@ -71,6 +71,7 @@ export const RpgPlayer = {
             guardedDamageIsFatal: false,
             ailmentsRecoverWhileCutsceneIsPlaying: false,
             receivesDamageWhileCutsceneIsPlaying: false,
+            attackingRewardsExperience: true,
         },
     } satisfies RpgStatus.Model,
     motion: {

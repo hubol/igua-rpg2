@@ -38,6 +38,7 @@ export namespace RpgEnemyRank {
                     ailmentsRecoverWhileCutsceneIsPlaying: status?.quirks?.ailmentsRecoverWhileCutsceneIsPlaying
                         ?? true,
                     receivesDamageWhileCutsceneIsPlaying: status?.quirks?.receivesDamageWhileCutsceneIsPlaying ?? true,
+                    attackingRewardsExperience: status?.quirks?.attackingRewardsExperience ?? false,
                 },
                 defenses: {
                     physical: status?.defenses?.physical ?? 0,

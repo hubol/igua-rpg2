@@ -2,6 +2,7 @@ import { blendColorDelta } from "../../lib/color/blend-color";
 import { Integer, PercentAsInteger, RgbInt } from "../../lib/math/number-alias-types";
 import { RpgAttack } from "./rpg-attack";
 import { RpgCutscene } from "./rpg-cutscene";
+import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 import { RpgFaction } from "./rpg-faction";
 
 export namespace RpgStatus {
@@ -44,6 +45,7 @@ export namespace RpgStatus {
             emotionalDamageIsFatal: boolean;
             roundReceivedDamageUp: boolean;
             guardedDamageIsFatal: boolean;
+            attackingRewardsExperience: boolean;
         };
     }
 
@@ -143,6 +145,8 @@ export namespace RpgStatus {
 
             const canBeFatal = !target.isGuarding || target.quirks.guardedDamageIsFatal || target.health <= 1;
 
+            const attackingRewardsExperience = attacker?.quirks?.attackingRewardsExperience ?? false;
+
             const tookEmotionalDamage = takeDamage(
                 attack.emotional,
                 DamageKind.Emotional,
@@ -152,6 +156,7 @@ export namespace RpgStatus {
                 0,
                 target,
                 targetEffects,
+                attackingRewardsExperience,
             );
 
             const tookPhysicalDamage = takeDamage(
@@ -162,6 +167,7 @@ export namespace RpgStatus {
                 target.guardingDefenses.physical,
                 target,
                 targetEffects,
+                attackingRewardsExperience,
             );
 
             const damaged = tookEmotionalDamage || tookPhysicalDamage;
@@ -197,6 +203,7 @@ export namespace RpgStatus {
         guardingDefense: PercentAsInteger,
         target: Model,
         targetEffects: Effects,
+        rewardExperience: boolean,
     ) {
         const previous = target.health;
         const totalDefense: PercentAsInteger = defense
@@ -215,6 +222,10 @@ export namespace RpgStatus {
 
         target.health = Math.max(minimumHealthAfterDamage, target.health - damage);
         const diff = previous - target.health;
+
+        if (rewardExperience && diff > 0) {
+            RpgExperienceRewarder.combat.onAttackDamage(diff);
+        }
 
         targetEffects.tookDamage(target.health, diff, kind);
 

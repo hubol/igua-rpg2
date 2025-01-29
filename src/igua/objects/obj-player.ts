@@ -93,7 +93,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 const hurtbox = puppet.collidesOne(instance.hurtboxes);
                 if (hurtbox) {
                     bounceIguanaOffObject(puppet, hurtbox);
-                    const result = instance.damage(RpgPlayer.meleeAttack);
+                    const result = instance.damage(RpgPlayer.meleeAttack, RpgPlayer.status);
                 }
             }
         }, StepOrder.Physics + 1);

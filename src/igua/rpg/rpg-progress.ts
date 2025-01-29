@@ -30,6 +30,7 @@ function getInitialRpgProgress() {
                 strength: 1,
             },
             experience: {
+                combat: 0,
                 gambling: 0,
                 pocket: 0,
                 social: 0,
