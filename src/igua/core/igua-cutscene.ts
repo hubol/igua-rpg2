@@ -3,11 +3,13 @@ import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { NpcPersonaInternalName } from "../data/npc-personas";
+import { Null } from "../../lib/types/null";
 
 type CutsceneFn = () => Coro.Type;
 
 function getDefaultCutsceneAttributes() {
     return {
+        speaker: Null<DisplayObject>(),
         letterbox: true,
         npcNamesSpoken: new Set<NpcPersonaInternalName>(),
     };
@@ -52,9 +54,9 @@ export class IguaCutscene {
             );
         }
 
-        const runner = new Container().named("Cutscene Runner")
+        new Container().named("Cutscene Runner")
             .merge({ fn, attributes: { ...getDefaultCutsceneAttributes(), ...attributes } })
-            .coro(function* () {
+            .coro(function* (self) {
                 try {
                     yield* fn();
                 }
@@ -66,8 +68,8 @@ export class IguaCutscene {
                     ErrorReporter.reportUnexpectedError("IguaCutscene.runner", e as Error);
                 }
                 finally {
-                    if (!runner.destroyed) {
-                        runner.destroy();
+                    if (!self.destroyed) {
+                        self.destroy();
                     }
                 }
             })

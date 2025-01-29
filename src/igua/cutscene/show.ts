@@ -2,7 +2,7 @@ import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
-import { Input, layers, scene } from "../globals";
+import { Cutscene, Input, layers, scene } from "../globals";
 import { Null } from "../../lib/types/null";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Tx } from "../../assets/textures";
@@ -99,11 +99,6 @@ function* showOneMessage(text: string) {
     endSpeaking(currentSpeaker, currentSpeakerMessageBoxObj);
 }
 
-// TODO feels like this shit should be in Cutscene.current tbh
-export const CtxShow = {
-    speaker: Null<DisplayObject>(),
-};
-
 function endSpeaking(currentSpeaker: DisplayObject | null, currentSpeakerMessageBoxObj: ObjSpeakerMessageBox) {
     if (currentSpeaker?.is(mxnSpeaker)) {
         currentSpeaker.dispatch("mxnSpeaker.speakingEnded");
@@ -114,7 +109,9 @@ function endSpeaking(currentSpeaker: DisplayObject | null, currentSpeakerMessage
 }
 
 function* startSpeaking(text: string) {
-    const currentSpeaker = CtxShow.speaker?.destroyed ? null : CtxShow.speaker;
+    const currentSpeaker = Cutscene.current?.attributes?.speaker?.destroyed
+        ? null
+        : (Cutscene.current?.attributes.speaker ?? null);
     let currentSpeakerMessageBoxObj = speakerMessageBoxObj?.destroyed ? null : speakerMessageBoxObj;
 
     if (currentSpeakerMessageBoxObj) {
