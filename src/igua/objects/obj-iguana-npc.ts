@@ -16,7 +16,6 @@ interface ObjIguanaNpcArgs {
     personaName: keyof typeof NpcPersonas;
 }
 
-// TODO should have some way to setup the interact hotspot!
 export function objIguanaNpc({ personaName }: ObjIguanaNpcArgs) {
     let persona = NpcPersonas[personaName];
     if (!persona) {
