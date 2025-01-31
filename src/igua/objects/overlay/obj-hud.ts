@@ -148,7 +148,26 @@ function objExperienceIndicator() {
                 );
                 previous = next;
             }
-        });
+        })
+            .step(() => {
+                if (obj.children.length < 1) {
+                    return;
+                }
+
+                let max = Number.MIN_SAFE_INTEGER;
+
+                for (const child of obj.children) {
+                    max = Math.max(child.y, max);
+                }
+
+                if (max >= 0) {
+                    return;
+                }
+
+                for (const child of obj.children) {
+                    child.y += 1;
+                }
+            });
     }
 
     return obj;
