@@ -11,6 +11,7 @@ import { ask, show } from "../cutscene/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { RpgProgress } from "../rpg/rpg-progress";
+import { Integer } from "../../lib/math/number-alias-types";
 
 export function scnNewBalltownArmorer() {
     Jukebox.play(Mzk.GolfResort);
@@ -26,6 +27,7 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
             yield* show("Zinc is an element that makes your loads bigger.");
         }
         else if (result === 1) {
+            // TODO check isFilled for more dialog!!!
             yield* show("Ah, my fishtank.", "I need water for it.");
         }
         else if (result === 2) {
@@ -34,20 +36,35 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
     });
 }
 
+const aquariumService = {
+    maximumMoistureUnits: 300,
+    get moistureUnits() {
+        return RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits;
+    },
+    incrementMoistureUnits(units: Integer) {
+        RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits = Math.min(
+            RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits + units,
+            this.maximumMoistureUnits,
+        );
+    },
+    get isFilled() {
+        return RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits >= this.maximumMoistureUnits;
+    },
+} as const;
+
 function enrichAquarium(lvl: LvlType.NewBalltownArmorer) {
-    const { aquarium } = RpgProgress.flags.newBalltown.armorer;
     const { wetness } = RpgProgress.character.status;
 
-    const maximumMoistureUnits = 300;
-
-    lvl.AquariumWaterLine.merge({ observedMoistureUnits: aquarium.moistureUnits })
+    lvl.AquariumWaterLine.merge({ observedMoistureUnits: aquariumService.moistureUnits })
         .step(self => {
-            self.scale.y = Math.min(1, self.observedMoistureUnits / maximumMoistureUnits);
+            self.scale.y = Math.min(1, self.observedMoistureUnits / aquariumService.maximumMoistureUnits);
         })
         .coro(function* (self) {
             while (true) {
-                yield () => aquarium.moistureUnits !== self.observedMoistureUnits;
-                yield interp(self, "observedMoistureUnits").factor(factor.sine).to(aquarium.moistureUnits).over(1000);
+                yield () => aquariumService.moistureUnits !== self.observedMoistureUnits;
+                yield interp(self, "observedMoistureUnits").factor(factor.sine).to(aquariumService.moistureUnits).over(
+                    1000,
+                );
             }
         });
 
@@ -59,7 +76,7 @@ function enrichAquarium(lvl: LvlType.NewBalltownArmorer) {
         colorSecondary: 0x0BC6A8,
         name: "Automated Water Intake",
     }).mixin(mxnCutscene, function* () {
-        if (aquarium.moistureUnits < maximumMoistureUnits) {
+        if (!aquariumService.isFilled) {
             if (wetness.value === 0) {
                 yield* show(`--Water analysis
 No moisture detected.`);
@@ -85,7 +102,7 @@ Need at least 150`);
                     "n",
                 )) === 0
             ) {
-                aquarium.moistureUnits = Math.min(aquarium.moistureUnits + wetness.value, maximumMoistureUnits);
+                aquariumService.incrementMoistureUnits(wetness.value);
                 wetness.value = 0;
                 Sfx.Fluid.Slurp.play();
                 yield sleep(1000);
@@ -93,6 +110,8 @@ Need at least 150`);
         }
 
         yield* show(`--Fill analysis
-at ${StringFromNumber.getPercentageNoDecimal(aquarium.moistureUnits, maximumMoistureUnits)} capacity`);
+at ${
+            StringFromNumber.getPercentageNoDecimal(aquariumService.moistureUnits, aquariumService.maximumMoistureUnits)
+        } capacity`);
     });
 }
