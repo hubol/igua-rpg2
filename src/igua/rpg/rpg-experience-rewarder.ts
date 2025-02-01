@@ -3,8 +3,8 @@ import { RpgProgress } from "./rpg-progress";
 
 export const RpgExperienceRewarder = {
     combat: {
-        onAttackDamage(damage: Integer) {
-            RpgProgress.character.experience.combat += damage;
+        onEnemyDefeat(enemyMaxHealth: Integer) {
+            RpgProgress.character.experience.combat += enemyMaxHealth;
         },
     },
     gambling: {

@@ -174,6 +174,9 @@ export namespace RpgStatus {
             target.invulnerable = target.invulnerableMax;
 
             if (damaged && target.health <= 0) {
+                if (attackingRewardsExperience) {
+                    RpgExperienceRewarder.combat.onEnemyDefeat(target.healthMax);
+                }
                 targetEffects.died();
             }
 
@@ -223,9 +226,10 @@ export namespace RpgStatus {
         target.health = Math.max(minimumHealthAfterDamage, target.health - damage);
         const diff = previous - target.health;
 
-        if (rewardExperience && diff > 0) {
-            RpgExperienceRewarder.combat.onAttackDamage(diff);
-        }
+        // TODO should experience be awarded for each hit? Not sure
+        // if (rewardExperience && diff > 0) {
+        //     RpgExperienceRewarder.combat.onAttackDamage(diff);
+        // }
 
         targetEffects.tookDamage(target.health, diff, kind);
 
