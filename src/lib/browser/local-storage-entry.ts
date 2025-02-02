@@ -13,4 +13,8 @@ export class LocalStorageEntry<T> {
     set value(value: T) {
         localStorage.setItem(this.key, Serializer.serialize(value));
     }
+
+    clear() {
+        localStorage.removeItem(this.key);
+    }
 }
