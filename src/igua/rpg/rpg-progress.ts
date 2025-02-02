@@ -1,6 +1,7 @@
 import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { Null } from "../../lib/types/null";
 import { PropertiesLike } from "../../lib/types/properties-like";
+import { EquipmentInternalName } from "../data/data-equipment";
 import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { RpgPocket } from "./rpg-pocket";
@@ -29,6 +30,7 @@ function getInitialRpgProgress() {
                 intelligence: 0,
                 strength: 1,
             },
+            equipment: ["JumpAtSpecialSignsRing", null, null, null] as Array<EquipmentInternalName | null>,
             experience: {
                 combat: 0,
                 gambling: 0,
@@ -70,6 +72,8 @@ function getInitialRpgProgress() {
 export const RpgProgress = getInitialRpgProgress();
 
 export type RpgProgressExperience = keyof typeof RpgProgress["character"]["experience"];
+
+export type RpgProgressEquipment = typeof RpgProgress["character"]["equipment"];
 
 // TODO not sure if these should be plural
 export type RpgProgressUids = keyof PropertiesLike<typeof RpgProgress["uids"], Set<number>>;

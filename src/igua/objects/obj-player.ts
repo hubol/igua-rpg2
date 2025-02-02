@@ -14,18 +14,23 @@ import { StepOrder } from "./step-order";
 import { force } from "../mixins/mxn-physics";
 import { Sfx } from "../../assets/sounds";
 import { CtxGate } from "./obj-gate";
+import { ObjSign, objSign } from "./obj-sign";
+import { mxnSparkling } from "../mixins/mxn-sparkling";
+import { interp } from "../../lib/game-engine/routines/interp";
 
 const PlayerConsts = {
     // TODO probably not constants, probably derived from status
     WalkingAcceleration: 0.3,
     WalkingDeceleration: 0.2,
     JumpSpeed: -3,
+    JumpSpeedAtSpecialSign: -6,
     VariableJumpSpeedMaximum: -1.5,
     VariableJumpDelta: -0.095,
     Gravity: 0.15,
 };
 
 const filterVulnerableObjs = (obj: MxnRpgStatus) => obj.status.faction !== RpgFaction.Player;
+const filterSpecialSignObjs = (obj: ObjSign) => obj.isSpecial;
 
 function objPlayer(looks: IguanaLooks.Serializable) {
     const iguanaLocomotiveObj = objIguanaLocomotive(looks);
@@ -40,6 +45,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
 
     const puppet = iguanaLocomotiveObj
         .mixin(mxnRpgStatus, { status: RpgPlayer.status, effects, hurtboxes: [iguanaLocomotiveObj] })
+        .mixin(mxnSparkling)
         .handles("moved", () => {
             if (CtxGate.value.isGateTransitionActive) {
                 return;
@@ -85,7 +91,20 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 puppet.speed.y += PlayerConsts.VariableJumpDelta;
             }
             if (hasControl && puppet.isOnGround && Input.justWentDown("Jump")) {
-                puppet.speed.y = PlayerConsts.JumpSpeed;
+                if (
+                    RpgPlayer.equipmentAttributes.quirks.enablesHighJumpsAtSpecialSigns
+                    && puppet.collidesOne(Instances(objSign, filterSpecialSignObjs))
+                ) {
+                    // TODO sfx for special jump
+                    puppet.coro(function* () {
+                        puppet.sparklesPerFrame = 2;
+                        yield interp(puppet, "sparklesPerFrame").to(0).over(500);
+                    });
+                    puppet.speed.y = PlayerConsts.JumpSpeedAtSpecialSign;
+                }
+                else {
+                    puppet.speed.y = PlayerConsts.JumpSpeed;
+                }
             }
         })
         .step(() => {

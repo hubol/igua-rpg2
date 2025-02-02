@@ -415,7 +415,7 @@
           "y": 448,
           "originX": 0,
           "originY": 26,
-          "values": {"title": "Town", "message": "Welcome to New Balltown.", "name": "", "depth": 0}
+          "values": {"title": "Town", "message": "Welcome to New Balltown.", "name": "", "depth": 0, "isSpecial": false}
         },
         {
           "name": "Door",
@@ -477,7 +477,7 @@
           "y": 384,
           "originX": 0,
           "originY": 26,
-          "values": {"title": "Casino", "message": "Must be 21+ to enter the gambling floor", "name": "", "depth": 0}
+          "values": {"title": "Casino", "message": "Must be 21+ to enter the gambling floor", "name": "", "depth": 0, "isSpecial": false}
         },
         {
           "name": "Sign",
@@ -487,7 +487,7 @@
           "y": 384,
           "originX": 0,
           "originY": 26,
-          "values": {"title": "Casino", "message": "Must be 21+ to enter the gambling floor", "name": "", "depth": 0}
+          "values": {"title": "Casino", "message": "Must be 21+ to enter the gambling floor\n\nThis sign is special.", "name": "", "depth": 0, "isSpecial": true}
         }
       ]
     },

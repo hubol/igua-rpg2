@@ -299,7 +299,7 @@
           "y": 144,
           "originX": 0,
           "originY": 26,
-          "values": {"title": "Outskirts", "message": "The outskirts of town.", "name": "", "depth": 0}
+          "values": {"title": "Outskirts", "message": "The outskirts of town.", "name": "", "depth": 0, "isSpecial": false}
         },
         {
           "name": "PocketableItemA",
