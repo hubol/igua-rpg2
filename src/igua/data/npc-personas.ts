@@ -1,27 +1,31 @@
 import { IguanaLooks } from "../iguana/looks";
 import { NpcLooks } from "./npc-looks";
 
-interface NpcPersona {
-    internalName: string;
+interface NpcPersona_NoInternalName {
     job: string;
     name: string;
     looks: IguanaLooks.Serializable;
 }
 
-const npcPersonas = [
-    { internalName: "BalltownOutskirtsMiner", job: "Miner", name: "Dante", looks: NpcLooks.Miner },
-    { internalName: "BalltownOutskirtsFarmer", job: "Farmer", name: "Lars", looks: NpcLooks.Farmer },
-    { internalName: "NewBalltownBallFruitFanatic", job: "Eccentric", name: "Marf", looks: NpcLooks.BallFruitFanatic },
-    { internalName: "NewBalltownArmorer", job: "Armorer", name: "Trav", looks: NpcLooks.Dizzy },
-    { internalName: "NewBalltownFishmonger", job: "Fishmonger", name: "Pop", looks: NpcLooks.Nerd },
-    { internalName: "NewBalltownOliveFanatic", job: "Autist", name: "Oly", looks: NpcLooks.LivingOlive },
-    { internalName: "NewBalltownCroupier", job: "Croupier", name: "Flum", looks: NpcLooks.PartyAnimal },
-    { internalName: "__Unknown__", job: "???", name: "???", looks: NpcLooks.MintyJourney },
-] as const satisfies readonly NpcPersona[];
+const npcPersonas = {
+    BalltownOutskirtsMiner: { job: "Miner", name: "Dante", looks: NpcLooks.Miner },
+    BalltownOutskirtsFarmer: { job: "Farmer", name: "Lars", looks: NpcLooks.Farmer },
+    NewBalltownBallFruitFanatic: { job: "Eccentric", name: "Marf", looks: NpcLooks.BallFruitFanatic },
+    NewBalltownArmorer: { job: "Armorer", name: "Trav", looks: NpcLooks.Dizzy },
+    NewBalltownFishmonger: { job: "Fishmonger", name: "Pop", looks: NpcLooks.Nerd },
+    NewBalltownOliveFanatic: { job: "Autist", name: "Oly", looks: NpcLooks.LivingOlive },
+    NewBalltownCroupier: { job: "Croupier", name: "Flum", looks: NpcLooks.PartyAnimal },
+    __Unknown__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
+} satisfies Record<string, NpcPersona_NoInternalName>;
 
-export type NpcPersonaInternalName = typeof npcPersonas[number]["internalName"];
+export type NpcPersonaInternalName = keyof typeof npcPersonas;
 
-export const NpcPersonas = npcPersonas.reduce((obj, npcPersona) => {
-    obj[npcPersona.internalName] = npcPersona;
-    return obj;
-}, {} as Record<NpcPersonaInternalName, Omit<NpcPersona, "internalName"> & { internalName: NpcPersonaInternalName }>);
+type NpcPersona = NpcPersona_NoInternalName & { internalName: NpcPersonaInternalName };
+
+export const NpcPersonas = Object.entries(npcPersonas).reduce(
+    (obj, [internalName, npcPersona]) => {
+        obj[internalName] = npcPersona;
+        return obj;
+    },
+    {} as Record<NpcPersonaInternalName, NpcPersona>,
+);
