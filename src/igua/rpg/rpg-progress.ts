@@ -69,7 +69,11 @@ function getInitialRpgProgress() {
     };
 }
 
-export const RpgProgress = getInitialRpgProgress();
+export let RpgProgress = getInitialRpgProgress();
+
+export function setRpgProgress(rpgProgress: typeof RpgProgress) {
+    RpgProgress = rpgProgress;
+}
 
 export type RpgProgressExperience = keyof typeof RpgProgress["character"]["experience"];
 

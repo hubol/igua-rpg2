@@ -12,7 +12,10 @@ import { DomErrorAnnouncer } from "./lib/game-engine/dom-error-announcer";
 
 // https://esbuild.github.io/api/#live-reload
 if (Environment.isDev) {
-    new EventSource("/esbuild").addEventListener("change", () => location.reload());
+    new EventSource("/esbuild").addEventListener("change", () => {
+        require("./igua/dev/dev-game-start-config").DevGameStartConfig.recordTransientGameStartConfig();
+        location.reload();
+    });
 }
 
 async function initialize() {

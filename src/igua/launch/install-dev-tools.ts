@@ -5,7 +5,7 @@ import { elDebugColors } from "../../lib/game-engine/elements/el-debug-colors";
 import { Toast } from "../../lib/game-engine/toast";
 import { IguaAudio } from "../core/igua-audio";
 import { SceneLibrary } from "../core/scene/scene-library";
-import { DevStartScene } from "../dev/dev-start-scene";
+import { DevGameStartConfig } from "../dev/dev-game-start-config";
 import { layers, sceneStack } from "../globals";
 
 export function installDevTools() {
@@ -57,7 +57,7 @@ function createSceneSwitcherEl() {
 
     const onChange = (sceneName: string) => {
         sceneStack.replace(SceneLibrary.findByName(sceneName), { useGameplay: false });
-        DevStartScene.name = sceneName;
+        DevGameStartConfig.setExplicitSceneName(sceneName);
     };
 
     const noChoiceOptionEl = document.createElement("option");

@@ -1,16 +1,45 @@
 import { Environment } from "../../lib/environment";
+import { VectorSimple } from "../../lib/math/vector-type";
 import { SceneLibrary } from "../core/scene/scene-library";
-import { DevStartScene } from "../dev/dev-start-scene";
+import { DevGameStartConfig } from "../dev/dev-game-start-config";
 import { sceneStack, startAnimator } from "../globals";
+import { playerObj } from "../objects/obj-player";
+import { RpgProgress, setRpgProgress } from "../rpg/rpg-progress";
 
 export function startGame() {
-    const sceneName = getStartSceneName();
-    sceneStack.push(SceneLibrary.findByName(sceneName), { useGameplay: false });
+    const config = getConfig();
+    sceneStack.push(SceneLibrary.findByName(config.sceneName), { useGameplay: false });
     startAnimator();
+
+    if (config.player.position && playerObj) {
+        playerObj.at(config.player.position);
+    }
+
+    if (config.progress) {
+        setRpgProgress(config.progress);
+    }
+
+    RpgProgress.character.position.sceneName = config.sceneName;
 }
 
-function getStartSceneName() {
-    return (Environment.isDev && DevStartScene.name)
-        ? DevStartScene.name
-        : "scnIguanaDesigner";
+function getConfig(): GameStartConfig {
+    const devConfig = Environment.isDev ? DevGameStartConfig.get() : null;
+
+    if (devConfig === null) {
+        return {
+            sceneName: "scnIguanaDesigner",
+            player: { position: null },
+            progress: null,
+        };
+    }
+
+    return devConfig;
+}
+
+export interface GameStartConfig {
+    sceneName: string;
+    progress: typeof RpgProgress | null;
+    player: {
+        position: VectorSimple | null;
+    };
 }
