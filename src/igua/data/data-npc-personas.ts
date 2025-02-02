@@ -1,5 +1,5 @@
 import { IguanaLooks } from "../iguana/looks";
-import { NpcLooks } from "./npc-looks";
+import { NpcLooks } from "./data-npc-looks";
 
 interface NpcPersona_NoInternalName {
     job: string;

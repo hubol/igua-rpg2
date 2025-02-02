@@ -2,7 +2,7 @@ import { Container, DisplayObject } from "pixi.js";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
-import { NpcPersonaInternalName } from "../data/npc-personas";
+import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { Null } from "../../lib/types/null";
 
 type CutsceneFn = () => Coro.Type;

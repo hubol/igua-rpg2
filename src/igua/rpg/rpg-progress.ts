@@ -1,7 +1,7 @@
 import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { Null } from "../../lib/types/null";
 import { PropertiesLike } from "../../lib/types/properties-like";
-import { NpcPersonaInternalName } from "../data/npc-personas";
+import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { RpgPocket } from "./rpg-pocket";
 
