@@ -24,7 +24,10 @@ type NpcPersona = NpcPersona_NoInternalName & { internalName: NpcPersonaInternal
 
 export const NpcPersonas = Object.entries(npcPersonas).reduce(
     (obj, [internalName, npcPersona]) => {
-        obj[internalName] = npcPersona;
+        obj[internalName] = {
+            internalName: internalName as NpcPersonaInternalName,
+            ...npcPersona,
+        } satisfies NpcPersona;
         return obj;
     },
     {} as Record<NpcPersonaInternalName, NpcPersona>,
