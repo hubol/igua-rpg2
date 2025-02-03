@@ -16,6 +16,7 @@ import { OgmoFactory } from "./factory";
 import { objGate } from "../objects/obj-gate";
 import { objPocketableItemSpawner } from "../objects/obj-pocketable-item-spawner";
 import { RpgPocket } from "../rpg/rpg-pocket";
+import { objMarker } from "../objects/utils/obj-marker";
 
 export const OgmoEntityResolvers = {
     "Player": (entity) => createOrConfigurePlayerObj(entity),
@@ -47,7 +48,7 @@ export const OgmoEntityResolvers = {
         delete entity.width;
         return obj;
     },
-    "Marker": (entity) => vnew(entity),
+    "Marker": objMarker,
     "Region": () => new Graphics().beginFill(0x00ff00).drawRect(0, 0, 1, 1).invisible(),
     "GateHorizontal": (entity) => objGate(entity, "horizontal"),
     // TODO somehow configure item to spawn
