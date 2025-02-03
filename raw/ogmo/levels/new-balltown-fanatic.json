@@ -28,10 +28,58 @@
       "gridCellsX": 64,
       "gridCellsY": 35,
       "decals": [
-        {"x": 203, "y": 108, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#31220b", "texture": "light/aura irregular 40.png", "originX": 0.5, "originY": 0.5, "groupName": "ChandelierLights"},
-        {"x": 230, "y": 106, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#31220b", "texture": "light/aura irregular 40.png", "originX": 0.5, "originY": 0.5, "groupName": "ChandelierLights"},
-        {"x": 289, "y": 106, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#31220b", "texture": "light/aura irregular 40.png", "originX": 0.5, "originY": 0.5, "groupName": "ChandelierLights"},
-        {"x": 314, "y": 105, "scaleX": 1, "scaleY": 1, "rotation": 0, "tint": "#31220b", "texture": "light/aura irregular 40.png", "originX": 0.5, "originY": 0.5, "groupName": "ChandelierLights"}
+        {
+          "x": 203,
+          "y": 108,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#31220b",
+          "texture": "light/aura irregular 40.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "ChandelierLights"
+        },
+        {
+          "x": 230,
+          "y": 106,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#31220b",
+          "texture": "light/aura irregular 40.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "ChandelierLights"
+        },
+        {
+          "x": 289,
+          "y": 106,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#31220b",
+          "texture": "light/aura irregular 40.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "ChandelierLights"
+        },
+        {
+          "x": 314,
+          "y": 105,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#31220b",
+          "texture": "light/aura irregular 40.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "ChandelierLights"
+        }
       ],
       "folder": "../textures"
     },
