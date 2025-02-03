@@ -53,9 +53,9 @@ function objDisplayObjectMonitor() {
 
         const { tx: x, ty: y } = displayObject.worldTransform;
 
-        displayObject.getBounds(false, r);
-        gfx.lineStyle(innerStyle).drawRect(r.x, r.y, r.width, r.height)
-            .lineStyle(outerStyle).drawRect(r.x - 1, r.y - 1, r.width + 2, r.height + 2)
+        const bounds = displayObject.getBounds(false, r);
+        gfx.lineStyle(innerStyle).drawRect(bounds.x, bounds.y, bounds.width, bounds.height)
+            .lineStyle(outerStyle).drawRect(bounds.x - 1, bounds.y - 1, bounds.width + 2, bounds.height + 2)
             .lineStyle(innerStyle)
             .beginFill(0x000000).drawRect(x, y, 1, 1);
 
