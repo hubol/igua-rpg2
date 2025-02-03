@@ -1,6 +1,7 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
+import { Instances } from "../../lib/game-engine/instances";
 import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
@@ -10,6 +11,8 @@ import { Jukebox } from "../core/igua-audio";
 import { rewardValuables } from "../cutscene/reward-valuables";
 import { ask, show } from "../cutscene/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { objFxSparkleMany } from "../objects/effects/obj-fx-sparkle-many";
+import { objMarker } from "../objects/utils/obj-marker";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 import { RpgProgress } from "../rpg/rpg-progress";
 
@@ -18,6 +21,11 @@ export function scnNewBalltown() {
     const lvl = Lvl.NewBalltown();
     enrichOliveFanatic(lvl);
     enrichCroupier(lvl);
+    enrichSparkles();
+}
+
+function enrichSparkles() {
+    objFxSparkleMany(...Instances(objMarker, obj => obj.tint === 0xffffff)).show();
 }
 
 function enrichOliveFanatic(lvl: LvlType.NewBalltown) {
