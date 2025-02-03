@@ -13,6 +13,8 @@ const filteredItems: any[] = [];
  *
  * However, if while iterating the list, you destroy game objects in the list;
  * they will continue to exist in the list.
+ *
+ * Do not store the returned value. Make a copy if necessary.
  */
 export function Instances<TFn extends Fn>(fn: TFn): ReturnType<TFn>[];
 export function Instances<TFn extends Fn>(fn: TFn, filter: (item: ReturnType<TFn>) => boolean): ReturnType<TFn>[];
