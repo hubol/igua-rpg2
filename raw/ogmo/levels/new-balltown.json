@@ -646,6 +646,17 @@
           "originX": 0,
           "originY": 26,
           "values": {"title": "Mines", "message": "Famous New Balltown mines ahead.", "name": "", "depth": 0, "isSpecial": false}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 11,
+          "_eid": "90326278",
+          "x": 984,
+          "y": 536,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": true,
+          "values": {"personaName": "NewBalltownMiner", "name": "Miner", "depth": 0}
         }
       ]
     },

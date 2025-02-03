@@ -22,10 +22,52 @@ export function scnNewBalltown() {
     enrichOliveFanatic(lvl);
     enrichCroupier(lvl);
     enrichSparkles();
+    enrichMiner(lvl);
 }
 
 function enrichSparkles() {
     objFxSparkleMany(...Instances(objMarker, obj => obj.tint === 0xffffff)).show();
+}
+
+function enrichMiner(lvl: LvlType.NewBalltown) {
+    lvl.Miner.mixin(mxnCutscene, function* () {
+        const result = yield* ask(
+            `Name's ${lvl.Miner.speaker.name}. I used to mine in these famous mines. Now I don't. How can I help?`,
+            "Why is it famous",
+            "Why don't you",
+            // TODO don't show if you haven't talked to dante
+            "Your brother's axe",
+            "You can't",
+        );
+
+        if (result === 0) {
+            yield* show(
+                "These mines are very famous due to being very awesome.",
+                "A lot of people come to see them every year, during the Generator festival.",
+                "The Generator festival is a time when things are also awesome.",
+                "It's hard to explain to out-of-towners.",
+            );
+        }
+        else if (result === 1) {
+            yield* show(
+                "I mined in these very famous mines for many years, but gave it up when my brother got really good at it.",
+                "To be honest, he found a much better mine to the east.",
+                "His mine has valuables that the casino does not have jurisdiction over.",
+            );
+        }
+        else if (result === 2) {
+            yield* show(
+                "Oh, so his picaxe finally broke?",
+                "...He says there is a shop in town that could sell a replacement?",
+                "My brother and I don't communicate very well... So I think he is mistaken.",
+                "The shop he is probably referring to went out of business a long time ago.",
+                "It was located where the mysterious machine is now.",
+            );
+        }
+        else if (result === 3) {
+            yield* show("Take it easy dude.");
+        }
+    });
 }
 
 function enrichOliveFanatic(lvl: LvlType.NewBalltown) {

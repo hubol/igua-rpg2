@@ -1318,6 +1318,7 @@ export const Lvl = {
     Sign_1: e(r["Sign"], { x: 968, y: 384, values: { title: "Casino", message: "Must be 21+ to enter the gambling floor", name: "", depth: 0, isSpecial: false } }, "Entities"),
     Sign_2: e(r["Sign"], { x: 624, y: 384, values: { title: "Casino", message: "Must be 21+ to enter the gambling floor\n\nThis sign is special.", name: "", depth: 0, isSpecial: true } }, "Entities"),
     Sign_3: e(r["Sign"], { x: 192, y: 488, values: { title: "Mines", message: "Famous New Balltown mines ahead.", name: "", depth: 0, isSpecial: false } }, "Entities"),
+    Miner: e(r["IguanaNpc"], { x: 984, y: 536, flippedX: true, values: { personaName: "NewBalltownMiner", name: "Miner", depth: 0 } }, "Entities"),
     TerrainEarthExposedDirt_3: d(Tx.Terrain.Earth.ExposedDirt, { x: 1300, y: 330, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x705031 }, "AboveEntitiesDecals"),
     StoneRockSmallShaded1_10: d(Tx.Stone.RockSmallShaded1, { x: 1276, y: 326, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
     StoneRockSmallShaded1_11: d(Tx.Stone.RockSmallShaded1, { x: 1323, y: 326, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
