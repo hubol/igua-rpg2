@@ -1,6 +1,7 @@
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { SceneLibrary } from "../core/scene/scene-library";
 import { sceneStack } from "../globals";
+import { playerObj } from "../objects/obj-player";
 import { RpgProgress } from "../rpg/rpg-progress";
 
 interface CreateArgs {
@@ -17,6 +18,9 @@ export class SceneChanger {
     }
 
     changeScene() {
+        if (playerObj) {
+            RpgProgress.character.position.facing = playerObj.facing > 0 ? 1 : -1;
+        }
         RpgProgress.character.position.sceneName = this._sceneName;
         RpgProgress.character.position.checkpointName = this._checkpointName;
         sceneStack.replace(this._scene, { useGameplay: true });

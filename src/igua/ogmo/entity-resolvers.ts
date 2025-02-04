@@ -68,7 +68,10 @@ function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?:
     }
 
     if (checkpointName) {
-        objCheckpoint(checkpointName, facing).at(pos).show();
+        const checkpointFacing = entity.values.overrideFlipX === "retainFromPreviousScene"
+            ? RpgProgress.character.position.facing
+            : facing;
+        objCheckpoint(checkpointName, checkpointFacing).at(pos).show();
     }
 
     const checkpointObj = Instances(objCheckpoint).find(x =>

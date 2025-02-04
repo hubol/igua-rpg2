@@ -180,7 +180,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": false},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": false},
       "texture": "preview-images/iguana.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAqCAYAAAAeeGN5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKCSURBVGhD3Ze9LwRBFMD3rkSj1IpKdHdKIhIViY+GRM21/gaFWotKIUHhEJ1ERKU4najEXyDRoD33xjzm5mbmzcebPfFLLvt2dnZ2fvNmZ/YqRUZaE7NtGQrqjzdZn5elcV1CJacQe8MuEZUcUqwN+oog3EJsjYWKIJxCVXn8F7CMSmxWEK7s9Fdm+14GNPWVT7Kv/ZEJkNBxSVkv7K02uzrYOFm21vWWSZDQMUn1FOgSOjYpUihQpLb8IaOieGgOyqi7vNJBhoKu1YwSAXzq9JAgAuC5Xt7uIEPBj0xIJ011uVYkvcMUqpCQiRltbyHG94RCPNwlY3pHsL7XohAgg1nZXzsXR5Xa6nrxcHIkz37ZPF4SR3h/qqEigEsCEVkqMStA9OeMj1DZiA7FZMeX1tmAtW0d18sPy7PrOjnNUgkR4aBCyWBmWlvX4R2bXpSBP6bRt22aCFyHLwJSpjYyJKNIEoVUEUS/jp82TplkESBCJhSUqdpecBYR4O5CBuGY9hVALVc/OI1LM5tIIqaNEs6h3ISQyb5nJGRHFdJF9L8BPZnJlhUGIZcI0FUAi0EpUyxhUTBJID0XovaTWAKkXBJIf2U61HfnyE76YmyoLCFOESD6q/kvYh2Z3NnhzgrQl8xMXp4WldEN9sFyjo6anZnnYXG8HXsTRx9M94CISvvlgC1DZEMghJ1CfIT0e96v6uJZtoxwSJHTTO8UYCqjGFpoteEnT7PgHA3q4R9PezL6ZXC8ISMzpnuQ1OxYb/YdRbVzlAiSS8g4zUKmAwr4igBq3fmppozSiVqadza/O4NHH6i6HFKl7zOqFGdWgGAZ0whT89x2z9Xhq/hhnLYAFMUXU801m+qL9IoAAAAASUVORK5CYII="
     },
@@ -450,7 +450,14 @@
       "tags": ["Player"],
       "values": [
         {"name": "name", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100},
+        {
+          "name": "overrideFlipX",
+          "definition": "Enum",
+          "display": 0,
+          "choices": ["none", "retainFromPreviousScene"],
+          "defaults": 0
+        }
       ],
       "isRegion": false,
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
@@ -958,7 +965,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/gate horizontal.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAACACAYAAAD03Gy6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAPlSURBVHhe7ZhRjtswDESzPUm/e4Wev1fY796kDZ1ISCQFMKUhCcrzAGcRY5Nnc0wq9tftdvt330gQRwA/f38/3hFX/v75dfyVAKQLuDlupeY/7i+vSEdws98qbQDEmaUApI3K9tzlyg5+WAdEFaGQ1Q8dQQxB74evAQxB518K4P479ku259uKVxF28EM6ILIIQmY/bAQxhDk/dA34dBBehcjohy/Co4PwJJtf/lkSkg+W9wcWV43m4Db315p3HSBiC/lZruaHjyCioxtBbfqatn1l9nsu4q81l51vAcjLKqiTmCWBv9YcPoJauTfZ/NAARnLPqy+jHxYAiz/nN/sV5HnyI7L4IQG06XuffGa/WQeQc8ADyNL6Vsz4y613t4gQM2rNOYKCYQDBMIBgGEAwDCAYBhAMAwiGAQTDAIJhAMEsBSC302V77nJlBz+sA6KKUMjqh44ghqD3w9cAhqDzLwUgz75Hz7+9irCDH9IBkUUQMvthI4ghzPmha8Cng/AqREY/fBEeHYQn2fzyz5KQfLC8P7C4ajQHt7m/1rzrABFbyM9yNT98BBEd3Qhq09e07Suz33MRf6257HwLQF5WQZ3ELAn8tebwEdTKvcnmhwYwkntefRn9sABY/Dm/2a8gz5MfkcUPCaBN3/vkM/vNOoCcAx5Alta3YsZfbr27RYSYUWvOERQMAwiGAQTDAIJhAMEwgGAYQDAMIBgGEAwDCGYpALmdLttzlys7+GEdEFWEQlY/dAQxBL0fvgYwBJ1/KQB59j16/u1VhB38kA6ILIKQ2Q8bQQxhzg9dAz4dhFchMvrhi/DoIDzJ5pd/loTkg+X9gcVVozm4zf215l0HiNhCfpar+eEjiOjoRlCbvqZtX5n9nov4a81l51sA8rIK6iRmSeCvNYePoFbuTTY/NICR3PPqy+iHBcDiz/nNfgV5nvyILH5IAG363ief2W/WAeQc8ACytL4VM/5y690tIsSMWnOOoGAYQDAMIBgGEAwDCIYBBMMAgmEAwTCAYBhAMEsByO102Z67XNnBD+uAqCIUsvqhI4gh6P3wNYAh6PxLAciz79Hzb68i7OCHdEBkEYTMftgIYghzfuga8OkgvAqR0Q9fhEcH4Uk2v/yzJCQfLO8PLK4azcFt7q817zpAxBbys1zNDx9BREc3gtr0NW37yuz3XMRfay473wKQl1VQJzFLAn+tOXwEtXJvsvmhAYzknldfRj8sABZ/zm/2K8jz5Edk8UMCaNP3PvnMfrMOIOeAB5Cl9a2Y8Zdb724RIWbUmnMEBcMAgmkDKKOIm+1WkQXjeC5B/Lkv2I8AHm+JP7fbf1JOtgXscPzRAAAAAElFTkSuQmCC"
     },
@@ -1095,7 +1102,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/gate vertical.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAABgCAYAAADVenpJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAM6SURBVHhe7ZxLbtwwFAQnuUSuk21OnK2vk1MkbnlIMJqR+NGjBKirANrQjMTiMxukwIW/PR6Pv58NTFkC8OPj19cVWPHn5+/ltwKgVYBm1NKcf//8UaIVgXb/ltHFsgU8l4P/vtzjmaCFz2ebn4sC/yF/nvP1CgBmhASgTOMV4B/3swKYMxyAK/a9EvwxflYAcwiAOQTAHAJgDgEwhwCYMzUAOqAo2/Pj08Bf97MCmLMZgFpyaow+l8B/jr9pBegdyLt7j5xc4Z/n79oCWgYRXXwJ/nj/ZgC2HtobRGTx+M/x60stL7oxXb+w1fHeYMRo8Wvwh/vznOuGagBETbYmqvgE/lB/nvPmd4CegqKLF/jn+LteAls6nlF8An+8vysAQoKZRdbAH+tXR03vAO8o96Ur/ij4h/3lnC8X6ih3Brcnz3n3FgD3ggCYQwDMIQDmEABzCIA5BMAcAmCOTo+GTgIPnEKFgP+QP885K4A5IQEo03gF+Mf9rADmDAfgin2vBH+MnxXAHAJgDgEwhwCYQwDMIQDmTA2ADijK9vz4NPDX/awA5mwGoJacGqPPJfCf429aAXoH8u7eIydX+Of5u7aAlkFEF1+CP96/GYCth/YGEVk8/nP8+lLLi25M1y9sdbw3GDFa/Br84f4857qhGgBRk62JKj6BP9Sf57z5HaCnoOjiBf45/q6XwJaOZxSfwB/v7wqAkGBmkTXw8/8BMviH/eWcLxfqKHcGtyfPefcWAPeCAJhDAMwhAOYQAHMIgDkEwBwCYI5Oj4ZOAg+cQoWA/5A/zzkrgDkhASjTeAX4x/2sAOYMB+CKfa8Ef4yfFcAcAmAOATCHAJhDAMwhAOZMDYAOKMr2/Pg08Nf9rADmbAaglpwao88l8J/jb1oBegfy7t4jJ1f45/m7toCWQUQXX4I/3r8ZgK2H9gYRWTz+c/z6UsuLbkzXL2x1vDcYMVr8Gvzh/jznuqEaAFGTrYkqPoE/1J/nvPkdoKeg6OIF/jn+rpfAlo5nFJ/AH+/vCoCQYGaRNfDz/wEy+If95ZwvF+oodwa3J8959xYA92IdgLQS0O7dMto3lv0A/NA7wBKAr0vw4/H4B/7Z/of1/OTMAAAAAElFTkSuQmCC"
     }

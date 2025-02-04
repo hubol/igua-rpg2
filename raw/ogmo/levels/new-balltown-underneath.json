@@ -84,7 +84,7 @@
           "originX": 22,
           "originY": 39,
           "flippedX": false,
-          "values": {"name": "fromOutskirts", "depth": 0}
+          "values": {"name": "fromOutskirts", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
         },
         {
           "name": "Checkpoint",
@@ -95,7 +95,7 @@
           "originX": 22,
           "originY": 39,
           "flippedX": false,
-          "values": {"name": "fromNewBalltown", "depth": 0}
+          "values": {"name": "fromNewBalltown", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
         }
       ]
     },

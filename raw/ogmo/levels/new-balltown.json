@@ -682,7 +682,7 @@
           "originX": 22,
           "originY": 39,
           "flippedX": true,
-          "values": {"name": "fromFanatic", "depth": 0}
+          "values": {"name": "fromFanatic", "depth": 0, "overrideFlipX": "none"}
         },
         {
           "name": "Checkpoint",
@@ -693,7 +693,7 @@
           "originX": 22,
           "originY": 39,
           "flippedX": true,
-          "values": {"name": "fromArmorer", "depth": 0}
+          "values": {"name": "fromArmorer", "depth": 0, "overrideFlipX": "none"}
         },
         {
           "name": "Checkpoint",
@@ -704,7 +704,7 @@
           "originX": 22,
           "originY": 39,
           "flippedX": false,
-          "values": {"name": "fromFishmonger", "depth": 0}
+          "values": {"name": "fromFishmonger", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },

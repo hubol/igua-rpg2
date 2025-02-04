@@ -1,3 +1,4 @@
+import { Polar } from "../../lib/math/number-alias-types";
 import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { Null } from "../../lib/types/null";
 import { PropertiesLike } from "../../lib/types/properties-like";
@@ -39,6 +40,7 @@ function getInitialRpgProgress() {
             },
             looks: getDefaultLooks(),
             position: {
+                facing: 1 as Polar,
                 sceneName: "",
                 checkpointName: "",
             },

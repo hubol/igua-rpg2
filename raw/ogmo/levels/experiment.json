@@ -462,7 +462,7 @@
           "originX": 22,
           "originY": 39,
           "flippedX": true,
-          "values": {"name": "fromUnderneath", "depth": 0}
+          "values": {"name": "fromUnderneath", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
         }
       ]
     },
