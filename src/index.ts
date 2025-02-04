@@ -10,10 +10,17 @@ import { settings } from "pixi.js";
 import { setCurrentPixiRenderer } from "./igua/current-pixi-renderer";
 import { DomErrorAnnouncer } from "./lib/game-engine/dom-error-announcer";
 
+let assetsLoaded = false;
+
 // https://esbuild.github.io/api/#live-reload
 if (Environment.isDev) {
     new EventSource("/esbuild").addEventListener("change", () => {
-        require("./igua/dev/dev-game-start-config").DevGameStartConfig.recordTransientGameStartConfig();
+        if (assetsLoaded) {
+            require("./igua/dev/dev-game-start-config").DevGameStartConfig.recordTransientGameStartConfig();
+        }
+        else {
+            console.log("Assets were not loaded. Not recording transient game start config.");
+        }
         location.reload();
     });
 }
@@ -48,6 +55,8 @@ async function initialize() {
             loadLaunchAssets(progress),
             showLoadingScreen(progress),
         ]);
+
+        assetsLoaded = true;
 
         integralUpscaleCanvas(addGameCanvasToDocument(renderer.view));
 
