@@ -25,7 +25,7 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
             },
             set locked(value) {
                 locked = value;
-                obj.texture = locked ? Tx.LockedDoor : Tx.OpenDoor;
+                obj.texture = locked ? Tx.Door.NormalLocked : Tx.Door.NormalOpen;
             },
         })
         .mixin(mxnInteract, () => {

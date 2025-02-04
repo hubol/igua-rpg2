@@ -8,6 +8,6 @@ interface PocketItemData {
 }
 
 export const DataPocketItem: Record<RpgPocket.Item, PocketItemData> = {
-    BallFruitTypeA: { name: "Ball Fruit Type A", texture: Tx.Pottery.Ball0 },
+    BallFruitTypeA: { name: "Ball Fruit Type A", texture: Tx.Collectibles.BallFruitTypeA },
     BallFruitTypeB: { name: "Ball Fruit Type B", texture: Tx.Collectibles.BallFruitTypeB },
 };
