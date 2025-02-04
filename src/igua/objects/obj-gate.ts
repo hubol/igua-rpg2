@@ -8,8 +8,7 @@ import { SceneLocal } from "../../lib/game-engine/scene-local";
 
 export const CtxGate = new SceneLocal(() => ({ isGateTransitionActive: false }), "CtxGate");
 
-// TODO vertical
-type Orientation = "horizontal";
+type Orientation = "horizontal" | "vertical";
 
 export function objGate(ogmoEntity: OgmoFactory.Entity, orientation: Orientation) {
     const gfx = new Graphics().beginFill(0xffffff).drawRect(0, 0, 1, 1).scaled(96, 1);

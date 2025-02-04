@@ -319,6 +319,7 @@ export const Lvl = {
     PocketableItemB_1: e(r["PocketableItemB"], { x: 724, y: 138, values: { name: "", depth: 0 } }, "Entities"),
     PocketableItemB_2: e(r["PocketableItemB"], { x: 723, y: 103, values: { name: "", depth: 0 } }, "Entities"),
     Player: e(r["Player"], { x: 48, y: 136, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    fromUnderneath: e(r["Checkpoint"], { x: 986, y: 504, flippedX: true, values: { name: "fromUnderneath", depth: 0 } }, "PlayerEntities"),
     Puddle: e(r["Puddle"], { x: 832, y: 168, width: 56, values: { name: "", depth: 0 }, tint: 0x68a8d0 }, "FrontEntities"),
     StoneRock0_8: d(Tx.Stone.Rock0, { x: 433, y: 231, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
     FoliageSmall_21: d(Tx.Foliage.Small, { x: 371, y: 231, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x779962 }, "FrontDecals"),
@@ -349,6 +350,7 @@ export const Lvl = {
     FarmerMoveToMarker: e(r["Marker"], { x: 480, y: 160, values: { name: "FarmerMoveToMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     GateHorizontal: e(r["GateHorizontal"], { x: -64, y: 8, height: 128, flippedX: true, values: { sceneName: "scnNewBalltown", checkpointName: "fromExperiment", name: "", depth: 0 } }, "MarkerEntities"),
     EnemyDemoMarker: e(r["Marker"], { x: 368, y: 194, values: { name: "EnemyDemoMarker", depth: 0 }, tint: 0xff1f00 }, "MarkerEntities"),
+    GateVertical: e(r["GateVertical"], { x: 584, y: 528, width: 592, flippedY: false, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromOutskirts", name: "", depth: 0 } }, "MarkerEntities"),
   })),
   MenuIguanaDesigner: l({ width: 500, height: 280, backgroundTint: 0x002c38 }, () => ({
     FoliageMedium0: d(Tx.Foliage.Medium0, { x: 254, y: 216, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x1b2714 }, "BackgroundDecals"),
@@ -771,6 +773,30 @@ export const Lvl = {
     Fish0: e(r["Marker"], { x: 352, y: 112, values: { name: "Fish0", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     Fish1: e(r["Marker"], { x: 384, y: 152, values: { name: "Fish1", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     Fish2: e(r["Marker"], { x: 360, y: 184, values: { name: "Fish2", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+  })),
+  NewBalltownUnderneath: l({ width: 832, height: 440, backgroundTint: 0xdcc132 }, () => ({
+    OutskirtsSeam: dg("OutskirtsSeam", "ParallaxDecals"),
+    SkyCloud0: d(Tx.Sky.Cloud0, { x: 464, y: 312, scaleX: -2, scaleY: -2, rotation: 90, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0xc44b17 }, "ParallaxDecals"),
+    SkyCloud0_1: d(Tx.Sky.Cloud0, { x: 504, y: 288, scaleX: 2, scaleY: -2, rotation: 90, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0x520e1a }, "ParallaxDecals"),
+    TerrainGrassJagged: d(Tx.Terrain.Grass.Jagged, { x: 452, y: 255, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0xc44b17 }, "ParallaxDecals"),
+    TerrainGrassJagged_1: d(Tx.Terrain.Grass.Jagged, { x: 468, y: 103, scaleX: -1, scaleY: 1, rotation: 110, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0xc44b17 }, "ParallaxDecals"),
+    TerrainGrassJagged_2: d(Tx.Terrain.Grass.Jagged, { x: 433, y: 174, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0xc44b17 }, "ParallaxDecals"),
+    SkyCloud0_2: d(Tx.Sky.Cloud0, { x: 464, y: -216, scaleX: -2, scaleY: -2, rotation: 90, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0xc44b17 }, "ParallaxDecals"),
+    SkyCloud0_3: d(Tx.Sky.Cloud0, { x: 504, y: -136, scaleX: 2, scaleY: -2, rotation: 90, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0x520e1a }, "ParallaxDecals"),
+    TerrainGrassJagged_3: d(Tx.Terrain.Grass.Jagged, { x: 452, y: -273, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0xc44b17 }, "ParallaxDecals"),
+    TerrainGrassJagged_4: d(Tx.Terrain.Grass.Jagged, { x: 468, y: -425, scaleX: -1, scaleY: 1, rotation: 110, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0xc44b17 }, "ParallaxDecals"),
+    TerrainGrassJagged_5: d(Tx.Terrain.Grass.Jagged, { x: 433, y: -354, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0xc44b17 }, "ParallaxDecals"),
+    ShapesSquare32: d(Tx.Shapes.Square32, { x: 526, y: -152, scaleX: 9.2, scaleY: 22.1, rotation: 0, originX: 0, originY: 0, groupName: "OutskirtsSeam", tint: 0x520e1a }, "ParallaxDecals"),
+    Block: e(r["Block"], { x: 160, y: 0, width: 112, height: 296, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+    Block_1: e(r["Block"], { x: 512, y: 0, width: 112, height: 296, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+    Block_2: e(r["Block"], { x: 0, y: 360, width: 832, height: 96, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+    Pipe: e(r["Pipe"], { x: 752, y: 144, width: 56, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+    Sign: e(r["Sign"], { x: 656, y: 360, values: { title: "", message: "", name: "", depth: 0, isSpecial: true } }, "Entities"),
+    Sign_1: e(r["Sign"], { x: 752, y: 144, values: { title: "", message: "", name: "", depth: 0, isSpecial: true } }, "Entities"),
+    Player: e(r["Player"], { x: 752, y: 360, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    fromOutskirts: e(r["Checkpoint"], { x: 720, y: 64, flippedX: false, values: { name: "fromOutskirts", depth: 0 } }, "PlayerEntities"),
+    fromNewBalltown: e(r["Checkpoint"], { x: 72, y: 56, flippedX: false, values: { name: "fromNewBalltown", depth: 0 } }, "PlayerEntities"),
+    GateVertical: e(r["GateVertical"], { x: 624, y: -48, width: 200, flippedY: true, values: { sceneName: "scnExperiment", checkpointName: "fromUnderneath", name: "", depth: 0 } }, "MarkerEntities"),
   })),
   NewBalltown: l({ width: 1644, height: 632, backgroundTint: 0xdcc132 }, () => ({
     OutskirtsSeam: dg("OutskirtsSeam", "ParallaxDecals"),
@@ -1455,6 +1481,7 @@ export const Lvl = {
     Marker_9: e(r["Marker"], { x: 920, y: 391, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
     Marker_10: e(r["Marker"], { x: 767, y: 388, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
     Marker_11: e(r["Marker"], { x: 903, y: 367, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
+    GateVertical: e(r["GateVertical"], { x: 0, y: 616, width: 880, flippedY: false, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromNewBalltown", name: "", depth: 0 } }, "MarkerEntities"),
   })),
 };
 
@@ -1464,5 +1491,6 @@ export namespace LvlType {
   export type NewBalltownArmorer = ReturnType<(typeof Lvl)["NewBalltownArmorer"]>;
   export type NewBalltownFanatic = ReturnType<(typeof Lvl)["NewBalltownFanatic"]>;
   export type NewBalltownFishmonger = ReturnType<(typeof Lvl)["NewBalltownFishmonger"]>;
+  export type NewBalltownUnderneath = ReturnType<(typeof Lvl)["NewBalltownUnderneath"]>;
   export type NewBalltown = ReturnType<(typeof Lvl)["NewBalltown"]>;
 }

@@ -51,6 +51,7 @@ export const OgmoEntityResolvers = {
     "Marker": objMarker,
     "Region": () => new Graphics().beginFill(0x00ff00).drawRect(0, 0, 1, 1).invisible(),
     "GateHorizontal": (entity) => objGate(entity, "horizontal"),
+    "GateVertical": (entity) => objGate(entity, "vertical"),
     // TODO somehow configure item to spawn
     "PocketableItemA": (entity) => objPocketableItemSpawner(vnew(entity), RpgPocket.Item.BallFruitTypeA).at(entity, -1),
     "PocketableItemB": (entity) => objPocketableItemSpawner(vnew(entity), RpgPocket.Item.BallFruitTypeB).at(entity, -1),
