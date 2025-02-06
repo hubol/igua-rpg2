@@ -20,6 +20,7 @@ import { CollisionShape } from "../../lib/pixi/collision";
 import { fntErotix } from "../../assets/bitmap-fonts/fnt-erotix";
 import { fntErotixLight } from "../../assets/bitmap-fonts/fnt-erotix-light";
 import { interpvr } from "../../lib/game-engine/routines/interp";
+import { isNotNullish } from "../../lib/types/guards/is-not-nullish";
 
 const [txSpeakBox, txSpeakBoxOutline, txSpeakBoxTail] = Tx.Ui.Dialog.SpeakBox.split({ count: 3 });
 
@@ -146,12 +147,12 @@ export function* show(text: string, ...moreText: string[]) {
 
 const [txQuestionOptionBox, txQuestionOptionSelected] = Tx.Ui.Dialog.QuestionOption.split({ count: 2 });
 
-function objQuestionOptionBox(text: string, color: RgbInt, textColor: RgbInt) {
+function objQuestionOptionBox(index: number, text: string, color: RgbInt, textColor: RgbInt) {
     const hitbox = new Graphics().beginFill(0xff0000).invisible().drawRect(6, 4, 112, 32);
 
     const obj = container(hitbox)
         .collisionShape(CollisionShape.DisplayObjects, [hitbox])
-        .merge({ selected: false });
+        .merge({ index, selected: false });
 
     container(
         container(
@@ -172,41 +173,49 @@ function objQuestionOptionBox(text: string, color: RgbInt, textColor: RgbInt) {
     return obj;
 }
 
-function objQuestionOptionBoxes(speaker: DisplayObject | null, options: string[]) {
+type ObjQuestionOptionBox = ReturnType<typeof objQuestionOptionBox>;
+
+function objQuestionOptionBoxes(speaker: DisplayObject | null, options: AskOptions) {
     const colors = getMessageBoxColors(speaker);
     const state = { confirmedIndex: -1 };
 
+    let layoutIndex = 0;
     const optionObjs = options.map((option, index) => {
-        const position = vnew((index % 2) * 140, Math.floor(index / 2) * 45);
-        if (index === options.length - 1 && options.length % 2 === 1) {
+        if (option === null) {
+            return null;
+        }
+        const position = vnew((layoutIndex % 2) * 140, Math.floor(layoutIndex / 2) * 45);
+        if (layoutIndex === options.length - 1 && options.length % 2 === 1) {
             position.x += 70;
         }
-        return objQuestionOptionBox(option, colors.secondary, colors.textSecondary).at(position);
-    });
+
+        layoutIndex++;
+        return objQuestionOptionBox(index, option, colors.secondary, colors.textSecondary).at(position);
+    })
+        .filter(isNotNullish);
 
     const pageObj = objUiPage(
         optionObjs,
         { selectionIndex: 0, startTicking: true },
     )
         .coro(function* (self) {
-            yield () => self.selectionIndex >= 0 && Input.isDown("Confirm");
+            yield () => Boolean(self.selected) && Input.isDown("Confirm");
             yield () => Input.isUp("Confirm");
 
-            // TODO assert self.selectionIndex >= 0
             self.navigation = false;
-            const confirmedIndex = self.selectionIndex;
+            const selectedOptionObj = self.selected as ObjQuestionOptionBox;
+            const confirmedIndex = selectedOptionObj.index;
 
             const translateX = confirmedIndex % 2 === 0 ? renderer.width : -renderer.width;
             yield* Coro.all(
-                [
-                    ...optionObjs.flatMap((optionObj, index) =>
-                        index === confirmedIndex ? [] : [interpvr(optionObj).translate(translateX, 0).over(500)]
-                    ),
-                    Coro.chain([
-                        sleep(250),
-                        interpvr(optionObjs[confirmedIndex]).translate(0, -renderer.height).over(500),
-                    ]),
-                ],
+                optionObjs.map((optionObj) =>
+                    selectedOptionObj === optionObj
+                        ? Coro.chain([
+                            sleep(250),
+                            interpvr(optionObj).translate(0, -renderer.height).over(500),
+                        ])
+                        : interpvr(optionObj).translate(translateX, 0).over(500)
+                ),
             );
 
             state.confirmedIndex = confirmedIndex;
@@ -230,14 +239,21 @@ function objQuestionOptionBoxes(speaker: DisplayObject | null, options: string[]
     ).at(117, 66).merge({ state }).show(layers.overlay.messages);
 }
 
+type AskOptions = Array<string | null>;
+
 export function ask(question: string): Coro.Type<boolean>;
-export function ask<TOptions extends string[]>(question: string, ...options: TOptions): Coro.Type<IndicesOf<TOptions>>;
-export function* ask(question: string, ...options: string[]): Coro.Type<any> {
+export function ask<TOptions extends AskOptions>(
+    question: string,
+    ...options: TOptions
+): Coro.Type<IndicesOf<TOptions>>;
+export function* ask(question: string, ...options: AskOptions): Coro.Type<any> {
     const isYesNo = options.length === 0;
 
     if (isYesNo) {
         options = ["Yes", "No"];
     }
+
+    // TODO assert that at least one option is not null!
 
     const { currentSpeaker, currentSpeakerMessageBoxObj } = yield* startSpeaking(question);
 
