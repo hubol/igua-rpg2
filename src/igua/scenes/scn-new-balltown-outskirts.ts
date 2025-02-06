@@ -20,9 +20,9 @@ import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgPocket } from "../rpg/rpg-pocket";
 import { RpgProgress } from "../rpg/rpg-progress";
 
-export function scnExperiment() {
+export function scnNewBalltownOutskirts() {
     Jukebox.play(Mzk.TrashDay);
-    const lvl = Lvl.Experiment();
+    const lvl = Lvl.NewBalltownOutskirts();
 
     objAngelSuggestive().at(lvl.EnemyDemoMarker).show();
 
@@ -30,7 +30,7 @@ export function scnExperiment() {
     enrichFarmer(lvl);
 }
 
-function enrichFarmer(lvl: LvlType.Experiment) {
+function enrichFarmer(lvl: LvlType.NewBalltownOutskirts) {
     const startingPosition = lvl.FarmerNpc.vcpy();
 
     lvl.FarmerNpc.mixin(mxnCutscene, function* () {
@@ -69,7 +69,7 @@ const atkPickaxe = RpgAttack.create({
     physical: 25,
 });
 
-function enrichMiner(lvl: LvlType.Experiment) {
+function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
     const valuableSpawnerObj = objValuableSpawner([lvl.MinerValuable0, lvl.MinerValuable1, lvl.MinerValuable2]);
 
     const pickaxeAttackObj = lvl.PickaxeHitbox.mixin(mxnRpgAttack, { attack: atkPickaxe });

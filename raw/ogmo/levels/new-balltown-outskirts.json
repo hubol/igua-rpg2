@@ -108,7 +108,7 @@
           "originX": 0,
           "originY": 0,
           "flippedX": true,
-          "values": {"sceneName": "scnNewBalltown", "checkpointName": "fromExperiment", "name": "", "depth": 0}
+          "values": {"sceneName": "scnNewBalltown", "checkpointName": "fromOutskirts", "name": "", "depth": 0}
         },
         {
           "name": "Marker",
