@@ -61,7 +61,7 @@ function enrichFarmer(lvl: LvlType.NewBalltownOutskirts) {
         // TODO should this happen automatically at the end of cutscenes?
         scene.camera.mode = "follow-player";
         lvl.FarmerNpc.at(startingPosition);
-        // TODO how to make him flip back right?! lol
+        lvl.FarmerNpc.setFacingOverrideAuto(1);
     });
 }
 

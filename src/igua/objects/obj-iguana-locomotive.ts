@@ -1,4 +1,5 @@
 import { approachLinear } from "../../lib/math/number";
+import { Polar } from "../../lib/math/number-alias-types";
 import { Undefined } from "../../lib/types/undefined";
 import { IguanaLooks } from "../iguana/looks";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
@@ -93,6 +94,11 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
         facingMode: ObjIguanaLocomotiveAutoFacingMode.CheckSpeedX,
     };
 
+    function setFacingOverrideAuto(value: Polar) {
+        autoFacingTarget = value;
+        puppet.facing = value;
+    }
+
     const puppet = objIguanaPuppet(looks)
         // TODO not sure if that is the correct physics faction...
         .mixin(mxnPhysics, {
@@ -123,6 +129,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             },
             walkTo,
             auto,
+            setFacingOverrideAuto,
         })
         .step(() => {
             if (
