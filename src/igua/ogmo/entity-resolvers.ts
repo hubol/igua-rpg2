@@ -17,6 +17,11 @@ import { objGate } from "../objects/obj-gate";
 import { objPocketableItemSpawner } from "../objects/obj-pocketable-item-spawner";
 import { RpgPocket } from "../rpg/rpg-pocket";
 import { objMarker } from "../objects/utils/obj-marker";
+import { OgmoProject } from "../../assets/generated/levels/generated-ogmo-project-data";
+
+type Entity<TName extends OgmoProject.Entities.Names> = OgmoFactory.Entity<
+    OgmoProject.Entities.Values[TName]
+>;
 
 export const OgmoEntityResolvers = {
     "Player": (entity) => createOrConfigurePlayerObj(entity),
@@ -27,11 +32,10 @@ export const OgmoEntityResolvers = {
     "PipeSlope": objPipeSlope,
     "Door": ({ values: { checkpointName, sceneName } }) => objDoor({ checkpointName, sceneName }).at(0, 2),
     "WaterDripSource": ({ values: { delayMin, delayMax } }) => objWaterDripSource({ delayMin, delayMax }),
-    // TODO as any feels bad, but so does stuff above
-    "Sign": ({ values }) => objSign(values as any),
-    "IntelligenceBackground": ({ values }) => objIntelligenceBackground(values as any),
+    "Sign": ({ values }) => objSign(values),
+    "IntelligenceBackground": ({ values }) => objIntelligenceBackground(values),
     "IguanaNpc": (entity) => {
-        const obj = objIguanaNpc(entity.values as any);
+        const obj = objIguanaNpc(entity.values);
         obj.y = 3;
         obj.facing = entity.flippedX ? -1 : 1;
         if (entity.flippedX) {
@@ -55,9 +59,11 @@ export const OgmoEntityResolvers = {
     // TODO somehow configure item to spawn
     "PocketableItemA": (entity) => objPocketableItemSpawner(vnew(entity), RpgPocket.Item.BallFruitTypeA).at(entity, -1),
     "PocketableItemB": (entity) => objPocketableItemSpawner(vnew(entity), RpgPocket.Item.BallFruitTypeB).at(entity, -1),
-} satisfies Record<string, (e: OgmoFactory.Entity) => unknown>;
+} satisfies {
+    [TName in OgmoProject.Entities.Names]: (e: Entity<TName>) => unknown;
+};
 
-function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?: string) {
+function createOrConfigurePlayerObj(entity: Entity<"Checkpoint" | "Player">, checkpointName?: string) {
     const pos = vnew(entity).add(entity.flippedX ? 3 : -2, 3);
     const facing = entity.flippedX ? -1 : 1;
 
@@ -68,7 +74,7 @@ function createOrConfigurePlayerObj(entity: OgmoFactory.Entity, checkpointName?:
     }
 
     if (checkpointName) {
-        const checkpointFacing = entity.values.overrideFlipX === "retainFromPreviousScene"
+        const checkpointFacing = (entity as Entity<"Checkpoint">).values.overrideFlipX === "retainFromPreviousScene"
             ? RpgProgress.character.position.facing
             : facing;
         objCheckpoint(checkpointName, checkpointFacing).at(pos).show();

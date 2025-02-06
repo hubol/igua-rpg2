@@ -51,6 +51,13 @@
 				"out": "src/assets/generated/levels/generated-level-data.ts",
 				"program": "src/assets/template/levels.js"
 			}
+		},
+		{
+			"glob": "raw/ogmo/*.ogmo",
+			"template": {
+				"out": "src/assets/generated/levels/generated-ogmo-project-data.ts",
+				"program": "src/assets/template/ogmo-project.js"
+			}
 		}
 	]
 }

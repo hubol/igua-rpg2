@@ -3,7 +3,7 @@ import { SubjectiveColorAnalyzer } from "../../lib/color/subjective-color-analyz
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { Rng } from "../../lib/math/rng";
-import { NpcPersonas } from "../data/data-npc-personas";
+import { NpcPersonaInternalName, NpcPersonas } from "../data/data-npc-personas";
 import { Cutscene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { mxnIguanaEditable } from "../mixins/mxn-iguana-editable";
@@ -12,12 +12,14 @@ import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { objIguanaLocomotive } from "./obj-iguana-locomotive";
 
-interface ObjIguanaNpcArgs {
-    personaName: keyof typeof NpcPersonas;
+interface ObjIguanaNpcArgs<TName extends string> {
+    personaName: TName;
 }
 
-export function objIguanaNpc({ personaName }: ObjIguanaNpcArgs) {
-    let persona = NpcPersonas[personaName];
+// Very verbose, obnoxious hack to retain autocomplete
+// While still allowing Ogmo levels to pass in string for name :-/
+export function objIguanaNpc<TName extends string = NpcPersonaInternalName>({ personaName }: ObjIguanaNpcArgs<TName>) {
+    let persona = NpcPersonas[personaName as NpcPersonaInternalName];
     if (!persona) {
         ErrorReporter.reportMisconfigurationError(
             "objIguanaNpc",

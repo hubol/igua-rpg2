@@ -5,7 +5,7 @@ import { ogmoAddToLayer } from "./add-to-layer";
 import { container } from "../../lib/pixi/container";
 
 export namespace OgmoFactory {
-    export interface Entity {
+    export interface Entity<TValues = EntityValues> {
         x: number;
         y: number;
         uid?: number;
@@ -14,7 +14,7 @@ export namespace OgmoFactory {
         width?: number;
         height?: number;
         tint?: number;
-        values: EntityValues & Record<string, any>;
+        values: TValues;
     }
 
     interface EntityValues {
