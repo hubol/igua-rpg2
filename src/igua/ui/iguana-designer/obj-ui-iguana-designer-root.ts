@@ -29,6 +29,7 @@ import { mxnBoilSeed } from "../../mixins/mxn-boil-seed";
 import { VectorSimple } from "../../../lib/math/vector-type";
 import { Force } from "../../../lib/types/force";
 import { scnNewBalltownOutskirts } from "../../scenes/scn-new-balltown-outskirts";
+import { SceneChanger } from "../../systems/scene-changer";
 
 interface Layout {
     leftFacingPreviewPosition: VectorSimple;
@@ -206,8 +207,8 @@ function objUiSavePage() {
             yield layers.overlay.solid.fadeIn(500);
             const looks = CtxUiIguanaDesigner.value.looks;
             RpgProgress.character.looks = looks;
-            // TODO use scenechanger probably?
-            sceneStack.replace(scnNewBalltownOutskirts, { useGameplay: false });
+            SceneChanger.create({ sceneName: scnNewBalltownOutskirts.name, checkpointName: "fromGameStart" })!
+                .changeScene();
             page.destroy();
             yield layers.overlay.solid.fadeOut(500);
         });
