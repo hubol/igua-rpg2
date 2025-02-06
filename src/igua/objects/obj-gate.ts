@@ -10,7 +10,7 @@ export const CtxGate = new SceneLocal(() => ({ isGateTransitionActive: false }),
 
 type Orientation = "horizontal" | "vertical";
 
-export function objGate(ogmoEntity: OgmoFactory.Entity, orientation: Orientation) {
+export function objGate(ogmoEntity: OgmoFactory.Entity<"GateHorizontal" | "GateVertical">, orientation: Orientation) {
     const gfx = new Graphics().beginFill(0xffffff).drawRect(0, 0, 1, 1).scaled(96, 1);
     if (ogmoEntity.flippedX) {
         gfx.pivot.x = 1;
@@ -47,7 +47,7 @@ export function objGate(ogmoEntity: OgmoFactory.Entity, orientation: Orientation
     return gfx.invisible();
 }
 
-function getForward(ogmo: OgmoFactory.Entity, orientation: Orientation) {
+function getForward(ogmo: OgmoFactory.EntityCommon, orientation: Orientation) {
     if (orientation === "horizontal") {
         return ogmo.flippedX ? "left" : "right";
     }

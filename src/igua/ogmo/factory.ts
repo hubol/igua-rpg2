@@ -3,9 +3,10 @@ import { scene } from "../globals";
 import { ErrorReporter } from "../../lib/game-engine/error-reporter";
 import { ogmoAddToLayer } from "./add-to-layer";
 import { container } from "../../lib/pixi/container";
+import { OgmoProject } from "../../assets/generated/levels/generated-ogmo-project-data";
 
 export namespace OgmoFactory {
-    export interface Entity<TValues = EntityValues> {
+    interface EntityBase {
         x: number;
         y: number;
         uid?: number;
@@ -14,10 +15,17 @@ export namespace OgmoFactory {
         width?: number;
         height?: number;
         tint?: number;
-        values: TValues;
     }
 
-    interface EntityValues {
+    export interface Entity<TEntityName extends OgmoProject.Entities.Names> extends EntityBase {
+        values: OgmoProject.Entities.Values[TEntityName];
+    }
+
+    export interface EntityCommon extends EntityBase {
+        values: EntityCommonValues & Record<string, any>;
+    }
+
+    interface EntityCommonValues {
         name: string;
         depth: number;
         visible?: boolean;
@@ -43,7 +51,7 @@ export namespace OgmoFactory {
 
     export function createEntity<TFn extends (...args: any[]) => any>(
         fn: TFn,
-        entity: OgmoFactory.Entity,
+        entity: OgmoFactory.EntityCommon,
         layerName: string,
     ): ReturnType<TFn> {
         if (typeof fn !== "function") {
