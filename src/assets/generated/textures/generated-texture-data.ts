@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 172 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 171 }];
 
 interface TxData {
   id: string;
@@ -26,7 +26,7 @@ function txs<T>(tx: (data: TxData) => T) {
       NormalOpen: tx({ id: "Door.NormalOpen", atlas: 0, x: 909, y: 374, width: 34, height: 46 }),
     },
     Effects: {
-      Bubble4: tx({ id: "Effects.Bubble4", atlas: 0, x: 869, y: 380, width: 4, height: 4 }),
+      Bubble4: tx({ id: "Effects.Bubble4", atlas: 0, x: 86, y: 440, width: 4, height: 4 }),
       Burst32: tx({ id: "Effects.Burst32", atlas: 0, x: 889, y: 458, width: 32, height: 22 }),
       BurstRound24: tx({ id: "Effects.BurstRound24", atlas: 0, x: 752, y: 324, width: 72, height: 24 }),
       SplashMedium: tx({ id: "Effects.SplashMedium", atlas: 0, x: 677, y: 338, width: 72, height: 24 }),
@@ -129,9 +129,6 @@ function txs<T>(tx: (data: TxData) => T) {
       ShadowIguana: tx({ id: "Light.ShadowIguana", atlas: 0, x: 971, y: 326, width: 48, height: 10 }),
       ShadowIrregularSmallRound: tx({ id: "Light.ShadowIrregularSmallRound", atlas: 0, x: 1009, y: 302, width: 12, height: 10 }),
       ShadowIrregularSmall: tx({ id: "Light.ShadowIrregularSmall", atlas: 0, x: 922, y: 477, width: 16, height: 8 }),
-    },
-    Metal: {
-      PipeDarkBroken: tx({ id: "Metal.PipeDarkBroken", atlas: 0, x: 86, y: 440, width: 4, height: 12 }),
     },
     Placeholder: tx({ id: "Placeholder", atlas: 0, x: 471, y: 368, width: 14, height: 14 }),
     Shapes: {
