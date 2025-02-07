@@ -41,7 +41,7 @@ export namespace IguanaLooks {
             },
             eyelid: {
                 color: TypedInput.color(),
-                placement: TypedInput.integer(-4, 4),
+                placement: TypedInput.integer(-7, 7),
             },
             pupil: {
                 shape: shapeChoice(IguanaShapes.Pupil),
