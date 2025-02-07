@@ -2,9 +2,11 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
 import { ask, show } from "../cutscene/show";
+import { NpcPersonas } from "../data/data-npc-personas";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objFish } from "../objects/obj-fish";
+import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltownFishmonger() {
     Jukebox.play(Mzk.BreadCrumbPool);
@@ -33,8 +35,24 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
             );
         }
         else if (result === 1) {
-            yield* ask("You want a fish delivered? That's great! Who wants a fish?", "I don't know");
-            yield* show("Oh, okay. Let me know if you find an interested party!");
+            const fishRecipient = yield* ask(
+                "You want a fish delivered? That's great! Who wants a fish?",
+                RpgProgress.flags.newBalltown.armorer.toldPlayerAboutDesireForFish
+                    ? NpcPersonas.NewBalltownArmorer.name
+                    : null,
+                "I don't know",
+            );
+
+            if (fishRecipient === 1) {
+                yield* show("Oh, okay. Let me know if you find an interested party!");
+                return;
+            }
+
+            if (fishRecipient === 0) {
+                yield* show(`${NpcPersonas.NewBalltownArmorer.name}...? Oh yeah, he had a fishtank!`);
+                yield* ask("Ready to make the delivery?");
+                // TODO start delivery sequence
+            }
         }
         else if (result === 2) {
             yield* show("Okay! See you around!");
