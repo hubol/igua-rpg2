@@ -4316,6 +4316,32 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 1259,
+          "y": 592,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#294988",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1179,
+          "y": 592,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#294988",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -7843,32 +7869,6 @@
           "groupName": null
         },
         {
-          "x": 1259,
-          "y": 592,
-          "scaleX": -1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#294988",
-          "texture": "terrain/grass/jagged.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 1179,
-          "y": 592,
-          "scaleX": -1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#294988",
-          "texture": "terrain/grass/jagged.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
           "x": 1288,
           "y": 582,
           "scaleX": 1,
@@ -8699,6 +8699,32 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 1232,
+          "y": 574,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/ball/idol base.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "MechanicalIdolBase"},
+          "groupName": "MechanicalIdol"
+        },
+        {
+          "x": 1230,
+          "y": 534,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/ball/idol head.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "MechanicalIdolHead"},
+          "groupName": "MechanicalIdol"
         }
       ],
       "folder": "../textures"

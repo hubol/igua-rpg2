@@ -6,11 +6,13 @@ import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
+import { range } from "../../lib/range";
 import { Empty } from "../../lib/types/empty";
 import { Jukebox } from "../core/igua-audio";
 import { rewardValuables } from "../cutscene/reward-valuables";
 import { ask, show } from "../cutscene/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFxSparkleMany } from "../objects/effects/obj-fx-sparkle-many";
 import { objMarker } from "../objects/utils/obj-marker";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
@@ -23,6 +25,7 @@ export function scnNewBalltown() {
     enrichCroupier(lvl);
     enrichSparkles();
     enrichMiner(lvl);
+    enrichMechanicalIdol(lvl);
 }
 
 function enrichSparkles() {
@@ -196,4 +199,49 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
             yield* show("I'll be here if you change your mind!");
         }
     });
+}
+
+function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
+    const options = ["Ball", "Star", "P", "3", "F"] as const;
+    const optionToCharacters: Record<typeof options[number], string> = {
+        "3": "3",
+        Ball: "O",
+        F: "F",
+        P: "P",
+        Star: "*",
+    };
+
+    lvl.MechanicalIdol
+        .mixin(mxnSpeaker, { name: "Mechanical Idol", colorPrimary: 0xDCC132, colorSecondary: 0xB52417 })
+        .mixin(mxnCutscene, function* () {
+            if (!(yield* ask("Please input 5-symbol password"))) {
+                return;
+            }
+
+            const characters = range(5).map(() => "_");
+
+            function getCurrentPasswordMessage() {
+                return `                             ${characters.join(" ")}`;
+            }
+
+            for (let i = 0; i < characters.length; i++) {
+                const shuffledOptions = Rng.shuffle([...options]);
+                const index = yield* ask("\n" + getCurrentPasswordMessage(), ...shuffledOptions);
+                const option = shuffledOptions[index];
+                const character = optionToCharacters[option];
+                characters[i] = character;
+            }
+
+            yield* show("Checking...\n" + getCurrentPasswordMessage());
+
+            const password = characters.join("");
+            if (password === "POOP*") {
+                yield* show("Access granted.");
+                // TODO a prize!
+            }
+            else {
+                yield* show("Access denied.");
+                return;
+            }
+        });
 }
