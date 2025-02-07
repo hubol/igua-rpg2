@@ -115,6 +115,7 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
 
         if (RpgProgress.flags.outskirts.miner.picaxeHealth <= 0) {
             yield* show("It broke after too much use. I heard there are picaxes for sale in the Balltown.");
+            RpgProgress.flags.outskirts.miner.toldPlayerAboutDepletedPickaxeHealth = true;
         }
         else {
             const picaxeHealth = RpgProgress.flags.outskirts.miner.picaxeHealth;

@@ -60,6 +60,7 @@ function getInitialRpgProgress() {
             outskirts: {
                 miner: {
                     picaxeHealth: 10,
+                    toldPlayerAboutDepletedPickaxeHealth: false,
                 },
             },
             test: false,
