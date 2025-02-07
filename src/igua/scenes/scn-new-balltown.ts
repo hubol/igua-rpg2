@@ -36,8 +36,7 @@ function enrichMiner(lvl: LvlType.NewBalltown) {
             "Why is it famous",
             "Why don't you",
             "The flowers",
-            // TODO don't show if you haven't talked to dante
-            "Your brother's axe",
+            RpgProgress.flags.outskirts.miner.toldPlayerAboutDepletedPickaxeHealth ? "Your brother's axe" : null,
             "You can't",
         );
 
