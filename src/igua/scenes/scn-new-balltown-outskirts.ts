@@ -86,14 +86,14 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
             while (true) {
                 yield interp(self, "angle").steps(4).to(135).over(1000);
                 self.isAtRest = true;
-                lvl.MinerPicaxeBrokenBandages.visible = RpgProgress.flags.outskirts.miner.picaxeHealth <= 0;
+                lvl.MinerPicaxeBrokenBandages.visible = RpgProgress.flags.outskirts.miner.pickaxeHealth <= 0;
                 yield () =>
-                    !valuableSpawnerObj.isFull && RpgProgress.flags.outskirts.miner.picaxeHealth > 0
+                    !valuableSpawnerObj.isFull && RpgProgress.flags.outskirts.miner.pickaxeHealth > 0
                     && !Cutscene.isPlaying;
                 self.isAtRest = false;
                 yield sleep(250);
                 yield interp(self, "angle").steps(4).to(initialAngle).over(300);
-                RpgProgress.flags.outskirts.miner.picaxeHealth--;
+                RpgProgress.flags.outskirts.miner.pickaxeHealth--;
                 pickaxeAttackObj.isAttackActive = true;
                 self.play(Sfx.Impact.PickaxeRock.with.rate(Rng.float(0.9, 1.1)));
                 lvl.MinerPicaxeBurst.visible = true;
@@ -113,12 +113,12 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
             "My picaxe is very precious to me.",
         );
 
-        if (RpgProgress.flags.outskirts.miner.picaxeHealth <= 0) {
+        if (RpgProgress.flags.outskirts.miner.pickaxeHealth <= 0) {
             yield* show("It broke after too much use. I heard there are picaxes for sale in the Balltown.");
             RpgProgress.flags.outskirts.miner.toldPlayerAboutDepletedPickaxeHealth = true;
         }
         else {
-            const picaxeHealth = RpgProgress.flags.outskirts.miner.picaxeHealth;
+            const picaxeHealth = RpgProgress.flags.outskirts.miner.pickaxeHealth;
             // TODO pluralization utility?
             yield* show(
                 `It currently has ${picaxeHealth} hit ${picaxeHealth === 1 ? "point" : "points"} remaining.`,
