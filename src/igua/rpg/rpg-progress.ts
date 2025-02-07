@@ -51,6 +51,7 @@ function getInitialRpgProgress() {
                     aquarium: {
                         moistureUnits: 0,
                     },
+                    toldPlayerAboutDesireForFish: false,
                 },
                 ballFruitFanatic: {
                     typePreference: Null<RpgPocket.Item>(),

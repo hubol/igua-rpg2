@@ -12,6 +12,7 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { Integer } from "../../lib/math/number-alias-types";
+import { rewardValuables } from "../cutscene/reward-valuables";
 
 export function scnNewBalltownArmorer() {
     Jukebox.play(Mzk.GolfResort);
@@ -27,8 +28,22 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
             yield* show("Zinc is an element that makes your loads bigger.");
         }
         else if (result === 1) {
-            // TODO check isFilled for more dialog!!!
-            yield* show("Ah, my fishtank.", "I need water for it.");
+            if (!aquariumService.isFilled) {
+                yield* show("Ah, my fishtank.", "I need water for it.");
+                return;
+            }
+
+            if (RpgProgress.flags.newBalltown.armorer.toldPlayerAboutDesireForFish) {
+                yield* show("It looks nice with the water in it.", "But it would look spectacular with a fish.");
+            }
+            else {
+                yield* show("Oh, my fishtank!", "You put water in it. Thanks.");
+                yield* rewardValuables(15, lvl.IguanaNpc);
+                yield* show(
+                    "Believe me, there's a whole lot more where that came from if you can get me a fish to live in the aquarium!",
+                );
+                RpgProgress.flags.newBalltown.armorer.toldPlayerAboutDesireForFish = true;
+            }
         }
         else if (result === 2) {
             yield* show("You are judgmental, and in many ways a bitch.");
