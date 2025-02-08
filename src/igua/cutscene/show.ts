@@ -185,7 +185,7 @@ function objQuestionOptionBoxes(speaker: DisplayObject | null, options: AskOptio
             return null;
         }
         const position = vnew((layoutIndex % 2) * 140, Math.floor(layoutIndex / 2) * 45);
-        if (layoutIndex === options.length - 1 && options.length % 2 === 1) {
+        if (index === options.length - 1 && layoutIndex % 2 === 0) {
             position.x += 70;
         }
 
