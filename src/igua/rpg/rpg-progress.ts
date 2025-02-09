@@ -57,6 +57,9 @@ function getInitialRpgProgress() {
                     typePreference: Null<RpgPocket.Item>(),
                     succesfulDeliveriesCount: 0,
                 },
+                fishmonger: {
+                    isReadyToDeliverToArmorer: false,
+                },
             },
             outskirts: {
                 miner: {

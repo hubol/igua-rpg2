@@ -11,12 +11,17 @@ import { Empty } from "../../lib/types/empty";
 import { Jukebox } from "../core/igua-audio";
 import { rewardValuables } from "../cutscene/reward-valuables";
 import { ask, show } from "../cutscene/show";
+import { NpcPersonas } from "../data/data-npc-personas";
+import { Cutscene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFxSparkleMany } from "../objects/effects/obj-fx-sparkle-many";
 import { objMarker } from "../objects/utils/obj-marker";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 import { RpgProgress } from "../rpg/rpg-progress";
+import { Tx } from "../../assets/textures";
+import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
+import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);
@@ -26,6 +31,7 @@ export function scnNewBalltown() {
     enrichSparkles();
     enrichMiner(lvl);
     enrichMechanicalIdol(lvl);
+    enrichFishmongerDeliveryToArmorer(lvl);
 }
 
 function enrichSparkles() {
@@ -244,4 +250,52 @@ function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
                 return;
             }
         });
+}
+
+function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
+    const expectedCheckpointName: keyof LvlType.NewBalltown = "fromFishmonger";
+
+    if (
+        !RpgProgress.flags.newBalltown.fishmonger.isReadyToDeliverToArmorer
+        || RpgProgress.character.position.checkpointName !== expectedCheckpointName
+    ) {
+        RpgProgress.flags.newBalltown.fishmonger.isReadyToDeliverToArmorer = false;
+        lvl.Fishmonger.destroy();
+        return;
+    }
+
+    Cutscene.play(function* () {
+        yield* show(
+            `To make the delivery more challenging, I am placing bombs along the route to ${NpcPersonas.NewBalltownArmorer.name}'s place.`,
+        );
+
+        yield sleep(500);
+
+        for (const markerObj of Instances(objMarker, obj => obj.tint === 0xff0000)) {
+            objFishmongerBomb().at(markerObj).show();
+        }
+
+        yield sleep(500);
+
+        yield* show("Please defuse the bombs before I reach them, so that I can successfully deliver the fish.");
+
+        lvl.Fishmonger.coro(function* (self) {
+            self.walkingTopSpeed = 0.3;
+            yield* self.walkTo(lvl.FishmongerStopAndJump.x);
+            yield sleep(500);
+            self.walkingTopSpeed = 0.7;
+            self.speed.y = -6;
+            yield* self.walkTo(lvl.ArmorerDoor.x);
+        });
+    }, { speaker: lvl.Fishmonger });
+}
+
+const txsFishmongerBomb = Tx.Town.Ball.FishmongerBomb.split({ count: 2 });
+
+function objFishmongerBomb() {
+    return objIndexedSprite(txsFishmongerBomb).anchored(0.5, 0.9).step(self =>
+        self.textureIndex = (self.textureIndex + 0.1) % 2
+    ).mixin(
+        mxnNudgeAppear,
+    );
 }
