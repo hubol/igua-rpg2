@@ -305,13 +305,18 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
 }
 
 const txsFishmongerBomb = Tx.Town.Ball.FishmongerBomb.split({ count: 2 });
+const txsFishmongerBombDefused = Tx.Town.Ball.FishmongerBombDefused.split({ count: 2 });
 
 function objFishmongerBomb() {
-    return objIndexedSprite(txsFishmongerBomb).anchored(0.5, 0.9).step(self =>
-        self.textureIndex = (self.textureIndex + 0.1) % 2
-    ).mixin(
-        mxnNudgeAppear,
-    )
+    return objIndexedSprite(txsFishmongerBomb)
+        .merge({ isDefused: false })
+        .anchored(0.5, 0.9)
+        .step(self => {
+            self.textures = self.isDefused ? txsFishmongerBombDefused : txsFishmongerBomb;
+            self.textureIndex = (self.textureIndex + 0.1) % 2;
+        }).mixin(
+            mxnNudgeAppear,
+        )
         .track(objFishmongerBomb)
         .zIndexed(ZIndex.Entities);
 }
