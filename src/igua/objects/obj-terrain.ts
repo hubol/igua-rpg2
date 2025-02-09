@@ -1,4 +1,4 @@
-import { BLEND_MODES, DisplayObject, Graphics, SimpleMesh, Sprite, WRAP_MODES } from "pixi.js";
+import { DisplayObject, Graphics, SimpleMesh, WRAP_MODES } from "pixi.js";
 import { Empty } from "../../lib/types/empty";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { scene } from "../globals";
@@ -6,9 +6,6 @@ import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { StepOrder } from "./step-order";
 import { Material } from "../systems/materials";
 import { container } from "../../lib/pixi/container";
-import { Tx } from "../../assets/textures";
-import { playerObj } from "./obj-player";
-import { mxnBoilMirrorRotate } from "../mixins/mxn-boil-mirror-rotate";
 import { ZIndex } from "../core/scene/z-index";
 
 /**
