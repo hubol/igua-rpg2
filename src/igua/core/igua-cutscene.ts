@@ -51,6 +51,7 @@ export class IguaCutscene {
         const cutsceneRunnerObj = new Container().named("Cutscene Runner")
             .merge({ fn, attributes: { ...getDefaultCutsceneAttributes(), ...attributes } })
             .coro(function* (self) {
+                // TODO This will not be sufficient if the sceneStack has length > 1. Need to rework for that case!
                 if (self.attributes.requiredScene !== null && scene !== self.attributes.requiredScene) {
                     // TODO Should be logged that the cutscene was aborted!
                     return;
