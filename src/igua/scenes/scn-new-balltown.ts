@@ -22,6 +22,7 @@ import { RpgProgress } from "../rpg/rpg-progress";
 import { Tx } from "../../assets/textures";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
+import { ZIndex } from "../core/scene/z-index";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);
@@ -297,5 +298,6 @@ function objFishmongerBomb() {
         self.textureIndex = (self.textureIndex + 0.1) % 2
     ).mixin(
         mxnNudgeAppear,
-    );
+    )
+        .zIndexed(ZIndex.Entities);
 }

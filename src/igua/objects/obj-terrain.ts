@@ -9,6 +9,7 @@ import { container } from "../../lib/pixi/container";
 import { Tx } from "../../assets/textures";
 import { playerObj } from "./obj-player";
 import { mxnBoilMirrorRotate } from "../mixins/mxn-boil-mirror-rotate";
+import { ZIndex } from "../core/scene/z-index";
 
 /**
  * Describes a line segment. Different kinds of terrain segments make certain guarantees:
@@ -104,7 +105,7 @@ export const CtxTerrain = new SceneLocal(createLocalTerrain, "CtxTerrain");
 
 export const CtxTerrainObj = new SceneLocal(() => {
     // TODO renderable hack is weird, PixiJS sucks
-    return container().step(self => self.renderable = true).show();
+    return container().step(self => self.renderable = true).zIndexed(ZIndex.TerrainEntities).show();
 }, "CtxTerrainObj");
 
 export function objSolidBlock() {

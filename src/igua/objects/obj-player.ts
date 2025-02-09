@@ -17,6 +17,7 @@ import { CtxGate } from "./obj-gate";
 import { ObjSign, objSign } from "./obj-sign";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { interp } from "../../lib/game-engine/routines/interp";
+import { ZIndex } from "../core/scene/z-index";
 
 const PlayerConsts = {
     // TODO probably not constants, probably derived from status
@@ -115,7 +116,8 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                     const result = instance.damage(RpgPlayer.meleeAttack, RpgPlayer.status);
                 }
             }
-        }, StepOrder.Physics + 1);
+        }, StepOrder.Physics + 1)
+        .zIndexed(ZIndex.PlayerEntities);
 
     puppet.auto.facingMode = ObjIguanaLocomotiveAutoFacingMode.CheckMoving;
 

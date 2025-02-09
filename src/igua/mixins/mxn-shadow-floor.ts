@@ -6,12 +6,16 @@ import { CtxTerrainObj } from "../objects/obj-terrain";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { container } from "../../lib/pixi/container";
+import { ZIndex } from "../core/scene/z-index";
 
 interface MxnShadowFloorArgs {
     offset: VectorSimple;
 }
 
-const CtxShadowFloorObj = new SceneLocal(() => container().named("CtxShadowFloorObj").show(), "CtxShadowFloorObj");
+const CtxShadowFloorObj = new SceneLocal(
+    () => container().named("CtxShadowFloorObj").zIndexed(ZIndex.Shadows).show(),
+    "CtxShadowFloorObj",
+);
 
 export function mxnShadowFloor(obj: DisplayObject, args: MxnShadowFloorArgs) {
     const shadowObj = Sprite.from(Tx.Light.ShadowIguana).anchored(0.5, 0.5).step(

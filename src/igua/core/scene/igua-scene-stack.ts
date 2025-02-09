@@ -20,6 +20,7 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
     const background = new Container().named("Background");
     const parallaxStage = new Container().named("Parallax Stage");
     const stage = new Container().named("Stage");
+    stage.sortableChildren = true;
 
     const camera = objCamera();
 
