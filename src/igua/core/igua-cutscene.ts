@@ -4,6 +4,7 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { Null } from "../../lib/types/null";
+import { scene } from "../globals";
 
 type CutsceneFn = () => Coro.Type;
 
@@ -12,6 +13,7 @@ function getDefaultCutsceneAttributes() {
         speaker: Null<DisplayObject>(),
         letterbox: true,
         npcNamesSpoken: new Set<NpcPersonaInternalName>(),
+        requiredScene: Null(scene),
     };
 }
 
@@ -41,22 +43,19 @@ export class IguaCutscene {
         return this._container.sinceCutsceneStepsCount;
     }
 
-    play(fn: CutsceneFn, attributes?: Partial<CutsceneAttributes>) {
-        if (this.isPlaying) {
-            const context = {
-                requestedCutsceneFn: fn,
-                currentCutsceneFns: this._container.children.map(({ fn }) => fn),
-            };
-            ErrorReporter.reportContractViolationError(
-                "IguaCutscene.play",
-                new Error("Started cutscene while another was playing"),
-                context,
-            );
-        }
+    private _enqueuedCutsceneRunnerObjs: DisplayObject[] = [];
 
-        new Container().named("Cutscene Runner")
+    play(fn: CutsceneFn, attributes?: Partial<CutsceneAttributes>) {
+        const dequeueCutscene = () => this._enqueuedCutsceneRunnerObjs.shift()?.show(this._container);
+
+        const cutsceneRunnerObj = new Container().named("Cutscene Runner")
             .merge({ fn, attributes: { ...getDefaultCutsceneAttributes(), ...attributes } })
             .coro(function* (self) {
+                if (self.attributes.requiredScene !== null && scene !== self.attributes.requiredScene) {
+                    // TODO Should be logged that the cutscene was aborted!
+                    return;
+                }
+
                 try {
                     yield* fn();
                 }
@@ -71,9 +70,18 @@ export class IguaCutscene {
                     if (!self.destroyed) {
                         self.destroy();
                     }
+
+                    dequeueCutscene();
                 }
-            })
-            .show(this._container);
+            });
+
+        if (this._container.children.length === 0) {
+            cutsceneRunnerObj.show(this._container);
+        }
+        else {
+            // TODO should be logged that a cutscene was enqueued!
+            this._enqueuedCutsceneRunnerObjs.push(cutsceneRunnerObj);
+        }
     }
 
     get isPlaying() {
