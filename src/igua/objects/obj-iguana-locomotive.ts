@@ -159,14 +159,21 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                 puppet.speed.y > 0 ? 0.075 : 0.25,
             );
 
+            const absSpeedX = Math.abs(puppet.speed.x);
+
             if (puppet.speed.x !== 0) {
-                puppet.pedometer += Math.abs(puppet.speed.x * 0.05);
+                puppet.pedometer += absSpeedX * 0.0375 + (absSpeedX / puppet.walkingTopSpeed) * 0.03125;
             }
             else if (puppet.gait === 0) {
                 puppet.pedometer = 0;
             }
 
-            const gaitFactor = Math.max(0, Math.abs(puppet.speed.x) - IguanaLocomotiveConsts.WalkingAcceleration);
+            const gaitFactor = Math.max(
+                0,
+                puppet.walkingTopSpeed < 1
+                    ? (absSpeedX / puppet.walkingTopSpeed)
+                    : absSpeedX - IguanaLocomotiveConsts.WalkingAcceleration,
+            );
             puppet.gait = approachLinear(puppet.gait, Math.min(puppet.isAirborne ? 0 : gaitFactor, 1), 0.15);
 
             if (puppet.speed.x !== 0) {
