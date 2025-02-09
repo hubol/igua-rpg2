@@ -17,7 +17,7 @@
   "compactExport": false,
   "externalScript": "igua-rpg2-ogmo.js",
   "playCommand": "",
-  "entityTags": ["Terrain", "Player", "Front", "Marker"],
+  "entityTags": ["Terrain", "Player", "Front", "Marker", "Character"],
   "layers": [
     {
       "definition": "entity",
@@ -58,6 +58,14 @@
       "excludedTags": []
     },
     {
+      "definition": "entity",
+      "name": "CharacterEntities",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "07790422",
+      "requiredTags": ["Character"],
+      "excludedTags": []
+    },
+    {
       "definition": "decal",
       "name": "AboveEntitiesDecals",
       "gridSize": {"x": 8, "y": 8},
@@ -77,7 +85,7 @@
       "gridSize": {"x": 8, "y": 8},
       "exportID": "93086020",
       "requiredTags": [],
-      "excludedTags": ["Terrain", "Player", "Marker"]
+      "excludedTags": ["Terrain", "Player", "Marker", "Character"]
     },
     {
       "definition": "decal",
@@ -180,7 +188,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": false},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": false},
       "texture": "preview-images/iguana.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAqCAYAAAAeeGN5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKCSURBVGhD3Ze9LwRBFMD3rkSj1IpKdHdKIhIViY+GRM21/gaFWotKIUHhEJ1ERKU4najEXyDRoD33xjzm5mbmzcebPfFLLvt2dnZ2fvNmZ/YqRUZaE7NtGQrqjzdZn5elcV1CJacQe8MuEZUcUqwN+oog3EJsjYWKIJxCVXn8F7CMSmxWEK7s9Fdm+14GNPWVT7Kv/ZEJkNBxSVkv7K02uzrYOFm21vWWSZDQMUn1FOgSOjYpUihQpLb8IaOieGgOyqi7vNJBhoKu1YwSAXzq9JAgAuC5Xt7uIEPBj0xIJ011uVYkvcMUqpCQiRltbyHG94RCPNwlY3pHsL7XohAgg1nZXzsXR5Xa6nrxcHIkz37ZPF4SR3h/qqEigEsCEVkqMStA9OeMj1DZiA7FZMeX1tmAtW0d18sPy7PrOjnNUgkR4aBCyWBmWlvX4R2bXpSBP6bRt22aCFyHLwJSpjYyJKNIEoVUEUS/jp82TplkESBCJhSUqdpecBYR4O5CBuGY9hVALVc/OI1LM5tIIqaNEs6h3ISQyb5nJGRHFdJF9L8BPZnJlhUGIZcI0FUAi0EpUyxhUTBJID0XovaTWAKkXBJIf2U61HfnyE76YmyoLCFOESD6q/kvYh2Z3NnhzgrQl8xMXp4WldEN9sFyjo6anZnnYXG8HXsTRx9M94CISvvlgC1DZEMghJ1CfIT0e96v6uJZtoxwSJHTTO8UYCqjGFpoteEnT7PgHA3q4R9PezL6ZXC8ISMzpnuQ1OxYb/YdRbVzlAiSS8g4zUKmAwr4igBq3fmppozSiVqadza/O4NHH6i6HFKl7zOqFGdWgGAZ0whT89x2z9Xhq/hhnLYAFMUXU801m+qL9IoAAAAASUVORK5CYII="
     },
@@ -641,7 +649,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": [],
+      "tags": ["Character"],
       "values": [
         {"name": "personaName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},

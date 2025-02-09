@@ -118,6 +118,29 @@
       ]
     },
     {
+      "name": "CharacterEntities",
+      "_eid": "07790422",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": [
+        {
+          "name": "IguanaNpc",
+          "id": 0,
+          "_eid": "90326278",
+          "x": 352,
+          "y": 200,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": true,
+          "values": {"personaName": "NewBalltownBallFruitFanatic", "name": "BallFruitFanaticNpc", "depth": 0}
+        }
+      ]
+    },
+    {
       "name": "AboveEntitiesDecals",
       "_eid": "63753160",
       "offsetX": 0,
@@ -139,17 +162,6 @@
       "gridCellsX": 64,
       "gridCellsY": 35,
       "entities": [
-        {
-          "name": "IguanaNpc",
-          "id": 0,
-          "_eid": "90326278",
-          "x": 352,
-          "y": 200,
-          "originX": 20,
-          "originY": 52,
-          "flippedX": true,
-          "values": {"personaName": "NewBalltownBallFruitFanatic", "name": "BallFruitFanaticNpc", "depth": 0}
-        },
         {
           "name": "Door",
           "id": 1,

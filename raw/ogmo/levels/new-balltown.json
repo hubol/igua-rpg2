@@ -764,6 +764,62 @@
       ]
     },
     {
+      "name": "CharacterEntities",
+      "_eid": "07790422",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 207,
+      "gridCellsY": 79,
+      "entities": [
+        {
+          "name": "IguanaNpc",
+          "id": 6,
+          "_eid": "90326278",
+          "x": 384,
+          "y": 416,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": false,
+          "values": {"personaName": "NewBalltownOliveFanatic", "name": "OliveFanatic", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 7,
+          "_eid": "90326278",
+          "x": 864,
+          "y": 184,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": true,
+          "values": {"personaName": "NewBalltownCroupier", "name": "Croupier", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 11,
+          "_eid": "90326278",
+          "x": 952,
+          "y": 536,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": true,
+          "values": {"personaName": "NewBalltownMiner", "name": "Miner", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 12,
+          "_eid": "90326278",
+          "x": 272,
+          "y": 328,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": false,
+          "values": {"personaName": "NewBalltownFishmonger", "name": "Fishmonger", "depth": 0}
+        }
+      ]
+    },
+    {
       "name": "AboveEntitiesDecals",
       "_eid": "63753160",
       "offsetX": 0,
@@ -1048,28 +1104,6 @@
           "values": {"sceneName": "scnNewBalltownFishmonger", "checkpointName": "", "name": "", "depth": 0}
         },
         {
-          "name": "IguanaNpc",
-          "id": 6,
-          "_eid": "90326278",
-          "x": 384,
-          "y": 416,
-          "originX": 20,
-          "originY": 52,
-          "flippedX": false,
-          "values": {"personaName": "NewBalltownOliveFanatic", "name": "OliveFanatic", "depth": 0}
-        },
-        {
-          "name": "IguanaNpc",
-          "id": 7,
-          "_eid": "90326278",
-          "x": 864,
-          "y": 184,
-          "originX": 20,
-          "originY": 52,
-          "flippedX": true,
-          "values": {"personaName": "NewBalltownCroupier", "name": "Croupier", "depth": 0}
-        },
-        {
           "name": "Sign",
           "id": 8,
           "_eid": "39046554",
@@ -1098,28 +1132,6 @@
           "originX": 0,
           "originY": 26,
           "values": {"title": "Mines", "message": "Famous New Balltown mines ahead.", "name": "", "depth": 0, "isSpecial": false}
-        },
-        {
-          "name": "IguanaNpc",
-          "id": 11,
-          "_eid": "90326278",
-          "x": 952,
-          "y": 536,
-          "originX": 20,
-          "originY": 52,
-          "flippedX": true,
-          "values": {"personaName": "NewBalltownMiner", "name": "Miner", "depth": 0}
-        },
-        {
-          "name": "IguanaNpc",
-          "id": 12,
-          "_eid": "90326278",
-          "x": 272,
-          "y": 328,
-          "originX": 20,
-          "originY": 52,
-          "flippedX": false,
-          "values": {"personaName": "NewBalltownFishmonger", "name": "Fishmonger", "depth": 0}
         }
       ]
     },

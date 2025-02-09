@@ -118,6 +118,29 @@
       ]
     },
     {
+      "name": "CharacterEntities",
+      "_eid": "07790422",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": [
+        {
+          "name": "IguanaNpc",
+          "id": 1,
+          "_eid": "90326278",
+          "x": 316,
+          "y": 232,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": true,
+          "values": {"personaName": "NewBalltownArmorer", "name": "", "depth": 0}
+        }
+      ]
+    },
+    {
       "name": "AboveEntitiesDecals",
       "_eid": "63753160",
       "offsetX": 0,
@@ -188,17 +211,6 @@
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnNewBalltown", "checkpointName": "fromArmorer", "name": "", "depth": 0}
-        },
-        {
-          "name": "IguanaNpc",
-          "id": 1,
-          "_eid": "90326278",
-          "x": 316,
-          "y": 232,
-          "originX": 20,
-          "originY": 52,
-          "flippedX": true,
-          "values": {"personaName": "NewBalltownArmorer", "name": "", "depth": 0}
         }
       ]
     },

@@ -53,6 +53,17 @@
       "entities": []
     },
     {
+      "name": "CharacterEntities",
+      "_eid": "07790422",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": []
+    },
+    {
       "name": "AboveEntitiesDecals",
       "_eid": "63753160",
       "offsetX": 0,
