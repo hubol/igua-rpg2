@@ -280,13 +280,26 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
 
         yield* show("Please defuse the bombs before I reach them, so that I can successfully deliver the fish.");
 
-        lvl.Fishmonger.coro(function* (self) {
+        const fishmongerRouteObj = container().coro(function* () {
+            const self = lvl.Fishmonger;
             self.walkingTopSpeed = 0.3;
             yield* self.walkTo(lvl.FishmongerStopAndJump.x);
             yield sleep(500);
             self.walkingTopSpeed = 0.7;
             self.speed.y = -6;
             yield* self.walkTo(lvl.ArmorerDoor.x);
+        }).show();
+
+        lvl.Fishmonger.coro(function* (self) {
+            // TODO check if not defused
+            yield () => Boolean(self.collidesOne(Instances(objFishmongerBomb)));
+            fishmongerRouteObj.destroy();
+            lvl.Fishmonger.isBeingPiloted = false;
+            lvl.Fishmonger.isMovingRight = false;
+            Cutscene.play(function* () {
+                yield* show("I blowed up...");
+                // TODO more
+            }, { speaker: lvl.Fishmonger });
         });
     }, { speaker: lvl.Fishmonger });
 }
@@ -299,5 +312,6 @@ function objFishmongerBomb() {
     ).mixin(
         mxnNudgeAppear,
     )
+        .track(objFishmongerBomb)
         .zIndexed(ZIndex.Entities);
 }
