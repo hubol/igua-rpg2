@@ -307,6 +307,11 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
 const txsFishmongerBomb = Tx.Town.Ball.FishmongerBomb.split({ count: 2 });
 const txsFishmongerBombDefused = Tx.Town.Ball.FishmongerBombDefused.split({ count: 2 });
 
+// TODO some ideas for defusing
+// - defuses, but makes a previous bomb live
+// - obnoxious math problems
+// - story questions
+// - excessively long dialogs
 function objFishmongerBomb() {
     return objIndexedSprite(txsFishmongerBomb)
         .merge({ isDefused: false })
