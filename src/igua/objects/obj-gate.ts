@@ -26,7 +26,7 @@ export function objGate(ogmoEntity: OgmoFactory.Entity<"GateHorizontal" | "GateV
 
     if (sceneChanger) {
         gfx.coro(function* (self) {
-            yield () => playerObj.hasControl && predicate() && self.collides(playerObj);
+            yield () => predicate() && self.collides(playerObj);
             // TODO is this really a cutscene?
             // Cutscenes are (thankfully?) not interruptible.
             // Either way, probably don't want the letterbox to appear!
