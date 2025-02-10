@@ -227,6 +227,17 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "FishmongerStopAndJump", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 19,
+          "_eid": "73148747",
+          "x": 464,
+          "y": 368,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#ff0000",
+          "values": {"name": "", "depth": 0}
         }
       ]
     },

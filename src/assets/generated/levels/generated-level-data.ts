@@ -1583,6 +1583,7 @@ export const Lvl = {
     FishmongerBomb2: e(r["Marker"], { x: 896, y: 352, values: { name: "FishmongerBomb2", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
     FishmongerBomb3: e(r["Marker"], { x: 1128, y: 416, values: { name: "FishmongerBomb3", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
     FishmongerStopAndJump: e(r["Marker"], { x: 1184, y: 416, values: { name: "FishmongerStopAndJump", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+    Marker_12: e(r["Marker"], { x: 464, y: 368, values: { name: "", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
   })),
 };
 

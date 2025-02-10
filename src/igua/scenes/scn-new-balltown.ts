@@ -23,6 +23,8 @@ import { Tx } from "../../assets/textures";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { ZIndex } from "../core/scene/z-index";
+import { Coro } from "../../lib/game-engine/routines/coro";
+import { Force } from "../../lib/types/force";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);
@@ -265,6 +267,10 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
         return;
     }
 
+    const bombMessages = {
+        defused: "Defused bomb.",
+    };
+
     Cutscene.play(function* () {
         yield* show(
             `To make the delivery more challenging, I am placing bombs along the route to ${NpcPersonas.NewBalltownArmorer.name}'s place.`,
@@ -272,9 +278,24 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
 
         yield sleep(500);
 
-        for (const markerObj of Instances(objMarker, obj => obj.tint === 0xff0000)) {
-            objFishmongerBomb().at(markerObj).show();
-        }
+        const bombObjs = Instances(objMarker, obj => obj.tint === 0xff0000)
+            .sort((a, b) => a.x - b.x)
+            .map((markerObj, index) => objFishmongerBomb(`Bomb #${index + 1}`).at(markerObj).show());
+
+        bombObjs[0].onAttemptToDefuse = function* (self) {
+            self.isDefused = true;
+            yield* show(bombMessages.defused);
+        };
+
+        bombObjs[1].onAttemptToDefuse = function* (self) {
+            self.isDefused = true;
+            yield* show(bombMessages.defused);
+            yield* show("Will automatically re-arm in 5 seconds");
+            self.coro(function* () {
+                yield sleep(5000);
+                self.isDefused = false;
+            });
+        };
 
         yield sleep(500);
 
@@ -291,8 +312,7 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
         }).show();
 
         lvl.Fishmonger.coro(function* (self) {
-            // TODO check if not defused
-            yield () => Boolean(self.collidesOne(Instances(objFishmongerBomb)));
+            yield () => Boolean(self.collidesOne(Instances(objFishmongerBomb, bombObj => !bombObj.isDefused)));
             fishmongerRouteObj.destroy();
             lvl.Fishmonger.isBeingPiloted = false;
             lvl.Fishmonger.isMovingRight = false;
@@ -312,16 +332,27 @@ const txsFishmongerBombDefused = Tx.Town.Ball.FishmongerBombDefused.split({ coun
 // - obnoxious math problems
 // - story questions
 // - excessively long dialogs
-function objFishmongerBomb() {
-    return objIndexedSprite(txsFishmongerBomb)
+function objFishmongerBomb(name: string) {
+    const obj = objIndexedSprite(txsFishmongerBomb)
         .merge({ isDefused: false })
         .anchored(0.5, 0.9)
         .step(self => {
             self.textures = self.isDefused ? txsFishmongerBombDefused : txsFishmongerBomb;
             self.textureIndex = (self.textureIndex + 0.1) % 2;
-        }).mixin(
-            mxnNudgeAppear,
-        )
+        })
+        .mixin(mxnNudgeAppear)
+        .mixin(mxnSpeaker, { colorPrimary: 0xCE3D21, colorSecondary: 0x000000, name })
         .track(objFishmongerBomb)
         .zIndexed(ZIndex.Entities);
+
+    const hookedObj = obj.merge({ onAttemptToDefuse: Force<(self: typeof obj) => Coro.Type>() });
+
+    return hookedObj
+        .mixin(mxnCutscene, function* () {
+            if (hookedObj.isDefused) {
+                yield* show("Already defused.");
+                return;
+            }
+            yield* hookedObj.onAttemptToDefuse(hookedObj);
+        });
 }
