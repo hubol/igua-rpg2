@@ -288,13 +288,50 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
         };
 
         bombObjs[1].onAttemptToDefuse = function* (self) {
+            yield* show(
+                "Okay",
+                "So you are trying to defuse this bomb, right?",
+                "But there are so many messages to get through first!",
+                "For example, you're trying to get through this message.",
+                "And this one as well.",
+                "And if you aren't paying attention,",
+                "Then you will probably miss the prompt...",
+            );
+
+            const result = yield* ask("To defuse the bomb.", "Retry", "Defuse");
+
+            if (result === 1) {
+                self.isDefused = true;
+                yield* show(bombMessages.defused);
+            }
+        };
+
+        const toArmBombObj = bombObjs[1];
+        bombObjs[2].onAttemptToDefuse = function* (self) {
             self.isDefused = true;
-            yield* show(bombMessages.defused);
-            yield* show("Will automatically re-arm in 5 seconds");
+            toArmBombObj.isDefused = false;
+            yield* show(bombMessages.defused + `\n\n${toArmBombObj.speaker.name} armed.`);
+        };
+
+        bombObjs[3].onAttemptToDefuse = function* (self) {
+            self.isDefused = true;
             self.coro(function* () {
                 yield sleep(5000);
                 self.isDefused = false;
             });
+            yield* show(bombMessages.defused + "\n\nWill automatically re-arm in 5 seconds");
+        };
+
+        const countingPuzzleCoroFactory = createCountingPuzzleCoroFactory();
+        bombObjs[4].onAttemptToDefuse = function* (self) {
+            const isCorrect = yield* countingPuzzleCoroFactory();
+            if (isCorrect) {
+                self.isDefused = true;
+                yield* show(bombMessages.defused);
+            }
+            else {
+                yield* show("Incorrect. Try again.");
+            }
         };
 
         yield sleep(500);
@@ -324,14 +361,35 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
     }, { speaker: lvl.Fishmonger });
 }
 
+function createCountingPuzzleCoroFactory() {
+    const letter0 = "A";
+    const letter1 = "B";
+
+    const count0 = Rng.intc(6, 9);
+    const count1 = Rng.intc(6, 9);
+
+    const message = Rng.shuffle([
+        ...range(count0).map(() => letter0),
+        ...range(count1).map(() => letter1),
+        ...range(9).map(() => " "),
+    ])
+        .join(" ");
+
+    const desiredLetterIndex = Rng.bool() ? 1 : 0;
+    const expectedCount = desiredLetterIndex === 0 ? count0 : count1;
+
+    return function* () {
+        yield* show("You will answer a question based on the following message.");
+        yield* show(message);
+        const choice = yield* ask(`How many letter ${desiredLetterIndex === 0 ? "A" : "B"}?`, "6", "7", "8", "9");
+        const choiceAsCount = choice + 6;
+        return choiceAsCount === expectedCount;
+    };
+}
+
 const txsFishmongerBomb = Tx.Town.Ball.FishmongerBomb.split({ count: 2 });
 const txsFishmongerBombDefused = Tx.Town.Ball.FishmongerBombDefused.split({ count: 2 });
 
-// TODO some ideas for defusing
-// - defuses, but makes a previous bomb live
-// - obnoxious math problems
-// - story questions
-// - excessively long dialogs
 function objFishmongerBomb(name: string) {
     const obj = objIndexedSprite(txsFishmongerBomb)
         .merge({ isDefused: false })
