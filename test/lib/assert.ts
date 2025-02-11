@@ -48,6 +48,21 @@ to be strictly equal to:
 ${paint.gray(expectedJson)}`);
     }
 
+    toSerializeTo(expected: unknown) {
+        const valueJson = stringify(this.value);
+        const expectedJson = stringify(expected);
+
+        if (valueJson === expectedJson) {
+            return;
+        }
+
+        throw new AssertError(`
+Expected
+${paint.red(valueJson)}
+to serialize to:
+${paint.gray(expectedJson)}`);
+    }
+
     toBeTruthy() {
         if (!this.value) {
             throw new AssertError(`Expected ${paint.red(stringify(this.value))} to be truthy`);
