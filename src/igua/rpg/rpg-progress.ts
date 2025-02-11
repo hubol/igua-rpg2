@@ -69,8 +69,6 @@ function getInitialRpgProgress() {
                     toldPlayerAboutDepletedPickaxeHealth: false,
                 },
             },
-            // TODO remove
-            test: false,
         },
         uids: {
             metNpcs: new Set<NpcPersonaInternalName>(),
