@@ -137,6 +137,17 @@
           "originY": 52,
           "flippedX": true,
           "values": {"personaName": "NewBalltownArmorer", "name": "", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 2,
+          "_eid": "90326278",
+          "x": 352,
+          "y": 136,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": true,
+          "values": {"personaName": "NewBalltownFishmonger", "name": "Fishmonger", "depth": 0}
         }
       ]
     },

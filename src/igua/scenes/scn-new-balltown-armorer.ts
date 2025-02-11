@@ -19,6 +19,14 @@ export function scnNewBalltownArmorer() {
     const lvl = Lvl.NewBalltownArmorer();
     enrichArmorer(lvl);
     enrichAquarium(lvl);
+    enrichFishmonger(lvl);
+}
+
+function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
+    const { deliveries } = RpgProgress.flags.newBalltown.fishmonger;
+    if (deliveries.armorer !== "arrived") {
+        lvl.Fishmonger.destroy();
+    }
 }
 
 function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {

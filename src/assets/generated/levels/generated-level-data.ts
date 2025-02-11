@@ -261,6 +261,7 @@ export const Lvl = {
     TerrainEarthExposedDirt_1: d(Tx.Terrain.Earth.ExposedDirt, { x: 278, y: 234, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x705031 }, "AboveEntitiesDecals"),
     TerrainEarthExposedDirt_2: d(Tx.Terrain.Earth.ExposedDirt, { x: 364, y: 235, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x705031 }, "AboveEntitiesDecals"),
     IguanaNpc: e(r["IguanaNpc"], { x: 316, y: 232, flippedX: true, values: { personaName: "NewBalltownArmorer", name: "", depth: 0 } }, "CharacterEntities"),
+    Fishmonger: e(r["IguanaNpc"], { x: 352, y: 136, flippedX: true, values: { personaName: "NewBalltownFishmonger", name: "Fishmonger", depth: 0 } }, "CharacterEntities"),
     Player: e(r["Player"], { x: 204, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     Puddle: e(r["Puddle"], { x: 148, y: 232, width: 224, values: { name: "", depth: 0 }, tint: 0x705031 }, "FrontEntities"),
     StoneRockSmallShaded1: d(Tx.Stone.RockSmallShaded1, { x: 352, y: 234, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
