@@ -1,5 +1,5 @@
 import { Logging } from "../../logging";
-import { ErrorReporter } from "../error-reporter";
+import { Logger } from "../logger";
 
 const MinPoolSize = 16;
 
@@ -64,7 +64,7 @@ export class StereoGainNode {
 
     setSource(sourceNode: AudioBufferSourceNode) {
         if (this._isDisposed) {
-            ErrorReporter.reportContractViolationError(
+            Logger.logContractViolationError(
                 "StereoGainNode",
                 new Error("Called StereoGainNodePair.setSource() when _isDisposed is true!"),
                 { sourceNode },

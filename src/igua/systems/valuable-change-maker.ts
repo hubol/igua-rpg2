@@ -1,4 +1,4 @@
-import { ErrorReporter } from "../../lib/game-engine/error-reporter";
+import { Logger } from "../../lib/game-engine/logger";
 import { RpgEconomy } from "../rpg/rpg-economy";
 
 export namespace ValuableChangeMaker {
@@ -15,7 +15,7 @@ export namespace ValuableChangeMaker {
         }
 
         if (total !== 0) {
-            ErrorReporter.reportAssertError("solveCounts", new Error("Did not solveCounts as expected"), {
+            Logger.logAssertError("solveCounts", new Error("Did not solveCounts as expected"), {
                 total,
                 result,
             });

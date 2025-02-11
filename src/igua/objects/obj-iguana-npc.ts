@@ -1,6 +1,6 @@
 import { Sfx } from "../../assets/sounds";
 import { SubjectiveColorAnalyzer } from "../../lib/color/subjective-color-analyzer";
-import { ErrorReporter } from "../../lib/game-engine/error-reporter";
+import { Logger } from "../../lib/game-engine/logger";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { Rng } from "../../lib/math/rng";
 import { NpcPersonaInternalName, NpcPersonas } from "../data/data-npc-personas";
@@ -21,7 +21,7 @@ interface ObjIguanaNpcArgs<TName extends string> {
 export function objIguanaNpc<TName extends string = NpcPersonaInternalName>({ personaName }: ObjIguanaNpcArgs<TName>) {
     let persona = NpcPersonas[personaName as NpcPersonaInternalName];
     if (!persona) {
-        ErrorReporter.reportMisconfigurationError(
+        Logger.logMisconfigurationError(
             "objIguanaNpc",
             new Error(`NpcPersona "${personaName}" does not exist!`),
         );

@@ -1,5 +1,5 @@
 <style>
-.runtime_errors {
+.logs {
     font-family: monospace;
     font-size: 120%;
 
@@ -13,26 +13,26 @@
     gap: 0.5rem;
 }
 
-.runtime_errors .count {
+.logs .count {
     font-weight: 600;
 }
 
-.runtime_errors .error .nature {
+.logs .log .nature {
     overflow: hidden;
     border-radius: 3px 0 0 3px;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
 }
 
-.runtime_errors .error .nature {
+.logs .log .nature {
     background-color: #f00000;
 }
 
-.runtime_errors .error[data-nature="Misconfigured"] .nature {
+.logs .log[data-nature="MisconfiguredError"] .nature {
     background-color: #ff8800;
 }
 
-.runtime_errors .error {
+.logs .log {
     display: flex;
     gap: 0.5rem;
     cursor: pointer;
@@ -43,21 +43,21 @@
     border-radius: 3px;
 }
 
-.runtime_errors .error .nature ~ * {
+.logs .log .nature ~ * {
     color: white;
     text-shadow: 0 -1px 0 #400000;
 }
 
-.runtime_errors .error > * {
+.logs .log > * {
     padding: 0.2rem 0;
 }
 
-.runtime_errors .error.empty {
+.logs .log.empty {
     display: none;
 }
 
-.runtime_errors .unique_count.empty {
+.logs .unique_count.empty {
     display: none;
 }
 </style>
-<div class="runtime_errors"></div>
+<div class="logs"></div>

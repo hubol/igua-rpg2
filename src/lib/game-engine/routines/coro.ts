@@ -1,4 +1,4 @@
-import { ErrorReporter } from "../error-reporter";
+import { Logger } from "../logger";
 
 export namespace Coro {
     export type Predicate = () => boolean;
@@ -46,7 +46,7 @@ export namespace Coro {
             }
         }
 
-        ErrorReporter.reportContractViolationError(
+        Logger.logContractViolationError(
             "Coro.runner",
             new Error(`Possible infinite coro loop detected!`),
             generator,

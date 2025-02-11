@@ -1,5 +1,5 @@
 import { Container, DisplayObject } from "pixi.js";
-import { ErrorReporter } from "../../lib/game-engine/error-reporter";
+import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { NpcPersonaInternalName } from "../data/data-npc-personas";
@@ -65,7 +65,7 @@ export class IguaCutscene {
                         throw e;
                     }
 
-                    ErrorReporter.reportUnexpectedError("IguaCutscene.runner", e as Error);
+                    Logger.logUnexpectedError("IguaCutscene.runner", e as Error);
                 }
                 finally {
                     if (!self.destroyed) {

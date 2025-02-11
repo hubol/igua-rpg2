@@ -1,4 +1,4 @@
-import { ErrorReporter } from "../../lib/game-engine/error-reporter";
+import { Logger } from "../../lib/game-engine/logger";
 import { SceneLibrary } from "../core/scene/scene-library";
 import { sceneStack } from "../globals";
 import { playerObj } from "../objects/obj-player";
@@ -29,7 +29,7 @@ export class SceneChanger {
     static create({ sceneName, checkpointName }: CreateArgs) {
         const scene = SceneLibrary.maybeFindByName(sceneName);
         if (!scene) {
-            ErrorReporter.reportContractViolationError(
+            Logger.logContractViolationError(
                 "SceneChanger.create",
                 new Error(`Scene with name "${sceneName}" does not exist!`),
             );

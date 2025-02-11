@@ -1,4 +1,4 @@
-import { ErrorReporter } from "./error-reporter";
+import { Logger } from "./logger";
 import { ICancellationToken } from "../promise/cancellation-token";
 
 export class EscapeTickerAndExecute {
@@ -63,7 +63,7 @@ export class AsshatTicker implements IAsshatTicker {
                 e.execute();
                 return;
             }
-            ErrorReporter.reportUnexpectedError("AsshatTicker.tick", e as Error);
+            Logger.logUnexpectedError("AsshatTicker.tick", e as Error);
         }
     }
 
@@ -99,7 +99,7 @@ export class AsshatTicker implements IAsshatTicker {
                     if (e instanceof EscapeTickerAndExecute) {
                         throw e;
                     }
-                    ErrorReporter.reportUnexpectedError("AsshatTicker.tickImpl", e as Error, task);
+                    Logger.logUnexpectedError("AsshatTicker.tickImpl", e as Error, task);
                 }
 
                 if (shift) {

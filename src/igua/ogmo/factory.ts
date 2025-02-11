@@ -1,6 +1,6 @@
 import { Container, DisplayObject, Sprite, Texture } from "pixi.js";
 import { scene } from "../globals";
-import { ErrorReporter } from "../../lib/game-engine/error-reporter";
+import { Logger } from "../../lib/game-engine/logger";
 import { ogmoAddToLayer } from "./add-to-layer";
 import { container } from "../../lib/pixi/container";
 import { OgmoProject } from "../../assets/generated/levels/generated-ogmo-project-data";
@@ -55,7 +55,7 @@ export namespace OgmoFactory {
         layerName: string,
     ): ReturnType<TFn> {
         if (typeof fn !== "function") {
-            ErrorReporter.reportContractViolationError(
+            Logger.logContractViolationError(
                 "OgmoFactory",
                 new Error("Received fn argument that is not a function. Is OgmoEntityResolvers up to date?"),
                 { fn },
@@ -115,7 +115,7 @@ export namespace OgmoFactory {
         if (decal.groupName) {
             const decalGroup = decalGroups.get(decal.groupName);
             if (!decalGroup) {
-                ErrorReporter.reportContractViolationError(
+                Logger.logContractViolationError(
                     "createDecal",
                     new Error(`Could not find Decal Group with name: ${decal.groupName}`),
                 );
@@ -134,7 +134,7 @@ export namespace OgmoFactory {
         const obj = (container() as Container<Sprite>).named(`Decal Group: ${groupName}`).merge({ groupName });
 
         if (decalGroups.has(groupName)) {
-            ErrorReporter.reportContractViolationError(
+            Logger.logContractViolationError(
                 "createDecalGroup",
                 new Error(`createDecalGroup called when decalGroup already exists with groupName: ${groupName}`),
                 { decalGroup: decalGroups.get(groupName) },

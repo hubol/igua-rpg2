@@ -1,14 +1,14 @@
 import { loadLaunchAssets } from "./igua/launch/load-launch-assets";
 import { showLoadingScreen } from "./igua/launch/show-loading-screen";
 import { integralUpscaleCanvas } from "./lib/browser/integral-upscale-canvas";
-import { ErrorReporter } from "./lib/game-engine/error-reporter";
+import { Logger } from "./lib/game-engine/logger";
 import { createPixiRenderer } from "./lib/game-engine/pixi-renderer";
 import { JobProgress } from "./lib/game-engine/job-progress";
 import { initializeAsshatAudioContext } from "./lib/game-engine/audio/asshat-audiocontext";
 import { Environment } from "./lib/environment";
 import { settings } from "pixi.js";
 import { setCurrentPixiRenderer } from "./igua/current-pixi-renderer";
-import { DomErrorAnnouncer } from "./lib/game-engine/dom-error-announcer";
+import { DomLogTarget } from "./lib/game-engine/dom-log-target";
 
 let assetsLoaded = false;
 
@@ -85,11 +85,11 @@ window.onload = initialize;
 
 window.addEventListener(
     "unhandledrejection",
-    (e) => ErrorReporter.reportUnhandledError("window.on('unhandledrejection')", e.reason),
+    (e) => Logger.logUnhandledError("window.on('unhandledrejection')", e.reason),
 );
-window.addEventListener("error", (e) => ErrorReporter.reportUnhandledError("window.on('error')", e));
+window.addEventListener("error", (e) => Logger.logUnhandledError("window.on('error')", e));
 
-ErrorReporter.announcer = new DomErrorAnnouncer();
+Logger.logTarget = new DomLogTarget();
 
 function addGameCanvasToDocument(element: HTMLCanvasElement) {
     element.id = "game_canvas";

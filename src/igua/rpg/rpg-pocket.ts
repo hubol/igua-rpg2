@@ -1,4 +1,4 @@
-import { ErrorReporter } from "../../lib/game-engine/error-reporter";
+import { Logger } from "../../lib/game-engine/logger";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 
 export namespace RpgPocket {
@@ -73,7 +73,7 @@ export namespace RpgPocket {
                     RpgExperienceRewarder.pocket.onRemoveItems(countToTakeFromSlot);
                 }
                 if (count < 0) {
-                    ErrorReporter.reportAssertError(
+                    Logger.logAssertError(
                         "RpgPocket.Methods.remove",
                         new Error(`count should not be < 0, got ${count}`),
                         { model, item, count },

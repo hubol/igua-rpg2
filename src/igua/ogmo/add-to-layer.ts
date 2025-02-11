@@ -1,7 +1,7 @@
 import { DisplayObject } from "pixi.js";
 import { scene } from "../globals";
 import { ZIndex } from "../core/scene/z-index";
-import { ErrorReporter } from "../../lib/game-engine/error-reporter";
+import { Logger } from "../../lib/game-engine/logger";
 
 export function ogmoAddToLayer(obj: DisplayObject, layerName: string) {
     if (obj.parent) {
@@ -15,7 +15,7 @@ export function ogmoAddToLayer(obj: DisplayObject, layerName: string) {
     if (!obj.parent) {
         const zIndex = ZIndex[layerName];
         if (zIndex === undefined) {
-            ErrorReporter.reportMisconfigurationError(
+            Logger.logMisconfigurationError(
                 "ogmoAddToLayer",
                 new Error("No ZIndex enumeration for layer name: " + layerName),
             );
