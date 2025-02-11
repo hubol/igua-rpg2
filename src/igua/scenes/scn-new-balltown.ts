@@ -257,12 +257,15 @@ function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
 
 function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
     const expectedCheckpointName: keyof LvlType.NewBalltown = "fromFishmonger";
+    const { deliveries } = RpgProgress.flags.newBalltown.fishmonger;
 
     if (
-        !RpgProgress.flags.newBalltown.fishmonger.isReadyToDeliverToArmorer
+        deliveries.armorer !== "ready"
         || RpgProgress.character.position.checkpointName !== expectedCheckpointName
     ) {
-        RpgProgress.flags.newBalltown.fishmonger.isReadyToDeliverToArmorer = false;
+        if (deliveries.armorer === "ready") {
+            deliveries.armorer = null;
+        }
         lvl.Fishmonger.destroy();
         return;
     }
@@ -346,6 +349,12 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
             self.walkingTopSpeed = 0.7;
             self.speed.y = -6;
             yield* self.walkTo(lvl.ArmorerDoor.x);
+            Cutscene.play(function* () {
+                yield* show("I made it!", "See you inside");
+                deliveries.armorer = "arrived";
+                Sfx.Interact.DoorOpen0.play();
+                self.destroy();
+            }, { speaker: lvl.Fishmonger });
         }).show();
 
         lvl.Fishmonger.coro(function* (self) {

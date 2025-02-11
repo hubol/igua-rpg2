@@ -58,7 +58,9 @@ function getInitialRpgProgress() {
                     succesfulDeliveriesCount: 0,
                 },
                 fishmonger: {
-                    isReadyToDeliverToArmorer: false,
+                    deliveries: {
+                        armorer: Null<"ready" | "arrived" | "delivered">(),
+                    },
                 },
             },
             outskirts: {
@@ -67,6 +69,7 @@ function getInitialRpgProgress() {
                     toldPlayerAboutDepletedPickaxeHealth: false,
                 },
             },
+            // TODO remove
             test: false,
         },
         uids: {

@@ -29,9 +29,13 @@ function enrichAquarium(lvl: LvlType.NewBalltownFishmonger) {
 
 function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
     const { fishObjs } = enrichAquarium(lvl);
+    const { deliveries } = RpgProgress.flags.newBalltown.fishmonger;
 
-    if (RpgProgress.flags.newBalltown.fishmonger.isReadyToDeliverToArmorer) {
+    if (deliveries.armorer) {
         fishObjs[0].destroy();
+    }
+
+    if (deliveries.armorer && deliveries.armorer !== "delivered") {
         lvl.Fishmonger.destroy();
         return;
     }
@@ -72,7 +76,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
                     yield* show("See you outside!");
                     yield* lvl.Fishmonger.walkTo(lvl.Door.x + 30);
                     lvl.Fishmonger.destroy();
-                    RpgProgress.flags.newBalltown.fishmonger.isReadyToDeliverToArmorer = true;
+                    RpgProgress.flags.newBalltown.fishmonger.deliveries.armorer = "ready";
                 }
                 else {
                     yield* show("Okay, let me know when you are ready!");
