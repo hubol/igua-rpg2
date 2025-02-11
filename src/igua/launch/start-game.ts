@@ -8,18 +8,19 @@ import { RpgProgress, setRpgProgress } from "../rpg/rpg-progress";
 
 export function startGame() {
     const config = getConfig();
-    sceneStack.push(SceneLibrary.findByName(config.sceneName), { useGameplay: false });
-    startAnimator();
-
-    if (config.player.position && playerObj) {
-        playerObj.at(config.player.position);
-    }
 
     if (config.progress) {
         setRpgProgress(config.progress);
     }
 
     RpgProgress.character.position.sceneName = config.sceneName;
+
+    sceneStack.push(SceneLibrary.findByName(config.sceneName), { useGameplay: false });
+    startAnimator();
+
+    if (config.player.position && playerObj) {
+        playerObj.at(config.player.position);
+    }
 }
 
 function getConfig(): GameStartConfig {
