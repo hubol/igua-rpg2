@@ -1,3 +1,5 @@
+import { Logging } from "../logging";
+
 export enum LogNature {
     Info = "Info",
     MisconfiguredError = "Misconfigured",
@@ -8,6 +10,14 @@ export enum LogNature {
 }
 
 const defaultLogTarget = {
+    onInfo(source: string, message: string, ...context: any[]) {
+        const args = [...Logging.badge(source), message];
+        if (context.length) {
+            args.push("\n\nContext:\n", ...context);
+        }
+
+        console.trace(...args);
+    },
     onError(nature: LogNature, source: string, error: any, ...context: any[]) {
         const args = [nature + " Error in " + source + "\n\n", error];
         if (context.length) {
@@ -23,11 +33,15 @@ export type LogTarget = Readonly<typeof defaultLogTarget>;
 export const DefaultLogTarget: LogTarget = defaultLogTarget;
 
 class LoggerImpl {
-    logTarget: LogTarget = defaultLogTarget;
+    target: LogTarget = defaultLogTarget;
+
+    logInfo(subsystem: string, message: string, ...context: any[]) {
+        this.target.onInfo(subsystem, message, ...context);
+    }
 
     logUnhandledError(source: string, error: any) {
         try {
-            this.logTarget.onError(LogNature.UnhandledError, source, error);
+            this.target.onError(LogNature.UnhandledError, source, error);
         }
         catch (e) {
             console.error("Unexpected error while logging unhandled error to logTarget!");
@@ -35,19 +49,19 @@ class LoggerImpl {
     }
 
     logMisconfigurationError(subsystem: string, error: Error, ...context: any[]) {
-        this.logTarget.onError(LogNature.MisconfiguredError, subsystem, error, ...context);
+        this.target.onError(LogNature.MisconfiguredError, subsystem, error, ...context);
     }
 
     logAssertError(subsystem: string, error: Error, ...context: any[]) {
-        this.logTarget.onError(LogNature.AssertFailedError, subsystem, error, ...context);
+        this.target.onError(LogNature.AssertFailedError, subsystem, error, ...context);
     }
 
     logContractViolationError(subsystem: string, error: Error, ...context: any[]) {
-        this.logTarget.onError(LogNature.ContractViolatedError, subsystem, error, ...context);
+        this.target.onError(LogNature.ContractViolatedError, subsystem, error, ...context);
     }
 
     logUnexpectedError(subsystem: string, error: Error, ...context: any[]) {
-        this.logTarget.onError(LogNature.UnexpectedError, subsystem, error, ...context);
+        this.target.onError(LogNature.UnexpectedError, subsystem, error, ...context);
     }
 }
 

@@ -8,6 +8,11 @@ export class DomLogTarget implements LogTarget {
         document.body.appendChild(this.logRoot.el);
     }
 
+    onInfo(source: string, message: string, ...context: any[]): void {
+        DefaultLogTarget.onInfo(source, message, ...context);
+        this.logRoot.increaseLogCountForSubsystem(LogNature.Info, source, message);
+    }
+
     onError(nature: LogNature, subsystem: string, error: any, ...context: any[]): void {
         DefaultLogTarget.onError(nature, subsystem, error, ...context);
         this.logRoot.increaseLogCountForSubsystem(nature, subsystem, `${error}`);
@@ -60,15 +65,23 @@ function createDomLog(nature: LogNature, subsytem: string) {
     const messageCountEl = document.createElement("div");
     messageCountEl.className = "count";
 
+    const latestMessageEl = document.createElement("div");
+    latestMessageEl.className = "latest";
+
     const uniqueMessageCountEl = document.createElement("div");
     uniqueMessageCountEl.className = "unique_count";
 
     el.append(natureEl, subsystemEl, messageCountEl, uniqueMessageCountEl);
 
+    if (nature === LogNature.Info) {
+        el.append(latestMessageEl);
+    }
+
     subsystemEl.textContent = subsytem;
     let messageCount = 0;
 
     const clearMessageCount = () => {
+        latestMessageEl.textContent = "";
         messageCount = 0;
         uniqueMessages.clear();
         update();
@@ -84,6 +97,8 @@ function createDomLog(nature: LogNature, subsytem: string) {
     const uniqueMessages = new Set<string>();
 
     const updateUniqueMessages = (message: string) => {
+        latestMessageEl.textContent = message;
+
         if (uniqueMessages.has(message)) {
             return;
         }

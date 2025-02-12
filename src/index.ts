@@ -89,7 +89,7 @@ window.addEventListener(
 );
 window.addEventListener("error", (e) => Logger.logUnhandledError("window.on('error')", e));
 
-Logger.logTarget = new DomLogTarget();
+Logger.target = new DomLogTarget();
 
 function addGameCanvasToDocument(element: HTMLCanvasElement) {
     element.id = "game_canvas";
