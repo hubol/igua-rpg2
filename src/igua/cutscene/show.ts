@@ -147,12 +147,12 @@ export function* show(text: string, ...moreText: string[]) {
 
 const [txQuestionOptionBox, txQuestionOptionSelected] = Tx.Ui.Dialog.QuestionOption.split({ count: 2 });
 
-function objQuestionOptionBox(index: number, text: string, color: RgbInt, textColor: RgbInt) {
+function objQuestionOptionBox(text: string, color: RgbInt, textColor: RgbInt) {
     const hitbox = new Graphics().beginFill(0xff0000).invisible().drawRect(6, 4, 112, 32);
 
     const obj = container(hitbox)
         .collisionShape(CollisionShape.DisplayObjects, [hitbox])
-        .merge({ index, selected: false });
+        .merge({ selected: false });
 
     container(
         container(
@@ -173,8 +173,6 @@ function objQuestionOptionBox(index: number, text: string, color: RgbInt, textCo
     return obj;
 }
 
-type ObjQuestionOptionBox = ReturnType<typeof objQuestionOptionBox>;
-
 function objQuestionOptionBoxes(speaker: DisplayObject | null, options: AskOptions) {
     const colors = getMessageBoxColors(speaker);
     const state = { confirmedIndex: -1 };
@@ -189,10 +187,17 @@ function objQuestionOptionBoxes(speaker: DisplayObject | null, options: AskOptio
             position.x += 70;
         }
 
+        const obj = objQuestionOptionBox(option, colors.secondary, colors.textSecondary)
+            .merge({ index, layoutIndex })
+            .at(position);
+
         layoutIndex++;
-        return objQuestionOptionBox(index, option, colors.secondary, colors.textSecondary).at(position);
+
+        return obj;
     })
         .filter(isNotNullish);
+
+    type ObjQuestionOptionBox = typeof optionObjs[number];
 
     const pageObj = objUiPage(
         optionObjs,
@@ -204,9 +209,8 @@ function objQuestionOptionBoxes(speaker: DisplayObject | null, options: AskOptio
 
             self.navigation = false;
             const selectedOptionObj = self.selected as ObjQuestionOptionBox;
-            const confirmedIndex = selectedOptionObj.index;
 
-            const translateX = confirmedIndex % 2 === 0 ? renderer.width : -renderer.width;
+            const translateX = selectedOptionObj.layoutIndex % 2 === 0 ? renderer.width : -renderer.width;
             yield* Coro.all(
                 optionObjs.map((optionObj) =>
                     selectedOptionObj === optionObj
@@ -218,7 +222,7 @@ function objQuestionOptionBoxes(speaker: DisplayObject | null, options: AskOptio
                 ),
             );
 
-            state.confirmedIndex = confirmedIndex;
+            state.confirmedIndex = selectedOptionObj.index;
         });
 
     const offset = vnew(64, 20);
