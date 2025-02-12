@@ -1,5 +1,7 @@
 import { LocalStorageEntry } from "../../lib/browser/local-storage-entry";
+import { Toast } from "../../lib/game-engine/toast";
 import { VectorSimple } from "../../lib/math/vector-type";
+import { deepUpgradeVerbose } from "../../lib/object/deep-upgrade-verbose";
 import { GameStartConfig } from "../launch/start-game";
 import { playerObj } from "../objects/obj-player";
 import { RpgProgress } from "../rpg/rpg-progress";
@@ -26,7 +28,25 @@ export const DevGameStartConfig = {
         if (transientGameStartConfig.value) {
             const config = transientGameStartConfig.value;
             transientGameStartConfig.clear();
-            return { sceneName: config.progress.character.position.sceneName, ...config };
+
+            const { upgradedObject: upgradedProgress, rawMessages } = deepUpgradeVerbose(config.progress, RpgProgress);
+            if (rawMessages.length) {
+                Toast.info(
+                    "Transient dev progress upgraded",
+                    `<dl>${
+                        rawMessages.map(({ path, message }) =>
+                            `<dt><pre>${path.join(".")}</pre></dt><dd>${message}</dd>`
+                        ).join("")
+                    }</dl>`,
+                    5000,
+                );
+            }
+
+            return {
+                sceneName: config.progress.character.position.sceneName,
+                progress: upgradedProgress,
+                player: config.player,
+            };
         }
 
         if (DevUrl.sceneName) {
