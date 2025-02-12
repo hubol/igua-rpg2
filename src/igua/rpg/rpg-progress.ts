@@ -7,7 +7,7 @@ import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { RpgPocket } from "./rpg-pocket";
 
-function getInitialRpgProgress() {
+export function getInitialRpgProgress() {
     return {
         character: {
             inventory: {

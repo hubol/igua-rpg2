@@ -2,10 +2,17 @@ import { LocalStorageEntry } from "../../lib/browser/local-storage-entry";
 import { Toast } from "../../lib/game-engine/toast";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { deepUpgradeVerbose } from "../../lib/object/deep-upgrade-verbose";
+import { Diff } from "../../lib/object/diff";
 import { GameStartConfig } from "../launch/start-game";
 import { playerObj } from "../objects/obj-player";
-import { RpgProgress } from "../rpg/rpg-progress";
+import { RpgProgress, getInitialRpgProgress } from "../rpg/rpg-progress";
 import { DevUrl } from "./dev-url";
+
+function formatUpdatedProgressMessage(rawMessages: Array<{ path: string[]; message: string }>) {
+    return `<dl>${
+        rawMessages.map(({ path, message }) => `<dt><pre>${path.join(".")}</pre></dt><dd>${message}</dd>`).join("")
+    }</dl>`;
+}
 
 export const DevGameStartConfig = {
     recordTransientGameStartConfig() {
@@ -17,6 +24,7 @@ export const DevGameStartConfig = {
         const playerPosition = playerObj?.position ?? null;
 
         transientGameStartConfig.value = {
+            initialProgress: getInitialRpgProgress(),
             progress: RpgProgress,
             player: { position: playerPosition ? playerPosition.vcpy() : null },
         };
@@ -29,17 +37,37 @@ export const DevGameStartConfig = {
             const config = transientGameStartConfig.value;
             transientGameStartConfig.clear();
 
-            const { upgradedObject: upgradedProgress, rawMessages } = deepUpgradeVerbose(config.progress, RpgProgress);
-            if (rawMessages.length) {
+            const { upgradedObject: upgradedProgress, rawMessages: schemaChangedMessages } = deepUpgradeVerbose(
+                config.progress,
+                RpgProgress,
+            );
+            if (schemaChangedMessages.length) {
                 Toast.info(
-                    "Transient dev progress upgraded",
-                    `<dl>${
-                        rawMessages.map(({ path, message }) =>
-                            `<dt><pre>${path.join(".")}</pre></dt><dd>${message}</dd>`
-                        ).join("")
-                    }</dl>`,
+                    "getInitialProgress() schema change",
+                    formatUpdatedProgressMessage(schemaChangedMessages),
                     5000,
                 );
+            }
+
+            const initialProgressDiff = Diff.detectUpdatedValues(config.initialProgress, getInitialRpgProgress());
+
+            if (initialProgressDiff.length) {
+                const results = Diff.apply(upgradedProgress, initialProgressDiff);
+
+                if (results.length) {
+                    Toast.info(
+                        "getInitialProgress() values updated",
+                        formatUpdatedProgressMessage(results),
+                        5000,
+                    );
+                }
+                else if (!schemaChangedMessages.length) {
+                    Toast.info(
+                        "getInitialProgress() values updated",
+                        "No changes to transient dev progress detected.",
+                        5000,
+                    );
+                }
             }
 
             return {
@@ -58,6 +86,7 @@ export const DevGameStartConfig = {
 };
 
 interface TransientGameStartConfig {
+    initialProgress: typeof RpgProgress;
     progress: typeof RpgProgress;
     player: {
         position: VectorSimple | null;
