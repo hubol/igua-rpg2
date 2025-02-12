@@ -91,9 +91,14 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
 
     const auto = {
         duckingSpeed: 0.075,
+        // TODO no enum?
         facingMode: ObjIguanaLocomotiveAutoFacingMode.CheckSpeedX,
+        set facing(value: Polar) {
+            autoFacingTarget = value;
+        },
     };
 
+    // TODO move into auto?
     function setFacingOverrideAuto(value: Polar) {
         autoFacingTarget = value;
         puppet.facing = value;

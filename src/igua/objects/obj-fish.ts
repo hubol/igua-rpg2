@@ -34,11 +34,13 @@ export function objFish(seed: Integer) {
                 collisionsCount++;
             }
         })
+        .merge({ isMoving: true })
         .step(self => {
             index += (Math.abs(self.speed.x) + Math.abs(self.speed.y)) * 0.15;
             bodyObj.texture = Math.floor(index) % 2 === 0 ? txFishBody0 : txFishBody1;
         })
         .coro(function* (self) {
+            yield () => self.isMoving;
             self.speed.at(Rng.vunit());
             while (true) {
                 const previousCollisionsCount = collisionsCount;
@@ -69,3 +71,5 @@ export function objFish(seed: Integer) {
             }
         });
 }
+
+objFish.forArmorer = () => objFish(5316007);

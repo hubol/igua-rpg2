@@ -16,7 +16,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 322,
+          "y": 107,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "FishMarker", "depth": 0}
+        }
+      ]
     },
     {
       "name": "FrontDecals",

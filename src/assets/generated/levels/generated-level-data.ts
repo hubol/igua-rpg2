@@ -267,6 +267,7 @@ export const Lvl = {
     StoneRockSmallShaded1: d(Tx.Stone.RockSmallShaded1, { x: 352, y: 234, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
     StoneRockSmallShaded1_1: d(Tx.Stone.RockSmallShaded1, { x: 375, y: 233, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
     StoneRockSmallShaded1_2: d(Tx.Stone.RockSmallShaded1, { x: 332, y: 230, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
+    FishMarker: e(r["Marker"], { x: 322, y: 107, values: { name: "FishMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
   })),
   NewBalltownFanatic: l({ width: 500, height: 280, backgroundTint: 0x478f79 }, () => ({
     TownBallBrick0: d(Tx.Town.Ball.Brick0, { x: 168, y: 88, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2e6d5a }, "BackgroundDecals"),

@@ -17,9 +17,12 @@ export function scnNewBalltownFishmonger() {
 }
 
 function enrichAquarium(lvl: LvlType.NewBalltownFishmonger) {
-    const fishObjs = [lvl.Fish0, lvl.Fish1, lvl.Fish2].map(markerObj =>
-        objFish(markerObj.x * 9999 + markerObj.y * 8888 + 800_903).at(markerObj).show()
-    );
+    const fishObjs = [
+        objFish.forArmorer().at(lvl.Fish0).show(),
+        ...[lvl.Fish1, lvl.Fish2].map(markerObj =>
+            objFish(markerObj.x * 9999 + markerObj.y * 8888 + 800_903).at(markerObj).show()
+        ),
+    ];
 
     lvl.WaterLineTop.mixin(mxnBoilPivot);
     return {
@@ -54,6 +57,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
             const fishRecipient = yield* ask(
                 "You want a fish delivered? That's great! Who wants a fish?",
                 RpgProgress.flags.newBalltown.armorer.toldPlayerAboutDesireForFish
+                    && RpgProgress.flags.newBalltown.fishmonger.deliveries.armorer === null
                     ? NpcPersonas.NewBalltownArmorer.name
                     : null,
                 "I don't know",
