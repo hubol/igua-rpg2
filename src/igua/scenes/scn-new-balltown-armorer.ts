@@ -51,12 +51,14 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
         yield sleep(250);
         lvl.IguanaNpc.auto.facing = -1;
         yield sleep(250);
+
+        Cutscene.setCurrentSpeaker(lvl.IguanaNpc);
         yield* show(
             "Oh how delightful! What a surprise!",
             "I would have never guessed in a million years that I would have my very own fishy!",
         );
-        // TODO should be more idiomatic way to set this!
-        Cutscene.current!.attributes.speaker = lvl.Fishmonger;
+
+        Cutscene.setCurrentSpeaker(lvl.Fishmonger);
         lvl.Fishmonger.isDucking = true;
         yield sleep(500);
         yield* show("Okay... I'm going to begin the installation");
@@ -77,12 +79,12 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
 
         yield sleep(1000);
 
-        Cutscene.current!.attributes.speaker = lvl.IguanaNpc;
+        Cutscene.setCurrentSpeaker(lvl.IguanaNpc);
         yield* show("Well...? How'd it go?");
 
         yield* lvl.Fishmonger.walkTo(lvl.Door.x);
 
-        Cutscene.current!.attributes.speaker = lvl.Fishmonger;
+        Cutscene.setCurrentSpeaker(lvl.Fishmonger);
         yield* show("Without a hitch!", "Congratulations on your new fishy!");
 
         Sfx.Interact.DoorOpen0.play();
@@ -94,13 +96,13 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
 
         lvl.IguanaNpc.auto.facing = -1;
 
-        Cutscene.current!.attributes.speaker = lvl.IguanaNpc;
+        Cutscene.setCurrentSpeaker(lvl.IguanaNpc);
         yield* show("Happy...! Happy...! Happy...!", "Thank you so much for arranging the delivery of the fish.");
         yield* rewardValuables(160, lvl.IguanaNpc);
         yield* show("You are cool.");
 
         deliveries.armorer = "delivered";
-    }, { speaker: lvl.IguanaNpc });
+    });
 }
 
 function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {

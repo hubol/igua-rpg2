@@ -92,4 +92,10 @@ export class IguaCutscene {
     get current(): { attributes: CutsceneAttributes } | null {
         return this._container.children.last ?? null;
     }
+
+    setCurrentSpeaker(speakerObj: DisplayObject) {
+        if (this.current) {
+            this.current.attributes.speaker = speakerObj;
+        }
+    }
 }
