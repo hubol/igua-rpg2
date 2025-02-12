@@ -9,7 +9,9 @@ export function deepUpgradeVerbose<TPojo extends Pojo>(
 
     deepUpgradeVerboseImpl([], previousVersionObject, nextVersionObject, upgradedObject, auditLog);
 
-    return { upgradedObject, messages: auditLog.messages };
+    // Slightly strange API
+    // but no one cares
+    return { upgradedObject, messages: auditLog.messages, rawMessages: auditLog.rawMessages };
 }
 
 type InferredType = { type: "object"; keys: string[] } | { type: "array" } | { type: "set" } | {
@@ -34,7 +36,10 @@ function inferType(value: any): InferredType {
 }
 
 function deepUpgradeVerboseImpl(path: PropertyPath, previous: any, next: any, upgraded: any, auditLog: AuditLog) {
-    if (!previous) {
+    const previousType = inferType(previous);
+    const nextType = inferType(next);
+
+    if (!previous && nextType.type !== previousType.type) {
         if (!path.length) {
             throw new Error("falsy previousVersionObject is not supported. Must at least be an empty Pojo!");
         }
@@ -43,9 +48,6 @@ function deepUpgradeVerboseImpl(path: PropertyPath, previous: any, next: any, up
         upgraded[path.last] = next;
         return;
     }
-
-    const previousType = inferType(previous);
-    const nextType = inferType(next);
 
     if (previousType.type !== nextType.type) {
         auditLog.push(
@@ -82,9 +84,17 @@ function deepUpgradeVerboseImpl(path: PropertyPath, previous: any, next: any, up
 type PropertyPath = string[];
 
 class AuditLog {
-    readonly messages: string[] = [];
+    private readonly _messages: Array<{ path: PropertyPath; message: string }> = [];
+
+    get messages() {
+        return this._messages.map(({ path, message }) => `${path.join(".")}: ${message}`);
+    }
+
+    get rawMessages() {
+        return this._messages;
+    }
 
     push(path: PropertyPath, message: string) {
-        this.messages.push(`${path.join(".")}: ${message}`);
+        this._messages.push({ path, message });
     }
 }
