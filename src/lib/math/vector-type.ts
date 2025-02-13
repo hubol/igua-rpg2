@@ -22,10 +22,6 @@ export function vnew(x_vector?: number | VectorSimple, y?: number) {
         : new Vector(x_vector as number, y!);
 }
 
-export function vequals(vector0: VectorSimple, vector1: VectorSimple) {
-    return vector0.x === vector1.x && vector0.y === vector1.y;
-}
-
 export interface Vector extends VectorSimple {
     vcpy(): Vector;
     vround(): this;

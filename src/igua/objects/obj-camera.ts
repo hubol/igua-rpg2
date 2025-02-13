@@ -1,5 +1,6 @@
 import { DisplayObject } from "pixi.js";
-import { Vector, vequals, vnew } from "../../lib/math/vector-type";
+import { Vector, vnew } from "../../lib/math/vector-type";
+import { vequals } from "../../lib/math/vector";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { scene } from "../globals";

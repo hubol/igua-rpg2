@@ -59,3 +59,7 @@ export function moveTowards(a: Vector, b: VectorSimple, d: number) {
 export function vdir(v: VectorSimple) {
     return Math.atan2(-v.y, v.x);
 }
+
+export function vequals(vector0: VectorSimple, vector1: VectorSimple) {
+    return vector0.x === vector1.x && vector0.y === vector1.y;
+}
