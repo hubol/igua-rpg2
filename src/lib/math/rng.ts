@@ -44,6 +44,7 @@ class RngBase {
         return this.random() > 0.5;
     }
 
+    // TODO just accept an array I think
     choose<T>(...items: T[]): T {
         return items[Math.floor(items.length * this.random())];
     }
