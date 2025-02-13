@@ -5,6 +5,7 @@ import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { Null } from "../../lib/types/null";
 import { scene } from "../globals";
+import { sleepf } from "../../lib/game-engine/routines/sleep";
 
 type CutsceneFn = () => Coro.Type;
 
@@ -14,10 +15,20 @@ function getDefaultCutsceneAttributes() {
         letterbox: true,
         npcNamesSpoken: new Set<NpcPersonaInternalName>(),
         requiredScene: Null(scene),
+        camera: {
+            start: "none" as "none" | "pan-to-speaker",
+            end: "delay-if-camera-moved-set-mode-follow-player" as
+                | "none"
+                | "delay-if-camera-moved-set-mode-follow-player"
+                | "pan-to-player",
+        },
     };
 }
 
 type CutsceneAttributes = ReturnType<typeof getDefaultCutsceneAttributes>;
+type ConfiguredCutsceneAttributes = Partial<
+    Omit<CutsceneAttributes, "camera"> & { camera: Partial<CutsceneAttributes["camera"]> }
+>;
 
 export class IguaCutscene {
     private readonly _container: ReturnType<typeof IguaCutscene._objCutsceneContainer>;
@@ -45,11 +56,24 @@ export class IguaCutscene {
 
     private _enqueuedCutsceneRunnerObjs: DisplayObject[] = [];
 
-    play(fn: CutsceneFn, attributes?: Partial<CutsceneAttributes>) {
+    play(fn: CutsceneFn, attributes?: ConfiguredCutsceneAttributes) {
         const dequeueCutscene = () => this._enqueuedCutsceneRunnerObjs.shift()?.show(this._container);
 
+        // TODO deep merge
+        const { camera: defaultCameraAttributes, ...defaultAttributes } = getDefaultCutsceneAttributes();
+        const { camera: configuredCameraAttributes, ...configuredAttributes } = attributes ?? {};
+
+        const mergedAttributes = {
+            ...defaultAttributes,
+            ...configuredAttributes,
+            camera: {
+                ...defaultCameraAttributes,
+                ...configuredCameraAttributes,
+            },
+        };
+
         const cutsceneRunnerObj = new Container().named("Cutscene Runner")
-            .merge({ fn, attributes: { ...getDefaultCutsceneAttributes(), ...attributes } })
+            .merge({ fn, attributes: mergedAttributes })
             .coro(function* (self) {
                 // TODO This will not be sufficient if the sceneStack has length > 1. Need to rework for that case!
                 if (self.attributes.requiredScene !== null && scene !== self.attributes.requiredScene) {
@@ -58,7 +82,24 @@ export class IguaCutscene {
                 }
 
                 try {
+                    if (self.attributes.camera.start === "pan-to-speaker" && self.attributes.speaker) {
+                        yield scene.camera.auto.panToSubject(self.attributes.speaker);
+                    }
                     yield* fn();
+                    if (
+                        self.attributes.camera.end === "delay-if-camera-moved-set-mode-follow-player"
+                        && !scene.camera.auto.isFramingPlayer
+                        && scene === self.attributes.requiredScene
+                    ) {
+                        yield sleepf(22);
+                    }
+                    // TODO unused so far
+                    if (self.attributes.camera.end === "pan-to-player") {
+                        yield scene.camera.auto.panToPlayer();
+                    }
+                    if (self.attributes.camera.end !== "none") {
+                        scene.camera.mode = "follow-player";
+                    }
                 }
                 catch (e) {
                     if (e instanceof EscapeTickerAndExecute) {

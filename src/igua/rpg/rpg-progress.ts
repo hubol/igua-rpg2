@@ -51,7 +51,7 @@ export function getInitialRpgProgress() {
                     aquarium: {
                         moistureUnits: 0,
                     },
-                    toldPlayerAboutDesireForFish: false,
+                    toldPlayerAboutDesireForFish: true,
                 },
                 ballFruitFanatic: {
                     typePreference: Null<RpgPocket.Item>(),
@@ -59,7 +59,7 @@ export function getInitialRpgProgress() {
                 },
                 fishmonger: {
                     deliveries: {
-                        armorer: Null<"ready" | "arrived" | "delivered">(),
+                        armorer: Null<"ready" | "arrived" | "delivered">("ready"),
                     },
                 },
             },

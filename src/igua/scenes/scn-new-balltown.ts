@@ -354,7 +354,7 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
                 deliveries.armorer = "arrived";
                 Sfx.Interact.DoorOpen0.play();
                 self.destroy();
-            }, { speaker: lvl.Fishmonger });
+            }, { speaker: lvl.Fishmonger, camera: { start: "pan-to-speaker" } });
         }).show();
 
         lvl.Fishmonger.coro(function* (self) {
@@ -365,7 +365,7 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
             Cutscene.play(function* () {
                 yield* show("I blowed up...");
                 // TODO more
-            }, { speaker: lvl.Fishmonger });
+            }, { speaker: lvl.Fishmonger, camera: { start: "pan-to-speaker" } });
         });
     }, { speaker: lvl.Fishmonger });
 }
