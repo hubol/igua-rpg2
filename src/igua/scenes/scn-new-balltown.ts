@@ -438,6 +438,9 @@ function objFishmongerBomb(name: string) {
                 yield* show("Already defused.");
                 return;
             }
-            yield* hookedObj.onAttemptToDefuse(hookedObj);
+            yield* Coro.race([
+                hookedObj.onAttemptToDefuse(hookedObj),
+                () => hookedObj.destroyed,
+            ]);
         });
 }

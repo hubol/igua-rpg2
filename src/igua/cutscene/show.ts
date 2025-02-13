@@ -51,8 +51,9 @@ function objSpeakerMessageBox(speaker: DisplayObject | null) {
 
     return container().merge({ state }).coro(
         function* (self) {
+            const rootObj = container().at(Math.round((renderer.width - txSpeakBox.width) / 2), -24).show(self);
             const spr = Sprite.from(txSpeakBoxOutline).tinted(colors.primary).show(
-                container().mixin(mxnBoilPivot).show(self),
+                container().mixin(mxnBoilPivot).show(rootObj),
             );
             yield sleepf(4);
             spr.texture = txSpeakBox;
@@ -63,7 +64,7 @@ function objSpeakerMessageBox(speaker: DisplayObject | null) {
                     mxnBoilPivot,
                 ),
                 nameTextObj,
-            ).at(37, 26).show(self);
+            ).at(37, 26).show(rootObj);
 
             yield sleepf(4);
             state.isReadyToReceiveText = true;
@@ -73,7 +74,7 @@ function objSpeakerMessageBox(speaker: DisplayObject | null) {
             }).step(textObj => textObj.text = state.text).at(
                 28,
                 41,
-            ).show(self);
+            ).show(rootObj);
 
             yield holdf(() => state.mayBeDestroyed, 2);
             textObj.destroy();
@@ -84,7 +85,6 @@ function objSpeakerMessageBox(speaker: DisplayObject | null) {
             self.destroy();
         },
     )
-        .at(Math.round((renderer.width - txSpeakBox.width) / 2), -24)
         .show(layers.overlay.messages);
 }
 
@@ -142,6 +142,15 @@ function* startSpeaking(text: string) {
 export function* show(text: string, ...moreText: string[]) {
     for (const messageText of [text, ...moreText]) {
         yield* showOneMessage(messageText);
+    }
+}
+
+/** Clear any messages on the screen.
+ * Note: `show` and `ask` Coros may not complete. Use `clear` only when you know this is safe.
+ */
+export function clear() {
+    if (speakerMessageBoxObj) {
+        speakerMessageBoxObj.state.mayBeDestroyed = true;
     }
 }
 
@@ -240,7 +249,7 @@ function objQuestionOptionBoxes(speaker: DisplayObject | null, options: AskOptio
                     self.moveTowards(v.at(offset).add(pageObj.selected), 8);
                 },
             ),
-    ).at(117, 66).merge({ state }).show(layers.overlay.messages);
+    ).at(117, 66).merge({ state });
 }
 
 type AskOptions = Array<string | null>;
@@ -263,7 +272,7 @@ export function* ask(question: string, ...options: AskOptions): Coro.Type<any> {
 
     yield () => Input.isUp("Confirm");
 
-    const optionsObj = objQuestionOptionBoxes(currentSpeaker, options);
+    const optionsObj = objQuestionOptionBoxes(currentSpeaker, options).show(currentSpeakerMessageBoxObj);
     yield () => optionsObj.state.confirmedIndex >= 0;
 
     optionsObj.destroy();

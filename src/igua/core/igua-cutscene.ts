@@ -6,6 +6,7 @@ import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { Null } from "../../lib/types/null";
 import { scene } from "../globals";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { clear } from "../cutscene/show";
 
 type CutsceneFn = () => Coro.Type;
 
@@ -86,6 +87,7 @@ export class IguaCutscene {
                         yield scene.camera.auto.panToSubject(self.attributes.speaker);
                     }
                     yield* fn();
+                    clear();
                     if (
                         self.attributes.camera.end === "delay-if-camera-moved-set-mode-follow-player"
                         && !scene.camera.auto.isFramingPlayer
