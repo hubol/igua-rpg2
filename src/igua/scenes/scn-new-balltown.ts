@@ -25,6 +25,8 @@ import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { ZIndex } from "../core/scene/z-index";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { Force } from "../../lib/types/force";
+import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
+import { ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);
@@ -358,10 +360,21 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
         }).show();
 
         lvl.Fishmonger.coro(function* (self) {
-            yield () => Boolean(self.collidesOne(Instances(objFishmongerBomb, bombObj => !bombObj.isDefused)));
+            yield () => {
+                const fishmongerBombObj = self.collidesOne(Instances(objFishmongerBomb, bombObj => !bombObj.isDefused));
+                if (fishmongerBombObj) {
+                    fishmongerBombObj.dispatch("objFishmongerBomb.explode");
+                    return true;
+                }
+
+                return false;
+            };
             fishmongerRouteObj.destroy();
+            lvl.Fishmonger.auto.facingMode = ObjIguanaLocomotiveAutoFacingMode.CheckMoving;
+            lvl.Fishmonger.speed.x = -3;
             lvl.Fishmonger.isBeingPiloted = false;
             lvl.Fishmonger.isMovingRight = false;
+            yield sleep(1000);
             Cutscene.play(function* () {
                 yield* show("I blowed up...");
                 // TODO more
@@ -403,6 +416,11 @@ function objFishmongerBomb(name: string) {
     const obj = objIndexedSprite(txsFishmongerBomb)
         .merge({ isDefused: false })
         .anchored(0.5, 0.9)
+        .dispatches<"objFishmongerBomb.explode">()
+        .handles("objFishmongerBomb.explode", self => {
+            objFxFieryBurst170px().at([0, -16].add(self)).show();
+            self.destroy();
+        })
         .step(self => {
             self.textures = self.isDefused ? txsFishmongerBombDefused : txsFishmongerBomb;
             self.textureIndex = (self.textureIndex + 0.1) % 2;
