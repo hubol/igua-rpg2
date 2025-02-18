@@ -11,7 +11,6 @@ import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { RpgPlayer } from "../../rpg/rpg-player";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
-import { mxnSpatialAudio } from "../../mixins/mxn-spatial-audio";
 import { Sfx } from "../../../assets/sounds";
 
 const clownTxs = Tx.Enemy.CommonClown.split({ count: 2 });
@@ -62,7 +61,6 @@ export function objAngelBouncing() {
             physicsFaction: PhysicsFaction.Enemy,
             physicsOffset: vnew(),
         })
-        .mixin(mxnSpatialAudio)
         .handles("moved", (obj, event) => {
             if (event.hitWall) {
                 obj.speed.x = -event.previousSpeed.x; // TODO might be nice to get the normal

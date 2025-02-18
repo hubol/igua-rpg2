@@ -18,7 +18,6 @@ import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgStatus } from "../../rpg/rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { playerObj } from "../obj-player";
-import { mxnSpatialAudio } from "../../mixins/mxn-spatial-audio";
 import { Sfx } from "../../../assets/sounds";
 
 const themes = {
@@ -286,8 +285,7 @@ export function objAngelSuggestive() {
         actualHeadObj,
         healthbarAnchorObj,
     )
-        .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0], healthbarAnchorObj })
-        .mixin(mxnSpatialAudio);
+        .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0], healthbarAnchorObj });
 
     return enemyObj;
 }

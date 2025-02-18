@@ -2,7 +2,6 @@ import { Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { CollisionShape } from "../../../lib/pixi/collision";
-import { mxnSpatialAudio } from "../../mixins/mxn-spatial-audio";
 import { Sfx } from "../../../assets/sounds";
 import { Rng } from "../../../lib/math/rng";
 import { objFxBurst32 } from "../effects/obj-fx-burst-32";
@@ -14,7 +13,6 @@ export function objSpikedCanonball() {
         .collisionShape(CollisionShape.Scaled, 0.8)
         .anchored(0.5, 0.5)
         .mixin(mxnPhysics, { gravity: 0.3, physicsRadius: 8 })
-        .mixin(mxnSpatialAudio)
         .coro(function* (self) {
             yield () => self.speed.y < 0;
             yield () => self.speed.y > 0;

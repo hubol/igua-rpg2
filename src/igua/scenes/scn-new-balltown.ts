@@ -29,7 +29,6 @@ import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170p
 import { IguanaLocomotiveConsts, ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
 import { stageDirection } from "../cutscene/stage-direction";
 import { isOnScreen } from "../../lib/game-engine/logic/is-on-screen";
-import { mxnSpatialAudio } from "../mixins/mxn-spatial-audio";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);
@@ -442,10 +441,7 @@ const txsFishmongerBombDefused = Tx.Town.Ball.FishmongerBombDefused.split({ coun
 function objFishmongerBomb(name: string) {
     let isDefused = false;
 
-    const sprite = objIndexedSprite(txsFishmongerBomb)
-        .mixin(mxnSpatialAudio);
-
-    const obj = sprite
+    const obj = objIndexedSprite(txsFishmongerBomb)
         .merge({
             get isDefused() {
                 return isDefused;
@@ -456,7 +452,7 @@ function objFishmongerBomb(name: string) {
                 }
 
                 isDefused = value;
-                sprite.play(
+                obj.play(
                     (value ? Sfx.Interact.BombDefuse : Sfx.Interact.BombArmed).rate(0.95, 1.05),
                 );
             },

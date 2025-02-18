@@ -10,7 +10,6 @@ import { holdf } from "../../lib/game-engine/routines/hold";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { scene } from "../globals";
 import { objPocketCollectNotification } from "./pocket/obj-pocket-collect-notification";
-import { mxnSpatialAudio } from "../mixins/mxn-spatial-audio";
 import { Sfx } from "../../assets/sounds";
 
 export function objPocketableItem(item: RpgPocket.Item) {
@@ -28,7 +27,6 @@ export function objPocketableItem(item: RpgPocket.Item) {
             physicsOffset: [0, 1],
             physicsFaction: PhysicsFaction.Environment,
         })
-            .mixin(mxnSpatialAudio)
             .step(self => {
                 virtualAngle += self.speed.x * 2;
                 self.angle = Math.round(virtualAngle / 45) * 45;

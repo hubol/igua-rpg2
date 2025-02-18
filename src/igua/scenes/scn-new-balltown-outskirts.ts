@@ -12,7 +12,6 @@ import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
-import { mxnSpatialAudio } from "../mixins/mxn-spatial-audio";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
 import { objPocketableItemSpawner } from "../objects/obj-pocketable-item-spawner";
 import { objValuableSpawner } from "../objects/obj-valuable-spawner";
@@ -79,7 +78,6 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
     lvl.MinerPicaxeBurst.invisible();
     const minerPicaxeObj = lvl.MinerPicaxe
         .merge({ isAtRest: false })
-        .mixin(mxnSpatialAudio)
         .coro(function* (self) {
             const initialAngle = self.angle;
 

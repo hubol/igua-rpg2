@@ -13,7 +13,6 @@ import { Instances } from "../../../lib/game-engine/instances";
 import { MxnPhysics, mxnPhysics } from "../../mixins/mxn-physics";
 import { Sfx } from "../../../assets/sounds";
 import { scene } from "../../globals";
-import { mxnSpatialAudio } from "../../mixins/mxn-spatial-audio";
 
 export function objPuddle(width: number, tint = 0x68A8D0) {
     const attack = RpgAttack.create({
@@ -118,7 +117,6 @@ const txsSideSplash = Tx.Effects.SplashSmall.split({ count: 4 });
 
 function objUpwardSplash() {
     return objEphemeralSprite(txsUpwardSplash, Rng.float(0.15, 0.25))
-        .mixin(mxnSpatialAudio)
         .anchored(0.5, 1)
         .coro(function* (self) {
             self.play(Sfx.Fluid.SplashSmall.rate(0.95, 1.05));

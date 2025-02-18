@@ -8,6 +8,7 @@ import "./pixi-displayobject-coro";
 import "./pixi-displayobject-convenience";
 import "./pixi-displayobject-dispatch";
 import "./pixi-displayobject-mixin";
+import "./pixi-displayobject-sound";
 import "./pixi-displayobject-ticker";
 import "./pixi-displayobject-track";
 import "./pixi-rectangle";
