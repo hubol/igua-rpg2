@@ -7,6 +7,7 @@ import { show } from "../cutscene/show";
 import { Sfx } from "../../assets/sounds";
 import { Rng } from "../../lib/math/rng";
 import { SceneChanger } from "../systems/scene-changer";
+import { stageDirection } from "../cutscene/stage-direction";
 
 interface ObjDoorArgs {
     sceneName: string;
@@ -35,7 +36,7 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
             }
             if (sceneChanger) {
                 throw new EscapeTickerAndExecute(() => {
-                    Rng.choose(Sfx.Interact.DoorOpen0, Sfx.Interact.DoorOpen1).play();
+                    stageDirection.departRoomViaDoor(null);
                     sceneChanger.changeScene();
                 });
             }

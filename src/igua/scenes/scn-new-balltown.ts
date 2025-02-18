@@ -27,6 +27,7 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { Force } from "../../lib/types/force";
 import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
 import { ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
+import { stageDirection } from "../cutscene/stage-direction";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);
@@ -354,8 +355,7 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
             Cutscene.play(function* () {
                 yield* show("I made it!", "See you inside");
                 deliveries.armorer = "arrived";
-                Sfx.Interact.DoorOpen0.play();
-                self.destroy();
+                stageDirection.departRoomViaDoor(self);
             }, { speaker: lvl.Fishmonger, camera: { start: "pan-to-speaker" } });
         }).show();
 

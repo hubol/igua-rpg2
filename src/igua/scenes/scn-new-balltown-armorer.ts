@@ -17,6 +17,7 @@ import { Cutscene } from "../globals";
 import { objFish } from "../objects/obj-fish";
 import { ZIndex } from "../core/scene/z-index";
 import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
+import { stageDirection } from "../cutscene/stage-direction";
 
 export function scnNewBalltownArmorer() {
     Jukebox.play(Mzk.GolfResort);
@@ -87,9 +88,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
         Cutscene.setCurrentSpeaker(lvl.Fishmonger);
         yield* show("Without a hitch!", "Congratulations on your new fishy!");
 
-        Sfx.Interact.DoorOpen0.play();
-
-        lvl.Fishmonger.destroy();
+        stageDirection.departRoomViaDoor(lvl.Fishmonger);
 
         lvl.IguanaNpc.speed.y = -6;
         yield* lvl.IguanaNpc.walkTo(lvl.FishMarker.x + 30);
