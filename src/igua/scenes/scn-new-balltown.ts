@@ -26,8 +26,9 @@ import { ZIndex } from "../core/scene/z-index";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { Force } from "../../lib/types/force";
 import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
-import { ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
+import { IguanaLocomotiveConsts, ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
 import { stageDirection } from "../cutscene/stage-direction";
+import { isOnScreen } from "../../lib/game-engine/logic/is-on-screen";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);
@@ -377,7 +378,32 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
             yield sleep(1000);
             Cutscene.play(function* () {
                 yield* show("I blowed up...");
-                // TODO more
+                lvl.Fishmonger.auto.facing = -1;
+                yield sleep(333);
+                lvl.Fishmonger.walkingTopSpeed = IguanaLocomotiveConsts.WalkingTopSpeed;
+                yield* Coro.race([
+                    () => !isOnScreen(lvl.Fishmonger),
+                    lvl.Fishmonger.walkTo(lvl.FishmongerRiseMarker.x),
+                ]);
+                if (!isOnScreen(lvl.Fishmonger)) {
+                    lvl.Fishmonger.destroy();
+                }
+                else {
+                    yield sleep(500);
+                    lvl.Fishmonger.physicsEnabled = false;
+                    lvl.Fishmonger.speed.at(0, 0);
+                    const flickerObj = container().step(() => lvl.Fishmonger.visible = !lvl.Fishmonger.visible).show(
+                        lvl.Fishmonger,
+                    );
+                    // TODO rise sfx
+                    yield interpvr(lvl.Fishmonger).to(lvl.FishmongerRiseMarker).over(2000);
+                    flickerObj.destroy();
+                    lvl.Fishmonger.visible = true;
+                    yield sleep(1000);
+                    stageDirection.departRoomViaDoor(lvl.Fishmonger);
+                }
+
+                deliveries.armorer = null;
             }, { speaker: lvl.Fishmonger, camera: { start: "pan-to-speaker" } });
         });
     }, { speaker: lvl.Fishmonger });

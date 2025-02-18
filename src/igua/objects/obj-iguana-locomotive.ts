@@ -6,7 +6,7 @@ import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { PhysicsFaction, mxnPhysics } from "../mixins/mxn-physics";
 import { mxnShadowFloor } from "../mixins/mxn-shadow-floor";
 
-const IguanaLocomotiveConsts = {
+export const IguanaLocomotiveConsts = {
     WalkingAcceleration: 0.3,
     WalkingDeceleration: 0.2,
     WalkingTopSpeed: 2.5,

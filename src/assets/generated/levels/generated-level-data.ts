@@ -1502,7 +1502,7 @@ export const Lvl = {
     Sign: e(r["Sign"], { x: 1423, y: 448, values: { title: "Town", message: "Welcome to New Balltown.", name: "", depth: 0, isSpecial: false } }, "Entities"),
     Door: e(r["Door"], { x: 1456, y: 216, values: { sceneName: "scnNewBalltownFanatic", checkpointName: "", name: "", depth: 0 } }, "Entities"),
     ArmorerDoor: e(r["Door"], { x: 1280, y: 280, values: { sceneName: "scnNewBalltownArmorer", checkpointName: "", name: "ArmorerDoor", depth: 0 } }, "Entities"),
-    Door_1: e(r["Door"], { x: 280, y: 280, values: { sceneName: "scnNewBalltownFishmonger", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+    FishmongerDoor: e(r["Door"], { x: 280, y: 280, values: { sceneName: "scnNewBalltownFishmonger", checkpointName: "", name: "FishmongerDoor", depth: 0 } }, "Entities"),
     Sign_1: e(r["Sign"], { x: 968, y: 384, values: { title: "Casino", message: "Must be 21+ to enter the gambling floor", name: "", depth: 0, isSpecial: false } }, "Entities"),
     Sign_2: e(r["Sign"], { x: 624, y: 384, values: { title: "Casino", message: "Must be 21+ to enter the gambling floor\n\nThis sign is special.", name: "", depth: 0, isSpecial: true } }, "Entities"),
     Sign_3: e(r["Sign"], { x: 192, y: 488, values: { title: "Mines", message: "Famous New Balltown mines ahead.", name: "", depth: 0, isSpecial: false } }, "Entities"),
@@ -1586,6 +1586,7 @@ export const Lvl = {
     FishmongerBomb3: e(r["Marker"], { x: 1128, y: 416, values: { name: "FishmongerBomb3", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
     FishmongerStopAndJump: e(r["Marker"], { x: 1184, y: 416, values: { name: "FishmongerStopAndJump", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     Marker_12: e(r["Marker"], { x: 464, y: 368, values: { name: "", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+    FishmongerRiseMarker: e(r["Marker"], { x: 296, y: 328, values: { name: "FishmongerRiseMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
   })),
 };
 

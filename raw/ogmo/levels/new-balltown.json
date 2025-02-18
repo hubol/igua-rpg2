@@ -238,6 +238,17 @@
           "originY": 8,
           "tint": "#ff0000",
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 20,
+          "_eid": "73148747",
+          "x": 296,
+          "y": 328,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "FishmongerRiseMarker", "depth": 0}
         }
       ]
     },
@@ -1112,7 +1123,7 @@
           "y": 280,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "scnNewBalltownFishmonger", "checkpointName": "", "name": "", "depth": 0}
+          "values": {"sceneName": "scnNewBalltownFishmonger", "checkpointName": "", "name": "FishmongerDoor", "depth": 0}
         },
         {
           "name": "Sign",
