@@ -57,6 +57,7 @@ export function mxnPhysics(
             speed: vnew(),
             gravity,
             isOnGround: false,
+            physicsEnabled: true,
             physicsRadius,
             physicsFaction,
             physicsOffset,
@@ -64,6 +65,16 @@ export function mxnPhysics(
         })
         .dispatchesValue<"moved", MoveEvent>()
         .step(obj => {
+            if (!obj.physicsEnabled) {
+                // TODO copy-pastey feels bad
+                setPositionDecimalOnTransformChanged = false;
+                obj.at(positionDecimal).add(obj.speed);
+                positionDecimal.at(obj.x, obj.y);
+                obj.x = Math.round(obj.x);
+                obj.y = Math.round(obj.y);
+                setPositionDecimalOnTransformChanged = true;
+                return;
+            }
             // TODO
             // Is this even necessary? If so, why?! Why doesn't rounding when rendering work?!
             setPositionDecimalOnTransformChanged = false;
