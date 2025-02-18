@@ -269,7 +269,7 @@ export function objAngelSuggestive() {
                 bodyObj.bulge.unit = 0;
                 yield interp(bodyObj.bulge, "unit").to(1).over(1000);
                 yield sleep(500);
-                enemyObj.play(Sfx.Enemy.Suggestive.Flick.rate(Rng.float(0.9, 1.1)));
+                enemyObj.play(Sfx.Enemy.Suggestive.Flick.rate(0.9, 1.1));
                 const canonballObj = objAngelSuggestiveSpikedCanonball(enemyObj.status).at(enemyObj).show();
                 // TODO I think there should be some kind of "player sight" mixin
                 // That could provide this info to enemies!

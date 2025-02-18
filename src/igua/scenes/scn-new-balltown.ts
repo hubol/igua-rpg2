@@ -178,7 +178,7 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
             lvl.DiceBlock.angle = 0;
             const tuneObj = container().coro(function* () {
                 while (true) {
-                    Sfx.Interact.SignRead.gain(0.3).rate(Rng.float(1.2, 1.8)).play();
+                    Sfx.Interact.SignRead.gain(0.3).rate(1.2, 1.8).play();
                     yield sleepf(8);
                 }
             }).show();
@@ -186,14 +186,14 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
             tuneObj.destroy();
             yield sleep(250);
             yield interpvr(lvl.DiceBlock).translate(0, 50).over(150);
-            Sfx.Impact.PocketableItemBounceHard.rate(Rng.float(0.9, 1.1)).play();
+            Sfx.Impact.PocketableItemBounceHard.rate(0.9, 1.1).play();
             yield interpvr(lvl.DiceBlock).translate(0, -25).over(200);
             yield interpvr(lvl.DiceBlock).steps(5).translate(0, 25).over(200);
-            Sfx.Impact.PocketableItemBounceMedium.rate(Rng.float(0.9, 1.1)).play();
+            Sfx.Impact.PocketableItemBounceMedium.rate(0.9, 1.1).play();
             yield interpvr(lvl.DiceBlock).steps(4).translate(0, -10).over(200);
             yield sleep(50);
             yield interpvr(lvl.DiceBlock).steps(3).translate(0, 10).over(200);
-            Sfx.Impact.PocketableItemBounceSoft.rate(Rng.float(0.9, 1.1)).play();
+            Sfx.Impact.PocketableItemBounceSoft.rate(0.9, 1.1).play();
 
             yield sleep(250);
 
@@ -457,14 +457,14 @@ function objFishmongerBomb(name: string) {
 
                 isDefused = value;
                 sprite.play(
-                    (value ? Sfx.Interact.BombDefuse : Sfx.Interact.BombArmed).rate(Rng.float(0.95, 1.05)),
+                    (value ? Sfx.Interact.BombDefuse : Sfx.Interact.BombArmed).rate(0.95, 1.05),
                 );
             },
         })
         .anchored(0.5, 0.9)
         .dispatches<"objFishmongerBomb.explode">()
         .handles("objFishmongerBomb.explode", self => {
-            self.play(Sfx.Interact.BombExplode.rate(Rng.float(0.95, 1.05)));
+            self.play(Sfx.Interact.BombExplode.rate(0.95, 1.05));
             objFxFieryBurst170px().at([0, -16].add(self)).show();
             self.destroy();
         })
@@ -473,7 +473,7 @@ function objFishmongerBomb(name: string) {
             self.textureIndex = (self.textureIndex + 0.1) % 2;
         })
         .coro(function* (self) {
-            self.play(Sfx.Impact.SpikedCanonballLand.rate(Rng.float(0.95, 1.06)));
+            self.play(Sfx.Impact.SpikedCanonballLand.rate(0.95, 1.06));
         })
         .mixin(mxnNudgeAppear)
         .mixin(mxnSpeaker, { colorPrimary: 0xCE3D21, colorSecondary: 0x000000, name })

@@ -1,4 +1,5 @@
 import { Polar, Seconds, Unit } from "../../math/number-alias-types";
+import { Rng } from "../../math/rng";
 import { StereoGainNode, StereoGainNodePool } from "./stereo-gain-node-pool";
 
 export class Sound {
@@ -29,10 +30,11 @@ export class Sound {
         return this;
     }
 
-    // TODO support Rng!
-    rate(value: number) {
+    rate(min: number, max: number): Sound;
+    rate(value: number): Sound;
+    rate(min_value: number, max?: number) {
         this._maybeResetParams();
-        this._params.rate = value;
+        this._params.rate = typeof max === "number" ? Rng.float(min_value, max) : min_value;
         return this;
     }
 

@@ -121,7 +121,7 @@ function objUpwardSplash() {
         .mixin(mxnSpatialAudio)
         .anchored(0.5, 1)
         .coro(function* (self) {
-            self.play(Sfx.Fluid.SplashSmall.rate(Rng.float(0.95, 1.05)));
+            self.play(Sfx.Fluid.SplashSmall.rate(0.95, 1.05));
         });
 }
 
