@@ -29,6 +29,7 @@ import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170p
 import { IguanaLocomotiveConsts, ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
 import { stageDirection } from "../cutscene/stage-direction";
 import { isOnScreen } from "../../lib/game-engine/logic/is-on-screen";
+import { mxnSpatialAudio } from "../mixins/mxn-spatial-audio";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);
@@ -395,11 +396,11 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
                     const flickerObj = container().step(() => lvl.Fishmonger.visible = !lvl.Fishmonger.visible).show(
                         lvl.Fishmonger,
                     );
-                    // TODO rise sfx
+                    lvl.Fishmonger.play(Sfx.Iguana.Rise);
                     yield interpvr(lvl.Fishmonger).to(lvl.FishmongerRiseMarker).over(2000);
                     flickerObj.destroy();
                     lvl.Fishmonger.visible = true;
-                    yield sleep(1000);
+                    yield sleep(500);
                     stageDirection.departRoomViaDoor(lvl.Fishmonger);
                 }
 
@@ -439,17 +440,40 @@ const txsFishmongerBomb = Tx.Town.Ball.FishmongerBomb.split({ count: 2 });
 const txsFishmongerBombDefused = Tx.Town.Ball.FishmongerBombDefused.split({ count: 2 });
 
 function objFishmongerBomb(name: string) {
-    const obj = objIndexedSprite(txsFishmongerBomb)
-        .merge({ isDefused: false })
+    let isDefused = false;
+
+    const sprite = objIndexedSprite(txsFishmongerBomb)
+        .mixin(mxnSpatialAudio);
+
+    const obj = sprite
+        .merge({
+            get isDefused() {
+                return isDefused;
+            },
+            set isDefused(value) {
+                if (value === isDefused) {
+                    return;
+                }
+
+                isDefused = value;
+                sprite.play(
+                    (value ? Sfx.Interact.BombDefuse : Sfx.Interact.BombArmed).with.rate(Rng.float(0.95, 1.05)),
+                );
+            },
+        })
         .anchored(0.5, 0.9)
         .dispatches<"objFishmongerBomb.explode">()
         .handles("objFishmongerBomb.explode", self => {
+            self.play(Sfx.Interact.BombExplode.with.rate(Rng.float(0.95, 1.05)));
             objFxFieryBurst170px().at([0, -16].add(self)).show();
             self.destroy();
         })
         .step(self => {
             self.textures = self.isDefused ? txsFishmongerBombDefused : txsFishmongerBomb;
             self.textureIndex = (self.textureIndex + 0.1) % 2;
+        })
+        .coro(function* (self) {
+            self.play(Sfx.Impact.SpikedCanonballLand.with.rate(Rng.float(0.95, 1.06)));
         })
         .mixin(mxnNudgeAppear)
         .mixin(mxnSpeaker, { colorPrimary: 0xCE3D21, colorSecondary: 0x000000, name })

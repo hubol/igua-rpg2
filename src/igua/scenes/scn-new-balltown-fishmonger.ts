@@ -10,6 +10,7 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
 import { objFish } from "../objects/obj-fish";
 import { RpgProgress } from "../rpg/rpg-progress";
+import { Sfx } from "../../assets/sounds";
 
 export function scnNewBalltownFishmonger() {
     Jukebox.play(Mzk.BreadCrumbPool);
@@ -74,9 +75,9 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
                 if (yield* ask("Ready to make the delivery with me?")) {
                     yield* show("Great!");
                     yield sleep(500);
+                    Sfx.Cutscene.FishTake.play();
                     objFxBurst32().at(fishObjs[0]).show();
                     fishObjs[0].destroy();
-                    // TODO sfx
                     yield sleep(500);
                     yield* show("See you outside!");
                     yield* lvl.Fishmonger.walkTo(lvl.Door.x + 30);

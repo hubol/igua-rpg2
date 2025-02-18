@@ -67,6 +67,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
 
         yield sleep(500);
 
+        Sfx.Cutscene.FishTake.play();
         fishObj.add(0, -64).show();
         objFxBurst32().at(fishObj).show();
 
