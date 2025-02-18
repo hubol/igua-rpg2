@@ -12,6 +12,7 @@ export const GeneratedMusicData = {
    "HomeFine": { ogg: require("./ogg/home-fine.ogg") },
    "HomosexualFeet": { ogg: require("./ogg/homosexual-feet.ogg") },
    "InvisibleTape": { ogg: require("./ogg/invisible-tape.ogg") },
+   "IronSkittle": { ogg: require("./ogg/iron-skittle.ogg") },
    "OpenWound": { ogg: require("./ogg/open-wound.ogg") },
    "PerishInstrument": { ogg: require("./ogg/perish-instrument.ogg") },
    "PieShake": { ogg: require("./ogg/pie-shake.ogg") },
