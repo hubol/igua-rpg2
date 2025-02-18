@@ -88,6 +88,7 @@ export const fntErotix = createBitmapFont(Tx.Font.Erotix, {
         "-": { x: 127, y: 28, w: 3, h: 1, xadv: 4, yoff: 3 },
         "=": { x: 131, y: 27, w: 3, h: 3, xadv: 4, yoff: 2 },
         "+": { x: 135, y: 27, w: 3, h: 3, xadv: 4, yoff: 2 },
+        "#": { x: 154, y: 0, w: 6, h: 9, xadv: 7, yoff: -1 },
     },
     kernings: [["b", "j", -1], ["F", "e", -1], ["F", "o", -1]],
 });
