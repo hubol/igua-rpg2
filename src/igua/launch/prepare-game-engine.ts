@@ -58,5 +58,6 @@ export function prepareGameEngine(renderer: PixiRenderer) {
             return scene.stage;
         },
         sceneStack,
+        renderer,
     });
 }

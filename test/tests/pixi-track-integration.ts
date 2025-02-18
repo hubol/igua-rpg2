@@ -28,6 +28,7 @@ class TestSceneStack extends SceneStack<{}, {}> {
 function configureEngine() {
     const sceneStack = new TestSceneStack();
     setEngineConfig({
+        renderer: null as any,
         sceneStack,
         showDefaultStage: new Container(),
     });

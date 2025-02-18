@@ -1,7 +1,9 @@
 import { Container } from "pixi.js";
 import { SceneStack } from "./scene-stack";
+import { PixiRenderer } from "./pixi-renderer";
 
 interface EngineConfigType {
+    readonly renderer: PixiRenderer;
     readonly sceneStack: SceneStack<unknown, unknown>;
     readonly showDefaultStage: Container;
 }
@@ -11,6 +13,10 @@ export function setEngineConfig(engineConfig: EngineConfigType) {
 }
 
 export let EngineConfig: EngineConfigType = {
+    get renderer() {
+        throw new Error("EngineConfig.renderer is not implemented!");
+        return undefined as any;
+    },
     get sceneStack() {
         throw new Error("EngineConfig.sceneStack is not implemented!");
         return undefined as any;
