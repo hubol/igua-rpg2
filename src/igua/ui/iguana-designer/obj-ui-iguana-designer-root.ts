@@ -354,7 +354,7 @@ function objIguanaPreview() {
                 }
             });
 
-        bigPuppet.playSfx = false;
+        bigPuppet.muted = true;
         bigPuppet.scale.set(3);
 
         bigPuppet.at(280, 183);

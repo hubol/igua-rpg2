@@ -163,7 +163,7 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
 
             sinceStepSoundEffectFrames++;
 
-            if (!isAirborne && c.playSfx && sinceStepSoundEffectFrames > 3) {
+            if (!isAirborne && sinceStepSoundEffectFrames > 3) {
                 if (prevForeLeftY < 0 && feetController.foreLeftY === 0) {
                     c.play(Materials[c.groundMaterial].stepSound0);
                     sinceStepSoundEffectFrames = 0;
@@ -279,7 +279,6 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
                     dirty = true;
                 }
             },
-            playSfx: true,
             groundMaterial: Material.Earth,
         })
         .step(applyAnimation)
