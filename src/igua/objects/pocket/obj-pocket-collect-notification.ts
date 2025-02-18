@@ -16,7 +16,7 @@ export function objPocketCollectNotification(receive: RpgPocket.ReceiveResult) {
         Sfx.Collect.PocketReset.play();
     }
     else {
-        Sfx.Collect.PocketIncrease.with.rate(1 + (receive.count - 1) * 0.05).play();
+        Sfx.Collect.PocketIncrease.rate(1 + (receive.count - 1) * 0.05).play();
     }
     // TODO sfx!
     Instances(objPocketCollectNotification).forEach(x => x.destroy());

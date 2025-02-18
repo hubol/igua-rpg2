@@ -121,14 +121,14 @@ function objUpwardSplash() {
         .mixin(mxnSpatialAudio)
         .anchored(0.5, 1)
         .coro(function* (self) {
-            self.play(Sfx.Fluid.SplashSmall.with.rate(Rng.float(0.95, 1.05)));
+            self.play(Sfx.Fluid.SplashSmall.rate(Rng.float(0.95, 1.05)));
         });
 }
 
 function objSideSplash(speed: number, max: number) {
     const f = Math.sin(speed * scene.ticker.ticks * 0.05) * 0.2;
     const rate = f + Math.max(0.4, Math.min(0.8, Math.abs(speed / 2)));
-    Sfx.Fluid.SplashTiny.with.rate(rate * 0.9).play();
+    Sfx.Fluid.SplashTiny.rate(rate * 0.9).play();
     let steps = 0;
     return objEphemeralSprite(txsSideSplash, Rng.float(0.15, 0.25))
         .scaled(Math.sign(speed), 1)

@@ -41,7 +41,7 @@ export class AsshatJukebox {
         ]);
         if (this._latestPlayRequest === track) {
             this._nowPlaying?.instance?.stop();
-            const instance = sound.with.loop(true).playInstance();
+            const instance = sound.loop(true).playInstance();
             this._nowPlaying = { track, instance };
         }
     }

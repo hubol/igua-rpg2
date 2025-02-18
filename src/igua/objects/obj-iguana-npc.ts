@@ -43,7 +43,7 @@ export function objIguanaNpc<TName extends string = NpcPersonaInternalName>({ pe
                 const count = Rng.intc(2, 4);
                 for (let i = 0; i < count; i++) {
                     yield interp(self.head.mouth, "agape").to(1).over(Rng.float(150, 225));
-                    Sfx.Iguana.Speak0.with.rate(Rng.float(0.8, 1.2)).play();
+                    Sfx.Iguana.Speak0.rate(Rng.float(0.8, 1.2)).play();
                     yield interp(self.head.mouth, "agape").to(0).over(Rng.float(100, 150));
                     if (!isSpeaking) {
                         break;

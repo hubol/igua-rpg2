@@ -5,33 +5,56 @@ export class Sound {
     private readonly _gainNodePool: StereoGainNodePool;
     private readonly _context: BaseAudioContext;
 
-    gain = 1;
-    pan = 0;
-    rate = 1;
-    loop = false;
-
-    private readonly _with = new SoundWith(this);
-
-    get with() {
-        this.gain = 1;
-        this.pan = 0;
-        this.rate = 1;
-        this.loop = false;
-        return this._with;
-    }
+    private readonly _params = {
+        gain: 1 as Unit,
+        pan: 0 as Polar,
+        rate: 1,
+        loop: false,
+    };
 
     constructor(private readonly _buffer: AudioBuffer, destination: AudioNode) {
         this._context = destination.context;
         this._gainNodePool = StereoGainNodePool.get(destination);
     }
 
+    gain(value: Unit) {
+        this._maybeResetParams();
+        this._params.gain = value;
+        return this;
+    }
+
+    pan(value: Polar) {
+        this._maybeResetParams();
+        this._params.pan = value;
+        return this;
+    }
+
+    // TODO support Rng!
+    rate(value: number) {
+        this._maybeResetParams();
+        this._params.rate = value;
+        return this;
+    }
+
+    loop(value = true) {
+        this._maybeResetParams();
+        this._params.loop = value;
+        return this;
+    }
+
+    // TODO support position(obj: DisplayObject)
+    // although feels weird here :-)
+    // but who cares
+
     play(offset?: Seconds) {
+        this._resetParamsOnNextParamsModification = true;
         const source = this._createSourceNode();
         this._createStereoGainNode(source);
         source.start(undefined, offset);
     }
 
     playInstance(offset?: Seconds) {
+        this._resetParamsOnNextParamsModification = true;
         const source = this._createSourceNode();
         const stereoGainNode = this._createStereoGainNode(source);
         source.start(undefined, offset);
@@ -41,16 +64,30 @@ export class Sound {
     private _createSourceNode() {
         const source = this._context.createBufferSource();
         source.buffer = this._buffer;
-        source.playbackRate.value = this.rate;
-        source.loop = this.loop;
+        source.playbackRate.value = this._params.rate;
+        source.loop = this._params.loop;
         return source;
     }
 
     private _createStereoGainNode(source: AudioBufferSourceNode) {
         const stereoGainNode = this._gainNodePool.connectInput(source);
-        stereoGainNode.gain.value = this.gain;
-        stereoGainNode.pan.value = this.pan;
+        stereoGainNode.gain.value = this._params.gain;
+        stereoGainNode.pan.value = this._params.pan;
         return stereoGainNode;
+    }
+
+    private _resetParamsOnNextParamsModification = false;
+
+    private _maybeResetParams() {
+        if (!this._resetParamsOnNextParamsModification) {
+            return;
+        }
+        this._params.gain = 1;
+        this._params.loop = false;
+        this._params.pan = 0;
+        this._params.rate = 1;
+
+        this._resetParamsOnNextParamsModification = false;
     }
 }
 
@@ -125,38 +162,3 @@ export class SoundInstance {
         this._sourceNode.stop();
     }
 }
-
-export class SoundWith {
-    constructor(private readonly _sound: Sound) {
-    }
-
-    rate(rate: number) {
-        this._sound.rate = rate;
-        return this;
-    }
-
-    gain(gain: Unit) {
-        this._sound.gain = gain;
-        return this;
-    }
-
-    pan(pan: Polar) {
-        this._sound.pan = pan;
-        return this;
-    }
-
-    loop(loop = true) {
-        this._sound.loop = loop;
-        return this;
-    }
-
-    play(offset?: Seconds) {
-        return this._sound.play(offset);
-    }
-
-    playInstance(offset?: Seconds) {
-        return this._sound.playInstance(offset);
-    }
-}
-
-// TODO there's some copy-paste here, maybe there's a way to eliminate it

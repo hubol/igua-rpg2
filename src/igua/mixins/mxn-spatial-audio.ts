@@ -1,5 +1,5 @@
 import { DisplayObject, Rectangle } from "pixi.js";
-import { Sound, SoundWith } from "../../lib/game-engine/audio/sound";
+import { Sound } from "../../lib/game-engine/audio/sound";
 import { IRectangle, areRectanglesOverlapping } from "../../lib/math/rectangle";
 import { renderer } from "../current-pixi-renderer";
 import { nlerp } from "../../lib/math/number";
@@ -20,12 +20,11 @@ const r = new Rectangle();
 
 export function mxnSpatialAudio(obj: DisplayObject) {
     return obj.merge({
-        play(sound: Sound | SoundWith) {
-            const soundWith = "with" in sound ? sound.with : sound;
+        play(sound: Sound) {
             const bounds = obj.getBounds(false, r);
             if (areRectanglesOverlapping(bounds, audibleRectangle)) {
                 const center = bounds.getCenter();
-                soundWith.pan(Math.max(
+                sound.pan(Math.max(
                     -0.9,
                     Math.min(0.9, nlerp(-1, 1, (center.x - audibleRectangle.x) / audibleRectangle.width)),
                 ));
@@ -37,7 +36,7 @@ export function mxnSpatialAudio(obj: DisplayObject) {
                     gain = Math.max(0.4, 1 - ((center.x - maximumGainRectangle.width) / -audibleRectangle.x));
                 }
 
-                soundWith.gain(gain).play();
+                sound.gain(gain).play();
             }
         },
     });

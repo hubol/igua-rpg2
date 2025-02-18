@@ -17,7 +17,7 @@ export function objPocketableItem(item: RpgPocket.Item) {
     const tx = DataPocketItem[item].texture;
     return Sprite.from(tx).merge({ freed: false }).anchored(0.5, 0.5).coro(function* (self) {
         yield () => (playerObj.speed.x !== 0 || playerObj.speed.y !== 0) && self.collides(playerObj);
-        Sfx.Impact.PocketableItemFree.with.rate(Rng.float(0.9, 1.1)).play();
+        Sfx.Impact.PocketableItemFree.rate(Rng.float(0.9, 1.1)).play();
         self.freed = true;
 
         let virtualAngle = 0;
@@ -46,7 +46,7 @@ export function objPocketableItem(item: RpgPocket.Item) {
                 }
 
                 if (e.hitGround) {
-                    obj.play(getBounceSfxToPlay(e.previousSpeed.y).with.rate(Rng.float(0.9, 1.1)));
+                    obj.play(getBounceSfxToPlay(e.previousSpeed.y).rate(Rng.float(0.9, 1.1)));
                     obj.speed.y = Math.abs(e.previousSpeed.y) * -0.8;
                     if (obj.speed.y > -0.5) {
                         obj.speed.y = 0;

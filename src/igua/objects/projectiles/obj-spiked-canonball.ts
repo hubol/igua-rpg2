@@ -21,7 +21,7 @@ export function objSpikedCanonball() {
             const speedX = self.speed.x;
             yield () => self.speed.y === 0;
             objFxBurst32().at(self).add(0, 8).tinted(Rng.choose(...burstTints)).show(self.parent);
-            self.play(Sfx.Impact.SpikedCanonballLand.with.rate(Rng.float(0.9, 1.1)));
+            self.play(Sfx.Impact.SpikedCanonballLand.rate(Rng.float(0.9, 1.1)));
             self.speed.y = -2;
             self.speed.x = speedX * 0.3;
         });

@@ -95,7 +95,7 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
                 yield interp(self, "angle").steps(4).to(initialAngle).over(300);
                 RpgProgress.flags.outskirts.miner.pickaxeHealth--;
                 pickaxeAttackObj.isAttackActive = true;
-                self.play(Sfx.Impact.PickaxeRock.with.rate(Rng.float(0.9, 1.1)));
+                self.play(Sfx.Impact.PickaxeRock.rate(Rng.float(0.9, 1.1)));
                 lvl.MinerPicaxeBurst.visible = true;
                 yield sleep(125);
                 pickaxeAttackObj.isAttackActive = false;
