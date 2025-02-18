@@ -106,7 +106,6 @@ function endSpeaking(currentSpeaker: DisplayObject | null, currentSpeakerMessage
     }
 
     currentSpeakerMessageBoxObj.state.mayBeDestroyed = true;
-    speakerMessageBoxObj = currentSpeakerMessageBoxObj;
 }
 
 function* startSpeaking(text: string) {
@@ -128,6 +127,7 @@ function* startSpeaking(text: string) {
 
     if (!currentSpeakerMessageBoxObj) {
         currentSpeakerMessageBoxObj = objSpeakerMessageBox(currentSpeaker);
+        speakerMessageBoxObj = currentSpeakerMessageBoxObj;
     }
 
     if (currentSpeaker?.is(mxnSpeaker)) {
