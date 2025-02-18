@@ -39,11 +39,10 @@ Object.defineProperties(DisplayObject.prototype, {
     },
     playInstance: {
         value: function (this: DisplayObject & DisplayObjectPrivate, sound: Sound) {
-            if (this._muted) {
-                return;
-            }
-
             applyDisplayObjectPositionToSound(this, sound);
+            if (this._muted) {
+                sound.gain(0);
+            }
             return sound.playInstance();
         },
         configurable: true,
