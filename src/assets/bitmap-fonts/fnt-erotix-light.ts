@@ -96,6 +96,7 @@ export const fntErotixLight = createBitmapFont(Tx.Font.ErotixLight, {
         ["f", "o", -1],
         ["f", "s", -1],
         ["g", "?", -1],
+        ["n", "j", -2],
         ["r", ",", -1],
         ["M", "i", -1],
         ["M", "o", -1],
