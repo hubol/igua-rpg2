@@ -32,7 +32,7 @@ Starts the project in development mode
 
 ## Play an alpha?!
 You can play an extremely early version of the game. The most recent commit to this repository is hosted on Heroku.
-At the time of writing this, the "game" is mostly a sandbox for testing a revamped game engine.
+At the time of writing this, the "game" includes a character editor and a small town to explore.
 
 [Play alpha version on Heroku](https://igua-rpg2-d76be5c97e6f.herokuapp.com/)
 
