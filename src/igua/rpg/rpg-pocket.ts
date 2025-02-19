@@ -68,6 +68,9 @@ export namespace RpgPocket {
                 if (slot.item === item) {
                     const countToTakeFromSlot = Math.min(count, slot.count);
                     slot.count -= countToTakeFromSlot;
+                    if (slot.count === 0) {
+                        slot.item = null;
+                    }
                     count -= countToTakeFromSlot;
                     // TODO feels a little crude to have an effect here
                     RpgExperienceRewarder.pocket.onRemoveItems(countToTakeFromSlot);
