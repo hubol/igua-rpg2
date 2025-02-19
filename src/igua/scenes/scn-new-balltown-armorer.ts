@@ -12,12 +12,12 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { Integer } from "../../lib/math/number-alias-types";
-import { rewardValuables } from "../cutscene/drama-wallet";
 import { Cutscene } from "../globals";
 import { objFish } from "../objects/obj-fish";
 import { ZIndex } from "../core/scene/z-index";
 import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
-import { stageDirection } from "../cutscene/drama-misc";
+import { DramaMisc } from "../cutscene/drama-misc";
+import { DramaWallet } from "../cutscene/drama-wallet";
 
 export function scnNewBalltownArmorer() {
     Jukebox.play(Mzk.GolfResort);
@@ -89,7 +89,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
         Cutscene.setCurrentSpeaker(lvl.Fishmonger);
         yield* show("Without a hitch!", "Congratulations on your new fishy!");
 
-        stageDirection.departRoomViaDoor(lvl.Fishmonger);
+        DramaMisc.departRoomViaDoor(lvl.Fishmonger);
 
         lvl.IguanaNpc.speed.y = -6;
         yield* lvl.IguanaNpc.walkTo(lvl.FishMarker.x + 30);
@@ -98,7 +98,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
 
         Cutscene.setCurrentSpeaker(lvl.IguanaNpc);
         yield* show("Happy...! Happy...! Happy...!", "Thank you so much for arranging the delivery of the fish.");
-        yield* rewardValuables(160, lvl.IguanaNpc);
+        yield* DramaWallet.rewardValuables(160, lvl.IguanaNpc);
         yield* show("You are cool.");
 
         deliveries.armorer = "delivered";
@@ -128,7 +128,7 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
             }
             else {
                 yield* show("Oh, my fishtank!", "You put water in it. Thanks.");
-                yield* rewardValuables(15, lvl.IguanaNpc);
+                yield* DramaWallet.rewardValuables(15, lvl.IguanaNpc);
                 yield* show(
                     "Believe me, there's a whole lot more where that came from if you can get me a fish to live in the aquarium!",
                 );

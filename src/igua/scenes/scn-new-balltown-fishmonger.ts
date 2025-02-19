@@ -2,7 +2,7 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
-import { stageDirection } from "../cutscene/drama-misc";
+import { DramaMisc } from "../cutscene/drama-misc";
 import { ask, show } from "../cutscene/show";
 import { NpcPersonas } from "../data/data-npc-personas";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
@@ -81,7 +81,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
                     yield sleep(500);
                     yield* show("See you outside!");
                     yield* lvl.Fishmonger.walkTo(lvl.Door.x + 30);
-                    stageDirection.departRoomViaDoor(lvl.Fishmonger);
+                    DramaMisc.departRoomViaDoor(lvl.Fishmonger);
                     RpgProgress.flags.newBalltown.fishmonger.deliveries.armorer = "ready";
                 }
                 else {

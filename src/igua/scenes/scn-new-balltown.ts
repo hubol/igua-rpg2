@@ -9,7 +9,6 @@ import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { Empty } from "../../lib/types/empty";
 import { Jukebox } from "../core/igua-audio";
-import { rewardValuables } from "../cutscene/drama-wallet";
 import { ask, show } from "../cutscene/show";
 import { NpcPersonas } from "../data/data-npc-personas";
 import { Cutscene } from "../globals";
@@ -27,11 +26,12 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { Force } from "../../lib/types/force";
 import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
 import { IguanaLocomotiveConsts, ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
-import { stageDirection } from "../cutscene/drama-misc";
+import { DramaMisc } from "../cutscene/drama-misc";
 import { isOnScreen } from "../../lib/game-engine/logic/is-on-screen";
 import { DataKeyItems } from "../data/data-key-items";
 import { RpgKeyItems } from "../rpg/rpg-key-items";
 import { DramaKeyItems } from "../cutscene/drama-key-items";
+import { DramaWallet } from "../cutscene/drama-wallet";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);
@@ -205,7 +205,7 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
             if (roll === guess) {
                 const prize = riskedValue * 5;
                 yield* show("Nice guess!", `You win ${prize} valuables!`);
-                yield* rewardValuables(prize, lvl.Croupier, "gambling");
+                yield* DramaWallet.rewardValuables(prize, lvl.Croupier, "gambling");
             }
             else {
                 yield* show("Sorry, you lost. You can always try again!");
@@ -375,7 +375,7 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
             Cutscene.play(function* () {
                 yield* show("I made it!", "See you inside");
                 deliveries.armorer = "arrived";
-                stageDirection.departRoomViaDoor(self);
+                DramaMisc.departRoomViaDoor(self);
             }, { speaker: lvl.Fishmonger, camera: { start: "pan-to-speaker" } });
         }).show();
 
@@ -419,7 +419,7 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
                     flickerObj.destroy();
                     lvl.Fishmonger.visible = true;
                     yield sleep(500);
-                    stageDirection.departRoomViaDoor(lvl.Fishmonger);
+                    DramaMisc.departRoomViaDoor(lvl.Fishmonger);
                 }
 
                 deliveries.armorer = null;

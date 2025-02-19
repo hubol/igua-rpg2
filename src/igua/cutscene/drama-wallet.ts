@@ -11,7 +11,7 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { ValuableChangeMaker } from "../systems/valuable-change-maker";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 
-export function* rewardValuables(
+function* rewardValuables(
     total: number,
     startPosition: VectorSimple,
     incomeSource: RpgPlayerWallet.IncomeSource = "default",
@@ -58,3 +58,7 @@ function* moveTowardsPlayer(obj: ReturnType<typeof objValuable>) {
 
     yield interpvr(obj).factor(factor.sine).to(playerObj).over(300);
 }
+
+export const DramaWallet = {
+    rewardValuables,
+};

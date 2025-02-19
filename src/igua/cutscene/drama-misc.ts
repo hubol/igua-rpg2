@@ -13,6 +13,6 @@ function departRoomViaDoor(departee: DisplayObject | null) {
     }
 }
 
-export const stageDirection = {
+export const DramaMisc = {
     departRoomViaDoor,
 };
