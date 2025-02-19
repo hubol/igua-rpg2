@@ -5,6 +5,7 @@ import { PropertiesLike } from "../../lib/types/properties-like";
 import { EquipmentInternalName } from "../data/data-equipment";
 import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { getDefaultLooks } from "../iguana/get-default-looks";
+import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPocket } from "./rpg-pocket";
 
 export function getInitialRpgProgress() {
@@ -12,6 +13,7 @@ export function getInitialRpgProgress() {
         character: {
             inventory: {
                 valuables: 100,
+                keyItems: RpgKeyItems.create(),
                 pocket: RpgPocket.create(),
             },
             status: {
@@ -65,6 +67,7 @@ export function getInitialRpgProgress() {
             },
             outskirts: {
                 miner: {
+                    hasUpgradedPickaxe: false,
                     pickaxeHealth: 10,
                     toldPlayerAboutDepletedPickaxeHealth: false,
                 },

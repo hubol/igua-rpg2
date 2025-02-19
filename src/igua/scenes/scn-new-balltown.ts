@@ -29,6 +29,9 @@ import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170p
 import { IguanaLocomotiveConsts, ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
 import { stageDirection } from "../cutscene/stage-direction";
 import { isOnScreen } from "../../lib/game-engine/logic/is-on-screen";
+import { DataKeyItems } from "../data/data-key-items";
+import { RpgKeyItems } from "../rpg/rpg-key-items";
+import { DramaKeyItems } from "../cutscene/drama-key-items";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);
@@ -250,7 +253,23 @@ function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
             const password = characters.join("");
             if (password === "POOP*") {
                 yield* show("Access granted.");
-                // TODO a prize!
+                // TODO this looks like shit!!
+                if (RpgKeyItems.Methods.has(RpgProgress.character.inventory.keyItems, "UpgradedPickaxe", 1)) {
+                    yield* show(
+                        `Master... You already have one. A ${DataKeyItems.UpgradedPickaxe.name}.`,
+                        "Please return when you have disposed of it.",
+                    );
+                }
+                else {
+                    yield* show(`Master... I see you do not have one. A ${DataKeyItems.UpgradedPickaxe.name}.`);
+                    if (yield* ask("Would you like one?")) {
+                        yield* DramaKeyItems.receive("UpgradedPickaxe");
+                        yield* show("Congratulations. Please enjoyb.");
+                    }
+                    else {
+                        yield* show("Got it. I'll always be around");
+                    }
+                }
             }
             else {
                 yield* show("Access denied.");
