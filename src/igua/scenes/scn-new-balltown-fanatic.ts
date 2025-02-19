@@ -9,7 +9,7 @@ import { show } from "../cutscene/show";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { RpgPocket } from "../rpg/rpg-pocket";
 import { interpv } from "../../lib/game-engine/routines/interp";
-import { rewardValuables } from "../cutscene/reward-valuables";
+import { rewardValuables } from "../cutscene/drama-wallet";
 
 export function scnNewBalltownFanatic() {
     Jukebox.play(Mzk.CedarWorld);

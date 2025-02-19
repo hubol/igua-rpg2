@@ -7,7 +7,7 @@ import { show } from "../cutscene/show";
 import { Sfx } from "../../assets/sounds";
 import { Rng } from "../../lib/math/rng";
 import { SceneChanger } from "../systems/scene-changer";
-import { stageDirection } from "../cutscene/stage-direction";
+import { stageDirection } from "../cutscene/drama-misc";
 
 interface ObjDoorArgs {
     sceneName: string;

@@ -42,6 +42,7 @@ export function* rewardValuables(
     }
     yield sleep(800 - ms);
 }
+
 function* moveTowardsPlayer(obj: ReturnType<typeof objValuable>) {
     let steps = Rng.int(0, 1000);
     const wiggle = container().step(() => obj.pivot.x = Math.round(Math.sin(steps++ * 0.2) * 4)).show(obj);

@@ -12,12 +12,12 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { Integer } from "../../lib/math/number-alias-types";
-import { rewardValuables } from "../cutscene/reward-valuables";
+import { rewardValuables } from "../cutscene/drama-wallet";
 import { Cutscene } from "../globals";
 import { objFish } from "../objects/obj-fish";
 import { ZIndex } from "../core/scene/z-index";
 import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
-import { stageDirection } from "../cutscene/stage-direction";
+import { stageDirection } from "../cutscene/drama-misc";
 
 export function scnNewBalltownArmorer() {
     Jukebox.play(Mzk.GolfResort);
