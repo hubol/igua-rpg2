@@ -3,11 +3,11 @@ import { Tx } from "../../assets/textures";
 import { mxnInteract } from "../mixins/mxn-interact";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { Cutscene } from "../globals";
-import { show } from "../cutscene/show";
+import { show } from "../drama/show";
 import { Sfx } from "../../assets/sounds";
 import { Rng } from "../../lib/math/rng";
 import { SceneChanger } from "../systems/scene-changer";
-import { DramaMisc } from "../cutscene/drama-misc";
+import { DramaMisc } from "../drama/drama-misc";
 
 interface ObjDoorArgs {
     sceneName: string;

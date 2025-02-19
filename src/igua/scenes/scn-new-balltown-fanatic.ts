@@ -5,11 +5,11 @@ import { Jukebox } from "../core/igua-audio";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnBoilMirrorRotate } from "../mixins/mxn-boil-mirror-rotate";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { show } from "../cutscene/show";
+import { show } from "../drama/show";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { RpgPocket } from "../rpg/rpg-pocket";
 import { interpv } from "../../lib/game-engine/routines/interp";
-import { DramaWallet } from "../cutscene/drama-wallet";
+import { DramaWallet } from "../drama/drama-wallet";
 
 export function scnNewBalltownFanatic() {
     Jukebox.play(Mzk.CedarWorld);

@@ -9,7 +9,7 @@ import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { Empty } from "../../lib/types/empty";
 import { Jukebox } from "../core/igua-audio";
-import { ask, show } from "../cutscene/show";
+import { ask, show } from "../drama/show";
 import { NpcPersonas } from "../data/data-npc-personas";
 import { Cutscene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -26,12 +26,12 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { Force } from "../../lib/types/force";
 import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
 import { IguanaLocomotiveConsts, ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
-import { DramaMisc } from "../cutscene/drama-misc";
+import { DramaMisc } from "../drama/drama-misc";
 import { isOnScreen } from "../../lib/game-engine/logic/is-on-screen";
 import { DataKeyItems } from "../data/data-key-items";
 import { RpgKeyItems } from "../rpg/rpg-key-items";
-import { DramaKeyItems } from "../cutscene/drama-key-items";
-import { DramaWallet } from "../cutscene/drama-wallet";
+import { DramaKeyItems } from "../drama/drama-key-items";
+import { DramaWallet } from "../drama/drama-wallet";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);

@@ -7,7 +7,7 @@ import { sleep } from "../../lib/game-engine/routines/sleep";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { StringFromNumber } from "../../lib/string/string-from-number";
 import { Jukebox } from "../core/igua-audio";
-import { ask, show } from "../cutscene/show";
+import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { RpgProgress } from "../rpg/rpg-progress";
@@ -16,8 +16,8 @@ import { Cutscene } from "../globals";
 import { objFish } from "../objects/obj-fish";
 import { ZIndex } from "../core/scene/z-index";
 import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
-import { DramaMisc } from "../cutscene/drama-misc";
-import { DramaWallet } from "../cutscene/drama-wallet";
+import { DramaMisc } from "../drama/drama-misc";
+import { DramaWallet } from "../drama/drama-wallet";
 
 export function scnNewBalltownArmorer() {
     Jukebox.play(Mzk.GolfResort);

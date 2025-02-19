@@ -6,7 +6,7 @@ import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { Null } from "../../lib/types/null";
 import { scene } from "../globals";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
-import { clear } from "../cutscene/show";
+import { clear } from "../drama/show";
 
 type CutsceneFn = () => Coro.Type;
 

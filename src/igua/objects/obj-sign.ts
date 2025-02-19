@@ -1,7 +1,7 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../assets/textures";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { show } from "../cutscene/show";
+import { show } from "../drama/show";
 import { objText } from "../../assets/fonts";
 import { container } from "../../lib/pixi/container";
 import { Sfx } from "../../assets/sounds";
