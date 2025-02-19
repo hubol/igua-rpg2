@@ -1,4 +1,4 @@
-import { Sprite, Mesh, Graphics, FilterSystem, Matrix, ISpriteMaskTarget, ObservablePoint, GraphicsGeometry } from "pixi.js";
+import { FilterSystem, Graphics, GraphicsGeometry, ISpriteMaskTarget, Matrix, Mesh, ObservablePoint, Sprite } from "pixi.js";
 
 type Public<T, TPrivate> = Omit<T, keyof TPrivate> & TPrivate;
 

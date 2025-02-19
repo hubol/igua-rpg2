@@ -1,7 +1,7 @@
 import { Container, DisplayObject } from "pixi.js";
-import { CancellationToken, ICancellationToken } from "../promise/cancellation-token";
 import { AsshatTicker, IAsshatTicker } from "../game-engine/asshat-ticker";
-import { LazyTicker, isLazyTicker } from "./lazy-ticker";
+import { CancellationToken, ICancellationToken } from "../promise/cancellation-token";
+import { isLazyTicker, LazyTicker } from "./lazy-ticker";
 
 declare module "pixi.js" {
     interface DisplayObject {

@@ -1,9 +1,9 @@
-import { IguaLayers } from "./core/igua-layers";
-import { IguaScene, IguaSceneStack } from "./core/scene/igua-scene-stack";
-import { IguaInput } from "./core/input";
 import { Container } from "pixi.js";
-import { IguaCutscene } from "./core/igua-cutscene";
 import { KeyListener } from "../lib/browser/key-listener";
+import { IguaCutscene } from "./core/igua-cutscene";
+import { IguaLayers } from "./core/igua-layers";
+import { IguaInput } from "./core/input";
+import { IguaScene, IguaSceneStack } from "./core/scene/igua-scene-stack";
 
 export let layers: IguaLayers;
 export let scene: IguaScene;

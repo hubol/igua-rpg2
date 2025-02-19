@@ -1,23 +1,23 @@
 import { Graphics } from "pixi.js";
+import { OgmoProject } from "../../assets/generated/levels/generated-ogmo-project-data";
 import { Instances } from "../../lib/game-engine/instances";
 import { vnew } from "../../lib/math/vector-type";
 import { objPuddle } from "../objects/nature/obj-puddle";
 import { objCheckpoint } from "../objects/obj-checkpoint";
 import { objDoor } from "../objects/obj-door";
+import { objGate } from "../objects/obj-gate";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { objIntelligenceBackground } from "../objects/obj-intelligence-background";
 import { createPlayerObj, playerObj } from "../objects/obj-player";
+import { objPocketableItemSpawner } from "../objects/obj-pocketable-item-spawner";
 import { objSign } from "../objects/obj-sign";
 import { objPipe, objPipeSlope, objSolidBlock, objSolidSlope } from "../objects/obj-terrain";
 import { objValuable } from "../objects/obj-valuable";
 import { objWaterDripSource } from "../objects/obj-water-drip-source";
+import { objMarker } from "../objects/utils/obj-marker";
+import { RpgPocket } from "../rpg/rpg-pocket";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { OgmoFactory } from "./factory";
-import { objGate } from "../objects/obj-gate";
-import { objPocketableItemSpawner } from "../objects/obj-pocketable-item-spawner";
-import { RpgPocket } from "../rpg/rpg-pocket";
-import { objMarker } from "../objects/utils/obj-marker";
-import { OgmoProject } from "../../assets/generated/levels/generated-ogmo-project-data";
 
 export const OgmoEntityResolvers = {
     "Player": (entity) => createOrConfigurePlayerObj(entity),

@@ -1,9 +1,9 @@
 import * as fs from "fs";
 import * as path from "path";
-import { paint } from "./lib/paint";
-import { ErrorPrinter } from "./lib/error-printer";
-import { TestPromise } from "./lib/test-promise";
 import { doGlobalSetup } from "./global-setup";
+import { ErrorPrinter } from "./lib/error-printer";
+import { paint } from "./lib/paint";
+import { TestPromise } from "./lib/test-promise";
 
 function findTestFiles() {
     const directory = path.resolve(__dirname, "tests/");

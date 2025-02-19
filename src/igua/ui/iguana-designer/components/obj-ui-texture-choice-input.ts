@@ -1,8 +1,8 @@
 import { Container, Graphics, Sprite, Texture } from "pixi.js";
 import { Tx } from "../../../../assets/textures";
-import { TypedInput } from "../../../iguana/typed-input";
-import { Input } from "../../../globals";
 import { cyclic } from "../../../../lib/math/number";
+import { Input } from "../../../globals";
+import { TypedInput } from "../../../iguana/typed-input";
 import { UiColor } from "../../ui-color";
 import { objUiDesignerInputBase } from "./obj-ui-designer-input-base";
 

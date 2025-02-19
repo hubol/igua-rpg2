@@ -1,13 +1,13 @@
-import { SceneStack } from "../../../lib/game-engine/scene-stack";
+import { Container, Graphics } from "pixi.js";
 import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
-import { IguaLayers } from "../igua-layers";
+import { SceneStack } from "../../../lib/game-engine/scene-stack";
 import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 import { Logging } from "../../../lib/logging";
-import { Container, Graphics } from "pixi.js";
 import { merge } from "../../../lib/object/merge";
 import { renderer } from "../../current-pixi-renderer";
 import { forceGameLoop } from "../../globals";
 import { objCamera } from "../../objects/obj-camera";
+import { IguaLayers } from "../igua-layers";
 
 interface IguaSceneMeta {
     useGameplay: boolean;

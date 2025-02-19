@@ -1,13 +1,13 @@
 import { Container, Graphics, Rectangle } from "pixi.js";
-import { container } from "../../../lib/pixi/container";
-import { cyclic } from "../../../lib/math/number";
-import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
-import { renderer } from "../../current-pixi-renderer";
-import { Input, forceGameLoop } from "../../globals";
-import { TickerContainer } from "../../../lib/game-engine/ticker-container";
-import { UiColor } from "../ui-color";
-import { Undefined } from "../../../lib/types/undefined";
 import { Sfx } from "../../../assets/sounds";
+import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
+import { TickerContainer } from "../../../lib/game-engine/ticker-container";
+import { cyclic } from "../../../lib/math/number";
+import { container } from "../../../lib/pixi/container";
+import { Undefined } from "../../../lib/types/undefined";
+import { renderer } from "../../current-pixi-renderer";
+import { forceGameLoop, Input } from "../../globals";
+import { UiColor } from "../ui-color";
 
 export type UiPageProps = { maxHeight?: number; title?: string; selectionIndex: number; startTicking?: boolean };
 export type ObjUiPageElement = Container & { selected: boolean };

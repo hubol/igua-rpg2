@@ -1,8 +1,8 @@
 import { IBitmapTextStyle } from "pixi.js";
 import { BitmapText } from "pixi.js";
 import { IrregularBitmapText } from "../igua/lib/irregular-bitmap-text";
-import { fntErotix } from "./bitmap-fonts/fnt-erotix";
 import { fntDiggit } from "./bitmap-fonts/fnt-diggit";
+import { fntErotix } from "./bitmap-fonts/fnt-erotix";
 import { fntErotixLight } from "./bitmap-fonts/fnt-erotix-light";
 import { fntFlaccid } from "./bitmap-fonts/fnt-flaccid";
 import { fntGoodBoy } from "./bitmap-fonts/fnt-good-boy";

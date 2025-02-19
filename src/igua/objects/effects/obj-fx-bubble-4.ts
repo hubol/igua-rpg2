@@ -1,12 +1,12 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
-import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
-import { mxnPhysics } from "../../mixins/mxn-physics";
 import { Coro } from "../../../lib/game-engine/routines/coro";
-import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { interp } from "../../../lib/game-engine/routines/interp";
+import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { scene } from "../../globals";
+import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
+import { mxnPhysics } from "../../mixins/mxn-physics";
 
 export function objFxBubble4() {
     return Sprite.from(Tx.Effects.Bubble4).anchored(0.5, 0.5).mixin(mxnBoilMirrorRotate)

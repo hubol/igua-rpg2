@@ -1,10 +1,10 @@
 import { Sprite } from "pixi.js";
-import { Tx } from "../../assets/textures";
-import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { show } from "../drama/show";
 import { objText } from "../../assets/fonts";
-import { container } from "../../lib/pixi/container";
 import { Sfx } from "../../assets/sounds";
+import { Tx } from "../../assets/textures";
+import { container } from "../../lib/pixi/container";
+import { show } from "../drama/show";
+import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 
 interface ObjSignArgs {

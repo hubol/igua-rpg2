@@ -1,9 +1,9 @@
 import { Graphics } from "pixi.js";
-import { Integer } from "../../lib/math/number-alias-types";
-import { RpgProgress } from "../rpg/rpg-progress";
-import { approachLinear } from "../../lib/math/number";
-import { StringConvert } from "../../lib/string/string-convert";
 import { blendColor } from "../../lib/color/blend-color";
+import { approachLinear } from "../../lib/math/number";
+import { Integer } from "../../lib/math/number-alias-types";
+import { StringConvert } from "../../lib/string/string-convert";
+import { RpgProgress } from "../rpg/rpg-progress";
 
 interface ObjIntelligenceBackgroundArgs {
     initialTint: string;

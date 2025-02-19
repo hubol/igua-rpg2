@@ -1,14 +1,14 @@
 import { Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../../../assets/sounds";
+import { Tx } from "../../../../assets/textures";
 import { VectorSimple, vnew } from "../../../../lib/math/vector-type";
 import { container } from "../../../../lib/pixi/container";
+import { Input } from "../../../globals";
 import { TypedInput } from "../../../iguana/typed-input";
 import { createActionRepeater } from "../../framework/action-repeater";
-import { Tx } from "../../../../assets/textures";
-import { Input } from "../../../globals";
-import { CtxUiIguanaDesigner } from "../obj-ui-iguana-designer-root";
 import { UiColor } from "../../ui-color";
+import { CtxUiIguanaDesigner } from "../obj-ui-iguana-designer-root";
 import { objUiDesignerInputBase } from "./obj-ui-designer-input-base";
-import { Sfx } from "../../../../assets/sounds";
 
 type Restrictions = Omit<TypedInput.Vector, "kind">;
 

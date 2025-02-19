@@ -1,9 +1,9 @@
 import { Sprite } from "pixi.js";
-import { Tx } from "../../../assets/textures";
-import { mxnPhysics } from "../../mixins/mxn-physics";
-import { CollisionShape } from "../../../lib/pixi/collision";
 import { Sfx } from "../../../assets/sounds";
+import { Tx } from "../../../assets/textures";
 import { Rng } from "../../../lib/math/rng";
+import { CollisionShape } from "../../../lib/pixi/collision";
+import { mxnPhysics } from "../../mixins/mxn-physics";
 import { objFxBurst32 } from "../effects/obj-fx-burst-32";
 
 const burstTints = [0x845FD3, 0xBEC71D, 0x5DE478, 0xBC362F];

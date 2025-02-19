@@ -1,6 +1,6 @@
-import { BaseTexture, FORMATS, IBaseTextureOptions, MIPMAP_MODES, MSAA_QUALITY, Rectangle, SCALE_MODES, TARGETS, Texture, loadImageBitmap } from "pixi.js";
-import { GeneratedTextureData } from "./generated/textures/generated-texture-data";
+import { BaseTexture, IBaseTextureOptions, loadImageBitmap, MIPMAP_MODES, MSAA_QUALITY, Rectangle, SCALE_MODES, Texture } from "pixi.js";
 import { JobProgress } from "../lib/game-engine/job-progress";
+import { GeneratedTextureData } from "./generated/textures/generated-texture-data";
 import { loadNoAtlasTextures } from "./no-atlas-textures";
 
 const { txs } = GeneratedTextureData;

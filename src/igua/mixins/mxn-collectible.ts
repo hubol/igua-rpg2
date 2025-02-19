@@ -1,7 +1,7 @@
 import { DisplayObject } from "pixi.js";
+import { DeepAccess } from "../../lib/object/deep-access";
 import { playerObj } from "../objects/obj-player";
 import { RpgProgress, RpgProgressFlags, RpgProgressUids } from "../rpg/rpg-progress";
-import { DeepAccess } from "../../lib/object/deep-access";
 
 interface MxnCollectibleUid {
     type: "uid";

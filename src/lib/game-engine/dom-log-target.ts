@@ -1,5 +1,5 @@
 import { elLogsRoot } from "./elements/el-logs-root";
-import { DefaultLogTarget, LogTarget, LogNature } from "./logger";
+import { DefaultLogTarget, LogNature, LogTarget } from "./logger";
 
 export class DomLogTarget implements LogTarget {
     readonly logRoot = createDomLogRoot();

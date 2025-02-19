@@ -3,7 +3,8 @@
     "indentWidth": 4,
     "objectExpression.preferSingleLine": true,
     "arrayExpression.preferSingleLine": true,
-    "quoteProps": "asNeeded"
+    "quoteProps": "asNeeded",
+    "newLineKind": "auto"
   },
   "plugins": [
     "https://plugins.dprint.dev/typescript-0.93.0.wasm"

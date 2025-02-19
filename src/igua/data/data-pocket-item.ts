@@ -1,6 +1,6 @@
 import { Texture } from "pixi.js";
-import { RpgPocket } from "../rpg/rpg-pocket";
 import { Tx } from "../../assets/textures";
+import { RpgPocket } from "../rpg/rpg-pocket";
 
 interface PocketItemData {
     name: string;

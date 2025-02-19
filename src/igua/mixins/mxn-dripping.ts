@@ -1,9 +1,9 @@
 import { Container, DisplayObject, Point, Rectangle } from "pixi.js";
 import { Rng } from "../../lib/math/rng";
+import { getRandomDeepChild } from "../lib/get-random-deep-child";
 import { objWaterDrip } from "../objects/obj-water-drip-source";
 import { mxnDestroyAfterSteps } from "./mxn-destroy-after-steps";
 import { mxnPhysics } from "./mxn-physics";
-import { getRandomDeepChild } from "../lib/get-random-deep-child";
 
 const r = new Rectangle();
 const p = new Point();

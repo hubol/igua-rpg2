@@ -1,8 +1,8 @@
 import { BaseTexture, IBaseTextureOptions, Rectangle, RenderTexture, Texture } from "pixi.js";
-import { VectorSimple, vnew } from "../math/vector-type";
 import { Boundaries } from "../math/boundaries";
-import { Empty } from "../types/empty";
 import { Integer } from "../math/number-alias-types";
+import { VectorSimple, vnew } from "../math/vector-type";
+import { Empty } from "../types/empty";
 
 const TextureCacheKey_TrimmedFrame = "__trimmedFrame";
 const TextureCacheKey_OpaquePixelsBoundaries = "__opaquePixelsBoundaries";

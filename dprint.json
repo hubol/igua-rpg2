@@ -2,11 +2,12 @@
   "typescript": {
     "indentWidth": 4,
     "importDeclaration.forceSingleLine": true,
-    "module.sortImportDeclarations": "maintain",
-    "importDeclaration.sortNamedImports": "maintain",
-    "importDeclaration.sortTypeOnlyImports": "none",
+    "module.sortImportDeclarations": "caseInsensitive",
+    "importDeclaration.sortNamedImports": "caseInsensitive",
+    "importDeclaration.sortTypeOnlyImports": "first",
     "nextControlFlowPosition": "nextLine",
-    "functionExpression.spaceBeforeParentheses": true
+    "functionExpression.spaceBeforeParentheses": true,
+    "newLineKind": "auto"
   },
   "includes": [
     "src/**/*.ts",

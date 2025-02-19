@@ -1,6 +1,6 @@
 import { DisplayObject } from "pixi.js";
-import { CancellationToken } from "../promise/cancellation-token";
 import { Coro } from "../game-engine/routines/coro";
+import { CancellationToken } from "../promise/cancellation-token";
 
 declare module "pixi.js" {
     interface DisplayObject {

@@ -1,9 +1,9 @@
 import { ColorSource } from "pixi.js";
 import { nlerp } from "../../math/number";
 import { Unit } from "../../math/number-alias-types";
-import { PropertiesLike } from "../../types/properties-like";
-import { AdjustColor } from "../../pixi/adjust-color";
 import { VectorSimple, vnew } from "../../math/vector-type";
+import { AdjustColor } from "../../pixi/adjust-color";
+import { PropertiesLike } from "../../types/properties-like";
 import { Coro } from "./coro";
 
 type FactorFn = (factor: Unit) => Unit;

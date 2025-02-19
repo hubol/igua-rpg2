@@ -1,7 +1,7 @@
 import { Graphics, Texture } from "pixi.js";
 import { range } from "../range";
-import { TextureProcessing } from "./texture-processing";
 import { Undefined } from "../types/undefined";
+import { TextureProcessing } from "./texture-processing";
 
 export class TextureToGraphicsConverter {
     constructor(readonly texture: Texture) {}

@@ -1,17 +1,17 @@
 import { DisplayObject, Rectangle, Sprite } from "pixi.js";
-import { IguanaShape, IguanaShapes } from "./shapes";
-import { container } from "../../lib/pixi/container";
-import { range } from "../../lib/range";
-import { IguanaLooks } from "./looks";
-import { objEye, objEyes } from "../objects/characters/obj-eye";
-import { Rng } from "../../lib/math/rng";
-import { Force } from "../../lib/types/force";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer, Polar, Unit, ZeroOrGreater } from "../../lib/math/number-alias-types";
+import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { CollisionShape } from "../../lib/pixi/collision";
-import { Material, Materials } from "../systems/materials";
-import { sleep } from "../../lib/game-engine/routines/sleep";
+import { container } from "../../lib/pixi/container";
+import { range } from "../../lib/range";
+import { Force } from "../../lib/types/force";
 import { mxnHasHead } from "../mixins/mxn-has-head";
+import { objEye, objEyes } from "../objects/characters/obj-eye";
+import { Material, Materials } from "../systems/materials";
+import { IguanaLooks } from "./looks";
+import { IguanaShape, IguanaShapes } from "./shapes";
 
 const r1 = new Rectangle();
 const r2 = new Rectangle();

@@ -1,6 +1,6 @@
-import { IRenderer, Renderer, autoDetectRenderer } from "pixi.js";
-import { Logging } from "../logging";
+import { autoDetectRenderer, IRenderer, Renderer } from "pixi.js";
 import { Environment } from "../environment";
+import { Logging } from "../logging";
 
 export function createPixiRenderer(rendererOptions: Parameters<typeof autoDetectRenderer<HTMLCanvasElement>>[0]) {
     // Tiny optimization (about ~15ms every restart)

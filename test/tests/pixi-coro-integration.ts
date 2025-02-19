@@ -1,9 +1,9 @@
 import "../../src/lib/extensions/-load-extensions";
 import { AsshatTicker } from "../../src/lib/game-engine/asshat-ticker";
-import { createDisplayObject } from "../lib/create-display-object";
-import { Assert } from "../lib/assert";
-import { TickerContainer } from "../../src/lib/game-engine/ticker-container";
 import { Coro } from "../../src/lib/game-engine/routines/coro";
+import { TickerContainer } from "../../src/lib/game-engine/ticker-container";
+import { Assert } from "../lib/assert";
+import { createDisplayObject } from "../lib/create-display-object";
 
 export function coroWorks() {
     const ticker = new AsshatTicker();

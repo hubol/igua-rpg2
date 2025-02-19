@@ -1,13 +1,13 @@
 import { Sprite, Texture } from "pixi.js";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
-import { VectorSimple, vnew } from "../../lib/math/vector-type";
-import { objValuableSparkle } from "./effects/obj-valuable-sparkle";
+import { Sound } from "../../lib/game-engine/audio/sound";
 import { Rng } from "../../lib/math/rng";
+import { VectorSimple, vnew } from "../../lib/math/vector-type";
 import { mxnCollectible } from "../mixins/mxn-collectible";
 import { RpgEconomy } from "../rpg/rpg-economy";
-import { Sound } from "../../lib/game-engine/audio/sound";
-import { Sfx } from "../../assets/sounds";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
+import { objValuableSparkle } from "./effects/obj-valuable-sparkle";
 
 interface ValuableConfig {
     texture: Texture;

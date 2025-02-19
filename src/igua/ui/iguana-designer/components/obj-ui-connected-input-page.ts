@@ -1,21 +1,21 @@
 import { Texture } from "pixi.js";
+import { StringTransform } from "../../../../lib/string/string-transform";
 import { Empty } from "../../../../lib/types/empty";
 import { ConnectedInput } from "../../../iguana/connected-input";
 import { TypedInput } from "../../../iguana/typed-input";
-import { UiPage, ObjUiPageElement, objUiPage } from "../../framework/obj-ui-page";
+import { objUiPage, ObjUiPageElement, UiPage } from "../../framework/obj-ui-page";
+import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
 import { CtxUiIguanaDesigner } from "../obj-ui-iguana-designer-root";
+import { objUiIguanaDesignerEyesPage } from "../pages/obj-ui-iguana-designer-eyes-page";
+import { objUiIguanaDesignerFeetPage } from "../pages/obj-ui-iguana-designer-feet-page";
 import { objUiCheckboxInput } from "./obj-ui-checkbox-input";
+import { objUiColorInput } from "./obj-ui-color-input";
 import { objUiDesignerButton } from "./obj-ui-designer-button";
-import { objUiTextureChoiceInput } from "./obj-ui-texture-choice-input";
+import { ObjUiDesignerInputBase } from "./obj-ui-designer-input-base";
+import { objUiIguanaDesignerBackButton } from "./obj-ui-iguana-designer-back-button";
 import { objUiPlacementInput } from "./obj-ui-placement-input";
 import { objUiSliderInput } from "./obj-ui-slider-input";
-import { objUiColorInput } from "./obj-ui-color-input";
-import { objUiIguanaDesignerEyesPage } from "../pages/obj-ui-iguana-designer-eyes-page";
-import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
-import { objUiIguanaDesignerBackButton } from "./obj-ui-iguana-designer-back-button";
-import { objUiIguanaDesignerFeetPage } from "../pages/obj-ui-iguana-designer-feet-page";
-import { ObjUiDesignerInputBase } from "./obj-ui-designer-input-base";
-import { StringTransform } from "../../../../lib/string/string-transform";
+import { objUiTextureChoiceInput } from "./obj-ui-texture-choice-input";
 
 export function createUiConnectedInputPageElements(root: ConnectedInput.Tree<unknown>) {
     const els = Empty<ObjUiPageElement & Partial<Pick<ObjUiDesignerInputBase, "noteOnConflict">>>();

@@ -1,8 +1,8 @@
 import { DisplayObject } from "pixi.js";
-import { RpgStatus } from "../rpg/rpg-status";
-import { RpgAttack } from "../rpg/rpg-attack";
-import { mxnDripping } from "./mxn-dripping";
 import { approachLinear } from "../../lib/math/number";
+import { RpgAttack } from "../rpg/rpg-attack";
+import { RpgStatus } from "../rpg/rpg-status";
+import { mxnDripping } from "./mxn-dripping";
 
 interface MxnRpgStatusArgs {
     status: RpgStatus.Model;

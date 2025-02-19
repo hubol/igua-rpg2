@@ -1,7 +1,7 @@
-import { TypedInput } from "./typed-input";
-import { IguanaShape, IguanaShapes } from "./shapes";
-import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { Texture } from "pixi.js";
+import { AdjustColor } from "../../lib/pixi/adjust-color";
+import { IguanaShape, IguanaShapes } from "./shapes";
+import { TypedInput } from "./typed-input";
 
 export namespace IguanaLooks {
     export type Input = ReturnType<typeof create>;

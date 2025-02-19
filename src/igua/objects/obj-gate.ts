@@ -1,10 +1,10 @@
 import { Graphics } from "pixi.js";
-import { OgmoFactory } from "../ogmo/factory";
-import { playerObj } from "./obj-player";
-import { Cutscene } from "../globals";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
-import { SceneChanger } from "../systems/scene-changer";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
+import { Cutscene } from "../globals";
+import { OgmoFactory } from "../ogmo/factory";
+import { SceneChanger } from "../systems/scene-changer";
+import { playerObj } from "./obj-player";
 
 export const CtxGate = new SceneLocal(() => ({ isGateTransitionActive: false }), "CtxGate");
 

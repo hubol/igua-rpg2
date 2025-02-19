@@ -3,7 +3,7 @@ import { Polar } from "../../lib/math/number-alias-types";
 import { Undefined } from "../../lib/types/undefined";
 import { IguanaLooks } from "../iguana/looks";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
-import { PhysicsFaction, mxnPhysics } from "../mixins/mxn-physics";
+import { mxnPhysics, PhysicsFaction } from "../mixins/mxn-physics";
 import { mxnShadowFloor } from "../mixins/mxn-shadow-floor";
 
 export const IguanaLocomotiveConsts = {

@@ -1,23 +1,23 @@
 import { DisplayObject, Rectangle } from "pixi.js";
+import { Sfx } from "../../assets/sounds";
 import { Instances } from "../../lib/game-engine/instances";
+import { interp } from "../../lib/game-engine/routines/interp";
 import { vnew } from "../../lib/math/vector-type";
 import { merge } from "../../lib/object/merge";
+import { ZIndex } from "../core/scene/z-index";
 import { Cutscene, Input, layers, scene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
+import { force } from "../mixins/mxn-physics";
 import { MxnRpgStatus, mxnRpgStatus } from "../mixins/mxn-rpg-status";
+import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgPlayer } from "../rpg/rpg-player";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { RpgStatus } from "../rpg/rpg-status";
-import { ObjIguanaLocomotive, ObjIguanaLocomotiveAutoFacingMode, objIguanaLocomotive } from "./obj-iguana-locomotive";
-import { StepOrder } from "./step-order";
-import { force } from "../mixins/mxn-physics";
-import { Sfx } from "../../assets/sounds";
 import { CtxGate } from "./obj-gate";
+import { ObjIguanaLocomotive, objIguanaLocomotive, ObjIguanaLocomotiveAutoFacingMode } from "./obj-iguana-locomotive";
 import { ObjSign, objSign } from "./obj-sign";
-import { mxnSparkling } from "../mixins/mxn-sparkling";
-import { interp } from "../../lib/game-engine/routines/interp";
-import { ZIndex } from "../core/scene/z-index";
+import { StepOrder } from "./step-order";
 
 const PlayerConsts = {
     // TODO probably not constants, probably derived from status

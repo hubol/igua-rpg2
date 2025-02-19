@@ -1,12 +1,12 @@
 import { BitmapText, Container, DisplayObject, Graphics, ILineStyleOptions, Rectangle, Sprite } from "pixi.js";
+import { forceViewportResize } from "../../browser/on-viewport-resize";
 import { AdjustColor } from "../../pixi/adjust-color";
+import { _Internal_Collision } from "../../pixi/collision";
 import { container } from "../../pixi/container";
 import { Undefined } from "../../types/undefined";
+import { elDebugPanel } from "../elements/el-debug-panel";
 import { TickerContainer } from "../ticker-container";
 import { createDebugKey } from "./debug-key";
-import { elDebugPanel } from "../elements/el-debug-panel";
-import { _Internal_Collision } from "../../pixi/collision";
-import { forceViewportResize } from "../../browser/on-viewport-resize";
 
 export function createDebugPanel(root: Container) {
     if (displayObjectMonitor) {

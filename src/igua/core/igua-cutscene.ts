@@ -1,12 +1,12 @@
 import { Container, DisplayObject } from "pixi.js";
+import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
-import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
-import { NpcPersonaInternalName } from "../data/data-npc-personas";
-import { Null } from "../../lib/types/null";
-import { scene } from "../globals";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { Null } from "../../lib/types/null";
+import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { clear } from "../drama/show";
+import { scene } from "../globals";
 
 type CutsceneFn = () => Coro.Type;
 

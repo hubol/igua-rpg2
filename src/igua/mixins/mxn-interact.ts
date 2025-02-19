@@ -1,9 +1,9 @@
 import { DisplayObject } from "pixi.js";
-import { playerObj } from "../objects/obj-player";
-import { Null } from "../../lib/types/null";
-import { SceneLocal } from "../../lib/game-engine/scene-local";
-import { Input, scene } from "../globals";
 import { Instances } from "../../lib/game-engine/instances";
+import { SceneLocal } from "../../lib/game-engine/scene-local";
+import { Null } from "../../lib/types/null";
+import { Input, scene } from "../globals";
+import { playerObj } from "../objects/obj-player";
 import { mxnHasHead } from "./mxn-has-head";
 
 export const CtxInteract = new SceneLocal(() => {

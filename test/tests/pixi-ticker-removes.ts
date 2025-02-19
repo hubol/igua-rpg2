@@ -1,9 +1,9 @@
 import "../../src/lib/extensions/-load-extensions";
 import { Container } from "pixi.js";
 import { AsshatTicker } from "../../src/lib/game-engine/asshat-ticker";
+import { TickerContainer } from "../../src/lib/game-engine/ticker-container";
 import { Assert } from "../lib/assert";
 import { createDisplayObject } from "../lib/create-display-object";
-import { TickerContainer } from "../../src/lib/game-engine/ticker-container";
 
 export function grandchildStopsTicking() {
     const ticker = new AsshatTicker();

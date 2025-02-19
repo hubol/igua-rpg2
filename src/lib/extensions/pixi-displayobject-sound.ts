@@ -1,8 +1,8 @@
 import { DisplayObject, Rectangle } from "pixi.js";
 import { Sound, SoundInstance } from "../game-engine/audio/sound";
 import { EngineConfig } from "../game-engine/engine-config";
-import { IRectangle, areRectanglesOverlapping } from "../math/rectangle";
 import { nlerp } from "../math/number";
+import { areRectanglesOverlapping, IRectangle } from "../math/rectangle";
 
 declare module "pixi.js" {
     interface DisplayObject {

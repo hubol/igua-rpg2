@@ -1,13 +1,13 @@
 import { DisplayObject, Rectangle } from "pixi.js";
+import { sleepf } from "../../../lib/game-engine/routines/sleep";
+import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { Undefined } from "../../../lib/types/undefined";
-import { RpgStatus } from "../../rpg/rpg-status";
-import { objHealthBar } from "./obj-health-bar";
-import { vnew } from "../../../lib/math/vector-type";
 import { scene } from "../../globals";
 import { mxnOnSceneChange } from "../../mixins/mxn-on-scene-change";
-import { sleepf } from "../../../lib/game-engine/routines/sleep";
+import { RpgStatus } from "../../rpg/rpg-status";
 import { playerObj } from "../obj-player";
+import { objHealthBar } from "./obj-health-bar";
 
 export function objEnemyHealthBars() {
     const getRpgStatusEffects = (obj: DisplayObject, status: RpgStatus.Model): Omit<RpgStatus.Effects, "died"> => {

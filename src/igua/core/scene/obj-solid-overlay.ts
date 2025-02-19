@@ -1,8 +1,8 @@
 import { BLEND_MODES, Container, Graphics } from "pixi.js";
-import { Undefined } from "../../../lib/types/undefined";
-import { interp } from "../../../lib/game-engine/routines/interp";
-import { renderer } from "../../current-pixi-renderer";
 import { Coro } from "../../../lib/game-engine/routines/coro";
+import { interp } from "../../../lib/game-engine/routines/interp";
+import { Undefined } from "../../../lib/types/undefined";
+import { renderer } from "../../current-pixi-renderer";
 
 export function objSolidOverlay() {
     let container = Undefined<Container>();

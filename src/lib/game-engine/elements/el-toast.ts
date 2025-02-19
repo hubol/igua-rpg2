@@ -1,5 +1,5 @@
-import { elHubol } from "./lib/el-hubol";
 import html from "./el-toast.html";
+import { elHubol } from "./lib/el-hubol";
 
 export function elToast(title: string, description: string, type: "warn" | "info", durationMs: number) {
     const context = {

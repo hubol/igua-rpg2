@@ -1,12 +1,12 @@
 import { BLEND_MODES, DisplayObject, Sprite } from "pixi.js";
 import { Tx } from "../../assets/textures";
-import { StepOrder } from "../objects/step-order";
-import { mxnBoilMirrorRotate } from "./mxn-boil-mirror-rotate";
-import { CtxTerrainObj } from "../objects/obj-terrain";
-import { VectorSimple } from "../../lib/math/vector-type";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
+import { VectorSimple } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
+import { CtxTerrainObj } from "../objects/obj-terrain";
+import { StepOrder } from "../objects/step-order";
+import { mxnBoilMirrorRotate } from "./mxn-boil-mirror-rotate";
 
 interface MxnShadowFloorArgs {
     offset: VectorSimple;

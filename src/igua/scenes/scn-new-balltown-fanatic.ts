@@ -1,15 +1,15 @@
 import { BLEND_MODES } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
-import { Jukebox } from "../core/igua-audio";
-import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
-import { mxnBoilMirrorRotate } from "../mixins/mxn-boil-mirror-rotate";
-import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { show } from "../drama/show";
-import { RpgProgress } from "../rpg/rpg-progress";
-import { RpgPocket } from "../rpg/rpg-pocket";
 import { interpv } from "../../lib/game-engine/routines/interp";
+import { Jukebox } from "../core/igua-audio";
 import { DramaWallet } from "../drama/drama-wallet";
+import { show } from "../drama/show";
+import { mxnBoilMirrorRotate } from "../mixins/mxn-boil-mirror-rotate";
+import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
+import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { RpgPocket } from "../rpg/rpg-pocket";
+import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltownFanatic() {
     Jukebox.play(Mzk.CedarWorld);

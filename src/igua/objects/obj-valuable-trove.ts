@@ -1,11 +1,11 @@
 import { DisplayObject } from "pixi.js";
+import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { container } from "../../lib/pixi/container";
 import { Empty } from "../../lib/types/empty";
-import { RpgEconomy } from "../rpg/rpg-economy";
-import { objValuable } from "./obj-valuable";
-import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
+import { RpgEconomy } from "../rpg/rpg-economy";
 import { ValuableChangeMaker } from "../systems/valuable-change-maker";
+import { objValuable } from "./obj-valuable";
 
 type Tiers = number[];
 

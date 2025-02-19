@@ -1,7 +1,6 @@
 import { DisplayObject, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
-import { interp } from "../../../lib/game-engine/routines/interp";
 
 interface ObjAngelPlantLegsArgs {
     objToBounce: DisplayObject;

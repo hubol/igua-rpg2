@@ -1,4 +1,4 @@
-import { Vector, defineVectorProperties } from "../math/vector-type";
+import { defineVectorProperties, Vector } from "../math/vector-type";
 
 declare global {
     interface Array<T> extends Vector {}

@@ -5,7 +5,7 @@ import { deepUpgradeVerbose } from "../../lib/object/deep-upgrade-verbose";
 import { Diff } from "../../lib/object/diff";
 import { GameStartConfig } from "../launch/start-game";
 import { playerObj } from "../objects/obj-player";
-import { RpgProgress, getInitialRpgProgress } from "../rpg/rpg-progress";
+import { getInitialRpgProgress, RpgProgress } from "../rpg/rpg-progress";
 import { DevUrl } from "./dev-url";
 
 function formatUpdatedProgressMessage(rawMessages: Array<{ path: string[]; message: string }>) {

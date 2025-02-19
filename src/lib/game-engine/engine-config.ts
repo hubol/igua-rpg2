@@ -1,6 +1,6 @@
 import { Container } from "pixi.js";
-import { SceneStack } from "./scene-stack";
 import { PixiRenderer } from "./pixi-renderer";
+import { SceneStack } from "./scene-stack";
 
 interface EngineConfigType {
     readonly renderer: PixiRenderer;

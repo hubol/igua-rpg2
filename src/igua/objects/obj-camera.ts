@@ -1,12 +1,12 @@
 import { DisplayObject } from "pixi.js";
-import { Vector, vnew } from "../../lib/math/vector-type";
 import { vequals } from "../../lib/math/vector";
+import { distance } from "../../lib/math/vector";
+import { Vector, vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { scene } from "../globals";
 import { playerObj } from "./obj-player";
 import { StepOrder } from "./step-order";
-import { distance } from "../../lib/math/vector";
 
 type CameraMode = "follow-player" | "controlled";
 

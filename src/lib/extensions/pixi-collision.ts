@@ -1,6 +1,6 @@
 import { DisplayObject } from "pixi.js";
-import { _Internal_Collision, CollisionShape } from "../pixi/collision";
 import { Vector, vnew } from "../math/vector-type";
+import { _Internal_Collision, CollisionShape } from "../pixi/collision";
 
 declare module "pixi.js" {
     interface DisplayObject {

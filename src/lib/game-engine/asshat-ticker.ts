@@ -1,5 +1,5 @@
-import { Logger } from "./logger";
 import { ICancellationToken } from "../promise/cancellation-token";
+import { Logger } from "./logger";
 
 export class EscapeTickerAndExecute {
     constructor(readonly execute: () => void) {}

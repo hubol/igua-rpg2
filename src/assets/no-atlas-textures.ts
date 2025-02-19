@@ -1,6 +1,6 @@
 import { Texture, WRAP_MODES } from "pixi.js";
-import { Tx } from "./textures";
 import { TextureProcessing } from "../lib/pixi/texture-processing";
+import { Tx } from "./textures";
 
 // For tiled textures,
 // I think it is not possible to keep them stored in a texture atlas.

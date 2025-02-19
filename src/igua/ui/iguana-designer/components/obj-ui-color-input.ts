@@ -1,17 +1,17 @@
 import { Graphics } from "pixi.js";
-import { AdjustColor } from "../../../../lib/pixi/adjust-color";
-import { objUiButton } from "../../framework/obj-ui-button";
-import { ObjUiPageElement, objUiPage } from "../../framework/obj-ui-page";
-import { objUiSliderInput } from "./obj-ui-slider-input";
 import { Rng } from "../../../../lib/math/rng";
-import { CtxUiIguanaDesigner } from "../obj-ui-iguana-designer-root";
-import { UiColor } from "../../ui-color";
+import { AdjustColor } from "../../../../lib/pixi/adjust-color";
+import { Empty } from "../../../../lib/types/empty";
 import { Input } from "../../../globals";
 import { ConnectedInput } from "../../../iguana/connected-input";
-import { Empty } from "../../../../lib/types/empty";
+import { objUiButton } from "../../framework/obj-ui-button";
+import { objUiPage, ObjUiPageElement } from "../../framework/obj-ui-page";
 import { UiVerticalLayout } from "../../framework/ui-vertical-layout";
-import { objUiIguanaDesignerBackButton } from "./obj-ui-iguana-designer-back-button";
+import { UiColor } from "../../ui-color";
+import { CtxUiIguanaDesigner } from "../obj-ui-iguana-designer-root";
 import { objUiDesignerInputBase } from "./obj-ui-designer-input-base";
+import { objUiIguanaDesignerBackButton } from "./obj-ui-iguana-designer-back-button";
+import { objUiSliderInput } from "./obj-ui-slider-input";
 
 function readHsv(binding: ConnectedInput.Binding<number>) {
     return AdjustColor.pixi(binding.value).toHsv();

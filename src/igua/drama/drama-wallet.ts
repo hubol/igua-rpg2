@@ -1,15 +1,15 @@
-import { container } from "../../lib/pixi/container";
-import { RpgEconomy } from "../rpg/rpg-economy";
-import { objValuable } from "../objects/obj-valuable";
-import { sleep } from "../../lib/game-engine/routines/sleep";
-import { VectorSimple } from "../../lib/math/vector-type";
-import { range } from "../../lib/range";
-import { Rng } from "../../lib/math/rng";
-import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
-import { playerObj } from "../objects/obj-player";
 import { Coro } from "../../lib/game-engine/routines/coro";
-import { ValuableChangeMaker } from "../systems/valuable-change-maker";
+import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
+import { sleep } from "../../lib/game-engine/routines/sleep";
+import { Rng } from "../../lib/math/rng";
+import { VectorSimple } from "../../lib/math/vector-type";
+import { container } from "../../lib/pixi/container";
+import { range } from "../../lib/range";
+import { playerObj } from "../objects/obj-player";
+import { objValuable } from "../objects/obj-valuable";
+import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
+import { ValuableChangeMaker } from "../systems/valuable-change-maker";
 
 function* rewardValuables(
     total: number,

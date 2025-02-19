@@ -1,7 +1,7 @@
 import { DisplayObject } from "pixi.js";
-import { scene } from "../globals";
-import { ZIndex } from "../core/scene/z-index";
 import { Logger } from "../../lib/game-engine/logger";
+import { ZIndex } from "../core/scene/z-index";
+import { scene } from "../globals";
 
 export function ogmoAddToLayer(obj: DisplayObject, layerName: string) {
     if (obj.parent) {

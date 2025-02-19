@@ -1,10 +1,10 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
-import { objEphemeralSprite } from "../obj-ephemeral-sprite";
-import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
-import { Rng } from "../../../lib/math/rng";
-import { mxnMotion } from "../../mixins/mxn-motion";
 import { vdeg } from "../../../lib/math/angle";
+import { Rng } from "../../../lib/math/rng";
+import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
+import { mxnMotion } from "../../mixins/mxn-motion";
+import { objEphemeralSprite } from "../obj-ephemeral-sprite";
 
 const txs = Tx.Effects.FieryBurst170px.split({ width: 170 });
 

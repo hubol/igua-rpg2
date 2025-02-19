@@ -1,6 +1,6 @@
 import { BitmapFont, BitmapText, IBitmapFontCharacter, IBitmapTextStyle, Texture } from "pixi.js";
-import { PseudoRng, Rng } from "../../lib/math/rng";
 import { Integer } from "../../lib/math/number-alias-types";
+import { PseudoRng, Rng } from "../../lib/math/rng";
 
 interface IrregularBitmapFont {
     rng: PseudoRng;

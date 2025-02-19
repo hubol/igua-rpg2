@@ -1,24 +1,24 @@
 import { DisplayObject, Graphics, Sprite } from "pixi.js";
-import { Tx } from "../../../assets/textures";
-import { objAngelEyes } from "./obj-angel-eyes";
-import { container } from "../../../lib/pixi/container";
-import { sleep } from "../../../lib/game-engine/routines/sleep";
-import { Rng } from "../../../lib/math/rng";
-import { Integer } from "../../../lib/math/number-alias-types";
-import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
-import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
-import { mxnEnemy } from "../../mixins/mxn-enemy";
-import { approachLinear, nlerp } from "../../../lib/math/number";
-import { scene } from "../../globals";
-import { interp } from "../../../lib/game-engine/routines/interp";
-import { objAngelPlantLegs } from "./obj-angel-plant-legs";
-import { objSpikedCanonball } from "../projectiles/obj-spiked-canonball";
-import { mxnStopAndDieWhenHitGround } from "../../mixins/mxn-stop-and-die-when-hit-ground";
-import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
-import { RpgStatus } from "../../rpg/rpg-status";
-import { RpgAttack } from "../../rpg/rpg-attack";
-import { playerObj } from "../obj-player";
 import { Sfx } from "../../../assets/sounds";
+import { Tx } from "../../../assets/textures";
+import { interp } from "../../../lib/game-engine/routines/interp";
+import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { approachLinear, nlerp } from "../../../lib/math/number";
+import { Integer } from "../../../lib/math/number-alias-types";
+import { Rng } from "../../../lib/math/rng";
+import { container } from "../../../lib/pixi/container";
+import { scene } from "../../globals";
+import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
+import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
+import { mxnStopAndDieWhenHitGround } from "../../mixins/mxn-stop-and-die-when-hit-ground";
+import { RpgAttack } from "../../rpg/rpg-attack";
+import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { RpgStatus } from "../../rpg/rpg-status";
+import { playerObj } from "../obj-player";
+import { objSpikedCanonball } from "../projectiles/obj-spiked-canonball";
+import { objAngelEyes } from "./obj-angel-eyes";
+import { objAngelPlantLegs } from "./obj-angel-plant-legs";
 
 const themes = {
     Common: {

@@ -1,9 +1,9 @@
 import { Container, DisplayObject, Filter, MaskData, Rectangle } from "pixi.js";
 import { EngineConfig } from "../game-engine/engine-config";
-import { Pojo } from "../types/pojo";
-import { merge } from "../object/merge";
-import { VectorSimple } from "../math/vector-type";
 import { Logging } from "../logging";
+import { VectorSimple } from "../math/vector-type";
+import { merge } from "../object/merge";
+import { Pojo } from "../types/pojo";
 
 type TypeError_ThisDoesNotSufficientlyImplementContainerChildrenType =
     "This DisplayObject does not sufficiently implement the Container's children type";

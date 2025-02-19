@@ -1,16 +1,16 @@
 import { DisplayObject } from "pixi.js";
-import { RpgStatus } from "../rpg/rpg-status";
-import { mxnRpgStatus } from "./mxn-rpg-status";
-import { RpgLoot } from "../rpg/rpg-loot";
-import { objLootDrop } from "../objects/obj-loot-drop";
-import { layers } from "../globals";
-import { RpgAttack } from "../rpg/rpg-attack";
-import { merge } from "../../lib/object/merge";
-import { playerObj } from "../objects/obj-player";
-import { clone } from "../../lib/object/clone";
-import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { Sfx } from "../../assets/sounds";
 import { Rng } from "../../lib/math/rng";
+import { clone } from "../../lib/object/clone";
+import { merge } from "../../lib/object/merge";
+import { layers } from "../globals";
+import { objLootDrop } from "../objects/obj-loot-drop";
+import { playerObj } from "../objects/obj-player";
+import { RpgAttack } from "../rpg/rpg-attack";
+import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
+import { RpgLoot } from "../rpg/rpg-loot";
+import { RpgStatus } from "../rpg/rpg-status";
+import { mxnRpgStatus } from "./mxn-rpg-status";
 
 interface MxnEnemyArgs {
     hurtboxes: DisplayObject[];

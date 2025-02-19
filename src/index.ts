@@ -1,14 +1,14 @@
+import { settings } from "pixi.js";
+import { setCurrentPixiRenderer } from "./igua/current-pixi-renderer";
 import { loadLaunchAssets } from "./igua/launch/load-launch-assets";
 import { showLoadingScreen } from "./igua/launch/show-loading-screen";
 import { integralUpscaleCanvas } from "./lib/browser/integral-upscale-canvas";
+import { Environment } from "./lib/environment";
+import { initializeAsshatAudioContext } from "./lib/game-engine/audio/asshat-audiocontext";
+import { DomLogTarget } from "./lib/game-engine/dom-log-target";
+import { JobProgress } from "./lib/game-engine/job-progress";
 import { Logger } from "./lib/game-engine/logger";
 import { createPixiRenderer } from "./lib/game-engine/pixi-renderer";
-import { JobProgress } from "./lib/game-engine/job-progress";
-import { initializeAsshatAudioContext } from "./lib/game-engine/audio/asshat-audiocontext";
-import { Environment } from "./lib/environment";
-import { settings } from "pixi.js";
-import { setCurrentPixiRenderer } from "./igua/current-pixi-renderer";
-import { DomLogTarget } from "./lib/game-engine/dom-log-target";
 
 let assetsLoaded = false;
 

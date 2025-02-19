@@ -1,18 +1,17 @@
 import { Graphics } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
+import { Tx } from "../../../assets/textures";
+import { Instances } from "../../../lib/game-engine/instances";
+import { approachLinear } from "../../../lib/math/number";
+import { Integer } from "../../../lib/math/number-alias-types";
+import { Rng } from "../../../lib/math/rng";
+import { CollisionShape } from "../../../lib/pixi/collision";
+import { container } from "../../../lib/pixi/container";
+import { scene } from "../../globals";
+import { MxnPhysics, mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
-import { container } from "../../../lib/pixi/container";
 import { objEphemeralSprite } from "../obj-ephemeral-sprite";
-import { Tx } from "../../../assets/textures";
-import { Rng } from "../../../lib/math/rng";
-import { Integer } from "../../../lib/math/number-alias-types";
-import { CollisionShape } from "../../../lib/pixi/collision";
-import { approachLinear } from "../../../lib/math/number";
-import { StepOrder } from "../step-order";
-import { Instances } from "../../../lib/game-engine/instances";
-import { MxnPhysics, mxnPhysics } from "../../mixins/mxn-physics";
-import { Sfx } from "../../../assets/sounds";
-import { scene } from "../../globals";
 
 export function objPuddle(width: number, tint = 0x68A8D0) {
     const attack = RpgAttack.create({

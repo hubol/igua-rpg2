@@ -2,12 +2,12 @@ import { unzip } from "unzipit";
 import { JobProgress } from "../lib/game-engine/job-progress";
 import { GeneratedSfxData } from "./generated/sounds/generated-sfx-data";
 
+import { IguaAudio, IguaAudioInitializer } from "../igua/core/igua-audio";
+import { RequireCapability } from "../lib/browser/capabilities";
+import { intervalWait } from "../lib/browser/interval-wait";
+import { Sound } from "../lib/game-engine/audio/sound";
 // @ts-expect-error
 import oggSoundsZipUrl from "./generated/sounds/sounds-ogg.zip";
-import { RequireCapability } from "../lib/browser/capabilities";
-import { IguaAudio, IguaAudioInitializer } from "../igua/core/igua-audio";
-import { Sound } from "../lib/game-engine/audio/sound";
-import { intervalWait } from "../lib/browser/interval-wait";
 
 const { sfxs } = GeneratedSfxData;
 

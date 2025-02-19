@@ -1,12 +1,12 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../assets/textures";
+import { factor, interpv } from "../../lib/game-engine/routines/interp";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../lib/math/rng";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { container } from "../../lib/pixi/container";
 import { mxnPhysics } from "../mixins/mxn-physics";
-import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
-import { factor, interpv } from "../../lib/game-engine/routines/interp";
 import { objFxBubble4 } from "./effects/obj-fx-bubble-4";
 
 const [txFishBody0, txFishBody1, ...txFishFaces] = Tx.Furniture.Aquarium.Fish.split({ width: 22 });

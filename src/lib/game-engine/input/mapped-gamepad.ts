@@ -2,7 +2,7 @@ import { sqDistance } from "../../math/vector";
 import { vnew } from "../../math/vector-type";
 import { Undefined } from "../../types/undefined";
 import { InputModalityType, MappedInputModality } from "./asshat-input";
-import { GamepadControlType, GamepadControls } from "./gamepad-controls";
+import { GamepadControls, GamepadControlType } from "./gamepad-controls";
 
 export class MappedGamepad<TAction extends string> implements MappedInputModality<TAction> {
     private readonly _keys: string[];

@@ -1,5 +1,5 @@
 import { DisplayObject, ObservablePoint, Point, Rectangle } from "pixi.js";
-import { Vector, defineVectorProperties } from "../math/vector-type";
+import { defineVectorProperties, Vector } from "../math/vector-type";
 
 declare module "pixi.js" {
     interface DisplayObject extends Vector {}

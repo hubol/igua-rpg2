@@ -1,7 +1,7 @@
-import { JobProgress } from "../../lib/game-engine/job-progress";
-import { approachLinear } from "../../lib/math/number";
 import { timeoutSleep } from "../../lib/browser/timeout-sleep";
 import { Environment } from "../../lib/environment";
+import { JobProgress } from "../../lib/game-engine/job-progress";
+import { approachLinear } from "../../lib/math/number";
 
 export async function showLoadingScreen(progress: JobProgress) {
     if (Environment.isProduction) {

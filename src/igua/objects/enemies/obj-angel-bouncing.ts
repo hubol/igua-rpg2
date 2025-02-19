@@ -1,17 +1,16 @@
 // const clownTxs = subimageTextures(CommonClown, 2);
 
 import { Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { nlerp } from "../../../lib/math/number";
-import { container } from "../../../lib/pixi/container";
-import { PhysicsFaction, mxnPhysics } from "../../mixins/mxn-physics";
 import { vnew } from "../../../lib/math/vector-type";
-import { playerObj } from "../obj-player";
+import { container } from "../../../lib/pixi/container";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
-import { RpgPlayer } from "../../rpg/rpg-player";
+import { mxnPhysics, PhysicsFaction } from "../../mixins/mxn-physics";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
-import { Sfx } from "../../../assets/sounds";
+import { playerObj } from "../obj-player";
 
 const clownTxs = Tx.Enemy.CommonClown.split({ count: 2 });
 

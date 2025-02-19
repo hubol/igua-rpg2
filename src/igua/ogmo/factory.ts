@@ -1,9 +1,9 @@
 import { Container, DisplayObject, Sprite, Texture } from "pixi.js";
-import { scene } from "../globals";
-import { Logger } from "../../lib/game-engine/logger";
-import { ogmoAddToLayer } from "./add-to-layer";
-import { container } from "../../lib/pixi/container";
 import { OgmoProject } from "../../assets/generated/levels/generated-ogmo-project-data";
+import { Logger } from "../../lib/game-engine/logger";
+import { container } from "../../lib/pixi/container";
+import { scene } from "../globals";
+import { ogmoAddToLayer } from "./add-to-layer";
 
 export namespace OgmoFactory {
     interface EntityBase {

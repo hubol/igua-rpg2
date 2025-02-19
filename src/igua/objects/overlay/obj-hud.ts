@@ -1,24 +1,24 @@
 import { Container, DisplayObject, Graphics, Rectangle, Sprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
-import { container } from "../../../lib/pixi/container";
-import { objHealthBar } from "./obj-health-bar";
-import { RpgPlayer } from "../../rpg/rpg-player";
-import { objStatusBar } from "./obj-status-bar";
-import { playerObj } from "../obj-player";
-import { RpgProgress, RpgProgressExperience } from "../../rpg/rpg-progress";
-import { renderer } from "../../current-pixi-renderer";
-import { Cutscene } from "../../globals";
-import { factor, interp, interpr, interpvr } from "../../../lib/game-engine/routines/interp";
-import { DataPocketItem } from "../../data/data-pocket-item";
-import { CtxInteract } from "../../mixins/mxn-interact";
-import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { Tx } from "../../../assets/textures";
-import { Null } from "../../../lib/types/null";
-import { approachLinear } from "../../../lib/math/number";
-import { sleep } from "../../../lib/game-engine/routines/sleep";
-import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
-import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
 import { Coro } from "../../../lib/game-engine/routines/coro";
+import { factor, interp, interpr, interpvr } from "../../../lib/game-engine/routines/interp";
+import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { approachLinear } from "../../../lib/math/number";
+import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
+import { container } from "../../../lib/pixi/container";
+import { Null } from "../../../lib/types/null";
+import { renderer } from "../../current-pixi-renderer";
+import { DataPocketItem } from "../../data/data-pocket-item";
+import { Cutscene } from "../../globals";
+import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
+import { mxnHasHead } from "../../mixins/mxn-has-head";
+import { CtxInteract } from "../../mixins/mxn-interact";
+import { RpgPlayer } from "../../rpg/rpg-player";
+import { RpgProgress, RpgProgressExperience } from "../../rpg/rpg-progress";
+import { playerObj } from "../obj-player";
+import { objHealthBar } from "./obj-health-bar";
+import { objStatusBar } from "./obj-status-bar";
 
 const Consts = {
     StatusTextTint: 0x00ff00,

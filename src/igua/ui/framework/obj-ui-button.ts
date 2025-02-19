@@ -1,9 +1,9 @@
 import { Graphics } from "pixi.js";
 import { objText } from "../../../assets/fonts";
+import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
 import { Input } from "../../globals";
 import { UiColor } from "../ui-color";
-import { Rng } from "../../../lib/math/rng";
 
 export function objUiButton(text: string, onPress: () => unknown, width = 96, height = 30) {
     let jigglesOnPress = false;

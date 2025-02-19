@@ -1,8 +1,8 @@
 import { Sprite, Texture } from "pixi.js";
 import { Integer } from "../../../lib/math/number-alias-types";
-import { objEye, objEyes } from "../characters/obj-eye";
-import { VectorSimple } from "../../../lib/math/vector-type";
 import { Rng } from "../../../lib/math/rng";
+import { VectorSimple } from "../../../lib/math/vector-type";
+import { objEye, objEyes } from "../characters/obj-eye";
 
 interface PupilRestStyle_CrossEyed {
     kind: "cross-eyed";

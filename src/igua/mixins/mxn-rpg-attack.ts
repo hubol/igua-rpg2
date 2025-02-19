@@ -1,8 +1,8 @@
 import { DisplayObject } from "pixi.js";
 import { Instances } from "../../lib/game-engine/instances";
-import { mxnRpgStatus } from "./mxn-rpg-status";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgStatus } from "../rpg/rpg-status";
+import { mxnRpgStatus } from "./mxn-rpg-status";
 
 interface MxnRpgAttackArgs {
     attack: RpgAttack.Model;

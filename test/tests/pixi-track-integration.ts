@@ -1,9 +1,9 @@
 import { Container } from "pixi.js";
 import { setEngineConfig } from "../../src/lib/game-engine/engine-config";
-import { SceneStack } from "../../src/lib/game-engine/scene-stack";
-import { Assert } from "../lib/assert";
 import { Instances } from "../../src/lib/game-engine/instances";
+import { SceneStack } from "../../src/lib/game-engine/scene-stack";
 import { range } from "../../src/lib/range";
+import { Assert } from "../lib/assert";
 
 function objTest() {
     return new Container().track(objTest);

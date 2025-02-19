@@ -1,7 +1,7 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
-import { Rng } from "../../../lib/math/rng";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
+import { Rng } from "../../../lib/math/rng";
 
 export function objFxBurst32() {
     return Sprite.from(Tx.Effects.Burst32).anchored(0.5, 0.5).coro(function* (self) {
