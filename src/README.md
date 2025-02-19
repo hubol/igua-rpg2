@@ -48,6 +48,17 @@ Use a function with a **camelCase** name prefixed **scn**.
 Place the module exporting the Scene in the **igua/scenes/** directory. The file should have a name prefixed **scn-**.
 
 
+## Drama functions
+Functions that return Coros with effects related to cutscenes.
+
+### Name
+Encapsulate the functions as methods on an object with a **PascalCase** name prefixed **Drama**.
+
+### Organization
+Place the module exporting the Drama object in the **igua/drama/** directory. The file should have a name prefixed **drama-**.
+Note: for frequently-used Drama functions, such as ones that display messages on the screen, the convention of encapsulating in a **Drama** object may be avoided for brevity.
+
+
 ## Global Services
 Game Objects and Scenes in this engine frequently access and manipulate Services that were not explicitly passed as dependencies.
 This enables writing more terse code.
