@@ -16,6 +16,17 @@
       "gridCellHeight": 8,
       "gridCellsX": 130,
       "gridCellsY": 55,
+      "entities": []
+    },
+    {
+      "name": "RegionEntities",
+      "_eid": "01831167",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 130,
+      "gridCellsY": 55,
       "entities": [
         {
           "name": "GateVertical",

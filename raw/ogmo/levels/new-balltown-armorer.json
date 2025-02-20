@@ -31,6 +31,17 @@
       ]
     },
     {
+      "name": "RegionEntities",
+      "_eid": "01831167",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": []
+    },
+    {
       "name": "FrontDecals",
       "_eid": "17577176",
       "offsetX": 0,

@@ -51,6 +51,51 @@
           "values": {"name": "MinerValuable0", "depth": 0}
         },
         {
+          "name": "Marker",
+          "id": 5,
+          "_eid": "73148747",
+          "x": 816,
+          "y": 168,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#4f3424",
+          "values": {"name": "FarmerAppearMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 6,
+          "_eid": "73148747",
+          "x": 480,
+          "y": 160,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "FarmerMoveToMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 8,
+          "_eid": "73148747",
+          "x": 368,
+          "y": 194,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#ff1f00",
+          "values": {"name": "EnemyDemoMarker", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "RegionEntities",
+      "_eid": "01831167",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 147,
+      "gridCellsY": 68,
+      "entities": [
+        {
           "name": "Region",
           "id": 3,
           "_eid": "11908607",
@@ -77,28 +122,6 @@
           "values": {"name": "FarmingRegion", "depth": 0}
         },
         {
-          "name": "Marker",
-          "id": 5,
-          "_eid": "73148747",
-          "x": 816,
-          "y": 168,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#4f3424",
-          "values": {"name": "FarmerAppearMarker", "depth": 0}
-        },
-        {
-          "name": "Marker",
-          "id": 6,
-          "_eid": "73148747",
-          "x": 480,
-          "y": 160,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#00ff00",
-          "values": {"name": "FarmerMoveToMarker", "depth": 0}
-        },
-        {
           "name": "GateHorizontal",
           "id": 7,
           "_eid": "97593426",
@@ -109,17 +132,6 @@
           "originY": 0,
           "flippedX": true,
           "values": {"sceneName": "scnNewBalltown", "checkpointName": "fromOutskirts", "name": "", "depth": 0}
-        },
-        {
-          "name": "Marker",
-          "id": 8,
-          "_eid": "73148747",
-          "x": 368,
-          "y": 194,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#ff1f00",
-          "values": {"name": "EnemyDemoMarker", "depth": 0}
         },
         {
           "name": "GateVertical",
