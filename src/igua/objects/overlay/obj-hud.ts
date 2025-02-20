@@ -210,8 +210,6 @@ function objExperienceIncrement(
         })
         .coro(function* (self) {
             const width = self.width;
-            self.pivot.x = -width;
-            yield interpvr(self.pivot).factor(factor.sine).to(0, 0).over(500);
             while (self.target !== state.value) {
                 yield interpr(state, "value").to(self.target).over(500);
                 yield* Coro.race([
@@ -220,7 +218,7 @@ function objExperienceIncrement(
                 ]);
             }
             self.canBeUpdated = false;
-            yield interpvr(self.pivot).factor(factor.sine).to(-width, 0).over(500);
+            yield interpvr(self.pivot).steps(3).to(-width, 0).over(200);
             self.destroy();
         });
 }
