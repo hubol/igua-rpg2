@@ -13,10 +13,12 @@ import { DramaMisc } from "../drama/drama-misc";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
 import { Cutscene } from "../globals";
+import { mxnComputer } from "../mixins/mxn-computer";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
 import { objFish } from "../objects/obj-fish";
+import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltownArmorer() {
@@ -180,7 +182,7 @@ function enrichAquarium(lvl: LvlType.NewBalltownArmorer) {
         colorPrimary: 0x0B4FA8,
         colorSecondary: 0x0BC6A8,
         name: "Automated Water Intake",
-    }).mixin(mxnCutscene, function* () {
+    }).mixin(mxnComputer).mixin(mxnCutscene, function* () {
         if (!aquariumService.isFilled) {
             if (wetness.value === 0) {
                 yield* show(`--Water analysis
@@ -211,12 +213,16 @@ Need at least 150`);
                 wetness.value = 0;
                 Sfx.Fluid.Slurp.play();
                 yield sleep(1000);
+                RpgExperienceRewarder.computer.onInteract("small-task");
             }
         }
 
         yield* show(`--Fill analysis
 at ${
-            StringFromNumber.getPercentageNoDecimal(aquariumService.moistureUnits, aquariumService.maximumMoistureUnits)
+            StringFromNumber.getPercentageNoDecimal(
+                aquariumService.moistureUnits,
+                aquariumService.maximumMoistureUnits,
+            )
         } capacity`);
     });
 }

@@ -11,3 +11,5 @@ export function mxnSpeaker(obj: DisplayObject, speaker: MxnSpeakerArgs) {
         .dispatches<"mxnSpeaker.speakingStarted">()
         .dispatches<"mxnSpeaker.speakingEnded">();
 }
+
+export type MxnSpeaker = ReturnType<typeof mxnSpeaker>;

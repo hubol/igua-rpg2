@@ -14,6 +14,7 @@ function getDefaultCutsceneAttributes() {
     return {
         speaker: Null<DisplayObject>(),
         letterbox: true,
+        computerObjsSpoken: new Set<DisplayObject>(),
         npcNamesSpoken: new Set<NpcPersonaInternalName>(),
         requiredScene: Null(scene),
         camera: {

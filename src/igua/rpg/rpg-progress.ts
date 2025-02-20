@@ -36,6 +36,7 @@ export function getInitialRpgProgress() {
             equipment: ["JumpAtSpecialSignsRing", null, null, null] as Array<EquipmentInternalName | null>,
             experience: {
                 combat: 0,
+                computer: 0,
                 gambling: 0,
                 pocket: 0,
                 social: 0,

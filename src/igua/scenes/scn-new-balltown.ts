@@ -21,6 +21,7 @@ import { DramaMisc } from "../drama/drama-misc";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
 import { Cutscene } from "../globals";
+import { mxnComputer } from "../mixins/mxn-computer";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
@@ -29,6 +30,7 @@ import { objFxSparkleMany } from "../objects/effects/obj-fx-sparkle-many";
 import { IguanaLocomotiveConsts, ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { objMarker } from "../objects/utils/obj-marker";
+import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgKeyItems } from "../rpg/rpg-key-items";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 import { RpgProgress } from "../rpg/rpg-progress";
@@ -229,6 +231,7 @@ function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
 
     lvl.MechanicalIdol
         .mixin(mxnSpeaker, { name: "Mechanical Idol", colorPrimary: 0xDCC132, colorSecondary: 0xB52417 })
+        .mixin(mxnComputer)
         .mixin(mxnCutscene, function* () {
             if (!(yield* ask("Please input 5-symbol password"))) {
                 return;
@@ -252,6 +255,7 @@ function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
 
             const password = characters.join("");
             if (password === "POOP*") {
+                RpgExperienceRewarder.computer.onInteract("medium-task");
                 yield* show("Access granted.");
                 // TODO this looks like shit!!
                 if (RpgKeyItems.Methods.has(RpgProgress.character.inventory.keyItems, "UpgradedPickaxe", 1)) {
@@ -498,6 +502,7 @@ function objFishmongerBomb(name: string) {
     const hookedObj = obj.merge({ onAttemptToDefuse: Force<(self: typeof obj) => Coro.Type>() });
 
     return hookedObj
+        .mixin(mxnComputer)
         .mixin(mxnCutscene, function* () {
             if (hookedObj.isDefused) {
                 yield* show("Already defused.");
@@ -507,5 +512,9 @@ function objFishmongerBomb(name: string) {
                 hookedObj.onAttemptToDefuse(hookedObj),
                 () => hookedObj.destroyed,
             ]);
+
+            if (hookedObj.isDefused) {
+                RpgExperienceRewarder.computer.onInteract("small-task");
+            }
         });
 }
