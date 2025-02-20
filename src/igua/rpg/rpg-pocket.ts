@@ -48,11 +48,15 @@ export namespace RpgPocket {
 
             model.nextSlotIndex = (index + 1) % model.slots.length;
 
-            return {
+            const result = {
                 index,
                 reset,
                 count: slot.count,
             };
+
+            RpgExperienceRewarder.pocket.onReceive(result);
+
+            return result;
         },
         has(model: Model, item: Item, count: number) {
             for (const slot of model.slots) {

@@ -1,4 +1,5 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { RpgPocket } from "./rpg-pocket";
 import { RpgProgress } from "./rpg-progress";
 
 type ComputerInteraction = "noop" | "small-task" | "medium-task";
@@ -29,8 +30,11 @@ export const RpgExperienceRewarder = {
         },
     },
     pocket: {
+        onReceive(result: RpgPocket.ReceiveResult) {
+            RpgProgress.character.experience.pocket += result.reset ? 2 : 1;
+        },
         onRemoveItems(count: Integer) {
-            RpgProgress.character.experience.pocket += count;
+            RpgProgress.character.experience.pocket += count * 2;
         },
     },
     social: {
