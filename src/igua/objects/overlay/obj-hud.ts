@@ -188,7 +188,10 @@ function objExperienceIncrement(
     const totalTextObj = objText.Large("", { tint: 0x000000 }).anchored(1, 0.5).at(-46, -15);
     const deltaTextObj = objText.SmallDigits("", { tint: 0x000000 }).anchored(1, 0.5).at(-68, -6);
 
-    const bgObj = Sprite.from(Tx.Ui.Experience.IncrementBg).mixin(mxnBoilMirrorRotate).tinted(bgTint).anchored(0.5, 0.5)
+    const bgObj = Sprite.from(Tx.Ui.Experience.IncrementBg).mixin(mxnBoilMirrorRotate, 2).tinted(bgTint).anchored(
+        0.5,
+        0.5,
+    )
         .at(
             0,
             -16,
