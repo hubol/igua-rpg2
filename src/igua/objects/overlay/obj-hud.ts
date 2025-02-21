@@ -207,8 +207,11 @@ function objExperienceIncrement(
         .step((self) => {
             totalTextObj.text = `${state.value} XP`;
             deltaTextObj.text = `+${self.delta}`;
-            bgObj.x = Math.round(
-                Tx.Ui.Experience.IncrementBg.width / 2 - Math.max(totalTextObj.width + 50, deltaTextObj.width + 72),
+            bgObj.x = Math.min(
+                bgObj.x,
+                Math.round(
+                    Tx.Ui.Experience.IncrementBg.width / 2 - Math.max(totalTextObj.width + 50, deltaTextObj.width + 72),
+                ),
             );
         })
         .coro(function* (self) {
