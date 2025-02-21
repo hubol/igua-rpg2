@@ -12,8 +12,11 @@ const computerInteractionsToExperience = {
 
 export const RpgExperienceRewarder = {
     combat: {
+        onAttackDamage(damageReceived: Integer) {
+            RpgProgress.character.experience.combat += damageReceived;
+        },
         onEnemyDefeat(enemyMaxHealth: Integer) {
-            RpgProgress.character.experience.combat += enemyMaxHealth;
+            RpgProgress.character.experience.combat += Math.ceil(enemyMaxHealth / 3);
         },
     },
     computer: {

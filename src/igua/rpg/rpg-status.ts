@@ -226,10 +226,9 @@ export namespace RpgStatus {
         target.health = Math.max(minimumHealthAfterDamage, target.health - damage);
         const diff = previous - target.health;
 
-        // TODO should experience be awarded for each hit? Not sure
-        // if (rewardExperience && diff > 0) {
-        //     RpgExperienceRewarder.combat.onAttackDamage(diff);
-        // }
+        if (rewardExperience && diff > 0) {
+            RpgExperienceRewarder.combat.onAttackDamage(diff);
+        }
 
         targetEffects.tookDamage(target.health, diff, kind);
 
