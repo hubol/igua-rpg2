@@ -13,8 +13,34 @@ import { playerObj } from "./obj-player";
 import { objPocketCollectNotification } from "./pocket/obj-pocket-collect-notification";
 
 export function objPocketableItem(item: RpgPocket.Item) {
+    return objPocketableItem.bouncing(item);
+}
+
+objPocketableItem.bouncing = function objPocketableItemBouncing (item: RpgPocket.Item) {
+    return objPocketableItemBase(item, false).mixin(mxnBounce);
+};
+
+function objPocketableItemBase(item: RpgPocket.Item, freed: boolean) {
     const tx = DataPocketItem[item].texture;
-    return Sprite.from(tx).merge({ freed: false }).anchored(0.5, 0.5).coro(function* (self) {
+    return Sprite.from(tx).merge({ freed, isCollectible: false, item }).anchored(0.5, 0.5).coro(function* (self) {
+        yield () => self.freed;
+        self.alpha = 0.5;
+        yield sleepf(15);
+        yield () => self.isCollectible;
+        self.alpha = 1;
+
+        yield () => playerObj.hasControl && self.collides(playerObj);
+        const result = RpgPocket.Methods.receive(RpgProgress.character.inventory.pocket, item);
+        objPocketCollectNotification(result).at(self).show();
+        self.destroy();
+    });
+}
+
+type ObjPocketableItemBase = ReturnType<typeof objPocketableItemBase>;
+
+function mxnBounce(obj: ObjPocketableItemBase) {
+    const tx = obj.texture;
+    return obj.coro(function* (self) {
         yield () => (playerObj.speed.x !== 0 || playerObj.speed.y !== 0) && self.collides(playerObj);
         Sfx.Impact.PocketableItemFree.rate(0.9, 1.1).play();
         self.freed = true;
@@ -62,15 +88,11 @@ export function objPocketableItem(item: RpgPocket.Item) {
         if (physicsObj.speed.y === 0) {
             physicsObj.speed.y = -1;
         }
-        physicsObj.alpha = 0.5;
+
         yield sleepf(15);
         yield holdf(() => physicsObj.isOnGround, 3);
-        physicsObj.alpha = 1;
 
-        yield () => playerObj.hasControl && self.collides(playerObj);
-        const result = RpgPocket.Methods.receive(RpgProgress.character.inventory.pocket, item);
-        objPocketCollectNotification(result).at(self).show();
-        self.destroy();
+        self.isCollectible = true;
     });
 }
 
