@@ -53,8 +53,8 @@ export const OgmoEntityResolvers = {
     "GateHorizontal": (entity) => objGate(entity, "horizontal"),
     "GateVertical": (entity) => objGate(entity, "vertical"),
     // TODO somehow configure item to spawn
-    "PocketableItemA": (entity) => objPocketableItemSpawner(vnew(entity), RpgPocket.Item.BallFruitTypeA).at(entity, -1),
-    "PocketableItemB": (entity) => objPocketableItemSpawner(vnew(entity), RpgPocket.Item.BallFruitTypeB).at(entity, -1),
+    "PocketableItemA": (entity) => objPocketableItemSpawner(vnew(entity), "BallFruitTypeA").at(entity, -1),
+    "PocketableItemB": (entity) => objPocketableItemSpawner(vnew(entity), "BallFruitTypeB").at(entity, -1),
 } satisfies {
     [TName in OgmoProject.Entities.Names]: (e: OgmoFactory.Entity<TName>) => unknown;
 };

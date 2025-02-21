@@ -44,12 +44,12 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
         // There should be a more terse way to check this
         const hasBallFruitTypeA = RpgPocket.Methods.has(
             RpgProgress.character.inventory.pocket,
-            RpgPocket.Item.BallFruitTypeA,
+            "BallFruitTypeA",
             10,
         );
         const hasBallFruitTypeB = RpgPocket.Methods.has(
             RpgProgress.character.inventory.pocket,
-            RpgPocket.Item.BallFruitTypeB,
+            "BallFruitTypeB",
             10,
         );
 
@@ -69,8 +69,8 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
         else if (hasBallFruitTypeA || hasBallFruitTypeB) {
             yield* show("Wow!! You got 10 ballfruit!");
             if (
-                (hasBallFruitTypeA && typePreference === RpgPocket.Item.BallFruitTypeA)
-                || (hasBallFruitTypeB && typePreference === RpgPocket.Item.BallFruitTypeB)
+                (hasBallFruitTypeA && typePreference === "BallFruitTypeA")
+                || (hasBallFruitTypeB && typePreference === "BallFruitTypeB")
             ) {
                 yield* show("These look awesome.", "How much do I owe you? Does 50 valuables sound good?");
                 RpgPocket.Methods.remove(
@@ -85,23 +85,23 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
 
             yield* show("Wait a minute...");
 
-            if (hasBallFruitTypeA && typePreference !== RpgPocket.Item.BallFruitTypeA) {
+            if (hasBallFruitTypeA && typePreference !== "BallFruitTypeA") {
                 yield* show(
                     "THESE ARE SEEDLESS!!!!",
                     "What the hell is going on?",
                     "I prefer the texture of the seeds.",
                     "Please bring 10 ballfruit with seeds.",
                 );
-                RpgProgress.flags.newBalltown.ballFruitFanatic.typePreference = RpgPocket.Item.BallFruitTypeB;
+                RpgProgress.flags.newBalltown.ballFruitFanatic.typePreference = "BallFruitTypeB";
             }
-            else if (hasBallFruitTypeB && typePreference !== RpgPocket.Item.BallFruitTypeB) {
+            else if (hasBallFruitTypeB && typePreference !== "BallFruitTypeB") {
                 yield* show(
                     "THESE HAVE SEEDS!!!!",
                     "Um... hello?!?!",
                     "I am terribly allergic to the seeds.",
                     "Please bring 10 seedless ballfruit.",
                 );
-                RpgProgress.flags.newBalltown.ballFruitFanatic.typePreference = RpgPocket.Item.BallFruitTypeA;
+                RpgProgress.flags.newBalltown.ballFruitFanatic.typePreference = "BallFruitTypeA";
             }
         }
     });

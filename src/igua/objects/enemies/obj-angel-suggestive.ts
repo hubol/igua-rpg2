@@ -14,7 +14,6 @@ import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { mxnStopAndDieWhenHitGround } from "../../mixins/mxn-stop-and-die-when-hit-ground";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
-import { RpgPocket } from "../../rpg/rpg-pocket";
 import { RpgStatus } from "../../rpg/rpg-status";
 import { playerObj } from "../obj-player";
 import { objPocketableItem } from "../obj-pocketable-item";
@@ -289,7 +288,7 @@ export function objAngelSuggestive() {
     )
         .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0], healthbarAnchorObj })
         // TODO part of loot!!
-        .handles("mxnEnemy.died", () => objPocketableItem.parachuting(RpgPocket.Item.ComputerChip).at(enemyObj).show());
+        .handles("mxnEnemy.died", () => objPocketableItem.parachuting("ComputerChip").at(enemyObj).show());
 
     return enemyObj;
 }

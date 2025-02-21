@@ -1,13 +1,9 @@
 import { Logger } from "../../lib/game-engine/logger";
+import { DataPocketItemInternalName } from "../data/data-pocket-items";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 
 export namespace RpgPocket {
-    // TODO feel like this belongs in the data directory
-    export enum Item {
-        BallFruitTypeA = "BallFruitTypeA",
-        BallFruitTypeB = "BallFruitTypeB",
-        ComputerChip = "ComputerChip",
-    }
+    export type Item = DataPocketItemInternalName;
 
     export interface Slot {
         item: Item | null;

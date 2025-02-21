@@ -40,7 +40,7 @@ function enrichFarmer(lvl: LvlType.NewBalltownOutskirts) {
         yield* show("I should replant the ballfruit? Sure.");
 
         const choice = yield* ask("What ballfruit do you want? Choose wisely.", "Type A", "Type B");
-        const choicePocketItem = choice === 0 ? RpgPocket.Item.BallFruitTypeA : RpgPocket.Item.BallFruitTypeB;
+        const choicePocketItem: RpgPocket.Item = choice === 0 ? "BallFruitTypeA" : "BallFruitTypeB";
 
         yield* show((choice === 0 ? "Type A" : "Type B") + ", got it.");
 
