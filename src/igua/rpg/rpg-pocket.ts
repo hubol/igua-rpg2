@@ -6,6 +6,7 @@ export namespace RpgPocket {
     export enum Item {
         BallFruitTypeA = "BallFruitTypeA",
         BallFruitTypeB = "BallFruitTypeB",
+        ComputerChip = "ComputerChip",
     }
 
     export interface Slot {

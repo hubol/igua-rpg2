@@ -14,8 +14,10 @@ import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { mxnStopAndDieWhenHitGround } from "../../mixins/mxn-stop-and-die-when-hit-ground";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { RpgPocket } from "../../rpg/rpg-pocket";
 import { RpgStatus } from "../../rpg/rpg-status";
 import { playerObj } from "../obj-player";
+import { objPocketableItem } from "../obj-pocketable-item";
 import { objSpikedCanonball } from "../projectiles/obj-spiked-canonball";
 import { objAngelEyes } from "./obj-angel-eyes";
 import { objAngelPlantLegs } from "./obj-angel-plant-legs";
@@ -285,7 +287,9 @@ export function objAngelSuggestive() {
         actualHeadObj,
         healthbarAnchorObj,
     )
-        .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0], healthbarAnchorObj });
+        .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0], healthbarAnchorObj })
+        // TODO part of loot!!
+        .handles("mxnEnemy.died", () => objPocketableItem.parachuting(RpgPocket.Item.ComputerChip).at(enemyObj).show());
 
     return enemyObj;
 }
