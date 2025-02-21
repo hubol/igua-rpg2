@@ -141,6 +141,8 @@ function getAvailableRisks(currentValuables: number) {
 }
 
 function enrichCroupier(lvl: LvlType.NewBalltown) {
+    // TODO This seems fine for now, but should it become its own layer?
+    lvl.DiceBlock.zIndex = ZIndex.CharacterEntities + 1;
     lvl.Croupier.mixin(mxnCutscene, function* () {
         yield* show(
             "The New Balltown committee recently ruled that gambling in the town square was OK depending on the vibes.",
