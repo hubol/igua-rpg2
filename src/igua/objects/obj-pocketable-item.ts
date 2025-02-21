@@ -6,7 +6,7 @@ import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../lib/math/number";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
-import { DataPocketItem } from "../data/data-pocket-item";
+import { DataPocketItems } from "../data/data-pocket-items";
 import { scene } from "../globals";
 import { MxnPhysics, mxnPhysics, PhysicsFaction } from "../mixins/mxn-physics";
 import { RpgPocket } from "../rpg/rpg-pocket";
@@ -27,7 +27,7 @@ objPocketableItem.parachuting = function objPocketableItemParachuting (item: Rpg
 };
 
 function objPocketableItemBase(item: RpgPocket.Item, freed: boolean) {
-    const tx = DataPocketItem[item].texture;
+    const tx = DataPocketItems[item].texture;
     const obj = container().merge({ freed, isCollectible: false, item, tx });
 
     Sprite.from(tx).anchored(0.5, 0.5).coro(function* (self) {
