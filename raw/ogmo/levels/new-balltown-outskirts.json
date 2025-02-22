@@ -71,17 +71,6 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "FarmerMoveToMarker", "depth": 0}
-        },
-        {
-          "name": "Marker",
-          "id": 8,
-          "_eid": "73148747",
-          "x": 368,
-          "y": 194,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#ff1f00",
-          "values": {"name": "EnemyDemoMarker", "depth": 0}
         }
       ]
     },
@@ -680,6 +669,17 @@
           "y": 103,
           "originX": 12,
           "originY": 12,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnemySuggestive",
+          "id": 37,
+          "_eid": "25633201",
+          "x": 368,
+          "y": 232,
+          "originX": 33,
+          "originY": 78,
+          "uid": 174025646673900,
           "values": {"name": "", "depth": 0}
         }
       ]

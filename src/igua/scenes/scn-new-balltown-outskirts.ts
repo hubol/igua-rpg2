@@ -13,7 +13,6 @@ import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
-import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
 import { objPocketableItemSpawner } from "../objects/obj-pocketable-item-spawner";
 import { objValuableSpawner } from "../objects/obj-valuable-spawner";
 import { RpgAttack } from "../rpg/rpg-attack";
@@ -24,8 +23,6 @@ import { RpgProgress } from "../rpg/rpg-progress";
 export function scnNewBalltownOutskirts() {
     Jukebox.play(Mzk.TrashDay);
     const lvl = Lvl.NewBalltownOutskirts();
-
-    objAngelSuggestive().at(lvl.EnemyDemoMarker).show();
 
     enrichMiner(lvl);
     enrichFarmer(lvl);

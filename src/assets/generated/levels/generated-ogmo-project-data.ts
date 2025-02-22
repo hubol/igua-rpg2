@@ -5,7 +5,7 @@ const entityValues = {
   Block: null as unknown as { name: string; depth: number; visible: boolean },
   Slope: null as unknown as { name: string; depth: number; visible: boolean },
   Pipe: null as unknown as { name: string; visible: boolean; depth: number },
-  PipeSlope: null as unknown as { name: string; depth: number },
+  PipeSlope: null as unknown as { name: string; depth: number; visible: boolean },
   Door: null as unknown as { sceneName: string; checkpointName: string; name: string; depth: number },
   Checkpoint: null as unknown as { name: string; depth: number; overrideFlipX: "none" | "retainFromPreviousScene" },
   WaterDripSource: null as unknown as { delayMin: number; delayMax: number; name: string; depth: number },
@@ -22,6 +22,7 @@ const entityValues = {
   PocketableItemA: null as unknown as { name: string; depth: number },
   PocketableItemB: null as unknown as { name: string; depth: number },
   GateVertical: null as unknown as { sceneName: string; checkpointName: string; name: string; depth: number },
+  EnemySuggestive: null as unknown as { name: string; depth: number },
 };
 
 export namespace OgmoProject {
