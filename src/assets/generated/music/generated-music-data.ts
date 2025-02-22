@@ -6,6 +6,7 @@ export const GeneratedMusicData = {
    "BreadCrumbPool": { ogg: require("./ogg/bread-crumb-pool.ogg") },
    "CedarWorld": { ogg: require("./ogg/cedar-world.ogg") },
    "Covid19": { ogg: require("./ogg/covid-19.ogg") },
+   "DespicableMessage": { ogg: require("./ogg/despicable-message.ogg") },
    "FaithBeam": { ogg: require("./ogg/faith-beam.ogg") },
    "FirstSong": { ogg: require("./ogg/first-song.ogg") },
    "GolfResort": { ogg: require("./ogg/golf-resort.ogg") },
