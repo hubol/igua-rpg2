@@ -64,6 +64,16 @@ export namespace RpgPocket {
 
             return count <= 0;
         },
+        count(model: Model, item: Item) {
+            let count = 0;
+            for (const slot of model.slots) {
+                if (slot.item === item) {
+                    count += slot.count;
+                }
+            }
+
+            return count;
+        },
         remove(model: Model, item: Item, count: number) {
             for (const slot of model.slots) {
                 if (slot.item === item) {

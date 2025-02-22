@@ -31,8 +31,8 @@ import { IguanaLocomotiveConsts, ObjIguanaLocomotiveAutoFacingMode } from "../ob
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { objMarker } from "../objects/utils/obj-marker";
 import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
-import { RpgKeyItems } from "../rpg/rpg-key-items";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
+import { RpgPocket } from "../rpg/rpg-pocket";
 import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltown() {
@@ -257,24 +257,77 @@ function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
 
             const password = characters.join("");
             if (password === "POOP*") {
-                RpgExperienceRewarder.computer.onInteract("medium-task");
+                RpgExperienceRewarder.computer.onInteract("small-task");
                 yield* show("Access granted.");
-                // TODO this looks like shit!!
-                if (RpgKeyItems.Methods.has(RpgProgress.character.inventory.keyItems, "UpgradedPickaxe", 1)) {
-                    yield* show(
-                        `Master... You already have one. A ${DataKeyItems.UpgradedPickaxe.name}.`,
-                        "Please return when you have disposed of it.",
+                yield* show(
+                    `Welcome master. You have ${RpgProgress.flags.newBalltown.mechanicalIdol.credits} credit(s).`,
+                );
+                while (true) {
+                    // TODO should there be an ask.append method?
+                    // Or maybe show.appendAsk ?
+                    const result = yield* ask(
+                        `Welcome master. You have ${RpgProgress.flags.newBalltown.mechanicalIdol.credits} credit(s).
+
+What would you like to do?`,
+                        "Deposit chips",
+                        "Redeem credits",
+                        "Nothing.",
                     );
-                }
-                else {
-                    yield* show(`Master... I see you do not have one. A ${DataKeyItems.UpgradedPickaxe.name}.`);
-                    if (yield* ask("Would you like one?")) {
-                        yield* DramaKeyItems.receive("UpgradedPickaxe");
-                        yield* show("Congratulations. Please enjoyb.");
+
+                    if (result === 0) {
+                        yield* show("You want to deposit computer chips? Let me check something first...");
+                        const count = RpgPocket.Methods.count(RpgProgress.character.inventory.pocket, "ComputerChip");
+                        if (count === 0) {
+                            yield* show("Master, you don't have any computer chips. Get real.");
+                        }
+                        else {
+                            if (
+                                yield* ask(`Wow, master! You have ${count} computer chip(s)!
+That's worth ${count} credit(s). Do you want to deposit them?`)
+                            ) {
+                                yield* show("Got it! Let's get those deposited...");
+                                yield sleep(250);
+                                RpgPocket.Methods.remove(RpgProgress.character.inventory.pocket, "ComputerChip", count);
+                                RpgProgress.flags.newBalltown.mechanicalIdol.credits += count;
+                                RpgExperienceRewarder.computer.onDepositComputerChips(count);
+                                yield sleep(250);
+                                yield* show("All done!");
+                            }
+                            else {
+                                yield* show("Oki. Let me know if you change your mind, sucka!");
+                            }
+                        }
+                        continue;
                     }
-                    else {
-                        yield* show("Got it. I'll always be around");
+                    else if (result === 1) {
+                        // TODO when shops are implemented
+                        // Make sure they support alternate currencies!
+                        while (true) {
+                            const redeemResult = yield* ask(
+                                `Reminder: You have ${RpgProgress.flags.newBalltown.mechanicalIdol.credits} credit(s).
+What would you like to redeem with your credits?`,
+                                RpgProgress.flags.newBalltown.mechanicalIdol.credits >= 10
+                                    ? `${DataKeyItems.UpgradedPickaxe.name}\n(Cost: 10)`
+                                    : null,
+                                "Nothin'",
+                            );
+
+                            if (redeemResult === 0) {
+                                RpgProgress.flags.newBalltown.mechanicalIdol.credits -= 10;
+                                yield* DramaKeyItems.receive("UpgradedPickaxe");
+                                yield* show("Congratulations. Please enjoyb.");
+                            }
+                            else {
+                                yield* show("Got it.");
+                                break;
+                            }
+                        }
+
+                        continue;
                     }
+
+                    yield* show("Peace, sucka!!");
+                    break;
                 }
             }
             else {

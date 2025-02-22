@@ -13,6 +13,16 @@ export namespace RpgKeyItems {
         receive(model: Model, item: Item) {
             model.push(item);
         },
+        count(items: Model, item: Item) {
+            let count = 0;
+            for (const heldItem of items) {
+                if (heldItem === item) {
+                    count++;
+                }
+            }
+
+            return count;
+        },
         has(items: Model, item: Item, count: number) {
             for (const heldItem of items) {
                 if (heldItem === item) {
@@ -29,6 +39,9 @@ export namespace RpgKeyItems {
                 if (modelItem === item) {
                     count--;
                     model.splice(index, 1);
+                    if (count === 0) {
+                        break;
+                    }
                 }
                 else {
                     index++;

@@ -20,6 +20,9 @@ export const RpgExperienceRewarder = {
         },
     },
     computer: {
+        onDepositComputerChips(count: Integer) {
+            RpgProgress.character.experience.computer += count * 2;
+        },
         onInteract(type: ComputerInteraction) {
             RpgProgress.character.experience.computer += computerInteractionsToExperience[type];
         },

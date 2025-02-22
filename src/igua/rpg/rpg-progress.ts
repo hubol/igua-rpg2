@@ -65,6 +65,9 @@ export function getInitialRpgProgress() {
                         armorer: Null<"ready" | "arrived" | "delivered">(),
                     },
                 },
+                mechanicalIdol: {
+                    credits: 10,
+                },
             },
             outskirts: {
                 miner: {
