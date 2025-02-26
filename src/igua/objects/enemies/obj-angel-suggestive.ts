@@ -1,4 +1,4 @@
-import { DisplayObject, Graphics, Sprite } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { interp } from "../../../lib/game-engine/routines/interp";
@@ -109,15 +109,42 @@ const themes = {
     },
 } satisfies Record<string, Theme>;
 
-const rnkAngelSuggestive = RpgEnemyRank.create({
-    loot: {
-        valuables: {
-            max: 8,
-            min: 2,
-            deltaPride: -3,
+const ranks = {
+    level0: RpgEnemyRank.create({
+        loot: {
+            valuables: {
+                max: 8,
+                min: 2,
+                deltaPride: -3,
+            },
         },
+    }),
+    level1: RpgEnemyRank.create({
+        status: {
+            healthMax: 40,
+        },
+        loot: {
+            valuables: {
+                max: 8,
+                min: 2,
+                deltaPride: -3,
+            },
+        },
+    }),
+};
+
+const variants = {
+    level0: {
+        theme: themes.Common,
+        rank: ranks.level0,
     },
-});
+    level1: {
+        theme: themes.Freakish,
+        rank: ranks.level1,
+    },
+};
+
+type VariantKey = keyof typeof variants;
 
 function objAngelSuggestiveGear(tint: Integer) {
     const ax = 8.5 / 16;
@@ -280,8 +307,9 @@ function objAngelSuggestiveBody() {
     return container(bulgeLeftSpr, bulgeRightSpr, bulgeSpr, bodySpr).merge({ bulge });
 }
 
-export function objAngelSuggestive() {
-    const theme = themes.Freakish;
+export function objAngelSuggestive(variantKey: VariantKey) {
+    const variant = variants[variantKey];
+    const theme = variant.theme;
 
     const faceObj = objAngelSuggestiveFace(theme);
 
@@ -337,7 +365,7 @@ export function objAngelSuggestive() {
         actualHeadObj,
         healthbarAnchorObj,
     )
-        .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0], healthbarAnchorObj })
+        .mixin(mxnEnemy, { rank: variant.rank, hurtboxes: [hurtbox0], healthbarAnchorObj })
         .filtered(new MapRgbFilter(theme.map.red, theme.map.green, theme.map.blue, theme.map.white))
         // TODO part of loot!!
         .handles("mxnEnemy.died", () => objPocketableItem.parachuting("ComputerChip").at(enemyObj).show());

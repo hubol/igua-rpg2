@@ -313,7 +313,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 174025673303600,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "variant": "level1"}
         },
         {
           "name": "EnemySuggestive",
@@ -324,7 +324,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 174025674886701,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "variant": "level1"}
         }
       ]
     },
@@ -348,7 +348,8 @@
           "texture": "foliage/moss hanging 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 529,
@@ -360,7 +361,8 @@
           "texture": "foliage/moss hanging 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 566,
@@ -372,7 +374,8 @@
           "texture": "foliage/moss hanging 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 548,
@@ -384,7 +387,8 @@
           "texture": "foliage/moss hanging 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 497,
@@ -396,7 +400,8 @@
           "texture": "foliage/moss hanging 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 485,
@@ -408,7 +413,8 @@
           "texture": "foliage/moss hanging 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 475,
@@ -420,7 +426,8 @@
           "texture": "foliage/moss hanging 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 495,
@@ -432,7 +439,8 @@
           "texture": "terrain/earth/crack 28px 38px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1188,
@@ -3149,7 +3157,8 @@
           "texture": "foliage/moss hanging 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 489,
@@ -3161,7 +3170,8 @@
           "texture": "foliage/moss hanging 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 558,
@@ -3173,7 +3183,8 @@
           "texture": "foliage/moss hanging 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

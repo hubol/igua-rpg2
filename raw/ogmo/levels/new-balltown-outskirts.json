@@ -680,7 +680,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 174025646673900,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "variant": "level0"}
         }
       ]
     },

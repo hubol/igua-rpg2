@@ -56,7 +56,7 @@ export const OgmoEntityResolvers = {
     // TODO somehow configure item to spawn
     "PocketableItemA": (entity) => objPocketableItemSpawner(vnew(entity), "BallFruitTypeA").at(entity, -1),
     "PocketableItemB": (entity) => objPocketableItemSpawner(vnew(entity), "BallFruitTypeB").at(entity, -1),
-    EnemySuggestive: () => objAngelSuggestive().at(0, -38),
+    EnemySuggestive: (entity) => objAngelSuggestive(entity.values.variant).at(0, -38),
 } satisfies {
     [TName in OgmoProject.Entities.Names]: (e: OgmoFactory.Entity<TName>) => unknown;
 };
