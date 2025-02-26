@@ -6,6 +6,7 @@ import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear, nlerp } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
+import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { scene } from "../../globals";
@@ -19,7 +20,7 @@ import { RpgStatus } from "../../rpg/rpg-status";
 import { playerObj } from "../obj-player";
 import { objPocketableItem } from "../obj-pocketable-item";
 import { objSpikedCanonball } from "../projectiles/obj-spiked-canonball";
-import { objAngelEyes } from "./obj-angel-eyes";
+import { objAngelEyes, ObjAngelEyesArgs } from "./obj-angel-eyes";
 import { objAngelPlantLegs } from "./obj-angel-plant-legs";
 
 const [txGear, txGearHighlight] = Tx.Enemy.Suggestive.Gear.split({ count: 2 });
@@ -36,16 +37,31 @@ const [
     .Enemy.Suggestive.Body.split({ count: 7 });
 
 const commonTheme = {
+    eyes: {
+        defaultEyelidRestingPosition: 3,
+        eyelidsTint: 0xff0000,
+        gap: 6,
+        pupilRestStyle: {
+            kind: "cross-eyed",
+            offsetFromCenter: 1,
+        },
+        pupilTx: Tx.Enemy.Suggestive.Pupil,
+        scleraTx: Tx.Enemy.Suggestive.Sclera,
+        sclerasMirrored: true,
+    } satisfies ObjAngelEyesArgs,
     textures: {
         face: Tx.Enemy.Suggestive.Face,
-        sclera: Tx.Enemy.Suggestive.Sclera,
+    },
+    positions: {
+        eyes: vnew(0, 0),
+        face: vnew(0, 0),
+        mouth: vnew(0, 9),
     },
     tints: {
         gear0: 0x0000ff,
         gear1: 0x00ff00,
         pupilLeft: 0x000080,
         pupilRight: 0x0000a0,
-        eyelids: 0xff0000,
         face: 0xa0ff00,
         mouth: 0x000080,
     },
@@ -61,7 +77,27 @@ type Theme = typeof commonTheme;
 
 const themes = {
     Common: commonTheme,
-};
+    Freakish: {
+        ...commonTheme,
+        eyes: {
+            ...commonTheme.eyes,
+            defaultEyelidRestingPosition: 2,
+            pupilRestStyle: {
+                kind: "cross-eyed",
+                offsetFromCenter: 5,
+            },
+            scleraTx: Tx.Enemy.Suggestive.ScleraWide,
+        },
+        positions: {
+            eyes: vnew(0, -3 + 8),
+            face: vnew(0, -3 + 8),
+            mouth: vnew(0, 1 + 8),
+        },
+        textures: {
+            face: Tx.Enemy.Suggestive.FaceWide,
+        },
+    },
+} satisfies Record<string, Theme>;
 
 const rnkAngelSuggestive = RpgEnemyRank.create({
     loot: {
@@ -105,18 +141,7 @@ function objAngelSuggestiveGears(theme: Theme) {
 }
 
 function objAngelSuggestiveFace(theme: Theme) {
-    const eyesObj = objAngelEyes({
-        defaultEyelidRestingPosition: 3,
-        eyelidsTint: theme.tints.eyelids,
-        gap: 6,
-        pupilRestStyle: {
-            kind: "cross-eyed",
-            offsetFromCenter: 1,
-        },
-        pupilTx: Tx.Enemy.Suggestive.Pupil,
-        scleraTx: theme.textures.sclera,
-        sclerasMirrored: true,
-    });
+    const eyesObj = objAngelEyes(theme.eyes).at(theme.positions.eyes);
 
     eyesObj.left.pupilSpr.tint = theme.tints.pupilLeft;
     eyesObj.right.pupilSpr.tint = theme.tints.pupilRight;
@@ -124,7 +149,7 @@ function objAngelSuggestiveFace(theme: Theme) {
     let agape = false;
     let agapeUnit = 0;
 
-    const mouthObj = Sprite.from(txMouth).anchored(0.5, 0.5).at(0, 9).tinted(theme.tints.mouth).merge({
+    const mouthObj = Sprite.from(txMouth).anchored(0.5, 0.5).at(theme.positions.mouth).tinted(theme.tints.mouth).merge({
         get agape() {
             return agape;
         },
@@ -145,9 +170,10 @@ function objAngelSuggestiveFace(theme: Theme) {
             }
         });
 
-    const spr = Sprite.from(theme.textures.face).tinted(theme.tints.face).anchored(0.5, 0.5).mixin(
-        mxnBoilMirrorRotate,
-    );
+    const spr = Sprite.from(theme.textures.face).at(theme.positions.face).tinted(theme.tints.face).anchored(0.5, 0.5)
+        .mixin(
+            mxnBoilMirrorRotate,
+        );
 
     return container(spr, eyesObj, mouthObj).merge({ mouthObj });
 }

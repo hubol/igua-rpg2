@@ -11,7 +11,7 @@ interface PupilRestStyle_CrossEyed {
 
 type PupilRestStyle = PupilRestStyle_CrossEyed;
 
-interface ObjAngelEyesArgs {
+export interface ObjAngelEyesArgs {
     pupilTx: Texture;
     scleraTx: Texture;
     sclerasMirrored: boolean;
