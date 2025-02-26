@@ -22,7 +22,24 @@ import { objSpikedCanonball } from "../projectiles/obj-spiked-canonball";
 import { objAngelEyes } from "./obj-angel-eyes";
 import { objAngelPlantLegs } from "./obj-angel-plant-legs";
 
+const [txGear, txGearHighlight] = Tx.Enemy.Suggestive.Gear.split({ count: 2 });
+const [txMouth, txMouthPartiallyAgape, txMouthAgape] = Tx.Enemy.Suggestive.Mouth.split({ count: 3 });
+const [
+    txBody,
+    txBulgeSmall,
+    txBulgeMedium,
+    txBulgeLarge,
+    txBulgeBursting,
+    txBulgeSkinny,
+    txBulgeSkinnyReducedHighlight,
+] = Tx
+    .Enemy.Suggestive.Body.split({ count: 7 });
+
 const commonTheme = {
+    textures: {
+        face: Tx.Enemy.Suggestive.Face,
+        sclera: Tx.Enemy.Suggestive.Sclera,
+    },
     tints: {
         gear0: 0x0000ff,
         gear1: 0x00ff00,
@@ -45,19 +62,6 @@ type Theme = typeof commonTheme;
 const themes = {
     Common: commonTheme,
 };
-
-const [txGear, txGearHighlight] = Tx.Enemy.Suggestive.Gear.split({ count: 2 });
-const [txMouth, txMouthPartiallyAgape, txMouthAgape] = Tx.Enemy.Suggestive.Mouth.split({ count: 3 });
-const [
-    txBody,
-    txBulgeSmall,
-    txBulgeMedium,
-    txBulgeLarge,
-    txBulgeBursting,
-    txBulgeSkinny,
-    txBulgeSkinnyReducedHighlight,
-] = Tx
-    .Enemy.Suggestive.Body.split({ count: 7 });
 
 const rnkAngelSuggestive = RpgEnemyRank.create({
     loot: {
@@ -110,7 +114,7 @@ function objAngelSuggestiveFace(theme: Theme) {
             offsetFromCenter: 1,
         },
         pupilTx: Tx.Enemy.Suggestive.Pupil,
-        scleraTx: Tx.Enemy.Suggestive.Sclera,
+        scleraTx: theme.textures.sclera,
         sclerasMirrored: true,
     });
 
@@ -141,7 +145,7 @@ function objAngelSuggestiveFace(theme: Theme) {
             }
         });
 
-    const spr = Sprite.from(Tx.Enemy.Suggestive.Face).tinted(theme.tints.face).anchored(0.5, 0.5).mixin(
+    const spr = Sprite.from(theme.textures.face).tinted(theme.tints.face).anchored(0.5, 0.5).mixin(
         mxnBoilMirrorRotate,
     );
 
