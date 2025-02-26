@@ -96,6 +96,16 @@ const themes = {
         textures: {
             face: Tx.Enemy.Suggestive.FaceWide,
         },
+        tints: {
+            ...commonTheme.tints,
+            face: 0xa000ff,
+        },
+        map: {
+            red: 0x208525,
+            green: 0xffc21c,
+            blue: 0x5D9938,
+            white: 0xffffff,
+        },
     },
 } satisfies Record<string, Theme>;
 
@@ -271,7 +281,7 @@ function objAngelSuggestiveBody() {
 }
 
 export function objAngelSuggestive() {
-    const theme = themes.Common;
+    const theme = themes.Freakish;
 
     const faceObj = objAngelSuggestiveFace(theme);
 
