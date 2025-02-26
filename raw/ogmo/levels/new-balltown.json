@@ -19,138 +19,6 @@
       "entities": [
         {
           "name": "Marker",
-          "id": 1,
-          "_eid": "73148747",
-          "x": 404,
-          "y": 493,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#ffffff",
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Marker",
-          "id": 2,
-          "_eid": "73148747",
-          "x": 435,
-          "y": 463,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#ffffff",
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Marker",
-          "id": 3,
-          "_eid": "73148747",
-          "x": 505,
-          "y": 462,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#ffffff",
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Marker",
-          "id": 4,
-          "_eid": "73148747",
-          "x": 752,
-          "y": 372,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#ffffff",
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Marker",
-          "id": 5,
-          "_eid": "73148747",
-          "x": 840,
-          "y": 395,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#ffffff",
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Marker",
-          "id": 6,
-          "_eid": "73148747",
-          "x": 822,
-          "y": 429,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#ffffff",
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Marker",
-          "id": 7,
-          "_eid": "73148747",
-          "x": 863,
-          "y": 397,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#ffffff",
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Marker",
-          "id": 8,
-          "_eid": "73148747",
-          "x": 894,
-          "y": 396,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#ffffff",
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Marker",
-          "id": 9,
-          "_eid": "73148747",
-          "x": 902,
-          "y": 430,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#ffffff",
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Marker",
-          "id": 10,
-          "_eid": "73148747",
-          "x": 920,
-          "y": 391,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#ffffff",
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Marker",
-          "id": 11,
-          "_eid": "73148747",
-          "x": 767,
-          "y": 388,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#ffffff",
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Marker",
-          "id": 12,
-          "_eid": "73148747",
-          "x": 903,
-          "y": 367,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#ffffff",
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Marker",
           "id": 14,
           "_eid": "73148747",
           "x": 560,
@@ -225,6 +93,126 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "FishmongerRiseMarker", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 21,
+          "_eid": "61143896",
+          "x": 405,
+          "y": 493,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 22,
+          "_eid": "61143896",
+          "x": 436,
+          "y": 463,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 23,
+          "_eid": "61143896",
+          "x": 506,
+          "y": 462,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 24,
+          "_eid": "61143896",
+          "x": 753,
+          "y": 372,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 25,
+          "_eid": "61143896",
+          "x": 768,
+          "y": 388,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 26,
+          "_eid": "61143896",
+          "x": 823,
+          "y": 429,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 27,
+          "_eid": "61143896",
+          "x": 841,
+          "y": 395,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 28,
+          "_eid": "61143896",
+          "x": 870,
+          "y": 393,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 29,
+          "_eid": "61143896",
+          "x": 895,
+          "y": 396,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 30,
+          "_eid": "61143896",
+          "x": 904,
+          "y": 367,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 31,
+          "_eid": "61143896",
+          "x": 920,
+          "y": 388,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 32,
+          "_eid": "61143896",
+          "x": 903,
+          "y": 430,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },

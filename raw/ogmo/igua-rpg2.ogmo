@@ -1171,9 +1171,54 @@
         }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/enemy suggestive.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEUAAABSCAYAAAACXhkKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASMSURBVHhe7Zs9aBRBFIDvVDAGlQOL2MTGgAFFNCjENsF0Qiy0SxcQkRTBxlI7LeSKEESwSycIFlaRi41gQIliFeFsFCEphKDgDxjOvMnM5e3czO7M7JuduWU/GHZu3Z+b7957OzcX6zXPrJ1rdHg3k7EPW97fjwne3oSJjMGJbd6r1X6t7GfbGMTs41tSbKJDIAS5nEsNuRSKQYUWQyol72AGn22zFhov6UNByGghkxJDLaAi2kgJSdRSQkVflFLw/CUEQaWICVtsRF9TQqRQVWgVBJcSYwrFFSmLvEkUnUJV+iiopCggW7vwHeJFrrOQRUosq2YU9E36FFlsq5qigFRKWVKoihQFpZEy83i8p+ao9plALsVnCkGxFY3vYojBU4khH0CRTwlM8+Yo7/WydGPVapxkUkLJEKRJwZgIcpYSo4SN9X+8t8vx0QO8tweplNASMDohC/VP/NUuc51TPWJIpDjLeLjFO5bcbvBONkJOV8gt9nKPxaSY+UfrRg8C7dMHZFgLARGiuYKvYXEdtlilWIuRMRmXUopzdPjAVpBYqOKCVHUFSBtjIpRyybD4VHPB0wvXFVFgH7xqsy1Grj+QQhhVOnUjxasQGIhFreiiOm/nXvJARTQsfz7ImkAcJ4sQXP/+kfeSMEvehWBMIyrjvGZ7vDtYWRJEDk4bOE4IeHrsLNtiIe2vJxLR4ve7jyo6VPtkDM6bH1nVCpaFYEAGFiIkYeo+o+T8hP7S71fUT0bbcyBiAHnwqtRRpYuQgmuLNylpgwNcpAC683QRCDXmSeMt6//+84NtBYcGjvLeHpBK7lJyRAlALgVAYrAMwYtrp3lvl8mlN0oxfmuKRL1+j7UsTI+zgQmBGS9qrZlLieiBKIFWqJSimd26yLYwcNMZL1AuKZqUTqSINONV4U1Kau47kueaV769ZtEiN8zI8BdW0EqdPhiIFnnGC6LkQgtiyiUFPX2mTv7tefosDLRYAxmyEDFfCVZo09KAOu2g2IqCCxJwkxHTfa9SKAfoci3VFF6FfBy7k68JHCBPxkwHZ32eZkaL0X0plKf6+SLF4I3gwdh82q7n2aKKpu7dvC4fSIxN3uU9PWut7GO6GHw4WSS+EPJt7f6RIXcpO0w93+Q9M9LEmApZnh7ivXzc+bmZCMXEi7xiBDaCsJyiZQhSpQBUYjC2UYShFiAjCwF6dgA+xMSISgig3AmUXYxOCKD9B6CMYtJkCDIPAPpZjokEGesTgBgluQxeB9mFdKJas8O8Rwv8jGH7xzimeLkocHn+gtdowr/tUMuJXgoevAkUgqKTYitBB/x0+rL5zml8QaVQCcjCVlBhK28gQG5FYXsvb1JCCaAgyBpt7FRSFJROChRV3MQ+G0ojBUvAwD7bR7O3R7Lr/6AwJevTd52jAH0nRZYBT7a+mOZfnZvuHD6zwV/RIYTkiQITopbiUg8o8HpD1xTytSRgShRSQkWEDq+PZNNPPCYhQDWjVRBcStZ8IwTepUAKxTjwNAqJFFXNAFGxyiq0wMFqHMxAsYzYimzhwKSOdyOmVvsPu0Aj3sKcwTUAAAAASUVORK5CYII="
+    },
+    {
+      "exportID": "61143896",
+      "name": "EnvironmentSparkleMarker",
+      "limit": -1,
+      "size": {"x": 8, "y": 8},
+      "origin": {"x": 4, "y": 4},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["Marker"],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/sparkle.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAABDSURBVChTY1zfk8pANPgPBFAmGIA0M0HZOAFcAUw3uilMIAEQgPLBACoEFmNihAKwDBRAhcBicCtgAjAaBgg4koEBAF7yH0rzM5CdAAAAAElFTkSuQmCC"
     }
   ],
   "tilesets": []

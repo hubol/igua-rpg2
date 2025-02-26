@@ -6,9 +6,11 @@ import { objValuableSparkle } from "./obj-valuable-sparkle";
 
 export function objFxSparkleMany(...sparkleVectors: VectorSimple[]) {
     return container()
-        .coro(function* () {
+        .merge({ sparkleVectors })
+        .coro(function* (self) {
             while (true) {
-                for (const vector of Rng.shuffle(sparkleVectors)) {
+                yield () => self.sparkleVectors.length > 0;
+                for (const vector of Rng.shuffle(self.sparkleVectors)) {
                     yield sleep(Rng.float(500, 1000));
                     objValuableSparkle().at(vector).show();
                 }

@@ -26,7 +26,6 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
-import { objFxSparkleMany } from "../objects/effects/obj-fx-sparkle-many";
 import { IguanaLocomotiveConsts, ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { objMarker } from "../objects/utils/obj-marker";
@@ -40,14 +39,9 @@ export function scnNewBalltown() {
     const lvl = Lvl.NewBalltown();
     enrichOliveFanatic(lvl);
     enrichCroupier(lvl);
-    enrichSparkles();
     enrichMiner(lvl);
     enrichMechanicalIdol(lvl);
     enrichFishmongerDeliveryToArmorer(lvl);
-}
-
-function enrichSparkles() {
-    objFxSparkleMany(...Instances(objMarker, obj => obj.tint === 0xffffff)).show();
 }
 
 function enrichMiner(lvl: LvlType.NewBalltown) {

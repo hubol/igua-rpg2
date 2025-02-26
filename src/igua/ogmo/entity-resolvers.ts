@@ -2,6 +2,7 @@ import { Graphics } from "pixi.js";
 import { OgmoProject } from "../../assets/generated/levels/generated-ogmo-project-data";
 import { Instances } from "../../lib/game-engine/instances";
 import { vnew } from "../../lib/math/vector-type";
+import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
 import { objPuddle } from "../objects/nature/obj-puddle";
 import { objCheckpoint } from "../objects/obj-checkpoint";
@@ -57,6 +58,7 @@ export const OgmoEntityResolvers = {
     "PocketableItemA": (entity) => objPocketableItemSpawner(vnew(entity), "BallFruitTypeA").at(entity, -1),
     "PocketableItemB": (entity) => objPocketableItemSpawner(vnew(entity), "BallFruitTypeB").at(entity, -1),
     EnemySuggestive: (entity) => objAngelSuggestive(entity.values.variant).at(0, -38),
+    EnvironmentSparkleMarker: objEnvironmentFxSparkle,
 } satisfies {
     [TName in OgmoProject.Entities.Names]: (e: OgmoFactory.Entity<TName>) => unknown;
 };
