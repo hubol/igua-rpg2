@@ -7,6 +7,7 @@ import { approachLinear, nlerp } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
+import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { scene } from "../../globals";
 import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
@@ -21,19 +22,29 @@ import { objSpikedCanonball } from "../projectiles/obj-spiked-canonball";
 import { objAngelEyes } from "./obj-angel-eyes";
 import { objAngelPlantLegs } from "./obj-angel-plant-legs";
 
-const themes = {
-    Common: {
-        gear0Tint: 0x241DE2,
-        gear1Tint: 0x5D9938,
-        pupilLeftTint: 0x000080,
-        pupilRightTint: 0x0000a0,
-        eyelidsTint: 0xCE3010,
-        faceTint: 0xCEBD00,
-        mouthTint: 0x000080,
+const commonTheme = {
+    tints: {
+        gear0: 0x0000ff,
+        gear1: 0x00ff00,
+        pupilLeft: 0x000080,
+        pupilRight: 0x0000a0,
+        eyelids: 0xff0000,
+        face: 0xa0ff00,
+        mouth: 0x000080,
+    },
+    map: {
+        red: 0xCE3010,
+        green: 0x5D9938,
+        blue: 0x241DE2,
+        white: 0xffffff,
     },
 };
 
-type Theme = typeof themes[keyof typeof themes];
+type Theme = typeof commonTheme;
+
+const themes = {
+    Common: commonTheme,
+};
 
 const [txGear, txGearHighlight] = Tx.Enemy.Suggestive.Gear.split({ count: 2 });
 const [txMouth, txMouthPartiallyAgape, txMouthAgape] = Tx.Enemy.Suggestive.Mouth.split({ count: 3 });
@@ -73,7 +84,7 @@ function objAngelSuggestiveGear(tint: Integer) {
 }
 
 function objAngelSuggestiveGears(theme: Theme) {
-    const gearObj0 = objAngelSuggestiveGear(theme.gear0Tint).coro(function* (self) {
+    const gearObj0 = objAngelSuggestiveGear(theme.tints.gear0).coro(function* (self) {
         while (true) {
             yield sleep(Rng.intc(100, 200));
             self.angleDelta = (Rng.bool() ? 1 : -1) * Rng.intc(2, 4);
@@ -81,7 +92,7 @@ function objAngelSuggestiveGears(theme: Theme) {
             self.angleDelta = 0;
         }
     });
-    const gearObj1 = objAngelSuggestiveGear(theme.gear1Tint).step(self => self.angleDelta = -gearObj0.angleDelta);
+    const gearObj1 = objAngelSuggestiveGear(theme.tints.gear1).step(self => self.angleDelta = -gearObj0.angleDelta);
 
     return container(
         gearObj0.at(4, 5),
@@ -92,7 +103,7 @@ function objAngelSuggestiveGears(theme: Theme) {
 function objAngelSuggestiveFace(theme: Theme) {
     const eyesObj = objAngelEyes({
         defaultEyelidRestingPosition: 3,
-        eyelidsTint: theme.eyelidsTint,
+        eyelidsTint: theme.tints.eyelids,
         gap: 6,
         pupilRestStyle: {
             kind: "cross-eyed",
@@ -103,13 +114,13 @@ function objAngelSuggestiveFace(theme: Theme) {
         sclerasMirrored: true,
     });
 
-    eyesObj.left.pupilSpr.tint = theme.pupilLeftTint;
-    eyesObj.right.pupilSpr.tint = theme.pupilLeftTint;
+    eyesObj.left.pupilSpr.tint = theme.tints.pupilLeft;
+    eyesObj.right.pupilSpr.tint = theme.tints.pupilRight;
 
     let agape = false;
     let agapeUnit = 0;
 
-    const mouthObj = Sprite.from(txMouth).anchored(0.5, 0.5).at(0, 9).tinted(theme.mouthTint).merge({
+    const mouthObj = Sprite.from(txMouth).anchored(0.5, 0.5).at(0, 9).tinted(theme.tints.mouth).merge({
         get agape() {
             return agape;
         },
@@ -130,7 +141,7 @@ function objAngelSuggestiveFace(theme: Theme) {
             }
         });
 
-    const spr = Sprite.from(Tx.Enemy.Suggestive.Face).tinted(theme.faceTint).anchored(0.5, 0.5).mixin(
+    const spr = Sprite.from(Tx.Enemy.Suggestive.Face).tinted(theme.tints.face).anchored(0.5, 0.5).mixin(
         mxnBoilMirrorRotate,
     );
 
@@ -234,7 +245,7 @@ export function objAngelSuggestive() {
 
     const faceObj = objAngelSuggestiveFace(theme);
 
-    const irregularShadowObj = Sprite.from(Tx.Light.ShadowIrregularSmallRound).anchored(0.5, 0.5).tinted(0x880D17).at(
+    const irregularShadowObj = Sprite.from(Tx.Light.ShadowIrregularSmallRound).anchored(0.5, 0.5).tinted(0xC00000).at(
         27,
         1,
     )
@@ -287,6 +298,7 @@ export function objAngelSuggestive() {
         healthbarAnchorObj,
     )
         .mixin(mxnEnemy, { rank: rnkAngelSuggestive, hurtboxes: [hurtbox0], healthbarAnchorObj })
+        .filtered(new MapRgbFilter(theme.map.red, theme.map.green, theme.map.blue, theme.map.white))
         // TODO part of loot!!
         .handles("mxnEnemy.died", () => objPocketableItem.parachuting("ComputerChip").at(enemyObj).show());
 
