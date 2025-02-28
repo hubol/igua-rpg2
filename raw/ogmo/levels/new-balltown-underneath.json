@@ -554,7 +554,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": false,
-          "values": {"personaName": "", "name": "", "depth": 0}
+          "values": {"personaName": "UnderneathHomeowner", "name": "Homeowner", "depth": 0}
         }
       ]
     },

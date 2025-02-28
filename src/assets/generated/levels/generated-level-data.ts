@@ -1098,7 +1098,7 @@ export const Lvl = {
     ShapesRectangle6_35: d(Tx.Shapes.Rectangle6, { x: 153, y: 257, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x99b074 }, "AboveEntitiesDecals"),
     ShapesRectangle6_36: d(Tx.Shapes.Rectangle6, { x: 167, y: 267, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x99b074 }, "AboveEntitiesDecals"),
     FoliageFlower18_2: d(Tx.Foliage.Flower18, { x: 167, y: 273, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xba3518 }, "AboveEntitiesDecals"),
-    IguanaNpc: e(r["IguanaNpc"], { x: 176, y: 248, flippedX: false, values: { personaName: "", name: "", depth: 0 } }, "CharacterEntities"),
+    Homeowner: e(r["IguanaNpc"], { x: 176, y: 248, flippedX: false, values: { personaName: "UnderneathHomeowner", name: "Homeowner", depth: 0 } }, "CharacterEntities"),
     Player: e(r["Player"], { x: 1608, y: 368, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
     fromOutskirtsRight: e(r["Checkpoint"], { x: 1592, y: 48, flippedX: false, values: { name: "fromOutskirtsRight", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
     fromNewBalltown: e(r["Checkpoint"], { x: 424, y: 48, flippedX: false, values: { name: "fromNewBalltown", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
