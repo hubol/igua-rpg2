@@ -74,7 +74,7 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
     }
 
     function getMiningDelayRate() {
-        return hasHighMiningSpeed() ? 0.5 : 1;
+        return hasHighMiningSpeed() ? 0.2 : 1;
     }
 
     const valuableSpawnerObj = objValuableSpawner([lvl.MinerValuable0, lvl.MinerValuable1, lvl.MinerValuable2]);
