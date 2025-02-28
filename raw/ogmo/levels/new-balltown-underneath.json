@@ -532,6 +532,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromOutskirts", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 6,
+          "_eid": "19953026",
+          "x": 288,
+          "y": 328,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromHomeowner", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -774,7 +785,7 @@
           "y": 280,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "", "checkpointName": "", "name": "", "depth": 0}
+          "values": {"sceneName": "scnNewBalltownUnderneathHomeowner", "checkpointName": "", "name": "", "depth": 0}
         },
         {
           "name": "Sign",
