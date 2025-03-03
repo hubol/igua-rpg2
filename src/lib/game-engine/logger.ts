@@ -1,7 +1,7 @@
 import { Logging } from "../logging";
 
 export enum LogNature {
-    Info = "Info",
+    Debug = "Debug",
     MisconfiguredError = "Misconfigured",
     AssertFailedError = "AssertFailed",
     ContractViolatedError = "ContractViolated",
@@ -10,7 +10,7 @@ export enum LogNature {
 }
 
 const defaultLogTarget = {
-    onInfo(source: string, message: string, ...context: any[]) {
+    onDebug(source: string, message: string, ...context: any[]) {
         const args = [...Logging.badge(source), message];
         if (context.length) {
             args.push("\n\nContext:\n", ...context);
@@ -35,8 +35,10 @@ export const DefaultLogTarget: LogTarget = defaultLogTarget;
 class LoggerImpl {
     target: LogTarget = defaultLogTarget;
 
-    logInfo(subsystem: string, message: string, ...context: any[]) {
-        this.target.onInfo(subsystem, message, ...context);
+    readonly logInfo = console.log.bind(console);
+
+    logDebug(subsystem: string, message: string, ...context: any[]) {
+        this.target.onDebug(subsystem, message, ...context);
     }
 
     logUnhandledError(source: string, error: any) {

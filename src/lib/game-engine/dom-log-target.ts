@@ -8,9 +8,9 @@ export class DomLogTarget implements LogTarget {
         document.body.appendChild(this.logRoot.el);
     }
 
-    onInfo(source: string, message: string, ...context: any[]): void {
-        DefaultLogTarget.onInfo(source, message, ...context);
-        this.logRoot.increaseLogCountForSubsystem(LogNature.Info, source, message);
+    onDebug(source: string, message: string, ...context: any[]): void {
+        DefaultLogTarget.onDebug(source, message, ...context);
+        this.logRoot.increaseLogCountForSubsystem(LogNature.Debug, source, message);
     }
 
     onError(nature: LogNature, subsystem: string, error: any, ...context: any[]): void {
@@ -73,7 +73,7 @@ function createDomLog(nature: LogNature, subsytem: string) {
 
     el.append(natureEl, subsystemEl, messageCountEl, uniqueMessageCountEl);
 
-    if (nature === LogNature.Info) {
+    if (nature === LogNature.Debug) {
         el.append(latestMessageEl);
     }
 
