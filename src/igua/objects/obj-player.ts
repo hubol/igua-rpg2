@@ -112,8 +112,9 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             for (const instance of Instances(mxnRpgStatus, filterVulnerableObjs)) {
                 const hurtbox = puppet.collidesOne(instance.hurtboxes);
                 if (hurtbox) {
-                    bounceIguanaOffObject(puppet, hurtbox);
-                    const result = instance.damage(RpgPlayer.meleeAttack, RpgPlayer.status);
+                    const collidedWithFeet = bounceIguanaOffObject(puppet, hurtbox);
+                    const attack = collidedWithFeet ? RpgPlayer.meleeClawAttack : RpgPlayer.meleeAttack;
+                    const result = instance.damage(attack, RpgPlayer.status);
                 }
             }
         }, StepOrder.Physics + 1)
@@ -153,6 +154,8 @@ const bounceIguanaOffObject = function () {
                 break;
             }
         }
+
+        return collidedWithFeet;
     };
 }();
 

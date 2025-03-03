@@ -93,6 +93,14 @@ export const RpgPlayer = {
     meleeAttack: RpgAttack.create({
         emotional: 0,
         get physical() {
+            return 4 + RpgProgress.character.attributes.strength * 3;
+        },
+        poison: 0,
+        versus: RpgFaction.Enemy,
+    }),
+    meleeClawAttack: RpgAttack.create({
+        emotional: 0,
+        get physical() {
             return 5 + RpgProgress.character.attributes.strength * 5;
         },
         poison: 0,
