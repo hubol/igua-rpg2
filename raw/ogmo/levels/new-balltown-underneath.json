@@ -2927,6 +2927,19 @@
           "originY": 0,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 268,
+          "y": 203,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#103418",
+          "texture": "foliage/moss hanging 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -3352,6 +3365,24 @@
           "flippedY": true,
           "tint": "#103418",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 48,
+          "_eid": "95769929",
+          "x": 256,
+          "y": 184,
+          "width": 24,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 49,
+          "_eid": "95769929",
+          "x": 64,
+          "y": 104,
+          "width": 72,
+          "values": {"name": "", "visible": false, "depth": 0}
         }
       ]
     },
@@ -3376,6 +3407,32 @@
       "gridCellsX": 216,
       "gridCellsY": 55,
       "decals": [
+        {
+          "x": 235,
+          "y": 169,
+          "scaleX": 3,
+          "scaleY": 1,
+          "rotation": 45,
+          "tint": "#08270e",
+          "texture": "shapes/arc 24.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 266,
+          "y": 191,
+          "scaleX": 0.1,
+          "scaleY": 3.5,
+          "rotation": 0,
+          "tint": "#08270e",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""},
+          "groupName": null
+        },
         {
           "x": 187,
           "y": 140,
