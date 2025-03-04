@@ -13,6 +13,8 @@ type CameraMode = "follow-player" | "controlled";
 function getCameraPositionToFrameSubject(vector: DisplayObject | Vector, subjectObj: DisplayObject) {
     if (subjectObj && !subjectObj.destroyed) {
         vector.at(subjectObj).add(-renderer.width / 2, -renderer.height / 2);
+        vector.x = Math.max(0, Math.min(vector.x, scene.level.width - renderer.width));
+        vector.y = Math.max(0, Math.min(vector.y, scene.level.height - renderer.height));
         return vector;
     }
 
