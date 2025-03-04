@@ -22,13 +22,6 @@ const rnkAngelBouncing = RpgEnemyRank.create({
     status: {
         healthMax: 30,
     },
-    loot: {
-        valuables: {
-            max: 7,
-            min: 2,
-            deltaPride: -3,
-        },
-    },
 });
 
 export function objAngelBouncing() {
