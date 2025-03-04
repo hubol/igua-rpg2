@@ -28,7 +28,7 @@ function getMessageBoxColors(speaker: DisplayObject | null) {
     const primary = speaker?.is(mxnSpeaker) ? speaker.speaker.colorPrimary : 0x600000;
     const secondary = speaker?.is(mxnSpeaker) ? speaker.speaker.colorSecondary : 0x400000;
     const textPrimary = SubjectiveColorAnalyzer.getPreferredTextColor(primary);
-    const textSecondary = SubjectiveColorAnalyzer.getPreferredTextColor(primary);
+    const textSecondary = SubjectiveColorAnalyzer.getPreferredTextColor(secondary);
 
     return {
         primary,
