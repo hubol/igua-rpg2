@@ -207,7 +207,20 @@
       "gridCellHeight": 8,
       "gridCellsX": 124,
       "gridCellsY": 59,
-      "decals": [],
+      "decals": [
+        {
+          "x": 124,
+          "y": 136,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#b4afb7",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -415,18 +428,6 @@
           "y": 81,
           "scaleX": 1,
           "scaleY": -1,
-          "rotation": 0,
-          "tint": "#b4afb7",
-          "texture": "terrain/grass/jagged.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 124,
-          "y": 136,
-          "scaleX": 1,
-          "scaleY": 1,
           "rotation": 0,
           "tint": "#b4afb7",
           "texture": "terrain/grass/jagged.png",
