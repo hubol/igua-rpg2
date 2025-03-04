@@ -53,6 +53,7 @@ const [txParachuteSlack, txParachute, txParachuteOpen] = Tx.Effects.Parachute.sp
 
 function objParachute(target: MxnPhysics) {
     return Sprite.from(txParachute).pivoted(30, 76).coro(function* (self) {
+        self.play(Sfx.Effect.ParachuteLaunch.rate(0.9, 1.1));
         self.scale.y = -1;
         yield () => target.speed.y >= -1;
         self.texture = txParachuteSlack;
@@ -62,8 +63,10 @@ function objParachute(target: MxnPhysics) {
         yield sleepf(10);
         self.texture = txParachute;
         yield sleepf(15);
+        self.play(Sfx.Effect.ParachuteOpen.rate(0.9, 1.1));
         self.texture = txParachuteOpen;
         yield () => target.isOnGround;
+        self.play(Sfx.Effect.ParachuteClose.rate(0.9, 1.1));
         self.texture = txParachuteSlack;
         yield sleepf(10);
         self.alpha = 0.5;
