@@ -56,6 +56,17 @@
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 4,
+          "_eid": "73148747",
+          "x": 200,
+          "y": 320,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "HomeownerLandPosition", "depth": 0}
         }
       ]
     },
@@ -144,12 +155,23 @@
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
-          "x": 120,
+          "x": 136,
           "y": 136,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 1,
+          "_eid": "19953026",
+          "x": 136,
+          "y": 136,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "HomeownerAppearPosition", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -162,7 +184,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 124,
       "gridCellsY": 59,
-      "entities": []
+      "entities": [
+        {
+          "name": "IguanaNpc",
+          "id": 0,
+          "_eid": "90326278",
+          "x": 240,
+          "y": 320,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": true,
+          "values": {"personaName": "UnderneathHomeowner", "name": "Homeowner", "depth": 0}
+        }
+      ]
     },
     {
       "name": "AboveEntitiesDecals",
