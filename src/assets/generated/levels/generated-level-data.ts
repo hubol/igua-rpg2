@@ -1380,7 +1380,7 @@ export const Lvl = {
     Sign_1: e(r["Sign"], { x: 1488, y: 145, values: { title: "Almost", message: "Almost to New Balltown.\n\nThis sign is special.", name: "", depth: 0, isSpecial: true } }, "Entities"),
     EnemySuggestive: e(r["EnemySuggestive"], { x: 833, y: 318, uid: 174025673303600, values: { name: "", depth: 0, variant: "level1" } }, "Entities"),
     EnemySuggestive_1: e(r["EnemySuggestive"], { x: 1280, y: 360, uid: 174025674886701, values: { name: "", depth: 0, variant: "level1" } }, "Entities"),
-    Door: e(r["Door"], { x: 240, y: 280, values: { sceneName: "scnNewBalltownUnderneathHomeowner", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+    ToHomeownerDoor: e(r["Door"], { x: 240, y: 280, values: { sceneName: "scnNewBalltownUnderneathHomeowner", checkpointName: "", name: "ToHomeownerDoor", depth: 0 } }, "Entities"),
     Sign_2: e(r["Sign"], { x: 136, y: 120, values: { title: "Monument", message: "A monument in honor of him.", name: "", depth: 0, isSpecial: false } }, "Entities"),
     EffectsStar12px: d(Tx.Effects.Star12px, { x: 1437, y: 350, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x854e31 }, "AboveEntitiesDecals"),
     EffectsStar12px_1: d(Tx.Effects.Star12px, { x: 1532, y: 134, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x854e31 }, "AboveEntitiesDecals"),

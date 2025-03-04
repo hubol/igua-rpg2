@@ -785,7 +785,7 @@
           "y": 280,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "scnNewBalltownUnderneathHomeowner", "checkpointName": "", "name": "", "depth": 0}
+          "values": {"sceneName": "scnNewBalltownUnderneathHomeowner", "checkpointName": "", "name": "ToHomeownerDoor", "depth": 0}
         },
         {
           "name": "Sign",

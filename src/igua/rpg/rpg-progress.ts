@@ -76,6 +76,11 @@ export function getInitialRpgProgress() {
                     toldPlayerAboutDepletedPickaxeHealth: false,
                 },
             },
+            underneath: {
+                homeowner: {
+                    hasClearedHouseOfEnemies: false,
+                },
+            },
         },
         uids: {
             metNpcs: new Set<NpcPersonaInternalName>(),
