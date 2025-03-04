@@ -18,12 +18,15 @@ export namespace RpgLoot {
         item: RpgPocket.Item;
     }
 
+    interface TierOptionDrop_Nothing {
+        kind: "nothing";
+    }
+
     // TODO key item, too
 
-    type TierOptionDrop = TierOptionDrop_Valuables | TierOptionDrop_PocketItem | null;
+    type TierOptionDrop = TierOptionDrop_Valuables | TierOptionDrop_PocketItem | TierOptionDrop_Nothing;
 
-    type TierOption = {
-        drop: TierOptionDrop;
+    type TierOption = TierOptionDrop & {
         weight?: Integer;
     };
 
@@ -74,7 +77,7 @@ export namespace RpgLoot {
         },
     };
 
-    function pickOptionDrop(tierOptions: TierOption[]): TierOptionDrop {
+    function pickOptionDrop(tierOptions: TierOption[]): TierOptionDrop | null {
         if (tierOptions.length === 0) {
             return null;
         }
@@ -83,7 +86,7 @@ export namespace RpgLoot {
         {
             let previousScore = 0;
             for (const option of tierOptions) {
-                const entry = { score: previousScore + (option.weight ?? 1), drop: option.drop };
+                const entry = { score: previousScore + (option.weight ?? 1), drop: option };
                 previousScore = entry.score;
                 dropWithMinimumScores.push(entry);
             }

@@ -113,13 +113,13 @@ const ranks = {
     level0: RpgEnemyRank.create({
         loot: {
             tier0: [
-                { drop: { kind: "valuables", max: 8, min: 2, deltaPride: -3 } },
+                { kind: "valuables", max: 8, min: 2, deltaPride: -3 },
             ],
             tier1: [
-                { drop: { kind: "pocket_item", item: "BallFruitTypeA" } },
-                { drop: { kind: "pocket_item", item: "BallFruitTypeB" } },
-                { drop: { kind: "pocket_item", item: "ComputerChip" }, weight: 2 },
-                { drop: null },
+                { kind: "pocket_item", item: "BallFruitTypeA" },
+                { kind: "pocket_item", item: "BallFruitTypeB" },
+                { kind: "pocket_item", item: "ComputerChip", weight: 2 },
+                { kind: "nothing" },
             ],
         },
     }),
@@ -129,11 +129,11 @@ const ranks = {
         },
         loot: {
             tier0: [
-                { drop: { kind: "valuables", max: 10, min: 2, deltaPride: -3 } },
+                { kind: "valuables", max: 10, min: 2, deltaPride: -3 },
             ],
             tier1: [
-                { drop: { kind: "pocket_item", item: "ComputerChip" }, weight: 4 },
-                { drop: null },
+                { kind: "pocket_item", item: "ComputerChip", weight: 4 },
+                { kind: "nothing" },
             ],
         },
     }),
