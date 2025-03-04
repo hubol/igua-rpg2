@@ -92,5 +92,24 @@ export function createDebugPanel() { }
 ## Classes
 For some systems, it feels more natural to use classes. There is no ban on using classes or any typical OOP features e.g. `abstract`, `protected`, and `private` modifiers.
 
+## Discriminated unions
+
+Use a `kind` property as a discriminator. Literal values should be `snake_case`. You may also wish to declare multiple types:
+
+```ts
+interface Animal_Dog {
+    kind: 'dog'
+    slobber: number
+}
+
+interface Animal_TyrannosaurusRex {
+    kind: 'tyrannosaurus_rex'
+    length: number
+}
+
+type Animal = Animal_Dog | Animal_TyrannosaurusRex
+
+```
+
 ## Formatting
 I am using `dprint` for formatting. `prettier` is too opinionated and `ESLint` has an embarrassing footprint.
