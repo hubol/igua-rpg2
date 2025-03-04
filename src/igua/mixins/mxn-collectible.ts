@@ -4,37 +4,37 @@ import { playerObj } from "../objects/obj-player";
 import { RpgProgress, RpgProgressFlags, RpgProgressUids } from "../rpg/rpg-progress";
 
 interface MxnCollectibleUid {
-    type: "uid";
+    kind: "uid";
     uid: number;
     set: RpgProgressUids;
 }
 
 interface MxnCollectibleFlag {
-    type: "flag";
+    kind: "flag";
     flag: RpgProgressFlags;
 }
 
 interface MxnCollectibleTransient {
-    type: "transient";
+    kind: "transient";
 }
 
 type MxnCollectibleArgs = MxnCollectibleUid | MxnCollectibleFlag | MxnCollectibleTransient;
 
 function isCollected(args: MxnCollectibleArgs): boolean {
-    if (args.type === "transient") {
+    if (args.kind === "transient") {
         return false;
     }
-    if (args.type === "flag") {
+    if (args.kind === "flag") {
         return DeepAccess.get(RpgProgress.flags, args.flag);
     }
     return RpgProgress.uids[args.set].has(args.uid);
 }
 
 function collect(args: MxnCollectibleArgs) {
-    if (args.type === "transient") {
+    if (args.kind === "transient") {
         return;
     }
-    if (args.type === "flag") {
+    if (args.kind === "flag") {
         DeepAccess.set(RpgProgress.flags, args.flag, true);
     }
     else {

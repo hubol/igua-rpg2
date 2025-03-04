@@ -3,13 +3,13 @@ import { RpgAttack } from "./rpg-attack";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgProgress } from "./rpg-progress";
 
-type ComputerInteraction = "noop" | "small-task" | "medium-task";
+type ComputerInteractionKind = "noop" | "small_task" | "medium_task";
 
 const computerInteractionsToExperience = {
     noop: 1,
-    "small-task": 7,
-    "medium-task": 14,
-} satisfies Record<ComputerInteraction, Integer>;
+    "small_task": 7,
+    "medium_task": 14,
+} satisfies Record<ComputerInteractionKind, Integer>;
 
 export const RpgExperienceRewarder = {
     combat: {
@@ -33,8 +33,8 @@ export const RpgExperienceRewarder = {
         onDepositComputerChips(count: Integer) {
             RpgProgress.character.experience.computer += count * 2;
         },
-        onInteract(type: ComputerInteraction) {
-            RpgProgress.character.experience.computer += computerInteractionsToExperience[type];
+        onInteract(kind: ComputerInteractionKind) {
+            RpgProgress.character.experience.computer += computerInteractionsToExperience[kind];
         },
     },
     gambling: {

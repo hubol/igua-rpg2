@@ -1,13 +1,13 @@
 export namespace RpgEconomy {
     export namespace Currency {
-        export type Type = "green" | "orange" | "blue";
+        export type Kind = "green" | "orange" | "blue";
 
-        export const Values: Record<Type, number> = {
+        export const Values: Record<Kind, number> = {
             green: 1,
             orange: 5,
             blue: 15,
         };
 
-        export const DescendingTypes: Type[] = ["blue", "orange", "green"];
+        export const DescendingTypes: Kind[] = ["blue", "orange", "green"];
     }
 }

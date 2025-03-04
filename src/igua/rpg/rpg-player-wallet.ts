@@ -11,14 +11,14 @@ export namespace RpgPlayerWallet {
         return RpgProgress.character.inventory.valuables >= count;
     }
 
-    export type ExpenseType = "default" | "gambling";
+    export type ExpenseKind = "default" | "gambling";
 
-    export function spendValuables(cost: Integer, type: ExpenseType = "default") {
+    export function spendValuables(cost: Integer, kind: ExpenseKind = "default") {
         // TODO assert valuables >= cost
 
         RpgProgress.character.inventory.valuables -= cost;
 
-        if (type === "gambling") {
+        if (kind === "gambling") {
             RpgExperienceRewarder.gambling.onPlaceBet(cost);
         }
     }

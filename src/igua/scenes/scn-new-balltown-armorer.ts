@@ -213,7 +213,7 @@ Need at least 150`);
                 wetness.value = 0;
                 Sfx.Fluid.Slurp.play();
                 yield sleep(1000);
-                RpgExperienceRewarder.computer.onInteract("small-task");
+                RpgExperienceRewarder.computer.onInteract("small_task");
             }
         }
 

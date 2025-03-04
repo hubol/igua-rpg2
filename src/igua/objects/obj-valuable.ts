@@ -15,7 +15,7 @@ interface ValuableConfig {
     sound: Sound;
 }
 
-const valuableConfigs: Record<RpgEconomy.Currency.Type, ValuableConfig> = {
+const valuableConfigs: Record<RpgEconomy.Currency.Kind, ValuableConfig> = {
     green: {
         texture: Tx.Collectibles.ValuableGreen,
         sparkle: {
@@ -40,16 +40,16 @@ const valuableConfigs: Record<RpgEconomy.Currency.Type, ValuableConfig> = {
 };
 
 export function objValuable(
-    type: RpgEconomy.Currency.Type,
+    kind: RpgEconomy.Currency.Kind,
     uid?: number,
     incomeSource: RpgPlayerWallet.IncomeSource = "default",
 ) {
     let collectableAfterSteps = 3;
 
-    const config = valuableConfigs[type];
+    const config = valuableConfigs[kind];
     return Sprite.from(config.texture)
         .anchored(0.5, 0.5)
-        .mixin(mxnCollectible, uid === undefined ? { type: "transient" } : { type: "uid", uid, set: "valuables" })
+        .mixin(mxnCollectible, uid === undefined ? { kind: "transient" } : { kind: "uid", uid, set: "valuables" })
         .handles("collected", self => {
             config.sound.play();
             for (const offset of config.sparkle.offsets) {
@@ -57,7 +57,7 @@ export function objValuable(
                     .at(self).add(offset).show(self.parent);
                 sparkle.index = Rng.float(1, 3);
             }
-            RpgPlayerWallet.receiveValuables(RpgEconomy.Currency.Values[type], incomeSource);
+            RpgPlayerWallet.receiveValuables(RpgEconomy.Currency.Values[kind], incomeSource);
         })
         .step(self => self.collectable = collectableAfterSteps-- <= 0);
 }

@@ -2,7 +2,7 @@ import { Logger } from "../../lib/game-engine/logger";
 import { RpgEconomy } from "../rpg/rpg-economy";
 
 export namespace ValuableChangeMaker {
-    export type Counts = Record<RpgEconomy.Currency.Type, number>;
+    export type Counts = Record<RpgEconomy.Currency.Kind, number>;
 
     export function solveCounts(total: number) {
         const result: Counts = {} as any;

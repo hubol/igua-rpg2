@@ -251,7 +251,7 @@ function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
 
             const password = characters.join("");
             if (password === "POOP*") {
-                RpgExperienceRewarder.computer.onInteract("small-task");
+                RpgExperienceRewarder.computer.onInteract("small_task");
                 yield* show("Access granted.");
                 yield* show(
                     `Welcome master. You have ${RpgProgress.flags.newBalltown.mechanicalIdol.credits} credit(s).`,
@@ -563,7 +563,7 @@ function objFishmongerBomb(name: string) {
             ]);
 
             if (hookedObj.isDefused) {
-                RpgExperienceRewarder.computer.onInteract("small-task");
+                RpgExperienceRewarder.computer.onInteract("small_task");
             }
         });
 }
