@@ -1,4 +1,5 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { RpgAttack } from "./rpg-attack";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgProgress } from "./rpg-progress";
 
@@ -12,8 +13,17 @@ const computerInteractionsToExperience = {
 
 export const RpgExperienceRewarder = {
     combat: {
-        onAttackDamage(damageReceived: Integer) {
-            RpgProgress.character.experience.combat += damageReceived;
+        onAttackDamage(attack: RpgAttack.Model, damageDealtToEnemy: Integer) {
+            if (attack.quirks.isPlayerClawMeleeAttack) {
+                RpgProgress.character.experience.combat += 3;
+            }
+            else if (attack.quirks.isPlayerMeleeAttack) {
+                RpgProgress.character.experience.combat += 1;
+            }
+            else {
+                // TODO not sure if player should receive XP equal to damage dealt for non-melee attacks. But could be interesting!
+                RpgProgress.character.experience.combat += damageDealtToEnemy;
+            }
         },
         onEnemyDefeat(enemyMaxHealth: Integer) {
             RpgProgress.character.experience.combat += Math.ceil(enemyMaxHealth / 3);

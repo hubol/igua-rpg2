@@ -12,6 +12,10 @@ export namespace RpgAttack {
             tint: RgbInt;
         };
         versus: RpgFaction;
+        quirks: {
+            isPlayerMeleeAttack: boolean;
+            isPlayerClawMeleeAttack: boolean;
+        };
     }
 
     export function create(model: DeepPartial<Model>): Model {
@@ -21,6 +25,10 @@ export namespace RpgAttack {
             poison: model.poison ?? 0,
             wetness: { value: model.wetness?.value ?? 0, tint: model.wetness?.tint ?? 0xffffff },
             versus: model.versus ?? RpgFaction.Player,
+            quirks: {
+                isPlayerClawMeleeAttack: model.quirks?.isPlayerClawMeleeAttack ?? false,
+                isPlayerMeleeAttack: model.quirks?.isPlayerMeleeAttack ?? false,
+            },
         };
     }
 }

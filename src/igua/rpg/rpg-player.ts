@@ -97,6 +97,9 @@ export const RpgPlayer = {
         },
         poison: 0,
         versus: RpgFaction.Enemy,
+        quirks: {
+            isPlayerMeleeAttack: true,
+        },
     }),
     meleeClawAttack: RpgAttack.create({
         emotional: 0,
@@ -105,6 +108,10 @@ export const RpgPlayer = {
         },
         poison: 0,
         versus: RpgFaction.Enemy,
+        quirks: {
+            // TODO should it have both player melee quirks?
+            isPlayerClawMeleeAttack: true,
+        },
     }),
 };
 

@@ -148,6 +148,7 @@ export namespace RpgStatus {
             const attackingRewardsExperience = attacker?.quirks?.attackingRewardsExperience ?? false;
 
             const tookEmotionalDamage = takeDamage(
+                attack,
                 attack.emotional,
                 DamageKind.Emotional,
                 canBeFatal && target.quirks.emotionalDamageIsFatal,
@@ -160,6 +161,7 @@ export namespace RpgStatus {
             );
 
             const tookPhysicalDamage = takeDamage(
+                attack,
                 attack.physical,
                 DamageKind.Physical,
                 canBeFatal,
@@ -199,6 +201,7 @@ export namespace RpgStatus {
     };
 
     function takeDamage(
+        attack: RpgAttack.Model,
         amount: Integer,
         kind: DamageKind,
         canBeFatal: boolean,
@@ -227,7 +230,7 @@ export namespace RpgStatus {
         const diff = previous - target.health;
 
         if (rewardExperience && diff > 0) {
-            RpgExperienceRewarder.combat.onAttackDamage(diff);
+            RpgExperienceRewarder.combat.onAttackDamage(attack, diff);
         }
 
         targetEffects.tookDamage(target.health, diff, kind);
