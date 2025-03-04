@@ -24,6 +24,7 @@ export function mxnShadowFloor(obj: DisplayObject, args: MxnShadowFloorArgs) {
                 self.destroy();
                 return;
             }
+            self.visible = obj.visible;
             self.at(obj.position).add(args.offset);
         },
         StepOrder.Camera - 1,
