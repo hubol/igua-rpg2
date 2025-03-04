@@ -50,7 +50,8 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
             strikePlayer(attack: RpgAttack.Model) {
                 playerObj.damage(attack, status);
             },
-        });
+        })
+        .track(mxnEnemy);
 
     return enemyObj;
 }
