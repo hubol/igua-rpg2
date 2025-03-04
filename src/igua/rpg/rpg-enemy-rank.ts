@@ -9,7 +9,9 @@ export namespace RpgEnemyRank {
         loot: RpgLoot.Model;
     }
 
-    export function create({ status, loot }: DeepPartial<Model>): Model {
+    type CreateArgs = DeepPartial<Omit<Model, "loot">> & { loot?: RpgLoot.Model };
+
+    export function create({ status, loot }: CreateArgs): Model {
         return {
             status: {
                 health: status?.health ?? status?.healthMax ?? 30,
@@ -50,13 +52,7 @@ export namespace RpgEnemyRank {
                     wetness: 1,
                 },
             },
-            loot: {
-                valuables: {
-                    min: loot?.valuables?.min ?? 1,
-                    max: loot?.valuables?.max ?? 2,
-                    deltaPride: loot?.valuables?.deltaPride ?? -1,
-                },
-            },
+            loot: loot ?? {},
         };
     }
 }

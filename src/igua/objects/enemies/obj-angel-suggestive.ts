@@ -112,11 +112,15 @@ const themes = {
 const ranks = {
     level0: RpgEnemyRank.create({
         loot: {
-            valuables: {
-                max: 8,
-                min: 2,
-                deltaPride: -3,
-            },
+            tier0: [
+                { drop: { kind: "valuables", max: 8, min: 2, deltaPride: -3 } },
+            ],
+            tier1: [
+                { drop: { kind: "pocket_item", item: "BallFruitTypeA" } },
+                { drop: { kind: "pocket_item", item: "BallFruitTypeB" } },
+                { drop: { kind: "pocket_item", item: "ComputerChip" }, weight: 2 },
+                { drop: null },
+            ],
         },
     }),
     level1: RpgEnemyRank.create({
@@ -124,11 +128,13 @@ const ranks = {
             healthMax: 40,
         },
         loot: {
-            valuables: {
-                max: 8,
-                min: 2,
-                deltaPride: -3,
-            },
+            tier0: [
+                { drop: { kind: "valuables", max: 10, min: 2, deltaPride: -3 } },
+            ],
+            tier1: [
+                { drop: { kind: "pocket_item", item: "ComputerChip" }, weight: 4 },
+                { drop: null },
+            ],
         },
     }),
 };
@@ -366,9 +372,7 @@ export function objAngelSuggestive(variantKey: VariantKey) {
         healthbarAnchorObj,
     )
         .mixin(mxnEnemy, { rank: variant.rank, hurtboxes: [hurtbox0], healthbarAnchorObj })
-        .filtered(new MapRgbFilter(theme.map.red, theme.map.green, theme.map.blue, theme.map.white))
-        // TODO part of loot!!
-        .handles("mxnEnemy.died", () => objPocketableItem.parachuting("ComputerChip").at(enemyObj).show());
+        .filtered(new MapRgbFilter(theme.map.red, theme.map.green, theme.map.blue, theme.map.white));
 
     return enemyObj;
 }
