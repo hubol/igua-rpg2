@@ -1,12 +1,15 @@
 import { Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { approachLinear, nlerp } from "../../lib/math/number";
+import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { DramaMisc } from "../drama/drama-misc";
 import { show } from "../drama/show";
 import { Cutscene } from "../globals";
+import { GenerativeMusicUtils } from "../lib/generative-music-utils";
 import { mxnInteract } from "../mixins/mxn-interact";
 import { SceneChanger } from "../systems/scene-changer";
 
@@ -69,9 +72,12 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
                 });
             }
         })
-        .coro(function* () {
+        .coro(function* (self) {
             while (true) {
                 yield () => maskObj0.y !== getTargetMaskY();
+
+                const tune = GenerativeMusicUtils.tune7(locked ? "minor" : "major");
+
                 while (maskObj0.y !== getTargetMaskY()) {
                     const targetY = getTargetMaskY();
                     const rawNextY = approachLinear(maskObj0.y, targetY, 4);
@@ -86,7 +92,11 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
                     const f0 = Math.max(1, 0.3 * f);
                     const f1 = Math.max(1, 0.65 * f);
 
-                    // TODO locking/unlocking sfx
+                    const { value: rate } = tune.next();
+                    if (rate) {
+                        self.play(Rng.choose(Sfx.Impact.DoorLock0, Sfx.Impact.DoorLock1).rate(rate));
+                    }
+
                     (isLocking ? maskObj0 : maskObj2).y = nextY;
                     yield sleepf(f1);
                     maskObj1.y = nextY;

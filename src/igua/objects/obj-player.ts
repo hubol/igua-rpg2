@@ -96,7 +96,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                     RpgPlayer.equipmentAttributes.quirks.enablesHighJumpsAtSpecialSigns
                     && puppet.collidesOne(Instances(objSign, filterSpecialSignObjs))
                 ) {
-                    // TODO sfx for special jump
+                    puppet.play(Sfx.Effect.JumpSpecial.rate(0.9, 1.1));
                     puppet.coro(function* () {
                         puppet.sparklesPerFrame = 2;
                         yield interp(puppet, "sparklesPerFrame").to(0).over(500);
