@@ -1078,6 +1078,41 @@ export const Lvl = {
     EnvironmentSparkleMarker_3: e(r["EnvironmentSparkleMarker"], { x: 374, y: 158, values: { name: "", depth: 0 } }, "MarkerEntities"),
     HomeownerLandPosition: e(r["Marker"], { x: 200, y: 320, values: { name: "HomeownerLandPosition", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
   })),
+  NewBalltownUnderneathTunnel: l({ width: 856, height: 368, backgroundTint: 0x132852 }, () => ({
+    ShapesSquare32: d(Tx.Shapes.Square32, { x: 591, y: 32, scaleX: 7.5, scaleY: 5.5, rotation: 0, originX: 0, originY: 0, tint: 0x425651 }, "BackgroundDecals"),
+    ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 23, y: 156, scaleX: 7.3, scaleY: 5.7, rotation: 0, originX: 0, originY: 0, tint: 0x425651 }, "BackgroundDecals"),
+    ShapesSquare32_2: d(Tx.Shapes.Square32, { x: 208, y: 130, scaleX: 5.6, scaleY: 6, rotation: 0, originX: 0, originY: 0, tint: 0x425651 }, "BackgroundDecals"),
+    ShapesSquare32_3: d(Tx.Shapes.Square32, { x: 327, y: 95, scaleX: 6, scaleY: 5.6, rotation: 0, originX: 0, originY: 0, tint: 0x425651 }, "BackgroundDecals"),
+    ShapesSquare32_4: d(Tx.Shapes.Square32, { x: 603, y: 47, scaleX: 6.6, scaleY: 4.6, rotation: 0, originX: 0, originY: 0, tint: 0x738550 }, "BackgroundDecals"),
+    ShapesSquare32_5: d(Tx.Shapes.Square32, { x: 37, y: 175, scaleX: 6.4, scaleY: 4.7, rotation: 0, originX: 0, originY: 0, tint: 0x738550 }, "BackgroundDecals"),
+    ShapesSquare32_6: d(Tx.Shapes.Square32, { x: 222, y: 155, scaleX: 4.7, scaleY: 4.8, rotation: 0, originX: 0, originY: 0, tint: 0x738550 }, "BackgroundDecals"),
+    ShapesSquare32_7: d(Tx.Shapes.Square32, { x: 343, y: 110, scaleX: 5.2, scaleY: 4.7, rotation: 0, originX: 0, originY: 0, tint: 0x738550 }, "BackgroundDecals"),
+    ShapesSquare32_8: d(Tx.Shapes.Square32, { x: -128, y: 488, scaleX: 3.3, scaleY: 2.3, rotation: 0, originX: 0, originY: 0, tint: 0xb1c190 }, "BackgroundDecals"),
+    TownBallFrame: d(Tx.Town.Ball.Frame, { x: -94, y: 529, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x94a66f }, "BackgroundDecals"),
+    ShapesSquare32_9: d(Tx.Shapes.Square32, { x: -114, y: 503, scaleX: 1.3, scaleY: 1.8, rotation: 0, originX: 0, originY: 0, tint: 0x738550 }, "BackgroundDecals"),
+    ShapesConfetti32: d(Tx.Shapes.Confetti32, { x: -112, y: 539, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x94a66f }, "BackgroundDecals"),
+    ShapesSquare32_10: d(Tx.Shapes.Square32, { x: -13, y: 486, scaleX: 3.4, scaleY: 2.5, rotation: 0, originX: 0, originY: 0, tint: 0x132852 }, "BackgroundDecals"),
+    ShapesSquare32_11: d(Tx.Shapes.Square32, { x: 61, y: 197, scaleX: 9, scaleY: 3.3, rotation: 0, originX: 0, originY: 0, tint: 0xb1c190 }, "BackgroundDecals"),
+    ShapesSquare32_12: d(Tx.Shapes.Square32, { x: 236, y: 136, scaleX: 9, scaleY: 3.3, rotation: 0, originX: 0, originY: 0, tint: 0xb1c190 }, "BackgroundDecals"),
+    ShapesSquare32_13: d(Tx.Shapes.Square32, { x: 501, y: 70, scaleX: 9, scaleY: 3.3, rotation: 0, originX: 0, originY: 0, tint: 0xb1c190 }, "BackgroundDecals"),
+    ShapesSquare32_14: d(Tx.Shapes.Square32, { x: 489, y: 111, scaleX: 3.9, scaleY: 3.8, rotation: 0, originX: 0, originY: 0, tint: 0xb1c190 }, "BackgroundDecals"),
+    Block: e(r["Block"], { x: 48, y: 200, width: 16, height: 96, values: { name: "", depth: 0, visible: true }, tint: 0x94a66f }, "TerrainEntities"),
+    Block_1: e(r["Block"], { x: 48, y: 296, width: 184, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x94a66f }, "TerrainEntities"),
+    Block_2: e(r["Block"], { x: 48, y: 184, width: 184, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x94a66f }, "TerrainEntities"),
+    Slope: e(r["Slope"], { x: 232, y: 232, width: 128, height: 64, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x94a66f }, "TerrainEntities"),
+    Slope_1: e(r["Slope"], { x: 232, y: 136, width: 128, height: 64, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x94a66f }, "TerrainEntities"),
+    Block_3: e(r["Block"], { x: 360, y: 232, width: 128, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x94a66f }, "TerrainEntities"),
+    Block_4: e(r["Block"], { x: 360, y: 120, width: 128, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x94a66f }, "TerrainEntities"),
+    Slope_2: e(r["Slope"], { x: 488, y: 168, width: 128, height: 64, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x94a66f }, "TerrainEntities"),
+    Slope_3: e(r["Slope"], { x: 488, y: 72, width: 128, height: 64, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x94a66f }, "TerrainEntities"),
+    Block_5: e(r["Block"], { x: 616, y: 56, width: 184, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x94a66f }, "TerrainEntities"),
+    Block_6: e(r["Block"], { x: 616, y: 168, width: 184, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x94a66f }, "TerrainEntities"),
+    Block_7: e(r["Block"], { x: 784, y: 72, width: 16, height: 96, values: { name: "", depth: 0, visible: true }, tint: 0x94a66f }, "TerrainEntities"),
+    Door: e(r["Door"], { x: 96, y: 248, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromTunnelLeft", name: "", depth: 0 } }, "Entities"),
+    Door_1: e(r["Door"], { x: 728, y: 120, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromTunnelRight", name: "", depth: 0 } }, "Entities"),
+    Player: e(r["Player"], { x: 144, y: 296, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    fromRight: e(r["Checkpoint"], { x: 712, y: 168, flippedX: true, values: { name: "fromRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+  })),
   NewBalltownUnderneath: l({ width: 1728, height: 440, backgroundTint: 0xdcc132 }, () => ({
     OutskirtsSeam: dg("OutskirtsSeam", "ParallaxDecals"),
     SkyCloud0: d(Tx.Sky.Cloud0, { x: 861, y: 316, scaleX: -2, scaleY: -2, rotation: 90, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0xc44b17 }, "ParallaxDecals"),
@@ -2225,6 +2260,7 @@ export namespace LvlType {
   export type NewBalltownFishmonger = ReturnType<(typeof Lvl)["NewBalltownFishmonger"]>;
   export type NewBalltownOutskirts = ReturnType<(typeof Lvl)["NewBalltownOutskirts"]>;
   export type NewBalltownUnderneathHomeowner = ReturnType<(typeof Lvl)["NewBalltownUnderneathHomeowner"]>;
+  export type NewBalltownUnderneathTunnel = ReturnType<(typeof Lvl)["NewBalltownUnderneathTunnel"]>;
   export type NewBalltownUnderneath = ReturnType<(typeof Lvl)["NewBalltownUnderneath"]>;
   export type NewBalltown = ReturnType<(typeof Lvl)["NewBalltown"]>;
 }
