@@ -56,7 +56,7 @@ export function objFxBallon(seed = Rng.intc(8_000_000, 24_000_000)) {
     )
         .invisible();
 
-    return container(inflatingObj, ballonObj)
+    return container(inflatingObj, ballonObj).pivoted(10, 23)
         .merge({
             get life() {
                 return life;
@@ -64,10 +64,14 @@ export function objFxBallon(seed = Rng.intc(8_000_000, 24_000_000)) {
             set life(value) {
                 life = value;
             },
+            inflation: 0,
         })
-        .coro(function* () {
-            yield interp(inflatingObj, "textureIndex").to(inflatingObj.textures.length).over(250);
+        .step(self => inflatingObj.textureIndex = self.inflation * inflatingObj.textures.length)
+        .coro(function* (self) {
+            yield interp(self, "inflation").to(1).over(250);
             inflatingObj.destroy();
             ballonObj.visible = true;
         });
 }
+
+export type ObjFxBallon = ReturnType<typeof objFxBallon>;
