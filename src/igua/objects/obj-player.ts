@@ -117,7 +117,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                     const result = instance.damage(attack, RpgPlayer.status);
                 }
             }
-        }, StepOrder.Physics + 1)
+        }, StepOrder.AfterPhysics)
         .zIndexed(ZIndex.PlayerEntities);
 
     puppet.auto.facingMode = ObjIguanaLocomotiveAutoFacingMode.CheckMoving;

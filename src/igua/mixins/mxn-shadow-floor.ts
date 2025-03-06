@@ -27,7 +27,7 @@ export function mxnShadowFloor(obj: DisplayObject, args: MxnShadowFloorArgs) {
             self.visible = obj.visible;
             self.at(obj.position).add(args.offset);
         },
-        StepOrder.Camera - 1,
+        StepOrder.BeforeCamera,
     ).mixin(mxnBoilMirrorRotate).show(CtxShadowFloorObj.value);
 
     shadowObj.blendMode = BLEND_MODES.MULTIPLY;
