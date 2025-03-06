@@ -22,7 +22,6 @@ export function objIndexedSprite(textures: Texture[], textureIndex = 0) {
             effectiveTextureIndex = Math.max(0, Math.min(textures.length - 1, Math.floor(textureIndex)));
             spr.texture = textures[effectiveTextureIndex];
         },
-        textureLength: textures.length,
     });
     return spr;
 }
