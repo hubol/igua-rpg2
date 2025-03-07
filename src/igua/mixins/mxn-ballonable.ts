@@ -13,7 +13,8 @@ interface MxnBallonableArgs {
     attachPoint: DisplayObject;
 }
 
-const p = new Point();
+const p0 = new Point();
+const p1 = new Point();
 const prng = new PseudoRng();
 const v = vnew();
 
@@ -37,8 +38,9 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint }: MxnBallonable
         })
         .step((self) => {
             // TODO this looks like shit
-            self.mxnBallonable.attachPoint.getGlobalPosition(p);
-            p.add(self.parent, -1);
+            self.mxnBallonable.attachPoint.getGlobalPosition(p0);
+            self.parent.getGlobalPosition(p1);
+            p0.add(p1, -1);
 
             gfx.clear();
             gfx.lineStyle(1, 0xb0b0b0);
@@ -47,10 +49,10 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint }: MxnBallonable
             for (let i = 0; i < fxBallonObjs.length; i++) {
                 const ballonObj = fxBallonObjs[i];
                 ballonObj.at(
-                    p.x + prng.intc(-1, 1),
-                    p.y - 6 - Math.round(8 * factor.sine(ballonObj.inflation)) * 3 - i * 30 + prng.int(4),
+                    p0.x + prng.intc(-1, 1),
+                    p0.y - 6 - Math.round(8 * factor.sine(ballonObj.inflation)) * 3 - i * 30 + prng.int(4),
                 );
-                v.at(p);
+                v.at(p0);
                 gfx.moveTo(v.x, v.y);
                 const length = distance(ballonObj, v);
                 const step = Math.ceil(length / 3);
