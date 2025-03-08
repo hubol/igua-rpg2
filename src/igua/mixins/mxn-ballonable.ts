@@ -10,10 +10,12 @@ import { container } from "../../lib/pixi/container";
 import { Empty } from "../../lib/types/empty";
 import { ObjFxBallon, objFxBallon } from "../objects/effects/obj-fx-ballon";
 import { StepOrder } from "../objects/step-order";
+import { RpgStatus } from "../rpg/rpg-status";
 import { mxnPhysics } from "./mxn-physics";
 
 interface MxnBallonableArgs {
     attachPoint: DisplayObject;
+    ballons: RpgStatus.Ballon[];
 }
 
 const p0 = new Point();
@@ -21,10 +23,13 @@ const p1 = new Point();
 const prng = new PseudoRng();
 const v = vnew();
 
-function objBallonManaged() {
-    return objFxBallon()
-        .merge({ restOffset: vnew(), restOffsetTarget: vnew() })
-        .step(self => self.restOffset.moveTowards(self.restOffsetTarget, 1));
+function objBallonManaged(ballon: RpgStatus.Ballon) {
+    return objFxBallon(ballon.seed)
+        .merge({ restOffset: vnew(), restOffsetTarget: vnew(), ballon })
+        .step(self => {
+            self.restOffset.moveTowards(self.restOffsetTarget, 1);
+            self.life = ballon.health / ballon.healthMax;
+        });
 }
 
 function updateRestOffsetTargets(ballonObjs: ObjBallonManaged[]) {
@@ -55,7 +60,7 @@ function updateRestOffsetTargets(ballonObjs: ObjBallonManaged[]) {
 
 type ObjBallonManaged = ReturnType<typeof objBallonManaged>;
 
-export function mxnBallonable(obj: DisplayObject, { attachPoint }: MxnBallonableArgs) {
+export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnBallonableArgs) {
     const fxBallonObjs = Empty<ObjBallonManaged>();
     const gfx = new Graphics();
     const c = container(gfx);
@@ -66,15 +71,27 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint }: MxnBallonable
 
     const previousSpeed = vnew();
 
+    function createBallonObj(ballon: RpgStatus.Ballon) {
+        fxBallonObjs.push(objBallonManaged(ballon).show(c));
+    }
+
+    const rpgStatusEffects: Pick<RpgStatus.Effects, "ballonCreated" | "ballonHealthDepleted"> = {
+        ballonCreated(ballon) {
+            createBallonObj(ballon);
+        },
+        ballonHealthDepleted(ballon) {
+            fxBallonObjs.find(obj => obj.ballon === ballon)?.destroy();
+        },
+    };
+
     return obj
-        .merge({ mxnBallonable: { attachPoint } })
+        .merge({ mxnBallonable: { attachPoint, rpgStatusEffects } })
         .coro(function* (self) {
             // TODO feels like it should actually go to primary scene stage, set an explicit z index
             c.show(self.parent).zIndexed(self.zIndex - 1);
-            // TODO temporary
-            for (let i = 0; i < 50; i++) {
-                yield sleep(1000);
-                fxBallonObjs.push(objBallonManaged().show(c));
+            // TODO don't show appear animation for these
+            for (const ballon of ballons) {
+                createBallonObj(ballon);
             }
         })
         .coro(function* () {

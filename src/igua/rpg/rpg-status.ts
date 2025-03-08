@@ -1,5 +1,6 @@
 import { blendColorDelta } from "../../lib/color/blend-color";
 import { Integer, PercentAsInteger, RgbInt } from "../../lib/math/number-alias-types";
+import { Rng } from "../../lib/math/rng";
 import { RpgAttack } from "./rpg-attack";
 import { RpgCutscene } from "./rpg-cutscene";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
@@ -49,6 +50,20 @@ export namespace RpgStatus {
         };
     }
 
+    export interface Ballon {
+        health: Integer;
+        healthMax: Integer;
+        seed: Integer;
+    }
+
+    export function createBallon(): Ballon {
+        return {
+            health: 100,
+            healthMax: 100,
+            seed: Rng.intc(8_000_000, 24_000_000),
+        };
+    }
+
     export enum DamageKind {
         Physical,
         Poison,
@@ -56,6 +71,8 @@ export namespace RpgStatus {
     }
 
     export interface Effects {
+        ballonHealthDepleted(ballon: Ballon): void;
+        ballonCreated(ballon: Ballon): void;
         healed(value: number, delta: number): void;
         tookDamage(value: number, delta: number, kind: DamageKind): void;
         died(): void;

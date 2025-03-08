@@ -10,7 +10,10 @@ import { playerObj } from "../obj-player";
 import { objHealthBar } from "./obj-health-bar";
 
 export function objEnemyHealthBars() {
-    const getRpgStatusEffects = (obj: DisplayObject, status: RpgStatus.Model): Omit<RpgStatus.Effects, "died"> => {
+    const getRpgStatusEffects = (
+        obj: DisplayObject,
+        status: RpgStatus.Model,
+    ): Pick<RpgStatus.Effects, "healed" | "tookDamage"> => {
         let healthBarObj = Undefined<ObjEnemyHealthBar>();
 
         const ensureHealthBarObj = () => {

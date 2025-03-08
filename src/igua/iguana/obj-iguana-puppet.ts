@@ -7,6 +7,7 @@ import { CollisionShape } from "../../lib/pixi/collision";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { Force } from "../../lib/types/force";
+import { mxnBallonable } from "../mixins/mxn-ballonable";
 import { mxnHasHead } from "../mixins/mxn-has-head";
 import { objEye, objEyes } from "../objects/characters/obj-eye";
 import { Material, Materials } from "../systems/materials";
@@ -212,6 +213,8 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     const c = container(back, core, front)
         .collisionShape(CollisionShape.DisplayObjects, [head.crest, head.noggin, body.torso, ...feet.shapes])
         .mixin(mxnHasHead, { obj: head.noggin })
+        // TODO feels strange that you can't pass ballons here
+        .mixin(mxnBallonable, { attachPoint: body.ballonAttachPointObj, ballons: [] })
         .merge({ head, body, feet })
         .merge({
             get facing() {
@@ -497,7 +500,13 @@ function objIguanaBody(body: Body) {
 
     tail.club?.pivot?.add(tail.pivot);
 
-    const c = container(tail, torso).merge({ torso, tail });
+    const ballonAttachPointObj = container().at(0, -23);
+
+    const c = container(tail, torso, ballonAttachPointObj).merge({
+        torso,
+        tail,
+        ballonAttachPointObj,
+    });
     tail.club?.show(c);
 
     c.pivot.set(-body.placement.x, -body.placement.y);

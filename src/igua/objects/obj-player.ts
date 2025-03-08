@@ -39,8 +39,9 @@ function objPlayer(looks: IguanaLooks.Serializable) {
 
     const died = () => {};
 
+    // TODO truly wretched
     const effects: RpgStatus.Effects = merge(
-        { died },
+        merge({ died }, iguanaLocomotiveObj.mxnBallonable.rpgStatusEffects),
         layers.overlay.hud.healthBarObj.effects,
     );
 

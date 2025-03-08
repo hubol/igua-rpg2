@@ -34,7 +34,8 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
     };
 
     const effects: RpgStatus.Effects = merge(
-        { died },
+        // TODO it might be time to rethink the effects approach
+        { died, ballonHealthDepleted() {}, ballonCreated() {} },
         layers.overlay.enemyHealthBars.getRpgStatusEffects(args.healthbarAnchorObj ?? obj, status),
     );
 
