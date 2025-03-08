@@ -2,6 +2,7 @@ import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { approachLinear, nlerp } from "../../../lib/math/number";
+import { Integer, Unit } from "../../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../../lib/math/rng";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
@@ -14,7 +15,7 @@ const prng = new PseudoRng();
 
 const maxBallonDrainY = 21;
 
-export function objFxBallon(seed = Rng.intc(8_000_000, 24_000_000)) {
+export function objFxBallon(seed: Integer, inflation: Unit) {
     prng.seed = seed;
     const txFace = prng.choose(...txBallonFaces);
     const hue = prng.float(360);
@@ -64,11 +65,13 @@ export function objFxBallon(seed = Rng.intc(8_000_000, 24_000_000)) {
             set life(value) {
                 life = value;
             },
-            inflation: 0,
+            inflation,
         })
         .step(self => inflatingObj.textureIndex = self.inflation * inflatingObj.textures.length)
         .coro(function* (self) {
-            yield interp(self, "inflation").to(1).over(250);
+            if (self.inflation < 1) {
+                yield interp(self, "inflation").to(1).over(250);
+            }
             inflatingObj.destroy();
             ballonObj.visible = true;
         });

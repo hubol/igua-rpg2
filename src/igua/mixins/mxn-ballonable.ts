@@ -4,6 +4,7 @@ import { factor } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { ToRad } from "../../lib/math/angle";
 import { approachLinear } from "../../lib/math/number";
+import { Unit } from "../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../lib/math/rng";
 import { distance, vequals } from "../../lib/math/vector";
 import { vnew } from "../../lib/math/vector-type";
@@ -24,8 +25,8 @@ const p1 = new Point();
 const prng = new PseudoRng();
 const v = vnew();
 
-function objBallonManaged(ballon: RpgStatus.Ballon) {
-    return objFxBallon(ballon.seed)
+function objBallonManaged(ballon: RpgStatus.Ballon, inflation: Unit) {
+    return objFxBallon(ballon.seed, inflation)
         .merge({ restOffset: vnew(), restOffsetTarget: vnew(), ballon })
         .step(self => {
             self.restOffset.moveTowards(self.restOffsetTarget, 1);
@@ -72,19 +73,22 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
 
     const previousSpeed = vnew();
 
-    function createBallonObj(ballon: RpgStatus.Ballon) {
-        fxBallonObjs.push(objBallonManaged(ballon).show(c));
+    function createBallonObj(ballon: RpgStatus.Ballon, inflation: Unit) {
+        const ballonObj = objBallonManaged(ballon, inflation).show(c);
+        fxBallonObjs.push(ballonObj);
+        return ballonObj;
     }
 
     const rpgStatusEffects: Pick<RpgStatus.Effects, "ballonCreated" | "ballonHealthDepleted"> = {
         ballonCreated(ballon) {
-            createBallonObj(ballon);
+            createBallonObj(ballon, 0);
         },
         ballonHealthDepleted(ballon) {
             const ballonObj = fxBallonObjs.find(obj => obj.ballon === ballon);
             if (ballonObj) {
                 ballonObj.destroy();
                 fxBallonObjs.removeFirst(ballonObj);
+                // TODO pop sfx, vfx!
             }
         },
     };
@@ -109,9 +113,14 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
         .coro(function* (self) {
             // TODO feels like it should actually go to primary scene stage, set an explicit z index
             c.show(self.parent).zIndexed(self.zIndex - 1);
-            // TODO don't show appear animation for these
             for (const ballon of ballons) {
-                createBallonObj(ballon);
+                createBallonObj(ballon, 1);
+            }
+
+            updateRestOffsetTargets(fxBallonObjs);
+
+            for (const ballonObj of fxBallonObjs) {
+                ballonObj.restOffset.at(ballonObj.restOffsetTarget);
             }
             initialBallonsAlreadyApplied = true;
         })
