@@ -80,7 +80,11 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
             createBallonObj(ballon);
         },
         ballonHealthDepleted(ballon) {
-            fxBallonObjs.find(obj => obj.ballon === ballon)?.destroy();
+            const ballonObj = fxBallonObjs.find(obj => obj.ballon === ballon);
+            if (ballonObj) {
+                ballonObj.destroy();
+                fxBallonObjs.removeFirst(ballonObj);
+            }
         },
     };
 
