@@ -12,6 +12,7 @@ export namespace RpgStatus {
     };
 
     export interface Model {
+        ballons: Ballon[];
         faction: RpgFaction;
         health: number;
         healthMax: number;
@@ -113,6 +114,20 @@ export namespace RpgStatus {
             }
             if (count % 4 === 0) {
                 model.wetness.value = Math.max(0, model.wetness.value - model.recoveries.wetness);
+
+                // TODO ballon health should only drain while airborne!
+                let i = 0;
+                while (i < model.ballons.length) {
+                    const ballon = model.ballons[i];
+                    ballon.health = Math.max(0, ballon.health - 1);
+                    if (ballon.health === 0) {
+                        model.ballons.splice(i, 1);
+                        effects.ballonHealthDepleted(ballon);
+                    }
+                    else {
+                        i++;
+                    }
+                }
             }
         },
 
@@ -214,6 +229,12 @@ export namespace RpgStatus {
             const diff = model.health - previous;
 
             effects.healed(model.health, diff);
+        },
+
+        createBallon(model: Model, effects: Effects) {
+            const ballon = createBallon();
+            model.ballons.push(ballon);
+            effects.ballonCreated(ballon);
         },
     };
 

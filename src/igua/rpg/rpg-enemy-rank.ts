@@ -9,11 +9,13 @@ export namespace RpgEnemyRank {
         loot: RpgLoot.Model;
     }
 
-    type CreateArgs = DeepPartial<Omit<Model, "loot">> & { loot?: RpgLoot.Model };
+    type CreateArgs = DeepPartial<Omit<Model, "ballons" | "loot">> & { loot?: RpgLoot.Model };
 
     export function create({ status, loot }: CreateArgs): Model {
         return {
             status: {
+                // TODO if it's important, could pass a ballonsCount or something!
+                ballons: [],
                 health: status?.health ?? status?.healthMax ?? 30,
                 healthMax: status?.healthMax ?? status?.health ?? 30,
                 invulnerable: status?.invulnerable ?? 0,

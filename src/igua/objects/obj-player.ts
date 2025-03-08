@@ -5,7 +5,7 @@ import { interp } from "../../lib/game-engine/routines/interp";
 import { vnew } from "../../lib/math/vector-type";
 import { merge } from "../../lib/object/merge";
 import { ZIndex } from "../core/scene/z-index";
-import { Cutscene, Input, layers, scene } from "../globals";
+import { Cutscene, DevKey, Input, layers, scene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { force } from "../mixins/mxn-physics";
 import { MxnRpgStatus, mxnRpgStatus } from "../mixins/mxn-rpg-status";
@@ -80,6 +80,11 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             if (puppet.isBeingPiloted) {
                 return;
             }
+
+            if (DevKey.justWentDown("KeyB")) {
+                RpgStatus.Methods.createBallon(puppet.status, puppet.effects);
+            }
+
             const hasControl = puppet.hasControl;
             puppet.isMovingLeft = hasControl && Input.isDown("MoveLeft");
             puppet.isMovingRight = hasControl && Input.isDown("MoveRight");

@@ -1,5 +1,6 @@
 import { Polar } from "../../lib/math/number-alias-types";
 import { DeepKeyOf } from "../../lib/types/deep-keyof";
+import { Empty } from "../../lib/types/empty";
 import { Null } from "../../lib/types/null";
 import { PropertiesLike } from "../../lib/types/properties-like";
 import { EquipmentInternalName } from "../data/data-equipment";
@@ -7,6 +8,7 @@ import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPocket } from "./rpg-pocket";
+import { RpgStatus } from "./rpg-status";
 
 export function getInitialRpgProgress() {
     return {
@@ -17,6 +19,7 @@ export function getInitialRpgProgress() {
                 pocket: RpgPocket.create(),
             },
             status: {
+                ballons: Empty<RpgStatus.Ballon>(),
                 health: 50,
                 invulnverable: 0,
                 poison: {

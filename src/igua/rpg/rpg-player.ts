@@ -10,6 +10,9 @@ export const RpgPlayer = {
         return computeEquipmentAttributes(RpgProgress.character.equipment);
     },
     status: {
+        get ballons() {
+            return RpgProgress.character.status.ballons;
+        },
         get health() {
             return RpgProgress.character.status.health;
         },
