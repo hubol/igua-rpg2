@@ -1,6 +1,7 @@
 import { DisplayObject, Graphics, Point } from "pixi.js";
 import { factor } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
+import { ToRad } from "../../lib/math/angle";
 import { approachLinear } from "../../lib/math/number";
 import { PseudoRng, Rng } from "../../lib/math/rng";
 import { distance, vequals } from "../../lib/math/vector";
@@ -20,8 +21,42 @@ const p1 = new Point();
 const prng = new PseudoRng();
 const v = vnew();
 
+function objBallonManaged() {
+    return objFxBallon()
+        .merge({ restOffset: vnew(), restOffsetTarget: vnew() })
+        .step(self => self.restOffset.moveTowards(self.restOffsetTarget, 1));
+}
+
+function updateRestOffsetTargets(ballonObjs: ObjBallonManaged[]) {
+    const radiusH = 90;
+    const radiusV = 200;
+    const deltaDegrees = 10;
+    let i = ballonObjs.length - 1;
+
+    for (let row = 0; row < Math.ceil(ballonObjs.length / 6); row++) {
+        const remainingBallonsCount = i + 1;
+        const rowBallonsCount = Math.min(remainingBallonsCount, 6 + row % 2);
+
+        const rangeDegrees = Math.max(0, rowBallonsCount - 1) * deltaDegrees;
+        const minDegrees = -rangeDegrees / 2;
+
+        for (let rowBallonIndex = 0; rowBallonIndex < rowBallonsCount; rowBallonIndex++) {
+            const ballonObj = ballonObjs[i];
+            const degrees = minDegrees + deltaDegrees * rowBallonIndex + 90;
+            const radians = degrees * ToRad;
+            ballonObj.restOffsetTarget.at(
+                Math.cos(radians) * radiusH,
+                -Math.sin(radians) * radiusV + radiusV - row * 18,
+            );
+            i--;
+        }
+    }
+}
+
+type ObjBallonManaged = ReturnType<typeof objBallonManaged>;
+
 export function mxnBallonable(obj: DisplayObject, { attachPoint }: MxnBallonableArgs) {
-    const fxBallonObjs = Empty<ObjFxBallon>();
+    const fxBallonObjs = Empty<ObjBallonManaged>();
     const gfx = new Graphics();
     const c = container(gfx);
     let seed = Rng.intc(8_000_000, 24_000_000);
@@ -34,13 +69,26 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint }: MxnBallonable
     return obj
         .merge({ mxnBallonable: { attachPoint } })
         .coro(function* (self) {
+            // TODO feels like it should actually go to primary scene stage, set an explicit z index
             c.show(self.parent).zIndexed(self.zIndex - 1);
-            fxBallonObjs.push(objFxBallon().show(c));
+            // TODO temporary
+            for (let i = 0; i < 50; i++) {
+                yield sleep(1000);
+                fxBallonObjs.push(objBallonManaged().show(c));
+            }
         })
         .coro(function* () {
             while (true) {
                 seed = Rng.intc(8_000_000, 24_000_000);
                 yield sleep(300);
+            }
+        })
+        .coro(function* () {
+            let previousLength = 0;
+            while (true) {
+                yield () => fxBallonObjs.length !== previousLength;
+                updateRestOffsetTargets(fxBallonObjs);
+                previousLength = fxBallonObjs.length;
             }
         })
         .step((self) => {
@@ -83,8 +131,9 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint }: MxnBallonable
             for (let i = 0; i < fxBallonObjs.length; i++) {
                 const ballonObj = fxBallonObjs[i];
                 ballonObj.at(
-                    p0.x + prng.intc(-1, 1) + physicsX,
-                    p0.y - 6 - Math.round(8 * factor.sine(ballonObj.inflation)) * 3 - i * 30 + prng.int(4) + physicsY,
+                    p0.x + prng.intc(-1, 1) + physicsX + Math.round(ballonObj.restOffset.x),
+                    p0.y - 6 - Math.round(8 * factor.sine(ballonObj.inflation)) * 3 + prng.int(4) + physicsY
+                        + Math.round(ballonObj.restOffset.y),
                 );
                 v.at(p0);
                 gfx.moveTo(v.x, v.y);
