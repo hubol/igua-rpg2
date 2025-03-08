@@ -37,6 +37,8 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     const iguanaLocomotiveObj = objIguanaLocomotive(looks);
     iguanaLocomotiveObj.gravity = PlayerConsts.Gravity;
 
+    iguanaLocomotiveObj.mxnBallonable.setInitialBallons(RpgPlayer.status.ballons);
+
     const died = () => {};
 
     // TODO truly wretched

@@ -1,4 +1,5 @@
 import { DisplayObject, Graphics, Point } from "pixi.js";
+import { Logger } from "../../lib/game-engine/logger";
 import { factor } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { ToRad } from "../../lib/math/angle";
@@ -88,8 +89,23 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
         },
     };
 
+    let initialBallonsAlreadyApplied = false;
+
+    function setInitialBallons(initialBallons: RpgStatus.Ballon[]) {
+        if (initialBallonsAlreadyApplied) {
+            Logger.logContractViolationError(
+                "mxnBallonable.setInitialBallons",
+                new Error("Attempted to set initial ballons after they have already been applied."),
+                { ballons, initialBallons },
+            );
+            return;
+        }
+
+        ballons = initialBallons;
+    }
+
     return obj
-        .merge({ mxnBallonable: { attachPoint, rpgStatusEffects } })
+        .merge({ mxnBallonable: { attachPoint, rpgStatusEffects, setInitialBallons } })
         .coro(function* (self) {
             // TODO feels like it should actually go to primary scene stage, set an explicit z index
             c.show(self.parent).zIndexed(self.zIndex - 1);
@@ -97,6 +113,7 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
             for (const ballon of ballons) {
                 createBallonObj(ballon);
             }
+            initialBallonsAlreadyApplied = true;
         })
         .coro(function* () {
             while (true) {
