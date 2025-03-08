@@ -3,14 +3,13 @@ import { Logger } from "../../lib/game-engine/logger";
 import { factor } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { ToRad } from "../../lib/math/angle";
-import { approachLinear } from "../../lib/math/number";
 import { Unit } from "../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../lib/math/rng";
-import { distance, vequals } from "../../lib/math/vector";
+import { distance } from "../../lib/math/vector";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { Empty } from "../../lib/types/empty";
-import { ObjFxBallon, objFxBallon } from "../objects/effects/obj-fx-ballon";
+import { objFxBallon } from "../objects/effects/obj-fx-ballon";
 import { StepOrder } from "../objects/step-order";
 import { RpgStatus } from "../rpg/rpg-status";
 import { mxnPhysics } from "./mxn-physics";
@@ -25,7 +24,7 @@ const p1 = new Point();
 const prng = new PseudoRng();
 const v = vnew();
 
-function objBallonManaged(ballon: RpgStatus.Ballon, inflation: Unit) {
+function objBallon(ballon: RpgStatus.Ballon, inflation: Unit) {
     return objFxBallon(ballon.seed, inflation)
         .merge({ restOffset: vnew(), restOffsetTarget: vnew(), ballon })
         .step(self => {
@@ -34,7 +33,7 @@ function objBallonManaged(ballon: RpgStatus.Ballon, inflation: Unit) {
         });
 }
 
-function updateRestOffsetTargets(ballonObjs: ObjBallonManaged[]) {
+function updateRestOffsetTargets(ballonObjs: ObjBallon[]) {
     const radiusH = 90;
     const radiusV = 200;
     const deltaDegrees = 10;
@@ -60,10 +59,10 @@ function updateRestOffsetTargets(ballonObjs: ObjBallonManaged[]) {
     }
 }
 
-type ObjBallonManaged = ReturnType<typeof objBallonManaged>;
+type ObjBallon = ReturnType<typeof objBallon>;
 
 export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnBallonableArgs) {
-    const fxBallonObjs = Empty<ObjBallonManaged>();
+    const ballonObjs = Empty<ObjBallon>();
     const gfx = new Graphics();
     const c = container(gfx);
     let seed = Rng.intc(8_000_000, 24_000_000);
@@ -74,8 +73,8 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
     const previousSpeed = vnew();
 
     function createBallonObj(ballon: RpgStatus.Ballon, inflation: Unit) {
-        const ballonObj = objBallonManaged(ballon, inflation).show(c);
-        fxBallonObjs.push(ballonObj);
+        const ballonObj = objBallon(ballon, inflation).show(c);
+        ballonObjs.push(ballonObj);
         return ballonObj;
     }
 
@@ -84,10 +83,10 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
             createBallonObj(ballon, 0);
         },
         ballonHealthDepleted(ballon) {
-            const ballonObj = fxBallonObjs.find(obj => obj.ballon === ballon);
+            const ballonObj = ballonObjs.find(obj => obj.ballon === ballon);
             if (ballonObj) {
                 ballonObj.destroy();
-                fxBallonObjs.removeFirst(ballonObj);
+                ballonObjs.removeFirst(ballonObj);
                 // TODO pop sfx, vfx!
             }
         },
@@ -117,9 +116,9 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
                 createBallonObj(ballon, 1);
             }
 
-            updateRestOffsetTargets(fxBallonObjs);
+            updateRestOffsetTargets(ballonObjs);
 
-            for (const ballonObj of fxBallonObjs) {
+            for (const ballonObj of ballonObjs) {
                 ballonObj.restOffset.at(ballonObj.restOffsetTarget);
             }
             initialBallonsAlreadyApplied = true;
@@ -133,9 +132,9 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
         .coro(function* () {
             let previousLength = 0;
             while (true) {
-                yield () => fxBallonObjs.length !== previousLength;
-                updateRestOffsetTargets(fxBallonObjs);
-                previousLength = fxBallonObjs.length;
+                yield () => ballonObjs.length !== previousLength;
+                updateRestOffsetTargets(ballonObjs);
+                previousLength = ballonObjs.length;
             }
         })
         .step((self) => {
@@ -175,8 +174,8 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
             gfx.lineStyle(1, 0xb0b0b0);
 
             prng.seed = seed;
-            for (let i = 0; i < fxBallonObjs.length; i++) {
-                const ballonObj = fxBallonObjs[i];
+            for (let i = 0; i < ballonObjs.length; i++) {
+                const ballonObj = ballonObjs[i];
                 ballonObj.at(
                     p0.x + prng.intc(-1, 1) + physicsX + Math.round(ballonObj.restOffset.x),
                     p0.y - 6 - Math.round(8 * factor.sine(ballonObj.inflation)) * 3 + prng.int(4) + physicsY
