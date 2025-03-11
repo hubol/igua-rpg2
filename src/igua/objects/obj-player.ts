@@ -48,7 +48,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     );
 
     const status: RpgStatus.Model = merge(
-        { state: { ballonHealthMayDrain: false } satisfies RpgStatus.Model["state"] },
+        { state: { ballonHealthMayDrain: false, isGuarding: false } satisfies RpgStatus.Model["state"] },
         RpgPlayer.status,
     );
 
@@ -98,8 +98,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             puppet.isMovingLeft = hasControl && Input.isDown("MoveLeft");
             puppet.isMovingRight = hasControl && Input.isDown("MoveRight");
             puppet.isDucking = hasControl && puppet.isOnGround && Input.isDown("Duck");
-            // TODO move to state
-            RpgPlayer.status.isGuarding = puppet.isDucking;
+            status.state.isGuarding = puppet.isDucking;
 
             if (
                 hasControl && !puppet.isOnGround && puppet.speed.y < PlayerConsts.VariableJumpSpeedMaximum

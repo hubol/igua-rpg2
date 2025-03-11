@@ -19,7 +19,6 @@ export namespace RpgStatus {
         invulnerable: number;
         invulnerableMax: number;
         pride: number;
-        isGuarding: boolean;
         poison: {
             immune: boolean;
             level: number;
@@ -49,8 +48,12 @@ export namespace RpgStatus {
             guardedDamageIsFatal: boolean;
             attackingRewardsExperience: boolean;
         };
+        // TODO name is kind of strange
+        // In reality, these are kind of like quirks that
+        // can change very frequently
         state: {
             ballonHealthMayDrain: boolean;
+            isGuarding: boolean;
         };
     }
 
@@ -179,7 +182,7 @@ export namespace RpgStatus {
                 return { rejected: true, invulnerable: true };
             }
 
-            const canBeFatal = !target.isGuarding || target.quirks.guardedDamageIsFatal || target.health <= 1;
+            const canBeFatal = !target.state.isGuarding || target.quirks.guardedDamageIsFatal || target.health <= 1;
 
             const attackingRewardsExperience = attacker?.quirks?.attackingRewardsExperience ?? false;
 
@@ -255,7 +258,7 @@ export namespace RpgStatus {
     ) {
         const previous = target.health;
         const totalDefense: PercentAsInteger = defense
-            + (target.isGuarding ? guardingDefense : 0);
+            + (target.state.isGuarding ? guardingDefense : 0);
 
         const minimumDamage = totalDefense >= 100 ? 0 : Math.sign(amount);
 

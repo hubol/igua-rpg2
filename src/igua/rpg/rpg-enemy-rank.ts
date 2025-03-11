@@ -20,7 +20,6 @@ export namespace RpgEnemyRank {
                 healthMax: status?.healthMax ?? status?.health ?? 30,
                 invulnerable: status?.invulnerable ?? 0,
                 invulnerableMax: status?.invulnerableMax ?? 15,
-                isGuarding: false,
                 faction: status?.faction ?? RpgFaction.Enemy,
                 pride: status?.pride ?? 0,
                 poison: {
@@ -56,6 +55,7 @@ export namespace RpgEnemyRank {
                 // TODO I don't think this should be passed in!
                 state: {
                     ballonHealthMayDrain: false,
+                    isGuarding: false,
                 },
             },
             loot: loot ?? {},
