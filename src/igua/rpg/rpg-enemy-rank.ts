@@ -53,6 +53,10 @@ export namespace RpgEnemyRank {
                 recoveries: {
                     wetness: 1,
                 },
+                // TODO I don't think this should be passed in!
+                state: {
+                    ballonHealthMayDrain: false,
+                },
             },
             loot: loot ?? {},
         };

@@ -47,13 +47,20 @@ function objPlayer(looks: IguanaLooks.Serializable) {
         layers.overlay.hud.healthBarObj.effects,
     );
 
+    const status: RpgStatus.Model = merge(
+        { state: { ballonHealthMayDrain: false } satisfies RpgStatus.Model["state"] },
+        RpgPlayer.status,
+    );
+
     const puppet = iguanaLocomotiveObj
-        .mixin(mxnRpgStatus, { status: RpgPlayer.status, effects, hurtboxes: [iguanaLocomotiveObj] })
+        .mixin(mxnRpgStatus, { status, effects, hurtboxes: [iguanaLocomotiveObj] })
         .mixin(mxnSparkling)
         .handles("moved", () => {
             if (CtxGate.value.isGateTransitionActive) {
                 return;
             }
+
+            status.state.ballonHealthMayDrain = !puppet.isOnGround;
 
             const xPrevious = puppet.x;
             puppet.x = Math.max(24, Math.min(puppet.x, scene.level.width - 24));
@@ -91,6 +98,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             puppet.isMovingLeft = hasControl && Input.isDown("MoveLeft");
             puppet.isMovingRight = hasControl && Input.isDown("MoveRight");
             puppet.isDucking = hasControl && puppet.isOnGround && Input.isDown("Duck");
+            // TODO move to state
             RpgPlayer.status.isGuarding = puppet.isDucking;
 
             if (
@@ -122,7 +130,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 if (hurtbox) {
                     const collidedWithFeet = bounceIguanaOffObject(puppet, hurtbox);
                     const attack = collidedWithFeet ? RpgPlayer.meleeClawAttack : RpgPlayer.meleeAttack;
-                    const result = instance.damage(attack, RpgPlayer.status);
+                    const result = instance.damage(attack, status);
                 }
             }
         }, StepOrder.AfterPhysics)

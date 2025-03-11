@@ -81,7 +81,7 @@ export const RpgPlayer = {
             receivesDamageWhileCutsceneIsPlaying: false,
             attackingRewardsExperience: true,
         },
-    } satisfies RpgStatus.Model,
+    } satisfies Omit<RpgStatus.Model, "state">,
     motion: {
         get bouncingMinSpeed() {
             return Math.min(4, 2.5 + RpgProgress.character.status.poison.level * 0.25);

@@ -49,6 +49,9 @@ export namespace RpgStatus {
             guardedDamageIsFatal: boolean;
             attackingRewardsExperience: boolean;
         };
+        state: {
+            ballonHealthMayDrain: boolean;
+        };
     }
 
     export interface Ballon {
@@ -115,7 +118,7 @@ export namespace RpgStatus {
             if (count % 4 === 0) {
                 model.wetness.value = Math.max(0, model.wetness.value - model.recoveries.wetness);
             }
-            if (count % 8 === 0) {
+            if (model.state.ballonHealthMayDrain && count % 8 === 0) {
                 // TODO ballon health should only drain while airborne!
                 let i = 0;
                 while (i < model.ballons.length) {
