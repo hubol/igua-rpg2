@@ -86,7 +86,7 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
         ballonHealthDepleted(ballon) {
             const ballonObj = ballonObjs.find(obj => obj.ballon === ballon);
             if (ballonObj) {
-                objFxBallonPop().tinted(ballonObj.tint).at(ballonObj).show();
+                objFxBallonPop().tinted(ballonObj.tint).at(ballonObj).add(0, -10).show();
                 ballonObj.destroy();
                 ballonObjs.removeFirst(ballonObj);
                 // TODO pop sfx
