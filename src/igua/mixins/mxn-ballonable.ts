@@ -10,6 +10,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { Empty } from "../../lib/types/empty";
 import { objFxBallon } from "../objects/effects/obj-fx-ballon";
+import { objFxBallonPop } from "../objects/effects/obj-fx-ballon-pop";
 import { StepOrder } from "../objects/step-order";
 import { RpgStatus } from "../rpg/rpg-status";
 import { mxnPhysics } from "./mxn-physics";
@@ -85,9 +86,10 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
         ballonHealthDepleted(ballon) {
             const ballonObj = ballonObjs.find(obj => obj.ballon === ballon);
             if (ballonObj) {
+                objFxBallonPop().tinted(ballonObj.tint).at(ballonObj).show();
                 ballonObj.destroy();
                 ballonObjs.removeFirst(ballonObj);
-                // TODO pop sfx, vfx!
+                // TODO pop sfx
             }
         },
     };

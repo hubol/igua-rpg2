@@ -66,6 +66,7 @@ export function objFxBallon(seed: Integer, inflation: Unit) {
                 life = value;
             },
             inflation,
+            tint,
         })
         .step(self => inflatingObj.textureIndex = self.inflation * inflatingObj.textures.length)
         .coro(function* (self) {
