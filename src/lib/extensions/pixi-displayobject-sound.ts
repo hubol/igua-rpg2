@@ -32,15 +32,16 @@ Object.defineProperties(DisplayObject.prototype, {
                 return;
             }
 
-            applyDisplayObjectPositionToSound(this, sound);
-            sound.play();
+            if (applyDisplayObjectPositionToSound(this, sound)) {
+                sound.play();
+            }
         },
         configurable: true,
     },
     playInstance: {
         value: function (this: DisplayObject & DisplayObjectPrivate, sound: Sound) {
-            applyDisplayObjectPositionToSound(this, sound);
-            if (this._muted) {
+            const result = applyDisplayObjectPositionToSound(this, sound);
+            if (this._muted || !result) {
                 sound.gain(0);
             }
             return sound.playInstance();
@@ -71,7 +72,7 @@ const objBoundsRectangle = new Rectangle();
 function applyDisplayObjectPositionToSound(obj: DisplayObject, sound: Sound) {
     if (obj.destroyed) {
         // TODO might need to actually apply something in this case
-        return;
+        return false;
     }
 
     updateRendererRectangles();
@@ -92,7 +93,10 @@ function applyDisplayObjectPositionToSound(obj: DisplayObject, sound: Sound) {
         }
 
         sound.gain(gain);
+        return true;
     }
+
+    return false;
 }
 
 export default 0;
