@@ -1,7 +1,8 @@
 import { DisplayObject, Graphics, Point } from "pixi.js";
+import { Sfx } from "../../assets/sounds";
 import { Logger } from "../../lib/game-engine/logger";
 import { factor } from "../../lib/game-engine/routines/interp";
-import { sleep } from "../../lib/game-engine/routines/sleep";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { ToRad } from "../../lib/math/angle";
 import { Unit } from "../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../lib/math/rng";
@@ -75,6 +76,12 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
 
     function createBallonObj(ballon: RpgStatus.Ballon, inflation: Unit) {
         const ballonObj = objBallon(ballon, inflation).show(c);
+        if (inflation === 0) {
+            ballonObj.coro(function* () {
+                yield sleepf(2);
+                ballonObj.play(Sfx.Effect.BallonInflate.rate(0.9, 1.1));
+            });
+        }
         ballonObjs.push(ballonObj);
         return ballonObj;
     }
@@ -87,9 +94,9 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
             const ballonObj = ballonObjs.find(obj => obj.ballon === ballon);
             if (ballonObj) {
                 objFxBallonPop().tinted(ballonObj.tint).at(ballonObj).add(0, -10).show();
+                ballonObj.play(Sfx.Effect.BallonPop.rate(0.9, 1.1));
                 ballonObj.destroy();
                 ballonObjs.removeFirst(ballonObj);
-                // TODO pop sfx
             }
         },
     };
