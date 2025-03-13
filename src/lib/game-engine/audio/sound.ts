@@ -19,13 +19,11 @@ export class Sound {
     }
 
     gain(value: Unit) {
-        this._maybeResetParams();
         this._params.gain = value;
         return this;
     }
 
     pan(value: Polar) {
-        this._maybeResetParams();
         this._params.pan = value;
         return this;
     }
@@ -33,33 +31,27 @@ export class Sound {
     rate(min: number, max: number): Sound;
     rate(value: number): Sound;
     rate(min_value: number, max?: number) {
-        this._maybeResetParams();
         this._params.rate = typeof max === "number" ? Rng.float(min_value, max) : min_value;
         return this;
     }
 
     loop(value = true) {
-        this._maybeResetParams();
         this._params.loop = value;
         return this;
     }
 
-    // TODO support position(obj: DisplayObject)
-    // although feels weird here :-)
-    // but who cares
-
     play(offset?: Seconds) {
-        this._resetParamsOnNextParamsModification = true;
         const source = this._createSourceNode();
         this._createStereoGainNode(source);
         source.start(undefined, offset);
+        this._resetParams();
     }
 
     playInstance(offset?: Seconds) {
-        this._resetParamsOnNextParamsModification = true;
         const source = this._createSourceNode();
         const stereoGainNode = this._createStereoGainNode(source);
         source.start(undefined, offset);
+        this._resetParams();
         return new SoundInstance(source, stereoGainNode);
     }
 
@@ -78,18 +70,11 @@ export class Sound {
         return stereoGainNode;
     }
 
-    private _resetParamsOnNextParamsModification = false;
-
-    private _maybeResetParams() {
-        if (!this._resetParamsOnNextParamsModification) {
-            return;
-        }
+    private _resetParams() {
         this._params.gain = 1;
         this._params.loop = false;
         this._params.pan = 0;
         this._params.rate = 1;
-
-        this._resetParamsOnNextParamsModification = false;
     }
 }
 
