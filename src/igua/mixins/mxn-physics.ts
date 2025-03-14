@@ -15,12 +15,14 @@ interface PhysicsArgs {
     physicsRadius: number;
     physicsFaction?: PhysicsFaction | null;
     physicsOffset?: Vector;
+    terminalVelocity?: number;
     debug?: boolean;
 }
 
 export function mxnPhysics(
     obj: DisplayObject,
-    { gravity, physicsRadius, physicsFaction = null, physicsOffset = vnew(), debug = false }: PhysicsArgs,
+    { gravity, physicsRadius, physicsFaction = null, physicsOffset = vnew(), terminalVelocity = 20, debug = false }:
+        PhysicsArgs,
 ) {
     if (debug && obj instanceof Container) {
         for (const child of obj.children) {
@@ -61,6 +63,7 @@ export function mxnPhysics(
             physicsRadius,
             physicsFaction,
             physicsOffset,
+            terminalVelocity,
             groundMaterial: Material.Earth,
         })
         .dispatchesValue<"moved", MoveEvent>()
@@ -103,7 +106,7 @@ const moveEvent = {
 } as MoveEvent;
 
 function move(obj: MxnPhysics) {
-    obj.speed.y += obj.gravity;
+    obj.speed.y = Math.min(obj.speed.y + obj.gravity, obj.terminalVelocity);
     return applySpeedInSteps(obj);
 }
 
