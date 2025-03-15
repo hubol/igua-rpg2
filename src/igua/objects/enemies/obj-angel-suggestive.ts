@@ -379,9 +379,6 @@ export function objAngelSuggestive(variantKey: VariantKey) {
 
 const atkAngelSuggestiveSpikedCanonball = RpgAttack.create({
     physical: 30,
-    conditions: {
-        poison: 30,
-    },
 });
 
 function objAngelSuggestiveSpikedCanonball(status: RpgStatus.Model) {
