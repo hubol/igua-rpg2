@@ -152,25 +152,31 @@ export namespace RpgStatus {
                 return { rejected: true, wrongFaction: true };
             }
 
-            const conditions = attack.conditions.poison > 0 || attack.conditions.wetness.value > 0;
+            const conditions = target.invulnerable === 0
+                && (attack.conditions.poison > 0 || attack.conditions.wetness.value > 0);
 
-            if (!target.poison.immune) {
-                target.poison.value += attack.conditions.poison;
-                if (target.poison.value >= target.poison.max) {
-                    target.poison.value = 0;
-                    target.poison.level += 1;
+            if (conditions) {
+                if (!target.poison.immune) {
+                    target.poison.value += attack.conditions.poison;
+                    if (target.poison.value >= target.poison.max) {
+                        target.poison.value = 0;
+                        target.poison.level += 1;
+                    }
                 }
-            }
 
-            if (attack.conditions.wetness.value > 0) {
-                if (target.wetness.value === 0) {
-                    target.wetness.tint = attack.conditions.wetness.tint;
+                if (attack.conditions.wetness.value > 0) {
+                    if (target.wetness.value === 0) {
+                        target.wetness.tint = attack.conditions.wetness.tint;
+                    }
+                    else {
+                        target.wetness.tint = blendColorDelta(target.wetness.tint, attack.conditions.wetness.tint, 4);
+                    }
                 }
-                else {
-                    target.wetness.tint = blendColorDelta(target.wetness.tint, attack.conditions.wetness.tint, 4);
-                }
+                target.wetness.value = Math.min(
+                    target.wetness.value + attack.conditions.wetness.value,
+                    target.wetness.max,
+                );
             }
-            target.wetness.value = Math.min(target.wetness.value + attack.conditions.wetness.value, target.wetness.max);
 
             // TODO warn when amount is not an integer
 
