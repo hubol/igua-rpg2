@@ -44,30 +44,30 @@ export const RpgPlayer = {
                 immune: false,
                 max: 100,
                 get level() {
-                    return RpgProgress.character.status.poison.level;
+                    return RpgProgress.character.status.conditions.poison.level;
                 },
                 set level(value) {
-                    RpgProgress.character.status.poison.level = value;
+                    RpgProgress.character.status.conditions.poison.level = value;
                 },
                 get value() {
-                    return RpgProgress.character.status.poison.value;
+                    return RpgProgress.character.status.conditions.poison.value;
                 },
                 set value(value) {
-                    RpgProgress.character.status.poison.value = value;
+                    RpgProgress.character.status.conditions.poison.value = value;
                 },
             },
             wetness: {
                 get tint() {
-                    return RpgProgress.character.status.wetness.tint;
+                    return RpgProgress.character.status.conditions.wetness.tint;
                 },
                 set tint(value) {
-                    RpgProgress.character.status.wetness.tint = value;
+                    RpgProgress.character.status.conditions.wetness.tint = value;
                 },
                 get value() {
-                    return RpgProgress.character.status.wetness.value;
+                    return RpgProgress.character.status.conditions.wetness.value;
                 },
                 set value(value) {
-                    RpgProgress.character.status.wetness.value = value;
+                    RpgProgress.character.status.conditions.wetness.value = value;
                 },
                 max: 100,
             },
@@ -93,13 +93,14 @@ export const RpgPlayer = {
         },
     } satisfies Omit<RpgStatus.Model, "state">,
     motion: {
+        // TODO some of these "motion" modifications are computed in objPlayer. Pick a place!
         get bouncingMinSpeed() {
-            return Math.min(4, 2.5 + RpgProgress.character.status.poison.level * 0.25);
+            return Math.min(4, 2.5 + RpgProgress.character.status.conditions.poison.level * 0.25);
         },
         get walkingTopSpeed() {
             let speed = 2.5;
-            speed += 0.75 * Math.min(1, RpgProgress.character.status.poison.level);
-            speed += 0.5 * Math.max(0, RpgProgress.character.status.poison.level - 1);
+            speed += 0.75 * Math.min(1, RpgProgress.character.status.conditions.poison.level);
+            speed += 0.5 * Math.max(0, RpgProgress.character.status.conditions.poison.level - 1);
             return speed;
         },
     },

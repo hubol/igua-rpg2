@@ -26,15 +26,14 @@ export function getInitialRpgProgress() {
                         value: 0,
                         ballons: Empty<RpgStatus.Ballon>(),
                     },
-                    // TODO add poison, wetness here
-                },
-                poison: {
-                    level: 0,
-                    value: 0,
-                },
-                wetness: {
-                    tint: 0xffffff,
-                    value: 0,
+                    poison: {
+                        level: 0,
+                        value: 0,
+                    },
+                    wetness: {
+                        tint: 0xffffff,
+                        value: 0,
+                    },
                 },
             },
             attributes: {

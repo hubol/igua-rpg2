@@ -160,7 +160,7 @@ const aquariumService = {
 } as const;
 
 function enrichAquarium(lvl: LvlType.NewBalltownArmorer) {
-    const { wetness } = RpgProgress.character.status;
+    const { wetness } = RpgProgress.character.status.conditions;
 
     lvl.AquariumWaterLine.merge({ observedMoistureUnits: aquariumService.moistureUnits })
         .step(self => {
