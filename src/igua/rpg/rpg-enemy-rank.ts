@@ -9,29 +9,33 @@ export namespace RpgEnemyRank {
         loot: RpgLoot.Model;
     }
 
-    type CreateArgs = DeepPartial<Omit<Model, "ballons" | "loot">> & { loot?: RpgLoot.Model };
+    type CreateArgs = DeepPartial<Omit<Model, "loot">> & { loot?: RpgLoot.Model };
 
     export function create({ status, loot }: CreateArgs): Model {
         return {
             status: {
-                // TODO if it's important, could pass a ballonsCount or something!
-                ballons: [],
                 health: status?.health ?? status?.healthMax ?? 30,
                 healthMax: status?.healthMax ?? status?.health ?? 30,
                 invulnerable: status?.invulnerable ?? 0,
                 invulnerableMax: status?.invulnerableMax ?? 15,
                 faction: status?.faction ?? RpgFaction.Enemy,
                 pride: status?.pride ?? 0,
-                poison: {
-                    value: status?.poison?.value ?? 0,
-                    max: status?.poison?.max ?? 100,
-                    level: status?.poison?.level ?? 0,
-                    immune: status?.poison?.immune ?? false,
-                },
-                wetness: {
-                    tint: 0xffffff,
-                    value: status?.wetness?.value ?? 0,
-                    max: status?.wetness?.max ?? 100,
+                conditions: {
+                    helium: {
+                        // TODO if it's important, could pass a ballonsCount or something!
+                        ballons: [],
+                    },
+                    poison: {
+                        value: status?.conditions?.poison?.value ?? 0,
+                        max: status?.conditions?.poison?.max ?? 100,
+                        level: status?.conditions?.poison?.level ?? 0,
+                        immune: status?.conditions?.poison?.immune ?? false,
+                    },
+                    wetness: {
+                        tint: 0xffffff,
+                        value: status?.conditions?.wetness?.value ?? 0,
+                        max: status?.conditions?.wetness?.max ?? 100,
+                    },
                 },
                 quirks: {
                     emotionalDamageIsFatal: status?.quirks?.emotionalDamageIsFatal ?? false,

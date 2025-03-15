@@ -275,7 +275,7 @@ function objPoisonLevel() {
     return objText.MediumIrregular("You are poisoned", { tint: Consts.StatusTextTint })
         .merge({ advance: -3 })
         .step(text => {
-            const level = RpgPlayer.status.poison.level;
+            const level = RpgPlayer.status.conditions.poison.level;
             text.visible = level > 0;
             if (text.visible) {
                 text.text = level > 1 ? ("You are poisoned x" + level) : "You are poisoned";
@@ -284,13 +284,13 @@ function objPoisonLevel() {
 }
 
 function objPoisonBuildUp() {
-    let value = RpgPlayer.status.poison.value;
+    let value = RpgPlayer.status.conditions.poison.value;
     const text = objText.MediumIrregular("Poison is building...", { tint: Consts.StatusTextTint });
     const bar = objStatusBar({
         height: 1,
         width: 85,
         value,
-        maxValue: RpgPlayer.status.poison.max,
+        maxValue: RpgPlayer.status.conditions.poison.max,
         tintBack: 0x003000,
         tintFront: 0x008000,
         increases: [{ tintBar: 0x00ff00 }],
@@ -301,7 +301,7 @@ function objPoisonBuildUp() {
 
     return container(bar, text)
         .step(self => {
-            const nextValue = RpgPlayer.status.poison.value;
+            const nextValue = RpgPlayer.status.conditions.poison.value;
             if (nextValue > value) {
                 bar.increase(nextValue, nextValue - value, 0);
             }
@@ -309,7 +309,7 @@ function objPoisonBuildUp() {
                 bar.decrease(nextValue, nextValue - value, 0);
             }
             value = nextValue;
-            const maxVisibleSteps = RpgPlayer.status.poison.level === 0 ? 1 : 2;
+            const maxVisibleSteps = RpgPlayer.status.conditions.poison.level === 0 ? 1 : 2;
             visibleSteps = value > 0 ? maxVisibleSteps : (visibleSteps - 1);
             self.visible = visibleSteps > 0;
         });

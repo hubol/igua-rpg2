@@ -67,7 +67,7 @@ const filterSpecialSignObjs = (obj: ObjSign) => obj.isSpecial;
 function objPlayer(looks: IguanaLooks.Serializable) {
     const iguanaLocomotiveObj = objIguanaLocomotive(looks);
 
-    iguanaLocomotiveObj.mxnBallonable.setInitialBallons(RpgPlayer.status.ballons);
+    iguanaLocomotiveObj.mxnBallonable.setInitialBallons(RpgPlayer.status.conditions.helium.ballons);
 
     const died = () => {};
 

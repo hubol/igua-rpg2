@@ -31,10 +31,10 @@ export function mxnRpgStatus(obj: DisplayObject, args: MxnRpgStatusArgs) {
         .step(self => {
             RpgStatus.Methods.tick(args.status, args.effects, tickCount = (tickCount + 1) % 120);
             obj.visible = args.status.invulnerable > 0 ? !obj.visible : true;
-            self.dripsTint = args.status.wetness.tint;
+            self.dripsTint = args.status.conditions.wetness.tint;
             self.dripsPerFrame = approachLinear(
                 self.dripsPerFrame,
-                getTargetDripsPerFrame(args.status.wetness.value),
+                getTargetDripsPerFrame(args.status.conditions.wetness.value),
                 0.025,
             );
         });

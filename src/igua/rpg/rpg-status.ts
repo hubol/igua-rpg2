@@ -12,23 +12,27 @@ export namespace RpgStatus {
     };
 
     export interface Model {
-        ballons: Ballon[];
         faction: RpgFaction;
         health: number;
         healthMax: number;
         invulnerable: number;
         invulnerableMax: number;
         pride: number;
-        poison: {
-            immune: boolean;
-            level: number;
-            value: number;
-            max: number;
-        };
-        wetness: {
-            tint: RgbInt;
-            value: Integer;
-            max: Integer;
+        conditions: {
+            helium: {
+                ballons: Ballon[];
+            };
+            poison: {
+                immune: boolean;
+                level: number;
+                value: number;
+                max: number;
+            };
+            wetness: {
+                tint: RgbInt;
+                value: Integer;
+                max: Integer;
+            };
         };
         guardingDefenses: {
             physical: PercentAsInteger;
@@ -108,27 +112,27 @@ export namespace RpgStatus {
                 return;
             }
 
-            if (count % 120 === 0 && model.health > Consts.FullyPoisonedHealth && model.poison.level > 0) {
+            if (count % 120 === 0 && model.health > Consts.FullyPoisonedHealth && model.conditions.poison.level > 0) {
                 const previous = model.health;
-                model.health = Math.max(Consts.FullyPoisonedHealth, model.health - model.poison.level);
+                model.health = Math.max(Consts.FullyPoisonedHealth, model.health - model.conditions.poison.level);
                 const diff = previous - model.health;
 
                 effects.tookDamage(model.health, diff, DamageKind.Poison);
             }
             if (count % 15 === 0) {
-                model.poison.value = Math.max(0, model.poison.value - 1);
+                model.conditions.poison.value = Math.max(0, model.conditions.poison.value - 1);
             }
             if (count % 4 === 0) {
-                model.wetness.value = Math.max(0, model.wetness.value - model.recoveries.wetness);
+                model.conditions.wetness.value = Math.max(0, model.conditions.wetness.value - model.recoveries.wetness);
             }
             if (model.state.ballonHealthMayDrain && count % 8 === 0) {
                 // TODO ballon health should only drain while airborne!
                 let i = 0;
-                while (i < model.ballons.length) {
-                    const ballon = model.ballons[i];
+                while (i < model.conditions.helium.ballons.length) {
+                    const ballon = model.conditions.helium.ballons[i];
                     ballon.health = Math.max(0, ballon.health - 1);
                     if (ballon.health === 0) {
-                        model.ballons.splice(i, 1);
+                        model.conditions.helium.ballons.splice(i, 1);
                         effects.ballonHealthDepleted(ballon);
                     }
                     else {
@@ -156,25 +160,29 @@ export namespace RpgStatus {
                 && (attack.conditions.poison > 0 || attack.conditions.wetness.value > 0);
 
             if (conditions) {
-                if (!target.poison.immune) {
-                    target.poison.value += attack.conditions.poison;
-                    if (target.poison.value >= target.poison.max) {
-                        target.poison.value = 0;
-                        target.poison.level += 1;
+                if (!target.conditions.poison.immune) {
+                    target.conditions.poison.value += attack.conditions.poison;
+                    if (target.conditions.poison.value >= target.conditions.poison.max) {
+                        target.conditions.poison.value = 0;
+                        target.conditions.poison.level += 1;
                     }
                 }
 
                 if (attack.conditions.wetness.value > 0) {
-                    if (target.wetness.value === 0) {
-                        target.wetness.tint = attack.conditions.wetness.tint;
+                    if (target.conditions.wetness.value === 0) {
+                        target.conditions.wetness.tint = attack.conditions.wetness.tint;
                     }
                     else {
-                        target.wetness.tint = blendColorDelta(target.wetness.tint, attack.conditions.wetness.tint, 4);
+                        target.conditions.wetness.tint = blendColorDelta(
+                            target.conditions.wetness.tint,
+                            attack.conditions.wetness.tint,
+                            4,
+                        );
                     }
                 }
-                target.wetness.value = Math.min(
-                    target.wetness.value + attack.conditions.wetness.value,
-                    target.wetness.max,
+                target.conditions.wetness.value = Math.min(
+                    target.conditions.wetness.value + attack.conditions.wetness.value,
+                    target.conditions.wetness.max,
                 );
             }
 
@@ -246,7 +254,7 @@ export namespace RpgStatus {
 
         createBallon(model: Model, effects: Effects) {
             const ballon = createBallon();
-            model.ballons.push(ballon);
+            model.conditions.helium.ballons.push(ballon);
             effects.ballonCreated(ballon);
         },
     };

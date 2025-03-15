@@ -10,9 +10,6 @@ export const RpgPlayer = {
         return computeEquipmentAttributes(RpgProgress.character.equipment);
     },
     status: {
-        get ballons() {
-            return RpgProgress.character.status.ballons;
-        },
         get health() {
             return RpgProgress.character.status.health;
         },
@@ -30,36 +27,43 @@ export const RpgPlayer = {
             return 45 + RpgProgress.character.attributes.health * 5;
         },
         pride: 0,
-        poison: {
-            immune: false,
-            max: 100,
-            get level() {
-                return RpgProgress.character.status.poison.level;
+        conditions: {
+            helium: {
+                get ballons() {
+                    return RpgProgress.character.status.ballons;
+                },
             },
-            set level(value) {
-                RpgProgress.character.status.poison.level = value;
+            poison: {
+                immune: false,
+                max: 100,
+                get level() {
+                    return RpgProgress.character.status.poison.level;
+                },
+                set level(value) {
+                    RpgProgress.character.status.poison.level = value;
+                },
+                get value() {
+                    return RpgProgress.character.status.poison.value;
+                },
+                set value(value) {
+                    RpgProgress.character.status.poison.value = value;
+                },
             },
-            get value() {
-                return RpgProgress.character.status.poison.value;
+            wetness: {
+                get tint() {
+                    return RpgProgress.character.status.wetness.tint;
+                },
+                set tint(value) {
+                    RpgProgress.character.status.wetness.tint = value;
+                },
+                get value() {
+                    return RpgProgress.character.status.wetness.value;
+                },
+                set value(value) {
+                    RpgProgress.character.status.wetness.value = value;
+                },
+                max: 100,
             },
-            set value(value) {
-                RpgProgress.character.status.poison.value = value;
-            },
-        },
-        wetness: {
-            get tint() {
-                return RpgProgress.character.status.wetness.tint;
-            },
-            set tint(value) {
-                RpgProgress.character.status.wetness.tint = value;
-            },
-            get value() {
-                return RpgProgress.character.status.wetness.value;
-            },
-            set value(value) {
-                RpgProgress.character.status.wetness.value = value;
-            },
-            max: 100,
         },
         guardingDefenses: {
             physical: 20,
