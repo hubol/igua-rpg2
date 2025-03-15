@@ -7,6 +7,7 @@ export namespace RpgAttack {
         physical: Integer;
         emotional: Integer;
         conditions: {
+            helium: Integer;
             poison: Integer;
             wetness: {
                 value: Integer;
@@ -25,6 +26,7 @@ export namespace RpgAttack {
             physical: model.physical ?? 0,
             emotional: model.emotional ?? 0,
             conditions: {
+                helium: model.conditions?.helium ?? 0,
                 poison: model.conditions?.poison ?? 0,
                 wetness: {
                     value: model.conditions?.wetness?.value ?? 0,

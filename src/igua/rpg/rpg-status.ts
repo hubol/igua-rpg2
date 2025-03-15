@@ -21,6 +21,8 @@ export namespace RpgStatus {
         conditions: {
             helium: {
                 ballons: Ballon[];
+                value: Integer;
+                max: Integer;
             };
             poison: {
                 immune: boolean;
@@ -119,6 +121,9 @@ export namespace RpgStatus {
 
                 effects.tookDamage(model.health, diff, DamageKind.Poison);
             }
+            if (count % 20 === 0) {
+                model.conditions.helium.value = Math.max(0, model.conditions.helium.value - 1);
+            }
             if (count % 15 === 0) {
                 model.conditions.poison.value = Math.max(0, model.conditions.poison.value - 1);
             }
@@ -157,9 +162,17 @@ export namespace RpgStatus {
             }
 
             const conditions = target.invulnerable === 0
-                && (attack.conditions.poison > 0 || attack.conditions.wetness.value > 0);
+                && (attack.conditions.helium > 0
+                    || attack.conditions.poison > 0
+                    || attack.conditions.wetness.value > 0);
 
             if (conditions) {
+                target.conditions.helium.value += attack.conditions.helium;
+                if (target.conditions.helium.value >= target.conditions.helium.max) {
+                    target.conditions.helium.value = 0;
+                    RpgStatus.Methods.createBallon(target, targetEffects);
+                }
+
                 if (!target.conditions.poison.immune) {
                     target.conditions.poison.value += attack.conditions.poison;
                     if (target.conditions.poison.value >= target.conditions.poison.max) {

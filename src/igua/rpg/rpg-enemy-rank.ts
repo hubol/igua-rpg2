@@ -22,6 +22,8 @@ export namespace RpgEnemyRank {
                 pride: status?.pride ?? 0,
                 conditions: {
                     helium: {
+                        value: status?.conditions?.helium?.value ?? 0,
+                        max: status?.conditions?.helium?.max ?? 100,
                         // TODO if it's important, could pass a ballonsCount or something!
                         ballons: [],
                     },

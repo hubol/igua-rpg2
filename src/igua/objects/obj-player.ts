@@ -116,7 +116,9 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             },
         })
         .step(() => {
-            const ballonPhysicsLevel = getBallonPhysicsLevel(RpgProgress.character.status.ballons.length);
+            const ballonPhysicsLevel = getBallonPhysicsLevel(
+                RpgProgress.character.status.conditions.helium.ballons.length,
+            );
 
             puppet.terminalVelocity = Math.max(
                 (ballonPhysicsLevel === 0

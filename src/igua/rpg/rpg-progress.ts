@@ -19,9 +19,15 @@ export function getInitialRpgProgress() {
                 pocket: RpgPocket.create(),
             },
             status: {
-                ballons: Empty<RpgStatus.Ballon>(),
                 health: 50,
                 invulnverable: 0,
+                conditions: {
+                    helium: {
+                        value: 0,
+                        ballons: Empty<RpgStatus.Ballon>(),
+                    },
+                    // TODO add poison, wetness here
+                },
                 poison: {
                     level: 0,
                     value: 0,

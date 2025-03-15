@@ -30,8 +30,15 @@ export const RpgPlayer = {
         conditions: {
             helium: {
                 get ballons() {
-                    return RpgProgress.character.status.ballons;
+                    return RpgProgress.character.status.conditions.helium.ballons;
                 },
+                get value() {
+                    return RpgProgress.character.status.conditions.helium.value;
+                },
+                set value(value) {
+                    RpgProgress.character.status.conditions.helium.value = value;
+                },
+                max: 100,
             },
             poison: {
                 immune: false,
