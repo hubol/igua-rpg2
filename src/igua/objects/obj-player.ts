@@ -28,14 +28,44 @@ const PlayerConsts = {
     VariableJumpSpeedMaximum: -1.5,
     VariableJumpDelta: -0.095,
     Gravity: 0.15,
+    TerminalVelocity: 20,
+    BallonLevelModifiers: {
+        Gravity: {
+            Delta: -0.01,
+            Minimum: 0.1,
+        },
+        TerminalVelocity: {
+            Base: 6,
+            Delta: -1.5,
+            Minimum: 2,
+        },
+    },
 };
+
+function getBallonPhysicsLevel(ballonsCount: number) {
+    let level = 0;
+    let countForNextLevel = 1;
+
+    while (ballonsCount > 0) {
+        if (ballonsCount >= countForNextLevel) {
+            level += 1;
+            ballonsCount -= countForNextLevel;
+            countForNextLevel += 1;
+        }
+        else {
+            level += ballonsCount / countForNextLevel;
+            break;
+        }
+    }
+
+    return level;
+}
 
 const filterVulnerableObjs = (obj: MxnRpgStatus) => obj.status.faction !== RpgFaction.Player;
 const filterSpecialSignObjs = (obj: ObjSign) => obj.isSpecial;
 
 function objPlayer(looks: IguanaLooks.Serializable) {
     const iguanaLocomotiveObj = objIguanaLocomotive(looks);
-    iguanaLocomotiveObj.gravity = PlayerConsts.Gravity;
 
     iguanaLocomotiveObj.mxnBallonable.setInitialBallons(RpgPlayer.status.ballons);
 
@@ -86,6 +116,21 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             },
         })
         .step(() => {
+            const ballonPhysicsLevel = getBallonPhysicsLevel(RpgProgress.character.status.ballons.length);
+
+            puppet.terminalVelocity = Math.max(
+                (ballonPhysicsLevel === 0
+                    ? PlayerConsts.TerminalVelocity
+                    : PlayerConsts.BallonLevelModifiers.TerminalVelocity.Base)
+                    + PlayerConsts.BallonLevelModifiers.TerminalVelocity.Delta * ballonPhysicsLevel,
+                PlayerConsts.BallonLevelModifiers.TerminalVelocity.Minimum,
+            );
+
+            puppet.gravity = Math.max(
+                PlayerConsts.Gravity + PlayerConsts.BallonLevelModifiers.Gravity.Delta * ballonPhysicsLevel,
+                PlayerConsts.BallonLevelModifiers.Gravity.Minimum,
+            );
+
             if (puppet.isBeingPiloted) {
                 return;
             }
