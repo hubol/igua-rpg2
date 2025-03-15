@@ -66,6 +66,17 @@
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 5,
+          "_eid": "73148747",
+          "x": 1855,
+          "y": 406,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ffff",
+          "values": {"name": "HeliumMarker", "depth": 0}
         }
       ]
     },
@@ -1085,6 +1096,78 @@
       "gridCellsX": 293,
       "gridCellsY": 55,
       "decals": [
+        {
+          "x": 1836,
+          "y": 420,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#08270e",
+          "texture": "shapes/confetti 45deg.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1877,
+          "y": 422,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#08270e",
+          "texture": "shapes/confetti 45deg.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1893,
+          "y": 420,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#08270e",
+          "texture": "town/underneath/helium pipe.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1897,
+          "y": 425,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#08270e",
+          "texture": "town/underneath/helium pipe.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1852,
+          "y": 408,
+          "scaleX": 0.095,
+          "scaleY": 0.5,
+          "rotation": 0,
+          "tint": "#08270e",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1856,
+          "y": 408,
+          "scaleX": 0.095,
+          "scaleY": 0.5,
+          "rotation": 0,
+          "tint": "#08270e",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
         {
           "x": 803,
           "y": 202,
@@ -3504,30 +3587,6 @@
           "groupName": null
         },
         {
-          "x": 1864,
-          "y": 423,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#08270e",
-          "texture": "terrain/earth/zigzag 0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 1953,
-          "y": 422,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#08270e",
-          "texture": "terrain/earth/zigzag 0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
           "x": 1810,
           "y": 390,
           "scaleX": 1,
@@ -3969,18 +4028,6 @@
           "groupName": null
         },
         {
-          "x": 1907,
-          "y": 441,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#08270e",
-          "texture": "terrain/earth/zigzag 0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
           "x": 2000,
           "y": 441,
           "scaleX": 1,
@@ -4030,6 +4077,150 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 1855,
+          "y": 433,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/underneath/helium tank.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1854,
+          "y": 406,
+          "scaleX": 0.095,
+          "scaleY": 0.5,
+          "rotation": 0,
+          "tint": "#3f1c3c",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1895,
+          "y": 423,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#3f1c3c",
+          "texture": "town/underneath/helium pipe.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1905,
+          "y": 391,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/underneath/helium creator.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1897,
+          "y": 433,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#9f4698",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1879,
+          "y": 434,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#9f4698",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1917,
+          "y": 416,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#9f4698",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1914,
+          "y": 429,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#9f4698",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1855,
+          "y": 416,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#9f4698",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1934,
+          "y": 425,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#08270e",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1897,
+          "y": 458,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#08270e",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1817,
+          "y": 445,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#08270e",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -4722,6 +4913,43 @@
       "gridCellsY": 55,
       "decals": [
         {
+          "x": 1879,
+          "y": 379,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#041608",
+          "texture": "terrain/earth/mass0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1884,
+          "y": 395,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#010c04",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 2036,
+          "y": 559,
+          "scaleX": 0.8,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#010c04",
+          "texture": "town/ball/frame.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
           "x": 2084,
           "y": 382,
           "scaleX": 1,
@@ -4768,19 +4996,6 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
-        },
-        {
-          "x": 1879,
-          "y": 379,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#041608",
-          "texture": "terrain/earth/mass0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
         },
         {
           "x": 726,
@@ -6519,18 +6734,6 @@
           "values": {"name": ""}
         },
         {
-          "x": 1824,
-          "y": 387,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 90,
-          "tint": "#103418",
-          "texture": "terrain/grass/jagged.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
           "x": 1870,
           "y": 373,
           "scaleX": 1,
@@ -6574,6 +6777,42 @@
           "rotation": 0,
           "tint": "#ffffff",
           "texture": "stone/rock0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 2026,
+          "y": 527,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#010c04",
+          "texture": "town/ball/ball0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1837,
+          "y": 384,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#010c04",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1824,
+          "y": 387,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#103418",
+          "texture": "terrain/grass/jagged.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
