@@ -87,7 +87,7 @@ export namespace RpgStatus {
 
     interface DamageAccepted {
         rejected: false;
-        ailments?: boolean;
+        conditions?: boolean;
         damaged?: boolean;
     }
 
@@ -152,30 +152,30 @@ export namespace RpgStatus {
                 return { rejected: true, wrongFaction: true };
             }
 
-            const ailments = attack.poison > 0 || attack.wetness.value > 0;
+            const conditions = attack.conditions.poison > 0 || attack.conditions.wetness.value > 0;
 
             if (!target.poison.immune) {
-                target.poison.value += attack.poison;
+                target.poison.value += attack.conditions.poison;
                 if (target.poison.value >= target.poison.max) {
                     target.poison.value = 0;
                     target.poison.level += 1;
                 }
             }
 
-            if (attack.wetness.value > 0) {
+            if (attack.conditions.wetness.value > 0) {
                 if (target.wetness.value === 0) {
-                    target.wetness.tint = attack.wetness.tint;
+                    target.wetness.tint = attack.conditions.wetness.tint;
                 }
                 else {
-                    target.wetness.tint = blendColorDelta(target.wetness.tint, attack.wetness.tint, 4);
+                    target.wetness.tint = blendColorDelta(target.wetness.tint, attack.conditions.wetness.tint, 4);
                 }
             }
-            target.wetness.value = Math.min(target.wetness.value + attack.wetness.value, target.wetness.max);
+            target.wetness.value = Math.min(target.wetness.value + attack.conditions.wetness.value, target.wetness.max);
 
             // TODO warn when amount is not an integer
 
             if (attack.physical === 0 && attack.emotional === 0) {
-                return { rejected: false, ailments };
+                return { rejected: false, conditions };
             }
 
             if (target.invulnerable > 0) {
@@ -225,7 +225,7 @@ export namespace RpgStatus {
                 attacker.pride++;
             }
 
-            return { rejected: false, ailments, damaged };
+            return { rejected: false, conditions, damaged };
         },
 
         heal(model: Model, effects: Effects, amount: number) {

@@ -97,7 +97,6 @@ export const RpgPlayer = {
         get physical() {
             return 4 + RpgProgress.character.attributes.strength * 3;
         },
-        poison: 0,
         versus: RpgFaction.Enemy,
         quirks: {
             isPlayerMeleeAttack: true,
@@ -108,7 +107,6 @@ export const RpgPlayer = {
         get physical() {
             return 5 + RpgProgress.character.attributes.strength * 5;
         },
-        poison: 0,
         versus: RpgFaction.Enemy,
         quirks: {
             // TODO should it have both player melee quirks?

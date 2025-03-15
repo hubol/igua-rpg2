@@ -6,10 +6,12 @@ export namespace RpgAttack {
     export interface Model {
         physical: Integer;
         emotional: Integer;
-        poison: Integer;
-        wetness: {
-            value: Integer;
-            tint: RgbInt;
+        conditions: {
+            poison: Integer;
+            wetness: {
+                value: Integer;
+                tint: RgbInt;
+            };
         };
         versus: RpgFaction;
         quirks: {
@@ -22,8 +24,13 @@ export namespace RpgAttack {
         return {
             physical: model.physical ?? 0,
             emotional: model.emotional ?? 0,
-            poison: model.poison ?? 0,
-            wetness: { value: model.wetness?.value ?? 0, tint: model.wetness?.tint ?? 0xffffff },
+            conditions: {
+                poison: model.conditions?.poison ?? 0,
+                wetness: {
+                    value: model.conditions?.wetness?.value ?? 0,
+                    tint: model.conditions?.wetness?.tint ?? 0xffffff,
+                },
+            },
             versus: model.versus ?? RpgFaction.Player,
             quirks: {
                 isPlayerClawMeleeAttack: model.quirks?.isPlayerClawMeleeAttack ?? false,

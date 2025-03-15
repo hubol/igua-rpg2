@@ -15,9 +15,11 @@ import { objEphemeralSprite } from "../obj-ephemeral-sprite";
 
 export function objPuddle(width: number, tint = 0x68A8D0) {
     const attack = RpgAttack.create({
-        wetness: {
-            value: 2,
-            tint,
+        conditions: {
+            wetness: {
+                value: 2,
+                tint,
+            },
         },
     });
     return objPuddleBase(
@@ -30,11 +32,13 @@ export function objPuddle(width: number, tint = 0x68A8D0) {
 
 export function objPuddlePoison(width: number, tint = 0x80B020) {
     const attack = RpgAttack.create({
-        wetness: {
-            value: 2,
-            tint,
+        conditions: {
+            poison: 5,
+            wetness: {
+                value: 2,
+                tint,
+            },
         },
-        poison: 5,
     });
     return objPuddleBase(
         width,
@@ -57,9 +61,11 @@ function objPuddleBase(width: number, height: number, tint: Integer, attack: Rpg
 
     const bigAttack = RpgAttack.create({
         ...attack,
-        wetness: {
-            ...attack.wetness,
-            value: 30,
+        conditions: {
+            wetness: {
+                ...attack.conditions.wetness,
+                value: 30,
+            },
         },
     });
 
