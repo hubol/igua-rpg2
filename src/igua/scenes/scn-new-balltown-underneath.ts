@@ -1,15 +1,22 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { ask, show } from "../drama/show";
 import { Cutscene } from "../globals";
+import { mxnComputer } from "../mixins/mxn-computer";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
+import { RpgCutscene } from "../rpg/rpg-cutscene";
+import { RpgPocket } from "../rpg/rpg-pocket";
 import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltownUnderneath() {
     Jukebox.play(Mzk.TrashDay);
     const lvl = Lvl.NewBalltownUnderneath();
     enrichHomeowner(lvl);
+    enrichHeliumCreator(lvl);
 }
 
 function enrichHomeowner(lvl: LvlType.NewBalltownUnderneath) {
@@ -87,4 +94,66 @@ function enrichHomeowner(lvl: LvlType.NewBalltownUnderneath) {
         }
         yield* show("Can you help? They took over my house :-(");
     });
+}
+
+function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
+    const { heliumCreator } = RpgProgress.flags.underneath;
+    const { tank } = heliumCreator;
+
+    lvl.TownUnderneathHeliumCreator
+        .mixin(mxnSpeaker, { name: "Pocket HeHe", colorPrimary: 0x08270E, colorSecondary: 0x3F1C3C })
+        .mixin(mxnComputer)
+        .mixin(mxnCutscene, function* () {
+            while (true) {
+                const result = yield* ask(
+                    `         -=-=-=-=-=-=- Tank status -=-=-=-=-=-=-
+                          Valve open: ${tank.isValveOpen ? "Yes" : "No"}
+                       Helium content: ${tank.heliumContent}`,
+                    tank.isValveOpen ? "Close valve" : "Open valve",
+                    "Create helium",
+                    "Do nothing",
+                );
+                if (result === 0) {
+                    tank.isValveOpen = !tank.isValveOpen;
+                    yield* show(tank.isValveOpen ? "Valve opened." : "Valve closed.");
+                }
+                else if (result === 1) {
+                    const pocketItemsCount = RpgPocket.Methods.countTotal(RpgProgress.character.inventory.pocket);
+
+                    yield* show(
+                        "Your pocket items may be converted into helium.",
+                        `You currently have ${pocketItemsCount} pocket item(s).`,
+                    );
+
+                    if (pocketItemsCount === 0) {
+                        yield* show("You cannot create any helium right now.");
+                        continue;
+                    }
+
+                    if (yield* ask(`Trade ${pocketItemsCount} pocket item(s) for helium?`)) {
+                        yield sleep(500);
+                        // TODO need DramaPocket.empty
+                        const emptiedPocketItemsCount = RpgPocket.Methods.empty(RpgProgress.character.inventory.pocket);
+                        yield sleep(500);
+                        // TODO should receive XP bonus for depositing computer chips
+                        tank.heliumContent += emptiedPocketItemsCount * 150;
+                        yield* show("Helium created.");
+                    }
+                }
+                else {
+                    break;
+                }
+            }
+        });
+
+    objHeliumExhaust()
+        .at(lvl.HeliumMarker)
+        .step((self) => {
+            self.isAttackActive = tank.heliumContent > 0 && tank.isValveOpen;
+            // TODO not sure if RpgCutscene.isPlaying is the right check
+            if (self.isAttackActive && !RpgCutscene.isPlaying) {
+                tank.heliumContent = Math.max(0, tank.heliumContent - 1);
+            }
+        })
+        .show();
 }

@@ -85,6 +85,12 @@ export function getInitialRpgProgress() {
                 },
             },
             underneath: {
+                heliumCreator: {
+                    tank: {
+                        heliumContent: 0,
+                        isValveOpen: false,
+                    },
+                },
                 homeowner: {
                     hasClearedHouseOfEnemies: false,
                 },
