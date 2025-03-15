@@ -17,6 +17,7 @@ const npcPersonas = {
     NewBalltownCroupier: { job: "Croupier", name: "Flum", looks: NpcLooks.PartyAnimal },
     NewBalltownMiner: { job: "Miner (Retired)", name: "Virgil", looks: NpcLooks.MinerSibling },
     UnderneathHomeowner: { job: "Homeowner", name: "Keef", looks: NpcLooks.Satisfier },
+    UnderneathTunneler: { job: "Tunneler", name: "Sheeb", looks: NpcLooks.HighIq },
     __Unknown__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
 } satisfies Record<string, NpcPersona_NoInternalName>;
 

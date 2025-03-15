@@ -1200,6 +1200,7 @@ export const Lvl = {
     Door_1: e(r["Door"], { x: 728, y: 120, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromTunnelRight", name: "", depth: 0 } }, "Entities"),
     TerrainGrassJagged_4: d(Tx.Terrain.Grass.Jagged, { x: 113, y: 297, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x94a66f }, "AboveEntitiesDecals"),
     TerrainGrassJagged_5: d(Tx.Terrain.Grass.Jagged, { x: 745, y: 169, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x94a66f }, "AboveEntitiesDecals"),
+    Tunneler: e(r["IguanaNpc"], { x: 184, y: 296, flippedX: false, values: { personaName: "UnderneathTunneler", name: "Tunneler", depth: 0 } }, "CharacterEntities"),
     Player: e(r["Player"], { x: 144, y: 296, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     fromRight: e(r["Checkpoint"], { x: 712, y: 168, flippedX: true, values: { name: "fromRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
   })),
