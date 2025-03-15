@@ -35,7 +35,7 @@ export function objHud() {
     const poisonBuildUpObj = objPoisonBuildUp();
     const poisonLevelObj = objPoisonLevel();
 
-    const statusObjs = [valuablesInfoObj, objPocketInfo(), poisonLevelObj, poisonBuildUpObj];
+    const statusObjs = [valuablesInfoObj, objPocketInfo(), poisonLevelObj, poisonBuildUpObj, objHeliumBuildUp()];
 
     return container(
         objCutsceneLetterbox(),
@@ -284,13 +284,33 @@ function objPoisonLevel() {
 }
 
 function objPoisonBuildUp() {
-    let value = RpgPlayer.status.conditions.poison.value;
-    const text = objText.MediumIrregular("Poison is building...", { tint: Consts.StatusTextTint });
+    return objBuildUp({
+        message: "Poison is building...",
+        conditionsKey: "poison",
+    });
+}
+
+function objHeliumBuildUp() {
+    return objBuildUp({
+        message: "Helium is potent...",
+        conditionsKey: "helium",
+    });
+}
+
+interface ObjBuildUpArgs {
+    message: string;
+    conditionsKey: "poison" | "helium";
+    // TODO tint
+}
+
+function objBuildUp({ message, conditionsKey }: ObjBuildUpArgs) {
+    let value = RpgPlayer.status.conditions[conditionsKey].value;
+    const text = objText.MediumIrregular(message, { tint: Consts.StatusTextTint });
     const bar = objStatusBar({
         height: 1,
         width: 85,
         value,
-        maxValue: RpgPlayer.status.conditions.poison.max,
+        maxValue: RpgPlayer.status.conditions[conditionsKey].max,
         tintBack: 0x003000,
         tintFront: 0x008000,
         increases: [{ tintBar: 0x00ff00 }],
@@ -301,7 +321,7 @@ function objPoisonBuildUp() {
 
     return container(bar, text)
         .step(self => {
-            const nextValue = RpgPlayer.status.conditions.poison.value;
+            const nextValue = RpgPlayer.status.conditions[conditionsKey].value;
             if (nextValue > value) {
                 bar.increase(nextValue, nextValue - value, 0);
             }
@@ -309,8 +329,9 @@ function objPoisonBuildUp() {
                 bar.decrease(nextValue, nextValue - value, 0);
             }
             value = nextValue;
-            const maxVisibleSteps = RpgPlayer.status.conditions.poison.level === 0 ? 1 : 2;
-            visibleSteps = value > 0 ? maxVisibleSteps : (visibleSteps - 1);
+            // I don't remember what I was trying to accomplish with this.
+            // const maxVisibleSteps = RpgPlayer.status.conditions.poison.level === 0 ? 1 : 2;
+            visibleSteps = value > 0 ? 2 : (visibleSteps - 1);
             self.visible = visibleSteps > 0;
         });
 }
