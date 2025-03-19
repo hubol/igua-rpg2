@@ -115,3 +115,5 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
 
     return obj;
 }
+
+export type ObjDoor = ReturnType<typeof objDoor>;
