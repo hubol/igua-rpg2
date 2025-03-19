@@ -10,7 +10,7 @@ import { scene } from "../globals";
 import { playerObj } from "./obj-player";
 import { StepOrder } from "./step-order";
 
-type CameraMode = "follow-player" | "follow-subject" | "controlled";
+type CameraMode = "follow_player" | "follow_subject" | "controlled";
 
 function getCameraPositionToFrameSubject(vector: DisplayObject | Vector, subjectObj: DisplayObject) {
     if (subjectObj && !subjectObj.destroyed) {
@@ -32,7 +32,7 @@ export function objCamera() {
 
     const auto = {
         followSubject(subjectObj: DisplayObject) {
-            obj.mode = "follow-subject";
+            obj.mode = "follow_subject";
             subjectToFollowObj = subjectObj;
         },
         panToSubject(subjectObj: DisplayObject) {
@@ -54,11 +54,11 @@ export function objCamera() {
     };
 
     // TODO not sure if mode should be exposed...
-    const obj = container().merge({ mode: <CameraMode> "follow-player", auto }).step(self => {
-        if (self.mode === "follow-player") {
+    const obj = container().merge({ mode: <CameraMode> "follow_player", auto }).step(self => {
+        if (self.mode === "follow_player") {
             getCameraPositionToFrameSubject(self, playerObj);
         }
-        else if (self.mode === "follow-subject") {
+        else if (self.mode === "follow_subject") {
             if (!subjectToFollowObj) {
                 Logger.logAssertError(
                     "objCamera.step",

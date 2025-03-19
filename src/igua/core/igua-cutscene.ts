@@ -102,7 +102,7 @@ export class IguaCutscene {
                         yield scene.camera.auto.panToPlayer();
                     }
                     if (self.attributes.camera.end !== "none") {
-                        scene.camera.mode = "follow-player";
+                        scene.camera.mode = "follow_player";
                     }
                 }
                 catch (e) {
