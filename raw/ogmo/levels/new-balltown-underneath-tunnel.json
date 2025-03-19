@@ -166,7 +166,7 @@
           "y": 248,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "scnNewBalltownUnderneath", "checkpointName": "fromTunnelLeft", "name": "", "depth": 0}
+          "values": {"sceneName": "scnNewBalltownUnderneath", "checkpointName": "fromTunnelLeft", "name": "LeftDoor", "depth": 0}
         },
         {
           "name": "Door",

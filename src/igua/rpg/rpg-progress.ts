@@ -94,6 +94,9 @@ export function getInitialRpgProgress() {
                 homeowner: {
                     hasClearedHouseOfEnemies: false,
                 },
+                tunneler: {
+                    isLeftDoorLocked: true,
+                },
             },
         },
         uids: {

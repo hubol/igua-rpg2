@@ -17,6 +17,7 @@ export function scnNewBalltownUnderneath() {
     const lvl = Lvl.NewBalltownUnderneath();
     enrichHomeowner(lvl);
     enrichHeliumCreator(lvl);
+    enrichTunnel(lvl);
 }
 
 function enrichHomeowner(lvl: LvlType.NewBalltownUnderneath) {
@@ -156,4 +157,8 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
             }
         })
         .show();
+}
+
+function enrichTunnel(lvl: LvlType.NewBalltownUnderneath) {
+    lvl.TunnelLeftDoor.locked = RpgProgress.flags.underneath.tunneler.isLeftDoorLocked;
 }
