@@ -1,3 +1,4 @@
+import { Container, Graphics } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -8,6 +9,7 @@ import { mxnComputer } from "../mixins/mxn-computer";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
+import { playerObj } from "../objects/obj-player";
 import { RpgCutscene } from "../rpg/rpg-cutscene";
 import { RpgPocket } from "../rpg/rpg-pocket";
 import { RpgProgress } from "../rpg/rpg-progress";
@@ -18,6 +20,7 @@ export function scnNewBalltownUnderneath() {
     enrichHomeowner(lvl);
     enrichHeliumCreator(lvl);
     enrichTunnel(lvl);
+    enrichMagicRisingFace(lvl);
 }
 
 function enrichHomeowner(lvl: LvlType.NewBalltownUnderneath) {
@@ -155,10 +158,33 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
             if (self.isAttackActive && !RpgCutscene.isPlaying) {
                 tank.heliumContent = Math.max(0, tank.heliumContent - 1);
             }
-        })
+        }, -1)
         .show();
 }
 
 function enrichTunnel(lvl: LvlType.NewBalltownUnderneath) {
     lvl.TunnelLeftDoor.locked = RpgProgress.flags.underneath.tunneler.isLeftDoorLocked;
+}
+
+function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
+    // TODO reward
+    // TODO cute sfx, vfx
+
+    const maximumPivotY = Math.abs(lvl.MagicRisingBar.y - lvl.MagicRisingFace.y);
+
+    const group: Container = lvl.MagicRisingFaceGroup;
+
+    lvl.MagicRisingFace.step(self => {
+        if (group.pivot.y < maximumPivotY && playerObj.speed.y <= 0 && self.collides(playerObj)) {
+            group.pivot.y = Math.min(maximumPivotY, group.pivot.y - Math.min(-1, playerObj.speed.y));
+        }
+    });
+
+    const barMaskObj = new Graphics()
+        .beginFill(0x103418)
+        .drawRect(-2, 0, 4, 512)
+        .beginFill(0x08270E)
+        .drawRect(-2, 128, 4, 512)
+        .at(lvl.MagicRisingFace);
+    group.addChildAt(barMaskObj, 0);
 }
