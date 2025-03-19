@@ -8,6 +8,7 @@ import { Cutscene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { mxnIguanaEditable } from "../mixins/mxn-iguana-editable";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { mxnStartPosition } from "../mixins/mxn-start-position";
 import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { objIguanaLocomotive } from "./obj-iguana-locomotive";
@@ -34,6 +35,7 @@ export function objIguanaNpc<TName extends string = NpcPersonaInternalName>({ pe
     return objIguanaLocomotive(persona.looks)
         .mixin(mxnIguanaEditable, persona.looks)
         .mixin(mxnSpeaker, { name: persona.name, ...getSpeakerColors(persona.looks) })
+        .mixin(mxnStartPosition)
         .coro(function* (self) {
             let speakingHandledCount = 0;
 
