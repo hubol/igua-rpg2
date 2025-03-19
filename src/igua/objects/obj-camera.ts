@@ -1,14 +1,16 @@
 import { DisplayObject } from "pixi.js";
+import { Logger } from "../../lib/game-engine/logger";
 import { vequals } from "../../lib/math/vector";
 import { distance } from "../../lib/math/vector";
 import { Vector, vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
+import { Null } from "../../lib/types/null";
 import { renderer } from "../current-pixi-renderer";
 import { scene } from "../globals";
 import { playerObj } from "./obj-player";
 import { StepOrder } from "./step-order";
 
-type CameraMode = "follow-player" | "controlled";
+type CameraMode = "follow-player" | "follow-subject" | "controlled";
 
 function getCameraPositionToFrameSubject(vector: DisplayObject | Vector, subjectObj: DisplayObject) {
     if (subjectObj && !subjectObj.destroyed) {
@@ -26,7 +28,13 @@ const v = vnew();
 export function objCamera() {
     // TODO need way to snap to desired position e.g. on level load
 
+    let subjectToFollowObj = Null<DisplayObject>();
+
     const auto = {
+        followSubject(subjectObj: DisplayObject) {
+            obj.mode = "follow-subject";
+            subjectToFollowObj = subjectObj;
+        },
         panToSubject(subjectObj: DisplayObject) {
             obj.mode = "controlled";
             const position = getCameraPositionToFrameSubject(vnew(), subjectObj) ?? obj;
@@ -45,9 +53,21 @@ export function objCamera() {
         },
     };
 
+    // TODO not sure if mode should be exposed...
     const obj = container().merge({ mode: <CameraMode> "follow-player", auto }).step(self => {
         if (self.mode === "follow-player") {
             getCameraPositionToFrameSubject(self, playerObj);
+        }
+        else if (self.mode === "follow-subject") {
+            if (!subjectToFollowObj) {
+                Logger.logAssertError(
+                    "objCamera.step",
+                    new Error("subjectToFollowObj is unset while mode is follow-subject"),
+                );
+            }
+            else if (!subjectToFollowObj.destroyed) {
+                getCameraPositionToFrameSubject(self, subjectToFollowObj);
+            }
         }
 
         // TODO switch for this?

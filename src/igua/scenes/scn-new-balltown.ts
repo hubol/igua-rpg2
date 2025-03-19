@@ -20,7 +20,7 @@ import { DramaKeyItems } from "../drama/drama-key-items";
 import { DramaMisc } from "../drama/drama-misc";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
-import { Cutscene } from "../globals";
+import { Cutscene, scene } from "../globals";
 import { mxnComputer } from "../mixins/mxn-computer";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
@@ -453,27 +453,22 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
                 lvl.Fishmonger.auto.facing = -1;
                 yield sleep(333);
                 lvl.Fishmonger.walkingTopSpeed = IguanaLocomotiveConsts.WalkingTopSpeed;
-                yield* Coro.race([
-                    () => !isOnScreen(lvl.Fishmonger),
-                    lvl.Fishmonger.walkTo(lvl.FishmongerRiseMarker.x),
-                ]);
-                if (!isOnScreen(lvl.Fishmonger)) {
-                    lvl.Fishmonger.destroy();
-                }
-                else {
-                    yield sleep(500);
-                    lvl.Fishmonger.physicsEnabled = false;
-                    lvl.Fishmonger.speed.at(0, 0);
-                    const flickerObj = container().step(() => lvl.Fishmonger.visible = !lvl.Fishmonger.visible).show(
-                        lvl.Fishmonger,
-                    );
-                    lvl.Fishmonger.play(Sfx.Iguana.Rise);
-                    yield interpvr(lvl.Fishmonger).to(lvl.FishmongerRiseMarker).over(2000);
-                    flickerObj.destroy();
-                    lvl.Fishmonger.visible = true;
-                    yield sleep(500);
-                    DramaMisc.departRoomViaDoor(lvl.Fishmonger);
-                }
+
+                scene.camera.auto.followSubject(lvl.Fishmonger);
+                yield* lvl.Fishmonger.walkTo(lvl.FishmongerRiseMarker.x);
+
+                yield sleep(500);
+                lvl.Fishmonger.physicsEnabled = false;
+                lvl.Fishmonger.speed.at(0, 0);
+                const flickerObj = container().step(() => lvl.Fishmonger.visible = !lvl.Fishmonger.visible).show(
+                    lvl.Fishmonger,
+                );
+                lvl.Fishmonger.play(Sfx.Iguana.Rise);
+                yield interpvr(lvl.Fishmonger).to(lvl.FishmongerRiseMarker).over(2000);
+                flickerObj.destroy();
+                lvl.Fishmonger.visible = true;
+                yield sleep(500);
+                DramaMisc.departRoomViaDoor(lvl.Fishmonger);
 
                 deliveries.armorer = null;
             }, { speaker: lvl.Fishmonger, camera: { start: "pan-to-speaker" } });
