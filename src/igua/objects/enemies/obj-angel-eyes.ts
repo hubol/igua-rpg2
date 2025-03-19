@@ -5,7 +5,7 @@ import { VectorSimple } from "../../../lib/math/vector-type";
 import { objEye, objEyes } from "../characters/obj-eye";
 
 interface PupilRestStyle_CrossEyed {
-    kind: "cross-eyed";
+    kind: "cross_eyed";
     offsetFromCenter: Integer;
 }
 
@@ -74,7 +74,7 @@ function getPupilPositionConfig(eye: "left" | "right", args: ObjAngelEyesArgs): 
 
     const rest = { x: cx, y: cy };
 
-    if (args.pupilRestStyle.kind === "cross-eyed") {
+    if (args.pupilRestStyle.kind === "cross_eyed") {
         const offset = Math.round(args.pupilTx.width / 2) + args.pupilRestStyle.offsetFromCenter;
         rest.x = eye === "left" ? sclera.x1 - offset : sclera.x0 + offset;
     }

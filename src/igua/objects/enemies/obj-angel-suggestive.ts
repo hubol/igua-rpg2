@@ -42,7 +42,7 @@ const commonTheme = {
         eyelidsTint: 0xff0000,
         gap: 6,
         pupilRestStyle: {
-            kind: "cross-eyed",
+            kind: "cross_eyed",
             offsetFromCenter: 1,
         },
         pupilTx: Tx.Enemy.Suggestive.Pupil,
@@ -83,7 +83,7 @@ const themes = {
             ...commonTheme.eyes,
             defaultEyelidRestingPosition: 2,
             pupilRestStyle: {
-                kind: "cross-eyed",
+                kind: "cross_eyed",
                 offsetFromCenter: 5,
             },
             scleraTx: Tx.Enemy.Suggestive.ScleraWide,
