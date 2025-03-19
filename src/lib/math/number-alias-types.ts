@@ -11,4 +11,5 @@ export type Milliseconds = ForceAliasType<number>;
 export type PercentAsInteger = ForceAliasType<number>;
 export type RgbInt = ForceAliasType<number>;
 export type DegreesFloat = ForceAliasType<number>;
+export type PolarInt = ForceAliasType<number>;
 // TODO use Int names ^^^
