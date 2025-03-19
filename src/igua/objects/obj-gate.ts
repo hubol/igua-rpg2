@@ -29,7 +29,6 @@ export function objGate(ogmoEntity: OgmoFactory.Entity<"GateHorizontal" | "GateV
             yield () => predicate() && self.collides(playerObj);
             // TODO is this really a cutscene?
             // Cutscenes are (thankfully?) not interruptible.
-            // Either way, probably don't want the letterbox to appear!
             Cutscene.play(function* () {
                 CtxGate.value.isGateTransitionActive = true;
                 playerObj.isBeingPiloted = true;
