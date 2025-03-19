@@ -1,8 +1,10 @@
 import { Container, Graphics } from "pixi.js";
+import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
+import { ZIndex } from "../core/scene/z-index";
 import { ask, show } from "../drama/show";
 import { Cutscene } from "../globals";
 import { mxnComputer } from "../mixins/mxn-computer";
@@ -159,6 +161,13 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
                 tank.heliumContent = Math.max(0, tank.heliumContent - 1);
             }
         }, -1)
+        .show();
+
+    objText.SmallDigits("", { tint: 0x385719 })
+        .anchored(1, 0.5)
+        .step(self => self.text = "" + tank.heliumContent)
+        .at(lvl.HeliumContentTextMarker)
+        .zIndexed(ZIndex.TerrainDecals)
         .show();
 }
 
