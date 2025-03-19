@@ -21,10 +21,7 @@ function getDeceleratingDistance(absSpeed: number, deceleration: number) {
     return countCeil * (absSpeed + errorCorrection) / 2 - errorCorrection;
 }
 
-export enum ObjIguanaLocomotiveAutoFacingMode {
-    CheckMoving,
-    CheckSpeedX,
-}
+export type ObjIguanaLocomotiveAutoFacingMode = "check_moving" | "check_speed_x";
 
 export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
     let autoFacingTarget = 0;
@@ -92,7 +89,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
     const auto = {
         duckingSpeed: 0.075,
         // TODO no enum?
-        facingMode: ObjIguanaLocomotiveAutoFacingMode.CheckSpeedX,
+        facingMode: <ObjIguanaLocomotiveAutoFacingMode> "check_speed_x",
         set facing(value: Polar) {
             autoFacingTarget = value;
         },
@@ -182,7 +179,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             puppet.gait = approachLinear(puppet.gait, Math.min(puppet.isAirborne ? 0 : gaitFactor, 1), 0.15);
 
             if (puppet.speed.x !== 0) {
-                if (puppet.auto.facingMode === ObjIguanaLocomotiveAutoFacingMode.CheckSpeedX) {
+                if (puppet.auto.facingMode === "check_speed_x") {
                     autoFacingTarget = Math.sign(puppet.speed.x);
                 }
                 else if (puppet.isMovingLeft && puppet.speed.x < 0) {

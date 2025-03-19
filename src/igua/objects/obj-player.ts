@@ -182,7 +182,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
         }, StepOrder.AfterPhysics)
         .zIndexed(ZIndex.PlayerEntities);
 
-    puppet.auto.facingMode = ObjIguanaLocomotiveAutoFacingMode.CheckMoving;
+    puppet.auto.facingMode = "check_moving";
 
     return puppet;
 }

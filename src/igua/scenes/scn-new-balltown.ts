@@ -443,7 +443,7 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
                 return false;
             };
             fishmongerRouteObj.destroy();
-            lvl.Fishmonger.auto.facingMode = ObjIguanaLocomotiveAutoFacingMode.CheckMoving;
+            lvl.Fishmonger.auto.facingMode = "check_moving";
             lvl.Fishmonger.speed.x = -3;
             lvl.Fishmonger.isBeingPiloted = false;
             lvl.Fishmonger.isMovingRight = false;
