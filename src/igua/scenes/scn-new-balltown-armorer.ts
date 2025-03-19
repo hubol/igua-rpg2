@@ -86,7 +86,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
         Cutscene.setCurrentSpeaker(lvl.IguanaNpc);
         yield* show("Well...? How'd it go?");
 
-        yield* lvl.Fishmonger.walkTo(lvl.Door.x);
+        yield* DramaMisc.walkToDoor(lvl.Fishmonger, lvl.Door);
 
         Cutscene.setCurrentSpeaker(lvl.Fishmonger);
         yield* show("Without a hitch!", "Congratulations on your new fishy!");
