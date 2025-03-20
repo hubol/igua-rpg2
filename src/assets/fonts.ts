@@ -1,7 +1,7 @@
 import { IBitmapTextStyle } from "pixi.js";
 import { BitmapText } from "pixi.js";
 import { IrregularBitmapText } from "../igua/lib/irregular-bitmap-text";
-import { fntDiggit } from "./bitmap-fonts/fnt-diggit";
+import { fntDiggit, fntDiggitMono } from "./bitmap-fonts/fnt-diggit";
 import { fntErotix } from "./bitmap-fonts/fnt-erotix";
 import { fntErotixLight } from "./bitmap-fonts/fnt-erotix-light";
 import { fntFlaccid } from "./bitmap-fonts/fnt-flaccid";
@@ -15,6 +15,9 @@ export const objText = {
     },
     SmallDigits(text = "", style: Style = {}) {
         return new BitmapText(text, { fontName: fntDiggit.font, ...style });
+    },
+    SmallDigitsMono(text = "", style: Style = {}) {
+        return new BitmapText(text, { fontName: fntDiggitMono.font, ...style });
     },
     MediumIrregular(text = "", style: Style = {}) {
         return new IrregularBitmapText(text, { fontName: fntErotixLight.font, ...style });
