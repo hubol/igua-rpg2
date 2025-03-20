@@ -10,7 +10,7 @@ import { scene } from "../globals";
 import { playerObj } from "./obj-player";
 import { StepOrder } from "./step-order";
 
-type CameraMode = "follow_player" | "follow_subject" | "controlled";
+type CameraMode = "follow_player" | "follow_subject" | "controlled" | "move_towards_player";
 
 function getCameraPositionToFrameSubject(vector: DisplayObject | Vector, subjectObj: DisplayObject) {
     if (subjectObj && !subjectObj.destroyed) {
@@ -57,6 +57,10 @@ export function objCamera() {
     const obj = container().merge({ mode: <CameraMode> "follow_player", auto }).step(self => {
         if (self.mode === "follow_player") {
             getCameraPositionToFrameSubject(self, playerObj);
+        }
+        else if (self.mode === "move_towards_player") {
+            getCameraPositionToFrameSubject(v, playerObj);
+            self.moveTowards(v, 2);
         }
         else if (self.mode === "follow_subject") {
             if (!subjectToFollowObj) {
