@@ -199,14 +199,19 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
     const group: Container = lvl.MagicRisingFaceGroup;
 
     let movedByPlayerSteps = 0;
-    let atFullMast = false;
+
+    if (RpgProgress.flags.underneath.magicalRisingFace.reachedSummit) {
+        lvl.MagicRisingFace.y = minimumY;
+    }
+
+    let atSummit = false;
 
     lvl.MagicRisingFace
         .mixin(mxnSpeaker, { name: "Magical Rising Face", colorPrimary: 0x103418, colorSecondary: 0x698826 })
         .step(self => {
-            atFullMast = self.y <= minimumY;
+            atSummit = self.y <= minimumY;
 
-            if (!atFullMast && playerObj.speed.y <= 0 && self.collides(playerObj)) {
+            if (!atSummit && playerObj.speed.y <= 0 && self.collides(playerObj)) {
                 self.y = Math.max(minimumY, self.y + Math.min(-1, playerObj.speed.y));
                 movedByPlayerSteps = 10;
             }
@@ -216,13 +221,13 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
                 self.texture = Tx.Town.Underneath.RiserFaceSurprise;
             }
             else {
-                self.texture = atFullMast ? Tx.Town.Underneath.RiserFaceHappy : Tx.Town.Underneath.RiserFace;
+                self.texture = atSummit ? Tx.Town.Underneath.RiserFaceHappy : Tx.Town.Underneath.RiserFace;
             }
         })
         .mixin(mxnBoilFlipH)
         .coro(function* (self) {
-            yield () => !atFullMast;
-            yield () => atFullMast;
+            yield () => !atSummit;
+            yield () => atSummit;
             Cutscene.play(function* () {
                 // TODO lovey VFX
                 objFxFieryBurst170px().at(self).show();
@@ -230,6 +235,7 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
                 yield* show("Thank you for bringing joy to this place!!!");
                 scene.camera.mode = "move_towards_player";
                 yield* DramaWallet.rewardValuables(100, self);
+                RpgProgress.flags.underneath.magicalRisingFace.reachedSummit = true;
             }, { speaker: self, camera: { start: "pan-to-speaker" } });
         });
 
