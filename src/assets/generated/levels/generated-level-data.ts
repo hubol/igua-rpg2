@@ -1707,6 +1707,7 @@ export const Lvl = {
     StoneRockSmallShaded1_13: d(Tx.Stone.RockSmallShaded1, { x: 2176, y: 392, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
     StoneRockSmallShaded1_14: d(Tx.Stone.RockSmallShaded1, { x: 2166, y: 397, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
     StoneRockSmallShaded1_15: d(Tx.Stone.RockSmallShaded1, { x: 2211, y: 392, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+    HeliumMachineOpenIndicator: d(Tx.Town.Underneath.OpenIndicator, { x: 1900, y: 381, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
     Sign: e(r["Sign"], { x: 1392, y: 360, values: { title: "Underneath", message: "Underneath New Balltown.\n\nThis sign is special.", name: "", depth: 0, isSpecial: true } }, "Entities"),
     Sign_1: e(r["Sign"], { x: 1488, y: 145, values: { title: "Almost", message: "Almost to New Balltown.\n\nThis sign is special.", name: "", depth: 0, isSpecial: true } }, "Entities"),
     EnemySuggestive: e(r["EnemySuggestive"], { x: 833, y: 318, uid: 174112182491000, values: { name: "", depth: 0, variant: "level1" } }, "Entities"),

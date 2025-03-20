@@ -163,9 +163,20 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
         }, -1)
         .show();
 
-    objText.SmallDigits("", { tint: 0x385719 })
+    lvl.HeliumMachineOpenIndicator.step(self => self.visible = tank.isValveOpen);
+
+    objText.SmallDigitsMono("", { tint: 0x385719 })
         .anchored(1, 0.5)
-        .step(self => self.text = "" + tank.heliumContent)
+        .step(self => {
+            if (tank.heliumContent < 10000) {
+                self.text = "" + tank.heliumContent;
+                self.pivot.x = 0;
+            }
+            else {
+                self.text = "9999+";
+                self.pivot.x = -3;
+            }
+        })
         .at(lvl.HeliumContentTextMarker)
         .zIndexed(ZIndex.TerrainDecals)
         .show();

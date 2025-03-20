@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 220 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 221 }];
 
 interface TxData {
   id: string;
@@ -56,7 +56,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Gear: tx({ id: "Enemy.Suggestive.Gear", atlas: 0, x: 522, y: 606, width: 32, height: 16 }),
         Mouth: tx({ id: "Enemy.Suggestive.Mouth", atlas: 0, x: 920, y: 410, width: 33, height: 6 }),
         Pupil: tx({ id: "Enemy.Suggestive.Pupil", atlas: 0, x: 1013, y: 0, width: 2, height: 8 }),
-        ScleraWide: tx({ id: "Enemy.Suggestive.ScleraWide", atlas: 0, x: 954, y: 410, width: 14, height: 6 }),
+        ScleraWide: tx({ id: "Enemy.Suggestive.ScleraWide", atlas: 0, x: 971, y: 410, width: 14, height: 6 }),
         Sclera: tx({ id: "Enemy.Suggestive.Sclera", atlas: 0, x: 1016, y: 685, width: 8, height: 16 }),
         Torso: tx({ id: "Enemy.Suggestive.Torso", atlas: 0, x: 938, y: 266, width: 86, height: 23 }),
       },
@@ -277,6 +277,7 @@ function txs<T>(tx: (data: TxData) => T) {
         HeliumCreator: tx({ id: "Town.Underneath.HeliumCreator", atlas: 0, x: 245, y: 695, width: 36, height: 38 }),
         HeliumPipe: tx({ id: "Town.Underneath.HeliumPipe", atlas: 0, x: 161, y: 690, width: 46, height: 30 }),
         HeliumTank: tx({ id: "Town.Underneath.HeliumTank", atlas: 0, x: 90, y: 699, width: 44, height: 34 }),
+        OpenIndicator: tx({ id: "Town.Underneath.OpenIndicator", atlas: 0, x: 954, y: 410, width: 16, height: 6 }),
         RiserFace: tx({ id: "Town.Underneath.RiserFace", atlas: 0, x: 309, y: 716, width: 28, height: 20 }),
       },
     },
@@ -294,7 +295,7 @@ function txs<T>(tx: (data: TxData) => T) {
       HorizontalBar9: tx({ id: "Ui.HorizontalBar9", atlas: 0, x: 505, y: 330, width: 500, height: 9 }),
       InteractionIndicator: tx({ id: "Ui.InteractionIndicator", atlas: 0, x: 297, y: 758, width: 22, height: 22 }),
       NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 1016, y: 715, width: 8, height: 8 }),
-      PlacementReticle: tx({ id: "Ui.PlacementReticle", atlas: 0, x: 969, y: 410, width: 6, height: 6 }),
+      PlacementReticle: tx({ id: "Ui.PlacementReticle", atlas: 0, x: 986, y: 410, width: 6, height: 6 }),
       Pocket: {
         CollectNotification: tx({ id: "Ui.Pocket.CollectNotification", atlas: 0, x: 809, y: 717, width: 76, height: 24 }),
       },
