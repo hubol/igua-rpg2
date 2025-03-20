@@ -13,7 +13,7 @@ import { mxnBoilFlipH } from "../mixins/mxn-boil-flip-h";
 import { mxnComputer } from "../mixins/mxn-computer";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
-import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
+import { objFxHeartBurst } from "../objects/effects/obj-fx-heart-burst";
 import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
 import { playerObj } from "../objects/obj-player";
 import { RpgCutscene } from "../rpg/rpg-cutscene";
@@ -229,8 +229,8 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
             yield () => !atSummit;
             yield () => atSummit;
             Cutscene.play(function* () {
-                // TODO lovey VFX
-                objFxFieryBurst170px().at(self).show();
+                // TODO lovey SFX
+                objFxHeartBurst.many(14, 5).at(self).show();
                 yield sleep(1000);
                 yield* show("Thank you for bringing joy to this place!!!");
                 scene.camera.mode = "move_towards_player";
