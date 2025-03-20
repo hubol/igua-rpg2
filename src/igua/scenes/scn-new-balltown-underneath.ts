@@ -17,6 +17,7 @@ import { objFxHeartBurst } from "../objects/effects/obj-fx-heart-burst";
 import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
 import { playerObj } from "../objects/obj-player";
 import { RpgCutscene } from "../rpg/rpg-cutscene";
+import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgPocket } from "../rpg/rpg-pocket";
 import { RpgProgress } from "../rpg/rpg-progress";
 
@@ -143,10 +144,10 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
                     if (yield* ask(`Trade ${pocketItemsCount} pocket item(s) for helium?`)) {
                         yield sleep(500);
                         // TODO need DramaPocket.empty
-                        const emptiedPocketItemsCount = RpgPocket.Methods.empty(RpgProgress.character.inventory.pocket);
+                        const emptied = RpgPocket.Methods.empty(RpgProgress.character.inventory.pocket);
                         yield sleep(500);
-                        // TODO should receive XP bonus for depositing computer chips
-                        tank.heliumContent += emptiedPocketItemsCount * 150;
+                        RpgExperienceRewarder.computer.onDepositComputerChips(emptied.items.ComputerChip);
+                        tank.heliumContent += emptied.totalItems * 150;
                         yield* show("Helium created.");
                     }
                 }

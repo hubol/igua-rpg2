@@ -1,6 +1,6 @@
 import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
-import { DataPocketItemInternalName } from "../data/data-pocket-items";
+import { DataPocketItemInternalName, DataPocketItems } from "../data/data-pocket-items";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 
 export namespace RpgPocket {
@@ -29,19 +29,30 @@ export namespace RpgPocket {
     }
 
     export const Methods = {
-        empty(model: Model): Integer {
-            let itemsRemovedCount = 0;
+        empty(model: Model) {
+            let totalItems = 0;
+
+            const items = Object.keys(DataPocketItems).reduce((obj, key) => {
+                obj[key] = 0;
+                return obj;
+            }, {} as Record<Item, Integer>);
 
             for (const slot of model.slots) {
                 if (slot.item !== null) {
-                    itemsRemovedCount += slot.count;
+                    items[slot.item] += slot.count;
+                    totalItems += slot.count;
                     slot.item = null;
                 }
 
                 slot.count = 0;
             }
 
-            return itemsRemovedCount;
+            RpgExperienceRewarder.pocket.onRemoveItems(totalItems);
+
+            return {
+                items,
+                totalItems,
+            };
         },
         receive(model: Model, item: Item) {
             // TODO assert model, item are valid
