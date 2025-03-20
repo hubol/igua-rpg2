@@ -6,12 +6,14 @@ import { Tx } from "../../assets/textures";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
-import { Cutscene } from "../globals";
+import { Cutscene, scene } from "../globals";
 import { mxnBoilFlipH } from "../mixins/mxn-boil-flip-h";
 import { mxnComputer } from "../mixins/mxn-computer";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
 import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
 import { playerObj } from "../objects/obj-player";
 import { RpgCutscene } from "../rpg/rpg-cutscene";
@@ -192,35 +194,50 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
     // TODO reward
     // TODO cute sfx, vfx
 
-    const maximumPivotY = Math.abs(lvl.MagicRisingBar.y - lvl.MagicRisingFace.y);
+    const minimumY = lvl.MagicRisingBar.y;
 
     const group: Container = lvl.MagicRisingFaceGroup;
 
     let movedByPlayerSteps = 0;
+    let atFullMast = false;
 
-    lvl.MagicRisingFace.step(self => {
-        const atFullMast = group.pivot.y >= maximumPivotY;
+    lvl.MagicRisingFace
+        .mixin(mxnSpeaker, { name: "Magical Rising Face", colorPrimary: 0x103418, colorSecondary: 0x698826 })
+        .step(self => {
+            atFullMast = self.y <= minimumY;
 
-        if (!atFullMast && playerObj.speed.y <= 0 && self.collides(playerObj)) {
-            group.pivot.y = Math.min(maximumPivotY, group.pivot.y - Math.min(-1, playerObj.speed.y));
-            movedByPlayerSteps = 10;
-        }
+            if (!atFullMast && playerObj.speed.y <= 0 && self.collides(playerObj)) {
+                self.y = Math.max(minimumY, self.y + Math.min(-1, playerObj.speed.y));
+                movedByPlayerSteps = 10;
+            }
 
-        if (movedByPlayerSteps > 0) {
-            movedByPlayerSteps--;
-            self.texture = Tx.Town.Underneath.RiserFaceSurprise;
-        }
-        else {
-            self.texture = atFullMast ? Tx.Town.Underneath.RiserFaceHappy : Tx.Town.Underneath.RiserFace;
-        }
-    })
-        .mixin(mxnBoilFlipH);
+            if (movedByPlayerSteps > 0) {
+                movedByPlayerSteps--;
+                self.texture = Tx.Town.Underneath.RiserFaceSurprise;
+            }
+            else {
+                self.texture = atFullMast ? Tx.Town.Underneath.RiserFaceHappy : Tx.Town.Underneath.RiserFace;
+            }
+        })
+        .mixin(mxnBoilFlipH)
+        .coro(function* (self) {
+            yield () => !atFullMast;
+            yield () => atFullMast;
+            Cutscene.play(function* () {
+                // TODO lovey VFX
+                objFxFieryBurst170px().at(self).show();
+                yield sleep(1000);
+                yield* show("Thank you for bringing joy to this place!!!");
+                scene.camera.mode = "move_towards_player";
+                yield* DramaWallet.rewardValuables(100, self);
+            }, { speaker: self, camera: { start: "pan-to-speaker" } });
+        });
 
     const barMaskObj = new Graphics()
         .beginFill(0x103418)
         .drawRect(-2, 0, 4, 512)
         .beginFill(0x08270E)
         .drawRect(-2, 128, 4, 512)
-        .at(lvl.MagicRisingFace);
+        .step(self => self.at(lvl.MagicRisingFace));
     group.addChildAt(barMaskObj, 0);
 }
