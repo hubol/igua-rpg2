@@ -94,6 +94,9 @@ export function getInitialRpgProgress() {
                 homeowner: {
                     hasClearedHouseOfEnemies: false,
                 },
+                magicalRisingFace: {
+                    reachedSummit: false,
+                },
                 tunneler: {
                     isLeftDoorLocked: true,
                 },
