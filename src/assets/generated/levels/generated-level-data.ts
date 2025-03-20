@@ -1457,6 +1457,7 @@ export const Lvl = {
     Slope_20: e(r["Slope"], { x: 1992, y: 392, width: 32, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x103418 }, "TerrainEntities"),
     Block_19: e(r["Block"], { x: 1992, y: 408, width: 32, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x103418 }, "TerrainEntities"),
     Block_20: e(r["Block"], { x: 2032, y: 0, width: 32, height: 264, values: { name: "", depth: 0, visible: true }, tint: 0x103418 }, "TerrainEntities"),
+    Block_21: e(r["Block"], { x: 2272, y: 208, width: 24, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x103418 }, "TerrainEntities"),
     ShapesConfetti45deg: d(Tx.Shapes.Confetti45deg, { x: 1836, y: 420, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x08270e }, "TerrainDecals"),
     ShapesConfetti45deg_1: d(Tx.Shapes.Confetti45deg, { x: 1877, y: 422, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x08270e }, "TerrainDecals"),
     TownUnderneathHeliumPipe: d(Tx.Town.Underneath.HeliumPipe, { x: 1893, y: 420, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x08270e }, "TerrainDecals"),

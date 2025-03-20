@@ -5048,6 +5048,19 @@
           "originY": 0,
           "tint": "#103418",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 69,
+          "_eid": "93117141",
+          "x": 2272,
+          "y": 208,
+          "width": 24,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#103418",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },

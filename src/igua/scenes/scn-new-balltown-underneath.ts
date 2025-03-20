@@ -2,11 +2,13 @@ import { Container, Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Tx } from "../../assets/textures";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { ask, show } from "../drama/show";
 import { Cutscene } from "../globals";
+import { mxnBoilFlipH } from "../mixins/mxn-boil-flip-h";
 import { mxnComputer } from "../mixins/mxn-computer";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
@@ -194,11 +196,25 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
 
     const group: Container = lvl.MagicRisingFaceGroup;
 
+    let movedByPlayerSteps = 0;
+
     lvl.MagicRisingFace.step(self => {
-        if (group.pivot.y < maximumPivotY && playerObj.speed.y <= 0 && self.collides(playerObj)) {
+        const atFullMast = group.pivot.y >= maximumPivotY;
+
+        if (!atFullMast && playerObj.speed.y <= 0 && self.collides(playerObj)) {
             group.pivot.y = Math.min(maximumPivotY, group.pivot.y - Math.min(-1, playerObj.speed.y));
+            movedByPlayerSteps = 10;
         }
-    });
+
+        if (movedByPlayerSteps > 0) {
+            movedByPlayerSteps--;
+            self.texture = Tx.Town.Underneath.RiserFaceSurprise;
+        }
+        else {
+            self.texture = atFullMast ? Tx.Town.Underneath.RiserFaceHappy : Tx.Town.Underneath.RiserFace;
+        }
+    })
+        .mixin(mxnBoilFlipH);
 
     const barMaskObj = new Graphics()
         .beginFill(0x103418)
