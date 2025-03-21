@@ -78,7 +78,7 @@ class RngBase {
 export class PseudoRng extends RngBase {
     public seed: number;
 
-    constructor(seed = Rng.int(10000)) {
+    constructor(seed = Rng.int(8_000_000, 16_000_000)) {
         super();
         this.seed = Math.abs(Math.round(seed) % 2147483647);
     }
