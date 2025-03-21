@@ -379,12 +379,14 @@ export function objAngelSuggestive(variantKey: VariantKey) {
                     && playerObj.speed.y >= 0
                 ) {
                     faceObj.mouthObj.flipV(-1);
+                    enemyObj.play(Sfx.Enemy.Suggestive.Lift.rate(0.9, 1.1));
                     yield interpvr(enemyObj.pivot).factor(factor.sine).to(0, 16).over(250);
                     objAngelSuggestiveElectricalPulseGround(enemyObj.status).at(enemyObj).show().zIndexed(
                         ZIndex.Entities - 1,
                     );
                     yield sleep(500);
                     faceObj.mouthObj.flipV(1);
+                    enemyObj.play(Sfx.Enemy.Suggestive.Unlift.rate(0.9, 1.1));
                     yield interpvr(enemyObj.pivot).factor(factor.sine).to(0, 0).over(250);
                     yield sleep(1000);
                 }

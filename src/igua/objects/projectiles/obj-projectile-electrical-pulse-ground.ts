@@ -1,6 +1,8 @@
 import { Graphics } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { holdf } from "../../../lib/game-engine/routines/hold";
 import { interpr } from "../../../lib/game-engine/routines/interp";
+import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { PseudoRng, Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
 import { mxnBoilSeed } from "../../mixins/mxn-boil-seed";
@@ -18,10 +20,16 @@ export function objProjectileElectricalPulseGround(initialHeight: number) {
         .mixin(mxnPhysics, { gravity: 0.2, physicsRadius: 12, physicsOffset: [0, -12] })
         .mixin(mxnDischargeable)
         .coro(function* (self) {
+            // TODO anytime I'm doing this, this is probably a bug hahahah
+            yield sleepf(2);
+            self.play(Sfx.Effect.ElectricPulseGroundAppear.rate(0.9, 1.1));
+        })
+        .coro(function* (self) {
             yield holdf(() => self.isOnGround, 2);
             yield interpr(internalState, "height").to(0).over(500);
             self.mxnDischargeable.charge();
             yield () => self.mxnDischargeable.isDischarged;
+            self.play(Sfx.Effect.ElectricPulseGroundDischarge.rate(0.9, 1.1));
             self.speed.x = 0;
             yield interpr(internalState, "height").to(64).over(250);
             self.destroy();
