@@ -1,7 +1,8 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
-import { interp } from "../../../lib/game-engine/routines/interp";
+import { Coro } from "../../../lib/game-engine/routines/coro";
+import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear, nlerp } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
@@ -9,6 +10,7 @@ import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
+import { ZIndex } from "../../core/scene/z-index";
 import { scene } from "../../globals";
 import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
@@ -19,6 +21,7 @@ import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { RpgStatus } from "../../rpg/rpg-status";
 import { playerObj } from "../obj-player";
 import { objPocketableItem } from "../obj-pocketable-item";
+import { objProjectileElectricalPulseGround } from "../projectiles/obj-projectile-electrical-pulse-ground";
 import { objSpikedCanonball } from "../projectiles/obj-spiked-canonball";
 import { objAngelEyes, ObjAngelEyesArgs } from "./obj-angel-eyes";
 import { objAngelPlantLegs } from "./obj-angel-plant-legs";
@@ -317,6 +320,9 @@ export function objAngelSuggestive(variantKey: VariantKey) {
     const variant = variants[variantKey];
     const theme = variant.theme;
 
+    // TODO should be more sophisticated
+    const usesEmoAttack = variantKey === "level1";
+
     const faceObj = objAngelSuggestiveFace(theme);
 
     const irregularShadowObj = Sprite.from(Tx.Light.ShadowIrregularSmallRound).anchored(0.5, 0.5).tinted(0xC00000).at(
@@ -363,6 +369,25 @@ export function objAngelSuggestive(variantKey: VariantKey) {
                 bodyObj.bulge.phase = "recovering";
                 bodyObj.bulge.unit = 0;
                 yield interp(bodyObj.bulge, "unit").to(1).over(1000);
+                if (!usesEmoAttack) {
+                    continue;
+                }
+
+                if (
+                    Math.abs(playerObj.x - enemyObj.x) < 300
+                    && Math.abs(playerObj.y - enemyObj.y) < 60
+                    && playerObj.speed.y >= 0
+                ) {
+                    faceObj.mouthObj.flipV(-1);
+                    yield interpvr(enemyObj.pivot).factor(factor.sine).to(0, 16).over(250);
+                    objAngelSuggestiveElectricalPulseGround(enemyObj.status).at(enemyObj).show().zIndexed(
+                        ZIndex.Entities - 1,
+                    );
+                    yield sleep(500);
+                    faceObj.mouthObj.flipV(1);
+                    yield interpvr(enemyObj.pivot).factor(factor.sine).to(0, 0).over(250);
+                    yield sleep(1000);
+                }
             }
         });
 
@@ -381,8 +406,30 @@ const atkAngelSuggestiveSpikedCanonball = RpgAttack.create({
     physical: 30,
 });
 
+const atkAngelSuggestiveElectricalPulseGround = RpgAttack.create({
+    emotional: 40,
+});
+
 function objAngelSuggestiveSpikedCanonball(status: RpgStatus.Model) {
     return objSpikedCanonball()
         .mixin(mxnRpgAttack, { attack: atkAngelSuggestiveSpikedCanonball, attacker: status })
         .mixin(mxnStopAndDieWhenHitGround);
+}
+
+function objAngelSuggestiveElectricalPulseGround(status: RpgStatus.Model) {
+    return objProjectileElectricalPulseGround(32)
+        .mixin(mxnRpgAttack, { attack: atkAngelSuggestiveElectricalPulseGround, attacker: status })
+        .coro(function* (self) {
+            yield () => self.mxnDischargeable.isCharged;
+            self.speed.x = (Math.sign(playerObj.x - self.x) || 1) * 3;
+            yield* Coro.race([
+                Coro.all([
+                    () => Math.abs(playerObj.x - self.x) < 10,
+                    sleep(333),
+                ]),
+                sleep(2000),
+            ]);
+            self.mxnDischargeable.discharge();
+        })
+        .show();
 }
