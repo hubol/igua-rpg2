@@ -17,7 +17,7 @@ export namespace RpgEnemyRank {
                 health: status?.health ?? status?.healthMax ?? 30,
                 healthMax: status?.healthMax ?? status?.health ?? 30,
                 invulnerable: status?.invulnerable ?? 0,
-                invulnerableMax: status?.invulnerableMax ?? 15,
+                invulnerableMax: status?.invulnerableMax ?? 10,
                 faction: status?.faction ?? RpgFaction.Enemy,
                 pride: status?.pride ?? 0,
                 conditions: {
