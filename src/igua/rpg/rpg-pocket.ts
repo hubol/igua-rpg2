@@ -137,5 +137,6 @@ export namespace RpgPocket {
         },
     };
 
+    export type EmptyResult = ReturnType<typeof Methods["empty"]>;
     export type ReceiveResult = ReturnType<typeof Methods["receive"]>;
 }

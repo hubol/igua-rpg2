@@ -6,6 +6,7 @@ import { Tx } from "../../assets/textures";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { DramaPocket } from "../drama/drama-pocket";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
@@ -143,9 +144,8 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
 
                     if (yield* ask(`Trade ${pocketItemsCount} pocket item(s) for helium?`)) {
                         yield sleep(500);
-                        // TODO need DramaPocket.empty
-                        const emptied = RpgPocket.Methods.empty(RpgProgress.character.inventory.pocket);
-                        yield sleep(500);
+                        const emptied = yield* DramaPocket.empty(lvl.TownUnderneathHeliumCreator);
+                        // TODO feels like this could somehow be done in empty, if recipient type had to be specified!
                         RpgExperienceRewarder.computer.onDepositComputerChips(emptied.items.ComputerChip);
                         tank.heliumContent += emptied.totalItems * 150;
                         yield* show("Helium created.");
