@@ -42,7 +42,7 @@ export function objHud() {
         objCutsceneLetterbox(),
         container(healthBarObj, ...statusObjs).at(3, 3),
         objInteractIndicator(),
-        objExperienceIndicatorV2(),
+        objExperienceIndicator(),
     )
         .merge({ healthBarObj, effectiveHeight: 0 })
         .step(self => {
@@ -106,27 +106,42 @@ function objInteractIndicator() {
     );
 }
 
-type ExperienceIndicatorV2Config = [
-    experienceKey: RpgProgressExperience,
-    bgTint: RgbInt,
+interface ExperienceIndicatorConfig {
+    experienceKey: RpgProgressExperience;
+    tint: RgbInt;
+}
+
+const experienceIndicatorConfigs: Array<ExperienceIndicatorConfig> = [
+    {
+        experienceKey: "combat",
+        tint: 0xFF401E,
+    },
+    {
+        experienceKey: "computer",
+        tint: 0xEABB00,
+    },
+    {
+        experienceKey: "gambling",
+        tint: 0x19A859,
+    },
+    {
+        experienceKey: "pocket",
+        tint: 0x3775E8,
+    },
+    {
+        experienceKey: "social",
+        tint: 0xA074E8,
+    },
 ];
 
-const experienceIndicatorV2Configs: Array<ExperienceIndicatorV2Config> = [
-    ["combat", 0xFF401E],
-    ["computer", 0xEABB00],
-    ["gambling", 0x19A859],
-    ["pocket", 0x3775E8],
-    ["social", 0xA074E8],
-];
-
-function objExperienceIndicatorV2() {
-    const weights = experienceIndicatorV2Configs.map(([_, tint]) => ({
+function objExperienceIndicator() {
+    const weights = experienceIndicatorConfigs.map(({ tint }) => ({
         tint,
         value: 0,
     }));
 
-    const deltaObjs = experienceIndicatorV2Configs.map(([experienceKey, tint]) =>
-        objExperienceIndicatorV2Delta(tint)
+    const deltaObjs = experienceIndicatorConfigs.map(({ experienceKey, tint }) =>
+        objExperienceIndicatorDelta(tint)
             .invisible()
             .coro(function* (self) {
                 let value = RpgProgress.character.experience[experienceKey];
@@ -158,8 +173,8 @@ function objExperienceIndicatorV2() {
     );
 
     function updateWeights() {
-        for (let i = 0; i < experienceIndicatorV2Configs.length; i++) {
-            weights[i].value = RpgProgress.character.experience[experienceIndicatorV2Configs[i][0]];
+        for (let i = 0; i < experienceIndicatorConfigs.length; i++) {
+            weights[i].value = RpgProgress.character.experience[experienceIndicatorConfigs[i].experienceKey];
         }
     }
 
@@ -184,7 +199,7 @@ function objExperienceIndicatorV2() {
     return obj;
 }
 
-function objExperienceIndicatorV2Delta(tint: RgbInt) {
+function objExperienceIndicatorDelta(tint: RgbInt) {
     const state = {
         total: 0,
         delta: 0,
