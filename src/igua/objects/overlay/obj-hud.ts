@@ -3,18 +3,15 @@ import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { holdf } from "../../../lib/game-engine/routines/hold";
-import { factor, interp, interpr, interpvr } from "../../../lib/game-engine/routines/interp";
-import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
+import { factor, interp } from "../../../lib/game-engine/routines/interp";
+import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
-import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
-import { Rng } from "../../../lib/math/rng";
+import { RgbInt } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
-import { Empty } from "../../../lib/types/empty";
 import { Null } from "../../../lib/types/null";
 import { renderer } from "../../current-pixi-renderer";
 import { DataPocketItems } from "../../data/data-pocket-items";
 import { Cutscene } from "../../globals";
-import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { CtxInteract } from "../../mixins/mxn-interact";
 import { RpgPlayer } from "../../rpg/rpg-player";
@@ -45,7 +42,6 @@ export function objHud() {
         objCutsceneLetterbox(),
         container(healthBarObj, ...statusObjs).at(3, 3),
         objInteractIndicator(),
-        objExperienceIndicator(),
         objExperienceIndicatorV2(),
     )
         .merge({ healthBarObj, effectiveHeight: 0 })
@@ -183,7 +179,7 @@ function objExperienceIndicatorV2() {
                 maximumX = deltaObj.x;
             }
         })
-        .at(4, renderer.height - 8);
+        .at(renderer.width - 128 - 4, renderer.height - 8);
 
     return obj;
 }
@@ -218,132 +214,6 @@ function objExperienceIndicatorV2Delta(tint: RgbInt) {
         })
         .pivoted(0, 9);
 }
-
-type ExperienceIndicatorConfig = [
-    experienceKey: RpgProgressExperience,
-    textureIndex: Integer,
-    bgTint: RgbInt,
-];
-
-const experienceIndicatorConfigs: Array<ExperienceIndicatorConfig> = [
-    ["computer", 5, 0xFF401E],
-    ["gambling", 4, 0xEABB00],
-    ["social", 3, 0x19A859],
-    ["pocket", 2, 0xEABB00],
-    ["combat", 1, 0x19A859],
-];
-
-function objExperienceIndicator() {
-    const obj = container<ObjExperienceIncrement>().at(renderer.width - 4, renderer.height - 4);
-
-    for (const [experience, textureIndex, bgTint] of experienceIndicatorConfigs) {
-        obj.coro(function* () {
-            let previous = RpgProgress.character.experience[experience];
-
-            while (true) {
-                yield () =>
-                    !Boolean(Cutscene.current) && Cutscene.sinceCutsceneStepsCount > 15
-                    && previous !== RpgProgress.character.experience[experience];
-                const next = RpgProgress.character.experience[experience];
-                const diff = next - previous;
-
-                const existingIncrementObj = obj.children.find(x => x.experience === experience && x.canBeUpdated);
-
-                if (existingIncrementObj) {
-                    existingIncrementObj.target = next;
-                    existingIncrementObj.delta += diff;
-                    previous = next;
-                    continue;
-                }
-
-                const bounds = obj.getBounds(false, r);
-                objExperienceIncrement(experience, textureIndex, bgTint, previous, diff, next).show(obj).at(
-                    0,
-                    -bounds.height + Math.sign(bounds.height) * -4,
-                );
-                previous = next;
-            }
-        })
-            .step(() => {
-                if (obj.children.length < 1) {
-                    return;
-                }
-
-                let max = Number.MIN_SAFE_INTEGER;
-
-                for (const child of obj.children) {
-                    max = Math.max(child.y, max);
-                }
-
-                if (max >= 0) {
-                    return;
-                }
-
-                for (const child of obj.children) {
-                    child.y += 1;
-                }
-            });
-    }
-
-    return obj;
-}
-
-const txsExperienceIncrement = Tx.Ui.Experience.Increment.split({ width: 44 });
-
-function objExperienceIncrement(
-    experience: RpgProgressExperience,
-    index: number,
-    bgTint: RgbInt,
-    start: number,
-    delta: number,
-    target: number,
-) {
-    const state = { value: start };
-    const totalTextObj = objText.Large("", { tint: 0x000000 }).anchored(1, 0.5).at(-46, -15);
-    const deltaTextObj = objText.SmallDigits("", { tint: 0x000000 }).anchored(1, 0.5).at(-68, -6);
-
-    const bgObj = Sprite.from(Tx.Ui.Experience.IncrementBg).mixin(mxnBoilMirrorRotate, 2).tinted(bgTint).anchored(
-        0.5,
-        0.5,
-    )
-        .at(
-            0,
-            -16,
-        );
-
-    return container(
-        bgObj,
-        Sprite.from(txsExperienceIncrement[index]).anchored(1, 1),
-        totalTextObj,
-        deltaTextObj,
-    )
-        .merge({ experience, target, delta, canBeUpdated: true })
-        .step((self) => {
-            totalTextObj.text = `${state.value} XP`;
-            deltaTextObj.text = `+${self.delta}`;
-            bgObj.x = Math.min(
-                bgObj.x,
-                Math.round(
-                    Tx.Ui.Experience.IncrementBg.width / 2 - Math.max(totalTextObj.width + 50, deltaTextObj.width + 72),
-                ),
-            );
-        })
-        .coro(function* (self) {
-            const width = self.width;
-            while (self.target !== state.value) {
-                yield interpr(state, "value").to(self.target).over(500);
-                yield* Coro.race([
-                    () => self.target !== state.value,
-                    sleep(1500),
-                ]);
-            }
-            self.canBeUpdated = false;
-            yield interpvr(self.pivot).steps(3).to(-width, 0).over(200);
-            self.destroy();
-        });
-}
-
-type ObjExperienceIncrement = ReturnType<typeof objExperienceIncrement>;
 
 export type ObjHud = ReturnType<typeof objHud>;
 
