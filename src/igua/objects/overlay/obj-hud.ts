@@ -2,11 +2,14 @@ import { Container, DisplayObject, Graphics, Rectangle, Sprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
+import { holdf } from "../../../lib/game-engine/routines/hold";
 import { factor, interp, interpr, interpvr } from "../../../lib/game-engine/routines/interp";
-import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
+import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
+import { Empty } from "../../../lib/types/empty";
 import { Null } from "../../../lib/types/null";
 import { renderer } from "../../current-pixi-renderer";
 import { DataPocketItems } from "../../data/data-pocket-items";
@@ -19,6 +22,7 @@ import { RpgProgress, RpgProgressExperience } from "../../rpg/rpg-progress";
 import { playerObj } from "../obj-player";
 import { objHealthBar } from "./obj-health-bar";
 import { objStatusBar } from "./obj-status-bar";
+import { objUiSubdividedBar } from "./obj-ui-subdivided-bar";
 
 const Consts = {
     StatusTextTint: 0x00ff00,
@@ -42,6 +46,7 @@ export function objHud() {
         container(healthBarObj, ...statusObjs).at(3, 3),
         objInteractIndicator(),
         objExperienceIndicator(),
+        objExperienceIndicatorV2(),
     )
         .merge({ healthBarObj, effectiveHeight: 0 })
         .step(self => {
@@ -103,6 +108,115 @@ function objInteractIndicator() {
                 },
             ),
     );
+}
+
+type ExperienceIndicatorV2Config = [
+    experienceKey: RpgProgressExperience,
+    bgTint: RgbInt,
+];
+
+const experienceIndicatorV2Configs: Array<ExperienceIndicatorV2Config> = [
+    ["combat", 0xFF401E],
+    ["computer", 0xEABB00],
+    ["gambling", 0x19A859],
+    ["pocket", 0x3775E8],
+    ["social", 0xA074E8],
+];
+
+function objExperienceIndicatorV2() {
+    const weights = experienceIndicatorV2Configs.map(([_, tint]) => ({
+        tint,
+        value: 0,
+    }));
+
+    const deltaObjs = experienceIndicatorV2Configs.map(([experienceKey, tint]) =>
+        objExperienceIndicatorV2Delta(tint)
+            .invisible()
+            .coro(function* (self) {
+                let value = RpgProgress.character.experience[experienceKey];
+                while (true) {
+                    yield () => RpgProgress.character.experience[experienceKey] != value;
+                    self.visible = true;
+                    self.state.total = value;
+                    let nextValue = RpgProgress.character.experience[experienceKey];
+                    yield holdf(() => {
+                        self.state.delta = nextValue - value;
+                        const latestValue = RpgProgress.character.experience[experienceKey];
+                        if (latestValue !== nextValue) {
+                            nextValue = latestValue;
+                            return false;
+                        }
+
+                        return true;
+                    }, 120);
+                    value = nextValue;
+                    self.state.total = value;
+                    self.state.delta = 0;
+                    yield* Coro.race([
+                        () => RpgProgress.character.experience[experienceKey] != value,
+                        sleepf(120),
+                    ]);
+                    self.visible = false;
+                }
+            })
+    );
+
+    function updateWeights() {
+        for (let i = 0; i < experienceIndicatorV2Configs.length; i++) {
+            weights[i].value = RpgProgress.character.experience[experienceIndicatorV2Configs[i][0]];
+        }
+    }
+
+    updateWeights();
+    const subdividedBarObj = objUiSubdividedBar({ width: 128, height: 4, tint: 0x404040, weights });
+    const obj = container(subdividedBarObj, ...deltaObjs)
+        .step(updateWeights)
+        .step(() => {
+            let maximumX = 128;
+            for (let i = deltaObjs.length - 1; i >= 0; i--) {
+                const deltaObj = deltaObjs[i];
+                const rectangle = subdividedBarObj.renderedWeights[i];
+                if (!deltaObj.visible) {
+                    continue;
+                }
+                deltaObj.x = Math.min(rectangle.x + rectangle.width, maximumX) - deltaObj.width;
+                maximumX = deltaObj.x;
+            }
+        })
+        .at(4, renderer.height - 8);
+
+    return obj;
+}
+
+function objExperienceIndicatorV2Delta(tint: RgbInt) {
+    const state = {
+        total: 0,
+        delta: 0,
+    };
+
+    const gfx = new Graphics();
+    const totalTextObj = objText.Medium("", { tint: 0xffffff }).pivoted(-1, -1);
+    const deltaTextObj = objText.SmallDigits("", { tint }).pivoted(-1, -2);
+
+    return container(gfx, totalTextObj, deltaTextObj)
+        .merge({ state })
+        .step(() => {
+            totalTextObj.text = "" + state.total;
+            deltaTextObj.visible = state.delta > 0;
+            if (deltaTextObj.visible) {
+                deltaTextObj.x = totalTextObj.width + 2;
+                deltaTextObj.text = "+" + state.delta;
+            }
+
+            const { width, height } = totalTextObj;
+            gfx.clear()
+                .beginFill(tint).drawRect(0, 0, width + 2, height + 2);
+
+            if (deltaTextObj.visible) {
+                gfx.beginFill(0xffffff).drawRect(width + 2, 0, deltaTextObj.width + 2, height + 2);
+            }
+        })
+        .pivoted(0, 9);
 }
 
 type ExperienceIndicatorConfig = [
