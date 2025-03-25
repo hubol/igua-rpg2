@@ -11,6 +11,14 @@ const computerInteractionsToExperience = {
     "medium_task": 14,
 } satisfies Record<ComputerInteractionKind, Integer>;
 
+type SpeakKind = "first_ever" | "first_in_cutscene" | "default";
+
+const speaksToExperience = {
+    first_ever: 25,
+    first_in_cutscene: 2,
+    default: 1,
+} satisfies Record<SpeakKind, Integer>;
+
 export const RpgExperienceRewarder = {
     combat: {
         onAttackDamage(attack: RpgAttack.Model, damageDealtToEnemy: Integer) {
@@ -54,8 +62,8 @@ export const RpgExperienceRewarder = {
         },
     },
     social: {
-        onSpeakWithNpc(isFirstTimeSpeaking: boolean) {
-            RpgProgress.character.experience.social += isFirstTimeSpeaking ? 10 : 1;
+        onNpcSpeak(kind: SpeakKind) {
+            RpgProgress.character.experience.social += speaksToExperience[kind];
         },
     },
 };

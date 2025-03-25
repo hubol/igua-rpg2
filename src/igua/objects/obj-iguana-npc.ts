@@ -54,11 +54,18 @@ export function objIguanaNpc<TName extends string = NpcPersonaInternalName>({ pe
             }
         })
         .handles("mxnSpeaker.speakingStarted", () => {
-            if (Cutscene.current && !Cutscene.current.attributes.npcNamesSpoken.has(persona.internalName)) {
-                RpgExperienceRewarder.social.onSpeakWithNpc(!RpgProgress.uids.metNpcs.has(persona.internalName));
-                RpgProgress.uids.metNpcs.add(persona.internalName);
+            const playerHasMetNpc = RpgProgress.uids.metNpcs.has(persona.internalName);
+            const spokenDuringCutscene = Cutscene.current
+                && Cutscene.current.attributes.npcNamesSpoken.has(persona.internalName);
+
+            RpgExperienceRewarder.social.onNpcSpeak(
+                playerHasMetNpc ? (spokenDuringCutscene ? "default" : "first_in_cutscene") : "first_ever",
+            );
+            RpgProgress.uids.metNpcs.add(persona.internalName);
+            if (Cutscene.current) {
                 Cutscene.current.attributes.npcNamesSpoken.add(persona.internalName);
             }
+
             speakingStartedCount++;
             isSpeaking = true;
         })
