@@ -42,6 +42,7 @@ export function objUiSubdividedBar(args: ObjUiSubdividedBarArgs) {
 
             let nextX = 0;
             let maxWidth = args.width;
+            let remainingNonZeroCount = nonZeroCount;
 
             for (let i = 0; i < args.weights.length; i++) {
                 const weight = args.weights[i].value;
@@ -56,7 +57,9 @@ export function objUiSubdividedBar(args: ObjUiSubdividedBarArgs) {
                     continue;
                 }
 
-                r.width = nonZeroCount === 0 ? maxWidth : Math.min(
+                remainingNonZeroCount--;
+
+                r.width = remainingNonZeroCount === 0 ? maxWidth : Math.min(
                     maxWidth,
                     1 + Math.round((weight / totalWeight) * effectiveAvailableWidth),
                 );
