@@ -46,6 +46,7 @@ export function getInitialRpgProgress() {
                 combat: 0,
                 computer: 0,
                 gambling: 0,
+                jump: 0,
                 pocket: 0,
                 social: 0,
             },

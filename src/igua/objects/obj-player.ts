@@ -10,6 +10,7 @@ import { IguanaLooks } from "../iguana/looks";
 import { force } from "../mixins/mxn-physics";
 import { MxnRpgStatus, mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
+import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgPlayer } from "../rpg/rpg-player";
 import { RpgProgress } from "../rpg/rpg-progress";
@@ -116,9 +117,8 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             },
         })
         .step(() => {
-            const ballonPhysicsLevel = getBallonPhysicsLevel(
-                RpgProgress.character.status.conditions.helium.ballons.length,
-            );
+            const ballonsCount = RpgProgress.character.status.conditions.helium.ballons.length;
+            const ballonPhysicsLevel = getBallonPhysicsLevel(ballonsCount);
 
             puppet.terminalVelocity = Math.max(
                 (ballonPhysicsLevel === 0
@@ -164,9 +164,11 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                         yield interp(puppet, "sparklesPerFrame").to(0).over(500);
                     });
                     puppet.speed.y = PlayerConsts.JumpSpeedAtSpecialSign;
+                    RpgExperienceRewarder.jump.onJump(ballonsCount, true);
                 }
                 else {
                     puppet.speed.y = PlayerConsts.JumpSpeed;
+                    RpgExperienceRewarder.jump.onJump(ballonsCount, false);
                 }
             }
         })

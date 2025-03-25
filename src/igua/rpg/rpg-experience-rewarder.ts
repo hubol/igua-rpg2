@@ -53,6 +53,11 @@ export const RpgExperienceRewarder = {
             RpgProgress.character.experience.gambling += prize;
         },
     },
+    jump: {
+        onJump(ballonsCount: Integer, isSpecial: boolean) {
+            RpgProgress.character.experience.jump += (isSpecial ? 4 : 1) + ballonsCount;
+        },
+    },
     pocket: {
         onReceive(result: RpgPocket.ReceiveResult) {
             if (result.count > 0 && result.count % 10 === 0) {
