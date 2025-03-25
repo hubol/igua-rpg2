@@ -23,7 +23,7 @@ export const RpgExperienceRewarder = {
     combat: {
         onAttackDamage(attack: RpgAttack.Model, damageDealtToEnemy: Integer) {
             if (attack.quirks.isPlayerClawMeleeAttack) {
-                RpgProgress.character.experience.combat += 3;
+                RpgProgress.character.experience.combat += 4;
             }
             else if (attack.quirks.isPlayerMeleeAttack) {
                 RpgProgress.character.experience.combat += 1;
@@ -34,7 +34,7 @@ export const RpgExperienceRewarder = {
             }
         },
         onEnemyDefeat(enemyMaxHealth: Integer) {
-            RpgProgress.character.experience.combat += Math.ceil(enemyMaxHealth / 3);
+            RpgProgress.character.experience.combat += Math.ceil(enemyMaxHealth / 5);
         },
     },
     computer: {
@@ -55,7 +55,12 @@ export const RpgExperienceRewarder = {
     },
     pocket: {
         onReceive(result: RpgPocket.ReceiveResult) {
-            RpgProgress.character.experience.pocket += result.reset ? 2 : 1;
+            if (result.count > 0 && result.count % 10 === 0) {
+                RpgProgress.character.experience.pocket += 10;
+            }
+            else {
+                RpgProgress.character.experience.pocket += result.reset ? 2 : 1;
+            }
         },
         onRemoveItems(count: Integer) {
             RpgProgress.character.experience.pocket += count * 2;
