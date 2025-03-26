@@ -131,7 +131,6 @@ export namespace RpgStatus {
                 model.conditions.wetness.value = Math.max(0, model.conditions.wetness.value - model.recoveries.wetness);
             }
             if (model.state.ballonHealthMayDrain && count % 8 === 0) {
-                // TODO ballon health should only drain while airborne!
                 let i = 0;
                 while (i < model.conditions.helium.ballons.length) {
                     const ballon = model.conditions.helium.ballons[i];
