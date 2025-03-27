@@ -8,6 +8,7 @@ import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPocket } from "./rpg-pocket";
+import { RpgQuests } from "./rpg-quests";
 import { RpgStatus } from "./rpg-status";
 
 export function getInitialRpgProgress() {
@@ -48,6 +49,7 @@ export function getInitialRpgProgress() {
                 gambling: 0,
                 jump: 0,
                 pocket: 0,
+                quest: 0,
                 social: 0,
             },
             looks: getDefaultLooks(),
@@ -56,6 +58,7 @@ export function getInitialRpgProgress() {
                 sceneName: "",
                 checkpointName: "",
             },
+            quests: {} as RpgQuests.Model,
         },
         flags: {
             newBalltown: {

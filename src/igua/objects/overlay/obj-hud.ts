@@ -116,21 +116,24 @@ const experienceIndicatorConfigs: Array<ExperienceIndicatorConfig> = [
         experienceKey: "combat",
         tint: 0xFF401E,
     },
-    // 0xFF7B00
     {
         experienceKey: "computer",
-        tint: 0xEABB00,
+        tint: 0xFF7B00,
     },
     {
         experienceKey: "gambling",
-        tint: 0x19A859,
+        tint: 0xEABB00,
     },
     {
         experienceKey: "jump",
-        tint: 0x54BAFF,
+        tint: 0x19A859,
     },
     {
         experienceKey: "pocket",
+        tint: 0x54BAFF,
+    },
+    {
+        experienceKey: "quest",
         tint: 0x3775E8,
     },
     {

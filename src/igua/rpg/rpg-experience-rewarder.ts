@@ -2,6 +2,7 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { RpgAttack } from "./rpg-attack";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgProgress } from "./rpg-progress";
+import { RpgQuests } from "./rpg-quests";
 
 type ComputerInteractionKind = "noop" | "small_task" | "medium_task";
 
@@ -18,6 +19,11 @@ const speaksToExperience = {
     first_in_cutscene: 2,
     default: 1,
 } satisfies Record<SpeakKind, Integer>;
+
+const questComplexityToExperience = {
+    easy: 30,
+    normal: 100,
+} satisfies Record<RpgQuests.Complexity, Integer>;
 
 export const RpgExperienceRewarder = {
     combat: {
@@ -69,6 +75,13 @@ export const RpgExperienceRewarder = {
         },
         onRemoveItems(count: Integer) {
             RpgProgress.character.experience.pocket += count * 2;
+        },
+    },
+    quest: {
+        onComplete(complexity: RpgQuests.Complexity, completionsCount: Integer) {
+            RpgProgress.character.experience.quest += Math.ceil(
+                questComplexityToExperience[complexity] * (1 / Math.pow(2, completionsCount - 1)),
+            );
         },
     },
     social: {

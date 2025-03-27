@@ -3,7 +3,7 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { interpv } from "../../lib/game-engine/routines/interp";
 import { Jukebox } from "../core/igua-audio";
-import { DramaWallet } from "../drama/drama-wallet";
+import { DramaQuests } from "../drama/drama-quests";
 import { show } from "../drama/show";
 import { mxnBoilMirrorRotate } from "../mixins/mxn-boil-mirror-rotate";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
@@ -78,7 +78,7 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
                     typePreference,
                     10,
                 );
-                yield* DramaWallet.rewardValuables(50, lvl.BallFruitFanaticNpc);
+                yield* DramaQuests.completeQuest("NewBalltownFanaticDelivery", lvl.BallFruitFanaticNpc);
                 RpgProgress.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount++;
                 return;
             }

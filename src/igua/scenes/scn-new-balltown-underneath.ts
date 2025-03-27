@@ -7,7 +7,7 @@ import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaPocket } from "../drama/drama-pocket";
-import { DramaWallet } from "../drama/drama-wallet";
+import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnBoilFlipH } from "../mixins/mxn-boil-flip-h";
@@ -235,7 +235,7 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
                 yield sleep(1000);
                 yield* show("Thank you for bringing joy to this place!!!");
                 scene.camera.mode = "move_towards_player";
-                yield* DramaWallet.rewardValuables(100, self);
+                yield* DramaQuests.completeQuest("NewBalltownUnderneathMagicRisingFace", self);
                 RpgProgress.flags.underneath.magicalRisingFace.reachedSummit = true;
             }, { speaker: self, camera: { start: "pan-to-speaker" } });
         });

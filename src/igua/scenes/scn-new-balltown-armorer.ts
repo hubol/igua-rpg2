@@ -10,6 +10,7 @@ import { StringFromNumber } from "../../lib/string/string-from-number";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaMisc } from "../drama/drama-misc";
+import { DramaQuests } from "../drama/drama-quests";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
 import { Cutscene } from "../globals";
@@ -100,7 +101,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
 
         Cutscene.setCurrentSpeaker(lvl.IguanaNpc);
         yield* show("Happy...! Happy...! Happy...!", "Thank you so much for arranging the delivery of the fish.");
-        yield* DramaWallet.rewardValuables(160, lvl.IguanaNpc);
+        yield* DramaQuests.completeQuest("NewBalltownArmorerReceivesFish", lvl.IguanaNpc);
         yield* show("You are cool.");
 
         deliveries.armorer = "delivered";

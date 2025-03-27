@@ -4,7 +4,7 @@ import { Instances } from "../../lib/game-engine/instances";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { DramaMisc } from "../drama/drama-misc";
-import { DramaWallet } from "../drama/drama-wallet";
+import { DramaQuests } from "../drama/drama-quests";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnEnemy } from "../mixins/mxn-enemy";
@@ -46,7 +46,7 @@ function enrichEnemyPresence(lvl: LvlType.NewBalltownUnderneathHomeowner) {
                 yield () => self.isOnGround;
                 yield scene.camera.auto.panToSubject(self);
                 yield* show("I hope this is a sufficient reward.");
-                yield* DramaWallet.rewardValuables(100, self);
+                yield* DramaQuests.completeQuest("NewBalltownUnderneathHomeownerEnemyPresenceCleared", self);
                 yield* show("Please come see me again. I can heal poison and also create pornographic images.");
                 RpgProgress.flags.underneath.homeowner.hasClearedHouseOfEnemies = true;
             }, { speaker: self, camera: { start: "pan-to-speaker" } });
