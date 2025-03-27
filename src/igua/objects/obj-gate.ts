@@ -11,9 +11,15 @@ export const CtxGate = new SceneLocal(() => ({ isGateTransitionActive: false }),
 type Orientation = "horizontal" | "vertical";
 
 export function objGate(ogmoEntity: OgmoFactory.Entity<"GateHorizontal" | "GateVertical">, orientation: Orientation) {
-    const gfx = new Graphics().beginFill(0xffffff).drawRect(0, 0, 1, 1).scaled(96, 1);
+    const gfx = new Graphics().beginFill(0xffffff).drawRect(0, 0, 1, 1).scaled(
+        orientation === "horizontal" ? 96 : 1,
+        orientation === "vertical" ? 96 : 1,
+    );
     if (ogmoEntity.flippedX) {
         gfx.pivot.x = 1;
+    }
+    if (ogmoEntity.flippedY) {
+        gfx.pivot.y = 1;
     }
 
     const { sceneName, checkpointName } = ogmoEntity.values;
@@ -33,8 +39,11 @@ export function objGate(ogmoEntity: OgmoFactory.Entity<"GateHorizontal" | "GateV
                 CtxGate.value.isGateTransitionActive = true;
                 playerObj.isBeingPiloted = true;
                 playerObj.isDucking = false;
-                playerObj.isMovingLeft = false;
-                playerObj.isMovingRight = false;
+
+                if (orientation === "horizontal") {
+                    playerObj.isMovingLeft = false;
+                    playerObj.isMovingRight = false;
+                }
                 pilotFn();
                 yield sleepf(20);
                 // TODO need to escape ticker and execute?
@@ -65,6 +74,10 @@ const forwardPredicates: Record<Forward, () => boolean> = {
 const forwardPilotFns: Record<Forward, () => void> = {
     left: () => playerObj.isMovingLeft = true,
     right: () => playerObj.isMovingRight = true,
-    up: () => playerObj.gravity = 0,
+    up: () => {
+        playerObj.gravity = 0;
+        // TODO probably a const!
+        playerObj.speed.y = Math.min(playerObj.speed.y, -5);
+    },
     down: () => {},
 };

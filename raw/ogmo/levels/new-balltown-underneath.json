@@ -106,12 +106,24 @@
           "id": 0,
           "_eid": "64222434",
           "x": 1128,
-          "y": -48,
+          "y": -88,
           "width": 600,
           "originX": 0,
           "originY": 0,
           "flippedY": true,
           "values": {"sceneName": "scnNewBalltownOutskirts", "checkpointName": "fromUnderneath", "name": "", "depth": 0}
+        },
+        {
+          "name": "GateVertical",
+          "id": 1,
+          "_eid": "64222434",
+          "x": 648,
+          "y": -96,
+          "width": 368,
+          "originX": 0,
+          "originY": 0,
+          "flippedY": true,
+          "values": {"sceneName": "scnNewBalltownOutskirts", "checkpointName": "fromUnderneathMiddle", "name": "", "depth": 0}
         }
       ]
     },
@@ -717,6 +729,28 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromTunnelRight", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 9,
+          "_eid": "19953026",
+          "x": 736,
+          "y": 24,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromOutskirtsMiddleLeft", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 10,
+          "_eid": "19953026",
+          "x": 928,
+          "y": 24,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromOutskirtsMiddleRight", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
         }
       ]
     },
@@ -4380,7 +4414,8 @@
           "texture": "shapes/x 10.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2284,
@@ -4392,7 +4427,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -5086,6 +5122,19 @@
           "originY": 0,
           "tint": "#103418",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 70,
+          "_eid": "93117141",
+          "x": 536,
+          "y": -56,
+          "width": 112,
+          "height": 56,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#103418",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -5120,7 +5169,8 @@
           "texture": "foliage/stem 16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2285,
@@ -5132,7 +5182,8 @@
           "texture": "foliage/stem 16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2284,
@@ -5144,7 +5195,8 @@
           "texture": "foliage/stem 16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2285,
@@ -5156,7 +5208,8 @@
           "texture": "foliage/stem 16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2285,
@@ -5168,7 +5221,8 @@
           "texture": "foliage/stem 16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2284,
@@ -5180,7 +5234,8 @@
           "texture": "foliage/stem 16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2284,
@@ -5192,7 +5247,8 @@
           "texture": "foliage/stem 16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2285,
@@ -5204,7 +5260,8 @@
           "texture": "foliage/stem 16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2285,
@@ -5216,7 +5273,8 @@
           "texture": "foliage/stem 16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2284,
@@ -5228,7 +5286,8 @@
           "texture": "foliage/stem 16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2284,
@@ -5240,7 +5299,8 @@
           "texture": "foliage/stem 16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1879,
@@ -7397,7 +7457,8 @@
           "texture": "terrain/grass/tall 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
