@@ -5,10 +5,12 @@ import { Instances } from "../../lib/game-engine/instances";
 import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
+import { ZIndex } from "../core/scene/z-index";
 import { DataKeyItems } from "../data/data-key-items";
 import { DramaKeyItems } from "../drama/drama-key-items";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
+import { mxnBallonable } from "../mixins/mxn-ballonable";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
@@ -19,6 +21,7 @@ import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgKeyItems } from "../rpg/rpg-key-items";
 import { RpgPocket } from "../rpg/rpg-pocket";
 import { RpgProgress } from "../rpg/rpg-progress";
+import { RpgStatus } from "../rpg/rpg-status";
 
 export function scnNewBalltownOutskirts() {
     Jukebox.play(Mzk.TrashDay);
@@ -26,6 +29,7 @@ export function scnNewBalltownOutskirts() {
 
     enrichMiner(lvl);
     enrichFarmer(lvl);
+    enrichSecretShopExterior(lvl);
 }
 
 function enrichFarmer(lvl: LvlType.NewBalltownOutskirts) {
@@ -147,5 +151,13 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
                 yield* show("Please let me know if you change your mind. That picaxe looks baller.");
             }
         }
+    });
+}
+
+function enrichSecretShopExterior(lvl: LvlType.NewBalltownOutskirts) {
+    const ballons = [69_100_000, 420_000_000].map((seed): RpgStatus.Ballon => ({ health: 1, healthMax: 1, seed }));
+    lvl.MarketingBallonsMarker.zIndexed(ZIndex.TerrainDecals).mixin(mxnBallonable, {
+        attachPoint: lvl.MarketingBallonsMarker,
+        ballons,
     });
 }
