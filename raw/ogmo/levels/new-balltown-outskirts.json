@@ -913,7 +913,7 @@
           "texture": "wood/sign giant 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "SecretShopSign"},
+          "values": {"name": ""},
           "groupName": null
         },
         {
@@ -3032,7 +3032,7 @@
           "texture": "town/ball/the secret shop.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""},
+          "values": {"name": "SecretShopSign"},
           "groupName": null
         }
       ],
