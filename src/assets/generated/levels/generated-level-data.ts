@@ -718,7 +718,7 @@ export const Lvl = {
     Pipe_13: e(r["Pipe"], { x: 200, y: 439, width: 131, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
     WoodMeasuringStick: d(Tx.Wood.MeasuringStick, { x: 290, y: 377, scaleX: 1, scaleY: 1, rotation: 180, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
     WoodMeasuringStick_1: d(Tx.Wood.MeasuringStick, { x: 264, y: 368, scaleX: 1, scaleY: 1, rotation: 180, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-    WoodSignGiant0: d(Tx.Wood.SignGiant0, { x: 266, y: 408, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+    SecretShopSign: d(Tx.Wood.SignGiant0, { x: 266, y: 408, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
     ShapesDitherSquare16_1: d(Tx.Shapes.DitherSquare16, { x: 701, y: 370, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe96565 }, "TerrainDecals"),
     LightShadowIrregularSmall: d(Tx.Light.ShadowIrregularSmall, { x: 702, y: 368, scaleX: 0.5, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe96565 }, "TerrainDecals"),
     TerrainGrassJagged_11: d(Tx.Terrain.Grass.Jagged, { x: 880, y: 401, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff8787 }, "TerrainDecals"),

@@ -15,6 +15,7 @@ import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
+import { mxnSign } from "../mixins/mxn-sign";
 import { objPocketableItemSpawner } from "../objects/obj-pocketable-item-spawner";
 import { objValuableSpawner } from "../objects/obj-valuable-spawner";
 import { RpgAttack } from "../rpg/rpg-attack";
@@ -160,4 +161,5 @@ function enrichSecretShopExterior(lvl: LvlType.NewBalltownOutskirts) {
         attachPoint: lvl.MarketingBallonsMarker,
         ballons,
     });
+    lvl.SecretShopSign.mixin(mxnSign, "The Secret Shop\n\nShhh! It's a secret!");
 }
