@@ -27,6 +27,9 @@ export class AsshatJukebox {
     private _latestPlayRequest?: MusicTrack;
 
     async playAsync(track: MusicTrack, fadeOutMs: Milliseconds = 1000) {
+        if (this._latestPlayRequest === track) {
+            return;
+        }
         this._latestPlayRequest = track;
         if (this._nowPlaying?.track === track) {
             this._nowPlaying.instance.linearRamp("gain", 1, 1);
