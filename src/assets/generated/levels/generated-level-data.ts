@@ -515,6 +515,7 @@ export const Lvl = {
     Door: e(r["Door"], { x: 64, y: 184, values: { sceneName: "scnNewBalltownOutskirts", checkpointName: "fromSecretShop", name: "", depth: 0 } }, "Entities"),
     TerrainGrassSparse3px1_11: d(Tx.Terrain.Grass.Sparse3px1, { x: 86, y: 231, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb0ba44 }, "AboveEntitiesDecals"),
     TerrainGrassSparse3px1_12: d(Tx.Terrain.Grass.Sparse3px1, { x: 176, y: 231, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb0ba44 }, "AboveEntitiesDecals"),
+    Shopkeeper: e(r["IguanaNpc"], { x: 368, y: 152, flippedX: true, values: { personaName: "BalltownOutskirtsSecretShopkeeper", name: "Shopkeeper", depth: 0 } }, "CharacterEntities"),
     Player: e(r["Player"], { x: 112, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 431, y: 192, values: { name: "", depth: 0 } }, "MarkerEntities"),
     EnvironmentSparkleMarker_1: e(r["EnvironmentSparkleMarker"], { x: 417, y: 216, values: { name: "", depth: 0 } }, "MarkerEntities"),

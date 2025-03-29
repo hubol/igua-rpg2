@@ -10,6 +10,7 @@ interface NpcPersona_NoInternalName {
 const npcPersonas = {
     BalltownOutskirtsMiner: { job: "Miner", name: "Dante", looks: NpcLooks.Miner },
     BalltownOutskirtsFarmer: { job: "Farmer", name: "Lars", looks: NpcLooks.Farmer },
+    BalltownOutskirtsSecretShopkeeper: { job: "Shopkeeper", name: "Cryst", looks: NpcLooks.Golvellius },
     NewBalltownBallFruitFanatic: { job: "Eccentric", name: "Marf", looks: NpcLooks.BallFruitFanatic },
     NewBalltownArmorer: { job: "Armorer", name: "Trav", looks: NpcLooks.Dizzy },
     NewBalltownFishmonger: { job: "Fishmonger", name: "Pop", looks: NpcLooks.Nerd },
