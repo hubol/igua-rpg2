@@ -6,6 +6,7 @@ interface EngineConfigType {
     readonly renderer: PixiRenderer;
     readonly sceneStack: SceneStack<unknown, unknown>;
     readonly showDefaultStage: Container;
+    readonly worldStage: Container;
 }
 
 export function setEngineConfig(engineConfig: EngineConfigType) {
@@ -23,6 +24,10 @@ export let EngineConfig: EngineConfigType = {
     },
     get showDefaultStage() {
         throw new Error("EngineConfig.showDefaultStage is not implemented!");
+        return undefined as any;
+    },
+    get worldStage() {
+        throw new Error("EngineConfig.worldStage is not implemented!");
         return undefined as any;
     },
 };

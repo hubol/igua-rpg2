@@ -59,5 +59,8 @@ export function prepareGameEngine(renderer: PixiRenderer) {
         },
         sceneStack,
         renderer,
+        get worldStage() {
+            return scene.stage;
+        },
     });
 }

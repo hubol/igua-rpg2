@@ -1,4 +1,4 @@
-import { Container, DisplayObject, Filter, MaskData, Rectangle } from "pixi.js";
+import { Container, DisplayObject, Filter, MaskData, Point, Rectangle } from "pixi.js";
 import { EngineConfig } from "../game-engine/engine-config";
 import { Logging } from "../logging";
 import { VectorSimple } from "../math/vector-type";
@@ -31,6 +31,8 @@ declare module "pixi.js" {
 
         masked(value: Container | MaskData | null): this;
         zIndexed(value: number): this;
+
+        getWorldPosition(point?: Point): VectorSimple;
     }
 
     interface Container {
@@ -44,6 +46,7 @@ declare module "pixi.js" {
 }
 
 let logObjIndex = 0;
+const p = new Point();
 const r = new Rectangle();
 
 Object.defineProperties(DisplayObject.prototype, {
@@ -139,6 +142,19 @@ Object.defineProperties(DisplayObject.prototype, {
         value: function (this: DisplayObject, zIndex: number) {
             this.zIndex = zIndex;
             return this;
+        },
+    },
+    getWorldPosition: {
+        value: function (this: DisplayObject, point = p): VectorSimple {
+            const stage = EngineConfig.worldStage;
+            if (this.parent === stage) {
+                return this;
+            }
+
+            this.getGlobalPosition(point, false);
+            // TODO maybe a little naive
+            point.add(-stage.x, -stage.y);
+            return point;
         },
     },
 });
