@@ -1,5 +1,6 @@
 import { DisplayObject } from "pixi.js";
 import { Instances } from "../../lib/game-engine/instances";
+import { objFxOwnerDefeat } from "../objects/effects/obj-fx-owner-defeat";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgStatus } from "../rpg/rpg-status";
 import { mxnRpgStatus } from "./mxn-rpg-status";
@@ -14,6 +15,12 @@ export function mxnRpgAttack(obj: DisplayObject, args: MxnRpgAttackArgs) {
         .dispatches<"mxnRpgAttack.hit">()
         .merge({ isAttackActive: true })
         .step(self => {
+            if (args.attacker && args.attacker.health <= 0) {
+                objFxOwnerDefeat().at(self.getWorldPosition()).show();
+                self.destroy();
+                return;
+            }
+
             if (!self.isAttackActive) {
                 return;
             }
