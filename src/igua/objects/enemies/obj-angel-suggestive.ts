@@ -332,6 +332,7 @@ export function objAngelSuggestive(variantKey: VariantKey) {
         .mixin(mxnBoilMirrorRotate);
 
     const hurtbox0 = new Graphics().beginFill(0).drawRect(-30, -11, 60, 25).invisible();
+    const hurtbox1 = new Graphics().beginFill(0).drawRect(-10, 12, 20, 25).invisible();
 
     const bodyObj = objAngelSuggestiveBody().pivoted(36, 46);
 
@@ -343,6 +344,7 @@ export function objAngelSuggestive(variantKey: VariantKey) {
         irregularShadowObj,
         objAngelSuggestiveGears(theme).at(24, -5),
         hurtbox0,
+        hurtbox1,
     )
         .coro(function* () {
             while (true) {
@@ -398,7 +400,7 @@ export function objAngelSuggestive(variantKey: VariantKey) {
         actualHeadObj,
         healthbarAnchorObj,
     )
-        .mixin(mxnEnemy, { rank: variant.rank, hurtboxes: [hurtbox0], healthbarAnchorObj })
+        .mixin(mxnEnemy, { rank: variant.rank, hurtboxes: [hurtbox0, hurtbox1], healthbarAnchorObj })
         .filtered(new MapRgbFilter(theme.map.red, theme.map.green, theme.map.blue, theme.map.white));
 
     return enemyObj;
