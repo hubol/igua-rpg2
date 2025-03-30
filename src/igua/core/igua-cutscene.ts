@@ -3,10 +3,12 @@ import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { container } from "../../lib/pixi/container";
+import { Empty } from "../../lib/types/empty";
 import { Null } from "../../lib/types/null";
 import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { clear } from "../drama/show";
-import { scene } from "../globals";
+import { scene, sceneStack } from "../globals";
 
 type CutsceneFn = () => Coro.Type;
 
@@ -32,40 +34,42 @@ type ConfiguredCutsceneAttributes = Partial<
     Omit<CutsceneAttributes, "camera"> & { camera: Partial<CutsceneAttributes["camera"]> }
 >;
 
+interface PlayRequest {
+    fn: CutsceneFn;
+    attributes: CutsceneAttributes;
+}
+
+function checkPlayRequestRequirements(request: PlayRequest) {
+    const { requiredScene } = request.attributes;
+    if (requiredScene === null) {
+        return "requirements_met";
+    }
+    else if (requiredScene === scene) {
+        return "requirements_met";
+    }
+
+    if (sceneStack.length <= 1) {
+        return "requirements_cannot_be_met";
+    }
+
+    return sceneStack.asArray().includes(requiredScene)
+        ? "requirements_may_be_met_in_future"
+        : "requirements_cannot_be_met";
+}
+
 export class IguaCutscene {
-    private readonly _container: ReturnType<typeof IguaCutscene._objCutsceneContainer>;
+    private readonly runnerObj: ObjCutsceneRunner;
 
     constructor(root: Container) {
-        this._container = IguaCutscene._objCutsceneContainer().named("IguaCutscene").show(root);
+        this.runnerObj = objCutsceneRunner().named("IguaCutscene").show(root);
     }
 
-    private static _objCutsceneContainer() {
-        return new Container<DisplayObject & { fn: CutsceneFn; attributes: CutsceneAttributes }>()
-            .merge({ sinceCutsceneStepsCount: 0 })
-            .step(self => {
-                if (self.children.length) {
-                    self.sinceCutsceneStepsCount = 0;
-                }
-                else {
-                    self.sinceCutsceneStepsCount++;
-                }
-            });
-    }
-
-    get sinceCutsceneStepsCount() {
-        return this._container.sinceCutsceneStepsCount;
-    }
-
-    private _enqueuedCutsceneRunnerObjs: DisplayObject[] = [];
-
-    play(fn: CutsceneFn, attributes?: ConfiguredCutsceneAttributes) {
-        const dequeueCutscene = () => this._enqueuedCutsceneRunnerObjs.shift()?.show(this._container);
-
+    play(fn: CutsceneFn, partialAttributes?: ConfiguredCutsceneAttributes) {
         // TODO deep merge
         const { camera: defaultCameraAttributes, ...defaultAttributes } = getDefaultCutsceneAttributes();
-        const { camera: configuredCameraAttributes, ...configuredAttributes } = attributes ?? {};
+        const { camera: configuredCameraAttributes, ...configuredAttributes } = partialAttributes ?? {};
 
-        const mergedAttributes = {
+        const attributes = {
             ...defaultAttributes,
             ...configuredAttributes,
             camera: {
@@ -74,68 +78,15 @@ export class IguaCutscene {
             },
         };
 
-        const cutsceneRunnerObj = new Container().named("Cutscene Runner")
-            .merge({ fn, attributes: mergedAttributes })
-            .coro(function* (self) {
-                // TODO This will not be sufficient if the sceneStack has length > 1. Need to rework for that case!
-                if (self.attributes.requiredScene !== null && scene !== self.attributes.requiredScene) {
-                    // TODO Should be logged that the cutscene was aborted!
-                    self.destroy();
-                    return;
-                }
-
-                try {
-                    if (self.attributes.camera.start === "pan-to-speaker" && self.attributes.speaker) {
-                        yield scene.camera.auto.panToSubject(self.attributes.speaker);
-                    }
-                    yield* fn();
-                    clear();
-                    if (
-                        self.attributes.camera.end === "delay-if-camera-moved-set-mode-follow-player"
-                        && !scene.camera.auto.isFramingPlayer
-                        && scene === self.attributes.requiredScene
-                    ) {
-                        yield sleepf(22);
-                    }
-                    // TODO unused so far
-                    if (self.attributes.camera.end === "pan-to-player") {
-                        yield scene.camera.auto.panToPlayer();
-                    }
-                    if (self.attributes.camera.end !== "none") {
-                        scene.camera.mode = "follow_player";
-                    }
-                }
-                catch (e) {
-                    if (e instanceof EscapeTickerAndExecute) {
-                        throw e;
-                    }
-
-                    Logger.logUnexpectedError("IguaCutscene.runner", e as Error);
-                }
-                finally {
-                    if (!self.destroyed) {
-                        self.destroy();
-                    }
-
-                    dequeueCutscene();
-                }
-            });
-
-        if (this._container.children.length === 0) {
-            cutsceneRunnerObj.show(this._container);
-        }
-        else {
-            // TODO should be logged that a cutscene was enqueued!
-            this._enqueuedCutsceneRunnerObjs.push(cutsceneRunnerObj);
-        }
+        this.runnerObj.state.pendingPlayRequests.push({ fn, attributes });
     }
 
     get isPlaying() {
-        return this._container.children.length > 0;
+        return this.runnerObj.state.currentlyFulfillingPlayRequest !== null;
     }
 
     get current(): { attributes: CutsceneAttributes } | null {
-        return this._container.children.last ?? null;
+        return this.runnerObj.state.currentlyFulfillingPlayRequest;
     }
 
     setCurrentSpeaker(speakerObj: DisplayObject) {
@@ -144,3 +95,99 @@ export class IguaCutscene {
         }
     }
 }
+
+function objCutsceneRunner() {
+    const state = {
+        currentlyFulfillingPlayRequest: Null<PlayRequest>(),
+        pendingPlayRequests: Empty<PlayRequest>(),
+    };
+
+    const maybeSetCurrentlyFulfillingPlayRequest = () => {
+        if (state.currentlyFulfillingPlayRequest) {
+            return;
+        }
+
+        for (let i = 0; i < state.pendingPlayRequests.length;) {
+            const request = state.pendingPlayRequests[i];
+            const requirements = checkPlayRequestRequirements(request);
+
+            if (requirements === "requirements_cannot_be_met") {
+                Logger.logInfo(
+                    "objCutsceneRunner.maybeSetCurrentlyFulfillingPlayRequest",
+                    "PlayRequest cannot be fulfilled, as the requirements cannot be met",
+                    request,
+                );
+                state.pendingPlayRequests.splice(i);
+                continue;
+            }
+            else if (requirements === "requirements_met") {
+                Logger.logInfo(
+                    "objCutsceneRunner.maybeSetCurrentlyFulfillingPlayRequest",
+                    "Begin fulfilling PlayRequest",
+                    request,
+                );
+                state.currentlyFulfillingPlayRequest = request;
+                state.pendingPlayRequests.splice(i);
+                break;
+            }
+
+            i++;
+        }
+    };
+
+    return container()
+        .merge({ state })
+        .step(maybeSetCurrentlyFulfillingPlayRequest)
+        .coro(function* () {
+            while (true) {
+                yield () => state.currentlyFulfillingPlayRequest !== null;
+
+                const { fn, attributes } = state.currentlyFulfillingPlayRequest!;
+
+                try {
+                    if (attributes.camera.start === "pan-to-speaker" && attributes.speaker) {
+                        yield scene.camera.auto.panToSubject(attributes.speaker);
+                    }
+                    yield* fn();
+                    clear();
+                    if (
+                        attributes.camera.end === "delay-if-camera-moved-set-mode-follow-player"
+                        && !scene.camera.auto.isFramingPlayer
+                        && scene === attributes.requiredScene
+                    ) {
+                        yield sleepf(22);
+                    }
+                    // TODO unused so far
+                    if (attributes.camera.end === "pan-to-player") {
+                        yield scene.camera.auto.panToPlayer();
+                    }
+                    if (attributes.camera.end !== "none") {
+                        scene.camera.mode = "follow_player";
+                    }
+                }
+                catch (e) {
+                    if (e instanceof EscapeTickerAndExecute) {
+                        throw e;
+                    }
+
+                    Logger.logUnexpectedError("objCutsceneRunner.coro", e as Error);
+                }
+                finally {
+                    Logger.logInfo("objCutsceneRunner.coro", "Cutscene completed");
+
+                    state.currentlyFulfillingPlayRequest = null;
+                    maybeSetCurrentlyFulfillingPlayRequest();
+
+                    if (!state.currentlyFulfillingPlayRequest) {
+                        Logger.logInfo(
+                            "objCutsceneRunner.coro",
+                            "No pending PlayRequests, or no pending PlayRequests have requirements met",
+                            { pendingPlayRequestsLength: state.pendingPlayRequests.length },
+                        );
+                    }
+                }
+            }
+        });
+}
+
+type ObjCutsceneRunner = ReturnType<typeof objCutsceneRunner>;
