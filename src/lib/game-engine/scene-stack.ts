@@ -29,8 +29,8 @@ export abstract class SceneStack<TSceneMeta, TSceneInstance> {
         return this.push(populateSceneFn, meta);
     }
 
-    toArray() {
-        return [...this.scenes];
+    asArray(): ReadonlyArray<TSceneInstance> {
+        return this.scenes;
     }
 
     get length() {
