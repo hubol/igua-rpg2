@@ -35,7 +35,9 @@ export const DefaultLogTarget: LogTarget = defaultLogTarget;
 class LoggerImpl {
     target: LogTarget = defaultLogTarget;
 
-    readonly logInfo = console.log.bind(console);
+    logInfo(subsystem: string, message: string, ...context: any[]) {
+        console.log(...Logging.badge(subsystem, "info"), message, ...context);
+    }
 
     logDebug(subsystem: string, message: string, ...context: any[]) {
         this.target.onDebug(subsystem, message, ...context);
