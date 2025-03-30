@@ -52,7 +52,7 @@ function enrichEnemyPresence(lvl: LvlType.NewBalltownUnderneathHomeowner) {
                 yield* DramaQuests.completeQuest("NewBalltownUnderneathHomeownerEnemyPresenceCleared", self);
                 yield* show("Please come see me again. I can heal poison and also create thought-provoking artworks.");
                 RpgProgress.flags.underneath.homeowner.hasClearedHouseOfEnemies = true;
-            }, { speaker: self, camera: { start: "pan-to-speaker" } });
+            }, { speaker: self, camera: { start: "pan_to_speaker" } });
         });
     }
 }

@@ -429,7 +429,7 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
                 yield* show("I made it!", "See you inside");
                 deliveries.armorer = "arrived";
                 DramaMisc.departRoomViaDoor(self);
-            }, { speaker: lvl.Fishmonger, camera: { start: "pan-to-speaker" } });
+            }, { speaker: lvl.Fishmonger, camera: { start: "pan_to_speaker" } });
         }).show();
 
         lvl.Fishmonger.coro(function* (self) {
@@ -471,7 +471,7 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
                 DramaMisc.departRoomViaDoor(lvl.Fishmonger);
 
                 deliveries.armorer = null;
-            }, { speaker: lvl.Fishmonger, camera: { start: "pan-to-speaker" } });
+            }, { speaker: lvl.Fishmonger, camera: { start: "pan_to_speaker" } });
         });
     }, { speaker: lvl.Fishmonger });
 }

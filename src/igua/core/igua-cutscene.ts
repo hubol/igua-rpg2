@@ -20,11 +20,11 @@ function getDefaultCutsceneAttributes() {
         npcNamesSpoken: new Set<NpcPersonaInternalName>(),
         requiredScene: Null(scene),
         camera: {
-            start: "none" as "none" | "pan-to-speaker",
-            end: "delay-if-camera-moved-set-mode-follow-player" as
+            start: "none" as "none" | "pan_to_speaker",
+            end: "delay_if_camera_moved_set_mode_follow_player" as
                 | "none"
-                | "delay-if-camera-moved-set-mode-follow-player"
-                | "pan-to-player",
+                | "delay_if_camera_moved_set_mode_follow_player"
+                | "pan_to_player",
         },
     };
 }
@@ -145,20 +145,20 @@ function objCutsceneRunner() {
                 const { fn, attributes } = state.currentlyFulfillingPlayRequest!;
 
                 try {
-                    if (attributes.camera.start === "pan-to-speaker" && attributes.speaker) {
+                    if (attributes.camera.start === "pan_to_speaker" && attributes.speaker) {
                         yield scene.camera.auto.panToSubject(attributes.speaker);
                     }
                     yield* fn();
                     clear();
                     if (
-                        attributes.camera.end === "delay-if-camera-moved-set-mode-follow-player"
+                        attributes.camera.end === "delay_if_camera_moved_set_mode_follow_player"
                         && !scene.camera.auto.isFramingPlayer
                         && scene === attributes.requiredScene
                     ) {
                         yield sleepf(22);
                     }
                     // TODO unused so far
-                    if (attributes.camera.end === "pan-to-player") {
+                    if (attributes.camera.end === "pan_to_player") {
                         yield scene.camera.auto.panToPlayer();
                     }
                     if (attributes.camera.end !== "none") {

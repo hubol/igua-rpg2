@@ -96,7 +96,7 @@ function enrichHomeowner(lvl: LvlType.NewBalltownUnderneath) {
 
             receivedPlayerConsent = true;
             lvl.ToHomeownerDoor.interact.onInteract = onInteract;
-        }, { speaker: lvl.Homeowner, camera: { start: "pan-to-speaker" } });
+        }, { speaker: lvl.Homeowner, camera: { start: "pan_to_speaker" } });
     };
 
     lvl.Homeowner.mixin(mxnCutscene, function* () {
@@ -237,7 +237,7 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
                 scene.camera.mode = "move_towards_player";
                 yield* DramaQuests.completeQuest("NewBalltownUnderneathMagicRisingFace", self);
                 RpgProgress.flags.underneath.magicalRisingFace.reachedSummit = true;
-            }, { speaker: self, camera: { start: "pan-to-speaker" } });
+            }, { speaker: self, camera: { start: "pan_to_speaker" } });
         });
 
     const barMaskObj = new Graphics()
