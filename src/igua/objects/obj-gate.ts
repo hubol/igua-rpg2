@@ -1,4 +1,5 @@
 import { Graphics } from "pixi.js";
+import { Logger } from "../../lib/game-engine/logger";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { Cutscene } from "../globals";
@@ -32,23 +33,42 @@ export function objGate(ogmoEntity: OgmoFactory.Entity<"GateHorizontal" | "GateV
 
     if (sceneChanger) {
         gfx.coro(function* (self) {
-            yield () => predicate() && self.collides(playerObj);
-            // TODO is this really a cutscene?
-            // Cutscenes are (thankfully?) not interruptible.
-            Cutscene.play(function* () {
-                CtxGate.value.isGateTransitionActive = true;
-                playerObj.isBeingPiloted = true;
-                playerObj.isDucking = false;
+            while (true) {
+                let retry = false;
+                yield () => predicate() && self.collides(playerObj);
+                Cutscene.play(function* () {
+                    // Rather awkward, but since cutscenes, and therefore gate transitions are bufferable,
+                    // then it is possible to touch an upwards gate during a cutscene, and fall back down
+                    // I could see this being a problem for other directions too.
+                    // But let's just patch this one for now I guess, haha.
+                    if (forward === "up") {
+                        if (playerObj.y > 0 && (!predicate() || !self.collides(playerObj))) {
+                            Logger.logInfo(
+                                "objGate.coro",
+                                "Upwards gate transition was aborted because the player appears to have fallen since the Cutscene was requested",
+                                { playerPosition: playerObj.vcpy(), playerSpeed: playerObj.speed.vcpy() },
+                            );
+                            retry = true;
+                            return;
+                        }
+                    }
 
-                if (orientation === "horizontal") {
-                    playerObj.isMovingLeft = false;
-                    playerObj.isMovingRight = false;
-                }
-                pilotFn();
-                yield sleepf(20);
-                // TODO need to escape ticker and execute?
-                sceneChanger.changeScene();
-            }, { letterbox: false });
+                    CtxGate.value.isGateTransitionActive = true;
+                    playerObj.isBeingPiloted = true;
+                    playerObj.isDucking = false;
+
+                    if (orientation === "horizontal") {
+                        playerObj.isMovingLeft = false;
+                        playerObj.isMovingRight = false;
+                    }
+                    pilotFn();
+                    yield sleepf(20);
+                    // TODO need to escape ticker and execute?
+                    sceneChanger.changeScene();
+                }, { letterbox: false });
+
+                yield () => retry;
+            }
         });
     }
 
