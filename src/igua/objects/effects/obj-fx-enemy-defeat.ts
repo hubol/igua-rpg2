@@ -1,4 +1,4 @@
-import { Geometry, Graphics, Polygon, Sprite } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
 import { RgbInt } from "../../../lib/math/number-alias-types";
@@ -6,9 +6,8 @@ import { Rng } from "../../../lib/math/rng";
 import { VectorSimple } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
-import { range } from "../../../lib/range";
 import { Empty } from "../../../lib/types/empty";
-import { Null } from "../../../lib/types/null";
+import { mxnBoilFlipH } from "../../mixins/mxn-boil-flip-h";
 import { objFxSpiritualRelease } from "./obj-fx-spiritual-release";
 
 interface ObjFxEnemyDefeatArgs {
@@ -43,6 +42,7 @@ function objFxSpiritPresence(args: ObjFxEnemyDefeatArgs) {
     const gfx = new Graphics();
     const characterObj = container(Sprite.from(txPresenceBody), Sprite.from(Rng.choose(...txsPresenceFace)))
         .pivoted(21, 26)
+        .mixin(mxnBoilFlipH)
         .filtered(new MapRgbFilter(args.primaryTint, args.secondaryTint, args.tertiaryTint));
 
     const points = Empty<VectorSimple>();
