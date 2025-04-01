@@ -88,7 +88,6 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
 
     const auto = {
         duckingSpeed: 0.075,
-        // TODO no enum?
         facingMode: <ObjIguanaLocomotiveAutoFacingMode> "check_speed_x",
         set facing(value: Polar) {
             autoFacingTarget = value;
