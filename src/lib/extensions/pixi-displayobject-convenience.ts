@@ -1,6 +1,7 @@
 import { Container, DisplayObject, Filter, MaskData, Point, Rectangle } from "pixi.js";
 import { EngineConfig } from "../game-engine/engine-config";
 import { Logging } from "../logging";
+import { DegreesFloat } from "../math/number-alias-types";
 import { VectorSimple } from "../math/vector-type";
 import { merge } from "../object/merge";
 import { Pojo } from "../types/pojo";
@@ -12,6 +13,8 @@ declare module "pixi.js" {
     interface DisplayObject {
         named(name: string): this;
         log(key?: string): this;
+
+        angled(degrees: DegreesFloat): this;
 
         scaled(vector: VectorSimple): this;
         scaled(scaleX: number, scaleY: number): this;
@@ -68,6 +71,13 @@ Object.defineProperties(DisplayObject.prototype, {
 
             window[key] = this;
             console.log(...Logging.componentArgs(key, this));
+
+            return this;
+        },
+    },
+    angled: {
+        value: function (this: DisplayObject, degrees: number) {
+            this.angle = degrees;
 
             return this;
         },
