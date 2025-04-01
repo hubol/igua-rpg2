@@ -19,6 +19,7 @@ import { mxnStopAndDieWhenHitGround } from "../../mixins/mxn-stop-and-die-when-h
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { RpgStatus } from "../../rpg/rpg-status";
+import { objFxEnemyDefeat } from "../effects/obj-fx-enemy-defeat";
 import { playerObj } from "../obj-player";
 import { objPocketableItem } from "../obj-pocketable-item";
 import { objProjectileElectricalPulseGround } from "../projectiles/obj-projectile-electrical-pulse-ground";
@@ -74,6 +75,10 @@ const commonTheme = {
         blue: 0x241DE2,
         white: 0xffffff,
     },
+    spirit: {
+        secondary: 0xDEB742,
+        tertiary: 0xDEB742,
+    },
 };
 
 type Theme = typeof commonTheme;
@@ -108,6 +113,10 @@ const themes = {
             green: 0xffc21c,
             blue: 0x5D9938,
             white: 0xffffff,
+        },
+        spirit: {
+            secondary: 0x71EC4F,
+            tertiary: 0xffc21c,
         },
     },
 } satisfies Record<string, Theme>;
@@ -401,6 +410,18 @@ export function objAngelSuggestive(variantKey: VariantKey) {
         healthbarAnchorObj,
     )
         .mixin(mxnEnemy, { rank: variant.rank, hurtboxes: [hurtbox0, hurtbox1], healthbarAnchorObj })
+        .handles(
+            "mxnEnemy.died",
+            (self) =>
+                objFxEnemyDefeat({
+                    primaryTint: theme.map.red,
+                    secondaryTint: theme.spirit.secondary,
+                    tertiaryTint: theme.spirit.tertiary,
+                })
+                    .at(self)
+                    .zIndexed(self.zIndex)
+                    .show(self.parent),
+        )
         .filtered(new MapRgbFilter(theme.map.red, theme.map.green, theme.map.blue, theme.map.white));
 
     return enemyObj;
