@@ -13,10 +13,28 @@ const atkHeliumExhaust = RpgAttack.create({
     },
 });
 
+const atkHeliumExhaustQuick = RpgAttack.create({
+    conditions: {
+        helium: 4,
+    },
+});
+
 export function objHeliumExhaust() {
     const hitboxObj = new Graphics().beginFill().drawRect(-16, -32, 32, 32).invisible();
 
-    return container(hitboxObj)
+    let quick = false;
+
+    const state = {
+        get quick() {
+            return quick;
+        },
+        set quick(value) {
+            quick = value;
+            obj.attack = quick ? atkHeliumExhaustQuick : atkHeliumExhaust;
+        },
+    };
+
+    const obj = container(hitboxObj)
         .collisionShape(CollisionShape.DisplayObjects, [hitboxObj])
         .mixin(mxnRpgAttack, { attack: atkHeliumExhaust })
         .coro(function* (self) {
@@ -26,4 +44,6 @@ export function objHeliumExhaust() {
                 yield sleep(Rng.intc(80, 120));
             }
         });
+
+    return obj.merge({ state });
 }

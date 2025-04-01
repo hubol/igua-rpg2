@@ -13,7 +13,7 @@ interface MxnRpgAttackArgs {
 export function mxnRpgAttack(obj: DisplayObject, args: MxnRpgAttackArgs) {
     return obj
         .dispatches<"mxnRpgAttack.hit">()
-        .merge({ isAttackActive: true })
+        .merge({ attack: args.attack, isAttackActive: true })
         .step(self => {
             if (args.attacker && args.attacker.health <= 0) {
                 objFxOwnerDefeat().at(self.getWorldPosition()).show();
@@ -28,7 +28,7 @@ export function mxnRpgAttack(obj: DisplayObject, args: MxnRpgAttackArgs) {
             for (const instance of Instances(mxnRpgStatus)) {
                 // TODO filter by faction here pls
                 if (obj.collidesOne(instance.hurtboxes)) {
-                    const result = instance.damage(args.attack, args.attacker);
+                    const result = instance.damage(self.attack, args.attacker);
                     if (!result.rejected) {
                         self.dispatch("mxnRpgAttack.hit");
                     }

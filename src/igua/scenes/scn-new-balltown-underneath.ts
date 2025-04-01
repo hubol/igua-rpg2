@@ -160,6 +160,7 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
     objHeliumExhaust()
         .at(lvl.HeliumMarker)
         .step((self) => {
+            self.state.quick = tank.heliumContent > 1000;
             self.isAttackActive = tank.heliumContent > 0 && tank.isValveOpen;
             // TODO not sure if RpgCutscene.isPlaying is the right check
             if (self.isAttackActive && !RpgCutscene.isPlaying) {
