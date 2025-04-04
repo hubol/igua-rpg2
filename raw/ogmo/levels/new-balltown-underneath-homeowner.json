@@ -129,6 +129,19 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": "ArtworkFrontGroup"
+        },
+        {
+          "x": 431,
+          "y": 401,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "furniture/artwork/statue 3.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "ArtworkFrontGroup"
         }
       ],
       "folder": "../textures"
@@ -1606,6 +1619,19 @@
           "y": 436,
           "scaleX": 1.25,
           "scaleY": -1,
+          "rotation": 0,
+          "tint": "#938999",
+          "texture": "light/shadow messy 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "ArtworkTerrainGroup"
+        },
+        {
+          "x": 437,
+          "y": 437,
+          "scaleX": 0.825,
+          "scaleY": 1,
           "rotation": 0,
           "tint": "#938999",
           "texture": "light/shadow messy 0.png",
