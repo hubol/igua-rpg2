@@ -22,4 +22,7 @@ export const Environment = {
     get requiresUserGestureForSound() {
         return Environment.isProduction && !Environment.isElectron;
     },
+    get includesDevTools() {
+        return true;
+    },
 };
