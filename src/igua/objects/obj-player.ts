@@ -2,6 +2,7 @@ import { DisplayObject, Rectangle } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
 import { Instances } from "../../lib/game-engine/instances";
 import { interp } from "../../lib/game-engine/routines/interp";
+import { approachLinear } from "../../lib/math/number";
 import { vnew } from "../../lib/math/vector-type";
 import { merge } from "../../lib/object/merge";
 import { ZIndex } from "../core/scene/z-index";
@@ -15,6 +16,7 @@ import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgPlayer } from "../rpg/rpg-player";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { RpgStatus } from "../rpg/rpg-status";
+import { objFxPlayerJumpComboDust } from "./effects/obj-fx-player-jump-combo-dust";
 import { CtxGate } from "./obj-gate";
 import { ObjIguanaLocomotive, objIguanaLocomotive, ObjIguanaLocomotiveAutoFacingMode } from "./obj-iguana-locomotive";
 import { ObjSign, objSign } from "./obj-sign";
@@ -83,6 +85,17 @@ function objPlayer(looks: IguanaLooks.Serializable) {
         RpgPlayer.status,
     );
 
+    let stepsSinceOffGround = 0;
+    let stepsSinceJumpJustWentDown = 100;
+    let landedThenJumpedHorizontalSpeedBoostUnit = 0;
+
+    function getWalkingTopSpeed() {
+        let speed = 2.5;
+        speed += 0.75 * Math.min(1, RpgProgress.character.status.conditions.poison.level);
+        speed += 0.5 * Math.max(0, RpgProgress.character.status.conditions.poison.level - 1);
+        return speed + landedThenJumpedHorizontalSpeedBoostUnit * 2;
+    }
+
     const puppet = iguanaLocomotiveObj
         .mixin(mxnRpgStatus, { status, effects, hurtboxes: [iguanaLocomotiveObj] })
         .mixin(mxnSparkling)
@@ -113,10 +126,25 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 return !Cutscene.isPlaying;
             },
             get walkingTopSpeed() {
-                return RpgPlayer.motion.walkingTopSpeed;
+                return getWalkingTopSpeed();
             },
         })
         .step(() => {
+            if (puppet.isOnGround) {
+                stepsSinceOffGround++;
+            }
+            else {
+                stepsSinceOffGround = 0;
+            }
+
+            stepsSinceJumpJustWentDown++;
+
+            landedThenJumpedHorizontalSpeedBoostUnit = approachLinear(
+                landedThenJumpedHorizontalSpeedBoostUnit,
+                0,
+                0.02,
+            );
+
             const ballonsCount = RpgProgress.character.status.conditions.helium.ballons.length;
             const ballonPhysicsLevel = getBallonPhysicsLevel(ballonsCount);
 
@@ -153,7 +181,12 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             ) {
                 puppet.speed.y += PlayerConsts.VariableJumpDelta;
             }
-            if (hasControl && puppet.isOnGround && Input.justWentDown("Jump")) {
+
+            if (hasControl && Input.justWentDown("Jump")) {
+                stepsSinceJumpJustWentDown = 0;
+            }
+
+            if (hasControl && puppet.isOnGround && stepsSinceJumpJustWentDown < 6) {
                 if (
                     RpgPlayer.equipmentAttributes.quirks.enablesHighJumpsAtSpecialSigns
                     && puppet.collidesOne(Instances(objSign, filterSpecialSignObjs))
@@ -169,6 +202,15 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 else {
                     puppet.speed.y = PlayerConsts.JumpSpeed;
                     RpgExperienceRewarder.jump.onJump(ballonsCount, false);
+                }
+
+                if (stepsSinceOffGround < 6 && (puppet.isMovingLeft || puppet.isMovingRight)) {
+                    objFxPlayerJumpComboDust().at(puppet.x + Math.sign(puppet.facing) * -4, puppet.y).scaled(
+                        -Math.sign(puppet.facing),
+                        1,
+                    ).show();
+                    puppet.speed.x += Math.sign(puppet.facing) * 2;
+                    landedThenJumpedHorizontalSpeedBoostUnit = 1;
                 }
             }
         })
@@ -208,7 +250,7 @@ const bounceIguanaOffObject = function () {
 
         vforce.at(pushx, pushy).normalize();
 
-        const length = Math.max(RpgPlayer.motion.bouncingMinSpeed, iguana.speed.vlength);
+        const length = RpgPlayer.motion.bouncingMinSpeed;
         iguana.speed.at(vforce).scale(length);
 
         let iter = 0;

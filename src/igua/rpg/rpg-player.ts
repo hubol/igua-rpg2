@@ -97,12 +97,6 @@ export const RpgPlayer = {
         get bouncingMinSpeed() {
             return Math.min(4, 2.5 + RpgProgress.character.status.conditions.poison.level * 0.25);
         },
-        get walkingTopSpeed() {
-            let speed = 2.5;
-            speed += 0.75 * Math.min(1, RpgProgress.character.status.conditions.poison.level);
-            speed += 0.5 * Math.max(0, RpgProgress.character.status.conditions.poison.level - 1);
-            return speed;
-        },
     },
     meleeAttack: RpgAttack.create({
         emotional: 0,
