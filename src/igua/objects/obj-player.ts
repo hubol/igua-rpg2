@@ -187,6 +187,8 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             }
 
             if (hasControl && puppet.isOnGround && stepsSinceJumpJustWentDown < 6) {
+                stepsSinceJumpJustWentDown = 100;
+
                 if (
                     RpgPlayer.equipmentAttributes.quirks.enablesHighJumpsAtSpecialSigns
                     && puppet.collidesOne(Instances(objSign, filterSpecialSignObjs))
