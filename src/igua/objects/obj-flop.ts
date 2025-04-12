@@ -74,11 +74,11 @@ function getArgsFromFlopDexNumber(flopDexNumber: Integer) {
 
     return {
         accessory,
-        crest: prng.choose(...txs.crest),
+        crest: prng.item(txs.crest),
         ears: txs.ears[prng.int(-1, txs.ears.length)] ?? null,
-        eyes: prng.choose(...txs.eyes),
-        feet: prng.choose(...txs.feet),
-        mouth: prng.choose(...txs.mouth),
+        eyes: prng.item(txs.eyes),
+        feet: prng.item(txs.feet),
+        mouth: prng.item(txs.mouth),
         nose: txs.nose[prng.int(-1, txs.nose.length)] ?? null,
         tint,
     };
