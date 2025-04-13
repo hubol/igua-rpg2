@@ -1,13 +1,18 @@
-import { Sprite } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../assets/textures";
+import { interp } from "../../lib/game-engine/routines/interp";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { cyclic } from "../../lib/math/number";
 import { Integer } from "../../lib/math/number-alias-types";
 import { PseudoRng } from "../../lib/math/rng";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { container } from "../../lib/pixi/container";
 import { MapRgbFilter } from "../../lib/pixi/filters/map-rgb-filter";
+import { objIndexedSprite } from "./utils/obj-indexed-sprite";
 
 const txs = {
+    appear: Tx.Collectibles.Flop.Appear.split({ width: 12 }),
+
     accessory: {
         front: Tx.Collectibles.Flop.Front.split({ width: 36 }),
         rear: Tx.Collectibles.Flop.Rear.split({ width: 48 }),
@@ -22,8 +27,36 @@ const txs = {
 };
 
 export function objFlop(flopDexNumberZeroIndexed: Integer) {
+    const appearObj = objIndexedSprite(txs.appear).anchored(0.5, 0.5);
+    const fullyRealizedCharacterObj = objFlopCharacter(flopDexNumberZeroIndexed).invisible();
+
+    const characterObj = container(appearObj, fullyRealizedCharacterObj)
+        .filtered(fullyRealizedCharacterObj.objects.filter)
+        .coro(function* () {
+            yield sleep(150);
+            appearObj.textureIndex = 1;
+            yield sleep(150);
+            appearObj.textureIndex = 2;
+            yield sleep(150);
+            fullyRealizedCharacterObj.scaled(0.5, 0.5).visible = true;
+            yield sleep(300);
+            fullyRealizedCharacterObj.scaled(1, 1);
+        })
+        .coro(function* () {
+            for (let i = 0; i < 8; i++) {
+                yield sleep(150);
+                characterObj.angle += 90;
+            }
+        });
+
+    return container(characterObj).pivoted(0, 17);
+}
+
+function objFlopCharacter(flopDexNumberZeroIndexed: Integer) {
     flopDexNumberZeroIndexed = Math.round(flopDexNumberZeroIndexed) % 1024;
     const args = getArgsFromFlopDexNumber(flopDexNumberZeroIndexed);
+
+    const filter = new MapRgbFilter(args.tint.red, args.tint.green, args.tint.blue);
 
     return container(
         ...(args.accessory.rear ? [Sprite.from(args.accessory.rear).at(-7, 7)] : []),
@@ -36,8 +69,8 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
         Sprite.from(args.eyes).at(-5, -4),
         ...(args.nose ? [Sprite.from(args.nose).at(-5, -3)] : []),
     )
-        .pivoted(18, 30)
-        .filtered(new MapRgbFilter(args.tint.red, args.tint.green, args.tint.blue));
+        .pivoted(15, 13)
+        .merge({ objects: { filter } });
 }
 
 const prng = new PseudoRng();
