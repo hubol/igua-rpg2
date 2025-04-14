@@ -57,6 +57,8 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
             objText.SmallDigits(printFlopDexNumber(flopDexNumberZeroIndexed)).anchored(0.5, 0).at(0, 19).show(
                 self,
             );
+
+            Sprite.from(Tx.Ui.NewIndicator).at(12, 16).show(self);
         });
 }
 

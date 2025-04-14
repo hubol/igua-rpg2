@@ -26,7 +26,9 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
+import { objFlop } from "../objects/obj-flop";
 import { IguanaLocomotiveConsts, ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
+import { playerObj } from "../objects/obj-player";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { objMarker } from "../objects/utils/obj-marker";
 import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
@@ -42,6 +44,18 @@ export function scnNewBalltown() {
     enrichMiner(lvl);
     enrichMechanicalIdol(lvl);
     enrichFishmongerDeliveryToArmorer(lvl);
+
+    container().at(playerObj)
+        .coro(function* (self) {
+            while (true) {
+                for (let i = 0; i < 1024; i++) {
+                    const obj = objFlop(i).at(self).show();
+                    yield sleep(2000);
+                    obj.destroy();
+                }
+            }
+        })
+        .show();
 }
 
 function enrichMiner(lvl: LvlType.NewBalltown) {
