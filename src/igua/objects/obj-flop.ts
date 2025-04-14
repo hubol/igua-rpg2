@@ -3,7 +3,7 @@ import { Tx } from "../../assets/textures";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { cyclic } from "../../lib/math/number";
-import { Integer } from "../../lib/math/number-alias-types";
+import { Integer, PolarInt } from "../../lib/math/number-alias-types";
 import { PseudoRng } from "../../lib/math/rng";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { container } from "../../lib/pixi/container";
@@ -83,8 +83,8 @@ function getArgsFromFlopDexNumber(flopDexNumber: Integer) {
 
     const hue0 = getHue();
     const hueDeltaSign = prng.intp();
-    const hue1 = cyclic(hue0 + prng.int(30, 120) * hueDeltaSign, 0, 360);
-    const hue2 = cyclic(hue1 + prng.int(30, 120) * hueDeltaSign, 0, 360);
+    const hue1 = getNextHue(hue0, hueDeltaSign);
+    const hue2 = getNextHue(hue1, hueDeltaSign);
 
     const [hueR, hueG, hueB] = prng.shuffle([hue0, hue1, hue2]);
 
@@ -127,4 +127,19 @@ function getHue() {
         return prng.int(70, 162);
     }
     return prng.int(162, 360);
+}
+
+function getNextHue(hue: number, deltaSign: PolarInt) {
+    let min = 20;
+    let max = 70;
+
+    if (hue >= 162 && prng.bool()) {
+        max += 50;
+    }
+    else if (hue >= 70 && hue < 162) {
+        min = 50;
+        max += 50;
+    }
+
+    return cyclic(hue + prng.int(min, max) * deltaSign, 0, 360);
 }
