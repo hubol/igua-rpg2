@@ -13,6 +13,7 @@ const characters = {
     "8": { x: 33, y: 0, w: 4, h: 5, xadv: 5 },
     "9": { x: 38, y: 0, w: 4, h: 5, xadv: 5 },
     "+": { x: 48, y: 1, w: 3, h: 3, xadv: 4, yoff: 1 },
+    "#": { x: 52, y: 0, w: 5, h: 5, xadv: 6 },
 };
 
 export const fntDiggit = createBitmapFont(Tx.Font.Diggit, {

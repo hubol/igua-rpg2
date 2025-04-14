@@ -1,4 +1,5 @@
 import { Graphics, Sprite } from "pixi.js";
+import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -27,11 +28,16 @@ const txs = {
 };
 
 export function objFlop(flopDexNumberZeroIndexed: Integer) {
+    flopDexNumberZeroIndexed = cyclic(Math.round(flopDexNumberZeroIndexed), 0, 999);
+
     const appearObj = objIndexedSprite(txs.appear).anchored(0.5, 0.5);
     const fullyRealizedCharacterObj = objFlopCharacter(flopDexNumberZeroIndexed).invisible();
 
     const characterObj = container(appearObj, fullyRealizedCharacterObj)
-        .filtered(fullyRealizedCharacterObj.objects.filter)
+        .filtered(fullyRealizedCharacterObj.objects.filter);
+
+    return container(characterObj)
+        .pivoted(0, 17)
         .coro(function* () {
             yield sleep(150);
             appearObj.textureIndex = 1;
@@ -42,18 +48,28 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
             yield sleep(300);
             fullyRealizedCharacterObj.scaled(1, 1);
         })
-        .coro(function* () {
+        .coro(function* (self) {
             for (let i = 0; i < 8; i++) {
                 yield sleep(150);
                 characterObj.angle += 90;
             }
-        });
 
-    return container(characterObj).pivoted(0, 17);
+            objText.SmallDigits(printFlopDexNumber(flopDexNumberZeroIndexed)).anchored(0.5, 0).at(0, 19).show(
+                self,
+            );
+        });
+}
+
+function printFlopDexNumber(flopDexNumberZeroIndexed: Integer) {
+    let result = "" + (flopDexNumberZeroIndexed + 1);
+    while (result.length < 3) {
+        result = "0" + result;
+    }
+
+    return "#" + result;
 }
 
 function objFlopCharacter(flopDexNumberZeroIndexed: Integer) {
-    flopDexNumberZeroIndexed = Math.round(flopDexNumberZeroIndexed) % 1024;
     const args = getArgsFromFlopDexNumber(flopDexNumberZeroIndexed);
 
     const filter = new MapRgbFilter(args.tint.red, args.tint.green, args.tint.blue);
