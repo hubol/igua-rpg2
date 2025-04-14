@@ -81,7 +81,7 @@ function getArgsFromFlopDexNumber(flopDexNumber: Integer) {
         : (88_888_888 + flopDexNumber * 9_919_191);
     prng.seed = seed;
 
-    const hue0 = prng.int(360);
+    const hue0 = getHue();
     const hueDeltaSign = prng.intp();
     const hue1 = cyclic(hue0 + prng.int(30, 120) * hueDeltaSign, 0, 360);
     const hue2 = cyclic(hue1 + prng.int(30, 120) * hueDeltaSign, 0, 360);
@@ -115,4 +115,16 @@ function getArgsFromFlopDexNumber(flopDexNumber: Integer) {
         nose: txs.nose[prng.int(-1, txs.nose.length)] ?? null,
         tint,
     };
+}
+
+function getHue() {
+    const range = prng.int(7);
+
+    if (range < 3) {
+        return prng.int(70);
+    }
+    if (range === 3) {
+        return prng.int(70, 162);
+    }
+    return prng.int(162, 360);
 }
