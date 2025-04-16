@@ -106,9 +106,11 @@ function getArgsFromFlopDexNumber(flopDexNumber: Integer) {
 
     const [hueR, hueG, hueB] = prng.shuffle([hue0, hue1, hue2]);
 
+    const noAccessoryPossibility = prng.int(2);
+
     const accessory = {
-        front: txs.accessory.front[prng.int(-1, txs.accessory.front.length)] ?? null,
-        rear: txs.accessory.rear[prng.int(-1, txs.accessory.rear.length)] ?? null,
+        front: txs.accessory.front[prng.int(noAccessoryPossibility === 0 ? -1 : 0, txs.accessory.front.length)] ?? null,
+        rear: txs.accessory.rear[prng.int(noAccessoryPossibility === 1 ? -1 : 0, txs.accessory.rear.length)] ?? null,
     };
 
     const tint = prng.bool()
