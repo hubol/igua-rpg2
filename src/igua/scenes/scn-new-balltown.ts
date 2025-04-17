@@ -20,7 +20,7 @@ import { DramaKeyItems } from "../drama/drama-key-items";
 import { DramaMisc } from "../drama/drama-misc";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
-import { Cutscene, scene } from "../globals";
+import { Cutscene, DevKey, scene } from "../globals";
 import { mxnComputer } from "../mixins/mxn-computer";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
@@ -50,7 +50,9 @@ export function scnNewBalltown() {
             while (true) {
                 for (let i = 0; i < 1024; i++) {
                     const obj = objFlop(i).at(self).show();
-                    yield sleep(2000);
+                    yield sleepf(15);
+                    // yield sleep(2000);
+                    // yield () => DevKey.justWentDown("KeyN");
                     obj.destroy();
                 }
             }
