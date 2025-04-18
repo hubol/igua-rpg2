@@ -45,13 +45,14 @@ export function scnNewBalltown() {
     enrichMechanicalIdol(lvl);
     enrichFishmongerDeliveryToArmorer(lvl);
 
-    container().at(playerObj)
+    container()
+        .at(playerObj)
+        .add(0, -24)
         .coro(function* (self) {
             while (true) {
                 for (let i = 0; i < 1024; i++) {
                     const obj = objFlop(i).at(self).show();
-                    yield sleepf(15);
-                    // yield sleep(2000);
+                    yield sleep(2000);
                     // yield () => DevKey.justWentDown("KeyN");
                     obj.destroy();
                 }

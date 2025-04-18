@@ -9,6 +9,7 @@ import { PseudoRng } from "../../lib/math/rng";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { container } from "../../lib/pixi/container";
 import { MapRgbFilter } from "../../lib/pixi/filters/map-rgb-filter";
+import { mxnPhysics } from "../mixins/mxn-physics";
 import { objIndexedSprite } from "./utils/obj-indexed-sprite";
 
 const txs = {
@@ -38,22 +39,23 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
         .filtered(fullyRealizedCharacterObj.objects.filter);
 
     return container(characterObj)
-        .pivoted(0, 17)
-        .coro(function* () {
-            // yield sleep(150);
-            // appearObj.textureIndex = 1;
-            // yield sleep(150);
-            // appearObj.textureIndex = 2;
-            // yield sleep(150);
+        .mixin(mxnPhysics, { physicsRadius: 6, gravity: 0.1, physicsOffset: [0, 9] })
+        .coro(function* (self) {
+            self.speed.y = -3;
+            yield sleep(150);
+            appearObj.textureIndex = 1;
+            yield sleep(150);
+            appearObj.textureIndex = 2;
+            yield sleep(150);
             fullyRealizedCharacterObj.scaled(0.5, 0.5).visible = true;
-            // yield sleep(300);
+            yield sleep(300);
             fullyRealizedCharacterObj.scaled(1, 1);
         })
         .coro(function* (self) {
-            // for (let i = 0; i < 8; i++) {
-            //     yield sleep(150);
-            //     characterObj.angle += 90;
-            // }
+            for (let i = 0; i < 8; i++) {
+                yield sleep(150);
+                characterObj.angle += 90;
+            }
 
             objText.SmallDigits(printFlopDexNumber(flopDexNumberZeroIndexed)).anchored(0.5, 0).at(0, 19).show(
                 self,
