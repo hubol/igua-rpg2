@@ -3,7 +3,6 @@ import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Instances } from "../../lib/game-engine/instances";
-import { isOnScreen } from "../../lib/game-engine/logic/is-on-screen";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
@@ -20,15 +19,13 @@ import { DramaKeyItems } from "../drama/drama-key-items";
 import { DramaMisc } from "../drama/drama-misc";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
-import { Cutscene, DevKey, scene } from "../globals";
+import { Cutscene, scene } from "../globals";
 import { mxnComputer } from "../mixins/mxn-computer";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
-import { objFlop } from "../objects/obj-flop";
-import { IguanaLocomotiveConsts, ObjIguanaLocomotiveAutoFacingMode } from "../objects/obj-iguana-locomotive";
-import { playerObj } from "../objects/obj-player";
+import { IguanaLocomotiveConsts } from "../objects/obj-iguana-locomotive";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { objMarker } from "../objects/utils/obj-marker";
 import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
@@ -44,21 +41,6 @@ export function scnNewBalltown() {
     enrichMiner(lvl);
     enrichMechanicalIdol(lvl);
     enrichFishmongerDeliveryToArmorer(lvl);
-
-    container()
-        .at(playerObj)
-        .add(0, -24)
-        .coro(function* (self) {
-            while (true) {
-                for (let i = 0; i < 1024; i++) {
-                    const obj = objFlop(i).at(self).show();
-                    yield sleep(2000);
-                    // yield () => DevKey.justWentDown("KeyN");
-                    obj.destroy();
-                }
-            }
-        })
-        .show();
 }
 
 function enrichMiner(lvl: LvlType.NewBalltown) {

@@ -18,13 +18,23 @@ export namespace RpgLoot {
         item: RpgPocket.Item;
     }
 
+    interface TierOptionDrop_Flop {
+        kind: "flop";
+        min: Integer;
+        max: Integer;
+    }
+
     interface TierOptionDrop_Nothing {
         kind: "nothing";
     }
 
     // TODO key item, too
 
-    type TierOptionDrop = TierOptionDrop_Valuables | TierOptionDrop_PocketItem | TierOptionDrop_Nothing;
+    type TierOptionDrop =
+        | TierOptionDrop_Valuables
+        | TierOptionDrop_PocketItem
+        | TierOptionDrop_Flop
+        | TierOptionDrop_Nothing;
 
     type TierOption = TierOptionDrop & {
         weight?: Integer;
@@ -41,12 +51,14 @@ export namespace RpgLoot {
     export interface Drop {
         valuables: Integer;
         pocketItems: RpgPocket.Item[];
+        flops: Integer[];
     }
 
     export const Methods = {
         drop(model: Model, dropperStatus: RpgStatus.Model): Drop {
             let valuables = 0;
             const pocketItems: RpgPocket.Item[] = [];
+            const flops: Integer[] = [];
 
             const tiers = [model.tier0, model.tier1];
 
@@ -66,13 +78,15 @@ export namespace RpgLoot {
                 else if (drop.kind === "pocket_item") {
                     pocketItems.push(drop.item);
                 }
+                else if (drop.kind === "flop") {
+                    flops.push(Rng.intc(drop.min, drop.max));
+                }
             }
-
-            console.log(pocketItems);
 
             return {
                 valuables,
                 pocketItems,
+                flops,
             };
         },
     };
@@ -94,8 +108,6 @@ export namespace RpgLoot {
 
         const maxScore = dropWithMinimumScores.last.score;
         const playerScore = Rng.int(maxScore);
-
-        console.log({ dropWithMinimumScores, maxScore, playerScore });
 
         for (const { drop, score } of dropWithMinimumScores) {
             if (playerScore < score) {

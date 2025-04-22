@@ -130,7 +130,8 @@ const ranks = {
             tier1: [
                 { kind: "pocket_item", item: "BallFruitTypeA" },
                 { kind: "pocket_item", item: "BallFruitTypeB" },
-                { kind: "pocket_item", item: "ComputerChip", weight: 2 },
+                { kind: "pocket_item", item: "ComputerChip", weight: 3 },
+                { kind: "flop", min: 10, max: 14 },
                 { kind: "nothing" },
             ],
         },
@@ -144,7 +145,8 @@ const ranks = {
                 { kind: "valuables", max: 10, min: 2, deltaPride: -3 },
             ],
             tier1: [
-                { kind: "pocket_item", item: "ComputerChip", weight: 4 },
+                { kind: "pocket_item", item: "ComputerChip", weight: 7 },
+                { kind: "flop", min: 0, max: 9, weight: 2 },
                 { kind: "nothing" },
             ],
         },

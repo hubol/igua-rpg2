@@ -1,15 +1,19 @@
 import { Graphics, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
-import { interp } from "../../lib/game-engine/routines/interp";
-import { sleep } from "../../lib/game-engine/routines/sleep";
-import { cyclic } from "../../lib/math/number";
+import { interp, interpvr } from "../../lib/game-engine/routines/interp";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
+import { approachLinear, cyclic } from "../../lib/math/number";
 import { Integer, PolarInt } from "../../lib/math/number-alias-types";
 import { PseudoRng } from "../../lib/math/rng";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { container } from "../../lib/pixi/container";
 import { MapRgbFilter } from "../../lib/pixi/filters/map-rgb-filter";
+import { scene } from "../globals";
 import { mxnPhysics } from "../mixins/mxn-physics";
+import { RpgFlops } from "../rpg/rpg-flops";
+import { RpgProgress } from "../rpg/rpg-progress";
+import { playerObj } from "./obj-player";
 import { objIndexedSprite } from "./utils/obj-indexed-sprite";
 
 const txs = {
@@ -38,8 +42,16 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
     const characterObj = container(appearObj, fullyRealizedCharacterObj)
         .filtered(fullyRealizedCharacterObj.objects.filter);
 
-    return container(characterObj)
+    const hitboxObj = new Graphics().beginFill(0).drawRect(-16, -20, 32, 40).invisible();
+
+    return container(characterObj, hitboxObj)
         .mixin(mxnPhysics, { physicsRadius: 6, gravity: 0.1, physicsOffset: [0, 9] })
+        .step(self => {
+            self.x = Math.max(0, Math.min(self.x, scene.level.width));
+            if (self.isOnGround) {
+                self.speed.x = approachLinear(self.speed.x, 0, 0.1);
+            }
+        })
         .coro(function* (self) {
             self.speed.y = -3;
             yield sleep(150);
@@ -61,7 +73,31 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
                 self,
             );
 
-            Sprite.from(Tx.Ui.NewIndicator).at(12, 16).show(self);
+            // TODO SFX
+
+            const newIndicatorObj = Sprite.from(Tx.Ui.NewIndicator).anchored(0.5, 0.5).at(18, 14).show(self);
+            const newIndicatorVisibleObj = container().step(() =>
+                newIndicatorObj.visible = !RpgFlops.Methods.has(
+                    RpgProgress.character.inventory.flops,
+                    flopDexNumberZeroIndexed,
+                )
+            ).show(self);
+
+            yield sleepf(2);
+            // TODO should it check if the player has control
+            yield () => playerObj.collides(hitboxObj);
+            newIndicatorVisibleObj.destroy();
+            RpgFlops.Methods.receive(RpgProgress.character.inventory.flops, flopDexNumberZeroIndexed);
+            self.physicsEnabled = false;
+            self.speed.at(0, 0);
+            yield interpvr(self).translate(0, -32).over(200);
+            yield interp(newIndicatorObj, "angle").steps(8).to(360).over(400);
+            yield sleep(1000);
+            for (let i = 0; i < 4; i++) {
+                self.visible = !self.visible;
+                yield sleep(100);
+            }
+            self.destroy();
         });
 }
 

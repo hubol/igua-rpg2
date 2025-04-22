@@ -6,6 +6,7 @@ import { PropertiesLike } from "../../lib/types/properties-like";
 import { EquipmentInternalName } from "../data/data-equipment";
 import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { getDefaultLooks } from "../iguana/get-default-looks";
+import { RpgFlops } from "./rpg-flops";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgQuests } from "./rpg-quests";
@@ -15,6 +16,7 @@ export function getInitialRpgProgress() {
     return {
         character: {
             inventory: {
+                flops: RpgFlops.create(),
                 valuables: 100,
                 keyItems: RpgKeyItems.create(),
                 pocket: RpgPocket.create(),
