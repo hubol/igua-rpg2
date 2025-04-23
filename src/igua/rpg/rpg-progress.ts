@@ -1,4 +1,4 @@
-import { Polar } from "../../lib/math/number-alias-types";
+import { Integer, Polar } from "../../lib/math/number-alias-types";
 import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { Empty } from "../../lib/types/empty";
 import { Null } from "../../lib/types/null";
@@ -108,6 +108,10 @@ export function getInitialRpgProgress() {
                 },
             },
         },
+        programmaticFlags: {
+            shopSoldCounts: {} as Record<string, Record<string, Integer>>,
+        },
+        // TODO move to programmaticFlags
         uids: {
             metNpcs: new Set<NpcPersonaInternalName>(),
             valuables: new Set<number>(),
