@@ -29,6 +29,8 @@ interface Product_Potion {
 
 // TODO can you buy pocket items?
 // probably...?
+// TODO can you buy flops?
+// not sure...?
 type Product = Product_Equipment | Product_KeyItem | Product_Potion;
 
 interface Price {
@@ -48,7 +50,8 @@ interface Config {
     stocks: Stock[];
 }
 
-type CatalogItem = Readonly<{
+export type CatalogItem = Readonly<{
+    index: Integer; // Feels a little bad here, as it really should only be used in RpgShop
     key: string;
     product: Product;
     currency: Currency;
@@ -101,27 +104,37 @@ export class RpgShop {
     }
 
     getCatalog(): CatalogItem[] {
-        return this.config.stocks.map((stock, index) => {
-            const key = this.catalogItemKeys[index];
-            const soldCount = this.getSoldCount(key);
-
-            return ({
-                key: this.catalogItemKeys[index],
-                product: stock.product,
-                currency: stock.price.currency,
-                price: stock.price.initial + Math.max(0, soldCount, stock.initialQuantity - 1) * stock.price.deltaSold,
-                quantity: Math.max(0, stock.initialQuantity - soldCount),
-            });
-        });
+        return this.config.stocks.map((stock, index) => this.getCatalogItem(index, stock));
     }
 
-    purchase(item: CatalogItem) {
+    private getCatalogItem(index: number, stock: Stock): CatalogItem {
+        const key = this.catalogItemKeys[index];
+        const soldCount = this.getSoldCount(key);
+
+        return {
+            index,
+            key: this.catalogItemKeys[index],
+            product: stock.product,
+            currency: stock.price.currency,
+            price: stock.price.initial
+                + Math.max(0, Math.min(soldCount, stock.initialQuantity - 1)) * stock.price.deltaSold,
+            quantity: Math.max(0, stock.initialQuantity - soldCount),
+        };
+    }
+
+    // TODO should purchase assert that the player can afford?
+    // Or return status indicating the player could not afford?!
+    purchase(identityItem: CatalogItem) {
+        if (!this.config.stocks[identityItem.index]) {
+            // TODO should this be a cutsom error that accepts more context?
+            throw new Error("Passed CatalogItem has invalid index");
+        }
+
+        const item = this.getCatalogItem(identityItem.index, this.config.stocks[identityItem.index]);
+
         if (item.quantity <= 0) {
-            Logger.logContractViolationError(
-                "RpgShop.purchase",
-                new Error("Attempting to purchase catalog item with quantity <= 0"),
-                item,
-            );
+            // TODO should this be a cutsom error that accepts more context?
+            throw new Error("Attempting to purchase catalog item with quantity <= 0");
         }
 
         // TODO assert afford
