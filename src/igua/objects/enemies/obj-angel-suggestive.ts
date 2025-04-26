@@ -25,10 +25,10 @@ import { objPocketableItem } from "../obj-pocketable-item";
 import { objProjectileElectricalPulseGround } from "../projectiles/obj-projectile-electrical-pulse-ground";
 import { objSpikedCanonball } from "../projectiles/obj-spiked-canonball";
 import { objAngelEyes, ObjAngelEyesArgs } from "./obj-angel-eyes";
+import { objAngelMouth } from "./obj-angel-mouth";
 import { objAngelPlantLegs } from "./obj-angel-plant-legs";
 
 const [txGear, txGearHighlight] = Tx.Enemy.Suggestive.Gear.split({ count: 2 });
-const [txMouth, txMouthPartiallyAgape, txMouthAgape] = Tx.Enemy.Suggestive.Mouth.split({ count: 3 });
 const [
     txBody,
     txBulgeSmall,
@@ -203,28 +203,18 @@ function objAngelSuggestiveFace(theme: Theme) {
     eyesObj.left.pupilSpr.tint = theme.tints.pupilLeft;
     eyesObj.right.pupilSpr.tint = theme.tints.pupilRight;
 
-    let agape = false;
-    let agapeUnit = 0;
-
-    const mouthObj = Sprite.from(txMouth).anchored(0.5, 0.5).at(theme.positions.mouth).tinted(theme.tints.mouth).merge({
-        get agape() {
-            return agape;
-        },
-        set agape(value) {
-            agape = value;
-        },
+    const mouthObj = objAngelMouth({
+        negativeSpaceTint: theme.tints.mouth,
+        teethCount: 0,
+        toothGapWidth: 1,
+        txs: objAngelMouth.txs.rounded11,
     })
-        .step(() => {
-            agapeUnit = approachLinear(agapeUnit, agape ? 1 : 0, 0.2);
-            if (agapeUnit === 1) {
-                mouthObj.texture = txMouthAgape;
-            }
-            else if (agapeUnit === 0) {
-                mouthObj.texture = txMouth;
-            }
-            else {
-                mouthObj.texture = txMouthPartiallyAgape;
-            }
+        .at(theme.positions.mouth)
+        .merge({
+            agape: false,
+        })
+        .step(self => {
+            self.controls.agapeUnit = approachLinear(self.controls.agapeUnit, self.agape ? 1 : 0, 0.2);
         });
 
     const spr = Sprite.from(theme.textures.face).at(theme.positions.face).tinted(theme.tints.face).anchored(0.5, 0.5)
@@ -391,14 +381,14 @@ export function objAngelSuggestive(variantKey: VariantKey) {
                     && Math.abs(playerObj.y - enemyObj.y) < 60
                     && playerObj.speed.y >= 0
                 ) {
-                    faceObj.mouthObj.flipV(-1);
+                    faceObj.mouthObj.controls.frowning = true;
                     enemyObj.play(Sfx.Enemy.Suggestive.Lift.rate(0.9, 1.1));
                     yield interpvr(enemyObj.pivot).factor(factor.sine).to(0, 16).over(250);
                     objAngelSuggestiveElectricalPulseGround(enemyObj.status).at(enemyObj).show().zIndexed(
                         ZIndex.Entities - 1,
                     );
                     yield sleep(500);
-                    faceObj.mouthObj.flipV(1);
+                    faceObj.mouthObj.controls.frowning = false;
                     enemyObj.play(Sfx.Enemy.Suggestive.Unlift.rate(0.9, 1.1));
                     yield interpvr(enemyObj.pivot).factor(factor.sine).to(0, 0).over(250);
                     yield sleep(1000);
