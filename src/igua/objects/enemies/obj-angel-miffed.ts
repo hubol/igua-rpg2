@@ -2,17 +2,42 @@ import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
+import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objAngelEyes } from "./obj-angel-eyes";
 import { objAngelMouth } from "./obj-angel-mouth";
 
 const themes = {};
-const ranks = {};
+const ranks = {
+    level0: RpgEnemyRank.create({
+        loot: {
+            // TODO idk
+            tier0: [{ kind: "valuables", deltaPride: -1, max: 10, min: 1 }],
+            tier1: [{ kind: "flop", min: 15, max: 19, weight: 3 }, { kind: "nothing" }],
+        },
+        status: {
+            healthMax: 60,
+        },
+    }),
+} satisfies Record<string, RpgEnemyRank.Model>;
 const variants = {};
 
 export function objAngelMiffed() {
-    return container(objAngelBody(), objAngelMiffedHead()).pivoted(22, 41).filtered(
-        new MapRgbFilter(0xFF77B0, 0x715EFF),
-    );
+    const hurtboxObjs = [
+        new Graphics().beginFill(0).drawRect(4, 10, 40, 16).invisible(),
+        new Graphics().beginFill(0).drawRect(11, 22, 24, 16).invisible(),
+    ];
+
+    const objHead = objAngelMiffedHead();
+
+    return container(objAngelBody(), objHead, ...hurtboxObjs)
+        .mixin(mxnEnemy, {
+            hurtboxes: hurtboxObjs,
+            rank: ranks.level0,
+            angelEyesObj: objHead.objects.faceObj.objects.eyesObj,
+        })
+        .pivoted(22, 41)
+        .filtered(new MapRgbFilter(0xFF77B0, 0x715EFF));
 }
 
 function objAngelMiffedHead() {
@@ -35,6 +60,9 @@ function objAngelMiffedFace() {
         scleraTx: Tx.Enemy.Miffed.Sclera0,
         sclerasMirrored: true,
     });
+
+    eyesObj.left.pupilSpr.tint = 0;
+    eyesObj.right.pupilSpr.tint = 0;
 
     const mouthObj = objAngelMouth({
         negativeSpaceTint: 0x000000,

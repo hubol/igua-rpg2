@@ -15,6 +15,7 @@ import { mxnComputer } from "../mixins/mxn-computer";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFxHeartBurst } from "../objects/effects/obj-fx-heart-burst";
+import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
 import { playerObj } from "../objects/obj-player";
 import { RpgCutscene } from "../rpg/rpg-cutscene";
@@ -29,6 +30,8 @@ export function scnNewBalltownUnderneath() {
     enrichHeliumCreator(lvl);
     enrichTunnel(lvl);
     enrichMagicRisingFace(lvl);
+
+    objAngelMiffed().at(lvl.TestMarker).show();
 }
 
 function enrichHomeowner(lvl: LvlType.NewBalltownUnderneath) {

@@ -2005,6 +2005,7 @@ export const Lvl = {
     EnvironmentSparkleMarker_4: e(r["EnvironmentSparkleMarker"], { x: 136, y: 80, values: { name: "", depth: 0 } }, "MarkerEntities"),
     HeliumMarker: e(r["Marker"], { x: 1855, y: 406, values: { name: "HeliumMarker", depth: 0 }, tint: 0x00ffff }, "MarkerEntities"),
     HeliumContentTextMarker: e(r["Marker"], { x: 1916, y: 388, values: { name: "HeliumContentTextMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+    TestMarker: e(r["Marker"], { x: 1688, y: 360, values: { name: "TestMarker", depth: 0 }, tint: 0xff00b8 }, "MarkerEntities"),
   })),
   NewBalltown: l({ width: 1644, height: 632, backgroundTint: 0xdcc132 }, () => ({
     OutskirtsSeam: dg("OutskirtsSeam", "ParallaxDecals"),

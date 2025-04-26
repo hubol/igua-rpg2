@@ -88,6 +88,17 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "HeliumContentTextMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 7,
+          "_eid": "73148747",
+          "x": 1688,
+          "y": 360,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#ff00b8",
+          "values": {"name": "TestMarker", "depth": 0}
         }
       ]
     },
