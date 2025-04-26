@@ -1,11 +1,16 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
+import { interp } from "../../../lib/game-engine/routines/interp";
+import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { objAngelEyes } from "./obj-angel-eyes";
 import { objAngelMouth } from "./obj-angel-mouth";
+
+const txsFistSlam = Tx.Enemy.Miffed.FistSlam.split({ count: 6 });
 
 const themes = {};
 const ranks = {
@@ -28,16 +33,59 @@ export function objAngelMiffed() {
         new Graphics().beginFill(0).drawRect(11, 22, 24, 16).invisible(),
     ];
 
-    const objHead = objAngelMiffedHead();
+    const headObj = objAngelMiffedHead();
+    const slammingFistRightObj = objSlammingFist("right");
 
-    return container(objAngelBody(), objHead, ...hurtboxObjs)
+    return container(objAngelBody(), headObj, slammingFistRightObj, ...hurtboxObjs)
         .mixin(mxnEnemy, {
             hurtboxes: hurtboxObjs,
             rank: ranks.level0,
-            angelEyesObj: objHead.objects.faceObj.objects.eyesObj,
+            angelEyesObj: headObj.objects.faceObj.objects.eyesObj,
         })
         .pivoted(22, 41)
-        .filtered(new MapRgbFilter(0xFF77B0, 0x715EFF));
+        .filtered(new MapRgbFilter(0xFF77B0, 0x715EFF))
+        .coro(function* () {
+            while (true) {
+                yield interp(slammingFistRightObj.controls, "exposedUnit").steps(3).to(1).over(300);
+                yield interp(slammingFistRightObj.controls, "slamUnit").to(1).over(500);
+                yield sleep(250);
+                yield interp(slammingFistRightObj.controls, "exposedUnit").steps(3).to(0).over(300);
+                yield sleep(250);
+                slammingFistRightObj.controls.slamUnit = 0;
+            }
+        });
+}
+
+function objSlammingFist(side: "right" | "left") {
+    let slamUnit = 0;
+
+    const obj = objIndexedSprite(txsFistSlam)
+        .pivoted(59, 41);
+
+    if (side === "right") {
+        obj.at(33, 29);
+    }
+
+    const controls = {
+        get exposedUnit() {
+            return obj.scale.y;
+        },
+        set exposedUnit(value) {
+            obj.scale.x = side === "right" ? value : -value;
+            obj.scale.y = value;
+        },
+        get slamUnit() {
+            return slamUnit;
+        },
+        set slamUnit(value) {
+            obj.textureIndex = value * obj.textures.length - 1;
+            slamUnit = value;
+        },
+    };
+
+    controls.exposedUnit = 0;
+
+    return obj.merge({ controls });
 }
 
 function objAngelMiffedHead() {
