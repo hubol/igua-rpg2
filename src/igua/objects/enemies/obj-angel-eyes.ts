@@ -14,8 +14,9 @@ type PupilRestStyle = PupilRestStyle_CrossEyed;
 
 export interface ObjAngelEyesArgs {
     pupilTx: Texture;
+    pupilsMirrored?: boolean;
     scleraTx: Texture;
-    sclerasMirrored: boolean;
+    sclerasMirrored?: boolean;
     eyelidsTint: Integer;
     gap: Integer;
     defaultEyelidRestingPosition: Integer;
@@ -30,7 +31,8 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
     const leftPupilObj = Sprite.from(args.pupilTx).anchored(0.5, 0.5).at(leftPupilPositionConfig.rest);
     const rightPupilObj = Sprite.from(args.pupilTx).anchored(0.5, 0.5).at(
         rightPupilPositionConfig.rest,
-    );
+    )
+        .scaled(args.pupilsMirrored ? -1 : 1, 1);
 
     const leftScleraObj = Sprite.from(args.scleraTx);
     const rightScleraObj = Sprite.from(args.scleraTx).flipH(args.sclerasMirrored ? -1 : 1);
