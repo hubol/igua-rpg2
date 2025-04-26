@@ -1,7 +1,8 @@
 import { Sprite, Texture } from "pixi.js";
+import { Tx } from "../../../assets/textures";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
-import { VectorSimple } from "../../../lib/math/vector-type";
+import { VectorSimple, vnew } from "../../../lib/math/vector-type";
 import { objEye, objEyes } from "../characters/obj-eye";
 
 interface PupilRestStyle_CrossEyed {
@@ -50,8 +51,52 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
 
     const eyesObj = objEyes(leftEyeObj, rightEyeObj);
     eyesObj.stepsUntilBlink = Rng.int(40, 120);
-    return eyesObj;
+
+    const injuredLeftEyeObj = Sprite.from(Tx.Enemy.Common.Eyes.Injured0).anchored(0.5, 0.5).at(leftEyeObj)
+        .add(
+            Math.round(leftEyeObj.width / 2),
+            Math.round(leftEyeObj.height / 2),
+        )
+        .add(scleraToInjuredOffsets.get(args.scleraTx) ?? vzero)
+        .invisible()
+        .scaled(-1, 1)
+        .show(
+            eyesObj,
+        );
+    const injuredRightEyeObj = Sprite.from(Tx.Enemy.Common.Eyes.Injured0).anchored(0.5, 0.5)
+        .at(rightEyeObj)
+        .add(
+            Math.round(rightEyeObj.width / 2),
+            Math.round(rightEyeObj.height / 2),
+        )
+        .add(scleraToInjuredOffsets.get(args.scleraTx) ?? vzero)
+        .invisible()
+        .show(eyesObj);
+
+    return eyesObj
+        .merge({
+            get injuredLeft() {
+                return injuredLeftEyeObj.visible;
+            },
+            set injuredLeft(value) {
+                injuredLeftEyeObj.visible = value;
+                leftEyeObj.visible = !value;
+            },
+            get injuredRight() {
+                return injuredRightEyeObj.visible;
+            },
+            set injuredRight(value) {
+                injuredRightEyeObj.visible = value;
+                rightEyeObj.visible = !value;
+            },
+        })
+        .step(() => {
+            injuredLeftEyeObj.tint = leftPupilObj.tint;
+            injuredRightEyeObj.tint = rightPupilObj.tint;
+        });
 }
+
+export type ObjAngelEyes = ReturnType<typeof objAngelEyes>;
 
 interface PupilPositionConfig {
     rest: VectorSimple;
@@ -96,3 +141,8 @@ function getScleraUsableArea(args: ObjAngelEyesArgs) {
         y1: args.scleraTx.height,
     };
 }
+
+const scleraToInjuredOffsets = new Map<Texture, VectorSimple>();
+scleraToInjuredOffsets.set(Tx.Enemy.Suggestive.Sclera, [0, 2]);
+scleraToInjuredOffsets.set(Tx.Enemy.Suggestive.ScleraWide, [0, -2]);
+const vzero = vnew();

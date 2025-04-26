@@ -222,7 +222,7 @@ function objAngelSuggestiveFace(theme: Theme) {
             mxnBoilMirrorRotate,
         );
 
-    return container(spr, eyesObj, mouthObj).merge({ mouthObj });
+    return container(spr, eyesObj, mouthObj).merge({ eyesObj, mouthObj });
 }
 
 type BulgePhase = "inflating" | "bursting" | "recovering";
@@ -401,7 +401,12 @@ export function objAngelSuggestive(variantKey: VariantKey) {
         actualHeadObj,
         healthbarAnchorObj,
     )
-        .mixin(mxnEnemy, { rank: variant.rank, hurtboxes: [hurtbox0, hurtbox1], healthbarAnchorObj })
+        .mixin(mxnEnemy, {
+            rank: variant.rank,
+            hurtboxes: [hurtbox0, hurtbox1],
+            healthbarAnchorObj,
+            angelEyesObj: faceObj.eyesObj,
+        })
         .handles(
             "mxnEnemy.died",
             (self) =>

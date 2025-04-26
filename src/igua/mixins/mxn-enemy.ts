@@ -4,6 +4,7 @@ import { Rng } from "../../lib/math/rng";
 import { clone } from "../../lib/object/clone";
 import { merge } from "../../lib/object/merge";
 import { layers } from "../globals";
+import { ObjAngelEyes } from "../objects/enemies/obj-angel-eyes";
 import { objLootDrop } from "../objects/obj-loot-drop";
 import { playerObj } from "../objects/obj-player";
 import { RpgAttack } from "../rpg/rpg-attack";
@@ -16,6 +17,7 @@ interface MxnEnemyArgs {
     hurtboxes: DisplayObject[];
     rank: RpgEnemyRank.Model;
     healthbarAnchorObj?: DisplayObject;
+    angelEyesObj?: ObjAngelEyes;
 }
 
 export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
@@ -44,9 +46,32 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
 
     // TODO maybe exposes a way to create projectiles associated with this enemy?
 
+    let leftEyeInjuredStepsCount = -1;
+    let rightEyeInjuredStepsCount = -1;
+
     const enemyObj = obj.mixin(mxnRpgStatus, { status, effects, hurtboxes: args.hurtboxes })
         .dispatches<"mxnEnemy.died">()
-        .handles("damaged", defaultDamagedHandler)
+        .handles("damaged", (self, result) => {
+            if (!result.rejected && result.damaged) {
+                Rng.choose(
+                    Sfx.Impact.VsEnemyPhysical0,
+                    Sfx.Impact.VsEnemyPhysical1,
+                    Sfx.Impact.VsEnemyPhysical2,
+                ).play();
+
+                // TODO rather arbitrary positions
+                if (playerObj.x > self.x + 22) {
+                    rightEyeInjuredStepsCount = 20;
+                }
+                else if (playerObj.x < self.x - 22) {
+                    leftEyeInjuredStepsCount = 20;
+                }
+                else {
+                    rightEyeInjuredStepsCount = Rng.intc(12, 20);
+                    leftEyeInjuredStepsCount = Rng.intc(12, 20);
+                }
+            }
+        })
         .merge({
             strikePlayer(attack: RpgAttack.Model) {
                 playerObj.damage(attack, status);
@@ -54,17 +79,22 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         })
         .track(mxnEnemy);
 
-    return enemyObj;
-}
+    if (args.angelEyesObj) {
+        enemyObj.step(() => {
+            if (leftEyeInjuredStepsCount > 0) {
+                leftEyeInjuredStepsCount--;
+            }
 
-function defaultDamagedHandler(_: unknown, result: RpgStatus.DamageResult) {
-    if (!result.rejected && result.damaged) {
-        Rng.choose(
-            Sfx.Impact.VsEnemyPhysical0,
-            Sfx.Impact.VsEnemyPhysical1,
-            Sfx.Impact.VsEnemyPhysical2,
-        ).play();
+            if (rightEyeInjuredStepsCount > 0) {
+                rightEyeInjuredStepsCount--;
+            }
+
+            args.angelEyesObj!.injuredLeft = leftEyeInjuredStepsCount > 0;
+            args.angelEyesObj!.injuredRight = rightEyeInjuredStepsCount > 0;
+        });
     }
+
+    return enemyObj;
 }
 
 export type MxnEnemy = ReturnType<typeof mxnEnemy>;

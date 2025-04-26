@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 265 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 266 }];
 
 interface TxData {
   id: string;
@@ -65,6 +65,9 @@ function txs<T>(tx: (data: TxData) => T) {
     Enemy: {
       CommonClown: tx({ id: "Enemy.CommonClown", atlas: 0, x: 1412, y: 443, width: 44, height: 32 }),
       Common: {
+        Eyes: {
+          Injured0: tx({ id: "Enemy.Common.Eyes.Injured0", atlas: 0, x: 245, y: 631, width: 6, height: 10 }),
+        },
         Mouths: {
           Rounded11: tx({ id: "Enemy.Common.Mouths.Rounded11", atlas: 0, x: 329, y: 560, width: 33, height: 6 }),
           Rounded14: tx({ id: "Enemy.Common.Mouths.Rounded14", atlas: 0, x: 609, y: 324, width: 70, height: 6 }),
@@ -348,7 +351,7 @@ function txs<T>(tx: (data: TxData) => T) {
       NewIndicator: tx({ id: "Ui.NewIndicator", atlas: 0, x: 1506, y: 418, width: 20, height: 12 }),
       NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 2031, y: 104, width: 8, height: 8 }),
       OwnerDefeat: tx({ id: "Ui.OwnerDefeat", atlas: 0, x: 1506, y: 401, width: 30, height: 16 }),
-      PlacementReticle: tx({ id: "Ui.PlacementReticle", atlas: 0, x: 245, y: 631, width: 6, height: 6 }),
+      PlacementReticle: tx({ id: "Ui.PlacementReticle", atlas: 0, x: 368, y: 704, width: 6, height: 6 }),
       Pocket: {
         CollectNotification: tx({ id: "Ui.Pocket.CollectNotification", atlas: 0, x: 252, y: 605, width: 76, height: 24 }),
         OpenablePocket: tx({ id: "Ui.Pocket.OpenablePocket", atlas: 0, x: 146, y: 701, width: 64, height: 48 }),
