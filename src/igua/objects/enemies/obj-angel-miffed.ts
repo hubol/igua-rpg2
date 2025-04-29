@@ -44,7 +44,9 @@ export function objAngelMiffed() {
     const slammingFistRightObj = objSlammingFist("right");
     const slammingFistLeftObj = objSlammingFist("left");
 
-    const obj = container(objAngelBody(), headObj, slammingFistRightObj, slammingFistLeftObj, ...hurtboxObjs)
+    const bodyObj = objAngelBody();
+
+    const obj = container(bodyObj, headObj, slammingFistRightObj, slammingFistLeftObj, ...hurtboxObjs)
         .pivoted(22, 41);
 
     return container(obj)
@@ -74,6 +76,19 @@ export function objAngelMiffed() {
             }
         })
         .step(self => {
+            let bodyObjY = 0;
+            if (!self.isOnGround) {
+                bodyObjY = self.speed.y < 0 ? -4 : -2;
+            }
+            bodyObj.pivot.y = -bodyObjY;
+
+            if (self.speed.x > 0) {
+                bodyObj.flipH(-1);
+            }
+            else if (self.speed.x < 0) {
+                bodyObj.flipH(1);
+            }
+
             if (self.isOnGround) {
                 self.speed.x = approachLinear(self.speed.x, 0, 0.1);
             }
