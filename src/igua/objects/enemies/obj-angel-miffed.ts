@@ -3,6 +3,7 @@ import { Tx } from "../../../assets/textures";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
+import { Rng } from "../../../lib/math/rng";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
@@ -172,7 +173,7 @@ function objAngelMiffedStarburstAttack() {
     const shape = new Graphics().beginFill(0).drawRect(-12, -12, 25, 25).invisible();
     const obj = objFxStarburst54();
     shape.show(obj);
-    return obj.collisionShape(CollisionShape.DisplayObjects, [shape]);
+    return obj.collisionShape(CollisionShape.DisplayObjects, [shape]).angled(Rng.int(4) * 90);
 }
 
 const atkSlamStarburst = RpgAttack.create({
