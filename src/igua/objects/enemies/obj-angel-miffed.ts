@@ -2,10 +2,16 @@ import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { approachLinear } from "../../../lib/math/number";
+import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnPhysics } from "../../mixins/mxn-physics";
+import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
+import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objFxStarburst54 } from "../effects/obj-fx-startburst-54";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { objAngelEyes } from "./obj-angel-eyes";
 import { objAngelMouth } from "./obj-angel-mouth";
@@ -36,30 +42,53 @@ export function objAngelMiffed() {
     const headObj = objAngelMiffedHead();
     const slammingFistRightObj = objSlammingFist("right");
 
-    return container(objAngelBody(), headObj, slammingFistRightObj, ...hurtboxObjs)
+    const obj = container(objAngelBody(), headObj, slammingFistRightObj, ...hurtboxObjs)
+        .pivoted(22, 41);
+
+    return container(obj)
         .mixin(mxnEnemy, {
             hurtboxes: hurtboxObjs,
             rank: ranks.level0,
             angelEyesObj: headObj.objects.faceObj.objects.eyesObj,
         })
-        .pivoted(22, 41)
+        .mixin(mxnPhysics, { gravity: 0.2, physicsRadius: 6, physicsOffset: [0, -7] })
         .filtered(new MapRgbFilter(0xFF77B0, 0x715EFF))
-        .coro(function* () {
+        .coro(function* (self) {
             while (true) {
                 yield interp(slammingFistRightObj.controls, "exposedUnit").steps(3).to(1).over(300);
                 yield interp(slammingFistRightObj.controls, "slamUnit").to(1).over(500);
+                objAngelMiffedStarburstAttack().at(slammingFistRightObj.state.slamFistWorldPosition).mixin(
+                    mxnRpgAttack,
+                    { attacker: self.status, attack: atkSlamStarburst },
+                ).show();
+
+                self.speed.at(1, -3);
                 yield sleep(250);
                 yield interp(slammingFistRightObj.controls, "exposedUnit").steps(3).to(0).over(300);
                 yield sleep(250);
                 slammingFistRightObj.controls.slamUnit = 0;
             }
+        })
+        .step(self => {
+            if (self.isOnGround) {
+                self.speed.x = approachLinear(self.speed.x, 0, 0.1);
+            }
+
+            headObj.objects.faceObj.objects.mouthObj.controls.agapeUnit = approachLinear(
+                headObj.objects.faceObj.objects.mouthObj.controls.agapeUnit,
+                self.isOnGround ? 0 : 1,
+                0.3,
+            );
         });
 }
 
 function objSlammingFist(side: "right" | "left") {
     let slamUnit = 0;
 
-    const obj = objIndexedSprite(txsFistSlam)
+    const indexedSpriteObj = objIndexedSprite(txsFistSlam);
+    const fistPositionObj = new Graphics().beginFill(0).at(9, 48).drawRect(0, 0, 1, 1).invisible();
+
+    const obj = container(indexedSpriteObj, fistPositionObj)
         .pivoted(59, 41);
 
     if (side === "right") {
@@ -78,14 +107,20 @@ function objSlammingFist(side: "right" | "left") {
             return slamUnit;
         },
         set slamUnit(value) {
-            obj.textureIndex = value * obj.textures.length - 1;
+            indexedSpriteObj.textureIndex = value * indexedSpriteObj.textures.length - 1;
             slamUnit = value;
+        },
+    };
+
+    const state = {
+        get slamFistWorldPosition() {
+            return fistPositionObj.getWorldPosition();
         },
     };
 
     controls.exposedUnit = 0;
 
-    return obj.merge({ controls });
+    return obj.merge({ controls, state });
 }
 
 function objAngelMiffedHead() {
@@ -132,3 +167,14 @@ function objAngelBody() {
     return container(legsObj, Sprite.from(Tx.Enemy.Miffed.Torso0).at(-3, 3), legsMaskObj)
         .at(10, 24);
 }
+
+function objAngelMiffedStarburstAttack() {
+    const shape = new Graphics().beginFill(0).drawRect(-12, -12, 25, 25).invisible();
+    const obj = objFxStarburst54();
+    shape.show(obj);
+    return obj.collisionShape(CollisionShape.DisplayObjects, [shape]);
+}
+
+const atkSlamStarburst = RpgAttack.create({
+    physical: 40,
+});
