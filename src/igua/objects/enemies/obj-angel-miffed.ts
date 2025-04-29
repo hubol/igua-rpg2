@@ -42,8 +42,9 @@ export function objAngelMiffed() {
 
     const headObj = objAngelMiffedHead();
     const slammingFistRightObj = objSlammingFist("right");
+    const slammingFistLeftObj = objSlammingFist("left");
 
-    const obj = container(objAngelBody(), headObj, slammingFistRightObj, ...hurtboxObjs)
+    const obj = container(objAngelBody(), headObj, slammingFistRightObj, slammingFistLeftObj, ...hurtboxObjs)
         .pivoted(22, 41);
 
     return container(obj)
@@ -56,18 +57,20 @@ export function objAngelMiffed() {
         .filtered(new MapRgbFilter(0xFF77B0, 0x715EFF))
         .coro(function* (self) {
             while (true) {
-                yield interp(slammingFistRightObj.controls, "exposedUnit").steps(3).to(1).over(300);
-                yield interp(slammingFistRightObj.controls, "slamUnit").to(1).over(500);
-                objAngelMiffedStarburstAttack().at(slammingFistRightObj.state.slamFistWorldPosition).mixin(
-                    mxnRpgAttack,
-                    { attacker: self.status, attack: atkSlamStarburst },
-                ).show();
+                for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
+                    yield interp(fistObj.controls, "exposedUnit").steps(3).to(1).over(300);
+                    yield interp(fistObj.controls, "slamUnit").to(1).over(500);
+                    objAngelMiffedStarburstAttack().at(fistObj.state.slamFistWorldPosition).mixin(
+                        mxnRpgAttack,
+                        { attacker: self.status, attack: atkSlamStarburst },
+                    ).show();
 
-                self.speed.at(1, -3);
-                yield sleep(250);
-                yield interp(slammingFistRightObj.controls, "exposedUnit").steps(3).to(0).over(300);
-                yield sleep(250);
-                slammingFistRightObj.controls.slamUnit = 0;
+                    self.speed.at(fistObj === slammingFistRightObj ? 1 : -1, -3);
+                    yield sleep(250);
+                    yield interp(fistObj.controls, "exposedUnit").steps(3).to(0).over(300);
+                    yield sleep(250);
+                    fistObj.controls.slamUnit = 0;
+                }
             }
         })
         .step(self => {
@@ -94,6 +97,9 @@ function objSlammingFist(side: "right" | "left") {
 
     if (side === "right") {
         obj.at(33, 29);
+    }
+    else {
+        obj.at(12, 29);
     }
 
     const controls = {
