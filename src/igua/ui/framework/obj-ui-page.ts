@@ -188,6 +188,7 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
             if (c.selected) {
                 const { y: rootY } = c.getBounds(false, r);
 
+                // TODO the 3 here -- might want it to be configurable!
                 for (let i = 0; i < 3; i++) {
                     const bounds = c.selected.getBounds(false, r);
                     bounds.y -= rootY;
