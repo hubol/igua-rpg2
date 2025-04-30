@@ -23,7 +23,7 @@ export namespace UiVerticalLayout {
 
             element.y = y;
             els.push(element);
-            y += element.height + UiStyle.Margin;
+            y += Math.round(element.height) + UiStyle.Margin;
         }
 
         return els;
