@@ -2,7 +2,7 @@ import { RpgEquipmentAttributes } from "../rpg/rpg-equipment-attributes";
 
 interface Equipment_NoInternalName {
     name: string;
-    // TODO description?
+    description: string;
     // TODO texture?
     attributes: RpgEquipmentAttributes.Model;
 }
@@ -10,10 +10,19 @@ interface Equipment_NoInternalName {
 const dataEquipment = {
     JumpAtSpecialSignsRing: {
         name: "Special Jumps Ring",
+        description: "Increase jump height at special signs",
         attributes: RpgEquipmentAttributes.create({ quirks: { enablesHighJumpsAtSpecialSigns: true } }),
     },
-    __Empty__: { name: "Empty", attributes: RpgEquipmentAttributes.create({}) },
-    __Unknown__: { name: "???", attributes: RpgEquipmentAttributes.create({}) },
+    __Empty__: {
+        name: "Empty",
+        description: "Void",
+        attributes: RpgEquipmentAttributes.create({}),
+    },
+    __Unknown__: {
+        name: "???",
+        description: "If you are reading this, it is an error",
+        attributes: RpgEquipmentAttributes.create({}),
+    },
 } satisfies Record<string, Equipment_NoInternalName>;
 
 export type EquipmentInternalName = keyof typeof dataEquipment;
