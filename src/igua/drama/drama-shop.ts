@@ -9,19 +9,23 @@ import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataEquipment } from "../data/data-equipment";
-import { layers } from "../globals";
+import { layers, scene } from "../globals";
+import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
+import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
+import { RpgProgress } from "../rpg/rpg-progress";
 import { CatalogItem, RpgShop } from "../rpg/rpg-shop";
 import { objUiPage } from "../ui/framework/obj-ui-page";
+import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
 
 export function* dramaShop(shop: RpgShop) {
-    const catalogItemObjs = shop.getCatalog().map(item =>
-        objDramaShopCatalogItem(shop, item).at(0, (ItemConsts.height + ItemConsts.gap) * item.index)
-    );
+    const catalogItemObjs = shop.getCatalog().map(item => objDramaShopCatalogItem(shop, item));
 
     const buttonObjs = [
         ...catalogItemObjs,
-        // someone else
+        objDoneButton(),
     ];
+
+    UiVerticalLayout.apply(buttonObjs);
 
     const pageObj = objUiPage(
         buttonObjs,
@@ -68,10 +72,6 @@ function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem) {
         const bottomLeft = vnew(ItemConsts.gutter, ItemConsts.height - ItemConsts.gutter);
 
         while (true) {
-            yield sleepf(Rng.int(10, 20));
-            if (!self.visible) {
-                continue;
-            }
             self.clear();
             self.moveTo(topLeft.x, topLeft.y);
             pen.at(topLeft);
@@ -97,6 +97,9 @@ function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem) {
                     }
                 }
             }
+
+            yield sleepf(Rng.int(10, 20));
+            yield () => self.visible;
         }
     }).show(obj);
 
@@ -184,4 +187,50 @@ function objLimitedQuantity(quantity: Integer) {
     );
 
     return container(gfx, textObj).pivoted(textObj.width, 0);
+}
+
+function objDoneButton() {
+    const maskObj = objRoundedRect();
+
+    const obj = container(
+        objRoundedRect(),
+        maskObj,
+    ).merge({ selected: false });
+
+    objText.MediumIrregular("OK! I'm all done looking at your shop.\nThank you!", {
+        tint: 0x802020,
+        align: "center",
+    }).at(110, 14)
+        .show(obj)
+        .step(self => {
+            if (scene.ticker.ticks % 24 === 0 && obj.selected) {
+                self.seed += 1;
+            }
+        });
+
+    objIguanaPuppet(RpgProgress.character.looks).at(70, 50).show(obj).masked(maskObj).step(self =>
+        self.head.mouth.agape = (obj.selected && scene.ticker.ticks % 24 < 12) ? 1 : 0
+    );
+
+    new Graphics().lineStyle(3, 0x802020, 1, 0).drawRoundedRect(
+        ItemConsts.gutter,
+        ItemConsts.gutter,
+        ItemConsts.width - ItemConsts.gutter * 2,
+        ItemConsts.height - ItemConsts.gutter * 2,
+        8,
+    )
+        .mixin(mxnBoilPivot)
+        .step(self => self.visible = obj.selected)
+        .show(obj);
+
+    return obj;
+}
+function objRoundedRect() {
+    return new Graphics().beginFill(0xffffff).drawRoundedRect(
+        0,
+        0,
+        ItemConsts.width,
+        ItemConsts.height,
+        8,
+    );
 }
