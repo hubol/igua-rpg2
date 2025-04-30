@@ -1,5 +1,6 @@
 import { Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
+import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { nlerp } from "../../lib/math/number";
 import { Integer } from "../../lib/math/number-alias-types";
@@ -9,7 +10,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataEquipment } from "../data/data-equipment";
-import { layers, scene } from "../globals";
+import { Input, layers, scene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { RpgProgress } from "../rpg/rpg-progress";
@@ -21,11 +22,17 @@ export function* dramaShop(shop: RpgShop) {
     // A very crude hack to ensure that the page does not see SelectUp having just gone down :-)
     yield sleepf(1);
 
+    let done = false;
+
     const catalogItemObjs = shop.getCatalog().map(item => objDramaShopCatalogItem(shop, item));
 
     const buttonObjs = [
         ...catalogItemObjs,
-        objDoneButton(),
+        objDoneButton().step((self) => {
+            if (self.selected && Input.justWentDown("Confirm")) {
+                done = true;
+            }
+        }),
     ];
 
     UiVerticalLayout.apply(buttonObjs);
@@ -43,7 +50,9 @@ export function* dramaShop(shop: RpgShop) {
         .at(Math.floor((renderer.width - ItemConsts.width) / 2), 0)
         .show(layers.overlay.messages);
 
-    yield () => false;
+    yield () => done;
+    yield interpvr(pageObj).factor(factor.sine).translate(0, -renderer.height).over(500);
+    pageObj.destroy();
 }
 
 const ItemConsts = {
