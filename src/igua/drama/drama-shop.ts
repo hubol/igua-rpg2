@@ -2,6 +2,7 @@ import { Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { nlerp } from "../../lib/math/number";
+import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { vequals } from "../../lib/math/vector";
 import { vnew } from "../../lib/math/vector-type";
@@ -107,6 +108,7 @@ function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem) {
         // TODO draw stufffff
         objCatalogItemNameDescription(item).show(contextualObj);
         objCatalogItemPrice(item).at(ItemConsts.width - 65, 32).show(contextualObj);
+        objLimitedQuantity(item.quantity).at(ItemConsts.width, 0).show(contextualObj);
     }
 
     function purchase() {
@@ -163,4 +165,23 @@ function objCatalogItemPrice(item: CatalogItem) {
         objText.Medium(item.currency === "valuables" ? "valuables" : `${item.currency.experience} XP`).anchored(0, 1)
             .at(1, 0),
     );
+}
+
+function objLimitedQuantity(quantity: Integer) {
+    if (quantity < 1) {
+        return container();
+    }
+
+    const urgent = quantity < 4;
+    const text = urgent ? `Only ${quantity} Left` : `${quantity} Left`;
+    const textObj = objText.Medium(text, { tint: 0 });
+    const gfx = new Graphics().beginFill(urgent ? 0xb03030 : 0xd0b030).drawRoundedRect(
+        -4,
+        -4,
+        textObj.width + 8,
+        textObj.height + 8,
+        4,
+    );
+
+    return container(gfx, textObj).pivoted(textObj.width, 0);
 }

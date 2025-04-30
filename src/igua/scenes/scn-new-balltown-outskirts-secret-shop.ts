@@ -10,7 +10,7 @@ const newBalltownSecretRpgShop = new RpgShop({
     stocks: [
         {
             product: { kind: "equipment", name: "JumpAtSpecialSignsRing" },
-            initialQuantity: 3,
+            initialQuantity: 999,
             price: {
                 currency: { kind: "experience", experience: "jump" },
                 initial: 100,
