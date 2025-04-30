@@ -18,6 +18,9 @@ import { objUiPage } from "../ui/framework/obj-ui-page";
 import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
 
 export function* dramaShop(shop: RpgShop) {
+    // A very crude hack to ensure that the page does not see SelectUp having just gone down :-)
+    yield sleepf(1);
+
     const catalogItemObjs = shop.getCatalog().map(item => objDramaShopCatalogItem(shop, item));
 
     const buttonObjs = [
@@ -203,7 +206,7 @@ function objDoneButton() {
     }).at(110, 14)
         .show(obj)
         .step(self => {
-            if (scene.ticker.ticks % 24 === 0 && obj.selected) {
+            if (scene.ticker.ticks % 12 === 0 && obj.selected) {
                 self.seed += 1;
             }
         });
