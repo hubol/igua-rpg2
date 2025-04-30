@@ -3,13 +3,21 @@ import { Sfx } from "../../../assets/sounds";
 import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
 import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 import { cyclic } from "../../../lib/math/number";
+import { RgbInt } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { Undefined } from "../../../lib/types/undefined";
 import { renderer } from "../../current-pixi-renderer";
 import { forceGameLoop, Input } from "../../globals";
 import { UiColor } from "../ui-color";
 
-export type UiPageProps = { maxHeight?: number; title?: string; selectionIndex: number; startTicking?: boolean };
+export type UiPageProps = {
+    maxHeight?: number;
+    title?: string;
+    selectionIndex: number;
+    startTicking?: boolean;
+    scrollbarBgTint?: RgbInt;
+    scrollbarFgTint?: RgbInt;
+};
 export type ObjUiPageElement = Container & { selected: boolean };
 
 export type ObjUiPageRouter = ReturnType<typeof objUiPageRouter>;
@@ -82,7 +90,10 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
     const maskedObj = container().show(c);
     const elementsObj = container(...elements).show(maskedObj);
 
-    const scrollBarObj = objScrollBar().show(c);
+    const scrollBarObj = objScrollBar(
+        props.scrollbarBgTint ?? UiColor.Background,
+        props.scrollbarFgTint ?? UiColor.Hint,
+    ).show(c);
 
     const mask = new Graphics().beginFill(0xffffff).drawRect(0, 0, renderer.width, 1).show(maskedObj);
 
@@ -207,13 +218,13 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
     return c;
 }
 
-function objScrollBar() {
+function objScrollBar(bgTint: RgbInt, fgTint: RgbInt) {
     return new Graphics().merge({ start: 0, end: 1, size: 0 }).step(bar => {
         const start = bar.start * bar.size;
         const end = bar.end * bar.size;
         bar.clear()
-            .beginFill(UiColor.Background).drawRect(0, 0, 3, bar.size)
-            .beginFill(UiColor.Hint).drawRect(0, start, 3, end - start);
+            .beginFill(bgTint).drawRect(0, 0, 3, bar.size)
+            .beginFill(fgTint).drawRect(0, start, 3, end - start);
     });
 }
 
