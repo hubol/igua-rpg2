@@ -59,6 +59,15 @@ export type CatalogItem = Readonly<{
     quantity: Integer;
 }>;
 
+export function isCatalogItemAffordable(item: CatalogItem) {
+    if (item.currency === "valuables") {
+        return RpgPlayerWallet.hasValuables(item.price);
+    }
+
+    const experience = item.currency.experience;
+    return RpgProgress.character.experience[experience] >= item.price;
+}
+
 function getCatalogItemKeyBase(stock: Stock) {
     const { product, price: { currency } } = stock;
 
