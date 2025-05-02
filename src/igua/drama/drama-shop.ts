@@ -1,5 +1,6 @@
-import { Graphics } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
+import { Tx } from "../../assets/textures";
 import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { nlerp } from "../../lib/math/number";
@@ -14,7 +15,7 @@ import { Input, layers, scene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { RpgProgress } from "../rpg/rpg-progress";
-import { CatalogItem, RpgShop } from "../rpg/rpg-shop";
+import { CatalogItem, isCatalogItemAffordable, RpgShop } from "../rpg/rpg-shop";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
 
@@ -175,10 +176,29 @@ function getCatalogItemDescription(item: CatalogItem) {
 }
 
 function objCatalogItemPrice(item: CatalogItem) {
+    const priceTextObj = objText.MediumBoldIrregular(item.price + "").anchored(1, 1).at(-1, 0);
+    const currencyTextObj = objText.Medium(
+        item.currency === "valuables" ? "valuables" : `${item.currency.experience} XP`,
+    ).anchored(0, 1)
+        .at(1, 0);
+    const textObj = container(
+        priceTextObj,
+        currencyTextObj,
+    );
+
+    if (item.currency === "valuables") {
+        priceTextObj.tint = 0x00ff00;
+        currencyTextObj.tint = 0x00ff00;
+    }
+
+    if (isCatalogItemAffordable(item)) {
+        return textObj;
+    }
+
+    const center = priceTextObj.getBounds().getCenter().vround();
     return container(
-        objText.MediumBoldIrregular(item.price + "").anchored(1, 1),
-        objText.Medium(item.currency === "valuables" ? "valuables" : `${item.currency.experience} XP`).anchored(0, 1)
-            .at(1, 0),
+        Sprite.from(Tx.Shapes.X22).tinted(0xff0000).at(center).anchored(0.5, 0.5).mixin(mxnBoilPivot),
+        textObj,
     );
 }
 

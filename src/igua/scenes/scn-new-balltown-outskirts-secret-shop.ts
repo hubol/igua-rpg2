@@ -13,6 +13,15 @@ const newBalltownSecretRpgShop = new RpgShop({
             initialQuantity: 999,
             price: {
                 currency: { kind: "experience", experience: "jump" },
+                initial: 1000,
+                deltaSold: 200,
+            },
+        },
+        {
+            product: { kind: "equipment", name: "JumpAtSpecialSignsRing" },
+            initialQuantity: 3,
+            price: {
+                currency: { kind: "experience", experience: "combat" },
                 initial: 100,
                 deltaSold: 200,
             },
@@ -21,16 +30,7 @@ const newBalltownSecretRpgShop = new RpgShop({
             product: { kind: "equipment", name: "JumpAtSpecialSignsRing" },
             initialQuantity: 3,
             price: {
-                currency: { kind: "experience", experience: "jump" },
-                initial: 100,
-                deltaSold: 200,
-            },
-        },
-        {
-            product: { kind: "equipment", name: "JumpAtSpecialSignsRing" },
-            initialQuantity: 3,
-            price: {
-                currency: { kind: "experience", experience: "jump" },
+                currency: "valuables",
                 initial: 100,
                 deltaSold: 200,
             },
