@@ -14,6 +14,7 @@ import { DataEquipment } from "../data/data-equipment";
 import { Input, layers, scene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
+import { experienceIndicatorConfigs } from "../objects/overlay/obj-hud";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { CatalogItem, isCatalogItemAffordable, RpgShop } from "../rpg/rpg-shop";
 import { objUiPage } from "../ui/framework/obj-ui-page";
@@ -123,7 +124,7 @@ function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem) {
         catalogItem = item;
         // TODO draw stufffff
         objCatalogItemNameDescription(item).show(contextualObj);
-        objCatalogItemPrice(item).at(ItemConsts.width - 65, 32).show(contextualObj);
+        objCatalogItemPrice(item).at(ItemConsts.width - 69, 32).show(contextualObj);
         objLimitedQuantity(item.quantity).at(ItemConsts.width, 0).show(contextualObj);
     }
 
@@ -189,6 +190,17 @@ function objCatalogItemPrice(item: CatalogItem) {
     if (item.currency === "valuables") {
         priceTextObj.tint = 0x00ff00;
         currencyTextObj.tint = 0x00ff00;
+        Sprite.from(Tx.Collectibles.ValuableGreen).anchored(0.5, 0.5).at(-priceTextObj.width - 8, -8).show(textObj);
+    }
+    else {
+        const bounds = currencyTextObj.getBounds();
+        const center = bounds.getCenter().vround();
+        textObj.addChildAt(
+            new Graphics()
+                .beginFill(experienceIndicatorConfigs[item.currency.experience].tint)
+                .drawEllipse(center.x, center.y, Math.round(bounds.width / 2), Math.round(bounds.height / 2)),
+            0,
+        );
     }
 
     if (isCatalogItemAffordable(item)) {
