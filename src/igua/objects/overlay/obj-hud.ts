@@ -107,48 +107,45 @@ function objInteractIndicator() {
 }
 
 interface ExperienceIndicatorConfig {
-    experienceKey: RpgProgressExperience;
     tint: RgbInt;
 }
 
-const experienceIndicatorConfigs: Array<ExperienceIndicatorConfig> = [
-    {
-        experienceKey: "combat",
+export const experienceIndicatorConfigs: Record<RpgProgressExperience, ExperienceIndicatorConfig> = {
+    combat: {
         tint: 0xFF401E,
     },
-    {
-        experienceKey: "computer",
+    computer: {
         tint: 0xFF7B00,
     },
-    {
-        experienceKey: "gambling",
+    gambling: {
         tint: 0xEABB00,
     },
-    {
-        experienceKey: "jump",
+    jump: {
         tint: 0x19A859,
     },
-    {
-        experienceKey: "pocket",
+    pocket: {
         tint: 0x54BAFF,
     },
-    {
-        experienceKey: "quest",
+    quest: {
         tint: 0x3775E8,
     },
-    {
-        experienceKey: "social",
+    social: {
         tint: 0xA074E8,
     },
-];
+};
+
+const experienceIndicatorConfigsArray = Object.entries(experienceIndicatorConfigs).map(([experienceKey, config]) => ({
+    experienceKey: experienceKey as RpgProgressExperience,
+    ...config,
+}));
 
 function objExperienceIndicator() {
-    const weights = experienceIndicatorConfigs.map(({ tint }) => ({
+    const weights = experienceIndicatorConfigsArray.map(({ tint }) => ({
         tint,
         value: 0,
     }));
 
-    const deltaObjs = experienceIndicatorConfigs.map(({ experienceKey, tint }) =>
+    const deltaObjs = experienceIndicatorConfigsArray.map(({ experienceKey, tint }) =>
         objExperienceIndicatorDelta(tint)
             .invisible()
             .coro(function* (self) {
@@ -181,8 +178,8 @@ function objExperienceIndicator() {
     );
 
     function updateWeights() {
-        for (let i = 0; i < experienceIndicatorConfigs.length; i++) {
-            weights[i].value = RpgProgress.character.experience[experienceIndicatorConfigs[i].experienceKey];
+        for (let i = 0; i < experienceIndicatorConfigsArray.length; i++) {
+            weights[i].value = RpgProgress.character.experience[experienceIndicatorConfigsArray[i].experienceKey];
         }
     }
 
