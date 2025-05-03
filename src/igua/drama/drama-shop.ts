@@ -26,7 +26,11 @@ export function* dramaShop(shop: RpgShop) {
 
     let done = false;
 
-    const catalogItemObjs = shop.getCatalog().map(item => objDramaShopCatalogItem(shop, item));
+    const refreshCatalog = () => {
+        shop.getCatalog().forEach((item, i) => catalogItemObjs[i].methods.applyCatalogItem(item));
+    };
+
+    const catalogItemObjs = shop.getCatalog().map(item => objDramaShopCatalogItem(shop, item, refreshCatalog));
 
     const buttonObjs = [
         ...catalogItemObjs,
@@ -64,7 +68,7 @@ const ItemConsts = {
     gap: 15,
 };
 
-function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem.Model) {
+function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem.Model, refreshCatalog: () => void) {
     let catalogItem = item;
 
     const methods = { applyCatalogItem };
@@ -73,10 +77,17 @@ function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem.Model) {
 
     const obj = container(
         new Graphics().beginFill(0x802020).drawRect(0, 0, ItemConsts.width, ItemConsts.height),
-    ).merge({
-        selected: false,
-        methods,
-    });
+    )
+        .merge({
+            selected: false,
+            methods,
+        })
+        .step(self => {
+            if (self.selected && Input.justWentDown("Confirm") && CatalogItem.isAffordable(catalogItem)) {
+                shop.purchase(catalogItem);
+                refreshCatalog();
+            }
+        });
 
     const selectionObj = new Graphics().step(self => self.visible = obj.selected).coro(function* (self) {
         const pen = vnew();
@@ -126,10 +137,6 @@ function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem.Model) {
         objCatalogItemNameDescription(item).show(contextualObj);
         objCatalogItemPrice(item).at(ItemConsts.width - 69, 32).show(contextualObj);
         objLimitedQuantity(item.quantity).at(ItemConsts.width, 0).show(contextualObj);
-    }
-
-    function purchase() {
-        shop.purchase(catalogItem);
     }
 
     applyCatalogItem(item);

@@ -148,7 +148,9 @@ export class RpgShop {
             throw new Error("Attempting to purchase catalog item with quantity <= 0");
         }
 
-        // TODO assert afford
+        if (!CatalogItem.isAffordable(item)) {
+            throw new Error("Attempting to purchase non-affordable catalog item");
+        }
 
         if (item.currency === "valuables") {
             RpgPlayerWallet.spendValuables(item.price);
