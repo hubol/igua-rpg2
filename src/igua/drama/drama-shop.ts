@@ -16,7 +16,7 @@ import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { experienceIndicatorConfigs } from "../objects/overlay/obj-hud";
 import { RpgProgress } from "../rpg/rpg-progress";
-import { CatalogItem, isCatalogItemAffordable, RpgShop } from "../rpg/rpg-shop";
+import { CatalogItem, RpgShop } from "../rpg/rpg-shop";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
 
@@ -64,7 +64,7 @@ const ItemConsts = {
     gap: 15,
 };
 
-function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem) {
+function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem.Model) {
     let catalogItem = item;
 
     const methods = { applyCatalogItem };
@@ -119,7 +119,7 @@ function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem) {
 
     contextualObj.show(obj);
 
-    function applyCatalogItem(item: CatalogItem) {
+    function applyCatalogItem(item: CatalogItem.Model) {
         contextualObj.removeAllChildren();
         catalogItem = item;
         // TODO draw stufffff
@@ -137,7 +137,7 @@ function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem) {
     return obj.pivoted(-2, -10);
 }
 
-function objCatalogItemNameDescription(item: CatalogItem) {
+function objCatalogItemNameDescription(item: CatalogItem.Model) {
     const nameText = getCatalogItemName(item);
     const descriptionText = getCatalogItemDescription(item);
 
@@ -156,7 +156,7 @@ function objCatalogItemNameDescription(item: CatalogItem) {
     return container(nameObj, objText.Medium(descriptionText).at(9, 18));
 }
 
-function getCatalogItemName(item: CatalogItem) {
+function getCatalogItemName(item: CatalogItem.Model) {
     switch (item.product.kind) {
         case "equipment":
             return (DataEquipment[item.product.name] ?? DataEquipment.__Unknown__).name;
@@ -167,7 +167,7 @@ function getCatalogItemName(item: CatalogItem) {
     }
 }
 
-function getCatalogItemDescription(item: CatalogItem) {
+function getCatalogItemDescription(item: CatalogItem.Model) {
     switch (item.product.kind) {
         case "equipment":
             return (DataEquipment[item.product.name] ?? DataEquipment.__Unknown__).description;
@@ -176,7 +176,7 @@ function getCatalogItemDescription(item: CatalogItem) {
     }
 }
 
-function objCatalogItemPrice(item: CatalogItem) {
+function objCatalogItemPrice(item: CatalogItem.Model) {
     const priceTextObj = objText.MediumBoldIrregular(item.price + "").anchored(1, 1).at(-1, 0);
     const currencyTextObj = objText.Medium(
         item.currency === "valuables" ? "valuables" : `${item.currency.experience} XP`,
@@ -203,7 +203,7 @@ function objCatalogItemPrice(item: CatalogItem) {
         );
     }
 
-    if (isCatalogItemAffordable(item)) {
+    if (CatalogItem.isAffordable(item)) {
         return textObj;
     }
 

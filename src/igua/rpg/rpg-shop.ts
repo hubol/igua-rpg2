@@ -50,22 +50,24 @@ interface Config {
     stocks: Stock[];
 }
 
-export type CatalogItem = Readonly<{
-    index: Integer; // Feels a little bad here, as it really should only be used in RpgShop
-    key: string;
-    product: Product;
-    currency: Currency;
-    price: Integer;
-    quantity: Integer;
-}>;
+export namespace CatalogItem {
+    export type Model = Readonly<{
+        index: Integer; // Feels a little bad here, as it really should only be used in RpgShop
+        key: string;
+        product: Product;
+        currency: Currency;
+        price: Integer;
+        quantity: Integer;
+    }>;
 
-export function isCatalogItemAffordable(item: CatalogItem) {
-    if (item.currency === "valuables") {
-        return RpgPlayerWallet.hasValuables(item.price);
+    export function isAffordable(item: Model) {
+        if (item.currency === "valuables") {
+            return RpgPlayerWallet.hasValuables(item.price);
+        }
+
+        const experience = item.currency.experience;
+        return RpgProgress.character.experience[experience] >= item.price;
     }
-
-    const experience = item.currency.experience;
-    return RpgProgress.character.experience[experience] >= item.price;
 }
 
 function getCatalogItemKeyBase(stock: Stock) {
@@ -112,11 +114,11 @@ export class RpgShop {
         obj[catalogItemKey] = previousCount + 1;
     }
 
-    getCatalog(): CatalogItem[] {
+    getCatalog(): CatalogItem.Model[] {
         return this.config.stocks.map((stock, index) => this.getCatalogItem(index, stock));
     }
 
-    private getCatalogItem(index: number, stock: Stock): CatalogItem {
+    private getCatalogItem(index: number, stock: Stock): CatalogItem.Model {
         const key = this.catalogItemKeys[index];
         const soldCount = this.getSoldCount(key);
 
@@ -133,7 +135,7 @@ export class RpgShop {
 
     // TODO should purchase assert that the player can afford?
     // Or return status indicating the player could not afford?!
-    purchase(identityItem: CatalogItem) {
+    purchase(identityItem: CatalogItem.Model) {
         if (!this.config.stocks[identityItem.index]) {
             // TODO should this be a cutsom error that accepts more context?
             throw new Error("Passed CatalogItem has invalid index");
