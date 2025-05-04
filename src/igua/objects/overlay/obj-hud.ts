@@ -142,7 +142,9 @@ export const experienceIndicatorConfigs: Record<RpgProgressExperience, Experienc
     },
 };
 
-const experienceIndicatorConfigsArray = Object.entries(experienceIndicatorConfigs).map(([experienceKey, config]) => ({
+export const experienceIndicatorConfigsArray = Object.entries(experienceIndicatorConfigs).map((
+    [experienceKey, config],
+) => ({
     experienceKey: experienceKey as RpgProgressExperience,
     ...config,
 }));
@@ -191,6 +193,11 @@ function objExperienceIndicator() {
         }
     }
 
+    const xPositions = {
+        left: 4,
+        right: renderer.width - 128 - 4,
+    };
+
     updateWeights();
     const subdividedBarObj = objUiSubdividedBar({ width: 128, height: 4, tint: 0x404040, weights });
     const obj = container(subdividedBarObj, ...deltaObjs)
@@ -207,7 +214,10 @@ function objExperienceIndicator() {
                 maximumX = deltaObj.x;
             }
         })
-        .at(renderer.width - 128 - 4, renderer.height - 8);
+        .step(self => {
+            self.x = approachLinear(self.x, dramaShop.isActive() ? xPositions.left : xPositions.right, 16);
+        })
+        .at(xPositions.right, renderer.height - 8);
 
     return obj;
 }
@@ -225,7 +235,7 @@ function objExperienceIndicatorDelta(tint: RgbInt) {
     return container(gfx, totalTextObj, deltaTextObj)
         .merge({ state })
         .step(() => {
-            totalTextObj.text = "" + state.total;
+            totalTextObj.text = state.delta < 0 ? ("" + (state.total + state.delta)) : ("" + state.total);
             deltaTextObj.visible = state.delta > 0;
             if (deltaTextObj.visible) {
                 deltaTextObj.x = totalTextObj.width + 2;

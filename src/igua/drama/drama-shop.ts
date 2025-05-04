@@ -1,10 +1,9 @@
 import { Graphics, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
-import { Instances } from "../../lib/game-engine/instances";
-import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
+import { Coro } from "../../lib/game-engine/routines/coro";
+import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
-import { nlerp } from "../../lib/math/number";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { vequals } from "../../lib/math/vector";
@@ -15,9 +14,9 @@ import { DataEquipment } from "../data/data-equipment";
 import { Input, layers, scene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
-import { experienceIndicatorConfigs } from "../objects/overlay/obj-hud";
+import { experienceIndicatorConfigs, experienceIndicatorConfigsArray } from "../objects/overlay/obj-hud";
 import { RpgProgress } from "../rpg/rpg-progress";
-import { CatalogItem, RpgShop } from "../rpg/rpg-shop";
+import { CatalogItem, Currency, RpgShop } from "../rpg/rpg-shop";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
 
@@ -31,7 +30,8 @@ export function* dramaShop(shop: RpgShop) {
         shop.getCatalog().forEach((item, i) => catalogItemObjs[i].methods.applyCatalogItem(item));
     };
 
-    const catalogItemObjs = shop.getCatalog().map(item => objDramaShopCatalogItem(shop, item, refreshCatalog));
+    const initialCatalog = shop.getCatalog();
+    const catalogItemObjs = initialCatalog.map(item => objDramaShopCatalogItem(shop, item, refreshCatalog));
 
     const buttonObjs = [
         ...catalogItemObjs,
@@ -54,14 +54,21 @@ export function* dramaShop(shop: RpgShop) {
             scrollbarFgTint: 0xffffff,
         },
     )
-        .at(Math.floor((renderer.width - ItemConsts.width) / 2), 0)
-        .show(layers.overlay.messages);
+        .at(renderer.width - ItemConsts.width - 32, 0);
+
+    const playerStatusObj = objPlayerStatus(initialCatalog).at(50, -5);
+
+    const shopObj = container(pageObj, playerStatusObj).show(layers.overlay.messages);
+
     dramaShopObjsCount++;
-    pageObj.on("destroyed", () => dramaShopObjsCount--);
+    shopObj.on("destroyed", () => dramaShopObjsCount--);
 
     yield () => done;
-    yield interpvr(pageObj).factor(factor.sine).translate(0, -renderer.height).over(500);
-    pageObj.destroy();
+    yield* Coro.all([
+        interpvr(pageObj).factor(factor.sine).translate(0, -renderer.height).over(500),
+        interpvr(playerStatusObj).steps(5).translate(-120, 0).over(500),
+    ]);
+    shopObj.destroy();
 }
 
 // It would technically be incorrect to track this with .track()
@@ -195,17 +202,61 @@ function getCatalogItemDescription(item: CatalogItem.Model) {
 }
 
 function objCatalogItemPrice(item: CatalogItem.Model) {
-    const priceTextObj = objText.MediumBoldIrregular(item.price + "").anchored(1, 1).at(-1, 0);
-    const currencyTextObj = objText.Medium(
-        item.currency === "valuables" ? "valuables" : `${item.currency.experience} XP`,
-    ).anchored(0, 1)
+    return objCurrencyAmount(item.price, item.currency, CatalogItem.isAffordable(item));
+}
+
+const possibleCurrencies: CatalogItem.Model["currency"][] = [
+    "valuables",
+    ...experienceIndicatorConfigsArray.map(({ experienceKey }) => ({
+        kind: "experience" as const,
+        experience: experienceKey,
+    })),
+];
+
+function objPlayerStatus(catalog: CatalogItem.Model[]) {
+    const currenciesInCatalog = possibleCurrencies.filter(currency =>
+        catalog.some(item => Currency.equals(item.currency, currency))
+    );
+    const currencyObjs = currenciesInCatalog.reverse().map((currency, i) =>
+        objCurrencyAmount(Currency.getPlayerHeldAmount(currency), currency, true).at(i, renderer.height - 28 - i * 15)
+            .step(self => self.controls.amount = Currency.getPlayerHeldAmount(currency))
+    );
+    const textsObj = container(
+        objText.Large("You have...").anchored(0.5, 1).at(12, currencyObjs.last.y - 16),
+        ...currencyObjs,
+    );
+
+    const bounds = textsObj.getBounds();
+
+    return container(
+        new Graphics().beginFill(0x802020).drawRoundedRect(-50, bounds.y, 124, bounds.height + 6, 16),
+        textsObj,
+    );
+}
+
+function objCurrencyAmount(amount: Integer, currency: CatalogItem.Model["currency"], isAffordable: boolean) {
+    const priceTextObj = objText.MediumBoldIrregular("").anchored(1, 1).at(-1, 0);
+    const currencyTextObj = objText.Medium("").anchored(0, 1)
         .at(1, 0);
+
+    function updateText() {
+        priceTextObj.text = amount + "";
+        if (currency === "valuables") {
+            currencyTextObj.text = amount === 1 ? "valuable" : "valuables";
+        }
+        else {
+            currencyTextObj.text = `${currency.experience} XP`;
+        }
+    }
+
+    updateText();
+
     const textObj = container(
         priceTextObj,
         currencyTextObj,
     );
 
-    if (item.currency === "valuables") {
+    if (currency === "valuables") {
         priceTextObj.tint = 0x00ff00;
         currencyTextObj.tint = 0x00ff00;
         Sprite.from(Tx.Collectibles.ValuableGreen).anchored(0.5, 0.5).at(-priceTextObj.width - 8, -8).show(textObj);
@@ -215,21 +266,27 @@ function objCatalogItemPrice(item: CatalogItem.Model) {
         const center = bounds.getCenter().vround();
         textObj.addChildAt(
             new Graphics()
-                .beginFill(experienceIndicatorConfigs[item.currency.experience].tint)
+                .beginFill(experienceIndicatorConfigs[currency.experience].tint)
                 .drawEllipse(center.x, center.y, Math.round(bounds.width / 2), Math.round(bounds.height / 2)),
             0,
         );
     }
 
-    if (CatalogItem.isAffordable(item)) {
-        return textObj;
-    }
+    const controls = {
+        set amount(value: Integer) {
+            amount = value;
+            updateText();
+        },
+    };
 
     const center = priceTextObj.getBounds().getCenter().vround();
     return container(
-        Sprite.from(Tx.Shapes.X22).tinted(0xff0000).at(center).anchored(0.5, 0.5).mixin(mxnBoilPivot),
+        ...isAffordable
+            ? []
+            : [Sprite.from(Tx.Shapes.X22).tinted(0xff0000).at(center).anchored(0.5, 0.5).mixin(mxnBoilPivot)],
         textObj,
-    );
+    )
+        .merge({ controls });
 }
 
 function objLimitedQuantity(quantity: Integer) {
