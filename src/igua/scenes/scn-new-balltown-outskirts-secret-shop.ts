@@ -13,8 +13,8 @@ const newBalltownSecretRpgShop = new RpgShop({
             initialQuantity: 999,
             price: {
                 currency: { kind: "experience", experience: "jump" },
-                initial: 1000,
-                deltaSold: 200,
+                initial: 1,
+                deltaSold: 3,
             },
         },
         {

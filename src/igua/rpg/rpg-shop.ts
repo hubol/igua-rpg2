@@ -11,7 +11,32 @@ interface Currency_Experience {
     experience: RpgProgressExperience;
 }
 
-type Currency = "valuables" | Currency_Experience;
+export namespace Currency {
+    export type Model = "valuables" | Currency_Experience;
+
+    export function equals(a: Model, b: Model) {
+        if (a === b) {
+            return true;
+        }
+        if (typeof a === "object" && typeof b === "object") {
+            if (a.kind !== b.kind) {
+                return false;
+            }
+
+            return a.experience === b.experience;
+        }
+        return false;
+    }
+
+    export function getPlayerHeldAmount(currency: Model) {
+        if (currency === "valuables") {
+            return RpgProgress.character.inventory.valuables;
+        }
+
+        const experience = currency.experience;
+        return RpgProgress.character.experience[experience];
+    }
+}
 
 interface Product_Equipment {
     kind: "equipment";
@@ -34,7 +59,7 @@ interface Product_Potion {
 type Product = Product_Equipment | Product_KeyItem | Product_Potion;
 
 interface Price {
-    currency: Currency;
+    currency: Currency.Model;
     initial: Integer;
     deltaSold: Integer;
 }
@@ -55,18 +80,13 @@ export namespace CatalogItem {
         index: Integer; // Feels a little bad here, as it really should only be used in RpgShop
         key: string;
         product: Product;
-        currency: Currency;
+        currency: Currency.Model;
         price: Integer;
         quantity: Integer;
     }>;
 
     export function isAffordable(item: Model) {
-        if (item.currency === "valuables") {
-            return RpgPlayerWallet.hasValuables(item.price);
-        }
-
-        const experience = item.currency.experience;
-        return RpgProgress.character.experience[experience] >= item.price;
+        return Currency.getPlayerHeldAmount(item.currency) >= item.price;
     }
 }
 
