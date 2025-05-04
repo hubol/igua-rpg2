@@ -1,6 +1,7 @@
 import { Graphics, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
+import { Instances } from "../../lib/game-engine/instances";
 import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { nlerp } from "../../lib/math/number";
@@ -55,11 +56,21 @@ export function* dramaShop(shop: RpgShop) {
     )
         .at(Math.floor((renderer.width - ItemConsts.width) / 2), 0)
         .show(layers.overlay.messages);
+    dramaShopObjsCount++;
+    pageObj.on("destroyed", () => dramaShopObjsCount--);
 
     yield () => done;
     yield interpvr(pageObj).factor(factor.sine).translate(0, -renderer.height).over(500);
     pageObj.destroy();
 }
+
+// It would technically be incorrect to track this with .track()
+// as these instances are added to the overlay, not the scene
+let dramaShopObjsCount = 0;
+
+dramaShop.isActive = function () {
+    return dramaShopObjsCount > 0;
+};
 
 const ItemConsts = {
     width: 340,
