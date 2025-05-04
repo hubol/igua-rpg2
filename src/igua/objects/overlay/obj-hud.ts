@@ -11,6 +11,7 @@ import { container } from "../../../lib/pixi/container";
 import { Null } from "../../../lib/types/null";
 import { renderer } from "../../current-pixi-renderer";
 import { DataPocketItems } from "../../data/data-pocket-items";
+import { dramaShop } from "../../drama/drama-shop";
 import { Cutscene } from "../../globals";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { CtxInteract } from "../../mixins/mxn-interact";
@@ -38,19 +39,26 @@ export function objHud() {
 
     const statusObjs = [valuablesInfoObj, objPocketInfo(), poisonLevelObj, poisonBuildUpObj, objHeliumBuildUp()];
 
+    const statusObjsContainer = container(...statusObjs);
+
     return container(
         objCutsceneLetterbox(),
-        container(healthBarObj, ...statusObjs).at(3, 3),
+        container(healthBarObj, statusObjsContainer).at(3, 3),
         objInteractIndicator(),
         objExperienceIndicator(),
     )
         .merge({ healthBarObj, effectiveHeight: 0 })
         .step(self => {
+            {
+                const isShopping = dramaShop.isActive();
+                healthBarObj.visible = !isShopping;
+                statusObjsContainer.visible = !isShopping;
+            }
             healthBarObj.width = RpgPlayer.status.healthMax;
             let y = 7;
             let lastVisibleObj: Container = healthBarObj;
             for (const statusObj of statusObjs) {
-                if (!statusObj.visible) {
+                if (!statusObj.visible || !statusObjsContainer.visible) {
                     continue;
                 }
                 lastVisibleObj = statusObj;
