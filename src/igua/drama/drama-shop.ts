@@ -231,7 +231,7 @@ function objPlayerStatus(catalog: CatalogItem.Model[]) {
     const bounds = textsObj.getBounds();
 
     return container(
-        new Graphics().beginFill(0x802020).drawRoundedRect(-50, bounds.y, 124, bounds.height + 6, 16),
+        new Graphics().beginFill(0x802020).drawRoundedRect(-60, bounds.y, 134, bounds.height + 6, 10),
         textsObj,
     );
 }
@@ -264,12 +264,15 @@ function objCurrencyAmount(amount: Integer, currency: CatalogItem.Model["currenc
         Sprite.from(Tx.Collectibles.ValuableGreen).anchored(0.5, 0.5).at(-priceTextObj.width - 8, -8).show(textObj);
     }
     else {
-        const bounds = currencyTextObj.getBounds();
-        const center = bounds.getCenter().vround();
+        const bounds = textObj.getBounds();
+        bounds.x -= 2;
+        bounds.y -= 2;
+        bounds.width += 4;
+        bounds.height = 11;
         textObj.addChildAt(
             new Graphics()
                 .beginFill(experienceIndicatorConfigs[currency.experience].tint)
-                .drawEllipse(center.x, center.y, Math.round(bounds.width / 2), Math.round(bounds.height / 2)),
+                .drawRoundedRect(bounds.x, bounds.y, bounds.width, bounds.height, 2),
             0,
         );
     }
@@ -281,13 +284,13 @@ function objCurrencyAmount(amount: Integer, currency: CatalogItem.Model["currenc
         },
     };
 
-    const center = priceTextObj.getBounds().getCenter().vround();
-    return container(
-        ...isAffordable
-            ? []
-            : [Sprite.from(Tx.Shapes.X22).tinted(0xff0000).at(center).anchored(0.5, 0.5).mixin(mxnBoilPivot)],
-        textObj,
-    )
+    if (!isAffordable) {
+        const center = priceTextObj.getBounds().getCenter().vround();
+        const xObj = Sprite.from(Tx.Shapes.X22).tinted(0xff0000).at(center).anchored(0.5, 0.5).mixin(mxnBoilPivot);
+        const index = currency === "valuables" ? 0 : 1;
+        textObj.addChildAt(xObj, index);
+    }
+    return textObj
         .merge({ controls });
 }
 
