@@ -21,6 +21,9 @@ import { objUiPage } from "../ui/framework/obj-ui-page";
 import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
 
 export function* dramaShop(shop: RpgShop) {
+    // Another hack to prevent a stupid flicker
+    // Sorry, me
+    dramaShopObjsCount++;
     // A very crude hack to ensure that the page does not see SelectUp having just gone down :-)
     yield sleepf(1);
 
@@ -60,7 +63,6 @@ export function* dramaShop(shop: RpgShop) {
 
     const shopObj = container(pageObj, playerStatusObj).show(layers.overlay.messages);
 
-    dramaShopObjsCount++;
     shopObj.on("destroyed", () => dramaShopObjsCount--);
 
     yield () => done;
