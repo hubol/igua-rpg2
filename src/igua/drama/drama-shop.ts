@@ -101,7 +101,7 @@ function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem.Model, refresh
             methods,
         })
         .step(self => {
-            if (self.selected && Input.justWentDown("Confirm") && CatalogItem.isAffordable(catalogItem)) {
+            if (self.selected && Input.justWentDown("Confirm") && CatalogItem.canPlayerAfford(catalogItem)) {
                 shop.purchase(catalogItem);
                 refreshCatalog();
             }
@@ -202,7 +202,7 @@ function getCatalogItemDescription(item: CatalogItem.Model) {
 }
 
 function objCatalogItemPrice(item: CatalogItem.Model) {
-    return objCurrencyAmount(item.price, item.currency, CatalogItem.isAffordable(item));
+    return objCurrencyAmount(item.price, item.currency, CatalogItem.canPlayerAfford(item));
 }
 
 const possibleCurrencies: CatalogItem.Model["currency"][] = [
