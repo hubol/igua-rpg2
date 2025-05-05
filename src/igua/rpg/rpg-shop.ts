@@ -85,7 +85,7 @@ export namespace CatalogItem {
         quantity: Integer;
     }>;
 
-    export function isAffordable(item: Model) {
+    export function canPlayerAfford(item: Model) {
         return Currency.getPlayerHeldAmount(item.currency) >= item.price;
     }
 }
@@ -168,7 +168,7 @@ export class RpgShop {
             throw new Error("Attempting to purchase catalog item with quantity <= 0");
         }
 
-        if (!CatalogItem.isAffordable(item)) {
+        if (!CatalogItem.canPlayerAfford(item)) {
             throw new Error("Attempting to purchase non-affordable catalog item");
         }
 
