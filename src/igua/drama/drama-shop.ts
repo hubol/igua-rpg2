@@ -1,4 +1,4 @@
-import { Graphics, Sprite } from "pixi.js";
+import { Graphics, Rectangle, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
@@ -326,6 +326,8 @@ function objPlayerStatus(catalog: CatalogItem.Model[]) {
         .merge({ methods });
 }
 
+const r = new Rectangle();
+
 function objCurrencyAmount(amount: Integer, currency: CatalogItem.Model["currency"], isAffordable: boolean) {
     const priceTextObj = objText.MediumBoldIrregular("").anchored(1, 1).at(-1, 0);
     const currencyTextObj = objText.Medium("").anchored(0, 1)
@@ -348,6 +350,8 @@ function objCurrencyAmount(amount: Integer, currency: CatalogItem.Model["currenc
         currencyTextObj,
     );
 
+    const obj = container(textObj);
+
     if (currency === "valuables") {
         priceTextObj.tint = 0x00ff00;
         currencyTextObj.tint = 0x00ff00;
@@ -358,17 +362,33 @@ function objCurrencyAmount(amount: Integer, currency: CatalogItem.Model["currenc
             .show(textObj);
     }
     else {
-        const bounds = textObj.getBounds();
-        bounds.x -= 2;
-        bounds.y -= 2;
-        bounds.width += 4;
-        bounds.height = 11;
-        textObj.addChildAt(
-            new Graphics()
-                .beginFill(experienceIndicatorConfigs[currency.experience].tint)
-                .drawRoundedRect(bounds.x, bounds.y, bounds.width, bounds.height, 2),
-            0,
-        );
+        const bounds = new Rectangle();
+        const gfx = new Graphics()
+            .tinted(experienceIndicatorConfigs[currency.experience].tint)
+            .step(() => {
+                updateBounds(r);
+                bounds.x = approachLinear(bounds.x, r.x, 1);
+                bounds.y = approachLinear(bounds.y, r.y, 1);
+                bounds.width = approachLinear(bounds.width, r.width, 1);
+                bounds.height = approachLinear(bounds.height, r.height, 1);
+            });
+
+        function updateBounds(rectangle: Rectangle) {
+            textObj.getLocalBounds(rectangle);
+            rectangle.x -= 2;
+            rectangle.y -= 2;
+            rectangle.width += 4;
+            rectangle.height = 11;
+
+            gfx
+                .clear()
+                .beginFill(0xffffff)
+                .drawRoundedRect(bounds.x, bounds.y, bounds.width, bounds.height, 2);
+        }
+
+        updateBounds(bounds);
+
+        obj.addChildAt(gfx, 0);
     }
 
     const controls = {
@@ -382,9 +402,9 @@ function objCurrencyAmount(amount: Integer, currency: CatalogItem.Model["currenc
         const center = priceTextObj.getBounds().getCenter().vround();
         const xObj = Sprite.from(Tx.Shapes.X22).tinted(0xff0000).at(center).anchored(0.5, 0.5).mixin(mxnBoilPivot);
         const index = currency === "valuables" ? 0 : 1;
-        textObj.addChildAt(xObj, index);
+        obj.addChildAt(xObj, index);
     }
-    return textObj
+    return obj
         .merge({ controls });
 }
 
