@@ -167,7 +167,8 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
             self.isAttackActive = tank.heliumContent > 0 && tank.isValveOpen;
             // TODO not sure if RpgCutscene.isPlaying is the right check
             if (self.isAttackActive && !RpgCutscene.isPlaying) {
-                tank.heliumContent = Math.max(0, tank.heliumContent - 1);
+                const delta = self.state.quick ? 4 : 1;
+                tank.heliumContent = Math.max(0, tank.heliumContent - delta);
             }
         }, -1)
         .show();
