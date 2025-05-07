@@ -10,7 +10,6 @@ import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { vequals } from "../../lib/math/vector";
 import { vnew } from "../../lib/math/vector-type";
-import { merge } from "../../lib/object/merge";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataEquipment } from "../data/data-equipment";
@@ -31,6 +30,7 @@ export interface DramaShopStyle {
 
 const CtxDramaShop = new SceneLocal(
     () => ({
+        state: { isInteractive: false },
         style: { primaryTint: 0x802020, secondaryTint: 0xffffff } satisfies DramaShopStyle,
     }),
     "CtxDramaShop",
@@ -38,11 +38,7 @@ const CtxDramaShop = new SceneLocal(
 
 export function* dramaShop(shop: RpgShop, style: DramaShopStyle) {
     CtxDramaShop.value.style = style;
-    // Another hack to prevent a stupid flicker
-    // Sorry, me
     dramaShopObjsCount++;
-    // A very crude hack to ensure that the page does not see SelectUp having just gone down :-)
-    yield sleepf(1);
 
     let done = false;
 
@@ -59,7 +55,7 @@ export function* dramaShop(shop: RpgShop, style: DramaShopStyle) {
     const buttonObjs = [
         ...catalogItemObjs,
         objDoneButton().step((self) => {
-            if (self.selected && Input.justWentDown("Confirm")) {
+            if (CtxDramaShop.value.state.isInteractive && self.selected && Input.justWentDown("Confirm")) {
                 done = true;
             }
         }),
@@ -78,15 +74,39 @@ export function* dramaShop(shop: RpgShop, style: DramaShopStyle) {
         },
     )
         .at(renderer.width - ItemConsts.width - 32, 0);
+    pageObj.navigation = false;
 
     const shopObj = container(pageObj, playerStatusObj).show(layers.overlay.messages);
 
+    const exitPositions = {
+        pageObj: vnew(0, -renderer.height),
+        playerStatusObj: vnew(-120, 0),
+    };
+
     shopObj.on("destroyed", () => dramaShopObjsCount--);
+    shopObj.visible = false;
+    pageObj.add(exitPositions.pageObj);
+    playerStatusObj.add(exitPositions.playerStatusObj);
+
+    yield sleepf(1);
+    shopObj.visible = true;
+
+    yield* Coro.all([
+        interpvr(pageObj).factor(factor.sine).translate(exitPositions.pageObj.vcpy().scale(-1)).over(500),
+        interpvr(playerStatusObj).steps(5).translate(exitPositions.playerStatusObj.vcpy().scale(-1)).over(500),
+    ]);
+
+    pageObj.navigation = true;
+    CtxDramaShop.value.state.isInteractive = true;
 
     yield () => done;
+
+    pageObj.navigation = false;
+    CtxDramaShop.value.state.isInteractive = false;
+
     yield* Coro.all([
-        interpvr(pageObj).factor(factor.sine).translate(0, -renderer.height).over(500),
-        interpvr(playerStatusObj).steps(5).translate(-120, 0).over(500),
+        interpvr(pageObj).factor(factor.sine).translate(exitPositions.pageObj).over(500),
+        interpvr(playerStatusObj).steps(5).translate(exitPositions.playerStatusObj).over(500),
     ]);
     shopObj.destroy();
 }
@@ -135,7 +155,7 @@ function objDramaShopCatalogItem(
             methods,
         })
         .step(self => {
-            if (self.selected && Input.justWentDown("Confirm")) {
+            if (CtxDramaShop.value.state.isInteractive && self.selected && Input.justWentDown("Confirm")) {
                 if (CatalogItem.canPlayerAfford(catalogItem)) {
                     shop.purchase(catalogItem);
                     refreshCatalog();
