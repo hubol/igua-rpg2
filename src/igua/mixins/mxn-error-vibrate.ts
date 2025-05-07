@@ -7,7 +7,7 @@ export function mxnErrorVibrate(obj: DisplayObject) {
 
     const methods = {
         vibrate() {
-            vibrateIterationsCount = 4;
+            vibrateIterationsCount = 3;
         },
     };
 
