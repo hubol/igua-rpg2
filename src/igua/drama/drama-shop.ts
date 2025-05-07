@@ -18,8 +18,9 @@ import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnErrorVibrate } from "../mixins/mxn-error-vibrate";
 import { experienceIndicatorConfigs, experienceIndicatorConfigsArray } from "../objects/overlay/obj-hud";
+import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgProgress } from "../rpg/rpg-progress";
-import { CatalogItem, Currency, RpgShop } from "../rpg/rpg-shop";
+import { CatalogItem, RpgShop } from "../rpg/rpg-shop";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
 
@@ -276,7 +277,7 @@ function objCatalogItemPrice(item: CatalogItem.Model) {
     return objCurrencyAmount(item.price, item.currency, CatalogItem.canPlayerAfford(item));
 }
 
-const possibleCurrencies: Currency.Model[] = [
+const possibleCurrencies: RpgEconomy.Currency.Model[] = [
     "valuables",
     ...experienceIndicatorConfigsArray.map(({ experienceKey }) => ({
         kind: "experience" as const,
@@ -286,14 +287,14 @@ const possibleCurrencies: Currency.Model[] = [
 
 function objPlayerStatus(catalog: CatalogItem.Model[]) {
     const currenciesInCatalog = possibleCurrencies.filter(currency =>
-        catalog.some(item => Currency.equals(item.currency, currency))
+        catalog.some(item => RpgEconomy.Currency.equals(item.currency, currency))
     );
     const currencyObjs = currenciesInCatalog.reverse().map((currency, i) =>
-        objCurrencyAmount(Currency.getPlayerHeldAmount(currency), currency, true)
+        objCurrencyAmount(RpgEconomy.Currency.getPlayerHeldAmount(currency), currency, true)
             .merge({ currency })
             .mixin(mxnErrorVibrate)
             .at(i, renderer.height - 28 - i * 15)
-            .step(self => self.controls.amount = Currency.getPlayerHeldAmount(currency))
+            .step(self => self.controls.amount = RpgEconomy.Currency.getPlayerHeldAmount(currency))
     );
     const textsObj = container(
         objText.Large("You have...", { tint: CtxDramaShop.value.style.secondaryTint }).anchored(0.5, 1).at(
@@ -306,8 +307,9 @@ function objPlayerStatus(catalog: CatalogItem.Model[]) {
     const bounds = textsObj.getBounds();
 
     const methods = {
-        vibrate(currency: Currency.Model) {
-            currencyObjs.find(obj => Currency.equals(obj.currency, currency))?.mxnErrorVibrate?.methods?.vibrate?.();
+        vibrate(currency: RpgEconomy.Currency.Model) {
+            currencyObjs.find(obj => RpgEconomy.Currency.equals(obj.currency, currency))?.mxnErrorVibrate?.methods
+                ?.vibrate?.();
         },
     };
 

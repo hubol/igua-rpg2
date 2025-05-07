@@ -19,7 +19,7 @@ function* rewardValuables(
     const counts = ValuableChangeMaker.solveCounts(total);
     const currencyToSpawn = Rng.shuffle(
         Object.entries(counts).flatMap(([currencyType, count]) =>
-            range(count).map(() => currencyType as RpgEconomy.Currency.Kind)
+            range(count).map(() => currencyType as RpgEconomy.Valuables.Kind)
         ),
     );
 

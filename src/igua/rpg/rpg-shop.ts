@@ -1,42 +1,10 @@
-import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { EquipmentInternalName } from "../data/data-equipment";
 import { DataKeyItemInternalName } from "../data/data-key-items";
+import { RpgEconomy } from "./rpg-economy";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerWallet } from "./rpg-player-wallet";
-import { RpgProgress, RpgProgressExperience } from "./rpg-progress";
-
-interface Currency_Experience {
-    kind: "experience";
-    experience: RpgProgressExperience;
-}
-
-export namespace Currency {
-    export type Model = "valuables" | Currency_Experience;
-
-    export function equals(a: Model, b: Model) {
-        if (a === b) {
-            return true;
-        }
-        if (typeof a === "object" && typeof b === "object") {
-            if (a.kind !== b.kind) {
-                return false;
-            }
-
-            return a.experience === b.experience;
-        }
-        return false;
-    }
-
-    export function getPlayerHeldAmount(currency: Model) {
-        if (currency === "valuables") {
-            return RpgProgress.character.inventory.valuables;
-        }
-
-        const experience = currency.experience;
-        return RpgProgress.character.experience[experience];
-    }
-}
+import { RpgProgress } from "./rpg-progress";
 
 interface Product_Equipment {
     kind: "equipment";
@@ -59,7 +27,7 @@ interface Product_Potion {
 type Product = Product_Equipment | Product_KeyItem | Product_Potion;
 
 interface Price {
-    currency: Currency.Model;
+    currency: RpgEconomy.Currency.Model;
     initial: Integer;
     deltaSold: Integer;
 }
@@ -80,13 +48,13 @@ export namespace CatalogItem {
         index: Integer; // Feels a little bad here, as it really should only be used in RpgShop
         key: string;
         product: Product;
-        currency: Currency.Model;
+        currency: RpgEconomy.Currency.Model;
         price: Integer;
         quantity: Integer;
     }>;
 
     export function canPlayerAfford(item: Model) {
-        return Currency.getPlayerHeldAmount(item.currency) >= item.price;
+        return RpgEconomy.Currency.getPlayerHeldAmount(item.currency) >= item.price;
     }
 }
 

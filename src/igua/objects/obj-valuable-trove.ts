@@ -148,11 +148,11 @@ function solveTiers(count: number): Tiers {
     return tiers;
 }
 
-type Layout = RpgEconomy.Currency.Kind[][];
+type Layout = RpgEconomy.Valuables.Kind[][];
 
 function solveLayout(counts: ValuableChangeMaker.Counts, tiers: Tiers) {
     const sortedCounts = Object.entries(counts)
-        .map(([kind, value]) => ({ kind: kind as RpgEconomy.Currency.Kind, value }))
+        .map(([kind, value]) => ({ kind: kind as RpgEconomy.Valuables.Kind, value }))
         .sort((a, b) => b.value - a.value);
 
     const layout: Layout = tiers.map(() => []);

@@ -2,13 +2,13 @@ import { Logger } from "../../lib/game-engine/logger";
 import { RpgEconomy } from "../rpg/rpg-economy";
 
 export namespace ValuableChangeMaker {
-    export type Counts = Record<RpgEconomy.Currency.Kind, number>;
+    export type Counts = Record<RpgEconomy.Valuables.Kind, number>;
 
     export function solveCounts(total: number) {
         const result: Counts = {} as any;
 
-        for (const type of RpgEconomy.Currency.DescendingTypes) {
-            const value = RpgEconomy.Currency.Values[type];
+        for (const type of RpgEconomy.Valuables.DescendingTypes) {
+            const value = RpgEconomy.Valuables.Values[type];
             const count = Math.floor(total / value);
             result[type] = count;
             total -= count * value;

@@ -15,7 +15,7 @@ interface ValuableConfig {
     sound: Sound;
 }
 
-const valuableConfigs: Record<RpgEconomy.Currency.Kind, ValuableConfig> = {
+const valuableConfigs: Record<RpgEconomy.Valuables.Kind, ValuableConfig> = {
     green: {
         texture: Tx.Collectibles.ValuableGreen,
         sparkle: {
@@ -40,7 +40,7 @@ const valuableConfigs: Record<RpgEconomy.Currency.Kind, ValuableConfig> = {
 };
 
 export function objValuable(
-    kind: RpgEconomy.Currency.Kind,
+    kind: RpgEconomy.Valuables.Kind,
     uid?: number,
     incomeSource: RpgPlayerWallet.IncomeSource = "default",
 ) {
@@ -57,7 +57,7 @@ export function objValuable(
                     .at(self).add(offset).show(self.parent);
                 sparkle.index = Rng.float(1, 3);
             }
-            RpgPlayerWallet.receiveValuables(RpgEconomy.Currency.Values[kind], incomeSource);
+            RpgPlayerWallet.receiveValuables(RpgEconomy.Valuables.Values[kind], incomeSource);
         })
         .step(self => self.collectable = collectableAfterSteps-- <= 0);
 }
