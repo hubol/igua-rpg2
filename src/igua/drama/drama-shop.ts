@@ -14,6 +14,7 @@ import { DataEquipment } from "../data/data-equipment";
 import { Input, layers, scene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
+import { mxnErrorVibrate } from "../mixins/mxn-error-vibrate";
 import { experienceIndicatorConfigs, experienceIndicatorConfigsArray } from "../objects/overlay/obj-hud";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { CatalogItem, Currency, RpgShop } from "../rpg/rpg-shop";
@@ -34,7 +35,10 @@ export function* dramaShop(shop: RpgShop) {
     };
 
     const initialCatalog = shop.getCatalog();
-    const catalogItemObjs = initialCatalog.map(item => objDramaShopCatalogItem(shop, item, refreshCatalog));
+    const playerStatusObj = objPlayerStatus(initialCatalog).at(50, -5);
+    const catalogItemObjs = initialCatalog.map(item =>
+        objDramaShopCatalogItem(shop, item, refreshCatalog, () => playerStatusObj.methods.vibrate(item.currency))
+    );
 
     const buttonObjs = [
         ...catalogItemObjs,
@@ -58,8 +62,6 @@ export function* dramaShop(shop: RpgShop) {
         },
     )
         .at(renderer.width - ItemConsts.width - 32, 0);
-
-    const playerStatusObj = objPlayerStatus(initialCatalog).at(50, -5);
 
     const shopObj = container(pageObj, playerStatusObj).show(layers.overlay.messages);
 
@@ -88,10 +90,19 @@ const ItemConsts = {
     gap: 15,
 };
 
-function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem.Model, refreshCatalog: () => void) {
+function objDramaShopCatalogItem(
+    shop: RpgShop,
+    item: CatalogItem.Model,
+    refreshCatalog: () => void,
+    showPurchaseError: () => void,
+) {
     let catalogItem = item;
 
-    const methods = { applyCatalogItem };
+    const methods = {
+        applyCatalogItem(item: CatalogItem.Model) {
+            objects = applyCatalogItem(item);
+        },
+    };
 
     const contextualObj = container();
 
@@ -103,9 +114,15 @@ function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem.Model, refresh
             methods,
         })
         .step(self => {
-            if (self.selected && Input.justWentDown("Confirm") && CatalogItem.canPlayerAfford(catalogItem)) {
-                shop.purchase(catalogItem);
-                refreshCatalog();
+            if (self.selected && Input.justWentDown("Confirm")) {
+                if (CatalogItem.canPlayerAfford(catalogItem)) {
+                    shop.purchase(catalogItem);
+                    refreshCatalog();
+                }
+                else {
+                    showPurchaseError();
+                    objects.catalogItemPriceObj.mxnErrorVibrate.methods.vibrate();
+                }
             }
         });
 
@@ -155,11 +172,18 @@ function objDramaShopCatalogItem(shop: RpgShop, item: CatalogItem.Model, refresh
         catalogItem = item;
         // TODO draw stufffff
         objCatalogItemNameDescription(item).show(contextualObj);
-        objCatalogItemPrice(item).at(ItemConsts.width - 69, 32).show(contextualObj);
+        const catalogItemPriceObj = objCatalogItemPrice(item)
+            .mixin(mxnErrorVibrate)
+            .at(ItemConsts.width - 69, 32)
+            .show(contextualObj);
         objLimitedQuantity(item.quantity).at(ItemConsts.width, 0).show(contextualObj);
+
+        return {
+            catalogItemPriceObj,
+        };
     }
 
-    applyCatalogItem(item);
+    let objects = applyCatalogItem(item);
 
     return obj.pivoted(-2, -10);
 }
@@ -207,7 +231,7 @@ function objCatalogItemPrice(item: CatalogItem.Model) {
     return objCurrencyAmount(item.price, item.currency, CatalogItem.canPlayerAfford(item));
 }
 
-const possibleCurrencies: CatalogItem.Model["currency"][] = [
+const possibleCurrencies: Currency.Model[] = [
     "valuables",
     ...experienceIndicatorConfigsArray.map(({ experienceKey }) => ({
         kind: "experience" as const,
@@ -220,7 +244,10 @@ function objPlayerStatus(catalog: CatalogItem.Model[]) {
         catalog.some(item => Currency.equals(item.currency, currency))
     );
     const currencyObjs = currenciesInCatalog.reverse().map((currency, i) =>
-        objCurrencyAmount(Currency.getPlayerHeldAmount(currency), currency, true).at(i, renderer.height - 28 - i * 15)
+        objCurrencyAmount(Currency.getPlayerHeldAmount(currency), currency, true)
+            .merge({ currency })
+            .mixin(mxnErrorVibrate)
+            .at(i, renderer.height - 28 - i * 15)
             .step(self => self.controls.amount = Currency.getPlayerHeldAmount(currency))
     );
     const textsObj = container(
@@ -230,10 +257,17 @@ function objPlayerStatus(catalog: CatalogItem.Model[]) {
 
     const bounds = textsObj.getBounds();
 
+    const methods = {
+        vibrate(currency: Currency.Model) {
+            currencyObjs.find(obj => Currency.equals(obj.currency, currency))?.mxnErrorVibrate?.methods?.vibrate?.();
+        },
+    };
+
     return container(
         new Graphics().beginFill(0x802020).drawRoundedRect(-60, bounds.y, 134, bounds.height + 6, 10),
         textsObj,
-    );
+    )
+        .merge({ methods });
 }
 
 function objCurrencyAmount(amount: Integer, currency: CatalogItem.Model["currency"], isAffordable: boolean) {
