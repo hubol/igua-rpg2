@@ -4,10 +4,13 @@ import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
-import { Integer } from "../../lib/math/number-alias-types";
+import { SceneLocal } from "../../lib/game-engine/scene-local";
+import { approachLinear } from "../../lib/math/number";
+import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { vequals } from "../../lib/math/vector";
 import { vnew } from "../../lib/math/vector-type";
+import { merge } from "../../lib/object/merge";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataEquipment } from "../data/data-equipment";
@@ -21,7 +24,20 @@ import { CatalogItem, Currency, RpgShop } from "../rpg/rpg-shop";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
 
-export function* dramaShop(shop: RpgShop) {
+export interface DramaShopStyle {
+    primaryTint: RgbInt;
+    secondaryTint: RgbInt;
+}
+
+const CtxDramaShop = new SceneLocal(
+    () => ({
+        style: { primaryTint: 0x802020, secondaryTint: 0xffffff } satisfies DramaShopStyle,
+    }),
+    "CtxDramaShop",
+);
+
+export function* dramaShop(shop: RpgShop, style: DramaShopStyle) {
+    CtxDramaShop.value.style = style;
     // Another hack to prevent a stupid flicker
     // Sorry, me
     dramaShopObjsCount++;
@@ -57,8 +73,8 @@ export function* dramaShop(shop: RpgShop) {
             selectionIndex: 0,
             startTicking: true,
             maxHeight: renderer.height - 40,
-            scrollbarBgTint: 0x802020,
-            scrollbarFgTint: 0xffffff,
+            scrollbarBgTint: CtxDramaShop.value.style.primaryTint,
+            scrollbarFgTint: CtxDramaShop.value.style.secondaryTint,
         },
     )
         .at(renderer.width - ItemConsts.width - 32, 0);
@@ -107,7 +123,12 @@ function objDramaShopCatalogItem(
     const contextualObj = container();
 
     const obj = container(
-        new Graphics().beginFill(0x802020).drawRect(0, 0, ItemConsts.width, ItemConsts.height),
+        new Graphics().beginFill(CtxDramaShop.value.style.primaryTint).drawRect(
+            0,
+            0,
+            ItemConsts.width,
+            ItemConsts.height,
+        ),
     )
         .merge({
             selected: false,
@@ -142,7 +163,7 @@ function objDramaShopCatalogItem(
 
             while (true) {
                 pen.moveTowards(next, Rng.int(16, 40));
-                self.lineStyle(Rng.int(1, 3), 0xffffff, 1, 1);
+                self.lineStyle(Rng.int(1, 3), CtxDramaShop.value.style.secondaryTint, 1, 1);
                 self.lineTo(pen.x, pen.y);
                 if (vequals(pen, next)) {
                     if (next === topLeft) {
@@ -170,7 +191,6 @@ function objDramaShopCatalogItem(
     function applyCatalogItem(item: CatalogItem.Model) {
         contextualObj.removeAllChildren();
         catalogItem = item;
-        // TODO draw stufffff
         objCatalogItemNameDescription(item).show(contextualObj);
         const catalogItemPriceObj = objCatalogItemPrice(item)
             .mixin(mxnErrorVibrate)
@@ -192,9 +212,11 @@ function objCatalogItemNameDescription(item: CatalogItem.Model) {
     const nameText = getCatalogItemName(item);
     const descriptionText = getCatalogItemDescription(item);
 
-    const nameTextObj = objText.Large(nameText, { tint: 0x802020 });
+    const nameTextObj = objText.Large(nameText, { tint: CtxDramaShop.value.style.primaryTint });
 
-    const ellipseObj = new Graphics().lineStyle(1, 0x802020).beginFill(0xffffff).drawRoundedRect(
+    const ellipseObj = new Graphics().lineStyle(1, CtxDramaShop.value.style.primaryTint).beginFill(
+        CtxDramaShop.value.style.secondaryTint,
+    ).drawRoundedRect(
         -6,
         -2,
         nameTextObj.width + 12,
@@ -204,7 +226,10 @@ function objCatalogItemNameDescription(item: CatalogItem.Model) {
 
     const nameObj = container(ellipseObj, nameTextObj).at(4, -8);
 
-    return container(nameObj, objText.Medium(descriptionText).at(9, 18));
+    return container(
+        nameObj,
+        objText.Medium(descriptionText, { tint: CtxDramaShop.value.style.secondaryTint }).at(9, 18),
+    );
 }
 
 function getCatalogItemName(item: CatalogItem.Model) {
@@ -251,7 +276,10 @@ function objPlayerStatus(catalog: CatalogItem.Model[]) {
             .step(self => self.controls.amount = Currency.getPlayerHeldAmount(currency))
     );
     const textsObj = container(
-        objText.Large("You have...").anchored(0.5, 1).at(12, currencyObjs.last.y - 16),
+        objText.Large("You have...", { tint: CtxDramaShop.value.style.secondaryTint }).anchored(0.5, 1).at(
+            12,
+            currencyObjs.last.y - 16,
+        ),
         ...currencyObjs,
     );
 
@@ -264,7 +292,13 @@ function objPlayerStatus(catalog: CatalogItem.Model[]) {
     };
 
     return container(
-        new Graphics().beginFill(0x802020).drawRoundedRect(-60, bounds.y, 134, bounds.height + 6, 10),
+        new Graphics().beginFill(CtxDramaShop.value.style.primaryTint).drawRoundedRect(
+            -60,
+            bounds.y,
+            134,
+            bounds.height + 6,
+            10,
+        ),
         textsObj,
     )
         .merge({ methods });
@@ -295,7 +329,11 @@ function objCurrencyAmount(amount: Integer, currency: CatalogItem.Model["currenc
     if (currency === "valuables") {
         priceTextObj.tint = 0x00ff00;
         currencyTextObj.tint = 0x00ff00;
-        Sprite.from(Tx.Collectibles.ValuableGreen).anchored(0.5, 0.5).at(-priceTextObj.width - 8, -8).show(textObj);
+        Sprite.from(Tx.Collectibles.ValuableGreen)
+            .anchored(0.5, 0.5)
+            .at(-priceTextObj.width - 8, -8)
+            .step(self => self.x = approachLinear(self.x, -priceTextObj.width - 8, 1))
+            .show(textObj);
     }
     else {
         const bounds = textObj.getBounds();
@@ -351,12 +389,12 @@ function objDoneButton() {
     const maskObj = objRoundedRect();
 
     const obj = container(
-        objRoundedRect(),
+        objRoundedRect().tinted(CtxDramaShop.value.style.secondaryTint),
         maskObj,
     ).merge({ selected: false });
 
     objText.MediumIrregular("OK! I'm all done looking at your shop.\nThank you!", {
-        tint: 0x802020,
+        tint: CtxDramaShop.value.style.primaryTint,
         align: "center",
     }).at(110, 14)
         .show(obj)
@@ -370,7 +408,7 @@ function objDoneButton() {
         self.head.mouth.agape = (obj.selected && scene.ticker.ticks % 24 < 12) ? 1 : 0
     );
 
-    new Graphics().lineStyle(3, 0x802020, 1, 0).drawRoundedRect(
+    new Graphics().lineStyle(3, CtxDramaShop.value.style.primaryTint, 1, 0).drawRoundedRect(
         ItemConsts.gutter,
         ItemConsts.gutter,
         ItemConsts.width - ItemConsts.gutter * 2,
@@ -383,6 +421,7 @@ function objDoneButton() {
 
     return obj;
 }
+
 function objRoundedRect() {
     return new Graphics().beginFill(0xffffff).drawRoundedRect(
         0,

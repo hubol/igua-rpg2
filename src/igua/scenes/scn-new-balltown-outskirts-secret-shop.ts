@@ -70,6 +70,6 @@ export function scnNewBalltownOutskirtsSecretShop() {
     const lvl = Lvl.NewBalltownOutskirtsSecretShop();
 
     lvl.Shopkeeper.mixin(mxnCutscene, function* () {
-        yield* dramaShop(newBalltownSecretRpgShop);
+        yield* dramaShop(newBalltownSecretRpgShop, { primaryTint: 0x152F12, secondaryTint: 0xE6E8CC });
     });
 }
