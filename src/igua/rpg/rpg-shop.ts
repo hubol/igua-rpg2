@@ -56,6 +56,25 @@ export namespace CatalogItem {
     export function canPlayerAfford(item: Model) {
         return RpgEconomy.Currency.getPlayerHeldAmount(item.currency) >= item.price;
     }
+
+    export function getPlayerOwnedCount(item: Model): Integer {
+        if (item.product.kind === "potion") {
+            // TODO implement!
+            return 0;
+        }
+        else if (item.product.kind === "equipment") {
+            // TODO this ain't right!
+            let count = 0;
+            for (const equipment of RpgProgress.character.equipment) {
+                if (equipment === item.product.name) {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        return RpgKeyItems.Methods.count(RpgProgress.character.inventory.keyItems, item.product.name);
+    }
 }
 
 function getCatalogItemKeyBase(stock: Stock) {

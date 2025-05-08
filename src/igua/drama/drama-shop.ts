@@ -250,6 +250,7 @@ function objCatalogItemNameDescription(item: CatalogItem.Model) {
     return container(
         nameObj,
         objText.Medium(descriptionText, { tint: CtxDramaShop.value.style.secondaryTint }).at(9, 18),
+        objOwnedCount(CatalogItem.getPlayerOwnedCount(item)).at(nameObj.width + 6, 4),
     );
 }
 
@@ -275,6 +276,25 @@ function getCatalogItemDescription(item: CatalogItem.Model) {
 
 function objCatalogItemPrice(item: CatalogItem.Model) {
     return objCurrencyAmount(item.price, item.currency, CatalogItem.canPlayerAfford(item));
+}
+
+function objOwnedCount(count: Integer) {
+    const textObj = objText.SmallDigits(count === 1 ? "OWNED" : `${count} OWNED`, {
+        tint: CtxDramaShop.value.style.primaryTint,
+    });
+    const gfx = new Graphics().beginFill(CtxDramaShop.value.style.secondaryTint).drawRect(
+        -1,
+        -1,
+        textObj.width + 2,
+        textObj.height + 2,
+    );
+
+    const obj = container(gfx, textObj);
+    if (count < 1) {
+        obj.visible = false;
+    }
+
+    return obj;
 }
 
 const possibleCurrencies: RpgEconomy.Currency.Model[] = [

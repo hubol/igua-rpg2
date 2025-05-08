@@ -14,6 +14,13 @@ const characters = {
     "9": { x: 38, y: 0, w: 4, h: 5, xadv: 5 },
     "+": { x: 48, y: 1, w: 3, h: 3, xadv: 4, yoff: 1 },
     "#": { x: 52, y: 0, w: 5, h: 5, xadv: 6 },
+    O: { x: 58, y: 0, w: 4, h: 5, xadv: 5 },
+    W: { x: 63, y: 0, w: 5, h: 5, xadv: 6 },
+    N: { x: 69, y: 0, w: 4, h: 5, xadv: 5 },
+    E: { x: 74, y: 0, w: 3, h: 5, xadv: 4 },
+    D: { x: 78, y: 0, w: 4, h: 5, xadv: 5 },
+    "-": { x: 83, y: 2, w: 3, h: 1, xadv: 4 },
+    " ": { x: 0, y: 0, w: 0, h: 0, xadv: 2 },
 };
 
 export const fntDiggit = createBitmapFont(Tx.Font.Diggit, {
