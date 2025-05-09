@@ -1,13 +1,12 @@
-import { DataEquipment } from "../data/data-equipment";
 import { RpgAttack } from "./rpg-attack";
-import { RpgEquipmentAttributes } from "./rpg-equipment-attributes";
+import { RpgEquipmentLoadout } from "./rpg-equipment-loadout";
 import { RpgFaction } from "./rpg-faction";
-import { RpgProgress, RpgProgressEquipment } from "./rpg-progress";
+import { RpgProgress } from "./rpg-progress";
 import { RpgStatus } from "./rpg-status";
 
 export const RpgPlayer = {
-    get equipmentAttributes() {
-        return computeEquipmentAttributes(RpgProgress.character.equipment);
+    get equipmentEffects() {
+        return RpgEquipmentLoadout.getPlayerEffects();
     },
     status: {
         get health() {
@@ -120,42 +119,3 @@ export const RpgPlayer = {
         },
     }),
 };
-
-const equipmentAttributesCacheKey: RpgProgressEquipment = [];
-let equipmentAttributesCache: RpgEquipmentAttributes.Model;
-
-function computeEquipmentAttributes(equipment: RpgProgressEquipment) {
-    const length = Math.max(equipment.length, equipmentAttributesCacheKey.length);
-    let requiresCompute = false;
-    for (let i = 0; i < length; i++) {
-        if (equipment[i] !== equipmentAttributesCacheKey[i]) {
-            requiresCompute = true;
-            break;
-        }
-    }
-
-    if (!requiresCompute) {
-        return equipmentAttributesCache;
-    }
-
-    equipmentAttributesCacheKey.length = 0;
-    equipmentAttributesCacheKey.push(...equipment);
-
-    const attributes = equipment.map(name =>
-        (DataEquipment[name ?? "__Empty__"] ?? DataEquipment.__Unknown__).attributes
-    );
-
-    // TODO generated code for this?
-    equipmentAttributesCache = {
-        loot: {
-            valuables: {
-                constant: attributes.reduce((value, attr) => value + attr.loot.valuables.constant, 0),
-            },
-        },
-        quirks: {
-            enablesHighJumpsAtSpecialSigns: attributes.some(attr => attr.quirks.enablesHighJumpsAtSpecialSigns),
-        },
-    };
-
-    return equipmentAttributesCache;
-}

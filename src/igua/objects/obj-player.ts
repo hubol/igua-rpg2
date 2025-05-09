@@ -27,7 +27,6 @@ const PlayerConsts = {
     WalkingAcceleration: 0.3,
     WalkingDeceleration: 0.2,
     JumpSpeed: -3,
-    JumpSpeedAtSpecialSign: -6,
     VariableJumpSpeedMaximum: -1.5,
     VariableJumpDelta: -0.095,
     Gravity: 0.15,
@@ -189,8 +188,10 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             if (hasControl && puppet.isOnGround && stepsSinceJumpJustWentDown < 6) {
                 stepsSinceJumpJustWentDown = 100;
 
+                const specialBonus = RpgPlayer.equipmentEffects.motion.jump.bonusAtSpecialSigns;
+
                 if (
-                    RpgPlayer.equipmentAttributes.quirks.enablesHighJumpsAtSpecialSigns
+                    specialBonus > 0
                     && puppet.collidesOne(Instances(objSign, filterSpecialSignObjs))
                 ) {
                     puppet.play(Sfx.Effect.JumpSpecial.rate(0.9, 1.1));
@@ -198,12 +199,13 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                         puppet.sparklesPerFrame = 2;
                         yield interp(puppet, "sparklesPerFrame").to(0).over(500);
                     });
-                    puppet.speed.y = PlayerConsts.JumpSpeedAtSpecialSign;
-                    RpgExperienceRewarder.jump.onJump(ballonsCount, true);
+                    puppet.speed.y = PlayerConsts.JumpSpeed - specialBonus;
+                    // TODO passing these in feels counterintuitive
+                    RpgExperienceRewarder.jump.onJump(ballonsCount, specialBonus * 2);
                 }
                 else {
                     puppet.speed.y = PlayerConsts.JumpSpeed;
-                    RpgExperienceRewarder.jump.onJump(ballonsCount, false);
+                    RpgExperienceRewarder.jump.onJump(ballonsCount, 0);
                 }
 
                 if (stepsSinceOffGround < 6 && (puppet.isMovingLeft || puppet.isMovingRight)) {

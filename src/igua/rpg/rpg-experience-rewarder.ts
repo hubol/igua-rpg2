@@ -60,8 +60,8 @@ export const RpgExperienceRewarder = {
         },
     },
     jump: {
-        onJump(ballonsCount: Integer, isSpecial: boolean) {
-            RpgProgress.character.experience.jump += (isSpecial ? 4 : 1) + ballonsCount;
+        onJump(ballonsCount: Integer, specialBonus: Integer) {
+            RpgProgress.character.experience.jump += 1 + specialBonus + ballonsCount;
         },
     },
     pocket: {

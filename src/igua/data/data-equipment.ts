@@ -1,27 +1,29 @@
-import { RpgEquipmentAttributes } from "../rpg/rpg-equipment-attributes";
+import { RpgEquipmentEffects } from "../rpg/rpg-equipment-effects";
 
 interface Equipment_NoInternalName {
     name: string;
     description: string;
     // TODO texture?
-    attributes: RpgEquipmentAttributes.Model;
+    effects: RpgEquipmentEffects.MutatorFn;
 }
+
+const voidEffects: RpgEquipmentEffects.MutatorFn = () => {};
 
 const dataEquipment = {
     JumpAtSpecialSignsRing: {
         name: "Special Jumps Ring",
         description: "Increase jump height at special signs",
-        attributes: RpgEquipmentAttributes.create({ quirks: { enablesHighJumpsAtSpecialSigns: true } }),
+        effects: (model, bonus) => model.motion.jump.bonusAtSpecialSigns += 2 * (1 + bonus),
     },
     __Empty__: {
         name: "Empty",
         description: "Void",
-        attributes: RpgEquipmentAttributes.create({}),
+        effects: voidEffects,
     },
     __Unknown__: {
         name: "???",
         description: "If you are reading this, it is an error",
-        attributes: RpgEquipmentAttributes.create({}),
+        effects: voidEffects,
     },
 } satisfies Record<string, Equipment_NoInternalName>;
 

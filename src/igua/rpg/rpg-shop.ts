@@ -2,6 +2,7 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { EquipmentInternalName } from "../data/data-equipment";
 import { DataKeyItemInternalName } from "../data/data-key-items";
 import { RpgEconomy } from "./rpg-economy";
+import { RpgEquipmentLoadout } from "./rpg-equipment-loadout";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerWallet } from "./rpg-player-wallet";
 import { RpgProgress } from "./rpg-progress";
@@ -181,16 +182,8 @@ export class RpgShop {
 
 function deliverProduct(product: Product) {
     switch (product.kind) {
-        // TODO this should be a different layer!
         case "equipment":
-            const freeIndex = RpgProgress.character.equipment.indexOf(null);
-            if (freeIndex >= 0) {
-                RpgProgress.character.equipment[freeIndex] = product.name;
-            }
-            else {
-                RpgProgress.character.equipment.shift();
-                RpgProgress.character.equipment.push(product.name);
-            }
+            RpgEquipmentLoadout.applyPlayer(product.name);
             return;
         case "key_item":
             RpgKeyItems.Methods.receive(RpgProgress.character.inventory.keyItems, product.name);
