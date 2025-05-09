@@ -15,6 +15,11 @@ const dataEquipment = {
         description: "Increase jump height at special signs",
         effects: (model, bonus) => model.motion.jump.bonusAtSpecialSigns += 2 * (1 + bonus),
     },
+    PoisonRing: {
+        name: "Pzzn Ring",
+        description: "Melee attacks apply poison to enemy",
+        effects: (model, bonus) => model.combat.melee.conditions.poison += 67 + 33 * bonus,
+    },
     __Empty__: {
         name: "Empty",
         description: "Void",

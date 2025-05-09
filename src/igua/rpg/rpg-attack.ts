@@ -1,4 +1,5 @@
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
+import { merge } from "../../lib/object/merge";
 import { DeepPartial } from "../../lib/types/deep-partial";
 import { RpgFaction } from "./rpg-faction";
 
@@ -25,14 +26,14 @@ export namespace RpgAttack {
         return {
             physical: model.physical ?? 0,
             emotional: model.emotional ?? 0,
-            conditions: {
+            conditions: merge({
                 helium: model.conditions?.helium ?? 0,
                 poison: model.conditions?.poison ?? 0,
                 wetness: {
                     value: model.conditions?.wetness?.value ?? 0,
                     tint: model.conditions?.wetness?.tint ?? 0xffffff,
                 },
-            },
+            }, model.conditions ?? {}),
             versus: model.versus ?? RpgFaction.Player,
             quirks: {
                 isPlayerClawMeleeAttack: model.quirks?.isPlayerClawMeleeAttack ?? false,

@@ -4,6 +4,13 @@ import { compileResetter } from "../../lib/object/compile-resetter";
 export namespace RpgEquipmentEffects {
     export function create() {
         return {
+            combat: {
+                melee: {
+                    conditions: {
+                        poison: 0,
+                    },
+                },
+            },
             motion: {
                 jump: {
                     bonusAtSpecialSigns: 0,

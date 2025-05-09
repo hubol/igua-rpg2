@@ -98,6 +98,11 @@ export const RpgPlayer = {
         },
     },
     meleeAttack: RpgAttack.create({
+        conditions: {
+            get poison() {
+                return RpgEquipmentLoadout.getPlayerEffects().combat.melee.conditions.poison;
+            },
+        },
         emotional: 0,
         get physical() {
             return 4 + RpgProgress.character.attributes.strength * 3;
@@ -108,6 +113,11 @@ export const RpgPlayer = {
         },
     }),
     meleeClawAttack: RpgAttack.create({
+        conditions: {
+            get poison() {
+                return RpgEquipmentLoadout.getPlayerEffects().combat.melee.conditions.poison;
+            },
+        },
         emotional: 0,
         get physical() {
             return 5 + RpgProgress.character.attributes.strength * 5;
