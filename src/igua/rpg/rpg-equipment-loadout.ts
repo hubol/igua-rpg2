@@ -53,7 +53,6 @@ export namespace RpgEquipmentLoadout {
             return playerEffectsCache;
         }
         getEffects(RpgProgress.character.equipment, playerEffectsCache);
-        console.log(playerEffectsCache);
         isPlayerEffectsCacheValid = true;
         return playerEffectsCache;
     }
