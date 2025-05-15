@@ -18,7 +18,7 @@ const dataEquipment = {
     PoisonRing: {
         name: "Pzzn Ring",
         description: "Melee attacks apply poison to enemy",
-        effects: (model, bonus) => model.combat.melee.conditions.poison += 67 + 33 * bonus,
+        effects: (model, bonus) => model.combat.melee.conditions.poison += Math.round(((2 + 1 * bonus) / 3) * 100),
     },
     __Empty__: {
         name: "Empty",
