@@ -105,7 +105,8 @@ export const RpgPlayer = {
         },
         emotional: 0,
         get physical() {
-            return 4 + RpgProgress.character.attributes.strength * 3;
+            return 4 + RpgProgress.character.attributes.strength * 3
+                + RpgEquipmentLoadout.getPlayerEffects().combat.melee.attack.physical;
         },
         versus: RpgFaction.Enemy,
         quirks: {
@@ -120,7 +121,8 @@ export const RpgPlayer = {
         },
         emotional: 0,
         get physical() {
-            return 5 + RpgProgress.character.attributes.strength * 5;
+            return 5 + RpgProgress.character.attributes.strength * 5
+                + RpgEquipmentLoadout.getPlayerEffects().combat.melee.clawAttack.physical;
         },
         versus: RpgFaction.Enemy,
         quirks: {

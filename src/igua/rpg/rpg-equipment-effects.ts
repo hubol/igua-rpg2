@@ -6,8 +6,14 @@ export namespace RpgEquipmentEffects {
         return {
             combat: {
                 melee: {
+                    attack: {
+                        physical: 0,
+                    },
                     conditions: {
                         poison: 0,
+                    },
+                    clawAttack: {
+                        physical: 0,
                     },
                 },
             },

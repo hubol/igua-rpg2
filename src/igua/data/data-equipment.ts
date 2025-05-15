@@ -28,6 +28,21 @@ const dataEquipment = {
             model.loot.valuables.bonus += 6 + 4 * bonus;
         },
     },
+    NailFile: {
+        name: "Nail File",
+        description: "Bonus claw physical attack",
+        // TODO would be cool if stats could be based on player attributes here...
+        effects: (model, bonus) => model.combat.melee.clawAttack.physical += 5 + bonus * 2,
+    },
+    PatheticCage: {
+        name: "Pathetic Cage",
+        description: "Modest bonus to physical attack",
+        // TODO would be cool if stats could be based on player attributes here...
+        effects: (model, bonus) => {
+            model.combat.melee.attack.physical += 1 + bonus;
+            model.combat.melee.clawAttack.physical += 1 + bonus;
+        },
+    },
     __Empty__: {
         name: "Empty",
         description: "Void",
