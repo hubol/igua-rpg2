@@ -27,6 +27,15 @@ const newBalltownSecretRpgShop = new RpgShop({
             },
         },
         {
+            product: { kind: "equipment", name: "RichesRing" },
+            initialQuantity: 999,
+            price: {
+                currency: "valuables",
+                initial: 1,
+                deltaSold: 3,
+            },
+        },
+        {
             product: { kind: "equipment", name: "JumpAtSpecialSignsRing" },
             initialQuantity: 3,
             price: {

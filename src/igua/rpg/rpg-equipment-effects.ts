@@ -11,6 +11,14 @@ export namespace RpgEquipmentEffects {
                     },
                 },
             },
+            loot: {
+                tiers: {
+                    nothingRerollCount: 0,
+                },
+                valuables: {
+                    bonus: 0,
+                },
+            },
             motion: {
                 jump: {
                     bonusAtSpecialSigns: 0,

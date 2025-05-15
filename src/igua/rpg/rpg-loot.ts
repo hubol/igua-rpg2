@@ -2,6 +2,7 @@ import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { Empty } from "../../lib/types/empty";
+import { RpgEquipmentEffects } from "./rpg-equipment-effects";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgStatus } from "./rpg-status";
 
@@ -55,8 +56,8 @@ export namespace RpgLoot {
     }
 
     export const Methods = {
-        drop(model: Model, dropperStatus: RpgStatus.Model): Drop {
-            let valuables = 0;
+        drop(model: Model, dropperStatus: RpgStatus.Model, lootEffects: RpgEquipmentEffects.Model["loot"]): Drop {
+            let valuables = lootEffects.valuables.bonus;
             const pocketItems: RpgPocket.Item[] = [];
             const flops: Integer[] = [];
 
@@ -67,7 +68,14 @@ export namespace RpgLoot {
                     continue;
                 }
 
-                const drop = pickOptionDrop(tier);
+                let drop = pickOptionDrop(tier);
+
+                let rerollCount = 0;
+                while (drop === null && rerollCount < lootEffects.tiers.nothingRerollCount) {
+                    drop = pickOptionDrop(tier);
+                    rerollCount++;
+                }
+
                 if (drop === null) {
                     continue;
                 }

@@ -20,6 +20,14 @@ const dataEquipment = {
         description: "Melee attacks apply poison to enemy",
         effects: (model, bonus) => model.combat.melee.conditions.poison += Math.round(((2 + 1 * bonus) / 3) * 100),
     },
+    RichesRing: {
+        name: "Riches Ring",
+        description: "Reduced odds of looting nothing, bonus valuables",
+        effects: (model, bonus) => {
+            model.loot.tiers.nothingRerollCount += 1 + bonus;
+            model.loot.valuables.bonus += 6 + 4 * bonus;
+        },
+    },
     __Empty__: {
         name: "Empty",
         description: "Void",
