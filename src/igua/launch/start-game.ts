@@ -4,7 +4,6 @@ import { SceneLibrary } from "../core/scene/scene-library";
 import { DevGameStartConfig } from "../dev/dev-game-start-config";
 import { sceneStack, startAnimator } from "../globals";
 import { playerObj } from "../objects/obj-player";
-import { RpgEquipmentLoadout } from "../rpg/rpg-equipment-loadout";
 import { RpgPlayer } from "../rpg/rpg-player";
 import { RpgProgress, setRpgProgress } from "../rpg/rpg-progress";
 
@@ -14,7 +13,6 @@ export function startGame() {
     if (config.progress) {
         setRpgProgress(config.progress);
         RpgProgress.character.status.health = RpgPlayer.status.healthMax;
-        RpgEquipmentLoadout.invalidatePlayerEffectsCache();
     }
 
     RpgProgress.character.position.sceneName = config.sceneName;

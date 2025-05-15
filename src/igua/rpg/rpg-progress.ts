@@ -6,6 +6,7 @@ import { PropertiesLike } from "../../lib/types/properties-like";
 import { EquipmentInternalName } from "../data/data-equipment";
 import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { getDefaultLooks } from "../iguana/get-default-looks";
+import { RpgEquipmentLoadout } from "./rpg-equipment-loadout";
 import { RpgFlops } from "./rpg-flops";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPocket } from "./rpg-pocket";
@@ -123,6 +124,7 @@ export let RpgProgress = getInitialRpgProgress();
 
 export function setRpgProgress(rpgProgress: typeof RpgProgress) {
     RpgProgress = rpgProgress;
+    RpgEquipmentLoadout.invalidatePlayerEffectsCache();
 }
 
 export type RpgProgressExperience = keyof typeof RpgProgress["character"]["experience"];
