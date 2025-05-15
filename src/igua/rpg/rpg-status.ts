@@ -174,8 +174,11 @@ export namespace RpgStatus {
 
                 if (!target.conditions.poison.immune) {
                     target.conditions.poison.value += attack.conditions.poison;
-                    if (target.conditions.poison.value >= target.conditions.poison.max) {
-                        target.conditions.poison.value = 0;
+                    while (target.conditions.poison.value >= Math.max(1, target.conditions.poison.max)) {
+                        target.conditions.poison.value = Math.max(
+                            0,
+                            target.conditions.poison.value - target.conditions.poison.max,
+                        );
                         target.conditions.poison.level += 1;
                     }
                 }
