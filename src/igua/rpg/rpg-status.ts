@@ -114,12 +114,27 @@ export namespace RpgStatus {
                 return;
             }
 
-            if (count % 120 === 0 && model.health > Consts.FullyPoisonedHealth && model.conditions.poison.level > 0) {
+            if (model.health > Consts.FullyPoisonedHealth && model.conditions.poison.level > 0) {
                 const previous = model.health;
-                model.health = Math.max(Consts.FullyPoisonedHealth, model.health - model.conditions.poison.level);
+
+                if (count % 120 === 0) {
+                    model.health = Math.max(
+                        Consts.FullyPoisonedHealth,
+                        model.health - Math.ceil(model.conditions.poison.level / 2),
+                    );
+                }
+                else if (count % 120 === 40) {
+                    model.health = Math.max(
+                        Consts.FullyPoisonedHealth,
+                        model.health - Math.floor(model.conditions.poison.level / 2),
+                    );
+                }
+
                 const diff = previous - model.health;
 
-                effects.tookDamage(model.health, diff, DamageKind.Poison);
+                if (diff > 0) {
+                    effects.tookDamage(model.health, diff, DamageKind.Poison);
+                }
             }
             if (count % 20 === 0) {
                 model.conditions.helium.value = Math.max(0, model.conditions.helium.value - 1);
