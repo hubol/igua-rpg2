@@ -13,10 +13,9 @@ import { Empty } from "../../lib/types/empty";
 import { Force } from "../../lib/types/force";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
-import { DataKeyItems } from "../data/data-key-items";
 import { NpcPersonas } from "../data/data-npc-personas";
-import { DramaKeyItems } from "../drama/drama-key-items";
 import { DramaMisc } from "../drama/drama-misc";
+import { dramaShop } from "../drama/drama-shop";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
@@ -32,6 +31,7 @@ import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 import { RpgPocket } from "../rpg/rpg-pocket";
 import { RpgProgress } from "../rpg/rpg-progress";
+import { RpgShop } from "../rpg/rpg-shop";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);
@@ -214,6 +214,15 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
     });
 }
 
+const shopMechanicalIdol = new RpgShop({
+    internalName: "shopMechanicalIdol",
+    stocks: [{
+        product: { kind: "key_item", name: "UpgradedPickaxe" },
+        initialQuantity: 999,
+        price: { currency: "mechanical_idol_credits", deltaSold: 0, initial: 10 },
+    }],
+});
+
 function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
     const options = ["Ball", "Star", "P", "3", "F"] as const;
     const optionToCharacters: Record<typeof options[number], string> = {
@@ -293,29 +302,7 @@ That's worth ${count} credit(s). Do you want to deposit them?`)
                         continue;
                     }
                     else if (result === 1) {
-                        // TODO when shops are implemented
-                        // Make sure they support alternate currencies!
-                        while (true) {
-                            const redeemResult = yield* ask(
-                                `Reminder: You have ${RpgProgress.flags.newBalltown.mechanicalIdol.credits} credit(s).
-What would you like to redeem with your credits?`,
-                                RpgProgress.flags.newBalltown.mechanicalIdol.credits >= 10
-                                    ? `${DataKeyItems.UpgradedPickaxe.name}\n(Cost: 10)`
-                                    : null,
-                                "Nothin'",
-                            );
-
-                            if (redeemResult === 0) {
-                                RpgProgress.flags.newBalltown.mechanicalIdol.credits -= 10;
-                                yield* DramaKeyItems.receive("UpgradedPickaxe");
-                                yield* show("Congratulations. Please enjoyb.");
-                            }
-                            else {
-                                yield* show("Got it.");
-                                break;
-                            }
-                        }
-
+                        yield* dramaShop(shopMechanicalIdol, { primaryTint: 0xB52417, secondaryTint: 0xDCC132 });
                         continue;
                     }
 

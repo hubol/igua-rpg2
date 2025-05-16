@@ -298,8 +298,11 @@ function objOwnedCount(count: Integer) {
     return obj;
 }
 
+// TODO this must be exhaustive
+// maybe a different approach
 const possibleCurrencies: RpgEconomy.Currency.Model[] = [
     "valuables",
+    "mechanical_idol_credits",
     ...experienceIndicatorConfigsArray.map(({ experienceKey }) => ({
         kind: "experience" as const,
         experience: experienceKey,
