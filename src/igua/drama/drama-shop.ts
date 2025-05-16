@@ -19,6 +19,7 @@ import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnErrorVibrate } from "../mixins/mxn-error-vibrate";
 import { experienceIndicatorConfigs, experienceIndicatorConfigsArray } from "../objects/overlay/obj-hud";
 import { RpgEconomy } from "../rpg/rpg-economy";
+import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { CatalogItem, RpgShop } from "../rpg/rpg-shop";
 import { objUiPage } from "../ui/framework/obj-ui-page";
@@ -310,11 +311,11 @@ function objPlayerStatus(catalog: CatalogItem.Model[]) {
         catalog.some(item => RpgEconomy.Currency.equals(item.currency, currency))
     );
     const currencyObjs = currenciesInCatalog.reverse().map((currency, i) =>
-        objCurrencyAmount(RpgEconomy.Currency.getPlayerHeldAmount(currency), currency, true)
+        objCurrencyAmount(RpgPlayerWallet.getHeldAmount(currency), currency, true)
             .merge({ currency })
             .mixin(mxnErrorVibrate)
             .at(i, renderer.height - 28 - i * 15)
-            .step(self => self.controls.amount = RpgEconomy.Currency.getPlayerHeldAmount(currency))
+            .step(self => self.controls.amount = RpgPlayerWallet.getHeldAmount(currency))
     );
     const textsObj = container(
         objText.Large("You have...", { tint: CtxDramaShop.value.style.secondaryTint }).anchored(0.5, 1).at(
@@ -358,6 +359,9 @@ function objCurrencyAmount(amount: Integer, currency: CatalogItem.Model["currenc
         if (currency === "valuables") {
             currencyTextObj.text = amount === 1 ? "valuable" : "valuables";
         }
+        else if (currency === "mechanical_idol_credits") {
+            currencyTextObj.text = amount === 1 ? "credit" : "credits";
+        }
         else {
             currencyTextObj.text = `${currency.experience} XP`;
         }
@@ -380,6 +384,9 @@ function objCurrencyAmount(amount: Integer, currency: CatalogItem.Model["currenc
             .at(-priceTextObj.width - 8, -8)
             .step(self => self.x = approachLinear(self.x, -priceTextObj.width - 8, 1))
             .show(textObj);
+    }
+    else if (currency === "mechanical_idol_credits") {
+        // TODO style
     }
     else {
         const bounds = new Rectangle();

@@ -1,22 +1,45 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { RpgEconomy } from "./rpg-economy";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 import { RpgProgress } from "./rpg-progress";
 
 export namespace RpgPlayerWallet {
-    export function isEmpty() {
-        return RpgProgress.character.inventory.valuables < 1;
+    export function getHeldAmount(currency: RpgEconomy.Currency.Model) {
+        if (currency === "valuables") {
+            return RpgProgress.character.inventory.valuables;
+        }
+        else if (currency === "mechanical_idol_credits") {
+            return RpgProgress.flags.newBalltown.mechanicalIdol.credits;
+        }
+
+        const experience = currency.experience;
+        return RpgProgress.character.experience[experience];
     }
 
-    export function hasValuables(count: Integer) {
-        return RpgProgress.character.inventory.valuables >= count;
+    export function hasNone(currency: RpgEconomy.Currency.Model) {
+        return getHeldAmount(currency) === 0;
     }
 
     export type ExpenseKind = "default" | "gambling";
 
-    export function spendValuables(cost: Integer, kind: ExpenseKind = "default") {
+    function update(currency: RpgEconomy.Currency.Model, delta: Integer) {
+        if (currency === "valuables") {
+            RpgProgress.character.inventory.valuables += delta;
+            return;
+        }
+        else if (currency === "mechanical_idol_credits") {
+            RpgProgress.flags.newBalltown.mechanicalIdol.credits += delta;
+            return;
+        }
+
+        const experience = currency.experience;
+        RpgProgress.character.experience[experience] += delta;
+    }
+
+    export function spend(currency: RpgEconomy.Currency.Model, cost: Integer, kind: ExpenseKind = "default") {
         // TODO assert valuables >= cost
 
-        RpgProgress.character.inventory.valuables -= cost;
+        update(currency, -cost);
 
         if (kind === "gambling") {
             RpgExperienceRewarder.gambling.onPlaceBet(cost);
@@ -25,10 +48,14 @@ export namespace RpgPlayerWallet {
 
     export type IncomeSource = "default" | "gambling";
 
-    export function receiveValuables(income: Integer, source: IncomeSource = "default") {
+    export function earn(
+        currency: RpgEconomy.Currency.Model,
+        income: Integer,
+        source: IncomeSource = "default",
+    ) {
         // TODO assert income > 0
 
-        RpgProgress.character.inventory.valuables += income;
+        update(currency, income);
 
         if (source === "gambling") {
             RpgExperienceRewarder.gambling.onWinPrize(income);

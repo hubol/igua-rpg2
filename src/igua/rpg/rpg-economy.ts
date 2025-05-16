@@ -1,3 +1,5 @@
+import { Integer } from "../../lib/math/number-alias-types";
+import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 import { RpgProgress, RpgProgressExperience } from "./rpg-progress";
 
 interface Currency_Experience {
@@ -7,7 +9,7 @@ interface Currency_Experience {
 
 export namespace RpgEconomy {
     export namespace Currency {
-        export type Model = "valuables" | Currency_Experience;
+        export type Model = "valuables" | "mechanical_idol_credits" | Currency_Experience;
 
         export function equals(a: Model, b: Model) {
             if (a === b) {
@@ -21,15 +23,6 @@ export namespace RpgEconomy {
                 return a.experience === b.experience;
             }
             return false;
-        }
-
-        export function getPlayerHeldAmount(currency: Model) {
-            if (currency === "valuables") {
-                return RpgProgress.character.inventory.valuables;
-            }
-
-            const experience = currency.experience;
-            return RpgProgress.character.experience[experience];
         }
     }
 

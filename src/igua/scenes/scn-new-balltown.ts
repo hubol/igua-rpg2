@@ -141,7 +141,7 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
             "The New Balltown committee recently ruled that gambling in the town square was OK depending on the vibes.",
         );
         if (yield* ask("Want to play a dice game?")) {
-            if (RpgPlayerWallet.isEmpty()) {
+            if (RpgPlayerWallet.hasNone("valuables")) {
                 yield* show("Oh... you don't have any valuables...", "Let's play when you find some!");
                 return;
             }
@@ -166,7 +166,7 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
 
             yield* show(`Okay. I'll take your ${riskedValue === 1 ? "valuable" : "valuables"} now.`);
             // TODO sfx, vfx for take money
-            RpgPlayerWallet.spendValuables(riskedValue, "gambling");
+            RpgPlayerWallet.spend("valuables", riskedValue, "gambling");
 
             yield sleep(500);
 

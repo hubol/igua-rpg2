@@ -57,7 +57,7 @@ export function objValuable(
                     .at(self).add(offset).show(self.parent);
                 sparkle.index = Rng.float(1, 3);
             }
-            RpgPlayerWallet.receiveValuables(RpgEconomy.Valuables.Values[kind], incomeSource);
+            RpgPlayerWallet.earn("valuables", RpgEconomy.Valuables.Values[kind], incomeSource);
         })
         .step(self => self.collectable = collectableAfterSteps-- <= 0);
 }

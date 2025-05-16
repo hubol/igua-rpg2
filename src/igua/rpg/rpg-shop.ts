@@ -55,7 +55,7 @@ export namespace CatalogItem {
     }>;
 
     export function canPlayerAfford(item: Model) {
-        return RpgEconomy.Currency.getPlayerHeldAmount(item.currency) >= item.price;
+        return RpgPlayerWallet.getHeldAmount(item.currency) >= item.price;
     }
 
     export function getPlayerOwnedCount(item: Model): Integer {
@@ -82,7 +82,9 @@ function getCatalogItemKeyBase(stock: Stock) {
     const { product, price: { currency } } = stock;
 
     const productSubstring = product.kind + "__" + ("name" in product ? product.name : "");
-    const currencySubstring = currency === "valuables" ? "" : ("__" + currency.kind + "__" + currency.experience);
+    const currencySubstring = typeof currency === "string"
+        ? currency
+        : ("__" + currency.kind + "__" + currency.experience);
 
     return productSubstring + currencySubstring;
 }
@@ -160,17 +162,7 @@ export class RpgShop {
             throw new Error("Attempting to purchase non-affordable catalog item");
         }
 
-        if (item.currency === "valuables") {
-            RpgPlayerWallet.spendValuables(item.price);
-        }
-        else {
-            const { experience } = item.currency;
-            // TODO feels like there should be another layer for this
-            RpgProgress.character.experience[experience] = Math.max(
-                0,
-                RpgProgress.character.experience[experience] - item.price,
-            );
-        }
+        RpgPlayerWallet.spend(item.currency, item.price);
 
         this.increaseSoldCount(item.key);
         deliverProduct(item.product);
