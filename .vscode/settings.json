@@ -7,6 +7,10 @@
 // - Bizarre PixiJS compilation error https://github.com/pixijs/pixijs/issues/9747
 
 {
+  "[javascript]": {
+      "editor.defaultFormatter": "dprint.dprint",
+      "editor.formatOnSave": true
+  },
   "[typescript]": {
       "editor.defaultFormatter": "dprint.dprint",
       "editor.formatOnSave": true

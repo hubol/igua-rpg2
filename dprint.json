@@ -13,6 +13,7 @@
     "src/**/*.ts",
     "test/**/*.ts",
     "tools/**/*.ts",
+    "./esbuild.mjs",
   ],
   "excludes": [
     "**/generated",
