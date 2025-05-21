@@ -8,6 +8,7 @@ import { objPuddle } from "../objects/nature/obj-puddle";
 import { objCheckpoint } from "../objects/obj-checkpoint";
 import { objDoor } from "../objects/obj-door";
 import { objGate } from "../objects/obj-gate";
+import { objIdol } from "../objects/obj-idol";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { objIntelligenceBackground } from "../objects/obj-intelligence-background";
 import { createPlayerObj, playerObj } from "../objects/obj-player";
@@ -59,6 +60,7 @@ export const OgmoEntityResolvers = {
     "PocketableItemB": (entity) => objPocketableItemSpawner(vnew(entity), "BallFruitTypeB").at(entity, -1),
     EnemySuggestive: (entity) => objAngelSuggestive(entity.values.variant).at(0, -38),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,
+    Idol: objIdol,
 } satisfies {
     [TName in OgmoProject.Entities.Names]: (e: OgmoFactory.Entity<TName>) => unknown;
 };

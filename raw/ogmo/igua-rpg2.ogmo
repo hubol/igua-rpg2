@@ -1216,9 +1216,54 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/sparkle.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAABDSURBVChTY1zfk8pANPgPBFAmGIA0M0HZOAFcAUw3uilMIAEQgPLBACoEFmNihAKwDBRAhcBicCtgAjAaBgg4koEBAF7yH0rzM5CdAAAAAElFTkSuQmCC"
+    },
+    {
+      "exportID": "79655020",
+      "name": "Idol",
+      "limit": 1,
+      "size": {"x": 82, "y": 104},
+      "origin": {"x": 32, "y": 97},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/idol.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFIAAABoCAMAAABVE1diAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAMUExURf+3KP///5k4IAAAAN/yNbgAAAAEdFJOU////wBAKqn0AAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAGHRFWHRTb2Z0d2FyZQBQYWludC5ORVQgNS4xLjL7vAO2AAAAtmVYSWZJSSoACAAAAAUAGgEFAAEAAABKAAAAGwEFAAEAAABSAAAAKAEDAAEAAAACAAAAMQECABAAAABaAAAAaYcEAAEAAABqAAAAAAAAAPJ2AQDoAwAA8nYBAOgDAABQYWludC5ORVQgNS4xLjIAAwAAkAcABAAAADAyMzABoAMAAQAAAAEAAAAFoAQAAQAAAJQAAAAAAAAAAgABAAIABAAAAFI5OAACAAcABAAAADAxMDAAAAAAjjvBV9MXvE4AAAMqSURBVGhDzZeJctswDAV9/P8/lwCWEniAoGRNpttpQoAPG0qW3fT1zXm9dlIHG+FifF75fl9x5tlyxoeVctkC5QZZFOGDSnzlyvedyyRCUV5wxkFsSlHuO+c5TAe/KtE0qHLT2cfMMGDKPWeXYtwEHjrEloxKNQ7KA4IL2ojMFN/n89HxKURjmoRMmHGmrKcnHHJDmTn9PnNiROmWZrSSfMC2shq1ZGBOoJRloSzqi/+TUpBlQQROKca7SlkJx3F14zD+onTcV4aYkh/GwJxQeV6yoaevx2dgTqz0Tl2fSvIBC+XhdEuFeESzz4hRX4v6/YR0RKxUl0EDCIe0AYYqM2Fq7JS9c4Tcij7DZASpJbMQ4yPsJ8QxNEBzhz9UYjqhH+D351E0HWzOSJUoRtgfaLauKQUyDU17lrDRGGKOphvs70BcaDqjku3uM7h/p0eIwDwO9m4zKtm4yvmZNSi1ex1sMt4rdSdicT/tjDjsW4XEnFgpO5+qapUWiPh+PvOE3UUckXJ6IFEOUqk/kkfRKS1Uf6rhlsUX4IStkkm516xaiGXMlSw6iGW4HIMFt/SQyzhzzMnde1z5Ch6Vy0rGhKZwkMyoOaYKbeXRYA45hoSudGgyx3LMCGfdPEpS6FZOfyhtonROXdteiuRsSqFpnO+iurDthJKytFKbYE77LFTYX+OVtFynOq3aVpL2eRqFW8oTOgUaBT3mYXxIWf6/c1U5yVMLcsrzup9S6rUDgTUo5SudRqlOlgUCaxJl699W2p+nleqk4y1NUbD9BPnHWZXUAvOFttpWmvNZpfwS0cB8oSv3lT3MF7ryf1IyLrT1W8uUqbI8Ue/zUTWfEP6a1RAp3RtKCuMXZdHJX6/UltYZU6U8p+qpdUE+P7RMmSjdlXa1lRm5kgMLuptyRambOWOuP5XcROvdfnmYF2p9oI2MydUwXpTqoFQskBArlaOUQz+iPGtVapkyUR4Or1S0TFkqXSlYmRJe+N8oN52jkvGZck+6UFYBjcLZWzEomQ6Ux9EX9EqGlaH1vyiZFegIdAx6MaGSxgHt3BgpKW8xvZesbzJTsrzH9/sPMDJEWu+EBvoAAAAASUVORK5CYII="
     }
   ],
   "tilesets": []

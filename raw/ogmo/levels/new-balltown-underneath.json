@@ -1139,6 +1139,16 @@
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnNewBalltownUnderneathTunnel", "checkpointName": "fromRight", "name": "", "depth": 0}
+        },
+        {
+          "name": "Idol",
+          "id": 9,
+          "_eid": "79655020",
+          "x": 1856,
+          "y": 304,
+          "originX": 32,
+          "originY": 97,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -4440,6 +4450,18 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 1828,
+          "y": 325,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#698826",
+          "texture": "foliage/small.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -5170,6 +5192,30 @@
       "gridCellsX": 293,
       "gridCellsY": 55,
       "decals": [
+        {
+          "x": 1856,
+          "y": 312,
+          "scaleX": 7,
+          "scaleY": 3,
+          "rotation": 0,
+          "tint": "#cecece",
+          "texture": "shapes/square irregular 10.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1859,
+          "y": 322,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#959595",
+          "texture": "light/shadow messy 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
         {
           "x": 2285,
           "y": 231,
@@ -7069,8 +7115,8 @@
           "groupName": null
         },
         {
-          "x": 1873,
-          "y": 321,
+          "x": 1849,
+          "y": 329,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -7470,6 +7516,18 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 1881,
+          "y": 306,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "light/shadow irregular small round.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
