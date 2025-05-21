@@ -7,10 +7,29 @@ import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { DramaMisc } from "../drama/drama-misc";
 import { DramaQuests } from "../drama/drama-quests";
-import { show } from "../drama/show";
+import { dramaShop } from "../drama/drama-shop";
+import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
+import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnEnemy } from "../mixins/mxn-enemy";
 import { RpgProgress } from "../rpg/rpg-progress";
+import { RpgShop } from "../rpg/rpg-shop";
+
+const shopHomeowner = new RpgShop({
+    internalName: "shopHomeowner",
+    stocks: [
+        {
+            initialQuantity: 99,
+            price: { currency: "valuables", deltaSold: 50, initial: 50 },
+            product: { kind: "key_item", name: "SeedYellow" },
+        },
+        {
+            initialQuantity: 99,
+            price: { currency: "valuables", deltaSold: 50, initial: 50 },
+            product: { kind: "key_item", name: "SeedGreen" },
+        },
+    ],
+});
 
 export function scnNewBalltownUnderneathHomeowner() {
     Jukebox.play(Mzk.PleasureMafia);
@@ -22,6 +41,7 @@ export function scnNewBalltownUnderneathHomeowner() {
 function enrichEnemyPresence(lvl: LvlType.NewBalltownUnderneathHomeowner) {
     if (RpgProgress.flags.underneath.homeowner.hasClearedHouseOfEnemies) {
         Instances(mxnEnemy).forEach(enemyObj => enemyObj.destroy());
+        enrichHomeowner(lvl);
     }
     else {
         lvl.Homeowner.visible = false;
@@ -52,9 +72,25 @@ function enrichEnemyPresence(lvl: LvlType.NewBalltownUnderneathHomeowner) {
                 yield* DramaQuests.completeQuest("NewBalltownUnderneathHomeownerEnemyPresenceCleared", self);
                 yield* show("Please come see me again. I can heal poison and also create thought-provoking artworks.");
                 RpgProgress.flags.underneath.homeowner.hasClearedHouseOfEnemies = true;
+                enrichHomeowner(lvl);
             }, { speaker: self, camera: { start: "pan_to_speaker" } });
         });
     }
+}
+
+function enrichHomeowner(lvl: LvlType.NewBalltownUnderneathHomeowner) {
+    lvl.Homeowner.mixin(mxnCutscene, function* () {
+        const result = yield* ask("Hey! What's up?", "I'm poisoned", "Need art", "I'm leaving");
+        if (result === 0) {
+            // TODO
+        }
+        else if (result === 1) {
+            yield* dramaShop(shopHomeowner, { primaryTint: 0x103418, secondaryTint: 0xA5A17E });
+        }
+        else if (result === 2) {
+            yield* show("Be seeing you!");
+        }
+    });
 }
 
 function enrichArtwork(lvl: LvlType.NewBalltownUnderneathHomeowner) {
