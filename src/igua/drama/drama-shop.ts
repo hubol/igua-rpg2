@@ -13,6 +13,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataEquipment } from "../data/data-equipment";
+import { DataKeyItems } from "../data/data-key-items";
 import { Input, layers, scene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
@@ -260,7 +261,7 @@ function getCatalogItemName(item: CatalogItem.Model) {
         case "equipment":
             return (DataEquipment[item.product.name] ?? DataEquipment.__Unknown__).name;
         case "key_item":
-            return item.product.name;
+            return (DataKeyItems[item.product.name] ?? DataKeyItems.__Unknown__).name;
         case "potion":
             return "Potion?!?!?";
     }
