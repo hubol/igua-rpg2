@@ -103,7 +103,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 return;
             }
 
-            if (!puppet.isWorldMap) {
+            if (!scene.isWorldMap) {
                 status.state.ballonHealthMayDrain = !puppet.isOnGround;
             }
 
@@ -174,20 +174,20 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             puppet.isMovingLeft = hasControl && Input.isDown("MoveLeft");
             puppet.isMovingRight = hasControl && Input.isDown("MoveRight");
             // TODO inputs for these
-            puppet.isMovingUp = hasControl && puppet.isWorldMap && Input.isDown("SelectUp");
-            puppet.isMovingDown = hasControl && puppet.isWorldMap && Input.isDown("SelectDown");
-            puppet.isDucking = hasControl && puppet.isOnGround && !puppet.isWorldMap && Input.isDown("Duck");
+            puppet.isMovingUp = hasControl && scene.isWorldMap && Input.isDown("SelectUp");
+            puppet.isMovingDown = hasControl && scene.isWorldMap && Input.isDown("SelectDown");
+            puppet.isDucking = hasControl && puppet.isOnGround && !scene.isWorldMap && Input.isDown("Duck");
             status.state.isGuarding = puppet.isDucking;
 
             if (
                 hasControl && !puppet.isOnGround && puppet.speed.y < PlayerConsts.VariableJumpSpeedMaximum
-                && !puppet.isWorldMap
+                && !scene.isWorldMap
                 && Input.isDown("Jump")
             ) {
                 puppet.speed.y += PlayerConsts.VariableJumpDelta;
             }
 
-            if (hasControl && !puppet.isWorldMap && Input.justWentDown("Jump")) {
+            if (hasControl && !scene.isWorldMap && Input.justWentDown("Jump")) {
                 stepsSinceJumpJustWentDown = 0;
             }
 

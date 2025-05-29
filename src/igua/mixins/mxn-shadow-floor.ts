@@ -34,7 +34,7 @@ export function mxnShadowFloor(obj: DisplayObject, args: MxnShadowFloorArgs) {
 
     shadowObj.blendMode = BLEND_MODES.MULTIPLY;
 
-    if (scene.source !== scnWorldMap) {
+    if (!scene.isWorldMap) {
         shadowObj.mask = CtxTerrainObj.value;
     }
 

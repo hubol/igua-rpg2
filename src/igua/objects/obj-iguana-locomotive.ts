@@ -2,9 +2,9 @@ import { approachLinear } from "../../lib/math/number";
 import { Polar } from "../../lib/math/number-alias-types";
 import { vnew } from "../../lib/math/vector-type";
 import { Undefined } from "../../lib/types/undefined";
+import { scene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
-import { mxnIsWorldMap } from "../mixins/mxn-is-world-map";
 import { mxnPhysics, PhysicsFaction } from "../mixins/mxn-physics";
 import { mxnShadowFloor } from "../mixins/mxn-shadow-floor";
 import { StepOrder } from "./step-order";
@@ -121,7 +121,6 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             }
         })
         .mixin(mxnShadowFloor, { offset: [0, -1] })
-        .mixin(mxnIsWorldMap)
         .merge({
             walkingTopSpeed: IguanaLocomotiveConsts.WalkingTopSpeed,
             isDucking: false,
@@ -138,8 +137,8 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             auto,
             setFacingOverrideAuto,
         })
-        .step(self => {
-            const effectiveWalkingSpeed = self.isWorldMap ? puppet.speed.vlength : Math.abs(puppet.speed.x);
+        .step(() => {
+            const effectiveWalkingSpeed = scene.isWorldMap ? puppet.speed.vlength : Math.abs(puppet.speed.x);
 
             if (effectiveWalkingSpeed !== 0) {
                 puppet.pedometer += effectiveWalkingSpeed * 0.0375
@@ -178,7 +177,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             puppet.ducking = approachLinear(puppet.ducking, puppet.isDucking ? 1 : 0, auto.duckingSpeed);
         }, 2);
 
-    if (puppet.isWorldMap) {
+    if (scene.isWorldMap) {
         puppet.step(self => {
             self.gravity = 0;
         }, StepOrder.TerrainClean)
