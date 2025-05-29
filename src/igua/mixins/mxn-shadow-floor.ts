@@ -4,8 +4,10 @@ import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
+import { scene } from "../globals";
 import { CtxTerrainObj } from "../objects/obj-terrain";
 import { StepOrder } from "../objects/step-order";
+import { scnWorldMap } from "../scenes/scn-world-map";
 import { mxnBoilMirrorRotate } from "./mxn-boil-mirror-rotate";
 
 interface MxnShadowFloorArgs {
@@ -31,7 +33,10 @@ export function mxnShadowFloor(obj: DisplayObject, args: MxnShadowFloorArgs) {
     ).mixin(mxnBoilMirrorRotate).show(CtxShadowFloorObj.value);
 
     shadowObj.blendMode = BLEND_MODES.MULTIPLY;
-    shadowObj.mask = CtxTerrainObj.value;
+
+    if (scene.source !== scnWorldMap) {
+        shadowObj.mask = CtxTerrainObj.value;
+    }
 
     return obj;
 }
