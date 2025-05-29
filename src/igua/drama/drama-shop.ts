@@ -1,4 +1,4 @@
-import { Graphics, Rectangle, Sprite } from "pixi.js";
+import { Graphics, Rectangle, Sprite, Texture } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
@@ -378,24 +378,29 @@ function objCurrencyAmount(amount: Integer, currency: CatalogItem.Model["currenc
         currencyTextObj,
     );
 
+    function objCurrencyIcon(tx: Texture) {
+        return Sprite.from(tx)
+            .anchored(1, 0.5)
+            .at(-priceTextObj.width - 4, -8)
+            .step(self => self.x = approachLinear(self.x, -priceTextObj.width - 4, 1))
+            .show(obj);
+    }
+
     const obj = container(textObj);
 
     if (currency === "valuables") {
         priceTextObj.tint = 0x00ff00;
         currencyTextObj.tint = 0x00ff00;
-        Sprite.from(Tx.Collectibles.ValuableGreen)
-            .anchored(0.5, 0.5)
-            .at(-priceTextObj.width - 8, -8)
-            .step(self => self.x = approachLinear(self.x, -priceTextObj.width - 8, 1))
-            .show(textObj);
+        objCurrencyIcon(Tx.Collectibles.ValuableGreen);
     }
     else if (currency === "mechanical_idol_credits") {
         // TODO style
     }
     else {
+        const config = experienceIndicatorConfigs[currency.experience];
         const bounds = new Rectangle();
         const gfx = new Graphics()
-            .tinted(experienceIndicatorConfigs[currency.experience].tint)
+            .tinted(config.tint)
             .step(() => {
                 updateBounds(r);
                 bounds.x = approachLinear(bounds.x, r.x, 1);
@@ -403,6 +408,8 @@ function objCurrencyAmount(amount: Integer, currency: CatalogItem.Model["currenc
                 bounds.width = approachLinear(bounds.width, r.width, 1);
                 bounds.height = approachLinear(bounds.height, r.height, 1);
             });
+
+        objCurrencyIcon(config.iconTx);
 
         function updateBounds(rectangle: Rectangle) {
             textObj.getLocalBounds(rectangle);
