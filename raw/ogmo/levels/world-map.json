@@ -106,7 +106,8 @@
           "texture": "world map/gate.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 821,
@@ -118,7 +119,8 @@
           "texture": "world map/gate.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -259,7 +261,72 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": null
+          "groupName": "NewBalltownLabel"
+        },
+        {
+          "x": 700,
+          "y": 463,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#b48cbe",
+          "texture": "foliage/flower 14.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "NewBalltownLabel"
+        },
+        {
+          "x": 795,
+          "y": 477,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e6a500",
+          "texture": "foliage/flower 14.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "NewBalltownLabel"
+        },
+        {
+          "x": 703,
+          "y": 439,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ff8787",
+          "texture": "foliage/flower 14.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "NewBalltownLabel"
+        },
+        {
+          "x": 663,
+          "y": 445,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e6a500",
+          "texture": "world map/labels/shock.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "NewBalltownLabel"
+        },
+        {
+          "x": 741,
+          "y": 445,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e6a500",
+          "texture": "world map/labels/shock.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "NewBalltownLabel"
         },
         {
           "x": 641,
@@ -301,45 +368,6 @@
           "groupName": null
         },
         {
-          "x": 700,
-          "y": 463,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#b48cbe",
-          "texture": "foliage/flower 14.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 795,
-          "y": 477,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#e6a500",
-          "texture": "foliage/flower 14.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 703,
-          "y": 439,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ff8787",
-          "texture": "foliage/flower 14.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
           "x": 795,
           "y": 949,
           "scaleX": -1,
@@ -364,30 +392,6 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
-        },
-        {
-          "x": 663,
-          "y": 445,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#e6a500",
-          "texture": "world map/labels/shock.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 741,
-          "y": 445,
-          "scaleX": -1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#e6a500",
-          "texture": "world map/labels/shock.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -1007,7 +1011,8 @@
           "texture": "shapes/square irregular 10.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 697,
@@ -1045,7 +1050,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 831,
@@ -1057,7 +1063,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 805,
@@ -1069,7 +1076,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 815,
@@ -1081,7 +1089,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 536,
@@ -1119,7 +1128,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 622,
@@ -1144,7 +1154,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 665,
@@ -1182,7 +1193,8 @@
           "texture": "world map/faces/variant 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 723,
@@ -1194,7 +1206,8 @@
           "texture": "world map/puddle 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 819,
@@ -1206,7 +1219,8 @@
           "texture": "world map/puddle 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -1426,7 +1440,8 @@
           "texture": "shapes/confetti32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 572,
@@ -1438,7 +1453,8 @@
           "texture": "world map/hill 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 647,
@@ -1450,7 +1466,8 @@
           "texture": "world map/hill 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 553,
@@ -1462,7 +1479,8 @@
           "texture": "world map/hill 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 878,
@@ -1474,7 +1492,8 @@
           "texture": "world map/hill 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 953,
@@ -1486,7 +1505,8 @@
           "texture": "world map/hill 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 859,
@@ -1498,7 +1518,8 @@
           "texture": "world map/hill 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
