@@ -25,7 +25,7 @@ function getCameraPositionToFrameSubject(vector: DisplayObject | Vector, subject
 
 const v = vnew();
 
-export function objCamera() {
+export function objCamera(isWorldMap: boolean) {
     // TODO need way to snap to desired position e.g. on level load
 
     let subjectToFollowObj = Null<DisplayObject>();
@@ -52,6 +52,8 @@ export function objCamera() {
             return !playerCameraPosition || distance(playerCameraPosition, obj) < 2;
         },
     };
+
+    const parallaxFactor = isWorldMap ? 1 : 0.8;
 
     // TODO not sure if mode should be exposed...
     const obj = container().merge({ mode: <CameraMode> "follow_player", auto }).step(self => {
@@ -81,8 +83,8 @@ export function objCamera() {
         scene.stage.x = Math.round(-self.x);
         scene.stage.y = Math.round(-self.y);
 
-        scene.parallaxStage.x = Math.round(-self.x * 0.8);
-        scene.parallaxStage.y = Math.round(-self.y * 0.8);
+        scene.parallaxStage.x = Math.round(-self.x * parallaxFactor);
+        scene.parallaxStage.y = Math.round(-self.y * parallaxFactor);
     }, StepOrder.Camera);
 
     return obj;
