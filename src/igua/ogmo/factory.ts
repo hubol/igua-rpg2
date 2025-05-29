@@ -103,7 +103,7 @@ export namespace OgmoFactory {
     const decalGroups = new Map<string, Container>();
 
     export function createDecal(texture: Texture, decal: OgmoFactory.Decal, layerName: string) {
-        const spr = Sprite.from(texture).at(decal.x, decal.y);
+        const spr = Sprite.from(texture).at(decal.x, decal.y).track(createDecal);
         spr.scale.set(decal.scaleX, decal.scaleY);
         spr.angle = decal.rotation;
         spr.anchor.set(decal.originX, decal.originY);
