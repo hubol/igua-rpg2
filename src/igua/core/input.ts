@@ -19,6 +19,9 @@ const actions = [
     "SelectUp",
     "Confirm",
     "CastSpell",
+    "WorldMap_Interact",
+    "WorldMap_MoveUp",
+    "WorldMap_MoveDown",
 ] as const;
 
 export type Action = typeof actions[number];
@@ -38,6 +41,9 @@ const keyboardControls: KeyboardControls<Action> = {
     SelectLeft: "ArrowLeft",
     SelectRight: "ArrowRight",
     SelectUp: "ArrowUp",
+    WorldMap_Interact: "Space",
+    WorldMap_MoveUp: "ArrowUp",
+    WorldMap_MoveDown: "ArrowDown",
 };
 
 const { button, axis, axisUnit } = GamepadControl;
@@ -80,6 +86,17 @@ const gamepadControls: GamepadControls<Action> = {
         button(StandardMapping.Button.PadUp),
         axisUnit(StandardMapping.Axis.JoystickLeft, [0, -1]),
         axisUnit(StandardMapping.Axis.JoystickRight, [0, -1]),
+    ],
+    WorldMap_Interact: [button(StandardMapping.Button.Bottom)],
+    WorldMap_MoveDown: [
+        button(StandardMapping.Button.PadDown),
+        axis(StandardMapping.Axis.JoystickLeftVertical, 1),
+        axis(StandardMapping.Axis.JoystickRightVertical, 1),
+    ],
+    WorldMap_MoveUp: [
+        button(StandardMapping.Button.PadUp),
+        axis(StandardMapping.Axis.JoystickLeftVertical, -1),
+        axis(StandardMapping.Axis.JoystickRightVertical, -1),
     ],
 };
 

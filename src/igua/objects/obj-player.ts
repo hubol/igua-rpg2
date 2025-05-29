@@ -173,9 +173,8 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             const hasControl = puppet.hasControl;
             puppet.isMovingLeft = hasControl && Input.isDown("MoveLeft");
             puppet.isMovingRight = hasControl && Input.isDown("MoveRight");
-            // TODO inputs for these
-            puppet.isMovingUp = hasControl && scene.isWorldMap && Input.isDown("SelectUp");
-            puppet.isMovingDown = hasControl && scene.isWorldMap && Input.isDown("SelectDown");
+            puppet.isMovingUp = hasControl && scene.isWorldMap && Input.isDown("WorldMap_MoveUp");
+            puppet.isMovingDown = hasControl && scene.isWorldMap && Input.isDown("WorldMap_MoveDown");
             puppet.isDucking = hasControl && puppet.isOnGround && !scene.isWorldMap && Input.isDown("Duck");
             status.state.isGuarding = puppet.isDucking;
 

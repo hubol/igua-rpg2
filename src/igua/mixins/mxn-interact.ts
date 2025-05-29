@@ -2,6 +2,7 @@ import { DisplayObject } from "pixi.js";
 import { Instances } from "../../lib/game-engine/instances";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { Null } from "../../lib/types/null";
+import { Action } from "../core/input";
 import { Input, scene } from "../globals";
 import { playerObj } from "../objects/obj-player";
 import { mxnHasHead } from "./mxn-has-head";
@@ -13,7 +14,9 @@ export const CtxInteract = new SceneLocal(() => {
 
     scene.stage
         .step(() => {
-            if (ctx.highestScoreInteractObj && playerObj.hasControl && Input.justWentDown("Interact")) {
+            const action: Action = scene.isWorldMap ? "WorldMap_Interact" : "Interact";
+
+            if (ctx.highestScoreInteractObj && playerObj.hasControl && Input.justWentDown(action)) {
                 ctx.highestScoreInteractObj.interact.onInteract();
             }
         }, -1)
