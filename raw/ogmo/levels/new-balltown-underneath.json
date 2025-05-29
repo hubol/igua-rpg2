@@ -1149,6 +1149,18 @@
           "originX": 32,
           "originY": 97,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "GateHorizontal",
+          "id": 10,
+          "_eid": "97593426",
+          "x": -64,
+          "y": 232,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "flippedX": true,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromNewBalltownUnderneathLeft", "name": "", "depth": 0}
         }
       ]
     },
@@ -4461,7 +4473,8 @@
           "texture": "foliage/small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -5202,7 +5215,8 @@
           "texture": "shapes/square irregular 10.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1859,
@@ -5214,7 +5228,8 @@
           "texture": "light/shadow messy 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2285,
@@ -7527,7 +7542,8 @@
           "texture": "light/shadow irregular small round.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

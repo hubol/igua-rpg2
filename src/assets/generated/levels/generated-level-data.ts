@@ -1934,6 +1934,7 @@ export const Lvl = {
     TunnelLeftDoor: e(r["Door"], { x: 456, y: 120, values: { sceneName: "scnNewBalltownUnderneathTunnel", checkpointName: "fromLeft", name: "TunnelLeftDoor", depth: 0 } }, "Entities"),
     Door: e(r["Door"], { x: 680, y: 24, values: { sceneName: "scnNewBalltownUnderneathTunnel", checkpointName: "fromRight", name: "", depth: 0 } }, "Entities"),
     Idol: e(r["Idol"], { x: 1856, y: 304, values: { name: "", depth: 0 } }, "Entities"),
+    GateHorizontal: e(r["GateHorizontal"], { x: -64, y: 232, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromNewBalltownUnderneathLeft", name: "", depth: 0 } }, "Entities"),
     EffectsStar12px: d(Tx.Effects.Star12px, { x: 1437, y: 350, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x854e31 }, "AboveEntitiesDecals"),
     EffectsStar12px_1: d(Tx.Effects.Star12px, { x: 1532, y: 134, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x854e31 }, "AboveEntitiesDecals"),
     FoliageMossHanging0_18: d(Tx.Foliage.MossHanging0, { x: 267, y: 270, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6b8b41 }, "AboveEntitiesDecals"),
@@ -2708,6 +2709,23 @@ export const Lvl = {
     EnvironmentSparkleMarker_10: e(r["EnvironmentSparkleMarker"], { x: 920, y: 388, values: { name: "", depth: 0 } }, "MarkerEntities"),
     EnvironmentSparkleMarker_11: e(r["EnvironmentSparkleMarker"], { x: 903, y: 430, values: { name: "", depth: 0 } }, "MarkerEntities"),
   })),
+  WorldMap: l({ width: 1368, height: 848, backgroundTint: 0x81bde9 }, () => ({
+    ShapesSquareIrregular10: d(Tx.Shapes.SquareIrregular10, { x: 688, y: 448, scaleX: 74, scaleY: 63, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x103418 }, "BackgroundDecals"),
+    ShapesRightTriangle24px: d(Tx.Shapes.RightTriangle24px, { x: 438, y: 726, scaleX: 2.9, scaleY: 3.2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x103418 }, "BackgroundDecals"),
+    ShapesRightTriangle24px_1: d(Tx.Shapes.RightTriangle24px, { x: 1013, y: 728, scaleX: -2.9, scaleY: 3.2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x103418 }, "BackgroundDecals"),
+    ShapesRightTriangle24px_2: d(Tx.Shapes.RightTriangle24px, { x: 865, y: 232, scaleX: -2.9, scaleY: -3.2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x103418 }, "BackgroundDecals"),
+    ShapesRightTriangle24px_3: d(Tx.Shapes.RightTriangle24px, { x: 436, y: 230, scaleX: 2.9, scaleY: -3.2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x103418 }, "BackgroundDecals"),
+    Slope: e(r["Slope"], { x: 983, y: 689, width: 80, height: 80, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+    Slope_1: e(r["Slope"], { x: 385, y: 688, width: 80, height: 80, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+    Slope_2: e(r["Slope"], { x: 387, y: 189, width: 80, height: 80, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+    Slope_3: e(r["Slope"], { x: 835, y: 190, width: 80, height: 80, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+    Block: e(r["Block"], { x: 459, y: 100, width: 384, height: 96, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+    Block_1: e(r["Block"], { x: 459, y: 764, width: 536, height: 72, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+    Block_2: e(r["Block"], { x: 915, y: 188, width: 536, height: 72, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+    Block_3: e(r["Block"], { x: 1059, y: 260, width: 120, height: 456, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+    Block_4: e(r["Block"], { x: 275, y: 244, width: 120, height: 456, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+    Player: e(r["Player"], { x: 768, y: 512, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+  })),
 };
 
 export namespace LvlType {
@@ -2721,4 +2739,5 @@ export namespace LvlType {
   export type NewBalltownUnderneathTunnel = ReturnType<(typeof Lvl)["NewBalltownUnderneathTunnel"]>;
   export type NewBalltownUnderneath = ReturnType<(typeof Lvl)["NewBalltownUnderneath"]>;
   export type NewBalltown = ReturnType<(typeof Lvl)["NewBalltown"]>;
+  export type WorldMap = ReturnType<(typeof Lvl)["WorldMap"]>;
 }

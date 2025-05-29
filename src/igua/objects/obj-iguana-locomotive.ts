@@ -1,10 +1,13 @@
 import { approachLinear } from "../../lib/math/number";
 import { Polar } from "../../lib/math/number-alias-types";
+import { vnew } from "../../lib/math/vector-type";
 import { Undefined } from "../../lib/types/undefined";
 import { IguanaLooks } from "../iguana/looks";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
+import { mxnIsWorldMap } from "../mixins/mxn-is-world-map";
 import { mxnPhysics, PhysicsFaction } from "../mixins/mxn-physics";
 import { mxnShadowFloor } from "../mixins/mxn-shadow-floor";
+import { StepOrder } from "./step-order";
 
 export const IguanaLocomotiveConsts = {
     WalkingAcceleration: 0.3,
@@ -118,11 +121,14 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             }
         })
         .mixin(mxnShadowFloor, { offset: [0, -1] })
+        .mixin(mxnIsWorldMap)
         .merge({
             walkingTopSpeed: IguanaLocomotiveConsts.WalkingTopSpeed,
             isDucking: false,
             isMovingLeft: false,
             isMovingRight: false,
+            isMovingUp: false,
+            isMovingDown: false,
             isBeingPiloted: false,
             get estimatedDecelerationDeltaX() {
                 return Math.sign(puppet.speed.x)
@@ -132,7 +138,81 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             auto,
             setFacingOverrideAuto,
         })
-        .step(() => {
+        .step(self => {
+            const effectiveWalkingSpeed = self.isWorldMap ? puppet.speed.vlength : Math.abs(puppet.speed.x);
+
+            if (effectiveWalkingSpeed !== 0) {
+                puppet.pedometer += effectiveWalkingSpeed * 0.0375
+                    + (effectiveWalkingSpeed / puppet.walkingTopSpeed) * 0.03125;
+            }
+            else if (puppet.gait === 0) {
+                puppet.pedometer = 0;
+            }
+
+            const gaitFactor = Math.max(
+                0,
+                puppet.walkingTopSpeed < 1
+                    ? (effectiveWalkingSpeed / puppet.walkingTopSpeed)
+                    : effectiveWalkingSpeed - IguanaLocomotiveConsts.WalkingAcceleration,
+            );
+            puppet.gait = approachLinear(puppet.gait, Math.min(puppet.isAirborne ? 0 : gaitFactor, 1), 0.15);
+
+            if (puppet.speed.x !== 0) {
+                if (puppet.auto.facingMode === "check_speed_x") {
+                    autoFacingTarget = Math.sign(puppet.speed.x);
+                }
+                else if (puppet.isMovingLeft && puppet.speed.x < 0) {
+                    autoFacingTarget = -1;
+                }
+                else if (puppet.isMovingRight && puppet.speed.x > 0) {
+                    autoFacingTarget = 1;
+                }
+            }
+
+            puppet.facing = approachLinear(
+                puppet.facing,
+                autoFacingTarget || Math.sign(puppet.facing),
+                0.1,
+            );
+
+            puppet.ducking = approachLinear(puppet.ducking, puppet.isDucking ? 1 : 0, auto.duckingSpeed);
+        }, 2);
+
+    if (puppet.isWorldMap) {
+        puppet.step(self => {
+            self.gravity = 0;
+        }, StepOrder.TerrainClean)
+            .step(self => {
+                v.at(0, 0);
+                if (self.isMovingDown) {
+                    v.add(0, 1);
+                }
+                if (self.isMovingLeft) {
+                    v.add(-1, 0);
+                }
+                if (self.isMovingRight) {
+                    v.add(1, 0);
+                }
+                if (self.isMovingUp) {
+                    v.add(0, -1);
+                }
+
+                if (v.isZero) {
+                    puppet.speed.moveTowards(
+                        v,
+                        IguanaLocomotiveConsts.WalkingDeceleration,
+                    );
+                }
+                else {
+                    puppet.speed.moveTowards(
+                        v.normalize().scale(puppet.walkingTopSpeed),
+                        IguanaLocomotiveConsts.WalkingAcceleration,
+                    );
+                }
+            });
+    }
+    else {
+        puppet.step(() => {
             if (
                 (puppet.isMovingLeft && puppet.isMovingRight) || (!puppet.isMovingLeft && !puppet.isMovingRight)
                 || puppet.isDucking
@@ -159,46 +239,12 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                 -Math.sign(puppet.speed.y),
                 puppet.speed.y > 0 ? 0.075 : 0.25,
             );
-
-            const absSpeedX = Math.abs(puppet.speed.x);
-
-            if (puppet.speed.x !== 0) {
-                puppet.pedometer += absSpeedX * 0.0375 + (absSpeedX / puppet.walkingTopSpeed) * 0.03125;
-            }
-            else if (puppet.gait === 0) {
-                puppet.pedometer = 0;
-            }
-
-            const gaitFactor = Math.max(
-                0,
-                puppet.walkingTopSpeed < 1
-                    ? (absSpeedX / puppet.walkingTopSpeed)
-                    : absSpeedX - IguanaLocomotiveConsts.WalkingAcceleration,
-            );
-            puppet.gait = approachLinear(puppet.gait, Math.min(puppet.isAirborne ? 0 : gaitFactor, 1), 0.15);
-
-            if (puppet.speed.x !== 0) {
-                if (puppet.auto.facingMode === "check_speed_x") {
-                    autoFacingTarget = Math.sign(puppet.speed.x);
-                }
-                else if (puppet.isMovingLeft && puppet.speed.x < 0) {
-                    autoFacingTarget = -1;
-                }
-                else if (puppet.isMovingRight && puppet.speed.x > 0) {
-                    autoFacingTarget = 1;
-                }
-            }
-
-            puppet.facing = approachLinear(
-                puppet.facing,
-                autoFacingTarget || Math.sign(puppet.facing),
-                0.1,
-            );
-
-            puppet.ducking = approachLinear(puppet.ducking, puppet.isDucking ? 1 : 0, auto.duckingSpeed);
         }, 1);
+    }
 
     return puppet;
 }
+
+const v = vnew();
 
 export type ObjIguanaLocomotive = ReturnType<typeof objIguanaLocomotive>;
