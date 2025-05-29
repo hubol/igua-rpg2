@@ -7,6 +7,7 @@ import { merge } from "../../../lib/object/merge";
 import { renderer } from "../../current-pixi-renderer";
 import { forceGameLoop } from "../../globals";
 import { objCamera } from "../../objects/obj-camera";
+import { scnWorldMap } from "../../scenes/scn-world-map";
 import { IguaLayers } from "../igua-layers";
 
 interface IguaSceneMeta {
@@ -22,7 +23,8 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
     const stage = new Container().named("Stage");
     stage.sortableChildren = true;
 
-    const camera = objCamera();
+    const isWorldMap = source === scnWorldMap;
+    const camera = objCamera(isWorldMap);
 
     root.addChild(background, parallaxStage, stage, camera);
 
