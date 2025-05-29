@@ -762,6 +762,28 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromOutskirtsMiddleRight", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 11,
+          "_eid": "19953026",
+          "x": 64,
+          "y": 360,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromMapLeft", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 12,
+          "_eid": "19953026",
+          "x": 2312,
+          "y": 392,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromMapRight", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },

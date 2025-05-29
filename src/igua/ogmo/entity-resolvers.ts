@@ -17,6 +17,7 @@ import { objSign } from "../objects/obj-sign";
 import { objPipe, objPipeSlope, objSolidBlock, objSolidSlope } from "../objects/obj-terrain";
 import { objValuable } from "../objects/obj-valuable";
 import { objWaterDripSource } from "../objects/obj-water-drip-source";
+import { objWorldMapGate } from "../objects/obj-world-map-gate";
 import { objMarker } from "../objects/utils/obj-marker";
 import { RpgPocket } from "../rpg/rpg-pocket";
 import { RpgProgress } from "../rpg/rpg-progress";
@@ -61,6 +62,7 @@ export const OgmoEntityResolvers = {
     EnemySuggestive: (entity) => objAngelSuggestive(entity.values.variant).at(0, -38),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,
     Idol: objIdol,
+    GateMap: objWorldMapGate,
 } satisfies {
     [TName in OgmoProject.Entities.Names]: (e: OgmoFactory.Entity<TName>) => unknown;
 };

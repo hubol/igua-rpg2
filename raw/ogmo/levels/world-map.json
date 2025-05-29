@@ -27,7 +27,32 @@
       "gridCellHeight": 8,
       "gridCellsX": 171,
       "gridCellsY": 106,
-      "entities": []
+      "entities": [
+        {
+          "name": "GateMap",
+          "id": 1,
+          "_eid": "53836309",
+          "x": 821,
+          "y": 495,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 2340,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnNewBalltownUnderneath", "checkpointName": "fromMapRight", "name": "", "depth": 0}
+        },
+        {
+          "name": "GateMap",
+          "id": 2,
+          "_eid": "53836309",
+          "x": 637,
+          "y": 497,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnNewBalltownUnderneath", "checkpointName": "fromMapLeft", "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "FrontDecals",
@@ -95,34 +120,7 @@
       "gridCellHeight": 8,
       "gridCellsX": 171,
       "gridCellsY": 106,
-      "decals": [
-        {
-          "x": 637,
-          "y": 497,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "world map/gate.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 821,
-          "y": 495,
-          "scaleX": -1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "world map/gate.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        }
-      ],
+      "decals": [],
       "folder": "../textures"
     },
     {

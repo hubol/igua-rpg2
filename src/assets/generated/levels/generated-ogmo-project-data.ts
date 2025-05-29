@@ -25,6 +25,7 @@ const entityValues = {
   EnemySuggestive: null as unknown as { name: string; depth: number; variant: "level0" | "level1" },
   EnvironmentSparkleMarker: null as unknown as { name: string; depth: number },
   Idol: null as unknown as { name: string; depth: number },
+  GateMap: null as unknown as { sceneName: string; checkpointName: string; name: string; depth: number },
 };
 
 export namespace OgmoProject {

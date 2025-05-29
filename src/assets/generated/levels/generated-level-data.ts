@@ -1965,6 +1965,8 @@ export const Lvl = {
     fromTunnelRight: e(r["Checkpoint"], { x: 720, y: 72, flippedX: false, values: { name: "fromTunnelRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
     fromOutskirtsMiddleLeft: e(r["Checkpoint"], { x: 736, y: 24, flippedX: true, values: { name: "fromOutskirtsMiddleLeft", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
     fromOutskirtsMiddleRight: e(r["Checkpoint"], { x: 928, y: 24, flippedX: false, values: { name: "fromOutskirtsMiddleRight", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
+    fromMapLeft: e(r["Checkpoint"], { x: 64, y: 360, flippedX: false, values: { name: "fromMapLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+    fromMapRight: e(r["Checkpoint"], { x: 2312, y: 392, flippedX: true, values: { name: "fromMapRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
     StoneRockSmallShaded1_16: d(Tx.Stone.RockSmallShaded1, { x: 148, y: 338, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
     TerrainGrassTall3px_23: d(Tx.Terrain.Grass.Tall3px, { x: 1400, y: 365, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "FrontDecals"),
     TerrainGrassTall3px_24: d(Tx.Terrain.Grass.Tall3px, { x: 1312, y: 365, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "FrontDecals"),
@@ -2814,9 +2816,9 @@ export const Lvl = {
     WorldMapCloud0_2: d(Tx.WorldMap.Cloud0, { x: 864, y: 394, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
     TerrainEarthMass0: d(Tx.Terrain.Earth.Mass0, { x: 795, y: 949, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe96565 }, "TerrainDecals"),
     TerrainEarthZigzag0: d(Tx.Terrain.Earth.Zigzag0, { x: 753, y: 1086, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x4b76a9 }, "TerrainDecals"),
-    WorldMapGate: d(Tx.WorldMap.Gate, { x: 637, y: 497, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
-    WorldMapGate_1: d(Tx.WorldMap.Gate, { x: 821, y: 495, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
     Player: e(r["Player"], { x: 632, y: 512, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    GateMap: e(r["GateMap"], { x: 821, y: 495, rotation: 2340, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0 }, tint: 0xffffff }, "RegionEntities"),
+    GateMap_1: e(r["GateMap"], { x: 637, y: 497, rotation: 0, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0 }, tint: 0xffffff }, "RegionEntities"),
   })),
 };
 

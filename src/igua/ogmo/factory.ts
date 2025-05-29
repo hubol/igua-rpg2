@@ -14,6 +14,7 @@ export namespace OgmoFactory {
         flippedY?: boolean;
         width?: number;
         height?: number;
+        rotation?: number;
         tint?: number;
     }
 
@@ -85,6 +86,10 @@ export namespace OgmoFactory {
 
         if (entity.flippedY) {
             obj.scale.y *= -1;
+        }
+
+        if (entity.rotation !== undefined) {
+            obj.angle = entity.rotation;
         }
 
         if (entity.tint !== undefined) {
