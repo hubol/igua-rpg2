@@ -1,4 +1,4 @@
-import { Container, DisplayObject, Graphics, Rectangle, Sprite } from "pixi.js";
+import { Container, DisplayObject, Graphics, Rectangle, Sprite, Texture } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
@@ -114,31 +114,41 @@ function objInteractIndicator() {
     );
 }
 
+const iconTxs = Tx.Ui.Experience.Icon12.split({ width: 22 });
+
 interface ExperienceIndicatorConfig {
     tint: RgbInt;
+    iconTx: Texture;
 }
 
 export const experienceIndicatorConfigs: Record<RpgProgressExperience, ExperienceIndicatorConfig> = {
     combat: {
         tint: 0xFF401E,
+        iconTx: iconTxs[0],
     },
     computer: {
         tint: 0xFF7B00,
+        iconTx: iconTxs[1],
     },
     gambling: {
         tint: 0xEABB00,
+        iconTx: iconTxs[2],
     },
     jump: {
         tint: 0x19A859,
+        iconTx: iconTxs[3],
     },
     pocket: {
         tint: 0x54BAFF,
+        iconTx: iconTxs[4],
     },
     quest: {
         tint: 0x3775E8,
+        iconTx: iconTxs[5],
     },
     social: {
         tint: 0xA074E8,
+        iconTx: iconTxs[6],
     },
 };
 
@@ -155,8 +165,8 @@ function objExperienceIndicator() {
         value: 0,
     }));
 
-    const deltaObjs = experienceIndicatorConfigsArray.map(({ experienceKey, tint }) =>
-        objExperienceIndicatorDelta(tint)
+    const deltaObjs = experienceIndicatorConfigsArray.map(({ experienceKey, ...config }) =>
+        objExperienceIndicatorDelta(config)
             .invisible()
             .coro(function* (self) {
                 let value = RpgProgress.character.experience[experienceKey];
@@ -210,7 +220,7 @@ function objExperienceIndicator() {
                 if (!deltaObj.visible) {
                     continue;
                 }
-                deltaObj.x = Math.min(rectangle.x + rectangle.width, maximumX) - deltaObj.width;
+                deltaObj.x = Math.min(rectangle.x + rectangle.width, maximumX) - deltaObj.effectiveWidth;
                 maximumX = deltaObj.x;
             }
         })
@@ -222,7 +232,7 @@ function objExperienceIndicator() {
     return obj;
 }
 
-function objExperienceIndicatorDelta(tint: RgbInt) {
+function objExperienceIndicatorDelta({ tint, iconTx }: ExperienceIndicatorConfig) {
     const state = {
         total: 0,
         delta: 0,
@@ -231,9 +241,15 @@ function objExperienceIndicatorDelta(tint: RgbInt) {
     const gfx = new Graphics();
     const totalTextObj = objText.Medium("", { tint: 0xffffff }).pivoted(-1, -1);
     const deltaTextObj = objText.SmallDigits("", { tint }).pivoted(-1, -2);
+    const iconObj = Sprite.from(iconTx).anchored(0.5, 1);
 
-    return container(gfx, totalTextObj, deltaTextObj)
-        .merge({ state })
+    return container(gfx, totalTextObj, deltaTextObj, iconObj)
+        .merge({
+            state,
+            get effectiveWidth() {
+                return gfx.width;
+            },
+        })
         .step(() => {
             totalTextObj.text = state.delta < 0 ? ("" + (state.total + state.delta)) : ("" + state.total);
             deltaTextObj.visible = state.delta > 0;
@@ -249,6 +265,8 @@ function objExperienceIndicatorDelta(tint: RgbInt) {
             if (deltaTextObj.visible) {
                 gfx.beginFill(0xffffff).drawRect(width + 2, 0, deltaTextObj.width + 2, height + 2);
             }
+
+            iconObj.x = Math.round(gfx.width / 2);
         })
         .pivoted(0, 9);
 }
