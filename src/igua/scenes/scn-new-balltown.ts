@@ -247,8 +247,13 @@ function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
                 return `                             ${characters.join(" ")}`;
             }
 
+            const presentStarOnLastAsk = RpgProgress.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount >= 5;
+
             for (let i = 0; i < characters.length; i++) {
-                const shuffledOptions = Rng.shuffle([...options]);
+                const isLast = i === characters.length - 1;
+                const shuffledOptions = Rng.shuffle(
+                    options.filter(value => value !== "Star" || !isLast || presentStarOnLastAsk),
+                );
                 const index = yield* ask("\n" + getCurrentPasswordMessage(), ...shuffledOptions);
                 const option = shuffledOptions[index];
                 const character = optionToCharacters[option];
