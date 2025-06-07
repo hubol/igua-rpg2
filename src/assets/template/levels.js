@@ -187,9 +187,9 @@ import { OgmoEntityResolvers as r } from '../../../igua/ogmo/entity-resolvers';
 import { OgmoFactory } from '../../../igua/ogmo/factory';
 import { Tx } from '../../../assets/textures';
 
-const { createEntity: e, createDecal: d, createLevel: l, createDecalGroup: dg } = OgmoFactory;
+const { createEntity: e, createDecal: d, applyLevel, createDecalGroup: dg } = OgmoFactory;
 
-export const ${camelName} = l(${serialize(level, 0)}, () => ({ ${resolveEntities.map(({ key, value }) => `"${key}": ${value},`).join('')} }));
+export const ${camelName} = () => { applyLevel(${serialize(level, 0)}); return { ${resolveEntities.map(({ key, value }) => `"${key}": ${value},`).join('')} }; };
 
 export type Lvl${name} = ReturnType<typeof ${camelName}>;
 `

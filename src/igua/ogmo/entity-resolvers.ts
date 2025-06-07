@@ -1,7 +1,7 @@
 import { Graphics } from "pixi.js";
-import { OgmoProject } from "../../assets/generated/levels/generated-ogmo-project-data";
+import { OgmoEntities, OgmoEntityResolverBase } from "../../assets/generated/levels/generated-ogmo-project-data";
 import { Instances } from "../../lib/game-engine/instances";
-import { vnew } from "../../lib/math/vector-type";
+import { Vector, vnew } from "../../lib/math/vector-type";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
 import { objPuddle } from "../objects/nature/obj-puddle";
@@ -63,11 +63,12 @@ export const OgmoEntityResolvers = {
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,
     Idol: objIdol,
     GateMap: objWorldMapGate,
-} satisfies {
-    [TName in OgmoProject.Entities.Names]: (e: OgmoFactory.Entity<TName>) => unknown;
-};
+} satisfies OgmoEntityResolverBase;
 
-function createOrConfigurePlayerObj(entity: OgmoFactory.Entity<"Checkpoint" | "Player">, checkpointName?: string) {
+function createOrConfigurePlayerObj(
+    entity: OgmoEntities.Checkpoint | OgmoEntities.Player,
+    checkpointName?: string,
+): Vector {
     const pos = vnew(entity).add(entity.flippedX ? 3 : -2, 3);
     const facing = entity.flippedX ? -1 : 1;
 
@@ -78,10 +79,9 @@ function createOrConfigurePlayerObj(entity: OgmoFactory.Entity<"Checkpoint" | "P
     }
 
     if (checkpointName) {
-        const checkpointFacing =
-            (entity as OgmoFactory.Entity<"Checkpoint">).values.overrideFlipX === "retainFromPreviousScene"
-                ? RpgProgress.character.position.facing
-                : facing;
+        const checkpointFacing = (entity as OgmoEntities.Checkpoint).values.overrideFlipX === "retainFromPreviousScene"
+            ? RpgProgress.character.position.facing
+            : facing;
         objCheckpoint(checkpointName, checkpointFacing).at(pos).show();
     }
 

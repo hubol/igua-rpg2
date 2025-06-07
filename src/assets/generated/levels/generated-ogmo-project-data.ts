@@ -1,36 +1,59 @@
 // This file is generated.
 
-const entityValues = {
-  Player: null as unknown as { name: string; depth: number },
-  Block: null as unknown as { name: string; depth: number; visible: boolean },
-  Slope: null as unknown as { name: string; depth: number; visible: boolean },
-  Pipe: null as unknown as { name: string; visible: boolean; depth: number },
-  PipeSlope: null as unknown as { name: string; depth: number; visible: boolean },
-  Door: null as unknown as { sceneName: string; checkpointName: string; name: string; depth: number },
-  Checkpoint: null as unknown as { name: string; depth: number; overrideFlipX: "none" | "retainFromPreviousScene" },
-  WaterDripSource: null as unknown as { delayMin: number; delayMax: number; name: string; depth: number },
-  Sign: null as unknown as { title: string; message: string; name: string; depth: number; isSpecial: boolean },
-  IntelligenceBackground: null as unknown as { initialTint: string; targetTint: string; min: number; max: number; name: string; depth: number },
-  IguanaNpc: null as unknown as { personaName: string; name: string; depth: number },
-  ValuableGreen: null as unknown as { name: string; depth: number },
-  ValuableOrange: null as unknown as { name: string; depth: number },
-  ValuableBlue: null as unknown as { name: string; depth: number },
-  Puddle: null as unknown as { name: string; depth: number },
-  Marker: null as unknown as { name: string; depth: number },
-  Region: null as unknown as { name: string; depth: number },
-  GateHorizontal: null as unknown as { sceneName: string; checkpointName: string; name: string; depth: number },
-  PocketableItemA: null as unknown as { name: string; depth: number },
-  PocketableItemB: null as unknown as { name: string; depth: number },
-  GateVertical: null as unknown as { sceneName: string; checkpointName: string; name: string; depth: number },
-  EnemySuggestive: null as unknown as { name: string; depth: number; variant: "level0" | "level1" },
-  EnvironmentSparkleMarker: null as unknown as { name: string; depth: number },
-  Idol: null as unknown as { name: string; depth: number },
-  GateMap: null as unknown as { sceneName: string; checkpointName: string; name: string; depth: number },
-};
+import { OgmoFactory } from "../../../igua/ogmo/factory";
 
-export namespace OgmoProject {
-  export namespace Entities {
-    export type Values = typeof entityValues;
-    export type Names = keyof Values;
-  }
+export namespace OgmoEntities {
+  export type Player = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type Block = OgmoFactory.EntityBase<{ name: string; depth: number; visible: boolean }>;
+  export type Slope = OgmoFactory.EntityBase<{ name: string; depth: number; visible: boolean }>;
+  export type Pipe = OgmoFactory.EntityBase<{ name: string; visible: boolean; depth: number }>;
+  export type PipeSlope = OgmoFactory.EntityBase<{ name: string; depth: number; visible: boolean }>;
+  export type Door = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
+  export type Checkpoint = OgmoFactory.EntityBase<{ name: string; depth: number; overrideFlipX: "none" | "retainFromPreviousScene" }>;
+  export type WaterDripSource = OgmoFactory.EntityBase<{ delayMin: number; delayMax: number; name: string; depth: number }>;
+  export type Sign = OgmoFactory.EntityBase<{ title: string; message: string; name: string; depth: number; isSpecial: boolean }>;
+  export type IntelligenceBackground = OgmoFactory.EntityBase<{ initialTint: string; targetTint: string; min: number; max: number; name: string; depth: number }>;
+  export type IguanaNpc = OgmoFactory.EntityBase<{ personaName: string; name: string; depth: number }>;
+  export type ValuableGreen = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type ValuableOrange = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type ValuableBlue = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type Puddle = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type Marker = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type Region = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type GateHorizontal = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
+  export type PocketableItemA = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type PocketableItemB = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type GateVertical = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
+  export type EnemySuggestive = OgmoFactory.EntityBase<{ name: string; depth: number; variant: "level0" | "level1" }>;
+  export type EnvironmentSparkleMarker = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type Idol = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type GateMap = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
+}
+
+export interface OgmoEntityResolverBase {
+  Player: (entity: OgmoEntities.Player) => unknown;
+  Block: (entity: OgmoEntities.Block) => unknown;
+  Slope: (entity: OgmoEntities.Slope) => unknown;
+  Pipe: (entity: OgmoEntities.Pipe) => unknown;
+  PipeSlope: (entity: OgmoEntities.PipeSlope) => unknown;
+  Door: (entity: OgmoEntities.Door) => unknown;
+  Checkpoint: (entity: OgmoEntities.Checkpoint) => unknown;
+  WaterDripSource: (entity: OgmoEntities.WaterDripSource) => unknown;
+  Sign: (entity: OgmoEntities.Sign) => unknown;
+  IntelligenceBackground: (entity: OgmoEntities.IntelligenceBackground) => unknown;
+  IguanaNpc: (entity: OgmoEntities.IguanaNpc) => unknown;
+  ValuableGreen: (entity: OgmoEntities.ValuableGreen) => unknown;
+  ValuableOrange: (entity: OgmoEntities.ValuableOrange) => unknown;
+  ValuableBlue: (entity: OgmoEntities.ValuableBlue) => unknown;
+  Puddle: (entity: OgmoEntities.Puddle) => unknown;
+  Marker: (entity: OgmoEntities.Marker) => unknown;
+  Region: (entity: OgmoEntities.Region) => unknown;
+  GateHorizontal: (entity: OgmoEntities.GateHorizontal) => unknown;
+  PocketableItemA: (entity: OgmoEntities.PocketableItemA) => unknown;
+  PocketableItemB: (entity: OgmoEntities.PocketableItemB) => unknown;
+  GateVertical: (entity: OgmoEntities.GateVertical) => unknown;
+  EnemySuggestive: (entity: OgmoEntities.EnemySuggestive) => unknown;
+  EnvironmentSparkleMarker: (entity: OgmoEntities.EnvironmentSparkleMarker) => unknown;
+  Idol: (entity: OgmoEntities.Idol) => unknown;
+  GateMap: (entity: OgmoEntities.GateMap) => unknown;
 }

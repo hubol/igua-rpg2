@@ -1,4 +1,5 @@
 import { Graphics } from "pixi.js";
+import { OgmoEntities } from "../../assets/generated/levels/generated-ogmo-project-data";
 import { Logger } from "../../lib/game-engine/logger";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
@@ -11,7 +12,7 @@ export const CtxGate = new SceneLocal(() => ({ isGateTransitionActive: false }),
 
 type Orientation = "horizontal" | "vertical";
 
-export function objGate(ogmoEntity: OgmoFactory.Entity<"GateHorizontal" | "GateVertical">, orientation: Orientation) {
+export function objGate(ogmoEntity: OgmoEntities.GateHorizontal | OgmoEntities.GateVertical, orientation: Orientation) {
     const gfx = new Graphics().beginFill(0xffffff).drawRect(0, 0, 1, 1).scaled(
         orientation === "horizontal" ? 96 : 1,
         orientation === "vertical" ? 96 : 1,
@@ -75,7 +76,7 @@ export function objGate(ogmoEntity: OgmoFactory.Entity<"GateHorizontal" | "GateV
     return gfx.invisible();
 }
 
-function getForward(ogmo: OgmoFactory.EntityCommon, orientation: Orientation) {
+function getForward(ogmo: OgmoFactory.EntityBase, orientation: Orientation) {
     if (orientation === "horizontal") {
         return ogmo.flippedX ? "left" : "right";
     }
