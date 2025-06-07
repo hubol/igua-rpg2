@@ -84,7 +84,7 @@ module.exports = function ({ files }, { pascal, noext, format }) {
         });
 
         const level = { width: json.width, height: json.height, backgroundTint: getSerializableTint(json.backgroundColor) }
-        const obj = literal(`l(${serialize(level, 0)}, () => ({ ${resolveEntities.map(({ key, value }) => `"${key}": ${value},`).join('')} }))`)
+        const obj = literal(`() => { applyLevel(${serialize(level, 0)}); return { ${resolveEntities.map(({ key, value }) => `"${key}": ${value},`).join('')} }; }`)
 
         const pascalPath = path.map(pascal);
         node(pascalPath, obj);
@@ -100,7 +100,7 @@ import { OgmoEntityResolvers as r } from '../../../igua/ogmo/entity-resolvers';
 import { OgmoFactory } from '../../../igua/ogmo/factory';
 import { Tx } from '../../../assets/textures';
 
-const { createEntity: e, createDecal: d, createLevel: l, createDecalGroup: dg } = OgmoFactory;
+const { createEntity: e, createDecal: d, applyLevel, createDecalGroup: dg } = OgmoFactory;
 
 export const Lvl = ${stringifiedTree};
 

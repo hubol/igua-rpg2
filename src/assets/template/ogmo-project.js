@@ -20,21 +20,20 @@ module.exports = function ({ files }, { format }) {
 
     const file = files[0];
 
-    const entities = file.json.entities.reduce((obj, entity) => {
-        obj[entity.name] = literal(`null as unknown as ${serialize(Object.assign({}, ...entity.values.map(convertOgmoEntityValueToPartialTypeScriptInterface)), 0)}`);
-        return obj;
-    }, {});
+    /** @type {Array<{ name: string, values: Record<string, any> }>} */
+    const entities = file.json.entities;
 
     const source = `// This file is generated.
 
-const entityValues = ${serialize(entities)};
+import { OgmoFactory } from "../../../igua/ogmo/factory";
 
-export namespace OgmoProject {
-    export namespace Entities {
-        export type Values = typeof entityValues;
-        export type Names = keyof Values;
-    }
-}`;
+export namespace OgmoEntities {
+    ${entities.map(entity => {
+        return `export type ${entity.name} = OgmoFactory.EntityBase<${serialize(Object.assign({}, ...entity.values.map(convertOgmoEntityValueToPartialTypeScriptInterface)), 0)}>;`
+    }).join('\n')}
+}
+    
+export interface OgmoEntityResolverBase ${serialize(Object.assign({}, ...entities.map(convertOgmoEntityToResolverFunction)))}`;
 
     return format(source, { parser: 'typescript', printWidth: 500 });
 }
@@ -62,4 +61,8 @@ function convertOgmoEntityValueToTypeScriptType(value) {
 
 function convertOgmoEntityValueToPartialTypeScriptInterface(value) {
     return { [value.name]: convertOgmoEntityValueToTypeScriptType(value) };
+}
+
+function convertOgmoEntityToResolverFunction(entity) {
+    return { [entity.name]: literal(`(entity: OgmoEntities.${entity.name}) => unknown`) }
 }

@@ -1,11 +1,11 @@
 import { Sprite } from "pixi.js";
+import { OgmoEntities } from "../../assets/generated/levels/generated-ogmo-project-data";
 import { Tx } from "../../assets/textures";
 import { ZIndex } from "../core/scene/z-index";
 import { mxnInteract } from "../mixins/mxn-interact";
-import { OgmoFactory } from "../ogmo/factory";
 import { SceneChanger } from "../systems/scene-changer";
 
-export function objWorldMapGate(ogmo: OgmoFactory.Entity<"GateMap">) {
+export function objWorldMapGate(ogmo: OgmoEntities.GateMap) {
     const sceneChanger = SceneChanger.create(ogmo.values);
 
     return Sprite.from(Tx.WorldMap.Gate)
