@@ -22,9 +22,17 @@ const dataEquipment = {
     },
     RichesRing: {
         name: "Riches Ring",
-        description: "Reduced odds of looting nothing, bonus valuables",
+        description: "Reduced chance of looting nothing, bonus valuables",
         effects: (model, bonus) => {
             model.loot.tiers.nothingRerollCount += 1 + bonus;
+            model.loot.valuables.bonus += 6 + 4 * bonus;
+        },
+    },
+    YellowRichesRing: {
+        name: "Riches Ring (Yellow)",
+        description: "Increased chance of doubled pocket item loot, bonus valuables",
+        effects: (model, bonus) => {
+            model.loot.pocket.bonusChance += Math.round((0.2 + Math.sqrt(bonus / 5) * 0.8) * 100);
             model.loot.valuables.bonus += 6 + 4 * bonus;
         },
     },

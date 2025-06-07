@@ -85,6 +85,9 @@ export namespace RpgLoot {
                 }
                 else if (drop.kind === "pocket_item") {
                     pocketItems.push(drop.item);
+                    if (Rng.float(100) <= lootEffects.pocket.bonusChance) {
+                        pocketItems.push(drop.item);
+                    }
                 }
                 else if (drop.kind === "flop") {
                     flops.push(Rng.intc(drop.min, drop.max));

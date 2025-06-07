@@ -1,4 +1,4 @@
-import { Integer } from "../../lib/math/number-alias-types";
+import { Integer, PercentAsInteger } from "../../lib/math/number-alias-types";
 import { compileResetter } from "../../lib/object/compile-resetter";
 
 export namespace RpgEquipmentEffects {
@@ -18,6 +18,9 @@ export namespace RpgEquipmentEffects {
                 },
             },
             loot: {
+                pocket: {
+                    bonusChance: <PercentAsInteger> 0,
+                },
                 tiers: {
                     nothingRerollCount: 0,
                 },

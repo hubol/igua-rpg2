@@ -77,6 +77,7 @@ function objParachute(target: MxnPhysics) {
 
 function mxnParachute(obj: ObjPocketableItemBase) {
     return obj.mixin(mxnPhysics, createPhysicsArgs(obj, 0.1))
+        .step(self => self.speed.x = approachLinear(self.speed.x, 0, 0.015))
         .coro(function* (self) {
             self.addChildAt(objParachute(self), 0);
             self.speed.y = -6;

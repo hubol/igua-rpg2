@@ -5,7 +5,7 @@ import { objFlop } from "./obj-flop";
 import { objPocketableItem } from "./obj-pocketable-item";
 import { objValuableTrove } from "./obj-valuable-trove";
 
-const flopHorizontalSpeeds = [
+const dropSpeedH = [
     0,
     1,
     -1,
@@ -14,16 +14,16 @@ const flopHorizontalSpeeds = [
 export function objLootDrop(drop: RpgLoot.Drop) {
     return objValuableTrove(drop.valuables)
         .coro(function* (self) {
-            for (const pocketItem of drop.pocketItems) {
-                // TODO probably can't just have them landing on each other
-                objPocketableItem.parachuting(pocketItem).at(self).show(self.parent);
+            for (let i = 0; i < drop.pocketItems.length; i++) {
+                const hspeed = dropSpeedH[i % dropSpeedH.length];
+                objPocketableItem.parachuting(drop.pocketItems[i]).at(self).show(self.parent).speed.x = hspeed;
                 yield sleep(250);
             }
 
-            let speedIndex = Rng.int(flopHorizontalSpeeds.length);
+            let speedIndex = Rng.int(dropSpeedH.length);
 
             for (let i = 0; i < drop.flops.length; i++) {
-                const hspeed = flopHorizontalSpeeds[(speedIndex + i) % flopHorizontalSpeeds.length];
+                const hspeed = dropSpeedH[(speedIndex + i) % dropSpeedH.length];
                 objFlop(drop.flops[i]).at(self).show(self.parent).speed.x = hspeed;
                 yield sleep(250);
             }
