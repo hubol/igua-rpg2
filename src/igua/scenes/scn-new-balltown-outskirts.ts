@@ -1,4 +1,4 @@
-import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { LvlNewBalltownOutskirts, lvlNewBalltownOutskirts } from "../../assets/generated/levels/lvl-new-balltown-outskirts";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Instances } from "../../lib/game-engine/instances";
@@ -26,14 +26,14 @@ import { RpgStatus } from "../rpg/rpg-status";
 
 export function scnNewBalltownOutskirts() {
     Jukebox.play(Mzk.TrashDay);
-    const lvl = Lvl.NewBalltownOutskirts();
+    const lvl = lvlNewBalltownOutskirts();
 
     enrichMiner(lvl);
     enrichFarmer(lvl);
     enrichSecretShopExterior(lvl);
 }
 
-function enrichFarmer(lvl: LvlType.NewBalltownOutskirts) {
+function enrichFarmer(lvl: LvlNewBalltownOutskirts) {
     const startingPosition = lvl.FarmerNpc.vcpy();
 
     lvl.FarmerNpc.mixin(mxnCutscene, function* () {
@@ -72,7 +72,7 @@ const atkPickaxe = RpgAttack.create({
     physical: 25,
 });
 
-function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
+function enrichMiner(lvl: LvlNewBalltownOutskirts) {
     function hasHighMiningSpeed() {
         return RpgProgress.flags.outskirts.miner.pickaxeHealth > 0
             && RpgProgress.flags.outskirts.miner.hasUpgradedPickaxe;
@@ -155,7 +155,7 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
     });
 }
 
-function enrichSecretShopExterior(lvl: LvlType.NewBalltownOutskirts) {
+function enrichSecretShopExterior(lvl: LvlNewBalltownOutskirts) {
     const ballons = [69_100_000, 420_000_000].map((seed): RpgStatus.Ballon => ({ health: 1, healthMax: 1, seed }));
     lvl.MarketingBallonsMarker.zIndexed(ZIndex.TerrainDecals).mixin(mxnBallonable, {
         attachPoint: lvl.MarketingBallonsMarker,

@@ -1,6 +1,6 @@
 import { Container, Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
-import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { LvlNewBalltownUnderneath, lvlNewBalltownUnderneath } from "../../assets/generated/levels/lvl-new-balltown-underneath";
 import { Mzk } from "../../assets/music";
 import { Tx } from "../../assets/textures";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -25,7 +25,7 @@ import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltownUnderneath() {
     Jukebox.play(Mzk.TrashDay);
-    const lvl = Lvl.NewBalltownUnderneath();
+    const lvl = lvlNewBalltownUnderneath();
     enrichHomeowner(lvl);
     enrichHeliumCreator(lvl);
     enrichTunnel(lvl);
@@ -34,7 +34,7 @@ export function scnNewBalltownUnderneath() {
     objAngelMiffed().at(lvl.TestMarker).show();
 }
 
-function enrichHomeowner(lvl: LvlType.NewBalltownUnderneath) {
+function enrichHomeowner(lvl: LvlNewBalltownUnderneath) {
     if (RpgProgress.flags.underneath.homeowner.hasClearedHouseOfEnemies) {
         lvl.Homeowner.destroy();
         return;
@@ -111,7 +111,7 @@ function enrichHomeowner(lvl: LvlType.NewBalltownUnderneath) {
     });
 }
 
-function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
+function enrichHeliumCreator(lvl: LvlNewBalltownUnderneath) {
     const { heliumCreator } = RpgProgress.flags.underneath;
     const { tank } = heliumCreator;
 
@@ -192,11 +192,11 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
         .show();
 }
 
-function enrichTunnel(lvl: LvlType.NewBalltownUnderneath) {
+function enrichTunnel(lvl: LvlNewBalltownUnderneath) {
     lvl.TunnelLeftDoor.locked = RpgProgress.flags.underneath.tunneler.isLeftDoorLocked;
 }
 
-function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
+function enrichMagicRisingFace(lvl: LvlNewBalltownUnderneath) {
     // TODO reward
     // TODO cute sfx, vfx
 

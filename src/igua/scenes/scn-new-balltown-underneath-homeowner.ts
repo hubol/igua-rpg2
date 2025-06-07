@@ -1,5 +1,5 @@
 import { Graphics } from "pixi.js";
-import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { LvlNewBalltownUnderneathHomeowner, lvlNewBalltownUnderneathHomeowner } from "../../assets/generated/levels/lvl-new-balltown-underneath-homeowner";
 import { Mzk } from "../../assets/music";
 import { Instances } from "../../lib/game-engine/instances";
 import { interpvr } from "../../lib/game-engine/routines/interp";
@@ -33,12 +33,12 @@ const shopHomeowner = new RpgShop({
 
 export function scnNewBalltownUnderneathHomeowner() {
     Jukebox.play(Mzk.PleasureMafia);
-    const lvl = Lvl.NewBalltownUnderneathHomeowner();
+    const lvl = lvlNewBalltownUnderneathHomeowner();
     enrichEnemyPresence(lvl);
     enrichArtwork(lvl);
 }
 
-function enrichEnemyPresence(lvl: LvlType.NewBalltownUnderneathHomeowner) {
+function enrichEnemyPresence(lvl: LvlNewBalltownUnderneathHomeowner) {
     if (RpgProgress.flags.underneath.homeowner.hasClearedHouseOfEnemies) {
         Instances(mxnEnemy).forEach(enemyObj => enemyObj.destroy());
         enrichHomeowner(lvl);
@@ -78,7 +78,7 @@ function enrichEnemyPresence(lvl: LvlType.NewBalltownUnderneathHomeowner) {
     }
 }
 
-function enrichHomeowner(lvl: LvlType.NewBalltownUnderneathHomeowner) {
+function enrichHomeowner(lvl: LvlNewBalltownUnderneathHomeowner) {
     lvl.Homeowner.mixin(mxnCutscene, function* () {
         const result = yield* ask("Hey! What's up?", "I'm poisoned", "Need art", "I'm leaving");
         if (result === 0) {
@@ -93,7 +93,7 @@ function enrichHomeowner(lvl: LvlType.NewBalltownUnderneathHomeowner) {
     });
 }
 
-function enrichArtwork(lvl: LvlType.NewBalltownUnderneathHomeowner) {
+function enrichArtwork(lvl: LvlNewBalltownUnderneathHomeowner) {
     if (RpgProgress.flags.underneath.homeowner.hasClearedHouseOfEnemies) {
         return;
     }

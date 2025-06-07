@@ -1,5 +1,5 @@
 import { DisplayObject } from "pixi.js";
-import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { lvlMenuIguanaDesigner } from "../../assets/generated/levels/lvl-menu-iguana-designer";
 import { Mzk } from "../../assets/music";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../lib/math/number";
@@ -12,7 +12,7 @@ import { CtxUiIguanaDesigner, objUiIguanaDesignerRoot } from "../ui/iguana-desig
 export function scnIguanaDesigner() {
     Jukebox.play(Mzk.FirstSong);
 
-    const { LightShadowIrregularSmall, ThoughtBubbleGroup } = Lvl.MenuIguanaDesigner();
+    const { LightShadowIrregularSmall, ThoughtBubbleGroup } = lvlMenuIguanaDesigner();
     ThoughtBubbleGroup.children.forEach(x => x.mixin(mxnBoilPivot));
     objUiIguanaDesignerRoot({ leftFacingPreviewPosition: LightShadowIrregularSmall }).show();
 

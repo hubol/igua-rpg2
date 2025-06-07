@@ -1,5 +1,5 @@
 import { Container, DisplayObject } from "pixi.js";
-import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { lvlWorldMap } from "../../assets/generated/levels/lvl-world-map";
 import { Tx } from "../../assets/textures";
 import { Instances } from "../../lib/game-engine/instances";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
@@ -7,7 +7,7 @@ import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { OgmoFactory } from "../ogmo/factory";
 
 export function scnWorldMap() {
-    const lvl = Lvl.WorldMap();
+    const lvl = lvlWorldMap();
     Instances(OgmoFactory.createDecal).filter(x => x.texture === Tx.WorldMap.Cloud0).forEach(x =>
         x.mixin(mxnSinePivot)
     );

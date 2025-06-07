@@ -1,4 +1,4 @@
-import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { LvlNewBalltown, lvlNewBalltown } from "../../assets/generated/levels/lvl-new-balltown";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
@@ -35,7 +35,7 @@ import { RpgShop } from "../rpg/rpg-shop";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);
-    const lvl = Lvl.NewBalltown();
+    const lvl = lvlNewBalltown();
     enrichOliveFanatic(lvl);
     enrichCroupier(lvl);
     enrichMiner(lvl);
@@ -43,7 +43,7 @@ export function scnNewBalltown() {
     enrichFishmongerDeliveryToArmorer(lvl);
 }
 
-function enrichMiner(lvl: LvlType.NewBalltown) {
+function enrichMiner(lvl: LvlNewBalltown) {
     lvl.Miner.mixin(mxnCutscene, function* () {
         const result = yield* ask(
             `Name's ${lvl.Miner.speaker.name}. I used to mine in these famous mines. Now I don't. How can I help?`,
@@ -87,7 +87,7 @@ function enrichMiner(lvl: LvlType.NewBalltown) {
     });
 }
 
-function enrichOliveFanatic(lvl: LvlType.NewBalltown) {
+function enrichOliveFanatic(lvl: LvlNewBalltown) {
     lvl.OliveFanatic.mixin(mxnCutscene, function* () {
         lvl.OliveFanatic.isDucking = false;
         yield sleep(500);
@@ -133,7 +133,7 @@ function getAvailableRisks(currentValuables: number) {
     return availableRisks;
 }
 
-function enrichCroupier(lvl: LvlType.NewBalltown) {
+function enrichCroupier(lvl: LvlNewBalltown) {
     // TODO This seems fine for now, but should it become its own layer?
     lvl.DiceBlock.zIndex = ZIndex.CharacterEntities + 1;
     lvl.Croupier.mixin(mxnCutscene, function* () {
@@ -223,7 +223,7 @@ const shopMechanicalIdol = new RpgShop({
     }],
 });
 
-function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
+function enrichMechanicalIdol(lvl: LvlNewBalltown) {
     const options = ["Ball", "Star", "P", "3", "F"] as const;
     const optionToCharacters: Record<typeof options[number], string> = {
         "3": "3",
@@ -322,8 +322,8 @@ That's worth ${count} credit(s). Do you want to deposit them?`)
         });
 }
 
-function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
-    const expectedCheckpointName: keyof LvlType.NewBalltown = "fromFishmonger";
+function enrichFishmongerDeliveryToArmorer(lvl: LvlNewBalltown) {
+    const expectedCheckpointName: keyof LvlNewBalltown = "fromFishmonger";
     const { deliveries } = RpgProgress.flags.newBalltown.fishmonger;
 
     if (

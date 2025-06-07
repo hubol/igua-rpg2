@@ -1,4 +1,4 @@
-import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { LvlNewBalltownUnderneathTunnel, lvlNewBalltownUnderneathTunnel } from "../../assets/generated/levels/lvl-new-balltown-underneath-tunnel";
 import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
 import { DramaMisc } from "../drama/drama-misc";
@@ -8,11 +8,11 @@ import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltownUnderneathTunnel() {
     Jukebox.play(Mzk.Covid19);
-    const lvl = Lvl.NewBalltownUnderneathTunnel();
+    const lvl = lvlNewBalltownUnderneathTunnel();
     enrichTunneler(lvl);
 }
 
-function enrichTunneler(lvl: LvlType.NewBalltownUnderneathTunnel) {
+function enrichTunneler(lvl: LvlNewBalltownUnderneathTunnel) {
     lvl.LeftDoor.locked = RpgProgress.flags.underneath.tunneler.isLeftDoorLocked;
     lvl.Tunneler.mixin(mxnCutscene, function* () {
         yield* show("Welcome. I'm the maintainer of this ancient tunnel.");

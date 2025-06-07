@@ -1,5 +1,5 @@
 import { BLEND_MODES } from "pixi.js";
-import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { LvlNewBalltownFanatic, lvlNewBalltownFanatic } from "../../assets/generated/levels/lvl-new-balltown-fanatic";
 import { Mzk } from "../../assets/music";
 import { interpv } from "../../lib/game-engine/routines/interp";
 import { Jukebox } from "../core/igua-audio";
@@ -13,14 +13,14 @@ import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltownFanatic() {
     Jukebox.play(Mzk.CedarWorld);
-    const lvl = Lvl.NewBalltownFanatic();
+    const lvl = lvlNewBalltownFanatic();
     lvl.FurnitureChandelier.mixin(mxnBoilPivot);
     lvl.ChandelierLights.children.forEach(x => x.mixin(mxnBoilMirrorRotate).blendMode = BLEND_MODES.ADD);
     enrichBallFruitFanaticNpc(lvl);
     enrichSecretSymbols(lvl);
 }
 
-function enrichSecretSymbols(lvl: LvlType.NewBalltownFanatic) {
+function enrichSecretSymbols(lvl: LvlNewBalltownFanatic) {
     const { ballFruitFanatic } = RpgProgress.flags.newBalltown;
 
     lvl.SecretSymbols.children.forEach((obj, i) => {
@@ -36,7 +36,7 @@ function enrichSecretSymbols(lvl: LvlType.NewBalltownFanatic) {
     });
 }
 
-function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
+function enrichBallFruitFanaticNpc(lvl: LvlNewBalltownFanatic) {
     lvl.BallFruitFanaticNpc.mixin(mxnCutscene, function* () {
         const typePreference = RpgProgress.flags.newBalltown.ballFruitFanatic.typePreference;
 

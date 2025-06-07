@@ -1,4 +1,4 @@
-import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { lvlNewBalltownOutskirtsSecretShop } from "../../assets/generated/levels/lvl-new-balltown-outskirts-secret-shop";
 import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
 import { dramaShop } from "../drama/drama-shop";
@@ -85,7 +85,7 @@ const newBalltownSecretRpgShop = new RpgShop({
 
 export function scnNewBalltownOutskirtsSecretShop() {
     Jukebox.play(Mzk.OpenWound);
-    const lvl = Lvl.NewBalltownOutskirtsSecretShop();
+    const lvl = lvlNewBalltownOutskirtsSecretShop();
 
     lvl.Shopkeeper.mixin(mxnCutscene, function* () {
         yield* dramaShop(newBalltownSecretRpgShop, { primaryTint: 0x152F12, secondaryTint: 0xE6E8CC });

@@ -1,5 +1,5 @@
 import { BLEND_MODES } from "pixi.js";
-import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { LvlNewBalltownArmorer, lvlNewBalltownArmorer } from "../../assets/generated/levels/lvl-new-balltown-armorer";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
@@ -24,13 +24,13 @@ import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltownArmorer() {
     Jukebox.play(Mzk.GolfResort);
-    const lvl = Lvl.NewBalltownArmorer();
+    const lvl = lvlNewBalltownArmorer();
     enrichArmorer(lvl);
     enrichAquarium(lvl);
     enrichFishmonger(lvl);
 }
 
-function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
+function enrichFishmonger(lvl: LvlNewBalltownArmorer) {
     const { deliveries } = RpgProgress.flags.newBalltown.fishmonger;
 
     const fishObj = objFish.forArmorer().at(lvl.FishMarker).zIndexed(ZIndex.Entities);
@@ -108,7 +108,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
     });
 }
 
-function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
+function enrichArmorer(lvl: LvlNewBalltownArmorer) {
     lvl.IguanaNpc.mixin(mxnCutscene, function* () {
         const delivered = RpgProgress.flags.newBalltown.fishmonger.deliveries.armorer === "delivered";
 
@@ -160,7 +160,7 @@ const aquariumService = {
     },
 } as const;
 
-function enrichAquarium(lvl: LvlType.NewBalltownArmorer) {
+function enrichAquarium(lvl: LvlNewBalltownArmorer) {
     const { wetness } = RpgProgress.character.status.conditions;
 
     lvl.AquariumWaterLine.merge({ observedMoistureUnits: aquariumService.moistureUnits })

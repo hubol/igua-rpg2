@@ -1,4 +1,4 @@
-import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { LvlNewBalltownFishmonger, lvlNewBalltownFishmonger } from "../../assets/generated/levels/lvl-new-balltown-fishmonger";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -14,11 +14,11 @@ import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltownFishmonger() {
     Jukebox.play(Mzk.BreadCrumbPool);
-    const lvl = Lvl.NewBalltownFishmonger();
+    const lvl = lvlNewBalltownFishmonger();
     enrichFishmonger(lvl);
 }
 
-function enrichAquarium(lvl: LvlType.NewBalltownFishmonger) {
+function enrichAquarium(lvl: LvlNewBalltownFishmonger) {
     const fishObjs = [
         objFish.forArmorer().at(lvl.Fish0).show(),
         ...[lvl.Fish1, lvl.Fish2].map(markerObj =>
@@ -32,7 +32,7 @@ function enrichAquarium(lvl: LvlType.NewBalltownFishmonger) {
     };
 }
 
-function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
+function enrichFishmonger(lvl: LvlNewBalltownFishmonger) {
     const { fishObjs } = enrichAquarium(lvl);
     const { deliveries } = RpgProgress.flags.newBalltown.fishmonger;
 
