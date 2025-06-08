@@ -14,12 +14,12 @@ import { ZIndex } from "../../core/scene/z-index";
 import { scene } from "../../globals";
 import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { mxnStopAndDieWhenHitGround } from "../../mixins/mxn-stop-and-die-when-hit-ground";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { RpgStatus } from "../../rpg/rpg-status";
-import { objFxEnemyDefeat } from "../effects/obj-fx-enemy-defeat";
 import { playerObj } from "../obj-player";
 import { objPocketableItem } from "../obj-pocketable-item";
 import { objProjectileElectricalPulseGround } from "../projectiles/obj-projectile-electrical-pulse-ground";
@@ -407,18 +407,11 @@ export function objAngelSuggestive(variantKey: VariantKey) {
             healthbarAnchorObj,
             angelEyesObj: faceObj.eyesObj,
         })
-        .handles(
-            "mxnEnemy.died",
-            (self) =>
-                objFxEnemyDefeat({
-                    primaryTint: theme.map.red,
-                    secondaryTint: theme.spirit.secondary,
-                    tertiaryTint: theme.spirit.tertiary,
-                })
-                    .at(self)
-                    .zIndexed(self.zIndex)
-                    .show(self.parent),
-        )
+        .mixin(mxnEnemyDeathBurst, {
+            primaryTint: theme.map.red,
+            secondaryTint: theme.spirit.secondary,
+            tertiaryTint: theme.spirit.tertiary,
+        })
         .filtered(new MapRgbFilter(theme.map.red, theme.map.green, theme.map.blue, theme.map.white));
 
     return enemyObj;

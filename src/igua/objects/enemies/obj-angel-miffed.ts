@@ -8,11 +8,11 @@ import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
-import { objFxEnemyDefeat } from "../effects/obj-fx-enemy-defeat";
 import { objFxStarburst54 } from "../effects/obj-fx-startburst-54";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { objAngelEyes } from "./obj-angel-eyes";
@@ -51,10 +51,11 @@ export function objAngelMiffed() {
     const headObj = objAngelMiffedHead();
     const slammingFistRightObj = objSlammingFist("right");
     const slammingFistLeftObj = objSlammingFist("left");
+    const soulAnchorObj = new Graphics().beginFill(0).drawRect(0, 0, 1, 1).at(21, 18).invisible();
 
     const bodyObj = objAngelBody();
 
-    const obj = container(bodyObj, headObj, slammingFistRightObj, slammingFistLeftObj, ...hurtboxObjs)
+    const obj = container(bodyObj, headObj, slammingFistRightObj, slammingFistLeftObj, ...hurtboxObjs, soulAnchorObj)
         .pivoted(22, 41);
 
     return container(obj)
@@ -62,19 +63,13 @@ export function objAngelMiffed() {
             hurtboxes: hurtboxObjs,
             rank: ranks.level0,
             angelEyesObj: headObj.objects.faceObj.objects.eyesObj,
+            soulAnchorObj,
         })
-        .handles(
-            "mxnEnemy.died",
-            (self) =>
-                objFxEnemyDefeat({
-                    primaryTint: themes.Common.tint.primary,
-                    secondaryTint: themes.Common.tint.secondary,
-                    tertiaryTint: themes.Common.tint.primary,
-                })
-                    .at(self)
-                    .zIndexed(self.zIndex)
-                    .show(self.parent),
-        )
+        .mixin(mxnEnemyDeathBurst, {
+            primaryTint: themes.Common.tint.primary,
+            secondaryTint: themes.Common.tint.secondary,
+            tertiaryTint: themes.Common.tint.primary,
+        })
         .mixin(mxnPhysics, { gravity: 0.2, physicsRadius: 6, physicsOffset: [0, -7] })
         .filtered(new MapRgbFilter(themes.Common.tint.primary, themes.Common.tint.secondary))
         .coro(function* (self) {

@@ -10,6 +10,7 @@ export enum ZIndex {
     PlayerEntities = -100,
     FrontEntities = -70,
     FrontDecals = -30,
+    EnemyDeathBursts = -24,
     RegionEntities = -15,
     MarkerEntities = -10,
 }

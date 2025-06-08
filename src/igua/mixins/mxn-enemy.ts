@@ -19,6 +19,7 @@ interface MxnEnemyArgs {
     rank: RpgEnemyRank.Model;
     healthbarAnchorObj?: DisplayObject;
     angelEyesObj?: ObjAngelEyes;
+    soulAnchorObj?: DisplayObject;
 }
 
 export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
@@ -31,7 +32,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         // Thinking about the dassmann fight from igua 1
         Sfx.Impact.DefeatEnemy.play();
         const drop = RpgLoot.Methods.drop(loot, status, RpgEquipmentLoadout.getPlayerEffects().loot);
-        objLootDrop(drop).at(obj).show(obj.parent);
+        objLootDrop(drop).at(enemyObj.mxnEnemy.soulAnchorObj.getWorldPosition()).show();
         enemyObj.dispatch("mxnEnemy.died");
         obj.destroy();
     };
@@ -74,8 +75,15 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
             }
         })
         .merge({
+            // TODO should this be on the `mxnEnemy`?
+            // Or actually... should this be removed?
             strikePlayer(attack: RpgAttack.Model) {
                 playerObj.damage(attack, status);
+            },
+        })
+        .merge({
+            mxnEnemy: {
+                soulAnchorObj: args.soulAnchorObj ?? obj,
             },
         })
         .track(mxnEnemy);
