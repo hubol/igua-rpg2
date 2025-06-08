@@ -1,6 +1,6 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
-import { interp } from "../../../lib/game-engine/routines/interp";
+import { interp, interpv } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { Rng } from "../../../lib/math/rng";
@@ -14,6 +14,7 @@ import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objFxStarburst54 } from "../effects/obj-fx-startburst-54";
+import { playerObj } from "../obj-player";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { objAngelEyes } from "./obj-angel-eyes";
 import { objAngelMouth } from "./obj-angel-mouth";
@@ -56,9 +57,11 @@ export function objAngelMiffed() {
     const bodyObj = objAngelBody();
 
     const obj = container(bodyObj, headObj, slammingFistRightObj, slammingFistLeftObj, ...hurtboxObjs, soulAnchorObj)
+        .filtered(new MapRgbFilter(themes.Common.tint.primary, themes.Common.tint.secondary))
         .pivoted(22, 41);
 
     return container(obj)
+        .autoSorted()
         .mixin(mxnEnemy, {
             hurtboxes: hurtboxObjs,
             rank: ranks.level0,
@@ -71,7 +74,6 @@ export function objAngelMiffed() {
             tertiaryTint: themes.Common.tint.primary,
         })
         .mixin(mxnPhysics, { gravity: 0.2, physicsRadius: 6, physicsOffset: [0, -7] })
-        .filtered(new MapRgbFilter(themes.Common.tint.primary, themes.Common.tint.secondary))
         .coro(function* (self) {
             while (true) {
                 for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
@@ -88,6 +90,28 @@ export function objAngelMiffed() {
                     yield sleep(250);
                     fistObj.controls.slamUnit = 0;
                 }
+                self.speed.at(playerObj.x < self.x ? -2 : 2, -7);
+                yield () => self.speed.y >= 0;
+                const attackObj = objAngelMiffedSlamAttack().mixin(
+                    mxnRpgAttack,
+                    { attacker: self.status, attack: atkBodySlamStarburst },
+                ).zIndexed(-1).show(self);
+                self.gravity = 0;
+                // TODO Should instead be a quirk like
+                // `isImmuneToPlayerMeleeAttack`
+                self.status.defenses.physical = 100;
+                self.speed.at(0, 0);
+                self.scale.y = -1;
+                self.pivot.y = -25;
+                yield sleep(250);
+                self.gravity = 1;
+                yield () => self.speed.y === 0 && self.isOnGround;
+                self.status.defenses.physical = 0;
+                yield interpv(attackObj.scale).steps(4).to(0, 0).over(250);
+                attackObj.destroy();
+                self.gravity = 0.2;
+                self.scale.y = 1;
+                self.pivot.y = 0;
             }
         })
         .step(self => {
@@ -212,6 +236,24 @@ function objAngelMiffedStarburstAttack() {
     return obj.collisionShape(CollisionShape.DisplayObjects, [shape]).angled(Rng.int(4) * 90);
 }
 
+const txsFlameAura = Tx.Enemy.Miffed.FlameAura.split({ width: 72 });
+
+function objAngelMiffedSlamAttack() {
+    const shape = new Graphics().beginFill(0).drawRect(-30, -42, 60, 44).invisible();
+
+    return container(
+        objIndexedSprite(txsFlameAura).anchored(0.5, 0.5).step(self =>
+            self.textureIndex = (self.textureIndex + 0.15) % txsFlameAura.length
+        ),
+        shape,
+    )
+        .collisionShape(CollisionShape.DisplayObjects, [shape]);
+}
+
 const atkSlamStarburst = RpgAttack.create({
+    physical: 40,
+});
+
+const atkBodySlamStarburst = RpgAttack.create({
     physical: 40,
 });
