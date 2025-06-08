@@ -12,6 +12,7 @@ import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objFxEnemyDefeat } from "../effects/obj-fx-enemy-defeat";
 import { objFxStarburst54 } from "../effects/obj-fx-startburst-54";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { objAngelEyes } from "./obj-angel-eyes";
@@ -19,7 +20,14 @@ import { objAngelMouth } from "./obj-angel-mouth";
 
 const txsFistSlam = Tx.Enemy.Miffed.FistSlam.split({ count: 6 });
 
-const themes = {};
+const themes = {
+    Common: {
+        tint: {
+            primary: 0xFF77B0,
+            secondary: 0x715EFF,
+        },
+    },
+};
 const ranks = {
     level0: RpgEnemyRank.create({
         loot: {
@@ -55,8 +63,20 @@ export function objAngelMiffed() {
             rank: ranks.level0,
             angelEyesObj: headObj.objects.faceObj.objects.eyesObj,
         })
+        .handles(
+            "mxnEnemy.died",
+            (self) =>
+                objFxEnemyDefeat({
+                    primaryTint: themes.Common.tint.primary,
+                    secondaryTint: themes.Common.tint.secondary,
+                    tertiaryTint: themes.Common.tint.primary,
+                })
+                    .at(self)
+                    .zIndexed(self.zIndex)
+                    .show(self.parent),
+        )
         .mixin(mxnPhysics, { gravity: 0.2, physicsRadius: 6, physicsOffset: [0, -7] })
-        .filtered(new MapRgbFilter(0xFF77B0, 0x715EFF))
+        .filtered(new MapRgbFilter(themes.Common.tint.primary, themes.Common.tint.secondary))
         .coro(function* (self) {
             while (true) {
                 for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
