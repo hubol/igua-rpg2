@@ -251,7 +251,7 @@ function objCatalogItemNameDescription(item: CatalogItem.Model) {
 
     return container(
         nameObj,
-        objText.Medium(descriptionText, { tint: CtxDramaShop.value.style.secondaryTint }).at(9, 18),
+        objText.Medium(descriptionText, { tint: CtxDramaShop.value.style.secondaryTint, maxWidth: 224 }).at(9, 18),
         objOwnedCount(CatalogItem.getPlayerOwnedCount(item)).at(nameObj.width + 6, 4),
     );
 }
