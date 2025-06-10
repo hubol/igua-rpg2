@@ -97,16 +97,14 @@ export function objAngelMiffed() {
                     { attacker: self.status, attack: atkBodySlamStarburst },
                 ).zIndexed(-1).show(self);
                 self.gravity = 0;
-                // TODO Should instead be a quirk like
-                // `isImmuneToPlayerMeleeAttack`
-                self.status.defenses.physical = 100;
+                self.status.quirks.isImmuneToPlayerMeleeAttack = true;
                 self.speed.at(0, 0);
                 self.scale.y = -1;
                 self.pivot.y = -25;
                 yield sleep(250);
                 self.gravity = 1;
                 yield () => self.speed.y === 0 && self.isOnGround;
-                self.status.defenses.physical = 0;
+                self.status.quirks.isImmuneToPlayerMeleeAttack = false;
                 yield interpv(attackObj.scale).steps(4).to(0, 0).over(250);
                 attackObj.destroy();
                 self.gravity = 0.2;

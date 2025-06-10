@@ -48,6 +48,7 @@ export namespace RpgEnemyRank {
                         ?? true,
                     receivesDamageWhileCutsceneIsPlaying: status?.quirks?.receivesDamageWhileCutsceneIsPlaying ?? true,
                     attackingRewardsExperience: status?.quirks?.attackingRewardsExperience ?? false,
+                    isImmuneToPlayerMeleeAttack: status?.quirks?.isImmuneToPlayerMeleeAttack ?? false,
                 },
                 defenses: {
                     physical: status?.defenses?.physical ?? 0,

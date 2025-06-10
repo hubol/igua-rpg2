@@ -53,6 +53,7 @@ export namespace RpgStatus {
             roundReceivedDamageUp: boolean;
             guardedDamageIsFatal: boolean;
             attackingRewardsExperience: boolean;
+            isImmuneToPlayerMeleeAttack: boolean;
         };
         // TODO name is kind of strange
         // In reality, these are kind of like quirks that
@@ -173,6 +174,10 @@ export namespace RpgStatus {
 
             if (attack.versus !== RpgFaction.Anyone && attack.versus !== target.faction) {
                 return { rejected: true, wrongFaction: true };
+            }
+
+            if (attack.quirks.isPlayerMeleeAttack && target.quirks.isImmuneToPlayerMeleeAttack) {
+                return { rejected: true, invulnerable: true };
             }
 
             const conditions = target.invulnerable === 0

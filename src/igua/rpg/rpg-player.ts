@@ -89,6 +89,7 @@ export const RpgPlayer = {
             ailmentsRecoverWhileCutsceneIsPlaying: false,
             receivesDamageWhileCutsceneIsPlaying: false,
             attackingRewardsExperience: true,
+            isImmuneToPlayerMeleeAttack: true,
         },
     } satisfies Omit<RpgStatus.Model, "state">,
     motion: {
