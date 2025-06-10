@@ -1,8 +1,9 @@
-import { Graphics, Sprite } from "pixi.js";
+import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { interp, interpv } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
+import { IRectangle } from "../../../lib/math/rectangle";
 import { Rng } from "../../../lib/math/rng";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
@@ -75,6 +76,13 @@ export function objAngelMiffed() {
         })
         .mixin(mxnPhysics, { gravity: 0.2, physicsRadius: 6, physicsOffset: [0, -7] })
         .coro(function* (self) {
+            for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
+                fistObj.mixin(
+                    mxnRpgAttack,
+                    { attacker: self.status, attack: atkFistSwing },
+                );
+            }
+
             while (true) {
                 for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
                     yield interp(fistObj.controls, "exposedUnit").steps(3).to(1).over(300);
@@ -138,13 +146,23 @@ export function objAngelMiffed() {
         });
 }
 
+const fistRectangles: Record<number, IRectangle> = {
+    2: { x: 79, y: 19, width: 9, height: 10 },
+    3: { x: 146 - 90, y: 4, width: 11, height: 9 },
+    4: { x: 194 - 180, y: 4, width: 15, height: 13 },
+};
+
 function objSlammingFist(side: "right" | "left") {
     let slamUnit = 0;
 
     const indexedSpriteObj = objIndexedSprite(txsFistSlam);
     const fistPositionObj = new Graphics().beginFill(0).at(9, 48).drawRect(0, 0, 1, 1).invisible();
+    const fistHurtboxObj = new Graphics().invisible();
 
-    const obj = container(indexedSpriteObj, fistPositionObj)
+    const hurtboxObjs: DisplayObject[] = [];
+
+    const obj = container(indexedSpriteObj, fistPositionObj, fistHurtboxObj)
+        .collisionShape(CollisionShape.DisplayObjects, hurtboxObjs)
         .pivoted(59, 41);
 
     if (side === "right") {
@@ -168,6 +186,20 @@ function objSlammingFist(side: "right" | "left") {
         set slamUnit(value) {
             indexedSpriteObj.textureIndex = value * indexedSpriteObj.textures.length - 1;
             slamUnit = value;
+            const fistRectangle = fistRectangles[indexedSpriteObj.effectiveTextureIndex];
+            fistHurtboxObj.clear();
+            if (fistRectangle) {
+                fistHurtboxObj.beginFill(0).drawRect(
+                    fistRectangle.x,
+                    fistRectangle.y,
+                    fistRectangle.width,
+                    fistRectangle.height,
+                );
+                hurtboxObjs[0] = fistHurtboxObj;
+            }
+            else {
+                hurtboxObjs.length = 0;
+            }
         },
     };
 
@@ -247,6 +279,10 @@ function objAngelMiffedSlamAttack() {
     )
         .collisionShape(CollisionShape.DisplayObjects, [shape]);
 }
+
+const atkFistSwing = RpgAttack.create({
+    physical: 25,
+});
 
 const atkSlamStarburst = RpgAttack.create({
     physical: 40,
