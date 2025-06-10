@@ -1,4 +1,4 @@
-import { DisplayObject, Graphics, Sprite } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { interp, interpv } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
@@ -10,6 +10,7 @@ import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
+import { mxnIndexedCollisionShape } from "../../mixins/mxn-indexed-collision-shape";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
@@ -157,12 +158,9 @@ function objSlammingFist(side: "right" | "left") {
 
     const indexedSpriteObj = objIndexedSprite(txsFistSlam);
     const fistPositionObj = new Graphics().beginFill(0).at(9, 48).drawRect(0, 0, 1, 1).invisible();
-    const fistHurtboxObj = new Graphics().invisible();
 
-    const hurtboxObjs: DisplayObject[] = [];
-
-    const obj = container(indexedSpriteObj, fistPositionObj, fistHurtboxObj)
-        .collisionShape(CollisionShape.DisplayObjects, hurtboxObjs)
+    const obj = container(indexedSpriteObj, fistPositionObj)
+        .mixin(mxnIndexedCollisionShape, { indexedSpriteObj, rectangles: fistRectangles })
         .pivoted(59, 41);
 
     if (side === "right") {
@@ -186,20 +184,6 @@ function objSlammingFist(side: "right" | "left") {
         set slamUnit(value) {
             indexedSpriteObj.textureIndex = value * indexedSpriteObj.textures.length - 1;
             slamUnit = value;
-            const fistRectangle = fistRectangles[indexedSpriteObj.effectiveTextureIndex];
-            fistHurtboxObj.clear();
-            if (fistRectangle) {
-                fistHurtboxObj.beginFill(0).drawRect(
-                    fistRectangle.x,
-                    fistRectangle.y,
-                    fistRectangle.width,
-                    fistRectangle.height,
-                );
-                hurtboxObjs[0] = fistHurtboxObj;
-            }
-            else {
-                hurtboxObjs.length = 0;
-            }
         },
     };
 
