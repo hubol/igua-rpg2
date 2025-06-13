@@ -63,14 +63,22 @@ const dataEquipment = {
     },
 } satisfies Record<string, Equipment_NoInternalName>;
 
+// TODO prefix with Data I think?
 export type EquipmentInternalName = keyof typeof dataEquipment;
 
 type Equipment = Equipment_NoInternalName & { internalName: EquipmentInternalName };
 
 export const DataEquipment = Object.entries(dataEquipment).reduce(
-    (obj, [internalName, npcPersona]) => {
-        obj[internalName] = npcPersona;
+    (obj, [internalName, equipment]) => {
+        // TODO does equipment actually need this?
+        obj[internalName] = equipment;
         return obj;
     },
     {} as Record<EquipmentInternalName, Equipment>,
 );
+
+// TODO i hate global namespace stuff beginning with get
+export function getDataEquipment(name: EquipmentInternalName) {
+    // TODO warn if undefined?
+    return DataEquipment[name] ?? DataEquipment.__Unknown__;
+}
