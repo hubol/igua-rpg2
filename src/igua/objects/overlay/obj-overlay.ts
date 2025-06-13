@@ -4,6 +4,7 @@ import { ObjSolidOverlay, objSolidOverlay } from "../../core/scene/obj-solid-ove
 import { ObjEnemyHealthBars, objEnemyHealthBars } from "./obj-enemy-health-bars";
 import { ObjHud, objHud } from "./obj-hud";
 import { ObjSystemMessage, objSystemMessage } from "./obj-system-message";
+import { objUiInventory } from "./obj-ui-inventory";
 
 export function objOverlay() {
     const hudObj = objHud();
@@ -13,7 +14,7 @@ export function objOverlay() {
     const solidObj = objSolidOverlay();
     const systemMessageObj = objSystemMessage();
 
-    return container(hudObj, enemyHealthBarsObj, messages, solidObj, systemMessageObj, dev)
+    return container(hudObj, enemyHealthBarsObj, messages, solidObj, systemMessageObj, dev, objUiInventory())
         .merge({
             hud: hudObj as Omit<ObjHud, keyof Container>,
             messages,

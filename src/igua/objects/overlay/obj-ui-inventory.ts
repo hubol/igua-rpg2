@@ -1,16 +1,30 @@
 import { Graphics } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { SubjectiveColorAnalyzer } from "../../../lib/color/subjective-color-analyzer";
+import { Coro } from "../../../lib/game-engine/routines/coro";
+import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { PseudoRng } from "../../../lib/math/rng";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { EquipmentInternalName, getDataEquipment } from "../../data/data-equipment";
+import { Cutscene, Input } from "../../globals";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { StepOrder } from "../step-order";
 
 export function objUiInventory() {
-    return objUiEquipmentLoadout();
+    return container().coro(function* (self) {
+        while (true) {
+            yield () => Input.isUp("InventoryMenuToggle");
+            yield () => Input.justWentDown("InventoryMenuToggle") && !Cutscene.isPlaying;
+            const obj = objUiEquipmentLoadout().show(self);
+            yield* Coro.race([
+                Coro.chain([() => Input.isUp("InventoryMenuToggle"), () => Input.justWentDown("InventoryMenuToggle")]),
+                () => Cutscene.isPlaying,
+            ]);
+            obj.destroy();
+        }
+    });
 }
 
 function objUiEquipmentLoadout() {
