@@ -81,6 +81,7 @@ function objEquipmentRepresentation(internalName: EquipmentInternalName) {
 
 const prng = new PseudoRng();
 const printedNameSanitizeRegexp = /((Ring)|a|e|i|o|u)*/g;
+const whiteSpaceRegexp = /\s+/g;
 
 // TODO placeholder until I draw sprites... I guess
 function getPlaceholderProperties(internalName: EquipmentInternalName) {
@@ -97,6 +98,9 @@ function getPlaceholderProperties(internalName: EquipmentInternalName) {
     return {
         backgroundTint,
         textTint,
-        name: getDataEquipment(internalName).name.replaceAll(printedNameSanitizeRegexp, ""),
+        name: getDataEquipment(internalName).name
+            .replaceAll(printedNameSanitizeRegexp, "")
+            .replaceAll(whiteSpaceRegexp, " ")
+            .trim(),
     };
 }
