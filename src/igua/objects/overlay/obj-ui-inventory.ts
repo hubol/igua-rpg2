@@ -1,5 +1,6 @@
-import { Graphics } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
+import { Tx } from "../../../assets/textures";
 import { SubjectiveColorAnalyzer } from "../../../lib/color/subjective-color-analyzer";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
@@ -9,7 +10,9 @@ import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { EquipmentInternalName, getDataEquipment } from "../../data/data-equipment";
 import { Cutscene, Input } from "../../globals";
+import { mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
 import { RpgProgress } from "../../rpg/rpg-progress";
+import { objUiPage } from "../../ui/framework/obj-ui-page";
 import { StepOrder } from "../step-order";
 
 export function objUiInventory() {
@@ -28,7 +31,17 @@ export function objUiInventory() {
 }
 
 function objUiEquipmentLoadout() {
-    return container(...range(4).map(i => objUiEquipment(() => RpgProgress.character.equipment[i]).at(i * 36, 0)));
+    const uiEquipmentObjs = range(4).map(i =>
+        objUiEquipment(() => RpgProgress.character.equipment[i]).at(i * 36, 0).mixin(mxnUiPageElement)
+    );
+    const equipmentsObj = container(
+        Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80),
+        ...uiEquipmentObjs,
+    );
+
+    // const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0 });
+
+    return container(equipmentsObj.at(180, 100));
 }
 
 function objUiEquipment(provider: () => EquipmentInternalName | null) {
