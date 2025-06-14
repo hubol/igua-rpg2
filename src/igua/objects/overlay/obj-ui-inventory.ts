@@ -12,7 +12,7 @@ import { EquipmentInternalName, getDataEquipment } from "../../data/data-equipme
 import { Cutscene, Input } from "../../globals";
 import { mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
 import { RpgProgress } from "../../rpg/rpg-progress";
-import { objUiPage } from "../../ui/framework/obj-ui-page";
+import { objUiPage, objUiPageRouter } from "../../ui/framework/obj-ui-page";
 import { StepOrder } from "../step-order";
 
 export function objUiInventory() {
@@ -20,7 +20,7 @@ export function objUiInventory() {
         while (true) {
             yield () => Input.isUp("InventoryMenuToggle");
             yield () => Input.justWentDown("InventoryMenuToggle") && !Cutscene.isPlaying;
-            const obj = objUiEquipmentLoadout().show(self);
+            const obj = objUiInventoryImpl().show(self);
             yield* Coro.race([
                 Coro.chain([() => Input.isUp("InventoryMenuToggle"), () => Input.justWentDown("InventoryMenuToggle")]),
                 () => Cutscene.isPlaying,
@@ -30,19 +30,22 @@ export function objUiInventory() {
     });
 }
 
-function objUiEquipmentLoadout() {
+function objUiInventoryImpl() {
+    const routerObj = objUiPageRouter();
+    routerObj.push(objUiEquipmentLoadoutPage());
+
+    return routerObj;
+}
+
+function objUiEquipmentLoadoutPage() {
     const uiEquipmentObjs = range(4).map(i =>
         objUiEquipment(() => RpgProgress.character.equipment[i]).at(i * 36, 0).mixin(mxnUiPageElement)
     );
 
-    const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0, startTicking: true });
+    const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0 }).at(180, 100);
+    Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80).show(pageObj);
 
-    const equipmentsObj = container(
-        Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80),
-        pageObj,
-    );
-
-    return container(equipmentsObj.at(180, 100));
+    return pageObj;
 }
 
 function objUiEquipment(provider: () => EquipmentInternalName | null) {
