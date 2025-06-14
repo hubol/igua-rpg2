@@ -39,7 +39,7 @@ function objUiInventoryImpl() {
 
 function objUiEquipmentLoadoutPage() {
     const uiEquipmentObjs = range(4).map(i =>
-        objUiEquipment(() => RpgProgress.character.equipment[i]).at(i * 36, 0).mixin(mxnUiPageElement)
+        objUiEquipment(() => RpgProgress.character.equipment[i], "show_empty").at(i * 36, 0).mixin(mxnUiPageElement)
     );
 
     const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0 }).at(180, 100);
@@ -48,8 +48,8 @@ function objUiEquipmentLoadoutPage() {
     return pageObj;
 }
 
-function objUiEquipment(provider: () => EquipmentInternalName | null) {
-    let appliedName: EquipmentInternalName | null = null;
+function objUiEquipment(provider: () => EquipmentInternalName | null, variant: "show_empty") {
+    let appliedName: EquipmentInternalName | null | undefined = undefined;
 
     const renderObj = container();
     const obj = container(renderObj).step(maybeApply, StepOrder.BeforeCamera);
@@ -64,6 +64,9 @@ function objUiEquipment(provider: () => EquipmentInternalName | null) {
 
         if (nameToApply !== null) {
             objEquipmentRepresentation(nameToApply).show(renderObj);
+        }
+        else if (variant === "show_empty") {
+            Sprite.from(Tx.Ui.Empty).show(renderObj);
         }
 
         appliedName = nameToApply;
