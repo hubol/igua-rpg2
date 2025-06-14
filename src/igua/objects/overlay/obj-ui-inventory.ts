@@ -34,12 +34,13 @@ function objUiEquipmentLoadout() {
     const uiEquipmentObjs = range(4).map(i =>
         objUiEquipment(() => RpgProgress.character.equipment[i]).at(i * 36, 0).mixin(mxnUiPageElement)
     );
+
+    const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0, startTicking: true });
+
     const equipmentsObj = container(
         Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80),
-        ...uiEquipmentObjs,
+        pageObj,
     );
-
-    // const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0 });
 
     return container(equipmentsObj.at(180, 100));
 }
@@ -47,7 +48,8 @@ function objUiEquipmentLoadout() {
 function objUiEquipment(provider: () => EquipmentInternalName | null) {
     let appliedName: EquipmentInternalName | null = null;
 
-    const obj = container().step(maybeApply, StepOrder.BeforeCamera);
+    const renderObj = container();
+    const obj = container(renderObj).step(maybeApply, StepOrder.BeforeCamera);
 
     function maybeApply() {
         const nameToApply = provider();
@@ -55,14 +57,16 @@ function objUiEquipment(provider: () => EquipmentInternalName | null) {
             return;
         }
 
-        obj.removeAllChildren();
+        renderObj.removeAllChildren();
 
         if (nameToApply !== null) {
-            objEquipmentRepresentation(nameToApply).show(obj);
+            objEquipmentRepresentation(nameToApply).show(renderObj);
         }
 
         appliedName = nameToApply;
     }
+
+    maybeApply();
 
     return obj;
 }
