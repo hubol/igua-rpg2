@@ -27,3 +27,5 @@ export function mxnUiPageElement(obj: Container) {
         },
     });
 }
+
+export type MxnUiPageElement = ReturnType<typeof mxnUiPageElement>;

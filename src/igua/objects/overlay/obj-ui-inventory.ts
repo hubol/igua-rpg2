@@ -10,6 +10,7 @@ import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { EquipmentInternalName, getDataEquipment } from "../../data/data-equipment";
 import { Cutscene, Input } from "../../globals";
+import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
 import { mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { objUiPage, objUiPageRouter } from "../../ui/framework/obj-ui-page";
@@ -40,6 +41,7 @@ function objUiInventoryImpl() {
 function objUiEquipmentLoadoutPage() {
     const uiEquipmentObjs = range(4).map(i =>
         objUiEquipment(() => RpgProgress.character.equipment[i], "show_empty").at(i * 36, 0).mixin(mxnUiPageElement)
+            .mixin(mxnUiPageButton, { onPress: () => {} })
     );
 
     const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0 }).at(180, 100);
