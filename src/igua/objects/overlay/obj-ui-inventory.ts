@@ -3,17 +3,16 @@ import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { SubjectiveColorAnalyzer } from "../../../lib/color/subjective-color-analyzer";
 import { Coro } from "../../../lib/game-engine/routines/coro";
-import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { PseudoRng } from "../../../lib/math/rng";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
-import { EquipmentInternalName, getDataEquipment } from "../../data/data-equipment";
+import { DataEquipment, EquipmentInternalName, getDataEquipment } from "../../data/data-equipment";
 import { Cutscene, Input } from "../../globals";
 import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
 import { mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
 import { RpgProgress } from "../../rpg/rpg-progress";
-import { objUiPage, objUiPageRouter } from "../../ui/framework/obj-ui-page";
+import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
 import { StepOrder } from "../step-order";
 
 export function objUiInventory() {
@@ -33,21 +32,37 @@ export function objUiInventory() {
 
 function objUiInventoryImpl() {
     const routerObj = objUiPageRouter();
-    routerObj.push(objUiEquipmentLoadoutPage());
+    routerObj.push(objUiEquipmentLoadoutPage(routerObj));
 
     return routerObj;
 }
 
-function objUiEquipmentLoadoutPage() {
+function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     const uiEquipmentObjs = range(4).map(i =>
         objUiEquipment(() => RpgProgress.character.equipment[i], "show_empty").at(i * 36, 0).mixin(mxnUiPageElement)
-            .mixin(mxnUiPageButton, { onPress: () => {} })
+            .mixin(mxnUiPageButton, {
+                onPress: () => {
+                    routerObj.push(objUiEquipmentChoosePage((name) => {
+                        RpgProgress.character.equipment[i] = name;
+                        routerObj.pop();
+                    }));
+                },
+            })
     );
 
     const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0 }).at(180, 100);
     Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80).show(pageObj);
 
     return pageObj;
+}
+
+function objUiEquipmentChoosePage(setEquipment: (name: EquipmentInternalName) => void) {
+    const uiEquipmentObjs = (<EquipmentInternalName[]> Object.keys(DataEquipment)).map((name, i) =>
+        objUiEquipment(() => name, "show_empty").at((i % 8) * 36, Math.floor(i / 8)).mixin(mxnUiPageElement)
+            .mixin(mxnUiPageButton, { onPress: () => setEquipment(name) })
+    );
+
+    return objUiPage(uiEquipmentObjs, { selectionIndex: 0 }).at(108, 100);
 }
 
 function objUiEquipment(provider: () => EquipmentInternalName | null, variant: "show_empty") {
