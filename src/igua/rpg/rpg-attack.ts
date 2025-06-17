@@ -23,22 +23,26 @@ export namespace RpgAttack {
     }
 
     export function create(model: DeepPartial<Model>): Model {
-        return {
-            physical: model.physical ?? 0,
-            emotional: model.emotional ?? 0,
-            conditions: merge({
-                helium: model.conditions?.helium ?? 0,
-                poison: model.conditions?.poison ?? 0,
-                wetness: {
-                    value: model.conditions?.wetness?.value ?? 0,
-                    tint: model.conditions?.wetness?.tint ?? 0xffffff,
+        return merge(
+            {
+                physical: model.physical ?? 0,
+                emotional: model.emotional ?? 0,
+                versus: model.versus ?? RpgFaction.Player,
+                quirks: {
+                    isPlayerClawMeleeAttack: model.quirks?.isPlayerClawMeleeAttack ?? false,
+                    isPlayerMeleeAttack: model.quirks?.isPlayerMeleeAttack ?? false,
                 },
-            }, model.conditions ?? {}),
-            versus: model.versus ?? RpgFaction.Player,
-            quirks: {
-                isPlayerClawMeleeAttack: model.quirks?.isPlayerClawMeleeAttack ?? false,
-                isPlayerMeleeAttack: model.quirks?.isPlayerMeleeAttack ?? false,
             },
-        };
+            merge(model, {
+                conditions: merge({
+                    helium: model.conditions?.helium ?? 0,
+                    poison: model.conditions?.poison ?? 0,
+                    wetness: {
+                        value: model.conditions?.wetness?.value ?? 0,
+                        tint: model.conditions?.wetness?.tint ?? 0xffffff,
+                    },
+                }, model.conditions ?? {}),
+            }),
+        );
     }
 }
