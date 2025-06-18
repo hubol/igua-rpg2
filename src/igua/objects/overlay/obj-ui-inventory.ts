@@ -235,6 +235,9 @@ function objUiEquipmentEffect(
                 return isFocused;
             },
             set isFocused(value) {
+                if (isFocused === value) {
+                    return;
+                }
                 isFocused = value;
                 updateTint();
             },
