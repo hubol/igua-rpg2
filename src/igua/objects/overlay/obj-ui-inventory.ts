@@ -58,7 +58,10 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 
     const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0 }).at(180, 100);
     Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80).show(pageObj);
-    objUiEquipmentEffects(RpgProgress.character.equipment).at(74, 46).show(pageObj);
+    objUiEquipmentEffects(
+        RpgProgress.character.equipment,
+        () => RpgProgress.character.equipment[pageObj.selectionIndex],
+    ).at(74, 46).show(pageObj);
 
     return pageObj;
 }
@@ -139,7 +142,10 @@ function getPlaceholderProperties(internalName: EquipmentInternalName) {
     };
 }
 
-function objUiEquipmentEffects(loadout: RpgEquipmentLoadout.Model) {
+function objUiEquipmentEffects(
+    loadout: RpgEquipmentLoadout.Model,
+    getSelectedEquipmentName: () => RpgEquipmentLoadout.Model[number],
+) {
     const effects = RpgEquipmentEffects.create();
 
     return container()
@@ -148,13 +154,40 @@ function objUiEquipmentEffects(loadout: RpgEquipmentLoadout.Model) {
                 self.removeAllChildren();
                 RpgEquipmentLoadout.getEffects(loadout, effects);
 
+                const uiEquipmentEffectObjs = getEquipmentEffectParameters(effects).map((
+                    [text, delta, sign, getValue],
+                    index,
+                ) => objUiEquipmentEffect(text, delta, sign, getValue).at(0, index * 14));
+
                 self.addChild(
-                    ...getEquipmentEffectParameters(effects).map(([text, delta, sign], index) =>
-                        objUiEquipmentEffect(text, delta, sign).at(0, index * 14)
-                    ),
+                    ...uiEquipmentEffectObjs,
                 );
 
                 self.pivot.x = Math.round(self.width / 2);
+
+                self.addChildAt(
+                    new Graphics().beginFill(0x808080).drawRect(-3, -3, self.width + 6, self.height + 6),
+                    0,
+                );
+
+                const selectedEffects = RpgEquipmentEffects.create();
+
+                container().coro(function* () {
+                    while (true) {
+                        const selectedEquipmentName = getSelectedEquipmentName();
+                        RpgEquipmentLoadout.getEffects(
+                            RpgProgress.character.equipment.map(name =>
+                                name === selectedEquipmentName ? selectedEquipmentName : null
+                            ),
+                            selectedEffects,
+                        );
+                        for (const obj of uiEquipmentEffectObjs) {
+                            obj.isFocused = obj.getValue(selectedEffects) !== 0;
+                        }
+                        yield () => getSelectedEquipmentName() !== selectedEquipmentName;
+                    }
+                }, StepOrder.BeforeCamera)
+                    .show(self);
 
                 const previous = JSON.stringify(loadout);
                 yield () => JSON.stringify(loadout) !== previous;
@@ -162,20 +195,57 @@ function objUiEquipmentEffects(loadout: RpgEquipmentLoadout.Model) {
         }, StepOrder.BeforeCamera);
 }
 
-function objUiEquipmentEffect(text: string, delta: string, sign: Integer) {
-    const tint = sign > 0 ? 0x0000ff : 0xff0000;
+type GetEffectValueFn = (effects: RpgEquipmentEffects.Model) => number;
+
+function getEquipmentEffectTint(sign: Integer, isFocused: boolean) {
+    if (isFocused) {
+        return sign > 0 ? 0xb0b0ff : 0xffb0b0;
+    }
+
+    return sign > 0 ? 0x0000ff : 0xff0000;
+}
+
+function objUiEquipmentEffect(
+    text: string,
+    delta: string,
+    sign: Integer,
+    getValue: GetEffectValueFn,
+) {
     const prefix = sign > 0 ? "+" : "-";
-    const leftTextObj = objText.Medium(text, { tint }).anchored(0, 0.5);
+
+    let isFocused = false;
+    const leftTextObj = objText.Medium(text);
+    const rightTextObj = objText.MediumBoldIrregular(prefix + delta).at(leftTextObj.width + 2, 0);
+
+    function updateTint() {
+        const tint = getEquipmentEffectTint(sign, isFocused);
+        leftTextObj.tint = tint;
+        rightTextObj.tint = tint;
+    }
+
+    updateTint();
+
     return container(
         leftTextObj,
-        objText.MediumBoldIrregular(prefix + delta, { tint }).anchored(0, 0.5).at(leftTextObj.width + 2, 0),
-    );
+        rightTextObj,
+    )
+        .merge({
+            getValue,
+            get isFocused() {
+                return isFocused;
+            },
+            set isFocused(value) {
+                isFocused = value;
+                updateTint();
+            },
+        });
 }
 
 const getEquipmentEffectParameters = (function () {
-    const parameterFactories: Partial<
-        Record<DeepKeyOf.Paths<RpgEquipmentEffects.Model>, (value: number) => Parameters<typeof objUiEquipmentEffect>>
-    > = {
+    type Params = Parameters<typeof objUiEquipmentEffect>;
+    type FactoryResult = [Params[0], Params[1], Params[2]];
+
+    const parameterFactories = {
         "combat.melee.attack.physical": (value) => ["Melee Phys ATK", String(value), Math.sign(value)],
         "combat.melee.conditions.poison": (value) => ["Melee Inflicts Poison", String(value), Math.sign(value)],
         "combat.melee.clawAttack.physical": (value) => ["Claw Phys ATK", String(value), Math.sign(value)],
@@ -183,11 +253,24 @@ const getEquipmentEffectParameters = (function () {
         "loot.tiers.nothingRerollCount": (value) => ["Re-Roll Empty Loot", String(value), Math.sign(value)],
         "loot.valuables.bonus": (value) => ["Valuable Bonus", String(value), Math.sign(value)],
         "motion.jump.bonusAtSpecialSigns": (value) => ["Special Jump", String(value), Math.sign(value)],
-    };
+    } satisfies Partial<
+        Record<DeepKeyOf.Paths<RpgEquipmentEffects.Model>, (value: number) => FactoryResult>
+    >;
+
+    const getValueMap = Object.keys(parameterFactories).reduce((obj, path) => {
+        obj[path] = new Function(
+            "effects",
+            `// Generated by src/igua/objects/overlay/obj-ui-inventory.ts
+// getEquipmentEffectParameters -> getValueMap
+return effects.${path};`,
+        );
+        return obj;
+    }, {} as Record<keyof typeof parameterFactories, (effects: RpgEquipmentEffects.Model) => number>);
 
     const fn = new Function(
         "effects",
         "factories",
+        "getValueMap",
         `// Generated by src/igua/objects/overlay/obj-ui-inventory.ts
 // getEquipmentEffectParameters
 
@@ -195,7 +278,9 @@ const results = [];
 ${
             Object.keys(parameterFactories).map(key =>
                 `if (effects.${key}) {
-    results.push(factories["${key}"](effects.${key}));
+    const array = factories["${key}"](effects.${key});
+    array.push(getValueMap["${key}"]);
+    results.push(array);
 }`
             ).join("\n")
         }
@@ -204,5 +289,5 @@ return results;`,
     );
 
     return (effects: RpgEquipmentEffects.Model): Array<Parameters<typeof objUiEquipmentEffect>> =>
-        fn(effects, parameterFactories);
+        fn(effects, parameterFactories, getValueMap);
 })();
