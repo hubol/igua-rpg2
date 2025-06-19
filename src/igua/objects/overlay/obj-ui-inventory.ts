@@ -16,7 +16,7 @@ import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
 import { StepOrder } from "../step-order";
-import { objUiEquipmentEffects } from "./obj-ui-equipment-effects";
+import { objUiEquipmentEffects, objUiEquipmentEffectsComparedTo } from "./obj-ui-equipment-effects";
 
 export function objUiInventory() {
     return container().coro(function* (self) {
@@ -67,10 +67,10 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 
     const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0 }).at(180, 100);
     Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80).show(pageObj);
-    objUiEquipmentEffects(
-        RpgProgress.character.equipment,
-        () => RpgProgress.character.equipment[pageObj.selectionIndex],
-    ).at(74, 46).show(pageObj);
+    objUiEquipmentEffects(RpgProgress.character.equipment)
+        .step(self => self.controls.focusEffectSource = RpgProgress.character.equipment[pageObj.selectionIndex])
+        .at(74, 46)
+        .show(pageObj);
 
     return pageObj;
 }
@@ -97,12 +97,10 @@ function objUiEquipmentChoosePage(
 
     objUiEquipmentEffects(
         RpgProgress.character.equipment,
-        () => null,
     ).at(60, 46 + 30).show(pageObj);
 
-    objUiEquipmentEffects(
+    objUiEquipmentEffectsComparedTo(
         loadoutPreview,
-        () => null,
         RpgProgress.character.equipment,
     ).at(284 - 60, 46 + 30).show(pageObj);
 

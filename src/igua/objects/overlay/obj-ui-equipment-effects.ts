@@ -1,5 +1,7 @@
 import { Graphics } from "pixi.js";
 import { objText } from "../../../assets/fonts";
+import { Coro } from "../../../lib/game-engine/routines/coro";
+import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
 import { container } from "../../../lib/pixi/container";
 import { DeepKeyOf } from "../../../lib/types/deep-keyof";
 import { RpgEquipmentEffects } from "../../rpg/rpg-equipment-effects";
@@ -9,72 +11,99 @@ import { StepOrder } from "../step-order";
 
 export function objUiEquipmentEffects(
     loadout: RpgEquipmentLoadout.Model,
-    // TODO i think second and third args should be exclusive
-    getSelectedEquipmentName: () => RpgEquipmentLoadout.Model[number],
-    comparisonLoadout: RpgEquipmentLoadout.Model | null = null,
 ) {
+    const controls = {
+        focusEffectSource: null as RpgEquipmentLoadout.Slot,
+    };
     const effects = RpgEquipmentEffects.create();
-    const comparisonEffects = RpgEquipmentEffects.create();
+    const focusedEffects = RpgEquipmentEffects.create();
 
-    return container()
+    return objUiEquipmentEffectsBase()
+        .merge({ controls })
         .coro(function* (self) {
             while (true) {
-                self.removeAllChildren();
                 RpgEquipmentLoadout.getEffects(loadout, effects);
+                const infos = getEffectInformations(effects);
+                const uiEquipmentEffectObjs = self.createUiEquipmentEffectObjs(infos, effects);
 
-                const uiEquipmentEffectObjs = getEffectInformations(effects).map((
-                    info,
-                    index,
-                ) => objUiEquipmentEffect(info, info.getValue(effects)).at(0, index * 14));
-
-                if (uiEquipmentEffectObjs.length) {
-                    self.addChild(
-                        ...uiEquipmentEffectObjs,
+                if (controls.focusEffectSource) {
+                    RpgEquipmentLoadout.getEffects(
+                        RpgProgress.character.equipment.map(name =>
+                            name === controls.focusEffectSource ? controls.focusEffectSource : null
+                        ) as RpgEquipmentLoadout.Model,
+                        focusedEffects,
                     );
-
-                    self.pivot.x = Math.round(self.width / 2);
-
-                    self.addChildAt(
-                        new Graphics().beginFill(0x808080).drawRect(-3, -3, self.width + 6, self.height + 6),
-                        0,
-                    );
-                }
-
-                if (comparisonLoadout) {
-                    RpgEquipmentLoadout.getEffects(comparisonLoadout, comparisonEffects);
-
                     for (const obj of uiEquipmentEffectObjs) {
-                        obj.previous = obj.info.getValue(comparisonEffects);
-                        obj.isFocused = obj.info.getValue(effects) !== obj.previous;
+                        obj.isFocused = obj.info.getValue(focusedEffects) !== 0;
                     }
                 }
-                else {
-                    const selectedEffects = RpgEquipmentEffects.create();
 
-                    container().coro(function* () {
-                        while (true) {
-                            const selectedEquipmentName = getSelectedEquipmentName();
-                            RpgEquipmentLoadout.getEffects(
-                                RpgProgress.character.equipment.map(name =>
-                                    name === selectedEquipmentName ? selectedEquipmentName : null
-                                ) as RpgEquipmentLoadout.Model,
-                                selectedEffects,
-                            );
-                            for (const obj of uiEquipmentEffectObjs) {
-                                obj.isFocused = obj.info.getValue(selectedEffects) !== 0;
-                            }
-                            yield () => getSelectedEquipmentName() !== selectedEquipmentName;
-                        }
-                    }, StepOrder.BeforeCamera)
-                        .show(self);
-                }
-
-                const previous = JSON.stringify(loadout);
-                const previousComparedTo = JSON.stringify(comparisonLoadout);
-                yield () =>
-                    JSON.stringify(loadout) !== previous || JSON.stringify(comparisonLoadout) !== previousComparedTo;
+                yield* Coro.race([
+                    onMutate(controls),
+                    onMutate(loadout),
+                ]);
             }
         }, StepOrder.BeforeCamera);
+}
+
+export function objUiEquipmentEffectsComparedTo(
+    loadout: RpgEquipmentLoadout.Model,
+    previousLoadout: RpgEquipmentLoadout.Model,
+) {
+    const effects = RpgEquipmentEffects.create();
+    const previousEffects = RpgEquipmentEffects.create();
+
+    return objUiEquipmentEffectsBase()
+        .coro(function* (self) {
+            while (true) {
+                RpgEquipmentLoadout.getEffects(loadout, effects);
+                const infos = getEffectInformations(effects);
+                const uiEquipmentEffectObjs = self.createUiEquipmentEffectObjs(infos, effects);
+
+                RpgEquipmentLoadout.getEffects(previousLoadout, previousEffects);
+
+                for (const obj of uiEquipmentEffectObjs) {
+                    obj.previous = obj.info.getValue(previousEffects);
+                    obj.isFocused = obj.info.getValue(effects) !== obj.previous;
+                }
+
+                yield* Coro.race([
+                    onMutate(previousLoadout),
+                    onMutate(loadout),
+                ]);
+            }
+        }, StepOrder.BeforeCamera);
+}
+
+function objUiEquipmentEffectsBase() {
+    const obj = container();
+    function createUiEquipmentEffectObjs(infos: EffectInformation[], effects: RpgEquipmentEffects.Model) {
+        obj.removeAllChildren();
+
+        const uiEquipmentEffectObjs = infos.map((
+            info,
+            index,
+        ) => objUiEquipmentEffect(info, info.getValue(effects)).at(0, index * 14));
+
+        if (!uiEquipmentEffectObjs.length) {
+            return uiEquipmentEffectObjs;
+        }
+
+        obj.addChild(
+            ...uiEquipmentEffectObjs,
+        );
+
+        obj.pivot.x = Math.round(obj.width / 2);
+
+        obj.addChildAt(
+            new Graphics().beginFill(0x808080).drawRect(-3, -3, obj.width + 6, obj.height + 6),
+            0,
+        );
+
+        return uiEquipmentEffectObjs;
+    }
+
+    return obj.merge({ createUiEquipmentEffectObjs });
 }
 
 function getEquipmentEffectTint(
