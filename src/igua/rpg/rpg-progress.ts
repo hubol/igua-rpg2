@@ -3,7 +3,6 @@ import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { Empty } from "../../lib/types/empty";
 import { Null } from "../../lib/types/null";
 import { PropertiesLike } from "../../lib/types/properties-like";
-import { EquipmentInternalName } from "../data/data-equipment";
 import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { RpgEquipmentLoadout } from "./rpg-equipment-loadout";
@@ -45,7 +44,7 @@ export function getInitialRpgProgress() {
                 intelligence: 0,
                 strength: 1,
             },
-            equipment: ["JumpAtSpecialSignsRing", null, null, null] as Array<EquipmentInternalName | null>,
+            equipment: ["JumpAtSpecialSignsRing", null, null, null] as RpgEquipmentLoadout.Model,
             experience: {
                 combat: 0,
                 computer: 0,

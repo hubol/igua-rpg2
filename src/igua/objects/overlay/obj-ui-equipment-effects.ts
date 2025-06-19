@@ -44,7 +44,7 @@ export function objUiEquipmentEffects(
                         RpgEquipmentLoadout.getEffects(
                             RpgProgress.character.equipment.map(name =>
                                 name === selectedEquipmentName ? selectedEquipmentName : null
-                            ),
+                            ) as RpgEquipmentLoadout.Model,
                             selectedEffects,
                         );
                         for (const obj of uiEquipmentEffectObjs) {

@@ -6,7 +6,8 @@ import { RpgEquipmentEffects } from "./rpg-equipment-effects";
 import { RpgProgress } from "./rpg-progress";
 
 export namespace RpgEquipmentLoadout {
-    export type Model = Array<EquipmentInternalName | null>;
+    export type Slot = EquipmentInternalName | null;
+    export type Model = [Slot, Slot, Slot, Slot];
 
     const effectsOrder = Empty<EquipmentInternalName>();
     const effectsBonusMap = new Map<EquipmentInternalName, Integer>();

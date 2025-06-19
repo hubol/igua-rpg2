@@ -45,18 +45,22 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
         objUiEquipment(() => RpgProgress.character.equipment[i], "show_empty").at(i * 36, 0).mixin(mxnUiPageElement)
             .mixin(mxnUiPageButton, {
                 onPress: () => {
-                    routerObj.push(objUiEquipmentChoosePage((name) => {
-                        // TODO applyPlayer does not work for this!
-                        RpgProgress.character.equipment[i] = name;
-                        RpgEquipmentLoadout.invalidatePlayerEffectsCache();
-                        routerObj.pop();
-                    }, (name, target) => {
-                        for (let i = 0; i < RpgProgress.character.equipment.length; i++) {
-                            target[i] = RpgProgress.character.equipment[i];
-                        }
-                        target[i] = name;
-                        return target;
-                    }));
+                    routerObj.push(objUiEquipmentChoosePage(
+                        RpgProgress.character.equipment[i],
+                        (name) => {
+                            // TODO applyPlayer does not work for this!
+                            RpgProgress.character.equipment[i] = name;
+                            RpgEquipmentLoadout.invalidatePlayerEffectsCache();
+                            routerObj.pop();
+                        },
+                        (name, target) => {
+                            for (let i = 0; i < RpgProgress.character.equipment.length; i++) {
+                                target[i] = RpgProgress.character.equipment[i];
+                            }
+                            target[i] = name;
+                            return target;
+                        },
+                    ));
                 },
             })
     );
@@ -72,61 +76,65 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 }
 
 function objUiEquipmentChoosePage(
-    setEquipment: (name: EquipmentInternalName) => void,
-    getLoadoutPreview: (name: EquipmentInternalName, target: RpgEquipmentLoadout.Model) => RpgEquipmentLoadout.Model,
+    currentSlot: RpgEquipmentLoadout.Slot,
+    setSlot: (slot: RpgEquipmentLoadout.Slot) => void,
+    getLoadoutPreview: (slot: RpgEquipmentLoadout.Slot, target: RpgEquipmentLoadout.Model) => RpgEquipmentLoadout.Model,
 ) {
     const loadoutPreview = clone(RpgProgress.character.equipment);
 
-    const uiEquipmentObjs = (<EquipmentInternalName[]> Object.keys(DataEquipment)).map((name, i) =>
-        objUiEquipment(() => name, "show_empty").at((i % 8) * 36, Math.floor(i / 8)).mixin(mxnUiPageElement)
+    const availableSlotValues = <RpgEquipmentLoadout.Slot[]> [...Object.keys(DataEquipment), null];
+    const uiEquipmentObjs = availableSlotValues.map((slot, i) =>
+        objUiEquipment(() => slot, "show_empty").at((i % 8) * 36, Math.floor(i / 8) * 36).mixin(mxnUiPageElement)
             .mixin(mxnUiPageButton, {
-                onPress: () => setEquipment(name),
-                onJustSelected: () => getLoadoutPreview(name, loadoutPreview),
+                onPress: () => setSlot(slot),
+                onJustSelected: () => getLoadoutPreview(slot, loadoutPreview),
             })
     );
 
-    const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0 }).at(108, 100);
+    const pageObj = objUiPage(uiEquipmentObjs, {
+        selectionIndex: availableSlotValues.findIndex(slot => currentSlot === slot),
+    }).at(108, 100);
 
     objUiEquipmentEffects(
         RpgProgress.character.equipment,
         () => null,
-    ).at(60, 46).show(pageObj);
+    ).at(60, 46 + 30).show(pageObj);
 
     objUiEquipmentEffects(
         loadoutPreview,
         () => null,
-    ).at(284 - 60, 46).show(pageObj);
+    ).at(284 - 60, 46 + 30).show(pageObj);
 
     return pageObj;
 }
 
-function objUiEquipment(getEquipmentName: () => EquipmentInternalName | null, variant: "show_empty") {
-    let appliedName: EquipmentInternalName | null | undefined = undefined;
+function objUiEquipment(getSlot: () => RpgEquipmentLoadout.Slot, variant: "show_empty") {
+    let appliedSlot: RpgEquipmentLoadout.Slot | undefined = undefined;
 
     const renderObj = container();
     const obj = container(renderObj).step(maybeApply, StepOrder.BeforeCamera);
 
     function maybeApply() {
-        const nameToApply = getEquipmentName();
-        if (nameToApply === appliedName) {
+        const slotToApply = getSlot();
+        if (slotToApply === appliedSlot) {
             return;
         }
 
         renderObj.removeAllChildren();
 
-        if (nameToApply !== null) {
-            objEquipmentRepresentation(nameToApply).show(renderObj);
+        if (slotToApply !== null) {
+            objEquipmentRepresentation(slotToApply).show(renderObj);
         }
         else if (variant === "show_empty") {
             Sprite.from(Tx.Ui.Empty).show(renderObj);
         }
 
-        appliedName = nameToApply;
+        appliedSlot = slotToApply;
     }
 
     maybeApply();
 
-    return obj.merge({ getEquipmentName });
+    return obj.merge({ getEquipmentName: getSlot });
 }
 
 function objEquipmentRepresentation(internalName: EquipmentInternalName) {
