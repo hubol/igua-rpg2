@@ -91,9 +91,12 @@ function objUiEquipmentChoosePage(
             })
     );
 
+    const selectionIndex = availableSlotValues.findIndex(slot => currentSlot === slot);
     const pageObj = objUiPage(uiEquipmentObjs, {
-        selectionIndex: availableSlotValues.findIndex(slot => currentSlot === slot),
+        selectionIndex,
     }).at(108, 100);
+
+    pageObj.selected?.addChild(Sprite.from(Tx.Ui.CurrentlyEquipped));
 
     objUiEquipmentEffects(
         RpgProgress.character.equipment,
