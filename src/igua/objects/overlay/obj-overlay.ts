@@ -4,7 +4,7 @@ import { ObjSolidOverlay, objSolidOverlay } from "../../core/scene/obj-solid-ove
 import { ObjEnemyHealthBars, objEnemyHealthBars } from "./obj-enemy-health-bars";
 import { ObjHud, objHud } from "./obj-hud";
 import { ObjSystemMessage, objSystemMessage } from "./obj-system-message";
-import { objUiInventory } from "./obj-ui-inventory";
+import { ObjUiInventory, objUiInventory } from "./obj-ui-inventory";
 
 export function objOverlay() {
     const hudObj = objHud();
@@ -13,8 +13,9 @@ export function objOverlay() {
     const dev = container().named("Dev");
     const solidObj = objSolidOverlay();
     const systemMessageObj = objSystemMessage();
+    const inventoryObj = objUiInventory();
 
-    return container(hudObj, enemyHealthBarsObj, messages, solidObj, systemMessageObj, dev, objUiInventory())
+    return container(hudObj, enemyHealthBarsObj, messages, solidObj, systemMessageObj, dev, inventoryObj)
         .merge({
             hud: hudObj as Omit<ObjHud, keyof Container>,
             messages,
@@ -22,6 +23,7 @@ export function objOverlay() {
             solid: solidObj as Pick<ObjSolidOverlay, "fadeIn" | "fadeOut" | "tint" | "blendMode">,
             enemyHealthBars: enemyHealthBarsObj as Pick<ObjEnemyHealthBars, "getRpgStatusEffects">,
             systemMessage: systemMessageObj as Pick<ObjSystemMessage, "setMessage">,
+            inventory: inventoryObj as ObjUiInventory,
         });
 }
 

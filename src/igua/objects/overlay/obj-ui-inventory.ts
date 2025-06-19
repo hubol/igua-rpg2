@@ -19,7 +19,7 @@ import { StepOrder } from "../step-order";
 import { objUiEquipmentEffects, objUiEquipmentEffectsComparedTo } from "./obj-ui-equipment-effects";
 
 export function objUiInventory() {
-    return container().coro(function* (self) {
+    const obj = container().coro(function* (self) {
         while (true) {
             yield () => Input.isUp("InventoryMenuToggle");
             yield () => Input.justWentDown("InventoryMenuToggle") && !Cutscene.isPlaying;
@@ -31,7 +31,15 @@ export function objUiInventory() {
             obj.destroy();
         }
     });
+
+    return obj.merge({
+        get isOpen() {
+            return Boolean(obj.children.length);
+        },
+    });
 }
+
+export type ObjUiInventory = Pick<ReturnType<typeof objUiInventory>, "isOpen">;
 
 function objUiInventoryImpl() {
     const routerObj = objUiPageRouter();

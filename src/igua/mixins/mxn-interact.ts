@@ -16,7 +16,7 @@ export const CtxInteract = new SceneLocal(() => {
         .step(() => {
             const action: Action = scene.isWorldMap ? "WorldMap_Interact" : "Interact";
 
-            if (ctx.highestScoreInteractObj && playerObj.hasControl && Input.justWentDown(action)) {
+            if (ctx.highestScoreInteractObj && playerObj.canInteract && Input.justWentDown(action)) {
                 ctx.highestScoreInteractObj.interact.onInteract();
             }
         }, -1)

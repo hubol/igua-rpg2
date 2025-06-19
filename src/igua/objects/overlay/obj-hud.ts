@@ -91,7 +91,7 @@ function objInteractIndicator() {
             .pivoted(12, 23)
             .step(
                 self => {
-                    const interactObj = playerObj?.hasControl ? CtxInteract.value.highestScoreInteractObj : null;
+                    const interactObj = playerObj?.canInteract ? CtxInteract.value.highestScoreInteractObj : null;
 
                     if (interactObj !== previousInteractObj) {
                         updatedOffsetY = 4;

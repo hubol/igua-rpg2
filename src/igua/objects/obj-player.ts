@@ -122,6 +122,10 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             }
         })
         .merge({
+            get canInteract() {
+                // TODO Same--I sometimes wonder if this belongs closer to the RPG layer
+                return this.hasControl && !layers.overlay.inventory.isOpen;
+            },
             get hasControl() {
                 // TODO I sometimes wonder if this belongs closer to the RPG layer
                 return !Cutscene.isPlaying;
