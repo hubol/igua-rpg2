@@ -27,16 +27,18 @@ export function objUiEquipmentEffects(
                     index,
                 ) => objUiEquipmentEffect(info, info.getValue(effects)).at(0, index * 14));
 
-                self.addChild(
-                    ...uiEquipmentEffectObjs,
-                );
+                if (uiEquipmentEffectObjs.length) {
+                    self.addChild(
+                        ...uiEquipmentEffectObjs,
+                    );
 
-                self.pivot.x = Math.round(self.width / 2);
+                    self.pivot.x = Math.round(self.width / 2);
 
-                self.addChildAt(
-                    new Graphics().beginFill(0x808080).drawRect(-3, -3, self.width + 6, self.height + 6),
-                    0,
-                );
+                    self.addChildAt(
+                        new Graphics().beginFill(0x808080).drawRect(-3, -3, self.width + 6, self.height + 6),
+                        0,
+                    );
+                }
 
                 if (comparisonLoadout) {
                     RpgEquipmentLoadout.getEffects(comparisonLoadout, comparisonEffects);
