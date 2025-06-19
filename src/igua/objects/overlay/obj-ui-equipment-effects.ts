@@ -1,5 +1,6 @@
 import { Graphics } from "pixi.js";
 import { objText } from "../../../assets/fonts";
+import { Logger } from "../../../lib/game-engine/logger";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
 import { container } from "../../../lib/pixi/container";
@@ -23,7 +24,7 @@ export function objUiEquipmentEffects(
         .coro(function* (self) {
             while (true) {
                 RpgEquipmentLoadout.getEffects(loadout, effects);
-                const infos = getEffectInformations(effects);
+                const infos = getEffectInformations(effects).filter(value => value !== null) as EffectInformation[];
                 const uiEquipmentEffectObjs = self.createUiEquipmentEffectObjs(infos, effects);
 
                 if (controls.focusEffectSource) {
@@ -56,11 +57,16 @@ export function objUiEquipmentEffectsComparedTo(
     return objUiEquipmentEffectsBase()
         .coro(function* (self) {
             while (true) {
+                RpgEquipmentLoadout.getEffects(previousLoadout, previousEffects);
+                const previousInfos = getEffectInformations(previousEffects);
+
                 RpgEquipmentLoadout.getEffects(loadout, effects);
                 const infos = getEffectInformations(effects);
-                const uiEquipmentEffectObjs = self.createUiEquipmentEffectObjs(infos, effects);
 
-                RpgEquipmentLoadout.getEffects(previousLoadout, previousEffects);
+                const uiEquipmentEffectObjs = self.createUiEquipmentEffectObjs(
+                    aggregateEffectInformations(previousInfos, infos),
+                    effects,
+                );
 
                 for (const obj of uiEquipmentEffectObjs) {
                     obj.previous = obj.info.getValue(previousEffects);
@@ -73,6 +79,21 @@ export function objUiEquipmentEffectsComparedTo(
                 ]);
             }
         }, StepOrder.BeforeCamera);
+}
+
+function aggregateEffectInformations(previousInfos: NullishEffectInformation[], infos: NullishEffectInformation[]) {
+    if (previousInfos.length !== infos.length) {
+        Logger.logAssertError(
+            "aggregateEffectInformations",
+            new Error("previousInfos and infos do not have same length"),
+            { previousInfos, infos },
+        );
+    }
+
+    return [
+        ...previousInfos.filter(x => x !== null),
+        ...infos.filter((info, index) => info && !previousInfos[index]),
+    ] as EffectInformation[];
 }
 
 function objUiEquipmentEffectsBase() {
@@ -136,8 +157,11 @@ function objUiEquipmentEffect(
 
     const delta = info.units === "integer" ? String(value) : (value + "%");
 
-    const leftTextObj = objText.Medium(info.name);
-    const rightTextObj = objText.MediumBoldIrregular(prefix + delta).at(leftTextObj.width + 2, 0);
+    const leftText = value === 0 ? "-" : info.name;
+    const rightText = value === 0 ? "" : (prefix + delta);
+
+    const leftTextObj = objText.Medium(leftText);
+    const rightTextObj = objText.MediumBoldIrregular(rightText).at(leftTextObj.width + 2, 0);
 
     return container(
         leftTextObj,
@@ -155,7 +179,8 @@ function objUiEquipmentEffect(
         }, StepOrder.BeforeCamera);
 }
 
-type EffectInformation = ReturnType<typeof getEffectInformations>[number];
+type NullishEffectInformation = ReturnType<typeof getEffectInformations>[number];
+type EffectInformation = NonNullable<NullishEffectInformation>;
 
 const getEffectInformations = (function () {
     function eff(
@@ -197,9 +222,7 @@ const getEffectInformations = (function () {
 const results = [];
 ${
             Object.keys(effectInformations).map(key =>
-                `if (effects.${key} !== 0) {
-    results.push(effectInformations["${key}"]);
-}`
+                `results.push(effects.${key} === 0 ? null : effectInformations["${key}"]);`
             ).join("\n")
         }
 
@@ -208,5 +231,5 @@ return results;`,
 
     type Eff = Readonly<ReturnType<typeof eff>[string]>;
 
-    return (effects: RpgEquipmentEffects.Model): Array<Eff> => fn(effects, effectInformations);
+    return (effects: RpgEquipmentEffects.Model): Array<Eff | null> => fn(effects, effectInformations);
 })();
