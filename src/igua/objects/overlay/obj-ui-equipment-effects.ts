@@ -1,6 +1,5 @@
 import { Graphics } from "pixi.js";
 import { objText } from "../../../assets/fonts";
-import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { DeepKeyOf } from "../../../lib/types/deep-keyof";
 import { RpgEquipmentEffects } from "../../rpg/rpg-equipment-effects";
@@ -10,9 +9,12 @@ import { StepOrder } from "../step-order";
 
 export function objUiEquipmentEffects(
     loadout: RpgEquipmentLoadout.Model,
+    // TODO i think second and third args should be exclusive
     getSelectedEquipmentName: () => RpgEquipmentLoadout.Model[number],
+    comparisonLoadout: RpgEquipmentLoadout.Model | null = null,
 ) {
     const effects = RpgEquipmentEffects.create();
+    const comparisonEffects = RpgEquipmentEffects.create();
 
     return container()
         .coro(function* (self) {
@@ -36,37 +38,60 @@ export function objUiEquipmentEffects(
                     0,
                 );
 
-                const selectedEffects = RpgEquipmentEffects.create();
+                if (comparisonLoadout) {
+                    RpgEquipmentLoadout.getEffects(comparisonLoadout, comparisonEffects);
 
-                container().coro(function* () {
-                    while (true) {
-                        const selectedEquipmentName = getSelectedEquipmentName();
-                        RpgEquipmentLoadout.getEffects(
-                            RpgProgress.character.equipment.map(name =>
-                                name === selectedEquipmentName ? selectedEquipmentName : null
-                            ) as RpgEquipmentLoadout.Model,
-                            selectedEffects,
-                        );
-                        for (const obj of uiEquipmentEffectObjs) {
-                            obj.isFocused = obj.info.getValue(selectedEffects) !== 0;
-                        }
-                        yield () => getSelectedEquipmentName() !== selectedEquipmentName;
+                    for (const obj of uiEquipmentEffectObjs) {
+                        obj.previous = obj.info.getValue(comparisonEffects);
+                        obj.isFocused = obj.info.getValue(effects) !== obj.previous;
                     }
-                }, StepOrder.BeforeCamera)
-                    .show(self);
+                }
+                else {
+                    const selectedEffects = RpgEquipmentEffects.create();
+
+                    container().coro(function* () {
+                        while (true) {
+                            const selectedEquipmentName = getSelectedEquipmentName();
+                            RpgEquipmentLoadout.getEffects(
+                                RpgProgress.character.equipment.map(name =>
+                                    name === selectedEquipmentName ? selectedEquipmentName : null
+                                ) as RpgEquipmentLoadout.Model,
+                                selectedEffects,
+                            );
+                            for (const obj of uiEquipmentEffectObjs) {
+                                obj.isFocused = obj.info.getValue(selectedEffects) !== 0;
+                            }
+                            yield () => getSelectedEquipmentName() !== selectedEquipmentName;
+                        }
+                    }, StepOrder.BeforeCamera)
+                        .show(self);
+                }
 
                 const previous = JSON.stringify(loadout);
-                yield () => JSON.stringify(loadout) !== previous;
+                const previousComparedTo = JSON.stringify(comparisonLoadout);
+                yield () =>
+                    JSON.stringify(loadout) !== previous || JSON.stringify(comparisonLoadout) !== previousComparedTo;
             }
         }, StepOrder.BeforeCamera);
 }
 
-function getEquipmentEffectTint(sign: Integer, isFocused: boolean) {
-    if (isFocused) {
-        return sign > 0 ? 0xb0b0ff : 0xffb0b0;
+function getEquipmentEffectTint(
+    previous: number,
+    value: number,
+    isFocused: boolean,
+    benefit: EffectInformation["benefit"],
+) {
+    const delta = (value - previous) * (benefit === "beneft_when_positive" ? 1 : -1);
+
+    if (delta === 0) {
+        return 0x202020;
     }
 
-    return sign > 0 ? 0x0000ff : 0xff0000;
+    if (isFocused) {
+        return delta > 0 ? 0x0000ff : 0xff0000;
+    }
+
+    return delta > 0 ? 0x000040 : 0x400000;
 }
 
 function objUiEquipmentEffect(
@@ -90,9 +115,10 @@ function objUiEquipmentEffect(
         .merge({
             info,
             isFocused: false,
+            previous: 0,
         })
         .step(self => {
-            const tint = getEquipmentEffectTint(value, self.isFocused);
+            const tint = getEquipmentEffectTint(self.previous, value, self.isFocused, info.benefit);
             leftTextObj.tint = tint;
             rightTextObj.tint = tint;
         }, StepOrder.BeforeCamera);

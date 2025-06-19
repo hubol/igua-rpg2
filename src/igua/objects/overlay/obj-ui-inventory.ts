@@ -103,6 +103,7 @@ function objUiEquipmentChoosePage(
     objUiEquipmentEffects(
         loadoutPreview,
         () => null,
+        RpgProgress.character.equipment,
     ).at(284 - 60, 46 + 30).show(pageObj);
 
     return pageObj;
