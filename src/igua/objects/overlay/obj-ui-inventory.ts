@@ -3,22 +3,20 @@ import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { SubjectiveColorAnalyzer } from "../../../lib/color/subjective-color-analyzer";
 import { Coro } from "../../../lib/game-engine/routines/coro";
-import { Integer } from "../../../lib/math/number-alias-types";
 import { PseudoRng } from "../../../lib/math/rng";
 import { clone } from "../../../lib/object/clone";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
-import { DeepKeyOf } from "../../../lib/types/deep-keyof";
 import { DataEquipment, EquipmentInternalName, getDataEquipment } from "../../data/data-equipment";
 import { Cutscene, Input } from "../../globals";
 import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
 import { mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
-import { RpgEquipmentEffects } from "../../rpg/rpg-equipment-effects";
 import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
 import { StepOrder } from "../step-order";
+import { objUiEquipmentEffects } from "./obj-ui-equipment-effects";
 
 export function objUiInventory() {
     return container().coro(function* (self) {
@@ -168,156 +166,3 @@ function getPlaceholderProperties(internalName: EquipmentInternalName) {
             .trim(),
     };
 }
-
-function objUiEquipmentEffects(
-    loadout: RpgEquipmentLoadout.Model,
-    getSelectedEquipmentName: () => RpgEquipmentLoadout.Model[number],
-) {
-    const effects = RpgEquipmentEffects.create();
-
-    return container()
-        .coro(function* (self) {
-            while (true) {
-                self.removeAllChildren();
-                RpgEquipmentLoadout.getEffects(loadout, effects);
-
-                const uiEquipmentEffectObjs = getEquipmentEffectParameters(effects).map((
-                    [text, delta, sign, getValue],
-                    index,
-                ) => objUiEquipmentEffect(text, delta, sign, getValue).at(0, index * 14));
-
-                self.addChild(
-                    ...uiEquipmentEffectObjs,
-                );
-
-                self.pivot.x = Math.round(self.width / 2);
-
-                self.addChildAt(
-                    new Graphics().beginFill(0x808080).drawRect(-3, -3, self.width + 6, self.height + 6),
-                    0,
-                );
-
-                const selectedEffects = RpgEquipmentEffects.create();
-
-                container().coro(function* () {
-                    while (true) {
-                        const selectedEquipmentName = getSelectedEquipmentName();
-                        RpgEquipmentLoadout.getEffects(
-                            RpgProgress.character.equipment.map(name =>
-                                name === selectedEquipmentName ? selectedEquipmentName : null
-                            ),
-                            selectedEffects,
-                        );
-                        for (const obj of uiEquipmentEffectObjs) {
-                            obj.isFocused = obj.getValue(selectedEffects) !== 0;
-                        }
-                        yield () => getSelectedEquipmentName() !== selectedEquipmentName;
-                    }
-                }, StepOrder.BeforeCamera)
-                    .show(self);
-
-                const previous = JSON.stringify(loadout);
-                yield () => JSON.stringify(loadout) !== previous;
-            }
-        }, StepOrder.BeforeCamera);
-}
-
-type GetEffectValueFn = (effects: RpgEquipmentEffects.Model) => number;
-
-function getEquipmentEffectTint(sign: Integer, isFocused: boolean) {
-    if (isFocused) {
-        return sign > 0 ? 0xb0b0ff : 0xffb0b0;
-    }
-
-    return sign > 0 ? 0x0000ff : 0xff0000;
-}
-
-function objUiEquipmentEffect(
-    text: string,
-    delta: string,
-    sign: Integer,
-    getValue: GetEffectValueFn,
-) {
-    const prefix = sign > 0 ? "+" : "-";
-
-    let isFocused = false;
-    const leftTextObj = objText.Medium(text);
-    const rightTextObj = objText.MediumBoldIrregular(prefix + delta).at(leftTextObj.width + 2, 0);
-
-    function updateTint() {
-        const tint = getEquipmentEffectTint(sign, isFocused);
-        leftTextObj.tint = tint;
-        rightTextObj.tint = tint;
-    }
-
-    updateTint();
-
-    return container(
-        leftTextObj,
-        rightTextObj,
-    )
-        .merge({
-            getValue,
-            get isFocused() {
-                return isFocused;
-            },
-            set isFocused(value) {
-                if (isFocused === value) {
-                    return;
-                }
-                isFocused = value;
-                updateTint();
-            },
-        });
-}
-
-const getEquipmentEffectParameters = (function () {
-    type Params = Parameters<typeof objUiEquipmentEffect>;
-    type FactoryResult = [Params[0], Params[1], Params[2]];
-
-    const parameterFactories = {
-        "combat.melee.attack.physical": (value) => ["Melee Phys ATK", String(value), Math.sign(value)],
-        "combat.melee.conditions.poison": (value) => ["Melee Inflicts Poison", String(value), Math.sign(value)],
-        "combat.melee.clawAttack.physical": (value) => ["Claw Phys ATK", String(value), Math.sign(value)],
-        "loot.pocket.bonusChance": (value) => ["Pocket Bonus Chance", String(value) + "%", Math.sign(value)],
-        "loot.tiers.nothingRerollCount": (value) => ["Re-Roll Empty Loot", String(value), Math.sign(value)],
-        "loot.valuables.bonus": (value) => ["Valuable Bonus", String(value), Math.sign(value)],
-        "motion.jump.bonusAtSpecialSigns": (value) => ["Special Jump", String(value), Math.sign(value)],
-    } satisfies Partial<
-        Record<DeepKeyOf.Paths<RpgEquipmentEffects.Model>, (value: number) => FactoryResult>
-    >;
-
-    const getValueMap = Object.keys(parameterFactories).reduce((obj, path) => {
-        obj[path] = new Function(
-            "effects",
-            `// Generated by src/igua/objects/overlay/obj-ui-inventory.ts
-// getEquipmentEffectParameters -> getValueMap
-return effects.${path};`,
-        );
-        return obj;
-    }, {} as Record<keyof typeof parameterFactories, (effects: RpgEquipmentEffects.Model) => number>);
-
-    const fn = new Function(
-        "effects",
-        "factories",
-        "getValueMap",
-        `// Generated by src/igua/objects/overlay/obj-ui-inventory.ts
-// getEquipmentEffectParameters
-
-const results = [];
-${
-            Object.keys(parameterFactories).map(key =>
-                `if (effects.${key}) {
-    const array = factories["${key}"](effects.${key});
-    array.push(getValueMap["${key}"]);
-    results.push(array);
-}`
-            ).join("\n")
-        }
-
-return results;`,
-    );
-
-    return (effects: RpgEquipmentEffects.Model): Array<Parameters<typeof objUiEquipmentEffect>> =>
-        fn(effects, parameterFactories, getValueMap);
-})();
