@@ -19,6 +19,7 @@ export class RpgCharacterEquipment {
     private readonly _loadout: RpgEquipmentLoadout.Model = [null, null, null, null];
 
     constructor(private readonly _data: Data) {
+        // TODO remove!!!!!!!
         this.receive("JumpAtSpecialSignsRing");
         this.receive("NailFile");
         this.receive("PatheticCage");
