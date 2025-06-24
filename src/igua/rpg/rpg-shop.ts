@@ -64,14 +64,7 @@ export namespace CatalogItem {
             return 0;
         }
         else if (item.product.kind === "equipment") {
-            // TODO this ain't right!
-            let count = 0;
-            for (const equipment of RpgProgress.character.equipment) {
-                if (equipment === item.product.name) {
-                    count++;
-                }
-            }
-            return count;
+            return RpgProgress.character.equipment.count(item.product.name);
         }
 
         return RpgKeyItems.Methods.count(RpgProgress.character.inventory.keyItems, item.product.name);

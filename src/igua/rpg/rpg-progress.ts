@@ -5,6 +5,7 @@ import { Null } from "../../lib/types/null";
 import { PropertiesLike } from "../../lib/types/properties-like";
 import { NpcPersonaInternalName } from "../data/data-npc-personas";
 import { getDefaultLooks } from "../iguana/get-default-looks";
+import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgEquipmentLoadout } from "./rpg-equipment-loadout";
 import { RpgFlops } from "./rpg-flops";
 import { RpgKeyItems } from "./rpg-key-items";
@@ -16,6 +17,7 @@ export function getInitialRpgProgress() {
     return {
         character: {
             inventory: {
+                equipment: RpgCharacterEquipment.createData(),
                 flops: RpgFlops.create(),
                 valuables: 100,
                 keyItems: RpgKeyItems.create(),
@@ -44,7 +46,6 @@ export function getInitialRpgProgress() {
                 intelligence: 0,
                 strength: 1,
             },
-            equipment: ["JumpAtSpecialSignsRing", null, null, null] as RpgEquipmentLoadout.Model,
             experience: {
                 combat: 0,
                 computer: 0,
@@ -119,10 +120,25 @@ export function getInitialRpgProgress() {
     };
 }
 
-export let RpgProgress = getInitialRpgProgress();
+export type RpgProgressData = ReturnType<typeof getInitialRpgProgress>;
+
+// TODO this is a fuckin mess!
+function getGuardedRpgProgress(data: RpgProgressData) {
+    const { character, ...rest } = data;
+
+    return {
+        character: {
+            ...character,
+            equipment: new RpgCharacterEquipment(character.inventory.equipment),
+        },
+        ...rest,
+    };
+}
+
+export let RpgProgress = getGuardedRpgProgress(getInitialRpgProgress());
 
 export function setRpgProgress(rpgProgress: typeof RpgProgress) {
-    RpgProgress = rpgProgress;
+    RpgProgress = getGuardedRpgProgress(rpgProgress);
     RpgEquipmentLoadout.invalidatePlayerEffectsCache();
 }
 

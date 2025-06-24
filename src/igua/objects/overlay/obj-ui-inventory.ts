@@ -8,10 +8,11 @@ import { clone } from "../../../lib/object/clone";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
-import { DataEquipment, EquipmentInternalName, getDataEquipment } from "../../data/data-equipment";
+import { EquipmentInternalName, getDataEquipment } from "../../data/data-equipment";
 import { Cutscene, Input } from "../../globals";
 import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
 import { mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
+import { RpgCharacterEquipmentData_ListItem } from "../../rpg/rpg-character-equipment";
 import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
@@ -50,22 +51,29 @@ function objUiInventoryImpl() {
 
 function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     const uiEquipmentObjs = range(4).map(i =>
-        objUiEquipment(() => RpgProgress.character.equipment[i], "show_empty").at(i * 36, 0).mixin(mxnUiPageElement)
+        objUiEquipment(() => RpgProgress.character.equipment.loadout[i], "show_empty").at(i * 36, 0).mixin(
+            mxnUiPageElement,
+        )
             .mixin(mxnUiPageButton, {
                 onPress: () => {
                     routerObj.push(objUiEquipmentChoosePage(
-                        RpgProgress.character.equipment[i],
-                        (name) => {
-                            // TODO applyPlayer does not work for this!
-                            RpgProgress.character.equipment[i] = name;
+                        RpgProgress.character.equipment.loadout[i],
+                        (equipment) => {
+                            if (equipment === null) {
+                                RpgProgress.character.equipment.dequip(i);
+                            }
+                            else {
+                                RpgProgress.character.equipment.equip(equipment.id, i);
+                            }
+                            // TODO this can go on the domain object
                             RpgEquipmentLoadout.invalidatePlayerEffectsCache();
                             routerObj.pop();
                         },
-                        (name, target) => {
-                            for (let i = 0; i < RpgProgress.character.equipment.length; i++) {
-                                target[i] = RpgProgress.character.equipment[i];
+                        (equipment, target) => {
+                            for (let i = 0; i < RpgProgress.character.equipment.loadout.length; i++) {
+                                target[i] = RpgProgress.character.equipment.loadout[i];
                             }
-                            target[i] = name;
+                            target[i] = equipment?.name ?? null;
                             return target;
                         },
                     ));
@@ -75,7 +83,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 
     const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0 }).at(180, 100);
     Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80).show(pageObj);
-    objUiEquipmentEffects(RpgProgress.character.equipment)
+    objUiEquipmentEffects(RpgProgress.character.equipment.loadout)
         .step(self => self.controls.focusEffectSource = RpgProgress.character.equipment[pageObj.selectionIndex])
         .at(74, 46)
         .show(pageObj);
@@ -85,14 +93,19 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 
 function objUiEquipmentChoosePage(
     currentSlot: RpgEquipmentLoadout.Slot,
-    setSlot: (slot: RpgEquipmentLoadout.Slot) => void,
-    getLoadoutPreview: (slot: RpgEquipmentLoadout.Slot, target: RpgEquipmentLoadout.Model) => RpgEquipmentLoadout.Model,
+    setSlot: (slot: RpgCharacterEquipmentData_ListItem | null) => void,
+    getLoadoutPreview: (
+        slot: RpgCharacterEquipmentData_ListItem | null,
+        target: RpgEquipmentLoadout.Model,
+    ) => RpgEquipmentLoadout.Model,
 ) {
-    const loadoutPreview = clone(RpgProgress.character.equipment);
+    const loadoutPreview = clone(RpgProgress.character.equipment.loadout) as RpgEquipmentLoadout.Model;
 
-    const availableSlotValues = <RpgEquipmentLoadout.Slot[]> [...Object.keys(DataEquipment), null];
+    const availableSlotValues = [...RpgProgress.character.equipment.list, null];
     const uiEquipmentObjs = availableSlotValues.map((slot, i) =>
-        objUiEquipment(() => slot, "show_empty").at((i % 8) * 36, Math.floor(i / 8) * 36).mixin(mxnUiPageElement)
+        objUiEquipment(() => slot?.name ?? null, "show_empty").at((i % 8) * 36, Math.floor(i / 8) * 36).mixin(
+            mxnUiPageElement,
+        )
             .mixin(mxnUiPageButton, {
                 onPress: () => setSlot(slot),
                 onJustSelected: () => getLoadoutPreview(slot, loadoutPreview),
@@ -107,12 +120,12 @@ function objUiEquipmentChoosePage(
     pageObj.selected?.addChild(Sprite.from(Tx.Ui.CurrentlyEquipped));
 
     objUiEquipmentEffects(
-        RpgProgress.character.equipment,
+        RpgProgress.character.equipment.loadout,
     ).at(60, 46 + 30).show(pageObj);
 
     objUiEquipmentEffectsComparedTo(
         loadoutPreview,
-        RpgProgress.character.equipment,
+        RpgProgress.character.equipment.loadout,
     ).at(284 - 60, 46 + 30).show(pageObj);
 
     return pageObj;

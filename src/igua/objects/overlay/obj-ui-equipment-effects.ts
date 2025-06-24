@@ -11,7 +11,7 @@ import { RpgProgress } from "../../rpg/rpg-progress";
 import { StepOrder } from "../step-order";
 
 export function objUiEquipmentEffects(
-    loadout: RpgEquipmentLoadout.Model,
+    loadout: Readonly<RpgEquipmentLoadout.Model>,
 ) {
     const controls = {
         focusEffectSource: null as RpgEquipmentLoadout.Slot,
@@ -29,7 +29,7 @@ export function objUiEquipmentEffects(
 
                 if (controls.focusEffectSource) {
                     RpgEquipmentLoadout.getEffects(
-                        RpgProgress.character.equipment.map(name =>
+                        RpgProgress.character.equipment.loadout.map(name =>
                             name === controls.focusEffectSource ? controls.focusEffectSource : null
                         ) as RpgEquipmentLoadout.Model,
                         focusedEffects,
@@ -49,7 +49,7 @@ export function objUiEquipmentEffects(
 
 export function objUiEquipmentEffectsComparedTo(
     loadout: RpgEquipmentLoadout.Model,
-    previousLoadout: RpgEquipmentLoadout.Model,
+    previousLoadout: Readonly<RpgEquipmentLoadout.Model>,
 ) {
     const effects = RpgEquipmentEffects.create();
     const previousEffects = RpgEquipmentEffects.create();

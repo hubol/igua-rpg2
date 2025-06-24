@@ -12,7 +12,7 @@ export namespace RpgEquipmentLoadout {
     const effectsOrder = Empty<EquipmentInternalName>();
     const effectsBonusMap = new Map<EquipmentInternalName, Integer>();
 
-    export function getEffects(loadout: Model, dest: RpgEquipmentEffects.Model) {
+    export function getEffects(loadout: Readonly<Model>, dest: RpgEquipmentEffects.Model) {
         RpgEquipmentEffects.clear(dest);
 
         effectsOrder.length = 0;
@@ -53,7 +53,7 @@ export namespace RpgEquipmentLoadout {
         if (isPlayerEffectsCacheValid) {
             return playerEffectsCache;
         }
-        getEffects(RpgProgress.character.equipment, playerEffectsCache);
+        getEffects(RpgProgress.character.equipment.loadout, playerEffectsCache);
         isPlayerEffectsCacheValid = true;
         return playerEffectsCache;
     }
@@ -65,14 +65,14 @@ export namespace RpgEquipmentLoadout {
     // TODO I dislike the name
     export function applyPlayer(name: EquipmentInternalName) {
         // TODO strange implementation, figure out API eventually :-)
-        const freeIndex = RpgProgress.character.equipment.indexOf(null);
-        if (freeIndex >= 0) {
-            RpgProgress.character.equipment[freeIndex] = name;
-        }
-        else {
-            RpgProgress.character.equipment.shift();
-            RpgProgress.character.equipment.push(name);
-        }
+        // const freeIndex = RpgProgress.character.equipment.loadout.indexOf(null);
+        // if (freeIndex >= 0) {
+        //     RpgProgress.character.equipment[freeIndex] = name;
+        // }
+        // else {
+        //     RpgProgress.character.equipment.loadout.shift();
+        //     RpgProgress.character.equipment.push(name);
+        // }
 
         invalidatePlayerEffectsCache();
     }
