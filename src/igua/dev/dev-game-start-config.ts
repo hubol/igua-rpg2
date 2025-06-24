@@ -5,7 +5,7 @@ import { deepUpgradeVerbose } from "../../lib/object/deep-upgrade-verbose";
 import { Diff } from "../../lib/object/diff";
 import { GameStartConfig } from "../launch/start-game";
 import { playerObj } from "../objects/obj-player";
-import { getInitialRpgProgress, RpgProgress } from "../rpg/rpg-progress";
+import { getInitialRpgProgress, RpgProgress, RpgProgressData } from "../rpg/rpg-progress";
 import { DevUrl } from "./dev-url";
 
 function formatUpdatedProgressMessage(rawMessages: Array<{ path: string[]; message: string }>) {
@@ -86,8 +86,8 @@ export const DevGameStartConfig = {
 };
 
 interface TransientGameStartConfig {
-    initialProgress: typeof RpgProgress;
-    progress: typeof RpgProgress;
+    initialProgress: RpgProgressData;
+    progress: RpgProgressData;
     player: {
         position: VectorSimple | null;
     };
