@@ -3,6 +3,7 @@ import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { SubjectiveColorAnalyzer } from "../../../lib/color/subjective-color-analyzer";
 import { Coro } from "../../../lib/game-engine/routines/coro";
+import { Integer } from "../../../lib/math/number-alias-types";
 import { PseudoRng } from "../../../lib/math/rng";
 import { clone } from "../../../lib/object/clone";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
@@ -57,7 +58,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
             .mixin(mxnUiPageButton, {
                 onPress: () => {
                     routerObj.push(objUiEquipmentChoosePage(
-                        RpgProgress.character.equipment.loadout[i],
+                        i,
                         (equipment) => {
                             if (equipment === null) {
                                 RpgProgress.character.equipment.dequip(i);
@@ -92,7 +93,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 }
 
 function objUiEquipmentChoosePage(
-    currentSlot: RpgEquipmentLoadout.Slot,
+    slotIndex: Integer,
     setSlot: (slot: RpgCharacterEquipmentData_ListItem | null) => void,
     getLoadoutPreview: (
         slot: RpgCharacterEquipmentData_ListItem | null,
@@ -112,9 +113,9 @@ function objUiEquipmentChoosePage(
             })
     );
 
-    const selectionIndex = availableSlotValues.findIndex(slot => currentSlot === slot);
+    const selectionIndex = availableSlotValues.findIndex(slot => slotIndex === slot?.equippedSlotIndex);
     const pageObj = objUiPage(uiEquipmentObjs, {
-        selectionIndex,
+        selectionIndex: selectionIndex === -1 ? availableSlotValues.length - 1 : selectionIndex,
     }).at(108, 100);
 
     pageObj.selected?.addChild(Sprite.from(Tx.Ui.CurrentlyEquipped));
