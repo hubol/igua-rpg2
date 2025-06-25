@@ -82,11 +82,11 @@ export class RpgCharacterEquipment {
 
         for (let i = 0; i < list.length; i++) {
             const item = list[i];
-            if (item.equippedSlotIndex === slotIndex) {
-                item.equippedSlotIndex = null;
-            }
-            else if (item.id === id) {
+            if (item.id === id) {
                 item.equippedSlotIndex = slotIndex;
+            }
+            else if (item.equippedSlotIndex === slotIndex) {
+                item.equippedSlotIndex = null;
             }
         }
         this._updateLoadout();
