@@ -83,7 +83,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0 }).at(180, 100);
     Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80).show(pageObj);
     objUiEquipmentEffects(RpgProgress.character.equipment.loadout)
-        .step(self => self.controls.focusEffectSource = RpgProgress.character.equipment[pageObj.selectionIndex])
+        .step(self => self.controls.focusEffectSource = RpgProgress.character.equipment.loadout[pageObj.selectionIndex])
         .at(74, 46)
         .show(pageObj);
 
