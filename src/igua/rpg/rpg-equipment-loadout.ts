@@ -45,19 +45,4 @@ export namespace RpgEquipmentLoadout {
             DataEquipment[name].effects(dest, bonus);
         }
     }
-
-    // TODO I dislike the name
-    export function applyPlayer(name: EquipmentInternalName) {
-        // TODO strange implementation, figure out API eventually :-)
-        // const freeIndex = RpgProgress.character.equipment.loadout.indexOf(null);
-        // if (freeIndex >= 0) {
-        //     RpgProgress.character.equipment[freeIndex] = name;
-        // }
-        // else {
-        //     RpgProgress.character.equipment.loadout.shift();
-        //     RpgProgress.character.equipment.push(name);
-        // }
-
-        // invalidatePlayerEffectsCache();
-    }
 }

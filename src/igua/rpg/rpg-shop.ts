@@ -168,7 +168,7 @@ export class RpgShop {
 function deliverProduct(product: Product) {
     switch (product.kind) {
         case "equipment":
-            RpgEquipmentLoadout.applyPlayer(product.name);
+            RpgProgress.character.equipment.receive(product.name);
             return;
         case "key_item":
             RpgKeyItems.Methods.receive(RpgProgress.character.inventory.keyItems, product.name);
