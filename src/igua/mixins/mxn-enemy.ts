@@ -9,8 +9,8 @@ import { objLootDrop } from "../objects/obj-loot-drop";
 import { playerObj } from "../objects/obj-player";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
-import { RpgEquipmentLoadout } from "../rpg/rpg-equipment-loadout";
 import { RpgLoot } from "../rpg/rpg-loot";
+import { RpgProgress } from "../rpg/rpg-progress";
 import { RpgStatus } from "../rpg/rpg-status";
 import { mxnRpgStatus } from "./mxn-rpg-status";
 
@@ -31,7 +31,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         // Might need to be overrideable too, actually
         // Thinking about the dassmann fight from igua 1
         Sfx.Impact.DefeatEnemy.play();
-        const drop = RpgLoot.Methods.drop(loot, status, RpgEquipmentLoadout.getPlayerEffects().loot);
+        const drop = RpgLoot.Methods.drop(loot, status, RpgProgress.character.equipment.loadoutEffects.loot);
         objLootDrop(drop).at(enemyObj.mxnEnemy.soulAnchorObj.getWorldPosition()).show();
         enemyObj.dispatch("mxnEnemy.died");
         obj.destroy();

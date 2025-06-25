@@ -1,13 +1,9 @@
 import { RpgAttack } from "./rpg-attack";
-import { RpgEquipmentLoadout } from "./rpg-equipment-loadout";
 import { RpgFaction } from "./rpg-faction";
 import { RpgProgress } from "./rpg-progress";
 import { RpgStatus } from "./rpg-status";
 
 export const RpgPlayer = {
-    get equipmentEffects() {
-        return RpgEquipmentLoadout.getPlayerEffects();
-    },
     status: {
         get health() {
             return RpgProgress.character.status.health;
@@ -101,13 +97,13 @@ export const RpgPlayer = {
     meleeAttack: RpgAttack.create({
         conditions: {
             get poison() {
-                return RpgEquipmentLoadout.getPlayerEffects().combat.melee.conditions.poison;
+                return RpgProgress.character.equipment.loadoutEffects.combat.melee.conditions.poison;
             },
         },
         emotional: 0,
         get physical() {
             return 4 + RpgProgress.character.attributes.strength * 3
-                + RpgEquipmentLoadout.getPlayerEffects().combat.melee.attack.physical;
+                + RpgProgress.character.equipment.loadoutEffects.combat.melee.attack.physical;
         },
         versus: RpgFaction.Enemy,
         quirks: {
@@ -117,13 +113,13 @@ export const RpgPlayer = {
     meleeClawAttack: RpgAttack.create({
         conditions: {
             get poison() {
-                return RpgEquipmentLoadout.getPlayerEffects().combat.melee.conditions.poison;
+                return RpgProgress.character.equipment.loadoutEffects.combat.melee.conditions.poison;
             },
         },
         emotional: 0,
         get physical() {
             return 5 + RpgProgress.character.attributes.strength * 5
-                + RpgEquipmentLoadout.getPlayerEffects().combat.melee.clawAttack.physical;
+                + RpgProgress.character.equipment.loadoutEffects.combat.melee.clawAttack.physical;
         },
         versus: RpgFaction.Enemy,
         quirks: {

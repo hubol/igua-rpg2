@@ -46,22 +46,6 @@ export namespace RpgEquipmentLoadout {
         }
     }
 
-    const playerEffectsCache = RpgEquipmentEffects.create();
-    let isPlayerEffectsCacheValid = false;
-
-    export function getPlayerEffects() {
-        if (isPlayerEffectsCacheValid) {
-            return playerEffectsCache;
-        }
-        getEffects(RpgProgress.character.equipment.loadout, playerEffectsCache);
-        isPlayerEffectsCacheValid = true;
-        return playerEffectsCache;
-    }
-
-    export function invalidatePlayerEffectsCache() {
-        isPlayerEffectsCacheValid = false;
-    }
-
     // TODO I dislike the name
     export function applyPlayer(name: EquipmentInternalName) {
         // TODO strange implementation, figure out API eventually :-)
@@ -74,6 +58,6 @@ export namespace RpgEquipmentLoadout {
         //     RpgProgress.character.equipment.push(name);
         // }
 
-        invalidatePlayerEffectsCache();
+        // invalidatePlayerEffectsCache();
     }
 }
