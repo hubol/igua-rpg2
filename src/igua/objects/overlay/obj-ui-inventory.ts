@@ -66,8 +66,6 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
                             else {
                                 RpgProgress.character.equipment.equip(equipment.id, i);
                             }
-                            // TODO this can go on the domain object
-                            RpgEquipmentLoadout.invalidatePlayerEffectsCache();
                             routerObj.pop();
                         },
                         (equipment, target) => {

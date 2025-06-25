@@ -1,6 +1,7 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { Empty } from "../../lib/types/empty";
 import { EquipmentInternalName } from "../data/data-equipment";
+import { RpgEquipmentEffects } from "./rpg-equipment-effects";
 import { RpgEquipmentLoadout } from "./rpg-equipment-loadout";
 
 function createData() {
@@ -17,6 +18,7 @@ export type RpgCharacterEquipmentData_ListItem = Data["list"][number];
 
 export class RpgCharacterEquipment {
     private readonly _loadout: RpgEquipmentLoadout.Model = [null, null, null, null];
+    private readonly _loadoutEffects = RpgEquipmentEffects.create();
 
     constructor(private readonly _data: Data) {
         // TODO remove!!!!!!!
@@ -44,6 +46,8 @@ export class RpgCharacterEquipment {
                 this._loadout[item.equippedSlotIndex] = item.name;
             }
         }
+
+        RpgEquipmentLoadout.getEffects(this._loadout, this._loadoutEffects);
     }
 
     static createData = createData;
@@ -94,6 +98,10 @@ export class RpgCharacterEquipment {
 
     get loadout(): Readonly<RpgEquipmentLoadout.Model> {
         return this._loadout;
+    }
+
+    get loadoutEffects(): Readonly<RpgEquipmentEffects.Model> {
+        return this._loadoutEffects;
     }
 
     receive(name: EquipmentInternalName) {

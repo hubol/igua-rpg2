@@ -197,7 +197,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             if (hasControl && puppet.isOnGround && stepsSinceJumpJustWentDown < 6) {
                 stepsSinceJumpJustWentDown = 100;
 
-                const specialBonus = RpgPlayer.equipmentEffects.motion.jump.bonusAtSpecialSigns;
+                const specialBonus = RpgProgress.character.equipment.loadoutEffects.motion.jump.bonusAtSpecialSigns;
 
                 if (
                     specialBonus > 0
