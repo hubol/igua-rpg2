@@ -9,7 +9,7 @@ import { RpgEquipmentLoadout } from "./rpg-equipment-loadout";
 export interface RpgObtainedEquipment {
     id: Integer;
     name: EquipmentInternalName;
-    equippedSlotIndex: Integer | null;
+    loadoutIndex: Integer | null;
 }
 
 function createData() {
@@ -20,8 +20,6 @@ function createData() {
 }
 
 type Data = ReturnType<typeof createData>;
-
-const debugSet = new Set<Integer>();
 
 export class RpgCharacterEquipment {
     private readonly _loadout: RpgEquipmentLoadout.Model = [null, null, null, null];
@@ -46,27 +44,25 @@ export class RpgCharacterEquipment {
 
         const { list } = this._data;
 
-        debugSet.clear();
         let assertFailed = false;
 
         for (let i = 0; i < list.length; i++) {
             const item = list[i];
-            if (item.equippedSlotIndex !== null) {
-                this._loadout[item.equippedSlotIndex] = item.name;
-                if (debugSet.has(item.equippedSlotIndex)) {
-                    assertFailed = true;
-                }
-                else {
-                    debugSet.add(item.equippedSlotIndex);
-                }
+            if (item.loadoutIndex === null) {
+                continue;
             }
+
+            if (this._loadout[item.loadoutIndex] !== null) {
+                assertFailed = true;
+            }
+            this._loadout[item.loadoutIndex] = item.name;
         }
 
         if (assertFailed) {
             Logger.logAssertError(
                 "RpgCharacterEquipment",
                 new Error(
-                    "The loadout appears invalid. One or more slots appeared more than once as equippedSlotIndex.",
+                    "The loadout appears invalid. One or more slots appeared more than once as loadoutIndex.",
                 ),
                 clone(this._loadout),
             );
@@ -90,16 +86,16 @@ export class RpgCharacterEquipment {
         return count;
     }
 
-    equip(id: Integer | null, slotIndex: Integer) {
+    equip(id: Integer | null, loadoutIndex: Integer) {
         const { list } = this._data;
 
         for (let i = 0; i < list.length; i++) {
             const item = list[i];
             if (item.id === id) {
-                item.equippedSlotIndex = slotIndex;
+                item.loadoutIndex = loadoutIndex;
             }
-            else if (item.equippedSlotIndex === slotIndex) {
-                item.equippedSlotIndex = null;
+            else if (item.loadoutIndex === loadoutIndex) {
+                item.loadoutIndex = null;
             }
         }
         this._updateLoadout();
@@ -118,7 +114,7 @@ export class RpgCharacterEquipment {
     }
 
     receive(name: EquipmentInternalName) {
-        this._data.list.push({ id: this._data.nextId++, name, equippedSlotIndex: null });
+        this._data.list.push({ id: this._data.nextId++, name, loadoutIndex: null });
         this._updateLoadout();
     }
 
