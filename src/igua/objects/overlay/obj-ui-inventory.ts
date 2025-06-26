@@ -59,12 +59,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
                     routerObj.push(objUiEquipmentChoosePage(
                         i,
                         (equipment) => {
-                            if (equipment === null) {
-                                RpgProgress.character.equipment.dequip(i);
-                            }
-                            else {
-                                RpgProgress.character.equipment.equip(equipment.id, i);
-                            }
+                            RpgProgress.character.equipment.equip(equipment?.id ?? null, i);
                             routerObj.pop();
                         },
                     ));
