@@ -49,6 +49,7 @@ export namespace TextureProcessing {
     }
 
     export function getOpaquePixelsBoundaries(texture: Texture) {
+        // @ts-expect-error Don't care
         const bounds: Boundaries = texture[TextureCacheKey_OpaquePixelsBoundaries];
         if (bounds) {
             return bounds;
@@ -82,12 +83,14 @@ export namespace TextureProcessing {
             return;
         }
 
+        // @ts-expect-error Don't care
         return texture[TextureCacheKey_OpaquePixelsBoundaries] = { x1, y1, x2, y2 };
     }
 
     type Maximums = Array<Integer | null>;
 
     export function getOpaquePixelsYMaximums(texture: Texture) {
+        // @ts-expect-error Don't care
         const oldMaximums: Maximums = texture[TextureCacheKey_OpaquePixelsYMaximums];
         if (oldMaximums) {
             return oldMaximums;
@@ -115,6 +118,7 @@ export namespace TextureProcessing {
             maximums.push(result);
         }
 
+        // @ts-expect-error Don't care
         return texture[TextureCacheKey_OpaquePixelsBoundaries] = maximums;
     }
 
@@ -164,6 +168,7 @@ export namespace TextureProcessing {
     }
 
     export function trimFrame(texture: Texture) {
+        // @ts-expect-error Don't care
         if (texture[TextureCacheKey_TrimmedFrame]) {
             throw { message: `Attempting to trim frame of already-trimmed texture`, texture };
         }
@@ -185,6 +190,7 @@ export namespace TextureProcessing {
 
         texture.id = texture.getId() + " (Trimmed)";
 
+        // @ts-expect-error Don't care
         texture[TextureCacheKey_TrimmedFrame] = true;
         return texture;
     }

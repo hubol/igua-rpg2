@@ -62,6 +62,7 @@ Object.defineProperties(DisplayObject.prototype, {
     log: {
         value: function (this: DisplayObject, key?: string) {
             if (!key) {
+                // @ts-expect-error
                 while (window["obj" + logObjIndex]) {
                     logObjIndex += 1;
                 }
@@ -69,6 +70,7 @@ Object.defineProperties(DisplayObject.prototype, {
                 key = "obj" + logObjIndex;
             }
 
+            // @ts-expect-error
             window[key] = this;
             console.log(...Logging.componentArgs(key, this));
 

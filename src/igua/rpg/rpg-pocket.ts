@@ -33,7 +33,7 @@ export namespace RpgPocket {
             let totalItems = 0;
 
             const items = Object.keys(DataPocketItems).reduce((obj, key) => {
-                obj[key] = 0;
+                obj[key as Item] = 0;
                 return obj;
             }, {} as Record<Item, Integer>);
 

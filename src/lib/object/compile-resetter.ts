@@ -12,7 +12,7 @@ return obj;`,
 
 type PathsAndValueLiterals = { path: string[]; valueLiteral: string }[];
 
-function collectPathsAndValueLiterals(obj: object, base: string[], result: PathsAndValueLiterals) {
+function collectPathsAndValueLiterals(obj: any, base: string[], result: PathsAndValueLiterals) {
     for (const key in obj) {
         const path = [...base, key];
         const value = obj[key];

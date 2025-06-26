@@ -116,7 +116,7 @@ class DisplayObjectComponent {
             this.update();
         };
 
-        if (obj["Stack"]) {
+        if ("Stack" in obj) {
             const getStack = this.dom("button", undefined, this._buttonsEl);
             getStack.textContent = "Stack";
             getStack.onclick = () => console.warn(obj["Stack"]);
@@ -197,6 +197,7 @@ constructorName.set(Graphics, "Graphics");
 constructorName.set(BitmapText, "BitmapText");
 
 function getName(obj: DisplayObject) {
+    // @ts-expect-error Don't care
     return (obj.isMask ? "🎭" : "") + (obj.name ?? obj["Name"] ?? "?");
 }
 
@@ -216,7 +217,7 @@ const getTypeInformationString = (obj: DisplayObject) => {
         }
     }
 
-    if (obj["texture"]) {
+    if ("texture" in obj) {
         if (string) {
             string += ", ";
         }
@@ -224,7 +225,7 @@ const getTypeInformationString = (obj: DisplayObject) => {
         string += (obj as Sprite).texture.getId();
     }
 
-    if (obj["text"]) {
+    if ("text" in obj) {
         if (string) {
             string += ", ";
         }

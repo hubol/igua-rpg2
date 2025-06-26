@@ -1,6 +1,7 @@
 import { Environment } from "../../lib/environment";
 import { DebugColors } from "../../lib/game-engine/debug/debug-colors";
 import { merge } from "../../lib/object/merge";
+import { Pojo } from "../../lib/types/pojo";
 import { TypedInput } from "./typed-input";
 
 export namespace ConnectedInput {
@@ -51,7 +52,7 @@ export namespace ConnectedInput {
         const instance = trees[0];
         if (instance) {
             traverse(instance, (input: TypedInput.Any & Binding<any>, path) => {
-                let self = output;
+                let self: Pojo = output;
                 for (let i = 0; i < path.length; i++) {
                     const key = path[i];
                     if (!self[key]) {

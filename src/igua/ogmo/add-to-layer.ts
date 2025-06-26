@@ -13,6 +13,7 @@ export function ogmoAddToLayer(obj: DisplayObject, layerName: string) {
     }
 
     if (!obj.parent) {
+        // @ts-expect-error Don't care
         const zIndex = ZIndex[layerName];
         if (zIndex === undefined) {
             Logger.logMisconfigurationError(

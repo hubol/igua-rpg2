@@ -1,6 +1,6 @@
 import { Logging } from "../../../lib/logging";
 
-const { default: sceneExports } = require(`../../scenes/**/*.ts`);
+const { default: sceneModules } = require(`../../scenes/**/*.ts`);
 
 type SceneLibraryImpl = Record<string, () => unknown>;
 let sceneLibrary: SceneLibraryImpl;
@@ -44,9 +44,9 @@ function ensureSceneLibrary() {
     console.log(...Logging.componentArgs("SceneLibrary", sceneLibrary));
 }
 
-function createSceneLibrary(): SceneLibraryImpl {
-    const sceneLibrary = {};
-    for (const exports of sceneExports) {
+function createSceneLibrary() {
+    const sceneLibrary: SceneLibraryImpl = {};
+    for (const exports of sceneModules) {
         for (const key in exports) {
             const fn = exports[key];
             if (typeof fn === "function") {

@@ -6,7 +6,9 @@ export function devAssignDisplayObjectIdentifiers(constructed: DisplayObject) {
 
     error.stack = stack;
 
+    // @ts-expect-error Don't care
     constructed["Name"] = name;
+    // @ts-expect-error Don't care
     constructed["Stack"] = stack;
 }
 

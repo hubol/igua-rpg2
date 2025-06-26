@@ -31,17 +31,17 @@ export class MappedGamepad<TAction extends string> implements MappedInputModalit
     }
 
     private _createActionDownRecord() {
-        const object = {};
+        const object = {} as Record<TAction, boolean>;
         for (const key of this._keys) {
-            object[key] = false;
+            object[key as TAction] = false;
         }
-        return object as Record<TAction, boolean>;
+        return object;
     }
 
     clear() {
         for (const key of this._keys) {
-            this._actionWasDown[key] = false;
-            this._actionIsDown[key] = false;
+            this._actionWasDown[key as TAction] = false;
+            this._actionIsDown[key as TAction] = false;
         }
     }
 

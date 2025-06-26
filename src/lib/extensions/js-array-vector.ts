@@ -26,7 +26,7 @@ Object.defineProperties(Array.prototype, {
         configurable: true,
     },
     at: {
-        value: function (x, y) {
+        value: function (x: number, y: number) {
             // Was not aware of this existing Array method
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
             if (y === undefined && typeof x === "number") {

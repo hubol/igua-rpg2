@@ -37,7 +37,13 @@ export function objHud() {
     const poisonBuildUpObj = objPoisonBuildUp();
     const poisonLevelObj = objPoisonLevel();
 
-    const statusObjs = [valuablesInfoObj, objPocketInfo(), poisonLevelObj, poisonBuildUpObj, objHeliumBuildUp()];
+    const statusObjs: Array<Container & { advance?: number }> = [
+        valuablesInfoObj,
+        objPocketInfo(),
+        poisonLevelObj,
+        poisonBuildUpObj,
+        objHeliumBuildUp(),
+    ];
 
     const statusObjsContainer = container(...statusObjs);
 

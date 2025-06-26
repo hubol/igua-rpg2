@@ -78,7 +78,7 @@ function installExtensions() {
     require("./lib/extensions/-load-extensions");
 }
 
-function showFatalError(error) {
+function showFatalError(error: any) {
     const message = typeof error === "string" ? error : (error?.message ? error.message : JSON.stringify(error));
     document.body.id = "fatal_error";
     document.body.innerHTML = `<h1>Error in initialization</h1>

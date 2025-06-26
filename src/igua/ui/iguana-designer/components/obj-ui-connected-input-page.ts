@@ -21,6 +21,7 @@ export function createUiConnectedInputPageElements(root: ConnectedInput.Tree<unk
     const els = Empty<ObjUiPageElement & Partial<Pick<ObjUiDesignerInputBase, "noteOnConflict">>>();
 
     for (const key in root) {
+        // @ts-expect-error Don't care
         const input = root[key];
         const inputObj = createInputObj(key, input);
         els.push(inputObj);

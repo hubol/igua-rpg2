@@ -1,9 +1,9 @@
 import { moveTowards, normalize } from "./vector";
 
-function Vector(this: Vector, x: number, y: number) {
+const Vector = function Vector (this: Vector, x: number, y: number) {
     this.x = x;
     this.y = y;
-}
+} as any as { new(x: number, y: number): Vector };
 
 export interface VectorSimple {
     x: number;
@@ -40,12 +40,7 @@ export interface Vector extends VectorSimple {
     readonly isZero: boolean;
 }
 
-type PropertyDefinitionShape = Partial<Record<keyof Vector, PropertyDescriptor & ThisType<any>>>;
-function createPropertyDefinitions<T extends PropertyDefinitionShape>(t: T): T {
-    return t;
-}
-
-const propertyDefinitions = createPropertyDefinitions({
+const propertyDefinitions = {
     vlength: {
         get: function (this: Vector) {
             return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
@@ -142,7 +137,7 @@ const propertyDefinitions = createPropertyDefinitions({
         },
         configurable: true,
     },
-});
+} satisfies Partial<Record<keyof Vector, PropertyDescriptor & ThisType<any>>>;
 
 type VectorProperty = keyof typeof propertyDefinitions;
 
@@ -152,12 +147,13 @@ interface DefineVectorPropertiesArgs {
 
 export function defineVectorProperties(prototype: unknown, { omit = [] }: Partial<DefineVectorPropertiesArgs> = {}) {
     const omitSet = new Set(omit);
-    const myProperties = {};
+    const myProperties: Partial<typeof propertyDefinitions> = {};
     for (const key in propertyDefinitions) {
         if (omitSet.has(key as VectorProperty)) {
             continue;
         }
-        myProperties[key] = propertyDefinitions[key];
+        // @ts-expect-error Don't care
+        myProperties[key as VectorProperty] = propertyDefinitions[key as VectorProperty];
     }
 
     Object.defineProperties(prototype, myProperties);

@@ -9,7 +9,7 @@ interface Equipment_NoInternalName {
 
 const voidEffects: RpgEquipmentEffects.MutatorFn = () => {};
 
-const dataEquipment = {
+export const DataEquipment = {
     JumpAtSpecialSignsRing: {
         name: "Special Jumps Ring",
         description: "Increase jump height at special signs",
@@ -64,18 +64,7 @@ const dataEquipment = {
 } satisfies Record<string, Equipment_NoInternalName>;
 
 // TODO prefix with Data I think?
-export type EquipmentInternalName = keyof typeof dataEquipment;
-
-type Equipment = Equipment_NoInternalName & { internalName: EquipmentInternalName };
-
-export const DataEquipment = Object.entries(dataEquipment).reduce(
-    (obj, [internalName, equipment]) => {
-        // TODO does equipment actually need this?
-        obj[internalName] = equipment;
-        return obj;
-    },
-    {} as Record<EquipmentInternalName, Equipment>,
-);
+export type EquipmentInternalName = keyof typeof DataEquipment;
 
 // TODO i hate global namespace stuff beginning with get
 export function getDataEquipment(name: EquipmentInternalName) {

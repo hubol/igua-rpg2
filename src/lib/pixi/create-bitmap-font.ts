@@ -10,7 +10,7 @@ interface CharacterData {
     xadv: Integer;
 }
 
-type CharactersData = Record<string, CharacterData>;
+export type CharactersData = Record<string, CharacterData>;
 
 interface CreateBitmapFontFactoryArgs<TCharacters extends CharactersData> {
     name: string;

@@ -1,4 +1,4 @@
-import { createBitmapFont } from "../../lib/pixi/create-bitmap-font";
+import { CharactersData, createBitmapFont } from "../../lib/pixi/create-bitmap-font";
 import { Tx } from "../textures";
 
 const characters = {
@@ -38,6 +38,6 @@ export const fntDiggitMono = createBitmapFont(Tx.Font.Diggit, {
     characters: Object.entries(characters).reduce((obj, [code, characterData]) => {
         obj[code] = { ...characterData, xadv: 5 };
         return obj;
-    }, {} as typeof characters),
+    }, {} as CharactersData) as typeof characters,
     kernings: [],
 });

@@ -9,7 +9,7 @@ export namespace UiVerticalLayout {
 
     export function apply(elements: Element[]): ObjUiPageElement[];
     export function apply(...elements: Element[]): ObjUiPageElement[];
-    export function apply(...args) {
+    export function apply(...args: any[]) {
         const els = Empty<ObjUiPageElement>();
 
         const elements: Element[] = Array.isArray(args[0]) ? args[0] : args;

@@ -186,8 +186,8 @@ Mesh.prototype.calculateVertices = function calculateVertices (this: Public<Mesh
         let y = vertices[(i * 2) + 1];
 
         if (this._roundPixels) {
-            x = Math.round(x * sx) / sx;
-            y = Math.round(y * sy) / sy;
+            x = Math.round(x * sx!) / sx!;
+            y = Math.round(y * sy!) / sy!;
         }
 
         vertexData[i * 2] = (a * x) + (c * y) + tx;

@@ -25,7 +25,7 @@ function createIrregularBitmapFont(font: BitmapFont): IrregularBitmapFont {
         chars: Object.entries(font.chars).reduce((object, [key, char]) => {
             object[key] = new IrregularBitmapFontCharacter(char, rng);
             return object;
-        }, {}),
+        }, {} as Record<string, IrregularBitmapFontCharacter>),
     };
 
     irregularBitmapFonts.set(font, irregularBitmapFont);

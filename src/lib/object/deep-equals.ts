@@ -51,7 +51,7 @@ export function deepEquals(value0: unknown, value1: unknown) {
         }
 
         for (const key of keys0) {
-            if (!deepEquals((value0 as object)[key], (value1 as object)[key])) {
+            if (!deepEquals((value0 as any)[key], (value1 as any)[key])) {
                 return false;
             }
         }

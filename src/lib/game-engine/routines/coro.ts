@@ -178,6 +178,7 @@ export namespace Coro {
     }
 
     function isCoroType(value: Coro.Type | Predicate): value is Coro.Type {
+        // @ts-expect-error Don't care
         return value["next"];
     }
 }

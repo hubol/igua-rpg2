@@ -1,5 +1,6 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../../../assets/textures";
+import { unsafeIndex } from "../../../../lib/types/unsafe-index";
 import { objUiButton } from "../../framework/obj-ui-button";
 import { UiPage } from "../../framework/obj-ui-page";
 import { CtxUiIguanaDesigner } from "../obj-ui-iguana-designer-root";
@@ -71,7 +72,7 @@ const icons = {
 };
 
 function getIcon(text: string) {
-    return icons[text.toLowerCase()];
+    return unsafeIndex(icons, text.toLocaleLowerCase());
 }
 
 export function objUiDesignerButton(text: string, onPress: () => unknown, width = 96, height = 30) {

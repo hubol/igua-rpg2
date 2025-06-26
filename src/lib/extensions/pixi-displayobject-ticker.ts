@@ -28,7 +28,7 @@ Object.defineProperties(Container.prototype, {
     // For now, don't support the other options
     // Because I have no idea what they do!
     destroy: {
-        value: function (this: Container, options) {
+        value: function (this: Container, options: unknown) {
             if (options !== undefined && options !== defaultContainerDestroyOptions) {
                 throw new Error(
                     `Specifying options to Container.destroy() is not supported! Got: ${JSON.stringify(options)}`,

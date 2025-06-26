@@ -13,8 +13,8 @@ export namespace Logging {
         ];
     }
 
-    export function componentArgs(name: string, impl: any);
-    export function componentArgs(impl: any);
+    export function componentArgs(name: string, impl: any): Array<any>;
+    export function componentArgs(impl: any): Array<any>;
     export function componentArgs(name_impl: string | any, impl?: any) {
         const name = impl ? name_impl : name_impl.constructor.name;
         if (!impl) {

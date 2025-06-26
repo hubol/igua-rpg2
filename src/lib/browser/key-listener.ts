@@ -108,15 +108,15 @@ export class KeyListener {
     protected onKeyDown(event: KeyboardEvent) {
         // First repeat KeyboardEvent when pressing arrow keys does not have .repeat set to true
         // Can check held bit to discard this event
-        if (event.repeat || this._state[event.code] & 0b001) {
+        if (event.repeat || this._state[event.code as KeyCode]! & 0b001) {
             return;
         }
-        this._state[event.code] |= 0b101;
+        this._state[event.code as KeyCode]! |= 0b101;
     }
 
     protected onKeyUp(event: KeyboardEvent) {
-        this._state[event.code] |= 0b010;
-        this._state[event.code] &= 0b110;
+        this._state[event.code as KeyCode]! |= 0b010;
+        this._state[event.code as KeyCode]! &= 0b110;
     }
 
     start() {
@@ -133,7 +133,7 @@ export class KeyListener {
             return console.error("Attempting to tick() unstarted KeyListener", this);
         }
         for (const key in this._state) {
-            this._state[key] &= 0b001;
+            this._state[key as KeyCode]! &= 0b001;
         }
     }
 }

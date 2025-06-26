@@ -6,5 +6,5 @@ type MusicId = keyof typeof GeneratedMusicData;
 export const Mzk: Record<MusicId, MusicTrack> = <any> {};
 
 for (const key in GeneratedMusicData) {
-    Mzk[key] = GeneratedMusicData[key].ogg;
+    Mzk[key as MusicId] = GeneratedMusicData[key as MusicId].ogg;
 }
