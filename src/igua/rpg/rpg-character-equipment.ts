@@ -1,4 +1,6 @@
+import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
+import { clone } from "../../lib/object/clone";
 import { Empty } from "../../lib/types/empty";
 import { EquipmentInternalName } from "../data/data-equipment";
 import { RpgEquipmentEffects } from "./rpg-equipment-effects";
@@ -15,6 +17,8 @@ type Data = ReturnType<typeof createData>;
 
 type RpgCharacterEquipmentData_List = Data["list"];
 export type RpgCharacterEquipmentData_ListItem = Data["list"][number];
+
+const debugSet = new Set<Integer>();
 
 export class RpgCharacterEquipment {
     private readonly _loadout: RpgEquipmentLoadout.Model = [null, null, null, null];
@@ -39,12 +43,30 @@ export class RpgCharacterEquipment {
 
         const { list } = this._data;
 
+        debugSet.clear();
+        let assertFailed = false;
+
         for (let i = 0; i < list.length; i++) {
-            // TODO debug assert that equippedSlotIndex only appears once!
             const item = list[i];
             if (item.equippedSlotIndex !== null) {
                 this._loadout[item.equippedSlotIndex] = item.name;
+                if (debugSet.has(item.equippedSlotIndex)) {
+                    assertFailed = true;
+                }
+                else {
+                    debugSet.add(item.equippedSlotIndex);
+                }
             }
+        }
+
+        if (assertFailed) {
+            Logger.logAssertError(
+                "RpgCharacterEquipment",
+                new Error(
+                    "The loadout appears invalid. One or more slots appeared more than once as equippedSlotIndex.",
+                ),
+                clone(this._loadout),
+            );
         }
 
         RpgEquipmentLoadout.getEffects(this._loadout, this._loadoutEffects);
