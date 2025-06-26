@@ -12,7 +12,7 @@ import { EquipmentInternalName, getDataEquipment } from "../../data/data-equipme
 import { Cutscene, Input } from "../../globals";
 import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
 import { mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
-import { RpgCharacterEquipment, RpgCharacterEquipmentData_ListItem } from "../../rpg/rpg-character-equipment";
+import { RpgCharacterEquipment, RpgObtainedEquipment } from "../../rpg/rpg-character-equipment";
 import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
@@ -78,25 +78,25 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 }
 
 function objUiEquipmentChoosePage(
-    slotIndex: Integer,
-    setSlot: (slot: RpgCharacterEquipmentData_ListItem | null) => void,
+    loadoutIndex: Integer,
+    onChoose: (equipment: RpgObtainedEquipment | null) => void,
 ) {
     const previewEquipment = new RpgCharacterEquipment.Preview(RpgProgress.character.equipment);
 
-    const availableSlotValues = [...RpgProgress.character.equipment.list, null];
-    const uiEquipmentObjs = availableSlotValues.map((slot, i) =>
-        objUiEquipment(() => slot?.name ?? null, "show_empty").at((i % 8) * 36, Math.floor(i / 8) * 36).mixin(
+    const availableLoadoutItems = [...RpgProgress.character.equipment.list, null];
+    const uiEquipmentObjs = availableLoadoutItems.map((equipment, i) =>
+        objUiEquipment(() => equipment?.name ?? null, "show_empty").at((i % 8) * 36, Math.floor(i / 8) * 36).mixin(
             mxnUiPageElement,
         )
             .mixin(mxnUiPageButton, {
-                onPress: () => setSlot(slot),
-                onJustSelected: () => previewEquipment.equip(slot?.id ?? null, slotIndex),
+                onPress: () => onChoose(equipment),
+                onJustSelected: () => previewEquipment.equip(equipment?.id ?? null, loadoutIndex),
             })
     );
 
-    const selectionIndex = availableSlotValues.findIndex(slot => slotIndex === slot?.equippedSlotIndex);
+    const initialSelectionIndex = availableLoadoutItems.findIndex(item => loadoutIndex === item?.equippedSlotIndex);
     const pageObj = objUiPage(uiEquipmentObjs, {
-        selectionIndex: selectionIndex === -1 ? availableSlotValues.length - 1 : selectionIndex,
+        selectionIndex: initialSelectionIndex === -1 ? availableLoadoutItems.length - 1 : initialSelectionIndex,
     }).at(108, 100);
 
     pageObj.selected?.addChild(Sprite.from(Tx.Ui.CurrentlyEquipped));
@@ -113,33 +113,33 @@ function objUiEquipmentChoosePage(
     return pageObj;
 }
 
-function objUiEquipment(getSlot: () => RpgEquipmentLoadout.Slot, variant: "show_empty") {
-    let appliedSlot: RpgEquipmentLoadout.Slot | undefined = undefined;
+function objUiEquipment(getEquipmentName: () => RpgEquipmentLoadout.Item, variant: "show_empty") {
+    let appliedName: RpgEquipmentLoadout.Item | undefined = undefined;
 
     const renderObj = container();
     const obj = container(renderObj).step(maybeApply, StepOrder.BeforeCamera);
 
     function maybeApply() {
-        const slotToApply = getSlot();
-        if (slotToApply === appliedSlot) {
+        const nameToApply = getEquipmentName();
+        if (nameToApply === appliedName) {
             return;
         }
 
         renderObj.removeAllChildren();
 
-        if (slotToApply !== null) {
-            objEquipmentRepresentation(slotToApply).show(renderObj);
+        if (nameToApply !== null) {
+            objEquipmentRepresentation(nameToApply).show(renderObj);
         }
         else if (variant === "show_empty") {
             Sprite.from(Tx.Ui.Empty).show(renderObj);
         }
 
-        appliedSlot = slotToApply;
+        appliedName = nameToApply;
     }
 
     maybeApply();
 
-    return obj.merge({ getEquipmentName: getSlot });
+    return obj.merge({ getEquipmentName });
 }
 
 function objEquipmentRepresentation(internalName: EquipmentInternalName) {

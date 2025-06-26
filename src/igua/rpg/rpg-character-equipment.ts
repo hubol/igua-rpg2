@@ -6,17 +6,20 @@ import { EquipmentInternalName } from "../data/data-equipment";
 import { RpgEquipmentEffects } from "./rpg-equipment-effects";
 import { RpgEquipmentLoadout } from "./rpg-equipment-loadout";
 
+export interface RpgObtainedEquipment {
+    id: Integer;
+    name: EquipmentInternalName;
+    equippedSlotIndex: Integer | null;
+}
+
 function createData() {
     return {
         nextId: 0 as Integer,
-        list: Empty<{ id: Integer; name: EquipmentInternalName; equippedSlotIndex: Integer | null }>(),
+        list: Empty<RpgObtainedEquipment>(),
     };
 }
 
 type Data = ReturnType<typeof createData>;
-
-type RpgCharacterEquipmentData_List = Data["list"];
-export type RpgCharacterEquipmentData_ListItem = Data["list"][number];
 
 const debugSet = new Set<Integer>();
 
@@ -102,7 +105,7 @@ export class RpgCharacterEquipment {
         this._updateLoadout();
     }
 
-    get list(): Readonly<RpgCharacterEquipmentData_List> {
+    get list(): Readonly<Data["list"]> {
         return this._data.list;
     }
 
