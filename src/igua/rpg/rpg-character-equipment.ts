@@ -87,19 +87,6 @@ export class RpgCharacterEquipment {
         return count;
     }
 
-    // TODO remove
-    dequip(slotIndex: Integer) {
-        const { list } = this._data;
-
-        for (let i = 0; i < list.length; i++) {
-            const item = list[i];
-            if (item.equippedSlotIndex === slotIndex) {
-                item.equippedSlotIndex = null;
-            }
-        }
-        this._updateLoadout();
-    }
-
     equip(id: Integer | null, slotIndex: Integer) {
         const { list } = this._data;
 
