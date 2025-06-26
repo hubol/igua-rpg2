@@ -5,6 +5,7 @@ import { Coro } from "../../../lib/game-engine/routines/coro";
 import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
 import { container } from "../../../lib/pixi/container";
 import { DeepKeyOf } from "../../../lib/types/deep-keyof";
+import { RpgCharacterEquipment } from "../../rpg/rpg-character-equipment";
 import { RpgEquipmentEffects } from "../../rpg/rpg-equipment-effects";
 import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
 import { RpgProgress } from "../../rpg/rpg-progress";
@@ -48,34 +49,28 @@ export function objUiEquipmentEffects(
 }
 
 export function objUiEquipmentEffectsComparedTo(
-    loadout: Readonly<RpgEquipmentLoadout.Model>,
-    previousLoadout: Readonly<RpgEquipmentLoadout.Model>,
+    equipment: RpgCharacterEquipment,
+    previousEquipment: RpgCharacterEquipment,
 ) {
-    const effects = RpgEquipmentEffects.create();
-    const previousEffects = RpgEquipmentEffects.create();
-
     return objUiEquipmentEffectsBase()
         .coro(function* (self) {
             while (true) {
-                RpgEquipmentLoadout.getEffects(previousLoadout, previousEffects);
-                const previousInfos = getEffectInformations(previousEffects);
-
-                RpgEquipmentLoadout.getEffects(loadout, effects);
-                const infos = getEffectInformations(effects);
+                const previousInfos = getEffectInformations(previousEquipment.loadoutEffects);
+                const infos = getEffectInformations(equipment.loadoutEffects);
 
                 const uiEquipmentEffectObjs = self.createUiEquipmentEffectObjs(
                     aggregateEffectInformations(previousInfos, infos),
-                    effects,
+                    equipment.loadoutEffects,
                 );
 
                 for (const obj of uiEquipmentEffectObjs) {
-                    obj.previous = obj.info.getValue(previousEffects);
-                    obj.isFocused = obj.info.getValue(effects) !== obj.previous;
+                    obj.previous = obj.info.getValue(previousEquipment.loadoutEffects);
+                    obj.isFocused = obj.info.getValue(equipment.loadoutEffects) !== obj.previous;
                 }
 
                 yield* Coro.race([
-                    onMutate(previousLoadout),
-                    onMutate(loadout),
+                    onMutate(previousEquipment.loadoutEffects),
+                    onMutate(equipment.loadoutEffects),
                 ]);
             }
         }, StepOrder.BeforeCamera);

@@ -111,8 +111,8 @@ function objUiEquipmentChoosePage(
     ).at(60, 46 + 30).show(pageObj);
 
     objUiEquipmentEffectsComparedTo(
-        previewEquipment.loadout,
-        RpgProgress.character.equipment.loadout,
+        previewEquipment,
+        RpgProgress.character.equipment,
     ).at(284 - 60, 46 + 30).show(pageObj);
 
     return pageObj;
