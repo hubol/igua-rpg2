@@ -3,11 +3,10 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { Empty } from "../../lib/types/empty";
 import { DataEquipment, EquipmentInternalName } from "../data/data-equipment";
 import { RpgEquipmentEffects } from "./rpg-equipment-effects";
-import { RpgProgress } from "./rpg-progress";
 
 export namespace RpgEquipmentLoadout {
-    export type Slot = EquipmentInternalName | null;
-    export type Model = [Slot, Slot, Slot, Slot];
+    export type Item = EquipmentInternalName | null;
+    export type Model = [Item, Item, Item, Item];
 
     const effectsOrder = Empty<EquipmentInternalName>();
     const effectsBonusMap = new Map<EquipmentInternalName, Integer>();

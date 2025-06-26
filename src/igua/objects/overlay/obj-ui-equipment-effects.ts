@@ -15,7 +15,7 @@ export function objUiEquipmentEffects(
     loadout: Readonly<RpgEquipmentLoadout.Model>,
 ) {
     const controls = {
-        focusEffectSource: null as RpgEquipmentLoadout.Slot,
+        focusEffectSource: null as RpgEquipmentLoadout.Item,
     };
     const effects = RpgEquipmentEffects.create();
     const focusedEffects = RpgEquipmentEffects.create();
