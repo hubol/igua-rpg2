@@ -94,7 +94,7 @@ function objUiEquipmentChoosePage(
             })
     );
 
-    const initialSelectionIndex = availableLoadoutItems.findIndex(item => loadoutIndex === item?.equippedSlotIndex);
+    const initialSelectionIndex = availableLoadoutItems.findIndex(item => loadoutIndex === item?.loadoutIndex);
     const pageObj = objUiPage(uiEquipmentObjs, {
         selectionIndex: initialSelectionIndex === -1 ? availableLoadoutItems.length - 1 : initialSelectionIndex,
     }).at(108, 100);
