@@ -24,7 +24,7 @@ export class RpgCharacterEquipment {
     private readonly _loadout: RpgEquipmentLoadout.Model = [null, null, null, null];
     private readonly _loadoutEffects = RpgEquipmentEffects.create();
 
-    constructor(private readonly _data: Data) {
+    constructor(private _data: Data) {
         // TODO remove!!!!!!!
         this.receive("JumpAtSpecialSignsRing");
         this.receive("NailFile");
@@ -87,6 +87,7 @@ export class RpgCharacterEquipment {
         return count;
     }
 
+    // TODO remove
     dequip(slotIndex: Integer) {
         const { list } = this._data;
 
@@ -99,7 +100,7 @@ export class RpgCharacterEquipment {
         this._updateLoadout();
     }
 
-    equip(id: Integer, slotIndex: Integer) {
+    equip(id: Integer | null, slotIndex: Integer) {
         const { list } = this._data;
 
         for (let i = 0; i < list.length; i++) {
@@ -130,4 +131,18 @@ export class RpgCharacterEquipment {
         this._data.list.push({ id: this._data.nextId++, name, equippedSlotIndex: null });
         this._updateLoadout();
     }
+
+    static Preview = class RpgCharacterEquipmentPreview extends RpgCharacterEquipment {
+        private readonly _dataToRestoreBeforeEquip: Data;
+
+        constructor(equipment: RpgCharacterEquipment) {
+            super(clone(equipment._data));
+            this._dataToRestoreBeforeEquip = clone(equipment._data);
+        }
+
+        equip(id: Integer | null, slotIndex: Integer): void {
+            this._data = clone(this._dataToRestoreBeforeEquip);
+            super.equip(id, slotIndex);
+        }
+    };
 }

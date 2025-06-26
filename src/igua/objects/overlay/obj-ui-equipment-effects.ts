@@ -48,7 +48,7 @@ export function objUiEquipmentEffects(
 }
 
 export function objUiEquipmentEffectsComparedTo(
-    loadout: RpgEquipmentLoadout.Model,
+    loadout: Readonly<RpgEquipmentLoadout.Model>,
     previousLoadout: Readonly<RpgEquipmentLoadout.Model>,
 ) {
     const effects = RpgEquipmentEffects.create();
