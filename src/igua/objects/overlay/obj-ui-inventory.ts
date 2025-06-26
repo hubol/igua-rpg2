@@ -5,7 +5,6 @@ import { SubjectiveColorAnalyzer } from "../../../lib/color/subjective-color-ana
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { PseudoRng } from "../../../lib/math/rng";
-import { clone } from "../../../lib/object/clone";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
@@ -13,7 +12,7 @@ import { EquipmentInternalName, getDataEquipment } from "../../data/data-equipme
 import { Cutscene, Input } from "../../globals";
 import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
 import { mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
-import { RpgCharacterEquipmentData_ListItem } from "../../rpg/rpg-character-equipment";
+import { RpgCharacterEquipment, RpgCharacterEquipmentData_ListItem } from "../../rpg/rpg-character-equipment";
 import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
@@ -68,13 +67,6 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
                             }
                             routerObj.pop();
                         },
-                        (equipment, target) => {
-                            for (let i = 0; i < RpgProgress.character.equipment.loadout.length; i++) {
-                                target[i] = RpgProgress.character.equipment.loadout[i];
-                            }
-                            target[i] = equipment?.name ?? null;
-                            return target;
-                        },
                     ));
                 },
             })
@@ -93,12 +85,8 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 function objUiEquipmentChoosePage(
     slotIndex: Integer,
     setSlot: (slot: RpgCharacterEquipmentData_ListItem | null) => void,
-    getLoadoutPreview: (
-        slot: RpgCharacterEquipmentData_ListItem | null,
-        target: RpgEquipmentLoadout.Model,
-    ) => RpgEquipmentLoadout.Model,
 ) {
-    const loadoutPreview = clone(RpgProgress.character.equipment.loadout) as RpgEquipmentLoadout.Model;
+    const previewEquipment = new RpgCharacterEquipment.Preview(RpgProgress.character.equipment);
 
     const availableSlotValues = [...RpgProgress.character.equipment.list, null];
     const uiEquipmentObjs = availableSlotValues.map((slot, i) =>
@@ -107,7 +95,7 @@ function objUiEquipmentChoosePage(
         )
             .mixin(mxnUiPageButton, {
                 onPress: () => setSlot(slot),
-                onJustSelected: () => getLoadoutPreview(slot, loadoutPreview),
+                onJustSelected: () => previewEquipment.equip(slot?.id ?? null, slotIndex),
             })
     );
 
@@ -123,7 +111,7 @@ function objUiEquipmentChoosePage(
     ).at(60, 46 + 30).show(pageObj);
 
     objUiEquipmentEffectsComparedTo(
-        loadoutPreview,
+        previewEquipment.loadout,
         RpgProgress.character.equipment.loadout,
     ).at(284 - 60, 46 + 30).show(pageObj);
 
