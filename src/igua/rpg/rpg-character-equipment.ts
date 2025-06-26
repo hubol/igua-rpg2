@@ -26,13 +26,6 @@ export class RpgCharacterEquipment {
     private readonly _loadoutEffects = RpgEquipmentEffects.create();
 
     constructor(private _data: Data) {
-        // TODO remove!!!!!!!
-        this.receive("JumpAtSpecialSignsRing");
-        this.receive("NailFile");
-        this.receive("PatheticCage");
-        this.receive("PoisonRing");
-        this.receive("RichesRing");
-        this.receive("YellowRichesRing");
         this._updateLoadout();
     }
 
