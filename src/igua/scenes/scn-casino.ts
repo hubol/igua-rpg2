@@ -11,7 +11,7 @@ const sym = {
     cherry: {
         identity: "fixed",
         prizeCondition: "line_from_left_consecutive",
-        countsToPrize: [0, 0, 3, 5],
+        countsToPrize: [0, 0, 3, 6],
     },
     seven: {
         identity: "fixed",
@@ -128,21 +128,33 @@ function objSlotMachineSimulator(price: Integer, rules: RpgSlotMachine.Rules) {
     let spins = 0;
     let won = 0;
 
+    let maxPrize = 0;
+    const prizeCounts = new Map<Integer, Integer>();
+
     return objText.Large().step(self => {
         const timeStart = Date.now();
         while (Date.now() < timeStart + 4) {
             const { totalPrize } = RpgSlotMachine.spin(rules);
             spins += 1;
             won += totalPrize;
+            maxPrize = Math.max(totalPrize, maxPrize);
+            prizeCounts.set(totalPrize, (prizeCounts.get(totalPrize) ?? 0) + totalPrize);
         }
 
         const paid = spins * price;
         const returnToPlayer = won / paid;
 
+        const mostFrequentPrizes = [...prizeCounts.entries()].map(([prize, count]) => ({ prize, count })).sort((a, b) =>
+            b.count - a.count
+        );
+
         self.text = `Spins: ${spins}
 Paid: ${paid}
 Won: ${won}
 Return-to-player: ${returnToPlayer}%
+Maximum prize: ${maxPrize}
+Most frequent prizes:
+${mostFrequentPrizes.slice(0, 5).map(({ count, prize }) => `${prize}: ${count} times`).join("\n")}
 `;
     });
 }
