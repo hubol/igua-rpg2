@@ -11,12 +11,12 @@ const sym = {
     cherry: {
         identity: "fixed",
         prizeCondition: "line_from_left_consecutive",
-        countsToPrize: [0, 0, 3, 6],
+        countsToPrize: [0, 0, 3, 7],
     },
     seven: {
         identity: "fixed",
         prizeCondition: "line_from_left_consecutive",
-        countsToPrize: [0, 0, 6, 12],
+        countsToPrize: [0, 0, 6, 25],
     },
     bar: {
         identity: "fixed",
@@ -43,9 +43,6 @@ const rules: RpgSlotMachine.Rules = {
             sym.seven,
             sym.bar,
             sym.cherry,
-            sym.cherry,
-            sym.peanut,
-            sym.seven,
             sym.bar,
         ],
         [
@@ -72,33 +69,43 @@ const rules: RpgSlotMachine.Rules = {
         ],
         [
             sym.cherry,
+            sym.peanut,
             sym.bar,
             sym.cherry,
+            sym.peanut,
+            sym.peanut,
             sym.cherry,
+            sym.peanut,
             sym.peanut,
             sym.seven,
             sym.cherry,
             sym.seven,
+            sym.peanut,
             sym.bar,
             sym.seven,
             sym.cherry,
             sym.peanut,
+            sym.peanut,
             sym.seven,
             sym.bar,
+            sym.peanut,
             sym.cherry,
             sym.seven,
             sym.bar,
+            sym.peanut,
         ],
         [
             sym.cherry,
             sym.bar,
             sym.cherry,
+            sym.peanut,
             sym.cherry,
             sym.seven,
             sym.bar,
             sym.cherry,
             sym.peanut,
             sym.cherry,
+            sym.peanut,
             sym.seven,
             sym.bar,
             sym.cherry,
@@ -151,7 +158,7 @@ function objSlotMachineSimulator(price: Integer, rules: RpgSlotMachine.Rules) {
         self.text = `Spins: ${spins}
 Paid: ${paid}
 Won: ${won}
-Return-to-player: ${returnToPlayer}%
+Return-to-player: ${returnToPlayer.toFixed(4)}%
 Maximum prize: ${maxPrize}
 Most frequent prizes:
 ${
