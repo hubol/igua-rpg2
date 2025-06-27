@@ -52,7 +52,7 @@ export namespace RpgSlotMachine {
                     symbolCount += 1;
                 }
                 else {
-                    const prize = symbolToMatch?.countsToPrize[symbolCount] ?? null;
+                    const prize = symbolToMatch?.countsToPrize[symbolCount - 1] ?? null;
                     if (prize) {
                         linePrizes.push({ index: i, prize });
                     }

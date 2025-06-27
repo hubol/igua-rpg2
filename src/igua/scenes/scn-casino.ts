@@ -140,7 +140,7 @@ symbolTxs.set(sym.seven, txs[2]);
 symbolTxs.set(sym.bar, txs[3]);
 
 export function scnCasino() {
-    objSlotMachineSimulator(5, rules).show();
+    // objSlotMachineSimulator(5, rules).show();
     objSlot().at(140, 20).show();
 }
 
@@ -149,7 +149,7 @@ function objSlot() {
         while (true) {
             yield () => DevKey.isDown("Space");
             self.removeAllChildren();
-            const { totalPrize, reelOffsets } = RpgSlotMachine.spin(rules);
+            const { totalPrize, reelOffsets, linePrizes } = RpgSlotMachine.spin(rules);
             for (let x = 0; x < 4; x++) {
                 const reel = rules.reels[x];
                 for (let y = 0; y < rules.height; y++) {
@@ -159,6 +159,10 @@ function objSlot() {
             }
 
             objText.Large(`Prize: ${totalPrize}`).at(58 * 1.5, 58 * 3.2).show(self);
+            if (linePrizes.length) {
+                objText.Medium(`${linePrizes.map(({ index, prize }) => `Line ${index + 1} pays ${prize}`).join("\n")}`)
+                    .at(58 * 1.5, 58 * 3.8).show(self);
+            }
 
             yield () => !DevKey.isDown("Space");
         }
