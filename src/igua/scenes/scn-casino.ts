@@ -1,5 +1,9 @@
+import { Sprite, Texture } from "pixi.js";
 import { objText } from "../../assets/fonts";
+import { Tx } from "../../assets/textures";
 import { Integer } from "../../lib/math/number-alias-types";
+import { container } from "../../lib/pixi/container";
+import { DevKey } from "../globals";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 
 const sym = {
@@ -127,8 +131,38 @@ const rules: RpgSlotMachine.Rules = {
     ],
 };
 
+const txs = Tx.Casino.Slots.Test.split({ width: 58 });
+
+const symbolTxs = new Map<RpgSlotMachine.Symbol, Texture>();
+symbolTxs.set(sym.peanut, txs[0]);
+symbolTxs.set(sym.cherry, txs[1]);
+symbolTxs.set(sym.seven, txs[2]);
+symbolTxs.set(sym.bar, txs[3]);
+
 export function scnCasino() {
     objSlotMachineSimulator(5, rules).show();
+    objSlot().at(140, 20).show();
+}
+
+function objSlot() {
+    return container().coro(function* (self) {
+        while (true) {
+            yield () => DevKey.isDown("Space");
+            self.removeAllChildren();
+            const { totalPrize, reelOffsets } = RpgSlotMachine.spin(rules);
+            for (let x = 0; x < 4; x++) {
+                const reel = rules.reels[x];
+                for (let y = 0; y < rules.height; y++) {
+                    const symbol = reel[(y + reelOffsets[x]) % reel.length];
+                    Sprite.from(symbolTxs.get(symbol)!).at(x * 58, y * 58).show(self);
+                }
+            }
+
+            objText.Large(`Prize: ${totalPrize}`).at(58 * 1.5, 58 * 3.2).show(self);
+
+            yield () => !DevKey.isDown("Space");
+        }
+    });
 }
 
 function objSlotMachineSimulator(price: Integer, rules: RpgSlotMachine.Rules) {
