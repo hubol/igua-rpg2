@@ -1,26 +1,27 @@
 import { objText } from "../../assets/fonts";
+import { Integer } from "../../lib/math/number-alias-types";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 
 const sym = {
     peanut: {
         identity: "fixed",
         prizeCondition: "line_from_left_consecutive",
-        countsToPrize: [0, 0, 3, 5],
+        countsToPrize: [0, 0, 1, 3],
     },
     cherry: {
         identity: "fixed",
         prizeCondition: "line_from_left_consecutive",
-        countsToPrize: [0, 0, 5, 8],
+        countsToPrize: [0, 0, 3, 5],
     },
     seven: {
         identity: "fixed",
         prizeCondition: "line_from_left_consecutive",
-        countsToPrize: [0, 0, 11, 25],
+        countsToPrize: [0, 0, 6, 12],
     },
     bar: {
         identity: "fixed",
         prizeCondition: "line_from_left_consecutive",
-        countsToPrize: [0, 0, 6, 10],
+        countsToPrize: [0, 0, 3, 5],
     },
 } satisfies Record<string, RpgSlotMachine.Symbol>;
 
@@ -120,12 +121,14 @@ const rules: RpgSlotMachine.Rules = {
 };
 
 export function scnCasino() {
-    const price = 10;
+    objSlotMachineSimulator(5, rules).show();
+}
 
+function objSlotMachineSimulator(price: Integer, rules: RpgSlotMachine.Rules) {
     let spins = 0;
     let won = 0;
 
-    objText.Large().step(self => {
+    return objText.Large().step(self => {
         const timeStart = Date.now();
         while (Date.now() < timeStart + 4) {
             const { totalPrize } = RpgSlotMachine.spin(rules);
@@ -141,5 +144,5 @@ Paid: ${paid}
 Won: ${won}
 Return-to-player: ${returnToPlayer}%
 `;
-    }).show();
+    });
 }
