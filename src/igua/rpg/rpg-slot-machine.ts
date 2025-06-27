@@ -39,7 +39,7 @@ export namespace RpgSlotMachine {
         for (let i = 0; i < rules.lines.length; i++) {
             const line = rules.lines[i];
             let symbolToMatch = Undefined<Symbol>();
-            let symbolCount = 1;
+            let symbolCount = 0;
             // TODO let wildsCount = 0;
             for (let x = 0; x < line.length; x++) {
                 const y = line[x];
@@ -47,17 +47,19 @@ export namespace RpgSlotMachine {
                 // TODO handle wilds
                 if (x === 0) {
                     symbolToMatch = symbol;
+                    symbolCount += 1;
                 }
                 else if (symbol === symbolToMatch) {
                     symbolCount += 1;
                 }
                 else {
-                    const prize = symbolToMatch?.countsToPrize[symbolCount - 1] ?? null;
-                    if (prize) {
-                        linePrizes.push({ index: i, prize });
-                    }
                     break;
                 }
+            }
+
+            const prize = symbolToMatch?.countsToPrize[symbolCount - 1] ?? null;
+            if (prize) {
+                linePrizes.push({ index: i, prize });
             }
         }
 
