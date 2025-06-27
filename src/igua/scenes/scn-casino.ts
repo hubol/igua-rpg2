@@ -1,9 +1,13 @@
-import { Sprite, Texture } from "pixi.js";
+import { Graphics, Sprite, Texture } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
+import { Coro } from "../../lib/game-engine/routines/coro";
+import { interp } from "../../lib/game-engine/routines/interp";
+import { cyclic } from "../../lib/math/number";
 import { Integer } from "../../lib/math/number-alias-types";
 import { container } from "../../lib/pixi/container";
-import { DevKey } from "../globals";
+import { range } from "../../lib/range";
+import { Input, scene } from "../globals";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 
 const sym = {
@@ -138,33 +142,72 @@ symbolTxs.set(sym.seven, txs[2]);
 symbolTxs.set(sym.bar, txs[3]);
 
 export function scnCasino() {
+    scene.style.backgroundTint = 0x1c1336;
     objSlotMachineSimulator(5, rules).show();
-    objSlot().at(140, 20).show();
+    objSlot().at(160, -30).show();
 }
 
 function objSlot() {
-    return container().coro(function* (self) {
-        while (true) {
-            yield () => DevKey.isDown("Space");
-            self.removeAllChildren();
-            const { totalPrize, reelOffsets, linePrizes } = RpgSlotMachine.spin(rules);
-            for (let x = 0; x < 4; x++) {
-                const reel = rules.reels[x];
-                for (let y = 0; y < rules.height; y++) {
-                    const symbol = reel[(y + reelOffsets[x]) % reel.length];
-                    Sprite.from(symbolTxs.get(symbol)!).at(x * 58, y * 58).show(self);
-                }
-            }
+    const reelObjs = rules.reels.map((reel, i) =>
+        objReel({ reel, height: rules.height, symbolPadding: 1 }).at(i * 65, 0)
+    );
+    const maskObj = new Graphics().beginFill(0xffffff).drawRect(0, 50, 65 * 4, 65 * 3 + 30);
+    const reelObj = container(...reelObjs, maskObj).masked(maskObj);
+    reelObj.scaled(0.8, 0.8);
+    const textObj = container().at(0, 50);
 
-            objText.Large(`Prize: ${totalPrize}`).at(58 * 1.5, 58 * 3.2).show(self);
+    return container(reelObj, textObj).coro(function* () {
+        while (true) {
+            yield () => Input.isDown("Confirm");
+
+            const { totalPrize, reelOffsets, linePrizes } = RpgSlotMachine.spin(rules);
+
+            yield* Coro.all(
+                reelOffsets.map((offset, index) => interp(reelObjs[index].controls, "offset").to(offset).over(500)),
+            );
+
+            textObj.removeAllChildren();
+            objText.Large(`Prize: ${totalPrize}`).at(58 * 1.5, 58 * 3.2).show(textObj);
             if (linePrizes.length) {
                 objText.Medium(`${linePrizes.map(({ index, prize }) => `Line ${index + 1} pays ${prize}`).join("\n")}`)
-                    .at(58 * 1.5, 58 * 3.8).show(self);
+                    .at(58 * 1.5, 58 * 3.8).show(textObj);
             }
 
-            yield () => !DevKey.isDown("Space");
+            yield () => !Input.isDown("Confirm");
         }
     });
+}
+
+interface ObjReelArgs {
+    reel: RpgSlotMachine.Reel;
+    height: Integer;
+    symbolPadding: Integer;
+}
+
+function objReel(args: ObjReelArgs) {
+    const controls = { offset: 0 };
+    const gap = 65;
+
+    const symbolObjs = range(args.height + args.symbolPadding * 2).map((i) => Sprite.from(txs[0]).at(0, i * gap));
+
+    return container(...symbolObjs)
+        .merge({ controls })
+        .step(self => {
+            self.pivot.y = Math.round((controls.offset % 1) * gap);
+
+            const reelIndexOffset = -args.symbolPadding + Math.floor(controls.offset);
+            for (let i = 0; i < symbolObjs.length; i++) {
+                const reelIndex = cyclic(i + reelIndexOffset, 0, args.reel.length);
+                const symbol = args.reel[reelIndex];
+                const tx = symbolTxs.get(symbol);
+                if (tx) {
+                    symbolObjs[i].texture = tx;
+                }
+                else {
+                    symbolObjs[i].visible = false;
+                }
+            }
+        });
 }
 
 function objSlotMachineSimulator(price: Integer, rules: RpgSlotMachine.Rules) {

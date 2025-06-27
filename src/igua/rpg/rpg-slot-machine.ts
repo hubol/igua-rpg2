@@ -4,7 +4,7 @@ import { Rng } from "../../lib/math/rng";
 import { Undefined } from "../../lib/types/undefined";
 
 export namespace RpgSlotMachine {
-    type Reel = Symbol[];
+    export type Reel = Symbol[];
 
     export interface Symbol {
         prizeCondition: "line_from_left_consecutive"; // | "scatter";
