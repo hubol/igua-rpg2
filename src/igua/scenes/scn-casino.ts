@@ -170,16 +170,36 @@ function objSlot() {
                 reelObj.controls.offsetDelta = Rng.float(0.175, 0.3);
             }
 
-            for (let i = 0; i < reelOffsets.length; i++) {
-                const offset = reelOffsets[i];
-                const reelObj = reelObjs[i];
+            function* spinReels() {
+                for (let i = 0; i < reelOffsets.length; i++) {
+                    const offset = reelOffsets[i];
+                    const reelObj = reelObjs[i];
 
-                yield sleep(i === 0 ? 500 : 125);
+                    yield sleep(i === 0 ? 500 : 125);
 
-                yield () => Math.abs(reelObj.controls.offset - offset) < 1;
+                    yield () => Math.abs(reelObj.controls.offset - offset) < 1;
 
-                reelObj.controls.offsetDelta = 0;
-                yield interp(reelObj.controls, "offset").factor(factor.sine).to(offset).over(Rng.int(250, 750));
+                    reelObj.controls.offsetDelta = 0;
+                    yield interp(reelObj.controls, "offset").factor(factor.sine).to(offset).over(Rng.int(250, 750));
+                }
+            }
+
+            let fastSpin = false;
+
+            yield* Coro.race([
+                spinReels(),
+                Coro.chain([() => Input.isUp("Confirm"), () => Input.isDown("Confirm"), () => fastSpin = true]),
+            ]);
+
+            if (fastSpin) {
+                const coros: Coro.Predicate[] = [];
+
+                for (let i = 0; i < reelOffsets.length; i++) {
+                    const controls = reelObjs[i].controls;
+                    controls.offsetDelta = 0;
+                    coros.push(interp(controls, "offset").factor(factor.sine).to(reelOffsets[i]).over(250));
+                }
+                yield* Coro.all(coros);
             }
 
             textObj.removeAllChildren();
