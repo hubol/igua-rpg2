@@ -2,9 +2,11 @@ import { Graphics, Sprite, Texture } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
-import { interp } from "../../lib/game-engine/routines/interp";
+import { factor, interp } from "../../lib/game-engine/routines/interp";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { cyclic } from "../../lib/math/number";
 import { Integer } from "../../lib/math/number-alias-types";
+import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { Input, scene } from "../globals";
@@ -149,22 +151,36 @@ export function scnCasino() {
 
 function objSlot() {
     const reelObjs = rules.reels.map((reel, i) =>
-        objReel({ reel, height: rules.height, symbolPadding: 1 }).at(i * 65, 0)
+        objReel({ reel, height: rules.height, symbolPadding: 2 }).at(i * 65, 0)
     );
-    const maskObj = new Graphics().beginFill(0xffffff).drawRect(0, 50, 65 * 4, 65 * 3 + 30);
+    const maskObj = new Graphics().beginFill(0xffffff).drawRect(0, 116, 65 * 4, 65 * 3 + 24);
     const reelObj = container(...reelObjs, maskObj).masked(maskObj);
-    reelObj.scaled(0.8, 0.8);
+    reelObj.scaled(0.8, 0.8).at(0, -50);
     const textObj = container().at(0, 50);
 
     return container(reelObj, textObj).coro(function* () {
         while (true) {
             yield () => Input.isDown("Confirm");
 
+            textObj.removeAllChildren();
+
             const { totalPrize, reelOffsets, linePrizes } = RpgSlotMachine.spin(rules);
 
-            yield* Coro.all(
-                reelOffsets.map((offset, index) => interp(reelObjs[index].controls, "offset").to(offset).over(500)),
-            );
+            for (const reelObj of reelObjs) {
+                reelObj.controls.offsetDelta = Rng.float(0.175, 0.3);
+            }
+
+            for (let i = 0; i < reelOffsets.length; i++) {
+                const offset = reelOffsets[i];
+                const reelObj = reelObjs[i];
+
+                yield sleep(i === 0 ? 500 : 125);
+
+                yield () => Math.abs(reelObj.controls.offset - offset) < 1;
+
+                reelObj.controls.offsetDelta = 0;
+                yield interp(reelObj.controls, "offset").factor(factor.sine).to(offset).over(Rng.int(250, 750));
+            }
 
             textObj.removeAllChildren();
             objText.Large(`Prize: ${totalPrize}`).at(58 * 1.5, 58 * 3.2).show(textObj);
@@ -185,7 +201,9 @@ interface ObjReelArgs {
 }
 
 function objReel(args: ObjReelArgs) {
-    const controls = { offset: 0 };
+    const reelLength = args.reel.length;
+
+    const controls = { offset: 0, offsetDelta: 0 };
     const gap = 65;
 
     const symbolObjs = range(args.height + args.symbolPadding * 2).map((i) => Sprite.from(txs[0]).at(0, i * gap));
@@ -193,11 +211,12 @@ function objReel(args: ObjReelArgs) {
     return container(...symbolObjs)
         .merge({ controls })
         .step(self => {
+            controls.offset = cyclic(controls.offset + controls.offsetDelta, 0, reelLength);
             self.pivot.y = Math.round((controls.offset % 1) * gap);
 
             const reelIndexOffset = -args.symbolPadding + Math.floor(controls.offset);
             for (let i = 0; i < symbolObjs.length; i++) {
-                const reelIndex = cyclic(i + reelIndexOffset, 0, args.reel.length);
+                const reelIndex = cyclic(i + reelIndexOffset, 0, reelLength);
                 const symbol = args.reel[reelIndex];
                 const tx = symbolTxs.get(symbol);
                 if (tx) {
