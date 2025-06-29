@@ -1,5 +1,5 @@
 import { Graphics } from "pixi.js";
-import { interpvr } from "../../../lib/game-engine/routines/interp";
+import { interpr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
@@ -62,7 +62,7 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
     const mainObj = container(boxObj, flopObj);
 
     function* updateCount(nextCount: Integer) {
-        yield interpvr(mainObj).to(0, -14).over(300);
+        yield interpr(mainObj, "y").to(-14).over(300);
         const state: DrawState = {
             filled: count > 0,
             flopVisible: false,
@@ -80,7 +80,7 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
         yield sleep(150);
         state.size = "small";
         draw(state);
-        yield interpvr(mainObj).to(0, 0).over(300);
+        yield interpr(mainObj, "y").to(0).over(300);
     }
 
     interface DrawState {
@@ -110,6 +110,15 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
         const scale = size === "full" ? 1 : 0.5;
         flopObj.scaled(scale, scale);
         flopObj.y = size === "full" ? -80 : -73;
+
+        const excessWidth = Math.round((boxObj.width - 12) / 2);
+
+        if (size !== "small" && excessWidth > obj.x) {
+            mainObj.x = excessWidth - obj.x;
+        }
+        else {
+            mainObj.x = 0;
+        }
     }
 
     draw({ filled: count > 0, flopVisible: false, size: "small" });
