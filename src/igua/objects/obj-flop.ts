@@ -34,10 +34,9 @@ const txs = {
 
 export function objFlop(flopDexNumberZeroIndexed: Integer) {
     flopDexNumberZeroIndexed = cyclic(Math.round(flopDexNumberZeroIndexed), 0, 999);
-    const seed = flopDexSeeds[flopDexNumberZeroIndexed];
 
     const appearObj = objIndexedSprite(txs.appear).anchored(0.5, 0.5);
-    const fullyRealizedCharacterObj = objFlopCharacter(seed).invisible();
+    const fullyRealizedCharacterObj = objFlopCharacter.fromDexNumber(flopDexNumberZeroIndexed).invisible();
 
     const characterObj = container(appearObj, fullyRealizedCharacterObj)
         .filtered(fullyRealizedCharacterObj.objects.filter);
@@ -127,8 +126,13 @@ export function objFlopCharacter(seed: Integer) {
         ...(args.nose ? [Sprite.from(args.nose).at(-5, -3)] : []),
     )
         .pivoted(15, 13)
-        .merge({ objects: { filter } });
+        .merge({ objects: { filter }, state: { tint: args.tint } });
 }
+
+objFlopCharacter.fromDexNumber = function fromDexNumber (flopDexNumberZeroIndexed: Integer) {
+    const seed = flopDexSeeds[flopDexNumberZeroIndexed];
+    return objFlopCharacter(seed);
+};
 
 const prng = new PseudoRng();
 
