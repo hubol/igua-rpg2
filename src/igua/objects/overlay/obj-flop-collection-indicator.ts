@@ -1,4 +1,5 @@
 import { Graphics } from "pixi.js";
+import { objText } from "../../../assets/fonts";
 import { interpr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
@@ -67,16 +68,19 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
 
     const halfTint = darken(filledTint);
 
-    const dexNumberObj = objFlopDexNumber(dexNumber).anchored(1, 0).at(-1, -118).invisible();
+    const dexNumberObj = objFlopDexNumber(dexNumber).at(-58, -118).invisible();
     dexNumberObj.tint = filledTint;
 
-    const mainObj = container(boxObj, flopObj, dexNumberObj);
+    const smallCountObj = objText.SmallDigits("", { tint: halfTint }).anchored(1, 1).at(-23, -58).invisible();
+
+    const mainObj = container(boxObj, flopObj, dexNumberObj, smallCountObj);
 
     const state: DrawState = {
         line: count > 0 ? "tint" : "black",
         filled: count > 0,
         flopVisible: false,
         size: "small",
+        smallCount: count,
     };
 
     function* updateCount(nextCount: Integer) {
@@ -102,6 +106,7 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
         draw(state);
         yield sleep(150);
         state.size = "small";
+        state.smallCount = nextCount;
         draw(state);
         yield interpr(mainObj, "y").to(0).over(300);
     }
@@ -109,11 +114,12 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
     interface DrawState {
         line: "black" | "half" | "tint";
         size: "small" | "half" | "full";
+        smallCount: Integer;
         filled: boolean;
         flopVisible: boolean;
     }
 
-    function draw({ line, filled, flopVisible, size }: DrawState) {
+    function draw({ line, filled, flopVisible, size, smallCount }: DrawState) {
         {
             boxObj.clear();
             if (filled && size === "small") {
@@ -153,6 +159,8 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
         }
 
         dexNumberObj.visible = size === "full";
+        smallCountObj.visible = size === "small" && smallCount > 1;
+        smallCountObj.text = String(smallCount);
     }
 
     draw(state);
