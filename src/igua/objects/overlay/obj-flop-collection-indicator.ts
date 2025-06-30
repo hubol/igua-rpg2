@@ -6,7 +6,7 @@ import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { RpgProgress } from "../../rpg/rpg-progress";
-import { objFlopCharacter } from "../obj-flop";
+import { objFlopCharacter, objFlopDexNumber } from "../obj-flop";
 
 export function objFlopCollectionIndicator(startingIndex: Integer, count: Integer) {
     const previousCounts: Integer[] = [];
@@ -67,7 +67,10 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
 
     const halfTint = darken(filledTint);
 
-    const mainObj = container(boxObj, flopObj);
+    const dexNumberObj = objFlopDexNumber(dexNumber).anchored(1, 0).at(-1, -118).invisible();
+    dexNumberObj.tint = filledTint;
+
+    const mainObj = container(boxObj, flopObj, dexNumberObj);
 
     const state: DrawState = {
         line: count > 0 ? "tint" : "black",
@@ -148,6 +151,8 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
         else {
             mainObj.x = 0;
         }
+
+        dexNumberObj.visible = size === "full";
     }
 
     draw(state);

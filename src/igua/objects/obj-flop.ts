@@ -68,7 +68,7 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
                 characterObj.angle += 90;
             }
 
-            objText.SmallDigits(printFlopDexNumber(flopDexNumberZeroIndexed)).anchored(0.5, 0).at(0, 19).show(
+            objFlopDexNumber(flopDexNumberZeroIndexed).anchored(0.5, 0).at(0, 19).show(
                 self,
             );
 
@@ -133,6 +133,10 @@ objFlopCharacter.fromDexNumber = function fromDexNumber (flopDexNumberZeroIndexe
     const seed = flopDexSeeds[flopDexNumberZeroIndexed];
     return objFlopCharacter(seed);
 };
+
+export function objFlopDexNumber(flopDexNumberZeroIndexed: Integer) {
+    return objText.SmallDigits(printFlopDexNumber(flopDexNumberZeroIndexed));
+}
 
 const prng = new PseudoRng();
 
