@@ -1,5 +1,6 @@
-import { Graphics } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
+import { Tx } from "../../../assets/textures";
 import { interpr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
@@ -71,9 +72,9 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
     const dexNumberObj = objFlopDexNumber(dexNumber).at(-58, -118).invisible();
     dexNumberObj.tint = filledTint;
 
-    const smallCountObj = objText.SmallDigits("", { tint: halfTint }).anchored(1, 1).at(-23, -58).invisible();
+    const countObj = objFlopCount(halfTint).at(-23, -58).invisible();
 
-    const mainObj = container(boxObj, flopObj, dexNumberObj, smallCountObj);
+    const mainObj = container(boxObj, flopObj, dexNumberObj, countObj);
 
     const state: DrawState = {
         line: count > 0 ? "tint" : "black",
@@ -159,8 +160,8 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
         }
 
         dexNumberObj.visible = size === "full";
-        smallCountObj.visible = size === "small" && smallCount > 1;
-        smallCountObj.text = String(smallCount);
+        countObj.visible = size === "small";
+        countObj.controls.count = smallCount;
     }
 
     draw(state);
@@ -172,4 +173,24 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
     const obj = container(mainObj).merge({ methods });
 
     return obj;
+}
+
+function objFlopCount(tint: RgbInt) {
+    const textObj = objText.SmallDigits("", { tint }).anchored(1, 1).invisible();
+    const sprite = Sprite.from(Tx.Ui.FlopMax).anchored(1, 1).at(-1, -1).tinted(tint).invisible();
+
+    const controls = {
+        set count(value: Integer) {
+            if (value <= 1) {
+                textObj.visible = false;
+                sprite.visible = false;
+                return;
+            }
+            sprite.visible = value >= 99;
+            textObj.visible = !sprite.visible;
+            textObj.text = String(value);
+        },
+    };
+
+    return container(textObj, sprite).merge({ controls });
 }

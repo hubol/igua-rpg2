@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 290 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 291 }];
 
 interface TxData {
   id: string;
@@ -118,7 +118,7 @@ function txs<T>(tx: (data: TxData) => T) {
       Cobweb0: tx({ id: "Fiber.Cobweb0", atlas: 0, x: 1553, y: 634, width: 30, height: 28 }),
       Cobweb1: tx({ id: "Fiber.Cobweb1", atlas: 0, x: 1706, y: 170, width: 20, height: 28 }),
       RopeFrame: tx({ id: "Fiber.RopeFrame", atlas: 0, x: 1798, y: 595, width: 37, height: 28 }),
-      StringOnStake0: tx({ id: "Fiber.StringOnStake0", atlas: 0, x: 382, y: 457, width: 8, height: 6 }),
+      StringOnStake0: tx({ id: "Fiber.StringOnStake0", atlas: 0, x: 1703, y: 521, width: 8, height: 6 }),
     },
     Foliage: {
       BranchCut0: tx({ id: "Foliage.BranchCut0", atlas: 0, x: 1818, y: 624, width: 24, height: 14 }),
@@ -364,6 +364,7 @@ function txs<T>(tx: (data: TxData) => T) {
         IncrementBg: tx({ id: "Ui.Experience.IncrementBg", atlas: 0, x: 217, y: 368, width: 188, height: 26 }),
         Increment: tx({ id: "Ui.Experience.Increment", atlas: 0, x: 415, y: 291, width: 264, height: 32 }),
       },
+      FlopMax: tx({ id: "Ui.FlopMax", atlas: 0, x: 382, y: 457, width: 12, height: 6 }),
       HorizontalBar9: tx({ id: "Ui.HorizontalBar9", atlas: 0, x: 681, y: 261, width: 500, height: 9 }),
       InteractionIndicator: tx({ id: "Ui.InteractionIndicator", atlas: 0, x: 1738, y: 648, width: 22, height: 22 }),
       NewIndicator: tx({ id: "Ui.NewIndicator", atlas: 0, x: 2027, y: 253, width: 20, height: 12 }),
