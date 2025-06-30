@@ -1,7 +1,8 @@
 import { Graphics } from "pixi.js";
 import { interpr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
-import { Integer } from "../../../lib/math/number-alias-types";
+import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
+import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { RpgProgress } from "../../rpg/rpg-progress";
@@ -52,6 +53,11 @@ export function objFlopCollectionIndicator(startingIndex: Integer, count: Intege
         .pivoted(-36, 0);
 }
 
+function darken(tint: RgbInt) {
+    const { r, g, b } = AdjustColor.pixi(tint).toRgb();
+    return AdjustColor.rgb(r / 2, g / 2, b / 2).toPixi();
+}
+
 function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
     const boxObj = new Graphics().pivoted(30, 60);
 
@@ -59,21 +65,35 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
     flopObj.filtered(flopObj.objects.filter);
     const filledTint = flopObj.state.tint.red;
 
+    const halfTint = darken(filledTint);
+
     const mainObj = container(boxObj, flopObj);
+
+    const state: DrawState = {
+        line: count > 0 ? "tint" : "black",
+        filled: count > 0,
+        flopVisible: false,
+        size: "small",
+    };
 
     function* updateCount(nextCount: Integer) {
         yield interpr(mainObj, "y").to(-14).over(300);
-        const state: DrawState = {
-            filled: count > 0,
-            flopVisible: false,
-            size: "half",
-        };
+        state.size = "half";
         draw(state);
         yield sleep(150);
         state.size = "full";
         state.filled = nextCount > 0;
         state.flopVisible = nextCount > 0;
         draw(state);
+        const targetLine: DrawState["line"] = state.filled ? "tint" : "black";
+        if (state.line !== targetLine) {
+            yield sleep(100);
+            state.line = "half";
+            draw(state);
+            yield sleep(200);
+            state.line = targetLine;
+            draw(state);
+        }
         yield sleep(500);
         state.size = "half";
         draw(state);
@@ -84,12 +104,13 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
     }
 
     interface DrawState {
+        line: "black" | "half" | "tint";
         size: "small" | "half" | "full";
         filled: boolean;
         flopVisible: boolean;
     }
 
-    function draw({ filled, flopVisible, size }: DrawState) {
+    function draw({ line, filled, flopVisible, size }: DrawState) {
         {
             boxObj.clear();
             if (filled && size === "small") {
@@ -103,7 +124,15 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
             else if (size === "full") {
                 width = 60;
             }
-            boxObj.lineStyle(1, 0x000000, 1, 1).drawRect(-width / 2, -width, width, width);
+
+            let lineTint = 0x000000;
+            if (line === "tint") {
+                lineTint = filledTint;
+            }
+            else if (line === "half") {
+                lineTint = halfTint;
+            }
+            boxObj.lineStyle(1, lineTint, 1, 1).drawRect(-width / 2, -width, width, width);
         }
 
         flopObj.visible = flopVisible && size !== "small";
@@ -121,7 +150,7 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
         }
     }
 
-    draw({ filled: count > 0, flopVisible: false, size: "small" });
+    draw(state);
 
     const methods = {
         updateCount,
