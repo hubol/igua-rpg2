@@ -1,58 +1,112 @@
 import { Graphics, Sprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
-import { interpr } from "../../../lib/game-engine/routines/interp";
+import { Coro } from "../../../lib/game-engine/routines/coro";
+import { interpr, interpvr } from "../../../lib/game-engine/routines/interp";
+import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
+import { clone } from "../../../lib/object/clone";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { objFlopCharacter, objFlopDexNumber } from "../obj-flop";
 
-export function objFlopCollectionIndicator(startingIndex: Integer, count: Integer) {
-    const previousCounts: Integer[] = [];
+const Consts = {
+    rangeSize: 10,
+};
 
-    function setPreviousCounts(counts: Integer[]) {
-        previousCounts.length = 0;
-        previousCounts.push(...counts);
+export function objFlopCollectionIndicator() {
+    const previous = range(999).map(index => RpgProgress.character.inventory.flops[index] ?? 0);
+
+    function slicePrevious(startIndex: Integer) {
+        return previous.slice(startIndex, startIndex + Consts.rangeSize);
     }
 
-    function getCounts() {
-        return range(count).map((i) => RpgProgress.character.inventory.flops[startingIndex + i] ?? 0);
-    }
+    const differenceRanges = new Map<Integer, Integer[]>();
 
-    function haveCountsChanged() {
-        for (let i = 0; i < count; i++) {
-            const progressValue = RpgProgress.character.inventory.flops[startingIndex + i] ?? 0;
-            if (progressValue !== previousCounts[i]) {
-                return true;
-            }
-        }
+    return container()
+        .step(() => {
+            for (const key in RpgProgress.character.inventory.flops) {
+                const index = Number(key);
+                const value = RpgProgress.character.inventory.flops[index];
+                if (value !== previous[index]) {
+                    const differenceRangeStartIndex = Math.floor(index / Consts.rangeSize) * Consts.rangeSize;
 
-        return false;
-    }
-
-    setPreviousCounts(getCounts());
-
-    const slotObjs = range(count).map((i) =>
-        objFlopCollectionIndicatorSlot(i + startingIndex, previousCounts[i + startingIndex]).at(i * 14, 0)
-    );
-
-    return container(...slotObjs)
-        .coro(function* () {
-            while (true) {
-                yield () => haveCountsChanged();
-                const counts = getCounts();
-                for (let i = 0; i < counts.length; i++) {
-                    if (previousCounts[i] !== counts[i]) {
-                        yield* slotObjs[i].methods.updateCount(counts[i]);
+                    let counts = differenceRanges.get(differenceRangeStartIndex);
+                    if (!counts) {
+                        counts = slicePrevious(differenceRangeStartIndex);
+                        differenceRanges.set(differenceRangeStartIndex, counts);
                     }
+
+                    counts[index - differenceRangeStartIndex] = value;
                 }
-                setPreviousCounts(counts);
             }
         })
-        .pivoted(-36, 0);
+        .coro(function* (self) {
+            while (true) {
+                yield () => differenceRanges.size > 0;
+                let range: { startIndex: Integer; counts: Integer[] } | null = null;
+                for (const [startIndex, counts] of differenceRanges) {
+                    range = { startIndex, counts };
+                }
+
+                if (range === null) {
+                    continue;
+                }
+
+                const sliceObj = objFlopCollectionIndicatorSlice(
+                    range.startIndex,
+                    slicePrevious(range.startIndex),
+                    range.counts,
+                ).show(self);
+                yield () => sliceObj.state.done;
+
+                previous.splice(range.startIndex, Consts.rangeSize, ...range.counts);
+                differenceRanges.delete(range.startIndex);
+
+                yield () => sliceObj.destroyed;
+            }
+        });
+}
+
+// TODO don't show a 1000th slot!
+function objFlopCollectionIndicatorSlice(startingIndex: Integer, initialCounts: Integer[], counts: Integer[]) {
+    const slotObjs = initialCounts.map((count, index) =>
+        objFlopCollectionIndicatorSlot(index + startingIndex, count).at(index * 14, 0)
+    );
+
+    const renderedCounts = [...initialCounts];
+
+    const state = {
+        done: false,
+    };
+
+    return container(...slotObjs)
+        .merge({ state })
+        .coro(function* (self) {
+            yield interpvr(self).to(0, 0).over(200);
+
+            while (!self.state.done) {
+                for (let i = 0; i < counts.length; i++) {
+                    if (renderedCounts[i] !== counts[i]) {
+                        yield* slotObjs[i].methods.updateCount(counts[i]);
+                        renderedCounts[i] = counts[i];
+                    }
+                }
+
+                yield* Coro.race([
+                    onMutate(counts),
+                    Coro.chain([sleep(500), () => self.state.done = true]),
+                ]);
+            }
+
+            yield interpvr(self).to(0, 20).over(200);
+            self.destroy();
+        })
+        .pivoted(-36, 0)
+        .at(0, 20);
 }
 
 function darken(tint: RgbInt) {

@@ -18,6 +18,7 @@ import { CtxInteract } from "../../mixins/mxn-interact";
 import { RpgPlayer } from "../../rpg/rpg-player";
 import { RpgProgress, RpgProgressExperience } from "../../rpg/rpg-progress";
 import { playerObj } from "../obj-player";
+import { objFlopCollectionIndicator } from "./obj-flop-collection-indicator";
 import { objHealthBar } from "./obj-health-bar";
 import { objStatusBar } from "./obj-status-bar";
 import { objUiSubdividedBar } from "./obj-ui-subdivided-bar";
@@ -52,6 +53,7 @@ export function objHud() {
         container(healthBarObj, statusObjsContainer).at(3, 3),
         objInteractIndicator(),
         objExperienceIndicator(),
+        objFlopCollectionIndicator().at(3, 336),
     )
         .merge({ healthBarObj, effectiveHeight: 0 })
         .step(self => {
