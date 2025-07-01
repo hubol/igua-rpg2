@@ -13,7 +13,7 @@ export namespace RpgSlotMachine {
         countsToPrize: Integer[];
     }
 
-    type Line = Integer[];
+    export type Line = Integer[];
 
     export interface Rules {
         lines: Line[];

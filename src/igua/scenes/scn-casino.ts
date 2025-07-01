@@ -1,4 +1,4 @@
-import { Graphics, Sprite, Texture } from "pixi.js";
+import { Graphics, LINE_CAP, Matrix, Point, Sprite, Texture } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
@@ -7,6 +7,7 @@ import { sleep } from "../../lib/game-engine/routines/sleep";
 import { cyclic } from "../../lib/math/number";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
+import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { Input, scene } from "../globals";
@@ -225,6 +226,17 @@ function objSlot() {
             if (linePrizes.length) {
                 objText.Medium(`${linePrizes.map(({ index, prize }) => `Line ${index + 1} pays ${prize}`).join("\n")}`)
                     .at(58 * 1.5, 58 * 3.8).show(textObj);
+
+                objLineHighlighter(reelObjs, reelObj.localTransform).coro(function* (self) {
+                    while (true) {
+                        for (const prize of linePrizes) {
+                            self.controls.line = rules.lines[prize.index];
+                            yield sleep(1000);
+                            self.controls.line = null;
+                            yield sleep(500);
+                        }
+                    }
+                }).show(textObj);
             }
 
             yield () => !Input.isDown("Confirm");
@@ -246,8 +258,12 @@ function objReel(args: ObjReelArgs) {
 
     const symbolObjs = range(args.height + args.symbolPadding * 2).map((i) => Sprite.from(txs[0]).at(0, i * gap));
 
+    const state = {
+        slotPositions: range(args.height).map(i => vnew(29, (i + args.symbolPadding - 0.5) * gap)),
+    };
+
     return container(...symbolObjs)
-        .merge({ controls })
+        .merge({ controls, state })
         .step(self => {
             controls.offset = cyclic(controls.offset + controls.offsetDelta, 0, reelLength);
             self.pivot.y = Math.round((controls.offset % 1) * gap);
@@ -265,6 +281,38 @@ function objReel(args: ObjReelArgs) {
                 }
             }
         });
+}
+
+type ObjReel = ReturnType<typeof objReel>;
+
+const p = new Point();
+
+function objLineHighlighter(reelObjs: ObjReel[], transform: Matrix) {
+    let line: RpgSlotMachine.Line | null = null;
+
+    const controls = {
+        set line(value: typeof line) {
+            line = value;
+            gfx.clear();
+
+            if (!line) {
+                return;
+            }
+
+            gfx.lineStyle({ cap: LINE_CAP.ROUND, color: 0xff0000, width: 10 });
+
+            for (let xIndex = 0; xIndex < line.length; xIndex++) {
+                const yIndex = line[xIndex];
+                const reelObj = reelObjs[xIndex];
+                const point = transform.apply(reelObj.vcpy().add(reelObj.state.slotPositions[yIndex]), p);
+                gfx[xIndex === 0 ? "moveTo" : "lineTo"](point.x, point.y);
+            }
+        },
+    };
+
+    const gfx = new Graphics();
+
+    return gfx.merge({ controls });
 }
 
 function objSlotMachineSimulator(price: Integer, rules: RpgSlotMachine.Rules) {
