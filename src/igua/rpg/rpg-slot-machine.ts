@@ -9,7 +9,7 @@ export namespace RpgSlotMachine {
     export interface Symbol {
         prizeCondition: "line_from_left_consecutive"; // | "scatter";
         // TODO another indentity: "flexible" for matching certain symbols to each other?
-        identity: "fixed"; // | "wild";
+        identity: "fixed" | "wild";
         countsToPrize: Integer[];
     }
 
@@ -39,13 +39,20 @@ export namespace RpgSlotMachine {
         for (let i = 0; i < rules.lines.length; i++) {
             const line = rules.lines[i];
             let symbolToMatch = Undefined<Symbol>();
+            let leftmostWildSymbol = Undefined<Symbol>();
             let symbolCount = 0;
-            // TODO let wildsCount = 0;
             for (let x = 0; x < line.length; x++) {
                 const y = line[x];
                 const symbol = effectiveReels[x][y];
-                // TODO handle wilds
-                if (x === 0) {
+
+                if (symbol.identity === "wild") {
+                    symbolCount += 1;
+
+                    if (x === 0) {
+                        leftmostWildSymbol = symbol;
+                    }
+                }
+                else if (symbolToMatch === undefined) {
                     symbolToMatch = symbol;
                     symbolCount += 1;
                 }
@@ -57,7 +64,9 @@ export namespace RpgSlotMachine {
                 }
             }
 
-            const prize = symbolToMatch?.countsToPrize[symbolCount - 1] ?? null;
+            const prizeSymbol = symbolToMatch ? symbolToMatch : leftmostWildSymbol;
+
+            const prize = prizeSymbol?.countsToPrize[symbolCount - 1] ?? null;
             if (prize) {
                 linePrizes.push({ index: i, prize });
             }

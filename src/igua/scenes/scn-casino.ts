@@ -33,6 +33,11 @@ const sym = {
         prizeCondition: "line_from_left_consecutive",
         countsToPrize: [0, 0, 5, 14],
     },
+    wild: {
+        identity: "wild",
+        prizeCondition: "line_from_left_consecutive",
+        countsToPrize: [0, 0, 0, 150],
+    },
 } satisfies Record<string, RpgSlotMachine.Symbol>;
 
 const rules: RpgSlotMachine.Rules = {
@@ -54,6 +59,9 @@ const rules: RpgSlotMachine.Rules = {
             sym.peanut,
             sym.peanut,
             sym.seven,
+            sym.wild,
+            sym.wild,
+            sym.wild,
             sym.cherry,
             sym.bar,
             sym.cherry,
@@ -74,6 +82,9 @@ const rules: RpgSlotMachine.Rules = {
             sym.peanut,
             sym.peanut,
             sym.peanut,
+            sym.wild,
+            sym.wild,
+            sym.wild,
             sym.cherry,
             sym.seven,
             sym.bar,
@@ -116,6 +127,9 @@ const rules: RpgSlotMachine.Rules = {
             sym.bar,
             sym.bar,
             sym.bar,
+            sym.wild,
+            sym.wild,
+            sym.wild,
             sym.bar,
         ],
         [
@@ -125,6 +139,9 @@ const rules: RpgSlotMachine.Rules = {
             sym.bar,
             sym.bar,
             sym.bar,
+            sym.wild,
+            sym.wild,
+            sym.wild,
             sym.cherry,
             sym.cherry,
             sym.cherry,
@@ -142,6 +159,7 @@ symbolTxs.set(sym.peanut, txs[0]);
 symbolTxs.set(sym.cherry, txs[1]);
 symbolTxs.set(sym.seven, txs[2]);
 symbolTxs.set(sym.bar, txs[3]);
+symbolTxs.set(sym.wild, txs[4]);
 
 export function scnCasino() {
     scene.style.backgroundTint = 0x1c1336;
