@@ -165,17 +165,28 @@ symbolTxs.set(sym.wild, txs[4]);
 export function scnCasino() {
     scene.style.backgroundTint = 0x1c1336;
     objSlotMachineSimulator(5, rules).show();
-    objSlot().at(160, -30).show();
+    objSlot(rules, { reel: { gap: 65 }, slot: { gap: 80, width: 65, height: 65 } }).at(160, 0).show();
 }
 
-function objSlot() {
+interface SlotMachineRenderConfig {
+    reel: {
+        gap: Integer;
+    };
+    slot: {
+        gap: Integer;
+        width: Integer;
+        height: Integer;
+    };
+}
+
+function objSlot(rules: RpgSlotMachine.Rules, config: SlotMachineRenderConfig) {
     const reelObjs = rules.reels.map((reel, i) =>
-        objReel({ reel, height: rules.height, symbolPadding: 2 }).at(i * 65, 0)
+        objReel({ config, reel, rules }).at(i * config.reel.gap, -symbolPadding * config.slot.gap)
     );
-    const maskObj = new Graphics().beginFill(0xffffff).drawRect(0, 116, 65 * 4, 65 * 3 + 24);
+    const maskObj = new Graphics().beginFill(0xffffff).drawRect(0, -10, config.reel.gap * 4, config.slot.gap * 3 + 20);
     const reelObj = container(...reelObjs, maskObj).masked(maskObj);
-    reelObj.scaled(0.8, 0.8).at(0, -50);
-    const textObj = container().at(0, 50);
+    reelObj.scaled(0.8, 0.8);
+    const textObj = container();
 
     return container(reelObj, textObj).coro(function* () {
         while (true) {
@@ -222,10 +233,10 @@ function objSlot() {
             }
 
             textObj.removeAllChildren();
-            objText.Large(`Prize: ${totalPrize}`).at(58 * 1.5, 58 * 3.2).show(textObj);
+            objText.Large(`Prize: ${totalPrize}`).at(58 * 1.5, 58 * 3.2 + 40).show(textObj);
             if (linePrizes.length) {
                 objText.Medium(`${linePrizes.map(({ index, prize }) => `Line ${index + 1} pays ${prize}`).join("\n")}`)
-                    .at(58 * 1.5, 58 * 3.8).show(textObj);
+                    .at(58 * 1.5, 58 * 3.8 + 40).show(textObj);
 
                 objLineHighlighter(reelObjs, reelObj.localTransform).coro(function* (self) {
                     while (true) {
@@ -245,21 +256,24 @@ function objSlot() {
 }
 
 interface ObjReelArgs {
+    config: SlotMachineRenderConfig;
     reel: RpgSlotMachine.Reel;
-    height: Integer;
-    symbolPadding: Integer;
+    rules: RpgSlotMachine.Rules;
 }
 
+const symbolPadding = 2;
+
 function objReel(args: ObjReelArgs) {
+    const { gap, width, height } = args.config.slot;
+
     const reelLength = args.reel.length;
 
     const controls = { offset: 0, offsetDelta: 0 };
-    const gap = 65;
 
-    const symbolObjs = range(args.height + args.symbolPadding * 2).map((i) => Sprite.from(txs[0]).at(0, i * gap));
+    const symbolObjs = range(args.rules.height + symbolPadding * 2).map((i) => Sprite.from(txs[0]).at(0, i * gap));
 
     const state = {
-        slotPositions: range(args.height).map(i => vnew(29, (i + args.symbolPadding - 0.5) * gap)),
+        slotPositions: range(args.rules.height).map(i => vnew(width / 2, (i + symbolPadding) * gap + height / 2)),
     };
 
     return container(...symbolObjs)
@@ -268,7 +282,7 @@ function objReel(args: ObjReelArgs) {
             controls.offset = cyclic(controls.offset + controls.offsetDelta, 0, reelLength);
             self.pivot.y = Math.round((controls.offset % 1) * gap);
 
-            const reelIndexOffset = -args.symbolPadding + Math.floor(controls.offset);
+            const reelIndexOffset = -symbolPadding + Math.floor(controls.offset);
             for (let i = 0; i < symbolObjs.length; i++) {
                 const reelIndex = cyclic(i + reelIndexOffset, 0, reelLength);
                 const symbol = args.reel[reelIndex];
