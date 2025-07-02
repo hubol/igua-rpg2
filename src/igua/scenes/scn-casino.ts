@@ -185,14 +185,24 @@ function objSlot(rules: RpgSlotMachine.Rules, config: SlotMachineRenderConfig) {
             ]);
 
             if (fastSpin) {
-                const coros: Coro.Predicate[] = [];
+                const coros: Coro.Type[] = [];
 
                 for (let i = 0; i < reelOffsets.length; i++) {
                     const controls = reelObjs[i].controls;
-                    controls.offsetDelta = 0;
-                    coros.push(interp(controls, "offset").factor(factor.sine).to(reelOffsets[i]).over(250));
+                    const targetOffset = reelOffsets[i];
+                    coros.push(
+                        Coro.chain([
+                            Coro.race([
+                                () => controls.offset < targetOffset,
+                                interp(controls, "offsetDelta").steps(4).to(0.9).over(500),
+                            ]),
+                            () => (controls.offsetDelta = 0, true),
+                            interp(controls, "offset").factor(factor.sine).to(targetOffset).over(300),
+                        ]),
+                    );
                 }
                 yield* Coro.all(coros);
+                yield sleep(100);
             }
 
             textObj.removeAllChildren();
