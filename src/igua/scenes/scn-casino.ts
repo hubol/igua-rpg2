@@ -285,8 +285,6 @@ function objReel(args: ObjReelArgs) {
 
 type ObjReel = ReturnType<typeof objReel>;
 
-const p = new Point();
-
 function objLineHighlighter(reelObjs: ObjReel[], transform: Matrix) {
     let line: RpgSlotMachine.Line | null = null;
 
@@ -299,13 +297,35 @@ function objLineHighlighter(reelObjs: ObjReel[], transform: Matrix) {
                 return;
             }
 
-            gfx.lineStyle({ cap: LINE_CAP.ROUND, color: 0xff0000, width: 10 });
+            gfx.lineStyle({ cap: LINE_CAP.ROUND, color: 0xff0000, width: 6 });
 
-            for (let xIndex = 0; xIndex < line.length; xIndex++) {
-                const yIndex = line[xIndex];
+            const slotPositions = line.map((yIndex, xIndex) => {
                 const reelObj = reelObjs[xIndex];
-                const point = transform.apply(reelObj.vcpy().add(reelObj.state.slotPositions[yIndex]), p);
-                gfx[xIndex === 0 ? "moveTo" : "lineTo"](point.x, point.y);
+                const v = reelObj.vcpy().add(reelObj.state.slotPositions[yIndex]);
+                return transform.apply(v, v);
+            });
+
+            const distance = slotPositions[1].x - slotPositions[0].x;
+            const half = distance / 2;
+            const quarter = distance / 4;
+
+            const points = [
+                slotPositions[0].vcpy().add(-half, 0),
+                slotPositions[0],
+                slotPositions[0].vcpy().add(quarter, 0),
+                ...slotPositions.slice(1, -1).flatMap(slot => [
+                    slot.vcpy().add(-quarter, 0),
+                    slot,
+                    slot.vcpy().add(quarter, 0),
+                ]),
+                slotPositions.last.vcpy().add(-quarter, 0),
+                slotPositions.last,
+                slotPositions.last.vcpy().add(half, 0),
+            ];
+
+            for (let i = 0; i < points.length; i++) {
+                const point = points[i].vround();
+                gfx[i === 0 ? "moveTo" : "lineTo"](point.x, point.y);
             }
         },
     };
