@@ -193,7 +193,7 @@ function objSlot(rules: RpgSlotMachine.Rules, config: SlotMachineRenderConfig) {
                     coros.push(
                         Coro.chain([
                             Coro.race([
-                                () => controls.offset < targetOffset,
+                                () => controls.offset < targetOffset || Math.abs(controls.offset - targetOffset) < 1,
                                 interp(controls, "offsetDelta").steps(4).to(0.9).over(500),
                             ]),
                             () => (controls.offsetDelta = 0, true),
