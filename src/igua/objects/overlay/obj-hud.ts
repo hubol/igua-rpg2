@@ -1,10 +1,12 @@
 import { Container, DisplayObject, Graphics, Rectangle, Sprite, Texture } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
+import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { holdf } from "../../../lib/game-engine/routines/hold";
 import { factor, interp } from "../../../lib/game-engine/routines/interp";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
+import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 import { approachLinear } from "../../../lib/math/number";
 import { RgbInt } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
@@ -185,8 +187,8 @@ function objExperienceIndicator() {
                     self.state.total = value;
                     let nextValue = RpgProgress.character.experience[experienceKey];
                     yield holdf(() => {
-                        self.state.delta = nextValue - value;
                         const latestValue = RpgProgress.character.experience[experienceKey];
+                        self.state.delta = latestValue - value;
                         if (latestValue !== nextValue) {
                             nextValue = latestValue;
                             return false;
@@ -203,7 +205,7 @@ function objExperienceIndicator() {
                     ]);
                     self.visible = false;
                 }
-            })
+            }, -2)
     );
 
     function updateWeights() {
@@ -219,8 +221,11 @@ function objExperienceIndicator() {
 
     updateWeights();
     const subdividedBarObj = objUiSubdividedBar({ width: 128, height: 4, tint: 0x404040, weights });
-    const obj = container(subdividedBarObj, ...deltaObjs)
-        .step(updateWeights, StepOrder.BeforeCamera - 2)
+
+    const root = new TickerContainer(new AsshatTicker(), true, StepOrder.BeforeCamera);
+
+    container(subdividedBarObj, ...deltaObjs)
+        .step(updateWeights, -1)
         .step(() => {
             let maximumX = 128;
             for (let i = deltaObjs.length - 1; i >= 0; i--) {
@@ -232,13 +237,14 @@ function objExperienceIndicator() {
                 deltaObj.x = Math.min(rectangle.x + rectangle.width, maximumX) - deltaObj.effectiveWidth;
                 maximumX = deltaObj.x;
             }
-        }, StepOrder.BeforeCamera)
+        }, 2)
         .step(self => {
             self.x = approachLinear(self.x, dramaShop.isActive() ? xPositions.left : xPositions.right, 16);
         })
-        .at(xPositions.right, renderer.height - 8);
+        .at(xPositions.right, renderer.height - 8)
+        .show(root);
 
-    return obj;
+    return root;
 }
 
 function objExperienceIndicatorDelta({ tint, iconTx }: ExperienceIndicatorConfig) {
@@ -276,7 +282,7 @@ function objExperienceIndicatorDelta({ tint, iconTx }: ExperienceIndicatorConfig
             }
 
             iconObj.x = Math.round(gfx.width / 2);
-        }, StepOrder.BeforeCamera - 1)
+        }, 1)
         .pivoted(0, 9);
 }
 
