@@ -1,4 +1,4 @@
-import { Graphics, LINE_CAP, Matrix, Point, Sprite, Texture } from "pixi.js";
+import { Graphics, LINE_CAP, Matrix, Sprite, Texture } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../assets/textures";
@@ -11,111 +11,11 @@ import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
+import { DataSlotMachines } from "../data/data-slot-machines";
 import { Input, scene } from "../globals";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 
-const sym = {
-    empty: {
-        identity: "fixed",
-        prizeCondition: "line_from_left_consecutive",
-        countsToPrize: [0, 0, 0],
-    },
-    peanut: {
-        identity: "fixed",
-        prizeCondition: "line_from_left_consecutive",
-        countsToPrize: [0, 0, 10],
-    },
-    bar: {
-        identity: "fixed",
-        prizeCondition: "line_from_left_consecutive",
-        countsToPrize: [0, 0, 10],
-    },
-    cherry: {
-        identity: "fixed",
-        prizeCondition: "line_from_left_consecutive",
-        countsToPrize: [0, 0, 25],
-    },
-    seven: {
-        identity: "fixed",
-        prizeCondition: "line_from_left_consecutive",
-        countsToPrize: [0, 0, 100],
-    },
-    wild: {
-        identity: "wild",
-        prizeCondition: "line_from_left_consecutive",
-        countsToPrize: [0, 0, 500],
-    },
-} satisfies Record<string, RpgSlotMachine.Symbol>;
-
-function interlace<T>(array: T[], item: T): T[] {
-    const result: T[] = [];
-    for (let i = 0; i < array.length; i++) {
-        result.push(array[i], item);
-    }
-
-    return result;
-}
-
-const rules: RpgSlotMachine.Rules = {
-    height: 3,
-    lines: [
-        [0, 0, 0],
-        [1, 1, 1],
-        [2, 2, 2],
-    ],
-    reels: [
-        interlace([
-            // sym.peanut,
-            // sym.peanut,
-            sym.bar,
-            sym.cherry,
-            sym.cherry,
-            sym.seven,
-            // sym.peanut,
-            sym.cherry,
-            sym.cherry,
-            // sym.peanut,
-            sym.bar,
-            sym.bar,
-            // sym.peanut,
-            sym.seven,
-            sym.seven,
-            sym.wild,
-            sym.wild,
-        ], sym.empty),
-        interlace([
-            // sym.peanut,
-            // sym.peanut,
-            sym.cherry,
-            // sym.peanut,
-            // sym.peanut,
-            sym.cherry,
-            sym.cherry,
-            sym.bar,
-            sym.bar,
-            sym.seven,
-            sym.seven,
-            sym.bar,
-            sym.wild,
-            sym.wild,
-        ], sym.empty),
-        interlace([
-            // sym.peanut,
-            // sym.peanut,
-            sym.cherry,
-            sym.cherry,
-            sym.bar,
-            sym.bar,
-            sym.cherry,
-            sym.seven,
-            sym.seven,
-            sym.bar,
-            // sym.peanut,
-            sym.wild,
-            sym.wild,
-        ], sym.empty),
-    ],
-};
+const { rules, sym } = DataSlotMachines.BasicThreeReel;
 
 const txs = Tx.Casino.Slots.Test.split({ width: 58 });
 
@@ -129,7 +29,6 @@ symbolTxs.set(sym.wild, txs[4]);
 export function scnCasino() {
     Lvl.Dummy();
     scene.style.backgroundTint = 0x1c1336;
-    objSlotMachineSimulator(5, rules).show();
     objSlot(rules, { reel: { gap: 90 }, slot: { gap: 50, width: 65, height: 65 } }).at(160, 30).show();
 }
 
@@ -320,44 +219,4 @@ function objLineHighlighter(reelObjs: ObjReel[], transform: Matrix) {
     const gfx = new Graphics();
 
     return gfx.merge({ controls });
-}
-
-function objSlotMachineSimulator(price: Integer, rules: RpgSlotMachine.Rules) {
-    let spins = 0;
-    let won = 0;
-
-    let maxPrize = 0;
-    const prizeCounts = new Map<Integer, Integer>();
-
-    return objText.Medium().step(self => {
-        const timeStart = Date.now();
-        while (Date.now() < timeStart + 4) {
-            const { totalPrize } = RpgSlotMachine.spin(rules);
-            spins += 1;
-            won += totalPrize;
-            maxPrize = Math.max(totalPrize, maxPrize);
-            prizeCounts.set(totalPrize, (prizeCounts.get(totalPrize) ?? 0) + 1);
-        }
-
-        const paid = spins * price;
-        const returnToPlayer = won / paid;
-
-        const mostFrequentPrizes = [...prizeCounts.entries()].map(([prize, count]) => ({ prize, count })).sort((a, b) =>
-            b.count - a.count
-        );
-
-        self.text = `Spins: ${spins}
-Paid: ${paid}
-Won: ${won}
-Return-to-player: ${(returnToPlayer * 100).toFixed(4)}%
-Maximum prize: ${maxPrize} (${((prizeCounts.get(maxPrize)! / spins) * 100).toFixed(5)}%)
-Most frequent prizes:
-${
-            mostFrequentPrizes.slice(0, 10).map(({ count, prize }) =>
-                `${prize}: ${((count / spins) * 100).toFixed(2)}%`
-            )
-                .join("\n")
-        }
-`;
-    });
 }
