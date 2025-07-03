@@ -218,6 +218,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 }
 
                 if (stepsSinceOffGround < 6 && (puppet.isMovingLeft || puppet.isMovingRight)) {
+                    puppet.play(Sfx.Iguana.JumpCombo.rate(0.975, 1.025));
                     objFxPlayerJumpComboDust().at(puppet.x + Math.sign(puppet.facing) * -4, puppet.y).scaled(
                         -Math.sign(puppet.facing),
                         1,
