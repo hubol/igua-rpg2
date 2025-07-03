@@ -1,0 +1,197 @@
+{
+  "ogmoVersion": "3.4.0-hubol",
+  "width": 500,
+  "height": 280,
+  "offsetX": 0,
+  "offsetY": 0,
+  "backgroundColor": "#408000",
+  "values": {"Terrain Color": "#000000"},
+  "layers": [
+    {
+      "name": "MarkerEntities",
+      "_eid": "73166939",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 280,
+          "y": 200,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "DummyMarker", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "RegionEntities",
+      "_eid": "01831167",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": []
+    },
+    {
+      "name": "FrontDecals",
+      "_eid": "17577176",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "FrontEntities",
+      "_eid": "55690179",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": []
+    },
+    {
+      "name": "PlayerEntities",
+      "_eid": "96470627",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": [
+        {
+          "name": "Player",
+          "id": 0,
+          "_eid": "93092164",
+          "x": 104,
+          "y": 200,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "CharacterEntities",
+      "_eid": "07790422",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": []
+    },
+    {
+      "name": "AboveEntitiesDecals",
+      "_eid": "63753160",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "Entities",
+      "_eid": "93086020",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": []
+    },
+    {
+      "name": "TerrainDecals",
+      "_eid": "02386446",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "TerrainEntities",
+      "_eid": "02302709",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": [
+        {
+          "name": "Block",
+          "id": 0,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 200,
+          "width": 504,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        }
+      ]
+    },
+    {
+      "name": "BackgroundEntities",
+      "_eid": "41483982",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": []
+    },
+    {
+      "name": "BackgroundDecals",
+      "_eid": "64691217",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxDecals",
+      "_eid": "17093961",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "decals": [],
+      "folder": "../textures"
+    }
+  ]
+}

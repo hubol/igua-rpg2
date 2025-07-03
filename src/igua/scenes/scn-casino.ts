@@ -1,5 +1,6 @@
 import { Graphics, LINE_CAP, Matrix, Point, Sprite, Texture } from "pixi.js";
 import { objText } from "../../assets/fonts";
+import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interp } from "../../lib/game-engine/routines/interp";
@@ -126,6 +127,7 @@ symbolTxs.set(sym.bar, txs[3]);
 symbolTxs.set(sym.wild, txs[4]);
 
 export function scnCasino() {
+    Lvl.Dummy();
     scene.style.backgroundTint = 0x1c1336;
     objSlotMachineSimulator(5, rules).show();
     objSlot(rules, { reel: { gap: 90 }, slot: { gap: 50, width: 65, height: 65 } }).at(160, 30).show();

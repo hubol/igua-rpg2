@@ -7,6 +7,10 @@ import { Tx } from "../../../assets/textures";
 const { createEntity: e, createDecal: d, applyLevel, createDecalGroup: dg } = OgmoFactory;
 
 export const Lvl = {
+  Dummy: () => {
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000 });
+    return { Block: e(r["Block"], { x: 0, y: 200, width: 504, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"), Player: e(r["Player"], { x: 104, y: 200, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"), DummyMarker: e(r["Marker"], { x: 280, y: 200, values: { name: "DummyMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities") };
+  },
   MenuIguanaDesigner: () => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x002c38 });
     return {
@@ -2906,6 +2910,7 @@ export const Lvl = {
 };
 
 export namespace LvlType {
+  export type Dummy = ReturnType<(typeof Lvl)["Dummy"]>;
   export type MenuIguanaDesigner = ReturnType<(typeof Lvl)["MenuIguanaDesigner"]>;
   export type NewBalltownArmorer = ReturnType<(typeof Lvl)["NewBalltownArmorer"]>;
   export type NewBalltownFanatic = ReturnType<(typeof Lvl)["NewBalltownFanatic"]>;
