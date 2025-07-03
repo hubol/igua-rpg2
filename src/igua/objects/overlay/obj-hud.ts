@@ -18,6 +18,7 @@ import { CtxInteract } from "../../mixins/mxn-interact";
 import { RpgPlayer } from "../../rpg/rpg-player";
 import { RpgProgress, RpgProgressExperience } from "../../rpg/rpg-progress";
 import { playerObj } from "../obj-player";
+import { StepOrder } from "../step-order";
 import { objFlopCollectionIndicator } from "./obj-flop-collection-indicator";
 import { objHealthBar } from "./obj-health-bar";
 import { objStatusBar } from "./obj-status-bar";
@@ -219,7 +220,7 @@ function objExperienceIndicator() {
     updateWeights();
     const subdividedBarObj = objUiSubdividedBar({ width: 128, height: 4, tint: 0x404040, weights });
     const obj = container(subdividedBarObj, ...deltaObjs)
-        .step(updateWeights)
+        .step(updateWeights, StepOrder.BeforeCamera - 2)
         .step(() => {
             let maximumX = 128;
             for (let i = deltaObjs.length - 1; i >= 0; i--) {
@@ -231,7 +232,7 @@ function objExperienceIndicator() {
                 deltaObj.x = Math.min(rectangle.x + rectangle.width, maximumX) - deltaObj.effectiveWidth;
                 maximumX = deltaObj.x;
             }
-        })
+        }, StepOrder.BeforeCamera)
         .step(self => {
             self.x = approachLinear(self.x, dramaShop.isActive() ? xPositions.left : xPositions.right, 16);
         })
@@ -275,7 +276,7 @@ function objExperienceIndicatorDelta({ tint, iconTx }: ExperienceIndicatorConfig
             }
 
             iconObj.x = Math.round(gfx.width / 2);
-        })
+        }, StepOrder.BeforeCamera - 1)
         .pivoted(0, 9);
 }
 
