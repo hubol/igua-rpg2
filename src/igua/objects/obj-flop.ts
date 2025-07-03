@@ -1,5 +1,6 @@
 import { Graphics, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
@@ -10,6 +11,7 @@ import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { container } from "../../lib/pixi/container";
 import { MapRgbFilter } from "../../lib/pixi/filters/map-rgb-filter";
 import { scene } from "../globals";
+import { GenerativeMusicUtils } from "../lib/generative-music-utils";
 import { mxnPhysics } from "../mixins/mxn-physics";
 import { RpgFlops } from "../rpg/rpg-flops";
 import { RpgProgress } from "../rpg/rpg-progress";
@@ -52,6 +54,7 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
             }
         })
         .coro(function* (self) {
+            self.play(Sfx.Collect.FlopAppear.rate(0.9, 1.1));
             self.speed.y = -3;
             yield sleep(150);
             appearObj.textureIndex = 1;
@@ -85,14 +88,24 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
             yield sleepf(2);
             // TODO should it check if the player has control
             yield () => playerObj.collides(hitboxObj);
+            self.play(Sfx.Collect.Flop.rate(0.9, 1.1));
             newIndicatorVisibleObj.destroy();
             RpgFlops.Methods.receive(RpgProgress.character.inventory.flops, flopDexNumberZeroIndexed);
             self.physicsEnabled = false;
             self.speed.at(0, 0);
             yield interpvr(self).translate(0, -32).over(200);
+            if (newIndicatorObj.visible) {
+                self.play(Sfx.Collect.FlopNew.rate(0.9, 1.1));
+            }
             yield interp(newIndicatorObj, "angle").steps(8).to(360).over(400);
             yield sleep(1000);
+
+            const tune = GenerativeMusicUtils.tune4("major");
             for (let i = 0; i < 4; i++) {
+                const { value: rate } = tune.next();
+                if (rate) {
+                    self.play(Sfx.Collect.FlopFlash.rate(rate));
+                }
                 self.visible = !self.visible;
                 yield sleep(100);
             }

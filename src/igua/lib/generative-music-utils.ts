@@ -67,4 +67,19 @@ export namespace GenerativeMusicUtils {
         yield cScaleRates[ironicRateIndex];
         yield cScaleRates[rootIndex] * (Rng.bool() ? 0.5 : 2);
     }
+
+    export function* tune4(scale: Scale) {
+        const rootIndex = getRandomRateIndex();
+        const scaleRateIndices = scales[scale];
+        const scaleSet = scaleSets[scale];
+        const identityIndex = (rootIndex + scaleRateIndices[2]) % 12;
+        const ironicRateIndex = getIronicRateIndex(rootIndex, scaleSet);
+        yield cScaleRates[Rng.bool() ? rootIndex : identityIndex];
+        for (let i = 0; i < 2; i++) {
+            const rawRateIndex = Rng.choose(...scaleRateIndices);
+            const rateIndex = (rootIndex + rawRateIndex) % 12;
+            yield cScaleRates[rateIndex];
+        }
+        yield Rng.bool() ? cScaleRates[ironicRateIndex] : (cScaleRates[rootIndex] * (Rng.bool() ? 0.5 : 2));
+    }
 }
