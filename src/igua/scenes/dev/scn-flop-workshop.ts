@@ -1,13 +1,13 @@
-import { objText } from "../../assets/fonts";
-import { KeyCode } from "../../lib/browser/key-listener";
-import { LocalStorageEntry } from "../../lib/browser/local-storage-entry";
-import { sleepf } from "../../lib/game-engine/routines/sleep";
-import { Integer } from "../../lib/math/number-alias-types";
-import { container } from "../../lib/pixi/container";
-import { range } from "../../lib/range";
-import { renderer } from "../current-pixi-renderer";
-import { DevKey, scene } from "../globals";
-import { objFlopCharacter } from "../objects/obj-flop";
+import { objText } from "../../../assets/fonts";
+import { KeyCode } from "../../../lib/browser/key-listener";
+import { LocalStorageEntry } from "../../../lib/browser/local-storage-entry";
+import { sleepf } from "../../../lib/game-engine/routines/sleep";
+import { Integer } from "../../../lib/math/number-alias-types";
+import { container } from "../../../lib/pixi/container";
+import { range } from "../../../lib/range";
+import { renderer } from "../../current-pixi-renderer";
+import { DevKey, scene } from "../../globals";
+import { objFlopCharacter } from "../../objects/obj-flop";
 
 // This is a simple tool
 // For picking seeds for the 999 flop characters

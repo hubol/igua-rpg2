@@ -1,7 +1,7 @@
 import { Graphics } from "pixi.js";
-import { objText } from "../../assets/fonts";
-import { container } from "../../lib/pixi/container";
-import { scene } from "../globals";
+import { objText } from "../../../assets/fonts";
+import { container } from "../../../lib/pixi/container";
+import { scene } from "../../globals";
 
 export function scnDevlogText() {
     // Note: To use, set renderer width/height to 1920x1080
