@@ -2,7 +2,7 @@ import { Container } from "pixi.js";
 import { AsshatTaskContext, AsshatTicker } from "./asshat-ticker";
 
 export class TickerContainer extends Container {
-    constructor(readonly _ticker: AsshatTicker, startTickingOnceAdded = true) {
+    constructor(readonly _ticker: AsshatTicker, startTickingOnceAdded = true, stepOrder = 0) {
         super();
         if (startTickingOnceAdded) {
             const tickFn = () => _ticker.tick();
@@ -14,7 +14,7 @@ export class TickerContainer extends Container {
                 parent.ticker.add({
                     fn: tickFn,
                     context: this as unknown as AsshatTaskContext,
-                }, 0);
+                }, stepOrder);
             });
         }
     }
