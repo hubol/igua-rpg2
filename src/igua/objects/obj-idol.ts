@@ -1,9 +1,12 @@
 import { Graphics, Sprite, Texture } from "pixi.js";
 import { Tx } from "../../assets/textures";
+import { Integer } from "../../lib/math/number-alias-types";
 import { Vector } from "../../lib/math/vector-type";
 import { CollisionShape } from "../../lib/pixi/collision";
 import { container } from "../../lib/pixi/container";
-import { mxnInteract } from "../mixins/mxn-interact";
+import { DataKeyItemInternalName } from "../data/data-key-items";
+import { DramaKeyItems } from "../drama/drama-key-items";
+import { mxnCutscene } from "../mixins/mxn-cutscene";
 
 const styles = new Map<Texture, Vector>();
 styles.set(Tx.Furniture.Artwork.Statue0, [32, 97]);
@@ -18,23 +21,36 @@ const textures = [
     Tx.Furniture.Artwork.Statue3,
 ];
 
+const itemToIndex = {
+    SeedYellow: 0,
+    SeedGreen: 1,
+    SeedBlue: 2,
+    SeedPurple: 3,
+} satisfies Partial<Record<DataKeyItemInternalName, Integer>>;
+
 export function objIdol() {
     const collisionShapeObj = new Graphics().beginFill(0).drawRect(-10, -10, 20, 20).invisible();
-    let index = 0;
+    let index = -1;
 
     const sprite = new Sprite();
 
     function updateSprite() {
-        sprite.texture = textures[index];
+        sprite.texture = textures[index] ?? textures[0];
         sprite.pivot.at(styles.get(sprite.texture)!);
+        sprite.visible = index >= 0;
     }
 
     updateSprite();
 
     return container(collisionShapeObj, sprite)
         .collisionShape(CollisionShape.DisplayObjects, [collisionShapeObj])
-        .mixin(mxnInteract, () => {
-            index = (index + 1) % textures.length;
+        .mixin(mxnCutscene, function* () {
+            const result = yield* DramaKeyItems.use({
+                items: Object.keys(itemToIndex) as (keyof typeof itemToIndex)[],
+            });
+            if (result && result.count) {
+                index = itemToIndex[result.item];
+            }
             updateSprite();
         });
 }
