@@ -3,7 +3,7 @@ import { Sfx } from "../../../assets/sounds";
 import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
 import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 import { cyclic } from "../../../lib/math/number";
-import { RgbInt } from "../../../lib/math/number-alias-types";
+import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { Undefined } from "../../../lib/types/undefined";
 import { renderer } from "../../current-pixi-renderer";
@@ -17,6 +17,7 @@ export type UiPageProps = {
     startTicking?: boolean;
     scrollbarBgTint?: RgbInt;
     scrollbarFgTint?: RgbInt;
+    scrollCatchUpSpeed?: Integer;
 };
 export type ObjUiPageElement = Container & { selected: boolean };
 
@@ -187,9 +188,9 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
 
             if (c.selected) {
                 const { y: rootY } = c.getBounds(false, r);
+                const iterations = props.scrollCatchUpSpeed ?? 3;
 
-                // TODO the 3 here -- might want it to be configurable!
-                for (let i = 0; i < 3; i++) {
+                for (let i = 0; i < iterations; i++) {
                     const bounds = c.selected.getBounds(false, r);
                     bounds.y -= rootY;
 

@@ -74,6 +74,7 @@ export function* dramaShop(shop: RpgShop, style: DramaShopStyle) {
             maxHeight: renderer.height - 40,
             scrollbarBgTint: CtxDramaShop.value.style.primaryTint,
             scrollbarFgTint: CtxDramaShop.value.style.secondaryTint,
+            scrollCatchUpSpeed: 10,
         },
     )
         .at(renderer.width - ItemConsts.width - 32, 0);
