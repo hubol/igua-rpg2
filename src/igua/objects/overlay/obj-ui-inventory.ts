@@ -1,14 +1,9 @@
-import { Graphics, Sprite } from "pixi.js";
-import { objText } from "../../../assets/fonts";
+import { Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
-import { SubjectiveColorAnalyzer } from "../../../lib/color/subjective-color-analyzer";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { Integer } from "../../../lib/math/number-alias-types";
-import { PseudoRng } from "../../../lib/math/rng";
-import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
-import { EquipmentInternalName, getDataEquipment } from "../../data/data-equipment";
 import { Cutscene, Input } from "../../globals";
 import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
 import { mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
@@ -16,6 +11,7 @@ import { RpgCharacterEquipment, RpgObtainedEquipment } from "../../rpg/rpg-chara
 import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
+import { objEquipmentRepresentation } from "../obj-equipment-representation";
 import { StepOrder } from "../step-order";
 import { objUiEquipmentEffects, objUiEquipmentEffectsComparedTo } from "./obj-ui-equipment-effects";
 
@@ -140,42 +136,4 @@ function objUiEquipment(getEquipmentName: () => RpgEquipmentLoadout.Item, varian
     maybeApply();
 
     return obj.merge({ getEquipmentName });
-}
-
-function objEquipmentRepresentation(internalName: EquipmentInternalName) {
-    const props = getPlaceholderProperties(internalName);
-
-    return container(
-        new Graphics().beginFill(props.backgroundTint).drawRect(0, 0, 32, 32),
-        objText.Medium(props.name, { tint: props.textTint, maxWidth: 32, align: "center" }).anchored(0.5, 0.5).at(
-            16,
-            16,
-        ),
-    );
-}
-
-const prng = new PseudoRng();
-const printedNameSanitizeRegexp = /((Ring)|a|e|i|o|u)*/g;
-const whiteSpaceRegexp = /\s+/g;
-
-// TODO placeholder until I draw sprites... I guess
-function getPlaceholderProperties(internalName: EquipmentInternalName) {
-    let seed = internalName.length * 698769;
-    for (let i = 0; i < internalName.length; i++) {
-        seed += internalName.charCodeAt(i) * 9901237 + 111 - i * 3;
-    }
-
-    prng.seed = seed;
-
-    const backgroundTint = AdjustColor.hsv(prng.float(0, 360), prng.float(80, 100), prng.float(80, 100)).toPixi();
-    const textTint = SubjectiveColorAnalyzer.getPreferredTextColor(backgroundTint);
-
-    return {
-        backgroundTint,
-        textTint,
-        name: getDataEquipment(internalName).name
-            .replaceAll(printedNameSanitizeRegexp, "")
-            .replaceAll(whiteSpaceRegexp, " ")
-            .trim(),
-    };
 }
