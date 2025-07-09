@@ -2,6 +2,7 @@ import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { Empty } from "../../lib/types/empty";
+import { EquipmentInternalName } from "../data/data-equipment";
 import { RpgEquipmentEffects } from "./rpg-equipment-effects";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgStatus } from "./rpg-status";
@@ -19,6 +20,11 @@ export namespace RpgLoot {
         item: RpgPocket.Item;
     }
 
+    interface TierOptionDrop_Equipment {
+        kind: "equipment";
+        equipment: EquipmentInternalName;
+    }
+
     interface TierOptionDrop_Flop {
         kind: "flop";
         min: Integer;
@@ -32,6 +38,7 @@ export namespace RpgLoot {
     // TODO key item, too
 
     type TierOptionDrop =
+        | TierOptionDrop_Equipment
         | TierOptionDrop_Valuables
         | TierOptionDrop_PocketItem
         | TierOptionDrop_Flop
@@ -50,6 +57,7 @@ export namespace RpgLoot {
     };
 
     export interface Drop {
+        equipments: EquipmentInternalName[];
         valuables: Integer;
         pocketItems: RpgPocket.Item[];
         flops: Integer[];
@@ -57,6 +65,7 @@ export namespace RpgLoot {
 
     export const Methods = {
         drop(model: Model, dropperStatus: RpgStatus.Model, lootEffects: RpgEquipmentEffects.Model["loot"]): Drop {
+            const equipments: EquipmentInternalName[] = [];
             let valuables = lootEffects.valuables.bonus;
             const pocketItems: RpgPocket.Item[] = [];
             const flops: Integer[] = [];
@@ -80,7 +89,10 @@ export namespace RpgLoot {
                     continue;
                 }
 
-                if (drop.kind === "valuables") {
+                if (drop.kind === "equipment") {
+                    equipments.push(drop.equipment);
+                }
+                else if (drop.kind === "valuables") {
                     valuables += computeValuables(drop, dropperStatus);
                 }
                 else if (drop.kind === "pocket_item") {
@@ -95,6 +107,7 @@ export namespace RpgLoot {
             }
 
             return {
+                equipments,
                 valuables,
                 pocketItems,
                 flops,
