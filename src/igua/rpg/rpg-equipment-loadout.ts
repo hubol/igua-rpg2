@@ -2,20 +2,20 @@ import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Empty } from "../../lib/types/empty";
 import { DataEquipment, EquipmentInternalName } from "../data/data-equipment";
-import { RpgEquipmentEffects } from "./rpg-equipment-effects";
+import { RpgPlayerBuffs } from "./rpg-player-buffs";
 
 export namespace RpgEquipmentLoadout {
     export type Item = EquipmentInternalName | null;
     export type Model = [Item, Item, Item, Item];
 
-    const effectsOrder = Empty<EquipmentInternalName>();
-    const effectsBonusMap = new Map<EquipmentInternalName, Integer>();
+    const equipmentsOrder = Empty<EquipmentInternalName>();
+    const equipmentBonusMap = new Map<EquipmentInternalName, Integer>();
 
-    export function getEffects(loadout: Readonly<Model>, dest: RpgEquipmentEffects.Model) {
-        RpgEquipmentEffects.clear(dest);
+    export function getPlayerBuffs(loadout: Readonly<Model>, dest: RpgPlayerBuffs.Model) {
+        RpgPlayerBuffs.clear(dest);
 
-        effectsOrder.length = 0;
-        effectsBonusMap.clear();
+        equipmentsOrder.length = 0;
+        equipmentBonusMap.clear();
 
         for (let i = 0; i < loadout.length; i++) {
             const name = loadout[i];
@@ -23,25 +23,25 @@ export namespace RpgEquipmentLoadout {
                 continue;
             }
 
-            const value = effectsBonusMap.get(name);
+            const value = equipmentBonusMap.get(name);
 
             if (value === undefined) {
-                effectsOrder.push(name);
+                equipmentsOrder.push(name);
             }
 
             const nextValue = value === undefined ? 0 : (value + 1);
-            effectsBonusMap.set(name, nextValue);
+            equipmentBonusMap.set(name, nextValue);
         }
 
-        for (let i = 0; i < effectsOrder.length; i++) {
-            const name = effectsOrder[i];
-            const bonus = effectsBonusMap.get(name)!;
+        for (let i = 0; i < equipmentsOrder.length; i++) {
+            const name = equipmentsOrder[i];
+            const bonus = equipmentBonusMap.get(name)!;
 
             if (bonus === undefined) {
-                Logger.logAssertError(`RpgEquipmentLoadout.getEffects`, new Error(`Got undefined bonus`), { name });
+                Logger.logAssertError(`RpgEquipmentLoadout.getPlayerBuffs`, new Error(`Got undefined bonus`), { name });
             }
 
-            DataEquipment[name].effects(dest, bonus);
+            DataEquipment[name].buffs(dest, bonus);
         }
     }
 }

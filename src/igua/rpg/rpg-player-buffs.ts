@@ -1,7 +1,7 @@
 import { Integer, PercentAsInteger } from "../../lib/math/number-alias-types";
 import { compileResetter } from "../../lib/object/compile-resetter";
 
-export namespace RpgEquipmentEffects {
+export namespace RpgPlayerBuffs {
     export function create() {
         return {
             combat: {

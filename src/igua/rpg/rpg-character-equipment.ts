@@ -3,8 +3,8 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { clone } from "../../lib/object/clone";
 import { Empty } from "../../lib/types/empty";
 import { EquipmentInternalName } from "../data/data-equipment";
-import { RpgEquipmentEffects } from "./rpg-equipment-effects";
 import { RpgEquipmentLoadout } from "./rpg-equipment-loadout";
+import { RpgPlayerBuffs } from "./rpg-player-buffs";
 
 export interface RpgObtainedEquipment {
     id: Integer;
@@ -23,7 +23,7 @@ type Data = ReturnType<typeof createData>;
 
 export class RpgCharacterEquipment {
     private readonly _loadout: RpgEquipmentLoadout.Model = [null, null, null, null];
-    private readonly _loadoutEffects = RpgEquipmentEffects.create();
+    private readonly _loadoutBuffs = RpgPlayerBuffs.create();
 
     constructor(private _data: Data) {
         this._updateLoadout();
@@ -61,7 +61,7 @@ export class RpgCharacterEquipment {
             );
         }
 
-        RpgEquipmentLoadout.getEffects(this._loadout, this._loadoutEffects);
+        RpgEquipmentLoadout.getPlayerBuffs(this._loadout, this._loadoutBuffs);
     }
 
     static createData = createData;
@@ -102,8 +102,8 @@ export class RpgCharacterEquipment {
         return this._loadout;
     }
 
-    get loadoutEffects(): Readonly<RpgEquipmentEffects.Model> {
-        return this._loadoutEffects;
+    get loadoutBuffs(): Readonly<RpgPlayerBuffs.Model> {
+        return this._loadoutBuffs;
     }
 
     receive(name: EquipmentInternalName) {

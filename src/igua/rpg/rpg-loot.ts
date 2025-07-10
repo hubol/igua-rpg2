@@ -3,7 +3,7 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { Empty } from "../../lib/types/empty";
 import { EquipmentInternalName } from "../data/data-equipment";
-import { RpgEquipmentEffects } from "./rpg-equipment-effects";
+import { RpgPlayerBuffs } from "./rpg-player-buffs";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgStatus } from "./rpg-status";
 
@@ -64,9 +64,9 @@ export namespace RpgLoot {
     }
 
     export const Methods = {
-        drop(model: Model, dropperStatus: RpgStatus.Model, lootEffects: RpgEquipmentEffects.Model["loot"]): Drop {
+        drop(model: Model, dropperStatus: RpgStatus.Model, lootBuffs: RpgPlayerBuffs.Model["loot"]): Drop {
             const equipments: EquipmentInternalName[] = [];
-            let valuables = lootEffects.valuables.bonus;
+            let valuables = lootBuffs.valuables.bonus;
             const pocketItems: RpgPocket.Item[] = [];
             const flops: Integer[] = [];
 
@@ -80,7 +80,7 @@ export namespace RpgLoot {
                 let drop = pickOptionDrop(tier);
 
                 let rerollCount = 0;
-                while (drop === null && rerollCount < lootEffects.tiers.nothingRerollCount) {
+                while (drop === null && rerollCount < lootBuffs.tiers.nothingRerollCount) {
                     drop = pickOptionDrop(tier);
                     rerollCount++;
                 }
@@ -97,7 +97,7 @@ export namespace RpgLoot {
                 }
                 else if (drop.kind === "pocket_item") {
                     pocketItems.push(drop.item);
-                    if (Rng.float(100) <= lootEffects.pocket.bonusChance) {
+                    if (Rng.float(100) <= lootBuffs.pocket.bonusChance) {
                         pocketItems.push(drop.item);
                     }
                 }

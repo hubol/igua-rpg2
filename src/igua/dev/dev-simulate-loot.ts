@@ -2,12 +2,12 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { EquipmentInternalName } from "../data/data-equipment";
 import { DataPocketItemInternalName } from "../data/data-pocket-items";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
-import { RpgEquipmentEffects } from "../rpg/rpg-equipment-effects";
 import { RpgLoot } from "../rpg/rpg-loot";
+import { RpgPlayerBuffs } from "../rpg/rpg-player-buffs";
 
 export function devSimulateLoot(loot: RpgLoot.Model) {
     const { status } = RpgEnemyRank.create({});
-    const effects = RpgEquipmentEffects.create();
+    const buffs = RpgPlayerBuffs.create();
 
     const counts = {
         equipments: new Map<EquipmentInternalName, Integer>(),
@@ -19,7 +19,7 @@ export function devSimulateLoot(loot: RpgLoot.Model) {
     const iterationsCount = 100000;
 
     for (let i = 0; i < iterationsCount; i++) {
-        const drop = RpgLoot.Methods.drop(loot, status, effects.loot);
+        const drop = RpgLoot.Methods.drop(loot, status, buffs.loot);
         increment(counts.equipments, drop.equipments);
         increment(counts.flops, drop.flops);
         increment(counts.pocketItems, drop.pocketItems);
