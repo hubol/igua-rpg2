@@ -29,10 +29,13 @@ export function objLootDrop(drop: RpgLoot.Drop) {
                 yield sleep(250);
             }
 
-            // TODO very sad
+            let xSign = Rng.intp();
             for (let i = 0; i < drop.equipments.length; i++) {
-                objCollectibleEquipment(drop.equipments[i]).at(self).add(i * 40, 0).show(self.parent);
-                yield sleep(250);
+                const equipmentObj = objCollectibleEquipment(drop.equipments[i]).at(self).show(self.parent);
+                equipmentObj.speed.y = Rng.float(-1, -3);
+                equipmentObj.speed.x = Rng.float(1, 2) * xSign;
+                yield sleep(333);
+                xSign *= -1;
             }
         });
 }
