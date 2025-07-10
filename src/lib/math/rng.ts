@@ -20,7 +20,11 @@ class RngBase {
         if (max === undefined) {
             return Math.round(this.random() * min_max);
         }
-        return min_max + Math.round(this.random() * (max - min_max));
+        const range = max - min_max;
+        if (range > 1) {
+            return this.int(min_max, max + 1);
+        }
+        return min_max + Math.round(this.random() * range);
     }
 
     intp(): number {
