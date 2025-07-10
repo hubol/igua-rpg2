@@ -5,7 +5,7 @@ import { deepUpgradeVerbose } from "../../lib/object/deep-upgrade-verbose";
 import { Diff } from "../../lib/object/diff";
 import { GameStartConfig } from "../launch/start-game";
 import { playerObj } from "../objects/obj-player";
-import { getInitialRpgProgress, RpgProgress, RpgProgressData } from "../rpg/rpg-progress";
+import { devGetRpgProgressData, getInitialRpgProgress, RpgProgressData } from "../rpg/rpg-progress";
 import { DevUrl } from "./dev-url";
 
 function formatUpdatedProgressMessage(rawMessages: Array<{ path: string[]; message: string }>) {
@@ -25,7 +25,7 @@ export const DevGameStartConfig = {
 
         transientGameStartConfig.value = {
             initialProgress: getInitialRpgProgress(),
-            progress: RpgProgress,
+            progress: devGetRpgProgressData(),
             player: { position: playerPosition ? playerPosition.vcpy() : null },
         };
     },
@@ -39,7 +39,7 @@ export const DevGameStartConfig = {
 
             const { upgradedObject: upgradedProgress, rawMessages: schemaChangedMessages } = deepUpgradeVerbose(
                 config.progress,
-                RpgProgress,
+                devGetRpgProgressData(),
             );
             if (schemaChangedMessages.length) {
                 Toast.info(

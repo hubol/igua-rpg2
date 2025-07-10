@@ -7,8 +7,6 @@ interface Equipment_NoInternalName {
     buffs: RpgPlayerBuffs.MutatorFn;
 }
 
-const voidBuffs: RpgPlayerBuffs.MutatorFn = () => {};
-
 export const DataEquipment = {
     JumpAtSpecialSignsRing: {
         name: "Special Jumps Ring",
@@ -54,12 +52,12 @@ export const DataEquipment = {
     __Empty__: {
         name: "Empty",
         description: "Void",
-        buffs: voidBuffs,
+        buffs: RpgPlayerBuffs.voidMutator,
     },
     __Unknown__: {
         name: "???",
         description: "If you are reading this, it is an error",
-        buffs: voidBuffs,
+        buffs: RpgPlayerBuffs.voidMutator,
     },
 } satisfies Record<string, Equipment_NoInternalName>;
 

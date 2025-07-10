@@ -8,6 +8,7 @@ import { getDefaultLooks } from "../iguana/get-default-looks";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgFlops } from "./rpg-flops";
 import { RpgKeyItems } from "./rpg-key-items";
+import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgQuests } from "./rpg-quests";
 import { RpgStatus } from "./rpg-status";
@@ -125,10 +126,16 @@ export type RpgProgressData = ReturnType<typeof getInitialRpgProgress>;
 function getGuardedRpgProgress(data: RpgProgressData) {
     const { character, ...rest } = data;
 
+    const equipment = new RpgCharacterEquipment(character.inventory.equipment);
+    const buffs = new RpgPlayerAggregatedBuffs(equipment);
+
     return {
         character: {
             ...character,
-            equipment: new RpgCharacterEquipment(character.inventory.equipment),
+            get buffs() {
+                return buffs.getAggregatedBuffs();
+            },
+            equipment,
         },
         ...rest,
     };
@@ -136,8 +143,17 @@ function getGuardedRpgProgress(data: RpgProgressData) {
 
 export let RpgProgress = getGuardedRpgProgress(getInitialRpgProgress());
 
-export function setRpgProgress(rpgProgress: typeof RpgProgress) {
+export function setRpgProgress(rpgProgress: RpgProgressData) {
     RpgProgress = getGuardedRpgProgress(rpgProgress);
+}
+
+// TODO sucks
+export function devGetRpgProgressData(): RpgProgressData {
+    const { character: { buffs, equipment, ...character }, ...rest } = RpgProgress;
+    return {
+        character,
+        ...rest,
+    };
 }
 
 export type RpgProgressExperience = keyof typeof RpgProgress["character"]["experience"];

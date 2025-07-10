@@ -41,4 +41,6 @@ export namespace RpgPlayerBuffs {
     export type Model = ReturnType<typeof create>;
 
     export type MutatorFn = (model: Model, bonus: Integer) => void;
+
+    export const voidMutator: MutatorFn = () => {};
 }

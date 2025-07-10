@@ -5,7 +5,7 @@ import { DevGameStartConfig } from "../dev/dev-game-start-config";
 import { sceneStack, startAnimator } from "../globals";
 import { playerObj } from "../objects/obj-player";
 import { RpgPlayer } from "../rpg/rpg-player";
-import { RpgProgress, setRpgProgress } from "../rpg/rpg-progress";
+import { RpgProgress, RpgProgressData, setRpgProgress } from "../rpg/rpg-progress";
 
 export function startGame() {
     const config = getConfig();
@@ -41,7 +41,7 @@ function getConfig(): GameStartConfig {
 
 export interface GameStartConfig {
     sceneName: string;
-    progress: typeof RpgProgress | null;
+    progress: RpgProgressData | null;
     player: {
         position: VectorSimple | null;
     };

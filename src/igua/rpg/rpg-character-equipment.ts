@@ -24,6 +24,7 @@ type Data = ReturnType<typeof createData>;
 export class RpgCharacterEquipment {
     private readonly _loadout: RpgEquipmentLoadout.Model = [null, null, null, null];
     private readonly _loadoutBuffs = RpgPlayerBuffs.create();
+    private _loadoutUpdatesCount = 0;
 
     constructor(private _data: Data) {
         this._updateLoadout();
@@ -62,6 +63,7 @@ export class RpgCharacterEquipment {
         }
 
         RpgEquipmentLoadout.getPlayerBuffs(this._loadout, this._loadoutBuffs);
+        this._loadoutUpdatesCount++;
     }
 
     static createData = createData;
@@ -104,6 +106,10 @@ export class RpgCharacterEquipment {
 
     get loadoutBuffs(): Readonly<RpgPlayerBuffs.Model> {
         return this._loadoutBuffs;
+    }
+
+    get loadoutUpdatesCount() {
+        return this._loadoutUpdatesCount;
     }
 
     receive(name: EquipmentInternalName) {

@@ -31,7 +31,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         // Might need to be overrideable too, actually
         // Thinking about the dassmann fight from igua 1
         Sfx.Impact.DefeatEnemy.play();
-        const drop = RpgLoot.Methods.drop(loot, status, RpgProgress.character.equipment.loadoutBuffs.loot);
+        const drop = RpgLoot.Methods.drop(loot, status, RpgProgress.character.buffs.loot);
         objLootDrop(drop).at(enemyObj.mxnEnemy.soulAnchorObj.getWorldPosition()).show();
         enemyObj.dispatch("mxnEnemy.died");
         obj.destroy();
