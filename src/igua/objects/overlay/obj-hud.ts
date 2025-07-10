@@ -1,4 +1,4 @@
-import { Container, DisplayObject, Graphics, Rectangle, Sprite, Texture } from "pixi.js";
+import { Container, DisplayObject, Graphics, Point, Rectangle, Sprite, Texture } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
@@ -14,7 +14,7 @@ import { Null } from "../../../lib/types/null";
 import { renderer } from "../../current-pixi-renderer";
 import { DataPocketItems } from "../../data/data-pocket-items";
 import { dramaShop } from "../../drama/drama-shop";
-import { Cutscene } from "../../globals";
+import { Cutscene, scene } from "../../globals";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { CtxInteract } from "../../mixins/mxn-interact";
 import { RpgPlayer } from "../../rpg/rpg-player";
@@ -88,6 +88,7 @@ export function objHud() {
         });
 }
 
+const p = new Point();
 const r = new Rectangle();
 
 function objInteractIndicator() {
@@ -117,9 +118,25 @@ function objInteractIndicator() {
                     updatedOffsetY = approachLinear(updatedOffsetY, 0, 0.75);
 
                     self.visible = true;
+
+                    // Concerning -- It appears that getBounds does not reset the rectangle
+                    // In particular when a container has no visible children
+                    r.x = 0;
+                    r.y = 0;
+                    r.width = 0;
+                    r.height = 0;
+
                     (interactObj.interact.hotspotObj
                         ?? (interactObj.is(mxnHasHead) ? interactObj.mxnHead.obj : interactObj)).getBounds(false, r);
-                    self.at(r.x + r.width / 2, r.y + updatedOffsetY).vround();
+                    if (r.x === 0 && r.y === 0 && r.width === 0 && r.height === 0) {
+                        self.at(interactObj.getGlobalPosition(p, false));
+                    }
+                    else {
+                        self.at(r.x + r.width / 2, r.y);
+                    }
+
+                    self.y += updatedOffsetY;
+                    self.vround();
                 },
             ),
     );
