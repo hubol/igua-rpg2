@@ -34,7 +34,7 @@ styles.set("Purple", {
 
 const keyItemIds = Object.values(DataIdol.Manifest)
     .map(({ keyItemId }) => keyItemId)
-    .filter(keyItemId => keyItemId !== "__Unknown__");
+    .filter(keyItemId => keyItemId !== "__Fallback__");
 
 export function objIdol() {
     const collisionShapeObj = new Graphics().beginFill(0).drawRect(-10, -10, 20, 20).invisible();

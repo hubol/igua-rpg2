@@ -1,8 +1,7 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { EquipmentInternalName } from "../data/data-equipment";
-import { DataKeyItemInternalName } from "../data/data-key-items";
+import { DataKeyItem } from "../data/data-key-items";
 import { RpgEconomy } from "./rpg-economy";
-import { RpgEquipmentLoadout } from "./rpg-equipment-loadout";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerWallet } from "./rpg-player-wallet";
 import { RpgProgress } from "./rpg-progress";
@@ -14,7 +13,8 @@ interface Product_Equipment {
 
 interface Product_KeyItem {
     kind: "key_item";
-    name: DataKeyItemInternalName;
+    // TODD rename to id
+    name: DataKeyItem.Id;
 }
 
 interface Product_Potion {

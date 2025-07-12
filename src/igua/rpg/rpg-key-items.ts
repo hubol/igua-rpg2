@@ -1,8 +1,9 @@
 import { Logger } from "../../lib/game-engine/logger";
-import { DataKeyItemInternalName } from "../data/data-key-items";
+import { DataKeyItem } from "../data/data-key-items";
 
 export namespace RpgKeyItems {
-    export type Item = DataKeyItemInternalName;
+    // TODO suspicious alias
+    export type Item = DataKeyItem.Id;
     export type Model = Item[];
 
     export function create(): Model {

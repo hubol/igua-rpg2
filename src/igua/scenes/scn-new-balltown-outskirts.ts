@@ -6,7 +6,7 @@ import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
-import { DataKeyItems } from "../data/data-key-items";
+import { DataKeyItem } from "../data/data-key-items";
 import { DramaKeyItems } from "../drama/drama-key-items";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
@@ -141,7 +141,7 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
         }
 
         if (RpgKeyItems.Methods.has(RpgProgress.character.inventory.keyItems, "UpgradedPickaxe", 1)) {
-            yield* show(`Oh! I see that you have the ${DataKeyItems.UpgradedPickaxe.name}!`);
+            yield* show(`Oh! I see that you have the ${DataKeyItem.Manifest.UpgradedPickaxe.name}!`);
             if (yield* ask("Will you give it to me? You can have any valuables I mine")) {
                 yield* DramaKeyItems.remove("UpgradedPickaxe");
                 yield* show("...?!", "Thank you so much!", "I will get right to work.");

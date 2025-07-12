@@ -1,10 +1,10 @@
 import { RpgPlayerBuffs } from "../rpg/rpg-player-buffs";
-import { DataKeyItemInternalName } from "./data-key-items";
+import { DataKeyItem } from "./data-key-items";
 import { DataLib } from "./data-lib";
 
 export namespace DataIdol {
     export interface Model {
-        keyItemId: DataKeyItemInternalName;
+        keyItemId: DataKeyItem.Id;
         buffs: RpgPlayerBuffs.MutatorFn;
     }
 
@@ -36,7 +36,7 @@ export namespace DataIdol {
             },
             __Fallback__: {
                 buffs: () => {},
-                keyItemId: "__Unknown__",
+                keyItemId: "__Fallback__",
             },
         } satisfies Record<string, Model>,
     );
