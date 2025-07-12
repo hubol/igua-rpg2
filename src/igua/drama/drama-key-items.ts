@@ -28,21 +28,21 @@ function getCountMessage(item: RpgKeyItems.Item) {
     return count < 2 ? "" : `\nNow you have ${count} of them.`;
 }
 
-const use: <TName extends DataKeyItemInternalName[]>(
-    args: { items: TName },
-) => Coro.Type<{ item: TName[number]; count: Integer } | null> = function* ({ items }) {
-    const options = items.map(item =>
+const use: <TKeyItemId extends DataKeyItemInternalName[]>(
+    args: { keyItemIds: TKeyItemId },
+) => Coro.Type<{ keyItemId: TKeyItemId[number]; count: Integer } | null> = function* ({ keyItemIds }) {
+    const options = keyItemIds.map(item =>
         RpgKeyItems.Methods.has(RpgProgress.character.inventory.keyItems, item, 1)
             ? (DataKeyItems[item] ?? DataKeyItems.__Unknown__).name
             : null
     );
     const itemIndex = yield* ask("What to use?", ...options, "Nothing");
 
-    const item = items[itemIndex];
+    const keyItemId = keyItemIds[itemIndex];
 
-    if (item) {
-        yield* remove(item);
-        return { item, count: 1 };
+    if (keyItemId) {
+        yield* remove(keyItemId);
+        return { keyItemId, count: 1 };
     }
 
     return null;
