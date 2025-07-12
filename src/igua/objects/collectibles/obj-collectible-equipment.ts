@@ -1,19 +1,19 @@
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
-import { EquipmentInternalName } from "../../data/data-equipment";
+import { DataEquipment } from "../../data/data-equipment";
 import { mxnCollectible } from "../../mixins/mxn-collectible";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { RpgProgress } from "../../rpg/rpg-progress";
 import { objEquipmentRepresentation } from "../obj-equipment-representation";
 
 // TODO very sad
-export function objCollectibleEquipment(name: EquipmentInternalName) {
+export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
     let angle = 0;
 
-    return objEquipmentRepresentation(name)
+    return objEquipmentRepresentation(equipmentId)
         .pivoted(16, 16)
         .mixin(mxnCollectible, { kind: "transient" })
-        .handles("collected", () => RpgProgress.character.equipment.receive(name))
+        .handles("collected", () => RpgProgress.character.equipment.receive(equipmentId))
         .merge({ collectable: false })
         .mixin(mxnPhysics, { gravity: 0.1, physicsRadius: 13 })
         .handles("moved", (self, event) => {

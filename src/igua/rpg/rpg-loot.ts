@@ -2,7 +2,7 @@ import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { Empty } from "../../lib/types/empty";
-import { EquipmentInternalName } from "../data/data-equipment";
+import { DataEquipment } from "../data/data-equipment";
 import { RpgPlayerBuffs } from "./rpg-player-buffs";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgStatus } from "./rpg-status";
@@ -22,7 +22,7 @@ export namespace RpgLoot {
 
     interface TierOptionDrop_Equipment {
         kind: "equipment";
-        equipment: EquipmentInternalName;
+        equipment: DataEquipment.Id;
     }
 
     interface TierOptionDrop_Flop {
@@ -57,7 +57,7 @@ export namespace RpgLoot {
     };
 
     export interface Drop {
-        equipments: EquipmentInternalName[];
+        equipments: DataEquipment.Id[];
         valuables: Integer;
         pocketItems: RpgPocket.Item[];
         flops: Integer[];
@@ -65,7 +65,7 @@ export namespace RpgLoot {
 
     export const Methods = {
         drop(model: Model, dropperStatus: RpgStatus.Model, lootBuffs: RpgPlayerBuffs.Model["loot"]): Drop {
-            const equipments: EquipmentInternalName[] = [];
+            const equipments: DataEquipment.Id[] = [];
             let valuables = lootBuffs.valuables.bonus;
             const pocketItems: RpgPocket.Item[] = [];
             const flops: Integer[] = [];

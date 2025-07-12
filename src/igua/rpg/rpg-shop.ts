@@ -1,5 +1,5 @@
 import { Integer } from "../../lib/math/number-alias-types";
-import { EquipmentInternalName } from "../data/data-equipment";
+import { DataEquipment } from "../data/data-equipment";
 import { DataKeyItem } from "../data/data-key-items";
 import { RpgEconomy } from "./rpg-economy";
 import { RpgKeyItems } from "./rpg-key-items";
@@ -8,7 +8,7 @@ import { RpgProgress } from "./rpg-progress";
 
 interface Product_Equipment {
     kind: "equipment";
-    name: EquipmentInternalName;
+    name: DataEquipment.Id;
 }
 
 interface Product_KeyItem {

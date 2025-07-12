@@ -260,7 +260,7 @@ function objCatalogItemNameDescription(item: CatalogItem.Model) {
 function getCatalogItemName(item: CatalogItem.Model) {
     switch (item.product.kind) {
         case "equipment":
-            return (DataEquipment[item.product.name] ?? DataEquipment.__Unknown__).name;
+            return DataEquipment.getById(item.product.name).name;
         case "key_item":
             return DataKeyItem.getById(item.product.name).name;
         case "potion":
@@ -271,7 +271,7 @@ function getCatalogItemName(item: CatalogItem.Model) {
 function getCatalogItemDescription(item: CatalogItem.Model) {
     switch (item.product.kind) {
         case "equipment":
-            return (DataEquipment[item.product.name] ?? DataEquipment.__Unknown__).description;
+            return DataEquipment.getById(item.product.name).description;
         default:
             return "";
     }

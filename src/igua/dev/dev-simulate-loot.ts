@@ -1,5 +1,5 @@
 import { Integer } from "../../lib/math/number-alias-types";
-import { EquipmentInternalName } from "../data/data-equipment";
+import { DataEquipment } from "../data/data-equipment";
 import { DataPocketItemInternalName } from "../data/data-pocket-items";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { RpgLoot } from "../rpg/rpg-loot";
@@ -10,7 +10,7 @@ export function devSimulateLoot(loot: RpgLoot.Model) {
     const buffs = RpgPlayerBuffs.create();
 
     const counts = {
-        equipments: new Map<EquipmentInternalName, Integer>(),
+        equipments: new Map<DataEquipment.Id, Integer>(),
         flops: new Map<Integer, Integer>(),
         pocketItems: new Map<DataPocketItemInternalName, Integer>(),
         valuables: new Map<Integer, Integer>(),

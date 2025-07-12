@@ -4,10 +4,10 @@ import { SubjectiveColorAnalyzer } from "../../lib/color/subjective-color-analyz
 import { PseudoRng } from "../../lib/math/rng";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { container } from "../../lib/pixi/container";
-import { EquipmentInternalName, getDataEquipment } from "../data/data-equipment";
+import { DataEquipment } from "../data/data-equipment";
 
-export function objEquipmentRepresentation(internalName: EquipmentInternalName) {
-    const props = getPlaceholderProperties(internalName);
+export function objEquipmentRepresentation(equipmentId: DataEquipment.Id) {
+    const props = getPlaceholderProperties(equipmentId);
 
     return container(
         new Graphics().beginFill(props.backgroundTint).drawRect(0, 0, 32, 32),
@@ -23,10 +23,10 @@ const printedNameSanitizeRegexp = /((Ring)|a|e|i|o|u)*/g;
 const whiteSpaceRegexp = /\s+/g;
 
 // TODO placeholder until I draw sprites... I guess
-function getPlaceholderProperties(internalName: EquipmentInternalName) {
-    let seed = internalName.length * 698769;
-    for (let i = 0; i < internalName.length; i++) {
-        seed += internalName.charCodeAt(i) * 9901237 + 111 - i * 3;
+function getPlaceholderProperties(equipmentId: DataEquipment.Id) {
+    let seed = equipmentId.length * 698769;
+    for (let i = 0; i < equipmentId.length; i++) {
+        seed += equipmentId.charCodeAt(i) * 9901237 + 111 - i * 3;
     }
 
     prng.seed = seed;
@@ -37,7 +37,7 @@ function getPlaceholderProperties(internalName: EquipmentInternalName) {
     return {
         backgroundTint,
         textTint,
-        name: getDataEquipment(internalName).name
+        name: DataEquipment.getById(equipmentId).name
             .replaceAll(printedNameSanitizeRegexp, "")
             .replaceAll(whiteSpaceRegexp, " ")
             .trim(),

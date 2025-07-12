@@ -2,13 +2,14 @@ import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { clone } from "../../lib/object/clone";
 import { Empty } from "../../lib/types/empty";
-import { EquipmentInternalName } from "../data/data-equipment";
+import { DataEquipment } from "../data/data-equipment";
 import { RpgEquipmentLoadout } from "./rpg-equipment-loadout";
 import { RpgPlayerBuffs } from "./rpg-player-buffs";
 
 export interface RpgObtainedEquipment {
     id: Integer;
-    name: EquipmentInternalName;
+    // TODO rename to equipmentId
+    name: DataEquipment.Id;
     loadoutIndex: Integer | null;
 }
 
@@ -68,12 +69,12 @@ export class RpgCharacterEquipment {
 
     static createData = createData;
 
-    count(name: EquipmentInternalName) {
+    count(equipmentId: DataEquipment.Id) {
         const { list } = this._data;
 
         let count = 0;
         for (let i = 0; i < list.length; i++) {
-            if (list[i].name === name) {
+            if (list[i].name === equipmentId) {
                 count++;
             }
         }
@@ -112,8 +113,8 @@ export class RpgCharacterEquipment {
         return this._loadoutUpdatesCount;
     }
 
-    receive(name: EquipmentInternalName) {
-        this._data.list.push({ id: this._data.nextId++, name, loadoutIndex: null });
+    receive(equipmentId: DataEquipment.Id) {
+        this._data.list.push({ id: this._data.nextId++, name: equipmentId, loadoutIndex: null });
         this._updateLoadout();
     }
 
