@@ -2783,6 +2783,31 @@ export const Lvl = {
       EnvironmentSparkleMarker_11: e(r["EnvironmentSparkleMarker"], { x: 903, y: 430, values: { name: "", depth: 0 } }, "MarkerEntities"),
     };
   },
+  PlainsSuggestive: () => {
+    applyLevel({ width: 1096, height: 464, backgroundTint: 0xd28270 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 280, width: 144, height: 184, values: { name: "", depth: 0, visible: true }, tint: 0x680c0c }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 144, y: 280, width: 128, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x680c0c }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 144, y: 312, width: 128, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x680c0c }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 144, y: 376, width: 32, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x680c0c }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 144, y: 448, width: 208, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x680c0c }, "TerrainEntities"),
+      Slope_2: e(r["Slope"], { x: 320, y: 416, width: 128, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x680c0c }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 352, y: 448, width: 96, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x680c0c }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 448, y: 416, width: 80, height: 176, values: { name: "", depth: 0, visible: true }, tint: 0x680c0c }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 272, y: 360, width: 104, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 264, y: 152, width: 88, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x680c0c }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 792, y: 416, width: 256, height: 176, values: { name: "", depth: 0, visible: true }, tint: 0x680c0c }, "TerrainEntities"),
+      Pipe_1: e(r["Pipe"], { x: 656, y: 416, width: 32, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Idol: e(r["Idol"], { x: 312, y: 152, values: { name: "", depth: 0 } }, "Entities"),
+      Sign: e(r["Sign"], { x: 176, y: 296, values: { title: "Red", message: "This is the red plains.", name: "", depth: 0, isSpecial: true } }, "Entities"),
+      EnemySuggestive: e(r["EnemySuggestive"], { x: 336, y: 360, uid: 175254820161800, values: { name: "", depth: 0, variant: "level0" } }, "Entities"),
+      EnemySuggestive_1: e(r["EnemySuggestive"], { x: 488, y: 416, uid: 175254820393401, values: { name: "", depth: 0, variant: "level0" } }, "Entities"),
+      EnemySuggestive_2: e(r["EnemySuggestive"], { x: 832, y: 416, uid: 175254821975902, values: { name: "", depth: 0, variant: "level0" } }, "Entities"),
+      EnemySuggestive_3: e(r["EnemySuggestive"], { x: 976, y: 416, uid: 175254822078403, values: { name: "", depth: 0, variant: "level0" } }, "Entities"),
+      Player: e(r["Player"], { x: 80, y: 280, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -32, y: 152, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromPlainsSuggestiveLeft", name: "", depth: 0 } }, "RegionEntities"),
+    };
+  },
   WorldMap: () => {
     applyLevel({ width: 1368, height: 848, backgroundTint: 0x81bde9 });
     return {
@@ -2905,6 +2930,7 @@ export const Lvl = {
       fromNewBalltownUnderneathRight: e(r["Checkpoint"], { x: 824, y: 512, flippedX: false, values: { name: "fromNewBalltownUnderneathRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       GateMap: e(r["GateMap"], { x: 821, y: 495, rotation: 2340, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0 }, tint: 0xffffff }, "RegionEntities"),
       GateMap_1: e(r["GateMap"], { x: 637, y: 497, rotation: 0, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0 }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_2: e(r["GateMap"], { x: 944, y: 584, rotation: 270, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0 }, tint: 0xffffff }, "RegionEntities"),
     };
   },
 };
@@ -2921,5 +2947,6 @@ export namespace LvlType {
   export type NewBalltownUnderneathTunnel = ReturnType<(typeof Lvl)["NewBalltownUnderneathTunnel"]>;
   export type NewBalltownUnderneath = ReturnType<(typeof Lvl)["NewBalltownUnderneath"]>;
   export type NewBalltown = ReturnType<(typeof Lvl)["NewBalltown"]>;
+  export type PlainsSuggestive = ReturnType<(typeof Lvl)["PlainsSuggestive"]>;
   export type WorldMap = ReturnType<(typeof Lvl)["WorldMap"]>;
 }

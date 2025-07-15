@@ -51,6 +51,18 @@
           "rotation": 0,
           "tint": "#ffffff",
           "values": {"sceneName": "scnNewBalltownUnderneath", "checkpointName": "fromMapLeft", "name": "", "depth": 0}
+        },
+        {
+          "name": "GateMap",
+          "id": 3,
+          "_eid": "53836309",
+          "x": 944,
+          "y": 584,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 270,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnPlainsSuggestive", "checkpointName": "fromWorldMap", "name": "", "depth": 0}
         }
       ]
     },
