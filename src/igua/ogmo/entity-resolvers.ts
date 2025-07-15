@@ -35,7 +35,7 @@ export const OgmoEntityResolvers = {
     "Sign": ({ values }) => objSign(values),
     "IntelligenceBackground": ({ values }) => objIntelligenceBackground(values),
     "IguanaNpc": (entity) => {
-        const obj = objIguanaNpc(entity.values);
+        const obj = objIguanaNpc(entity.values.personaName as any);
         obj.y = 3;
         obj.facing = entity.flippedX ? -1 : 1;
         if (entity.flippedX) {

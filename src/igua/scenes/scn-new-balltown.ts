@@ -13,7 +13,7 @@ import { Empty } from "../../lib/types/empty";
 import { Force } from "../../lib/types/force";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
-import { NpcPersonas } from "../data/data-npc-personas";
+import { DataNpcPersona } from "../data/data-npc-personas";
 import { DramaMisc } from "../drama/drama-misc";
 import { dramaShop } from "../drama/drama-shop";
 import { DramaWallet } from "../drama/drama-wallet";
@@ -343,7 +343,7 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
 
     Cutscene.play(function* () {
         yield* show(
-            `To make the delivery more challenging, I am placing bombs along the route to ${NpcPersonas.NewBalltownArmorer.name}'s place.`,
+            `To make the delivery more challenging, I am placing bombs along the route to ${DataNpcPersona.Manifest.NewBalltownArmorer.name}'s place.`,
         );
 
         yield sleep(500);

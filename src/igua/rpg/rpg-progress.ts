@@ -3,7 +3,7 @@ import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { Empty } from "../../lib/types/empty";
 import { Null } from "../../lib/types/null";
 import { PropertiesLike } from "../../lib/types/properties-like";
-import { NpcPersonaInternalName } from "../data/data-npc-personas";
+import { DataNpcPersona } from "../data/data-npc-personas";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgFlops } from "./rpg-flops";
@@ -114,7 +114,7 @@ export function getInitialRpgProgress() {
         },
         // TODO move to programmaticFlags
         uids: {
-            metNpcs: new Set<NpcPersonaInternalName>(),
+            metNpcPersonaIds: new Set<DataNpcPersona.Id>(),
             valuables: new Set<number>(),
         },
     };

@@ -3,7 +3,7 @@ import { SubjectiveColorAnalyzer } from "../../lib/color/subjective-color-analyz
 import { Logger } from "../../lib/game-engine/logger";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { Rng } from "../../lib/math/rng";
-import { NpcPersonaInternalName, NpcPersonas } from "../data/data-npc-personas";
+import { DataNpcPersona } from "../data/data-npc-personas";
 import { Cutscene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { mxnIguanaEditable } from "../mixins/mxn-iguana-editable";
@@ -13,21 +13,8 @@ import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgProgress } from "../rpg/rpg-progress";
 import { objIguanaLocomotive } from "./obj-iguana-locomotive";
 
-interface ObjIguanaNpcArgs<TName extends string> {
-    personaName: TName;
-}
-
-// Very verbose, obnoxious hack to retain autocomplete
-// While still allowing Ogmo levels to pass in string for name :-/
-export function objIguanaNpc<TName extends string = NpcPersonaInternalName>({ personaName }: ObjIguanaNpcArgs<TName>) {
-    let persona = NpcPersonas[personaName as NpcPersonaInternalName];
-    if (!persona) {
-        Logger.logMisconfigurationError(
-            "objIguanaNpc",
-            new Error(`NpcPersona "${personaName}" does not exist!`),
-        );
-        persona = NpcPersonas.__Unknown__;
-    }
+export function objIguanaNpc(npcPersonaId: DataNpcPersona.Id) {
+    const persona = DataNpcPersona.getById(npcPersonaId as any);
 
     let speakingStartedCount = 0;
     let isSpeaking = false;
@@ -54,16 +41,16 @@ export function objIguanaNpc<TName extends string = NpcPersonaInternalName>({ pe
             }
         })
         .handles("mxnSpeaker.speakingStarted", () => {
-            const playerHasMetNpc = RpgProgress.uids.metNpcs.has(persona.internalName);
+            const playerHasMetNpc = RpgProgress.uids.metNpcPersonaIds.has(persona.id);
             const spokenDuringCutscene = Cutscene.current
-                && Cutscene.current.attributes.npcNamesSpoken.has(persona.internalName);
+                && Cutscene.current.attributes.speakerNpcPersonaIds.has(persona.id);
 
             RpgExperienceRewarder.social.onNpcSpeak(
                 playerHasMetNpc ? (spokenDuringCutscene ? "default" : "first_in_cutscene") : "first_ever",
             );
-            RpgProgress.uids.metNpcs.add(persona.internalName);
+            RpgProgress.uids.metNpcPersonaIds.add(persona.id);
             if (Cutscene.current) {
-                Cutscene.current.attributes.npcNamesSpoken.add(persona.internalName);
+                Cutscene.current.attributes.speakerNpcPersonaIds.add(persona.id);
             }
 
             speakingStartedCount++;

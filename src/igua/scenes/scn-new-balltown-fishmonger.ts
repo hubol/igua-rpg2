@@ -3,7 +3,7 @@ import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
-import { NpcPersonas } from "../data/data-npc-personas";
+import { DataNpcPersona } from "../data/data-npc-personas";
 import { DramaMisc } from "../drama/drama-misc";
 import { ask, show } from "../drama/show";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
@@ -60,7 +60,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
                 "You want a fish delivered? That's great! Who wants a fish?",
                 RpgProgress.flags.newBalltown.armorer.toldPlayerAboutDesireForFish
                     && RpgProgress.flags.newBalltown.fishmonger.deliveries.armorer === null
-                    ? NpcPersonas.NewBalltownArmorer.name
+                    ? DataNpcPersona.Manifest.NewBalltownArmorer.name
                     : null,
                 "I don't know",
             );
@@ -71,7 +71,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
             }
 
             if (fishRecipient === 0) {
-                yield* show(`${NpcPersonas.NewBalltownArmorer.name}...? Oh yeah, he had a fishtank!`);
+                yield* show(`${DataNpcPersona.Manifest.NewBalltownArmorer.name}...? Oh yeah, he had a fishtank!`);
                 if (yield* ask("Ready to make the delivery with me?")) {
                     yield* show("Great!");
                     yield sleep(500);
