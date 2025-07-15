@@ -1,5 +1,5 @@
 import { Logger } from "../../lib/game-engine/logger";
-import { DataKeyItem } from "../data/data-key-items";
+import { DataKeyItem } from "../data/data-key-item";
 
 export namespace RpgKeyItems {
     // TODO suspicious alias

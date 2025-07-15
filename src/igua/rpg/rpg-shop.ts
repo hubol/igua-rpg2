@@ -1,6 +1,6 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataEquipment } from "../data/data-equipment";
-import { DataKeyItem } from "../data/data-key-items";
+import { DataKeyItem } from "../data/data-key-item";
 import { RpgEconomy } from "./rpg-economy";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerWallet } from "./rpg-player-wallet";

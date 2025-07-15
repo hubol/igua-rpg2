@@ -1,5 +1,5 @@
 import { RpgPlayerBuffs } from "../rpg/rpg-player-buffs";
-import { DataKeyItem } from "./data-key-items";
+import { DataKeyItem } from "./data-key-item";
 import { DataLib } from "./data-lib";
 
 export namespace DataIdol {

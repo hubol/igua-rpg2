@@ -2,7 +2,7 @@ import { objText } from "../../assets/fonts";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { Integer } from "../../lib/math/number-alias-types";
 import { container } from "../../lib/pixi/container";
-import { DataKeyItem } from "../data/data-key-items";
+import { DataKeyItem } from "../data/data-key-item";
 import { layers } from "../globals";
 import { RpgKeyItems } from "../rpg/rpg-key-items";
 import { RpgProgress } from "../rpg/rpg-progress";

@@ -6,7 +6,7 @@ import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
-import { DataKeyItem } from "../data/data-key-items";
+import { DataKeyItem } from "../data/data-key-item";
 import { DramaKeyItems } from "../drama/drama-key-items";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
