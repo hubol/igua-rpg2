@@ -3,7 +3,7 @@ import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
-import { DataNpcPersona } from "../data/data-npc-personas";
+import { DataNpcPersona } from "../data/data-npc-persona";
 import { DramaMisc } from "../drama/drama-misc";
 import { ask, show } from "../drama/show";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";

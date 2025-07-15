@@ -3,7 +3,7 @@ import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { Empty } from "../../lib/types/empty";
 import { Null } from "../../lib/types/null";
 import { PropertiesLike } from "../../lib/types/properties-like";
-import { DataNpcPersona } from "../data/data-npc-personas";
+import { DataNpcPersona } from "../data/data-npc-persona";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgFlops } from "./rpg-flops";

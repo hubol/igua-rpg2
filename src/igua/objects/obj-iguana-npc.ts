@@ -3,7 +3,7 @@ import { SubjectiveColorAnalyzer } from "../../lib/color/subjective-color-analyz
 import { Logger } from "../../lib/game-engine/logger";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { Rng } from "../../lib/math/rng";
-import { DataNpcPersona } from "../data/data-npc-personas";
+import { DataNpcPersona } from "../data/data-npc-persona";
 import { Cutscene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { mxnIguanaEditable } from "../mixins/mxn-iguana-editable";
