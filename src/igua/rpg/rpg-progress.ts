@@ -4,6 +4,7 @@ import { Empty } from "../../lib/types/empty";
 import { Null } from "../../lib/types/null";
 import { PropertiesLike } from "../../lib/types/properties-like";
 import { DataNpcPersona } from "../data/data-npc-persona";
+import { DataPocketItem } from "../data/data-pocket-item";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgFlops } from "./rpg-flops";
@@ -111,6 +112,7 @@ export function getInitialRpgProgress() {
         },
         programmaticFlags: {
             shopSoldCounts: {} as Record<string, Record<string, Integer>>,
+            stashPocketDeposits: {} as Record<number, { pocketItemId: DataPocketItem.Id; count: Integer }>,
         },
         // TODO move to programmaticFlags
         uids: {
@@ -121,6 +123,8 @@ export function getInitialRpgProgress() {
 }
 
 export type RpgProgressData = ReturnType<typeof getInitialRpgProgress>;
+
+export type RpgProgressData_StashPocketDeposits = RpgProgressData["programmaticFlags"]["stashPocketDeposits"];
 
 // TODO this is a fuckin mess!
 function getGuardedRpgProgress(data: RpgProgressData) {
