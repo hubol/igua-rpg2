@@ -8,7 +8,6 @@ export namespace OgmoFactory {
     export interface EntityBase<TValues = DefaultEntityValues> {
         x: number;
         y: number;
-        // TODO I feel like this could be generated instead
         uid?: number;
         flippedX?: boolean;
         flippedY?: boolean;

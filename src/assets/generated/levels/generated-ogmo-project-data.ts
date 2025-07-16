@@ -14,9 +14,9 @@ export namespace OgmoEntities {
   export type Sign = OgmoFactory.EntityBase<{ title: string; message: string; name: string; depth: number; isSpecial: boolean }>;
   export type IntelligenceBackground = OgmoFactory.EntityBase<{ initialTint: string; targetTint: string; min: number; max: number; name: string; depth: number }>;
   export type IguanaNpc = OgmoFactory.EntityBase<{ personaName: string; name: string; depth: number }>;
-  export type ValuableGreen = OgmoFactory.EntityBase<{ name: string; depth: number }>;
-  export type ValuableOrange = OgmoFactory.EntityBase<{ name: string; depth: number }>;
-  export type ValuableBlue = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type ValuableGreen = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
+  export type ValuableOrange = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
+  export type ValuableBlue = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
   export type Puddle = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type Marker = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type Region = OgmoFactory.EntityBase<{ name: string; depth: number }>;
@@ -24,11 +24,11 @@ export namespace OgmoEntities {
   export type PocketableItemA = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type PocketableItemB = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type GateVertical = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
-  export type EnemySuggestive = OgmoFactory.EntityBase<{ name: string; depth: number; variant: "level0" | "level1" }>;
+  export type EnemySuggestive = OgmoFactory.EntityBase<{ name: string; depth: number; variant: "level0" | "level1" }> & { uid: number };
   export type EnvironmentSparkleMarker = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type Idol = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type GateMap = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
-  export type StashPocket = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type StashPocket = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
 }
 
 export interface OgmoEntityResolverBase {

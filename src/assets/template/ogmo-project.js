@@ -20,7 +20,7 @@ module.exports = function ({ files }, { format }) {
 
     const file = files[0];
 
-    /** @type {Array<{ name: string, values: Record<string, any> }>} */
+    /** @type {Array<import("./ogmo-project-json").OgmoProjectJson.Entity>} */
     const entities = file.json.entities;
 
     const source = `// This file is generated.
@@ -29,7 +29,9 @@ import { OgmoFactory } from "../../../igua/ogmo/factory";
 
 export namespace OgmoEntities {
     ${entities.map(entity => {
-        return `export type ${entity.name} = OgmoFactory.EntityBase<${serialize(Object.assign({}, ...entity.values.map(convertOgmoEntityValueToPartialTypeScriptInterface)), 0)}>;`
+        const sum = Object.assign(entity.hasUid ? { uid: literal("number") } : {});
+        const tValues = Object.assign({}, ...entity.values.map(convertOgmoEntityValueToPartialTypeScriptInterface));
+        return `export type ${entity.name} = OgmoFactory.EntityBase<${serialize(tValues, 0)}>${Object.keys(sum).length ? ` & ${serialize(sum, 0)}` : ''};`
     }).join('\n')}
 }
     
