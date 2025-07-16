@@ -1,10 +1,10 @@
 import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
-import { DataPocketItemInternalName, DataPocketItems } from "../data/data-pocket-items";
+import { DataPocketItem } from "../data/data-pocket-items";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 
 export namespace RpgPocket {
-    export type Item = DataPocketItemInternalName;
+    export type Item = DataPocketItem.Id;
 
     export interface Slot {
         item: Item | null;
@@ -32,7 +32,7 @@ export namespace RpgPocket {
         empty(model: Model) {
             let totalItems = 0;
 
-            const items = Object.keys(DataPocketItems).reduce((obj, key) => {
+            const items = Object.keys(DataPocketItem.Manifest).reduce((obj, key) => {
                 obj[key as Item] = 0;
                 return obj;
             }, {} as Record<Item, Integer>);

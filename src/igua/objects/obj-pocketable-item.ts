@@ -7,7 +7,7 @@ import { approachLinear } from "../../lib/math/number";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
-import { DataPocketItems } from "../data/data-pocket-items";
+import { DataPocketItem } from "../data/data-pocket-items";
 import { scene } from "../globals";
 import { MxnPhysics, mxnPhysics, PhysicsFaction } from "../mixins/mxn-physics";
 import { RpgPocket } from "../rpg/rpg-pocket";
@@ -28,7 +28,7 @@ objPocketableItem.parachuting = function objPocketableItemParachuting (item: Rpg
 };
 
 function objPocketableItemBase(item: RpgPocket.Item, freed: boolean) {
-    const tx = DataPocketItems[item].texture;
+    const tx = DataPocketItem.getById(item).texture;
     const obj = container().merge({ freed, isCollectible: false, item, tx }).zIndexed(ZIndex.Entities);
 
     Sprite.from(tx).anchored(0.5, 0.5).coro(function* (self) {

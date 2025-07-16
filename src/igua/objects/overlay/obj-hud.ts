@@ -12,7 +12,7 @@ import { RgbInt } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { Null } from "../../../lib/types/null";
 import { renderer } from "../../current-pixi-renderer";
-import { DataPocketItems } from "../../data/data-pocket-items";
+import { DataPocketItem } from "../../data/data-pocket-items";
 import { dramaShop } from "../../drama/drama-shop";
 import { Cutscene, scene } from "../../globals";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
@@ -327,7 +327,7 @@ function objPocketInfo() {
             // TODO multiple slots lol
             self.visible = slot.count > 0;
             if (self.visible) {
-                self.text = "Your pocket has " + DataPocketItems[slot.item!].name + "x" + slot.count;
+                self.text = "Your pocket has " + DataPocketItem.getById(slot.item!).name + "x" + slot.count;
                 self.seed = slot.count + 80_000;
             }
         });

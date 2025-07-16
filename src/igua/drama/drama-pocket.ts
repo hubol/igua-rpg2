@@ -4,7 +4,7 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { container } from "../../lib/pixi/container";
-import { DataPocketItems } from "../data/data-pocket-items";
+import { DataPocketItem } from "../data/data-pocket-items";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { playerObj } from "../objects/obj-player";
 import { RpgPocket } from "../rpg/rpg-pocket";
@@ -52,15 +52,15 @@ function* empty(recipientObj: DisplayObject): Coro.Type<RpgPocket.EmptyResult> {
     pocketObj.methods.open();
     yield sleep(333);
     const result = RpgPocket.Methods.empty(RpgProgress.character.inventory.pocket);
-    const keys = Object.keys(result.items) as RpgPocket.Item[];
+    const pocketItemIds = Object.keys(result.items) as RpgPocket.Item[];
 
     const itemsObj = container().show();
 
     let delay = 15;
 
-    for (const key of keys) {
-        const count = result.items[key];
-        const tx = DataPocketItems[key].texture;
+    for (const pocketItemId of pocketItemIds) {
+        const count = result.items[pocketItemId];
+        const tx = DataPocketItem.getById(pocketItemId).texture;
         for (let i = 0; i < count; i++) {
             // TODO sfx
             // TODO need more mature way to place object and recipient in appropriate spaces
