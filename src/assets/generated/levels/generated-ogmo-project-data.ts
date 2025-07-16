@@ -28,6 +28,7 @@ export namespace OgmoEntities {
   export type EnvironmentSparkleMarker = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type Idol = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type GateMap = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
+  export type StashPocket = OgmoFactory.EntityBase<{ name: string; depth: number }>;
 }
 
 export interface OgmoEntityResolverBase {
@@ -56,4 +57,5 @@ export interface OgmoEntityResolverBase {
   EnvironmentSparkleMarker: (entity: OgmoEntities.EnvironmentSparkleMarker) => unknown;
   Idol: (entity: OgmoEntities.Idol) => unknown;
   GateMap: (entity: OgmoEntities.GateMap) => unknown;
+  StashPocket: (entity: OgmoEntities.StashPocket) => unknown;
 }

@@ -2834,9 +2834,11 @@ export const Lvl = {
       EnemySuggestive_1: e(r["EnemySuggestive"], { x: 488, y: 416, uid: 175254820393401, values: { name: "", depth: 0, variant: "level0" } }, "Entities"),
       EnemySuggestive_2: e(r["EnemySuggestive"], { x: 896, y: 416, uid: 175254821975902, values: { name: "", depth: 0, variant: "level0" } }, "Entities"),
       EnemySuggestive_3: e(r["EnemySuggestive"], { x: 1040, y: 416, uid: 175254822078403, values: { name: "", depth: 0, variant: "level0" } }, "Entities"),
+      StashPocket: e(r["StashPocket"], { x: 192, y: 448, uid: 175263822298100, values: { name: "", depth: 0 } }, "Entities"),
       StoneRock0_2: d(Tx.Stone.Rock0, { x: 170, y: 291, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
       FoliageSmall: d(Tx.Foliage.Small, { x: 262, y: 304, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb728 }, "AboveEntitiesDecals"),
       EffectsStar12px: d(Tx.Effects.Star12px, { x: 220, y: 285, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x854e31 }, "AboveEntitiesDecals"),
+      FoliageSmall_1: d(Tx.Foliage.Small, { x: 175, y: 446, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb728 }, "AboveEntitiesDecals"),
       Player: e(r["Player"], { x: 80, y: 280, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -32, y: 152, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromPlainsSuggestiveLeft", name: "", depth: 0 } }, "RegionEntities"),
     };

@@ -4,6 +4,7 @@ import { Instances } from "../../lib/game-engine/instances";
 import { Vector, vnew } from "../../lib/math/vector-type";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
+import { objStashPocket } from "../objects/interactables/obj-stash-pocket";
 import { objPuddle } from "../objects/nature/obj-puddle";
 import { objCheckpoint } from "../objects/obj-checkpoint";
 import { objDoor } from "../objects/obj-door";
@@ -19,9 +20,7 @@ import { objValuable } from "../objects/obj-valuable";
 import { objWaterDripSource } from "../objects/obj-water-drip-source";
 import { objWorldMapGate } from "../objects/obj-world-map-gate";
 import { objMarker } from "../objects/utils/obj-marker";
-import { RpgPocket } from "../rpg/rpg-pocket";
 import { RpgProgress } from "../rpg/rpg-progress";
-import { OgmoFactory } from "./factory";
 
 export const OgmoEntityResolvers = {
     "Player": (entity) => createOrConfigurePlayerObj(entity),
@@ -63,6 +62,7 @@ export const OgmoEntityResolvers = {
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,
     Idol: objIdol,
     GateMap: objWorldMapGate,
+    StashPocket: objStashPocket,
 } satisfies OgmoEntityResolverBase;
 
 function createOrConfigurePlayerObj(
