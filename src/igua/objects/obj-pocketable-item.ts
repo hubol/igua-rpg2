@@ -7,7 +7,7 @@ import { approachLinear } from "../../lib/math/number";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
-import { DataPocketItem } from "../data/data-pocket-items";
+import { DataPocketItem } from "../data/data-pocket-item";
 import { scene } from "../globals";
 import { MxnPhysics, mxnPhysics, PhysicsFaction } from "../mixins/mxn-physics";
 import { RpgPocket } from "../rpg/rpg-pocket";

@@ -1,6 +1,6 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataEquipment } from "../data/data-equipment";
-import { DataPocketItem } from "../data/data-pocket-items";
+import { DataPocketItem } from "../data/data-pocket-item";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { RpgLoot } from "../rpg/rpg-loot";
 import { RpgPlayerBuffs } from "../rpg/rpg-player-buffs";

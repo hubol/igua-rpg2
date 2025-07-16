@@ -12,7 +12,7 @@ import { RgbInt } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { Null } from "../../../lib/types/null";
 import { renderer } from "../../current-pixi-renderer";
-import { DataPocketItem } from "../../data/data-pocket-items";
+import { DataPocketItem } from "../../data/data-pocket-item";
 import { dramaShop } from "../../drama/drama-shop";
 import { Cutscene, scene } from "../../globals";
 import { mxnHasHead } from "../../mixins/mxn-has-head";

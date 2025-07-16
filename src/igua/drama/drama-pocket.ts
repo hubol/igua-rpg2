@@ -4,7 +4,7 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { container } from "../../lib/pixi/container";
-import { DataPocketItem } from "../data/data-pocket-items";
+import { DataPocketItem } from "../data/data-pocket-item";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { playerObj } from "../objects/obj-player";
 import { RpgPocket } from "../rpg/rpg-pocket";

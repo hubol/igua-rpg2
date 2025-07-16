@@ -1,6 +1,6 @@
 import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
-import { DataPocketItem } from "../data/data-pocket-items";
+import { DataPocketItem } from "../data/data-pocket-item";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 
 export namespace RpgPocket {
