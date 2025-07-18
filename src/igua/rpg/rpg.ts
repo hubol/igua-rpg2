@@ -1,11 +1,13 @@
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { getInitialRpgProgress, RpgProgressData } from "./rpg-progress";
+import { RpgQuests } from "./rpg-quests";
 
 // TODO this is a fuckin mess!
 function createRpg(data: RpgProgressData) {
     const equipment = new RpgCharacterEquipment(data.character.inventory.equipment);
     const buffs = new RpgPlayerAggregatedBuffs(equipment);
+    const quests = new RpgQuests(data.character.quests);
 
     return {
         // TODO rename to player
@@ -32,23 +34,21 @@ function createRpg(data: RpgProgressData) {
             get position() {
                 return data.character.position;
             },
-            get quests() {
-                return data.character.quests;
-            },
             get status() {
                 return data.character.status;
             },
-        },
+        } as const,
         get flags() {
             return data.flags;
         },
         get programmaticFlags() {
             return data.programmaticFlags;
         },
+        quests,
         __private__: {
             data,
         },
-    };
+    } as const;
 }
 
 type RpgPrivate = ReturnType<typeof createRpg>;

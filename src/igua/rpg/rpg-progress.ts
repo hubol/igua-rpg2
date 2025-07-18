@@ -63,7 +63,7 @@ export function getInitialRpgProgress() {
                 sceneName: "",
                 checkpointName: "",
             },
-            quests: {} as RpgQuests.Model,
+            quests: RpgQuests.createState(),
         },
         flags: {
             newBalltown: {
