@@ -2,7 +2,7 @@ import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { getInitialRpgProgress, RpgProgressData } from "./rpg-progress";
 import { RpgQuests } from "./rpg-quests";
-import { RpgStashPockets } from "./rpg-stash-pocket";
+import { RpgStashPockets } from "./rpg-stash-pockets";
 
 // TODO this is a fuckin mess!
 function createRpg(data: RpgProgressData) {

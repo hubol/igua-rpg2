@@ -13,7 +13,7 @@ import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgQuests } from "./rpg-quests";
-import { RpgStashPockets } from "./rpg-stash-pocket";
+import { RpgStashPockets } from "./rpg-stash-pockets";
 import { RpgStatus } from "./rpg-status";
 
 export function getInitialRpgProgress() {
