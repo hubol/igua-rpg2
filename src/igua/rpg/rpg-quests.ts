@@ -1,32 +1,18 @@
 import { Integer } from "../../lib/math/number-alias-types";
-import { DataQuestInternalName, DataQuests } from "../data/data-quests";
+import { DataQuest } from "../data/data-quests";
 import { Rpg } from "./rpg";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 
 export namespace RpgQuests {
-    export type Complexity = "easy" | "normal";
-
-    interface Rewards {
-        valuables: Integer;
-        // TODO more stuff!
-    }
-
-    export interface DataModel {
-        complexity: Complexity;
-        rewards: Rewards;
-    }
-
-    export type Name = DataQuestInternalName;
-
-    export type Model = Partial<Record<Name, Integer>>;
+    export type Model = Partial<Record<DataQuest.Id, Integer>>;
 
     export const Methods = {
-        complete(name: Name): Rewards {
-            const completionsCount = (Rpg.character.quests[name] ?? 0) + 1;
-            Rpg.character.quests[name] = completionsCount;
-            const dataQuest = DataQuests[name];
-            RpgExperienceRewarder.quest.onComplete(dataQuest.complexity, completionsCount);
-            return dataQuest.rewards;
+        complete(questId: DataQuest.Id): DataQuest.Rewards {
+            const completionsCount = (Rpg.character.quests[questId] ?? 0) + 1;
+            Rpg.character.quests[questId] = completionsCount;
+            const quest = DataQuest.getById(questId);
+            RpgExperienceRewarder.quest.onComplete(quest.complexity, completionsCount);
+            return quest.rewards;
         },
         // TODO if these are useful...
         // getCompletionCount(name: Name): Integer {

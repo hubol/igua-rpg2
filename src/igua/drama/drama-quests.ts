@@ -1,9 +1,10 @@
 import { DisplayObject } from "pixi.js";
+import { DataQuest } from "../data/data-quests";
 import { RpgQuests } from "../rpg/rpg-quests";
 import { DramaWallet } from "./drama-wallet";
 
-function* completeQuest(name: RpgQuests.Name, rewarderObj: DisplayObject) {
-    const rewards = RpgQuests.Methods.complete(name);
+function* completeQuest(questId: DataQuest.Id, rewarderObj: DisplayObject) {
+    const rewards = RpgQuests.Methods.complete(questId);
     if (rewards.valuables) {
         yield* DramaWallet.rewardValuables(rewards.valuables, rewarderObj);
     }

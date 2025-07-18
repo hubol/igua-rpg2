@@ -1,8 +1,8 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { DataQuest } from "../data/data-quests";
 import { Rpg } from "./rpg";
 import { RpgAttack } from "./rpg-attack";
 import { RpgPocket } from "./rpg-pocket";
-import { RpgQuests } from "./rpg-quests";
 
 type ComputerInteractionKind = "noop" | "small_task" | "medium_task";
 
@@ -23,7 +23,7 @@ const speaksToExperience = {
 const questComplexityToExperience = {
     easy: 30,
     normal: 100,
-} satisfies Record<RpgQuests.Complexity, Integer>;
+} satisfies Record<DataQuest.Complexity, Integer>;
 
 export const RpgExperienceRewarder = {
     combat: {
@@ -78,7 +78,7 @@ export const RpgExperienceRewarder = {
         },
     },
     quest: {
-        onComplete(complexity: RpgQuests.Complexity, completionsCount: Integer) {
+        onComplete(complexity: DataQuest.Complexity, completionsCount: Integer) {
             Rpg.character.experience.quest += Math.ceil(
                 questComplexityToExperience[complexity] * (1 / Math.pow(2, completionsCount - 1)),
             );

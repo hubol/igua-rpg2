@@ -1,10 +1,30 @@
-import { RpgQuests } from "../rpg/rpg-quests";
+import { Integer } from "../../lib/math/number-alias-types";
+import { DataLib } from "./data-lib";
 
-export const DataQuests = {
-    NewBalltownArmorerReceivesFish: { complexity: "normal", rewards: { valuables: 160 } },
-    NewBalltownFanaticDelivery: { complexity: "easy", rewards: { valuables: 50 } },
-    NewBalltownUnderneathHomeownerEnemyPresenceCleared: { complexity: "easy", rewards: { valuables: 100 } },
-    NewBalltownUnderneathMagicRisingFace: { complexity: "normal", rewards: { valuables: 100 } },
-} satisfies Record<string, RpgQuests.DataModel>;
+export namespace DataQuest {
+    export type Complexity = "easy" | "normal";
 
-export type DataQuestInternalName = keyof typeof DataQuests;
+    export interface Rewards {
+        valuables: Integer;
+        // TODO more stuff!
+    }
+
+    export interface Model {
+        complexity: Complexity;
+        rewards: Rewards;
+    }
+
+    export const Manifest = DataLib.createManifest(
+        {
+            NewBalltownArmorerReceivesFish: { complexity: "normal", rewards: { valuables: 160 } },
+            NewBalltownFanaticDelivery: { complexity: "easy", rewards: { valuables: 50 } },
+            NewBalltownUnderneathHomeownerEnemyPresenceCleared: { complexity: "easy", rewards: { valuables: 100 } },
+            NewBalltownUnderneathMagicRisingFace: { complexity: "normal", rewards: { valuables: 100 } },
+            __Fallback__: { complexity: "easy", rewards: { valuables: 0 } },
+        } satisfies Record<string, Model>,
+    );
+
+    export type Id = keyof typeof Manifest;
+
+    export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataQuest" });
+}
