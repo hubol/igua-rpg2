@@ -1,25 +1,27 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataPocketItem } from "../data/data-pocket-item";
-import { Rpg } from "./rpg";
 import { RpgPocket } from "./rpg-pocket";
 
-export namespace RpgStashPocket {
-    interface CheckResult_Empty {
-        kind: "empty";
-        count: 0;
+interface CheckResult_Empty {
+    kind: "empty";
+    count: 0;
+}
+
+interface CheckResult_NotEmpty {
+    kind: "not_empty";
+    pocketItemId: DataPocketItem.Id;
+    count: Integer;
+}
+
+const empty: CheckResult_Empty = { kind: "empty", count: 0 };
+const notEmpty: CheckResult_NotEmpty = { kind: "not_empty", pocketItemId: "__Fallback__", count: 0 };
+
+export class RpgStashPockets {
+    constructor(private readonly _state: RpgStashPockets.State, private readonly _pocket: RpgPocket.Model) {
     }
 
-    interface CheckResult_NotEmpty {
-        kind: "not_empty";
-        pocketItemId: DataPocketItem.Id;
-        count: Integer;
-    }
-
-    const empty: CheckResult_Empty = { kind: "empty", count: 0 };
-    const notEmpty: CheckResult_NotEmpty = { kind: "not_empty", pocketItemId: "__Fallback__", count: 0 };
-
-    function check(stashPocketId: Integer) {
-        const deposit = Rpg.programmaticFlags.stashPocketDeposits[stashPocketId];
+    check(stashPocketId: Integer) {
+        const deposit = this._state[stashPocketId];
         if (!deposit || deposit.count < 1) {
             return empty;
         }
@@ -29,12 +31,10 @@ export namespace RpgStashPocket {
         return notEmpty;
     }
 
-    type Operation = "withdraw" | "deposit" | "swap";
-
-    // TODO why do you pass an id and then implicitly access global RpgProgress, but require passing pocket?
-    function checkPossibleOperations(stashPocketId: Integer, model: RpgPocket.Model): Operation[] {
-        const existingDeposit = check(stashPocketId);
-        const currentSlot = model.slots[model.nextSlotIndex];
+    checkPossibleOperations(stashPocketId: Integer): RpgStashPockets.Operation[] {
+        const existingDeposit = this.check(stashPocketId);
+        // TODO should be exposed on a pocket method!
+        const currentSlot = this._pocket.slots[this._pocket.nextSlotIndex];
 
         if (existingDeposit.kind === "empty") {
             return currentSlot.count === 0 ? [] : ["deposit"];
@@ -48,24 +48,24 @@ export namespace RpgStashPocket {
         return (currentSlot.count === 0 || !currentSlot.item) ? ["withdraw"] : ["swap"];
     }
 
-    function deposit(stashPocketId: Integer, model: RpgPocket.Model) {
-        const existingDeposit = check(stashPocketId);
-        const { count, item } = model.slots[model.nextSlotIndex];
+    deposit(stashPocketId: Integer) {
+        const existingDeposit = this.check(stashPocketId);
+        const { count, item } = this._pocket.slots[this._pocket.nextSlotIndex];
 
         // TODO assert that existing deposit item and deposited item are identical, and that count > 0 and item is truthy
 
-        Rpg.programmaticFlags.stashPocketDeposits[stashPocketId] = {
+        this._state[stashPocketId] = {
             pocketItemId: item!,
             count: count + existingDeposit.count,
         };
 
-        model.slots[model.nextSlotIndex].item = null;
-        model.slots[model.nextSlotIndex].count = 0;
+        this._pocket.slots[this._pocket.nextSlotIndex].item = null;
+        this._pocket.slots[this._pocket.nextSlotIndex].count = 0;
     }
 
-    function withdraw(stashPocketId: Integer, model: RpgPocket.Model) {
-        const existingDeposit = check(stashPocketId);
-        const { count } = model.slots[model.nextSlotIndex];
+    withdraw(stashPocketId: Integer) {
+        const existingDeposit = this.check(stashPocketId);
+        const { count } = this._pocket.slots[this._pocket.nextSlotIndex];
 
         // TODO assert that existing deposit item and deposited item are identical, and that count > 0 and item is truthy
 
@@ -74,33 +74,34 @@ export namespace RpgStashPocket {
             return;
         }
 
-        delete Rpg.programmaticFlags.stashPocketDeposits[stashPocketId];
-        model.slots[model.nextSlotIndex].item = existingDeposit.pocketItemId;
-        model.slots[model.nextSlotIndex].count = count + existingDeposit.count;
+        delete this._state[stashPocketId];
+        this._pocket.slots[this._pocket.nextSlotIndex].item = existingDeposit.pocketItemId;
+        this._pocket.slots[this._pocket.nextSlotIndex].count = count + existingDeposit.count;
     }
 
-    function swap(stashPocketId: Integer, model: RpgPocket.Model) {
-        const existingDeposit = check(stashPocketId);
-        const { count, item } = model.slots[model.nextSlotIndex];
+    swap(stashPocketId: Integer) {
+        const existingDeposit = this.check(stashPocketId);
+        const { count, item } = this._pocket.slots[this._pocket.nextSlotIndex];
 
         if (count === 0 || !item) {
-            delete Rpg.programmaticFlags.stashPocketDeposits[stashPocketId];
+            delete this._state[stashPocketId];
         }
         else {
-            Rpg.programmaticFlags.stashPocketDeposits[stashPocketId] = { count, pocketItemId: item };
+            this._state[stashPocketId] = { count, pocketItemId: item };
         }
 
         if (existingDeposit.kind === "not_empty") {
-            model.slots[model.nextSlotIndex].item = existingDeposit.pocketItemId;
-            model.slots[model.nextSlotIndex].count = existingDeposit.count;
+            this._pocket.slots[this._pocket.nextSlotIndex].item = existingDeposit.pocketItemId;
+            this._pocket.slots[this._pocket.nextSlotIndex].count = existingDeposit.count;
         }
     }
 
-    export const Methods = {
-        check,
-        checkPossibleOperations,
-        deposit,
-        withdraw,
-        swap,
-    };
+    static createState(): RpgStashPockets.State {
+        return {};
+    }
+}
+
+module RpgStashPockets {
+    export type State = Record<Integer, { pocketItemId: DataPocketItem.Id; count: Integer }>;
+    export type Operation = "withdraw" | "deposit" | "swap";
 }

@@ -13,6 +13,7 @@ import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgQuests } from "./rpg-quests";
+import { RpgStashPockets } from "./rpg-stash-pocket";
 import { RpgStatus } from "./rpg-status";
 
 export function getInitialRpgProgress() {
@@ -115,14 +116,12 @@ export function getInitialRpgProgress() {
             collectedValuableUids: new Set<Integer>(),
             metNpcPersonaIds: new Set<DataNpcPersona.Id>(),
             shopSoldCounts: {} as Record<string, Record<string, Integer>>,
-            stashPocketDeposits: {} as Record<number, { pocketItemId: DataPocketItem.Id; count: Integer }>,
+            stashPockets: RpgStashPockets.createState(),
         },
     };
 }
 
 export type RpgProgressData = ReturnType<typeof getInitialRpgProgress>;
-
-export type RpgProgressData_StashPocketDeposits = RpgProgressData["programmaticFlags"]["stashPocketDeposits"];
 
 export type RpgProgressExperience = keyof typeof Rpg["character"]["experience"];
 

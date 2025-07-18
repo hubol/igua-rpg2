@@ -2,12 +2,16 @@ import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { getInitialRpgProgress, RpgProgressData } from "./rpg-progress";
 import { RpgQuests } from "./rpg-quests";
+import { RpgStashPockets } from "./rpg-stash-pocket";
 
 // TODO this is a fuckin mess!
 function createRpg(data: RpgProgressData) {
+    const { programmaticFlags: { stashPockets: stashPocketsState, ...programmaticFlags } } = data;
+
     const equipment = new RpgCharacterEquipment(data.character.inventory.equipment);
     const buffs = new RpgPlayerAggregatedBuffs(equipment);
     const quests = new RpgQuests(data.character.quests);
+    const stashPockets = new RpgStashPockets(stashPocketsState, data.character.inventory.pocket);
 
     return {
         // TODO rename to player
@@ -41,10 +45,9 @@ function createRpg(data: RpgProgressData) {
         get flags() {
             return data.flags;
         },
-        get programmaticFlags() {
-            return data.programmaticFlags;
-        },
+        programmaticFlags,
         quests,
+        stashPockets,
         __private__: {
             data,
         },
