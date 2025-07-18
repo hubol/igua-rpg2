@@ -20,7 +20,7 @@ import { getDefaultLooks } from "../../iguana/get-default-looks";
 import { IguanaLooks } from "../../iguana/looks";
 import { objIguanaPuppet } from "../../iguana/obj-iguana-puppet";
 import { mxnBoilSeed } from "../../mixins/mxn-boil-seed";
-import { RpgProgress } from "../../rpg/rpg-progress";
+import { Rpg } from "../../rpg/rpg";
 import { scnNewBalltownOutskirts } from "../../scenes/scn-new-balltown-outskirts";
 import { SceneChanger } from "../../systems/scene-changer";
 import { objUiButton } from "../framework/obj-ui-button";
@@ -206,7 +206,7 @@ function objUiSavePage() {
             layers.overlay.solid.blendMode = BLEND_MODES.SUBTRACT;
             yield layers.overlay.solid.fadeIn(500);
             const looks = CtxUiIguanaDesigner.value.looks;
-            RpgProgress.character.looks = looks;
+            Rpg.character.looks = looks;
             SceneChanger.create({ sceneName: scnNewBalltownOutskirts.name, checkpointName: "fromGameStart" })!
                 .changeScene();
             page.destroy();

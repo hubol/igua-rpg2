@@ -3,7 +3,7 @@ import { approachLinear } from "../../../lib/math/number";
 import { DataEquipment } from "../../data/data-equipment";
 import { mxnCollectible } from "../../mixins/mxn-collectible";
 import { mxnPhysics } from "../../mixins/mxn-physics";
-import { RpgProgress } from "../../rpg/rpg-progress";
+import { Rpg } from "../../rpg/rpg";
 import { objEquipmentRepresentation } from "../obj-equipment-representation";
 
 // TODO very sad
@@ -13,7 +13,7 @@ export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
     return objEquipmentRepresentation(equipmentId)
         .pivoted(16, 16)
         .mixin(mxnCollectible, { kind: "transient" })
-        .handles("collected", () => RpgProgress.character.equipment.receive(equipmentId))
+        .handles("collected", () => Rpg.character.equipment.receive(equipmentId))
         .merge({ collectable: false })
         .mixin(mxnPhysics, { gravity: 0.1, physicsRadius: 13 })
         .handles("moved", (self, event) => {

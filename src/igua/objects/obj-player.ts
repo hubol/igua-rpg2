@@ -11,10 +11,10 @@ import { IguanaLooks } from "../iguana/looks";
 import { force } from "../mixins/mxn-physics";
 import { MxnRpgStatus, mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
+import { Rpg } from "../rpg/rpg";
 import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgPlayer } from "../rpg/rpg-player";
-import { RpgProgress } from "../rpg/rpg-progress";
 import { RpgStatus } from "../rpg/rpg-status";
 import { objFxPlayerJumpComboDust } from "./effects/obj-fx-player-jump-combo-dust";
 import { CtxGate } from "./obj-gate";
@@ -90,8 +90,8 @@ function objPlayer(looks: IguanaLooks.Serializable) {
 
     function getWalkingTopSpeed() {
         let speed = 2.5;
-        speed += 0.75 * Math.min(1, RpgProgress.character.status.conditions.poison.level);
-        speed += 0.5 * Math.max(0, RpgProgress.character.status.conditions.poison.level - 1);
+        speed += 0.75 * Math.min(1, Rpg.character.status.conditions.poison.level);
+        speed += 0.5 * Math.max(0, Rpg.character.status.conditions.poison.level - 1);
         return speed + landedThenJumpedHorizontalSpeedBoostUnit * 2;
     }
 
@@ -150,7 +150,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 0.02,
             );
 
-            const ballonsCount = RpgProgress.character.status.conditions.helium.ballons.length;
+            const ballonsCount = Rpg.character.status.conditions.helium.ballons.length;
             const ballonPhysicsLevel = getBallonPhysicsLevel(ballonsCount);
 
             puppet.terminalVelocity = Math.max(
@@ -197,7 +197,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             if (hasControl && puppet.isOnGround && stepsSinceJumpJustWentDown < 6) {
                 stepsSinceJumpJustWentDown = 100;
 
-                const specialBonus = RpgProgress.character.buffs.motion.jump.bonusAtSpecialSigns;
+                const specialBonus = Rpg.character.buffs.motion.jump.bonusAtSpecialSigns;
 
                 if (
                     specialBonus > 0
@@ -287,6 +287,6 @@ export function isPlayerObj(obj: DisplayObject): obj is ObjPlayer {
 
 export let playerObj: ObjPlayer;
 
-export function createPlayerObj(looks: IguanaLooks.Serializable = RpgProgress.character.looks) {
+export function createPlayerObj(looks: IguanaLooks.Serializable = Rpg.character.looks) {
     return playerObj = objPlayer(looks);
 }

@@ -4,18 +4,20 @@ import { SceneLibrary } from "../core/scene/scene-library";
 import { DevGameStartConfig } from "../dev/dev-game-start-config";
 import { sceneStack, startAnimator } from "../globals";
 import { playerObj } from "../objects/obj-player";
+import { Rpg } from "../rpg/rpg";
+import { setRpgProgressData } from "../rpg/rpg";
 import { RpgPlayer } from "../rpg/rpg-player";
-import { RpgProgress, RpgProgressData, setRpgProgress } from "../rpg/rpg-progress";
+import { RpgProgressData } from "../rpg/rpg-progress";
 
 export function startGame() {
     const config = getConfig();
 
     if (config.progress) {
-        setRpgProgress(config.progress);
-        RpgProgress.character.status.health = RpgPlayer.status.healthMax;
+        setRpgProgressData(config.progress);
+        Rpg.character.status.health = RpgPlayer.status.healthMax;
     }
 
-    RpgProgress.character.position.sceneName = config.sceneName;
+    Rpg.character.position.sceneName = config.sceneName;
 
     sceneStack.push(SceneLibrary.findByName(config.sceneName), { useGameplay: false });
     startAnimator();

@@ -6,6 +6,7 @@ import { PropertiesLike } from "../../lib/types/properties-like";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { getDefaultLooks } from "../iguana/get-default-looks";
+import { Rpg } from "./rpg";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgFlops } from "./rpg-flops";
 import { RpgKeyItems } from "./rpg-key-items";
@@ -111,13 +112,10 @@ export function getInitialRpgProgress() {
             },
         },
         programmaticFlags: {
+            collectedValuableUids: new Set<Integer>(),
+            metNpcPersonaIds: new Set<DataNpcPersona.Id>(),
             shopSoldCounts: {} as Record<string, Record<string, Integer>>,
             stashPocketDeposits: {} as Record<number, { pocketItemId: DataPocketItem.Id; count: Integer }>,
-        },
-        // TODO move to programmaticFlags
-        uids: {
-            metNpcPersonaIds: new Set<DataNpcPersona.Id>(),
-            valuables: new Set<number>(),
         },
     };
 }
@@ -126,45 +124,9 @@ export type RpgProgressData = ReturnType<typeof getInitialRpgProgress>;
 
 export type RpgProgressData_StashPocketDeposits = RpgProgressData["programmaticFlags"]["stashPocketDeposits"];
 
-// TODO this is a fuckin mess!
-function getGuardedRpgProgress(data: RpgProgressData) {
-    const { character, ...rest } = data;
+export type RpgProgressExperience = keyof typeof Rpg["character"]["experience"];
 
-    const equipment = new RpgCharacterEquipment(character.inventory.equipment);
-    const buffs = new RpgPlayerAggregatedBuffs(equipment);
+export type RpgProgressEquipment = typeof Rpg["character"]["equipment"];
 
-    return {
-        character: {
-            ...character,
-            get buffs() {
-                return buffs.getAggregatedBuffs();
-            },
-            equipment,
-        },
-        ...rest,
-    };
-}
-
-export let RpgProgress = getGuardedRpgProgress(getInitialRpgProgress());
-
-export function setRpgProgress(rpgProgress: RpgProgressData) {
-    RpgProgress = getGuardedRpgProgress(rpgProgress);
-}
-
-// TODO sucks
-export function devGetRpgProgressData(): RpgProgressData {
-    const { character: { buffs, equipment, ...character }, ...rest } = RpgProgress;
-    return {
-        character,
-        ...rest,
-    };
-}
-
-export type RpgProgressExperience = keyof typeof RpgProgress["character"]["experience"];
-
-export type RpgProgressEquipment = typeof RpgProgress["character"]["equipment"];
-
-// TODO not sure if these should be plural
-export type RpgProgressUids = keyof PropertiesLike<typeof RpgProgress["uids"], Set<number>>;
 // TODO I think some places already expect flags to only be booleans :-X
-export type RpgProgressFlags = DeepKeyOf.Leaves<typeof RpgProgress["flags"]>;
+export type RpgProgressFlags = DeepKeyOf.Leaves<typeof Rpg["flags"]>;

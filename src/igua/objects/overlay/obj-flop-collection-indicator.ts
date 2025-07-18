@@ -10,7 +10,7 @@ import { clone } from "../../../lib/object/clone";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
-import { RpgProgress } from "../../rpg/rpg-progress";
+import { Rpg } from "../../rpg/rpg";
 import { objFlopCharacter, objFlopDexNumber } from "../obj-flop";
 
 const Consts = {
@@ -18,7 +18,7 @@ const Consts = {
 };
 
 export function objFlopCollectionIndicator() {
-    const previous = range(999).map(index => RpgProgress.character.inventory.flops[index] ?? 0);
+    const previous = range(999).map(index => Rpg.character.inventory.flops[index] ?? 0);
 
     function slicePrevious(startIndex: Integer) {
         return previous.slice(startIndex, startIndex + Consts.rangeSize);
@@ -28,9 +28,9 @@ export function objFlopCollectionIndicator() {
 
     return container()
         .step(() => {
-            for (const key in RpgProgress.character.inventory.flops) {
+            for (const key in Rpg.character.inventory.flops) {
                 const index = Number(key);
-                const value = RpgProgress.character.inventory.flops[index];
+                const value = Rpg.character.inventory.flops[index];
                 if (value !== previous[index]) {
                     const differenceRangeStartIndex = Math.floor(index / Consts.rangeSize) * Consts.rangeSize;
 

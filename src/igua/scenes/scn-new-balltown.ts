@@ -27,10 +27,10 @@ import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170p
 import { IguanaLocomotiveConsts } from "../objects/obj-iguana-locomotive";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { objMarker } from "../objects/utils/obj-marker";
+import { Rpg } from "../rpg/rpg";
 import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 import { RpgPocket } from "../rpg/rpg-pocket";
-import { RpgProgress } from "../rpg/rpg-progress";
 import { RpgShop } from "../rpg/rpg-shop";
 
 export function scnNewBalltown() {
@@ -50,7 +50,7 @@ function enrichMiner(lvl: LvlType.NewBalltown) {
             "Why is it famous",
             "Why don't you",
             "The flowers",
-            RpgProgress.flags.outskirts.miner.toldPlayerAboutDepletedPickaxeHealth ? "Your brother's axe" : null,
+            Rpg.flags.outskirts.miner.toldPlayerAboutDepletedPickaxeHealth ? "Your brother's axe" : null,
             "You can't",
         );
 
@@ -147,7 +147,7 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
             }
             const guess = yield* ask("What face of the die will land face-up?", "1", "2", "3", "4", "5", "6");
 
-            const availableRisks = getAvailableRisks(RpgProgress.character.inventory.valuables);
+            const availableRisks = getAvailableRisks(Rpg.character.inventory.valuables);
 
             const risked = yield* ask(
                 `How many valuables would you like to risk? You'll win five times as many if the die lands on ${
@@ -247,7 +247,7 @@ function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
                 return `                             ${characters.join(" ")}`;
             }
 
-            const presentStarOnLastAsk = RpgProgress.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount >= 5;
+            const presentStarOnLastAsk = Rpg.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount >= 5;
 
             for (let i = 0; i < characters.length; i++) {
                 const isLast = i === characters.length - 1;
@@ -267,13 +267,13 @@ function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
                 RpgExperienceRewarder.computer.onInteract("small_task");
                 yield* show("Access granted.");
                 yield* show(
-                    `Welcome master. You have ${RpgProgress.flags.newBalltown.mechanicalIdol.credits} credit(s).`,
+                    `Welcome master. You have ${Rpg.flags.newBalltown.mechanicalIdol.credits} credit(s).`,
                 );
                 while (true) {
                     // TODO should there be an ask.append method?
                     // Or maybe show.appendAsk ?
                     const result = yield* ask(
-                        `Welcome master. You have ${RpgProgress.flags.newBalltown.mechanicalIdol.credits} credit(s).
+                        `Welcome master. You have ${Rpg.flags.newBalltown.mechanicalIdol.credits} credit(s).
 
 What would you like to do?`,
                         "Deposit chips",
@@ -283,7 +283,7 @@ What would you like to do?`,
 
                     if (result === 0) {
                         yield* show("You want to deposit computer chips? Let me check something first...");
-                        const count = RpgPocket.Methods.count(RpgProgress.character.inventory.pocket, "ComputerChip");
+                        const count = RpgPocket.Methods.count(Rpg.character.inventory.pocket, "ComputerChip");
                         if (count === 0) {
                             yield* show("Master, you don't have any computer chips. Get real.");
                         }
@@ -294,8 +294,8 @@ That's worth ${count} credit(s). Do you want to deposit them?`)
                             ) {
                                 yield* show("Got it! Let's get those deposited...");
                                 yield sleep(250);
-                                RpgPocket.Methods.remove(RpgProgress.character.inventory.pocket, "ComputerChip", count);
-                                RpgProgress.flags.newBalltown.mechanicalIdol.credits += count;
+                                RpgPocket.Methods.remove(Rpg.character.inventory.pocket, "ComputerChip", count);
+                                Rpg.flags.newBalltown.mechanicalIdol.credits += count;
                                 RpgExperienceRewarder.computer.onDepositComputerChips(count);
                                 yield sleep(250);
                                 yield* show("All done!");
@@ -324,11 +324,11 @@ That's worth ${count} credit(s). Do you want to deposit them?`)
 
 function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
     const expectedCheckpointName: keyof LvlType.NewBalltown = "fromFishmonger";
-    const { deliveries } = RpgProgress.flags.newBalltown.fishmonger;
+    const { deliveries } = Rpg.flags.newBalltown.fishmonger;
 
     if (
         deliveries.armorer !== "ready"
-        || RpgProgress.character.position.checkpointName !== expectedCheckpointName
+        || Rpg.character.position.checkpointName !== expectedCheckpointName
     ) {
         if (deliveries.armorer === "ready") {
             deliveries.armorer = null;

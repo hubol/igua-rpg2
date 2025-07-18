@@ -18,10 +18,10 @@ import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { mxnSign } from "../mixins/mxn-sign";
 import { objPocketableItemSpawner } from "../objects/obj-pocketable-item-spawner";
 import { objValuableSpawner } from "../objects/obj-valuable-spawner";
+import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgKeyItems } from "../rpg/rpg-key-items";
 import { RpgPocket } from "../rpg/rpg-pocket";
-import { RpgProgress } from "../rpg/rpg-progress";
 import { RpgStatus } from "../rpg/rpg-status";
 
 export function scnNewBalltownOutskirts() {
@@ -74,8 +74,8 @@ const atkPickaxe = RpgAttack.create({
 
 function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
     function hasHighMiningSpeed() {
-        return RpgProgress.flags.outskirts.miner.pickaxeHealth > 0
-            && RpgProgress.flags.outskirts.miner.hasUpgradedPickaxe;
+        return Rpg.flags.outskirts.miner.pickaxeHealth > 0
+            && Rpg.flags.outskirts.miner.hasUpgradedPickaxe;
     }
 
     function getMiningDelayRate() {
@@ -101,14 +101,14 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
 
                 yield interp(self, "angle").steps(4).to(135).over(1000 * getMiningDelayRate());
                 self.isAtRest = true;
-                lvl.MinerPicaxeBrokenBandages.visible = RpgProgress.flags.outskirts.miner.pickaxeHealth <= 0;
+                lvl.MinerPicaxeBrokenBandages.visible = Rpg.flags.outskirts.miner.pickaxeHealth <= 0;
                 yield () =>
-                    !valuableSpawnerObj.isFull && RpgProgress.flags.outskirts.miner.pickaxeHealth > 0
+                    !valuableSpawnerObj.isFull && Rpg.flags.outskirts.miner.pickaxeHealth > 0
                     && !Cutscene.isPlaying;
                 self.isAtRest = false;
                 yield sleep(250 * getMiningDelayRate());
                 yield interp(self, "angle").steps(4).to(initialAngle).over(300 * getMiningDelayRate());
-                RpgProgress.flags.outskirts.miner.pickaxeHealth--;
+                Rpg.flags.outskirts.miner.pickaxeHealth--;
                 pickaxeAttackObj.isAttackActive = true;
                 self.play(Sfx.Impact.PickaxeRock.rate(0.9, 1.1));
                 lvl.MinerPicaxeBurst.visible = true;
@@ -128,25 +128,25 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
             "My picaxe is very precious to me.",
         );
 
-        if (RpgProgress.flags.outskirts.miner.pickaxeHealth <= 0) {
+        if (Rpg.flags.outskirts.miner.pickaxeHealth <= 0) {
             yield* show("It broke after too much use. I heard there are picaxes for sale in the Balltown.");
-            RpgProgress.flags.outskirts.miner.toldPlayerAboutDepletedPickaxeHealth = true;
+            Rpg.flags.outskirts.miner.toldPlayerAboutDepletedPickaxeHealth = true;
         }
         else {
-            const picaxeHealth = RpgProgress.flags.outskirts.miner.pickaxeHealth;
+            const picaxeHealth = Rpg.flags.outskirts.miner.pickaxeHealth;
             // TODO pluralization utility?
             yield* show(
                 `It currently has ${picaxeHealth} hit ${picaxeHealth === 1 ? "point" : "points"} remaining.`,
             );
         }
 
-        if (RpgKeyItems.Methods.has(RpgProgress.character.inventory.keyItems, "UpgradedPickaxe", 1)) {
+        if (RpgKeyItems.Methods.has(Rpg.character.inventory.keyItems, "UpgradedPickaxe", 1)) {
             yield* show(`Oh! I see that you have the ${DataKeyItem.Manifest.UpgradedPickaxe.name}!`);
             if (yield* ask("Will you give it to me? You can have any valuables I mine")) {
                 yield* DramaKeyItems.remove("UpgradedPickaxe");
                 yield* show("...?!", "Thank you so much!", "I will get right to work.");
-                RpgProgress.flags.outskirts.miner.hasUpgradedPickaxe = true;
-                RpgProgress.flags.outskirts.miner.pickaxeHealth += 15;
+                Rpg.flags.outskirts.miner.hasUpgradedPickaxe = true;
+                Rpg.flags.outskirts.miner.pickaxeHealth += 15;
             }
             else {
                 yield* show("Please let me know if you change your mind. That picaxe looks baller.");

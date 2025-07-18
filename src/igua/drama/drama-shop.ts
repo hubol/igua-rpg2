@@ -19,9 +19,9 @@ import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnErrorVibrate } from "../mixins/mxn-error-vibrate";
 import { experienceIndicatorConfigs, experienceIndicatorConfigsArray } from "../objects/overlay/obj-hud";
+import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
-import { RpgProgress } from "../rpg/rpg-progress";
 import { CatalogItem, RpgShop } from "../rpg/rpg-shop";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
@@ -485,7 +485,7 @@ function objDoneButton() {
             }
         });
 
-    objIguanaPuppet(RpgProgress.character.looks).at(70, 50).show(obj).masked(maskObj).step(self =>
+    objIguanaPuppet(Rpg.character.looks).at(70, 50).show(obj).masked(maskObj).step(self =>
         self.head.mouth.agape = (obj.selected && scene.ticker.ticks % 24 < 12) ? 1 : 0
     );
 

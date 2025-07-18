@@ -1,7 +1,7 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataPocketItem } from "../data/data-pocket-item";
+import { Rpg } from "./rpg";
 import { RpgPocket } from "./rpg-pocket";
-import { RpgProgress } from "./rpg-progress";
 
 export namespace RpgStashPocket {
     interface CheckResult_Empty {
@@ -19,7 +19,7 @@ export namespace RpgStashPocket {
     const notEmpty: CheckResult_NotEmpty = { kind: "not_empty", pocketItemId: "__Fallback__", count: 0 };
 
     function check(stashPocketId: Integer) {
-        const deposit = RpgProgress.programmaticFlags.stashPocketDeposits[stashPocketId];
+        const deposit = Rpg.programmaticFlags.stashPocketDeposits[stashPocketId];
         if (!deposit || deposit.count < 1) {
             return empty;
         }
@@ -54,7 +54,7 @@ export namespace RpgStashPocket {
 
         // TODO assert that existing deposit item and deposited item are identical, and that count > 0 and item is truthy
 
-        RpgProgress.programmaticFlags.stashPocketDeposits[stashPocketId] = {
+        Rpg.programmaticFlags.stashPocketDeposits[stashPocketId] = {
             pocketItemId: item!,
             count: count + existingDeposit.count,
         };
@@ -74,7 +74,7 @@ export namespace RpgStashPocket {
             return;
         }
 
-        delete RpgProgress.programmaticFlags.stashPocketDeposits[stashPocketId];
+        delete Rpg.programmaticFlags.stashPocketDeposits[stashPocketId];
         model.slots[model.nextSlotIndex].item = existingDeposit.pocketItemId;
         model.slots[model.nextSlotIndex].count = count + existingDeposit.count;
     }
@@ -84,10 +84,10 @@ export namespace RpgStashPocket {
         const { count, item } = model.slots[model.nextSlotIndex];
 
         if (count === 0 || !item) {
-            delete RpgProgress.programmaticFlags.stashPocketDeposits[stashPocketId];
+            delete Rpg.programmaticFlags.stashPocketDeposits[stashPocketId];
         }
         else {
-            RpgProgress.programmaticFlags.stashPocketDeposits[stashPocketId] = { count, pocketItemId: item };
+            Rpg.programmaticFlags.stashPocketDeposits[stashPocketId] = { count, pocketItemId: item };
         }
 
         if (existingDeposit.kind === "not_empty") {

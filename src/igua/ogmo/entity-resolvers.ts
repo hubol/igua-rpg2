@@ -20,7 +20,7 @@ import { objValuable } from "../objects/obj-valuable";
 import { objWaterDripSource } from "../objects/obj-water-drip-source";
 import { objWorldMapGate } from "../objects/obj-world-map-gate";
 import { objMarker } from "../objects/utils/obj-marker";
-import { RpgProgress } from "../rpg/rpg-progress";
+import { Rpg } from "../rpg/rpg";
 
 export const OgmoEntityResolvers = {
     "Player": (entity) => createOrConfigurePlayerObj(entity),
@@ -80,13 +80,13 @@ function createOrConfigurePlayerObj(
 
     if (checkpointName) {
         const checkpointFacing = (entity as OgmoEntities.Checkpoint).values.overrideFlipX === "retainFromPreviousScene"
-            ? RpgProgress.character.position.facing
+            ? Rpg.character.position.facing
             : facing;
         objCheckpoint(checkpointName, checkpointFacing).at(pos).show();
     }
 
     const checkpointObj = Instances(objCheckpoint).find(x =>
-        x.checkpointName === RpgProgress.character.position.checkpointName
+        x.checkpointName === Rpg.character.position.checkpointName
     );
 
     if (checkpointObj || !checkpointName || mustCreatePlayer) {

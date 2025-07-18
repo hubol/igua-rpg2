@@ -19,8 +19,8 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
 import { objFish } from "../objects/obj-fish";
+import { Rpg } from "../rpg/rpg";
 import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
-import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltownArmorer() {
     Jukebox.play(Mzk.GolfResort);
@@ -31,7 +31,7 @@ export function scnNewBalltownArmorer() {
 }
 
 function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
-    const { deliveries } = RpgProgress.flags.newBalltown.fishmonger;
+    const { deliveries } = Rpg.flags.newBalltown.fishmonger;
 
     const fishObj = objFish.forArmorer().at(lvl.FishMarker).zIndexed(ZIndex.Entities);
     fishObj.isMoving = false;
@@ -110,7 +110,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
 
 function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
     lvl.IguanaNpc.mixin(mxnCutscene, function* () {
-        const delivered = RpgProgress.flags.newBalltown.fishmonger.deliveries.armorer === "delivered";
+        const delivered = Rpg.flags.newBalltown.fishmonger.deliveries.armorer === "delivered";
 
         if (delivered) {
             yield* show("Fishy, fishy...");
@@ -126,7 +126,7 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
                 return;
             }
 
-            if (RpgProgress.flags.newBalltown.armorer.toldPlayerAboutDesireForFish) {
+            if (Rpg.flags.newBalltown.armorer.toldPlayerAboutDesireForFish) {
                 yield* show("It looks nice with the water in it.", "But it would look spectacular with a fish.");
             }
             else {
@@ -135,7 +135,7 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
                 yield* show(
                     "Believe me, there's a whole lot more where that came from if you can get me a fish to live in the aquarium!",
                 );
-                RpgProgress.flags.newBalltown.armorer.toldPlayerAboutDesireForFish = true;
+                Rpg.flags.newBalltown.armorer.toldPlayerAboutDesireForFish = true;
             }
         }
         else if (result === 2) {
@@ -147,21 +147,21 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
 const aquariumService = {
     maximumMoistureUnits: 300,
     get moistureUnits() {
-        return RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits;
+        return Rpg.flags.newBalltown.armorer.aquarium.moistureUnits;
     },
     incrementMoistureUnits(units: Integer) {
-        RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits = Math.min(
-            RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits + units,
+        Rpg.flags.newBalltown.armorer.aquarium.moistureUnits = Math.min(
+            Rpg.flags.newBalltown.armorer.aquarium.moistureUnits + units,
             this.maximumMoistureUnits,
         );
     },
     get isFilled() {
-        return RpgProgress.flags.newBalltown.armorer.aquarium.moistureUnits >= this.maximumMoistureUnits;
+        return Rpg.flags.newBalltown.armorer.aquarium.moistureUnits >= this.maximumMoistureUnits;
     },
 } as const;
 
 function enrichAquarium(lvl: LvlType.NewBalltownArmorer) {
-    const { wetness } = RpgProgress.character.status.conditions;
+    const { wetness } = Rpg.character.status.conditions;
 
     lvl.AquariumWaterLine.merge({ observedMoistureUnits: aquariumService.moistureUnits })
         .step(self => {

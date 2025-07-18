@@ -1,6 +1,7 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { Rpg } from "./rpg";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
-import { RpgProgress, RpgProgressExperience } from "./rpg-progress";
+import { RpgProgressExperience } from "./rpg-progress";
 
 interface Currency_Experience {
     kind: "experience";

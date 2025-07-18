@@ -3,7 +3,7 @@ import { blendColor } from "../../lib/color/blend-color";
 import { approachLinear } from "../../lib/math/number";
 import { Integer } from "../../lib/math/number-alias-types";
 import { StringConvert } from "../../lib/string/string-convert";
-import { RpgProgress } from "../rpg/rpg-progress";
+import { Rpg } from "../rpg/rpg";
 
 interface ObjIntelligenceBackgroundArgs {
     initialTint: string;
@@ -36,6 +36,6 @@ export function objIntelligenceBackground({ initialTint, targetTint, min, max }:
 function getLerpFactor(min: number, max: number) {
     return Math.min(
         1,
-        Math.max(0, RpgProgress.character.attributes.intelligence - min + 1) / Math.max(1, max - min + 1),
+        Math.max(0, Rpg.character.attributes.intelligence - min + 1) / Math.max(1, max - min + 1),
     );
 }

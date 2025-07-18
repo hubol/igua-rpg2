@@ -1,12 +1,14 @@
 import { DisplayObject } from "pixi.js";
+import { Integer } from "../../lib/math/number-alias-types";
 import { DeepAccess } from "../../lib/object/deep-access";
 import { playerObj } from "../objects/obj-player";
-import { RpgProgress, RpgProgressFlags, RpgProgressUids } from "../rpg/rpg-progress";
+import { Rpg } from "../rpg/rpg";
+import { RpgProgressFlags } from "../rpg/rpg-progress";
 
 interface MxnCollectibleUid {
     kind: "uid";
-    uid: number;
-    set: RpgProgressUids;
+    uid: Integer;
+    set: Set<Integer>;
 }
 
 interface MxnCollectibleFlag {
@@ -25,9 +27,9 @@ function isCollected(args: MxnCollectibleArgs): boolean {
         return false;
     }
     if (args.kind === "flag") {
-        return DeepAccess.get(RpgProgress.flags, args.flag);
+        return DeepAccess.get(Rpg.flags, args.flag);
     }
-    return RpgProgress.uids[args.set].has(args.uid);
+    return args.set.has(args.uid);
 }
 
 function collect(args: MxnCollectibleArgs) {
@@ -35,10 +37,10 @@ function collect(args: MxnCollectibleArgs) {
         return;
     }
     if (args.kind === "flag") {
-        DeepAccess.set(RpgProgress.flags, args.flag, true);
+        DeepAccess.set(Rpg.flags, args.flag, true);
     }
     else {
-        RpgProgress.uids[args.set].add(args.uid);
+        args.set.add(args.uid);
     }
 }
 

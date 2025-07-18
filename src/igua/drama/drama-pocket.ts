@@ -7,8 +7,8 @@ import { container } from "../../lib/pixi/container";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { playerObj } from "../objects/obj-player";
+import { Rpg } from "../rpg/rpg";
 import { RpgPocket } from "../rpg/rpg-pocket";
-import { RpgProgress } from "../rpg/rpg-progress";
 
 const pocketTxs = Tx.Ui.Pocket.OpenablePocket.split({ count: 2 });
 
@@ -51,7 +51,7 @@ function* empty(recipientObj: DisplayObject): Coro.Type<RpgPocket.EmptyResult> {
     const pocketObj = yield* dramaCreatePocketObj();
     pocketObj.methods.open();
     yield sleep(333);
-    const result = RpgPocket.Methods.empty(RpgProgress.character.inventory.pocket);
+    const result = RpgPocket.Methods.empty(Rpg.character.inventory.pocket);
     const pocketItemIds = Object.keys(result.items) as RpgPocket.Item[];
 
     const itemsObj = container().show();

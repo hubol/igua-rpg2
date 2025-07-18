@@ -17,8 +17,9 @@ import { dramaShop } from "../../drama/drama-shop";
 import { Cutscene, scene } from "../../globals";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { CtxInteract } from "../../mixins/mxn-interact";
+import { Rpg } from "../../rpg/rpg";
 import { RpgPlayer } from "../../rpg/rpg-player";
-import { RpgProgress, RpgProgressExperience } from "../../rpg/rpg-progress";
+import { RpgProgressExperience } from "../../rpg/rpg-progress";
 import { playerObj } from "../obj-player";
 import { StepOrder } from "../step-order";
 import { objFlopCollectionIndicator } from "./obj-flop-collection-indicator";
@@ -197,14 +198,14 @@ function objExperienceIndicator() {
         objExperienceIndicatorDelta(config)
             .invisible()
             .coro(function* (self) {
-                let value = RpgProgress.character.experience[experienceKey];
+                let value = Rpg.character.experience[experienceKey];
                 while (true) {
-                    yield () => RpgProgress.character.experience[experienceKey] != value;
+                    yield () => Rpg.character.experience[experienceKey] != value;
                     self.visible = true;
                     self.state.total = value;
-                    let nextValue = RpgProgress.character.experience[experienceKey];
+                    let nextValue = Rpg.character.experience[experienceKey];
                     yield holdf(() => {
-                        const latestValue = RpgProgress.character.experience[experienceKey];
+                        const latestValue = Rpg.character.experience[experienceKey];
                         self.state.delta = latestValue - value;
                         if (latestValue !== nextValue) {
                             nextValue = latestValue;
@@ -217,7 +218,7 @@ function objExperienceIndicator() {
                     self.state.total = value;
                     self.state.delta = 0;
                     yield* Coro.race([
-                        () => RpgProgress.character.experience[experienceKey] != value,
+                        () => Rpg.character.experience[experienceKey] != value,
                         sleepf(120),
                     ]);
                     self.visible = false;
@@ -227,7 +228,7 @@ function objExperienceIndicator() {
 
     function updateWeights() {
         for (let i = 0; i < experienceIndicatorConfigsArray.length; i++) {
-            weights[i].value = RpgProgress.character.experience[experienceIndicatorConfigsArray[i].experienceKey];
+            weights[i].value = Rpg.character.experience[experienceIndicatorConfigsArray[i].experienceKey];
         }
     }
 
@@ -323,7 +324,7 @@ function objCutsceneLetterbox() {
 function objPocketInfo() {
     return objText.MediumIrregular("", { tint: Consts.StatusTextTint }).invisible()
         .step(self => {
-            const slot = RpgProgress.character.inventory.pocket.slots[0];
+            const slot = Rpg.character.inventory.pocket.slots[0];
             // TODO multiple slots lol
             self.visible = slot.count > 0;
             if (self.visible) {
@@ -336,10 +337,10 @@ function objPocketInfo() {
 function objValuablesInfo() {
     return objText.MediumIrregular("You have 0 valuables", { tint: Consts.StatusTextTint })
         .step(text => {
-            text.seed = RpgProgress.character.inventory.valuables + 64;
-            text.text = RpgProgress.character.inventory.valuables === 1
+            text.seed = Rpg.character.inventory.valuables + 64;
+            text.text = Rpg.character.inventory.valuables === 1
                 ? "You have 1 valuable"
-                : `You have ${RpgProgress.character.inventory.valuables} valuables`;
+                : `You have ${Rpg.character.inventory.valuables} valuables`;
         });
 }
 

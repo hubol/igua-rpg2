@@ -5,6 +5,7 @@ import { Sound } from "../../lib/game-engine/audio/sound";
 import { Rng } from "../../lib/math/rng";
 import { VectorSimple, vnew } from "../../lib/math/vector-type";
 import { mxnCollectible } from "../mixins/mxn-collectible";
+import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 import { objValuableSparkle } from "./effects/obj-valuable-sparkle";
@@ -49,7 +50,12 @@ export function objValuable(
     const config = valuableConfigs[kind];
     return Sprite.from(config.texture)
         .anchored(0.5, 0.5)
-        .mixin(mxnCollectible, uid === undefined ? { kind: "transient" } : { kind: "uid", uid, set: "valuables" })
+        .mixin(
+            mxnCollectible,
+            uid === undefined
+                ? { kind: "transient" }
+                : { kind: "uid", uid, set: Rpg.programmaticFlags.collectedValuableUids },
+        )
         .handles("collected", self => {
             config.sound.play();
             for (const offset of config.sparkle.offsets) {

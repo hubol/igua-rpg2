@@ -7,9 +7,9 @@ import { range } from "../../../lib/range";
 import { Cutscene, Input } from "../../globals";
 import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
 import { mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
+import { Rpg } from "../../rpg/rpg";
 import { RpgCharacterEquipment, RpgObtainedEquipment } from "../../rpg/rpg-character-equipment";
 import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
-import { RpgProgress } from "../../rpg/rpg-progress";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
 import { objEquipmentRepresentation } from "../obj-equipment-representation";
 import { StepOrder } from "../step-order";
@@ -47,7 +47,7 @@ function objUiInventoryImpl() {
 
 function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     const uiEquipmentObjs = range(4).map(i =>
-        objUiEquipment(() => RpgProgress.character.equipment.loadout[i], "show_empty").at(i * 36, 0).mixin(
+        objUiEquipment(() => Rpg.character.equipment.loadout[i], "show_empty").at(i * 36, 0).mixin(
             mxnUiPageElement,
         )
             .mixin(mxnUiPageButton, {
@@ -55,7 +55,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
                     routerObj.push(objUiEquipmentChoosePage(
                         i,
                         (equipment) => {
-                            RpgProgress.character.equipment.equip(equipment?.id ?? null, i);
+                            Rpg.character.equipment.equip(equipment?.id ?? null, i);
                             routerObj.pop();
                         },
                     ));
@@ -65,8 +65,8 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 
     const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0 }).at(180, 100);
     Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80).show(pageObj);
-    objUiEquipmentBuffs(RpgProgress.character.equipment.loadout)
-        .step(self => self.controls.focusBuffsSource = RpgProgress.character.equipment.loadout[pageObj.selectionIndex])
+    objUiEquipmentBuffs(Rpg.character.equipment.loadout)
+        .step(self => self.controls.focusBuffsSource = Rpg.character.equipment.loadout[pageObj.selectionIndex])
         .at(74, 46)
         .show(pageObj);
 
@@ -77,9 +77,9 @@ function objUiEquipmentChoosePage(
     loadoutIndex: Integer,
     onChoose: (equipment: RpgObtainedEquipment | null) => void,
 ) {
-    const previewEquipment = new RpgCharacterEquipment.Preview(RpgProgress.character.equipment);
+    const previewEquipment = new RpgCharacterEquipment.Preview(Rpg.character.equipment);
 
-    const availableLoadoutItems = [...RpgProgress.character.equipment.list, null];
+    const availableLoadoutItems = [...Rpg.character.equipment.list, null];
     const uiEquipmentObjs = availableLoadoutItems.map((equipment, i) =>
         objUiEquipment(() => equipment?.name ?? null, "show_empty").at((i % 8) * 36, Math.floor(i / 8) * 36).mixin(
             mxnUiPageElement,
@@ -98,12 +98,12 @@ function objUiEquipmentChoosePage(
     pageObj.selected?.addChild(Sprite.from(Tx.Ui.CurrentlyEquipped));
 
     objUiEquipmentBuffs(
-        RpgProgress.character.equipment.loadout,
+        Rpg.character.equipment.loadout,
     ).at(60, 46 + 30).show(pageObj);
 
     objUiEquipmentBuffsComparedTo(
         previewEquipment,
-        RpgProgress.character.equipment,
+        Rpg.character.equipment,
     ).at(284 - 60, 46 + 30).show(pageObj);
 
     return pageObj;

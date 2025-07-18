@@ -1,10 +1,10 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataEquipment } from "../data/data-equipment";
 import { DataKeyItem } from "../data/data-key-item";
+import { Rpg } from "./rpg";
 import { RpgEconomy } from "./rpg-economy";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerWallet } from "./rpg-player-wallet";
-import { RpgProgress } from "./rpg-progress";
 
 interface Product_Equipment {
     kind: "equipment";
@@ -64,10 +64,10 @@ export namespace CatalogItem {
             return 0;
         }
         else if (item.product.kind === "equipment") {
-            return RpgProgress.character.equipment.count(item.product.name);
+            return Rpg.character.equipment.count(item.product.name);
         }
 
-        return RpgKeyItems.Methods.count(RpgProgress.character.inventory.keyItems, item.product.name);
+        return RpgKeyItems.Methods.count(Rpg.character.inventory.keyItems, item.product.name);
     }
 }
 
@@ -100,11 +100,11 @@ export class RpgShop {
     }
 
     private getSoldCounts() {
-        if (!RpgProgress.programmaticFlags.shopSoldCounts[this.config.internalName]) {
-            RpgProgress.programmaticFlags.shopSoldCounts[this.config.internalName] = {};
+        if (!Rpg.programmaticFlags.shopSoldCounts[this.config.internalName]) {
+            Rpg.programmaticFlags.shopSoldCounts[this.config.internalName] = {};
         }
 
-        return RpgProgress.programmaticFlags.shopSoldCounts[this.config.internalName];
+        return Rpg.programmaticFlags.shopSoldCounts[this.config.internalName];
     }
 
     private getSoldCount(catalogItemKey: string) {
@@ -168,10 +168,10 @@ export class RpgShop {
 function deliverProduct(product: Product) {
     switch (product.kind) {
         case "equipment":
-            RpgProgress.character.equipment.receive(product.name);
+            Rpg.character.equipment.receive(product.name);
             return;
         case "key_item":
-            RpgKeyItems.Methods.receive(RpgProgress.character.inventory.keyItems, product.name);
+            RpgKeyItems.Methods.receive(Rpg.character.inventory.keyItems, product.name);
             return;
         case "potion":
             // TODO

@@ -8,8 +8,8 @@ import { show } from "../drama/show";
 import { mxnBoilMirrorRotate } from "../mixins/mxn-boil-mirror-rotate";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { Rpg } from "../rpg/rpg";
 import { RpgPocket } from "../rpg/rpg-pocket";
-import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltownFanatic() {
     Jukebox.play(Mzk.CedarWorld);
@@ -21,7 +21,7 @@ export function scnNewBalltownFanatic() {
 }
 
 function enrichSecretSymbols(lvl: LvlType.NewBalltownFanatic) {
-    const { ballFruitFanatic } = RpgProgress.flags.newBalltown;
+    const { ballFruitFanatic } = Rpg.flags.newBalltown;
 
     lvl.SecretSymbols.children.forEach((obj, i) => {
         if (ballFruitFanatic.succesfulDeliveriesCount > i) {
@@ -38,17 +38,17 @@ function enrichSecretSymbols(lvl: LvlType.NewBalltownFanatic) {
 
 function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
     lvl.BallFruitFanaticNpc.mixin(mxnCutscene, function* () {
-        const typePreference = RpgProgress.flags.newBalltown.ballFruitFanatic.typePreference;
+        const typePreference = Rpg.flags.newBalltown.ballFruitFanatic.typePreference;
 
         // TODO this will be used frequently maybe
         // There should be a more terse way to check this
         const hasBallFruitTypeA = RpgPocket.Methods.has(
-            RpgProgress.character.inventory.pocket,
+            Rpg.character.inventory.pocket,
             "BallFruitTypeA",
             10,
         );
         const hasBallFruitTypeB = RpgPocket.Methods.has(
-            RpgProgress.character.inventory.pocket,
+            Rpg.character.inventory.pocket,
             "BallFruitTypeB",
             10,
         );
@@ -74,12 +74,12 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
             ) {
                 yield* show("These look awesome.", "How much do I owe you? Does 50 valuables sound good?");
                 RpgPocket.Methods.remove(
-                    RpgProgress.character.inventory.pocket,
+                    Rpg.character.inventory.pocket,
                     typePreference,
                     10,
                 );
                 yield* DramaQuests.completeQuest("NewBalltownFanaticDelivery", lvl.BallFruitFanaticNpc);
-                RpgProgress.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount++;
+                Rpg.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount++;
                 return;
             }
 
@@ -92,7 +92,7 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
                     "I prefer the texture of the seeds.",
                     "Please bring 10 ballfruit with seeds.",
                 );
-                RpgProgress.flags.newBalltown.ballFruitFanatic.typePreference = "BallFruitTypeB";
+                Rpg.flags.newBalltown.ballFruitFanatic.typePreference = "BallFruitTypeB";
             }
             else if (hasBallFruitTypeB && typePreference !== "BallFruitTypeB") {
                 yield* show(
@@ -101,7 +101,7 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
                     "I am terribly allergic to the seeds.",
                     "Please bring 10 seedless ballfruit.",
                 );
-                RpgProgress.flags.newBalltown.ballFruitFanatic.typePreference = "BallFruitTypeA";
+                Rpg.flags.newBalltown.ballFruitFanatic.typePreference = "BallFruitTypeA";
             }
         }
     });

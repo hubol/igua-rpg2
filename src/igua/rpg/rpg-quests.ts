@@ -1,7 +1,7 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataQuestInternalName, DataQuests } from "../data/data-quests";
+import { Rpg } from "./rpg";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
-import { RpgProgress } from "./rpg-progress";
 
 export namespace RpgQuests {
     export type Complexity = "easy" | "normal";
@@ -22,8 +22,8 @@ export namespace RpgQuests {
 
     export const Methods = {
         complete(name: Name): Rewards {
-            const completionsCount = (RpgProgress.character.quests[name] ?? 0) + 1;
-            RpgProgress.character.quests[name] = completionsCount;
+            const completionsCount = (Rpg.character.quests[name] ?? 0) + 1;
+            Rpg.character.quests[name] = completionsCount;
             const dataQuest = DataQuests[name];
             RpgExperienceRewarder.quest.onComplete(dataQuest.complexity, completionsCount);
             return dataQuest.rewards;

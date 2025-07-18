@@ -1,19 +1,19 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { Rpg } from "./rpg";
 import { RpgEconomy } from "./rpg-economy";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
-import { RpgProgress } from "./rpg-progress";
 
 export namespace RpgPlayerWallet {
     export function getHeldAmount(currency: RpgEconomy.Currency.Model) {
         if (currency === "valuables") {
-            return RpgProgress.character.inventory.valuables;
+            return Rpg.character.inventory.valuables;
         }
         else if (currency === "mechanical_idol_credits") {
-            return RpgProgress.flags.newBalltown.mechanicalIdol.credits;
+            return Rpg.flags.newBalltown.mechanicalIdol.credits;
         }
 
         const experience = currency.experience;
-        return RpgProgress.character.experience[experience];
+        return Rpg.character.experience[experience];
     }
 
     export function hasNone(currency: RpgEconomy.Currency.Model) {
@@ -24,16 +24,16 @@ export namespace RpgPlayerWallet {
 
     function update(currency: RpgEconomy.Currency.Model, delta: Integer) {
         if (currency === "valuables") {
-            RpgProgress.character.inventory.valuables += delta;
+            Rpg.character.inventory.valuables += delta;
             return;
         }
         else if (currency === "mechanical_idol_credits") {
-            RpgProgress.flags.newBalltown.mechanicalIdol.credits += delta;
+            Rpg.flags.newBalltown.mechanicalIdol.credits += delta;
             return;
         }
 
         const experience = currency.experience;
-        RpgProgress.character.experience[experience] += delta;
+        Rpg.character.experience[experience] += delta;
     }
 
     export function spend(currency: RpgEconomy.Currency.Model, cost: Integer, kind: ExpenseKind = "default") {

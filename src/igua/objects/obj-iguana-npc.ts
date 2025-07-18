@@ -9,8 +9,8 @@ import { IguanaLooks } from "../iguana/looks";
 import { mxnIguanaEditable } from "../mixins/mxn-iguana-editable";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { mxnStartPosition } from "../mixins/mxn-start-position";
+import { Rpg } from "../rpg/rpg";
 import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
-import { RpgProgress } from "../rpg/rpg-progress";
 import { objIguanaLocomotive } from "./obj-iguana-locomotive";
 
 export function objIguanaNpc(npcPersonaId: DataNpcPersona.Id) {
@@ -41,14 +41,14 @@ export function objIguanaNpc(npcPersonaId: DataNpcPersona.Id) {
             }
         })
         .handles("mxnSpeaker.speakingStarted", () => {
-            const playerHasMetNpc = RpgProgress.uids.metNpcPersonaIds.has(persona.id);
+            const playerHasMetNpc = Rpg.programmaticFlags.metNpcPersonaIds.has(persona.id);
             const spokenDuringCutscene = Cutscene.current
                 && Cutscene.current.attributes.speakerNpcPersonaIds.has(persona.id);
 
             RpgExperienceRewarder.social.onNpcSpeak(
                 playerHasMetNpc ? (spokenDuringCutscene ? "default" : "first_in_cutscene") : "first_ever",
             );
-            RpgProgress.uids.metNpcPersonaIds.add(persona.id);
+            Rpg.programmaticFlags.metNpcPersonaIds.add(persona.id);
             if (Cutscene.current) {
                 Cutscene.current.attributes.speakerNpcPersonaIds.add(persona.id);
             }

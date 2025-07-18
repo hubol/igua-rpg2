@@ -18,10 +18,10 @@ import { objFxHeartBurst } from "../objects/effects/obj-fx-heart-burst";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
 import { playerObj } from "../objects/obj-player";
+import { Rpg } from "../rpg/rpg";
 import { RpgCutscene } from "../rpg/rpg-cutscene";
 import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgPocket } from "../rpg/rpg-pocket";
-import { RpgProgress } from "../rpg/rpg-progress";
 
 export function scnNewBalltownUnderneath() {
     Jukebox.play(Mzk.TrashDay);
@@ -35,7 +35,7 @@ export function scnNewBalltownUnderneath() {
 }
 
 function enrichHomeowner(lvl: LvlType.NewBalltownUnderneath) {
-    if (RpgProgress.flags.underneath.homeowner.hasClearedHouseOfEnemies) {
+    if (Rpg.flags.underneath.homeowner.hasClearedHouseOfEnemies) {
         lvl.Homeowner.destroy();
         return;
     }
@@ -112,7 +112,7 @@ function enrichHomeowner(lvl: LvlType.NewBalltownUnderneath) {
 }
 
 function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
-    const { heliumCreator } = RpgProgress.flags.underneath;
+    const { heliumCreator } = Rpg.flags.underneath;
     const { tank } = heliumCreator;
 
     lvl.TownUnderneathHeliumCreator
@@ -133,7 +133,7 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
                     yield* show(tank.isValveOpen ? "Valve opened." : "Valve closed.");
                 }
                 else if (result === 1) {
-                    const pocketItemsCount = RpgPocket.Methods.countTotal(RpgProgress.character.inventory.pocket);
+                    const pocketItemsCount = RpgPocket.Methods.countTotal(Rpg.character.inventory.pocket);
 
                     yield* show(
                         "Your pocket items may be converted into helium.",
@@ -193,7 +193,7 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
 }
 
 function enrichTunnel(lvl: LvlType.NewBalltownUnderneath) {
-    lvl.TunnelLeftDoor.locked = RpgProgress.flags.underneath.tunneler.isLeftDoorLocked;
+    lvl.TunnelLeftDoor.locked = Rpg.flags.underneath.tunneler.isLeftDoorLocked;
 }
 
 function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
@@ -206,7 +206,7 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
 
     let movedByPlayerSteps = 0;
 
-    if (RpgProgress.flags.underneath.magicalRisingFace.reachedSummit) {
+    if (Rpg.flags.underneath.magicalRisingFace.reachedSummit) {
         lvl.MagicRisingFace.y = minimumY;
     }
 
@@ -241,7 +241,7 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
                 yield* show("Thank you for bringing joy to this place!!!");
                 scene.camera.mode = "move_towards_player";
                 yield* DramaQuests.completeQuest("NewBalltownUnderneathMagicRisingFace", self);
-                RpgProgress.flags.underneath.magicalRisingFace.reachedSummit = true;
+                Rpg.flags.underneath.magicalRisingFace.reachedSummit = true;
             }, { speaker: self, camera: { start: "pan_to_speaker" } });
         });
 

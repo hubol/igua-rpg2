@@ -10,7 +10,7 @@ import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
 import { objFish } from "../objects/obj-fish";
-import { RpgProgress } from "../rpg/rpg-progress";
+import { Rpg } from "../rpg/rpg";
 
 export function scnNewBalltownFishmonger() {
     Jukebox.play(Mzk.BreadCrumbPool);
@@ -34,7 +34,7 @@ function enrichAquarium(lvl: LvlType.NewBalltownFishmonger) {
 
 function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
     const { fishObjs } = enrichAquarium(lvl);
-    const { deliveries } = RpgProgress.flags.newBalltown.fishmonger;
+    const { deliveries } = Rpg.flags.newBalltown.fishmonger;
 
     if (deliveries.armorer) {
         fishObjs[0].destroy();
@@ -58,8 +58,8 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
         else if (result === 1) {
             const fishRecipient = yield* ask(
                 "You want a fish delivered? That's great! Who wants a fish?",
-                RpgProgress.flags.newBalltown.armorer.toldPlayerAboutDesireForFish
-                    && RpgProgress.flags.newBalltown.fishmonger.deliveries.armorer === null
+                Rpg.flags.newBalltown.armorer.toldPlayerAboutDesireForFish
+                    && Rpg.flags.newBalltown.fishmonger.deliveries.armorer === null
                     ? DataNpcPersona.Manifest.NewBalltownArmorer.name
                     : null,
                 "I don't know",
@@ -82,7 +82,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
                     yield* show("See you outside!");
                     yield* lvl.Fishmonger.walkTo(lvl.Door.x + 30);
                     DramaMisc.departRoomViaDoor(lvl.Fishmonger);
-                    RpgProgress.flags.newBalltown.fishmonger.deliveries.armorer = "ready";
+                    Rpg.flags.newBalltown.fishmonger.deliveries.armorer = "ready";
                 }
                 else {
                     yield* show("Okay, let me know when you are ready!");

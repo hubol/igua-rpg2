@@ -5,7 +5,7 @@ import { container } from "../../../lib/pixi/container";
 import { DataPocketItem } from "../../data/data-pocket-item";
 import { ask, show } from "../../drama/show";
 import { mxnCutscene } from "../../mixins/mxn-cutscene";
-import { RpgProgress } from "../../rpg/rpg-progress";
+import { Rpg } from "../../rpg/rpg";
 import { RpgStashPocket } from "../../rpg/rpg-stash-pocket";
 
 export function objStashPocket({ uid }: OgmoEntities.StashPocket) {
@@ -16,7 +16,7 @@ export function objStashPocket({ uid }: OgmoEntities.StashPocket) {
                 const deposited = RpgStashPocket.Methods.check(uid);
                 const operations = RpgStashPocket.Methods.checkPossibleOperations(
                     uid,
-                    RpgProgress.character.inventory.pocket,
+                    Rpg.character.inventory.pocket,
                 );
 
                 const message = deposited.kind === "empty"
@@ -33,13 +33,13 @@ export function objStashPocket({ uid }: OgmoEntities.StashPocket) {
                 );
 
                 if (result === 0) {
-                    RpgStashPocket.Methods.deposit(uid, RpgProgress.character.inventory.pocket);
+                    RpgStashPocket.Methods.deposit(uid, Rpg.character.inventory.pocket);
                 }
                 else if (result === 1) {
-                    RpgStashPocket.Methods.withdraw(uid, RpgProgress.character.inventory.pocket);
+                    RpgStashPocket.Methods.withdraw(uid, Rpg.character.inventory.pocket);
                 }
                 else if (result === 2) {
-                    RpgStashPocket.Methods.swap(uid, RpgProgress.character.inventory.pocket);
+                    RpgStashPocket.Methods.swap(uid, Rpg.character.inventory.pocket);
                 }
             }),
     );

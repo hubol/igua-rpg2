@@ -4,7 +4,7 @@ import { Jukebox } from "../core/igua-audio";
 import { DramaMisc } from "../drama/drama-misc";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { RpgProgress } from "../rpg/rpg-progress";
+import { Rpg } from "../rpg/rpg";
 
 export function scnNewBalltownUnderneathTunnel() {
     Jukebox.play(Mzk.Covid19);
@@ -13,12 +13,12 @@ export function scnNewBalltownUnderneathTunnel() {
 }
 
 function enrichTunneler(lvl: LvlType.NewBalltownUnderneathTunnel) {
-    lvl.LeftDoor.locked = RpgProgress.flags.underneath.tunneler.isLeftDoorLocked;
+    lvl.LeftDoor.locked = Rpg.flags.underneath.tunneler.isLeftDoorLocked;
     lvl.Tunneler.mixin(mxnCutscene, function* () {
         yield* show("Welcome. I'm the maintainer of this ancient tunnel.");
         const result = yield* ask(
             "Can I help you somehow?",
-            RpgProgress.flags.underneath.tunneler.isLeftDoorLocked ? "Unlock the door" : null,
+            Rpg.flags.underneath.tunneler.isLeftDoorLocked ? "Unlock the door" : null,
             "No, thanks",
         );
 
@@ -26,7 +26,7 @@ function enrichTunneler(lvl: LvlType.NewBalltownUnderneathTunnel) {
             yield* show("Oh, sure, sorry. I can totally unlock it for you...");
             yield DramaMisc.face(lvl.Tunneler, -1);
             yield* DramaMisc.walkToDoor.andUnlock(lvl.Tunneler, lvl.LeftDoor);
-            RpgProgress.flags.underneath.tunneler.isLeftDoorLocked = false;
+            Rpg.flags.underneath.tunneler.isLeftDoorLocked = false;
             yield DramaMisc.face(lvl.Tunneler, 1);
             yield* lvl.Tunneler.walkTo(lvl.Tunneler.startPosition.x);
             yield* show(

@@ -10,8 +10,8 @@ import { ZIndex } from "../core/scene/z-index";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { scene } from "../globals";
 import { MxnPhysics, mxnPhysics, PhysicsFaction } from "../mixins/mxn-physics";
+import { Rpg } from "../rpg/rpg";
 import { RpgPocket } from "../rpg/rpg-pocket";
-import { RpgProgress } from "../rpg/rpg-progress";
 import { playerObj } from "./obj-player";
 import { objPocketCollectNotification } from "./pocket/obj-pocket-collect-notification";
 
@@ -39,7 +39,7 @@ function objPocketableItemBase(item: RpgPocket.Item, freed: boolean) {
         self.alpha = 1;
 
         yield () => playerObj.hasControl && self.collides(playerObj);
-        const result = RpgPocket.Methods.receive(RpgProgress.character.inventory.pocket, item);
+        const result = RpgPocket.Methods.receive(Rpg.character.inventory.pocket, item);
         objPocketCollectNotification(result).at(obj).show();
         obj.destroy();
     }).show(obj);

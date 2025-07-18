@@ -5,10 +5,10 @@ import { Coro } from "../../../lib/game-engine/routines/coro";
 import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
 import { container } from "../../../lib/pixi/container";
 import { DeepKeyOf } from "../../../lib/types/deep-keyof";
+import { Rpg } from "../../rpg/rpg";
 import { RpgCharacterEquipment } from "../../rpg/rpg-character-equipment";
 import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
 import { RpgPlayerBuffs } from "../../rpg/rpg-player-buffs";
-import { RpgProgress } from "../../rpg/rpg-progress";
 import { StepOrder } from "../step-order";
 
 export function objUiEquipmentBuffs(
@@ -30,7 +30,7 @@ export function objUiEquipmentBuffs(
 
                 if (controls.focusBuffsSource) {
                     RpgEquipmentLoadout.getPlayerBuffs(
-                        RpgProgress.character.equipment.loadout.map(name =>
+                        Rpg.character.equipment.loadout.map(name =>
                             name === controls.focusBuffsSource ? controls.focusBuffsSource : null
                         ) as RpgEquipmentLoadout.Model,
                         focusedBuffs,

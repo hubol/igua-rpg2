@@ -13,8 +13,8 @@ import { MapRgbFilter } from "../../lib/pixi/filters/map-rgb-filter";
 import { scene } from "../globals";
 import { GenerativeMusicUtils } from "../lib/generative-music-utils";
 import { mxnPhysics } from "../mixins/mxn-physics";
+import { Rpg } from "../rpg/rpg";
 import { RpgFlops } from "../rpg/rpg-flops";
-import { RpgProgress } from "../rpg/rpg-progress";
 import { playerObj } from "./obj-player";
 import { objIndexedSprite } from "./utils/obj-indexed-sprite";
 
@@ -80,7 +80,7 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
             const newIndicatorObj = Sprite.from(Tx.Ui.NewIndicator).anchored(0.5, 0.5).at(18, 14).show(self);
             const newIndicatorVisibleObj = container().step(() =>
                 newIndicatorObj.visible = !RpgFlops.Methods.has(
-                    RpgProgress.character.inventory.flops,
+                    Rpg.character.inventory.flops,
                     flopDexNumberZeroIndexed,
                 )
             ).show(self);
@@ -90,7 +90,7 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
             yield () => playerObj.collides(hitboxObj);
             self.play(Sfx.Collect.Flop.rate(0.9, 1.1));
             newIndicatorVisibleObj.destroy();
-            RpgFlops.Methods.receive(RpgProgress.character.inventory.flops, flopDexNumberZeroIndexed);
+            RpgFlops.Methods.receive(Rpg.character.inventory.flops, flopDexNumberZeroIndexed);
             self.physicsEnabled = false;
             self.speed.at(0, 0);
             yield interpvr(self).translate(0, -32).over(200);
