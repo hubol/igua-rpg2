@@ -1,5 +1,5 @@
 import { DisplayObject } from "pixi.js";
-import { DataQuest } from "../data/data-quests";
+import { DataQuest } from "../data/data-quest";
 import { RpgQuests } from "../rpg/rpg-quests";
 import { DramaWallet } from "./drama-wallet";
 

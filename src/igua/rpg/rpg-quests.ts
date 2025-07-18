@@ -1,5 +1,5 @@
 import { Integer } from "../../lib/math/number-alias-types";
-import { DataQuest } from "../data/data-quests";
+import { DataQuest } from "../data/data-quest";
 import { Rpg } from "./rpg";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 
