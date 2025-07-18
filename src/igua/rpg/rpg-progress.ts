@@ -126,7 +126,5 @@ export type RpgProgressData_StashPocketDeposits = RpgProgressData["programmaticF
 
 export type RpgProgressExperience = keyof typeof Rpg["character"]["experience"];
 
-export type RpgProgressEquipment = typeof Rpg["character"]["equipment"];
-
 // TODO I think some places already expect flags to only be booleans :-X
 export type RpgProgressFlags = DeepKeyOf.Leaves<typeof Rpg["flags"]>;
