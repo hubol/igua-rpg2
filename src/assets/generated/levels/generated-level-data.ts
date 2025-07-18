@@ -2971,6 +2971,8 @@ export const Lvl = {
       WorldMapCloud0_2: d(Tx.WorldMap.Cloud0, { x: 864, y: 394, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       TerrainEarthMass0: d(Tx.Terrain.Earth.Mass0, { x: 795, y: 949, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe96565 }, "TerrainDecals"),
       TerrainEarthZigzag0: d(Tx.Terrain.Earth.Zigzag0, { x: 753, y: 1086, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x4b76a9 }, "TerrainDecals"),
+      ShapesSquareIrregular10_10: d(Tx.Shapes.SquareIrregular10, { x: 467, y: 711, scaleX: 7, scaleY: 2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
+      StashPocket: e(r["StashPocket"], { x: 472, y: 712, uid: 175280777909200, values: { name: "", depth: 0 } }, "Entities"),
       Player: e(r["Player"], { x: 632, y: 512, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromNewBalltownUnderneathRight: e(r["Checkpoint"], { x: 824, y: 512, flippedX: false, values: { name: "fromNewBalltownUnderneathRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromPlainsSuggestiveLeft: e(r["Checkpoint"], { x: 901, y: 629, flippedX: true, values: { name: "fromPlainsSuggestiveLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),

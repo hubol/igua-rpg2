@@ -166,7 +166,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 171,
       "gridCellsY": 106,
-      "entities": []
+      "entities": [
+        {
+          "name": "StashPocket",
+          "id": 0,
+          "_eid": "63818363",
+          "x": 472,
+          "y": 712,
+          "originX": 23,
+          "originY": 33,
+          "uid": 175280777909200,
+          "values": {"name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "TerrainDecals",
@@ -424,6 +436,18 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 467,
+          "y": 711,
+          "scaleX": 7,
+          "scaleY": 2,
+          "rotation": 0,
+          "tint": "#698826",
+          "texture": "shapes/square irregular 10.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -1420,7 +1444,8 @@
           "texture": "foliage/flower 14.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 967,
@@ -1432,7 +1457,8 @@
           "texture": "foliage/flower 14.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 987,
@@ -1444,7 +1470,8 @@
           "texture": "foliage/flower 14.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 970,
@@ -1456,7 +1483,8 @@
           "texture": "foliage/small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 983,
@@ -1468,7 +1496,8 @@
           "texture": "foliage/small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -1779,7 +1808,8 @@
           "texture": "shapes/square irregular 10.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1003,
@@ -1791,7 +1821,8 @@
           "texture": "foliage/moss 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 913,
@@ -1803,7 +1834,8 @@
           "texture": "foliage/moss 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 952,
@@ -1815,7 +1847,8 @@
           "texture": "terrain/earth/exposed dirt.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
