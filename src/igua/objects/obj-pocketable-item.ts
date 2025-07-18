@@ -39,7 +39,7 @@ function objPocketableItemBase(item: RpgPocket.Item, freed: boolean) {
         self.alpha = 1;
 
         yield () => playerObj.hasControl && self.collides(playerObj);
-        const result = RpgPocket.Methods.receive(Rpg.character.inventory.pocket, item);
+        const result = Rpg.inventory.pocket.receive(item);
         objPocketCollectNotification(result).at(obj).show();
         obj.destroy();
     }).show(obj);

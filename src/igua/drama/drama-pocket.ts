@@ -51,7 +51,7 @@ function* empty(recipientObj: DisplayObject): Coro.Type<RpgPocket.EmptyResult> {
     const pocketObj = yield* dramaCreatePocketObj();
     pocketObj.methods.open();
     yield sleep(333);
-    const result = RpgPocket.Methods.empty(Rpg.character.inventory.pocket);
+    const result = Rpg.inventory.pocket.empty();
     const pocketItemIds = Object.keys(result.items) as RpgPocket.Item[];
 
     const itemsObj = container().show();

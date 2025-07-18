@@ -283,7 +283,7 @@ What would you like to do?`,
 
                     if (result === 0) {
                         yield* show("You want to deposit computer chips? Let me check something first...");
-                        const count = RpgPocket.Methods.count(Rpg.character.inventory.pocket, "ComputerChip");
+                        const count = Rpg.inventory.pocket.count("ComputerChip");
                         if (count === 0) {
                             yield* show("Master, you don't have any computer chips. Get real.");
                         }
@@ -294,7 +294,7 @@ That's worth ${count} credit(s). Do you want to deposit them?`)
                             ) {
                                 yield* show("Got it! Let's get those deposited...");
                                 yield sleep(250);
-                                RpgPocket.Methods.remove(Rpg.character.inventory.pocket, "ComputerChip", count);
+                                Rpg.inventory.pocket.remove("ComputerChip", count);
                                 Rpg.flags.newBalltown.mechanicalIdol.credits += count;
                                 RpgExperienceRewarder.computer.onDepositComputerChips(count);
                                 yield sleep(250);

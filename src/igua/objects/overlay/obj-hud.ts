@@ -324,7 +324,7 @@ function objCutsceneLetterbox() {
 function objPocketInfo() {
     return objText.MediumIrregular("", { tint: Consts.StatusTextTint }).invisible()
         .step(self => {
-            const slot = Rpg.character.inventory.pocket.slots[0];
+            const slot = Rpg.inventory.pocket.slots[0];
             // TODO multiple slots lol
             self.visible = slot.count > 0;
             if (self.visible) {

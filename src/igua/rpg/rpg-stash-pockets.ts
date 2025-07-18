@@ -17,7 +17,8 @@ const empty: CheckResult_Empty = { kind: "empty", count: 0 };
 const notEmpty: CheckResult_NotEmpty = { kind: "not_empty", pocketItemId: "__Fallback__", count: 0 };
 
 export class RpgStashPockets {
-    constructor(private readonly _state: RpgStashPockets.State, private readonly _pocket: RpgPocket.Model) {
+    // TODO should not manipulate state directly, hoe!!
+    constructor(private readonly _state: RpgStashPockets.State, private readonly _pocket: RpgPocket.State) {
     }
 
     check(stashPocketId: Integer) {

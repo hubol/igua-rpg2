@@ -40,15 +40,11 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
     lvl.BallFruitFanaticNpc.mixin(mxnCutscene, function* () {
         const typePreference = Rpg.flags.newBalltown.ballFruitFanatic.typePreference;
 
-        // TODO this will be used frequently maybe
-        // There should be a more terse way to check this
-        const hasBallFruitTypeA = RpgPocket.Methods.has(
-            Rpg.character.inventory.pocket,
+        const hasBallFruitTypeA = Rpg.inventory.pocket.has(
             "BallFruitTypeA",
             10,
         );
-        const hasBallFruitTypeB = RpgPocket.Methods.has(
-            Rpg.character.inventory.pocket,
+        const hasBallFruitTypeB = Rpg.inventory.pocket.has(
             "BallFruitTypeB",
             10,
         );
@@ -73,8 +69,7 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
                 || (hasBallFruitTypeB && typePreference === "BallFruitTypeB")
             ) {
                 yield* show("These look awesome.", "How much do I owe you? Does 50 valuables sound good?");
-                RpgPocket.Methods.remove(
-                    Rpg.character.inventory.pocket,
+                Rpg.inventory.pocket.remove(
                     typePreference,
                     10,
                 );
