@@ -6,28 +6,12 @@ import { DataEquipment } from "../data/data-equipment";
 import { RpgEquipmentLoadout } from "./rpg-equipment-loadout";
 import { RpgPlayerBuffs } from "./rpg-player-buffs";
 
-export interface RpgObtainedEquipment {
-    id: Integer;
-    // TODO rename to equipmentId
-    name: DataEquipment.Id;
-    loadoutIndex: Integer | null;
-}
-
-function createData() {
-    return {
-        nextId: 0 as Integer,
-        list: Empty<RpgObtainedEquipment>(),
-    };
-}
-
-type Data = ReturnType<typeof createData>;
-
 export class RpgCharacterEquipment {
     private readonly _loadout: RpgEquipmentLoadout.Model = [null, null, null, null];
     private readonly _loadoutBuffs = RpgPlayerBuffs.create();
     private _loadoutUpdatesCount = 0;
 
-    constructor(private _data: Data) {
+    constructor(private _state: RpgCharacterEquipment.State) {
         this._updateLoadout();
     }
 
@@ -37,7 +21,7 @@ export class RpgCharacterEquipment {
         this._loadout[2] = null;
         this._loadout[3] = null;
 
-        const { list } = this._data;
+        const { list } = this._state;
 
         let assertFailed = false;
 
@@ -67,10 +51,8 @@ export class RpgCharacterEquipment {
         this._loadoutUpdatesCount++;
     }
 
-    static createData = createData;
-
     count(equipmentId: DataEquipment.Id) {
-        const { list } = this._data;
+        const { list } = this._state;
 
         let count = 0;
         for (let i = 0; i < list.length; i++) {
@@ -83,7 +65,7 @@ export class RpgCharacterEquipment {
     }
 
     equip(id: Integer | null, loadoutIndex: Integer) {
-        const { list } = this._data;
+        const { list } = this._state;
 
         for (let i = 0; i < list.length; i++) {
             const item = list[i];
@@ -97,8 +79,8 @@ export class RpgCharacterEquipment {
         this._updateLoadout();
     }
 
-    get list(): Readonly<Data["list"]> {
-        return this._data.list;
+    get list(): ReadonlyArray<Readonly<RpgCharacterEquipment.ObtainedEquipment>> {
+        return this._state.list;
     }
 
     get loadout(): Readonly<RpgEquipmentLoadout.Model> {
@@ -114,21 +96,42 @@ export class RpgCharacterEquipment {
     }
 
     receive(equipmentId: DataEquipment.Id) {
-        this._data.list.push({ id: this._data.nextId++, name: equipmentId, loadoutIndex: null });
+        this._state.list.push({ id: this._state.nextId++, name: equipmentId, loadoutIndex: null });
         this._updateLoadout();
     }
 
     static Preview = class RpgCharacterEquipmentPreview extends RpgCharacterEquipment {
-        private readonly _dataToRestoreBeforeEquip: Data;
+        private readonly _stateToRestoreBeforeEquip: RpgCharacterEquipment.State;
 
         constructor(equipment: RpgCharacterEquipment) {
-            super(clone(equipment._data));
-            this._dataToRestoreBeforeEquip = clone(equipment._data);
+            super(clone(equipment._state));
+            this._stateToRestoreBeforeEquip = clone(equipment._state);
         }
 
         equip(id: Integer | null, slotIndex: Integer): void {
-            this._data = clone(this._dataToRestoreBeforeEquip);
+            this._state = clone(this._stateToRestoreBeforeEquip);
             super.equip(id, slotIndex);
         }
     };
+
+    static createState(): RpgCharacterEquipment.State {
+        return {
+            nextId: 0,
+            list: [],
+        };
+    }
+}
+
+export module RpgCharacterEquipment {
+    export interface ObtainedEquipment {
+        id: Integer;
+        // TODO rename to equipmentId
+        name: DataEquipment.Id;
+        loadoutIndex: Integer | null;
+    }
+
+    export interface State {
+        nextId: Integer;
+        list: Array<RpgCharacterEquipment.ObtainedEquipment>;
+    }
 }

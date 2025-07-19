@@ -8,7 +8,7 @@ import { Cutscene, Input } from "../../globals";
 import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
 import { mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
 import { Rpg } from "../../rpg/rpg";
-import { RpgCharacterEquipment, RpgObtainedEquipment } from "../../rpg/rpg-character-equipment";
+import { RpgCharacterEquipment } from "../../rpg/rpg-character-equipment";
 import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
 import { objEquipmentRepresentation } from "../obj-equipment-representation";
@@ -75,7 +75,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 
 function objUiEquipmentChoosePage(
     loadoutIndex: Integer,
-    onChoose: (equipment: RpgObtainedEquipment | null) => void,
+    onChoose: (equipment: RpgCharacterEquipment.ObtainedEquipment | null) => void,
 ) {
     const previewEquipment = new RpgCharacterEquipment.Preview(Rpg.character.equipment);
 
