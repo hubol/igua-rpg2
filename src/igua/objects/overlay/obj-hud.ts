@@ -326,7 +326,7 @@ function objPocketInfo() {
         .step(self => {
             const slot = Rpg.inventory.pocket.slots[0];
             // TODO multiple slots lol
-            self.visible = slot.count > 0;
+            self.visible = !slot.isEmpty;
             if (self.visible) {
                 self.text = "Your pocket has " + DataPocketItem.getById(slot.item!).name + "x" + slot.count;
                 self.seed = slot.count + 80_000;

@@ -18,7 +18,7 @@ const notEmpty: CheckResult_NotEmpty = { kind: "not_empty", pocketItemId: "__Fal
 
 export class RpgStashPockets {
     // TODO should not manipulate state directly, hoe!!
-    constructor(private readonly _state: RpgStashPockets.State, private readonly _pocket: RpgPocket.State) {
+    constructor(private readonly _state: RpgStashPockets.State, private readonly _pocket: RpgPocket) {
     }
 
     check(stashPocketId: Integer) {
@@ -34,24 +34,22 @@ export class RpgStashPockets {
 
     checkPossibleOperations(stashPocketId: Integer): RpgStashPockets.Operation[] {
         const existingDeposit = this.check(stashPocketId);
-        // TODO should be exposed on a pocket method!
-        const currentSlot = this._pocket.slots[this._pocket.nextSlotIndex];
+        const currentSlot = this._pocket.receivingSlot;
 
         if (existingDeposit.kind === "empty") {
-            return currentSlot.count === 0 ? [] : ["deposit"];
+            return currentSlot.isEmpty ? [] : ["deposit"];
         }
 
         if (existingDeposit.pocketItemId === currentSlot.item) {
             return ["deposit", "withdraw"];
         }
 
-        // TODO all the count === 0 or !item checks suck
-        return (currentSlot.count === 0 || !currentSlot.item) ? ["withdraw"] : ["swap"];
+        return currentSlot.isEmpty ? ["withdraw"] : ["swap"];
     }
 
     deposit(stashPocketId: Integer) {
         const existingDeposit = this.check(stashPocketId);
-        const { count, item } = this._pocket.slots[this._pocket.nextSlotIndex];
+        const { count, item } = this._pocket.receivingSlot;
 
         // TODO assert that existing deposit item and deposited item are identical, and that count > 0 and item is truthy
 
@@ -60,13 +58,12 @@ export class RpgStashPockets {
             count: count + existingDeposit.count,
         };
 
-        this._pocket.slots[this._pocket.nextSlotIndex].item = null;
-        this._pocket.slots[this._pocket.nextSlotIndex].count = 0;
+        this._pocket.receivingSlot.force(null, 0, "stash_pocket_operation");
     }
 
     withdraw(stashPocketId: Integer) {
         const existingDeposit = this.check(stashPocketId);
-        const { count } = this._pocket.slots[this._pocket.nextSlotIndex];
+        const { count } = this._pocket.receivingSlot;
 
         // TODO assert that existing deposit item and deposited item are identical, and that count > 0 and item is truthy
 
@@ -76,24 +73,30 @@ export class RpgStashPockets {
         }
 
         delete this._state[stashPocketId];
-        this._pocket.slots[this._pocket.nextSlotIndex].item = existingDeposit.pocketItemId;
-        this._pocket.slots[this._pocket.nextSlotIndex].count = count + existingDeposit.count;
+        this._pocket.receivingSlot.force(
+            existingDeposit.pocketItemId,
+            count + existingDeposit.count,
+            "stash_pocket_operation",
+        );
     }
 
     swap(stashPocketId: Integer) {
         const existingDeposit = this.check(stashPocketId);
-        const { count, item } = this._pocket.slots[this._pocket.nextSlotIndex];
+        const { count, item, isEmpty } = this._pocket.receivingSlot;
 
-        if (count === 0 || !item) {
+        if (isEmpty) {
             delete this._state[stashPocketId];
         }
         else {
-            this._state[stashPocketId] = { count, pocketItemId: item };
+            this._state[stashPocketId] = { count, pocketItemId: item! };
         }
 
         if (existingDeposit.kind === "not_empty") {
-            this._pocket.slots[this._pocket.nextSlotIndex].item = existingDeposit.pocketItemId;
-            this._pocket.slots[this._pocket.nextSlotIndex].count = existingDeposit.count;
+            this._pocket.receivingSlot.force(
+                existingDeposit.pocketItemId,
+                existingDeposit.count,
+                "stash_pocket_operation",
+            );
         }
     }
 

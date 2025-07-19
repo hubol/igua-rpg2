@@ -14,7 +14,7 @@ function createRpg(data: RpgProgressData) {
     const buffs = new RpgPlayerAggregatedBuffs(equipment);
     const quests = new RpgQuests(data.character.quests);
     const pocket = new RpgPocket(pocketState);
-    const stashPockets = new RpgStashPockets(stashPocketsState, data.character.inventory.pocket);
+    const stashPockets = new RpgStashPockets(stashPocketsState, pocket);
 
     return {
         // TODO rename to player

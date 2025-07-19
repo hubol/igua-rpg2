@@ -3,12 +3,31 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 
+type RpgPocketSlotPublic = Omit<RpgPocketSlot, "update">;
+
 export class RpgPocket {
+    private readonly _slotObjects: RpgPocketSlot[] = [];
+
     constructor(private readonly _state: RpgPocket.State) {
     }
 
-    get slots(): ReadonlyArray<Readonly<RpgPocket.Slot>> {
-        return this._state.slots;
+    private get _slots() {
+        while (this._slotObjects.length < this._state.slots.length) {
+            const index = this._slotObjects.length;
+            this._slotObjects[index] = new RpgPocketSlot(this._state.slots[index]);
+        }
+
+        this._slotObjects.length = this._state.slots.length;
+
+        return this._slotObjects;
+    }
+
+    get slots(): ReadonlyArray<RpgPocketSlotPublic> {
+        return this._slots;
+    }
+
+    get receivingSlot() {
+        return this.slots[this._state.receivingSlotIndex];
     }
 
     empty() {
@@ -40,7 +59,7 @@ export class RpgPocket {
     receive(item: RpgPocket.Item) {
         // TODO assert model, item are valid
 
-        const index = this._state.nextSlotIndex;
+        const index = this._state.receivingSlotIndex;
         const slot = this._state.slots[index];
         const reset = slot.item !== null && slot.item !== item;
 
@@ -52,7 +71,7 @@ export class RpgPocket {
             slot.count += 1;
         }
 
-        this._state.nextSlotIndex = (index + 1) % this._state.slots.length;
+        this._state.receivingSlotIndex = (index + 1) % this._state.slots.length;
 
         const result = {
             index,
@@ -126,7 +145,7 @@ export class RpgPocket {
 
     static createState(): RpgPocket.State {
         return {
-            nextSlotIndex: 0,
+            receivingSlotIndex: 0,
             slots: [
                 {
                     item: null,
@@ -140,16 +159,52 @@ export class RpgPocket {
 export module RpgPocket {
     export type Item = DataPocketItem.Id;
 
-    export interface Slot {
-        item: Item | null;
-        count: number;
-    }
-
     export interface State {
-        nextSlotIndex: number;
-        slots: Slot[];
+        receivingSlotIndex: number;
+        slots: RpgPocketSlot.State[];
     }
 
     export type EmptyResult = ReturnType<RpgPocket["empty"]>;
     export type ReceiveResult = ReturnType<RpgPocket["receive"]>;
+}
+
+class RpgPocketSlot {
+    constructor(private readonly _state: RpgPocketSlot.State) {
+    }
+
+    get isEmpty() {
+        return this._state.count === 0 || !this._state.item;
+    }
+
+    get count() {
+        return this._state.count;
+    }
+
+    get item() {
+        return this._state.item;
+    }
+
+    update(item: RpgPocketSlot.State["item"], count: Integer) {
+        if (!item && count !== 0) {
+            Logger.logContractViolationError("RpgPocketSlot", new Error("item is falsy but count is not 0"), {
+                item,
+                count,
+            });
+            count = 0;
+        }
+
+        this._state.count = count;
+        this._state.item = item;
+    }
+
+    force(item: RpgPocketSlot.State["item"], count: Integer, reason: "stash_pocket_operation") {
+        this.update(item, count);
+    }
+}
+
+module RpgPocketSlot {
+    export interface State {
+        item: RpgPocket.Item | null;
+        count: number;
+    }
 }
