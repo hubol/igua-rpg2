@@ -11,6 +11,7 @@ import { DataPocketItem } from "../../data/data-pocket-item";
 import { ask, show } from "../../drama/show";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../../mixins/mxn-cutscene";
+import { mxnSpeaker } from "../../mixins/mxn-speaker";
 import { Rpg } from "../../rpg/rpg";
 import { objUiBubbleNumber } from "../overlay/obj-ui-bubble-numbers";
 
@@ -34,6 +35,7 @@ export function objStashPocket({ uid }: OgmoEntities.StashPocket) {
     return container(
         Sprite.from(Tx.Esoteric.StashPocket)
             .pivoted(23, 33)
+            .mixin(mxnSpeaker, { name: "Pocket Stash", colorPrimary: 0x54BAFF, colorSecondary: 0xFFB200 })
             .mixin(mxnCutscene, function* () {
                 const deposited = Rpg.stashPockets.check(uid);
                 const operations = Rpg.stashPockets.checkPossibleOperations(uid);
