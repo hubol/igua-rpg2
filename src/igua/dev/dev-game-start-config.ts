@@ -38,22 +38,24 @@ export const DevGameStartConfig = {
             const config = transientGameStartConfig.value;
             transientGameStartConfig.clear();
 
-            const { upgradedObject: upgradedProgress, rawMessages: schemaChangedMessages } = deepUpgradeVerbose(
-                config.progress,
-                devGetRpgProgressData(),
-            );
-            if (schemaChangedMessages.length) {
-                Toast.info(
-                    "getInitialProgress() schema change",
-                    formatUpdatedProgressMessage(schemaChangedMessages),
-                    5000,
-                );
-            }
+            // TODO need to reconsider how this stuff works...
+
+            // const { upgradedObject: upgradedProgress, rawMessages: schemaChangedMessages } = deepUpgradeVerbose(
+            //     config.progress,
+            //     devGetRpgProgressData(),
+            // );
+            // if (schemaChangedMessages.length) {
+            //     Toast.info(
+            //         "getInitialProgress() schema change",
+            //         formatUpdatedProgressMessage(schemaChangedMessages),
+            //         5000,
+            //     );
+            // }
 
             const initialProgressDiff = Diff.detectUpdatedValues(config.initialProgress, getInitialRpgProgress());
 
             if (initialProgressDiff.length) {
-                const results = Diff.apply(upgradedProgress, initialProgressDiff);
+                const results = Diff.apply(config.progress, initialProgressDiff);
 
                 if (results.length) {
                     Toast.info(
@@ -62,18 +64,18 @@ export const DevGameStartConfig = {
                         5000,
                     );
                 }
-                else if (!schemaChangedMessages.length) {
-                    Toast.info(
-                        "getInitialProgress() values updated",
-                        "No changes to transient dev progress detected.",
-                        5000,
-                    );
-                }
+                // else if (!schemaChangedMessages.length) {
+                //     Toast.info(
+                //         "getInitialProgress() values updated",
+                //         "No changes to transient dev progress detected.",
+                //         5000,
+                //     );
+                // }
             }
 
             return {
                 sceneName: config.progress.character.position.sceneName,
-                progress: upgradedProgress,
+                progress: config.progress,
                 player: config.player,
             };
         }
