@@ -4,6 +4,7 @@ import { Tx } from "../../../assets/textures";
 import { holdf } from "../../../lib/game-engine/routines/hold";
 import { interpr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { approachLinear } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { DataPocketItem } from "../../data/data-pocket-item";
@@ -94,7 +95,7 @@ function objStashPocketDepositedInfo({ controls }: ObjStashPocketDepositedInfoAr
     )
         .step(() => {
             pocketItemSpriteObj.controls.texture = getTx(controls);
-            bubbleNumberObj.controls.value = controls.count;
+            bubbleNumberObj.controls.value = approachLinear(bubbleNumberObj.controls.value, controls.count, 11);
         });
 }
 

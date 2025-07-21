@@ -37,7 +37,8 @@ export function objUiBubbleNumber({ value }: ObjUiBubbleNumberArgs) {
         .coro(function* () {
             while (true) {
                 yield () => controls.value !== state.renderedValue;
-                const digits = [...String(Math.abs(controls.value))].map(Number);
+                const nextRenderedValue = controls.value;
+                const digits = [...String(Math.abs(nextRenderedValue))].map(Number);
                 for (let i = 0; i < Math.max(digits.length, digitObjs.length); i++) {
                     const digit = digits[i];
                     const digitObj = digitObjs[i];
@@ -58,7 +59,7 @@ export function objUiBubbleNumber({ value }: ObjUiBubbleNumberArgs) {
                     }
                 }
                 digitObjs.length = digits.length;
-                state.renderedValue = controls.value;
+                state.renderedValue = nextRenderedValue;
             }
         })
         .coro(function* () {
