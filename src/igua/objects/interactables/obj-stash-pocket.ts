@@ -2,7 +2,7 @@ import { Sprite, Texture } from "pixi.js";
 import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Tx } from "../../../assets/textures";
 import { holdf } from "../../../lib/game-engine/routines/hold";
-import { interpr } from "../../../lib/game-engine/routines/interp";
+import { interp, interpr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
@@ -14,6 +14,9 @@ import { mxnCutscene } from "../../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../../mixins/mxn-speaker";
 import { Rpg } from "../../rpg/rpg";
 import { objUiBubbleNumber } from "../overlay/obj-ui-bubble-numbers";
+import { objIndexedSprite } from "../utils/obj-indexed-sprite";
+
+const txs = Tx.Esoteric.StashPocket.split({ count: 3 });
 
 export function objStashPocket({ uid }: OgmoEntities.StashPocket) {
     const depositInfoArgs = { controls: {} } as ObjStashPocketDepositedInfoArgs;
@@ -32,11 +35,15 @@ export function objStashPocket({ uid }: OgmoEntities.StashPocket) {
 
     updateDepositInfoArgs();
 
+    const spriteObj = objIndexedSprite(txs)
+        .pivoted(23, 41);
+
     return container(
-        Sprite.from(Tx.Esoteric.StashPocket)
-            .pivoted(23, 33)
+        spriteObj
             .mixin(mxnSpeaker, { name: "Pocket Stash", colorPrimary: 0x54BAFF, colorSecondary: 0xFFB200 })
             .mixin(mxnCutscene, function* () {
+                yield interp(spriteObj, "textureIndex").to(3).over(250);
+
                 const deposited = Rpg.stashPockets.check(uid);
                 const operations = Rpg.stashPockets.checkPossibleOperations(uid);
 
@@ -62,6 +69,8 @@ export function objStashPocket({ uid }: OgmoEntities.StashPocket) {
                 else if (result === 2) {
                     Rpg.stashPockets.swap(uid);
                 }
+
+                yield interp(spriteObj, "textureIndex").to(0).over(250);
             }),
         objStashPocketDepositedInfo(depositInfoArgs)
             .step(updateDepositInfoArgs),
