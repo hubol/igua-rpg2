@@ -1,4 +1,5 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -15,7 +16,13 @@ function enrichGatekeeper(lvl: LvlType.PlainsSuggestiveCavern) {
         if (!opening) {
             if (yield* ask("Ready to go?")) {
                 lvl.MovingCeilingBlock.coro(function* (self) {
-                    yield interpvr(self).factor(factor.sine).translate(self.width, 0).over(20_000);
+                    const dx = self.width;
+                    const duration = 20_000;
+
+                    yield* Coro.all([
+                        interpvr(self).factor(factor.sine).translate(dx, 0).over(duration),
+                        interpvr(lvl.MovingCeilingBlockDecals).factor(factor.sine).translate(dx, 0).over(duration),
+                    ]);
                 });
                 opening = true;
 

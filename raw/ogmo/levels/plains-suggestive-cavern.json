@@ -4,8 +4,8 @@
   "height": 520,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#408000",
-  "values": {"Terrain Color": "#000000"},
+  "backgroundColor": "#190000",
+  "values": {"Terrain Color": "#540707"},
   "layers": [
     {
       "name": "MarkerEntities",
@@ -45,7 +45,7 @@
           "id": 1,
           "_eid": "64222434",
           "x": 48,
-          "y": -40,
+          "y": -80,
           "width": 440,
           "originX": 0,
           "originY": 0,
@@ -155,7 +155,509 @@
       "gridCellHeight": 8,
       "gridCellsX": 104,
       "gridCellsY": 65,
-      "decals": [],
+      "decals": [
+        {
+          "x": 240,
+          "y": -64,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 64,
+          "y": 72,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 93,
+          "y": 71,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 121,
+          "y": 70,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 149,
+          "y": 71,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 178,
+          "y": 70,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 206,
+          "y": 69,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 238,
+          "y": 70,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 267,
+          "y": 69,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 295,
+          "y": 68,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 318,
+          "y": 70,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 346,
+          "y": 69,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 378,
+          "y": 70,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 399,
+          "y": 71,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 427,
+          "y": 70,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 459,
+          "y": 71,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 196,
+          "y": 84,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 257,
+          "y": 89,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#cecece",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 124,
+          "y": 89,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#cecece",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 404,
+          "y": 89,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#cecece",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 47,
+          "y": 44,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#cecece",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 480,
+          "y": 40,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#cecece",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "MovingCeilingBlockDecals"
+        },
+        {
+          "x": 334,
+          "y": 471,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 253,
+          "y": 392,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 168,
+          "y": 312,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 86,
+          "y": 230,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 481,
+          "y": 471,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 609,
+          "y": 471,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 545,
+          "y": 345,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 545,
+          "y": 217,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 744,
+          "y": 78,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 90,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 744,
+          "y": 214,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 90,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 744,
+          "y": 382,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 90,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 479,
+          "y": 318,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 90,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 479,
+          "y": 182,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 90,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 49,
+          "y": 136,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 90,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 124,
+          "y": 256,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#190000",
+          "texture": "terrain/earth/crack small0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 291,
+          "y": 459,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#190000",
+          "texture": "terrain/earth/crack small0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 514,
+          "y": 382,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#190000",
+          "texture": "terrain/earth/crack small0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 662,
+          "y": 476,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#190000",
+          "texture": "terrain/earth/crack small0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -178,7 +680,7 @@
           "height": 544,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#540707",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -191,7 +693,7 @@
           "height": 368,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#540707",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -204,7 +706,7 @@
           "height": 48,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#540707",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -217,7 +719,7 @@
           "height": 32,
           "flippedX": false,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#540707",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -230,7 +732,7 @@
           "height": 32,
           "flippedX": false,
           "flippedY": true,
-          "tint": "#000000",
+          "tint": "#540707",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -243,7 +745,7 @@
           "height": 80,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#540707",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -256,7 +758,7 @@
           "height": 80,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#540707",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -269,7 +771,7 @@
           "height": 80,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#540707",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -282,7 +784,7 @@
           "height": 368,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#540707",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -304,7 +806,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#540707",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -317,7 +819,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#540707",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -330,7 +832,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#540707",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -397,7 +899,7 @@
           "height": 88,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#cecece",
           "values": {"name": "MovingCeilingBlock", "depth": 0, "visible": true}
         }
       ]
@@ -422,7 +924,20 @@
       "gridCellHeight": 8,
       "gridCellsX": 104,
       "gridCellsY": 65,
-      "decals": [],
+      "decals": [
+        {
+          "x": 545,
+          "y": 57,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -434,7 +949,32 @@
       "gridCellHeight": 8,
       "gridCellsX": 104,
       "gridCellsY": 65,
-      "decals": [],
+      "decals": [
+        {
+          "x": -16,
+          "y": 48,
+          "scaleX": 37,
+          "scaleY": 2,
+          "rotation": 0,
+          "tint": "#47201c",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": -16,
+          "y": -16,
+          "scaleX": 37,
+          "scaleY": 2,
+          "rotation": 0,
+          "tint": "#a46154",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     }
   ]
