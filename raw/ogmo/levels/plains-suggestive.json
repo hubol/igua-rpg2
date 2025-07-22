@@ -39,6 +39,18 @@
           "originY": 0,
           "flippedX": true,
           "values": {"sceneName": "scnWorldMap", "checkpointName": "fromPlainsSuggestiveLeft", "name": "", "depth": 0}
+        },
+        {
+          "name": "GateVertical",
+          "id": 1,
+          "_eid": "64222434",
+          "x": 528,
+          "y": 440,
+          "width": 336,
+          "originX": 0,
+          "originY": 0,
+          "flippedY": false,
+          "values": {"sceneName": "scnPlainsSuggestiveCavern", "checkpointName": "", "name": "", "depth": 0}
         }
       ]
     },
@@ -85,6 +97,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 1,
+          "_eid": "19953026",
+          "x": 688,
+          "y": 416,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromCavern", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
         }
       ]
     },
@@ -158,7 +181,8 @@
           "texture": "foliage/small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

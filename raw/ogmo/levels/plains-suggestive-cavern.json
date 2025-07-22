@@ -1,0 +1,441 @@
+{
+  "ogmoVersion": "3.4.0-hubol",
+  "width": 820,
+  "height": 520,
+  "offsetX": 0,
+  "offsetY": 0,
+  "backgroundColor": "#408000",
+  "values": {"Terrain Color": "#000000"},
+  "layers": [
+    {
+      "name": "MarkerEntities",
+      "_eid": "73166939",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 104,
+      "gridCellsY": 65,
+      "entities": []
+    },
+    {
+      "name": "RegionEntities",
+      "_eid": "01831167",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 104,
+      "gridCellsY": 65,
+      "entities": [
+        {
+          "name": "GateVertical",
+          "id": 0,
+          "_eid": "64222434",
+          "x": 568,
+          "y": -32,
+          "width": 176,
+          "originX": 0,
+          "originY": 0,
+          "flippedY": true,
+          "values": {"sceneName": "scnPlainsSuggestive", "checkpointName": "fromCavern", "name": "", "depth": 0}
+        },
+        {
+          "name": "GateVertical",
+          "id": 1,
+          "_eid": "64222434",
+          "x": 48,
+          "y": -40,
+          "width": 440,
+          "originX": 0,
+          "originY": 0,
+          "flippedY": true,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromPlainsSuggestiveCavern", "name": "", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "FrontDecals",
+      "_eid": "17577176",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 104,
+      "gridCellsY": 65,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "FrontEntities",
+      "_eid": "55690179",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 104,
+      "gridCellsY": 65,
+      "entities": []
+    },
+    {
+      "name": "PlayerEntities",
+      "_eid": "96470627",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 104,
+      "gridCellsY": 65,
+      "entities": [
+        {
+          "name": "Player",
+          "id": 0,
+          "_eid": "93092164",
+          "x": 656,
+          "y": 48,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "CharacterEntities",
+      "_eid": "07790422",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 104,
+      "gridCellsY": 65,
+      "entities": [
+        {
+          "name": "IguanaNpc",
+          "id": 0,
+          "_eid": "90326278",
+          "x": 88,
+          "y": 232,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": false,
+          "values": {"personaName": "", "name": "Gatekeeper", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "AboveEntitiesDecals",
+      "_eid": "63753160",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 104,
+      "gridCellsY": 65,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "Entities",
+      "_eid": "93086020",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 104,
+      "gridCellsY": 65,
+      "entities": []
+    },
+    {
+      "name": "TerrainDecals",
+      "_eid": "02386446",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 104,
+      "gridCellsY": 65,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "TerrainEntities",
+      "_eid": "02302709",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 104,
+      "gridCellsY": 65,
+      "entities": [
+        {
+          "name": "Block",
+          "id": 0,
+          "_eid": "93117141",
+          "x": 744,
+          "y": 0,
+          "width": 80,
+          "height": 544,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 1,
+          "_eid": "93117141",
+          "x": 480,
+          "y": 0,
+          "width": 64,
+          "height": 368,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 2,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 472,
+          "width": 752,
+          "height": 48,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 3,
+          "_eid": "95675713",
+          "x": 680,
+          "y": 440,
+          "width": 64,
+          "height": 32,
+          "flippedX": false,
+          "flippedY": false,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 4,
+          "_eid": "95675713",
+          "x": 480,
+          "y": 368,
+          "width": 64,
+          "height": 32,
+          "flippedX": false,
+          "flippedY": true,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 5,
+          "_eid": "93117141",
+          "x": -24,
+          "y": 392,
+          "width": 320,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 6,
+          "_eid": "93117141",
+          "x": -104,
+          "y": 312,
+          "width": 320,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 7,
+          "_eid": "93117141",
+          "x": -192,
+          "y": 232,
+          "width": 320,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 8,
+          "_eid": "93117141",
+          "x": -16,
+          "y": -136,
+          "width": 64,
+          "height": 368,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 10,
+          "_eid": "95769929",
+          "x": 264,
+          "y": 184,
+          "width": 216,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 11,
+          "_eid": "93117141",
+          "x": 392,
+          "y": 408,
+          "width": 16,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 12,
+          "_eid": "93117141",
+          "x": 336,
+          "y": 328,
+          "width": 16,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 13,
+          "_eid": "93117141",
+          "x": 208,
+          "y": 248,
+          "width": 16,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 14,
+          "_eid": "95769929",
+          "x": 48,
+          "y": 128,
+          "width": 56,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 15,
+          "_eid": "95769929",
+          "x": 432,
+          "y": 120,
+          "width": 48,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 16,
+          "_eid": "95769929",
+          "x": 432,
+          "y": 64,
+          "width": 48,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 17,
+          "_eid": "95769929",
+          "x": 432,
+          "y": 8,
+          "width": 48,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 18,
+          "_eid": "95769929",
+          "x": 48,
+          "y": 64,
+          "width": 56,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 19,
+          "_eid": "95769929",
+          "x": 48,
+          "y": 8,
+          "width": 56,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 21,
+          "_eid": "93117141",
+          "x": 48,
+          "y": 0,
+          "width": 432,
+          "height": 88,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "MovingCeilingBlock", "depth": 0, "visible": true}
+        }
+      ]
+    },
+    {
+      "name": "BackgroundEntities",
+      "_eid": "41483982",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 104,
+      "gridCellsY": 65,
+      "entities": []
+    },
+    {
+      "name": "BackgroundDecals",
+      "_eid": "64691217",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 104,
+      "gridCellsY": 65,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxDecals",
+      "_eid": "17093961",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 104,
+      "gridCellsY": 65,
+      "decals": [],
+      "folder": "../textures"
+    }
+  ]
+}

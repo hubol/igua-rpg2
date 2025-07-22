@@ -2783,6 +2783,35 @@ export const Lvl = {
       EnvironmentSparkleMarker_11: e(r["EnvironmentSparkleMarker"], { x: 903, y: 430, values: { name: "", depth: 0 } }, "MarkerEntities"),
     };
   },
+  PlainsSuggestiveCavern: () => {
+    applyLevel({ width: 820, height: 520, backgroundTint: 0x408000 });
+    return {
+      Block: e(r["Block"], { x: 744, y: 0, width: 80, height: 544, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 480, y: 0, width: 64, height: 368, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 0, y: 472, width: 752, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 680, y: 440, width: 64, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 480, y: 368, width: 64, height: 32, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: -24, y: 392, width: 320, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: -104, y: 312, width: 320, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: -192, y: 232, width: 320, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: -16, y: -136, width: 64, height: 368, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 264, y: 184, width: 216, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 392, y: 408, width: 16, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_8: e(r["Block"], { x: 336, y: 328, width: 16, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_9: e(r["Block"], { x: 208, y: 248, width: 16, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe_1: e(r["Pipe"], { x: 48, y: 128, width: 56, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_2: e(r["Pipe"], { x: 432, y: 120, width: 48, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_3: e(r["Pipe"], { x: 432, y: 64, width: 48, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_4: e(r["Pipe"], { x: 432, y: 8, width: 48, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_5: e(r["Pipe"], { x: 48, y: 64, width: 56, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_6: e(r["Pipe"], { x: 48, y: 8, width: 56, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      MovingCeilingBlock: e(r["Block"], { x: 48, y: 0, width: 432, height: 88, values: { name: "MovingCeilingBlock", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Gatekeeper: e(r["IguanaNpc"], { x: 88, y: 232, flippedX: false, values: { personaName: "", name: "Gatekeeper", depth: 0 } }, "CharacterEntities"),
+      Player: e(r["Player"], { x: 656, y: 48, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      GateVertical: e(r["GateVertical"], { x: 568, y: -32, width: 176, flippedY: true, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromCavern", name: "", depth: 0 } }, "RegionEntities"),
+      GateVertical_1: e(r["GateVertical"], { x: 48, y: -40, width: 440, flippedY: true, values: { sceneName: "scnWorldMap", checkpointName: "fromPlainsSuggestiveCavern", name: "", depth: 0 } }, "RegionEntities"),
+    };
+  },
   PlainsSuggestive: () => {
     applyLevel({ width: 1096, height: 464, backgroundTint: 0xd28270 });
     return {
@@ -2840,7 +2869,9 @@ export const Lvl = {
       EffectsStar12px: d(Tx.Effects.Star12px, { x: 220, y: 285, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x854e31 }, "AboveEntitiesDecals"),
       FoliageSmall_1: d(Tx.Foliage.Small, { x: 175, y: 446, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb728 }, "AboveEntitiesDecals"),
       Player: e(r["Player"], { x: 80, y: 280, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      fromCavern: e(r["Checkpoint"], { x: 688, y: 416, flippedX: false, values: { name: "fromCavern", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -32, y: 152, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromPlainsSuggestiveLeft", name: "", depth: 0 } }, "RegionEntities"),
+      GateVertical: e(r["GateVertical"], { x: 528, y: 440, width: 336, flippedY: false, values: { sceneName: "scnPlainsSuggestiveCavern", checkpointName: "", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
   WorldMap: () => {
@@ -2873,6 +2904,8 @@ export const Lvl = {
       FoliageMoss0: d(Tx.Foliage.Moss0, { x: 1003, y: 605, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xd28270 }, "ParallaxDecals"),
       FoliageMoss0_1: d(Tx.Foliage.Moss0, { x: 913, y: 553, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xd28270 }, "ParallaxDecals"),
       TerrainEarthExposedDirt: d(Tx.Terrain.Earth.ExposedDirt, { x: 952, y: 888, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbab532 }, "ParallaxDecals"),
+      LightShadowMessy0: d(Tx.Light.ShadowMessy0, { x: 980, y: 692, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
+      StoneRock0_2: d(Tx.Stone.Rock0, { x: 944, y: 684, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       ShapesRightTriangle24px: d(Tx.Shapes.RightTriangle24px, { x: 438, y: 726, scaleX: 2.9, scaleY: 3.2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
       ShapesRightTriangle24px_1: d(Tx.Shapes.RightTriangle24px, { x: 1013, y: 728, scaleX: -2.9, scaleY: 3.2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
       ShapesRightTriangle24px_2: d(Tx.Shapes.RightTriangle24px, { x: 865, y: 232, scaleX: -2.9, scaleY: -3.2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
@@ -2942,6 +2975,11 @@ export const Lvl = {
       FoliageFlower14_2: d(Tx.Foliage.Flower14, { x: 987, y: 579, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       FoliageSmall: d(Tx.Foliage.Small, { x: 970, y: 600, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe6a500 }, "BackgroundDecals"),
       FoliageSmall_1: d(Tx.Foliage.Small, { x: 983, y: 591, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe6a500 }, "BackgroundDecals"),
+      ShapesCircleIrregular26_9: d(Tx.Shapes.CircleIrregular26, { x: 963, y: 696, scaleX: 2, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc1c1c1 }, "BackgroundDecals"),
+      ShapesConfetti18x8: d(Tx.Shapes.Confetti18x8, { x: 971, y: 688, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa0a0a0 }, "BackgroundDecals"),
+      ShapesConfetti18x8_1: d(Tx.Shapes.Confetti18x8, { x: 953, y: 706, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa0a0a0 }, "BackgroundDecals"),
+      StoneRock0_3: d(Tx.Stone.Rock0, { x: 984, y: 704, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      StoneRockSmallShaded1_3: d(Tx.Stone.RockSmallShaded1, { x: 998, y: 706, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       Slope: e(r["Slope"], { x: 983, y: 689, width: 80, height: 80, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Slope_1: e(r["Slope"], { x: 385, y: 688, width: 80, height: 80, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Slope_2: e(r["Slope"], { x: 387, y: 189, width: 80, height: 80, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
@@ -2953,12 +2991,12 @@ export const Lvl = {
       Block_4: e(r["Block"], { x: 275, y: 244, width: 120, height: 456, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       TerrainGrassTall3px: d(Tx.Terrain.Grass.Tall3px, { x: 777, y: 508, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
       TerrainGrassTall3px_1: d(Tx.Terrain.Grass.Tall3px, { x: 676, y: 507, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
-      ShapesConfetti18x8: d(Tx.Shapes.Confetti18x8, { x: 706, y: 511, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
-      ShapesConfetti18x8_1: d(Tx.Shapes.Confetti18x8, { x: 749, y: 514, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
-      ShapesConfetti18x8_2: d(Tx.Shapes.Confetti18x8, { x: 796, y: 519, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
-      ShapesConfetti18x8_3: d(Tx.Shapes.Confetti18x8, { x: 808, y: 510, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
-      ShapesConfetti18x8_4: d(Tx.Shapes.Confetti18x8, { x: 659, y: 521, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
-      ShapesConfetti18x8_5: d(Tx.Shapes.Confetti18x8, { x: 641, y: 507, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
+      ShapesConfetti18x8_2: d(Tx.Shapes.Confetti18x8, { x: 706, y: 511, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
+      ShapesConfetti18x8_3: d(Tx.Shapes.Confetti18x8, { x: 749, y: 514, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
+      ShapesConfetti18x8_4: d(Tx.Shapes.Confetti18x8, { x: 796, y: 519, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
+      ShapesConfetti18x8_5: d(Tx.Shapes.Confetti18x8, { x: 808, y: 510, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
+      ShapesConfetti18x8_6: d(Tx.Shapes.Confetti18x8, { x: 659, y: 521, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
+      ShapesConfetti18x8_7: d(Tx.Shapes.Confetti18x8, { x: 641, y: 507, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
       NewBalltownLabel: dg("NewBalltownLabel", "TerrainDecals"),
       WorldMapLabelsNewBalltown: d(Tx.WorldMap.Labels.NewBalltown, { x: 736, y: 462, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "NewBalltownLabel", tint: 0x520e1a }, "TerrainDecals"),
       FoliageFlower14_3: d(Tx.Foliage.Flower14, { x: 700, y: 463, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "NewBalltownLabel", tint: 0xb48cbe }, "TerrainDecals"),
@@ -2976,6 +3014,7 @@ export const Lvl = {
       Player: e(r["Player"], { x: 632, y: 512, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromNewBalltownUnderneathRight: e(r["Checkpoint"], { x: 824, y: 512, flippedX: false, values: { name: "fromNewBalltownUnderneathRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromPlainsSuggestiveLeft: e(r["Checkpoint"], { x: 901, y: 629, flippedX: true, values: { name: "fromPlainsSuggestiveLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromPlainsSuggestiveCavern: e(r["Checkpoint"], { x: 920, y: 720, flippedX: true, values: { name: "fromPlainsSuggestiveCavern", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       GateMap: e(r["GateMap"], { x: 821, y: 495, rotation: 2340, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0 }, tint: 0xffffff }, "RegionEntities"),
       GateMap_1: e(r["GateMap"], { x: 637, y: 497, rotation: 0, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0 }, tint: 0xffffff }, "RegionEntities"),
       GateMap_2: e(r["GateMap"], { x: 942, y: 604, rotation: 270, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0 }, tint: 0xffffff }, "RegionEntities"),
@@ -2995,6 +3034,7 @@ export namespace LvlType {
   export type NewBalltownUnderneathTunnel = ReturnType<(typeof Lvl)["NewBalltownUnderneathTunnel"]>;
   export type NewBalltownUnderneath = ReturnType<(typeof Lvl)["NewBalltownUnderneath"]>;
   export type NewBalltown = ReturnType<(typeof Lvl)["NewBalltown"]>;
+  export type PlainsSuggestiveCavern = ReturnType<(typeof Lvl)["PlainsSuggestiveCavern"]>;
   export type PlainsSuggestive = ReturnType<(typeof Lvl)["PlainsSuggestive"]>;
   export type WorldMap = ReturnType<(typeof Lvl)["WorldMap"]>;
 }
