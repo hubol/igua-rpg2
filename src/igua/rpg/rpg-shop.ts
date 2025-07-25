@@ -3,18 +3,16 @@ import { DataEquipment } from "../data/data-equipment";
 import { DataKeyItem } from "../data/data-key-item";
 import { Rpg } from "./rpg";
 import { RpgEconomy } from "./rpg-economy";
-import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerWallet } from "./rpg-player-wallet";
 
 interface Product_Equipment {
     kind: "equipment";
-    name: DataEquipment.Id;
+    equipmentId: DataEquipment.Id;
 }
 
 interface Product_KeyItem {
     kind: "key_item";
-    // TODD rename to id
-    name: DataKeyItem.Id;
+    keyItemid: DataKeyItem.Id;
 }
 
 interface Product_Potion {
@@ -64,22 +62,32 @@ export namespace CatalogItem {
             return 0;
         }
         else if (item.product.kind === "equipment") {
-            return Rpg.character.equipment.count(item.product.name);
+            return Rpg.character.equipment.count(item.product.equipmentId);
         }
 
-        return Rpg.inventory.keyItems.count(item.product.name);
+        return Rpg.inventory.keyItems.count(item.product.keyItemid);
     }
 }
 
 function getCatalogItemKeyBase(stock: Stock) {
     const { product, price: { currency } } = stock;
 
-    const productSubstring = product.kind + "__" + ("name" in product ? product.name : "");
+    const productSubstring = product.kind + "__" + getProductKey(product);
     const currencySubstring = typeof currency === "string"
         ? currency
         : ("__" + currency.kind + "__" + currency.experience);
 
     return productSubstring + currencySubstring;
+}
+
+function getProductKey(product: Product) {
+    if (product.kind === "equipment") {
+        return product.equipmentId;
+    }
+    if (product.kind === "key_item") {
+        return product.keyItemid;
+    }
+    return "unknown";
 }
 
 function getCatalogItemKeys(stocks: Stock[]) {
@@ -168,10 +176,10 @@ export class RpgShop {
 function deliverProduct(product: Product) {
     switch (product.kind) {
         case "equipment":
-            Rpg.character.equipment.receive(product.name);
+            Rpg.character.equipment.receive(product.equipmentId);
             return;
         case "key_item":
-            Rpg.inventory.keyItems.receive(product.name);
+            Rpg.inventory.keyItems.receive(product.keyItemid);
             return;
         case "potion":
             // TODO

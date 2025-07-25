@@ -9,7 +9,7 @@ const newBalltownSecretRpgShop = new RpgShop({
     internalName: "newBalltownSecretShop",
     stocks: [
         {
-            product: { kind: "equipment", name: "JumpAtSpecialSignsRing" },
+            product: { kind: "equipment", equipmentId: "JumpAtSpecialSignsRing" },
             initialQuantity: 999,
             price: {
                 currency: { kind: "experience", experience: "jump" },
@@ -18,7 +18,7 @@ const newBalltownSecretRpgShop = new RpgShop({
             },
         },
         {
-            product: { kind: "equipment", name: "PoisonRing" },
+            product: { kind: "equipment", equipmentId: "PoisonRing" },
             initialQuantity: 999,
             price: {
                 currency: "valuables",
@@ -27,7 +27,7 @@ const newBalltownSecretRpgShop = new RpgShop({
             },
         },
         {
-            product: { kind: "equipment", name: "YellowRichesRing" },
+            product: { kind: "equipment", equipmentId: "YellowRichesRing" },
             initialQuantity: 999,
             price: {
                 currency: "valuables",
@@ -36,7 +36,7 @@ const newBalltownSecretRpgShop = new RpgShop({
             },
         },
         {
-            product: { kind: "equipment", name: "RichesRing" },
+            product: { kind: "equipment", equipmentId: "RichesRing" },
             initialQuantity: 999,
             price: {
                 currency: "valuables",
@@ -45,7 +45,7 @@ const newBalltownSecretRpgShop = new RpgShop({
             },
         },
         {
-            product: { kind: "equipment", name: "JumpAtSpecialSignsRing" },
+            product: { kind: "equipment", equipmentId: "JumpAtSpecialSignsRing" },
             initialQuantity: 3,
             price: {
                 currency: { kind: "experience", experience: "combat" },
@@ -54,7 +54,7 @@ const newBalltownSecretRpgShop = new RpgShop({
             },
         },
         {
-            product: { kind: "equipment", name: "JumpAtSpecialSignsRing" },
+            product: { kind: "equipment", equipmentId: "JumpAtSpecialSignsRing" },
             initialQuantity: 3,
             price: {
                 currency: "valuables",
@@ -63,7 +63,7 @@ const newBalltownSecretRpgShop = new RpgShop({
             },
         },
         {
-            product: { kind: "equipment", name: "JumpAtSpecialSignsRing" },
+            product: { kind: "equipment", equipmentId: "JumpAtSpecialSignsRing" },
             initialQuantity: 3,
             price: {
                 currency: { kind: "experience", experience: "computer" },
@@ -72,7 +72,7 @@ const newBalltownSecretRpgShop = new RpgShop({
             },
         },
         {
-            product: { kind: "equipment", name: "JumpAtSpecialSignsRing" },
+            product: { kind: "equipment", equipmentId: "JumpAtSpecialSignsRing" },
             initialQuantity: 3,
             price: {
                 currency: { kind: "experience", experience: "gambling" },
@@ -81,7 +81,7 @@ const newBalltownSecretRpgShop = new RpgShop({
             },
         },
         {
-            product: { kind: "equipment", name: "JumpAtSpecialSignsRing" },
+            product: { kind: "equipment", equipmentId: "JumpAtSpecialSignsRing" },
             initialQuantity: 3,
             price: {
                 currency: { kind: "experience", experience: "pocket" },

@@ -217,7 +217,7 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
 const shopMechanicalIdol = new RpgShop({
     internalName: "shopMechanicalIdol",
     stocks: [{
-        product: { kind: "key_item", name: "UpgradedPickaxe" },
+        product: { kind: "key_item", keyItemid: "UpgradedPickaxe" },
         initialQuantity: 999,
         price: { currency: "mechanical_idol_credits", deltaSold: 0, initial: 10 },
     }],

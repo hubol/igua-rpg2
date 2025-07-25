@@ -21,12 +21,12 @@ const shopHomeowner = new RpgShop({
         {
             initialQuantity: 99,
             price: { currency: "valuables", deltaSold: 50, initial: 50 },
-            product: { kind: "key_item", name: "SeedYellow" },
+            product: { kind: "key_item", keyItemid: "SeedYellow" },
         },
         {
             initialQuantity: 99,
             price: { currency: "valuables", deltaSold: 50, initial: 50 },
-            product: { kind: "key_item", name: "SeedGreen" },
+            product: { kind: "key_item", keyItemid: "SeedGreen" },
         },
     ],
 });

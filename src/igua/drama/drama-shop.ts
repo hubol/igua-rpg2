@@ -260,9 +260,9 @@ function objCatalogItemNameDescription(item: CatalogItem.Model) {
 function getCatalogItemName(item: CatalogItem.Model) {
     switch (item.product.kind) {
         case "equipment":
-            return DataEquipment.getById(item.product.name).name;
+            return DataEquipment.getById(item.product.equipmentId).name;
         case "key_item":
-            return DataKeyItem.getById(item.product.name).name;
+            return DataKeyItem.getById(item.product.keyItemid).name;
         case "potion":
             return "Potion?!?!?";
     }
@@ -271,9 +271,9 @@ function getCatalogItemName(item: CatalogItem.Model) {
 function getCatalogItemDescription(item: CatalogItem.Model) {
     switch (item.product.kind) {
         case "equipment":
-            return DataEquipment.getById(item.product.name).description;
+            return DataEquipment.getById(item.product.equipmentId).description;
         case "key_item":
-            return DataKeyItem.getById(item.product.name).description;
+            return DataKeyItem.getById(item.product.keyItemid).description;
         default:
             return "";
     }
