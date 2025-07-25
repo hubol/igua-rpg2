@@ -1,3 +1,4 @@
+import { DataQuest } from "../data/data-quest";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
@@ -54,7 +55,9 @@ function createRpg(data: RpgProgressData) {
             pocket,
         },
         programmaticFlags,
-        quests,
+        quest(questId: DataQuest.Id) {
+            return quests.getById(questId);
+        },
         stashPockets,
         __private__: {
             data,
