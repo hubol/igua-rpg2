@@ -39,6 +39,11 @@ function enrichFarmer(lvl: LvlType.NewBalltownOutskirts) {
     lvl.FarmerNpc.mixin(mxnCutscene, function* () {
         scene.camera.mode = "controlled";
 
+        if (!Rpg.flags.outskirts.farmer.hasBagOfSeeds) {
+            // TODO check key items
+            return;
+        }
+
         yield* show("I should replant the ballfruit? Sure.");
 
         const choice = yield* ask("What ballfruit do you want? Choose wisely.", "Type A", "Type B");

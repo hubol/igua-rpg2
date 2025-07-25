@@ -88,6 +88,9 @@ export function getInitialRpgProgress() {
                 },
             },
             outskirts: {
+                farmer: {
+                    hasBagOfSeeds: false,
+                },
                 miner: {
                     hasUpgradedPickaxe: false,
                     pickaxeHealth: 10,

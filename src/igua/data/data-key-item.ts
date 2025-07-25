@@ -8,6 +8,10 @@ export namespace DataKeyItem {
 
     export const Manifest = DataLib.createManifest(
         {
+            BagOfSeeds: {
+                name: "Seed Bag",
+                description: "A magical bag with the power to annihilate the ballfruit economy.",
+            },
             UpgradedPickaxe: { name: "MyPicaxe Version 2.0", description: "A miner would benefit from this" },
             SeedYellow: { name: "Seed (Yellow)", description: "The seed of a lucrative idea." },
             SeedGreen: { name: "Seed (Green)", description: "The seed of a poisonous idea." },
