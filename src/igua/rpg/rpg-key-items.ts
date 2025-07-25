@@ -1,61 +1,66 @@
 import { Logger } from "../../lib/game-engine/logger";
 import { DataKeyItem } from "../data/data-key-item";
 
-export namespace RpgKeyItems {
-    // TODO suspicious alias
-    export type Item = DataKeyItem.Id;
-    export type Model = Item[];
+export class RpgKeyItems {
+    constructor(private readonly _state: RpgKeyItems.State) {
+    }
 
-    export function create(): Model {
+    static createState(): RpgKeyItems.State {
         return [];
     }
 
-    export const Methods = {
-        receive(model: Model, item: Item) {
-            model.push(item);
-        },
-        count(items: Model, item: Item) {
-            let count = 0;
-            for (const heldItem of items) {
-                if (heldItem === item) {
-                    count++;
-                }
-            }
+    receive(item: RpgKeyItems.Item) {
+        this._state.push(item);
+    }
 
-            return count;
-        },
-        has(items: Model, item: Item, count: number) {
-            for (const heldItem of items) {
-                if (heldItem === item) {
-                    count--;
-                }
+    count(item: RpgKeyItems.Item) {
+        let count = 0;
+        for (const heldItem of this._state) {
+            if (heldItem === item) {
+                count++;
             }
+        }
 
-            return count <= 0;
-        },
-        remove(model: Model, item: Item, count: number) {
-            let index = 0;
-            while (index < model.length) {
-                const modelItem = model[index];
-                if (modelItem === item) {
-                    count--;
-                    model.splice(index, 1);
-                    if (count === 0) {
-                        break;
-                    }
-                }
-                else {
-                    index++;
-                }
-            }
+        return count;
+    }
 
-            if (count !== 0) {
-                Logger.logAssertError(
-                    "RpgKeyItems.Methods.remove",
-                    new Error(`count should be 0, got ${count}`),
-                    { model, item, count },
-                );
+    has(item: RpgKeyItems.Item, count: number) {
+        for (const heldItem of this._state) {
+            if (heldItem === item) {
+                count--;
             }
-        },
-    };
+        }
+
+        return count <= 0;
+    }
+
+    remove(item: RpgKeyItems.Item, count: number) {
+        let index = 0;
+        while (index < this._state.length) {
+            const modelItem = this._state[index];
+            if (modelItem === item) {
+                count--;
+                this._state.splice(index, 1);
+                if (count === 0) {
+                    break;
+                }
+            }
+            else {
+                index++;
+            }
+        }
+
+        if (count !== 0) {
+            Logger.logAssertError(
+                "RpgKeyItems.Methods.remove",
+                new Error(`count should be 0, got ${count}`),
+                { state: this._state, item, count },
+            );
+        }
+    }
+}
+
+export module RpgKeyItems {
+    export type Item = DataKeyItem.Id;
+    export type State = Item[];
 }

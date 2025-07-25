@@ -67,7 +67,7 @@ export namespace CatalogItem {
             return Rpg.character.equipment.count(item.product.name);
         }
 
-        return RpgKeyItems.Methods.count(Rpg.character.inventory.keyItems, item.product.name);
+        return Rpg.inventory.keyItems.count(item.product.name);
     }
 }
 
@@ -171,7 +171,7 @@ function deliverProduct(product: Product) {
             Rpg.character.equipment.receive(product.name);
             return;
         case "key_item":
-            RpgKeyItems.Methods.receive(Rpg.character.inventory.keyItems, product.name);
+            Rpg.inventory.keyItems.receive(product.name);
             return;
         case "potion":
             // TODO
