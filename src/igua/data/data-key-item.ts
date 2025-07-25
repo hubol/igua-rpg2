@@ -3,16 +3,17 @@ import { DataLib } from "./data-lib";
 export namespace DataKeyItem {
     export interface Model {
         name: string;
+        description: string;
     }
 
     export const Manifest = DataLib.createManifest(
         {
-            UpgradedPickaxe: { name: "MyPicaxe Version 2.0" },
-            SeedYellow: { name: "Seed (Yellow)" },
-            SeedGreen: { name: "Seed (Green)" },
-            SeedBlue: { name: "Seed (Blue)" },
-            SeedPurple: { name: "Seed (Purple)" },
-            __Fallback__: { name: "???" },
+            UpgradedPickaxe: { name: "MyPicaxe Version 2.0", description: "A miner would benefit from this" },
+            SeedYellow: { name: "Seed (Yellow)", description: "The seed of a lucrative idea." },
+            SeedGreen: { name: "Seed (Green)", description: "The seed of a poisonous idea." },
+            SeedBlue: { name: "Seed (Blue)", description: "The seed of a strong idea." },
+            SeedPurple: { name: "Seed (Purple)", description: "The seed of a lucky idea." },
+            __Fallback__: { name: "???", description: "If you are reading this, this is a bug." },
         } satisfies Record<string, Model>,
     );
 

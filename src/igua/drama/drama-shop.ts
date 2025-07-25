@@ -272,6 +272,8 @@ function getCatalogItemDescription(item: CatalogItem.Model) {
     switch (item.product.kind) {
         case "equipment":
             return DataEquipment.getById(item.product.name).description;
+        case "key_item":
+            return DataKeyItem.getById(item.product.name).description;
         default:
             return "";
     }
