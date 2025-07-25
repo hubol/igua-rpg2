@@ -12,7 +12,7 @@ interface Product_Equipment {
 
 interface Product_KeyItem {
     kind: "key_item";
-    keyItemid: DataKeyItem.Id;
+    keyItemId: DataKeyItem.Id;
 }
 
 interface Product_Potion {
@@ -65,7 +65,7 @@ export namespace CatalogItem {
             return Rpg.character.equipment.count(item.product.equipmentId);
         }
 
-        return Rpg.inventory.keyItems.count(item.product.keyItemid);
+        return Rpg.inventory.keyItems.count(item.product.keyItemId);
     }
 }
 
@@ -85,7 +85,7 @@ function getProductKey(product: Product) {
         return product.equipmentId;
     }
     if (product.kind === "key_item") {
-        return product.keyItemid;
+        return product.keyItemId;
     }
     return "unknown";
 }
@@ -179,7 +179,7 @@ function deliverProduct(product: Product) {
             Rpg.character.equipment.receive(product.equipmentId);
             return;
         case "key_item":
-            Rpg.inventory.keyItems.receive(product.keyItemid);
+            Rpg.inventory.keyItems.receive(product.keyItemId);
             return;
         case "potion":
             // TODO

@@ -262,7 +262,7 @@ function getCatalogItemName(item: CatalogItem.Model) {
         case "equipment":
             return DataEquipment.getById(item.product.equipmentId).name;
         case "key_item":
-            return DataKeyItem.getById(item.product.keyItemid).name;
+            return DataKeyItem.getById(item.product.keyItemId).name;
         case "potion":
             return "Potion?!?!?";
     }
@@ -273,7 +273,7 @@ function getCatalogItemDescription(item: CatalogItem.Model) {
         case "equipment":
             return DataEquipment.getById(item.product.equipmentId).description;
         case "key_item":
-            return DataKeyItem.getById(item.product.keyItemid).description;
+            return DataKeyItem.getById(item.product.keyItemId).description;
         default:
             return "";
     }
