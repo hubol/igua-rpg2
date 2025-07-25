@@ -40,7 +40,25 @@ function enrichFarmer(lvl: LvlType.NewBalltownOutskirts) {
         scene.camera.mode = "controlled";
 
         if (!Rpg.flags.outskirts.farmer.hasBagOfSeeds) {
-            // TODO check key items
+            yield* show(
+                "I need to jump-start my farming career.",
+                `But I need a ${DataKeyItem.Manifest.BagOfSeeds.name}...`,
+            );
+
+            const used = yield* DramaKeyItems.use({ keyItemIds: ["BagOfSeeds"] });
+
+            if (used?.count) {
+                yield* show(
+                    "Yo!! What?!",
+                    "Thank you!!! This will let me plant ballfruit.",
+                    "Just talk to me when you want ballfruit planted.",
+                );
+                Rpg.flags.outskirts.farmer.hasBagOfSeeds = true;
+            }
+            else {
+                yield* show("...");
+            }
+
             return;
         }
 
