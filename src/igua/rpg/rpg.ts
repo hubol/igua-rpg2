@@ -1,3 +1,4 @@
+import { Integer } from "../../lib/math/number-alias-types";
 import { DataQuest } from "../data/data-quest";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgKeyItems } from "./rpg-key-items";
@@ -58,7 +59,9 @@ function createRpg(data: RpgProgressData) {
         quest(questId: DataQuest.Id) {
             return quests.getById(questId);
         },
-        stashPockets,
+        stashPocket(stashPocketId: Integer) {
+            return stashPockets.getById(stashPocketId);
+        },
         __private__: {
             data,
         },

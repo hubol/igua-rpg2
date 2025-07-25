@@ -17,12 +17,42 @@ const empty: CheckResult_Empty = { kind: "empty", count: 0 };
 const notEmpty: CheckResult_NotEmpty = { kind: "not_empty", pocketItemId: "__Fallback__", count: 0 };
 
 export class RpgStashPockets {
+    private readonly _cache: Partial<Record<Integer, RpgStashPocket>> = {};
+
     // TODO should not manipulate state directly, hoe!!
     constructor(private readonly _state: RpgStashPockets.State, private readonly _pocket: RpgPocket) {
     }
 
-    check(stashPocketId: Integer) {
-        const deposit = this._state[stashPocketId];
+    getById(stashPocketId: Integer) {
+        const cache = this._cache[stashPocketId];
+
+        if (cache) {
+            return cache;
+        }
+
+        return this._cache[stashPocketId] = new RpgStashPocket(this._state, this._pocket, stashPocketId);
+    }
+
+    static createState(): RpgStashPockets.State {
+        return {};
+    }
+}
+
+module RpgStashPockets {
+    export type State = Record<Integer, { pocketItemId: DataPocketItem.Id; count: Integer }>;
+    export type Operation = "withdraw" | "deposit" | "swap";
+}
+
+class RpgStashPocket {
+    constructor(
+        private readonly _state: RpgStashPockets.State,
+        private readonly _pocket: RpgPocket,
+        private readonly _id: Integer,
+    ) {
+    }
+
+    check() {
+        const deposit = this._state[this._id];
         if (!deposit || deposit.count < 1) {
             return empty;
         }
@@ -32,8 +62,8 @@ export class RpgStashPockets {
         return notEmpty;
     }
 
-    checkPossibleOperations(stashPocketId: Integer): RpgStashPockets.Operation[] {
-        const existingDeposit = this.check(stashPocketId);
+    checkPossibleOperations(): RpgStashPockets.Operation[] {
+        const existingDeposit = this.check();
         const currentSlot = this._pocket.receivingSlot;
 
         if (existingDeposit.kind === "empty") {
@@ -47,13 +77,13 @@ export class RpgStashPockets {
         return currentSlot.isEmpty ? ["withdraw"] : ["swap"];
     }
 
-    deposit(stashPocketId: Integer) {
-        const existingDeposit = this.check(stashPocketId);
+    deposit() {
+        const existingDeposit = this.check();
         const { count, item } = this._pocket.receivingSlot;
 
         // TODO assert that existing deposit item and deposited item are identical, and that count > 0 and item is truthy
 
-        this._state[stashPocketId] = {
+        this._state[this._id] = {
             pocketItemId: item!,
             count: count + existingDeposit.count,
         };
@@ -61,8 +91,8 @@ export class RpgStashPockets {
         this._pocket.receivingSlot.force(null, 0, "stash_pocket_operation");
     }
 
-    withdraw(stashPocketId: Integer) {
-        const existingDeposit = this.check(stashPocketId);
+    withdraw() {
+        const existingDeposit = this.check();
         const { count } = this._pocket.receivingSlot;
 
         // TODO assert that existing deposit item and deposited item are identical, and that count > 0 and item is truthy
@@ -72,7 +102,7 @@ export class RpgStashPockets {
             return;
         }
 
-        delete this._state[stashPocketId];
+        delete this._state[this._id];
         this._pocket.receivingSlot.force(
             existingDeposit.pocketItemId,
             count + existingDeposit.count,
@@ -80,15 +110,15 @@ export class RpgStashPockets {
         );
     }
 
-    swap(stashPocketId: Integer) {
-        const existingDeposit = this.check(stashPocketId);
+    swap() {
+        const existingDeposit = this.check();
         const { count, item, isEmpty } = this._pocket.receivingSlot;
 
         if (isEmpty) {
-            delete this._state[stashPocketId];
+            delete this._state[this._id];
         }
         else {
-            this._state[stashPocketId] = { count, pocketItemId: item! };
+            this._state[this._id] = { count, pocketItemId: item! };
         }
 
         if (existingDeposit.kind === "not_empty") {
@@ -99,13 +129,4 @@ export class RpgStashPockets {
             );
         }
     }
-
-    static createState(): RpgStashPockets.State {
-        return {};
-    }
-}
-
-module RpgStashPockets {
-    export type State = Record<Integer, { pocketItemId: DataPocketItem.Id; count: Integer }>;
-    export type Operation = "withdraw" | "deposit" | "swap";
 }

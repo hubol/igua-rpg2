@@ -22,7 +22,7 @@ export function objStashPocket({ uid }: OgmoEntities.StashPocket) {
     const depositInfoArgs = { controls: {} } as ObjStashPocketDepositedInfoArgs;
 
     function updateDepositInfoArgs() {
-        const deposited = Rpg.stashPockets.check(uid);
+        const deposited = Rpg.stashPocket(uid).check();
         if (deposited.kind === "empty") {
             depositInfoArgs.controls.count = 0;
             depositInfoArgs.controls.pocketItemId = null;
@@ -44,8 +44,8 @@ export function objStashPocket({ uid }: OgmoEntities.StashPocket) {
             .mixin(mxnCutscene, function* () {
                 yield interp(spriteObj, "textureIndex").to(3).over(250);
 
-                const deposited = Rpg.stashPockets.check(uid);
-                const operations = Rpg.stashPockets.checkPossibleOperations(uid);
+                const deposited = Rpg.stashPocket(uid).check();
+                const operations = Rpg.stashPocket(uid).checkPossibleOperations();
 
                 const message = deposited.kind === "empty"
                     ? "Stash is empty."
@@ -61,13 +61,13 @@ export function objStashPocket({ uid }: OgmoEntities.StashPocket) {
                 );
 
                 if (result === 0) {
-                    Rpg.stashPockets.deposit(uid);
+                    Rpg.stashPocket(uid).deposit();
                 }
                 else if (result === 1) {
-                    Rpg.stashPockets.withdraw(uid);
+                    Rpg.stashPocket(uid).withdraw();
                 }
                 else if (result === 2) {
-                    Rpg.stashPockets.swap(uid);
+                    Rpg.stashPocket(uid).swap();
                 }
 
                 yield interp(spriteObj, "textureIndex").to(0).over(250);
