@@ -12,6 +12,7 @@ import { RgbInt } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { Null } from "../../../lib/types/null";
 import { renderer } from "../../current-pixi-renderer";
+import { DataIdol } from "../../data/data-idol";
 import { DataPocketItem } from "../../data/data-pocket-item";
 import { dramaShop } from "../../drama/drama-shop";
 import { Cutscene, scene } from "../../globals";
@@ -20,6 +21,7 @@ import { CtxInteract } from "../../mixins/mxn-interact";
 import { Rpg } from "../../rpg/rpg";
 import { RpgExperience } from "../../rpg/rpg-experience";
 import { RpgPlayer } from "../../rpg/rpg-player";
+import { RpgSceneIdol } from "../../rpg/rpg-player-aggregated-buffs";
 import { playerObj } from "../obj-player";
 import { StepOrder } from "../step-order";
 import { objFlopCollectionIndicator } from "./obj-flop-collection-indicator";
@@ -45,6 +47,7 @@ export function objHud() {
     const statusObjs: Array<Container & { advance?: number }> = [
         valuablesInfoObj,
         objPocketInfo(),
+        objIdolBuff(),
         poisonLevelObj,
         poisonBuildUpObj,
         objHeliumBuildUp(),
@@ -368,6 +371,17 @@ function objHeliumBuildUp() {
         message: "Helium is potent...",
         conditionsKey: "helium",
     });
+}
+
+function objIdolBuff() {
+    return objText.MediumIrregular("", { tint: Consts.StatusTextTint })
+        .step(text => {
+            const idol = RpgSceneIdol.value.idol;
+            text.visible = Boolean(idol && !idol.isEmpty);
+            if (text.visible) {
+                text.text = DataIdol.getById(idol?.idolId!).hudText;
+            }
+        });
 }
 
 interface ObjBuildUpArgs {
