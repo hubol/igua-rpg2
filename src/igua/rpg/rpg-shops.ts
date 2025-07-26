@@ -91,11 +91,11 @@ export class RpgStock {
     purchase() {
         if (this.quantity <= 0) {
             // TODO should this be a cutsom error that accepts more context?
-            throw new Error("Attempting to purchase catalog item with quantity <= 0");
+            throw new Error("Attempting to purchase stock with quantity <= 0");
         }
 
         if (!RpgPlayerWallet.canAfford(this)) {
-            throw new Error("Attempting to purchase non-affordable catalog item");
+            throw new Error("Attempting to purchase non-affordable stock");
         }
 
         RpgPlayerWallet.spend(this.currency, this.price);
