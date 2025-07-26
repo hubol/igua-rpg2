@@ -160,9 +160,11 @@ function objDramaShopStock(
             methods,
         })
         .step(self => {
-            // TODO handle sold out!
             if (CtxDramaShop.value.state.isInteractive && self.selected && Input.justWentDown("Confirm")) {
-                if (RpgPlayerWallet.canAfford(appliedStock)) {
+                if (appliedStock.isSoldOut) {
+                    objects.limitedQuantityObj.mxnErrorVibrate.methods.vibrate();
+                }
+                else if (RpgPlayerWallet.canAfford(appliedStock)) {
                     appliedStock.purchase();
                     refreshStocks();
                 }
@@ -222,9 +224,19 @@ function objDramaShopStock(
             .mixin(mxnErrorVibrate)
             .at(ItemConsts.width - 69, 32)
             .show(contextualObj);
-        objLimitedQuantity(stock.quantity).at(ItemConsts.width, 0).show(contextualObj);
+
+        const limitedQuantityObj = objLimitedQuantity(stock.quantity)
+            .mixin(mxnErrorVibrate)
+            .at(ItemConsts.width, 0)
+            .show(contextualObj);
+
+        if (stock.isSoldOut) {
+            stockPriceObj.visible = false;
+            limitedQuantityObj.add(-20, 20);
+        }
 
         return {
+            limitedQuantityObj,
             stockPriceObj,
         };
     }
@@ -465,12 +477,8 @@ function objCurrencyAmount(amount: Integer, currency: RpgStock["currency"], isAf
 }
 
 function objLimitedQuantity(quantity: Integer) {
-    if (quantity < 1) {
-        return container();
-    }
-
     const urgent = quantity < 4;
-    const text = urgent ? `Only ${quantity} Left` : `${quantity} Left`;
+    const text = quantity < 1 ? "Sold Out" : (urgent ? `Only ${quantity} Left` : `${quantity} Left`);
     const textObj = objText.Medium(text, { tint: 0 });
     const gfx = new Graphics().beginFill(urgent ? 0xb03030 : 0xd0b030).drawRoundedRect(
         -4,

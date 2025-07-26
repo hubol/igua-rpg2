@@ -73,6 +73,10 @@ export class RpgStock {
         return this._data.price.currency;
     }
 
+    get isSoldOut() {
+        return this.quantity < 1;
+    }
+
     get price() {
         return this._data.price.initial
             + Math.max(0, Math.min(this._getSoldCount(), this._data.initialQuantity - 1)) * this._data.price.deltaSold;
@@ -89,9 +93,9 @@ export class RpgStock {
     // TODO should purchase assert that the player can afford?
     // Or return status indicating the player could not afford?!
     purchase() {
-        if (this.quantity <= 0) {
+        if (this.isSoldOut) {
             // TODO should this be a cutsom error that accepts more context?
-            throw new Error("Attempting to purchase stock with quantity <= 0");
+            throw new Error("Attempting to purchase stock when sold out");
         }
 
         if (!RpgPlayerWallet.canAfford(this)) {
