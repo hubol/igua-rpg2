@@ -18,8 +18,8 @@ import { Cutscene, scene } from "../../globals";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { CtxInteract } from "../../mixins/mxn-interact";
 import { Rpg } from "../../rpg/rpg";
+import { RpgExperience } from "../../rpg/rpg-experience";
 import { RpgPlayer } from "../../rpg/rpg-player";
-import { RpgProgressExperience } from "../../rpg/rpg-progress";
 import { playerObj } from "../obj-player";
 import { StepOrder } from "../step-order";
 import { objFlopCollectionIndicator } from "./obj-flop-collection-indicator";
@@ -150,7 +150,7 @@ interface ExperienceIndicatorConfig {
     iconTx: Texture;
 }
 
-export const experienceIndicatorConfigs: Record<RpgProgressExperience, ExperienceIndicatorConfig> = {
+export const experienceIndicatorConfigs: Record<RpgExperience.Id, ExperienceIndicatorConfig> = {
     combat: {
         tint: 0xFF401E,
         iconTx: iconTxs[0],
@@ -184,7 +184,7 @@ export const experienceIndicatorConfigs: Record<RpgProgressExperience, Experienc
 export const experienceIndicatorConfigsArray = Object.entries(experienceIndicatorConfigs).map((
     [experienceKey, config],
 ) => ({
-    experienceKey: experienceKey as RpgProgressExperience,
+    experienceKey: experienceKey as RpgExperience.Id,
     ...config,
 }));
 

@@ -14,6 +14,7 @@ import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataEquipment } from "../data/data-equipment";
 import { DataKeyItem } from "../data/data-key-item";
+import { DataShop } from "../data/data-shop";
 import { Input, layers, scene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
@@ -22,7 +23,7 @@ import { experienceIndicatorConfigs, experienceIndicatorConfigsArray } from "../
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
-import { CatalogItem, RpgShop } from "../rpg/rpg-shop";
+import { RpgShop, RpgStock } from "../rpg/rpg-shops";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
 
@@ -39,19 +40,20 @@ const CtxDramaShop = new SceneLocal(
     "CtxDramaShop",
 );
 
-export function* dramaShop(shop: RpgShop, style: DramaShopStyle) {
+export function* dramaShop(shopId: DataShop.Id, style: DramaShopStyle) {
+    const shop = Rpg.shop(shopId);
+
     CtxDramaShop.value.style = style;
     dramaShopObjsCount++;
 
     let done = false;
 
     const refreshCatalog = () => {
-        shop.getCatalog().forEach((item, i) => catalogItemObjs[i].methods.applyCatalogItem(item));
+        shop.stocks.forEach((stock, i) => catalogItemObjs[i].methods.applyCatalogItem(stock));
     };
 
-    const initialCatalog = shop.getCatalog();
-    const playerStatusObj = objPlayerStatus(initialCatalog).at(50, -5);
-    const catalogItemObjs = initialCatalog.map(item =>
+    const playerStatusObj = objPlayerStatus(shop.stocks).at(50, -5);
+    const catalogItemObjs = shop.stocks.map(item =>
         objDramaShopCatalogItem(shop, item, refreshCatalog, () => playerStatusObj.methods.vibrate(item.currency))
     );
 
@@ -132,14 +134,14 @@ const ItemConsts = {
 
 function objDramaShopCatalogItem(
     shop: RpgShop,
-    item: CatalogItem.Model,
+    item: RpgStock,
     refreshCatalog: () => void,
     showPurchaseError: () => void,
 ) {
     let catalogItem = item;
 
     const methods = {
-        applyCatalogItem(item: CatalogItem.Model) {
+        applyCatalogItem(item: RpgStock) {
             objects = applyCatalogItem(item);
         },
     };
@@ -159,9 +161,10 @@ function objDramaShopCatalogItem(
             methods,
         })
         .step(self => {
+            // TODO handle sold out!
             if (CtxDramaShop.value.state.isInteractive && self.selected && Input.justWentDown("Confirm")) {
-                if (CatalogItem.canPlayerAfford(catalogItem)) {
-                    shop.purchase(catalogItem);
+                if (RpgPlayerWallet.canAfford(catalogItem)) {
+                    catalogItem.purchase();
                     refreshCatalog();
                 }
                 else {
@@ -212,7 +215,7 @@ function objDramaShopCatalogItem(
 
     contextualObj.show(obj);
 
-    function applyCatalogItem(item: CatalogItem.Model) {
+    function applyCatalogItem(item: RpgStock) {
         contextualObj.removeAllChildren();
         catalogItem = item;
         objCatalogItemNameDescription(item).show(contextualObj);
@@ -232,9 +235,9 @@ function objDramaShopCatalogItem(
     return obj.pivoted(-2, -10);
 }
 
-function objCatalogItemNameDescription(item: CatalogItem.Model) {
-    const nameText = getCatalogItemName(item);
-    const descriptionText = getCatalogItemDescription(item);
+function objCatalogItemNameDescription(stock: RpgStock) {
+    const nameText = getCatalogItemName(stock);
+    const descriptionText = getCatalogItemDescription(stock);
 
     const nameTextObj = objText.Large(nameText, { tint: CtxDramaShop.value.style.primaryTint });
 
@@ -253,11 +256,11 @@ function objCatalogItemNameDescription(item: CatalogItem.Model) {
     return container(
         nameObj,
         objText.Medium(descriptionText, { tint: CtxDramaShop.value.style.secondaryTint, maxWidth: 224 }).at(9, 18),
-        objOwnedCount(CatalogItem.getPlayerOwnedCount(item)).at(nameObj.width + 6, 4),
+        objOwnedCount(getStockPlayerOwnedCount(stock)).at(nameObj.width + 6, 4),
     );
 }
 
-function getCatalogItemName(item: CatalogItem.Model) {
+function getCatalogItemName(item: RpgStock) {
     switch (item.product.kind) {
         case "equipment":
             return DataEquipment.getById(item.product.equipmentId).name;
@@ -268,7 +271,7 @@ function getCatalogItemName(item: CatalogItem.Model) {
     }
 }
 
-function getCatalogItemDescription(item: CatalogItem.Model) {
+function getCatalogItemDescription(item: RpgStock) {
     switch (item.product.kind) {
         case "equipment":
             return DataEquipment.getById(item.product.equipmentId).description;
@@ -279,8 +282,21 @@ function getCatalogItemDescription(item: CatalogItem.Model) {
     }
 }
 
-function objCatalogItemPrice(item: CatalogItem.Model) {
-    return objCurrencyAmount(item.price, item.currency, CatalogItem.canPlayerAfford(item));
+// TODO likely does not belong here
+function getStockPlayerOwnedCount(stock: RpgStock): Integer {
+    if (stock.product.kind === "potion") {
+        // TODO implement!
+        return 0;
+    }
+    else if (stock.product.kind === "equipment") {
+        return Rpg.character.equipment.count(stock.product.equipmentId);
+    }
+
+    return Rpg.inventory.keyItems.count(stock.product.keyItemId);
+}
+
+function objCatalogItemPrice(item: RpgStock) {
+    return objCurrencyAmount(item.price, item.currency, RpgPlayerWallet.canAfford(item));
 }
 
 function objOwnedCount(count: Integer) {
@@ -313,7 +329,7 @@ const possibleCurrencies: RpgEconomy.Currency.Model[] = [
     })),
 ];
 
-function objPlayerStatus(catalog: CatalogItem.Model[]) {
+function objPlayerStatus(catalog: ReadonlyArray<RpgStock>) {
     const currenciesInCatalog = possibleCurrencies.filter(currency =>
         catalog.some(item => RpgEconomy.Currency.equals(item.currency, currency))
     );
@@ -356,7 +372,7 @@ function objPlayerStatus(catalog: CatalogItem.Model[]) {
 
 const r = new Rectangle();
 
-function objCurrencyAmount(amount: Integer, currency: CatalogItem.Model["currency"], isAffordable: boolean) {
+function objCurrencyAmount(amount: Integer, currency: RpgStock["currency"], isAffordable: boolean) {
     const priceTextObj = objText.MediumBoldIrregular("").anchored(1, 1).at(-1, 0);
     const currencyTextObj = objText.Medium("").anchored(0, 1)
         .at(1, 0);

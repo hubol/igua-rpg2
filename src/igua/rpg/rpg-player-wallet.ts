@@ -4,6 +4,10 @@ import { RpgEconomy } from "./rpg-economy";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 
 export namespace RpgPlayerWallet {
+    export function canAfford(offer: RpgEconomy.Offer) {
+        return RpgPlayerWallet.getHeldAmount(offer.currency) >= offer.price;
+    }
+
     export function getHeldAmount(currency: RpgEconomy.Currency.Model) {
         if (currency === "valuables") {
             return Rpg.character.inventory.valuables;

@@ -30,8 +30,6 @@ import { objMarker } from "../objects/utils/obj-marker";
 import { Rpg } from "../rpg/rpg";
 import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
-import { RpgPocket } from "../rpg/rpg-pocket";
-import { RpgShop } from "../rpg/rpg-shop";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);
@@ -214,15 +212,6 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
     });
 }
 
-const shopMechanicalIdol = new RpgShop({
-    internalName: "shopMechanicalIdol",
-    stocks: [{
-        product: { kind: "key_item", keyItemId: "UpgradedPickaxe" },
-        initialQuantity: 999,
-        price: { currency: "mechanical_idol_credits", deltaSold: 0, initial: 10 },
-    }],
-});
-
 function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
     const options = ["Ball", "Star", "P", "3", "F"] as const;
     const optionToCharacters: Record<typeof options[number], string> = {
@@ -307,7 +296,7 @@ That's worth ${count} credit(s). Do you want to deposit them?`)
                         continue;
                     }
                     else if (result === 1) {
-                        yield* dramaShop(shopMechanicalIdol, { primaryTint: 0xB52417, secondaryTint: 0xDCC132 });
+                        yield* dramaShop("BalltownMechanicalIdol", { primaryTint: 0xB52417, secondaryTint: 0xDCC132 });
                         continue;
                     }
 

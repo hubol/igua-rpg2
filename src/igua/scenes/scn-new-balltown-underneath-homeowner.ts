@@ -13,23 +13,6 @@ import { Cutscene, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnEnemy } from "../mixins/mxn-enemy";
 import { Rpg } from "../rpg/rpg";
-import { RpgShop } from "../rpg/rpg-shop";
-
-const shopHomeowner = new RpgShop({
-    internalName: "shopHomeowner",
-    stocks: [
-        {
-            initialQuantity: 99,
-            price: { currency: "valuables", deltaSold: 50, initial: 50 },
-            product: { kind: "key_item", keyItemId: "SeedYellow" },
-        },
-        {
-            initialQuantity: 99,
-            price: { currency: "valuables", deltaSold: 50, initial: 50 },
-            product: { kind: "key_item", keyItemId: "SeedGreen" },
-        },
-    ],
-});
 
 export function scnNewBalltownUnderneathHomeowner() {
     Jukebox.play(Mzk.PleasureMafia);
@@ -85,7 +68,7 @@ function enrichHomeowner(lvl: LvlType.NewBalltownUnderneathHomeowner) {
             // TODO
         }
         else if (result === 1) {
-            yield* dramaShop(shopHomeowner, { primaryTint: 0x103418, secondaryTint: 0xA5A17E });
+            yield* dramaShop("UnderneathHomeowner", { primaryTint: 0x103418, secondaryTint: 0xA5A17E });
         }
         else if (result === 2) {
             yield* show("Be seeing you!");

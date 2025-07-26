@@ -1,16 +1,18 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataQuest } from "../data/data-quest";
+import { DataShop } from "../data/data-shop";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPocket } from "./rpg-pocket";
 import { getInitialRpgProgress, RpgProgressData } from "./rpg-progress";
 import { RpgQuests } from "./rpg-quests";
+import { RpgShops } from "./rpg-shops";
 import { RpgStashPockets } from "./rpg-stash-pockets";
 
 // TODO this is a fuckin mess!
 function createRpg(data: RpgProgressData) {
-    const { programmaticFlags: { stashPockets: stashPocketsState, ...programmaticFlags } } = data;
+    const { programmaticFlags: { shops: shopsState, stashPockets: stashPocketsState, ...programmaticFlags } } = data;
     const { character: { inventory: { pocket: pocketState, keyItems: keyItemsState, ...inventory } } } = data;
 
     const equipment = new RpgCharacterEquipment(data.character.inventory.equipment);
@@ -18,6 +20,7 @@ function createRpg(data: RpgProgressData) {
     const quests = new RpgQuests(data.character.quests);
     const pocket = new RpgPocket(pocketState);
     const keyItems = new RpgKeyItems(keyItemsState);
+    const shops = new RpgShops(shopsState);
     const stashPockets = new RpgStashPockets(stashPocketsState, pocket);
 
     return {
@@ -58,6 +61,9 @@ function createRpg(data: RpgProgressData) {
         programmaticFlags,
         quest(questId: DataQuest.Id) {
             return quests.getById(questId);
+        },
+        shop(shopId: DataShop.Id) {
+            return shops.getById(shopId);
         },
         stashPocket(stashPocketId: Integer) {
             return stashPockets.getById(stashPocketId);

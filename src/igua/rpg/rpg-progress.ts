@@ -2,17 +2,16 @@ import { Integer, Polar } from "../../lib/math/number-alias-types";
 import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { Empty } from "../../lib/types/empty";
 import { Null } from "../../lib/types/null";
-import { PropertiesLike } from "../../lib/types/properties-like";
 import { DataNpcPersona } from "../data/data-npc-persona";
-import { DataPocketItem } from "../data/data-pocket-item";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { Rpg } from "./rpg";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
+import { RpgExperience } from "./rpg-experience";
 import { RpgFlops } from "./rpg-flops";
 import { RpgKeyItems } from "./rpg-key-items";
-import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgQuests } from "./rpg-quests";
+import { RpgShops } from "./rpg-shops";
 import { RpgStashPockets } from "./rpg-stash-pockets";
 import { RpgStatus } from "./rpg-status";
 
@@ -22,7 +21,7 @@ export function getInitialRpgProgress() {
             inventory: {
                 equipment: RpgCharacterEquipment.createState(),
                 flops: RpgFlops.create(),
-                valuables: 100,
+                valuables: 5000,
                 keyItems: RpgKeyItems.createState(),
                 pocket: RpgPocket.createState(),
             },
@@ -49,15 +48,7 @@ export function getInitialRpgProgress() {
                 intelligence: 0,
                 strength: 1,
             },
-            experience: {
-                combat: 0,
-                computer: 0,
-                gambling: 0,
-                jump: 0,
-                pocket: 0,
-                quest: 0,
-                social: 0,
-            },
+            experience: RpgExperience.createState(),
             looks: getDefaultLooks(),
             position: {
                 facing: 1 as Polar,
@@ -118,15 +109,13 @@ export function getInitialRpgProgress() {
         programmaticFlags: {
             collectedValuableUids: new Set<Integer>(),
             metNpcPersonaIds: new Set<DataNpcPersona.Id>(),
-            shopSoldCounts: {} as Record<string, Record<string, Integer>>,
+            shops: RpgShops.createState(),
             stashPockets: RpgStashPockets.createState(),
         },
     };
 }
 
 export type RpgProgressData = ReturnType<typeof getInitialRpgProgress>;
-
-export type RpgProgressExperience = keyof typeof Rpg["character"]["experience"];
 
 // TODO I think some places already expect flags to only be booleans :-X
 export type RpgProgressFlags = DeepKeyOf.Leaves<typeof Rpg["flags"]>;

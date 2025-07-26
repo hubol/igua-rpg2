@@ -1,11 +1,9 @@
 import { Integer } from "../../lib/math/number-alias-types";
-import { Rpg } from "./rpg";
-import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
-import { RpgProgressExperience } from "./rpg-progress";
+import { RpgExperience } from "./rpg-experience";
 
 interface Currency_Experience {
     kind: "experience";
-    experience: RpgProgressExperience;
+    experience: RpgExperience.Id;
 }
 
 export namespace RpgEconomy {
@@ -37,5 +35,10 @@ export namespace RpgEconomy {
         };
 
         export const DescendingTypes: Kind[] = ["blue", "orange", "green"];
+    }
+
+    export interface Offer {
+        currency: Currency.Model;
+        price: Integer;
     }
 }
