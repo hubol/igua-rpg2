@@ -2,6 +2,7 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { DataQuest } from "../data/data-quest";
 import { DataShop } from "../data/data-shop";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
+import { RpgIdols } from "./rpg-idols";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPocket } from "./rpg-pocket";
@@ -12,11 +13,19 @@ import { RpgStashPockets } from "./rpg-stash-pockets";
 
 // TODO this is a fuckin mess!
 function createRpg(data: RpgProgressData) {
-    const { programmaticFlags: { shops: shopsState, stashPockets: stashPocketsState, ...programmaticFlags } } = data;
+    const {
+        programmaticFlags: {
+            idols: idolsState,
+            shops: shopsState,
+            stashPockets: stashPocketsState,
+            ...programmaticFlags
+        },
+    } = data;
     const { character: { inventory: { pocket: pocketState, keyItems: keyItemsState, ...inventory } } } = data;
 
     const equipment = new RpgCharacterEquipment(data.character.inventory.equipment);
     const buffs = new RpgPlayerAggregatedBuffs(equipment);
+    const idols = new RpgIdols(idolsState);
     const quests = new RpgQuests(data.character.quests);
     const pocket = new RpgPocket(pocketState);
     const keyItems = new RpgKeyItems(keyItemsState);
@@ -52,6 +61,9 @@ function createRpg(data: RpgProgressData) {
         } as const,
         get flags() {
             return data.flags;
+        },
+        idols(idolId: Integer) {
+            return idols.getById(idolId);
         },
         // TODO put all inventory here:
         inventory: {

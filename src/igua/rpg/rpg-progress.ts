@@ -8,6 +8,7 @@ import { Rpg } from "./rpg";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgExperience } from "./rpg-experience";
 import { RpgFlops } from "./rpg-flops";
+import { RpgIdols } from "./rpg-idols";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgQuests } from "./rpg-quests";
@@ -108,6 +109,7 @@ export function getInitialRpgProgress() {
         },
         programmaticFlags: {
             collectedValuableUids: new Set<Integer>(),
+            idols: RpgIdols.createState(),
             metNpcPersonaIds: new Set<DataNpcPersona.Id>(),
             shops: RpgShops.createState(),
             stashPockets: RpgStashPockets.createState(),

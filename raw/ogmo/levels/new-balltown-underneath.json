@@ -1132,7 +1132,7 @@
           "y": 318,
           "originX": 33,
           "originY": 78,
-          "uid": 174112182491000,
+          "uid": 175350180634400,
           "values": {"name": "", "depth": 0, "variant": "level1"}
         },
         {
@@ -1143,7 +1143,7 @@
           "y": 360,
           "originX": 33,
           "originY": 78,
-          "uid": 174112182491001,
+          "uid": 175350180634401,
           "values": {"name": "", "depth": 0, "variant": "level1"}
         },
         {
@@ -1188,12 +1188,13 @@
         },
         {
           "name": "Idol",
-          "id": 9,
+          "id": 12,
           "_eid": "79655020",
           "x": 1856,
           "y": 304,
           "originX": 32,
           "originY": 97,
+          "uid": 175350180634402,
           "values": {"name": "", "depth": 0}
         }
       ]
@@ -4520,7 +4521,8 @@
           "texture": "town/ball/structure small.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2490,
@@ -4532,7 +4534,8 @@
           "texture": "town/ball/structure.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2548,
@@ -4544,7 +4547,8 @@
           "texture": "town/ball/column spiral 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2557,
@@ -4556,7 +4560,8 @@
           "texture": "town/ball/column spiral 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2545,
@@ -4568,7 +4573,8 @@
           "texture": "town/ball/column spiral 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2558,
@@ -4580,7 +4586,8 @@
           "texture": "town/ball/column spiral 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2546,
@@ -4592,7 +4599,8 @@
           "texture": "town/ball/column spiral 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2533,
@@ -4604,7 +4612,8 @@
           "texture": "town/ball/column spiral 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2518,
@@ -4616,7 +4625,8 @@
           "texture": "town/ball/column spiral 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2533,
@@ -4628,7 +4638,8 @@
           "texture": "town/ball/column spiral 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2536,
@@ -4640,7 +4651,8 @@
           "texture": "town/ball/column spiral 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2535,
@@ -4652,7 +4664,8 @@
           "texture": "town/ball/column spiral 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2415,
@@ -4664,7 +4677,8 @@
           "texture": "town/ball/ball1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2447,
@@ -4676,7 +4690,8 @@
           "texture": "town/ball/structure highlight.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2510,
@@ -4688,7 +4703,8 @@
           "texture": "shapes/confetti 45deg.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2469,
@@ -4739,7 +4755,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2403,
@@ -4751,7 +4768,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2653,

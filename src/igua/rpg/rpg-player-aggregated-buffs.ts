@@ -3,16 +3,18 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { clone } from "../../lib/object/clone";
 import { Null } from "../../lib/types/null";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
+import { RpgIdol } from "./rpg-idols";
 import { RpgPlayerBuffs } from "./rpg-player-buffs";
 
-export const RpgScenePlayerBuffsMutator = new SceneLocal<{ mutatorFn: RpgPlayerBuffs.MutatorFn }>(
-    () => ({ mutatorFn: RpgPlayerBuffs.voidMutator }),
-    "RpgPlayerSceneBuffsMutator",
+export const RpgSceneIdol = new SceneLocal<{ idol: RpgIdol | null }>(
+    () => ({ idol: null }),
+    "RpgSceneIdol",
 );
 
 function getSceneMutatorFn() {
     try {
-        return RpgScenePlayerBuffsMutator.value.mutatorFn;
+        const idol = RpgSceneIdol.value.idol;
+        return idol?.buffs ?? RpgPlayerBuffs.voidMutator;
     }
     catch (e) {
         // TODO  a bad sign to have an expected error like this

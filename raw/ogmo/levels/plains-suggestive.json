@@ -198,16 +198,6 @@
       "gridCellsY": 58,
       "entities": [
         {
-          "name": "Idol",
-          "id": 0,
-          "_eid": "79655020",
-          "x": 312,
-          "y": 152,
-          "originX": 32,
-          "originY": 97,
-          "values": {"name": "", "depth": 0}
-        },
-        {
           "name": "Sign",
           "id": 1,
           "_eid": "39046554",
@@ -270,6 +260,17 @@
           "originX": 23,
           "originY": 33,
           "uid": 175263822298100,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Idol",
+          "id": 7,
+          "_eid": "79655020",
+          "x": 312,
+          "y": 152,
+          "originX": 32,
+          "originY": 97,
+          "uid": 175350182475000,
           "values": {"name": "", "depth": 0}
         }
       ]

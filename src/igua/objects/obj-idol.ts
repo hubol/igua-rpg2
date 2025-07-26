@@ -1,4 +1,5 @@
 import { Graphics, Sprite, Texture } from "pixi.js";
+import { OgmoEntities } from "../../assets/generated/levels/generated-ogmo-project-data";
 import { Tx } from "../../assets/textures";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { CollisionShape } from "../../lib/pixi/collision";
@@ -7,7 +8,8 @@ import { Null } from "../../lib/types/null";
 import { DataIdol } from "../data/data-idol";
 import { DramaKeyItems } from "../drama/drama-key-items";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { RpgScenePlayerBuffsMutator } from "../rpg/rpg-player-aggregated-buffs";
+import { Rpg } from "../rpg/rpg";
+import { RpgSceneIdol } from "../rpg/rpg-player-aggregated-buffs";
 
 interface IdolStyle {
     tx: Texture;
@@ -36,15 +38,15 @@ const keyItemIds = Object.values(DataIdol.Manifest)
     .map(({ keyItemId }) => keyItemId)
     .filter(keyItemId => keyItemId !== "__Fallback__");
 
-export function objIdol() {
+export function objIdol({ uid }: OgmoEntities.Idol) {
     const collisionShapeObj = new Graphics().beginFill(0).drawRect(-10, -10, 20, 20).invisible();
-    let idolId = Null<DataIdol.Id>();
+    const idol = Rpg.idols(uid);
 
     const sprite = new Sprite();
 
     function updateSprite() {
-        const style = styles.get(idolId!);
-        sprite.visible = Boolean(idolId);
+        const style = styles.get(idol.idolId!);
+        sprite.visible = Boolean(idol.idolId);
         if (style) {
             sprite.texture = style.tx;
             sprite.pivot.at(style.pivot);
@@ -58,10 +60,13 @@ export function objIdol() {
         .mixin(mxnCutscene, function* () {
             const result = yield* DramaKeyItems.use({ keyItemIds });
             if (result && result.count) {
-                const idol = Object.values(DataIdol.Manifest).find(idol => idol.keyItemId === result.keyItemId);
-                idolId = idol?.id ?? null;
-                RpgScenePlayerBuffsMutator.value.mutatorFn = DataIdol.getById(idol?.id!).buffs;
+                const dataIdol = Object.values(DataIdol.Manifest).find(idol => idol.keyItemId === result.keyItemId);
+                idol.upload(dataIdol?.id!);
             }
+        })
+        .step(() => {
+            idol.tick();
+            RpgSceneIdol.value.idol = idol;
             updateSprite();
         });
 }

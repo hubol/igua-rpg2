@@ -26,7 +26,7 @@ export namespace OgmoEntities {
   export type GateVertical = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
   export type EnemySuggestive = OgmoFactory.EntityBase<{ name: string; depth: number; variant: "level0" | "level1" }> & { uid: number };
   export type EnvironmentSparkleMarker = OgmoFactory.EntityBase<{ name: string; depth: number }>;
-  export type Idol = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type Idol = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
   export type GateMap = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
   export type StashPocket = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
 }
