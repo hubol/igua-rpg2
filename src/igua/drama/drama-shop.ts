@@ -48,17 +48,17 @@ export function* dramaShop(shopId: DataShop.Id, style: DramaShopStyle) {
 
     let done = false;
 
-    const refreshCatalog = () => {
-        shop.stocks.forEach((stock, i) => catalogItemObjs[i].methods.applyCatalogItem(stock));
+    const refreshStocks = () => {
+        shop.stocks.forEach((stock, i) => stockObjs[i].methods.applyStock(stock));
     };
 
     const playerStatusObj = objPlayerStatus(shop.stocks).at(50, -5);
-    const catalogItemObjs = shop.stocks.map(item =>
-        objDramaShopCatalogItem(shop, item, refreshCatalog, () => playerStatusObj.methods.vibrate(item.currency))
+    const stockObjs = shop.stocks.map(stock =>
+        objDramaShopStock(stock, refreshStocks, () => playerStatusObj.methods.vibrate(stock.currency))
     );
 
     const buttonObjs = [
-        ...catalogItemObjs,
+        ...stockObjs,
         objDoneButton().step((self) => {
             if (CtxDramaShop.value.state.isInteractive && self.selected && Input.justWentDown("Confirm")) {
                 done = true;
@@ -132,17 +132,16 @@ const ItemConsts = {
     gap: 15,
 };
 
-function objDramaShopCatalogItem(
-    shop: RpgShop,
-    item: RpgStock,
-    refreshCatalog: () => void,
+function objDramaShopStock(
+    stock: RpgStock,
+    refreshStocks: () => void,
     showPurchaseError: () => void,
 ) {
-    let catalogItem = item;
+    let appliedStock = stock;
 
     const methods = {
-        applyCatalogItem(item: RpgStock) {
-            objects = applyCatalogItem(item);
+        applyStock(stock: RpgStock) {
+            objects = applyStock(stock);
         },
     };
 
@@ -163,13 +162,13 @@ function objDramaShopCatalogItem(
         .step(self => {
             // TODO handle sold out!
             if (CtxDramaShop.value.state.isInteractive && self.selected && Input.justWentDown("Confirm")) {
-                if (RpgPlayerWallet.canAfford(catalogItem)) {
-                    catalogItem.purchase();
-                    refreshCatalog();
+                if (RpgPlayerWallet.canAfford(appliedStock)) {
+                    appliedStock.purchase();
+                    refreshStocks();
                 }
                 else {
                     showPurchaseError();
-                    objects.catalogItemPriceObj.mxnErrorVibrate.methods.vibrate();
+                    objects.stockPriceObj.mxnErrorVibrate.methods.vibrate();
                 }
             }
         });
@@ -215,29 +214,29 @@ function objDramaShopCatalogItem(
 
     contextualObj.show(obj);
 
-    function applyCatalogItem(item: RpgStock) {
+    function applyStock(stock: RpgStock) {
         contextualObj.removeAllChildren();
-        catalogItem = item;
-        objCatalogItemNameDescription(item).show(contextualObj);
-        const catalogItemPriceObj = objCatalogItemPrice(item)
+        appliedStock = stock;
+        objStockNameDescription(stock).show(contextualObj);
+        const stockPriceObj = objStockPrice(stock)
             .mixin(mxnErrorVibrate)
             .at(ItemConsts.width - 69, 32)
             .show(contextualObj);
-        objLimitedQuantity(item.quantity).at(ItemConsts.width, 0).show(contextualObj);
+        objLimitedQuantity(stock.quantity).at(ItemConsts.width, 0).show(contextualObj);
 
         return {
-            catalogItemPriceObj,
+            stockPriceObj,
         };
     }
 
-    let objects = applyCatalogItem(item);
+    let objects = applyStock(stock);
 
     return obj.pivoted(-2, -10);
 }
 
-function objCatalogItemNameDescription(stock: RpgStock) {
-    const nameText = getCatalogItemName(stock);
-    const descriptionText = getCatalogItemDescription(stock);
+function objStockNameDescription(stock: RpgStock) {
+    const nameText = getStockName(stock);
+    const descriptionText = getStockDescription(stock);
 
     const nameTextObj = objText.Large(nameText, { tint: CtxDramaShop.value.style.primaryTint });
 
@@ -260,7 +259,7 @@ function objCatalogItemNameDescription(stock: RpgStock) {
     );
 }
 
-function getCatalogItemName(item: RpgStock) {
+function getStockName(item: RpgStock) {
     switch (item.product.kind) {
         case "equipment":
             return DataEquipment.getById(item.product.equipmentId).name;
@@ -271,7 +270,7 @@ function getCatalogItemName(item: RpgStock) {
     }
 }
 
-function getCatalogItemDescription(item: RpgStock) {
+function getStockDescription(item: RpgStock) {
     switch (item.product.kind) {
         case "equipment":
             return DataEquipment.getById(item.product.equipmentId).description;
@@ -295,7 +294,7 @@ function getStockPlayerOwnedCount(stock: RpgStock): Integer {
     return Rpg.inventory.keyItems.count(stock.product.keyItemId);
 }
 
-function objCatalogItemPrice(item: RpgStock) {
+function objStockPrice(item: RpgStock) {
     return objCurrencyAmount(item.price, item.currency, RpgPlayerWallet.canAfford(item));
 }
 
@@ -329,11 +328,11 @@ const possibleCurrencies: RpgEconomy.Currency.Model[] = [
     })),
 ];
 
-function objPlayerStatus(catalog: ReadonlyArray<RpgStock>) {
-    const currenciesInCatalog = possibleCurrencies.filter(currency =>
-        catalog.some(item => RpgEconomy.Currency.equals(item.currency, currency))
+function objPlayerStatus(stocks: ReadonlyArray<RpgStock>) {
+    const currenciesInStocks = possibleCurrencies.filter(currency =>
+        stocks.some(item => RpgEconomy.Currency.equals(item.currency, currency))
     );
-    const currencyObjs = currenciesInCatalog.reverse().map((currency, i) =>
+    const currencyObjs = currenciesInStocks.reverse().map((currency, i) =>
         objCurrencyAmount(RpgPlayerWallet.getHeldAmount(currency), currency, true)
             .merge({ currency })
             .mixin(mxnErrorVibrate)
