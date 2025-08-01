@@ -1,6 +1,7 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
+import { Tx } from "../../assets/textures";
 import { Instances } from "../../lib/game-engine/instances";
 import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
@@ -18,6 +19,7 @@ import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { mxnSign } from "../mixins/mxn-sign";
 import { objPocketableItemSpawner } from "../objects/obj-pocketable-item-spawner";
 import { objValuableSpawner } from "../objects/obj-valuable-spawner";
+import { objTransitionedSprite } from "../objects/utils/obj-transitioned-sprite";
 import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgKeyItems } from "../rpg/rpg-key-items";
@@ -35,6 +37,14 @@ export function scnNewBalltownOutskirts() {
 
 function enrichFarmer(lvl: LvlType.NewBalltownOutskirts) {
     const startingPosition = lvl.FarmerNpc.vcpy();
+
+    objTransitionedSprite({
+        anchorProvider: () => [0.5, 1],
+        txProvider: () => Rpg.flags.outskirts.farmer.hasBagOfSeeds ? Tx.Esoteric.Decoration.SeedBag : null,
+    })
+        .at(lvl.FarmerBagOfSeeds)
+        .zIndexed(ZIndex.TerrainDecals)
+        .show();
 
     lvl.FarmerNpc.mixin(mxnCutscene, function* () {
         scene.camera.mode = "controlled";

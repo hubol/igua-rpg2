@@ -132,6 +132,17 @@
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 13,
+          "_eid": "73148747",
+          "x": 590,
+          "y": 515,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#9c4925",
+          "values": {"name": "FarmerBagOfSeeds", "depth": 0}
         }
       ]
     },
@@ -706,6 +717,19 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 570,
+          "y": 512,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#98ba60",
+          "texture": "foliage/small.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -976,19 +1000,6 @@
           "rotation": 0,
           "tint": "#e96565",
           "texture": "light/shadow irregular small.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 589,
-          "y": 499,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "esoteric/decoration/seed bag.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
@@ -2454,19 +2465,6 @@
           "x": 536,
           "y": 505,
           "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#98ba60",
-          "texture": "foliage/small.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 570,
-          "y": 512,
-          "scaleX": -1,
           "scaleY": 1,
           "rotation": 0,
           "tint": "#98ba60",
