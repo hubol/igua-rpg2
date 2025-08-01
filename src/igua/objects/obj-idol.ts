@@ -1,15 +1,15 @@
-import { Graphics, Sprite, Texture } from "pixi.js";
+import { Graphics, Texture } from "pixi.js";
 import { OgmoEntities } from "../../assets/generated/levels/generated-ogmo-project-data";
 import { Tx } from "../../assets/textures";
-import { VectorSimple } from "../../lib/math/vector-type";
+import { VectorSimple, vnew } from "../../lib/math/vector-type";
 import { CollisionShape } from "../../lib/pixi/collision";
 import { container } from "../../lib/pixi/container";
-import { Null } from "../../lib/types/null";
 import { DataIdol } from "../data/data-idol";
 import { DramaKeyItems } from "../drama/drama-key-items";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { Rpg } from "../rpg/rpg";
 import { RpgSceneIdol } from "../rpg/rpg-player-aggregated-buffs";
+import { objTransitionedSprite } from "./utils/obj-transitioned-sprite";
 
 interface IdolStyle {
     tx: Texture;
@@ -42,18 +42,13 @@ export function objIdol({ uid }: OgmoEntities.Idol) {
     const collisionShapeObj = new Graphics().beginFill(0).drawRect(-10, -10, 20, 20).invisible();
     const idol = Rpg.idols(uid);
 
-    const sprite = new Sprite();
-
-    function updateSprite() {
-        const style = styles.get(idol.idolId!);
-        sprite.visible = Boolean(idol.idolId);
-        if (style) {
-            sprite.texture = style.tx;
-            sprite.pivot.at(style.pivot);
-        }
-    }
-
-    updateSprite();
+    const sprite = objTransitionedSprite({
+        txProvider: () => styles.get(idol.idolId!)?.tx ?? null,
+        anchorProvider: () => {
+            const style = styles.get(idol.idolId!);
+            return style ? vnew(style.pivot).scale(1 / style.tx.width, 1 / style.tx.height) : [0, 0];
+        },
+    });
 
     return container(collisionShapeObj, sprite)
         .collisionShape(CollisionShape.DisplayObjects, [collisionShapeObj])
@@ -67,6 +62,5 @@ export function objIdol({ uid }: OgmoEntities.Idol) {
         .step(() => {
             idol.tick();
             RpgSceneIdol.value.idol = idol;
-            updateSprite();
         });
 }
