@@ -30,10 +30,12 @@ export function objTransitionedSprite({ anchorProvider, txProvider }: ObjTransit
         sprite.visible = true;
 
         const b = sprite.getLocalBounds(r);
-        mask
-            .clear().beginFill(0xffffff).drawRect(b.x, b.y, b.width, b.height);
 
-        console.log(b.x, b.y, b.width, b.height);
+        const pivotY = b.y < 0 && b.height > -b.y ? (b.height + b.y) : 0;
+
+        mask
+            .clear().beginFill(0xffffff).drawRect(b.x, b.y - pivotY, b.width, b.height)
+            .at(0, pivotY);
     }
 
     updateSprite(txProvider());
