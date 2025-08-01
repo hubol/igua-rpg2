@@ -7,7 +7,6 @@ import { RpgPlayerWallet } from "./rpg-player-wallet";
 export class RpgShops {
     private readonly _cache: Partial<Record<DataShop.Id, RpgShop>> = {};
 
-    // TODO should not manipulate state directly, hoe!!
     constructor(private readonly _state: RpgShops.State) {
     }
 

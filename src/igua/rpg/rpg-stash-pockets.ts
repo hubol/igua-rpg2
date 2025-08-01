@@ -19,7 +19,6 @@ const notEmpty: CheckResult_NotEmpty = { kind: "not_empty", pocketItemId: "__Fal
 export class RpgStashPockets {
     private readonly _cache: Partial<Record<Integer, RpgStashPocket>> = {};
 
-    // TODO should not manipulate state directly, hoe!!
     constructor(private readonly _state: RpgStashPockets.State, private readonly _pocket: RpgPocket) {
     }
 
