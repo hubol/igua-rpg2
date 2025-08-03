@@ -32,11 +32,24 @@ function createRpg(data: RpgProgressData) {
     const shops = new RpgShops(shopsState);
     const stashPockets = new RpgStashPockets(stashPocketsState, pocket);
 
+    // TODO formalize
+    const attributes = {
+        get health() {
+            return data.character.attributes.health;
+        },
+        get intelligence() {
+            return data.character.attributes.intelligence + buffs.getAggregatedBuffs().attributes.intelligence;
+        },
+        get strength() {
+            return data.character.attributes.strength;
+        },
+    };
+
     return {
         // TODO rename to player
         character: {
             get attributes() {
-                return data.character.attributes;
+                return attributes;
             },
             get buffs() {
                 return buffs.getAggregatedBuffs();

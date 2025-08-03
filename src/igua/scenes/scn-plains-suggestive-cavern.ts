@@ -1,12 +1,14 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
+import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 
 export function scnPlainsSuggestiveCavern() {
     const lvl = Lvl.PlainsSuggestiveCavern();
     enrichGatekeeper(lvl);
+    enrichShopkeeper(lvl);
 }
 
 function enrichGatekeeper(lvl: LvlType.PlainsSuggestiveCavern) {
@@ -35,5 +37,12 @@ function enrichGatekeeper(lvl: LvlType.PlainsSuggestiveCavern) {
         }
 
         yield* show("Please proceed upwards to leave.");
+    });
+}
+
+function enrichShopkeeper(lvl: LvlType.PlainsSuggestiveCavern) {
+    lvl.Shopkeeper.mixin(mxnCutscene, function* () {
+        // TODO extract tints from speaker?
+        yield* dramaShop("SuggestiveCavern", { primaryTint: 0x103418, secondaryTint: 0xA5A17E });
     });
 }

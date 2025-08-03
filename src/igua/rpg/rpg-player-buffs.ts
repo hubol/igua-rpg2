@@ -4,6 +4,9 @@ import { compileResetter } from "../../lib/object/compile-resetter";
 export namespace RpgPlayerBuffs {
     export function create() {
         return {
+            attributes: {
+                intelligence: 0,
+            },
             combat: {
                 melee: {
                     attack: {

@@ -53,6 +53,13 @@ export namespace DataEquipment {
                     model.combat.melee.clawAttack.physical += 1 + bonus;
                 },
             },
+            IqIndicator: {
+                name: "IQ Indicator",
+                description: "Raises intelligence while worn",
+                buffs: (model, bonus) => {
+                    model.attributes.intelligence += 1 + bonus;
+                },
+            },
             __Empty__: {
                 name: "Empty",
                 description: "Void",

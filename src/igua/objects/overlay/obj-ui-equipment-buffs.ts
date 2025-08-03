@@ -206,6 +206,7 @@ const getBuffInformations = (function () {
         buff("loot.tiers.nothingRerollCount", "Re-Roll Empty Loot", "integer", "beneft_when_positive"),
         buff("loot.valuables.bonus", "Valuable Bonus", "integer", "beneft_when_positive"),
         buff("motion.jump.bonusAtSpecialSigns", "Special Jump", "integer", "beneft_when_positive"),
+        buff("attributes.intelligence", "Intelligence", "integer", "beneft_when_positive"),
     );
 
     const fn = new Function(

@@ -61,6 +61,20 @@ export namespace DataShop {
                     },
                 ],
             },
+            SuggestiveCavern: {
+                stocks: [
+                    {
+                        initialQuantity: 1,
+                        price: { currency: "valuables", deltaSold: 0, initial: 999 },
+                        product: { kind: "key_item", keyItemId: "BagOfSeeds" },
+                    },
+                    {
+                        initialQuantity: 3,
+                        price: { currency: { kind: "experience", experience: "jump" }, initial: 100, deltaSold: 300 },
+                        product: { kind: "equipment", equipmentId: "IqIndicator" },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );
