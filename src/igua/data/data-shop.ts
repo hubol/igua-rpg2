@@ -41,13 +41,23 @@ export namespace DataShop {
                 stocks: [
                     {
                         initialQuantity: 99,
-                        price: { currency: "valuables", deltaSold: 50, initial: 50 },
+                        price: { currency: "valuables", deltaSold: 1, initial: 5 },
                         product: { kind: "key_item", keyItemId: "SeedYellow" },
                     },
                     {
                         initialQuantity: 99,
-                        price: { currency: "valuables", deltaSold: 50, initial: 50 },
+                        price: { currency: "valuables", deltaSold: 1, initial: 5 },
                         product: { kind: "key_item", keyItemId: "SeedGreen" },
+                    },
+                    {
+                        initialQuantity: 99,
+                        price: { currency: "valuables", deltaSold: 1, initial: 5 },
+                        product: { kind: "key_item", keyItemId: "SeedBlue" },
+                    },
+                    {
+                        initialQuantity: 99,
+                        price: { currency: "valuables", deltaSold: 1, initial: 5 },
+                        product: { kind: "key_item", keyItemId: "SeedPurple" },
                     },
                 ],
             },
