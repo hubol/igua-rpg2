@@ -8,7 +8,9 @@ import { DataIdol } from "../data/data-idol";
 import { DramaKeyItems } from "../drama/drama-key-items";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { Rpg } from "../rpg/rpg";
+import { RpgIdol } from "../rpg/rpg-idols";
 import { RpgSceneIdol } from "../rpg/rpg-player-aggregated-buffs";
+import { objUiBubbleNumber } from "./overlay/obj-ui-bubble-numbers";
 import { objTransitionedSprite } from "./utils/obj-transitioned-sprite";
 
 interface IdolStyle {
@@ -38,6 +40,10 @@ const keyItemIds = Object.values(DataIdol.Manifest)
     .map(({ keyItemId }) => keyItemId)
     .filter(keyItemId => keyItemId !== "__Fallback__");
 
+function getHealthText(idol: RpgIdol) {
+    return Math.ceil(idol.health / 60);
+}
+
 export function objIdol({ uid }: OgmoEntities.Idol) {
     const collisionShapeObj = new Graphics().beginFill(0).drawRect(-10, -10, 20, 20).invisible();
     const idol = Rpg.idols(uid);
@@ -48,9 +54,7 @@ export function objIdol({ uid }: OgmoEntities.Idol) {
             const style = styles.get(idol.idolId!);
             return style ? vnew(style.pivot).scale(1 / style.tx.width, 1 / style.tx.height) : [0, 0];
         },
-    });
-
-    return container(collisionShapeObj, sprite)
+    })
         .collisionShape(CollisionShape.DisplayObjects, [collisionShapeObj])
         .mixin(mxnCutscene, function* () {
             const result = yield* DramaKeyItems.use({ keyItemIds });
@@ -58,9 +62,15 @@ export function objIdol({ uid }: OgmoEntities.Idol) {
                 const dataIdol = Object.values(DataIdol.Manifest).find(idol => idol.keyItemId === result.keyItemId);
                 idol.upload(dataIdol?.id!);
             }
-        })
+        });
+
+    const bubbleNumberObj = objUiBubbleNumber({ value: getHealthText(idol) }).invisible();
+
+    return container(collisionShapeObj, sprite, bubbleNumberObj)
         .step(() => {
             idol.tick();
+            bubbleNumberObj.visible = !idol.isEmpty;
+            bubbleNumberObj.controls.value = getHealthText(idol);
             RpgSceneIdol.value.idol = idol;
         });
 }

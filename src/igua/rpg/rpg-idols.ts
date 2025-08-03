@@ -37,6 +37,10 @@ export class RpgIdol {
         return this.isEmpty ? RpgPlayerBuffs.voidMutator : DataIdol.getById(this.idolId!).buffs;
     }
 
+    get health() {
+        return this._state.health;
+    }
+
     get idolId() {
         return this.isEmpty ? null : this._state.idolId!;
     }
