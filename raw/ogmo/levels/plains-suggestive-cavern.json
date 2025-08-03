@@ -179,17 +179,6 @@
           "originX": 0,
           "originY": 0,
           "values": {"initialTint": "#540707", "targetTint": "#000000", "min": 1, "max": 5, "name": "", "depth": 0}
-        },
-        {
-          "name": "ValuableBlue",
-          "id": 2,
-          "_eid": "69755574",
-          "x": 1072,
-          "y": 392,
-          "originX": 8,
-          "originY": 6,
-          "uid": 175424634851200,
-          "values": {"name": "", "depth": 0}
         }
       ]
     },

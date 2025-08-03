@@ -2865,7 +2865,6 @@ export const Lvl = {
       TerrainEarthCrackSmall0_3: d(Tx.Terrain.Earth.CrackSmall0, { x: 662, y: 476, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x190000 }, "TerrainDecals"),
       IntelligenceBackground: e(r["IntelligenceBackground"], { x: 992, y: 376, width: 96, height: 32, values: { initialTint: "#540707", targetTint: "#000000", min: 1, max: 5, name: "", depth: 0 } }, "Entities"),
       IntelligenceBackground_1: e(r["IntelligenceBackground"], { x: 1056, y: 408, width: 32, height: 112, values: { initialTint: "#540707", targetTint: "#000000", min: 1, max: 5, name: "", depth: 0 } }, "Entities"),
-      ValuableBlue: e(r["ValuableBlue"], { x: 1072, y: 392, uid: 175424634851200, values: { name: "", depth: 0 } }, "Entities"),
       Gatekeeper: e(r["IguanaNpc"], { x: 88, y: 232, flippedX: false, values: { personaName: "", name: "Gatekeeper", depth: 0 } }, "CharacterEntities"),
       Shopkeeper: e(r["IguanaNpc"], { x: 896, y: 600, flippedX: false, values: { personaName: "", name: "Shopkeeper", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 656, y: 48, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
