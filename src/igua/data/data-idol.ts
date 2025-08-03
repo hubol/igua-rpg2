@@ -27,6 +27,7 @@ export namespace DataIdol {
             },
             Blue: {
                 buffs: (model) => {
+                    model.combat.melee.clawAttack.physical += 3;
                     model.combat.melee.attack.physical += 3;
                 },
                 hudText: "Power of the idol increases attack power",
@@ -34,7 +35,7 @@ export namespace DataIdol {
             },
             Purple: {
                 buffs: (model) => {
-                    model.loot.pocket.bonusChance += 25;
+                    model.loot.pocket.bonusChance += 67;
                 },
                 hudText: "Power of the idol increases luck",
                 keyItemId: "SeedPurple",
