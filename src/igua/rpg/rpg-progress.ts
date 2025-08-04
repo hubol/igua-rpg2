@@ -10,6 +10,7 @@ import { RpgExperience } from "./rpg-experience";
 import { RpgFlops } from "./rpg-flops";
 import { RpgIdols } from "./rpg-idols";
 import { RpgKeyItems } from "./rpg-key-items";
+import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgQuests } from "./rpg-quests";
 import { RpgShops } from "./rpg-shops";
@@ -44,11 +45,7 @@ export function getInitialRpgProgress() {
                     },
                 },
             },
-            attributes: {
-                health: 1,
-                intelligence: 0,
-                strength: 1,
-            },
+            attributes: RpgPlayerAttributes.createState(),
             experience: RpgExperience.createState(),
             looks: getDefaultLooks(),
             position: {

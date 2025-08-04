@@ -5,6 +5,7 @@ import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgIdols } from "./rpg-idols";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
+import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPocket } from "./rpg-pocket";
 import { getInitialRpgProgress, RpgProgressData } from "./rpg-progress";
 import { RpgQuests } from "./rpg-quests";
@@ -31,26 +32,12 @@ function createRpg(data: RpgProgressData) {
     const keyItems = new RpgKeyItems(keyItemsState);
     const shops = new RpgShops(shopsState);
     const stashPockets = new RpgStashPockets(stashPocketsState, pocket);
-
-    // TODO formalize
-    const attributes = {
-        get health() {
-            return data.character.attributes.health;
-        },
-        get intelligence() {
-            return data.character.attributes.intelligence + buffs.getAggregatedBuffs().attributes.intelligence;
-        },
-        get strength() {
-            return data.character.attributes.strength;
-        },
-    };
+    const attributes = new RpgPlayerAttributes(data.character.attributes, buffs);
 
     return {
         // TODO rename to player
         character: {
-            get attributes() {
-                return attributes;
-            },
+            attributes,
             get buffs() {
                 return buffs.getAggregatedBuffs();
             },
