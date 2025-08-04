@@ -62,7 +62,7 @@ function createRpg(data: RpgProgressData) {
         get flags() {
             return data.flags;
         },
-        idols(idolId: Integer) {
+        idol(idolId: Integer) {
             return idols.getById(idolId);
         },
         // TODO put all inventory here:

@@ -46,7 +46,7 @@ function getHealthText(idol: RpgIdol) {
 
 export function objIdol({ uid }: OgmoEntities.Idol) {
     const collisionShapeObj = new Graphics().beginFill(0).drawRect(-10, -10, 20, 20).invisible();
-    const idol = Rpg.idols(uid);
+    const idol = Rpg.idol(uid);
 
     const sprite = objTransitionedSprite({
         txProvider: () => styles.get(idol.idolId!)?.tx ?? null,
