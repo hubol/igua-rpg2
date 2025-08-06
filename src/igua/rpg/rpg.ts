@@ -29,8 +29,8 @@ function createRpg(data: RpgProgressData) {
     const equipment = new RpgCharacterEquipment(data.character.inventory.equipment);
     const buffs = new RpgPlayerAggregatedBuffs(equipment);
     const idols = new RpgIdols(idolsState);
-    const quests = new RpgQuests(data.character.quests);
-    const pocket = new RpgPocket(pocketState);
+    const quests = new RpgQuests(data.character.quests, experience);
+    const pocket = new RpgPocket(pocketState, experience);
     const keyItems = new RpgKeyItems(keyItemsState);
     const shops = new RpgShops(shopsState);
     const stashPockets = new RpgStashPockets(stashPocketsState, pocket);

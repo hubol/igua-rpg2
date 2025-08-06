@@ -1,14 +1,14 @@
 import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataPocketItem } from "../data/data-pocket-item";
-import { Rpg } from "./rpg";
+import { RpgExperience } from "./rpg-experience";
 
 type RpgPocketSlotPublic = Omit<RpgPocketSlot, "update">;
 
 export class RpgPocket {
     private readonly _slotObjects: RpgPocketSlot[] = [];
 
-    constructor(private readonly _state: RpgPocket.State) {
+    constructor(private readonly _state: RpgPocket.State, private readonly _experience: RpgExperience) {
     }
 
     private get _slots() {
@@ -48,8 +48,7 @@ export class RpgPocket {
             slot.count = 0;
         }
 
-        // TODO should not import Rpg
-        Rpg.experience.reward.pocket.onRemoveItems(totalItems);
+        this._experience.reward.pocket.onRemoveItems(totalItems);
 
         return {
             items,
@@ -80,8 +79,7 @@ export class RpgPocket {
             count: slot.count,
         };
 
-        // TODO should not import Rpg
-        Rpg.experience.reward.pocket.onReceive(result);
+        this._experience.reward.pocket.onReceive(result);
 
         return result;
     }
@@ -129,8 +127,7 @@ export class RpgPocket {
                     slot.item = null;
                 }
                 count -= countToTakeFromSlot;
-                // TODO should not import Rpg
-                Rpg.experience.reward.pocket.onRemoveItems(countToTakeFromSlot);
+                this._experience.reward.pocket.onRemoveItems(countToTakeFromSlot);
             }
             if (count < 0) {
                 Logger.logAssertError(
