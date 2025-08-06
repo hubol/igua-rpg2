@@ -20,7 +20,6 @@ import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
 import { objFish } from "../objects/obj-fish";
 import { Rpg } from "../rpg/rpg";
-import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 
 export function scnNewBalltownArmorer() {
     Jukebox.play(Mzk.GolfResort);
@@ -214,7 +213,7 @@ Need at least 150`);
                 wetness.value = 0;
                 Sfx.Fluid.Slurp.play();
                 yield sleep(1000);
-                RpgExperienceRewarder.computer.onInteract("small_task");
+                Rpg.experience.reward.computer.onInteract("small_task");
             }
         }
 

@@ -1,9 +1,9 @@
 import { blendColorDelta } from "../../lib/color/blend-color";
 import { Integer, PercentAsInteger, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
+import { Rpg } from "./rpg";
 import { RpgAttack } from "./rpg-attack";
 import { RpgCutscene } from "./rpg-cutscene";
-import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 import { RpgFaction } from "./rpg-faction";
 
 export namespace RpgStatus {
@@ -265,7 +265,8 @@ export namespace RpgStatus {
 
             if (damaged && target.health <= 0) {
                 if (attackingRewardsExperience) {
-                    RpgExperienceRewarder.combat.onEnemyDefeat(target.healthMax);
+                    // TODO maybe instead have RpgExperience passed?
+                    Rpg.experience.reward.combat.onEnemyDefeat(target.healthMax);
                 }
                 targetEffects.died();
             }
@@ -324,7 +325,7 @@ export namespace RpgStatus {
         const diff = previous - target.health;
 
         if (rewardExperience && diff > 0) {
-            RpgExperienceRewarder.combat.onAttackDamage(attack, diff);
+            Rpg.experience.reward.combat.onAttackDamage(attack, diff);
         }
 
         targetEffects.tookDamage(target.health, diff, kind);

@@ -20,8 +20,6 @@ import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgCutscene } from "../rpg/rpg-cutscene";
-import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
-import { RpgPocket } from "../rpg/rpg-pocket";
 
 export function scnNewBalltownUnderneath() {
     Jukebox.play(Mzk.TrashDay);
@@ -149,7 +147,7 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
                         yield sleep(500);
                         const emptied = yield* DramaPocket.empty(lvl.TownUnderneathHeliumCreator);
                         // TODO feels like this could somehow be done in empty, if recipient type had to be specified!
-                        RpgExperienceRewarder.computer.onDepositComputerChips(emptied.items.ComputerChip);
+                        Rpg.experience.reward.computer.onDepositComputerChips(emptied.items.ComputerChip);
                         tank.heliumContent += emptied.totalItems * 150;
                         yield* show("Helium created.");
                     }

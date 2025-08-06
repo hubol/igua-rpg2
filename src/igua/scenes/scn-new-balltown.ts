@@ -28,7 +28,6 @@ import { IguanaLocomotiveConsts } from "../objects/obj-iguana-locomotive";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { objMarker } from "../objects/utils/obj-marker";
 import { Rpg } from "../rpg/rpg";
-import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 
 export function scnNewBalltown() {
@@ -253,7 +252,7 @@ function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
 
             const password = characters.join("");
             if (password === "POOP*") {
-                RpgExperienceRewarder.computer.onInteract("small_task");
+                Rpg.experience.reward.computer.onInteract("small_task");
                 yield* show("Access granted.");
                 yield* show(
                     `Welcome master. You have ${Rpg.flags.newBalltown.mechanicalIdol.credits} credit(s).`,
@@ -285,7 +284,7 @@ That's worth ${count} credit(s). Do you want to deposit them?`)
                                 yield sleep(250);
                                 Rpg.inventory.pocket.remove("ComputerChip", count);
                                 Rpg.flags.newBalltown.mechanicalIdol.credits += count;
-                                RpgExperienceRewarder.computer.onDepositComputerChips(count);
+                                Rpg.experience.reward.computer.onDepositComputerChips(count);
                                 yield sleep(250);
                                 yield* show("All done!");
                             }
@@ -538,7 +537,7 @@ function objFishmongerBomb(name: string) {
             ]);
 
             if (hookedObj.isDefused) {
-                RpgExperienceRewarder.computer.onInteract("small_task");
+                Rpg.experience.reward.computer.onInteract("small_task");
             }
         });
 }

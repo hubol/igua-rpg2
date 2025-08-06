@@ -1,7 +1,6 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rpg } from "./rpg";
 import { RpgEconomy } from "./rpg-economy";
-import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 
 export namespace RpgPlayerWallet {
     export function canAfford(offer: RpgEconomy.Offer) {
@@ -46,7 +45,7 @@ export namespace RpgPlayerWallet {
         update(currency, -cost);
 
         if (kind === "gambling") {
-            RpgExperienceRewarder.gambling.onPlaceBet(cost);
+            Rpg.experience.reward.gambling.onPlaceBet(cost);
         }
     }
 
@@ -62,7 +61,7 @@ export namespace RpgPlayerWallet {
         update(currency, income);
 
         if (source === "gambling") {
-            RpgExperienceRewarder.gambling.onWinPrize(income);
+            Rpg.experience.reward.gambling.onWinPrize(income);
         }
     }
 }

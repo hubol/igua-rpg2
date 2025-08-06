@@ -12,7 +12,6 @@ import { force } from "../mixins/mxn-physics";
 import { MxnRpgStatus, mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { Rpg } from "../rpg/rpg";
-import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgPlayer } from "../rpg/rpg-player";
 import { RpgStatus } from "../rpg/rpg-status";
@@ -210,11 +209,11 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                     });
                     puppet.speed.y = PlayerConsts.JumpSpeed - specialBonus;
                     // TODO passing these in feels counterintuitive
-                    RpgExperienceRewarder.jump.onJump(ballonsCount, specialBonus * 2);
+                    Rpg.experience.reward.jump.onJump(ballonsCount, specialBonus * 2);
                 }
                 else {
                     puppet.speed.y = PlayerConsts.JumpSpeed;
-                    RpgExperienceRewarder.jump.onJump(ballonsCount, 0);
+                    Rpg.experience.reward.jump.onJump(ballonsCount, 0);
                 }
 
                 if (stepsSinceOffGround < 6 && (puppet.isMovingLeft || puppet.isMovingRight)) {

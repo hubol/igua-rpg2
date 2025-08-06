@@ -2,6 +2,7 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { DataQuest } from "../data/data-quest";
 import { DataShop } from "../data/data-shop";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
+import { RpgExperience } from "./rpg-experience";
 import { RpgIdols } from "./rpg-idols";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
@@ -24,6 +25,7 @@ function createRpg(data: RpgProgressData) {
     } = data;
     const { character: { inventory: { pocket: pocketState, keyItems: keyItemsState, ...inventory } } } = data;
 
+    const experience = new RpgExperience(data.character.experience);
     const equipment = new RpgCharacterEquipment(data.character.inventory.equipment);
     const buffs = new RpgPlayerAggregatedBuffs(equipment);
     const idols = new RpgIdols(idolsState);
@@ -59,6 +61,7 @@ function createRpg(data: RpgProgressData) {
                 return data.character.status;
             },
         } as const,
+        experience,
         get flags() {
             return data.flags;
         },
