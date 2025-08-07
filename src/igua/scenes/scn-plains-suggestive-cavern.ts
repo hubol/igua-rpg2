@@ -1,11 +1,14 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
+import { Jukebox } from "../core/igua-audio";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 
 export function scnPlainsSuggestiveCavern() {
+    Jukebox.play(Mzk.HomeFine);
     const lvl = Lvl.PlainsSuggestiveCavern();
     enrichGatekeeper(lvl);
     enrichShopkeeper(lvl);
