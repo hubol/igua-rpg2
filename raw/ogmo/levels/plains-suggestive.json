@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 1096,
+  "width": 1504,
   "height": 464,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 137,
+      "gridCellsX": 188,
       "gridCellsY": 58,
       "entities": []
     },
@@ -25,7 +25,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 137,
+      "gridCellsX": 188,
       "gridCellsY": 58,
       "entities": [
         {
@@ -51,6 +51,18 @@
           "originY": 0,
           "flippedY": false,
           "values": {"sceneName": "scnPlainsSuggestiveCavern", "checkpointName": "", "name": "", "depth": 0}
+        },
+        {
+          "name": "GateHorizontal",
+          "id": 3,
+          "_eid": "97593426",
+          "x": 1440,
+          "y": 16,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "flippedX": false,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromPlainsSuggestiveRight", "name": "", "depth": 0}
         }
       ]
     },
@@ -61,7 +73,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 137,
+      "gridCellsX": 188,
       "gridCellsY": 58,
       "decals": [],
       "folder": "../textures"
@@ -73,7 +85,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 137,
+      "gridCellsX": 188,
       "gridCellsY": 58,
       "entities": []
     },
@@ -84,7 +96,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 137,
+      "gridCellsX": 188,
       "gridCellsY": 58,
       "entities": [
         {
@@ -118,7 +130,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 137,
+      "gridCellsX": 188,
       "gridCellsY": 58,
       "entities": []
     },
@@ -129,7 +141,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 137,
+      "gridCellsX": 188,
       "gridCellsY": 58,
       "decals": [
         {
@@ -194,7 +206,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 137,
+      "gridCellsX": 188,
       "gridCellsY": 58,
       "entities": [
         {
@@ -282,7 +294,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 137,
+      "gridCellsX": 188,
       "gridCellsY": 58,
       "decals": [
         {
@@ -659,7 +671,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 137,
+      "gridCellsX": 188,
       "gridCellsY": 58,
       "entities": [
         {
@@ -794,8 +806,8 @@
           "_eid": "93117141",
           "x": 864,
           "y": 416,
-          "width": 256,
-          "height": 176,
+          "width": 384,
+          "height": 168,
           "originX": 0,
           "originY": 0,
           "tint": "#680c0c",
@@ -809,6 +821,97 @@
           "y": 416,
           "width": 32,
           "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 15,
+          "_eid": "93117141",
+          "x": 1248,
+          "y": 176,
+          "width": 256,
+          "height": 288,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#680c0c",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 16,
+          "_eid": "95675713",
+          "x": 1216,
+          "y": 176,
+          "width": 32,
+          "height": 32,
+          "flippedX": false,
+          "flippedY": true,
+          "tint": "#680c0c",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 17,
+          "_eid": "95675713",
+          "x": 1400,
+          "y": 144,
+          "width": 32,
+          "height": 32,
+          "flippedX": false,
+          "flippedY": false,
+          "tint": "#680c0c",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 18,
+          "_eid": "93117141",
+          "x": 1432,
+          "y": 144,
+          "width": 112,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#680c0c",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 19,
+          "_eid": "93117141",
+          "x": 544,
+          "y": 152,
+          "width": 32,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#680c0c",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 21,
+          "_eid": "93117141",
+          "x": 768,
+          "y": 152,
+          "width": 32,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#680c0c",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 23,
+          "_eid": "93117141",
+          "x": 992,
+          "y": 152,
+          "width": 32,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#680c0c",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -819,7 +922,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 137,
+      "gridCellsX": 188,
       "gridCellsY": 58,
       "entities": []
     },
@@ -830,7 +933,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 137,
+      "gridCellsX": 188,
       "gridCellsY": 58,
       "decals": [
         {
@@ -856,7 +959,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 137,
+      "gridCellsX": 188,
       "gridCellsY": 58,
       "decals": [
         {
