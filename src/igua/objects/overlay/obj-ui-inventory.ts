@@ -73,7 +73,10 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     const pageObj = objUiPage([...uiEquipmentObjs, ...uiKeyItemObjs], { selectionIndex: 0 }).at(180, 100);
     Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80).show(pageObj);
     objUiEquipmentBuffs(Rpg.character.equipment.loadout)
-        .step(self => self.controls.focusBuffsSource = Rpg.character.equipment.loadout[pageObj.selectionIndex])
+        .step(self => {
+            self.visible = pageObj.selectionIndex < 4;
+            self.controls.focusBuffsSource = Rpg.character.equipment.loadout[pageObj.selectionIndex];
+        })
         .at(74, 46)
         .show(pageObj);
 
@@ -124,7 +127,6 @@ function objUiEquipment(getEquipmentName: () => RpgEquipmentLoadout.Item, varian
     let appliedName: RpgEquipmentLoadout.Item | undefined = undefined;
 
     const renderObj = container();
-    const obj = container(renderObj).step(maybeApply, StepOrder.BeforeCamera);
 
     function maybeApply() {
         const nameToApply = getEquipmentName();
@@ -146,7 +148,7 @@ function objUiEquipment(getEquipmentName: () => RpgEquipmentLoadout.Item, varian
 
     maybeApply();
 
-    return obj.merge({ getEquipmentName });
+    return container(renderObj).step(maybeApply, StepOrder.BeforeCamera);
 }
 
 function createObjUiKeyItems() {
@@ -160,7 +162,7 @@ function createObjUiKeyItems() {
         pageElementObjs.push(objUiKeyItem(keyItemId, count).at(x, y).add(-40, 0));
 
         y += 36;
-        if (y >= 460) {
+        if (y >= 36 * 5) {
             y = 0;
             x -= 36;
         }
