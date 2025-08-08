@@ -21,10 +21,26 @@ export namespace DataKeyItem {
                 description: "A miner would benefit from this",
                 texture: null,
             },
-            SeedYellow: { name: "Seed (Yellow)", description: "The seed of a lucrative idea.", texture: null },
-            SeedGreen: { name: "Seed (Green)", description: "The seed of a poisonous idea.", texture: null },
-            SeedBlue: { name: "Seed (Blue)", description: "The seed of a strong idea.", texture: null },
-            SeedPurple: { name: "Seed (Purple)", description: "The seed of a lucky idea.", texture: null },
+            SeedYellow: {
+                name: "Seed (Yellow)",
+                description: "The seed of a lucrative idea.",
+                texture: Tx.Collectibles.Key.SeedYellow,
+            },
+            SeedGreen: {
+                name: "Seed (Green)",
+                description: "The seed of a poisonous idea.",
+                texture: Tx.Collectibles.Key.SeedGreen,
+            },
+            SeedBlue: {
+                name: "Seed (Blue)",
+                description: "The seed of a strong idea.",
+                texture: Tx.Collectibles.Key.SeedBlue,
+            },
+            SeedPurple: {
+                name: "Seed (Purple)",
+                description: "The seed of a lucky idea.",
+                texture: Tx.Collectibles.Key.SeedPurple,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );
