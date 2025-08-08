@@ -175,9 +175,9 @@ function createObjUiKeyItems() {
 function objUiKeyItem(keyItemId: DataKeyItem.Id, count: Integer) {
     return container(
         objFigureKeyItem(keyItemId),
-        ...(count > 1 ? [objUiBubbleNumber({ value: count }).at(16, 26)] : []),
+        ...(count > 1 ? [objText.SmallDigits("" + count, { tint: 0x3775E8 }).anchored(1, 1).at(31, 31)] : []),
     )
-        .mixin(mxnUiPageElement)
+        .mixin(mxnUiPageElement, { tint: 0x3775E8 })
         .mixin(mxnUiKeyItem, keyItemId);
 }
 
