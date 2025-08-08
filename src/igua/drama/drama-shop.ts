@@ -19,6 +19,7 @@ import { Input, layers, scene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnErrorVibrate } from "../mixins/mxn-error-vibrate";
+import { objFigureKeyItem } from "../objects/figures/obj-figure-key-item";
 import { experienceIndicatorConfigs, experienceIndicatorConfigsArray } from "../objects/overlay/obj-hud";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
@@ -252,6 +253,8 @@ function objStockNameDescription(stock: RpgStock) {
 
     const nameTextObj = objText.Large(nameText, { tint: CtxDramaShop.value.style.primaryTint });
 
+    const figureObj = getStockFigure(stock).at(nameTextObj.width + 9, -15);
+
     const ellipseObj = new Graphics().lineStyle(1, CtxDramaShop.value.style.primaryTint).beginFill(
         CtxDramaShop.value.style.secondaryTint,
     ).drawRoundedRect(
@@ -266,6 +269,7 @@ function objStockNameDescription(stock: RpgStock) {
 
     return container(
         nameObj,
+        figureObj,
         objText.Medium(descriptionText, { tint: CtxDramaShop.value.style.secondaryTint, maxWidth: 224 }).at(9, 18),
         objOwnedCount(getStockPlayerOwnedCount(stock)).at(nameObj.width + 6, 4),
     );
@@ -279,6 +283,17 @@ function getStockName(item: RpgStock) {
             return DataKeyItem.getById(item.product.keyItemId).name;
         case "potion":
             return "Potion?!?!?";
+    }
+}
+
+function getStockFigure(stock: RpgStock) {
+    switch (stock.product.kind) {
+        case "key_item":
+            return objFigureKeyItem(stock.product.keyItemId);
+        case "equipment":
+            return container();
+        case "potion":
+            return container();
     }
 }
 
