@@ -19,7 +19,7 @@ export namespace DataKeyItem {
             UpgradedPickaxe: {
                 name: "MyPicaxe Version 2.0",
                 description: "A miner would benefit from this",
-                texture: null,
+                texture: Tx.Collectibles.Key.PickaxeUpgrade,
             },
             SeedYellow: {
                 name: "Seed (Yellow)",
