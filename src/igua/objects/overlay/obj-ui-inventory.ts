@@ -81,7 +81,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
         .at(74, 46)
         .show(pageObj);
 
-    objUiKeyItemDescription(() => pageObj.selected)
+    objUiKeyItemInfo(() => pageObj.selected)
         .at(-7, 0)
         .show(pageObj);
 
@@ -185,8 +185,8 @@ function mxnUiKeyItem(obj: DisplayObject, keyItemId: DataKeyItem.Id) {
     return obj.merge({ mxnUiKeyItem: { keyItemId } });
 }
 
-function objUiKeyItemDescription(selectedObjSupplier: () => DisplayObject | undefined) {
-    return objText.Medium("", { align: "right", tint: 0x000000, maxWidth: 168 })
+function objUiKeyItemInfo(selectedObjSupplier: () => DisplayObject | undefined) {
+    const descriptionObj = objText.Medium("", { align: "right", tint: 0x000000, maxWidth: 168 })
         .anchored(1, 1)
         .mixin(mxnTextTyped, () => {
             const uiKeyItemObj = selectedObjSupplier();
@@ -194,4 +194,16 @@ function objUiKeyItemDescription(selectedObjSupplier: () => DisplayObject | unde
                 ? DataKeyItem.getById(uiKeyItemObj.mxnUiKeyItem.keyItemId).description
                 : "";
         });
+
+    const nameObj = objText.MediumBoldIrregular("", { align: "left", tint: 0x000000, maxWidth: 168 })
+        .at(-168, -24)
+        .anchored(0, 1)
+        .mixin(mxnTextTyped, () => {
+            const uiKeyItemObj = selectedObjSupplier();
+            return uiKeyItemObj?.is(mxnUiKeyItem)
+                ? DataKeyItem.getById(uiKeyItemObj.mxnUiKeyItem.keyItemId).name
+                : "";
+        });
+
+    return container(descriptionObj, nameObj);
 }
