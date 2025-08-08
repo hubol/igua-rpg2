@@ -1,11 +1,11 @@
 import { DisplayObject, Sprite } from "pixi.js";
+import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { Empty } from "../../../lib/types/empty";
-import { renderer } from "../../current-pixi-renderer";
 import { DataKeyItem } from "../../data/data-key-item";
 import { Cutscene, Input } from "../../globals";
 import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
@@ -75,6 +75,10 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     objUiEquipmentBuffs(Rpg.character.equipment.loadout)
         .step(self => self.controls.focusBuffsSource = Rpg.character.equipment.loadout[pageObj.selectionIndex])
         .at(74, 46)
+        .show(pageObj);
+
+    objUiKeyItemDescription(() => pageObj.selected)
+        .at(-7, 0)
         .show(pageObj);
 
     return pageObj;
@@ -168,7 +172,7 @@ function createObjUiKeyItems() {
 function objUiKeyItem(keyItemId: DataKeyItem.Id, count: Integer) {
     return container(
         objFigureKeyItem(keyItemId),
-        ...(count > 1 ? [objUiBubbleNumber({ value: count }).at(27, 26)] : []),
+        ...(count > 1 ? [objUiBubbleNumber({ value: count }).at(16, 26)] : []),
     )
         .mixin(mxnUiPageElement)
         .mixin(mxnUiKeyItem, keyItemId);
@@ -176,4 +180,26 @@ function objUiKeyItem(keyItemId: DataKeyItem.Id, count: Integer) {
 
 function mxnUiKeyItem(obj: DisplayObject, keyItemId: DataKeyItem.Id) {
     return obj.merge({ mxnUiKeyItem: { keyItemId } });
+}
+
+function objUiKeyItemDescription(selectedObjSupplier: () => DisplayObject | undefined) {
+    return objText.Medium("", { align: "right", tint: 0x000000, maxWidth: 168 })
+        .anchored(1, 1)
+        .step(self => {
+            let targetText = "";
+            const uiKeyItemObj = selectedObjSupplier();
+            if (uiKeyItemObj?.is(mxnUiKeyItem)) {
+                targetText = DataKeyItem.getById(uiKeyItemObj.mxnUiKeyItem.keyItemId).description;
+            }
+            if (self.text === targetText) {
+                return;
+            }
+
+            if (self.text === targetText.substring(0, self.text.length)) {
+                self.text = targetText.substring(0, self.text.length + 1);
+            }
+            else {
+                self.text = self.text.substring(0, self.text.length - 1);
+            }
+        });
 }
