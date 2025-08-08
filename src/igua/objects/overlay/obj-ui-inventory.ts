@@ -1,18 +1,23 @@
-import { Sprite } from "pixi.js";
+import { DisplayObject, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
+import { Empty } from "../../../lib/types/empty";
+import { renderer } from "../../current-pixi-renderer";
+import { DataKeyItem } from "../../data/data-key-item";
 import { Cutscene, Input } from "../../globals";
 import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
-import { mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
+import { MxnUiPageElement, mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
 import { Rpg } from "../../rpg/rpg";
 import { RpgCharacterEquipment } from "../../rpg/rpg-character-equipment";
 import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
+import { objFigureKeyItem } from "../figures/obj-figure-key-item";
 import { objEquipmentRepresentation } from "../obj-equipment-representation";
 import { StepOrder } from "../step-order";
+import { objUiBubbleNumber } from "./obj-ui-bubble-numbers";
 import { objUiEquipmentBuffs, objUiEquipmentBuffsComparedTo } from "./obj-ui-equipment-buffs";
 
 export function objUiInventory() {
@@ -63,7 +68,9 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
             })
     );
 
-    const pageObj = objUiPage(uiEquipmentObjs, { selectionIndex: 0 }).at(180, 100);
+    const uiKeyItemObjs = createObjUiKeyItems();
+
+    const pageObj = objUiPage([...uiEquipmentObjs, ...uiKeyItemObjs], { selectionIndex: 0 }).at(180, 100);
     Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80).show(pageObj);
     objUiEquipmentBuffs(Rpg.character.equipment.loadout)
         .step(self => self.controls.focusBuffsSource = Rpg.character.equipment.loadout[pageObj.selectionIndex])
@@ -136,4 +143,37 @@ function objUiEquipment(getEquipmentName: () => RpgEquipmentLoadout.Item, varian
     maybeApply();
 
     return obj.merge({ getEquipmentName });
+}
+
+function createObjUiKeyItems() {
+    const pageElementObjs = Empty<MxnUiPageElement>();
+
+    const { list } = Rpg.inventory.keyItems;
+
+    let x = 0;
+    let y = 0;
+    for (const { count, keyItemId } of list) {
+        pageElementObjs.push(objUiKeyItem(keyItemId, count).at(x, y).add(-40, 0));
+
+        y += 36;
+        if (y >= 460) {
+            y = 0;
+            x -= 36;
+        }
+    }
+
+    return pageElementObjs;
+}
+
+function objUiKeyItem(keyItemId: DataKeyItem.Id, count: Integer) {
+    return container(
+        objFigureKeyItem(keyItemId),
+        ...(count > 1 ? [objUiBubbleNumber({ value: count }).at(27, 26)] : []),
+    )
+        .mixin(mxnUiPageElement)
+        .mixin(mxnUiKeyItem, keyItemId);
+}
+
+function mxnUiKeyItem(obj: DisplayObject, keyItemId: DataKeyItem.Id) {
+    return obj.merge({ mxnUiKeyItem: { keyItemId } });
 }

@@ -1,4 +1,5 @@
 import { Logger } from "../../lib/game-engine/logger";
+import { Integer } from "../../lib/math/number-alias-types";
 import { DataKeyItem } from "../data/data-key-item";
 
 export class RpgKeyItems {
@@ -7,6 +8,25 @@ export class RpgKeyItems {
 
     static createState(): RpgKeyItems.State {
         return [];
+    }
+
+    get list(): RpgKeyItems.List {
+        const list: RpgKeyItems.List = [];
+        const items: Partial<Record<DataKeyItem.Id, RpgKeyItems.List[number]>> = {};
+
+        for (let i = this._state.length - 1; i >= 0; i--) {
+            const keyItemId = this._state[i];
+            if (!items[keyItemId]) {
+                const item = { count: 1, keyItemId };
+                items[keyItemId] = item;
+                list.push(item);
+            }
+            else {
+                items[keyItemId]!.count += 1;
+            }
+        }
+
+        return list;
     }
 
     receive(item: RpgKeyItems.Item) {
@@ -63,4 +83,11 @@ export class RpgKeyItems {
 export module RpgKeyItems {
     export type Item = DataKeyItem.Id;
     export type State = Item[];
+
+    interface ListItem {
+        count: Integer;
+        keyItemId: DataKeyItem.Id;
+    }
+
+    export type List = ListItem[];
 }
