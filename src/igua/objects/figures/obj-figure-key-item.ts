@@ -1,4 +1,4 @@
-import { Graphics } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { SubjectiveColorAnalyzer } from "../../../lib/color/subjective-color-analyzer";
 import { PseudoRng } from "../../../lib/math/rng";
@@ -7,6 +7,12 @@ import { container } from "../../../lib/pixi/container";
 import { DataKeyItem } from "../../data/data-key-item";
 
 export function objFigureKeyItem(keyItemId: DataKeyItem.Id) {
+    const texture = DataKeyItem.getById(keyItemId).texture;
+
+    if (texture) {
+        return Sprite.from(texture);
+    }
+
     const props = getPlaceholderProperties(keyItemId);
 
     return container(
