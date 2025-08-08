@@ -8,6 +8,7 @@ import { range } from "../../../lib/range";
 import { Empty } from "../../../lib/types/empty";
 import { DataKeyItem } from "../../data/data-key-item";
 import { Cutscene, Input } from "../../globals";
+import { mxnTextTyped } from "../../mixins/mxn-text-typed";
 import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
 import { MxnUiPageElement, mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
 import { Rpg } from "../../rpg/rpg";
@@ -187,21 +188,10 @@ function mxnUiKeyItem(obj: DisplayObject, keyItemId: DataKeyItem.Id) {
 function objUiKeyItemDescription(selectedObjSupplier: () => DisplayObject | undefined) {
     return objText.Medium("", { align: "right", tint: 0x000000, maxWidth: 168 })
         .anchored(1, 1)
-        .step(self => {
-            let targetText = "";
+        .mixin(mxnTextTyped, () => {
             const uiKeyItemObj = selectedObjSupplier();
-            if (uiKeyItemObj?.is(mxnUiKeyItem)) {
-                targetText = DataKeyItem.getById(uiKeyItemObj.mxnUiKeyItem.keyItemId).description;
-            }
-            if (self.text === targetText) {
-                return;
-            }
-
-            if (self.text === targetText.substring(0, self.text.length)) {
-                self.text = targetText.substring(0, self.text.length + 1);
-            }
-            else {
-                self.text = self.text.substring(0, self.text.length - 1);
-            }
+            return uiKeyItemObj?.is(mxnUiKeyItem)
+                ? DataKeyItem.getById(uiKeyItemObj.mxnUiKeyItem.keyItemId).description
+                : "";
         });
 }
