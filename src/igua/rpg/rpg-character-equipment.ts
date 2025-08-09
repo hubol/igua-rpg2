@@ -67,13 +67,15 @@ export class RpgCharacterEquipment {
     equip(id: Integer | null, loadoutIndex: Integer) {
         const { list } = this._state;
 
+        const previousLoadoutIndex = list.find(item => item.id === id)?.loadoutIndex ?? null;
+
         for (let i = 0; i < list.length; i++) {
             const item = list[i];
             if (item.id === id) {
                 item.loadoutIndex = loadoutIndex;
             }
             else if (item.loadoutIndex === loadoutIndex) {
-                item.loadoutIndex = null;
+                item.loadoutIndex = previousLoadoutIndex;
             }
         }
         this._updateLoadout();
