@@ -42,6 +42,7 @@ export namespace RpgStatus {
         defenses: {
             physical: PercentAsInteger;
         };
+        factionDefenses: Record<RpgFaction, PercentAsInteger>;
         recoveries: {
             wetness: Integer;
         };
@@ -231,6 +232,8 @@ export namespace RpgStatus {
                 return { rejected: true, invulnerable: true };
             }
 
+            const factionDefense = attacker ? target.factionDefenses[attacker.faction] : 0;
+
             const canBeFatal = !target.state.isGuarding || target.quirks.guardedDamageIsFatal || target.health <= 1;
 
             const attackingRewardsExperience = attacker?.quirks?.attackingRewardsExperience ?? false;
@@ -243,6 +246,7 @@ export namespace RpgStatus {
                 // TODO emotional defense
                 0,
                 0,
+                factionDefense,
                 target,
                 targetEffects,
                 attackingRewardsExperience,
@@ -255,6 +259,7 @@ export namespace RpgStatus {
                 canBeFatal,
                 target.defenses.physical,
                 target.guardingDefenses.physical,
+                factionDefense,
                 target,
                 targetEffects,
                 attackingRewardsExperience,
@@ -302,13 +307,15 @@ export namespace RpgStatus {
         canBeFatal: boolean,
         defense: PercentAsInteger,
         guardingDefense: PercentAsInteger,
+        factionDefense: PercentAsInteger,
         target: Model,
         targetEffects: Effects,
         rewardExperience: boolean,
     ) {
         const previous = target.health;
         const totalDefense: PercentAsInteger = defense
-            + (target.state.isGuarding ? guardingDefense : 0);
+            + (target.state.isGuarding ? guardingDefense : 0)
+            + factionDefense;
 
         const minimumDamage = totalDefense >= 100 ? 0 : Math.sign(amount);
 

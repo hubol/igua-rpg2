@@ -22,7 +22,8 @@ import { objValuableSpawner } from "../objects/obj-valuable-spawner";
 import { objTransitionedSprite } from "../objects/utils/obj-transitioned-sprite";
 import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
-import { RpgKeyItems } from "../rpg/rpg-key-items";
+import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
+import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgPocket } from "../rpg/rpg-pocket";
 import { RpgStatus } from "../rpg/rpg-status";
 
@@ -105,6 +106,14 @@ const atkPickaxe = RpgAttack.create({
     physical: 25,
 });
 
+const ranks = {
+    miner: RpgEnemyRank.create({
+        status: {
+            faction: RpgFaction.Miner,
+        },
+    }),
+};
+
 function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
     function hasHighMiningSpeed() {
         return Rpg.flags.outskirts.miner.pickaxeHealth > 0
@@ -117,7 +126,10 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
 
     const valuableSpawnerObj = objValuableSpawner([lvl.MinerValuable0, lvl.MinerValuable1, lvl.MinerValuable2]);
 
-    const pickaxeAttackObj = lvl.PickaxeHitbox.mixin(mxnRpgAttack, { attack: atkPickaxe });
+    const pickaxeAttackObj = lvl.PickaxeHitbox.mixin(mxnRpgAttack, {
+        attack: atkPickaxe,
+        attacker: ranks.miner.status,
+    });
     pickaxeAttackObj.isAttackActive = false;
 
     lvl.MinerPicaxeBrokenBandages.mixin(mxnBoilPivot).invisible();

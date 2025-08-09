@@ -8,6 +8,11 @@ export namespace RpgPlayerBuffs {
                 intelligence: 0,
             },
             combat: {
+                defense: {
+                    faction: {
+                        miner: 0,
+                    },
+                },
                 melee: {
                     attack: {
                         physical: 0,

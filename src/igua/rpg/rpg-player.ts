@@ -73,6 +73,14 @@ export const RpgPlayer = {
         defenses: {
             physical: 0,
         },
+        factionDefenses: {
+            [RpgFaction.Anyone]: 0,
+            [RpgFaction.Enemy]: 0,
+            [RpgFaction.Player]: 100,
+            get [RpgFaction.Miner]() {
+                return Rpg.character.buffs.combat.defense.faction.miner;
+            },
+        },
         recoveries: {
             wetness: 1,
         },

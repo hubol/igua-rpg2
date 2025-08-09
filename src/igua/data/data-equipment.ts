@@ -69,6 +69,17 @@ export namespace DataEquipment {
                     model.attributes.intelligence += 1 + bonus;
                 },
             },
+            FactionDefenseMiner: {
+                name: "Miner's Helmet",
+                texture: null,
+                description: "Defends from attacks from miners",
+                buffs: (model, bonus) => {
+                    model.combat.defense.faction.miner += Math.min(100, 99 + bonus);
+                    if (bonus > 1) {
+                        model.loot.valuables.bonus += bonus - 1;
+                    }
+                },
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,

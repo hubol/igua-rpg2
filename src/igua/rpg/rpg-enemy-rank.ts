@@ -56,6 +56,12 @@ export namespace RpgEnemyRank {
                 guardingDefenses: {
                     physical: status?.defenses?.physical ?? 0,
                 },
+                factionDefenses: {
+                    [RpgFaction.Anyone]: 0,
+                    [RpgFaction.Enemy]: 100,
+                    [RpgFaction.Miner]: 0,
+                    [RpgFaction.Player]: 0,
+                },
                 recoveries: {
                     wetness: 1,
                 },
