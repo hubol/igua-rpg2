@@ -6,6 +6,7 @@ import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { Empty } from "../../../lib/types/empty";
+import { DataEquipment } from "../../data/data-equipment";
 import { DataKeyItem } from "../../data/data-key-item";
 import { Cutscene, Input } from "../../globals";
 import { mxnTextTyped } from "../../mixins/mxn-text-typed";
@@ -120,6 +121,15 @@ function objUiEquipmentChoosePage(
         previewEquipment,
         Rpg.character.equipment,
     ).at(284 - 60, 46 + 30).show(pageObj);
+
+    objText.MediumBoldIrregular("", { tint: 0x00ff00 })
+        .mixin(mxnTextTyped, () => {
+            const equipment = availableLoadoutItems[pageObj.selectionIndex];
+            return equipment ? DataEquipment.getById(equipment.name).name : "Nothing";
+        })
+        .anchored(0, 1)
+        .at(0, -3)
+        .show(pageObj);
 
     return pageObj;
 }

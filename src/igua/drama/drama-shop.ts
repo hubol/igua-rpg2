@@ -272,7 +272,7 @@ function objStockNameDescription(stock: RpgStock) {
         nameObj,
         figureObj,
         objText.Medium(descriptionText, { tint: CtxDramaShop.value.style.secondaryTint, maxWidth: 224 }).at(9, 18),
-        objOwnedCount(getStockPlayerOwnedCount(stock)).at(nameObj.width + 6, 4),
+        objOwnedCount(getStockPlayerOwnedCount(stock)).at(nameObj.width + 32, 4),
     );
 }
 
