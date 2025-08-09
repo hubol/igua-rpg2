@@ -64,7 +64,7 @@ export function objIdol({ uid }: OgmoEntities.Idol) {
             }
         });
 
-    const bubbleNumberObj = objUiBubbleNumber({ value: getHealthText(idol) }).invisible();
+    const bubbleNumberObj = objUiBubbleNumber({ value: getHealthText(idol) }).at(0, 14).invisible();
 
     return container(collisionShapeObj, sprite, bubbleNumberObj)
         .step(() => {
