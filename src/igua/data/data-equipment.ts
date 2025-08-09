@@ -69,12 +69,6 @@ export namespace DataEquipment {
                     model.attributes.intelligence += 1 + bonus;
                 },
             },
-            __Empty__: {
-                name: "Empty",
-                texture: null,
-                description: "Void",
-                buffs: RpgPlayerBuffs.voidMutator,
-            },
             __Fallback__: {
                 name: "???",
                 texture: null,
