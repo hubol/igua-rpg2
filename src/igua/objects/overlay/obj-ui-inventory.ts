@@ -15,8 +15,8 @@ import { Rpg } from "../../rpg/rpg";
 import { RpgCharacterEquipment } from "../../rpg/rpg-character-equipment";
 import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
+import { objFigureEquipment } from "../figures/obj-figure-equipment";
 import { objFigureKeyItem } from "../figures/obj-figure-key-item";
-import { objEquipmentRepresentation } from "../obj-equipment-representation";
 import { StepOrder } from "../step-order";
 import { objUiBubbleNumber } from "./obj-ui-bubble-numbers";
 import { objUiEquipmentBuffs, objUiEquipmentBuffsComparedTo } from "./obj-ui-equipment-buffs";
@@ -138,7 +138,7 @@ function objUiEquipment(getEquipmentName: () => RpgEquipmentLoadout.Item, varian
         renderObj.removeAllChildren();
 
         if (nameToApply !== null) {
-            objEquipmentRepresentation(nameToApply).show(renderObj);
+            objFigureEquipment(nameToApply).show(renderObj);
         }
         else if (variant === "show_empty") {
             Sprite.from(Tx.Ui.Empty).show(renderObj);

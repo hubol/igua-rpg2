@@ -1,12 +1,12 @@
 import { Graphics } from "pixi.js";
-import { objText } from "../../assets/fonts";
-import { SubjectiveColorAnalyzer } from "../../lib/color/subjective-color-analyzer";
-import { PseudoRng } from "../../lib/math/rng";
-import { AdjustColor } from "../../lib/pixi/adjust-color";
-import { container } from "../../lib/pixi/container";
-import { DataEquipment } from "../data/data-equipment";
+import { objText } from "../../../assets/fonts";
+import { SubjectiveColorAnalyzer } from "../../../lib/color/subjective-color-analyzer";
+import { PseudoRng } from "../../../lib/math/rng";
+import { AdjustColor } from "../../../lib/pixi/adjust-color";
+import { container } from "../../../lib/pixi/container";
+import { DataEquipment } from "../../data/data-equipment";
 
-export function objEquipmentRepresentation(equipmentId: DataEquipment.Id) {
+export function objFigureEquipment(equipmentId: DataEquipment.Id) {
     const props = getPlaceholderProperties(equipmentId);
 
     return container(

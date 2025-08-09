@@ -4,13 +4,13 @@ import { DataEquipment } from "../../data/data-equipment";
 import { mxnCollectible } from "../../mixins/mxn-collectible";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { Rpg } from "../../rpg/rpg";
-import { objEquipmentRepresentation } from "../obj-equipment-representation";
+import { objFigureEquipment } from "../figures/obj-figure-equipment";
 
 // TODO very sad
 export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
     let angle = 0;
 
-    return objEquipmentRepresentation(equipmentId)
+    return objFigureEquipment(equipmentId)
         .pivoted(16, 16)
         .mixin(mxnCollectible, { kind: "transient" })
         .handles("collected", () => Rpg.character.equipment.receive(equipmentId))
