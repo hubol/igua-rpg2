@@ -19,6 +19,7 @@ import { Input, layers, scene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnErrorVibrate } from "../mixins/mxn-error-vibrate";
+import { objFigureEquipment } from "../objects/figures/obj-figure-equipment";
 import { objFigureKeyItem } from "../objects/figures/obj-figure-key-item";
 import { experienceIndicatorConfigs, experienceIndicatorConfigsArray } from "../objects/overlay/obj-hud";
 import { Rpg } from "../rpg/rpg";
@@ -291,7 +292,7 @@ function getStockFigure(stock: RpgStock) {
         case "key_item":
             return objFigureKeyItem(stock.product.keyItemId);
         case "equipment":
-            return container();
+            return objFigureEquipment(stock.product.equipmentId);
         case "potion":
             return container();
     }
