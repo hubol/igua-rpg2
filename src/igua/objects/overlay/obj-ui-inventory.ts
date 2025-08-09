@@ -89,6 +89,8 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     return pageObj;
 }
 
+const currentlyEquippedSlotTxs = Tx.Ui.CurrentlyEquippedSlot.split({ width: 10 });
+
 function objUiEquipmentChoosePage(
     loadoutIndex: Integer,
     onChoose: (equipment: RpgCharacterEquipment.ObtainedEquipment | null) => void,
@@ -96,22 +98,32 @@ function objUiEquipmentChoosePage(
     const previewEquipment = new RpgCharacterEquipment.Preview(Rpg.character.equipment);
 
     const availableLoadoutItems = [...Rpg.character.equipment.list, null];
-    const uiEquipmentObjs = availableLoadoutItems.map((equipment, i) =>
-        objUiEquipment(() => equipment?.name ?? null, "show_empty").at((i % 8) * 36, Math.floor(i / 8) * 36).mixin(
-            mxnUiPageElement,
-        )
+    const uiEquipmentObjs = availableLoadoutItems.map((equipment, i) => {
+        const obj = objUiEquipment(() => equipment?.name ?? null, "show_empty").at((i % 8) * 36, Math.floor(i / 8) * 36)
+            .mixin(
+                mxnUiPageElement,
+            )
             .mixin(mxnUiPageButton, {
                 onPress: () => onChoose(equipment),
                 onJustSelected: () => previewEquipment.equip(equipment?.id ?? null, loadoutIndex),
-            })
-    );
+            });
+
+        if (Number.isInteger(equipment?.loadoutIndex)) {
+            const equippedTx = equipment!.loadoutIndex! === loadoutIndex
+                ? Tx.Ui.CurrentlyEquipped
+                : currentlyEquippedSlotTxs[equipment!.loadoutIndex!];
+            if (equippedTx) {
+                obj.addChild(Sprite.from(equippedTx));
+            }
+        }
+
+        return obj;
+    });
 
     const initialSelectionIndex = availableLoadoutItems.findIndex(item => loadoutIndex === item?.loadoutIndex);
     const pageObj = objUiPage(uiEquipmentObjs, {
         selectionIndex: initialSelectionIndex === -1 ? availableLoadoutItems.length - 1 : initialSelectionIndex,
     }).at(108, 100);
-
-    pageObj.selected?.addChild(Sprite.from(Tx.Ui.CurrentlyEquipped));
 
     objUiEquipmentBuffs(
         Rpg.character.equipment.loadout,
