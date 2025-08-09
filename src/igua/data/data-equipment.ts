@@ -70,8 +70,8 @@ export namespace DataEquipment {
                 },
             },
             FactionDefenseMiner: {
-                name: "Miner's Helmet",
-                texture: null,
+                name: "Commemorative Pillow (Generator Festival)",
+                texture: Tx.Collectibles.Equipment.DefenseMiner,
                 description: "Defends from attacks from miners",
                 buffs: (model, bonus) => {
                     model.combat.defense.faction.miner += Math.min(100, 99 + bonus);
