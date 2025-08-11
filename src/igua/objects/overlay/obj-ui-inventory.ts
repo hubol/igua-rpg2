@@ -1,4 +1,4 @@
-import { DisplayObject, Sprite } from "pixi.js";
+import { DisplayObject, Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
@@ -55,7 +55,7 @@ function objUiInventoryImpl() {
 function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     const uiEquipmentObjs = range(4).map(i =>
         objUiEquipment(() => Rpg.character.equipment.loadout[i], "show_empty").at(i * 36, 0)
-            .mixin(mxnUiPageElement)
+            .mixin(mxnUiPageElement, { tint: 0xE5BB00 })
             .mixin(mxnUiPageButton, {
                 onPress: () => {
                     routerObj.push(objUiEquipmentChoosePage(
@@ -73,23 +73,34 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     const uiKeyItemObjs = createObjUiKeyItems();
 
     const pageObj = objUiPage([...uiEquipmentObjs, ...uiKeyItemObjs], { selectionIndex: 0 }).at(180, 100);
-    Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80).show(pageObj);
-    objUiEquipmentBuffs(Rpg.character.equipment.loadout)
-        .step(self => {
-            if (pageObj.selected?.is(mxnUiEquipment)) {
-                self.visible = true;
-                self.controls.focusBuffsSource = pageObj.selected.mxnUiEquipment.equipmentId;
-            }
-            else {
-                self.visible = false;
-            }
-        })
-        .at(74, 46)
-        .show(pageObj);
+    // Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80).show(pageObj);
+    pageObj.addChildAt(
+        container(
+            Sprite.from(Tx.Ui.Inventory.BackgroundEquipment).at(-7, -26),
+            objUiEquipmentBuffs(Rpg.character.equipment.loadout)
+                .step(self => {
+                    if (pageObj.selected?.is(mxnUiEquipment)) {
+                        self.controls.focusBuffsSource = pageObj.selected.mxnUiEquipment.equipmentId;
+                    }
+                })
+                .at(74, 46),
+        )
+            .step(self => {
+                self.visible = Boolean(pageObj.selected?.is(mxnUiEquipment));
+            }),
+        0,
+    );
 
-    objUiKeyItemInfo(() => pageObj.selected)
-        .at(-7, 0)
-        .show(pageObj);
+    pageObj.addChildAt(
+        container(
+            Sprite.from(Tx.Ui.Inventory.BackgroundKeyItem).at(-180, -26),
+            objUiKeyItemInfo(() => pageObj.selected).at(0, 80),
+        )
+            .step(self => {
+                self.visible = Boolean(pageObj.selected?.is(mxnUiKeyItem));
+            }),
+        0,
+    );
 
     return pageObj;
 }
@@ -202,7 +213,7 @@ function objUiKeyItem(keyItemId: DataKeyItem.Id, count: Integer) {
         objFigureKeyItem(keyItemId),
         ...(count > 1 ? [objText.SmallDigits("" + count, { tint: 0x3775E8 }).anchored(1, 1).at(31, 31)] : []),
     )
-        .mixin(mxnUiPageElement, { tint: 0x3775E8 })
+        .mixin(mxnUiPageElement, { tint: 0x37B2E8 })
         .mixin(mxnUiKeyItem, keyItemId);
 }
 
@@ -221,8 +232,8 @@ function mxnUiEquipment(obj: DisplayObject, equipmentIdProvider: () => RpgEquipm
 }
 
 function objUiKeyItemInfo(selectedObjSupplier: () => DisplayObject | undefined) {
-    const descriptionObj = objText.Medium("", { align: "right", tint: 0x000000, maxWidth: 168 })
-        .anchored(1, 1)
+    const descriptionObj = objText.Medium("", { align: "left", tint: 0x000000, maxWidth: 168 })
+        .at(0, 24)
         .mixin(mxnTextTyped, () => {
             const uiKeyItemObj = selectedObjSupplier();
             return uiKeyItemObj?.is(mxnUiKeyItem)
@@ -231,8 +242,7 @@ function objUiKeyItemInfo(selectedObjSupplier: () => DisplayObject | undefined) 
         });
 
     const nameObj = objText.MediumBoldIrregular("", { align: "left", tint: 0x000000, maxWidth: 168 })
-        .at(-168, -24)
-        .anchored(0, 1)
+        .anchored(0, 0)
         .mixin(mxnTextTyped, () => {
             const uiKeyItemObj = selectedObjSupplier();
             return uiKeyItemObj?.is(mxnUiKeyItem)
@@ -240,5 +250,11 @@ function objUiKeyItemInfo(selectedObjSupplier: () => DisplayObject | undefined) 
                 : "";
         });
 
-    return container(descriptionObj, nameObj);
+    return container(
+        new Graphics().lineStyle({ join: LINE_JOIN.BEVEL, alignment: 1, width: 4, color: 0x808080 })
+            .beginFill(0x808080)
+            .drawRect(0, 0, 168, 48),
+        descriptionObj,
+        nameObj,
+    );
 }
