@@ -54,9 +54,8 @@ function objUiInventoryImpl() {
 
 function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     const uiEquipmentObjs = range(4).map(i =>
-        objUiEquipment(() => Rpg.character.equipment.loadout[i], "show_empty").at(i * 36, 0).mixin(
-            mxnUiPageElement,
-        )
+        objUiEquipment(() => Rpg.character.equipment.loadout[i], "show_empty").at(i * 36, 0)
+            .mixin(mxnUiPageElement)
             .mixin(mxnUiPageButton, {
                 onPress: () => {
                     routerObj.push(objUiEquipmentChoosePage(
@@ -68,6 +67,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
                     ));
                 },
             })
+            .mixin(mxnUiEquipment, () => Rpg.character.equipment.loadout[i])
     );
 
     const uiKeyItemObjs = createObjUiKeyItems();
@@ -76,8 +76,13 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80).show(pageObj);
     objUiEquipmentBuffs(Rpg.character.equipment.loadout)
         .step(self => {
-            self.visible = pageObj.selectionIndex < 4;
-            self.controls.focusBuffsSource = Rpg.character.equipment.loadout[pageObj.selectionIndex];
+            if (pageObj.selected?.is(mxnUiEquipment)) {
+                self.visible = true;
+                self.controls.focusBuffsSource = pageObj.selected.mxnUiEquipment.equipmentId;
+            }
+            else {
+                self.visible = false;
+            }
         })
         .at(74, 46)
         .show(pageObj);
@@ -100,9 +105,7 @@ function objUiEquipmentChoosePage(
     const availableLoadoutItems = [...Rpg.character.equipment.list, null];
     const uiEquipmentObjs = availableLoadoutItems.map((equipment, i) => {
         const obj = objUiEquipment(() => equipment?.name ?? null, "show_empty").at((i % 8) * 36, Math.floor(i / 8) * 36)
-            .mixin(
-                mxnUiPageElement,
-            )
+            .mixin(mxnUiPageElement)
             .mixin(mxnUiPageButton, {
                 onPress: () => onChoose(equipment),
                 onJustSelected: () => previewEquipment.equip(equipment?.id ?? null, loadoutIndex),
@@ -205,6 +208,16 @@ function objUiKeyItem(keyItemId: DataKeyItem.Id, count: Integer) {
 
 function mxnUiKeyItem(obj: DisplayObject, keyItemId: DataKeyItem.Id) {
     return obj.merge({ mxnUiKeyItem: { keyItemId } });
+}
+
+function mxnUiEquipment(obj: DisplayObject, equipmentIdProvider: () => RpgEquipmentLoadout.Item) {
+    return obj.merge({
+        mxnUiEquipment: {
+            get equipmentId() {
+                return equipmentIdProvider();
+            },
+        },
+    });
 }
 
 function objUiKeyItemInfo(selectedObjSupplier: () => DisplayObject | undefined) {
