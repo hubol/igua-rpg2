@@ -69,7 +69,8 @@ export function objHud() {
                 healthBarObj.visible = !isShopping;
                 statusObjsContainer.visible = !isShopping;
             }
-            healthBarObj.width = RpgPlayer.status.healthMax;
+            healthBarObj.maxValue = approachLinear(healthBarObj.maxValue, RpgPlayer.status.healthMax, 1);
+            healthBarObj.width = healthBarObj.maxValue;
             let y = 7;
             let lastVisibleObj: Container = healthBarObj;
             for (const statusObj of statusObjs) {
