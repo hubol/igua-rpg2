@@ -105,13 +105,27 @@ export const RpgPlayer = {
     meleeAttack: RpgAttack.create({
         conditions: {
             get poison() {
-                return Rpg.character.buffs.combat.melee.conditions.poison;
+                try {
+                    return Rpg.character.buffs.combat.melee.conditions.poison;
+                }
+                catch (e) {
+                    // TODO THIS IS A VERY BAD HACK!!!! FIX ASAP!!!!!!!!!!!!!
+                    // RpgPlayer must no longer be a global dude!!!
+                    return 0;
+                }
             },
         },
         emotional: 0,
         get physical() {
-            return 4 + Rpg.character.attributes.strength * 3
-                + Rpg.character.buffs.combat.melee.attack.physical;
+            try {
+                return 4 + Rpg.character.attributes.strength * 3
+                    + Rpg.character.buffs.combat.melee.attack.physical;
+            }
+            catch (e) {
+                // TODO THIS IS A VERY BAD HACK!!!! FIX ASAP!!!!!!!!!!!!!
+                // RpgPlayer must no longer be a global dude!!!
+                return 1;
+            }
         },
         versus: RpgFaction.Enemy,
         quirks: {
@@ -121,13 +135,27 @@ export const RpgPlayer = {
     meleeClawAttack: RpgAttack.create({
         conditions: {
             get poison() {
-                return Rpg.character.buffs.combat.melee.conditions.poison;
+                try {
+                    return Rpg.character.buffs.combat.melee.conditions.poison;
+                }
+                catch (e) {
+                    // TODO THIS IS A VERY BAD HACK!!!! FIX ASAP!!!!!!!!!!!!!
+                    // RpgPlayer must no longer be a global dude!!!
+                    return 0;
+                }
             },
         },
         emotional: 0,
         get physical() {
-            return 5 + Rpg.character.attributes.strength * 5
-                + Rpg.character.buffs.combat.melee.clawAttack.physical;
+            try {
+                return 5 + Rpg.character.attributes.strength * 5
+                    + Rpg.character.buffs.combat.melee.clawAttack.physical;
+            }
+            catch (e) {
+                // TODO THIS IS A VERY BAD HACK!!!! FIX ASAP!!!!!!!!!!!!!
+                // RpgPlayer must no longer be a global dude!!!
+                return 1;
+            }
         },
         versus: RpgFaction.Enemy,
         quirks: {

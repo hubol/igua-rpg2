@@ -8,6 +8,7 @@ import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPocket } from "./rpg-pocket";
+import { RpgPotions } from "./rpg-potions";
 import { getInitialRpgProgress, RpgProgressData } from "./rpg-progress";
 import { RpgQuests } from "./rpg-quests";
 import { RpgShops } from "./rpg-shops";
@@ -23,7 +24,9 @@ function createRpg(data: RpgProgressData) {
             ...programmaticFlags
         },
     } = data;
-    const { character: { inventory: { pocket: pocketState, keyItems: keyItemsState, ...inventory } } } = data;
+    const {
+        character: { inventory: { pocket: pocketState, keyItems: keyItemsState, potions: potionsState, ...inventory } },
+    } = data;
 
     const experience = new RpgExperience(data.character.experience);
     const equipment = new RpgCharacterEquipment(data.character.inventory.equipment);
@@ -31,6 +34,7 @@ function createRpg(data: RpgProgressData) {
     const idols = new RpgIdols(idolsState);
     const quests = new RpgQuests(data.character.quests, experience);
     const pocket = new RpgPocket(pocketState, experience);
+    const potions = new RpgPotions(potionsState);
     const keyItems = new RpgKeyItems(keyItemsState);
     const shops = new RpgShops(shopsState);
     const stashPockets = new RpgStashPockets(stashPocketsState, pocket);
@@ -72,6 +76,7 @@ function createRpg(data: RpgProgressData) {
         inventory: {
             keyItems,
             pocket,
+            potions,
         },
         programmaticFlags,
         quest(questId: DataQuest.Id) {

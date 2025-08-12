@@ -12,6 +12,7 @@ import { RpgIdols } from "./rpg-idols";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPocket } from "./rpg-pocket";
+import { RpgPotions } from "./rpg-potions";
 import { RpgQuests } from "./rpg-quests";
 import { RpgShops } from "./rpg-shops";
 import { RpgStashPockets } from "./rpg-stash-pockets";
@@ -26,6 +27,7 @@ export function getInitialRpgProgress() {
                 valuables: 100,
                 keyItems: RpgKeyItems.createState(),
                 pocket: RpgPocket.createState(),
+                potions: RpgPotions.createState(),
             },
             status: {
                 health: 50,
