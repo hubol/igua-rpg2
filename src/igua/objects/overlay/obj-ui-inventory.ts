@@ -73,32 +73,49 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     const uiKeyItemObjs = createObjUiKeyItems();
 
     const pageObj = objUiPage([...uiEquipmentObjs, ...uiKeyItemObjs], { selectionIndex: 0 }).at(180, 100);
+
+    function isSelected(fn: typeof mxnUiEquipment | typeof mxnUiKeyItem) {
+        return Boolean(pageObj.selected?.is(fn));
+    }
+
     // Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80).show(pageObj);
     pageObj.addChildAt(
         container(
-            Sprite.from(Tx.Ui.Inventory.BackgroundEquipment).at(-7, -26),
+            Sprite.from(Tx.Ui.Inventory.BackgroundEquipment)
+                .step(self =>
+                    self.texture = isSelected(mxnUiEquipment)
+                        ? Tx.Ui.Inventory.BackgroundEquipment
+                        : Tx.Ui.Inventory.BackgroundUnselectedEquipment
+                )
+                .at(-7, -26),
             objUiEquipmentBuffs(Rpg.character.equipment.loadout)
                 .step(self => {
                     if (pageObj.selected?.is(mxnUiEquipment)) {
                         self.controls.focusBuffsSource = pageObj.selected.mxnUiEquipment.equipmentId;
+                        self.visible = true;
+                    }
+                    else {
+                        self.visible = false;
                     }
                 })
                 .at(74, 46),
-        )
-            .step(self => {
-                self.visible = Boolean(pageObj.selected?.is(mxnUiEquipment));
-            }),
+        ),
         0,
     );
 
     pageObj.addChildAt(
         container(
-            Sprite.from(Tx.Ui.Inventory.BackgroundKeyItem).at(-180, -26),
-            objUiKeyItemInfo(() => pageObj.selected).at(0, 80),
-        )
-            .step(self => {
-                self.visible = Boolean(pageObj.selected?.is(mxnUiKeyItem));
-            }),
+            Sprite.from(Tx.Ui.Inventory.BackgroundKeyItem)
+                .step(self =>
+                    self.texture = isSelected(mxnUiKeyItem)
+                        ? Tx.Ui.Inventory.BackgroundKeyItem
+                        : Tx.Ui.Inventory.BackgroundUnselectedKeyItem
+                )
+                .at(-180, -26),
+            objUiKeyItemInfo(() => pageObj.selected)
+                .step(self => self.visible = isSelected(mxnUiKeyItem))
+                .at(0, 80),
+        ),
         0,
     );
 
