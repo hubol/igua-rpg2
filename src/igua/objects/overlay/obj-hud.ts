@@ -201,14 +201,14 @@ function objExperienceIndicator() {
         objExperienceIndicatorDelta(config)
             .invisible()
             .coro(function* (self) {
-                let value = Rpg.character.experience[experienceKey];
+                let value = Rpg.experience[experienceKey];
                 while (true) {
-                    yield () => Rpg.character.experience[experienceKey] != value;
+                    yield () => Rpg.experience[experienceKey] != value;
                     self.visible = true;
                     self.state.total = value;
-                    let nextValue = Rpg.character.experience[experienceKey];
+                    let nextValue = Rpg.experience[experienceKey];
                     yield holdf(() => {
-                        const latestValue = Rpg.character.experience[experienceKey];
+                        const latestValue = Rpg.experience[experienceKey];
                         self.state.delta = latestValue - value;
                         if (latestValue !== nextValue) {
                             nextValue = latestValue;
@@ -221,7 +221,7 @@ function objExperienceIndicator() {
                     self.state.total = value;
                     self.state.delta = 0;
                     yield* Coro.race([
-                        () => Rpg.character.experience[experienceKey] != value,
+                        () => Rpg.experience[experienceKey] != value,
                         sleepf(120),
                     ]);
                     self.visible = false;
@@ -231,7 +231,7 @@ function objExperienceIndicator() {
 
     function updateWeights() {
         for (let i = 0; i < experienceIndicatorConfigsArray.length; i++) {
-            weights[i].value = Rpg.character.experience[experienceIndicatorConfigsArray[i].experienceKey];
+            weights[i].value = Rpg.experience[experienceIndicatorConfigsArray[i].experienceKey];
         }
     }
 
