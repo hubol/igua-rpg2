@@ -43,7 +43,7 @@ function createRpg(data: RpgProgressData) {
     const stashPockets = new RpgStashPockets(stashPocketsState, pocket);
     const attributes = new RpgPlayerAttributes(data.character.attributes, buffs);
     const status = new RpgPlayerStatus(data.character.status, attributes, buffs);
-    const player = new RpgPlayer(attributes, buffs, status);
+    const player = new RpgPlayer(data.character, attributes, buffs, status);
 
     return {
         // TODO rename to player
@@ -55,15 +55,6 @@ function createRpg(data: RpgProgressData) {
                     return data.character.experience;
                 },
                 inventory,
-                get looks() {
-                    return data.character.looks;
-                },
-                set looks(value) {
-                    data.character.looks = value;
-                },
-                get position() {
-                    return data.character.position;
-                },
             } as const,
         ),
         experience,

@@ -9,6 +9,7 @@ import { RpgExperience } from "./rpg-experience";
 import { RpgFlops } from "./rpg-flops";
 import { RpgIdols } from "./rpg-idols";
 import { RpgKeyItems } from "./rpg-key-items";
+import { RpgPlayer } from "./rpg-player";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPlayerStatus } from "./rpg-player-status";
 import { RpgPocket } from "./rpg-pocket";
@@ -31,13 +32,8 @@ export function getInitialRpgProgress() {
             status: RpgPlayerStatus.createState(),
             attributes: RpgPlayerAttributes.createState(),
             experience: RpgExperience.createState(),
-            looks: getDefaultLooks(),
-            position: {
-                facing: 1 as Polar,
-                sceneName: "",
-                checkpointName: "",
-            },
             quests: RpgQuests.createState(),
+            ...RpgPlayer.createState(),
         },
         flags: {
             newBalltown: {

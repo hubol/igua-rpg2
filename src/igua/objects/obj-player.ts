@@ -13,7 +13,6 @@ import { MxnRpgStatus, mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { Rpg } from "../rpg/rpg";
 import { RpgFaction } from "../rpg/rpg-faction";
-import { RpgPlayer } from "../rpg/rpg-player";
 import { RpgStatus } from "../rpg/rpg-status";
 import { objFxPlayerJumpComboDust } from "./effects/obj-fx-player-jump-combo-dust";
 import { CtxGate } from "./obj-gate";

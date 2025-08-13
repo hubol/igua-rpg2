@@ -1,3 +1,6 @@
+import { PolarInt } from "../../lib/math/number-alias-types";
+import { getDefaultLooks } from "../iguana/get-default-looks";
+import { IguanaLooks } from "../iguana/looks";
 import { RpgAttack } from "./rpg-attack";
 import { RpgFaction } from "./rpg-faction";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
@@ -6,6 +9,7 @@ import { RpgPlayerStatus } from "./rpg-player-status";
 
 export class RpgPlayer {
     constructor(
+        private readonly _state: RpgPlayer.State,
         readonly attributes: RpgPlayerAttributes,
         private readonly _buffs: RpgPlayerAggregatedBuffs,
         readonly status: RpgPlayerStatus,
@@ -69,10 +73,40 @@ export class RpgPlayer {
             },
         });
     })();
+
+    get looks() {
+        return this._state.looks;
+    }
+
+    set looks(value) {
+        this._state.looks = value;
+    }
+
+    get position() {
+        return this._state.position;
+    }
+
+    static createState(): RpgPlayer.State {
+        return {
+            looks: getDefaultLooks(),
+            position: {
+                facing: 1,
+                checkpointName: "",
+                sceneName: "",
+            },
+        };
+    }
 }
 
 export module RpgPlayer {
     export interface State {
-        // TODO
+        looks: IguanaLooks.Serializable;
+        position: Position;
+    }
+
+    interface Position {
+        facing: PolarInt;
+        sceneName: string;
+        checkpointName: string;
     }
 }

@@ -20,7 +20,6 @@ import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { CtxInteract } from "../../mixins/mxn-interact";
 import { Rpg } from "../../rpg/rpg";
 import { RpgExperience } from "../../rpg/rpg-experience";
-import { RpgPlayer } from "../../rpg/rpg-player";
 import { RpgSceneIdol } from "../../rpg/rpg-player-aggregated-buffs";
 import { playerObj } from "../obj-player";
 import { StepOrder } from "../step-order";
