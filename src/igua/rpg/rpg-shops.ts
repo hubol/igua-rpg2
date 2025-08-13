@@ -1,13 +1,17 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { ForceAliasType } from "../../lib/types/force-alias-type";
 import { DataShop } from "../data/data-shop";
-import { Rpg } from "./rpg";
+import { RpgInventory } from "./rpg-inventory";
 import { RpgPlayerWallet } from "./rpg-player-wallet";
 
 export class RpgShops {
     private readonly _cache: Partial<Record<DataShop.Id, RpgShop>> = {};
 
-    constructor(private readonly _state: RpgShops.State, private readonly _wallet: RpgPlayerWallet) {
+    constructor(
+        private readonly _state: RpgShops.State,
+        private readonly _wallet: RpgPlayerWallet,
+        private readonly _inventory: RpgInventory,
+    ) {
     }
 
     getById(shopId: DataShop.Id) {
@@ -18,7 +22,7 @@ export class RpgShops {
         }
 
         const shopState = this._state[shopId] ?? (this._state[shopId] = RpgShop.createState());
-        return this._cache[shopId] = new RpgShop(shopState, DataShop.getById(shopId), this._wallet);
+        return this._cache[shopId] = new RpgShop(shopState, DataShop.getById(shopId), this._wallet, this._inventory);
     }
 
     static createState(): RpgShops.State {
@@ -37,9 +41,10 @@ export class RpgShop {
         private readonly _state: RpgShop.State,
         private readonly _data: DataShop.Model,
         private readonly _wallet: RpgPlayerWallet,
+        private readonly _inventory: RpgInventory,
     ) {
         this.stocks = StockKey.createStockKeys(this._data.stocks).map(({ key, stock }) =>
-            new RpgStock(this._state, key, stock, this._wallet)
+            new RpgStock(this._state, key, stock, this._wallet, this._inventory)
         );
     }
 
@@ -62,6 +67,7 @@ export class RpgStock {
         private readonly _key: StockKey.Model,
         private readonly _data: DataShop.Stock,
         private readonly _wallet: RpgPlayerWallet,
+        private readonly _inventory: RpgInventory,
     ) {
     }
 
@@ -109,7 +115,7 @@ export class RpgStock {
         this._wallet.spend(this.currency, this.price);
 
         this._increaseSoldCount();
-        deliverProduct(this.product);
+        this._inventory.receive(this.product);
 
         // Caller can decide to animate this I guess
         return this.product;
@@ -151,19 +157,4 @@ namespace StockKey {
     }
 
     export type Model = ForceAliasType<string>;
-}
-
-// TODO belongs somewhere else, I think
-function deliverProduct(product: DataShop.Product) {
-    switch (product.kind) {
-        case "equipment":
-            Rpg.inventory.equipment.receive(product.equipmentId);
-            return;
-        case "key_item":
-            Rpg.inventory.keyItems.receive(product.keyItemId);
-            return;
-        case "potion":
-            // TODO
-            return;
-    }
 }

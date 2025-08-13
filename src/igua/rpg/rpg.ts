@@ -1,11 +1,11 @@
 import { Integer } from "../../lib/math/number-alias-types";
-import { merge } from "../../lib/object/merge";
 import { DataQuest } from "../data/data-quest";
 import { DataShop } from "../data/data-shop";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgExperience } from "./rpg-experience";
 import { RpgFlops } from "./rpg-flops";
 import { RpgIdols } from "./rpg-idols";
+import { RpgInventory } from "./rpg-inventory";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayer } from "./rpg-player";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
@@ -43,8 +43,9 @@ function createRpg(data: RpgProgressData) {
     const status = new RpgPlayerStatus(data.character.status, attributes, buffs);
     const player = new RpgPlayer(data.character, attributes, buffs, status);
     const flops = new RpgFlops(data.character.inventory.flops);
+    const inventory = new RpgInventory(equipment, flops, keyItems, pocket, potions);
     const wallet = new RpgPlayerWallet(data.character.wallet, experience);
-    const shops = new RpgShops(shopsState, wallet);
+    const shops = new RpgShops(shopsState, wallet, inventory);
 
     return {
         // TODO rename to player
@@ -56,13 +57,7 @@ function createRpg(data: RpgProgressData) {
         idol(idolId: Integer) {
             return idols.getById(idolId);
         },
-        inventory: {
-            equipment,
-            flops,
-            keyItems,
-            pocket,
-            potions,
-        },
+        inventory,
         programmaticFlags,
         quest(questId: DataQuest.Id) {
             return quests.getById(questId);
