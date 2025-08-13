@@ -38,8 +38,8 @@ export namespace DataPotion {
                 use: () =>
                     // TODO because of questionable decisions, I think this will not produce the delta animation
                     Rpg.character.status.health = Math.min(
-                        RpgPlayer.status.health + Math.ceil(RpgPlayer.status.healthMax / 3),
-                        RpgPlayer.status.healthMax,
+                        Rpg.character.status.health + Math.ceil(Rpg.character.status.healthMax / 3),
+                        Rpg.character.status.healthMax,
                     ),
             },
             Poison: {

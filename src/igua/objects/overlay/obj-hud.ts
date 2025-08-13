@@ -35,10 +35,10 @@ const Consts = {
 
 export function objHud() {
     const healthBarObj = objHealthBar(
-        RpgPlayer.status.healthMax,
+        Rpg.character.status.healthMax,
         9,
-        RpgPlayer.status.health,
-        RpgPlayer.status.healthMax,
+        Rpg.character.status.health,
+        Rpg.character.status.healthMax,
     );
     const valuablesInfoObj = objValuablesInfo();
     const poisonBuildUpObj = objPoisonBuildUp();
@@ -69,7 +69,7 @@ export function objHud() {
                 healthBarObj.visible = !isShopping;
                 statusObjsContainer.visible = !isShopping;
             }
-            healthBarObj.maxValue = approachLinear(healthBarObj.maxValue, RpgPlayer.status.healthMax, 1);
+            healthBarObj.maxValue = approachLinear(healthBarObj.maxValue, Rpg.character.status.healthMax, 1);
             healthBarObj.width = healthBarObj.maxValue;
             let y = 7;
             let lastVisibleObj: Container = healthBarObj;
@@ -352,7 +352,7 @@ function objPoisonLevel() {
     return objText.MediumIrregular("You are poisoned", { tint: Consts.StatusTextTint })
         .merge({ advance: -3 })
         .step(text => {
-            const level = RpgPlayer.status.conditions.poison.level;
+            const level = Rpg.character.status.conditions.poison.level;
             text.visible = level > 0;
             if (text.visible) {
                 text.text = level > 1 ? ("You are poisoned x" + level) : "You are poisoned";
@@ -392,13 +392,13 @@ interface ObjBuildUpArgs {
 }
 
 function objBuildUp({ message, conditionsKey }: ObjBuildUpArgs) {
-    let value = RpgPlayer.status.conditions[conditionsKey].value;
+    let value = Rpg.character.status.conditions[conditionsKey].value;
     const text = objText.MediumIrregular(message, { tint: Consts.StatusTextTint });
     const bar = objStatusBar({
         height: 1,
         width: 85,
         value,
-        maxValue: RpgPlayer.status.conditions[conditionsKey].max,
+        maxValue: Rpg.character.status.conditions[conditionsKey].max,
         tintBack: 0x003000,
         tintFront: 0x008000,
         increases: [{ tintBar: 0x00ff00 }],
@@ -409,7 +409,7 @@ function objBuildUp({ message, conditionsKey }: ObjBuildUpArgs) {
 
     return container(bar, text)
         .step(self => {
-            const nextValue = RpgPlayer.status.conditions[conditionsKey].value;
+            const nextValue = Rpg.character.status.conditions[conditionsKey].value;
             if (nextValue > value) {
                 bar.increase(nextValue, nextValue - value, 0);
             }

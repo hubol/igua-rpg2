@@ -1,6 +1,5 @@
 import { Integer, Polar } from "../../lib/math/number-alias-types";
 import { DeepKeyOf } from "../../lib/types/deep-keyof";
-import { Empty } from "../../lib/types/empty";
 import { Null } from "../../lib/types/null";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { getDefaultLooks } from "../iguana/get-default-looks";
@@ -11,12 +10,12 @@ import { RpgFlops } from "./rpg-flops";
 import { RpgIdols } from "./rpg-idols";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
+import { RpgPlayerStatus } from "./rpg-player-status";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgPotions } from "./rpg-potions";
 import { RpgQuests } from "./rpg-quests";
 import { RpgShops } from "./rpg-shops";
 import { RpgStashPockets } from "./rpg-stash-pockets";
-import { RpgStatus } from "./rpg-status";
 
 export function getInitialRpgProgress() {
     return {
@@ -29,24 +28,7 @@ export function getInitialRpgProgress() {
                 pocket: RpgPocket.createState(),
                 potions: RpgPotions.createState(),
             },
-            status: {
-                health: 50,
-                invulnverable: 0,
-                conditions: {
-                    helium: {
-                        value: 0,
-                        ballons: Empty<RpgStatus.Ballon>(),
-                    },
-                    poison: {
-                        level: 0,
-                        value: 0,
-                    },
-                    wetness: {
-                        tint: 0xffffff,
-                        value: 0,
-                    },
-                },
-            },
+            status: RpgPlayerStatus.createState(),
             attributes: RpgPlayerAttributes.createState(),
             experience: RpgExperience.createState(),
             looks: getDefaultLooks(),

@@ -6,7 +6,6 @@ import { sceneStack, startAnimator } from "../globals";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { setRpgProgressData } from "../rpg/rpg";
-import { RpgPlayer } from "../rpg/rpg-player";
 import { RpgProgressData } from "../rpg/rpg-progress";
 
 export function startGame() {
@@ -14,7 +13,7 @@ export function startGame() {
 
     if (config.progress) {
         setRpgProgressData(config.progress);
-        Rpg.character.status.health = RpgPlayer.status.healthMax;
+        Rpg.character.status.health = Rpg.character.status.healthMax;
     }
 
     Rpg.character.position.sceneName = config.sceneName;

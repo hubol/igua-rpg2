@@ -1,166 +1,78 @@
-import { Rpg } from "./rpg";
 import { RpgAttack } from "./rpg-attack";
 import { RpgFaction } from "./rpg-faction";
-import { RpgStatus } from "./rpg-status";
+import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
+import { RpgPlayerAttributes } from "./rpg-player-attributes";
+import { RpgPlayerStatus } from "./rpg-player-status";
 
-export const RpgPlayer = {
-    status: {
-        get health() {
-            return Rpg.character.status.health;
-        },
-        set health(value) {
-            Rpg.character.status.health = value;
-        },
-        get invulnerable() {
-            return Rpg.character.status.invulnverable;
-        },
-        set invulnerable(value) {
-            Rpg.character.status.invulnverable = value;
-        },
-        invulnerableMax: 60,
-        get healthMax() {
-            return 45 + Rpg.character.attributes.health * 5;
-        },
-        pride: 0,
-        conditions: {
-            helium: {
-                get ballons() {
-                    return Rpg.character.status.conditions.helium.ballons;
-                },
-                get value() {
-                    return Rpg.character.status.conditions.helium.value;
-                },
-                set value(value) {
-                    Rpg.character.status.conditions.helium.value = value;
-                },
-                max: 100,
+export class RpgPlayer {
+    constructor(
+        readonly attributes: RpgPlayerAttributes,
+        private readonly _buffs: RpgPlayerAggregatedBuffs,
+        readonly status: RpgPlayerStatus,
+    ) {
+    }
+
+    get buffs() {
+        return this._buffs.getAggregatedBuffs();
+    }
+
+    readonly motion = (() => {
+        const player = this;
+
+        return {
+            // TODO some of these "motion" modifications are computed in objPlayer. Pick a place!
+            get bouncingMinSpeed() {
+                return Math.min(4, 2.5 + player.status.conditions.poison.level * 0.25);
             },
-            poison: {
-                immune: false,
-                max: 100,
-                get level() {
-                    return Rpg.character.status.conditions.poison.level;
-                },
-                set level(value) {
-                    Rpg.character.status.conditions.poison.level = value;
-                },
-                get value() {
-                    return Rpg.character.status.conditions.poison.value;
-                },
-                set value(value) {
-                    Rpg.character.status.conditions.poison.value = value;
+        };
+    })();
+
+    readonly meleeAttack = (() => {
+        const player = this;
+
+        return RpgAttack.create({
+            conditions: {
+                get poison() {
+                    return player.buffs.combat.melee.conditions.poison;
                 },
             },
-            wetness: {
-                get tint() {
-                    return Rpg.character.status.conditions.wetness.tint;
-                },
-                set tint(value) {
-                    Rpg.character.status.conditions.wetness.tint = value;
-                },
-                get value() {
-                    return Rpg.character.status.conditions.wetness.value;
-                },
-                set value(value) {
-                    Rpg.character.status.conditions.wetness.value = value;
-                },
-                max: 100,
+            emotional: 0,
+            get physical() {
+                return 4 + player.attributes.strength * 3
+                    + player.buffs.combat.melee.attack.physical;
             },
-        },
-        guardingDefenses: {
-            physical: 20,
-        },
-        defenses: {
-            physical: 0,
-        },
-        factionDefenses: {
-            [RpgFaction.Anyone]: 0,
-            [RpgFaction.Enemy]: 0,
-            [RpgFaction.Player]: 100,
-            get [RpgFaction.Miner]() {
-                return Rpg.character.buffs.combat.defense.faction.miner;
+            versus: RpgFaction.Enemy,
+            quirks: {
+                isPlayerMeleeAttack: true,
             },
-        },
-        recoveries: {
-            wetness: 1,
-        },
-        faction: RpgFaction.Player,
-        quirks: {
-            emotionalDamageIsFatal: true,
-            incrementsAttackerPrideOnDamage: true,
-            roundReceivedDamageUp: false,
-            guardedDamageIsFatal: false,
-            ailmentsRecoverWhileCutsceneIsPlaying: false,
-            receivesDamageWhileCutsceneIsPlaying: false,
-            attackingRewardsExperience: true,
-            isImmuneToPlayerMeleeAttack: true,
-        },
-    } satisfies Omit<RpgStatus.Model, "state">,
-    motion: {
-        // TODO some of these "motion" modifications are computed in objPlayer. Pick a place!
-        get bouncingMinSpeed() {
-            return Math.min(4, 2.5 + Rpg.character.status.conditions.poison.level * 0.25);
-        },
-    },
-    meleeAttack: RpgAttack.create({
-        conditions: {
-            get poison() {
-                try {
-                    return Rpg.character.buffs.combat.melee.conditions.poison;
-                }
-                catch (e) {
-                    // TODO THIS IS A VERY BAD HACK!!!! FIX ASAP!!!!!!!!!!!!!
-                    // RpgPlayer must no longer be a global dude!!!
-                    return 0;
-                }
+        });
+    })();
+
+    readonly meleeClawAttack = (() => {
+        const player = this;
+
+        return RpgAttack.create({
+            conditions: {
+                get poison() {
+                    return player.buffs.combat.melee.conditions.poison;
+                },
             },
-        },
-        emotional: 0,
-        get physical() {
-            try {
-                return 4 + Rpg.character.attributes.strength * 3
-                    + Rpg.character.buffs.combat.melee.attack.physical;
-            }
-            catch (e) {
-                // TODO THIS IS A VERY BAD HACK!!!! FIX ASAP!!!!!!!!!!!!!
-                // RpgPlayer must no longer be a global dude!!!
-                return 1;
-            }
-        },
-        versus: RpgFaction.Enemy,
-        quirks: {
-            isPlayerMeleeAttack: true,
-        },
-    }),
-    meleeClawAttack: RpgAttack.create({
-        conditions: {
-            get poison() {
-                try {
-                    return Rpg.character.buffs.combat.melee.conditions.poison;
-                }
-                catch (e) {
-                    // TODO THIS IS A VERY BAD HACK!!!! FIX ASAP!!!!!!!!!!!!!
-                    // RpgPlayer must no longer be a global dude!!!
-                    return 0;
-                }
+            emotional: 0,
+            get physical() {
+                return 5 + player.attributes.strength * 5
+                    + player.buffs.combat.melee.clawAttack.physical;
             },
-        },
-        emotional: 0,
-        get physical() {
-            try {
-                return 5 + Rpg.character.attributes.strength * 5
-                    + Rpg.character.buffs.combat.melee.clawAttack.physical;
-            }
-            catch (e) {
-                // TODO THIS IS A VERY BAD HACK!!!! FIX ASAP!!!!!!!!!!!!!
-                // RpgPlayer must no longer be a global dude!!!
-                return 1;
-            }
-        },
-        versus: RpgFaction.Enemy,
-        quirks: {
-            // TODO should it have both player melee quirks?
-            isPlayerClawMeleeAttack: true,
-        },
-    }),
-};
+            versus: RpgFaction.Enemy,
+            quirks: {
+                // TODO should it have both player melee quirks?
+                isPlayerClawMeleeAttack: true,
+            },
+        });
+    })();
+}
+
+export module RpgPlayer {
+    export interface State {
+        // TODO
+    }
+}

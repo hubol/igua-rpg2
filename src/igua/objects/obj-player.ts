@@ -68,7 +68,7 @@ const filterSpecialSignObjs = (obj: ObjSign) => obj.isSpecial;
 function objPlayer(looks: IguanaLooks.Serializable) {
     const iguanaLocomotiveObj = objIguanaLocomotive(looks);
 
-    iguanaLocomotiveObj.mxnBallonable.setInitialBallons(RpgPlayer.status.conditions.helium.ballons);
+    iguanaLocomotiveObj.mxnBallonable.setInitialBallons(Rpg.character.status.conditions.helium.ballons);
 
     const died = () => {};
 
@@ -78,10 +78,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
         layers.overlay.hud.healthBarObj.effects,
     );
 
-    const status: RpgStatus.Model = merge(
-        { state: { ballonHealthMayDrain: false, isGuarding: false } satisfies RpgStatus.Model["state"] },
-        RpgPlayer.status,
-    );
+    const status = Rpg.character.status;
 
     let stepsSinceOffGround = 0;
     let stepsSinceJumpJustWentDown = 100;
@@ -232,7 +229,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 const hurtbox = puppet.collidesOne(instance.hurtboxes);
                 if (hurtbox) {
                     const collidedWithFeet = bounceIguanaOffObject(puppet, hurtbox);
-                    const attack = collidedWithFeet ? RpgPlayer.meleeClawAttack : RpgPlayer.meleeAttack;
+                    const attack = collidedWithFeet ? Rpg.character.meleeClawAttack : Rpg.character.meleeAttack;
                     const result = instance.damage(attack, status);
                 }
             }
@@ -263,7 +260,7 @@ const bounceIguanaOffObject = function () {
 
         vforce.at(pushx, pushy).normalize();
 
-        const length = RpgPlayer.motion.bouncingMinSpeed;
+        const length = Rpg.character.motion.bouncingMinSpeed;
         iguana.speed.at(vforce).scale(length);
 
         let iter = 0;
