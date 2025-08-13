@@ -30,7 +30,7 @@ export function objUiEquipmentBuffs(
 
                 if (controls.focusBuffsSource) {
                     RpgEquipmentLoadout.getPlayerBuffs(
-                        Rpg.character.equipment.loadout.map(name =>
+                        Rpg.inventory.equipment.loadout.map(name =>
                             name === controls.focusBuffsSource ? controls.focusBuffsSource : null
                         ) as RpgEquipmentLoadout.Model,
                         focusedBuffs,

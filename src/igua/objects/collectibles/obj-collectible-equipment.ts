@@ -13,7 +13,7 @@ export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
     return objFigureEquipment(equipmentId)
         .pivoted(16, 16)
         .mixin(mxnCollectible, { kind: "transient" })
-        .handles("collected", () => Rpg.character.equipment.receive(equipmentId))
+        .handles("collected", () => Rpg.inventory.equipment.receive(equipmentId))
         .merge({ collectable: false })
         .mixin(mxnPhysics, { gravity: 0.1, physicsRadius: 13 })
         .handles("moved", (self, event) => {

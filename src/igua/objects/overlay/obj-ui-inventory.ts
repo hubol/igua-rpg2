@@ -54,20 +54,20 @@ function objUiInventoryImpl() {
 
 function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     const uiEquipmentObjs = range(4).map(i =>
-        objUiEquipment(() => Rpg.character.equipment.loadout[i], "show_empty").at(i * 36, 0)
+        objUiEquipment(() => Rpg.inventory.equipment.loadout[i], "show_empty").at(i * 36, 0)
             .mixin(mxnUiPageElement, { tint: 0xE5BB00 })
             .mixin(mxnUiPageButton, {
                 onPress: () => {
                     routerObj.push(objUiEquipmentChoosePage(
                         i,
                         (equipment) => {
-                            Rpg.character.equipment.equip(equipment?.id ?? null, i);
+                            Rpg.inventory.equipment.equip(equipment?.id ?? null, i);
                             routerObj.pop();
                         },
                     ));
                 },
             })
-            .mixin(mxnUiEquipment, () => Rpg.character.equipment.loadout[i])
+            .mixin(mxnUiEquipment, () => Rpg.inventory.equipment.loadout[i])
     );
 
     const uiKeyItemObjs = createObjUiKeyItems();
@@ -88,7 +88,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
                         : Tx.Ui.Inventory.BackgroundUnselectedEquipment
                 )
                 .at(-7, -26),
-            objUiEquipmentBuffs(Rpg.character.equipment.loadout)
+            objUiEquipmentBuffs(Rpg.inventory.equipment.loadout)
                 .step(self => {
                     if (pageObj.selected?.is(mxnUiEquipment)) {
                         self.controls.focusBuffsSource = pageObj.selected.mxnUiEquipment.equipmentId;
@@ -128,9 +128,9 @@ function objUiEquipmentChoosePage(
     loadoutIndex: Integer,
     onChoose: (equipment: RpgCharacterEquipment.ObtainedEquipment | null) => void,
 ) {
-    const previewEquipment = new RpgCharacterEquipment.Preview(Rpg.character.equipment);
+    const previewEquipment = new RpgCharacterEquipment.Preview(Rpg.inventory.equipment);
 
-    const availableLoadoutItems = [...Rpg.character.equipment.list, null];
+    const availableLoadoutItems = [...Rpg.inventory.equipment.list, null];
     const uiEquipmentObjs = availableLoadoutItems.map((equipment, i) => {
         const obj = objUiEquipment(() => equipment?.name ?? null, "show_empty").at((i % 8) * 36, Math.floor(i / 8) * 36)
             .mixin(mxnUiPageElement)
@@ -157,12 +157,12 @@ function objUiEquipmentChoosePage(
     }).at(108, 100);
 
     objUiEquipmentBuffs(
-        Rpg.character.equipment.loadout,
+        Rpg.inventory.equipment.loadout,
     ).at(60, 46 + 30).show(pageObj);
 
     objUiEquipmentBuffsComparedTo(
         previewEquipment,
-        Rpg.character.equipment,
+        Rpg.inventory.equipment,
     ).at(284 - 60, 46 + 30).show(pageObj);
 
     objText.MediumBoldIrregular("", { tint: 0x00ff00 })

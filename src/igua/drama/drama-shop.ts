@@ -316,7 +316,7 @@ function getStockPlayerOwnedCount(stock: RpgStock): Integer {
         return 0;
     }
     else if (stock.product.kind === "equipment") {
-        return Rpg.character.equipment.count(stock.product.equipmentId);
+        return Rpg.inventory.equipment.count(stock.product.equipmentId);
     }
 
     return Rpg.inventory.keyItems.count(stock.product.keyItemId);

@@ -152,7 +152,7 @@ namespace StockKey {
 function deliverProduct(product: DataShop.Product) {
     switch (product.kind) {
         case "equipment":
-            Rpg.character.equipment.receive(product.equipmentId);
+            Rpg.inventory.equipment.receive(product.equipmentId);
             return;
         case "key_item":
             Rpg.inventory.keyItems.receive(product.keyItemId);

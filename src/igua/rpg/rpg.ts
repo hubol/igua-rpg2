@@ -50,7 +50,6 @@ function createRpg(data: RpgProgressData) {
         character: merge(
             player,
             {
-                equipment,
                 get experience() {
                     return data.character.experience;
                 },
@@ -66,6 +65,7 @@ function createRpg(data: RpgProgressData) {
         },
         // TODO put all inventory here:
         inventory: {
+            equipment,
             keyItems,
             pocket,
             potions,
