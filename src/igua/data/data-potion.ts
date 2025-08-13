@@ -1,6 +1,6 @@
 import { Texture } from "pixi.js";
+import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
-import { RpgPlayer } from "../rpg/rpg-player";
 import { DataLib } from "./data-lib";
 
 export namespace DataPotion {
@@ -35,12 +35,7 @@ export namespace DataPotion {
                 name: "Sweet Berry",
                 description: "",
                 texture: null,
-                use: () =>
-                    // TODO because of questionable decisions, I think this will not produce the delta animation
-                    Rpg.character.status.health = Math.min(
-                        Rpg.character.status.health + Math.ceil(Rpg.character.status.healthMax / 3),
-                        Rpg.character.status.healthMax,
-                    ),
+                use: () => playerObj.heal(Math.ceil(Rpg.character.status.healthMax / 3)),
             },
             Poison: {
                 name: "Poison",
