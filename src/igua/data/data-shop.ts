@@ -23,7 +23,7 @@ export namespace DataShop {
                     {
                         product: { kind: "equipment", equipmentId: "JumpAtSpecialSignsRing" },
                         initialQuantity: 2,
-                        price: { currency: { kind: "experience", experience: "jump" }, initial: 250, deltaSold: 500 },
+                        price: { currency: "jump", initial: 250, deltaSold: 500 },
                     },
                     {
                         product: { kind: "equipment", equipmentId: "RichesRing" },
@@ -33,7 +33,7 @@ export namespace DataShop {
                     {
                         product: { kind: "equipment", equipmentId: "YellowRichesRing" },
                         initialQuantity: 2,
-                        price: { currency: { experience: "combat", kind: "experience" }, deltaSold: 750, initial: 250 },
+                        price: { currency: "combat", deltaSold: 750, initial: 250 },
                     },
                 ],
             },
@@ -70,7 +70,7 @@ export namespace DataShop {
                     },
                     {
                         initialQuantity: 3,
-                        price: { currency: { kind: "experience", experience: "jump" }, initial: 100, deltaSold: 300 },
+                        price: { currency: "jump", initial: 100, deltaSold: 300 },
                         product: { kind: "equipment", equipmentId: "IqIndicator" },
                     },
                 ],
@@ -104,7 +104,7 @@ export namespace DataShop {
     export type Product = Product_Equipment | Product_KeyItem | Product_Potion;
 
     export interface Price {
-        currency: RpgEconomy.Currency.Model;
+        currency: RpgEconomy.Currency.Id;
         initial: Integer;
         deltaSold: Integer;
     }

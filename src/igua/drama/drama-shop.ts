@@ -166,7 +166,7 @@ function objDramaShopStock(
                 if (appliedStock.isSoldOut) {
                     objects.limitedQuantityObj.mxnErrorVibrate.methods.vibrate();
                 }
-                else if (RpgPlayerWallet.canAfford(appliedStock)) {
+                else if (Rpg.wallet.canAfford(appliedStock)) {
                     appliedStock.purchase();
                     refreshStocks();
                 }
@@ -323,7 +323,7 @@ function getStockPlayerOwnedCount(stock: RpgStock): Integer {
 }
 
 function objStockPrice(item: RpgStock) {
-    return objCurrencyAmount(item.price, item.currency, RpgPlayerWallet.canAfford(item));
+    return objCurrencyAmount(item.price, item.currency, Rpg.wallet.canAfford(item));
 }
 
 function objOwnedCount(count: Integer) {
@@ -347,25 +347,20 @@ function objOwnedCount(count: Integer) {
 
 // TODO this must be exhaustive
 // maybe a different approach
-const possibleCurrencies: RpgEconomy.Currency.Model[] = [
+const possibleCurrencies: RpgEconomy.Currency.Id[] = [
     "valuables",
     "mechanical_idol_credits",
-    ...experienceIndicatorConfigsArray.map(({ experienceKey }) => ({
-        kind: "experience" as const,
-        experience: experienceKey,
-    })),
+    ...experienceIndicatorConfigsArray.map(({ experienceKey }) => experienceKey),
 ];
 
 function objPlayerStatus(stocks: ReadonlyArray<RpgStock>) {
-    const currenciesInStocks = possibleCurrencies.filter(currency =>
-        stocks.some(item => RpgEconomy.Currency.equals(item.currency, currency))
-    );
+    const currenciesInStocks = possibleCurrencies.filter(currency => stocks.some(item => item.currency === currency));
     const currencyObjs = currenciesInStocks.reverse().map((currency, i) =>
-        objCurrencyAmount(RpgPlayerWallet.getHeldAmount(currency), currency, true)
+        objCurrencyAmount(Rpg.wallet.count(currency), currency, true)
             .merge({ currency })
             .mixin(mxnErrorVibrate)
             .at(i, renderer.height - 28 - i * 15)
-            .step(self => self.controls.amount = RpgPlayerWallet.getHeldAmount(currency))
+            .step(self => self.controls.amount = Rpg.wallet.count(currency))
     );
     const textsObj = container(
         objText.Large("You have...", { tint: CtxDramaShop.value.style.secondaryTint }).anchored(0.5, 1).at(
@@ -378,8 +373,8 @@ function objPlayerStatus(stocks: ReadonlyArray<RpgStock>) {
     const bounds = textsObj.getBounds();
 
     const methods = {
-        vibrate(currency: RpgEconomy.Currency.Model) {
-            currencyObjs.find(obj => RpgEconomy.Currency.equals(obj.currency, currency))?.mxnErrorVibrate?.methods
+        vibrate(currency: RpgEconomy.Currency.Id) {
+            currencyObjs.find(obj => obj.currency === currency)?.mxnErrorVibrate?.methods
                 ?.vibrate?.();
         },
     };
@@ -413,7 +408,7 @@ function objCurrencyAmount(amount: Integer, currency: RpgStock["currency"], isAf
             currencyTextObj.text = amount === 1 ? "credit" : "credits";
         }
         else {
-            currencyTextObj.text = `${currency.experience} XP`;
+            currencyTextObj.text = `${currency} XP`;
         }
     }
 
@@ -443,7 +438,7 @@ function objCurrencyAmount(amount: Integer, currency: RpgStock["currency"], isAf
         // TODO style
     }
     else {
-        const config = experienceIndicatorConfigs[currency.experience];
+        const config = experienceIndicatorConfigs[currency];
         const bounds = new Rectangle();
         const gfx = new Graphics()
             .tinted(config.tint)

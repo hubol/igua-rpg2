@@ -12,6 +12,7 @@ import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayer } from "./rpg-player";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPlayerStatus } from "./rpg-player-status";
+import { RpgPlayerWallet } from "./rpg-player-wallet";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgPotions } from "./rpg-potions";
 import { RpgQuests } from "./rpg-quests";
@@ -24,11 +25,11 @@ export function getInitialRpgProgress() {
             inventory: {
                 equipment: RpgCharacterEquipment.createState(),
                 flops: RpgFlops.createState(),
-                valuables: 100,
                 keyItems: RpgKeyItems.createState(),
                 pocket: RpgPocket.createState(),
                 potions: RpgPotions.createState(),
             },
+            wallet: RpgPlayerWallet.createState(),
             status: RpgPlayerStatus.createState(),
             attributes: RpgPlayerAttributes.createState(),
             experience: RpgExperience.createState(),
@@ -51,9 +52,6 @@ export function getInitialRpgProgress() {
                     deliveries: {
                         armorer: Null<"ready" | "arrived" | "delivered">(),
                     },
-                },
-                mechanicalIdol: {
-                    credits: 10,
                 },
             },
             outskirts: {

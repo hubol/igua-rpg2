@@ -14,7 +14,7 @@ import { ValuableChangeMaker } from "../systems/valuable-change-maker";
 function* rewardValuables(
     total: number,
     startPosition: VectorSimple,
-    incomeSource: RpgPlayerWallet.IncomeSource = "default",
+    reason: RpgPlayerWallet.EarnReason = "default",
 ) {
     const counts = ValuableChangeMaker.solveCounts(total);
     const currencyToSpawn = Rng.shuffle(
@@ -27,7 +27,7 @@ function* rewardValuables(
     let atThresholdCount = 0;
 
     for (const currency of currencyToSpawn) {
-        objValuable(currency, undefined, incomeSource).at(startPosition).scaled(0, 0).coro(moveTowardsPlayer).show();
+        objValuable(currency, undefined, reason).at(startPosition).scaled(0, 0).coro(moveTowardsPlayer).show();
         yield sleep(ms);
 
         if (atThresholdCount > 50) {

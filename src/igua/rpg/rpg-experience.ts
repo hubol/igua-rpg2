@@ -35,6 +35,10 @@ export class RpgExperience implements Readonly<RpgExperience.State> {
         return this._state.social;
     }
 
+    spend(experienceId: RpgExperience.Id, amount: Integer) {
+        this._state[experienceId] = Math.max(0, this._state[experienceId] - amount);
+    }
+
     static createState(): RpgExperience.State {
         return {
             combat: 0,

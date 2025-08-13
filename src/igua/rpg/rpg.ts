@@ -11,6 +11,7 @@ import { RpgPlayer } from "./rpg-player";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPlayerStatus } from "./rpg-player-status";
+import { RpgPlayerWallet } from "./rpg-player-wallet";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgPotions } from "./rpg-potions";
 import { getInitialRpgProgress, RpgProgressData } from "./rpg-progress";
@@ -28,45 +29,27 @@ function createRpg(data: RpgProgressData) {
             ...programmaticFlags
         },
     } = data;
-    const {
-        character: {
-            inventory: {
-                flops: flopsState,
-                pocket: pocketState,
-                keyItems: keyItemsState,
-                potions: potionsState,
-                ...inventory
-            },
-        },
-    } = data;
 
     const experience = new RpgExperience(data.character.experience);
     const equipment = new RpgCharacterEquipment(data.character.inventory.equipment);
     const buffs = new RpgPlayerAggregatedBuffs(equipment);
     const idols = new RpgIdols(idolsState);
     const quests = new RpgQuests(data.character.quests, experience);
-    const pocket = new RpgPocket(pocketState, experience);
-    const potions = new RpgPotions(potionsState);
-    const keyItems = new RpgKeyItems(keyItemsState);
-    const shops = new RpgShops(shopsState);
+    const pocket = new RpgPocket(data.character.inventory.pocket, experience);
+    const potions = new RpgPotions(data.character.inventory.potions);
+    const keyItems = new RpgKeyItems(data.character.inventory.keyItems);
     const stashPockets = new RpgStashPockets(stashPocketsState, pocket);
     const attributes = new RpgPlayerAttributes(data.character.attributes, buffs);
     const status = new RpgPlayerStatus(data.character.status, attributes, buffs);
     const player = new RpgPlayer(data.character, attributes, buffs, status);
-    const flops = new RpgFlops(flopsState);
+    const flops = new RpgFlops(data.character.inventory.flops);
+    const wallet = new RpgPlayerWallet(data.character.wallet, experience);
+    const shops = new RpgShops(shopsState, wallet);
 
     return {
         // TODO rename to player
-        character: merge(
-            player,
-            {
-                get experience() {
-                    return data.character.experience;
-                },
-                inventory,
-            } as const,
-        ),
-        experience,
+        character: player,
+        experience: experience as Omit<RpgExperience, "spend">,
         get flags() {
             return data.flags;
         },
@@ -90,6 +73,7 @@ function createRpg(data: RpgProgressData) {
         stashPocket(stashPocketId: Integer) {
             return stashPockets.getById(stashPocketId);
         },
+        wallet,
         __private__: {
             data,
         },

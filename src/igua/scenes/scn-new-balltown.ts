@@ -138,13 +138,13 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
             "The New Balltown committee recently ruled that gambling in the town square was OK depending on the vibes.",
         );
         if (yield* ask("Want to play a dice game?")) {
-            if (RpgPlayerWallet.hasNone("valuables")) {
+            if (Rpg.wallet.isEmpty("valuables")) {
                 yield* show("Oh... you don't have any valuables...", "Let's play when you find some!");
                 return;
             }
             const guess = yield* ask("What face of the die will land face-up?", "1", "2", "3", "4", "5", "6");
 
-            const availableRisks = getAvailableRisks(Rpg.character.inventory.valuables);
+            const availableRisks = getAvailableRisks(Rpg.wallet.count("valuables"));
 
             const risked = yield* ask(
                 `How many valuables would you like to risk? You'll win five times as many if the die lands on ${
@@ -163,7 +163,7 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
 
             yield* show(`Okay. I'll take your ${riskedValue === 1 ? "valuable" : "valuables"} now.`);
             // TODO sfx, vfx for take money
-            RpgPlayerWallet.spend("valuables", riskedValue, "gambling");
+            Rpg.wallet.spend("valuables", riskedValue, "gambling");
 
             yield sleep(500);
 
@@ -255,13 +255,13 @@ function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
                 Rpg.experience.reward.computer.onInteract("small_task");
                 yield* show("Access granted.");
                 yield* show(
-                    `Welcome master. You have ${Rpg.flags.newBalltown.mechanicalIdol.credits} credit(s).`,
+                    `Welcome master. You have ${Rpg.wallet.count("mechanical_idol_credits")} credit(s).`,
                 );
                 while (true) {
                     // TODO should there be an ask.append method?
                     // Or maybe show.appendAsk ?
                     const result = yield* ask(
-                        `Welcome master. You have ${Rpg.flags.newBalltown.mechanicalIdol.credits} credit(s).
+                        `Welcome master. You have ${Rpg.wallet.count("mechanical_idol_credits")} credit(s).
 
 What would you like to do?`,
                         "Deposit chips",
@@ -283,7 +283,7 @@ That's worth ${count} credit(s). Do you want to deposit them?`)
                                 yield* show("Got it! Let's get those deposited...");
                                 yield sleep(250);
                                 Rpg.inventory.pocket.remove("ComputerChip", count);
-                                Rpg.flags.newBalltown.mechanicalIdol.credits += count;
+                                Rpg.wallet.earn("mechanical_idol_credits", count);
                                 Rpg.experience.reward.computer.onDepositComputerChips(count);
                                 yield sleep(250);
                                 yield* show("All done!");

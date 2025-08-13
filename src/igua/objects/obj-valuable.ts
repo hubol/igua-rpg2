@@ -43,7 +43,7 @@ const valuableConfigs: Record<RpgEconomy.Valuables.Kind, ValuableConfig> = {
 export function objValuable(
     kind: RpgEconomy.Valuables.Kind,
     uid?: number,
-    incomeSource: RpgPlayerWallet.IncomeSource = "default",
+    reason: RpgPlayerWallet.EarnReason = "default",
 ) {
     let collectableAfterSteps = 3;
 
@@ -63,7 +63,7 @@ export function objValuable(
                     .at(self).add(offset).show(self.parent);
                 sparkle.index = Rng.float(1, 3);
             }
-            RpgPlayerWallet.earn("valuables", RpgEconomy.Valuables.Values[kind], incomeSource);
+            Rpg.wallet.earn("valuables", RpgEconomy.Valuables.Values[kind], reason);
         })
         .step(self => self.collectable = collectableAfterSteps-- <= 0);
 }

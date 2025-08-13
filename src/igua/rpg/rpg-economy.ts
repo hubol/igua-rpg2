@@ -1,28 +1,9 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { RpgExperience } from "./rpg-experience";
 
-interface Currency_Experience {
-    kind: "experience";
-    experience: RpgExperience.Id;
-}
-
 export namespace RpgEconomy {
     export namespace Currency {
-        export type Model = "valuables" | "mechanical_idol_credits" | Currency_Experience;
-
-        export function equals(a: Model, b: Model) {
-            if (a === b) {
-                return true;
-            }
-            if (typeof a === "object" && typeof b === "object") {
-                if (a.kind !== b.kind) {
-                    return false;
-                }
-
-                return a.experience === b.experience;
-            }
-            return false;
-        }
+        export type Id = "valuables" | "mechanical_idol_credits" | RpgExperience.Id;
     }
 
     export namespace Valuables {
@@ -38,7 +19,7 @@ export namespace RpgEconomy {
     }
 
     export interface Offer {
-        currency: Currency.Model;
+        currency: Currency.Id;
         price: Integer;
     }
 }

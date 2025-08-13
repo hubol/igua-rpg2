@@ -340,10 +340,11 @@ function objPocketInfo() {
 function objValuablesInfo() {
     return objText.MediumIrregular("You have 0 valuables", { tint: Consts.StatusTextTint })
         .step(text => {
-            text.seed = Rpg.character.inventory.valuables + 64;
-            text.text = Rpg.character.inventory.valuables === 1
+            const valuables = Rpg.wallet.count("valuables");
+            text.seed = valuables + 64;
+            text.text = valuables === 1
                 ? "You have 1 valuable"
-                : `You have ${Rpg.character.inventory.valuables} valuables`;
+                : `You have ${valuables} valuables`;
         });
 }
 

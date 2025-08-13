@@ -7,7 +7,7 @@ import { RpgPlayerWallet } from "./rpg-player-wallet";
 export class RpgShops {
     private readonly _cache: Partial<Record<DataShop.Id, RpgShop>> = {};
 
-    constructor(private readonly _state: RpgShops.State) {
+    constructor(private readonly _state: RpgShops.State, private readonly _wallet: RpgPlayerWallet) {
     }
 
     getById(shopId: DataShop.Id) {
@@ -18,7 +18,7 @@ export class RpgShops {
         }
 
         const shopState = this._state[shopId] ?? (this._state[shopId] = RpgShop.createState());
-        return this._cache[shopId] = new RpgShop(shopState, DataShop.getById(shopId));
+        return this._cache[shopId] = new RpgShop(shopState, DataShop.getById(shopId), this._wallet);
     }
 
     static createState(): RpgShops.State {
@@ -33,9 +33,13 @@ module RpgShops {
 export class RpgShop {
     readonly stocks: ReadonlyArray<RpgStock>;
 
-    constructor(private readonly _state: RpgShop.State, private readonly _data: DataShop.Model) {
+    constructor(
+        private readonly _state: RpgShop.State,
+        private readonly _data: DataShop.Model,
+        private readonly _wallet: RpgPlayerWallet,
+    ) {
         this.stocks = StockKey.createStockKeys(this._data.stocks).map(({ key, stock }) =>
-            new RpgStock(this._state, key, stock)
+            new RpgStock(this._state, key, stock, this._wallet)
         );
     }
 
@@ -57,6 +61,7 @@ export class RpgStock {
         private readonly _shopState: RpgShop.State,
         private readonly _key: StockKey.Model,
         private readonly _data: DataShop.Stock,
+        private readonly _wallet: RpgPlayerWallet,
     ) {
     }
 
@@ -97,11 +102,11 @@ export class RpgStock {
             throw new Error("Attempting to purchase stock when sold out");
         }
 
-        if (!RpgPlayerWallet.canAfford(this)) {
+        if (!this._wallet.canAfford(this)) {
             throw new Error("Attempting to purchase non-affordable stock");
         }
 
-        RpgPlayerWallet.spend(this.currency, this.price);
+        this._wallet.spend(this.currency, this.price);
 
         this._increaseSoldCount();
         deliverProduct(this.product);
