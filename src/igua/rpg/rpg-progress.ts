@@ -23,7 +23,7 @@ export function getInitialRpgProgress() {
         character: {
             inventory: {
                 equipment: RpgCharacterEquipment.createState(),
-                flops: RpgFlops.create(),
+                flops: RpgFlops.createState(),
                 valuables: 100,
                 keyItems: RpgKeyItems.createState(),
                 pocket: RpgPocket.createState(),

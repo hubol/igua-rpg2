@@ -4,6 +4,7 @@ import { DataQuest } from "../data/data-quest";
 import { DataShop } from "../data/data-shop";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgExperience } from "./rpg-experience";
+import { RpgFlops } from "./rpg-flops";
 import { RpgIdols } from "./rpg-idols";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayer } from "./rpg-player";
@@ -28,7 +29,15 @@ function createRpg(data: RpgProgressData) {
         },
     } = data;
     const {
-        character: { inventory: { pocket: pocketState, keyItems: keyItemsState, potions: potionsState, ...inventory } },
+        character: {
+            inventory: {
+                flops: flopsState,
+                pocket: pocketState,
+                keyItems: keyItemsState,
+                potions: potionsState,
+                ...inventory
+            },
+        },
     } = data;
 
     const experience = new RpgExperience(data.character.experience);
@@ -44,6 +53,7 @@ function createRpg(data: RpgProgressData) {
     const attributes = new RpgPlayerAttributes(data.character.attributes, buffs);
     const status = new RpgPlayerStatus(data.character.status, attributes, buffs);
     const player = new RpgPlayer(data.character, attributes, buffs, status);
+    const flops = new RpgFlops(flopsState);
 
     return {
         // TODO rename to player
@@ -63,9 +73,9 @@ function createRpg(data: RpgProgressData) {
         idol(idolId: Integer) {
             return idols.getById(idolId);
         },
-        // TODO put all inventory here:
         inventory: {
             equipment,
+            flops,
             keyItems,
             pocket,
             potions,

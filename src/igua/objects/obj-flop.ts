@@ -79,10 +79,7 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
 
             const newIndicatorObj = Sprite.from(Tx.Ui.NewIndicator).anchored(0.5, 0.5).at(18, 14).show(self);
             const newIndicatorVisibleObj = container().step(() =>
-                newIndicatorObj.visible = !RpgFlops.Methods.has(
-                    Rpg.character.inventory.flops,
-                    flopDexNumberZeroIndexed,
-                )
+                newIndicatorObj.visible = !Rpg.inventory.flops.has(flopDexNumberZeroIndexed)
             ).show(self);
 
             yield sleepf(2);
@@ -90,7 +87,7 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
             yield () => playerObj.collides(hitboxObj);
             self.play(Sfx.Collect.Flop.rate(0.9, 1.1));
             newIndicatorVisibleObj.destroy();
-            RpgFlops.Methods.receive(Rpg.character.inventory.flops, flopDexNumberZeroIndexed);
+            Rpg.inventory.flops.receive(flopDexNumberZeroIndexed);
             self.physicsEnabled = false;
             self.speed.at(0, 0);
             yield interpvr(self).translate(0, -32).over(200);

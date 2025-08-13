@@ -18,7 +18,7 @@ const Consts = {
 };
 
 export function objFlopCollectionIndicator() {
-    const previous = range(999).map(index => Rpg.character.inventory.flops[index] ?? 0);
+    const previous = range(999).map(index => Rpg.inventory.flops.count(index));
 
     function slicePrevious(startIndex: Integer) {
         return previous.slice(startIndex, startIndex + Consts.rangeSize);
@@ -28,9 +28,9 @@ export function objFlopCollectionIndicator() {
 
     return container()
         .step(() => {
-            for (const key in Rpg.character.inventory.flops) {
+            for (const key in Rpg.inventory.flops.values) {
                 const index = Number(key);
-                const value = Rpg.character.inventory.flops[index];
+                const value = Rpg.inventory.flops.values[index];
                 if (value !== previous[index]) {
                     const differenceRangeStartIndex = Math.floor(index / Consts.rangeSize) * Consts.rangeSize;
 
