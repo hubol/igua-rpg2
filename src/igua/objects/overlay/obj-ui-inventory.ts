@@ -10,6 +10,7 @@ import { Empty } from "../../../lib/types/empty";
 import { DataEquipment } from "../../data/data-equipment";
 import { DataKeyItem } from "../../data/data-key-item";
 import { Cutscene, Input } from "../../globals";
+import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnTextTyped } from "../../mixins/mxn-text-typed";
 import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
 import { MxnUiPageElement, mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
@@ -134,6 +135,14 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
                         : Tx.Ui.Inventory.BackgroundUnselectedPotion
                 )
                 .at(-5, -22),
+            objText.MediumIrregular("", { tint: 0x214901 })
+                .step(self =>
+                    self.text = Rpg.inventory.potions.excessList.length
+                        ? `+${Rpg.inventory.potions.excessList.length} more`
+                        : ""
+                )
+                .mixin(mxnBoilPivot)
+                .at(224, 60),
         ),
         0,
     );
