@@ -43,6 +43,7 @@ Object.defineProperties(Texture.prototype, {
                 );
                 texture.id = this.getId();
                 this._trimmedTexture = TextureProcessing.trimFrame(texture);
+                (texture as TexturePrivate)._trimmedTexture = this._trimmedTexture;
             }
 
             return this._trimmedTexture;

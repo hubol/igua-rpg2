@@ -1,3 +1,4 @@
+import { Sprite } from "pixi.js";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { DataEquipment } from "../../data/data-equipment";
@@ -10,12 +11,22 @@ import { objFigureEquipment } from "../figures/obj-figure-equipment";
 export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
     let angle = 0;
 
-    return objFigureEquipment(equipmentId)
-        .pivoted(16, 16)
+    const figureObj = objFigureEquipment(equipmentId);
+    let physicsRadius = 13;
+
+    if (figureObj instanceof Sprite) {
+        figureObj.trimmed().anchored(0.5, 0.5);
+        physicsRadius = Math.floor(Math.min(figureObj.texture.width, figureObj.texture.height) / 2);
+    }
+    else {
+        figureObj.pivoted(16, 16);
+    }
+
+    return figureObj
         .mixin(mxnCollectible, { kind: "transient" })
         .handles("collected", () => Rpg.inventory.equipment.receive(equipmentId))
         .merge({ collectable: false })
-        .mixin(mxnPhysics, { gravity: 0.1, physicsRadius: 13 })
+        .mixin(mxnPhysics, { gravity: 0.1, physicsRadius })
         .handles("moved", (self, event) => {
             if (event.hitGround) {
                 if (event.previousSpeed.y > 1) {

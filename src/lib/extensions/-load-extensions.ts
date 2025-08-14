@@ -13,5 +13,6 @@ import "./pixi-displayobject-ticker";
 import "./pixi-displayobject-track";
 import "./pixi-rectangle";
 import "./pixi-rounding";
+import "./pixi-sprite";
 import "./pixi-texture";
 import "./pixi-vector";
