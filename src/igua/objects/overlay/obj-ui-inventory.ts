@@ -86,41 +86,28 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     }
 
     pageObj.addChildAt(
-        container(
-            Sprite.from(Tx.Ui.Inventory.BackgroundPotion)
-                .step(self =>
-                    self.texture = isSelected(mxnUiPotion)
-                        ? Tx.Ui.Inventory.BackgroundPotion
-                        : Tx.Ui.Inventory.BackgroundUnselectedPotion
-                )
-                .at(-5, -22),
-        ),
+        Sprite.from(Tx.Ui.Inventory.BackgroundEquipment)
+            .step(self =>
+                self.texture = isSelected(mxnUiEquipment)
+                    ? Tx.Ui.Inventory.BackgroundEquipment
+                    : Tx.Ui.Inventory.BackgroundUnselectedEquipment
+            )
+            .at(-7, -66),
         0,
     );
 
-    pageObj.addChildAt(
-        container(
-            Sprite.from(Tx.Ui.Inventory.BackgroundEquipment)
-                .step(self =>
-                    self.texture = isSelected(mxnUiEquipment)
-                        ? Tx.Ui.Inventory.BackgroundEquipment
-                        : Tx.Ui.Inventory.BackgroundUnselectedEquipment
-                )
-                .at(-7, -26),
-            objUiEquipmentBuffs(Rpg.inventory.equipment.loadout)
-                .step(self => {
-                    if (pageObj.selected?.is(mxnUiEquipment)) {
-                        self.controls.focusBuffsSource = pageObj.selected.mxnUiEquipment.equipmentId;
-                        self.visible = true;
-                    }
-                    else {
-                        self.visible = false;
-                    }
-                })
-                .at(74, 46),
-        ).at(0, -40),
-        0,
-    );
+    objUiEquipmentBuffs(Rpg.inventory.equipment.loadout)
+        .step(self => {
+            if (pageObj.selected?.is(mxnUiEquipment)) {
+                self.controls.focusBuffsSource = pageObj.selected.mxnUiEquipment.equipmentId;
+                self.visible = true;
+            }
+            else {
+                self.visible = false;
+            }
+        })
+        .at(74, 6)
+        .show(pageObj);
 
     pageObj.addChildAt(
         container(
@@ -134,6 +121,19 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
             objUiKeyItemInfo(() => pageObj.selected)
                 .step(self => self.visible = isSelected(mxnUiKeyItem))
                 .at(0, 80),
+        ),
+        0,
+    );
+
+    pageObj.addChildAt(
+        container(
+            Sprite.from(Tx.Ui.Inventory.BackgroundPotion)
+                .step(self =>
+                    self.texture = isSelected(mxnUiPotion)
+                        ? Tx.Ui.Inventory.BackgroundPotion
+                        : Tx.Ui.Inventory.BackgroundUnselectedPotion
+                )
+                .at(-5, -22),
         ),
         0,
     );
