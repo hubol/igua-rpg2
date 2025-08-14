@@ -2,6 +2,7 @@ import { DisplayObject, Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
+import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
@@ -18,6 +19,7 @@ import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
 import { objFigureEquipment } from "../figures/obj-figure-equipment";
 import { objFigureKeyItem } from "../figures/obj-figure-key-item";
+import { objFigurePotion } from "../figures/obj-figure-potion";
 import { StepOrder } from "../step-order";
 import { objUiBubbleNumber } from "./obj-ui-bubble-numbers";
 import { objUiEquipmentBuffs, objUiEquipmentBuffsComparedTo } from "./obj-ui-equipment-buffs";
@@ -54,7 +56,7 @@ function objUiInventoryImpl() {
 
 function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     const uiEquipmentObjs = range(4).map(i =>
-        objUiEquipment(() => Rpg.inventory.equipment.loadout[i], "show_empty").at(i * 36, 0)
+        objUiEquipment(() => Rpg.inventory.equipment.loadout[i], "show_empty").at(i * 36, -40)
             .mixin(mxnUiPageElement, { tint: 0xE5BB00 })
             .mixin(mxnUiPageButton, {
                 onPress: () => {
@@ -72,7 +74,12 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 
     const uiKeyItemObjs = createObjUiKeyItems();
 
-    const pageObj = objUiPage([...uiEquipmentObjs, ...uiKeyItemObjs], { selectionIndex: 0 }).at(180, 100);
+    const uiPotionObjs = createObjUiPotions();
+
+    const pageObj = objUiPage([...uiEquipmentObjs, ...uiKeyItemObjs, ...uiPotionObjs], { selectionIndex: 0 }).at(
+        180,
+        100,
+    );
 
     function isSelected(fn: typeof mxnUiEquipment | typeof mxnUiKeyItem) {
         return Boolean(pageObj.selected?.is(fn));
@@ -99,7 +106,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
                     }
                 })
                 .at(74, 46),
-        ),
+        ).at(0, -40),
         0,
     );
 
@@ -203,6 +210,49 @@ function objUiEquipment(getEquipmentName: () => RpgEquipmentLoadout.Item, varian
     maybeApply();
 
     return container(renderObj).step(maybeApply, StepOrder.BeforeCamera);
+}
+
+function createObjUiPotions() {
+    const pageElementObjs = Empty<MxnUiPageElement>();
+
+    for (let i = 0; i < 12; i++) {
+        const x = (i % 6) * 36;
+        const y = Math.floor(i / 6) * 36;
+        pageElementObjs.push(objUiPotion(i).at(x, y).add(0, 0));
+    }
+
+    return pageElementObjs;
+}
+
+function objUiPotion(index: Integer) {
+    const obj = container(new Graphics().beginFill(0xffffff, 1 / 255).drawRect(0, 0, 32, 32))
+        .mixin(mxnPotion, index)
+        .mixin(mxnUiPageElement, { tint: 0x37B2E8 });
+
+    container()
+        .coro(function* (self) {
+            while (true) {
+                self.removeAllChildren();
+                const potionId = obj.mxnKeyItem.potionId;
+                if (potionId) {
+                    objFigurePotion(potionId).show(self);
+                }
+                yield onMutate(obj.mxnKeyItem);
+            }
+        })
+        .show(obj);
+
+    return obj.mixin(mxnUiPageButton, { onPress: () => Rpg.inventory.potions.use(index) });
+}
+
+function mxnPotion(obj: DisplayObject, index: Integer) {
+    return obj.merge({
+        mxnKeyItem: {
+            get potionId() {
+                return Rpg.inventory.potions.list[index];
+            },
+        },
+    });
 }
 
 function createObjUiKeyItems() {
