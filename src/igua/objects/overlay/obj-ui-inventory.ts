@@ -76,16 +76,28 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 
     const uiPotionObjs = createObjUiPotions();
 
-    const pageObj = objUiPage([...uiEquipmentObjs, ...uiKeyItemObjs, ...uiPotionObjs], { selectionIndex: 0 }).at(
+    const pageObj = objUiPage([...uiPotionObjs, ...uiEquipmentObjs, ...uiKeyItemObjs], { selectionIndex: 0 }).at(
         180,
         100,
     );
 
-    function isSelected(fn: typeof mxnUiEquipment | typeof mxnUiKeyItem) {
+    function isSelected(fn: typeof mxnUiEquipment | typeof mxnUiKeyItem | typeof mxnUiPotion) {
         return Boolean(pageObj.selected?.is(fn));
     }
 
-    // Sprite.from(Tx.Ui.EquippedIguana).at(-9, -80).show(pageObj);
+    pageObj.addChildAt(
+        container(
+            Sprite.from(Tx.Ui.Inventory.BackgroundPotion)
+                .step(self =>
+                    self.texture = isSelected(mxnUiPotion)
+                        ? Tx.Ui.Inventory.BackgroundPotion
+                        : Tx.Ui.Inventory.BackgroundUnselectedPotion
+                )
+                .at(-5, -22),
+        ),
+        0,
+    );
+
     pageObj.addChildAt(
         container(
             Sprite.from(Tx.Ui.Inventory.BackgroundEquipment)
@@ -225,9 +237,9 @@ function createObjUiPotions() {
 }
 
 function objUiPotion(index: Integer) {
-    const obj = container(new Graphics().beginFill(0xffffff, 1 / 255).drawRect(0, 0, 32, 32))
-        .mixin(mxnPotion, index)
-        .mixin(mxnUiPageElement, { tint: 0x37B2E8 });
+    const obj = container(new Graphics().beginFill(0xffffff, 1 / 512).drawRect(0, 0, 32, 32))
+        .mixin(mxnUiPotion, index)
+        .mixin(mxnUiPageElement, { tint: 0x84B500 });
 
     container()
         .coro(function* (self) {
@@ -245,7 +257,7 @@ function objUiPotion(index: Integer) {
     return obj.mixin(mxnUiPageButton, { onPress: () => Rpg.inventory.potions.use(index) });
 }
 
-function mxnPotion(obj: DisplayObject, index: Integer) {
+function mxnUiPotion(obj: DisplayObject, index: Integer) {
     return obj.merge({
         mxnKeyItem: {
             get potionId() {
