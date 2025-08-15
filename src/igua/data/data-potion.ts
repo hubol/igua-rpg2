@@ -1,4 +1,5 @@
 import { Texture } from "pixi.js";
+import { Tx } from "../../assets/textures";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { DataLib } from "./data-lib";
@@ -40,7 +41,7 @@ export namespace DataPotion {
             Poison: {
                 name: "Poison",
                 description: "",
-                texture: null,
+                texture: Tx.Collectibles.Potion.Poison,
                 use: () => Rpg.character.status.conditions.poison.level += 1,
             },
             PoisonRestore: {
