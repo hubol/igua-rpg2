@@ -57,7 +57,11 @@ function objUiInventoryImpl() {
 
 function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     const uiEquipmentObjs = range(4).map(i =>
-        objUiEquipment(() => Rpg.inventory.equipment.loadout[i], "show_empty").at(i * 36, -40)
+        objUiEquipment(
+            () => Rpg.inventory.equipment.loadout[i],
+            "show_empty",
+            Sprite.from(Tx.Ui.EmptyMono).step(setEmptyEquipmentIconTint),
+        ).at(i * 36, -40)
             .mixin(mxnUiPageElement, { tint: 0xE5BB00 })
             .mixin(mxnUiPageButton, {
                 onPress: () => {
@@ -77,13 +81,19 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 
     const uiPotionObjs = createObjUiPotions();
 
-    const pageObj = objUiPage([...uiPotionObjs, ...uiEquipmentObjs, ...uiKeyItemObjs], { selectionIndex: 0 }).at(
+    const pageElementObjs = [...uiPotionObjs, ...uiEquipmentObjs, ...uiKeyItemObjs];
+
+    const pageObj = objUiPage(pageElementObjs, { selectionIndex: 0 }).at(
         180,
         100,
     );
 
     function isSelected(fn: typeof mxnUiEquipment | typeof mxnUiKeyItem | typeof mxnUiPotion) {
         return Boolean(pageObj.selected?.is(fn));
+    }
+
+    function setEmptyEquipmentIconTint(spr: Sprite) {
+        spr.tint = isSelected(mxnUiEquipment) ? 0xE5BB00 : 0xAD3600;
     }
 
     pageObj.addChildAt(
@@ -205,7 +215,11 @@ function objUiEquipmentChoosePage(
     return pageObj;
 }
 
-function objUiEquipment(getEquipmentName: () => RpgEquipmentLoadout.Item, variant: "show_empty") {
+function objUiEquipment(
+    getEquipmentName: () => RpgEquipmentLoadout.Item,
+    variant: "show_empty",
+    emptyObj = Sprite.from(Tx.Ui.Empty),
+) {
     let appliedName: RpgEquipmentLoadout.Item | undefined = undefined;
 
     const renderObj = container();
@@ -221,16 +235,18 @@ function objUiEquipment(getEquipmentName: () => RpgEquipmentLoadout.Item, varian
         if (nameToApply !== null) {
             objFigureEquipment(nameToApply).show(renderObj);
         }
-        else if (variant === "show_empty") {
-            Sprite.from(Tx.Ui.Empty).show(renderObj);
+
+        if (variant === "show_empty") {
+            emptyObj.visible = !nameToApply;
         }
 
         appliedName = nameToApply;
     }
 
+    emptyObj.invisible();
     maybeApply();
 
-    return container(renderObj).step(maybeApply, StepOrder.BeforeCamera);
+    return container(emptyObj, renderObj).step(maybeApply, StepOrder.BeforeCamera);
 }
 
 function createObjUiPotions() {
