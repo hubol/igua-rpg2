@@ -35,7 +35,18 @@ export class RpgPotions {
     }
 
     get length() {
-        return this._list.length + this._excessList.length;
+        if (this._excessList.length) {
+            return this._list.length + this._excessList.length;
+        }
+
+        let count = 0;
+        for (let i = 0; i < this._list.length; i++) {
+            if (this._list[i]) {
+                count++;
+            }
+        }
+
+        return count;
     }
 
     receive(potionId: DataPotion.Id) {
