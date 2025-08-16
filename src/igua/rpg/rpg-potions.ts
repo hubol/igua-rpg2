@@ -34,6 +34,10 @@ export class RpgPotions {
         return this._excessList;
     }
 
+    get length() {
+        return this._list.length + this._excessList.length;
+    }
+
     receive(potionId: DataPotion.Id) {
         const freeIndex = this._state.findIndex(value => value === null);
         if (freeIndex === -1) {
