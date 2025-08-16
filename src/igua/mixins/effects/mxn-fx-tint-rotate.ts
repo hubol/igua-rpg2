@@ -1,9 +1,9 @@
-import { Sprite } from "pixi.js";
+import { ColorSource, DisplayObject } from "pixi.js";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
 
-export function mxnFxTintRotate(spr: Sprite) {
+export function mxnFxTintRotate(spr: DisplayObject & { tint: ColorSource }) {
     return spr.coro(function* (self) {
         const angle = Rng.int(0, 360);
 
