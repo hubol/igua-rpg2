@@ -18,12 +18,12 @@ export namespace RpgLoot {
 
     interface TierOptionDrop_PocketItem {
         kind: "pocket_item";
-        item: RpgPocket.Item;
+        id: RpgPocket.Item;
     }
 
     interface TierOptionDrop_Equipment {
         kind: "equipment";
-        equipment: DataEquipment.Id;
+        id: DataEquipment.Id;
     }
 
     interface TierOptionDrop_Potion {
@@ -99,15 +99,15 @@ export namespace RpgLoot {
                 }
 
                 if (drop.kind === "equipment") {
-                    equipments.push(drop.equipment);
+                    equipments.push(drop.id);
                 }
                 else if (drop.kind === "valuables") {
                     valuables += computeValuables(drop, dropperStatus);
                 }
                 else if (drop.kind === "pocket_item") {
-                    pocketItems.push(drop.item);
+                    pocketItems.push(drop.id);
                     if (Rng.float(100) <= lootBuffs.pocket.bonusChance) {
-                        pocketItems.push(drop.item);
+                        pocketItems.push(drop.id);
                     }
                 }
                 else if (drop.kind === "flop") {
