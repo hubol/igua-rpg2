@@ -1,6 +1,7 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataEquipment } from "../data/data-equipment";
 import { DataPocketItem } from "../data/data-pocket-item";
+import { DataPotion } from "../data/data-potion";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { RpgLoot } from "../rpg/rpg-loot";
 import { RpgPlayerBuffs } from "../rpg/rpg-player-buffs";
@@ -13,6 +14,7 @@ export function devSimulateLoot(loot: RpgLoot.Model) {
         equipments: new Map<DataEquipment.Id, Integer>(),
         flops: new Map<Integer, Integer>(),
         pocketItems: new Map<DataPocketItem.Id, Integer>(),
+        potions: new Map<DataPotion.Id, Integer>(),
         valuables: new Map<Integer, Integer>(),
     };
 
@@ -23,6 +25,7 @@ export function devSimulateLoot(loot: RpgLoot.Model) {
         increment(counts.equipments, drop.equipments);
         increment(counts.flops, drop.flops);
         increment(counts.pocketItems, drop.pocketItems);
+        increment(counts.potions, drop.potions);
         increment(counts.valuables, drop.valuables);
     }
 
@@ -30,6 +33,7 @@ export function devSimulateLoot(loot: RpgLoot.Model) {
 ${print({ iterationsCount, map: counts.equipments, name: "Equipment", serializer: (item) => item })}
 ${print({ iterationsCount, map: counts.flops, name: "Flops", serializer: (item) => `#${item + 1}` })}
 ${print({ iterationsCount, map: counts.pocketItems, name: "Pocket Items", serializer: (item) => item })}
+${print({ iterationsCount, map: counts.potions, name: "Potions", serializer: (item) => item })}
 ${print({ iterationsCount, map: counts.valuables, name: "Valuables", serializer: (item) => String(item) })}`);
 }
 
@@ -47,9 +51,13 @@ function print<T>(args: PrintArgs<T>) {
     return `----${args.name}----
 ${
         orderedItems.map(({ item, count }) =>
-            `${args.serializer(item)}: ${count} (${((count / args.iterationsCount) * 100).toFixed(3)}%)`
+            `${args.serializer(item)}: ${count} (${printPercentage(count, args.iterationsCount)})`
         ).join("\n")
     }`;
+}
+
+function printPercentage(numerator: Integer, denominator: Integer) {
+    return `${((numerator / denominator) * 100).toFixed(3)}%`;
 }
 
 function increment(map: Map<unknown, Integer>, value: unknown) {

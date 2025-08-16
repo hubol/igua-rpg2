@@ -3,6 +3,7 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { Empty } from "../../lib/types/empty";
 import { DataEquipment } from "../data/data-equipment";
+import { DataPotion } from "../data/data-potion";
 import { RpgPlayerBuffs } from "./rpg-player-buffs";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgStatus } from "./rpg-status";
@@ -25,6 +26,11 @@ export namespace RpgLoot {
         equipment: DataEquipment.Id;
     }
 
+    interface TierOptionDrop_Potion {
+        kind: "potion";
+        id: DataPotion.Id;
+    }
+
     interface TierOptionDrop_Flop {
         kind: "flop";
         min: Integer;
@@ -41,6 +47,7 @@ export namespace RpgLoot {
         | TierOptionDrop_Equipment
         | TierOptionDrop_Valuables
         | TierOptionDrop_PocketItem
+        | TierOptionDrop_Potion
         | TierOptionDrop_Flop
         | TierOptionDrop_Nothing;
 
@@ -60,6 +67,7 @@ export namespace RpgLoot {
         equipments: DataEquipment.Id[];
         valuables: Integer;
         pocketItems: RpgPocket.Item[];
+        potions: DataPotion.Id[];
         flops: Integer[];
     }
 
@@ -69,6 +77,7 @@ export namespace RpgLoot {
             let valuables = lootBuffs.valuables.bonus;
             const pocketItems: RpgPocket.Item[] = [];
             const flops: Integer[] = [];
+            const potions: DataPotion.Id[] = [];
 
             const tiers = [model.tier0, model.tier1];
 
@@ -104,6 +113,9 @@ export namespace RpgLoot {
                 else if (drop.kind === "flop") {
                     flops.push(Rng.intc(drop.min, drop.max));
                 }
+                else if (drop.kind === "potion") {
+                    potions.push(drop.id);
+                }
             }
 
             return {
@@ -111,6 +123,7 @@ export namespace RpgLoot {
                 valuables,
                 pocketItems,
                 flops,
+                potions,
             };
         },
     };

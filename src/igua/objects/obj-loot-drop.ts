@@ -2,6 +2,7 @@ import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { RpgLoot } from "../rpg/rpg-loot";
 import { objCollectibleEquipment } from "./collectibles/obj-collectible-equipment";
+import { objCollectiblePotion } from "./collectibles/obj-collectible-potion";
 import { objFlop } from "./obj-flop";
 import { objPocketableItem } from "./obj-pocketable-item";
 import { objValuableTrove } from "./obj-valuable-trove";
@@ -36,6 +37,16 @@ export function objLootDrop(drop: RpgLoot.Drop) {
                 equipmentObj.speed.x = Rng.float(1, 2) * xSign;
                 yield sleep(333);
                 xSign *= -1;
+            }
+
+            const xOffsets = [0, -48, 48];
+            for (let i = 0; i < drop.potions.length; i++) {
+                objCollectiblePotion(drop.potions[i])
+                    .at(self)
+                    .add(xOffsets[i % xOffsets.length], -32)
+                    .show(self.parent);
+
+                yield sleep(333);
             }
         });
 }

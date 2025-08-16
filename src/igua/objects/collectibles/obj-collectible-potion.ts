@@ -35,7 +35,7 @@ export function objCollectiblePotion(potionId: DataPotion.Id) {
         dishSpr,
         lidSpr,
     )
-        .mixin(mxnPhysics, { gravity: 0.2, physicsRadius: 16, physicsOffset: [0, -19] })
+        .mixin(mxnPhysics, { gravity: 0.18, physicsRadius: 16, physicsOffset: [0, -19] })
         .coro(function* (self) {
             yield () => self.isOnGround;
 

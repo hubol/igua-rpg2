@@ -21,7 +21,6 @@ import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { RpgStatus } from "../../rpg/rpg-status";
 import { playerObj } from "../obj-player";
-import { objPocketableItem } from "../obj-pocketable-item";
 import { objProjectileElectricalPulseGround } from "../projectiles/obj-projectile-electrical-pulse-ground";
 import { objSpikedCanonball } from "../projectiles/obj-spiked-canonball";
 import { objAngelEyes, ObjAngelEyesArgs } from "./obj-angel-eyes";
@@ -128,11 +127,12 @@ const ranks = {
                 { kind: "valuables", max: 8, min: 2, deltaPride: -3 },
             ],
             tier1: [
-                { kind: "equipment", equipment: "RichesRing", weight: 2 },
+                { kind: "pocket_item", item: "ComputerChip", weight: 34 },
                 { kind: "pocket_item", item: "BallFruitTypeA", weight: 14 },
                 { kind: "pocket_item", item: "BallFruitTypeB", weight: 14 },
-                { kind: "pocket_item", item: "ComputerChip", weight: 42 },
                 { kind: "flop", min: 10, max: 14, weight: 14 },
+                { kind: "potion", id: "RestoreHealth", weight: 8 },
+                { kind: "equipment", equipment: "RichesRing", weight: 2 },
                 { kind: "nothing", weight: 14 },
             ],
         },
@@ -146,9 +146,10 @@ const ranks = {
                 { kind: "valuables", max: 10, min: 2, deltaPride: -3 },
             ],
             tier1: [
-                { kind: "equipment", equipment: "PoisonRing", weight: 5 },
-                { kind: "pocket_item", item: "ComputerChip", weight: 65 },
+                { kind: "pocket_item", item: "ComputerChip", weight: 57 },
                 { kind: "flop", min: 0, max: 9, weight: 20 },
+                { kind: "potion", id: "RestoreHealth", weight: 8 },
+                { kind: "equipment", equipment: "PoisonRing", weight: 5 },
                 { kind: "nothing", weight: 10 },
             ],
         },
