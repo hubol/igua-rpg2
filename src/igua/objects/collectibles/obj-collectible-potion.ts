@@ -1,4 +1,5 @@
 import { Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
@@ -39,7 +40,10 @@ export function objCollectiblePotion(potionId: DataPotion.Id) {
         .coro(function* (self) {
             yield () => self.isOnGround;
 
+            self.play(Sfx.Effect.PotionDishLand.rate(0.9, 1.1));
+
             yield sleep(250);
+            self.play(Sfx.Effect.PotionDishOpen.rate(0.9, 1.1));
             yield interpvr(lidSpr).factor(factor.sine).to(0, -32).over(500);
             yield sleep(250);
             lidSpr.alpha = 0.5;
@@ -73,6 +77,8 @@ export function objCollectiblePotion(potionId: DataPotion.Id) {
 
             yield () => playerObj.hasControl && playerObj.collides(figureObj);
 
+            self.play(Sfx.Collect.Potion.rate(0.9, 1.1));
+
             figureObj.y += 3;
 
             stinkLinesObj.alpha = 0.5;
@@ -85,6 +91,8 @@ export function objCollectiblePotion(potionId: DataPotion.Id) {
 
             Rpg.inventory.potions.receive(potionId);
             stinkLinesObj.destroy();
+
+            figureObj.play(Sfx.Collect.PotionAway.rate(0.9, 1.1));
 
             yield* Coro.all([
                 interpvr(figureObj).factor(factor.sine).translate(Rng.int(-32, 32), -300).over(1000),

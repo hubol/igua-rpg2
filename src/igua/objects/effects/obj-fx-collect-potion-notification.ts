@@ -1,4 +1,5 @@
 import { objText } from "../../../assets/fonts";
+import { Sfx } from "../../../assets/sounds";
 import { Instances } from "../../../lib/game-engine/instances";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { container } from "../../../lib/pixi/container";
@@ -27,6 +28,7 @@ export function objFxCollectPotionNotification() {
 
             yield sleep(750);
             for (let i = 0; i < 10; i++) {
+                self.play(Sfx.Effect.PotionNotificationTwitch.rate(0.5, 2));
                 self.pivot.x = (i + 1) * (i % 2 === 0 ? 1 : -1);
                 yield sleep(70);
             }
