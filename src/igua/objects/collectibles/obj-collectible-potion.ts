@@ -6,6 +6,7 @@ import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
 import { DataPotion } from "../../data/data-potion";
+import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { Rpg } from "../../rpg/rpg";
 import { objFxCollectPotionNotification } from "../effects/obj-fx-collect-potion-notification";
@@ -34,7 +35,10 @@ export function objCollectiblePotion(potionId: DataPotion.Id) {
         dishSpr,
         lidSpr,
     )
+        .mixin(mxnPhysics, { gravity: 0.2, physicsRadius: 16, physicsOffset: [0, -19] })
         .coro(function* (self) {
+            yield () => self.isOnGround;
+
             yield sleep(250);
             yield interpvr(lidSpr).factor(factor.sine).to(0, -32).over(500);
             yield sleep(250);
