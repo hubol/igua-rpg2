@@ -35,7 +35,7 @@ export namespace DataPotion {
             RestoreHealth: {
                 name: "Sweet Berry",
                 description: "",
-                texture: null,
+                texture: Tx.Collectibles.Potion.RestoreHealth,
                 use: () => playerObj.heal(Math.ceil(Rpg.character.status.healthMax / 3)),
             },
             Poison: {
