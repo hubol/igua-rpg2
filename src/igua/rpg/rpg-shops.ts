@@ -147,13 +147,7 @@ namespace StockKey {
     }
 
     function computeProductKey(product: DataShop.Product) {
-        if (product.kind === "equipment") {
-            return product.equipmentId;
-        }
-        if (product.kind === "key_item") {
-            return product.keyItemId;
-        }
-        return "";
+        return product.id;
     }
 
     export type Model = ForceAliasType<string>;

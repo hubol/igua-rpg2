@@ -3,6 +3,7 @@ import { RpgEconomy } from "../rpg/rpg-economy";
 import { DataEquipment } from "./data-equipment";
 import { DataKeyItem } from "./data-key-item";
 import { DataLib } from "./data-lib";
+import { DataPotion } from "./data-potion";
 
 export namespace DataShop {
     export interface Model {
@@ -13,7 +14,7 @@ export namespace DataShop {
         {
             BalltownMechanicalIdol: {
                 stocks: [{
-                    product: { kind: "key_item", keyItemId: "UpgradedPickaxe" },
+                    product: { kind: "key_item", id: "UpgradedPickaxe" },
                     initialQuantity: 999,
                     price: { currency: "mechanical_idol_credits", deltaSold: 0, initial: 10 },
                 }],
@@ -21,17 +22,17 @@ export namespace DataShop {
             BalltownOutskirtsSecret: {
                 stocks: [
                     {
-                        product: { kind: "equipment", equipmentId: "JumpAtSpecialSignsRing" },
+                        product: { kind: "equipment", id: "JumpAtSpecialSignsRing" },
                         initialQuantity: 2,
                         price: { currency: "jump", initial: 250, deltaSold: 500 },
                     },
                     {
-                        product: { kind: "equipment", equipmentId: "RichesRing" },
+                        product: { kind: "equipment", id: "RichesRing" },
                         initialQuantity: 2,
                         price: { currency: "valuables", deltaSold: 800, initial: 200 },
                     },
                     {
-                        product: { kind: "equipment", equipmentId: "YellowRichesRing" },
+                        product: { kind: "equipment", id: "YellowRichesRing" },
                         initialQuantity: 2,
                         price: { currency: "combat", deltaSold: 750, initial: 250 },
                     },
@@ -42,22 +43,29 @@ export namespace DataShop {
                     {
                         initialQuantity: 99,
                         price: { currency: "valuables", deltaSold: 1, initial: 5 },
-                        product: { kind: "key_item", keyItemId: "SeedYellow" },
+                        product: { kind: "key_item", id: "SeedYellow" },
                     },
                     {
                         initialQuantity: 99,
                         price: { currency: "valuables", deltaSold: 1, initial: 5 },
-                        product: { kind: "key_item", keyItemId: "SeedGreen" },
+                        product: { kind: "key_item", id: "SeedGreen" },
                     },
                     {
                         initialQuantity: 99,
                         price: { currency: "valuables", deltaSold: 1, initial: 5 },
-                        product: { kind: "key_item", keyItemId: "SeedBlue" },
+                        product: { kind: "key_item", id: "SeedBlue" },
                     },
                     {
                         initialQuantity: 99,
                         price: { currency: "valuables", deltaSold: 1, initial: 5 },
-                        product: { kind: "key_item", keyItemId: "SeedPurple" },
+                        product: { kind: "key_item", id: "SeedPurple" },
+                    },
+                    // TODO not sure if restore poison should appear in the art store
+                    // maybe he has two stores instead
+                    {
+                        initialQuantity: 99,
+                        price: { currency: "valuables", deltaSold: 25, initial: 15 },
+                        product: { kind: "potion", id: "PoisonRestore" },
                     },
                 ],
             },
@@ -66,12 +74,12 @@ export namespace DataShop {
                     {
                         initialQuantity: 1,
                         price: { currency: "valuables", deltaSold: 0, initial: 999 },
-                        product: { kind: "key_item", keyItemId: "BagOfSeeds" },
+                        product: { kind: "key_item", id: "BagOfSeeds" },
                     },
                     {
                         initialQuantity: 3,
                         price: { currency: "jump", initial: 100, deltaSold: 300 },
-                        product: { kind: "equipment", equipmentId: "IqIndicator" },
+                        product: { kind: "equipment", id: "IqIndicator" },
                     },
                 ],
             },
@@ -85,16 +93,17 @@ export namespace DataShop {
 
     export interface Product_Equipment {
         kind: "equipment";
-        equipmentId: DataEquipment.Id;
+        id: DataEquipment.Id;
     }
 
     export interface Product_KeyItem {
         kind: "key_item";
-        keyItemId: DataKeyItem.Id;
+        id: DataKeyItem.Id;
     }
 
     export interface Product_Potion {
         kind: "potion";
+        id: DataPotion.Id;
     }
 
     // TODO can you buy pocket items?

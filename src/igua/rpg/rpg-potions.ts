@@ -85,9 +85,8 @@ export class RpgPotions {
             return;
         }
 
-        const potion = DataPotion.getById(potionId);
         // TODO I think this should require an RpgPlayer to be passed
-        potion.use();
+        DataPotion.usePotion(potionId);
 
         const deleted = this._state.splice(Consts.Size, 1);
         this._state[index] = deleted[0] ?? null;

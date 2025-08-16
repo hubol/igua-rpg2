@@ -11,7 +11,6 @@ export namespace DataPotion {
         description: string;
         stinkLineTint: RgbInt;
         texture: Texture | null;
-        use: () => void;
     }
 
     export const Manifest = DataLib.createManifest(
@@ -21,52 +20,42 @@ export namespace DataPotion {
                 description: "Delicious nectar. Increases maximum HP.",
                 stinkLineTint: 0xffffff,
                 texture: null,
-                use: () => Rpg.character.attributes.update("health", 1),
             },
             AttributeIntelligenceUp: {
                 name: "Foul Stew",
                 description: "Odiforous soup. Increases intelligence.",
                 stinkLineTint: 0xffffff,
                 texture: null,
-                use: () => Rpg.character.attributes.update("intelligence", 1),
             },
             AttributeStrengthUp: {
                 name: "Claw Powder",
                 description: "Fine grit for sharpening claws. Increases physical attack power.",
                 stinkLineTint: 0xffffff,
                 texture: null,
-                use: () => Rpg.character.attributes.update("strength", 1),
             },
             RestoreHealth: {
                 name: "Sweet Berry",
                 description: "",
                 stinkLineTint: 0xD882D1,
                 texture: Tx.Collectibles.Potion.RestoreHealth,
-                use: () => playerObj.heal(Math.ceil(Rpg.character.status.healthMax / 3)),
             },
             Poison: {
                 name: "Poison",
                 description: "",
                 stinkLineTint: 0xA53609,
                 texture: Tx.Collectibles.Potion.Poison,
-                use: () => Rpg.character.status.conditions.poison.level += 1,
             },
             PoisonRestore: {
                 name: "Bitter Medicine",
                 description: "",
                 stinkLineTint: 0xffffff,
                 texture: null,
-                use: () => {
-                    Rpg.character.status.conditions.poison.value = 0;
-                    Rpg.character.status.conditions.poison.level = 0;
-                },
             },
             __Fallback__: {
                 name: "???",
                 description: "Consume to experience a bug",
                 stinkLineTint: 0xff00ff,
                 texture: null,
-                use: () => {},
             },
         } satisfies Record<string, Model>,
     );
@@ -74,4 +63,31 @@ export namespace DataPotion {
     export type Id = keyof typeof Manifest;
 
     export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataPotion" });
+
+    // TODO The colocation is good. But there are many strange things going on here, haha
+    export function usePotion(id: Id) {
+        switch (id) {
+            case "AttributeHealthUp":
+                Rpg.character.attributes.update("health", 1);
+                return;
+            case "AttributeIntelligenceUp":
+                Rpg.character.attributes.update("intelligence", 1);
+                return;
+            case "AttributeStrengthUp":
+                Rpg.character.attributes.update("strength", 1);
+                return;
+            case "RestoreHealth":
+                playerObj.heal(Math.ceil(Rpg.character.status.healthMax / 3));
+                return;
+            case "Poison":
+                Rpg.character.status.conditions.poison.level += 1;
+                return;
+            case "PoisonRestore":
+                Rpg.character.status.conditions.poison.value = 0;
+                Rpg.character.status.conditions.poison.level = 0;
+                return;
+            case "__Fallback__":
+                return;
+        }
+    }
 }

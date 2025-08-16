@@ -18,13 +18,13 @@ export class RpgInventory {
     receive(product: DataShop.Product) {
         switch (product.kind) {
             case "equipment":
-                this.equipment.receive(product.equipmentId);
+                this.equipment.receive(product.id);
                 return;
             case "key_item":
-                this.keyItems.receive(product.keyItemId);
+                this.keyItems.receive(product.id);
                 return;
             case "potion":
-                // TODO
+                this.potions.receive(product.id);
                 return;
         }
     }

@@ -14,6 +14,7 @@ import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataEquipment } from "../data/data-equipment";
 import { DataKeyItem } from "../data/data-key-item";
+import { DataPotion } from "../data/data-potion";
 import { DataShop } from "../data/data-shop";
 import { Input, layers, scene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
@@ -21,11 +22,11 @@ import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnErrorVibrate } from "../mixins/mxn-error-vibrate";
 import { objFigureEquipment } from "../objects/figures/obj-figure-equipment";
 import { objFigureKeyItem } from "../objects/figures/obj-figure-key-item";
+import { objFigurePotion } from "../objects/figures/obj-figure-potion";
 import { experienceIndicatorConfigs, experienceIndicatorConfigsArray } from "../objects/overlay/obj-hud";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
-import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
-import { RpgShop, RpgStock } from "../rpg/rpg-shops";
+import { RpgStock } from "../rpg/rpg-shops";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
 
@@ -166,6 +167,7 @@ function objDramaShopStock(
                 if (appliedStock.isSoldOut) {
                     objects.limitedQuantityObj.mxnErrorVibrate.methods.vibrate();
                 }
+                // TODO where to enforce potions inventory being too full???
                 else if (Rpg.wallet.canAfford(appliedStock)) {
                     appliedStock.purchase();
                     refreshStocks();
@@ -279,47 +281,46 @@ function objStockNameDescription(stock: RpgStock) {
 function getStockName(item: RpgStock) {
     switch (item.product.kind) {
         case "equipment":
-            return DataEquipment.getById(item.product.equipmentId).name;
+            return DataEquipment.getById(item.product.id).name;
         case "key_item":
-            return DataKeyItem.getById(item.product.keyItemId).name;
+            return DataKeyItem.getById(item.product.id).name;
         case "potion":
-            return "Potion?!?!?";
+            return DataPotion.getById(item.product.id).name;
     }
 }
 
 function getStockFigure(stock: RpgStock) {
     switch (stock.product.kind) {
         case "key_item":
-            return objFigureKeyItem(stock.product.keyItemId);
+            return objFigureKeyItem(stock.product.id);
         case "equipment":
-            return objFigureEquipment(stock.product.equipmentId);
+            return objFigureEquipment(stock.product.id);
         case "potion":
-            return container();
+            return objFigurePotion(stock.product.id);
     }
 }
 
 function getStockDescription(item: RpgStock) {
     switch (item.product.kind) {
         case "equipment":
-            return DataEquipment.getById(item.product.equipmentId).description;
+            return DataEquipment.getById(item.product.id).description;
         case "key_item":
-            return DataKeyItem.getById(item.product.keyItemId).description;
-        default:
-            return "";
+            return DataKeyItem.getById(item.product.id).description;
+        case "potion":
+            return DataPotion.getById(item.product.id).description;
     }
 }
 
 // TODO likely does not belong here
 function getStockPlayerOwnedCount(stock: RpgStock): Integer {
     if (stock.product.kind === "potion") {
-        // TODO implement!
-        return 0;
+        return Rpg.inventory.potions.count(stock.product.id);
     }
     else if (stock.product.kind === "equipment") {
-        return Rpg.inventory.equipment.count(stock.product.equipmentId);
+        return Rpg.inventory.equipment.count(stock.product.id);
     }
 
-    return Rpg.inventory.keyItems.count(stock.product.keyItemId);
+    return Rpg.inventory.keyItems.count(stock.product.id);
 }
 
 function objStockPrice(item: RpgStock) {
