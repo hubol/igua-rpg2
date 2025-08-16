@@ -49,6 +49,17 @@ export class RpgPotions {
         return count;
     }
 
+    count(potionId: DataPotion.Id) {
+        let count = 0;
+        for (let i = 0; i < this._state.length; i++) {
+            if (this._state[i] === potionId) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
     receive(potionId: DataPotion.Id) {
         const freeIndex = this._state.findIndex(value => value === null);
         if (freeIndex === -1) {
