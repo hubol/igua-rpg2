@@ -8,6 +8,7 @@ import { Rng } from "../../../lib/math/rng";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
+import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnIndexedCollisionShape } from "../../mixins/mxn-indexed-collision-shape";
@@ -76,6 +77,7 @@ export function objAngelMiffed() {
             tertiaryTint: themes.Common.tint.primary,
         })
         .mixin(mxnPhysics, { gravity: 0.2, physicsRadius: 6, physicsOffset: [0, -7] })
+        .mixin(mxnDetectPlayer)
         .coro(function* (self) {
             for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
                 fistObj.mixin(
@@ -84,7 +86,11 @@ export function objAngelMiffed() {
                 );
             }
 
+            yield () => self.mxnDetectPlayer.detectionScore > 0;
+
             while (true) {
+                yield () => self.mxnDetectPlayer.detectionScore > -120;
+
                 for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
                     yield interp(fistObj.controls, "exposedUnit").steps(3).to(1).over(300);
                     yield interp(fistObj.controls, "slamUnit").to(1).over(500);
