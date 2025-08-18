@@ -37,7 +37,12 @@ const ranks = {
         loot: {
             // TODO idk
             tier0: [{ kind: "valuables", deltaPride: -1, max: 10, min: 1 }],
-            tier1: [{ kind: "flop", min: 15, max: 19, weight: 3 }, { kind: "nothing" }],
+            tier1: [
+                { kind: "flop", min: 15, max: 19, weight: 40 },
+                { kind: "potion", id: "Poison", weight: 30 },
+                { kind: "equipment", id: "FactionDefenseMiner", weight: 10 },
+                { kind: "nothing", weight: 20 },
+            ],
         },
         status: {
             healthMax: 60,
@@ -86,10 +91,16 @@ export function objAngelMiffed() {
                 );
             }
 
-            yield () => self.mxnDetectPlayer.detectionScore > 0;
+            let minDetectionScore = 0;
 
             while (true) {
-                yield () => self.mxnDetectPlayer.detectionScore > -120;
+                if (self.mxnDetectPlayer.detectionScore <= minDetectionScore) {
+                    yield () => self.mxnDetectPlayer.detectionScore > minDetectionScore;
+                    self.speed.y = -2;
+                    yield () => self.isOnGround;
+                }
+
+                minDetectionScore = -120;
 
                 for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
                     yield interp(fistObj.controls, "exposedUnit").steps(3).to(1).over(300);
