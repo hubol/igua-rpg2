@@ -1,17 +1,20 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
-import { interp, interpc } from "../../../lib/game-engine/routines/interp";
+import { factor, interp, interpc, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
+import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { DataKeyItem } from "../../data/data-key-item";
+import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { Rpg } from "../../rpg/rpg";
 import { objFxCollectKeyItemNotification } from "../effects/obj-fx-collection-key-item-notification";
 import { objFigureKeyItem } from "../figures/obj-figure-key-item";
 import { playerObj } from "../obj-player";
+import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 
 export function objCollectibleKeyItem(keyItemId: DataKeyItem.Id) {
     const figureObj = objFigureKeyItem(keyItemId).mixin(mxnSparkling);
@@ -28,21 +31,17 @@ export function objCollectibleKeyItem(keyItemId: DataKeyItem.Id) {
             self.scaled(0.5, 0.5);
             yield sleep(200);
             self.scaled(1, 1);
+
+            const indicatorSpr = objIndicator()
+                .anchored(0.5, 1)
+                .at(0, -figureObj.height);
+
             self.coro(function* () {
                 yield* Coro.all([
                     interp(figureObj, "sparklesPerFrame").to(0.08).over(2000),
                     interpc(figureObj, "sparklesTint").to(0x2048AD).over(2000),
                 ]);
-
-                const indicatorSpr = Sprite.from(Tx.Effects.KeyItemIndicator)
-                    .anchored(0.5, 1)
-                    .at(0, -figureObj.height);
                 self.addChildAt(indicatorSpr, 0);
-
-                while (true) {
-                    yield sleep(1000);
-                    indicatorSpr.visible = !indicatorSpr.visible;
-                }
             });
             yield sleep(400);
 
@@ -57,7 +56,43 @@ export function objCollectibleKeyItem(keyItemId: DataKeyItem.Id) {
 
             objFxCollectKeyItemNotification(keyItemId).show().at(self);
             Rpg.inventory.keyItems.receive(keyItemId);
+
+            indicatorSpr
+                .merge({ intensity: 1, speed: vnew(Rng.float(-1, 1), -3) })
+                .step(self => {
+                    self.intensity += 0.1;
+                    self.textureIndex = (self.textureIndex + 0.4 * self.intensity) % self.textures.length;
+                    self.add(self.speed);
+                    self.speed.y += 0.18;
+                });
+            indicatorSpr.visible = true;
+            indicatorSpr.flash = false;
+
+            yield* Coro.all([
+                () => indicatorSpr.y >= 200,
+                interpv(figureObj.scale).steps(4).to(3, 0).over(500),
+            ]);
+
             self.destroy();
             // TODO more!!
+        });
+}
+
+const indicatorTxs = (function () {
+    const [first, ...rest] = Tx.Effects.KeyItemIndicator.split({ width: 18 });
+    const [skip, ...more] = rest;
+    return [first, ...rest, ...more.reverse()];
+})();
+
+function objIndicator() {
+    return objIndexedSprite(indicatorTxs)
+        .merge({ flash: true })
+        .coro(function* (self) {
+            while (self.flash) {
+                yield sleep(1000);
+                self.visible = !self.visible;
+            }
+
+            self.visible = true;
         });
 }

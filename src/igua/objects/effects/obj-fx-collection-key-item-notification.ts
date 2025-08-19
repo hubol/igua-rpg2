@@ -11,6 +11,7 @@ import { mxnFxTintRotate } from "../../mixins/effects/mxn-fx-tint-rotate";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnTextTyped } from "../../mixins/mxn-text-typed";
 import { Rpg } from "../../rpg/rpg";
+import { objFxBurst32 } from "./obj-fx-burst-32";
 
 const [headingTx, subheadingTx] = Tx.Effects.KeyItemNotification.split({ count: 2 });
 
@@ -42,7 +43,10 @@ export function objFxCollectKeyItemNotification(keyItemId: DataKeyItem.Id) {
                 .show(self);
 
             yield interpvr(textObj.scale).factor(factor.sine).to(1, 1).over(400);
+
+            self.addChildAt(objFxBurst32().at(textObj), 0);
             textObj.mixin(mxnBoilPivot);
+
             yield sleep(700);
             self.destroy();
         })
