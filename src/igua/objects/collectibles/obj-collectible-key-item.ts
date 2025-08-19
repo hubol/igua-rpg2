@@ -36,12 +36,13 @@ export function objCollectibleKeyItem(keyItemId: DataKeyItem.Id) {
                 .anchored(0.5, 1)
                 .at(0, -figureObj.height);
 
+            self.addChildAt(indicatorSpr, 0);
+
             self.coro(function* () {
                 yield* Coro.all([
                     interp(figureObj, "sparklesPerFrame").to(0.08).over(2000),
                     interpc(figureObj, "sparklesTint").to(0x2048AD).over(2000),
                 ]);
-                self.addChildAt(indicatorSpr, 0);
             });
             yield sleep(400);
 

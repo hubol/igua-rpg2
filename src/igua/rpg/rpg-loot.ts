@@ -3,6 +3,7 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { Empty } from "../../lib/types/empty";
 import { DataEquipment } from "../data/data-equipment";
+import { DataKeyItem } from "../data/data-key-item";
 import { DataPotion } from "../data/data-potion";
 import { RpgPlayerBuffs } from "./rpg-player-buffs";
 import { RpgPocket } from "./rpg-pocket";
@@ -26,6 +27,11 @@ export namespace RpgLoot {
         id: DataEquipment.Id;
     }
 
+    interface TierOptionDrop_KeyItem {
+        kind: "key_item";
+        id: DataKeyItem.Id;
+    }
+
     interface TierOptionDrop_Potion {
         kind: "potion";
         id: DataPotion.Id;
@@ -41,10 +47,9 @@ export namespace RpgLoot {
         kind: "nothing";
     }
 
-    // TODO key item, too
-
     type TierOptionDrop =
         | TierOptionDrop_Equipment
+        | TierOptionDrop_KeyItem
         | TierOptionDrop_Valuables
         | TierOptionDrop_PocketItem
         | TierOptionDrop_Potion
@@ -65,6 +70,7 @@ export namespace RpgLoot {
 
     export interface Drop {
         equipments: DataEquipment.Id[];
+        keyItems: DataKeyItem.Id[];
         valuables: Integer;
         pocketItems: RpgPocket.Item[];
         potions: DataPotion.Id[];
@@ -74,6 +80,7 @@ export namespace RpgLoot {
     export const Methods = {
         drop(model: Model, dropperStatus: RpgStatus.Model, lootBuffs: RpgPlayerBuffs.Model["loot"]): Drop {
             const equipments: DataEquipment.Id[] = [];
+            const keyItems: DataKeyItem.Id[] = [];
             let valuables = lootBuffs.valuables.bonus;
             const pocketItems: RpgPocket.Item[] = [];
             const flops: Integer[] = [];
@@ -101,6 +108,9 @@ export namespace RpgLoot {
                 if (drop.kind === "equipment") {
                     equipments.push(drop.id);
                 }
+                else if (drop.kind === "key_item") {
+                    keyItems.push(drop.id);
+                }
                 else if (drop.kind === "valuables") {
                     valuables += computeValuables(drop, dropperStatus);
                 }
@@ -120,6 +130,7 @@ export namespace RpgLoot {
 
             return {
                 equipments,
+                keyItems,
                 valuables,
                 pocketItems,
                 flops,
