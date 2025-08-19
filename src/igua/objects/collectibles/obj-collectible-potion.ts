@@ -15,10 +15,13 @@ import { objFigurePotion } from "../figures/obj-figure-potion";
 import { playerObj } from "../obj-player";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 
+const potionServingDishAppearTxs = Tx.Effects.PotionServingDishAppear.split({ count: 2 });
 const [dishTx, lidTx] = Tx.Effects.PotionServingDish.split({ count: 2 });
 const potionStinkLinesTxs = Tx.Effects.PotionStinkLines.split({ width: 38 });
 
 export function objCollectiblePotion(potionId: DataPotion.Id) {
+    const appearSpr = objIndexedSprite(potionServingDishAppearTxs).anchored(0.5, 1);
+
     const stinkLineTint = DataPotion.getById(potionId).stinkLineTint;
     const figureObj = objFigurePotion(potionId);
 
@@ -31,13 +34,21 @@ export function objCollectiblePotion(potionId: DataPotion.Id) {
     const lidSpr = Sprite.from(lidTx).anchored(0.5, 1);
 
     return container(
-        maskObj,
-        figureObj.masked(maskObj),
-        dishSpr,
-        lidSpr,
+        appearSpr,
     )
-        .mixin(mxnPhysics, { gravity: 0.18, physicsRadius: 16, physicsOffset: [0, -19] })
+        .mixin(mxnPhysics, { gravity: 0.01, physicsRadius: 16, physicsOffset: [0, -19] })
         .coro(function* (self) {
+            self.play(Sfx.Collect.PotionAppear.rate(0.9, 1.1));
+            self.speed.y = -1;
+
+            yield sleep(120);
+            appearSpr.textureIndex = 1;
+            yield sleep(120);
+
+            appearSpr.destroy();
+            self.addChild(maskObj, figureObj.masked(maskObj), dishSpr, lidSpr);
+            self.gravity = 0.18;
+
             yield () => self.isOnGround;
 
             self.play(Sfx.Effect.PotionDishLand.rate(0.9, 1.1));
