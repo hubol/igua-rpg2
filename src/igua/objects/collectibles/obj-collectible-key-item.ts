@@ -1,4 +1,5 @@
 import { Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { factor, interp, interpc, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
@@ -28,6 +29,8 @@ export function objCollectibleKeyItem(keyItemId: DataKeyItem.Id) {
     return container(figureObj)
         .mixin(mxnPhysics, { gravity: 0, physicsRadius: 8, physicsOffset: [0, -11] })
         .coro(function* (self) {
+            self.play(Sfx.Collect.KeyItemAppear.rate(0.9, 1.1));
+
             self.scaled(0.5, 0.5);
             yield sleep(200);
             self.scaled(1, 1);
@@ -51,6 +54,7 @@ export function objCollectibleKeyItem(keyItemId: DataKeyItem.Id) {
 
             yield () => self.isOnGround;
 
+            self.play(Sfx.Collect.KeyItemLand.rate(0.9, 1.1));
             self.speed.x = 0;
 
             yield () => playerObj.hasControl && playerObj.collides(figureObj);

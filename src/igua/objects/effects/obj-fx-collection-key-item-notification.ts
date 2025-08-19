@@ -31,6 +31,7 @@ export function objFxCollectKeyItemNotification(keyItemId: DataKeyItem.Id) {
             yield interpvr(self.pivot).factor(factor.sine).translate(0, 32).over(300);
         })
         .coro(function* (self) {
+            self.play(Sfx.Collect.KeyItem.rate(0.9, 1.1));
             yield sleep(300);
             Sprite.from(subheadingTx).show(self);
             yield sleep(300);
@@ -42,8 +43,10 @@ export function objFxCollectKeyItemNotification(keyItemId: DataKeyItem.Id) {
                 .scaled(6, 6)
                 .show(self);
 
+            self.play(Sfx.Collect.KeyItemCountAppear);
             yield interpvr(textObj.scale).factor(factor.sine).to(1, 1).over(400);
 
+            self.play(Sfx.Collect.KeyItemCountStarburst.rate(0.9, 1.1));
             self.addChildAt(objFxBurst32().at(textObj), 0);
             textObj.mixin(mxnBoilPivot);
 
