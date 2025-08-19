@@ -23,7 +23,7 @@ export function mxnSparkling(obj: DisplayObject) {
                 const point = self.getGlobalPosition(p, false);
                 objValuableSparkle()
                     .tinted(self.sparklesTint)
-                    .at(point).at(self).add(bounds).add(point, -1).add(Rng.int(bounds.width), 0)
+                    .at(point).at(self).add(bounds).add(point, -1).add(Rng.int(bounds.width), Rng.int(bounds.height))
                     .show(self.parent);
 
                 sparkleUnit -= 1;
