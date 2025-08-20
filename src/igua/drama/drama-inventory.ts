@@ -18,6 +18,7 @@ import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnBoilSeed } from "../mixins/mxn-boil-seed";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
+import { DramaLib } from "./drama-lib";
 
 interface AskUseCountOptions {
     min?: Integer;
@@ -31,6 +32,8 @@ function* askRemoveCount(
     item: RpgInventory.Item,
     { min = 1, max: rawMax, multipleOf = 1, rejectMessage = "Never mind" }: AskUseCountOptions = {},
 ) {
+    const colors = DramaLib.Speaker.getColors();
+
     if (min % multipleOf !== 0) {
         Logger.logContractViolationError(
             "DramaInventory",
@@ -44,9 +47,9 @@ function* askRemoveCount(
     const obj = container().show(layers.overlay.messages);
 
     const messageObj = container(
-        Sprite.from(Tx.Ui.Dialog.AskRemoveCountBox).anchored(0.5, 0.5).mixin(mxnBoilPivot),
+        Sprite.from(Tx.Ui.Dialog.AskRemoveCountBox).tinted(colors.primary).anchored(0.5, 0.5).mixin(mxnBoilPivot),
         DataItem.getFigureObj(item).pivotedUnit(0.5, 0.5).scaled(2, 2).at(0, -15),
-        objHeader(message, 0x000000).pivotedUnit(0.5, 0).at(0, 30),
+        objHeader(message, colors.textPrimary).pivotedUnit(0.5, 0).at(0, 30),
     )
         .at(renderer.width / 2, -80)
         .coro(function* (self) {
@@ -60,7 +63,7 @@ function* askRemoveCount(
     let isControllable = true;
     let isSliderSelected = true;
 
-    const sliderObj = objSlider({ max, value: min });
+    const sliderObj = objSlider({ max, value: min, colors });
 
     const sliderContainerObj = container(
         new Graphics().beginFill(0x000000).drawRect(-140, -20, 300, 60)
@@ -99,11 +102,11 @@ function* askRemoveCount(
             .step(self => self.visible = !isSliderSelected)
             .mixin(mxnBoilPivot)
             .at(8, 8),
-        Sprite.from(Tx.Ui.Dialog.AskRemoveCountRejectBox).anchored(0.5, 0.5)
+        Sprite.from(Tx.Ui.Dialog.AskRemoveCountRejectBox).tinted(colors.secondary).anchored(0.5, 0.5)
             .step(self => {
                 self.pivot.y = isSliderSelected ? 0 : Math.round(Math.sin(scene.ticker.ticks / 60 * Math.PI) * 2);
             }),
-        objText.MediumIrregular(rejectMessage, { tint: 0x000000 }).anchored(0.5, 0.5).step(self => {
+        objText.MediumIrregular(rejectMessage, { tint: colors.textSecondary }).anchored(0.5, 0.5).step(self => {
             if (!isSliderSelected && scene.ticker.ticks % 15 === 0) {
                 self.seed += 1;
             }
@@ -153,9 +156,10 @@ function objHeader(text: string, tint: RgbInt) {
 interface ObjSliderArgs {
     max: Integer;
     value: Integer;
+    colors: DramaLib.Speaker.Colors;
 }
 
-function objSlider({ max, value }: ObjSliderArgs) {
+function objSlider({ max, value, colors }: ObjSliderArgs) {
     const width = 224;
     const fgGfx = new Graphics().beginFill(0xffffff).drawRect(0, 0, 1, 12).at(14, 26);
 
@@ -164,13 +168,15 @@ function objSlider({ max, value }: ObjSliderArgs) {
         value,
     };
 
-    const valueTextObj = objText.MediumBoldIrregular(String(value), { tint: 0x000000 })
+    const valueTextObj = objText.MediumBoldIrregular(String(value), { tint: colors.textSecondary })
         .scaled(2, 2)
         .anchored(0.5, 0.5)
         .step(self => self.text = String(controls.value));
 
     return container(
-        Sprite.from(Tx.Ui.Dialog.AskRemoveCountSliderBox).anchored(0.5, 0.5).mixin(mxnBoilMirrorRotate).at(148, 31),
+        Sprite.from(Tx.Ui.Dialog.AskRemoveCountSliderBox).tinted(colors.secondary).anchored(0.5, 0.5).mixin(
+            mxnBoilMirrorRotate,
+        ).at(148, 31),
         new Graphics().lineStyle({
             alignment: 1,
             alpha: 1,

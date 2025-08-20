@@ -3,7 +3,6 @@ import { fntErotix } from "../../assets/bitmap-fonts/fnt-erotix";
 import { fntErotixLight } from "../../assets/bitmap-fonts/fnt-erotix-light";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
-import { SubjectiveColorAnalyzer } from "../../lib/color/subjective-color-analyzer";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { holdf } from "../../lib/game-engine/routines/hold";
 import { interpvr } from "../../lib/game-engine/routines/interp";
@@ -16,31 +15,18 @@ import { isNotNullish } from "../../lib/types/guards/is-not-nullish";
 import { IndicesOf } from "../../lib/types/indices-of";
 import { Null } from "../../lib/types/null";
 import { renderer } from "../current-pixi-renderer";
-import { Cutscene, Input, layers, scene } from "../globals";
+import { Input, layers, scene } from "../globals";
 import { mxnBoilMirrorRotate } from "../mixins/mxn-boil-mirror-rotate";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objUiPage } from "../ui/framework/obj-ui-page";
+import { DramaLib } from "./drama-lib";
 
 const [txSpeakBox, txSpeakBoxOutline, txSpeakBoxTail] = Tx.Ui.Dialog.SpeakBox.split({ count: 3 });
 
-function getMessageBoxColors(speaker: DisplayObject | null) {
-    const primary = speaker?.is(mxnSpeaker) ? speaker.speaker.colorPrimary : 0x600000;
-    const secondary = speaker?.is(mxnSpeaker) ? speaker.speaker.colorSecondary : 0x400000;
-    const textPrimary = SubjectiveColorAnalyzer.getPreferredTextColor(primary);
-    const textSecondary = SubjectiveColorAnalyzer.getPreferredTextColor(secondary);
-
-    return {
-        primary,
-        secondary,
-        textPrimary,
-        textSecondary,
-    };
-}
-
 function objSpeakerMessageBox(speaker: DisplayObject | null) {
-    const colors = getMessageBoxColors(speaker);
-    const name = speaker?.is(mxnSpeaker) ? speaker.speaker.name : "???";
+    const colors = DramaLib.Speaker.getColors(speaker);
+    const name = DramaLib.Speaker.getName(speaker);
 
     const state = {
         speaker,
@@ -109,9 +95,7 @@ function endSpeaking(currentSpeaker: DisplayObject | null, currentSpeakerMessage
 }
 
 function* startSpeaking(text: string) {
-    const currentSpeaker = Cutscene.current?.attributes?.speaker?.destroyed
-        ? null
-        : (Cutscene.current?.attributes.speaker ?? null);
+    const currentSpeaker = DramaLib.Speaker.current;
     let currentSpeakerMessageBoxObj = speakerMessageBoxObj?.destroyed ? null : speakerMessageBoxObj;
 
     if (currentSpeakerMessageBoxObj) {
@@ -183,7 +167,7 @@ function objQuestionOptionBox(text: string, color: RgbInt, textColor: RgbInt) {
 }
 
 function objQuestionOptionBoxes(speaker: DisplayObject | null, options: AskOptions) {
-    const colors = getMessageBoxColors(speaker);
+    const colors = DramaLib.Speaker.getColors(speaker);
     const state = { confirmedIndex: -1 };
 
     let layoutIndex = 0;
