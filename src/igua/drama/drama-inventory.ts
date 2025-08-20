@@ -2,7 +2,8 @@ import { Graphics, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
 import { Logger } from "../../lib/game-engine/logger";
-import { factor, interpvr } from "../../lib/game-engine/routines/interp";
+import { Coro } from "../../lib/game-engine/routines/coro";
+import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { onMutate } from "../../lib/game-engine/routines/on-mutate";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
@@ -39,8 +40,6 @@ function* askRemoveCount(
 
     const max = Math.max(Math.floor(Rpg.inventory.count(item) / multipleOf) * multipleOf, rawMax ?? 0);
 
-    console.log(max, Rpg.inventory.count(item));
-
     const obj = container().show(layers.overlay.messages);
 
     const messageObj = container(
@@ -57,20 +56,23 @@ function* askRemoveCount(
     yield () => Input.isUp("Confirm");
     yield () => Input.justWentDown("Confirm");
 
+    let isControllable = true;
     let isSliderSelected = true;
 
-    container(
+    const sliderObj = objSlider({ max, value: min });
+
+    const sliderContainerObj = container(
         new Graphics().beginFill(0x000000).drawRect(-140, -20, 300, 60)
             .mixin(mxnBoilPivot)
             .step(self => self.visible = isSliderSelected),
-        objSlider({ max, value: min })
+        sliderObj
             .pivotedUnit(0.5, 0.5)
             .mixin(mxnActionRepeater, ["SelectLeft", "SelectRight"])
             .step(self => {
                 const scale = isSliderSelected ? 1 : 0.9;
                 self.scaled(scale, scale);
 
-                if (!isSliderSelected) {
+                if (!isSliderSelected || !isControllable) {
                     return;
                 }
 
@@ -90,7 +92,7 @@ function* askRemoveCount(
         .at(renderer.width / 2, 140)
         .show(obj);
 
-    container(
+    const rejectButtonObj = container(
         Sprite.from(Tx.Ui.Dialog.AskRemoveCountRejectBox).tinted(0x000000).anchored(0.5, 0.5).scaled(1.2, 1.2)
             .invisible()
             .step(self => self.visible = !isSliderSelected)
@@ -100,17 +102,39 @@ function* askRemoveCount(
             .step(self => {
                 self.pivot.y = isSliderSelected ? 0 : Math.round(Math.sin(scene.ticker.ticks / 60 * Math.PI) * 2);
             }),
+        objText.MediumIrregular(rejectMessage, { tint: 0x000000 }).anchored(0.5, 0.5).step(self => {
+            if (!isSliderSelected && scene.ticker.ticks % 15 === 0) {
+                self.seed += 1;
+            }
+        }),
     )
         .at(renderer.width / 2, 200)
         .show(obj);
 
     obj.step(() => {
+        if (!isControllable) {
+            return;
+        }
         if (Input.justWentDown("SelectUp") || Input.justWentDown("SelectDown")) {
             isSliderSelected = !isSliderSelected;
         }
     });
 
+    yield () => Input.isUp("Confirm");
     yield () => Input.justWentDown("Confirm");
+
+    const value = isSliderSelected ? sliderObj.controls.value : null;
+    isControllable = false;
+
+    yield* Coro.all([
+        interpvr(messageObj).translate(0, -128).over(400),
+        interpv(sliderContainerObj.scale).steps(4).to(0, 0).over(400),
+        interpvr(rejectButtonObj).steps(5).translate(0, 200).over(700),
+    ]);
+
+    obj.destroy();
+
+    return value;
 }
 
 function objHeader(text: string, tint: RgbInt) {
