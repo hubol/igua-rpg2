@@ -1,4 +1,4 @@
-import { Graphics, Sprite } from "pixi.js";
+import { Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
 import { Logger } from "../../lib/game-engine/logger";
@@ -6,6 +6,7 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { onMutate } from "../../lib/game-engine/routines/on-mutate";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { approachLinear } from "../../lib/math/number";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
@@ -170,7 +171,16 @@ function objSlider({ max, value }: ObjSliderArgs) {
 
     return container(
         Sprite.from(Tx.Ui.Dialog.AskRemoveCountSliderBox).anchored(0.5, 0.5).mixin(mxnBoilMirrorRotate).at(148, 31),
-        new Graphics().lineStyle(3, 0x000000, 1, 1).beginFill(0x000000).drawRect(0, 0, width, 12).at(fgGfx),
+        new Graphics().lineStyle({
+            alignment: 1,
+            alpha: 1,
+            color: 0x000000,
+            width: 4,
+            cap: LINE_CAP.ROUND,
+            join: LINE_JOIN.ROUND,
+        })
+            .beginFill(0x000000)
+            .drawRect(0, 0, width, 12).at(fgGfx).angled(0.3),
         fgGfx,
         container(valueTextObj)
             .at(270, 37)
@@ -191,15 +201,16 @@ function objSlider({ max, value }: ObjSliderArgs) {
     )
         .merge({ controls })
         .step(() => {
+            let target = width;
+
             if (controls.value <= 0) {
-                fgGfx.scale.x = 0;
+                target = 0;
             }
             else if (controls.value < max) {
-                fgGfx.scale.x = Math.max(1, Math.round((controls.value / max) * (width - 1)));
+                target = Math.max(1, Math.round((controls.value / max) * (width - 1)));
             }
-            else {
-                fgGfx.scale.x = width;
-            }
+
+            fgGfx.scale.x = approachLinear(fgGfx.scale.x + (target - fgGfx.scale.x) * 0.3, target, 1);
         });
 }
 
