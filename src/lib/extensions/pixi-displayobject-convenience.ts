@@ -41,6 +41,8 @@ declare module "pixi.js" {
     interface Container {
         pivoted(vector: VectorSimple): this;
         pivoted(x: number, y: number): this;
+        pivotedUnit(vector: VectorSimple): this;
+        pivotedUnit(x: number, y: number): this;
         sized(vector: VectorSimple): this;
         sized(width: number, height: number): this;
         autoSorted(): this;
@@ -91,6 +93,22 @@ Object.defineProperties(DisplayObject.prototype, {
             }
             else {
                 this.transform.pivot.set(<number> x_vector, y);
+            }
+
+            return this;
+        },
+    },
+    pivotedUnit: {
+        value: function (this: Container, x_vector: number | VectorSimple, y?: number) {
+            console.log(this.width, this.height);
+            if (y === undefined) {
+                this.transform.pivot.set(
+                    Math.round((<VectorSimple> x_vector).x * this.width),
+                    Math.round((<VectorSimple> x_vector).y * this.height),
+                );
+            }
+            else {
+                this.transform.pivot.set(Math.round(<number> x_vector * this.width), Math.round(y * this.height));
             }
 
             return this;
