@@ -2,6 +2,7 @@ import { DisplayObject } from "pixi.js";
 import { Action } from "../../core/input";
 import { Input } from "../../globals";
 
+// TODO see if usages can use `mxnActionRepeater`
 export function createActionRepeater(o: DisplayObject, action: Action) {
     let keyDownFor = 0;
     let repeats = 0;
