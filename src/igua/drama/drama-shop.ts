@@ -12,17 +12,12 @@ import { vequals } from "../../lib/math/vector";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
-import { DataEquipment } from "../data/data-equipment";
-import { DataKeyItem } from "../data/data-key-item";
-import { DataPotion } from "../data/data-potion";
+import { DataItem } from "../data/data-item";
 import { DataShop } from "../data/data-shop";
 import { Input, layers, scene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnErrorVibrate } from "../mixins/mxn-error-vibrate";
-import { objFigureEquipment } from "../objects/figures/obj-figure-equipment";
-import { objFigureKeyItem } from "../objects/figures/obj-figure-key-item";
-import { objFigurePotion } from "../objects/figures/obj-figure-potion";
 import { experienceIndicatorConfigs, experienceIndicatorConfigsArray } from "../objects/overlay/obj-hud";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
@@ -251,12 +246,12 @@ function objDramaShopStock(
 }
 
 function objStockNameDescription(stock: RpgStock) {
-    const nameText = getStockName(stock);
-    const descriptionText = getStockDescription(stock);
+    const nameText = DataItem.getName(stock.product);
+    const descriptionText = DataItem.getDescription(stock.product);
 
     const nameTextObj = objText.Large(nameText, { tint: CtxDramaShop.value.style.primaryTint });
 
-    const figureObj = getStockFigure(stock).at(nameTextObj.width + 9, -15);
+    const figureObj = DataItem.getFigureObj(stock.product).at(nameTextObj.width + 9, -15);
 
     const ellipseObj = new Graphics().lineStyle(1, CtxDramaShop.value.style.primaryTint).beginFill(
         CtxDramaShop.value.style.secondaryTint,
@@ -274,53 +269,8 @@ function objStockNameDescription(stock: RpgStock) {
         nameObj,
         figureObj,
         objText.Medium(descriptionText, { tint: CtxDramaShop.value.style.secondaryTint, maxWidth: 224 }).at(9, 18),
-        objOwnedCount(getStockPlayerOwnedCount(stock)).at(nameObj.width + 32, 4),
+        objOwnedCount(Rpg.inventory.count(stock.product)).at(nameObj.width + 32, 4),
     );
-}
-
-function getStockName(item: RpgStock) {
-    switch (item.product.kind) {
-        case "equipment":
-            return DataEquipment.getById(item.product.id).name;
-        case "key_item":
-            return DataKeyItem.getById(item.product.id).name;
-        case "potion":
-            return DataPotion.getById(item.product.id).name;
-    }
-}
-
-function getStockFigure(stock: RpgStock) {
-    switch (stock.product.kind) {
-        case "key_item":
-            return objFigureKeyItem(stock.product.id);
-        case "equipment":
-            return objFigureEquipment(stock.product.id);
-        case "potion":
-            return objFigurePotion(stock.product.id);
-    }
-}
-
-function getStockDescription(item: RpgStock) {
-    switch (item.product.kind) {
-        case "equipment":
-            return DataEquipment.getById(item.product.id).description;
-        case "key_item":
-            return DataKeyItem.getById(item.product.id).description;
-        case "potion":
-            return DataPotion.getById(item.product.id).description;
-    }
-}
-
-// TODO likely does not belong here
-function getStockPlayerOwnedCount(stock: RpgStock): Integer {
-    if (stock.product.kind === "potion") {
-        return Rpg.inventory.potions.count(stock.product.id);
-    }
-    else if (stock.product.kind === "equipment") {
-        return Rpg.inventory.equipment.count(stock.product.id);
-    }
-
-    return Rpg.inventory.keyItems.count(stock.product.id);
 }
 
 function objStockPrice(item: RpgStock) {
