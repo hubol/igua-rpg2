@@ -42,7 +42,8 @@ function* askRemoveCount(
         );
     }
 
-    const max = Math.max(Math.floor(Rpg.inventory.count(item) / multipleOf) * multipleOf, rawMax ?? 0);
+    const heldCount = Rpg.inventory.count(item);
+    const max = Math.max(Math.floor(heldCount / multipleOf) * multipleOf, rawMax ?? 0);
 
     const obj = container().show(layers.overlay.messages);
 
@@ -60,10 +61,12 @@ function* askRemoveCount(
     yield () => Input.isUp("Confirm");
     yield () => Input.justWentDown("Confirm");
 
-    let isControllable = true;
-    let isSliderSelected = true;
+    const isHoldingAtLeastMinimum = heldCount >= min;
 
-    const sliderObj = objSlider({ max, value: min, colors });
+    let isControllable = true;
+    let isSliderSelected = isHoldingAtLeastMinimum;
+
+    const sliderObj = objSlider({ max, value: isHoldingAtLeastMinimum ? min : 0, colors });
 
     const sliderContainerObj = container(
         new Graphics().beginFill(0x000000).drawRect(-140, -20, 300, 60)
@@ -115,8 +118,16 @@ function* askRemoveCount(
         .at(renderer.width / 2, 200)
         .show(obj);
 
+    if (!isHoldingAtLeastMinimum) {
+        objText.MediumIrregular("You need at least " + min, { tint: 0xc00000 })
+            .anchored(0.5, 0.5)
+            .at(0, 4)
+            .mixin(mxnBoilPivot)
+            .show(sliderContainerObj);
+    }
+
     obj.step(() => {
-        if (!isControllable) {
+        if (!isControllable || !isHoldingAtLeastMinimum) {
             return;
         }
         if (Input.justWentDown("SelectUp") || Input.justWentDown("SelectDown")) {
