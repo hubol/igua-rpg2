@@ -149,6 +149,7 @@ function objCutsceneRunner() {
                         yield scene.camera.auto.panToSubject(attributes.speaker);
                     }
                     yield* fn();
+                    // TODO I think `clear` might be able to just clear the overlay messages!
                     clear();
                     if (
                         attributes.camera.end === "delay_if_camera_moved_set_mode_follow_player"
