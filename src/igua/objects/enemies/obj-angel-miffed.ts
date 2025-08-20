@@ -38,9 +38,10 @@ const ranks = {
             // TODO idk
             tier0: [{ kind: "valuables", deltaPride: -1, max: 10, min: 1 }],
             tier1: [
-                { kind: "flop", min: 15, max: 19, weight: 40 },
-                { kind: "potion", id: "Poison", weight: 30 },
-                { kind: "equipment", id: "FactionDefenseMiner", weight: 10 },
+                { kind: "flop", min: 15, max: 19, weight: 36 },
+                { kind: "potion", id: "Poison", weight: 27 },
+                { kind: "key_item", id: "SeedPurple", weight: 10 },
+                { kind: "equipment", id: "FactionDefenseMiner", weight: 7 },
                 { kind: "nothing", weight: 20 },
             ],
         },
