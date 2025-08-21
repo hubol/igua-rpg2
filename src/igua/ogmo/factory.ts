@@ -120,6 +120,7 @@ export namespace OgmoFactory {
             }
             else {
                 decalGroup.addChild(spr);
+                spr.add(decalGroup, -1);
             }
         }
 
@@ -128,8 +129,8 @@ export namespace OgmoFactory {
         return spr;
     }
 
-    export function createDecalGroup(groupName: string, layerName: string) {
-        const obj = (container() as Container<Sprite>).named(`Decal Group: ${groupName}`).merge({ groupName });
+    export function createDecalGroup(x: number, y: number, groupName: string, layerName: string) {
+        const obj = (container() as Container<Sprite>).named(`Decal Group: ${groupName}`).merge({ groupName }).at(x, y);
 
         if (decalGroups.has(groupName)) {
             Logger.logContractViolationError(

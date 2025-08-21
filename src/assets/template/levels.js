@@ -56,7 +56,8 @@ module.exports = function ({ files }, { pascal, noext, format }) {
             return name;
         }
 
-        const resolvedGroupNames = new Set();
+        /** @type {Record<string, { x: number, y: number, key: string, value: string }>} */
+        const groups = {}
 
         const resolveEntities = entities.flatMap(entity => {
             const resolvedEntity = {
@@ -66,16 +67,27 @@ module.exports = function ({ files }, { pascal, noext, format }) {
                     : `e(r["${entity.name}"], ${serialize(getSerializableOgmoEntityArgs(entity), 0)}, "${entity.layerName}")`,
             };
 
-            if (!entity.texture || !entity.groupName || resolvedGroupNames.has(entity.groupName)) {
+            const existingGroup = groups[entity.groupName]
+
+            if (!entity.texture || !entity.groupName || existingGroup) {
+                if (existingGroup) {
+                    existingGroup.x = Math.min(existingGroup.x, entity.x);
+                    existingGroup.y = Math.min(existingGroup.y, entity.y);
+                }
+
                 return [resolvedEntity];
             }
 
             const resolvedGroup = {
                 key: getUniqueName({ name: pascal(entity.groupName) }),
-                value: `dg("${entity.groupName}", "${entity.layerName}")`,
+                x: entity.x,
+                y: entity.y,
+                get value() {
+                    return `dg(${this.x}, ${this.y}, "${entity.groupName}", "${entity.layerName}")`
+                },
             };
 
-            resolvedGroupNames.add(entity.groupName);
+            groups[entity.groupName] = resolvedGroup;
 
             return [
                 resolvedGroup,
