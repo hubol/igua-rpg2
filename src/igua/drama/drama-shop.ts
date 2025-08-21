@@ -269,7 +269,12 @@ function objStockNameDescription(stock: RpgStock) {
         nameObj,
         figureObj,
         objText.Medium(descriptionText, { tint: CtxDramaShop.value.style.secondaryTint, maxWidth: 224 }).at(9, 18),
-        objOwnedCount(Rpg.inventory.count(stock.product)).at(nameObj.width + 32, 4),
+        objOwnedCount({
+            count: Rpg.inventory.count(stock.product),
+            fgTint: CtxDramaShop.value.style.primaryTint,
+            bgTint: CtxDramaShop.value.style.secondaryTint,
+            visibleWhenZero: false,
+        }).at(nameObj.width + 32, 4),
     );
 }
 
@@ -277,23 +282,45 @@ function objStockPrice(item: RpgStock) {
     return objCurrencyAmount(item.price, item.currency, Rpg.wallet.canAfford(item));
 }
 
-function objOwnedCount(count: Integer) {
-    const textObj = objText.SmallDigits(count === 1 ? "OWNED" : `${count} OWNED`, {
-        tint: CtxDramaShop.value.style.primaryTint,
-    });
-    const gfx = new Graphics().beginFill(CtxDramaShop.value.style.secondaryTint).drawRect(
-        -1,
-        -1,
-        textObj.width + 2,
-        textObj.height + 2,
-    );
+interface ObjOwnedCountArgs {
+    count: Integer;
+    bgTint: RgbInt;
+    fgTint: RgbInt;
+    visibleWhenZero: boolean;
+}
+
+function objOwnedCount(args: ObjOwnedCountArgs) {
+    let count = args.count;
+
+    const controls = {
+        get count() {
+            return count;
+        },
+        set count(value) {
+            count = value;
+            update();
+        },
+    };
+
+    const textObj = objText.SmallDigits("", { tint: CtxDramaShop.value.style.primaryTint });
+    const gfx = new Graphics();
 
     const obj = container(gfx, textObj);
-    if (count < 1) {
-        obj.visible = false;
+
+    function update() {
+        textObj.text = count === 1 ? "OWNED" : `${count} OWNED`;
+        gfx.clear().beginFill(CtxDramaShop.value.style.secondaryTint).drawRect(
+            -1,
+            -1,
+            textObj.width + 2,
+            textObj.height + 2,
+        );
+        obj.visible = args.visibleWhenZero || count > 0;
     }
 
-    return obj;
+    update();
+
+    return obj.merge({ controls });
 }
 
 // TODO this must be exhaustive
