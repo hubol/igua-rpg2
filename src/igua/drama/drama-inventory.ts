@@ -8,6 +8,8 @@ import { onMutate } from "../../lib/game-engine/routines/on-mutate";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../lib/math/number";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
+import { Rng } from "../../lib/math/rng";
+import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataItem } from "../data/data-item";
@@ -16,6 +18,8 @@ import { mxnActionRepeater } from "../mixins/mxn-action-repeater";
 import { mxnBoilMirrorRotate } from "../mixins/mxn-boil-mirror-rotate";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnBoilSeed } from "../mixins/mxn-boil-seed";
+import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
+import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { DramaLib } from "./drama-lib";
@@ -29,10 +33,31 @@ interface AskUseCountOptions {
 
 function* askRemoveCount(
     message: string,
-    item: RpgInventory.Item,
+    item: RpgInventory.RemovableItem,
     { min = 1, max: rawMax, multipleOf = 1, rejectMessage = "Never mind" }: AskUseCountOptions = {},
 ) {
     const colors = DramaLib.Speaker.getColors();
+
+    if (multipleOf < 1) {
+        Logger.logContractViolationError(
+            "DramaInventory",
+            new Error("askRemoveCount multipleOf must be >= 1, setting to 1"),
+            { multipleOf },
+        );
+        multipleOf = 1;
+    }
+
+    if (min < multipleOf) {
+        Logger.logContractViolationError(
+            "DramaInventory",
+            new Error("askRemoveCount min must be >= multipleOf, setting to multipleOf"),
+            {
+                min,
+                multipleOf,
+            },
+        );
+        min = multipleOf;
+    }
 
     if (min % multipleOf !== 0) {
         Logger.logContractViolationError(
@@ -138,8 +163,19 @@ function* askRemoveCount(
     yield () => Input.isUp("Confirm");
     yield () => Input.justWentDown("Confirm");
 
-    const value = isSliderSelected ? sliderObj.controls.value : null;
-    isControllable = false;
+    const sliderValue = sliderObj.controls.value;
+    const value = isSliderSelected && sliderValue ? sliderValue : null;
+
+    const removeFiguresObj = container()
+        .coro(function* (self) {
+            for (let i = 0; i < Number(value); i++) {
+                objRemovedFigure(item).at(playerObj).add(Rng.float(-8, 8), Rng.float(-32, -40)).show();
+                yield sleepf(Math.max(1, 10 - i * 0.1));
+            }
+
+            self.destroy();
+        })
+        .show(layers.overlay.messages);
 
     yield* Coro.all([
         interpvr(messageObj).translate(0, -128).over(400),
@@ -149,7 +185,40 @@ function* askRemoveCount(
 
     obj.destroy();
 
+    if (value) {
+        Rpg.inventory.remove(item, value);
+    }
+
+    yield () => removeFiguresObj.destroyed;
+
     return value;
+}
+
+function objRemovedFigure(item: RpgInventory.RemovableItem) {
+    const speed = vnew(Rng.float(-1, 1), Rng.float(-2.5, -3.5));
+    const gravity = Rng.float(0.1, 0.15);
+
+    let angle = 0;
+
+    return DataItem.getFigureObj(item)
+        .pivotedUnit(0.5, 0.5)
+        .scaled(0, 0)
+        .coro(function* (self) {
+            yield* Coro.all([
+                interpv(self.scale).steps(3).to(1, 1).over(100),
+                interpvr(self).factor(factor.sine).translate(0, -6).over(100),
+            ]);
+            self.step(() => {
+                self.add(speed);
+                speed.y += gravity;
+
+                angle += speed.x * 4 + Math.sign(speed.x) * 2;
+                self.angle = Math.round(angle / 90) * 90;
+            });
+            yield sleepf(90);
+            objFxBurst32().at(self).show();
+            self.destroy();
+        });
 }
 
 function objHeader(text: string, tint: RgbInt) {
