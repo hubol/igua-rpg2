@@ -14,6 +14,7 @@ import { Force } from "../../lib/types/force";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataNpcPersona } from "../data/data-npc-persona";
+import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
 import { dramaShop } from "../drama/drama-shop";
 import { DramaWallet } from "../drama/drama-wallet";
@@ -28,7 +29,6 @@ import { IguanaLocomotiveConsts } from "../objects/obj-iguana-locomotive";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { objMarker } from "../objects/utils/obj-marker";
 import { Rpg } from "../rpg/rpg";
-import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 
 export function scnNewBalltown() {
     Jukebox.play(Mzk.HomosexualFeet);
@@ -281,11 +281,9 @@ What would you like to do?`,
 That's worth ${count} credit(s). Do you want to deposit them?`)
                             ) {
                                 yield* show("Got it! Let's get those deposited...");
-                                yield sleep(250);
-                                Rpg.inventory.pocket.remove("ComputerChip", count);
+                                yield* DramaInventory.remove({ kind: "pocket_item", id: "ComputerChip" }, count);
                                 Rpg.wallet.earn("mechanical_idol_credits", count);
                                 Rpg.experience.reward.computer.onDepositComputerChips(count);
-                                yield sleep(250);
                                 yield* show("All done!");
                             }
                             else {
