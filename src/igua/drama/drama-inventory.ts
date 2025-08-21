@@ -263,7 +263,7 @@ function objRemovedFigure(item: RpgInventory.RemovableItem) {
                 yield* Coro.race([
                     () => speakerObj.destroyed,
                     Coro.chain([sleepf(10), () => speakerObj.collides(self)]),
-                    interpvr(self).factor(factor.sine).to(speakerObj).over(300),
+                    interpvr(self).factor(factor.sine).to(speakerObj.getWorldCenter()).over(300),
                 ]);
             }
             else {
