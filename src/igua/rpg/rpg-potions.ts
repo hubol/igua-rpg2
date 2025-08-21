@@ -22,7 +22,9 @@ export class RpgPotions {
 
         this._excessList.length = 0;
         for (let i = Consts.Size; i < this._state.length; i++) {
-            this._excessList[i - Consts.Size] = this._state[i];
+            if (this._state[i]) {
+                this._excessList.push(this._state[i]);
+            }
         }
     }
 
@@ -71,6 +73,37 @@ export class RpgPotions {
         this._updateLists();
     }
 
+    private _removeIndex(index: Integer) {
+        const deleted = this._state.splice(Consts.Size, 1);
+        this._state[index] = deleted[0] ?? null;
+    }
+
+    remove(potionId: DataPotion.Id, count: Integer) {
+        let removedCount = 0;
+
+        for (let i = 0; i < this._state.length;) {
+            if (this._state[i] === potionId) {
+                this._removeIndex(i);
+
+                if (++removedCount >= count) {
+                    break;
+                }
+            }
+            else {
+                i++;
+            }
+        }
+        this._updateLists();
+
+        if (removedCount !== count) {
+            Logger.logContractViolationError(
+                "RpgPotions",
+                new Error("Failed to remove() requested count of potions. Did you check with count()?"),
+                { potionId, count, removedCount },
+            );
+        }
+    }
+
     use(index: Integer) {
         if (!(index in this._list)) {
             Logger.logContractViolationError("RpgPotions", new Error("use() received out-of-bounds index"), {
@@ -88,9 +121,7 @@ export class RpgPotions {
         // TODO I think this should require an RpgPlayer to be passed
         DataPotion.usePotion(potionId);
 
-        const deleted = this._state.splice(Consts.Size, 1);
-        this._state[index] = deleted[0] ?? null;
-
+        this._removeIndex(index);
         this._updateLists();
     }
 
