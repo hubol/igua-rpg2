@@ -3,13 +3,13 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { interpv } from "../../lib/game-engine/routines/interp";
 import { Jukebox } from "../core/igua-audio";
+import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
 import { show } from "../drama/show";
 import { mxnBoilMirrorRotate } from "../mixins/mxn-boil-mirror-rotate";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { Rpg } from "../rpg/rpg";
-import { RpgPocket } from "../rpg/rpg-pocket";
 
 export function scnNewBalltownFanatic() {
     Jukebox.play(Mzk.CedarWorld);
@@ -69,10 +69,7 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
                 || (hasBallFruitTypeB && typePreference === "BallFruitTypeB")
             ) {
                 yield* show("These look awesome.", "How much do I owe you? Does 50 valuables sound good?");
-                Rpg.inventory.pocket.remove(
-                    typePreference,
-                    10,
-                );
+                yield* DramaInventory.remove({ kind: "pocket_item", id: typePreference }, 10);
                 yield* DramaQuests.completeQuest("NewBalltownFanaticDelivery", lvl.BallFruitFanaticNpc);
                 Rpg.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount++;
                 return;

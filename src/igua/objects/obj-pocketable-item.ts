@@ -7,11 +7,11 @@ import { approachLinear } from "../../lib/math/number";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
-import { DataPocketItem } from "../data/data-pocket-item";
 import { scene } from "../globals";
 import { MxnPhysics, mxnPhysics, PhysicsFaction } from "../mixins/mxn-physics";
 import { Rpg } from "../rpg/rpg";
 import { RpgPocket } from "../rpg/rpg-pocket";
+import { objFigurePocketItem } from "./figures/obj-figure-pocket-item";
 import { playerObj } from "./obj-player";
 import { objPocketCollectNotification } from "./pocket/obj-pocket-collect-notification";
 
@@ -28,10 +28,12 @@ objPocketableItem.parachuting = function objPocketableItemParachuting (item: Rpg
 };
 
 function objPocketableItemBase(item: RpgPocket.Item, freed: boolean) {
-    const tx = DataPocketItem.getById(item).texture;
-    const obj = container().merge({ freed, isCollectible: false, item, tx }).zIndexed(ZIndex.Entities);
+    const figureObj = objFigurePocketItem(item);
+    const obj = container()
+        .merge({ freed, isCollectible: false, item, figureHeight: figureObj.height })
+        .zIndexed(ZIndex.Entities);
 
-    Sprite.from(tx).anchored(0.5, 0.5).coro(function* (self) {
+    figureObj.pivotedUnit(0.5, 0.5).coro(function* (self) {
         yield () => obj.freed;
         self.alpha = 0.5;
         yield sleepf(15);
@@ -153,7 +155,7 @@ function getBounceSfxToPlay(vspeed: number) {
 function createPhysicsArgs(obj: ObjPocketableItemBase, gravity: number) {
     return {
         gravity,
-        physicsRadius: Math.floor(obj.tx.height * 0.3),
+        physicsRadius: Math.floor(obj.figureHeight * 0.3),
         physicsOffset: [0, 1],
         physicsFaction: PhysicsFaction.Environment,
     };

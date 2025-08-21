@@ -1,6 +1,7 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataEquipment } from "../data/data-equipment";
 import { DataKeyItem } from "../data/data-key-item";
+import { DataPocketItem } from "../data/data-pocket-item";
 import { DataPotion } from "../data/data-potion";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgFlops } from "./rpg-flops";
@@ -26,6 +27,8 @@ export class RpgInventory {
                 return this.keyItems.count(item.id);
             case "potion":
                 return this.potions.count(item.id);
+            case "pocket_item":
+                return this.pocket.count(item.id);
         }
     }
 
@@ -40,6 +43,9 @@ export class RpgInventory {
             case "potion":
                 this.potions.receive(item.id);
                 return;
+            case "pocket_item":
+                this.pocket.receive(item.id);
+                return;
         }
     }
 
@@ -50,6 +56,9 @@ export class RpgInventory {
                 return;
             case "potion":
                 this.potions.remove(item.id, count);
+                return;
+            case "pocket_item":
+                this.pocket.remove(item.id, count);
                 return;
         }
     }
@@ -73,7 +82,12 @@ export module RpgInventory {
         id: DataPotion.Id;
     }
 
-    export type Item = Item_Equipment | Item_KeyItem | Item_Potion;
+    interface Item_PocketItem {
+        kind: "pocket_item";
+        id: DataPocketItem.Id;
+    }
 
-    export type RemovableItem = Item_KeyItem | Item_Potion;
+    export type Item = Item_Equipment | Item_KeyItem | Item_PocketItem | Item_Potion;
+
+    export type RemovableItem = Item_KeyItem | Item_PocketItem | Item_Potion;
 }
