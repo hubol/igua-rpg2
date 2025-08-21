@@ -24,13 +24,14 @@ import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgStock } from "../rpg/rpg-shops";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
+import { objDramaOwnedCount } from "./objects/obj-drama-owned-count";
 
 export interface DramaShopStyle {
     primaryTint: RgbInt;
     secondaryTint: RgbInt;
 }
 
-const CtxDramaShop = new SceneLocal(
+export const CtxDramaShop = new SceneLocal(
     () => ({
         state: { isInteractive: false },
         style: { primaryTint: 0x802020, secondaryTint: 0xffffff } satisfies DramaShopStyle,
@@ -269,7 +270,7 @@ function objStockNameDescription(stock: RpgStock) {
         nameObj,
         figureObj,
         objText.Medium(descriptionText, { tint: CtxDramaShop.value.style.secondaryTint, maxWidth: 224 }).at(9, 18),
-        objOwnedCount({
+        objDramaOwnedCount({
             count: Rpg.inventory.count(stock.product),
             fgTint: CtxDramaShop.value.style.primaryTint,
             bgTint: CtxDramaShop.value.style.secondaryTint,
@@ -280,47 +281,6 @@ function objStockNameDescription(stock: RpgStock) {
 
 function objStockPrice(item: RpgStock) {
     return objCurrencyAmount(item.price, item.currency, Rpg.wallet.canAfford(item));
-}
-
-interface ObjOwnedCountArgs {
-    count: Integer;
-    bgTint: RgbInt;
-    fgTint: RgbInt;
-    visibleWhenZero: boolean;
-}
-
-function objOwnedCount(args: ObjOwnedCountArgs) {
-    let count = args.count;
-
-    const controls = {
-        get count() {
-            return count;
-        },
-        set count(value) {
-            count = value;
-            update();
-        },
-    };
-
-    const textObj = objText.SmallDigits("", { tint: CtxDramaShop.value.style.primaryTint });
-    const gfx = new Graphics();
-
-    const obj = container(gfx, textObj);
-
-    function update() {
-        textObj.text = count === 1 ? "OWNED" : `${count} OWNED`;
-        gfx.clear().beginFill(CtxDramaShop.value.style.secondaryTint).drawRect(
-            -1,
-            -1,
-            textObj.width + 2,
-            textObj.height + 2,
-        );
-        obj.visible = args.visibleWhenZero || count > 0;
-    }
-
-    update();
-
-    return obj.merge({ controls });
 }
 
 // TODO this must be exhaustive

@@ -1,11 +1,11 @@
-import { Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
+import { DisplayObject, Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
 import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { onMutate } from "../../lib/game-engine/routines/on-mutate";
-import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../lib/math/number";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
@@ -23,6 +23,7 @@ import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { DramaLib } from "./drama-lib";
+import { objDramaOwnedCount } from "./objects/obj-drama-owned-count";
 
 interface AskUseCountOptions {
     min?: Integer;
@@ -168,10 +169,7 @@ function* askRemoveCount(
 
     const removeFiguresObj = container()
         .coro(function* (self) {
-            for (let i = 0; i < Number(value); i++) {
-                objRemovedFigure(item).at(playerObj).add(Rng.float(-8, 8), Rng.float(-32, -40)).show();
-                yield sleepf(Math.max(1, 10 - i * 0.1));
-            }
+            yield* removeFromPlayer(item, Number(value));
 
             self.destroy();
         })
@@ -185,13 +183,47 @@ function* askRemoveCount(
 
     obj.destroy();
 
-    if (value) {
-        Rpg.inventory.remove(item, value);
-    }
-
     yield () => removeFiguresObj.destroyed;
 
     return value;
+}
+
+function* removeFromPlayer(item: RpgInventory.RemovableItem, count: Integer) {
+    if (count <= 0) {
+        return;
+    }
+
+    const colors = DramaLib.Speaker.getColors();
+
+    const initialCount = Rpg.inventory.count(item);
+    Rpg.inventory.remove(item, count);
+    const endingCount = Rpg.inventory.count(item);
+
+    const length = initialCount - endingCount;
+
+    const ownedObj = objDramaOwnedCount({
+        bgTint: colors.primary,
+        fgTint: colors.textPrimary,
+        count: initialCount,
+        visibleWhenZero: true,
+    })
+        .pivotedUnit(0.5, 0.5)
+        .at(playerObj)
+        .add(0, 10)
+        .show();
+
+    yield sleep(250);
+
+    let removedFigureObj: DisplayObject | null = null;
+
+    for (let i = 0; i < length; i++) {
+        ownedObj.controls.count = initialCount - i - 1;
+        removedFigureObj = objRemovedFigure(item).at(playerObj).add(Rng.float(-8, 8), Rng.float(-32, -40)).show();
+        yield sleepf(Math.max(1, 10 - i * 0.1));
+    }
+
+    yield () => !removedFigureObj || removedFigureObj.destroyed;
+    ownedObj.destroy();
 }
 
 function objRemovedFigure(item: RpgInventory.RemovableItem) {
