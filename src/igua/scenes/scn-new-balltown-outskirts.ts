@@ -8,6 +8,7 @@ import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataKeyItem } from "../data/data-key-item";
+import { DramaInventory } from "../drama/drama-inventory";
 import { DramaKeyItems } from "../drama/drama-key-items";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
@@ -188,7 +189,7 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
         if (Rpg.inventory.keyItems.has("UpgradedPickaxe", 1)) {
             yield* show(`Oh! I see that you have the ${DataKeyItem.Manifest.UpgradedPickaxe.name}!`);
             if (yield* ask("Will you give it to me? You can have any valuables I mine")) {
-                yield* DramaKeyItems.remove("UpgradedPickaxe");
+                yield* DramaInventory.remove({ kind: "key_item", id: "UpgradedPickaxe" }, 1);
                 yield* show("...?!", "Thank you so much!", "I will get right to work.");
                 Rpg.flags.outskirts.miner.hasUpgradedPickaxe = true;
                 Rpg.flags.outskirts.miner.pickaxeHealth += 15;

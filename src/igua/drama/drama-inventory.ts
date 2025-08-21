@@ -212,7 +212,7 @@ function* removeFromPlayer(item: RpgInventory.RemovableItem, count: Integer) {
         .add(0, 10)
         .show();
 
-    yield sleep(250);
+    yield sleep(750);
 
     let removedFigureObj: DisplayObject | null = null;
 
@@ -240,14 +240,36 @@ function objRemovedFigure(item: RpgInventory.RemovableItem) {
                 interpv(self.scale).steps(3).to(1, 1).over(100),
                 interpvr(self).factor(factor.sine).translate(0, -6).over(100),
             ]);
-            self.step(() => {
-                self.add(speed);
-                speed.y += gravity;
 
-                angle += speed.x * 4 + Math.sign(speed.x) * 2;
-                self.angle = Math.round(angle / 90) * 90;
-            });
-            yield sleepf(90);
+            const motionObj = container()
+                .step(() => {
+                    self.add(speed);
+                    speed.y += gravity;
+
+                    angle += speed.x * 4 + Math.sign(speed.x) * 2;
+                    self.angle = Math.round(angle / 90) * 90;
+                })
+                .show(self);
+
+            yield () => speed.y >= 0;
+
+            const speakerObj = DramaLib.Speaker.current;
+
+            if (speakerObj) {
+                motionObj.destroy();
+
+                yield sleepf(10);
+
+                yield* Coro.race([
+                    () => speakerObj.destroyed,
+                    Coro.chain([sleepf(10), () => speakerObj.collides(self)]),
+                    interpvr(self).factor(factor.sine).to(speakerObj).over(300),
+                ]);
+            }
+            else {
+                yield sleepf(90);
+            }
+
             objFxBurst32().at(self).show();
             self.destroy();
         });
@@ -334,4 +356,5 @@ function objSlider({ max, value, colors }: ObjSliderArgs) {
 
 export const DramaInventory = {
     askRemoveCount,
+    remove: removeFromPlayer,
 };
