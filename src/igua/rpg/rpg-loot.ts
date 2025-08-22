@@ -139,7 +139,7 @@ export namespace RpgLoot {
         },
     };
 
-    function pickOptionDrop(tierOptions: TierOption[]): TierOptionDrop | null {
+    function pickOptionDrop(tierOptions: TierOption[]): Exclude<TierOptionDrop, { kind: "nothing" }> | null {
         if (tierOptions.length === 0) {
             return null;
         }
@@ -159,7 +159,7 @@ export namespace RpgLoot {
 
         for (const { drop, score } of dropWithMinimumScores) {
             if (playerScore < score) {
-                return drop;
+                return drop.kind === "nothing" ? null : drop;
             }
         }
 
