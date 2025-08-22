@@ -13,6 +13,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataItem } from "../data/data-item";
+import { DataPocketItem } from "../data/data-pocket-item";
 import { Input, layers, scene } from "../globals";
 import { mxnActionRepeater } from "../mixins/mxn-action-repeater";
 import { mxnBoilMirrorRotate } from "../mixins/mxn-boil-mirror-rotate";
@@ -193,13 +194,20 @@ function* removeFromPlayer(item: RpgInventory.RemovableItem, count: Integer) {
         return;
     }
 
-    const colors = DramaLib.Speaker.getColors();
-
     const initialCount = Rpg.inventory.count(item);
     Rpg.inventory.remove(item, count);
     const endingCount = Rpg.inventory.count(item);
 
-    const length = initialCount - endingCount;
+    return yield* _removeFromPlayer(item, initialCount, endingCount);
+}
+
+function* _removeFromPlayer(item: RpgInventory.RemovableItem, initialCount: Integer, endingCount: Integer) {
+    if (initialCount === endingCount) {
+        return;
+    }
+
+    const colors = DramaLib.Speaker.getColors();
+    const count = initialCount - endingCount;
 
     const ownedObj = objDramaOwnedCount({
         bgTint: colors.primary,
@@ -216,7 +224,7 @@ function* removeFromPlayer(item: RpgInventory.RemovableItem, count: Integer) {
 
     let removedFigureObj: DisplayObject | null = null;
 
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < count; i++) {
         ownedObj.controls.count = initialCount - i - 1;
         removedFigureObj = objRemovedFigure(item).at(playerObj).add(Rng.float(-8, 8), Rng.float(-32, -40)).show();
         yield sleepf(Math.max(1, 10 - i * 0.1));
@@ -354,7 +362,21 @@ function objSlider({ max, value, colors }: ObjSliderArgs) {
         });
 }
 
+function* emptyPocket() {
+    const result = Rpg.inventory.pocket.empty();
+
+    for (const pocketItemId of Object.keys(result.items) as DataPocketItem.Id[]) {
+        const removedCount = result.items[pocketItemId];
+        yield* _removeFromPlayer({ kind: "pocket_item", id: pocketItemId }, removedCount, 0);
+    }
+
+    return result;
+}
+
 export const DramaInventory = {
     askRemoveCount,
     remove: removeFromPlayer,
+    pocket: {
+        empty: emptyPocket,
+    },
 };
