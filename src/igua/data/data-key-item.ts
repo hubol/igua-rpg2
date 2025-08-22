@@ -41,6 +41,11 @@ export namespace DataKeyItem {
                 description: "The seed of a lucky idea.",
                 texture: Tx.Collectibles.Key.SeedPurple,
             },
+            FlopBlindBox: {
+                name: "Blind Box (Flop)",
+                description: "Only a professional collector should open this.",
+                texture: Tx.Collectibles.Key.FlopBlindBox,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );
