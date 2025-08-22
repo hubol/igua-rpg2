@@ -1,18 +1,19 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataEquipment } from "../data/data-equipment";
+import { DataKeyItem } from "../data/data-key-item";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { DataPotion } from "../data/data-potion";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { RpgLoot } from "../rpg/rpg-loot";
 import { RpgPlayerBuffs } from "../rpg/rpg-player-buffs";
 
-export function devSimulateLoot(loot: RpgLoot.Model) {
+export function devSimulateLoot(loot: RpgLoot.Model, buffs = RpgPlayerBuffs.create()) {
     const { status } = RpgEnemyRank.create({});
-    const buffs = RpgPlayerBuffs.create();
 
     const counts = {
         equipments: new Map<DataEquipment.Id, Integer>(),
         flops: new Map<Integer, Integer>(),
+        keyItems: new Map<DataKeyItem.Id, Integer>(),
         pocketItems: new Map<DataPocketItem.Id, Integer>(),
         potions: new Map<DataPotion.Id, Integer>(),
         valuables: new Map<Integer, Integer>(),
@@ -20,18 +21,35 @@ export function devSimulateLoot(loot: RpgLoot.Model) {
 
     const iterationsCount = 100000;
 
+    console.log(buffs.loot.tiers.nothingRerollCount);
+
     for (let i = 0; i < iterationsCount; i++) {
         const drop = RpgLoot.Methods.drop(loot, status, buffs.loot);
         increment(counts.equipments, drop.equipments);
         increment(counts.flops, drop.flops);
+        increment(counts.keyItems, drop.keyItems);
         increment(counts.pocketItems, drop.pocketItems);
         increment(counts.potions, drop.potions);
         increment(counts.valuables, drop.valuables);
+
+        if (i === 1 || i === 9999 || i === iterationsCount - 1) {
+            console.log(buffs.loot.tiers.nothingRerollCount);
+        }
     }
 
     console.log(`====Loot simulation result (${iterationsCount} iterations)====
 ${print({ iterationsCount, map: counts.equipments, name: "Equipment", serializer: (item) => item })}
-${print({ iterationsCount, map: counts.flops, name: "Flops", serializer: (item) => `#${item + 1}` })}
+${
+        print({
+            iterationsCount,
+            map: counts.flops,
+            name: `Flops ${
+                printPercentage([...counts.flops.values()].reduce((value, next) => value + next, 0), iterationsCount)
+            }`,
+            serializer: (item) => `#${item + 1}`,
+        })
+    }
+${print({ iterationsCount, map: counts.keyItems, name: "Key Items", serializer: (item) => item })}
 ${print({ iterationsCount, map: counts.pocketItems, name: "Pocket Items", serializer: (item) => item })}
 ${print({ iterationsCount, map: counts.potions, name: "Potions", serializer: (item) => item })}
 ${print({ iterationsCount, map: counts.valuables, name: "Valuables", serializer: (item) => String(item) })}`);
