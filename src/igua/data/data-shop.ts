@@ -83,6 +83,20 @@ export namespace DataShop {
                     },
                 ],
             },
+            SuggestiveSecret: {
+                stocks: [
+                    {
+                        initialQuantity: 1,
+                        price: { currency: "combat", deltaSold: 0, initial: 100 },
+                        product: { kind: "equipment", id: "JumpAtSpecialSignsRing" },
+                    },
+                    {
+                        initialQuantity: 5,
+                        price: { currency: "valuables", deltaSold: 0, initial: 10 },
+                        product: { kind: "key_item", id: "FlopBlindBox" },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );
