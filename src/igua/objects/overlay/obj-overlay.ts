@@ -27,5 +27,4 @@ export function objOverlay() {
         });
 }
 
-type ObjOverlay = ReturnType<typeof objOverlay>;
-export type Overlay = Omit<ObjOverlay, keyof Container>;
+export type ObjOverlay = ReturnType<typeof objOverlay>;

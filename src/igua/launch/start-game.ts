@@ -2,7 +2,7 @@ import { Environment } from "../../lib/environment";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { SceneLibrary } from "../core/scene/scene-library";
 import { DevGameStartConfig } from "../dev/dev-game-start-config";
-import { sceneStack, startAnimator } from "../globals";
+import { layers, sceneStack, startAnimator } from "../globals";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { setRpgProgressData } from "../rpg/rpg";
@@ -17,6 +17,8 @@ export function startGame() {
     }
 
     Rpg.character.position.sceneName = config.sceneName;
+
+    layers.recreateOverlay();
 
     sceneStack.push(SceneLibrary.findByName(config.sceneName), { useGameplay: false });
     startAnimator();
