@@ -200,35 +200,35 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
 
     const minimumY = lvl.MagicRisingBar.y;
 
-    const group: Container = lvl.MagicRisingFaceGroup;
+    const groupObj: Container = lvl.MagicRisingFaceGroup;
+    const faceObj = lvl.MagicRisingFace.mixin(mxnBoilFlipH);
 
     let movedByPlayerSteps = 0;
 
     if (Rpg.flags.underneath.magicalRisingFace.reachedSummit) {
-        lvl.MagicRisingFace.y = minimumY;
+        groupObj.y = minimumY;
     }
 
     let atSummit = false;
 
-    lvl.MagicRisingFace
+    groupObj
         .mixin(mxnSpeaker, { name: "Magical Rising Face", colorPrimary: 0x103418, colorSecondary: 0x698826 })
         .step(self => {
             atSummit = self.y <= minimumY;
 
-            if (!atSummit && playerObj.speed.y <= 0 && self.collides(playerObj)) {
+            if (!atSummit && playerObj.speed.y <= 0 && faceObj.collides(playerObj)) {
                 self.y = Math.max(minimumY, self.y + Math.min(-1, playerObj.speed.y));
                 movedByPlayerSteps = 10;
             }
 
             if (movedByPlayerSteps > 0) {
                 movedByPlayerSteps--;
-                self.texture = Tx.Town.Underneath.RiserFaceSurprise;
+                faceObj.texture = Tx.Town.Underneath.RiserFaceSurprise;
             }
             else {
-                self.texture = atSummit ? Tx.Town.Underneath.RiserFaceHappy : Tx.Town.Underneath.RiserFace;
+                faceObj.texture = atSummit ? Tx.Town.Underneath.RiserFaceHappy : Tx.Town.Underneath.RiserFace;
             }
         })
-        .mixin(mxnBoilFlipH)
         .coro(function* (self) {
             yield () => !atSummit;
             yield () => atSummit;
@@ -247,7 +247,6 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
         .beginFill(0x103418)
         .drawRect(-2, 0, 4, 512)
         .beginFill(0x08270E)
-        .drawRect(-2, 128, 4, 512)
-        .step(self => self.at(lvl.MagicRisingFace));
-    group.addChildAt(barMaskObj, 0);
+        .drawRect(-2, 128, 4, 512);
+    groupObj.addChildAt(barMaskObj, 0);
 }
