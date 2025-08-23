@@ -21,8 +21,6 @@ export function devSimulateLoot(loot: RpgLoot.Model, buffs = RpgPlayerBuffs.crea
 
     const iterationsCount = 100000;
 
-    console.log(buffs.loot.tiers.nothingRerollCount);
-
     for (let i = 0; i < iterationsCount; i++) {
         const drop = RpgLoot.Methods.drop(loot, status, buffs.loot);
         increment(counts.equipments, drop.equipments);
@@ -31,10 +29,6 @@ export function devSimulateLoot(loot: RpgLoot.Model, buffs = RpgPlayerBuffs.crea
         increment(counts.pocketItems, drop.pocketItems);
         increment(counts.potions, drop.potions);
         increment(counts.valuables, drop.valuables);
-
-        if (i === 1 || i === 9999 || i === iterationsCount - 1) {
-            console.log(buffs.loot.tiers.nothingRerollCount);
-        }
     }
 
     console.log(`====Loot simulation result (${iterationsCount} iterations)====
