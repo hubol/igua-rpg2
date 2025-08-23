@@ -1,3 +1,4 @@
+import { Logging } from "../../lib/logging";
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataQuest } from "../data/data-quest";
 import { DataShop } from "../data/data-shop";
@@ -82,7 +83,7 @@ export let Rpg: RpgPublic = createRpg(getInitialRpgProgress());
 
 export function setRpgProgressData(data: RpgProgressData) {
     Rpg = createRpg(data);
-    console.log(Rpg);
+    console.log(...Logging.componentArgs("Rpg", Rpg));
 }
 
 export function devGetRpgProgressData(): RpgProgressData {

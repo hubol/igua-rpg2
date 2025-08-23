@@ -102,7 +102,6 @@ Object.defineProperties(DisplayObject.prototype, {
     },
     pivotedUnit: {
         value: function (this: Container, x_vector: number | VectorSimple, y?: number) {
-            console.log(this.width, this.height);
             if (y === undefined) {
                 this.transform.pivot.set(
                     Math.round((<VectorSimple> x_vector).x * this.width),
