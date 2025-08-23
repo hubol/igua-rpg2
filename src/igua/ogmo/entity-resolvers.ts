@@ -2,6 +2,7 @@ import { Graphics } from "pixi.js";
 import { OgmoEntities, OgmoEntityResolverBase } from "../../assets/generated/levels/generated-ogmo-project-data";
 import { Instances } from "../../lib/game-engine/instances";
 import { Vector, vnew } from "../../lib/math/vector-type";
+import { objDevPlayer } from "../objects/dev/obj-dev-player";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
 import { objStashPocket } from "../objects/interactables/obj-stash-pocket";
@@ -63,6 +64,7 @@ export const OgmoEntityResolvers = {
     Idol: objIdol,
     GateMap: objWorldMapGate,
     StashPocket: objStashPocket,
+    PlayerDev: objDevPlayer,
 } satisfies OgmoEntityResolverBase;
 
 function createOrConfigurePlayerObj(
