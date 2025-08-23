@@ -5,6 +5,7 @@ import { Empty } from "../../lib/types/empty";
 import { DataEquipment } from "../data/data-equipment";
 import { DataKeyItem } from "../data/data-key-item";
 import { DataPotion } from "../data/data-potion";
+import { Rpg } from "./rpg";
 import { RpgPlayerBuffs } from "./rpg-player-buffs";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgStatus } from "./rpg-status";
@@ -87,6 +88,7 @@ export namespace RpgLoot {
             const potions: DataPotion.Id[] = [];
 
             const tiers = [model.tier0, model.tier1];
+            const rerollCounts: Integer[] = [];
 
             for (const tier of tiers) {
                 if (!tier) {
@@ -100,6 +102,8 @@ export namespace RpgLoot {
                     drop = pickOptionDrop(tier);
                     rerollCount++;
                 }
+
+                rerollCounts.push(rerollCount);
 
                 if (drop === null) {
                     continue;
@@ -128,6 +132,9 @@ export namespace RpgLoot {
                 }
             }
 
+            Rpg.experience.reward.gambling.onRerollLoot(rerollCounts);
+
+            // TODO maybe the counts are returned here for FX?
             return {
                 equipments,
                 keyItems,

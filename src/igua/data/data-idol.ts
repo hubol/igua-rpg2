@@ -36,6 +36,7 @@ export namespace DataIdol {
             Purple: {
                 buffs: (model) => {
                     model.loot.pocket.bonusChance += 67;
+                    model.loot.tiers.nothingRerollCount += 1;
                 },
                 hudText: "Power of the idol increases luck",
                 keyItemId: "SeedPurple",

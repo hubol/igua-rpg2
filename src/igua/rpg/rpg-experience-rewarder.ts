@@ -70,6 +70,12 @@ function createRpgExperienceRewarder(state: RpgExperience.State) {
             onWinPrize(prize: Integer) {
                 state.gambling += prize;
             },
+            onRerollLoot(rerollLootCounts: Integer[]) {
+                state.gambling += rerollLootCounts.reduce(
+                    (value, next) => value + (next ? Math.pow(2, next - 1) * 25 : 0),
+                    0,
+                );
+            },
         },
         jump: {
             onJump(ballonsCount: Integer, specialBonus: Integer) {
