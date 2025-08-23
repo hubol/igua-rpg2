@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 1504,
+  "width": 1896,
   "height": 464,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 188,
+      "gridCellsX": 237,
       "gridCellsY": 58,
       "entities": []
     },
@@ -25,7 +25,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 188,
+      "gridCellsX": 237,
       "gridCellsY": 58,
       "entities": [
         {
@@ -56,7 +56,7 @@
           "name": "GateHorizontal",
           "id": 3,
           "_eid": "97593426",
-          "x": 1440,
+          "x": 1808,
           "y": 16,
           "height": 128,
           "originX": 0,
@@ -73,7 +73,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 188,
+      "gridCellsX": 237,
       "gridCellsY": 58,
       "decals": [],
       "folder": "../textures"
@@ -85,7 +85,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 188,
+      "gridCellsX": 237,
       "gridCellsY": 58,
       "entities": []
     },
@@ -96,7 +96,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 188,
+      "gridCellsX": 237,
       "gridCellsY": 58,
       "entities": [
         {
@@ -120,6 +120,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromCavern", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 2,
+          "_eid": "19953026",
+          "x": 1520,
+          "y": 144,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromFlopCollector", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -130,7 +141,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 188,
+      "gridCellsX": 237,
       "gridCellsY": 58,
       "entities": []
     },
@@ -141,7 +152,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 188,
+      "gridCellsX": 237,
       "gridCellsY": 58,
       "decals": [
         {
@@ -195,6 +206,32 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 1590,
+          "y": 143,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#680c0c",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1664,
+          "y": 143,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#680c0c",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -206,7 +243,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 188,
+      "gridCellsX": 237,
       "gridCellsY": 58,
       "entities": [
         {
@@ -284,6 +321,38 @@
           "originY": 97,
           "uid": 175350182475000,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 8,
+          "_eid": "88296692",
+          "x": 1544,
+          "y": 96,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnPlainsSuggestiveFlopCollector", "checkpointName": "", "name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableBlue",
+          "id": 9,
+          "_eid": "69755574",
+          "x": 1512,
+          "y": 15,
+          "originX": 8,
+          "originY": 6,
+          "uid": 175591398159205,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableBlue",
+          "id": 10,
+          "_eid": "69755574",
+          "x": 1730,
+          "y": 33,
+          "originX": 8,
+          "originY": 6,
+          "uid": 175591398332707,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -294,7 +363,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 188,
+      "gridCellsX": 237,
       "gridCellsY": 58,
       "decals": [
         {
@@ -660,6 +729,19 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 1479,
+          "y": 145,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#680c0c",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -671,7 +753,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 188,
+      "gridCellsX": 237,
       "gridCellsY": 58,
       "entities": [
         {
@@ -828,8 +910,8 @@
           "_eid": "93117141",
           "x": 1248,
           "y": 176,
-          "width": 256,
-          "height": 288,
+          "width": 664,
+          "height": 296,
           "originX": 0,
           "originY": 0,
           "tint": "#680c0c",
@@ -867,7 +949,7 @@
           "_eid": "93117141",
           "x": 1432,
           "y": 144,
-          "width": 112,
+          "width": 488,
           "height": 32,
           "originX": 0,
           "originY": 0,
@@ -912,6 +994,24 @@
           "originY": 0,
           "tint": "#680c0c",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 24,
+          "_eid": "95769929",
+          "x": 1504,
+          "y": 26,
+          "width": 152,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 25,
+          "_eid": "95769929",
+          "x": 1589,
+          "y": 48,
+          "width": 152,
+          "values": {"name": "", "visible": false, "depth": 0}
         }
       ]
     },
@@ -922,7 +1022,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 188,
+      "gridCellsX": 237,
       "gridCellsY": 58,
       "entities": []
     },
@@ -933,7 +1033,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 188,
+      "gridCellsX": 237,
       "gridCellsY": 58,
       "decals": [
         {
@@ -948,6 +1048,306 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 1444,
+          "y": 4,
+          "scaleX": 30,
+          "scaleY": 20,
+          "rotation": 0,
+          "tint": "#0a8148",
+          "texture": "shapes/square irregular 10.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1496,
+          "y": 40,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#0a8148",
+          "texture": "shapes/right triangle 24px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1664,
+          "y": 40,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#0a8148",
+          "texture": "shapes/right triangle 24px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1752,
+          "y": 136,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#0a8148",
+          "texture": "shapes/right triangle 24px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1464,
+          "y": 136,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#0a8148",
+          "texture": "shapes/right triangle 24px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1722,
+          "y": 59,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#23591f",
+          "texture": "stone/brick rows 3.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1686,
+          "y": 68,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#23591f",
+          "texture": "stone/brick rows 3.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1721,
+          "y": 91,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#23591f",
+          "texture": "stone/brick rows 3.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1685,
+          "y": 98,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#5f9f84",
+          "texture": "stone/brick rows 3.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1706,
+          "y": 122,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#23591f",
+          "texture": "stone/brick rows 3.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1576,
+          "y": 33,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#5f9f84",
+          "texture": "town/roof/flowerish.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1658,
+          "y": 114,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#23591f",
+          "texture": "stone/brick rows 3 b.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1650,
+          "y": 61,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#23591f",
+          "texture": "stone/brick rows 3 b.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1560,
+          "y": 120,
+          "scaleX": 1.4,
+          "scaleY": 1.9,
+          "rotation": 0,
+          "tint": "#23591f",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1664,
+          "y": 52,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#5f9f84",
+          "texture": "town/roof/flowerish.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1562,
+          "y": 74,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#23591f",
+          "texture": "town/signage/collector.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1499,
+          "y": 59,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#5f9f84",
+          "texture": "stone/brick rows 3.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1502,
+          "y": 50,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a8e6cc",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1515,
+          "y": 66,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a8e6cc",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1689,
+          "y": 89,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a8e6cc",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1681,
+          "y": 98,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a8e6cc",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1700,
+          "y": 106,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a8e6cc",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1703,
+          "y": 46,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a8e6cc",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1739,
+          "y": 45,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a8e6cc",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1652,
+          "y": 28,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a8e6cc",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -959,7 +1359,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 188,
+      "gridCellsX": 237,
       "gridCellsY": 58,
       "decals": [
         {

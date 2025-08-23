@@ -1,0 +1,427 @@
+{
+  "ogmoVersion": "3.4.0-hubol",
+  "width": 500,
+  "height": 280,
+  "offsetX": 0,
+  "offsetY": 0,
+  "backgroundColor": "#408000",
+  "values": {"Terrain Color": "#152c0a"},
+  "layers": [
+    {
+      "name": "MarkerEntities",
+      "_eid": "73166939",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 288,
+          "y": 232,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "FlopStartMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 1,
+          "_eid": "73148747",
+          "x": 48,
+          "y": 232,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "FlopEndMarker", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "RegionEntities",
+      "_eid": "01831167",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": [
+        {
+          "name": "Region",
+          "id": 0,
+          "_eid": "11908607",
+          "x": 32,
+          "y": 168,
+          "width": 272,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "WallHereRegion", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "FrontDecals",
+      "_eid": "17577176",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "FrontEntities",
+      "_eid": "55690179",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": []
+    },
+    {
+      "name": "PlayerEntities",
+      "_eid": "96470627",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": [
+        {
+          "name": "Player",
+          "id": 0,
+          "_eid": "93092164",
+          "x": 424,
+          "y": 248,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "CharacterEntities",
+      "_eid": "07790422",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": [
+        {
+          "name": "IguanaNpc",
+          "id": 0,
+          "_eid": "90326278",
+          "x": 336,
+          "y": 248,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": false,
+          "values": {"personaName": "", "name": "CollectorNpc", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "AboveEntitiesDecals",
+      "_eid": "63753160",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "Entities",
+      "_eid": "93086020",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": [
+        {
+          "name": "Door",
+          "id": 0,
+          "_eid": "88296692",
+          "x": 432,
+          "y": 200,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnPlainsSuggestive", "checkpointName": "fromFlopCollector", "name": "", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "TerrainDecals",
+      "_eid": "02386446",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "TerrainEntities",
+      "_eid": "02302709",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": [
+        {
+          "name": "Slope",
+          "id": 2,
+          "_eid": "95675713",
+          "x": 312,
+          "y": 104,
+          "width": 32,
+          "height": 32,
+          "flippedX": true,
+          "flippedY": true,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 3,
+          "_eid": "95675713",
+          "x": 344,
+          "y": 96,
+          "width": 32,
+          "height": 8,
+          "flippedX": true,
+          "flippedY": true,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 4,
+          "_eid": "95675713",
+          "x": 304,
+          "y": 136,
+          "width": 8,
+          "height": 32,
+          "flippedX": true,
+          "flippedY": true,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 5,
+          "_eid": "93117141",
+          "x": 304,
+          "y": 96,
+          "width": 40,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 6,
+          "_eid": "93117141",
+          "x": 304,
+          "y": 104,
+          "width": 8,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 7,
+          "_eid": "95675713",
+          "x": 440,
+          "y": 104,
+          "width": 32,
+          "height": 32,
+          "flippedX": false,
+          "flippedY": true,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 8,
+          "_eid": "95675713",
+          "x": 408,
+          "y": 96,
+          "width": 32,
+          "height": 8,
+          "flippedX": false,
+          "flippedY": true,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 9,
+          "_eid": "95675713",
+          "x": 472,
+          "y": 136,
+          "width": 8,
+          "height": 32,
+          "flippedX": false,
+          "flippedY": true,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 10,
+          "_eid": "93117141",
+          "x": 440,
+          "y": 96,
+          "width": 40,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 11,
+          "_eid": "93117141",
+          "x": 472,
+          "y": 104,
+          "width": 8,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 12,
+          "_eid": "93117141",
+          "x": 0,
+          "y": -16,
+          "width": 504,
+          "height": 112,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 13,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 248,
+          "width": 504,
+          "height": 168,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 14,
+          "_eid": "93117141",
+          "x": 480,
+          "y": 96,
+          "width": 24,
+          "height": 168,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 16,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 96,
+          "width": 304,
+          "height": 72,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 17,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 168,
+          "width": 32,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#152c0a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        }
+      ]
+    },
+    {
+      "name": "BackgroundEntities",
+      "_eid": "41483982",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "entities": []
+    },
+    {
+      "name": "BackgroundDecals",
+      "_eid": "64691217",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxDecals",
+      "_eid": "17093961",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 35,
+      "decals": [],
+      "folder": "../textures"
+    }
+  ]
+}
