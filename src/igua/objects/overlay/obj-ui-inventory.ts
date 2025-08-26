@@ -8,6 +8,7 @@ import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { Empty } from "../../../lib/types/empty";
 import { DataEquipment } from "../../data/data-equipment";
+import { DataItem } from "../../data/data-item";
 import { DataKeyItem } from "../../data/data-key-item";
 import { Cutscene, Input } from "../../globals";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
@@ -17,6 +18,7 @@ import { MxnUiPageElement, mxnUiPageElement } from "../../mixins/mxn-ui-page-ele
 import { Rpg } from "../../rpg/rpg";
 import { RpgCharacterEquipment } from "../../rpg/rpg-character-equipment";
 import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
+import { RpgInventory } from "../../rpg/rpg-inventory";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
 import { objFigureEquipment } from "../figures/obj-figure-equipment";
 import { objFigureKeyItem } from "../figures/obj-figure-key-item";
@@ -130,7 +132,6 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
                 )
                 .at(-180, -26),
             objUiKeyItemInfo(() => pageObj.selected)
-                .step(self => self.visible = isSelected(mxnUiKeyItem))
                 .at(0, 80),
         ),
         0,
@@ -270,11 +271,11 @@ function objUiPotion(index: Integer) {
         .coro(function* (self) {
             while (true) {
                 self.removeAllChildren();
-                const potionId = obj.mxnKeyItem.potionId;
+                const potionId = obj.mxnUiPotion.potionId;
                 if (potionId) {
                     objFigurePotion(potionId).show(self);
                 }
-                yield onMutate(obj.mxnKeyItem);
+                yield onMutate(obj.mxnUiPotion);
             }
         })
         .show(obj);
@@ -284,7 +285,7 @@ function objUiPotion(index: Integer) {
 
 function mxnUiPotion(obj: DisplayObject, index: Integer) {
     return obj.merge({
-        mxnKeyItem: {
+        mxnUiPotion: {
             get potionId() {
                 return Rpg.inventory.potions.list[index];
             },
@@ -336,23 +337,21 @@ function mxnUiEquipment(obj: DisplayObject, equipmentIdProvider: () => RpgEquipm
 }
 
 function objUiKeyItemInfo(selectedObjSupplier: () => DisplayObject | undefined) {
+    let item: RpgInventory.Item | null;
+
     const descriptionObj = objText.Medium("", { align: "left", tint: 0x000000, maxWidth: 168 })
         .at(0, 24)
-        .mixin(mxnTextTyped, () => {
-            const uiKeyItemObj = selectedObjSupplier();
-            return uiKeyItemObj?.is(mxnUiKeyItem)
-                ? DataKeyItem.getById(uiKeyItemObj.mxnUiKeyItem.keyItemId).description
-                : "";
-        });
+        .mixin(mxnTextTyped, () =>
+            item
+                ? DataItem.getDescription(item)
+                : "");
 
     const nameObj = objText.MediumBoldIrregular("", { align: "left", tint: 0x000000, maxWidth: 168 })
         .anchored(0, 0)
-        .mixin(mxnTextTyped, () => {
-            const uiKeyItemObj = selectedObjSupplier();
-            return uiKeyItemObj?.is(mxnUiKeyItem)
-                ? DataKeyItem.getById(uiKeyItemObj.mxnUiKeyItem.keyItemId).name
-                : "";
-        });
+        .mixin(mxnTextTyped, () =>
+            item
+                ? DataItem.getName(item)
+                : "");
 
     return container(
         new Graphics().lineStyle({ join: LINE_JOIN.BEVEL, alignment: 1, width: 4, color: 0x808080 })
@@ -360,5 +359,19 @@ function objUiKeyItemInfo(selectedObjSupplier: () => DisplayObject | undefined) 
             .drawRect(0, 0, 168, 48),
         descriptionObj,
         nameObj,
-    );
+    )
+        .step(self => {
+            const obj = selectedObjSupplier();
+
+            item = null;
+
+            if (obj?.is(mxnUiPotion) && obj.mxnUiPotion.potionId) {
+                item = { kind: "potion", id: obj.mxnUiPotion.potionId };
+            }
+            else if (obj?.is(mxnUiKeyItem)) {
+                item = { kind: "key_item", id: obj.mxnUiKeyItem.keyItemId };
+            }
+
+            self.visible = Boolean(item);
+        });
 }
