@@ -1,23 +1,29 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
-import { interp, interpv } from "../../../lib/game-engine/routines/interp";
+import { factor, interp, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { IRectangle } from "../../../lib/math/rectangle";
 import { Rng } from "../../../lib/math/rng";
+import { vnew } from "../../../lib/math/vector-type";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
+import { scene } from "../../globals";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnIndexedCollisionShape } from "../../mixins/mxn-indexed-collision-shape";
+import { mxnNudgeAppear } from "../../mixins/mxn-nudge-appear";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { RpgStatus } from "../../rpg/rpg-status";
+import { objFxSpiritualRelease } from "../effects/obj-fx-spiritual-release";
 import { objFxStarburst54 } from "../effects/obj-fx-startburst-54";
 import { playerObj } from "../obj-player";
+import { objProjectileIndicatedBox } from "../projectiles/obj-projectile-indicated-box";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { objAngelEyes } from "./obj-angel-eyes";
 import { objAngelMouth } from "./obj-angel-mouth";
@@ -99,6 +105,19 @@ export function objAngelMiffed() {
                     yield () => self.mxnDetectPlayer.detectionScore > minDetectionScore;
                     self.speed.y = -2;
                     yield () => self.isOnGround;
+                }
+
+                if (minDetectionScore === -120 && Rng.float() > 0.25) {
+                    const vibrateObj = container()
+                        .step(() => self.pivot.x = Math.round(Math.sin(scene.ticker.ticks / 15 * Math.PI)) * 2)
+                        .show(self);
+                    yield sleep(125);
+                    const poisonBoxObj = objAngelMiffedPoisonBox(self.status).at(self).show();
+                    yield () => poisonBoxObj.mxnDischargeable.isDischarged;
+                    self.speed.y = -2;
+                    yield () => poisonBoxObj.destroyed;
+                    vibrateObj.destroy();
+                    self.pivot.x = 0;
                 }
 
                 minDetectionScore = -120;
@@ -293,3 +312,55 @@ const atkSlamStarburst = RpgAttack.create({
 const atkBodySlamStarburst = RpgAttack.create({
     physical: 40,
 });
+
+const atkPoisonBox = RpgAttack.create({
+    conditions: {
+        poison: 5,
+    },
+});
+
+const getPoisonBoxTargetPosition = function () {
+    const v = vnew();
+
+    return () => v.at(playerObj).add(playerObj.facing * 64, 0);
+}();
+
+function objAngelMiffedPoisonBox(attacker: RpgStatus.Model) {
+    const tint = 0x4A7825;
+    return objProjectileIndicatedBox(64, 64)
+        .mixin(mxnRpgAttack, { attack: atkPoisonBox, attacker })
+        .tinted(tint)
+        .coro(function* (self) {
+            yield interpvr(self).factor(factor.sine).to(getPoisonBoxTargetPosition()).over(700);
+            const trackBehaviorObj = container()
+                .step(() => self.moveTowards(getPoisonBoxTargetPosition(), 2).vround())
+                .show(self);
+            yield () => self.mxnDischargeable.isCharged;
+            yield sleep(500);
+            trackBehaviorObj.destroy();
+            yield sleep(150);
+            // TODO should be a special effect for this
+            objFxSpiritualRelease().tinted(tint)
+                .scaled(-1, 1)
+                .at(self)
+                .add(-16, 32)
+                .show();
+            objFxSpiritualRelease().tinted(tint)
+                .scaled(1, 1)
+                .angled(-90)
+                .at(self)
+                .add(40, -16)
+                .show();
+            objFxSpiritualRelease().tinted(tint)
+                .scaled(-1, -1)
+                .at(self)
+                .add(-8, -38)
+                .show();
+            objFxSpiritualRelease().tinted(tint)
+                .scaled(1, 1)
+                .at(self)
+                .add(34, 34)
+                .show();
+            self.mxnDischargeable.discharge();
+        });
+}
