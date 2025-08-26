@@ -3,6 +3,7 @@ import { Tx } from "../../assets/textures";
 import { RgbInt } from "../../lib/math/number-alias-types";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
+import { RpgAttack } from "../rpg/rpg-attack";
 import { DataLib } from "./data-lib";
 
 export namespace DataPotion {
@@ -19,19 +20,19 @@ export namespace DataPotion {
                 name: "Spiced Nectar",
                 description: "Delicious nectar. Increases maximum HP.",
                 stinkLineTint: 0xffffff,
-                texture: null,
+                texture: Tx.Collectibles.Potion.AttributeHealthUp,
             },
             AttributeIntelligenceUp: {
                 name: "Foul Stew",
                 description: "Odiforous soup. Increases intelligence.",
                 stinkLineTint: 0xffffff,
-                texture: null,
+                texture: Tx.Collectibles.Potion.AttributeIntelligenceUp,
             },
             AttributeStrengthUp: {
                 name: "Claw Powder",
                 description: "Fine grit for sharpening claws. Increases physical attack power.",
                 stinkLineTint: 0xffffff,
-                texture: null,
+                texture: Tx.Collectibles.Potion.AttributeStrengthUp,
             },
             RestoreHealth: {
                 name: "Sweet Berry",
@@ -49,7 +50,13 @@ export namespace DataPotion {
                 name: "Bitter Medicine",
                 description: "",
                 stinkLineTint: 0xffffff,
-                texture: null,
+                texture: Tx.Collectibles.Potion.PoisonRestore,
+            },
+            Ballon: {
+                name: "Wonder Ballon",
+                description: "",
+                stinkLineTint: 0xffffff,
+                texture: Tx.Collectibles.Potion.Ballon,
             },
             __Fallback__: {
                 name: "???",
@@ -86,8 +93,17 @@ export namespace DataPotion {
                 Rpg.character.status.conditions.poison.value = 0;
                 Rpg.character.status.conditions.poison.level = 0;
                 return;
+            case "Ballon":
+                playerObj.damage(atkBallon);
+                return;
             case "__Fallback__":
                 return;
         }
     }
 }
+
+const atkBallon = RpgAttack.create({
+    conditions: {
+        helium: 99999999,
+    },
+});
