@@ -47,7 +47,18 @@ const v = vnew();
 function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model) {
     const vworld = vnew();
 
-    return objHealthBar(32, 9, status.healthMax, status.healthMax)
+    const healthBarObj = objHealthBar(32, 9, status.healthMax, status.healthMax);
+
+    function updateEnemyWorldPosition() {
+        if (!obj.destroyed) {
+            obj.getBounds(false, r);
+            vworld.at(r).add(Math.round(r.width / 2), 0).add(scene.camera);
+        }
+    }
+
+    updateEnemyWorldPosition();
+
+    return healthBarObj
         .step(self => {
             // TODO should be a cuter in/out animation
             self.visible = self.stepsSinceChange < 60;
@@ -55,10 +66,7 @@ function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model) {
                 return self.destroy();
             }
 
-            if (!obj.destroyed) {
-                obj.getBounds(false, r);
-                vworld.at(r).add(Math.round(r.width / 2), 0).add(scene.camera);
-            }
+            updateEnemyWorldPosition();
 
             self.at(vworld).add(scene.camera, -1).add(-Math.round(self.width / 2), -self.height - 1);
         })
