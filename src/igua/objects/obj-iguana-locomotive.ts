@@ -26,7 +26,15 @@ function getDeceleratingDistance(absSpeed: number, deceleration: number) {
 
 export type ObjIguanaLocomotiveAutoFacingMode = "check_moving" | "check_speed_x";
 
-export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
+interface ObjIguanaLocomotiveArgs {
+    form?: "corporeal" | "spirit";
+    looks: IguanaLooks.Serializable;
+    locomotion?: "platform" | "top_down";
+}
+
+export function objIguanaLocomotive(
+    { form = "corporeal", looks, locomotion = scene.isWorldMap ? "top_down" : "platform" }: ObjIguanaLocomotiveArgs,
+) {
     let autoFacingTarget = 0;
 
     let currentWalkToTarget = Undefined<number>();
@@ -103,7 +111,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
         puppet.facing = value;
     }
 
-    const puppet = objIguanaPuppet(looks)
+    const puppet = objIguanaPuppet(looks, form)
         // TODO not sure if that is the correct physics faction...
         .mixin(mxnPhysics, {
             gravity: IguanaLocomotiveConsts.Gravity,
@@ -120,7 +128,6 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
                 hitWall = true;
             }
         })
-        .mixin(mxnShadowFloor, { offset: [0, -1] })
         .merge({
             walkingTopSpeed: IguanaLocomotiveConsts.WalkingTopSpeed,
             isDucking: false,
@@ -129,6 +136,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             isMovingUp: false,
             isMovingDown: false,
             isBeingPiloted: false,
+            locomotion,
             get estimatedDecelerationDeltaX() {
                 return Math.sign(puppet.speed.x)
                     * getDeceleratingDistance(Math.abs(puppet.speed.x), IguanaLocomotiveConsts.WalkingDeceleration);
@@ -138,7 +146,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             setFacingOverrideAuto,
         })
         .step(() => {
-            const effectiveWalkingSpeed = scene.isWorldMap ? puppet.speed.vlength : Math.abs(puppet.speed.x);
+            const effectiveWalkingSpeed = locomotion === "top_down" ? puppet.speed.vlength : Math.abs(puppet.speed.x);
 
             if (effectiveWalkingSpeed !== 0) {
                 puppet.pedometer += effectiveWalkingSpeed * 0.0375
@@ -177,7 +185,11 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             puppet.ducking = approachLinear(puppet.ducking, puppet.isDucking ? 1 : 0, auto.duckingSpeed);
         }, 2);
 
-    if (scene.isWorldMap) {
+    if (form === "corporeal") {
+        puppet.mixin(mxnShadowFloor, { offset: [0, -1] });
+    }
+
+    if (locomotion === "top_down") {
         puppet.step(self => {
             self.gravity = 0;
         }, StepOrder.TerrainClean)

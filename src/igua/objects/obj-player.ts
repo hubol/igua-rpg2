@@ -8,6 +8,7 @@ import { merge } from "../../lib/object/merge";
 import { ZIndex } from "../core/scene/z-index";
 import { Cutscene, DevKey, Input, layers, scene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
+import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { force } from "../mixins/mxn-physics";
 import { MxnRpgStatus, mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
@@ -64,8 +65,16 @@ function getBallonPhysicsLevel(ballonsCount: number) {
 const filterVulnerableObjs = (obj: MxnRpgStatus) => obj.status.faction !== RpgFaction.Player;
 const filterSpecialSignObjs = (obj: ObjSign) => obj.isSpecial;
 
-function objPlayer(looks: IguanaLooks.Serializable) {
-    const iguanaLocomotiveObj = objIguanaLocomotive(looks);
+function objPlayer(looks: IguanaLooks.Serializable, form: objIguanaPuppet.Form) {
+    const iguanaLocomotiveObj = objIguanaLocomotive({
+        looks,
+        form,
+        locomotion: form === "spirit" ? "top_down" : undefined,
+    });
+
+    if (form === "spirit") {
+        iguanaLocomotiveObj.physicsEnabled = false;
+    }
 
     iguanaLocomotiveObj.mxnBallonable.setInitialBallons(Rpg.character.status.conditions.helium.ballons);
 
@@ -98,7 +107,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 return;
             }
 
-            if (!scene.isWorldMap) {
+            if (puppet.locomotion === "platform") {
                 status.state.ballonHealthMayDrain = !puppet.isOnGround;
             }
 
@@ -172,9 +181,10 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             const hasControl = puppet.hasControl;
             puppet.isMovingLeft = hasControl && Input.isDown("MoveLeft");
             puppet.isMovingRight = hasControl && Input.isDown("MoveRight");
-            puppet.isMovingUp = hasControl && scene.isWorldMap && Input.isDown("WorldMap_MoveUp");
-            puppet.isMovingDown = hasControl && scene.isWorldMap && Input.isDown("WorldMap_MoveDown");
-            puppet.isDucking = hasControl && puppet.isOnGround && !scene.isWorldMap && Input.isDown("Duck");
+            puppet.isMovingUp = hasControl && puppet.locomotion === "top_down" && Input.isDown("WorldMap_MoveUp");
+            puppet.isMovingDown = hasControl && puppet.locomotion === "top_down" && Input.isDown("WorldMap_MoveDown");
+            puppet.isDucking = hasControl && puppet.isOnGround && puppet.locomotion === "platform"
+                && Input.isDown("Duck");
             status.state.isGuarding = puppet.isDucking;
 
             if (
@@ -233,7 +243,17 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 }
             }
         }, StepOrder.AfterPhysics)
-        .zIndexed(ZIndex.PlayerEntities);
+        .coro(function* (self) {
+            yield () => DevKey.justWentDown("KeyD");
+            yield () => !DevKey.isDown("KeyD");
+            const { x, y } = self;
+            self.destroy();
+            createPlayerObj(looks, "spirit").at(x, y).show().facing = self.facing;
+        });
+
+    if (form === "corporeal") {
+        puppet.zIndexed(ZIndex.PlayerEntities);
+    }
 
     puppet.auto.facingMode = "check_moving";
 
@@ -282,6 +302,9 @@ export function isPlayerObj(obj: DisplayObject): obj is ObjPlayer {
 
 export let playerObj: ObjPlayer;
 
-export function createPlayerObj(looks: IguanaLooks.Serializable = Rpg.character.looks) {
-    return playerObj = objPlayer(looks);
+export function createPlayerObj(
+    looks: IguanaLooks.Serializable = Rpg.character.looks,
+    form: objIguanaPuppet.Form = "corporeal",
+) {
+    return playerObj = objPlayer(looks, form);
 }

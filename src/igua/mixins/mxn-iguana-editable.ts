@@ -23,7 +23,7 @@ export function mxnIguanaEditable(obj: ObjIguanaLocomotive, looks: IguanaLooks.S
                 designer.destroy();
 
                 const nextLooks = CtxUiIguanaDesigner.value.looks;
-                const iguana = objIguanaLocomotive(nextLooks)
+                const iguana = objIguanaLocomotive({ looks: nextLooks })
                     .mixin(mxnIguanaEditable, nextLooks)
                     .at(self);
 

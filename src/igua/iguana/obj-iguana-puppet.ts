@@ -1,12 +1,15 @@
-import { DisplayObject, Rectangle, Sprite } from "pixi.js";
+import { AlphaFilter, BLEND_MODES, DisplayObject, Rectangle, Sprite } from "pixi.js";
 import { sleep } from "../../lib/game-engine/routines/sleep";
-import { Integer, Polar, Unit, ZeroOrGreater } from "../../lib/math/number-alias-types";
+import { Integer, Polar, RgbInt, Unit, ZeroOrGreater } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
+import { clone } from "../../lib/object/clone";
+import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { CollisionShape } from "../../lib/pixi/collision";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { Force } from "../../lib/types/force";
+import { scene } from "../globals";
 import { mxnBallonable } from "../mixins/mxn-ballonable";
 import { mxnHasHead } from "../mixins/mxn-has-head";
 import { objEye, objEyes } from "../objects/characters/obj-eye";
@@ -47,11 +50,37 @@ function getFlippableOffsetX(src: DisplayObject | undefined, dst: DisplayObject,
     return sign * c;
 }
 
-export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
+function mute(tint: RgbInt) {
+    const { r, g, b } = AdjustColor.pixi(tint).toRgb();
+    return AdjustColor.rgb(r / 8, g / 8, b / 8).toPixi();
+}
+
+function getSpiritFormLooks(corporealLooks: IguanaLooks.Serializable) {
+    const looks = clone(corporealLooks);
+    looks.body.color = 0xf0f0f0;
+    looks.head.color = 0xf0f0f0;
+    looks.head.crest.color = 0xf0f0f0;
+    looks.head.eyes.left.eyelid.color = 0xf0f0f0;
+    looks.head.eyes.right.eyelid.color = 0xf0f0f0;
+    looks.body.tail.color = 0xf0f0f0;
+    return looks;
+}
+
+export function objIguanaPuppet(looks: IguanaLooks.Serializable, form: objIguanaPuppet.Form = "corporeal") {
+    if (form === "spirit") {
+        looks = getSpiritFormLooks(looks);
+    }
+
     const iguanaSprites: IguanaSprite[] = [];
     IguanaSprite.resetList();
 
     const { back, front, controller: feetController, feet } = objIguanaFeet(looks.feet);
+
+    if (form === "spirit") {
+        back.visible = false;
+        front.visible = false;
+    }
+
     const body = objIguanaBody(looks.body);
     const head = objIguanaHead(looks.head);
     head.pivot.set(-7, 14).add(looks.head.placement, -1);
@@ -302,7 +331,19 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
         iguanaSprites.push(sprite);
     }
 
+    if (form === "spirit") {
+        //     const filter = new AlphaFilter();
+        //     filter.blendMode = BLEND_MODES.ADD;
+        c
+            // .filtered(filter)
+            .step(self => self.pivot.y = Math.round(Math.sin(scene.ticker.ticks / 45 * Math.PI) * 2));
+    }
+
     return c;
+}
+
+export namespace objIguanaPuppet {
+    export type Form = "corporeal" | "spirit";
 }
 
 type Feet = IguanaLooks.Serializable["feet"];

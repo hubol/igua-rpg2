@@ -18,7 +18,7 @@ export function objIguanaNpc(npcPersonaId: DataNpcPersona.Id) {
     let speakingStartedCount = 0;
     let isSpeaking = false;
 
-    return objIguanaLocomotive(persona.looks)
+    return objIguanaLocomotive({ looks: persona.looks })
         .mixin(mxnIguanaEditable, persona.looks)
         .mixin(mxnSpeaker, { name: persona.name, ...getSpeakerColors(persona.looks) })
         .mixin(mxnStartPosition)
