@@ -320,12 +320,12 @@ const atkPoisonBox = RpgAttack.create({
 const getPoisonBoxTargetPosition = function () {
     const v = vnew();
 
-    return (detected: mxnDetectPlayer.Context) => v.at(detected.position).add(detected.facing * 64, 0);
+    return (detected: mxnDetectPlayer.Context) => v.at(detected.position).add(detected.speed);
 }();
 
 function objAngelMiffedPoisonBox(attacker: MxnRpgStatus & MxnDetectPlayer) {
     const tint = 0x4A7825;
-    return objProjectileIndicatedBox(64, 64)
+    return objProjectileIndicatedBox(80, 64)
         .mixin(mxnRpgAttack, { attack: atkPoisonBox, attacker: attacker.status })
         .tinted(tint)
         .coro(function* (self) {
@@ -338,23 +338,23 @@ function objAngelMiffedPoisonBox(attacker: MxnRpgStatus & MxnDetectPlayer) {
             trackBehaviorObj.destroy();
             yield sleep(150);
             // TODO should be a special effect for this
-            objFxSpiritualRelease().tinted(tint)
+            objFxSpiritualRelease().tinted(0x6DAF36)
                 .scaled(-1, 1)
                 .at(self)
                 .add(-16, 32)
                 .show();
-            objFxSpiritualRelease().tinted(tint)
+            objFxSpiritualRelease().tinted(0x6DAF36)
                 .scaled(1, 1)
                 .angled(-90)
                 .at(self)
                 .add(40, -16)
                 .show();
-            objFxSpiritualRelease().tinted(tint)
+            objFxSpiritualRelease().tinted(0x6DAF36)
                 .scaled(-1, -1)
                 .at(self)
                 .add(-8, -38)
                 .show();
-            objFxSpiritualRelease().tinted(tint)
+            objFxSpiritualRelease().tinted(0x6DAF36)
                 .scaled(1, 1)
                 .at(self)
                 .add(34, 34)

@@ -36,7 +36,8 @@ export function objProjectileIndicatedBox(width: Integer, height: Integer) {
                 .beginFill(0xffffff)
                 .drawRoundedRect(x, y, width, height, 8);
 
-            yield sleep(500);
+            // TODO dischargeable needs to be reworked to allow this time to be configurable
+            yield sleep(1000);
             self.destroy();
         });
 }
