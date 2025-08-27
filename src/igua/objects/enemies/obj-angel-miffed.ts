@@ -10,19 +10,17 @@ import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { scene } from "../../globals";
-import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
+import { MxnDetectPlayer, mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnIndexedCollisionShape } from "../../mixins/mxn-indexed-collision-shape";
-import { mxnNudgeAppear } from "../../mixins/mxn-nudge-appear";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
+import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
-import { RpgStatus } from "../../rpg/rpg-status";
 import { objFxSpiritualRelease } from "../effects/obj-fx-spiritual-release";
 import { objFxStarburst54 } from "../effects/obj-fx-startburst-54";
-import { playerObj } from "../obj-player";
 import { objProjectileIndicatedBox } from "../projectiles/obj-projectile-indicated-box";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { objAngelEyes } from "./obj-angel-eyes";
@@ -112,7 +110,7 @@ export function objAngelMiffed() {
                         .step(() => self.pivot.x = Math.round(Math.sin(scene.ticker.ticks / 15 * Math.PI)) * 2)
                         .show(self);
                     yield sleep(125);
-                    const poisonBoxObj = objAngelMiffedPoisonBox(self.status).at(self).show();
+                    const poisonBoxObj = objAngelMiffedPoisonBox(self).at(self).show();
                     yield () => poisonBoxObj.mxnDischargeable.isDischarged;
                     self.speed.y = -2;
                     yield () => poisonBoxObj.destroyed;
@@ -136,7 +134,7 @@ export function objAngelMiffed() {
                     yield sleep(250);
                     fistObj.controls.slamUnit = 0;
                 }
-                self.speed.at(playerObj.x < self.x ? -2 : 2, -7);
+                self.speed.at(self.mxnDetectPlayer.position.x < self.x ? -2 : 2, -7);
                 yield () => self.speed.y >= 0;
                 const attackObj = objAngelMiffedSlamAttack().mixin(
                     mxnRpgAttack,
@@ -322,18 +320,18 @@ const atkPoisonBox = RpgAttack.create({
 const getPoisonBoxTargetPosition = function () {
     const v = vnew();
 
-    return () => v.at(playerObj).add(playerObj.facing * 64, 0);
+    return (detected: mxnDetectPlayer.Context) => v.at(detected.position).add(detected.facing * 64, 0);
 }();
 
-function objAngelMiffedPoisonBox(attacker: RpgStatus.Model) {
+function objAngelMiffedPoisonBox(attacker: MxnRpgStatus & MxnDetectPlayer) {
     const tint = 0x4A7825;
     return objProjectileIndicatedBox(64, 64)
-        .mixin(mxnRpgAttack, { attack: atkPoisonBox, attacker })
+        .mixin(mxnRpgAttack, { attack: atkPoisonBox, attacker: attacker.status })
         .tinted(tint)
         .coro(function* (self) {
-            yield interpvr(self).factor(factor.sine).to(getPoisonBoxTargetPosition()).over(700);
+            yield interpvr(self).factor(factor.sine).to(getPoisonBoxTargetPosition(attacker.mxnDetectPlayer)).over(700);
             const trackBehaviorObj = container()
-                .step(() => self.moveTowards(getPoisonBoxTargetPosition(), 2).vround())
+                .step(() => self.moveTowards(getPoisonBoxTargetPosition(attacker.mxnDetectPlayer), 2).vround())
                 .show(self);
             yield () => self.mxnDischargeable.isCharged;
             yield sleep(500);

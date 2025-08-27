@@ -13,14 +13,15 @@ import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { ZIndex } from "../../core/scene/z-index";
 import { scene } from "../../globals";
 import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
+import { MxnDetectPlayer, mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
+import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { mxnStopAndDieWhenHitGround } from "../../mixins/mxn-stop-and-die-when-hit-ground";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { RpgStatus } from "../../rpg/rpg-status";
-import { playerObj } from "../obj-player";
 import { objProjectileElectricalPulseGround } from "../projectiles/obj-projectile-electrical-pulse-ground";
 import { objSpikedCanonball } from "../projectiles/obj-spiked-canonball";
 import { objAngelEyes, ObjAngelEyesArgs } from "./obj-angel-eyes";
@@ -357,48 +358,6 @@ export function objAngelSuggestive(variantKey: VariantKey) {
                 yield sleep(1000);
                 faceObj.mouthObj.agape = !faceObj.mouthObj.agape;
             }
-        })
-        .coro(function* () {
-            while (true) {
-                bodyObj.bulge.phase = "inflating";
-                bodyObj.bulge.unit = 0;
-                yield interp(bodyObj.bulge, "unit").to(1).over(1000);
-                yield sleep(500);
-                bodyObj.bulge.phase = "bursting";
-                bodyObj.bulge.unit = 0;
-                yield interp(bodyObj.bulge, "unit").to(1).over(1000);
-                yield sleep(500);
-                enemyObj.play(Sfx.Enemy.Suggestive.Flick.rate(0.9, 1.1));
-                const canonballObj = objAngelSuggestiveSpikedCanonball(enemyObj.status).at(enemyObj).show();
-                // TODO I think there should be some kind of "player sight" mixin
-                // That could provide this info to enemies!
-                canonballObj.speed.x = playerObj.x > enemyObj.x ? 2 : -2;
-                canonballObj.speed.y = -8;
-                bodyObj.bulge.phase = "recovering";
-                bodyObj.bulge.unit = 0;
-                yield interp(bodyObj.bulge, "unit").to(1).over(1000);
-                if (!usesEmoAttack) {
-                    continue;
-                }
-
-                if (
-                    Math.abs(playerObj.x - enemyObj.x) < 300
-                    && Math.abs(playerObj.y - enemyObj.y) < 60
-                    && playerObj.speed.y >= 0
-                ) {
-                    faceObj.mouthObj.controls.frowning = true;
-                    enemyObj.play(Sfx.Enemy.Suggestive.Lift.rate(0.9, 1.1));
-                    yield interpvr(enemyObj.pivot).factor(factor.sine).to(0, 16).over(250);
-                    objAngelSuggestiveElectricalPulseGround(enemyObj.status).at(enemyObj).show().zIndexed(
-                        ZIndex.Entities - 1,
-                    );
-                    yield sleep(500);
-                    faceObj.mouthObj.controls.frowning = false;
-                    enemyObj.play(Sfx.Enemy.Suggestive.Unlift.rate(0.9, 1.1));
-                    yield interpvr(enemyObj.pivot).factor(factor.sine).to(0, 0).over(250);
-                    yield sleep(1000);
-                }
-            }
         });
 
     const enemyObj = container(
@@ -417,7 +376,50 @@ export function objAngelSuggestive(variantKey: VariantKey) {
             secondaryTint: theme.spirit.secondary,
             tertiaryTint: theme.spirit.tertiary,
         })
-        .filtered(new MapRgbFilter(theme.map.red, theme.map.green, theme.map.blue, theme.map.white));
+        .filtered(new MapRgbFilter(theme.map.red, theme.map.green, theme.map.blue, theme.map.white))
+        .mixin(mxnDetectPlayer)
+        .coro(function* (self) {
+            while (true) {
+                bodyObj.bulge.phase = "inflating";
+                bodyObj.bulge.unit = 0;
+                yield interp(bodyObj.bulge, "unit").to(1).over(1000);
+                yield sleep(500);
+                bodyObj.bulge.phase = "bursting";
+                bodyObj.bulge.unit = 0;
+                yield interp(bodyObj.bulge, "unit").to(1).over(1000);
+                yield sleep(500);
+                enemyObj.play(Sfx.Enemy.Suggestive.Flick.rate(0.9, 1.1));
+                const canonballObj = objAngelSuggestiveSpikedCanonball(enemyObj.status).at(enemyObj).show();
+                // TODO I think there should be some kind of "player sight" mixin
+                // That could provide this info to enemies!
+                canonballObj.speed.x = self.mxnDetectPlayer.position.x > enemyObj.x ? 2 : -2;
+                canonballObj.speed.y = -8;
+                bodyObj.bulge.phase = "recovering";
+                bodyObj.bulge.unit = 0;
+                yield interp(bodyObj.bulge, "unit").to(1).over(1000);
+                if (!usesEmoAttack) {
+                    continue;
+                }
+
+                if (
+                    Math.abs(self.mxnDetectPlayer.position.x - enemyObj.x) < 300
+                    && Math.abs(self.mxnDetectPlayer.position.y - enemyObj.y) < 60
+                    && self.mxnDetectPlayer.speed.y >= 0
+                ) {
+                    faceObj.mouthObj.controls.frowning = true;
+                    enemyObj.play(Sfx.Enemy.Suggestive.Lift.rate(0.9, 1.1));
+                    yield interpvr(enemyObj.pivot).factor(factor.sine).to(0, 16).over(250);
+                    objAngelSuggestiveElectricalPulseGround(enemyObj).at(enemyObj).show().zIndexed(
+                        ZIndex.Entities - 1,
+                    );
+                    yield sleep(500);
+                    faceObj.mouthObj.controls.frowning = false;
+                    enemyObj.play(Sfx.Enemy.Suggestive.Unlift.rate(0.9, 1.1));
+                    yield interpvr(enemyObj.pivot).factor(factor.sine).to(0, 0).over(250);
+                    yield sleep(1000);
+                }
+            }
+        });
 
     return enemyObj;
 }
@@ -436,15 +438,15 @@ function objAngelSuggestiveSpikedCanonball(status: RpgStatus.Model) {
         .mixin(mxnStopAndDieWhenHitGround);
 }
 
-function objAngelSuggestiveElectricalPulseGround(status: RpgStatus.Model) {
+function objAngelSuggestiveElectricalPulseGround(attacker: MxnRpgStatus & MxnDetectPlayer) {
     return objProjectileElectricalPulseGround(32)
-        .mixin(mxnRpgAttack, { attack: atkAngelSuggestiveElectricalPulseGround, attacker: status })
+        .mixin(mxnRpgAttack, { attack: atkAngelSuggestiveElectricalPulseGround, attacker: attacker.status })
         .coro(function* (self) {
             yield () => self.mxnDischargeable.isCharged;
-            self.speed.x = (Math.sign(playerObj.x - self.x) || 1) * 3;
+            self.speed.x = (Math.sign(attacker.mxnDetectPlayer.position.x - self.x) || 1) * 3;
             yield* Coro.race([
                 Coro.all([
-                    () => Math.abs(playerObj.x - self.x) < 10,
+                    () => Math.abs(attacker.mxnDetectPlayer.position.x - self.x) < 10,
                     sleep(333),
                 ]),
                 sleep(2000),

@@ -2,7 +2,9 @@ import { Sprite, Texture } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
+import { vlerp } from "../../../lib/math/vector";
 import { VectorSimple, vnew } from "../../../lib/math/vector-type";
+import { Empty } from "../../../lib/types/empty";
 import { objEye, objEyes } from "../characters/obj-eye";
 
 interface PupilRestStyle_CrossEyed {
@@ -22,6 +24,8 @@ export interface ObjAngelEyesArgs {
     defaultEyelidRestingPosition: Integer;
     pupilRestStyle: PupilRestStyle;
 }
+
+const v = vnew();
 
 export function objAngelEyes(args: ObjAngelEyesArgs) {
     // TODO use rest of configuration!
@@ -91,11 +95,32 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
                 injuredRightEyeObj.visible = value;
                 rightEyeObj.visible = !value;
             },
+            pupilPolarOffsets: Empty<VectorSimple>(),
         })
-        .step(() => {
+        .step((self) => {
             injuredLeftEyeObj.tint = leftPupilObj.tint;
             injuredRightEyeObj.tint = rightPupilObj.tint;
+
+            for (let i = self.pupilPolarOffsets.length - 1; i >= 0; i--) {
+                const polar = self.pupilPolarOffsets[i];
+                if (polar) {
+                    leftPupilObj.at(lerpPupilPosition(leftPupilPositionConfig, polar));
+                    rightPupilObj.at(lerpPupilPosition(rightPupilPositionConfig, polar));
+                    break;
+                }
+            }
         });
+}
+
+function lerpPupilPosition(config: PupilPositionConfig, polar: VectorSimple) {
+    v.at(config.rest);
+    if (polar.x !== 0) {
+        vlerp(v, polar.x > 0 ? config.right : config.left, Math.abs(polar.x));
+    }
+    if (polar.y !== 0) {
+        vlerp(v, polar.y > 0 ? config.down : config.up, Math.abs(polar.y));
+    }
+    return v.vround();
 }
 
 export type ObjAngelEyes = ReturnType<typeof objAngelEyes>;
@@ -116,8 +141,8 @@ function getPupilPositionConfig(eye: "left" | "right", args: ObjAngelEyesArgs): 
 
     // Prevent pupils with one skinny dimension from
     // becoming 1 pixel tall or wide
-    const h = args.pupilTx.width < 3 ? 1 : 0;
-    const v = args.pupilTx.height < 3 ? 1 : 0;
+    const h = args.pupilTx.width < 3 ? 2 : 3;
+    const v = args.pupilTx.height < 3 ? 2 : 3;
 
     const rest = { x: cx, y: cy };
 
