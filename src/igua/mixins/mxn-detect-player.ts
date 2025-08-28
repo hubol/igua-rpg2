@@ -32,7 +32,6 @@ export function mxnDetectPlayer(obj: DisplayObject) {
                     pupilPolarOffset.normalize();
                 }
                 obj.mxnEnemy.angelEyesObj.pupilPolarOffsets[0] = pupilPolarOffset;
-                console.log(pupilPolarOffset.x, pupilPolarOffset.y);
             }
         })
         .coro(function* () {
