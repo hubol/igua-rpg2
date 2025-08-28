@@ -2,7 +2,7 @@ import { Graphics, Sprite } from "pixi.js";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
-import { factor, interp, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
+import { factor, interp, interpc, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { IRectangle } from "../../../lib/math/rectangle";
@@ -352,14 +352,21 @@ function objAngelMiffedPoisonBox(attacker: MxnRpgStatus & MxnDetectPlayer) {
         .mixin(mxnRpgAttack, { attack: atkPoisonBox, attacker: attacker.status })
         .tinted(tint)
         .coro(function* (self) {
+            self.play(Sfx.Enemy.Miffed.PoisonAttackAppear.rate(0.95, 1.05));
             yield interpvr(self).factor(factor.sine).to(getPoisonBoxTargetPosition(attacker.mxnDetectPlayer)).over(700);
             const trackBehaviorObj = container()
                 .step(() => self.moveTowards(getPoisonBoxTargetPosition(attacker.mxnDetectPlayer), 2).vround())
                 .show(self);
             yield () => self.mxnDischargeable.isCharged;
-            yield sleep(500);
+            for (let i = 0; i < 3; i++) {
+                self.play(Sfx.Enemy.Miffed.PoisonWarning.rate(1 + i * 0.15));
+                self.tint = i === 2 ? 0xffffff : 0x9ae95a;
+                yield sleep(67);
+                yield interpc(self, "tint").to(tint).over(100);
+            }
             trackBehaviorObj.destroy();
             yield sleep(150);
+            self.play(Sfx.Enemy.Miffed.PoisonActive.rate(0.95, 1.05));
             // TODO should be a special effect for this
             objFxSpiritualRelease().tinted(0x6DAF36)
                 .scaled(-1, 1)
