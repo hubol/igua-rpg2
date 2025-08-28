@@ -1,5 +1,7 @@
 import { Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
+import { Coro } from "../../../lib/game-engine/routines/coro";
 import { factor, interp, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
@@ -19,6 +21,7 @@ import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objFxHeartBurst } from "../effects/obj-fx-heart-burst";
 import { objFxSpiritualRelease } from "../effects/obj-fx-spiritual-release";
 import { objFxStarburst54 } from "../effects/obj-fx-startburst-54";
 import { objProjectileIndicatedBox } from "../projectiles/obj-projectile-indicated-box";
@@ -121,12 +124,28 @@ export function objAngelMiffed() {
                 minDetectionScore = -120;
 
                 for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
-                    yield interp(fistObj.controls, "exposedUnit").steps(3).to(1).over(300);
+                    yield* Coro.all([
+                        interp(fistObj.controls, "exposedUnit").steps(3).to(1).over(300),
+                        Coro.chain([
+                            sleep(150),
+                            () => (objFxHeartBurst.many(10, 4)
+                                .at(fistObj.getWorldPosition())
+                                .coro(function* (self) {
+                                    self.play(Sfx.Enemy.Miffed.PunchArmAppear.rate(0.9, 1.1));
+                                })
+                                .show(),
+                                true),
+                        ]),
+                    ]);
                     yield interp(fistObj.controls, "slamUnit").to(1).over(500);
-                    objAngelMiffedStarburstAttack().at(fistObj.state.slamFistWorldPosition).mixin(
-                        mxnRpgAttack,
-                        { attacker: self.status, attack: atkSlamStarburst },
-                    ).show();
+                    objAngelMiffedStarburstAttack()
+                        .at(fistObj.state.slamFistWorldPosition)
+                        .mixin(
+                            mxnRpgAttack,
+                            { attacker: self.status, attack: atkSlamStarburst },
+                        )
+                        .show()
+                        .play(Sfx.Enemy.Miffed.PunchLand.rate(0.9, 1.1));
 
                     self.speed.at(fistObj === slammingFistRightObj ? 1 : -1, -3);
                     yield sleep(250);
@@ -134,8 +153,10 @@ export function objAngelMiffed() {
                     yield sleep(250);
                     fistObj.controls.slamUnit = 0;
                 }
+                self.play(Sfx.Enemy.Miffed.Jump.rate(0.9, 1.1));
                 self.speed.at(self.mxnDetectPlayer.position.x < self.x ? -2 : 2, -7);
                 yield () => self.speed.y >= 0;
+                self.play(Sfx.Enemy.Miffed.Pause.rate(0.9, 1.1));
                 const attackObj = objAngelMiffedSlamAttack().mixin(
                     mxnRpgAttack,
                     { attacker: self.status, attack: atkBodySlamStarburst },
@@ -146,8 +167,10 @@ export function objAngelMiffed() {
                 self.scale.y = -1;
                 self.pivot.y = -25;
                 yield sleep(250);
+                self.play(Sfx.Enemy.Miffed.Dive.rate(0.9, 1.1));
                 self.gravity = 1;
                 yield () => self.speed.y === 0 && self.isOnGround;
+                self.play(Sfx.Enemy.Miffed.DiveLand.rate(0.9, 1.1));
                 self.status.quirks.isImmuneToPlayerMeleeAttack = false;
                 yield interpv(attackObj.scale).steps(4).to(0, 0).over(250);
                 attackObj.destroy();
