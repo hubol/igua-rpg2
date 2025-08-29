@@ -1171,7 +1171,7 @@
         }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/enemy suggestive.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEUAAABSCAYAAAACXhkKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASMSURBVHhe7Zs9aBRBFIDvVDAGlQOL2MTGgAFFNCjENsF0Qiy0SxcQkRTBxlI7LeSKEESwSycIFlaRi41gQIliFeFsFCEphKDgDxjOvMnM5e3czO7M7JuduWU/GHZu3Z+b7957OzcX6zXPrJ1rdHg3k7EPW97fjwne3oSJjMGJbd6r1X6t7GfbGMTs41tSbKJDIAS5nEsNuRSKQYUWQyol72AGn22zFhov6UNByGghkxJDLaAi2kgJSdRSQkVflFLw/CUEQaWICVtsRF9TQqRQVWgVBJcSYwrFFSmLvEkUnUJV+iiopCggW7vwHeJFrrOQRUosq2YU9E36FFlsq5qigFRKWVKoihQFpZEy83i8p+ao9plALsVnCkGxFY3vYojBU4khH0CRTwlM8+Yo7/WydGPVapxkUkLJEKRJwZgIcpYSo4SN9X+8t8vx0QO8tweplNASMDohC/VP/NUuc51TPWJIpDjLeLjFO5bcbvBONkJOV8gt9nKPxaSY+UfrRg8C7dMHZFgLARGiuYKvYXEdtlilWIuRMRmXUopzdPjAVpBYqOKCVHUFSBtjIpRyybD4VHPB0wvXFVFgH7xqsy1Grj+QQhhVOnUjxasQGIhFreiiOm/nXvJARTQsfz7ImkAcJ4sQXP/+kfeSMEvehWBMIyrjvGZ7vDtYWRJEDk4bOE4IeHrsLNtiIe2vJxLR4ve7jyo6VPtkDM6bH1nVCpaFYEAGFiIkYeo+o+T8hP7S71fUT0bbcyBiAHnwqtRRpYuQgmuLNylpgwNcpAC683QRCDXmSeMt6//+84NtBYcGjvLeHpBK7lJyRAlALgVAYrAMwYtrp3lvl8mlN0oxfmuKRL1+j7UsTI+zgQmBGS9qrZlLieiBKIFWqJSimd26yLYwcNMZL1AuKZqUTqSINONV4U1Kau47kueaV769ZtEiN8zI8BdW0EqdPhiIFnnGC6LkQgtiyiUFPX2mTv7tefosDLRYAxmyEDFfCVZo09KAOu2g2IqCCxJwkxHTfa9SKAfoci3VFF6FfBy7k68JHCBPxkwHZ32eZkaL0X0plKf6+SLF4I3gwdh82q7n2aKKpu7dvC4fSIxN3uU9PWut7GO6GHw4WSS+EPJt7f6RIXcpO0w93+Q9M9LEmApZnh7ivXzc+bmZCMXEi7xiBDaCsJyiZQhSpQBUYjC2UYShFiAjCwF6dgA+xMSISgig3AmUXYxOCKD9B6CMYtJkCDIPAPpZjokEGesTgBgluQxeB9mFdKJas8O8Rwv8jGH7xzimeLkocHn+gtdowr/tUMuJXgoevAkUgqKTYitBB/x0+rL5zml8QaVQCcjCVlBhK28gQG5FYXsvb1JCCaAgyBpt7FRSFJROChRV3MQ+G0ojBUvAwD7bR7O3R7Lr/6AwJevTd52jAH0nRZYBT7a+mOZfnZvuHD6zwV/RIYTkiQITopbiUg8o8HpD1xTytSRgShRSQkWEDq+PZNNPPCYhQDWjVRBcStZ8IwTepUAKxTjwNAqJFFXNAFGxyiq0wMFqHMxAsYzYimzhwKSOdyOmVvsPu0Aj3sKcwTUAAAAASUVORK5CYII="
     },
@@ -1398,9 +1398,54 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": false},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": false},
       "texture": "preview-images/player dev.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAqCAYAAAAeeGN5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAMDSURBVGhD3Zc9jxMxEIY3KTka/gKiQnQJJRJCdFBwNIdEzV0Lf4GClvqgokDiKAhC14EQJUXSISrEL0Ci4WjDvo4nNzsZjz/Wm0g80siz/lq/nrE3GTUDMr92a+ldx/Tb50HfN8jkUgRnSEHVJ7aEcIYQVXXCVCFEbUHVJssVQtQUNPblf0GVXSmNClErOrsV8/Srd+JM7/+NrnU3YjJESCxRwYbjg1lngUcn+8G+yWJ6iJBoojYqpAhJSFRUUKaQyf6Z95pmMdvzXrd+1OJdR+c2iwkBKX026CEE0LOsX7Z417EWk7NIrW+tG0kuOAYX5MSU7HayoIrnJIZ7uSVGOyPUP+lSyBBDUXnx4L0rOZODh83i5LV/OufwzT1X4vyMc4UASwThorTFqIDinzMpgraNW1BJdFKZv7sQnFtiHX5cz1Y70mzEhVD+WWCMdx3yesyBfz9AXzEbaYa1hgxg8WD++KOz2BgYodVJtD4kWoonqD7rzPCXTJ7fduXQSAHaM/20KboAagniaWOlkAQCyDhj64C32eRMg6cBh8Zw09DGh+aU8O8N/8GZFBlrURqLJ5+6JnYwB/mhxDM+oCa41UDrrg3QQSdkO9DqONZ4XN0wINsA2rA2XpK1/ToknxnscApIFW5EaDzOSui8UETppwyPiPZ/Zi1mF190Lpb7GiQEIjQhIDky27qKQ1giiE4jcpTvUPvovRVy96jdGgMoxWhDYlFg89odBUmRwZyZ83YgEannDuQKAaYYS4QWAUBjuElCY4HVFiP5zHDohTk7TaSMaTegKA2yxEBEHyFDsyGGFqwZgAgpROvLjXP9w1tXav1gfYiGE1/vmz8u+acVX6789l4YOebP6dS9a3T5kbri5c+XRanFiaaZXBTQ6mJcvDtfwvzjIJi7EXv52fdj752zd/XIezraGKJvdIKDU3eRLy4mhBhKkJpmOelAAlKFAN73zo2Z9/pT9J15drhaDJUpxPrWEFUkpg9cVM2ogGwx2g7H8jw05vTVL2fk97sAmuYfjc0n/DbZiIoAAAAASUVORK5CYII="
+    },
+    {
+      "exportID": "43434686",
+      "name": "EnemyMiffed",
+      "limit": -1,
+      "size": {"x": 48, "y": 42},
+      "origin": {"x": 22, "y": 41},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": true,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["Enemy"],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/enemy miffed.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAqCAYAAAD1T9h6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKlSURBVGhD1Zk/Th0xEMZ3kahSpKZBSFwgipTQ5gbQ0NLQQLogRckBKIIigWiAhoaChgaOAUgkF0iUjjqRotC9eAbPyus3tme8s+jxkyx7V97x9/nPzj69xprJp8sJFH85Oq2vTYiFt3trpvE55nz9bDGbod7sLy34huPX/agrYb8CoXggvjbGZGaSs0+4VQDGWIlBAdm3TcZAiJWZqiDF12R0BhDuXkCtoeJDRbEScueAMQNIDbGdpkR/WfUNz+cr3xDCGdh66xuek5vHWmmou9kTHQtOITUSGoiFp0jEjo30DUiFE5qVIBNSA0TBCOaBkvi2bdmiMgxbw4nn4kBJUhijmMhywbMDM1THgtWLzhFt+bmpAzvLMCaKKzCZpP25AL4lI9c/N06PyIToWwiCTxWleAKe4+LV0sIy+LbsUGpzQA7JeJQfQoJc0TdAhIEzgt2rTLUSxf6pccNtEyU63oAQEARITGj6ahj0e4DEkLgUY4kH8OU7ZBWAnMAxxQNd9hhqAuBWYizhxFT6szDyVLgJS+fvWTcC4rHGqwSzYoLEcmQN5BjLXE4sR5WBDxv1uf/Vsm84vv9omoMz5SdthOrhnPD905e+1TQ7m7+xju+F4kOGGBE9JJlxEvv3+g3WwIuVW9/KGwDABKA1UszEQ7ZLDdrxBn1KaKFZtsTcAGybj4dfsXBwJoYYK+63mi308O8b1kfn77AG6GBL0JwDs0NshfYQSzujAWcEL8Zgf+FKncQAjQHoC/9/Ne9/LuJNC44vXndfrE9iAC/cgG6wbmCNIRAMxDGQ3Q2s2vk/YiMax739Ew68c7+KiUwwsEWMHuLOdJDdIaNrrAnJ4bOIESPKxOHA8aAE9eGwiJGiaADe6VS21++6d3x4n0qKsE9tDJ6m+Q9c04zTkg2/CgAAAABJRU5ErkJggg=="
     }
   ],
   "tilesets": []

@@ -4,6 +4,7 @@ import { Instances } from "../../lib/game-engine/instances";
 import { Vector, vnew } from "../../lib/math/vector-type";
 import { objDevPlayer } from "../objects/dev/obj-dev-player";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
+import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
 import { objStashPocket } from "../objects/interactables/obj-stash-pocket";
 import { objPuddle } from "../objects/nature/obj-puddle";
@@ -60,6 +61,7 @@ export const OgmoEntityResolvers = {
     "PocketableItemA": (entity) => objPocketableItemSpawner(vnew(entity), "BallFruitTypeA").at(entity, -1),
     "PocketableItemB": (entity) => objPocketableItemSpawner(vnew(entity), "BallFruitTypeB").at(entity, -1),
     EnemySuggestive: (entity) => objAngelSuggestive(entity.values.variant).at(0, -38),
+    EnemyMiffed: () => objAngelMiffed().at(0, 1),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,
     Idol: objIdol,
     GateMap: objWorldMapGate,

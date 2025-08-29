@@ -4,8 +4,8 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#0a8148",
   "values": {"Terrain Color": "#23591f"},
+  "backgroundColor": "#0a8148",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -155,7 +155,8 @@
           "texture": "terrain/grass/sparse 3px 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -202,7 +203,8 @@
           "texture": "furniture/artwork/flop text large.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 258,
@@ -214,7 +216,8 @@
           "texture": "terrain/grass/sparse 3px 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 154,
@@ -226,7 +229,8 @@
           "texture": "terrain/grass/sparse 3px 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 58,
@@ -238,7 +242,8 @@
           "texture": "terrain/grass/sparse 3px 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 73,
@@ -250,7 +255,8 @@
           "texture": "terrain/grass/sparse 3px 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 177,
@@ -262,7 +268,8 @@
           "texture": "terrain/grass/sparse 3px 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 289,
@@ -274,7 +281,8 @@
           "texture": "terrain/grass/sparse 3px 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 304,
@@ -286,7 +294,8 @@
           "texture": "shapes/confetti 45deg.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 221,
@@ -298,7 +307,8 @@
           "texture": "shapes/confetti 45deg.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 157,
@@ -310,7 +320,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 90,
@@ -322,7 +333,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 33,
@@ -334,7 +346,8 @@
           "texture": "terrain/grass/sparse 3px 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 479,
@@ -346,7 +359,8 @@
           "texture": "terrain/grass/sparse 3px 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -625,7 +639,8 @@
           "texture": "terrain/earth/small platformer.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 136,
@@ -637,7 +652,8 @@
           "texture": "terrain/earth/small platformer.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 192,
@@ -649,7 +665,8 @@
           "texture": "terrain/earth/small platformer.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 248,
@@ -661,7 +678,8 @@
           "texture": "terrain/earth/small platformer.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 431,
@@ -673,7 +691,8 @@
           "texture": "furniture/artwork/crude flop painting 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 351,
@@ -685,7 +704,8 @@
           "texture": "furniture/artwork/crude flop painting 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 164,
@@ -697,7 +717,8 @@
           "texture": "terrain/earth/crack 28px 38px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 278,
@@ -709,7 +730,8 @@
           "texture": "terrain/earth/crack 28px 38px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 416,
@@ -721,7 +743,8 @@
           "texture": "terrain/earth/crack 28px 38px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

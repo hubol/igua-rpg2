@@ -30,6 +30,7 @@ export namespace OgmoEntities {
   export type GateMap = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
   export type StashPocket = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
   export type PlayerDev = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type EnemyMiffed = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
 }
 
 export interface OgmoEntityResolverBase {
@@ -60,4 +61,5 @@ export interface OgmoEntityResolverBase {
   GateMap: (entity: OgmoEntities.GateMap) => unknown;
   StashPocket: (entity: OgmoEntities.StashPocket) => unknown;
   PlayerDev: (entity: OgmoEntities.PlayerDev) => unknown;
+  EnemyMiffed: (entity: OgmoEntities.EnemyMiffed) => unknown;
 }

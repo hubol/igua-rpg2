@@ -808,6 +808,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromMapRight", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "PlayerDev",
+          "id": 13,
+          "_eid": "98101389",
+          "x": 1848,
+          "y": 408,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -1195,6 +1206,17 @@
           "originX": 32,
           "originY": 97,
           "uid": 175350180634402,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnemyMiffed",
+          "id": 13,
+          "_eid": "43434686",
+          "x": 1688,
+          "y": 360,
+          "originX": 22,
+          "originY": 41,
+          "uid": 175643438232400,
           "values": {"name": "", "depth": 0}
         }
       ]
