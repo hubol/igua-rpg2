@@ -22,6 +22,7 @@ import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objFxExpressSurprise } from "../effects/obj-fx-express-surprise";
 import { objFxHeartBurst } from "../effects/obj-fx-heart-burst";
 import { objFxSpiritualRelease } from "../effects/obj-fx-spiritual-release";
 import { objFxStarburst54 } from "../effects/obj-fx-startburst-54";
@@ -212,6 +213,8 @@ export function objAngelMiffed() {
             obj.pivot.y = 0;
         },
         *expressSurprise() {
+            obj.play(Sfx.Enemy.Miffed.ExpressSurprise.rate(0.9, 1.1));
+            objFxExpressSurprise().at(obj).add(5, -32).show();
             obj.speed.y = -2;
             yield () => obj.speed.y >= 0 && obj.isOnGround;
         },
