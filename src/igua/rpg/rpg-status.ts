@@ -27,6 +27,7 @@ export namespace RpgStatus {
             poison: {
                 immune: boolean;
                 level: number;
+                ticksCount: Integer;
                 value: number;
                 max: number;
             };
@@ -116,28 +117,36 @@ export namespace RpgStatus {
                 return;
             }
 
-            if (model.health > Consts.FullyPoisonedHealth && model.conditions.poison.level > 0) {
-                const previous = model.health;
+            if (model.conditions.poison.level > 0) {
+                if (model.health > Consts.FullyPoisonedHealth) {
+                    const previous = model.health;
 
-                if (count % 120 === 0) {
-                    model.health = Math.max(
-                        Consts.FullyPoisonedHealth,
-                        model.health - Math.ceil(model.conditions.poison.level / 2),
-                    );
-                }
-                else if (count % 120 === 40) {
-                    model.health = Math.max(
-                        Consts.FullyPoisonedHealth,
-                        model.health - Math.floor(model.conditions.poison.level / 2),
-                    );
+                    if (model.conditions.poison.ticksCount % 120 === 0) {
+                        model.health = Math.max(
+                            Consts.FullyPoisonedHealth,
+                            model.health - Math.ceil(model.conditions.poison.level / 2),
+                        );
+                    }
+                    else if (model.conditions.poison.ticksCount % 120 === 40) {
+                        model.health = Math.max(
+                            Consts.FullyPoisonedHealth,
+                            model.health - Math.floor(model.conditions.poison.level / 2),
+                        );
+                    }
+
+                    const diff = previous - model.health;
+
+                    if (diff > 0) {
+                        effects.tookDamage(model.health, diff, DamageKind.Poison);
+                    }
                 }
 
-                const diff = previous - model.health;
-
-                if (diff > 0) {
-                    effects.tookDamage(model.health, diff, DamageKind.Poison);
-                }
+                model.conditions.poison.ticksCount++;
             }
+            else {
+                model.conditions.poison.ticksCount = -1;
+            }
+
             if (count % 20 === 0) {
                 model.conditions.helium.value = Math.max(0, model.conditions.helium.value - 1);
             }

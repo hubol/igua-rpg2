@@ -32,6 +32,7 @@ export namespace RpgEnemyRank {
                         max: status?.conditions?.poison?.max ?? 100,
                         level: status?.conditions?.poison?.level ?? 0,
                         immune: status?.conditions?.poison?.immune ?? false,
+                        ticksCount: -1,
                     },
                     wetness: {
                         tint: 0xffffff,
