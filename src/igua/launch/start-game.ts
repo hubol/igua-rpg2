@@ -16,6 +16,10 @@ export function startGame() {
         Rpg.character.status.health = Rpg.character.status.healthMax;
     }
 
+    if (Environment.isDev) {
+        executeDevRpg();
+    }
+
     Rpg.character.position.sceneName = config.sceneName;
 
     layers.recreateOverlay();
@@ -26,6 +30,15 @@ export function startGame() {
     if (config.player.position && playerObj) {
         playerObj.at(config.player.position);
     }
+}
+
+function executeDevRpg() {
+    const { default: devModules } = require(`../dev/**/*.ts`);
+    (devModules as Array<Record<string, unknown>>)
+        .find((module): module is { devRpg: () => void } =>
+            Boolean(module.devRpg && typeof module.devRpg === "function")
+        )
+        ?.devRpg?.();
 }
 
 function getConfig(): GameStartConfig {

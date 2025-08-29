@@ -1,5 +1,7 @@
 dist/
 
+dev-rpg.ts
+
 public/**/*
 !public/index.html
 !public/index.css
