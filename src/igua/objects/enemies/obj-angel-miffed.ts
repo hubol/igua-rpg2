@@ -72,11 +72,18 @@ export function objAngelMiffed() {
 
     const bodyObj = objAngelBody();
 
-    const obj = container(bodyObj, headObj, slammingFistRightObj, slammingFistLeftObj, ...hurtboxObjs, soulAnchorObj)
+    const puppetObj = container(
+        bodyObj,
+        headObj,
+        slammingFistRightObj,
+        slammingFistLeftObj,
+        ...hurtboxObjs,
+        soulAnchorObj,
+    )
         .filtered(new MapRgbFilter(themes.Common.tint.primary, themes.Common.tint.secondary))
         .pivoted(22, 41);
 
-    return container(obj)
+    const obj = container(puppetObj)
         .autoSorted()
         .mixin(mxnEnemy, {
             hurtboxes: hurtboxObjs,
@@ -91,94 +98,6 @@ export function objAngelMiffed() {
         })
         .mixin(mxnPhysics, { gravity: 0.2, physicsRadius: 6, physicsOffset: [0, -7] })
         .mixin(mxnDetectPlayer)
-        .coro(function* (self) {
-            for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
-                fistObj.mixin(
-                    mxnRpgAttack,
-                    { attacker: self.status, attack: atkFistSwing },
-                );
-            }
-
-            let minDetectionScore = 0;
-
-            while (true) {
-                if (self.mxnDetectPlayer.detectionScore <= minDetectionScore) {
-                    yield () => self.mxnDetectPlayer.detectionScore > minDetectionScore;
-                    self.speed.y = -2;
-                    yield () => self.isOnGround;
-                }
-
-                if (minDetectionScore === -120 && Rng.float() > 0.25) {
-                    const vibrateObj = container()
-                        .step(() => self.pivot.x = Math.round(Math.sin(scene.ticker.ticks / 15 * Math.PI)) * 2)
-                        .show(self);
-                    yield sleep(125);
-                    const poisonBoxObj = objAngelMiffedPoisonBox(self).at(self).show();
-                    yield () => poisonBoxObj.mxnDischargeable.isDischarged;
-                    self.speed.y = -2;
-                    yield () => poisonBoxObj.destroyed;
-                    vibrateObj.destroy();
-                    self.pivot.x = 0;
-                }
-
-                minDetectionScore = -120;
-
-                for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
-                    yield* Coro.all([
-                        interp(fistObj.controls, "exposedUnit").steps(3).to(1).over(300),
-                        Coro.chain([
-                            sleep(150),
-                            () => (objFxHeartBurst.many(10, 4)
-                                .at(fistObj.getWorldPosition())
-                                .coro(function* (self) {
-                                    self.play(Sfx.Enemy.Miffed.PunchArmAppear.rate(0.9, 1.1));
-                                })
-                                .show(),
-                                true),
-                        ]),
-                    ]);
-                    yield interp(fistObj.controls, "slamUnit").to(1).over(500);
-                    objAngelMiffedStarburstAttack()
-                        .at(fistObj.state.slamFistWorldPosition)
-                        .mixin(
-                            mxnRpgAttack,
-                            { attacker: self.status, attack: atkSlamStarburst },
-                        )
-                        .show()
-                        .play(Sfx.Enemy.Miffed.PunchLand.rate(0.9, 1.1));
-
-                    self.speed.at(fistObj === slammingFistRightObj ? 1 : -1, -3);
-                    yield sleep(250);
-                    yield interp(fistObj.controls, "exposedUnit").steps(3).to(0).over(300);
-                    yield sleep(250);
-                    fistObj.controls.slamUnit = 0;
-                }
-                self.play(Sfx.Enemy.Miffed.Jump.rate(0.9, 1.1));
-                self.speed.at(self.mxnDetectPlayer.position.x < self.x ? -2 : 2, -7);
-                yield () => self.speed.y >= 0;
-                self.play(Sfx.Enemy.Miffed.Pause.rate(0.9, 1.1));
-                const attackObj = objAngelMiffedSlamAttack().mixin(
-                    mxnRpgAttack,
-                    { attacker: self.status, attack: atkBodySlamStarburst },
-                ).zIndexed(-1).show(self);
-                self.gravity = 0;
-                self.status.quirks.isImmuneToPlayerMeleeAttack = true;
-                self.speed.at(0, 0);
-                self.scale.y = -1;
-                self.pivot.y = -25;
-                yield sleep(250);
-                self.play(Sfx.Enemy.Miffed.Dive.rate(0.9, 1.1));
-                self.gravity = 1;
-                yield () => self.speed.y === 0 && self.isOnGround;
-                self.play(Sfx.Enemy.Miffed.DiveLand.rate(0.9, 1.1));
-                self.status.quirks.isImmuneToPlayerMeleeAttack = false;
-                yield interpv(attackObj.scale).steps(4).to(0, 0).over(250);
-                attackObj.destroy();
-                self.gravity = 0.2;
-                self.scale.y = 1;
-                self.pivot.y = 0;
-            }
-        })
         .step(self => {
             let bodyObjY = 0;
             if (!self.isOnGround) {
@@ -202,6 +121,114 @@ export function objAngelMiffed() {
                 self.isOnGround ? 0 : 1,
                 0.3,
             );
+        });
+
+    for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
+        fistObj.mixin(
+            mxnRpgAttack,
+            { attacker: obj.status, attack: atkFistSwing },
+        );
+    }
+
+    const moves = {
+        *castPoisonMagic() {
+            const vibrateObj = container()
+                .step(() => obj.pivot.x = Math.round(Math.sin(scene.ticker.ticks / 15 * Math.PI)) * 2)
+                .show(obj);
+            yield sleep(125);
+            const poisonBoxObj = objAngelMiffedPoisonBox(obj).at(obj).show();
+            yield () => poisonBoxObj.mxnDischargeable.isDischarged;
+            obj.speed.y = -2;
+            yield () => poisonBoxObj.destroyed;
+            vibrateObj.destroy();
+            obj.pivot.x = 0;
+        },
+        *slamFist(fistObj: ObjSlammingFist) {
+            yield* Coro.all([
+                interp(fistObj.controls, "exposedUnit").steps(3).to(1).over(300),
+                Coro.chain([
+                    sleep(150),
+                    () => (objFxHeartBurst.many(10, 4)
+                        .at(fistObj.getWorldPosition())
+                        .coro(function* (self) {
+                            self.play(Sfx.Enemy.Miffed.PunchArmAppear.rate(0.9, 1.1));
+                        })
+                        .show(),
+                        true),
+                ]),
+            ]);
+            yield interp(fistObj.controls, "slamUnit").to(1).over(500);
+            objAngelMiffedStarburstAttack()
+                .at(fistObj.state.slamFistWorldPosition)
+                .mixin(
+                    mxnRpgAttack,
+                    { attacker: obj.status, attack: atkSlamStarburst },
+                )
+                .show()
+                .play(Sfx.Enemy.Miffed.PunchLand.rate(0.9, 1.1));
+
+            obj.speed.at(fistObj === slammingFistRightObj ? 1 : -1, -3);
+            yield sleep(250);
+            yield interp(fistObj.controls, "exposedUnit").steps(3).to(0).over(300);
+            yield sleep(250);
+            fistObj.controls.slamUnit = 0;
+        },
+        *dive() {
+            obj.play(Sfx.Enemy.Miffed.Jump.rate(0.9, 1.1));
+            obj.speed.at(obj.mxnDetectPlayer.position.x < obj.x ? -2 : 2, -7);
+            yield () => obj.speed.y >= 0;
+            obj.play(Sfx.Enemy.Miffed.Pause.rate(0.9, 1.1));
+            const attackObj = objAngelMiffedSlamAttack().mixin(
+                mxnRpgAttack,
+                { attacker: obj.status, attack: atkBodySlamStarburst },
+            ).zIndexed(-1).show(obj);
+            obj.gravity = 0;
+            obj.status.quirks.isImmuneToPlayerMeleeAttack = true;
+            obj.speed.at(0, 0);
+            obj.scale.y = -1;
+            obj.pivot.y = -25;
+            yield sleep(250);
+            obj.play(Sfx.Enemy.Miffed.Dive.rate(0.9, 1.1));
+            obj.gravity = 1;
+            yield () => obj.speed.y === 0 && obj.isOnGround;
+            obj.play(Sfx.Enemy.Miffed.DiveLand.rate(0.9, 1.1));
+            obj.status.quirks.isImmuneToPlayerMeleeAttack = false;
+            yield interpv(attackObj.scale).steps(4).to(0, 0).over(250);
+            attackObj.destroy();
+            obj.gravity = 0.2;
+            obj.scale.y = 1;
+            obj.pivot.y = 0;
+        },
+        *expressSurprise() {
+            obj.speed.y = -2;
+            yield () => obj.speed.y >= 0 && obj.isOnGround;
+        },
+    };
+
+    return obj
+        .coro(function* (self) {
+            let minDetectionScore = 0;
+            let iterationsCount = 0;
+
+            while (true) {
+                if (self.mxnDetectPlayer.detectionScore <= minDetectionScore) {
+                    yield () => self.mxnDetectPlayer.detectionScore > minDetectionScore;
+                    yield* moves.expressSurprise();
+                }
+
+                if (iterationsCount > 0 && Rng.float() > 0.25) {
+                    yield* moves.castPoisonMagic();
+                }
+
+                minDetectionScore = -120;
+
+                for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
+                    yield* moves.slamFist(fistObj);
+                }
+
+                yield* moves.dive();
+                iterationsCount++;
+            }
         });
 }
 
@@ -255,6 +282,8 @@ function objSlammingFist(side: "right" | "left") {
 
     return obj.merge({ controls, state });
 }
+
+type ObjSlammingFist = ReturnType<typeof objSlammingFist>;
 
 function objAngelMiffedHead() {
     const faceObj = objAngelMiffedFace().pivoted(-20, -15);
