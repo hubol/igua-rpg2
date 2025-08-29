@@ -1,4 +1,4 @@
-import { DisplayObject } from "pixi.js";
+import { Container, DisplayObject } from "pixi.js";
 
 type TypeError_ThisDoesNotSufficientlyImplementMinimum =
     "This DisplayObject does not sufficiently implement the mixin minimum type";
@@ -17,6 +17,10 @@ declare module "pixi.js" {
             ...args: ExcludeFirstParameter<Parameters<TFn>>
         ): Mixed<Parameters<TFn>[0], ReturnType<TFn>, this>;
         is<TFn extends (...args: any) => any>(mixin: TFn): this is ReturnType<TFn>;
+    }
+
+    interface Container {
+        findIs<TFn extends (...args: any) => any>(mixin: TFn): Array<ReturnType<TFn>>;
     }
 }
 
@@ -43,6 +47,34 @@ Object.defineProperties(DisplayObject.prototype, {
     is: {
         value: function (this: DisplayObject & DisplayObjectPrivate, mixin: (...args: any) => any) {
             return this._mixins ? this._mixins.has(mixin) : false;
+        },
+    },
+});
+
+const children: DisplayObject[] = [];
+
+Object.defineProperties(Container.prototype, {
+    findIs: {
+        value: function (this: Container, mixin: (...args: any) => any) {
+            const results: any[] = [];
+
+            children.length = 0;
+            children[0] = this;
+
+            for (let i = 0; i < children.length; i++) {
+                const obj = children[i];
+
+                if (obj.is?.(mixin)) {
+                    results.push(obj);
+                }
+
+                if (obj.children) {
+                    children.push(...obj.children as any);
+                }
+            }
+
+            children.length = 0;
+            return results;
         },
     },
 });
