@@ -52,7 +52,7 @@ export function mxnDetectPlayer(obj: Container) {
                 facingPivotObjs[i].polarOffsets[0] = polarOffset;
             }
         })
-        .coro(function* () {
+        .coro(function* (self) {
             // return;
             // TODO: note probably leaks when parent object dies
             const rayObj = objDetectRay().invisible()
@@ -68,6 +68,10 @@ export function mxnDetectPlayer(obj: Container) {
                     }
                 })
                 .show();
+
+            if (self.is(mxnEnemy)) {
+                self.handles("damaged", () => rayObj.at(playerObj));
+            }
 
             // TODO: note probably leaks when parent object dies
             const playerTrackerObj = new Graphics().beginFill(0xffffff).drawCircle(0, 0, 12).invisible()
