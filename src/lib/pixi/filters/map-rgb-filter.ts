@@ -1,5 +1,5 @@
 import { Filter } from "pixi.js";
-import { AdjustColor } from "../adjust-color";
+import { PixiFilterUtils } from "./pixi-filter-utils";
 
 const fragment = `varying vec2 vTextureCoord;
 uniform sampler2D uSampler;
@@ -24,16 +24,11 @@ void main(void)
 export class MapRgbFilter extends Filter {
     constructor(red = 0, green = 0, blue = 0, white = 0xffffff) {
         const uniforms = {
-            red: getPixiColorAsGlslVec3(red),
-            green: getPixiColorAsGlslVec3(green),
-            blue: getPixiColorAsGlslVec3(blue),
-            white: getPixiColorAsGlslVec3(white),
+            red: PixiFilterUtils.getRgbIntAsGlslVec3(red),
+            green: PixiFilterUtils.getRgbIntAsGlslVec3(green),
+            blue: PixiFilterUtils.getRgbIntAsGlslVec3(blue),
+            white: PixiFilterUtils.getRgbIntAsGlslVec3(white),
         };
         super(undefined, fragment, uniforms);
     }
-}
-
-function getPixiColorAsGlslVec3(color: number) {
-    const { r, g, b } = AdjustColor.pixi(color).toRgb();
-    return [r / 255, g / 255, b / 255];
 }
