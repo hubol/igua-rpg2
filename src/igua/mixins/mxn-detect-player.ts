@@ -53,8 +53,6 @@ export function mxnDetectPlayer(obj: Container) {
             }
         })
         .coro(function* (self) {
-            // return;
-            // TODO: note probably leaks when parent object dies
             const rayObj = objDetectRay().invisible()
                 .step(self => {
                     if (self.collides(playerObj)) {
@@ -70,10 +68,14 @@ export function mxnDetectPlayer(obj: Container) {
                 .show();
 
             if (self.is(mxnEnemy)) {
-                self.handles("damaged", () => rayObj.at(playerObj));
+                self.handles("damaged", (_, result) => {
+                    // TODO may be necessary to check if the player actually caused the damage!
+                    if (!result.rejected && result.damaged) {
+                        rayObj.at(playerObj);
+                    }
+                });
             }
 
-            // TODO: note probably leaks when parent object dies
             const playerTrackerObj = new Graphics().beginFill(0xffffff).drawCircle(0, 0, 12).invisible()
                 .mixin(mxnPhysics, {
                     physicsRadius: 10,
@@ -97,10 +99,22 @@ export function mxnDetectPlayer(obj: Container) {
                 })
                 .show();
 
+            // Crude, but can't seem to rely on `.destroyed`...
+            self.on("removed", () => {
+                if (rayObj.parent) {
+                    rayObj.destroy();
+                }
+                if (playerTrackerObj.parent) {
+                    playerTrackerObj.destroy();
+                }
+            });
+
             const startPos = vnew();
 
             while (true) {
-                rayObj.at(obj.getWorldPosition()).add(0, -16);
+                // TODO very arbitrary value, should probably be configurable per enemy
+                // Or detect a head position
+                rayObj.at(obj.getWorldPosition()).add(0, -30);
                 force(rayObj, v.at(0, 16));
                 rayObj.speed.at(v.at(playerObj).add(rayObj, -1).normalize().scale(32));
                 startPos.at(rayObj);
@@ -126,9 +140,9 @@ export namespace mxnDetectPlayer {
 export type MxnDetectPlayer = ReturnType<typeof mxnDetectPlayer>;
 
 function objDetectRay() {
-    return new Graphics().beginFill(0xffffff).drawRect(-12, -12, 24, 24)
+    return new Graphics().beginFill(0xffffff).drawRect(-16, -16, 32, 32)
         .mixin(mxnPhysics, {
-            physicsRadius: 8,
+            physicsRadius: 16,
             gravity: 0,
         });
 }
