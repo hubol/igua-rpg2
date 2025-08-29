@@ -808,17 +808,6 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromMapRight", "depth": 0, "overrideFlipX": "none"}
-        },
-        {
-          "name": "PlayerDev",
-          "id": 13,
-          "_eid": "98101389",
-          "x": 1848,
-          "y": 408,
-          "originX": 22,
-          "originY": 39,
-          "flippedX": false,
-          "values": {"name": "", "depth": 0}
         }
       ]
     },

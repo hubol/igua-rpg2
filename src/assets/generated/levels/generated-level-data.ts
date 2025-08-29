@@ -2034,7 +2034,6 @@ export const Lvl = {
       fromOutskirtsMiddleRight: e(r["Checkpoint"], { x: 928, y: 24, flippedX: false, values: { name: "fromOutskirtsMiddleRight", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       fromMapLeft: e(r["Checkpoint"], { x: 64, y: 360, flippedX: false, values: { name: "fromMapLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromMapRight: e(r["Checkpoint"], { x: 2592, y: 272, flippedX: true, values: { name: "fromMapRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
-      PlayerDev: e(r["PlayerDev"], { x: 1848, y: 408, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       StoneRockSmallShaded1_18: d(Tx.Stone.RockSmallShaded1, { x: 148, y: 338, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
       TerrainGrassTall3px_26: d(Tx.Terrain.Grass.Tall3px, { x: 1400, y: 365, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "FrontDecals"),
       TerrainGrassTall3px_27: d(Tx.Terrain.Grass.Tall3px, { x: 1312, y: 365, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "FrontDecals"),
