@@ -4,6 +4,7 @@ import { Integer } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { vlerp } from "../../../lib/math/vector";
 import { VectorSimple, vnew } from "../../../lib/math/vector-type";
+import { container } from "../../../lib/pixi/container";
 import { Empty } from "../../../lib/types/empty";
 import { objEye, objEyes } from "../characters/obj-eye";
 
@@ -173,3 +174,19 @@ const scleraToInjuredOffsets = new Map<Texture, VectorSimple>();
 scleraToInjuredOffsets.set(Tx.Enemy.Suggestive.Sclera, [0, 2]);
 scleraToInjuredOffsets.set(Tx.Enemy.Suggestive.ScleraWide, [0, -2]);
 const vzero = vnew();
+
+objAngelEyes.objEyeRoller = function objEyeRoller (angelEyesObj: ObjAngelEyes) {
+    let count = 0;
+    const polarOffset = vnew();
+
+    return container()
+        .step(() => {
+            count++;
+            const rads = count * 0.04 * Math.PI;
+            angelEyesObj.pupilPolarOffsets[1] = polarOffset.at(
+                Math.sin(rads),
+                Math.cos(rads),
+            );
+        })
+        .on("removed", () => delete angelEyesObj.pupilPolarOffsets[1]);
+};

@@ -136,11 +136,19 @@ export function objAngelMiffed() {
             const vibrateObj = container()
                 .step(() => obj.pivot.x = Math.round(Math.sin(scene.ticker.ticks / 15 * Math.PI)) * 2)
                 .show(obj);
+
             yield sleep(125);
+
+            const eyeRollerObj = objAngelEyes.objEyeRoller(headObj.objects.faceObj.objects.eyesObj).show(obj);
             const poisonBoxObj = objAngelMiffedPoisonBox(obj).at(obj).show();
+
             yield () => poisonBoxObj.mxnDischargeable.isDischarged;
+
+            eyeRollerObj.destroy();
             obj.speed.y = -2;
+
             yield () => poisonBoxObj.destroyed;
+
             vibrateObj.destroy();
             obj.pivot.x = 0;
         },
