@@ -18,12 +18,14 @@ export class SceneChanger {
     }
 
     changeScene() {
+        const startMs = performance.now();
         if (playerObj) {
             Rpg.character.position.facing = playerObj.facing > 0 ? 1 : -1;
         }
         Rpg.character.position.sceneName = this._sceneName;
         Rpg.character.position.checkpointName = this._checkpointName;
         sceneStack.replace(this._scene, { useGameplay: true });
+        Logger.logInfo("SceneChanger.changeScene", `Took ${performance.now() - startMs}ms`);
     }
 
     static create({ sceneName, checkpointName }: CreateArgs) {
