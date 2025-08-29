@@ -37,6 +37,7 @@ const themes = {
         tint: {
             primary: 0xFF77B0,
             secondary: 0x715EFF,
+            tertiary: 0xfffb0e,
         },
     },
 };
@@ -81,7 +82,9 @@ export function objAngelMiffed() {
         ...hurtboxObjs,
         soulAnchorObj,
     )
-        .filtered(new MapRgbFilter(themes.Common.tint.primary, themes.Common.tint.secondary))
+        .filtered(
+            new MapRgbFilter(themes.Common.tint.primary, themes.Common.tint.secondary, themes.Common.tint.tertiary),
+        )
         .pivoted(22, 41);
 
     const obj = container(puppetObj)
