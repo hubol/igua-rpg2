@@ -33,7 +33,7 @@ export function startGame() {
 }
 
 function executeDevRpg() {
-    const { default: devModules } = require(`../dev/**/*.ts`);
+    const { default: devModules } = require(`../dev/ignored/**/*.ts`);
     (devModules as Array<Record<string, unknown>>)
         .find((module): module is { devRpg: () => void } =>
             Boolean(module.devRpg && typeof module.devRpg === "function")

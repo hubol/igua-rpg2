@@ -1,6 +1,6 @@
 dist/
 
-dev-rpg.ts
+**/dev/ignored/**/*.ts
 
 public/**/*
 !public/index.html
