@@ -1,16 +1,18 @@
-import { DisplayObject, Graphics } from "pixi.js";
+import { Container, Graphics } from "pixi.js";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { Integer, Polar } from "../../lib/math/number-alias-types";
 import { distance } from "../../lib/math/vector";
 import { VectorSimple, vnew } from "../../lib/math/vector-type";
+import { Force } from "../../lib/types/force";
 import { playerObj } from "../objects/obj-player";
 import { mxnEnemy } from "./mxn-enemy";
+import { MxnFacingPivot, mxnFacingPivot } from "./mxn-facing-pivot";
 import { force, mxnPhysics } from "./mxn-physics";
 
 const v = vnew();
 
-export function mxnDetectPlayer(obj: DisplayObject) {
+export function mxnDetectPlayer(obj: Container) {
     const mxnDetectPlayer = {
         debug: false,
         detectionScore: -1,
@@ -19,19 +21,35 @@ export function mxnDetectPlayer(obj: DisplayObject) {
         speed: vnew(),
     } satisfies mxnDetectPlayer.Context;
 
-    const pupilPolarOffset = vnew();
+    const polarOffset = vnew();
+
+    let facingPivotObjs = Force<MxnFacingPivot[]>();
 
     return obj
         .merge({ mxnDetectPlayer })
+        .coro(function* () {
+            facingPivotObjs = obj.findIs(mxnFacingPivot);
+        })
         .step(() => {
             mxnDetectPlayer.detectionScore--;
 
-            if (obj.is(mxnEnemy) && obj.mxnEnemy.angelEyesObj && mxnDetectPlayer.detectionScore > 0) {
-                pupilPolarOffset.at(mxnDetectPlayer.position).add(obj, -1).scale(1 / 120);
-                if (pupilPolarOffset.vlength > 1) {
-                    pupilPolarOffset.normalize();
+            if (mxnDetectPlayer.detectionScore > 0) {
+                polarOffset.at(mxnDetectPlayer.position).add(obj, -1).scale(1 / 120);
+                if (polarOffset.vlength > 1) {
+                    polarOffset.normalize();
                 }
-                obj.mxnEnemy.angelEyesObj.pupilPolarOffsets[0] = pupilPolarOffset;
+            }
+
+            if (mxnDetectPlayer.detectionScore < -240) {
+                polarOffset.moveTowards(v.at(0, 0), 0.05);
+            }
+
+            if (obj.is(mxnEnemy) && obj.mxnEnemy.angelEyesObj) {
+                obj.mxnEnemy.angelEyesObj.pupilPolarOffsets[0] = polarOffset;
+            }
+
+            for (let i = 0; i < facingPivotObjs.length; i++) {
+                facingPivotObjs[i].polarOffsets[0] = polarOffset;
             }
         })
         .coro(function* () {

@@ -15,6 +15,7 @@ import { scene } from "../../globals";
 import { MxnDetectPlayer, mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
+import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnIndexedCollisionShape } from "../../mixins/mxn-indexed-collision-shape";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
@@ -286,12 +287,24 @@ function objSlammingFist(side: "right" | "left") {
 type ObjSlammingFist = ReturnType<typeof objSlammingFist>;
 
 function objAngelMiffedHead() {
-    const faceObj = objAngelMiffedFace().pivoted(-20, -15);
+    const faceObj = objAngelMiffedFace().pivoted(-22, -15).mixin(mxnFacingPivot, {
+        down: 2,
+        left: -3,
+        right: 5,
+        up: -2,
+    });
 
     return container(
         Sprite.from(Tx.Enemy.Miffed.Noggin0),
         faceObj,
-    ).merge({ objects: { faceObj } });
+    )
+        .merge({ objects: { faceObj } })
+        .mixin(mxnFacingPivot, {
+            down: 1,
+            left: -2,
+            right: 2,
+            up: 0,
+        });
 }
 
 function objAngelMiffedFace() {
