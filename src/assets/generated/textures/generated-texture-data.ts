@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 360 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 361 }];
 
 interface TxData {
   id: string;
@@ -74,6 +74,7 @@ function txs<T>(tx: (data: TxData) => T) {
       NormalOpen: tx({ id: "Door.NormalOpen", atlas: 0, x: 375, y: 936, width: 34, height: 46 }),
     },
     Effects: {
+      Asterisk16px: tx({ id: "Effects.Asterisk16px", atlas: 0, x: 1157, y: 860, width: 64, height: 16 }),
       BallonInflate: tx({ id: "Effects.BallonInflate", atlas: 0, x: 1442, y: 787, width: 110, height: 24 }),
       BallonPop: tx({ id: "Effects.BallonPop", atlas: 0, x: 0, y: 49, width: 1012, height: 50 }),
       Ballon: tx({ id: "Effects.Ballon", atlas: 0, x: 854, y: 739, width: 110, height: 24 }),
@@ -202,7 +203,7 @@ function txs<T>(tx: (data: TxData) => T) {
       },
       Artwork: {
         CrudeFlopPainting0: tx({ id: "Furniture.Artwork.CrudeFlopPainting0", atlas: 0, x: 716, y: 870, width: 74, height: 48 }),
-        CrudeFlopPainting1: tx({ id: "Furniture.Artwork.CrudeFlopPainting1", atlas: 0, x: 1157, y: 860, width: 64, height: 64 }),
+        CrudeFlopPainting1: tx({ id: "Furniture.Artwork.CrudeFlopPainting1", atlas: 0, x: 1157, y: 877, width: 64, height: 64 }),
         FlopTextLarge: tx({ id: "Furniture.Artwork.FlopTextLarge", atlas: 0, x: 1722, y: 530, width: 274, height: 112 }),
         Poster0: tx({ id: "Furniture.Artwork.Poster0", atlas: 0, x: 1424, y: 690, width: 128, height: 58 }),
         Statue0: tx({ id: "Furniture.Artwork.Statue0", atlas: 0, x: 1945, y: 756, width: 82, height: 104 }),

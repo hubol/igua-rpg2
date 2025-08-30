@@ -11,6 +11,8 @@ import { DataEquipment } from "../../data/data-equipment";
 import { mxnCollectibleLoot } from "../../mixins/mxn-collectible-loot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { Rpg } from "../../rpg/rpg";
+import { objFxLibRadialBurst } from "../effects/lib/obj-fx-lib-radial-burst";
+import { objFxAsterisk16Px } from "../effects/obj-fx-asterisk-16px";
 import { objFxBurst32 } from "../effects/obj-fx-burst-32";
 import { objFigureEquipment } from "../figures/obj-figure-equipment";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
@@ -64,7 +66,21 @@ export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
             yield interp(filter, "factor").steps(4).to(0).over(1000);
             figureObj.filters = null;
             yield () => self.mxnCollectibleLoot.collectConditionsMet;
+            objFxEquipmentCollectBurst().at(self).show();
             Rpg.inventory.equipment.receive(equipmentId);
             self.destroy();
         });
+}
+
+function objFxEquipmentCollectBurst() {
+    return objFxLibRadialBurst({
+        count: 6,
+        distance0: 6,
+        distance1: 12,
+        fxObjConstructor: objFxAsterisk16Px,
+        speed0: 1.2,
+        speed1: 1.9,
+        tint0: 0xE5BB00,
+        tint1: 0xecd364,
+    });
 }
