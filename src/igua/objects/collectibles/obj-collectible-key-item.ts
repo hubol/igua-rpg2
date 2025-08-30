@@ -30,8 +30,7 @@ export function objCollectibleKeyItem(keyItemId: DataKeyItem.Id) {
     return container(figureObj)
         .mixin(mxnCollectibleLoot)
         .mixin(mxnPhysics, { gravity: 0, physicsRadius: 8, physicsOffset: [0, -11] })
-        // TODO may need to pass some offset so that it looks less silly when rescued
-        .mixin(mxnRescue)
+        .mixin(mxnRescue, [0, 13])
         .coro(function* (self) {
             self.play(Sfx.Collect.KeyItemAppear.rate(0.9, 1.1));
 
@@ -58,11 +57,16 @@ export function objCollectibleKeyItem(keyItemId: DataKeyItem.Id) {
 
             yield () => self.isOnGround || self.mxnRescue.isRescued;
 
+            if (self.mxnRescue.isRescued) {
+                indicatorSpr.alpha = 0;
+            }
+
             self.play(Sfx.Collect.KeyItemLand.rate(0.9, 1.1));
             self.speed.x = 0;
 
             yield () => self.mxnCollectibleLoot.collectConditionsMet;
 
+            indicatorSpr.alpha = 1;
             objFxCollectKeyItemNotification(keyItemId).show().at(self);
             Rpg.inventory.keyItems.receive(keyItemId);
 

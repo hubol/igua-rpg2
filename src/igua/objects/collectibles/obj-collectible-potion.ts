@@ -39,7 +39,7 @@ export function objCollectiblePotion(potionId: DataPotion.Id) {
     )
         .mixin(mxnCollectibleLoot)
         .mixin(mxnPhysics, { gravity: 0.01, physicsRadius: 16, physicsOffset: [0, -19] })
-        .mixin(mxnRescue)
+        .mixin(mxnRescue, [0, 11])
         .coro(function* (self) {
             self.play(Sfx.Collect.PotionAppear.rate(0.9, 1.1));
             self.speed.y = -1;

@@ -56,9 +56,9 @@ function objItemRescueAngelPuppet() {
 
 const v = vnew();
 
-export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSimple) {
+export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSimple, objCenterOffset: VectorSimple) {
     function getTargetPosition() {
-        return v.at(rescueObj.getWorldPosition());
+        return v.at(rescueObj.getWorldPosition()).add(objCenterOffset);
     }
 
     const puppetObj = objItemRescueAngelPuppet();
@@ -148,7 +148,7 @@ export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSim
                     puppetObj.controls.animatePivot = false;
                     aliveBehaviorObj.step(() => {
                         if (!rescueObj.destroyed) {
-                            rescueObj.at(self);
+                            rescueObj.at(self).add(objCenterOffset);
                         }
                     }, StepOrder.AfterPhysics);
                     self.speed.at(towSpeed);

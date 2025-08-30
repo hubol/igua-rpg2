@@ -1,11 +1,11 @@
 import { DisplayObject } from "pixi.js";
 import { holdf } from "../../lib/game-engine/routines/hold";
-import { vnew } from "../../lib/math/vector-type";
+import { VectorSimple, vnew } from "../../lib/math/vector-type";
 import { renderer } from "../current-pixi-renderer";
 import { scene } from "../globals";
 import { objItemRescueAngel } from "../objects/characters/obj-item-rescue-angel";
 
-export function mxnRescue(obj: DisplayObject) {
+export function mxnRescue(obj: DisplayObject, centerOffset: VectorSimple = vnew()) {
     let isRescuing = false;
     let isRescued = false;
 
@@ -75,7 +75,7 @@ export function mxnRescue(obj: DisplayObject) {
             towSpeed.normalize();
             obj.add(towSpeed, 40);
 
-            const angelObj = objItemRescueAngel(obj, towSpeed.scale(0.3)).at(startingPosition).show();
+            const angelObj = objItemRescueAngel(obj, towSpeed.scale(0.3), centerOffset).at(startingPosition).show();
             yield () => angelObj.state.isRescued;
 
             isRescued = true;
