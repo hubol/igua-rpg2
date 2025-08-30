@@ -1,4 +1,5 @@
 import { Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { interp } from "../../../lib/game-engine/routines/interp";
@@ -31,15 +32,23 @@ export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
 
     figureObj.pivotedUnit(0.5, 0.5);
 
-    let hitGroundCount = 0;
+    let hitSolidCount = 0;
 
     return container()
         .mixin(mxnCollectibleLoot)
         .mixin(mxnPhysics, { gravity: 0, physicsRadius, physicsOffset: [0, -3] })
         .handles("moved", (self, event) => {
-            if (event.hitGround && !event.previousOnGround) {
+            const hitGround = event.hitGround && !event.previousOnGround;
+            const hitWall = event.hitWall && event.previousSpeed.x !== 0;
+
+            if (hitGround || hitWall) {
+                const sfxRate = Math.max(0.5, Math.min(2, Math.abs(event.previousSpeed.y) / 3) + Rng.float(-0.1, 0.1));
+                self.play(Sfx.Collect.EquipmentLand.rate(sfxRate));
                 objFxBurst32().tinted(0xE5BB00).at(self).add(0, 10).show();
-                hitGroundCount++;
+                hitSolidCount++;
+            }
+
+            if (hitGround) {
                 if (event.previousSpeed.y > 1) {
                     self.speed.y = -event.previousSpeed.y * 0.8;
                     self.speed.x = approachLinear(event.previousSpeed.x * 0.8, 0, 0.1);
@@ -47,6 +56,9 @@ export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
                 else {
                     self.speed.x = 0;
                 }
+            }
+            if (hitWall) {
+                self.speed.x = -event.previousSpeed.x;
             }
         })
         .coro(function* (self) {
@@ -58,7 +70,7 @@ export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
             self.speed.x = Rng.float(1, 2) * Rng.intp();
             self.gravity = 0.1;
             yield* Coro.race([
-                Coro.chain([sleep(250), () => hitGroundCount > 0]),
+                Coro.chain([sleep(250), () => hitSolidCount > 0]),
                 sleep(1000),
             ]);
             appearObj.destroy();
@@ -68,6 +80,7 @@ export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
             self.coro(function* () {
                 yield sleep(250);
                 yield () => self.mxnCollectibleLoot.collectConditionsMet;
+                self.play(Sfx.Collect.Equipment.rate(0.95, 1.05));
                 objFxEquipmentCollectBurst().at(self).show();
                 objFxCollectEquipmentNotification().at(self).show();
                 Rpg.inventory.equipment.receive(equipmentId);

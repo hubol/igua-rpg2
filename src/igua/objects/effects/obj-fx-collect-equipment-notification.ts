@@ -12,7 +12,10 @@ export function objFxCollectEquipmentNotification() {
             yield interpvr(self.pivot).factor(factor.sine).to(0, 24).over(250);
             self.sparklesTint = 0xE5BB00;
             yield interp(self, "sparklesPerFrame").to(0.3).over(350);
-            yield sleep(350);
+            yield sleep(400);
+            self.alpha = 0.5;
+            self.sparklesPerFrame = 0.05;
+            yield sleep(150);
             self.destroy();
         });
 }
