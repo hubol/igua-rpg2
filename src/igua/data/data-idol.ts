@@ -20,7 +20,7 @@ export namespace DataIdol {
             },
             Green: {
                 buffs: (model) => {
-                    model.combat.melee.conditions.poison += 100;
+                    model.combat.melee.conditions.poison += 300;
                 },
                 hudText: "Power of the idol bestows poison",
                 keyItemId: "SeedGreen",
