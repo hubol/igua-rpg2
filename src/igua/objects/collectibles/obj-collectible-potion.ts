@@ -7,12 +7,12 @@ import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
 import { DataPotion } from "../../data/data-potion";
+import { mxnCollectibleLoot } from "../../mixins/mxn-collectible-loot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { Rpg } from "../../rpg/rpg";
 import { objFxCollectPotionNotification } from "../effects/obj-fx-collect-potion-notification";
 import { objFigurePotion } from "../figures/obj-figure-potion";
-import { playerObj } from "../obj-player";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 
 const potionServingDishAppearTxs = Tx.Effects.PotionServingDishAppear.split({ count: 2 });
@@ -36,6 +36,7 @@ export function objCollectiblePotion(potionId: DataPotion.Id) {
     return container(
         appearSpr,
     )
+        .mixin(mxnCollectibleLoot)
         .mixin(mxnPhysics, { gravity: 0.01, physicsRadius: 16, physicsOffset: [0, -19] })
         .coro(function* (self) {
             self.play(Sfx.Collect.PotionAppear.rate(0.9, 1.1));
@@ -86,7 +87,7 @@ export function objCollectiblePotion(potionId: DataPotion.Id) {
                 .show(self)
                 .tinted(stinkLineTint);
 
-            yield () => playerObj.hasControl && playerObj.collides(figureObj);
+            yield () => self.mxnCollectibleLoot.collectConditionsMet;
 
             self.play(Sfx.Collect.Potion.rate(0.9, 1.1));
 

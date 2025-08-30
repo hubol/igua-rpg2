@@ -8,6 +8,7 @@ import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { DataKeyItem } from "../../data/data-key-item";
+import { mxnCollectibleLoot } from "../../mixins/mxn-collectible-loot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { Rpg } from "../../rpg/rpg";
@@ -26,6 +27,7 @@ export function objCollectibleKeyItem(keyItemId: DataKeyItem.Id) {
     figureObj.pivot.set(Math.round(figureObj.width / 2), figureObj.height);
 
     return container(figureObj)
+        .mixin(mxnCollectibleLoot)
         .mixin(mxnPhysics, { gravity: 0, physicsRadius: 8, physicsOffset: [0, -11] })
         .coro(function* (self) {
             self.play(Sfx.Collect.KeyItemAppear.rate(0.9, 1.1));
@@ -56,7 +58,7 @@ export function objCollectibleKeyItem(keyItemId: DataKeyItem.Id) {
             self.play(Sfx.Collect.KeyItemLand.rate(0.9, 1.1));
             self.speed.x = 0;
 
-            yield () => playerObj.hasControl && playerObj.collides(figureObj);
+            yield () => self.mxnCollectibleLoot.collectConditionsMet;
 
             objFxCollectKeyItemNotification(keyItemId).show().at(self);
             Rpg.inventory.keyItems.receive(keyItemId);
