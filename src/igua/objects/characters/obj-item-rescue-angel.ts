@@ -56,21 +56,32 @@ function objItemRescueAngelPuppet() {
 
 const v = vnew();
 
-export function objItemRescueAngel(rescueObj: DisplayObject) {
+export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSimple) {
     function getTargetPosition() {
         return v.at(rescueObj.getWorldPosition());
     }
 
     const puppetObj = objItemRescueAngelPuppet();
 
+    const state = {
+        isRescued: false,
+    };
+
     return container(puppetObj)
         .pivoted(21, 65)
+        .merge({ state })
         .mixin(mxnPhysics, { gravity: 0, physicsRadius: 8 })
         .coro(function* (self) {
             self.physicsEnabled = false;
 
             const aliveBehaviorObj = container()
-                .merge({ direction: Math.PI, targetDirection: Math.PI, speed: 1, previousDistance: Number.MAX_VALUE })
+                .merge({
+                    direction: Math.PI,
+                    targetDirection: Math.PI,
+                    speed: 1,
+                    previousDistance: Number.MAX_VALUE,
+                    isOutsideLevel: false,
+                })
                 .step((aliveBehaviorObj) => {
                     if (rescueObj.destroyed) {
                         aliveBehaviorObj.destroy();
@@ -109,9 +120,27 @@ export function objItemRescueAngel(rescueObj: DisplayObject) {
 
                         aliveBehaviorObj.previousDistance = distance;
                     }
+
+                    if (self.x < -84) {
+                        self.x = -84;
+                        aliveBehaviorObj.isOutsideLevel = true;
+                    }
+                    else if (self.x > scene.level.width + 84) {
+                        self.x = scene.level.width + 84;
+                        aliveBehaviorObj.isOutsideLevel = true;
+                    }
+
+                    if (self.y < -84) {
+                        self.y = -84;
+                        aliveBehaviorObj.isOutsideLevel = true;
+                    }
+                    else if (self.y > scene.level.height + 84) {
+                        self.y = scene.level.height + 84;
+                        aliveBehaviorObj.isOutsideLevel = true;
+                    }
                 })
                 .coro(function* (aliveBehaviorObj) {
-                    yield () => aliveBehaviorObj.previousDistance < 60;
+                    yield () => aliveBehaviorObj.previousDistance < 60 || aliveBehaviorObj.isOutsideLevel;
                     aliveBehaviorObj.speed = 0;
                     self.speed.at(0, 0);
                     yield interpvr(self).factor(factor.sine).to(rescueObj).over(500);
@@ -121,7 +150,7 @@ export function objItemRescueAngel(rescueObj: DisplayObject) {
                             rescueObj.at(self);
                         }
                     }, StepOrder.AfterPhysics);
-                    self.speed.at(0, -0.2);
+                    self.speed.at(towSpeed);
                 })
                 .show(self);
 

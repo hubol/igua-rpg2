@@ -11,6 +11,7 @@ import { ForceTintFilter } from "../../../lib/pixi/filters/force-tint-filter";
 import { DataEquipment } from "../../data/data-equipment";
 import { mxnCollectibleLoot } from "../../mixins/mxn-collectible-loot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
+import { mxnRescue } from "../../mixins/mxn-rescue";
 import { Rpg } from "../../rpg/rpg";
 import { objFxLibRadialBurst } from "../effects/lib/obj-fx-lib-radial-burst";
 import { objFxAsterisk16Px } from "../effects/obj-fx-asterisk-16px";
@@ -37,6 +38,7 @@ export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
     return container()
         .mixin(mxnCollectibleLoot)
         .mixin(mxnPhysics, { gravity: 0, physicsRadius, physicsOffset: [0, -3] })
+        .mixin(mxnRescue)
         .handles("moved", (self, event) => {
             const hitGround = event.hitGround && !event.previousOnGround;
             const hitWall = event.hitWall && event.previousSpeed.x !== 0;
