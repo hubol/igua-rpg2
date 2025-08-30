@@ -43,5 +43,8 @@ objFxHeartBurst.many = function (radius: Integer, count: Integer) {
                 objFxHeartBurst().at(v, radius).show(self).speed = v;
                 yield sleepf(1);
             }
+
+            yield () => self.children.length === 0;
+            self.destroy();
         });
 };
