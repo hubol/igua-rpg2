@@ -14,6 +14,7 @@ import { Rpg } from "../../rpg/rpg";
 import { objFxLibRadialBurst } from "../effects/lib/obj-fx-lib-radial-burst";
 import { objFxAsterisk16Px } from "../effects/obj-fx-asterisk-16px";
 import { objFxBurst32 } from "../effects/obj-fx-burst-32";
+import { objFxCollectEquipmentNotification } from "../effects/obj-fx-collect-equipment-notification";
 import { objFigureEquipment } from "../figures/obj-figure-equipment";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 
@@ -63,12 +64,18 @@ export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
             appearObj.destroy();
             const filter = new ForceTintFilter(0xAD3600);
             figureObj.show(self).filters = [filter];
+
+            self.coro(function* () {
+                yield sleep(250);
+                yield () => self.mxnCollectibleLoot.collectConditionsMet;
+                objFxEquipmentCollectBurst().at(self).show();
+                objFxCollectEquipmentNotification().at(self).show();
+                Rpg.inventory.equipment.receive(equipmentId);
+                self.destroy();
+            });
+
             yield interp(filter, "factor").steps(4).to(0).over(1000);
             figureObj.filters = null;
-            yield () => self.mxnCollectibleLoot.collectConditionsMet;
-            objFxEquipmentCollectBurst().at(self).show();
-            Rpg.inventory.equipment.receive(equipmentId);
-            self.destroy();
         });
 }
 
