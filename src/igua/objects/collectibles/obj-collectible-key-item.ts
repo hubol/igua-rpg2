@@ -10,6 +10,7 @@ import { container } from "../../../lib/pixi/container";
 import { DataKeyItem } from "../../data/data-key-item";
 import { mxnCollectibleLoot } from "../../mixins/mxn-collectible-loot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
+import { mxnRescue } from "../../mixins/mxn-rescue";
 import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { Rpg } from "../../rpg/rpg";
 import { objFxCollectKeyItemNotification } from "../effects/obj-fx-collect-key-item-notification";
@@ -29,6 +30,8 @@ export function objCollectibleKeyItem(keyItemId: DataKeyItem.Id) {
     return container(figureObj)
         .mixin(mxnCollectibleLoot)
         .mixin(mxnPhysics, { gravity: 0, physicsRadius: 8, physicsOffset: [0, -11] })
+        // TODO may need to pass some offset so that it looks less silly when rescued
+        .mixin(mxnRescue)
         .coro(function* (self) {
             self.play(Sfx.Collect.KeyItemAppear.rate(0.9, 1.1));
 
@@ -53,7 +56,7 @@ export function objCollectibleKeyItem(keyItemId: DataKeyItem.Id) {
             self.speed.at(Math.sign(playerObj.x - self.x), -1);
             self.gravity = 0.1;
 
-            yield () => self.isOnGround;
+            yield () => self.isOnGround || self.mxnRescue.isRescued;
 
             self.play(Sfx.Collect.KeyItemLand.rate(0.9, 1.1));
             self.speed.x = 0;

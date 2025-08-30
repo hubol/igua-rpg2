@@ -144,6 +144,7 @@ export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSim
                     aliveBehaviorObj.speed = 0;
                     self.speed.at(0, 0);
                     yield interpvr(self).factor(factor.sine).to(rescueObj).over(500);
+                    state.isRescued = true;
                     puppetObj.controls.animatePivot = false;
                     aliveBehaviorObj.step(() => {
                         if (!rescueObj.destroyed) {
