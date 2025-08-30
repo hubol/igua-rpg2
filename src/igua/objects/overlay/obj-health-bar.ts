@@ -51,7 +51,7 @@ export function objHealthBar(width: number, height: number, value: number, maxVa
         .merge({
             effects: {
                 healed(value, delta) {
-                    bar.increase(value, delta, 1);
+                    bar.increase(value, delta, 0);
                 },
                 tookDamage(value, delta, kind) {
                     bar.decrease(value, Math.abs(delta), DamageIndex[kind]);
