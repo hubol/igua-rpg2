@@ -38,9 +38,7 @@ export function objLootDrop(drop: RpgLoot.Drop) {
 
             let xSign = Rng.intp();
             for (let i = 0; i < drop.equipments.length; i++) {
-                const equipmentObj = objCollectibleEquipment(drop.equipments[i]).at(self).show(self.parent);
-                equipmentObj.speed.y = Rng.float(-1, -3);
-                equipmentObj.speed.x = Rng.float(1, 2) * xSign;
+                objCollectibleEquipment(drop.equipments[i]).at(self).add(0, -50).show(self.parent);
                 yield sleep(333);
                 xSign *= -1;
             }
