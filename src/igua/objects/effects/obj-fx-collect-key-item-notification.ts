@@ -3,13 +3,11 @@ import { objText } from "../../../assets/fonts";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Instances } from "../../../lib/game-engine/instances";
-import { factor, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
+import { factor, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { container } from "../../../lib/pixi/container";
 import { DataKeyItem } from "../../data/data-key-item";
-import { mxnFxTintRotate } from "../../mixins/effects/mxn-fx-tint-rotate";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
-import { mxnTextTyped } from "../../mixins/mxn-text-typed";
 import { Rpg } from "../../rpg/rpg";
 import { objFxBurst32 } from "./obj-fx-burst-32";
 
