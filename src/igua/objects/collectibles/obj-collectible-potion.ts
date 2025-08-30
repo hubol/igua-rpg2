@@ -9,6 +9,7 @@ import { container } from "../../../lib/pixi/container";
 import { DataPotion } from "../../data/data-potion";
 import { mxnCollectibleLoot } from "../../mixins/mxn-collectible-loot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
+import { mxnRescue } from "../../mixins/mxn-rescue";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { Rpg } from "../../rpg/rpg";
 import { objFxCollectPotionNotification } from "../effects/obj-fx-collect-potion-notification";
@@ -38,6 +39,7 @@ export function objCollectiblePotion(potionId: DataPotion.Id) {
     )
         .mixin(mxnCollectibleLoot)
         .mixin(mxnPhysics, { gravity: 0.01, physicsRadius: 16, physicsOffset: [0, -19] })
+        .mixin(mxnRescue)
         .coro(function* (self) {
             self.play(Sfx.Collect.PotionAppear.rate(0.9, 1.1));
             self.speed.y = -1;
@@ -50,7 +52,7 @@ export function objCollectiblePotion(potionId: DataPotion.Id) {
             self.addChild(maskObj, figureObj.masked(maskObj), dishSpr, lidSpr);
             self.gravity = 0.18;
 
-            yield () => self.isOnGround;
+            yield () => self.isOnGround || self.mxnRescue.isRescued;
 
             self.play(Sfx.Effect.PotionDishLand.rate(0.9, 1.1));
 
@@ -84,8 +86,11 @@ export function objCollectiblePotion(potionId: DataPotion.Id) {
                     }
                 })
                 .at(0, -24)
-                .show(self)
                 .tinted(stinkLineTint);
+
+            if (!self.mxnRescue.isRescued) {
+                stinkLinesObj.show(self);
+            }
 
             yield () => self.mxnCollectibleLoot.collectConditionsMet;
 
