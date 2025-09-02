@@ -12,7 +12,9 @@ import { container } from "../../lib/pixi/container";
 import { MapRgbFilter } from "../../lib/pixi/filters/map-rgb-filter";
 import { scene } from "../globals";
 import { GenerativeMusicUtils } from "../lib/generative-music-utils";
+import { mxnCollectibleLoot } from "../mixins/mxn-collectible-loot";
 import { mxnPhysics } from "../mixins/mxn-physics";
+import { mxnRescue } from "../mixins/mxn-rescue";
 import { Rpg } from "../rpg/rpg";
 import { RpgFlops } from "../rpg/rpg-flops";
 import { playerObj } from "./obj-player";
@@ -47,6 +49,8 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
 
     return container(characterObj, hitboxObj)
         .mixin(mxnPhysics, { physicsRadius: 6, gravity: 0.1, physicsOffset: [0, 9] })
+        .mixin(mxnCollectibleLoot)
+        .mixin(mxnRescue)
         .step(self => {
             self.x = Math.max(0, Math.min(self.x, scene.level.width));
             if (self.isOnGround) {
@@ -83,8 +87,7 @@ export function objFlop(flopDexNumberZeroIndexed: Integer) {
             ).show(self);
 
             yield sleepf(2);
-            // TODO should it check if the player has control
-            yield () => playerObj.collides(hitboxObj);
+            yield () => self.mxnCollectibleLoot.collectConditionsMet;
             self.play(Sfx.Collect.Flop.rate(0.9, 1.1));
             newIndicatorVisibleObj.destroy();
             Rpg.inventory.flops.receive(flopDexNumberZeroIndexed);
