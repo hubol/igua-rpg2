@@ -46,7 +46,7 @@ export function mxnActionRepeater<TAction extends Action>(
             }
         }
 
-        if (downCount === actions.length) {
+        if (actions.length > 1 && downCount === actions.length) {
             for (const action of actions) {
                 reset(action);
             }
