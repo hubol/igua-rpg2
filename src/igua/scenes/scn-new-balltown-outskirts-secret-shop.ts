@@ -3,7 +3,6 @@ import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
 import { dramaShop } from "../drama/drama-shop";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { objDevPotions } from "../objects/dev/obj-dev-potions";
 
 export function scnNewBalltownOutskirtsSecretShop() {
     Jukebox.play(Mzk.OpenWound);
@@ -12,6 +11,4 @@ export function scnNewBalltownOutskirtsSecretShop() {
     lvl.Shopkeeper.mixin(mxnCutscene, function* () {
         yield* dramaShop("BalltownOutskirtsSecret", { primaryTint: 0x152F12, secondaryTint: 0xE6E8CC });
     });
-
-    objDevPotions();
 }
