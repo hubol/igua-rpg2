@@ -1,8 +1,10 @@
 import { DisplayObject, Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
-import { sleep } from "../../../lib/game-engine/routines/sleep";
-import { approachLinear } from "../../../lib/math/number";
+import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
+import { approachLinear, nlerp } from "../../../lib/math/number";
+import { Rng } from "../../../lib/math/rng";
 import { vdir } from "../../../lib/math/vector";
 import { VectorSimple, vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
@@ -64,6 +66,8 @@ export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSim
 
     const puppetObj = objItemRescueAngelPuppet().invisible();
 
+    let flapBaseRate = 1;
+
     const state = {
         isRescued: false,
     };
@@ -73,7 +77,14 @@ export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSim
         .merge({ state })
         .mixin(mxnPhysics, { gravity: 0, physicsRadius: 8 })
         .coro(function* (self) {
-            // TODO SFX
+            while (true) {
+                yield () => puppetObj.visible;
+                self.play(Sfx.Character.RescueAngelFlap.rate(flapBaseRate + Rng.float(-.1, .1)));
+                yield sleepf(8);
+            }
+        })
+        .coro(function* (self) {
+            self.play(Sfx.Character.RescueAngelAppear.rate(0.95, 1.05));
             objFxFormativeBurst().at(33, 33).show(self);
             yield sleep(500);
 
@@ -152,6 +163,7 @@ export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSim
                     aliveBehaviorObj.speed = 0;
                     self.speed.at(0, 0);
                     yield interpvr(self).factor(factor.sine).to(rescueObj).over(500);
+                    flapBaseRate = 0.8;
                     state.isRescued = true;
                     puppetObj.controls.animatePivot = false;
                     aliveBehaviorObj.step(() => {
@@ -166,6 +178,8 @@ export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSim
             yield () => aliveBehaviorObj.destroyed;
             aliveBehaviorObj.destroy();
             yield* puppetObj.coros.removeBag();
+
+            flapBaseRate = 1;
 
             self.speed.at(0, -0.5);
             self.step(self => self.speed.y -= 0.1);
