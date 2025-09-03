@@ -57,6 +57,8 @@ export function mxnRescue(obj: DisplayObject, centerOffset: VectorSimple = vnew(
             startingOffset.y = Math.max(-rh2, Math.min(rh2, startingOffset.y));
             const startingPosition = cameraCenter.vcpy().add(startingOffset);
 
+            startingPosition.moveTowards(cameraCenter, 32);
+
             const towSpeed = vnew(0, 0);
 
             if (obj.x < -width) {

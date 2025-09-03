@@ -10,6 +10,7 @@ import { scene } from "../../globals";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
+import { objFxFormativeBurst } from "../effects/obj-fx-formative-burst";
 import { StepOrder } from "../step-order";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 
@@ -61,7 +62,7 @@ export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSim
         return v.at(rescueObj.getWorldPosition()).add(objCenterOffset);
     }
 
-    const puppetObj = objItemRescueAngelPuppet();
+    const puppetObj = objItemRescueAngelPuppet().invisible();
 
     const state = {
         isRescued: false,
@@ -72,6 +73,13 @@ export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSim
         .merge({ state })
         .mixin(mxnPhysics, { gravity: 0, physicsRadius: 8 })
         .coro(function* (self) {
+            // TODO SFX
+            objFxFormativeBurst().at(33, 33).show(self);
+            yield sleep(500);
+
+            puppetObj.visible = true;
+            yield sleep(333);
+
             self.physicsEnabled = false;
 
             const aliveBehaviorObj = container()
