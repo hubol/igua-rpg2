@@ -7,7 +7,7 @@ import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { renderer } from "../../current-pixi-renderer";
 import { DevKey, scene } from "../../globals";
-import { objFlopCharacter } from "../../objects/obj-flop";
+import { objFigureFlop } from "../../objects/figures/obj-figure-flop";
 
 // This is a simple tool
 // For picking seeds for the 999 flop characters
@@ -60,13 +60,13 @@ export function scnFlopWorkshop() {
 
                     const flopObjs = container();
 
-                    const flopObj = objFlopCharacter(seed).show(flopObjs);
+                    const flopObj = objFigureFlop.fromSeed(seed).show(flopObjs);
                     flopObj.filtered(flopObj.objects.filter);
 
                     intoTextObj.visible = isOverride;
                     flopObj.x = isOverride ? 64 : 0;
                     if (isOverride) {
-                        const previousFlopObj = objFlopCharacter(i).at(-flopObj.x, 0).show(flopObjs);
+                        const previousFlopObj = objFigureFlop.fromSeed(i).at(-flopObj.x, 0).show(flopObjs);
                         previousFlopObj.filtered(previousFlopObj.objects.filter);
                     }
 

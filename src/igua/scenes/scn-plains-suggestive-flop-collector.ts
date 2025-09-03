@@ -6,7 +6,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DevKey, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { objFlop } from "../objects/obj-flop";
+import { objCollectibleFlop } from "../objects/collectibles/obj-collectible-flop";
 import { Rpg } from "../rpg/rpg";
 
 export function scnPlainsSuggestiveFlopCollector() {
@@ -41,7 +41,7 @@ function enrichCollectorNpc(lvl: LvlType.PlainsSuggestiveFlopCollector) {
                 lvl.FlopEndMarker,
                 i / Math.max(minimumToReachEnd, flopsCount),
             );
-            objFlop(Rng.intc(0, 998)).at(position).show();
+            objCollectibleFlop(Rng.intc(0, 998)).at(position).show();
             yield sleep(100);
         }
     });

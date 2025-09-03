@@ -6,12 +6,11 @@ import { interpr, interpvr } from "../../../lib/game-engine/routines/interp";
 import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
-import { clone } from "../../../lib/object/clone";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { Rpg } from "../../rpg/rpg";
-import { objFlopCharacter, objFlopDexNumber } from "../obj-flop";
+import { objFigureFlop } from "../figures/obj-figure-flop";
 
 const Consts = {
     rangeSize: 10,
@@ -117,18 +116,18 @@ function darken(tint: RgbInt) {
 function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
     const boxObj = new Graphics().pivoted(30, 60);
 
-    const flopObj = objFlopCharacter.fromDexNumber(dexNumber).at(-30, 0).invisible();
-    flopObj.filtered(flopObj.objects.filter);
-    const filledTint = flopObj.state.tint.red;
+    const figureObj = objFigureFlop(dexNumber).at(-30, 0).invisible();
+    figureObj.filtered(figureObj.objects.filter);
+    const filledTint = figureObj.state.tint.red;
 
     const halfTint = darken(filledTint);
 
-    const dexNumberObj = objFlopDexNumber(dexNumber).at(-58, -118).invisible();
+    const dexNumberObj = objFigureFlop.dexNumber(dexNumber).at(-58, -118).invisible();
     dexNumberObj.tint = filledTint;
 
     const countObj = objFlopCount(halfTint).at(-23, -58).invisible();
 
-    const mainObj = container(boxObj, flopObj, dexNumberObj, countObj);
+    const mainObj = container(boxObj, figureObj, dexNumberObj, countObj);
 
     const state: DrawState = {
         line: count > 0 ? "tint" : "black",
@@ -199,10 +198,10 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
             boxObj.lineStyle(1, lineTint, 1, 1).drawRect(-width / 2, -width, width, width);
         }
 
-        flopObj.visible = flopVisible && size !== "small";
+        figureObj.visible = flopVisible && size !== "small";
         const scale = size === "full" ? 1 : 0.5;
-        flopObj.scaled(scale, scale);
-        flopObj.y = size === "full" ? -80 : -73;
+        figureObj.scaled(scale, scale);
+        figureObj.y = size === "full" ? -80 : -73;
 
         const excessWidth = Math.round((boxObj.width - 12) / 2);
 
