@@ -1,56 +1,28 @@
 import { DisplayObject } from "pixi.js";
-import { blendColor } from "../../../../lib/color/blend-color";
-import { Integer, RgbInt } from "../../../../lib/math/number-alias-types";
+import { Integer } from "../../../../lib/math/number-alias-types";
 import { Rng } from "../../../../lib/math/rng";
-import { vnew } from "../../../../lib/math/vector-type";
+import { VectorSimple, vnew } from "../../../../lib/math/vector-type";
 import { container } from "../../../../lib/pixi/container";
 
-interface ObjFxLibBurstArgs {
+interface ObjFxLibBurstArgs<T extends DisplayObject> {
     count: Integer;
     distance0: number;
     distance1?: number;
-    fxObjConstructor: () => DisplayObject;
-    speed0: number;
-    speed1?: number;
-    tint0?: RgbInt;
-    tint1?: RgbInt;
+    fxObjConstructor: (normal: VectorSimple, index: Integer) => T;
 }
 
-export function objFxLibRadialBurst({ count, distance0, fxObjConstructor, speed0, ...args }: ObjFxLibBurstArgs) {
+export function objFxLibRadialBurst<T extends DisplayObject>(
+    { count, distance0, fxObjConstructor, ...args }: ObjFxLibBurstArgs<T>,
+) {
     const distance1 = args.distance1 === undefined ? distance0 : args.distance1;
-    const tint0 = args.tint0 === undefined ? 0xffffff : args.tint0;
-    const tint1 = args.tint1 === undefined ? tint0 : args.tint1;
-    const speed1 = args.speed1 === undefined ? speed0 : args.speed1;
-
-    function tint(obj: DisplayObject) {
-        if (!("tint" in obj)) {
-            return;
-        }
-
-        if (tint0 === tint1) {
-            obj.tint = tint0;
-        }
-        else {
-            obj.tint = blendColor(tint0, tint1, Rng.float());
-        }
-    }
 
     return container()
         .coro(function* (self) {
             for (let i = 0; i < count; i++) {
                 const radians = (i * Math.PI * 2) / count;
-                const start = vnew(Math.sin(radians), Math.cos(radians)).scale(Rng.float(distance0, distance1));
-                const offset = vnew();
-                const speed = start.vcpy().normalize().scale(Rng.float(speed0, speed1));
-                const fxObj = fxObjConstructor()
-                    .step(self => {
-                        offset.add(speed);
-                        speed.scale(0.97);
-                        self.at(start).add(offset).vround();
-                    })
-                    .at(start)
-                    .show(self);
-                tint(fxObj);
+                const normal = vnew(Math.sin(radians), Math.cos(radians));
+
+                const obj = fxObjConstructor(normal, i).at(normal, Rng.float(distance0, distance1)).show(self);
             }
 
             yield () => self.children.length === 0;

@@ -1,6 +1,7 @@
 import { Sprite } from "pixi.js";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
+import { blendColor } from "../../../lib/color/blend-color";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
@@ -10,6 +11,7 @@ import { container } from "../../../lib/pixi/container";
 import { ForceTintFilter } from "../../../lib/pixi/filters/force-tint-filter";
 import { DataEquipment } from "../../data/data-equipment";
 import { mxnCollectibleLoot } from "../../mixins/mxn-collectible-loot";
+import { mxnMotion } from "../../mixins/mxn-motion";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRescue } from "../../mixins/mxn-rescue";
 import { Rpg } from "../../rpg/rpg";
@@ -99,10 +101,15 @@ function objFxEquipmentCollectBurst() {
         count: 6,
         distance0: 6,
         distance1: 12,
-        fxObjConstructor: objFxAsterisk16Px,
-        speed0: 1.2,
-        speed1: 1.9,
-        tint0: 0xE5BB00,
-        tint1: 0xecd364,
+        fxObjConstructor: (normal) => {
+            const obj = objFxAsterisk16Px()
+                .tinted(blendColor(0xE5BB00, 0xecd364, Rng.float()))
+                .mixin(mxnMotion)
+                .step(self => self.speed.scale(0.97));
+
+            obj.speed.at(normal, Rng.float(1.2, 1.9));
+
+            return obj;
+        },
     });
 }
