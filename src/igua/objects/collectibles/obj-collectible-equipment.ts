@@ -15,11 +15,12 @@ import { mxnMotion } from "../../mixins/mxn-motion";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRescue } from "../../mixins/mxn-rescue";
 import { Rpg } from "../../rpg/rpg";
-import { objFxLibRadialBurst } from "../effects/lib/obj-fx-lib-radial-burst";
+import { FxPattern } from "../effects/lib/fx-pattern";
 import { objFxAsterisk16Px } from "../effects/obj-fx-asterisk-16px";
 import { objFxBurst32 } from "../effects/obj-fx-burst-32";
 import { objFxCollectEquipmentNotification } from "../effects/obj-fx-collect-equipment-notification";
 import { objFigureEquipment } from "../figures/obj-figure-equipment";
+import { objDieOnEmpty } from "../utils/obj-die-on-empty";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 
 const appearTxs = Tx.Effects.EquipmentAppear.split({ width: 40 });
@@ -97,19 +98,17 @@ export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
 }
 
 function objFxEquipmentCollectBurst() {
-    return objFxLibRadialBurst({
-        count: 6,
-        distance0: 6,
-        distance1: 12,
-        fxObjConstructor: (normal) => {
-            const obj = objFxAsterisk16Px()
-                .tinted(blendColor(0xE5BB00, 0xecd364, Rng.float()))
-                .mixin(mxnMotion)
-                .step(self => self.speed.scale(0.97));
+    const obj = objDieOnEmpty();
 
-            obj.speed.at(normal, Rng.float(1.2, 1.9));
+    for (const { position, normal } of FxPattern.getRadialBurst({ count: 6, radius0: 6, radius1: 12 })) {
+        objFxAsterisk16Px()
+            .tinted(blendColor(0xE5BB00, 0xecd364, Rng.float()))
+            .mixin(mxnMotion)
+            .step(self => self.speed.scale(0.97))
+            .at(position)
+            .show(obj)
+            .speed.at(normal, Rng.float(1.2, 1.9));
+    }
 
-            return obj;
-        },
-    });
+    return obj;
 }

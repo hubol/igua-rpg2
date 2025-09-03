@@ -1,22 +1,18 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
-import { vdeg } from "../../../lib/math/angle";
 import { Rng } from "../../../lib/math/rng";
 import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
 import { mxnMotion } from "../../mixins/mxn-motion";
 import { objEphemeralSprite } from "../obj-ephemeral-sprite";
+import { FxPattern } from "./lib/fx-pattern";
 
 const txs = Tx.Effects.FieryBurst170px.split({ width: 170 });
 
 export function objFxFieryBurst170px() {
-    // TODO sfx
     return objEphemeralSprite(txs, 0.125).anchored(93 / 170, 83 / 150).coro(function* (self) {
         yield () => self.index >= 1;
-        const offset = Rng.float(360);
-        for (let i = 0; i < 6; i += 1) {
-            const v = vdeg(offset + i * 55);
-            const boomObj = objFxBoom().at(self).add(v, Rng.float(24, 48)).show(self.parent);
-            boomObj.speed.at(v).scale(Rng.float(2, 4.5));
+        for (const { position, normal } of FxPattern.getRadialBurst({ count: 6, radius0: 24, radius1: 48 })) {
+            objFxBoom().at(position).show(self).speed.at(normal, Rng.float(2, 4.5));
         }
     });
 }

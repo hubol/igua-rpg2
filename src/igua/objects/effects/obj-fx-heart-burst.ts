@@ -1,12 +1,12 @@
 import { Tx } from "../../../assets/textures";
 import { interp, interpc } from "../../../lib/game-engine/routines/interp";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
-import { vdeg } from "../../../lib/math/angle";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
-import { container } from "../../../lib/pixi/container";
 import { mxnMotion } from "../../mixins/mxn-motion";
+import { objDieOnEmpty } from "../utils/obj-die-on-empty";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
+import { FxPattern } from "./lib/fx-pattern";
 
 const txsHeart = Tx.Effects.HeartBurst16px.split({ width: 16 });
 
@@ -33,18 +33,11 @@ export function objFxHeartBurst() {
 }
 
 objFxHeartBurst.many = function (radius: Integer, count: Integer) {
-    return container()
+    return objDieOnEmpty()
         .coro(function* (self) {
-            const deg = Rng.int(0, 360);
-            const delta = 360 / count;
-
-            for (let i = 0; i < count; i++) {
-                const v = vdeg(deg + delta * i);
-                objFxHeartBurst().at(v, radius).show(self).speed = v;
+            for (const { position, normal } of FxPattern.getRadialBurst({ count, radius0: radius })) {
+                objFxHeartBurst().at(position).show(self).speed.at(normal);
                 yield sleepf(1);
             }
-
-            yield () => self.children.length === 0;
-            self.destroy();
         });
 };
