@@ -100,7 +100,7 @@ export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
 function objFxEquipmentCollectBurst() {
     const obj = objDieOnEmpty();
 
-    for (const { position, normal } of FxPattern.getRadialBurst({ count: 6, radius0: 6, radius1: 12 })) {
+    for (const { position, normal } of FxPattern.getRadialBurst({ count: 6, radius: [6, 12] })) {
         objFxAsterisk16Px()
             .tinted(blendColor(0xE5BB00, 0xecd364, Rng.float()))
             .mixin(mxnMotion)

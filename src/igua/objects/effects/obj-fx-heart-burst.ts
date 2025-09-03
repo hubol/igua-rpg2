@@ -35,7 +35,7 @@ export function objFxHeartBurst() {
 objFxHeartBurst.many = function (radius: Integer, count: Integer) {
     return objDieOnEmpty()
         .coro(function* (self) {
-            for (const { position, normal } of FxPattern.getRadialBurst({ count, radius0: radius })) {
+            for (const { position, normal } of FxPattern.getRadialBurst({ count, radius })) {
                 objFxHeartBurst().at(position).show(self).speed.at(normal);
                 yield sleepf(1);
             }

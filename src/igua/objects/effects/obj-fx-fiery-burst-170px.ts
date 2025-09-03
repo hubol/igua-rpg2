@@ -11,7 +11,7 @@ const txs = Tx.Effects.FieryBurst170px.split({ width: 170 });
 export function objFxFieryBurst170px() {
     return objEphemeralSprite(txs, 0.125).anchored(93 / 170, 83 / 150).coro(function* (self) {
         yield () => self.index >= 1;
-        for (const { position, normal } of FxPattern.getRadialBurst({ count: 6, radius0: 24, radius1: 48 })) {
+        for (const { position, normal } of FxPattern.getRadialBurst({ count: 6, radius: [24, 48] })) {
             objFxBoom().at(position).show(self).speed.at(normal, Rng.float(2, 4.5));
         }
     });
