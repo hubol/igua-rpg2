@@ -23,7 +23,7 @@ import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objFxExpressSurprise } from "../effects/obj-fx-express-surprise";
-import { objFxHeartBurst } from "../effects/obj-fx-heart-burst";
+import { objFxHeart } from "../effects/obj-fx-heart";
 import { objFxSpiritualRelease } from "../effects/obj-fx-spiritual-release";
 import { objFxStarburst54 } from "../effects/obj-fx-startburst-54";
 import { objProjectileIndicatedBox } from "../projectiles/obj-projectile-indicated-box";
@@ -161,7 +161,7 @@ export function objAngelMiffed() {
                 interp(fistObj.controls, "exposedUnit").steps(3).to(1).over(300),
                 Coro.chain([
                     sleep(150),
-                    () => (objFxHeartBurst.objBurst(10, 4)
+                    () => (objFxHeart.objBurst(10, 4)
                         .at(fistObj.getWorldPosition())
                         .coro(function* (self) {
                             self.play(Sfx.Enemy.Miffed.PunchArmAppear.rate(0.9, 1.1));

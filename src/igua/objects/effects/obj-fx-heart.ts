@@ -10,7 +10,7 @@ import { FxPattern } from "./lib/fx-pattern";
 
 const txsHeart = Tx.Effects.HeartBurst16px.split({ width: 16 });
 
-export function objFxHeartBurst() {
+export function objFxHeart() {
     return objIndexedSprite(txsHeart)
         .anchored(0.5, 0.5)
         .flipH(Rng.intp())
@@ -32,11 +32,11 @@ export function objFxHeartBurst() {
         });
 }
 
-objFxHeartBurst.objBurst = function objBurst (radius: Integer, count: Integer) {
+objFxHeart.objBurst = function objBurst (radius: Integer, count: Integer) {
     return objDieOnEmpty()
         .coro(function* (self) {
             for (const { position, normal } of FxPattern.getRadialBurst({ count, radius })) {
-                objFxHeartBurst().at(position).show(self).speed.at(normal);
+                objFxHeart().at(position).show(self).speed.at(normal);
                 yield sleepf(1);
             }
         });
