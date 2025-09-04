@@ -4,8 +4,8 @@ import { RpgLoot } from "../rpg/rpg-loot";
 import { objCollectibleEquipment } from "./collectibles/obj-collectible-equipment";
 import { objCollectibleFlop } from "./collectibles/obj-collectible-flop";
 import { objCollectibleKeyItem } from "./collectibles/obj-collectible-key-item";
+import { objCollectiblePocketItem } from "./collectibles/obj-collectible-pocket-item";
 import { objCollectiblePotion } from "./collectibles/obj-collectible-potion";
-import { objPocketableItem } from "./obj-pocketable-item";
 import { objValuableTrove } from "./obj-valuable-trove";
 
 const dropSpeedH = [
@@ -19,7 +19,10 @@ export function objLootDrop(drop: RpgLoot.Drop) {
         .coro(function* (self) {
             for (let i = 0; i < drop.pocketItems.length; i++) {
                 const hspeed = dropSpeedH[i % dropSpeedH.length];
-                objPocketableItem.objParachuting(drop.pocketItems[i]).at(self).show(self.parent).speed.x = hspeed;
+                objCollectiblePocketItem.objParachuting(drop.pocketItems[i])
+                    .at(self)
+                    .show(self.parent)
+                    .speed.x = hspeed;
                 yield sleep(250);
             }
 

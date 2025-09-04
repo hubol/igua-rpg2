@@ -1,29 +1,32 @@
 import { Sprite } from "pixi.js";
-import { Sfx } from "../../assets/sounds";
-import { Tx } from "../../assets/textures";
-import { holdf } from "../../lib/game-engine/routines/hold";
-import { sleepf } from "../../lib/game-engine/routines/sleep";
-import { approachLinear } from "../../lib/math/number";
-import { Rng } from "../../lib/math/rng";
-import { container } from "../../lib/pixi/container";
-import { ZIndex } from "../core/scene/z-index";
-import { scene } from "../globals";
-import { MxnPhysics, mxnPhysics, PhysicsFaction } from "../mixins/mxn-physics";
-import { Rpg } from "../rpg/rpg";
-import { RpgPocket } from "../rpg/rpg-pocket";
-import { objFigurePocketItem } from "./figures/obj-figure-pocket-item";
-import { playerObj } from "./obj-player";
-import { objPocketCollectNotification } from "./pocket/obj-pocket-collect-notification";
+import { Sfx } from "../../../assets/sounds";
+import { Tx } from "../../../assets/textures";
+import { holdf } from "../../../lib/game-engine/routines/hold";
+import { sleepf } from "../../../lib/game-engine/routines/sleep";
+import { approachLinear } from "../../../lib/math/number";
+import { Rng } from "../../../lib/math/rng";
+import { container } from "../../../lib/pixi/container";
+import { ZIndex } from "../../core/scene/z-index";
+import { scene } from "../../globals";
+import { mxnCollectibleLoot } from "../../mixins/mxn-collectible-loot";
+import { MxnPhysics, mxnPhysics, PhysicsFaction } from "../../mixins/mxn-physics";
+import { Rpg } from "../../rpg/rpg";
+import { RpgPocket } from "../../rpg/rpg-pocket";
+import { objFigurePocketItem } from "../figures/obj-figure-pocket-item";
+import { playerObj } from "../obj-player";
+import { objPocketCollectNotification } from "../pocket/obj-pocket-collect-notification";
 
-export function objPocketableItem(item: RpgPocket.Item) {
-    return objPocketableItem.objBouncing(item);
+export function objCollectiblePocketItem(item: RpgPocket.Item) {
+    return objCollectiblePocketItem.objBouncing(item);
 }
 
-objPocketableItem.objBouncing = function objBouncing (item: RpgPocket.Item) {
+export type ObjCollectiblePocketItem = ReturnType<typeof objCollectiblePocketItem>;
+
+objCollectiblePocketItem.objBouncing = function objBouncing (item: RpgPocket.Item) {
     return objPocketableItemBase(item, false).mixin(mxnBounce);
 };
 
-objPocketableItem.objParachuting = function objParachuting (item: RpgPocket.Item) {
+objCollectiblePocketItem.objParachuting = function objParachuting (item: RpgPocket.Item) {
     return objPocketableItemBase(item, true).mixin(mxnParachute);
 };
 
@@ -31,6 +34,7 @@ function objPocketableItemBase(item: RpgPocket.Item, freed: boolean) {
     const figureObj = objFigurePocketItem(item);
     const obj = container()
         .merge({ freed, isCollectible: false, item, figureHeight: figureObj.height })
+        .mixin(mxnCollectibleLoot)
         .zIndexed(ZIndex.Entities);
 
     figureObj.pivotedUnit(0.5, 0.5).coro(function* (self) {
@@ -40,7 +44,7 @@ function objPocketableItemBase(item: RpgPocket.Item, freed: boolean) {
         yield () => obj.isCollectible;
         self.alpha = 1;
 
-        yield () => playerObj.hasControl && self.collides(playerObj);
+        yield () => obj.mxnCollectibleLoot.collectConditionsMet;
         const result = Rpg.inventory.pocket.receive(item);
         objPocketCollectNotification(result).at(obj).show();
         obj.destroy();
@@ -92,7 +96,7 @@ function mxnParachute(obj: ObjPocketableItemBase) {
 
 function mxnBounce(obj: ObjPocketableItemBase) {
     return obj.coro(function* (self) {
-        yield () => (playerObj.speed.x !== 0 || playerObj.speed.y !== 0) && self.collides(playerObj);
+        yield () => (playerObj.speed.x !== 0 || playerObj.speed.y !== 0) && obj.mxnCollectibleLoot.collectConditionsMet;
         Sfx.Impact.PocketableItemFree.rate(0.9, 1.1).play();
         self.freed = true;
 

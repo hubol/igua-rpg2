@@ -18,7 +18,7 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { mxnSign } from "../mixins/mxn-sign";
-import { objPocketableItemSpawner } from "../objects/obj-pocketable-item-spawner";
+import { objCollectiblePocketItemSpawner } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objValuableSpawner } from "../objects/obj-valuable-spawner";
 import { objTransitionedSprite } from "../objects/utils/obj-transitioned-sprite";
 import { Rpg } from "../rpg/rpg";
@@ -86,7 +86,7 @@ function enrichFarmer(lvl: LvlType.NewBalltownOutskirts) {
         lvl.FarmerNpc.at(lvl.FarmerAppearMarker);
         yield* lvl.FarmerNpc.walkTo(lvl.FarmerMoveToMarker.x);
 
-        for (const spawnerObj of Instances(objPocketableItemSpawner)) {
+        for (const spawnerObj of Instances(objCollectiblePocketItemSpawner)) {
             const maybeObj = spawnerObj.spawn(choicePocketItem);
             if (maybeObj) {
                 maybeObj.mixin(mxnNudgeAppear);
