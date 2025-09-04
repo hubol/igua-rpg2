@@ -23,10 +23,10 @@ const txs = {
 };
 
 export function objFigureFlop(dexNumberZeroIndexed: Integer) {
-    return objFigureFlop.fromSeed(flopDexSeeds[dexNumberZeroIndexed] ?? -1);
+    return objFigureFlop.objFromSeed(flopDexSeeds[dexNumberZeroIndexed] ?? -1);
 }
 
-objFigureFlop.fromSeed = function fromSeed (seed: Integer) {
+objFigureFlop.objFromSeed = function objFromSeed (seed: Integer) {
     const args = getArgsFromFlopSeed(seed);
 
     const filter = new MapRgbFilter(args.tint.red, args.tint.green, args.tint.blue);
@@ -46,7 +46,7 @@ objFigureFlop.fromSeed = function fromSeed (seed: Integer) {
         .merge({ objects: { filter }, state: { tint: args.tint } });
 };
 
-objFigureFlop.dexNumber = function dexNumber (flopDexNumberZeroIndexed: Integer) {
+objFigureFlop.objDexNumber = function objDexNumber (flopDexNumberZeroIndexed: Integer) {
     return objText.SmallDigits(printFlopDexNumber(flopDexNumberZeroIndexed));
 };
 

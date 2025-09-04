@@ -19,7 +19,7 @@ export function objLootDrop(drop: RpgLoot.Drop) {
         .coro(function* (self) {
             for (let i = 0; i < drop.pocketItems.length; i++) {
                 const hspeed = dropSpeedH[i % dropSpeedH.length];
-                objPocketableItem.parachuting(drop.pocketItems[i]).at(self).show(self.parent).speed.x = hspeed;
+                objPocketableItem.objParachuting(drop.pocketItems[i]).at(self).show(self.parent).speed.x = hspeed;
                 yield sleep(250);
             }
 

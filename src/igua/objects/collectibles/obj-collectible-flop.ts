@@ -58,7 +58,7 @@ export function objCollectibleFlop(flopDexNumberZeroIndexed: Integer) {
                 characterObj.angle += 90;
             }
 
-            objFigureFlop.dexNumber(flopDexNumberZeroIndexed).anchored(0.5, 0).at(0, 19).show(
+            objFigureFlop.objDexNumber(flopDexNumberZeroIndexed).anchored(0.5, 0).at(0, 19).show(
                 self,
             );
 

@@ -161,7 +161,7 @@ export function objAngelMiffed() {
                 interp(fistObj.controls, "exposedUnit").steps(3).to(1).over(300),
                 Coro.chain([
                     sleep(150),
-                    () => (objFxHeartBurst.many(10, 4)
+                    () => (objFxHeartBurst.objBurst(10, 4)
                         .at(fistObj.getWorldPosition())
                         .coro(function* (self) {
                             self.play(Sfx.Enemy.Miffed.PunchArmAppear.rate(0.9, 1.1));

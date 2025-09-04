@@ -60,13 +60,13 @@ export function scnFlopWorkshop() {
 
                     const flopObjs = container();
 
-                    const flopObj = objFigureFlop.fromSeed(seed).show(flopObjs);
+                    const flopObj = objFigureFlop.objFromSeed(seed).show(flopObjs);
                     flopObj.filtered(flopObj.objects.filter);
 
                     intoTextObj.visible = isOverride;
                     flopObj.x = isOverride ? 64 : 0;
                     if (isOverride) {
-                        const previousFlopObj = objFigureFlop.fromSeed(i).at(-flopObj.x, 0).show(flopObjs);
+                        const previousFlopObj = objFigureFlop.objFromSeed(i).at(-flopObj.x, 0).show(flopObjs);
                         previousFlopObj.filtered(previousFlopObj.objects.filter);
                     }
 

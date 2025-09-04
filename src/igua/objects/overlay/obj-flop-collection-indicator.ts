@@ -122,7 +122,7 @@ function objFlopCollectionIndicatorSlot(dexNumber: Integer, count: Integer) {
 
     const halfTint = darken(filledTint);
 
-    const dexNumberObj = objFigureFlop.dexNumber(dexNumber).at(-58, -118).invisible();
+    const dexNumberObj = objFigureFlop.objDexNumber(dexNumber).at(-58, -118).invisible();
     dexNumberObj.tint = filledTint;
 
     const countObj = objFlopCount(halfTint).at(-23, -58).invisible();

@@ -16,14 +16,14 @@ import { playerObj } from "./obj-player";
 import { objPocketCollectNotification } from "./pocket/obj-pocket-collect-notification";
 
 export function objPocketableItem(item: RpgPocket.Item) {
-    return objPocketableItem.bouncing(item);
+    return objPocketableItem.objBouncing(item);
 }
 
-objPocketableItem.bouncing = function objPocketableItemBouncing (item: RpgPocket.Item) {
+objPocketableItem.objBouncing = function objBouncing (item: RpgPocket.Item) {
     return objPocketableItemBase(item, false).mixin(mxnBounce);
 };
 
-objPocketableItem.parachuting = function objPocketableItemParachuting (item: RpgPocket.Item) {
+objPocketableItem.objParachuting = function objParachuting (item: RpgPocket.Item) {
     return objPocketableItemBase(item, true).mixin(mxnParachute);
 };
 

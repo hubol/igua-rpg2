@@ -32,7 +32,7 @@ export function objFxHeartBurst() {
         });
 }
 
-objFxHeartBurst.many = function (radius: Integer, count: Integer) {
+objFxHeartBurst.objBurst = function objBurst (radius: Integer, count: Integer) {
     return objDieOnEmpty()
         .coro(function* (self) {
             for (const { position, normal } of FxPattern.getRadialBurst({ count, radius })) {

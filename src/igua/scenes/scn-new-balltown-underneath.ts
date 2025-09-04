@@ -231,7 +231,7 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
             yield () => atSummit;
             Cutscene.play(function* () {
                 // TODO lovey SFX
-                objFxHeartBurst.many(14, 5).at(self).show();
+                objFxHeartBurst.objBurst(14, 5).at(self).show();
                 yield sleep(1000);
                 yield* show("Thank you for bringing joy to this place!!!");
                 scene.camera.mode = "move_towards_player";
