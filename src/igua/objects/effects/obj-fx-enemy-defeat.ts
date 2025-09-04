@@ -8,6 +8,7 @@ import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { Empty } from "../../../lib/types/empty";
 import { mxnBoilFlipH } from "../../mixins/mxn-boil-flip-h";
+import { objDieOnEmpty } from "../utils/obj-die-on-empty";
 import { objFxSpiritualRelease } from "./obj-fx-spiritual-release";
 
 interface ObjFxEnemyDefeatArgs {
@@ -17,23 +18,10 @@ interface ObjFxEnemyDefeatArgs {
 }
 
 export function objFxEnemyDefeat(args: ObjFxEnemyDefeatArgs) {
-    return container(
-        objFxSpiritualRelease().tinted(Rng.choose(args.primaryTint, args.secondaryTint, args.tertiaryTint))
-            .scaled(-1, 1),
-        objFxSpiritualRelease().tinted(Rng.choose(args.primaryTint, args.secondaryTint, args.tertiaryTint))
-            .scaled(1, 1)
-            .angled(-90),
-        objFxSpiritualRelease().tinted(Rng.choose(args.primaryTint, args.secondaryTint, args.tertiaryTint))
-            .scaled(-1, -1),
-        objFxSpiritualRelease().tinted(Rng.choose(args.primaryTint, args.secondaryTint, args.tertiaryTint))
-            .scaled(1, 1),
+    return objDieOnEmpty(
+        objFxSpiritualRelease.objBurst({ tints: [args.primaryTint, args.secondaryTint, args.tertiaryTint] }),
         objFxSpiritPresence(args),
-    )
-        .step(self => {
-            if (self.children.length === 0) {
-                self.destroy();
-            }
-        });
+    );
 }
 
 const [txPresenceBody, ...txsPresenceFace] = Tx.Enemy.Spirit.Presence.split({ count: 3 });

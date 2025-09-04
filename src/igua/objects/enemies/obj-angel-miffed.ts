@@ -423,27 +423,8 @@ function objAngelMiffedPoisonBox(attacker: MxnRpgStatus & MxnDetectPlayer) {
             trackBehaviorObj.destroy();
             yield sleep(150);
             self.play(Sfx.Enemy.Miffed.PoisonActive.rate(0.95, 1.05));
-            // TODO should be a special effect for this
-            objFxSpiritualRelease().tinted(0x6DAF36)
-                .scaled(-1, 1)
+            objFxSpiritualRelease.objBurst({ halfWidth: 34, halfHeight: 26, tints: [0x6DAF36] })
                 .at(self)
-                .add(-16, 32)
-                .show();
-            objFxSpiritualRelease().tinted(0x6DAF36)
-                .scaled(1, 1)
-                .angled(-90)
-                .at(self)
-                .add(40, -16)
-                .show();
-            objFxSpiritualRelease().tinted(0x6DAF36)
-                .scaled(-1, -1)
-                .at(self)
-                .add(-8, -38)
-                .show();
-            objFxSpiritualRelease().tinted(0x6DAF36)
-                .scaled(1, 1)
-                .at(self)
-                .add(34, 34)
                 .show();
             self.mxnDischargeable.discharge();
         });
