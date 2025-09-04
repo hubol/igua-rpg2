@@ -5,6 +5,7 @@ import { Coro } from "../../../lib/game-engine/routines/coro";
 import { factor, interp, interpc, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
+import { PolarInt } from "../../../lib/math/number-alias-types";
 import { IRectangle } from "../../../lib/math/rectangle";
 import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
@@ -12,6 +13,7 @@ import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { scene } from "../../globals";
+import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
 import { MxnDetectPlayer, mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
@@ -23,9 +25,12 @@ import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objFxExpressSurprise } from "../effects/obj-fx-express-surprise";
+import { objFxFormativeBurst } from "../effects/obj-fx-formative-burst";
 import { objFxHeart } from "../effects/obj-fx-heart";
 import { objFxSpiritualRelease } from "../effects/obj-fx-spiritual-release";
 import { objFxStarburst54 } from "../effects/obj-fx-startburst-54";
+import { objGroundSpawner } from "../obj-ground-spawner";
+import { objProjectileFlameColumn } from "../projectiles/obj-projectile-flame-column";
 import { objProjectileIndicatedBox } from "../projectiles/obj-projectile-indicated-box";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { objAngelEyes } from "./obj-angel-eyes";
@@ -186,7 +191,7 @@ export function objAngelMiffed() {
             yield sleep(250);
             fistObj.controls.slamUnit = 0;
         },
-        *dive() {
+        *dive(kind: "flame_column" | "default") {
             obj.play(Sfx.Enemy.Miffed.Jump.rate(0.9, 1.1));
             obj.speed.at(obj.mxnDetectPlayer.position.x < obj.x ? -2 : 2, -7);
             yield () => obj.speed.y >= 0;
@@ -200,10 +205,25 @@ export function objAngelMiffed() {
             obj.speed.at(0, 0);
             obj.scale.y = -1;
             obj.pivot.y = -25;
+
+            if (kind === "flame_column") {
+                objFxFormativeBurst(0xf0f000)
+                    .at(obj)
+                    .mixin(mxnDestroyAfterSteps, 30)
+                    .show();
+                yield sleep(100);
+            }
+
             yield sleep(250);
             obj.play(Sfx.Enemy.Miffed.Dive.rate(0.9, 1.1));
-            obj.gravity = 1;
+            obj.gravity = kind === "flame_column" ? 1.33 : 1;
             yield () => obj.speed.y === 0 && obj.isOnGround;
+
+            if (kind === "flame_column") {
+                objAngelMiffedFlameColumnTrail(obj, -1).at(obj).add(-20, 0).show();
+                objAngelMiffedFlameColumnTrail(obj, 1).at(obj).add(20, 0).show();
+            }
+
             obj.play(Sfx.Enemy.Miffed.DiveLand.rate(0.9, 1.1));
             obj.status.quirks.isImmuneToPlayerMeleeAttack = false;
             yield interpv(attackObj.scale).steps(4).to(0, 0).over(250);
@@ -241,7 +261,7 @@ export function objAngelMiffed() {
                     yield* moves.slamFist(fistObj);
                 }
 
-                yield* moves.dive();
+                yield* moves.dive(obj.status.health / obj.status.healthMax < 0.67 ? "flame_column" : "default");
                 iterationsCount++;
             }
         });
@@ -390,6 +410,10 @@ const atkBodySlamStarburst = RpgAttack.create({
     physical: 40,
 });
 
+const atkFlameColumn = RpgAttack.create({
+    physical: 30,
+});
+
 const atkPoisonBox = RpgAttack.create({
     conditions: {
         poison: 5,
@@ -428,4 +452,13 @@ function objAngelMiffedPoisonBox(attacker: MxnRpgStatus & MxnDetectPlayer) {
                 .show();
             self.mxnDischargeable.discharge();
         });
+}
+
+function objAngelMiffedFlameColumnTrail(attacker: MxnRpgStatus, signX: PolarInt) {
+    return objGroundSpawner({
+        objFactory: () =>
+            objProjectileFlameColumn().mixin(mxnRpgAttack, { attack: atkFlameColumn, attacker: attacker.status }),
+        maxDistance: 100,
+        speedX: 20 * signX,
+    });
 }
