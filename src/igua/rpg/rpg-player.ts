@@ -98,7 +98,7 @@ export class RpgPlayer {
     }
 }
 
-export module RpgPlayer {
+export namespace RpgPlayer {
     export interface State {
         looks: IguanaLooks.Serializable;
         position: Position;

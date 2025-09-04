@@ -52,7 +52,7 @@ export class RpgExperience implements Readonly<RpgExperience.State> {
     }
 }
 
-export module RpgExperience {
+export namespace RpgExperience {
     export interface State {
         combat: Integer;
         computer: Integer;

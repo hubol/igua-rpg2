@@ -71,7 +71,7 @@ export class RpgPlayerWallet {
     }
 }
 
-export module RpgPlayerWallet {
+export namespace RpgPlayerWallet {
     export interface State {
         valuables: Integer;
         mechanicalIdolCredits: Integer;

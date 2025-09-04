@@ -40,6 +40,6 @@ class RpgQuest {
     }
 }
 
-module RpgQuests {
+namespace RpgQuests {
     export type State = Partial<Record<DataQuest.Id, Integer>>;
 }

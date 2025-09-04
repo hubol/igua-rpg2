@@ -37,7 +37,7 @@ export class RpgStashPockets {
     }
 }
 
-module RpgStashPockets {
+namespace RpgStashPockets {
     export type State = Record<Integer, { pocketItemId: DataPocketItem.Id; count: Integer }>;
     export type Operation = "withdraw" | "deposit" | "swap";
 }

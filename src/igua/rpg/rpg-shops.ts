@@ -30,7 +30,7 @@ export class RpgShops {
     }
 }
 
-module RpgShops {
+namespace RpgShops {
     export type State = Partial<Record<DataShop.Id, RpgShop.State>>;
 }
 
@@ -55,7 +55,7 @@ export class RpgShop {
     }
 }
 
-module RpgShop {
+namespace RpgShop {
     export interface State {
         stockSales: Record<StockKey.Model, Integer>;
     }

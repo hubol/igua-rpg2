@@ -31,7 +31,7 @@ export namespace DramaLib {
         getColors,
     };
 
-    export module Speaker {
+    export namespace Speaker {
         export type Colors = ReturnType<typeof getColors>;
     }
 }

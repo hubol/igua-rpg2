@@ -149,7 +149,7 @@ export class RpgPlayerStatus implements RpgStatus.Model {
     }
 }
 
-export module RpgPlayerStatus {
+export namespace RpgPlayerStatus {
     export interface State {
         health: Integer;
         invulnerable: Integer;

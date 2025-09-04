@@ -25,7 +25,7 @@ export class RpgIdols {
     }
 }
 
-module RpgIdols {
+namespace RpgIdols {
     export type State = Record<Integer, RpgIdol.State>;
 }
 
@@ -69,7 +69,7 @@ export class RpgIdol {
     }
 }
 
-module RpgIdol {
+namespace RpgIdol {
     export interface State {
         health: Integer;
         idolId: DataIdol.Id | null;

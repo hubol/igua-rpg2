@@ -130,6 +130,6 @@ export class RpgPotions {
     }
 }
 
-export module RpgPotions {
+export namespace RpgPotions {
     export type State = Array<DataPotion.Id | null>;
 }

@@ -64,7 +64,7 @@ export class RpgInventory {
     }
 }
 
-export module RpgInventory {
+export namespace RpgInventory {
     // TODO probably need to model them all
 
     interface Item_Equipment {

@@ -80,7 +80,7 @@ export class RpgKeyItems {
     }
 }
 
-export module RpgKeyItems {
+export namespace RpgKeyItems {
     export type Item = DataKeyItem.Id;
     export type State = Item[];
 

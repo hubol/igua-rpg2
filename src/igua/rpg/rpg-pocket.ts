@@ -155,7 +155,7 @@ export class RpgPocket {
     }
 }
 
-export module RpgPocket {
+export namespace RpgPocket {
     export type Item = DataPocketItem.Id;
 
     export interface State {
@@ -201,7 +201,7 @@ class RpgPocketSlot {
     }
 }
 
-module RpgPocketSlot {
+namespace RpgPocketSlot {
     export interface State {
         item: RpgPocket.Item | null;
         count: number;

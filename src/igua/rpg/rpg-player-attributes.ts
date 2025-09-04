@@ -30,7 +30,7 @@ export class RpgPlayerAttributes {
     }
 }
 
-export module RpgPlayerAttributes {
+export namespace RpgPlayerAttributes {
     export interface State {
         health: Integer;
         intelligence: Integer;

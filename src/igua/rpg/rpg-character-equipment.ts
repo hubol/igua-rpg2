@@ -124,7 +124,7 @@ export class RpgCharacterEquipment {
     }
 }
 
-export module RpgCharacterEquipment {
+export namespace RpgCharacterEquipment {
     export interface ObtainedEquipment {
         id: Integer;
         // TODO rename to equipmentId

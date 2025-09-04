@@ -36,6 +36,6 @@ export class RpgFlops {
     }
 }
 
-export module RpgFlops {
+export namespace RpgFlops {
     export type State = Record<Integer, Integer>;
 }
