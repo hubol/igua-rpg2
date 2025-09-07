@@ -25,6 +25,8 @@ const questComplexityToExperience = {
     normal: 100,
 } satisfies Record<DataQuest.Complexity, Integer>;
 
+const rerollCountToExperience = [0, 3, 9, 15, 25, 50, 99];
+
 interface RpgExperienceRewarder {
     new(state: RpgExperience.State): ReturnType<typeof createRpgExperienceRewarder>;
 }
@@ -71,10 +73,18 @@ function createRpgExperienceRewarder(state: RpgExperience.State) {
                 state.gambling += prize;
             },
             onRerollLoot(rerollLootCounts: Integer[]) {
-                state.gambling += rerollLootCounts.reduce(
-                    (value, next) => value + (next ? Math.pow(2, next - 1) * 25 : 0),
-                    0,
-                );
+                const count = rerollLootCounts.reduce((sum, next) => sum + next, 0);
+
+                if (count === 0) {
+                    return;
+                }
+
+                const rawExperience = rerollCountToExperience[count];
+
+                const experience = rawExperience
+                    ? rawExperience
+                    : (100 + (count - rerollCountToExperience.length) * 25);
+                state.gambling += experience;
             },
         },
         jump: {
