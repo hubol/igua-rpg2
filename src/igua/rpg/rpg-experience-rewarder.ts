@@ -66,6 +66,9 @@ function createRpgExperienceRewarder(state: RpgExperience.State) {
             },
         },
         gambling: {
+            onOpenBlindBoxes(count: Integer) {
+                state.gambling += count * 5;
+            },
             onPlaceBet(bet: Integer) {
                 state.gambling += bet;
             },

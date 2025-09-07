@@ -44,5 +44,7 @@ function enrichCollectorNpc(lvl: LvlType.PlainsSuggestiveFlopCollector) {
             objCollectibleFlop(Rng.intc(0, 998)).at(position).show();
             yield sleep(100);
         }
+
+        Rpg.experience.reward.gambling.onOpenBlindBoxes(flopsCount);
     });
 }
