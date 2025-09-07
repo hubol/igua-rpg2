@@ -9,7 +9,7 @@ export namespace GenerativeMusicUtils {
     type Rate = ForceAliasType<number>;
 
     const c4Hz = 261.63;
-    const cScaleRates: Rate[] = [
+    export const cScaleRates: Rate[] = [
         c4Hz,
         277.18,
         293.66,
@@ -25,7 +25,7 @@ export namespace GenerativeMusicUtils {
     ]
         .map(hz => hz / c4Hz);
 
-    const scales = {
+    export const scales = {
         major: [0, 2, 4, 5, 7, 9, 11] as RateIndex[],
         minor: [0, 2, 3, 5, 7, 9, 11] as RateIndex[],
     };

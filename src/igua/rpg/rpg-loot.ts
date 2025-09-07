@@ -76,6 +76,7 @@ export namespace RpgLoot {
         pocketItems: RpgPocket.Item[];
         potions: DataPotion.Id[];
         flops: Integer[];
+        rerolledTimes: Integer;
     }
 
     export const Methods = {
@@ -134,7 +135,8 @@ export namespace RpgLoot {
 
             Rpg.experience.reward.gambling.onRerollLoot(rerollCounts);
 
-            // TODO maybe the counts are returned here for FX?
+            const rerolledTimes = rerollCounts.reduce((sum, count) => sum + count, 0);
+
             return {
                 equipments,
                 keyItems,
@@ -142,6 +144,7 @@ export namespace RpgLoot {
                 pocketItems,
                 flops,
                 potions,
+                rerolledTimes,
             };
         },
     };

@@ -1,11 +1,16 @@
-import { sleep } from "../../lib/game-engine/routines/sleep";
+import { Sfx } from "../../assets/sounds";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
+import { container } from "../../lib/pixi/container";
+import { Empty } from "../../lib/types/empty";
+import { GenerativeMusicUtils } from "../lib/generative-music-utils";
 import { RpgLoot } from "../rpg/rpg-loot";
 import { objCollectibleEquipment } from "./collectibles/obj-collectible-equipment";
 import { objCollectibleFlop } from "./collectibles/obj-collectible-flop";
 import { objCollectibleKeyItem } from "./collectibles/obj-collectible-key-item";
 import { objCollectiblePocketItem } from "./collectibles/obj-collectible-pocket-item";
 import { objCollectiblePotion } from "./collectibles/obj-collectible-potion";
+import { ObjFxRerollNotification, objFxRerollNotification } from "./effects/obj-fx-reroll-notification";
 import { objValuableTrove } from "./obj-valuable-trove";
 
 const dropSpeedH = [
@@ -15,8 +20,26 @@ const dropSpeedH = [
 ];
 
 export function objLootDrop(drop: RpgLoot.Drop) {
-    return objValuableTrove(drop.valuables)
+    return container()
         .coro(function* (self) {
+            const notificationObjs = Empty<ObjFxRerollNotification>();
+
+            for (let i = 0; i < drop.rerolledTimes; i++) {
+                const scaleIndex = GenerativeMusicUtils.scales.major[i];
+                const rate = scaleIndex === undefined ? 2 : GenerativeMusicUtils.cScaleRates[scaleIndex];
+                const notificationObj = objFxRerollNotification().show(self);
+                notificationObjs.push(notificationObj);
+                notificationObj.play(Sfx.Effect.RerollNotification.rate(rate + Rng.float(-0.01, 0.01)));
+                yield sleepf(40);
+            }
+
+            for (const notificationObj of notificationObjs) {
+                notificationObj.controls.die = true;
+                yield sleepf(20);
+            }
+
+            objValuableTrove(drop.valuables).at(self).show(self.parent);
+
             for (let i = 0; i < drop.pocketItems.length; i++) {
                 const hspeed = dropSpeedH[i % dropSpeedH.length];
                 objCollectiblePocketItem.objParachuting(drop.pocketItems[i])
@@ -55,5 +78,7 @@ export function objLootDrop(drop: RpgLoot.Drop) {
 
                 yield sleep(333);
             }
+
+            self.destroy();
         });
 }
