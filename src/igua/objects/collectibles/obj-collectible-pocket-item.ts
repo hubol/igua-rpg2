@@ -5,6 +5,7 @@ import { holdf } from "../../../lib/game-engine/routines/hold";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { Rng } from "../../../lib/math/rng";
+import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { ZIndex } from "../../core/scene/z-index";
 import { scene } from "../../globals";
@@ -33,6 +34,7 @@ objCollectiblePocketItem.objParachuting = function objParachuting (item: RpgPock
 function objPocketableItemBase(item: RpgPocket.Item, freed: boolean) {
     const figureObj = objFigurePocketItem(item);
     const obj = container()
+        .collisionShape(CollisionShape.DisplayObjects, [figureObj])
         .merge({ freed, isCollectible: false, item, figureHeight: figureObj.height })
         .mixin(mxnCollectibleLoot)
         .zIndexed(ZIndex.Entities);
