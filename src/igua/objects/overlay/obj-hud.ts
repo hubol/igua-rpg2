@@ -258,6 +258,20 @@ function objExperienceIndicator() {
                 deltaObj.x = Math.min(rectangle.x + rectangle.width, maximumX) - deltaObj.effectiveWidth;
                 maximumX = deltaObj.x;
             }
+
+            let xCorrection = 0;
+
+            for (let i = 0; i < deltaObjs.length; i++) {
+                const deltaObj = deltaObjs[i];
+                if (!deltaObj.visible || deltaObj.x >= 0) {
+                    continue;
+                }
+
+                if (xCorrection === 0) {
+                    xCorrection = -deltaObj.x;
+                }
+                deltaObj.x += xCorrection;
+            }
         }, 2)
         .step(self => {
             self.x = approachLinear(self.x, dramaShop.isActive() ? xPositions.left : xPositions.right, 16);
