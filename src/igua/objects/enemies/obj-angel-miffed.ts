@@ -207,6 +207,7 @@ export function objAngelMiffed() {
             obj.pivot.y = -25;
 
             if (kind === "flame_column") {
+                obj.play(Sfx.Enemy.Miffed.FlameDiveWarn.rate(0.9, 1.1));
                 objFxFormativeBurst(0xf0f000)
                     .at(obj)
                     .mixin(mxnDestroyAfterSteps, 30)
@@ -220,6 +221,7 @@ export function objAngelMiffed() {
             yield () => obj.speed.y === 0 && obj.isOnGround;
 
             if (kind === "flame_column") {
+                obj.play(Sfx.Enemy.Miffed.FlameDive.rate(0.95, 1.05));
                 objAngelMiffedFlameColumnTrail(obj, -1).at(obj).add(-20, 0).show();
                 objAngelMiffedFlameColumnTrail(obj, 1).at(obj).add(20, 0).show();
             }
