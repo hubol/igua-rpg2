@@ -205,7 +205,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": false,
-          "values": {"personaName": "", "name": "GlueMakerNpc", "depth": 0}
+          "values": {"personaName": "Gluemaker", "name": "GlueMakerNpc", "depth": 0}
         },
         {
           "name": "IguanaNpc",

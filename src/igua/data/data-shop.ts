@@ -97,6 +97,25 @@ export namespace DataShop {
                     },
                 ],
             },
+            Gluemaker: {
+                stocks: [
+                    {
+                        initialQuantity: 10,
+                        price: { currency: "valuables", deltaSold: 100, initial: 100 },
+                        product: { kind: "key_item", id: "EquipmentGlue" },
+                    },
+                    {
+                        initialQuantity: 10,
+                        price: { currency: "jump", deltaSold: 400, initial: 100 },
+                        product: { kind: "key_item", id: "EquipmentGlue" },
+                    },
+                    {
+                        initialQuantity: 10,
+                        price: { currency: "gambling", deltaSold: 130, initial: 100 },
+                        product: { kind: "key_item", id: "EquipmentGlue" },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );

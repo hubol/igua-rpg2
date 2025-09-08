@@ -134,7 +134,7 @@ export const Lvl = {
       GlueDripSource1: e(r["WaterDripSource"], { x: 85, y: 161, values: { delayMin: 1000, delayMax: 4000, name: "GlueDripSource1", depth: 0 } }, "Entities"),
       TerrainGrassCloudy_7: d(Tx.Terrain.Grass.Cloudy, { x: 389, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x1a0739 }, "AboveEntitiesDecals"),
       TerrainGrassCloudy_8: d(Tx.Terrain.Grass.Cloudy, { x: 433, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x1a0739 }, "AboveEntitiesDecals"),
-      GlueMakerNpc: e(r["IguanaNpc"], { x: 112, y: 208, flippedX: false, values: { personaName: "", name: "GlueMakerNpc", depth: 0 } }, "CharacterEntities"),
+      GlueMakerNpc: e(r["IguanaNpc"], { x: 112, y: 208, flippedX: false, values: { personaName: "Gluemaker", name: "GlueMakerNpc", depth: 0 } }, "CharacterEntities"),
       CobblerNpc: e(r["IguanaNpc"], { x: 576, y: 208, flippedX: true, values: { personaName: "", name: "CobblerNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 336, y: 176, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
       EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 112, y: 85, values: { name: "", depth: 0 } }, "MarkerEntities"),
