@@ -16,11 +16,11 @@ interface ObjWaterDripSourceArgs {
 export function objWaterDripSource({ delayMin, delayMax }: ObjWaterDripSourceArgs) {
     return container()
         .track(objWaterDripSource)
-        .merge({ poison: false })
+        .merge({ poison: false, atkDrip })
         .coro(function* (self) {
             while (true) {
                 yield sleep(Rng.intc(delayMin, delayMax));
-                objWaterDrip(self.poison ? atkPoisonDrip : atkDrip).at(self).show(self.parent);
+                objWaterDrip(self.poison ? atkPoisonDrip : self.atkDrip).at(self).show(self.parent);
             }
         });
 }
