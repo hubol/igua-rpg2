@@ -23,6 +23,7 @@ export namespace DataNpcPersona {
             UnderneathHomeowner: { job: "Homeowner", name: "Keef", looks: NpcLooks.Satisfier },
             UnderneathTunneler: { job: "Tunneler", name: "Sheeb", looks: NpcLooks.HighIq },
             Gluemaker: { job: "Gluemaker", name: "Paste", looks: NpcLooks.Paste },
+            Cobbler: { job: "Cobbler", name: "Frint", looks: NpcLooks.Spice },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
         } satisfies Record<string, Model>,
     );
