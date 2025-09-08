@@ -49,7 +49,7 @@ export namespace DataKeyItem {
             EquipmentGlue: {
                 name: "Shoe Glue",
                 description: "Used to increase the power of shoes.",
-                texture: null,
+                texture: Tx.Collectibles.Key.EquipmentGlue,
             },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
