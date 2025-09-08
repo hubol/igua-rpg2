@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 374 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 375 }];
 
 interface TxData {
   id: string;
@@ -82,7 +82,7 @@ function txs<T>(tx: (data: TxData) => T) {
       BallonPop: tx({ id: "Effects.BallonPop", atlas: 0, x: 0, y: 49, width: 1012, height: 50 }),
       Ballon: tx({ id: "Effects.Ballon", atlas: 0, x: 1543, y: 809, width: 110, height: 24 }),
       BoomText: tx({ id: "Effects.BoomText", atlas: 0, x: 1163, y: 452, width: 44, height: 16 }),
-      Bubble4: tx({ id: "Effects.Bubble4", atlas: 0, x: 2044, y: 751, width: 4, height: 4 }),
+      Bubble4: tx({ id: "Effects.Bubble4", atlas: 0, x: 2017, y: 0, width: 4, height: 4 }),
       Burst32: tx({ id: "Effects.Burst32", atlas: 0, x: 1571, y: 1093, width: 32, height: 22 }),
       BurstDusty: tx({ id: "Effects.BurstDusty", atlas: 0, x: 1208, y: 403, width: 470, height: 86 }),
       BurstRound24: tx({ id: "Effects.BurstRound24", atlas: 0, x: 1969, y: 1057, width: 72, height: 24 }),
@@ -143,7 +143,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Face: tx({ id: "Enemy.Suggestive.Face", atlas: 0, x: 1046, y: 1023, width: 38, height: 24 }),
         Gear: tx({ id: "Enemy.Suggestive.Gear", atlas: 0, x: 1604, y: 1093, width: 32, height: 16 }),
         Pupil: tx({ id: "Enemy.Suggestive.Pupil", atlas: 0, x: 382, y: 595, width: 2, height: 8 }),
-        ScleraWide: tx({ id: "Enemy.Suggestive.ScleraWide", atlas: 0, x: 242, y: 873, width: 14, height: 6 }),
+        ScleraWide: tx({ id: "Enemy.Suggestive.ScleraWide", atlas: 0, x: 627, y: 445, width: 14, height: 6 }),
         Sclera: tx({ id: "Enemy.Suggestive.Sclera", atlas: 0, x: 1935, y: 105, width: 8, height: 16 }),
         Torso: tx({ id: "Enemy.Suggestive.Torso", atlas: 0, x: 1148, y: 844, width: 86, height: 23 }),
       },
@@ -272,7 +272,7 @@ function txs<T>(tx: (data: TxData) => T) {
       ShadowIrregularSmall: tx({ id: "Light.ShadowIrregularSmall", atlas: 0, x: 1019, y: 948, width: 16, height: 8 }),
       ShadowMessy0: tx({ id: "Light.ShadowMessy0", atlas: 0, x: 1862, y: 812, width: 58, height: 12 }),
     },
-    Placeholder: tx({ id: "Placeholder", atlas: 0, x: 242, y: 880, width: 14, height: 14 }),
+    Placeholder: tx({ id: "Placeholder", atlas: 0, x: 1208, y: 931, width: 14, height: 14 }),
     Shapes: {
       Arc24: tx({ id: "Shapes.Arc24", atlas: 0, x: 1434, y: 724, width: 24, height: 4 }),
       ArcFilledIrregular90: tx({ id: "Shapes.ArcFilledIrregular90", atlas: 0, x: 1574, y: 865, width: 90, height: 92 }),
@@ -305,6 +305,7 @@ function txs<T>(tx: (data: TxData) => T) {
       CloudStrokeThick0: tx({ id: "Sky.CloudStrokeThick0", atlas: 0, x: 1596, y: 288, width: 414, height: 76 }),
       CloudStrokeThick1: tx({ id: "Sky.CloudStrokeThick1", atlas: 0, x: 1827, y: 932, width: 78, height: 66 }),
       Cloud0: tx({ id: "Sky.Cloud0", atlas: 0, x: 1566, y: 547, width: 283, height: 53 }),
+      LittleAngel0: tx({ id: "Sky.LittleAngel0", atlas: 0, x: 242, y: 873, width: 14, height: 16 }),
     },
     Stone: {
       BrickLump0: tx({ id: "Stone.BrickLump0", atlas: 0, x: 189, y: 687, width: 66, height: 12 }),
@@ -363,7 +364,7 @@ function txs<T>(tx: (data: TxData) => T) {
     Town: {
       Ball: {
         Ball0: tx({ id: "Town.Ball.Ball0", atlas: 0, x: 1303, y: 1062, width: 12, height: 12 }),
-        Ball1: tx({ id: "Town.Ball.Ball1", atlas: 0, x: 1208, y: 931, width: 14, height: 12 }),
+        Ball1: tx({ id: "Town.Ball.Ball1", atlas: 0, x: 2033, y: 866, width: 14, height: 12 }),
         Brick0: tx({ id: "Town.Ball.Brick0", atlas: 0, x: 1410, y: 992, width: 36, height: 30 }),
         Brick1: tx({ id: "Town.Ball.Brick1", atlas: 0, x: 2007, y: 845, width: 36, height: 20 }),
         ColumnSpiral0: tx({ id: "Town.Ball.ColumnSpiral0", atlas: 0, x: 1191, y: 983, width: 12, height: 20 }),

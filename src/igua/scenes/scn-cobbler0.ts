@@ -1,13 +1,17 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
+import { mxnAlternatePivot } from "../mixins/mxn-alternate-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { RpgAttack } from "../rpg/rpg-attack";
 
 export function scnCobbler0() {
     const lvl = Lvl.Cobbler0();
     enrichGlueDripSources(lvl);
     enrichGluemaker(lvl);
+    lvl.LittleAngel.mixin(mxnSinePivot);
+    lvl.LittleAngelShadow.mixin(mxnAlternatePivot);
 }
 
 const atkGlueDrip = RpgAttack.create({
