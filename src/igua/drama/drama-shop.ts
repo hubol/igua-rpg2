@@ -39,6 +39,32 @@ export const CtxDramaShop = new SceneLocal(
     "CtxDramaShop",
 );
 
+const stockKindOrder: Record<DataShop.Product["kind"], Integer> = {
+    potion: 0,
+    key_item: 1,
+    equipment: 2,
+};
+
+function getSortScore(stock: RpgStock) {
+    return stockKindOrder[stock.product.kind] * 100 + possibleCurrencyIndices[stock.currency];
+}
+
+function compareStock(a: RpgStock, b: RpgStock) {
+    const aScore = getSortScore(a);
+    const bScore = getSortScore(b);
+    if (aScore === bScore) {
+        const aName = DataItem.getName(a.product);
+        const bName = DataItem.getName(b.product);
+
+        if (aName === bName) {
+            return 0;
+        }
+
+        return aName > bName ? 1 : -1;
+    }
+    return aScore - bScore;
+}
+
 export function* dramaShop(shopId: DataShop.Id, style: DramaShopStyle) {
     const shop = Rpg.shop(shopId);
 
@@ -48,11 +74,13 @@ export function* dramaShop(shopId: DataShop.Id, style: DramaShopStyle) {
     let done = false;
 
     const refreshStocks = () => {
-        shop.stocks.forEach((stock, i) => stockObjs[i].methods.applyStock(stock));
+        for (const stockObj of stockObjs) {
+            stockObj.methods.update();
+        }
     };
 
     const playerStatusObj = objPlayerStatus(shop.stocks).at(50, -5);
-    const stockObjs = shop.stocks.map(stock =>
+    const stockObjs = [...shop.stocks].sort(compareStock).map(stock =>
         objDramaShopStock(stock, refreshStocks, () => playerStatusObj.methods.vibrate(stock.currency))
     );
 
@@ -136,11 +164,9 @@ function objDramaShopStock(
     refreshStocks: () => void,
     showPurchaseError: () => void,
 ) {
-    let appliedStock = stock;
-
     const methods = {
-        applyStock(stock: RpgStock) {
-            objects = applyStock(stock);
+        update() {
+            objects = update();
         },
     };
 
@@ -160,12 +186,12 @@ function objDramaShopStock(
         })
         .step(self => {
             if (CtxDramaShop.value.state.isInteractive && self.selected && Input.justWentDown("Confirm")) {
-                if (appliedStock.isSoldOut) {
+                if (stock.isSoldOut) {
                     objects.limitedQuantityObj.mxnErrorVibrate.methods.vibrate();
                 }
                 // TODO where to enforce potions inventory being too full???
-                else if (Rpg.wallet.canAfford(appliedStock)) {
-                    appliedStock.purchase();
+                else if (Rpg.wallet.canAfford(stock)) {
+                    stock.purchase();
                     refreshStocks();
                 }
                 else {
@@ -216,9 +242,8 @@ function objDramaShopStock(
 
     contextualObj.show(obj);
 
-    function applyStock(stock: RpgStock) {
+    function update() {
         contextualObj.removeAllChildren();
-        appliedStock = stock;
         objStockNameDescription(stock).show(contextualObj);
         const stockPriceObj = objStockPrice(stock)
             .mixin(mxnErrorVibrate)
@@ -241,7 +266,7 @@ function objDramaShopStock(
         };
     }
 
-    let objects = applyStock(stock);
+    let objects = update();
 
     return obj.pivoted(-2, -10);
 }
@@ -290,6 +315,11 @@ const possibleCurrencies: RpgEconomy.Currency.Id[] = [
     "mechanical_idol_credits",
     ...experienceIndicatorConfigsArray.map(({ experienceKey }) => experienceKey),
 ];
+
+const possibleCurrencyIndices: Record<RpgEconomy.Currency.Id, Integer> = Object.assign(
+    {},
+    ...possibleCurrencies.map((currency, index) => ({ [currency]: index })),
+);
 
 function objPlayerStatus(stocks: ReadonlyArray<RpgStock>) {
     const currenciesInStocks = possibleCurrencies.filter(currency => stocks.some(item => item.currency === currency));
