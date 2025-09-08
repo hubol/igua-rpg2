@@ -1,4 +1,4 @@
-import { Container, Graphics, Rectangle } from "pixi.js";
+import { Container, DisplayObject, Graphics, Rectangle } from "pixi.js";
 import { Sfx } from "../../../assets/sounds";
 import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
 import { TickerContainer } from "../../../lib/game-engine/ticker-container";
@@ -11,6 +11,7 @@ import { forceGameLoop, Input } from "../../globals";
 import { UiColor } from "../ui-color";
 
 export type UiPageProps = {
+    children?: DisplayObject[];
     maxHeight?: number;
     title?: string;
     selectionIndex: number;
@@ -20,6 +21,12 @@ export type UiPageProps = {
     scrollCatchUpSpeed?: Integer;
 };
 export type ObjUiPageElement = Container & { selected: boolean };
+
+export namespace ObjUiPageElement {
+    export function is(obj: DisplayObject): obj is ObjUiPageElement {
+        return obj instanceof Container && "selected" in obj;
+    }
+}
 
 export type ObjUiPageRouter = ReturnType<typeof objUiPageRouter>;
 
@@ -80,7 +87,7 @@ export function objUiPageRouter(props: UiPageRouterProps = {}) {
     return c;
 }
 
-export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
+export function objUiPage(elements: ObjUiPageElement[], { children = elements, ...props }: UiPageProps) {
     const ticker = new AsshatTicker();
     const c = new TickerContainer(ticker, props.startTicking ?? false).merge({
         navigation: true,
@@ -89,7 +96,7 @@ export function objUiPage(elements: ObjUiPageElement[], props: UiPageProps) {
     }).merge(props);
 
     const maskedObj = container().show(c);
-    const elementsObj = container(...elements).show(maskedObj);
+    const elementsObj = container(...children).show(maskedObj);
 
     const scrollBarObj = objScrollBar(
         props.scrollbarBgTint ?? UiColor.Background,

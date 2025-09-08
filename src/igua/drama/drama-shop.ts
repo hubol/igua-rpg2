@@ -1,4 +1,4 @@
-import { Graphics, Rectangle, Sprite, Texture } from "pixi.js";
+import { Container, Graphics, Rectangle, Sprite, Texture } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
@@ -11,6 +11,7 @@ import { Rng } from "../../lib/math/rng";
 import { vequals } from "../../lib/math/vector";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
+import { MapRgbFilter } from "../../lib/pixi/filters/map-rgb-filter";
 import { renderer } from "../current-pixi-renderer";
 import { DataItem } from "../data/data-item";
 import { DataShop } from "../data/data-shop";
@@ -22,7 +23,7 @@ import { experienceIndicatorConfigs, experienceIndicatorConfigsArray } from "../
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgStock } from "../rpg/rpg-shops";
-import { objUiPage } from "../ui/framework/obj-ui-page";
+import { objUiPage, ObjUiPageElement } from "../ui/framework/obj-ui-page";
 import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
 import { objDramaOwnedCount } from "./objects/obj-drama-owned-count";
 
@@ -84,20 +85,36 @@ export function* dramaShop(shopId: DataShop.Id, style: DramaShopStyle) {
         objDramaShopStock(stock, refreshStocks, () => playerStatusObj.methods.vibrate(stock.currency))
     );
 
-    const buttonObjs = [
-        ...stockObjs,
-        objDoneButton().step((self) => {
-            if (CtxDramaShop.value.state.isInteractive && self.selected && Input.justWentDown("Confirm")) {
-                done = true;
-            }
-        }),
-    ];
+    const doneButtonObj = objDoneButton().step((self) => {
+        if (CtxDramaShop.value.state.isInteractive && self.selected && Input.justWentDown("Confirm")) {
+            done = true;
+        }
+    });
 
-    UiVerticalLayout.apply(buttonObjs);
+    const elementObjs = (function () {
+        const productKinds = new Set<DataShop.Product["kind"]>();
+
+        const objs: Container[] = [];
+        for (const stockObj of stockObjs) {
+            const productKind = stockObj.state.productKind;
+            if (!productKinds.has(productKind)) {
+                objs.push(objProductSeparator(productKind).at(ItemConsts.width / 2, 0).vround());
+                productKinds.add(productKind);
+            }
+
+            objs.push(stockObj);
+        }
+
+        objs.push(doneButtonObj);
+        return objs;
+    })();
+
+    UiVerticalLayout.apply(elementObjs);
 
     const pageObj = objUiPage(
-        buttonObjs,
+        elementObjs.filter(ObjUiPageElement.is),
         {
+            children: elementObjs,
             selectionIndex: 0,
             startTicking: true,
             maxHeight: renderer.height - 40,
@@ -164,6 +181,10 @@ function objDramaShopStock(
     refreshStocks: () => void,
     showPurchaseError: () => void,
 ) {
+    const state = {
+        productKind: stock.product.kind,
+    };
+
     const methods = {
         update() {
             objects = update();
@@ -182,6 +203,7 @@ function objDramaShopStock(
     )
         .merge({
             selected: false,
+            state,
             methods,
         })
         .step(self => {
@@ -515,4 +537,32 @@ function objRoundedRect() {
         ItemConsts.height,
         8,
     );
+}
+
+const separatorTxs = (function () {
+    const txs = Tx.Ui.ShopProductSeparator.split({ width: 178 });
+    return {
+        potion: {
+            bannerTx: txs[0],
+            decorationTx: txs[3],
+        },
+        key_item: {
+            bannerTx: txs[1],
+            decorationTx: txs[4],
+        },
+        equipment: {
+            bannerTx: txs[2],
+            decorationTx: txs[5],
+        },
+    };
+})();
+
+function objProductSeparator(kind: DataShop.Product["kind"]) {
+    const filter = new MapRgbFilter(CtxDramaShop.value.style.primaryTint, CtxDramaShop.value.style.secondaryTint);
+
+    return container(
+        Sprite.from(separatorTxs[kind].bannerTx).filtered(filter),
+        Sprite.from(separatorTxs[kind].decorationTx),
+    )
+        .pivoted(89, 0);
 }
