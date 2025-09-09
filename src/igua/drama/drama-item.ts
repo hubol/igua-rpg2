@@ -8,6 +8,7 @@ import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataItem } from "../data/data-item";
 import { Input, layers } from "../globals";
+import { mxnMotion } from "../mixins/mxn-motion";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { DramaLib } from "./drama-lib";
@@ -71,6 +72,24 @@ function* choose({ message = "", items = [], noneMessage }: Partial<ChooseArgs>)
     pageObj.navigation = true;
 
     yield () => Input.justWentDown("Confirm");
+
+    pageObj.navigation = false;
+
+    elementObjs
+        .filter(obj => !obj.selected)
+        .forEach(obj => {
+            let angle = 0;
+
+            obj
+                .mixin(mxnMotion)
+                .step(self => {
+                    self.angle = Math.round((angle += self.speed.x) / 45) * 45;
+                    self.speed.y += 0.3;
+                })
+                .speed.at(Rng.int(-10, 10), Rng.int(-3, -6));
+        });
+
+    yield sleep(700);
 
     yield interp(obj, "alpha").steps(3).to(0).over(500);
 
@@ -142,11 +161,12 @@ function mxnSelect(obj: Container) {
         .merge({ selected: false })
         .step(self => {
             indicatorObj.appear = self.selected;
-            self.angle = self.selected ? 4 : 0;
         })
         .coro(function* (self) {
             while (true) {
+                self.angle = 0;
                 yield () => self.selected;
+                self.angle = 4;
                 self.pivot.at(Rng.int(-1, 1), Rng.int(-1, 1));
                 yield sleep(Rng.int(100, 300));
             }
