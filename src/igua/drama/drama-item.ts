@@ -15,20 +15,20 @@ import { RpgInventory } from "../rpg/rpg-inventory";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { DramaLib } from "./drama-lib";
 
-interface Option {
-    item: RpgInventory.Item;
+interface Option<TItem extends RpgInventory.Item> {
+    item: TItem;
     message: string;
 }
 
-interface ChooseArgs {
-    options: Option[];
+interface ChooseArgs<TItem extends RpgInventory.Item> {
+    options: Option<TItem>[];
     message: string;
     noneMessage: string;
 }
 
-function choose(args: ChooseArgs): Coro.Type<RpgInventory.Item | null>;
-function choose(args: Omit<ChooseArgs, "noneMessage">): Coro.Type<RpgInventory.Item>;
-function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs>) {
+function choose<TItem extends RpgInventory.Item>(args: ChooseArgs<TItem>): Coro.Type<TItem | null>;
+function choose<TItem extends RpgInventory.Item>(args: Omit<ChooseArgs<TItem>, "noneMessage">): Coro.Type<TItem>;
+function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs<RpgInventory.Item>>) {
     if (!options.length && !noneMessage) {
         Logger.logContractViolationError(
             "DramaItem.choose",

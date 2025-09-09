@@ -23,6 +23,7 @@ import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
+import { DramaItem } from "./drama-item";
 import { DramaLib } from "./drama-lib";
 import { objDramaOwnedCount } from "./objects/obj-drama-owned-count";
 
@@ -373,8 +374,28 @@ function* emptyPocket() {
     return result;
 }
 
+function* askWhichToOffer<TItem extends RpgInventory.RemovableItem>(items: TItem[]) {
+    const item = yield* DramaItem.choose({
+        message: "Which to offer?",
+        noneMessage: "Nothing, sorry",
+        options: items.filter(item => Rpg.inventory.count(item) >= 1).map(item => ({
+            item,
+            message: DataItem.getName(item) + "\n" + DataItem.getDescription(item),
+        })),
+    });
+
+    if (item === null) {
+        return null;
+    }
+
+    yield* removeFromPlayer(item, 1);
+
+    return item;
+}
+
 export const DramaInventory = {
     askRemoveCount,
+    askWhichToOffer,
     remove: removeFromPlayer,
     pocket: {
         empty: emptyPocket,

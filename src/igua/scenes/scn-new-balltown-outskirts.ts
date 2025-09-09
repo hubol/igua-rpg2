@@ -9,7 +9,6 @@ import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataKeyItem } from "../data/data-key-item";
 import { DramaInventory } from "../drama/drama-inventory";
-import { DramaKeyItems } from "../drama/drama-key-items";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnBallonable } from "../mixins/mxn-ballonable";
@@ -57,9 +56,9 @@ function enrichFarmer(lvl: LvlType.NewBalltownOutskirts) {
                 `But I need a ${DataKeyItem.Manifest.BagOfSeeds.name}...`,
             );
 
-            const used = yield* DramaKeyItems.use({ keyItemIds: ["BagOfSeeds"] });
+            const offer = yield* DramaInventory.askWhichToOffer([{ kind: "key_item", id: "BagOfSeeds" }]);
 
-            if (used?.count) {
+            if (offer) {
                 yield* show(
                     "Yo!! What?!",
                     "Thank you!!! This will let me plant ballfruit.",

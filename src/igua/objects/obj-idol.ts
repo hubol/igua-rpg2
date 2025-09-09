@@ -5,10 +5,11 @@ import { VectorSimple, vnew } from "../../lib/math/vector-type";
 import { CollisionShape } from "../../lib/pixi/collision";
 import { container } from "../../lib/pixi/container";
 import { DataIdol } from "../data/data-idol";
-import { DramaKeyItems } from "../drama/drama-key-items";
+import { DramaInventory } from "../drama/drama-inventory";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { Rpg } from "../rpg/rpg";
 import { RpgIdol } from "../rpg/rpg-idols";
+import { RpgInventory } from "../rpg/rpg-inventory";
 import { RpgSceneIdol } from "../rpg/rpg-player-aggregated-buffs";
 import { objUiBubbleNumber } from "./overlay/obj-ui-bubble-numbers";
 import { objTransitionedSprite } from "./utils/obj-transitioned-sprite";
@@ -36,9 +37,10 @@ styles.set("Purple", {
     pivot: [36, 70],
 });
 
-const keyItemIds = Object.values(DataIdol.Manifest)
+const keyItems: RpgInventory.Item.KeyItem[] = Object.values(DataIdol.Manifest)
     .map(({ keyItemId }) => keyItemId)
-    .filter(keyItemId => keyItemId !== "__Fallback__");
+    .filter(keyItemId => keyItemId !== "__Fallback__")
+    .map(id => ({ kind: "key_item", id }));
 
 function getHealthText(idol: RpgIdol) {
     return Math.ceil(idol.health / 60);
@@ -57,9 +59,9 @@ export function objIdol({ uid }: OgmoEntities.Idol) {
     })
         .collisionShape(CollisionShape.DisplayObjects, [collisionShapeObj])
         .mixin(mxnCutscene, function* () {
-            const result = yield* DramaKeyItems.use({ keyItemIds });
-            if (result && result.count) {
-                const dataIdol = Object.values(DataIdol.Manifest).find(idol => idol.keyItemId === result.keyItemId);
+            const offer = yield* DramaInventory.askWhichToOffer(keyItems);
+            if (offer) {
+                const dataIdol = Object.values(DataIdol.Manifest).find(idol => idol.keyItemId === offer.id);
                 idol.upload(dataIdol?.id!);
             }
         });
