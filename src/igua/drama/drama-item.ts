@@ -45,7 +45,7 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
         .at(renderer.width / 2, 12)
         .show(obj);
 
-    const submessageObj = objMessage(options[0].message)
+    const submessageObj = objMessage("")
         .at(renderer.width / 2, 220)
         .show(obj);
 
@@ -96,21 +96,23 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
 
     pageObj.navigation = false;
 
-    elementObjs
-        .filter(obj => !obj.selected)
-        .forEach(obj => {
-            let angle = 0;
+    if (elementObjs.length > 1) {
+        elementObjs
+            .filter(obj => !obj.selected)
+            .forEach(obj => {
+                let angle = 0;
 
-            obj
-                .mixin(mxnMotion)
-                .step(self => {
-                    self.angle = Math.round((angle += self.speed.x) / 45) * 45;
-                    self.speed.y += 0.3;
-                })
-                .speed.at(Rng.int(-10, 10), Rng.int(-3, -6));
-        });
+                obj
+                    .mixin(mxnMotion)
+                    .step(self => {
+                        self.angle = Math.round((angle += self.speed.x) / 45) * 45;
+                        self.speed.y += 0.3;
+                    })
+                    .speed.at(Rng.int(-10, 10), Rng.int(-3, -6));
+            });
 
-    yield sleep(700);
+        yield sleep(700);
+    }
 
     yield interp(obj, "alpha").steps(3).to(0).over(500);
 
