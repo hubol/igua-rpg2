@@ -15,35 +15,29 @@ import { RpgInventory } from "../rpg/rpg-inventory";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { DramaLib } from "./drama-lib";
 
-interface ChooseItem {
+interface Option {
     item: RpgInventory.Item;
     message: string;
 }
 
 interface ChooseArgs {
-    items: ChooseItem[];
+    options: Option[];
     message: string;
     noneMessage: string;
 }
 
 function choose(args: ChooseArgs): Coro.Type<RpgInventory.Item | null>;
 function choose(args: Omit<ChooseArgs, "noneMessage">): Coro.Type<RpgInventory.Item>;
-function* choose({ message = "", items = [], noneMessage }: Partial<ChooseArgs>) {
-    if (!items.length && !noneMessage) {
+function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs>) {
+    if (!options.length && !noneMessage) {
         Logger.logContractViolationError(
             "DramaItem.choose",
             new Error("items must not be empty when noneMessage is empty"),
         );
-        items.push({ item: { kind: "potion", id: "__Fallback__" }, message: "This is a bug" });
+        options.push({ item: { kind: "potion", id: "__Fallback__" }, message: "This is a bug" });
     }
 
-    let value = items[0] ? items[0].item : null;
-
-    const item: RpgInventory.Item = {
-        kind: "equipment",
-        id: "FactionDefenseMiner",
-        level: 3,
-    };
+    let value = options[0] ? options[0].item : null;
 
     const obj = container().show(layers.overlay.messages);
 
@@ -51,11 +45,11 @@ function* choose({ message = "", items = [], noneMessage }: Partial<ChooseArgs>)
         .at(renderer.width / 2, 12)
         .show(obj);
 
-    const submessageObj = objMessage(items[0].message)
+    const submessageObj = objMessage(options[0].message)
         .at(renderer.width / 2, 220)
         .show(obj);
 
-    const elementObjs = items.map(({ item, message }) =>
+    const elementObjs = options.map(({ item, message }) =>
         container(DataItem.getFigureObj(item).pivotedUnit(0.5, 0.5).scaled(2, 2))
             .mixin(mxnSelect)
             .step(self => {
