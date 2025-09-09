@@ -1,5 +1,6 @@
-import { Container, Graphics, LINE_CAP, LINE_JOIN } from "pixi.js";
+import { Container, Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
+import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interp, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
@@ -27,8 +28,6 @@ interface ChooseArgs {
 function choose(args: ChooseArgs): Coro.Type<RpgInventory.Item | null>;
 function choose(args: Omit<ChooseArgs, "noneMessage">): Coro.Type<RpgInventory.Item>;
 function* choose({ message = "", items = [], noneMessage }: Partial<ChooseArgs>) {
-    const colors = DramaLib.Speaker.getColors();
-
     const item: RpgInventory.Item = {
         kind: "equipment",
         id: "FactionDefenseMiner",
@@ -45,7 +44,7 @@ function* choose({ message = "", items = [], noneMessage }: Partial<ChooseArgs>)
         .at(renderer.width / 2, 220)
         .show(obj);
 
-    const elementObjs = items.map(({ item, message }, index) =>
+    const elementObjs = items.map(({ item, message }) =>
         container(DataItem.getFigureObj(item).pivotedUnit(0.5, 0.5).scaled(2, 2))
             .mixin(mxnSelect)
             .step(self => {
@@ -53,8 +52,23 @@ function* choose({ message = "", items = [], noneMessage }: Partial<ChooseArgs>)
                     submessageObj.text = message;
                 }
             })
-            .at(80 + (index % 5) * 83, 80 + Math.floor(index / 5) * 90)
     );
+
+    if (noneMessage) {
+        elementObjs.push(
+            container(Sprite.from(Tx.Ui.EmptyLarge).anchored(0.5, 0.5))
+                .mixin(mxnSelect)
+                .step(self => {
+                    if (self.selected) {
+                        submessageObj.text = noneMessage;
+                    }
+                }),
+        );
+    }
+
+    for (let i = 0; i < elementObjs.length; i++) {
+        elementObjs[i].at(80 + (i % 5) * 83, 80 + Math.floor(i / 5) * 90);
+    }
 
     const pageObj = objUiPage(elementObjs, { selectionIndex: 0, startTicking: true })
         .show(obj);

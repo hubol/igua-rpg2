@@ -35,6 +35,7 @@ function enrichCobbler(lvl: LvlType.Cobbler0) {
     lvl.CobblerNpc.mixin(mxnCutscene, function* () {
         yield* DramaItem.choose({
             message: "What do you want to upgrade?",
+            noneMessage: "asdfasdf",
             items: DataEquipment.ids.map(id => ({
                 item: { kind: "equipment", id, level: 2 },
                 message: "Pussy and ass " + DataEquipment.getName(id, 2),
