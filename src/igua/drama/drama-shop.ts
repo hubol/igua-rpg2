@@ -19,6 +19,7 @@ import { Input, layers, scene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnErrorVibrate } from "../mixins/mxn-error-vibrate";
+import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { experienceIndicatorConfigs, experienceIndicatorConfigsArray } from "../objects/overlay/obj-hud";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
@@ -70,7 +71,6 @@ export function* dramaShop(shopId: DataShop.Id, style: DramaShopStyle) {
     const shop = Rpg.shop(shopId);
 
     CtxDramaShop.value.style = style;
-    dramaShopObjsCount++;
 
     let done = false;
 
@@ -126,14 +126,16 @@ export function* dramaShop(shopId: DataShop.Id, style: DramaShopStyle) {
         .at(renderer.width - ItemConsts.width - 32, 0);
     pageObj.navigation = false;
 
-    const shopObj = container(pageObj, playerStatusObj).show(layers.overlay.messages);
+    const shopObj = container(pageObj, playerStatusObj)
+        .mixin(mxnHudModifiers.mxnHideStatus)
+        .mixin(mxnHudModifiers.mxnExperienceIndicatorToLeft)
+        .show(layers.overlay.messages);
 
     const exitPositions = {
         pageObj: vnew(0, -renderer.height),
         playerStatusObj: vnew(-120, 0),
     };
 
-    shopObj.on("destroyed", () => dramaShopObjsCount--);
     shopObj.visible = false;
     pageObj.add(exitPositions.pageObj);
     playerStatusObj.add(exitPositions.playerStatusObj);
@@ -160,14 +162,6 @@ export function* dramaShop(shopId: DataShop.Id, style: DramaShopStyle) {
     ]);
     shopObj.destroy();
 }
-
-// It would technically be incorrect to track this with .track()
-// as these instances are added to the overlay, not the scene
-let dramaShopObjsCount = 0;
-
-dramaShop.isActive = function () {
-    return dramaShopObjsCount > 0;
-};
 
 const ItemConsts = {
     width: 340,

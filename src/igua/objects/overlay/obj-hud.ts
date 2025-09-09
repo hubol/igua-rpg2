@@ -14,9 +14,9 @@ import { Null } from "../../../lib/types/null";
 import { renderer } from "../../current-pixi-renderer";
 import { DataIdol } from "../../data/data-idol";
 import { DataPocketItem } from "../../data/data-pocket-item";
-import { dramaShop } from "../../drama/drama-shop";
-import { Cutscene, scene } from "../../globals";
+import { Cutscene } from "../../globals";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
+import { mxnHudModifiers } from "../../mixins/mxn-hud-modifiers";
 import { CtxInteract } from "../../mixins/mxn-interact";
 import { Rpg } from "../../rpg/rpg";
 import { RpgExperience } from "../../rpg/rpg-experience";
@@ -64,9 +64,9 @@ export function objHud() {
         .merge({ healthBarObj, effectiveHeight: 0 })
         .step(self => {
             {
-                const isShopping = dramaShop.isActive();
-                healthBarObj.visible = !isShopping;
-                statusObjsContainer.visible = !isShopping;
+                const showStatus = !mxnHudModifiers.mxnHideStatus.exists();
+                healthBarObj.visible = showStatus;
+                statusObjsContainer.visible = showStatus;
             }
             healthBarObj.maxValue = approachLinear(healthBarObj.maxValue, Rpg.character.status.healthMax, 1);
             healthBarObj.width = healthBarObj.maxValue;
@@ -274,7 +274,11 @@ function objExperienceIndicator() {
             }
         }, 2)
         .step(self => {
-            self.x = approachLinear(self.x, dramaShop.isActive() ? xPositions.left : xPositions.right, 16);
+            self.x = approachLinear(
+                self.x,
+                mxnHudModifiers.mxnExperienceIndicatorToLeft.exists() ? xPositions.left : xPositions.right,
+                16,
+            );
         })
         .at(xPositions.right, renderer.height - 8)
         .show(root);

@@ -10,6 +10,7 @@ import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataItem } from "../data/data-item";
 import { Input, layers } from "../globals";
+import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { mxnMotion } from "../mixins/mxn-motion";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { objUiPage } from "../ui/framework/obj-ui-page";
@@ -39,7 +40,9 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
 
     let value = options[0] ? options[0].item : null;
 
-    const obj = container().show(layers.overlay.messages);
+    const obj = container()
+        .mixin(mxnHudModifiers.mxnHideStatus)
+        .show(layers.overlay.messages);
 
     const messageObj = objMessage(message)
         .at(renderer.width / 2, 12)
