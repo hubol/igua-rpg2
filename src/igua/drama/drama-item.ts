@@ -1,6 +1,7 @@
 import { Container, Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
+import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interp, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
@@ -28,6 +29,14 @@ interface ChooseArgs {
 function choose(args: ChooseArgs): Coro.Type<RpgInventory.Item | null>;
 function choose(args: Omit<ChooseArgs, "noneMessage">): Coro.Type<RpgInventory.Item>;
 function* choose({ message = "", items = [], noneMessage }: Partial<ChooseArgs>) {
+    if (!items.length && !noneMessage) {
+        Logger.logContractViolationError(
+            "DramaItem.choose",
+            new Error("items must not be empty when noneMessage is empty"),
+        );
+        items.push({ item: { kind: "potion", id: "__Fallback__" }, message: "This is a bug" });
+    }
+
     const item: RpgInventory.Item = {
         kind: "equipment",
         id: "FactionDefenseMiner",
