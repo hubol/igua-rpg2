@@ -171,7 +171,7 @@ function* askRemoveCount(
 
     const removeFiguresObj = container()
         .coro(function* (self) {
-            yield* removeFromPlayer(item, Number(value));
+            yield* removeCountFromPlayer(item, Number(value));
 
             self.destroy();
         })
@@ -190,7 +190,8 @@ function* askRemoveCount(
     return value;
 }
 
-function* removeFromPlayer(item: RpgInventory.RemovableItem, count: Integer) {
+/** Before calling this function, you must assert that the player has the demanded amount */
+function* removeCountFromPlayer(item: RpgInventory.RemovableItem, count: Integer) {
     if (count <= 0) {
         return;
     }
@@ -199,10 +200,14 @@ function* removeFromPlayer(item: RpgInventory.RemovableItem, count: Integer) {
     Rpg.inventory.remove(item, count);
     const endingCount = Rpg.inventory.count(item);
 
-    return yield* _removeFromPlayer(item, initialCount, endingCount);
+    return yield* visualizeRemoveCountFromPlayer(item, initialCount, endingCount);
 }
 
-function* _removeFromPlayer(item: RpgInventory.RemovableItem, initialCount: Integer, endingCount: Integer) {
+function* visualizeRemoveCountFromPlayer(
+    item: RpgInventory.RemovableItem,
+    initialCount: Integer,
+    endingCount: Integer,
+) {
     if (initialCount === endingCount) {
         return;
     }
@@ -227,12 +232,20 @@ function* _removeFromPlayer(item: RpgInventory.RemovableItem, initialCount: Inte
 
     for (let i = 0; i < count; i++) {
         ownedObj.controls.count = initialCount - i - 1;
-        removedFigureObj = objRemovedFigure(item).at(playerObj).add(Rng.float(-8, 8), Rng.float(-32, -40)).show();
-        yield sleepf(Math.max(1, 10 - i * 0.1));
+        removedFigureObj = createRemovedFigureObjAtPlayer(item);
+        yield sleepAfterIterations(i);
     }
 
     yield () => !removedFigureObj || removedFigureObj.destroyed;
     ownedObj.destroy();
+}
+
+function createRemovedFigureObjAtPlayer(item: RpgInventory.RemovableItem) {
+    return objRemovedFigure(item).at(playerObj).add(Rng.float(-8, 8), Rng.float(-32, -40)).show();
+}
+
+function sleepAfterIterations(i: Integer) {
+    return sleepf(Math.max(1, 10 - i * 0.1));
 }
 
 function objRemovedFigure(item: RpgInventory.RemovableItem) {
@@ -368,7 +381,7 @@ function* emptyPocket() {
 
     for (const pocketItemId of Object.keys(result.items) as DataPocketItem.Id[]) {
         const removedCount = result.items[pocketItemId];
-        yield* _removeFromPlayer({ kind: "pocket_item", id: pocketItemId }, removedCount, 0);
+        yield* visualizeRemoveCountFromPlayer({ kind: "pocket_item", id: pocketItemId }, removedCount, 0);
     }
 
     return result;
@@ -388,7 +401,7 @@ function* askWhichToOffer<TItem extends RpgInventory.RemovableItem>(items: TItem
         return null;
     }
 
-    yield* removeFromPlayer(item, 1);
+    yield* removeCountFromPlayer(item, 1);
 
     return item;
 }
@@ -396,7 +409,7 @@ function* askWhichToOffer<TItem extends RpgInventory.RemovableItem>(items: TItem
 export const DramaInventory = {
     askRemoveCount,
     askWhichToOffer,
-    remove: removeFromPlayer,
+    removeCount: removeCountFromPlayer,
     pocket: {
         empty: emptyPocket,
     },

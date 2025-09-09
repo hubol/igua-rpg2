@@ -188,7 +188,7 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
         if (Rpg.inventory.keyItems.has("UpgradedPickaxe", 1)) {
             yield* show(`Oh! I see that you have the ${DataKeyItem.Manifest.UpgradedPickaxe.name}!`);
             if (yield* ask("Will you give it to me? You can have any valuables I mine")) {
-                yield* DramaInventory.remove({ kind: "key_item", id: "UpgradedPickaxe" }, 1);
+                yield* DramaInventory.removeCount({ kind: "key_item", id: "UpgradedPickaxe" }, 1);
                 yield* show("...?!", "Thank you so much!", "I will get right to work.");
                 Rpg.flags.outskirts.miner.hasUpgradedPickaxe = true;
                 Rpg.flags.outskirts.miner.pickaxeHealth += 15;

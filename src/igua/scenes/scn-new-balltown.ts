@@ -281,7 +281,7 @@ What would you like to do?`,
 That's worth ${count} credit(s). Do you want to deposit them?`)
                             ) {
                                 yield* show("Got it! Let's get those deposited...");
-                                yield* DramaInventory.remove({ kind: "pocket_item", id: "ComputerChip" }, count);
+                                yield* DramaInventory.removeCount({ kind: "pocket_item", id: "ComputerChip" }, count);
                                 Rpg.wallet.earn("mechanical_idol_credits", count);
                                 Rpg.experience.reward.computer.onDepositComputerChips(count);
                                 yield* show("All done!");
