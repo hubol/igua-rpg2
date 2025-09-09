@@ -37,6 +37,8 @@ function* choose({ message = "", items = [], noneMessage }: Partial<ChooseArgs>)
         items.push({ item: { kind: "potion", id: "__Fallback__" }, message: "This is a bug" });
     }
 
+    let value = items[0] ? items[0].item : null;
+
     const item: RpgInventory.Item = {
         kind: "equipment",
         id: "FactionDefenseMiner",
@@ -59,6 +61,7 @@ function* choose({ message = "", items = [], noneMessage }: Partial<ChooseArgs>)
             .step(self => {
                 if (self.selected) {
                     submessageObj.text = message;
+                    value = item;
                 }
             })
     );
@@ -70,6 +73,7 @@ function* choose({ message = "", items = [], noneMessage }: Partial<ChooseArgs>)
                 .step(self => {
                     if (self.selected) {
                         submessageObj.text = noneMessage;
+                        value = null;
                     }
                 }),
         );
@@ -118,7 +122,7 @@ function* choose({ message = "", items = [], noneMessage }: Partial<ChooseArgs>)
 
     obj.destroy();
 
-    return item;
+    return value;
 }
 
 function objMessage(message: string) {
