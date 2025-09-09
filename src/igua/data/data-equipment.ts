@@ -92,6 +92,8 @@ export namespace DataEquipment {
 
     export type Id = keyof typeof Manifest;
 
+    export const ids = Object.keys(Manifest) as Id[];
+
     export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataEquipment" });
 
     export const getName = (id: Id, level: Integer) =>

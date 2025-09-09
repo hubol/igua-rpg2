@@ -1,4 +1,6 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { DataEquipment } from "../data/data-equipment";
+import { DramaItem } from "../drama/drama-item";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnAlternatePivot } from "../mixins/mxn-alternate-pivot";
@@ -10,6 +12,7 @@ export function scnCobbler0() {
     const lvl = Lvl.Cobbler0();
     enrichGlueDripSources(lvl);
     enrichGluemaker(lvl);
+    enrichCobbler(lvl);
     lvl.LittleAngel.mixin(mxnSinePivot);
     lvl.LittleAngelShadow.mixin(mxnAlternatePivot);
 }
@@ -26,6 +29,18 @@ const atkGlueDrip = RpgAttack.create({
 function enrichGlueDripSources(lvl: LvlType.Cobbler0) {
     lvl.GlueDripSource0.atkDrip = atkGlueDrip;
     lvl.GlueDripSource1.atkDrip = atkGlueDrip;
+}
+
+function enrichCobbler(lvl: LvlType.Cobbler0) {
+    lvl.CobblerNpc.mixin(mxnCutscene, function* () {
+        yield* DramaItem.choose({
+            message: "What do you want to upgrade?",
+            items: DataEquipment.ids.map(id => ({
+                item: { kind: "equipment", id, level: 2 },
+                message: "Pussy and ass " + DataEquipment.getName(id, 2),
+            })),
+        });
+    });
 }
 
 function enrichGluemaker(lvl: LvlType.Cobbler0) {
