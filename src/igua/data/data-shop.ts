@@ -99,7 +99,7 @@ export namespace DataShop {
                 stocks: [
                     {
                         initialQuantity: 10,
-                        price: { currency: "valuables", deltaSold: 100, initial: 100 },
+                        price: { currency: "pocket", deltaSold: 50, initial: 50 },
                         product: { kind: "key_item", id: "EquipmentGlue" },
                     },
                     {
