@@ -12,7 +12,7 @@ export namespace DataItem {
     export function getName(item: RpgInventory.Item) {
         switch (item.kind) {
             case "equipment":
-                return DataEquipment.getById(item.id).name;
+                return DataEquipment.getName(item.id, item.level);
             case "key_item":
                 return DataKeyItem.getById(item.id).name;
             case "pocket_item":
@@ -27,7 +27,7 @@ export namespace DataItem {
             case "key_item":
                 return objFigureKeyItem(item.id);
             case "equipment":
-                return objFigureEquipment(item.id);
+                return objFigureEquipment(item.id, item.level);
             case "pocket_item":
                 return objFigurePocketItem(item.id);
             case "potion":

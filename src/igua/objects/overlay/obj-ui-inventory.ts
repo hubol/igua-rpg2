@@ -1,4 +1,4 @@
-import { DisplayObject, Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
+import { DisplayObject, Graphics, LINE_JOIN, Sprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
@@ -7,6 +7,7 @@ import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { Empty } from "../../../lib/types/empty";
+import { Null } from "../../../lib/types/null";
 import { DataEquipment } from "../../data/data-equipment";
 import { DataItem } from "../../data/data-item";
 import { DataKeyItem } from "../../data/data-key-item";
@@ -24,7 +25,6 @@ import { objFigureEquipment } from "../figures/obj-figure-equipment";
 import { objFigureKeyItem } from "../figures/obj-figure-key-item";
 import { objFigurePotion } from "../figures/obj-figure-potion";
 import { StepOrder } from "../step-order";
-import { objUiBubbleNumber } from "./obj-ui-bubble-numbers";
 import { objUiEquipmentBuffs, objUiEquipmentBuffsComparedTo } from "./obj-ui-equipment-buffs";
 
 export function objUiInventory() {
@@ -207,7 +207,7 @@ function objUiEquipmentChoosePage(
     objText.MediumBoldIrregular("", { tint: 0x00ff00 })
         .mixin(mxnTextTyped, () => {
             const equipment = availableLoadoutItems[pageObj.selectionIndex];
-            return equipment ? DataEquipment.getById(equipment.equipmentId).name : "Nothing";
+            return equipment ? DataEquipment.getName(equipment.equipmentId, equipment.level) : "Nothing";
         })
         .anchored(0, 1)
         .at(0, -3)
@@ -221,35 +221,29 @@ function objUiEquipment(
     variant: "show_empty",
     emptyObj = Sprite.from(Tx.Ui.Empty),
 ) {
-    let appliedEquipmentId: DataEquipment.Id | null | undefined = undefined;
+    const itemRef = {
+        value: Null<RpgEquipmentLoadout.Item>(),
+    };
 
     const renderObj = container();
 
-    function maybeApply() {
-        const itemToApply = getEquipmentLoadoutItem();
-        const equipmentIdToApply = itemToApply?.equipmentId ?? null;
+    return container(emptyObj, renderObj)
+        .step(() => itemRef.value = getEquipmentLoadoutItem(), StepOrder.BeforeCamera)
+        .coro(function* () {
+            while (true) {
+                renderObj.removeAllChildren();
 
-        if (equipmentIdToApply === appliedEquipmentId) {
-            return;
-        }
+                if (itemRef.value !== null) {
+                    objFigureEquipment(itemRef.value.equipmentId, itemRef.value.level).show(renderObj);
+                }
 
-        renderObj.removeAllChildren();
+                if (variant === "show_empty") {
+                    emptyObj.visible = !itemRef.value;
+                }
 
-        if (equipmentIdToApply !== null) {
-            objFigureEquipment(equipmentIdToApply).show(renderObj);
-        }
-
-        if (variant === "show_empty") {
-            emptyObj.visible = !equipmentIdToApply;
-        }
-
-        appliedEquipmentId = equipmentIdToApply;
-    }
-
-    emptyObj.invisible();
-    maybeApply();
-
-    return container(emptyObj, renderObj).step(maybeApply, StepOrder.BeforeCamera);
+                yield onMutate(itemRef);
+            }
+        }, StepOrder.BeforeCamera);
 }
 
 function createObjUiPotions() {

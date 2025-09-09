@@ -1,9 +1,7 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { RpgEconomy } from "../rpg/rpg-economy";
-import { DataEquipment } from "./data-equipment";
-import { DataKeyItem } from "./data-key-item";
+import { RpgInventory } from "../rpg/rpg-inventory";
 import { DataLib } from "./data-lib";
-import { DataPotion } from "./data-potion";
 
 export namespace DataShop {
     export interface Model {
@@ -22,17 +20,17 @@ export namespace DataShop {
             BalltownOutskirtsSecret: {
                 stocks: [
                     {
-                        product: { kind: "equipment", id: "JumpAtSpecialSignsRing" },
+                        product: { kind: "equipment", id: "JumpAtSpecialSignsRing", level: 1 },
                         initialQuantity: 2,
                         price: { currency: "jump", initial: 250, deltaSold: 500 },
                     },
                     {
-                        product: { kind: "equipment", id: "RichesRing" },
+                        product: { kind: "equipment", id: "RichesRing", level: 1 },
                         initialQuantity: 2,
                         price: { currency: "valuables", deltaSold: 800, initial: 200 },
                     },
                     {
-                        product: { kind: "equipment", id: "YellowRichesRing" },
+                        product: { kind: "equipment", id: "YellowRichesRing", level: 1 },
                         initialQuantity: 2,
                         price: { currency: "combat", deltaSold: 750, initial: 250 },
                     },
@@ -79,7 +77,7 @@ export namespace DataShop {
                     {
                         initialQuantity: 3,
                         price: { currency: "jump", initial: 100, deltaSold: 300 },
-                        product: { kind: "equipment", id: "IqIndicator" },
+                        product: { kind: "equipment", id: "IqIndicator", level: 1 },
                     },
                 ],
             },
@@ -88,7 +86,7 @@ export namespace DataShop {
                     {
                         initialQuantity: 1,
                         price: { currency: "combat", deltaSold: 0, initial: 100 },
-                        product: { kind: "equipment", id: "JumpAtSpecialSignsRing" },
+                        product: { kind: "equipment", id: "JumpAtSpecialSignsRing", level: 1 },
                     },
                     {
                         initialQuantity: 5,
@@ -124,26 +122,17 @@ export namespace DataShop {
 
     export type Id = keyof typeof Manifest;
 
-    export interface Product_Equipment {
-        kind: "equipment";
-        id: DataEquipment.Id;
-    }
-
-    export interface Product_KeyItem {
-        kind: "key_item";
-        id: DataKeyItem.Id;
-    }
-
-    export interface Product_Potion {
-        kind: "potion";
-        id: DataPotion.Id;
-    }
-
     // TODO can you buy pocket items?
     // probably...?
     // TODO can you buy flops?
     // not sure...?
-    export type Product = Product_Equipment | Product_KeyItem | Product_Potion;
+    export type Product = Product.Equipment | Product.KeyItem | Product.Potion;
+
+    export namespace Product {
+        export type Equipment = RpgInventory.Item.Equipment;
+        export type KeyItem = RpgInventory.Item.KeyItem;
+        export type Potion = RpgInventory.Item.Potion;
+    }
 
     export interface Price {
         currency: RpgEconomy.Currency.Id;

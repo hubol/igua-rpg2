@@ -1,5 +1,6 @@
 import { Texture } from "pixi.js";
 import { Tx } from "../../assets/textures";
+import { Integer } from "../../lib/math/number-alias-types";
 import { RpgPlayerBuffs } from "../rpg/rpg-player-buffs";
 import { DataLib } from "./data-lib";
 
@@ -92,4 +93,7 @@ export namespace DataEquipment {
     export type Id = keyof typeof Manifest;
 
     export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataEquipment" });
+
+    export const getName = (id: Id, level: Integer) =>
+        DataEquipment.getById(id).name + (level < 2 ? "" : (" Lvl." + level));
 }

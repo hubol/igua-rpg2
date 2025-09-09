@@ -35,7 +35,7 @@ export class RpgInventory {
     receive(item: RpgInventory.Item) {
         switch (item.kind) {
             case "equipment":
-                this.equipment.receive(item.id);
+                this.equipment.receive(item.id, item.level);
                 return;
             case "key_item":
                 this.keyItems.receive(item.id);
@@ -65,29 +65,31 @@ export class RpgInventory {
 }
 
 export namespace RpgInventory {
+    export type Item = Item.Equipment | Item.KeyItem | Item.PocketItem | Item.Potion;
+
     // TODO probably need to model them all
+    export namespace Item {
+        export interface Equipment {
+            kind: "equipment";
+            id: DataEquipment.Id;
+            level: Integer;
+        }
 
-    interface Item_Equipment {
-        kind: "equipment";
-        id: DataEquipment.Id;
+        export interface KeyItem {
+            kind: "key_item";
+            id: DataKeyItem.Id;
+        }
+
+        export interface Potion {
+            kind: "potion";
+            id: DataPotion.Id;
+        }
+
+        export interface PocketItem {
+            kind: "pocket_item";
+            id: DataPocketItem.Id;
+        }
     }
 
-    interface Item_KeyItem {
-        kind: "key_item";
-        id: DataKeyItem.Id;
-    }
-
-    interface Item_Potion {
-        kind: "potion";
-        id: DataPotion.Id;
-    }
-
-    interface Item_PocketItem {
-        kind: "pocket_item";
-        id: DataPocketItem.Id;
-    }
-
-    export type Item = Item_Equipment | Item_KeyItem | Item_PocketItem | Item_Potion;
-
-    export type RemovableItem = Item_KeyItem | Item_PocketItem | Item_Potion;
+    export type RemovableItem = Item.KeyItem | Item.PocketItem | Item.Potion;
 }

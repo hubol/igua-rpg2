@@ -96,7 +96,7 @@ export class RpgCharacterEquipment {
         return this._loadoutUpdatesCount;
     }
 
-    receive(equipmentId: DataEquipment.Id, level = 1) {
+    receive(equipmentId: DataEquipment.Id, level: Integer) {
         if (level < 1) {
             Logger.logContractViolationError(
                 "RpgCharacterEquipment.receive",

@@ -25,8 +25,9 @@ import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 
 const appearTxs = Tx.Effects.EquipmentAppear.split({ width: 40 });
 
+// TODO doesn't support levels
 export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
-    const figureObj = objFigureEquipment(equipmentId);
+    const figureObj = objFigureEquipment(equipmentId, 1);
     let physicsRadius = 13;
 
     if (figureObj instanceof Sprite) {
@@ -88,7 +89,7 @@ export function objCollectibleEquipment(equipmentId: DataEquipment.Id) {
                 self.play(Sfx.Collect.Equipment.rate(0.95, 1.05));
                 objFxEquipmentCollectBurst().at(self).show();
                 objFxCollectEquipmentNotification().at(self).show();
-                Rpg.inventory.equipment.receive(equipmentId);
+                Rpg.inventory.equipment.receive(equipmentId, 1);
                 self.destroy();
             });
 
