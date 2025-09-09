@@ -5,7 +5,7 @@ import { DataEquipment } from "../data/data-equipment";
 import { RpgPlayerBuffs } from "./rpg-player-buffs";
 
 export namespace RpgEquipmentLoadout {
-    export type Item = DataEquipment.Id | null;
+    export type Item = Readonly<{ equipmentId: DataEquipment.Id; level: Integer }> | null;
     export type Model = [Item, Item, Item, Item];
 
     const equipmentsOrder = Empty<DataEquipment.Id>();
@@ -18,19 +18,19 @@ export namespace RpgEquipmentLoadout {
         equipmentBonusMap.clear();
 
         for (let i = 0; i < loadout.length; i++) {
-            const equipmentId = loadout[i];
-            if (equipmentId === null) {
+            const item = loadout[i];
+            if (item === null) {
                 continue;
             }
 
-            const value = equipmentBonusMap.get(equipmentId);
+            const bonus = equipmentBonusMap.get(item.equipmentId);
 
-            if (value === undefined) {
-                equipmentsOrder.push(equipmentId);
+            if (bonus === undefined) {
+                equipmentsOrder.push(item.equipmentId);
             }
 
-            const nextValue = value === undefined ? 0 : (value + 1);
-            equipmentBonusMap.set(equipmentId, nextValue);
+            const nextBonus = bonus === undefined ? (item.level - 1) : (bonus + item.level);
+            equipmentBonusMap.set(item.equipmentId, nextBonus);
         }
 
         for (let i = 0; i < equipmentsOrder.length; i++) {

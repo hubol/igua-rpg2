@@ -1,7 +1,6 @@
 import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { clone } from "../../lib/object/clone";
-import { Empty } from "../../lib/types/empty";
 import { DataEquipment } from "../data/data-equipment";
 import { RpgEquipmentLoadout } from "./rpg-equipment-loadout";
 import { RpgPlayerBuffs } from "./rpg-player-buffs";
@@ -34,7 +33,7 @@ export class RpgCharacterEquipment {
             if (this._loadout[item.loadoutIndex] !== null) {
                 assertFailed = true;
             }
-            this._loadout[item.loadoutIndex] = item.name;
+            this._loadout[item.loadoutIndex] = item;
         }
 
         if (assertFailed) {
@@ -56,7 +55,7 @@ export class RpgCharacterEquipment {
 
         let count = 0;
         for (let i = 0; i < list.length; i++) {
-            if (list[i].name === equipmentId) {
+            if (list[i].equipmentId === equipmentId) {
                 count++;
             }
         }
@@ -97,8 +96,16 @@ export class RpgCharacterEquipment {
         return this._loadoutUpdatesCount;
     }
 
-    receive(equipmentId: DataEquipment.Id) {
-        this._state.list.push({ id: this._state.nextId++, name: equipmentId, loadoutIndex: null });
+    receive(equipmentId: DataEquipment.Id, level = 1) {
+        if (level < 1) {
+            Logger.logContractViolationError(
+                "RpgCharacterEquipment.receive",
+                new Error("Attempting to receive an equipment with level < 1, setting to 1."),
+                { level },
+            );
+            level = 1;
+        }
+        this._state.list.push({ id: this._state.nextId++, equipmentId, level, loadoutIndex: null });
         this._updateLoadout();
     }
 
@@ -127,9 +134,9 @@ export class RpgCharacterEquipment {
 export namespace RpgCharacterEquipment {
     export interface ObtainedEquipment {
         id: Integer;
-        // TODO rename to equipmentId
-        name: DataEquipment.Id;
+        equipmentId: DataEquipment.Id;
         loadoutIndex: Integer | null;
+        level: Integer;
     }
 
     export interface State {

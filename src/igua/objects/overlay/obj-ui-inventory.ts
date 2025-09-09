@@ -171,7 +171,7 @@ function objUiEquipmentChoosePage(
 
     const availableLoadoutItems = [...Rpg.inventory.equipment.list, null];
     const uiEquipmentObjs = availableLoadoutItems.map((equipment, i) => {
-        const obj = objUiEquipment(() => equipment?.name ?? null, "show_empty").at((i % 8) * 36, Math.floor(i / 8) * 36)
+        const obj = objUiEquipment(() => equipment ?? null, "show_empty").at((i % 8) * 36, Math.floor(i / 8) * 36)
             .mixin(mxnUiPageElement)
             .mixin(mxnUiPageButton, {
                 onPress: () => onChoose(equipment),
@@ -207,7 +207,7 @@ function objUiEquipmentChoosePage(
     objText.MediumBoldIrregular("", { tint: 0x00ff00 })
         .mixin(mxnTextTyped, () => {
             const equipment = availableLoadoutItems[pageObj.selectionIndex];
-            return equipment ? DataEquipment.getById(equipment.name).name : "Nothing";
+            return equipment ? DataEquipment.getById(equipment.equipmentId).name : "Nothing";
         })
         .anchored(0, 1)
         .at(0, -3)
@@ -217,31 +217,33 @@ function objUiEquipmentChoosePage(
 }
 
 function objUiEquipment(
-    getEquipmentName: () => RpgEquipmentLoadout.Item,
+    getEquipmentLoadoutItem: () => RpgEquipmentLoadout.Item,
     variant: "show_empty",
     emptyObj = Sprite.from(Tx.Ui.Empty),
 ) {
-    let appliedName: RpgEquipmentLoadout.Item | undefined = undefined;
+    let appliedEquipmentId: DataEquipment.Id | null | undefined = undefined;
 
     const renderObj = container();
 
     function maybeApply() {
-        const nameToApply = getEquipmentName();
-        if (nameToApply === appliedName) {
+        const itemToApply = getEquipmentLoadoutItem();
+        const equipmentIdToApply = itemToApply?.equipmentId ?? null;
+
+        if (equipmentIdToApply === appliedEquipmentId) {
             return;
         }
 
         renderObj.removeAllChildren();
 
-        if (nameToApply !== null) {
-            objFigureEquipment(nameToApply).show(renderObj);
+        if (equipmentIdToApply !== null) {
+            objFigureEquipment(equipmentIdToApply).show(renderObj);
         }
 
         if (variant === "show_empty") {
-            emptyObj.visible = !nameToApply;
+            emptyObj.visible = !equipmentIdToApply;
         }
 
-        appliedName = nameToApply;
+        appliedEquipmentId = equipmentIdToApply;
     }
 
     emptyObj.invisible();
