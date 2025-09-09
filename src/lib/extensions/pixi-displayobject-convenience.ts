@@ -182,7 +182,13 @@ Object.defineProperties(DisplayObject.prototype, {
                 return this;
             }
 
-            return this.getBounds(false, r)
+            const bounds = this.getBounds(false, r);
+
+            if (bounds.x === 0 && bounds.y === 0 && bounds.width === 0 && bounds.height === 0) {
+                return this.getWorldPosition();
+            }
+
+            return bounds
                 .getCenter()
                 .vround()
                 .add(-stage.x, -stage.y);
