@@ -2,19 +2,8 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { RpgPocket } from "./rpg-pocket";
 
-interface CheckResult_Empty {
-    kind: "empty";
-    count: 0;
-}
-
-interface CheckResult_NotEmpty {
-    kind: "not_empty";
-    pocketItemId: DataPocketItem.Id;
-    count: Integer;
-}
-
-const empty: CheckResult_Empty = { kind: "empty", count: 0 };
-const notEmpty: CheckResult_NotEmpty = { kind: "not_empty", pocketItemId: "__Fallback__", count: 0 };
+const empty: RpgStashPocket.CheckBalance.Empty = { kind: "empty", count: 0 };
+const notEmpty: RpgStashPocket.CheckBalance.NotEmpty = { kind: "not_empty", pocketItemId: "__Fallback__", count: 0 };
 
 export class RpgStashPockets {
     private readonly _cache: Partial<Record<Integer, RpgStashPocket>> = {};
@@ -33,13 +22,22 @@ export class RpgStashPockets {
     }
 
     static createState(): RpgStashPockets.State {
-        return {};
+        return {
+            balances: {},
+            discoveredIds: new Set(),
+        };
     }
 }
 
 namespace RpgStashPockets {
-    export type State = Record<Integer, { pocketItemId: DataPocketItem.Id; count: Integer }>;
-    export type Operation = "withdraw" | "deposit" | "swap";
+    export interface State {
+        balances: Partial<Record<Integer, { pocketItemId: DataPocketItem.Id; count: Integer }>>;
+        discoveredIds: Set<Integer>;
+    }
+
+    export namespace State {
+        export interface Balance {}
+    }
 }
 
 class RpgStashPocket {
@@ -50,26 +48,26 @@ class RpgStashPocket {
     ) {
     }
 
-    check() {
-        const deposit = this._state[this._id];
-        if (!deposit || deposit.count < 1) {
+    check(): RpgStashPocket.CheckBalance {
+        const balance = this._state.balances[this._id];
+        if (!balance || balance.count < 1) {
             return empty;
         }
 
-        notEmpty.count = deposit.count;
-        notEmpty.pocketItemId = deposit.pocketItemId;
+        notEmpty.count = balance.count;
+        notEmpty.pocketItemId = balance.pocketItemId;
         return notEmpty;
     }
 
-    checkPossibleOperations(): RpgStashPockets.Operation[] {
-        const existingDeposit = this.check();
+    checkPossibleOperations(): RpgStashPocket.Operation[] {
+        const balance = this.check();
         const currentSlot = this._pocket.receivingSlot;
 
-        if (existingDeposit.kind === "empty") {
+        if (balance.kind === "empty") {
             return currentSlot.isEmpty ? [] : ["deposit"];
         }
 
-        if (existingDeposit.pocketItemId === currentSlot.item) {
+        if (balance.pocketItemId === currentSlot.item) {
             return ["deposit", "withdraw"];
         }
 
@@ -77,55 +75,74 @@ class RpgStashPocket {
     }
 
     deposit() {
-        const existingDeposit = this.check();
+        const balance = this.check();
         const { count, item } = this._pocket.receivingSlot;
 
         // TODO assert that existing deposit item and deposited item are identical, and that count > 0 and item is truthy
 
-        this._state[this._id] = {
+        this._state.balances[this._id] = {
             pocketItemId: item!,
-            count: count + existingDeposit.count,
+            count: count + balance.count,
         };
 
         this._pocket.receivingSlot.force(null, 0, "stash_pocket_operation");
     }
 
     withdraw() {
-        const existingDeposit = this.check();
+        const balance = this.check();
         const { count } = this._pocket.receivingSlot;
 
         // TODO assert that existing deposit item and deposited item are identical, and that count > 0 and item is truthy
 
-        if (existingDeposit.kind === "empty") {
+        if (balance.kind === "empty") {
             // TODO assert fail
             return;
         }
 
-        delete this._state[this._id];
+        delete this._state.balances[this._id];
         this._pocket.receivingSlot.force(
-            existingDeposit.pocketItemId,
-            count + existingDeposit.count,
+            balance.pocketItemId,
+            count + balance.count,
             "stash_pocket_operation",
         );
     }
 
     swap() {
-        const existingDeposit = this.check();
+        const balance = this.check();
         const { count, item, isEmpty } = this._pocket.receivingSlot;
 
         if (isEmpty) {
-            delete this._state[this._id];
+            delete this._state.balances[this._id];
         }
         else {
-            this._state[this._id] = { count, pocketItemId: item! };
+            this._state.balances[this._id] = { count, pocketItemId: item! };
         }
 
-        if (existingDeposit.kind === "not_empty") {
+        if (balance.kind === "not_empty") {
             this._pocket.receivingSlot.force(
-                existingDeposit.pocketItemId,
-                existingDeposit.count,
+                balance.pocketItemId,
+                balance.count,
                 "stash_pocket_operation",
             );
         }
     }
+}
+
+namespace RpgStashPocket {
+    export type CheckBalance = Readonly<CheckBalance.Empty | CheckBalance.NotEmpty>;
+
+    export namespace CheckBalance {
+        export interface Empty {
+            kind: "empty";
+            count: 0;
+        }
+
+        export interface NotEmpty {
+            kind: "not_empty";
+            pocketItemId: DataPocketItem.Id;
+            count: Integer;
+        }
+    }
+
+    export type Operation = "withdraw" | "deposit" | "swap";
 }
