@@ -105,7 +105,25 @@ export class RpgCharacterEquipment {
             );
             level = 1;
         }
-        this._state.list.push({ id: this._state.nextId++, equipmentId, level, loadoutIndex: null });
+        const obtainedEquipment = { id: this._state.nextId++, equipmentId, level, loadoutIndex: null };
+        this._state.list.push(obtainedEquipment);
+        this._updateLoadout();
+
+        return obtainedEquipment;
+    }
+
+    remove(obtainedId: Integer) {
+        const index = this._state.list.findIndex(obtainedEquipment => obtainedEquipment.id === obtainedId);
+        if (index === -1) {
+            Logger.logContractViolationError(
+                "RpgCharacterEquipment.remove",
+                new Error("Attempted to remove an obtainedId that does not exist in the list"),
+                { obtainedId },
+            );
+            return;
+        }
+
+        this._state.list.splice(index, 1);
         this._updateLoadout();
     }
 

@@ -232,69 +232,12 @@ function* visualizeRemoveCountFromPlayer(
 
     for (let i = 0; i < count; i++) {
         ownedObj.controls.count = initialCount - i - 1;
-        removedFigureObj = createRemovedFigureObjAtPlayer(item);
-        yield sleepAfterIterations(i);
+        removedFigureObj = DramaItem.createRemovedItemFigureObjAtPlayer(item);
+        yield DramaItem.sleepAfterRemoveIteration(i);
     }
 
     yield () => !removedFigureObj || removedFigureObj.destroyed;
     ownedObj.destroy();
-}
-
-function createRemovedFigureObjAtPlayer(item: RpgInventory.RemovableItem) {
-    return objRemovedFigure(item).at(playerObj).add(Rng.float(-8, 8), Rng.float(-32, -40)).show();
-}
-
-function sleepAfterIterations(i: Integer) {
-    return sleepf(Math.max(1, 10 - i * 0.1));
-}
-
-function objRemovedFigure(item: RpgInventory.RemovableItem) {
-    const speed = vnew(Rng.float(-1, 1), Rng.float(-2.5, -3.5));
-    const gravity = Rng.float(0.1, 0.15);
-
-    let angle = 0;
-
-    return DataItem.getFigureObj(item)
-        .pivotedUnit(0.5, 0.5)
-        .scaled(0, 0)
-        .coro(function* (self) {
-            yield* Coro.all([
-                interpv(self.scale).steps(3).to(1, 1).over(100),
-                interpvr(self).factor(factor.sine).translate(0, -6).over(100),
-            ]);
-
-            const motionObj = container()
-                .step(() => {
-                    self.add(speed);
-                    speed.y += gravity;
-
-                    angle += speed.x * 4 + Math.sign(speed.x) * 2;
-                    self.angle = Math.round(angle / 90) * 90;
-                })
-                .show(self);
-
-            yield () => speed.y >= 0;
-
-            const speakerObj = DramaLib.Speaker.current;
-
-            if (speakerObj) {
-                motionObj.destroy();
-
-                yield sleepf(10);
-
-                yield* Coro.race([
-                    () => speakerObj.destroyed,
-                    Coro.chain([sleepf(10), () => speakerObj.collides(self)]),
-                    interpvr(self).factor(factor.sine).to(speakerObj.getWorldCenter()).over(300),
-                ]);
-            }
-            else {
-                yield sleepf(90);
-            }
-
-            objFxBurst32().at(self).show();
-            self.destroy();
-        });
 }
 
 function objHeader(text: string, tint: RgbInt) {

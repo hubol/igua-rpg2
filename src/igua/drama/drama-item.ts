@@ -5,7 +5,9 @@ import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
+import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
+import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataItem } from "../data/data-item";
@@ -13,6 +15,8 @@ import { Input, layers } from "../globals";
 import { mxnBoilRotate } from "../mixins/mxn-boil-rotate";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { mxnMotion } from "../mixins/mxn-motion";
+import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
+import { playerObj } from "../objects/obj-player";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { DramaLib } from "./drama-lib";
@@ -216,6 +220,65 @@ function mxnSelect(obj: Container) {
         });
 }
 
+function createRemovedItemFigureObjAtPlayer(item: RpgInventory.Item) {
+    return objRemovedItemFigure(item).at(playerObj).add(Rng.float(-8, 8), Rng.float(-32, -40)).show();
+}
+
+function sleepAfterRemoveIteration(index: Integer) {
+    return sleepf(Math.max(1, 10 - index * 0.1));
+}
+
+function objRemovedItemFigure(item: RpgInventory.Item) {
+    const speed = vnew(Rng.float(-1, 1), Rng.float(-2.5, -3.5));
+    const gravity = Rng.float(0.1, 0.15);
+
+    let angle = 0;
+
+    return DataItem.getFigureObj(item)
+        .pivotedUnit(0.5, 0.5)
+        .scaled(0, 0)
+        .coro(function* (self) {
+            yield* Coro.all([
+                interpv(self.scale).steps(3).to(1, 1).over(100),
+                interpvr(self).factor(factor.sine).translate(0, -6).over(100),
+            ]);
+
+            const motionObj = container()
+                .step(() => {
+                    self.add(speed);
+                    speed.y += gravity;
+
+                    angle += speed.x * 4 + Math.sign(speed.x) * 2;
+                    self.angle = Math.round(angle / 90) * 90;
+                })
+                .show(self);
+
+            yield () => speed.y >= 0;
+
+            const speakerObj = DramaLib.Speaker.current;
+
+            if (speakerObj) {
+                motionObj.destroy();
+
+                yield sleepf(10);
+
+                yield* Coro.race([
+                    () => speakerObj.destroyed,
+                    Coro.chain([sleepf(10), () => speakerObj.collides(self)]),
+                    interpvr(self).factor(factor.sine).to(speakerObj.getWorldCenter()).over(300),
+                ]);
+            }
+            else {
+                yield sleepf(90);
+            }
+
+            objFxBurst32().at(self).show();
+            self.destroy();
+        });
+}
+
 export const DramaItem = {
     choose,
+    createRemovedItemFigureObjAtPlayer,
+    sleepAfterRemoveIteration,
 };

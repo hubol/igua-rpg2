@@ -1,9 +1,11 @@
-import { Integer } from "../../lib/math/number-alias-types";
+import { Logger } from "../../lib/game-engine/logger";
 import { isNotNullish } from "../../lib/types/guards/is-not-nullish";
 import { DataEquipment } from "../data/data-equipment";
 import { DataItem } from "../data/data-item";
 import { Rpg } from "../rpg/rpg";
 import { RpgCharacterEquipment } from "../rpg/rpg-character-equipment";
+import { RpgInventory } from "../rpg/rpg-inventory";
+import { DramaInventory } from "./drama-inventory";
 import { DramaItem } from "./drama-item";
 import { show } from "./show";
 
@@ -27,33 +29,74 @@ function* upgrade() {
     }
 
     const options = upgradeableEquipments.map(
-        ({ equipmentId, resultingLevel, obtainedEquipments: [equipment0, equipment1] }) => {
-            const item = { kind: "equipment" as const, level: resultingLevel, id: equipmentId };
+        ({ resultingEquipment, obtainedEquipments: [equipment0, equipment1] }) => {
             const message = `I'll make a ${
-                DataItem.getName(item)
+                DataItem.getName(resultingEquipment)
             }\nby combining your Lvl ${equipment0.level} and Lvl ${equipment1.level} with Shoe Glue`;
             return ({
-                item,
+                item: resultingEquipment,
                 message,
             });
         },
     );
 
-    const item = yield* DramaItem.choose({
+    const chosenEquipment = yield* DramaItem.choose({
         message: "Which shoes to upgrade?",
         noneMessage: "Uhhh... nevermind",
         options,
     });
 
-    if (item === null) {
+    if (chosenEquipment === null) {
         return;
+    }
+
+    const equipmentToUpgrade = upgradeableEquipments.find(upgradeable =>
+        upgradeable.resultingEquipment === chosenEquipment
+    );
+
+    if (!equipmentToUpgrade) {
+        Logger.logAssertError(
+            "DramaEquipment.upgrade",
+            new Error("Failed to find chosenEquipment in upgradeableEquipments"),
+            { upgradeableEquipments, chosenEquipment },
+        );
+
+        return;
+    }
+
+    yield* DramaInventory.removeCount({ kind: "key_item", id: "EquipmentGlue" }, 1);
+
+    for (const obtainedEquipment of equipmentToUpgrade.obtainedEquipments) {
+        Rpg.inventory.equipment.remove(obtainedEquipment.id);
+    }
+
+    {
+        const [removeItem0, removeItem1]: RpgInventory.Item.Equipment[] = equipmentToUpgrade.obtainedEquipments.map((
+            { equipmentId, level },
+        ) => ({ kind: "equipment", id: equipmentId, level }));
+        DramaItem.createRemovedItemFigureObjAtPlayer(removeItem0);
+        yield DramaItem.sleepAfterRemoveIteration(0);
+        const removedItemObj = DramaItem.createRemovedItemFigureObjAtPlayer(removeItem1);
+        yield DramaItem.sleepAfterRemoveIteration(1);
+        yield () => removedItemObj.destroyed;
+    }
+
+    const freeLoadoutIndex = Rpg.inventory.equipment.loadout.findIndex(item => item === null);
+
+    // TODO animated receive items!!
+    const obtainedEquipment = Rpg.inventory.equipment.receive(
+        equipmentToUpgrade.resultingEquipment.id,
+        equipmentToUpgrade.resultingEquipment.level,
+    );
+
+    if (equipmentToUpgrade.areEitherEquipped) {
+        Rpg.inventory.equipment.equip(obtainedEquipment.id, freeLoadoutIndex);
     }
 }
 
 interface UpgradeableEquipment {
-    equipmentId: DataEquipment.Id;
     obtainedEquipments: [RpgCharacterEquipment.ObtainedEquipment, RpgCharacterEquipment.ObtainedEquipment];
-    resultingLevel: Integer;
+    resultingEquipment: RpgInventory.Item.Equipment;
     areEitherEquipped: boolean;
 }
 
@@ -68,11 +111,14 @@ function toUpgradeableEquipment(
     const [equipment0, equipment1] = [...obtainedEquipments].sort((a, b) => b.level - a.level);
 
     return {
-        equipmentId,
         obtainedEquipments: [equipment0, equipment1],
         areEitherEquipped: equipment0.loadoutIndex !== null
             || equipment1.loadoutIndex !== null,
-        resultingLevel: equipment0.level + equipment1.level,
+        resultingEquipment: {
+            kind: "equipment",
+            id: equipmentId,
+            level: equipment0.level + equipment1.level,
+        },
     };
 }
 
