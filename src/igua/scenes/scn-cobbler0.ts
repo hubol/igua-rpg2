@@ -1,5 +1,6 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { DataEquipment } from "../data/data-equipment";
+import { DramaEquipment } from "../drama/drama-equipment";
 import { DramaItem } from "../drama/drama-item";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
@@ -33,16 +34,7 @@ function enrichGlueDripSources(lvl: LvlType.Cobbler0) {
 
 function enrichCobbler(lvl: LvlType.Cobbler0) {
     lvl.CobblerNpc.mixin(mxnCutscene, function* () {
-        const result = yield* DramaItem.choose({
-            message: "What do you want to upgrade?",
-            noneMessage: "asdfasdf",
-            options: DataEquipment.ids.map(id => ({
-                item: { kind: "equipment", id, level: 2 },
-                message: "Pussy and ass " + DataEquipment.getName(id, 2),
-            })),
-        });
-
-        console.log(result);
+        yield* DramaEquipment.upgrade();
     });
 }
 

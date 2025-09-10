@@ -1,4 +1,4 @@
-import { Container, Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
+import { BitmapText, Container, Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
 import { Logger } from "../../lib/game-engine/logger";
@@ -41,15 +41,17 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
 
     let value = options[0] ? options[0].item : null;
 
+    const colors = DramaLib.Speaker.getColors();
+
     const obj = container()
         .mixin(mxnHudModifiers.mxnHideStatus)
         .show(layers.overlay.messages);
 
-    const messageObj = objMessage(message)
+    const messageObj = objMessage(objText.MediumIrregular(message, { tint: colors.textPrimary }))
         .at(renderer.width / 2, 12)
         .show(obj);
 
-    const submessageObj = objMessage("")
+    const submessageObj = objMessage(objText.Medium("", { tint: colors.textPrimary }))
         .at(renderer.width / 2, 220)
         .show(obj);
 
@@ -138,12 +140,8 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
     return value;
 }
 
-function objMessage(message: string) {
+function objMessage(textObj: BitmapText) {
     const colors = DramaLib.Speaker.getColors();
-
-    const textObj = objText.MediumIrregular(message, { tint: colors.textPrimary })
-        .at(0, 12)
-        .anchored(0.5, 0.5);
 
     return container(
         new Graphics()
@@ -160,7 +158,9 @@ function objMessage(message: string) {
             .pivoted(0, 10)
             .at(0, 10)
             .mixin(mxnBoilRotate),
-        textObj,
+        textObj
+            .at(0, 12)
+            .anchored(0.5, 0.5),
     )
         .merge({
             set text(value: string) {
