@@ -3,13 +3,14 @@ import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
 import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
-import { factor, interp, interpv, interpvr } from "../../lib/game-engine/routines/interp";
+import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataItem } from "../data/data-item";
 import { Input, layers } from "../globals";
+import { mxnBoilRotate } from "../mixins/mxn-boil-rotate";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { mxnMotion } from "../mixins/mxn-motion";
 import { RpgInventory } from "../rpg/rpg-inventory";
@@ -99,6 +100,10 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
 
     pageObj.navigation = false;
 
+    pageObj.selected?.coro(function* (self) {
+        yield interpvr(self).factor(factor.sine).to(renderer.width / 2, renderer.height / 2).over(1000);
+    });
+
     if (elementObjs.length > 1) {
         elementObjs
             .filter(obj => !obj.selected)
@@ -116,8 +121,17 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
 
         yield sleep(700);
     }
+    else {
+        yield sleep(400);
+    }
 
-    yield interp(obj, "alpha").steps(3).to(0).over(500);
+    yield* Coro.all([
+        interpvr(messageObj).factor(factor.sine).translate(-renderer.width, 0).over(500),
+        interpvr(submessageObj).factor(factor.sine).translate(renderer.width, 0).over(500),
+    ]);
+
+    obj.alpha = 0.5;
+    yield sleep(200);
 
     obj.destroy();
 
@@ -142,7 +156,10 @@ function objMessage(message: string) {
                 join: LINE_JOIN.ROUND,
                 width: 8,
             })
-            .drawRect(-150, 0, 300, 20),
+            .drawRect(-150, 0, 300, 20)
+            .pivoted(0, 10)
+            .at(0, 10)
+            .mixin(mxnBoilRotate),
         textObj,
     )
         .merge({
