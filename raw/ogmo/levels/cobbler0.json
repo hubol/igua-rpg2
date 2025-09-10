@@ -335,7 +335,7 @@
           "y": 128,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "", "checkpointName": "", "name": "", "depth": 0}
+          "values": {"sceneName": "scnStrangeMarket", "checkpointName": "fromCobbler0", "name": "", "depth": 0}
         },
         {
           "name": "WaterDripSource",

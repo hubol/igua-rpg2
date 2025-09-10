@@ -63,6 +63,18 @@
           "rotation": 270,
           "tint": "#ffffff",
           "values": {"sceneName": "scnPlainsSuggestive", "checkpointName": "fromWorldMap", "name": "", "depth": 0}
+        },
+        {
+          "name": "GateMap",
+          "id": 4,
+          "_eid": "53836309",
+          "x": 479,
+          "y": 579,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 450,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnStrangeMarket", "checkpointName": "fromWorldMap", "name": "", "depth": 0}
         }
       ]
     },
@@ -153,6 +165,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromPlainsSuggestiveRight", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 5,
+          "_eid": "19953026",
+          "x": 504,
+          "y": 616,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromStrangeMarket", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -1612,6 +1635,78 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 493,
+          "y": 612,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#6b55c3",
+          "texture": "world map/puddle 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 481,
+          "y": 598,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#6b55c3",
+          "texture": "terrain/earth/splotch 225 degree.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 469,
+          "y": 602,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#6b55c3",
+          "texture": "terrain/earth/spots.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 473,
+          "y": 607,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#6b55c3",
+          "texture": "terrain/earth/small platformer.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 496,
+          "y": 600,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#6b55c3",
+          "texture": "terrain/earth/small platformer.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 465,
+          "y": 597,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#6b55c3",
+          "texture": "terrain/earth/small platformer.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"

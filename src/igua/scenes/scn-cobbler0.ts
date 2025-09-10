@@ -1,7 +1,7 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
-import { DataEquipment } from "../data/data-equipment";
+import { Mzk } from "../../assets/music";
+import { Jukebox } from "../core/igua-audio";
 import { DramaEquipment } from "../drama/drama-equipment";
-import { DramaItem } from "../drama/drama-item";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnAlternatePivot } from "../mixins/mxn-alternate-pivot";
@@ -10,6 +10,7 @@ import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { RpgAttack } from "../rpg/rpg-attack";
 
 export function scnCobbler0() {
+    Jukebox.play(Mzk.PieShake);
     const lvl = Lvl.Cobbler0();
     enrichGlueDripSources(lvl);
     enrichGluemaker(lvl);
