@@ -86,6 +86,7 @@ export function getInitialRpgProgress() {
             collectedValuableUids: new Set<Integer>(),
             idols: RpgIdols.createState(),
             metNpcPersonaIds: new Set<DataNpcPersona.Id>(),
+            revealedWorldMapGateUids: new Set<Integer>(),
             shops: RpgShops.createState(),
             stashPockets: RpgStashPockets.createState(),
         },

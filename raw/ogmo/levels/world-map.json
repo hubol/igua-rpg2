@@ -37,8 +37,9 @@
           "originX": 16,
           "originY": 16,
           "rotation": 2340,
+          "uid": 175755215936800,
           "tint": "#ffffff",
-          "values": {"sceneName": "scnNewBalltownUnderneath", "checkpointName": "fromMapRight", "name": "", "depth": 0}
+          "values": {"sceneName": "scnNewBalltownUnderneath", "checkpointName": "fromMapRight", "name": "", "depth": 0, "visible": true}
         },
         {
           "name": "GateMap",
@@ -49,8 +50,9 @@
           "originX": 16,
           "originY": 16,
           "rotation": 0,
+          "uid": 175755215936900,
           "tint": "#ffffff",
-          "values": {"sceneName": "scnNewBalltownUnderneath", "checkpointName": "fromMapLeft", "name": "", "depth": 0}
+          "values": {"sceneName": "scnNewBalltownUnderneath", "checkpointName": "fromMapLeft", "name": "", "depth": 0, "visible": true}
         },
         {
           "name": "GateMap",
@@ -61,8 +63,9 @@
           "originX": 16,
           "originY": 16,
           "rotation": 270,
+          "uid": 175755215936901,
           "tint": "#ffffff",
-          "values": {"sceneName": "scnPlainsSuggestive", "checkpointName": "fromWorldMap", "name": "", "depth": 0}
+          "values": {"sceneName": "scnPlainsSuggestive", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": false}
         },
         {
           "name": "GateMap",
@@ -73,8 +76,9 @@
           "originX": 16,
           "originY": 16,
           "rotation": 450,
+          "uid": 175755215936902,
           "tint": "#ffffff",
-          "values": {"sceneName": "scnStrangeMarket", "checkpointName": "fromWorldMap", "name": "", "depth": 0}
+          "values": {"sceneName": "scnStrangeMarket", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": false}
         }
       ]
     },
@@ -1646,7 +1650,8 @@
           "texture": "world map/puddle 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 481,
@@ -1658,7 +1663,8 @@
           "texture": "terrain/earth/splotch 225 degree.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 469,
@@ -1670,7 +1676,8 @@
           "texture": "terrain/earth/spots.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 473,
@@ -1682,7 +1689,8 @@
           "texture": "terrain/earth/small platformer.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 496,
@@ -1694,7 +1702,8 @@
           "texture": "terrain/earth/small platformer.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 465,
@@ -1706,7 +1715,8 @@
           "texture": "terrain/earth/small platformer.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

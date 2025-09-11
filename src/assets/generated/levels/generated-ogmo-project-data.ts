@@ -24,10 +24,10 @@ export namespace OgmoEntities {
   export type PocketableItemA = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type PocketableItemB = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type GateVertical = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
+  export type GateMap = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number; visible: boolean }> & { uid: number };
   export type EnemySuggestive = OgmoFactory.EntityBase<{ name: string; depth: number; variant: "level0" | "level1" }> & { uid: number };
   export type EnvironmentSparkleMarker = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type Idol = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
-  export type GateMap = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
   export type StashPocket = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
   export type PlayerDev = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type EnemyMiffed = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
@@ -55,10 +55,10 @@ export interface OgmoEntityResolverBase {
   PocketableItemA: (entity: OgmoEntities.PocketableItemA) => unknown;
   PocketableItemB: (entity: OgmoEntities.PocketableItemB) => unknown;
   GateVertical: (entity: OgmoEntities.GateVertical) => unknown;
+  GateMap: (entity: OgmoEntities.GateMap) => unknown;
   EnemySuggestive: (entity: OgmoEntities.EnemySuggestive) => unknown;
   EnvironmentSparkleMarker: (entity: OgmoEntities.EnvironmentSparkleMarker) => unknown;
   Idol: (entity: OgmoEntities.Idol) => unknown;
-  GateMap: (entity: OgmoEntities.GateMap) => unknown;
   StashPocket: (entity: OgmoEntities.StashPocket) => unknown;
   PlayerDev: (entity: OgmoEntities.PlayerDev) => unknown;
   EnemyMiffed: (entity: OgmoEntities.EnemyMiffed) => unknown;

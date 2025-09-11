@@ -3564,10 +3564,10 @@ export const Lvl = {
       fromPlainsSuggestiveCavern: e(r["Checkpoint"], { x: 920, y: 720, flippedX: true, values: { name: "fromPlainsSuggestiveCavern", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromPlainsSuggestiveRight: e(r["Checkpoint"], { x: 989, y: 629, flippedX: false, values: { name: "fromPlainsSuggestiveRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromStrangeMarket: e(r["Checkpoint"], { x: 504, y: 616, flippedX: false, values: { name: "fromStrangeMarket", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
-      GateMap: e(r["GateMap"], { x: 821, y: 495, rotation: 2340, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0 }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_1: e(r["GateMap"], { x: 637, y: 497, rotation: 0, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0 }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_2: e(r["GateMap"], { x: 942, y: 604, rotation: 270, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0 }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_3: e(r["GateMap"], { x: 479, y: 579, rotation: 450, values: { sceneName: "scnStrangeMarket", checkpointName: "fromWorldMap", name: "", depth: 0 }, tint: 0xffffff }, "RegionEntities"),
+      GateMap: e(r["GateMap"], { x: 821, y: 495, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_1: e(r["GateMap"], { x: 637, y: 497, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_2: e(r["GateMap"], { x: 942, y: 604, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_3: e(r["GateMap"], { x: 479, y: 579, rotation: 450, uid: 175755215936902, values: { sceneName: "scnStrangeMarket", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
     };
   },
 };
