@@ -20,7 +20,9 @@ interface MxnCollectibleTransient {
     kind: "transient";
 }
 
-type MxnCollectibleArgs = MxnCollectibleUid | MxnCollectibleFlag | MxnCollectibleTransient;
+type MxnCollectibleArgs = (MxnCollectibleUid | MxnCollectibleFlag | MxnCollectibleTransient) & {
+    collectable?: boolean;
+};
 
 function isCollected(args: MxnCollectibleArgs): boolean {
     if (args.kind === "transient") {
@@ -49,7 +51,10 @@ export function mxnCollectible(obj: DisplayObject, args: MxnCollectibleArgs) {
 
     const collectible = obj
         .dispatches<"collected">()
-        .merge({ collectable: true, collectableOnlyIfPlayerHasControl: true })
+        .merge({
+            collectable: args.collectable === undefined ? true : args.collectable,
+            collectableOnlyIfPlayerHasControl: true,
+        })
         .step(self => {
             if (initialCollected) {
                 return obj.destroy();

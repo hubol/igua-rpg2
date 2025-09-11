@@ -45,7 +45,7 @@ export function objValuable(
     uid?: number,
     reason: RpgPlayerWallet.EarnReason = "default",
 ) {
-    let collectableAfterSteps = 3;
+    let collectableAfterSteps = 5;
 
     const config = valuableConfigs[kind];
     return Sprite.from(config.texture)
@@ -53,7 +53,7 @@ export function objValuable(
         .mixin(
             mxnCollectible,
             uid === undefined
-                ? { kind: "transient" }
+                ? { kind: "transient", collectable: false }
                 : { kind: "uid", uid, set: Rpg.programmaticFlags.collectedValuableUids },
         )
         .handles("collected", self => {
