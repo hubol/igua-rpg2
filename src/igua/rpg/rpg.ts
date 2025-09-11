@@ -39,7 +39,7 @@ function createRpg(data: RpgProgressData) {
     const pocket = new RpgPocket(data.character.inventory.pocket, experience);
     const potions = new RpgPotions(data.character.inventory.potions);
     const keyItems = new RpgKeyItems(data.character.inventory.keyItems);
-    const stashPockets = new RpgStashPockets(stashPocketsState, pocket);
+    const stashPockets = new RpgStashPockets(stashPocketsState, pocket, experience.reward);
     const attributes = new RpgPlayerAttributes(data.character.attributes, buffs);
     const status = new RpgPlayerStatus(data.character.status, attributes, buffs);
     const player = new RpgPlayer(data.character, attributes, buffs, status);

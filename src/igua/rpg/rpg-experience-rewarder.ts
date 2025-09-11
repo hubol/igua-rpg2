@@ -27,98 +27,103 @@ const questComplexityToExperience = {
 
 const rerollCountToExperience = [0, 3, 9, 15, 25, 50, 99];
 
-interface RpgExperienceRewarder {
-    new(state: RpgExperience.State): ReturnType<typeof createRpgExperienceRewarder>;
-}
+type IncreaseFn = (amount: Integer) => void;
 
-export const RpgExperienceRewarder = function RpgExperienceRewarder (
-    this: RpgExperienceRewarder,
-    state: RpgExperience.State,
-) {
-    Object.assign(this, createRpgExperienceRewarder(state));
-} as any as RpgExperienceRewarder;
+export class RpgExperienceRewarder {
+    constructor(private readonly _state: RpgExperience.State) {
+    }
 
-function createRpgExperienceRewarder(state: RpgExperience.State) {
-    return {
-        combat: {
-            onAttackDamage(attack: RpgAttack.Model, damageDealtToEnemy: Integer) {
-                if (attack.quirks.isPlayerClawMeleeAttack) {
-                    state.combat += 4;
-                }
-                else if (attack.quirks.isPlayerMeleeAttack) {
-                    state.combat += 1;
-                }
-                else {
-                    // TODO not sure if player should receive XP equal to damage dealt for non-melee attacks. But could be interesting!
-                    state.combat += damageDealtToEnemy;
-                }
-            },
-            onEnemyDefeat(enemyMaxHealth: Integer) {
-                state.combat += Math.ceil(enemyMaxHealth / 5);
-            },
+    readonly combat = this._expose("combat", (increase) => ({
+        onAttackDamage(attack: RpgAttack.Model, damageDealtToEnemy: Integer) {
+            if (attack.quirks.isPlayerClawMeleeAttack) {
+                increase(4);
+            }
+            else if (attack.quirks.isPlayerMeleeAttack) {
+                increase(1);
+            }
+            else {
+                // TODO not sure if player should receive XP equal to damage dealt for non-melee attacks. But could be interesting!
+                increase(damageDealtToEnemy);
+            }
         },
-        computer: {
-            onDepositComputerChips(count: Integer) {
-                state.computer += count * 2;
-            },
-            onInteract(kind: ComputerInteractionKind) {
-                state.computer += computerInteractionsToExperience[kind];
-            },
+        onEnemyDefeat(enemyMaxHealth: Integer) {
+            increase(Math.ceil(enemyMaxHealth / 5));
         },
-        gambling: {
-            onOpenBlindBoxes(count: Integer) {
-                state.gambling += count * 5;
-            },
-            onPlaceBet(bet: Integer) {
-                state.gambling += bet;
-            },
-            onWinPrize(prize: Integer) {
-                state.gambling += prize;
-            },
-            onRerollLoot(rerollLootCounts: Integer[]) {
-                const count = rerollLootCounts.reduce((sum, next) => sum + next, 0);
+    }));
 
-                if (count === 0) {
-                    return;
-                }
+    readonly computer = this._expose("computer", (increase) => ({
+        onDepositComputerChips(count: Integer) {
+            increase(count * 2);
+        },
+        onInteract(kind: ComputerInteractionKind) {
+            increase(computerInteractionsToExperience[kind]);
+        },
+    }));
 
-                const rawExperience = rerollCountToExperience[count];
+    readonly gambling = this._expose("gambling", (increase) => ({
+        onOpenBlindBoxes(count: Integer) {
+            increase(count * 5);
+        },
+        onPlaceBet(bet: Integer) {
+            increase(bet);
+        },
+        onWinPrize(prize: Integer) {
+            increase(prize);
+        },
+        onRerollLoot(rerollLootCounts: Integer[]) {
+            const count = rerollLootCounts.reduce((sum, next) => sum + next, 0);
 
-                const experience = rawExperience
-                    ? rawExperience
-                    : (100 + (count - rerollCountToExperience.length) * 25);
-                state.gambling += experience;
-            },
+            if (count === 0) {
+                return;
+            }
+
+            const rawExperience = rerollCountToExperience[count];
+
+            const experience = rawExperience
+                ? rawExperience
+                : (100 + (count - rerollCountToExperience.length) * 25);
+            increase(experience);
         },
-        jump: {
-            onJump(ballonsCount: Integer, specialBonus: Integer) {
-                state.jump += 1 + specialBonus + ballonsCount;
-            },
+    }));
+
+    readonly jump = this._expose("jump", (increase) => ({
+        onJump(ballonsCount: Integer, specialBonus: Integer) {
+            increase(1 + specialBonus + ballonsCount);
         },
-        pocket: {
-            onReceive(result: RpgPocket.ReceiveResult) {
-                if (result.count > 0 && result.count % 10 === 0) {
-                    state.pocket += 10;
-                }
-                else {
-                    state.pocket += result.reset ? 2 : 1;
-                }
-            },
-            onRemoveItems(count: Integer) {
-                state.pocket += count * 2;
-            },
+    }));
+
+    readonly pocket = this._expose("pocket", (increase) => ({
+        onDiscoverStash() {
+            increase(20);
         },
-        quest: {
-            onComplete(complexity: DataQuest.Complexity, completionsCount: Integer) {
-                state.quest += Math.ceil(
-                    questComplexityToExperience[complexity] * (1 / Math.pow(2, completionsCount - 1)),
-                );
-            },
+        onReceive(result: RpgPocket.ReceiveResult) {
+            if (result.count > 0 && result.count % 10 === 0) {
+                increase(10);
+            }
+            else {
+                increase(result.reset ? 2 : 1);
+            }
         },
-        social: {
-            onNpcSpeak(kind: SpeakKind) {
-                state.social += speaksToExperience[kind];
-            },
+        onRemoveItems(count: Integer) {
+            increase(count * 2);
         },
-    };
+    }));
+
+    readonly quest = this._expose("quest", (increase) => ({
+        onComplete(complexity: DataQuest.Complexity, completionsCount: Integer) {
+            increase(Math.ceil(
+                questComplexityToExperience[complexity] * (1 / Math.pow(2, completionsCount - 1)),
+            ));
+        },
+    }));
+
+    readonly social = this._expose("social", (increase) => ({
+        onNpcSpeak(kind: SpeakKind) {
+            increase(speaksToExperience[kind]);
+        },
+    }));
+
+    private _expose<T>(id: RpgExperience.Id, impl: (increase: IncreaseFn) => T) {
+        return impl(amount => this._state[id] += amount);
+    }
 }

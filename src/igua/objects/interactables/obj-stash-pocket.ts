@@ -42,6 +42,8 @@ export function objStashPocket({ uid }: OgmoEntities.StashPocket) {
         spriteObj
             .mixin(mxnSpeaker, { name: "Pocket Stash", colorPrimary: 0x54BAFF, colorSecondary: 0xFFB200 })
             .mixin(mxnCutscene, function* () {
+                Rpg.stashPocket(uid).discover();
+
                 yield interp(spriteObj, "textureIndex").to(3).over(250);
 
                 const deposited = Rpg.stashPocket(uid).check();

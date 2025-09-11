@@ -1,5 +1,6 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataPocketItem } from "../data/data-pocket-item";
+import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 import { RpgPocket } from "./rpg-pocket";
 
 const empty: RpgStashPocket.CheckBalance.Empty = { kind: "empty", count: 0 };
@@ -8,7 +9,11 @@ const notEmpty: RpgStashPocket.CheckBalance.NotEmpty = { kind: "not_empty", pock
 export class RpgStashPockets {
     private readonly _cache: Partial<Record<Integer, RpgStashPocket>> = {};
 
-    constructor(private readonly _state: RpgStashPockets.State, private readonly _pocket: RpgPocket) {
+    constructor(
+        private readonly _state: RpgStashPockets.State,
+        private readonly _pocket: RpgPocket,
+        private readonly _reward: RpgExperienceRewarder,
+    ) {
     }
 
     getById(stashPocketId: Integer) {
@@ -18,7 +23,7 @@ export class RpgStashPockets {
             return cache;
         }
 
-        return this._cache[stashPocketId] = new RpgStashPocket(this._state, this._pocket, stashPocketId);
+        return this._cache[stashPocketId] = new RpgStashPocket(this._state, this._pocket, this._reward, stashPocketId);
     }
 
     static createState(): RpgStashPockets.State {
@@ -44,6 +49,7 @@ class RpgStashPocket {
     constructor(
         private readonly _state: RpgStashPockets.State,
         private readonly _pocket: RpgPocket,
+        private readonly _reward: RpgExperienceRewarder,
         private readonly _id: Integer,
     ) {
     }
@@ -86,6 +92,13 @@ class RpgStashPocket {
         };
 
         this._pocket.receivingSlot.force(null, 0, "stash_pocket_operation");
+    }
+
+    discover() {
+        if (!this._state.discoveredIds.has(this._id)) {
+            this._reward.pocket.onDiscoverStash();
+            this._state.discoveredIds.add(this._id);
+        }
     }
 
     withdraw() {
