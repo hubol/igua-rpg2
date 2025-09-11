@@ -5,6 +5,7 @@ import { Tx } from "../../assets/textures";
 import { Instances } from "../../lib/game-engine/instances";
 import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
+import { Rng } from "../../lib/math/rng";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataKeyItem } from "../data/data-key-item";
@@ -142,7 +143,6 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
 
             while (true) {
                 const isGoingFast = hasHighMiningSpeed();
-                const f = isGoingFast ? 0.5 : 1;
 
                 yield interp(self, "angle").steps(4).to(135).over(1000 * getMiningDelayRate());
                 self.isAtRest = true;
@@ -159,7 +159,7 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
                 lvl.MinerPicaxeBurst.visible = true;
                 yield sleep(125 * getMiningDelayRate());
                 pickaxeAttackObj.isAttackActive = false;
-                valuableSpawnerObj.spawn();
+                valuableSpawnerObj.spawn(isGoingFast && Rng.float() > 0.67 ? "blue" : "orange");
                 yield sleep(125 * getMiningDelayRate());
                 lvl.MinerPicaxeBurst.visible = false;
                 yield sleep(250 * getMiningDelayRate());

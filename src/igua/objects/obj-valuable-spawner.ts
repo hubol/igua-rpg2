@@ -2,6 +2,7 @@ import { Rng } from "../../lib/math/rng";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
+import { RpgEconomy } from "../rpg/rpg-economy";
 import { ObjValuable, objValuable } from "./obj-valuable";
 
 // TODO does this need to be an object?
@@ -12,8 +13,7 @@ export function objValuableSpawner(positions: VectorSimple[]) {
 
     return container()
         .merge({
-            // TODO support type passed in
-            spawn(strategy: "first" | "random" = "random") {
+            spawn(kind: RpgEconomy.Valuables.Kind, strategy: "first" | "random" = "random") {
                 let index = -1;
                 if (valuables.length < positions.length) {
                     index = valuables.length;
@@ -36,8 +36,7 @@ export function objValuableSpawner(positions: VectorSimple[]) {
                     return false;
                 }
 
-                // TODO orange from arg
-                const valuableObj = objValuable("orange").mixin(mxnNudgeAppear).handles(
+                const valuableObj = objValuable(kind).mixin(mxnNudgeAppear).handles(
                     "collected",
                     () => collectedCount++,
                 )
