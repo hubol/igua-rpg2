@@ -1,4 +1,4 @@
-import { BitmapText, Container, Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
+import { BitmapText, Container, DisplayObject, Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
 import { Logger } from "../../lib/game-engine/logger";
@@ -11,7 +11,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataItem } from "../data/data-item";
-import { Input, layers } from "../globals";
+import { Input, layers, scene } from "../globals";
 import { mxnBoilRotate } from "../mixins/mxn-boil-rotate";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { mxnMotion } from "../mixins/mxn-motion";
@@ -221,14 +221,27 @@ function mxnSelect(obj: Container) {
 }
 
 function createRemovedItemFigureObjAtPlayer(item: RpgInventory.Item) {
-    return objRemovedItemFigure(item).at(playerObj).add(Rng.float(-8, 8), Rng.float(-32, -40)).show();
+    return objItemFigureWithTarget(item, DramaLib.Speaker.current)
+        .at(playerObj)
+        .add(Rng.float(-8, 8), Rng.float(-32, -40))
+        .show();
+}
+
+function createReceivedItemFigureObjAtSpeaker(item: RpgInventory.Item) {
+    return objItemFigureWithTarget(item, playerObj)
+        .at(
+            DramaLib.Speaker.current?.getWorldCenter()
+                ?? scene.camera.vcpy().add(renderer.width / 2, renderer.height / 2),
+        )
+        .add(Rng.float(-8, 8), Rng.float(-32, -40))
+        .show();
 }
 
 function sleepAfterRemoveIteration(index: Integer) {
     return sleepf(Math.max(1, 10 - index * 0.1));
 }
 
-function objRemovedItemFigure(item: RpgInventory.Item) {
+function objItemFigureWithTarget(item: RpgInventory.Item, targetObj: DisplayObject | null) {
     const speed = vnew(Rng.float(-1, 1), Rng.float(-2.5, -3.5));
     const gravity = Rng.float(0.1, 0.15);
 
@@ -255,17 +268,15 @@ function objRemovedItemFigure(item: RpgInventory.Item) {
 
             yield () => speed.y >= 0;
 
-            const speakerObj = DramaLib.Speaker.current;
-
-            if (speakerObj) {
+            if (targetObj) {
                 motionObj.destroy();
 
                 yield sleepf(10);
 
                 yield* Coro.race([
-                    () => speakerObj.destroyed,
-                    Coro.chain([sleepf(10), () => speakerObj.collides(self)]),
-                    interpvr(self).factor(factor.sine).to(speakerObj.getWorldCenter()).over(300),
+                    () => targetObj.destroyed,
+                    Coro.chain([sleepf(10), () => targetObj.collides(self)]),
+                    interpvr(self).factor(factor.sine).to(targetObj.getWorldCenter()).over(300),
                 ]);
             }
             else {
@@ -279,6 +290,7 @@ function objRemovedItemFigure(item: RpgInventory.Item) {
 
 export const DramaItem = {
     choose,
+    createReceivedItemFigureObjAtSpeaker,
     createRemovedItemFigureObjAtPlayer,
     sleepAfterRemoveIteration,
 };

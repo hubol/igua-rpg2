@@ -83,7 +83,8 @@ function* upgrade() {
 
     const freeLoadoutIndex = Rpg.inventory.equipment.loadout.findIndex(item => item === null);
 
-    // TODO animated receive items!!
+    const itemFigureObj = DramaItem.createReceivedItemFigureObjAtSpeaker(equipmentToUpgrade.resultingEquipment);
+
     const obtainedEquipment = Rpg.inventory.equipment.receive(
         equipmentToUpgrade.resultingEquipment.id,
         equipmentToUpgrade.resultingEquipment.level,
@@ -92,6 +93,8 @@ function* upgrade() {
     if (equipmentToUpgrade.areEitherEquipped) {
         Rpg.inventory.equipment.equip(obtainedEquipment.id, freeLoadoutIndex);
     }
+
+    yield () => itemFigureObj.destroyed;
 }
 
 interface UpgradeableEquipment {
