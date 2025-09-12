@@ -2961,6 +2961,36 @@ export const Lvl = {
       EnvironmentSparkleMarker_11: e(r["EnvironmentSparkleMarker"], { x: 903, y: 430, values: { name: "", depth: 0 } }, "MarkerEntities"),
     };
   },
+  ObstacleCourse: () => {
+    applyLevel({ width: 656, height: 552, backgroundTint: 0x408000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 472, width: 656, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 232, y: 432, width: 16, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 296, y: 400, width: 16, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 376, y: 368, width: 16, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 448, y: 304, width: 128, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 448, y: 240, width: 128, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 200, y: 240, width: 56, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 576, y: 384, width: 80, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_8: e(r["Block"], { x: 640, y: 72, width: 32, height: 312, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_9: e(r["Block"], { x: -16, y: 72, width: 32, height: 312, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_10: e(r["Block"], { x: 0, y: 384, width: 80, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      PocketableItemA: e(r["PocketableItemA"], { x: 240, y: 408, values: { name: "", depth: 0 } }, "Entities"),
+      PocketableItemA_1: e(r["PocketableItemA"], { x: 304, y: 368, values: { name: "", depth: 0 } }, "Entities"),
+      PocketableItemA_2: e(r["PocketableItemA"], { x: 384, y: 336, values: { name: "", depth: 0 } }, "Entities"),
+      PocketableItemA_3: e(r["PocketableItemA"], { x: 560, y: 216, values: { name: "", depth: 0 } }, "Entities"),
+      PocketableItemA_4: e(r["PocketableItemA"], { x: 248, y: 216, values: { name: "", depth: 0 } }, "Entities"),
+      PocketableItemA_5: e(r["PocketableItemA"], { x: 208, y: 216, values: { name: "", depth: 0 } }, "Entities"),
+      PocketableItemB: e(r["PocketableItemB"], { x: 512, y: 216, values: { name: "", depth: 0 } }, "Entities"),
+      PocketableItemB_1: e(r["PocketableItemB"], { x: 488, y: 280, values: { name: "", depth: 0 } }, "Entities"),
+      PocketableItemA_6: e(r["PocketableItemA"], { x: 520, y: 280, values: { name: "", depth: 0 } }, "Entities"),
+      PocketableItemA_7: e(r["PocketableItemA"], { x: 552, y: 280, values: { name: "", depth: 0 } }, "Entities"),
+      PocketableItemA_8: e(r["PocketableItemA"], { x: 584, y: 280, values: { name: "", depth: 0 } }, "Entities"),
+      PocketableItemB_2: e(r["PocketableItemB"], { x: 424, y: 456, values: { name: "", depth: 0 } }, "Entities"),
+      PocketableItemB_3: e(r["PocketableItemB"], { x: 616, y: 456, values: { name: "", depth: 0 } }, "Entities"),
+      Player: e(r["Player"], { x: 72, y: 472, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    };
+  },
   PlainsSuggestiveCavern: () => {
     applyLevel({ width: 1152, height: 648, backgroundTint: 0x190000 });
     return {
@@ -3585,6 +3615,7 @@ export namespace LvlType {
   export type NewBalltownUnderneathTunnel = ReturnType<(typeof Lvl)["NewBalltownUnderneathTunnel"]>;
   export type NewBalltownUnderneath = ReturnType<(typeof Lvl)["NewBalltownUnderneath"]>;
   export type NewBalltown = ReturnType<(typeof Lvl)["NewBalltown"]>;
+  export type ObstacleCourse = ReturnType<(typeof Lvl)["ObstacleCourse"]>;
   export type PlainsSuggestiveCavern = ReturnType<(typeof Lvl)["PlainsSuggestiveCavern"]>;
   export type PlainsSuggestiveFlopCollector = ReturnType<(typeof Lvl)["PlainsSuggestiveFlopCollector"]>;
   export type PlainsSuggestive = ReturnType<(typeof Lvl)["PlainsSuggestive"]>;

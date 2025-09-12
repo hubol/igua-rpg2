@@ -58,9 +58,19 @@ export const OgmoEntityResolvers = {
     "GateHorizontal": (entity) => objGate(entity, "horizontal"),
     "GateVertical": (entity) => objGate(entity, "vertical"),
     "PocketableItemA": (entity) =>
-        objCollectiblePocketItemSpawner(vnew(entity), "BallFruitTypeA", CtxPocketItems.value.variant).at(entity, -1),
+        objCollectiblePocketItemSpawner(
+            vnew(entity),
+            "BallFruitTypeA",
+            CtxPocketItems.value.variant,
+            CtxPocketItems.value.behavior,
+        ).at(entity, -1),
     "PocketableItemB": (entity) =>
-        objCollectiblePocketItemSpawner(vnew(entity), "BallFruitTypeB", CtxPocketItems.value.variant).at(entity, -1),
+        objCollectiblePocketItemSpawner(
+            vnew(entity),
+            "BallFruitTypeB",
+            CtxPocketItems.value.variant,
+            CtxPocketItems.value.behavior,
+        ).at(entity, -1),
     EnemySuggestive: (entity) => objAngelSuggestive(entity.values.variant).at(0, -38),
     EnemyMiffed: () => objAngelMiffed().at(0, 1),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,
