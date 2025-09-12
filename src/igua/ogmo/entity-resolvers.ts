@@ -2,7 +2,7 @@ import { Graphics } from "pixi.js";
 import { OgmoEntities, OgmoEntityResolverBase } from "../../assets/generated/levels/generated-ogmo-project-data";
 import { Instances } from "../../lib/game-engine/instances";
 import { Vector, vnew } from "../../lib/math/vector-type";
-import { objCollectiblePocketItemSpawner } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
+import { CtxPocketItems, objCollectiblePocketItemSpawner } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objDevPlayer } from "../objects/dev/obj-dev-player";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
@@ -57,9 +57,10 @@ export const OgmoEntityResolvers = {
     "Region": () => new Graphics().beginFill(0x00ff00).drawRect(0, 0, 1, 1).invisible(),
     "GateHorizontal": (entity) => objGate(entity, "horizontal"),
     "GateVertical": (entity) => objGate(entity, "vertical"),
-    // TODO somehow configure item to spawn
-    "PocketableItemA": (entity) => objCollectiblePocketItemSpawner(vnew(entity), "BallFruitTypeA").at(entity, -1),
-    "PocketableItemB": (entity) => objCollectiblePocketItemSpawner(vnew(entity), "BallFruitTypeB").at(entity, -1),
+    "PocketableItemA": (entity) =>
+        objCollectiblePocketItemSpawner(vnew(entity), "BallFruitTypeA", CtxPocketItems.value.variant).at(entity, -1),
+    "PocketableItemB": (entity) =>
+        objCollectiblePocketItemSpawner(vnew(entity), "BallFruitTypeB", CtxPocketItems.value.variant).at(entity, -1),
     EnemySuggestive: (entity) => objAngelSuggestive(entity.values.variant).at(0, -38),
     EnemyMiffed: () => objAngelMiffed().at(0, 1),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,

@@ -24,14 +24,18 @@ export function objCollectiblePocketItem(item: RpgPocket.Item) {
 export type ObjCollectiblePocketItem = ReturnType<typeof objCollectiblePocketItem>;
 
 objCollectiblePocketItem.objBouncing = function objBouncing (item: RpgPocket.Item) {
-    return objPocketableItemBase(item, false).mixin(mxnBounce);
+    return objPocketableItemBase(item, false, true).mixin(mxnBounce);
+};
+
+objCollectiblePocketItem.objFloating = function objFloating (item: RpgPocket.Item) {
+    return objPocketableItemBase(item, true, false).merge({ isCollectible: true });
 };
 
 objCollectiblePocketItem.objParachuting = function objParachuting (item: RpgPocket.Item) {
-    return objPocketableItemBase(item, true).mixin(mxnParachute);
+    return objPocketableItemBase(item, true, true).mixin(mxnParachute);
 };
 
-function objPocketableItemBase(item: RpgPocket.Item, freed: boolean) {
+function objPocketableItemBase(item: RpgPocket.Item, freed: boolean, brieflyIntangible: boolean) {
     const figureObj = objFigurePocketItem(item);
     const obj = container()
         .collisionShape(CollisionShape.DisplayObjects, [figureObj])
@@ -40,9 +44,11 @@ function objPocketableItemBase(item: RpgPocket.Item, freed: boolean) {
         .zIndexed(ZIndex.Entities);
 
     figureObj.pivotedUnit(0.5, 0.5).coro(function* (self) {
-        yield () => obj.freed;
-        self.alpha = 0.5;
-        yield sleepf(15);
+        if (brieflyIntangible) {
+            yield () => obj.freed;
+            self.alpha = 0.5;
+            yield sleepf(15);
+        }
         yield () => obj.isCollectible;
         self.alpha = 1;
 
