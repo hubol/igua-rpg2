@@ -1,7 +1,9 @@
 import { Graphics, Sprite, Texture } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
+import { Logger } from "../../../lib/game-engine/logger";
 import { approachLinear } from "../../../lib/math/number";
+import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { TextureProcessing } from "../../../lib/pixi/texture-processing";
 import { Force } from "../../../lib/types/force";
@@ -285,3 +287,37 @@ export function objStatusBar(config: ObjStatusBarConfig) {
 }
 
 export type ObjStatusBar = ReturnType<typeof objStatusBar>;
+
+objStatusBar.objAutoUpdated = function objAutoUpdated (
+    config: Omit<ObjStatusBarConfig, "value">,
+    valueProvider: () => Integer,
+) {
+    let value = valueProvider();
+
+    if (config.decreases.length !== 1 || config.increases.length !== 1) {
+        Logger.logContractViolationError(
+            "objStatusBar.objAutoUpdated",
+            new Error("config.decreases and config.increases must have length === 1"),
+            { increases: config.increases, decreases: config.decreases },
+        );
+    }
+
+    return objStatusBar({ ...config, value })
+        .step(self => {
+            const nextValue = valueProvider();
+            if (nextValue === value) {
+                return;
+            }
+
+            const delta = nextValue - value;
+
+            if (delta > 0) {
+                self.increase(nextValue, delta, 0);
+            }
+            else {
+                self.decrease(nextValue, Math.abs(delta), 0);
+            }
+
+            value = nextValue;
+        });
+};
