@@ -2,23 +2,30 @@ import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { SceneLocal } from "../../../lib/game-engine/scene-local";
 import { VectorSimple } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
-import { RpgPocket } from "../../rpg/rpg-pocket";
-import { objFxFormativeBurst } from "../effects/obj-fx-formative-burst";
+import { DataPocketItem } from "../../data/data-pocket-item";
 import { ObjCollectiblePocketItem, objCollectiblePocketItem } from "./obj-collectible-pocket-item";
 
 interface CtxPocketItemsValue {
     variant: "objBouncing" | "objFloating";
     behavior: "default" | "respawn";
+    pocketItemIds: {
+        typeA: DataPocketItem.Id;
+        typeB: DataPocketItem.Id;
+    };
 }
 
 export const CtxPocketItems = new SceneLocal<CtxPocketItemsValue>(
-    () => ({ variant: "objBouncing", behavior: "default" }),
+    () => ({
+        variant: "objBouncing",
+        behavior: "default",
+        pocketItemIds: { typeA: "BallFruitTypeA", typeB: "BallFruitTypeB" },
+    }),
     "CtxPocketItems",
 );
 
 export function objCollectiblePocketItemSpawner(
     position: VectorSimple,
-    defaultItem: RpgPocket.Item,
+    defaultItem: DataPocketItem.Id,
     variant: CtxPocketItemsValue["variant"],
     behavior: CtxPocketItemsValue["behavior"],
 ) {

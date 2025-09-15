@@ -13,6 +13,8 @@ export namespace DataPocketItem {
             BallFruitTypeA: { name: "Ball Fruit Type A", texture: Tx.Collectibles.BallFruitTypeA },
             BallFruitTypeB: { name: "Ball Fruit Type B", texture: Tx.Collectibles.BallFruitTypeB },
             ComputerChip: { name: "Computer Chip V1.0", texture: Tx.Collectibles.ComputerChip },
+            Wheat: { name: "Wizened Wheat", texture: Tx.Collectibles.Pocket.Wheat },
+            Beet: { name: "Bizened Beet", texture: Tx.Collectibles.Pocket.Beet },
             __Fallback__: { name: "???", texture: Tx.Collectibles.ComputerChip },
         } satisfies Record<string, Model>,
     );

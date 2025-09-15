@@ -60,14 +60,14 @@ export const OgmoEntityResolvers = {
     "PocketableItemA": (entity) =>
         objCollectiblePocketItemSpawner(
             vnew(entity),
-            "BallFruitTypeA",
+            CtxPocketItems.value.pocketItemIds.typeA,
             CtxPocketItems.value.variant,
             CtxPocketItems.value.behavior,
         ).at(entity, -1),
     "PocketableItemB": (entity) =>
         objCollectiblePocketItemSpawner(
             vnew(entity),
-            "BallFruitTypeB",
+            CtxPocketItems.value.pocketItemIds.typeB,
             CtxPocketItems.value.variant,
             CtxPocketItems.value.behavior,
         ).at(entity, -1),
