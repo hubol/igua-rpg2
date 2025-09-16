@@ -4,8 +4,8 @@
   "height": 416,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#408000",
   "values": {"Terrain Color": "#6b55c3"},
+  "backgroundColor": "#408000",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -83,6 +83,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 2,
+          "_eid": "19953026",
+          "x": 296,
+          "y": 248,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromObstacleCourse", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -152,6 +163,16 @@
           "originY": 0,
           "flippedX": true,
           "values": {"sceneName": "scnWorldMap", "checkpointName": "fromStrangeMarket", "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 3,
+          "_eid": "88296692",
+          "x": 248,
+          "y": 200,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnObstacleCourse", "checkpointName": "", "name": "", "depth": 0}
         }
       ]
     },

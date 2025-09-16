@@ -2978,6 +2978,9 @@ export const Lvl = {
       Block_11: e(r["Block"], { x: 0, y: 680, width: 224, height: 88, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_12: e(r["Block"], { x: -8, y: 208, width: 232, height: 384, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       RestrictedBlock: e(r["Block"], { x: 224, y: 640, width: 80, height: 40, values: { name: "RestrictedBlock", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_13: e(r["Block"], { x: 0, y: 0, width: 232, height: 208, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_14: e(r["Block"], { x: 232, y: 0, width: 672, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_15: e(r["Block"], { x: 864, y: 32, width: 56, height: 248, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       PocketableItemA: e(r["PocketableItemA"], { x: 464, y: 616, values: { name: "", depth: 0 } }, "Entities"),
       PocketableItemA_1: e(r["PocketableItemA"], { x: 528, y: 576, values: { name: "", depth: 0 } }, "Entities"),
       PocketableItemA_2: e(r["PocketableItemA"], { x: 608, y: 544, values: { name: "", depth: 0 } }, "Entities"),
@@ -3000,6 +3003,7 @@ export const Lvl = {
       PocketableItemB_7: e(r["PocketableItemB"], { x: 640, y: 136, values: { name: "", depth: 0 } }, "Entities"),
       PocketableItemB_8: e(r["PocketableItemB"], { x: 616, y: 200, values: { name: "", depth: 0 } }, "Entities"),
       PocketableItemB_9: e(r["PocketableItemB"], { x: 656, y: 272, values: { name: "", depth: 0 } }, "Entities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -48, y: 568, height: 128, flippedX: true, values: { sceneName: "scnStrangeMarket", checkpointName: "fromObstacleCourse", name: "", depth: 0 } }, "Entities"),
       ObstacleWatcherNpc: e(r["IguanaNpc"], { x: 184, y: 680, flippedX: true, values: { personaName: "ObstacleWatcher", name: "ObstacleWatcherNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 80, y: 680, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       ResetPlayerMarker: e(r["Marker"], { x: 72, y: 680, values: { name: "ResetPlayerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
@@ -3455,8 +3459,10 @@ export const Lvl = {
       Door: e(r["Door"], { x: 472, y: 232, values: { sceneName: "scnCobbler0", checkpointName: "", name: "", depth: 0 } }, "Entities"),
       GateHorizontal: e(r["GateHorizontal"], { x: 856, y: 80, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromStrangeMarket", name: "", depth: 0 } }, "Entities"),
       GateHorizontal_1: e(r["GateHorizontal"], { x: -64, y: 88, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromStrangeMarket", name: "", depth: 0 } }, "Entities"),
+      Door_1: e(r["Door"], { x: 248, y: 200, values: { sceneName: "scnObstacleCourse", checkpointName: "", name: "", depth: 0 } }, "Entities"),
       fromCobbler0: e(r["Checkpoint"], { x: 448, y: 280, flippedX: true, values: { name: "fromCobbler0", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       Player: e(r["Player"], { x: 824, y: 224, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      fromObstacleCourse: e(r["Checkpoint"], { x: 296, y: 248, flippedX: false, values: { name: "fromObstacleCourse", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
     };
   },
   WorldMap: () => {
