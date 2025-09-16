@@ -14,7 +14,20 @@ export function scnStrangeMarket() {
 }
 
 function enrichMusicians(lvl: LvlType.StrangeMarket) {
-    objMusician.objHubolish().at(lvl.HubolishMarker).zIndexed(ZIndex.TerrainEntities)
+    objMusician.objHubolish()
+        .at(lvl.HubolishMarker)
+        .zIndexed(ZIndex.TerrainEntities)
+        .mixin(mxnCuesheet<"beat">, Mzk.SoldierBoyDemo, DataCuesheet.SoldierBoyDemo)
+        .handles("cue:start", (self, message) => {
+            if (message === "beat") {
+                self.methods.nextBeat();
+            }
+        })
+        .show();
+
+    objMusician.objLottieish()
+        .at(lvl.LottieishMarker)
+        .zIndexed(ZIndex.TerrainEntities)
         .mixin(mxnCuesheet<"beat">, Mzk.SoldierBoyDemo, DataCuesheet.SoldierBoyDemo)
         .handles("cue:start", (self, message) => {
             if (message === "beat") {
