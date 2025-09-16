@@ -3441,7 +3441,7 @@ export const Lvl = {
     };
   },
   StrangeMarket: () => {
-    applyLevel({ width: 896, height: 416, backgroundTint: 0x408000 });
+    applyLevel({ width: 896, height: 544, backgroundTint: 0x408000 });
     return {
       Block: e(r["Block"], { x: 176, y: 248, width: 200, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 488, y: 280, width: 200, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
@@ -3451,18 +3451,27 @@ export const Lvl = {
       Slope_2: e(r["Slope"], { x: 112, y: 216, width: 64, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
       Slope_3: e(r["Slope"], { x: 864, y: 192, width: 64, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
       Slope_4: e(r["Slope"], { x: 536, y: 256, width: 64, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
-      Block_3: e(r["Block"], { x: 864, y: 224, width: 112, height: 208, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
-      Block_4: e(r["Block"], { x: 600, y: 256, width: 264, height: 168, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
-      Block_5: e(r["Block"], { x: 0, y: 280, width: 600, height: 144, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 864, y: 224, width: 112, height: 232, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 600, y: 256, width: 272, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 0, y: 280, width: 600, height: 176, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
       Block_6: e(r["Block"], { x: 0, y: 216, width: 112, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
       Block_7: e(r["Block"], { x: 112, y: 248, width: 64, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
+      Slope_5: e(r["Slope"], { x: 600, y: 320, width: 32, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
+      Slope_6: e(r["Slope"], { x: 832, y: 320, width: 32, height: 32, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
+      Block_8: e(r["Block"], { x: 0, y: 456, width: 904, height: 88, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
+      Slope_7: e(r["Slope"], { x: 600, y: 424, width: 32, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
+      Slope_8: e(r["Slope"], { x: 832, y: 424, width: 32, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
       Door: e(r["Door"], { x: 472, y: 232, values: { sceneName: "scnCobbler0", checkpointName: "", name: "", depth: 0 } }, "Entities"),
       GateHorizontal: e(r["GateHorizontal"], { x: 856, y: 80, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromStrangeMarket", name: "", depth: 0 } }, "Entities"),
       GateHorizontal_1: e(r["GateHorizontal"], { x: -64, y: 88, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromStrangeMarket", name: "", depth: 0 } }, "Entities"),
       Door_1: e(r["Door"], { x: 248, y: 200, values: { sceneName: "scnObstacleCourse", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+      Door_2: e(r["Door"], { x: 720, y: 176, values: { sceneName: "scnStrangeMarket", checkpointName: "fromAbove", name: "", depth: 0 } }, "Entities"),
+      Door_3: e(r["Door"], { x: 720, y: 408, values: { sceneName: "scnStrangeMarket", checkpointName: "fromBelow", name: "", depth: 0 } }, "Entities"),
       fromCobbler0: e(r["Checkpoint"], { x: 448, y: 280, flippedX: true, values: { name: "fromCobbler0", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       Player: e(r["Player"], { x: 824, y: 224, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromObstacleCourse: e(r["Checkpoint"], { x: 296, y: 248, flippedX: false, values: { name: "fromObstacleCourse", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromBelow: e(r["Checkpoint"], { x: 712, y: 224, flippedX: true, values: { name: "fromBelow", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
+      fromAbove: e(r["Checkpoint"], { x: 712, y: 456, flippedX: true, values: { name: "fromAbove", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
     };
   },
   WorldMap: () => {
