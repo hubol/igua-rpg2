@@ -1,6 +1,7 @@
 import { DisplayObject } from "pixi.js";
 import { MusicTrack } from "../../lib/game-engine/audio/asshat-jukebox";
 import { Integer } from "../../lib/math/number-alias-types";
+import { Force } from "../../lib/types/force";
 import { Jukebox } from "../core/igua-audio";
 import { DataCuesheet } from "../data/data-cuesheet";
 
@@ -11,6 +12,8 @@ export function mxnCuesheet<TCommand>(obj: DisplayObject, track: MusicTrack, cue
     }
 
     const startedCueIndices = new Set<Integer>();
+    const endedCueIndices = new Set<Integer>();
+
     let previousTime = Jukebox.getEstimatedPlayheadPosition(track);
     let minCueIndex = 0;
 
@@ -23,16 +26,22 @@ export function mxnCuesheet<TCommand>(obj: DisplayObject, track: MusicTrack, cue
             if (time < previousTime) {
                 minCueIndex = 0;
                 for (const cueIndex of startedCueIndices) {
+                    if (endedCueIndices.has(cueIndex)) {
+                        continue;
+                    }
                     const cue = cuesheet[cueIndex];
                     const command = cue[2];
                     const data = cue[3];
                     self.dispatch("cue:end", { command, data });
                 }
                 startedCueIndices.clear();
+                endedCueIndices.clear();
             }
             else {
                 previousTime = time;
             }
+
+            let maxStart = Force<Integer>();
 
             for (let i = minCueIndex; i < cuesheet.length; i++) {
                 const cue = cuesheet[i];
@@ -41,23 +50,32 @@ export function mxnCuesheet<TCommand>(obj: DisplayObject, track: MusicTrack, cue
                 const command = cue[2];
                 const data = cue[3];
 
-                if (time >= end) {
-                    if (!startedCueIndices.has(i)) {
-                        self.dispatch("cue:start", { command, data });
-                    }
-                    self.dispatch("cue:end", { command, data });
-                    if (i === minCueIndex) {
-                        minCueIndex++;
-                    }
+                if (i === minCueIndex) {
+                    maxStart = end;
                 }
-                else if (time >= start) {
+                else {
+                    maxStart = Math.max(maxStart, end);
+                }
+
+                if (start > maxStart) {
+                    break;
+                }
+
+                if (time >= start || time >= end) {
                     if (!startedCueIndices.has(i)) {
                         self.dispatch("cue:start", { command, data });
                         startedCueIndices.add(i);
                     }
                 }
-                else {
-                    break;
+                if (time >= end) {
+                    if (!endedCueIndices.has(i)) {
+                        self.dispatch("cue:end", { command, data });
+                        endedCueIndices.add(i);
+                    }
+
+                    if (i === minCueIndex) {
+                        minCueIndex++;
+                    }
                 }
             }
         });

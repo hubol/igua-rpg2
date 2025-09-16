@@ -15,6 +15,8 @@
 28.798909	28.798909	beat
 30.939822	30.939822	beat
 33.184147	33.184147	beat
+34.788434	34.788434	beat
+35.084696	35.084696	beat
 35.341829	35.341829	beat
 37.468767	37.468767	beat
 39.634834	39.634834	beat
@@ -40,3 +42,17 @@
 82.436318	82.436318	beat
 84.742132	84.742132	beat
 11.607324	13.127764	lyric:toilet bowl
+15.374883	17.781314	lyric:Watched the big ol' sun come
+18.010498	20.014459	lyric:Through my window
+20.629343	26.476326	lyric:Need to let you know
+27.082825	30.509403	lyric:In need of sympathy
+31.496012	33.175762	lyric:Damn, I wish you were
+33.175762	34.475402	lyric:Here with me
+34.475402	39.251929	lyric:Right now
+39.836069	41.708669	lyric:And maybe we could
+41.753387	43.754554	lyric:Go to town
+44.520363	47.010642	lyric:After you peeled me
+47.010642	49.235402	lyric:up off the ground
+49.833516	52.295845	lyric:With Gatorade, and
+52.295845	54.526195	lyric:cigarettes, and
+54.526195	56.767725	lyric:love
