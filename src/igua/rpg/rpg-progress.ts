@@ -54,6 +54,10 @@ export function getInitialRpgProgress() {
                     },
                 },
             },
+            obstacleCourse: {
+                wheatPrizesCount: 0,
+                beetPrizesCount: 0,
+            },
             outskirts: {
                 farmer: {
                     hasBagOfSeeds: false,
