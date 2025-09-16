@@ -3472,6 +3472,7 @@ export const Lvl = {
       fromObstacleCourse: e(r["Checkpoint"], { x: 296, y: 248, flippedX: false, values: { name: "fromObstacleCourse", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromBelow: e(r["Checkpoint"], { x: 712, y: 224, flippedX: true, values: { name: "fromBelow", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       fromAbove: e(r["Checkpoint"], { x: 712, y: 456, flippedX: true, values: { name: "fromAbove", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
+      HubolishMarker: e(r["Marker"], { x: 800, y: 376, values: { name: "HubolishMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   WorldMap: () => {

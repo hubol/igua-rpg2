@@ -16,7 +16,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 112,
       "gridCellsY": 68,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 800,
+          "y": 376,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "HubolishMarker", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",

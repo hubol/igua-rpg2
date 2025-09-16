@@ -8,5 +8,7 @@ public/**/*
 
 node_modules/
 
+raw/labels/**/*.json
+
 .smooch/
 smooch.tgz
