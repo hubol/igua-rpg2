@@ -31,7 +31,7 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
         .zIndexed(ZIndex.TerrainEntities)
         .show();
 
-    const lyricsObj = objText.MediumBoldIrregular("", { tint: 0x000000 })
+    const lyricsObj = objText.MediumBoldIrregular("", { tint: 0xFFB200 })
         .anchored(0.5, 0.5)
         .at(lvl.LyricsMarker)
         .zIndexed(ZIndex.AboveEntitiesDecals)
