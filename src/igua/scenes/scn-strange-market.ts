@@ -1,5 +1,7 @@
+import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataCuesheet } from "../data/data-cuesheet";
@@ -14,24 +16,36 @@ export function scnStrangeMarket() {
 }
 
 function enrichMusicians(lvl: LvlType.StrangeMarket) {
-    objMusician.objHubolish()
+    const hubolishObj = objMusician.objHubolish()
         .at(lvl.HubolishMarker)
         .zIndexed(ZIndex.TerrainEntities)
-        .mixin(mxnCuesheet<"beat">, Mzk.SoldierBoyDemo, DataCuesheet.SoldierBoyDemo)
-        .handles("cue:start", (self, message) => {
-            if (message === "beat") {
-                self.methods.nextBeat();
-            }
-        })
         .show();
 
-    objMusician.objLottieish()
+    const lottieishObj = objMusician.objLottieish()
         .at(lvl.LottieishMarker)
         .zIndexed(ZIndex.TerrainEntities)
-        .mixin(mxnCuesheet<"beat">, Mzk.SoldierBoyDemo, DataCuesheet.SoldierBoyDemo)
-        .handles("cue:start", (self, message) => {
-            if (message === "beat") {
-                self.methods.nextBeat();
+        .show();
+
+    const lyricsObj = objText.MediumBoldIrregular("", { tint: 0x000000 })
+        .anchored(0.5, 0.5)
+        .at(lvl.LyricsMarker)
+        .zIndexed(ZIndex.AboveEntitiesDecals)
+        .show();
+
+    container()
+        .mixin(mxnCuesheet<"beat" | "lyric">, Mzk.SoldierBoyDemo, DataCuesheet.SoldierBoyDemo)
+        .handles("cue:start", (self, { command, data }) => {
+            if (command === "beat") {
+                hubolishObj.methods.nextBeat();
+                lottieishObj.methods.nextBeat();
+            }
+            else if (command === "lyric") {
+                lyricsObj.text = data!;
+            }
+        })
+        .handles("cue:end", (self, { command, data }) => {
+            if (command === "lyric" && lyricsObj.text === data) {
+                lyricsObj.text = "";
             }
         })
         .show();

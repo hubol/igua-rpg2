@@ -38,6 +38,17 @@
           "originY": 8,
           "tint": "#b88cf0",
           "values": {"name": "LottieishMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 2,
+          "_eid": "73148747",
+          "x": 735,
+          "y": 339,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "LyricsMarker", "depth": 0}
         }
       ]
     },

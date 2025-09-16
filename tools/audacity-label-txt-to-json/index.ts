@@ -14,8 +14,13 @@ export default async function (labelFile: string) {
                 return [];
             }
             const [start, end, message] = trimmed.split("\t");
-            return [`[${start}, ${end}, ${JSON.stringify(message)}]`];
+            const [command, data = null] = message.split(":");
+            return [{ start: Number(start), end: Number(end), command, data }];
         })
+        .sort((a, b) => a.start - b.start)
+        .map(({ start, end, command, data }) =>
+            `[${start}, ${end}, ${JSON.stringify(command)}, ${JSON.stringify(data)}]`
+        )
         .join(",\n");
 
     const processedText = `[
