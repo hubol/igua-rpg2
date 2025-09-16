@@ -78,7 +78,12 @@ export class IguaCutscene {
             },
         };
 
-        this.runnerObj.state.pendingPlayRequests.push({ fn, attributes });
+        const playRequest = { fn, attributes };
+        this.runnerObj.state.pendingPlayRequests.push(playRequest);
+
+        return {
+            done: () => this.current !== playRequest && !this.runnerObj.state.pendingPlayRequests.includes(playRequest),
+        };
     }
 
     get isPlaying() {
