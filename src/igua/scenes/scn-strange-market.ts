@@ -40,7 +40,7 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
     let nudgeGentleHubol = false;
 
     container()
-        .mixin(mxnCuesheet<"beat" | "lyric">, Mzk.SoldierBoyDemo, DataCuesheet.SoldierBoyDemo)
+        .mixin(mxnCuesheet<"beat" | "lyric" | "lip">, Mzk.SoldierBoyDemo, DataCuesheet.SoldierBoyDemo)
         .handles("cue:start", (self, { command, data }) => {
             if (command === "beat") {
                 hubolishObj.methods.nextBeat();
@@ -58,10 +58,16 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
             else if (command === "lyric") {
                 lyricsObj.text = data!;
             }
+            else if (command === "lip") {
+                hubolishObj.methods.setLip(data);
+            }
         })
         .handles("cue:end", (self, { command, data }) => {
             if (command === "lyric" && lyricsObj.text === data) {
                 lyricsObj.text = "";
+            }
+            else if (command === "lip") {
+                hubolishObj.methods.unsetLip(data);
             }
         })
         .show();

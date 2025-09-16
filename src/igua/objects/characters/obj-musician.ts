@@ -1,4 +1,4 @@
-import { Sprite } from "pixi.js";
+import { Sprite, Texture } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
@@ -8,13 +8,52 @@ export function objMusician() {
 }
 
 objMusician.objHubolish = function () {
-    const [txBody, txFeet0, txFeet1, txFaceDefault, txKeyboard, txHandLeft, txHandRight] = Tx.Esoteric.Musicians
+    const [
+        txBody,
+        txFeet0,
+        txFeet1,
+        txFaceDefault,
+        txKeyboard,
+        txHandLeft,
+        txHandRight,
+        txLipSmallO,
+        txLipBigO,
+        txLipE,
+        txLipA,
+        txLipS,
+        txLipF,
+        txLipL,
+        txLipP,
+    ] = Tx.Esoteric.Musicians
         .Hubolish.split({ width: 50 });
+
+    const faceTxs: Record<string, Texture> = {
+        o: txLipSmallO,
+        r: txLipSmallO,
+        O: txLipBigO,
+        e: txLipE,
+        i: txLipE,
+        uh: txLipE,
+        a: txLipA,
+        UH: txLipA,
+        s: txLipS,
+        th: txLipS,
+        f: txLipF,
+        l: txLipL,
+        n: txLipL,
+        p: txLipP,
+        b: txLipP,
+    };
+
     return function objHubolish () {
         const feetObj = Sprite.from(txFeet0);
         const faceObj = Sprite.from(txFaceDefault).mixin(mxnBoilPivot);
         const leftHandObj = Sprite.from(txHandLeft);
         const rightHandObj = Sprite.from(txHandRight);
+
+        function getLipTx(lip: string | null) {
+            return faceTxs[lip ?? ""] ?? txFaceDefault;
+        }
 
         const methods = {
             nextBeat() {
@@ -30,6 +69,14 @@ objMusician.objHubolish = function () {
                 }
                 else if (choice === 2) {
                     rightHandObj.y = -4;
+                }
+            },
+            setLip(lip: string | null) {
+                faceObj.texture = getLipTx(lip);
+            },
+            unsetLip(lip: string | null) {
+                if (faceObj.texture === getLipTx(lip)) {
+                    faceObj.texture = txFaceDefault;
                 }
             },
         };
