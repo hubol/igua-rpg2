@@ -3474,7 +3474,7 @@ export const Lvl = {
       fromAbove: e(r["Checkpoint"], { x: 712, y: 456, flippedX: true, values: { name: "fromAbove", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       HubolishMarker: e(r["Marker"], { x: 800, y: 376, values: { name: "HubolishMarker", depth: 0 }, tint: 0xffc700 }, "MarkerEntities"),
       LottieishMarker: e(r["Marker"], { x: 672, y: 383, values: { name: "LottieishMarker", depth: 0 }, tint: 0xb88cf0 }, "MarkerEntities"),
-      LyricsMarker: e(r["Marker"], { x: 735, y: 339, values: { name: "LyricsMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      LyricsMarker: e(r["Marker"], { x: 735, y: 307, values: { name: "LyricsMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   WorldMap: () => {

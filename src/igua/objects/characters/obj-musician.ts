@@ -28,21 +28,33 @@ objMusician.objHubolish = function () {
         .Hubolish.split({ width: 50 });
 
     const faceTxs: Record<string, Texture> = {
+        c: txLipSmallO,
         o: txLipSmallO,
+        g: txLipSmallO,
+        h: txLipSmallO,
+        u: txLipSmallO,
+        w: txLipSmallO,
         r: txLipSmallO,
         O: txLipBigO,
         e: txLipE,
+        y: txLipE,
         i: txLipE,
         uh: txLipE,
         a: txLipA,
         UH: txLipA,
+        ch: txLipS,
+        sh: txLipS,
         s: txLipS,
+        t: txLipS,
+        d: txLipL,
         th: txLipS,
         f: txLipF,
+        v: txLipF,
         l: txLipL,
         n: txLipL,
         p: txLipP,
         b: txLipP,
+        m: txLipP,
     };
 
     return function objHubolish () {

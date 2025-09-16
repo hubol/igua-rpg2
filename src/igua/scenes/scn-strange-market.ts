@@ -46,6 +46,8 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
                 hubolishObj.methods.nextBeat();
                 lottieishObj.methods.nextBeat();
 
+                lyricsObj.seed += 1;
+
                 nudgeGentleHubol = !nudgeGentleHubol;
 
                 if (nudgeGentleHubol) {
