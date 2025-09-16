@@ -1,5 +1,6 @@
 import { Polar, Seconds, Unit } from "../../math/number-alias-types";
 import { Rng } from "../../math/rng";
+import { Logger } from "../logger";
 import { StereoGainNode, StereoGainNodePool } from "./stereo-gain-node-pool";
 
 export class Sound {
@@ -81,7 +82,10 @@ export class Sound {
 type RampableParam = "rate" | "gain" | "pan";
 
 export class SoundInstance {
+    private readonly _startTime: number;
+
     constructor(private readonly _sourceNode: AudioBufferSourceNode, private readonly _stereoGainNode: StereoGainNode) {
+        this._startTime = this._sourceNode.context.currentTime;
     }
 
     private _getAudioParam(param: RampableParam) {
@@ -111,6 +115,19 @@ export class SoundInstance {
             currentTime + durationSeconds,
         );
         return this;
+    }
+
+    /** The approximate playhead position assuming the sound is looping and not playing at a rate other than 1 */
+    get estimatedPlayheadPosition() {
+        const duration = this._sourceNode.buffer?.duration;
+        if (!duration) {
+            Logger.logAssertError("SoundInstance.estimatedPlayheadPosition", new Error("duration should be truthy"), {
+                duration,
+            });
+            return 0;
+        }
+
+        return (this._sourceNode.context.currentTime - this._startTime) % duration;
     }
 
     get gain() {

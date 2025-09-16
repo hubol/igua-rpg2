@@ -19,6 +19,14 @@ export class AsshatJukebox {
         this._loader = new MusicTrackLoader(_destination);
     }
 
+    getEstimatedPlayheadPosition(track: MusicTrack) {
+        if (this._nowPlaying?.track !== track) {
+            return 0;
+        }
+
+        return this._nowPlaying.instance.estimatedPlayheadPosition;
+    }
+
     play(track: MusicTrack, fadeOutMs: Milliseconds = 1000) {
         setTimeout(() => this.playAsync(track, fadeOutMs));
         return this;
