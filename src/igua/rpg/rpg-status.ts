@@ -221,7 +221,7 @@ export namespace RpgStatus {
                         target.conditions.wetness.tint = blendColorDelta(
                             target.conditions.wetness.tint,
                             attack.conditions.wetness.tint,
-                            4,
+                            Math.min(255, Math.max(attack.conditions.wetness.tint, 4)),
                         );
                     }
                 }

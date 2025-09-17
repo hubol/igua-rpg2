@@ -19,19 +19,19 @@ export namespace DataPotion {
             AttributeHealthUp: {
                 name: "Spiced Nectar",
                 description: "Delicious nectar. Increases maximum HP.",
-                stinkLineTint: 0xffffff,
+                stinkLineTint: 0x004AFF,
                 texture: Tx.Collectibles.Potion.AttributeHealthUp,
             },
             AttributeIntelligenceUp: {
                 name: "Foul Stew",
                 description: "Challenging, odiforous soup. Increases intelligence.",
-                stinkLineTint: 0xffffff,
+                stinkLineTint: 0xCEA5AA,
                 texture: Tx.Collectibles.Potion.AttributeIntelligenceUp,
             },
             AttributeStrengthUp: {
                 name: "Claw Powder",
                 description: "Fine grit for sharpening claws. Increases physical attack power.",
-                stinkLineTint: 0xffffff,
+                stinkLineTint: 0xB6B2FF,
                 texture: Tx.Collectibles.Potion.AttributeStrengthUp,
             },
             RestoreHealth: {
@@ -49,20 +49,20 @@ export namespace DataPotion {
             PoisonRestore: {
                 name: "Bitter Medicine",
                 description: "Expensive capsule. Recover from poison.",
-                stinkLineTint: 0xffffff,
+                stinkLineTint: 0x7A42FF,
                 texture: Tx.Collectibles.Potion.PoisonRestore,
             },
             Ballon: {
                 name: "Ballon Fruit",
                 description: "Naturally-occurring and filled with helium. What?",
-                stinkLineTint: 0xffffff,
+                stinkLineTint: 0xE1282C,
                 texture: Tx.Collectibles.Potion.Ballon,
             },
             Wetness: {
                 name: "TheWetter",
                 description: "Celebrated beverage. Become drenched.",
-                stinkLineTint: 0xffffff,
-                texture: null,
+                stinkLineTint: 0x2149FF,
+                texture: Tx.Collectibles.Potion.Wetness,
             },
             __Fallback__: {
                 name: "???",
