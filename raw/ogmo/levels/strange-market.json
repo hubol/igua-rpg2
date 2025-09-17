@@ -49,6 +49,39 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "LyricsMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 3,
+          "_eid": "73148747",
+          "x": 672,
+          "y": 352,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#ff0f00",
+          "values": {"name": "PotionSpawn0", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 4,
+          "_eid": "73148747",
+          "x": 800,
+          "y": 352,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#ff0f00",
+          "values": {"name": "PotionSpawn2", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 5,
+          "_eid": "73148747",
+          "x": 736,
+          "y": 368,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#ff0f00",
+          "values": {"name": "PotionSpawn1", "depth": 0}
         }
       ]
     },

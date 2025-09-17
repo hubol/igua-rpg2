@@ -5,14 +5,19 @@ import { Mzk } from "../../assets/music";
 import { interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
+import { VectorSimple } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
+import { Null } from "../../lib/types/null";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataCuesheet } from "../data/data-cuesheet";
+import { DataPotion } from "../data/data-potion";
 import { mxnCuesheet } from "../mixins/mxn-cuesheet";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { objMusician } from "../objects/characters/obj-musician";
+import { objCollectiblePotion } from "../objects/collectibles/obj-collectible-potion";
 import { Rpg } from "../rpg/rpg";
+import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnStrangeMarket() {
     Jukebox.play(Rpg.character.position.checkpointName === "fromAbove" ? Mzk.SoldierBoyDemo : Mzk.BigLove);
@@ -37,12 +42,31 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
         .zIndexed(ZIndex.AboveEntitiesDecals)
         .show();
 
+    const miscCommandDataToPotionSpawn = {
+        "spawn_wetness": {
+            position: lvl.PotionSpawn0,
+            potionId: "Wetness",
+        },
+        "spawn_poison": {
+            position: lvl.PotionSpawn1,
+            potionId: "Poison",
+        },
+        "spawn_heal": {
+            position: lvl.PotionSpawn2,
+            potionId: "RestoreHealth",
+        },
+    } satisfies Record<string, { potionId: DataPotion.Id; position: VectorSimple }>;
+
     let nudgeGentleHubol = false;
 
     container()
-        .mixin(mxnCuesheet<"beat" | "lyric" | "lip">, Mzk.SoldierBoyDemo, DataCuesheet.SoldierBoyDemo)
+        .mixin(
+            mxnCuesheet<"beat" | "lyric" | "lip" | "misc" | "offbeat">,
+            Mzk.SoldierBoyDemo,
+            DataCuesheet.SoldierBoyDemo,
+        )
         .handles("cue:start", (self, { command, data }) => {
-            if (command === "beat") {
+            if (command === "beat" || command === "offbeat") {
                 hubolishObj.methods.nextBeat();
                 lottieishObj.methods.nextBeat();
 
@@ -62,6 +86,12 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
             }
             else if (command === "lip") {
                 hubolishObj.methods.setLip(data);
+            }
+            else if (command === "misc") {
+                const potionSpawn = miscCommandDataToPotionSpawn[data as keyof typeof miscCommandDataToPotionSpawn];
+                if (potionSpawn) {
+                    objCollectiblePotion(potionSpawn.potionId).at(potionSpawn.position).show();
+                }
             }
         })
         .handles("cue:end", (self, { command, data }) => {

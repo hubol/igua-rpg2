@@ -42,7 +42,7 @@ export namespace DataPotion {
             },
             Poison: {
                 name: "Poison",
-                description: "Popular in certain communities. Become poisoned.",
+                description: "Popular in most communities. Become poisoned.",
                 stinkLineTint: 0xA53609,
                 texture: Tx.Collectibles.Potion.Poison,
             },
@@ -57,6 +57,12 @@ export namespace DataPotion {
                 description: "Naturally-occurring and filled with helium. What?",
                 stinkLineTint: 0xffffff,
                 texture: Tx.Collectibles.Potion.Ballon,
+            },
+            Wetness: {
+                name: "TheWetter",
+                description: "Celebrated beverage. Become drenched.",
+                stinkLineTint: 0xffffff,
+                texture: null,
             },
             __Fallback__: {
                 name: "???",
@@ -96,6 +102,9 @@ export namespace DataPotion {
             case "Ballon":
                 playerObj.damage(atkBallon);
                 return;
+            case "Wetness":
+                playerObj.damage(atkWetness);
+                return;
             case "__Fallback__":
                 return;
         }
@@ -105,5 +114,14 @@ export namespace DataPotion {
 const atkBallon = RpgAttack.create({
     conditions: {
         helium: 99999999,
+    },
+});
+
+const atkWetness = RpgAttack.create({
+    conditions: {
+        wetness: {
+            tint: 0x0080ff,
+            value: 999999,
+        },
     },
 });

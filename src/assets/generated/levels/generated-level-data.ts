@@ -3475,6 +3475,9 @@ export const Lvl = {
       HubolishMarker: e(r["Marker"], { x: 800, y: 376, values: { name: "HubolishMarker", depth: 0 }, tint: 0xffc700 }, "MarkerEntities"),
       LottieishMarker: e(r["Marker"], { x: 672, y: 383, values: { name: "LottieishMarker", depth: 0 }, tint: 0xb88cf0 }, "MarkerEntities"),
       LyricsMarker: e(r["Marker"], { x: 735, y: 307, values: { name: "LyricsMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      PotionSpawn0: e(r["Marker"], { x: 672, y: 352, values: { name: "PotionSpawn0", depth: 0 }, tint: 0xff0f00 }, "MarkerEntities"),
+      PotionSpawn2: e(r["Marker"], { x: 800, y: 352, values: { name: "PotionSpawn2", depth: 0 }, tint: 0xff0f00 }, "MarkerEntities"),
+      PotionSpawn1: e(r["Marker"], { x: 736, y: 368, values: { name: "PotionSpawn1", depth: 0 }, tint: 0xff0f00 }, "MarkerEntities"),
     };
   },
   WorldMap: () => {

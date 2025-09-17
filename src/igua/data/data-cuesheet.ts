@@ -1,7 +1,7 @@
 export type DataCuesheet<TCommand> = Array<[start: number, end: number, command: TCommand, data: string | null]>;
 
 export namespace DataCuesheet {
-    export const SoldierBoyDemo: DataCuesheet<"beat" | "lyric" | "lip"> = [
+    export const SoldierBoyDemo: DataCuesheet<"beat" | "lyric" | "lip" | "misc" | "offbeat"> = [
         [0.617678, 0.617678, "beat", null],
         [2.912312, 2.912312, "beat", null],
         [5.097944, 5.097944, "beat", null],
@@ -114,9 +114,9 @@ export namespace DataCuesheet {
         [34.475402, 39.251929, "lyric", "Right now"],
         [34.601174, 34.782844, "lip", "i"],
         [34.782844, 34.92818, "lip", "o"],
-        [34.788434, 34.788434, "beat", null],
+        [34.788434, 34.788434, "offbeat", null],
         [34.92818, 35.154569, "lip", "n"],
-        [35.084696, 35.084696, "beat", null],
+        [35.084696, 35.084696, "offbeat", null],
         [35.154569, 36.929346, "lip", "O"],
         [35.341829, 35.341829, "beat", null],
         [36.929346, 37.616898, "lip", "a"],
@@ -179,6 +179,7 @@ export namespace DataCuesheet {
         [50.289089, 50.414861, "lip", "th"],
         [50.400886, 50.400886, "beat", null],
         [50.414861, 50.543427, "lip", "g"],
+        [50.414861, 50.414861, "misc", "spawn_wetness"],
         [50.543427, 50.753046, "lip", "a"],
         [50.753046, 50.873228, "lip", "t"],
         [50.873228, 51.166695, "lip", "O"],
@@ -188,6 +189,7 @@ export namespace DataCuesheet {
         [51.896171, 52.29305, "lip", "n"],
         [52.295845, 54.526195, "lyric", "cigarettes, and"],
         [52.295845, 52.592107, "lip", "s"],
+        [52.39786, 52.39786, "misc", "spawn_poison"],
         [52.508259, 52.508259, "beat", null],
         [52.592107, 52.85483, "lip", "i"],
         [52.85483, 52.977807, "lip", "g"],
@@ -201,6 +203,7 @@ export namespace DataCuesheet {
         [54.526195, 54.719045, "lip", "l"],
         [54.671532, 54.671532, "beat", null],
         [54.719045, 55.722423, "lip", "O"],
+        [54.719045, 54.719045, "misc", "spawn_heal"],
         [55.722423, 56.650339, "lip", "o"],
         [56.650339, 56.871138, "lip", "v"],
         [56.764931, 56.764931, "beat", null],
