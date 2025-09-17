@@ -148,7 +148,15 @@ function objMinigameController(lvl: LvlType.ObstacleCourse) {
 function* dramaEndMinigame(lvl: LvlType.ObstacleCourse) {
     playerObj.physicsEnabled = false;
     playerObj.speed.at(0, 0);
-    yield interpvr(playerObj).factor(factor.sine).to(lvl.ResetPlayerMarker).over(4000);
+    // TODO If I find myself doing shit like this a lot, it might be a good idea to invent a way
+    // for the cutscene coro to execute before the camera is applied
+    const movePlayerObj = container()
+        .coro(function* (self) {
+            yield interpvr(playerObj).factor(factor.sine).to(lvl.ResetPlayerMarker).over(4000);
+            self.destroy();
+        })
+        .show();
+    yield () => movePlayerObj.destroyed;
     playerObj.physicsEnabled = true;
     yield interpvr(lvl.RestrictedBlock).translate(0, -50).over(500);
 }
