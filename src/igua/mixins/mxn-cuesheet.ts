@@ -37,9 +37,8 @@ export function mxnCuesheet<TCommand>(obj: DisplayObject, track: MusicTrack, cue
                 startedCueIndices.clear();
                 endedCueIndices.clear();
             }
-            else {
-                previousTime = time;
-            }
+
+            previousTime = time;
 
             let maxStart = Force<Integer>();
 
