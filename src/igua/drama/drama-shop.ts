@@ -21,6 +21,7 @@ import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnErrorVibrate } from "../mixins/mxn-error-vibrate";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { experienceIndicatorConfigs, experienceIndicatorConfigsArray } from "../objects/overlay/obj-hud";
+import { objUiDelta } from "../objects/overlay/obj-ui-delta";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgStock } from "../rpg/rpg-shops";
@@ -411,7 +412,19 @@ function objCurrencyAmount(amount: Integer, currency: RpgStock["currency"], isAf
             .show(obj);
     }
 
-    const obj = container(textObj);
+    const deltaObj = objUiDelta({
+        valueProvider: () => amount,
+        bgNegativeTint: 0xff0000,
+        bgPositiveTint: 0x808080,
+        fgTint: 0xffffff,
+    })
+        .pivoted(0, 12)
+        .step(self => self.x = currencyTextObj.width + 7);
+
+    const obj = container(
+        textObj,
+        deltaObj,
+    );
 
     if (currency === "valuables") {
         priceTextObj.tint = 0x00ff00;
