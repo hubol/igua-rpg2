@@ -1,6 +1,11 @@
-import { Sprite, Texture } from "pixi.js";
+import { DisplayObject, Sprite, Texture } from "pixi.js";
 import { Tx } from "../../../assets/textures";
+import { Coro } from "../../../lib/game-engine/routines/coro";
+import { interpr, interpvr } from "../../../lib/game-engine/routines/interp";
+import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
+import { vequals } from "../../../lib/math/vector";
+import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 
@@ -60,8 +65,11 @@ objMusician.objHubolish = function () {
     return function objHubolish () {
         const feetObj = Sprite.from(txFeet0);
         const faceObj = Sprite.from(txFaceDefault).mixin(mxnBoilPivot);
-        const leftHandObj = Sprite.from(txHandLeft);
-        const rightHandObj = Sprite.from(txHandRight);
+
+        const offKeysPivot = [0, 6];
+
+        const leftHandObj = Sprite.from(txHandLeft).invisible().pivoted(offKeysPivot).mixin(mxnHandMotion);
+        const rightHandObj = Sprite.from(txHandRight).invisible().pivoted(offKeysPivot).mixin(mxnHandMotion);
 
         function getLipTx(lip: string | null) {
             return faceTxs[lip ?? ""] ?? txFaceDefault;
@@ -70,17 +78,16 @@ objMusician.objHubolish = function () {
         const methods = {
             nextBeat() {
                 feetObj.texture = feetObj.texture === txFeet0 ? txFeet1 : txFeet0;
-                const choice = Rng.int(4);
-                if (choice < 3) {
-                    leftHandObj.y = 0;
-                    rightHandObj.y = 0;
+            },
+            playLowKey() {
+                if (state.handsPosition === "off_keys") {
+                    return;
                 }
 
-                if (choice === 1) {
-                    leftHandObj.y = -4;
-                }
-                else if (choice === 2) {
-                    rightHandObj.y = -4;
+                const previousRightHandX = rightHandObj.targetPosition.x;
+                rightHandObj.targetPosition.x = Rng.intc(-3, 3);
+                if (rightHandObj.targetPosition.x === previousRightHandX) {
+                    rightHandObj.targetPosition.x += 1;
                 }
             },
             setLip(lip: string | null) {
@@ -93,6 +100,10 @@ objMusician.objHubolish = function () {
             },
         };
 
+        const state = {
+            handsPosition: "off_keys" as "on_keys" | "off_keys",
+        };
+
         return container(
             Sprite.from(txBody),
             feetObj,
@@ -102,9 +113,46 @@ objMusician.objHubolish = function () {
             rightHandObj,
         )
             .pivoted(29, 45)
-            .merge({ methods });
+            .merge({ methods, state })
+            .coro(function* () {
+                while (true) {
+                    yield () => state.handsPosition === "on_keys";
+
+                    leftHandObj.visible = true;
+                    rightHandObj.visible = true;
+
+                    yield* Coro.all([
+                        interpvr(leftHandObj.pivot).to(0, 0).over(300),
+                        interpvr(rightHandObj.pivot).to(0, 0).over(400),
+                    ]);
+
+                    yield () => state.handsPosition === "off_keys";
+
+                    yield* Coro.all([
+                        interpvr(leftHandObj.pivot).to(offKeysPivot).over(300),
+                        interpvr(rightHandObj.pivot).to(offKeysPivot).over(400),
+                    ]);
+                    leftHandObj.visible = false;
+                    rightHandObj.visible = false;
+                }
+            });
     };
 }();
+
+function mxnHandMotion(obj: DisplayObject) {
+    return obj
+        .merge({ targetPosition: vnew() })
+        .coro(function* (self) {
+            while (true) {
+                yield () => !vequals(self, self.targetPosition);
+                self.y -= 1;
+                yield sleepf(2);
+                self.y -= 1;
+                yield sleepf(2);
+                yield interpvr(self).to(self.targetPosition).over(80);
+            }
+        });
+}
 
 objMusician.objLottieish = function () {
     const [txBody, txFeet0, txFeet1, txFaceDefault, txGuitar, txHandLeft, txHandRight] = Tx.Esoteric.Musicians

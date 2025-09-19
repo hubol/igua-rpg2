@@ -92,6 +92,8 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
             if (bassPlucking && (command === "beat" || command === "offbeat")) {
                 nudgeGentleHubol = !nudgeGentleHubol;
 
+                hubolishObj.methods.playLowKey();
+
                 if (nudgeGentleHubol) {
                     hubolishObj.mixin(mxnGentleNudge);
                 }
@@ -132,6 +134,12 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
                 }
                 else if (data === "bass_end") {
                     bassPlucking = false;
+                }
+                else if (data === "keys_start") {
+                    hubolishObj.state.handsPosition = "on_keys";
+                }
+                else if (data === "keys_end") {
+                    hubolishObj.state.handsPosition = "off_keys";
                 }
             }
         })

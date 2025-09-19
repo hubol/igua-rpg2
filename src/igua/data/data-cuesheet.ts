@@ -7,6 +7,7 @@ export namespace DataCuesheet {
     export const SoldierBoyDemo: DataCuesheet<"beat" | "lyric" | "lip" | "misc" | "offbeat"> = [
         [0.595319, 0.595319, "misc", "guitar_start"],
         [0.617678, 0.617678, "beat", null],
+        [2.906722, 2.906722, "misc", "keys_start"],
         [2.912312, 2.912312, "beat", null],
         [5.097944, 5.097944, "beat", null],
         [7.283575, 7.283575, "beat", null],
@@ -317,6 +318,7 @@ export namespace DataCuesheet {
         [86.986457, 86.986457, "offbeat", null],
         [87.187691, 87.187691, "misc", "guitar_end"],
         [87.272936, 87.272936, "misc", "bass_end"],
+        [91.047483, 91.047483, "misc", "keys_end"],
     ];
 
     export function interlaceClickCues<TCommand>(

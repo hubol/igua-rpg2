@@ -307,6 +307,8 @@
 52.397860	52.397860	misc:spawn_poison
 54.719045	54.719045	misc:spawn_heal
 0.595319	0.595319	misc:guitar_start
+2.906722	2.906722	misc:keys_start
 9.386756	9.386756	misc:bass_start
 87.187691	87.187691	misc:guitar_end
 87.272936	87.272936	misc:bass_end
+91.047483	91.047483	misc:keys_end
