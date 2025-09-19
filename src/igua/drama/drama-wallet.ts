@@ -1,3 +1,4 @@
+import { Container, DisplayObject } from "pixi.js";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -27,7 +28,11 @@ function* rewardValuables(
     let atThresholdCount = 0;
 
     for (const currency of currencyToSpawn) {
-        objValuable(currency, undefined, reason).at(startPosition).scaled(0, 0).coro(moveTowardsPlayer).show();
+        objValuable(currency, undefined, reason)
+            .at(startPosition)
+            .mixin(mxnValuableMotion, playerObj)
+            .handles("motion:ready", self => self.collectableOnlyIfPlayerHasControl = false)
+            .show();
         yield sleep(ms);
 
         if (atThresholdCount > 50) {
@@ -43,20 +48,25 @@ function* rewardValuables(
     yield sleep(800 - ms);
 }
 
-function* moveTowardsPlayer(obj: ReturnType<typeof objValuable>) {
-    let steps = Rng.int(0, 1000);
-    const wiggle = container().step(() => obj.pivot.x = Math.round(Math.sin(steps++ * 0.2) * 4)).show(obj);
+function mxnValuableMotion(obj: Container, targetObj: DisplayObject) {
+    return obj
+        .scaled(0, 0)
+        .dispatches<"motion:ready">()
+        .coro(function* (self) {
+            let steps = Rng.int(0, 1000);
+            const wiggle = container().step(() => obj.pivot.x = Math.round(Math.sin(steps++ * 0.2) * 4)).show(obj);
 
-    yield* Coro.all([
-        interpv(obj.scale).steps(3).to(1, 1).over(100),
-        interpvr(obj).factor(factor.sine).translate(0, -100).over(500),
-    ]);
+            yield* Coro.all([
+                interpv(obj.scale).steps(3).to(1, 1).over(100),
+                interpvr(obj).factor(factor.sine).translate(0, -100).over(500),
+            ]);
 
-    wiggle.destroy();
+            wiggle.destroy();
 
-    obj.collectableOnlyIfPlayerHasControl = false;
+            self.dispatch("motion:ready");
 
-    yield interpvr(obj).factor(factor.sine).to(playerObj).over(300);
+            yield interpvr(obj).factor(factor.sine).to(targetObj).over(300);
+        });
 }
 
 export const DramaWallet = {
