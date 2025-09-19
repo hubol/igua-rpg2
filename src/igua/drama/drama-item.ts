@@ -11,7 +11,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataItem } from "../data/data-item";
-import { Input, layers, scene } from "../globals";
+import { Input, layers } from "../globals";
 import { mxnBoilRotate } from "../mixins/mxn-boil-rotate";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { mxnMotion } from "../mixins/mxn-motion";
@@ -229,10 +229,7 @@ function createRemovedItemFigureObjAtPlayer(item: RpgInventory.Item) {
 
 function createReceivedItemFigureObjAtSpeaker(item: RpgInventory.Item) {
     return objItemFigureWithTarget(item, playerObj)
-        .at(
-            DramaLib.Speaker.current?.getWorldCenter()
-                ?? scene.camera.vcpy().add(renderer.width / 2, renderer.height / 2),
-        )
+        .at(DramaLib.Speaker.getWorldCenter())
         .add(Rng.float(-8, 8), Rng.float(-32, -40))
         .show();
 }
