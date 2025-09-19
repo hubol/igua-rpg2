@@ -7,19 +7,17 @@ import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
-import { Null } from "../../lib/types/null";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataCuesheet } from "../data/data-cuesheet";
 import { DataPotion } from "../data/data-potion";
 import { mxnCuesheet } from "../mixins/mxn-cuesheet";
 import { mxnMotion } from "../mixins/mxn-motion";
-import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
+import { mxnTextTyped } from "../mixins/mxn-text-typed";
 import { objMusician } from "../objects/characters/obj-musician";
 import { objCollectiblePotion } from "../objects/collectibles/obj-collectible-potion";
 import { objFxEighthNote } from "../objects/effects/obj-fx-eighth-note";
 import { Rpg } from "../rpg/rpg";
-import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnStrangeMarket() {
     Jukebox.play(Rpg.character.position.checkpointName === "fromAbove" ? Mzk.SoldierBoyDemo : Mzk.BigLove);
@@ -38,10 +36,13 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
         .zIndexed(ZIndex.TerrainEntities)
         .show();
 
+    let lyricsText = "";
+
     const lyricsObj = objText.MediumBoldIrregular("", { tint: 0xFFB200 })
         .anchored(0.5, 0.5)
         .at(lvl.LyricsMarker)
         .zIndexed(ZIndex.AboveEntitiesDecals)
+        .mixin(mxnTextTyped, () => lyricsText)
         .show();
 
     const miscCommandDataToPotionSpawn = {
@@ -109,7 +110,7 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
                 hubolishObj.methods.playHighKey();
             }
             if (command === "lyric") {
-                lyricsObj.text = data!;
+                lyricsText = data!;
             }
             else if (command === "lip") {
                 hubolishObj.methods.setLip(data);
@@ -148,8 +149,8 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
             }
         })
         .handles("cue:end", (self, { command, data }) => {
-            if (command === "lyric" && lyricsObj.text === data) {
-                lyricsObj.text = "";
+            if (command === "lyric" && lyricsText === data) {
+                lyricsText = "";
             }
             else if (command === "lip") {
                 hubolishObj.methods.unsetLip(data);
