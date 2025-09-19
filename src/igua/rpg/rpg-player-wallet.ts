@@ -9,7 +9,17 @@ export class RpgPlayerWallet {
 
     private _update(id: RpgEconomy.Currency.Id, delta: Integer) {
         if (id === "valuables") {
-            this._state.valuables += delta;
+            if (delta < 0 && (this._state.valuables + delta) < 0) {
+                Logger.logContractViolationError(
+                    "RpgPlayerWallet._update",
+                    new Error("Negative delta would set held valuables below 0, setting to 0"),
+                    { valuables: this._state.valuables, delta },
+                );
+                this._state.valuables = 0;
+            }
+            else {
+                this._state.valuables += delta;
+            }
         }
         else if (id === "mechanical_idol_credits") {
             this._state.mechanicalIdolCredits += delta;

@@ -7,6 +7,7 @@ import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaInventory } from "../drama/drama-inventory";
+import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
 import { Cutscene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -58,7 +59,7 @@ function enrichMinigameManager(lvl: LvlType.ObstacleCourse) {
         }
         // TODO I think there should be a DramaWallet for this
         if (yield* ask("It costs 100 valuables to play. We doin this?")) {
-            Rpg.wallet.spend("valuables", 100);
+            yield* DramaWallet.spendValuables(100);
             yield interpvr(lvl.RestrictedBlock).translate(0, 50).over(500);
             CtxObstacleCourseMinigame.value.secondsRemaining = 60;
             objMinigameController(lvl).show();

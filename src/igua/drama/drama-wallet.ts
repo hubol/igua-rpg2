@@ -1,4 +1,5 @@
-import { Container, DisplayObject } from "pixi.js";
+import { Container } from "pixi.js";
+import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -6,26 +7,31 @@ import { Rng } from "../../lib/math/rng";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
+import { objFigureValuable } from "../objects/figures/obj-figure-valuable";
 import { playerObj } from "../objects/obj-player";
 import { objValuable } from "../objects/obj-valuable";
+import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 import { ValuableChangeMaker } from "../systems/valuable-change-maker";
+import { DramaLib } from "./drama-lib";
+
+function getCurrencyToSpawn(total: number) {
+    const counts = ValuableChangeMaker.solveCounts(total);
+    return Rng.shuffle(
+        Object.entries(counts).flatMap(([currencyType, count]) =>
+            range(count).map(() => currencyType as RpgEconomy.Valuables.Kind)
+        ),
+    );
+}
 
 function* rewardValuables(
     total: number,
     startPosition: VectorSimple,
     reason: RpgPlayerWallet.EarnReason = "default",
 ) {
-    const counts = ValuableChangeMaker.solveCounts(total);
-    const currencyToSpawn = Rng.shuffle(
-        Object.entries(counts).flatMap(([currencyType, count]) =>
-            range(count).map(() => currencyType as RpgEconomy.Valuables.Kind)
-        ),
-    );
-
-    let ms = 250;
-    let atThresholdCount = 0;
+    const currencyToSpawn = getCurrencyToSpawn(total);
+    const msDelayGenerator = generateMsDelayBetweenValuables();
 
     for (const currency of currencyToSpawn) {
         objValuable(currency, undefined, reason)
@@ -33,7 +39,48 @@ function* rewardValuables(
             .mixin(mxnValuableMotion, playerObj)
             .handles("motion:ready", self => self.collectableOnlyIfPlayerHasControl = false)
             .show();
-        yield sleep(ms);
+        yield sleep(msDelayGenerator.next().value!);
+    }
+    yield sleep(800 - (msDelayGenerator.next().value!));
+}
+
+/** Before calling this function, you must assert that the player has the demanded amount */
+function* spendValuables(
+    total: number,
+    reason: RpgPlayerWallet.SpendReason = "default",
+) {
+    const currencyToSpawn = getCurrencyToSpawn(total);
+    const msDelayGenerator = generateMsDelayBetweenValuables();
+
+    for (const currency of currencyToSpawn) {
+        objFigureValuable(currency)
+            .at(playerObj)
+            .mixin(mxnValuableMotion, DramaLib.Speaker.getWorldCenter())
+            .handles("motion:ready", self =>
+                self.coro(function* () {
+                    yield* Coro.race([
+                        sleep(300),
+                        () => Boolean(DramaLib.Speaker.current && self.collides(DramaLib.Speaker.current)),
+                    ]);
+
+                    const value = RpgEconomy.Valuables.Values[currency];
+                    Rpg.wallet.spend("valuables", value, reason);
+
+                    self.objFigureValuable.methods.collectFx();
+                    self.destroy();
+                }))
+            .show();
+        yield sleep(msDelayGenerator.next().value!);
+    }
+    yield sleep(800 - (msDelayGenerator.next().value!));
+}
+
+function* generateMsDelayBetweenValuables() {
+    let ms = 250;
+    let atThresholdCount = 0;
+
+    while (true) {
+        yield ms;
 
         if (atThresholdCount > 50) {
             ms = Math.max(70, ms - 1);
@@ -45,10 +92,9 @@ function* rewardValuables(
             ms = Math.max(100, ms - 6);
         }
     }
-    yield sleep(800 - ms);
 }
 
-function mxnValuableMotion(obj: Container, targetObj: DisplayObject) {
+function mxnValuableMotion(obj: Container, targetPosition: VectorSimple) {
     return obj
         .scaled(0, 0)
         .dispatches<"motion:ready">()
@@ -65,10 +111,11 @@ function mxnValuableMotion(obj: Container, targetObj: DisplayObject) {
 
             self.dispatch("motion:ready");
 
-            yield interpvr(obj).factor(factor.sine).to(targetObj).over(300);
+            yield interpvr(obj).factor(factor.sine).to(targetPosition).over(300);
         });
 }
 
 export const DramaWallet = {
     rewardValuables,
+    spendValuables,
 };

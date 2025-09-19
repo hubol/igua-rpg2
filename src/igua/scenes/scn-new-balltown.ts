@@ -162,8 +162,7 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
             const riskedValue = availableRisks[risked - 1];
 
             yield* show(`Okay. I'll take your ${riskedValue === 1 ? "valuable" : "valuables"} now.`);
-            // TODO sfx, vfx for take money
-            Rpg.wallet.spend("valuables", riskedValue, "gambling");
+            yield* DramaWallet.spendValuables(riskedValue, "gambling");
 
             yield sleep(500);
 
