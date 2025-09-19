@@ -26,6 +26,7 @@ import { StepOrder } from "../step-order";
 import { objFlopCollectionIndicator } from "./obj-flop-collection-indicator";
 import { objHealthBar } from "./obj-health-bar";
 import { objStatusBar } from "./obj-status-bar";
+import { objUiDelta } from "./obj-ui-delta";
 import { objUiSubdividedBar } from "./obj-ui-subdivided-bar";
 
 const Consts = {
@@ -43,7 +44,7 @@ export function objHud() {
     const poisonBuildUpObj = objPoisonBuildUp();
     const poisonLevelObj = objPoisonLevel();
 
-    const statusObjs: Array<Container & { advance?: number }> = [
+    const statusObjs: Array<Container & { advance?: number; effectiveHeight?: number }> = [
         valuablesInfoObj,
         objPocketInfo(),
         objIdolBuff(),
@@ -79,7 +80,12 @@ export function objHud() {
                 lastVisibleObj = statusObj;
                 y += 3;
                 statusObj.y = y;
-                y += statusObj.height + (statusObj["advance"] ?? 0);
+                if (statusObj["effectiveHeight"]) {
+                    y += statusObj.effectiveHeight!;
+                }
+                else {
+                    y += statusObj.height + (statusObj["advance"] ?? 0);
+                }
             }
 
             if (!playerObj) {
@@ -356,7 +362,7 @@ function objPocketInfo() {
 }
 
 function objValuablesInfo() {
-    return objText.MediumIrregular("You have 0 valuables", { tint: Consts.StatusTextTint })
+    const youHaveTextObj = objText.MediumIrregular("You have 0 valuables", { tint: Consts.StatusTextTint })
         .step(text => {
             const valuables = Rpg.wallet.count("valuables");
             text.seed = valuables + 64;
@@ -364,6 +370,18 @@ function objValuablesInfo() {
                 ? "You have 1 valuable"
                 : `You have ${valuables} valuables`;
         });
+
+    return container(
+        youHaveTextObj,
+        objUiDelta({
+            valueProvider: () => Rpg.wallet.count("valuables"),
+            bgNegativeTint: 0xff0000,
+            bgPositiveTint: 0x00ff00,
+            fgTint: 0xffffff,
+        })
+            .step(self => self.x = youHaveTextObj.width + 4),
+    )
+        .merge({ effectiveHeight: 8 });
 }
 
 function objPoisonLevel() {
