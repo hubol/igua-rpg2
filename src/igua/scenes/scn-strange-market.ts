@@ -3,7 +3,7 @@ import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { interpvr } from "../../lib/game-engine/routines/interp";
-import { sleep } from "../../lib/game-engine/routines/sleep";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
@@ -13,9 +13,11 @@ import { ZIndex } from "../core/scene/z-index";
 import { DataCuesheet } from "../data/data-cuesheet";
 import { DataPotion } from "../data/data-potion";
 import { mxnCuesheet } from "../mixins/mxn-cuesheet";
+import { mxnMotion } from "../mixins/mxn-motion";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { objMusician } from "../objects/characters/obj-musician";
 import { objCollectiblePotion } from "../objects/collectibles/obj-collectible-potion";
+import { objFxEighthNote } from "../objects/effects/obj-fx-eighth-note";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 
@@ -57,7 +59,21 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
         },
     } satisfies Record<string, { potionId: DataPotion.Id; position: VectorSimple }>;
 
+    function createFxLottieishNote(sign = Rng.intp()) {
+        const target = [Rng.float(0.5) * sign, Rng.float(-0.2, -0.35)];
+        objFxEighthNote()
+            .at(lottieishObj)
+            .add(10 - Math.sign(target.x) * 8, 0)
+            .mixin(mxnMotion)
+            .tinted(Rng.choose(0xCB9EFF, 0x546DFF, 0xffffff))
+            .step(self => self.speed.moveTowards(target, 0.025))
+            .show()
+            .speed.at(target.x * -2.3, target.y * 2);
+    }
+
     let nudgeGentleHubol = false;
+    let guitarStrumming = false;
+    let bassPlucking = false;
 
     container()
         .mixin(
@@ -68,9 +84,12 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
         .handles("cue:start", (self, { command, data }) => {
             if (command === "beat" || command === "click") {
                 hubolishObj.methods.nextBeat();
-                lottieishObj.methods.nextBeat();
+                if (guitarStrumming) {
+                    lottieishObj.methods.nextBeat();
+                    createFxLottieishNote();
+                }
             }
-            if (command === "beat" || command === "offbeat") {
+            if (bassPlucking && (command === "beat" || command === "offbeat")) {
                 nudgeGentleHubol = !nudgeGentleHubol;
 
                 if (nudgeGentleHubol) {
@@ -93,6 +112,26 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
                 const potionSpawn = miscCommandDataToPotionSpawn[data as keyof typeof miscCommandDataToPotionSpawn];
                 if (potionSpawn) {
                     objCollectiblePotion(potionSpawn.potionId).at(potionSpawn.position).show();
+                }
+                else if (data === "guitar_start") {
+                    lottieishObj.methods.setStrumming(true);
+                    guitarStrumming = true;
+                }
+                else if (data === "guitar_end") {
+                    self.coro(function* () {
+                        for (let i = 0; i < 5; i++) {
+                            createFxLottieishNote(i % 2 === 0 ? 1 : -1);
+                            yield sleepf(3 + i * 0.5);
+                        }
+                    });
+                    lottieishObj.methods.setStrumming(false);
+                    guitarStrumming = false;
+                }
+                else if (data === "bass_start") {
+                    bassPlucking = true;
+                }
+                else if (data === "bass_end") {
+                    bassPlucking = false;
                 }
             }
         })

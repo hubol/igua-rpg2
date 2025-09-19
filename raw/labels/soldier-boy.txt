@@ -46,6 +46,7 @@
 80.245097	80.245097	beat
 82.436318	82.436318	beat
 84.742132	84.742132	beat
+86.414894	86.414894	beat
 86.986457	86.986457	offbeat
 11.607324	13.127764	lyric:toilet bowl
 15.374883	17.781314	lyric:Watched the big ol' sun come
@@ -305,3 +306,7 @@
 50.414861	50.414861	misc:spawn_wetness
 52.397860	52.397860	misc:spawn_poison
 54.719045	54.719045	misc:spawn_heal
+0.595319	0.595319	misc:guitar_start
+9.386756	9.386756	misc:bass_start
+87.187691	87.187691	misc:guitar_end
+87.272936	87.272936	misc:bass_end

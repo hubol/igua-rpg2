@@ -110,10 +110,21 @@ objMusician.objLottieish = function () {
     const [txBody, txFeet0, txFeet1, txFaceDefault, txGuitar, txHandLeft, txHandRight] = Tx.Esoteric.Musicians
         .Lottieish.split({ width: 66 });
     return function objLottieish () {
+        let strumming = false;
+
         const feetObj = Sprite.from(txFeet0);
         const faceObj = Sprite.from(txFaceDefault).mixin(mxnBoilPivot);
+
         const leftHandObj = Sprite.from(txHandLeft).mixin(mxnBoilPivot);
         const rightHandObj = Sprite.from(txHandRight).mixin(mxnBoilPivot);
+
+        for (const handObj of [leftHandObj, rightHandObj]) {
+            handObj.step((self) => {
+                if (!strumming) {
+                    self.pivot.at(0, 0);
+                }
+            });
+        }
 
         const methods = {
             nextBeat() {
@@ -130,6 +141,9 @@ objMusician.objLottieish = function () {
                 else if (choice === 2) {
                     leftHandObj.at(2, -2);
                 }
+            },
+            setStrumming(value: boolean) {
+                strumming = value;
             },
         };
 

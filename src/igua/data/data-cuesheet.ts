@@ -5,10 +5,12 @@ export type DataCuesheet<TCommand> = Array<[start: number, end: number, command:
 
 export namespace DataCuesheet {
     export const SoldierBoyDemo: DataCuesheet<"beat" | "lyric" | "lip" | "misc" | "offbeat"> = [
+        [0.595319, 0.595319, "misc", "guitar_start"],
         [0.617678, 0.617678, "beat", null],
         [2.912312, 2.912312, "beat", null],
         [5.097944, 5.097944, "beat", null],
         [7.283575, 7.283575, "beat", null],
+        [9.386756, 9.386756, "misc", "bass_start"],
         [9.438462, 9.438462, "beat", null],
         [9.734724, 11.607324, "lyric", "I threw up in the"],
         [9.734724, 9.969498, "lip", "i"],
@@ -311,7 +313,10 @@ export namespace DataCuesheet {
         [81.4553, 81.940219, "lip", "o"],
         [82.436318, 82.436318, "beat", null],
         [84.742132, 84.742132, "beat", null],
+        [86.414894, 86.414894, "beat", null],
         [86.986457, 86.986457, "offbeat", null],
+        [87.187691, 87.187691, "misc", "guitar_end"],
+        [87.272936, 87.272936, "misc", "bass_end"],
     ];
 
     export function interlaceClickCues<TCommand>(
