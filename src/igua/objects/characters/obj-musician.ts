@@ -79,16 +79,19 @@ objMusician.objHubolish = function () {
             nextBeat() {
                 feetObj.texture = feetObj.texture === txFeet0 ? txFeet1 : txFeet0;
             },
+            playHighKey() {
+                if (state.handsPosition === "off_keys") {
+                    return;
+                }
+
+                leftHandObj.mxnHandMotion.methods.move();
+            },
             playLowKey() {
                 if (state.handsPosition === "off_keys") {
                     return;
                 }
 
-                const previousRightHandX = rightHandObj.targetPosition.x;
-                rightHandObj.targetPosition.x = Rng.intc(-3, 3);
-                if (rightHandObj.targetPosition.x === previousRightHandX) {
-                    rightHandObj.targetPosition.x += 1;
-                }
+                rightHandObj.mxnHandMotion.methods.move();
             },
             setLip(lip: string | null) {
                 faceObj.texture = getLipTx(lip);
@@ -140,16 +143,28 @@ objMusician.objHubolish = function () {
 }();
 
 function mxnHandMotion(obj: DisplayObject) {
+    const targetPosition = vnew();
+
+    const methods = {
+        move() {
+            const previousX = targetPosition.x;
+            targetPosition.x = Rng.intc(-3, 3);
+            if (targetPosition.x === previousX) {
+                targetPosition.x += 1;
+            }
+        },
+    };
+
     return obj
-        .merge({ targetPosition: vnew() })
+        .merge({ mxnHandMotion: { methods } })
         .coro(function* (self) {
             while (true) {
-                yield () => !vequals(self, self.targetPosition);
+                yield () => !vequals(self, targetPosition);
                 self.y -= 1;
                 yield sleepf(2);
                 self.y -= 1;
                 yield sleepf(2);
-                yield interpvr(self).to(self.targetPosition).over(80);
+                yield interpvr(self).to(targetPosition).over(80);
             }
         });
 }

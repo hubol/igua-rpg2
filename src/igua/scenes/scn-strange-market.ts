@@ -64,6 +64,7 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
         objFxEighthNote()
             .at(lottieishObj)
             .add(10 - Math.sign(target.x) * 8, 0)
+            .scaled(0.75, 0.75)
             .mixin(mxnMotion)
             .tinted(Rng.choose(0xCB9EFF, 0x546DFF, 0xffffff))
             .step(self => self.speed.moveTowards(target, 0.025))
@@ -77,7 +78,7 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
 
     container()
         .mixin(
-            mxnCuesheet<"beat" | "lyric" | "lip" | "misc" | "offbeat" | "click">,
+            mxnCuesheet<"beat" | "key" | "lyric" | "lip" | "misc" | "offbeat" | "click">,
             Mzk.SoldierBoyDemo,
             DataCuesheet.interlaceClickCues(DataCuesheet.SoldierBoyDemo, "beat", 3),
         )
@@ -103,6 +104,9 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
             }
             if (command === "beat" || command === "offbeat" || command === "click") {
                 lyricsObj.seed += 1;
+            }
+            if (command === "key" && data === "high") {
+                hubolishObj.methods.playHighKey();
             }
             if (command === "lyric") {
                 lyricsObj.text = data!;
