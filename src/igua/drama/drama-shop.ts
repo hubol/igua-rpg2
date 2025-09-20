@@ -176,7 +176,7 @@ const ItemConsts = {
 function objDramaShopStock(
     stock: RpgStock,
     refreshStocks: () => void,
-    showPurchaseError: () => void,
+    showCantAffordError: () => void,
 ) {
     const state = {
         productKind: stock.product.kind,
@@ -205,26 +205,31 @@ function objDramaShopStock(
         })
         .step(self => {
             if (CtxDramaShop.value.state.isInteractive && self.selected && Input.justWentDown("Confirm")) {
-                if (stock.isSoldOut) {
-                    objects.limitedQuantityObj.mxnErrorVibrate.methods.vibrate();
-                }
-                // TODO where to enforce potions inventory being too full???
-                else if (Rpg.wallet.canAfford(stock)) {
-                    const purchasePrice = stock.price;
-                    stock.purchase();
+                const result = stock.tryPurchase();
+
+                if (result.success) {
                     refreshStocks();
 
                     scene.stage.coro(function* () {
                         if (stock.currency === "valuables") {
-                            const spentValuablesObj = DramaWallet.createSpentValuables(purchasePrice);
+                            const spentValuablesObj = DramaWallet.createSpentValuables(result.purchase.price);
                             yield () => spentValuablesObj.destroyed;
                         }
                         DramaItem.createReceivedItemFigureObjAtSpeaker(stock.product);
                     });
+
+                    return;
                 }
-                else {
-                    showPurchaseError();
+
+                if (result.failures.cantAfford) {
+                    showCantAffordError();
                     objects.stockPriceObj.mxnErrorVibrate.methods.vibrate();
+                }
+                if (result.failures.isSoldOut) {
+                    objects.limitedQuantityObj.mxnErrorVibrate.methods.vibrate();
+                }
+                if (result.failures.potionInventoryHasInsufficientSlots) {
+                    // TODO implement
                 }
             }
         });

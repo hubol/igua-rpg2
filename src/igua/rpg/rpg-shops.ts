@@ -100,25 +100,28 @@ export class RpgStock {
         return Math.max(0, this._data.initialQuantity - this._getSoldCount());
     }
 
-    // TODO should purchase assert that the player can afford?
-    // Or return status indicating the player could not afford?!
-    purchase() {
-        if (this.isSoldOut) {
-            // TODO should this be a cutsom error that accepts more context?
-            throw new Error("Attempting to purchase stock when sold out");
+    tryPurchase() {
+        const isSoldOut = this.isSoldOut;
+        const cantAfford = !isSoldOut && !this._wallet.canAfford(this);
+        const potionInventoryHasInsufficientSlots = !isSoldOut && this.product.kind === "potion"
+            && this._inventory.potions.freeSlots > 0;
+
+        const failed = isSoldOut || cantAfford || potionInventoryHasInsufficientSlots;
+
+        if (failed) {
+            return {
+                success: false,
+                failures: { isSoldOut, cantAfford, potionInventoryHasInsufficientSlots },
+            } as const;
         }
 
-        if (!this._wallet.canAfford(this)) {
-            throw new Error("Attempting to purchase non-affordable stock");
-        }
-
-        this._wallet.spend(this.currency, this.price);
+        const price = this.price;
+        this._wallet.spend(this.currency, price);
 
         this._increaseSoldCount();
         this._inventory.receive(this.product);
 
-        // Caller can decide to animate this I guess
-        return this.product;
+        return { success: true, purchase: { price } } as const;
     }
 }
 

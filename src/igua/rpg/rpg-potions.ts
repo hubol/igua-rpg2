@@ -8,6 +8,7 @@ const Consts = {
 };
 
 export class RpgPotions {
+    private _listSize = 0;
     private readonly _list: Array<DataPotion.Id | null> = range(Consts.Size).map(() => null);
     private readonly _excessList: Array<DataPotion.Id | null> = [];
 
@@ -16,8 +17,12 @@ export class RpgPotions {
     }
 
     private _updateLists() {
+        this._listSize = 0;
         for (let i = 0; i < Consts.Size; i++) {
             this._list[i] = this._state[i] ?? null;
+            if (this._list[i]) {
+                this._listSize++;
+            }
         }
 
         this._excessList.length = 0;
@@ -26,6 +31,10 @@ export class RpgPotions {
                 this._excessList.push(this._state[i]);
             }
         }
+    }
+
+    get freeSlots() {
+        return Math.max(0, Consts.Size - this._listSize);
     }
 
     get list(): ReadonlyArray<DataPotion.Id | null> {
