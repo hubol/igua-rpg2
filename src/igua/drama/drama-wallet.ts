@@ -48,30 +48,48 @@ function* spendValuables(
     total: number,
     reason: RpgPlayerWallet.SpendReason = "default",
 ) {
+    const valuableSpenderObj = objValuableSpender(
+        total,
+        (kind) => Rpg.wallet.spend("valuables", RpgEconomy.Valuables.Values[kind], reason),
+    )
+        .show();
+
+    yield () => valuableSpenderObj.destroyed;
+}
+
+function createSpentValuables(total: number) {
+    objValuableSpender(total, () => {}).show();
+}
+
+function objValuableSpender(total: number, onSpend: (valuablesKind: RpgEconomy.Valuables.Kind) => void) {
+    const currentSpeaker = DramaLib.Speaker.current;
     const currencyToSpawn = getCurrencyToSpawn(total);
     const msDelayGenerator = generateMsDelayBetweenValuables();
 
-    for (const currency of currencyToSpawn) {
-        objFigureValuable(currency)
-            .at(playerObj)
-            .mixin(mxnValuableMotion, DramaLib.Speaker.getWorldCenter())
-            .handles("motion:ready", self =>
-                self.coro(function* () {
-                    yield* Coro.race([
-                        sleep(300),
-                        () => Boolean(DramaLib.Speaker.current && self.collides(DramaLib.Speaker.current)),
-                    ]);
+    return container()
+        .coro(function* (self) {
+            for (const currency of currencyToSpawn) {
+                objFigureValuable(currency)
+                    .at(playerObj)
+                    .mixin(mxnValuableMotion, DramaLib.Speaker.getWorldCenter())
+                    .handles("motion:ready", self =>
+                        self.coro(function* () {
+                            yield* Coro.race([
+                                sleep(300),
+                                () => Boolean(currentSpeaker && self.collides(currentSpeaker)),
+                            ]);
 
-                    const value = RpgEconomy.Valuables.Values[currency];
-                    Rpg.wallet.spend("valuables", value, reason);
+                            onSpend(currency);
 
-                    self.objFigureValuable.methods.collectFx();
-                    self.destroy();
-                }))
-            .show();
-        yield sleep(msDelayGenerator.next().value!);
-    }
-    yield sleep(800 - (msDelayGenerator.next().value!));
+                            self.objFigureValuable.methods.collectFx();
+                            self.destroy();
+                        }))
+                    .show();
+                yield sleep(msDelayGenerator.next().value!);
+            }
+            yield sleep(800 - (msDelayGenerator.next().value!));
+            self.destroy();
+        });
 }
 
 function* generateMsDelayBetweenValuables() {
@@ -115,6 +133,7 @@ function mxnValuableMotion(obj: Container, targetPosition: VectorSimple) {
 }
 
 export const DramaWallet = {
+    createSpentValuables,
     rewardValuables,
     spendValuables,
 };
