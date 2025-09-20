@@ -7,12 +7,20 @@ import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { renderer } from "../current-pixi-renderer";
+import { DataNpcPersona } from "../data/data-npc-persona";
+import { DataPocketItem } from "../data/data-pocket-item";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaWallet } from "../drama/drama-wallet";
-import { ask, show } from "../drama/show";
-import { Cutscene } from "../globals";
+import { show } from "../drama/show";
+import { Cutscene, scene } from "../globals";
+import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { CtxPocketItems } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
+import { objFxPuffyCloud } from "../objects/effects/obj-fx-puffy-cloud";
+import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
 import { objStatusBar } from "../objects/overlay/obj-status-bar";
 import { Rpg } from "../rpg/rpg";
@@ -82,49 +90,25 @@ function objMinigameController(lvl: LvlType.ObstacleCourse) {
             CtxObstacleCourseMinigame.value.isActive = true;
             const indicatorObj = objMinigameRemainingTimeIndicator(lvl);
 
-            self.coro(function* () {
-                while (true) {
-                    yield () => Rpg.inventory.pocket.count("Wheat") >= 50;
-                    yield Cutscene.play(function* () {
-                        // TODO sick ass animation for this
-                        yield* DramaInventory.removeCount({ kind: "pocket_item", id: "Wheat" }, 50);
-                        const prize = PrizeConsts.wheat[Rpg.flags.obstacleCourse.wheatPrizesCount++];
-                        if (prize) {
-                            Rpg.inventory.receive(prize);
-                        }
-                        else {
-                            for (let i = 0; i < 5; i++) {
-                                Rpg.inventory.receive({ id: "FlopBlindBox", kind: "key_item" });
-                            }
-                        }
+            self.coro(
+                function* () {
+                    yield* coroAwardPrizeForCollection({
+                        npcPersona: DataNpcPersona.Manifest.WheatGod,
+                        pocketItemId: "Wheat",
+                        getPrize: () => PrizeConsts.wheat[Rpg.flags.obstacleCourse.wheatPrizesCount++] ?? null,
+                    });
+                },
+            );
 
-                        yield* show("Gave a prize. Check inv.");
-                    }).done;
-                }
-            });
-
-            // TODO copy-paste sucks
-
-            self.coro(function* () {
-                while (true) {
-                    yield () => Rpg.inventory.pocket.count("Beet") >= 50;
-                    yield Cutscene.play(function* () {
-                        // TODO sick ass animation for this
-                        yield* DramaInventory.removeCount({ kind: "pocket_item", id: "Beet" }, 50);
-                        const prize = PrizeConsts.beet[Rpg.flags.obstacleCourse.beetPrizesCount++];
-                        if (prize) {
-                            Rpg.inventory.receive(prize);
-                        }
-                        else {
-                            for (let i = 0; i < 5; i++) {
-                                Rpg.inventory.receive({ id: "FlopBlindBox", kind: "key_item" });
-                            }
-                        }
-
-                        yield* show("Gave a prize. Check inv.");
-                    }).done;
-                }
-            });
+            self.coro(
+                function* () {
+                    yield* coroAwardPrizeForCollection({
+                        npcPersona: DataNpcPersona.Manifest.BeetGod,
+                        pocketItemId: "Beet",
+                        getPrize: () => PrizeConsts.beet[Rpg.flags.obstacleCourse.beetPrizesCount++] ?? null,
+                    });
+                },
+            );
 
             self.step(() => {
                 if (playerObj.hasControl && ++steps >= 60) {
@@ -162,4 +146,49 @@ function* dramaEndMinigame(lvl: LvlType.ObstacleCourse) {
     yield () => movePlayerObj.destroyed;
     playerObj.physicsEnabled = true;
     yield interpvr(lvl.RestrictedBlock).translate(0, -50).over(500);
+}
+
+function objHolyIguana(persona: DataNpcPersona.Model) {
+    return container(
+        objFxPuffyCloud(0xacbddd).at(2, -3),
+        objIguanaPuppet(persona.looks),
+        objFxPuffyCloud(0xffffff),
+    )
+        .mixin(mxnSpeaker, { name: persona.name, ...objIguanaNpc.getSpeakerColors(persona.looks) })
+        .mixin(mxnSinePivot);
+}
+
+interface CoroAwardPrizeForCollectionArgs {
+    pocketItemId: DataPocketItem.Id;
+    npcPersona: DataNpcPersona.Model;
+    getPrize: () => RpgInventory.Item | null;
+}
+
+function* coroAwardPrizeForCollection({ npcPersona, pocketItemId, getPrize }: CoroAwardPrizeForCollectionArgs) {
+    while (true) {
+        yield () => Rpg.inventory.pocket.count(pocketItemId) >= 50;
+        const holyIguanaObj = objHolyIguana(npcPersona).at(
+            scene.camera.x + renderer.width / 2 - 64,
+            scene.camera.y - 64,
+        )
+            .show();
+        yield Cutscene.play(function* () {
+            yield interpvr(holyIguanaObj).factor(factor.sine).translate(0, 202).over(2000);
+            // TODO sick ass animation for this
+            yield* DramaInventory.removeCount({ kind: "pocket_item", id: pocketItemId }, 50);
+            const prize = getPrize();
+            if (prize) {
+                Rpg.inventory.receive(prize);
+            }
+            else {
+                for (let i = 0; i < 5; i++) {
+                    Rpg.inventory.receive({ id: "FlopBlindBox", kind: "key_item" });
+                }
+            }
+
+            yield* show("Gave a prize. Check inv.");
+            yield interpvr(holyIguanaObj).factor(factor.sine).translate(0, -202).over(2000);
+            holyIguanaObj.destroy();
+        }, { speaker: holyIguanaObj }).done;
+    }
 }
