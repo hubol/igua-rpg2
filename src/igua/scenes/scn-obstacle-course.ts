@@ -1,5 +1,6 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
@@ -74,7 +75,10 @@ function objMinigameController(lvl: LvlType.ObstacleCourse) {
     let steps = 0;
     return container()
         .coro(function* (self) {
-            yield onPrimitiveMutate(() => Rpg.inventory.pocket.count("Wheat"));
+            yield* Coro.race([
+                onPrimitiveMutate(() => Rpg.inventory.pocket.count("Wheat")),
+                onPrimitiveMutate(() => Rpg.inventory.pocket.count("Beet")),
+            ]);
             CtxObstacleCourseMinigame.value.isActive = true;
             const indicatorObj = objMinigameRemainingTimeIndicator(lvl);
 
