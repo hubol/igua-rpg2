@@ -24,8 +24,8 @@ export namespace DataNpcPersona {
             UnderneathTunneler: { job: "Tunneler", name: "Sheeb", looks: NpcLooks.HighIq },
             Gluemaker: { job: "Gluemaker", name: "Paste", looks: NpcLooks.Paste },
             Cobbler: { job: "Cobbler", name: "Frint", looks: NpcLooks.Spice },
-            WheatGod: { job: "God", name: "Wheena", looks: NpcLooks.Spice },
-            BeetGod: { job: "God", name: "Bweena", looks: NpcLooks.Spice },
+            WheatGod: { job: "God", name: "Wheena", looks: NpcLooks.Wheat },
+            BeetGod: { job: "God", name: "Bweena", looks: NpcLooks.Beet },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
         } satisfies Record<string, Model>,
     );
