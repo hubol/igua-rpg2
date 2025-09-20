@@ -11,11 +11,23 @@ export namespace DataShop {
     export const Manifest = DataLib.createManifest(
         {
             BalltownMechanicalIdol: {
-                stocks: [{
-                    product: { kind: "key_item", id: "UpgradedPickaxe" },
-                    initialQuantity: 999,
-                    price: { currency: "mechanical_idol_credits", deltaSold: 0, initial: 10 },
-                }],
+                stocks: [
+                    {
+                        product: { kind: "key_item", id: "UpgradedPickaxe" },
+                        initialQuantity: 999,
+                        price: { currency: "mechanical_idol_credits", deltaSold: 0, initial: 10 },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeHealthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "mechanical_idol_credits", deltaSold: 0, initial: 10 },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "mechanical_idol_credits", deltaSold: 0, initial: 15 },
+                    },
+                ],
             },
             BalltownOutskirtsSecret: {
                 stocks: [
