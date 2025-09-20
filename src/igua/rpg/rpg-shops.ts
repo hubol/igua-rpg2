@@ -104,7 +104,7 @@ export class RpgStock {
         const isSoldOut = this.isSoldOut;
         const cantAfford = !isSoldOut && !this._wallet.canAfford(this);
         const potionInventoryHasInsufficientSlots = !isSoldOut && this.product.kind === "potion"
-            && this._inventory.potions.freeSlots > 0;
+            && this._inventory.potions.freeSlots <= 0;
 
         const failed = isSoldOut || cantAfford || potionInventoryHasInsufficientSlots;
 
