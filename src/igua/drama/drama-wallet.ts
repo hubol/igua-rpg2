@@ -15,6 +15,7 @@ import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 import { ValuableChangeMaker } from "../systems/valuable-change-maker";
 import { DramaLib } from "./drama-lib";
+import { ask } from "./show";
 
 function getCurrencyToSpawn(total: number) {
     const counts = ValuableChangeMaker.solveCounts(total);
@@ -55,6 +56,24 @@ function* spendValuables(
         .show();
 
     yield () => valuableSpenderObj.destroyed;
+}
+
+function* askSpendValuables(
+    question: string,
+    total: number,
+    reason: RpgPlayerWallet.SpendReason = "default",
+) {
+    if (Rpg.wallet.count("valuables") < total) {
+        yield* ask(question, "I can't afford it");
+        return false;
+    }
+
+    if (yield* ask(question)) {
+        yield* spendValuables(total, reason);
+        return true;
+    }
+
+    return false;
 }
 
 function createSpentValuables(total: number) {
@@ -133,6 +152,7 @@ function mxnValuableMotion(obj: Container, targetPosition: VectorSimple) {
 }
 
 export const DramaWallet = {
+    askSpendValuables,
     createSpentValuables,
     rewardValuables,
     spendValuables,

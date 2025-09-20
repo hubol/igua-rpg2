@@ -57,9 +57,7 @@ function enrichMinigameManager(lvl: LvlType.ObstacleCourse) {
             yield* show("You should already be playing.");
             return;
         }
-        // TODO I think there should be a DramaWallet for this
-        if (yield* ask("It costs 100 valuables to play. We doin this?")) {
-            yield* DramaWallet.spendValuables(100);
+        if (yield* DramaWallet.askSpendValuables("It costs 100 valuables to play. We doin this?", 100)) {
             yield interpvr(lvl.RestrictedBlock).translate(0, 50).over(500);
             CtxObstacleCourseMinigame.value.secondsRemaining = 60;
             objMinigameController(lvl).show();
