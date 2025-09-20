@@ -3,6 +3,7 @@ import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
+import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { approachLinear } from "../../lib/math/number";
@@ -86,9 +87,12 @@ export function* dramaShop(shopId: DataShop.Id, style: DramaShopStyle) {
 
     const playerStatusObj = objPlayerStatus(shop.stocks).at(50, -5);
     const stockObjs = [...shop.stocks].sort(compareStock).map(stock =>
-        objDramaShopStock(stock, refreshStocks, () => playerStatusObj.methods.vibrate(stock.currency), () => {
-            // TODO implement
-        })
+        objDramaShopStock(
+            stock,
+            refreshStocks,
+            () => playerStatusObj.methods.vibrate(stock.currency),
+            () => playerStatusObj.methods.vibratePotionInventorySlots(),
+        )
     );
 
     const doneButtonObj = objDoneButton().step((self) => {
@@ -283,7 +287,6 @@ function objDramaShopStock(
         contextualObj.removeAllChildren();
         objStockNameDescription(stock).show(contextualObj);
         const stockPriceObj = objStockPrice(stock)
-            .mixin(mxnErrorVibrate)
             .at(ItemConsts.width - 69, 32)
             .show(contextualObj);
 
@@ -342,7 +345,11 @@ function objStockNameDescription(stock: RpgStock) {
 }
 
 function objStockPrice(item: RpgStock) {
-    return objCurrencyAmount(item.price, item.currency, Rpg.wallet.canAfford(item));
+    return objCurrencyAmount(
+        () => item.price,
+        item.currency,
+        Rpg.wallet.canAfford(item),
+    );
 }
 
 // TODO this must be exhaustive
@@ -361,14 +368,17 @@ const possibleCurrencyIndices: Record<RpgEconomy.Currency.Id, Integer> = Object.
 function objPlayerStatus(stocks: ReadonlyArray<RpgStock>) {
     const currenciesInStocks = possibleCurrencies.filter(currency => stocks.some(item => item.currency === currency));
     const currencyObjs = currenciesInStocks.reverse().map((currency, i) =>
-        objCurrencyAmount(Rpg.wallet.count(currency), currency, true)
+        objCurrencyAmount(() => Rpg.wallet.count(currency), currency, true)
             .merge({ currency })
-            .mixin(mxnErrorVibrate)
-            .step(self => self.controls.amount = Rpg.wallet.count(currency))
     );
+
+    const anyPotionsInStocks = stocks.some(stock => stock.product.kind === "potion");
+
+    const potionInventorySlotsObj = objPotionInventorySlots();
 
     const statusObjs = [
         ...currencyObjs,
+        ...(anyPotionsInStocks ? [potionInventorySlotsObj] : []),
     ]
         .map((obj, i) => obj.at(i, renderer.height - 28 - i * 15));
 
@@ -387,6 +397,9 @@ function objPlayerStatus(stocks: ReadonlyArray<RpgStock>) {
             currencyObjs.find(obj => obj.currency === currency)?.mxnErrorVibrate?.methods
                 ?.vibrate?.();
         },
+        vibratePotionInventorySlots() {
+            potionInventorySlotsObj.mxnErrorVibrate.methods.vibrate();
+        },
     };
 
     return container(
@@ -402,9 +415,19 @@ function objPlayerStatus(stocks: ReadonlyArray<RpgStock>) {
         .merge({ methods });
 }
 
+function objPotionInventorySlots() {
+    return objBadge({
+        getAmount: () => Rpg.inventory.potions.freeSlots,
+        getText: amount => amount === 1 ? "free slot" : "free slots",
+        bgTint: 0x204800,
+        textTint: 0x84B500,
+        iconTx: Tx.Ui.FreePotionSlots,
+    });
+}
+
 const r = new Rectangle();
 
-function getObjBadgeArgsForCurrency(currency: RpgStock["currency"]): Omit<ObjBadgeArgs, "amount" | "isAffordable"> {
+function getObjBadgeArgsForCurrency(currency: RpgStock["currency"]): Omit<ObjBadgeArgs, "getAmount" | "isAffordable"> {
     if (RpgExperience.isId(currency)) {
         const config = experienceIndicatorConfigs[currency];
 
@@ -428,16 +451,16 @@ function getObjBadgeArgsForCurrency(currency: RpgStock["currency"]): Omit<ObjBad
     };
 }
 
-function objCurrencyAmount(amount: Integer, currency: RpgStock["currency"], isAffordable: boolean) {
+function objCurrencyAmount(getAmount: () => Integer, currency: RpgStock["currency"], isAffordable: boolean) {
     return objBadge({
-        amount,
+        getAmount,
         isAffordable,
         ...getObjBadgeArgsForCurrency(currency),
     });
 }
 
 interface ObjBadgeArgs {
-    amount: Integer;
+    getAmount: () => Integer;
     isAffordable?: boolean;
     getText: (amount: Integer) => string;
     iconTx?: Texture | null;
@@ -445,12 +468,15 @@ interface ObjBadgeArgs {
     bgTint?: RgbInt | null;
 }
 
-function objBadge({ amount, getText, isAffordable = true, iconTx, textTint = 0xffffff, bgTint = null }: ObjBadgeArgs) {
+function objBadge(
+    { getAmount, getText, isAffordable = true, iconTx, textTint = 0xffffff, bgTint = null }: ObjBadgeArgs,
+) {
     const priceTextObj = objText.MediumBoldIrregular("", { tint: textTint }).anchored(1, 1).at(-1, 0);
     const currencyTextObj = objText.Medium("", { tint: textTint }).anchored(0, 1)
         .at(1, 0);
 
     function updateText() {
+        const amount = getAmount();
         priceTextObj.text = amount + "";
         currencyTextObj.text = getText(amount);
     }
@@ -471,7 +497,7 @@ function objBadge({ amount, getText, isAffordable = true, iconTx, textTint = 0xf
     }
 
     const deltaObj = objUiDelta({
-        valueProvider: () => amount,
+        valueProvider: getAmount,
         bgNegativeTint: 0xff0000,
         bgPositiveTint: 0x808080,
         fgTint: 0xffffff,
@@ -519,13 +545,6 @@ function objBadge({ amount, getText, isAffordable = true, iconTx, textTint = 0xf
         gfx.zIndexed(-2).show(obj);
     }
 
-    const controls = {
-        set amount(value: Integer) {
-            amount = value;
-            updateText();
-        },
-    };
-
     if (!isAffordable) {
         const center = priceTextObj.getBounds().getCenter().vround();
         Sprite.from(Tx.Shapes.X22)
@@ -537,7 +556,13 @@ function objBadge({ amount, getText, isAffordable = true, iconTx, textTint = 0xf
             .show(obj);
     }
     return obj
-        .merge({ controls });
+        .mixin(mxnErrorVibrate)
+        .coro(function* () {
+            while (true) {
+                yield onPrimitiveMutate(getAmount);
+                updateText();
+            }
+        });
 }
 
 function objLimitedQuantity(quantity: Integer) {
