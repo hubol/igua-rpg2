@@ -27,7 +27,6 @@ function getCurrencyToSpawn(total: number) {
 
 function* rewardValuables(
     total: number,
-    startPosition: VectorSimple,
     reason: RpgPlayerWallet.EarnReason = "default",
 ) {
     const currencyToSpawn = getCurrencyToSpawn(total);
@@ -35,7 +34,7 @@ function* rewardValuables(
 
     for (const currency of currencyToSpawn) {
         objValuable(currency, undefined, reason)
-            .at(startPosition)
+            .at(DramaLib.Speaker.getWorldCenter())
             .mixin(mxnValuableMotion, playerObj)
             .handles("motion:ready", self => self.collectableOnlyIfPlayerHasControl = false)
             .show();

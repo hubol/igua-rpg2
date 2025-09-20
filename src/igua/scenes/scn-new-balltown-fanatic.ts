@@ -70,7 +70,7 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
             ) {
                 yield* show("These look awesome.", "How much do I owe you? Does 50 valuables sound good?");
                 yield* DramaInventory.removeCount({ kind: "pocket_item", id: typePreference }, 10);
-                yield* DramaQuests.completeQuest("NewBalltownFanaticDelivery", lvl.BallFruitFanaticNpc);
+                yield* DramaQuests.completeQuest("NewBalltownFanaticDelivery");
                 Rpg.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount++;
                 return;
             }

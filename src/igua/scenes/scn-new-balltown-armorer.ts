@@ -100,7 +100,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
 
         Cutscene.setCurrentSpeaker(lvl.IguanaNpc);
         yield* show("Happy...! Happy...! Happy...!", "Thank you so much for arranging the delivery of the fish.");
-        yield* DramaQuests.completeQuest("NewBalltownArmorerReceivesFish", lvl.IguanaNpc);
+        yield* DramaQuests.completeQuest("NewBalltownArmorerReceivesFish");
         yield* show("You are cool.");
 
         deliveries.armorer = "delivered";
@@ -130,7 +130,7 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
             }
             else {
                 yield* show("Oh, my fishtank!", "You put water in it. Thanks.");
-                yield* DramaWallet.rewardValuables(15, lvl.IguanaNpc);
+                yield* DramaWallet.rewardValuables(15);
                 yield* show(
                     "Believe me, there's a whole lot more where that came from if you can get me a fish to live in the aquarium!",
                 );

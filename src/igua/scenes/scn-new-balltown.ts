@@ -198,7 +198,7 @@ function enrichCroupier(lvl: LvlType.NewBalltown) {
             if (roll === guess) {
                 const prize = riskedValue * 5;
                 yield* show("Nice guess!", `You win ${prize} valuables!`);
-                yield* DramaWallet.rewardValuables(prize, lvl.Croupier, "gambling");
+                yield* DramaWallet.rewardValuables(prize, "gambling");
             }
             else {
                 yield* show("Sorry, you lost. You can always try again!");
