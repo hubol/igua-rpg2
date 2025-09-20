@@ -20,7 +20,7 @@ export function objIguanaNpc(npcPersonaId: DataNpcPersona.Id) {
 
     return objIguanaLocomotive(persona.looks)
         .mixin(mxnIguanaEditable, persona.looks)
-        .mixin(mxnSpeaker, { name: persona.name, ...getSpeakerColors(persona.looks) })
+        .mixin(mxnSpeaker, { name: persona.name, ...objIguanaNpc.getSpeakerColors(persona.looks) })
         .mixin(mxnStartPosition)
         .coro(function* (self) {
             let speakingHandledCount = 0;
@@ -60,7 +60,7 @@ export function objIguanaNpc(npcPersonaId: DataNpcPersona.Id) {
         });
 }
 
-function getSpeakerColors(looks: IguanaLooks.Serializable) {
+objIguanaNpc.getSpeakerColors = function getSpeakerColors (looks: IguanaLooks.Serializable) {
     return {
         colorPrimary: looks.head.color,
         colorSecondary: SubjectiveColorAnalyzer.getColorWithHighestContrast(looks.head.color, [
@@ -69,4 +69,4 @@ function getSpeakerColors(looks: IguanaLooks.Serializable) {
             looks.head.crest.color,
         ]),
     };
-}
+};
