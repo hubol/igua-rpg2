@@ -8,9 +8,8 @@ import { onMutate } from "../../lib/game-engine/routines/on-mutate";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../lib/math/number";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
-import { Rng } from "../../lib/math/rng";
-import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
+import { Null } from "../../lib/types/null";
 import { renderer } from "../current-pixi-renderer";
 import { DataItem } from "../data/data-item";
 import { DataPocketItem } from "../data/data-pocket-item";
@@ -19,7 +18,6 @@ import { mxnActionRepeater } from "../mixins/mxn-action-repeater";
 import { mxnBoilMirrorRotate } from "../mixins/mxn-boil-mirror-rotate";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnBoilSeed } from "../mixins/mxn-boil-seed";
-import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
@@ -349,9 +347,26 @@ function* askWhichToOffer<TItem extends RpgInventory.RemovableItem>(items: TItem
     return item;
 }
 
+function* receiveItems(items: RpgInventory.Item[]) {
+    for (const item of items) {
+        Rpg.inventory.receive(item);
+    }
+
+    let lastObj = Null<DisplayObject>();
+
+    // TODO improve FX
+    for (let i = 0; i < items.length; i++) {
+        lastObj = DramaItem.createReceivedItemFigureObjAtSpeaker(items[i]);
+        yield DramaItem.sleepAfterRemoveIteration(i);
+    }
+
+    yield () => !lastObj || lastObj.destroyed;
+}
+
 export const DramaInventory = {
     askRemoveCount,
     askWhichToOffer,
+    receiveItems,
     removeCount: removeCountFromPlayer,
     pocket: {
         empty: emptyPocket,

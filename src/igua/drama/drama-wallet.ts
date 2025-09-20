@@ -77,7 +77,7 @@ function* askSpendValuables(
 }
 
 function createSpentValuables(total: number) {
-    objValuableSpender(total, () => {}).show();
+    return objValuableSpender(total, () => {}).show();
 }
 
 function objValuableSpender(total: number, onSpend: (valuablesKind: RpgEconomy.Valuables.Kind) => void) {

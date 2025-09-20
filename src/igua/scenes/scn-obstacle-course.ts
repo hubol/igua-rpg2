@@ -5,6 +5,7 @@ import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { container } from "../../lib/pixi/container";
+import { range } from "../../lib/range";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { renderer } from "../current-pixi-renderer";
@@ -178,15 +179,13 @@ function* coroAwardPrizeForCollection({ npcPersona, pocketItemId, getPrize }: Co
             yield* DramaInventory.removeCount({ kind: "pocket_item", id: pocketItemId }, 50);
             const prize = getPrize();
             if (prize) {
-                Rpg.inventory.receive(prize);
+                yield* DramaInventory.receiveItems([prize]);
             }
             else {
-                for (let i = 0; i < 5; i++) {
-                    Rpg.inventory.receive({ id: "FlopBlindBox", kind: "key_item" });
-                }
+                yield* DramaInventory.receiveItems(range(5).map(() => ({ id: "FlopBlindBox", kind: "key_item" })));
             }
 
-            yield* show("Gave a prize. Check inv.");
+            yield* show("A blessing for thy harvest.", "Many thanks unto thine ass.");
             yield interpvr(holyIguanaObj).factor(factor.sine).translate(0, -202).over(2000);
             holyIguanaObj.destroy();
         }, { speaker: holyIguanaObj }).done;

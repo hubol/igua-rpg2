@@ -27,6 +27,7 @@ import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgStock } from "../rpg/rpg-shops";
 import { objUiPage, ObjUiPageElement } from "../ui/framework/obj-ui-page";
 import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
+import { DramaItem } from "./drama-item";
 import { DramaWallet } from "./drama-wallet";
 import { objDramaOwnedCount } from "./objects/obj-drama-owned-count";
 
@@ -209,11 +210,17 @@ function objDramaShopStock(
                 }
                 // TODO where to enforce potions inventory being too full???
                 else if (Rpg.wallet.canAfford(stock)) {
-                    if (stock.currency === "valuables") {
-                        DramaWallet.createSpentValuables(stock.price);
-                    }
+                    const purchasePrice = stock.price;
                     stock.purchase();
                     refreshStocks();
+
+                    scene.stage.coro(function* () {
+                        if (stock.currency === "valuables") {
+                            const spentValuablesObj = DramaWallet.createSpentValuables(purchasePrice);
+                            yield () => spentValuablesObj.destroyed;
+                        }
+                        DramaItem.createReceivedItemFigureObjAtSpeaker(stock.product);
+                    });
                 }
                 else {
                     showPurchaseError();
