@@ -53,15 +53,22 @@ export class RpgExperience implements Readonly<RpgExperience.State> {
 }
 
 export namespace RpgExperience {
-    export interface State {
-        combat: Integer;
-        computer: Integer;
-        gambling: Integer;
-        jump: Integer;
-        pocket: Integer;
-        quest: Integer;
-        social: Integer;
-    }
+    export const Manifest = [
+        "combat",
+        "computer",
+        "gambling",
+        "jump",
+        "pocket",
+        "quest",
+        "social",
+    ] as const;
 
-    export type Id = keyof State;
+    export type Id = typeof Manifest[number];
+
+    export type State = Record<Id, Integer>;
+
+    const manifestSet = new Set(Manifest);
+    export function isId(value: string): value is Id {
+        return manifestSet.has(value as Id);
+    }
 }

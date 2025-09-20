@@ -24,6 +24,7 @@ import { experienceIndicatorConfigs, experienceIndicatorConfigsArray } from "../
 import { objUiDelta } from "../objects/overlay/obj-ui-delta";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
+import { RpgExperience } from "../rpg/rpg-experience";
 import { RpgStock } from "../rpg/rpg-shops";
 import { objUiPage, ObjUiPageElement } from "../ui/framework/obj-ui-page";
 import { UiVerticalLayout } from "../ui/framework/ui-vertical-layout";
@@ -85,7 +86,9 @@ export function* dramaShop(shopId: DataShop.Id, style: DramaShopStyle) {
 
     const playerStatusObj = objPlayerStatus(shop.stocks).at(50, -5);
     const stockObjs = [...shop.stocks].sort(compareStock).map(stock =>
-        objDramaShopStock(stock, refreshStocks, () => playerStatusObj.methods.vibrate(stock.currency))
+        objDramaShopStock(stock, refreshStocks, () => playerStatusObj.methods.vibrate(stock.currency), () => {
+            // TODO implement
+        })
     );
 
     const doneButtonObj = objDoneButton().step((self) => {
@@ -177,6 +180,7 @@ function objDramaShopStock(
     stock: RpgStock,
     refreshStocks: () => void,
     showCantAffordError: () => void,
+    showPotionInventoryHasInsufficientSlotsError: () => void,
 ) {
     const state = {
         productKind: stock.product.kind,
@@ -229,7 +233,7 @@ function objDramaShopStock(
                     objects.limitedQuantityObj.mxnErrorVibrate.methods.vibrate();
                 }
                 if (result.failures.potionInventoryHasInsufficientSlots) {
-                    // TODO implement
+                    showPotionInventoryHasInsufficientSlotsError();
                 }
             }
         });
@@ -360,15 +364,20 @@ function objPlayerStatus(stocks: ReadonlyArray<RpgStock>) {
         objCurrencyAmount(Rpg.wallet.count(currency), currency, true)
             .merge({ currency })
             .mixin(mxnErrorVibrate)
-            .at(i, renderer.height - 28 - i * 15)
             .step(self => self.controls.amount = Rpg.wallet.count(currency))
     );
+
+    const statusObjs = [
+        ...currencyObjs,
+    ]
+        .map((obj, i) => obj.at(i, renderer.height - 28 - i * 15));
+
     const textsObj = container(
         objText.Large("You have...", { tint: CtxDramaShop.value.style.secondaryTint }).anchored(0.5, 1).at(
             12,
-            currencyObjs.last.y - 16,
+            statusObjs.last.y - 16,
         ),
-        ...currencyObjs,
+        ...statusObjs,
     );
 
     const bounds = textsObj.getBounds();
@@ -395,22 +404,55 @@ function objPlayerStatus(stocks: ReadonlyArray<RpgStock>) {
 
 const r = new Rectangle();
 
+function getObjBadgeArgsForCurrency(currency: RpgStock["currency"]): Omit<ObjBadgeArgs, "amount" | "isAffordable"> {
+    if (RpgExperience.isId(currency)) {
+        const config = experienceIndicatorConfigs[currency];
+
+        return {
+            bgTint: config.tint,
+            getText: () => `${currency} XP`,
+            iconTx: config.iconTx,
+        };
+    }
+
+    if (currency === "valuables") {
+        return {
+            getText: (amount) => amount === 1 ? "valuable" : "valuables",
+            iconTx: Tx.Collectibles.ValuableGreen,
+            textTint: 0x00ff00,
+        };
+    }
+
+    return {
+        getText: (amount) => amount === 1 ? "credit" : "credits",
+    };
+}
+
 function objCurrencyAmount(amount: Integer, currency: RpgStock["currency"], isAffordable: boolean) {
-    const priceTextObj = objText.MediumBoldIrregular("").anchored(1, 1).at(-1, 0);
-    const currencyTextObj = objText.Medium("").anchored(0, 1)
+    return objBadge({
+        amount,
+        isAffordable,
+        ...getObjBadgeArgsForCurrency(currency),
+    });
+}
+
+interface ObjBadgeArgs {
+    amount: Integer;
+    isAffordable?: boolean;
+    getText: (amount: Integer) => string;
+    iconTx?: Texture | null;
+    textTint?: RgbInt;
+    bgTint?: RgbInt | null;
+}
+
+function objBadge({ amount, getText, isAffordable = true, iconTx, textTint = 0xffffff, bgTint = null }: ObjBadgeArgs) {
+    const priceTextObj = objText.MediumBoldIrregular("", { tint: textTint }).anchored(1, 1).at(-1, 0);
+    const currencyTextObj = objText.Medium("", { tint: textTint }).anchored(0, 1)
         .at(1, 0);
 
     function updateText() {
         priceTextObj.text = amount + "";
-        if (currency === "valuables") {
-            currencyTextObj.text = amount === 1 ? "valuable" : "valuables";
-        }
-        else if (currency === "mechanical_idol_credits") {
-            currencyTextObj.text = amount === 1 ? "credit" : "credits";
-        }
-        else {
-            currencyTextObj.text = `${currency} XP`;
-        }
+        currencyTextObj.text = getText(amount);
     }
 
     updateText();
@@ -440,21 +482,17 @@ function objCurrencyAmount(amount: Integer, currency: RpgStock["currency"], isAf
     const obj = container(
         textObj,
         deltaObj,
-    );
+    )
+        .autoSorted();
 
-    if (currency === "valuables") {
-        priceTextObj.tint = 0x00ff00;
-        currencyTextObj.tint = 0x00ff00;
-        objCurrencyIcon(Tx.Collectibles.ValuableGreen);
+    if (iconTx) {
+        objCurrencyIcon(iconTx);
     }
-    else if (currency === "mechanical_idol_credits") {
-        // TODO style
-    }
-    else {
-        const config = experienceIndicatorConfigs[currency];
+
+    if (bgTint !== null) {
         const bounds = new Rectangle();
         const gfx = new Graphics()
-            .tinted(config.tint)
+            .tinted(bgTint)
             .step(() => {
                 updateBounds(r);
                 bounds.x = approachLinear(bounds.x, r.x, 1);
@@ -462,8 +500,6 @@ function objCurrencyAmount(amount: Integer, currency: RpgStock["currency"], isAf
                 bounds.width = approachLinear(bounds.width, r.width, 1);
                 bounds.height = approachLinear(bounds.height, r.height, 1);
             });
-
-        objCurrencyIcon(config.iconTx);
 
         function updateBounds(rectangle: Rectangle) {
             textObj.getLocalBounds(rectangle);
@@ -480,7 +516,7 @@ function objCurrencyAmount(amount: Integer, currency: RpgStock["currency"], isAf
 
         updateBounds(bounds);
 
-        obj.addChildAt(gfx, 0);
+        gfx.zIndexed(-2).show(obj);
     }
 
     const controls = {
@@ -492,9 +528,13 @@ function objCurrencyAmount(amount: Integer, currency: RpgStock["currency"], isAf
 
     if (!isAffordable) {
         const center = priceTextObj.getBounds().getCenter().vround();
-        const xObj = Sprite.from(Tx.Shapes.X22).tinted(0xff0000).at(center).anchored(0.5, 0.5).mixin(mxnBoilPivot);
-        const index = currency === "valuables" ? 0 : 1;
-        obj.addChildAt(xObj, index);
+        Sprite.from(Tx.Shapes.X22)
+            .tinted(0xff0000)
+            .at(center)
+            .anchored(0.5, 0.5)
+            .mixin(mxnBoilPivot)
+            .zIndexed(-1)
+            .show(obj);
     }
     return obj
         .merge({ controls });
