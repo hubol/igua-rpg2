@@ -5,6 +5,7 @@ import { Coro } from "../../../lib/game-engine/routines/coro";
 import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
+import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { DataPotion } from "../../data/data-potion";
 import { mxnCollectibleLoot } from "../../mixins/mxn-collectible-loot";
@@ -37,6 +38,7 @@ export function objCollectiblePotion(potionId: DataPotion.Id) {
     return container(
         appearSpr,
     )
+        .collisionShape(CollisionShape.DisplayObjects, [figureObj])
         .mixin(mxnCollectibleLoot)
         .mixin(mxnPhysics, { gravity: 0.01, physicsRadius: 16, physicsOffset: [0, -19] })
         .mixin(mxnRescue, [0, 11])

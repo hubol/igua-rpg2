@@ -6,6 +6,7 @@ import { interp, interpc, interpv } from "../../../lib/game-engine/routines/inte
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
+import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { DataKeyItem } from "../../data/data-key-item";
 import { mxnCollectibleLoot } from "../../mixins/mxn-collectible-loot";
@@ -31,6 +32,7 @@ export function objCollectibleKeyItem(keyItemId: DataKeyItem.Id) {
         .mixin(mxnCollectibleLoot)
         .mixin(mxnPhysics, { gravity: 0, physicsRadius: 8, physicsOffset: [0, -11] })
         .mixin(mxnRescue, [0, 13])
+        .collisionShape(CollisionShape.DisplayObjects, [figureObj])
         .coro(function* (self) {
             self.play(Sfx.Collect.KeyItemAppear.rate(0.9, 1.1));
 
