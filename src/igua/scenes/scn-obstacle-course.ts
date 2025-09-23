@@ -1,9 +1,11 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Coro } from "../../lib/game-engine/routines/coro";
-import { factor, interpvr } from "../../lib/game-engine/routines/interp";
+import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
+import { vlerp } from "../../lib/math/vector";
+import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { Jukebox } from "../core/igua-audio";
@@ -168,13 +170,26 @@ interface CoroAwardPrizeForCollectionArgs {
 function* coroAwardPrizeForCollection({ npcPersona, pocketItemId, getPrize }: CoroAwardPrizeForCollectionArgs) {
     while (true) {
         yield () => Rpg.inventory.pocket.count(pocketItemId) >= 50;
-        const holyIguanaObj = objHolyIguana(npcPersona).at(
-            scene.camera.x + renderer.width / 2 - 64,
-            scene.camera.y - 64,
-        )
+
+        const startPosition = vnew(renderer.width / 2 - 64, -64);
+        const endPosition = startPosition.vcpy().add(0, 202);
+
+        const vector = vnew();
+
+        const holyIguanaObj = objHolyIguana(npcPersona)
+            .at(scene.camera)
+            .add(startPosition)
+            .step(self =>
+                self.at(scene.camera).add(vlerp(vector.at(startPosition), endPosition, lerpRef.factor)).vround()
+            )
             .show();
+
+        const lerpRef = {
+            factor: 0,
+        };
+
         yield Cutscene.play(function* () {
-            yield interpvr(holyIguanaObj).factor(factor.sine).translate(0, 202).over(2000);
+            yield interp(lerpRef, "factor").factor(factor.sine).to(1).over(2000);
             // TODO sick ass animation for this
             yield* DramaInventory.removeCount({ kind: "pocket_item", id: pocketItemId }, 50);
             const prize = getPrize();
@@ -186,7 +201,7 @@ function* coroAwardPrizeForCollection({ npcPersona, pocketItemId, getPrize }: Co
             }
 
             yield* show("A blessing for thy harvest.", "Many thanks unto thine ass.");
-            yield interpvr(holyIguanaObj).factor(factor.sine).translate(0, -202).over(2000);
+            yield interp(lerpRef, "factor").factor(factor.sine).to(0).over(2000);
             holyIguanaObj.destroy();
         }, { speaker: holyIguanaObj }).done;
     }
