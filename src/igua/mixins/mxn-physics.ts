@@ -270,7 +270,8 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                 const tanA = Math.abs(tan);
                 const vCat = tanA * halfHeight;
 
-                if (segment.isCeiling) {
+                // The edgesOnly condition was added to prevent ugly snapping when falling down past a ceiling
+                if (segment.isCeiling && edgesOnly) {
                     // Previously, the statements here were guarded by a check to determine
                     // whether the physics object was moving down OR the segment was a slope
                     // (See Git history for fewer lies)
