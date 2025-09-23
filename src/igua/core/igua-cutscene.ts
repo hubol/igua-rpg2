@@ -6,7 +6,6 @@ import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { container } from "../../lib/pixi/container";
 import { Empty } from "../../lib/types/empty";
 import { Null } from "../../lib/types/null";
-import { DataNpcPersona } from "../data/data-npc-persona";
 import { clear } from "../drama/show";
 import { scene, sceneStack } from "../globals";
 
@@ -17,7 +16,6 @@ function getDefaultCutsceneAttributes() {
         speaker: Null<DisplayObject>(),
         letterbox: true,
         computerObjsSpoken: new Set<DisplayObject>(),
-        speakerNpcPersonaIds: new Set<DataNpcPersona.Id>(),
         requiredScene: Null(scene),
         camera: {
             start: "none" as "none" | "pan_to_speaker",

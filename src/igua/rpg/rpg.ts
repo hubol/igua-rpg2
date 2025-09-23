@@ -1,11 +1,13 @@
 import { Logging } from "../../lib/logging";
 import { Integer } from "../../lib/math/number-alias-types";
+import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataQuest } from "../data/data-quest";
 import { DataShop } from "../data/data-shop";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgExperience } from "./rpg-experience";
 import { RpgFlops } from "./rpg-flops";
 import { RpgIdols } from "./rpg-idols";
+import { RpgIguanaNpcs } from "./rpg-iguana-npcs";
 import { RpgInventory } from "./rpg-inventory";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayer } from "./rpg-player";
@@ -25,6 +27,7 @@ function createRpg(data: RpgProgressData) {
     const {
         programmaticFlags: {
             idols: idolsState,
+            iguanaNpcs: iguanaNpcsState,
             shops: shopsState,
             stashPockets: stashPocketsState,
             ...programmaticFlags
@@ -35,6 +38,7 @@ function createRpg(data: RpgProgressData) {
     const equipment = new RpgCharacterEquipment(data.character.inventory.equipment);
     const buffs = new RpgPlayerAggregatedBuffs(equipment);
     const idols = new RpgIdols(idolsState);
+    const iguanaNpcs = new RpgIguanaNpcs(iguanaNpcsState, experience.reward);
     const quests = new RpgQuests(data.character.quests, experience);
     const pocket = new RpgPocket(data.character.inventory.pocket, experience);
     const potions = new RpgPotions(data.character.inventory.potions);
@@ -57,6 +61,9 @@ function createRpg(data: RpgProgressData) {
         },
         idol(idolId: Integer) {
             return idols.getById(idolId);
+        },
+        iguanaNpc(npcId: DataNpcPersona.Id) {
+            return iguanaNpcs.getById(npcId);
         },
         inventory,
         programmaticFlags,

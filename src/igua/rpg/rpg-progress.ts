@@ -1,13 +1,12 @@
-import { Integer, Polar } from "../../lib/math/number-alias-types";
+import { Integer } from "../../lib/math/number-alias-types";
 import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { Null } from "../../lib/types/null";
-import { DataNpcPersona } from "../data/data-npc-persona";
-import { getDefaultLooks } from "../iguana/get-default-looks";
 import { Rpg } from "./rpg";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgExperience } from "./rpg-experience";
 import { RpgFlops } from "./rpg-flops";
 import { RpgIdols } from "./rpg-idols";
+import { RpgIguanaNpcs } from "./rpg-iguana-npcs";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPlayer } from "./rpg-player";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
@@ -89,7 +88,7 @@ export function getInitialRpgProgress() {
         programmaticFlags: {
             collectedValuableUids: new Set<Integer>(),
             idols: RpgIdols.createState(),
-            metNpcPersonaIds: new Set<DataNpcPersona.Id>(),
+            iguanaNpcs: RpgIguanaNpcs.createState(),
             revealedWorldMapGateUids: new Set<Integer>(),
             shops: RpgShops.createState(),
             stashPockets: RpgStashPockets.createState(),

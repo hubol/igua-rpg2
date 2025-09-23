@@ -1,3 +1,4 @@
+import { DisplayObject } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
 import { SubjectiveColorAnalyzer } from "../../lib/color/subjective-color-analyzer";
 import { Logger } from "../../lib/game-engine/logger";
@@ -20,6 +21,7 @@ export function objIguanaNpc(npcPersonaId: DataNpcPersona.Id) {
 
     return objIguanaLocomotive(persona.looks)
         .mixin(mxnIguanaEditable, persona.looks)
+        .mixin(mxnRpgIguanaNpc, persona.id)
         .mixin(mxnSpeaker, { name: persona.name, ...objIguanaNpc.getSpeakerColors(persona.looks) })
         .mixin(mxnStartPosition)
         .coro(function* (self) {
@@ -39,18 +41,8 @@ export function objIguanaNpc(npcPersonaId: DataNpcPersona.Id) {
                 }
             }
         })
-        .handles("mxnSpeaker.speakingStarted", () => {
-            const playerHasMetNpc = Rpg.programmaticFlags.metNpcPersonaIds.has(persona.id);
-            const spokenDuringCutscene = Cutscene.current
-                && Cutscene.current.attributes.speakerNpcPersonaIds.has(persona.id);
-
-            Rpg.experience.reward.social.onNpcSpeak(
-                playerHasMetNpc ? (spokenDuringCutscene ? "default" : "first_in_cutscene") : "first_ever",
-            );
-            Rpg.programmaticFlags.metNpcPersonaIds.add(persona.id);
-            if (Cutscene.current) {
-                Cutscene.current.attributes.speakerNpcPersonaIds.add(persona.id);
-            }
+        .handles("mxnSpeaker.speakingStarted", (self) => {
+            self.rpgIguanaNpc.onSpeak();
 
             speakingStartedCount++;
             isSpeaking = true;
@@ -70,3 +62,9 @@ objIguanaNpc.getSpeakerColors = function getSpeakerColors (looks: IguanaLooks.Se
         ]),
     };
 };
+
+function mxnRpgIguanaNpc(obj: DisplayObject, id: DataNpcPersona.Id) {
+    return obj.merge({
+        rpgIguanaNpc: Rpg.iguanaNpc(id),
+    });
+}
