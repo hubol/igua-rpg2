@@ -2999,6 +2999,8 @@ export const Lvl = {
   ObstacleCourse: () => {
     applyLevel({ width: 880, height: 760, backgroundTint: 0x005280 });
     return {
+      TerrainDistantHills500: d(Tx.Terrain.Distant.Hills500, { x: 228, y: 566, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x4e771a }, "ParallaxDecals"),
+      FurnitureArtworkPeanutBoyMonument: d(Tx.Furniture.Artwork.PeanutBoyMonument, { x: 351, y: 506, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloudBalls1: d(Tx.Sky.CloudBalls1, { x: 272, y: 424, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa8e0ff }, "ParallaxDecals"),
       SkyCloudBalls1_1: d(Tx.Sky.CloudBalls1, { x: 502, y: 287, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa8e0ff }, "ParallaxDecals"),
       SkyCloudBalls1_2: d(Tx.Sky.CloudBalls1, { x: 294, y: 183, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa8e0ff }, "ParallaxDecals"),
@@ -3007,7 +3009,6 @@ export const Lvl = {
       SkyCloudBalls0_2: d(Tx.Sky.CloudBalls0, { x: 805, y: 383, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa8e0ff }, "ParallaxDecals"),
       SkyCloudBalls1_3: d(Tx.Sky.CloudBalls1, { x: 543, y: 492, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa8e0ff }, "ParallaxDecals"),
       SkyCloudBalls1_4: d(Tx.Sky.CloudBalls1, { x: 627, y: 522, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa8e0ff }, "ParallaxDecals"),
-      TerrainDistantHills500: d(Tx.Terrain.Distant.Hills500, { x: 228, y: 566, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x4e771a }, "ParallaxDecals"),
       TerrainDistantHills500_1: d(Tx.Terrain.Distant.Hills500, { x: 634, y: 579, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x4e771a }, "ParallaxDecals"),
       WorldMapTree1: d(Tx.WorldMap.Tree1, { x: 399, y: 522, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x324f0d }, "ParallaxDecals"),
       WorldMapTree1_1: d(Tx.WorldMap.Tree1, { x: 390, y: 536, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x324f0d }, "ParallaxDecals"),
@@ -3036,6 +3037,16 @@ export const Lvl = {
       WorldMapTree1_24: d(Tx.WorldMap.Tree1, { x: 723, y: 566, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x324f0d }, "ParallaxDecals"),
       WorldMapTree1_25: d(Tx.WorldMap.Tree1, { x: 714, y: 580, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x324f0d }, "ParallaxDecals"),
       WorldMapTree1_26: d(Tx.WorldMap.Tree1, { x: 699, y: 566, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x324f0d }, "ParallaxDecals"),
+      StoneRockSmallShaded1: d(Tx.Stone.RockSmallShaded1, { x: 382, y: 552, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      StoneRockSmallShaded1_1: d(Tx.Stone.RockSmallShaded1, { x: 309, y: 546, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      StoneRockSmallShaded1_2: d(Tx.Stone.RockSmallShaded1, { x: 317, y: 556, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      StoneRockSmallShaded1_3: d(Tx.Stone.RockSmallShaded1, { x: 672, y: 560, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      StoneRockSmallShaded1_4: d(Tx.Stone.RockSmallShaded1, { x: 703, y: 581, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      StoneRock0: d(Tx.Stone.Rock0, { x: 808, y: 574, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      StoneRock0_1: d(Tx.Stone.Rock0, { x: 424, y: 538, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      StoneRockSmallShaded1_5: d(Tx.Stone.RockSmallShaded1, { x: 426, y: 547, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      StoneRockSmallShaded1_6: d(Tx.Stone.RockSmallShaded1, { x: 439, y: 542, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      TerrainDistantStream0: d(Tx.Terrain.Distant.Stream0, { x: 620, y: 610, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x428db7 }, "ParallaxDecals"),
       ShapesX22: d(Tx.Shapes.X22, { x: 465, y: 617, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x04324b }, "BackgroundDecals"),
       ShapesX22_1: d(Tx.Shapes.X22, { x: 529, y: 579, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x04324b }, "BackgroundDecals"),
       ShapesX22_2: d(Tx.Shapes.X22, { x: 608, y: 545, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x04324b }, "BackgroundDecals"),
