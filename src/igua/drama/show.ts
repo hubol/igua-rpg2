@@ -29,6 +29,7 @@ function objSpeakerMessageBox(speaker: DisplayObject | null) {
     const name = DramaLib.Speaker.getName(speaker);
 
     const state = {
+        beingDestroyed: false,
         speaker,
         isReadyToReceiveText: false,
         text: "",
@@ -63,6 +64,7 @@ function objSpeakerMessageBox(speaker: DisplayObject | null) {
             ).show(rootObj);
 
             yield holdf(() => state.mayBeDestroyed, 2);
+            state.beingDestroyed = true;
             textObj.destroy();
             yield sleepf(4);
             nameObj.destroy();
@@ -96,7 +98,9 @@ function endSpeaking(currentSpeaker: DisplayObject | null, currentSpeakerMessage
 
 function* startSpeaking(text: string) {
     const currentSpeaker = DramaLib.Speaker.current;
-    let currentSpeakerMessageBoxObj = speakerMessageBoxObj?.destroyed ? null : speakerMessageBoxObj;
+    let currentSpeakerMessageBoxObj = (speakerMessageBoxObj?.destroyed || speakerMessageBoxObj?.state?.beingDestroyed)
+        ? null
+        : speakerMessageBoxObj;
 
     if (currentSpeakerMessageBoxObj) {
         if (currentSpeakerMessageBoxObj.state.speaker === currentSpeaker) {
