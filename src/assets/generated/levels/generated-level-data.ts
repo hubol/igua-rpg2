@@ -3047,6 +3047,7 @@ export const Lvl = {
       StoneRockSmallShaded1_5: d(Tx.Stone.RockSmallShaded1, { x: 426, y: 547, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       StoneRockSmallShaded1_6: d(Tx.Stone.RockSmallShaded1, { x: 439, y: 542, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       TerrainDistantStream0: d(Tx.Terrain.Distant.Stream0, { x: 620, y: 610, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x428db7 }, "ParallaxDecals"),
+      FurnitureArtworkMisterMonument: d(Tx.Furniture.Artwork.MisterMonument, { x: 502, y: 260, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       ShapesX22: d(Tx.Shapes.X22, { x: 465, y: 617, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x04324b }, "BackgroundDecals"),
       ShapesX22_1: d(Tx.Shapes.X22, { x: 529, y: 579, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x04324b }, "BackgroundDecals"),
       ShapesX22_2: d(Tx.Shapes.X22, { x: 608, y: 545, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x04324b }, "BackgroundDecals"),
