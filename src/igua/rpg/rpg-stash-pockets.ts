@@ -1,4 +1,5 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { CacheMap } from "../../lib/object/cache-map";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 import { RpgPocket } from "./rpg-pocket";
@@ -7,7 +8,9 @@ const empty: RpgStashPocket.CheckBalance.Empty = { kind: "empty", count: 0 };
 const notEmpty: RpgStashPocket.CheckBalance.NotEmpty = { kind: "not_empty", pocketItemId: "__Fallback__", count: 0 };
 
 export class RpgStashPockets {
-    private readonly _cache: Partial<Record<Integer, RpgStashPocket>> = {};
+    private readonly _cacheMap = new CacheMap((stashPocketId: Integer) =>
+        new RpgStashPocket(this._state, this._pocket, this._reward, stashPocketId)
+    );
 
     constructor(
         private readonly _state: RpgStashPockets.State,
@@ -16,15 +19,7 @@ export class RpgStashPockets {
     ) {
     }
 
-    getById(stashPocketId: Integer) {
-        const cache = this._cache[stashPocketId];
-
-        if (cache) {
-            return cache;
-        }
-
-        return this._cache[stashPocketId] = new RpgStashPocket(this._state, this._pocket, this._reward, stashPocketId);
-    }
+    readonly getById = this._cacheMap.get.bind(this._cacheMap);
 
     static createState(): RpgStashPockets.State {
         return {

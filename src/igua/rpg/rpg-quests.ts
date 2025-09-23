@@ -1,22 +1,17 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { CacheMap } from "../../lib/object/cache-map";
 import { DataQuest } from "../data/data-quest";
 import { RpgExperience } from "./rpg-experience";
 
 export class RpgQuests {
-    private readonly _cache: Partial<Record<DataQuest.Id, RpgQuest>> = {};
+    private readonly _cacheMap = new CacheMap((questId: DataQuest.Id) =>
+        new RpgQuest(this._state, questId, this._experience)
+    );
 
     constructor(private readonly _state: RpgQuests.State, private readonly _experience: RpgExperience) {
     }
 
-    getById(questId: DataQuest.Id) {
-        const cache = this._cache[questId];
-
-        if (cache) {
-            return cache;
-        }
-
-        return this._cache[questId] = new RpgQuest(this._state, questId, this._experience);
-    }
+    readonly getById = this._cacheMap.get.bind(this._cacheMap);
 
     static createState(): RpgQuests.State {
         return {};

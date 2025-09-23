@@ -1,24 +1,19 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { CacheMap } from "../../lib/object/cache-map";
 import { DataIdol } from "../data/data-idol";
 import { RpgCutscene } from "./rpg-cutscene";
 import { RpgPlayerBuffs } from "./rpg-player-buffs";
 
 export class RpgIdols {
-    private readonly _cache: Partial<Record<Integer, RpgIdol>> = {};
+    private readonly _cacheMap = new CacheMap((idolId: Integer) => {
+        const idolState = this._state[idolId] ?? (this._state[idolId] = RpgIdol.createState());
+        return new RpgIdol(idolState);
+    });
 
     constructor(private readonly _state: RpgIdols.State) {
     }
 
-    getById(idolId: Integer) {
-        const cache = this._cache[idolId];
-
-        if (cache) {
-            return cache;
-        }
-
-        const idolState = this._state[idolId] ?? (this._state[idolId] = RpgIdol.createState());
-        return this._cache[idolId] = new RpgIdol(idolState);
-    }
+    readonly getById = this._cacheMap.get.bind(this._cacheMap);
 
     static createState(): RpgIdols.State {
         return {};

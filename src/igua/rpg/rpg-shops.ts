@@ -1,11 +1,15 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { CacheMap } from "../../lib/object/cache-map";
 import { ForceAliasType } from "../../lib/types/force-alias-type";
 import { DataShop } from "../data/data-shop";
 import { RpgInventory } from "./rpg-inventory";
 import { RpgPlayerWallet } from "./rpg-player-wallet";
 
 export class RpgShops {
-    private readonly _cache: Partial<Record<DataShop.Id, RpgShop>> = {};
+    private readonly _cacheMap = new CacheMap((shopId: DataShop.Id) => {
+        const shopState = this._state[shopId] ?? (this._state[shopId] = RpgShop.createState());
+        return new RpgShop(shopState, DataShop.getById(shopId), this._wallet, this._inventory);
+    });
 
     constructor(
         private readonly _state: RpgShops.State,
@@ -14,16 +18,7 @@ export class RpgShops {
     ) {
     }
 
-    getById(shopId: DataShop.Id) {
-        const cache = this._cache[shopId];
-
-        if (cache) {
-            return cache;
-        }
-
-        const shopState = this._state[shopId] ?? (this._state[shopId] = RpgShop.createState());
-        return this._cache[shopId] = new RpgShop(shopState, DataShop.getById(shopId), this._wallet, this._inventory);
-    }
+    readonly getById = this._cacheMap.get.bind(this._cacheMap);
 
     static createState(): RpgShops.State {
         return {};

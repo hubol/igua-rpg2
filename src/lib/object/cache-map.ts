@@ -1,4 +1,4 @@
-export class CacheMap<TKey extends string, TValue> {
+export class CacheMap<TKey extends string | number, TValue> {
     private readonly _impl: Partial<Record<TKey, TValue>> = {};
 
     constructor(private readonly _initFn: (key: TKey) => TValue) {
