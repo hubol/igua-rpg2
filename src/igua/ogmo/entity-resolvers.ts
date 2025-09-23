@@ -72,7 +72,7 @@ export const OgmoEntityResolvers = {
             CtxPocketItems.value.behavior,
         ).at(entity, -1),
     EnemySuggestive: (entity) => objAngelSuggestive(entity.values.variant).at(0, -38),
-    EnemyMiffed: () => objAngelMiffed().at(0, 1),
+    EnemyMiffed: (entity) => objAngelMiffed(entity).at(0, 1),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,
     Idol: objIdol,
     GateMap: objWorldMapGate,

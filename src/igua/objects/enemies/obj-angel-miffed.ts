@@ -1,4 +1,5 @@
 import { Graphics, Sprite } from "pixi.js";
+import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
@@ -64,10 +65,30 @@ const ranks = {
             healthMax: 60,
         },
     }),
+    level1: RpgEnemyRank.create({
+        loot: {
+            tier0: [{ kind: "valuables", deltaPride: -5, max: 70, min: 15 }],
+            tier1: [
+                { kind: "potion", id: "Ballon", weight: 20 },
+                { kind: "valuables", deltaPride: -10, max: 70, min: 30, weight: 20 },
+                { kind: "flop", min: 15, max: 19, weight: 20 },
+            ],
+        },
+        status: {
+            healthMax: 250,
+            defenses: {
+                physical: 100,
+            },
+            quirks: {
+                emotionalDamageIsFatal: true,
+            },
+        },
+    }),
 } satisfies Record<string, RpgEnemyRank.Model>;
-const variants = {};
 
-export function objAngelMiffed() {
+// TODO const variants = {};
+
+export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
     const hurtboxObjs = [
         new Graphics().beginFill(0).drawRect(4, 10, 40, 16).invisible(),
         new Graphics().beginFill(0).drawRect(11, 22, 24, 16).invisible(),
@@ -97,7 +118,7 @@ export function objAngelMiffed() {
         .autoSorted()
         .mixin(mxnEnemy, {
             hurtboxes: hurtboxObjs,
-            rank: ranks.level0,
+            rank: ranks[entity.values.variant],
             angelEyesObj: headObj.objects.faceObj.objects.eyesObj,
             soulAnchorObj,
         })

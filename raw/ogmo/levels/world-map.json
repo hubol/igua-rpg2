@@ -79,6 +79,19 @@
           "uid": 175755215936902,
           "tint": "#ffffff",
           "values": {"sceneName": "scnStrangeMarket", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "GateMap",
+          "id": 5,
+          "_eid": "53836309",
+          "x": 608,
+          "y": 720,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 90,
+          "uid": 175860865618400,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnColosseumMiffed", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": false}
         }
       ]
     },
@@ -180,6 +193,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromStrangeMarket", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 6,
+          "_eid": "19953026",
+          "x": 640,
+          "y": 704,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromColosseumMiffed", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },

@@ -15,6 +15,7 @@ export namespace DataPocketItem {
             ComputerChip: { name: "Computer Chip V1.0", texture: Tx.Collectibles.ComputerChip },
             Wheat: { name: "Wizened Wheat", texture: Tx.Collectibles.Pocket.Wheat },
             Beet: { name: "Bizened Beet", texture: Tx.Collectibles.Pocket.Beet },
+            EmoBallistaBolt: { name: "Emo Ballista Bolt", texture: Tx.Collectibles.Pocket.Beet },
             __Fallback__: { name: "???", texture: Tx.Collectibles.ComputerChip },
         } satisfies Record<string, Model>,
     );

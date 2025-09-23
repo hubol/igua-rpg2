@@ -1206,7 +1206,7 @@
           "originX": 22,
           "originY": 41,
           "uid": 175643438232400,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "", "depth": 0, "variant": "level0"}
         }
       ]
     },

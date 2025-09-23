@@ -332,7 +332,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/pipe.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAAmSURBVChTY1y/fv1/BgoAE5QmGzD29fVR5IKB98LAh8FAe4GBAQBQ2gt5H0/w0QAAAABJRU5ErkJggg=="
     },
@@ -1167,7 +1167,7 @@
         {"name": "visible", "definition": "Boolean", "display": 0, "defaults": true}
       ],
       "isRegion": false,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/world map gate.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC7SURBVFhH5ZPRCoQwDARb//+f1UCFUFsMmZUizsuJXLtz2VwtE/aT9vgqW/tcxnKBUAX1pD1K8Hd/swL7BRftVRo8ASohqYBIpARGS5mVQNs9Co38Y/w5VIFiEngHqIRkCYmERMDIStSoKaGX85myCWRZLnDrjTCq82k3ZBOIhvdIBLLhBhYg4QYSoOHG9Mv+8tGlJNyfTU2AhPdIljAbbmABEm5MD/sx05Aef7ekAsJygVAFb/L3Cko5AJ+reA2Dpk05AAAAAElFTkSuQmCC"
     },
@@ -1441,10 +1441,17 @@
       "tags": ["Enemy"],
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100},
+        {
+          "name": "variant",
+          "definition": "Enum",
+          "display": 1,
+          "choices": ["level0", "level1"],
+          "defaults": 0
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/enemy miffed.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAqCAYAAAD1T9h6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKlSURBVGhD1Zk/Th0xEMZ3kahSpKZBSFwgipTQ5gbQ0NLQQLogRckBKIIigWiAhoaChgaOAUgkF0iUjjqRotC9eAbPyus3tme8s+jxkyx7V97x9/nPzj69xprJp8sJFH85Oq2vTYiFt3trpvE55nz9bDGbod7sLy34huPX/agrYb8CoXggvjbGZGaSs0+4VQDGWIlBAdm3TcZAiJWZqiDF12R0BhDuXkCtoeJDRbEScueAMQNIDbGdpkR/WfUNz+cr3xDCGdh66xuek5vHWmmou9kTHQtOITUSGoiFp0jEjo30DUiFE5qVIBNSA0TBCOaBkvi2bdmiMgxbw4nn4kBJUhijmMhywbMDM1THgtWLzhFt+bmpAzvLMCaKKzCZpP25AL4lI9c/N06PyIToWwiCTxWleAKe4+LV0sIy+LbsUGpzQA7JeJQfQoJc0TdAhIEzgt2rTLUSxf6pccNtEyU63oAQEARITGj6ahj0e4DEkLgUY4kH8OU7ZBWAnMAxxQNd9hhqAuBWYizhxFT6szDyVLgJS+fvWTcC4rHGqwSzYoLEcmQN5BjLXE4sR5WBDxv1uf/Vsm84vv9omoMz5SdthOrhnPD905e+1TQ7m7+xju+F4kOGGBE9JJlxEvv3+g3WwIuVW9/KGwDABKA1UszEQ7ZLDdrxBn1KaKFZtsTcAGybj4dfsXBwJoYYK+63mi308O8b1kfn77AG6GBL0JwDs0NshfYQSzujAWcEL8Zgf+FKncQAjQHoC/9/Ne9/LuJNC44vXndfrE9iAC/cgG6wbmCNIRAMxDGQ3Q2s2vk/YiMax739Ew68c7+KiUwwsEWMHuLOdJDdIaNrrAnJ4bOIESPKxOHA8aAE9eGwiJGiaADe6VS21++6d3x4n0qKsE9tDJ6m+Q9c04zTkg2/CgAAAABJRU5ErkJggg=="
     }
