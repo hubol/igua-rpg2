@@ -119,7 +119,21 @@
       "gridCellHeight": 8,
       "gridCellsX": 110,
       "gridCellsY": 95,
-      "decals": [],
+      "decals": [
+        {
+          "x": 852,
+          "y": 661,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#854e31",
+          "texture": "effects/star 12px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -1244,7 +1258,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1256,7 +1270,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1268,7 +1282,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1280,7 +1294,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1292,7 +1306,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1304,7 +1318,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1316,7 +1330,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1328,7 +1342,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1340,7 +1354,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1352,7 +1366,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1364,7 +1378,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1376,7 +1390,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1388,7 +1402,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1400,7 +1414,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1412,7 +1426,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1424,7 +1438,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1436,7 +1450,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1448,7 +1462,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1460,7 +1474,7 @@
           "scaleY": 1,
           "rotation": 0,
           "tint": "#04324b",
-          "texture": "shapes/x 22.png",
+          "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1478,6 +1492,30 @@
       "gridCellsX": 110,
       "gridCellsY": 95,
       "decals": [
+        {
+          "x": 552,
+          "y": 104,
+          "scaleX": 4,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#0c6da3",
+          "texture": "terrain/distant/hill mountain xl.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 536,
+          "y": 32,
+          "scaleX": -3,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#1889c8",
+          "texture": "terrain/distant/hill mountain xl.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
         {
           "x": 228,
           "y": 566,
@@ -2062,6 +2100,225 @@
           "rotation": 0,
           "tint": "#ffffff",
           "texture": "furniture/artwork/mister monument.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 522,
+          "y": 285,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a8e0ff",
+          "texture": "shapes/circle irregular26.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 437,
+          "y": 296,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a8e0ff",
+          "texture": "shapes/circle irregular26.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 335,
+          "y": 415,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a8e0ff",
+          "texture": "shapes/circle irregular26.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 481,
+          "y": 503,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a8e0ff",
+          "texture": "shapes/circle irregular26.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 725,
+          "y": 367,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a8e0ff",
+          "texture": "shapes/circle irregular26.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 400,
+          "y": 556,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 441,
+          "y": 553,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 681,
+          "y": 569,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 803,
+          "y": 589,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a0a0a0",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 629,
+          "y": 571,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#a8e0ff",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterShimmerGroup"
+        },
+        {
+          "x": 618,
+          "y": 564,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#a8e0ff",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterShimmerGroup"
+        },
+        {
+          "x": 634,
+          "y": 592,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#a8e0ff",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterShimmerGroup"
+        },
+        {
+          "x": 440,
+          "y": 145,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#b4a8ff",
+          "texture": "terrain/earth/asterisk.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 314,
+          "y": 180,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#b4a8ff",
+          "texture": "terrain/earth/asterisk.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 744,
+          "y": 375,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#b4a8ff",
+          "texture": "terrain/earth/asterisk.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 324,
+          "y": 422,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#b4a8ff",
+          "texture": "terrain/earth/asterisk.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 612,
+          "y": 74,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#b4a8ff",
+          "texture": "terrain/earth/asterisk.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 589,
+          "y": 494,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#b4a8ff",
+          "texture": "terrain/earth/asterisk.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}

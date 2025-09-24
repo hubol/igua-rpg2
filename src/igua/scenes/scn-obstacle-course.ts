@@ -18,6 +18,7 @@ import { DramaWallet } from "../drama/drama-wallet";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
+import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
@@ -42,6 +43,11 @@ export function scnObstacleCourse() {
     CtxPocketItems.value.behavior = "respawn";
     const lvl = Lvl.ObstacleCourse();
     enrichMinigameManager(lvl);
+    enrichDecorations(lvl);
+}
+
+function enrichDecorations(lvl: LvlType.ObstacleCourse) {
+    lvl.WaterShimmerGroup.children.forEach(x => x.mixin(mxnBoilPivot));
 }
 
 function objMinigameRemainingTimeIndicator(lvl: LvlType.ObstacleCourse) {
