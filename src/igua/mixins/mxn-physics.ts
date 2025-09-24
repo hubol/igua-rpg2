@@ -271,7 +271,8 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
                 const vCat = tanA * halfHeight;
 
                 // The edgesOnly condition was added to prevent ugly snapping when falling down past a ceiling
-                if (segment.isCeiling && edgesOnly) {
+                // But then this appeared to cause problems with sloped ceilings
+                if (segment.isCeiling && (edgesOnly || isSlope)) {
                     // Previously, the statements here were guarded by a check to determine
                     // whether the physics object was moving down OR the segment was a slope
                     // (See Git history for fewer lies)
