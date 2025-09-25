@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 896,
+  "width": 1112,
   "height": 544,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 112,
+      "gridCellsX": 139,
       "gridCellsY": 68,
       "entities": [
         {
@@ -92,7 +92,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 112,
+      "gridCellsX": 139,
       "gridCellsY": 68,
       "entities": []
     },
@@ -103,7 +103,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 112,
+      "gridCellsX": 139,
       "gridCellsY": 68,
       "decals": [],
       "folder": "../textures"
@@ -115,7 +115,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 112,
+      "gridCellsX": 139,
       "gridCellsY": 68,
       "entities": []
     },
@@ -126,7 +126,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 112,
+      "gridCellsX": 139,
       "gridCellsY": 68,
       "entities": [
         {
@@ -144,22 +144,22 @@
           "name": "Player",
           "id": 1,
           "_eid": "93092164",
-          "x": 824,
-          "y": 224,
+          "x": 72,
+          "y": 216,
           "originX": 22,
           "originY": 39,
-          "flippedX": true,
+          "flippedX": false,
           "values": {"name": "", "depth": 0}
         },
         {
           "name": "Checkpoint",
           "id": 2,
           "_eid": "19953026",
-          "x": 296,
-          "y": 248,
+          "x": 1000,
+          "y": 192,
           "originX": 22,
           "originY": 39,
-          "flippedX": false,
+          "flippedX": true,
           "values": {"name": "fromObstacleCourse", "depth": 0, "overrideFlipX": "none"}
         },
         {
@@ -193,7 +193,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 112,
+      "gridCellsX": 139,
       "gridCellsY": 68,
       "entities": []
     },
@@ -204,94 +204,9 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 112,
+      "gridCellsX": 139,
       "gridCellsY": 68,
-      "decals": [
-        {
-          "x": 247,
-          "y": 247,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#77b923",
-          "texture": "terrain/grass/sparse 3px 1.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 237,
-          "y": 249,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#e26d6d",
-          "texture": "foliage/flower 14.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 207,
-          "y": 256,
-          "scaleX": 1,
-          "scaleY": -1,
-          "rotation": 0,
-          "tint": "#ffce20",
-          "texture": "foliage/flower 14.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 267,
-          "y": 250,
-          "scaleX": -1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffce20",
-          "texture": "foliage/flower 14.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 321,
-          "y": 248,
-          "scaleX": 1,
-          "scaleY": -1,
-          "rotation": 0,
-          "tint": "#ffce20",
-          "texture": "foliage/flower 14.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 296,
-          "y": 257,
-          "scaleX": -1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#e26d6d",
-          "texture": "foliage/flower 14.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 224,
-          "y": 236,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#4e771a",
-          "texture": "foliage/medium0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        }
-      ],
+      "decals": [],
       "folder": "../textures"
     },
     {
@@ -301,7 +216,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 112,
+      "gridCellsX": 139,
       "gridCellsY": 68,
       "entities": [
         {
@@ -318,13 +233,13 @@
           "name": "GateHorizontal",
           "id": 1,
           "_eid": "97593426",
-          "x": 856,
-          "y": 80,
+          "x": 1064,
+          "y": 64,
           "height": 128,
           "originX": 0,
           "originY": 0,
           "flippedX": false,
-          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromStrangeMarket", "name": "", "depth": 0}
+          "values": {"sceneName": "scnObstacleCourse", "checkpointName": "fromStrangeMarket", "name": "", "depth": 0}
         },
         {
           "name": "GateHorizontal",
@@ -337,16 +252,6 @@
           "originY": 0,
           "flippedX": true,
           "values": {"sceneName": "scnWorldMap", "checkpointName": "fromStrangeMarket", "name": "", "depth": 0}
-        },
-        {
-          "name": "Door",
-          "id": 3,
-          "_eid": "88296692",
-          "x": 248,
-          "y": 200,
-          "originX": 0,
-          "originY": -2,
-          "values": {"sceneName": "scnObstacleCourse", "checkpointName": "", "name": "", "depth": 0}
         },
         {
           "name": "Door",
@@ -476,12 +381,12 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 112,
+      "gridCellsX": 139,
       "gridCellsY": 68,
       "decals": [
         {
-          "x": 192,
-          "y": 248,
+          "x": 1000,
+          "y": 192,
           "scaleX": 4.3,
           "scaleY": 2,
           "rotation": 0,
@@ -564,8 +469,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 200,
-          "y": 248,
+          "x": 1008,
+          "y": 192,
           "scaleX": 3.8,
           "scaleY": 1.7,
           "rotation": 0,
@@ -576,8 +481,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 235,
-          "y": 313,
+          "x": 1043,
+          "y": 257,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -588,8 +493,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 276,
-          "y": 302,
+          "x": 1084,
+          "y": 246,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 180,
@@ -600,8 +505,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 287,
-          "y": 313,
+          "x": 1095,
+          "y": 257,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -612,8 +517,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 233,
-          "y": 263,
+          "x": 1041,
+          "y": 207,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -624,8 +529,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 305,
-          "y": 286,
+          "x": 1113,
+          "y": 230,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -636,8 +541,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 215,
-          "y": 294,
+          "x": 1023,
+          "y": 238,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -648,9 +553,9 @@
           "values": {"name": ""}
         },
         {
-          "x": 658,
-          "y": 234,
-          "scaleX": 1,
+          "x": 381,
+          "y": 256,
+          "scaleX": -1,
           "scaleY": 1,
           "rotation": 0,
           "tint": "#6b55c3",
@@ -660,10 +565,10 @@
           "values": {"name": ""}
         },
         {
-          "x": 407,
-          "y": 170,
+          "x": 655,
+          "y": 197,
           "scaleX": 3,
-          "scaleY": 6,
+          "scaleY": 2,
           "rotation": 0,
           "tint": "#8e8e8e",
           "texture": "shapes/line vertical16.png",
@@ -672,8 +577,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 319,
-          "y": 170,
+          "x": 567,
+          "y": 194,
           "scaleX": 3,
           "scaleY": 5,
           "rotation": 0,
@@ -681,6 +586,90 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0,
           "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1055,
+          "y": 191,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#77b923",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1045,
+          "y": 193,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e26d6d",
+          "texture": "foliage/flower 14.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1015,
+          "y": 200,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#ffce20",
+          "texture": "foliage/flower 14.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1075,
+          "y": 194,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffce20",
+          "texture": "foliage/flower 14.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1129,
+          "y": 192,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#ffce20",
+          "texture": "foliage/flower 14.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1104,
+          "y": 201,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e26d6d",
+          "texture": "foliage/flower 14.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1032,
+          "y": 180,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#4e771a",
+          "texture": "foliage/medium0.png",
+          "originX": 0.5,
+          "originY": 0.5,
           "values": {"name": ""}
         }
       ],
@@ -693,7 +682,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 112,
+      "gridCellsX": 139,
       "gridCellsY": 68,
       "entities": [
         {
@@ -897,7 +886,7 @@
           "_eid": "93117141",
           "x": 0,
           "y": 456,
-          "width": 904,
+          "width": 928,
           "height": 88,
           "originX": 0,
           "originY": 0,
@@ -934,8 +923,8 @@
           "name": "Pipe",
           "id": 22,
           "_eid": "95769929",
-          "x": 312,
-          "y": 160,
+          "x": 568,
+          "y": 184,
           "width": 96,
           "values": {"name": "", "visible": true, "depth": 0}
         },
@@ -943,11 +932,11 @@
           "name": "PipeSlope",
           "id": 23,
           "_eid": "95781942",
-          "x": 408,
-          "y": 160,
-          "width": 256,
+          "x": 376,
+          "y": 184,
+          "width": 192,
           "height": 64,
-          "flippedX": true,
+          "flippedX": false,
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -958,6 +947,19 @@
           "y": 72,
           "width": 272,
           "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 25,
+          "_eid": "93117141",
+          "x": 928,
+          "y": 192,
+          "width": 200,
+          "height": 352,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#6b55c3",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -968,7 +970,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 112,
+      "gridCellsX": 139,
       "gridCellsY": 68,
       "entities": []
     },
@@ -979,12 +981,12 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 112,
+      "gridCellsX": 139,
       "gridCellsY": 68,
       "decals": [
         {
-          "x": 282,
-          "y": 235,
+          "x": 1064,
+          "y": 174,
           "scaleX": 5.9,
           "scaleY": 1.2,
           "rotation": 0,
@@ -995,8 +997,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 242,
-          "y": 202,
+          "x": 1024,
+          "y": 141,
           "scaleX": 5.9,
           "scaleY": 1.2,
           "rotation": 0,
@@ -1007,8 +1009,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 290,
-          "y": 172,
+          "x": 1072,
+          "y": 111,
           "scaleX": 5.9,
           "scaleY": 1.2,
           "rotation": 0,
@@ -1019,8 +1021,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 212,
-          "y": 137,
+          "x": 994,
+          "y": 76,
           "scaleX": 3,
           "scaleY": 1.2,
           "rotation": 0,
@@ -1031,8 +1033,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 349,
-          "y": 202,
+          "x": 1131,
+          "y": 141,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1043,8 +1045,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 272,
-          "y": 142,
+          "x": 1054,
+          "y": 81,
           "scaleX": 1,
           "scaleY": -1,
           "rotation": 0,
@@ -1055,8 +1057,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 186,
-          "y": 170,
+          "x": 968,
+          "y": 109,
           "scaleX": -1,
           "scaleY": -1,
           "rotation": 0,
@@ -1067,8 +1069,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 177,
-          "y": 236,
+          "x": 959,
+          "y": 175,
           "scaleX": -1,
           "scaleY": 1,
           "rotation": 0,
@@ -1079,8 +1081,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 202,
-          "y": 118,
+          "x": 984,
+          "y": 57,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1091,8 +1093,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 296,
-          "y": 153,
+          "x": 1078,
+          "y": 92,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1103,8 +1105,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 349,
-          "y": 153,
+          "x": 1131,
+          "y": 92,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1115,8 +1117,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 186,
-          "y": 183,
+          "x": 968,
+          "y": 122,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1127,8 +1129,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 349,
-          "y": 191,
+          "x": 1131,
+          "y": 130,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1139,8 +1141,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 184,
-          "y": 224,
+          "x": 966,
+          "y": 163,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1151,8 +1153,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 200,
-          "y": 156,
+          "x": 982,
+          "y": 95,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1163,8 +1165,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 223,
-          "y": 119,
+          "x": 1005,
+          "y": 58,
           "scaleX": 1,
           "scaleY": -1,
           "rotation": 0,
@@ -1175,8 +1177,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 375,
-          "y": 253,
+          "x": 1157,
+          "y": 192,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 90,
@@ -1187,8 +1189,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 185,
-          "y": 262,
+          "x": 967,
+          "y": 201,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 90,
@@ -1199,8 +1201,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 193,
-          "y": 185,
+          "x": 975,
+          "y": 124,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 90,
@@ -1211,8 +1213,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 262,
-          "y": 153,
+          "x": 1044,
+          "y": 92,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 90,
@@ -1223,8 +1225,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 337,
-          "y": 227,
+          "x": 1119,
+          "y": 166,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 90,
@@ -1365,6 +1367,30 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
+        },
+        {
+          "x": 208,
+          "y": 736,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ad3600",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 248,
+          "y": 736,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e5bb00",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -1376,7 +1402,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 112,
+      "gridCellsX": 139,
       "gridCellsY": 68,
       "decals": [],
       "folder": "../textures"

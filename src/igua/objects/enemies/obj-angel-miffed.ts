@@ -20,7 +20,7 @@ import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnIndexedCollisionShape } from "../../mixins/mxn-indexed-collision-shape";
-import { mxnPhysics } from "../../mixins/mxn-physics";
+import { mxnPhysics, PhysicsFaction } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
@@ -114,6 +114,8 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
         )
         .pivoted(22, 41);
 
+    const mouthObj = headObj.objects.faceObj.objects.mouthObj;
+
     const obj = container(puppetObj)
         .autoSorted()
         .mixin(mxnEnemy, {
@@ -127,7 +129,12 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
             secondaryTint: themes.Common.tint.secondary,
             tertiaryTint: themes.Common.tint.primary,
         })
-        .mixin(mxnPhysics, { gravity: 0.2, physicsRadius: 6, physicsOffset: [0, -7] })
+        .mixin(mxnPhysics, {
+            gravity: 0.2,
+            physicsRadius: 6,
+            physicsOffset: [0, -7],
+            physicsFaction: PhysicsFaction.Enemy,
+        })
         .mixin(mxnDetectPlayer)
         .step(self => {
             let bodyObjY = 0;
@@ -147,11 +154,13 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
                 self.speed.x = approachLinear(self.speed.x, 0, 0.1);
             }
 
-            headObj.objects.faceObj.objects.mouthObj.controls.agapeUnit = approachLinear(
-                headObj.objects.faceObj.objects.mouthObj.controls.agapeUnit,
-                self.isOnGround ? 0 : 1,
+            mouthObj.controls.agapeUnit = approachLinear(
+                mouthObj.controls.agapeUnit,
+                mouthObj.controls.teethExposedUnit === 0 ? (self.isOnGround ? 0 : 1) : 1,
                 0.3,
             );
+
+            mouthObj.pivot.y = mouthObj.controls.teethExposedUnit === 0 ? 0 : (scene.ticker.ticks % 30 < 15 ? -2 : -1);
         });
 
     for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
@@ -169,11 +178,13 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
 
             yield sleep(125);
 
+            mouthObj.controls.teethExposedUnit = 1;
             const eyeRollerObj = objAngelEyes.objEyeRoller(headObj.objects.faceObj.objects.eyesObj).show(obj);
             const poisonBoxObj = objAngelMiffedPoisonBox(obj).at(obj).show();
 
             yield () => poisonBoxObj.mxnDischargeable.isDischarged;
 
+            mouthObj.controls.teethExposedUnit = 0;
             eyeRollerObj.destroy();
             obj.speed.y = -2;
 
@@ -381,9 +392,9 @@ function objAngelMiffedFace() {
 
     const mouthObj = objAngelMouth({
         negativeSpaceTint: 0x000000,
-        teethCount: 1,
+        teethCount: 2,
         toothGapWidth: 1,
-        txs: objAngelMouth.txs.rounded14,
+        txs: objAngelMouth.txs.w14,
     })
         .at(0, 6);
 

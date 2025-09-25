@@ -85,10 +85,11 @@ export function objAngelMouth(args: ObjAngelMouthArgs) {
 
     applyTeethPosition();
 
-    return obj.merge({ controls }).pivoted(Math.round(width / 2), Math.round(height / 2));
+    return container(obj.pivoted(Math.round(width / 2), Math.round(height / 2))).merge({ controls });
 }
 
 objAngelMouth.txs = {
     rounded11: Tx.Enemy.Common.Mouths.Rounded11.split({ width: 11 }),
     rounded14: Tx.Enemy.Common.Mouths.Rounded14.split({ width: 14 }),
+    w14: Tx.Enemy.Common.Mouths.W14.split({ width: 14 }),
 };

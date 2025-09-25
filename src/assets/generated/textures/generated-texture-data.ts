@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 394 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 395 }];
 
 interface TxData {
   id: string;
@@ -128,8 +128,9 @@ function txs<T>(tx: (data: TxData) => T) {
           Injured0: tx({ id: "Enemy.Common.Eyes.Injured0", atlas: 0, x: 923, y: 862, width: 6, height: 10 }),
         },
         Mouths: {
-          Rounded11: tx({ id: "Enemy.Common.Mouths.Rounded11", atlas: 0, x: 542, y: 521, width: 33, height: 6 }),
+          Rounded11: tx({ id: "Enemy.Common.Mouths.Rounded11", atlas: 0, x: 613, y: 521, width: 33, height: 6 }),
           Rounded14: tx({ id: "Enemy.Common.Mouths.Rounded14", atlas: 0, x: 471, y: 521, width: 70, height: 6 }),
+          W14: tx({ id: "Enemy.Common.Mouths.W14", atlas: 0, x: 542, y: 521, width: 70, height: 6 }),
         },
       },
       Miffed: {
@@ -137,7 +138,7 @@ function txs<T>(tx: (data: TxData) => T) {
         FlameAura: tx({ id: "Enemy.Miffed.FlameAura", atlas: 0, x: 1295, y: 801, width: 216, height: 98 }),
         Leg: tx({ id: "Enemy.Miffed.Leg", atlas: 0, x: 126, y: 1051, width: 12, height: 20 }),
         Noggin0: tx({ id: "Enemy.Miffed.Noggin0", atlas: 0, x: 2000, y: 49, width: 48, height: 28 }),
-        Pupil0: tx({ id: "Enemy.Miffed.Pupil0", atlas: 0, x: 800, y: 305, width: 8, height: 4 }),
+        Pupil0: tx({ id: "Enemy.Miffed.Pupil0", atlas: 0, x: 220, y: 1024, width: 8, height: 8 }),
         Sclera0: tx({ id: "Enemy.Miffed.Sclera0", atlas: 0, x: 841, y: 647, width: 14, height: 10 }),
         Torso0: tx({ id: "Enemy.Miffed.Torso0", atlas: 0, x: 1382, y: 1015, width: 30, height: 12 }),
       },
@@ -151,7 +152,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Face: tx({ id: "Enemy.Suggestive.Face", atlas: 0, x: 583, y: 919, width: 38, height: 24 }),
         Gear: tx({ id: "Enemy.Suggestive.Gear", atlas: 0, x: 1262, y: 878, width: 32, height: 16 }),
         Pupil: tx({ id: "Enemy.Suggestive.Pupil", atlas: 0, x: 1067, y: 790, width: 2, height: 8 }),
-        ScleraWide: tx({ id: "Enemy.Suggestive.ScleraWide", atlas: 0, x: 576, y: 521, width: 14, height: 6 }),
+        ScleraWide: tx({ id: "Enemy.Suggestive.ScleraWide", atlas: 0, x: 647, y: 521, width: 14, height: 6 }),
         Sclera: tx({ id: "Enemy.Suggestive.Sclera", atlas: 0, x: 220, y: 1007, width: 8, height: 16 }),
         Torso: tx({ id: "Enemy.Suggestive.Torso", atlas: 0, x: 1817, y: 1188, width: 86, height: 23 }),
       },
@@ -347,7 +348,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Asterisk: tx({ id: "Terrain.Earth.Asterisk", atlas: 0, x: 669, y: 1032, width: 21, height: 24 }),
         Crack8px12px: tx({ id: "Terrain.Earth.Crack8px12px", atlas: 0, x: 2040, y: 655, width: 8, height: 12 }),
         Crack28px38px: tx({ id: "Terrain.Earth.Crack28px38px", atlas: 0, x: 1267, y: 572, width: 28, height: 38 }),
-        CrackSmall0: tx({ id: "Terrain.Earth.CrackSmall0", atlas: 0, x: 1262, y: 895, width: 8, height: 4 }),
+        CrackSmall0: tx({ id: "Terrain.Earth.CrackSmall0", atlas: 0, x: 800, y: 305, width: 8, height: 4 }),
         ExposedDirt: tx({ id: "Terrain.Earth.ExposedDirt", atlas: 0, x: 1099, y: 528, width: 80, height: 14 }),
         Loop: tx({ id: "Terrain.Earth.Loop", atlas: 0, x: 209, y: 1166, width: 17, height: 18 }),
         Mass0: tx({ id: "Terrain.Earth.Mass0", atlas: 0, x: 1552, y: 978, width: 137, height: 81 }),
@@ -490,7 +491,7 @@ function txs<T>(tx: (data: TxData) => T) {
         BackgroundUnselectedPotion: tx({ id: "Ui.Inventory.BackgroundUnselectedPotion", atlas: 0, x: 823, y: 695, width: 246, height: 94 }),
       },
       NewIndicator: tx({ id: "Ui.NewIndicator", atlas: 0, x: 986, y: 223, width: 20, height: 12 }),
-      NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 220, y: 1024, width: 8, height: 8 }),
+      NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 244, y: 1179, width: 8, height: 8 }),
       OwnerDefeat: tx({ id: "Ui.OwnerDefeat", atlas: 0, x: 402, y: 1081, width: 30, height: 16 }),
       PlacementReticle: tx({ id: "Ui.PlacementReticle", atlas: 0, x: 2042, y: 1119, width: 6, height: 6 }),
       Pocket: {
