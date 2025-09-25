@@ -54,12 +54,15 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
     const enemyObj = obj.mixin(mxnRpgStatus, { status, effects, hurtboxes: args.hurtboxes })
         .dispatches<"mxnEnemy.died">()
         .handles("damaged", (self, result) => {
-            if (!result.rejected && result.damaged) {
-                Rng.choose(
+            if (result.rejected) {
+                return;
+            }
+            if (result.damaged) {
+                self.play(Rng.choose(
                     Sfx.Impact.VsEnemyPhysical0,
                     Sfx.Impact.VsEnemyPhysical1,
                     Sfx.Impact.VsEnemyPhysical2,
-                ).play();
+                ));
 
                 // TODO rather arbitrary positions
                 if (playerObj.x > self.x + 22) {
@@ -72,6 +75,9 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
                     rightEyeInjuredStepsCount = Rng.intc(12, 20);
                     leftEyeInjuredStepsCount = Rng.intc(12, 20);
                 }
+            }
+            else {
+                self.play(Sfx.Impact.VsEnemyBlocked);
             }
         })
         .merge({
