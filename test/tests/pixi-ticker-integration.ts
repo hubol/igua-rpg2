@@ -5,6 +5,29 @@ import { TickerContainer } from "../../src/lib/game-engine/ticker-container";
 import { Assert } from "../lib/assert";
 import { createDisplayObject } from "../lib/create-display-object";
 
+export function grandchildInheritsTicker() {
+    const ticker = new AsshatTicker();
+    const root = new TickerContainer(ticker);
+
+    let steps0 = 0;
+    let steps1 = 0;
+
+    const grandchild = createDisplayObject().step(() => steps0 += 1);
+    const child = new Container();
+    const parent = new Container();
+
+    child.addChild(grandchild);
+    parent.addChild(child);
+
+    grandchild.step(() => steps1 += 1);
+
+    root.addChild(parent);
+
+    ticker.tick();
+    Assert(steps0).toStrictlyBe(1);
+    Assert(steps1).toStrictlyBe(1);
+}
+
 export function childInheritsTicker() {
     const ticker = new AsshatTicker();
     const c = new TickerContainer(ticker);

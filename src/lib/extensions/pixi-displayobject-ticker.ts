@@ -17,7 +17,7 @@ interface DisplayObjectPrivate {
     _cancellationToken?: ICancellationToken;
 
     _ticker?: IAsshatTicker;
-    _receiveResolvedTicker(ticker: AsshatTicker): void;
+    _receiveLatestTicker(ticker: IAsshatTicker): void;
 }
 
 const _container_destroy = Container.prototype.destroy;
@@ -65,9 +65,7 @@ Object.defineProperties(DisplayObject.prototype, {
                         throw new Error("Expected a LazyTicker, but got something else!");
                     }
 
-                    parentTicker.push(this._ticker);
-                    parentTicker.addReceiver(this);
-                    this._ticker = parentTicker;
+                    parentTicker.merge(this._ticker);
                 }
                 else {
                     lazyTicker.resolve(parentTicker as AsshatTicker);
@@ -77,7 +75,7 @@ Object.defineProperties(DisplayObject.prototype, {
         },
         configurable: true,
     },
-    _receiveResolvedTicker: {
+    _receiveLatestTicker: {
         value: function (this: DisplayObject & DisplayObjectPrivate, ticker: AsshatTicker) {
             this._ticker = ticker;
         },
