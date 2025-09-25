@@ -76,7 +76,7 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
                     leftEyeInjuredStepsCount = Rng.intc(12, 20);
                 }
             }
-            else {
+            else if (!result.ambient) {
                 self.play(Sfx.Impact.VsEnemyBlocked);
             }
         })

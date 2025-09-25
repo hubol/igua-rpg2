@@ -96,7 +96,7 @@ export namespace RpgStatus {
 
     interface DamageAccepted {
         rejected: false;
-        conditions?: boolean;
+        ambient?: boolean;
         damaged?: boolean;
     }
 
@@ -190,6 +190,9 @@ export namespace RpgStatus {
                 return { rejected: true, invulnerable: true };
             }
 
+            const ambient = !attack.quirks.isPlayerClawMeleeAttack && !attack.quirks.isPlayerMeleeAttack
+                && attack.physical === 0 && attack.emotional === 0;
+
             const conditions = target.invulnerable === 0
                 && (attack.conditions.helium > 0
                     || attack.conditions.poison > 0
@@ -234,7 +237,7 @@ export namespace RpgStatus {
             // TODO warn when amount is not an integer
 
             if (attack.physical === 0 && attack.emotional === 0) {
-                return { rejected: false, conditions };
+                return { rejected: false, ambient };
             }
 
             if (target.invulnerable > 0) {
@@ -289,7 +292,7 @@ export namespace RpgStatus {
                 attacker.pride++;
             }
 
-            return { rejected: false, conditions, damaged };
+            return { rejected: false, ambient, damaged };
         },
 
         heal(model: Model, effects: Effects, amount: number) {

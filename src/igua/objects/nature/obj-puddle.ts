@@ -11,6 +11,7 @@ import { scene } from "../../globals";
 import { MxnPhysics, mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
+import { RpgFaction } from "../../rpg/rpg-faction";
 import { objEphemeralSprite } from "../obj-ephemeral-sprite";
 
 export function objPuddle(width: number, tint = 0x68A8D0) {
@@ -21,6 +22,7 @@ export function objPuddle(width: number, tint = 0x68A8D0) {
                 tint,
             },
         },
+        versus: RpgFaction.Anyone,
     });
     return objPuddleBase(
         width,
@@ -39,6 +41,7 @@ export function objPuddlePoison(width: number, tint = 0x80B020) {
                 tint,
             },
         },
+        versus: RpgFaction.Anyone,
     });
     return objPuddleBase(
         width,
@@ -67,6 +70,7 @@ function objPuddleBase(width: number, height: number, tint: Integer, attack: Rpg
                 value: 30,
             },
         },
+        versus: RpgFaction.Anyone,
     });
 
     const c = container(gfx)
