@@ -51,6 +51,11 @@ export namespace DataKeyItem {
                 description: "Used to increase the power of shoes.",
                 texture: Tx.Collectibles.Key.EquipmentGlue,
             },
+            UninflatedBallon: {
+                name: "Uninflated Ballon",
+                description: "In desperate need of helium.",
+                texture: Tx.Collectibles.Key.UninflatedBallon,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );

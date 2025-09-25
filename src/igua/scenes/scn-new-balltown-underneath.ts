@@ -3,7 +3,10 @@ import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Tx } from "../../assets/textures";
+import { Coro } from "../../lib/game-engine/routines/coro";
+import { factor, interpr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
+import { range } from "../../lib/range";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaInventory } from "../drama/drama-inventory";
@@ -109,6 +112,9 @@ function enrichHomeowner(lvl: LvlType.NewBalltownUnderneath) {
 function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
     const { heliumCreator } = Rpg.flags.underneath;
     const { tank } = heliumCreator;
+    const consts = {
+        heliumPerBallonsFilled: 200,
+    };
 
     lvl.TownUnderneathHeliumCreator
         .mixin(mxnSpeaker, { name: "Pocket HeHe", colorPrimary: 0x08270E, colorSecondary: 0x3F1C3C })
@@ -121,6 +127,7 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
                        Helium content: ${tank.heliumContent}`,
                     tank.isValveOpen ? "Close valve" : "Open valve",
                     "Create helium",
+                    "Fill ballons",
                     "Do nothing",
                 );
                 if (result === 0) {
@@ -148,6 +155,37 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
                         tank.heliumContent += emptied.totalItems * 150;
                         yield* show("Helium created.");
                     }
+                }
+                else if (result === 2) {
+                    const max = Math.min(
+                        Math.floor(tank.heliumContent / consts.heliumPerBallonsFilled),
+                        Rpg.inventory.potions.freeSlots,
+                    );
+
+                    yield* show(
+                        `You can fill ballons with ${consts.heliumPerBallonsFilled} helium each.`,
+                        `With the helium content and your inventory space, you could fill ${max} provided you have enough uninflated ballons on hand.`,
+                    );
+
+                    if (max <= 0) {
+                        continue;
+                    }
+
+                    const count = yield* DramaInventory.askRemoveCount("How many to inflate?", {
+                        kind: "key_item",
+                        id: "UninflatedBallon",
+                    }, { max });
+
+                    if (!count) {
+                        continue;
+                    }
+
+                    const targetHelium = Math.max(0, tank.heliumContent - count * consts.heliumPerBallonsFilled);
+
+                    yield* Coro.all([
+                        DramaInventory.receiveItems(range(count).map(() => ({ kind: "potion", id: "Ballon" }))),
+                        interpr(tank, "heliumContent").factor(factor.sine).to(targetHelium).over(140 * count),
+                    ]);
                 }
                 else {
                     break;

@@ -69,7 +69,7 @@ function* askRemoveCount(
     }
 
     const heldCount = Rpg.inventory.count(item);
-    const max = Math.max(Math.floor(heldCount / multipleOf) * multipleOf, rawMax ?? 0);
+    const max = Math.min(Math.floor(heldCount / multipleOf) * multipleOf, rawMax ?? 0);
 
     const obj = container().show(layers.overlay.messages);
 
