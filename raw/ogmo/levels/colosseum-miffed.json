@@ -241,37 +241,7 @@
           "id": 4,
           "_eid": "30599782",
           "x": 56,
-          "y": 376,
-          "originX": 12,
-          "originY": 12,
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "PocketableItemB",
-          "id": 5,
-          "_eid": "30599782",
-          "x": 96,
           "y": 392,
-          "originX": 12,
-          "originY": 12,
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "PocketableItemB",
-          "id": 6,
-          "_eid": "30599782",
-          "x": 16,
-          "y": 392,
-          "originX": 12,
-          "originY": 12,
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "PocketableItemB",
-          "id": 7,
-          "_eid": "30599782",
-          "x": 16,
-          "y": 432,
           "originX": 12,
           "originY": 12,
           "values": {"name": "", "depth": 0}

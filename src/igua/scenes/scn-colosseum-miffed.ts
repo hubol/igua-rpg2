@@ -1,6 +1,8 @@
 import { Graphics } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Instances } from "../../lib/game-engine/instances";
+import { Jukebox } from "../core/igua-audio";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
@@ -13,6 +15,7 @@ import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgFaction } from "../rpg/rpg-faction";
 
 export function scnColosseumMiffed() {
+    Jukebox.play(Mzk.Roundabout);
     CtxPocketItems.value.pocketItemIds.typeA = "EmoBallistaBolt";
     CtxPocketItems.value.pocketItemIds.typeB = "BallFruitTypeA";
     CtxPocketItems.value.variant = "objFloating";
