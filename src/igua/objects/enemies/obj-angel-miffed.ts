@@ -71,8 +71,9 @@ const ranks = {
             tier1: [
                 { kind: "potion", id: "Ballon", weight: 5 },
                 { kind: "valuables", deltaPride: -10, max: 70, min: 30, weight: 5 },
-                { kind: "key_item", id: "UninflatedBallon", weight: 30 },
-                { kind: "flop", min: 15, max: 19, weight: 20 },
+                { kind: "key_item", id: "UninflatedBallon", count: 5, weight: 30 },
+                { kind: "key_item", id: "UninflatedBallon", count: 8, weight: 5 },
+                { kind: "flop", min: 15, max: 19, weight: 15 },
                 { kind: "nothing", weight: 40 },
             ],
         },

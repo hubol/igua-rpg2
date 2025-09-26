@@ -49,8 +49,11 @@ export function objLootDrop(drop: RpgLoot.Drop) {
                 yield sleep(250);
             }
 
-            for (const keyItemId of drop.keyItems) {
-                objCollectibleKeyItem(keyItemId).at(self).add(0, -60).show(self.parent);
+            for (let i = 0; i < drop.keyItems.length; i++) {
+                const keyItemId = drop.keyItems[i];
+                objCollectibleKeyItem(keyItemId).at(self).add(10 * Math.cos(i * 1.4), -60 + 10 * Math.sin(i)).show(
+                    self.parent,
+                );
                 yield sleep(500);
             }
 

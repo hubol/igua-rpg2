@@ -58,6 +58,7 @@ export namespace RpgLoot {
         | TierOptionDrop_Nothing;
 
     type TierOption = TierOptionDrop & {
+        count?: Integer;
         weight?: Integer;
     };
 
@@ -110,26 +111,30 @@ export namespace RpgLoot {
                     continue;
                 }
 
-                if (drop.kind === "equipment") {
-                    equipments.push(drop.id);
-                }
-                else if (drop.kind === "key_item") {
-                    keyItems.push(drop.id);
-                }
-                else if (drop.kind === "valuables") {
-                    valuables += computeValuables(drop, dropperStatus);
-                }
-                else if (drop.kind === "pocket_item") {
-                    pocketItems.push(drop.id);
-                    if (Rng.float(100) <= lootBuffs.pocket.bonusChance) {
-                        pocketItems.push(drop.id);
+                const count = drop.count ?? 1;
+
+                for (let i = 0; i < count; i++) {
+                    if (drop.kind === "equipment") {
+                        equipments.push(drop.id);
                     }
-                }
-                else if (drop.kind === "flop") {
-                    flops.push(Rng.intc(drop.min, drop.max));
-                }
-                else if (drop.kind === "potion") {
-                    potions.push(drop.id);
+                    else if (drop.kind === "key_item") {
+                        keyItems.push(drop.id);
+                    }
+                    else if (drop.kind === "valuables") {
+                        valuables += computeValuables(drop, dropperStatus);
+                    }
+                    else if (drop.kind === "pocket_item") {
+                        pocketItems.push(drop.id);
+                        if (Rng.float(100) <= lootBuffs.pocket.bonusChance) {
+                            pocketItems.push(drop.id);
+                        }
+                    }
+                    else if (drop.kind === "flop") {
+                        flops.push(Rng.intc(drop.min, drop.max));
+                    }
+                    else if (drop.kind === "potion") {
+                        potions.push(drop.id);
+                    }
                 }
             }
 
@@ -149,12 +154,12 @@ export namespace RpgLoot {
         },
     };
 
-    function pickOptionDrop(tierOptions: TierOption[]): Exclude<TierOptionDrop, { kind: "nothing" }> | null {
+    function pickOptionDrop(tierOptions: TierOption[]): Exclude<TierOption, { kind: "nothing" }> | null {
         if (tierOptions.length === 0) {
             return null;
         }
 
-        const dropWithMinimumScores = Empty<{ score: Integer; drop: TierOptionDrop }>();
+        const dropWithMinimumScores = Empty<{ score: Integer; drop: TierOption }>();
         {
             let previousScore = 0;
             for (const option of tierOptions) {
