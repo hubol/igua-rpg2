@@ -76,7 +76,7 @@ function enrichWatcherNpc(lvl: LvlType.ColosseumMiffed) {
 }
 
 function enrichEmoBallista(lvl: LvlType.ColosseumMiffed) {
-    let bolts = 0;
+    const rpgBallista = Rpg.flags.colosseum.ballista;
 
     lvl.EmoBallistaPlaceholder.mixin(mxnSpeaker, {
         name: "Emo Ballista",
@@ -87,19 +87,21 @@ function enrichEmoBallista(lvl: LvlType.ColosseumMiffed) {
             const count = Rpg.inventory.pocket.count("EmoBallistaBolt");
             if (count > 0) {
                 yield* DramaInventory.removeCount({ kind: "pocket_item", id: "EmoBallistaBolt" }, count);
-                bolts += count;
-                for (const spawnerObj of Instances(objCollectiblePocketItemSpawner)) {
-                    spawnerObj.spawn();
-                }
+                rpgBallista.bolts += count;
             }
-            if (bolts === 0) {
+
+            for (const spawnerObj of Instances(objCollectiblePocketItemSpawner)) {
+                spawnerObj.spawn();
+            }
+
+            if (rpgBallista.bolts === 0) {
                 yield* show("No bolts. Look west.");
                 return;
             }
 
-            if (yield* ask(`${bolts} bolt(s). Fire?`)) {
+            if (yield* ask(`${rpgBallista.bolts} bolt(s). Fire?`)) {
                 objGiantBallistaAttack().at(lvl.EmoBallistaPlaceholder).show();
-                bolts--;
+                rpgBallista.bolts--;
             }
         });
 }

@@ -85,6 +85,9 @@ export function getInitialRpgProgress() {
                 },
             },
             colosseum: {
+                ballista: {
+                    bolts: 0,
+                },
                 watcher: {
                     toldPlayerAboutStrangeMarketFightingTechnique: false,
                 },
