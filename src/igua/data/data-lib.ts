@@ -7,7 +7,7 @@ export namespace DataLib {
             namespace: string;
         },
     ) {
-        return function getById (id: keyof TManifest) {
+        return function getById<TId extends keyof TManifest> (id: TId): TManifest[TId] {
             const model = manifest[id];
             if (!model) {
                 Logger.logContractViolationError(
@@ -16,6 +16,7 @@ export namespace DataLib {
                     { id },
                 );
 
+                // @ts-expect-error Leave me alone
                 return manifest.__Fallback__;
             }
 
