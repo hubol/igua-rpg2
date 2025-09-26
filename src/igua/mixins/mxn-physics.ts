@@ -160,8 +160,8 @@ function applySpeedInSteps(obj: MxnPhysics) {
         const hspSign = Math.sign(hsp);
         const vspSign = Math.sign(vsp);
 
-        const hspLength = Math.min(hspAbs, vspAbs === 0 ? radius : radiusSqrt);
-        const vspLength = Math.min(vspAbs, hspAbs === 0 ? radius : radiusSqrt);
+        const hspLength = Math.min(hspAbs, radiusSqrt);
+        const vspLength = Math.min(vspAbs, radiusSqrt);
 
         const hspStep = hspSign * hspLength;
         const vspStep = vspSign * vspLength;
