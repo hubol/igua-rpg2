@@ -35,7 +35,7 @@ export function objCollectiblePocketItemSpawner(
     let itemObj: ObjCollectiblePocketItem | null = null;
 
     function spawn(item = defaultItem) {
-        if (itemObj && !itemObj.destroyed && !itemObj.isCollectible) {
+        if (itemObj && !itemObj.destroyed && (itemObj.isCollectible || variant === "objBouncing")) {
             return null;
         }
         return itemObj = objCollectiblePocketItem[variant](item).at(position).show(obj);
