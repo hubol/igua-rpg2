@@ -11,7 +11,10 @@ import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataCuesheet } from "../data/data-cuesheet";
 import { DataPotion } from "../data/data-potion";
+import { DramaInventory } from "../drama/drama-inventory";
+import { ask, show } from "../drama/show";
 import { mxnCuesheet } from "../mixins/mxn-cuesheet";
+import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnMotion } from "../mixins/mxn-motion";
 import { mxnTextTyped } from "../mixins/mxn-text-typed";
 import { objMusician } from "../objects/characters/obj-musician";
@@ -23,6 +26,44 @@ export function scnStrangeMarket() {
     Jukebox.play(Rpg.character.position.checkpointName === "fromAbove" ? Mzk.SoldierBoyDemo : Mzk.BigLove);
     const lvl = Lvl.StrangeMarket();
     enrichMusicians(lvl);
+    enrichGreeter(lvl);
+}
+
+function enrichGreeter(lvl: LvlType.StrangeMarket) {
+    lvl.GreeterNpc.mixin(mxnCutscene, function* () {
+        const result = yield* ask(
+            "Welcome to Strange Market. Can I help you somehow?",
+            "About this place",
+            Rpg.flags.colosseum.watcher.toldPlayerAboutStrangeMarketFightingTechnique ? "Dark colosseum sprite" : null,
+            "No thanks",
+        );
+
+        if (result === 0) {
+            yield* show(
+                "Strange Market has a few attractions you may find interesting.",
+                "The cobbler will allow you to combine multiple shoes into one, more powerful shoe.",
+                "The band will play a song for you.",
+                "There is an obstacle course with nice rewards if you collect many items.",
+            );
+        }
+        else if (result === 1) {
+            yield* show("Oh... Yes, those guys are pretty tough.", "But they can be poisoned like most other sprites.");
+
+            if (Rpg.flags.strangeMarket.greeter.gavePlayerPoisonRing) {
+                yield* show("Did you try the shoe I gave you?");
+            }
+            else {
+                yield* show("You will probably get some more use out of this shoe than me.");
+                yield* DramaInventory.receiveItems([{ kind: "equipment", id: "PoisonRing", level: 1 }]);
+                Rpg.flags.strangeMarket.greeter.gavePlayerPoisonRing = true;
+            }
+
+            yield* show("Although, I'm not sure how you'll deliver the final blow...");
+        }
+        else if (result === 2) {
+            yield* show("Ok! Have fun!");
+        }
+    });
 }
 
 function enrichMusicians(lvl: LvlType.StrangeMarket) {

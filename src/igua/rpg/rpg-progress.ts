@@ -84,6 +84,16 @@ export function getInitialRpgProgress() {
                     isLeftDoorLocked: true,
                 },
             },
+            colosseum: {
+                watcher: {
+                    toldPlayerAboutStrangeMarketFightingTechnique: false,
+                },
+            },
+            strangeMarket: {
+                greeter: {
+                    gavePlayerPoisonRing: false,
+                },
+            },
         },
         programmaticFlags: {
             collectedValuableUids: new Set<Integer>(),
