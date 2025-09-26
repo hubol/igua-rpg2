@@ -20,19 +20,22 @@ export function mxnDripping(obj: DisplayObject) {
             while (dripUnit >= 1) {
                 const box = isContainer ? getRandomDeepChild(obj) : obj;
                 const bounds = box.getBounds(false, r);
-                const point = self.getGlobalPosition(p, false);
-                const dripObj = objWaterDrip(null)
-                    .tinted(self.dripsTint)
-                    .mixin(mxnDestroyAfterSteps, 30)
-                    .at(point).at(self).add(bounds).add(point, -1).add(Rng.int(bounds.width), 0)
-                    .show(self.parent);
+                if (bounds.x !== 0 || bounds.y !== 0 || bounds.width !== 0 || bounds.height !== 0) {
+                    const point = self.getGlobalPosition(p, false);
+                    const dripObj = objWaterDrip(null)
+                        .tinted(self.dripsTint)
+                        .mixin(mxnDestroyAfterSteps, 30)
+                        .at(point).at(self).add(bounds).add(point, -1).add(Rng.int(bounds.width), 0)
+                        .show(self.parent);
 
-                if (obj.is(mxnPhysics)) {
-                    dripObj.speed.x = obj.speed.x * 0.1;
-                    dripObj.speed.y = obj.speed.y * -0.3;
+                    if (obj.is(mxnPhysics)) {
+                        dripObj.speed.x = obj.speed.x * 0.1;
+                        dripObj.speed.y = obj.speed.y * -0.3;
+                    }
+                    dripObj.speed.y += 0.3;
+                    dripObj.gravity = 0.07;
                 }
-                dripObj.speed.y += 0.3;
-                dripObj.gravity = 0.07;
+
                 dripUnit -= 1;
             }
         });
