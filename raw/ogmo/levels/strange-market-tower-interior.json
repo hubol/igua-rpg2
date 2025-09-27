@@ -954,6 +954,54 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
+        },
+        {
+          "x": 251,
+          "y": 692,
+          "scaleX": 3.7,
+          "scaleY": 3.7,
+          "rotation": 0,
+          "tint": "#8f2d00",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 274,
+          "y": 742,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 450,
+          "tint": "#8f2d00",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 245,
+          "y": 741,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 450,
+          "tint": "#8f2d00",
+          "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 248,
+          "y": 688,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/signage/band poster.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
