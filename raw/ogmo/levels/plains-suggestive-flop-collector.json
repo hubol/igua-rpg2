@@ -131,7 +131,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": false,
-          "values": {"personaName": "", "name": "CollectorNpc", "depth": 0}
+          "values": {"personaName": "FlopCollector", "name": "CollectorNpc", "depth": 0}
         }
       ]
     },

@@ -26,6 +26,11 @@ export namespace DataNpcPersona {
             Cobbler: { job: "Cobbler", name: "Frint", looks: NpcLooks.Spice },
             WheatGod: { job: "God", name: "Wheena", looks: NpcLooks.Wheat },
             BeetGod: { job: "God", name: "Bweena", looks: NpcLooks.Beet },
+            CavernShopkeeper: { job: "Shopkeeper", name: "Sweet P", looks: NpcLooks.CaveDweller },
+            CavernGatekeeper: { job: "Gatekeeper", name: "Tax", looks: NpcLooks.Ruby },
+            FlopCollector: { job: "Flop Collector", name: "Pin", looks: NpcLooks.Circus },
+            MarketGreeter: { job: "Greeter", name: "Yrem", looks: NpcLooks.Bubblegum },
+            ObstacleWatcher: { job: "Host", name: "Tipp", looks: NpcLooks.Corpo },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
         } satisfies Record<string, Model>,
     );

@@ -119,7 +119,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": false,
-          "values": {"personaName": "", "name": "Gatekeeper", "depth": 0}
+          "values": {"personaName": "CavernGatekeeper", "name": "Gatekeeper", "depth": 0}
         },
         {
           "name": "IguanaNpc",
@@ -130,7 +130,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": false,
-          "values": {"personaName": "", "name": "Shopkeeper", "depth": 0}
+          "values": {"personaName": "CavernShopkeeper", "name": "Shopkeeper", "depth": 0}
         }
       ]
     },
