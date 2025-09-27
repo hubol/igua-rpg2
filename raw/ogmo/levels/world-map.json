@@ -1819,6 +1819,45 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 431,
+          "y": 566,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#62c44a",
+          "texture": "terrain/earth/question mark.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 502,
+          "y": 548,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#62c44a",
+          "texture": "terrain/earth/question mark.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 525,
+          "y": 575,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#62c44a",
+          "texture": "terrain/earth/question mark.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -2203,6 +2242,18 @@
           "rotation": 0,
           "tint": "#d2264f",
           "texture": "world map/landmarks/splatter.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 477,
+          "y": 572,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#baee25",
+          "texture": "world map/dome 0.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}

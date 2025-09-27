@@ -1510,7 +1510,68 @@
       "gridCellHeight": 8,
       "gridCellsX": 139,
       "gridCellsY": 68,
-      "decals": [],
+      "decals": [
+        {
+          "x": 124,
+          "y": 105,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#62c44a",
+          "texture": "sky/cloud question mark 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 325,
+          "y": 206,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#62c44a",
+          "texture": "sky/cloud question mark 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 540,
+          "y": 85,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#62c44a",
+          "texture": "sky/cloud question mark 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 772,
+          "y": 173,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#62c44a",
+          "texture": "sky/cloud question mark 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 940,
+          "y": 77,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#62c44a",
+          "texture": "sky/cloud question mark 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     }
   ]

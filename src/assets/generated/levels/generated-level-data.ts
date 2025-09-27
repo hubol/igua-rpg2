@@ -3626,6 +3626,11 @@ export const Lvl = {
   StrangeMarket: () => {
     applyLevel({ width: 1112, height: 544, backgroundTint: 0xbaee25 });
     return {
+      SkyCloudQuestionMark0: d(Tx.Sky.CloudQuestionMark0, { x: 124, y: 105, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "ParallaxDecals"),
+      SkyCloudQuestionMark0_1: d(Tx.Sky.CloudQuestionMark0, { x: 325, y: 206, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "ParallaxDecals"),
+      SkyCloudQuestionMark0_2: d(Tx.Sky.CloudQuestionMark0, { x: 540, y: 85, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "ParallaxDecals"),
+      SkyCloudQuestionMark0_3: d(Tx.Sky.CloudQuestionMark0, { x: 772, y: 173, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "ParallaxDecals"),
+      SkyCloudQuestionMark0_4: d(Tx.Sky.CloudQuestionMark0, { x: 940, y: 77, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "ParallaxDecals"),
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 1064, y: 174, scaleX: 5.9, scaleY: 1.2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x005280 }, "BackgroundDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 1024, y: 141, scaleX: 5.9, scaleY: 1.2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x005280 }, "BackgroundDecals"),
       ShapesSquare32_2: d(Tx.Shapes.Square32, { x: 1072, y: 111, scaleX: 5.9, scaleY: 1.2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x005280 }, "BackgroundDecals"),
@@ -3770,6 +3775,7 @@ export const Lvl = {
       WorldMapLandmarksUnusualTower: d(Tx.WorldMap.Landmarks.UnusualTower, { x: 650, y: 718, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x503966 }, "ParallaxDecals"),
       WorldMapLandmarksUnusualTower_1: d(Tx.WorldMap.Landmarks.UnusualTower, { x: 569, y: 718, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x503966 }, "ParallaxDecals"),
       WorldMapLandmarksSplatter: d(Tx.WorldMap.Landmarks.Splatter, { x: 607, y: 739, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xd2264f }, "ParallaxDecals"),
+      WorldMapDome0: d(Tx.WorldMap.Dome0, { x: 477, y: 572, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbaee25 }, "ParallaxDecals"),
       LightShadowMessy0: d(Tx.Light.ShadowMessy0, { x: 980, y: 692, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
       StoneRock0_2: d(Tx.Stone.Rock0, { x: 944, y: 684, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       ShapesRightTriangle24px: d(Tx.Shapes.RightTriangle24px, { x: 438, y: 726, scaleX: 2.9, scaleY: 3.2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
@@ -3858,6 +3864,9 @@ export const Lvl = {
       ShapesSquare32_14: d(Tx.Shapes.Square32, { x: 446, y: 564, scaleX: 1.4, scaleY: 0.6, rotation: 0, originX: 0, originY: 0.5, tint: 0xad3600 }, "BackgroundDecals"),
       ShapesX22: d(Tx.Shapes.X22, { x: 468, y: 578, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe5bb00 }, "BackgroundDecals"),
       ShapesSquare32_15: d(Tx.Shapes.Square32, { x: 461, y: 592, scaleX: 0.3, scaleY: 0.4, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x252525 }, "BackgroundDecals"),
+      TerrainEarthQuestionMark: d(Tx.Terrain.Earth.QuestionMark, { x: 431, y: 566, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "BackgroundDecals"),
+      TerrainEarthQuestionMark_1: d(Tx.Terrain.Earth.QuestionMark, { x: 502, y: 548, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "BackgroundDecals"),
+      TerrainEarthQuestionMark_2: d(Tx.Terrain.Earth.QuestionMark, { x: 525, y: 575, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "BackgroundDecals"),
       Slope: e(r["Slope"], { x: 983, y: 689, width: 80, height: 80, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Slope_1: e(r["Slope"], { x: 385, y: 688, width: 80, height: 80, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Slope_2: e(r["Slope"], { x: 387, y: 189, width: 80, height: 80, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
