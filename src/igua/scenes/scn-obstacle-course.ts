@@ -14,6 +14,7 @@ import { renderer } from "../current-pixi-renderer";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { DramaInventory } from "../drama/drama-inventory";
+import { DramaMisc } from "../drama/drama-misc";
 import { DramaWallet } from "../drama/drama-wallet";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
@@ -142,18 +143,7 @@ function objMinigameController(lvl: LvlType.ObstacleCourse) {
 }
 
 function* dramaEndMinigame(lvl: LvlType.ObstacleCourse) {
-    playerObj.physicsEnabled = false;
-    playerObj.speed.at(0, 0);
-    // TODO If I find myself doing shit like this a lot, it might be a good idea to invent a way
-    // for the cutscene coro to execute before the camera is applied
-    const movePlayerObj = container()
-        .coro(function* (self) {
-            yield interpvr(playerObj).factor(factor.sine).to(lvl.ResetPlayerMarker).over(4000);
-            self.destroy();
-        })
-        .show();
-    yield () => movePlayerObj.destroyed;
-    playerObj.physicsEnabled = true;
+    yield* DramaMisc.levitatePlayer(interpvr(playerObj).factor(factor.sine).to(lvl.ResetPlayerMarker).over(4000));
     yield interpvr(lvl.RestrictedBlock).translate(0, -50).over(500);
 }
 

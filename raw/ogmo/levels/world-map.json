@@ -1769,6 +1769,19 @@
           "groupName": null
         },
         {
+          "x": 479,
+          "y": 545,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#62c44a",
+          "texture": "terrain/earth/question mark.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
           "x": 400,
           "y": 912,
           "scaleX": 1,
@@ -1780,6 +1793,18 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 486,
+          "y": 543,
+          "scaleX": 0.75,
+          "scaleY": 1.5,
+          "rotation": 0,
+          "tint": "#e5bb00",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
         },
         {
           "x": 446,
@@ -1834,8 +1859,8 @@
           "groupName": null
         },
         {
-          "x": 502,
-          "y": 548,
+          "x": 525,
+          "y": 575,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1847,13 +1872,13 @@
           "groupName": null
         },
         {
-          "x": 525,
-          "y": 575,
-          "scaleX": 1,
-          "scaleY": 1,
+          "x": 499,
+          "y": 555,
+          "scaleX": 0.3,
+          "scaleY": 0.4,
           "rotation": 0,
-          "tint": "#62c44a",
-          "texture": "terrain/earth/question mark.png",
+          "tint": "#252525",
+          "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},

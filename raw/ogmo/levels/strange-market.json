@@ -171,7 +171,7 @@
           "originX": 22,
           "originY": 39,
           "flippedX": false,
-          "values": {"name": "fromBelow", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+          "values": {"name": "fromTowerAbove", "depth": 0, "overrideFlipX": "none"}
         },
         {
           "name": "Checkpoint",
@@ -182,7 +182,7 @@
           "originX": 22,
           "originY": 39,
           "flippedX": true,
-          "values": {"name": "fromAbove", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+          "values": {"name": "fromTowerBelow", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
         }
       ]
     },
@@ -286,7 +286,7 @@
           "y": 80,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "scnStrangeMarket", "checkpointName": "fromAbove", "name": "", "depth": 0}
+          "values": {"sceneName": "scnStrangeMarketTowerInterior", "checkpointName": "fromAbove", "name": "", "depth": 0}
         },
         {
           "name": "Door",
@@ -296,7 +296,7 @@
           "y": 680,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "scnStrangeMarket", "checkpointName": "fromBelow", "name": "", "depth": 0}
+          "values": {"sceneName": "scnStrangeMarketTowerInterior", "checkpointName": "fromBelow", "name": "", "depth": 0}
         },
         {
           "name": "ValuableBlue",

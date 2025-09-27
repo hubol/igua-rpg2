@@ -23,7 +23,7 @@ import { objFxEighthNote } from "../objects/effects/obj-fx-eighth-note";
 import { Rpg } from "../rpg/rpg";
 
 export function scnStrangeMarket() {
-    Jukebox.play(Rpg.character.position.checkpointName === "fromAbove" ? Mzk.SoldierBoyDemo : Mzk.BigLove);
+    Jukebox.play(Rpg.character.position.checkpointName === "fromTowerBelow" ? Mzk.SoldierBoyDemo : Mzk.BigLove);
     const lvl = Lvl.StrangeMarket();
     enrichMusicians(lvl);
     enrichGreeter(lvl);
