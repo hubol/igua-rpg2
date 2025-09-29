@@ -158,6 +158,22 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
         0,
     );
 
+    objText.Medium("", { tint: 0x00ff00, align: "right" })
+        .anchored(1, 1)
+        .at(314, 170)
+        .step(self => {
+            self.text = `---- Attributes ----
+Health: ${Rpg.character.attributes.health}
+Intelligence: ${Rpg.character.attributes.intelligence}
+Strength: ${Rpg.character.attributes.strength}
+---- Stats ----
+HP: ${Rpg.character.status.health} / ${Rpg.character.status.healthMax}
+Melee Phys ATK: ${Rpg.character.meleeAttack.physical}
+Claw Phys ATK: ${Rpg.character.meleeClawAttack.physical}
+Fact Capacity: ${Rpg.character.facts.usedSlots} / ${Rpg.character.facts.totalSlots}`;
+        })
+        .show(pageObj);
+
     return pageObj;
 }
 
