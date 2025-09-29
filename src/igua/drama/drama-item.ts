@@ -7,7 +7,6 @@ import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
-import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataItem } from "../data/data-item";
@@ -241,7 +240,11 @@ function sleepAfterRemoveIteration(index: Integer) {
 
 function objItemFigureWithTarget(item: RpgInventory.Item, targetObj: DisplayObject | null) {
     return DataItem.getFigureObj(item)
-        .mixin(mxnFxFigureTransfer, { targetObj });
+        .mixin(mxnFxFigureTransfer, { targetObj })
+        .handles("mxnFigureTransfer:transfered", (self) => {
+            objFxBurst32().at(self).show();
+            self.destroy();
+        });
 }
 
 export const DramaItem = {
