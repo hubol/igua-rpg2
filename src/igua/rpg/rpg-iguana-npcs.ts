@@ -43,6 +43,10 @@ class RpgIguanaNpc {
         const globalCount = ++this._state.spokenToTimesCount;
         const sceneCount = CtxIguanaSpeakers.value.personaIdsSpoken.increment(this._id);
 
+        if (globalCount > 10) {
+            return;
+        }
+
         if (globalCount === 1) {
             this._reward.social.onNpcSpeak("first_ever");
         }

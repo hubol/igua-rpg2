@@ -122,7 +122,7 @@ export class RpgExperienceRewarder {
             increase(speaksToExperience[kind]);
         },
         onTeachFactToClassroom() {
-            increase(25);
+            increase(50);
         },
     }));
 
