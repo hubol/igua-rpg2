@@ -3,6 +3,7 @@ import { getDefaultLooks } from "../iguana/get-default-looks";
 import { IguanaLooks } from "../iguana/looks";
 import { RpgAttack } from "./rpg-attack";
 import { RpgFaction } from "./rpg-faction";
+import { RpgFacts } from "./rpg-facts";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPlayerStatus } from "./rpg-player-status";
@@ -13,6 +14,7 @@ export class RpgPlayer {
         readonly attributes: RpgPlayerAttributes,
         private readonly _buffs: RpgPlayerAggregatedBuffs,
         readonly status: RpgPlayerStatus,
+        readonly facts: RpgFacts,
     ) {
     }
 

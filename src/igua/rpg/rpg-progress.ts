@@ -4,6 +4,7 @@ import { Null } from "../../lib/types/null";
 import { Rpg } from "./rpg";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgExperience } from "./rpg-experience";
+import { RpgFacts } from "./rpg-facts";
 import { RpgFlops } from "./rpg-flops";
 import { RpgIdols } from "./rpg-idols";
 import { RpgIguanaNpcs } from "./rpg-iguana-npcs";
@@ -21,6 +22,7 @@ import { RpgStashPockets } from "./rpg-stash-pockets";
 export function getInitialRpgProgress() {
     return {
         character: {
+            facts: RpgFacts.createState(),
             inventory: {
                 equipment: RpgCharacterEquipment.createState(),
                 flops: RpgFlops.createState(),

@@ -14,6 +14,7 @@ import { Force } from "../../lib/types/force";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataNpcPersona } from "../data/data-npc-persona";
+import { DramaFacts } from "../drama/drama-facts";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
 import { dramaShop } from "../drama/drama-shop";
@@ -52,7 +53,8 @@ function enrichMiner(lvl: LvlType.NewBalltown) {
         );
 
         if (result === 0) {
-            yield* show(
+            yield* DramaFacts.memorize(
+                "GeneratorFestivalAwesome",
                 "These mines are very famous due to being very awesome.",
                 "A lot of people come to see them every year, during the Generator festival.",
                 "The Generator festival is a time when things are also awesome.",
@@ -102,7 +104,8 @@ function enrichOliveFanatic(lvl: LvlType.NewBalltown) {
             );
         }
         else {
-            yield* show(
+            yield* DramaFacts.memorize(
+                "NewBalltownOlives",
                 "Ah, yay!",
                 "Did you know that the olives that grow in New Balltown aren't brined?",
                 "The salt mines directly below us give the olives a delicious flavor!",

@@ -5,6 +5,7 @@ import { DataQuest } from "../data/data-quest";
 import { DataShop } from "../data/data-shop";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgExperience } from "./rpg-experience";
+import { RpgFacts } from "./rpg-facts";
 import { RpgFlops } from "./rpg-flops";
 import { RpgIdols } from "./rpg-idols";
 import { RpgIguanaNpcs } from "./rpg-iguana-npcs";
@@ -46,7 +47,8 @@ function createRpg(data: RpgProgressData) {
     const stashPockets = new RpgStashPockets(stashPocketsState, pocket, experience.reward);
     const attributes = new RpgPlayerAttributes(data.character.attributes, buffs);
     const status = new RpgPlayerStatus(data.character.status, attributes, buffs);
-    const player = new RpgPlayer(data.character, attributes, buffs, status);
+    const facts = new RpgFacts(data.character.facts, attributes);
+    const player = new RpgPlayer(data.character, attributes, buffs, status, facts);
     const flops = new RpgFlops(data.character.inventory.flops);
     const inventory = new RpgInventory(equipment, flops, keyItems, pocket, potions);
     const wallet = new RpgPlayerWallet(data.character.wallet, experience);

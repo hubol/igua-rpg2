@@ -9,6 +9,7 @@ import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { StringFromNumber } from "../../lib/string/string-from-number";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { DramaFacts } from "../drama/drama-facts";
 import { DramaMisc } from "../drama/drama-misc";
 import { DramaQuests } from "../drama/drama-quests";
 import { DramaWallet } from "../drama/drama-wallet";
@@ -117,7 +118,7 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
 
         const result = yield* ask("What's going on?", "About zinc", delivered ? null : "About fishtank", "Muddy house");
         if (result === 0) {
-            yield* show("Zinc is an element that makes your loads bigger.");
+            yield* DramaFacts.memorize("ZincLoads");
         }
         else if (result === 1) {
             if (!aquariumService.isFilled) {
