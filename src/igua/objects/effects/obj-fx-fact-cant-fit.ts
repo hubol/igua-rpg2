@@ -1,4 +1,5 @@
 import { Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../../lib/game-engine/routines/interp";
@@ -23,6 +24,7 @@ export function objFxFactCantFit() {
             yield sleep(200);
             for (let i = 0; i < 3; i++) {
                 line = i;
+                self.play(Sfx.Collect.FactCantFitScan.rate(0.8, 1.2));
                 yield interpvr(cursor).factor(factor.sine).translate(60, 0).over(300);
                 yield sleep(100);
                 line = i + 0.5;
@@ -31,8 +33,10 @@ export function objFxFactCantFit() {
                 }
             }
             yield sleep(250);
+            self.play(Sfx.Collect.FactCantFitChime.rate(0.9, 1.1));
             text.mixin(mxnFxTintRotate, 5);
             yield sleep(1000);
+            self.play(Sfx.Collect.FactCantFitAway.rate(0.9, 1.1));
             text.mask = null;
             mask.visible = false;
             yield* Coro.all([

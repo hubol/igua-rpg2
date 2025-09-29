@@ -1,4 +1,5 @@
 import { DisplayObject } from "pixi.js";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { DataFact } from "../data/data-fact";
@@ -48,6 +49,7 @@ function* memorize(factId: DataFact.Id, ...messages: string[]) {
             const startX = factObj.x;
             factObj
                 .handles("mxnFigureTransfer:transfered", (self) => {
+                    self.play(Sfx.Collect.FactCantFitSmack.rate(0.9, 1.1));
                     const dx = (Math.sign(self.x - startX) || 1) * 8;
                     objFxBurst32().at(self).show();
                     self
