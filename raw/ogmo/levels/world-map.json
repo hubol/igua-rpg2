@@ -204,6 +204,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromColosseumMiffed", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 7,
+          "_eid": "19953026",
+          "x": 960,
+          "y": 344,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromCollege0", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -250,6 +261,19 @@
           "originY": 33,
           "uid": 175280777909200,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "GateMap",
+          "id": 1,
+          "_eid": "53836309",
+          "x": 992,
+          "y": 312,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 270,
+          "uid": 175918662282800,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnCollege0", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         }
       ]
     },

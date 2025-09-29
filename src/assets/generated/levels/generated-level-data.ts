@@ -184,6 +184,26 @@ export const Lvl = {
       EnvironmentSparkleMarker_16: e(r["EnvironmentSparkleMarker"], { x: 236, y: 165, values: { name: "", depth: 0 } }, "MarkerEntities"),
     };
   },
+  College0: () => {
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 0, width: 24, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 476, y: 0, width: 24, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 24, y: 0, width: 456, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 24, y: 200, width: 456, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 240, y: 184, width: 240, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 304, y: 168, width: 240, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 368, y: 152, width: 240, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 432, y: 136, width: 240, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Podium: d(Tx.Town.Ball.StructureHighlight, { x: 168, y: 192, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x1853ad }, "TerrainDecals"),
+      Door: e(r["Door"], { x: 48, y: 152, values: { sceneName: "scnWorldMap", checkpointName: "fromCollege0", name: "", depth: 0 } }, "Entities"),
+      IguanaNpc: e(r["IguanaNpc"], { x: 272, y: 184, flippedX: true, values: { personaName: "", name: "", depth: 0 } }, "CharacterEntities"),
+      IguanaNpc_1: e(r["IguanaNpc"], { x: 336, y: 168, flippedX: true, values: { personaName: "", name: "", depth: 0 } }, "CharacterEntities"),
+      IguanaNpc_2: e(r["IguanaNpc"], { x: 400, y: 152, flippedX: true, values: { personaName: "", name: "", depth: 0 } }, "CharacterEntities"),
+      IguanaNpc_3: e(r["IguanaNpc"], { x: 456, y: 136, flippedX: true, values: { personaName: "", name: "", depth: 0 } }, "CharacterEntities"),
+      Player: e(r["Player"], { x: 112, y: 200, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    };
+  },
   ColosseumMiffed: () => {
     applyLevel({ width: 1184, height: 528, backgroundTint: 0x408000 });
     return {
@@ -4020,6 +4040,7 @@ export const Lvl = {
       TerrainEarthZigzag0: d(Tx.Terrain.Earth.Zigzag0, { x: 753, y: 1086, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x4b76a9 }, "TerrainDecals"),
       ShapesSquareIrregular10_10: d(Tx.Shapes.SquareIrregular10, { x: 467, y: 711, scaleX: 7, scaleY: 2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
       StashPocket: e(r["StashPocket"], { x: 472, y: 712, uid: 175280777909200, values: { name: "", depth: 0 } }, "Entities"),
+      GateMap: e(r["GateMap"], { x: 992, y: 312, rotation: 270, uid: 175918662282800, values: { sceneName: "scnCollege0", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "Entities"),
       Player: e(r["Player"], { x: 632, y: 512, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromNewBalltownUnderneathRight: e(r["Checkpoint"], { x: 824, y: 512, flippedX: false, values: { name: "fromNewBalltownUnderneathRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromPlainsSuggestiveLeft: e(r["Checkpoint"], { x: 901, y: 629, flippedX: true, values: { name: "fromPlainsSuggestiveLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
@@ -4027,17 +4048,19 @@ export const Lvl = {
       fromPlainsSuggestiveRight: e(r["Checkpoint"], { x: 989, y: 629, flippedX: false, values: { name: "fromPlainsSuggestiveRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromStrangeMarket: e(r["Checkpoint"], { x: 528, y: 624, flippedX: false, values: { name: "fromStrangeMarket", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromColosseumMiffed: e(r["Checkpoint"], { x: 640, y: 704, flippedX: false, values: { name: "fromColosseumMiffed", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
-      GateMap: e(r["GateMap"], { x: 821, y: 495, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_1: e(r["GateMap"], { x: 637, y: 497, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_2: e(r["GateMap"], { x: 942, y: 604, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_3: e(r["GateMap"], { x: 487, y: 595, rotation: 540, uid: 175755215936902, values: { sceneName: "scnStrangeMarket", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_4: e(r["GateMap"], { x: 608, y: 720, rotation: 90, uid: 175860865618400, values: { sceneName: "scnColosseumMiffed", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
+      fromCollege0: e(r["Checkpoint"], { x: 960, y: 344, flippedX: true, values: { name: "fromCollege0", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      GateMap_1: e(r["GateMap"], { x: 821, y: 495, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_2: e(r["GateMap"], { x: 637, y: 497, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_3: e(r["GateMap"], { x: 942, y: 604, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_4: e(r["GateMap"], { x: 487, y: 595, rotation: 540, uid: 175755215936902, values: { sceneName: "scnStrangeMarket", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_5: e(r["GateMap"], { x: 608, y: 720, rotation: 90, uid: 175860865618400, values: { sceneName: "scnColosseumMiffed", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
     };
   },
 };
 
 export namespace LvlType {
   export type Cobbler0 = ReturnType<(typeof Lvl)["Cobbler0"]>;
+  export type College0 = ReturnType<(typeof Lvl)["College0"]>;
   export type ColosseumMiffed = ReturnType<(typeof Lvl)["ColosseumMiffed"]>;
   export type Dummy = ReturnType<(typeof Lvl)["Dummy"]>;
   export type MenuIguanaDesigner = ReturnType<(typeof Lvl)["MenuIguanaDesigner"]>;
