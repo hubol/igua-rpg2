@@ -1,5 +1,6 @@
 import { Graphics, Sprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { factor, interpc, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
@@ -14,6 +15,7 @@ export function objFxFactNew() {
         .pivoted(28, 32)
         .invisible()
         .coro(function* (self) {
+            self.play(Sfx.Collect.FactNewAppear.rate(0.9, 1.1));
             objFxBurstDusty()
                 .at(self)
                 .coro(function* (self) {
@@ -22,11 +24,17 @@ export function objFxFactNew() {
                 .show();
             yield sleep(200);
             self.visible = true;
+            self.play(Sfx.Collect.FactNewText.rate(0.9, 1.1));
             yield interpvr(self).factor(factor.sine).translate(0, -20).over(200);
 
-            objCapacity().at(28, 50).show(self);
+            yield sleep(350);
 
-            yield sleep(1000);
+            self.play(Sfx.Collect.FactNewCapacity.rate(0.9, 1.1));
+            const capacityObj = objCapacity().at(28, 60).show(self);
+            yield interpvr(capacityObj).translate(0, -10).over(200);
+
+            yield sleep(1200);
+            self.play(Sfx.Collect.FactNewAway.rate(0.9, 1.1));
             yield interpvr(self).factor(factor.sine).translate(0, 20).over(200);
             self.destroy();
         });

@@ -59,7 +59,7 @@ function* memorize(factId: DataFact.Id, ...messages: string[]) {
                         })
                         .coro(function* () {
                             const position = self.vcpy();
-                            yield sleep(500);
+                            yield sleep(700);
                             const cantFitObj = objFxFactCantFit().at(position).show();
                             yield () => cantFitObj.destroyed;
                             self.destroy();
