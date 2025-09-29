@@ -3,6 +3,7 @@ import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { Null } from "../../lib/types/null";
 import { Rpg } from "./rpg";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
+import { RpgClassrooms } from "./rpg-classrooms";
 import { RpgExperience } from "./rpg-experience";
 import { RpgFacts } from "./rpg-facts";
 import { RpgFlops } from "./rpg-flops";
@@ -101,6 +102,7 @@ export function getInitialRpgProgress() {
             },
         },
         programmaticFlags: {
+            classrooms: RpgClassrooms.createState(),
             collectedValuableUids: new Set<Integer>(),
             idols: RpgIdols.createState(),
             iguanaNpcs: RpgIguanaNpcs.createState(),

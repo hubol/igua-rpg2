@@ -121,6 +121,9 @@ export class RpgExperienceRewarder {
         onNpcSpeak(kind: SpeakKind) {
             increase(speaksToExperience[kind]);
         },
+        onTeachFactToClassroom() {
+            increase(25);
+        },
     }));
 
     private _expose<T>(id: RpgExperience.Id, impl: (increase: IncreaseFn) => T) {

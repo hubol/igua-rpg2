@@ -11,12 +11,14 @@ import { IguanaLooks } from "../iguana/looks";
 import { force } from "../mixins/mxn-physics";
 import { MxnRpgStatus, mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Rpg } from "../rpg/rpg";
 import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgStatus } from "../rpg/rpg-status";
 import { objFxPlayerJumpComboDust } from "./effects/obj-fx-player-jump-combo-dust";
 import { CtxGate } from "./obj-gate";
 import { ObjIguanaLocomotive, objIguanaLocomotive, ObjIguanaLocomotiveAutoFacingMode } from "./obj-iguana-locomotive";
+import { objIguanaNpc } from "./obj-iguana-npc";
 import { ObjSign, objSign } from "./obj-sign";
 import { StepOrder } from "./step-order";
 
@@ -93,6 +95,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     const puppet = iguanaLocomotiveObj
         .mixin(mxnRpgStatus, { status, effects, hurtboxes: [iguanaLocomotiveObj] })
         .mixin(mxnSparkling)
+        .mixin(mxnSpeaker, { name: "You", ...objIguanaNpc.getSpeakerColors(looks) })
         .handles("moved", () => {
             if (CtxGate.value.isGateTransitionActive) {
                 return;

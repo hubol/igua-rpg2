@@ -4,6 +4,7 @@ import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataQuest } from "../data/data-quest";
 import { DataShop } from "../data/data-shop";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
+import { RpgClassrooms } from "./rpg-classrooms";
 import { RpgExperience } from "./rpg-experience";
 import { RpgFacts } from "./rpg-facts";
 import { RpgFlops } from "./rpg-flops";
@@ -27,6 +28,7 @@ import { RpgStashPockets } from "./rpg-stash-pockets";
 function createRpg(data: RpgProgressData) {
     const {
         programmaticFlags: {
+            classrooms: classroomsState,
             idols: idolsState,
             iguanaNpcs: iguanaNpcsState,
             shops: shopsState,
@@ -36,6 +38,7 @@ function createRpg(data: RpgProgressData) {
     } = data;
 
     const experience = new RpgExperience(data.character.experience);
+    const classrooms = new RpgClassrooms(classroomsState, experience.reward);
     const equipment = new RpgCharacterEquipment(data.character.inventory.equipment);
     const buffs = new RpgPlayerAggregatedBuffs(equipment);
     const idols = new RpgIdols(idolsState);
@@ -57,6 +60,9 @@ function createRpg(data: RpgProgressData) {
     return {
         // TODO rename to player
         character: player,
+        classroom(classroomId: string) {
+            return classrooms.getById(classroomId);
+        },
         experience: experience as Omit<RpgExperience, "spend">,
         get flags() {
             return data.flags;

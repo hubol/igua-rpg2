@@ -9,6 +9,10 @@ export class RpgFacts {
     constructor(private readonly _state: RpgFacts.State, private readonly _attributes: RpgPlayerAttributes) {
     }
 
+    get memorized(): ReadonlySet<DataFact.Id> {
+        return this._state.memorized;
+    }
+
     memorize(factId: DataFact.Id): RpgFacts.MemorizeResult {
         if (this._state.memorized.has(factId)) {
             return { accepted: false, reason: "already_memorized" };
