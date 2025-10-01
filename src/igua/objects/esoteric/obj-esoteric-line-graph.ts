@@ -21,13 +21,8 @@ export function objEsotericLineGraph({ min, max, width, height }: ObjEsotericLin
     };
 
     const rangeRender = {
-        start: 0,
-        end: width,
-    };
-
-    const targetRender = {
-        start: 0,
-        end: width,
+        start: min,
+        end: max,
     };
 
     const textObjs = {
@@ -38,32 +33,28 @@ export function objEsotericLineGraph({ min, max, width, height }: ObjEsotericLin
     const range = max - min;
 
     const rangeGfx = new Graphics()
-        .coro(function* () {
-            while (true) {
-                const sf = (controls.range.start - min) / range;
-                const ef = (controls.range.end - min) / range;
-
-                targetRender.start = Math.max(sf > 0 ? 1 : 0, Math.min(width - 1, Math.round(sf * width)));
-                targetRender.end = Math.max(1, Math.min(ef < 1 ? (width - 1) : width, Math.round(ef * width)));
-
-                yield onMutate(controls.range);
-            }
-        })
         .step(self => {
-            rangeRender.start = approachLinear(rangeRender.start, targetRender.start, 1);
-            rangeRender.end = approachLinear(rangeRender.end, targetRender.end, 1);
+            rangeRender.start = approachLinear(rangeRender.start, controls.range.start, 1);
+            rangeRender.end = approachLinear(rangeRender.end, controls.range.end, 1);
+
+            const sf = (rangeRender.start - min) / range;
+            const ef = (rangeRender.end - min) / range;
+
+            const start = Math.max(sf > 0 ? 1 : 0, Math.min(width - 1, Math.round(sf * width)));
+            const end = Math.max(1, Math.min(ef < 1 ? (width - 1) : width, Math.round(ef * width)));
 
             self.clear().beginFill(0xff0000).drawRect(
-                rangeRender.start,
                 0,
-                rangeRender.end - rangeRender.start,
+                0,
+                end - start,
                 height,
-            );
+            )
+                .at(start, 0);
         })
-        .coro(function* () {
+        .coro(function* (self) {
             while (true) {
-                textObjs.start.at(rangeRender.start, 0).text = String(rangeRender.start);
-                textObjs.end.at(rangeRender.end, 0).text = String(rangeRender.end);
+                textObjs.start.at(self).text = String(rangeRender.start);
+                textObjs.end.at(self.x + self.width, 0).text = String(rangeRender.end);
 
                 const gap = Math.round((textObjs.start.width + textObjs.end.width) / 2) + 4;
 
