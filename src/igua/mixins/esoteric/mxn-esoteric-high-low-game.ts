@@ -28,12 +28,7 @@ export function mxnEsotericHighLowGame(obj: DisplayObject) {
                 "You must pick a number between [1-100]!",
             );
 
-            let value = null;
-
-            while (value === null) {
-                // TODO maybe it just shouldnt be possible to get null here
-                value = yield* DramaMisc.askNullableInteger("Pick a number between [1-100]", { min: 1, max: 100 });
-            }
+            const value = yield* DramaMisc.askInteger("Pick a number between [1-100]", { min: 1, max: 100 });
 
             const lineGraphObj = objEsotericLineGraph({ min: 1, max: 100, width: 128, height: 6 })
                 .at((renderer.width - 128) / 2, 250)

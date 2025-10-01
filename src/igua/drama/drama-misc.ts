@@ -96,6 +96,11 @@ type AskIntegerOptions = Omit<AskIntegerImplOptions, "rejectMessage" | "disabled
 const askNullableInteger: (message: string, options: AskNullableIntegerOptions) => Coro.Type<Integer | null> =
     askIntegerImpl;
 
+function* askInteger(message: string, options: AskIntegerOptions) {
+    const result = yield* askIntegerImpl(message, { ...options, disabledMessage: null, rejectMessage: null });
+    return result!;
+}
+
 interface AskIntegerImplOptions {
     messageObj?: DisplayObject;
     min?: Integer;
@@ -174,8 +179,6 @@ function* askIntegerImpl(
     yield () => Input.justWentDown("Confirm");
 
     const isDisabled = disabledMessage !== null;
-
-    let isControllable = true;
     let isSliderSelected = !isDisabled;
 
     const sliderObj = objSlider({ max, value: isDisabled ? 0 : min, colors });
@@ -184,24 +187,10 @@ function* askIntegerImpl(
         new Graphics().beginFill(0x000000).drawRect(-140, -20, 300, 60)
             .mixin(mxnBoilPivot)
             .step(self => self.visible = isSliderSelected),
-        sliderObj
-            .pivotedUnit(0.5, 0.5)
-            .mixin(mxnActionRepeater, ["SelectLeft", "SelectRight"])
-            .step(self => {
-                const scale = isSliderSelected ? 1 : 0.9;
-                self.scaled(scale, scale);
-
-                if (!isSliderSelected || !isControllable) {
-                    return;
-                }
-
-                if (self.mxnActionRepeater.justWentDown("SelectLeft")) {
-                    self.controls.value = Math.max(min, self.controls.value - multipleOf);
-                }
-                else if (self.mxnActionRepeater.justWentDown("SelectRight")) {
-                    self.controls.value = Math.min(max, self.controls.value + multipleOf);
-                }
-            }),
+        sliderObj.pivotedUnit(0.5, 0.5).step(self => {
+            const scale = isSliderSelected ? 1 : 0.9;
+            self.scaled(scale, scale);
+        }),
         Sprite.from(Tx.Ui.Dialog.SliderBoxObscured)
             .anchored(0.5, 0.5)
             .mixin(mxnBoilPivot)
@@ -241,17 +230,35 @@ function* askIntegerImpl(
             .show(sliderContainerObj);
     }
 
-    obj.step(() => {
-        if (!isControllable || isDisabled) {
-            return;
-        }
-        if (Input.justWentDown("SelectUp") || Input.justWentDown("SelectDown")) {
-            isSliderSelected = !isSliderSelected;
-        }
-    });
+    const selectionControlObj = container()
+        .step(() => {
+            if (isDisabled || rejectMessage === null) {
+                return;
+            }
+
+            if (Input.justWentDown("SelectUp") || Input.justWentDown("SelectDown")) {
+                isSliderSelected = !isSliderSelected;
+            }
+        })
+        .mixin(mxnActionRepeater, ["SelectLeft", "SelectRight"])
+        .step(self => {
+            if (!isSliderSelected) {
+                return;
+            }
+
+            if (self.mxnActionRepeater.justWentDown("SelectLeft")) {
+                sliderObj.controls.value = Math.max(min, sliderObj.controls.value - multipleOf);
+            }
+            else if (self.mxnActionRepeater.justWentDown("SelectRight")) {
+                sliderObj.controls.value = Math.min(max, sliderObj.controls.value + multipleOf);
+            }
+        })
+        .show(obj);
 
     yield () => Input.isUp("Confirm");
     yield () => Input.justWentDown("Confirm");
+
+    selectionControlObj.destroy();
 
     const sliderValue = sliderObj.controls.value;
     const value = isSliderSelected && sliderValue ? sliderValue : null;
@@ -348,6 +355,7 @@ function objHeader(text: string, tint: RgbInt) {
 
 export const DramaMisc = {
     arriveViaDoor,
+    askInteger,
     askNullableInteger,
     departRoomViaDoor,
     face,
