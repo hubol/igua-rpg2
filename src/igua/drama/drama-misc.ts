@@ -90,16 +90,22 @@ function* levitatePlayer(playerMotionCoroPredicate: Coro.Predicate) {
     playerObj.physicsEnabled = true;
 }
 
-interface AskIntegerOptions {
+type AskNullableIntegerOptions = Omit<AskIntegerImplOptions, "rejectMessage"> & { rejectMessage?: string };
+type AskIntegerOptions = Omit<AskIntegerImplOptions, "rejectMessage" | "disabledMessage">;
+
+const askNullableInteger: (message: string, options: AskNullableIntegerOptions) => Coro.Type<Integer | null> =
+    askIntegerImpl;
+
+interface AskIntegerImplOptions {
     messageObj?: DisplayObject;
-    disabledMessage?: string | null;
     min?: Integer;
     max: Integer;
     multipleOf?: Integer;
-    rejectMessage?: string;
+    disabledMessage?: string | null;
+    rejectMessage?: string | null;
 }
 
-function* askInteger(
+function* askIntegerImpl(
     message: string,
     {
         messageObj: messageObjFromArgs = container(),
@@ -108,7 +114,7 @@ function* askInteger(
         max,
         multipleOf = 1,
         rejectMessage = "Never mind",
-    }: AskIntegerOptions,
+    }: AskIntegerImplOptions,
 ) {
     const colors = DramaLib.Speaker.getColors();
 
@@ -139,6 +145,16 @@ function* askInteger(
             new Error("min must be a multiple of multipleOf"),
             { min, multipleOf },
         );
+    }
+
+    if (disabledMessage !== null && rejectMessage === null) {
+        Logger.logContractViolationError(
+            "DramaMisc.askInteger",
+            new Error("rejectMessage must be null when disabledMessage is not null"),
+            { disabledMessage, rejectMessage },
+        );
+
+        disabledMessage = null;
     }
 
     const obj = container().show(layers.overlay.messages);
@@ -205,16 +221,19 @@ function* askInteger(
             .step(self => {
                 self.pivot.y = isSliderSelected ? 0 : Math.round(Math.sin(scene.ticker.ticks / 60 * Math.PI) * 2);
             }),
-        objText.MediumIrregular(rejectMessage, { tint: colors.textSecondary }).anchored(0.5, 0.5).step(self => {
+        objText.MediumIrregular(rejectMessage ?? "", { tint: colors.textSecondary }).anchored(0.5, 0.5).step(self => {
             if (!isSliderSelected && scene.ticker.ticks % 15 === 0) {
                 self.seed += 1;
             }
         }),
     )
-        .at(renderer.width / 2, 200)
-        .show(obj);
+        .at(renderer.width / 2, 200);
 
-    if (isDisabled) {
+    if (rejectMessage !== null) {
+        rejectButtonObj.show(obj);
+    }
+
+    if (disabledMessage !== null) {
         objText.MediumIrregular(disabledMessage, { tint: 0xc00000 })
             .anchored(0.5, 0.5)
             .at(0, 4)
@@ -329,7 +348,7 @@ function objHeader(text: string, tint: RgbInt) {
 
 export const DramaMisc = {
     arriveViaDoor,
-    askInteger,
+    askNullableInteger,
     departRoomViaDoor,
     face,
     levitatePlayer,
