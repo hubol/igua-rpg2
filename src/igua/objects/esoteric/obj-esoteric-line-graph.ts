@@ -1,4 +1,5 @@
 import { Graphics } from "pixi.js";
+import { objText } from "../../../assets/fonts";
 import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
 import { approachLinear } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
@@ -29,6 +30,11 @@ export function objEsotericLineGraph({ min, max, width, height }: ObjEsotericLin
         end: width,
     };
 
+    const textObjs = {
+        start: objText.Medium(String(min)).anchored(0.5, 1),
+        end: objText.Medium(String(min)).anchored(0.5, 1),
+    };
+
     const range = max - min;
 
     const rangeGfx = new Graphics()
@@ -53,11 +59,35 @@ export function objEsotericLineGraph({ min, max, width, height }: ObjEsotericLin
                 rangeRender.end - rangeRender.start,
                 height,
             );
+        })
+        .coro(function* () {
+            while (true) {
+                textObjs.start.at(rangeRender.start, 0).text = String(rangeRender.start);
+                textObjs.end.at(rangeRender.end, 0).text = String(rangeRender.end);
+
+                const gap = Math.round((textObjs.start.width + textObjs.end.width) / 2) + 4;
+
+                let shiftStart = true;
+
+                while ((textObjs.end.x - textObjs.start.x) < gap) {
+                    if (shiftStart) {
+                        textObjs.start.x -= 1;
+                    }
+                    else {
+                        textObjs.end.x += 1;
+                    }
+                    shiftStart = !shiftStart;
+                }
+
+                yield onMutate(rangeRender);
+            }
         });
 
     return container(
         new Graphics().beginFill(0x000000).drawRect(0, 0, width, height),
         rangeGfx,
+        textObjs.start,
+        textObjs.end,
     )
         .merge({ objEsotericLineGraph: { controls, min, max } });
 }
