@@ -1,8 +1,12 @@
-import { DisplayObject } from "pixi.js";
+import { DisplayObject, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Tx } from "../../assets/textures";
+import { Instances } from "../../lib/game-engine/instances";
 import { interpvr } from "../../lib/game-engine/routines/interp";
+import { onMutate } from "../../lib/game-engine/routines/on-mutate";
+import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { VectorSimple } from "../../lib/math/vector-type";
@@ -20,6 +24,7 @@ import { mxnTextTyped } from "../mixins/mxn-text-typed";
 import { objMusician } from "../objects/characters/obj-musician";
 import { objCollectiblePotion } from "../objects/collectibles/obj-collectible-potion";
 import { objFxEighthNote } from "../objects/effects/obj-fx-eighth-note";
+import { OgmoFactory } from "../ogmo/factory";
 import { Rpg } from "../rpg/rpg";
 
 export function scnStrangeMarket() {
@@ -114,6 +119,18 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
             .speed.at(target.x * -2.3, target.y * 2);
     }
 
+    const heartObjs = Instances(OgmoFactory.createDecal)
+        .filter(x => x.texture === Tx.Terrain.Earth.Heart24px)
+        .map(obj => obj.mixin(mxnHeartbeat));
+
+    function twitchHeartDecalObjs() {
+        for (const obj of heartObjs) {
+            if (Rng.bool()) {
+                obj.mxnHeatbeat.methods.beat();
+            }
+        }
+    }
+
     let nudgeGentleHubol = false;
     let guitarStrumming = false;
     let bassPlucking = false;
@@ -134,6 +151,8 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
             }
             if (bassPlucking && (command === "beat" || command === "offbeat")) {
                 nudgeGentleHubol = !nudgeGentleHubol;
+
+                twitchHeartDecalObjs();
 
                 hubolishObj.methods.playLowKey();
 
@@ -206,4 +225,30 @@ function mxnGentleNudge(obj: DisplayObject) {
         yield sleep(100);
         yield interpvr(obj.pivot).translate(0, -5).over(400);
     });
+}
+
+function mxnHeartbeat(sprite: Sprite) {
+    let beatsCount = 0;
+
+    const methods = {
+        beat() {
+            beatsCount++;
+        },
+    };
+
+    return sprite
+        .merge({ mxnHeatbeat: { methods } })
+        .coro(function* () {
+            while (true) {
+                yield onPrimitiveMutate(() => beatsCount);
+                const previousTx = sprite.texture;
+                sprite.texture = Tx.Terrain.Earth.Heart24px;
+                sprite.scale.set(0.75, 0.75);
+                yield sleepf(6);
+                sprite.scale.set(1, 1);
+                sprite.texture = previousTx === Tx.Terrain.Earth.Heart24px
+                    ? Tx.Terrain.Earth.Heart12px
+                    : Tx.Terrain.Earth.Heart24px;
+            }
+        });
 }
