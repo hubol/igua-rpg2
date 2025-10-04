@@ -3705,7 +3705,7 @@ export const Lvl = {
       TownBallBrick0_10: d(Tx.Town.Ball.Brick0, { x: 122, y: 672, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe58900 }, "TerrainDecals"),
       TownBallBrick0_11: d(Tx.Town.Ball.Brick0, { x: 309, y: 854, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe58900 }, "TerrainDecals"),
       Door: e(r["Door"], { x: 232, y: 104, values: { sceneName: "scnStrangeMarket", checkpointName: "fromTowerAbove", name: "", depth: 0 } }, "Entities"),
-      Door_1: e(r["Door"], { x: 184, y: 776, values: { sceneName: "scnStrangeMarket", checkpointName: "fromTowerBelow", name: "", depth: 0 } }, "Entities"),
+      LowerDoor: e(r["Door"], { x: 184, y: 776, values: { sceneName: "scnStrangeMarket", checkpointName: "fromTowerBelow", name: "LowerDoor", depth: 0 } }, "Entities"),
       ValuableBlue: e(r["ValuableBlue"], { x: 168, y: 472, uid: 175899758029701, values: { name: "", depth: 0 } }, "Entities"),
       ValuableOrange: e(r["ValuableOrange"], { x: 168, y: 376, uid: 175899766232203, values: { name: "", depth: 0 } }, "Entities"),
       ValuableBlue_1: e(r["ValuableBlue"], { x: 328, y: 528, uid: 175899768749704, values: { name: "", depth: 0 } }, "Entities"),

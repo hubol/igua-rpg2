@@ -13,6 +13,7 @@ export function scnStrangeMarketTowerInterior() {
     Jukebox.play(Mzk.BigLove);
     const lvl = Lvl.StrangeMarketTowerInterior();
     enrichMisterMonument(lvl);
+    enrichLowerDoor(lvl);
 }
 
 function enrichMisterMonument(lvl: LvlType.StrangeMarketTowerInterior) {
@@ -42,4 +43,15 @@ function enrichMisterMonument(lvl: LvlType.StrangeMarketTowerInterior) {
 
             playerObj.sparklesPerFrame = 0;
         });
+}
+
+function enrichLowerDoor(lvl: LvlType.StrangeMarketTowerInterior) {
+    lvl.LowerDoor.locked = Jukebox.isPlaying(Mzk.SoldierBoyDemo);
+
+    if (lvl.LowerDoor.locked) {
+        lvl.LowerDoor.coro(function* (self) {
+            yield () => !Jukebox.isPlaying(Mzk.SoldierBoyDemo);
+            self.unlock();
+        });
+    }
 }
