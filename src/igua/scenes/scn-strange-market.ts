@@ -134,6 +134,7 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
     let nudgeGentleHubol = false;
     let guitarStrumming = false;
     let bassPlucking = false;
+    let potionSpawnsCount = 0;
 
     container()
         .mixin(
@@ -177,8 +178,9 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
             }
             else if (command === "misc") {
                 const potionSpawn = miscCommandDataToPotionSpawn[data as keyof typeof miscCommandDataToPotionSpawn];
-                if (potionSpawn) {
+                if (potionSpawn && potionSpawnsCount < 3) {
                     objCollectiblePotion(potionSpawn.potionId).at(potionSpawn.position).show();
+                    potionSpawnsCount++;
                 }
                 else if (data === "guitar_start") {
                     lottieishObj.methods.setStrumming(true);
