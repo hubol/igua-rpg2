@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 407 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 408 }];
 
 interface TxData {
   id: string;
@@ -248,7 +248,7 @@ function txs<T>(tx: (data: TxData) => T) {
       LargeBlackMetalShelf: tx({ id: "Furniture.LargeBlackMetalShelf", atlas: 0, x: 1928, y: 148, width: 84, height: 112 }),
       Library: {
         Books0: tx({ id: "Furniture.Library.Books0", atlas: 0, x: 1972, y: 1133, width: 12, height: 14 }),
-        Books1: tx({ id: "Furniture.Library.Books1", atlas: 0, x: 846, y: 1009, width: 16, height: 12 }),
+        Books1: tx({ id: "Furniture.Library.Books1", atlas: 0, x: 1834, y: 1019, width: 16, height: 12 }),
         Books2: tx({ id: "Furniture.Library.Books2", atlas: 0, x: 481, y: 1020, width: 14, height: 16 }),
       },
       PotionGreen: tx({ id: "Furniture.PotionGreen", atlas: 0, x: 273, y: 717, width: 16, height: 22 }),
@@ -262,7 +262,7 @@ function txs<T>(tx: (data: TxData) => T) {
       Boiled: {
         Club: tx({ id: "Iguana.Boiled.Club", atlas: 0, x: 0, y: 1046, width: 90, height: 18 }),
         Crest: tx({ id: "Iguana.Boiled.Crest", atlas: 0, x: 841, y: 173, width: 168, height: 24 }),
-        Eye: tx({ id: "Iguana.Boiled.Eye", atlas: 0, x: 1972, y: 1148, width: 12, height: 12 }),
+        Eye: tx({ id: "Iguana.Boiled.Eye", atlas: 0, x: 1282, y: 887, width: 12, height: 12 }),
         Foot: tx({ id: "Iguana.Boiled.Foot", atlas: 0, x: 888, y: 528, width: 210, height: 18 }),
         Head: tx({ id: "Iguana.Boiled.Head", atlas: 0, x: 2017, y: 0, width: 27, height: 27 }),
         Horn: tx({ id: "Iguana.Boiled.Horn", atlas: 0, x: 507, y: 910, width: 72, height: 12 }),
@@ -274,7 +274,7 @@ function txs<T>(tx: (data: TxData) => T) {
       },
       Club: tx({ id: "Iguana.Club", atlas: 0, x: 91, y: 1046, width: 90, height: 18 }),
       Crest: tx({ id: "Iguana.Crest", atlas: 0, x: 841, y: 198, width: 168, height: 24 }),
-      Eye: tx({ id: "Iguana.Eye", atlas: 0, x: 1274, y: 887, width: 12, height: 12 }),
+      Eye: tx({ id: "Iguana.Eye", atlas: 0, x: 1972, y: 1148, width: 12, height: 12 }),
       Foot: tx({ id: "Iguana.Foot", atlas: 0, x: 759, y: 824, width: 210, height: 18 }),
       Head: tx({ id: "Iguana.Head", atlas: 0, x: 764, y: 1107, width: 27, height: 27 }),
       Horn: tx({ id: "Iguana.Horn", atlas: 0, x: 432, y: 917, width: 72, height: 12 }),
@@ -352,7 +352,7 @@ function txs<T>(tx: (data: TxData) => T) {
       },
       Earth: {
         Asterisk: tx({ id: "Terrain.Earth.Asterisk", atlas: 0, x: 388, y: 1167, width: 21, height: 24 }),
-        Crack8px12px: tx({ id: "Terrain.Earth.Crack8px12px", atlas: 0, x: 863, y: 1009, width: 8, height: 12 }),
+        Crack8px12px: tx({ id: "Terrain.Earth.Crack8px12px", atlas: 0, x: 865, y: 1009, width: 8, height: 12 }),
         Crack28px38px: tx({ id: "Terrain.Earth.Crack28px38px", atlas: 0, x: 1834, y: 949, width: 28, height: 38 }),
         CrackSmall0: tx({ id: "Terrain.Earth.CrackSmall0", atlas: 0, x: 1403, y: 549, width: 8, height: 4 }),
         ExposedDirt: tx({ id: "Terrain.Earth.ExposedDirt", atlas: 0, x: 0, y: 1030, width: 80, height: 14 }),
@@ -375,6 +375,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Jagged2px: tx({ id: "Terrain.Grass.Jagged2px", atlas: 0, x: 1928, y: 345, width: 42, height: 8 }),
         Jagged: tx({ id: "Terrain.Grass.Jagged", atlas: 0, x: 152, y: 915, width: 75, height: 13 }),
         Loops: tx({ id: "Terrain.Grass.Loops", atlas: 0, x: 190, y: 1111, width: 72, height: 10 }),
+        Lumpy0: tx({ id: "Terrain.Grass.Lumpy0", atlas: 0, x: 1238, y: 887, width: 26, height: 12 }),
         Shape1: tx({ id: "Terrain.Grass.Shape1", atlas: 0, x: 970, y: 836, width: 40, height: 8 }),
         Sparse3px1: tx({ id: "Terrain.Grass.Sparse3px1", atlas: 0, x: 1297, y: 549, width: 80, height: 4 }),
         Sparse3px: tx({ id: "Terrain.Grass.Sparse3px", atlas: 0, x: 751, y: 305, width: 48, height: 4 }),
@@ -386,8 +387,8 @@ function txs<T>(tx: (data: TxData) => T) {
     },
     Town: {
       Ball: {
-        Ball0: tx({ id: "Town.Ball.Ball0", atlas: 0, x: 568, y: 1088, width: 12, height: 12 }),
-        Ball1: tx({ id: "Town.Ball.Ball1", atlas: 0, x: 1259, y: 887, width: 14, height: 12 }),
+        Ball0: tx({ id: "Town.Ball.Ball0", atlas: 0, x: 388, y: 1192, width: 12, height: 12 }),
+        Ball1: tx({ id: "Town.Ball.Ball1", atlas: 0, x: 568, y: 1088, width: 14, height: 12 }),
         Brick0: tx({ id: "Town.Ball.Brick0", atlas: 0, x: 874, y: 991, width: 36, height: 30 }),
         Brick1: tx({ id: "Town.Ball.Brick1", atlas: 0, x: 809, y: 1009, width: 36, height: 20 }),
         ColumnSpiral0: tx({ id: "Town.Ball.ColumnSpiral0", atlas: 0, x: 1074, y: 912, width: 12, height: 20 }),
@@ -420,10 +421,10 @@ function txs<T>(tx: (data: TxData) => T) {
         Mouth2: tx({ id: "Town.Colossus.Mouth2", atlas: 0, x: 415, y: 581, width: 50, height: 14 }),
         Mouth3: tx({ id: "Town.Colossus.Mouth3", atlas: 0, x: 1812, y: 1143, width: 124, height: 14 }),
         Noggin0: tx({ id: "Town.Colossus.Noggin0", atlas: 0, x: 71, y: 991, width: 84, height: 38 }),
-        Nose0: tx({ id: "Town.Colossus.Nose0", atlas: 0, x: 1490, y: 972, width: 18, height: 12 }),
+        Nose0: tx({ id: "Town.Colossus.Nose0", atlas: 0, x: 846, y: 1009, width: 18, height: 12 }),
         Pupil0: tx({ id: "Town.Colossus.Pupil0", atlas: 0, x: 2040, y: 654, width: 8, height: 16 }),
         Pupil1: tx({ id: "Town.Colossus.Pupil1", atlas: 0, x: 946, y: 1014, width: 34, height: 14 }),
-        Pupil2: tx({ id: "Town.Colossus.Pupil2", atlas: 0, x: 581, y: 1088, width: 12, height: 12 }),
+        Pupil2: tx({ id: "Town.Colossus.Pupil2", atlas: 0, x: 351, y: 1200, width: 12, height: 12 }),
         Sclera0: tx({ id: "Town.Colossus.Sclera0", atlas: 0, x: 2026, y: 1095, width: 18, height: 24 }),
         Sclera1: tx({ id: "Town.Colossus.Sclera1", atlas: 0, x: 355, y: 1006, width: 60, height: 36 }),
         Sclera2: tx({ id: "Town.Colossus.Sclera2", atlas: 0, x: 522, y: 1047, width: 36, height: 40 }),
@@ -467,7 +468,7 @@ function txs<T>(tx: (data: TxData) => T) {
       Checkbox: tx({ id: "Ui.Checkbox", atlas: 0, x: 355, y: 1043, width: 60, height: 30 }),
       ChooseYourLooksIcons: tx({ id: "Ui.ChooseYourLooksIcons", atlas: 0, x: 1069, y: 49, width: 930, height: 30 }),
       CurrentlyEquippedSlot: tx({ id: "Ui.CurrentlyEquippedSlot", atlas: 0, x: 73, y: 1359, width: 40, height: 10 }),
-      CurrentlyEquipped: tx({ id: "Ui.CurrentlyEquipped", atlas: 0, x: 388, y: 1192, width: 12, height: 12 }),
+      CurrentlyEquipped: tx({ id: "Ui.CurrentlyEquipped", atlas: 0, x: 364, y: 1200, width: 12, height: 12 }),
       Dialog: {
         AskRemoveCountBox: tx({ id: "Ui.Dialog.AskRemoveCountBox", atlas: 0, x: 0, y: 717, width: 272, height: 150 }),
         AskRemoveCountRejectBox: tx({ id: "Ui.Dialog.AskRemoveCountRejectBox", atlas: 0, x: 1928, y: 261, width: 112, height: 28 }),
@@ -488,7 +489,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Increment: tx({ id: "Ui.Experience.Increment", atlas: 0, x: 681, y: 321, width: 264, height: 32 }),
       },
       FlopMax: tx({ id: "Ui.FlopMax", atlas: 0, x: 576, y: 521, width: 12, height: 6 }),
-      FreePotionSlots: tx({ id: "Ui.FreePotionSlots", atlas: 0, x: 1834, y: 1019, width: 16, height: 12 }),
+      FreePotionSlots: tx({ id: "Ui.FreePotionSlots", atlas: 0, x: 1265, y: 887, width: 16, height: 12 }),
       HorizontalBar9: tx({ id: "Ui.HorizontalBar9", atlas: 0, x: 0, y: 484, width: 500, height: 9 }),
       InteractionIndicator: tx({ id: "Ui.InteractionIndicator", atlas: 0, x: 590, y: 1146, width: 22, height: 22 }),
       Inventory: {
@@ -499,7 +500,7 @@ function txs<T>(tx: (data: TxData) => T) {
         BackgroundUnselectedKeyItem: tx({ id: "Ui.Inventory.BackgroundUnselectedKeyItem", atlas: 0, x: 1863, y: 834, width: 176, height: 206 }),
         BackgroundUnselectedPotion: tx({ id: "Ui.Inventory.BackgroundUnselectedPotion", atlas: 0, x: 823, y: 695, width: 246, height: 94 }),
       },
-      NewIndicator: tx({ id: "Ui.NewIndicator", atlas: 0, x: 1238, y: 887, width: 20, height: 12 }),
+      NewIndicator: tx({ id: "Ui.NewIndicator", atlas: 0, x: 1490, y: 972, width: 20, height: 12 }),
       NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 1026, y: 836, width: 8, height: 8 }),
       OwnerDefeat: tx({ id: "Ui.OwnerDefeat", atlas: 0, x: 2018, y: 358, width: 30, height: 16 }),
       PlacementReticle: tx({ id: "Ui.PlacementReticle", atlas: 0, x: 1006, y: 292, width: 6, height: 6 }),
