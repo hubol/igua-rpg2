@@ -31,6 +31,7 @@ export namespace DataNpcPersona {
             FlopCollector: { job: "Flop Collector", name: "Pin", looks: NpcLooks.Circus },
             MarketGreeter: { job: "Greeter", name: "Yrem", looks: NpcLooks.Bubblegum },
             ObstacleWatcher: { job: "Host", name: "Tipp", looks: NpcLooks.Corpo },
+            ColosseumWatcher: { job: "Watcher", name: "Chimm", looks: NpcLooks.DarkOne },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
         } satisfies Record<string, Model>,
     );
