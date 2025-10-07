@@ -39,15 +39,56 @@ import { objAngelMouth } from "./obj-angel-mouth";
 
 const txsFistSlam = Tx.Enemy.Miffed.FistSlam.split({ count: 6 });
 
-const themes = {
-    Common: {
+const themes = (function () {
+    const commonTheme = {
+        pivots: {
+            noggin: vnew(0, 0),
+        },
+        textures: {
+            mouth: objAngelMouth.txs.w14,
+            noggin: Tx.Enemy.Miffed.Noggin0,
+            pupil: Tx.Enemy.Miffed.Pupil0,
+            sclera: Tx.Enemy.Miffed.Sclera0,
+        },
         tint: {
             primary: 0xFF77B0,
             secondary: 0x715EFF,
             tertiary: 0xfffb0e,
         },
-    },
-};
+        values: {
+            eyesGap: 11,
+        },
+    };
+
+    type CommonTheme = typeof commonTheme;
+
+    return {
+        Common: commonTheme,
+        Freakish: {
+            ...commonTheme,
+            pivots: {
+                noggin: vnew(10, 4),
+            },
+            textures: {
+                mouth: objAngelMouth.txs.rounded14,
+                noggin: Tx.Enemy.Miffed.Noggin1,
+                pupil: Tx.Enemy.Miffed.Pupil1,
+                sclera: Tx.Enemy.Miffed.Sclera1,
+            },
+            tint: {
+                primary: 0x9052c4,
+                secondary: 0xc22419,
+                tertiary: 0x1e803e,
+            },
+            values: {
+                eyesGap: 20,
+            },
+        },
+    } satisfies Record<string, CommonTheme>;
+})();
+
+type Theme = typeof themes[keyof typeof themes];
+
 const ranks = {
     level0: RpgEnemyRank.create({
         loot: {
@@ -89,15 +130,26 @@ const ranks = {
     }),
 } satisfies Record<string, RpgEnemyRank.Model>;
 
-// TODO const variants = {};
+const variants = {
+    level0: {
+        rank: ranks.level0,
+        theme: themes.Common,
+    },
+    level1: {
+        rank: ranks.level1,
+        theme: themes.Freakish,
+    },
+};
 
 export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
+    const { rank, theme } = variants[entity.values.variant];
+
     const hurtboxObjs = [
         new Graphics().beginFill(0).drawRect(4, 10, 40, 16).invisible(),
         new Graphics().beginFill(0).drawRect(11, 22, 24, 16).invisible(),
     ];
 
-    const headObj = objAngelMiffedHead();
+    const headObj = objAngelMiffedHead(theme);
     const slammingFistRightObj = objSlammingFist("right");
     const slammingFistLeftObj = objSlammingFist("left");
     const soulAnchorObj = new Graphics().beginFill(0).drawRect(0, 0, 1, 1).at(21, 18).invisible();
@@ -113,7 +165,7 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
         soulAnchorObj,
     )
         .filtered(
-            new MapRgbFilter(themes.Common.tint.primary, themes.Common.tint.secondary, themes.Common.tint.tertiary),
+            new MapRgbFilter(theme.tint.primary, theme.tint.secondary, theme.tint.tertiary),
         )
         .pivoted(22, 41);
 
@@ -123,14 +175,14 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
         .autoSorted()
         .mixin(mxnEnemy, {
             hurtboxes: hurtboxObjs,
-            rank: ranks[entity.values.variant],
+            rank,
             angelEyesObj: headObj.objects.faceObj.objects.eyesObj,
             soulAnchorObj,
         })
         .mixin(mxnEnemyDeathBurst, {
-            primaryTint: themes.Common.tint.primary,
-            secondaryTint: themes.Common.tint.secondary,
-            tertiaryTint: themes.Common.tint.primary,
+            primaryTint: theme.tint.primary,
+            secondaryTint: theme.tint.secondary,
+            tertiaryTint: theme.tint.primary,
         })
         .mixin(mxnPhysics, {
             gravity: 0.2,
@@ -357,8 +409,8 @@ function objSlammingFist(side: "right" | "left") {
 
 type ObjSlammingFist = ReturnType<typeof objSlammingFist>;
 
-function objAngelMiffedHead() {
-    const faceObj = objAngelMiffedFace().pivoted(-22, -15).mixin(mxnFacingPivot, {
+function objAngelMiffedHead(theme: Theme) {
+    const faceObj = objAngelMiffedFace(theme).pivoted(-22, -15).mixin(mxnFacingPivot, {
         down: 2,
         left: -3,
         right: 5,
@@ -366,7 +418,7 @@ function objAngelMiffedHead() {
     });
 
     return container(
-        Sprite.from(Tx.Enemy.Miffed.Noggin0),
+        Sprite.from(theme.textures.noggin).pivoted(theme.pivots.noggin),
         faceObj,
     )
         .merge({ objects: { faceObj } })
@@ -378,15 +430,15 @@ function objAngelMiffedHead() {
         });
 }
 
-function objAngelMiffedFace() {
+function objAngelMiffedFace(theme: Theme) {
     const eyesObj = objAngelEyes({
         defaultEyelidRestingPosition: 0,
         eyelidsTint: 0xc80000,
-        gap: 11,
+        gap: theme.values.eyesGap,
         pupilRestStyle: { kind: "cross_eyed", offsetFromCenter: 0 },
-        pupilTx: Tx.Enemy.Miffed.Pupil0,
+        pupilTx: theme.textures.pupil,
         pupilsMirrored: true,
-        scleraTx: Tx.Enemy.Miffed.Sclera0,
+        scleraTx: theme.textures.sclera,
         sclerasMirrored: true,
     });
 
@@ -397,7 +449,7 @@ function objAngelMiffedFace() {
         negativeSpaceTint: 0x000000,
         teethCount: 2,
         toothGapWidth: 1,
-        txs: objAngelMouth.txs.w14,
+        txs: theme.textures.mouth,
     })
         .at(0, 6);
 
