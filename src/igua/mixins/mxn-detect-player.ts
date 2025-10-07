@@ -57,6 +57,8 @@ export function mxnDetectPlayer(obj: Container) {
                 .step(self => {
                     if (self.collides(playerObj)) {
                         mxnDetectPlayer.detectionScore = 60;
+                        self.speed.at(playerObj.speed);
+                        self.at(playerObj).add(0, -self.physicsRadius);
                         playerTrackerObj.at(playerObj);
                     }
 
