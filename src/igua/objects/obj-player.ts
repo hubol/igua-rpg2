@@ -262,6 +262,9 @@ const bounceIguanaOffObject = function () {
 
         vforce.at(pushx, pushy).normalize();
 
+        // Punish for attacking with your face instead of feet
+        vforce.x *= 1.5;
+
         const length = Rpg.character.motion.bouncingMinSpeed;
         iguana.speed.at(vforce).scale(length);
 
