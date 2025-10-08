@@ -1,8 +1,11 @@
-import { Sprite } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { container } from "../../../lib/pixi/container";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
+import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
+import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objAngelEyes } from "./obj-angel-eyes";
 import { objAngelMouth } from "./obj-angel-mouth";
 
@@ -22,15 +25,38 @@ const themes = (function () {
     };
 })();
 
+const ranks = {
+    level0: RpgEnemyRank.create({
+        status: {
+            healthMax: 500,
+            defenses: {
+                physical: 50,
+            },
+        },
+    }),
+};
+
 type Theme = typeof themes[keyof typeof themes];
 
 export function objAngelChill() {
+    const rank = ranks.level0;
     const theme = themes.Common;
 
     const bodyObj = objAngelChillBody(theme);
 
-    return container(bodyObj, objAngelChillHead(theme))
+    const hurtboxes = [
+        new Graphics().beginFill(0xff0000).drawRect(-50, -32, 100, 42).invisible(),
+        new Graphics().beginFill(0xffff00).drawRect(-32, 10, 64, 48).invisible(),
+    ];
+
+    return container(bodyObj, objAngelChillHead(theme), ...hurtboxes)
         .mixin(mxnDetectPlayer)
+        .mixin(mxnEnemy, { hurtboxes, rank })
+        .mixin(mxnEnemyDeathBurst, {
+            primaryTint: 0xff0000,
+            secondaryTint: 0x00ff00,
+            tertiaryTint: 0x0000ff,
+        })
         .pivoted(0, bodyObj.height - 3);
 }
 

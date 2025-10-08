@@ -1679,6 +1679,42 @@
           "originY": 0,
           "tint": "#540707",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 42,
+          "_eid": "95769929",
+          "x": 1480,
+          "y": 552,
+          "width": 32,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 43,
+          "_eid": "95769929",
+          "x": 1504,
+          "y": 488,
+          "width": 32,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 44,
+          "_eid": "95769929",
+          "x": 1760,
+          "y": 488,
+          "width": 32,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 45,
+          "_eid": "95769929",
+          "x": 1784,
+          "y": 552,
+          "width": 32,
+          "values": {"name": "", "visible": true, "depth": 0}
         }
       ]
     },
