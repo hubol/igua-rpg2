@@ -27,7 +27,7 @@ function* askRemoveCount(
     { min = 1, max: rawMax, multipleOf = 1, rejectMessage = "Never mind" }: AskUseCountOptions = {},
 ) {
     const heldCount = Rpg.inventory.count(item);
-    const max = Math.min(Math.floor(heldCount / multipleOf) * multipleOf, rawMax ?? 0);
+    const max = Math.min(Math.floor(heldCount / multipleOf) * multipleOf, rawMax ?? Number.MAX_SAFE_INTEGER);
 
     const value = yield* DramaMisc.askNullableInteger(message, {
         messageObj: DataItem.getFigureObj(item).pivotedUnit(0.5, 0.5).scaled(2, 2).at(0, -15),
