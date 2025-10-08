@@ -27,9 +27,8 @@ import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
-import { objFxBurst32 } from "../effects/obj-fx-burst-32";
-import { objFxBurstRound24 } from "../effects/obj-fx-burst-round-24";
 import { objFxExpressSurprise } from "../effects/obj-fx-express-surprise";
+import { objFxFizzle } from "../effects/obj-fx-fizzle";
 import { objFxFormativeBurst } from "../effects/obj-fx-formative-burst";
 import { objFxHeart } from "../effects/obj-fx-heart";
 import { objFxSpiritualRelease } from "../effects/obj-fx-spiritual-release";
@@ -601,11 +600,19 @@ function objAngelMiffedSweepAttack(attacker: MxnRpgStatus, signX: PolarInt) {
     const tintStart = 0xe05620;
     const tintEnd = 0xf0f000;
 
+    const fizzleTintStart = 0x909090;
+    const fizzleTintEnd = 0x505050;
+
     return container()
         .coro(function* (self) {
             for (let i = 0; i < 0.5; i += 0.05) {
                 self.parent.play(Sfx.Enemy.Miffed.SweepOrb.rate(i + 0.5));
-                const orbObj = objAngelMiffedSweepAttackOrb(attacker, blendColor(tintStart, tintEnd, i * 2))
+                const tintBlend = i * 2;
+                const orbObj = objAngelMiffedSweepAttackOrb(
+                    attacker,
+                    blendColor(tintStart, tintEnd, tintBlend),
+                    blendColor(fizzleTintStart, fizzleTintEnd, tintBlend),
+                )
                     .at(self.getWorldPosition())
                     .show();
 
@@ -619,7 +626,7 @@ function objAngelMiffedSweepAttack(attacker: MxnRpgStatus, signX: PolarInt) {
 
 const orbTxs = Tx.Enemy.Miffed.SweepOrb.split({ width: 16 });
 
-function objAngelMiffedSweepAttackOrb(attacker: MxnRpgStatus, tint: RgbInt) {
+function objAngelMiffedSweepAttackOrb(attacker: MxnRpgStatus, tint: RgbInt, fizzleTint: RgbInt) {
     const sprite = objIndexedSprite(orbTxs).anchored(0.5, 0.5).at(0, 8).tinted(tint);
     return container(sprite)
         .pivoted(0, 8)
@@ -628,7 +635,7 @@ function objAngelMiffedSweepAttackOrb(attacker: MxnRpgStatus, tint: RgbInt) {
         .mixin(mxnDestroyAfterSteps, 120)
         .handles("moved", (self, event) => {
             if (event.hitGround) {
-                objFxBurst32().tinted(tint).at(self).show();
+                objFxFizzle().tinted(fizzleTint).at(self).show();
                 self.destroy();
             }
         })
