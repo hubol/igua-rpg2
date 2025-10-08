@@ -3291,10 +3291,10 @@ export const Lvl = {
     };
   },
   PlainsSuggestiveCavern: () => {
-    applyLevel({ width: 1152, height: 648, backgroundTint: 0x190000 });
+    applyLevel({ width: 2000, height: 648, backgroundTint: 0x190000 });
     return {
-      ShapesSquare32: d(Tx.Shapes.Square32, { x: -16, y: 48, scaleX: 37, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0x47201c }, "ParallaxDecals"),
-      ShapesSquare32_1: d(Tx.Shapes.Square32, { x: -16, y: -16, scaleX: 37, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0xa46154 }, "ParallaxDecals"),
+      ShapesSquare32: d(Tx.Shapes.Square32, { x: -16, y: 48, scaleX: 64, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0x47201c }, "ParallaxDecals"),
+      ShapesSquare32_1: d(Tx.Shapes.Square32, { x: -16, y: -16, scaleX: 64, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0xa46154 }, "ParallaxDecals"),
       TerrainGrassSparse3px1: d(Tx.Terrain.Grass.Sparse3px1, { x: 545, y: 57, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x540707 }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 744, y: 0, width: 416, height: 376, values: { name: "", depth: 0, visible: true }, tint: 0x540707 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 480, y: 0, width: 64, height: 368, values: { name: "", depth: 0, visible: true }, tint: 0x540707 }, "TerrainEntities"),
@@ -3329,6 +3329,11 @@ export const Lvl = {
       Slope_2: e(r["Slope"], { x: 960, y: 568, width: 32, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x540707 }, "TerrainEntities"),
       Block_16: e(r["Block"], { x: 992, y: 568, width: 64, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x540707 }, "TerrainEntities"),
       Slope_3: e(r["Slope"], { x: 1056, y: 568, width: 32, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x540707 }, "TerrainEntities"),
+      Block_17: e(r["Block"], { x: 1384, y: 328, width: 500, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x540707 }, "TerrainEntities"),
+      Block_18: e(r["Block"], { x: 1384, y: 608, width: 500, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x540707 }, "TerrainEntities"),
+      Block_19: e(r["Block"], { x: 1152, y: -8, width: 232, height: 672, values: { name: "", depth: 0, visible: true }, tint: 0x540707 }, "TerrainEntities"),
+      Block_20: e(r["Block"], { x: 1884, y: 0, width: 224, height: 656, values: { name: "", depth: 0, visible: true }, tint: 0x540707 }, "TerrainEntities"),
+      Block_21: e(r["Block"], { x: 1384, y: 680, width: 508, height: 304, values: { name: "", depth: 0, visible: true }, tint: 0x540707 }, "TerrainEntities"),
       ShapesConfettiCorner: d(Tx.Shapes.ConfettiCorner, { x: 552, y: 481, scaleX: 1, scaleY: 1, rotation: 180, originX: 0.5, originY: 0.5, tint: 0x2a0202 }, "TerrainDecals"),
       ShapesConfettiCorner_1: d(Tx.Shapes.ConfettiCorner, { x: 746, y: 453, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2a0202 }, "TerrainDecals"),
       TerrainGrassSparse3px1_1: d(Tx.Terrain.Grass.Sparse3px1, { x: 297, y: 440, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x540707 }, "TerrainDecals"),
@@ -3412,8 +3417,10 @@ export const Lvl = {
       Gatekeeper: e(r["IguanaNpc"], { x: 88, y: 232, flippedX: false, values: { personaName: "CavernGatekeeper", name: "Gatekeeper", depth: 0 } }, "CharacterEntities"),
       Shopkeeper: e(r["IguanaNpc"], { x: 896, y: 600, flippedX: false, values: { personaName: "CavernShopkeeper", name: "Shopkeeper", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 656, y: 48, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      PlayerDev: e(r["PlayerDev"], { x: 1448, y: 608, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       GateVertical: e(r["GateVertical"], { x: 568, y: -32, width: 176, flippedY: true, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromCavern", name: "", depth: 0 } }, "RegionEntities"),
       GateVertical_1: e(r["GateVertical"], { x: 48, y: -80, width: 440, flippedY: true, values: { sceneName: "scnWorldMap", checkpointName: "fromPlainsSuggestiveCavern", name: "", depth: 0 } }, "RegionEntities"),
+      ChillBossMarker: e(r["Marker"], { x: 1640, y: 608, values: { name: "ChillBossMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   PlainsSuggestiveFlopCollector: () => {

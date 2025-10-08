@@ -3,15 +3,22 @@ import { Mzk } from "../../assets/music";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { Jukebox } from "../core/igua-audio";
+import { ZIndex } from "../core/scene/z-index";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { objAngelChill } from "../objects/enemies/obj-angel-chill";
 
 export function scnPlainsSuggestiveCavern() {
     Jukebox.play(Mzk.HomeFine);
     const lvl = Lvl.PlainsSuggestiveCavern();
     enrichGatekeeper(lvl);
     enrichShopkeeper(lvl);
+    enrichChillEnemy(lvl);
+}
+
+function enrichChillEnemy(lvl: LvlType.PlainsSuggestiveCavern) {
+    objAngelChill().at(lvl.ChillBossMarker).zIndexed(ZIndex.Entities).show();
 }
 
 function enrichGatekeeper(lvl: LvlType.PlainsSuggestiveCavern) {

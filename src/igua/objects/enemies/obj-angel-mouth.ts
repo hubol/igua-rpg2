@@ -92,4 +92,5 @@ objAngelMouth.txs = {
     rounded11: Tx.Enemy.Common.Mouths.Rounded11.split({ width: 11 }),
     rounded14: Tx.Enemy.Common.Mouths.Rounded14.split({ width: 14 }),
     w14: Tx.Enemy.Common.Mouths.W14.split({ width: 14 }),
+    w36: Tx.Enemy.Common.Mouths.W36.split({ width: 36 }),
 };
