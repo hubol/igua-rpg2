@@ -1,4 +1,4 @@
-import { Sprite, Texture } from "pixi.js";
+import { DisplayObject, Sprite, Texture } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
@@ -96,8 +96,8 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
                 injuredRightEyeObj.visible = value;
                 rightEyeObj.visible = !value;
             },
-            pupilPolarOffsets: Empty<VectorSimple>(),
         })
+        .mixin(mxnAngelEyesLike)
         .step((self) => {
             injuredLeftEyeObj.tint = leftPupilObj.tint;
             injuredRightEyeObj.tint = rightPupilObj.tint;
@@ -112,6 +112,13 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
             }
         });
 }
+
+export function mxnAngelEyesLike(obj: DisplayObject) {
+    return obj
+        .merge({ pupilPolarOffsets: Empty<VectorSimple>() });
+}
+
+export type MxnAngelEyesLike = ReturnType<typeof mxnAngelEyesLike>;
 
 function lerpPupilPosition(config: PupilPositionConfig, polar: VectorSimple) {
     v.at(config.rest);

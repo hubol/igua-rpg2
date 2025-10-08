@@ -90,7 +90,6 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         .merge({
             mxnEnemy: {
                 soulAnchorObj: args.soulAnchorObj ?? obj,
-                angelEyesObj: args.angelEyesObj,
             },
         })
         .track(mxnEnemy);
