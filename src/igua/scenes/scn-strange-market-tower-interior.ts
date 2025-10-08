@@ -1,5 +1,6 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Sfx } from "../../assets/sounds";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
@@ -29,6 +30,9 @@ function enrichMisterMonument(lvl: LvlType.StrangeMarketTowerInterior) {
             playerObj.isDucking = true;
 
             yield sleep(1000);
+
+            Sfx.Effect.GodTowerBlessing.play();
+
             playerObj.sparklesPerFrame = 0.3;
 
             yield sleep(1000);
