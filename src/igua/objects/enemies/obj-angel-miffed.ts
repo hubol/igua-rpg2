@@ -2,12 +2,13 @@ import { Graphics, Sprite } from "pixi.js";
 import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
+import { blendColor } from "../../../lib/color/blend-color";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { factor, interp, interpc, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { vrad } from "../../../lib/math/angle";
 import { approachLinear } from "../../../lib/math/number";
-import { PolarInt } from "../../../lib/math/number-alias-types";
+import { PolarInt, RgbInt } from "../../../lib/math/number-alias-types";
 import { IRectangle } from "../../../lib/math/rectangle";
 import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
@@ -26,6 +27,8 @@ import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objFxBurst32 } from "../effects/obj-fx-burst-32";
+import { objFxBurstRound24 } from "../effects/obj-fx-burst-round-24";
 import { objFxExpressSurprise } from "../effects/obj-fx-express-surprise";
 import { objFxFormativeBurst } from "../effects/obj-fx-formative-burst";
 import { objFxHeart } from "../effects/obj-fx-heart";
@@ -595,11 +598,14 @@ function objAngelMiffedFlameColumnTrail(attacker: MxnRpgStatus, signX: PolarInt)
 }
 
 function objAngelMiffedSweepAttack(attacker: MxnRpgStatus, signX: PolarInt) {
+    const tintStart = 0xe05620;
+    const tintEnd = 0xf0f000;
+
     return container()
         .coro(function* (self) {
             for (let i = 0; i < 0.5; i += 0.05) {
                 self.parent.play(Sfx.Enemy.Miffed.SweepOrb.rate(i + 0.5));
-                const orbObj = objAngelMiffedSweepAttackOrb(attacker)
+                const orbObj = objAngelMiffedSweepAttackOrb(attacker, blendColor(tintStart, tintEnd, i * 2))
                     .at(self.getWorldPosition())
                     .show();
 
@@ -611,23 +617,28 @@ function objAngelMiffedSweepAttack(attacker: MxnRpgStatus, signX: PolarInt) {
         });
 }
 
-function objAngelMiffedSweepAttackOrb(attacker: MxnRpgStatus) {
-    // TODO VFX
-    return new Graphics().beginFill(0xff0000).drawRect(-8, -8, 16, 16)
+const orbTxs = Tx.Enemy.Miffed.SweepOrb.split({ width: 16 });
+
+function objAngelMiffedSweepAttackOrb(attacker: MxnRpgStatus, tint: RgbInt) {
+    const sprite = objIndexedSprite(orbTxs).anchored(0.5, 0.5).at(0, 8).tinted(tint);
+    return container(sprite)
         .pivoted(0, 8)
         .mixin(mxnRpgAttack, { attacker: attacker.status, attack: atkSweepOrb })
         .mixin(mxnPhysics, { physicsRadius: 8, gravity: 0.2, physicsOffset: [0, -8] })
         .mixin(mxnDestroyAfterSteps, 120)
         .handles("moved", (self, event) => {
             if (event.hitGround) {
-                self.speed.at(0, 0);
-                self.isAttackActive = false;
-                self.coro(function* () {
-                    yield sleep(333);
-                    self.scale.at(0.5, 0.5);
-                    yield sleep(333);
-                    self.destroy();
-                });
+                objFxBurst32().tinted(tint).at(self).show();
+                self.destroy();
+            }
+        })
+        .coro(function* (self) {
+            sprite.scale.x = Math.sign(self.speed.x) || 1;
+            yield interp(sprite, "textureIndex").to(sprite.textures.length).over(Rng.int(100, 200));
+            yield sleepf(5);
+            while (true) {
+                sprite.angle += 90;
+                yield sleepf(5);
             }
         });
 }
