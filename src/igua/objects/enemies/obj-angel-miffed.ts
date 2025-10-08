@@ -4,7 +4,8 @@ import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { factor, interp, interpc, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
-import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
+import { vrad } from "../../../lib/math/angle";
 import { approachLinear } from "../../../lib/math/number";
 import { PolarInt } from "../../../lib/math/number-alias-types";
 import { IRectangle } from "../../../lib/math/rectangle";
@@ -150,6 +151,7 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
     ];
 
     const headObj = objAngelMiffedHead(theme);
+    const wrappedHeadObj = container(headObj);
     const slammingFistRightObj = objSlammingFist("right");
     const slammingFistLeftObj = objSlammingFist("left");
     const soulAnchorObj = new Graphics().beginFill(0).drawRect(0, 0, 1, 1).at(21, 18).invisible();
@@ -158,7 +160,7 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
 
     const puppetObj = container(
         bodyObj,
-        headObj,
+        wrappedHeadObj,
         slammingFistRightObj,
         slammingFistLeftObj,
         ...hurtboxObjs,
@@ -321,6 +323,26 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
             obj.scale.y = 1;
             obj.pivot.y = 0;
         },
+        *sweepAndBackstep() {
+            obj.play(Sfx.Enemy.Miffed.SweepBegin);
+            yield interpvr(wrappedHeadObj).factor(factor.sine).to(0, 15).over(200);
+            for (let i = 0; i < 4; i++) {
+                obj.x += i % 2 === 0 ? 1 : -1;
+                yield sleepf(3);
+            }
+            yield interpvr(wrappedHeadObj).to(0, 0).over(70);
+            const playerSignX = Math.sign(obj.mxnDetectPlayer.position.x - obj.x) || Rng.intp();
+            obj.gravity = 0.0825;
+            obj.speed.at(-playerSignX * 2, -4);
+            const attackObj = objAngelMiffedSweepAttack(obj, playerSignX).at(0, -32).show(obj);
+            obj.isOnGround = false;
+            yield* Coro.all([
+                () => obj.isOnGround,
+                () => attackObj.destroyed,
+                interp(obj.speed, "x").to(0).over(1000),
+            ]);
+            obj.gravity = 0.2;
+        },
         *expressSurprise() {
             obj.play(Sfx.Enemy.Miffed.ExpressSurprise.rate(0.9, 1.1));
             objFxExpressSurprise().at(obj).add(5, -32).show();
@@ -331,6 +353,8 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
 
     return obj
         .coro(function* (self) {
+            const startPosition = self.vcpy();
+
             let minDetectionScore = 0;
             let iterationsCount = 0;
 
@@ -346,7 +370,21 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
 
                 minDetectionScore = -120;
 
-                for (const fistObj of [slammingFistLeftObj, slammingFistRightObj]) {
+                // TODO feels like this should be declared on the rank or something
+                if (rank === ranks.level1) {
+                    yield* moves.sweepAndBackstep();
+                }
+
+                let fistObjs = [slammingFistLeftObj, slammingFistRightObj];
+
+                const distanceFromStartPosition = self.x - startPosition.x;
+                if (Math.abs(distanceFromStartPosition) > 100) {
+                    fistObjs = distanceFromStartPosition > 0
+                        ? [slammingFistLeftObj, slammingFistLeftObj]
+                        : [slammingFistRightObj, slammingFistRightObj];
+                }
+
+                for (const fistObj of fistObjs) {
                     yield* moves.slamFist(fistObj);
                 }
 
@@ -509,6 +547,10 @@ const atkPoisonBox = RpgAttack.create({
     },
 });
 
+const atkSweepOrb = RpgAttack.create({
+    emotional: 40,
+});
+
 const getPoisonBoxTargetPosition = function () {
     const v = vnew();
 
@@ -550,4 +592,42 @@ function objAngelMiffedFlameColumnTrail(attacker: MxnRpgStatus, signX: PolarInt)
         maxDistance: 100,
         speedX: 20 * signX,
     });
+}
+
+function objAngelMiffedSweepAttack(attacker: MxnRpgStatus, signX: PolarInt) {
+    return container()
+        .coro(function* (self) {
+            for (let i = 0; i < 0.5; i += 0.05) {
+                self.parent.play(Sfx.Enemy.Miffed.SweepOrb.rate(i + 0.5));
+                const orbObj = objAngelMiffedSweepAttackOrb(attacker)
+                    .at(self.getWorldPosition())
+                    .show();
+
+                orbObj.speed.at(vrad((-0.5 + i * signX) * Math.PI)).scale(5);
+
+                yield sleepf(4);
+            }
+            self.destroy();
+        });
+}
+
+function objAngelMiffedSweepAttackOrb(attacker: MxnRpgStatus) {
+    // TODO VFX
+    return new Graphics().beginFill(0xff0000).drawRect(-8, -8, 16, 16)
+        .pivoted(0, 8)
+        .mixin(mxnRpgAttack, { attacker: attacker.status, attack: atkSweepOrb })
+        .mixin(mxnPhysics, { physicsRadius: 8, gravity: 0.2, physicsOffset: [0, -8] })
+        .mixin(mxnDestroyAfterSteps, 120)
+        .handles("moved", (self, event) => {
+            if (event.hitGround) {
+                self.speed.at(0, 0);
+                self.isAttackActive = false;
+                self.coro(function* () {
+                    yield sleep(333);
+                    self.scale.at(0.5, 0.5);
+                    yield sleep(333);
+                    self.destroy();
+                });
+            }
+        });
 }
