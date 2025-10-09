@@ -5,7 +5,7 @@ import { Integer, Polar } from "../../lib/math/number-alias-types";
 import { distance } from "../../lib/math/vector";
 import { VectorSimple, vnew } from "../../lib/math/vector-type";
 import { Force } from "../../lib/types/force";
-import { MxnAngelEyesLike, mxnAngelEyesLike } from "../objects/enemies/obj-angel-eyes";
+import { ObjAngelEyes, objAngelEyes } from "../objects/enemies/obj-angel-eyes";
 import { playerObj } from "../objects/obj-player";
 import { mxnEnemy } from "./mxn-enemy";
 import { MxnFacingPivot, mxnFacingPivot } from "./mxn-facing-pivot";
@@ -25,13 +25,13 @@ export function mxnDetectPlayer(obj: Container) {
     const polarOffset = vnew();
 
     let facingPivotObjs = Force<MxnFacingPivot[]>();
-    let angelEyesLikeObjs = Force<MxnAngelEyesLike[]>();
+    let angelEyesObjs = Force<ObjAngelEyes[]>();
 
     return obj
         .merge({ mxnDetectPlayer })
         .coro(function* () {
             facingPivotObjs = obj.findIs(mxnFacingPivot);
-            angelEyesLikeObjs = obj.findIs(mxnAngelEyesLike);
+            angelEyesObjs = obj.findIs(objAngelEyes);
         })
         .step(() => {
             mxnDetectPlayer.detectionScore--;
@@ -47,8 +47,8 @@ export function mxnDetectPlayer(obj: Container) {
                 polarOffset.moveTowards(v.at(0, 0), 0.05);
             }
 
-            for (let i = 0; i < angelEyesLikeObjs.length; i++) {
-                angelEyesLikeObjs[i].pupilPolarOffsets[0] = polarOffset;
+            for (let i = 0; i < angelEyesObjs.length; i++) {
+                angelEyesObjs[i].pupilPolarOffsets[0] = polarOffset;
             }
 
             for (let i = 0; i < facingPivotObjs.length; i++) {

@@ -1,10 +1,10 @@
-import { DisplayObject } from "pixi.js";
+import { Container, DisplayObject } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
 import { Rng } from "../../lib/math/rng";
 import { clone } from "../../lib/object/clone";
 import { merge } from "../../lib/object/merge";
 import { layers } from "../globals";
-import { ObjAngelEyes } from "../objects/enemies/obj-angel-eyes";
+import { objAngelEyes } from "../objects/enemies/obj-angel-eyes";
 import { objLootDrop } from "../objects/obj-loot-drop";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
@@ -18,11 +18,10 @@ interface MxnEnemyArgs {
     hurtboxes: DisplayObject[];
     rank: RpgEnemyRank.Model;
     healthbarAnchorObj?: DisplayObject;
-    angelEyesObj?: ObjAngelEyes;
     soulAnchorObj?: DisplayObject;
 }
 
-export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
+export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
     const { status, loot } = clone(args.rank);
 
     const died = () => {
@@ -94,7 +93,9 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
         })
         .track(mxnEnemy);
 
-    if (args.angelEyesObj) {
+    const angelEyesObj = enemyObj.findIs(objAngelEyes).last;
+
+    if (angelEyesObj) {
         enemyObj.step(() => {
             if (leftEyeInjuredStepsCount > 0) {
                 leftEyeInjuredStepsCount--;
@@ -104,8 +105,8 @@ export function mxnEnemy(obj: DisplayObject, args: MxnEnemyArgs) {
                 rightEyeInjuredStepsCount--;
             }
 
-            args.angelEyesObj!.injuredLeft = leftEyeInjuredStepsCount > 0;
-            args.angelEyesObj!.injuredRight = rightEyeInjuredStepsCount > 0;
+            angelEyesObj.injuredLeft = leftEyeInjuredStepsCount > 0;
+            angelEyesObj.injuredRight = rightEyeInjuredStepsCount > 0;
         });
     }
 

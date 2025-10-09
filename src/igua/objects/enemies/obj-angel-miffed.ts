@@ -180,7 +180,6 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
         .mixin(mxnEnemy, {
             hurtboxes: hurtboxObjs,
             rank,
-            angelEyesObj: headObj.objects.faceObj.objects.eyesObj,
             soulAnchorObj,
         })
         .mixin(mxnEnemyDeathBurst, {

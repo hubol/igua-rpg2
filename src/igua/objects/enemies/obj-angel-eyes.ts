@@ -81,6 +81,7 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
         .show(eyesObj);
 
     return eyesObj
+        .identify(objAngelEyes)
         .merge({
             get injuredLeft() {
                 return injuredLeftEyeObj.visible;
@@ -96,8 +97,8 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
                 injuredRightEyeObj.visible = value;
                 rightEyeObj.visible = !value;
             },
+            pupilPolarOffsets: Empty<VectorSimple>(),
         })
-        .mixin(mxnAngelEyesLike)
         .step((self) => {
             injuredLeftEyeObj.tint = leftPupilObj.tint;
             injuredRightEyeObj.tint = rightPupilObj.tint;
@@ -112,13 +113,6 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
             }
         });
 }
-
-export function mxnAngelEyesLike(obj: DisplayObject) {
-    return obj
-        .merge({ pupilPolarOffsets: Empty<VectorSimple>() });
-}
-
-export type MxnAngelEyesLike = ReturnType<typeof mxnAngelEyesLike>;
 
 function lerpPupilPosition(config: PupilPositionConfig, polar: VectorSimple) {
     v.at(config.rest);

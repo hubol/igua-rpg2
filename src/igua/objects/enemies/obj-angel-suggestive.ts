@@ -369,7 +369,6 @@ export function objAngelSuggestive(variantKey: VariantKey) {
             rank: variant.rank,
             hurtboxes: [hurtbox0, hurtbox1],
             healthbarAnchorObj,
-            angelEyesObj: faceObj.eyesObj,
         })
         .mixin(mxnEnemyDeathBurst, {
             primaryTint: theme.map.red,
