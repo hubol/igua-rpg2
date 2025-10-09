@@ -94,7 +94,7 @@ export function objAngelChill() {
                 .mixin(mxnShield)
                 .merge({ initialScale: vnew(1, 0) });
 
-            container(leftAoeObj, topAoeObj, rightAoeObj).at(enemyObj).show();
+            const rootObj = container(leftAoeObj, topAoeObj, rightAoeObj).at(enemyObj).show();
 
             const aoeObjs = [rightAoeObj, topAoeObj, leftAoeObj];
             const reversedAoeObjs = [...aoeObjs].reverse();
@@ -112,13 +112,17 @@ export function objAngelChill() {
                 for (const obj of reversedAoeObjs) {
                     yield interpv(obj.scale).to(obj.initialScale).over(1000);
                 }
+
+                rootObj.scale.x *= -1;
             }
         },
     };
 
-    const enemyObj = container(bodyObj, objAngelChillHead(theme), ...hurtboxes)
+    const soulAnchorObj = new Graphics().beginFill(0).drawRect(0, 0, 1, 1).at(0, 10).invisible();
+
+    const enemyObj = container(bodyObj, objAngelChillHead(theme), ...hurtboxes, soulAnchorObj)
         .mixin(mxnDetectPlayer)
-        .mixin(mxnEnemy, { hurtboxes, rank })
+        .mixin(mxnEnemy, { hurtboxes, rank, soulAnchorObj })
         .mixin(mxnEnemyDeathBurst, {
             primaryTint: 0xff0000,
             secondaryTint: 0x00ff00,
