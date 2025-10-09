@@ -16,6 +16,7 @@ import { Rpg } from "../rpg/rpg";
 import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgStatus } from "../rpg/rpg-status";
 import { objFxPlayerJumpComboDust } from "./effects/obj-fx-player-jump-combo-dust";
+import { objFxSuperDust } from "./effects/obj-fx-super-dust";
 import { CtxGate } from "./obj-gate";
 import { ObjIguanaLocomotive, objIguanaLocomotive, ObjIguanaLocomotiveAutoFacingMode } from "./obj-iguana-locomotive";
 import { objIguanaNpc } from "./obj-iguana-npc";
@@ -231,7 +232,21 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 const hurtbox = puppet.collidesOne(instance.hurtboxes);
                 if (hurtbox) {
                     const collidedWithFeet = bounceIguanaOffObject(puppet, hurtbox);
-                    const attack = collidedWithFeet ? Rpg.character.meleeClawAttack : Rpg.character.meleeAttack;
+                    let attack = collidedWithFeet
+                        ? Rpg.character.meleeClawAttack
+                        : Rpg.character.meleeAttack;
+
+                    if (attack === Rpg.character.meleeClawAttack && stepsSinceJumpJustWentDown < 6) {
+                        // TODO extra XP for this, too
+                        puppet.play(Sfx.Iguana.TimedClawAttack.rate(0.975, 1.025));
+                        objFxSuperDust().at(playerObj).zIndexed(ZIndex.CharacterEntities).show();
+                        playerObj.landingFrames = 10;
+
+                        landedThenJumpedHorizontalSpeedBoostUnit = 1;
+
+                        attack = Rpg.character.meleeClawWellTimedAttack;
+                    }
+
                     const result = instance.damage(attack, status);
                 }
             }
@@ -263,7 +278,7 @@ const bounceIguanaOffObject = function () {
         vforce.at(pushx, pushy).normalize();
 
         // Punish for attacking with your face instead of feet
-        vforce.x *= 1.5;
+        vforce.x *= 1.35;
 
         const length = Rpg.character.motion.bouncingMinSpeed;
         iguana.speed.at(vforce).scale(length);

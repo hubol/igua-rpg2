@@ -44,7 +44,7 @@ export class RpgPlayer {
             },
             emotional: 0,
             get physical() {
-                return 4 + player.attributes.strength * 3
+                return 3 + player.attributes.strength * 2
                     + player.buffs.combat.melee.attack.physical;
             },
             versus: RpgFaction.Enemy,
@@ -67,6 +67,29 @@ export class RpgPlayer {
             get physical() {
                 return 5 + player.attributes.strength * 5
                     + player.buffs.combat.melee.clawAttack.physical;
+            },
+            versus: RpgFaction.Enemy,
+            quirks: {
+                // TODO should it have both player melee quirks?
+                isPlayerClawMeleeAttack: true,
+            },
+        });
+    })();
+
+    readonly meleeClawWellTimedAttack = (() => {
+        const player = this;
+
+        return RpgAttack.create({
+            conditions: {
+                get poison() {
+                    return player.meleeClawAttack.conditions.poison;
+                },
+            },
+            emotional: 0,
+            get physical() {
+                const base = player.meleeClawAttack.physical;
+                const bonus = Math.max(3, Math.ceil(base * 0.3));
+                return base + bonus;
             },
             versus: RpgFaction.Enemy,
             quirks: {
