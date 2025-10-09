@@ -237,17 +237,21 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                         : Rpg.character.meleeAttack;
 
                     if (attack === Rpg.character.meleeClawAttack && stepsSinceJumpJustWentDown < 6) {
+                        attack = Rpg.character.meleeClawWellTimedAttack;
+                    }
+
+                    const result = instance.damage(attack, status);
+
+                    if (
+                        attack === Rpg.character.meleeClawWellTimedAttack && (!result.rejected || !result.invulnerable)
+                    ) {
                         // TODO extra XP for this, too
                         puppet.play(Sfx.Iguana.TimedClawAttack.rate(0.975, 1.025));
                         objFxSuperDust().at(playerObj).zIndexed(ZIndex.CharacterEntities).show();
                         playerObj.landingFrames = 10;
 
                         landedThenJumpedHorizontalSpeedBoostUnit = 1;
-
-                        attack = Rpg.character.meleeClawWellTimedAttack;
                     }
-
-                    const result = instance.damage(attack, status);
                 }
             }
         }, StepOrder.AfterPhysics)
