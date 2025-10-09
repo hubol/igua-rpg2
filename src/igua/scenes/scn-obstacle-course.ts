@@ -103,7 +103,7 @@ function objMinigameController(lvl: LvlType.ObstacleCourse) {
             self.coro(
                 function* () {
                     yield* coroAwardPrizeForCollection({
-                        npcPersona: DataNpcPersona.Manifest.WheatGod,
+                        npcPersonaId: "WheatGod",
                         pocketItemId: "Wheat",
                         getPrize: () => PrizeConsts.wheat[Rpg.flags.obstacleCourse.wheatPrizesCount++] ?? null,
                     });
@@ -113,7 +113,7 @@ function objMinigameController(lvl: LvlType.ObstacleCourse) {
             self.coro(
                 function* () {
                     yield* coroAwardPrizeForCollection({
-                        npcPersona: DataNpcPersona.Manifest.BeetGod,
+                        npcPersonaId: "BeetGod",
                         pocketItemId: "Beet",
                         getPrize: () => PrizeConsts.beet[Rpg.flags.obstacleCourse.beetPrizesCount++] ?? null,
                     });
@@ -147,23 +147,24 @@ function* dramaEndMinigame(lvl: LvlType.ObstacleCourse) {
     yield interpvr(lvl.RestrictedBlock).translate(0, -50).over(500);
 }
 
-function objHolyIguana(persona: DataNpcPersona.Model) {
+function objHolyIguana(npcPersonaId: DataNpcPersona.Id) {
+    const iguanaNpcObj = objIguanaNpc(npcPersonaId);
     return container(
         objFxPuffyCloud(0xacbddd).at(2, -3),
-        objIguanaPuppet(persona.looks),
+        iguanaNpcObj,
         objFxPuffyCloud(0xffffff),
     )
-        .mixin(mxnSpeaker, { name: persona.name, ...objIguanaNpc.getSpeakerColors(persona.looks) })
-        .mixin(mxnSinePivot);
+        .mixin(mxnSinePivot)
+        .merge({ iguanaNpcObj });
 }
 
 interface CoroAwardPrizeForCollectionArgs {
     pocketItemId: DataPocketItem.Id;
-    npcPersona: DataNpcPersona.Model;
+    npcPersonaId: DataNpcPersona.Id;
     getPrize: () => RpgInventory.Item | null;
 }
 
-function* coroAwardPrizeForCollection({ npcPersona, pocketItemId, getPrize }: CoroAwardPrizeForCollectionArgs) {
+function* coroAwardPrizeForCollection({ npcPersonaId, pocketItemId, getPrize }: CoroAwardPrizeForCollectionArgs) {
     while (true) {
         yield () => Rpg.inventory.pocket.count(pocketItemId) >= 50;
 
@@ -172,7 +173,7 @@ function* coroAwardPrizeForCollection({ npcPersona, pocketItemId, getPrize }: Co
 
         const vector = vnew();
 
-        const holyIguanaObj = objHolyIguana(npcPersona)
+        const holyIguanaObj = objHolyIguana(npcPersonaId)
             .at(scene.camera)
             .add(startPosition)
             .step(self =>
@@ -199,6 +200,6 @@ function* coroAwardPrizeForCollection({ npcPersona, pocketItemId, getPrize }: Co
             yield* show("A blessing for thy harvest.", "Many thanks unto thine ass.");
             yield interp(lerpRef, "factor").factor(factor.sine).to(0).over(2000);
             holyIguanaObj.destroy();
-        }, { speaker: holyIguanaObj }).done;
+        }, { speaker: holyIguanaObj.iguanaNpcObj }).done;
     }
 }
