@@ -27,6 +27,17 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "ChillBossMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 1,
+          "_eid": "73148747",
+          "x": 1600,
+          "y": 562,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#ff0000",
+          "values": {"name": "ExitChillEnemyDoorMarker", "depth": 0}
         }
       ]
     },
@@ -108,17 +119,6 @@
           "originX": 22,
           "originY": 39,
           "flippedX": true,
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "PlayerDev",
-          "id": 1,
-          "_eid": "98101389",
-          "x": 1448,
-          "y": 608,
-          "originX": 22,
-          "originY": 39,
-          "flippedX": false,
           "values": {"name": "", "depth": 0}
         }
       ]
@@ -255,6 +255,40 @@
           "originX": 0,
           "originY": 0,
           "values": {"initialTint": "#540707", "targetTint": "#000000", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 2,
+          "_eid": "41461695",
+          "x": 744,
+          "y": 264,
+          "width": 672,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#540707", "targetTint": "#000000", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 3,
+          "_eid": "41461695",
+          "x": 1384,
+          "y": 296,
+          "width": 32,
+          "height": 104,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#540707", "targetTint": "#000000", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 4,
+          "_eid": "88296692",
+          "x": 1752,
+          "y": 704,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromPlainsSuggestiveCavern", "name": "ExitChillEnemyDoor", "depth": 0}
         }
       ]
     },
@@ -1237,7 +1271,7 @@
           "x": 744,
           "y": 0,
           "width": 416,
-          "height": 376,
+          "height": 264,
           "originX": 0,
           "originY": 0,
           "tint": "#540707",
@@ -1619,7 +1653,7 @@
           "name": "Block",
           "id": 36,
           "_eid": "93117141",
-          "x": 1384,
+          "x": 1416,
           "y": 328,
           "width": 500,
           "height": 72,
@@ -1646,7 +1680,7 @@
           "id": 39,
           "_eid": "93117141",
           "x": 1152,
-          "y": -8,
+          "y": 296,
           "width": 232,
           "height": 672,
           "originX": 0,
@@ -1672,7 +1706,7 @@
           "id": 41,
           "_eid": "93117141",
           "x": 1384,
-          "y": 680,
+          "y": -40,
           "width": 508,
           "height": 304,
           "originX": 0,
@@ -1715,6 +1749,58 @@
           "y": 552,
           "width": 32,
           "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 46,
+          "_eid": "93117141",
+          "x": 1416,
+          "y": 304,
+          "width": 472,
+          "height": 24,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 47,
+          "_eid": "93117141",
+          "x": 1160,
+          "y": -40,
+          "width": 224,
+          "height": 304,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 48,
+          "_eid": "93117141",
+          "x": 1416,
+          "y": 264,
+          "width": 472,
+          "height": 40,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 49,
+          "_eid": "93117141",
+          "x": 744,
+          "y": 296,
+          "width": 408,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },

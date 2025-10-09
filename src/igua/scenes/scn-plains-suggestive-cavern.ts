@@ -18,7 +18,12 @@ export function scnPlainsSuggestiveCavern() {
 }
 
 function enrichChillEnemy(lvl: LvlType.PlainsSuggestiveCavern) {
-    objAngelChill().at(lvl.ChillBossMarker).zIndexed(ZIndex.Entities).show();
+    const chillAngelObj = objAngelChill().at(lvl.ChillBossMarker).zIndexed(ZIndex.Entities).show();
+    chillAngelObj.handles("mxnEnemy.died", () => {
+        lvl.ExitChillEnemyDoor.coro(function* (self) {
+            yield interpvr(self).factor(factor.sine).to(lvl.ExitChillEnemyDoorMarker).over(5000);
+        });
+    });
 }
 
 function enrichGatekeeper(lvl: LvlType.PlainsSuggestiveCavern) {

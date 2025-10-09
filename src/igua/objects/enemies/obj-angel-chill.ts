@@ -1,10 +1,15 @@
-import { Graphics, Sprite } from "pixi.js";
+import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
+import { factor, interpv } from "../../../lib/game-engine/routines/interp";
+import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
+import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
+import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objAngelEyes } from "./obj-angel-eyes";
 import { objAngelMouth } from "./obj-angel-mouth";
@@ -30,6 +35,23 @@ const ranks = {
         status: {
             healthMax: 999,
         },
+        loot: {
+            tier0: [
+                { kind: "valuables", min: 100, max: 150, deltaPride: -10, weight: 30 },
+                { kind: "pocket_item", count: 3, id: "ComputerChip", weight: 30 },
+                { kind: "pocket_item", count: 5, id: "ComputerChip", weight: 20 },
+                { kind: "flop", min: 60, max: 69, count: 5, weight: 20 },
+            ],
+            tier1: [
+                { kind: "equipment", id: "NailFile", weight: 10 },
+                { kind: "equipment", id: "PatheticCage", weight: 10 },
+                { kind: "equipment", id: "PoisonRing", weight: 10 },
+                { kind: "equipment", id: "RichesRing", weight: 10 },
+                { kind: "equipment", id: "YellowRichesRing", weight: 10 },
+                { kind: "potion", id: "RestoreHealth", count: 5, weight: 10 },
+                { kind: "nothing", weight: 40 },
+            ],
+        },
     }),
 };
 
@@ -46,7 +68,55 @@ export function objAngelChill() {
         new Graphics().beginFill(0xffff00).drawRect(-32, 10, 64, 48).invisible(),
     ];
 
-    return container(bodyObj, objAngelChillHead(theme), ...hurtboxes)
+    const moves = {
+        *shieldWithWeakpoint() {
+            const leftAoeObj = new Graphics()
+                .beginFill(0xff0000)
+                .drawRect(0, 0, 32, 134)
+                .at(-90, -134)
+                .mixin(mxnRpgAttack, { attack: atkAoe, attacker: enemyObj.status })
+                .mixin(mxnShield)
+                .merge({ initialScale: vnew(1, 0) });
+
+            const topAoeObj = new Graphics()
+                .beginFill(0xffff00)
+                .drawRect(-90, -134, 166, 32)
+                .pivoted(76, 0)
+                .at(76, 0)
+                .mixin(mxnRpgAttack, { attack: atkAoe, attacker: enemyObj.status })
+                .mixin(mxnShield)
+                .merge({ initialScale: vnew(0, 1) });
+
+            const rightAoeObj = new Graphics()
+                .beginFill(0xff0000)
+                .drawRect(55, -134, 32, 134)
+                .mixin(mxnRpgAttack, { attack: atkAoe, attacker: enemyObj.status })
+                .mixin(mxnShield)
+                .merge({ initialScale: vnew(1, 0) });
+
+            container(leftAoeObj, topAoeObj, rightAoeObj).at(enemyObj).show();
+
+            const aoeObjs = [rightAoeObj, topAoeObj, leftAoeObj];
+            const reversedAoeObjs = [...aoeObjs].reverse();
+
+            for (const obj of aoeObjs) {
+                obj.scale.at(obj.initialScale);
+            }
+
+            while (true) {
+                for (const obj of aoeObjs) {
+                    yield interpv(obj.scale).factor(factor.sine).to(1, 1).over(1000);
+                    yield sleep(1000);
+                }
+
+                for (const obj of reversedAoeObjs) {
+                    yield interpv(obj.scale).to(obj.initialScale).over(1000);
+                }
+            }
+        },
+    };
+
+    const enemyObj = container(bodyObj, objAngelChillHead(theme), ...hurtboxes)
         .mixin(mxnDetectPlayer)
         .mixin(mxnEnemy, { hurtboxes, rank })
         .mixin(mxnEnemyDeathBurst, {
@@ -54,7 +124,12 @@ export function objAngelChill() {
             secondaryTint: 0x00ff00,
             tertiaryTint: 0x0000ff,
         })
-        .pivoted(0, bodyObj.height - 3);
+        .pivoted(0, bodyObj.height - 3)
+        .coro(function* () {
+            yield* moves.shieldWithWeakpoint();
+        });
+
+    return enemyObj;
 }
 
 function objAngelChillBody(theme: Theme) {
@@ -96,3 +171,15 @@ function objAngelChillHead(theme: Theme) {
     )
         .mixin(mxnFacingPivot, { down: 3, up: 0, right: 5, left: -5 });
 }
+
+function mxnShield(obj: DisplayObject) {
+    return obj.step(() => {
+        if (obj.is(mxnRpgAttack)) {
+            obj.isAttackActive = obj.scale.x !== 0 && obj.scale.y !== 0;
+        }
+    });
+}
+
+const atkAoe = RpgAttack.create({
+    emotional: 30,
+});
