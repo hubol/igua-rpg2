@@ -16,6 +16,8 @@ declare module "pixi.js" {
             mixin: TFn,
             ...args: ExcludeFirstParameter<Parameters<TFn>>
         ): Mixed<Parameters<TFn>[0], ReturnType<TFn>, this>;
+        /** Beware! This method is not well-typed. */
+        identify<TFn extends (...args: any) => DisplayObject>(fn: TFn): this;
         is<TFn extends (...args: any) => any>(mixin: TFn): this is ReturnType<TFn>;
     }
 
@@ -25,28 +27,34 @@ declare module "pixi.js" {
 }
 
 interface DisplayObjectPrivate {
-    _mixins?: Set<(...args: any) => any>;
+    _identities?: Set<(...args: any) => any>;
 }
 
 Object.defineProperties(DisplayObject.prototype, {
     mixin: {
         value: function (
             this: DisplayObject & DisplayObjectPrivate,
-            mixin: (d: DisplayObject, ...rest: any[]) => unknown,
+            mixin: (d: DisplayObject, ...rest: any[]) => any,
             arg1: any,
             arg2: any,
             arg3: any,
         ) {
-            if (!this._mixins) {
-                this._mixins = new Set();
-            }
-            this._mixins.add(mixin);
+            this.identify(mixin);
             return mixin(this, arg1, arg2, arg3);
+        },
+    },
+    identify: {
+        value: function (this: DisplayObject & DisplayObjectPrivate, identity: (...args: any) => any) {
+            if (!this._identities) {
+                this._identities = new Set();
+            }
+            this._identities.add(identity);
+            return this;
         },
     },
     is: {
         value: function (this: DisplayObject & DisplayObjectPrivate, mixin: (...args: any) => any) {
-            return this._mixins ? this._mixins.has(mixin) : false;
+            return this._identities ? this._identities.has(mixin) : false;
         },
     },
 });
