@@ -49,7 +49,8 @@ const commonTheme = {
             kind: "cross_eyed",
             offsetFromCenter: 1,
         },
-        pupilTx: Tx.Enemy.Suggestive.Pupil,
+        pupilsTx: Tx.Enemy.Suggestive.Pupil,
+        pupilsTint: [0x000080, 0x0000a0],
         scleraTx: Tx.Enemy.Suggestive.Sclera,
         sclerasMirrored: true,
     } satisfies ObjAngelEyesArgs,
@@ -64,8 +65,6 @@ const commonTheme = {
     tints: {
         gear0: 0x0000ff,
         gear1: 0x00ff00,
-        pupilLeft: 0x000080,
-        pupilRight: 0x0000a0,
         face: 0xa0ff00,
         mouth: 0x000080,
     },
@@ -204,10 +203,8 @@ function objAngelSuggestiveGears(theme: Theme) {
 }
 
 function objAngelSuggestiveFace(theme: Theme) {
-    const eyesObj = objAngelEyes(theme.eyes).at(theme.positions.eyes);
-
-    eyesObj.left.pupilSpr.tint = theme.tints.pupilLeft;
-    eyesObj.right.pupilSpr.tint = theme.tints.pupilRight;
+    const eyesObj = objAngelEyes(theme.eyes)
+        .at(theme.positions.eyes);
 
     const mouthObj = objAngelMouth({
         negativeSpaceTint: theme.tints.mouth,

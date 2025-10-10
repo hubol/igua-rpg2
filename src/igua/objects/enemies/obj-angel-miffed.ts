@@ -475,14 +475,12 @@ function objAngelMiffedFace(theme: Theme) {
         eyelidsTint: 0xc80000,
         gap: theme.values.eyesGap,
         pupilRestStyle: { kind: "cross_eyed", offsetFromCenter: 0 },
-        pupilTx: theme.textures.pupil,
+        pupilsTx: theme.textures.pupil,
+        pupilsTint: 0x000000,
         pupilsMirrored: true,
         scleraTx: theme.textures.sclera,
         sclerasMirrored: true,
     });
-
-    eyesObj.left.pupilSpr.tint = 0;
-    eyesObj.right.pupilSpr.tint = 0;
 
     const mouthObj = objAngelMouth({
         negativeSpaceTint: 0x000000,

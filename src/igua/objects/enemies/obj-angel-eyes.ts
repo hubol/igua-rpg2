@@ -1,6 +1,7 @@
-import { DisplayObject, Sprite, Texture } from "pixi.js";
+import { Sprite, Texture } from "pixi.js";
 import { Tx } from "../../../assets/textures";
-import { Integer } from "../../../lib/math/number-alias-types";
+import { OneOrTwo } from "../../../lib/array/one-or-two";
+import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { vlerp } from "../../../lib/math/vector";
 import { VectorSimple, vnew } from "../../../lib/math/vector-type";
@@ -16,11 +17,12 @@ interface PupilRestStyle_CrossEyed {
 type PupilRestStyle = PupilRestStyle_CrossEyed;
 
 export interface ObjAngelEyesArgs {
-    pupilTx: Texture;
+    pupilsTx: OneOrTwo<Texture>;
+    pupilsTint: OneOrTwo<RgbInt>;
     pupilsMirrored?: boolean;
     scleraTx: Texture;
     sclerasMirrored?: boolean;
-    eyelidsTint: Integer;
+    eyelidsTint: OneOrTwo<RgbInt>;
     gap: Integer;
     defaultEyelidRestingPosition: Integer;
     pupilRestStyle: PupilRestStyle;
@@ -33,10 +35,14 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
     const leftPupilPositionConfig = getPupilPositionConfig("left", args);
     const rightPupilPositionConfig = getPupilPositionConfig("right", args);
 
-    const leftPupilObj = Sprite.from(args.pupilTx).anchored(0.5, 0.5).at(leftPupilPositionConfig.rest);
-    const rightPupilObj = Sprite.from(args.pupilTx).anchored(0.5, 0.5).at(
-        rightPupilPositionConfig.rest,
-    )
+    const leftPupilObj = Sprite.from(OneOrTwo.get(args.pupilsTx, 0))
+        .tinted(OneOrTwo.get(args.pupilsTint, 0))
+        .anchored(0.5, 0.5)
+        .at(leftPupilPositionConfig.rest);
+
+    const rightPupilObj = Sprite.from(OneOrTwo.get(args.pupilsTx, 1))
+        .tinted(OneOrTwo.get(args.pupilsTint, 1))
+        .anchored(0.5, 0.5).at(rightPupilPositionConfig.rest)
         .scaled(args.pupilsMirrored ? -1 : 1, 1);
 
     const leftScleraObj = Sprite.from(args.scleraTx);
@@ -47,14 +53,21 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
 
     const y = -Math.round(args.scleraTx.height / 2);
 
-    const leftEyeObj = objEye(leftScleraObj, leftPupilObj, args.eyelidsTint, args.defaultEyelidRestingPosition).at(
-        leftEyeX,
-        y,
-    );
-    const rightEyeObj = objEye(rightScleraObj, rightPupilObj, args.eyelidsTint, args.defaultEyelidRestingPosition).at(
-        rightEyeX,
-        y,
-    );
+    const leftEyeObj = objEye(
+        leftScleraObj,
+        leftPupilObj,
+        OneOrTwo.get(args.eyelidsTint, 0),
+        args.defaultEyelidRestingPosition,
+    )
+        .at(leftEyeX, y);
+
+    const rightEyeObj = objEye(
+        rightScleraObj,
+        rightPupilObj,
+        OneOrTwo.get(args.eyelidsTint, 1),
+        args.defaultEyelidRestingPosition,
+    )
+        .at(rightEyeX, y);
 
     const eyesObj = objEyes(leftEyeObj, rightEyeObj);
     eyesObj.stepsUntilBlink = Rng.int(40, 120);
@@ -67,9 +80,8 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
         .add(scleraToInjuredOffsets.get(args.scleraTx) ?? vzero)
         .invisible()
         .scaled(-1, 1)
-        .show(
-            eyesObj,
-        );
+        .show(eyesObj);
+
     const injuredRightEyeObj = Sprite.from(Tx.Enemy.Common.Eyes.Injured0).anchored(0.5, 0.5)
         .at(rightEyeObj)
         .add(
@@ -141,15 +153,17 @@ function getPupilPositionConfig(eye: "left" | "right", args: ObjAngelEyesArgs): 
     const cx = sclera.x0 + Math.round((sclera.x1 - sclera.x0) / 2);
     const cy = sclera.y0 + Math.round((sclera.y1 - sclera.y0) / 2);
 
+    const tx = OneOrTwo.get(args.pupilsTx, eye === "left" ? 0 : 1);
+
     // Prevent pupils with one skinny dimension from
     // becoming 1 pixel tall or wide
-    const h = args.pupilTx.width < 3 ? 2 : 3;
-    const v = args.pupilTx.height < 3 ? 2 : 3;
+    const h = tx.width < 3 ? 2 : 3;
+    const v = tx.height < 3 ? 2 : 3;
 
     const rest = { x: cx, y: cy };
 
     if (args.pupilRestStyle.kind === "cross_eyed") {
-        const offset = Math.round(args.pupilTx.width / 2) + args.pupilRestStyle.offsetFromCenter;
+        const offset = Math.round(tx.width / 2) + args.pupilRestStyle.offsetFromCenter;
         rest.x = eye === "left" ? sclera.x1 - offset : sclera.x0 + offset;
     }
 

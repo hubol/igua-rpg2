@@ -1,9 +1,12 @@
 import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
+import { OneOrTwo } from "../../../lib/array/one-or-two";
 import { factor, interpv } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { RgbInt } from "../../../lib/math/number-alias-types";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
+import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
@@ -22,6 +25,11 @@ const themes = (function () {
             mouth: objAngelMouth.txs.w36,
             pupil: Tx.Enemy.Chill.Pupil0,
             sclera: Tx.Enemy.Chill.Sclera0,
+        },
+        tints: {
+            eyelids: 0x0000ff,
+            map: [0xff0000, 0x00ff00, 0x0000ff],
+            pupils: [0x000000, 0x000000] as OneOrTwo<RgbInt>,
         },
     };
 
@@ -122,12 +130,13 @@ export function objAngelChill() {
     const soulAnchorObj = new Graphics().beginFill(0).drawRect(0, 0, 1, 1).at(0, 10).invisible();
 
     const enemyObj = container(bodyObj, objAngelChillHead(theme), ...hurtboxes, soulAnchorObj)
+        .filtered(new MapRgbFilter(...theme.tints.map))
         .mixin(mxnDetectPlayer)
         .mixin(mxnEnemy, { hurtboxes, rank, soulAnchorObj })
         .mixin(mxnEnemyDeathBurst, {
-            primaryTint: 0xff0000,
-            secondaryTint: 0x00ff00,
-            tertiaryTint: 0x0000ff,
+            primaryTint: theme.tints.map[0],
+            secondaryTint: theme.tints.map[1],
+            tertiaryTint: theme.tints.map[2],
         })
         .pivoted(0, bodyObj.height - 3)
         .coro(function* () {
@@ -160,13 +169,14 @@ function objAngelChillHead(theme: Theme) {
                     .at(0, -8),
                 objAngelEyes({
                     defaultEyelidRestingPosition: 6,
-                    eyelidsTint: 0x0000ff,
+                    eyelidsTint: theme.tints.eyelids,
                     gap: 20,
                     pupilRestStyle: {
                         kind: "cross_eyed",
                         offsetFromCenter: 5,
                     },
-                    pupilTx: theme.textures.pupil,
+                    pupilsTx: theme.textures.pupil,
+                    pupilsTint: 0x000000,
                     scleraTx: theme.textures.sclera,
                 })
                     .at(0, -24),
