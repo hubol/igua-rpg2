@@ -53,10 +53,8 @@ const themes = (function () {
             pupil: Tx.Enemy.Miffed.Pupil0,
             sclera: Tx.Enemy.Miffed.Sclera0,
         },
-        tint: {
-            primary: 0xFF77B0,
-            secondary: 0x715EFF,
-            tertiary: 0xfffb0e,
+        tints: {
+            map: [0xFF77B0, 0x715EFF, 0xfffb0e] as MapRgbFilter.Map,
         },
         values: {
             eyesGap: 11,
@@ -78,10 +76,8 @@ const themes = (function () {
                 pupil: Tx.Enemy.Miffed.Pupil1,
                 sclera: Tx.Enemy.Miffed.Sclera1,
             },
-            tint: {
-                primary: 0x9052c4,
-                secondary: 0xc22419,
-                tertiary: 0x1e803e,
+            tints: {
+                map: [0x9052c4, 0xc22419, 0x1e803e] as MapRgbFilter.Map,
             },
             values: {
                 eyesGap: 20,
@@ -168,9 +164,7 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
         ...hurtboxObjs,
         soulAnchorObj,
     )
-        .filtered(
-            new MapRgbFilter(theme.tint.primary, theme.tint.secondary, theme.tint.tertiary),
-        )
+        .filtered(new MapRgbFilter(...theme.tints.map))
         .pivoted(22, 41);
 
     const mouthObj = headObj.objects.faceObj.objects.mouthObj;
@@ -182,11 +176,7 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
             rank,
             soulAnchorObj,
         })
-        .mixin(mxnEnemyDeathBurst, {
-            primaryTint: theme.tint.primary,
-            secondaryTint: theme.tint.secondary,
-            tertiaryTint: theme.tint.primary,
-        })
+        .mixin(mxnEnemyDeathBurst, { map: theme.tints.map })
         .mixin(mxnPhysics, {
             gravity: 0.2,
             physicsRadius: 6,

@@ -68,16 +68,8 @@ const commonTheme = {
         face: 0xa0ff00,
         mouth: 0x000080,
     },
-    map: {
-        red: 0xCE3010,
-        green: 0x5D9938,
-        blue: 0x241DE2,
-        white: 0xffffff,
-    },
-    spirit: {
-        secondary: 0xDEB742,
-        tertiary: 0xDEB742,
-    },
+    map: [0xCE3010, 0x5D9938, 0x241DE2, 0xffffff] as MapRgbFilter.Map,
+    spirit: [0xCE3010, 0xDEB742, 0xDEB742] as MapRgbFilter.Map,
 };
 
 type Theme = typeof commonTheme;
@@ -107,16 +99,8 @@ const themes = {
             ...commonTheme.tints,
             face: 0xa000ff,
         },
-        map: {
-            red: 0x208525,
-            green: 0xffc21c,
-            blue: 0x5D9938,
-            white: 0xffffff,
-        },
-        spirit: {
-            secondary: 0x71EC4F,
-            tertiary: 0xffc21c,
-        },
+        map: [0x208525, 0xffc21c, 0x5D9938, 0xffffff] as MapRgbFilter.Map,
+        spirit: [0x208525, 0x71EC4F, 0xffc21c] as MapRgbFilter.Map,
     },
 } satisfies Record<string, Theme>;
 
@@ -367,12 +351,8 @@ export function objAngelSuggestive(variantKey: VariantKey) {
             hurtboxes: [hurtbox0, hurtbox1],
             healthbarAnchorObj,
         })
-        .mixin(mxnEnemyDeathBurst, {
-            primaryTint: theme.map.red,
-            secondaryTint: theme.spirit.secondary,
-            tertiaryTint: theme.spirit.tertiary,
-        })
-        .filtered(new MapRgbFilter(theme.map.red, theme.map.green, theme.map.blue, theme.map.white))
+        .mixin(mxnEnemyDeathBurst, { map: theme.spirit })
+        .filtered(new MapRgbFilter(...theme.map))
         .mixin(mxnDetectPlayer)
         .coro(function* (self) {
             while (true) {

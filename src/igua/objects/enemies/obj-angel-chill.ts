@@ -28,7 +28,7 @@ const themes = (function () {
         },
         tints: {
             eyelids: 0x0000ff,
-            map: [0xff0000, 0x00ff00, 0x0000ff],
+            map: [0xff0000, 0x00ff00, 0x0000ff] as MapRgbFilter.Map,
             pupils: [0x000000, 0x000000] as OneOrTwo<RgbInt>,
         },
     };
@@ -133,11 +133,7 @@ export function objAngelChill() {
         .filtered(new MapRgbFilter(...theme.tints.map))
         .mixin(mxnDetectPlayer)
         .mixin(mxnEnemy, { hurtboxes, rank, soulAnchorObj })
-        .mixin(mxnEnemyDeathBurst, {
-            primaryTint: theme.tints.map[0],
-            secondaryTint: theme.tints.map[1],
-            tertiaryTint: theme.tints.map[2],
-        })
+        .mixin(mxnEnemyDeathBurst, { map: theme.tints.map })
         .pivoted(0, bodyObj.height - 3)
         .coro(function* () {
             yield* moves.shieldWithWeakpoint();

@@ -12,14 +12,12 @@ import { objDieOnEmpty } from "../utils/obj-die-on-empty";
 import { objFxSpiritualRelease } from "./obj-fx-spiritual-release";
 
 interface ObjFxEnemyDefeatArgs {
-    primaryTint: RgbInt;
-    secondaryTint: RgbInt;
-    tertiaryTint: RgbInt;
+    map: MapRgbFilter.Map;
 }
 
 export function objFxEnemyDefeat(args: ObjFxEnemyDefeatArgs) {
     return objDieOnEmpty(
-        objFxSpiritualRelease.objBurst({ tints: [args.primaryTint, args.secondaryTint, args.tertiaryTint] }),
+        objFxSpiritualRelease.objBurst({ tints: args.map }),
         objFxSpiritPresence(args),
     );
 }
@@ -31,9 +29,11 @@ function objFxSpiritPresence(args: ObjFxEnemyDefeatArgs) {
     const characterObj = container(Sprite.from(txPresenceBody), Sprite.from(Rng.choose(...txsPresenceFace)))
         .pivoted(21, 26)
         .mixin(mxnBoilFlipH)
-        .filtered(new MapRgbFilter(args.primaryTint, args.secondaryTint, args.tertiaryTint));
+        .filtered(new MapRgbFilter(...args.map));
 
     const points = Empty<VectorSimple>();
+
+    const primaryTint = args.map[0];
 
     return container(
         gfx,
@@ -56,15 +56,15 @@ function objFxSpiritPresence(args: ObjFxEnemyDefeatArgs) {
                 }
 
                 points.push(characterObj.vcpy());
-                gfx.clear().lineStyle(1, args.primaryTint).moveTo(0, 0);
+                gfx.clear().lineStyle(1, primaryTint).moveTo(0, 0);
 
                 for (let i = 0; i < points.length; i++) {
                     const { x, y } = points[i];
                     if (i === 8) {
-                        gfx.lineStyle(2, args.primaryTint);
+                        gfx.lineStyle(2, primaryTint);
                     }
                     else if (i === 14) {
-                        gfx.lineStyle(3, args.primaryTint);
+                        gfx.lineStyle(3, primaryTint);
                     }
 
                     gfx.lineTo(x, y);

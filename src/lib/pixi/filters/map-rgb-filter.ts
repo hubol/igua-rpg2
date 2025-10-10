@@ -1,4 +1,5 @@
 import { Filter } from "pixi.js";
+import { RgbInt } from "../../math/number-alias-types";
 import { PixiFilterUtils } from "./pixi-filter-utils";
 
 const fragment = `varying vec2 vTextureCoord;
@@ -31,4 +32,12 @@ export class MapRgbFilter extends Filter {
         };
         super(undefined, fragment, uniforms);
     }
+}
+
+export namespace MapRgbFilter {
+    export type Map =
+        | [red: RgbInt]
+        | [red: RgbInt, green: RgbInt]
+        | [red: RgbInt, green: RgbInt, blue: RgbInt]
+        | [red: RgbInt, green: RgbInt, blue: RgbInt, white: RgbInt];
 }
