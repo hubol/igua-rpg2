@@ -1,12 +1,10 @@
-import { RgbInt } from "../../lib/math/number-alias-types";
+import { MapRgbFilter } from "../../lib/pixi/filters/map-rgb-filter";
 import { ZIndex } from "../core/scene/z-index";
 import { objFxEnemyDefeat } from "../objects/effects/obj-fx-enemy-defeat";
 import { MxnEnemy } from "./mxn-enemy";
 
 interface MxnEnemyDeathBurstArgs {
-    primaryTint: RgbInt;
-    secondaryTint: RgbInt;
-    tertiaryTint: RgbInt;
+    map: MapRgbFilter.Map;
 }
 
 export function mxnEnemyDeathBurst(obj: MxnEnemy, args: MxnEnemyDeathBurstArgs) {
