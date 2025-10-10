@@ -1828,7 +1828,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 446,
@@ -1907,6 +1908,30 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 472,
+          "y": 920,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#0b043b",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 512,
+          "y": 920,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#322c59",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -1933,6 +1958,18 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 607,
+          "y": 709,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#0b043b",
+          "texture": "world map/dome 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         },
         {
           "x": 317,
@@ -2260,13 +2297,13 @@
           "groupName": null
         },
         {
-          "x": 650,
-          "y": 718,
+          "x": 557,
+          "y": 697,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
-          "tint": "#503966",
-          "texture": "world map/landmarks/unusual tower.png",
+          "tint": "#322c59",
+          "texture": "world map/cloud 0.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -2281,6 +2318,57 @@
           "texture": "world map/landmarks/unusual tower.png",
           "originX": 0.5,
           "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 477,
+          "y": 572,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#baee25",
+          "texture": "world map/dome 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 641,
+          "y": 713,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#322c59",
+          "texture": "world map/cloud 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 650,
+          "y": 718,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#503966",
+          "texture": "world map/landmarks/unusual tower.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 608,
+          "y": 740,
+          "scaleX": 2.8,
+          "scaleY": 0.3,
+          "rotation": 0,
+          "tint": "#503966",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
           "values": {"name": ""}
         },
         {
@@ -2293,16 +2381,17 @@
           "texture": "world map/landmarks/splatter.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
-          "x": 477,
-          "y": 572,
+          "x": 624,
+          "y": 681,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
-          "tint": "#baee25",
-          "texture": "world map/dome 0.png",
+          "tint": "#322c59",
+          "texture": "world map/cloud 0.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}

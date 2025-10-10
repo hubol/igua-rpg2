@@ -262,7 +262,7 @@
           "_eid": "41461695",
           "x": 744,
           "y": 264,
-          "width": 672,
+          "width": 360,
           "height": 32,
           "originX": 0,
           "originY": 0,
@@ -278,7 +278,7 @@
           "height": 104,
           "originX": 0,
           "originY": 0,
-          "values": {"initialTint": "#540707", "targetTint": "#000000", "min": 1, "max": 5, "name": "", "depth": 0}
+          "values": {"initialTint": "#4b0303", "targetTint": "#000000", "min": 1, "max": 5, "name": "", "depth": 0}
         },
         {
           "name": "Door",
@@ -289,6 +289,18 @@
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnWorldMap", "checkpointName": "fromPlainsSuggestiveCavern", "name": "ExitChillEnemyDoor", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 6,
+          "_eid": "41461695",
+          "x": 1104,
+          "y": 264,
+          "width": 312,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#4b0303", "targetTint": "#000000", "min": 1, "max": 5, "name": "", "depth": 0}
         }
       ]
     },
