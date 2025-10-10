@@ -27,8 +27,8 @@ const themes = (function () {
             sclera: Tx.Enemy.Chill.Sclera0,
         },
         tints: {
-            eyelids: 0x0000ff,
-            map: [0xff0000, 0x00ff00, 0x0000ff] as MapRgbFilter.Map,
+            eyelids: 0xE02020,
+            map: [0x990000, 0xff6600, 0xffd000] as MapRgbFilter.Map,
             pupils: [0x000000, 0x000000] as OneOrTwo<RgbInt>,
         },
     };
