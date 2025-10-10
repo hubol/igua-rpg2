@@ -20,10 +20,14 @@ export function mxnSparkling(obj: DisplayObject) {
             while (sparkleUnit >= 1) {
                 const box = isContainer ? getRandomDeepChild(obj) : obj;
                 const bounds = box.getBounds(false, r);
-                const point = self.getGlobalPosition(p, false);
+
+                p.at(bounds).add(Rng.int(bounds.width), Rng.int(bounds.height));
+
+                self.parent.transform.worldTransform.applyInverse(p, p);
+
                 objValuableSparkle()
                     .tinted(self.sparklesTint)
-                    .at(point).at(self).add(bounds).add(point, -1).add(Rng.int(bounds.width), Rng.int(bounds.height))
+                    .at(p)
                     .show(self.parent);
 
                 sparkleUnit -= 1;
