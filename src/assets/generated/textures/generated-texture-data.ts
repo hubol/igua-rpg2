@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 432 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 433 }];
 
 interface TxData {
   id: string;
@@ -76,7 +76,7 @@ function txs<T>(tx: (data: TxData) => T) {
       },
       ValuableBlue: tx({ id: "Collectibles.ValuableBlue", atlas: 0, x: 871, y: 1176, width: 17, height: 13 }),
       ValuableGreen: tx({ id: "Collectibles.ValuableGreen", atlas: 0, x: 2041, y: 148, width: 7, height: 6 }),
-      ValuableOrange: tx({ id: "Collectibles.ValuableOrange", atlas: 0, x: 2031, y: 764, width: 17, height: 13 }),
+      ValuableOrange: tx({ id: "Collectibles.ValuableOrange", atlas: 0, x: 2031, y: 783, width: 17, height: 13 }),
     },
     Door: {
       NormalLockedLayer0: tx({ id: "Door.NormalLockedLayer0", atlas: 0, x: 784, y: 1099, width: 34, height: 46 }),
@@ -123,7 +123,7 @@ function txs<T>(tx: (data: TxData) => T) {
       SpiritualRelease0: tx({ id: "Effects.SpiritualRelease0", atlas: 0, x: 1393, y: 533, width: 416, height: 68 }),
       SplashMedium: tx({ id: "Effects.SplashMedium", atlas: 0, x: 1061, y: 1129, width: 72, height: 24 }),
       SplashSmall: tx({ id: "Effects.SplashSmall", atlas: 0, x: 1215, y: 1029, width: 96, height: 12 }),
-      Star12px: tx({ id: "Effects.Star12px", atlas: 0, x: 650, y: 1159, width: 12, height: 10 }),
+      Star12px: tx({ id: "Effects.Star12px", atlas: 0, x: 482, y: 590, width: 12, height: 10 }),
       StarDust: tx({ id: "Effects.StarDust", atlas: 0, x: 1813, y: 577, width: 224, height: 26 }),
       Starburst54: tx({ id: "Effects.Starburst54", atlas: 0, x: 1813, y: 705, width: 216, height: 56 }),
       SuperDust: tx({ id: "Effects.SuperDust", atlas: 0, x: 972, y: 533, width: 420, height: 26 }),
@@ -142,6 +142,7 @@ function txs<T>(tx: (data: TxData) => T) {
       Common: {
         Eyes: {
           Injured0: tx({ id: "Enemy.Common.Eyes.Injured0", atlas: 0, x: 538, y: 1010, width: 6, height: 10 }),
+          Injured1: tx({ id: "Enemy.Common.Eyes.Injured1", atlas: 0, x: 545, y: 929, width: 16, height: 18 }),
         },
         Mouths: {
           Rounded11: tx({ id: "Enemy.Common.Mouths.Rounded11", atlas: 0, x: 298, y: 1118, width: 33, height: 6 }),
@@ -213,11 +214,11 @@ function txs<T>(tx: (data: TxData) => T) {
       Flower14: tx({ id: "Foliage.Flower14", atlas: 0, x: 1499, y: 1087, width: 14, height: 8 }),
       Flower18: tx({ id: "Foliage.Flower18", atlas: 0, x: 463, y: 590, width: 18, height: 10 }),
       Flower22: tx({ id: "Foliage.Flower22", atlas: 0, x: 899, y: 1237, width: 22, height: 16 }),
-      Leaf16: tx({ id: "Foliage.Leaf16", atlas: 0, x: 2031, y: 778, width: 16, height: 16 }),
+      Leaf16: tx({ id: "Foliage.Leaf16", atlas: 0, x: 2031, y: 797, width: 16, height: 16 }),
       Leaf36: tx({ id: "Foliage.Leaf36", atlas: 0, x: 650, y: 1170, width: 36, height: 22 }),
       LeavesMedium0: tx({ id: "Foliage.LeavesMedium0", atlas: 0, x: 255, y: 1118, width: 42, height: 60 }),
       Medium0: tx({ id: "Foliage.Medium0", atlas: 0, x: 1838, y: 1057, width: 26, height: 31 }),
-      Moss0: tx({ id: "Foliage.Moss0", atlas: 0, x: 545, y: 929, width: 16, height: 18 }),
+      Moss0: tx({ id: "Foliage.Moss0", atlas: 0, x: 904, y: 1193, width: 16, height: 18 }),
       MossHanging0: tx({ id: "Foliage.MossHanging0", atlas: 0, x: 1499, y: 1042, width: 24, height: 44 }),
       RootMedium0: tx({ id: "Foliage.RootMedium0", atlas: 0, x: 1637, y: 1096, width: 48, height: 19 }),
       Small: tx({ id: "Foliage.Small", atlas: 0, x: 1412, y: 1227, width: 11, height: 17 }),
@@ -304,7 +305,7 @@ function txs<T>(tx: (data: TxData) => T) {
       AuraIrregular40: tx({ id: "Light.AuraIrregular40", atlas: 0, x: 1489, y: 1250, width: 44, height: 42 }),
       GlassMetalSheen20px: tx({ id: "Light.GlassMetalSheen20px", atlas: 0, x: 738, y: 1246, width: 14, height: 20 }),
       ShadowIguana: tx({ id: "Light.ShadowIguana", atlas: 0, x: 1637, y: 1116, width: 48, height: 10 }),
-      ShadowIrregularSmallRound: tx({ id: "Light.ShadowIrregularSmallRound", atlas: 0, x: 1701, y: 983, width: 12, height: 10 }),
+      ShadowIrregularSmallRound: tx({ id: "Light.ShadowIrregularSmallRound", atlas: 0, x: 650, y: 1159, width: 12, height: 10 }),
       ShadowIrregularSmall: tx({ id: "Light.ShadowIrregularSmall", atlas: 0, x: 596, y: 961, width: 16, height: 8 }),
       ShadowMessy0: tx({ id: "Light.ShadowMessy0", atlas: 0, x: 826, y: 1041, width: 58, height: 12 }),
     },
@@ -321,7 +322,7 @@ function txs<T>(tx: (data: TxData) => T) {
       Confetti32: tx({ id: "Shapes.Confetti32", atlas: 0, x: 922, y: 1183, width: 32, height: 32 }),
       DashedLine3px: tx({ id: "Shapes.DashedLine3px", atlas: 0, x: 2040, y: 432, width: 6, height: 98 }),
       DashedLineArc3px: tx({ id: "Shapes.DashedLineArc3px", atlas: 0, x: 0, y: 1226, width: 52, height: 46 }),
-      DitherSquare16: tx({ id: "Shapes.DitherSquare16", atlas: 0, x: 2031, y: 795, width: 16, height: 16 }),
+      DitherSquare16: tx({ id: "Shapes.DitherSquare16", atlas: 0, x: 2031, y: 814, width: 16, height: 16 }),
       LineVertical16: tx({ id: "Shapes.LineVertical16", atlas: 0, x: 1233, y: 806, width: 1, height: 16 }),
       LumpSmall0: tx({ id: "Shapes.LumpSmall0", atlas: 0, x: 835, y: 728, width: 12, height: 4 }),
       Quad22deg0: tx({ id: "Shapes.Quad22deg0", atlas: 0, x: 1358, y: 1042, width: 140, height: 78 }),
@@ -352,7 +353,7 @@ function txs<T>(tx: (data: TxData) => T) {
       BrickRows1: tx({ id: "Stone.BrickRows1", atlas: 0, x: 780, y: 1218, width: 24, height: 26 }),
       BrickRows3B: tx({ id: "Stone.BrickRows3B", atlas: 0, x: 394, y: 1200, width: 40, height: 22 }),
       BrickRows3: tx({ id: "Stone.BrickRows3", atlas: 0, x: 540, y: 1171, width: 40, height: 22 }),
-      BrickSingle0: tx({ id: "Stone.BrickSingle0", atlas: 0, x: 482, y: 590, width: 16, height: 10 }),
+      BrickSingle0: tx({ id: "Stone.BrickSingle0", atlas: 0, x: 545, y: 948, width: 16, height: 10 }),
       RockLargeShaded: tx({ id: "Stone.RockLargeShaded", atlas: 0, x: 819, y: 1104, width: 38, height: 26 }),
       RockPointy0: tx({ id: "Stone.RockPointy0", atlas: 0, x: 835, y: 699, width: 20, height: 28 }),
       RockSmallShaded1: tx({ id: "Stone.RockSmallShaded1", atlas: 0, x: 101, y: 1049, width: 7, height: 6 }),
@@ -377,9 +378,9 @@ function txs<T>(tx: (data: TxData) => T) {
         Crack28px38px: tx({ id: "Terrain.Earth.Crack28px38px", atlas: 0, x: 332, y: 1029, width: 28, height: 38 }),
         CrackSmall0: tx({ id: "Terrain.Earth.CrackSmall0", atlas: 0, x: 666, y: 1118, width: 8, height: 4 }),
         ExposedDirt: tx({ id: "Terrain.Earth.ExposedDirt", atlas: 0, x: 536, y: 1060, width: 80, height: 14 }),
-        Heart12px: tx({ id: "Terrain.Earth.Heart12px", atlas: 0, x: 770, y: 1122, width: 12, height: 10 }),
+        Heart12px: tx({ id: "Terrain.Earth.Heart12px", atlas: 0, x: 1701, y: 983, width: 12, height: 10 }),
         Heart24px: tx({ id: "Terrain.Earth.Heart24px", atlas: 0, x: 778, y: 1245, width: 24, height: 18 }),
-        Loop: tx({ id: "Terrain.Earth.Loop", atlas: 0, x: 904, y: 1193, width: 17, height: 18 }),
+        Loop: tx({ id: "Terrain.Earth.Loop", atlas: 0, x: 2031, y: 751, width: 17, height: 18 }),
         Mass0: tx({ id: "Terrain.Earth.Mass0", atlas: 0, x: 1499, y: 1096, width: 137, height: 81 }),
         QuestionMarkStencil0: tx({ id: "Terrain.Earth.QuestionMarkStencil0", atlas: 0, x: 0, y: 1273, width: 22, height: 14 }),
         QuestionMark: tx({ id: "Terrain.Earth.QuestionMark", atlas: 0, x: 2030, y: 705, width: 18, height: 24 }),
@@ -411,7 +412,7 @@ function txs<T>(tx: (data: TxData) => T) {
     },
     Town: {
       Ball: {
-        Ball0: tx({ id: "Town.Ball.Ball0", atlas: 0, x: 770, y: 1133, width: 12, height: 12 }),
+        Ball0: tx({ id: "Town.Ball.Ball0", atlas: 0, x: 770, y: 1122, width: 12, height: 12 }),
         Ball1: tx({ id: "Town.Ball.Ball1", atlas: 0, x: 1510, y: 770, width: 14, height: 12 }),
         Brick0: tx({ id: "Town.Ball.Brick0", atlas: 0, x: 618, y: 1193, width: 36, height: 30 }),
         Brick1: tx({ id: "Town.Ball.Brick1", atlas: 0, x: 577, y: 1211, width: 36, height: 20 }),
@@ -445,7 +446,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Mouth2: tx({ id: "Town.Colossus.Mouth2", atlas: 0, x: 187, y: 1225, width: 50, height: 14 }),
         Mouth3: tx({ id: "Town.Colossus.Mouth3", atlas: 0, x: 841, y: 223, width: 124, height: 14 }),
         Noggin0: tx({ id: "Town.Colossus.Noggin0", atlas: 0, x: 538, y: 1021, width: 84, height: 38 }),
-        Nose0: tx({ id: "Town.Colossus.Nose0", atlas: 0, x: 2030, y: 751, width: 18, height: 12 }),
+        Nose0: tx({ id: "Town.Colossus.Nose0", atlas: 0, x: 2030, y: 770, width: 18, height: 12 }),
         Pupil0: tx({ id: "Town.Colossus.Pupil0", atlas: 0, x: 180, y: 1091, width: 8, height: 16 }),
         Pupil1: tx({ id: "Town.Colossus.Pupil1", atlas: 0, x: 2013, y: 285, width: 34, height: 14 }),
         Pupil2: tx({ id: "Town.Colossus.Pupil2", atlas: 0, x: 805, y: 1146, width: 12, height: 12 }),
@@ -517,7 +518,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Increment: tx({ id: "Ui.Experience.Increment", atlas: 0, x: 681, y: 321, width: 264, height: 32 }),
       },
       FlopMax: tx({ id: "Ui.FlopMax", atlas: 0, x: 151, y: 1169, width: 12, height: 6 }),
-      FreePotionSlots: tx({ id: "Ui.FreePotionSlots", atlas: 0, x: 545, y: 948, width: 16, height: 12 }),
+      FreePotionSlots: tx({ id: "Ui.FreePotionSlots", atlas: 0, x: 2031, y: 831, width: 16, height: 12 }),
       HorizontalBar9: tx({ id: "Ui.HorizontalBar9", atlas: 0, x: 501, y: 504, width: 500, height: 9 }),
       InteractionIndicator: tx({ id: "Ui.InteractionIndicator", atlas: 0, x: 0, y: 1288, width: 22, height: 22 }),
       Inventory: {
