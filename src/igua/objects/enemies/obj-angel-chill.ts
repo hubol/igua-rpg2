@@ -79,7 +79,7 @@ export function objAngelChill() {
                 .merge({ initialScale: vnew(1, 0) });
 
             const topAoeObj = new Graphics()
-                .beginFill(0xffff00)
+                .beginFill(0xff0000)
                 .drawRect(-90, -134, 166, 32)
                 .pivoted(76, 0)
                 .at(76, 0)
@@ -109,11 +109,12 @@ export function objAngelChill() {
                     yield sleep(1000);
                 }
 
+                rootObj.scale.x *= -1;
+                rootObj.pivot.x = rootObj.scale.x < 0 ? -3 : 0;
+
                 for (const obj of reversedAoeObjs) {
                     yield interpv(obj.scale).to(obj.initialScale).over(1000);
                 }
-
-                rootObj.scale.x *= -1;
             }
         },
     };
