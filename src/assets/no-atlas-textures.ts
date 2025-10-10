@@ -16,6 +16,11 @@ type NoAtlasTextures = Awaited<ReturnType<typeof createNoAtlasTx>>;
 
 async function createNoAtlasTx(tx: typeof Tx) {
     return {
+        Enemy: {
+            Chill: {
+                Aoe: await repeat(tx.Enemy.Chill.Aoe),
+            },
+        },
         Terrain: {
             Pipe: {
                 Gray: await repeat(tx.Terrain.Pipe.Gray),

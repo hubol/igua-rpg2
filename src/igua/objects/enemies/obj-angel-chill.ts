@@ -1,8 +1,9 @@
-import { DisplayObject, Graphics, Sprite } from "pixi.js";
+import { DisplayObject, Graphics, Sprite, TilingSprite } from "pixi.js";
+import { NoAtlasTx } from "../../../assets/no-atlas-textures";
 import { Tx } from "../../../assets/textures";
 import { OneOrTwo } from "../../../lib/array/one-or-two";
 import { factor, interpv } from "../../../lib/game-engine/routines/interp";
-import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { RgbInt } from "../../../lib/math/number-alias-types";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
@@ -12,6 +13,7 @@ import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
+import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objAngelEyes } from "./obj-angel-eyes";
@@ -78,6 +80,15 @@ export function objAngelChill() {
 
     const moves = {
         *shieldWithWeakpoint() {
+            const aoeSprite = new TilingSprite(NoAtlasTx.Enemy.Chill.Aoe, 300, 300)
+                .at(-90, -134)
+                .coro(function* (self) {
+                    while (true) {
+                        yield sleepf(5);
+                        self.tilePosition.add(1, 1);
+                    }
+                });
+
             const leftAoeObj = new Graphics()
                 .beginFill(0xff0000)
                 .drawRect(0, 0, 32, 134)
@@ -102,7 +113,8 @@ export function objAngelChill() {
                 .mixin(mxnShield)
                 .merge({ initialScale: vnew(1, 0) });
 
-            const rootObj = container(leftAoeObj, topAoeObj, rightAoeObj).at(enemyObj).show();
+            const aoeMaskObj = container(leftAoeObj, topAoeObj, rightAoeObj);
+            const rootObj = container(aoeMaskObj, aoeSprite.masked(aoeMaskObj)).at(enemyObj).show();
 
             const aoeObjs = [rightAoeObj, topAoeObj, leftAoeObj];
             const reversedAoeObjs = [...aoeObjs].reverse();
@@ -117,8 +129,8 @@ export function objAngelChill() {
                     yield sleep(1000);
                 }
 
-                rootObj.scale.x *= -1;
-                rootObj.pivot.x = rootObj.scale.x < 0 ? -3 : 0;
+                aoeMaskObj.scale.x *= -1;
+                aoeMaskObj.pivot.x = aoeMaskObj.scale.x < 0 ? -3 : 0;
 
                 for (const obj of reversedAoeObjs) {
                     yield interpv(obj.scale).to(obj.initialScale).over(1000);
@@ -184,11 +196,15 @@ function objAngelChillHead(theme: Theme) {
 }
 
 function mxnShield(obj: DisplayObject) {
-    return obj.step(() => {
-        if (obj.is(mxnRpgAttack)) {
-            obj.isAttackActive = obj.scale.x !== 0 && obj.scale.y !== 0;
-        }
-    });
+    return obj
+        .mixin(mxnSparkling)
+        .step((self) => {
+            const hasScale = obj.scale.x !== 0 && obj.scale.y !== 0;
+            self.sparklesPerFrame = hasScale ? 2 : 0;
+            if (obj.is(mxnRpgAttack)) {
+                obj.isAttackActive = hasScale;
+            }
+        });
 }
 
 const atkAoe = RpgAttack.create({
