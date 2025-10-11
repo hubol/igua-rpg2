@@ -81,6 +81,25 @@ export namespace DataEquipment {
                     }
                 },
             },
+            BallonLastLonger: {
+                name: "Load Lightener",
+                texture: null,
+                description: "Ballons drain slower",
+                buffs: (() => {
+                    const values = [50, 67, 75, 80, 85, 90, 93, 95, 97, 98, 99];
+
+                    return (model, bonus) => {
+                        const value = values[bonus] ?? values.last;
+                        model.conditions.ballonDrainReductionFactor += value;
+                        const additionalBonuses = bonus - values.length + 1;
+                        if (additionalBonuses > 0) {
+                            model.loot.pocket.bonusChance += additionalBonuses;
+                            model.loot.valuables.bonus += Math.round(additionalBonuses / 2);
+                            model.loot.tiers.nothingRerollCount += Math.round(additionalBonuses / 3);
+                        }
+                    };
+                })(),
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,

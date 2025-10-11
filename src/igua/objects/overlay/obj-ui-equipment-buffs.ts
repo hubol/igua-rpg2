@@ -208,6 +208,7 @@ const getBuffInformations = (function () {
         buff("motion.jump.bonusAtSpecialSigns", "Special Jump", "integer", "beneft_when_positive"),
         buff("attributes.intelligence", "Intelligence", "integer", "beneft_when_positive"),
         buff("combat.defense.faction.miner", "Defense Against Miners", "percent", "beneft_when_positive"),
+        buff("conditions.ballonDrainReductionFactor", "Ballons Drain Slower", "percent", "beneft_when_positive"),
     );
 
     const fn = new Function(

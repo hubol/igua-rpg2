@@ -20,6 +20,7 @@ export namespace RpgStatus {
         pride: number;
         conditions: {
             helium: {
+                ballonDrainFactor: PercentAsInteger;
                 ballons: Ballon[];
                 value: Integer;
                 max: Integer;
@@ -74,8 +75,8 @@ export namespace RpgStatus {
 
     export function createBallon(): Ballon {
         return {
-            health: 100,
-            healthMax: 100,
+            health: 100 * 800,
+            healthMax: 100 * 800,
             seed: Rng.intc(8_000_000, 24_000_000),
         };
     }
@@ -156,11 +157,13 @@ export namespace RpgStatus {
             if (count % 4 === 0) {
                 model.conditions.wetness.value = Math.max(0, model.conditions.wetness.value - model.recoveries.wetness);
             }
-            if (model.state.ballonHealthMayDrain && count % 8 === 0) {
+            if (model.state.ballonHealthMayDrain) {
+                const healthDelta = -Math.max(1, model.conditions.helium.ballonDrainFactor);
+
                 let i = 0;
                 while (i < model.conditions.helium.ballons.length) {
                     const ballon = model.conditions.helium.ballons[i];
-                    ballon.health = Math.max(0, ballon.health - 1);
+                    ballon.health = Math.max(0, ballon.health + healthDelta);
                     if (ballon.health === 0) {
                         model.conditions.helium.ballons.splice(i, 1);
                         effects.ballonHealthDepleted(ballon);

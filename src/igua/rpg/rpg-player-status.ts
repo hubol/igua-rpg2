@@ -42,11 +42,15 @@ export class RpgPlayerStatus implements RpgStatus.Model {
 
     pride = 0;
 
-    readonly conditions = (() => {
+    readonly conditions = ((): RpgStatus.Model["conditions"] => {
+        const buffs = this._buffs;
         const state = this._state;
 
         return ({
             helium: {
+                get ballonDrainFactor() {
+                    return 100 - buffs.getAggregatedBuffs().conditions.ballonDrainReductionFactor;
+                },
                 get ballons() {
                     return state.conditions.helium.ballons;
                 },

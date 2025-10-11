@@ -25,6 +25,9 @@ export namespace RpgPlayerBuffs {
                     },
                 },
             },
+            conditions: {
+                ballonDrainReductionFactor: <PercentAsInteger> 0,
+            },
             loot: {
                 pocket: {
                     bonusChance: <PercentAsInteger> 0,
