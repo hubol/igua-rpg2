@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 435 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 436 }];
 
 interface TxData {
   id: string;
@@ -207,7 +207,7 @@ function txs<T>(tx: (data: TxData) => T) {
       Cobweb0: tx({ id: "Fiber.Cobweb0", atlas: 0, x: 423, y: 1306, width: 30, height: 28 }),
       Cobweb1: tx({ id: "Fiber.Cobweb1", atlas: 0, x: 2022, y: 78, width: 20, height: 28 }),
       RopeFrame: tx({ id: "Fiber.RopeFrame", atlas: 0, x: 185, y: 1201, width: 37, height: 28 }),
-      StringOnStake0: tx({ id: "Fiber.StringOnStake0", atlas: 0, x: 1762, y: 1208, width: 8, height: 6 }),
+      StringOnStake0: tx({ id: "Fiber.StringOnStake0", atlas: 0, x: 841, y: 240, width: 8, height: 6 }),
     },
     Foliage: {
       BranchCut0: tx({ id: "Foliage.BranchCut0", atlas: 0, x: 508, y: 1329, width: 24, height: 14 }),
@@ -356,6 +356,7 @@ function txs<T>(tx: (data: TxData) => T) {
       BrickRows3B: tx({ id: "Stone.BrickRows3B", atlas: 0, x: 0, y: 1319, width: 40, height: 22 }),
       BrickRows3: tx({ id: "Stone.BrickRows3", atlas: 0, x: 0, y: 1342, width: 40, height: 22 }),
       BrickSingle0: tx({ id: "Stone.BrickSingle0", atlas: 0, x: 160, y: 1125, width: 16, height: 10 }),
+      BrickSingle1: tx({ id: "Stone.BrickSingle1", atlas: 0, x: 572, y: 497, width: 12, height: 6 }),
       RockLargeShaded: tx({ id: "Stone.RockLargeShaded", atlas: 0, x: 41, y: 1319, width: 38, height: 26 }),
       RockPointy0: tx({ id: "Stone.RockPointy0", atlas: 0, x: 788, y: 1117, width: 20, height: 28 }),
       RockSmallShaded1: tx({ id: "Stone.RockSmallShaded1", atlas: 0, x: 87, y: 1091, width: 7, height: 6 }),
@@ -519,7 +520,7 @@ function txs<T>(tx: (data: TxData) => T) {
         IncrementBg: tx({ id: "Ui.Experience.IncrementBg", atlas: 0, x: 1526, y: 886, width: 188, height: 26 }),
         Increment: tx({ id: "Ui.Experience.Increment", atlas: 0, x: 681, y: 321, width: 264, height: 32 }),
       },
-      FlopMax: tx({ id: "Ui.FlopMax", atlas: 0, x: 572, y: 497, width: 12, height: 6 }),
+      FlopMax: tx({ id: "Ui.FlopMax", atlas: 0, x: 1762, y: 1208, width: 12, height: 6 }),
       FreePotionSlots: tx({ id: "Ui.FreePotionSlots", atlas: 0, x: 290, y: 1285, width: 16, height: 12 }),
       HorizontalBar9: tx({ id: "Ui.HorizontalBar9", atlas: 0, x: 501, y: 504, width: 500, height: 9 }),
       InteractionIndicator: tx({ id: "Ui.InteractionIndicator", atlas: 0, x: 262, y: 1341, width: 22, height: 22 }),

@@ -1,11 +1,11 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 500,
+  "width": 688,
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#000000"},
   "backgroundColor": "#408000",
+  "values": {"Terrain Color": "#000000"},
   "layers": [
     {
       "name": "MarkerEntities",
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 86,
       "gridCellsY": 35,
       "entities": []
     },
@@ -25,7 +25,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 86,
       "gridCellsY": 35,
       "entities": []
     },
@@ -36,7 +36,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 86,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -48,7 +48,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 86,
       "gridCellsY": 35,
       "entities": []
     },
@@ -59,19 +59,52 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 86,
       "gridCellsY": 35,
       "entities": [
         {
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
-          "x": 112,
-          "y": 200,
+          "x": 288,
+          "y": 216,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 1,
+          "_eid": "19953026",
+          "x": 408,
+          "y": 216,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
-          "values": {"name": "", "depth": 0}
+          "values": {"name": "fromExteriorLeft", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 2,
+          "_eid": "19953026",
+          "x": 536,
+          "y": 216,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromNurse", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 3,
+          "_eid": "19953026",
+          "x": 152,
+          "y": 216,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromLectureHall", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -82,54 +115,9 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 86,
       "gridCellsY": 35,
-      "entities": [
-        {
-          "name": "IguanaNpc",
-          "id": 1,
-          "_eid": "90326278",
-          "x": 272,
-          "y": 184,
-          "originX": 20,
-          "originY": 52,
-          "flippedX": true,
-          "values": {"personaName": "IndianaStudent0", "name": "", "depth": 0}
-        },
-        {
-          "name": "IguanaNpc",
-          "id": 2,
-          "_eid": "90326278",
-          "x": 336,
-          "y": 168,
-          "originX": 20,
-          "originY": 52,
-          "flippedX": true,
-          "values": {"personaName": "IndianaStudent1", "name": "", "depth": 0}
-        },
-        {
-          "name": "IguanaNpc",
-          "id": 3,
-          "_eid": "90326278",
-          "x": 400,
-          "y": 152,
-          "originX": 20,
-          "originY": 52,
-          "flippedX": true,
-          "values": {"personaName": "IndianaStudent2", "name": "", "depth": 0}
-        },
-        {
-          "name": "IguanaNpc",
-          "id": 4,
-          "_eid": "90326278",
-          "x": 456,
-          "y": 136,
-          "originX": 20,
-          "originY": 52,
-          "flippedX": true,
-          "values": {"personaName": "IndianaStudent3", "name": "", "depth": 0}
-        }
-      ]
+      "entities": []
     },
     {
       "name": "AboveEntitiesDecals",
@@ -138,7 +126,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 86,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -150,18 +138,48 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 86,
       "gridCellsY": 35,
       "entities": [
         {
           "name": "Door",
           "id": 0,
           "_eid": "88296692",
-          "x": 48,
-          "y": 152,
+          "x": 104,
+          "y": 168,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "scnIndianaUniversityInterior", "checkpointName": "fromLectureHall", "name": "", "depth": 0}
+          "values": {"sceneName": "scnCollege0", "checkpointName": "", "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 1,
+          "_eid": "88296692",
+          "x": 552,
+          "y": 168,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "", "checkpointName": "", "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 2,
+          "_eid": "88296692",
+          "x": 296,
+          "y": 168,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnIndianaUniversity", "checkpointName": "fromInteriorLeft", "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 3,
+          "_eid": "88296692",
+          "x": 360,
+          "y": 168,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnIndianaUniversity", "checkpointName": "fromInteriorRight", "name": "", "depth": 0}
         }
       ]
     },
@@ -172,23 +190,9 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 86,
       "gridCellsY": 35,
-      "decals": [
-        {
-          "x": 168,
-          "y": 192,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#1853ad",
-          "texture": "town/ball/structure highlight.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": "Podium"},
-          "groupName": null
-        }
-      ],
+      "decals": [],
       "folder": "../textures"
     },
     {
@@ -198,7 +202,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 86,
       "gridCellsY": 35,
       "entities": [
         {
@@ -207,8 +211,8 @@
           "_eid": "93117141",
           "x": 0,
           "y": 0,
-          "width": 24,
-          "height": 280,
+          "width": 688,
+          "height": 64,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
@@ -218,10 +222,10 @@
           "name": "Block",
           "id": 1,
           "_eid": "93117141",
-          "x": 476,
-          "y": 0,
-          "width": 24,
-          "height": 280,
+          "x": 0,
+          "y": 216,
+          "width": 688,
+          "height": 64,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
@@ -231,10 +235,10 @@
           "name": "Block",
           "id": 2,
           "_eid": "93117141",
-          "x": 24,
-          "y": 0,
-          "width": 456,
-          "height": 80,
+          "x": 0,
+          "y": 64,
+          "width": 56,
+          "height": 152,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
@@ -244,62 +248,10 @@
           "name": "Block",
           "id": 3,
           "_eid": "93117141",
-          "x": 24,
-          "y": 200,
-          "width": 456,
-          "height": 80,
-          "originX": 0,
-          "originY": 0,
-          "tint": "#000000",
-          "values": {"name": "", "depth": 0, "visible": true}
-        },
-        {
-          "name": "Block",
-          "id": 4,
-          "_eid": "93117141",
-          "x": 240,
-          "y": 184,
-          "width": 240,
-          "height": 16,
-          "originX": 0,
-          "originY": 0,
-          "tint": "#000000",
-          "values": {"name": "", "depth": 0, "visible": true}
-        },
-        {
-          "name": "Block",
-          "id": 5,
-          "_eid": "93117141",
-          "x": 304,
-          "y": 168,
-          "width": 240,
-          "height": 16,
-          "originX": 0,
-          "originY": 0,
-          "tint": "#000000",
-          "values": {"name": "", "depth": 0, "visible": true}
-        },
-        {
-          "name": "Block",
-          "id": 7,
-          "_eid": "93117141",
-          "x": 368,
-          "y": 152,
-          "width": 240,
-          "height": 16,
-          "originX": 0,
-          "originY": 0,
-          "tint": "#000000",
-          "values": {"name": "", "depth": 0, "visible": true}
-        },
-        {
-          "name": "Block",
-          "id": 9,
-          "_eid": "93117141",
-          "x": 432,
-          "y": 136,
-          "width": 240,
-          "height": 16,
+          "x": 632,
+          "y": 64,
+          "width": 56,
+          "height": 152,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
@@ -314,7 +266,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 86,
       "gridCellsY": 35,
       "entities": []
     },
@@ -325,7 +277,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 86,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -337,7 +289,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 86,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"

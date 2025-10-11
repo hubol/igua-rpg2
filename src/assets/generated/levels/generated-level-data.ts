@@ -196,11 +196,11 @@ export const Lvl = {
       Block_6: e(r["Block"], { x: 368, y: 152, width: 240, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_7: e(r["Block"], { x: 432, y: 136, width: 240, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Podium: d(Tx.Town.Ball.StructureHighlight, { x: 168, y: 192, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x1853ad }, "TerrainDecals"),
-      Door: e(r["Door"], { x: 48, y: 152, values: { sceneName: "scnWorldMap", checkpointName: "fromCollege0", name: "", depth: 0 } }, "Entities"),
-      IguanaNpc: e(r["IguanaNpc"], { x: 272, y: 184, flippedX: true, values: { personaName: "", name: "", depth: 0 } }, "CharacterEntities"),
-      IguanaNpc_1: e(r["IguanaNpc"], { x: 336, y: 168, flippedX: true, values: { personaName: "", name: "", depth: 0 } }, "CharacterEntities"),
-      IguanaNpc_2: e(r["IguanaNpc"], { x: 400, y: 152, flippedX: true, values: { personaName: "", name: "", depth: 0 } }, "CharacterEntities"),
-      IguanaNpc_3: e(r["IguanaNpc"], { x: 456, y: 136, flippedX: true, values: { personaName: "", name: "", depth: 0 } }, "CharacterEntities"),
+      Door: e(r["Door"], { x: 48, y: 152, values: { sceneName: "scnIndianaUniversityInterior", checkpointName: "fromLectureHall", name: "", depth: 0 } }, "Entities"),
+      IguanaNpc: e(r["IguanaNpc"], { x: 272, y: 184, flippedX: true, values: { personaName: "IndianaStudent0", name: "", depth: 0 } }, "CharacterEntities"),
+      IguanaNpc_1: e(r["IguanaNpc"], { x: 336, y: 168, flippedX: true, values: { personaName: "IndianaStudent1", name: "", depth: 0 } }, "CharacterEntities"),
+      IguanaNpc_2: e(r["IguanaNpc"], { x: 400, y: 152, flippedX: true, values: { personaName: "IndianaStudent2", name: "", depth: 0 } }, "CharacterEntities"),
+      IguanaNpc_3: e(r["IguanaNpc"], { x: 456, y: 136, flippedX: true, values: { personaName: "IndianaStudent3", name: "", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 112, y: 200, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     };
   },
@@ -327,6 +327,91 @@ export const Lvl = {
   Dummy: () => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x408000 });
     return { Block: e(r["Block"], { x: 0, y: 200, width: 504, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"), Player: e(r["Player"], { x: 104, y: 200, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"), DummyMarker: e(r["Marker"], { x: 280, y: 200, values: { name: "DummyMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities") };
+  },
+  IndianaUniversityInterior: () => {
+    applyLevel({ width: 688, height: 280, backgroundTint: 0x408000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 0, width: 688, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 0, y: 216, width: 688, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 0, y: 64, width: 56, height: 152, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 632, y: 64, width: 56, height: 152, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Door: e(r["Door"], { x: 104, y: 168, values: { sceneName: "scnCollege0", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+      Door_1: e(r["Door"], { x: 552, y: 168, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+      Door_2: e(r["Door"], { x: 296, y: 168, values: { sceneName: "scnIndianaUniversity", checkpointName: "fromInteriorLeft", name: "", depth: 0 } }, "Entities"),
+      Door_3: e(r["Door"], { x: 360, y: 168, values: { sceneName: "scnIndianaUniversity", checkpointName: "fromInteriorRight", name: "", depth: 0 } }, "Entities"),
+      Player: e(r["Player"], { x: 288, y: 216, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      fromExteriorLeft: e(r["Checkpoint"], { x: 408, y: 216, flippedX: false, values: { name: "fromExteriorLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromNurse: e(r["Checkpoint"], { x: 536, y: 216, flippedX: true, values: { name: "fromNurse", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromLectureHall: e(r["Checkpoint"], { x: 152, y: 216, flippedX: false, values: { name: "fromLectureHall", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+    };
+  },
+  IndianaUniversity: () => {
+    applyLevel({ width: 832, height: 312, backgroundTint: 0x00803b });
+    return {
+      ShapesSquare32: d(Tx.Shapes.Square32, { x: 144, y: 168, scaleX: 17, scaleY: 3, rotation: 0, originX: 0, originY: 0, tint: 0xd58b55 }, "BackgroundDecals"),
+      ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 416, y: 112, scaleX: 4, scaleY: 4, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xd58b55 }, "BackgroundDecals"),
+      StoneBrickRows1: d(Tx.Stone.BrickRows1, { x: 457, y: 82, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickRows1_1: d(Tx.Stone.BrickRows1, { x: 372, y: 134, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickRows0: d(Tx.Stone.BrickRows0, { x: 663, y: 193, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickRows0_1: d(Tx.Stone.BrickRows0, { x: 169, y: 243, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickRows1_2: d(Tx.Stone.BrickRows1, { x: 220, y: 191, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickRows1_3: d(Tx.Stone.BrickRows1, { x: 624, y: 245, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickRows1_4: d(Tx.Stone.BrickRows1, { x: 267, y: 224, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickRows1_5: d(Tx.Stone.BrickRows1, { x: 557, y: 193, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickRows0_2: d(Tx.Stone.BrickRows0, { x: 312, y: 248, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickRows0_3: d(Tx.Stone.BrickRows0, { x: 343, y: 191, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickRows0_4: d(Tx.Stone.BrickRows0, { x: 537, y: 245, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickRows0_5: d(Tx.Stone.BrickRows0, { x: 486, y: 196, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      ShapesSquare32_2: d(Tx.Shapes.Square32, { x: 140, y: 168, scaleX: 7, scaleY: 0.125, rotation: 0, originX: 0, originY: 0, tint: 0xb44d13 }, "BackgroundDecals"),
+      ShapesSquare32_3: d(Tx.Shapes.Square32, { x: 468, y: 168, scaleX: 7, scaleY: 0.125, rotation: 0, originX: 0, originY: 0, tint: 0xb44d13 }, "BackgroundDecals"),
+      ShapesSquare32_4: d(Tx.Shapes.Square32, { x: 348, y: 48, scaleX: 4.25, scaleY: 0.125, rotation: 0, originX: 0, originY: 0, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickSingle1: d(Tx.Stone.BrickSingle1, { x: 325, y: 192, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickSingle1_1: d(Tx.Stone.BrickSingle1, { x: 492, y: 212, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickSingle1_2: d(Tx.Stone.BrickSingle1, { x: 366, y: 119, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickSingle1_3: d(Tx.Stone.BrickSingle1, { x: 394, y: 144, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickSingle1_4: d(Tx.Stone.BrickSingle1, { x: 463, y: 67, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickSingle1_5: d(Tx.Stone.BrickSingle1, { x: 576, y: 194, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickSingle1_6: d(Tx.Stone.BrickSingle1, { x: 606, y: 245, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickSingle1_7: d(Tx.Stone.BrickSingle1, { x: 652, y: 185, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickSingle1_8: d(Tx.Stone.BrickSingle1, { x: 239, y: 191, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      StoneBrickSingle1_9: d(Tx.Stone.BrickSingle1, { x: 246, y: 182, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      TerrainGrassCloudy: d(Tx.Terrain.Grass.Cloudy, { x: 387, y: 48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      TerrainGrassCloudy_1: d(Tx.Terrain.Grass.Cloudy, { x: 445, y: 48, scaleX: -1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      TerrainGrassCloudy_2: d(Tx.Terrain.Grass.Cloudy, { x: 503, y: 168, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      TerrainGrassCloudy_3: d(Tx.Terrain.Grass.Cloudy, { x: 576, y: 168, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      TerrainGrassCloudy_4: d(Tx.Terrain.Grass.Cloudy, { x: 649, y: 168, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      TerrainGrassCloudy_5: d(Tx.Terrain.Grass.Cloudy, { x: 178, y: 168, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      TerrainGrassCloudy_6: d(Tx.Terrain.Grass.Cloudy, { x: 251, y: 168, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      TerrainGrassCloudy_7: d(Tx.Terrain.Grass.Cloudy, { x: 324, y: 168, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb44d13 }, "BackgroundDecals"),
+      Block: e(r["Block"], { x: 128, y: 264, width: 576, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x215700 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 0, y: 264, width: 128, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x215700 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 704, y: 264, width: 128, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x215700 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 0, y: 296, width: 832, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x215700 }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 144, y: 168, width: 208, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
+      Pipe_1: e(r["Pipe"], { x: 480, y: 168, width: 208, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
+      Pipe_2: e(r["Pipe"], { x: 352, y: 48, width: 128, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
+      Window0: d(Tx.Shapes.Square32, { x: 168, y: 200, scaleX: 2, scaleY: 1.25, rotation: 0, originX: 0, originY: 0, tint: 0x68ba8e }, "TerrainDecals"),
+      Window1: d(Tx.Shapes.Square32, { x: 264, y: 200, scaleX: 2, scaleY: 1.25, rotation: 0, originX: 0, originY: 0, tint: 0x68ba8e }, "TerrainDecals"),
+      Window2: d(Tx.Shapes.Square32, { x: 504, y: 200, scaleX: 2, scaleY: 1.25, rotation: 0, originX: 0, originY: 0, tint: 0x68ba8e }, "TerrainDecals"),
+      Window3: d(Tx.Shapes.Square32, { x: 600, y: 200, scaleX: 2, scaleY: 1.25, rotation: 0, originX: 0, originY: 0, tint: 0x68ba8e }, "TerrainDecals"),
+      ShapesSquare32_5: d(Tx.Shapes.Square32, { x: 416, y: 104, scaleX: 2, scaleY: 2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x68ba8e }, "TerrainDecals"),
+      LightGlassMetalSheen20px: d(Tx.Light.GlassMetalSheen20px, { x: 436, y: 87, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      LightGlassMetalSheen20px_1: d(Tx.Light.GlassMetalSheen20px, { x: 556, y: 215, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      LightGlassMetalSheen20px_2: d(Tx.Light.GlassMetalSheen20px, { x: 654, y: 212, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      LightGlassMetalSheen20px_3: d(Tx.Light.GlassMetalSheen20px, { x: 318, y: 213, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      LightGlassMetalSheen20px_4: d(Tx.Light.GlassMetalSheen20px, { x: 222, y: 213, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      Door: e(r["Door"], { x: 368, y: 216, values: { sceneName: "scnIndianaUniversityInterior", checkpointName: "fromExteriorLeft", name: "", depth: 0 } }, "Entities"),
+      Door_1: e(r["Door"], { x: 432, y: 216, values: { sceneName: "scnIndianaUniversityInterior", checkpointName: "fromExteriorRight", name: "", depth: 0 } }, "Entities"),
+      StudentNpc0: e(r["IguanaNpc"], { x: 184, y: 256, flippedX: false, values: { personaName: "IndianaStudent0", name: "StudentNpc0", depth: 0 } }, "CharacterEntities"),
+      StudentNpc1: e(r["IguanaNpc"], { x: 272, y: 256, flippedX: false, values: { personaName: "IndianaStudent1", name: "StudentNpc1", depth: 0 } }, "CharacterEntities"),
+      StudentNpc2: e(r["IguanaNpc"], { x: 552, y: 256, flippedX: true, values: { personaName: "IndianaStudent2", name: "StudentNpc2", depth: 0 } }, "CharacterEntities"),
+      StudentNpc3: e(r["IguanaNpc"], { x: 656, y: 256, flippedX: true, values: { personaName: "IndianaStudent3", name: "StudentNpc3", depth: 0 } }, "CharacterEntities"),
+      Player: e(r["Player"], { x: 56, y: 280, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      fromInteriorRight: e(r["Checkpoint"], { x: 352, y: 264, flippedX: true, values: { name: "fromInteriorRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromInteriorLeft: e(r["Checkpoint"], { x: 480, y: 264, flippedX: false, values: { name: "fromInteriorLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -32, y: 184, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaUniversity", name: "", depth: 0 } }, "RegionEntities"),
+      GateHorizontal_1: e(r["GateHorizontal"], { x: 768, y: 176, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaUniversity", name: "", depth: 0 } }, "RegionEntities"),
+    };
   },
   MenuIguanaDesigner: () => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x002c38 });
@@ -4321,7 +4406,6 @@ export const Lvl = {
       TerrainEarthZigzag0: d(Tx.Terrain.Earth.Zigzag0, { x: -1271, y: 2182, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x4b76a9 }, "TerrainDecals"),
       ShapesSquareIrregular10_9: d(Tx.Shapes.SquareIrregular10, { x: 467, y: 951, scaleX: 7, scaleY: 2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
       StashPocket: e(r["StashPocket"], { x: 472, y: 952, uid: 175280777909200, values: { name: "", depth: 0 } }, "Entities"),
-      GateMap: e(r["GateMap"], { x: 992, y: 552, rotation: 270, uid: 175918662282800, values: { sceneName: "scnCollege0", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "Entities"),
       Player: e(r["Player"], { x: 768, y: 856, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromNewBalltownUnderneathRight: e(r["Checkpoint"], { x: 824, y: 752, flippedX: false, values: { name: "fromNewBalltownUnderneathRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromPlainsSuggestiveLeft: e(r["Checkpoint"], { x: 901, y: 869, flippedX: true, values: { name: "fromPlainsSuggestiveLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
@@ -4329,13 +4413,14 @@ export const Lvl = {
       fromPlainsSuggestiveRight: e(r["Checkpoint"], { x: 989, y: 869, flippedX: false, values: { name: "fromPlainsSuggestiveRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromStrangeMarket: e(r["Checkpoint"], { x: 600, y: 560, flippedX: false, values: { name: "fromStrangeMarket", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromColosseumMiffed: e(r["Checkpoint"], { x: 592, y: 1120, flippedX: false, values: { name: "fromColosseumMiffed", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
-      fromCollege0: e(r["Checkpoint"], { x: 960, y: 584, flippedX: true, values: { name: "fromCollege0", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromIndianaUniversity: e(r["Checkpoint"], { x: 960, y: 584, flippedX: true, values: { name: "fromIndianaUniversity", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       fromNewBalltownUnderneathLeft: e(r["Checkpoint"], { x: 616, y: 752, flippedX: true, values: { name: "fromNewBalltownUnderneathLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
-      GateMap_1: e(r["GateMap"], { x: 821, y: 735, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_2: e(r["GateMap"], { x: 637, y: 737, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_3: e(r["GateMap"], { x: 942, y: 844, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_4: e(r["GateMap"], { x: 551, y: 531, rotation: 540, uid: 175755215936902, values: { sceneName: "scnStrangeMarket", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_5: e(r["GateMap"], { x: 520, y: 1112, rotation: 90, uid: 175860865618400, values: { sceneName: "scnColosseumMiffed", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
+      GateMap: e(r["GateMap"], { x: 821, y: 735, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_1: e(r["GateMap"], { x: 637, y: 737, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_2: e(r["GateMap"], { x: 942, y: 844, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_3: e(r["GateMap"], { x: 551, y: 531, rotation: 540, uid: 175755215936902, values: { sceneName: "scnStrangeMarket", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_4: e(r["GateMap"], { x: 520, y: 1112, rotation: 90, uid: 175860865618400, values: { sceneName: "scnColosseumMiffed", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_5: e(r["GateMap"], { x: 992, y: 552, rotation: 270, uid: 176021246543005, values: { sceneName: "scnIndianaUniversity", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
     };
   },
 };
@@ -4345,6 +4430,8 @@ export namespace LvlType {
   export type College0 = ReturnType<(typeof Lvl)["College0"]>;
   export type ColosseumMiffed = ReturnType<(typeof Lvl)["ColosseumMiffed"]>;
   export type Dummy = ReturnType<(typeof Lvl)["Dummy"]>;
+  export type IndianaUniversityInterior = ReturnType<(typeof Lvl)["IndianaUniversityInterior"]>;
+  export type IndianaUniversity = ReturnType<(typeof Lvl)["IndianaUniversity"]>;
   export type MenuIguanaDesigner = ReturnType<(typeof Lvl)["MenuIguanaDesigner"]>;
   export type NewBalltownArmorer = ReturnType<(typeof Lvl)["NewBalltownArmorer"]>;
   export type NewBalltownFanatic = ReturnType<(typeof Lvl)["NewBalltownFanatic"]>;
