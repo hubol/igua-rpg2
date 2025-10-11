@@ -51,10 +51,10 @@ function createRpg(data: RpgProgressData) {
     const attributes = new RpgPlayerAttributes(data.character.attributes, buffs);
     const status = new RpgPlayerStatus(data.character.status, attributes, buffs);
     const facts = new RpgFacts(data.character.facts, attributes);
-    const player = new RpgPlayer(data.character, attributes, buffs, status, facts);
     const flops = new RpgFlops(data.character.inventory.flops);
     const inventory = new RpgInventory(equipment, flops, keyItems, pocket, potions);
     const wallet = new RpgPlayerWallet(data.character.wallet, experience);
+    const player = new RpgPlayer(data.character, attributes, buffs, status, facts, experience.reward, wallet, pocket);
     const shops = new RpgShops(shopsState, wallet, inventory);
 
     return {

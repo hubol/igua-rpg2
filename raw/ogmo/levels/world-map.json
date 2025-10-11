@@ -132,8 +132,8 @@
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
-          "x": 632,
-          "y": 512,
+          "x": 768,
+          "y": 616,
           "originX": 22,
           "originY": 39,
           "flippedX": true,
@@ -215,6 +215,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromCollege0", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 8,
+          "_eid": "19953026",
+          "x": 616,
+          "y": 512,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromNewBalltownUnderneathLeft", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },

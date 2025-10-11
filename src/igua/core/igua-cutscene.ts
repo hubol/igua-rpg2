@@ -8,6 +8,7 @@ import { Empty } from "../../lib/types/empty";
 import { Null } from "../../lib/types/null";
 import { clear } from "../drama/show";
 import { scene, sceneStack } from "../globals";
+import { Rpg } from "../rpg/rpg";
 
 type CutsceneFn = () => Coro.Type;
 
@@ -16,6 +17,7 @@ function getDefaultCutsceneAttributes() {
         speaker: Null<DisplayObject>(),
         letterbox: true,
         computerObjsSpoken: new Set<DisplayObject>(),
+        requiredPlayerIsAlive: true,
         requiredScene: Null(scene),
         camera: {
             start: "none" as "none" | "pan_to_speaker",
@@ -38,7 +40,12 @@ interface PlayRequest {
 }
 
 function checkPlayRequestRequirements(request: PlayRequest) {
-    const { requiredScene } = request.attributes;
+    const { requiredPlayerIsAlive, requiredScene } = request.attributes;
+
+    if (Rpg.character.status.isAlive !== requiredPlayerIsAlive) {
+        return "requirements_may_be_met_in_future";
+    }
+
     if (requiredScene === null) {
         return "requirements_met";
     }

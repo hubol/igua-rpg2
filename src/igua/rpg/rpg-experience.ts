@@ -35,6 +35,10 @@ export class RpgExperience implements Readonly<RpgExperience.State> {
         return this._state.social;
     }
 
+    get spirit() {
+        return this._state.spirit;
+    }
+
     spend(experienceId: RpgExperience.Id, amount: Integer) {
         this._state[experienceId] = Math.max(0, this._state[experienceId] - amount);
     }
@@ -48,6 +52,7 @@ export class RpgExperience implements Readonly<RpgExperience.State> {
             pocket: 0,
             quest: 0,
             social: 0,
+            spirit: 0,
         };
     }
 }
@@ -61,6 +66,7 @@ export namespace RpgExperience {
         "pocket",
         "quest",
         "social",
+        "spirit",
     ] as const;
 
     export type Id = typeof Manifest[number];

@@ -2,9 +2,11 @@ import { DisplayObject, Rectangle } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
 import { Instances } from "../../lib/game-engine/instances";
 import { interp } from "../../lib/game-engine/routines/interp";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../lib/math/number";
 import { vnew } from "../../lib/math/vector-type";
 import { merge } from "../../lib/object/merge";
+import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
 import { Cutscene, DevKey, Input, layers, scene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
@@ -15,10 +17,13 @@ import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Rpg } from "../rpg/rpg";
 import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgStatus } from "../rpg/rpg-status";
+import { scnWorldMap } from "../scenes/scn-world-map";
+import { SceneChanger } from "../systems/scene-changer";
+import { objFxEnemyDefeat } from "./effects/obj-fx-enemy-defeat";
 import { objFxPlayerJumpComboDust } from "./effects/obj-fx-player-jump-combo-dust";
 import { objFxSuperDust } from "./effects/obj-fx-super-dust";
 import { CtxGate } from "./obj-gate";
-import { ObjIguanaLocomotive, objIguanaLocomotive, ObjIguanaLocomotiveAutoFacingMode } from "./obj-iguana-locomotive";
+import { ObjIguanaLocomotive, objIguanaLocomotive } from "./obj-iguana-locomotive";
 import { objIguanaNpc } from "./obj-iguana-npc";
 import { ObjSign, objSign } from "./obj-sign";
 import { StepOrder } from "./step-order";
@@ -72,11 +77,33 @@ function objPlayer(looks: IguanaLooks.Serializable) {
 
     iguanaLocomotiveObj.mxnBallonable.setInitialBallons(Rpg.character.status.conditions.helium.ballons);
 
-    const died = () => {};
+    const onDied = () => {
+        objFxEnemyDefeat({ map: [looks.head.color, looks.head.crest.color, looks.body.color] })
+            .at(puppet)
+            .show();
+
+        playerAliveObj.destroy();
+        puppet
+            .step(() => {
+                puppet.physicsEnabled = false;
+                puppet.gravity = 0;
+                puppet.speed.at(0, 0);
+            }, StepOrder.Physics - 1)
+            .step(() => {
+                puppet.visible = false;
+            }, StepOrder.BeforeCamera);
+        Cutscene.play(function* () {
+            Rpg.character.die();
+            yield sleep(4000);
+            SceneChanger.create({ sceneName: scnWorldMap.name, checkpointName: "restart" })!.changeScene();
+            Rpg.character.revive();
+            layers.recreateOverlay();
+        }, { requiredPlayerIsAlive: false });
+    };
 
     // TODO truly wretched
     const effects: RpgStatus.Effects = merge(
-        merge({ died }, iguanaLocomotiveObj.mxnBallonable.rpgStatusEffects),
+        merge({ died: onDied }, iguanaLocomotiveObj.mxnBallonable.rpgStatusEffects),
         layers.overlay.hud.healthBarObj.effects,
     );
 
@@ -133,6 +160,9 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 return getWalkingTopSpeed();
             },
         })
+        .zIndexed(ZIndex.PlayerEntities);
+
+    const playerAliveObj = container()
         .step(() => {
             if (puppet.isOnGround) {
                 stepsSinceOffGround++;
@@ -255,7 +285,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 }
             }
         }, StepOrder.AfterPhysics)
-        .zIndexed(ZIndex.PlayerEntities);
+        .show(puppet);
 
     puppet.auto.facingMode = "check_moving";
 

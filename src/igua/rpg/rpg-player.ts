@@ -2,11 +2,14 @@ import { PolarInt } from "../../lib/math/number-alias-types";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { IguanaLooks } from "../iguana/looks";
 import { RpgAttack } from "./rpg-attack";
+import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 import { RpgFaction } from "./rpg-faction";
 import { RpgFacts } from "./rpg-facts";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPlayerStatus } from "./rpg-player-status";
+import { RpgPlayerWallet } from "./rpg-player-wallet";
+import { RpgPocket } from "./rpg-pocket";
 
 export class RpgPlayer {
     constructor(
@@ -15,6 +18,9 @@ export class RpgPlayer {
         private readonly _buffs: RpgPlayerAggregatedBuffs,
         readonly status: RpgPlayerStatus,
         readonly facts: RpgFacts,
+        private readonly _reward: RpgExperienceRewarder,
+        private readonly _wallet: RpgPlayerWallet,
+        private readonly _pocket: RpgPocket,
     ) {
     }
 
@@ -109,6 +115,20 @@ export class RpgPlayer {
 
     get position() {
         return this._state.position;
+    }
+
+    die() {
+        const valuablesCount = this._wallet.count("valuables");
+        this._wallet.spend("valuables", valuablesCount);
+        const { totalItems: pocketItemsCount } = this._pocket.empty("death_tax");
+
+        this._reward.spirit.onTaxPocketItemsCount(pocketItemsCount);
+        this._reward.spirit.onTaxValuables(valuablesCount);
+    }
+
+    revive() {
+        this.status.health = this.status.healthMax;
+        this.status.conditions.poison.level = Math.min(1, this.status.conditions.poison.level);
     }
 
     static createState(): RpgPlayer.State {

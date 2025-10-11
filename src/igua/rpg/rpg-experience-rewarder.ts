@@ -104,8 +104,10 @@ export class RpgExperienceRewarder {
                 increase(result.reset ? 2 : 1);
             }
         },
-        onRemoveItems(count: Integer) {
-            increase(count * 2);
+        onRemoveItems(count: Integer, reason: "default" | "death_tax") {
+            if (reason === "default") {
+                increase(count * 2);
+            }
         },
     }));
 
@@ -123,6 +125,15 @@ export class RpgExperienceRewarder {
         },
         onTeachFactToClassroom() {
             increase(50);
+        },
+    }));
+
+    readonly spirit = this._expose("spirit", (increase) => ({
+        onTaxPocketItemsCount(pocketItemsCount: Integer) {
+            increase(pocketItemsCount);
+        },
+        onTaxValuables(valuablesCount: Integer) {
+            increase(valuablesCount);
         },
     }));
 

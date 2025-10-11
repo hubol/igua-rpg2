@@ -34,6 +34,10 @@ export class RpgPlayerStatus implements RpgStatus.Model {
         this._state.invulnerable = value;
     }
 
+    get isAlive() {
+        return this._state.health > 0;
+    }
+
     readonly invulnerableMax = 60;
 
     pride = 0;

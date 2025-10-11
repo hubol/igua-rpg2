@@ -30,7 +30,7 @@ export class RpgPocket {
         return this.slots[this._state.receivingSlotIndex];
     }
 
-    empty() {
+    empty(reason: "default" | "death_tax" = "default") {
         let totalItems = 0;
 
         const items = Object.keys(DataPocketItem.Manifest).reduce((obj, key) => {
@@ -48,7 +48,7 @@ export class RpgPocket {
             slot.count = 0;
         }
 
-        this._experience.reward.pocket.onRemoveItems(totalItems);
+        this._experience.reward.pocket.onRemoveItems(totalItems, reason);
 
         return {
             items,
@@ -127,7 +127,7 @@ export class RpgPocket {
                     slot.item = null;
                 }
                 count -= countToTakeFromSlot;
-                this._experience.reward.pocket.onRemoveItems(countToTakeFromSlot);
+                this._experience.reward.pocket.onRemoveItems(countToTakeFromSlot, "default");
             }
             if (count < 0) {
                 Logger.logAssertError(

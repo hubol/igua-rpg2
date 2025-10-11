@@ -188,6 +188,10 @@ export const experienceIndicatorConfigs: Record<RpgExperience.Id, ExperienceIndi
         tint: 0xA074E8,
         iconTx: iconTxs[6],
     },
+    spirit: {
+        tint: 0x2e2e2e,
+        iconTx: iconTxs[7],
+    },
 };
 
 export const experienceIndicatorConfigsArray = Object.entries(experienceIndicatorConfigs).map((

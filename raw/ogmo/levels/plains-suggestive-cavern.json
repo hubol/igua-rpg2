@@ -120,6 +120,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PlayerDev",
+          "id": 3,
+          "_eid": "98101389",
+          "x": 1432,
+          "y": 608,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
