@@ -95,6 +95,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             }, StepOrder.Physics - 1)
             .step(() => {
                 puppet.visible = false;
+                puppet.dripsPerFrame = 0;
             }, StepOrder.BeforeCamera);
 
         Cutscene.play(function* () {
