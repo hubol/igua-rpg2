@@ -7,6 +7,7 @@ import { approachLinear } from "../../lib/math/number";
 import { vnew } from "../../lib/math/vector-type";
 import { merge } from "../../lib/object/merge";
 import { container } from "../../lib/pixi/container";
+import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { Cutscene, DevKey, Input, layers, scene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
@@ -78,11 +79,14 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     iguanaLocomotiveObj.mxnBallonable.setInitialBallons(Rpg.character.status.conditions.helium.ballons);
 
     const onDied = () => {
+        Jukebox.stop();
+
         objFxEnemyDefeat({ map: [looks.head.color, looks.head.crest.color, looks.body.color] })
             .at(puppet)
             .show();
 
         playerAliveObj.destroy();
+
         puppet
             .step(() => {
                 puppet.physicsEnabled = false;
@@ -92,6 +96,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             .step(() => {
                 puppet.visible = false;
             }, StepOrder.BeforeCamera);
+
         Cutscene.play(function* () {
             Rpg.character.die();
             yield sleep(4000);

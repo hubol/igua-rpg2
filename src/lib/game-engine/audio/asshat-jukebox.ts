@@ -13,7 +13,7 @@ interface NowPlaying {
 // TODO generics?
 export class AsshatJukebox {
     private readonly _loader: MusicTrackLoader;
-    private _nowPlaying?: NowPlaying;
+    private _nowPlaying: NowPlaying | null = null;
 
     constructor(private readonly _destination: AudioNode) {
         this._loader = new MusicTrackLoader(_destination);
@@ -36,7 +36,13 @@ export class AsshatJukebox {
         return this;
     }
 
-    private _latestPlayRequest?: MusicTrack;
+    stop() {
+        this._nowPlaying?.instance?.stop();
+        this._nowPlaying = null;
+        this._latestPlayRequest = null;
+    }
+
+    private _latestPlayRequest: MusicTrack | null = null;
 
     async playAsync(track: MusicTrack, fadeOutMs: Milliseconds = 1000) {
         if (this._latestPlayRequest === track) {
