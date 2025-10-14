@@ -209,6 +209,13 @@ const getBuffInformations = (function () {
         buff("attributes.intelligence", "Intelligence", "integer", "beneft_when_positive"),
         buff("combat.defense.faction.miner", "Defense Against Miners", "percent", "beneft_when_positive"),
         buff("conditions.ballonDrainReductionFactor", "Ballons Drain Slower", "percent", "beneft_when_positive"),
+        buff("combat.defense.physical", "Phys DEF", "percent", "beneft_when_positive"),
+        buff(
+            "combat.melee.clawAttack.perfect.attackExperience",
+            "Perfect Claw Bonus XP",
+            "integer",
+            "beneft_when_positive",
+        ),
     );
 
     const fn = new Function(

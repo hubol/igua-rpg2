@@ -49,6 +49,11 @@ export class RpgExperienceRewarder {
         onEnemyDefeat(enemyMaxHealth: Integer) {
             increase(Math.ceil(enemyMaxHealth / 5));
         },
+        onPerfectClawAttack(attackExperience: Integer) {
+            if (attackExperience) {
+                increase(attackExperience);
+            }
+        },
     }));
 
     readonly computer = this._expose("computer", (increase) => ({

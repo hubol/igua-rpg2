@@ -9,6 +9,7 @@ export namespace RpgPlayerBuffs {
             },
             combat: {
                 defense: {
+                    physical: <PercentAsInteger> 0,
                     faction: {
                         miner: 0,
                     },
@@ -21,6 +22,9 @@ export namespace RpgPlayerBuffs {
                         poison: 0,
                     },
                     clawAttack: {
+                        perfect: {
+                            attackExperience: 0,
+                        },
                         physical: 0,
                     },
                 },

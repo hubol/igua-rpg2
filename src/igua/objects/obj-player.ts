@@ -281,7 +281,9 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                     if (
                         attack === Rpg.character.meleeClawWellTimedAttack && (!result.rejected || !result.invulnerable)
                     ) {
-                        // TODO extra XP for this, too
+                        Rpg.experience.reward.combat.onPerfectClawAttack(
+                            Rpg.character.buffs.combat.melee.clawAttack.perfect.attackExperience,
+                        );
                         puppet.play(Sfx.Iguana.TimedClawAttack.rate(0.975, 1.025));
                         objFxSuperDust().at(playerObj).zIndexed(ZIndex.CharacterEntities).show();
                         playerObj.landingFrames = 10;

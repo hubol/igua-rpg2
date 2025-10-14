@@ -346,6 +346,7 @@ export namespace RpgStatus {
         target.health = Math.max(minimumHealthAfterDamage, target.health - damage);
         const diff = previous - target.health;
 
+        // TODO I suspect this does not belong here!
         if (rewardExperience && diff > 0) {
             Rpg.experience.reward.combat.onAttackDamage(attack, diff);
         }
