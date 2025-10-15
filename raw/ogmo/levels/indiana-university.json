@@ -285,7 +285,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
-          "tint": "#ffffff",
+          "tint": "#880f0f",
           "texture": "town/signage/uni.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -931,6 +931,18 @@
           "rotation": 0,
           "tint": "#163702",
           "texture": "terrain/earth/heart 24px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 777,
+          "y": 452,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#880f0f",
+          "texture": "town/signage/exit 0.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -1794,6 +1806,30 @@
           "rotation": 0,
           "tint": "#00803b",
           "texture": "shapes/confetti corner.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 828,
+          "y": 248,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#163702",
+          "texture": "terrain/distant/hill mountain.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": -40,
+          "y": 248,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#163702",
+          "texture": "terrain/distant/hill mountain.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
