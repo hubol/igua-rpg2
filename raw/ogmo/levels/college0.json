@@ -4,8 +4,8 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#000000"},
-  "backgroundColor": "#408000",
+  "values": {"Terrain Color": "#d55555"},
+  "backgroundColor": "#68ba8e",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -16,7 +16,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 256,
+          "y": 136,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#bc83e9",
+          "values": {"name": "DistantAngelTarget", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",
@@ -187,6 +199,102 @@
           "originY": 0.5,
           "values": {"name": "Podium"},
           "groupName": null
+        },
+        {
+          "x": 50,
+          "y": 223,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#cbb53f",
+          "texture": "stone/brick rows 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 260,
+          "y": 211,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#cbb53f",
+          "texture": "stone/brick rows 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 450,
+          "y": 164,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#cbb53f",
+          "texture": "stone/brick rows 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 32,
+          "y": 56,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#cbb53f",
+          "texture": "stone/brick rows 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 193,
+          "y": 45,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#cbb53f",
+          "texture": "stone/brick rows 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 370,
+          "y": 60,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 180,
+          "tint": "#cbb53f",
+          "texture": "stone/brick rows 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 429,
+          "y": 233,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ff7777",
+          "texture": "stone/brick rows 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 70,
+          "y": 8,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ff7777",
+          "texture": "stone/brick rows 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -211,7 +319,7 @@
           "height": 280,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#d55555",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -224,7 +332,7 @@
           "height": 280,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#d55555",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -237,7 +345,7 @@
           "height": 80,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#d55555",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -250,7 +358,7 @@
           "height": 80,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#d55555",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -263,7 +371,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#d55555",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -276,7 +384,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#d55555",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -289,7 +397,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#d55555",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -302,7 +410,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#d55555",
           "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
@@ -327,7 +435,170 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 208,
+          "y": 464,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#d55555",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 255,
+          "y": 481,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#cbb53f",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 278,
+          "y": 481,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ff7777",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 168,
+          "y": 480,
+          "scaleX": 2,
+          "scaleY": 2,
+          "rotation": 0,
+          "tint": "#68ba8e",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 96,
+          "y": 480,
+          "scaleX": 2,
+          "scaleY": 2,
+          "rotation": 0,
+          "tint": "#880f0f",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 24,
+          "y": 480,
+          "scaleX": 2,
+          "scaleY": 2,
+          "rotation": 0,
+          "tint": "#98c8ae",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "scaleX": 4,
+          "scaleY": 8,
+          "rotation": 0,
+          "tint": "#cbb53f",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 208,
+          "y": 0,
+          "scaleX": 10,
+          "scaleY": 8,
+          "rotation": 0,
+          "tint": "#cbb53f",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 8,
+          "y": -160,
+          "scaleX": 10,
+          "scaleY": 8,
+          "rotation": 0,
+          "tint": "#cbb53f",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 40,
+          "y": 160,
+          "scaleX": 10,
+          "scaleY": 8,
+          "rotation": 0,
+          "tint": "#cbb53f",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 240,
+          "y": 109,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#d55555",
+          "texture": "stone/brick rows 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 83,
+          "y": 171,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#d55555",
+          "texture": "stone/brick rows 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 470,
+          "y": 110,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#d55555",
+          "texture": "stone/brick rows 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -339,7 +610,32 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 91,
+          "y": 113,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "characters/item rescue angel distant.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "DistantAngel"}
+        },
+        {
+          "x": 203,
+          "y": 156,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#98c8ae",
+          "texture": "sky/cloud puff 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     }
   ]
