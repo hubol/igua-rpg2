@@ -32,9 +32,9 @@ export namespace DataNpcPersona {
             MarketGreeter: { job: "Greeter", name: "Yrem", looks: NpcLooks.Bubblegum },
             ObstacleWatcher: { job: "Host", name: "Tipp", looks: NpcLooks.Corpo },
             ColosseumWatcher: { job: "Watcher", name: "Chimm", looks: NpcLooks.DarkOne },
+            IndianaStudent0: { job: "Student", name: "???", looks: NpcLooks.TurtleMutant },
+            IndianaStudent1: { job: "Student", name: "???", looks: NpcLooks.FleshHound },
             // TODO looks for these
-            IndianaStudent0: { job: "Student", name: "???", looks: NpcLooks.DarkOne },
-            IndianaStudent1: { job: "Student", name: "???", looks: NpcLooks.Corpo },
             IndianaStudent2: { job: "Student", name: "???", looks: NpcLooks.Bubblegum },
             IndianaStudent3: { job: "Student", name: "???", looks: NpcLooks.Circus },
             IndianaNurse: { job: "Nurse", name: "???", looks: NpcLooks.Circus },
