@@ -96,4 +96,7 @@ interface TransientGameStartConfig {
     };
 }
 
-const transientGameStartConfig = new LocalStorageEntry<TransientGameStartConfig>("dev__transientGameStartConfig");
+const transientGameStartConfig = new LocalStorageEntry<TransientGameStartConfig>(
+    "dev__transientGameStartConfig",
+    "session",
+);
