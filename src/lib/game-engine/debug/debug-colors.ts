@@ -1,7 +1,7 @@
-import { LocalStorageEntry } from "../../browser/local-storage-entry";
+import { StorageEntry } from "../../browser/storage-entry";
 import { AdjustColor } from "../../pixi/adjust-color";
 
-const debugColorsLocalStorage = new LocalStorageEntry<string[]>("debugColors");
+const debugColorsLocalStorage = new StorageEntry.Local<string[]>("debugColors");
 let debugColors: string[] = [];
 
 export const DebugColors = {

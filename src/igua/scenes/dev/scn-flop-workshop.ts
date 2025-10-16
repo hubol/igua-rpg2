@@ -1,6 +1,6 @@
 import { objText } from "../../../assets/fonts";
 import { KeyCode } from "../../../lib/browser/key-listener";
-import { LocalStorageEntry } from "../../../lib/browser/local-storage-entry";
+import { StorageEntry } from "../../../lib/browser/storage-entry";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
@@ -13,7 +13,7 @@ import { objFigureFlop } from "../../objects/figures/obj-figure-flop";
 // For picking seeds for the 999 flop characters
 
 const overrideService = function () {
-    const storage = new LocalStorageEntry<Record<Integer, Integer>>("__dev__overrides");
+    const storage = new StorageEntry.Local<Record<Integer, Integer>>("__dev__overrides");
 
     function get() {
         return storage.value ?? {};

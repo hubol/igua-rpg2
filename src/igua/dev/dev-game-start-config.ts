@@ -1,4 +1,4 @@
-import { LocalStorageEntry } from "../../lib/browser/local-storage-entry";
+import { StorageEntry } from "../../lib/browser/storage-entry";
 import { Toast } from "../../lib/game-engine/toast";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { deepUpgradeVerbose } from "../../lib/object/deep-upgrade-verbose";
@@ -96,7 +96,4 @@ interface TransientGameStartConfig {
     };
 }
 
-const transientGameStartConfig = new LocalStorageEntry<TransientGameStartConfig>(
-    "dev__transientGameStartConfig",
-    "session",
-);
+const transientGameStartConfig = new StorageEntry.Session<TransientGameStartConfig>("dev__transientGameStartConfig");
