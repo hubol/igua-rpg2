@@ -35,9 +35,8 @@ export namespace DataNpcPersona {
             IndianaStudent0: { job: "Student", name: "???", looks: NpcLooks.TurtleMutant },
             IndianaStudent1: { job: "Student", name: "???", looks: NpcLooks.FleshHound },
             IndianaStudent2: { job: "Student", name: "???", looks: NpcLooks.Tweaker },
-            // TODO looks for these
-            IndianaStudent3: { job: "Student", name: "???", looks: NpcLooks.Circus },
-            IndianaNurse: { job: "Nurse", name: "???", looks: NpcLooks.Circus },
+            IndianaStudent3: { job: "Student", name: "???", looks: NpcLooks.Flamboyant },
+            IndianaNurse: { job: "Nurse", name: "???", looks: NpcLooks.Unamused },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
         } satisfies Record<string, Model>,
     );
