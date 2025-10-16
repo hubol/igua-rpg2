@@ -34,8 +34,8 @@ export namespace DataNpcPersona {
             ColosseumWatcher: { job: "Watcher", name: "Chimm", looks: NpcLooks.DarkOne },
             IndianaStudent0: { job: "Student", name: "???", looks: NpcLooks.TurtleMutant },
             IndianaStudent1: { job: "Student", name: "???", looks: NpcLooks.FleshHound },
+            IndianaStudent2: { job: "Student", name: "???", looks: NpcLooks.Tweaker },
             // TODO looks for these
-            IndianaStudent2: { job: "Student", name: "???", looks: NpcLooks.Bubblegum },
             IndianaStudent3: { job: "Student", name: "???", looks: NpcLooks.Circus },
             IndianaNurse: { job: "Nurse", name: "???", looks: NpcLooks.Circus },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
