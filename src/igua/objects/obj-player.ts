@@ -101,9 +101,9 @@ function objPlayer(looks: IguanaLooks.Serializable) {
         Cutscene.play(function* () {
             Rpg.character.die();
             yield sleep(4000);
-            SceneChanger.create({ sceneName: scnWorldMap.name, checkpointName: "restart" })!.changeScene();
             Rpg.character.revive();
             layers.recreateOverlay();
+            SceneChanger.create({ sceneName: scnWorldMap.name, checkpointName: "restart" })!.changeScene();
         }, { requiredPlayerIsAlive: false });
     };
 
