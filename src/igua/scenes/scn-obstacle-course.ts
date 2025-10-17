@@ -13,6 +13,7 @@ import { ZIndex } from "../core/scene/z-index";
 import { renderer } from "../current-pixi-renderer";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataPocketItem } from "../data/data-pocket-item";
+import { DramaFacts } from "../drama/drama-facts";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
 import { DramaWallet } from "../drama/drama-wallet";
@@ -45,6 +46,13 @@ export function scnObstacleCourse() {
     const lvl = Lvl.ObstacleCourse();
     enrichMinigameManager(lvl);
     enrichDecorations(lvl);
+    enrichSecretNpc(lvl);
+}
+
+function enrichSecretNpc(lvl: LvlType.ObstacleCourse) {
+    lvl.SecretNpc.mixin(mxnCutscene, function* () {
+        yield* DramaFacts.memorize("FarmingGods");
+    });
 }
 
 function enrichDecorations(lvl: LvlType.ObstacleCourse) {

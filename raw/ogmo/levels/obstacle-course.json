@@ -107,6 +107,17 @@
           "originY": 52,
           "flippedX": true,
           "values": {"personaName": "ObstacleWatcher", "name": "ObstacleWatcherNpc", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 1,
+          "_eid": "90326278",
+          "x": 80,
+          "y": 280,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": false,
+          "values": {"personaName": "SecretKnower0", "name": "SecretNpc", "depth": 0}
         }
       ]
     },
@@ -284,7 +295,7 @@
           "y": 592,
           "originX": 23,
           "originY": 33,
-          "uid": 175797782351500,
+          "uid": 176066726291300,
           "values": {"name": "", "depth": 0}
         },
         {
@@ -381,6 +392,42 @@
           "originY": 0,
           "flippedX": true,
           "values": {"sceneName": "scnStrangeMarket", "checkpointName": "fromObstacleCourse", "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 24,
+          "_eid": "41461695",
+          "x": 40,
+          "y": 208,
+          "width": 88,
+          "height": 72,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#77b923", "targetTint": "#588b16", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 25,
+          "_eid": "41461695",
+          "x": 128,
+          "y": 208,
+          "width": 56,
+          "height": 72,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#77b923", "targetTint": "#588b16", "min": 2, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 26,
+          "_eid": "41461695",
+          "x": 184,
+          "y": 208,
+          "width": 48,
+          "height": 72,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#77b923", "targetTint": "#588b16", "min": 3, "max": 5, "name": "", "depth": 0}
         }
       ]
     },
@@ -657,19 +704,6 @@
         {
           "x": 240,
           "y": 329,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 90,
-          "tint": "#77b923",
-          "texture": "terrain/grass/sparse 3px 1.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 224,
-          "y": 241,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 90,
@@ -1054,7 +1088,8 @@
           "texture": "shapes/confetti corner.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 220,
@@ -1066,7 +1101,8 @@
           "texture": "shapes/confetti corner.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 848,
@@ -1078,7 +1114,8 @@
           "texture": "shapes/confetti corner.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -1254,9 +1291,9 @@
           "id": 13,
           "_eid": "93117141",
           "x": -8,
-          "y": 208,
+          "y": 280,
           "width": 232,
-          "height": 384,
+          "height": 312,
           "originX": 0,
           "originY": 0,
           "tint": "#77b923",
@@ -1309,6 +1346,19 @@
           "y": 32,
           "width": 56,
           "height": 248,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#77b923",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 19,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 208,
+          "width": 40,
+          "height": 72,
           "originX": 0,
           "originY": 0,
           "tint": "#77b923",

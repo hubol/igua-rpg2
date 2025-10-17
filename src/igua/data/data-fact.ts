@@ -16,6 +16,9 @@ export namespace DataFact {
             GeneratorFestivalAwesome: {
                 messages: ["The Generator festival is a time when things are awesome."],
             },
+            FarmingGods: {
+                messages: ["Beet and Wheat are farming gods created by the Wizard of Emotion."],
+            },
             "__Fallback__": {
                 messages: ["If you are reading this, it is a bug with the facts mechanic."],
             },
