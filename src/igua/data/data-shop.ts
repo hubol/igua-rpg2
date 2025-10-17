@@ -126,6 +126,20 @@ export namespace DataShop {
                     },
                 ],
             },
+            GreatTower: {
+                stocks: [
+                    {
+                        initialQuantity: 99,
+                        price: { currency: "valuables", deltaSold: 2, initial: 10 },
+                        product: { kind: "key_item", id: "UninflatedBallon" },
+                    },
+                    {
+                        initialQuantity: 2,
+                        price: { currency: "jump", deltaSold: 500, initial: 500 },
+                        product: { kind: "equipment", id: "BallonLastLonger", level: 1 },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );
