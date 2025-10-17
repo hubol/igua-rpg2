@@ -10,6 +10,7 @@ import { RpgFlops } from "./rpg-flops";
 import { RpgIdols } from "./rpg-idols";
 import { RpgIguanaNpcs } from "./rpg-iguana-npcs";
 import { RpgKeyItems } from "./rpg-key-items";
+import { RpgLooseValuables } from "./rpg-loose-valuables";
 import { RpgPlayer } from "./rpg-player";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPlayerStatus } from "./rpg-player-status";
@@ -103,7 +104,7 @@ export function getInitialRpgProgress() {
         },
         programmaticFlags: {
             classrooms: RpgClassrooms.createState(),
-            collectedValuableUids: new Set<Integer>(),
+            looseValuables: RpgLooseValuables.createState(),
             idols: RpgIdols.createState(),
             iguanaNpcs: RpgIguanaNpcs.createState(),
             revealedWorldMapGateUids: new Set<Integer>(),

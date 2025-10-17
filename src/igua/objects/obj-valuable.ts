@@ -11,12 +11,18 @@ export function objValuable(
 ) {
     let collectableAfterSteps = 5;
 
-    return objFigureValuable(kind)
+    const computedKind = uid === undefined ? kind : Rpg.looseValuables.trySpawn(uid, kind);
+
+    return objFigureValuable(computedKind ?? "green")
         .mixin(
             mxnCollectible,
             uid === undefined
                 ? { kind: "transient", collectable: false }
-                : { kind: "uid", uid, set: Rpg.programmaticFlags.collectedValuableUids },
+                : {
+                    kind: "controlled",
+                    isCollected: computedKind === null,
+                    collect: () => Rpg.looseValuables.collect(uid),
+                },
         )
         .handles("collected", self => {
             self.objFigureValuable.methods.collectFx();

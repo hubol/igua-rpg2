@@ -6,9 +6,9 @@ import { Rpg } from "../rpg/rpg";
 import { RpgProgressFlags } from "../rpg/rpg-progress";
 
 interface MxnCollectibleUid {
-    kind: "uid";
-    uid: Integer;
-    set: Set<Integer>;
+    kind: "controlled";
+    readonly isCollected: boolean;
+    collect: () => void;
 }
 
 interface MxnCollectibleFlag {
@@ -31,7 +31,7 @@ function isCollected(args: MxnCollectibleArgs): boolean {
     if (args.kind === "flag") {
         return DeepAccess.get(Rpg.flags, args.flag);
     }
-    return args.set.has(args.uid);
+    return args.isCollected;
 }
 
 function collect(args: MxnCollectibleArgs) {
@@ -42,10 +42,11 @@ function collect(args: MxnCollectibleArgs) {
         DeepAccess.set(Rpg.flags, args.flag, true);
     }
     else {
-        args.set.add(args.uid);
+        args.collect();
     }
 }
 
+// TODO this is overengineered and only used by valuables...
 export function mxnCollectible(obj: DisplayObject, args: MxnCollectibleArgs) {
     const initialCollected = isCollected(args);
 

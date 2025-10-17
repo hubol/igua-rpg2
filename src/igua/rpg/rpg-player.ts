@@ -5,6 +5,7 @@ import { RpgAttack } from "./rpg-attack";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 import { RpgFaction } from "./rpg-faction";
 import { RpgFacts } from "./rpg-facts";
+import { RpgLooseValuables } from "./rpg-loose-valuables";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPlayerStatus } from "./rpg-player-status";
@@ -21,6 +22,7 @@ export class RpgPlayer {
         private readonly _reward: RpgExperienceRewarder,
         private readonly _wallet: RpgPlayerWallet,
         private readonly _pocket: RpgPocket,
+        private readonly _looseValuables: RpgLooseValuables,
     ) {
     }
 
@@ -129,6 +131,7 @@ export class RpgPlayer {
     revive() {
         this.status.health = this.status.healthMax;
         this.status.conditions.poison.level = Math.min(1, this.status.conditions.poison.level);
+        this._looseValuables.nextLifetime();
     }
 
     static createState(): RpgPlayer.State {

@@ -12,6 +12,7 @@ import { RpgIdols } from "./rpg-idols";
 import { RpgIguanaNpcs } from "./rpg-iguana-npcs";
 import { RpgInventory } from "./rpg-inventory";
 import { RpgKeyItems } from "./rpg-key-items";
+import { RpgLooseValuables } from "./rpg-loose-valuables";
 import { RpgPlayer } from "./rpg-player";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
@@ -33,6 +34,7 @@ function createRpg(data: RpgProgressData) {
             iguanaNpcs: iguanaNpcsState,
             shops: shopsState,
             stashPockets: stashPocketsState,
+            looseValuables: looseValuablesState,
             ...programmaticFlags
         },
     } = data;
@@ -54,7 +56,18 @@ function createRpg(data: RpgProgressData) {
     const flops = new RpgFlops(data.character.inventory.flops);
     const inventory = new RpgInventory(equipment, flops, keyItems, pocket, potions);
     const wallet = new RpgPlayerWallet(data.character.wallet, experience);
-    const player = new RpgPlayer(data.character, attributes, buffs, status, facts, experience.reward, wallet, pocket);
+    const looseValuables = new RpgLooseValuables(looseValuablesState);
+    const player = new RpgPlayer(
+        data.character,
+        attributes,
+        buffs,
+        status,
+        facts,
+        experience.reward,
+        wallet,
+        pocket,
+        looseValuables,
+    );
     const shops = new RpgShops(shopsState, wallet, inventory);
 
     return {
@@ -74,6 +87,7 @@ function createRpg(data: RpgProgressData) {
             return iguanaNpcs.getById(npcId);
         },
         inventory,
+        looseValuables: looseValuables as Omit<RpgLooseValuables, "nextLifetime">,
         programmaticFlags,
         quest(questId: DataQuest.Id) {
             return quests.getById(questId);
