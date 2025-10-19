@@ -7,30 +7,28 @@ import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { vlerp } from "../../lib/math/vector";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
-import { range } from "../../lib/range";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { renderer } from "../current-pixi-renderer";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataPocketItem } from "../data/data-pocket-item";
+import { DataRewardPool } from "../data/data-reward-pool";
 import { DramaFacts } from "../drama/drama-facts";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
+import { DramaRewardPool } from "../drama/drama-reward-pool";
 import { DramaWallet } from "../drama/drama-wallet";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
-import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
-import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { CtxPocketItems } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objFxPuffyCloud } from "../objects/effects/obj-fx-puffy-cloud";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
 import { objStatusBar } from "../objects/overlay/obj-status-bar";
 import { Rpg } from "../rpg/rpg";
-import { RpgInventory } from "../rpg/rpg-inventory";
 
 const CtxObstacleCourseMinigame = new SceneLocal(() => ({
     isActive: false,
@@ -92,11 +90,6 @@ function enrichMinigameManager(lvl: LvlType.ObstacleCourse) {
     });
 }
 
-const PrizeConsts = {
-    beet: [{ kind: "potion", id: "AttributeStrengthUp" }, { kind: "equipment", id: "NailFile", level: 1 }],
-    wheat: [{ kind: "potion", id: "AttributeStrengthUp" }, { kind: "equipment", id: "PatheticCage", level: 1 }],
-} satisfies Record<string, RpgInventory.Item[]>;
-
 function objMinigameController(lvl: LvlType.ObstacleCourse) {
     let steps = 0;
     return container()
@@ -113,7 +106,7 @@ function objMinigameController(lvl: LvlType.ObstacleCourse) {
                     yield* coroAwardPrizeForCollection({
                         npcPersonaId: "WheatGod",
                         pocketItemId: "Wheat",
-                        getPrize: () => PrizeConsts.wheat[Rpg.flags.obstacleCourse.wheatPrizesCount++] ?? null,
+                        rewardPoolId: "WheatGod",
                     });
                 },
             );
@@ -123,7 +116,7 @@ function objMinigameController(lvl: LvlType.ObstacleCourse) {
                     yield* coroAwardPrizeForCollection({
                         npcPersonaId: "BeetGod",
                         pocketItemId: "Beet",
-                        getPrize: () => PrizeConsts.beet[Rpg.flags.obstacleCourse.beetPrizesCount++] ?? null,
+                        rewardPoolId: "BeetGod",
                     });
                 },
             );
@@ -169,10 +162,10 @@ function objHolyIguana(npcPersonaId: DataNpcPersona.Id) {
 interface CoroAwardPrizeForCollectionArgs {
     pocketItemId: DataPocketItem.Id;
     npcPersonaId: DataNpcPersona.Id;
-    getPrize: () => RpgInventory.Item | null;
+    rewardPoolId: DataRewardPool.Id;
 }
 
-function* coroAwardPrizeForCollection({ npcPersonaId, pocketItemId, getPrize }: CoroAwardPrizeForCollectionArgs) {
+function* coroAwardPrizeForCollection({ npcPersonaId, pocketItemId, rewardPoolId }: CoroAwardPrizeForCollectionArgs) {
     while (true) {
         yield () => Rpg.inventory.pocket.count(pocketItemId) >= 50;
 
@@ -197,13 +190,7 @@ function* coroAwardPrizeForCollection({ npcPersonaId, pocketItemId, getPrize }: 
             yield interp(lerpRef, "factor").factor(factor.sine).to(1).over(2000);
             // TODO sick ass animation for this
             yield* DramaInventory.removeCount({ kind: "pocket_item", id: pocketItemId }, 50);
-            const prize = getPrize();
-            if (prize) {
-                yield* DramaInventory.receiveItems([prize]);
-            }
-            else {
-                yield* DramaInventory.receiveItems(range(5).map(() => ({ id: "FlopBlindBox", kind: "key_item" })));
-            }
+            yield* DramaRewardPool.reward(rewardPoolId);
 
             yield* show("A blessing for thy harvest.", "Many thanks unto thine ass.");
             yield interp(lerpRef, "factor").factor(factor.sine).to(0).over(2000);

@@ -2,6 +2,7 @@ import { Logging } from "../../lib/logging";
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataQuest } from "../data/data-quest";
+import { DataRewardPool } from "../data/data-reward-pool";
 import { DataShop } from "../data/data-shop";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgClassrooms } from "./rpg-classrooms";
@@ -22,6 +23,7 @@ import { RpgPocket } from "./rpg-pocket";
 import { RpgPotions } from "./rpg-potions";
 import { getInitialRpgProgress, RpgProgressData } from "./rpg-progress";
 import { RpgQuests } from "./rpg-quests";
+import { RpgRewardPools } from "./rpg-reward-pools";
 import { RpgShops } from "./rpg-shops";
 import { RpgStashPockets } from "./rpg-stash-pockets";
 
@@ -35,6 +37,7 @@ function createRpg(data: RpgProgressData) {
             shops: shopsState,
             stashPockets: stashPocketsState,
             looseValuables: looseValuablesState,
+            rewardPools: rewardPoolsState,
             ...programmaticFlags
         },
     } = data;
@@ -69,6 +72,7 @@ function createRpg(data: RpgProgressData) {
         looseValuables,
     );
     const shops = new RpgShops(shopsState, wallet, inventory);
+    const rewardPools = new RpgRewardPools(rewardPoolsState);
 
     return {
         // TODO rename to player
@@ -91,6 +95,9 @@ function createRpg(data: RpgProgressData) {
         programmaticFlags,
         quest(questId: DataQuest.Id) {
             return quests.getById(questId);
+        },
+        rewardPool(rewardPoolId: DataRewardPool.Id) {
+            return rewardPools.getById(rewardPoolId);
         },
         shop(shopId: DataShop.Id) {
             return shops.getById(shopId);

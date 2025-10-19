@@ -18,6 +18,7 @@ import { RpgPlayerWallet } from "./rpg-player-wallet";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgPotions } from "./rpg-potions";
 import { RpgQuests } from "./rpg-quests";
+import { RpgRewardPools } from "./rpg-reward-pools";
 import { RpgShops } from "./rpg-shops";
 import { RpgStashPockets } from "./rpg-stash-pockets";
 
@@ -56,10 +57,6 @@ export function getInitialRpgProgress() {
                         armorer: Null<"ready" | "arrived" | "delivered">(),
                     },
                 },
-            },
-            obstacleCourse: {
-                wheatPrizesCount: 0,
-                beetPrizesCount: 0,
             },
             outskirts: {
                 farmer: {
@@ -108,6 +105,7 @@ export function getInitialRpgProgress() {
             idols: RpgIdols.createState(),
             iguanaNpcs: RpgIguanaNpcs.createState(),
             revealedWorldMapGateUids: new Set<Integer>(),
+            rewardPools: RpgRewardPools.createState(),
             shops: RpgShops.createState(),
             stashPockets: RpgStashPockets.createState(),
         },

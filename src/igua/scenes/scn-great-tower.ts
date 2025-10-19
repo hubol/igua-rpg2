@@ -1,7 +1,7 @@
 import { DisplayObject } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { sleep } from "../../lib/game-engine/routines/sleep";
-import { DramaInventory } from "../drama/drama-inventory";
+import { DramaRewardPool } from "../drama/drama-reward-pool";
 import { dramaShop } from "../drama/drama-shop";
 import { show } from "../drama/show";
 import { scene } from "../globals";
@@ -76,7 +76,7 @@ function enrichRacePipesRegion(lvl: LvlType.GreatTower) {
 function enrichReward(lvl: LvlType.GreatTower) {
     lvl.EndingRewarder.mixin(mxnCutscene, function* () {
         yield* show("You did great.");
-        yield* DramaInventory.receiveItems([{ kind: "equipment", id: "DefensePhysicalAndPerfectBonus", level: 2 }]);
+        yield* DramaRewardPool.reward("GreatTower");
         yield* show("Bye-bye!!");
         SceneChanger.create({ sceneName: scnWorldMap.name, checkpointName: "" })!.changeScene();
     });
