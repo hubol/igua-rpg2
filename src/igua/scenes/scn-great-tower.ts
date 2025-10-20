@@ -6,7 +6,7 @@ import { dramaShop } from "../drama/drama-shop";
 import { show } from "../drama/show";
 import { scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { objPipe } from "../objects/obj-terrain";
+import { objPipe, ObjTerrain } from "../objects/obj-terrain";
 import { SceneChanger } from "../systems/scene-changer";
 import { scnWorldMap } from "./scn-world-map";
 
@@ -28,13 +28,11 @@ function enrichTogglingBlocks(lvl: LvlType.GreatTower) {
     const blockObjs = [lvl.TogglingBlock0, lvl.TogglingBlock1];
 
     scene.stage.coro(function* () {
-        const delta = 1000;
-
         while (true) {
             for (const blockObj of blockObjs) {
-                blockObj.x += delta;
+                ObjTerrain.toggle(blockObj);
                 yield sleep(2000);
-                blockObj.x -= delta;
+                ObjTerrain.toggle(blockObj);
             }
         }
     });
@@ -47,7 +45,7 @@ function enrichRacePipesRegion(lvl: LvlType.GreatTower) {
     let x = 0;
     let remainingWidth = obj.width;
 
-    const pipeObjs: DisplayObject[] = [];
+    const pipeObjs: ObjTerrain[] = [];
 
     while (remainingWidth > 0) {
         const pipeWidth = Math.min(delta, remainingWidth);
@@ -60,14 +58,11 @@ function enrichRacePipesRegion(lvl: LvlType.GreatTower) {
     }
 
     scene.stage.coro(function* () {
-        // This is so stupid
-        const delta = 1000;
-
         while (true) {
             for (const pipeObj of pipeObjs) {
-                pipeObj.x += delta;
+                ObjTerrain.toggle(pipeObj);
                 yield sleep(350);
-                pipeObj.x -= delta;
+                ObjTerrain.toggle(pipeObj);
             }
         }
     });
