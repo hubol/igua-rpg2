@@ -32,7 +32,16 @@ export class RpgRewardPool {
     }
 
     peek(): RpgRewardPool.Pull {
-        const pull = this._data.items[this._state.pulls] ?? this._data.repeatItemOnEmpty;
+        let pull = this._data.items[this._state.pulls] ?? null;
+
+        if (!pull && this._data.extend) {
+            pull = this._data.extend.item;
+        }
+
+        if (!pull) {
+            return null;
+        }
+
         return {
             ...pull,
             count: pull.count ?? 1,
@@ -57,5 +66,5 @@ namespace RpgRewardPool {
         pulls: Integer;
     }
 
-    export type Pull = Required<DataRewardPool.Item>;
+    export type Pull = Required<DataRewardPool.Item> | null;
 }

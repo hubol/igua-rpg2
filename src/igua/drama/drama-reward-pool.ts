@@ -6,7 +6,13 @@ import { DramaInventory } from "./drama-inventory";
 import { DramaWallet } from "./drama-wallet";
 
 function* reward(rewardPoolId: DataRewardPool.Id) {
-    const { count, ...pull } = Rpg.rewardPool(rewardPoolId).pull();
+    const prize = Rpg.rewardPool(rewardPoolId).pull();
+
+    if (!prize) {
+        return;
+    }
+
+    const { count, ...pull } = prize;
 
     if (pull.kind === "currency") {
         yield* DramaWallet.rewardValuables(count);
