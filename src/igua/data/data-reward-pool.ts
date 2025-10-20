@@ -3,7 +3,7 @@ import { RpgInventory } from "../rpg/rpg-inventory";
 import { DataLib } from "./data-lib";
 
 export namespace DataRewardPool {
-    export type Item = RpgInventory.Item & { count?: Integer };
+    export type Item = (RpgInventory.Item | { kind: "currency"; id: "valuables" }) & { count?: Integer };
 
     namespace Model {
         export interface InOrder {

@@ -1,7 +1,6 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { CacheMap } from "../../lib/object/cache-map";
 import { DataRewardPool } from "../data/data-reward-pool";
-import { RpgInventory } from "./rpg-inventory";
 
 export class RpgRewardPools {
     private readonly _cacheMap = new CacheMap((rewardPoolId: DataRewardPool.Id) => {
@@ -58,5 +57,5 @@ namespace RpgRewardPool {
         pulls: Integer;
     }
 
-    export type Pull = RpgInventory.Item & { count: Integer };
+    export type Pull = Required<DataRewardPool.Item>;
 }
