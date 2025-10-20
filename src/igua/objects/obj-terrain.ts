@@ -31,6 +31,7 @@ interface Terrain {
     iguaMaterial: Material;
     destroyed: boolean;
     dirty: boolean;
+    enabled: boolean;
     // TODO does it need to be on Terrain?
     clean: () => void;
     segments: TerrainSegment[];
@@ -168,7 +169,14 @@ function clean(obj: CleanableTerrainObj) {
     }
 }
 
-type ObjTerrain = DisplayObject & Terrain & { onTransformChanged(): void };
+export type ObjTerrain = DisplayObject & Terrain & { onTransformChanged(): void };
+
+export namespace ObjTerrain {
+    export function toggle(terrainObj: ObjTerrain) {
+        terrainObj.visible = !terrainObj.visible;
+        terrainObj.enabled = terrainObj.visible;
+    }
+}
 
 function constructTerrain(terrainObj: ObjTerrain, weights: TerrainSegment[]) {
     for (let i = 0; i < weights.length; i++) {
@@ -188,6 +196,7 @@ function constructTerrain(terrainObj: ObjTerrain, weights: TerrainSegment[]) {
 abstract class TerrainGraphics extends Graphics {
     dirty = true;
     segments: TerrainSegment[] = [];
+    enabled = true;
 
     constructor(readonly weights: TerrainSegment[], readonly iguaMaterial: Material) {
         super();
@@ -208,6 +217,7 @@ abstract class TerrainGraphics extends Graphics {
 abstract class TerrainMesh extends SimpleMesh {
     dirty = true;
     segments: TerrainSegment[] = [];
+    enabled = true;
 
     constructor(readonly weights: TerrainSegment[], readonly iguaMaterial: Material) {
         super();

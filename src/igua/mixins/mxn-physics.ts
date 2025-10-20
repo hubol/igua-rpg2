@@ -238,6 +238,11 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
     const terrains = CtxTerrain.value;
     for (let i = 0; i < terrains.length; i++) {
         const terrain = terrains[i];
+
+        if (!terrain.enabled) {
+            continue;
+        }
+
         const segments = terrain.segments;
         for (let j = 0; j < segments.length; j++) {
             const segment = segments[j];
