@@ -534,6 +534,7 @@ export const Lvl = {
       NurseNpc: e(r["IguanaNpc"], { x: 256, y: 200, flippedX: true, values: { personaName: "IndianaNurse", name: "NurseNpc", depth: 0 } }, "CharacterEntities"),
       fromInterior: e(r["Checkpoint"], { x: 616, y: 200, flippedX: true, values: { name: "fromInterior", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       Player: e(r["Player"], { x: 136, y: 184, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      DoctorSpriteMarker: e(r["Marker"], { x: 400, y: 200, values: { name: "DoctorSpriteMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   IndianaUniversity: () => {
