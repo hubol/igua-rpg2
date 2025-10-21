@@ -140,6 +140,20 @@ export namespace DataShop {
                     },
                 ],
             },
+            DoctorSprite: {
+                stocks: [
+                    {
+                        initialQuantity: 5,
+                        price: { currency: "spirit", deltaSold: 50, initial: 100 },
+                        product: { kind: "potion", id: "AttributeHealthUp" },
+                    },
+                    {
+                        initialQuantity: 99,
+                        price: { currency: "spirit", deltaSold: 5, initial: 5 },
+                        product: { kind: "potion", id: "RestoreHealth" },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );

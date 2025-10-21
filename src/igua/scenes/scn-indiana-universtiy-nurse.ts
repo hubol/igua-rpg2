@@ -2,6 +2,7 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { ZIndex } from "../core/scene/z-index";
+import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
@@ -21,7 +22,13 @@ function enrichDoctorNpc(lvl: LvlType.IndianaUniversityNurse) {
     obj
         .mixin(mxnSpeaker, { name: "Doctor Sprite", colorPrimary: 0x21AA0D, colorSecondary: 0xEAEA1E })
         .mixin(mxnCutscene, function* () {
-            yield* show("okkkk");
+            const result = yield* ask("Can I help you?", "About this", "Trade", "Respawn location");
+            if (result === 0) {
+                yield* show("Please feel free to ask the nurse any questions.");
+            }
+            else if (result === 1) {
+                yield* dramaShop("DoctorSprite", { primaryTint: 0x21AA0D, secondaryTint: 0xEAEA1E });
+            }
             yield interp(obj.objCharacterDoctorSprite.controls, "armUnit").to(1).over(500);
             yield* show("Drink responsibly!");
             yield interp(obj.objCharacterDoctorSprite.controls, "armUnit").to(0).over(500);
