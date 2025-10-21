@@ -209,16 +209,19 @@ function objUiEquipmentChoosePage(
     const initialSelectionIndex = availableLoadoutItems.findIndex(item => loadoutIndex === item?.loadoutIndex);
     const pageObj = objUiPage(uiEquipmentObjs, {
         selectionIndex: initialSelectionIndex === -1 ? availableLoadoutItems.length - 1 : initialSelectionIndex,
-    }).at(108, 100);
+        maxHeight: 104,
+        scrollbarBgTint: 0x005000,
+        scrollbarFgTint: 0x00ff00,
+    }).at(108, 80);
 
     objUiEquipmentBuffs(
         Rpg.inventory.equipment.loadout,
-    ).at(60, 46 + 30).show(pageObj);
+    ).at(60, 46 + 74).show(pageObj);
 
     objUiEquipmentBuffsComparedTo(
         previewEquipment,
         Rpg.inventory.equipment,
-    ).at(284 - 60, 46 + 30).show(pageObj);
+    ).at(284 - 60, 46 + 74).show(pageObj);
 
     objText.MediumBoldIrregular("", { tint: 0x00ff00 })
         .mixin(mxnTextTyped, () => {
