@@ -5,6 +5,7 @@ import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { objAngelEyes } from "../enemies/obj-angel-eyes";
+import { objAngelMouth } from "../enemies/obj-angel-mouth";
 
 const [bodyTx, nogginTx, hairTx, doctorHeadThingTx, armTx, heldSodaTx] = Tx.Characters.DoctorSprite.Layers.split({
     width: 88,
@@ -12,13 +13,36 @@ const [bodyTx, nogginTx, hairTx, doctorHeadThingTx, armTx, heldSodaTx] = Tx.Char
 
 export function objCharacterDoctorSprite() {
     const armObj = Sprite.from(armTx);
-    const heldSodaObj = Sprite.from(heldSodaTx);
+    const heldSodaObj = Sprite.from(heldSodaTx).mixin(mxnSinePivot);
+
+    let armUnit = 0;
+
+    const controls = {
+        get armUnit() {
+            return armUnit;
+        },
+        set armUnit(value) {
+            armObj.visible = value > 0.75;
+            heldSodaObj.visible = value > 0.25;
+            heldSodaObj.x = value > 0.75 ? 0 : -20;
+            armUnit = value;
+        },
+    };
+
+    controls.armUnit = 0;
 
     return container(
         Sprite.from(bodyTx),
         container(
             Sprite.from(nogginTx),
             Sprite.from(hairTx),
+            objAngelMouth({
+                txs: objAngelMouth.txs.w14b,
+                negativeSpaceTint: 0x000000,
+                teethCount: 2,
+                toothGapWidth: 2,
+            })
+                .at(24, 37),
             objAngelEyes({
                 pupilsTint: 0x000000,
                 eyelidsTint: 0x808080,
@@ -35,6 +59,7 @@ export function objCharacterDoctorSprite() {
         armObj,
         heldSodaObj,
     )
+        .merge({ objCharacterDoctorSprite: { controls } })
         .mixin(mxnDetectPlayer)
         .pivotedUnit(.6, 1);
 }

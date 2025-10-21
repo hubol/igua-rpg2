@@ -4,8 +4,8 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#408000",
   "values": {"Terrain Color": "#000000"},
+  "backgroundColor": "#408000",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -16,7 +16,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 94,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 400,
+          "y": 200,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "DoctorSpriteMarker", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",

@@ -1,13 +1,35 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
+import { ZIndex } from "../core/scene/z-index";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { objCharacterDoctorSprite } from "../objects/characters/obj-character-doctor-sprite";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 
 export function scnIndianaUniversityNurse() {
     const lvl = Lvl.IndianaUniversityNurse();
     enrichNurseNpc(lvl);
+    enrichDoctorNpc(lvl);
+}
+
+function enrichDoctorNpc(lvl: LvlType.IndianaUniversityNurse) {
+    const obj = objCharacterDoctorSprite();
+
+    obj
+        .mixin(mxnSpeaker, { name: "Doctor Sprite", colorPrimary: 0x21AA0D, colorSecondary: 0xEAEA1E })
+        .mixin(mxnCutscene, function* () {
+            yield* show("okkkk");
+            yield interp(obj.objCharacterDoctorSprite.controls, "armUnit").to(1).over(500);
+            yield* show("Drink responsibly!");
+            yield interp(obj.objCharacterDoctorSprite.controls, "armUnit").to(0).over(500);
+        })
+        .at(lvl.DoctorSpriteMarker)
+        .add(0, 3)
+        .zIndexed(ZIndex.Entities)
+        .show();
 }
 
 function enrichNurseNpc(lvl: LvlType.IndianaUniversityNurse) {

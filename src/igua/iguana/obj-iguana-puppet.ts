@@ -9,6 +9,7 @@ import { range } from "../../lib/range";
 import { Force } from "../../lib/types/force";
 import { mxnBallonable } from "../mixins/mxn-ballonable";
 import { mxnHasHead } from "../mixins/mxn-has-head";
+import { mxnSpeakingMouth } from "../mixins/mxn-speaking-mouth";
 import { objEye, objEyes } from "../objects/characters/obj-eye";
 import { Material, Materials } from "../systems/materials";
 import { IguanaLooks } from "./looks";
@@ -570,6 +571,14 @@ function objIguanaMouth(head: Head) {
                         mouths[i].flipV(-1);
                     }
                 },
+            },
+        })
+        .mixin(mxnSpeakingMouth, {
+            get agapeUnit() {
+                return agape;
+            },
+            set agapeUnit(value) {
+                c.agape = value;
             },
         });
 

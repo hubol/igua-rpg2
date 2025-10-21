@@ -15,7 +15,6 @@ import { force } from "../mixins/mxn-physics";
 import { MxnRpgStatus, mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
-import { mxnSpeakingIguana } from "../mixins/mxn-speaking-iguana";
 import { Rpg } from "../rpg/rpg";
 import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgStatus } from "../rpg/rpg-status";
@@ -131,7 +130,6 @@ function objPlayer(looks: IguanaLooks.Serializable) {
         .mixin(mxnRpgStatus, { status, effects, hurtboxes: [iguanaLocomotiveObj] })
         .mixin(mxnSparkling)
         .mixin(mxnSpeaker, { name: "You", ...objIguanaNpc.getSpeakerColors(looks) })
-        .mixin(mxnSpeakingIguana)
         .handles("moved", () => {
             if (CtxGate.value.isGateTransitionActive) {
                 return;

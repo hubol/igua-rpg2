@@ -3,6 +3,7 @@ import { Tx } from "../../../assets/textures";
 import { nlerp } from "../../../lib/math/number";
 import { Integer, RgbInt, Unit } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
+import { mxnSpeakingMouth } from "../../mixins/mxn-speaking-mouth";
 
 interface ObjAngelMouthArgs {
     negativeSpaceTint: RgbInt;
@@ -85,12 +86,22 @@ export function objAngelMouth(args: ObjAngelMouthArgs) {
 
     applyTeethPosition();
 
-    return container(obj.pivoted(Math.round(width / 2), Math.round(height / 2))).merge({ controls });
+    return container(obj.pivoted(Math.round(width / 2), Math.round(height / 2)))
+        .merge({ controls })
+        .mixin(mxnSpeakingMouth, {
+            get agapeUnit() {
+                return controls.agapeUnit;
+            },
+            set agapeUnit(value) {
+                controls.agapeUnit = value;
+            },
+        });
 }
 
 objAngelMouth.txs = {
     rounded11: Tx.Enemy.Common.Mouths.Rounded11.split({ width: 11 }),
     rounded14: Tx.Enemy.Common.Mouths.Rounded14.split({ width: 14 }),
     w14: Tx.Enemy.Common.Mouths.W14.split({ width: 14 }),
+    w14b: Tx.Enemy.Common.Mouths.W14B.split({ width: 14 }),
     w36: Tx.Enemy.Common.Mouths.W36.split({ width: 36 }),
 };
