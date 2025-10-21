@@ -33,11 +33,17 @@ export type ObjUiPageRouter = ReturnType<typeof objUiPageRouter>;
 type UiPageRouterProps = { readonly maxHeight?: number };
 
 export function objUiPageRouter(props: UiPageRouterProps = {}) {
+    function applyDefaults(page: UiPage) {
+        if (props.maxHeight !== undefined && page.maxHeight === undefined) {
+            page.maxHeight = props.maxHeight;
+        }
+    }
+
     function replace(page: UiPage) {
         if (c.playSounds && c.page) {
             Sfx.Ui.NavigateInto.play();
         }
-        page.maxHeight = props.maxHeight;
+        applyDefaults(page);
         c.children.last?.destroy();
         c.addChild(page);
         forceGameLoop();
@@ -47,7 +53,7 @@ export function objUiPageRouter(props: UiPageRouterProps = {}) {
         if (c.playSounds && c.page) {
             Sfx.Ui.NavigateInto.play();
         }
-        page.maxHeight = props.maxHeight;
+        applyDefaults(page);
         c.addChild(page);
         forceGameLoop();
     }
