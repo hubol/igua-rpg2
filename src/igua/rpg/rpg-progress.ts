@@ -18,7 +18,6 @@ import { RpgPlayerWallet } from "./rpg-player-wallet";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgPotions } from "./rpg-potions";
 import { RpgQuests } from "./rpg-quests";
-import { RpgRewardPools } from "./rpg-reward-pools";
 import { RpgShops } from "./rpg-shops";
 import { RpgStashPockets } from "./rpg-stash-pockets";
 
@@ -37,7 +36,6 @@ export function getInitialRpgProgress() {
             status: RpgPlayerStatus.createState(),
             attributes: RpgPlayerAttributes.createState(),
             experience: RpgExperience.createState(),
-            quests: RpgQuests.createState(),
             ...RpgPlayer.createState(),
         },
         flags: {
@@ -104,8 +102,8 @@ export function getInitialRpgProgress() {
             looseValuables: RpgLooseValuables.createState(),
             idols: RpgIdols.createState(),
             iguanaNpcs: RpgIguanaNpcs.createState(),
+            quests: RpgQuests.createState(),
             revealedWorldMapGateUids: new Set<Integer>(),
-            rewardPools: RpgRewardPools.createState(),
             shops: RpgShops.createState(),
             stashPockets: RpgStashPockets.createState(),
         },

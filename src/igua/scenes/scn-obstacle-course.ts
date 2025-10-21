@@ -12,11 +12,11 @@ import { ZIndex } from "../core/scene/z-index";
 import { renderer } from "../current-pixi-renderer";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataPocketItem } from "../data/data-pocket-item";
-import { DataRewardPool } from "../data/data-reward-pool";
+import { DataQuestReward } from "../data/data-quest-reward";
 import { DramaFacts } from "../drama/drama-facts";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
-import { DramaRewardPool } from "../drama/drama-reward-pool";
+import { DramaQuests } from "../drama/drama-quests";
 import { DramaWallet } from "../drama/drama-wallet";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
@@ -106,7 +106,7 @@ function objMinigameController(lvl: LvlType.ObstacleCourse) {
                     yield* coroAwardPrizeForCollection({
                         npcPersonaId: "WheatGod",
                         pocketItemId: "Wheat",
-                        rewardPoolId: "WheatGod",
+                        questRewardId: "WheatGod",
                     });
                 },
             );
@@ -116,7 +116,7 @@ function objMinigameController(lvl: LvlType.ObstacleCourse) {
                     yield* coroAwardPrizeForCollection({
                         npcPersonaId: "BeetGod",
                         pocketItemId: "Beet",
-                        rewardPoolId: "BeetGod",
+                        questRewardId: "BeetGod",
                     });
                 },
             );
@@ -162,10 +162,10 @@ function objHolyIguana(npcPersonaId: DataNpcPersona.Id) {
 interface CoroAwardPrizeForCollectionArgs {
     pocketItemId: DataPocketItem.Id;
     npcPersonaId: DataNpcPersona.Id;
-    rewardPoolId: DataRewardPool.Id;
+    questRewardId: DataQuestReward.Id;
 }
 
-function* coroAwardPrizeForCollection({ npcPersonaId, pocketItemId, rewardPoolId }: CoroAwardPrizeForCollectionArgs) {
+function* coroAwardPrizeForCollection({ npcPersonaId, pocketItemId, questRewardId }: CoroAwardPrizeForCollectionArgs) {
     while (true) {
         yield () => Rpg.inventory.pocket.count(pocketItemId) >= 50;
 
@@ -190,7 +190,7 @@ function* coroAwardPrizeForCollection({ npcPersonaId, pocketItemId, rewardPoolId
             yield interp(lerpRef, "factor").factor(factor.sine).to(1).over(2000);
             // TODO sick ass animation for this
             yield* DramaInventory.removeCount({ kind: "pocket_item", id: pocketItemId }, 50);
-            yield* DramaRewardPool.reward(rewardPoolId);
+            yield* DramaQuests.receiveReward(questRewardId);
 
             yield* show("A blessing for thy harvest.", "Many thanks unto thine ass.");
             yield interp(lerpRef, "factor").factor(factor.sine).to(0).over(2000);

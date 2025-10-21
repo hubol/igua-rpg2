@@ -1,5 +1,4 @@
 import { Integer } from "../../lib/math/number-alias-types";
-import { DataQuest } from "../data/data-quest";
 import { RpgAttack } from "./rpg-attack";
 import { RpgExperience } from "./rpg-experience";
 import { RpgPocket } from "./rpg-pocket";
@@ -19,11 +18,6 @@ const speaksToExperience = {
     first_in_cutscene: 2,
     default: 1,
 } satisfies Record<SpeakKind, Integer>;
-
-const questComplexityToExperience = {
-    easy: 30,
-    normal: 100,
-} satisfies Record<DataQuest.Complexity, Integer>;
 
 const rerollCountToExperience = [0, 3, 9, 15, 25, 50, 99];
 
@@ -117,10 +111,12 @@ export class RpgExperienceRewarder {
     }));
 
     readonly quest = this._expose("quest", (increase) => ({
-        onComplete(complexity: DataQuest.Complexity, completionsCount: Integer) {
-            increase(Math.ceil(
-                questComplexityToExperience[complexity] * (1 / Math.pow(2, completionsCount - 1)),
-            ));
+        onReceiveReward(rewardsReceivedCount: Integer, isExtended: boolean) {
+            if (isExtended) {
+                increase(1);
+                return;
+            }
+            increase(Math.ceil(50 * (1 / Math.pow(2, rewardsReceivedCount - 1))));
         },
     }));
 

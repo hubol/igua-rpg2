@@ -1,14 +1,18 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { CacheMap } from "../../lib/object/cache-map";
-import { DataQuest } from "../data/data-quest";
-import { RpgExperience } from "./rpg-experience";
+import { DataQuestReward } from "../data/data-quest-reward";
+import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 
 export class RpgQuests {
-    private readonly _cacheMap = new CacheMap((questId: DataQuest.Id) =>
-        new RpgQuest(this._state, questId, this._experience)
-    );
+    private readonly _cacheMap = new CacheMap((questId: DataQuestReward.Id) => {
+        const questState = this._state[questId] ?? (this._state[questId] = RpgQuest.createState());
+        return new RpgQuest(questState, DataQuestReward.getById(questId), this._reward);
+    });
 
-    constructor(private readonly _state: RpgQuests.State, private readonly _experience: RpgExperience) {
+    constructor(
+        private readonly _state: RpgQuests.State,
+        private readonly _reward: RpgExperienceRewarder,
+    ) {
     }
 
     readonly getById = this._cacheMap.get.bind(this._cacheMap);
@@ -18,23 +22,64 @@ export class RpgQuests {
     }
 }
 
-class RpgQuest {
+namespace RpgQuests {
+    export type State = Partial<Record<DataQuestReward.Id, RpgQuest.State>>;
+}
+
+export class RpgQuest {
     constructor(
-        private readonly _state: RpgQuests.State,
-        private readonly _id: DataQuest.Id,
-        private readonly _experience: RpgExperience,
+        private readonly _state: RpgQuest.State,
+        private readonly _data: DataQuestReward.Model,
+        private readonly _reward: RpgExperienceRewarder,
     ) {
     }
 
-    complete(): DataQuest.Rewards {
-        const completionsCount = (this._state[this._id] ?? 0) + 1;
-        this._state[this._id] = completionsCount;
-        const quest = DataQuest.getById(this._id);
-        this._experience.reward.quest.onComplete(quest.complexity, completionsCount);
-        return quest.rewards;
+    peekReward(): RpgQuest.Reward {
+        if (this._data.kind === "single") {
+            const { count = 1, ...reward } = this._data.reward;
+            return this._state.rewardsReceived === 0 ? { count, ...reward, isExtended: false } : null;
+        }
+
+        let rewards = this._data.rewards[this._state.rewardsReceived] ?? null;
+        let isExtended = false;
+
+        if (!rewards && this._data.extend) {
+            rewards = this._data.extend.reward;
+            isExtended = true;
+        }
+
+        if (!rewards) {
+            return null;
+        }
+
+        return {
+            ...rewards,
+            count: rewards.count ?? 1,
+            isExtended,
+        };
+    }
+
+    receiveReward(): RpgQuest.Reward {
+        const reward = this.peekReward();
+        if (reward) {
+            this._state.rewardsReceived += 1;
+            this._reward.quest.onReceiveReward(this._state.rewardsReceived, reward.isExtended);
+        }
+
+        return reward;
+    }
+
+    static createState(): RpgQuest.State {
+        return {
+            rewardsReceived: 0,
+        };
     }
 }
 
-namespace RpgQuests {
-    export type State = Partial<Record<DataQuest.Id, Integer>>;
+export namespace RpgQuest {
+    export interface State {
+        rewardsReceived: Integer;
+    }
+
+    export type Reward = (Required<DataQuestReward.Reward> & { isExtended: boolean }) | null;
 }

@@ -1,11 +1,12 @@
 import { DisplayObject } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { sleep } from "../../lib/game-engine/routines/sleep";
-import { DramaRewardPool } from "../drama/drama-reward-pool";
+import { DramaQuests } from "../drama/drama-quests";
 import { dramaShop } from "../drama/drama-shop";
 import { show } from "../drama/show";
-import { scene } from "../globals";
+import { Cutscene, Input, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { playerObj } from "../objects/obj-player";
 import { objPipe, ObjTerrain } from "../objects/obj-terrain";
 import { SceneChanger } from "../systems/scene-changer";
 import { scnWorldMap } from "./scn-world-map";
@@ -71,7 +72,7 @@ function enrichRacePipesRegion(lvl: LvlType.GreatTower) {
 function enrichReward(lvl: LvlType.GreatTower) {
     lvl.EndingRewarder.mixin(mxnCutscene, function* () {
         yield* show("You did great.");
-        yield* DramaRewardPool.reward("GreatTower");
+        yield* DramaQuests.receiveReward("GreatTower");
         yield* show("Bye-bye!!");
         SceneChanger.create({ sceneName: scnWorldMap.name, checkpointName: "" })!.changeScene();
     });

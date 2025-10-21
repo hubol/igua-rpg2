@@ -1,8 +1,7 @@
 import { Logging } from "../../lib/logging";
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataNpcPersona } from "../data/data-npc-persona";
-import { DataQuest } from "../data/data-quest";
-import { DataRewardPool } from "../data/data-reward-pool";
+import { DataQuestReward } from "../data/data-quest-reward";
 import { DataShop } from "../data/data-shop";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgClassrooms } from "./rpg-classrooms";
@@ -23,7 +22,6 @@ import { RpgPocket } from "./rpg-pocket";
 import { RpgPotions } from "./rpg-potions";
 import { getInitialRpgProgress, RpgProgressData } from "./rpg-progress";
 import { RpgQuests } from "./rpg-quests";
-import { RpgRewardPools } from "./rpg-reward-pools";
 import { RpgShops } from "./rpg-shops";
 import { RpgStashPockets } from "./rpg-stash-pockets";
 
@@ -37,7 +35,7 @@ function createRpg(data: RpgProgressData) {
             shops: shopsState,
             stashPockets: stashPocketsState,
             looseValuables: looseValuablesState,
-            rewardPools: rewardPoolsState,
+            quests: questsState,
             ...programmaticFlags
         },
     } = data;
@@ -48,7 +46,7 @@ function createRpg(data: RpgProgressData) {
     const buffs = new RpgPlayerAggregatedBuffs(equipment);
     const idols = new RpgIdols(idolsState);
     const iguanaNpcs = new RpgIguanaNpcs(iguanaNpcsState, experience.reward);
-    const quests = new RpgQuests(data.character.quests, experience);
+    const quests = new RpgQuests(questsState, experience.reward);
     const pocket = new RpgPocket(data.character.inventory.pocket, experience);
     const potions = new RpgPotions(data.character.inventory.potions);
     const keyItems = new RpgKeyItems(data.character.inventory.keyItems);
@@ -72,7 +70,6 @@ function createRpg(data: RpgProgressData) {
         looseValuables,
     );
     const shops = new RpgShops(shopsState, wallet, inventory);
-    const rewardPools = new RpgRewardPools(rewardPoolsState);
 
     return {
         // TODO rename to player
@@ -93,11 +90,8 @@ function createRpg(data: RpgProgressData) {
         inventory,
         looseValuables: looseValuables as Omit<RpgLooseValuables, "nextLifetime">,
         programmaticFlags,
-        quest(questId: DataQuest.Id) {
+        quest(questId: DataQuestReward.Id) {
             return quests.getById(questId);
-        },
-        rewardPool(rewardPoolId: DataRewardPool.Id) {
-            return rewardPools.getById(rewardPoolId);
         },
         shop(shopId: DataShop.Id) {
             return shops.getById(shopId);

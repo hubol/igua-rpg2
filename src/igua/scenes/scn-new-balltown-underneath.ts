@@ -273,7 +273,7 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
                 yield sleep(1000);
                 yield* show("Thank you for bringing joy to this place!!!");
                 scene.camera.mode = "move_towards_player";
-                yield* DramaQuests.completeQuest("NewBalltownUnderneathMagicRisingFace");
+                yield* DramaQuests.receiveReward("NewBalltown.RisingFace");
                 Rpg.flags.underneath.magicalRisingFace.reachedSummit = true;
             }, { speaker: self, camera: { start: "pan_to_speaker" } });
         });
