@@ -31,7 +31,9 @@ const atkPoisonDrip = RpgAttack.create({
             tint: 0x80B020,
             value: 5,
         },
-        poison: 5,
+        poison: {
+            value: 5,
+        },
     },
     versus: RpgFaction.Anyone,
 });

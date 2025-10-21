@@ -534,7 +534,9 @@ const atkFlameColumn = RpgAttack.create({
 
 const atkPoisonBox = RpgAttack.create({
     conditions: {
-        poison: 5,
+        poison: {
+            value: 5,
+        },
     },
 });
 

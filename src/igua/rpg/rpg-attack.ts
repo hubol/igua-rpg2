@@ -9,7 +9,10 @@ export namespace RpgAttack {
         emotional: Integer;
         conditions: {
             helium: Integer;
-            poison: Integer;
+            poison: {
+                value: Integer;
+                maxLevel: Integer;
+            };
             wetness: {
                 value: Integer;
                 tint: RgbInt;
@@ -36,7 +39,10 @@ export namespace RpgAttack {
             merge(model, {
                 conditions: merge({
                     helium: model.conditions?.helium ?? 0,
-                    poison: model.conditions?.poison ?? 0,
+                    poison: {
+                        value: model.conditions?.poison?.value ?? 0,
+                        maxLevel: model.conditions?.poison?.maxLevel ?? 999,
+                    },
                     wetness: {
                         value: model.conditions?.wetness?.value ?? 0,
                         tint: model.conditions?.wetness?.tint ?? 0xffffff,

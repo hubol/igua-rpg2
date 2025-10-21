@@ -20,7 +20,8 @@ export namespace DataIdol {
             },
             Green: {
                 buffs: (model) => {
-                    model.combat.melee.conditions.poison += 300;
+                    model.combat.melee.conditions.poison.value += 300;
+                    model.combat.melee.conditions.poison.maxLevel += 20;
                 },
                 hudText: "Power of the idol bestows poison",
                 keyItemId: "SeedGreen",

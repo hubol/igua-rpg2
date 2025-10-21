@@ -46,8 +46,13 @@ export class RpgPlayer {
 
         return RpgAttack.create({
             conditions: {
-                get poison() {
-                    return player.buffs.combat.melee.conditions.poison;
+                poison: {
+                    get value() {
+                        return player.buffs.combat.melee.conditions.poison.value;
+                    },
+                    get maxLevel() {
+                        return player.buffs.combat.melee.conditions.poison.maxLevel;
+                    },
                 },
             },
             emotional: 0,

@@ -35,7 +35,9 @@ export function objPuddle(width: number, tint = 0x68A8D0) {
 export function objPuddlePoison(width: number, tint = 0x80B020) {
     const attack = RpgAttack.create({
         conditions: {
-            poison: 5,
+            poison: {
+                value: 5,
+            },
             wetness: {
                 value: 2,
                 tint,

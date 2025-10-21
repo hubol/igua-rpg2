@@ -198,7 +198,7 @@ export namespace RpgStatus {
 
             const conditions = target.invulnerable === 0
                 && (attack.conditions.helium > 0
-                    || attack.conditions.poison > 0
+                    || attack.conditions.poison.value > 0
                     || attack.conditions.wetness.value > 0);
 
             if (conditions) {
@@ -209,8 +209,15 @@ export namespace RpgStatus {
                 }
 
                 if (!target.conditions.poison.immune) {
-                    target.conditions.poison.value += attack.conditions.poison;
-                    while (target.conditions.poison.value >= Math.max(1, target.conditions.poison.max)) {
+                    target.conditions.poison.value += attack.conditions.poison.value;
+                    const max = Math.max(1, target.conditions.poison.max);
+
+                    while (target.conditions.poison.value >= max) {
+                        if (target.conditions.poison.level >= attack.conditions.poison.maxLevel) {
+                            target.conditions.poison.value = max - 1;
+                            break;
+                        }
+
                         target.conditions.poison.value = Math.max(
                             0,
                             target.conditions.poison.value - target.conditions.poison.max,

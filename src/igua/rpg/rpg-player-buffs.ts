@@ -19,7 +19,10 @@ export namespace RpgPlayerBuffs {
                         physical: 0,
                     },
                     conditions: {
-                        poison: 0,
+                        poison: {
+                            value: 0,
+                            maxLevel: 0,
+                        },
                     },
                     clawAttack: {
                         perfect: {

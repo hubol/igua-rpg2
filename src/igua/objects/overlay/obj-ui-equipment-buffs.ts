@@ -200,7 +200,18 @@ const getBuffInformations = (function () {
     > = Object.assign(
         {},
         buff("combat.melee.attack.physical", "Melee Phys ATK", "integer", "beneft_when_positive"),
-        buff("combat.melee.conditions.poison", "Melee Inflicts Poison", "integer", "beneft_when_positive"),
+        buff(
+            "combat.melee.conditions.poison.value",
+            "Melee ATK Poison (Buildup)",
+            "integer",
+            "beneft_when_positive",
+        ),
+        buff(
+            "combat.melee.conditions.poison.maxLevel",
+            "Melee ATK Poison (Max)",
+            "integer",
+            "beneft_when_positive",
+        ),
         buff("combat.melee.clawAttack.physical", "Claw Phys ATK", "integer", "beneft_when_positive"),
         buff("loot.pocket.bonusChance", "Pocket Bonus Chance", "percent", "beneft_when_positive"),
         buff("loot.tiers.nothingRerollCount", "Re-Roll Empty Loot", "integer", "beneft_when_positive"),

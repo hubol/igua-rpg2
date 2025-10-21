@@ -24,8 +24,10 @@ export namespace DataEquipment {
                 name: "Green Drip",
                 texture: Tx.Collectibles.Equipment.Poison0,
                 description: "Melee attacks apply poison to enemy",
-                buffs: (model, bonus) =>
-                    model.combat.melee.conditions.poison += Math.round(((2 + 1 * bonus) / 3) * 100),
+                buffs: (model, bonus) => {
+                    model.combat.melee.conditions.poison.value += Math.round(((2 + 1 * bonus) / 3) * 100);
+                    model.combat.melee.conditions.poison.maxLevel += 2 + Math.round(bonus * 1.5);
+                },
             },
             RichesRing: {
                 name: "Luck Coin",
