@@ -15,13 +15,7 @@ export function objFxFactNew() {
         .pivoted(28, 32)
         .invisible()
         .coro(function* (self) {
-            self.play(Sfx.Collect.FactNewAppear.rate(0.9, 1.1));
-            objFxBurstDusty()
-                .at(self)
-                .coro(function* (self) {
-                    yield interpc(self, "tint").steps(5).to(0xA074E8).over(200);
-                })
-                .show();
+            objFxFactNew.objFxBurst().at(self).show();
             yield sleep(200);
             self.visible = true;
             self.play(Sfx.Collect.FactNewText.rate(0.9, 1.1));
@@ -39,6 +33,14 @@ export function objFxFactNew() {
             self.destroy();
         });
 }
+
+objFxFactNew.objFxBurst = function objFxBurst () {
+    return objFxBurstDusty()
+        .coro(function* (self) {
+            self.play(Sfx.Collect.FactNewAppear.rate(0.9, 1.1));
+            yield interpc(self, "tint").steps(5).to(0xA074E8).over(200);
+        });
+};
 
 function objCapacity() {
     const capacityTextObj = objText.Medium("Capacity:").anchored(1, 1);

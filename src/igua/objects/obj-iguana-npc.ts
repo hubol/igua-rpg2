@@ -18,7 +18,8 @@ export function objIguanaNpc(npcPersonaId: DataNpcPersona.Id) {
         .mixin(mxnStartPosition)
         .handles("mxnSpeaker.speakingStarted", (self) => {
             self.rpgIguanaNpc.onSpeak();
-        });
+        })
+        .track(objIguanaNpc);
 }
 
 objIguanaNpc.getSpeakerColors = function getSpeakerColors (looks: IguanaLooks.Serializable) {

@@ -83,4 +83,5 @@ function objFxFact(targetObj: DisplayObject | null) {
 
 export const DramaFacts = {
     memorize,
+    objFxFact,
 };
