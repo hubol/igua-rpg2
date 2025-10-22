@@ -1,6 +1,8 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
+import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
@@ -11,6 +13,7 @@ import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 
 export function scnIndianaUniversityNurse() {
+    Jukebox.play(Mzk.DespicableMessage);
     const lvl = Lvl.IndianaUniversityNurse();
     enrichNurseNpc(lvl);
     enrichDoctorNpc(lvl);

@@ -36,7 +36,7 @@ export namespace DataNpcPersona {
             IndianaStudent1: { job: "Student", name: "???", looks: NpcLooks.FleshHound },
             IndianaStudent2: { job: "Student", name: "???", looks: NpcLooks.Tweaker },
             IndianaStudent3: { job: "Student", name: "???", looks: NpcLooks.Flamboyant },
-            IndianaNurse: { job: "Nurse", name: "???", looks: NpcLooks.Unamused },
+            IndianaNurse: { job: "Nurse", name: "Chandelique", looks: NpcLooks.Unamused },
             SecretKnower0: { job: "Knower", name: "???", looks: NpcLooks.KoopaVariety },
             GreatTowerShopkeeper: { job: "Shopkeeper", name: "???", looks: NpcLooks.PotteryEnthusiast },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },

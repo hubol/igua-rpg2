@@ -1,17 +1,18 @@
-import { DisplayObject } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { sleep } from "../../lib/game-engine/routines/sleep";
+import { Jukebox } from "../core/igua-audio";
 import { DramaQuests } from "../drama/drama-quests";
 import { dramaShop } from "../drama/drama-shop";
 import { show } from "../drama/show";
-import { Cutscene, Input, scene } from "../globals";
+import { scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { playerObj } from "../objects/obj-player";
 import { objPipe, ObjTerrain } from "../objects/obj-terrain";
 import { SceneChanger } from "../systems/scene-changer";
 import { scnWorldMap } from "./scn-world-map";
 
 export function scnGreatTower() {
+    Jukebox.play(Mzk.FaithBeam);
     const lvl = Lvl.GreatTower();
     enrichShopkeeperNpc(lvl);
     enrichTogglingBlocks(lvl);

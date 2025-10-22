@@ -1,7 +1,10 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { ForceTintFilter } from "../../lib/pixi/filters/force-tint-filter";
+import { Jukebox } from "../core/igua-audio";
 
 export function scnIndianaUniversity() {
+    Jukebox.play(Mzk.DespicableMessage);
     const lvl = Lvl.IndianaUniversity();
     enrichStudentSilhouettes(lvl);
 }
