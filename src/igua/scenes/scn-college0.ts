@@ -1,13 +1,16 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { ForceTintFilter } from "../../lib/pixi/filters/force-tint-filter";
+import { Jukebox } from "../core/igua-audio";
 import { DramaClassroom } from "../drama/drama-classroom";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 
 export function scnCollege0() {
+    Jukebox.play(Mzk.DespicableMessage);
     const lvl = Lvl.College0();
     lvl.Podium.mixin(mxnCutscene, function* () {
         yield* DramaClassroom.teach("college0");
