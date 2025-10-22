@@ -24,7 +24,10 @@ function enrichDoctorNpc(lvl: LvlType.IndianaUniversityNurse) {
         .mixin(mxnCutscene, function* () {
             const result = yield* ask("Can I help you?", "About this", "Trade", "Respawn location");
             if (result === 0) {
-                yield* show("Please feel free to ask the nurse any questions.");
+                yield* show(
+                    "Sorry, I'm not particularly good at talking with patients.",
+                    "Please feel free to ask the nurse any questions.",
+                );
             }
             else if (result === 1) {
                 yield* dramaShop("DoctorSprite", { primaryTint: 0x21AA0D, secondaryTint: 0xEAEA1E });
@@ -44,7 +47,7 @@ function enrichNurseNpc(lvl: LvlType.IndianaUniversityNurse) {
         const result = yield* ask(
             "Hello.",
             Rpg.character.status.conditions.poison.level ? "I'm poisoned" : null,
-            "Spirit tax",
+            "About death",
         );
         if (result === 0) {
             if (Rpg.character.status.conditions.poison.level > 1) {
@@ -65,14 +68,13 @@ function enrichNurseNpc(lvl: LvlType.IndianaUniversityNurse) {
             yield* show(
                 "I'm sorry. There's only so much I can do.",
                 "The healer underneath New Balltown has powerful medicine to cure poison.",
-                "Also, if it is any comfort, poison is not fatal.",
             );
         }
         else if (result === 1) {
             yield* show(
                 "When you are fatally injured, you become a spirit.",
                 "Your valuables and pocket items are permanently lost and turned into spirit experience.",
-                "The sprite doctor can dispense valuable items in return for this experience.",
+                "The sprite doctor can dispense useful items in return for this experience.",
             );
         }
     });

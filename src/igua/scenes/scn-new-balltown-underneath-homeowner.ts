@@ -5,6 +5,7 @@ import { Instances } from "../../lib/game-engine/instances";
 import { interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
+import { DramaFacts } from "../drama/drama-facts";
 import { DramaMisc } from "../drama/drama-misc";
 import { DramaQuests } from "../drama/drama-quests";
 import { dramaShop } from "../drama/drama-shop";
@@ -53,7 +54,7 @@ function enrichEnemyPresence(lvl: LvlType.NewBalltownUnderneathHomeowner) {
                 yield scene.camera.auto.panToSubject(self);
                 yield* show("I hope this is a sufficient reward.");
                 yield* DramaQuests.receiveReward("NewBalltown.Homeowner.EnemyPresenceCleared");
-                yield* show("Please come see me again. I can heal poison and also create thought-provoking artworks.");
+                yield* show("Please come see me again. I sell medication and also create thought-provoking artworks.");
                 Rpg.flags.underneath.homeowner.hasClearedHouseOfEnemies = true;
                 enrichHomeowner(lvl);
             }, { speaker: self, camera: { start: "pan_to_speaker" } });
@@ -63,9 +64,13 @@ function enrichEnemyPresence(lvl: LvlType.NewBalltownUnderneathHomeowner) {
 
 function enrichHomeowner(lvl: LvlType.NewBalltownUnderneathHomeowner) {
     lvl.Homeowner.mixin(mxnCutscene, function* () {
-        const result = yield* ask("Hey! What's up?", "I'm poisoned", "Need art", "I'm leaving");
+        const result = yield* ask("Hey! What's up?", "About poison", "Let's trade", "I'm leaving");
         if (result === 0) {
-            // TODO
+            yield* DramaFacts.memorize(
+                "Poison",
+                "Poison is not fatal. Also, it increases your running speed and bounciness.",
+                "If you want to cure poisoning, buy my medicine.",
+            );
         }
         else if (result === 1) {
             yield* dramaShop("UnderneathHomeowner", { primaryTint: 0x103418, secondaryTint: 0xA5A17E });

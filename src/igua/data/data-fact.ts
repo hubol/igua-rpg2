@@ -19,6 +19,9 @@ export namespace DataFact {
             FarmingGods: {
                 messages: ["Beet and Wheat are farming gods created by the Wizard of Emotion."],
             },
+            Poison: {
+                messages: ["Poison is not fatal. Also, it increases your running speed and bounciness."],
+            },
             "__Fallback__": {
                 messages: ["If you are reading this, it is a bug with the facts mechanic."],
             },
