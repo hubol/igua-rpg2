@@ -3,6 +3,7 @@ import { Tx } from "../../../assets/textures";
 import { container } from "../../../lib/pixi/container";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
+import { mxnShadowFloor } from "../../mixins/mxn-shadow-floor";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { objAngelEyes } from "../enemies/obj-angel-eyes";
 import { objAngelMouth } from "../enemies/obj-angel-mouth";
@@ -61,5 +62,6 @@ export function objCharacterDoctorSprite() {
     )
         .merge({ objCharacterDoctorSprite: { controls } })
         .mixin(mxnDetectPlayer)
+        .mixin(mxnShadowFloor, { offset: [0, 0] })
         .pivotedUnit(.6, 1);
 }
