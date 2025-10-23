@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 448 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 449 }];
 
 interface TxData {
   id: string;
@@ -555,6 +555,7 @@ function txs<T>(tx: (data: TxData) => T) {
         OpenablePocket: tx({ id: "Ui.Pocket.OpenablePocket", atlas: 0, x: 703, y: 1223, width: 64, height: 48 }),
       },
       ShopProductSeparator: tx({ id: "Ui.ShopProductSeparator", atlas: 0, x: 0, y: 49, width: 1068, height: 32 }),
+      Total: tx({ id: "Ui.Total", atlas: 0, x: 377, y: 1414, width: 32, height: 10 }),
     },
     Wood: {
       Bookshelf0: tx({ id: "Wood.Bookshelf0", atlas: 0, x: 202, y: 1279, width: 34, height: 56 }),
@@ -570,7 +571,7 @@ function txs<T>(tx: (data: TxData) => T) {
       Faces: {
         Variant0: tx({ id: "WorldMap.Faces.Variant0", atlas: 0, x: 292, y: 1440, width: 28, height: 16 }),
       },
-      Gate: tx({ id: "WorldMap.Gate", atlas: 0, x: 377, y: 1414, width: 32, height: 32 }),
+      Gate: tx({ id: "WorldMap.Gate", atlas: 0, x: 377, y: 1425, width: 32, height: 32 }),
       Hill0: tx({ id: "WorldMap.Hill0", atlas: 0, x: 1090, y: 1072, width: 73, height: 41 }),
       Labels: {
         NewBalltown: tx({ id: "WorldMap.Labels.NewBalltown", atlas: 0, x: 143, y: 1179, width: 124, height: 58 }),

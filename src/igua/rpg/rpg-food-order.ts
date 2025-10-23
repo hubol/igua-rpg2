@@ -6,16 +6,11 @@ export class RpgFoodOrder {
     readonly valuablesPrice: Integer;
 
     constructor(private readonly _items: ReadonlyArray<RpgFoodOrder.Item>) {
-        this.valuablesPrice = RpgFoodOrder._computePrice(_items);
+        this.valuablesPrice = RpgFoodOrder.getPrice(_items);
     }
 
     get list() {
         return this._items;
-    }
-
-    private static _computePrice(items: ReadonlyArray<RpgFoodOrder.Item>) {
-        const optionsCount = items.filter(item => Boolean(item.option)).length;
-        return items.length * 9 + optionsCount * 4;
     }
 
     static fromSeed(seed: Integer, difficulty: "normal" | "hard"): RpgFoodOrder {
@@ -108,6 +103,15 @@ export namespace RpgFoodOrder {
         toOrder() {
             return new RpgFoodOrder(this._items);
         }
+    }
+
+    export function getPrice(item: ReadonlyArray<Item>): Integer;
+    export function getPrice(item: Item): Integer;
+    export function getPrice(maybeItems: Item | ReadonlyArray<Item>) {
+        if (Array.isArray(maybeItems)) {
+            return maybeItems.reduce((price, item) => price + getPrice(item), 0);
+        }
+        return 9 + ((maybeItems as Item).option ? 4 : 0);
     }
 
     export function getGroupedItems(items: ReadonlyArray<Item>) {

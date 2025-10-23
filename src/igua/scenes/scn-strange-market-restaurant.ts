@@ -36,7 +36,7 @@ function computeItemToDispense(order: RpgFoodOrder): RpgInventory.Item {
 function enrichScenario(lvl: LvlType.StrangeMarketRestaurant) {
     const inProgressOrderObj = objEsotericInProgressOrder()
         .at(lvl.InProgressOrderRegion)
-        .zIndexed(ZIndex.BackgroundEntities)
+        .zIndexed(ZIndex.TerrainDecals)
         .show();
 
     function* takeOrder() {
