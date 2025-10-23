@@ -4,20 +4,24 @@ import { ask, show } from "./show";
 
 const englishCounts = ["Zero ", "", "Two ", "Three ", "Four ", "Five ", "Six ", "Seven ", "Eight ", "Nine "];
 
+function* explainOrder(order: RpgFoodOrder) {
+    const groupedItems = RpgFoodOrder.getGroupedItems(order.list);
+
+    yield* show(
+        `I would like the following ${order.list.length} items:`,
+        ...groupedItems.map(({ count, item: { name, option } }) =>
+            `        ${englishCounts[count]}${name}${!name.endsWith("s") && count > 1 ? "s" : ""}
+    ${option ? option : ""}`
+        ),
+    );
+}
+
 function* requestOrderFromPlayer() {
     const seed = Rng.intc(100_000, 990_000_000);
     const order = RpgFoodOrder.fromSeed(seed, "normal");
 
-    const groupedItems = RpgFoodOrder.getGroupedItems(order.list);
-
     while (true) {
-        yield* show(
-            `I would like the following ${order.list.length} items:`,
-            ...groupedItems.map(({ count, item: { name, option } }) =>
-                `        ${englishCounts[count]}${name}${!name.endsWith("s") && count > 1 ? "s" : ""}
-        ${option ? option : ""}`
-            ),
-        );
+        yield* explainOrder(order);
 
         if (yield* ask("Do you need to hear that again?")) {
             continue;
@@ -57,6 +61,7 @@ function* buildOrderAtRestaurant(inProgressOrder: RpgFoodOrder.InProgress) {
 }
 
 export const DramaFoodOrder = {
+    explainOrder,
     requestOrderFromPlayer,
     buildOrderAtRestaurant,
 };

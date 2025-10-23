@@ -80,6 +80,7 @@ export function getInitialRpgProgress() {
                     reachedSummit: false,
                 },
                 tunneler: {
+                    foodOrderSeed: Null<Integer>(),
                     isLeftDoorLocked: true,
                 },
             },

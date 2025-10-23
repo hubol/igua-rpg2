@@ -40,6 +40,24 @@ export namespace DataPotion {
                 stinkLineTint: 0xD882D1,
                 texture: Tx.Collectibles.Potion.RestoreHealth,
             },
+            RestoreHealthRestaurantLevel0: {
+                name: "Pathetic Meal",
+                description: "Meal for a cheapskate. Recover negligible health.",
+                stinkLineTint: 0xD882D1,
+                texture: null,
+            },
+            RestoreHealthRestaurantLevel1: {
+                name: "Unremarkable Meal",
+                description: "Average meal. Recover some health.",
+                stinkLineTint: 0xD882D1,
+                texture: null,
+            },
+            RestoreHealthRestaurantLevel2: {
+                name: "Celebratory Meal",
+                description: "Oversized meal. Recover substantial health.",
+                stinkLineTint: 0xD882D1,
+                texture: null,
+            },
             Poison: {
                 name: "Poison",
                 description: "Popular in most communities. Become poisoned.",
@@ -89,8 +107,15 @@ export namespace DataPotion {
             case "AttributeStrengthUp":
                 Rpg.character.attributes.update("strength", 1);
                 return;
+            case "RestoreHealthRestaurantLevel0":
+                playerObj.heal(1);
+                return;
             case "RestoreHealth":
+            case "RestoreHealthRestaurantLevel1":
                 playerObj.heal(Math.ceil(Rpg.character.status.healthMax / 3));
+                return;
+            case "RestoreHealthRestaurantLevel2":
+                playerObj.heal(Math.ceil(Rpg.character.status.healthMax * 0.8));
                 return;
             case "Poison":
                 Rpg.character.status.conditions.poison.level += 1;

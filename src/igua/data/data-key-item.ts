@@ -56,6 +56,11 @@ export namespace DataKeyItem {
                 description: "In desperate need of helium.",
                 texture: Tx.Collectibles.Key.UninflatedBallon,
             },
+            TunnelGuyOrder: {
+                name: "Sheeb's Order",
+                description: "Delicious meal for Sheeb, the iguana in the tunnel beneath New Balltown.",
+                texture: null,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );

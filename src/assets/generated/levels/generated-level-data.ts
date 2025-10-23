@@ -4199,6 +4199,19 @@ export const Lvl = {
       GateVertical_1: e(r["GateVertical"], { x: 1344, y: 424, width: 792, flippedY: false, values: { sceneName: "scnPlainsSuggestiveCavern", checkpointName: "", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
+  StrangeMarketRestaurant: () => {
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 0, width: 40, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 464, y: 0, width: 40, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 40, y: -16, width: 424, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 40, y: 232, width: 424, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Door: e(r["Door"], { x: 64, y: 184, values: { sceneName: "scnStrangeMarket", checkpointName: "fromRestaurant", name: "", depth: 0 } }, "Entities"),
+      MiffedAngel: e(r["EnemyMiffed"], { x: 256, y: 232, uid: 176119665767100, values: { name: "MiffedAngel", depth: 0, variant: "level0" } }, "Entities"),
+      WaiterNpc: e(r["IguanaNpc"], { x: 416, y: 232, flippedX: true, values: { personaName: "", name: "WaiterNpc", depth: 0 } }, "CharacterEntities"),
+      Player: e(r["Player"], { x: 120, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    };
+  },
   StrangeMarketTowerInterior: () => {
     applyLevel({ width: 500, height: 880, backgroundTint: 0xad3600 });
     return {
@@ -4370,6 +4383,11 @@ export const Lvl = {
       TownBallBrick1_6: d(Tx.Town.Ball.Brick1, { x: 705, y: 642, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x0941a3 }, "BackgroundDecals"),
       TownSignageBandPoster: d(Tx.Town.Signage.BandPoster, { x: 1336, y: 704, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       TownBallBrick1_7: d(Tx.Town.Ball.Brick1, { x: 761, y: 101, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xad3600 }, "BackgroundDecals"),
+      ShapesSquare32_10: d(Tx.Shapes.Square32, { x: 232, y: 184, scaleX: 6.5, scaleY: 4, rotation: 0, originX: 0, originY: 0, tint: 0xcca5df }, "BackgroundDecals"),
+      ShapesSquare32_11: d(Tx.Shapes.Square32, { x: 336, y: 520, scaleX: 1, scaleY: 7, rotation: 0, originX: 0.5, originY: 1, tint: 0xcca5df }, "BackgroundDecals"),
+      ShapesDashedLine3px: d(Tx.Shapes.DashedLine3px, { x: 328, y: 391, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6b55c3 }, "BackgroundDecals"),
+      ShapesDashedLine3px_1: d(Tx.Shapes.DashedLine3px, { x: 345, y: 446, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6b55c3 }, "BackgroundDecals"),
+      ShapesDashedLine3px_2: d(Tx.Shapes.DashedLine3px, { x: 328, y: 520, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6b55c3 }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 176, y: 520, width: 200, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 488, y: 552, width: 200, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 664, y: 496, width: 200, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
@@ -4403,14 +4421,15 @@ export const Lvl = {
       Block_13: e(r["Block"], { x: 664, y: 128, width: 144, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xe5bb00 }, "TerrainEntities"),
       Block_14: e(r["Block"], { x: 664, y: 64, width: 16, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0xe5bb00 }, "TerrainEntities"),
       Block_15: e(r["Block"], { x: 664, y: 24, width: 160, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0xe5bb00 }, "TerrainEntities"),
+      Pipe_7: e(r["Pipe"], { x: 232, y: 304, width: 208, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
       "1": d(Tx.Shapes.Square32, { x: 1000, y: 464, scaleX: 4.3, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0x708673 }, "TerrainDecals"),
-      ShapesSquare32_10: d(Tx.Shapes.Square32, { x: -32, y: 1008, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x77b923 }, "TerrainDecals"),
-      ShapesSquare32_11: d(Tx.Shapes.Square32, { x: 8, y: 1008, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x4e771a }, "TerrainDecals"),
-      ShapesSquare32_12: d(Tx.Shapes.Square32, { x: 88, y: 1008, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x005280 }, "TerrainDecals"),
-      ShapesSquare32_13: d(Tx.Shapes.Square32, { x: 48, y: 1008, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x324f0d }, "TerrainDecals"),
-      ShapesSquare32_14: d(Tx.Shapes.Square32, { x: 128, y: 1008, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa8e0ff }, "TerrainDecals"),
-      ShapesSquare32_15: d(Tx.Shapes.Square32, { x: 168, y: 1008, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb4a8ff }, "TerrainDecals"),
-      ShapesSquare32_16: d(Tx.Shapes.Square32, { x: 1008, y: 464, scaleX: 3.8, scaleY: 1.7, rotation: 0, originX: 0, originY: 0, tint: 0x77b923 }, "TerrainDecals"),
+      ShapesSquare32_12: d(Tx.Shapes.Square32, { x: -32, y: 1008, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x77b923 }, "TerrainDecals"),
+      ShapesSquare32_13: d(Tx.Shapes.Square32, { x: 8, y: 1008, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x4e771a }, "TerrainDecals"),
+      ShapesSquare32_14: d(Tx.Shapes.Square32, { x: 88, y: 1008, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x005280 }, "TerrainDecals"),
+      ShapesSquare32_15: d(Tx.Shapes.Square32, { x: 48, y: 1008, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x324f0d }, "TerrainDecals"),
+      ShapesSquare32_16: d(Tx.Shapes.Square32, { x: 128, y: 1008, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa8e0ff }, "TerrainDecals"),
+      ShapesSquare32_17: d(Tx.Shapes.Square32, { x: 168, y: 1008, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb4a8ff }, "TerrainDecals"),
+      ShapesSquare32_18: d(Tx.Shapes.Square32, { x: 1008, y: 464, scaleX: 3.8, scaleY: 1.7, rotation: 0, originX: 0, originY: 0, tint: 0x77b923 }, "TerrainDecals"),
       TerrainGrassSparse3px1_6: d(Tx.Terrain.Grass.Sparse3px1, { x: 1043, y: 529, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x708673 }, "TerrainDecals"),
       TerrainGrassSparse3px1_7: d(Tx.Terrain.Grass.Sparse3px1, { x: 1084, y: 518, scaleX: 1, scaleY: 1, rotation: 180, originX: 0.5, originY: 0.5, tint: 0x708673 }, "TerrainDecals"),
       TerrainGrassSparse3px1_8: d(Tx.Terrain.Grass.Sparse3px1, { x: 1095, y: 529, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x708673 }, "TerrainDecals"),
@@ -4472,10 +4491,10 @@ export const Lvl = {
       ShapesRectangle6_11: d(Tx.Shapes.Rectangle6, { x: 810, y: 43, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffe24a }, "TerrainDecals"),
       ShapesRectangle6_12: d(Tx.Shapes.Rectangle6, { x: 755, y: 231, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffe24a }, "TerrainDecals"),
       ShapesRectangle6_13: d(Tx.Shapes.Rectangle6, { x: 775, y: 241, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffe24a }, "TerrainDecals"),
-      ShapesSquare32_17: d(Tx.Shapes.Square32, { x: 600, y: 560, scaleX: 8.25, scaleY: 1, rotation: 0, originX: 0, originY: 0, tint: 0xe58900 }, "TerrainDecals"),
-      ShapesSquare32_18: d(Tx.Shapes.Square32, { x: 600, y: 728, scaleX: 8.25, scaleY: 1, rotation: 0, originX: 0, originY: 0, tint: 0xe58900 }, "TerrainDecals"),
-      ShapesSquare32_19: d(Tx.Shapes.Square32, { x: 568, y: 592, scaleX: 1, scaleY: 4.5, rotation: 0, originX: 0, originY: 0, tint: 0xe58900 }, "TerrainDecals"),
-      ShapesSquare32_20: d(Tx.Shapes.Square32, { x: 864, y: 584, scaleX: 1, scaleY: 4.5, rotation: 0, originX: 0, originY: 0, tint: 0xe58900 }, "TerrainDecals"),
+      ShapesSquare32_19: d(Tx.Shapes.Square32, { x: 600, y: 560, scaleX: 8.25, scaleY: 1, rotation: 0, originX: 0, originY: 0, tint: 0xe58900 }, "TerrainDecals"),
+      ShapesSquare32_20: d(Tx.Shapes.Square32, { x: 600, y: 728, scaleX: 8.25, scaleY: 1, rotation: 0, originX: 0, originY: 0, tint: 0xe58900 }, "TerrainDecals"),
+      ShapesSquare32_21: d(Tx.Shapes.Square32, { x: 568, y: 592, scaleX: 1, scaleY: 4.5, rotation: 0, originX: 0, originY: 0, tint: 0xe58900 }, "TerrainDecals"),
+      ShapesSquare32_22: d(Tx.Shapes.Square32, { x: 864, y: 584, scaleX: 1, scaleY: 4.5, rotation: 0, originX: 0, originY: 0, tint: 0xe58900 }, "TerrainDecals"),
       TerrainGrassSparse3px1_10: d(Tx.Terrain.Grass.Sparse3px1, { x: 651, y: 559, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe58900 }, "TerrainDecals"),
       TerrainGrassSparse3px1_11: d(Tx.Terrain.Grass.Sparse3px1, { x: 745, y: 559, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe58900 }, "TerrainDecals"),
       TerrainGrassSparse3px1_12: d(Tx.Terrain.Grass.Sparse3px1, { x: 817, y: 560, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe58900 }, "TerrainDecals"),
@@ -4518,6 +4537,15 @@ export const Lvl = {
       TerrainEarthQuestionMark_20: d(Tx.Terrain.Earth.QuestionMark, { x: 843, y: 537, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x4b30b5 }, "TerrainDecals"),
       TerrainEarthQuestionMark_21: d(Tx.Terrain.Earth.QuestionMark, { x: 933, y: 487, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x4b30b5 }, "TerrainDecals"),
       TerrainEarthQuestionMark_22: d(Tx.Terrain.Earth.QuestionMark, { x: 978, y: 516, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x4b30b5 }, "TerrainDecals"),
+      ShapesSquare32_23: d(Tx.Shapes.Square32, { x: 232, y: 304, scaleX: 6.5, scaleY: 0.5, rotation: 0, originX: 0, originY: 0, tint: 0x6b55c3 }, "TerrainDecals"),
+      TerrainGrassPokey: d(Tx.Terrain.Grass.Pokey, { x: 260, y: 321, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6b55c3 }, "TerrainDecals"),
+      TerrainGrassPokey_1: d(Tx.Terrain.Grass.Pokey, { x: 313, y: 321, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6b55c3 }, "TerrainDecals"),
+      TerrainGrassPokey_2: d(Tx.Terrain.Grass.Pokey, { x: 368, y: 323, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6b55c3 }, "TerrainDecals"),
+      TerrainGrassPokey_3: d(Tx.Terrain.Grass.Pokey, { x: 418, y: 323, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6b55c3 }, "TerrainDecals"),
+      TerrainGrassPokey_4: d(Tx.Terrain.Grass.Pokey, { x: 258, y: 301, scaleX: 1, scaleY: 1, rotation: 180, originX: 0.5, originY: 0.5, tint: 0x6b55c3 }, "TerrainDecals"),
+      TerrainGrassPokey_5: d(Tx.Terrain.Grass.Pokey, { x: 311, y: 301, scaleX: 1, scaleY: 1, rotation: 180, originX: 0.5, originY: 0.5, tint: 0x6b55c3 }, "TerrainDecals"),
+      TerrainGrassPokey_6: d(Tx.Terrain.Grass.Pokey, { x: 366, y: 303, scaleX: 1, scaleY: 1, rotation: 180, originX: 0.5, originY: 0.5, tint: 0x6b55c3 }, "TerrainDecals"),
+      TerrainGrassPokey_7: d(Tx.Terrain.Grass.Pokey, { x: 416, y: 303, scaleX: 1, scaleY: 1, rotation: 180, originX: 0.5, originY: 0.5, tint: 0x6b55c3 }, "TerrainDecals"),
       Door: e(r["Door"], { x: 472, y: 504, values: { sceneName: "scnCobbler0", checkpointName: "", name: "", depth: 0 } }, "Entities"),
       GateHorizontal: e(r["GateHorizontal"], { x: 1064, y: 336, height: 128, flippedX: false, values: { sceneName: "scnObstacleCourse", checkpointName: "fromStrangeMarket", name: "", depth: 0 } }, "Entities"),
       GateHorizontal_1: e(r["GateHorizontal"], { x: -64, y: 360, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromStrangeMarket", name: "", depth: 0 } }, "Entities"),
@@ -4533,6 +4561,7 @@ export const Lvl = {
       ValuableGreen_2: e(r["ValuableGreen"], { x: 520, y: 328, uid: 175868625937707, values: { name: "", depth: 0 } }, "Entities"),
       ValuableGreen_3: e(r["ValuableGreen"], { x: 504, y: 328, uid: 175868626090108, values: { name: "", depth: 0 } }, "Entities"),
       Sign: e(r["Sign"], { x: 152, y: 432, values: { title: "Market", message: "Welcome to Strange Market.", name: "", depth: 0, isSpecial: false } }, "Entities"),
+      Door_3: e(r["Door"], { x: 272, y: 256, values: { sceneName: "scnStrangeMarketRestaurant", checkpointName: "fromMarket", name: "", depth: 0 } }, "Entities"),
       TerrainGrassSparse3px1_27: d(Tx.Terrain.Grass.Sparse3px1, { x: 708, y: 127, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe5bb00 }, "AboveEntitiesDecals"),
       TerrainGrassLumpy0_11: d(Tx.Terrain.Grass.Lumpy0, { x: 169, y: 431, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6b55c3 }, "AboveEntitiesDecals"),
       GreeterNpc: e(r["IguanaNpc"], { x: 272, y: 504, flippedX: true, values: { personaName: "MarketGreeter", name: "GreeterNpc", depth: 0 } }, "CharacterEntities"),
@@ -4541,6 +4570,7 @@ export const Lvl = {
       fromObstacleCourse: e(r["Checkpoint"], { x: 1000, y: 464, flippedX: true, values: { name: "fromObstacleCourse", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromTowerAbove: e(r["Checkpoint"], { x: 760, y: 128, flippedX: false, values: { name: "fromTowerAbove", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromTowerBelow: e(r["Checkpoint"], { x: 712, y: 728, flippedX: true, values: { name: "fromTowerBelow", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
+      fromRestaurant: e(r["Checkpoint"], { x: 256, y: 304, flippedX: true, values: { name: "fromRestaurant", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       HubolishMarker: e(r["Marker"], { x: 800, y: 648, values: { name: "HubolishMarker", depth: 0 }, tint: 0xffc700 }, "MarkerEntities"),
       LottieishMarker: e(r["Marker"], { x: 672, y: 655, values: { name: "LottieishMarker", depth: 0 }, tint: 0xb88cf0 }, "MarkerEntities"),
       LyricsMarker: e(r["Marker"], { x: 735, y: 579, values: { name: "LyricsMarker", depth: 0 }, tint: 0x9b2b1c }, "MarkerEntities"),
@@ -4842,6 +4872,7 @@ export namespace LvlType {
   export type PlainsSuggestiveCavern = ReturnType<(typeof Lvl)["PlainsSuggestiveCavern"]>;
   export type PlainsSuggestiveFlopCollector = ReturnType<(typeof Lvl)["PlainsSuggestiveFlopCollector"]>;
   export type PlainsSuggestive = ReturnType<(typeof Lvl)["PlainsSuggestive"]>;
+  export type StrangeMarketRestaurant = ReturnType<(typeof Lvl)["StrangeMarketRestaurant"]>;
   export type StrangeMarketTowerInterior = ReturnType<(typeof Lvl)["StrangeMarketTowerInterior"]>;
   export type StrangeMarket = ReturnType<(typeof Lvl)["StrangeMarket"]>;
   export type WorldMap = ReturnType<(typeof Lvl)["WorldMap"]>;

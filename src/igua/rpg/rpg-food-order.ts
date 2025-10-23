@@ -3,10 +3,10 @@ import { PseudoRng } from "../../lib/math/rng";
 import { range } from "../../lib/range";
 
 export class RpgFoodOrder {
-    readonly price: Integer;
+    readonly valuablesPrice: Integer;
 
     constructor(private readonly _items: ReadonlyArray<RpgFoodOrder.Item>) {
-        this.price = RpgFoodOrder._computePrice(_items);
+        this.valuablesPrice = RpgFoodOrder._computePrice(_items);
     }
 
     get list() {
@@ -15,7 +15,7 @@ export class RpgFoodOrder {
 
     private static _computePrice(items: ReadonlyArray<RpgFoodOrder.Item>) {
         const optionsCount = items.filter(item => Boolean(item.option)).length;
-        return items.length * 10 + optionsCount * 4;
+        return items.length * 9 + optionsCount * 4;
     }
 
     static fromSeed(seed: Integer, difficulty: "normal" | "hard"): RpgFoodOrder {

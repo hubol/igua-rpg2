@@ -57,6 +57,17 @@ export namespace DataQuestReward {
                 kind: "single",
                 reward: { kind: "potion", id: "AttributeHealthUp" },
             },
+            "NewBalltown.Tunneler.ReceivedOrder": {
+                kind: "in_order",
+                rewards: [
+                    { kind: "equipment", id: "RichesRing", level: 1 },
+                    { kind: "equipment", id: "YellowRichesRing", level: 1 },
+                ],
+                extend: {
+                    kind: "repeat",
+                    reward: { kind: "currency", id: "valuables", count: 50 },
+                },
+            },
             BeetGod: {
                 kind: "in_order",
                 rewards: [
