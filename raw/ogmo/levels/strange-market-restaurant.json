@@ -140,6 +140,19 @@
           "originY": 41,
           "uid": 176119665767100,
           "values": {"name": "MiffedAngel", "depth": 0, "variant": "level0"}
+        },
+        {
+          "name": "Region",
+          "id": 2,
+          "_eid": "11908607",
+          "x": 392,
+          "y": 56,
+          "width": 70,
+          "height": 130,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "InProgressOrderRegion", "depth": 0}
         }
       ]
     },

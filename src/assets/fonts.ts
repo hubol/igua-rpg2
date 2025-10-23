@@ -13,6 +13,9 @@ export const objText = {
     XSmallIrregular(text = "", style: Style = {}) {
         return new IrregularBitmapText(text, { fontName: fntFlaccid.font, ...style });
     },
+    XSmall(text = "", style: Style = {}) {
+        return new BitmapText(text, { fontName: fntFlaccid.font, ...style });
+    },
     SmallDigits(text = "", style: Style = {}) {
         return new BitmapText(text, { fontName: fntDiggit.font, ...style });
     },
@@ -27,6 +30,9 @@ export const objText = {
     },
     MediumBoldIrregular(text = "", style: Style = {}) {
         return new IrregularBitmapText(text, { fontName: fntErotix.font, ...style });
+    },
+    MediumBold(text = "", style: Style = {}) {
+        return new BitmapText(text, { fontName: fntErotix.font, ...style });
     },
     Large(text = "", style: Style = {}) {
         return new BitmapText(text, { fontName: fntGoodBoy.font, ...style });
