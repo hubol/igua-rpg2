@@ -2,6 +2,7 @@ import { Graphics } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { onPrimitiveMutate } from "../../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
+import { approachLinear } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { Null } from "../../../lib/types/null";
@@ -13,7 +14,12 @@ export function objEsotericInProgressOrder() {
     };
 
     const maskObj = new Graphics().beginFill(0xffffff).drawRect(0, 0, 70, 130);
-    const itemsObj = container();
+    const itemsObj = container()
+        .step(self => {
+            const maxHeight = maskObj.height - 3;
+            const targetY = itemsObj.height > maxHeight ? itemsObj.height - maxHeight : 0;
+            self.pivot.y = approachLinear(self.pivot.y, targetY, 2);
+        });
 
     return container(
         new Graphics().beginFill(0xffffff).drawRect(0, 0, 70, 130),
@@ -36,10 +42,12 @@ export function objEsotericInProgressOrder() {
                 }
 
                 itemsObj.removeAllChildren();
+                itemsObj.pivot.y = 0;
                 for (const groupedItem of groupedItems) {
                     objGroupedItem(groupedItem.item, groupedItem.count)
-                        .at(3, itemsObj.height)
+                        .at(3, 3 + itemsObj.height)
                         .show(itemsObj);
+
                     yield sleepf(2);
                 }
             }
@@ -59,6 +67,8 @@ function objGroupedItem(item: RpgFoodOrder.Item, count: Integer) {
     if (item.option !== null) {
         objText.XSmall(item.option, { tint: 0x000000 }).at(0, obj.height + 1).show(obj);
     }
+
+    new Graphics().beginFill(0xffffff).drawRect(0, 0, 32, 4).at(0, obj.height).show(obj).alpha = 0;
 
     return obj;
 }
