@@ -11,15 +11,14 @@ import { RpgPocket } from "../../rpg/rpg-pocket";
 
 const [txPocket, txReset] = Tx.Ui.Pocket.CollectNotification.split({ count: 2 });
 
-export function objPocketCollectNotification(receive: RpgPocket.ReceiveResult) {
+export function objFxCollectPocketItemNotification(receive: RpgPocket.ReceiveResult) {
     if (receive.reset) {
         Sfx.Collect.PocketReset.play();
     }
     else {
         Sfx.Collect.PocketIncrease.rate(1 + (receive.count - 1) * 0.05).play();
     }
-    // TODO sfx!
-    Instances(objPocketCollectNotification).forEach(x => x.destroy());
+    Instances(objFxCollectPocketItemNotification).forEach(x => x.destroy());
     return container(
         Sprite.from(txPocket).tinted(0x00ff00),
         receive.reset
@@ -32,5 +31,5 @@ export function objPocketCollectNotification(receive: RpgPocket.ReceiveResult) {
             yield sleep(900);
             self.destroy();
         })
-        .track(objPocketCollectNotification);
+        .track(objFxCollectPocketItemNotification);
 }

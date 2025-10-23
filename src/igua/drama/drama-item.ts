@@ -1,5 +1,6 @@
 import { BitmapText, Container, DisplayObject, Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
@@ -16,6 +17,10 @@ import { mxnBoilRotate } from "../mixins/mxn-boil-rotate";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { mxnMotion } from "../mixins/mxn-motion";
 import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
+import { objFxCollectEquipmentNotification } from "../objects/effects/obj-fx-collect-equipment-notification";
+import { objFxCollectKeyItemNotification } from "../objects/effects/obj-fx-collect-key-item-notification";
+import { objFxCollectPocketItemNotification } from "../objects/effects/obj-fx-collect-pocket-item-notification";
+import { objFxCollectPotionNotification } from "../objects/effects/obj-fx-collect-potion-notification";
 import { playerObj } from "../objects/obj-player";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { objUiPage } from "../ui/framework/obj-ui-page";
@@ -222,6 +227,10 @@ function mxnSelect(obj: Container) {
 
 function createRemovedItemFigureObjAtPlayer(item: RpgInventory.Item) {
     return objItemFigureWithTarget(item, DramaLib.Speaker.current)
+        .handles("mxnFigureTransfer:transfered", (self) => {
+            objFxBurst32().at(self).show();
+            self.destroy();
+        })
         .at(playerObj)
         .add(Rng.float(-8, 8), Rng.float(-32, -40))
         .show();
@@ -229,6 +238,23 @@ function createRemovedItemFigureObjAtPlayer(item: RpgInventory.Item) {
 
 function createReceivedItemFigureObjAtSpeaker(item: RpgInventory.Item) {
     return objItemFigureWithTarget(item, playerObj)
+        .handles("mxnFigureTransfer:transfered", (self) => {
+            if (item.kind === "equipment") {
+                objFxCollectEquipmentNotification().at(self).show();
+            }
+            else if (item.kind === "key_item") {
+                objFxCollectKeyItemNotification(item.id).at(self).show();
+            }
+            else if (item.kind === "potion") {
+                self.play(Sfx.Collect.Potion.rate(0.9, 1.1));
+                objFxCollectPotionNotification().at(self).show();
+            }
+            else if (item.kind === "pocket_item") {
+                // TODO implementation is not accurate
+                objFxCollectPocketItemNotification({ count: 999, index: 0, reset: false }).at(self).show();
+            }
+            self.destroy();
+        })
         .at(DramaLib.Speaker.getWorldCenter())
         .add(Rng.float(-8, 8), Rng.float(-32, -40))
         .show();
@@ -240,11 +266,7 @@ function sleepAfterRemoveIteration(index: Integer) {
 
 function objItemFigureWithTarget(item: RpgInventory.Item, targetObj: DisplayObject | null) {
     return DataItem.getFigureObj(item)
-        .mixin(mxnFxFigureTransfer, { targetObj })
-        .handles("mxnFigureTransfer:transfered", (self) => {
-            objFxBurst32().at(self).show();
-            self.destroy();
-        });
+        .mixin(mxnFxFigureTransfer, { targetObj });
 }
 
 export const DramaItem = {

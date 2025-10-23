@@ -13,9 +13,9 @@ import { mxnCollectibleLoot } from "../../mixins/mxn-collectible-loot";
 import { MxnPhysics, mxnPhysics, PhysicsFaction } from "../../mixins/mxn-physics";
 import { Rpg } from "../../rpg/rpg";
 import { RpgPocket } from "../../rpg/rpg-pocket";
+import { objFxCollectPocketItemNotification } from "../effects/obj-fx-collect-pocket-item-notification";
 import { objFigurePocketItem } from "../figures/obj-figure-pocket-item";
 import { playerObj } from "../obj-player";
-import { objPocketCollectNotification } from "../pocket/obj-pocket-collect-notification";
 
 export function objCollectiblePocketItem(item: RpgPocket.Item) {
     return objCollectiblePocketItem.objBouncing(item);
@@ -54,7 +54,7 @@ function objPocketableItemBase(item: RpgPocket.Item, freed: boolean, brieflyInta
 
         yield () => obj.mxnCollectibleLoot.collectConditionsMet;
         const result = Rpg.inventory.pocket.receive(item);
-        objPocketCollectNotification(result).at(obj).show();
+        objFxCollectPocketItemNotification(result).at(obj).show();
         obj.destroy();
     }).show(obj);
 
