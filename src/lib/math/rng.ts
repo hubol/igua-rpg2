@@ -52,7 +52,7 @@ class RngBase {
         return items[Math.floor(items.length * this.random())];
     }
 
-    item<T>(items: T[]): T {
+    item<T>(items: ReadonlyArray<T>): T {
         return items[Math.floor(items.length * this.random())];
     }
 
