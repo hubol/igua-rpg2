@@ -199,7 +199,9 @@ const getBuffInformations = (function () {
         Record<DeepKeyOf.Paths<RpgPlayerBuffs.Model>, BuffInformation>
     > = Object.assign(
         {},
+        buff("attributes.intelligence", "Intelligence", "integer", "beneft_when_positive"),
         buff("combat.melee.faceAttack.physical", "Face Phys ATK", "integer", "beneft_when_positive"),
+        buff("combat.melee.clawAttack.physical", "Claw Phys ATK", "integer", "beneft_when_positive"),
         buff(
             "combat.melee.conditions.poison.value",
             "Melee ATK Poison (Buildup)",
@@ -212,15 +214,13 @@ const getBuffInformations = (function () {
             "integer",
             "beneft_when_positive",
         ),
-        buff("combat.melee.clawAttack.physical", "Claw Phys ATK", "integer", "beneft_when_positive"),
         buff("loot.pocket.bonusChance", "Pocket Bonus Chance", "percent", "beneft_when_positive"),
         buff("loot.tiers.nothingRerollCount", "Re-Roll Empty Loot", "integer", "beneft_when_positive"),
         buff("loot.valuables.bonus", "Valuable Bonus", "integer", "beneft_when_positive"),
-        buff("motion.jump.bonusAtSpecialSigns", "Special Jump", "integer", "beneft_when_positive"),
-        buff("attributes.intelligence", "Intelligence", "integer", "beneft_when_positive"),
-        buff("combat.defense.faction.miner", "Defense Against Miners", "percent", "beneft_when_positive"),
         buff("conditions.ballonDrainReductionFactor", "Ballons Drain Slower", "percent", "beneft_when_positive"),
+        buff("motion.jump.bonusAtSpecialSigns", "Special Jump", "integer", "beneft_when_positive"),
         buff("combat.defense.physical", "Phys DEF", "percent", "beneft_when_positive"),
+        buff("combat.defense.faction.miner", "Defense Against Miners", "percent", "beneft_when_positive"),
         buff(
             "combat.melee.clawAttack.perfect.attackExperience",
             "Perfect Claw Bonus XP",

@@ -8,11 +8,11 @@ import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { Empty } from "../../../lib/types/empty";
 import { Null } from "../../../lib/types/null";
-import { DataEquipment } from "../../data/data-equipment";
 import { DataItem } from "../../data/data-item";
 import { DataKeyItem } from "../../data/data-key-item";
 import { Cutscene, Input } from "../../globals";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
+import { mxnHudModifiers } from "../../mixins/mxn-hud-modifiers";
 import { mxnTextTyped } from "../../mixins/mxn-text-typed";
 import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
 import { MxnUiPageElement, mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
@@ -76,7 +76,6 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
                     ));
                 },
             })
-            .mixin(mxnUiEquipment, () => Rpg.inventory.equipment.loadout[i])
     );
 
     const uiKeyItemObjs = createObjUiKeyItems();
@@ -112,7 +111,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     objUiEquipmentBuffs(Rpg.inventory.equipment.loadout)
         .step(self => {
             if (pageObj.selected?.is(mxnUiEquipment)) {
-                self.controls.focusBuffsSource = pageObj.selected.mxnUiEquipment.equipmentId;
+                self.controls.focusBuffsSource = pageObj.selected.mxnUiEquipment.loadoutItem;
                 self.visible = true;
             }
             else {
@@ -131,7 +130,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
                         : Tx.Ui.Inventory.BackgroundUnselectedKeyItem
                 )
                 .at(-180, -26),
-            objUiKeyItemInfo(() => pageObj.selected)
+            objUiItemInfo(() => pageObj.selected, "none")
                 .at(0, 80),
         ),
         0,
@@ -188,7 +187,7 @@ function objUiEquipmentChoosePage(
     const availableLoadoutItems = [...Rpg.inventory.equipment.list, null];
     const uiEquipmentObjs = availableLoadoutItems.map((equipment, i) => {
         const obj = objUiEquipment(() => equipment ?? null, "show_empty").at((i % 8) * 36, Math.floor(i / 8) * 36)
-            .mixin(mxnUiPageElement)
+            .mixin(mxnUiPageElement, { tint: 0xE5BB00 })
             .mixin(mxnUiPageButton, {
                 onPress: () => onChoose(equipment),
                 onJustSelected: () => previewEquipment.equip(equipment?.id ?? null, loadoutIndex),
@@ -210,9 +209,12 @@ function objUiEquipmentChoosePage(
     const pageObj = objUiPage(uiEquipmentObjs, {
         selectionIndex: initialSelectionIndex === -1 ? availableLoadoutItems.length - 1 : initialSelectionIndex,
         maxHeight: 104,
-        scrollbarBgTint: 0x005000,
-        scrollbarFgTint: 0x00ff00,
-    }).at(108, 80);
+        scrollbarBgTint: 0xAD3600,
+        scrollbarFgTint: 0xE5BB00,
+    })
+        .mixin(mxnHudModifiers.mxnHideStatus)
+        .mixin(mxnHudModifiers.mxnExperienceIndicatorToLeft)
+        .at(188, 8);
 
     objUiEquipmentBuffs(
         Rpg.inventory.equipment.loadout,
@@ -223,13 +225,9 @@ function objUiEquipmentChoosePage(
         Rpg.inventory.equipment,
     ).at(284 - 60, 46 + 74).show(pageObj);
 
-    objText.MediumBoldIrregular("", { tint: 0x00ff00 })
-        .mixin(mxnTextTyped, () => {
-            const equipment = availableLoadoutItems[pageObj.selectionIndex];
-            return equipment ? DataEquipment.getName(equipment.equipmentId, equipment.level) : "Nothing";
-        })
-        .anchored(0, 1)
-        .at(0, -3)
+    objUiItemInfo(() => pageObj.selected, "show_equipment")
+        .at(-4, 0)
+        .pivotedUnit(1, 0)
         .show(pageObj);
 
     return pageObj;
@@ -247,6 +245,7 @@ function objUiEquipment(
     const renderObj = container();
 
     return container(emptyObj, renderObj)
+        .mixin(mxnUiEquipment, getEquipmentLoadoutItem)
         .step(() => itemRef.value = getEquipmentLoadoutItem(), StepOrder.BeforeCamera)
         .coro(function* () {
             while (true) {
@@ -341,32 +340,27 @@ function mxnUiKeyItem(obj: DisplayObject, keyItemId: DataKeyItem.Id) {
     return obj.merge({ mxnUiKeyItem: { keyItemId } });
 }
 
-function mxnUiEquipment(obj: DisplayObject, equipmentIdProvider: () => RpgEquipmentLoadout.Item) {
+function mxnUiEquipment(obj: DisplayObject, loadoutItemProvider: () => RpgEquipmentLoadout.Item) {
     return obj.merge({
         mxnUiEquipment: {
-            get equipmentId() {
-                return equipmentIdProvider();
+            get loadoutItem() {
+                return loadoutItemProvider();
             },
         },
     });
 }
 
-function objUiKeyItemInfo(selectedObjSupplier: () => DisplayObject | undefined) {
-    let item: RpgInventory.Item | null;
+function objUiItemInfo(selectedObjSupplier: () => DisplayObject | undefined, quirk: "show_equipment" | "none") {
+    let name = "";
+    let description = "";
 
     const descriptionObj = objText.Medium("", { align: "left", tint: 0x000000, maxWidth: 168 })
         .at(0, 24)
-        .mixin(mxnTextTyped, () =>
-            item
-                ? DataItem.getDescription(item)
-                : "");
+        .mixin(mxnTextTyped, () => description);
 
     const nameObj = objText.MediumBoldIrregular("", { align: "left", tint: 0x000000, maxWidth: 168 })
         .anchored(0, 0)
-        .mixin(mxnTextTyped, () =>
-            item
-                ? DataItem.getName(item)
-                : "");
+        .mixin(mxnTextTyped, () => name);
 
     return container(
         new Graphics().lineStyle({ join: LINE_JOIN.BEVEL, alignment: 1, width: 4, color: 0x808080 })
@@ -378,7 +372,9 @@ function objUiKeyItemInfo(selectedObjSupplier: () => DisplayObject | undefined) 
         .step(self => {
             const obj = selectedObjSupplier();
 
-            item = null;
+            name = "";
+            description = "";
+            let item: RpgInventory.Item | null = null;
 
             if (obj?.is(mxnUiPotion) && obj.mxnUiPotion.potionId) {
                 item = { kind: "potion", id: obj.mxnUiPotion.potionId };
@@ -386,7 +382,24 @@ function objUiKeyItemInfo(selectedObjSupplier: () => DisplayObject | undefined) 
             else if (obj?.is(mxnUiKeyItem)) {
                 item = { kind: "key_item", id: obj.mxnUiKeyItem.keyItemId };
             }
+            else if (obj?.is(mxnUiEquipment) && quirk === "show_equipment") {
+                if (obj.mxnUiEquipment.loadoutItem) {
+                    item = {
+                        kind: "equipment",
+                        id: obj.mxnUiEquipment.loadoutItem.equipmentId,
+                        level: obj.mxnUiEquipment.loadoutItem.level,
+                    };
+                }
+                else {
+                    name = "Nothing";
+                    description = "Remove the shoe from this foot";
+                }
+            }
 
-            self.visible = Boolean(item);
+            if (item) {
+                name = DataItem.getName(item);
+                description = DataItem.getDescription(item);
+            }
+            self.visible = Boolean(name || description);
         });
 }
