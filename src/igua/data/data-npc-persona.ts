@@ -21,7 +21,7 @@ export namespace DataNpcPersona {
             NewBalltownCroupier: { job: "Croupier", name: "Flum", looks: NpcLooks.PartyAnimal },
             NewBalltownMiner: { job: "Miner (Retired)", name: "Virgil", looks: NpcLooks.MinerSibling },
             UnderneathHomeowner: { job: "Homeowner", name: "Keef", looks: NpcLooks.Satisfier },
-            UnderneathTunneler: { job: "Tunneler", name: "Sheeb", looks: NpcLooks.HighIq },
+            UnderneathTunneler: { job: "Maintainer", name: "Sheeb", looks: NpcLooks.HighIq },
             Gluemaker: { job: "Gluemaker", name: "Paste", looks: NpcLooks.Paste },
             Cobbler: { job: "Cobbler", name: "Frint", looks: NpcLooks.Spice },
             WheatGod: { job: "God", name: "Wheena", looks: NpcLooks.Wheat },

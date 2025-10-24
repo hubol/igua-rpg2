@@ -29,8 +29,8 @@ function enrichTunneler(lvl: LvlType.NewBalltownUnderneathTunnel) {
         const result = yield* ask(
             "Can I help you somehow?",
             tunneler.isLeftDoorLocked ? "Unlock the door" : null,
-            !playerHasOrder && tunneler.foodOrderSeed === null ? "Any errands?" : null,
-            tunneler.foodOrderSeed !== null ? "Your order?" : null,
+            !playerHasOrder && tunneler.foodOrder === null ? "Any errands?" : null,
+            tunneler.foodOrder !== null ? "Your order?" : null,
             playerHasOrder ? "Your order!!" : null,
             "No, thanks",
         );
@@ -59,7 +59,9 @@ function enrichTunneler(lvl: LvlType.NewBalltownUnderneathTunnel) {
                 "Yaaaay! Okay, be warned, my order is a little complicated.",
                 "You might want to write it down or something.",
             );
-            const { order, seed } = yield* DramaFoodOrder.requestOrderFromPlayer();
+
+            const difficulty = Rpg.quest("NewBalltown.Tunneler.ReceivedOrder").everCompleted ? "hard" : "normal";
+            const { order, seed } = yield* DramaFoodOrder.requestOrderFromPlayer(difficulty);
 
             yield* show(
                 `Yay! Okay, I order this all the time. It should be exactly ${order.valuablesPrice} valuables.`,
@@ -69,12 +71,12 @@ function enrichTunneler(lvl: LvlType.NewBalltownUnderneathTunnel) {
 
             yield* show(`Thanks so much for doing this. I can't wait to dig in!!!`);
 
-            tunneler.foodOrderSeed = seed;
+            tunneler.foodOrder = { difficulty, seed };
         }
         else if (result === 2) {
             yield* show("You forgot my Meal Soul order? That's okay, it's pretty complicated.");
 
-            const order = RpgFoodOrder.fromSeed(tunneler.foodOrderSeed!, "normal");
+            const order = RpgFoodOrder.fromSeed(tunneler.foodOrder!);
             yield* DramaFoodOrder.explainOrder(order);
 
             yield* show(`Dude I am salivating!!!!`);

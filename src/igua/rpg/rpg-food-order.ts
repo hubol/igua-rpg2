@@ -13,10 +13,10 @@ export class RpgFoodOrder {
         return this._items;
     }
 
-    static fromSeed(seed: Integer, difficulty: "normal" | "hard"): RpgFoodOrder {
+    static fromSeed({ seed, difficulty }: { seed: Integer; difficulty: RpgFoodOrder.Difficulty }): RpgFoodOrder {
         const optionLikelihood = difficulty === "normal" ? 40 : 50;
-        const itemMinmum = difficulty === "normal" ? 3 : 5;
-        const itemMaximum = difficulty === "normal" ? 6 : 9;
+        const itemMinmum = difficulty === "normal" ? 3 : 7;
+        const itemMaximum = difficulty === "normal" ? 6 : 10;
 
         const rng = new PseudoRng(seed);
         const itemCount = rng.intc(itemMinmum, itemMaximum);
@@ -50,6 +50,8 @@ export class RpgFoodOrder {
 }
 
 export namespace RpgFoodOrder {
+    export type Difficulty = "normal" | "hard";
+
     export namespace Menu {
         interface Item {
             name: string;

@@ -58,7 +58,7 @@ export namespace DataKeyItem {
             },
             TunnelGuyOrder: {
                 name: "Sheeb's Order",
-                description: "Delicious meal for Sheeb, the iguana in the tunnel beneath New Balltown.",
+                description: "Delicious meal for Sheeb, the ancient tunnel maintainer.",
                 texture: null,
             },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },

@@ -7,6 +7,7 @@ import { RpgClassrooms } from "./rpg-classrooms";
 import { RpgExperience } from "./rpg-experience";
 import { RpgFacts } from "./rpg-facts";
 import { RpgFlops } from "./rpg-flops";
+import { RpgFoodOrder } from "./rpg-food-order";
 import { RpgIdols } from "./rpg-idols";
 import { RpgIguanaNpcs } from "./rpg-iguana-npcs";
 import { RpgKeyItems } from "./rpg-key-items";
@@ -80,7 +81,7 @@ export function getInitialRpgProgress() {
                     reachedSummit: false,
                 },
                 tunneler: {
-                    foodOrderSeed: Null<Integer>(),
+                    foodOrder: Null<{ seed: Integer; difficulty: RpgFoodOrder.Difficulty }>(),
                     isLeftDoorLocked: true,
                 },
             },

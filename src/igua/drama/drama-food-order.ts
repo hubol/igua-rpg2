@@ -16,9 +16,9 @@ function* explainOrder(order: RpgFoodOrder) {
     );
 }
 
-function* requestOrderFromPlayer() {
+function* requestOrderFromPlayer(difficulty: RpgFoodOrder.Difficulty) {
     const seed = Rng.intc(100_000, 990_000_000);
-    const order = RpgFoodOrder.fromSeed(seed, "normal");
+    const order = RpgFoodOrder.fromSeed({ seed, difficulty });
 
     while (true) {
         yield* explainOrder(order);

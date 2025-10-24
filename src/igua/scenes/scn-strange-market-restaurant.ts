@@ -20,8 +20,11 @@ export function scnStrangeMarketRestaurant() {
 function computeItemToDispense(order: RpgFoodOrder): RpgInventory.Item {
     const tunneler = Rpg.flags.underneath.tunneler;
 
-    if (tunneler.foodOrderSeed !== null && order.equals(RpgFoodOrder.fromSeed(tunneler.foodOrderSeed, "normal"))) {
-        tunneler.foodOrderSeed = null;
+    if (
+        tunneler.foodOrder
+        && order.equals(RpgFoodOrder.fromSeed(tunneler.foodOrder))
+    ) {
+        tunneler.foodOrder = null;
         return { kind: "key_item", id: "TunnelGuyOrder" };
     }
 
