@@ -41,7 +41,7 @@ function enrichScenario(lvl: LvlType.StrangeMarketRestaurant) {
         .zIndexed(ZIndex.TerrainDecals)
         .show();
 
-    if (Rpg.quest("StrangeMarket.Restaurant.EnemyPresenceCleared").everReceivedReward) {
+    if (Rpg.quest("StrangeMarket.Restaurant.EnemyPresenceCleared").everCompleted) {
         lvl.MiffedAngel.destroy();
     }
     else {
@@ -52,7 +52,7 @@ function enrichScenario(lvl: LvlType.StrangeMarketRestaurant) {
                     "Thanks for helping me with that customer.",
                     "Retail, am I right?!",
                 );
-                yield* DramaQuests.receiveReward("StrangeMarket.Restaurant.EnemyPresenceCleared");
+                yield* DramaQuests.complete("StrangeMarket.Restaurant.EnemyPresenceCleared");
             }, { speaker: lvl.WaiterNpc });
         });
     }

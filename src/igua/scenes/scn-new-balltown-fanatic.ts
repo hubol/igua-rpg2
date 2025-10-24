@@ -68,13 +68,13 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
                 (hasBallFruitTypeA && typePreference === "BallFruitTypeA")
                 || (hasBallFruitTypeB && typePreference === "BallFruitTypeB")
             ) {
-                const rewardName = DramaQuests.peekRewardName("NewBalltown.Fanatic.FruitDelivery");
+                const rewardName = DramaQuests.peekCompletionRewardName("NewBalltown.Fanatic.FruitDelivery");
                 yield* show(
                     "These look awesome.",
                     `How much do I owe you? Does ${rewardName} sound good?`,
                 );
                 yield* DramaInventory.removeCount({ kind: "pocket_item", id: typePreference }, 10);
-                yield* DramaQuests.receiveReward("NewBalltown.Fanatic.FruitDelivery");
+                yield* DramaQuests.complete("NewBalltown.Fanatic.FruitDelivery");
                 Rpg.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount++;
                 return;
             }

@@ -73,7 +73,7 @@ function enrichRacePipesRegion(lvl: LvlType.GreatTower) {
 function enrichReward(lvl: LvlType.GreatTower) {
     lvl.EndingRewarder.mixin(mxnCutscene, function* () {
         yield* show("You did great.");
-        yield* DramaQuests.receiveReward("GreatTower");
+        yield* DramaQuests.complete("GreatTower");
         yield* show("Bye-bye!!");
         SceneChanger.create({ sceneName: scnWorldMap.name, checkpointName: "" })!.changeScene();
     });

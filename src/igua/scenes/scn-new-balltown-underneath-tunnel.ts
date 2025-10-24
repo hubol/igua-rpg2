@@ -87,7 +87,7 @@ function enrichTunneler(lvl: LvlType.NewBalltownUnderneathTunnel) {
                 "Allow me to show my gratitude with a tip.",
             );
 
-            yield* DramaQuests.receiveReward("NewBalltown.Tunneler.ReceivedOrder");
+            yield* DramaQuests.complete("NewBalltown.Tunneler.ReceivedOrder");
         }
     });
 }

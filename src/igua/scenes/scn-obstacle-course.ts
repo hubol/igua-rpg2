@@ -190,7 +190,7 @@ function* coroAwardPrizeForCollection({ npcPersonaId, pocketItemId, questRewardI
             yield interp(lerpRef, "factor").factor(factor.sine).to(1).over(2000);
             // TODO sick ass animation for this
             yield* DramaInventory.removeCount({ kind: "pocket_item", id: pocketItemId }, 50);
-            yield* DramaQuests.receiveReward(questRewardId);
+            yield* DramaQuests.complete(questRewardId);
 
             yield* show("A blessing for thy harvest.", "Many thanks unto thine ass.");
             yield interp(lerpRef, "factor").factor(factor.sine).to(0).over(2000);

@@ -110,9 +110,7 @@ export namespace DataQuestReward {
                 },
             },
             __Fallback__: {
-                kind: "in_order",
-                rewards: [],
-                extend: null,
+                kind: "nothing",
             },
         } satisfies Record<string, Model>,
     );

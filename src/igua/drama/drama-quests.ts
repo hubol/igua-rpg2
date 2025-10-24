@@ -6,8 +6,8 @@ import { RpgInventory } from "../rpg/rpg-inventory";
 import { DramaInventory } from "./drama-inventory";
 import { DramaWallet } from "./drama-wallet";
 
-function peekRewardName(questId: DataQuestReward.Id) {
-    const reward = Rpg.quest(questId).peekReward();
+function peekCompletionRewardName(questId: DataQuestReward.Id) {
+    const reward = Rpg.quest(questId).peekCompletionReward();
 
     if (reward === null) {
         return "nothing";
@@ -22,8 +22,8 @@ function peekRewardName(questId: DataQuestReward.Id) {
     return reward.count > 1 ? `${itemName} x${reward.count}` : itemName;
 }
 
-function* receiveReward(questId: DataQuestReward.Id) {
-    const reward = Rpg.quest(questId).receiveReward();
+function* complete(questId: DataQuestReward.Id) {
+    const reward = Rpg.quest(questId).complete();
 
     if (!reward) {
         return;
@@ -42,6 +42,6 @@ function* receiveReward(questId: DataQuestReward.Id) {
 }
 
 export const DramaQuests = {
-    peekRewardName,
-    receiveReward,
+    peekCompletionRewardName,
+    complete,
 };

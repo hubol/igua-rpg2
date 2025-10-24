@@ -53,7 +53,7 @@ function enrichEnemyPresence(lvl: LvlType.NewBalltownUnderneathHomeowner) {
                 yield () => self.isOnGround;
                 yield scene.camera.auto.panToSubject(self);
                 yield* show("I hope this is a sufficient reward.");
-                yield* DramaQuests.receiveReward("NewBalltown.Homeowner.EnemyPresenceCleared");
+                yield* DramaQuests.complete("NewBalltown.Homeowner.EnemyPresenceCleared");
                 yield* show("Please come see me again. I sell medication and also create thought-provoking artworks.");
                 Rpg.flags.underneath.homeowner.hasClearedHouseOfEnemies = true;
                 enrichHomeowner(lvl);

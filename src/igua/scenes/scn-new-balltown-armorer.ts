@@ -101,7 +101,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
 
         Cutscene.setCurrentSpeaker(lvl.IguanaNpc);
         yield* show("Happy...! Happy...! Happy...!", "Thank you so much for arranging the delivery of the fish.");
-        yield* DramaQuests.receiveReward("NewBalltown.Armorer.ReceivedFish");
+        yield* DramaQuests.complete("NewBalltown.Armorer.ReceivedFish");
         yield* show("You are cool.");
 
         deliveries.armorer = "delivered";

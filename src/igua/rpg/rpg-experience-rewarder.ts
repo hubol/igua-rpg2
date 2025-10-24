@@ -111,7 +111,7 @@ export class RpgExperienceRewarder {
     }));
 
     readonly quest = this._expose("quest", (increase) => ({
-        onReceiveReward(rewardsReceivedCount: Integer, isExtended: boolean) {
+        onComplete(rewardsReceivedCount: Integer, isExtended: boolean) {
             if (isExtended) {
                 increase(1);
                 return;
