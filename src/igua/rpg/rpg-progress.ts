@@ -74,12 +74,6 @@ export function getInitialRpgProgress() {
                         isValveOpen: false,
                     },
                 },
-                homeowner: {
-                    hasClearedHouseOfEnemies: false,
-                },
-                magicalRisingFace: {
-                    reachedSummit: false,
-                },
                 tunneler: {
                     foodOrder: Null<{ seed: Integer; difficulty: RpgFoodOrder.Difficulty }>(),
                     isLeftDoorLocked: true,

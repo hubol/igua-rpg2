@@ -23,7 +23,7 @@ export function scnNewBalltownUnderneathHomeowner() {
 }
 
 function enrichEnemyPresence(lvl: LvlType.NewBalltownUnderneathHomeowner) {
-    if (Rpg.flags.underneath.homeowner.hasClearedHouseOfEnemies) {
+    if (Rpg.quest("NewBalltown.Homeowner.EnemyPresenceCleared").everCompleted) {
         Instances(mxnEnemy).forEach(enemyObj => enemyObj.destroy());
         enrichHomeowner(lvl);
     }
@@ -55,7 +55,6 @@ function enrichEnemyPresence(lvl: LvlType.NewBalltownUnderneathHomeowner) {
                 yield* show("I hope this is a sufficient reward.");
                 yield* DramaQuests.complete("NewBalltown.Homeowner.EnemyPresenceCleared");
                 yield* show("Please come see me again. I sell medication and also create thought-provoking artworks.");
-                Rpg.flags.underneath.homeowner.hasClearedHouseOfEnemies = true;
                 enrichHomeowner(lvl);
             }, { speaker: self, camera: { start: "pan_to_speaker" } });
         });
@@ -82,7 +81,7 @@ function enrichHomeowner(lvl: LvlType.NewBalltownUnderneathHomeowner) {
 }
 
 function enrichArtwork(lvl: LvlType.NewBalltownUnderneathHomeowner) {
-    if (Rpg.flags.underneath.homeowner.hasClearedHouseOfEnemies) {
+    if (Rpg.quest("NewBalltown.Homeowner.EnemyPresenceCleared").everCompleted) {
         return;
     }
 
@@ -91,7 +90,7 @@ function enrichArtwork(lvl: LvlType.NewBalltownUnderneathHomeowner) {
         .drawRect(0, 0, scene.level.width, scene.level.height)
         .at(0, scene.level.height)
         .coro(function* (self) {
-            yield () => Rpg.flags.underneath.homeowner.hasClearedHouseOfEnemies;
+            yield () => Rpg.quest("NewBalltown.Homeowner.EnemyPresenceCleared").everCompleted && !Cutscene.isPlaying;
             yield sleep(500);
             yield interpvr(self).steps(32).to(0, 0).over(2000);
         })

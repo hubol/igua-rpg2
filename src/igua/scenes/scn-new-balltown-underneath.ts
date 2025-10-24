@@ -33,7 +33,7 @@ export function scnNewBalltownUnderneath() {
 }
 
 function enrichHomeowner(lvl: LvlType.NewBalltownUnderneath) {
-    if (Rpg.flags.underneath.homeowner.hasClearedHouseOfEnemies) {
+    if (Rpg.quest("NewBalltown.Homeowner.EnemyPresenceCleared").everCompleted) {
         lvl.Homeowner.destroy();
         return;
     }
@@ -240,7 +240,7 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
 
     let movedByPlayerSteps = 0;
 
-    if (Rpg.flags.underneath.magicalRisingFace.reachedSummit) {
+    if (Rpg.quest("NewBalltown.RisingFace").everCompleted) {
         groupObj.y = minimumY;
     }
 
@@ -273,8 +273,8 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
                 yield sleep(1000);
                 yield* show("Thank you for bringing joy to this place!!!");
                 scene.camera.mode = "move_towards_player";
+                yield sleep(1000);
                 yield* DramaQuests.complete("NewBalltown.RisingFace");
-                Rpg.flags.underneath.magicalRisingFace.reachedSummit = true;
             }, { speaker: self, camera: { start: "pan_to_speaker" } });
         });
 
