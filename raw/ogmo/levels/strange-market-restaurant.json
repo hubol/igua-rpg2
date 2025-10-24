@@ -4,8 +4,8 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#408000",
   "values": {"Terrain Color": "#000000"},
+  "backgroundColor": "#408000",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -139,7 +139,7 @@
           "originX": 22,
           "originY": 41,
           "uid": 176119665767100,
-          "values": {"name": "MiffedAngel", "depth": 0, "variant": "level0"}
+          "values": {"name": "MiffedAngel", "depth": 0, "variant": "level2"}
         },
         {
           "name": "Region",

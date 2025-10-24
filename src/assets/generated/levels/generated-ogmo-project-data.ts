@@ -30,7 +30,7 @@ export namespace OgmoEntities {
   export type Idol = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
   export type StashPocket = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
   export type PlayerDev = OgmoFactory.EntityBase<{ name: string; depth: number }>;
-  export type EnemyMiffed = OgmoFactory.EntityBase<{ name: string; depth: number; variant: "level0" | "level1" }> & { uid: number };
+  export type EnemyMiffed = OgmoFactory.EntityBase<{ name: string; depth: number; variant: "level0" | "level1" | "level2" }> & { uid: number };
 }
 
 export interface OgmoEntityResolverBase {

@@ -1446,7 +1446,7 @@
           "name": "variant",
           "definition": "Enum",
           "display": 1,
-          "choices": ["level0", "level1"],
+          "choices": ["level0", "level1", "level2"],
           "defaults": 0
         }
       ],

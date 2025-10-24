@@ -25,9 +25,13 @@ export namespace DataQuestReward {
             kind: "single";
             reward: DataQuestReward.Reward;
         }
+
+        export interface Nothing {
+            kind: "nothing";
+        }
     }
 
-    export type Model = Model.InOrder | Model.Single;
+    export type Model = Model.InOrder | Model.Single | Model.Nothing;
 
     export const Manifest = DataLib.createManifest(
         {
@@ -67,6 +71,9 @@ export namespace DataQuestReward {
                     kind: "repeat",
                     reward: { kind: "currency", id: "valuables", count: 50 },
                 },
+            },
+            "StrangeMarket.Restaurant.EnemyPresenceCleared": {
+                kind: "nothing",
             },
             BeetGod: {
                 kind: "in_order",

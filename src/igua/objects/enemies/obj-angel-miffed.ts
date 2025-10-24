@@ -83,6 +83,25 @@ const themes = (function () {
                 eyesGap: 20,
             },
         },
+        // TODO implement
+        Dinosaur: {
+            ...commonTheme,
+            pivots: {
+                noggin: vnew(10, 4),
+            },
+            textures: {
+                mouth: objAngelMouth.txs.rounded14,
+                noggin: Tx.Enemy.Miffed.Noggin1,
+                pupil: Tx.Enemy.Miffed.Pupil1,
+                sclera: Tx.Enemy.Miffed.Sclera1,
+            },
+            tints: {
+                map: [0x9052c4, 0xc22419, 0x1e803e] as MapRgbFilter.Map,
+            },
+            values: {
+                eyesGap: 20,
+            },
+        },
     } satisfies Record<string, CommonTheme>;
 })();
 
@@ -129,6 +148,25 @@ const ranks = {
             },
         },
     }),
+    level2: RpgEnemyRank.create({
+        loot: {
+            tier0: [
+                { kind: "valuables", deltaPride: -5, max: 70, min: 15, weight: 95 },
+                { kind: "equipment", id: "PatheticCage", weight: 5 },
+            ],
+            tier1: [
+                // TODO
+                { kind: "valuables", deltaPride: -5, max: 70, min: 15, weight: 50 },
+                { kind: "nothing", weight: 50 },
+            ],
+        },
+        status: {
+            healthMax: 250,
+            defenses: {
+                physical: 25,
+            },
+        },
+    }),
 } satisfies Record<string, RpgEnemyRank.Model>;
 
 const variants = {
@@ -139,6 +177,10 @@ const variants = {
     level1: {
         rank: ranks.level1,
         theme: themes.Freakish,
+    },
+    level2: {
+        rank: ranks.level2,
+        theme: themes.Dinosaur,
     },
 };
 

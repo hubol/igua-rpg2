@@ -35,6 +35,10 @@ export class RpgQuest {
     }
 
     peekReward(): RpgQuest.Reward {
+        if (this._data.kind === "nothing") {
+            return null;
+        }
+
         if (this._data.kind === "single") {
             const { count = 1, ...reward } = this._data.reward;
             return this._state.rewardsReceived === 0 ? { count, ...reward, isExtended: false } : null;
@@ -61,12 +65,23 @@ export class RpgQuest {
 
     receiveReward(): RpgQuest.Reward {
         const reward = this.peekReward();
-        if (reward) {
+        if (reward || this._state.rewardsReceived === 0) {
             this._state.rewardsReceived += 1;
-            this._reward.quest.onReceiveReward(this._state.rewardsReceived, reward.isExtended);
+            // TODO rename event
+            this._reward.quest.onReceiveReward(this._state.rewardsReceived, reward?.isExtended ?? false);
         }
 
         return reward;
+    }
+
+    // TODO update verbiage to relate to completions rather than rewards
+
+    get rewardsReceived() {
+        return this._state.rewardsReceived;
+    }
+
+    get everReceivedReward() {
+        return Boolean(this.rewardsReceived);
     }
 
     static createState(): RpgQuest.State {

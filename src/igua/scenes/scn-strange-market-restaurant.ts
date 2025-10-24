@@ -2,8 +2,10 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { ZIndex } from "../core/scene/z-index";
 import { DramaFoodOrder } from "../drama/drama-food-order";
 import { DramaInventory } from "../drama/drama-inventory";
+import { DramaQuests } from "../drama/drama-quests";
 import { DramaWallet } from "../drama/drama-wallet";
 import { show } from "../drama/show";
+import { Cutscene, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objEsotericInProgressOrder } from "../objects/esoteric/obj-esoteric-in-progress-order";
 import { Rpg } from "../rpg/rpg";
@@ -38,6 +40,22 @@ function enrichScenario(lvl: LvlType.StrangeMarketRestaurant) {
         .at(lvl.InProgressOrderRegion)
         .zIndexed(ZIndex.TerrainDecals)
         .show();
+
+    if (Rpg.quest("StrangeMarket.Restaurant.EnemyPresenceCleared").everReceivedReward) {
+        lvl.MiffedAngel.destroy();
+    }
+    else {
+        scene.stage.coro(function* () {
+            yield () => lvl.MiffedAngel.destroyed;
+            Cutscene.play(function* () {
+                yield* show(
+                    "Thanks for helping me with that customer.",
+                    "Retail, am I right?!",
+                );
+                yield* DramaQuests.receiveReward("StrangeMarket.Restaurant.EnemyPresenceCleared");
+            }, { speaker: lvl.WaiterNpc });
+        });
+    }
 
     function* takeOrder() {
         yield* show("Welcome to Meal Soul");
