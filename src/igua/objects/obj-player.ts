@@ -270,7 +270,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                     const collidedWithFeet = bounceIguanaOffObject(puppet, hurtbox);
                     let attack = collidedWithFeet
                         ? Rpg.character.meleeClawAttack
-                        : Rpg.character.meleeAttack;
+                        : Rpg.character.meleeFaceAttack;
 
                     if (attack === Rpg.character.meleeClawAttack && stepsSinceJumpJustWentDown < 6) {
                         attack = Rpg.character.meleeClawWellTimedAttack;

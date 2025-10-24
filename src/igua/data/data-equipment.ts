@@ -60,7 +60,7 @@ export namespace DataEquipment {
                 description: "Modest bonus to physical attack",
                 // TODO would be cool if stats could be based on player attributes here...
                 buffs: (model, bonus) => {
-                    model.combat.melee.attack.physical += 1 + bonus;
+                    model.combat.melee.faceAttack.physical += 1 + bonus;
                     model.combat.melee.clawAttack.physical += 1 + bonus;
                 },
             },

@@ -15,7 +15,7 @@ export namespace RpgPlayerBuffs {
                     },
                 },
                 melee: {
-                    attack: {
+                    faceAttack: {
                         physical: 0,
                     },
                     conditions: {

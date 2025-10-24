@@ -41,7 +41,7 @@ export class RpgPlayer {
         };
     })();
 
-    readonly meleeAttack = (() => {
+    readonly meleeFaceAttack = (() => {
         const player = this;
 
         return RpgAttack.create({
@@ -58,7 +58,7 @@ export class RpgPlayer {
             emotional: 0,
             get physical() {
                 return 3 + player.attributes.strength * 2
-                    + player.buffs.combat.melee.attack.physical;
+                    + player.buffs.combat.melee.faceAttack.physical;
             },
             versus: RpgFaction.Enemy,
             quirks: {

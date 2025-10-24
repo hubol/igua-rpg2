@@ -168,7 +168,7 @@ Intelligence: ${Rpg.character.attributes.intelligence}
 Strength: ${Rpg.character.attributes.strength}
 ---- Stats ----
 HP: ${Rpg.character.status.health} / ${Rpg.character.status.healthMax}
-Melee Phys ATK: ${Rpg.character.meleeAttack.physical}
+Face Phys ATK: ${Rpg.character.meleeFaceAttack.physical}
 Claw Phys ATK: ${Rpg.character.meleeClawAttack.physical}
 Fact Capacity: ${Rpg.character.facts.usedSlots} / ${Rpg.character.facts.totalSlots}`;
         })

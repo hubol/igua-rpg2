@@ -199,7 +199,7 @@ const getBuffInformations = (function () {
         Record<DeepKeyOf.Paths<RpgPlayerBuffs.Model>, BuffInformation>
     > = Object.assign(
         {},
-        buff("combat.melee.attack.physical", "Melee Phys ATK", "integer", "beneft_when_positive"),
+        buff("combat.melee.faceAttack.physical", "Face Phys ATK", "integer", "beneft_when_positive"),
         buff(
             "combat.melee.conditions.poison.value",
             "Melee ATK Poison (Buildup)",

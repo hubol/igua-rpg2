@@ -29,7 +29,7 @@ export namespace DataIdol {
             Blue: {
                 buffs: (model) => {
                     model.combat.melee.clawAttack.physical += 3;
-                    model.combat.melee.attack.physical += 3;
+                    model.combat.melee.faceAttack.physical += 3;
                 },
                 hudText: "Power of the idol increases attack power",
                 keyItemId: "SeedBlue",
