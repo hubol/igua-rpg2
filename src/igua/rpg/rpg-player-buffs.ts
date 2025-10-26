@@ -5,7 +5,9 @@ export namespace RpgPlayerBuffs {
     export function create() {
         return {
             attributes: {
+                health: 0,
                 intelligence: 0,
+                strength: 0,
             },
             combat: {
                 defense: {

@@ -199,7 +199,9 @@ const getBuffInformations = (function () {
         Record<DeepKeyOf.Paths<RpgPlayerBuffs.Model>, BuffInformation>
     > = Object.assign(
         {},
+        buff("attributes.health", "Health", "integer", "beneft_when_positive"),
         buff("attributes.intelligence", "Intelligence", "integer", "beneft_when_positive"),
+        buff("attributes.strength", "Strength", "integer", "beneft_when_positive"),
         buff("combat.melee.faceAttack.physical", "Face Phys ATK", "integer", "beneft_when_positive"),
         buff("combat.melee.clawAttack.physical", "Claw Phys ATK", "integer", "beneft_when_positive"),
         buff(

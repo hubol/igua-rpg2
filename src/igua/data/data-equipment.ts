@@ -115,6 +115,18 @@ export namespace DataEquipment {
                     };
                 })(),
             },
+            StrengthUp: {
+                name: "Strong Icon",
+                texture: null,
+                description: "Increases strength",
+                buffs: (model, bonus) => model.attributes.strength += 1 + bonus,
+            },
+            HealthUp: {
+                name: "Healthy Icon",
+                texture: null,
+                description: "Increases health",
+                buffs: (model, bonus) => model.attributes.health += 1 + bonus,
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,

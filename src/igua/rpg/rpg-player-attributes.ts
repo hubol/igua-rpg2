@@ -6,7 +6,7 @@ export class RpgPlayerAttributes {
     }
 
     get health() {
-        return this._state.health;
+        return this._state.health + this._buffs.getAggregatedBuffs().attributes.health;
     }
 
     get intelligence() {
@@ -14,7 +14,7 @@ export class RpgPlayerAttributes {
     }
 
     get strength() {
-        return this._state.strength;
+        return this._state.strength + this._buffs.getAggregatedBuffs().attributes.strength;
     }
 
     update(attributeKey: keyof RpgPlayerAttributes.State, delta: Integer) {

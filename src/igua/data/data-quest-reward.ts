@@ -89,7 +89,7 @@ export namespace DataQuestReward {
             WheatGod: {
                 kind: "in_order",
                 rewards: [
-                    { kind: "potion", id: "AttributeStrengthUp" },
+                    { kind: "equipment", id: "StrengthUp", level: 1 },
                     { kind: "equipment", id: "PatheticCage", level: 1 },
                 ],
                 extend: {
@@ -100,7 +100,7 @@ export namespace DataQuestReward {
             GreatTower: {
                 kind: "in_order",
                 rewards: [
-                    { kind: "equipment", id: "DefensePhysicalAndPerfectBonus", level: 1 },
+                    { kind: "equipment", id: "StrengthUp", level: 1 },
                     { kind: "equipment", id: "DefensePhysicalAndPerfectBonus", level: 2 },
                     { kind: "potion", id: "AttributeStrengthUp" },
                 ],

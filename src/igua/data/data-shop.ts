@@ -152,6 +152,11 @@ export namespace DataShop {
                         price: { currency: "spirit", deltaSold: 5, initial: 5 },
                         product: { kind: "potion", id: "RestoreHealth" },
                     },
+                    {
+                        initialQuantity: 5,
+                        price: { currency: "spirit", deltaSold: 30, initial: 40 },
+                        product: { kind: "equipment", id: "HealthUp", level: 1 },
+                    },
                 ],
             },
             __Fallback__: { stocks: [] },
