@@ -41,7 +41,10 @@ export class RpgFlops {
 
     createLoan(flopId: RpgFlops.Id): RpgFlops.Loan {
         if (this.count(flopId) <= (this._state.loans[flopId] ?? 0)) {
-            return { accepted: false };
+            return {
+                accepted: false,
+                error: new Error(`count: ${this.count(flopId)} <= loans: ${this._state.loans[flopId] ?? 0}`),
+            };
         }
 
         this._state.loans[flopId] = (this._state.loans[flopId] ?? 0) + 1;
@@ -92,6 +95,7 @@ export namespace RpgFlops {
 
         export interface Declined {
             accepted: false;
+            error: Error;
         }
     }
 
