@@ -1309,7 +1309,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/idol.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFIAAABoCAMAAABVE1diAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAMUExURf+3KP///5k4IAAAAN/yNbgAAAAEdFJOU////wBAKqn0AAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAGHRFWHRTb2Z0d2FyZQBQYWludC5ORVQgNS4xLjL7vAO2AAAAtmVYSWZJSSoACAAAAAUAGgEFAAEAAABKAAAAGwEFAAEAAABSAAAAKAEDAAEAAAACAAAAMQECABAAAABaAAAAaYcEAAEAAABqAAAAAAAAAPJ2AQDoAwAA8nYBAOgDAABQYWludC5ORVQgNS4xLjIAAwAAkAcABAAAADAyMzABoAMAAQAAAAEAAAAFoAQAAQAAAJQAAAAAAAAAAgABAAIABAAAAFI5OAACAAcABAAAADAxMDAAAAAAjjvBV9MXvE4AAAMqSURBVGhDzZeJctswDAV9/P8/lwCWEniAoGRNpttpQoAPG0qW3fT1zXm9dlIHG+FifF75fl9x5tlyxoeVctkC5QZZFOGDSnzlyvedyyRCUV5wxkFsSlHuO+c5TAe/KtE0qHLT2cfMMGDKPWeXYtwEHjrEloxKNQ7KA4IL2ojMFN/n89HxKURjmoRMmHGmrKcnHHJDmTn9PnNiROmWZrSSfMC2shq1ZGBOoJRloSzqi/+TUpBlQQROKca7SlkJx3F14zD+onTcV4aYkh/GwJxQeV6yoaevx2dgTqz0Tl2fSvIBC+XhdEuFeESzz4hRX4v6/YR0RKxUl0EDCIe0AYYqM2Fq7JS9c4Tcij7DZASpJbMQ4yPsJ8QxNEBzhz9UYjqhH+D351E0HWzOSJUoRtgfaLauKQUyDU17lrDRGGKOphvs70BcaDqjku3uM7h/p0eIwDwO9m4zKtm4yvmZNSi1ex1sMt4rdSdicT/tjDjsW4XEnFgpO5+qapUWiPh+PvOE3UUckXJ6IFEOUqk/kkfRKS1Uf6rhlsUX4IStkkm516xaiGXMlSw6iGW4HIMFt/SQyzhzzMnde1z5Ch6Vy0rGhKZwkMyoOaYKbeXRYA45hoSudGgyx3LMCGfdPEpS6FZOfyhtonROXdteiuRsSqFpnO+iurDthJKytFKbYE77LFTYX+OVtFynOq3aVpL2eRqFW8oTOgUaBT3mYXxIWf6/c1U5yVMLcsrzup9S6rUDgTUo5SudRqlOlgUCaxJl699W2p+nleqk4y1NUbD9BPnHWZXUAvOFttpWmvNZpfwS0cB8oSv3lT3MF7ryf1IyLrT1W8uUqbI8Ue/zUTWfEP6a1RAp3RtKCuMXZdHJX6/UltYZU6U8p+qpdUE+P7RMmSjdlXa1lRm5kgMLuptyRambOWOuP5XcROvdfnmYF2p9oI2MydUwXpTqoFQskBArlaOUQz+iPGtVapkyUR4Or1S0TFkqXSlYmRJe+N8oN52jkvGZck+6UFYBjcLZWzEomQ6Ux9EX9EqGlaH1vyiZFegIdAx6MaGSxgHt3BgpKW8xvZesbzJTsrzH9/sPMDJEWu+EBvoAAAAASUVORK5CYII="
     },
@@ -1451,9 +1451,55 @@
         }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/enemy miffed.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAqCAYAAAD1T9h6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKlSURBVGhD1Zk/Th0xEMZ3kahSpKZBSFwgipTQ5gbQ0NLQQLogRckBKIIigWiAhoaChgaOAUgkF0iUjjqRotC9eAbPyus3tme8s+jxkyx7V97x9/nPzj69xprJp8sJFH85Oq2vTYiFt3trpvE55nz9bDGbod7sLy34huPX/agrYb8CoXggvjbGZGaSs0+4VQDGWIlBAdm3TcZAiJWZqiDF12R0BhDuXkCtoeJDRbEScueAMQNIDbGdpkR/WfUNz+cr3xDCGdh66xuek5vHWmmou9kTHQtOITUSGoiFp0jEjo30DUiFE5qVIBNSA0TBCOaBkvi2bdmiMgxbw4nn4kBJUhijmMhywbMDM1THgtWLzhFt+bmpAzvLMCaKKzCZpP25AL4lI9c/N06PyIToWwiCTxWleAKe4+LV0sIy+LbsUGpzQA7JeJQfQoJc0TdAhIEzgt2rTLUSxf6pccNtEyU63oAQEARITGj6ahj0e4DEkLgUY4kH8OU7ZBWAnMAxxQNd9hhqAuBWYizhxFT6szDyVLgJS+fvWTcC4rHGqwSzYoLEcmQN5BjLXE4sR5WBDxv1uf/Vsm84vv9omoMz5SdthOrhnPD905e+1TQ7m7+xju+F4kOGGBE9JJlxEvv3+g3WwIuVW9/KGwDABKA1UszEQ7ZLDdrxBn1KaKFZtsTcAGybj4dfsXBwJoYYK+63mi308O8b1kfn77AG6GBL0JwDs0NshfYQSzujAWcEL8Zgf+FKncQAjQHoC/9/Ne9/LuJNC44vXndfrE9iAC/cgG6wbmCNIRAMxDGQ3Q2s2vk/YiMax739Ew68c7+KiUwwsEWMHuLOdJDdIaNrrAnJ4bOIESPKxOHA8aAE9eGwiJGiaADe6VS21++6d3x4n0qKsE9tDJ6m+Q9c04zTkg2/CgAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "60046263",
+      "name": "WeightedPedestal",
+      "limit": -1,
+      "size": {"x": 46, "y": 24},
+      "origin": {"x": 23, "y": 24},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": true,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "requiredFlopsCount", "definition": "Integer", "display": 1, "defaults": 1, "bounded": true, "min": 1, "max": 100},
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/weighted pedestal.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAYCAYAAACFms+HAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACJSURBVFhHYxiqgBFKowD/2P//ocwBBxsXM2J1IxOUHnJg1OH0BqMOpzfAmmPxgVwe1BJn8hfsuR4foIYZo0mF3gAjiiT/bxo0lQ8MPGf0w3Dn8AjxwRjaMIAe6nDOYHY0DCA7HswYCo6GAZjjGYeSo2EA5PjRcpzeYNTh9AajDqc3GHU4fQEDAwBxPSAoXHzJ7gAAAABJRU5ErkJggg=="
     }
   ],
   "tilesets": []

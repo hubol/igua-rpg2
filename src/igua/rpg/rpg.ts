@@ -24,6 +24,7 @@ import { getInitialRpgProgress, RpgProgressData } from "./rpg-progress";
 import { RpgQuests } from "./rpg-quests";
 import { RpgShops } from "./rpg-shops";
 import { RpgStashPockets } from "./rpg-stash-pockets";
+import { RpgWeightedPedestals } from "./rpg-weighted-pedestals";
 
 // TODO this is a fuckin mess!
 function createRpg(data: RpgProgressData) {
@@ -36,6 +37,7 @@ function createRpg(data: RpgProgressData) {
             stashPockets: stashPocketsState,
             looseValuables: looseValuablesState,
             quests: questsState,
+            weightedPedestals: weightedPedestalsState,
             ...programmaticFlags
         },
     } = data;
@@ -70,6 +72,7 @@ function createRpg(data: RpgProgressData) {
         looseValuables,
     );
     const shops = new RpgShops(shopsState, wallet, inventory);
+    const weightedPedestals = new RpgWeightedPedestals(weightedPedestalsState);
 
     return {
         // TODO rename to player
@@ -100,6 +103,7 @@ function createRpg(data: RpgProgressData) {
             return stashPockets.getById(stashPocketId);
         },
         wallet,
+        weightedPedestals,
         __private__: {
             data,
         },

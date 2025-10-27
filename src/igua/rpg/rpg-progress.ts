@@ -21,6 +21,7 @@ import { RpgPotions } from "./rpg-potions";
 import { RpgQuests } from "./rpg-quests";
 import { RpgShops } from "./rpg-shops";
 import { RpgStashPockets } from "./rpg-stash-pockets";
+import { RpgWeightedPedestals } from "./rpg-weighted-pedestals";
 
 export function getInitialRpgProgress() {
     return {
@@ -102,6 +103,7 @@ export function getInitialRpgProgress() {
             revealedWorldMapGateUids: new Set<Integer>(),
             shops: RpgShops.createState(),
             stashPockets: RpgStashPockets.createState(),
+            weightedPedestals: RpgWeightedPedestals.createState(),
         },
     };
 }

@@ -20,6 +20,7 @@ import { objSign } from "../objects/obj-sign";
 import { objPipe, objPipeSlope, objSolidBlock, objSolidSlope } from "../objects/obj-terrain";
 import { objValuable } from "../objects/obj-valuable";
 import { objWaterDripSource } from "../objects/obj-water-drip-source";
+import { objWeightedPedestal } from "../objects/obj-weighted-pedestal";
 import { objWorldMapGate } from "../objects/obj-world-map-gate";
 import { objMarker } from "../objects/utils/obj-marker";
 import { Rpg } from "../rpg/rpg";
@@ -78,6 +79,7 @@ export const OgmoEntityResolvers = {
     GateMap: objWorldMapGate,
     StashPocket: objStashPocket,
     PlayerDev: objDevPlayer,
+    WeightedPedestal: objWeightedPedestal,
 } satisfies OgmoEntityResolverBase;
 
 function createOrConfigurePlayerObj(

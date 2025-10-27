@@ -4563,6 +4563,7 @@ export const Lvl = {
       ValuableGreen_3: e(r["ValuableGreen"], { x: 504, y: 328, uid: 175868626090108, values: { name: "", depth: 0 } }, "Entities"),
       Sign: e(r["Sign"], { x: 152, y: 432, values: { title: "Market", message: "Welcome to Strange Market.", name: "", depth: 0, isSpecial: false } }, "Entities"),
       Door_3: e(r["Door"], { x: 272, y: 256, values: { sceneName: "scnStrangeMarketRestaurant", checkpointName: "fromMarket", name: "", depth: 0 } }, "Entities"),
+      WeightedPedestal: e(r["WeightedPedestal"], { x: 384, y: 304, uid: 176160055287700, values: { requiredFlopsCount: 1, name: "", depth: 0 } }, "Entities"),
       TerrainGrassSparse3px1_27: d(Tx.Terrain.Grass.Sparse3px1, { x: 708, y: 127, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe5bb00 }, "AboveEntitiesDecals"),
       TerrainGrassLumpy0_11: d(Tx.Terrain.Grass.Lumpy0, { x: 169, y: 431, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6b55c3 }, "AboveEntitiesDecals"),
       GreeterNpc: e(r["IguanaNpc"], { x: 272, y: 504, flippedX: true, values: { personaName: "MarketGreeter", name: "GreeterNpc", depth: 0 } }, "CharacterEntities"),

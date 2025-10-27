@@ -31,6 +31,7 @@ export namespace OgmoEntities {
   export type StashPocket = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
   export type PlayerDev = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type EnemyMiffed = OgmoFactory.EntityBase<{ name: string; depth: number; variant: "level0" | "level1" | "level2" }> & { uid: number };
+  export type WeightedPedestal = OgmoFactory.EntityBase<{ requiredFlopsCount: number; name: string; depth: number }> & { uid: number };
 }
 
 export interface OgmoEntityResolverBase {
@@ -62,4 +63,5 @@ export interface OgmoEntityResolverBase {
   StashPocket: (entity: OgmoEntities.StashPocket) => unknown;
   PlayerDev: (entity: OgmoEntities.PlayerDev) => unknown;
   EnemyMiffed: (entity: OgmoEntities.EnemyMiffed) => unknown;
+  WeightedPedestal: (entity: OgmoEntities.WeightedPedestal) => unknown;
 }
