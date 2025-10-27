@@ -451,7 +451,7 @@
           "originX": 23,
           "originY": 24,
           "uid": 176160055287700,
-          "values": {"requiredFlopsCount": 1, "name": "", "depth": 0}
+          "values": {"requiredFlopsCount": 5, "name": "", "depth": 0}
         }
       ]
     },
