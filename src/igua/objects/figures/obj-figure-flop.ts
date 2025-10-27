@@ -1133,3 +1133,5 @@ const flopDexSeeds = [
     997,
     2646,
 ];
+
+objFigureFlop.primaryTints = flopDexSeeds.map(seed => getArgsFromFlopSeed(seed).tint.red);
