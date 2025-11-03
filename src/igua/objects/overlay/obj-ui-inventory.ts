@@ -3,7 +3,7 @@ import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
-import { Integer } from "../../../lib/math/number-alias-types";
+import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { Empty } from "../../../lib/types/empty";
@@ -27,6 +27,13 @@ import { objFigureKeyItem } from "../figures/obj-figure-key-item";
 import { objFigurePotion } from "../figures/obj-figure-potion";
 import { StepOrder } from "../step-order";
 import { objUiEquipmentBuffs, objUiEquipmentBuffsComparedTo } from "./obj-ui-equipment-buffs";
+
+const Consts = {
+    Flops: {
+        BackTint: 0x35145c,
+        FrontTint: 0xffffff,
+    },
+};
 
 export function objUiInventory() {
     const obj = container().coro(function* (self) {
@@ -440,23 +447,61 @@ function objUiFlopCollection() {
     updateCollectionData();
 
     return container(
-        objLabeledText(() => "Free:", () => String(collectionData.availableCount))
+        new Graphics().beginFill(Consts.Flops.BackTint).drawRect(-100 + 3, -17, 192 - 6, 20),
+        objLabeledText(
+            { text: "Free:", tint: Consts.Flops.FrontTint },
+            {
+                get text() {
+                    return String(collectionData.availableCount);
+                },
+                tint: Consts.Flops.FrontTint,
+            },
+        )
             .at(-64, 0),
-        objLabeledText(() => "Busy:", () => String(collectionData.loanedCount))
+        objLabeledText(
+            { text: "Busy:", tint: Consts.Flops.FrontTint },
+            {
+                get text() {
+                    return String(collectionData.loanedCount);
+                },
+                tint: Consts.Flops.FrontTint,
+            },
+        )
             .at(0, 0),
-        objLabeledText(() => "Unique:", () => String(collectionData.uniquesCount))
+        objLabeledText(
+            { text: "Unique:", tint: Consts.Flops.FrontTint },
+            {
+                get text() {
+                    return String(collectionData.uniquesCount);
+                },
+                tint: Consts.Flops.FrontTint,
+            },
+        )
             .at(64, 0),
     );
 }
 
-function objLabeledText(labelProvider: () => string, textProvider: () => string) {
+interface TextControls {
+    readonly text: string;
+    readonly tint: RgbInt;
+}
+
+function objLabeledText(label: TextControls, value: TextControls) {
+    const labelObj = objText.Medium(label.text)
+        .step(self => (self.text = label.text, self.tint = label.tint));
+
+    labelObj.tint = label.tint;
+
+    const valueObj = objText.MediumBold(value.text)
+        .step(self => (self.text = value.text, self.tint = value.tint));
+
+    valueObj.tint = value.tint;
+
     return container(
-        objText.Medium(labelProvider())
-            .step(self => self.text = labelProvider())
+        labelObj
             .anchored(1, 1)
             .at(-1, 0),
-        objText.MediumBold(textProvider())
-            .step(self => self.text = textProvider())
+        valueObj
             .anchored(0, 1)
             .at(1, 0),
     );
