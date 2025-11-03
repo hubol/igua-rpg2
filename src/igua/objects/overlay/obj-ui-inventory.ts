@@ -19,6 +19,7 @@ import { MxnUiPageElement, mxnUiPageElement } from "../../mixins/mxn-ui-page-ele
 import { Rpg } from "../../rpg/rpg";
 import { RpgCharacterEquipment } from "../../rpg/rpg-character-equipment";
 import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
+import { RpgFlops } from "../../rpg/rpg-flops";
 import { RpgInventory } from "../../rpg/rpg-inventory";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
 import { objFigureEquipment } from "../figures/obj-figure-equipment";
@@ -171,6 +172,10 @@ Face Phys ATK: ${Rpg.character.meleeFaceAttack.physical}
 Claw Phys ATK: ${Rpg.character.meleeClawAttack.physical}
 Fact Capacity: ${Rpg.character.facts.usedSlots} / ${Rpg.character.facts.totalSlots}`;
         })
+        .show(pageObj);
+
+    objUiFlopCollection()
+        .at(96, 181)
         .show(pageObj);
 
     return pageObj;
@@ -402,4 +407,57 @@ function objUiItemInfo(selectedObjSupplier: () => DisplayObject | undefined, qui
             }
             self.visible = Boolean(name || description);
         });
+}
+
+function objUiFlopCollection() {
+    const collectionData = {
+        availableCount: 0,
+        loanedCount: 0,
+        uniquesCount: 0,
+        list: [] as RpgFlops["list"],
+    };
+
+    function updateCollectionData() {
+        collectionData.availableCount = 0;
+        collectionData.loanedCount = 0;
+        collectionData.uniquesCount = 0;
+
+        // TODO RpgFlops should expose
+        const list = Rpg.inventory.flops.list;
+        for (const item of list) {
+            if (!item.count) {
+                continue;
+            }
+
+            collectionData.uniquesCount += 1;
+            collectionData.availableCount += item.count - item.loanedCount;
+            collectionData.loanedCount += item.loanedCount;
+        }
+
+        collectionData.list = list;
+    }
+
+    updateCollectionData();
+
+    return container(
+        objLabeledText(() => "Free:", () => String(collectionData.availableCount))
+            .at(-64, 0),
+        objLabeledText(() => "Busy:", () => String(collectionData.loanedCount))
+            .at(0, 0),
+        objLabeledText(() => "Unique:", () => String(collectionData.uniquesCount))
+            .at(64, 0),
+    );
+}
+
+function objLabeledText(labelProvider: () => string, textProvider: () => string) {
+    return container(
+        objText.Medium(labelProvider())
+            .step(self => self.text = labelProvider())
+            .anchored(1, 1)
+            .at(-1, 0),
+        objText.MediumBold(textProvider())
+            .step(self => self.text = textProvider())
+            .anchored(0, 1)
+            .at(1, 0),
+    );
 }
