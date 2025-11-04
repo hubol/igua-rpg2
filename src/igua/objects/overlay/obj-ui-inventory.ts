@@ -421,27 +421,12 @@ function objUiFlopCollection() {
         availableCount: 0,
         loanedCount: 0,
         uniquesCount: 0,
-        list: [] as RpgFlops["list"],
     };
 
     function updateCollectionData() {
-        collectionData.availableCount = 0;
-        collectionData.loanedCount = 0;
-        collectionData.uniquesCount = 0;
-
-        // TODO RpgFlops should expose
-        const list = Rpg.inventory.flops.list;
-        for (const item of list) {
-            if (!item.count) {
-                continue;
-            }
-
-            collectionData.uniquesCount += 1;
-            collectionData.availableCount += item.count - item.loanedCount;
-            collectionData.loanedCount += item.loanedCount;
-        }
-
-        collectionData.list = list;
+        collectionData.availableCount = Rpg.inventory.flops.availableFlopIds.length;
+        collectionData.loanedCount = Rpg.inventory.flops.loanedFlopIds.length;
+        collectionData.uniquesCount = Rpg.inventory.flops.uniqueFlopIds.size;
     }
 
     updateCollectionData();

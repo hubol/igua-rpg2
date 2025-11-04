@@ -15,8 +15,6 @@ export function objWeightedPedestal({ uid, values: { requiredFlopsCount } }: Ogm
     return container(
         Sprite.from(Tx.Esoteric.WeightedPedestal)
             .mixin(mxnCutscene, function* () {
-                const list = Rpg.inventory.flops.list;
-
                 const message =
                     `A weighted pedestal for presenting Flops. The scale reads ${rpgWeightedPedestal.weight}f.`;
                 yield* show(message);
@@ -29,18 +27,13 @@ What to do?`,
                 );
 
                 if (result === 0) {
-                    const anyFlopsAvailable = list.some(item => item.count > item.loanedCount);
-
-                    if (!anyFlopsAvailable) {
+                    if (!Rpg.inventory.flops.availableFlopIds.length) {
                         yield* show("But you don't have any Flops to add.");
                     }
 
                     // TODO picker?
 
-                    const possibleFlopIds = list.flatMap((item, flopId) =>
-                        item.count > item.loanedCount ? [flopId] : []
-                    );
-                    const flopId = Rng.item(possibleFlopIds);
+                    const flopId = Rng.item(Rpg.inventory.flops.availableFlopIds);
 
                     const loan = Rpg.inventory.flops.createLoan(flopId);
                     if (loan.accepted) {

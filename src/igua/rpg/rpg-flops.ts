@@ -1,29 +1,70 @@
 import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
-import { range } from "../../lib/range";
 
 export class RpgFlops {
     constructor(private readonly _state: RpgFlops.State) {
+        this._clean();
+    }
+
+    private _availableFlopIds: Array<RpgFlops.Id> = [];
+    private _collectedCountsByFlopId: Record<RpgFlops.Id, Integer> = {};
+    private _loanedCountsByFlopId: Record<RpgFlops.Id, Integer> = {};
+    private _uniqueFlopIds = new Set<RpgFlops.Id>();
+
+    private _clean() {
+        // Zero
+
+        this._availableFlopIds.length = 0;
+
+        for (let i = 0; i < 999; i++) {
+            this._collectedCountsByFlopId[i] = 0;
+            this._loanedCountsByFlopId[i] = 0;
+        }
+
+        this._uniqueFlopIds.clear();
+
+        // Compute
+
+        for (let i = 0; i < this._state.loanedFlopIds.length; i++) {
+            const id = this._state.loanedFlopIds[i];
+            this._loanedCountsByFlopId[id]++;
+        }
+
+        for (let i = 0; i < this._state.collectedFlopIds.length; i++) {
+            const id = this._state.collectedFlopIds[i];
+            this._collectedCountsByFlopId[id]++;
+
+            this._uniqueFlopIds.add(id);
+
+            if (this._collectedCountsByFlopId[id] > this._loanedCountsByFlopId[id]) {
+                this._availableFlopIds.push(id);
+            }
+        }
     }
 
     /** Generally, prefer the `count` and `has` methods */
-    get values(): Readonly<RpgFlops.State["collections"]> {
-        return this._state.collections;
+    get values(): Readonly<Record<RpgFlops.Id, Integer>> {
+        return this._collectedCountsByFlopId;
     }
 
-    get list(): ReadonlyArray<{ count: Integer; loanedCount: Integer }> {
-        return range(999).map(id => ({
-            count: this.count(id),
-            loanedCount: this._state.loans[id] ?? 0,
-        }));
+    get availableFlopIds(): ReadonlyArray<RpgFlops.Id> {
+        return this._availableFlopIds;
+    }
+
+    get loanedFlopIds(): ReadonlyArray<RpgFlops.Id> {
+        return this._state.loanedFlopIds;
+    }
+
+    get uniqueFlopIds(): ReadonlySet<RpgFlops.Id> {
+        return this._uniqueFlopIds;
     }
 
     count(id: RpgFlops.Id) {
-        return this._state.collections[id] ?? 0;
+        return this._collectedCountsByFlopId[id] ?? 0;
     }
 
     has(id: RpgFlops.Id) {
-        return Boolean(this._state.collections[id]);
+        return Boolean(this._collectedCountsByFlopId[id]);
     }
 
     receive(id: RpgFlops.Id) {
@@ -36,24 +77,27 @@ export class RpgFlops {
             return;
         }
 
-        this._state.collections[id] = this.count(id) + 1;
+        this._state.collectedFlopIds.push(id);
+        this._clean();
     }
 
     createLoan(flopId: RpgFlops.Id): RpgFlops.Loan {
-        if (this.count(flopId) <= (this._state.loans[flopId] ?? 0)) {
+        if (!this._availableFlopIds.includes(flopId)) {
             return {
                 accepted: false,
-                error: new Error(`count: ${this.count(flopId)} <= loans: ${this._state.loans[flopId] ?? 0}`),
+                error: new Error(`${flopId} is not available for loan`),
             };
         }
 
-        this._state.loans[flopId] = (this._state.loans[flopId] ?? 0) + 1;
+        this._state.loanedFlopIds.push(flopId);
+        this._clean();
         return { flopId, accepted: true };
     }
 
     processReturn(request: RpgFlops.Return) {
         for (const flopId of request.returnedFlopIds) {
-            if (!this._state.loans[flopId]) {
+            const index = this._state.loanedFlopIds.indexOf(flopId);
+            if (index === -1) {
                 Logger.logContractViolationError(
                     "RpgFlops.processReturn",
                     new Error("id must be on loan to be unloaned"),
@@ -62,8 +106,10 @@ export class RpgFlops {
                 continue;
             }
 
-            this._state.loans[flopId] = 0;
+            this._state.loanedFlopIds.splice(index, 1);
         }
+
+        this._clean();
     }
 
     private static _isFlopId(flopId: RpgFlops.Id) {
@@ -72,8 +118,8 @@ export class RpgFlops {
 
     static createState(): RpgFlops.State {
         return {
-            collections: {},
-            loans: {},
+            collectedFlopIds: [],
+            loanedFlopIds: [],
         };
     }
 }
@@ -81,8 +127,8 @@ export class RpgFlops {
 export namespace RpgFlops {
     export type Id = Integer;
     export interface State {
-        collections: Record<RpgFlops.Id, Integer>;
-        loans: Record<RpgFlops.Id, Integer>;
+        collectedFlopIds: Array<RpgFlops.Id>;
+        loanedFlopIds: Array<RpgFlops.Id>;
     }
 
     export type Loan = Loan.Accepted | Loan.Declined;
