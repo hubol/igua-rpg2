@@ -29,6 +29,7 @@ What to do?`,
                 if (result === 0) {
                     if (!Rpg.inventory.flops.availableFlopIds.length) {
                         yield* show("But you don't have any Flops to add.");
+                        return;
                     }
 
                     // TODO picker?
