@@ -135,9 +135,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 return;
             }
 
-            if (!scene.isWorldMap) {
-                status.state.ballonHealthMayDrain = !puppet.isOnGround;
-            }
+            status.state.ballonHealthMayDrain = !scene.isWorldMap && !puppet.isOnGround;
 
             const xPrevious = puppet.x;
             puppet.x = Math.max(24, Math.min(puppet.x, scene.level.width - 24));
