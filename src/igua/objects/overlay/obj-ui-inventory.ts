@@ -3,6 +3,7 @@ import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
+import { onPrimitiveMutate } from "../../../lib/game-engine/routines/on-primitive-mutate";
 import { approachLinear } from "../../../lib/math/number";
 import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
 import { CollisionShape } from "../../../lib/pixi/collision";
@@ -441,6 +442,37 @@ function objUiFlopElement(flopId: RpgFlops.Id) {
     return obj.identify(objUiFlopElement);
 }
 
+function objUiFlopGrid() {
+    const w = 2;
+    const h = 3;
+    const padding = 1;
+
+    return new Graphics()
+        .coro(function* (gfx) {
+            while (true) {
+                gfx.clear();
+                gfx.lineStyle(1, Consts.Flops.BackTint, 1, 1).drawRect(
+                    -padding,
+                    -padding,
+                    100 * w + padding * 2,
+                    10 * h + padding * 2,
+                );
+                gfx.lineStyle(0);
+
+                for (let i = 0; i < 999; i++) {
+                    if (Rpg.inventory.flops.values[i] < 1) {
+                        continue;
+                    }
+                    const x = Math.floor(i / 10);
+                    const y = i % 10;
+                    gfx.beginFill(objFigureFlop.primaryTints[i]).drawRect(x * w, y * h, w, h);
+                }
+
+                yield onPrimitiveMutate(() => Rpg.inventory.flops.availableFlopIds.length);
+            }
+        });
+}
+
 function objUiFlopCounts(selectedObjSupplier: () => DisplayObject | undefined) {
     return container(
         new Graphics().beginFill(Consts.Flops.BackTint).drawRoundedRect(-100 + 3, -17, 192 - 6, 18, 5),
@@ -474,6 +506,7 @@ function objUiFlopCounts(selectedObjSupplier: () => DisplayObject | undefined) {
             },
         )
             .at(64, 0),
+        objUiFlopGrid().at(-94, -53),
     )
         .invisible()
         .step(self => self.visible = Boolean(selectedObjSupplier()?.is(objUiFlopElement)));
