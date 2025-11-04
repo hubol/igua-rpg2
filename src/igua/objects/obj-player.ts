@@ -52,6 +52,10 @@ const PlayerConsts = {
 };
 
 function getBallonPhysicsLevel(ballonsCount: number) {
+    if (scene.isWorldMap) {
+        return 0;
+    }
+
     let level = 0;
     let countForNextLevel = 1;
 
