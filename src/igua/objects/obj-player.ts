@@ -9,6 +9,7 @@ import { merge } from "../../lib/object/merge";
 import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { DataRespawnConfiguration } from "../data/data-respawn-configuration";
 import { Cutscene, DevKey, Input, layers, scene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { force } from "../mixins/mxn-physics";
@@ -18,8 +19,6 @@ import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Rpg } from "../rpg/rpg";
 import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgStatus } from "../rpg/rpg-status";
-import { scnWorldMap } from "../scenes/scn-world-map";
-import { SceneChanger } from "../systems/scene-changer";
 import { objFxEnemyDefeat } from "./effects/obj-fx-enemy-defeat";
 import { objFxPlayerJumpComboDust } from "./effects/obj-fx-player-jump-combo-dust";
 import { objFxSuperDust } from "./effects/obj-fx-super-dust";
@@ -107,7 +106,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             yield sleep(4000);
             Rpg.character.revive();
             layers.recreateOverlay();
-            SceneChanger.create({ sceneName: scnWorldMap.name, checkpointName: "restart" })!.changeScene();
+            DataRespawnConfiguration.getSceneChanger(Rpg.character.attributes.respawnConfiguration).changeScene();
         }, { requiredPlayerIsAlive: false });
     };
 
