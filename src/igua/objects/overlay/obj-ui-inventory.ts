@@ -3,7 +3,9 @@ import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
+import { approachLinear } from "../../../lib/math/number";
 import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
+import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { Empty } from "../../../lib/types/empty";
@@ -23,6 +25,7 @@ import { RpgFlops } from "../../rpg/rpg-flops";
 import { RpgInventory } from "../../rpg/rpg-inventory";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter } from "../../ui/framework/obj-ui-page";
 import { objFigureEquipment } from "../figures/obj-figure-equipment";
+import { objFigureFlop } from "../figures/obj-figure-flop";
 import { objFigureKeyItem } from "../figures/obj-figure-key-item";
 import { objFigurePotion } from "../figures/obj-figure-potion";
 import { StepOrder } from "../step-order";
@@ -31,7 +34,7 @@ import { objUiEquipmentBuffs, objUiEquipmentBuffsComparedTo } from "./obj-ui-equ
 const Consts = {
     Flops: {
         BackTint: 0x35145c,
-        FrontTint: 0xffffff,
+        FrontTint: 0xc450d3,
     },
 };
 
@@ -90,7 +93,11 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 
     const uiPotionObjs = createObjUiPotions();
 
-    const pageElementObjs = [...uiPotionObjs, ...uiEquipmentObjs, ...uiKeyItemObjs];
+    const flopId = Rpg.inventory.flops.latestCollectedFlopId;
+
+    const uiFlopObjs = flopId === null ? [] : [objUiFlopElement(flopId).at(6, 161)];
+
+    const pageElementObjs = [...uiPotionObjs, ...uiEquipmentObjs, ...uiKeyItemObjs, ...uiFlopObjs];
 
     const pageObj = objUiPage(pageElementObjs, { selectionIndex: 0 }).at(
         180,
@@ -181,8 +188,8 @@ Fact Capacity: ${Rpg.character.facts.usedSlots} / ${Rpg.character.facts.totalSlo
         })
         .show(pageObj);
 
-    objUiFlopCollection()
-        .at(96, 181)
+    objUiFlopCounts(() => pageObj.selected)
+        .at(96, 131)
         .show(pageObj);
 
     return pageObj;
@@ -416,28 +423,32 @@ function objUiItemInfo(selectedObjSupplier: () => DisplayObject | undefined, qui
         });
 }
 
-function objUiFlopCollection() {
-    const collectionData = {
-        availableCount: 0,
-        loanedCount: 0,
-        uniquesCount: 0,
-    };
+function objUiFlopElement(flopId: RpgFlops.Id) {
+    const shapeObj = new Graphics().beginFill(0xff0000).drawRect(0, 0, 32, 32).invisible();
+    const flopObj = objFigureFlop(flopId).at(15, 13);
+    const flopWrapperObj = container(flopObj.filtered(flopObj.objects.filter));
 
-    function updateCollectionData() {
-        collectionData.availableCount = Rpg.inventory.flops.availableFlopIds.length;
-        collectionData.loanedCount = Rpg.inventory.flops.loanedFlopIds.length;
-        collectionData.uniquesCount = Rpg.inventory.flops.uniqueFlopIds.size;
-    }
+    const obj = container(shapeObj, flopWrapperObj)
+        .collisionShape(CollisionShape.DisplayObjects, [shapeObj])
+        .mixin(mxnUiPageElement, { tint: Consts.Flops.FrontTint });
 
-    updateCollectionData();
+    Sprite.from(Tx.Ui.Inventory.FlopsTitle).at(47, -7).show(obj);
 
+    flopWrapperObj
+        .step(self => self.pivot.y = approachLinear(self.pivot.y, obj.selected ? 10 : 0, 1))
+        .show(obj);
+
+    return obj.identify(objUiFlopElement);
+}
+
+function objUiFlopCounts(selectedObjSupplier: () => DisplayObject | undefined) {
     return container(
-        new Graphics().beginFill(Consts.Flops.BackTint).drawRect(-100 + 3, -17, 192 - 6, 20),
+        new Graphics().beginFill(Consts.Flops.BackTint).drawRoundedRect(-100 + 3, -17, 192 - 6, 18, 5),
         objLabeledText(
             { text: "Free:", tint: Consts.Flops.FrontTint },
             {
                 get text() {
-                    return String(collectionData.availableCount);
+                    return String(Rpg.inventory.flops.availableFlopIds.length);
                 },
                 tint: Consts.Flops.FrontTint,
             },
@@ -447,7 +458,7 @@ function objUiFlopCollection() {
             { text: "Busy:", tint: Consts.Flops.FrontTint },
             {
                 get text() {
-                    return String(collectionData.loanedCount);
+                    return String(Rpg.inventory.flops.loanedFlopIds.length);
                 },
                 tint: Consts.Flops.FrontTint,
             },
@@ -457,13 +468,15 @@ function objUiFlopCollection() {
             { text: "Unique:", tint: Consts.Flops.FrontTint },
             {
                 get text() {
-                    return String(collectionData.uniquesCount);
+                    return String(Rpg.inventory.flops.uniqueFlopIds.size);
                 },
                 tint: Consts.Flops.FrontTint,
             },
         )
             .at(64, 0),
-    );
+    )
+        .invisible()
+        .step(self => self.visible = Boolean(selectedObjSupplier()?.is(objUiFlopElement)));
 }
 
 interface TextControls {

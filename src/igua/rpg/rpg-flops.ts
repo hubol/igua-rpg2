@@ -59,6 +59,13 @@ export class RpgFlops {
         return this._uniqueFlopIds;
     }
 
+    get latestCollectedFlopId(): RpgFlops.Id | null {
+        if (this._state.collectedFlopIds.length === 0) {
+            return null;
+        }
+        return this._state.collectedFlopIds.last;
+    }
+
     count(id: RpgFlops.Id) {
         return this._collectedCountsByFlopId[id] ?? 0;
     }
