@@ -1,4 +1,5 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { DataRespawnConfiguration } from "../data/data-respawn-configuration";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 
 export class RpgPlayerAttributes {
@@ -17,7 +18,11 @@ export class RpgPlayerAttributes {
         return this._state.strength + this._buffs.getAggregatedBuffs().attributes.strength;
     }
 
-    update(attributeKey: keyof RpgPlayerAttributes.State, delta: Integer) {
+    get respawnConfiguration() {
+        return this._state.respawnConfiguration;
+    }
+
+    update(attributeKey: RpgPlayerAttributes.Point, delta: Integer) {
         this._state[attributeKey] += delta;
     }
 
@@ -26,6 +31,7 @@ export class RpgPlayerAttributes {
             health: 1,
             intelligence: 0,
             strength: 1,
+            respawnConfiguration: "Indiana.University.Nurse",
         };
     }
 }
@@ -35,5 +41,8 @@ export namespace RpgPlayerAttributes {
         health: Integer;
         intelligence: Integer;
         strength: Integer;
+        respawnConfiguration: DataRespawnConfiguration.Id;
     }
+
+    export type Point = "health" | "intelligence" | "strength";
 }
