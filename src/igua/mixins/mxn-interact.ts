@@ -38,6 +38,10 @@ export const CtxInteract = new SceneLocal(() => {
 }, "CtxInteract");
 
 function getPlayerOverlapScore(interactObj: MxnInteract) {
+    if (!interactObj.interact.enabled) {
+        return -2;
+    }
+
     if (!playerObj.collides(interactObj)) {
         return -1;
     }
@@ -55,6 +59,7 @@ function getPlayerOverlapScore(interactObj: MxnInteract) {
 
 export function mxnInteract(obj: DisplayObject, interactFn: () => void, hotspotObj = Null<DisplayObject>()) {
     const interact = {
+        enabled: true,
         hotspotObj,
         // TOOD should this be an event?!?!!?
         onInteract: interactFn,
@@ -65,4 +70,4 @@ export function mxnInteract(obj: DisplayObject, interactFn: () => void, hotspotO
         .merge({ interact });
 }
 
-type MxnInteract = ReturnType<typeof mxnInteract>;
+export type MxnInteract = ReturnType<typeof mxnInteract>;
