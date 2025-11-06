@@ -7,6 +7,7 @@ import { show } from "../drama/show";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { mxnWeightedPedestalMask } from "../mixins/mxn-weighted-pedestal-mask";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 
@@ -20,6 +21,11 @@ export function scnPlainsSuggestive() {
     // Rpg.inventory.equipment.receive("IqIndicator");
 
     enrichDevilBoneMan(lvl);
+    enrichWeightedPedestal(lvl);
+}
+
+function enrichWeightedPedestal(lvl: LvlType.PlainsSuggestive) {
+    lvl.WeightedPedestal.mixin(mxnWeightedPedestalMask, { interactObjs: [lvl.PedestalSign] });
 }
 
 function enrichDevilBoneMan(lvl: LvlType.PlainsSuggestive) {

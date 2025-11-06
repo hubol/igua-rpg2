@@ -442,6 +442,27 @@
           "originY": 6,
           "uid": 175644435369007,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "WeightedPedestal",
+          "id": 11,
+          "_eid": "60046263",
+          "x": 1768,
+          "y": 144,
+          "originX": 23,
+          "originY": 24,
+          "uid": 176245475470100,
+          "values": {"requiredFlopsCount": 1, "name": "", "depth": 0}
+        },
+        {
+          "name": "Sign",
+          "id": 12,
+          "_eid": "39046554",
+          "x": 1816,
+          "y": 144,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "Flops", "message": "Happy! :-)", "name": "PedestalSign", "depth": 0, "isSpecial": false}
         }
       ]
     },

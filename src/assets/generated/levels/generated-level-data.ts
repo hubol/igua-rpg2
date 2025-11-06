@@ -4178,6 +4178,8 @@ export const Lvl = {
       Door: e(r["Door"], { x: 1544, y: 96, values: { sceneName: "scnPlainsSuggestiveFlopCollector", checkpointName: "", name: "", depth: 0 } }, "Entities"),
       ValuableBlue: e(r["ValuableBlue"], { x: 1512, y: 15, uid: 175644435369006, values: { name: "", depth: 0 } }, "Entities"),
       ValuableBlue_1: e(r["ValuableBlue"], { x: 1730, y: 33, uid: 175644435369007, values: { name: "", depth: 0 } }, "Entities"),
+      WeightedPedestal: e(r["WeightedPedestal"], { x: 1768, y: 144, uid: 176245475470100, values: { requiredFlopsCount: 1, name: "", depth: 0 } }, "Entities"),
+      PedestalSign: e(r["Sign"], { x: 1816, y: 144, values: { title: "Flops", message: "Happy! :-)", name: "PedestalSign", depth: 0, isSpecial: false } }, "Entities"),
       StoneRock0_5: d(Tx.Stone.Rock0, { x: 170, y: 291, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
       FoliageSmall_2: d(Tx.Foliage.Small, { x: 262, y: 304, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb728 }, "AboveEntitiesDecals"),
       EffectsStar12px: d(Tx.Effects.Star12px, { x: 220, y: 285, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x854e31 }, "AboveEntitiesDecals"),
