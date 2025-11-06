@@ -68,5 +68,8 @@ What to do?`,
             .autoSorted()
             .at(23, -14),
     )
+        .merge({ rpgWeightedPedestal })
         .pivoted(23, 24);
 }
+
+export type ObjWeightedPedestal = ReturnType<typeof objWeightedPedestal>;

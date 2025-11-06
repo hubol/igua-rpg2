@@ -193,7 +193,7 @@ function constructTerrain(terrainObj: ObjTerrain, weights: TerrainSegment[]) {
     terrainObj.once("added", () => CtxTerrain.value.push(terrainObj));
 }
 
-abstract class TerrainGraphics extends Graphics {
+export abstract class TerrainGraphics extends Graphics {
     dirty = true;
     segments: TerrainSegment[] = [];
     enabled = true;
@@ -214,7 +214,7 @@ abstract class TerrainGraphics extends Graphics {
     }
 }
 
-abstract class TerrainMesh extends SimpleMesh {
+export abstract class TerrainMesh extends SimpleMesh {
     dirty = true;
     segments: TerrainSegment[] = [];
     enabled = true;

@@ -5,7 +5,6 @@ import { Mzk } from "../../assets/music";
 import { Tx } from "../../assets/textures";
 import { Instances } from "../../lib/game-engine/instances";
 import { interpvr } from "../../lib/game-engine/routines/interp";
-import { onMutate } from "../../lib/game-engine/routines/on-mutate";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
@@ -21,6 +20,7 @@ import { mxnCuesheet } from "../mixins/mxn-cuesheet";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnMotion } from "../mixins/mxn-motion";
 import { mxnTextTyped } from "../mixins/mxn-text-typed";
+import { mxnWeightedPedestalMask } from "../mixins/mxn-weighted-pedestal-mask";
 import { objMusician } from "../objects/characters/obj-musician";
 import { objCollectiblePotion } from "../objects/collectibles/obj-collectible-potion";
 import { objFxEighthNote } from "../objects/effects/obj-fx-eighth-note";
@@ -32,6 +32,14 @@ export function scnStrangeMarket() {
     const lvl = Lvl.StrangeMarket();
     enrichMusicians(lvl);
     enrichGreeter(lvl);
+    enrichWeightedPedestal(lvl);
+}
+
+function enrichWeightedPedestal(lvl: LvlType.StrangeMarket) {
+    lvl.WeightedPedestal.mixin(mxnWeightedPedestalMask, {
+        terrainObjs: [lvl.RestaurantPipe0, lvl.RestaurantPipe1, lvl.RestaurantPipe2],
+        decalObjs: [lvl.RestaurantPipeBackGroup, lvl.RestaurantPipeFrontGroup],
+    });
 }
 
 function enrichGreeter(lvl: LvlType.StrangeMarket) {
