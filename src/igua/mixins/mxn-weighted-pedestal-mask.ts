@@ -2,15 +2,17 @@ import { DisplayObject } from "pixi.js";
 import { Null } from "../../lib/types/null";
 import { TerrainGraphics, TerrainMesh } from "../objects/obj-terrain";
 import { ObjWeightedPedestal } from "../objects/obj-weighted-pedestal";
+import { MxnInteract } from "./mxn-interact";
 
 interface MxnWeightedPedestalMaskArgs {
-    terrainObjs: ReadonlyArray<TerrainGraphics | TerrainMesh>;
-    decalObjs: ReadonlyArray<DisplayObject>;
+    terrainObjs?: ReadonlyArray<TerrainGraphics | TerrainMesh>;
+    decalObjs?: ReadonlyArray<DisplayObject>;
+    interactObjs?: ReadonlyArray<MxnInteract>;
 }
 
 export function mxnWeightedPedestalMask(
     obj: ObjWeightedPedestal,
-    { terrainObjs, decalObjs }: MxnWeightedPedestalMaskArgs,
+    { terrainObjs = [], decalObjs = [], interactObjs = [] }: MxnWeightedPedestalMaskArgs,
 ) {
     let appliedMaskState = Null<boolean>();
 
@@ -34,6 +36,10 @@ export function mxnWeightedPedestalMask(
         }
         for (const decalObj of decalObjs) {
             decalObj.visible = maskState;
+        }
+        for (const interactObj of interactObjs) {
+            interactObj.visible = maskState;
+            interactObj.interact.enabled = maskState;
         }
         appliedMaskState = maskState;
     }
