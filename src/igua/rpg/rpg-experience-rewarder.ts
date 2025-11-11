@@ -1,6 +1,9 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { Rng } from "../../lib/math/rng";
 import { RpgAttack } from "./rpg-attack";
 import { RpgExperience } from "./rpg-experience";
+import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
+import { RpgPlayerStatus } from "./rpg-player-status";
 import { RpgPocket } from "./rpg-pocket";
 
 type ComputerInteractionKind = "noop" | "small_task" | "medium_task";
@@ -24,7 +27,11 @@ const rerollCountToExperience = [0, 3, 9, 15, 25, 50, 99];
 type IncreaseFn = (amount: Integer) => void;
 
 export class RpgExperienceRewarder {
-    constructor(private readonly _state: RpgExperience.State) {
+    constructor(
+        private readonly _state: RpgExperience.State,
+        private readonly _buffs: RpgPlayerAggregatedBuffs,
+        private readonly _status: RpgPlayerStatus,
+    ) {
     }
 
     readonly combat = this._expose("combat", (increase) => ({
@@ -138,7 +145,21 @@ export class RpgExperienceRewarder {
         },
     }));
 
+    private _getIncreaseAmount(id: RpgExperience.Id, amount: Integer) {
+        const isWet = this._status.conditions.wetness.value >= 1;
+        const bonus = isWet ? this._buffs.getAggregatedBuffs().experience.bonusFactorWhileWet[id] : 0;
+        if (bonus === 0) {
+            return amount;
+        }
+
+        const raw = amount * (100 + bonus) / 100;
+        const asInteger = Math.floor(raw);
+        const fraction = raw - asInteger;
+
+        return asInteger + (Rng.float() < fraction ? 1 : 0);
+    }
+
     private _expose<T>(id: RpgExperience.Id, impl: (increase: IncreaseFn) => T) {
-        return impl(amount => this._state[id] += amount);
+        return impl(amount => this._state[id] += this._getIncreaseAmount(id, amount));
     }
 }

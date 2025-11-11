@@ -1,5 +1,6 @@
 import { Integer, PercentAsInteger } from "../../lib/math/number-alias-types";
 import { compileResetter } from "../../lib/object/compile-resetter";
+import { RpgExperience } from "./rpg-experience";
 
 export namespace RpgPlayerBuffs {
     export function create() {
@@ -37,6 +38,18 @@ export namespace RpgPlayerBuffs {
             conditions: {
                 ballonDrainReductionFactor: <PercentAsInteger> 0,
                 wetnessCapacityIncreaseFactor: <PercentAsInteger> 0,
+            },
+            experience: {
+                bonusFactorWhileWet: {
+                    combat: 0,
+                    computer: 0,
+                    gambling: 0,
+                    jump: 0,
+                    pocket: 0,
+                    quest: 0,
+                    social: 0,
+                    spirit: 0,
+                } satisfies Record<RpgExperience.Id, PercentAsInteger>,
             },
             loot: {
                 pocket: {

@@ -131,7 +131,11 @@ export namespace DataEquipment {
                 name: "Sponge",
                 texture: null,
                 description: "Increases maximum wetness",
-                buffs: (model, bonus) => model.conditions.wetnessCapacityIncreaseFactor += (1 + bonus) * 100,
+                buffs: (model, bonus) => {
+                    model.conditions.wetnessCapacityIncreaseFactor += (1 + bonus) * 100;
+                    model.experience.bonusFactorWhileWet.combat += (1 + bonus) * 50;
+                    model.experience.bonusFactorWhileWet.jump += (1 + bonus) * 50;
+                },
             },
             __Fallback__: {
                 name: "???",

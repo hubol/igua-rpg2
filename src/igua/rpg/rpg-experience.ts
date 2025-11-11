@@ -2,10 +2,8 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 
 export class RpgExperience implements Readonly<RpgExperience.State> {
-    constructor(private readonly _state: RpgExperience.State) {
+    constructor(private readonly _state: RpgExperience.State, readonly reward: RpgExperienceRewarder) {
     }
-
-    readonly reward = new RpgExperienceRewarder(this._state);
 
     get combat() {
         return this._state.combat;

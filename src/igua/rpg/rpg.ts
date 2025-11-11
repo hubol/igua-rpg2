@@ -6,6 +6,7 @@ import { DataShop } from "../data/data-shop";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgClassrooms } from "./rpg-classrooms";
 import { RpgExperience } from "./rpg-experience";
+import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 import { RpgFacts } from "./rpg-facts";
 import { RpgFlops } from "./rpg-flops";
 import { RpgIdols } from "./rpg-idols";
@@ -42,19 +43,20 @@ function createRpg(data: RpgProgressData) {
         },
     } = data;
 
-    const experience = new RpgExperience(data.character.experience);
-    const classrooms = new RpgClassrooms(classroomsState, experience.reward);
     const equipment = new RpgCharacterEquipment(data.character.inventory.equipment);
     const buffs = new RpgPlayerAggregatedBuffs(equipment);
     const idols = new RpgIdols(idolsState);
+    const potions = new RpgPotions(data.character.inventory.potions);
+    const keyItems = new RpgKeyItems(data.character.inventory.keyItems);
+    const attributes = new RpgPlayerAttributes(data.character.attributes, buffs);
+    const status = new RpgPlayerStatus(data.character.status, attributes, buffs);
+    const experienceRewarder = new RpgExperienceRewarder(data.character.experience, buffs, status);
+    const experience = new RpgExperience(data.character.experience, experienceRewarder);
+    const classrooms = new RpgClassrooms(classroomsState, experience.reward);
     const iguanaNpcs = new RpgIguanaNpcs(iguanaNpcsState, experience.reward);
     const quests = new RpgQuests(questsState, experience.reward);
     const pocket = new RpgPocket(data.character.inventory.pocket, experience);
-    const potions = new RpgPotions(data.character.inventory.potions);
-    const keyItems = new RpgKeyItems(data.character.inventory.keyItems);
     const stashPockets = new RpgStashPockets(stashPocketsState, pocket, experience.reward);
-    const attributes = new RpgPlayerAttributes(data.character.attributes, buffs);
-    const status = new RpgPlayerStatus(data.character.status, attributes, buffs);
     const facts = new RpgFacts(data.character.facts, attributes);
     const flops = new RpgFlops(data.character.inventory.flops);
     const inventory = new RpgInventory(equipment, flops, keyItems, pocket, potions);
