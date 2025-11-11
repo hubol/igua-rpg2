@@ -92,7 +92,11 @@ export class RpgPlayerStatus implements RpgStatus.Model {
                 set value(value) {
                     state.conditions.wetness.value = value;
                 },
-                max: 100,
+                get max() {
+                    return Math.round(
+                        100 * (buffs.getAggregatedBuffs().conditions.wetnessCapacityIncreaseFactor / 100),
+                    );
+                },
             },
         });
     })();

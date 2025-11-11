@@ -127,6 +127,12 @@ export namespace DataEquipment {
                 description: "Increases health",
                 buffs: (model, bonus) => model.attributes.health += 1 + bonus,
             },
+            WetnessCapacityUp: {
+                name: "Sponge",
+                texture: null,
+                description: "Increases maximum wetness",
+                buffs: (model, bonus) => model.conditions.wetnessCapacityIncreaseFactor += (1 + bonus) * 100,
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,

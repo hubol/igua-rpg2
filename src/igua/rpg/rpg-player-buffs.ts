@@ -36,6 +36,7 @@ export namespace RpgPlayerBuffs {
             },
             conditions: {
                 ballonDrainReductionFactor: <PercentAsInteger> 0,
+                wetnessCapacityIncreaseFactor: <PercentAsInteger> 0,
             },
             loot: {
                 pocket: {
