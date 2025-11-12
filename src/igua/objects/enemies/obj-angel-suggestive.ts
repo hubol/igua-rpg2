@@ -106,6 +106,9 @@ const themes = {
 
 const ranks = {
     level0: RpgEnemyRank.create({
+        status: {
+            healthMax: 25,
+        },
         loot: {
             tier0: [
                 { kind: "valuables", max: 8, min: 2, deltaPride: -3 },
@@ -124,7 +127,7 @@ const ranks = {
     }),
     level1: RpgEnemyRank.create({
         status: {
-            healthMax: 40,
+            healthMax: 39,
         },
         loot: {
             tier0: [
