@@ -25,7 +25,11 @@ export function scnPlainsSuggestive() {
 }
 
 function enrichWeightedPedestal(lvl: LvlType.PlainsSuggestive) {
-    lvl.WeightedPedestal.mixin(mxnWeightedPedestalMask, { interactObjs: [lvl.PedestalSign] });
+    lvl.WeightedPedestal.mixin(mxnWeightedPedestalMask, {
+        interactObjs: [lvl.PedestalSign],
+        terrainObjs: [lvl.PedestalBlock0],
+        decalObjs: [lvl.PedestalTerrainGroup],
+    });
 }
 
 function enrichDevilBoneMan(lvl: LvlType.PlainsSuggestive) {
