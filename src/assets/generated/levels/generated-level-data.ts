@@ -4212,6 +4212,42 @@ export const Lvl = {
       GateVertical_1: e(r["GateVertical"], { x: 1344, y: 424, width: 792, flippedY: false, values: { sceneName: "scnPlainsSuggestiveCavern", checkpointName: "", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
+  SimpleSecretValuables: () => {
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 176, width: 176, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 328, y: 176, width: 176, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 0, y: 240, width: 504, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 216, y: 176, width: 72, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 24, y: 168, width: 32, height: 8, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 56, y: 168, width: 56, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 112, y: 168, width: 32, height: 8, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_2: e(r["Slope"], { x: 360, y: 168, width: 32, height: 8, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 392, y: 168, width: 56, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_3: e(r["Slope"], { x: 448, y: 168, width: 32, height: 8, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      PedestalBlock0: e(r["Block"], { x: 176, y: 176, width: 40, height: 16, values: { name: "PedestalBlock0", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      PedestalBlock1: e(r["Block"], { x: 288, y: 176, width: 40, height: 16, values: { name: "PedestalBlock1", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      WeightedPedestal: e(r["WeightedPedestal"], { x: 254, y: 176, uid: 176306401632900, values: { requiredFlopsCount: 1, name: "", depth: 0 } }, "Entities"),
+      ValuableBlue: e(r["ValuableBlue"], { x: 191, y: 228, uid: 176306403480701, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableBlue_1: e(r["ValuableBlue"], { x: 312, y: 228, uid: 176306403507602, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableOrange: e(r["ValuableOrange"], { x: 205, y: 212, uid: 176306404125703, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableOrange_1: e(r["ValuableOrange"], { x: 221.03353540730782, y: 229.21712549750976, uid: 176306404143504, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableGreen: e(r["ValuableGreen"], { x: 189, y: 213, uid: 176306404597505, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableGreen_1: e(r["ValuableGreen"], { x: 205, y: 229, uid: 176306404687404, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableGreen_2: e(r["ValuableGreen"], { x: 221, y: 213, uid: 176306405059907, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableOrange_2: e(r["ValuableOrange"], { x: 285.0335354073078, y: 229.21712549750976, uid: 176306405462208, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableOrange_3: e(r["ValuableOrange"], { x: 298, y: 212, uid: 176306405732109, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableGreen_3: e(r["ValuableGreen"], { x: 281, y: 215, uid: 176306406205510, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableGreen_4: e(r["ValuableGreen"], { x: 299, y: 234, uid: 176306406432911, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableGreen_5: e(r["ValuableGreen"], { x: 313, y: 215, uid: 176306406616112, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableOrange_4: e(r["ValuableOrange"], { x: 254.0335354073078, y: 207.21712549750976, uid: 176306407245313, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableBlue_2: e(r["ValuableBlue"], { x: 240, y: 219, uid: 176306407802903, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableBlue_3: e(r["ValuableBlue"], { x: 266, y: 219, uid: 176306407944915, values: { name: "", depth: 0 } }, "Entities"),
+      ValuableOrange_5: e(r["ValuableOrange"], { x: 253.0335354073078, y: 232.21712549750976, uid: 176306408246316, values: { name: "", depth: 0 } }, "Entities"),
+      IntelligenceBackground: e(r["IntelligenceBackground"], { x: 328, y: 224, width: 176, height: 16, values: { initialTint: "#000000", targetTint: "#000000", min: 3, max: 5, name: "", depth: 0 } }, "Entities"),
+      Player: e(r["Player"], { x: 88, y: 168, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    };
+  },
   StrangeMarketRestaurant: () => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x408000 });
     return {
@@ -4917,6 +4953,7 @@ export namespace LvlType {
   export type PlainsSuggestiveCavern = ReturnType<(typeof Lvl)["PlainsSuggestiveCavern"]>;
   export type PlainsSuggestiveFlopCollector = ReturnType<(typeof Lvl)["PlainsSuggestiveFlopCollector"]>;
   export type PlainsSuggestive = ReturnType<(typeof Lvl)["PlainsSuggestive"]>;
+  export type SimpleSecretValuables = ReturnType<(typeof Lvl)["SimpleSecretValuables"]>;
   export type StrangeMarketRestaurant = ReturnType<(typeof Lvl)["StrangeMarketRestaurant"]>;
   export type StrangeMarketTowerInterior = ReturnType<(typeof Lvl)["StrangeMarketTowerInterior"]>;
   export type StrangeMarket = ReturnType<(typeof Lvl)["StrangeMarket"]>;

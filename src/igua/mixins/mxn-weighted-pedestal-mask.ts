@@ -8,11 +8,12 @@ interface MxnWeightedPedestalMaskArgs {
     terrainObjs?: ReadonlyArray<TerrainGraphics | TerrainMesh>;
     decalObjs?: ReadonlyArray<DisplayObject>;
     interactObjs?: ReadonlyArray<MxnInteract>;
+    maskWhenWeighted?: boolean;
 }
 
 export function mxnWeightedPedestalMask(
     obj: ObjWeightedPedestal,
-    { terrainObjs = [], decalObjs = [], interactObjs = [] }: MxnWeightedPedestalMaskArgs,
+    { terrainObjs = [], decalObjs = [], interactObjs = [], maskWhenWeighted = true }: MxnWeightedPedestalMaskArgs,
 ) {
     let appliedMaskState = Null<boolean>();
 
@@ -24,7 +25,7 @@ export function mxnWeightedPedestalMask(
 
     // TODO VFX probably
     function applyMask() {
-        const maskState = obj.rpgWeightedPedestal.isSufficientlyWeighted;
+        const maskState = obj.rpgWeightedPedestal.isSufficientlyWeighted === maskWhenWeighted;
 
         if (appliedMaskState === maskState) {
             return;
