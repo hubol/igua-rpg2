@@ -99,7 +99,9 @@ export namespace DataPotion {
     export function usePotion(id: Id) {
         switch (id) {
             case "AttributeHealthUp":
+                const previousHealthMax = Rpg.character.status.healthMax;
                 Rpg.character.attributes.update("health", 1);
+                playerObj.heal(Math.round(Rpg.character.status.healthMax - previousHealthMax));
                 return;
             case "AttributeIntelligenceUp":
                 Rpg.character.attributes.update("intelligence", 1);
