@@ -94,7 +94,7 @@ export class RpgPlayerStatus implements RpgStatus.Model {
                 },
                 get max() {
                     return Math.round(
-                        100 * (buffs.getAggregatedBuffs().conditions.wetnessCapacityIncreaseFactor / 100),
+                        100 * (1 + buffs.getAggregatedBuffs().conditions.wetnessCapacityIncreaseFactor / 100),
                     );
                 },
             },
