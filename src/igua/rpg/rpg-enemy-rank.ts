@@ -29,6 +29,7 @@ export namespace RpgEnemyRank {
                         ballons: [],
                     },
                     poison: {
+                        rateFactor: status?.conditions?.poison?.rateFactor ?? 100,
                         value: status?.conditions?.poison?.value ?? 0,
                         max: status?.conditions?.poison?.max ?? 100,
                         level: status?.conditions?.poison?.level ?? 0,

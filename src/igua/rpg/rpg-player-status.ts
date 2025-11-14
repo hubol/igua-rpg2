@@ -65,6 +65,7 @@ export class RpgPlayerStatus implements RpgStatus.Model {
             poison: {
                 immune: false,
                 max: 100,
+                rateFactor: 100,
                 get level() {
                     return state.conditions.poison.level;
                 },
