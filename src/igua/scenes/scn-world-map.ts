@@ -1,9 +1,11 @@
 import { Container, DisplayObject } from "pixi.js";
-import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Instances } from "../../lib/game-engine/instances";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
+import { playerObj } from "../objects/obj-player";
 import { OgmoFactory } from "../ogmo/factory";
 
 export function scnWorldMap() {
@@ -14,4 +16,23 @@ export function scnWorldMap() {
     Object.entries(lvl).flatMap(([key, value]) =>
         key.endsWith("Label") && value instanceof DisplayObject ? [value] : []
     ).forEach(x => x.mixin(mxnBoilPivot));
+
+    enrichSimpleSecretValuables(lvl);
+}
+
+function enrichSimpleSecretValuables(lvl: LvlType.WorldMap) {
+    lvl.RedSecretGroup.children.forEach(obj =>
+        obj.step(self => {
+            if (playerObj.collides(self)) {
+                self.play(Sfx.Effect.BallonPop.rate(0.5, 2));
+                self.destroy();
+            }
+        })
+    );
+
+    lvl.SimpleSecretValuablesGate.coro(function* (self) {
+        yield () => lvl.RedSecretGroup.children.length === 0;
+        self.interact.enabled = true;
+    })
+        .interact.enabled = false;
 }

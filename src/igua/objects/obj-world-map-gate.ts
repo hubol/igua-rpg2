@@ -24,10 +24,12 @@ export function objWorldMapGate(ogmo: OgmoEntities.GateMap) {
         .coro(function* (self) {
             if (ogmo.values.visible || Rpg.programmaticFlags.revealedWorldMapGateUids.has(ogmo.uid)) {
                 self.visible = true;
+                // TODO kind of a hack
+                self.interact.enabled = true;
                 return;
             }
 
-            yield () => playerObj.collides(self);
+            yield () => playerObj.collides(self) && self.interact.enabled;
 
             self.play(Sfx.Interact.WorldMapGateAppear0.rate(0.9, 1.1));
 
