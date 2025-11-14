@@ -279,8 +279,16 @@ function objExperienceIndicator() {
 
                 if (xCorrection === 0) {
                     xCorrection = -deltaObj.x;
+                    break;
                 }
-                deltaObj.x += xCorrection;
+            }
+
+            if (xCorrection === 0) {
+                return;
+            }
+
+            for (let i = 0; i < deltaObjs.length; i++) {
+                deltaObjs[i].x += xCorrection;
             }
         }, 2)
         .step(self => {
