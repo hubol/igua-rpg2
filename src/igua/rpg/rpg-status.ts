@@ -26,6 +26,7 @@ export namespace RpgStatus {
                 max: Integer;
             };
             poison: {
+                rateFactor: PercentAsInteger;
                 immune: boolean;
                 level: number;
                 ticksCount: Integer;
@@ -121,14 +122,17 @@ export namespace RpgStatus {
             if (model.conditions.poison.level > 0) {
                 if (model.health > Consts.FullyPoisonedHealth) {
                     const previous = model.health;
+                    const factor = 1 / (Math.max(1, model.conditions.poison.rateFactor) / 100);
+                    const maxTick = Math.max(1, Math.round(120 * factor));
+                    const secondDamageTick = Math.min(maxTick - 1, Math.round(40 * factor));
 
-                    if (model.conditions.poison.ticksCount % 120 === 0) {
+                    if (model.conditions.poison.ticksCount % maxTick === 0) {
                         model.health = Math.max(
                             Consts.FullyPoisonedHealth,
                             model.health - Math.ceil(model.conditions.poison.level / 2),
                         );
                     }
-                    else if (model.conditions.poison.ticksCount % 120 === 40) {
+                    if (model.conditions.poison.ticksCount % maxTick === secondDamageTick) {
                         model.health = Math.max(
                             Consts.FullyPoisonedHealth,
                             model.health - Math.floor(model.conditions.poison.level / 2),
