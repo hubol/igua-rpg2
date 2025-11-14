@@ -39,6 +39,7 @@ export namespace DataNpcPersona {
             IndianaNurse: { job: "Nurse", name: "Chandelique", looks: NpcLooks.Unamused },
             SecretKnower0: { job: "Knower", name: "???", looks: NpcLooks.KoopaVariety },
             GreatTowerShopkeeper: { job: "Shopkeeper", name: "???", looks: NpcLooks.PotteryEnthusiast },
+            Hubol: { job: "???", name: "Hubol", looks: NpcLooks.Hubol },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
         } satisfies Record<string, Model>,
     );

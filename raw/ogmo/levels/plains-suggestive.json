@@ -452,7 +452,7 @@
           "originX": 23,
           "originY": 24,
           "uid": 176245475470100,
-          "values": {"requiredFlopsCount": 1, "name": "", "depth": 0}
+          "values": {"requiredFlopsCount": 5, "name": "", "depth": 0}
         },
         {
           "name": "Sign",
