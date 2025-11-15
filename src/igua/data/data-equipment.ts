@@ -137,6 +137,20 @@ export namespace DataEquipment {
                     model.experience.bonusFactorWhileWet.jump += (1 + bonus) * 50;
                 },
             },
+            PoisonResistance: {
+                name: "Antidote Shoe",
+                texture: null,
+                description: "Good for poison",
+                buffs: (() => {
+                    const values = [25, 40, 50, 60, 70, 75, 77, 79, 80];
+                    for (let i = 81; i <= 99; i++) {
+                        values.push(i);
+                    }
+                    return (model, bonus) => {
+                        model.conditions.poisonRateReductionFactor += values[bonus] ?? values.last;
+                    };
+                })(),
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,
