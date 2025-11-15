@@ -221,7 +221,7 @@ const getBuffInformations = (function () {
         buff("loot.valuables.bonus", "Valuable Bonus", "integer", "beneft_when_positive"),
         buff("conditions.poisonRateReductionFactor", "Poison Drains HP Slower", "percent", "beneft_when_positive"),
         buff("conditions.ballonDrainReductionFactor", "Ballons Drain Slower", "percent", "beneft_when_positive"),
-        buff("conditions.wetnessCapacityIncreaseFactor", "Wetness Maximum", "percent", "beneft_when_positive"),
+        buff("conditions.wetnessMaxIncreaseFactor", "Wetness Maximum", "percent", "beneft_when_positive"),
         buff("experience.bonusFactorWhileWet.combat", "Combat XP Bonus (While Wet)", "percent", "beneft_when_positive"),
         buff("experience.bonusFactorWhileWet.jump", "Jump XP Bonus (While Wet)", "percent", "beneft_when_positive"),
         buff("motion.jump.bonusAtSpecialSigns", "Special Jump", "integer", "beneft_when_positive"),
