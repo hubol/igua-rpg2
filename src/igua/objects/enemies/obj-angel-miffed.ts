@@ -65,6 +65,7 @@ const themes = (function () {
         sprites: {
             leg: Tx.Enemy.Miffed.Leg,
             noggin: Tx.Enemy.Miffed.Noggin0,
+            torso: Tx.Enemy.Miffed.Torso0,
         },
         tints: {
             map: [0xFF77B0, 0x715EFF, 0xfffb0e] as MapRgbFilter.Map,
@@ -96,26 +97,32 @@ const themes = (function () {
                 },
             },
         ),
-        Dinosaur: themeTemplate.createTheme(
+        MoldyLemon: themeTemplate.createTheme(
             {
                 eyes: {
-                    gap: 20,
-                    pupilsTx: Tx.Enemy.Miffed.Pupil1,
-                    scleraTx: Tx.Enemy.Miffed.Sclera1,
+                    gap: 10,
+                    pupilsTx: Tx.Enemy.Miffed.Pupil0,
+                    scleraTx: Tx.Enemy.Miffed.Sclera0,
                 },
                 mouth: {
                     txs: objAngelMouth.txs.rounded14,
+                    teethCount: 3,
                 },
                 sprites: {
-                    noggin: Tx.Enemy.Miffed.Noggin1,
+                    leg: Tx.Enemy.Miffed.Leg1,
+                    noggin: Tx.Enemy.Miffed.Noggin2,
+                    torso: Tx.Enemy.Miffed.Torso1,
                 },
                 tints: {
-                    map: [0x9052c4, 0xc22419, 0x1e803e],
+                    map: [0xffc832, 0x77441a, 0x1e803e],
                 },
             },
             {
+                eyes: (obj) => obj.at(0, -6),
+                mouth: (obj) => obj.at(0, -6),
                 sprites: {
-                    noggin: (obj) => obj.pivoted(10, 4),
+                    noggin: (obj) => obj.pivoted(6, 5),
+                    torso: (obj) => obj.add(-5, -4),
                 },
             },
         ),
@@ -198,7 +205,7 @@ const variants = {
     },
     level2: {
         rank: ranks.level2,
-        theme: themes.Dinosaur,
+        theme: themes.MoldyLemon,
     },
 };
 
@@ -216,7 +223,7 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
     const slammingFistLeftObj = objSlammingFist("left");
     const soulAnchorObj = new Graphics().beginFill(0).drawRect(0, 0, 1, 1).at(21, 18).invisible();
 
-    const bodyObj = objAngelBody();
+    const bodyObj = objAngelBody(theme);
 
     const puppetObj = container(
         bodyObj,
@@ -523,18 +530,18 @@ function objAngelMiffedHead(theme: Theme) {
 
 function objAngelMiffedFace(theme: Theme) {
     const eyesObj = theme.createEyesObj();
-    const mouthObj = theme.createMouthObj().at(0, 6);
+    const mouthObj = theme.createMouthObj().add(0, 6);
 
     return container(eyesObj, mouthObj).merge({ objects: { eyesObj, mouthObj } });
 }
 
-function objAngelBody() {
-    const leftLegObj = Sprite.from(Tx.Enemy.Miffed.Leg).at(-2, -1);
-    const rightLegObj = Sprite.from(Tx.Enemy.Miffed.Leg).at(15, -1);
+function objAngelBody(theme: Theme) {
+    const leftLegObj = theme.createSprite("leg").add(-2, -1);
+    const rightLegObj = theme.createSprite("leg").add(15, -1);
     const legsMaskObj = new Graphics().beginFill(0x000000).drawRect(-16, 8, 58, 12);
     const legsObj = container(leftLegObj, rightLegObj).masked(legsMaskObj);
 
-    return container(legsObj, Sprite.from(Tx.Enemy.Miffed.Torso0).at(-3, 3), legsMaskObj)
+    return container(legsObj, theme.createSprite("torso").add(-3, 3), legsMaskObj)
         .at(10, 24);
 }
 
