@@ -99,9 +99,10 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             .step(() => {
                 puppet.visible = false;
                 puppet.dripsPerFrame = 0;
-            }, StepOrder.BeforeCamera);
+            }, StepOrder.BeforeCamera - 1);
 
         Cutscene.play(function* () {
+            iguanaLocomotiveObj.mxnBallonable.releaseBallons();
             Rpg.character.die();
             yield sleep(4000);
             Rpg.character.revive();

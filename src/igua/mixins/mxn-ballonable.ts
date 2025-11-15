@@ -14,6 +14,7 @@ import { objFxBallon } from "../objects/effects/obj-fx-ballon";
 import { objFxBallonPop } from "../objects/effects/obj-fx-ballon-pop";
 import { StepOrder } from "../objects/step-order";
 import { RpgStatus } from "../rpg/rpg-status";
+import { mxnMotion } from "./mxn-motion";
 import { mxnPhysics } from "./mxn-physics";
 
 interface MxnBallonableArgs {
@@ -116,8 +117,24 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
         ballons = initialBallons;
     }
 
+    let ballonsReleased = false;
+
+    function releaseBallons() {
+        if (ballonsReleased) {
+            return;
+        }
+
+        for (const ballonObj of ballonObjs) {
+            ballonObj.mixin(mxnMotion)
+                .step((self) => self.speed.scale(1.01))
+                .speed.at(Rng.float(-1, 1), Rng.float(-2, -3));
+        }
+
+        ballonsReleased = true;
+    }
+
     return obj
-        .merge({ mxnBallonable: { attachPoint, rpgStatusEffects, setInitialBallons } })
+        .merge({ mxnBallonable: { attachPoint, rpgStatusEffects, setInitialBallons, releaseBallons } })
         .coro(function* (self) {
             // TODO feels like it should actually go to primary scene stage, set an explicit z index
             c.show(self.parent).zIndexed(self.zIndex - 1);
@@ -147,6 +164,11 @@ export function mxnBallonable(obj: DisplayObject, { attachPoint, ballons }: MxnB
             }
         })
         .step((self) => {
+            if (ballonsReleased) {
+                gfx.visible = false;
+                return;
+            }
+
             let physicsX = 0;
             let physicsY = 0;
 
