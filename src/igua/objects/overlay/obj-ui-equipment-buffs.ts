@@ -220,7 +220,7 @@ const getBuffInformations = (function () {
         buff("loot.tiers.nothingRerollCount", "Re-Roll Empty Loot", "integer", "beneft_when_positive"),
         buff("loot.valuables.bonus", "Valuable Bonus", "integer", "beneft_when_positive"),
         buff("conditions.ballonDrainReductionFactor", "Ballons Drain Slower", "percent", "beneft_when_positive"),
-        buff("conditions.poisonMaxIncreaseFactor", "Poison Resistance", "percent", "beneft_when_positive"),
+        buff("conditions.poisonMaxIncreaseFactor", "Poison Builds Slower", "percent", "beneft_when_positive"),
         buff("conditions.poisonRateReductionFactor", "Poison Drains HP Slower", "percent", "beneft_when_positive"),
         buff("conditions.wetnessMaxIncreaseFactor", "Wetness Maximum", "percent", "beneft_when_positive"),
         buff("experience.bonusFactorWhileWet.combat", "Combat XP Bonus (While Wet)", "percent", "beneft_when_positive"),
