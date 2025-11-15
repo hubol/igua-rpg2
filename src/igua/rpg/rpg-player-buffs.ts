@@ -38,7 +38,7 @@ export namespace RpgPlayerBuffs {
             conditions: {
                 ballonDrainReductionFactor: <PercentAsInteger> 0,
                 poisonRateReductionFactor: <PercentAsInteger> 0,
-                wetnessCapacityIncreaseFactor: <PercentAsInteger> 0,
+                wetnessMaxIncreaseFactor: <PercentAsInteger> 0,
             },
             experience: {
                 bonusFactorWhileWet: {
