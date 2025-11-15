@@ -5,7 +5,7 @@ import { Integer, RgbInt, Unit } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { mxnSpeakingMouth } from "../../mixins/mxn-speaking-mouth";
 
-interface ObjAngelMouthArgs {
+export interface ObjAngelMouthArgs {
     negativeSpaceTint: RgbInt;
     txs: Texture[];
     teethCount: Integer;
@@ -105,3 +105,5 @@ objAngelMouth.txs = {
     w14b: Tx.Enemy.Common.Mouths.W14B.split({ width: 14 }),
     w36: Tx.Enemy.Common.Mouths.W36.split({ width: 36 }),
 };
+
+export type ObjAngelMouth = ReturnType<typeof objAngelMouth>;

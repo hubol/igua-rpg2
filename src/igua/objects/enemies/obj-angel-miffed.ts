@@ -37,72 +37,89 @@ import { objGroundSpawner } from "../obj-ground-spawner";
 import { objProjectileFlameColumn } from "../projectiles/obj-projectile-flame-column";
 import { objProjectileIndicatedBox } from "../projectiles/obj-projectile-indicated-box";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
+import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelEyes } from "./obj-angel-eyes";
 import { objAngelMouth } from "./obj-angel-mouth";
 
 const txsFistSlam = Tx.Enemy.Miffed.FistSlam.split({ count: 6 });
 
 const themes = (function () {
-    const commonTheme = {
-        pivots: {
-            noggin: vnew(0, 0),
+    const themeTemplate = AngelThemeTemplate.create({
+        eyes: {
+            defaultEyelidRestingPosition: 0,
+            eyelidsTint: 0xc80000,
+            gap: 11,
+            pupilRestStyle: { kind: "cross_eyed", offsetFromCenter: 0 },
+            pupilsTx: Tx.Enemy.Miffed.Pupil0,
+            pupilsTint: 0x000000,
+            pupilsMirrored: true,
+            scleraTx: Tx.Enemy.Miffed.Sclera0,
+            sclerasMirrored: true,
         },
-        textures: {
-            mouth: objAngelMouth.txs.w14,
+        mouth: {
+            negativeSpaceTint: 0x000000,
+            teethCount: 2,
+            toothGapWidth: 1,
+            txs: objAngelMouth.txs.w14,
+        },
+        sprites: {
+            leg: Tx.Enemy.Miffed.Leg,
             noggin: Tx.Enemy.Miffed.Noggin0,
-            pupil: Tx.Enemy.Miffed.Pupil0,
-            sclera: Tx.Enemy.Miffed.Sclera0,
         },
         tints: {
             map: [0xFF77B0, 0x715EFF, 0xfffb0e] as MapRgbFilter.Map,
         },
-        values: {
-            eyesGap: 11,
-        },
-    };
-
-    type CommonTheme = typeof commonTheme;
+    });
 
     return {
-        Common: commonTheme,
-        Freakish: {
-            ...commonTheme,
-            pivots: {
-                noggin: vnew(10, 4),
+        Common: themeTemplate.createTheme(),
+        Freakish: themeTemplate.createTheme(
+            {
+                eyes: {
+                    gap: 20,
+                    pupilsTx: Tx.Enemy.Miffed.Pupil1,
+                    scleraTx: Tx.Enemy.Miffed.Sclera1,
+                },
+                mouth: {
+                    txs: objAngelMouth.txs.rounded14,
+                },
+                sprites: {
+                    noggin: Tx.Enemy.Miffed.Noggin1,
+                },
+                tints: {
+                    map: [0x9052c4, 0xc22419, 0x1e803e],
+                },
             },
-            textures: {
-                mouth: objAngelMouth.txs.rounded14,
-                noggin: Tx.Enemy.Miffed.Noggin1,
-                pupil: Tx.Enemy.Miffed.Pupil1,
-                sclera: Tx.Enemy.Miffed.Sclera1,
+            {
+                sprites: {
+                    noggin: (obj) => obj.pivoted(10, 4),
+                },
             },
-            tints: {
-                map: [0x9052c4, 0xc22419, 0x1e803e] as MapRgbFilter.Map,
+        ),
+        Dinosaur: themeTemplate.createTheme(
+            {
+                eyes: {
+                    gap: 20,
+                    pupilsTx: Tx.Enemy.Miffed.Pupil1,
+                    scleraTx: Tx.Enemy.Miffed.Sclera1,
+                },
+                mouth: {
+                    txs: objAngelMouth.txs.rounded14,
+                },
+                sprites: {
+                    noggin: Tx.Enemy.Miffed.Noggin1,
+                },
+                tints: {
+                    map: [0x9052c4, 0xc22419, 0x1e803e],
+                },
             },
-            values: {
-                eyesGap: 20,
+            {
+                sprites: {
+                    noggin: (obj) => obj.pivoted(10, 4),
+                },
             },
-        },
-        // TODO implement
-        Dinosaur: {
-            ...commonTheme,
-            pivots: {
-                noggin: vnew(10, 4),
-            },
-            textures: {
-                mouth: objAngelMouth.txs.rounded14,
-                noggin: Tx.Enemy.Miffed.Noggin1,
-                pupil: Tx.Enemy.Miffed.Pupil1,
-                sclera: Tx.Enemy.Miffed.Sclera1,
-            },
-            tints: {
-                map: [0x9052c4, 0xc22419, 0x1e803e] as MapRgbFilter.Map,
-            },
-            values: {
-                eyesGap: 20,
-            },
-        },
-    } satisfies Record<string, CommonTheme>;
+        ),
+    };
 })();
 
 type Theme = typeof themes[keyof typeof themes];
@@ -492,7 +509,7 @@ function objAngelMiffedHead(theme: Theme) {
     });
 
     return container(
-        Sprite.from(theme.textures.noggin).pivoted(theme.pivots.noggin),
+        theme.createSprite("noggin"),
         faceObj,
     )
         .merge({ objects: { faceObj } })
@@ -505,25 +522,8 @@ function objAngelMiffedHead(theme: Theme) {
 }
 
 function objAngelMiffedFace(theme: Theme) {
-    const eyesObj = objAngelEyes({
-        defaultEyelidRestingPosition: 0,
-        eyelidsTint: 0xc80000,
-        gap: theme.values.eyesGap,
-        pupilRestStyle: { kind: "cross_eyed", offsetFromCenter: 0 },
-        pupilsTx: theme.textures.pupil,
-        pupilsTint: 0x000000,
-        pupilsMirrored: true,
-        scleraTx: theme.textures.sclera,
-        sclerasMirrored: true,
-    });
-
-    const mouthObj = objAngelMouth({
-        negativeSpaceTint: 0x000000,
-        teethCount: 2,
-        toothGapWidth: 1,
-        txs: theme.textures.mouth,
-    })
-        .at(0, 6);
+    const eyesObj = theme.createEyesObj();
+    const mouthObj = theme.createMouthObj().at(0, 6);
 
     return container(eyesObj, mouthObj).merge({ objects: { eyesObj, mouthObj } });
 }
