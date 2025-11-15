@@ -138,16 +138,21 @@ export namespace DataEquipment {
                 },
             },
             PoisonResistance: {
-                name: "Antidote Shoe",
+                name: "Vaccine Shoe",
                 texture: null,
-                description: "Good for poison",
+                description: "Increases resistance to poison, poison damage is applied more slowly",
                 buffs: (() => {
-                    const values = [25, 40, 50, 60, 70, 75, 77, 79, 80];
+                    const maxValues = [50, 75, 95, 110, 120, 129, 137, 144, 150];
+
+                    const rateValues = [25, 40, 50, 60, 70, 75, 77, 79, 80];
                     for (let i = 81; i <= 99; i++) {
-                        values.push(i);
+                        rateValues.push(i);
                     }
+
                     return (model, bonus) => {
-                        model.conditions.poisonRateReductionFactor += values[bonus] ?? values.last;
+                        // TODO infinity bonuses
+                        model.conditions.poisonMaxIncreaseFactor += maxValues[bonus] ?? maxValues.last;
+                        model.conditions.poisonRateReductionFactor += rateValues[bonus] ?? rateValues.last;
                     };
                 })(),
             },

@@ -458,6 +458,8 @@ function objBuildUp({ message, conditionsKey }: ObjBuildUpArgs) {
     return container(bar, text)
         .step(self => {
             const nextValue = Rpg.character.status.conditions[conditionsKey].value;
+            bar.maxValue = Rpg.character.status.conditions[conditionsKey].max;
+
             if (nextValue > value) {
                 bar.increase(nextValue, nextValue - value, 0);
             }

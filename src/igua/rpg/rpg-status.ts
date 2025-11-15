@@ -153,13 +153,22 @@ export namespace RpgStatus {
             }
 
             if (count % 20 === 0) {
-                model.conditions.helium.value = Math.max(0, model.conditions.helium.value - 1);
+                model.conditions.helium.value = Math.max(
+                    0,
+                    Math.min(model.conditions.helium.max, model.conditions.helium.value) - 1,
+                );
             }
             if (count % 15 === 0) {
-                model.conditions.poison.value = Math.max(0, model.conditions.poison.value - 1);
+                model.conditions.poison.value = Math.max(
+                    0,
+                    Math.min(model.conditions.poison.max, model.conditions.poison.value) - 1,
+                );
             }
             if (count % 4 === 0) {
-                model.conditions.wetness.value = Math.max(0, model.conditions.wetness.value - model.recoveries.wetness);
+                model.conditions.wetness.value = Math.max(
+                    0,
+                    Math.min(model.conditions.wetness.max, model.conditions.wetness.value) - model.recoveries.wetness,
+                );
             }
             if (model.state.ballonHealthMayDrain) {
                 const healthDelta = -Math.max(1, model.conditions.helium.ballonDrainFactor);

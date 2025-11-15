@@ -64,7 +64,9 @@ export class RpgPlayerStatus implements RpgStatus.Model {
             },
             poison: {
                 immune: false,
-                max: 100,
+                get max() {
+                    return Math.round(100 * (1 + buffs.getAggregatedBuffs().conditions.poisonMaxIncreaseFactor / 100));
+                },
                 get rateFactor() {
                     return 100 - buffs.getAggregatedBuffs().conditions.poisonRateReductionFactor;
                 },
