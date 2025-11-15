@@ -136,6 +136,7 @@ export class RpgPlayer {
     revive() {
         this.status.health = this.status.healthMax;
         this.status.conditions.poison.level = Math.min(1, this.status.conditions.poison.level);
+        this.status.conditions.poison.value = 0;
         this._looseValuables.nextLifetime();
     }
 
