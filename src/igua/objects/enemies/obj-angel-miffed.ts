@@ -15,6 +15,7 @@ import { vnew } from "../../../lib/math/vector-type";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
+import { ValuesOf } from "../../../lib/types/values-of";
 import { scene } from "../../globals";
 import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
 import { MxnDetectPlayer, mxnDetectPlayer } from "../../mixins/mxn-detect-player";
@@ -44,7 +45,7 @@ import { objAngelMouth } from "./obj-angel-mouth";
 const txsFistSlam = Tx.Enemy.Miffed.FistSlam.split({ count: 6 });
 
 const themes = (function () {
-    const themeTemplate = AngelThemeTemplate.create({
+    const template = AngelThemeTemplate.create({
         eyes: {
             defaultEyelidRestingPosition: 0,
             eyelidsTint: 0xc80000,
@@ -73,8 +74,8 @@ const themes = (function () {
     });
 
     return {
-        common: themeTemplate.createTheme(),
-        freakish: themeTemplate.createTheme(
+        common: template.createTheme(),
+        freakish: template.createTheme(
             {
                 eyes: {
                     gap: 20,
@@ -97,7 +98,7 @@ const themes = (function () {
                 },
             },
         ),
-        moldyLemon: themeTemplate.createTheme(
+        moldyLemon: template.createTheme(
             {
                 eyes: {
                     gap: 10,
@@ -129,7 +130,7 @@ const themes = (function () {
     };
 })();
 
-type Theme = typeof themes[keyof typeof themes];
+type Theme = ValuesOf<typeof themes>;
 
 const ranks = {
     level0: RpgEnemyRank.create({

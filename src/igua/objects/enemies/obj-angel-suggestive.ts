@@ -1,4 +1,5 @@
 import { Graphics, Sprite } from "pixi.js";
+import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
@@ -7,9 +8,9 @@ import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear, nlerp } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
-import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
+import { ValuesOf } from "../../../lib/types/values-of";
 import { ZIndex } from "../../core/scene/z-index";
 import { scene } from "../../globals";
 import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
@@ -24,7 +25,7 @@ import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { RpgStatus } from "../../rpg/rpg-status";
 import { objProjectileElectricalPulseGround } from "../projectiles/obj-projectile-electrical-pulse-ground";
 import { objSpikedCanonball } from "../projectiles/obj-spiked-canonball";
-import { objAngelEyes, ObjAngelEyesArgs } from "./obj-angel-eyes";
+import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
 import { objAngelPlantLegs } from "./obj-angel-plant-legs";
 
@@ -40,69 +41,81 @@ const [
 ] = Tx
     .Enemy.Suggestive.Body.split({ count: 7 });
 
-const commonTheme = {
-    eyes: {
-        defaultEyelidRestingPosition: 3,
-        eyelidsTint: 0xff0000,
-        gap: 6,
-        pupilRestStyle: {
-            kind: "cross_eyed",
-            offsetFromCenter: 1,
-        },
-        pupilsTx: Tx.Enemy.Suggestive.Pupil,
-        pupilsTint: [0x000080, 0x0000a0],
-        scleraTx: Tx.Enemy.Suggestive.Sclera,
-        sclerasMirrored: true,
-    } satisfies ObjAngelEyesArgs,
-    textures: {
-        face: Tx.Enemy.Suggestive.Face,
-    },
-    positions: {
-        eyes: vnew(0, 0),
-        face: vnew(0, 0),
-        mouth: vnew(0, 9),
-    },
-    tints: {
-        gear0: 0x0000ff,
-        gear1: 0x00ff00,
-        face: 0xa0ff00,
-        mouth: 0x000080,
-    },
-    map: [0xCE3010, 0x5D9938, 0x241DE2, 0xffffff] as MapRgbFilter.Map,
-    spirit: [0xCE3010, 0xDEB742, 0xDEB742] as MapRgbFilter.Map,
-};
-
-type Theme = typeof commonTheme;
-
-const themes = {
-    Common: commonTheme,
-    Freakish: {
-        ...commonTheme,
-        eyes: {
-            ...commonTheme.eyes,
-            defaultEyelidRestingPosition: 2,
-            pupilRestStyle: {
-                kind: "cross_eyed",
-                offsetFromCenter: 5,
+const themes = (function () {
+    const template = AngelThemeTemplate.create(
+        {
+            eyes: {
+                defaultEyelidRestingPosition: 3,
+                eyelidsTint: 0xff0000,
+                gap: 13,
+                pupilRestStyle: {
+                    kind: "cross_eyed",
+                    offsetFromCenter: 1,
+                },
+                pupilsTx: Tx.Enemy.Suggestive.Pupil,
+                pupilsTint: [0x000080, 0x0000a0],
+                scleraTx: Tx.Enemy.Suggestive.Sclera,
+                sclerasMirrored: true,
             },
-            scleraTx: Tx.Enemy.Suggestive.ScleraWide,
+            mouth: {
+                negativeSpaceTint: 0x000080,
+                teethCount: 0,
+                toothGapWidth: 1,
+                txs: objAngelMouth.txs.rounded11,
+            },
+            sprites: {
+                face: Tx.Enemy.Suggestive.Face,
+            },
+            tints: {
+                gear0: 0x0000ff,
+                gear1: 0x00ff00,
+                map: [0xCE3010, 0x5D9938, 0x241DE2, 0xffffff] as MapRgbFilter.Map,
+                spirit: [0xCE3010, 0xDEB742, 0xDEB742] as MapRgbFilter.Map,
+            },
         },
-        positions: {
-            eyes: vnew(0, -3 + 8),
-            face: vnew(0, -3 + 8),
-            mouth: vnew(0, 1 + 8),
+        {
+            sprites: {
+                face: (obj) => obj.tinted(0xa0ff00),
+            },
         },
-        textures: {
-            face: Tx.Enemy.Suggestive.FaceWide,
-        },
-        tints: {
-            ...commonTheme.tints,
-            face: 0xa000ff,
-        },
-        map: [0x208525, 0xffc21c, 0x5D9938, 0xffffff] as MapRgbFilter.Map,
-        spirit: [0x208525, 0x71EC4F, 0xffc21c] as MapRgbFilter.Map,
-    },
-} satisfies Record<string, Theme>;
+    );
+
+    return {
+        common: template.createTheme(
+            {},
+            {
+                mouth: (obj) => obj.add(0, -1),
+            },
+        ),
+        freakish: template.createTheme(
+            {
+                eyes: {
+                    defaultEyelidRestingPosition: 2,
+                    pupilRestStyle: {
+                        kind: "cross_eyed",
+                        offsetFromCenter: 5,
+                    },
+                    scleraTx: Tx.Enemy.Suggestive.ScleraWide,
+                },
+                sprites: {
+                    face: Tx.Enemy.Suggestive.FaceWide,
+                },
+                tints: {
+                    map: [0x208525, 0xffc21c, 0x5D9938, 0xffffff],
+                    spirit: [0x208525, 0x71EC4F, 0xffc21c],
+                },
+            },
+            {
+                eyes: (obj) => obj.add(0, 5),
+                sprites: {
+                    face: (obj) => obj.tinted(0xa000ff).add(0, 5),
+                },
+            },
+        ),
+    };
+})();
+
+type Theme = ValuesOf<typeof themes>;
 
 const ranks = {
     level0: RpgEnemyRank.create({
@@ -145,18 +158,20 @@ const ranks = {
     }),
 };
 
+type Feature = "electrical_pulse";
+
 const variants = {
     level0: {
-        theme: themes.Common,
+        features: new Set<Feature>([]),
+        theme: themes.common,
         rank: ranks.level0,
     },
     level1: {
-        theme: themes.Freakish,
+        features: new Set<Feature>(["electrical_pulse"]),
+        theme: themes.freakish,
         rank: ranks.level1,
     },
 };
-
-type VariantKey = keyof typeof variants;
 
 function objAngelSuggestiveGear(tint: Integer) {
     const ax = 8.5 / 16;
@@ -190,16 +205,10 @@ function objAngelSuggestiveGears(theme: Theme) {
 }
 
 function objAngelSuggestiveFace(theme: Theme) {
-    const eyesObj = objAngelEyes(theme.eyes)
-        .at(theme.positions.eyes);
+    const eyesObj = theme.createEyesObj();
 
-    const mouthObj = objAngelMouth({
-        negativeSpaceTint: theme.tints.mouth,
-        teethCount: 0,
-        toothGapWidth: 1,
-        txs: objAngelMouth.txs.rounded11,
-    })
-        .at(theme.positions.mouth)
+    const mouthObj = theme.createMouthObj()
+        .add(0, 9)
         .merge({
             agape: false,
         })
@@ -207,7 +216,7 @@ function objAngelSuggestiveFace(theme: Theme) {
             self.controls.agapeUnit = approachLinear(self.controls.agapeUnit, self.agape ? 1 : 0, 0.2);
         });
 
-    const spr = Sprite.from(theme.textures.face).at(theme.positions.face).tinted(theme.tints.face).anchored(0.5, 0.5)
+    const spr = theme.createSprite("face").anchored(0.5, 0.5)
         .mixin(
             mxnBoilMirrorRotate,
         );
@@ -307,12 +316,8 @@ function objAngelSuggestiveBody() {
     return container(bulgeLeftSpr, bulgeRightSpr, bulgeSpr, bodySpr).merge({ bulge });
 }
 
-export function objAngelSuggestive(variantKey: VariantKey) {
-    const variant = variants[variantKey];
-    const theme = variant.theme;
-
-    // TODO should be more sophisticated
-    const usesEmoAttack = variantKey === "level1";
+export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
+    const { features, rank, theme } = variants[entity.values.variant];
 
     const faceObj = objAngelSuggestiveFace(theme);
 
@@ -350,12 +355,12 @@ export function objAngelSuggestive(variantKey: VariantKey) {
         healthbarAnchorObj,
     )
         .mixin(mxnEnemy, {
-            rank: variant.rank,
+            rank,
             hurtboxes: [hurtbox0, hurtbox1],
             healthbarAnchorObj,
         })
-        .mixin(mxnEnemyDeathBurst, { map: theme.spirit })
-        .filtered(new MapRgbFilter(...theme.map))
+        .mixin(mxnEnemyDeathBurst, { map: theme.tints.spirit })
+        .filtered(new MapRgbFilter(...theme.tints.map))
         .mixin(mxnDetectPlayer)
         .coro(function* (self) {
             while (true) {
@@ -369,14 +374,12 @@ export function objAngelSuggestive(variantKey: VariantKey) {
                 yield sleep(500);
                 enemyObj.play(Sfx.Enemy.Suggestive.Flick.rate(0.9, 1.1));
                 const canonballObj = objAngelSuggestiveSpikedCanonball(enemyObj.status).at(enemyObj).show();
-                // TODO I think there should be some kind of "player sight" mixin
-                // That could provide this info to enemies!
                 canonballObj.speed.x = self.mxnDetectPlayer.position.x > enemyObj.x ? 2 : -2;
                 canonballObj.speed.y = -8;
                 bodyObj.bulge.phase = "recovering";
                 bodyObj.bulge.unit = 0;
                 yield interp(bodyObj.bulge, "unit").to(1).over(1000);
-                if (!usesEmoAttack) {
+                if (!features.has("electrical_pulse")) {
                     continue;
                 }
 
