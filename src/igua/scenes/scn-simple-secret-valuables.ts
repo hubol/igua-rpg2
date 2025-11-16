@@ -3,6 +3,7 @@ import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
 import { show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { mxnWeightedPedestalMask } from "../mixins/mxn-weighted-pedestal-mask";
 
 export function scnSimpleSecretValuables() {
@@ -10,6 +11,8 @@ export function scnSimpleSecretValuables() {
     const lvl = Lvl.SimpleSecretValuables();
     enrichPedestal(lvl);
     enrichNpc(lvl);
+    [lvl.CloudsGroup0, lvl.CloudsGroup1, lvl.CloudsGroup2].forEach(obj => obj.mixin(mxnSinePivot));
+    lvl.BehindHubolGroup.children.forEach(obj => obj.mixin(mxnSinePivot));
 }
 
 function enrichPedestal(lvl: LvlType.SimpleSecretValuables) {
