@@ -91,6 +91,7 @@ const themes = (function () {
             {
                 eyes: {
                     defaultEyelidRestingPosition: 2,
+                    gap: 8,
                     pupilRestStyle: {
                         kind: "cross_eyed",
                         offsetFromCenter: 5,
