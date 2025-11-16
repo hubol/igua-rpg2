@@ -73,8 +73,8 @@ const themes = (function () {
     });
 
     return {
-        Common: themeTemplate.createTheme(),
-        Freakish: themeTemplate.createTheme(
+        common: themeTemplate.createTheme(),
+        freakish: themeTemplate.createTheme(
             {
                 eyes: {
                     gap: 20,
@@ -97,7 +97,7 @@ const themes = (function () {
                 },
             },
         ),
-        MoldyLemon: themeTemplate.createTheme(
+        moldyLemon: themeTemplate.createTheme(
             {
                 eyes: {
                     gap: 10,
@@ -194,23 +194,28 @@ const ranks = {
     }),
 } satisfies Record<string, RpgEnemyRank.Model>;
 
+type Feature = "poison_magic" | "flame_spray";
+
 const variants = {
     level0: {
+        features: new Set<Feature>(["poison_magic"]),
         rank: ranks.level0,
-        theme: themes.Common,
+        theme: themes.common,
     },
     level1: {
+        features: new Set<Feature>(["poison_magic", "flame_spray"]),
         rank: ranks.level1,
-        theme: themes.Freakish,
+        theme: themes.freakish,
     },
     level2: {
+        features: new Set<Feature>(["poison_magic"]),
         rank: ranks.level2,
-        theme: themes.MoldyLemon,
+        theme: themes.moldyLemon,
     },
 };
 
 export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
-    const { rank, theme } = variants[entity.values.variant];
+    const { features, rank, theme } = variants[entity.values.variant];
 
     const hurtboxObjs = [
         new Graphics().beginFill(0).drawRect(4, 10, 40, 16).invisible(),
@@ -383,7 +388,7 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
             obj.scale.y = 1;
             obj.pivot.y = 0;
         },
-        *sweepAndBackstep() {
+        *sprayFlamesAndBackstep() {
             obj.play(Sfx.Enemy.Miffed.SweepBegin);
             yield interpvr(wrappedHeadObj).factor(factor.sine).to(0, 15).over(200);
             for (let i = 0; i < 4; i++) {
@@ -394,7 +399,7 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
             const playerSignX = Math.sign(obj.mxnDetectPlayer.position.x - obj.x) || Rng.intp();
             obj.gravity = 0.0825;
             obj.speed.at(-playerSignX * 2, -4);
-            const attackObj = objAngelMiffedSweepAttack(obj, playerSignX).at(0, -32).show(obj);
+            const attackObj = objAngelMiffedFlameSprayAttack(obj, playerSignX).at(0, -32).show(obj);
             obj.isOnGround = false;
             yield* Coro.all([
                 () => obj.isOnGround,
@@ -424,15 +429,14 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
                     yield* moves.expressSurprise();
                 }
 
-                if (iterationsCount > 0 && Rng.float() > 0.25) {
+                if (iterationsCount > 0 && Rng.float() > 0.25 && features.has("poison_magic")) {
                     yield* moves.castPoisonMagic();
                 }
 
                 minDetectionScore = -120;
 
-                // TODO feels like this should be declared on the rank or something
-                if (rank === ranks.level1) {
-                    yield* moves.sweepAndBackstep();
+                if (features.has("flame_spray")) {
+                    yield* moves.sprayFlamesAndBackstep();
                 }
 
                 let fistObjs = [slammingFistLeftObj, slammingFistRightObj];
@@ -637,7 +641,7 @@ function objAngelMiffedFlameColumnTrail(attacker: MxnRpgStatus, signX: PolarInt)
     });
 }
 
-function objAngelMiffedSweepAttack(attacker: MxnRpgStatus, signX: PolarInt) {
+function objAngelMiffedFlameSprayAttack(attacker: MxnRpgStatus, signX: PolarInt) {
     const tintStart = 0xe05620;
     const tintEnd = 0xf0f000;
 
@@ -649,7 +653,7 @@ function objAngelMiffedSweepAttack(attacker: MxnRpgStatus, signX: PolarInt) {
             for (let i = 0; i < 0.5; i += 0.05) {
                 self.parent.play(Sfx.Enemy.Miffed.SweepOrb.rate(i + 0.5));
                 const tintBlend = i * 2;
-                const orbObj = objAngelMiffedSweepAttackOrb(
+                const orbObj = objAngelMiffedFlameSprayAttackOrb(
                     attacker,
                     blendColor(tintStart, tintEnd, tintBlend),
                     blendColor(fizzleTintStart, fizzleTintEnd, tintBlend),
@@ -667,7 +671,7 @@ function objAngelMiffedSweepAttack(attacker: MxnRpgStatus, signX: PolarInt) {
 
 const orbTxs = Tx.Enemy.Miffed.SweepOrb.split({ width: 16 });
 
-function objAngelMiffedSweepAttackOrb(attacker: MxnRpgStatus, tint: RgbInt, fizzleTint: RgbInt) {
+function objAngelMiffedFlameSprayAttackOrb(attacker: MxnRpgStatus, tint: RgbInt, fizzleTint: RgbInt) {
     const sprite = objIndexedSprite(orbTxs).anchored(0.5, 0.5).at(0, 8).tinted(tint);
     return container(sprite)
         .pivoted(0, 8)
