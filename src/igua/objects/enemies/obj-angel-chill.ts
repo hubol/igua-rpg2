@@ -1,4 +1,4 @@
-import { DisplayObject, Graphics, Sprite, TilingSprite } from "pixi.js";
+import { DisplayObject, Graphics, TilingSprite } from "pixi.js";
 import { NoAtlasTx } from "../../../assets/no-atlas-textures";
 import { Tx } from "../../../assets/textures";
 import { OneOrTwo } from "../../../lib/array/one-or-two";
@@ -8,6 +8,7 @@ import { RgbInt } from "../../../lib/math/number-alias-types";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
+import { ValuesOf } from "../../../lib/types/values-of";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
@@ -16,27 +17,47 @@ import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
-import { objAngelEyes } from "./obj-angel-eyes";
+import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
 
 const themes = (function () {
-    const Common = {
-        textures: {
-            body: Tx.Enemy.Chill.Body.split({ count: 3 }),
-            head: Tx.Enemy.Chill.Head0,
-            mouth: objAngelMouth.txs.w36,
-            pupil: Tx.Enemy.Chill.Pupil0,
-            sclera: Tx.Enemy.Chill.Sclera0,
+    const [torsoTx, legsTx, armsTx] = Tx.Enemy.Chill.Body.split({ count: 3 });
+
+    const template = AngelThemeTemplate.create(
+        {
+            eyes: {
+                defaultEyelidRestingPosition: 6,
+                eyelidsTint: 0xE02020,
+                gap: 20,
+                pupilRestStyle: {
+                    kind: "cross_eyed",
+                    offsetFromCenter: 5,
+                },
+                pupilsTx: Tx.Enemy.Chill.Pupil0,
+                pupilsTint: 0x000000,
+                scleraTx: Tx.Enemy.Chill.Sclera0,
+            },
+            mouth: {
+                negativeSpaceTint: 0x000000,
+                teethCount: 3,
+                toothGapWidth: 2,
+                txs: objAngelMouth.txs.w36,
+            },
+            sprites: {
+                torso: torsoTx,
+                legs: legsTx,
+                arms: armsTx,
+                head: Tx.Enemy.Chill.Head0,
+            },
+            tints: {
+                map: [0x990000, 0xff6600, 0xffd000] as MapRgbFilter.Map,
+                pupils: [0x000000, 0x000000] as OneOrTwo<RgbInt>,
+            },
         },
-        tints: {
-            eyelids: 0xE02020,
-            map: [0x990000, 0xff6600, 0xffd000] as MapRgbFilter.Map,
-            pupils: [0x000000, 0x000000] as OneOrTwo<RgbInt>,
-        },
-    };
+    );
 
     return {
-        Common,
+        common: template.createTheme(),
     };
 })();
 
@@ -65,11 +86,11 @@ const ranks = {
     }),
 };
 
-type Theme = typeof themes[keyof typeof themes];
+type Theme = ValuesOf<typeof themes>;
 
 export function objAngelChill() {
     const rank = ranks.level0;
-    const theme = themes.Common;
+    const theme = themes.common;
 
     const bodyObj = objAngelChillBody(theme);
 
@@ -156,9 +177,9 @@ export function objAngelChill() {
 
 function objAngelChillBody(theme: Theme) {
     return container(
-        Sprite.from(theme.textures.body[0]),
-        Sprite.from(theme.textures.body[1]),
-        Sprite.from(theme.textures.body[2]).mixin(mxnFacingPivot, { down: 1, up: -3, right: 3, left: -3 }),
+        theme.createSprite("torso"),
+        theme.createSprite("legs"),
+        theme.createSprite("arms").mixin(mxnFacingPivot, { down: 1, up: -3, right: 3, left: -3 }),
     )
         .pivotedUnit(0.5, 0);
 }
@@ -166,28 +187,10 @@ function objAngelChillBody(theme: Theme) {
 function objAngelChillHead(theme: Theme) {
     return container(
         container(
-            Sprite.from(theme.textures.head).anchored(0.5, 0.8),
+            theme.createSprite("head").anchored(0.5, 0.8),
             container(
-                objAngelMouth({
-                    negativeSpaceTint: 0x000000,
-                    teethCount: 3,
-                    toothGapWidth: 2,
-                    txs: theme.textures.mouth,
-                })
-                    .at(0, -8),
-                objAngelEyes({
-                    defaultEyelidRestingPosition: 6,
-                    eyelidsTint: theme.tints.eyelids,
-                    gap: 20,
-                    pupilRestStyle: {
-                        kind: "cross_eyed",
-                        offsetFromCenter: 5,
-                    },
-                    pupilsTx: theme.textures.pupil,
-                    pupilsTint: 0x000000,
-                    scleraTx: theme.textures.sclera,
-                })
-                    .at(0, -24),
+                theme.createMouthObj().add(0, -8),
+                theme.createEyesObj().add(0, -24),
             )
                 .mixin(mxnFacingPivot, { down: 6, up: -6, right: 6, left: -6 }),
         ),
