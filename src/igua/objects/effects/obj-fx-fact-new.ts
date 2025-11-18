@@ -14,6 +14,7 @@ export function objFxFactNew() {
     return container(Sprite.from(Tx.Effects.NewFact).mixin(mxnSinePivot))
         .pivoted(28, 32)
         .invisible()
+        .autoSorted()
         .coro(function* (self) {
             objFxFactNew.objFxBurst().at(self).show();
             yield sleep(200);
@@ -24,7 +25,7 @@ export function objFxFactNew() {
             yield sleep(350);
 
             self.play(Sfx.Collect.FactNewCapacity.rate(0.9, 1.1));
-            const capacityObj = objCapacity().at(28, 60).show(self);
+            const capacityObj = objCapacity().at(28, 60).zIndexed(-1).show(self);
             yield interpvr(capacityObj).translate(0, -10).over(200);
 
             yield sleep(1200);
