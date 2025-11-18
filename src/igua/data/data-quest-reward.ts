@@ -109,6 +109,10 @@ export namespace DataQuestReward {
                     reward: { kind: "potion", id: "RestoreHealth", count: 2 },
                 },
             },
+            SimpleSecretHappy: {
+                kind: "single",
+                reward: { kind: "equipment", id: "WetnessCapacityUp", level: 1 },
+            },
             __Fallback__: {
                 kind: "nothing",
             },
