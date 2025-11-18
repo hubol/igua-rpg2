@@ -29,7 +29,7 @@ export namespace RpgPlayerBuffs {
                     },
                     clawAttack: {
                         perfect: {
-                            attackExperience: 0,
+                            combatExperience: 0,
                         },
                         physical: 0,
                     },

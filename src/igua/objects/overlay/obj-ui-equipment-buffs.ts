@@ -229,7 +229,7 @@ const getBuffInformations = (function () {
         buff("combat.defense.physical", "Phys DEF", "percent", "beneft_when_positive"),
         buff("combat.defense.faction.miner", "Defense Against Miners", "percent", "beneft_when_positive"),
         buff(
-            "combat.melee.clawAttack.perfect.attackExperience",
+            "combat.melee.clawAttack.perfect.combatExperience",
             "Perfect Claw Bonus XP",
             "integer",
             "beneft_when_positive",

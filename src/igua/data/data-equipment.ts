@@ -105,13 +105,13 @@ export namespace DataEquipment {
             DefensePhysicalAndPerfectBonus: {
                 name: "Def. Charm",
                 texture: null,
-                description: "Increases physical defense, increases attack XP on perfect claw attack",
+                description: "Increases physical defense, increases combat XP on perfect claw attack",
                 buffs: (() => {
                     const values = [10, 15, 20, 25, 30, 32, 34, 36, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50];
 
                     return (model, bonus) => {
                         model.combat.defense.physical += values[bonus] ?? values.last;
-                        model.combat.melee.clawAttack.perfect.attackExperience += bonus + 1;
+                        model.combat.melee.clawAttack.perfect.combatExperience += 15 + bonus * 5;
                     };
                 })(),
             },
