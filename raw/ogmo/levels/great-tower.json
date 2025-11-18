@@ -177,7 +177,7 @@
           "originX": 22,
           "originY": 41,
           "uid": 176068398863102,
-          "values": {"name": "", "depth": 0, "variant": "level0"}
+          "values": {"name": "", "depth": 0, "variant": "level2"}
         },
         {
           "name": "ValuableBlue",
@@ -1118,9 +1118,9 @@
           "name": "Pipe",
           "id": 91,
           "_eid": "95769929",
-          "x": 0,
+          "x": 40,
           "y": 856,
-          "width": 72,
+          "width": 32,
           "values": {"name": "", "visible": true, "depth": 0}
         },
         {
