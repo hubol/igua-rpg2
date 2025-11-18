@@ -125,7 +125,7 @@ export namespace DataEquipment {
                 name: "Healthy Icon",
                 texture: null,
                 description: "Increases health",
-                buffs: (model, bonus) => model.attributes.health += 1 + bonus,
+                buffs: (model, bonus) => model.attributes.health += 5 + bonus * 2,
             },
             WetnessCapacityUp: {
                 name: "Sponge",
