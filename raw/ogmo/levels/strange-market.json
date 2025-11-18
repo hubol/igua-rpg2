@@ -446,7 +446,7 @@
           "name": "WeightedPedestal",
           "id": 17,
           "_eid": "60046263",
-          "x": 384,
+          "x": 412,
           "y": 304,
           "originX": 23,
           "originY": 24,
@@ -3786,6 +3786,78 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": "RestaurantPipeBackGroup"
+        },
+        {
+          "x": 311,
+          "y": 218,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#6b55c3",
+          "texture": "town/signage/meal soul.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 411,
+          "y": 234,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#6b55c3",
+          "texture": "stone/brick rows 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 338,
+          "y": 282,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#6b55c3",
+          "texture": "stone/brick rows 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 345,
+          "y": 282,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e3caf0",
+          "texture": "stone/brick single 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 405,
+          "y": 235,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e3caf0",
+          "texture": "stone/brick single 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 307,
+          "y": 150,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/signage/i will grill your food.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
