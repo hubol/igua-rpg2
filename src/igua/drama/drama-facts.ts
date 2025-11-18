@@ -76,6 +76,7 @@ const factTxs = Tx.Effects.FactFigure.split({ count: 3 });
 
 function objFxFact(targetObj: DisplayObject | null) {
     return objIndexedSprite(factTxs)
+        .anchored(0.5, 0.5)
         .mixin(mxnBoilTextureIndex)
         .mixin(mxnFxFigureTransfer, { targetObj, gravity: 0.0825, speed: [0, -4] })
         .mixin(mxnSinePivot);
