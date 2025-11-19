@@ -760,6 +760,45 @@
       "gridCellsY": 171,
       "decals": [
         {
+          "x": 489,
+          "y": 506,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#62c44a",
+          "texture": "terrain/earth/question mark.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 496,
+          "y": 489,
+          "scaleX": 0.3,
+          "scaleY": 1.1,
+          "rotation": 0,
+          "tint": "#cca5df",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 484,
+          "y": 471,
+          "scaleX": 1.05,
+          "scaleY": 0.8,
+          "rotation": 0,
+          "tint": "#cca5df",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
           "x": 968,
           "y": 442,
           "scaleX": 1,
@@ -1891,19 +1930,6 @@
           "groupName": null
         },
         {
-          "x": 495,
-          "y": 502,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#62c44a",
-          "texture": "terrain/earth/question mark.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
           "x": 589,
           "y": 511,
           "scaleX": 1,
@@ -2732,6 +2758,31 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
+        },
+        {
+          "x": -101,
+          "y": 342,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/signage/i will grill your food.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 494,
+          "y": 487,
+          "scaleX": 0.3,
+          "scaleY": 0.4,
+          "rotation": 0,
+          "tint": "#252525",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -3650,6 +3701,32 @@
           "scaleY": 1,
           "rotation": 90,
           "tint": "#00803b",
+          "texture": "foliage/moss 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 615,
+          "y": 504,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 180,
+          "tint": "#baee25",
+          "texture": "foliage/moss 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 466,
+          "y": 548,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 180,
+          "tint": "#baee25",
           "texture": "foliage/moss 0.png",
           "originX": 0.5,
           "originY": 0.5,
