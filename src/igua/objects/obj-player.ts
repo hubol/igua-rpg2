@@ -78,6 +78,7 @@ const filterSpecialSignObjs = (obj: ObjSign) => obj.isSpecial;
 
 function objPlayer(looks: IguanaLooks.Serializable) {
     const iguanaLocomotiveObj = objIguanaLocomotive(looks);
+    iguanaLocomotiveObj.snapToGround = !scene.isWorldMap;
 
     iguanaLocomotiveObj.mxnBallonable.setInitialBallons(Rpg.character.status.conditions.helium.ballons);
 

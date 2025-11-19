@@ -113,7 +113,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             debug: false,
         })
         .handles("moved", (self, event) => {
-            if (event.hitGround && !event.previousOnGround && event.previousSpeed.y > 1.2) {
+            if (event.hitGround && !event.previousOnGround && event.previousSpeed.y > 1.2 && self.snapToGround) {
                 self.landingFrames = 10;
             }
             if (event.hitWall) {

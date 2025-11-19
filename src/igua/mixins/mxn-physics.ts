@@ -65,6 +65,7 @@ export function mxnPhysics(
             physicsOffset,
             terminalVelocity,
             groundMaterial: Material.Earth,
+            snapToGround: true,
         })
         .dispatchesValue<"moved", MoveEvent>()
         .step(obj => {
@@ -319,7 +320,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 
                     // Enables you to be snapped to the floor while walking down a slope
                     // obj.speed.y >= 0 check added to allow jumping while walking up slopes
-                    const vSnap = (obj.speed.y >= 0 && !horizontalSpeedIndicatesClimbingSlope)
+                    const vSnap = (obj.speed.y >= 0 && !horizontalSpeedIndicatesClimbingSlope && obj.snapToGround)
                         ? Math.abs(obj.speed.x)
                         : 0;
 
