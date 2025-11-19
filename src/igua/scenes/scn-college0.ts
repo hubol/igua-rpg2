@@ -12,7 +12,7 @@ import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 export function scnCollege0() {
     Jukebox.play(Mzk.DespicableMessage);
     const lvl = Lvl.College0();
-    lvl.Podium.mixin(mxnCutscene, function* () {
+    lvl.Chalkboard.mixin(mxnCutscene, function* () {
         yield* DramaClassroom.teach("college0");
     });
     enrichDistantAngel(lvl);
