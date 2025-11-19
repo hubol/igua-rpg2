@@ -760,6 +760,19 @@
       "gridCellsY": 171,
       "decals": [
         {
+          "x": 985,
+          "y": 797,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#680c0c",
+          "texture": "world map/hill 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
           "x": 489,
           "y": 506,
           "scaleX": 1,
@@ -2720,7 +2733,7 @@
           "groupName": null
         },
         {
-          "x": 962,
+          "x": 956,
           "y": 786,
           "scaleX": 0.8,
           "scaleY": 0.9,
@@ -2732,7 +2745,7 @@
           "values": {"name": ""}
         },
         {
-          "x": 962,
+          "x": 956,
           "y": 784,
           "scaleX": 0.8,
           "scaleY": 0.1,
@@ -2744,7 +2757,7 @@
           "values": {"name": ""}
         },
         {
-          "x": 972,
+          "x": 966,
           "y": 796,
           "scaleX": 0.3,
           "scaleY": 0.4,
@@ -2796,18 +2809,6 @@
           "groupName": null
         },
         {
-          "x": 986,
-          "y": 811,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#680c0c",
-          "texture": "shapes/right triangle 24px.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
           "x": 974,
           "y": 807,
           "scaleX": 1,
@@ -2832,13 +2833,49 @@
           "values": {"name": ""}
         },
         {
-          "x": 996,
-          "y": 806,
-          "scaleX": -1,
+          "x": 956,
+          "y": 803,
+          "scaleX": 0.175,
+          "scaleY": 0.9,
+          "rotation": 0,
+          "tint": "#d28270",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 985,
+          "y": 801,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#680c0c",
+          "texture": "shapes/right triangle 24px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 998,
+          "y": 787,
+          "scaleX": 1,
           "scaleY": 1,
-          "rotation": 90,
-          "tint": "#bab532",
-          "texture": "foliage/moss 0.png",
+          "rotation": 0,
+          "tint": "#e6a500",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 988,
+          "y": 765,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e6a500",
+          "texture": "world map/tree 1.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
@@ -3788,6 +3825,19 @@
           "rotation": 180,
           "tint": "#baee25",
           "texture": "foliage/moss 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 974,
+          "y": 795,
+          "scaleX": 8,
+          "scaleY": 4,
+          "rotation": 0,
+          "tint": "#d28270",
+          "texture": "shapes/square irregular 10.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
