@@ -1,5 +1,6 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Sfx } from "../../assets/sounds";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { DramaQuests } from "../drama/drama-quests";
@@ -34,6 +35,7 @@ function enrichTogglingBlocks(lvl: LvlType.GreatTower) {
             for (const blockObj of blockObjs) {
                 ObjTerrain.toggle(blockObj);
                 yield sleep(2000);
+                blockObj.play(Sfx.Effect.PipeAlternate.rate(0.9, 1.1));
                 ObjTerrain.toggle(blockObj);
             }
         }
