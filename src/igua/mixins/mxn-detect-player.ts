@@ -35,6 +35,13 @@ export function mxnDetectPlayer(obj: Container) {
             angelEyesObjs = obj.findIs(objAngelEyes);
         })
         .step(() => {
+            if (!Rpg.character.status.isAlive) {
+                mxnDetectPlayer.detectionScore = Math.min(-200, mxnDetectPlayer.detectionScore);
+                mxnDetectPlayer.facing = 0;
+                mxnDetectPlayer.position.at(0, 0);
+                mxnDetectPlayer.speed.at(0, 0);
+            }
+
             mxnDetectPlayer.detectionScore--;
 
             if (mxnDetectPlayer.detectionScore > 0) {
@@ -59,6 +66,10 @@ export function mxnDetectPlayer(obj: Container) {
         .coro(function* (self) {
             const rayObj = objDetectRay().invisible()
                 .step(self => {
+                    if (!Rpg.character.status.isAlive) {
+                        return;
+                    }
+
                     if (self.collides(playerObj)) {
                         mxnDetectPlayer.detectionScore = 60;
                         self.speed.at(playerObj.speed);
