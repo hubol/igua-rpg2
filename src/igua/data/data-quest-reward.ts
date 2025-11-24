@@ -109,6 +109,10 @@ export namespace DataQuestReward {
                     reward: { kind: "potion", id: "RestoreHealth", count: 2 },
                 },
             },
+            "GreatTower.EnemyHearts": {
+                kind: "single",
+                reward: { kind: "equipment", id: "DefensePhysicalAndPerfectBonus", level: 3 },
+            },
             SimpleSecretHappy: {
                 kind: "single",
                 reward: { kind: "equipment", id: "WetnessCapacityUp", level: 1 },
