@@ -66,12 +66,14 @@ function enrichScenario(lvl: LvlType.StrangeMarketRestaurant) {
         inProgressOrderObj.objEsotericInProgressOrder.controls.inProgressOrder = inProgressOrder;
         const { order } = yield* DramaFoodOrder.buildOrderAtRestaurant(inProgressOrder);
 
-        const question = `Your total is ${order.valuablesPrice} valuables. Are you gonna pay or not?`;
-        if (yield* DramaWallet.askSpendValuables(question, order.valuablesPrice)) {
-            const item = computeItemToDispense(order);
-            yield* DramaInventory.receiveItems([item]);
+        if (order.list.length > 0) {
+            const question = `Your total is ${order.valuablesPrice} valuables. Are you gonna pay or not?`;
+            if (yield* DramaWallet.askSpendValuables(question, order.valuablesPrice)) {
+                const item = computeItemToDispense(order);
+                yield* DramaInventory.receiveItems([item]);
 
-            yield* show("Enjoy!");
+                yield* show("Enjoy!");
+            }
         }
 
         inProgressOrderObj.objEsotericInProgressOrder.controls.inProgressOrder = null;
