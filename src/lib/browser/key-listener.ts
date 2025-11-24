@@ -106,9 +106,8 @@ export class KeyListener {
     }
 
     protected onKeyDown(event: KeyboardEvent) {
-        // First repeat KeyboardEvent when pressing arrow keys does not have .repeat set to true
-        // Can check held bit to discard this event
-        if (event.repeat || this._state[event.code as KeyCode]! & 0b001) {
+        if (event.repeat) {
+            this._state[event.code as KeyCode]! |= 0b001;
             return;
         }
         this._state[event.code as KeyCode]! |= 0b101;
