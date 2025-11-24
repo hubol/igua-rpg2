@@ -7,6 +7,7 @@ import { VectorSimple, vnew } from "../../lib/math/vector-type";
 import { Force } from "../../lib/types/force";
 import { ObjAngelEyes, objAngelEyes } from "../objects/enemies/obj-angel-eyes";
 import { playerObj } from "../objects/obj-player";
+import { Rpg } from "../rpg/rpg";
 import { mxnEnemy } from "./mxn-enemy";
 import { MxnFacingPivot, mxnFacingPivot } from "./mxn-facing-pivot";
 import { force, mxnPhysics } from "./mxn-physics";
@@ -74,8 +75,7 @@ export function mxnDetectPlayer(obj: Container) {
 
             if (self.is(mxnEnemy)) {
                 self.handles("damaged", (_, result) => {
-                    // TODO may be necessary to check if the player actually caused the damage!
-                    if (!result.rejected && result.damaged) {
+                    if (!result.rejected && result.damaged && result.attacker === Rpg.character.status) {
                         rayObj.at(playerObj);
                     }
                 });

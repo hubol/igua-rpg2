@@ -98,6 +98,7 @@ export namespace RpgStatus {
 
     interface DamageAccepted {
         rejected: false;
+        attacker: RpgStatus.Model | null;
         ambient?: boolean;
         damaged?: boolean;
     }
@@ -192,7 +193,7 @@ export namespace RpgStatus {
             target: Model,
             targetEffects: Effects,
             attack: RpgAttack.Model,
-            attacker?: RpgStatus.Model,
+            attacker: RpgStatus.Model | null = null,
         ): DamageResult {
             if (RpgCutscene.isPlaying && !target.quirks.receivesDamageWhileCutsceneIsPlaying) {
                 return { rejected: true, doesntReceiveDamageWhileCutsceneIsPlaying: true };
@@ -260,7 +261,7 @@ export namespace RpgStatus {
             // TODO warn when amount is not an integer
 
             if (attack.physical === 0 && attack.emotional === 0) {
-                return { rejected: false, ambient };
+                return { rejected: false, ambient, attacker };
             }
 
             if (target.invulnerable > 0) {
@@ -315,7 +316,7 @@ export namespace RpgStatus {
                 attacker.pride++;
             }
 
-            return { rejected: false, ambient, damaged };
+            return { rejected: false, ambient, damaged, attacker };
         },
 
         heal(model: Model, effects: Effects, amount: number) {
