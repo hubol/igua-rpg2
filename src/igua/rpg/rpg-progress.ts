@@ -93,6 +93,13 @@ export function getInitialRpgProgress() {
                     gavePlayerPoisonRing: false,
                 },
             },
+            greatTower: {
+                balcony: {
+                    lever0: false,
+                    lever1: false,
+                    lever2: false,
+                },
+            },
         },
         programmaticFlags: {
             classrooms: RpgClassrooms.createState(),

@@ -59,6 +59,14 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
             unlock() {
                 locked = false;
             },
+            get checkpointName() {
+                return sceneChanger?.checkpointName ?? null;
+            },
+            set checkpointName(value) {
+                if (sceneChanger && value) {
+                    sceneChanger.checkpointName = value;
+                }
+            },
         })
         .mixin(mxnInteract, () => {
             if (obj.locked) {

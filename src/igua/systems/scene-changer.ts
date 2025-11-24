@@ -13,7 +13,7 @@ export class SceneChanger {
     private constructor(
         private readonly _scene: () => unknown,
         private readonly _sceneName: string,
-        private readonly _checkpointName: string,
+        public checkpointName: string,
     ) {
     }
 
@@ -23,7 +23,7 @@ export class SceneChanger {
             Rpg.character.position.facing = playerObj.facing > 0 ? 1 : -1;
         }
         Rpg.character.position.sceneName = this._sceneName;
-        Rpg.character.position.checkpointName = this._checkpointName;
+        Rpg.character.position.checkpointName = this.checkpointName;
         sceneStack.replace(this._scene, { useGameplay: true });
         Logger.logInfo("SceneChanger.changeScene", `Took ${performance.now() - startMs}ms`);
     }
