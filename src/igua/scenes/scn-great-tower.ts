@@ -11,6 +11,7 @@ import { dramaShop } from "../drama/drama-shop";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { CtxPocketItems } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objFxBurstDusty } from "../objects/effects/obj-fx-burst-dusty";
 import { objPipe, ObjTerrain } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
@@ -18,6 +19,7 @@ import { SceneChanger } from "../systems/scene-changer";
 import { scnWorldMap } from "./scn-world-map";
 
 export function scnGreatTower() {
+    CtxPocketItems.value.pocketItemIds.typeA = "EssenceWind";
     Jukebox.play(Mzk.FaithBeam);
     const lvl = Lvl.GreatTower();
     enrichEnemyHearts(lvl);

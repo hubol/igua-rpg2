@@ -130,8 +130,8 @@
           "name": "PlayerDev",
           "id": 1,
           "_eid": "98101389",
-          "x": 32,
-          "y": 952,
+          "x": 208,
+          "y": 2112,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
@@ -259,6 +259,96 @@
           "originX": 8,
           "originY": 6,
           "uid": 176073731109206,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PocketableItemA",
+          "id": 7,
+          "_eid": "30330516",
+          "x": 480,
+          "y": 1872,
+          "originX": 12,
+          "originY": 12,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PocketableItemA",
+          "id": 8,
+          "_eid": "30330516",
+          "x": 376,
+          "y": 1840,
+          "originX": 12,
+          "originY": 12,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PocketableItemA",
+          "id": 9,
+          "_eid": "30330516",
+          "x": 416,
+          "y": 1480,
+          "originX": 12,
+          "originY": 12,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PocketableItemA",
+          "id": 27,
+          "_eid": "30330516",
+          "x": 480,
+          "y": 1936,
+          "originX": 12,
+          "originY": 12,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PocketableItemA",
+          "id": 28,
+          "_eid": "30330516",
+          "x": 480,
+          "y": 2000,
+          "originX": 12,
+          "originY": 12,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PocketableItemA",
+          "id": 29,
+          "_eid": "30330516",
+          "x": 480,
+          "y": 2064,
+          "originX": 12,
+          "originY": 12,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PocketableItemA",
+          "id": 30,
+          "_eid": "30330516",
+          "x": 376,
+          "y": 1776,
+          "originX": 12,
+          "originY": 12,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PocketableItemA",
+          "id": 31,
+          "_eid": "30330516",
+          "x": 376,
+          "y": 1712,
+          "originX": 12,
+          "originY": 12,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PocketableItemA",
+          "id": 32,
+          "_eid": "30330516",
+          "x": 376,
+          "y": 1648,
+          "originX": 12,
+          "originY": 12,
           "values": {"name": "", "depth": 0}
         }
       ]
@@ -638,7 +728,7 @@
           "groupName": null
         },
         {
-          "x": 508,
+          "x": 506,
           "y": 1961,
           "scaleX": 1,
           "scaleY": -1,
@@ -651,7 +741,7 @@
           "groupName": null
         },
         {
-          "x": 513,
+          "x": 507,
           "y": 2022,
           "scaleX": 1,
           "scaleY": 1,
@@ -1860,7 +1950,7 @@
           "groupName": null
         },
         {
-          "x": 512,
+          "x": 506,
           "y": 2042,
           "scaleX": 1,
           "scaleY": -1,
@@ -1925,7 +2015,7 @@
           "groupName": null
         },
         {
-          "x": 513,
+          "x": 511,
           "y": 1975,
           "scaleX": 1,
           "scaleY": 1,
@@ -1938,7 +2028,7 @@
           "groupName": null
         },
         {
-          "x": 508,
+          "x": 506,
           "y": 1911,
           "scaleX": 1,
           "scaleY": 1,
@@ -4328,7 +4418,7 @@
           "_eid": "93117141",
           "x": 496,
           "y": 2024,
-          "width": 32,
+          "width": 22,
           "height": 16,
           "originX": 0,
           "originY": 0,
@@ -4376,7 +4466,7 @@
           "_eid": "93117141",
           "x": 496,
           "y": 1960,
-          "width": 24,
+          "width": 22,
           "height": 16,
           "originX": 0,
           "originY": 0,
@@ -4463,7 +4553,7 @@
           "_eid": "93117141",
           "x": 496,
           "y": 1896,
-          "width": 24,
+          "width": 22,
           "height": 16,
           "originX": 0,
           "originY": 0,
