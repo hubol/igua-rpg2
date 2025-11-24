@@ -4764,7 +4764,7 @@ export const Lvl = {
       Door: e(r["Door"], { x: 64, y: 184, values: { sceneName: "scnStrangeMarket", checkpointName: "fromRestaurant", name: "", depth: 0 } }, "Entities"),
       MiffedAngel: e(r["EnemyMiffed"], { x: 256, y: 232, uid: 176119665767100, values: { name: "MiffedAngel", depth: 0, variant: "level2" } }, "Entities"),
       InProgressOrderRegion: e(r["Region"], { x: 392, y: 40, width: 70, height: 130, values: { name: "InProgressOrderRegion", depth: 0 }, tint: 0x00ff00 }, "Entities"),
-      WaiterNpc: e(r["IguanaNpc"], { x: 416, y: 232, flippedX: true, values: { personaName: "", name: "WaiterNpc", depth: 0 } }, "CharacterEntities"),
+      WaiterNpc: e(r["IguanaNpc"], { x: 416, y: 232, flippedX: true, values: { personaName: "MealSoulWaiter", name: "WaiterNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 120, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     };
   },

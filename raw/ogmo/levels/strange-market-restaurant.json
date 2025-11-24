@@ -94,7 +94,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": true,
-          "values": {"personaName": "", "name": "WaiterNpc", "depth": 0}
+          "values": {"personaName": "MealSoulWaiter", "name": "WaiterNpc", "depth": 0}
         }
       ]
     },
@@ -189,7 +189,8 @@
           "texture": "stone/brick rows 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 119,
@@ -201,7 +202,8 @@
           "texture": "stone/brick single 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 172,
@@ -213,7 +215,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 362,
@@ -225,7 +228,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 39,
@@ -237,7 +241,8 @@
           "texture": "shapes/confetti 45deg.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 303,
@@ -249,7 +254,8 @@
           "texture": "stone/brick rows 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 385,
@@ -261,7 +267,8 @@
           "texture": "stone/brick rows 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 296,
@@ -273,7 +280,8 @@
           "texture": "stone/brick single 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 390,
@@ -285,7 +293,8 @@
           "texture": "stone/brick single 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 472,
@@ -297,7 +306,8 @@
           "texture": "shapes/right triangle 24px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 472,
@@ -309,7 +319,8 @@
           "texture": "shapes/right triangle 24px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 79,
@@ -321,7 +332,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 227,
@@ -333,7 +345,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 335,
@@ -345,7 +358,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 136,
@@ -357,7 +371,8 @@
           "texture": "stone/brick rows 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 141,
@@ -369,7 +384,8 @@
           "texture": "stone/brick single 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 478,
@@ -381,7 +397,8 @@
           "texture": "terrain/earth/crack 28px 38px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 36,
@@ -393,7 +410,8 @@
           "texture": "terrain/earth/crack 8px 12px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -493,7 +511,8 @@
           "texture": "town/signage/i will grill your food.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 329,
@@ -505,7 +524,8 @@
           "texture": "stone/brick single 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 40,
@@ -517,7 +537,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 336,
@@ -529,7 +550,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 168,
@@ -541,7 +563,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 160,
@@ -553,7 +576,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 152,
@@ -565,7 +589,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 51,
@@ -577,7 +602,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 37,
@@ -589,7 +615,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 137,
@@ -601,7 +628,8 @@
           "texture": "light/glass metal sheen 20px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 320,
@@ -613,7 +641,8 @@
           "texture": "light/glass metal sheen 20px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 86,
@@ -625,7 +654,8 @@
           "texture": "light/blob 48 x 66.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 90,
@@ -637,7 +667,8 @@
           "texture": "light/shadow irregular small round.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 365,
@@ -649,7 +680,8 @@
           "texture": "stone/brick rows 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 358,
@@ -661,7 +693,8 @@
           "texture": "stone/brick single 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 172,
@@ -673,7 +706,8 @@
           "texture": "terrain/earth/crack 8px 12px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 252,
@@ -685,7 +719,8 @@
           "texture": "town/signage/meal soul character.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
