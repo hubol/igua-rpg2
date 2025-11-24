@@ -1,3 +1,4 @@
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
@@ -10,6 +11,7 @@ export function objFxExpressSurprise() {
     return objIndexedSprite(txs)
         .anchored(0.5, 0.5)
         .coro(function* (self) {
+            self.play(Sfx.Enemy.Miffed.ExpressSurprise.rate(0.9, 1.1));
             yield* Coro.all([
                 interp(self, "textureIndex").to(1).over(150),
                 interpvr(self).factor(factor.sine).translate(0, -16).over(150),

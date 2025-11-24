@@ -410,7 +410,6 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
             obj.gravity = 0.2;
         },
         *expressSurprise() {
-            obj.play(Sfx.Enemy.Miffed.ExpressSurprise.rate(0.9, 1.1));
             objFxExpressSurprise().at(obj).add(5, -32).show();
             obj.speed.y = -2;
             yield () => obj.speed.y >= 0 && obj.isOnGround;

@@ -4,7 +4,7 @@ import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
-import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear, nlerp } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
@@ -23,6 +23,7 @@ import { mxnStopAndDieWhenHitGround } from "../../mixins/mxn-stop-and-die-when-h
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { RpgStatus } from "../../rpg/rpg-status";
+import { objFxExpressSurprise } from "../effects/obj-fx-express-surprise";
 import { objProjectileElectricalPulseGround } from "../projectiles/obj-projectile-electrical-pulse-ground";
 import { objSpikedCanonball } from "../projectiles/obj-spiked-canonball";
 import { AngelThemeTemplate } from "./angel-theme-template";
@@ -350,8 +351,10 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
             }
         });
 
+    const legsObj = objAngelPlantLegs({ objToBounce: actualHeadObj }).pivoted(18, -17);
+
     const enemyObj = container(
-        objAngelPlantLegs({ objToBounce: actualHeadObj }).pivoted(18, -17),
+        legsObj,
         actualHeadObj,
         healthbarAnchorObj,
     )
@@ -373,9 +376,9 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
                 bodyObj.bulge.unit = 0;
                 yield interp(bodyObj.bulge, "unit").to(1).over(1000);
                 yield sleep(500);
-                enemyObj.play(Sfx.Enemy.Suggestive.Flick.rate(0.9, 1.1));
-                const canonballObj = objAngelSuggestiveSpikedCanonball(enemyObj.status).at(enemyObj).show();
-                canonballObj.speed.x = self.mxnDetectPlayer.position.x > enemyObj.x ? 2 : -2;
+                self.play(Sfx.Enemy.Suggestive.Flick.rate(0.9, 1.1));
+                const canonballObj = objAngelSuggestiveSpikedCanonball(self.status).at(self).show();
+                canonballObj.speed.x = self.mxnDetectPlayer.position.x > self.x ? 2 : -2;
                 canonballObj.speed.y = -8;
                 bodyObj.bulge.phase = "recovering";
                 bodyObj.bulge.unit = 0;
@@ -385,22 +388,36 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
                 }
 
                 if (
-                    Math.abs(self.mxnDetectPlayer.position.x - enemyObj.x) < 300
-                    && Math.abs(self.mxnDetectPlayer.position.y - enemyObj.y) < 60
+                    Math.abs(self.mxnDetectPlayer.position.x - self.x) < 300
+                    && Math.abs(self.mxnDetectPlayer.position.y - self.y) < 60
                     && self.mxnDetectPlayer.speed.y >= 0
                 ) {
                     faceObj.mouthObj.controls.frowning = true;
-                    enemyObj.play(Sfx.Enemy.Suggestive.Lift.rate(0.9, 1.1));
-                    yield interpvr(enemyObj.pivot).factor(factor.sine).to(0, 16).over(250);
-                    objAngelSuggestiveElectricalPulseGround(enemyObj).at(enemyObj).show().zIndexed(
+                    self.play(Sfx.Enemy.Suggestive.Lift.rate(0.9, 1.1));
+                    yield interpvr(self.pivot).factor(factor.sine).to(0, 16).over(250);
+                    objAngelSuggestiveElectricalPulseGround(self).at(self).show().zIndexed(
                         ZIndex.Entities - 1,
                     );
                     yield sleep(500);
                     faceObj.mouthObj.controls.frowning = false;
-                    enemyObj.play(Sfx.Enemy.Suggestive.Unlift.rate(0.9, 1.1));
-                    yield interpvr(enemyObj.pivot).factor(factor.sine).to(0, 0).over(250);
+                    self.play(Sfx.Enemy.Suggestive.Unlift.rate(0.9, 1.1));
+                    yield interpvr(self.pivot).factor(factor.sine).to(0, 0).over(250);
                     yield sleep(1000);
                 }
+            }
+        })
+        .coro(function* (self) {
+            while (true) {
+                yield () => self.mxnDetectPlayer.detectionScore > 0;
+                objFxExpressSurprise().at(self).add(0, -20).show();
+                legsObj.controls.bounceEnabled = false;
+                actualHeadObj.pivot.y = 4;
+                yield sleepf(2);
+                actualHeadObj.pivot.y = 10;
+                yield sleepf(16);
+                yield interpvr(actualHeadObj.pivot).factor(factor.sine).to(0, 0).over(90);
+                legsObj.controls.bounceEnabled = true;
+                yield () => self.mxnDetectPlayer.detectionScore <= 0;
             }
         });
 
