@@ -38,7 +38,6 @@ export function mxnDetectPlayer(obj: Container) {
             if (!Rpg.character.status.isAlive) {
                 mxnDetectPlayer.detectionScore = Math.min(-200, mxnDetectPlayer.detectionScore);
                 mxnDetectPlayer.facing = 0;
-                mxnDetectPlayer.position.at(0, 0);
                 mxnDetectPlayer.speed.at(0, 0);
             }
 
