@@ -41,6 +41,7 @@ export namespace DataNpcPersona {
             GreatTowerShopkeeper: { job: "Shopkeeper", name: "???", looks: NpcLooks.PotteryEnthusiast },
             MealSoulWaiter: { job: "Franchise Owner", name: "Midge", looks: NpcLooks.HotTopic },
             Hubol: { job: "???", name: "Hubol", looks: NpcLooks.Hubol },
+            CloudHouse0: { job: "???", name: "???", looks: NpcLooks.Rugby },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
         } satisfies Record<string, Model>,
     );
