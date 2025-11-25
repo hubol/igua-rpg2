@@ -55,8 +55,22 @@ export function objCamera(isWorldMap: boolean) {
 
     const parallaxFactor = isWorldMap ? 1 : 0.8;
 
+    let mode = Null<CameraMode>();
+
     // TODO not sure if mode should be exposed...
-    const obj = container().merge({ mode: <CameraMode> "follow_player", auto }).step(self => {
+    const obj = container().merge({
+        defaultMode: <CameraMode> "follow_player",
+        get mode() {
+            if (!mode) {
+                mode = this.defaultMode;
+            }
+            return mode;
+        },
+        set mode(value) {
+            mode = value;
+        },
+        auto,
+    }).step(self => {
         if (self.mode === "follow_player") {
             getCameraPositionToFrameSubject(self, playerObj);
         }

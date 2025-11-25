@@ -7,9 +7,9 @@ import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 
 export function scnEfficientHome() {
+    scene.camera.defaultMode = "controlled";
     const lvl = Lvl.EfficientHome();
     scene.camera.at(Math.floor(playerObj.x / 512) * 512, Math.floor(playerObj.y / 288) * 288);
-    scene.camera.mode = "controlled";
 
     enrichHelium(lvl);
     enrichRoom0(lvl);

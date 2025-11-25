@@ -21,9 +21,9 @@ function getDefaultCutsceneAttributes() {
         requiredScene: Null(scene),
         camera: {
             start: "none" as "none" | "pan_to_speaker",
-            end: "delay_if_camera_moved_set_mode_follow_player" as
+            end: "delay_if_camera_moved_set_default_mode" as
                 | "none"
-                | "delay_if_camera_moved_set_mode_follow_player"
+                | "delay_if_camera_moved_set_default_mode"
                 | "pan_to_player",
         },
     };
@@ -162,7 +162,7 @@ function objCutsceneRunner() {
                     // TODO I think `clear` might be able to just clear the overlay messages!
                     clear();
                     if (
-                        attributes.camera.end === "delay_if_camera_moved_set_mode_follow_player"
+                        attributes.camera.end === "delay_if_camera_moved_set_default_mode"
                         && !scene.camera.auto.isFramingPlayer
                         && scene === attributes.requiredScene
                     ) {
@@ -173,7 +173,7 @@ function objCutsceneRunner() {
                         yield scene.camera.auto.panToPlayer();
                     }
                     if (attributes.camera.end !== "none") {
-                        scene.camera.mode = "follow_player";
+                        scene.camera.mode = scene.camera.defaultMode;
                     }
                 }
                 catch (e) {
