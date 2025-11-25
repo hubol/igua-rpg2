@@ -11,6 +11,7 @@ import { dramaShop } from "../drama/drama-shop";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { CtxPocketItems } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objFxBurstDusty } from "../objects/effects/obj-fx-burst-dusty";
 import { objPipe, ObjTerrain } from "../objects/obj-terrain";
@@ -55,6 +56,7 @@ function enrichEnemyHearts(lvl: LvlType.GreatTower) {
     lvl.EnemyHeartLeft.mixin(mxnEnemyHeart, { enemyObj: lvl.MiffedLeft, lvl });
     lvl.EnemyHeartRight.mixin(mxnEnemyHeart, { enemyObj: lvl.MiffedRight, lvl });
     lvl.EnemyHeartLarge
+        .mixin(mxnSpeaker, { name: "Heart of Wind", colorPrimary: 0x487723, colorSecondary: 0xD0E840 })
         .coro(function* (self) {
             self.scaled(0.5, 0.5);
             yield holdf(() => lvl.EnemyHeartLeft.collides(lvl.EnemyHeartRight), 3);
@@ -72,7 +74,8 @@ function enrichEnemyHearts(lvl: LvlType.GreatTower) {
                     "And the green hearts combine into one.",
                 );
                 yield* DramaQuests.complete("GreatTower.EnemyHearts");
-            }).done;
+            }, { speaker: self })
+                .done;
 
             objFxBurstDusty().at(self).show();
             self.destroy();

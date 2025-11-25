@@ -1193,6 +1193,7 @@ export const Lvl = {
       ShopkeeperNpc: e(r["IguanaNpc"], { x: 368, y: 1504, flippedX: true, values: { personaName: "GreatTowerShopkeeper", name: "ShopkeeperNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 120, y: 2224, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromBalcony: e(r["Checkpoint"], { x: 72, y: 1480, flippedX: false, values: { name: "fromBalcony", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      PlayerDev: e(r["PlayerDev"], { x: 32, y: 952, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       FoliageVine2_6: d(Tx.Foliage.Vine2, { x: 341, y: 2226, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x579923 }, "FrontDecals"),
       RacePipesRegion: e(r["Region"], { x: 72, y: 648, width: 408, height: 16, values: { name: "RacePipesRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -40, y: 2096, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromGreatTower", name: "", depth: 0 } }, "RegionEntities"),

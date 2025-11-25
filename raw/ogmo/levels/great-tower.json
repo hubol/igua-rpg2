@@ -148,6 +148,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromBalcony", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "PlayerDev",
+          "id": 3,
+          "_eid": "98101389",
+          "x": 32,
+          "y": 952,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
