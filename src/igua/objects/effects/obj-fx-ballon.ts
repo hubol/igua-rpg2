@@ -6,6 +6,7 @@ import { Integer, Unit } from "../../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../../lib/math/rng";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
+import { StepOrder } from "../step-order";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 
 const [txBallon, txBallonHighlight, ...txBallonFaces] = Tx.Effects.Ballon.split({ width: 22 });
@@ -46,7 +47,7 @@ export function objFxBallon(seed: Integer, inflation: Unit) {
         else {
             self.y = maxBallonDrainY;
         }
-    });
+    }, StepOrder.BeforeCamera);
 
     const ballonObj = container(
         maskObj,
