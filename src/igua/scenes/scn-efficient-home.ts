@@ -1,13 +1,17 @@
 import { BLEND_MODES } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
+import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
+import { ZIndex } from "../core/scene/z-index";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { ask, show } from "../drama/show";
 import { layers, scene } from "../globals";
 import { mxnFxAlphaVisibility } from "../mixins/effects/mxn-fx-alpha-visibility";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { objEsotericArt } from "../objects/esoteric/obj-esoteric-art";
 import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
@@ -32,9 +36,27 @@ function enrichHelium(lvl: LvlType.EfficientHome) {
 }
 
 function enrichRoom0(lvl: LvlType.EfficientHome) {
+    container()
+        .coro(function* (self) {
+            while (true) {
+                const seed = Rpg.flags.greatTower.efficientHome.artSeed;
+
+                self.removeAllChildren();
+                if (seed !== null) {
+                    objEsotericArt(seed).show(self);
+                }
+                // TODO types could be improved maybe?
+                yield onPrimitiveMutate(() => Rpg.flags.greatTower.efficientHome.artSeed ?? -1);
+            }
+        })
+        .at(lvl.ArtRegion)
+        .zIndexed(ZIndex.BackgroundDecals)
+        .show();
+
     lvl.CloudHouseNpc0.mixin(mxnCutscene, function* () {
         yield* ask("You can't tell, but right now I'm working on my art.", "You are?");
         yield* show("Yep, I'm dreaming up big ideas...");
+        Rpg.flags.greatTower.efficientHome.artSeed = Rng.intc(0, Number.MAX_SAFE_INTEGER / 2);
     });
 }
 

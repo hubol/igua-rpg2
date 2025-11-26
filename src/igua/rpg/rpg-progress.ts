@@ -99,6 +99,9 @@ export function getInitialRpgProgress() {
                     lever1: false,
                     lever2: false,
                 },
+                efficientHome: {
+                    artSeed: Null<Integer>(),
+                },
             },
         },
         programmaticFlags: {
