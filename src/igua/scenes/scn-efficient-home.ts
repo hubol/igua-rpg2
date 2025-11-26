@@ -1,8 +1,9 @@
 import { BLEND_MODES } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
-import { sleep } from "../../lib/game-engine/routines/sleep";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
@@ -36,7 +37,7 @@ function enrichHelium(lvl: LvlType.EfficientHome) {
 }
 
 function enrichRoom0(lvl: LvlType.EfficientHome) {
-    container()
+    const artObj = container()
         .coro(function* (self) {
             while (true) {
                 const seed = Rpg.flags.greatTower.efficientHome.artSeed;
@@ -56,7 +57,12 @@ function enrichRoom0(lvl: LvlType.EfficientHome) {
     lvl.CloudHouseNpc0.mixin(mxnCutscene, function* () {
         yield* ask("You can't tell, but right now I'm working on my art.", "You are?");
         yield* show("Yep, I'm dreaming up big ideas...");
+        yield sleep(1000);
+        yield* show("Oh! Here's an idea now.");
+        yield interpvr(artObj.pivot).factor(factor.sine).translate(0, -280).over(1000);
         Rpg.flags.greatTower.efficientHome.artSeed = Rng.intc(0, Number.MAX_SAFE_INTEGER / 2);
+        yield interpvr(artObj.pivot).factor(factor.sine).to(0, 0).over(500);
+        artObj.pivot.y = 0;
     });
 }
 
