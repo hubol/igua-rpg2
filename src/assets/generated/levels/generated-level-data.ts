@@ -461,7 +461,7 @@ export const Lvl = {
       fromEfficient5: e(r["Checkpoint"], { x: 1232, y: 496, flippedX: false, values: { name: "fromEfficient5", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromEfficient6: e(r["Checkpoint"], { x: 232, y: 792, flippedX: false, values: { name: "fromEfficient6", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromEfficient7: e(r["Checkpoint"], { x: 752, y: 792, flippedX: false, values: { name: "fromEfficient7", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
-      ArtRegion: e(r["Region"], { x: 172, y: 96, width: 64, height: 96, values: { name: "ArtRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      ArtRegion: e(r["Region"], { x: 176, y: 96, width: 64, height: 96, values: { name: "ArtRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       HeliumMarker0: e(r["Marker"], { x: 1336, y: 200, values: { name: "HeliumMarker0", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       HeliumMarker1: e(r["Marker"], { x: 1312, y: 496, values: { name: "HeliumMarker1", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       HeliumMarker2: e(r["Marker"], { x: 312, y: 792, values: { name: "HeliumMarker2", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
