@@ -1,5 +1,8 @@
 import { Logger } from "../../lib/game-engine/logger";
+import { Rng } from "../../lib/math/rng";
+import { container } from "../../lib/pixi/container";
 import { mxnCollectible } from "../mixins/mxn-collectible";
+import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
@@ -14,7 +17,9 @@ export function objValuable(
 
     const computedKind = uid === undefined ? kind : Rpg.looseValuables.trySpawn(uid, kind);
 
-    return objFigureValuable(computedKind ?? "green")
+    const valuableObj = objFigureValuable(computedKind ?? "green");
+
+    return valuableObj
         .mixin(
             mxnCollectible,
             uid === undefined
@@ -22,7 +27,16 @@ export function objValuable(
                 : {
                     kind: "controlled",
                     isCollected: computedKind === null,
-                    collect: () => Rpg.looseValuables.collect(uid),
+                    collect: () => {
+                        Rpg.looseValuables.collect(uid);
+                        container()
+                            .at(valuableObj)
+                            .mixin(mxnSparkling)
+                            .step(self =>
+                                self.sparklesPerFrame = Rpg.looseValuables.trySpawn(uid, kind) ? Rng.float(0.05) : 0
+                            )
+                            .show();
+                    },
                 },
         )
         .handles("collected", self => {
