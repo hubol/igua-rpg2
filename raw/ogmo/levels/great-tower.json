@@ -148,17 +148,6 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromBalcony", "depth": 0, "overrideFlipX": "none"}
-        },
-        {
-          "name": "PlayerDev",
-          "id": 3,
-          "_eid": "98101389",
-          "x": 32,
-          "y": 952,
-          "originX": 22,
-          "originY": 39,
-          "flippedX": false,
-          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -4145,6 +4134,133 @@
           "originY": 0.5,
           "values": {"name": "EnemyHeartLarge"},
           "groupName": null
+        },
+        {
+          "x": 42,
+          "y": 1355,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#d0e840",
+          "texture": "shapes/confetti 45deg.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 16,
+          "y": 1329,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#d0e840",
+          "texture": "shapes/confetti 45deg.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 24,
+          "y": 646,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#579923",
+          "texture": "terrain/grass/messy 28px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 56,
+          "y": 646,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#579923",
+          "texture": "terrain/grass/messy 28px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 74,
+          "y": 667,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#d0e840",
+          "texture": "terrain/grass/messy 28px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": -8,
+          "y": 646,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#579923",
+          "texture": "terrain/grass/messy 28px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 27,
+          "y": 687,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#d0e840",
+          "texture": "terrain/grass/messy 28px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 59,
+          "y": 687,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#d0e840",
+          "texture": "terrain/grass/messy 28px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": -5,
+          "y": 687,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#d0e840",
+          "texture": "terrain/grass/messy 28px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 33,
+          "y": 669,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#579923",
+          "texture": "town/colossus/miniature 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
