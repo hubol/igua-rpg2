@@ -59,7 +59,7 @@ function enrichRoom0(lvl: LvlType.EfficientHome) {
         yield* show("Yep, I'm dreaming up big ideas...");
         yield sleep(1000);
         yield* show("Oh! Here's an idea now.");
-        yield interpvr(artObj.pivot).factor(factor.sine).translate(0, -280).over(1000);
+        yield interpvr(artObj.pivot).factor(factor.sine).translate(0, -280).over(artObj.children.length ? 1000 : 0);
         Rpg.flags.greatTower.efficientHome.artSeed = Rng.intc(0, Number.MAX_SAFE_INTEGER / 2);
         yield interpvr(artObj.pivot).factor(factor.sine).to(0, 0).over(500);
         artObj.pivot.y = 0;
