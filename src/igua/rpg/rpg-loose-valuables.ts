@@ -21,6 +21,14 @@ export class RpgLooseValuables {
         this._state.thisLifetimeCollections.clear();
     }
 
+    forgetCollection() {
+        for (const key in this._state.allTimeCollectionCounts) {
+            const uid = Number(key);
+            this._state.allTimeCollectionCounts[uid] = Math.max(0, (this._state.allTimeCollectionCounts[uid] ?? 0) - 1);
+        }
+        this._state.thisLifetimeCollections.clear();
+    }
+
     trySpawn(uid: Integer, kind: RpgEconomy.Valuables.Kind) {
         if (this._state.thisLifetimeCollections.has(uid)) {
             return null;

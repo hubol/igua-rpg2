@@ -82,6 +82,12 @@ export namespace DataPotion {
                 stinkLineTint: 0x2149FF,
                 texture: Tx.Collectibles.Potion.Wetness,
             },
+            ForgetLooseValuableCollection: {
+                name: "Forgeddit",
+                description: "Renowned charm. Loose valuables forgive your transgressions.",
+                stinkLineTint: 0x808080,
+                texture: null,
+            },
             __Fallback__: {
                 name: "???",
                 description: "Consume to experience a bug",
@@ -131,6 +137,9 @@ export namespace DataPotion {
                 return;
             case "Wetness":
                 playerObj.damage(atkWetness);
+                return;
+            case "ForgetLooseValuableCollection":
+                Rpg.looseValuables.forgetCollection();
                 return;
             case "__Fallback__":
                 return;
