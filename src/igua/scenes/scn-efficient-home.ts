@@ -25,6 +25,7 @@ export function scnEfficientHome() {
     enrichHelium(lvl);
     enrichRoom0(lvl);
     enrichRoom1(lvl);
+    enrichRoom2(lvl);
 }
 
 function enrichHelium(lvl: LvlType.EfficientHome) {
@@ -104,4 +105,7 @@ function enrichRoom1(lvl: LvlType.EfficientHome) {
         yield layers.overlay.solidBelowMessages.fadeOut(500);
         textObjs.destroy();
     });
+}
+
+function enrichRoom2(lvl: LvlType.EfficientHome) {
 }
