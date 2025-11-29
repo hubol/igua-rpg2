@@ -21,9 +21,13 @@ export function mxnSparkling(obj: DisplayObject) {
                 const box = isContainer ? getRandomDeepChild(obj) : obj;
                 const bounds = box.getBounds(false, r);
 
-                p.at(bounds).add(Rng.int(bounds.width), Rng.int(bounds.height));
-
-                self.parent.transform.worldTransform.applyInverse(p, p);
+                if (bounds.x === 0 && bounds.y === 0 && bounds.width === 0 && bounds.height === 0) {
+                    p.at(self).add(Rng.intc(-2, 2), Rng.intc(-2, 2));
+                }
+                else {
+                    p.at(bounds).add(Rng.int(bounds.width), Rng.int(bounds.height));
+                    self.parent.transform.worldTransform.applyInverse(p, p);
+                }
 
                 objValuableSparkle()
                     .tinted(self.sparklesTint)
