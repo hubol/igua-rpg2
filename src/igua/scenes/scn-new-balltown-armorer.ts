@@ -21,6 +21,7 @@ import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
 import { objFish } from "../objects/obj-fish";
 import { Rpg } from "../rpg/rpg";
+import { TerrainAttributes } from "../systems/terrain-attributes";
 
 export function scnNewBalltownArmorer() {
     Jukebox.play(Mzk.GolfResort);
@@ -34,12 +35,15 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
     const { deliveries } = Rpg.flags.newBalltown.fishmonger;
 
     const fishObj = objFish.forArmorer().at(lvl.FishMarker).zIndexed(ZIndex.Entities);
-    fishObj.isMoving = false;
 
     if (deliveries.armorer === "delivered") {
         fishObj.show();
         lvl.IguanaNpc.at(lvl.Fishmonger);
     }
+
+    [lvl.FishBlock0, lvl.FishBlock1, lvl.FishBlock2, lvl.FishBlock3].forEach(obj =>
+        obj.attributes = TerrainAttributes.Decorative
+    );
 
     if (deliveries.armorer !== "arrived") {
         lvl.Fishmonger.destroy();
@@ -48,6 +52,8 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
 
     lvl.IguanaNpc.x -= 32;
     lvl.IguanaNpc.setFacingOverrideAuto(1);
+
+    fishObj.isMoving = false;
 
     Cutscene.play(function* () {
         lvl.IguanaNpc.speed.y = -2;
@@ -77,6 +83,8 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
         yield sleep(500);
 
         yield interpvr(fishObj).factor(factor.sine).to(lvl.FishMarker).over(4000);
+
+        fishObj.isMoving = true;
 
         yield sleep(1000);
 
