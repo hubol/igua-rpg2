@@ -14,6 +14,7 @@ import { mxnFxAlphaVisibility } from "../mixins/effects/mxn-fx-alpha-visibility"
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objEsotericArt } from "../objects/esoteric/obj-esoteric-art";
 import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
+import { objFish } from "../objects/obj-fish";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 
@@ -108,4 +109,5 @@ function enrichRoom1(lvl: LvlType.EfficientHome) {
 }
 
 function enrichRoom2(lvl: LvlType.EfficientHome) {
+    objFish(0x808080).at(lvl.FishMarker).zIndexed(ZIndex.FrontDecals).show().isMoving = false;
 }

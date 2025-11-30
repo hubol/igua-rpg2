@@ -49,6 +49,17 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "HeliumMarker2", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 5,
+          "_eid": "73148747",
+          "x": 1437,
+          "y": 198,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "FishMarker", "depth": 0}
         }
       ]
     },
