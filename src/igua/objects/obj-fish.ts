@@ -7,6 +7,7 @@ import { PseudoRng, Rng } from "../../lib/math/rng";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { container } from "../../lib/pixi/container";
 import { mxnPhysics } from "../mixins/mxn-physics";
+import { TerrainAttributes } from "../systems/terrain-attributes";
 import { objFxBubble4 } from "./effects/obj-fx-bubble-4";
 
 const [txFishBody0, txFishBody1, ...txFishFaces] = Tx.Furniture.Aquarium.Fish.split({ width: 22 });
@@ -28,7 +29,11 @@ export function objFish(seed: Integer) {
         faceObj,
     )
         .pivoted(16, 11)
-        .mixin(mxnPhysics, { gravity: 0, physicsRadius: 4 })
+        .mixin(mxnPhysics, {
+            gravity: 0,
+            physicsRadius: 4,
+            terrainAttributes: TerrainAttributes.Decorative | TerrainAttributes.Default,
+        })
         .handles("moved", (_, e) => {
             if (!e.previousSpeed.isZero && (e.hitCeiling || e.hitGround || e.hitWall)) {
                 collisionsCount++;

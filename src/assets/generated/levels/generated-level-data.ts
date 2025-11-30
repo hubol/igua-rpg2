@@ -428,6 +428,8 @@ export const Lvl = {
       Slope_3: e(r["Slope"], { x: 1352, y: 192, width: 32, height: 16, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xa61cd7 }, "TerrainEntities"),
       Block_38: e(r["Block"], { x: 1272, y: 192, width: 80, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xa61cd7 }, "TerrainEntities"),
       Block_39: e(r["Block"], { x: 1352, y: 208, width: 184, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0xa61cd7 }, "TerrainEntities"),
+      FishCeilingBlock: e(r["Block"], { x: 1336, y: 176, width: 152, height: 16, values: { name: "FishCeilingBlock", depth: 0, visible: false }, tint: 0xd71c1c }, "TerrainEntities"),
+      FishWallBlock: e(r["Block"], { x: 1352, y: 192, width: 32, height: 16, values: { name: "FishWallBlock", depth: 0, visible: false }, tint: 0xd71c1c }, "TerrainEntities"),
       TerrainGrassCloudy: d(Tx.Terrain.Grass.Cloudy, { x: 291, y: 56, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xd71c1c }, "TerrainDecals"),
       LightShadowIrregularSmall: d(Tx.Light.ShadowIrregularSmall, { x: 300, y: 59, scaleX: 2, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x991010 }, "TerrainDecals"),
       LightShadowIrregularSmall_1: d(Tx.Light.ShadowIrregularSmall, { x: 277, y: 57, scaleX: 2, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x991010 }, "TerrainDecals"),

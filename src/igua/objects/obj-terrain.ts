@@ -1,11 +1,13 @@
 import { DisplayObject, Graphics, SimpleMesh, WRAP_MODES } from "pixi.js";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
+import { Bitfield } from "../../lib/math/number-alias-types";
 import { container } from "../../lib/pixi/container";
 import { Empty } from "../../lib/types/empty";
 import { ZIndex } from "../core/scene/z-index";
 import { scene } from "../globals";
 import { Material } from "../systems/materials";
+import { TerrainAttributes } from "../systems/terrain-attributes";
 import { StepOrder } from "./step-order";
 
 /**
@@ -35,6 +37,7 @@ interface Terrain {
     // TODO does it need to be on Terrain?
     clean: () => void;
     segments: TerrainSegment[];
+    attributes: Bitfield;
 }
 
 function cleanTerrain() {
@@ -197,6 +200,7 @@ export abstract class TerrainGraphics extends Graphics {
     dirty = true;
     segments: TerrainSegment[] = [];
     enabled = true;
+    attributes = TerrainAttributes.Default;
 
     constructor(readonly weights: TerrainSegment[], readonly iguaMaterial: Material) {
         super();
@@ -218,6 +222,7 @@ export abstract class TerrainMesh extends SimpleMesh {
     dirty = true;
     segments: TerrainSegment[] = [];
     enabled = true;
+    attributes = TerrainAttributes.Default;
 
     constructor(readonly weights: TerrainSegment[], readonly iguaMaterial: Material) {
         super();

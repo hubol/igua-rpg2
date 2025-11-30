@@ -17,6 +17,7 @@ import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
 import { objFish } from "../objects/obj-fish";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
+import { TerrainAttributes } from "../systems/terrain-attributes";
 
 export function scnEfficientHome() {
     scene.camera.defaultMode = "controlled";
@@ -109,5 +110,6 @@ function enrichRoom1(lvl: LvlType.EfficientHome) {
 }
 
 function enrichRoom2(lvl: LvlType.EfficientHome) {
-    objFish(0x808080).at(lvl.FishMarker).zIndexed(ZIndex.FrontDecals).show().isMoving = false;
+    [lvl.FishCeilingBlock, lvl.FishWallBlock].forEach(obj => obj.attributes = TerrainAttributes.Decorative);
+    objFish(0x808080).at(lvl.FishMarker).zIndexed(ZIndex.FrontDecals).show();
 }

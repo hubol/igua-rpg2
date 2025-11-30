@@ -1,8 +1,10 @@
 import { Container, DisplayObject, Graphics } from "pixi.js";
+import { Bitfield } from "../../lib/math/number-alias-types";
 import { Vector, VectorSimple, vnew } from "../../lib/math/vector-type";
 import { CtxTerrain } from "../objects/obj-terrain";
 import { StepOrder } from "../objects/step-order";
 import { Material } from "../systems/materials";
+import { TerrainAttributes } from "../systems/terrain-attributes";
 
 export enum PhysicsFaction {
     Player = 1,
@@ -17,12 +19,20 @@ interface PhysicsArgs {
     physicsOffset?: Vector;
     terminalVelocity?: number;
     debug?: boolean;
+    terrainAttributes?: Bitfield;
 }
 
 export function mxnPhysics(
     obj: DisplayObject,
-    { gravity, physicsRadius, physicsFaction = null, physicsOffset = vnew(), terminalVelocity = 20, debug = false }:
-        PhysicsArgs,
+    {
+        gravity,
+        physicsRadius,
+        physicsFaction = null,
+        physicsOffset = vnew(),
+        terminalVelocity = 20,
+        debug = false,
+        terrainAttributes = TerrainAttributes.Default,
+    }: PhysicsArgs,
 ) {
     if (debug && obj instanceof Container) {
         for (const child of obj.children) {
@@ -66,6 +76,7 @@ export function mxnPhysics(
             terminalVelocity,
             groundMaterial: Material.Earth,
             snapToGround: true,
+            terrainAttributes,
         })
         .dispatchesValue<"moved", MoveEvent>()
         .step(obj => {
@@ -240,7 +251,7 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
     for (let i = 0; i < terrains.length; i++) {
         const terrain = terrains[i];
 
-        if (!terrain.enabled) {
+        if (!terrain.enabled || !(terrain.attributes & obj.terrainAttributes)) {
             continue;
         }
 
