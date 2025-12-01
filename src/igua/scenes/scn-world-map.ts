@@ -4,14 +4,21 @@ import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Instances } from "../../lib/game-engine/instances";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
+import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { playerObj } from "../objects/obj-player";
 import { OgmoFactory } from "../ogmo/factory";
+import { RpgAttack } from "../rpg/rpg-attack";
+
+const atkSpikeBall = RpgAttack.create({ physical: 30 });
 
 export function scnWorldMap() {
     const lvl = Lvl.WorldMap();
     Instances(OgmoFactory.createDecal).filter(x => x.texture === Tx.WorldMap.Cloud0).forEach(x =>
         x.mixin(mxnSinePivot)
+    );
+    Instances(OgmoFactory.createDecal).filter(x => x.texture === Tx.Enemy.SpikeBall).forEach(x =>
+        x.mixin(mxnRpgAttack, { attack: atkSpikeBall })
     );
     Object.entries(lvl).flatMap(([key, value]) =>
         key.endsWith("Label") && value instanceof DisplayObject ? [value] : []
