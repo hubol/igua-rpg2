@@ -53,7 +53,7 @@ export class Sound {
         const stereoGainNode = this._createStereoGainNode(source);
         source.start(undefined, offset);
         this._resetParams();
-        return new SoundInstance(source, stereoGainNode);
+        return new SoundInstance(source, stereoGainNode, offset ?? 0);
     }
 
     private _createSourceNode() {
@@ -82,10 +82,16 @@ export class Sound {
 type RampableParam = "rate" | "gain" | "pan";
 
 export class SoundInstance {
-    private readonly _startTime: number;
+    private _lastRateSetContextTime: Seconds;
+    private _lastRateSetElapsedTime: Seconds;
 
-    constructor(private readonly _sourceNode: AudioBufferSourceNode, private readonly _stereoGainNode: StereoGainNode) {
-        this._startTime = this._sourceNode.context.currentTime;
+    constructor(
+        private readonly _sourceNode: AudioBufferSourceNode,
+        private readonly _stereoGainNode: StereoGainNode,
+        offsetSeconds: Seconds,
+    ) {
+        this._lastRateSetElapsedTime = offsetSeconds;
+        this._lastRateSetContextTime = this._sourceNode.context.currentTime;
     }
 
     private _getAudioParam(param: RampableParam) {
@@ -117,7 +123,7 @@ export class SoundInstance {
         return this;
     }
 
-    /** The approximate playhead position assuming the sound is looping and not playing at a rate other than 1 */
+    /** The approximate playhead position assuming the sound is looping */
     get estimatedPlayheadPosition() {
         const duration = this._sourceNode.buffer?.duration;
         if (!duration) {
@@ -127,7 +133,10 @@ export class SoundInstance {
             return 0;
         }
 
-        return (this._sourceNode.context.currentTime - this._startTime) % duration;
+        const timeSinceLastRateSet = this._sourceNode.context.currentTime - this._lastRateSetContextTime;
+        const rawElapsedTime = this._lastRateSetElapsedTime + timeSinceLastRateSet * this.rate;
+
+        return rawElapsedTime % duration;
     }
 
     get gain() {
@@ -151,6 +160,10 @@ export class SoundInstance {
     }
 
     set rate(value: number) {
+        const currentContextTime = this._sourceNode.context.currentTime;
+        const timeSinceLastRateSet = currentContextTime - this._lastRateSetContextTime;
+        this._lastRateSetElapsedTime += timeSinceLastRateSet * this.rate;
+        this._lastRateSetContextTime = currentContextTime;
         this._sourceNode.playbackRate.value = value;
     }
 
