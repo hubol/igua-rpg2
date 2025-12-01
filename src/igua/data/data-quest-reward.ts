@@ -113,6 +113,9 @@ export namespace DataQuestReward {
                 kind: "single",
                 reward: { kind: "equipment", id: "DefensePhysicalAndPerfectBonus", level: 3 },
             },
+            "GreatTower.EfficientHome.Ringer.ReceivedFish": {
+                kind: "nothing",
+            },
             SimpleSecretHappy: {
                 kind: "single",
                 reward: { kind: "equipment", id: "WetnessCapacityUp", level: 1 },

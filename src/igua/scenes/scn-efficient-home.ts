@@ -3,11 +3,12 @@ import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
-import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
-import { DataNpcPersona } from "../data/data-npc-persona";
+import { DramaInventory } from "../drama/drama-inventory";
+import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { layers, scene } from "../globals";
 import { mxnFxAlphaVisibility } from "../mixins/effects/mxn-fx-alpha-visibility";
@@ -125,9 +126,14 @@ function enrichRoom2(lvl: LvlType.EfficientHome) {
             }
 
             while (true) {
+                const playerHasFish = Rpg.inventory.count({ kind: "key_item", id: "RingerFish" }) >= 1;
+
                 const result = yield* ask(
                     "What do you need? DING?",
-                    Rpg.quest("GreatTower.EfficientHome.Ringer.ReceivedFish").everCompleted ? null : "An errand!",
+                    (playerHasFish || Rpg.quest("GreatTower.EfficientHome.Ringer.ReceivedFish").everCompleted)
+                        ? null
+                        : "An errand!",
+                    playerHasFish ? "Your fish is here!" : null,
                     "Tell me about yourself",
                     "Nothing",
                 );
@@ -137,6 +143,12 @@ function enrichRoom2(lvl: LvlType.EfficientHome) {
                     Rpg.flags.greatTower.efficientHome.ringer.toldPlayerAboutDesireForFish = true;
                 }
                 else if (result === 1) {
+                    yield* DramaInventory.removeCount({ kind: "key_item", id: "RingerFish" }, 1);
+                    yield* DramaQuests.complete("GreatTower.EfficientHome.Ringer.ReceivedFish");
+                    yield* show("Wow! Fantastic!", "What a fish! A damn good fish, indeed!", "DING! DING! DING! DING!");
+                    // TODO reveal great secrets
+                }
+                else if (result === 2) {
                     yield* show("I'm the guardian of the bell. Also I know a secret about helium.", "D-D-D-DING!");
                 }
                 else {
