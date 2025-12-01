@@ -111,5 +111,38 @@ function enrichRoom1(lvl: LvlType.EfficientHome) {
 
 function enrichRoom2(lvl: LvlType.EfficientHome) {
     [lvl.FishCeilingBlock, lvl.FishWallBlock].forEach(obj => obj.attributes = TerrainAttributes.Decorative);
-    objFish(0x808080).at(lvl.FishMarker).zIndexed(ZIndex.FrontDecals).show();
+    objFish.forRinger()
+        .at(lvl.FishMarker)
+        .zIndexed(ZIndex.FrontDecals)
+        .step(self => self.visible = Rpg.quest("GreatTower.EfficientHome.Ringer.ReceivedFish").everCompleted)
+        .show();
+
+    lvl.CloudHouseRingerNpc
+        .handles("mxnSpeaker.speakingStarted", self => self.speed.y = -2)
+        .mixin(mxnCutscene, function* () {
+            if (!lvl.CloudHouseRingerNpc.speaker.spokeOnceInCurrentScene) {
+                yield* show(`DING! It's me, ${lvl.CloudHouseRingerNpc.speaker.name}!`);
+            }
+
+            while (true) {
+                const result = yield* ask(
+                    "What do you need? DING?",
+                    Rpg.quest("GreatTower.EfficientHome.Ringer.ReceivedFish").everCompleted ? null : "An errand!",
+                    "Tell me about yourself",
+                    "Nothing",
+                );
+
+                if (result === 0) {
+                    yield* show("I would love a fish.", "It would really enhance the natural dwelling vibe. DING!");
+                    Rpg.flags.greatTower.efficientHome.ringer.toldPlayerAboutDesireForFish = true;
+                }
+                else if (result === 1) {
+                    yield* show("I'm the guardian of the bell. Also I know a secret about helium.", "D-D-D-DING!");
+                }
+                else {
+                    yield* show("I love that! DING!");
+                    break;
+                }
+            }
+        });
 }

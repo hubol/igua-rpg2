@@ -1,9 +1,11 @@
+import { DisplayObject } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { DataNpcPersona } from "../data/data-npc-persona";
+import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
 import { ask, show } from "../drama/show";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
@@ -21,7 +23,8 @@ export function scnNewBalltownFishmonger() {
 function enrichAquarium(lvl: LvlType.NewBalltownFishmonger) {
     const fishObjs = [
         objFish.forArmorer().at(lvl.Fish0).show(),
-        ...[lvl.Fish1, lvl.Fish2].map(markerObj =>
+        objFish.forRinger().at(lvl.Fish1).show(),
+        ...[lvl.Fish2].map(markerObj =>
             objFish(markerObj.x * 9999 + markerObj.y * 8888 + 800_903).at(markerObj).show()
         ),
     ];
@@ -38,6 +41,10 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
 
     if (deliveries.armorer) {
         fishObjs[0].destroy();
+    }
+
+    if (deliveries.ringer) {
+        fishObjs[1].destroy();
     }
 
     if (deliveries.armorer && deliveries.armorer !== "delivered") {
@@ -59,26 +66,47 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
             const fishRecipient = yield* ask(
                 "You want a fish delivered? That's great! Who wants a fish?",
                 Rpg.flags.newBalltown.armorer.toldPlayerAboutDesireForFish
-                    && Rpg.flags.newBalltown.fishmonger.deliveries.armorer === null
+                    && !deliveries.armorer
                     ? DataNpcPersona.Manifest.NewBalltownArmorer.name
+                    : null,
+                Rpg.flags.greatTower.efficientHome.ringer.toldPlayerAboutDesireForFish
+                    && !deliveries.ringer
+                    ? DataNpcPersona.Manifest.CloudHouseRinger.name
                     : null,
                 "I don't know",
             );
 
-            if (fishRecipient === 1) {
+            if (fishRecipient === 2) {
                 yield* show("Oh, okay. Let me know if you find an interested party!");
                 return;
             }
 
+            if (fishRecipient === 1) {
+                yield* show(
+                    `${DataNpcPersona.Manifest.CloudHouseRinger.name} in the cloud house apartment?`,
+                    "He's a bit unusual... Maybe a fish could improve him.",
+                );
+
+                yield* dramaTakeFish(fishObjs[1]);
+
+                yield* DramaInventory.receiveItems([{ kind: "key_item", id: "RingerFish" }]);
+                deliveries.ringer = "handed_off_to_player";
+
+                yield* show(
+                    "It's kind of a long walk...",
+                    "And I don't have any ballons.",
+                    "Why don't you make the delivery yourself?",
+                );
+            }
+
             if (fishRecipient === 0) {
-                yield* show(`${DataNpcPersona.Manifest.NewBalltownArmorer.name}...? Oh yeah, he had a fishtank!`);
+                yield* show(
+                    `${DataNpcPersona.Manifest.NewBalltownArmorer.name}...? Oh yeah, he had a fishtank!`,
+                    "Since he's in town, let's deliver the fish together!",
+                );
                 if (yield* ask("Ready to make the delivery with me?")) {
                     yield* show("Great!");
-                    yield sleep(500);
-                    Sfx.Cutscene.FishTake.play();
-                    objFxBurst32().at(fishObjs[0]).show();
-                    fishObjs[0].destroy();
-                    yield sleep(500);
+                    yield* dramaTakeFish(fishObjs[0]);
                     yield* show("See you outside!");
                     yield* lvl.Fishmonger.walkTo(lvl.Door.x + 30);
                     DramaMisc.departRoomViaDoor(lvl.Fishmonger);
@@ -93,4 +121,11 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
             yield* show("Okay! See you around!");
         }
     });
+}
+function* dramaTakeFish(obj: DisplayObject) {
+    yield sleep(500);
+    Sfx.Cutscene.FishTake.play();
+    objFxBurst32().at(obj).show();
+    obj.destroy();
+    yield sleep(500);
 }

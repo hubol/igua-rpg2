@@ -55,6 +55,7 @@ export function getInitialRpgProgress() {
                 fishmonger: {
                     deliveries: {
                         armorer: Null<"ready" | "arrived" | "delivered">(),
+                        ringer: Null<"handed_off_to_player">(),
                     },
                 },
             },
@@ -101,6 +102,9 @@ export function getInitialRpgProgress() {
                 },
                 efficientHome: {
                     artSeed: Null<Integer>(),
+                    ringer: {
+                        toldPlayerAboutDesireForFish: false,
+                    },
                 },
             },
         },
