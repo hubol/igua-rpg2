@@ -1,7 +1,7 @@
 import { BLEND_MODES } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
-import { factor, interpvr } from "../../lib/game-engine/routines/interp";
+import { factor, interpr, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
@@ -18,6 +18,7 @@ import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
 import { objFish } from "../objects/obj-fish";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
+import { RpgStatus } from "../rpg/rpg-status";
 import { TerrainAttributes } from "../systems/terrain-attributes";
 
 export function scnEfficientHome() {
@@ -32,9 +33,14 @@ export function scnEfficientHome() {
 }
 
 function enrichHelium(lvl: LvlType.EfficientHome) {
-    [lvl.HeliumMarker0, lvl.HeliumMarker1, lvl.HeliumMarker2].forEach((obj, index) =>
+    [lvl.HeliumMarker1, lvl.HeliumMarker2].forEach((obj, index) =>
         objHeliumExhaust()
-            .step(self => self.isAttackActive = Rpg.character.status.conditions.helium.ballons.length === index, -1)
+            .step(
+                self =>
+                    self.isAttackActive = Rpg.quest("GreatTower.EfficientHome.Ringer.ReceivedFish").everCompleted
+                        && Rpg.character.status.conditions.helium.ballons.length === index + 1,
+                -1,
+            )
             .at(obj)
             .show()
     );
@@ -111,11 +117,28 @@ function enrichRoom1(lvl: LvlType.EfficientHome) {
 }
 
 function enrichRoom2(lvl: LvlType.EfficientHome) {
+    const receivedFishQuest = Rpg.quest("GreatTower.EfficientHome.Ringer.ReceivedFish");
+    const ballons = [{ health: 100, healthMax: 100, seed: 0xc01e }];
+
+    let exhaustPrerequisitesMet = receivedFishQuest.everCompleted;
+
+    objHeliumExhaust()
+        .step(
+            self =>
+                self.isAttackActive =
+                    (Rpg.character.status.conditions.helium.ballons.length === 0 || ballons.length === 0)
+                    && exhaustPrerequisitesMet,
+            -1,
+        )
+        .at(lvl.HeliumMarker0)
+        .show();
+
     [lvl.FishCeilingBlock, lvl.FishWallBlock].forEach(obj => obj.attributes = TerrainAttributes.Decorative);
+
     objFish.forRinger()
         .at(lvl.FishMarker)
         .zIndexed(ZIndex.FrontDecals)
-        .step(self => self.visible = Rpg.quest("GreatTower.EfficientHome.Ringer.ReceivedFish").everCompleted)
+        .step(self => self.visible = receivedFishQuest.everCompleted)
         .show();
 
     lvl.CloudHouseRingerNpc
@@ -130,10 +153,11 @@ function enrichRoom2(lvl: LvlType.EfficientHome) {
 
                 const result = yield* ask(
                     "What do you need? DING?",
-                    (playerHasFish || Rpg.quest("GreatTower.EfficientHome.Ringer.ReceivedFish").everCompleted)
+                    (playerHasFish || receivedFishQuest.everCompleted)
                         ? null
                         : "An errand!",
                     playerHasFish ? "Your fish is here!" : null,
+                    receivedFishQuest.everCompleted ? "Secret helium help" : null,
                     "Tell me about yourself",
                     "Nothing",
                 );
@@ -146,9 +170,44 @@ function enrichRoom2(lvl: LvlType.EfficientHome) {
                     yield* DramaInventory.removeCount({ kind: "key_item", id: "RingerFish" }, 1);
                     yield* DramaQuests.complete("GreatTower.EfficientHome.Ringer.ReceivedFish");
                     yield* show("Wow! Fantastic!", "What a fish! A damn good fish, indeed!", "DING! DING! DING! DING!");
-                    // TODO reveal great secrets
+                    yield sleep(333);
+                    yield* show("I will now give you access to a local helium secret.");
+                    yield* lvl.CloudHouseRingerNpc.walkTo(lvl.HeliumMarker0.x);
+                    lvl.CloudHouseRingerNpc.auto.facing = 1;
+
+                    yield* show("DING! If you visit my apartment without any ballons...");
+
+                    yield interpr(ballons[0], "health").factor(factor.sine).to(0).over(1000);
+                    lvl.CloudHouseRingerNpc.mxnBallonable.rpgStatusEffects.ballonHealthDepleted(ballons[0]);
+                    ballons.length = 0;
+                    exhaustPrerequisitesMet = true;
+
+                    yield sleep(500);
+                    yield* show("...Then a helium vein will appear.");
+
+                    yield sleep(500);
+                    ballons.push(RpgStatus.createBallon());
+                    lvl.CloudHouseRingerNpc.mxnBallonable.rpgStatusEffects.ballonCreated(ballons[0]);
+                    yield sleep(500);
+
+                    yield* show("Once you have one ballon, then the vein will disappear.");
+
+                    yield* show(
+                        "You can find similar mysteries in apartments 5 and 6.",
+                        "Use the dip switches.",
+                        "I believe in you. DING!!!",
+                    );
+                    break;
                 }
                 else if (result === 2) {
+                    yield* show(
+                        "My apartment, apartment 2, will reveal a helium spot when you have no ballons. DING!",
+                        "Apartment 5 will reveal the spot when you have one ballon.",
+                        "Apartment 6 will reveal the spot when you have two ballons.",
+                        "This could be useful for repeatedly getting up the great tower. DING! SUCKA!",
+                    );
+                }
+                else if (result === 3) {
                     yield* show("I'm the guardian of the bell. Also I know a secret about helium.", "D-D-D-DING!");
                 }
                 else {
@@ -156,5 +215,6 @@ function enrichRoom2(lvl: LvlType.EfficientHome) {
                     break;
                 }
             }
-        });
+        })
+        .mxnBallonable.setInitialBallons(ballons);
 }
