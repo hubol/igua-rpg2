@@ -2,6 +2,7 @@ import { Container, DisplayObject } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { Rng } from "../../lib/math/rng";
+import { merge } from "../../lib/object/merge";
 import { mxnSpeakingMouth } from "./mxn-speaking-mouth";
 
 interface MxnSpeakerArgs {
@@ -10,10 +11,13 @@ interface MxnSpeakerArgs {
     colorSecondary: number;
 }
 
-export function mxnSpeaker(obj: DisplayObject, speaker: MxnSpeakerArgs) {
+export function mxnSpeaker(obj: DisplayObject, args: MxnSpeakerArgs) {
+    const speaker = merge(args, { spokeOnceInCurrentScene: false });
     const speakerObj = obj.merge({ speaker })
         .dispatches<"mxnSpeaker.speakingStarted">()
         .dispatches<"mxnSpeaker.speakingEnded">();
+
+    speakerObj.handles("mxnSpeaker.speakingEnded", () => speaker.spokeOnceInCurrentScene = true);
 
     if (obj instanceof Container) {
         const speakingMouthObj = obj.findIs(mxnSpeakingMouth).last;
