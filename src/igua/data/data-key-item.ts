@@ -61,6 +61,11 @@ export namespace DataKeyItem {
                 description: "Delicious meal for Sheeb, the ancient tunnel maintainer.",
                 texture: null,
             },
+            RingerFish: {
+                name: "Ding Ding Saudah's Fish",
+                description: "Fish for Ding Ding Saudah, the eccentric in apartment 2.",
+                texture: null,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );
