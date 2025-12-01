@@ -15,6 +15,7 @@ import { objGate } from "../objects/obj-gate";
 import { objIdol } from "../objects/obj-idol";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { objIntelligenceBackground } from "../objects/obj-intelligence-background";
+import { objIntelligenceSign } from "../objects/obj-intelligence-sign";
 import { createPlayerObj, playerObj } from "../objects/obj-player";
 import { objSign } from "../objects/obj-sign";
 import { objPipe, objPipeSlope, objSolidBlock, objSolidSlope } from "../objects/obj-terrain";
@@ -80,6 +81,7 @@ export const OgmoEntityResolvers = {
     StashPocket: objStashPocket,
     PlayerDev: objDevPlayer,
     WeightedPedestal: objWeightedPedestal,
+    IntelligenceSign: (entity) => objIntelligenceSign(entity.values),
 } satisfies OgmoEntityResolverBase;
 
 function createOrConfigurePlayerObj(

@@ -352,6 +352,16 @@
           "originX": 12,
           "originY": 12,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceSign",
+          "id": 33,
+          "_eid": "61823517",
+          "x": 448,
+          "y": 2224,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "Great Tower", "message": "The Great Tower... I remember that place. I always needed 3 ballons.", "min": 0, "max": 1, "name": "", "depth": 0}
         }
       ]
     },
@@ -4145,7 +4155,8 @@
           "texture": "shapes/confetti 45deg.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 16,
@@ -4157,7 +4168,8 @@
           "texture": "shapes/confetti 45deg.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 24,
@@ -4260,7 +4272,8 @@
           "texture": "town/colossus/miniature 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

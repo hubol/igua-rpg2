@@ -378,7 +378,7 @@
         {"name": "visible", "definition": "Boolean", "display": 0, "defaults": true}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/pipe slope.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAsCAYAAAAEuLqPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAD2SURBVFhHxdXJDYMwFEVRoBNapBBaoSSXkuhaicVk8PCHswhZ4NwngZTB07Ztn/H33Rxxri4D/vEQgv2AfXyeZ9sB5zjMBtzFYTIgFzd5B57iUB3wFofagJI4VAaUxiE+oCYO0QG1cYgNaIkvyzKKDGiNc+0e0BNH14DeOJoHSMTRNEAqjuoBknFUDZCOo3iARhxFA7TieL1JM47HG7XjyN5sEcftAas4Locs4zgctI4jHfaII/6AVxyjZxwTH15xTJ5xTJ5xxEcAjzjSO5CjGUd8B3K040iP4MwijtsBVnFcBljGcRhgHUca4BGP1nWN/wU+huELWt5AQF4RmxAAAAAASUVORK5CYII="
     },
@@ -572,7 +572,7 @@
         {"name": "isSpecial", "definition": "Boolean", "display": 2, "defaults": false}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/sign.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAdCAYAAADoxT9SAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFPSURBVFhHY2SgIliR5/8fyqQriJi0kRHukYFyBCXA1kcGymJgAHuEFp4QFxaAskgDapY8UBYqeKgMZaABnecsYJppoGJCio8LKyYXMNLbIzJCvFAWdqBoxQ9loQJcMSJ/F0Iz7m+MJ+iRl28/QFmUAUKegAFSPPNv8UeGJ+8+MzBB+UMCgEIfhkEeAGEYoGvSIjZGSAWgGKF7HsEFyPUkyBMgMKSSFjIAeQDmCRAYNDFCKRiyMYIOiCp+qQWoVYxjA8MnRkbzyCADIydpvfz4FcpCBeL83FAWbQCp3QCCMQJyMDY82MCwyew08QioDw1lkgRa/QxR3KKsIAdl4QfwPjsxnrn74BGUBQHVm85TdeACBNA9AgLE2kNQETbDQWCweWRQFb88gsIYmFgwcipEbKEEwoMNjJwYGSqA6JJnYrwLSomSv3AP1Ust8gEDAwBIVG4j090eZwAAAABJRU5ErkJggg=="
     },
@@ -621,7 +621,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true}
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true}
     },
     {
       "exportID": "90326278",
@@ -1500,6 +1500,55 @@
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/weighted pedestal.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAYCAYAAACFms+HAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACJSURBVFhHYxiqgBFKowD/2P//ocwBBxsXM2J1IxOUHnJg1OH0BqMOpzfAmmPxgVwe1BJn8hfsuR4foIYZo0mF3gAjiiT/bxo0lQ8MPGf0w3Dn8AjxwRjaMIAe6nDOYHY0DCA7HswYCo6GAZjjGYeSo2EA5PjRcpzeYNTh9AajDqc3GHU4fQEDAwBxPSAoXHzJ7gAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "61823517",
+      "name": "IntelligenceSign",
+      "limit": -1,
+      "size": {"x": 50, "y": 29},
+      "origin": {"x": 0, "y": 26},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "title", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "message", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "min", "definition": "Integer", "display": 2, "defaults": 0, "bounded": false, "min": 0, "max": 100},
+        {"name": "max", "definition": "Integer", "display": 2, "defaults": 1, "bounded": false, "min": 1, "max": 100},
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/intelligence sign.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAdCAMAAADfG89gAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAeUExURYFPqNRr5f/YAJZfv91rreBv8pdcxHBEkWAxhQAAAApODFYAAAAKdFJOU////////////wCyzCzPAAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAGHRFWHRTb2Z0d2FyZQBQYWludC5ORVQgNS4xLjL7vAO2AAAAtmVYSWZJSSoACAAAAAUAGgEFAAEAAABKAAAAGwEFAAEAAABSAAAAKAEDAAEAAAACAAAAMQECABAAAABaAAAAaYcEAAEAAABqAAAAAAAAAPJ2AQDoAwAA8nYBAOgDAABQYWludC5ORVQgNS4xLjIAAwAAkAcABAAAADAyMzABoAMAAQAAAAEAAAAFoAQAAQAAAJQAAAAAAAAAAgABAAIABAAAAFI5OAACAAcABAAAADAxMDAAAAAAjjvBV9MXvE4AAADGSURBVDhPvZRREoIwDAUbFbT3v7Av6UqL0IKj4/4Q8rKlZQZS3pKGZCmU5zAzSYWLQ53SdSH6jt2CaWKE9uIwX4W+Up/jzDNdB0Ubq6uFx3AwF0UX08WKM7+2UIa3Cripg5upJoShQrlWPKBsOTB2lQh2hL7Se7o4HZQ35iihAiYGygYmBnQ31uf0WSofK/eAmzVSOF1A9wimA1rfw08AHoJA6NunSskThtZ40CTLgtH/mRLvklp8o0S/CRrekj8rJaEckPMTnt0TDxB9PckAAAAASUVORK5CYII="
     }
   ],
   "tilesets": []

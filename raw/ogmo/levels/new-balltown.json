@@ -1154,6 +1154,16 @@
           "originX": 0,
           "originY": 26,
           "values": {"title": "Mines", "message": "Famous New Balltown mines ahead.", "name": "", "depth": 0, "isSpecial": false}
+        },
+        {
+          "name": "IntelligenceSign",
+          "id": 11,
+          "_eid": "61823517",
+          "x": 1088,
+          "y": 560,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "Idol", "message": "The previous owner is a ballfruit fanatic.", "min": 2, "max": 3, "name": "", "depth": 0}
         }
       ]
     },
