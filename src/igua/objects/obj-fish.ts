@@ -68,10 +68,14 @@ export function objFish(seed: Integer) {
         .coro(function* (self) {
             while (true) {
                 yield sleep(Rng.float(2500, 5000));
-                objFxBubble4().at(self).show();
+                if (self.visible) {
+                    objFxBubble4().at(self).show();
+                }
                 if (self.speed.vlength > 0.5 && Rng.bool()) {
                     yield sleep(Rng.float(100, 400));
-                    objFxBubble4().at(self).show();
+                    if (self.visible) {
+                        objFxBubble4().at(self).show();
+                    }
                 }
             }
         });
