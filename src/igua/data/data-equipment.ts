@@ -156,6 +156,12 @@ export namespace DataEquipment {
                     };
                 })(),
             },
+            MusicTempoUp: {
+                name: "Allegro Shoe",
+                texture: null,
+                description: "World feels faster",
+                buffs: (model, bonus) => model.audio.musicTempoAdjustmentFactor += 10 * (bonus + 1),
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,

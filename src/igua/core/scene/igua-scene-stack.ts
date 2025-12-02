@@ -7,7 +7,9 @@ import { merge } from "../../../lib/object/merge";
 import { renderer } from "../../current-pixi-renderer";
 import { forceGameLoop } from "../../globals";
 import { objCamera } from "../../objects/obj-camera";
+import { Rpg } from "../../rpg/rpg";
 import { scnWorldMap } from "../../scenes/scn-world-map";
+import { Jukebox } from "../igua-audio";
 import { IguaLayers } from "../igua-layers";
 
 interface IguaSceneMeta {
@@ -22,6 +24,8 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
     const parallaxStage = new Container().named("Parallax Stage");
     const stage = new Container().named("Stage");
     stage.sortableChildren = true;
+
+    stage.step(() => Jukebox.rate = 1 + Rpg.character.buffs.audio.musicTempoAdjustmentFactor / 100);
 
     const isWorldMap = source === scnWorldMap;
     const camera = objCamera(isWorldMap);

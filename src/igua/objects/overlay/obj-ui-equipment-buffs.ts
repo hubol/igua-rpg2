@@ -234,6 +234,8 @@ const getBuffInformations = (function () {
             "integer",
             "beneft_when_positive",
         ),
+        // TODO it is not necessarily a benefit
+        buff("audio.musicTempoAdjustmentFactor", "Music Tempo Adjust", "percent", "beneft_when_positive"),
     );
 
     const fn = new Function(

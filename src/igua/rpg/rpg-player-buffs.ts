@@ -10,6 +10,9 @@ export namespace RpgPlayerBuffs {
                 intelligence: 0,
                 strength: 0,
             },
+            audio: {
+                musicTempoAdjustmentFactor: <PercentAsInteger> 0,
+            },
             combat: {
                 defense: {
                     physical: <PercentAsInteger> 0,
