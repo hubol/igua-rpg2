@@ -13,6 +13,8 @@ import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { DataSlotMachines } from "../data/data-slot-machines";
 import { Input, scene } from "../globals";
+import { objAngelSnail } from "../objects/enemies/obj-angel-snail";
+import { playerObj } from "../objects/obj-player";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 
 const { rules, sym } = DataSlotMachines.BasicThreeReel;
@@ -30,6 +32,7 @@ export function scnCasino() {
     Lvl.Dummy();
     scene.style.backgroundTint = 0x1c1336;
     objSlot(rules, { reel: { gap: 90 }, slot: { gap: 50, width: 65, height: 65 } }).at(160, 30).show();
+    objAngelSnail().at(playerObj).add(0, -32).show();
 }
 
 interface SlotMachineRenderConfig {
