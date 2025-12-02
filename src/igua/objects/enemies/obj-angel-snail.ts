@@ -4,6 +4,8 @@ import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { ValuesOf } from "../../../lib/types/values-of";
+import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
+import { mxnPhysics } from "../../mixins/mxn-physics";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
@@ -33,7 +35,7 @@ const themes = (() => {
             shell: txShell,
         },
         tints: {
-            map: [0xFF77B0, 0x715EFF, 0x000cad] as MapRgbFilter.Map,
+            map: [0xb9c50c, 0x1a0b92, 0x477a0c] as MapRgbFilter.Map,
         },
     });
 
@@ -48,7 +50,9 @@ export function objAngelSnail() {
     const theme = themes.common;
 
     const bodyObj = objAngelSnailBody(theme);
-    return container(theme.createSprite("shell"), bodyObj)
+    return container(container(theme.createSprite("shell"), bodyObj).pivoted(20, 45))
+        .mixin(mxnPhysics, { gravity: 0.2, physicsRadius: 8, physicsOffset: [0, -8] })
+        .mixin(mxnDetectPlayer)
         .filtered(new MapRgbFilter(...theme.tints.map))
         .coro(function* (self) {
             while (true) {
@@ -56,6 +60,7 @@ export function objAngelSnail() {
                 yield sleep(6000);
                 yield interp(bodyObj.controls, "exposedUnit").to(0).over(700);
                 yield sleep(1000);
+                self.flipH(self.scale.x * -1);
             }
         });
 }
