@@ -29,6 +29,7 @@ export interface ObjAngelEyesArgs {
 }
 
 const v = vnew();
+const v2 = vnew();
 
 export function objAngelEyes(args: ObjAngelEyesArgs) {
     // TODO use rest of configuration!
@@ -118,9 +119,12 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
             injuredLeftEyeObj.tint = leftPupilObj.tint;
             injuredRightEyeObj.tint = rightPupilObj.tint;
 
+            const effectiveScaleX = self.worldTransform.a;
+
             for (let i = self.pupilPolarOffsets.length - 1; i >= 0; i--) {
-                const polar = self.pupilPolarOffsets[i];
-                if (polar) {
+                const polarOffset = self.pupilPolarOffsets[i];
+                if (polarOffset) {
+                    const polar = v2.at(polarOffset).scale(effectiveScaleX, 1);
                     leftPupilObj.at(lerpPupilPosition(leftPupilPositionConfig, polar));
                     rightPupilObj.at(lerpPupilPosition(rightPupilPositionConfig, polar));
                     break;
