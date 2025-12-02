@@ -1,3 +1,4 @@
+import { Graphics } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
@@ -5,7 +6,9 @@ import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { ValuesOf } from "../../../lib/types/values-of";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
+import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnPhysics } from "../../mixins/mxn-physics";
+import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
@@ -20,7 +23,7 @@ const themes = (() => {
             gap: 4,
             pupilRestStyle: { kind: "cross_eyed", offsetFromCenter: 3 },
             pupilsTx: Tx.Enemy.Snail.Pupil0,
-            pupilsTint: 0xffffff,
+            pupilsTint: 0x0000ff,
             pupilsMirrored: true,
             scleraTx: Tx.Enemy.Snail.Sclera0,
             sclerasMirrored: true,
@@ -48,20 +51,47 @@ type Theme = ValuesOf<typeof themes>;
 
 export function objAngelSnail() {
     const theme = themes.common;
+    const rank = RpgEnemyRank.create({
+        status: {
+            healthMax: 80,
+            guardingDefenses: {
+                physical: 100,
+            },
+        },
+    });
 
     const bodyObj = objAngelSnailBody(theme);
-    return container(container(theme.createSprite("shell"), bodyObj).pivoted(20, 45))
+    const hurtboxObj = new Graphics()
+        .beginFill(0xff0000)
+        .drawRect(-7, -32, 32, 32)
+        .step(self => {
+            // TODO this is pretty shitty
+            // Dynamic hurtboxes should not be so hard
+            self.x = bodyObj.controls.exposedUnit < 0.1 ? -9 : 0;
+            self.y = bodyObj.controls.exposedUnit < 0.1 ? 2 : 0;
+        })
+        .invisible();
+
+    return container(
+        hurtboxObj,
+        container(theme.createSprite("shell"), bodyObj)
+            .pivoted(20, 45)
+            .filtered(new MapRgbFilter(...theme.tints.map)),
+    )
         .mixin(mxnPhysics, { gravity: 0.2, physicsRadius: 8, physicsOffset: [0, -8] })
         .mixin(mxnDetectPlayer)
-        .filtered(new MapRgbFilter(...theme.tints.map))
+        .mixin(mxnEnemy, { rank, hurtboxes: [hurtboxObj] })
         .coro(function* (self) {
             while (true) {
                 yield interp(bodyObj.controls, "exposedUnit").to(1).over(400);
-                yield sleep(6000);
+                yield sleep(1000);
                 yield interp(bodyObj.controls, "exposedUnit").to(0).over(700);
                 yield sleep(1000);
                 self.flipH(self.scale.x * -1);
             }
+        })
+        .step((self) => {
+            self.status.state.isGuarding = bodyObj.controls.exposedUnit < 0.2;
         });
 }
 
