@@ -160,6 +160,10 @@ export class SoundInstance {
     }
 
     set rate(value: number) {
+        if (value === this.rate) {
+            return;
+        }
+
         const currentContextTime = this._sourceNode.context.currentTime;
         const timeSinceLastRateSet = currentContextTime - this._lastRateSetContextTime;
         this._lastRateSetElapsedTime += timeSinceLastRateSet * this.rate;
