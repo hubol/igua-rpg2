@@ -162,6 +162,15 @@ export namespace DataEquipment {
                 description: "World feels faster",
                 buffs: (model, bonus) => model.audio.musicTempoAdjustmentFactor += 10 * (bonus + 1),
             },
+            WalkTopSpeedAndMusicTempoDown: {
+                name: "Sticky, Tacky Shoe",
+                texture: null,
+                description: "World feels slower, also move slower",
+                buffs: (model, bonus) => {
+                    model.audio.musicTempoAdjustmentFactor -= 10 * (bonus + 1);
+                    model.motion.walk.topSpeedIncreaseFactor -= 20 * (bonus + 1);
+                },
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,

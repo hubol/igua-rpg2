@@ -125,7 +125,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     let landedThenJumpedHorizontalSpeedBoostUnit = 0;
 
     function getWalkingTopSpeed() {
-        let speed = 2.5;
+        let speed = 2.5 * Math.max(0, 1 + Rpg.character.buffs.motion.walk.topSpeedIncreaseFactor / 100);
         speed += 0.75 * Math.min(1, Rpg.character.status.conditions.poison.level);
         speed += 0.5 * Math.max(0, Rpg.character.status.conditions.poison.level - 1);
         return speed + landedThenJumpedHorizontalSpeedBoostUnit * 2;

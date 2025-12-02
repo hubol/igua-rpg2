@@ -71,6 +71,9 @@ export namespace RpgPlayerBuffs {
                 jump: {
                     bonusAtSpecialSigns: 0,
                 },
+                walk: {
+                    topSpeedIncreaseFactor: <PercentAsInteger> 0,
+                },
             },
         };
     }

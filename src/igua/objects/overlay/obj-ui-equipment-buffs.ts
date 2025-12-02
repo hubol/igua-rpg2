@@ -147,7 +147,7 @@ function objUiEquipmentBuff(
 ) {
     let prefix = "";
     if (value !== 0) {
-        prefix = value > 0 ? "+" : "-";
+        prefix = value > 0 ? "+" : "";
     }
 
     const delta = info.units === "integer" ? String(value) : (value + "%");
@@ -226,6 +226,7 @@ const getBuffInformations = (function () {
         buff("experience.bonusFactorWhileWet.combat", "Combat XP Bonus (While Wet)", "percent", "beneft_when_positive"),
         buff("experience.bonusFactorWhileWet.jump", "Jump XP Bonus (While Wet)", "percent", "beneft_when_positive"),
         buff("motion.jump.bonusAtSpecialSigns", "Special Jump", "integer", "beneft_when_positive"),
+        buff("motion.walk.topSpeedIncreaseFactor", "Walk Top Speed", "percent", "beneft_when_positive"),
         buff("combat.defense.physical", "Phys DEF", "percent", "beneft_when_positive"),
         buff("combat.defense.faction.miner", "Defense Against Miners", "percent", "beneft_when_positive"),
         buff(
