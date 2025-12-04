@@ -101,7 +101,7 @@ export namespace DataShop {
                         product: { kind: "equipment", id: "JumpAtSpecialSignsRing", level: 1 },
                     },
                     {
-                        initialQuantity: 5,
+                        initialQuantity: 4,
                         price: { currency: "valuables", deltaSold: 0, initial: 10 },
                         product: { kind: "key_item", id: "FlopBlindBox" },
                     },
