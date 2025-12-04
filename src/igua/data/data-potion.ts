@@ -44,19 +44,19 @@ export namespace DataPotion {
                 name: "Pathetic Meal",
                 description: "Meal for a cheapskate. Recover negligible health.",
                 stinkLineTint: 0xD882D1,
-                texture: null,
+                texture: Tx.Collectibles.Potion.PatheticMeal,
             },
             RestoreHealthRestaurantLevel1: {
                 name: "Unremarkable Meal",
                 description: "Average meal. Recover some health.",
                 stinkLineTint: 0xD882D1,
-                texture: null,
+                texture: Tx.Collectibles.Potion.UnremarkableMeal,
             },
             RestoreHealthRestaurantLevel2: {
                 name: "Celebratory Meal",
                 description: "Oversized meal. Recover substantial health.",
                 stinkLineTint: 0xD882D1,
-                texture: null,
+                texture: Tx.Collectibles.Potion.CelebratoryMeal,
             },
             Poison: {
                 name: "Poison",
