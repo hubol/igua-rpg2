@@ -8,6 +8,7 @@ import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnPhysics, PhysicsFaction } from "../../mixins/mxn-physics";
+import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { playerObj } from "../obj-player";
@@ -159,12 +160,9 @@ export function objAngelBouncing() {
 
             // if (obj.portal && playerIsWeakToPortalFluid() && (player.collides(spikeBall) || player.collides(mask))) {
             //     teleportToTheRoomOfDoors();
-        })
-        .step(self => {
-            if (playerObj.collides(spikeBall)) {
-                self.strikePlayer(atkSpikeBall);
-            }
-        }, 1001);
+        });
+
+    spikeBall.mixin(mxnRpgAttack, { attack: atkSpikeBall, attacker: obj.status });
 
     obj.speed.x = 0.75;
 

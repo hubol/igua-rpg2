@@ -75,13 +75,6 @@ export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
             }
         })
         .merge({
-            // TODO should this be on the `mxnEnemy`?
-            // Or actually... should this be removed?
-            strikePlayer(attack: RpgAttack.Model) {
-                playerObj.damage(attack, status);
-            },
-        })
-        .merge({
             mxnEnemy: {
                 soulAnchorObj: args.soulAnchorObj ?? obj,
             },
