@@ -83,10 +83,10 @@ export namespace DataPotion {
                 texture: Tx.Collectibles.Potion.Wetness,
             },
             ForgetLooseValuableCollection: {
-                name: "Forgeddit",
-                description: "Renowned charm. Loose valuables forgive your transgressions.",
+                name: "Forgeddit Fruid Snags",
+                description: "Renowned flavor and texture. Loose valuables forgive your transgressions.",
                 stinkLineTint: 0x808080,
-                texture: null,
+                texture: Tx.Collectibles.Potion.FruitSnacks,
             },
             __Fallback__: {
                 name: "???",

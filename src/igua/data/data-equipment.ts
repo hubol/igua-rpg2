@@ -84,8 +84,8 @@ export namespace DataEquipment {
                 },
             },
             BallonLastLonger: {
-                name: "Load Lightener",
-                texture: null,
+                name: "Float Kernel",
+                texture: Tx.Collectibles.Equipment.Bubbles,
                 description: "Ballons drain slower",
                 buffs: (() => {
                     const values = [50, 67, 75, 80, 85, 90, 93, 95, 97, 98, 99];
@@ -104,7 +104,7 @@ export namespace DataEquipment {
             },
             DefensePhysicalAndPerfectBonus: {
                 name: "Def. Charm",
-                texture: null,
+                texture: Tx.Collectibles.Equipment.Brick,
                 description: "Increases physical defense, increases combat XP on perfect claw attack",
                 buffs: (() => {
                     const values = [10, 15, 20, 25, 30, 32, 34, 36, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50];
@@ -117,19 +117,19 @@ export namespace DataEquipment {
             },
             StrengthUp: {
                 name: "Strong Icon",
-                texture: null,
+                texture: Tx.Collectibles.Equipment.Dumbell,
                 description: "Increases strength",
                 buffs: (model, bonus) => model.attributes.strength += 1 + bonus,
             },
             HealthUp: {
                 name: "Healthy Icon",
-                texture: null,
+                texture: Tx.Collectibles.Equipment.Heart,
                 description: "Increases health",
                 buffs: (model, bonus) => model.attributes.health += 5 + bonus * 2,
             },
             WetnessCapacityUp: {
                 name: "Sponge",
-                texture: null,
+                texture: Tx.Collectibles.Equipment.Sponge,
                 description: "Increases maximum wetness",
                 buffs: (model, bonus) => {
                     model.conditions.wetnessMaxIncreaseFactor += (1 + bonus) * 100;
@@ -139,7 +139,7 @@ export namespace DataEquipment {
             },
             PoisonResistance: {
                 name: "Vaccine Shoe",
-                texture: null,
+                texture: Tx.Collectibles.Equipment.VaccinatedShoe,
                 description: "Increases resistance to poison, poison damage is applied more slowly",
                 buffs: (() => {
                     const maxValues = [50, 75, 95, 110, 120, 129, 137, 144, 150];
@@ -150,21 +150,21 @@ export namespace DataEquipment {
                     }
 
                     return (model, bonus) => {
-                        // TODO infinity bonuses
                         model.conditions.poisonMaxIncreaseFactor += maxValues[bonus] ?? maxValues.last;
                         model.conditions.poisonRateReductionFactor += rateValues[bonus] ?? rateValues.last;
+                        model.loot.pocket.bonusChance += bonus > 5 ? (10 + (bonus - 6) * 3) : 0;
                     };
                 })(),
             },
             MusicTempoUp: {
-                name: "Allegro Shoe",
-                texture: null,
+                name: "Artifact of Allegro",
+                texture: Tx.Collectibles.Equipment.Spedometer,
                 description: "World feels faster",
                 buffs: (model, bonus) => model.audio.musicTempoAdjustmentFactor += 10 * (bonus + 1),
             },
             WalkTopSpeedAndMusicTempoDown: {
-                name: "Sticky, Tacky Shoe",
-                texture: null,
+                name: "Anvilled Shoe",
+                texture: Tx.Collectibles.Equipment.Anvil,
                 description: "World feels slower, also move slower",
                 buffs: (model, bonus) => {
                     model.audio.musicTempoAdjustmentFactor -= 10 * (bonus + 1);

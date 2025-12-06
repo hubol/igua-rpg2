@@ -59,12 +59,12 @@ export namespace DataKeyItem {
             TunnelGuyOrder: {
                 name: "Sheeb's Order",
                 description: "Delicious meal for Sheeb, the ancient tunnel maintainer.",
-                texture: null,
+                texture: Tx.Collectibles.Key.SheebMeal,
             },
             RingerFish: {
                 name: "Ding Ding Saudah's Fish",
                 description: "Fish for Ding Ding Saudah, the eccentric in apartment 2.",
-                texture: null,
+                texture: Tx.Collectibles.Key.DingDingFish,
             },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
