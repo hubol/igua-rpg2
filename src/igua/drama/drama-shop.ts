@@ -352,21 +352,15 @@ function objStockPrice(item: RpgStock) {
     );
 }
 
-// TODO this must be exhaustive
-// maybe a different approach
-const possibleCurrencies: RpgEconomy.Currency.Id[] = [
-    "valuables",
-    "mechanical_idol_credits",
-    ...experienceIndicatorConfigsArray.map(({ experienceKey }) => experienceKey),
-];
-
 const possibleCurrencyIndices: Record<RpgEconomy.Currency.Id, Integer> = Object.assign(
     {},
-    ...possibleCurrencies.map((currency, index) => ({ [currency]: index })),
+    ...RpgEconomy.Currency.Manifest.map((currency, index) => ({ [currency]: index })),
 );
 
 function objPlayerStatus(stocks: ReadonlyArray<RpgStock>) {
-    const currenciesInStocks = possibleCurrencies.filter(currency => stocks.some(item => item.currency === currency));
+    const currenciesInStocks = RpgEconomy.Currency.Manifest.filter(currency =>
+        stocks.some(item => item.currency === currency)
+    );
     const currencyObjs = currenciesInStocks.reverse().map((currency, i) =>
         objCurrencyAmount(() => Rpg.wallet.count(currency), currency, true)
             .merge({ currency })
