@@ -25,11 +25,6 @@ export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
     const { status, loot } = clone(args.rank);
 
     const died = () => {
-        // TODO needs more
-        // Particle effects
-        // Might need to be overrideable too, actually
-        // Thinking about the dassmann fight from igua 1
-        Sfx.Impact.DefeatEnemy.play();
         const drop = RpgLoot.Methods.drop(loot, status, Rpg.character.buffs.loot);
         objLootDrop(drop).at(enemyObj.mxnEnemy.soulAnchorObj.getWorldPosition()).show();
         enemyObj.dispatch("mxnEnemy.died");
