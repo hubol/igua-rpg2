@@ -51,7 +51,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
     }
 
     lvl.IguanaNpc.x -= 32;
-    lvl.IguanaNpc.setFacingOverrideAuto(1);
+    lvl.IguanaNpc.auto.setFacingImmediately(1);
 
     fishObj.isMoving = false;
 

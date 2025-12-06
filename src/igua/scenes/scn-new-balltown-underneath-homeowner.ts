@@ -30,7 +30,7 @@ function enrichEnemyPresence(lvl: LvlType.NewBalltownUnderneathHomeowner) {
     else {
         lvl.Homeowner.visible = false;
         lvl.Homeowner.at(lvl.HomeownerAppearPosition);
-        lvl.Homeowner.setFacingOverrideAuto(1);
+        lvl.Homeowner.auto.setFacingImmediately(1);
 
         Cutscene.play(function* () {
             yield sleep(500);

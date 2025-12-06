@@ -95,13 +95,11 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
         set facing(value: Polar) {
             autoFacingTarget = value;
         },
+        setFacingImmediately(value: Polar) {
+            autoFacingTarget = value;
+            puppet.facing = value;
+        },
     };
-
-    // TODO move into auto?
-    function setFacingOverrideAuto(value: Polar) {
-        autoFacingTarget = value;
-        puppet.facing = value;
-    }
 
     const puppet = objIguanaPuppet(looks)
         // TODO not sure if that is the correct physics faction...
@@ -135,7 +133,6 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             },
             walkTo,
             auto,
-            setFacingOverrideAuto,
         })
         .step(() => {
             const effectiveWalkingSpeed = scene.isWorldMap ? puppet.speed.vlength : Math.abs(puppet.speed.x);

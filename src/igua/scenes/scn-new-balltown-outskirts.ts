@@ -99,7 +99,7 @@ function enrichFarmer(lvl: LvlType.NewBalltownOutskirts) {
         // TODO farmer flashes for 1 frame. I think cutscene runner needs to be lowest priority!
         scene.camera.mode = "follow_player";
         lvl.FarmerNpc.at(startingPosition);
-        lvl.FarmerNpc.setFacingOverrideAuto(1);
+        lvl.FarmerNpc.auto.setFacingImmediately(1);
     });
 }
 
