@@ -30,8 +30,6 @@ import { StepOrder } from "./step-order";
 
 const PlayerConsts = {
     // TODO probably not constants, probably derived from status
-    WalkingAcceleration: 0.3,
-    WalkingDeceleration: 0.2,
     JumpSpeed: -3,
     VariableJumpSpeedMaximum: -1.5,
     VariableJumpDelta: -0.095,
