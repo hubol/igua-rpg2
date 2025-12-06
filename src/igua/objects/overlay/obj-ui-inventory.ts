@@ -385,7 +385,7 @@ function objUiItemInfo(selectedObjSupplier: () => DisplayObject | undefined, qui
     return container(
         new Graphics().lineStyle({ join: LINE_JOIN.BEVEL, alignment: 1, width: 4, color: 0x808080 })
             .beginFill(0x808080)
-            .drawRect(0, 0, 168, 48),
+            .drawRect(0, 0, 168, 55),
         descriptionObj,
         nameObj,
     )
