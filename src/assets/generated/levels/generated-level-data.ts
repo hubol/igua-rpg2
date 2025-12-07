@@ -566,12 +566,11 @@ export const Lvl = {
       fromEfficient7: e(r["Checkpoint"], { x: 752, y: 792, flippedX: false, values: { name: "fromEfficient7", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       Puddle: e(r["Puddle"], { x: 1352, y: 192, width: 136, values: { name: "", depth: 0 }, tint: 0x68a8d0 }, "FrontEntities"),
       ArtRegion: e(r["Region"], { x: 176, y: 96, width: 64, height: 96, values: { name: "ArtRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
-      NeatFreakUnsafeRegion: e(r["Region"], { x: 232, y: 376, width: 184, height: 144, values: { name: "NeatFreakUnsafeRegion", depth: 0 }, tint: 0xff0000 }, "RegionEntities"),
+      NeatFreakUnsafeRegion: e(r["Region"], { x: 208, y: 376, width: 208, height: 152, values: { name: "NeatFreakUnsafeRegion", depth: 0 }, tint: 0xff0000 }, "RegionEntities"),
       HeliumMarker0: e(r["Marker"], { x: 1104, y: 200, values: { name: "HeliumMarker0", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       HeliumMarker1: e(r["Marker"], { x: 1312, y: 496, values: { name: "HeliumMarker1", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       HeliumMarker2: e(r["Marker"], { x: 312, y: 792, values: { name: "HeliumMarker2", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       FishMarker: e(r["Marker"], { x: 1437, y: 198, values: { name: "FishMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
-      NeatFreakSafeMarker: e(r["Marker"], { x: 184, y: 520, values: { name: "NeatFreakSafeMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   GiantIguanaStatue: () => {
