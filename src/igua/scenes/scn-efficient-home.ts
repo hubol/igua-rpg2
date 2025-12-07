@@ -10,7 +10,7 @@ import { ZIndex } from "../core/scene/z-index";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
-import { layers, scene } from "../globals";
+import { Cutscene, layers, scene } from "../globals";
 import { mxnFxAlphaVisibility } from "../mixins/effects/mxn-fx-alpha-visibility";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objEsotericArt } from "../objects/esoteric/obj-esoteric-art";
@@ -30,6 +30,7 @@ export function scnEfficientHome() {
     enrichRoom0(lvl);
     enrichRoom1(lvl);
     enrichRoom2(lvl);
+    enrichRoom3(lvl);
 }
 
 function enrichHelium(lvl: LvlType.EfficientHome) {
@@ -217,4 +218,20 @@ function enrichRoom2(lvl: LvlType.EfficientHome) {
             }
         })
         .mxnBallonable.setInitialBallons(ballons);
+}
+
+function enrichRoom3(lvl: LvlType.EfficientHome) {
+    lvl.CloudHouseNeatFreakNpc.coro(function* (self) {
+        while (true) {
+            // TODO only if player is wearing shoes
+            yield () =>
+                playerObj.x >= lvl.NeatFreakUnsafeRegion.x && playerObj.speed.x > 0
+                && playerObj.collides(lvl.NeatFreakUnsafeRegion);
+            yield Cutscene.play(function* () {
+                playerObj.speed.y = -2;
+                playerObj.speed.x = -6;
+                yield sleep(500);
+            }, { speaker: self }).done;
+        }
+    });
 }
