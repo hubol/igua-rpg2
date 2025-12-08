@@ -31,14 +31,14 @@ export class RpgPlayerAggregatedBuffs {
 
     getAggregatedBuffs(): Readonly<RpgPlayerBuffs.Model> {
         const sceneMutatorFn = getSceneMutatorFn();
-        const loadoutUpdatesCount = this._equipment.loadoutUpdatesCount;
+        const loadoutUpdatesCount = this._equipment.loadout.updatesCount;
 
         if (
             !this._cachedBuffs
             || this._cacheKeys.loadoutUpdatesCount !== loadoutUpdatesCount
             || this._cacheKeys.sceneMutatorFn !== sceneMutatorFn
         ) {
-            const loadoutBuffs = clone(this._equipment.loadoutBuffs);
+            const loadoutBuffs = clone(this._equipment.loadout.buffs);
             sceneMutatorFn(loadoutBuffs, 0);
 
             this._cachedBuffs = loadoutBuffs;

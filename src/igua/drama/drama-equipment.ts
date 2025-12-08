@@ -81,7 +81,7 @@ function* upgrade() {
         yield () => removedItemObj.destroyed;
     }
 
-    const freeLoadoutIndex = Rpg.inventory.equipment.loadout.findIndex(item => item === null);
+    const freeLoadoutIndex = Rpg.inventory.equipment.loadout.items.findIndex(item => item === null);
 
     const itemFigureObj = DramaItem.createReceivedItemFigureObjAtSpeaker(equipmentToUpgrade.resultingEquipment);
 

@@ -84,17 +84,30 @@ export class RpgCharacterEquipment {
         return this._state.list;
     }
 
-    get loadout(): Readonly<RpgEquipmentLoadout.Model> {
-        return this._loadout;
-    }
+    readonly loadout = (() => {
+        const self = this;
 
-    get loadoutBuffs(): Readonly<RpgPlayerBuffs.Model> {
-        return this._loadoutBuffs;
-    }
+        return {
+            get buffs(): Readonly<RpgPlayerBuffs.Model> {
+                return self._loadoutBuffs;
+            },
+            get isEmpty() {
+                for (let i = 0; i < 4; i++) {
+                    if (self._loadout[i]) {
+                        return false;
+                    }
+                }
 
-    get loadoutUpdatesCount() {
-        return this._loadoutUpdatesCount;
-    }
+                return true;
+            },
+            get items(): Readonly<RpgEquipmentLoadout.Model> {
+                return self._loadout;
+            },
+            get updatesCount() {
+                return self._loadoutUpdatesCount;
+            },
+        };
+    })();
 
     receive(equipmentId: DataEquipment.Id, level: Integer) {
         if (level < 1) {

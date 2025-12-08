@@ -72,7 +72,7 @@ function objUiInventoryImpl() {
 function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
     const uiEquipmentObjs = range(4).map(i =>
         objUiEquipment(
-            () => Rpg.inventory.equipment.loadout[i],
+            () => Rpg.inventory.equipment.loadout.items[i],
             "show_empty",
             Sprite.from(Tx.Ui.EmptyMono).step(setEmptyEquipmentIconTint),
         ).at(i * 36, -40)
@@ -124,7 +124,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
         0,
     );
 
-    objUiEquipmentBuffs(Rpg.inventory.equipment.loadout)
+    objUiEquipmentBuffs(Rpg.inventory.equipment.loadout.items)
         .step(self => {
             if (pageObj.selected?.is(mxnUiEquipment)) {
                 self.controls.focusBuffsSource = pageObj.selected.mxnUiEquipment.loadoutItem;
@@ -237,7 +237,7 @@ function objUiEquipmentChoosePage(
         .at(188, 8);
 
     objUiEquipmentBuffs(
-        Rpg.inventory.equipment.loadout,
+        Rpg.inventory.equipment.loadout.items,
     ).at(60, 46 + 74).show(pageObj);
 
     objUiEquipmentBuffsComparedTo(

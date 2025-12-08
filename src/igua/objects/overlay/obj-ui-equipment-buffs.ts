@@ -30,7 +30,7 @@ export function objUiEquipmentBuffs(
 
                 if (controls.focusBuffsSource) {
                     RpgEquipmentLoadout.getPlayerBuffs(
-                        Rpg.inventory.equipment.loadout.map(name =>
+                        Rpg.inventory.equipment.loadout.items.map(name =>
                             name === controls.focusBuffsSource ? controls.focusBuffsSource : null
                         ) as RpgEquipmentLoadout.Model,
                         focusedBuffs,
@@ -55,22 +55,22 @@ export function objUiEquipmentBuffsComparedTo(
     return objUiEquipmentBuffsBase()
         .coro(function* (self) {
             while (true) {
-                const previousInfos = getBuffInformations(previousEquipment.loadoutBuffs);
-                const infos = getBuffInformations(equipment.loadoutBuffs);
+                const previousInfos = getBuffInformations(previousEquipment.loadout.buffs);
+                const infos = getBuffInformations(equipment.loadout.buffs);
 
                 const uiEquipmentBuffsObjs = self.createUiEquipmentBuffObjs(
                     aggregateBuffsInformations(previousInfos, infos),
-                    equipment.loadoutBuffs,
+                    equipment.loadout.buffs,
                 );
 
                 for (const obj of uiEquipmentBuffsObjs) {
-                    obj.previous = obj.info.getValue(previousEquipment.loadoutBuffs);
-                    obj.isFocused = obj.info.getValue(equipment.loadoutBuffs) !== obj.previous;
+                    obj.previous = obj.info.getValue(previousEquipment.loadout.buffs);
+                    obj.isFocused = obj.info.getValue(equipment.loadout.buffs) !== obj.previous;
                 }
 
                 yield* Coro.race([
-                    onMutate(previousEquipment.loadoutBuffs),
-                    onMutate(equipment.loadoutBuffs),
+                    onMutate(previousEquipment.loadout.buffs),
+                    onMutate(equipment.loadout.buffs),
                 ]);
             }
         }, StepOrder.BeforeCamera);
