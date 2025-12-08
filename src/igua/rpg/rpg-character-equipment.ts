@@ -104,6 +104,16 @@ export class RpgCharacterEquipment {
             get updatesCount() {
                 return self._loadoutUpdatesCount;
             },
+            get slotsUsedCount() {
+                let count = 0;
+                for (let i = 0; i < self._loadout.length; i++) {
+                    if (self._loadout[i]) {
+                        count += 1;
+                    }
+                }
+
+                return count;
+            },
         };
     })();
 

@@ -571,6 +571,7 @@ export const Lvl = {
       HeliumMarker1: e(r["Marker"], { x: 1312, y: 496, values: { name: "HeliumMarker1", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       HeliumMarker2: e(r["Marker"], { x: 312, y: 792, values: { name: "HeliumMarker2", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       FishMarker: e(r["Marker"], { x: 1437, y: 198, values: { name: "FishMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      RemovedShoesMarker: e(r["Marker"], { x: 128, y: 520, values: { name: "RemovedShoesMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   GiantIguanaStatue: () => {

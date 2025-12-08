@@ -60,6 +60,17 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "FishMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 6,
+          "_eid": "73148747",
+          "x": 128,
+          "y": 520,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "RemovedShoesMarker", "depth": 0}
         }
       ]
     },

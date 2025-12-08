@@ -2,6 +2,7 @@ import { BLEND_MODES } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { factor, interpr, interpvr } from "../../lib/game-engine/routines/interp";
+import { onMutate } from "../../lib/game-engine/routines/on-mutate";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
@@ -14,6 +15,7 @@ import { Cutscene, layers, scene } from "../globals";
 import { mxnFxAlphaVisibility } from "../mixins/effects/mxn-fx-alpha-visibility";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objEsotericArt } from "../objects/esoteric/obj-esoteric-art";
+import { objEsotericRemovedShoes } from "../objects/esoteric/obj-esoteric-removed-shoes";
 import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
 import { objFish } from "../objects/obj-fish";
 import { playerObj } from "../objects/obj-player";
@@ -226,6 +228,8 @@ function enrichRoom3(lvl: LvlType.EfficientHome) {
         "What did I say?!",
         "You're tracking dirt everywhere!",
     ];
+
+    objEsotericRemovedShoes().at(lvl.RemovedShoesMarker).show();
 
     lvl.CloudHouseNeatFreakNpc.coro(function* (self) {
         while (true) {

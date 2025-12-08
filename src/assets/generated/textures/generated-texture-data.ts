@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 520 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 521 }];
 
 interface TxData {
   id: string;
@@ -331,6 +331,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Books1: tx({ id: "Furniture.Library.Books1", atlas: 0, x: 1990, y: 1571, width: 16, height: 12 }),
         Books2: tx({ id: "Furniture.Library.Books2", atlas: 0, x: 1343, y: 1331, width: 14, height: 16 }),
       },
+      LittleShoe: tx({ id: "Furniture.LittleShoe", atlas: 0, x: 281, y: 947, width: 14, height: 12 }),
       PotionGreen: tx({ id: "Furniture.PotionGreen", atlas: 0, x: 1905, y: 1680, width: 16, height: 22 }),
       PotionRed: tx({ id: "Furniture.PotionRed", atlas: 0, x: 1884, y: 1713, width: 16, height: 22 }),
       Pottery18: tx({ id: "Furniture.Pottery18", atlas: 0, x: 425, y: 1487, width: 18, height: 18 }),
@@ -502,7 +503,7 @@ function txs<T>(tx: (data: TxData) => T) {
     Town: {
       Ball: {
         Ball0: tx({ id: "Town.Ball.Ball0", atlas: 0, x: 1541, y: 1207, width: 12, height: 12 }),
-        Ball1: tx({ id: "Town.Ball.Ball1", atlas: 0, x: 281, y: 947, width: 14, height: 12 }),
+        Ball1: tx({ id: "Town.Ball.Ball1", atlas: 0, x: 265, y: 1088, width: 14, height: 12 }),
         Brick0: tx({ id: "Town.Ball.Brick0", atlas: 0, x: 832, y: 1591, width: 36, height: 30 }),
         Brick1: tx({ id: "Town.Ball.Brick1", atlas: 0, x: 795, y: 1598, width: 36, height: 20 }),
         ColumnSpiral0: tx({ id: "Town.Ball.ColumnSpiral0", atlas: 0, x: 593, y: 1529, width: 12, height: 20 }),
