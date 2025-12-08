@@ -221,13 +221,21 @@ function enrichRoom2(lvl: LvlType.EfficientHome) {
 }
 
 function enrichRoom3(lvl: LvlType.EfficientHome) {
+    const angryMessages = [
+        "Gah! Really?! You walk into places like that?!",
+        "What did I say?!",
+        "You're tracking dirt everywhere!",
+    ];
+
     lvl.CloudHouseNeatFreakNpc.coro(function* (self) {
         while (true) {
-            // TODO only if player is wearing shoes
             yield () =>
-                playerObj.x >= lvl.NeatFreakUnsafeRegion.x && playerObj.speed.x > 0
+                playerObj.x >= lvl.NeatFreakUnsafeRegion.x
+                && playerObj.speed.x > 0
+                && !Rpg.inventory.equipment.loadout.isEmpty
                 && playerObj.collides(lvl.NeatFreakUnsafeRegion);
             yield Cutscene.play(function* () {
+                yield* show(angryMessages.length > 1 ? angryMessages.shift()! : angryMessages[0]);
                 playerObj.speed.y = -2;
                 playerObj.speed.x = -6;
                 yield sleep(500);

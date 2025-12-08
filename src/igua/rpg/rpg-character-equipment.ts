@@ -9,6 +9,7 @@ export class RpgCharacterEquipment {
     private readonly _loadout: RpgEquipmentLoadout.Model = [null, null, null, null];
     private readonly _loadoutBuffs = RpgPlayerBuffs.create();
     private _loadoutUpdatesCount = 0;
+    private _loadoutIsEmpty = true;
 
     constructor(private _state: RpgCharacterEquipment.State) {
         this._updateLoadout();
@@ -19,6 +20,7 @@ export class RpgCharacterEquipment {
         this._loadout[1] = null;
         this._loadout[2] = null;
         this._loadout[3] = null;
+        this._loadoutIsEmpty = true;
 
         const { list } = this._state;
 
@@ -29,6 +31,8 @@ export class RpgCharacterEquipment {
             if (item.loadoutIndex === null) {
                 continue;
             }
+
+            this._loadoutIsEmpty = false;
 
             if (this._loadout[item.loadoutIndex] !== null) {
                 assertFailed = true;
@@ -92,13 +96,7 @@ export class RpgCharacterEquipment {
                 return self._loadoutBuffs;
             },
             get isEmpty() {
-                for (let i = 0; i < 4; i++) {
-                    if (self._loadout[i]) {
-                        return false;
-                    }
-                }
-
-                return true;
+                return self._loadoutIsEmpty;
             },
             get items(): Readonly<RpgEquipmentLoadout.Model> {
                 return self._loadout;

@@ -288,7 +288,7 @@
           "y": 520,
           "originX": 20,
           "originY": 52,
-          "flippedX": false,
+          "flippedX": true,
           "values": {"personaName": "CloudHouseNeatFreak", "name": "CloudHouseNeatFreakNpc", "depth": 0}
         }
       ]

@@ -555,7 +555,7 @@ export const Lvl = {
       CloudHouseNpc0: e(r["IguanaNpc"], { x: 288, y: 160, flippedX: true, values: { personaName: "CloudHouseArtist", name: "CloudHouseNpc0", depth: 0 } }, "CharacterEntities"),
       CloudHouseAddictNpc: e(r["IguanaNpc"], { x: 832, y: 192, flippedX: true, values: { personaName: "CloudHouseAddict", name: "CloudHouseAddictNpc", depth: 0 } }, "CharacterEntities"),
       CloudHouseRingerNpc: e(r["IguanaNpc"], { x: 1312, y: 192, flippedX: true, values: { personaName: "CloudHouseRinger", name: "CloudHouseRingerNpc", depth: 0 } }, "CharacterEntities"),
-      CloudHouseNeatFreakNpc: e(r["IguanaNpc"], { x: 352, y: 520, flippedX: false, values: { personaName: "CloudHouseNeatFreak", name: "CloudHouseNeatFreakNpc", depth: 0 } }, "CharacterEntities"),
+      CloudHouseNeatFreakNpc: e(r["IguanaNpc"], { x: 352, y: 520, flippedX: true, values: { personaName: "CloudHouseNeatFreak", name: "CloudHouseNeatFreakNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 200, y: 216, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromEfficient1: e(r["Checkpoint"], { x: 688, y: 208, flippedX: false, values: { name: "fromEfficient1", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromEfficient2: e(r["Checkpoint"], { x: 1160, y: 136, flippedX: false, values: { name: "fromEfficient2", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
