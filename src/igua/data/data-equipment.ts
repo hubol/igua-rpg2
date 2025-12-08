@@ -107,7 +107,7 @@ export namespace DataEquipment {
                 texture: Tx.Collectibles.Equipment.Brick,
                 description: "Increases physical defense, increases combat XP on perfect claw attack",
                 buffs: (() => {
-                    const values = [10, 15, 20, 25, 30, 32, 34, 36, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50];
+                    const values = [20, 25, 30, 32, 34, 36, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50];
 
                     return (model, bonus) => {
                         model.combat.defense.physical += values[bonus] ?? values.last;

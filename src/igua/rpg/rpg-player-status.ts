@@ -116,7 +116,7 @@ export class RpgPlayerStatus implements RpgStatus.Model {
 
         return {
             get physical() {
-                return self.defenses.physical + 20;
+                return 20;
             },
         };
     })();
