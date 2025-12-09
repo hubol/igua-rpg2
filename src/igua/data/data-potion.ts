@@ -125,7 +125,10 @@ export namespace DataPotion {
             case "AttributeHealthUp":
                 const previousHealthMax = Rpg.character.status.healthMax;
                 Rpg.character.attributes.update("health", 1);
-                playerObj.heal(Math.round(Rpg.character.status.healthMax - previousHealthMax));
+                const delta = Math.round(Rpg.character.status.healthMax - previousHealthMax);
+                if (delta > 0) {
+                    playerObj.heal(delta);
+                }
                 return;
             case "AttributeIntelligenceUp":
                 Rpg.character.attributes.update("intelligence", 1);
