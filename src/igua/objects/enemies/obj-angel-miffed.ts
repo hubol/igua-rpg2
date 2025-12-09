@@ -135,13 +135,16 @@ type Theme = ValuesOf<typeof themes>;
 const ranks = {
     level0: RpgEnemyRank.create({
         loot: {
-            tier0: [{ kind: "valuables", deltaPride: -1, max: 10, min: 1 }],
+            tier0: [
+                { kind: "valuables", deltaPride: -3, max: 25, min: 5 },
+            ],
             tier1: [
-                { kind: "potion", id: "Poison", weight: 25 },
+                { kind: "potion", id: "RestoreHealth", weight: 21 },
                 { kind: "key_item", id: "SeedPurple", weight: 15 },
                 { kind: "flop", min: 15, max: 19, weight: 10 },
                 { kind: "equipment", id: "FactionDefenseMiner", weight: 10 },
                 { kind: "flop", count: 2, min: 15, max: 19, weight: 5 },
+                { kind: "valuables", deltaPride: -1, max: 25, min: 1, weight: 4 },
                 { kind: "nothing", weight: 35 },
             ],
         },

@@ -126,14 +126,14 @@ const ranks = {
         },
         loot: {
             tier0: [
-                { kind: "valuables", max: 8, min: 2, deltaPride: -3 },
+                { kind: "valuables", max: 7, min: 1, deltaPride: -5 },
             ],
             tier1: [
                 { kind: "pocket_item", id: "ComputerChip", weight: 31 },
                 { kind: "pocket_item", id: "BallFruitTypeA", weight: 14 },
                 { kind: "pocket_item", id: "BallFruitTypeB", weight: 14 },
                 { kind: "flop", min: 10, max: 14, weight: 12 },
-                { kind: "potion", id: "RestoreHealth", weight: 8 },
+                { kind: "potion", id: "Poison", weight: 8 },
                 { kind: "key_item", id: "SeedYellow", weight: 5 },
                 { kind: "equipment", id: "RichesRing", weight: 2 },
                 { kind: "nothing", weight: 14 },
@@ -146,7 +146,7 @@ const ranks = {
         },
         loot: {
             tier0: [
-                { kind: "valuables", max: 10, min: 2, deltaPride: -3 },
+                { kind: "valuables", max: 8, min: 2, deltaPride: -3 },
             ],
             tier1: [
                 { kind: "pocket_item", id: "ComputerChip", weight: 50 },

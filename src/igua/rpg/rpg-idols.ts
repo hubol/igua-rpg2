@@ -46,7 +46,7 @@ export class RpgIdol {
 
     upload(idolId: DataIdol.Id) {
         this._state.idolId = idolId;
-        this._state.health = 60 * 30;
+        this._state.health = 50 * 30;
     }
 
     tick() {
