@@ -1,10 +1,13 @@
-import { Container, DisplayObject } from "pixi.js";
+import { Container } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
+import { Jukebox } from "../core/igua-audio";
 import { mxnInteract } from "../mixins/mxn-interact";
 import { Rpg } from "../rpg/rpg";
-import { RpgProgressData, RpgProgressFlags } from "../rpg/rpg-progress";
+import { RpgProgressData } from "../rpg/rpg-progress";
 
 export function scnGreatTowerBalcony() {
+    Jukebox.play(Mzk.UnforgivableToner);
     const lvl = Lvl.GreatTowerBalcony();
     enrichEfficientHome(lvl);
 }

@@ -1,12 +1,14 @@
 import { BLEND_MODES } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { factor, interpr, interpvr } from "../../lib/game-engine/routines/interp";
 import { onMutate } from "../../lib/game-engine/routines/on-mutate";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
+import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
@@ -24,6 +26,7 @@ import { RpgStatus } from "../rpg/rpg-status";
 import { TerrainAttributes } from "../systems/terrain-attributes";
 
 export function scnEfficientHome() {
+    Jukebox.play(Mzk.UnforgivableToner);
     scene.camera.defaultMode = "controlled";
     const lvl = Lvl.EfficientHome();
     scene.camera.at(Math.floor(playerObj.x / 512) * 512, Math.floor(playerObj.y / 288) * 288);
