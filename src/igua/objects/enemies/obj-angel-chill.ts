@@ -144,6 +144,7 @@ export function objAngelChill() {
                 obj.scale.at(obj.initialScale);
             }
 
+            // TODO probably not while (true)
             while (true) {
                 for (const obj of aoeObjs) {
                     yield interpv(obj.scale).factor(factor.sine).to(1, 1).over(1000);
@@ -156,6 +157,8 @@ export function objAngelChill() {
                 for (const obj of reversedAoeObjs) {
                     yield interpv(obj.scale).to(obj.initialScale).over(1000);
                 }
+
+                yield* enemyObj.mxnRpgStatusPotions.dramaUseAppropriatePotion();
             }
         },
     };

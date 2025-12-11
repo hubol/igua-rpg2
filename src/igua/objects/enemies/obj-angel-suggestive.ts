@@ -383,6 +383,9 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
                 bodyObj.bulge.phase = "recovering";
                 bodyObj.bulge.unit = 0;
                 yield interp(bodyObj.bulge, "unit").to(1).over(1000);
+
+                yield* self.mxnRpgStatusPotions.dramaUseAppropriatePotion();
+
                 if (!features.has("electrical_pulse")) {
                     continue;
                 }

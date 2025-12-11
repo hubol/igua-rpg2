@@ -1,9 +1,10 @@
 import { Container } from "pixi.js";
 import { Coro } from "../../lib/game-engine/routines/coro";
-import { interpr, interpvr } from "../../lib/game-engine/routines/interp";
+import { interpr, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Unit } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
+import { vnew } from "../../lib/math/vector-type";
 import { DataPotion } from "../data/data-potion";
 import { objAngelEyes } from "../objects/enemies/obj-angel-eyes";
 import { objFigurePotion } from "../objects/figures/obj-figure-potion";
@@ -66,29 +67,36 @@ function objUsedPotion(potionId: DataPotion.Id, statusObj: MxnRpgStatus & Contai
                 statusObj.speed.y = -2;
             }
 
+            // TODO this should be less awkward, maybe each "pupil polar offset" should be weighted on the eyes...
+            const pupilPolarOffset = vnew();
+            const pupilPolarOffsetStart = vnew();
+
             const angelEyesObj = statusObj.findIs(objAngelEyes).last;
+            if (angelEyesObj) {
+                if (angelEyesObj.pupilPolarOffsets[0]) {
+                    pupilPolarOffsetStart.at(angelEyesObj.pupilPolarOffsets[0]);
+                    pupilPolarOffset.at(pupilPolarOffsetStart);
+                }
+                angelEyesObj.pupilPolarOffsets[2] = pupilPolarOffset;
+            }
 
             yield* Coro.all([
                 interpr(self, "angle").steps(4).to(360).over(400),
                 interpvr(self).translate(0, -height).over(400),
-                Coro.chain([
-                    sleep(200),
-                    () => {
-                        if (angelEyesObj) {
-                            angelEyesObj.pupilPolarOffsets[2] = [0, -1];
-                        }
-                        return true;
-                    },
-                ]),
+                interpv(pupilPolarOffset).to(0, -1).over(400),
             ]);
 
             yield sleep(300);
+
+            DataPotion.usePotion(potionId, statusObj);
+            self.visible = false;
+
+            yield interpv(pupilPolarOffset).to(pupilPolarOffsetStart).over(300);
 
             if (angelEyesObj) {
                 delete angelEyesObj.pupilPolarOffsets[2];
             }
 
-            DataPotion.usePotion(potionId, statusObj);
             self.destroy();
         })
         .at(statusObj)
