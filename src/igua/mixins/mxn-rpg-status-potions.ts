@@ -1,8 +1,15 @@
+import { Container } from "pixi.js";
 import { Coro } from "../../lib/game-engine/routines/coro";
+import { interpr, interpvr } from "../../lib/game-engine/routines/interp";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Unit } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { DataPotion } from "../data/data-potion";
+import { objAngelEyes } from "../objects/enemies/obj-angel-eyes";
+import { objFigurePotion } from "../objects/figures/obj-figure-potion";
 import { RpgStatus } from "../rpg/rpg-status";
+import { mxnDestroyOnStatusDeath } from "./mxn-destroy-on-status-death";
+import { mxnPhysics } from "./mxn-physics";
 import { MxnRpgStatus } from "./mxn-rpg-status";
 
 interface MxnRpgStatusPotionsArgs {
@@ -48,7 +55,48 @@ function inferPotionToUse(
     return null;
 }
 
-export function mxnRpgStatusPotions(statusObj: MxnRpgStatus, { heldPotionIds }: MxnRpgStatusPotionsArgs) {
+function objUsedPotion(potionId: DataPotion.Id, statusObj: MxnRpgStatus & Container) {
+    return objFigurePotion(potionId)
+        .pivotedUnit(0.5, 0.5)
+        .mixin(mxnDestroyOnStatusDeath, statusObj.status)
+        .coro(function* (self) {
+            const { height } = statusObj.getBounds();
+
+            if (statusObj.is(mxnPhysics) && statusObj.isOnGround && statusObj.gravity > 0) {
+                statusObj.speed.y = -2;
+            }
+
+            const angelEyesObj = statusObj.findIs(objAngelEyes).last;
+
+            yield* Coro.all([
+                interpr(self, "angle").steps(4).to(360).over(400),
+                interpvr(self).translate(0, -height).over(400),
+                Coro.chain([
+                    sleep(200),
+                    () => {
+                        if (angelEyesObj) {
+                            angelEyesObj.pupilPolarOffsets[2] = [0, -1];
+                        }
+                        return true;
+                    },
+                ]),
+            ]);
+
+            yield sleep(300);
+
+            if (angelEyesObj) {
+                delete angelEyesObj.pupilPolarOffsets[2];
+            }
+
+            DataPotion.usePotion(potionId, statusObj);
+            self.destroy();
+        })
+        .at(statusObj)
+        .add(0, statusObj.getBounds().height * -0.5)
+        .vround();
+}
+
+export function mxnRpgStatusPotions(statusObj: MxnRpgStatus & Container, { heldPotionIds }: MxnRpgStatusPotionsArgs) {
     const state: RpgStatusPotionsState = {
         nextPoisonRecoveryRemainingHealthRatio: 0.8,
     };
@@ -58,14 +106,14 @@ export function mxnRpgStatusPotions(statusObj: MxnRpgStatus, { heldPotionIds }: 
             return;
         }
 
-        const { status } = statusObj;
-
-        const potionId = inferPotionToUse(status, heldPotionIds, state);
+        const potionId = inferPotionToUse(statusObj.status, heldPotionIds, state);
         if (!potionId) {
             return;
         }
 
-        DataPotion.usePotion(potionId, statusObj);
+        heldPotionIds.removeFirst(potionId);
+        const potionObj = objUsedPotion(potionId, statusObj).show();
+        yield () => potionObj.destroyed;
     };
 
     return statusObj
