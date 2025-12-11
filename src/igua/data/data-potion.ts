@@ -3,6 +3,7 @@ import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Sound } from "../../lib/game-engine/audio/sound";
 import { RgbInt } from "../../lib/math/number-alias-types";
+import { MxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
@@ -117,11 +118,12 @@ export namespace DataPotion {
 
     export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataPotion" });
 
-    // TODO The colocation is good. But there are many strange things going on here, haha
-    export function usePotion(id: Id) {
+    export function usePotion(id: Id, target: MxnRpgStatus) {
         getById(id).sound?.play();
 
         switch (id) {
+            // TODO attributes do not exist on MxnRpgStatus
+            // Maybe they should?
             case "AttributeHealthUp":
                 const previousHealthMax = Rpg.character.status.healthMax;
                 Rpg.character.attributes.update("health", 1);
@@ -137,27 +139,27 @@ export namespace DataPotion {
                 Rpg.character.attributes.update("strength", 1);
                 return;
             case "RestoreHealthRestaurantLevel0":
-                playerObj.heal(1);
+                target.heal(1);
                 return;
             case "RestoreHealth":
             case "RestoreHealthRestaurantLevel1":
-                playerObj.heal(Math.ceil(Rpg.character.status.healthMax / 3));
+                target.heal(Math.ceil(target.status.healthMax / 3));
                 return;
             case "RestoreHealthRestaurantLevel2":
-                playerObj.heal(Math.ceil(Rpg.character.status.healthMax * 0.8));
+                target.heal(Math.ceil(target.status.healthMax * 0.8));
                 return;
             case "Poison":
-                Rpg.character.status.conditions.poison.level += 1;
+                target.status.conditions.poison.level += 1;
                 return;
             case "PoisonRestore":
-                Rpg.character.status.conditions.poison.value = 0;
-                Rpg.character.status.conditions.poison.level = 0;
+                target.status.conditions.poison.value = 0;
+                target.status.conditions.poison.level = 0;
                 return;
             case "Ballon":
-                playerObj.damage(atkBallon);
+                target.damage(atkBallon);
                 return;
             case "Wetness":
-                playerObj.damage(atkWetness);
+                target.damage(atkWetness);
                 return;
             case "ForgetLooseValuableCollection":
                 Rpg.looseValuables.forgetCollection();

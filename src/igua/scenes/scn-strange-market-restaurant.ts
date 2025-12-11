@@ -48,6 +48,10 @@ function enrichScenario(lvl: LvlType.StrangeMarketRestaurant) {
         lvl.MiffedAngel.destroy();
     }
     else {
+        lvl.MiffedAngel.mxnRpgStatusPotions.heldPotionIds.push(
+            "RestoreHealthRestaurantLevel2",
+            "RestoreHealthRestaurantLevel2",
+        );
         scene.stage.coro(function* () {
             yield () => lvl.MiffedAngel.destroyed;
             Cutscene.play(function* () {

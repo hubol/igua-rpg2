@@ -432,6 +432,8 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
                     yield* moves.expressSurprise();
                 }
 
+                yield* obj.mxnRpgStatusPotions.dramaUseAppropriatePotion();
+
                 if (iterationsCount > 0 && Rng.float() > 0.25 && features.has("poison_magic")) {
                     yield* moves.castPoisonMagic();
                 }

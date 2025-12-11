@@ -2,6 +2,7 @@ import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { range } from "../../lib/range";
 import { DataPotion } from "../data/data-potion";
+import { playerObj } from "../objects/obj-player";
 
 const Consts = {
     Size: 12,
@@ -127,8 +128,8 @@ export class RpgPotions {
             return;
         }
 
-        // TODO I think this should require an RpgPlayer to be passed
-        DataPotion.usePotion(potionId);
+        // TODO ehhhh feels bad to have the game object here...
+        DataPotion.usePotion(potionId, playerObj);
 
         this._removeIndex(index);
         this._updateLists();
