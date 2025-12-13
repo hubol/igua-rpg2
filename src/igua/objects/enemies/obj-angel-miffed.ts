@@ -64,6 +64,8 @@ const themes = (function () {
             txs: objAngelMouth.txs.w14,
         },
         sprites: {
+            faceAbove: Tx.Empty16,
+            faceBehind: Tx.Empty16,
             leg: Tx.Enemy.Miffed.Leg,
             noggin: Tx.Enemy.Miffed.Noggin0,
             torso: Tx.Enemy.Miffed.Torso0,
@@ -123,6 +125,39 @@ const themes = (function () {
                 mouth: (obj) => obj.at(0, -6),
                 sprites: {
                     noggin: (obj) => obj.pivoted(6, 5),
+                    torso: (obj) => obj.add(-5, -4),
+                },
+            },
+        ),
+        zombieNudist: template.createTheme(
+            {
+                eyes: {
+                    gap: 15,
+                    pupilsTx: Tx.Enemy.Miffed.Pupil1,
+                    scleraTx: Tx.Enemy.Miffed.Sclera1,
+                },
+                mouth: {
+                    txs: objAngelMouth.txs.rounded14,
+                    teethCount: 2,
+                },
+                sprites: {
+                    faceAbove: Tx.Enemy.Miffed.FaceAbove0,
+                    faceBehind: Tx.Enemy.Miffed.FaceBehind0,
+                    leg: Tx.Enemy.Miffed.Leg2,
+                    noggin: Tx.Enemy.Miffed.Noggin3,
+                    torso: Tx.Enemy.Miffed.Torso2,
+                },
+                tints: {
+                    map: [0x1F962D, 0xac1111, 0xffc400],
+                },
+            },
+            {
+                eyes: (obj) => obj.at(0, -6),
+                mouth: (obj) => obj.at(0, -1),
+                sprites: {
+                    faceAbove: (obj) => obj.add(-30, -16),
+                    faceBehind: (obj) => obj.add(-30, -16),
+                    noggin: (obj) => obj.pivoted(9, 2),
                     torso: (obj) => obj.add(-5, -4),
                 },
             },
@@ -241,7 +276,7 @@ const variants = {
     level3: {
         features: new Set<Feature>(["homing_magic_flame", "flame_spray"]),
         rank: ranks.level3,
-        theme: themes.moldyLemon,
+        theme: themes.zombieNudist,
     },
 };
 
@@ -581,7 +616,14 @@ function objAngelMiffedFace(theme: Theme) {
     const eyesObj = theme.createEyesObj();
     const mouthObj = theme.createMouthObj().add(0, 6);
 
-    return container(eyesObj, mouthObj).merge({ objects: { eyesObj, mouthObj } });
+    return container(
+        theme.createSprite("faceBehind"),
+        eyesObj,
+        mouthObj,
+        theme.createSprite("faceAbove"),
+    ).merge({
+        objects: { eyesObj, mouthObj },
+    });
 }
 
 function objAngelBody(theme: Theme) {
