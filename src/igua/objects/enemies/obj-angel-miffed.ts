@@ -247,6 +247,7 @@ const ranks = {
             healthMax: 150,
             conditions: {
                 poison: {
+                    levelMax: 1,
                     rateFactor: 50,
                     max: 300,
                 },

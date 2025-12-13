@@ -81,6 +81,7 @@ export class RpgPlayerStatus implements RpgStatus.Model {
                 set level(value) {
                     state.conditions.poison.level = value;
                 },
+                levelMax: 999,
                 ticksCount: -1,
                 get value() {
                     return state.conditions.poison.value;

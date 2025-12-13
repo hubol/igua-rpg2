@@ -33,6 +33,7 @@ export namespace RpgEnemyRank {
                         value: status?.conditions?.poison?.value ?? 0,
                         max: status?.conditions?.poison?.max ?? 100,
                         level: status?.conditions?.poison?.level ?? 0,
+                        levelMax: status?.conditions?.poison?.levelMax ?? 999,
                         immune: status?.conditions?.poison?.immune ?? false,
                         ticksCount: -1,
                     },

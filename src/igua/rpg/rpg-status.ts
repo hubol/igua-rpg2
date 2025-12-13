@@ -29,6 +29,7 @@ export namespace RpgStatus {
                 rateFactor: PercentAsInteger;
                 immune: boolean;
                 level: number;
+                levelMax: number;
                 ticksCount: Integer;
                 value: number;
                 max: number;
@@ -236,7 +237,10 @@ export namespace RpgStatus {
                             0,
                             target.conditions.poison.value - target.conditions.poison.max,
                         );
-                        target.conditions.poison.level += 1;
+                        target.conditions.poison.level = Math.min(
+                            target.conditions.poison.levelMax,
+                            target.conditions.poison.level + 1,
+                        );
                     }
                 }
 
