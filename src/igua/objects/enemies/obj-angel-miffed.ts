@@ -196,6 +196,28 @@ const ranks = {
             },
         },
     }),
+    level3: RpgEnemyRank.create({
+        loot: {
+            tier0: [
+                { kind: "valuables", deltaPride: -5, max: 70, min: 15, weight: 95 },
+                { kind: "equipment", id: "PatheticCage", weight: 5 },
+            ],
+            tier1: [
+                // TODO
+                { kind: "valuables", deltaPride: -5, max: 70, min: 15, weight: 50 },
+                { kind: "nothing", weight: 50 },
+            ],
+        },
+        status: {
+            healthMax: 150,
+            conditions: {
+                poison: {
+                    rateFactor: 50,
+                    max: 300,
+                },
+            },
+        },
+    }),
 } satisfies Record<string, RpgEnemyRank.Model>;
 
 type Feature = "homing_magic_poison" | "homing_magic_flame" | "flame_spray";
@@ -218,7 +240,7 @@ const variants = {
     },
     level3: {
         features: new Set<Feature>(["homing_magic_flame", "flame_spray"]),
-        rank: ranks.level2,
+        rank: ranks.level3,
         theme: themes.moldyLemon,
     },
 };

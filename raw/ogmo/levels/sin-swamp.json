@@ -4,8 +4,8 @@
   "height": 512,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#000000"},
-  "backgroundColor": "#408000",
+  "values": {"Terrain Color": "#251105"},
+  "backgroundColor": "#172a03",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -233,7 +233,7 @@
           "height": 120,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -246,7 +246,7 @@
           "height": 80,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -259,7 +259,7 @@
           "height": 160,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -272,7 +272,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -285,7 +285,7 @@
           "height": 104,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -298,7 +298,7 @@
           "height": 144,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -311,7 +311,7 @@
           "height": 136,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -324,7 +324,7 @@
           "height": 144,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -337,7 +337,7 @@
           "height": 64,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -350,7 +350,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -363,7 +363,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -376,7 +376,7 @@
           "height": 336,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -389,7 +389,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -402,7 +402,7 @@
           "height": 224,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -415,7 +415,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -441,7 +441,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -454,7 +454,7 @@
           "height": 56,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -467,7 +467,7 @@
           "height": 40,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#251105",
           "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
@@ -492,7 +492,80 @@
       "gridCellHeight": 8,
       "gridCellsX": 288,
       "gridCellsY": 64,
-      "decals": [],
+      "decals": [
+        {
+          "x": 512,
+          "y": 384,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#678b19",
+          "texture": "terrain/distant/waves 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 360,
+          "y": 424,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#678b19",
+          "texture": "terrain/distant/hills 500.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1012,
+          "y": 384,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#678b19",
+          "texture": "terrain/distant/waves 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1512,
+          "y": 384,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#678b19",
+          "texture": "terrain/distant/waves 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 2008,
+          "y": 384,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#678b19",
+          "texture": "terrain/distant/waves 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 592,
+          "y": 408,
+          "scaleX": 54,
+          "scaleY": 2,
+          "rotation": 0,
+          "tint": "#678b19",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -504,7 +577,80 @@
       "gridCellHeight": 8,
       "gridCellsX": 288,
       "gridCellsY": 64,
-      "decals": [],
+      "decals": [
+        {
+          "x": 496,
+          "y": 340,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#85b421",
+          "texture": "terrain/distant/waves 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 344,
+          "y": 380,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#85b421",
+          "texture": "terrain/distant/hills 500.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 996,
+          "y": 340,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#85b421",
+          "texture": "terrain/distant/waves 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1496,
+          "y": 340,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#85b421",
+          "texture": "terrain/distant/waves 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1992,
+          "y": 340,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#85b421",
+          "texture": "terrain/distant/waves 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 576,
+          "y": 364,
+          "scaleX": 54,
+          "scaleY": 2,
+          "rotation": 0,
+          "tint": "#85b421",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     }
   ]
