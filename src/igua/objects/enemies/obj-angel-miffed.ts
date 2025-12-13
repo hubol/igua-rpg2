@@ -198,21 +198,26 @@ const ranks = {
     }),
 } satisfies Record<string, RpgEnemyRank.Model>;
 
-type Feature = "poison_magic" | "flame_spray";
+type Feature = "homing_magic_poison" | "homing_magic_flame" | "flame_spray";
 
 const variants = {
     level0: {
-        features: new Set<Feature>(["poison_magic"]),
+        features: new Set<Feature>(["homing_magic_poison"]),
         rank: ranks.level0,
         theme: themes.common,
     },
     level1: {
-        features: new Set<Feature>(["poison_magic", "flame_spray"]),
+        features: new Set<Feature>(["homing_magic_poison", "flame_spray"]),
         rank: ranks.level1,
         theme: themes.freakish,
     },
     level2: {
-        features: new Set<Feature>(["poison_magic"]),
+        features: new Set<Feature>(["homing_magic_poison"]),
+        rank: ranks.level2,
+        theme: themes.moldyLemon,
+    },
+    level3: {
+        features: new Set<Feature>(["homing_magic_flame", "flame_spray"]),
         rank: ranks.level2,
         theme: themes.moldyLemon,
     },
@@ -297,7 +302,7 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
     }
 
     const moves = {
-        *castPoisonMagic() {
+        *castHomingMagic(variant: objAngelMiffedHomingBox.Variant) {
             const vibrateObj = container()
                 .step(() => obj.pivot.x = Math.round(Math.sin(scene.ticker.ticks / 15 * Math.PI)) * 2)
                 .show(obj);
@@ -306,7 +311,7 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
 
             mouthObj.controls.teethExposedUnit = 1;
             const eyeRollerObj = objAngelEyes.objEyeRoller(headObj.objects.faceObj.objects.eyesObj).show(obj);
-            const poisonBoxObj = objAngelMiffedPoisonBox(obj).at(obj).show();
+            const poisonBoxObj = objAngelMiffedHomingBox(obj, variant).at(obj).show();
 
             yield () => poisonBoxObj.mxnDischargeable.isDischarged;
 
@@ -434,8 +439,11 @@ export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
 
                 yield* obj.mxnRpgStatusPotions.dramaUseAppropriatePotion();
 
-                if (iterationsCount > 0 && Rng.float() > 0.25 && features.has("poison_magic")) {
-                    yield* moves.castPoisonMagic();
+                if (
+                    iterationsCount > 0 && Rng.float() > 0.25
+                    && (features.has("homing_magic_poison") || features.has("homing_magic_flame"))
+                ) {
+                    yield* moves.castHomingMagic(getHomingMagicVariant(features));
                 }
 
                 minDetectionScore = -120;
@@ -468,6 +476,16 @@ const fistRectangles: Record<number, IRectangle> = {
     3: { x: 146 - 90, y: 4, width: 11, height: 9 },
     4: { x: 194 - 180, y: 4, width: 15, height: 13 },
 };
+
+function getHomingMagicVariant(features: Set<Feature>): objAngelMiffedHomingBox.Variant {
+    if (!features.has("homing_magic_poison")) {
+        return "flame";
+    }
+    if (features.has("homing_magic_flame")) {
+        return Rng.choose("flame", "poison");
+    }
+    return "poison";
+}
 
 function objSlammingFist(side: "right" | "left") {
     let slamUnit = 0;
@@ -599,6 +617,10 @@ const atkPoisonBox = RpgAttack.create({
     },
 });
 
+const atkFlameBox = RpgAttack.create({
+    physical: 30,
+});
+
 const atkSweepOrb = RpgAttack.create({
     emotional: 40,
 });
@@ -609,10 +631,15 @@ const getPoisonBoxTargetPosition = function () {
     return (detected: mxnDetectPlayer.Context) => v.at(detected.position).add(detected.speed);
 }();
 
-function objAngelMiffedPoisonBox(attacker: MxnRpgStatus & MxnDetectPlayer) {
-    const tint = 0x4A7825;
+function objAngelMiffedHomingBox(attacker: MxnRpgStatus & MxnDetectPlayer, variant: objAngelMiffedHomingBox.Variant) {
+    const tint = variant === "poison" ? 0x4A7825 : 0x690000;
+    const bright0Tint = variant === "poison" ? 0xffffff : 0xffd92e;
+    const bright1Tint = variant === "poison" ? 0x9ae95a : 0xff5e00;
+    const burstTint = variant === "poison" ? 0x6DAF36 : 0xc20000;
+    const attack = variant === "poison" ? atkPoisonBox : atkFlameBox;
+
     return objProjectileIndicatedBox(80, 64)
-        .mixin(mxnRpgAttack, { attack: atkPoisonBox, attacker: attacker.status })
+        .mixin(mxnRpgAttack, { attack, attacker: attacker.status })
         .tinted(tint)
         .coro(function* (self) {
             self.play(Sfx.Enemy.Miffed.PoisonAttackAppear.rate(0.95, 1.05));
@@ -623,18 +650,22 @@ function objAngelMiffedPoisonBox(attacker: MxnRpgStatus & MxnDetectPlayer) {
             yield () => self.mxnDischargeable.isCharged;
             for (let i = 0; i < 3; i++) {
                 self.play(Sfx.Enemy.Miffed.PoisonWarning.rate(1 + i * 0.15));
-                self.tint = i === 2 ? 0xffffff : 0x9ae95a;
+                self.tint = i === 2 ? bright0Tint : bright1Tint;
                 yield sleep(67);
                 yield interpc(self, "tint").to(tint).over(100);
             }
             trackBehaviorObj.destroy();
             yield sleep(150);
             self.play(Sfx.Enemy.Miffed.PoisonActive.rate(0.95, 1.05));
-            objFxSpiritualRelease.objBurst({ halfWidth: 34, halfHeight: 26, tints: [0x6DAF36] })
+            objFxSpiritualRelease.objBurst({ halfWidth: 34, halfHeight: 26, tints: [burstTint] })
                 .at(self)
                 .show();
             self.mxnDischargeable.discharge();
         });
+}
+
+namespace objAngelMiffedHomingBox {
+    export type Variant = "poison" | "flame";
 }
 
 function objAngelMiffedFlameColumnTrail(attacker: MxnRpgStatus, signX: PolarInt) {
