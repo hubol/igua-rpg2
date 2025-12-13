@@ -1,0 +1,355 @@
+{
+  "ogmoVersion": "3.4.0-hubol",
+  "width": 2304,
+  "height": 328,
+  "offsetX": 0,
+  "offsetY": 0,
+  "backgroundColor": "#408000",
+  "values": {"Terrain Color": "#000000"},
+  "layers": [
+    {
+      "name": "MarkerEntities",
+      "_eid": "73166939",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 288,
+      "gridCellsY": 41,
+      "entities": []
+    },
+    {
+      "name": "RegionEntities",
+      "_eid": "01831167",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 288,
+      "gridCellsY": 41,
+      "entities": [
+        {
+          "name": "Region",
+          "id": 0,
+          "_eid": "11908607",
+          "x": 224,
+          "y": 184,
+          "width": 2024,
+          "height": 64,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "PoisonRegion", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "FrontDecals",
+      "_eid": "17577176",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 288,
+      "gridCellsY": 41,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "FrontEntities",
+      "_eid": "55690179",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 288,
+      "gridCellsY": 41,
+      "entities": []
+    },
+    {
+      "name": "PlayerEntities",
+      "_eid": "96470627",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 288,
+      "gridCellsY": 41,
+      "entities": [
+        {
+          "name": "Player",
+          "id": 0,
+          "_eid": "93092164",
+          "x": 104,
+          "y": 208,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "CharacterEntities",
+      "_eid": "07790422",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 288,
+      "gridCellsY": 41,
+      "entities": []
+    },
+    {
+      "name": "AboveEntitiesDecals",
+      "_eid": "63753160",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 288,
+      "gridCellsY": 41,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "Entities",
+      "_eid": "93086020",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 288,
+      "gridCellsY": 41,
+      "entities": [
+        {
+          "name": "EnemyMiffed",
+          "id": 0,
+          "_eid": "43434686",
+          "x": 536,
+          "y": 248,
+          "originX": 22,
+          "originY": 41,
+          "uid": 176559377373100,
+          "values": {"name": "", "depth": 0, "variant": "level2"}
+        },
+        {
+          "name": "Sign",
+          "id": 1,
+          "_eid": "39046554",
+          "x": 136,
+          "y": 208,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "Swamp", "message": "Poisonous swamp. Wear proper shoes before entering.", "name": "", "depth": 0, "isSpecial": false}
+        },
+        {
+          "name": "GateHorizontal",
+          "id": 2,
+          "_eid": "97593426",
+          "x": -40,
+          "y": 80,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "flippedX": true,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromSinSwamp", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemySuggestive",
+          "id": 3,
+          "_eid": "25633201",
+          "x": 800,
+          "y": 184,
+          "originX": 33,
+          "originY": 78,
+          "uid": 176559394272601,
+          "values": {"name": "", "depth": 0, "variant": "level1"}
+        },
+        {
+          "name": "EnemyMiffed",
+          "id": 4,
+          "_eid": "43434686",
+          "x": 936,
+          "y": 248,
+          "originX": 22,
+          "originY": 41,
+          "uid": 176559395325602,
+          "values": {"name": "", "depth": 0, "variant": "level1"}
+        },
+        {
+          "name": "EnemyMiffed",
+          "id": 5,
+          "_eid": "43434686",
+          "x": 1072,
+          "y": 248,
+          "originX": 22,
+          "originY": 41,
+          "uid": 176559395604103,
+          "values": {"name": "", "depth": 0, "variant": "level2"}
+        },
+        {
+          "name": "EnemyMiffed",
+          "id": 6,
+          "_eid": "43434686",
+          "x": 1192,
+          "y": 248,
+          "originX": 22,
+          "originY": 41,
+          "uid": 176559395780604,
+          "values": {"name": "", "depth": 0, "variant": "level2"}
+        }
+      ]
+    },
+    {
+      "name": "TerrainDecals",
+      "_eid": "02386446",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 288,
+      "gridCellsY": 41,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "TerrainEntities",
+      "_eid": "02302709",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 288,
+      "gridCellsY": 41,
+      "entities": [
+        {
+          "name": "Block",
+          "id": 0,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 208,
+          "width": 224,
+          "height": 120,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 1,
+          "_eid": "93117141",
+          "x": 224,
+          "y": 248,
+          "width": 384,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 2,
+          "_eid": "93117141",
+          "x": 608,
+          "y": 184,
+          "width": 128,
+          "height": 160,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 3,
+          "_eid": "93117141",
+          "x": 520,
+          "y": 144,
+          "width": 32,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 4,
+          "_eid": "93117141",
+          "x": 656,
+          "y": 120,
+          "width": 80,
+          "height": 64,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 5,
+          "_eid": "93117141",
+          "x": 736,
+          "y": 184,
+          "width": 120,
+          "height": 144,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 6,
+          "_eid": "93117141",
+          "x": 856,
+          "y": 248,
+          "width": 456,
+          "height": 136,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        }
+      ]
+    },
+    {
+      "name": "BackgroundEntities",
+      "_eid": "41483982",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 288,
+      "gridCellsY": 41,
+      "entities": []
+    },
+    {
+      "name": "BackgroundDecals",
+      "_eid": "64691217",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 288,
+      "gridCellsY": 41,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxDecals",
+      "_eid": "17093961",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 288,
+      "gridCellsY": 41,
+      "decals": [],
+      "folder": "../textures"
+    }
+  ]
+}

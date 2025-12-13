@@ -5219,6 +5219,27 @@ export const Lvl = {
       PlayerChargeRegion: e(r["Region"], { x: 160, y: 24, width: 32, height: 32, values: { name: "PlayerChargeRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
     };
   },
+  SinSwamp: () => {
+    applyLevel({ width: 2304, height: 328, backgroundTint: 0x408000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 208, width: 224, height: 120, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 224, y: 248, width: 384, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 608, y: 184, width: 128, height: 160, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 520, y: 144, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 656, y: 120, width: 80, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 736, y: 184, width: 120, height: 144, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 856, y: 248, width: 456, height: 136, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      EnemyMiffed: e(r["EnemyMiffed"], { x: 536, y: 248, uid: 176559377373100, values: { name: "", depth: 0, variant: "level2" } }, "Entities"),
+      Sign: e(r["Sign"], { x: 136, y: 208, values: { title: "Swamp", message: "Poisonous swamp. Wear proper shoes before entering.", name: "", depth: 0, isSpecial: false } }, "Entities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -40, y: 80, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromSinSwamp", name: "", depth: 0 } }, "Entities"),
+      EnemySuggestive: e(r["EnemySuggestive"], { x: 800, y: 184, uid: 176559394272601, values: { name: "", depth: 0, variant: "level1" } }, "Entities"),
+      EnemyMiffed_1: e(r["EnemyMiffed"], { x: 936, y: 248, uid: 176559395325602, values: { name: "", depth: 0, variant: "level1" } }, "Entities"),
+      EnemyMiffed_2: e(r["EnemyMiffed"], { x: 1072, y: 248, uid: 176559395604103, values: { name: "", depth: 0, variant: "level2" } }, "Entities"),
+      EnemyMiffed_3: e(r["EnemyMiffed"], { x: 1192, y: 248, uid: 176559395780604, values: { name: "", depth: 0, variant: "level2" } }, "Entities"),
+      Player: e(r["Player"], { x: 104, y: 208, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      PoisonRegion: e(r["Region"], { x: 224, y: 184, width: 2024, height: 64, values: { name: "PoisonRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+    };
+  },
   StrangeMarketRestaurant: () => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x62c44a });
     return {
@@ -6113,6 +6134,7 @@ export namespace LvlType {
   export type PlainsSuggestiveFlopCollector = ReturnType<(typeof Lvl)["PlainsSuggestiveFlopCollector"]>;
   export type PlainsSuggestive = ReturnType<(typeof Lvl)["PlainsSuggestive"]>;
   export type SimpleSecretValuables = ReturnType<(typeof Lvl)["SimpleSecretValuables"]>;
+  export type SinSwamp = ReturnType<(typeof Lvl)["SinSwamp"]>;
   export type StrangeMarketRestaurant = ReturnType<(typeof Lvl)["StrangeMarketRestaurant"]>;
   export type StrangeMarketTowerInterior = ReturnType<(typeof Lvl)["StrangeMarketTowerInterior"]>;
   export type StrangeMarket = ReturnType<(typeof Lvl)["StrangeMarket"]>;
