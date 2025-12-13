@@ -119,7 +119,10 @@ export namespace DataPotion {
     export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataPotion" });
 
     export function usePotion(id: Id, target: MxnRpgStatus) {
-        getById(id).sound?.play();
+        const sound = getById(id).sound;
+        if (sound) {
+            target.play(sound);
+        }
 
         switch (id) {
             // TODO attributes do not exist on MxnRpgStatus
