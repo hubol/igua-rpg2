@@ -131,6 +131,19 @@
           "uid": 176310576198900,
           "tint": "#ffffff",
           "values": {"sceneName": "scnSimpleSecretValuables", "checkpointName": "fromWorldMap", "name": "SimpleSecretValuablesGate", "depth": 0, "visible": false}
+        },
+        {
+          "name": "GateMap",
+          "id": 9,
+          "_eid": "53836309",
+          "x": 920,
+          "y": 208,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 270,
+          "uid": 176569559038300,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnSinSwamp", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -298,6 +311,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromGreatTowerBalcony", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 12,
+          "_eid": "19953026",
+          "x": 888,
+          "y": 248,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromSinSwamp", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -719,7 +743,8 @@
           "texture": "enemy/spike ball.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 715,
@@ -731,7 +756,8 @@
           "texture": "enemy/spike ball.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -3899,7 +3925,8 @@
           "texture": "light/shadow irregular small round.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 719,
@@ -3911,7 +3938,8 @@
           "texture": "light/shadow irregular small round.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

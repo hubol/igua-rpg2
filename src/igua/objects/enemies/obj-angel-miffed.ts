@@ -234,12 +234,14 @@ const ranks = {
     level3: RpgEnemyRank.create({
         loot: {
             tier0: [
-                { kind: "valuables", deltaPride: -5, max: 70, min: 15, weight: 95 },
-                { kind: "equipment", id: "PatheticCage", weight: 5 },
+                { kind: "valuables", deltaPride: -5, max: 70, min: 15, weight: 90 },
+                { kind: "equipment", id: "PoisonResistance", weight: 10 },
             ],
             tier1: [
-                // TODO
-                { kind: "valuables", deltaPride: -5, max: 70, min: 15, weight: 50 },
+                { kind: "valuables", deltaPride: -5, max: 70, min: 15, weight: 16 },
+                { kind: "flop", count: 1, min: 20, max: 24, weight: 14 },
+                { kind: "flop", count: 2, min: 20, max: 24, weight: 11 },
+                { kind: "flop", count: 3, min: 20, max: 24, weight: 9 },
                 { kind: "nothing", weight: 50 },
             ],
         },
