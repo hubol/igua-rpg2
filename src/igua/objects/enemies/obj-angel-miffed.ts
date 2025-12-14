@@ -687,7 +687,7 @@ const atkFlameBox = RpgAttack.create({
 });
 
 const atkSweepOrb = RpgAttack.create({
-    emotional: 40,
+    physical: 40,
 });
 
 const getPoisonBoxTargetPosition = function () {
