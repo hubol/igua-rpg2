@@ -5228,12 +5228,6 @@ export const Lvl = {
       TerrainDistantWaves0_2: d(Tx.Terrain.Distant.Waves0, { x: 1496, y: 340, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "ParallaxDecals"),
       TerrainDistantWaves0_3: d(Tx.Terrain.Distant.Waves0, { x: 1992, y: 340, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "ParallaxDecals"),
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 576, y: 364, scaleX: 54, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0x85b421 }, "ParallaxDecals"),
-      TerrainDistantWaves0_4: d(Tx.Terrain.Distant.Waves0, { x: 512, y: 384, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x678b19 }, "BackgroundDecals"),
-      TerrainDistantHills500_1: d(Tx.Terrain.Distant.Hills500, { x: 360, y: 424, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x678b19 }, "BackgroundDecals"),
-      TerrainDistantWaves0_5: d(Tx.Terrain.Distant.Waves0, { x: 1012, y: 384, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x678b19 }, "BackgroundDecals"),
-      TerrainDistantWaves0_6: d(Tx.Terrain.Distant.Waves0, { x: 1512, y: 384, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x678b19 }, "BackgroundDecals"),
-      TerrainDistantWaves0_7: d(Tx.Terrain.Distant.Waves0, { x: 2008, y: 384, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x678b19 }, "BackgroundDecals"),
-      ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 592, y: 408, scaleX: 54, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0x678b19 }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 0, y: 392, width: 224, height: 120, values: { name: "", depth: 0, visible: true }, tint: 0x251105 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 224, y: 432, width: 384, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x251105 }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 608, y: 368, width: 128, height: 160, values: { name: "", depth: 0, visible: true }, tint: 0x251105 }, "TerrainEntities"),
@@ -5261,7 +5255,7 @@ export const Lvl = {
       EnemyMiffed_2: e(r["EnemyMiffed"], { x: 1144, y: 272, uid: 176559395604103, values: { name: "", depth: 0, variant: "level3" } }, "Entities"),
       EnemyMiffed_3: e(r["EnemyMiffed"], { x: 1192, y: 432, uid: 176559395780604, values: { name: "", depth: 0, variant: "level3" } }, "Entities"),
       Player: e(r["Player"], { x: 104, y: 392, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
-      PoisonRegion: e(r["Region"], { x: 224, y: 368, width: 2024, height: 64, values: { name: "PoisonRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      PoisonRegion: e(r["Region"], { x: 224, y: 382, width: 2024, height: 50, values: { name: "PoisonRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
     };
   },
   StrangeMarketRestaurant: () => {

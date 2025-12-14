@@ -33,9 +33,9 @@
           "id": 0,
           "_eid": "11908607",
           "x": 224,
-          "y": 368,
+          "y": 382,
           "width": 2024,
-          "height": 64,
+          "height": 50,
           "originX": 0,
           "originY": 0,
           "tint": "#00ff00",
@@ -492,80 +492,7 @@
       "gridCellHeight": 8,
       "gridCellsX": 288,
       "gridCellsY": 64,
-      "decals": [
-        {
-          "x": 512,
-          "y": 384,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#678b19",
-          "texture": "terrain/distant/waves 0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 360,
-          "y": 424,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#678b19",
-          "texture": "terrain/distant/hills 500.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 1012,
-          "y": 384,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#678b19",
-          "texture": "terrain/distant/waves 0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 1512,
-          "y": 384,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#678b19",
-          "texture": "terrain/distant/waves 0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 2008,
-          "y": 384,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#678b19",
-          "texture": "terrain/distant/waves 0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 592,
-          "y": 408,
-          "scaleX": 54,
-          "scaleY": 2,
-          "rotation": 0,
-          "tint": "#678b19",
-          "texture": "shapes/square32.png",
-          "originX": 0,
-          "originY": 0,
-          "values": {"name": ""}
-        }
-      ],
+      "decals": [],
       "folder": "../textures"
     },
     {
