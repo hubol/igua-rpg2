@@ -5087,6 +5087,60 @@ export const Lvl = {
       GateVertical_1: e(r["GateVertical"], { x: 1344, y: 424, width: 792, flippedY: false, values: { sceneName: "scnPlainsSuggestiveCavern", checkpointName: "", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
+  RaceTrack: () => {
+    applyLevel({ width: 9848, height: 696, backgroundTint: 0x408000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 376, width: 392, height: 320, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 392, y: 376, width: 256, height: 128, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 648, y: 504, width: 256, height: 64, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 904, y: 568, width: 1248, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_2: e(r["Slope"], { x: 2152, y: 504, width: 256, height: 64, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_3: e(r["Slope"], { x: 2408, y: 376, width: 256, height: 128, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 2664, y: 376, width: 392, height: 320, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 1048, y: 512, width: 16, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 1496, y: 512, width: 16, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 1944, y: 512, width: 16, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 544, y: 0, width: 1936, height: 368, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 3096, y: -152, width: 2848, height: 376, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_8: e(r["Block"], { x: 3208, y: 376, width: 160, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_9: e(r["Block"], { x: 3592, y: 376, width: 160, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_10: e(r["Block"], { x: 4032, y: 408, width: 160, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_11: e(r["Block"], { x: 4528, y: 416, width: 160, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_12: e(r["Block"], { x: 4976, y: 512, width: 160, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_13: e(r["Block"], { x: 5448, y: 520, width: 160, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_14: e(r["Block"], { x: 3536, y: 224, width: 264, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_15: e(r["Block"], { x: 3984, y: 224, width: 264, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_16: e(r["Block"], { x: 4480, y: 224, width: 264, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_17: e(r["Block"], { x: 4936, y: 224, width: 264, height: 104, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_18: e(r["Block"], { x: 5400, y: 224, width: 264, height: 104, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_19: e(r["Block"], { x: 5920, y: 608, width: 1528, height: 88, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 6240, y: 552, width: 952, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_20: e(r["Block"], { x: 6144, y: 0, width: 96, height: 560, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_21: e(r["Block"], { x: 6240, y: 552, width: 240, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe_1: e(r["Pipe"], { x: 6240, y: 496, width: 952, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_22: e(r["Block"], { x: 6240, y: 496, width: 512, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_23: e(r["Block"], { x: 7032, y: 496, width: 544, height: 112, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_24: e(r["Block"], { x: 6736, y: 552, width: 304, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe_2: e(r["Pipe"], { x: 7416, y: 440, width: 1984, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_25: e(r["Block"], { x: 6280, y: 440, width: 1136, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_26: e(r["Block"], { x: 7576, y: 400, width: 504, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe_3: e(r["Pipe"], { x: 7992, y: 496, width: 712, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_27: e(r["Block"], { x: 7904, y: 456, width: 176, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_28: e(r["Block"], { x: 8248, y: 496, width: 288, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_29: e(r["Block"], { x: 8080, y: 440, width: 368, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_30: e(r["Block"], { x: 7576, y: 0, width: 504, height: 408, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe_4: e(r["Pipe"], { x: 7936, y: 552, width: 176, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_5: e(r["Pipe"], { x: 7576, y: 552, width: 256, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_31: e(r["Block"], { x: 9640, y: 440, width: 232, height: 256, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_32: e(r["Block"], { x: 1032, y: 512, width: 16, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_33: e(r["Block"], { x: 1480, y: 512, width: 16, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_34: e(r["Block"], { x: 1928, y: 512, width: 16, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Player: e(r["Player"], { x: 216, y: 376, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      PlayerDev: e(r["PlayerDev"], { x: 216, y: 376, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      fromRestart: e(r["Checkpoint"], { x: 216, y: 104, flippedX: false, values: { name: "fromRestart", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
+      GateVertical: e(r["GateVertical"], { x: 0, y: 656, width: 9864, flippedY: false, values: { sceneName: "scnRaceTrack", checkpointName: "fromRestart", name: "", depth: 0 } }, "RegionEntities"),
+    };
+  },
   SimpleSecretValuables: () => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x8b93dc });
     return {
@@ -6164,6 +6218,7 @@ export namespace LvlType {
   export type PlainsSuggestiveCavern = ReturnType<(typeof Lvl)["PlainsSuggestiveCavern"]>;
   export type PlainsSuggestiveFlopCollector = ReturnType<(typeof Lvl)["PlainsSuggestiveFlopCollector"]>;
   export type PlainsSuggestive = ReturnType<(typeof Lvl)["PlainsSuggestive"]>;
+  export type RaceTrack = ReturnType<(typeof Lvl)["RaceTrack"]>;
   export type SimpleSecretValuables = ReturnType<(typeof Lvl)["SimpleSecretValuables"]>;
   export type SinSwamp = ReturnType<(typeof Lvl)["SinSwamp"]>;
   export type StrangeMarketRestaurant = ReturnType<(typeof Lvl)["StrangeMarketRestaurant"]>;
