@@ -4,6 +4,7 @@ import { interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
+import { ZIndex } from "../core/scene/z-index";
 import { ask, show } from "../drama/show";
 import { Cutscene, layers } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -189,5 +190,6 @@ function objGhostPlayback(lvl: LvlType.RaceTrack) {
         });
     };
 
-    return iguanaObj2;
+    return iguanaObj2
+        .zIndexed(ZIndex.TerrainDecals);
 }
