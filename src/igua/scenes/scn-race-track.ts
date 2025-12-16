@@ -4,7 +4,9 @@ import { interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
-import { layers } from "../globals";
+import { ask, show } from "../drama/show";
+import { Cutscene, layers } from "../globals";
+import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objHolyIguana } from "../objects/characters/obj-holy-iguana";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
@@ -13,7 +15,7 @@ export function scnRaceTrack() {
     Rpg.character.status.conditions.poison.level = 10;
     const lvl = Lvl.RaceTrack();
     // objGhostRecord(lvl).show();
-    objGhostPlayback().show();
+    objGhostPlayback(lvl).show();
 }
 
 function objGhostRecord(lvl: LvlType.RaceTrack) {
@@ -93,7 +95,7 @@ function objGhostRecord(lvl: LvlType.RaceTrack) {
         });
 }
 
-function objGhostPlayback() {
+function objGhostPlayback(lvl: LvlType.RaceTrack) {
     const data = [
         [161, 379, 2],
         [436, 396, 48],
@@ -152,14 +154,40 @@ function objGhostPlayback() {
         [9680, 443, 1181],
     ];
 
-    return objHolyIguana("Hubol")
-        .coro(function* (self) {
-            yield sleep(300);
+    const iguanaObj = objHolyIguana("Hubol");
+
+    const iguanaObj2 = iguanaObj
+        .mixin(mxnCutscene, function* () {
+            if (Rpg.character.status.conditions.poison.level !== 10) {
+                yield* show(
+                    "Hey kid, I'll race you, but you need to be poisoned ten times. Or there is just no point.",
+                );
+                return;
+            }
+            if (yield* ask("Nice, you're poisoned. Want to race?")) {
+                yield* show("Cool. Rev up your engines!!!!");
+                playerObj.at(lvl.PlayerStartMarker);
+                playerObj.auto.facing = 1;
+                yield sleep(3000);
+                startRace();
+            }
+            else {
+                yield* show("Suit yourself!");
+            }
+        })
+        .at(data[0]);
+
+    const startRace = () => {
+        iguanaObj2.interact.enabled = false;
+        iguanaObj2.coro(function* (self) {
+            yield () => !Cutscene.isPlaying;
             let previous = 0;
             for (const [x, y, time] of data) {
                 yield interpvr(self).to(x, y).over((time - previous) * 1000 / 60);
                 previous = time;
             }
-        })
-        .at(data[0]);
+        });
+    };
+
+    return iguanaObj2;
 }
