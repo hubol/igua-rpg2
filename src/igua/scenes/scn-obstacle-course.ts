@@ -22,10 +22,8 @@ import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
+import { objHolyIguana } from "../objects/characters/obj-holy-iguana";
 import { CtxPocketItems } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
-import { objFxPuffyCloud } from "../objects/effects/obj-fx-puffy-cloud";
-import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
 import { objStatusBar } from "../objects/overlay/obj-status-bar";
 import { Rpg } from "../rpg/rpg";
@@ -146,17 +144,6 @@ function objMinigameController(lvl: LvlType.ObstacleCourse) {
 function* dramaEndMinigame(lvl: LvlType.ObstacleCourse) {
     yield* DramaMisc.levitatePlayer(interpvr(playerObj).factor(factor.sine).to(lvl.ResetPlayerMarker).over(4000));
     yield interpvr(lvl.RestrictedBlock).translate(0, -50).over(500);
-}
-
-function objHolyIguana(npcPersonaId: DataNpcPersona.Id) {
-    const iguanaNpcObj = objIguanaNpc(npcPersonaId);
-    return container(
-        objFxPuffyCloud(0xacbddd).at(2, -3),
-        iguanaNpcObj,
-        objFxPuffyCloud(0xffffff),
-    )
-        .mixin(mxnSinePivot)
-        .merge({ iguanaNpcObj });
 }
 
 interface CoroAwardPrizeForCollectionArgs {
