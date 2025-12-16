@@ -5136,9 +5136,11 @@ export const Lvl = {
       Block_33: e(r["Block"], { x: 1480, y: 512, width: 16, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_34: e(r["Block"], { x: 1928, y: 512, width: 16, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Player: e(r["Player"], { x: 216, y: 376, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
-      PlayerDev: e(r["PlayerDev"], { x: 216, y: 376, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromRestart: e(r["Checkpoint"], { x: 216, y: 104, flippedX: false, values: { name: "fromRestart", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       GateVertical: e(r["GateVertical"], { x: 0, y: 656, width: 9864, flippedY: false, values: { sceneName: "scnRaceTrack", checkpointName: "fromRestart", name: "", depth: 0 } }, "RegionEntities"),
+      WinRegion: e(r["Region"], { x: 9640, y: 336, width: 208, height: 120, values: { name: "WinRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      PlayerStartMarker: e(r["Marker"], { x: 215, y: 376, values: { name: "PlayerStartMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      GhostStartMarker: e(r["Marker"], { x: 160, y: 376, values: { name: "GhostStartMarker", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
     };
   },
   SimpleSecretValuables: () => {
