@@ -127,8 +127,8 @@ function* startSpeaking(text: string) {
     return { currentSpeaker, currentSpeakerMessageBoxObj };
 }
 
-export function* show(text: string, ...moreText: string[]) {
-    for (const messageText of [text, ...moreText]) {
+export function* show(...messageTexts: string[]) {
+    for (const messageText of messageTexts) {
         yield* showOneMessage(messageText);
     }
 }
