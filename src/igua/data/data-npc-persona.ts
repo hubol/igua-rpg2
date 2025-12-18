@@ -45,6 +45,7 @@ export namespace DataNpcPersona {
             CloudHouseAddict: { job: "Addict", name: "Marin", looks: NpcLooks.CharmingFool },
             CloudHouseRinger: { job: "Ringer", name: "Ding Ding Saudah", looks: NpcLooks.Insecure },
             IndianaDirector: { job: "Director", name: "Don GPA", looks: NpcLooks.Miserable },
+            Olympian: { job: "Olympian", name: "Jim Niss", looks: NpcLooks.Naive },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
         } satisfies Record<string, Model>,
     );

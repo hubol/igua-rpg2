@@ -1,6 +1,6 @@
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
-import { interpvr } from "../../lib/game-engine/routines/interp";
+import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
@@ -155,9 +155,7 @@ function objGhostPlayback(lvl: LvlType.RaceTrack) {
         [9680, 443, 1181],
     ];
 
-    const iguanaObj = objHolyIguana("Hubol");
-
-    const iguanaObj2 = iguanaObj
+    const iguanaObj = objHolyIguana("Olympian")
         .mixin(mxnCutscene, function* () {
             if (Rpg.character.status.conditions.poison.level !== 10) {
                 yield* show(
@@ -167,7 +165,7 @@ function objGhostPlayback(lvl: LvlType.RaceTrack) {
             }
             if (yield* ask("Nice, you're poisoned. Want to race?")) {
                 yield* show("Cool. Rev up your engines!!!!");
-                playerObj.at(lvl.PlayerStartMarker);
+                playerObj.x = lvl.PlayerStartMarker.x;
                 playerObj.auto.facing = 1;
                 yield sleep(3000);
                 startRace();
@@ -176,20 +174,26 @@ function objGhostPlayback(lvl: LvlType.RaceTrack) {
                 yield* show("Suit yourself!");
             }
         })
-        .at(data[0]);
+        .at(data[0])
+        .zIndexed(ZIndex.TerrainDecals);
 
-    const startRace = () => {
-        iguanaObj2.interact.enabled = false;
-        iguanaObj2.coro(function* (self) {
+    function startRace() {
+        iguanaObj.interact.enabled = false;
+        iguanaObj.coro(function* (self) {
             yield () => !Cutscene.isPlaying;
             let previous = 0;
             for (const [x, y, time] of data) {
-                yield interpvr(self).to(x, y).over((time - previous) * 1000 / 60);
+                const ms = (time - previous) * 1000 / 60;
+                if (ms > 300) {
+                    yield interpvr(self).to(x, y).over(ms);
+                }
+                else {
+                    yield interpvr(self).factor(factor.sine).to(x, y).over(ms);
+                }
                 previous = time;
             }
         });
-    };
+    }
 
-    return iguanaObj2
-        .zIndexed(ZIndex.TerrainDecals);
+    return iguanaObj;
 }
