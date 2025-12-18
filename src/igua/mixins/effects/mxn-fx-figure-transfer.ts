@@ -63,3 +63,5 @@ export function mxnFxFigureTransfer(
             self.dispatch("mxnFigureTransfer:transfered");
         });
 }
+
+export type MxnFxFigureTransfer = ReturnType<typeof mxnFxFigureTransfer>;

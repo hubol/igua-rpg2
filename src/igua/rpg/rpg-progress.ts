@@ -1,6 +1,7 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { Null } from "../../lib/types/null";
+import { DataNpcPersona } from "../data/data-npc-persona";
 import { Rpg } from "./rpg";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgClassrooms } from "./rpg-classrooms";
@@ -41,6 +42,9 @@ export function getInitialRpgProgress() {
             ...RpgPlayer.createState(),
         },
         flags: {
+            classrooms: {
+                approvedForTeachingBy: Null<DataNpcPersona.Id>(),
+            },
             newBalltown: {
                 armorer: {
                     aquarium: {
