@@ -4,6 +4,22 @@ import { Integer } from "../../lib/math/number-alias-types";
 export type DataCuesheet<TCommand> = Array<[start: number, end: number, command: TCommand, data: string | null]>;
 
 export namespace DataCuesheet {
+    export const ReadySetGo: DataCuesheet<"lip" | "done"> = [
+        [0.050814, 0.050814, "lip", "o0"],
+        [0.148377, 0.148377, "lip", "tall"],
+        [0.347569, 0.347569, "lip", "tongue"],
+        [0.406514, 0.406514, "lip", "wide"],
+        [0.892297, 0.892297, "lip", "default"],
+        [1.380114, 1.380114, "lip", "teeth"],
+        [1.563045, 1.563045, "lip", "wide"],
+        [2.026471, 2.026471, "lip", "tongue"],
+        [2.128099, 2.128099, "lip", "default"],
+        [2.756163, 2.756163, "lip", "o0"],
+        [2.920801, 2.920801, "lip", "o1"],
+        [3.296826, 3.296826, "lip", "default"],
+        [3.349673, 3.349673, "done", null],
+    ];
+
     export const SoldierBoyDemo: DataCuesheet<"beat" | "key" | "lyric" | "lip" | "misc" | "offbeat"> = [
         [0.595319, 0.595319, "misc", "guitar_start"],
         [0.617678, 0.617678, "beat", null],

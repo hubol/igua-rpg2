@@ -1,13 +1,16 @@
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Sfx } from "../../assets/sounds";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
+import { DataCuesheet } from "../data/data-cuesheet";
 import { ask, show } from "../drama/show";
-import { Cutscene, layers } from "../globals";
+import { Cutscene, layers, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { objAnnouncer } from "../objects/characters/obj-announcer";
 import { objHolyIguana } from "../objects/characters/obj-holy-iguana";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
@@ -17,6 +20,12 @@ export function scnRaceTrack() {
     const lvl = Lvl.RaceTrack();
     // objGhostRecord(lvl).show();
     objGhostPlayback(lvl).show();
+    // const readySetGoSfx = Sfx.Character.AnnouncerReadySetGo.playInstance();
+    // // readySetGoSfx.stop();
+    // scene.stage.coro(function* () {
+    //     yield sleep(100);
+    //     objAnnouncer(readySetGoSfx, DataCuesheet.ReadySetGo).at(playerObj).add(0, 0).show();
+    // });
 }
 
 function objGhostRecord(lvl: LvlType.RaceTrack) {
@@ -167,7 +176,22 @@ function objGhostPlayback(lvl: LvlType.RaceTrack) {
                 yield* show("Cool. Rev up your engines!!!!");
                 playerObj.x = lvl.PlayerStartMarker.x;
                 playerObj.auto.facing = 1;
-                yield sleep(3000);
+
+                const readySetGoSfx = Sfx.Character.AnnouncerReadySetGo.playInstance();
+                const announcerObj = objAnnouncer(readySetGoSfx, DataCuesheet.ReadySetGo)
+                    .at(playerObj)
+                    .add(20, 300)
+                    .show();
+
+                yield interpvr(announcerObj).factor(factor.sine).translate(0, -150).over(200);
+
+                yield sleep(2800);
+
+                announcerObj.coro(function* (self) {
+                    yield interpvr(announcerObj).factor(factor.sine).translate(0, 200).over(200);
+                    self.destroy();
+                });
+
                 startRace();
             }
             else {

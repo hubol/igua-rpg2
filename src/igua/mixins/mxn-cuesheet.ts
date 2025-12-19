@@ -1,11 +1,16 @@
 import { DisplayObject } from "pixi.js";
 import { MusicTrack } from "../../lib/game-engine/audio/asshat-jukebox";
+import { SoundInstance } from "../../lib/game-engine/audio/sound";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Force } from "../../lib/types/force";
 import { Jukebox } from "../core/igua-audio";
 import { DataCuesheet } from "../data/data-cuesheet";
 
-export function mxnCuesheet<TCommand>(obj: DisplayObject, track: MusicTrack, cuesheet: DataCuesheet<TCommand>) {
+export function mxnCuesheet<TCommand>(
+    obj: DisplayObject,
+    soundInstance: MusicTrack | SoundInstance,
+    cuesheet: DataCuesheet<TCommand>,
+) {
     interface Message {
         command: TCommand;
         data: string | null;
@@ -14,14 +19,18 @@ export function mxnCuesheet<TCommand>(obj: DisplayObject, track: MusicTrack, cue
     const startedCueIndices = new Set<Integer>();
     const endedCueIndices = new Set<Integer>();
 
-    let previousTime = Jukebox.getEstimatedPlayheadPosition(track);
+    const getPlayheadPosition = soundInstance instanceof SoundInstance
+        ? () => soundInstance.estimatedPlayheadPosition
+        : () => Jukebox.getEstimatedPlayheadPosition(soundInstance);
+
+    let previousTime = getPlayheadPosition();
     let minCueIndex = 0;
 
     return obj
         .dispatchesValue<"cue:start", Message>()
         .dispatchesValue<"cue:end", Message>()
         .step(self => {
-            const time = Jukebox.getEstimatedPlayheadPosition(track);
+            const time = getPlayheadPosition();
 
             if (time < previousTime) {
                 minCueIndex = 0;
