@@ -21,6 +21,11 @@ export namespace DataQuestReward {
             extend: Extend;
         }
 
+        export interface Repeat {
+            kind: "repeat";
+            reward: DataQuestReward.Reward;
+        }
+
         export interface Single {
             kind: "single";
             reward: DataQuestReward.Reward;
@@ -31,7 +36,7 @@ export namespace DataQuestReward {
         }
     }
 
-    export type Model = Model.InOrder | Model.Single | Model.Nothing;
+    export type Model = Model.InOrder | Model.Repeat | Model.Single | Model.Nothing;
 
     export const Manifest = DataLib.createManifest(
         {
@@ -119,6 +124,10 @@ export namespace DataQuestReward {
             SimpleSecretHappy: {
                 kind: "single",
                 reward: { kind: "equipment", id: "WetnessCapacityUp", level: 1 },
+            },
+            "RaceTrack.WonRace": {
+                kind: "repeat",
+                reward: { kind: "equipment", id: "MusicTempoUp", level: 1 },
             },
             __Fallback__: {
                 kind: "nothing",

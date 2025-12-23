@@ -44,6 +44,12 @@ export class RpgQuest {
             return this._state.timesCompleted === 0 ? { count, ...reward, isExtended: false } : null;
         }
 
+        if (this._data.kind === "repeat") {
+            const { count = 1, ...reward } = this._data.reward;
+            // TODO not sure semantics of isExtended for repeat rewards
+            return { count, ...reward, isExtended: false };
+        }
+
         let rewards = this._data.rewards[this._state.timesCompleted] ?? null;
         let isExtended = false;
 

@@ -7,6 +7,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
 import { DataCuesheet } from "../data/data-cuesheet";
+import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { Cutscene, layers, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -164,8 +165,31 @@ function objGhostPlayback(lvl: LvlType.RaceTrack) {
         [9680, 443, 1181],
     ];
 
+    let state: "initial" | "racing" | "player_lost" | "player_won" | "player_rewarded" = "initial";
+
     const iguanaObj = objHolyIguana("Olympian")
         .mixin(mxnCutscene, function* () {
+            if (state === "racing") {
+                return;
+            }
+
+            if (state === "player_lost") {
+                yield* show("Sorry kid, you lost.", "Jump into the pit to try again.");
+                return;
+            }
+
+            if (state === "player_won") {
+                yield* show("Congrantulations!", "You are awesome.");
+                yield* DramaQuests.complete("RaceTrack.WonRace");
+                state = "player_rewarded";
+                return;
+            }
+
+            if (state === "player_rewarded") {
+                yield* show("I hope you enjoy your prize.");
+                return;
+            }
+
             if (Rpg.character.status.conditions.poison.level !== 10) {
                 yield* show(
                     "Hey kid, I'll race you, but you need to be poisoned ten times. Or there is just no point.",
@@ -198,25 +222,38 @@ function objGhostPlayback(lvl: LvlType.RaceTrack) {
                 yield* show("Suit yourself!");
             }
         })
+        .step(self => self.interact.enabled = state !== "racing")
         .at(data[0])
         .zIndexed(ZIndex.TerrainDecals);
 
     function startRace() {
-        iguanaObj.interact.enabled = false;
-        iguanaObj.coro(function* (self) {
-            yield () => !Cutscene.isPlaying;
-            let previous = 0;
-            for (const [x, y, time] of data) {
-                const ms = (time - previous) * 1000 / 60;
-                if (ms > 300) {
-                    yield interpvr(self).to(x, y).over(ms);
+        state = "racing";
+        iguanaObj
+            .coro(function* (self) {
+                yield () => !Cutscene.isPlaying;
+                let previous = 0;
+                for (const [x, y, time] of data) {
+                    const ms = (time - previous) * 1000 / 60;
+                    if (ms > 300) {
+                        yield interpvr(self).to(x, y).over(ms);
+                    }
+                    else {
+                        yield interpvr(self).factor(factor.sine).to(x, y).over(ms);
+                    }
+                    previous = time;
                 }
-                else {
-                    yield interpvr(self).factor(factor.sine).to(x, y).over(ms);
+            })
+            .step(() => {
+                if (state !== "racing") {
+                    return;
                 }
-                previous = time;
-            }
-        });
+                if (playerObj.collides(lvl.WinRegion)) {
+                    state = "player_won";
+                }
+                else if (iguanaObj.collides(lvl.WinRegion)) {
+                    state = "player_lost";
+                }
+            });
     }
 
     return iguanaObj;
