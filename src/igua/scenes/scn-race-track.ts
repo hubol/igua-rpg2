@@ -23,7 +23,6 @@ export function scnRaceTrack() {
     // objGhostRecord(lvl).show();
     objGhostPlayback(lvl).show();
     // const readySetGoSfx = Sfx.Character.AnnouncerReadySetGo.playInstance();
-    // // readySetGoSfx.stop();
     // scene.stage.coro(function* () {
     //     yield sleep(100);
     //     objAnnouncer(readySetGoSfx, DataCuesheet.ReadySetGo).at(playerObj).add(0, 0).show();
@@ -206,7 +205,7 @@ function objGhostPlayback(lvl: LvlType.RaceTrack) {
                 const readySetGoSfx = Sfx.Character.AnnouncerReadySetGo.playInstance();
                 const announcerObj = objAnnouncer(readySetGoSfx, DataCuesheet.ReadySetGo)
                     .at(playerObj)
-                    .add(20, 300)
+                    .add(20, 290)
                     .show();
 
                 yield interpvr(announcerObj).factor(factor.sine).translate(0, -150).over(200);

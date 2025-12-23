@@ -4,14 +4,16 @@ import { Integer } from "../../lib/math/number-alias-types";
 export type DataCuesheet<TCommand> = Array<[start: number, end: number, command: TCommand, data: string | null]>;
 
 export namespace DataCuesheet {
-    export const ReadySetGo: DataCuesheet<"lip" | "done"> = [
+    export const ReadySetGo: DataCuesheet<"lip" | "done" | "left_arm_raise" | "right_arm_raise"> = [
         [0.050814, 0.050814, "lip", "o0"],
         [0.148377, 0.148377, "lip", "tall"],
         [0.347569, 0.347569, "lip", "tongue"],
+        [0.359765, 0.359765, "left_arm_raise", null],
         [0.406514, 0.406514, "lip", "wide"],
         [0.892297, 0.892297, "lip", "default"],
         [1.380114, 1.380114, "lip", "teeth"],
         [1.563045, 1.563045, "lip", "wide"],
+        [1.585403, 1.585403, "right_arm_raise", null],
         [2.026471, 2.026471, "lip", "tongue"],
         [2.128099, 2.128099, "lip", "default"],
         [2.756163, 2.756163, "lip", "o0"],
