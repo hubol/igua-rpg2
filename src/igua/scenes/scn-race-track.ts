@@ -18,7 +18,7 @@ import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 
 export function scnRaceTrack() {
-    Rpg.character.status.conditions.poison.level = 10;
+    // Rpg.character.status.conditions.poison.level = 10;
     const lvl = Lvl.RaceTrack();
     // objGhostRecord(lvl).show();
     objGhostPlayback(lvl).show();
