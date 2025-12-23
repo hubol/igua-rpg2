@@ -9,15 +9,16 @@ import { ZIndex } from "../core/scene/z-index";
 import { DataCuesheet } from "../data/data-cuesheet";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
-import { Cutscene, layers, scene } from "../globals";
+import { Cutscene, layers } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnIguanaHoly } from "../mixins/mxn-iguana-holy";
 import { objAnnouncer } from "../objects/characters/obj-announcer";
-import { objHolyIguana } from "../objects/characters/obj-holy-iguana";
+import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 
 export function scnRaceTrack() {
-    // Rpg.character.status.conditions.poison.level = 10;
+    Rpg.character.status.conditions.poison.level = 10;
     const lvl = Lvl.RaceTrack();
     // objGhostRecord(lvl).show();
     objGhostPlayback(lvl).show();
@@ -167,7 +168,8 @@ function objGhostPlayback(lvl: LvlType.RaceTrack) {
 
     let state: "initial" | "racing" | "player_lost" | "player_won" | "player_rewarded" = "initial";
 
-    const iguanaObj = objHolyIguana("Olympian")
+    const iguanaObj = objIguanaNpc("Olympian")
+        .mixin(mxnIguanaHoly)
         .mixin(mxnCutscene, function* () {
             if (state === "racing") {
                 return;

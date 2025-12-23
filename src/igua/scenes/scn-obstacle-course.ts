@@ -22,8 +22,9 @@ import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { objHolyIguana } from "../objects/characters/obj-holy-iguana";
+import { mxnIguanaHoly } from "../mixins/mxn-iguana-holy";
 import { CtxPocketItems } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
+import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
 import { objStatusBar } from "../objects/overlay/obj-status-bar";
 import { Rpg } from "../rpg/rpg";
@@ -161,7 +162,8 @@ function* coroAwardPrizeForCollection({ npcPersonaId, pocketItemId, questRewardI
 
         const vector = vnew();
 
-        const holyIguanaObj = objHolyIguana(npcPersonaId)
+        const holyIguanaObj = objIguanaNpc(npcPersonaId)
+            .mixin(mxnIguanaHoly)
             .at(scene.camera)
             .add(startPosition)
             .step(self =>
@@ -182,6 +184,6 @@ function* coroAwardPrizeForCollection({ npcPersonaId, pocketItemId, questRewardI
             yield* show("A blessing for thy harvest.", "Many thanks unto thine ass.");
             yield interp(lerpRef, "factor").factor(factor.sine).to(0).over(2000);
             holyIguanaObj.destroy();
-        }, { speaker: holyIguanaObj.iguanaNpcObj }).done;
+        }, { speaker: holyIguanaObj }).done;
     }
 }

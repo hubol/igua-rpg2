@@ -9,6 +9,7 @@ import { CtxTerrainObj } from "../objects/obj-terrain";
 import { StepOrder } from "../objects/step-order";
 import { scnWorldMap } from "../scenes/scn-world-map";
 import { mxnBoilMirrorRotate } from "./mxn-boil-mirror-rotate";
+import { mxnIguanaHoly } from "./mxn-iguana-holy";
 
 interface MxnShadowFloorArgs {
     offset: VectorSimple;
@@ -26,7 +27,8 @@ export function mxnShadowFloor(obj: DisplayObject, args: MxnShadowFloorArgs) {
                 self.destroy();
                 return;
             }
-            self.visible = obj.visible;
+            // TODO crude obj.is check, maybe should expose API for this
+            self.visible = obj.visible && !obj.is(mxnIguanaHoly);
             self.at(obj.position).add(args.offset);
         },
         StepOrder.BeforeCamera,

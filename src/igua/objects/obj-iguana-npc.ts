@@ -38,3 +38,5 @@ function mxnRpgIguanaNpc(obj: DisplayObject, id: DataNpcPersona.Id) {
         rpgIguanaNpc: Rpg.iguanaNpc(id),
     });
 }
+
+export type ObjIguanaNpc = ReturnType<typeof objIguanaNpc>;
