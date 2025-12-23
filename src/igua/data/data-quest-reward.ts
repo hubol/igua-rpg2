@@ -121,6 +121,10 @@ export namespace DataQuestReward {
             "GreatTower.EfficientHome.Ringer.ReceivedFish": {
                 kind: "nothing",
             },
+            "GreatTower.EfficientHome.NeatFreak.DidntWearEquipment": {
+                kind: "single",
+                reward: { kind: "equipment", id: "IqIndicator", level: 1 },
+            },
             SimpleSecretHappy: {
                 kind: "single",
                 reward: { kind: "equipment", id: "WetnessCapacityUp", level: 1 },

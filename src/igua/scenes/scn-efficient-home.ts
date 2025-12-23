@@ -234,19 +234,30 @@ function enrichRoom3(lvl: LvlType.EfficientHome) {
 
     objEsotericRemovedShoes().at(lvl.RemovedShoesMarker).show();
 
-    lvl.CloudHouseNeatFreakNpc.coro(function* (self) {
-        while (true) {
-            yield () =>
-                playerObj.x >= lvl.NeatFreakUnsafeRegion.x
-                && playerObj.speed.x > 0
-                && !Rpg.inventory.equipment.loadout.isEmpty
-                && playerObj.collides(lvl.NeatFreakUnsafeRegion);
-            yield Cutscene.play(function* () {
-                yield* show(angryMessages.length > 1 ? angryMessages.shift()! : angryMessages[0]);
-                playerObj.speed.y = -2;
-                playerObj.speed.x = -6;
-                yield sleep(500);
-            }, { speaker: self }).done;
-        }
-    });
+    lvl.CloudHouseNeatFreakNpc
+        .coro(function* (self) {
+            while (true) {
+                yield () =>
+                    playerObj.x >= lvl.NeatFreakUnsafeRegion.x
+                    && playerObj.speed.x > 0
+                    && !Rpg.inventory.equipment.loadout.isEmpty
+                    && playerObj.collides(lvl.NeatFreakUnsafeRegion);
+                yield Cutscene.play(function* () {
+                    yield* show(angryMessages.length > 1 ? angryMessages.shift()! : angryMessages[0]);
+                    playerObj.speed.y = -2;
+                    playerObj.speed.x = -6;
+                    yield sleep(500);
+                }, { speaker: self }).done;
+            }
+        })
+        .mixin(mxnCutscene, function* () {
+            if (!Rpg.inventory.equipment.loadout.isEmpty) {
+                return;
+            }
+
+            yield* show("Thank you for not wearing your shoes in my apartment.");
+            if (!Rpg.quest("GreatTower.EfficientHome.NeatFreak.DidntWearEquipment").everCompleted) {
+                yield* DramaQuests.complete("GreatTower.EfficientHome.NeatFreak.DidntWearEquipment");
+            }
+        });
 }
