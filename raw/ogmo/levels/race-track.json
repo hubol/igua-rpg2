@@ -115,8 +115,8 @@
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
-          "x": 216,
-          "y": 376,
+          "x": 80,
+          "y": 320,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
@@ -167,7 +167,18 @@
       "gridCellHeight": 8,
       "gridCellsX": 1231,
       "gridCellsY": 87,
-      "entities": []
+      "entities": [
+        {
+          "name": "Door",
+          "id": 0,
+          "_eid": "88296692",
+          "x": 24,
+          "y": 272,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnPlainsSuggestive", "checkpointName": "fromRaceTrack", "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "TerrainDecals",
@@ -747,6 +758,19 @@
           "y": 512,
           "width": 16,
           "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 63,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 320,
+          "width": 96,
+          "height": 56,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
