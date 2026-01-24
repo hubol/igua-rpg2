@@ -2,8 +2,14 @@ import { Texture } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Sound } from "../../lib/game-engine/audio/sound";
+import { Instances } from "../../lib/game-engine/instances";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { RgbInt } from "../../lib/math/number-alias-types";
+import { Rng } from "../../lib/math/rng";
+import { show } from "../drama/show";
+import { Cutscene } from "../globals";
 import { MxnRpgStatus } from "../mixins/mxn-rpg-status";
+import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
@@ -104,6 +110,13 @@ export namespace DataPotion {
                 texture: Tx.Collectibles.Potion.FruitSnacks,
                 sound: Sfx.Effect.Potion.LooseValuablesForget,
             },
+            AnnoyIguanas: {
+                name: "Nuisance Machine",
+                description: "Terrifying sound. Annoys iguanas.",
+                stinkLineTint: 0x808080,
+                texture: null,
+                sound: null,
+            },
             __Fallback__: {
                 name: "???",
                 description: "Consume to experience a bug",
@@ -166,6 +179,20 @@ export namespace DataPotion {
                 return;
             case "ForgetLooseValuableCollection":
                 Rpg.looseValuables.forgetCollection();
+                return;
+            case "AnnoyIguanas":
+                const iguanaNpcObjs = Instances(objIguanaNpc);
+                iguanaNpcObjs.forEach(obj => obj.speed.y = -2);
+                const collidedIguanaNpcObj = playerObj.collidesOne(iguanaNpcObjs);
+                if (collidedIguanaNpcObj) {
+                    Cutscene.play(
+                        function* () {
+                            yield sleep(333);
+                            yield* show(Rng.choose("Ack! That scared me!", "Ah!", "Eek!"));
+                        },
+                        { speaker: collidedIguanaNpcObj },
+                    );
+                }
                 return;
             case "__Fallback__":
                 return;
