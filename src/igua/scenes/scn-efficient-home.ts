@@ -17,7 +17,7 @@ import { ask, show } from "../drama/show";
 import { Cutscene, layers, scene } from "../globals";
 import { mxnFxAlphaVisibility } from "../mixins/effects/mxn-fx-alpha-visibility";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { objEsotericArt } from "../objects/esoteric/obj-esoteric-art";
+import { mxnEsotericArtInteractive, objEsotericArt } from "../objects/esoteric/obj-esoteric-art";
 import { objEsotericRemovedShoes } from "../objects/esoteric/obj-esoteric-removed-shoes";
 import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
 import { objFish } from "../objects/obj-fish";
@@ -61,7 +61,9 @@ function enrichRoom0(lvl: LvlType.EfficientHome) {
 
                 self.removeAllChildren();
                 if (seed !== null) {
-                    objEsotericArt(seed).show(self);
+                    objEsotericArt(seed)
+                        .mixin(mxnEsotericArtInteractive)
+                        .show(self);
                 }
                 // TODO types could be improved maybe?
                 yield onPrimitiveMutate(() => Rpg.flags.greatTower.efficientHome.artSeed ?? -1);
@@ -77,7 +79,7 @@ function enrichRoom0(lvl: LvlType.EfficientHome) {
         yield sleep(1000);
         yield* show("Oh! Here's an idea now.");
         yield interpvr(artObj.pivot).factor(factor.sine).translate(0, -280).over(artObj.children.length ? 1000 : 0);
-        Rpg.flags.greatTower.efficientHome.artSeed = Rng.intc(0, Number.MAX_SAFE_INTEGER / 2);
+        Rpg.flags.greatTower.efficientHome.artSeed = Rng.intc(0, Math.floor(Number.MAX_SAFE_INTEGER / 2));
         yield interpvr(artObj.pivot).factor(factor.sine).to(0, 0).over(500);
         artObj.pivot.y = 0;
     });
