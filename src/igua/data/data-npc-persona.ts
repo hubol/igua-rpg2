@@ -41,7 +41,7 @@ export namespace DataNpcPersona {
             GreatTowerShopkeeper: { job: "Shopkeeper", name: "???", looks: NpcLooks.PotteryEnthusiast },
             MealSoulWaiter: { job: "Franchise Owner", name: "Midge", looks: NpcLooks.HotTopic },
             Hubol: { job: "???", name: "Hubol", looks: NpcLooks.Hubol },
-            CloudHouseArtist: { job: "Artist", name: "???", looks: NpcLooks.Rugby },
+            CloudHouseArtist: { job: "Artist", name: "Eoonze", looks: NpcLooks.Rugby },
             CloudHouseAddict: { job: "Addict", name: "Marin", looks: NpcLooks.CharmingFool },
             CloudHouseRinger: { job: "Ringer", name: "Ding Ding Saudah", looks: NpcLooks.Insecure },
             IndianaDirector: { job: "Director", name: "Don GPA", looks: NpcLooks.Miserable },

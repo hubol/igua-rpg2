@@ -85,7 +85,7 @@ const interactiveConsts = {
         "foul",
         "grand",
         "hyper",
-        "ill",
+        "intense",
         "juiced",
         "loose",
         "miserable",
@@ -187,8 +187,18 @@ export function mxnEsotericArtInteractive(obj: ObjEsotericArt) {
         });
 }
 
+const nonTitleCaseWords = new Set([
+    "and",
+    "a",
+    "an",
+    "the",
+    "of",
+    "by",
+    "in",
+]);
+
 function doesWordNeedTitleCase(word: string) {
-    return word !== "a" && word !== "and" && word !== "an" && word !== "the";
+    return !nonTitleCaseWords.has(word);
 }
 
 function applyTitleCase(word: string) {
