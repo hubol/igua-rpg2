@@ -2,6 +2,7 @@ import { BLEND_MODES } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Sfx } from "../../assets/sounds";
 import { factor, interpr, interpvr } from "../../lib/game-engine/routines/interp";
 import { onMutate } from "../../lib/game-engine/routines/on-mutate";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
@@ -88,7 +89,10 @@ function enrichRoom1(lvl: LvlType.EfficientHome) {
         layers.overlay.solidBelowMessages.blendMode = BLEND_MODES.SUBTRACT;
         yield sleep(400);
         yield layers.overlay.solidBelowMessages.fadeIn(500);
+        Jukebox.applyGainRamp(Mzk.UnforgivableToner, 0, 1000);
         yield sleep(1000);
+
+        const addictionSfx = Sfx.Character.MarinsAddiction.playInstance();
 
         const textObjs = container().at(40, 40).show(layers.overlay.messages);
 
@@ -100,7 +104,7 @@ function enrichRoom1(lvl: LvlType.EfficientHome) {
 
         textObj0.mxnFxAlphaVisibility.visible = true;
 
-        yield sleep(2500);
+        yield () => addictionSfx.estimatedPlayheadPosition >= 3.18;
 
         const textObj1 = objText.Medium(
             `Last year, ${lvl.CloudHouseAddictNpc.speaker.name} ate 150,000 gallon-pounts of foam insulation.`,
@@ -115,6 +119,7 @@ function enrichRoom1(lvl: LvlType.EfficientHome) {
 
         textObj0.mxnFxAlphaVisibility.visible = false;
         textObj1.mxnFxAlphaVisibility.visible = false;
+        Jukebox.applyGainRamp(Mzk.UnforgivableToner, 1, 1000);
         yield sleep(500);
 
         yield layers.overlay.solidBelowMessages.fadeOut(500);
