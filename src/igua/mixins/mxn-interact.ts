@@ -1,4 +1,4 @@
-import { DisplayObject } from "pixi.js";
+import { Container, DisplayObject } from "pixi.js";
 import { Instances } from "../../lib/game-engine/instances";
 import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { Null } from "../../lib/types/null";
@@ -42,11 +42,16 @@ function getPlayerOverlapScore(interactObj: MxnInteract) {
         return -2;
     }
 
-    if (!playerObj.collides(interactObj)) {
+    let collideObj: DisplayObject = interactObj;
+    if (interactObj.mask instanceof Container) {
+        collideObj = interactObj.mask;
+    }
+
+    if (!playerObj.collides(collideObj)) {
         return -1;
     }
 
-    if (!playerObj.head.collides(interactObj)) {
+    if (!playerObj.head.collides(collideObj)) {
         return 1;
     }
 

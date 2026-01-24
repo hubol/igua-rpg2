@@ -136,8 +136,14 @@ function objInteractIndicator() {
                     r.width = 0;
                     r.height = 0;
 
-                    (interactObj.interact.hotspotObj
-                        ?? (interactObj.is(mxnHasHead) ? interactObj.mxnHead.obj : interactObj)).getBounds(false, r);
+                    let boundsObj = interactObj.interact.hotspotObj
+                        ?? (interactObj.is(mxnHasHead) ? interactObj.mxnHead.obj : interactObj);
+
+                    if (boundsObj.mask instanceof Container) {
+                        boundsObj = boundsObj.mask;
+                    }
+
+                    boundsObj.getBounds(false, r);
                     if (r.x === 0 && r.y === 0 && r.width === 0 && r.height === 0) {
                         self.at(interactObj.getGlobalPosition(p, false));
                     }
