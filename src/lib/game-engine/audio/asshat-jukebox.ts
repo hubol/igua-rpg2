@@ -1,6 +1,6 @@
 import { intervalWait } from "../../browser/interval-wait";
 import { timeoutSleep } from "../../browser/timeout-sleep";
-import { Milliseconds } from "../../math/number-alias-types";
+import { Milliseconds, Unit } from "../../math/number-alias-types";
 import { Sound, SoundInstance } from "./sound";
 
 export type MusicTrack = string & { readonly __t: unique symbol };
@@ -41,6 +41,14 @@ export class AsshatJukebox {
         this._nowPlaying?.instance?.stop();
         this._nowPlaying = null;
         this._latestPlayRequest = null;
+    }
+
+    applyGainRamp(track: MusicTrack, value: Unit, durationMs: Milliseconds) {
+        if (this._nowPlaying?.track !== track) {
+            return;
+        }
+
+        this._nowPlaying.instance.linearRamp("gain", value, durationMs / 1000);
     }
 
     get rate() {
