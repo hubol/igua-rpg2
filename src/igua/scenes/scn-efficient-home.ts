@@ -17,6 +17,7 @@ import { ask, show } from "../drama/show";
 import { Cutscene, layers, scene } from "../globals";
 import { mxnFxAlphaVisibility } from "../mixins/effects/mxn-fx-alpha-visibility";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSign } from "../mixins/mxn-sign";
 import { mxnEsotericArtInteractive, objEsotericArt } from "../objects/esoteric/obj-esoteric-art";
 import { objEsotericRemovedShoes } from "../objects/esoteric/obj-esoteric-removed-shoes";
 import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
@@ -267,4 +268,7 @@ function enrichRoom3(lvl: LvlType.EfficientHome) {
                 yield* DramaQuests.complete("GreatTower.EfficientHome.NeatFreak.DidntWearEquipment");
             }
         });
+
+    lvl.FurnitureArtworkSaying0
+        .mixin(mxnSign, "...Interesting sentiment.");
 }

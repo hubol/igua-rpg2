@@ -352,6 +352,30 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 47,
+          "y": 520,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#ffedcb",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": -16,
+          "y": 504,
+          "scaleX": 2.2,
+          "scaleY": 1.8,
+          "rotation": 0,
+          "tint": "#d7b91c",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -1897,6 +1921,138 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 58,
+          "y": 475,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffedcb",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 57,
+          "y": 423,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffedcb",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 415,
+          "y": 475,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffedcb",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 414,
+          "y": 423,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffedcb",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 108,
+          "y": 376,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#ffedcb",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 210,
+          "y": 376,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 90,
+          "tint": "#ffedcb",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 312,
+          "y": 376,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#ffedcb",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 353,
+          "y": 376,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#ffedcb",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 254,
+          "y": 520,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#ffedcb",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 359,
+          "y": 520,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#ffedcb",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 150,
+          "y": 520,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#ffedcb",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -2181,8 +2337,8 @@
           "height": 144,
           "originX": 0,
           "originY": 0,
-          "tint": "#d71c1c",
-          "values": {"name": "", "depth": 0, "visible": true}
+          "tint": "#bea214",
+          "values": {"name": "", "depth": 0, "visible": false}
         },
         {
           "name": "Block",
@@ -2194,8 +2350,8 @@
           "height": 144,
           "originX": 0,
           "originY": 0,
-          "tint": "#d71c1c",
-          "values": {"name": "", "depth": 0, "visible": true}
+          "tint": "#bea214",
+          "values": {"name": "", "depth": 0, "visible": false}
         },
         {
           "name": "Block",
@@ -2207,8 +2363,8 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#d71c1c",
-          "values": {"name": "", "depth": 0, "visible": true}
+          "tint": "#bea214",
+          "values": {"name": "", "depth": 0, "visible": false}
         },
         {
           "name": "Block",
@@ -2220,8 +2376,8 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#d71c1c",
-          "values": {"name": "", "depth": 0, "visible": true}
+          "tint": "#bea214",
+          "values": {"name": "", "depth": 0, "visible": false}
         },
         {
           "name": "Block",
@@ -2800,6 +2956,68 @@
           "originY": 0,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 0,
+          "y": 288,
+          "scaleX": 16,
+          "scaleY": 9,
+          "rotation": 0,
+          "tint": "#d7b91c",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": -560,
+          "y": 352,
+          "scaleX": 16,
+          "scaleY": 9,
+          "rotation": 0,
+          "tint": "#ffedcb",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 137,
+          "y": 382,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffedcb",
+          "texture": "terrain/earth/crack 8px 12px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 278,
+          "y": 500,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffedcb",
+          "texture": "terrain/earth/crack 28px 38px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 228,
+          "y": 433,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffedcb",
+          "texture": "furniture/artwork/saying 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
