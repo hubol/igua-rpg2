@@ -22,6 +22,10 @@ export class RpgPlayerAttributes {
         return this._state.respawnConfiguration;
     }
 
+    set respawnConfiguration(value) {
+        this._state.respawnConfiguration = value;
+    }
+
     update(attributeKey: RpgPlayerAttributes.Point, delta: Integer) {
         this._state[attributeKey] += delta;
     }

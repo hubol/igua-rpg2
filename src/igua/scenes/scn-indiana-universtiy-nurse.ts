@@ -6,11 +6,14 @@ import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { dramaShop } from "../drama/drama-shop";
+import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
+import { Cutscene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objCharacterDoctorSprite } from "../objects/characters/obj-character-doctor-sprite";
+import { objFxHeart } from "../objects/effects/obj-fx-heart";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 
@@ -50,7 +53,12 @@ function enrichDoctorNpc(lvl: LvlType.IndianaUniversityNurse) {
     obj
         .mixin(mxnSpeaker, { name: "Doctor Sprite", colorPrimary: 0x21AA0D, colorSecondary: 0xEAEA1E })
         .mixin(mxnCutscene, function* () {
-            const result = yield* ask("Can I help you?", "About this", "Trade", "Respawn location");
+            const result = yield* ask(
+                "Can I help you?",
+                "About this",
+                "Trade",
+                Rpg.character.attributes.respawnConfiguration === "Indiana" ? null : "Respawn location",
+            );
             if (result === 0) {
                 yield* show(
                     "Sorry, I'm not particularly good at talking with patients.",
@@ -59,6 +67,30 @@ function enrichDoctorNpc(lvl: LvlType.IndianaUniversityNurse) {
             }
             else if (result === 1) {
                 yield* dramaShop("DoctorSprite", { primaryTint: 0x21AA0D, secondaryTint: 0xEAEA1E });
+            }
+            else if (result === 2) {
+                if (
+                    yield* DramaWallet.askSpendValuables(
+                        "You want to change where we bandage you up? We can do it in the field, if you want. There is a one-time fee of 999 valuables.",
+                        999,
+                    )
+                ) {
+                    yield* show("Wow great!", "Nurse!");
+                    lvl.NurseNpc.auto.facing = 1;
+                    yield sleep(400);
+                    yield* show(
+                        "Nurse, please update this fucka's file to indicate a preference of being patched up in the field.",
+                    );
+                    Cutscene.setCurrentSpeaker(lvl.NurseNpc);
+                    yield* show("Otay");
+                    yield sleep(400);
+                    lvl.NurseNpc.play(Sfx.Cutscene.OminousWhirr);
+                    objFxHeart.objBurst(10, 8).at(lvl.NurseNpc).add(20, -20).show();
+                    yield sleep(400);
+                    yield* show("All done.");
+                    Cutscene.setCurrentSpeaker(obj);
+                    Rpg.character.attributes.respawnConfiguration = "Indiana";
+                }
             }
             yield interp(obj.objCharacterDoctorSprite.controls, "armUnit").to(1).over(500);
             yield* show("Drink responsibly!");
