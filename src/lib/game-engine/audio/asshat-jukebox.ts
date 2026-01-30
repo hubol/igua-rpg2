@@ -20,6 +20,10 @@ export class AsshatJukebox {
         this._loader = new MusicTrackLoader(_destination);
     }
 
+    get currentTrack() {
+        return this._nowPlaying?.track ?? null;
+    }
+
     getEstimatedPlayheadPosition(track: MusicTrack) {
         if (this._nowPlaying?.track !== track) {
             return 0;
