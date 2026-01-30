@@ -1,5 +1,6 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Sfx } from "../../assets/sounds";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
@@ -7,6 +8,7 @@ import { ZIndex } from "../core/scene/z-index";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objCharacterDoctorSprite } from "../objects/characters/obj-character-doctor-sprite";
 import { playerObj } from "../objects/obj-player";
@@ -17,6 +19,29 @@ export function scnIndianaUniversityNurse() {
     const lvl = Lvl.IndianaUniversityNurse();
     enrichNurseNpc(lvl);
     enrichDoctorNpc(lvl);
+    enrichDoor(lvl);
+}
+
+function enrichDoor(lvl: LvlType.IndianaUniversityNurse) {
+    if (Rpg.character.position.checkpointName !== "restart") {
+        return;
+    }
+
+    lvl.Door.locked = true;
+
+    lvl.Door
+        .coro(function* (self) {
+            for (let i = 5; i >= 1; i--) {
+                lvl.Door.lockedMessage = `Let's get ready!
+Please perform ${i} pushup(s) to unlock.`;
+                yield () => playerObj.ducking >= 1;
+                yield () => playerObj.ducking <= 0;
+                self.mixin(mxnNudgeAppear);
+                self.play(Sfx.Cutscene.DoorPushup.rate((5 - i) * 0.1 + 1));
+            }
+
+            lvl.Door.unlock();
+        });
 }
 
 function enrichDoctorNpc(lvl: LvlType.IndianaUniversityNurse) {

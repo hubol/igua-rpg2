@@ -46,6 +46,7 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
 
     const obj = container(openObj, maskObj0, maskObj1, maskObj2, lockedObj0, lockedObj1, lockedObj2)
         .merge({
+            lockedMessage: "Closed.",
             get locked() {
                 return locked;
             },
@@ -70,7 +71,7 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
         })
         .mixin(mxnInteract, () => {
             if (obj.locked) {
-                Cutscene.play(() => show("Closed."));
+                Cutscene.play(() => show(obj.lockedMessage));
                 return;
             }
             if (sceneChanger) {
