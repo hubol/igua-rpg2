@@ -1342,9 +1342,9 @@ export const Lvl = {
   GrottoIndianaShop: () => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x4888d3 });
     return {
-      ShapesConfetti18x8: d(Tx.Shapes.Confetti18x8, { x: 344, y: 192, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
-      ShapesConfetti18x8_1: d(Tx.Shapes.Confetti18x8, { x: 299, y: 153, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
-      ShapesCircle64: d(Tx.Shapes.Circle64, { x: 320, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      ShapesConfetti18x8: d(Tx.Shapes.Confetti18x8, { x: 311, y: 186, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      ShapesConfetti18x8_1: d(Tx.Shapes.Confetti18x8, { x: 266, y: 147, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      ShapesCircle64: d(Tx.Shapes.Circle64, { x: 287, y: 170, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 12, y: 87, scaleX: 2, scaleY: 4, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x76a6df }, "BackgroundDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: -12, y: 85, scaleX: 2, scaleY: 4, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbedcff }, "BackgroundDecals"),
       StoneRock146px: d(Tx.Stone.Rock146px, { x: 87, y: 58, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
@@ -1363,9 +1363,9 @@ export const Lvl = {
       WoodCrate0_3: d(Tx.Wood.Crate0, { x: 410, y: 220, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb0aaff }, "BackgroundDecals"),
       WoodCrate0_4: d(Tx.Wood.Crate0, { x: 410, y: 194, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb0aaff }, "BackgroundDecals"),
       FoliageMoss0: d(Tx.Foliage.Moss0, { x: 41, y: 48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x909c4a }, "BackgroundDecals"),
-      TownSignageIguana0: d(Tx.Town.Signage.Iguana0, { x: 311, y: 171, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
-      ShapesBubbleEdge2: d(Tx.Shapes.BubbleEdge2, { x: 351, y: 202, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
-      ShapesBubbleEdge0: d(Tx.Shapes.BubbleEdge0, { x: 292, y: 144, scaleX: -1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      TownSignageIguana0: d(Tx.Town.Signage.Iguana0, { x: 278, y: 165, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      ShapesBubbleEdge2: d(Tx.Shapes.BubbleEdge2, { x: 318, y: 196, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      ShapesBubbleEdge0: d(Tx.Shapes.BubbleEdge0, { x: 259, y: 138, scaleX: -1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       TownSignageIguanaSimple0: d(Tx.Town.Signage.IguanaSimple0, { x: 90, y: 82, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x999999 }, "BackgroundDecals"),
       TerrainEarthCrack10px10px: d(Tx.Terrain.Earth.Crack10px10px, { x: 107, y: 74, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xededed }, "BackgroundDecals"),
       TerrainEarthCrack8px12px: d(Tx.Terrain.Earth.Crack8px12px, { x: 75, y: 77, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xededed }, "BackgroundDecals"),
@@ -1425,7 +1425,7 @@ export const Lvl = {
       StoneRock0_1: d(Tx.Stone.Rock0, { x: 42, y: 152, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       TerrainGrassTall3px: d(Tx.Terrain.Grass.Tall3px, { x: 22, y: 29, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x909c4a }, "TerrainDecals"),
       TerrainGrassMessy28px: d(Tx.Terrain.Grass.Messy28px, { x: 58, y: 33, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x909c4a }, "TerrainDecals"),
-      ShopkeeperNpc: e(r["IguanaNpc"], { x: 400, y: 232, flippedX: true, values: { personaName: "", name: "ShopkeeperNpc", depth: 0 } }, "CharacterEntities"),
+      ShopkeeperNpc: e(r["IguanaNpc"], { x: 400, y: 232, flippedX: true, values: { personaName: "GrottoIndianaMerchant", name: "ShopkeeperNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 96, y: 160, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -48, y: 16, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromGrottoIndianaShop", name: "", depth: 0 } }, "RegionEntities"),
     };

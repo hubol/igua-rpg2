@@ -107,7 +107,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": true,
-          "values": {"personaName": "", "name": "ShopkeeperNpc", "depth": 0}
+          "values": {"personaName": "GrottoIndianaMerchant", "name": "ShopkeeperNpc", "depth": 0}
         }
       ]
     },
@@ -853,8 +853,8 @@
       "gridCellsY": 35,
       "decals": [
         {
-          "x": 344,
-          "y": 192,
+          "x": 311,
+          "y": 186,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -865,8 +865,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 299,
-          "y": 153,
+          "x": 266,
+          "y": 147,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -877,8 +877,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 320,
-          "y": 176,
+          "x": 287,
+          "y": 170,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1114,8 +1114,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 311,
-          "y": 171,
+          "x": 278,
+          "y": 165,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1126,8 +1126,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 351,
-          "y": 202,
+          "x": 318,
+          "y": 196,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1138,8 +1138,8 @@
           "values": {"name": ""}
         },
         {
-          "x": 292,
-          "y": 144,
+          "x": 259,
+          "y": 138,
           "scaleX": -1,
           "scaleY": -1,
           "rotation": 0,

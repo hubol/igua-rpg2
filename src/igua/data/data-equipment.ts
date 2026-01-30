@@ -173,7 +173,7 @@ export namespace DataEquipment {
             },
             ApprovalIndianaMerchants: {
                 name: "Heel of Indiana Merchants",
-                texture: null,
+                texture: Tx.Collectibles.Equipment.IndianaShoe,
                 description: "Indiana merchants recognize you as worthy.",
                 buffs: (model, bonus) => {
                     model.approval.indianaMerchants = 100;
