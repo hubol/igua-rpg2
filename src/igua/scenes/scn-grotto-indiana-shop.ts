@@ -4,6 +4,7 @@ import { Jukebox } from "../core/igua-audio";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { Rpg } from "../rpg/rpg";
 
 export function scnGrottoIndianaShop() {
     Jukebox.play(Mzk.IronSkittle);
@@ -16,8 +17,16 @@ function enrichShopkeeper(lvl: LvlType.GrottoIndianaShop) {
         .mixin(mxnCutscene, function* () {
             const result = yield* ask("Welcome to the hole. What can I help you with?", "Wares", "The area");
             if (result === 0) {
-                // TODO setting tints for shops is getting annoying!
-                yield* dramaShop("GrottoIndiana", { primaryTint: 0x808080, secondaryTint: 0x505050 });
+                if (Rpg.character.buffs.approval.indianaMerchants <= 0) {
+                    yield* show(
+                        "... Hm...",
+                        "Sorry, I don't think I can trust you yet.",
+                    );
+                }
+                else {
+                    // TODO setting tints for shops is getting annoying!
+                    yield* dramaShop("GrottoIndiana", { primaryTint: 0x808080, secondaryTint: 0x505050 });
+                }
             }
             else {
                 // TODO stupid

@@ -172,7 +172,7 @@ export namespace DataShop {
                         product: { kind: "potion", id: "AttributeStrengthUp" },
                     },
                     {
-                        initialQuantity: 5,
+                        initialQuantity: 50,
                         price: { currency: "valuables", deltaSold: 0, initial: 10 },
                         product: { kind: "potion", id: "RestoreHealth" },
                     },

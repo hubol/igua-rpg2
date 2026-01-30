@@ -171,6 +171,15 @@ export namespace DataEquipment {
                     model.motion.walk.topSpeedIncreaseFactor -= 20 * (bonus + 1);
                 },
             },
+            ApprovalIndianaMerchants: {
+                name: "Heel of Indiana Merchants",
+                texture: null,
+                description: "Indiana merchants recognize you as worthy.",
+                buffs: (model, bonus) => {
+                    model.approval.indianaMerchants = 100;
+                    // TODO weird bonuses?
+                },
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,

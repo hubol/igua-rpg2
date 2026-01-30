@@ -5,6 +5,10 @@ import { RpgExperience } from "./rpg-experience";
 export namespace RpgPlayerBuffs {
     export function create() {
         return {
+            approval: {
+                // TODO support for booleans?
+                indianaMerchants: <PercentAsInteger> 0,
+            },
             attributes: {
                 health: 0,
                 intelligence: 0,
