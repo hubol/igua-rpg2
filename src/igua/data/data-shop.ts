@@ -159,6 +159,30 @@ export namespace DataShop {
                     },
                 ],
             },
+            GrottoIndiana: {
+                stocks: [
+                    {
+                        initialQuantity: 3,
+                        price: { currency: "valuables", deltaSold: 500, initial: 250 },
+                        product: { kind: "potion", id: "AttributeHealthUp" },
+                    },
+                    {
+                        initialQuantity: 1,
+                        price: { currency: "valuables", deltaSold: 500, initial: 500 },
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                    },
+                    {
+                        initialQuantity: 5,
+                        price: { currency: "valuables", deltaSold: 0, initial: 10 },
+                        product: { kind: "potion", id: "RestoreHealth" },
+                    },
+                    {
+                        initialQuantity: 10,
+                        price: { currency: "valuables", deltaSold: 0, initial: 10 },
+                        product: { kind: "potion", id: "AnnoyIguanas" },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );
