@@ -5,9 +5,12 @@ import { show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { OgmoFactory } from "../ogmo/factory";
+import { Rpg } from "../rpg/rpg";
 
 export function scnErrorRecoveryRoom() {
     const lvl = Lvl.ErrorRecoveryRoom();
+
+    Rpg.character.position.sceneName = scnErrorRecoveryRoom.name;
 
     // TODO should be nice API for this
     Instances(OgmoFactory.createDecal)

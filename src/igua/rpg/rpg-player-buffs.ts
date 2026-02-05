@@ -48,6 +48,9 @@ export namespace RpgPlayerBuffs {
                 poisonRateReductionFactor: <PercentAsInteger> 0,
                 wetnessMaxIncreaseFactor: <PercentAsInteger> 0,
             },
+            esoteric: {
+                sceneChangeErrorChance: <PercentAsInteger> 0,
+            },
             experience: {
                 bonusFactorWhileWet: {
                     combat: 0,

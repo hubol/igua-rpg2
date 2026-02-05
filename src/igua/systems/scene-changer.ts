@@ -1,4 +1,5 @@
 import { Logger } from "../../lib/game-engine/logger";
+import { Rng } from "../../lib/math/rng";
 import { SceneLibrary } from "../core/scene/scene-library";
 import { sceneStack } from "../globals";
 import { playerObj } from "../objects/obj-player";
@@ -7,6 +8,10 @@ import { Rpg } from "../rpg/rpg";
 interface CreateArgs {
     sceneName: string;
     checkpointName: string;
+}
+
+function throwBootyError() {
+    throw new Error("booty");
 }
 
 export class SceneChanger {
@@ -24,7 +29,8 @@ export class SceneChanger {
         }
         Rpg.character.position.sceneName = this._sceneName;
         Rpg.character.position.checkpointName = this.checkpointName;
-        sceneStack.replace(this._scene, { useGameplay: true });
+        const forceError = Rng.float(100) <= Rpg.character.buffs.esoteric.sceneChangeErrorChance;
+        sceneStack.replace(forceError ? throwBootyError : this._scene, { useGameplay: true });
         Logger.logInfo("SceneChanger.changeScene", `Took ${performance.now() - startMs}ms`);
     }
 

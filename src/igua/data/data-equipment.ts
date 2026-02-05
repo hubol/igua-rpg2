@@ -180,6 +180,14 @@ export namespace DataEquipment {
                     // TODO weird bonuses?
                 },
             },
+            SceneChangeErrorChanceUp: {
+                name: "Error Sandal",
+                texture: null,
+                description: "Increased chance of error while using doors",
+                buffs: (model, bonus) => {
+                    model.esoteric.sceneChangeErrorChance += 1 + bonus;
+                },
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,
