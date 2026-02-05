@@ -346,6 +346,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromGrottoIndianaShop", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 14,
+          "_eid": "19953026",
+          "x": 488,
+          "y": 368,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromErrorRecovery", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
         }
       ]
     },

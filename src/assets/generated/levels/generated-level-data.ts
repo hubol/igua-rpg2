@@ -592,6 +592,49 @@ export const Lvl = {
       RemovedShoesMarker: e(r["Marker"], { x: 128, y: 520, values: { name: "RemovedShoesMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
+  ErrorRecoveryRoom: () => {
+    applyLevel({ width: 500, height: 896, backgroundTint: 0x000d80 });
+    return {
+      TownSignageWarning: d(Tx.Town.Signage.Warning, { x: 112, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffca0d }, "ParallaxDecals"),
+      TownSignageWarning_1: d(Tx.Town.Signage.Warning, { x: 231, y: 317, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff9e0d }, "ParallaxDecals"),
+      TownSignageWarning_2: d(Tx.Town.Signage.Warning, { x: 429, y: 241, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffca0d }, "ParallaxDecals"),
+      TownSignageWarning_3: d(Tx.Town.Signage.Warning, { x: 103, y: 458, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffca0d }, "ParallaxDecals"),
+      TownSignageWarning_4: d(Tx.Town.Signage.Warning, { x: 364, y: 512, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff9e0d }, "ParallaxDecals"),
+      ShapesSquare32: d(Tx.Shapes.Square32, { x: -16, y: 824, scaleX: 17, scaleY: 6, rotation: 0, originX: 0, originY: 0, tint: 0x6bb3e9 }, "BackgroundDecals"),
+      ShapesCircle64: d(Tx.Shapes.Circle64, { x: 120, y: 833, scaleX: 1.5, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "BackgroundDecals"),
+      ShapesCircleIrregular26: d(Tx.Shapes.CircleIrregular26, { x: 75, y: 827, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "BackgroundDecals"),
+      ShapesCircleIrregular26_1: d(Tx.Shapes.CircleIrregular26, { x: 162, y: 825, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "BackgroundDecals"),
+      ShapesCircle64_1: d(Tx.Shapes.Circle64, { x: 351, y: 836, scaleX: 1.5, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "BackgroundDecals"),
+      ShapesCircleIrregular26_2: d(Tx.Shapes.CircleIrregular26, { x: 306, y: 830, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "BackgroundDecals"),
+      ShapesCircleIrregular26_3: d(Tx.Shapes.CircleIrregular26, { x: 393, y: 828, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "BackgroundDecals"),
+      ShapesCircleIrregular26_4: d(Tx.Shapes.CircleIrregular26, { x: 178, y: 831, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "BackgroundDecals"),
+      ShapesCircleIrregular26_5: d(Tx.Shapes.CircleIrregular26, { x: 56, y: 831, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "BackgroundDecals"),
+      ShapesCircleIrregular26_6: d(Tx.Shapes.CircleIrregular26, { x: 412, y: 830, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "BackgroundDecals"),
+      ShapesCircleIrregular26_7: d(Tx.Shapes.CircleIrregular26, { x: 241, y: 817, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x000d80 }, "BackgroundDecals"),
+      ShapesCircleIrregular26_8: d(Tx.Shapes.CircleIrregular26, { x: 225, y: 816, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x000d80 }, "BackgroundDecals"),
+      ShapesCircleIrregular26_9: d(Tx.Shapes.CircleIrregular26, { x: 260, y: 816, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x000d80 }, "BackgroundDecals"),
+      Block: e(r["Block"], { x: 0, y: 840, width: 504, height: 120, values: { name: "", depth: 0, visible: true }, tint: 0xd5edff }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 32, y: 824, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xd5edff }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 96, y: 824, width: 48, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xd5edff }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 144, y: 824, width: 64, height: 16, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xd5edff }, "TerrainEntities"),
+      Slope_2: e(r["Slope"], { x: 264, y: 824, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xd5edff }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 328, y: 824, width: 48, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xd5edff }, "TerrainEntities"),
+      Slope_3: e(r["Slope"], { x: 376, y: 824, width: 64, height: 16, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xd5edff }, "TerrainEntities"),
+      TerrainEarthQuestionMark: d(Tx.Terrain.Earth.QuestionMark, { x: 100, y: 849, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_1: d(Tx.Terrain.Earth.QuestionMark, { x: 139, y: 862, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_2: d(Tx.Terrain.Earth.QuestionMark, { x: 172, y: 851, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_3: d(Tx.Terrain.Earth.QuestionMark, { x: 56, y: 858, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_4: d(Tx.Terrain.Earth.QuestionMark, { x: 337, y: 855, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_5: d(Tx.Terrain.Earth.QuestionMark, { x: 376, y: 868, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_6: d(Tx.Terrain.Earth.QuestionMark, { x: 409, y: 857, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_7: d(Tx.Terrain.Earth.QuestionMark, { x: 293, y: 864, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6bb3e9 }, "TerrainDecals"),
+      Sign: e(r["Sign"], { x: 96, y: 824, values: { title: "Error", message: "Error recovery room.", name: "", depth: 0, isSpecial: false } }, "Entities"),
+      HubolNpc: e(r["IguanaNpc"], { x: 360, y: 824, flippedX: true, values: { personaName: "Hubol", name: "HubolNpc", depth: 0 } }, "CharacterEntities"),
+      Player: e(r["Player"], { x: 256, y: 64, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -40, y: 712, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromErrorRecovery", name: "", depth: 0 } }, "RegionEntities"),
+      GateHorizontal_1: e(r["GateHorizontal"], { x: 456, y: 712, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromErrorRecovery", name: "", depth: 0 } }, "RegionEntities"),
+    };
+  },
   GiantIguanaStatue: () => {
     applyLevel({ width: 872, height: 440, backgroundTint: 0x4a648b });
     return {
@@ -6305,6 +6348,7 @@ export const Lvl = {
       fromGreatTowerBalcony: e(r["Checkpoint"], { x: 584, y: 256, flippedX: true, values: { name: "fromGreatTowerBalcony", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromSinSwamp: e(r["Checkpoint"], { x: 888, y: 248, flippedX: true, values: { name: "fromSinSwamp", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromGrottoIndianaShop: e(r["Checkpoint"], { x: 739, y: 414, flippedX: true, values: { name: "fromGrottoIndianaShop", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromErrorRecovery: e(r["Checkpoint"], { x: 488, y: 368, flippedX: false, values: { name: "fromErrorRecovery", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       GateMap: e(r["GateMap"], { x: 821, y: 735, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_1: e(r["GateMap"], { x: 637, y: 737, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_2: e(r["GateMap"], { x: 942, y: 844, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
@@ -6325,6 +6369,7 @@ export namespace LvlType {
   export type ColosseumMiffed = ReturnType<(typeof Lvl)["ColosseumMiffed"]>;
   export type Dummy = ReturnType<(typeof Lvl)["Dummy"]>;
   export type EfficientHome = ReturnType<(typeof Lvl)["EfficientHome"]>;
+  export type ErrorRecoveryRoom = ReturnType<(typeof Lvl)["ErrorRecoveryRoom"]>;
   export type GiantIguanaStatue = ReturnType<(typeof Lvl)["GiantIguanaStatue"]>;
   export type GreatTowerBalcony = ReturnType<(typeof Lvl)["GreatTowerBalcony"]>;
   export type GreatTower = ReturnType<(typeof Lvl)["GreatTower"]>;

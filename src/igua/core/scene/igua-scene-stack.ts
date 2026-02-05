@@ -8,6 +8,7 @@ import { renderer } from "../../current-pixi-renderer";
 import { forceGameLoop } from "../../globals";
 import { objCamera } from "../../objects/obj-camera";
 import { Rpg } from "../../rpg/rpg";
+import { scnErrorRecoveryRoom } from "../../scenes/scn-error-recovery-room";
 import { scnWorldMap } from "../../scenes/scn-world-map";
 import { Jukebox } from "../igua-audio";
 import { IguaLayers } from "../igua-layers";
@@ -71,6 +72,7 @@ export class IguaSceneStack extends SceneStack<IguaSceneMeta, IguaScene> {
     ) {
         super();
         console.log(...Logging.componentArgs(this));
+        this.fallbackPopulateSceneFn = scnErrorRecoveryRoom;
     }
 
     protected convert<T>(populateSceneFn: () => T, meta: IguaSceneMeta) {
