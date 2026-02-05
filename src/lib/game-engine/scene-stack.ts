@@ -1,3 +1,5 @@
+import { Logger } from "./logger";
+
 export abstract class SceneStack<TSceneMeta, TSceneInstance> {
     protected readonly scenes: TSceneInstance[] = [];
 
@@ -7,11 +9,34 @@ export abstract class SceneStack<TSceneMeta, TSceneInstance> {
 
     protected abstract onScenesModified(): void;
 
-    push<T>(populateSceneFn: () => T, meta: TSceneMeta) {
-        const scene = this.convert(populateSceneFn, meta);
-        this.scenes.push(scene);
-        this.onScenesModified();
-        return scene.populateScene();
+    protected fallbackPopulateSceneFn: null | (() => unknown) = null;
+
+    push<T>(populateSceneFn: () => T, meta: TSceneMeta): T {
+        const scenesLength = this.scenes.length;
+
+        try {
+            const scene = this.convert(populateSceneFn, meta);
+            this.scenes.push(scene);
+            this.onScenesModified();
+            return scene.populateScene();
+        }
+        catch (e) {
+            const isFallback = populateSceneFn === this.fallbackPopulateSceneFn;
+            Logger.logUnexpectedError("SceneStack", e as Error, {
+                populateSceneFn,
+                meta,
+                isFallback,
+            });
+            while (this.scenes.length > scenesLength) {
+                this.pop();
+            }
+
+            if (this.fallbackPopulateSceneFn && !isFallback) {
+                return this.push(this.fallbackPopulateSceneFn, meta) as T;
+            }
+
+            return null as T;
+        }
     }
 
     pop() {
