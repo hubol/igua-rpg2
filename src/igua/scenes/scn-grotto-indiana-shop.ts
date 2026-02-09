@@ -20,7 +20,10 @@ function enrichShopkeeper(lvl: LvlType.GrottoIndianaShop) {
                 if (Rpg.character.buffs.approval.indianaMerchants <= 0) {
                     yield* show(
                         "... Hm...",
-                        "Sorry, I don't think I can trust you yet.",
+                        "Sorry, I don't think I can trust you yet...",
+                        "I hail from a tribe of merchants.",
+                        "We have long relished the bittered beets found in the strange market.",
+                        "Produce the symbol of our god and you may take a look at my wares.",
                     );
                 }
                 else {

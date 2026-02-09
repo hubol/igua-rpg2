@@ -83,7 +83,7 @@ export namespace DataQuestReward {
             BeetGod: {
                 kind: "in_order",
                 rewards: [
-                    { kind: "potion", id: "AttributeStrengthUp" },
+                    { kind: "equipment", id: "ApprovalIndianaMerchants", level: 1 },
                     { kind: "equipment", id: "NailFile", level: 1 },
                 ],
                 extend: {
