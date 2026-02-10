@@ -145,6 +145,10 @@ export namespace DataQuestReward {
                 reward: { kind: "equipment", id: "SceneChangeErrorChanceUp", level: 1 },
                 countCompletions: "once",
             },
+            "ErrorRecoveryRoom.Hubol": {
+                kind: "repeat",
+                reward: { kind: "potion", id: "RestoreHealth", count: 2 },
+            },
             __Fallback__: {
                 kind: "nothing",
             },

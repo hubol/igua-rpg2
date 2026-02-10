@@ -176,13 +176,12 @@ export namespace DataEquipment {
                 texture: Tx.Collectibles.Equipment.IndianaShoe,
                 description: "Indiana merchants recognize you as worthy.",
                 buffs: (model, bonus) => {
-                    model.approval.indianaMerchants = 100;
-                    // TODO weird bonuses?
+                    model.approval.indianaMerchants = 100 + bonus * 100;
                 },
             },
             SceneChangeErrorChanceUp: {
                 name: "Error Sandal",
-                texture: null,
+                texture: Tx.Collectibles.Equipment.ErrorSandal,
                 description: "Increased chance of error while using doors",
                 buffs: (model, bonus) => {
                     model.esoteric.sceneChangeErrorChance += 1 + bonus;
