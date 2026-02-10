@@ -1,5 +1,7 @@
 import { DisplayObject, Matrix, RenderTexture, Sprite, TilingSprite } from "pixi.js";
 import { NoAtlasTx } from "../../../assets/no-atlas-textures";
+import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { Rng } from "../../../lib/math/rng";
 import { SpriteAlphaMaskFilter } from "../../../lib/pixi/filters/sprite-alpha-mask-filter";
 import { renderer } from "../../current-pixi-renderer";
 import { scene } from "../../globals";
@@ -31,6 +33,12 @@ export function mxnFxNoise(obj: DisplayObject) {
                     sprite.at(obj).add(-hw, -hh);
                     renderer.render(obj, renderOptions);
                 }, StepOrder.Camera)
+                .coro(function* (self) {
+                    while (true) {
+                        self.tilePosition.at(Rng.int(256), Rng.int(256));
+                        yield sleep(Rng.intc(250, 500));
+                    }
+                })
                 .filtered(new SpriteAlphaMaskFilter(sprite))
                 .zIndexed(obj.zIndex)
                 .show(obj.parent);
