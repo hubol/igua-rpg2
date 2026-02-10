@@ -6455,6 +6455,23 @@ export const Lvl = {
       PotionSpawn1: e(r["Marker"], { x: 736, y: 640, values: { name: "PotionSpawn1", depth: 0 }, tint: 0xff0f00 }, "MarkerEntities"),
     };
   },
+  VaseInhabitant: () => {
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 0, width: 48, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 456, y: 0, width: 48, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 48, y: 0, width: 408, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 48, y: 232, width: 408, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 360, y: 200, width: 96, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 48, y: 200, width: 96, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 48, y: 136, width: 104, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      FurnitureAquariumGiantVase: d(Tx.Furniture.Aquarium.GiantVase, { x: 248, y: 160, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      VaseWater: d(Tx.Furniture.Aquarium.GiantVaseWater, { x: 175, y: 103, scaleX: 1, scaleY: 1, rotation: 0, originX: 0, originY: 0, tint: 0xffffff }, "TerrainDecals"),
+      Door: e(r["Door"], { x: 56, y: 88, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+      VaseNpc: e(r["IguanaNpc"], { x: 248, y: 232, flippedX: true, values: { personaName: "Vase", name: "VaseNpc", depth: 0 } }, "CharacterEntities"),
+      Player: e(r["Player"], { x: 128, y: 136, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    };
+  },
   WorldMap: () => {
     applyLevel({ width: 1368, height: 1368, backgroundTint: 0x81bde9 });
     return {
@@ -6909,5 +6926,6 @@ export namespace LvlType {
   export type StrangeMarketRestaurant = ReturnType<(typeof Lvl)["StrangeMarketRestaurant"]>;
   export type StrangeMarketTowerInterior = ReturnType<(typeof Lvl)["StrangeMarketTowerInterior"]>;
   export type StrangeMarket = ReturnType<(typeof Lvl)["StrangeMarket"]>;
+  export type VaseInhabitant = ReturnType<(typeof Lvl)["VaseInhabitant"]>;
   export type WorldMap = ReturnType<(typeof Lvl)["WorldMap"]>;
 }

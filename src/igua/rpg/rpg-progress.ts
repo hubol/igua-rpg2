@@ -111,6 +111,9 @@ export function getInitialRpgProgress() {
                     },
                 },
             },
+            vase: {
+                moistureUnits: 0,
+            },
         },
         programmaticFlags: {
             classrooms: RpgClassrooms.createState(),
