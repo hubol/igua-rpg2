@@ -4,8 +4,8 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#408000",
   "values": {"Terrain Color": "#000000"},
+  "backgroundColor": "#408000",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -39,7 +39,21 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Region",
+          "id": 0,
+          "_eid": "11908607",
+          "x": 216,
+          "y": 64,
+          "width": 64,
+          "height": 40,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "FillVaseRegion", "depth": 0}
+        }
+      ]
     },
     {
       "name": "FrontDecals",
@@ -78,7 +92,7 @@
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
-          "x": 128,
+          "x": 144,
           "y": 104,
           "originX": 22,
           "originY": 39,
@@ -124,7 +138,7 @@
           "name": "Door",
           "id": 0,
           "_eid": "88296692",
-          "x": 56,
+          "x": 72,
           "y": 56,
           "originX": 0,
           "originY": -2,
@@ -152,7 +166,8 @@
           "texture": "furniture/aquarium/giant vase.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 175,
@@ -164,7 +179,8 @@
           "texture": "furniture/aquarium/giant vase water.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": "VaseWater"}
+          "values": {"name": "VaseWater"},
+          "groupName": null
         }
       ],
       "folder": "../textures"

@@ -2,14 +2,20 @@ import { Graphics } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
-import { approachLinear } from "../../lib/math/number";
 import { ZIndex } from "../core/scene/z-index";
 import { DataNpcPersona } from "../data/data-npc-persona";
-import { show } from "../drama/show";
+import { ask, show } from "../drama/show";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Rpg } from "../rpg/rpg";
+
+// TODO I would like this to work differently
+// Perhaps flags expose their own API
+const consts = {
+    maxVaseMoistureUnits: 1000,
+};
 
 export function scnVaseInhabitant() {
     const lvl = Lvl.VaseInhabitant();
@@ -20,7 +26,7 @@ export function scnVaseInhabitant() {
         .scaled(1, 0)
         .coro(function* (self) {
             function getTargetScaleY() {
-                return Math.max(0, Math.min(1, Rpg.flags.vase.moistureUnits / 1000));
+                return Math.max(0, Math.min(1, Rpg.flags.vase.moistureUnits / consts.maxVaseMoistureUnits));
             }
 
             self.scale.y = getTargetScaleY();
@@ -36,6 +42,25 @@ export function scnVaseInhabitant() {
 
     lvl.VaseWater
         .masked(vaseMaskObj);
+
+    lvl.FillVaseRegion
+        .mixin(mxnSpeaker, { name: "Giant Vase", colorPrimary: 0x0000a0, colorSecondary: 0x0080f0 })
+        .mixin(mxnCutscene, function* () {
+            if (Rpg.flags.vase.moistureUnits >= consts.maxVaseMoistureUnits) {
+                yield* show("Already at max.");
+                return;
+            }
+            if (yield* ask("A giant vase... Add moisture?")) {
+                if (Rpg.character.status.conditions.wetness.value <= 0) {
+                    yield* show("No moisture to add.");
+                }
+                else {
+                    yield* show(`Added ${Rpg.character.status.conditions.wetness.value} units.`);
+                    Rpg.flags.vase.moistureUnits += Rpg.character.status.conditions.wetness.value;
+                    Rpg.character.status.conditions.wetness.value = 0;
+                }
+            }
+        });
 
     objIguanaPuppet(DataNpcPersona.getById("Vase" as any)!.looks)
         .coro(function* (self) {
@@ -57,7 +82,9 @@ export function scnVaseInhabitant() {
         })
         .mixin(mxnCutscene, function* () {
             yield* show("I'm trapped. Please help.");
-            Rpg.flags.vase.moistureUnits += 100;
+        })
+        .step(self => {
+            self.interact.enabled = !self.collides(lvl.FillVaseRegion);
         })
         .at(lvl.VaseNpcMarker)
         .zIndexed(ZIndex.CharacterEntities)

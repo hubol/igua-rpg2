@@ -6469,8 +6469,9 @@ export const Lvl = {
       Block_3: e(r["Block"], { x: 0, y: -24, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       FurnitureAquariumGiantVase: d(Tx.Furniture.Aquarium.GiantVase, { x: 248, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       VaseWater: d(Tx.Furniture.Aquarium.GiantVaseWater, { x: 175, y: 127, scaleX: 1, scaleY: 1, rotation: 0, originX: 0, originY: 0, tint: 0xffffff }, "TerrainDecals"),
-      Door: e(r["Door"], { x: 56, y: 56, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
-      Player: e(r["Player"], { x: 128, y: 104, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      Door: e(r["Door"], { x: 72, y: 56, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+      Player: e(r["Player"], { x: 144, y: 104, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      FillVaseRegion: e(r["Region"], { x: 216, y: 64, width: 64, height: 40, values: { name: "FillVaseRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       VaseNpcMarker: e(r["Marker"], { x: 248, y: 259, values: { name: "VaseNpcMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
