@@ -144,7 +144,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 1231,
       "gridCellsY": 87,
-      "entities": []
+      "entities": [
+        {
+          "name": "IguanaNpc",
+          "id": 0,
+          "_eid": "90326278",
+          "x": 1496,
+          "y": 320,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": false,
+          "values": {"personaName": "", "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "AboveEntitiesDecals",
@@ -217,6 +229,97 @@
       "gridCellsX": 1231,
       "gridCellsY": 87,
       "decals": [
+        {
+          "x": 1401,
+          "y": 226,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#2b00d7",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1401,
+          "y": 298,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#2b00d7",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1644,
+          "y": 319,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#2b00d7",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1583,
+          "y": 320,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#2b00d7",
+          "texture": "terrain/grass/jagged 2px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1543,
+          "y": 320,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#2b00d7",
+          "texture": "terrain/grass/jagged 2px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1502,
+          "y": 320,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#2b00d7",
+          "texture": "terrain/grass/jagged 2px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1441,
+          "y": 319,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#2b00d7",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
         {
           "x": 371,
           "y": 393,
@@ -3264,6 +3367,71 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
+        },
+        {
+          "x": 1436,
+          "y": 241,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#2b00d7",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1497,
+          "y": 242,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#2b00d7",
+          "texture": "terrain/grass/jagged 2px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1538,
+          "y": 242,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#2b00d7",
+          "texture": "terrain/grass/jagged 2px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1578,
+          "y": 242,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#2b00d7",
+          "texture": "terrain/grass/jagged 2px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1639,
+          "y": 241,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#2b00d7",
+          "texture": "terrain/grass/jagged.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -3414,7 +3582,7 @@
           "_eid": "93117141",
           "x": 544,
           "y": 0,
-          "width": 1936,
+          "width": 856,
           "height": 368,
           "originX": 0,
           "originY": 0,
@@ -3916,6 +4084,71 @@
           "originY": 0,
           "tint": "#2b00d7",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 70,
+          "_eid": "93117141",
+          "x": 1400,
+          "y": 320,
+          "width": 1080,
+          "height": 48,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#2b00d7",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 71,
+          "_eid": "93117141",
+          "x": 1400,
+          "y": 0,
+          "width": 272,
+          "height": 240,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#2b00d7",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 72,
+          "_eid": "95675713",
+          "x": 1688,
+          "y": 128,
+          "width": 792,
+          "height": 200,
+          "flippedX": false,
+          "flippedY": false,
+          "tint": "#2b00d7",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 73,
+          "_eid": "95675713",
+          "x": 1672,
+          "y": 40,
+          "width": 792,
+          "height": 200,
+          "flippedX": true,
+          "flippedY": true,
+          "tint": "#2b00d7",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 74,
+          "_eid": "93117141",
+          "x": 1672,
+          "y": 0,
+          "width": 808,
+          "height": 40,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#2b00d7",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -3928,7 +4161,44 @@
       "gridCellHeight": 8,
       "gridCellsX": 1231,
       "gridCellsY": 87,
-      "entities": []
+      "entities": [
+        {
+          "name": "IntelligenceBackground",
+          "id": 0,
+          "_eid": "41461695",
+          "x": 1392,
+          "y": 8,
+          "width": 496,
+          "height": 336,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#2b00d7", "targetTint": "#1f048b", "min": 3, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 1,
+          "_eid": "41461695",
+          "x": 1888,
+          "y": 8,
+          "width": 496,
+          "height": 336,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#2b00d7", "targetTint": "#1f048b", "min": 2, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 2,
+          "_eid": "41461695",
+          "x": 2384,
+          "y": 8,
+          "width": 96,
+          "height": 336,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#2b00d7", "targetTint": "#1f048b", "min": 1, "max": 5, "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "BackgroundDecals",
