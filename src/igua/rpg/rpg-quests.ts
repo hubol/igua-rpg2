@@ -71,8 +71,10 @@ export class RpgQuest {
 
     complete(): RpgQuest.Reward {
         const reward = this.peekCompletionReward();
-        this._state.timesCompleted += 1;
-        this._reward.quest.onComplete(this._state.timesCompleted, reward?.isExtended ?? false);
+        if (this._data.countCompletions !== "once" || this._state.timesCompleted === 0) {
+            this._state.timesCompleted += 1;
+            this._reward.quest.onComplete(this._state.timesCompleted, reward?.isExtended ?? false);
+        }
 
         return reward;
     }

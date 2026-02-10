@@ -34,9 +34,14 @@ export namespace DataQuestReward {
         export interface Nothing {
             kind: "nothing";
         }
+
+        export interface Base {
+            /** Default is assumed to be `"always"` */
+            countCompletions?: "once" | "always";
+        }
     }
 
-    export type Model = Model.InOrder | Model.Repeat | Model.Single | Model.Nothing;
+    export type Model = (Model.InOrder | Model.Repeat | Model.Single | Model.Nothing) & Model.Base;
 
     export const Manifest = DataLib.createManifest(
         {
@@ -124,14 +129,21 @@ export namespace DataQuestReward {
             "GreatTower.EfficientHome.NeatFreak.DidntWearEquipment": {
                 kind: "single",
                 reward: { kind: "equipment", id: "IqIndicator", level: 1 },
+                countCompletions: "once",
             },
             SimpleSecretHappy: {
                 kind: "single",
                 reward: { kind: "equipment", id: "WetnessCapacityUp", level: 1 },
+                countCompletions: "once",
             },
             "RaceTrack.WonRace": {
                 kind: "repeat",
                 reward: { kind: "equipment", id: "MusicTempoUp", level: 1 },
+            },
+            "RaceTrack.MysteriousIguana": {
+                kind: "single",
+                reward: { kind: "equipment", id: "SceneChangeErrorChanceUp", level: 1 },
+                countCompletions: "once",
             },
             __Fallback__: {
                 kind: "nothing",

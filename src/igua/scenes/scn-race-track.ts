@@ -22,14 +22,26 @@ export function scnRaceTrack() {
     // Rpg.character.status.conditions.poison.level = 10;
     const lvl = Lvl.RaceTrack();
     // objGhostRecord(lvl).show();
+    enrichMysteriousIguana(lvl);
     objGhostPlayback(lvl).show();
-    // const readySetGoSfx = Sfx.Character.AnnouncerReadySetGo.playInstance();
-    // scene.stage.coro(function* () {
-    //     yield sleep(100);
-    //     objAnnouncer(readySetGoSfx, DataCuesheet.ReadySetGo).at(playerObj).add(0, 0).show();
-    // });
 
     lvl.RestartGroup.children.forEach(obj => obj.mixin(mxnBoilPivot));
+}
+
+function enrichMysteriousIguana(lvl: LvlType.RaceTrack) {
+    lvl.MysteriousNpc
+        .mixin(mxnCutscene, function* () {
+            yield* show(
+                "I couldn't reproduce it.",
+                "I restarted the services.",
+                "It seemed to go away.",
+                "The tests all pass.",
+                "And when I'm done for the day,",
+                "I will have gay sex.",
+            );
+
+            yield* DramaQuests.complete("RaceTrack.MysteriousIguana");
+        });
 }
 
 function objGhostRecord(lvl: LvlType.RaceTrack) {

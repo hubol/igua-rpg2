@@ -99,9 +99,7 @@ function enrichChargingLetters(lvl: LvlType.SimpleSecretValuables) {
                 }
                 yield sleep(1000);
                 yield* show("Groovy.");
-                if (!Rpg.quest("SimpleSecretHappy").everCompleted) {
-                    yield* DramaQuests.complete("SimpleSecretHappy");
-                }
+                yield* DramaQuests.complete("SimpleSecretHappy");
             }, { speaker: lvl.IguanaNpc });
         });
 }

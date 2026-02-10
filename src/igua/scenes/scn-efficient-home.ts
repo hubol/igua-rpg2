@@ -264,9 +264,7 @@ function enrichRoom3(lvl: LvlType.EfficientHome) {
             }
 
             yield* show("Thank you for not wearing your shoes in my apartment.");
-            if (!Rpg.quest("GreatTower.EfficientHome.NeatFreak.DidntWearEquipment").everCompleted) {
-                yield* DramaQuests.complete("GreatTower.EfficientHome.NeatFreak.DidntWearEquipment");
-            }
+            yield* DramaQuests.complete("GreatTower.EfficientHome.NeatFreak.DidntWearEquipment");
         });
 
     lvl.FurnitureArtworkSaying0

@@ -5648,7 +5648,7 @@ export const Lvl = {
       Door: e(r["Door"], { x: 24, y: 272, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromRaceTrack", name: "", depth: 0 } }, "Entities"),
       TerrainGrassJagged_66: d(Tx.Terrain.Grass.Jagged, { x: -11, y: 319, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b00d7 }, "AboveEntitiesDecals"),
       TerrainGrassJagged_67: d(Tx.Terrain.Grass.Jagged, { x: 61, y: 319, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b00d7 }, "AboveEntitiesDecals"),
-      IguanaNpc: e(r["IguanaNpc"], { x: 1496, y: 320, flippedX: false, values: { personaName: "", name: "", depth: 0 } }, "CharacterEntities"),
+      MysteriousNpc: e(r["IguanaNpc"], { x: 1496, y: 320, flippedX: false, values: { personaName: "BugGlitch0", name: "MysteriousNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 80, y: 320, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromRestart: e(r["Checkpoint"], { x: 216, y: 104, flippedX: false, values: { name: "fromRestart", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       GateVertical: e(r["GateVertical"], { x: 0, y: 656, width: 9864, flippedY: false, values: { sceneName: "scnRaceTrack", checkpointName: "fromRestart", name: "", depth: 0 } }, "RegionEntities"),

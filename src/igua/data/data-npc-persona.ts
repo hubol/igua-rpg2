@@ -47,6 +47,7 @@ export namespace DataNpcPersona {
             IndianaDirector: { job: "Director", name: "Don GPA", looks: NpcLooks.Miserable },
             Olympian: { job: "Olympian", name: "Jim Niss", looks: NpcLooks.Naive },
             GrottoIndianaMerchant: { job: "Merchant", name: "Nasr", looks: NpcLooks.AustraliasOwnBluey },
+            BugGlitch0: { job: "Error", name: "K.P.I.", looks: NpcLooks.AustraliasOwnBluey },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
         } satisfies Record<string, Model>,
     );
