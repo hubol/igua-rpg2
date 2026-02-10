@@ -32,8 +32,16 @@ function enrichShopkeeper(lvl: LvlType.GrottoIndianaShop) {
                 }
             }
             else {
-                // TODO stupid
-                yield* show("I'm not local. I can't help with that.");
+                yield* show(
+                    "This is Indiana.",
+                    "Currently, you are in my trade grotto.",
+                    "There are many iguanas in New Balltown, south of here.",
+                    "You'll need a way to climb up there, though...",
+                    "Another place with a lot of iguanas is the strange market to the southwest.",
+                    "To the southeast is the university.",
+                    "To the north is the great tower.",
+                    "There is an apartment complex there.",
+                );
             }
         });
 }
