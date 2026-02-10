@@ -10,6 +10,7 @@ import { DataCuesheet } from "../data/data-cuesheet";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { Cutscene, layers } from "../globals";
+import { mxnFxNoise } from "../mixins/effects/mxn-fx-noise";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnIguanaHoly } from "../mixins/mxn-iguana-holy";
@@ -41,7 +42,8 @@ function enrichMysteriousIguana(lvl: LvlType.RaceTrack) {
             );
 
             yield* DramaQuests.complete("RaceTrack.MysteriousIguana");
-        });
+        })
+        .mixin(mxnFxNoise);
 }
 
 function objGhostRecord(lvl: LvlType.RaceTrack) {

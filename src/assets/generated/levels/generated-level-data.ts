@@ -5651,6 +5651,7 @@ export const Lvl = {
       MysteriousNpc: e(r["IguanaNpc"], { x: 1496, y: 320, flippedX: false, values: { personaName: "BugGlitch0", name: "MysteriousNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 80, y: 320, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromRestart: e(r["Checkpoint"], { x: 216, y: 104, flippedX: false, values: { name: "fromRestart", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
+      PlayerDev: e(r["PlayerDev"], { x: 1592, y: 304, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       GateVertical: e(r["GateVertical"], { x: 0, y: 656, width: 9864, flippedY: false, values: { sceneName: "scnRaceTrack", checkpointName: "fromRestart", name: "", depth: 0 } }, "RegionEntities"),
       WinRegion: e(r["Region"], { x: 9640, y: 336, width: 208, height: 120, values: { name: "WinRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       PlayerStartMarker: e(r["Marker"], { x: 215, y: 376, values: { name: "PlayerStartMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),

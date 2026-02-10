@@ -132,6 +132,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromRestart", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+        },
+        {
+          "name": "PlayerDev",
+          "id": 6,
+          "_eid": "98101389",
+          "x": 1592,
+          "y": 304,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
