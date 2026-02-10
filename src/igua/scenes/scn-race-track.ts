@@ -10,6 +10,7 @@ import { DataCuesheet } from "../data/data-cuesheet";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { Cutscene, layers } from "../globals";
+import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnIguanaHoly } from "../mixins/mxn-iguana-holy";
 import { objAnnouncer } from "../objects/characters/obj-announcer";
@@ -27,6 +28,8 @@ export function scnRaceTrack() {
     //     yield sleep(100);
     //     objAnnouncer(readySetGoSfx, DataCuesheet.ReadySetGo).at(playerObj).add(0, 0).show();
     // });
+
+    lvl.RestartGroup.children.forEach(obj => obj.mixin(mxnBoilPivot));
 }
 
 function objGhostRecord(lvl: LvlType.RaceTrack) {
