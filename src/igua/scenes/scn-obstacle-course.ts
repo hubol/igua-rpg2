@@ -49,6 +49,12 @@ export function scnObstacleCourse() {
 function enrichSecretNpc(lvl: LvlType.ObstacleCourse) {
     lvl.SecretNpc.mixin(mxnCutscene, function* () {
         yield* DramaFacts.memorize("FarmingGods");
+        yield* show(
+            "That wizard is such an epic fail...",
+            "In his arrogance, he thought he could restore and maintain the world himself.",
+            "But he forgot about the power of friendship!!!",
+            "His sychophantic familiars, untrue friends, now do the bare minimum in maintaining the balance of the world.",
+        );
     });
 }
 
