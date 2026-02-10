@@ -6458,18 +6458,20 @@ export const Lvl = {
   VaseInhabitant: () => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x408000 });
     return {
-      Block: e(r["Block"], { x: 0, y: 0, width: 48, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_1: e(r["Block"], { x: 456, y: 0, width: 48, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_2: e(r["Block"], { x: 48, y: 0, width: 408, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_3: e(r["Block"], { x: 48, y: 232, width: 408, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope: e(r["Slope"], { x: 360, y: 200, width: 96, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_1: e(r["Slope"], { x: 48, y: 200, width: 96, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Pipe: e(r["Pipe"], { x: 48, y: 136, width: 104, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
-      FurnitureAquariumGiantVase: d(Tx.Furniture.Aquarium.GiantVase, { x: 248, y: 160, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      VaseWater: d(Tx.Furniture.Aquarium.GiantVaseWater, { x: 175, y: 103, scaleX: 1, scaleY: 1, rotation: 0, originX: 0, originY: 0, tint: 0xffffff }, "TerrainDecals"),
-      Door: e(r["Door"], { x: 56, y: 88, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
-      VaseNpc: e(r["IguanaNpc"], { x: 248, y: 232, flippedX: true, values: { personaName: "Vase", name: "VaseNpc", depth: 0 } }, "CharacterEntities"),
-      Player: e(r["Player"], { x: 128, y: 136, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      Block: e(r["Block"], { x: 0, y: 24, width: 48, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 456, y: 24, width: 48, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 48, y: 256, width: 408, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 360, y: 224, width: 96, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 48, y: 224, width: 96, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 48, y: 104, width: 168, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_1: e(r["Pipe"], { x: 216, y: 104, width: 66, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
+      Pipe_2: e(r["Pipe"], { x: 48, y: 160, width: 48, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 0, y: -24, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      FurnitureAquariumGiantVase: d(Tx.Furniture.Aquarium.GiantVase, { x: 248, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      VaseWater: d(Tx.Furniture.Aquarium.GiantVaseWater, { x: 175, y: 127, scaleX: 1, scaleY: 1, rotation: 0, originX: 0, originY: 0, tint: 0xffffff }, "TerrainDecals"),
+      Door: e(r["Door"], { x: 56, y: 56, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+      Player: e(r["Player"], { x: 128, y: 104, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      VaseNpcMarker: e(r["Marker"], { x: 248, y: 259, values: { name: "VaseNpcMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   WorldMap: () => {

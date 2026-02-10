@@ -16,7 +16,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 248,
+          "y": 259,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "VaseNpcMarker", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",
@@ -67,7 +79,7 @@
           "id": 0,
           "_eid": "93092164",
           "x": 128,
-          "y": 136,
+          "y": 104,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
@@ -84,19 +96,7 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": [
-        {
-          "name": "IguanaNpc",
-          "id": 0,
-          "_eid": "90326278",
-          "x": 248,
-          "y": 232,
-          "originX": 20,
-          "originY": 52,
-          "flippedX": true,
-          "values": {"personaName": "Vase", "name": "VaseNpc", "depth": 0}
-        }
-      ]
+      "entities": []
     },
     {
       "name": "AboveEntitiesDecals",
@@ -125,7 +125,7 @@
           "id": 0,
           "_eid": "88296692",
           "x": 56,
-          "y": 88,
+          "y": 56,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "", "checkpointName": "", "name": "", "depth": 0}
@@ -144,7 +144,7 @@
       "decals": [
         {
           "x": 248,
-          "y": 160,
+          "y": 184,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -156,7 +156,7 @@
         },
         {
           "x": 175,
-          "y": 103,
+          "y": 127,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -184,7 +184,7 @@
           "id": 0,
           "_eid": "93117141",
           "x": 0,
-          "y": 0,
+          "y": 24,
           "width": 48,
           "height": 280,
           "originX": 0,
@@ -197,22 +197,9 @@
           "id": 1,
           "_eid": "93117141",
           "x": 456,
-          "y": 0,
+          "y": 24,
           "width": 48,
           "height": 280,
-          "originX": 0,
-          "originY": 0,
-          "tint": "#000000",
-          "values": {"name": "", "depth": 0, "visible": true}
-        },
-        {
-          "name": "Block",
-          "id": 2,
-          "_eid": "93117141",
-          "x": 48,
-          "y": 0,
-          "width": 408,
-          "height": 48,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
@@ -223,7 +210,7 @@
           "id": 3,
           "_eid": "93117141",
           "x": 48,
-          "y": 232,
+          "y": 256,
           "width": 408,
           "height": 48,
           "originX": 0,
@@ -236,7 +223,7 @@
           "id": 4,
           "_eid": "95675713",
           "x": 360,
-          "y": 200,
+          "y": 224,
           "width": 96,
           "height": 32,
           "flippedX": false,
@@ -249,7 +236,7 @@
           "id": 5,
           "_eid": "95675713",
           "x": 48,
-          "y": 200,
+          "y": 224,
           "width": 96,
           "height": 32,
           "flippedX": true,
@@ -262,9 +249,40 @@
           "id": 6,
           "_eid": "95769929",
           "x": 48,
-          "y": 136,
-          "width": 104,
+          "y": 104,
+          "width": 168,
           "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 7,
+          "_eid": "95769929",
+          "x": 216,
+          "y": 104,
+          "width": 66,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 8,
+          "_eid": "95769929",
+          "x": 48,
+          "y": 160,
+          "width": 48,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 9,
+          "_eid": "93117141",
+          "x": 0,
+          "y": -24,
+          "width": 504,
+          "height": 48,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
