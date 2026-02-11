@@ -3512,7 +3512,8 @@
           "texture": "town/signage/wow.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3675,
@@ -3524,7 +3525,8 @@
           "texture": "town/signage/dude.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4115,
@@ -3536,7 +3538,8 @@
           "texture": "town/signage/no way.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3290,
@@ -3548,7 +3551,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3670,
@@ -3560,7 +3564,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4110,
@@ -3572,7 +3577,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4606,
@@ -3584,7 +3590,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3617,
@@ -3596,7 +3603,8 @@
           "texture": "terrain/grass/tall 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 5057,
@@ -3608,7 +3616,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 5529,
@@ -3620,7 +3629,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3178,
@@ -3632,7 +3642,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3474,
@@ -3644,7 +3655,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3723,
@@ -3656,7 +3668,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4066,
@@ -3668,7 +3681,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4667,
@@ -3680,7 +3694,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 5123,
@@ -3692,7 +3707,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 5482,
@@ -3704,7 +3720,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3890,
@@ -3716,7 +3733,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4362,
@@ -3728,7 +3746,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4842,
@@ -3740,7 +3759,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 5298,
@@ -3752,7 +3772,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 5754,
@@ -3764,7 +3785,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 5898,
@@ -3776,7 +3798,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 6042,
@@ -3788,7 +3811,8 @@
           "texture": "terrain/grass/irregular 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3284,
@@ -3969,7 +3993,8 @@
           "texture": "terrain/grass/jagged.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 9760,
@@ -3981,7 +4006,8 @@
           "texture": "terrain/grass/jagged.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 9832,
@@ -3993,7 +4019,8 @@
           "texture": "terrain/grass/jagged.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 9639,
@@ -4005,7 +4032,8 @@
           "texture": "terrain/grass/jagged.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 9639,
@@ -4017,7 +4045,8 @@
           "texture": "terrain/grass/jagged.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 9639,
@@ -4029,7 +4058,8 @@
           "texture": "terrain/grass/jagged.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 5057,
@@ -4041,7 +4071,8 @@
           "texture": "town/signage/dude.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 5528,
@@ -4051,6 +4082,115 @@
           "rotation": 0,
           "tint": "#74cdff",
           "texture": "town/signage/no way.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 3213,
+          "y": 103,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/colossus/guy 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3182,
+          "y": 178,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1f048b",
+          "texture": "terrain/earth/loop.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3143,
+          "y": 161,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1f048b",
+          "texture": "terrain/earth/loop.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3139,
+          "y": 90,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1f048b",
+          "texture": "terrain/earth/loop.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3165,
+          "y": 37,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1f048b",
+          "texture": "terrain/earth/loop.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3264,
+          "y": 90,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1f048b",
+          "texture": "terrain/earth/loop.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3270,
+          "y": 174,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1f048b",
+          "texture": "terrain/earth/loop.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3306,
+          "y": 142,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1f048b",
+          "texture": "terrain/earth/loop.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3251,
+          "y": 15,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1f048b",
+          "texture": "terrain/earth/loop.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -5479,7 +5619,8 @@
           "texture": "terrain/earth/question mark.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2792,
@@ -5491,7 +5632,8 @@
           "texture": "terrain/earth/question mark.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2925,
@@ -5503,7 +5645,8 @@
           "texture": "terrain/earth/question mark.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2844,
@@ -5515,7 +5658,8 @@
           "texture": "terrain/earth/question mark.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2876,
@@ -5527,7 +5671,8 @@
           "texture": "terrain/earth/question mark.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2783,
@@ -5539,7 +5684,8 @@
           "texture": "terrain/earth/question mark.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2824,
@@ -5551,7 +5697,8 @@
           "texture": "terrain/earth/question mark.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2893,
@@ -5563,7 +5710,8 @@
           "texture": "terrain/earth/question mark.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2860,
@@ -5575,7 +5723,8 @@
           "texture": "terrain/earth/question mark.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2908,
@@ -5587,7 +5736,8 @@
           "texture": "terrain/earth/question mark.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2935,
@@ -5599,7 +5749,8 @@
           "texture": "terrain/earth/question mark.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 9656,
@@ -5611,7 +5762,8 @@
           "texture": "town/signage/finish line.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 9656,
@@ -5623,7 +5775,8 @@
           "texture": "town/signage/finish line.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
