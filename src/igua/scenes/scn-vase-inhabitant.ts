@@ -1,12 +1,15 @@
 import { Graphics } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
-import { interp } from "../../lib/game-engine/routines/interp";
+import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { ZIndex } from "../core/scene/z-index";
 import { DataNpcPersona } from "../data/data-npc-persona";
+import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
+import { Cutscene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { MxnInteract } from "../mixins/mxn-interact";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Rpg } from "../rpg/rpg";
@@ -18,6 +21,15 @@ const consts = {
 };
 
 export function scnVaseInhabitant() {
+    const vaseProgress = {
+        get fillUnit() {
+            return Math.max(0, Math.min(1, Rpg.flags.vase.moistureUnits / consts.maxVaseMoistureUnits));
+        },
+        get isFilled() {
+            return this.fillUnit >= 1;
+        },
+    };
+
     const lvl = Lvl.VaseInhabitant();
 
     const vaseMaskObj = new Graphics()
@@ -25,15 +37,11 @@ export function scnVaseInhabitant() {
         .drawRect(0, -lvl.VaseWater.height, lvl.VaseWater.width, lvl.VaseWater.height)
         .scaled(1, 0)
         .coro(function* (self) {
-            function getTargetScaleY() {
-                return Math.max(0, Math.min(1, Rpg.flags.vase.moistureUnits / consts.maxVaseMoistureUnits));
-            }
-
-            self.scale.y = getTargetScaleY();
+            self.scale.y = vaseProgress.fillUnit;
 
             while (true) {
-                yield onPrimitiveMutate(() => Rpg.flags.vase.moistureUnits);
-                yield interp(self.scale, "y").to(getTargetScaleY()).over(1000);
+                yield onPrimitiveMutate(() => vaseProgress.fillUnit);
+                yield interp(self.scale, "y").to(vaseProgress.fillUnit).over(1000);
             }
         })
         .at(lvl.VaseWater)
@@ -62,7 +70,7 @@ export function scnVaseInhabitant() {
             }
         });
 
-    objIguanaPuppet(DataNpcPersona.getById("Vase" as any)!.looks)
+    const floatingIguanaObj = objIguanaPuppet(DataNpcPersona.getById("Vase" as any)!.looks)
         .coro(function* (self) {
             self.facing = -1;
             const y = self.y;
@@ -89,4 +97,36 @@ export function scnVaseInhabitant() {
         .at(lvl.VaseNpcMarker)
         .zIndexed(ZIndex.CharacterEntities)
         .show();
+
+    const iguanaObjs = {
+        floating: floatingIguanaObj,
+        surfaced: lvl.VaseNpc,
+    };
+
+    if (vaseProgress.isFilled) {
+        iguanaObjs.floating.visible = false;
+        iguanaObjs.floating.interact.enabled = false;
+    }
+    else {
+        iguanaObjs.surfaced.visible = false;
+        iguanaObjs.floating
+            .coro(function* (self) {
+                yield () => vaseProgress.isFilled;
+                Cutscene.play(function* () {
+                    yield interpvr(self).to(iguanaObjs.surfaced).over(400);
+                    self.visible = false;
+                    iguanaObjs.surfaced.visible = true;
+                });
+            });
+    }
+
+    iguanaObjs.surfaced
+        .coro(function* (self) {
+            yield () => self.visible;
+            if (!Rpg.quest("VaseInhabitant.Saved").everCompleted) {
+                Cutscene.play(function* () {
+                    yield* DramaQuests.complete("VaseInhabitant.Saved");
+                });
+            }
+        });
 }

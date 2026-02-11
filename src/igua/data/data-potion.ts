@@ -181,7 +181,7 @@ export namespace DataPotion {
                 Rpg.looseValuables.forgetCollection();
                 return;
             case "AnnoyIguanas":
-                const iguanaNpcObjs = Instances(objIguanaNpc);
+                const iguanaNpcObjs = Instances(objIguanaNpc).filter(obj => obj.visible);
                 iguanaNpcObjs.forEach(obj => obj.speed.y = -2);
                 const collidedIguanaNpcObj = playerObj.collidesOne(iguanaNpcObjs);
                 if (collidedIguanaNpcObj) {

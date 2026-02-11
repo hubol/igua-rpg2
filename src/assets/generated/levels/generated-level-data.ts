@@ -6517,6 +6517,7 @@ export const Lvl = {
       TerrainEarthZigzag0_4: d(Tx.Terrain.Earth.Zigzag0, { x: 472, y: 96, scaleX: 1, scaleY: -1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x9cd53f }, "TerrainDecals"),
       TerrainEarthZigzag0_5: d(Tx.Terrain.Earth.Zigzag0, { x: 488, y: 8, scaleX: 1, scaleY: -1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x9cd53f }, "TerrainDecals"),
       Door: e(r["Door"], { x: 72, y: 56, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+      VaseNpc: e(r["IguanaNpc"], { x: 248, y: 104, flippedX: true, values: { personaName: "Vase", name: "VaseNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 144, y: 104, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       FillVaseRegion: e(r["Region"], { x: 216, y: 64, width: 64, height: 40, values: { name: "FillVaseRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       VaseNpcMarker: e(r["Marker"], { x: 248, y: 259, values: { name: "VaseNpcMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
