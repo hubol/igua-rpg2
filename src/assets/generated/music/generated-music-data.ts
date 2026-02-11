@@ -24,6 +24,7 @@ export const GeneratedMusicData = {
    "Roundabout": { ogg: require("./ogg/roundabout.ogg") },
    "SharedBaby": { ogg: require("./ogg/shared-baby.ogg") },
    "SoldierBoyDemo": { ogg: require("./ogg/soldier-boy-demo.ogg") },
+   "SporadicQuest": { ogg: require("./ogg/sporadic-quest.ogg") },
    "TrashDay": { ogg: require("./ogg/trash-day.ogg") },
    "UnforgivableToner": { ogg: require("./ogg/unforgivable-toner.ogg") },
    "WondrousAmerica": { ogg: require("./ogg/wondrous-america.ogg") }

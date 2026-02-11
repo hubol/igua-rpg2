@@ -1,5 +1,6 @@
 import { Sprite } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Tx } from "../../assets/textures";
 import { Instances } from "../../lib/game-engine/instances";
 import { Coro } from "../../lib/game-engine/routines/coro";
@@ -7,6 +8,7 @@ import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp"
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { range } from "../../lib/range";
+import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataPotion } from "../data/data-potion";
 import { mxnFxSpawnMany } from "../mixins/effects/mxn-fx-spawn-many";
@@ -16,6 +18,7 @@ import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgFaction } from "../rpg/rpg-faction";
 
 export function scnSinSwamp() {
+    Jukebox.play(Mzk.SporadicQuest);
     const lvl = Lvl.SinSwamp();
     enrichPoison(lvl);
 }
