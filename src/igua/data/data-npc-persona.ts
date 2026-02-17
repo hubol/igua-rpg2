@@ -3,7 +3,7 @@ import { DataLib } from "./data-lib";
 import { NpcLooks } from "./data-npc-looks";
 
 export namespace DataNpcPersona {
-    export interface Model {
+    interface Model {
         job: string;
         name: string;
         looks: IguanaLooks.Serializable;
@@ -54,6 +54,8 @@ export namespace DataNpcPersona {
     );
 
     export type Id = keyof typeof Manifest;
+
+    export type Type = typeof Manifest[Id];
 
     export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataNpcPersona" });
 }

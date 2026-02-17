@@ -29,7 +29,7 @@ function enrichDirector(lvl: LvlType.IndianaUniversityInterior) {
                     "Your pupils await!!!",
                 );
                 lvl.ClassroomDoor.unlock();
-                Rpg.flags.classrooms.approvedForTeachingBy = lvl.DirectorNpc.rpgIguanaNpc.id;
+                Rpg.flags.classrooms.approvedForTeachingBy = lvl.DirectorNpc.mxnIguanaSpeaker.rpgIguanaNpc.id;
             }
             else {
                 yield* show("Well, if you ever do learn a fact, we're hiring!");

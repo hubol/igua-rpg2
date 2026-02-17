@@ -3,13 +3,12 @@ import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { ZIndex } from "../core/scene/z-index";
-import { DataNpcPersona } from "../data/data-npc-persona";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { Cutscene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { MxnInteract } from "../mixins/mxn-interact";
+import { mxnIguanaSpeaker } from "../mixins/mxn-iguana-speaker";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Rpg } from "../rpg/rpg";
@@ -70,7 +69,8 @@ export function scnVaseInhabitant() {
             }
         });
 
-    const floatingIguanaObj = objIguanaPuppet(DataNpcPersona.getById("Vase" as any)!.looks)
+    const floatingIguanaObj = objIguanaPuppet(lvl.VaseNpc.objIguanaNpc.persona.looks)
+        .mixin(mxnIguanaSpeaker, lvl.VaseNpc.objIguanaNpc.persona)
         .coro(function* (self) {
             self.facing = -1;
             const y = self.y;
@@ -99,28 +99,27 @@ export function scnVaseInhabitant() {
         .show();
 
     const iguanaObjs = {
-        floating: floatingIguanaObj,
-        surfaced: lvl.VaseNpc,
+        floatingObj: floatingIguanaObj,
+        surfacedObj: lvl.VaseNpc,
     };
 
     if (vaseProgress.isFilled) {
-        iguanaObjs.floating.visible = false;
-        iguanaObjs.floating.interact.enabled = false;
+        iguanaObjs.floatingObj.destroy();
     }
     else {
-        iguanaObjs.surfaced.visible = false;
-        iguanaObjs.floating
+        iguanaObjs.surfacedObj.visible = false;
+        iguanaObjs.floatingObj
             .coro(function* (self) {
                 yield () => vaseProgress.isFilled;
                 Cutscene.play(function* () {
-                    yield interpvr(self).to(iguanaObjs.surfaced).over(400);
-                    self.visible = false;
-                    iguanaObjs.surfaced.visible = true;
+                    yield interpvr(self).to(iguanaObjs.surfacedObj).over(400);
+                    self.destroy();
+                    iguanaObjs.surfacedObj.visible = true;
                 });
             });
     }
 
-    iguanaObjs.surfaced
+    iguanaObjs.surfacedObj
         .coro(function* (self) {
             yield () => self.visible;
             if (!Rpg.quest("VaseInhabitant.Saved").everCompleted) {
