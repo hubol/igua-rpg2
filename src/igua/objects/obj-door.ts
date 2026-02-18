@@ -11,6 +11,7 @@ import { show } from "../drama/show";
 import { Cutscene } from "../globals";
 import { GenerativeMusicUtils } from "../lib/generative-music-utils";
 import { mxnInteract } from "../mixins/mxn-interact";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { SceneChanger } from "../systems/scene-changer";
 
 interface ObjDoorArgs {
@@ -45,6 +46,7 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
     setMaskPositionToTarget();
 
     const obj = container(openObj, maskObj0, maskObj1, maskObj2, lockedObj0, lockedObj1, lockedObj2)
+        .mixin(mxnSpeaker, { name: "Door", colorPrimary: 0x342716, colorSecondary: 0x2C251D })
         .merge({
             lockedMessage: "Closed.",
             get locked() {
@@ -71,7 +73,7 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
         })
         .mixin(mxnInteract, () => {
             if (obj.locked) {
-                Cutscene.play(() => show(obj.lockedMessage));
+                Cutscene.play(() => show(obj.lockedMessage), { speaker: obj });
                 return;
             }
             if (sceneChanger) {
