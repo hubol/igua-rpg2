@@ -2,6 +2,7 @@
 // This file is generated
 
 export const GeneratedMusicData = {
+   "ArticulateReunion": { ogg: require("./ogg/articulate-reunion.ogg") },
    "BestSeller": { ogg: require("./ogg/best-seller.ogg") },
    "BigLove": { ogg: require("./ogg/big-love.ogg") },
    "BreadCrumbPool": { ogg: require("./ogg/bread-crumb-pool.ogg") },
