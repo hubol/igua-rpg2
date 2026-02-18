@@ -57,6 +57,7 @@ function enrichGreeter(lvl: LvlType.StrangeMarket) {
                 "The cobbler will allow you to combine multiple shoes into one, more powerful shoe.",
                 "The band will play a song for you.",
                 "There is an obstacle course with nice rewards if you collect many items.",
+                "The world-renowned MEAL SOUL restaurant is right above us! They serve many craveables (food).",
             );
         }
         else if (result === 1) {
