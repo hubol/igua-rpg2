@@ -3,11 +3,40 @@ import { DataEquipment } from "../data/data-equipment";
 import { DataKeyItem } from "../data/data-key-item";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { DataPotion } from "../data/data-potion";
+import { RpgCharacterEquipment } from "../rpg/rpg-character-equipment";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
+import { RpgExperience } from "../rpg/rpg-experience";
+import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgLoot } from "../rpg/rpg-loot";
+import { RpgPlayerAggregatedBuffs } from "../rpg/rpg-player-aggregated-buffs";
+import { RpgPlayerAttributes } from "../rpg/rpg-player-attributes";
 import { RpgPlayerBuffs } from "../rpg/rpg-player-buffs";
+import { RpgPlayerStatus } from "../rpg/rpg-player-status";
 
-export function devSimulateLoot(loot: RpgLoot.Model, buffs = RpgPlayerBuffs.create()) {
+function devCreateRpgLoot() {
+    const experienceState = RpgExperience.createState();
+    const aggregatedBuffs = new RpgPlayerAggregatedBuffs(
+        new RpgCharacterEquipment(RpgCharacterEquipment.createState()),
+    );
+    const experienceRewarder = new RpgExperienceRewarder(
+        experienceState,
+        aggregatedBuffs,
+        new RpgPlayerStatus(
+            RpgPlayerStatus.createState(),
+            new RpgPlayerAttributes(
+                RpgPlayerAttributes.createState(),
+                aggregatedBuffs,
+            ),
+            aggregatedBuffs,
+        ),
+    );
+    const experience = new RpgExperience(experienceState, experienceRewarder);
+    return new RpgLoot(experience);
+}
+
+export function devSimulateLoot(table: RpgLoot.Table, buffs = RpgPlayerBuffs.create()) {
+    const loot = devCreateRpgLoot();
+
     const { status } = RpgEnemyRank.create({});
 
     const counts = {
@@ -22,7 +51,7 @@ export function devSimulateLoot(loot: RpgLoot.Model, buffs = RpgPlayerBuffs.crea
     const iterationsCount = 100000;
 
     for (let i = 0; i < iterationsCount; i++) {
-        const drop = RpgLoot.Methods.drop(loot, status, buffs.loot);
+        const drop = loot.drop(table, status, buffs.loot);
         increment(counts.equipments, drop.equipments);
         increment(counts.flops, drop.flops);
         increment(counts.keyItems, drop.keyItems);

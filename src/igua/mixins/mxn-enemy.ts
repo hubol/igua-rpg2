@@ -8,9 +8,7 @@ import { objAngelEyes } from "../objects/enemies/obj-angel-eyes";
 import { objLootDrop } from "../objects/obj-loot-drop";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
-import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
-import { RpgLoot } from "../rpg/rpg-loot";
 import { RpgStatus } from "../rpg/rpg-status";
 import { mxnRpgStatus } from "./mxn-rpg-status";
 import { mxnRpgStatusPotions } from "./mxn-rpg-status-potions";
@@ -26,7 +24,7 @@ export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
     const { status, loot } = clone(args.rank);
 
     const died = () => {
-        const drop = RpgLoot.Methods.drop(loot, status, Rpg.character.buffs.loot);
+        const drop = Rpg.loot.drop(loot, status, Rpg.character.buffs.loot);
         objLootDrop(drop).at(enemyObj.mxnEnemy.soulAnchorObj.getWorldPosition()).show();
         enemyObj.dispatch("mxnEnemy.died");
         obj.destroy();

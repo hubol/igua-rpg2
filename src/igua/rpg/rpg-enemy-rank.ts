@@ -6,10 +6,10 @@ import { RpgStatus } from "./rpg-status";
 export namespace RpgEnemyRank {
     export interface Model {
         status: RpgStatus.Model;
-        loot: RpgLoot.Model;
+        loot: RpgLoot.Table;
     }
 
-    type CreateArgs = DeepPartial<Omit<Model, "loot">> & { loot?: RpgLoot.Model };
+    type CreateArgs = DeepPartial<Omit<Model, "loot">> & { loot?: RpgLoot.Table };
 
     export function create({ status, loot }: CreateArgs): Model {
         return {

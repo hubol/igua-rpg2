@@ -14,6 +14,7 @@ import { RpgIguanaNpcs } from "./rpg-iguana-npcs";
 import { RpgInventory } from "./rpg-inventory";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgLooseValuables } from "./rpg-loose-valuables";
+import { RpgLoot } from "./rpg-loot";
 import { RpgPlayer } from "./rpg-player";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
@@ -52,6 +53,7 @@ function createRpg(data: RpgProgressData) {
     const status = new RpgPlayerStatus(data.character.status, attributes, buffs);
     const experienceRewarder = new RpgExperienceRewarder(data.character.experience, buffs, status);
     const experience = new RpgExperience(data.character.experience, experienceRewarder);
+    const loot = new RpgLoot(experience);
     const classrooms = new RpgClassrooms(classroomsState, experience.reward);
     const iguanaNpcs = new RpgIguanaNpcs(iguanaNpcsState, experience.reward);
     const quests = new RpgQuests(questsState, experience.reward);
@@ -94,6 +96,7 @@ function createRpg(data: RpgProgressData) {
         },
         inventory,
         looseValuables: looseValuables as Omit<RpgLooseValuables, "nextLifetime">,
+        loot,
         programmaticFlags,
         quest(questId: DataQuestReward.Id) {
             return quests.getById(questId);

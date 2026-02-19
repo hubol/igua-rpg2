@@ -71,7 +71,7 @@ const ranks = {
                 { kind: "valuables", min: 100, max: 150, deltaPride: -10, weight: 30 },
                 { kind: "pocket_item", count: 3, id: "ComputerChip", weight: 30 },
                 { kind: "pocket_item", count: 5, id: "ComputerChip", weight: 20 },
-                { kind: "flop", min: 60, max: 69, count: 5, weight: 20 },
+                { kind: "flop", min: 59, max: 68, count: 5, weight: 20 },
             ],
             tier1: [
                 { kind: "equipment", id: "NailFile", weight: 10 },
