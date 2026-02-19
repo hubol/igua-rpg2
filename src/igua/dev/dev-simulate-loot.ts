@@ -3,39 +3,20 @@ import { DataEquipment } from "../data/data-equipment";
 import { DataKeyItem } from "../data/data-key-item";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { DataPotion } from "../data/data-potion";
-import { RpgCharacterEquipment } from "../rpg/rpg-character-equipment";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
-import { RpgExperience } from "../rpg/rpg-experience";
-import { RpgExperienceRewarder } from "../rpg/rpg-experience-rewarder";
 import { RpgLoot } from "../rpg/rpg-loot";
-import { RpgPlayerAggregatedBuffs } from "../rpg/rpg-player-aggregated-buffs";
-import { RpgPlayerAttributes } from "../rpg/rpg-player-attributes";
 import { RpgPlayerBuffs } from "../rpg/rpg-player-buffs";
-import { RpgPlayerStatus } from "../rpg/rpg-player-status";
+import { getInitialRpgProgress } from "../rpg/rpg-progress";
 
-function devCreateRpgLoot() {
-    const experienceState = RpgExperience.createState();
-    const aggregatedBuffs = new RpgPlayerAggregatedBuffs(
-        new RpgCharacterEquipment(RpgCharacterEquipment.createState()),
-    );
-    const experienceRewarder = new RpgExperienceRewarder(
-        experienceState,
-        aggregatedBuffs,
-        new RpgPlayerStatus(
-            RpgPlayerStatus.createState(),
-            new RpgPlayerAttributes(
-                RpgPlayerAttributes.createState(),
-                aggregatedBuffs,
-            ),
-            aggregatedBuffs,
-        ),
-    );
-    const experience = new RpgExperience(experienceState, experienceRewarder);
-    return new RpgLoot(experience);
-}
-
-export function devSimulateLoot(table: RpgLoot.Table, buffs = RpgPlayerBuffs.create()) {
-    const loot = devCreateRpgLoot();
+export async function devSimulateLoot(table: RpgLoot.Table, buffs = RpgPlayerBuffs.create()) {
+    // Some shortcuts have made it so that calling `devSimulateLoot` directly from a module
+    // leads to a circular dependency
+    // since this is dev code
+    // and it doesn't need to happen in any particular order,
+    // it is OK to mark the function as async
+    // and wait for the module to be resolved
+    const { RpgFactory } = await import("../rpg/rpg-factory");
+    const loot = RpgFactory.create(getInitialRpgProgress()).loot;
 
     const { status } = RpgEnemyRank.create({});
 
