@@ -110,8 +110,8 @@
           "name": "GateMap",
           "id": 7,
           "_eid": "53836309",
-          "x": 632,
-          "y": 240,
+          "x": 751,
+          "y": 264,
           "originX": 16,
           "originY": 16,
           "rotation": 270,
@@ -157,6 +157,19 @@
           "uid": 176975623156307,
           "tint": "#ffffff",
           "values": {"sceneName": "scnGrottoIndianaShop", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 11,
+          "_eid": "53836309",
+          "x": 488,
+          "y": 232,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 0,
+          "uid": 177152452563600,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnIndianaDesert", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -296,8 +309,8 @@
           "name": "Checkpoint",
           "id": 9,
           "_eid": "19953026",
-          "x": 608,
-          "y": 280,
+          "x": 736,
+          "y": 304,
           "originX": 22,
           "originY": 39,
           "flippedX": true,
@@ -318,8 +331,8 @@
           "name": "Checkpoint",
           "id": 11,
           "_eid": "19953026",
-          "x": 584,
-          "y": 256,
+          "x": 712,
+          "y": 280,
           "originX": 22,
           "originY": 39,
           "flippedX": true,
@@ -357,6 +370,28 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromErrorRecovery", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 15,
+          "_eid": "19953026",
+          "x": 472,
+          "y": 264,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromIndianaDesertLeft", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 16,
+          "_eid": "19953026",
+          "x": 664,
+          "y": 256,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromIndianaDesertRight", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -2378,19 +2413,6 @@
           "groupName": null
         },
         {
-          "x": 783,
-          "y": 163,
-          "scaleX": -1,
-          "scaleY": -1,
-          "rotation": 0,
-          "tint": "#698826",
-          "texture": "shapes/right triangle 58px.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
           "x": 1010,
           "y": 162,
           "scaleX": -1,
@@ -3366,8 +3388,8 @@
           "groupName": null
         },
         {
-          "x": 617,
-          "y": 147,
+          "x": 732,
+          "y": 162,
           "scaleX": 1.1,
           "scaleY": 2.6,
           "rotation": 0,
@@ -3379,8 +3401,8 @@
           "groupName": null
         },
         {
-          "x": 628,
-          "y": 148,
+          "x": 743,
+          "y": 163,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -3392,8 +3414,8 @@
           "groupName": null
         },
         {
-          "x": 643,
-          "y": 190,
+          "x": 758,
+          "y": 205,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -3405,8 +3427,8 @@
           "groupName": null
         },
         {
-          "x": 626,
-          "y": 229,
+          "x": 741,
+          "y": 244,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -3418,8 +3440,8 @@
           "groupName": null
         },
         {
-          "x": 646,
-          "y": 228,
+          "x": 761,
+          "y": 243,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -3431,8 +3453,8 @@
           "groupName": null
         },
         {
-          "x": 652,
-          "y": 167,
+          "x": 767,
+          "y": 182,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -3444,8 +3466,8 @@
           "groupName": null
         },
         {
-          "x": 612,
-          "y": 207,
+          "x": 727,
+          "y": 222,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -3457,8 +3479,8 @@
           "groupName": null
         },
         {
-          "x": 646,
-          "y": 151,
+          "x": 761,
+          "y": 166,
           "scaleX": 0.2,
           "scaleY": 1,
           "rotation": 0,
@@ -3470,8 +3492,8 @@
           "groupName": null
         },
         {
-          "x": 617,
-          "y": 191,
+          "x": 732,
+          "y": 206,
           "scaleX": 0.2,
           "scaleY": 1,
           "rotation": 0,
@@ -3769,8 +3791,8 @@
           "groupName": null
         },
         {
-          "x": 617,
-          "y": 170,
+          "x": 732,
+          "y": 185,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -3782,8 +3804,8 @@
           "groupName": null
         },
         {
-          "x": 652,
-          "y": 207,
+          "x": 767,
+          "y": 222,
           "scaleX": -1,
           "scaleY": 1,
           "rotation": 0,
@@ -3986,7 +4008,8 @@
           "texture": "world map/cave entrance 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 746,
@@ -3998,7 +4021,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 777,
@@ -4023,7 +4047,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 762,
@@ -4035,7 +4060,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 786,
@@ -4045,6 +4071,201 @@
           "rotation": 0,
           "tint": "#ffffff",
           "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 292,
+          "y": -47,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffc123",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 572,
+          "y": 208,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffc123",
+          "texture": "world map/hills 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 607,
+          "y": 229,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffc123",
+          "texture": "world map/hills 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 564,
+          "y": 248,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffc123",
+          "texture": "world map/hills 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 252,
+          "y": -47,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffd25e",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 517,
+          "y": 205,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/cactus.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 539,
+          "y": 215,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/cactus.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 521,
+          "y": 228,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/cactus.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 504,
+          "y": 249,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/cactus.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 535,
+          "y": 244,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/cactus.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 573,
+          "y": 248,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/cactus.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 614,
+          "y": 247,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/cactus.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 565,
+          "y": 227,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/cactus.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 619,
+          "y": 204,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/cactus.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 626,
+          "y": 226,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/cactus.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 648,
+          "y": 216,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/cactus.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -4408,6 +4629,19 @@
           "rotation": 270,
           "tint": "#0b043b",
           "texture": "shapes/confetti32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 783,
+          "y": 163,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#698826",
+          "texture": "shapes/right triangle 58px.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
@@ -5012,8 +5246,8 @@
           "groupName": null
         },
         {
-          "x": 636,
-          "y": 197,
+          "x": 748,
+          "y": 213,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -5025,8 +5259,8 @@
           "groupName": null
         },
         {
-          "x": 577,
-          "y": 193,
+          "x": 689,
+          "y": 209,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -5038,8 +5272,8 @@
           "groupName": null
         },
         {
-          "x": 692,
-          "y": 149,
+          "x": 804,
+          "y": 165,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -5051,8 +5285,8 @@
           "groupName": null
         },
         {
-          "x": 700,
-          "y": 234,
+          "x": 812,
+          "y": 250,
           "scaleX": -1,
           "scaleY": -1,
           "rotation": 0,
@@ -5064,8 +5298,8 @@
           "groupName": null
         },
         {
-          "x": 636,
-          "y": 229,
+          "x": 748,
+          "y": 245,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -5077,8 +5311,8 @@
           "groupName": null
         },
         {
-          "x": 675,
-          "y": 207,
+          "x": 787,
+          "y": 223,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -5090,8 +5324,8 @@
           "groupName": null
         },
         {
-          "x": 597,
-          "y": 161,
+          "x": 709,
+          "y": 177,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -5103,8 +5337,8 @@
           "groupName": null
         },
         {
-          "x": 614,
-          "y": 147,
+          "x": 726,
+          "y": 163,
           "scaleX": -1,
           "scaleY": 1,
           "rotation": 0,
@@ -5116,8 +5350,8 @@
           "groupName": null
         },
         {
-          "x": 652,
-          "y": 240,
+          "x": 764,
+          "y": 256,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -5129,8 +5363,8 @@
           "groupName": null
         },
         {
-          "x": 644,
-          "y": 247,
+          "x": 756,
+          "y": 263,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -5142,8 +5376,8 @@
           "groupName": null
         },
         {
-          "x": 655,
-          "y": 255,
+          "x": 767,
+          "y": 271,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -5155,8 +5389,8 @@
           "groupName": null
         },
         {
-          "x": 636,
-          "y": 261,
+          "x": 748,
+          "y": 277,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -5448,6 +5682,19 @@
           "rotation": 0,
           "tint": "#252525",
           "texture": "shapes/square irregular 10.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 588,
+          "y": 235,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffd25e",
+          "texture": "world map/blob 0.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
