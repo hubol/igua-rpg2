@@ -3,6 +3,7 @@ import { fntErotix } from "../../assets/bitmap-fonts/fnt-erotix";
 import { fntErotixLight } from "../../assets/bitmap-fonts/fnt-erotix-light";
 import { objText } from "../../assets/fonts";
 import { Tx } from "../../assets/textures";
+import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { holdf } from "../../lib/game-engine/routines/hold";
 import { interpvr } from "../../lib/game-engine/routines/interp";
@@ -254,7 +255,15 @@ export function* ask(question: string, ...options: AskOptions): Coro.Type<any> {
         options = ["Yes", "No"];
     }
 
-    // TODO assert that at least one option is not null!
+    if (options.every(option => option === null)) {
+        Logger.logContractViolationError(
+            "ask",
+            new Error("options must be an array with at least one non-null value"),
+            { question, options },
+        );
+        yield* show(question);
+        return -1;
+    }
 
     const { currentSpeaker, currentSpeakerMessageBoxObj } = yield* startSpeaking(question);
 
