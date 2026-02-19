@@ -1541,6 +1541,66 @@ export const Lvl = {
       GateHorizontal: e(r["GateHorizontal"], { x: -48, y: 16, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromGrottoIndianaShop", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
+  IndianaDesert: () => {
+    applyLevel({ width: 1552, height: 344, backgroundTint: 0x8dcbe6 });
+    return {
+      SkyCloudLong0: d(Tx.Sky.CloudLong0, { x: 296, y: 104, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      SkyCloudLong1: d(Tx.Sky.CloudLong1, { x: 504, y: 152, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      SkyCloudLong0_1: d(Tx.Sky.CloudLong0, { x: 792, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      SkyCloudLong1_1: d(Tx.Sky.CloudLong1, { x: 1000, y: 232, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      SkyCloudLong0_2: d(Tx.Sky.CloudLong0, { x: 1064, y: 88, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      SkyCloudLong1_2: d(Tx.Sky.CloudLong1, { x: 1272, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      SkyCloudLong0_3: d(Tx.Sky.CloudLong0, { x: 1552, y: 72, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      SkyCloudLong1_3: d(Tx.Sky.CloudLong1, { x: 1760, y: 120, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      SkyCloud0: d(Tx.Sky.Cloud0, { x: 224, y: 104, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      SkyCloud0_1: d(Tx.Sky.Cloud0, { x: 1129, y: 87, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      TerrainDistantHillMountainXl: d(Tx.Terrain.Distant.HillMountainXl, { x: 88, y: 312, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd25e }, "ParallaxDecals"),
+      TerrainDistantHillMountainXl_1: d(Tx.Terrain.Distant.HillMountainXl, { x: 688, y: 344, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd25e }, "ParallaxDecals"),
+      TerrainDistantHillMountainXl_2: d(Tx.Terrain.Distant.HillMountainXl, { x: 904, y: 368, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd25e }, "ParallaxDecals"),
+      TerrainDistantHillMountainXl_3: d(Tx.Terrain.Distant.HillMountainXl, { x: 1304, y: 328, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd25e }, "ParallaxDecals"),
+      Block: e(r["Block"], { x: 152, y: 240, width: 384, height: 104, values: { name: "", depth: 0, visible: true }, tint: 0xffc123 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 536, y: 264, width: 1016, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0xffc123 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 536, y: 240, width: 96, height: 24, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xffc123 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 336, y: 216, width: 96, height: 24, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xffc123 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 248, y: 216, width: 88, height: 24, values: { name: "", depth: 0, visible: true }, tint: 0xffc123 }, "TerrainEntities"),
+      Slope_2: e(r["Slope"], { x: 152, y: 216, width: 96, height: 24, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xffc123 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 0, y: 240, width: 152, height: 104, values: { name: "", depth: 0, visible: true }, tint: 0xffc123 }, "TerrainEntities"),
+      Slope_3: e(r["Slope"], { x: 1112, y: 240, width: 96, height: 24, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xffc123 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 1208, y: 240, width: 344, height: 24, values: { name: "", depth: 0, visible: true }, tint: 0xffc123 }, "TerrainEntities"),
+      Player: e(r["Player"], { x: 104, y: 240, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      FrontCactusGroup: dg(88, 280, "FrontCactusGroup", "FrontDecals"),
+      FoliageCactus0: d(Tx.Foliage.Cactus0, { x: 88, y: 288, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus1: d(Tx.Foliage.Cactus1, { x: 208, y: 320, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_1: d(Tx.Foliage.Cactus0, { x: 320, y: 280, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_2: d(Tx.Foliage.Cactus0, { x: 408, y: 304, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_3: d(Tx.Foliage.Cactus0, { x: 536, y: 320, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus1_1: d(Tx.Foliage.Cactus1, { x: 656, y: 352, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_4: d(Tx.Foliage.Cactus0, { x: 768, y: 312, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_5: d(Tx.Foliage.Cactus0, { x: 856, y: 336, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_6: d(Tx.Foliage.Cactus0, { x: 1032, y: 312, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus1_2: d(Tx.Foliage.Cactus1, { x: 1152, y: 344, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_7: d(Tx.Foliage.Cactus0, { x: 1264, y: 304, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_8: d(Tx.Foliage.Cactus0, { x: 1352, y: 328, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_9: d(Tx.Foliage.Cactus0, { x: 1512, y: 296, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus1_3: d(Tx.Foliage.Cactus1, { x: 1632, y: 328, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_10: d(Tx.Foliage.Cactus0, { x: 1744, y: 288, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_11: d(Tx.Foliage.Cactus0, { x: 1832, y: 312, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_12: d(Tx.Foliage.Cactus0, { x: 1952, y: 312, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_13: d(Tx.Foliage.Cactus0, { x: 2040, y: 336, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_14: d(Tx.Foliage.Cactus0, { x: 2200, y: 304, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus1_4: d(Tx.Foliage.Cactus1, { x: 2320, y: 336, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_15: d(Tx.Foliage.Cactus0, { x: 2432, y: 296, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_16: d(Tx.Foliage.Cactus0, { x: 2520, y: 320, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_17: d(Tx.Foliage.Cactus0, { x: 2656, y: 304, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_18: d(Tx.Foliage.Cactus0, { x: 2744, y: 328, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_19: d(Tx.Foliage.Cactus0, { x: 2904, y: 296, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus1_5: d(Tx.Foliage.Cactus1, { x: 3024, y: 328, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_20: d(Tx.Foliage.Cactus0, { x: 3136, y: 288, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      FoliageCactus0_21: d(Tx.Foliage.Cactus0, { x: 3224, y: 312, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -24, y: 128, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaDesert", name: "", depth: 0 } }, "RegionEntities"),
+      GateHorizontal_1: e(r["GateHorizontal"], { x: 1496, y: 120, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaDesert", name: "", depth: 0 } }, "RegionEntities"),
+    };
+  },
   IndianaUniversityInterior: () => {
     applyLevel({ width: 688, height: 280, backgroundTint: 0x68ba8e });
     return {
@@ -6963,6 +7023,7 @@ export namespace LvlType {
   export type GreatTowerBalcony = ReturnType<(typeof Lvl)["GreatTowerBalcony"]>;
   export type GreatTower = ReturnType<(typeof Lvl)["GreatTower"]>;
   export type GrottoIndianaShop = ReturnType<(typeof Lvl)["GrottoIndianaShop"]>;
+  export type IndianaDesert = ReturnType<(typeof Lvl)["IndianaDesert"]>;
   export type IndianaUniversityInterior = ReturnType<(typeof Lvl)["IndianaUniversityInterior"]>;
   export type IndianaUniversityNurse = ReturnType<(typeof Lvl)["IndianaUniversityNurse"]>;
   export type IndianaUniversity = ReturnType<(typeof Lvl)["IndianaUniversity"]>;
