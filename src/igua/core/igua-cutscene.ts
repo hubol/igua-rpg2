@@ -7,7 +7,7 @@ import { container } from "../../lib/pixi/container";
 import { Empty } from "../../lib/types/empty";
 import { Null } from "../../lib/types/null";
 import { clear } from "../drama/show";
-import { scene, sceneStack } from "../globals";
+import { layers, scene, sceneStack } from "../globals";
 import { Rpg } from "../rpg/rpg";
 
 type CutsceneFn = () => Coro.Type;
@@ -177,6 +177,8 @@ function objCutsceneRunner() {
                     }
                 }
                 catch (e) {
+                    layers.overlay.messages.removeAllChildren();
+
                     if (e instanceof EscapeTickerAndExecute) {
                         throw e;
                     }
