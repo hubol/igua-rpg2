@@ -97,7 +97,7 @@ export namespace DataShop {
                 stocks: [
                     {
                         initialQuantity: 1,
-                        price: { currency: "combat", deltaSold: 0, initial: 100 },
+                        price: { currency: "combat", deltaSold: 0, initial: 500 },
                         product: { kind: "equipment", id: "JumpAtSpecialSignsRing", level: 1 },
                     },
                     {
