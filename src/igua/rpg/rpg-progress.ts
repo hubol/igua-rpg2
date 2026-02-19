@@ -1,8 +1,6 @@
 import { Integer } from "../../lib/math/number-alias-types";
-import { DeepKeyOf } from "../../lib/types/deep-keyof";
 import { Null } from "../../lib/types/null";
 import { DataNpcPersona } from "../data/data-npc-persona";
-import { Rpg } from "./rpg";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgClassrooms } from "./rpg-classrooms";
 import { RpgExperience } from "./rpg-experience";
@@ -130,6 +128,3 @@ export function getInitialRpgProgress() {
 }
 
 export type RpgProgressData = ReturnType<typeof getInitialRpgProgress>;
-
-// TODO I think some places already expect flags to only be booleans :-X
-export type RpgProgressFlags = DeepKeyOf.Leaves<typeof Rpg["flags"]>;

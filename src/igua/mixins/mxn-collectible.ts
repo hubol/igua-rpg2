@@ -1,9 +1,5 @@
 import { DisplayObject } from "pixi.js";
-import { Integer } from "../../lib/math/number-alias-types";
-import { DeepAccess } from "../../lib/object/deep-access";
 import { playerObj } from "../objects/obj-player";
-import { Rpg } from "../rpg/rpg";
-import { RpgProgressFlags } from "../rpg/rpg-progress";
 
 interface MxnCollectibleUid {
     kind: "controlled";
@@ -11,39 +7,23 @@ interface MxnCollectibleUid {
     collect: () => void;
 }
 
-interface MxnCollectibleFlag {
-    kind: "flag";
-    flag: RpgProgressFlags;
-}
-
 interface MxnCollectibleTransient {
     kind: "transient";
 }
 
-type MxnCollectibleArgs = (MxnCollectibleUid | MxnCollectibleFlag | MxnCollectibleTransient) & {
+type MxnCollectibleArgs = (MxnCollectibleUid | MxnCollectibleTransient) & {
     collectable?: boolean;
 };
 
 function isCollected(args: MxnCollectibleArgs): boolean {
-    if (args.kind === "transient") {
-        return false;
-    }
-    if (args.kind === "flag") {
-        return DeepAccess.get(Rpg.flags, args.flag);
-    }
-    return args.isCollected;
+    return args.kind === "transient" ? false : args.isCollected;
 }
 
 function collect(args: MxnCollectibleArgs) {
     if (args.kind === "transient") {
         return;
     }
-    if (args.kind === "flag") {
-        DeepAccess.set(Rpg.flags, args.flag, true);
-    }
-    else {
-        args.collect();
-    }
+    args.collect();
 }
 
 // TODO this is overengineered and only used by valuables...
