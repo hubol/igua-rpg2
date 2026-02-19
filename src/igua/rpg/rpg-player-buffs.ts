@@ -1,4 +1,4 @@
-import { Integer, PercentAsInteger } from "../../lib/math/number-alias-types";
+import { Integer, PercentInt } from "../../lib/math/number-alias-types";
 import { compileResetter } from "../../lib/object/compile-resetter";
 import { RpgExperience } from "./rpg-experience";
 
@@ -7,7 +7,7 @@ export namespace RpgPlayerBuffs {
         return {
             approval: {
                 // TODO support for booleans?
-                indianaMerchants: <PercentAsInteger> 0,
+                indianaMerchants: <PercentInt> 0,
             },
             attributes: {
                 health: 0,
@@ -15,11 +15,11 @@ export namespace RpgPlayerBuffs {
                 strength: 0,
             },
             audio: {
-                musicTempoAdjustmentFactor: <PercentAsInteger> 0,
+                musicTempoAdjustmentFactor: <PercentInt> 0,
             },
             combat: {
                 defense: {
-                    physical: <PercentAsInteger> 0,
+                    physical: <PercentInt> 0,
                     faction: {
                         miner: 0,
                     },
@@ -43,13 +43,13 @@ export namespace RpgPlayerBuffs {
                 },
             },
             conditions: {
-                ballonDrainReductionFactor: <PercentAsInteger> 0,
-                poisonMaxIncreaseFactor: <PercentAsInteger> 0,
-                poisonRateReductionFactor: <PercentAsInteger> 0,
-                wetnessMaxIncreaseFactor: <PercentAsInteger> 0,
+                ballonDrainReductionFactor: <PercentInt> 0,
+                poisonMaxIncreaseFactor: <PercentInt> 0,
+                poisonRateReductionFactor: <PercentInt> 0,
+                wetnessMaxIncreaseFactor: <PercentInt> 0,
             },
             esoteric: {
-                sceneChangeErrorChance: <PercentAsInteger> 0,
+                sceneChangeErrorChance: <PercentInt> 0,
             },
             experience: {
                 bonusFactorWhileWet: {
@@ -61,11 +61,11 @@ export namespace RpgPlayerBuffs {
                     quest: 0,
                     social: 0,
                     spirit: 0,
-                } satisfies Record<RpgExperience.Id, PercentAsInteger>,
+                } satisfies Record<RpgExperience.Id, PercentInt>,
             },
             loot: {
                 pocket: {
-                    bonusChance: <PercentAsInteger> 0,
+                    bonusChance: <PercentInt> 0,
                 },
                 tiers: {
                     nothingRerollCount: 0,
@@ -79,7 +79,7 @@ export namespace RpgPlayerBuffs {
                     bonusAtSpecialSigns: 0,
                 },
                 walk: {
-                    topSpeedIncreaseFactor: <PercentAsInteger> 0,
+                    topSpeedIncreaseFactor: <PercentInt> 0,
                 },
             },
         };

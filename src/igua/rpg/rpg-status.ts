@@ -1,5 +1,5 @@
 import { blendColorDelta } from "../../lib/color/blend-color";
-import { Integer, PercentAsInteger, RgbInt } from "../../lib/math/number-alias-types";
+import { Integer, PercentInt, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { Rpg } from "./rpg";
 import { RpgAttack } from "./rpg-attack";
@@ -20,13 +20,13 @@ export namespace RpgStatus {
         pride: number;
         conditions: {
             helium: {
-                ballonDrainFactor: PercentAsInteger;
+                ballonDrainFactor: PercentInt;
                 ballons: Ballon[];
                 value: Integer;
                 max: Integer;
             };
             poison: {
-                rateFactor: PercentAsInteger;
+                rateFactor: PercentInt;
                 immune: boolean;
                 level: number;
                 levelMax: number;
@@ -41,12 +41,12 @@ export namespace RpgStatus {
             };
         };
         guardingDefenses: {
-            physical: PercentAsInteger;
+            physical: PercentInt;
         };
         defenses: {
-            physical: PercentAsInteger;
+            physical: PercentInt;
         };
-        factionDefenses: Record<RpgFaction, PercentAsInteger>;
+        factionDefenses: Record<RpgFaction, PercentInt>;
         recoveries: {
             wetness: Integer;
         };
@@ -345,15 +345,15 @@ export namespace RpgStatus {
         amount: Integer,
         kind: DamageKind,
         canBeFatal: boolean,
-        defense: PercentAsInteger,
-        guardingDefense: PercentAsInteger,
-        factionDefense: PercentAsInteger,
+        defense: PercentInt,
+        guardingDefense: PercentInt,
+        factionDefense: PercentInt,
         target: Model,
         targetEffects: Effects,
         rewardExperience: boolean,
     ) {
         const previous = target.health;
-        const totalDefense: PercentAsInteger = defense
+        const totalDefense: PercentInt = defense
             + (target.state.isGuarding ? guardingDefense : 0)
             + factionDefense;
 
