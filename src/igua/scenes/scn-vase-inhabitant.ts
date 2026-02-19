@@ -72,7 +72,6 @@ export function scnVaseInhabitant() {
     const floatingIguanaObj = objIguanaPuppet(lvl.VaseNpc.objIguanaNpc.persona.looks)
         .mixin(mxnIguanaSpeaker, lvl.VaseNpc.objIguanaNpc.persona)
         .coro(function* (self) {
-            self.facing = -1;
             const y = self.y;
 
             self
@@ -97,6 +96,8 @@ export function scnVaseInhabitant() {
         .at(lvl.VaseNpcMarker)
         .zIndexed(ZIndex.CharacterEntities)
         .show();
+
+    floatingIguanaObj.facing = -1;
 
     const iguanaObjs = {
         floatingObj: floatingIguanaObj,
