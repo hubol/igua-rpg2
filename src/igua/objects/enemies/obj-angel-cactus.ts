@@ -1,4 +1,5 @@
 import { Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
@@ -85,7 +86,16 @@ export function objAngelCactus() {
         theme.createSprite("nose")
             .anchored(0.5, 0.5)
             .add(-1, -4)
-            .step(self => self.pivot.y = mouthObj.mxnSpeakingMouth.agapeUnit >= 1 ? 1 : 0),
+            .step(self => {
+                let value = 0;
+                if (mouthObj.controls.agapeUnit >= 1) {
+                    value = 1;
+                }
+                if (mouthObj.controls.frowning) {
+                    value = 2;
+                }
+                self.pivot.y = value;
+            }),
         hurtboxObj,
     )
         .pivoted(0, 10)
@@ -99,6 +109,8 @@ export function objAngelCactus() {
         .coro(function* (self) {
             yield sleep(Rng.int(250, 750));
             while (true) {
+                self.play(Sfx.Enemy.Cactus.AttackCharge.rate(0.99, 1.01));
+                mouthObj.controls.frowning = true;
                 const vibrateObj = container()
                     .coro(function* () {
                         while (true) {
@@ -110,12 +122,15 @@ export function objAngelCactus() {
                     })
                     .show(self);
                 yield sleep(500);
-                yield interp(mouthObj.mxnSpeakingMouth, "agapeUnit").to(1).over(50);
+                yield interp(mouthObj.controls, "agapeUnit").to(1).over(50);
+                mouthObj.controls.frowning = false;
                 vibrateObj.destroy();
+                self.play(Sfx.Enemy.Cactus.SpikesExpose.rate(0.9, 1.1));
                 yield interp(cactusSpikesObj.objAngelCactusSpikes, "scale").to(1).over(250);
                 yield sleep(Rng.int(500, 1500));
+                self.play(Sfx.Enemy.Cactus.SpikesRetract.rate(0.9, 1.1));
                 yield interp(cactusSpikesObj.objAngelCactusSpikes, "scale").to(0).over(250);
-                yield interp(mouthObj.mxnSpeakingMouth, "agapeUnit").to(0).over(250);
+                yield interp(mouthObj.controls, "agapeUnit").to(0).over(250);
                 yield sleep(Rng.int(500, 1500));
             }
         });
