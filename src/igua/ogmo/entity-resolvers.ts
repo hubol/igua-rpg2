@@ -5,6 +5,7 @@ import { Vector, vnew } from "../../lib/math/vector-type";
 import { CtxPocketItems, objCollectiblePocketItemSpawner } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objDevPlayer } from "../objects/dev/obj-dev-player";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
+import { objAngelCactus } from "../objects/enemies/obj-angel-cactus";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
 import { objStashPocket } from "../objects/interactables/obj-stash-pocket";
@@ -73,6 +74,7 @@ export const OgmoEntityResolvers = {
             CtxPocketItems.value.variant,
             CtxPocketItems.value.behavior,
         ).at(entity, -1),
+    EnemyCactus: () => objAngelCactus().at(1, 3),
     EnemySuggestive: (entity) => objAngelSuggestive(entity).at(0, -38),
     EnemyMiffed: (entity) => objAngelMiffed(entity).at(0, 1),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,
