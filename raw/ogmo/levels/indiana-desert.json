@@ -568,6 +568,38 @@
           "originX": 32,
           "originY": 34,
           "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "Idol",
+          "id": 6,
+          "_eid": "79655020",
+          "x": 1365,
+          "y": 160,
+          "originX": 32,
+          "originY": 97,
+          "uid": 177160815398100,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Sign",
+          "id": 7,
+          "_eid": "39046554",
+          "x": 800,
+          "y": 264,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "Sand", "message": "This is the desert.\\n\\nThis sign is special.", "name": "", "depth": 0, "isSpecial": true}
+        },
+        {
+          "name": "StashPocket",
+          "id": 8,
+          "_eid": "63818363",
+          "x": 821,
+          "y": 88,
+          "originX": 23,
+          "originY": 33,
+          "uid": 177160835052001,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -581,6 +613,18 @@
       "gridCellsX": 194,
       "gridCellsY": 43,
       "decals": [
+        {
+          "x": 1388,
+          "y": 166,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
         {
           "x": 681,
           "y": 266,
@@ -654,6 +698,104 @@
           "rotation": 0,
           "tint": "#ffc123",
           "texture": "terrain/earth/lumpy 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1344,
+          "y": 166,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1366,
+          "y": 166,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1377,
+          "y": 170,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1401,
+          "y": 168,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1326,
+          "y": 169,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 768,
+          "y": 88,
+          "scaleX": 3.3,
+          "scaleY": 0.3,
+          "rotation": 0,
+          "tint": "#ffc123",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 821,
+          "y": 95,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#ffc123",
+          "texture": "terrain/earth/lumpy 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 814,
+          "y": 90,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffc123",
+          "texture": "terrain/earth/smooth.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
@@ -796,6 +938,15 @@
           "x": 1288,
           "y": 170,
           "width": 160,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 10,
+          "_eid": "95769929",
+          "x": 768,
+          "y": 88,
+          "width": 104,
           "values": {"name": "", "visible": false, "depth": 0}
         }
       ]

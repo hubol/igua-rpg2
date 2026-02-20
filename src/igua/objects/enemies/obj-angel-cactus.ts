@@ -6,9 +6,11 @@ import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
+import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { ValuesOf } from "../../../lib/types/values-of";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
@@ -20,7 +22,7 @@ const themes = (() => {
     const template = AngelThemeTemplate.create({
         eyes: {
             defaultEyelidRestingPosition: 0,
-            eyelidsTint: 0x55B53B,
+            eyelidsTint: 0xff0000,
             gap: 8,
             pupilRestStyle: { kind: "cross_eyed", offsetFromCenter: 3 },
             pupilsTx: Tx.Enemy.Snail.Pupil0,
@@ -38,7 +40,9 @@ const themes = (() => {
         sprites: {
             nose: Tx.Enemy.Cactus.Nose,
         },
-        tints: {},
+        tints: {
+            map: [0x55B53B, 0xC9FF4A, 0xB20005] as MapRgbFilter.Map,
+        },
     });
 
     return {
@@ -54,16 +58,36 @@ const atkSpikes = RpgAttack.create({
     physical: 60,
 });
 
-export function objAngelCactus() {
-    const theme = themes.common;
-    const rank = RpgEnemyRank.create({
+const ranks = {
+    level0: RpgEnemyRank.create({
         status: {
             healthMax: 80,
-            guardingDefenses: {
-                physical: 100,
-            },
         },
-    });
+        loot: {
+            tier0: [
+                { kind: "pocket_item", count: 1, id: "CactusFruitTypeA" },
+                { kind: "pocket_item", count: 2, id: "CactusFruitTypeA" },
+                { kind: "pocket_item", count: 1, id: "CactusFruitTypeB" },
+                { kind: "pocket_item", count: 2, id: "CactusFruitTypeB" },
+            ],
+            tier1: [
+                { kind: "valuables", deltaPride: 0, min: 25, max: 25, weight: 25 },
+                { kind: "flop", min: 25, max: 29, weight: 25 },
+                { kind: "nothing", weight: 50 },
+            ],
+        },
+    }),
+};
+
+const variants = {
+    level0: {
+        rank: ranks.level0,
+        theme: themes.common,
+    },
+};
+
+export function objAngelCactus() {
+    const { rank, theme } = variants.level0;
 
     const hurtboxObj = new Graphics()
         .beginFill(0xff0000)
@@ -101,6 +125,8 @@ export function objAngelCactus() {
         .pivoted(0, 10)
         .mixin(mxnDetectPlayer)
         .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank })
+        .mixin(mxnEnemyDeathBurst, { map: theme.tints.map })
+        .filtered(new MapRgbFilter(...theme.tints.map))
         .coro(function* (self) {
             cactusSpikesObj
                 .mixin(mxnRpgAttack, { attacker: self.status, attack: atkSpikes })
