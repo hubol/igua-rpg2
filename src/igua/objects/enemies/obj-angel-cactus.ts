@@ -1,7 +1,7 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { interp } from "../../../lib/game-engine/routines/interp";
-import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
@@ -70,6 +70,7 @@ export function objAngelCactus() {
         .invisible();
 
     const cactusSpikesObj = objAngelCactusSpikes();
+    const mouthObj = theme.createMouthObj();
 
     return container(
         container(
@@ -79,11 +80,12 @@ export function objAngelCactus() {
             .pivoted(32, 27),
         theme.createEyesObj()
             .add(0, -6),
-        theme.createMouthObj()
+        mouthObj
             .add(0, 0),
         theme.createSprite("nose")
             .anchored(0.5, 0.5)
-            .add(-1, -4),
+            .add(-1, -4)
+            .step(self => self.pivot.y = mouthObj.mxnSpeakingMouth.agapeUnit >= 1 ? 1 : 0),
         hurtboxObj,
     )
         .pivoted(0, 10)
@@ -94,12 +96,27 @@ export function objAngelCactus() {
                 .mixin(mxnRpgAttack, { attacker: self.status, attack: atkSpikes })
                 .step(spikesObj => spikesObj.isAttackActive = spikesObj.objAngelCactusSpikes.scale >= 1);
         })
-        .coro(function* () {
+        .coro(function* (self) {
+            yield sleep(Rng.int(250, 750));
             while (true) {
-                yield sleep(Rng.int(500, 1500));
+                const vibrateObj = container()
+                    .coro(function* () {
+                        while (true) {
+                            for (let i = 0; i <= 1; i++) {
+                                self.pivot.x = i;
+                                yield sleepf(4);
+                            }
+                        }
+                    })
+                    .show(self);
+                yield sleep(500);
+                yield interp(mouthObj.mxnSpeakingMouth, "agapeUnit").to(1).over(50);
+                vibrateObj.destroy();
                 yield interp(cactusSpikesObj.objAngelCactusSpikes, "scale").to(1).over(250);
                 yield sleep(Rng.int(500, 1500));
                 yield interp(cactusSpikesObj.objAngelCactusSpikes, "scale").to(0).over(250);
+                yield interp(mouthObj.mxnSpeakingMouth, "agapeUnit").to(0).over(250);
+                yield sleep(Rng.int(500, 1500));
             }
         });
 }
