@@ -55,7 +55,12 @@ export function objAngelCactus() {
         },
     });
 
-    const obj = container(
+    const hurtboxObj = new Graphics()
+        .beginFill(0xff0000)
+        .drawRect(-23, -11, 43, 21)
+        .invisible();
+
+    return container(
         container(
             Sprite.from(txCactusBody),
             objAngelCactusSpikes(),
@@ -68,12 +73,11 @@ export function objAngelCactus() {
         theme.createSprite("nose")
             .anchored(0.5, 0.5)
             .add(-1, -4),
+        hurtboxObj,
     )
         .pivoted(0, 10)
-        .mixin(mxnDetectPlayer);
-
-    return obj
-        .mixin(mxnEnemy, { hurtboxes: [obj], rank });
+        .mixin(mxnDetectPlayer)
+        .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank });
 }
 
 function objAngelCactusSpikes() {
