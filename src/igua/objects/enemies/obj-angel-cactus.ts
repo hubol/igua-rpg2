@@ -73,7 +73,8 @@ const ranks = {
             tier1: [
                 { kind: "valuables", deltaPride: 0, min: 25, max: 25, weight: 25 },
                 { kind: "flop", min: 25, max: 29, weight: 25 },
-                { kind: "nothing", weight: 50 },
+                { kind: "potion", id: "Wetness", weight: 5 },
+                { kind: "nothing", weight: 45 },
             ],
         },
     }),

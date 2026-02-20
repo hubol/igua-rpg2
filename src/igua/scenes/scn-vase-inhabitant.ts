@@ -3,6 +3,8 @@ import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { ZIndex } from "../core/scene/z-index";
+import { DataPocketItem } from "../data/data-pocket-item";
+import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { Cutscene } from "../globals";
@@ -53,10 +55,6 @@ export function scnVaseInhabitant() {
     lvl.FillVaseRegion
         .mixin(mxnSpeaker, { name: "Giant Vase", colorPrimary: 0x0000a0, colorSecondary: 0x0080f0 })
         .mixin(mxnCutscene, function* () {
-            if (Rpg.flags.vase.moistureUnits >= consts.maxVaseMoistureUnits) {
-                yield* show("Already at max.");
-                return;
-            }
             if (yield* ask("A giant vase... Add moisture?")) {
                 if (Rpg.character.status.conditions.wetness.value <= 0) {
                     yield* show("No moisture to add.");
@@ -67,7 +65,8 @@ export function scnVaseInhabitant() {
                     Rpg.character.status.conditions.wetness.value = 0;
                 }
             }
-        });
+        })
+        .step(self => self.interact.enabled = !vaseProgress.isFilled);
 
     const floatingIguanaObj = objIguanaPuppet(lvl.VaseNpc.objIguanaNpc.persona.looks)
         .mixin(mxnIguanaSpeaker, lvl.VaseNpc.objIguanaNpc.persona)
@@ -126,7 +125,53 @@ export function scnVaseInhabitant() {
             if (!Rpg.quest("VaseInhabitant.Saved").everCompleted) {
                 Cutscene.play(function* () {
                     yield* DramaQuests.complete("VaseInhabitant.Saved");
+                    yield* show(
+                        "Thank you so much for rescuing me!",
+                        "If you want more shoes like that, I can create some from Cactus Fruit.",
+                    );
                 });
             }
+
+            self
+                .mixin(mxnCutscene, function* () {
+                    const routes = [
+                        { vaseStoredKey: "cactusFruitTypeA", pocketItemId: "CactusFruitTypeA" },
+                        { vaseStoredKey: "cactusFruitTypeB", pocketItemId: "CactusFruitTypeB" },
+                    ] as const;
+
+                    const result = yield* ask(
+                        "I need 5 of each type of Cactus Fruit to make a shoe. I'll store them when you give me 5.",
+                        ...routes
+                            .map(({ pocketItemId }) =>
+                                Rpg.inventory.pocket.has(pocketItemId, 5)
+                                    ? "Give\n" + DataPocketItem.getById(pocketItemId).name
+                                    : null
+                            ),
+                        "I see.",
+                    );
+
+                    for (let i = 0; i < routes.length; i++) {
+                        if (result !== i) {
+                            continue;
+                        }
+
+                        const { pocketItemId, vaseStoredKey } = routes[i];
+
+                        if (Rpg.flags.vase[vaseStoredKey] >= 5) {
+                            yield* show("I already have five.");
+                            return;
+                        }
+
+                        yield* DramaInventory.removeCount({ kind: "pocket_item", id: pocketItemId }, 5);
+                        Rpg.flags.vase[vaseStoredKey] += 5;
+
+                        while (Rpg.flags.vase.cactusFruitTypeA >= 5 && Rpg.flags.vase.cactusFruitTypeB >= 5) {
+                            yield* show("Nice. You've given me enough for a shoe!");
+                            yield* DramaQuests.complete("VaseInhabitant.CombinedCactusFruits");
+                            Rpg.flags.vase.cactusFruitTypeA -= 5;
+                            Rpg.flags.vase.cactusFruitTypeB -= 5;
+                        }
+                    }
+                });
         });
 }

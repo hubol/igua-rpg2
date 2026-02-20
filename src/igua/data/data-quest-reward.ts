@@ -149,10 +149,13 @@ export namespace DataQuestReward {
                 kind: "repeat",
                 reward: { kind: "potion", id: "RestoreHealth", count: 2 },
             },
-            // TODO
             "VaseInhabitant.Saved": {
                 kind: "single",
-                reward: { kind: "currency", id: "valuables", count: 1 },
+                reward: { kind: "equipment", id: "PatheticCage", level: 1 },
+            },
+            "VaseInhabitant.CombinedCactusFruits": {
+                kind: "repeat",
+                reward: { kind: "equipment", id: "PatheticCage", level: 1 },
             },
             __Fallback__: {
                 kind: "nothing",

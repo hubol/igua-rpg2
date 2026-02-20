@@ -111,6 +111,8 @@ export function getInitialRpgProgress() {
             },
             vase: {
                 moistureUnits: 0,
+                cactusFruitTypeA: 0,
+                cactusFruitTypeB: 0,
             },
         },
         programmaticFlags: {
