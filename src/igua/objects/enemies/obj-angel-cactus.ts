@@ -1,10 +1,15 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
+import { interp } from "../../../lib/game-engine/routines/interp";
+import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { Rng } from "../../../lib/math/rng";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { ValuesOf } from "../../../lib/types/values-of";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
+import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { AngelThemeTemplate } from "./angel-theme-template";
@@ -44,6 +49,10 @@ type Theme = ValuesOf<typeof themes>;
 
 const [txCactusBody, ...txsCactusSpikes] = Tx.Enemy.Cactus.Body.split({ count: 4 });
 
+const atkSpikes = RpgAttack.create({
+    physical: 60,
+});
+
 export function objAngelCactus() {
     const theme = themes.common;
     const rank = RpgEnemyRank.create({
@@ -60,10 +69,12 @@ export function objAngelCactus() {
         .drawRect(-23, -11, 43, 21)
         .invisible();
 
+    const cactusSpikesObj = objAngelCactusSpikes();
+
     return container(
         container(
             Sprite.from(txCactusBody),
-            objAngelCactusSpikes(),
+            cactusSpikesObj,
         )
             .pivoted(32, 27),
         theme.createEyesObj()
@@ -77,7 +88,20 @@ export function objAngelCactus() {
     )
         .pivoted(0, 10)
         .mixin(mxnDetectPlayer)
-        .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank });
+        .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank })
+        .coro(function* (self) {
+            cactusSpikesObj
+                .mixin(mxnRpgAttack, { attacker: self.status, attack: atkSpikes })
+                .step(spikesObj => spikesObj.isAttackActive = spikesObj.objAngelCactusSpikes.scale >= 1);
+        })
+        .coro(function* () {
+            while (true) {
+                yield sleep(Rng.int(500, 1500));
+                yield interp(cactusSpikesObj.objAngelCactusSpikes, "scale").to(1).over(250);
+                yield sleep(Rng.int(500, 1500));
+                yield interp(cactusSpikesObj.objAngelCactusSpikes, "scale").to(0).over(250);
+            }
+        });
 }
 
 function objAngelCactusSpikes() {
@@ -95,11 +119,13 @@ function objAngelCactusSpikes() {
         .step(self => {
             self.textureIndex = txsCactusSpikes.length * api.scale;
             collisionShapeObj.scale.set(self.effectiveTextureIndex >= (txsCactusSpikes.length - 1) ? 1 : 0);
+            self.visible = api.scale > 0;
         });
 
     return container(
         sprite,
         collisionShapeObj,
     )
-        .collisionShape(CollisionShape.DisplayObjects, [collisionShapeObj]);
+        .collisionShape(CollisionShape.DisplayObjects, [collisionShapeObj])
+        .merge({ objAngelCactusSpikes: api });
 }
