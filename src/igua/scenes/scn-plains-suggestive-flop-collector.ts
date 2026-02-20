@@ -45,7 +45,7 @@ function enrichCollectorNpc(lvl: LvlType.PlainsSuggestiveFlopCollector) {
                 lvl.FlopEndMarker,
                 i / Math.max(minimumToReachEnd, flopsCount),
             );
-            objCollectibleFlop(Rng.intc(0, 998)).at(position).show();
+            objCollectibleFlop(Rng.intc(99, 198)).at(position).show();
             yield sleep(100);
         }
 
