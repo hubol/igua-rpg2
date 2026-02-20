@@ -14,11 +14,11 @@ const themes = (() => {
     const template = AngelThemeTemplate.create({
         eyes: {
             defaultEyelidRestingPosition: 0,
-            eyelidsTint: 0xff0000,
+            eyelidsTint: 0x55B53B,
             gap: 8,
             pupilRestStyle: { kind: "cross_eyed", offsetFromCenter: 3 },
             pupilsTx: Tx.Enemy.Snail.Pupil0,
-            pupilsTint: 0x0000ff,
+            pupilsTint: 0x000000,
             pupilsMirrored: true,
             scleraTx: Tx.Enemy.Snail.Sclera0,
             sclerasMirrored: true,
@@ -27,9 +27,11 @@ const themes = (() => {
             teethCount: 2,
             toothGapWidth: 1,
             negativeSpaceTint: 0x000000,
-            txs: objAngelMouth.txs.horizontal10,
+            txs: objAngelMouth.txs.rounded14,
         },
-        sprites: {},
+        sprites: {
+            nose: Tx.Enemy.Cactus.Nose,
+        },
         tints: {},
     });
 
@@ -62,7 +64,10 @@ export function objAngelCactus() {
         theme.createEyesObj()
             .add(0, -6),
         theme.createMouthObj()
-            .add(0, 2),
+            .add(0, 0),
+        theme.createSprite("nose")
+            .anchored(0.5, 0.5)
+            .add(-1, -4),
     )
         .pivoted(0, 10)
         .mixin(mxnDetectPlayer);
