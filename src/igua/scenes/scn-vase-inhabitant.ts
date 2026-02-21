@@ -129,7 +129,7 @@ export function scnVaseInhabitant() {
                         "Thank you so much for rescuing me!",
                         "If you want more shoes like that, I can create some from Cactus Fruit.",
                     );
-                });
+                }, { speaker: self });
             }
 
             self
