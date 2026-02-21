@@ -98,12 +98,18 @@ export function objAngelCactus() {
     const cactusSpikesObj = objAngelCactusSpikes();
     const mouthObj = theme.createMouthObj();
 
+    const soulAnchorObj = new Graphics()
+        .beginFill(0x000000)
+        .drawRect(0, 0, 1, 1)
+        .invisible();
+
     return container(
         container(
             Sprite.from(txCactusBody),
             cactusSpikesObj,
         )
             .pivoted(32, 27),
+        soulAnchorObj,
         theme.createEyesObj()
             .add(0, -6),
         mouthObj
@@ -125,7 +131,7 @@ export function objAngelCactus() {
     )
         .pivoted(0, 10)
         .mixin(mxnDetectPlayer)
-        .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank })
+        .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank, soulAnchorObj })
         .mixin(mxnEnemyDeathBurst, { map: theme.tints.map })
         .filtered(new MapRgbFilter(...theme.tints.map))
         .coro(function* (self) {
