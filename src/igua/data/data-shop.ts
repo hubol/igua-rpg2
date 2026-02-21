@@ -157,6 +157,11 @@ export namespace DataShop {
                         price: { currency: "spirit", deltaSold: 30, initial: 40 },
                         product: { kind: "equipment", id: "HealthUp", level: 1 },
                     },
+                    {
+                        initialQuantity: 1,
+                        price: { currency: "spirit", deltaSold: 0, initial: 666 },
+                        product: { kind: "equipment", id: "PoisonResistance", level: 1 },
+                    },
                 ],
             },
             GrottoIndiana: {
