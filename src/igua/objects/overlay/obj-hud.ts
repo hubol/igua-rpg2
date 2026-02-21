@@ -21,6 +21,8 @@ import { CtxInteract } from "../../mixins/mxn-interact";
 import { Rpg } from "../../rpg/rpg";
 import { RpgExperience } from "../../rpg/rpg-experience";
 import { RpgSceneIdol } from "../../rpg/rpg-player-aggregated-buffs";
+import { RpgPocket } from "../../rpg/rpg-pocket";
+import { objFigurePocketItem } from "../figures/obj-figure-pocket-item";
 import { playerObj } from "../obj-player";
 import { StepOrder } from "../step-order";
 import { objFlopCollectionIndicator } from "./obj-flop-collection-indicator";
@@ -367,16 +369,50 @@ function objCutsceneLetterbox() {
 }
 
 function objPocketInfo() {
-    return objText.MediumIrregular("", { tint: Consts.StatusTextTint }).invisible()
+    const prefixTextObj = objText.MediumIrregular("Your pocket has ", { tint: Consts.StatusTextTint });
+    const suffixTextObj = objText.MediumIrregular("", { tint: Consts.StatusTextTint });
+
+    let appliedPocketItemId: RpgPocket.Item | null = null;
+
+    const figureMaskObj = new Graphics().beginFill(0xff0000).drawRect(0, 2, 21, 12);
+
+    const figureContainerObj = container(
+        container()
+            .step((self) => {
+                if (appliedPocketItemId === Rpg.inventory.pocket.slots[0].item) {
+                    return;
+                }
+
+                const pocketItemId = Rpg.inventory.pocket.slots[0].item;
+                self.removeAllChildren();
+                if (pocketItemId !== null) {
+                    objFigurePocketItem(pocketItemId).show(self);
+                }
+                appliedPocketItemId = pocketItemId;
+            })
+            .masked(figureMaskObj),
+        figureMaskObj,
+    )
+        .step(self => self.visible = Rpg.character.attributes.intelligence >= 1)
+        .at(prefixTextObj.width, -4);
+
+    return container(
+        prefixTextObj,
+        suffixTextObj,
+        figureContainerObj,
+    )
         .step(self => {
             const slot = Rpg.inventory.pocket.slots[0];
             // TODO multiple slots lol
             self.visible = !slot.isEmpty;
             if (self.visible) {
-                self.text = "Your pocket has " + DataPocketItem.getById(slot.item!).name + "x" + slot.count;
-                self.seed = slot.count + 80_000;
+                suffixTextObj.x = figureContainerObj.visible ? (figureContainerObj.x + 24) : prefixTextObj.width;
+                suffixTextObj.text = DataPocketItem.getById(slot.item!).name + "x" + slot.count;
+                prefixTextObj.seed = slot.count + 81_000;
+                suffixTextObj.seed = slot.count + 80_000;
             }
-        });
+        })
+        .merge({ effectiveHeight: 10 });
 }
 
 function objValuablesInfo() {
@@ -436,7 +472,8 @@ function objIdolBuff() {
             if (text.visible) {
                 text.text = DataIdol.getById(idol?.idolId!).hudText;
             }
-        });
+        })
+        .merge({ effectiveHeight: 9 });
 }
 
 interface ObjBuildUpArgs {
