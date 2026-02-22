@@ -21,6 +21,7 @@ export const GeneratedMusicData = {
    "PieShake": { ogg: require("./ogg/pie-shake.ogg") },
    "PleasureMafia": { ogg: require("./ogg/pleasure-mafia.ogg") },
    "PoopPainter": { ogg: require("./ogg/poop-painter.ogg") },
+   "RiceRoyalty": { ogg: require("./ogg/rice-royalty.ogg") },
    "RochesterDetour": { ogg: require("./ogg/rochester-detour.ogg") },
    "Roundabout": { ogg: require("./ogg/roundabout.ogg") },
    "SharedBaby": { ogg: require("./ogg/shared-baby.ogg") },
