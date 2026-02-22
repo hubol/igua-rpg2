@@ -1,7 +1,14 @@
 import { Graphics } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
+import { Sfx } from "../../assets/sounds";
+import { SoundInstance } from "../../lib/game-engine/audio/sound";
 import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
+import { Rng } from "../../lib/math/rng";
+import { container } from "../../lib/pixi/container";
+import { Null } from "../../lib/types/null";
+import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { DramaInventory } from "../drama/drama-inventory";
@@ -22,6 +29,8 @@ const consts = {
 };
 
 export function scnVaseInhabitant() {
+    Jukebox.play(Mzk.FatFire);
+
     const vaseProgress = {
         get fillUnit() {
             return Math.max(0, Math.min(1, Rpg.flags.vase.moistureUnits / consts.maxVaseMoistureUnits));
@@ -174,4 +183,46 @@ export function scnVaseInhabitant() {
                     }
                 });
         });
+
+    objVaseVocalPlayback().show();
+}
+
+function objVaseVocalPlayback() {
+    const vocalCueSeconds = [
+        17.307,
+        54.230,
+    ];
+
+    let soundInstance = Null<SoundInstance>();
+
+    function getPlayheadSeconds() {
+        return Jukebox.getEstimatedPlayheadPosition(Mzk.FatFire);
+    }
+
+    return container()
+        .coro(function* () {
+            while (true) {
+                for (const seconds of vocalCueSeconds) {
+                    yield () => getPlayheadSeconds() >= seconds - 0.1;
+                    const delta = getPlayheadSeconds() - seconds;
+                    if (delta > 0.02) {
+                        continue;
+                    }
+
+                    const when = Math.max(0, -delta);
+                    const sfx = Rng.choose(Sfx.Character.Vase.StuckInAVase, Sfx.Character.Vase.OutOfTheVase);
+                    soundInstance = sfx.playInstance(when);
+                }
+
+                yield () => getPlayheadSeconds() < 1;
+            }
+        })
+        .step(() => {
+            if (!soundInstance) {
+                return;
+            }
+
+            soundInstance.rate = Jukebox.rate;
+        })
+        .on("removed", () => soundInstance?.stop());
 }
