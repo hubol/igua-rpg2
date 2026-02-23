@@ -7,6 +7,7 @@ import { Sound, SoundInstance } from "../../lib/game-engine/audio/sound";
 import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { approachLinear } from "../../lib/math/number";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { Null } from "../../lib/types/null";
@@ -203,7 +204,8 @@ function objVaseVocalPlayback(speakerObjs: Array<Container>) {
     cuesheets.set(Sfx.Character.Vase.OutOfTheVase, DataCuesheet.Vase.OutOf);
 
     let soundInstance = Null<SoundInstance>();
-    let singing = false;
+    let isSinging = false;
+    let isSilenced = false;
 
     function getPlayheadSeconds() {
         return Jukebox.getEstimatedPlayheadPosition(Mzk.FatFire);
@@ -217,6 +219,10 @@ function objVaseVocalPlayback(speakerObjs: Array<Container>) {
         }
 
         return speakerObjs.last;
+    }
+
+    function isSpeakerInCutscene(): boolean {
+        return Cutscene.isPlaying && speakerObjs.includes(Cutscene.current?.attributes?.speaker as any);
     }
 
     const lyricTextObj = objText
@@ -242,13 +248,17 @@ function objVaseVocalPlayback(speakerObjs: Array<Container>) {
                     soundInstance = sfx.playInstance(when);
                     for (const [start, end, _, data] of cuesheets.get(sfx) ?? []) {
                         yield () => soundInstance!.estimatedPlayheadPosition >= start;
-                        singing = true;
                         const speakerObj = getSpeakerObj();
                         lyricTextObj.at(speakerObj.getWorldCenter()).add(0, -40);
                         lyricTextObj.text = data;
+                        if (!isSilenced || !isSpeakerInCutscene()) {
+                            isSinging = true;
+                            isSilenced = false;
+                        }
+
                         yield () => soundInstance!.estimatedPlayheadPosition >= end;
-                        singing = false;
                         lyricTextObj.text = "";
+                        isSinging = false;
                     }
                 }
 
@@ -262,14 +272,26 @@ function objVaseVocalPlayback(speakerObjs: Array<Container>) {
 
             soundInstance.rate = Jukebox.rate;
         })
+        .step(() => {
+            if (!isSilenced && isSpeakerInCutscene()) {
+                isSilenced = true;
+                isSinging = false;
+            }
+
+            lyricTextObj.visible = isSinging;
+            if (soundInstance) {
+                soundInstance.gain = approachLinear(soundInstance.gain, isSilenced ? 0 : 0.7, 0.1);
+            }
+        })
         .coro(function* () {
             while (true) {
-                yield () => singing;
+                yield () => isSinging;
                 const mouthObj = getSpeakerObj().findIs(mxnSpeakingMouth).last;
                 yield interp(mouthObj.mxnSpeakingMouth, "agapeUnit").to(1).over(Rng.intc(1, 2) * 144);
                 yield sleepf(2);
                 yield interp(mouthObj.mxnSpeakingMouth, "agapeUnit").to(0).over(144);
             }
         })
-        .on("removed", () => soundInstance?.stop());
+        .on("removed", () => soundInstance?.stop())
+        .zIndexed(ZIndex.CharacterEntities);
 }
