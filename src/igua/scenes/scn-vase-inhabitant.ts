@@ -191,7 +191,9 @@ export function scnVaseInhabitant() {
                 });
         });
 
-    objVaseVocalPlayback([iguanaObjs.floatingObj, iguanaObjs.surfacedObj]).show();
+    objVaseVocalPlayback([iguanaObjs.floatingObj, iguanaObjs.surfacedObj])
+        .step(self => self.objVaseVocalPlayback.isStuck = !vaseProgress.isFilled)
+        .show();
 }
 
 function objVaseVocalPlayback(speakerObjs: Array<Container>) {
@@ -202,10 +204,15 @@ function objVaseVocalPlayback(speakerObjs: Array<Container>) {
 
     const cuesheets = new Map<Sound, ValuesOf<typeof DataCuesheet["Vase"]>>();
     cuesheets.set(Sfx.Character.Vase.OutOfTheVase, DataCuesheet.Vase.OutOf);
+    cuesheets.set(Sfx.Character.Vase.StuckInAVase, DataCuesheet.Vase.StuckIn);
 
     let soundInstance = Null<SoundInstance>();
     let isSinging = false;
     let isSilenced = false;
+
+    const api = {
+        isStuck: false,
+    };
 
     function getPlayheadSeconds() {
         return Jukebox.getEstimatedPlayheadPosition(Mzk.FatFire);
@@ -228,11 +235,13 @@ function objVaseVocalPlayback(speakerObjs: Array<Container>) {
     const lyricTextObj = objText
         .MediumIrregular("", { tint: 0x478D26 })
         .anchored(0.5, 1)
-        .mixin(mxnBoilSeed);
+        .mixin(mxnBoilSeed)
+        .step(self => self.at(getSpeakerObj().getWorldCenter()).add(0, -44));
 
     return container(
         lyricTextObj,
     )
+        .merge({ objVaseVocalPlayback: api })
         .coro(function* () {
             while (true) {
                 for (const seconds of vocalCueSeconds) {
@@ -243,13 +252,10 @@ function objVaseVocalPlayback(speakerObjs: Array<Container>) {
                     }
 
                     const when = Math.max(0, -delta);
-                    const sfx = Sfx.Character.Vase.OutOfTheVase;
-                    // const sfx = Rng.choose(Sfx.Character.Vase.StuckInAVase, Sfx.Character.Vase.OutOfTheVase);
+                    const sfx = Sfx.Character.Vase[api.isStuck ? "StuckInAVase" : "OutOfTheVase"];
                     soundInstance = sfx.playInstance(when);
                     for (const [start, end, _, data] of cuesheets.get(sfx) ?? []) {
                         yield () => soundInstance!.estimatedPlayheadPosition >= start;
-                        const speakerObj = getSpeakerObj();
-                        lyricTextObj.at(speakerObj.getWorldCenter()).add(0, -40);
                         lyricTextObj.text = data;
                         if (!isSilenced || !isSpeakerInCutscene()) {
                             isSinging = true;

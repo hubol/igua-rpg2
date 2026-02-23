@@ -17,6 +17,18 @@ export namespace DataCuesheet {
             [14.063732, 14.716479, "lyric", "Because"],
             [14.716479, 16.605489, "lyric", "I'm out of the vase!"],
         ],
+        StuckIn: [
+            [0.96923, 2.680219, "lyric", "Stuck in a vase"],
+            [3.243955, 4.875823, "lyric", "Stuck in a vase"],
+            [4.875823, 5.667031, "lyric", "Why am I"],
+            [5.667031, 7.249448, "lyric", "Stuck in the vase?"],
+            [7.813184, 9.514283, "lyric", "Stuck in a vase"],
+            [9.514283, 10.354942, "lyric", "Why did I"],
+            [10.424173, 11.907689, "lyric", "Get stuck in a vase?"],
+            [12.669227, 14.004391, "lyric", "Get stuck in a vase?"],
+            [14.073622, 14.874721, "lyric", "Why am I"],
+            [14.874721, 16.526369, "lyric", "Stuck in the vase?"],
+        ],
     } satisfies Record<string, DataCuesheet<"lyric">>;
 
     export const ReadySetGo: DataCuesheet<"lip" | "done" | "left_arm_raise" | "right_arm_raise"> = [
