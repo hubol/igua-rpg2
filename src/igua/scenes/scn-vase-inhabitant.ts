@@ -15,6 +15,7 @@ import { ValuesOf } from "../../lib/types/values-of";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataCuesheet } from "../data/data-cuesheet";
+import { DataEquipment } from "../data/data-equipment";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
@@ -163,6 +164,7 @@ export function scnVaseInhabitant() {
                                     ? "Give\n" + DataPocketItem.getById(pocketItemId).name
                                     : null
                             ),
+                        "About shoe.",
                         "I see.",
                     );
 
@@ -181,12 +183,26 @@ export function scnVaseInhabitant() {
                         yield* DramaInventory.removeCount({ kind: "pocket_item", id: pocketItemId }, 5);
                         Rpg.flags.vase[vaseStoredKey] += 5;
 
+                        let receivedReward = false;
+
                         while (Rpg.flags.vase.cactusFruitTypeA >= 5 && Rpg.flags.vase.cactusFruitTypeB >= 5) {
+                            receivedReward = true;
                             yield* show("Nice. You've given me enough for a shoe!");
                             yield* DramaQuests.complete("VaseInhabitant.CombinedCactusFruits");
                             Rpg.flags.vase.cactusFruitTypeA -= 5;
                             Rpg.flags.vase.cactusFruitTypeB -= 5;
                         }
+
+                        if (!receivedReward) {
+                            yield* show("I will store these. Bring me the other ingredients for your shoe!");
+                        }
+                    }
+
+                    if (result === 2) {
+                        yield* show(
+                            "The " + DataEquipment.getById("PatheticCage").name + " gets better at level 5.",
+                            "Please see the cobbler in the strange market for more infomrations.",
+                        );
                     }
                 });
         });
@@ -312,7 +328,7 @@ function objVaseVocalPlayback(speakerObjs: Array<Container>) {
 
             lyricTextObj.visible = isSinging;
             if (soundInstance) {
-                soundInstance.gain = approachLinear(soundInstance.gain, isSilenced ? 0 : 0.7, 0.1);
+                soundInstance.gain = approachLinear(soundInstance.gain, isSilenced ? 0 : 0.4, 0.1);
             }
         })
         .coro(function* () {
