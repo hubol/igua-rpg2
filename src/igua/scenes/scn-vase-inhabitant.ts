@@ -1,25 +1,31 @@
-import { Graphics } from "pixi.js";
+import { Container, Graphics } from "pixi.js";
+import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
-import { SoundInstance } from "../../lib/game-engine/audio/sound";
+import { Sound, SoundInstance } from "../../lib/game-engine/audio/sound";
 import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
+import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { Null } from "../../lib/types/null";
+import { ValuesOf } from "../../lib/types/values-of";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { DataCuesheet } from "../data/data-cuesheet";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { Cutscene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
+import { mxnBoilSeed } from "../mixins/mxn-boil-seed";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnIguanaSpeaker } from "../mixins/mxn-iguana-speaker";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { mxnSpeakingMouth } from "../mixins/mxn-speaking-mouth";
 import { Rpg } from "../rpg/rpg";
 
 // TODO I would like this to work differently
@@ -184,22 +190,43 @@ export function scnVaseInhabitant() {
                 });
         });
 
-    objVaseVocalPlayback().show();
+    objVaseVocalPlayback([iguanaObjs.floatingObj, iguanaObjs.surfacedObj]).show();
 }
 
-function objVaseVocalPlayback() {
+function objVaseVocalPlayback(speakerObjs: Array<Container>) {
     const vocalCueSeconds = [
         17.307,
         54.230,
     ];
 
+    const cuesheets = new Map<Sound, ValuesOf<typeof DataCuesheet["Vase"]>>();
+    cuesheets.set(Sfx.Character.Vase.OutOfTheVase, DataCuesheet.Vase.OutOf);
+
     let soundInstance = Null<SoundInstance>();
+    let singing = false;
 
     function getPlayheadSeconds() {
         return Jukebox.getEstimatedPlayheadPosition(Mzk.FatFire);
     }
 
-    return container()
+    function getSpeakerObj() {
+        for (const speakerObj of speakerObjs) {
+            if (!speakerObj.destroyed && speakerObj.visible) {
+                return speakerObj;
+            }
+        }
+
+        return speakerObjs.last;
+    }
+
+    const lyricTextObj = objText
+        .MediumIrregular("", { tint: 0x478D26 })
+        .anchored(0.5, 1)
+        .mixin(mxnBoilSeed);
+
+    return container(
+        lyricTextObj,
+    )
         .coro(function* () {
             while (true) {
                 for (const seconds of vocalCueSeconds) {
@@ -210,8 +237,19 @@ function objVaseVocalPlayback() {
                     }
 
                     const when = Math.max(0, -delta);
-                    const sfx = Rng.choose(Sfx.Character.Vase.StuckInAVase, Sfx.Character.Vase.OutOfTheVase);
+                    const sfx = Sfx.Character.Vase.OutOfTheVase;
+                    // const sfx = Rng.choose(Sfx.Character.Vase.StuckInAVase, Sfx.Character.Vase.OutOfTheVase);
                     soundInstance = sfx.playInstance(when);
+                    for (const [start, end, _, data] of cuesheets.get(sfx) ?? []) {
+                        yield () => soundInstance!.estimatedPlayheadPosition >= start;
+                        singing = true;
+                        const speakerObj = getSpeakerObj();
+                        lyricTextObj.at(speakerObj.getWorldCenter()).add(0, -40);
+                        lyricTextObj.text = data;
+                        yield () => soundInstance!.estimatedPlayheadPosition >= end;
+                        singing = false;
+                        lyricTextObj.text = "";
+                    }
                 }
 
                 yield () => getPlayheadSeconds() < 1;
@@ -223,6 +261,15 @@ function objVaseVocalPlayback() {
             }
 
             soundInstance.rate = Jukebox.rate;
+        })
+        .coro(function* () {
+            while (true) {
+                yield () => singing;
+                const mouthObj = getSpeakerObj().findIs(mxnSpeakingMouth).last;
+                yield interp(mouthObj.mxnSpeakingMouth, "agapeUnit").to(1).over(Rng.intc(1, 2) * 144);
+                yield sleepf(2);
+                yield interp(mouthObj.mxnSpeakingMouth, "agapeUnit").to(0).over(144);
+            }
         })
         .on("removed", () => soundInstance?.stop());
 }

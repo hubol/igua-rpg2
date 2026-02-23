@@ -4,6 +4,21 @@ import { Integer } from "../../lib/math/number-alias-types";
 export type DataCuesheet<TCommand> = Array<[start: number, end: number, command: TCommand, data: string | null]>;
 
 export namespace DataCuesheet {
+    export const Vase = {
+        OutOf: [
+            [0.870329, 2.74945, "lyric", "I'm out of the vase"],
+            [3.184614, 4.895603, "lyric", "I'm out of the vase"],
+            [4.895603, 5.716482, "lyric", "Oh, now I'm"],
+            [5.716482, 7.318679, "lyric", "Out of the vase"],
+            [8.070327, 9.464832, "lyric", "Out of the vase"],
+            [9.464832, 10.265931, "lyric", "And now I"],
+            [10.354942, 11.907689, "lyric", "Can make you shoes"],
+            [12.382414, 14.063732, "lyric", "I can make you shoes"],
+            [14.063732, 14.716479, "lyric", "Because"],
+            [14.716479, 16.605489, "lyric", "I'm out of the vase!"],
+        ],
+    } satisfies Record<string, DataCuesheet<"lyric">>;
+
     export const ReadySetGo: DataCuesheet<"lip" | "done" | "left_arm_raise" | "right_arm_raise"> = [
         [0.050814, 0.050814, "lip", "o0"],
         [0.148377, 0.148377, "lip", "tall"],
