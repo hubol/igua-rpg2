@@ -232,6 +232,10 @@ function objVaseVocalPlayback(speakerObjs: Array<Container>) {
         return Cutscene.isPlaying && speakerObjs.includes(Cutscene.current?.attributes?.speaker as any);
     }
 
+    function getLyricSfxToPlay() {
+        return Sfx.Character.Vase[api.isStuck ? "StuckInAVase" : "OutOfTheVase"];
+    }
+
     const lyricTextObj = objText
         .MediumIrregular("", { tint: 0x478D26 })
         .anchored(0.5, 1)
@@ -243,6 +247,27 @@ function objVaseVocalPlayback(speakerObjs: Array<Container>) {
     )
         .merge({ objVaseVocalPlayback: api })
         .coro(function* () {
+            function* displayLyricsForSfx(sfx: Sound) {
+                for (const [start, end, _, data] of cuesheets.get(sfx) ?? []) {
+                    if (sfx !== getLyricSfxToPlay()) {
+                        return false;
+                    }
+
+                    yield () => soundInstance!.estimatedPlayheadPosition >= start;
+                    lyricTextObj.text = data;
+                    if (!isSilenced || !isSpeakerInCutscene()) {
+                        isSinging = true;
+                        isSilenced = false;
+                    }
+
+                    yield () => soundInstance!.estimatedPlayheadPosition >= end;
+                    lyricTextObj.text = "";
+                    isSinging = false;
+                }
+
+                return true;
+            }
+
             while (true) {
                 for (const seconds of vocalCueSeconds) {
                     yield () => getPlayheadSeconds() >= seconds - 0.1;
@@ -252,19 +277,20 @@ function objVaseVocalPlayback(speakerObjs: Array<Container>) {
                     }
 
                     const when = Math.max(0, -delta);
-                    const sfx = Sfx.Character.Vase[api.isStuck ? "StuckInAVase" : "OutOfTheVase"];
+                    let sfx = getLyricSfxToPlay();
                     soundInstance = sfx.playInstance(when);
-                    for (const [start, end, _, data] of cuesheets.get(sfx) ?? []) {
-                        yield () => soundInstance!.estimatedPlayheadPosition >= start;
-                        lyricTextObj.text = data;
-                        if (!isSilenced || !isSpeakerInCutscene()) {
-                            isSinging = true;
-                            isSilenced = false;
+
+                    for (let i = 0; i < 2; i++) {
+                        const completed = yield* displayLyricsForSfx(sfx);
+                        if (completed) {
+                            break;
                         }
 
-                        yield () => soundInstance!.estimatedPlayheadPosition >= end;
-                        lyricTextObj.text = "";
-                        isSinging = false;
+                        sfx = getLyricSfxToPlay();
+                        soundInstance?.stop();
+                        soundInstance = sfx
+                            .gain(soundInstance?.gain)
+                            .playInstance(undefined, soundInstance?.estimatedPlayheadPosition);
                     }
                 }
 
