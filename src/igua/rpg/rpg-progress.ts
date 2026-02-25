@@ -124,6 +124,7 @@ export function getInitialRpgProgress() {
             revealedWorldMapGateUids: new Set<Integer>(),
             shops: RpgShops.createState(),
             stashPockets: RpgStashPockets.createState(),
+            unlockedMagicDoorUids: new Set<Integer>(),
             weightedPedestals: RpgWeightedPedestals.createState(),
         },
     };

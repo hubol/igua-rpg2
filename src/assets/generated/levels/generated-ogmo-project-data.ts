@@ -34,6 +34,7 @@ export namespace OgmoEntities {
   export type WeightedPedestal = OgmoFactory.EntityBase<{ requiredFlopsCount: number; name: string; depth: number }> & { uid: number };
   export type IntelligenceSign = OgmoFactory.EntityBase<{ title: string; message: string; min: number; max: number; name: string; depth: number }>;
   export type EnemyCactus = OgmoFactory.EntityBase<{ variant: "level0"; name: string; depth: number }>;
+  export type MagicDoor = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }> & { uid: number };
 }
 
 export interface OgmoEntityResolverBase {
@@ -68,4 +69,5 @@ export interface OgmoEntityResolverBase {
   WeightedPedestal: (entity: OgmoEntities.WeightedPedestal) => unknown;
   IntelligenceSign: (entity: OgmoEntities.IntelligenceSign) => unknown;
   EnemyCactus: (entity: OgmoEntities.EnemyCactus) => unknown;
+  MagicDoor: (entity: OgmoEntities.MagicDoor) => unknown;
 }

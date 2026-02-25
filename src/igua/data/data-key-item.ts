@@ -66,6 +66,11 @@ export namespace DataKeyItem {
                 description: "Fish for Ding Ding Saudah, the eccentric in apartment 2.",
                 texture: Tx.Collectibles.Key.DingDingFish,
             },
+            MagicKey: {
+                name: "Magic Key",
+                description: "Heavy, strong-smelling door key.",
+                texture: Tx.Collectibles.Key.MagicKey,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );

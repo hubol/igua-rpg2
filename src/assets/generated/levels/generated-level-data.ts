@@ -1645,6 +1645,20 @@ export const Lvl = {
       GateHorizontal_1: e(r["GateHorizontal"], { x: 1496, y: 120, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaDesertRight", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
+  IndianaHallOfDoors: () => {
+    applyLevel({ width: 912, height: 280, backgroundTint: 0xa286f3 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 0, width: 912, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 0, y: 248, width: 912, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 880, y: 32, width: 32, height: 216, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 0, y: 32, width: 304, height: 136, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
+      MagicDoor: e(r["MagicDoor"], { x: 376, y: 200, uid: 177203717952800, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+      MagicDoor_1: e(r["MagicDoor"], { x: 480, y: 200, uid: 177203718158901, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+      MagicDoor_2: e(r["MagicDoor"], { x: 584, y: 200, uid: 177203718418602, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+      MagicDoor_3: e(r["MagicDoor"], { x: 688, y: 200, uid: 177203722716303, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+      Player: e(r["Player"], { x: 80, y: 248, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    };
+  },
   IndianaUniversityInterior: () => {
     applyLevel({ width: 688, height: 280, backgroundTint: 0x68ba8e });
     return {
@@ -7088,6 +7102,7 @@ export namespace LvlType {
   export type GreatTower = ReturnType<(typeof Lvl)["GreatTower"]>;
   export type GrottoIndianaShop = ReturnType<(typeof Lvl)["GrottoIndianaShop"]>;
   export type IndianaDesert = ReturnType<(typeof Lvl)["IndianaDesert"]>;
+  export type IndianaHallOfDoors = ReturnType<(typeof Lvl)["IndianaHallOfDoors"]>;
   export type IndianaUniversityInterior = ReturnType<(typeof Lvl)["IndianaUniversityInterior"]>;
   export type IndianaUniversityNurse = ReturnType<(typeof Lvl)["IndianaUniversityNurse"]>;
   export type IndianaUniversity = ReturnType<(typeof Lvl)["IndianaUniversity"]>;

@@ -2,6 +2,7 @@ import { Graphics } from "pixi.js";
 import { OgmoEntities, OgmoEntityResolverBase } from "../../assets/generated/levels/generated-ogmo-project-data";
 import { Instances } from "../../lib/game-engine/instances";
 import { Vector, vnew } from "../../lib/math/vector-type";
+import { mxnDoorMagic } from "../mixins/mxn-door-magic";
 import { CtxPocketItems, objCollectiblePocketItemSpawner } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objDevPlayer } from "../objects/dev/obj-dev-player";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
@@ -84,6 +85,7 @@ export const OgmoEntityResolvers = {
     PlayerDev: objDevPlayer,
     WeightedPedestal: objWeightedPedestal,
     IntelligenceSign: (entity) => objIntelligenceSign(entity.values),
+    MagicDoor: (entity) => objDoor(entity.values).mixin(mxnDoorMagic, entity.uid).at(0, 2),
 } satisfies OgmoEntityResolverBase;
 
 function createOrConfigurePlayerObj(

@@ -425,7 +425,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/door.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAuCAYAAABNhcu5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAABKSURBVFhH7c6hAYAADMCwwS/7/0QwGPoAiMTU9tjda37gfPo5I2WkjJSRMlJGykgZKSNlpIyUkTJSRspIGSkjZaSMlJEyUkbeZm60VQHKmVU0iQAAAABJRU5ErkJggg=="
     },
@@ -1598,9 +1598,56 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/enemy cactus.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD0AAAAqCAYAAAAAsVPKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHvSURBVGhD7ZjNUcMwEIUtGqAbOEAF9hludEEZVBLOcQVwIN1Qgckz2oysSMruWvLYI38zGiv+We3z059jmhXxM7SDrTaPpi+W2509VsUuuhZ20Rww2VCxpzbHLKe3Knzv3hq26LZYdMlNw1KonPaFb83tfUxL2LLbu9NStup2NU7DECpZlh/f4Y/+19ZkvLf3tjaN8dl9q/MM9b4iooFGeEy0C/cFhHIi1KJfjk+ToJTwQ3McjzFe+2dbuwYxJM/HXkBKMOahbGP6HGwsxphLkULuujH8WIf2ayw+EErFnpoAsTTxijPzHQZIwk2MGIbr9lNOA2ksd0iEIKEuIqdDgrW8dadL0aIRDNiipYI1LgPcE3qWC3XjmGCQZUwj0fNLGZOl4oLrHMEEJ96p6eyvfzAfpIS6sG7K2a1Lw1nSFhF9TsTW+MBpDRzR1WxDXUxqIQ+h2WkBidtal8GqnOYKmSOYy6LdG4JiolLXclPl7F3nRGaPN1mb26HPUI7LgC0arEl4aN+ddUfm44v3E+AsayGnJMQ+NjjCZ41pNBxrvDSxF5X6piZUToNU4JJOh8Zt6o8DW52gEi1tJIQbQ/JcjJQJfnxRYznEErlFExzxrDGNQDkFl4STz6yJbG2CCeSVyo2VtO9yDrGluvdtmuYP8WIh938BeAIAAAAASUVORK5CYII="
+    },
+    {
+      "exportID": "03703297",
+      "name": "MagicDoor",
+      "limit": -1,
+      "size": {"x": 34, "y": 46},
+      "origin": {"x": 0, "y": -2},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": true,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "sceneName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "checkpointName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/door magic.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAuBAMAAAC/q9aKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURUFGqAAAAD4P/AUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAv3YBAOgDAAC/dgEA6AMAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAAAOPXXShIpetwAAADtJREFUOMtjYGQAAwEwCeYQIyKIDojURx0RbLaj6mCgochg8zv97MYV8nQKeCy2o8gLYOigqgia3YKCAH2oCvRuz8MZAAAAAElFTkSuQmCC"
     }
   ],
   "tilesets": []
