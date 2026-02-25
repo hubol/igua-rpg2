@@ -18,6 +18,10 @@ import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 
 interface SlotMachineRenderConfig {
+    mask: {
+        y: Integer;
+        height: Integer;
+    };
     reel: {
         gap: Integer;
     };
@@ -28,12 +32,19 @@ interface SlotMachineRenderConfig {
 }
 
 export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineRenderConfig) {
+    const fallbackSymbolTx = [...config.symbolTxs.values()][0];
     const pricePerSpin: RpgEconomy.Offer = { currency: "valuables", price: rules.price };
 
     const reelObjs = rules.reels.map((reel, i) =>
-        objReel({ config, reel, rules }).at(i * config.reel.gap, -symbolPadding * config.slot.gap)
+        objReel({ config, reel, rules }, fallbackSymbolTx).at(i * config.reel.gap, -symbolPadding * config.slot.gap)
     );
-    const maskObj = new Graphics().beginFill(0xffffff).drawRect(0, -10, config.reel.gap * 4, config.slot.gap * 3 + 40);
+
+    const maskObj = new Graphics().beginFill(0xffffff).drawRect(
+        0,
+        config.mask.y,
+        config.reel.gap * (rules.reels.length + 1),
+        config.mask.height,
+    );
     const reelObj = container(...reelObjs, maskObj).masked(maskObj);
     const textObj = container();
 
@@ -148,7 +159,7 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
 
                 if (totalPrize > 0) {
                     self.coro(function* () {
-                        yield* DramaWallet.rewardValuables(totalPrize * pricePerSpin.price, "gambling");
+                        yield* DramaWallet.rewardValuables(totalPrize, "gambling");
                     });
                 }
 
@@ -166,9 +177,9 @@ interface ObjReelArgs {
 
 const symbolPadding = 2;
 
-function objReel(args: ObjReelArgs) {
+function objReel(args: ObjReelArgs, fallbackSymbolTx: Texture) {
     // Before, height and width came from slot config. I am not totally sure why.
-    const { width, height } = [...args.config.symbolTxs.values()][0];
+    const { width, height } = fallbackSymbolTx;
     const { gap } = args.config.slot;
 
     const reelLength = args.reel.length;

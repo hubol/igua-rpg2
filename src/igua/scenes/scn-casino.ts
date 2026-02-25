@@ -22,7 +22,7 @@ export function scnCasino() {
     scene.style.backgroundTint = 0x1c1336;
     objSlotMachine(
         rules,
-        { reel: { gap: 40 }, slot: { gap: 20 }, symbolTxs },
+        { mask: { y: -2, height: 74 }, reel: { gap: 46 }, slot: { gap: 20 }, symbolTxs },
     )
         .at(160, 70)
         .zIndexed(ZIndex.Entities)
