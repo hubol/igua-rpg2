@@ -4,8 +4,8 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#d8a5f7",
   "values": {"Terrain Color": "#ffd600"},
+  "backgroundColor": "#d8a5f7",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -203,7 +203,8 @@
           "texture": "casino/slots/machine simple.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 241,
@@ -213,6 +214,43 @@
           "rotation": 0,
           "tint": "#ffffff",
           "texture": "casino/slots/machine simple secondary display.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 243,
+          "y": 205,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#db3020",
+          "texture": "casino/slots/five valuable bet.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 272,
+          "y": 205,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffd800",
+          "texture": "shapes/exaggerate 16px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 211,
+          "y": 203,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffd800",
+          "texture": "shapes/exaggerate 16px.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
