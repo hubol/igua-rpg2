@@ -59,8 +59,10 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
                 if (!state.paidForGame) {
                     if (!Rpg.wallet.canAfford(pricePerSpin)) {
                         Cutscene.play(function* () {
-                            // TODO needs to serialize offer consistently
-                            yield* show("Cost is " + pricePerSpin.price);
+                            yield* show(
+                                "Minimum bet is " + RpgEconomy.Offer.toString(pricePerSpin.price, pricePerSpin.currency)
+                                    + ".",
+                            );
                         });
                     }
                     else {

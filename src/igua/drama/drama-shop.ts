@@ -422,27 +422,27 @@ function objPotionInventorySlots() {
 const r = new Rectangle();
 
 function getObjBadgeArgsForCurrency(currency: RpgStock["currency"]): Omit<ObjBadgeArgs, "getAmount" | "isAffordable"> {
+    const getText = (amount: Integer) => RpgEconomy.Offer.getPluralizedNoun(amount, currency);
+
     if (RpgExperience.isId(currency)) {
         const config = experienceIndicatorConfigs[currency];
 
         return {
             bgTint: config.tint,
-            getText: () => `${currency} XP`,
+            getText,
             iconTx: config.iconTx,
         };
     }
 
     if (currency === "valuables") {
         return {
-            getText: (amount) => amount === 1 ? "valuable" : "valuables",
+            getText,
             iconTx: Tx.Collectibles.ValuableGreen,
             textTint: 0x00ff00,
         };
     }
 
-    return {
-        getText: (amount) => amount === 1 ? "credit" : "credits",
-    };
+    return { getText };
 }
 
 function objCurrencyAmount(getAmount: () => Integer, currency: RpgStock["currency"], isAffordable: boolean) {

@@ -23,4 +23,22 @@ export namespace RpgEconomy {
         currency: Currency.Id;
         price: Integer;
     }
+
+    export namespace Offer {
+        export function getPluralizedNoun(price: Integer, currencyId: Currency.Id) {
+            if (RpgExperience.isId(currencyId)) {
+                return currencyId + " XP";
+            }
+
+            if (currencyId === "valuables") {
+                return price === 1 ? "valuable" : "valuables";
+            }
+
+            return price === 1 ? "credit" : "credits";
+        }
+
+        export function toString(price: Integer, currencyId: Currency.Id) {
+            return price + " " + getPluralizedNoun(price, currencyId);
+        }
+    }
 }
