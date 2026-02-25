@@ -46,14 +46,17 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
         config.mask.height,
     );
     const reelObj = container(...reelObjs, maskObj).masked(maskObj);
-    const textObj = container();
+    const resultsObj = container();
 
     const state = {
         paidForGame: false,
         fastSpinRequested: false,
     };
 
-    return container(reelObj, textObj)
+    return container(reelObj, resultsObj)
+        .dispatches<"objSlotMachine.gameStarted">()
+        .dispatchesValue<"objSlotMachine.gameEnded", RpgSlotMachine.SpinResult>()
+        .dispatchesValue<"objSlotMachine.showLinePrize", RpgSlotMachine.SpinResult.LinePrize>()
         .coro(function* (self) {
             const interactiveSelf = self.mixin(mxnInteract, () => {
                 if (!state.paidForGame) {
@@ -83,9 +86,11 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
             while (true) {
                 yield () => state.paidForGame;
 
-                textObj.removeAllChildren();
+                resultsObj.removeAllChildren();
+                self.dispatch("objSlotMachine.gameStarted");
 
-                const { totalPrize, reelOffsets, linePrizes } = RpgSlotMachine.spin(rules);
+                const spinResult = RpgSlotMachine.spin(rules);
+                const { totalPrize, reelOffsets, linePrizes } = spinResult;
 
                 for (const reelObj of reelObjs) {
                     reelObj.controls.offsetDelta = Rng.float(0.175, 0.3);
@@ -134,29 +139,21 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
                     yield sleep(100);
                 }
 
-                textObj.removeAllChildren();
-                objText.MediumBold(`Prize: ${totalPrize}`)
-                    .at(0, -12)
-                    .anchored(0, 1)
-                    .show(textObj);
-                if (linePrizes.length) {
-                    objText.Medium(
-                        `${linePrizes.map(({ index, prize }) => `Line ${index + 1} pays ${prize}`).join("\n")}`,
-                    )
-                        .anchored(0, 1)
-                        .at(0, -22)
-                        .show(textObj);
+                self.dispatch("objSlotMachine.gameEnded", spinResult);
 
-                    objLineHighlighter(reelObjs, reelObj.localTransform).coro(function* (self) {
+                if (linePrizes.length) {
+                    objLineHighlighter(reelObjs, reelObj.localTransform).coro(function* (highlighterObj) {
                         while (true) {
                             for (const prize of linePrizes) {
-                                self.controls.line = rules.lines[prize.index];
+                                self.dispatch("objSlotMachine.showLinePrize", prize);
+                                highlighterObj.controls.line = rules.lines[prize.index];
                                 yield sleep(1000);
-                                self.controls.line = null;
+                                highlighterObj.controls.line = null;
                                 yield sleep(500);
                             }
                         }
-                    }).show(textObj);
+                    })
+                        .show(resultsObj);
                 }
 
                 if (totalPrize > 0) {
@@ -170,6 +167,8 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
             }
         });
 }
+
+export type ObjSlotMachine = ReturnType<typeof objSlotMachine>;
 
 interface ObjReelArgs {
     config: SlotMachineRenderConfig;

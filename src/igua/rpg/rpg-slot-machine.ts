@@ -84,6 +84,12 @@ export namespace RpgSlotMachine {
         };
     }
 
+    export type SpinResult = ReturnType<typeof spin>;
+
+    export namespace SpinResult {
+        export type LinePrize = SpinResult["linePrizes"][number];
+    }
+
     function verifyRules(rules: Rules) {
         if (rules.reels.length < 2) {
             Logger.logContractViolationError(

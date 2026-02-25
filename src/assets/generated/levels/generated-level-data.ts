@@ -1549,8 +1549,10 @@ export const Lvl = {
     applyLevel({ width: 500, height: 280, backgroundTint: 0xd8a5f7 });
     return {
       CasinoSlotsMachineSimple: d(Tx.Casino.Slots.MachineSimple, { x: 264, y: 160, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      CasinoSlotsMachineSimpleSecondaryDisplay: d(Tx.Casino.Slots.MachineSimpleSecondaryDisplay, { x: 241, y: 75, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 0, y: 232, width: 504, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
       Player: e(r["Player"], { x: 64, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      SlotMachineSecondaryDisplay0: e(r["Region"], { x: 212, y: 72, width: 57, height: 15, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       SlotMachineDisplay0: e(r["Marker"], { x: 176, y: 101, values: { name: "SlotMachineDisplay0", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
