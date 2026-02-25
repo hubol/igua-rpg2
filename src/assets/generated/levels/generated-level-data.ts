@@ -1545,6 +1545,15 @@ export const Lvl = {
       GateHorizontal: e(r["GateHorizontal"], { x: -48, y: 16, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromGrottoIndianaShop", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
+  IndianaCasino: () => {
+    applyLevel({ width: 500, height: 280, backgroundTint: 0xd8a5f7 });
+    return {
+      CasinoSlotsMachineSimple: d(Tx.Casino.Slots.MachineSimple, { x: 264, y: 160, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      Block: e(r["Block"], { x: 0, y: 232, width: 504, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Player: e(r["Player"], { x: 64, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      SlotMachineDisplay0: e(r["Marker"], { x: 176, y: 101, values: { name: "SlotMachineDisplay0", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+    };
+  },
   IndianaDesert: () => {
     applyLevel({ width: 1552, height: 344, backgroundTint: 0x8dcbe6 });
     return {
@@ -7105,6 +7114,7 @@ export namespace LvlType {
   export type GreatTowerBalcony = ReturnType<(typeof Lvl)["GreatTowerBalcony"]>;
   export type GreatTower = ReturnType<(typeof Lvl)["GreatTower"]>;
   export type GrottoIndianaShop = ReturnType<(typeof Lvl)["GrottoIndianaShop"]>;
+  export type IndianaCasino = ReturnType<(typeof Lvl)["IndianaCasino"]>;
   export type IndianaDesert = ReturnType<(typeof Lvl)["IndianaDesert"]>;
   export type IndianaHallOfDoors = ReturnType<(typeof Lvl)["IndianaHallOfDoors"]>;
   export type IndianaUniversityInterior = ReturnType<(typeof Lvl)["IndianaUniversityInterior"]>;

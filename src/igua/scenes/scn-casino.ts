@@ -18,13 +18,12 @@ symbolTxs.set(sym.bar, txs[1]);
 symbolTxs.set(sym.wild, txs[3]);
 
 export function scnCasino() {
-    Lvl.Dummy();
-    scene.style.backgroundTint = 0x1c1336;
+    const lvl = Lvl.IndianaCasino();
     objSlotMachine(
         rules,
         { mask: { y: -2, height: 74 }, reel: { gap: 46 }, slot: { gap: 20 }, symbolTxs },
     )
-        .at(160, 70)
+        .at(lvl.SlotMachineDisplay0)
         .zIndexed(ZIndex.Entities)
         .show();
 }
