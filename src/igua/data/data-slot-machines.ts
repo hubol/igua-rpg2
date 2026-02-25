@@ -11,8 +11,6 @@ function interlace<T>(array: T[], item: T): T[] {
 
 export namespace DataSlotMachines {
     export namespace BasicThreeReel {
-        export const price = 5;
-
         export const sym = {
             empty: {
                 identity: "fixed",
@@ -42,6 +40,7 @@ export namespace DataSlotMachines {
         } satisfies Record<string, RpgSlotMachine.Symbol>;
 
         export const rules: RpgSlotMachine.Rules = {
+            price: 5,
             height: 3,
             lines: [
                 [0, 0, 0],

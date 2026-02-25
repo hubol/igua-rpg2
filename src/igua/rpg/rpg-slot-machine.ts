@@ -16,6 +16,7 @@ export namespace RpgSlotMachine {
     export type Line = Integer[];
 
     export interface Rules {
+        price: Integer;
         lines: Line[];
         reels: Reel[];
         height: Integer;

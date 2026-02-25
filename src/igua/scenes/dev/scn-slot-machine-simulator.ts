@@ -6,10 +6,10 @@ import { RpgSlotMachine } from "../../rpg/rpg-slot-machine";
 
 export function scnSlotMachineSimulator() {
     scene.style.backgroundTint = 0x1c1336;
-    objSlotMachineSimulator(DataSlotMachines.BasicThreeReel.price, DataSlotMachines.BasicThreeReel.rules).show();
+    objSlotMachineSimulator(DataSlotMachines.BasicThreeReel.rules).show();
 }
 
-function objSlotMachineSimulator(price: Integer, rules: RpgSlotMachine.Rules) {
+function objSlotMachineSimulator(rules: RpgSlotMachine.Rules) {
     let spins = 0;
     let won = 0;
 
@@ -26,7 +26,7 @@ function objSlotMachineSimulator(price: Integer, rules: RpgSlotMachine.Rules) {
             prizeCounts.set(totalPrize, (prizeCounts.get(totalPrize) ?? 0) + 1);
         }
 
-        const paid = spins * price;
+        const paid = spins * rules.price;
         const returnToPlayer = won / paid;
 
         const mostFrequentPrizes = [...prizeCounts.entries()].map(([prize, count]) => ({ prize, count })).sort((a, b) =>

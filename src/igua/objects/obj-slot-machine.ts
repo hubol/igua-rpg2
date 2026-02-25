@@ -9,7 +9,12 @@ import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
-import { Input } from "../globals";
+import { DramaWallet } from "../drama/drama-wallet";
+import { show } from "../drama/show";
+import { Cutscene } from "../globals";
+import { mxnInteract } from "../mixins/mxn-interact";
+import { Rpg } from "../rpg/rpg";
+import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 
 interface SlotMachineRenderConfig {
@@ -18,96 +23,139 @@ interface SlotMachineRenderConfig {
     };
     slot: {
         gap: Integer;
-        width: Integer;
-        height: Integer;
     };
     symbolTxs: Map<RpgSlotMachine.Symbol, Texture>;
 }
 
 export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineRenderConfig) {
+    const pricePerSpin: RpgEconomy.Offer = { currency: "valuables", price: rules.price };
+
     const reelObjs = rules.reels.map((reel, i) =>
         objReel({ config, reel, rules }).at(i * config.reel.gap, -symbolPadding * config.slot.gap)
     );
     const maskObj = new Graphics().beginFill(0xffffff).drawRect(0, -10, config.reel.gap * 4, config.slot.gap * 3 + 40);
     const reelObj = container(...reelObjs, maskObj).masked(maskObj);
-    reelObj.scaled(0.8, 0.8);
     const textObj = container();
 
-    return container(reelObj, textObj).coro(function* () {
-        while (true) {
-            yield () => Input.isDown("Confirm");
+    const state = {
+        paidForGame: false,
+        fastSpinRequested: false,
+    };
 
-            textObj.removeAllChildren();
-
-            const { totalPrize, reelOffsets, linePrizes } = RpgSlotMachine.spin(rules);
-
-            for (const reelObj of reelObjs) {
-                reelObj.controls.offsetDelta = Rng.float(0.175, 0.3);
-            }
-
-            function* spinReels() {
-                for (let i = 0; i < reelOffsets.length; i++) {
-                    const offset = reelOffsets[i];
-                    const reelObj = reelObjs[i];
-
-                    yield sleep(i === 0 ? 500 : 125);
-
-                    yield () => Math.abs(reelObj.controls.offset - offset) < 1;
-
-                    reelObj.controls.offsetDelta = 0;
-                    yield interp(reelObj.controls, "offset").factor(factor.sine).to(offset).over(Rng.int(250, 750));
-                }
-            }
-
-            let fastSpin = false;
-
-            yield* Coro.race([
-                spinReels(),
-                Coro.chain([() => Input.isUp("Confirm"), () => Input.isDown("Confirm"), () => fastSpin = true]),
-            ]);
-
-            if (fastSpin) {
-                const coros: Coro.Type[] = [];
-
-                for (let i = 0; i < reelOffsets.length; i++) {
-                    const controls = reelObjs[i].controls;
-                    const targetOffset = reelOffsets[i];
-                    coros.push(
-                        Coro.chain([
-                            Coro.race([
-                                () => controls.offset < targetOffset || Math.abs(controls.offset - targetOffset) < 1,
-                                interp(controls, "offsetDelta").steps(4).to(0.9).over(500),
-                            ]),
-                            () => (controls.offsetDelta = 0, true),
-                            interp(controls, "offset").factor(factor.sine).to(targetOffset).over(300),
-                        ]),
-                    );
-                }
-                yield* Coro.all(coros);
-                yield sleep(100);
-            }
-
-            textObj.removeAllChildren();
-            objText.Large(`Prize: ${totalPrize}`).at(58 * 1.5, 58 * 3.2 + 40).show(textObj);
-            if (linePrizes.length) {
-                objText.Medium(`${linePrizes.map(({ index, prize }) => `Line ${index + 1} pays ${prize}`).join("\n")}`)
-                    .at(58 * 1.5, 58 * 3.8 + 40).show(textObj);
-
-                objLineHighlighter(reelObjs, reelObj.localTransform).coro(function* (self) {
-                    while (true) {
-                        for (const prize of linePrizes) {
-                            self.controls.line = rules.lines[prize.index];
-                            yield sleep(1000);
-                            self.controls.line = null;
-                            yield sleep(500);
-                        }
+    return container(reelObj, textObj)
+        .coro(function* (self) {
+            const interactiveSelf = self.mixin(mxnInteract, () => {
+                if (!state.paidForGame) {
+                    if (!Rpg.wallet.canAfford(pricePerSpin)) {
+                        Cutscene.play(function* () {
+                            // TODO needs to serialize offer consistently
+                            yield* show("Cost is " + pricePerSpin.price);
+                        });
                     }
-                }).show(textObj);
-            }
+                    else {
+                        Rpg.wallet.spend(pricePerSpin.currency, pricePerSpin.price, "gambling");
+                        // TODO doesn't respect currency
+                        // TODO doesn't move towards slot machine
+                        DramaWallet.createSpentValuables(pricePerSpin.price);
+                        state.fastSpinRequested = false;
+                        state.paidForGame = true;
+                    }
+                }
+                else if (!state.fastSpinRequested) {
+                    state.fastSpinRequested = true;
+                    interactiveSelf.interact.enabled = false;
+                }
+            });
 
-            yield () => !Input.isDown("Confirm");
-        }
-    });
+            while (true) {
+                yield () => state.paidForGame;
+
+                textObj.removeAllChildren();
+
+                const { totalPrize, reelOffsets, linePrizes } = RpgSlotMachine.spin(rules);
+
+                for (const reelObj of reelObjs) {
+                    reelObj.controls.offsetDelta = Rng.float(0.175, 0.3);
+                }
+
+                function* spinReels() {
+                    for (let i = 0; i < reelOffsets.length; i++) {
+                        const offset = reelOffsets[i];
+                        const reelObj = reelObjs[i];
+
+                        yield sleep(i === 0 ? 500 : 125);
+
+                        yield () => Math.abs(reelObj.controls.offset - offset) < 1;
+
+                        reelObj.controls.offsetDelta = 0;
+                        yield interp(reelObj.controls, "offset").factor(factor.sine).to(offset).over(Rng.int(250, 750));
+                    }
+                }
+
+                yield* Coro.race([
+                    spinReels(),
+                    () => state.fastSpinRequested,
+                ]);
+
+                interactiveSelf.interact.enabled = false;
+
+                if (state.fastSpinRequested) {
+                    const coros: Coro.Type[] = [];
+
+                    for (let i = 0; i < reelOffsets.length; i++) {
+                        const controls = reelObjs[i].controls;
+                        const targetOffset = reelOffsets[i];
+                        coros.push(
+                            Coro.chain([
+                                Coro.race([
+                                    () =>
+                                        controls.offset < targetOffset || Math.abs(controls.offset - targetOffset) < 1,
+                                    interp(controls, "offsetDelta").steps(4).to(0.9).over(500),
+                                ]),
+                                () => (controls.offsetDelta = 0, true),
+                                interp(controls, "offset").factor(factor.sine).to(targetOffset).over(300),
+                            ]),
+                        );
+                    }
+                    yield* Coro.all(coros);
+                    yield sleep(100);
+                }
+
+                textObj.removeAllChildren();
+                objText.MediumBold(`Prize: ${totalPrize}`)
+                    .at(0, -12)
+                    .anchored(0, 1)
+                    .show(textObj);
+                if (linePrizes.length) {
+                    objText.Medium(
+                        `${linePrizes.map(({ index, prize }) => `Line ${index + 1} pays ${prize}`).join("\n")}`,
+                    )
+                        .anchored(0, 1)
+                        .at(0, -22)
+                        .show(textObj);
+
+                    objLineHighlighter(reelObjs, reelObj.localTransform).coro(function* (self) {
+                        while (true) {
+                            for (const prize of linePrizes) {
+                                self.controls.line = rules.lines[prize.index];
+                                yield sleep(1000);
+                                self.controls.line = null;
+                                yield sleep(500);
+                            }
+                        }
+                    }).show(textObj);
+                }
+
+                if (totalPrize > 0) {
+                    self.coro(function* () {
+                        yield* DramaWallet.rewardValuables(totalPrize * pricePerSpin.price, "gambling");
+                    });
+                }
+
+                interactiveSelf.interact.enabled = true;
+                state.paidForGame = false;
+            }
+        });
 }
 
 interface ObjReelArgs {
@@ -119,7 +167,9 @@ interface ObjReelArgs {
 const symbolPadding = 2;
 
 function objReel(args: ObjReelArgs) {
-    const { gap, width, height } = args.config.slot;
+    // Before, height and width came from slot config. I am not totally sure why.
+    const { width, height } = [...args.config.symbolTxs.values()][0];
+    const { gap } = args.config.slot;
 
     const reelLength = args.reel.length;
 
