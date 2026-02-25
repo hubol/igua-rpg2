@@ -15,15 +15,19 @@ function objSlotMachineSimulator(rules: RpgSlotMachine.Rules) {
 
     let maxPrize = 0;
     const prizeCounts = new Map<Integer, Integer>();
+    const linePrizeCounts = new Map<Integer, Integer>();
 
     return objText.Medium().step(self => {
         const timeStart = Date.now();
         while (Date.now() < timeStart + 4) {
-            const { totalPrize } = RpgSlotMachine.spin(rules);
+            const { totalPrize, linePrizes } = RpgSlotMachine.spin(rules);
             spins += 1;
             won += totalPrize;
             maxPrize = Math.max(totalPrize, maxPrize);
             prizeCounts.set(totalPrize, (prizeCounts.get(totalPrize) ?? 0) + 1);
+            for (const { index } of linePrizes) {
+                linePrizeCounts.set(index, (linePrizeCounts.get(index) ?? 0) + 1);
+            }
         }
 
         const paid = spins * rules.price;
@@ -38,6 +42,9 @@ Paid: ${paid}
 Won: ${won}
 Return-to-player: ${(returnToPlayer * 100).toFixed(4)}%
 Maximum prize: ${maxPrize} (${((prizeCounts.get(maxPrize)! / spins) * 100).toFixed(5)}%)
+Line 1 wins: ${linePrizeCounts.get(0) ?? 0}
+Line 2 wins: ${linePrizeCounts.get(1) ?? 0}
+Line 3 wins: ${linePrizeCounts.get(2) ?? 0}
 Most frequent prizes:
 ${
             mostFrequentPrizes.slice(0, 10).map(({ count, prize }) =>
