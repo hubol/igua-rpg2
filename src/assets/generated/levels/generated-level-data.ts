@@ -913,6 +913,10 @@ export const Lvl = {
       ValuableBlue_2: e(r["ValuableBlue"], { x: 616, y: 87, uid: 176405765348502, values: { name: "", depth: 0 } }, "Entities"),
       ValuableBlue_3: e(r["ValuableBlue"], { x: 580, y: 71, uid: 176405765968503, values: { name: "", depth: 0 } }, "Entities"),
       ValuableBlue_4: e(r["ValuableBlue"], { x: 604, y: 71, uid: 176405765968504, values: { name: "", depth: 0 } }, "Entities"),
+      IguanaNpc: e(r["IguanaNpc"], { x: 424, y: 192, flippedX: false, values: { personaName: "", name: "", depth: 0 } }, "CharacterEntities"),
+      IguanaNpc_1: e(r["IguanaNpc"], { x: 224, y: 272, flippedX: true, values: { personaName: "", name: "", depth: 0 } }, "CharacterEntities"),
+      IguanaNpc_2: e(r["IguanaNpc"], { x: 616, y: 400, flippedX: false, values: { personaName: "", name: "", depth: 0 } }, "CharacterEntities"),
+      IguanaNpc_3: e(r["IguanaNpc"], { x: 688, y: 400, flippedX: true, values: { personaName: "", name: "", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 208, y: 400, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     };
   },
