@@ -120,6 +120,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 1,
+          "_eid": "19953026",
+          "x": 592,
+          "y": 336,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromHallOfDoors", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -301,6 +312,16 @@
           "originX": 0,
           "originY": 0,
           "values": {"initialTint": "#4b0303", "targetTint": "#190000", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 7,
+          "_eid": "88296692",
+          "x": 560,
+          "y": 288,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnIndianaHallOfDoors", "checkpointName": "fromSuggestiveCavern", "name": "", "depth": 0}
         }
       ]
     },
@@ -1813,6 +1834,15 @@
           "originY": 0,
           "tint": "#540707",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 50,
+          "_eid": "95769929",
+          "x": 544,
+          "y": 336,
+          "width": 64,
+          "values": {"name": "", "visible": true, "depth": 0}
         }
       ]
     },

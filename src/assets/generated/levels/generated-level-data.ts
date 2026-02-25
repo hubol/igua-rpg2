@@ -1656,7 +1656,8 @@ export const Lvl = {
       MagicDoor_1: e(r["MagicDoor"], { x: 480, y: 200, uid: 177203718158901, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
       MagicDoor_2: e(r["MagicDoor"], { x: 584, y: 200, uid: 177203718418602, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
       MagicDoor_3: e(r["MagicDoor"], { x: 688, y: 200, uid: 177203722716303, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
-      Player: e(r["Player"], { x: 80, y: 248, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      Player: e(r["Player"], { x: 112, y: 248, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -48, y: 136, height: 128, flippedX: true, values: { sceneName: "scnPlainsSuggestiveCavern", checkpointName: "fromHallOfDoors", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
   IndianaUniversityInterior: () => {
@@ -4978,6 +4979,7 @@ export const Lvl = {
       Block_23: e(r["Block"], { x: 1160, y: -40, width: 224, height: 304, values: { name: "", depth: 0, visible: true }, tint: 0x540707 }, "TerrainEntities"),
       Block_24: e(r["Block"], { x: 1416, y: 264, width: 472, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x540707 }, "TerrainEntities"),
       Block_25: e(r["Block"], { x: 744, y: 296, width: 408, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x540707 }, "TerrainEntities"),
+      Pipe_15: e(r["Pipe"], { x: 544, y: 336, width: 64, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
       ShapesConfettiCorner: d(Tx.Shapes.ConfettiCorner, { x: 552, y: 481, scaleX: 1, scaleY: 1, rotation: 180, originX: 0.5, originY: 0.5, tint: 0x2a0202 }, "TerrainDecals"),
       ShapesConfettiCorner_1: d(Tx.Shapes.ConfettiCorner, { x: 746, y: 453, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2a0202 }, "TerrainDecals"),
       TerrainGrassSparse3px1_1: d(Tx.Terrain.Grass.Sparse3px1, { x: 297, y: 440, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x540707 }, "TerrainDecals"),
@@ -5058,6 +5060,7 @@ export const Lvl = {
       IntelligenceBackground_3: e(r["IntelligenceBackground"], { x: 1384, y: 296, width: 32, height: 104, values: { initialTint: "#4b0303", targetTint: "#190000", min: 1, max: 5, name: "", depth: 0 } }, "Entities"),
       ExitChillEnemyDoor: e(r["Door"], { x: 1752, y: 704, values: { sceneName: "scnWorldMap", checkpointName: "fromPlainsSuggestiveCavern", name: "ExitChillEnemyDoor", depth: 0 } }, "Entities"),
       IntelligenceBackground_4: e(r["IntelligenceBackground"], { x: 1104, y: 264, width: 312, height: 32, values: { initialTint: "#4b0303", targetTint: "#190000", min: 1, max: 5, name: "", depth: 0 } }, "Entities"),
+      Door: e(r["Door"], { x: 560, y: 288, values: { sceneName: "scnIndianaHallOfDoors", checkpointName: "fromSuggestiveCavern", name: "", depth: 0 } }, "Entities"),
       ShapesSquareIrregular10: d(Tx.Shapes.SquareIrregular10, { x: 1070, y: 484, scaleX: 5, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x540707 }, "AboveEntitiesDecals"),
       ShapesSquareIrregular10_1: d(Tx.Shapes.SquareIrregular10, { x: 1072, y: 514, scaleX: 5, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x540707 }, "AboveEntitiesDecals"),
       ShapesSquareIrregular10_2: d(Tx.Shapes.SquareIrregular10, { x: 1075, y: 444, scaleX: 7, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x540707 }, "AboveEntitiesDecals"),
@@ -5065,6 +5068,7 @@ export const Lvl = {
       Gatekeeper: e(r["IguanaNpc"], { x: 88, y: 232, flippedX: false, values: { personaName: "CavernGatekeeper", name: "Gatekeeper", depth: 0 } }, "CharacterEntities"),
       Shopkeeper: e(r["IguanaNpc"], { x: 896, y: 600, flippedX: false, values: { personaName: "CavernShopkeeper", name: "Shopkeeper", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 656, y: 48, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      fromHallOfDoors: e(r["Checkpoint"], { x: 592, y: 336, flippedX: false, values: { name: "fromHallOfDoors", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       GateVertical: e(r["GateVertical"], { x: 568, y: -32, width: 176, flippedY: true, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromCavern", name: "", depth: 0 } }, "RegionEntities"),
       GateVertical_1: e(r["GateVertical"], { x: 48, y: -80, width: 440, flippedY: true, values: { sceneName: "scnWorldMap", checkpointName: "fromPlainsSuggestiveCavern", name: "", depth: 0 } }, "RegionEntities"),
       ChillBossMarker: e(r["Marker"], { x: 1640, y: 608, values: { name: "ChillBossMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),

@@ -27,7 +27,20 @@
       "gridCellHeight": 8,
       "gridCellsX": 114,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "GateHorizontal",
+          "id": 0,
+          "_eid": "97593426",
+          "x": -48,
+          "y": 136,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "flippedX": true,
+          "values": {"sceneName": "scnPlainsSuggestiveCavern", "checkpointName": "fromHallOfDoors", "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "FrontDecals",
@@ -66,7 +79,7 @@
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
-          "x": 80,
+          "x": 112,
           "y": 248,
           "originX": 22,
           "originY": 39,
