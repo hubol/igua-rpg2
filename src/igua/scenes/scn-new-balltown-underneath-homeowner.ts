@@ -36,7 +36,7 @@ function enrichEnemyPresence(lvl: LvlType.NewBalltownUnderneathHomeowner) {
             yield sleep(500);
             yield* show("OK! I'm locking the door :-)");
             yield sleep(500);
-            lvl.Door.lock();
+            lvl.Door.objDoor.lock();
             yield sleep(1000);
             yield* show("Good luck soldier");
         }, { speaker: lvl.Homeowner });
@@ -44,7 +44,7 @@ function enrichEnemyPresence(lvl: LvlType.NewBalltownUnderneathHomeowner) {
         lvl.Homeowner.coro(function* (self) {
             yield () => Instances(mxnEnemy).length === 0;
             Cutscene.play(function* () {
-                lvl.Door.unlock();
+                lvl.Door.objDoor.unlock();
                 yield sleep(1000);
                 DramaMisc.arriveViaDoor(self);
                 yield sleep(500);

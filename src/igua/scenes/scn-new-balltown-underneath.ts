@@ -226,7 +226,7 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
 }
 
 function enrichTunnel(lvl: LvlType.NewBalltownUnderneath) {
-    lvl.TunnelLeftDoor.locked = Rpg.flags.underneath.tunneler.isLeftDoorLocked;
+    lvl.TunnelLeftDoor.objDoor.locked = Rpg.flags.underneath.tunneler.isLeftDoorLocked;
 }
 
 function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {

@@ -30,12 +30,12 @@ function enrichDoor(lvl: LvlType.IndianaUniversityNurse) {
         return;
     }
 
-    lvl.Door.locked = true;
+    lvl.Door.objDoor.locked = true;
 
     lvl.Door
         .coro(function* (self) {
             for (let i = 5; i >= 1; i--) {
-                lvl.Door.lockedMessage = `Let's get ready!
+                lvl.Door.objDoor.lockedMessage = `Let's get ready!
 Please perform ${i} pushup(s) to unlock.`;
                 yield () => playerObj.ducking >= 1;
                 yield () => playerObj.ducking <= 0;
@@ -43,7 +43,7 @@ Please perform ${i} pushup(s) to unlock.`;
                 self.play(Sfx.Cutscene.DoorPushup.rate((5 - i) * 0.1 + 1));
             }
 
-            lvl.Door.unlock();
+            lvl.Door.objDoor.unlock();
         });
 }
 

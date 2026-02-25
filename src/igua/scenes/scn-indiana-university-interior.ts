@@ -13,7 +13,7 @@ export function scnIndianaUniversityInterior() {
 }
 
 function enrichDirector(lvl: LvlType.IndianaUniversityInterior) {
-    lvl.ClassroomDoor.locked = !Rpg.flags.classrooms.approvedForTeachingBy;
+    lvl.ClassroomDoor.objDoor.locked = !Rpg.flags.classrooms.approvedForTeachingBy;
 
     lvl.DirectorNpc.mixin(mxnCutscene, function* () {
         if (!Rpg.flags.classrooms.approvedForTeachingBy) {
@@ -28,7 +28,7 @@ function enrichDirector(lvl: LvlType.IndianaUniversityInterior) {
                     "Heh! Well, that's a new one!",
                     "Your pupils await!!!",
                 );
-                lvl.ClassroomDoor.unlock();
+                lvl.ClassroomDoor.objDoor.unlock();
                 Rpg.flags.classrooms.approvedForTeachingBy = lvl.DirectorNpc.mxnIguanaSpeaker.rpgIguanaNpc.id;
             }
             else {

@@ -53,7 +53,7 @@ function enrichEfficientHome(lvl: LvlType.GreatTowerBalcony) {
     lvl.Door.step(self => {
         const field = getLeverBitfield();
         const config = leverBitfieldConfigurations[field] ?? leverBitfieldConfigurations[0];
-        self.checkpointName = config.checkpointName;
+        self.objDoor.checkpointName = config.checkpointName;
     });
 }
 

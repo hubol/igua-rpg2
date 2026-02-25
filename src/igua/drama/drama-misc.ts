@@ -55,13 +55,13 @@ function walkToDoor(walker: ObjIguanaLocomotive, door: ObjDoor) {
 
 walkToDoor.andLock = function* (locker: ObjIguanaLocomotive, doorObj: ObjDoor) {
     yield* walkToDoor(locker, doorObj);
-    doorObj.lock();
+    doorObj.objDoor.lock();
     yield sleep(750);
 };
 
 walkToDoor.andUnlock = function* (unlockerObj: ObjIguanaLocomotive, doorObj: ObjDoor) {
     yield* walkToDoor(unlockerObj, doorObj);
-    doorObj.unlock();
+    doorObj.objDoor.unlock();
     yield sleep(750);
 };
 

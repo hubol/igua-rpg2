@@ -20,7 +20,7 @@ export function scnNewBalltownUnderneathTunnel() {
 function enrichTunneler(lvl: LvlType.NewBalltownUnderneathTunnel) {
     const { tunneler } = Rpg.flags.underneath;
 
-    lvl.LeftDoor.locked = tunneler.isLeftDoorLocked;
+    lvl.LeftDoor.objDoor.locked = tunneler.isLeftDoorLocked;
     lvl.Tunneler.mixin(mxnCutscene, function* () {
         yield* show("Welcome. I'm the maintainer of this ancient tunnel.");
 

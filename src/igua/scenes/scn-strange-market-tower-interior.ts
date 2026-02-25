@@ -50,12 +50,12 @@ function enrichMisterMonument(lvl: LvlType.StrangeMarketTowerInterior) {
 }
 
 function enrichLowerDoor(lvl: LvlType.StrangeMarketTowerInterior) {
-    lvl.LowerDoor.locked = Jukebox.isPlaying(Mzk.SoldierBoyDemo);
+    lvl.LowerDoor.objDoor.locked = Jukebox.isPlaying(Mzk.SoldierBoyDemo);
 
-    if (lvl.LowerDoor.locked) {
+    if (lvl.LowerDoor.objDoor.locked) {
         lvl.LowerDoor.coro(function* (self) {
             yield () => !Jukebox.isPlaying(Mzk.SoldierBoyDemo);
-            self.unlock();
+            self.objDoor.unlock();
         });
     }
 }

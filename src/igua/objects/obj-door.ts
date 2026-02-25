@@ -45,35 +45,37 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
 
     setMaskPositionToTarget();
 
+    const api = {
+        lockedMessage: "Closed.",
+        get locked() {
+            return locked;
+        },
+        set locked(value) {
+            locked = value;
+            setMaskPositionToTarget();
+        },
+        lock() {
+            locked = true;
+        },
+        unlock() {
+            locked = false;
+        },
+        get checkpointName() {
+            return sceneChanger?.checkpointName ?? null;
+        },
+        set checkpointName(value) {
+            if (sceneChanger && value) {
+                sceneChanger.checkpointName = value;
+            }
+        },
+    };
+
     const obj = container(openObj, maskObj0, maskObj1, maskObj2, lockedObj0, lockedObj1, lockedObj2)
         .mixin(mxnSpeaker, { name: "Door", colorPrimary: 0x342716, colorSecondary: 0x2C251D })
-        .merge({
-            lockedMessage: "Closed.",
-            get locked() {
-                return locked;
-            },
-            set locked(value) {
-                locked = value;
-                setMaskPositionToTarget();
-            },
-            lock() {
-                locked = true;
-            },
-            unlock() {
-                locked = false;
-            },
-            get checkpointName() {
-                return sceneChanger?.checkpointName ?? null;
-            },
-            set checkpointName(value) {
-                if (sceneChanger && value) {
-                    sceneChanger.checkpointName = value;
-                }
-            },
-        })
+        .merge({ objDoor: api })
         .mixin(mxnInteract, () => {
-            if (obj.locked) {
-                Cutscene.play(() => show(obj.lockedMessage), { speaker: obj });
+            if (api.locked) {
+                Cutscene.play(() => show(api.lockedMessage), { speaker: obj });
                 return;
             }
             if (sceneChanger) {
