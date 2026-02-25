@@ -10,8 +10,6 @@ import { clear } from "../drama/show";
 import { layers, scene, sceneStack } from "../globals";
 import { Rpg } from "../rpg/rpg";
 
-type CutsceneFn = () => Coro.Type;
-
 function getDefaultCutsceneAttributes() {
     return {
         speaker: Null<DisplayObject>(),
@@ -35,7 +33,7 @@ type ConfiguredCutsceneAttributes = Partial<
 >;
 
 interface PlayRequest {
-    fn: CutsceneFn;
+    fn: IguaCutscene.CutsceneFn;
     attributes: CutsceneAttributes;
 }
 
@@ -69,7 +67,7 @@ export class IguaCutscene {
         this.runnerObj = objCutsceneRunner().named("IguaCutscene").show(root);
     }
 
-    play(fn: CutsceneFn, partialAttributes?: ConfiguredCutsceneAttributes) {
+    play(fn: IguaCutscene.CutsceneFn, partialAttributes?: ConfiguredCutsceneAttributes) {
         // TODO deep merge
         const { camera: defaultCameraAttributes, ...defaultAttributes } = getDefaultCutsceneAttributes();
         const { camera: configuredCameraAttributes, ...configuredAttributes } = partialAttributes ?? {};
@@ -104,6 +102,10 @@ export class IguaCutscene {
             this.current.attributes.speaker = speakerObj;
         }
     }
+}
+
+export namespace IguaCutscene {
+    export type CutsceneFn = () => Coro.Type;
 }
 
 function objCutsceneRunner() {

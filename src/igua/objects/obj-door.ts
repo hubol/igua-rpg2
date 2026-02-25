@@ -6,6 +6,8 @@ import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { approachLinear, nlerp } from "../../lib/math/number";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
+import { Null } from "../../lib/types/null";
+import { IguaCutscene } from "../core/igua-cutscene";
 import { DramaMisc } from "../drama/drama-misc";
 import { show } from "../drama/show";
 import { Cutscene } from "../globals";
@@ -47,6 +49,7 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
 
     const api = {
         lockedMessage: "Closed.",
+        lockedCutscene: Null<IguaCutscene.CutsceneFn>(),
         get locked() {
             return locked;
         },
@@ -81,7 +84,12 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
         .merge({ objDoor: api })
         .mixin(mxnInteract, () => {
             if (api.locked) {
-                Cutscene.play(() => show(api.lockedMessage), { speaker: obj });
+                Cutscene.play(
+                    api.lockedCutscene
+                        ? api.lockedCutscene
+                        : () => show(api.lockedMessage),
+                    { speaker: obj },
+                );
                 return;
             }
             if (sceneChanger) {
