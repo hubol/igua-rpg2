@@ -1,4 +1,4 @@
-import { Graphics, Sprite } from "pixi.js";
+import { Graphics, Sprite, Texture } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
@@ -24,13 +24,13 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
 
     const sceneChanger = SceneChanger.create({ sceneName, checkpointName });
 
-    const openObj = Sprite.from(Tx.Door.NormalOpen);
+    const openObj = Sprite.from(Tx.Door.Normal.Open);
     const maskObj0 = new Graphics().beginFill(0x000000).drawRect(0, 0, 34, 46);
     const maskObj1 = new Graphics().beginFill(0x000000).drawRect(0, 0, 34, 46);
     const maskObj2 = new Graphics().beginFill(0x000000).drawRect(0, 0, 34, 46);
-    const lockedObj0 = Sprite.from(Tx.Door.NormalLockedLayer0).masked(maskObj0);
-    const lockedObj1 = Sprite.from(Tx.Door.NormalLockedLayer1).masked(maskObj1);
-    const lockedObj2 = Sprite.from(Tx.Door.NormalLockedLayer2).masked(maskObj2);
+    const lockedObj0 = Sprite.from(Tx.Door.Normal.LockedLayer0).masked(maskObj0);
+    const lockedObj1 = Sprite.from(Tx.Door.Normal.LockedLayer1).masked(maskObj1);
+    const lockedObj2 = Sprite.from(Tx.Door.Normal.LockedLayer2).masked(maskObj2);
 
     function getTargetMaskY() {
         return locked ? 0 : 46;
@@ -67,6 +67,12 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
             if (sceneChanger && value) {
                 sceneChanger.checkpointName = value;
             }
+        },
+        set style(style: keyof typeof Tx["Door"]) {
+            lockedObj0.texture = Tx.Door[style].LockedLayer0;
+            lockedObj1.texture = Tx.Door[style].LockedLayer1;
+            lockedObj2.texture = Tx.Door[style].LockedLayer2;
+            openObj.texture = Tx.Door[style].Open;
         },
     };
 
