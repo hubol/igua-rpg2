@@ -967,17 +967,100 @@
           "values": {"name": ""}
         },
         {
-          "x": -124,
-          "y": 293,
+          "x": 232,
+          "y": 210,
           "scaleX": 1,
           "scaleY": 1,
-          "rotation": 0,
-          "tint": "#85b421",
-          "texture": "terrain/distant/waves 0.png",
+          "rotation": 90,
+          "tint": "#a786b9",
+          "texture": "terrain/grass/cloudy.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
+          "values": {"name": ""}
+        },
+        {
+          "x": 232,
+          "y": 280,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#a786b9",
+          "texture": "terrain/grass/cloudy.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 176,
+          "y": 218,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#77677d",
+          "texture": "terrain/grass/cloudy.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 176,
+          "y": 282,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#77677d",
+          "texture": "terrain/grass/cloudy.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 112,
+          "y": 206,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#46483f",
+          "texture": "terrain/grass/cloudy.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 112,
+          "y": 274,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#46483f",
+          "texture": "terrain/grass/cloudy.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 40,
+          "y": 202,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#172a03",
+          "texture": "terrain/grass/cloudy.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 40,
+          "y": 266,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#172a03",
+          "texture": "terrain/grass/cloudy.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         },
         {
           "x": -204,
@@ -991,6 +1074,43 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": -124,
+          "y": 293,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#85b421",
+          "texture": "terrain/distant/waves 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 116,
+          "y": 233,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#46483f",
+          "texture": "terrain/grass/lumpy 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 180,
+          "y": 175,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#77677d",
+          "texture": "terrain/grass/lumpy 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
