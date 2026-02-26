@@ -48,43 +48,26 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
     const reelObj = container(...reelObjs, maskObj).masked(maskObj);
     const resultsObj = container();
 
-    const state = {
+    const api = {
+        get rules() {
+            return rules;
+        },
         paidForGame: false,
+        get pricePerSpin() {
+            return pricePerSpin;
+        },
         fastSpinRequested: false,
     };
 
     return container(reelObj, resultsObj)
+        .merge({ objSlotMachine: api })
         .dispatches<"objSlotMachine.gameStarted">()
+        .dispatches<"objSlotMachine.fastSpinOpportunityEnded">()
         .dispatchesValue<"objSlotMachine.gameEnded", RpgSlotMachine.SpinResult>()
         .dispatchesValue<"objSlotMachine.showLinePrize", RpgSlotMachine.SpinResult.LinePrize>()
         .coro(function* (self) {
-            const interactiveSelf = self.mixin(mxnInteract, () => {
-                if (!state.paidForGame) {
-                    if (!Rpg.wallet.canAfford(pricePerSpin)) {
-                        Cutscene.play(function* () {
-                            yield* show(
-                                "Minimum bet is " + RpgEconomy.Offer.toString(pricePerSpin.price, pricePerSpin.currency)
-                                    + ".",
-                            );
-                        });
-                    }
-                    else {
-                        Rpg.wallet.spend(pricePerSpin.currency, pricePerSpin.price, "gambling");
-                        // TODO doesn't respect currency
-                        // TODO doesn't move towards slot machine
-                        DramaWallet.createSpentValuables(pricePerSpin.price);
-                        state.fastSpinRequested = false;
-                        state.paidForGame = true;
-                    }
-                }
-                else if (!state.fastSpinRequested) {
-                    state.fastSpinRequested = true;
-                    interactiveSelf.interact.enabled = false;
-                }
-            });
-
             while (true) {
-                yield () => state.paidForGame;
+                yield () => api.paidForGame;
 
                 resultsObj.removeAllChildren();
                 self.dispatch("objSlotMachine.gameStarted");
@@ -112,12 +95,12 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
 
                 yield* Coro.race([
                     spinReels(),
-                    () => state.fastSpinRequested,
+                    () => api.fastSpinRequested,
                 ]);
 
-                interactiveSelf.interact.enabled = false;
+                self.dispatch("objSlotMachine.fastSpinOpportunityEnded");
 
-                if (state.fastSpinRequested) {
+                if (api.fastSpinRequested) {
                     const coros: Coro.Type[] = [];
 
                     for (let i = 0; i < reelOffsets.length; i++) {
@@ -162,8 +145,7 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
                     });
                 }
 
-                interactiveSelf.interact.enabled = true;
-                state.paidForGame = false;
+                api.paidForGame = false;
             }
         });
 }

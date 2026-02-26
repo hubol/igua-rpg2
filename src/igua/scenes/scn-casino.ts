@@ -3,6 +3,7 @@ import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../assets/textures";
 import { ZIndex } from "../core/scene/z-index";
 import { DataSlotMachines } from "../data/data-slot-machines";
+import { mxnSlotMachineBetButton } from "../mixins/mxn-slot-machine-bet-button";
 import { mxnSlotMachineSecondaryDisplay } from "../mixins/mxn-slot-machine-secondary-display";
 import { objSlotMachine } from "../objects/obj-slot-machine";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
@@ -19,14 +20,19 @@ symbolTxs.set(sym.wild, txs[3]);
 
 export function scnCasino() {
     const lvl = Lvl.IndianaCasino();
-    const slotMachineObj = objSlotMachine(
-        rules,
-        { mask: { y: -2, height: 74 }, reel: { gap: 46 }, slot: { gap: 20 }, symbolTxs },
-    )
-        .at(lvl.SlotMachineDisplay0)
-        .zIndexed(ZIndex.Entities)
-        .show();
+    {
+        const slotMachineObj = objSlotMachine(
+            rules,
+            { mask: { y: -2, height: 74 }, reel: { gap: 46 }, slot: { gap: 20 }, symbolTxs },
+        )
+            .at(lvl.SlotMachineDisplay0)
+            .zIndexed(ZIndex.Entities)
+            .show();
 
-    lvl.SlotMachineSecondaryDisplay0
-        .mixin(mxnSlotMachineSecondaryDisplay, slotMachineObj);
+        lvl.SlotMachineSecondaryDisplay0
+            .mixin(mxnSlotMachineSecondaryDisplay, slotMachineObj);
+
+        lvl.SlotMachineBetButton0
+            .mixin(mxnSlotMachineBetButton, slotMachineObj);
+    }
 }
