@@ -12,6 +12,10 @@ export function objNetRoom(client: IguaClient) {
     return container()
         .step(() => client.update(playerObj.x, playerObj.y, playerObj.ducking, playerObj.speed))
         .step(() => {
+            if (!client.room) {
+                return;
+            }
+
             for (const iguana of client.room.iguanas) {
                 if (!iguanaObjsById[iguana.id]) {
                     iguanaObjsById[iguana.id] = objIguanaLocomotive(iguana.looks)

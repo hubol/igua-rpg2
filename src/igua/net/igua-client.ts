@@ -2,6 +2,7 @@ import { Logger } from "../../lib/game-engine/logger";
 import { Unit } from "../../lib/math/number-alias-types";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { RethrownError } from "../../lib/rethrown-error";
+import { Null } from "../../lib/types/null";
 import { Rpg } from "../rpg/rpg";
 import { IguaNet } from "./igua-net";
 
@@ -48,18 +49,35 @@ export class IguaClient {
         }
     }
 
+    private _isAcceptedToRoom = false;
+    private _clientId = Null<number>();
+
     private _room: IguaClient.Room = {
         iguanas: [],
     };
 
     get room() {
-        return this._room;
+        return this._isAcceptedToRoom ? this._room : null;
     }
 
     private _receive(message: IguaNet.Message.FromServer) {
+        if (message.type === "room_accepted") {
+            this._clientId = message.clientId;
+            this._isAcceptedToRoom = true;
+        }
+
+        if (!this._isAcceptedToRoom) {
+            return;
+        }
+
         if (message.type === "room_broadcast") {
             this._room.iguanas.length = 0;
-            this._room.iguanas.push(...message.iguanas as any);
+            for (let i = 0; i < message.iguanas.length; i++) {
+                const iguana = message.iguanas[i];
+                if (iguana.id !== this._clientId) {
+                    this._room.iguanas.push(iguana);
+                }
+            }
         }
     }
 

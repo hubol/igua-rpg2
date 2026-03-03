@@ -31,6 +31,11 @@ export namespace IguaNet {
                 iguanas: RoomBroadcast.Iguana[];
             }
 
+            export interface RoomAccepted {
+                type: "room_accepted";
+                clientId: number;
+            }
+
             export namespace RoomBroadcast {
                 export interface Iguana {
                     id: number;
@@ -46,6 +51,6 @@ export namespace IguaNet {
             }
         }
 
-        export type FromServer = FromServer.RoomBroadcast;
+        export type FromServer = FromServer.RoomBroadcast | FromServer.RoomAccepted;
     }
 }
