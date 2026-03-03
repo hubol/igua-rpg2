@@ -1,7 +1,9 @@
 import { Logger } from "../../lib/game-engine/logger";
+import { Unit } from "../../lib/math/number-alias-types";
+import { VectorSimple } from "../../lib/math/vector-type";
 import { RethrownError } from "../../lib/rethrown-error";
-import { IguanaLooks } from "../iguana/looks";
 import { Rpg } from "../rpg/rpg";
+import { IguaNet } from "./igua-net";
 
 const url = "https://avuncular-kimbra-disjointed.ngrok-free.dev";
 
@@ -11,10 +13,10 @@ export class IguaClient {
         private readonly _roomId: string,
     ) {
         this._socket.addEventListener("message", (event) => {
-            let message: IguaClient.Message;
+            let message: IguaNet.Message.FromServer;
 
             try {
-                message = IguaClient.parseMessage(event);
+                message = IguaClient.parseServerMessage(event);
             }
             catch (e) {
                 Logger.logContractViolationError("IguaClient", new RethrownError("Server sent invalid message", e), {
@@ -36,8 +38,14 @@ export class IguaClient {
         return this._socket.readyState === WebSocket.OPEN;
     }
 
-    private _send(message: IguaClient.Message) {
-        this._socket.send(JSON.stringify(message));
+    update(x: number, y: number, ducking: Unit, speed: VectorSimple) {
+        this._send({ type: "iguana", x: Math.round(x), y: Math.round(y), ducking, speed: { x: speed.x, y: speed.y } });
+    }
+
+    private _send(message: IguaNet.Message.FromClient) {
+        if (this.isOpen) {
+            this._socket.send(JSON.stringify(message));
+        }
     }
 
     private _room: IguaClient.Room = {
@@ -48,7 +56,7 @@ export class IguaClient {
         return this._room;
     }
 
-    private _receive(message: IguaClient.Message) {
+    private _receive(message: IguaNet.Message.FromServer) {
         if (message.type === "room_broadcast") {
             this._room.iguanas.length = 0;
             this._room.iguanas.push(...message.iguanas as any);
@@ -60,7 +68,7 @@ export class IguaClient {
         return new IguaClient(socket, args.roomId);
     }
 
-    static parseMessage(event: MessageEvent): IguaClient.Message {
+    static parseServerMessage(event: MessageEvent): IguaNet.Message.FromServer {
         if (typeof event.data !== "string") {
             throw new Error("event.data is not string: " + typeof event.data);
         }
@@ -84,23 +92,7 @@ namespace IguaClient {
         roomId: string;
     }
 
-    export type Message = { type: string } & Record<string, unknown>;
-
-    export namespace Room {
-        export interface Iguana {
-            id: number;
-            x: number;
-            y: number;
-            duckUnit: number;
-            speed: {
-                x: number;
-                y: number;
-            };
-            looks: IguanaLooks.Serializable;
-        }
-    }
-
     export interface Room {
-        iguanas: Room.Iguana[];
+        iguanas: IguaNet.Message.FromServer.RoomBroadcast.Iguana[];
     }
 }
