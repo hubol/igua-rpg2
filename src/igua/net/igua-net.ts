@@ -41,7 +41,7 @@ export namespace IguaNet {
                         x: number;
                         y: number;
                     };
-                    looks: object;
+                    looks: Looks;
                 }
             }
         }
