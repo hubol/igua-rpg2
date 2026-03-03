@@ -1,4 +1,5 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { distance } from "../../lib/math/vector";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
 import { IguaClient } from "../net/igua-client";
@@ -18,7 +19,13 @@ export function objNetRoom(client: IguaClient) {
                         .show();
                 }
                 const iguanaObj = iguanaObjsById[iguana.id];
-                iguanaObj.at(iguana);
+                const length = distance(iguanaObj, iguana);
+                if (length > 64) {
+                    iguanaObj.at(iguana);
+                }
+                else {
+                    iguanaObj.moveTowards(iguana, length / 2);
+                }
                 iguanaObj.speed.at(iguana.speed);
                 iguanaObj.ducking = iguana.ducking;
             }
