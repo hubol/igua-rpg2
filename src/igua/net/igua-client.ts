@@ -4,6 +4,7 @@ import { VectorSimple } from "../../lib/math/vector-type";
 import { RethrownError } from "../../lib/rethrown-error";
 import { Null } from "../../lib/types/null";
 import { Rpg } from "../rpg/rpg";
+import { RpgInventory } from "../rpg/rpg-inventory";
 import { IguaNet } from "./igua-net";
 
 const url = "https://avuncular-kimbra-disjointed.ngrok-free.dev";
@@ -43,6 +44,22 @@ export class IguaClient {
         this._send({ type: "iguana", x: Math.round(x), y: Math.round(y), ducking, speed: { x: speed.x, y: speed.y } });
     }
 
+    private readonly _offerTransactions = new TransactionList<IguaNet.Message.FromServer.GiftOfferOutcome>();
+
+    offer(item: RpgInventory.Item) {
+        const transaction = this._offerTransactions.add();
+        this._send({ type: "gift_offer", item });
+        return transaction;
+    }
+
+    private readonly _takeTransactions = new TransactionList<IguaNet.Message.FromServer.GiftTakeOutcome>();
+
+    take() {
+        const transaction = this._takeTransactions.add();
+        this._send({ type: "gift_take" });
+        return transaction;
+    }
+
     private _send(message: IguaNet.Message.FromClient) {
         if (this.isOpen) {
             this._socket.send(JSON.stringify(message));
@@ -55,6 +72,7 @@ export class IguaClient {
     private _room: IguaClient.Room = {
         time: -1,
         iguanas: [],
+        giftItem: null,
     };
 
     get room() {
@@ -80,6 +98,20 @@ export class IguaClient {
                     this._room.iguanas.push(iguana);
                 }
             }
+            // @ts-expect-error Eh...
+            this._room.giftItem = message.giftItem;
+
+            return;
+        }
+
+        if (message.type === "gift_offer_outcome") {
+            this._offerTransactions.complete(message);
+            return;
+        }
+
+        if (message.type === "gift_take_outcome") {
+            this._takeTransactions.complete(message);
+            return;
         }
     }
 
@@ -115,5 +147,24 @@ namespace IguaClient {
     export interface Room {
         time: Integer;
         iguanas: IguaNet.Message.FromServer.RoomBroadcast.Iguana[];
+        giftItem: RpgInventory.Item | null;
+    }
+}
+
+interface Transaction<T> {
+    outcome: T | null;
+}
+
+class TransactionList<TOutcome> {
+    private readonly _impl = new Array<Transaction<TOutcome>>();
+
+    add() {
+        const transaction: Transaction<TOutcome> = { outcome: null };
+        this._impl.push(transaction);
+        return transaction;
+    }
+
+    complete(outcome: TOutcome) {
+        this._impl.last.outcome = outcome;
     }
 }

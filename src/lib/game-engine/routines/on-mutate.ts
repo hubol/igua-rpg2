@@ -6,3 +6,8 @@ export function onMutate<TMutable extends Mutable>(mutable: TMutable) {
     const json = JSON.stringify(mutable);
     return () => JSON.stringify(mutable) !== json;
 }
+
+onMutate.Provider = function onMutateProvider (provider: () => any) {
+    const json = JSON.stringify(provider());
+    return () => JSON.stringify(provider()) !== json;
+};
