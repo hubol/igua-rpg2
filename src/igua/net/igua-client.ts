@@ -3,6 +3,7 @@ import { Integer, Unit } from "../../lib/math/number-alias-types";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { RethrownError } from "../../lib/rethrown-error";
 import { Null } from "../../lib/types/null";
+import { IguanaLooks } from "../iguana/looks";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { IguaNet } from "./igua-net";
@@ -88,14 +89,25 @@ export class IguaClient {
     private _isAcceptedToRoom = false;
     private _clientId = Null<number>();
 
-    private _room: IguaClient.Room = {
+    private _room: IguaClient.Room.Private = {
         time: -1,
         iguanas: [],
+        iguanaLooks: {},
         giftItem: null,
     };
 
-    get room() {
-        return this._isAcceptedToRoom ? this._room : null;
+    get room(): IguaClient.Room.Public | null {
+        if (!this._isAcceptedToRoom) {
+            return null;
+        }
+
+        return {
+            time: this._room.time,
+            giftItem: this._room.giftItem,
+            iguanas: this._room.iguanas
+                .filter((iguana) => iguana.id in this._room.iguanaLooks)
+                .map((iguana) => ({ ...iguana, looks: this._room.iguanaLooks[iguana.id] })),
+        };
     }
 
     private _receive(message: IguaNet.Message.FromServer) {
@@ -105,6 +117,15 @@ export class IguaClient {
             // @ts-expect-error Eh...
             this._room.giftItem = message.giftItem;
             this._room.iguanas = message.iguanas;
+            this._room.iguanaLooks = message.iguanaLooks;
+        }
+
+        if (message.type === "iguana_identify") {
+            this._room.iguanaLooks[message.id] = message.looks;
+        }
+
+        if (message.type === "iguana_destroy") {
+            delete this._room.iguanaLooks[message.id];
         }
 
         if (!this._isAcceptedToRoom) {
@@ -166,9 +187,25 @@ namespace IguaClient {
         roomId: string;
     }
 
+    export namespace Room {
+        interface Common {
+            time: Integer;
+            giftItem: RpgInventory.Item | null;
+        }
+
+        export interface Public extends Common {
+            iguanas: (IguaNet.Message.FromServer.RoomBroadcast.Iguana & { looks: IguanaLooks.Serializable })[];
+        }
+
+        export interface Private extends Common {
+            iguanas: IguaNet.Message.FromServer.RoomBroadcast.Iguana[];
+            iguanaLooks: Record<Integer, IguanaLooks.Serializable>;
+        }
+    }
+
     export interface Room {
         time: Integer;
-        iguanas: IguaNet.Message.FromServer.RoomBroadcast.Iguana[];
+        iguanas: (IguaNet.Message.FromServer.RoomBroadcast.Iguana & { looks: IguanaLooks.Serializable })[];
         giftItem: RpgInventory.Item | null;
     }
 }

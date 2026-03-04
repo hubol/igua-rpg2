@@ -4,6 +4,7 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { distance } from "../../lib/math/vector";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
+import { scene } from "../globals";
 import { IguaClient } from "../net/igua-client";
 import { ObjIguanaLocomotive, objIguanaLocomotive } from "./obj-iguana-locomotive";
 import { playerObj } from "./obj-player";
@@ -14,7 +15,11 @@ export function objNetRoom(client: IguaClient) {
     const iguanaIdsInRoom = new Set<Integer>();
 
     return container()
-        .step(() => client.update(playerObj.x, playerObj.y, playerObj.ducking, playerObj.speed))
+        .step(() => {
+            if (scene.ticker.ticks % 2 === 0) {
+                client.update(playerObj.x, playerObj.y, playerObj.ducking, playerObj.speed);
+            }
+        })
         .step(() => {
             if (!client.room) {
                 return;

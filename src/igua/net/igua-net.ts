@@ -55,6 +55,18 @@ export namespace IguaNet {
                 clientId: number;
                 giftItem: Model.Item | null;
                 iguanas: RoomBroadcast.Iguana[];
+                iguanaLooks: Record<number, Looks>;
+            }
+
+            export interface IguanaIdentify {
+                type: "iguana_identify";
+                id: number;
+                looks: Looks;
+            }
+
+            export interface IguanaDestroy {
+                type: "iguana_destroy";
+                id: number;
             }
 
             export namespace RoomBroadcast {
@@ -67,7 +79,6 @@ export namespace IguaNet {
                         x: number;
                         y: number;
                     };
-                    looks: Looks;
                 }
             }
 
@@ -96,6 +107,8 @@ export namespace IguaNet {
             | FromServer.RoomBroadcast
             | FromServer.RoomAccepted
             | FromServer.GiftOfferOutcome
-            | FromServer.GiftTakeOutcome;
+            | FromServer.GiftTakeOutcome
+            | FromServer.IguanaIdentify
+            | FromServer.IguanaDestroy;
     }
 }
