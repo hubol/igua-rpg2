@@ -53,6 +53,8 @@ export namespace IguaNet {
             export interface RoomAccepted {
                 type: "room_accepted";
                 clientId: number;
+                giftItem: Model.Item | null;
+                iguanas: RoomBroadcast.Iguana[];
             }
 
             export namespace RoomBroadcast {

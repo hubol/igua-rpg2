@@ -7,7 +7,7 @@ import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { IguaNet } from "./igua-net";
 
-const url = "https://avuncular-kimbra-disjointed.ngrok-free.dev";
+const url = "http://localhost:9999";
 
 export class IguaClient {
     constructor(
@@ -40,8 +40,27 @@ export class IguaClient {
         return this._socket.readyState === WebSocket.OPEN;
     }
 
+    private _previousUpdateJson = "";
+
     update(x: number, y: number, ducking: Unit, speed: VectorSimple) {
-        this._send({ type: "iguana", x: Math.round(x), y: Math.round(y), ducking, speed: { x: speed.x, y: speed.y } });
+        if (!this.isOpen) {
+            return;
+        }
+
+        const update = {
+            type: "iguana" as const,
+            x: Math.round(x),
+            y: Math.round(y),
+            ducking,
+            speed: { x: speed.x, y: speed.y },
+        };
+
+        const updateJson = JSON.stringify(update);
+        if (updateJson === this._previousUpdateJson) {
+            return;
+        }
+        this._send(update);
+        this._previousUpdateJson = updateJson;
     }
 
     private readonly _offerTransactions = new TransactionList<IguaNet.Message.FromServer.GiftOfferOutcome>();
@@ -83,6 +102,9 @@ export class IguaClient {
         if (message.type === "room_accepted") {
             this._clientId = message.clientId;
             this._isAcceptedToRoom = true;
+            // @ts-expect-error Eh...
+            this._room.giftItem = message.giftItem;
+            this._room.iguanas = message.iguanas;
         }
 
         if (!this._isAcceptedToRoom) {
