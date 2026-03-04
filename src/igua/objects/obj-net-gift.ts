@@ -1,5 +1,7 @@
 import { Graphics } from "pixi.js";
+import { Coro } from "../../lib/game-engine/routines/coro";
 import { onMutate } from "../../lib/game-engine/routines/on-mutate";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { DataItem } from "../data/data-item";
@@ -18,70 +20,100 @@ export function objNetGift(client: IguaClient) {
             const figureObj = container().show(self);
 
             while (true) {
-                if (client.room?.giftItem) {
-                    DataItem.getFigureObj(client.room?.giftItem).show(figureObj);
+                if (client.room.giftItem) {
+                    DataItem.getFigureObj(client.room.giftItem).show(figureObj);
                 }
-                yield onMutate.Provider(() => client.room?.giftItem);
+                yield onMutate.Provider(() => client.room.giftItem);
                 figureObj.removeAllChildren();
             }
         })
         .mixin(mxnCutscene, function* () {
-            if (!client.room) {
+            if (!client.isOnline) {
+                yield* show("You are offline.");
                 return;
             }
 
-            const giftItem = client.room.giftItem;
-
-            if (!giftItem) {
-                const options = Rng.shuffle([...Rpg.inventory.equipment.list])
-                    .filter(equipment => equipment.loadoutIndex === null)
-                    .map(({ equipmentId, level }) => ({
-                        kind: "equipment" as const,
-                        id: equipmentId,
-                        level,
-                    }))
-                    .slice(0, 7)
-                    .map((item) => ({ item, message: DataItem.getName(item) }));
-
-                const item = yield* DramaItem.choose({
-                    message: "Which shoe to offer?",
-                    noneMessage: "None!",
-                    options,
-                });
-
-                if (item === null) {
-                    return;
-                }
-
-                // TODO shitty, should be a better API!
-                const obtainedId = Rpg.inventory.equipment.list.find(equipment =>
-                    equipment.equipmentId === item.id && equipment.level === item.level
-                )?.id ?? -1;
-
-                Rpg.inventory.equipment.remove(obtainedId);
-
-                const transaction = client.offer(item);
-                yield () =>
-                    Boolean(transaction.outcome);
-
-                const outcome = transaction.outcome!;
-
-                yield* show(outcome.accepted ? "Success" : "Someone beat you to it.");
-
-                if (!outcome.accepted) {
-                    yield* DramaInventory.receiveItems([item]);
-                }
-            }
-            else {
-                const transaction = client.take();
-                yield () => Boolean(transaction.outcome);
-                if (transaction.outcome!.success) {
-                    // TODO shitty
-                    yield* DramaInventory.receiveItems([transaction.outcome?.item! as RpgInventory.Item]);
-                }
-                else {
-                    yield* show("Someone beat you to it.");
-                }
-            }
+            yield* dramaNetGift(client);
         });
+}
+
+function* dramaNetGift(client: IguaClient) {
+    const giftItem = client.room.giftItem;
+
+    if (!giftItem) {
+        const options = Rng.shuffle([...Rpg.inventory.equipment.list])
+            .filter(equipment => equipment.loadoutIndex === null)
+            .map(({ equipmentId, level }) => ({
+                kind: "equipment" as const,
+                id: equipmentId,
+                level,
+            }))
+            .slice(0, 7)
+            .map((item) => ({ item, message: DataItem.getName(item) }));
+
+        const item = yield* DramaItem.choose({
+            message: "Which shoe to offer?",
+            noneMessage: "None!",
+            options,
+        });
+
+        if (item === null) {
+            return;
+        }
+
+        // TODO shitty, should be a better API!
+        const obtainedId = Rpg.inventory.equipment.list.find(equipment =>
+            equipment.equipmentId === item.id && equipment.level === item.level
+        )?.id ?? -1;
+
+        Rpg.inventory.equipment.remove(obtainedId);
+
+        const outcome = yield* dramaTransaction(client, client.offer(item));
+
+        if (outcome?.accepted) {
+            yield* show("Success");
+        }
+        else {
+            if (outcome?.accepted === false) {
+                yield* show("Someone beat you to it.");
+            }
+            yield* DramaInventory.receiveItems([item]);
+        }
+    }
+    else {
+        const outcome = yield* dramaTransaction(client, client.take());
+
+        if (outcome?.success) {
+            // TODO shitty
+            yield* DramaInventory.receiveItems([outcome.item as RpgInventory.Item]);
+        }
+        else if (outcome?.success === false) {
+            yield* show("Someone beat you to it.");
+        }
+    }
+}
+
+function* dramaTransaction<T>(client: IguaClient, transaction: IguaClient.Transaction<T>) {
+    let wentOffline = false;
+    let timedOut = false;
+
+    yield* Coro.race([
+        Coro.chain([() => !client.isOnline, () => wentOffline = true]),
+        Coro.chain([sleep(2000), () => timedOut = true]),
+        () => Boolean(transaction.outcome),
+    ]);
+
+    if (!wentOffline && !timedOut) {
+        return transaction.outcome!;
+    }
+
+    if (wentOffline) {
+        yield* show("You went offline...");
+    }
+
+    if (timedOut) {
+        yield* show("Request timed out...");
+    }
+
+    return null;
 }

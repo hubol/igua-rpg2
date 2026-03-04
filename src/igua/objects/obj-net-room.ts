@@ -21,10 +21,6 @@ export function objNetRoom(client: IguaClient) {
             }
         })
         .step(() => {
-            if (!client.room) {
-                return;
-            }
-
             if (lastTime === client.room.time) {
                 return;
             }

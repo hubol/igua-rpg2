@@ -1,3 +1,4 @@
+import { Environment } from "../../lib/environment";
 import { Logger } from "../../lib/game-engine/logger";
 import { Integer, Unit } from "../../lib/math/number-alias-types";
 import { VectorSimple } from "../../lib/math/vector-type";
@@ -8,7 +9,18 @@ import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { IguaNet } from "./igua-net";
 
-const url = "http://localhost:9999";
+const url = (function (devServiceEnvironment: "dev" | "prod" = "dev") {
+    const IguaNetServiceEnvironment = {
+        dev: {
+            url: "http://localhost:9999",
+        },
+        prod: {
+            url: "https://igua-net-f2fb9b46b4a2.herokuapp.com",
+        },
+    };
+
+    return IguaNetServiceEnvironment[Environment.isProduction ? "prod" : devServiceEnvironment].url;
+})();
 
 export class IguaClient {
     constructor(
@@ -37,14 +49,14 @@ export class IguaClient {
         });
     }
 
-    get isOpen() {
+    private get _isSocketOpen() {
         return this._socket.readyState === WebSocket.OPEN;
     }
 
     private _previousUpdateJson = "";
 
     update(x: number, y: number, ducking: Unit, speed: VectorSimple) {
-        if (!this.isOpen) {
+        if (!this._isSocketOpen) {
             return;
         }
 
@@ -81,12 +93,12 @@ export class IguaClient {
     }
 
     private _send(message: IguaNet.Message.FromClient) {
-        if (this.isOpen) {
+        if (this._isSocketOpen) {
             this._socket.send(JSON.stringify(message));
         }
     }
 
-    private _isAcceptedToRoom = false;
+    private _joinRoomAccepted = false;
     private _clientId = Null<number>();
 
     private _room: IguaClient.Room.Private = {
@@ -96,9 +108,19 @@ export class IguaClient {
         giftItem: null,
     };
 
-    get room(): IguaClient.Room.Public | null {
-        if (!this._isAcceptedToRoom) {
-            return null;
+    private static readonly _offlineRoom: IguaClient.Room.Public = Object.seal({
+        time: Number.MIN_SAFE_INTEGER,
+        iguanas: [],
+        giftItem: null,
+    });
+
+    get isOnline() {
+        return this._joinRoomAccepted && this._isSocketOpen;
+    }
+
+    get room(): IguaClient.Room.Public {
+        if (!this.isOnline) {
+            return IguaClient._offlineRoom;
         }
 
         return {
@@ -113,7 +135,7 @@ export class IguaClient {
     private _receive(message: IguaNet.Message.FromServer) {
         if (message.type === "room_accepted") {
             this._clientId = message.clientId;
-            this._isAcceptedToRoom = true;
+            this._joinRoomAccepted = true;
             // @ts-expect-error Eh...
             this._room.giftItem = message.giftItem;
             this._room.iguanas = message.iguanas;
@@ -128,7 +150,7 @@ export class IguaClient {
             delete this._room.iguanaLooks[message.id];
         }
 
-        if (!this._isAcceptedToRoom) {
+        if (!this._joinRoomAccepted) {
             return;
         }
 
@@ -182,7 +204,7 @@ export class IguaClient {
     }
 }
 
-namespace IguaClient {
+export namespace IguaClient {
     export interface CreateArgs {
         roomId: string;
     }
@@ -208,17 +230,17 @@ namespace IguaClient {
         iguanas: (IguaNet.Message.FromServer.RoomBroadcast.Iguana & { looks: IguanaLooks.Serializable })[];
         giftItem: RpgInventory.Item | null;
     }
-}
 
-interface Transaction<T> {
-    outcome: T | null;
+    export interface Transaction<T> {
+        outcome: T | null;
+    }
 }
 
 class TransactionList<TOutcome> {
-    private readonly _impl = new Array<Transaction<TOutcome>>();
+    private readonly _impl = new Array<IguaClient.Transaction<TOutcome>>();
 
     add() {
-        const transaction: Transaction<TOutcome> = { outcome: null };
+        const transaction: IguaClient.Transaction<TOutcome> = { outcome: null };
         this._impl.push(transaction);
         return transaction;
     }
