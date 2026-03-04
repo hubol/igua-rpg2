@@ -7,6 +7,7 @@ import { ObjIguanaLocomotive, objIguanaLocomotive } from "./obj-iguana-locomotiv
 import { playerObj } from "./obj-player";
 
 export function objNetRoom(client: IguaClient) {
+    let lastTime = -1;
     const iguanaObjsById: Record<Integer, ObjIguanaLocomotive> = {};
 
     return container()
@@ -16,22 +17,31 @@ export function objNetRoom(client: IguaClient) {
                 return;
             }
 
+            if (lastTime === client.room.time) {
+                return;
+            }
+
             for (const iguana of client.room.iguanas) {
                 if (!iguanaObjsById[iguana.id]) {
-                    iguanaObjsById[iguana.id] = objIguanaLocomotive(iguana.looks)
+                    const newIguanaObj = objIguanaLocomotive(iguana.looks)
                         .zIndexed(ZIndex.CharacterEntities)
                         .show();
+                    newIguanaObj.auto.duckingSpeed = 0;
+                    iguanaObjsById[iguana.id] = newIguanaObj;
                 }
                 const iguanaObj = iguanaObjsById[iguana.id];
+
                 const length = distance(iguanaObj, iguana);
                 if (length > 64) {
                     iguanaObj.at(iguana);
                 }
                 else {
-                    iguanaObj.moveTowards(iguana, length / 2);
+                    iguanaObj.moveTowards(iguana, length / 2).vround();
                 }
                 iguanaObj.speed.at(iguana.speed);
                 iguanaObj.ducking = iguana.ducking;
             }
+
+            lastTime = client.room.time;
         });
 }

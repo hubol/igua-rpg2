@@ -1,5 +1,5 @@
 import { Logger } from "../../lib/game-engine/logger";
-import { Unit } from "../../lib/math/number-alias-types";
+import { Integer, Unit } from "../../lib/math/number-alias-types";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { RethrownError } from "../../lib/rethrown-error";
 import { Null } from "../../lib/types/null";
@@ -53,6 +53,7 @@ export class IguaClient {
     private _clientId = Null<number>();
 
     private _room: IguaClient.Room = {
+        time: -1,
         iguanas: [],
     };
 
@@ -71,6 +72,7 @@ export class IguaClient {
         }
 
         if (message.type === "room_broadcast") {
+            this._room.time = message.time;
             this._room.iguanas.length = 0;
             for (let i = 0; i < message.iguanas.length; i++) {
                 const iguana = message.iguanas[i];
@@ -111,6 +113,7 @@ namespace IguaClient {
     }
 
     export interface Room {
+        time: Integer;
         iguanas: IguaNet.Message.FromServer.RoomBroadcast.Iguana[];
     }
 }

@@ -28,6 +28,7 @@ export namespace IguaNet {
         export namespace FromServer {
             export interface RoomBroadcast {
                 type: "room_broadcast";
+                time: number;
                 iguanas: RoomBroadcast.Iguana[];
             }
 
