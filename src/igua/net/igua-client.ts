@@ -55,6 +55,10 @@ export class IguaClient {
 
     private _previousUpdateJson = "";
 
+    close() {
+        this._socket.close();
+    }
+
     update(x: number, y: number, ducking: Unit, speed: VectorSimple) {
         if (!this._isSocketOpen) {
             return;

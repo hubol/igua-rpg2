@@ -4,12 +4,14 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { distance } from "../../lib/math/vector";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
-import { scene } from "../globals";
+import { show } from "../drama/show";
+import { Cutscene, scene } from "../globals";
 import { IguaClient } from "../net/igua-client";
+import { SceneChanger } from "../systems/scene-changer";
 import { ObjIguanaLocomotive, objIguanaLocomotive } from "./obj-iguana-locomotive";
 import { playerObj } from "./obj-player";
 
-export function objNetRoom(client: IguaClient) {
+export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger) {
     let lastTime = -1;
     const iguanaObjsById: Record<Integer, ObjIguanaLocomotive> = {};
     const iguanaIdsInRoom = new Set<Integer>();
@@ -60,6 +62,14 @@ export function objNetRoom(client: IguaClient) {
             }
 
             lastTime = client.room.time;
+        })
+        .on("destroyed", () => client.close())
+        .coro(function* () {
+            yield () => !client.isOnline;
+            Cutscene.play(function* () {
+                yield* show("Leaving now.");
+                offlineSceneChanger.changeScene();
+            });
         });
 }
 
