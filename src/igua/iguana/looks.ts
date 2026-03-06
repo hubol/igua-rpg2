@@ -123,7 +123,39 @@ export namespace IguanaLooks {
         return darken(color, 0.1);
     }
 
+    export function createIguaNetValidator() {
+        return JSON.stringify(create(), (key, value) => {
+            if (typeof value !== "object" || typeof value.kind !== "string") {
+                return value;
+            }
+
+            return transformInputToIguaNetValidator(value as TypedInput.Any);
+        })
+            .replaceAll("\"v.", "v.")
+            .replaceAll(")\"", ")");
+    }
+
+    function transformInputToIguaNetValidator(input: TypedInput.Any): string | object {
+        switch (input.kind) {
+            case "boolean":
+                return "v.boolean()";
+            case "choice":
+                return `v.integer(0, ${input.options.length - 1})`;
+            case "vector":
+                return {
+                    x: `v.integer(${input.minX ?? -24}, ${input.maxX ?? 24})`,
+                    y: `v.integer(${input.minY ?? -24}, ${input.maxY ?? 24})`,
+                };
+            case "integer":
+                return `v.integer(${input.min ?? -8}, ${input.max ?? 8})`;
+            case "color":
+                return `v.integer(0, ${0xffffff})`;
+        }
+    }
+
     function darken(color: number, amount: number) {
         return AdjustColor.pixi(color).saturate(0.1).darken(amount).toPixi();
     }
 }
+
+// console.log(IguanaLooks.createIguaNetValidator());
