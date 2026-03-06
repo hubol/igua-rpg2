@@ -59,6 +59,8 @@ export class IguaClient {
         this._socket.close();
     }
 
+    private _skippedUpdatesCount = 0;
+
     update(x: number, y: number, ducking: Unit, speed: VectorSimple) {
         if (!this._isSocketOpen) {
             return;
@@ -73,9 +75,11 @@ export class IguaClient {
         };
 
         const updateJson = JSON.stringify(update);
-        if (updateJson === this._previousUpdateJson) {
+        if (this._skippedUpdatesCount < 150 && updateJson === this._previousUpdateJson) {
+            this._skippedUpdatesCount++;
             return;
         }
+        this._skippedUpdatesCount = 0;
         this._send(update);
         this._previousUpdateJson = updateJson;
     }
