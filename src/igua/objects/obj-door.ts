@@ -77,6 +77,15 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
             lockedObj2.texture = Tx.Door[style].LockedLayer2;
             openObj.texture = Tx.Door[style].Open;
         },
+        get sceneChanger() {
+            return sceneChanger!;
+        },
+        changeScene() {
+            if (sceneChanger) {
+                DramaMisc.departRoomViaDoor(null);
+                sceneChanger.changeScene();
+            }
+        },
     };
 
     const obj = container(openObj, maskObj0, maskObj1, maskObj2, lockedObj0, lockedObj1, lockedObj2)
@@ -92,12 +101,9 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
                 );
                 return;
             }
-            if (sceneChanger) {
-                throw new EscapeTickerAndExecute(() => {
-                    DramaMisc.departRoomViaDoor(null);
-                    sceneChanger.changeScene();
-                });
-            }
+            throw new EscapeTickerAndExecute(() => {
+                api.changeScene();
+            });
         })
         .coro(function* (self) {
             while (true) {

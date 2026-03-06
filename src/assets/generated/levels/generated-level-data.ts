@@ -1744,6 +1744,47 @@ export const Lvl = {
       GateHorizontal: e(r["GateHorizontal"], { x: -48, y: 136, height: 128, flippedX: true, values: { sceneName: "scnPlainsSuggestiveCavern", checkpointName: "fromHallOfDoors", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
+  IndianaLoungeExterior: () => {
+    applyLevel({ width: 500, height: 400, backgroundTint: 0x408000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 328, width: 520, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 48, y: 312, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 384, y: 312, width: 64, height: 16, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 112, y: 312, width: 272, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      DoorLeft: e(r["Door"], { x: 176, y: 264, values: { sceneName: "scnIndianaLoungeInterior", checkpointName: "fromExteriorLeft", name: "DoorLeft", depth: 0 } }, "Entities"),
+      DoorRight: e(r["Door"], { x: 288, y: 264, values: { sceneName: "scnIndianaLoungeInterior", checkpointName: "fromExteriorRight", name: "DoorRight", depth: 0 } }, "Entities"),
+      Player: e(r["Player"], { x: 72, y: 320, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      fromLoungeLeft: e(r["Checkpoint"], { x: 168, y: 312, flippedX: true, values: { name: "fromLoungeLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromLoungeRight: e(r["Checkpoint"], { x: 336, y: 312, flippedX: false, values: { name: "fromLoungeRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromLoungeOffline: e(r["Checkpoint"], { x: 248, y: 80, flippedX: false, values: { name: "fromLoungeOffline", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -72, y: 200, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaLounge", name: "", depth: 0 } }, "RegionEntities"),
+      GateHorizontal_1: e(r["GateHorizontal"], { x: 472, y: 200, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaLounge", name: "", depth: 0 } }, "RegionEntities"),
+    };
+  },
+  IndianaLoungeInterior: () => {
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 0, width: 504, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 0, y: 248, width: 504, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 472, y: 32, width: 32, height: 216, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 0, y: 32, width: 32, height: 216, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 32, y: 104, width: 128, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_1: e(r["Pipe"], { x: 344, y: 104, width: 128, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 128, y: 232, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 312, y: 232, width: 64, height: 16, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 192, y: 232, width: 120, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe_2: e(r["Pipe"], { x: 224, y: 80, width: 56, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_3: e(r["Pipe"], { x: 128, y: 152, width: 64, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_4: e(r["Pipe"], { x: 312, y: 152, width: 64, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_5: e(r["Pipe"], { x: 32, y: 200, width: 48, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_6: e(r["Pipe"], { x: 424, y: 200, width: 48, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Door: e(r["Door"], { x: 56, y: 56, values: { sceneName: "scnIndianaLoungeExterior", checkpointName: "fromLoungeRight", name: "", depth: 0 } }, "Entities"),
+      Door_1: e(r["Door"], { x: 416, y: 56, values: { sceneName: "scnIndianaLoungeExterior", checkpointName: "fromLoungeLeft", name: "", depth: 0 } }, "Entities"),
+      Player: e(r["Player"], { x: 104, y: 104, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      fromExteriorLeft: e(r["Checkpoint"], { x: 408, y: 104, flippedX: true, values: { name: "fromExteriorLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      NetOfferMarker: e(r["Marker"], { x: 250, y: 232, values: { name: "NetOfferMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+    };
+  },
   IndianaUniversityInterior: () => {
     applyLevel({ width: 688, height: 280, backgroundTint: 0x68ba8e });
     return {
@@ -7192,6 +7233,8 @@ export namespace LvlType {
   export type IndianaCasino = ReturnType<(typeof Lvl)["IndianaCasino"]>;
   export type IndianaDesert = ReturnType<(typeof Lvl)["IndianaDesert"]>;
   export type IndianaHallOfDoors = ReturnType<(typeof Lvl)["IndianaHallOfDoors"]>;
+  export type IndianaLoungeExterior = ReturnType<(typeof Lvl)["IndianaLoungeExterior"]>;
+  export type IndianaLoungeInterior = ReturnType<(typeof Lvl)["IndianaLoungeInterior"]>;
   export type IndianaUniversityInterior = ReturnType<(typeof Lvl)["IndianaUniversityInterior"]>;
   export type IndianaUniversityNurse = ReturnType<(typeof Lvl)["IndianaUniversityNurse"]>;
   export type IndianaUniversity = ReturnType<(typeof Lvl)["IndianaUniversity"]>;

@@ -16,8 +16,8 @@ function throwBootyError() {
 
 export class SceneChanger {
     private constructor(
-        private readonly _scene: () => unknown,
-        private readonly _sceneName: string,
+        public scene: () => unknown,
+        readonly sceneName: string,
         public checkpointName: string,
     ) {
     }
@@ -27,10 +27,10 @@ export class SceneChanger {
         if (playerObj) {
             Rpg.character.position.facing = playerObj.facing > 0 ? 1 : -1;
         }
-        Rpg.character.position.sceneName = this._sceneName;
+        Rpg.character.position.sceneName = this.sceneName;
         Rpg.character.position.checkpointName = this.checkpointName;
         const forceError = Rng.float(100) <= Rpg.character.buffs.esoteric.sceneChangeErrorChance;
-        sceneStack.replace(forceError ? throwBootyError : this._scene, { useGameplay: true });
+        sceneStack.replace(forceError ? throwBootyError : this.scene, { useGameplay: true });
         Logger.logInfo("SceneChanger.changeScene", `Took ${performance.now() - startMs}ms`);
     }
 
