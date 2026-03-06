@@ -140,7 +140,7 @@ export namespace IguanaLooks {
             case "boolean":
                 return "v.boolean()";
             case "choice":
-                return `v.integer(0, ${input.options.length - 1})`;
+                return `v.integer(${input.allowNone ? -1 : 0}, ${input.options.length - 1})`;
             case "vector":
                 return {
                     x: `v.integer(${input.minX ?? -24}, ${input.maxX ?? 24})`,
@@ -157,5 +157,3 @@ export namespace IguanaLooks {
         return AdjustColor.pixi(color).saturate(0.1).darken(amount).toPixi();
     }
 }
-
-// console.log(IguanaLooks.createIguaNetValidator());
