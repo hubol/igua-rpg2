@@ -7204,6 +7204,7 @@ export const Lvl = {
       fromErrorRecovery: e(r["Checkpoint"], { x: 488, y: 368, flippedX: false, values: { name: "fromErrorRecovery", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       fromIndianaDesertLeft: e(r["Checkpoint"], { x: 472, y: 264, flippedX: true, values: { name: "fromIndianaDesertLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromIndianaDesertRight: e(r["Checkpoint"], { x: 664, y: 256, flippedX: false, values: { name: "fromIndianaDesertRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromIndianaLounge: e(r["Checkpoint"], { x: 632, y: 920, flippedX: false, values: { name: "fromIndianaLounge", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       GateMap: e(r["GateMap"], { x: 821, y: 735, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_1: e(r["GateMap"], { x: 637, y: 737, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_2: e(r["GateMap"], { x: 942, y: 844, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
@@ -7215,6 +7216,7 @@ export const Lvl = {
       GateMap_7: e(r["GateMap"], { x: 920, y: 208, rotation: 270, uid: 176569559038300, values: { sceneName: "scnSinSwamp", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_8: e(r["GateMap"], { x: 758, y: 385, rotation: 270, uid: 176975623156307, values: { sceneName: "scnGrottoIndianaShop", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_9: e(r["GateMap"], { x: 488, y: 232, rotation: 0, uid: 177152452563600, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_10: e(r["GateMap"], { x: 632, y: 880, rotation: 180, uid: 177281293625000, values: { sceneName: "scnIndianaLoungeExterior", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
     };
   },
 };

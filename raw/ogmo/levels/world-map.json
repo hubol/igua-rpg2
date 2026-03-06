@@ -170,6 +170,19 @@
           "uid": 177152452563600,
           "tint": "#ffffff",
           "values": {"sceneName": "scnIndianaDesert", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 12,
+          "_eid": "53836309",
+          "x": 632,
+          "y": 880,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 180,
+          "uid": 177281293625000,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnIndianaLoungeExterior", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -392,6 +405,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromIndianaDesertRight", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 17,
+          "_eid": "19953026",
+          "x": 632,
+          "y": 920,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromIndianaLounge", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
         }
       ]
     },
@@ -4099,7 +4123,8 @@
           "texture": "world map/hills 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 607,
@@ -4111,7 +4136,8 @@
           "texture": "world map/hills 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 564,
@@ -4123,7 +4149,8 @@
           "texture": "world map/hills 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 252,
@@ -4148,7 +4175,8 @@
           "texture": "world map/cactus.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 539,
@@ -4160,7 +4188,8 @@
           "texture": "world map/cactus.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 521,
@@ -4172,7 +4201,8 @@
           "texture": "world map/cactus.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 504,
@@ -4184,7 +4214,8 @@
           "texture": "world map/cactus.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 535,
@@ -4196,7 +4227,8 @@
           "texture": "world map/cactus.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 573,
@@ -4208,7 +4240,8 @@
           "texture": "world map/cactus.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 614,
@@ -4220,7 +4253,8 @@
           "texture": "world map/cactus.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 565,
@@ -4232,7 +4266,8 @@
           "texture": "world map/cactus.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 619,
@@ -4244,7 +4279,8 @@
           "texture": "world map/cactus.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 626,
@@ -4256,7 +4292,8 @@
           "texture": "world map/cactus.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 648,
@@ -4268,7 +4305,8 @@
           "texture": "world map/cactus.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -5697,7 +5735,8 @@
           "texture": "world map/blob 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
