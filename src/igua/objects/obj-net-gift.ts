@@ -17,6 +17,8 @@ import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function objNetGift(client: IguaClient) {
+    let warned = false;
+
     const hitboxObj = new Graphics().beginFill(0xff0000).drawRect(-16, -32, 32, 32).invisible();
     return container(hitboxObj)
         .collisionShape(CollisionShape.DisplayObjects, [hitboxObj])
@@ -36,8 +38,16 @@ export function objNetGift(client: IguaClient) {
         })
         .mixin(mxnCutscene, function* () {
             if (!client.isOnline) {
-                yield* show("You are offline.");
                 return;
+            }
+
+            if (!warned) {
+                yield* show(
+                    "Here you can offer shoes for other iguanas to take.",
+                    "Be careful, as once your shoes are taken, it might not be possible to retrieve them.",
+                    "Additionally, if you are ejected from the lounge, you may not be able to retrieve your shoes.",
+                );
+                warned = true;
             }
 
             yield* dramaNetGift(client);
@@ -56,7 +66,7 @@ function* dramaNetGift(client: IguaClient) {
                 id: equipmentId,
                 level,
             }))
-            .slice(0, 7)
+            .slice(0, 9)
             .map((item) => ({ item, message: DataItem.getName(item) }));
 
         const item = yield* DramaItem.choose({
