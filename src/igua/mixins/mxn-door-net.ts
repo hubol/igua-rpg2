@@ -1,4 +1,5 @@
 import { objText } from "../../assets/fonts";
+import { Sfx } from "../../assets/sounds";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { container } from "../../lib/pixi/container";
@@ -44,6 +45,7 @@ export function mxnDoorNet(doorObj: ObjDoor) {
 function objFxConnecting() {
     return container()
         .coro(function* (self) {
+            let count = 0;
             while (true) {
                 yield sleep(1000);
                 objText.MediumBoldIrregular("Connecting...")
@@ -57,6 +59,7 @@ function objFxConnecting() {
                         }
                     })
                     .coro(function* (self) {
+                        self.play(Sfx.Cutscene.Connecting.rate(1 + (count++) * 0.0333));
                         self.alpha = 0.5;
                         yield sleep(125);
                         self.alpha = 1;
