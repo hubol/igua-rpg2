@@ -26,6 +26,7 @@ async function createNoAtlasTx(tx: typeof Tx) {
         },
         Terrain: {
             Pipe: {
+                Brick: await repeat(tx.Terrain.Pipe.Brick),
                 Gray: await repeat(tx.Terrain.Pipe.Gray),
             },
         },

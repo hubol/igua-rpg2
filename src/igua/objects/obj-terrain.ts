@@ -267,6 +267,8 @@ class SolidSlopeGraphics extends TerrainGraphics {
     }
 }
 
+export const CtxTerrainPipe = new SceneLocal(() => ({ texture: NoAtlasTx.Terrain.Pipe.Gray }), "CtxTerrainPipe");
+
 class PipeMesh extends TerrainMesh {
     private static readonly _Weights: TerrainSegment[] = [
         { x0: 0, y0: 0, x1: 1, y1: 0, isFloor: true, isPipe: true },
@@ -279,7 +281,7 @@ class PipeMesh extends TerrainMesh {
     constructor(weights = PipeMesh._Weights) {
         super(weights, Material.Metal);
 
-        this.texture = NoAtlasTx.Terrain.Pipe.Gray;
+        this.texture = CtxTerrainPipe.value.texture;
     }
 
     onTransformChanged() {
