@@ -170,7 +170,6 @@ function objCutsceneRunner() {
                     ) {
                         yield sleepf(22);
                     }
-                    // TODO unused so far
                     if (attributes.camera.end === "pan_to_player") {
                         yield scene.camera.auto.panToPlayer();
                     }

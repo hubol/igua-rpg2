@@ -645,6 +645,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromSecretShop", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 5,
+          "_eid": "19953026",
+          "x": 144,
+          "y": 48,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromWizard", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },

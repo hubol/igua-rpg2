@@ -34,7 +34,7 @@
           "_eid": "11908607",
           "x": 224,
           "y": 382,
-          "width": 2024,
+          "width": 2080,
           "height": 50,
           "originX": 0,
           "originY": 0,
@@ -86,6 +86,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 1,
+          "_eid": "19953026",
+          "x": 2200,
+          "y": 432,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromCasino", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -242,6 +253,16 @@
           "originY": 78,
           "uid": 176569555435000,
           "values": {"name": "", "depth": 0, "variant": "level1"}
+        },
+        {
+          "name": "Door",
+          "id": 19,
+          "_eid": "88296692",
+          "x": 2232,
+          "y": 384,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnCasino", "checkpointName": "fromSwamp", "name": "", "depth": 0}
         }
       ]
     },
@@ -520,7 +541,7 @@
           "_eid": "93117141",
           "x": 1464,
           "y": 432,
-          "width": 784,
+          "width": 840,
           "height": 80,
           "originX": 0,
           "originY": 0,
@@ -650,7 +671,8 @@
           "texture": "terrain/distant/waves 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 344,
@@ -662,7 +684,8 @@
           "texture": "terrain/distant/hills 500.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 996,
@@ -674,7 +697,8 @@
           "texture": "terrain/distant/waves 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1496,
@@ -686,7 +710,8 @@
           "texture": "terrain/distant/waves 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1992,
@@ -698,7 +723,8 @@
           "texture": "terrain/distant/waves 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 576,
@@ -710,7 +736,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

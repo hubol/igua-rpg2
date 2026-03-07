@@ -14,14 +14,14 @@ import { merge } from "../../../lib/object/merge";
 import { container } from "../../../lib/pixi/container";
 import { Force } from "../../../lib/types/force";
 import { renderer } from "../../current-pixi-renderer";
-import { Cutscene, DevKey, layers, sceneStack } from "../../globals";
+import { Cutscene, DevKey, layers } from "../../globals";
 import { ConnectedInput } from "../../iguana/connected-input";
 import { getDefaultLooks } from "../../iguana/get-default-looks";
 import { IguanaLooks } from "../../iguana/looks";
 import { objIguanaPuppet } from "../../iguana/obj-iguana-puppet";
 import { mxnBoilSeed } from "../../mixins/mxn-boil-seed";
 import { Rpg } from "../../rpg/rpg";
-import { scnNewBalltownOutskirts } from "../../scenes/scn-new-balltown-outskirts";
+import { scnWizardLair } from "../../scenes/scn-wizard-lair";
 import { SceneChanger } from "../../systems/scene-changer";
 import { objUiButton } from "../framework/obj-ui-button";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter, UiPage } from "../framework/obj-ui-page";
@@ -207,11 +207,11 @@ function objUiSavePage() {
             yield layers.overlay.solid.fadeIn(500);
             const looks = CtxUiIguanaDesigner.value.looks;
             Rpg.character.looks = looks;
-            SceneChanger.create({ sceneName: scnNewBalltownOutskirts.name, checkpointName: "fromGameStart" })!
+            SceneChanger.create({ sceneName: scnWizardLair.name, checkpointName: "fromGameStart" })!
                 .changeScene();
             page.destroy();
             yield layers.overlay.solid.fadeOut(500);
-        });
+        }, { camera: { end: "none" } });
     }, width).jiggle().center().at(horizontalMargin, 160);
 
     const page = objUiPage([
