@@ -287,7 +287,6 @@ export const Lvl = {
       Block_19: e(r["Block"], { x: 816, y: 304, width: 48, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x503966 }, "TerrainEntities"),
       Pipe: e(r["Pipe"], { x: 816, y: 104, width: 120, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
       LightShadowMessy0: d(Tx.Light.ShadowMessy0, { x: 663, y: 308, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3f2756 }, "TerrainDecals"),
-      EmoBallistaPlaceholder: d(Tx.Esoteric.DevilBoneMan.Head, { x: 768, y: 464, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       TerrainEarthCrack8px12px: d(Tx.Terrain.Earth.Crack8px12px, { x: 706, y: 310, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x18062a }, "TerrainDecals"),
       TerrainEarthCrack8px12px_1: d(Tx.Terrain.Earth.Crack8px12px, { x: 633, y: 422, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x18062a }, "TerrainDecals"),
       TerrainEarthCrack8px12px_2: d(Tx.Terrain.Earth.Crack8px12px, { x: 204, y: 446, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x18062a }, "TerrainDecals"),
@@ -354,6 +353,7 @@ export const Lvl = {
       Puddle_3: e(r["Puddle"], { x: 456, y: 472, width: 24, values: { name: "", depth: 0 }, tint: 0xd2264f }, "FrontEntities"),
       Puddle_4: e(r["Puddle"], { x: 501, y: 472, width: 24, values: { name: "", depth: 0 }, tint: 0xd2264f }, "FrontEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: 1136, y: 224, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromColosseumMiffed", name: "", depth: 0 } }, "RegionEntities"),
+      EmoBallistaMarker: e(r["Marker"], { x: 768, y: 472, values: { name: "EmoBallistaMarker", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
     };
   },
   Dummy: () => {

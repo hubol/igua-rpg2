@@ -1,4 +1,3 @@
-import { Graphics } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Instances } from "../../lib/game-engine/instances";
@@ -7,8 +6,7 @@ import { DramaInventory } from "../drama/drama-inventory";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
-import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { objCharacterEmoBallista } from "../objects/characters/obj-character-emo-ballista";
 import { CtxPocketItems, objCollectiblePocketItemSpawner } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
@@ -78,11 +76,8 @@ function enrichWatcherNpc(lvl: LvlType.ColosseumMiffed) {
 function enrichEmoBallista(lvl: LvlType.ColosseumMiffed) {
     const rpgBallista = Rpg.flags.colosseum.ballista;
 
-    lvl.EmoBallistaPlaceholder.mixin(mxnSpeaker, {
-        name: "Emo Ballista",
-        colorPrimary: 0x808080,
-        colorSecondary: 0x404040,
-    })
+    const ballistaObj = objCharacterEmoBallista()
+        .at(lvl.EmoBallistaMarker)
         .mixin(mxnCutscene, function* () {
             const count = Rpg.inventory.pocket.count("EmoBallistaBolt");
             if (count > 0) {
@@ -100,19 +95,11 @@ function enrichEmoBallista(lvl: LvlType.ColosseumMiffed) {
             }
 
             if (yield* ask(`${rpgBallista.bolts} bolt(s). Fire?`)) {
-                objGiantBallistaAttack().at(lvl.EmoBallistaPlaceholder).show();
+                ballistaObj.objCharacterEmoBallista.fire(atkGiantBallista);
                 rpgBallista.bolts--;
             }
-        });
-}
-
-function objGiantBallistaAttack() {
-    return new Graphics()
-        .beginFill(0xff0000)
-        .drawCircle(0, 0, 48)
-        .mixin(mxnRpgAttack, { attack: atkGiantBallista })
-        .step(self => self.x -= 1)
-        .handles("mxnRpgAttack.hit", self => self.destroy());
+        })
+        .show();
 }
 
 const atkGiantBallista = RpgAttack.create({
