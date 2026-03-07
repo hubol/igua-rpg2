@@ -3,25 +3,32 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { onMutate } from "../../lib/game-engine/routines/on-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
+import { CollisionShape } from "../../lib/pixi/collision";
 import { container } from "../../lib/pixi/container";
+import { ZIndex } from "../core/scene/z-index";
 import { DataItem } from "../data/data-item";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaItem } from "../drama/drama-item";
 import { show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { IguaClient } from "../net/igua-client";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function objNetGift(client: IguaClient) {
-    const hitboxObj = new Graphics().beginFill(0xff0000).drawRect(0, 0, 32, 32);
+    const hitboxObj = new Graphics().beginFill(0xff0000).drawRect(-16, -32, 32, 32).invisible();
     return container(hitboxObj)
+        .collisionShape(CollisionShape.DisplayObjects, [hitboxObj])
+        .mixin(mxnSpeaker, { name: "Shoe Altar", colorPrimary: 0xE5BB00, colorSecondary: 0xAD3600 })
         .coro(function* (self) {
             const figureObj = container().show(self);
 
             while (true) {
                 if (client.room.giftItem) {
-                    DataItem.getFigureObj(client.room.giftItem).show(figureObj);
+                    DataItem.getFigureObj(client.room.giftItem)
+                        .pivotedUnit(0.5, 1)
+                        .show(figureObj);
                 }
                 yield onMutate.Provider(() => client.room.giftItem);
                 figureObj.removeAllChildren();
@@ -34,7 +41,8 @@ export function objNetGift(client: IguaClient) {
             }
 
             yield* dramaNetGift(client);
-        });
+        })
+        .zIndexed(ZIndex.Entities);
 }
 
 function* dramaNetGift(client: IguaClient) {

@@ -6,6 +6,7 @@ import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { IguaClient } from "../net/igua-client";
 import { SceneChanger } from "../systems/scene-changer";
 import { ObjIguanaLocomotive, objIguanaLocomotive } from "./obj-iguana-locomotive";
@@ -64,12 +65,13 @@ export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger
             lastTime = client.room.time;
         })
         .on("destroyed", () => client.close())
-        .coro(function* () {
+        .mixin(mxnSpeaker, { name: "Net God", colorPrimary: 0xff0000, colorSecondary: 0xffff00 })
+        .coro(function* (self) {
             yield () => !client.isOnline;
             Cutscene.play(function* () {
-                yield* show("Leaving now.");
+                yield* show("You are being ejected.");
                 offlineSceneChanger.changeScene();
-            });
+            }, { speaker: self });
         });
 }
 
