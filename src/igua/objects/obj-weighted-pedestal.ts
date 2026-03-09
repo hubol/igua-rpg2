@@ -7,6 +7,7 @@ import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Rpg } from "../rpg/rpg";
 import { objFigureFlop } from "./figures/obj-figure-flop";
 
@@ -14,6 +15,7 @@ export function objWeightedPedestal({ uid, values: { requiredFlopsCount } }: Ogm
     const rpgWeightedPedestal = Rpg.weightedPedestals.getById(uid, { requiredFlopsCount });
     return container(
         Sprite.from(Tx.Esoteric.WeightedPedestal)
+            .mixin(mxnSpeaker, { name: "Weighted Pedestal", colorPrimary: 0xC450D3, colorSecondary: 0x35145C })
             .mixin(mxnCutscene, function* () {
                 const message =
                     `A weighted pedestal for presenting Flops. The scale reads ${rpgWeightedPedestal.weight}f.`;
