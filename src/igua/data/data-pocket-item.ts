@@ -17,8 +17,8 @@ export namespace DataPocketItem {
             Beet: { name: "Bittered Beet", texture: Tx.Collectibles.Pocket.Beet },
             EmoBallistaBolt: { name: "Emo Ballista Bolt", texture: Tx.Collectibles.Pocket.EmoBallistaBolt },
             EssenceWind: { name: "Essence of Wind", texture: Tx.Collectibles.Pocket.EssenceWind },
-            CactusFruitTypeA: { name: "Cactus Fruit Type A", texture: Tx.Collectibles.Pocket.EssenceWind },
-            CactusFruitTypeB: { name: "Cactus Fruit Type B", texture: Tx.Collectibles.Pocket.Beet },
+            CactusFruitTypeA: { name: "Cactus Fruit Type A", texture: Tx.Collectibles.Pocket.CactusFruitA },
+            CactusFruitTypeB: { name: "Cactus Fruit Type B", texture: Tx.Collectibles.Pocket.CactusFruitB },
             __Fallback__: { name: "???", texture: Tx.Collectibles.ComputerChip },
         } satisfies Record<string, Model>,
     );
