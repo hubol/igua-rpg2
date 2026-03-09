@@ -215,37 +215,54 @@ function objExperienceIndicator() {
         value: 0,
     }));
 
-    const deltaObjs = experienceIndicatorConfigsArray.map(({ experienceKey, ...config }) =>
-        objExperienceIndicatorDelta(config)
+    const deltaObjs = experienceIndicatorConfigsArray.map(({ experienceKey, ...config }) => {
+        function shouldShowTotal() {
+            return mxnHudModifiers.mxnExperienceIndicatorShowTotals.exists() && Rpg.experience[experienceKey] > 0;
+        }
+
+        return objExperienceIndicatorDelta(config)
             .invisible()
             .coro(function* (self) {
                 let value = Rpg.experience[experienceKey];
                 while (true) {
-                    yield () => Rpg.experience[experienceKey] != value;
+                    yield () => Rpg.experience[experienceKey] != value || shouldShowTotal();
+                    const forceShowTotal = Rpg.experience[experienceKey] === value && shouldShowTotal();
                     self.visible = true;
                     self.state.total = value;
                     let nextValue = Rpg.experience[experienceKey];
-                    yield holdf(() => {
-                        const latestValue = Rpg.experience[experienceKey];
-                        self.state.delta = latestValue - value;
-                        if (latestValue !== nextValue) {
-                            nextValue = latestValue;
-                            return false;
-                        }
+                    if (!forceShowTotal) {
+                        yield holdf(() => {
+                            const latestValue = Rpg.experience[experienceKey];
+                            self.state.delta = latestValue - value;
+                            if (latestValue !== nextValue) {
+                                nextValue = latestValue;
+                                return false;
+                            }
 
-                        return true;
-                    }, 120);
+                            return true;
+                        }, 120);
+                    }
                     value = nextValue;
                     self.state.total = value;
                     self.state.delta = 0;
-                    yield* Coro.race([
-                        () => Rpg.experience[experienceKey] != value,
-                        sleepf(120),
-                    ]);
+                    if (forceShowTotal) {
+                        yield* Coro.race([
+                            () => Rpg.experience[experienceKey] != value,
+                            () => !shouldShowTotal(),
+                            sleepf(120),
+                        ]);
+                    }
+                    else {
+                        yield* Coro.race([
+                            () => Rpg.experience[experienceKey] != value,
+                            shouldShowTotal,
+                            sleepf(120),
+                        ]);
+                    }
                     self.visible = false;
                 }
-            }, -2)
-    );
+            }, -2);
+    });
 
     function updateWeights() {
         for (let i = 0; i < experienceIndicatorConfigsArray.length; i++) {

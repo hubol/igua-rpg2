@@ -63,7 +63,8 @@ export function objUiInventory() {
 export type ObjUiInventory = Pick<ReturnType<typeof objUiInventory>, "isOpen">;
 
 function objUiInventoryImpl() {
-    const routerObj = objUiPageRouter();
+    const routerObj = objUiPageRouter()
+        .mixin(mxnHudModifiers.mxnExperienceIndicatorShowTotals);
     routerObj.push(objUiEquipmentLoadoutPage(routerObj));
 
     return routerObj;
@@ -175,7 +176,7 @@ function objUiEquipmentLoadoutPage(routerObj: ObjUiPageRouter) {
 
     objText.Medium("", { tint: 0x00ff00, align: "right" })
         .anchored(1, 1)
-        .at(314, 170)
+        .at(314, 153)
         .step(self => {
             self.text = `---- Attributes ----
 Health: ${Rpg.character.attributes.health}
