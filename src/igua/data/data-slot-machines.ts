@@ -10,6 +10,69 @@ function interlace<T>(array: T[], item: T): T[] {
 }
 
 export namespace DataSlotMachines {
+    export namespace Epic {
+        export const sym = {
+            happy: {
+                identity: "fixed",
+                prizeCondition: "line_from_left_consecutive",
+                countsToPrize: [0, 1, 2],
+            },
+            uberHappy: {
+                identity: "fixed",
+                prizeCondition: "line_from_left_consecutive",
+                countsToPrize: [0, 2, 8],
+            },
+            omegaHappy: {
+                identity: "fixed",
+                prizeCondition: "line_from_left_consecutive",
+                countsToPrize: [0, 0, 100],
+            },
+            wild: {
+                identity: "wild",
+                prizeCondition: "line_from_left_consecutive",
+                countsToPrize: [0, 0, 300],
+            },
+        } satisfies Record<string, RpgSlotMachine.Symbol>;
+
+        export const rules: RpgSlotMachine.Rules = {
+            price: 10,
+            height: 4,
+            lines: [
+                [0, 0, 0],
+                [1, 1, 1],
+                [2, 2, 2],
+                [3, 3, 3],
+            ],
+            reels: [
+                [sym.happy, sym.happy, sym.happy, sym.happy, sym.uberHappy, sym.omegaHappy, sym.uberHappy, sym.wild],
+                [
+                    sym.happy,
+                    sym.wild,
+                    sym.happy,
+                    sym.uberHappy,
+                    sym.happy,
+                    sym.happy,
+                    sym.omegaHappy,
+                    sym.uberHappy,
+                    sym.happy,
+                ],
+                [
+                    sym.happy,
+                    sym.happy,
+                    sym.happy,
+                    sym.omegaHappy,
+                    sym.happy,
+                    sym.uberHappy,
+                    sym.happy,
+                    sym.happy,
+                    sym.uberHappy,
+                    sym.happy,
+                    sym.wild,
+                ],
+            ],
+        };
+    }
+
     export namespace BasicThreeReel {
         export const sym = {
             empty: {

@@ -18,6 +18,16 @@ symbolTxs.set(sym.seven, txs[2]);
 symbolTxs.set(sym.bar, txs[1]);
 symbolTxs.set(sym.wild, txs[3]);
 
+// TODO this should be less boilerplate!
+
+const { rules: rules1, sym: sym1 } = DataSlotMachines.Epic;
+
+const symbolTxs1 = new Map<RpgSlotMachine.Symbol, Texture>();
+symbolTxs1.set(sym1.happy, txs[0]);
+symbolTxs1.set(sym1.uberHappy, txs[1]);
+symbolTxs1.set(sym1.omegaHappy, txs[2]);
+symbolTxs1.set(sym1.wild, txs[3]);
+
 export function scnCasino() {
     const lvl = Lvl.IndianaCasino();
     {
@@ -28,6 +38,14 @@ export function scnCasino() {
             .at(lvl.SlotMachineDisplay0)
             .zIndexed(ZIndex.Entities)
             .show();
+
+        // const slotMachineObj = objSlotMachine(
+        //     rules1,
+        //     { mask: { y: -2, height: 120 }, reel: { gap: 46 }, slot: { gap: 30 }, symbolTxs: symbolTxs1 },
+        // )
+        //     .at(lvl.SlotMachineDisplay0)
+        //     .zIndexed(ZIndex.Entities)
+        //     .show();
 
         lvl.SlotMachineSecondaryDisplay0
             .mixin(mxnSlotMachineSecondaryDisplay, slotMachineObj);
