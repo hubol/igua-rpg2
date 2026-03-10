@@ -177,6 +177,19 @@ export function objStatusBar(config: ObjStatusBarConfig) {
             barsGfx.clear();
             barsGfx.beginFill(config.tintBack).drawRect(0, 0, width, height);
 
+            if (frontValue > c.maxValue) {
+                const excessWidth = (frontValue - c.maxValue) / valuePerPixel;
+                barsGfx
+                    .endFill()
+                    .lineStyle(1, config.tintFront);
+                for (let i = 1; i < excessWidth; i += 2) {
+                    const x = width + i;
+                    barsGfx
+                        .moveTo(x, 0)
+                        .lineTo(x, height);
+                }
+            }
+
             {
                 let x = 1;
                 for (let i = 0; i < leftAlignedTexts.length; i++) {
