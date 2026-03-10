@@ -4,6 +4,7 @@ import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Logger } from "../../lib/game-engine/logger";
 import { vnew } from "../../lib/math/vector-type";
 import { ZIndex } from "../core/scene/z-index";
+import { ask } from "../drama/show";
 import { scene } from "../globals";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
@@ -63,7 +64,15 @@ export function scnMenuTitleScreen() {
         .objDoor.locked = !saveFiles.some(Boolean);
 
     [lvl.NewFile0Door, lvl.NewFile1Door, lvl.NewFile2Door]
-        .forEach((obj, i) => obj.mixin(mxnLabeled, "File " + (i + 1)).objDoor.locked = Boolean(saveFiles[i]));
+        .forEach((obj, i) => {
+            obj.mixin(mxnLabeled, "File " + (i + 1));
+            obj.objDoor.locked = Boolean(saveFiles[i]);
+            obj.objDoor.lockedCutscene = function* () {
+                if (yield* ask(`File ${i + 1} will be overridden. Continue?`)) {
+                    obj.objDoor.unlock();
+                }
+            };
+        });
 
     [lvl.LoadFile0Door, lvl.LoadFile1Door, lvl.LoadFile2Door]
         .forEach((obj, i) => obj.mixin(mxnLabeled, "File " + (i + 1)).objDoor.locked = !Boolean(saveFiles[i]));
