@@ -317,6 +317,7 @@ function objExperienceIndicator() {
             }
         }, 2)
         .step(self => {
+            self.visible = !mxnHudModifiers.mxnHideExperience.exists();
             self.x = approachLinear(
                 self.x,
                 mxnHudModifiers.mxnExperienceIndicatorToLeft.exists() ? xPositions.left : xPositions.right,

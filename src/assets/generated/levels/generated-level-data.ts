@@ -2235,6 +2235,26 @@ export const Lvl = {
       TerrainEarthAsterisk_8: d(Tx.Terrain.Earth.Asterisk, { x: 408, y: 216, scaleX: -0.7, scaleY: 0.7, rotation: 0, originX: 0.5, originY: 0.5, groupName: "ThoughtBubbleGroup", tint: 0x001c28 }, "TerrainDecals"),
     };
   },
+  MenuTitleScreen: () => {
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x002c38 });
+    return {
+      Block: e(r["Block"], { x: 8, y: 160, width: 512, height: 136, values: { name: "", depth: 0, visible: true }, tint: 0x002c38 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 48, y: 336, width: 64, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x001c28 }, "TerrainEntities"),
+      UiTitleIgua: d(Tx.Ui.Title.Igua, { x: 120, y: 211, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      UiTitleRpg: d(Tx.Ui.Title.Rpg, { x: 279, y: 207, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      UiTitleTwo: d(Tx.Ui.Title.Two, { x: 418, y: 204, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      UiTitleDemo: d(Tx.Ui.Title.Demo, { x: 250, y: 257, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      TerrainGrassSparse3px1: d(Tx.Terrain.Grass.Sparse3px1, { x: 61, y: 161, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x001c28 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_1: d(Tx.Terrain.Grass.Sparse3px1, { x: 147, y: 162, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x001c28 }, "TerrainDecals"),
+      ContinueDoor: e(r["Door"], { x: 264, y: 112, values: { sceneName: "scnMenuTitleScreen", checkpointName: "", name: "ContinueDoor", depth: 0 } }, "Entities"),
+      NewDoor: e(r["Door"], { x: 336, y: 112, values: { sceneName: "scnMenuTitleScreen", checkpointName: "", name: "NewDoor", depth: 0 } }, "Entities"),
+      LoadDoor: e(r["Door"], { x: 408, y: 112, values: { sceneName: "scnMenuTitleScreen", checkpointName: "", name: "LoadDoor", depth: 0 } }, "Entities"),
+      TerrainGrassSparse3px1_2: d(Tx.Terrain.Grass.Sparse3px1, { x: 234, y: 161, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x001c28 }, "AboveEntitiesDecals"),
+      TerrainGrassSparse3px1_3: d(Tx.Terrain.Grass.Sparse3px1, { x: 329, y: 160, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x001c28 }, "AboveEntitiesDecals"),
+      TerrainGrassSparse3px1_4: d(Tx.Terrain.Grass.Sparse3px1, { x: 418, y: 161, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x001c28 }, "AboveEntitiesDecals"),
+      Player: e(r["Player"], { x: 128, y: 160, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    };
+  },
   NewBalltownArmorer: () => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x56721c });
     return {
@@ -7409,6 +7429,7 @@ export namespace LvlType {
   export type IndianaUniversityNurse = ReturnType<(typeof Lvl)["IndianaUniversityNurse"]>;
   export type IndianaUniversity = ReturnType<(typeof Lvl)["IndianaUniversity"]>;
   export type MenuIguanaDesigner = ReturnType<(typeof Lvl)["MenuIguanaDesigner"]>;
+  export type MenuTitleScreen = ReturnType<(typeof Lvl)["MenuTitleScreen"]>;
   export type NewBalltownArmorer = ReturnType<(typeof Lvl)["NewBalltownArmorer"]>;
   export type NewBalltownFanatic = ReturnType<(typeof Lvl)["NewBalltownFanatic"]>;
   export type NewBalltownFishmonger = ReturnType<(typeof Lvl)["NewBalltownFishmonger"]>;
