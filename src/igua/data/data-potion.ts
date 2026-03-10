@@ -141,11 +141,11 @@ export namespace DataPotion {
             // TODO attributes do not exist on MxnRpgStatus
             // Maybe they should?
             case "AttributeHealthUp":
-                const previousHealthMax = Rpg.character.status.healthMax;
+                const previousHealthMax = target.status.healthMax;
                 Rpg.character.attributes.update("health", 1);
-                const delta = Math.round(Rpg.character.status.healthMax - previousHealthMax);
-                if (delta > 0) {
-                    playerObj.heal(delta);
+                const delta = Math.round(target.status.healthMax - previousHealthMax);
+                if (delta > 0 && target.status.health < target.status.healthMax) {
+                    target.heal(delta);
                 }
                 return;
             case "AttributeIntelligenceUp":
