@@ -1546,7 +1546,7 @@ export const Lvl = {
     };
   },
   IndianaCasino: () => {
-    applyLevel({ width: 780, height: 336, backgroundTint: 0xd8a5f7 });
+    applyLevel({ width: 1184, height: 336, backgroundTint: 0xd8a5f7 });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: -56, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0xa786b9 }, "ParallaxDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: -112, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0x77677d }, "ParallaxDecals"),
@@ -1573,7 +1573,8 @@ export const Lvl = {
       TerrainDistantWaves0_3: d(Tx.Terrain.Distant.Waves0, { x: -215, y: 281, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "BackgroundDecals"),
       ShapesCircleIrregular26: d(Tx.Shapes.CircleIrregular26, { x: 584, y: 261, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x65bf21 }, "BackgroundDecals"),
       SlotMachineBetButton0: d(Tx.Casino.Slots.OkButton, { x: 583, y: 257, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd800 }, "BackgroundDecals"),
-      Block: e(r["Block"], { x: 280, y: 288, width: 504, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      SlotMachineBetButton1: d(Tx.Casino.Slots.OkButton, { x: 1031, y: 249, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd800 }, "BackgroundDecals"),
+      Block: e(r["Block"], { x: 280, y: 288, width: 912, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 208, y: 288, width: 72, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xc8a401 }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 136, y: 288, width: 72, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x927302 }, "TerrainEntities"),
       Block_3: e(r["Block"], { x: 56, y: 288, width: 80, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x5a4103 }, "TerrainEntities"),
@@ -1619,16 +1620,23 @@ export const Lvl = {
       ShapesFontsWeight3I: d(Tx.Shapes.Fonts.Weight3.I, { x: 394, y: 43, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
       ShapesFontsWeight3N: d(Tx.Shapes.Fonts.Weight3.N, { x: 424, y: 29, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
       ShapesFontsWeight3O: d(Tx.Shapes.Fonts.Weight3.O, { x: 459, y: 18, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_30: d(Tx.Terrain.Grass.Sparse3px1, { x: 829, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_31: d(Tx.Terrain.Grass.Sparse3px1, { x: 917, y: 287, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_32: d(Tx.Terrain.Grass.Sparse3px1, { x: 1005, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_33: d(Tx.Terrain.Grass.Sparse3px1, { x: 1077, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_34: d(Tx.Terrain.Grass.Sparse3px1, { x: 1165, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
       Player: e(r["Player"], { x: 160, y: 288, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromWizard: e(r["Checkpoint"], { x: 688, y: 48, flippedX: false, values: { name: "fromWizard", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       SlotMachineSecondaryDisplay0: e(r["Region"], { x: 492, y: 128, width: 57, height: 15, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -56, y: 168, height: 128, flippedX: true, values: { sceneName: "scnSinSwamp", checkpointName: "fromCasino", name: "", depth: 0 } }, "RegionEntities"),
+      SlotMachineSecondaryDisplay1: e(r["Region"], { x: 916, y: 64, width: 57, height: 15, values: { name: "SlotMachineSecondaryDisplay1", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       SlotMachineDisplay0: e(r["Marker"], { x: 456, y: 157, values: { name: "SlotMachineDisplay0", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 442, y: 141, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_1: e(r["EnvironmentSparkleMarker"], { x: 432, y: 219, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_2: e(r["EnvironmentSparkleMarker"], { x: 595, y: 234, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_3: e(r["EnvironmentSparkleMarker"], { x: 596, y: 142, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_4: e(r["EnvironmentSparkleMarker"], { x: 654, y: 175, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      SlotMachineDisplay1: e(r["Marker"], { x: 896, y: 120, values: { name: "SlotMachineDisplay1", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   IndianaDesert: () => {

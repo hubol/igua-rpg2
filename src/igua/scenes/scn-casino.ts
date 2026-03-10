@@ -18,7 +18,7 @@ symbolTxs.set(sym.seven, txs[2]);
 symbolTxs.set(sym.bar, txs[1]);
 symbolTxs.set(sym.wild, txs[3]);
 
-// TODO this should be less boilerplate!
+// TODO try to reduce boilerplate!
 
 const { rules: rules1, sym: sym1 } = DataSlotMachines.Epic;
 
@@ -39,18 +39,26 @@ export function scnCasino() {
             .zIndexed(ZIndex.Entities)
             .show();
 
-        // const slotMachineObj = objSlotMachine(
-        //     rules1,
-        //     { mask: { y: -2, height: 120 }, reel: { gap: 46 }, slot: { gap: 30 }, symbolTxs: symbolTxs1 },
-        // )
-        //     .at(lvl.SlotMachineDisplay0)
-        //     .zIndexed(ZIndex.Entities)
-        //     .show();
-
         lvl.SlotMachineSecondaryDisplay0
             .mixin(mxnSlotMachineSecondaryDisplay, slotMachineObj);
 
         lvl.SlotMachineBetButton0
+            .mixin(mxnSlotMachineBetButton, slotMachineObj);
+    }
+
+    {
+        const slotMachineObj = objSlotMachine(
+            rules1,
+            { mask: { y: -2, height: 120 }, reel: { gap: 46 }, slot: { gap: 30 }, symbolTxs: symbolTxs1 },
+        )
+            .at(lvl.SlotMachineDisplay1)
+            .zIndexed(ZIndex.Entities)
+            .show();
+
+        lvl.SlotMachineSecondaryDisplay1
+            .mixin(mxnSlotMachineSecondaryDisplay, slotMachineObj);
+
+        lvl.SlotMachineBetButton1
             .mixin(mxnSlotMachineBetButton, slotMachineObj);
     }
 }

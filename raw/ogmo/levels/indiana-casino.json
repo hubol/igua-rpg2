@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 780,
+  "width": 1184,
   "height": 336,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 99,
+      "gridCellsX": 148,
       "gridCellsY": 42,
       "entities": [
         {
@@ -77,6 +77,17 @@
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 6,
+          "_eid": "73148747",
+          "x": 896,
+          "y": 120,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "SlotMachineDisplay1", "depth": 0}
         }
       ]
     },
@@ -87,7 +98,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 99,
+      "gridCellsX": 148,
       "gridCellsY": 42,
       "entities": [
         {
@@ -114,6 +125,19 @@
           "originY": 0,
           "flippedX": true,
           "values": {"sceneName": "scnSinSwamp", "checkpointName": "fromCasino", "name": "", "depth": 0}
+        },
+        {
+          "name": "Region",
+          "id": 2,
+          "_eid": "11908607",
+          "x": 916,
+          "y": 64,
+          "width": 57,
+          "height": 15,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "SlotMachineSecondaryDisplay1", "depth": 0}
         }
       ]
     },
@@ -124,7 +148,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 99,
+      "gridCellsX": 148,
       "gridCellsY": 42,
       "decals": [],
       "folder": "../textures"
@@ -136,7 +160,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 99,
+      "gridCellsX": 148,
       "gridCellsY": 42,
       "entities": []
     },
@@ -147,7 +171,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 99,
+      "gridCellsX": 148,
       "gridCellsY": 42,
       "entities": [
         {
@@ -181,7 +205,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 99,
+      "gridCellsX": 148,
       "gridCellsY": 42,
       "entities": []
     },
@@ -192,7 +216,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 99,
+      "gridCellsX": 148,
       "gridCellsY": 42,
       "decals": [],
       "folder": "../textures"
@@ -204,7 +228,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 99,
+      "gridCellsX": 148,
       "gridCellsY": 42,
       "entities": []
     },
@@ -215,7 +239,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 99,
+      "gridCellsX": 148,
       "gridCellsY": 42,
       "decals": [
         {
@@ -685,6 +709,71 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 829,
+          "y": 287,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#ffd600",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 917,
+          "y": 287,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffd600",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1005,
+          "y": 287,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#ffd600",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1077,
+          "y": 287,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#ffd600",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1165,
+          "y": 287,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#ffd600",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -696,7 +785,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 99,
+      "gridCellsX": 148,
       "gridCellsY": 42,
       "entities": [
         {
@@ -705,8 +794,8 @@
           "_eid": "93117141",
           "x": 280,
           "y": 288,
-          "width": 504,
-          "height": 56,
+          "width": 912,
+          "height": 64,
           "originX": 0,
           "originY": 0,
           "tint": "#ffd600",
@@ -838,7 +927,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 99,
+      "gridCellsX": 148,
       "gridCellsY": 42,
       "entities": []
     },
@@ -849,7 +938,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 99,
+      "gridCellsX": 148,
       "gridCellsY": 42,
       "decals": [
         {
@@ -968,6 +1057,19 @@
           "originY": 0.5,
           "values": {"name": "SlotMachineBetButton0"},
           "groupName": null
+        },
+        {
+          "x": 1031,
+          "y": 249,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffd800",
+          "texture": "casino/slots/ok button.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "SlotMachineBetButton1"},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -979,7 +1081,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 99,
+      "gridCellsX": 148,
       "gridCellsY": 42,
       "decals": [
         {
