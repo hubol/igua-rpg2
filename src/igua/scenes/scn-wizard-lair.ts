@@ -53,7 +53,7 @@ export function scnWizardLair() {
             }, { speaker: wizardObj, camera: { end: "none" } })
                 .done;
 
-            yield sleep(1000);
+            yield sleep(500);
 
             DataPotion.usePotion("Ballon", playerObj);
 
