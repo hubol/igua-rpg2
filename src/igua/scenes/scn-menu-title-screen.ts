@@ -4,6 +4,7 @@ import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { ZIndex } from "../core/scene/z-index";
 import { scene } from "../globals";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
+import { mxnHasHead } from "../mixins/mxn-has-head";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { MxnSpeaker } from "../mixins/mxn-speaker";
 import { RpgSaveFiles } from "../rpg/rpg-save-files";
@@ -38,10 +39,13 @@ function mxnLabeled(obj: Container & MxnSpeaker, label: string) {
             obj.speaker.name = "\"" + label + "\" " + obj.speaker.name;
             const b = obj.getBounds();
 
-            objText.MediumIrregular(label)
+            const textObj = objText.MediumIrregular(label)
                 .anchored(0.5, 1)
                 .at(b.getCenter().x + 1, b.y - 1)
                 .zIndexed(ZIndex.Entities)
                 .show();
+
+            obj
+                .mixin(mxnHasHead, { obj: textObj });
         });
 }
