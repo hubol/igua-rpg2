@@ -1,16 +1,20 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { IguanaLooks } from "../iguana/looks";
 
 export namespace RpgSaveFiles {
     export function check(): check.Model {
         return {
-            lastLoadedIndex: null,
+            lastLoaded: null,
             saveFilesCount: 0,
         };
     }
 
     export namespace check {
         export interface Model {
-            lastLoadedIndex: Integer | null;
+            lastLoaded: {
+                index: Integer;
+                looks: IguanaLooks.Serializable;
+            } | null;
             saveFilesCount: Integer;
         }
     }

@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 500,
+  "width": 1520,
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 190,
       "gridCellsY": 35,
       "entities": []
     },
@@ -25,7 +25,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 190,
       "gridCellsY": 35,
       "entities": []
     },
@@ -36,7 +36,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 190,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -48,7 +48,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 190,
       "gridCellsY": 35,
       "entities": []
     },
@@ -59,7 +59,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 190,
       "gridCellsY": 35,
       "entities": [
         {
@@ -72,6 +72,50 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 1,
+          "_eid": "19953026",
+          "x": 624,
+          "y": 160,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "new", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 2,
+          "_eid": "19953026",
+          "x": 1144,
+          "y": 160,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "load", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 3,
+          "_eid": "19953026",
+          "x": 320,
+          "y": 160,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromNew", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 4,
+          "_eid": "19953026",
+          "x": 392,
+          "y": 160,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromLoad", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -82,7 +126,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 190,
       "gridCellsY": 35,
       "entities": []
     },
@@ -93,7 +137,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 190,
       "gridCellsY": 35,
       "decals": [
         {
@@ -131,6 +175,150 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
+        },
+        {
+          "x": 61,
+          "y": 161,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#001c28",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 147,
+          "y": 162,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#001c28",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 738,
+          "y": 161,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#001c28",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 833,
+          "y": 160,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#001c28",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 922,
+          "y": 161,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#001c28",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 565,
+          "y": 161,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#001c28",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 651,
+          "y": 162,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#001c28",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1250,
+          "y": 161,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#001c28",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1345,
+          "y": 160,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#001c28",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1434,
+          "y": 161,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#001c28",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1077,
+          "y": 161,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#001c28",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1163,
+          "y": 162,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#001c28",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -142,7 +330,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 190,
       "gridCellsY": 35,
       "entities": [
         {
@@ -163,7 +351,7 @@
           "y": 112,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "scnMenuTitleScreen", "checkpointName": "", "name": "NewDoor", "depth": 0}
+          "values": {"sceneName": "scnMenuTitleScreen", "checkpointName": "new", "name": "NewDoor", "depth": 0}
         },
         {
           "name": "Door",
@@ -173,7 +361,87 @@
           "y": 112,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "scnMenuTitleScreen", "checkpointName": "", "name": "LoadDoor", "depth": 0}
+          "values": {"sceneName": "scnMenuTitleScreen", "checkpointName": "load", "name": "LoadDoor", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 3,
+          "_eid": "88296692",
+          "x": 760,
+          "y": 112,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnMenuTitleScreen", "checkpointName": "", "name": "NewFile0Door", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 4,
+          "_eid": "88296692",
+          "x": 832,
+          "y": 112,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnMenuTitleScreen", "checkpointName": "", "name": "NewFile1Door", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 5,
+          "_eid": "88296692",
+          "x": 904,
+          "y": 112,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnMenuTitleScreen", "checkpointName": "", "name": "NewFile2Door", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 6,
+          "_eid": "88296692",
+          "x": 560,
+          "y": 112,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnMenuTitleScreen", "checkpointName": "fromNew", "name": "NewBackDoor", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 7,
+          "_eid": "88296692",
+          "x": 1280,
+          "y": 112,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnMenuTitleScreen", "checkpointName": "", "name": "LoadFile0Door", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 8,
+          "_eid": "88296692",
+          "x": 1352,
+          "y": 112,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnMenuTitleScreen", "checkpointName": "", "name": "LoadFile1Door", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 9,
+          "_eid": "88296692",
+          "x": 1424,
+          "y": 112,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnMenuTitleScreen", "checkpointName": "", "name": "LoadFile2Door", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 10,
+          "_eid": "88296692",
+          "x": 1080,
+          "y": 112,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnMenuTitleScreen", "checkpointName": "fromLoad", "name": "LoadBackDoor", "depth": 0}
         }
       ]
     },
@@ -184,7 +452,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 190,
       "gridCellsY": 35,
       "decals": [
         {
@@ -234,30 +502,6 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
-        },
-        {
-          "x": 61,
-          "y": 161,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#001c28",
-          "texture": "terrain/grass/sparse 3px 1.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 147,
-          "y": 162,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#001c28",
-          "texture": "terrain/grass/sparse 3px 1.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -269,7 +513,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 190,
       "gridCellsY": 35,
       "entities": [
         {
@@ -278,7 +522,7 @@
           "_eid": "93117141",
           "x": 8,
           "y": 160,
-          "width": 512,
+          "width": 1500,
           "height": 136,
           "originX": 0,
           "originY": 0,
@@ -297,6 +541,45 @@
           "originY": 0,
           "tint": "#001c28",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 2,
+          "_eid": "93117141",
+          "x": 500,
+          "y": -32,
+          "width": 500,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#001c28",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 3,
+          "_eid": "93117141",
+          "x": 492,
+          "y": 0,
+          "width": 16,
+          "height": 280,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#001c28",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 4,
+          "_eid": "93117141",
+          "x": 992,
+          "y": 0,
+          "width": 16,
+          "height": 280,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#001c28",
+          "values": {"name": "", "depth": 0, "visible": false}
         }
       ]
     },
@@ -307,7 +590,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 190,
       "gridCellsY": 35,
       "entities": []
     },
@@ -318,7 +601,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 190,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -330,7 +613,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 190,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
