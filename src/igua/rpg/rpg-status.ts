@@ -327,7 +327,7 @@ export namespace RpgStatus {
             // TODO warn when amount is not an integer
 
             const previous = model.health;
-            model.health = Math.min(model.healthMax, model.health + amount);
+            model.health = Math.min(Math.max(model.health, model.healthMax), model.health + amount);
             const diff = model.health - previous;
 
             effects.healed(model.health, diff);

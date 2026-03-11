@@ -144,7 +144,7 @@ export namespace DataPotion {
                 const previousHealthMax = target.status.healthMax;
                 Rpg.character.attributes.update("health", 1);
                 const delta = Math.round(target.status.healthMax - previousHealthMax);
-                if (delta > 0 && target.status.health < target.status.healthMax) {
+                if (delta > 0) {
                     target.heal(delta);
                 }
                 return;
