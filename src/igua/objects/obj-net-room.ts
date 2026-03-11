@@ -5,6 +5,7 @@ import { distance } from "../../lib/math/vector";
 import { container } from "../../lib/pixi/container";
 import { Null } from "../../lib/types/null";
 import { ZIndex } from "../core/scene/z-index";
+import { DramaMisc } from "../drama/drama-misc";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
@@ -21,7 +22,7 @@ export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger
     return container()
         .step(() => {
             if (scene.ticker.ticks % 2 === 0) {
-                client.update(playerObj.x, playerObj.y, playerObj.ducking, playerObj.speed);
+                client.update(playerObj.x, playerObj.y, playerObj.ducking, playerObj.facing, playerObj.speed);
             }
         })
         .step(() => {
@@ -37,7 +38,9 @@ export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger
                     const newIguanaObj = objIguanaLocomotive(iguana.looks)
                         .zIndexed(ZIndex.CharacterEntities)
                         .show();
+                    DramaMisc.arriveViaDoor(newIguanaObj);
                     newIguanaObj.auto.duckingSpeed = 0;
+                    newIguanaObj.facing = iguana.facing;
                     iguanaObjsById[iguana.id] = newIguanaObj;
                 }
                 const iguanaObj = iguanaObjsById[iguana.id];
@@ -51,6 +54,10 @@ export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger
                 }
                 iguanaObj.speed.at(iguana.speed);
                 iguanaObj.ducking = iguana.ducking;
+
+                if (iguanaObj.speed.isZero && iguanaObj.facing === -iguana.facing) {
+                    iguanaObj.facing = iguana.facing;
+                }
             }
 
             for (const iguanaIdString in iguanaObjsById) {

@@ -24,6 +24,7 @@ export namespace IguaNet {
                 x: number;
                 y: number;
                 ducking: number;
+                facing: number;
                 speed: {
                     x: number;
                     y: number;
@@ -75,6 +76,7 @@ export namespace IguaNet {
                     x: number;
                     y: number;
                     ducking: number;
+                    facing: number;
                     speed: {
                         x: number;
                         y: number;

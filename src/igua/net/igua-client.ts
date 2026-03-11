@@ -61,7 +61,7 @@ export class IguaClient {
 
     private _skippedUpdatesCount = 0;
 
-    update(x: number, y: number, ducking: Unit, speed: VectorSimple) {
+    update(x: number, y: number, ducking: Unit, facing: Unit, speed: VectorSimple) {
         if (!this._isSocketOpen) {
             return;
         }
@@ -71,6 +71,7 @@ export class IguaClient {
             x: Math.round(x),
             y: Math.round(y),
             ducking,
+            facing: Math.sign(facing) || 1,
             speed: { x: speed.x, y: speed.y },
         };
 
