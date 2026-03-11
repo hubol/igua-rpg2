@@ -3,6 +3,7 @@ import { interp } from "../../lib/game-engine/routines/interp";
 import { Integer } from "../../lib/math/number-alias-types";
 import { distance } from "../../lib/math/vector";
 import { container } from "../../lib/pixi/container";
+import { Null } from "../../lib/types/null";
 import { ZIndex } from "../core/scene/z-index";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
@@ -13,7 +14,7 @@ import { ObjIguanaLocomotive, objIguanaLocomotive } from "./obj-iguana-locomotiv
 import { playerObj } from "./obj-player";
 
 export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger) {
-    let lastTime = -1;
+    let lastTime = Null<Integer>();
     const iguanaObjsById: Record<Integer, ObjIguanaLocomotive> = {};
     const iguanaIdsInRoom = new Set<Integer>();
 
