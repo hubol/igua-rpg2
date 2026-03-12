@@ -7,7 +7,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { Null } from "../../lib/types/null";
 import { ZIndex } from "../core/scene/z-index";
 import { ask } from "../drama/show";
-import { scene } from "../globals";
+import { scene, sceneStack } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
@@ -20,6 +20,7 @@ import { StepOrder } from "../objects/step-order";
 import { Rpg, setRpgProgressData } from "../rpg/rpg";
 import { getInitialRpgProgress } from "../rpg/rpg-progress";
 import { RpgSaveFiles } from "../rpg/rpg-save-files";
+import { scnIguanaDesigner } from "./scn-iguana-designer";
 
 export function scnMenuTitleScreen() {
     const { saveFiles, lastLoadedSaveFile, errors } = validateLooks(RpgSaveFiles.check());
@@ -78,10 +79,17 @@ export function scnMenuTitleScreen() {
                     obj.objDoor.unlock();
                 }
             };
+
+            obj.objDoor.changeScene = () => {
+                RpgSaveFiles.Current.open(i);
+                sceneStack.replace(scnIguanaDesigner, { useGameplay: false });
+            };
         });
 
     [lvl.LoadFile0Door, lvl.LoadFile1Door, lvl.LoadFile2Door]
-        .forEach((obj, i) => obj.mixin(mxnLabeled, "File " + (i + 1)).objDoor.locked = !Boolean(saveFiles[i]));
+        .forEach((obj, i) => {
+            obj.mixin(mxnLabeled, "File " + (i + 1)).objDoor.locked = !Boolean(saveFiles[i]);
+        });
 
     [
         [lvl.NewFile0Door, lvl.LoadFile0Door],

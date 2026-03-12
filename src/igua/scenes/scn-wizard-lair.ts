@@ -7,8 +7,10 @@ import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { playerObj } from "../objects/obj-player";
+import { RpgSaveFiles } from "../rpg/rpg-save-files";
 
 export function scnWizardLair() {
+    RpgSaveFiles.Current.save();
     scene.camera.mode = "controlled";
     const lvl = Lvl.WizardLair();
 

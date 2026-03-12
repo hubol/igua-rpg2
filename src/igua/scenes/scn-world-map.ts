@@ -11,10 +11,12 @@ import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { playerObj } from "../objects/obj-player";
 import { OgmoFactory } from "../ogmo/factory";
 import { RpgAttack } from "../rpg/rpg-attack";
+import { RpgSaveFiles } from "../rpg/rpg-save-files";
 
 const atkSpikeBall = RpgAttack.create({ physical: 30 });
 
 export function scnWorldMap() {
+    RpgSaveFiles.Current.save();
     if (Jukebox.currentTrack === null) {
         Jukebox.play(Mzk.PoopPainter);
     }

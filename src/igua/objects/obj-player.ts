@@ -18,6 +18,7 @@ import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Rpg } from "../rpg/rpg";
 import { RpgFaction } from "../rpg/rpg-faction";
+import { RpgSaveFiles } from "../rpg/rpg-save-files";
 import { RpgStatus } from "../rpg/rpg-status";
 import { objFxEnemyDefeat } from "./effects/obj-fx-enemy-defeat";
 import { objFxPlayerJumpComboDust } from "./effects/obj-fx-player-jump-combo-dust";
@@ -107,6 +108,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             Rpg.character.revive();
             layers.recreateOverlay();
             DataRespawnConfiguration.getSceneChanger(Rpg.character.attributes.respawnConfiguration).changeScene();
+            RpgSaveFiles.Current.save();
         }, { requiredPlayerIsAlive: false });
     };
 
