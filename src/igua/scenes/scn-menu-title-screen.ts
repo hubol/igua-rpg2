@@ -89,6 +89,7 @@ export function scnMenuTitleScreen() {
     [lvl.LoadFile0Door, lvl.LoadFile1Door, lvl.LoadFile2Door]
         .forEach((obj, i) => {
             obj.mixin(mxnLabeled, "File " + (i + 1)).objDoor.locked = !Boolean(saveFiles[i]);
+            obj.objDoor.changeScene = () => RpgSaveFiles.Current.load(i)?.changeScene();
         });
 
     [
