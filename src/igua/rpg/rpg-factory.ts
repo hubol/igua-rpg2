@@ -1,3 +1,4 @@
+import { StorageEntry } from "../../lib/browser/storage-entry";
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataQuestReward } from "../data/data-quest-reward";
@@ -108,6 +109,9 @@ export namespace RpgFactory {
             },
             wallet,
             weightedPedestals,
+            write(storage: StorageEntry.Local<RpgProgressData>) {
+                storage.value = data;
+            },
             __private__: {
                 data,
             },
