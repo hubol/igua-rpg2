@@ -52,7 +52,7 @@ export function scnMenuTitleScreen() {
         .mixin(mxnHudModifiers.mxnHideExperience)
         .mixin(mxnHudModifiers.mxnHideStatus);
 
-    [lvl.UiTitleIgua, lvl.UiTitleRpg, lvl.UiTitleTwo, lvl.UiTitleDemo]
+    [lvl.UiTitleIgua, lvl.UiTitleRpg, lvl.UiTitleTwo, lvl.UiTitleDemo, lvl.UiTitleNew, lvl.UiTitleLoad]
         .forEach(obj => obj.mixin(mxnBoilPivot));
 
     [lvl.NewBackDoor, lvl.LoadBackDoor]
@@ -71,8 +71,8 @@ export function scnMenuTitleScreen() {
 
     [lvl.NewFile0Door, lvl.NewFile1Door, lvl.NewFile2Door]
         .forEach((obj, i) => {
-            obj.mixin(mxnLabeled, "File " + (i + 1));
             obj.objDoor.locked = Boolean(saveFiles[i]);
+            obj.mixin(mxnLabeled, (obj.objDoor.locked ? "Overwrite\n" : "") + "File " + (i + 1));
             obj.objDoor.lockedCutscene = function* () {
                 if (yield* ask(`File ${i + 1} will be overridden. Continue?`)) {
                     obj.objDoor.unlock();
@@ -166,11 +166,11 @@ function validateLooks(check: RpgSaveFiles.check.Model): ValidateLooksResult {
 function mxnLabeled(obj: Container & MxnSpeaker, label: string) {
     return obj
         .coro(function* () {
-            obj.speaker.name = "\"" + label + "\" " + obj.speaker.name;
+            obj.speaker.name = "\"" + label.replaceAll("\n", " ") + "\" " + obj.speaker.name;
             const b = obj.getBounds();
             const offset = vnew(b.getCenter().x + 1, b.y - 1).add(obj, -1);
 
-            const textObj = objText.MediumIrregular(label)
+            const textObj = objText.MediumIrregular(label, { align: "center" })
                 .anchored(0.5, 1)
                 .zIndexed(ZIndex.Entities)
                 .step(self => self.at(obj).add(offset))

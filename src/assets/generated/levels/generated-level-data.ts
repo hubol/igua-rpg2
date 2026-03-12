@@ -2255,6 +2255,8 @@ export const Lvl = {
       UiTitleRpg: d(Tx.Ui.Title.Rpg, { x: 279, y: 207, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       UiTitleTwo: d(Tx.Ui.Title.Two, { x: 418, y: 204, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       UiTitleDemo: d(Tx.Ui.Title.Demo, { x: 250, y: 257, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      UiTitleNew: d(Tx.Ui.Title.New, { x: 750, y: 220, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      UiTitleLoad: d(Tx.Ui.Title.Load, { x: 1250, y: 220, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       ContinueDoor: e(r["Door"], { x: 264, y: 112, values: { sceneName: "scnMenuTitleScreen", checkpointName: "", name: "ContinueDoor", depth: 0 } }, "Entities"),
       NewDoor: e(r["Door"], { x: 336, y: 112, values: { sceneName: "scnMenuTitleScreen", checkpointName: "new", name: "NewDoor", depth: 0 } }, "Entities"),
       LoadDoor: e(r["Door"], { x: 408, y: 112, values: { sceneName: "scnMenuTitleScreen", checkpointName: "load", name: "LoadDoor", depth: 0 } }, "Entities"),
