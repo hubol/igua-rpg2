@@ -1,16 +1,20 @@
-import { Container } from "pixi.js";
+import { Container, DisplayObject } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Instances } from "../../lib/game-engine/instances";
 import { Logger } from "../../lib/game-engine/logger";
 import { vnew } from "../../lib/math/vector-type";
+import { Null } from "../../lib/types/null";
 import { ZIndex } from "../core/scene/z-index";
 import { ask } from "../drama/show";
 import { scene } from "../globals";
+import { IguanaLooks } from "../iguana/looks";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnHasHead } from "../mixins/mxn-has-head";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { MxnSpeaker } from "../mixins/mxn-speaker";
+import { ObjIguanaLocomotive, objIguanaLocomotive } from "../objects/obj-iguana-locomotive";
 import { playerObj } from "../objects/obj-player";
 import { StepOrder } from "../objects/step-order";
 import { Rpg, setRpgProgressData } from "../rpg/rpg";
@@ -23,6 +27,8 @@ export function scnMenuTitleScreen() {
     if (!["new", "load", "fromNew", "fromLoad"].includes(Rpg.character.position.checkpointName)) {
         setRpgProgressData(getInitialRpgProgress());
     }
+
+    const defaultLooks = Rpg.character.looks;
 
     const lvl = Lvl.MenuTitleScreen();
 
@@ -76,6 +82,53 @@ export function scnMenuTitleScreen() {
 
     [lvl.LoadFile0Door, lvl.LoadFile1Door, lvl.LoadFile2Door]
         .forEach((obj, i) => obj.mixin(mxnLabeled, "File " + (i + 1)).objDoor.locked = !Boolean(saveFiles[i]));
+
+    [
+        [lvl.NewFile0Door, lvl.LoadFile0Door],
+        [lvl.NewFile1Door, lvl.LoadFile1Door],
+        [lvl.NewFile2Door, lvl.LoadFile2Door],
+    ]
+        .forEach((objs, i) => objs.forEach(obj => obj.mixin(mxnSetPlayerLooks, saveFiles[i]?.looks ?? defaultLooks)));
+
+    {
+        let doppelgangerLooks = Rpg.character.looks;
+        let doppelgangerIguanaObj = Null<ObjIguanaLocomotive>();
+
+        scene.stage
+            .step(() => {
+                const setPlayerLooksObj = playerObj.collidesOne(Instances(mxnSetPlayerLooks));
+                const looks = setPlayerLooksObj?.mxnSetPlayerLooks?.looks ?? defaultLooks;
+                if (doppelgangerLooks === looks) {
+                    return;
+                }
+
+                doppelgangerLooks = looks;
+                doppelgangerIguanaObj?.destroy();
+                if (looks === defaultLooks) {
+                    doppelgangerIguanaObj = null;
+                    return;
+                }
+
+                doppelgangerIguanaObj = objIguanaLocomotive(looks).show();
+                doppelgangerLooks = looks;
+            })
+            .step(() => {
+                playerObj.visible = !doppelgangerIguanaObj;
+                if (doppelgangerIguanaObj) {
+                    doppelgangerIguanaObj.at(playerObj);
+                    doppelgangerIguanaObj.speed.at(playerObj.speed);
+                    doppelgangerIguanaObj.pedometer = playerObj.pedometer;
+                    doppelgangerIguanaObj.facing = playerObj.facing;
+                    doppelgangerIguanaObj.ducking = playerObj.ducking;
+                }
+            });
+    }
+}
+
+function mxnSetPlayerLooks(obj: DisplayObject, looks: IguanaLooks.Serializable) {
+    return obj
+        .merge({ mxnSetPlayerLooks: { looks } })
+        .track(mxnSetPlayerLooks);
 }
 
 interface ValidateLooksResult {
