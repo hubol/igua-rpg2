@@ -3,6 +3,14 @@ import { Serializer } from "../object/serializer";
 abstract class StorageEntryBase<T> {
     constructor(readonly key: string, private readonly _storage: Storage) {}
 
+    readOrThrow() {
+        const value = this.value;
+        if (!value) {
+            throw new Error("No local storage entry at " + this.key);
+        }
+        return value;
+    }
+
     get value(): T | undefined {
         const value = this._storage.getItem(this.key);
         if (value) {
