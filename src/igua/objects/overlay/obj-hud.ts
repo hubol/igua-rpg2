@@ -5,7 +5,8 @@ import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { holdf } from "../../../lib/game-engine/routines/hold";
 import { factor, interp } from "../../../lib/game-engine/routines/interp";
-import { sleepf } from "../../../lib/game-engine/routines/sleep";
+import { onPrimitiveMutate } from "../../../lib/game-engine/routines/on-primitive-mutate";
+import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 import { approachLinear } from "../../../lib/math/number";
 import { RgbInt } from "../../../lib/math/number-alias-types";
@@ -22,7 +23,9 @@ import { Rpg } from "../../rpg/rpg";
 import { RpgExperience } from "../../rpg/rpg-experience";
 import { RpgSceneIdol } from "../../rpg/rpg-player-aggregated-buffs";
 import { RpgPocket } from "../../rpg/rpg-pocket";
+import { RpgSaveFiles } from "../../rpg/rpg-save-files";
 import { objFigurePocketItem } from "../figures/obj-figure-pocket-item";
+import { objFloppyDisk } from "../obj-floppy-disk";
 import { playerObj } from "../obj-player";
 import { StepOrder } from "../step-order";
 import { objFlopCollectionIndicator } from "./obj-flop-collection-indicator";
@@ -63,6 +66,7 @@ export function objHud() {
         objInteractIndicator(),
         objExperienceIndicator(),
         objFlopCollectionIndicator().at(3, 336),
+        objSaveIndicator(),
     )
         .merge({ healthBarObj, effectiveHeight: 0 })
         .step(self => {
@@ -97,6 +101,21 @@ export function objHud() {
                 self.visible = !playerObj.destroyed;
             }
             self.effectiveHeight = self.visible ? self.y + lastVisibleObj.y + lastVisibleObj.height : 0;
+        });
+}
+
+function objSaveIndicator() {
+    return container()
+        .coro(function* (self) {
+            while (true) {
+                yield onPrimitiveMutate(() => RpgSaveFiles.attemptedSaveCounts);
+                objFloppyDisk()
+                    .pivotedUnit(1, 0)
+                    .at(490, 10)
+                    .show(self);
+                yield sleep(2000);
+                self.removeAllChildren();
+            }
         });
 }
 

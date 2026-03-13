@@ -8,6 +8,8 @@ import { Rpg, setRpgProgressData } from "./rpg";
 import { RpgProgressData } from "./rpg-progress";
 
 export namespace RpgSaveFiles {
+    export let attemptedSaveCounts = 0;
+
     const saveFileLocalStorageEntries = range(3)
         .map(i => new StorageEntry.Local<RpgProgressData>("igua-rpg2-save-" + i));
 
@@ -34,6 +36,7 @@ export namespace RpgSaveFiles {
         }
 
         export function save() {
+            attemptedSaveCounts += 1;
             if (!saveFileLocalStorageEntries[currentIndex]) {
                 Logger.logUnexpectedError(
                     "RpgSaveFiles.Current",
