@@ -8,7 +8,7 @@ import { Rpg, setRpgProgressData } from "./rpg";
 import { RpgProgressData } from "./rpg-progress";
 
 export namespace RpgSaveFiles {
-    export let attemptedSaveCounts = 0;
+    export const saveEvents = new Array<"success" | "error">();
 
     const lastOpenedIndexStorage = new StorageEntry.Local<Integer>("igua-rpg2-last-loaded-index");
 
@@ -38,9 +38,8 @@ export namespace RpgSaveFiles {
         }
 
         export function save() {
-            // TODO this might be insufficient for failed saves. Although it should be pretty uncommon to happen...
-            attemptedSaveCounts += 1;
             if (!saveFileLocalStorageEntries[currentIndex]) {
+                saveEvents.push("error");
                 Logger.logUnexpectedError(
                     "RpgSaveFiles.Current",
                     new Error("Attempting to write save file outside of range [0-2]: " + currentIndex),
@@ -48,7 +47,17 @@ export namespace RpgSaveFiles {
                 return;
             }
 
-            Rpg.write(saveFileLocalStorageEntries[currentIndex]);
+            try {
+                Rpg.write(saveFileLocalStorageEntries[currentIndex]);
+                saveEvents.push("success");
+            }
+            catch (e) {
+                Logger.logUnexpectedError(
+                    "RpgSaveFiles.Current",
+                    e as Error,
+                );
+                saveEvents.push("error");
+            }
         }
     }
 
