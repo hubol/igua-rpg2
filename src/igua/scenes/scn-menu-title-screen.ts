@@ -1,7 +1,6 @@
 import { Container, DisplayObject } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
-import { Instances } from "../../lib/game-engine/instances";
 import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { vnew } from "../../lib/math/vector-type";
@@ -14,6 +13,7 @@ import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnHasHead } from "../mixins/mxn-has-head";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
+import { CtxInteract } from "../mixins/mxn-interact";
 import { MxnSpeaker } from "../mixins/mxn-speaker";
 import { ObjIguanaLocomotive, objIguanaLocomotive } from "../objects/obj-iguana-locomotive";
 import { playerObj } from "../objects/obj-player";
@@ -111,8 +111,9 @@ export function scnMenuTitleScreen() {
 
         scene.stage
             .step(() => {
-                const setPlayerLooksObj = playerObj.collidesOne(Instances(mxnSetPlayerLooks));
-                const looks = setPlayerLooksObj?.mxnSetPlayerLooks?.looks ?? defaultLooks;
+                const looks = CtxInteract.value.highestScoreInteractObj?.is(mxnSetPlayerLooks)
+                    ? CtxInteract.value.highestScoreInteractObj.mxnSetPlayerLooks.looks
+                    : defaultLooks;
                 if (doppelgangerLooks === looks) {
                     return;
                 }
