@@ -3,6 +3,7 @@ import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Instances } from "../../lib/game-engine/instances";
 import { Logger } from "../../lib/game-engine/logger";
+import { Integer } from "../../lib/math/number-alias-types";
 import { vnew } from "../../lib/math/vector-type";
 import { Null } from "../../lib/types/null";
 import { ZIndex } from "../core/scene/z-index";
@@ -23,7 +24,7 @@ import { RpgSaveFiles } from "../rpg/rpg-save-files";
 import { scnIguanaDesigner } from "./scn-iguana-designer";
 
 export function scnMenuTitleScreen() {
-    const { saveFiles, lastLoadedSaveFile, errors } = validateLooks(RpgSaveFiles.check());
+    const { saveFiles, lastLoadedSaveFileIndex, lastLoadedSaveFile, errors } = validateLooks(RpgSaveFiles.check());
 
     if (!["new", "load", "fromNew", "fromLoad"].includes(Rpg.character.position.checkpointName)) {
         setRpgProgressData(getInitialRpgProgress());
@@ -59,9 +60,14 @@ export function scnMenuTitleScreen() {
     [lvl.NewBackDoor, lvl.LoadBackDoor]
         .forEach(obj => obj.mixin(mxnLabeled, "Back"));
 
-    lvl.ContinueDoor
-        .mixin(mxnLabeled, "Continue")
-        .objDoor.locked = lastLoadedSaveFile === null;
+    {
+        lvl.ContinueDoor
+            .mixin(mxnLabeled, "Continue")
+            .mixin(mxnSetPlayerLooks, lastLoadedSaveFile?.looks ?? defaultLooks)
+            .objDoor.locked = lastLoadedSaveFile === null;
+
+        lvl.ContinueDoor.objDoor.changeScene = () => RpgSaveFiles.Current.load(lastLoadedSaveFileIndex!)?.changeScene();
+    }
 
     lvl.NewDoor
         .mixin(mxnLabeled, "New");
@@ -141,6 +147,7 @@ function mxnSetPlayerLooks(obj: DisplayObject, looks: IguanaLooks.Serializable) 
 }
 
 interface ValidateLooksResult {
+    lastLoadedSaveFileIndex: Integer | null;
     lastLoadedSaveFile: RpgSaveFiles.check.Model["saveFiles"][number];
     saveFiles: RpgSaveFiles.check.Model["saveFiles"];
     errors: string[];
@@ -166,6 +173,7 @@ function validateLooks(check: RpgSaveFiles.check.Model): ValidateLooksResult {
     });
 
     return {
+        lastLoadedSaveFileIndex: validatedSaveFiles[check.lastLoadedIndex!] ? check.lastLoadedIndex! : null,
         lastLoadedSaveFile: validatedSaveFiles[check.lastLoadedIndex!] ?? null,
         saveFiles: validatedSaveFiles,
         errors,

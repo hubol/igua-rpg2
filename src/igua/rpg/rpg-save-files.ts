@@ -10,6 +10,8 @@ import { RpgProgressData } from "./rpg-progress";
 export namespace RpgSaveFiles {
     export let attemptedSaveCounts = 0;
 
+    const lastOpenedIndexStorage = new StorageEntry.Local<Integer>("igua-rpg2-last-loaded-index");
+
     const saveFileLocalStorageEntries = range(3)
         .map(i => new StorageEntry.Local<RpgProgressData>("igua-rpg2-save-" + i));
 
@@ -18,6 +20,7 @@ export namespace RpgSaveFiles {
 
         export function open(index: Integer) {
             currentIndex = index;
+            lastOpenedIndexStorage.value = index;
         }
 
         export function close() {
@@ -30,12 +33,12 @@ export namespace RpgSaveFiles {
             }
 
             setRpgProgressData(saveFileLocalStorageEntries[index].readOrThrow());
-            currentIndex = index;
-            // TODO record last loaded index
+            open(index);
             return SceneChanger.create(Rpg.character.position);
         }
 
         export function save() {
+            // TODO this might be insufficient for failed saves. Although it should be pretty uncommon to happen...
             attemptedSaveCounts += 1;
             if (!saveFileLocalStorageEntries[currentIndex]) {
                 Logger.logUnexpectedError(
@@ -46,16 +49,16 @@ export namespace RpgSaveFiles {
             }
 
             Rpg.write(saveFileLocalStorageEntries[currentIndex]);
-            // TODO increment some counter for UI to spy on?
         }
     }
 
     export function check(): check.Model {
+        const saveFiles = saveFileLocalStorageEntries
+            .map(entry => entry.value?.character?.looks ? { looks: entry.value.character.looks } : null);
+        const lastLoadedIndex = lastOpenedIndexStorage.value!;
         return {
-            lastLoadedIndex: null,
-            saveFiles: saveFileLocalStorageEntries.map(entry =>
-                entry.value?.character?.looks ? { looks: entry.value.character.looks } : null
-            ),
+            lastLoadedIndex: saveFiles[lastLoadedIndex] ? lastLoadedIndex : null,
+            saveFiles,
         };
     }
 
