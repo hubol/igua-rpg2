@@ -1,10 +1,12 @@
 import { Container, DisplayObject } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { vnew } from "../../lib/math/vector-type";
 import { Null } from "../../lib/types/null";
+import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { ask } from "../drama/show";
 import { layers, scene, sceneStack } from "../globals";
@@ -25,6 +27,7 @@ import { RpgSaveFiles } from "../rpg/rpg-save-files";
 import { scnIguanaDesigner } from "./scn-iguana-designer";
 
 export function scnMenuTitleScreen() {
+    Jukebox.play(Mzk.FirstSong);
     const { saveFiles, lastLoadedSaveFileIndex, lastLoadedSaveFile, errors } = validateLooks(RpgSaveFiles.check());
 
     function mxnLoadFile(obj: ObjDoor, fileIndex: Integer | null) {

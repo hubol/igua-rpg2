@@ -26,6 +26,7 @@ export const GeneratedMusicData = {
    "RochesterDetour": { ogg: require("./ogg/rochester-detour.ogg") },
    "Roundabout": { ogg: require("./ogg/roundabout.ogg") },
    "SharedBaby": { ogg: require("./ogg/shared-baby.ogg") },
+   "SodaMachine": { ogg: require("./ogg/soda-machine.ogg") },
    "SoldierBoyDemo": { ogg: require("./ogg/soldier-boy-demo.ogg") },
    "SporadicQuest": { ogg: require("./ogg/sporadic-quest.ogg") },
    "TrashDay": { ogg: require("./ogg/trash-day.ogg") },

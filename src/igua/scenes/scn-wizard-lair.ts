@@ -1,7 +1,9 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { container } from "../../lib/pixi/container";
+import { Jukebox } from "../core/igua-audio";
 import { DataPotion } from "../data/data-potion";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
@@ -10,6 +12,7 @@ import { playerObj } from "../objects/obj-player";
 import { RpgSaveFiles } from "../rpg/rpg-save-files";
 
 export function scnWizardLair() {
+    Jukebox.play(Mzk.SodaMachine);
     RpgSaveFiles.Current.save();
     scene.camera.mode = "controlled";
     const lvl = Lvl.WizardLair();
