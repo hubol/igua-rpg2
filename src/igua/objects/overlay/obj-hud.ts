@@ -5,7 +5,6 @@ import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { holdf } from "../../../lib/game-engine/routines/hold";
 import { factor, interp } from "../../../lib/game-engine/routines/interp";
-import { onPrimitiveMutate } from "../../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 import { approachLinear } from "../../../lib/math/number";
@@ -16,6 +15,7 @@ import { renderer } from "../../current-pixi-renderer";
 import { DataIdol } from "../../data/data-idol";
 import { DataPocketItem } from "../../data/data-pocket-item";
 import { Cutscene } from "../../globals";
+import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { mxnHudModifiers } from "../../mixins/mxn-hud-modifiers";
 import { CtxInteract } from "../../mixins/mxn-interact";
@@ -108,11 +108,19 @@ function objSaveIndicator() {
     return container()
         .coro(function* (self) {
             while (true) {
-                yield onPrimitiveMutate(() => RpgSaveFiles.attemptedSaveCounts);
-                objFloppyDisk()
+                yield () => RpgSaveFiles.saveEvents.length > 0;
+                const event = RpgSaveFiles.saveEvents.last;
+                RpgSaveFiles.saveEvents.length = 0;
+                const floppyDiskObj = objFloppyDisk()
                     .pivotedUnit(1, 0)
                     .at(490, 10)
                     .show(self);
+                if (event === "error") {
+                    Sprite.from(Tx.Ui.SaveFail)
+                        .mixin(mxnBoilPivot)
+                        .at(-6, -2)
+                        .show(floppyDiskObj);
+                }
                 yield sleep(2000);
                 self.removeAllChildren();
             }
