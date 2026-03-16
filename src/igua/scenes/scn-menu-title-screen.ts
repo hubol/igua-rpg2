@@ -7,7 +7,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { Null } from "../../lib/types/null";
 import { ZIndex } from "../core/scene/z-index";
 import { ask } from "../drama/show";
-import { scene, sceneStack } from "../globals";
+import { layers, scene, sceneStack } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { objIguanaPuppet } from "../iguana/obj-iguana-puppet";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
@@ -15,6 +15,7 @@ import { mxnHasHead } from "../mixins/mxn-has-head";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { CtxInteract } from "../mixins/mxn-interact";
 import { MxnSpeaker } from "../mixins/mxn-speaker";
+import { ObjDoor } from "../objects/obj-door";
 import { ObjIguanaLocomotive, objIguanaLocomotive } from "../objects/obj-iguana-locomotive";
 import { playerObj } from "../objects/obj-player";
 import { StepOrder } from "../objects/step-order";
@@ -25,6 +26,19 @@ import { scnIguanaDesigner } from "./scn-iguana-designer";
 
 export function scnMenuTitleScreen() {
     const { saveFiles, lastLoadedSaveFileIndex, lastLoadedSaveFile, errors } = validateLooks(RpgSaveFiles.check());
+
+    function mxnLoadFile(obj: ObjDoor, fileIndex: Integer | null) {
+        obj.objDoor.locked = !saveFiles[fileIndex!];
+        obj.objDoor.changeScene = () => {
+            const result = RpgSaveFiles.Current.load(fileIndex!);
+            if (!result) {
+                return;
+            }
+            layers.recreateOverlay();
+            result.changeScene();
+        };
+        return obj;
+    }
 
     if (!["new", "load", "fromNew", "fromLoad"].includes(Rpg.character.position.checkpointName)) {
         setRpgProgressData(getInitialRpgProgress());
@@ -60,14 +74,10 @@ export function scnMenuTitleScreen() {
     [lvl.NewBackDoor, lvl.LoadBackDoor]
         .forEach(obj => obj.mixin(mxnLabeled, "Back"));
 
-    {
-        lvl.ContinueDoor
-            .mixin(mxnLabeled, "Continue")
-            .mixin(mxnSetPlayerLooks, lastLoadedSaveFile?.looks ?? defaultLooks)
-            .objDoor.locked = lastLoadedSaveFile === null;
-
-        lvl.ContinueDoor.objDoor.changeScene = () => RpgSaveFiles.Current.load(lastLoadedSaveFileIndex!)?.changeScene();
-    }
+    lvl.ContinueDoor
+        .mixin(mxnLabeled, "Continue")
+        .mixin(mxnSetPlayerLooks, lastLoadedSaveFile?.looks ?? defaultLooks)
+        .mixin(mxnLoadFile, lastLoadedSaveFileIndex);
 
     lvl.NewDoor
         .mixin(mxnLabeled, "New");
@@ -94,8 +104,11 @@ export function scnMenuTitleScreen() {
 
     [lvl.LoadFile0Door, lvl.LoadFile1Door, lvl.LoadFile2Door]
         .forEach((obj, i) => {
-            obj.mixin(mxnLabeled, "File " + (i + 1)).objDoor.locked = !Boolean(saveFiles[i]);
-            obj.objDoor.changeScene = () => RpgSaveFiles.Current.load(i)?.changeScene();
+            obj
+                .mixin(mxnLabeled, "File " + (i + 1))
+                .mixin(mxnLoadFile, i);
+
+            obj.objDoor.locked = !Boolean(saveFiles[i]);
         });
 
     [
