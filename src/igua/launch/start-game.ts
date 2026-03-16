@@ -46,7 +46,7 @@ function getConfig(): GameStartConfig {
 
     if (devConfig === null) {
         return {
-            sceneName: "scnIguanaDesigner",
+            sceneName: Environment.isDev ? "scnWorldMap" : "scnMenuTitleScreen",
             player: { position: null },
             progress: null,
         };
