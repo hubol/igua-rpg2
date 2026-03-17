@@ -65,6 +65,7 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
         .dispatches<"objSlotMachine.fastSpinOpportunityEnded">()
         .dispatchesValue<"objSlotMachine.gameEnded", RpgSlotMachine.SpinResult>()
         .dispatchesValue<"objSlotMachine.showLinePrize", RpgSlotMachine.SpinResult.LinePrize>()
+        .dispatchesValue<"objSlotMachine.showGamePrize", Integer>()
         .coro(function* (self) {
             while (true) {
                 yield () => api.paidForGame;
@@ -131,9 +132,14 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
                                 self.dispatch("objSlotMachine.showLinePrize", prize);
                                 highlighterObj.controls.line = rules.lines[prize.index];
                                 yield sleep(1000);
+                                if (prize === linePrizes.last) {
+                                    break;
+                                }
                                 highlighterObj.controls.line = null;
                                 yield sleep(500);
                             }
+                            self.dispatch("objSlotMachine.showGamePrize", spinResult.totalPrize);
+                            yield sleep(1500);
                         }
                     })
                         .show(resultsObj);

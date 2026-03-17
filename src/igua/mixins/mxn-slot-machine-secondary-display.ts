@@ -37,7 +37,11 @@ export function mxnSlotMachineSecondaryDisplay(regionObj: Graphics, slotMachineO
                 })
                 .handles(
                     "objSlotMachine.showLinePrize",
-                    (_, linePrize) => textObj.text = `Line ${linePrize.index + 1} wins ${linePrize.prize}`,
+                    (_, linePrize) => textObj.text = `Line ${linePrize.index + 1} pays ${linePrize.prize}`,
+                )
+                .handles(
+                    "objSlotMachine.showGamePrize",
+                    (_, totalPrize) => textObj.text = `Game pays ${totalPrize}`,
                 );
         });
 }
