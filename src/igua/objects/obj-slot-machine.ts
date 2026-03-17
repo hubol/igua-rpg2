@@ -1,5 +1,4 @@
 import { Graphics, LINE_CAP, Matrix, Sprite, Texture } from "pixi.js";
-import { objText } from "../../assets/fonts";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -10,10 +9,6 @@ import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { DramaWallet } from "../drama/drama-wallet";
-import { show } from "../drama/show";
-import { Cutscene } from "../globals";
-import { mxnInteract } from "../mixins/mxn-interact";
-import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 
