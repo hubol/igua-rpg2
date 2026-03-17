@@ -132,11 +132,10 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
                                 self.dispatch("objSlotMachine.showLinePrize", prize);
                                 highlighterObj.controls.line = rules.lines[prize.index];
                                 yield sleep(1000);
-                                if (prize === linePrizes.last) {
-                                    break;
-                                }
                                 highlighterObj.controls.line = null;
-                                yield sleep(500);
+                                if (prize !== linePrizes.last) {
+                                    yield sleep(500);
+                                }
                             }
                             self.dispatch("objSlotMachine.showGamePrize", spinResult.totalPrize);
                             yield sleep(1500);
