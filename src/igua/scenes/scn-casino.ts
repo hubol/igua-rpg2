@@ -1,6 +1,8 @@
 import { Texture } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Tx } from "../../assets/textures";
+import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataSlotMachines } from "../data/data-slot-machines";
 import { mxnSlotMachineBetButton } from "../mixins/mxn-slot-machine-bet-button";
@@ -29,6 +31,7 @@ symbolTxs1.set(sym1.omegaHappy, txs[2]);
 symbolTxs1.set(sym1.wild, txs[3]);
 
 export function scnCasino() {
+    Jukebox.play(Mzk.ProfitMotive);
     const lvl = Lvl.IndianaCasino();
     {
         const slotMachineObj = objSlotMachine(
