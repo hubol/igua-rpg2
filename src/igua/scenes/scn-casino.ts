@@ -10,30 +10,28 @@ import { mxnSlotMachineSecondaryDisplay } from "../mixins/mxn-slot-machine-secon
 import { objSlotMachine } from "../objects/obj-slot-machine";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 
-const { rules, sym } = DataSlotMachines.BasicThreeReel;
-
 const txs = Tx.Casino.Slots.Simple.split({ count: 4 });
 
-const symbolTxs = new Map<RpgSlotMachine.Symbol, Texture>();
-symbolTxs.set(sym.cherry, txs[0]);
-symbolTxs.set(sym.seven, txs[2]);
-symbolTxs.set(sym.bar, txs[1]);
-symbolTxs.set(sym.wild, txs[3]);
-
-// TODO try to reduce boilerplate!
-
-const { rules: rules1, sym: sym1 } = DataSlotMachines.Epic;
-
-const symbolTxs1 = new Map<RpgSlotMachine.Symbol, Texture>();
-symbolTxs1.set(sym1.happy, txs[0]);
-symbolTxs1.set(sym1.uberHappy, txs[1]);
-symbolTxs1.set(sym1.omegaHappy, txs[2]);
-symbolTxs1.set(sym1.wild, txs[3]);
+function createSymbolTxs(...symbolTxs: Array<[symbol: RpgSlotMachine.Symbol, texture: Texture]>) {
+    const map = new Map<RpgSlotMachine.Symbol, Texture>();
+    for (const [symbol, texture] of symbolTxs) {
+        map.set(symbol, texture);
+    }
+    return map;
+}
 
 export function scnCasino() {
     Jukebox.play(Mzk.ProfitMotive);
     const lvl = Lvl.IndianaCasino();
     {
+        const { rules, sym } = DataSlotMachines.BasicThreeReel;
+        const symbolTxs = createSymbolTxs(
+            [sym.cherry, txs[0]],
+            [sym.seven, txs[1]],
+            [sym.bar, txs[2]],
+            [sym.wild, txs[3]],
+        );
+
         const slotMachineObj = objSlotMachine(
             rules,
             { mask: { y: -2, height: 74 }, reel: { gap: 46 }, slot: { gap: 20 }, symbolTxs },
@@ -50,9 +48,17 @@ export function scnCasino() {
     }
 
     {
+        const { rules, sym } = DataSlotMachines.Epic;
+        const symbolTxs = createSymbolTxs(
+            [sym.happy, txs[0]],
+            [sym.uberHappy, txs[1]],
+            [sym.omegaHappy, txs[2]],
+            [sym.wild, txs[3]],
+        );
+
         const slotMachineObj = objSlotMachine(
-            rules1,
-            { mask: { y: -2, height: 120 }, reel: { gap: 46 }, slot: { gap: 30 }, symbolTxs: symbolTxs1 },
+            rules,
+            { mask: { y: -2, height: 120 }, reel: { gap: 46 }, slot: { gap: 30 }, symbolTxs },
         )
             .at(lvl.SlotMachineDisplay1)
             .zIndexed(ZIndex.Entities)
