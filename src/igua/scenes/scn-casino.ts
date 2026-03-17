@@ -48,7 +48,7 @@ export function scnCasino() {
     }
 
     {
-        const { rules, sym } = DataSlotMachines.Epic;
+        const { rules, sym } = DataSlotMachines.LowVolatilityGrid;
         const symbolTxs = createSymbolTxs(
             [sym.happy, txs[0]],
             [sym.uberHappy, txs[1]],

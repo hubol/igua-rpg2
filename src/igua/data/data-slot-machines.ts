@@ -10,7 +10,7 @@ function interlace<T>(array: T[], item: T): T[] {
 }
 
 export namespace DataSlotMachines {
-    export namespace Epic {
+    export namespace LowVolatilityGrid {
         export const sym = {
             happy: {
                 identity: "fixed",
