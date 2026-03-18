@@ -2,11 +2,13 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { ForceTintFilter } from "../../lib/pixi/filters/force-tint-filter";
 import { Jukebox } from "../core/igua-audio";
+import { Rpg } from "../rpg/rpg";
 
 export function scnIndianaUniversity() {
     Jukebox.play(Mzk.DespicableMessage);
     const lvl = Lvl.IndianaUniversity();
     enrichStudentSilhouettes(lvl);
+    enrichRunningWater(lvl);
 }
 
 function enrichStudentSilhouettes(lvl: LvlType.IndianaUniversity) {
@@ -19,4 +21,13 @@ function enrichStudentSilhouettes(lvl: LvlType.IndianaUniversity) {
             .masked(windowObjs[i].step(self => self.renderable = true))
             .gravity = 0
     );
+}
+
+function enrichRunningWater(lvl: LvlType.IndianaUniversity) {
+    if (Rpg.flags.indianaUniversity.isWaterRunning) {
+        return;
+    }
+
+    lvl.SpigotDripSource.destroy();
+    lvl.SpigotPuddle.destroy();
 }

@@ -6,8 +6,11 @@ import { Rng } from "../../lib/math/rng";
 import { ForceTintFilter } from "../../lib/pixi/filters/force-tint-filter";
 import { Jukebox } from "../core/igua-audio";
 import { DramaClassroom } from "../drama/drama-classroom";
+import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { Rpg } from "../rpg/rpg";
 
 export function scnCollege0() {
     Jukebox.play(Mzk.DespicableMessage);
@@ -16,6 +19,7 @@ export function scnCollege0() {
         yield* DramaClassroom.teach("college0");
     });
     enrichDistantAngel(lvl);
+    enrichRunningWater(lvl);
 }
 
 function enrichDistantAngel(lvl: LvlType.College0) {
@@ -28,5 +32,27 @@ function enrichDistantAngel(lvl: LvlType.College0) {
         .coro(function* (self) {
             yield sleep(5000);
             yield interpvr(self).factor(factor.sine).to(lvl.DistantAngelTarget).over(7000);
+        });
+}
+
+function enrichRunningWater(lvl: LvlType.College0) {
+    lvl.SpigotRegion
+        .mixin(mxnSpeaker, { name: "Mysterious Spigot", tintPrimary: 0xCBB53F, tintSecondary: 0x9793BC })
+        .mixin(mxnCutscene, function* () {
+            const message = Rpg.flags.indianaUniversity.isWaterRunning
+                ? "You hear the sound of running water."
+                : "This is a mysterious spigot.";
+            yield* show(message);
+            if (yield* ask(message + "\nTurn it?")) {
+                Rpg.flags.indianaUniversity.isWaterRunning = !Rpg.flags.indianaUniversity.isWaterRunning;
+                yield* show(
+                    Rpg.flags.indianaUniversity.isWaterRunning
+                        ? "You hear the sound of running water."
+                        : "The sound of running water is snuffed out by your violence.",
+                );
+            }
+            else {
+                yield* show("Probably a good move. This spigot is just a little too mysterious.");
+            }
         });
 }

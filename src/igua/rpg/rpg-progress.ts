@@ -40,6 +40,9 @@ export function getInitialRpgProgress() {
             ...RpgPlayer.createState(),
         },
         flags: {
+            indianaUniversity: {
+                isWaterRunning: false,
+            },
             classrooms: {
                 approvedForTeachingBy: Null<DataNpcPersona.Id>(),
             },
