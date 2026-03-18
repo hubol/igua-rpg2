@@ -57,7 +57,7 @@ function enrichFarmer(lvl: LvlType.NewBalltownOutskirts) {
                 `But I need a ${DataKeyItem.Manifest.BagOfSeeds.name}...`,
             );
 
-            const offer = yield* DramaInventory.askWhichToOffer([{ kind: "key_item", id: "BagOfSeeds" }]);
+            const offer = yield* DramaInventory.askWhichAndRemoveOne([{ kind: "key_item", id: "BagOfSeeds" }]);
 
             if (offer) {
                 yield* show(

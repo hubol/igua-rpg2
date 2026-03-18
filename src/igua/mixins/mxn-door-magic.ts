@@ -15,7 +15,7 @@ export function mxnDoorMagic(obj: ObjDoor, uid: Integer) {
             obj.objDoor.style = "Magic";
             obj.objDoor.lockedCutscene = function* () {
                 yield* show("Sealed by magic.");
-                const offer = yield* DramaInventory.askWhichToOffer([{ kind: "key_item", id: "MagicKey" }]);
+                const offer = yield* DramaInventory.askWhichAndRemoveOne([{ kind: "key_item", id: "MagicKey" }]);
                 if (offer) {
                     Rpg.programmaticFlags.unlockedMagicDoorUids.add(uid);
                 }

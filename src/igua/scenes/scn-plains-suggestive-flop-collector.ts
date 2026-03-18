@@ -1,10 +1,12 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { sleep } from "../../lib/game-engine/routines/sleep";
+import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { vlerp } from "../../lib/math/vector";
 import { vnew } from "../../lib/math/vector-type";
 import { Jukebox } from "../core/igua-audio";
+import { DataKeyItem } from "../data/data-key-item";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DevKey, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -21,21 +23,35 @@ export function scnPlainsSuggestiveFlopCollector() {
         if (DevKey.isDown("KeyF")) {
             Rpg.inventory.keyItems.receive("FlopBlindBox");
         }
+        if (DevKey.isDown("KeyG")) {
+            Rpg.inventory.keyItems.receive("FlopBlindBoxTypeB");
+        }
     });
 }
+
+const flopIdRanges = {
+    FlopBlindBox: [99, 198],
+    FlopBlindBoxTypeB: [199, 298],
+} satisfies Partial<Record<DataKeyItem.Id, [start: Integer, end: Integer]>>;
 
 function enrichCollectorNpc(lvl: LvlType.PlainsSuggestiveFlopCollector) {
     const minimumToReachEnd = 6;
 
     lvl.CollectorNpc.mixin(mxnCutscene, function* () {
-        const flopsCount = yield* DramaInventory.askRemoveCount("How many flops can we unbox together?", {
-            kind: "key_item",
-            id: "FlopBlindBox",
+        const removed = yield* DramaInventory.askWhichAndRemoveCount([
+            { kind: "key_item", id: "FlopBlindBox" },
+            { kind: "key_item", id: "FlopBlindBoxTypeB" },
+        ], {
+            message: "Do you have any flops to unbox?",
+            countMessage: "Ooh! How many can we unbox?!",
         });
 
-        if (!flopsCount) {
+        if (!removed) {
             return;
         }
+
+        const flopsCount = removed.count;
+        const range = flopIdRanges[removed.item.id];
 
         const v1 = vnew();
 
@@ -45,7 +61,7 @@ function enrichCollectorNpc(lvl: LvlType.PlainsSuggestiveFlopCollector) {
                 lvl.FlopEndMarker,
                 i / Math.max(minimumToReachEnd, flopsCount),
             );
-            objCollectibleFlop(Rng.intc(99, 198)).at(position).show();
+            objCollectibleFlop(Rng.intc(...range)).at(position).show();
             yield sleep(100);
         }
 

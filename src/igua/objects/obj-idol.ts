@@ -59,7 +59,7 @@ export function objIdol({ uid }: OgmoEntities.Idol) {
     })
         .collisionShape(CollisionShape.DisplayObjects, [collisionShapeObj])
         .mixin(mxnCutscene, function* () {
-            const offer = yield* DramaInventory.askWhichToOffer(keyItems);
+            const offer = yield* DramaInventory.askWhichAndRemoveOne(keyItems);
             if (offer) {
                 const dataIdol = Object.values(DataIdol.Manifest).find(idol => idol.keyItemId === offer.id);
                 idol.upload(dataIdol?.id!);

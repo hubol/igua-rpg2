@@ -112,15 +112,8 @@ function* emptyPocket() {
     return result;
 }
 
-function* askWhichToOffer<TItem extends RpgInventory.RemovableItem>(items: TItem[]) {
-    const item = yield* DramaItem.choose({
-        message: "Which to offer?",
-        noneMessage: "Nothing, sorry",
-        options: items.filter(item => Rpg.inventory.count(item) >= 1).map(item => ({
-            item,
-            message: DataItem.getName(item) + "\n" + DataItem.getDescription(item),
-        })),
-    });
+function* askWhichAndRemoveOne<TItem extends RpgInventory.RemovableItem>(items: TItem[]) {
+    const item = yield* askWhich<TItem>("Which to offer?", items);
 
     if (item === null) {
         return null;
@@ -129,6 +122,20 @@ function* askWhichToOffer<TItem extends RpgInventory.RemovableItem>(items: TItem
     yield* removeCountFromPlayer(item, 1);
 
     return item;
+}
+
+function* askWhich<TItem extends RpgInventory.RemovableItem>(message: string, items: TItem[]) {
+    return yield* DramaItem.choose({
+        message,
+        noneMessage: "Nothing, sorry",
+        options: items
+            .map(item => ({ item, count: Rpg.inventory.count(item) }))
+            .filter(({ count }) => count >= 1)
+            .map(({ item }) => ({
+                item,
+                message: DataItem.getName(item) + "\n" + DataItem.getDescription(item),
+            })),
+    });
 }
 
 function* receiveItems(items: RpgInventory.Item[]) {
@@ -147,9 +154,31 @@ function* receiveItems(items: RpgInventory.Item[]) {
     yield () => !lastObj || lastObj.destroyed;
 }
 
+interface AskWhichAndRemoveCountOptions extends AskUseCountOptions {
+    message?: string;
+    countMessage?: string;
+}
+
+function* askWhichAndRemoveCount<TItem extends RpgInventory.RemovableItem>(
+    items: TItem[],
+    options: AskWhichAndRemoveCountOptions = {},
+) {
+    const item = yield* askWhich(options.message ?? "Which to offer?", items);
+    if (!item) {
+        return null;
+    }
+    const count = yield* askRemoveCount(options.countMessage ?? "How many?", item, options);
+    if (!count) {
+        return null;
+    }
+
+    return { item, count };
+}
+
 export const DramaInventory = {
     askRemoveCount,
-    askWhichToOffer,
+    askWhichAndRemoveOne,
+    askWhichAndRemoveCount,
     receiveItems,
     removeCount: removeCountFromPlayer,
     pocket: {

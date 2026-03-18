@@ -42,9 +42,14 @@ export namespace DataKeyItem {
                 texture: Tx.Collectibles.Key.SeedPurple,
             },
             FlopBlindBox: {
-                name: "Blind Box (Flop)",
+                name: "Blind Box (Flop Type A)",
                 description: "Only a professional collector should open this.",
                 texture: Tx.Collectibles.Key.FlopBlindBox,
+            },
+            FlopBlindBoxTypeB: {
+                name: "Blind Box (Flop Type B)",
+                description: "Only a professional collector should open this.",
+                texture: Tx.Collectibles.Key.FlopBlindBoxB,
             },
             EquipmentGlue: {
                 name: "Shoe Glue",

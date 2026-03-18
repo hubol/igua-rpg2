@@ -29,6 +29,7 @@ import { DramaLib } from "./drama-lib";
 interface Option<TItem extends RpgInventory.Item> {
     item: TItem;
     message: string;
+    // TODO maybe accept an additional messageObj or something?
 }
 
 interface ChooseArgs<TItem extends RpgInventory.Item> {
