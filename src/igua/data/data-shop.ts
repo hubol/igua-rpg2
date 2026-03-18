@@ -200,6 +200,11 @@ export namespace DataShop {
                         initialQuantity: 1,
                         price: { currency: "casino_pity", deltaSold: 0, initial: 999 },
                     },
+                    {
+                        product: { kind: "key_item", id: "MagicKey" },
+                        initialQuantity: 1,
+                        price: { currency: "casino_pity", deltaSold: 0, initial: 999 },
+                    },
                 ],
             },
             __Fallback__: { stocks: [] },
