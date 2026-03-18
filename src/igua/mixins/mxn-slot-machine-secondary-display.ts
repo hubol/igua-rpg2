@@ -1,6 +1,7 @@
 import { Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { interpvr } from "../../lib/game-engine/routines/interp";
+import { ZIndex } from "../core/scene/z-index";
 import { ObjSlotMachine } from "../objects/obj-slot-machine";
 import { mxnBoilSeed } from "./mxn-boil-seed";
 
@@ -26,6 +27,7 @@ export function mxnSlotMachineSecondaryDisplay(regionObj: Graphics, slotMachineO
                         }
                     }
                 })
+                .zIndexed(ZIndex.Entities)
                 .show();
 
             slotMachineObj

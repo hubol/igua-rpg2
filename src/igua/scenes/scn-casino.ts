@@ -10,7 +10,10 @@ import { mxnSlotMachineSecondaryDisplay } from "../mixins/mxn-slot-machine-secon
 import { objSlotMachine } from "../objects/obj-slot-machine";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 
-const txs = Tx.Casino.Slots.Simple.split({ count: 4 });
+const slotTxs = {
+    simple: Tx.Casino.Slots.Simple.split({ count: 4 }),
+    happiness: Tx.Casino.Slots.Happiness.split({ count: 4 }),
+};
 
 function createSymbolTxs(...symbolTxs: Array<[symbol: RpgSlotMachine.Symbol, texture: Texture]>) {
     const map = new Map<RpgSlotMachine.Symbol, Texture>();
@@ -26,10 +29,10 @@ export function scnCasino() {
     {
         const { rules, sym } = DataSlotMachines.BasicThreeReel;
         const symbolTxs = createSymbolTxs(
-            [sym.cherry, txs[0]],
-            [sym.seven, txs[1]],
-            [sym.bar, txs[2]],
-            [sym.wild, txs[3]],
+            [sym.cherry, slotTxs.simple[0]],
+            [sym.seven, slotTxs.simple[1]],
+            [sym.bar, slotTxs.simple[2]],
+            [sym.wild, slotTxs.simple[3]],
         );
 
         const slotMachineObj = objSlotMachine(
@@ -50,15 +53,15 @@ export function scnCasino() {
     {
         const { rules, sym } = DataSlotMachines.LowVolatilityGrid;
         const symbolTxs = createSymbolTxs(
-            [sym.happy, txs[0]],
-            [sym.uberHappy, txs[1]],
-            [sym.omegaHappy, txs[2]],
-            [sym.wild, txs[3]],
+            [sym.happy, slotTxs.happiness[0]],
+            [sym.uberHappy, slotTxs.happiness[1]],
+            [sym.omegaHappy, slotTxs.happiness[2]],
+            [sym.wild, slotTxs.happiness[3]],
         );
 
         const slotMachineObj = objSlotMachine(
             rules,
-            { mask: { y: -2, height: 92 }, reel: { gap: 46 }, slot: { gap: 30 }, symbolTxs },
+            { mask: { y: 1, height: 98 }, reel: { gap: 46 }, slot: { gap: 33 }, symbolTxs },
         )
             .at(lvl.SlotMachineDisplay1)
             .zIndexed(ZIndex.Entities)
