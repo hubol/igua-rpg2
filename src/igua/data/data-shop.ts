@@ -103,7 +103,7 @@ export namespace DataShop {
                     {
                         initialQuantity: 4,
                         price: { currency: "valuables", deltaSold: 0, initial: 10 },
-                        product: { kind: "key_item", id: "FlopBlindBox" },
+                        product: { kind: "key_item", id: "FlopBlindBoxTypeB" },
                     },
                 ],
             },
@@ -204,6 +204,11 @@ export namespace DataShop {
                         product: { kind: "key_item", id: "MagicKey" },
                         initialQuantity: 1,
                         price: { currency: "casino_pity", deltaSold: 0, initial: 999 },
+                    },
+                    {
+                        product: { kind: "key_item", id: "FlopBlindBoxTypeB" },
+                        initialQuantity: 99,
+                        price: { currency: "casino_pity", deltaSold: 0, initial: 20 },
                     },
                 ],
             },

@@ -30,7 +30,7 @@ export namespace DataFact {
             },
             Gambling: {
                 heading: "About gambling",
-                messages: ["Gambling is a fun activity void of any risks."],
+                messages: ["Gambling is a fun activity devoid of any risks."],
             },
             "__Fallback__": {
                 heading: "About a bug",
