@@ -1646,7 +1646,7 @@ export const Lvl = {
       TerrainGrassSparse3px1_32: d(Tx.Terrain.Grass.Sparse3px1, { x: 1005, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
       TerrainGrassSparse3px1_33: d(Tx.Terrain.Grass.Sparse3px1, { x: 1077, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
       TerrainGrassSparse3px1_34: d(Tx.Terrain.Grass.Sparse3px1, { x: 1165, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
-      PityBossNpc: e(r["IguanaNpc"], { x: 752, y: 272, flippedX: true, values: { personaName: "", name: "PityBossNpc", depth: 0 } }, "CharacterEntities"),
+      PityBossNpc: e(r["IguanaNpc"], { x: 752, y: 272, flippedX: true, values: { personaName: "PityBoss", name: "PityBossNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 160, y: 288, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromWizard: e(r["Checkpoint"], { x: 688, y: 48, flippedX: false, values: { name: "fromWizard", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       SlotMachineSecondaryDisplay0: e(r["Region"], { x: 492, y: 128, width: 57, height: 15, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),

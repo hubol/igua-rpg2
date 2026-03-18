@@ -288,7 +288,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": true,
-          "values": {"personaName": "", "name": "PityBossNpc", "depth": 0}
+          "values": {"personaName": "PityBoss", "name": "PityBossNpc", "depth": 0}
         }
       ]
     },
