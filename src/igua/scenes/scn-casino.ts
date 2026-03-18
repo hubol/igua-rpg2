@@ -6,6 +6,7 @@ import { Tx } from "../../assets/textures";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataSlotMachines } from "../data/data-slot-machines";
+import { DramaFacts } from "../drama/drama-facts";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -107,6 +108,7 @@ export function scnCasino() {
                     "What's up. I'm the pity boss. What can I do for you?",
                     "What is pity?",
                     "Trade",
+                    "What is gambling?",
                     "Nothing",
                 );
                 if (result === 0) {
@@ -118,6 +120,9 @@ export function scnCasino() {
                 }
                 else if (result === 1) {
                     yield* dramaShop("CasinoPity", { tintPrimary: 0xCC2C42, tintSecondary: 0xffffff });
+                }
+                else if (result === 2) {
+                    yield* DramaFacts.memorize("Gambling");
                 }
                 else {
                     yield* show("Okay! Let me know if you need something!");

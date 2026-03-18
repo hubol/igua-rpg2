@@ -28,6 +28,10 @@ export namespace DataFact {
                 heading: "About poison",
                 messages: ["Poison is not fatal. Also, it increases your running speed and bounciness."],
             },
+            Gambling: {
+                heading: "About gambling",
+                messages: ["Gambling is a fun activity void of any risks."],
+            },
             "__Fallback__": {
                 heading: "About a bug",
                 messages: ["If you are reading this, it is a bug with the facts mechanic."],
