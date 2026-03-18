@@ -224,7 +224,7 @@ function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
     };
 
     lvl.MechanicalIdol
-        .mixin(mxnSpeaker, { name: "Mechanical Idol", colorPrimary: 0xDCC132, colorSecondary: 0xB52417 })
+        .mixin(mxnSpeaker, { name: "Mechanical Idol", tintPrimary: 0xDCC132, tintSecondary: 0xB52417 })
         .mixin(mxnComputer)
         .mixin(mxnCutscene, function* () {
             if (!(yield* ask("Please input 5-symbol password"))) {
@@ -295,7 +295,7 @@ That's worth ${count} credit(s). Do you want to deposit them?`)
                         continue;
                     }
                     else if (result === 1) {
-                        yield* dramaShop("BalltownMechanicalIdol", { primaryTint: 0xB52417, secondaryTint: 0xDCC132 });
+                        yield* dramaShop("BalltownMechanicalIdol", { tintPrimary: 0xB52417, tintSecondary: 0xDCC132 });
                         continue;
                     }
 
@@ -518,7 +518,7 @@ function objFishmongerBomb(name: string) {
             self.play(Sfx.Impact.SpikedCanonballLand.rate(0.95, 1.06));
         })
         .mixin(mxnNudgeAppear)
-        .mixin(mxnSpeaker, { colorPrimary: 0xCE3D21, colorSecondary: 0x000000, name })
+        .mixin(mxnSpeaker, { tintPrimary: 0xCE3D21, tintSecondary: 0x000000, name })
         .track(objFishmongerBomb)
         .zIndexed(ZIndex.Entities);
 

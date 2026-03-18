@@ -72,7 +72,7 @@ function enrichHomeowner(lvl: LvlType.NewBalltownUnderneathHomeowner) {
             );
         }
         else if (result === 1) {
-            yield* dramaShop("UnderneathHomeowner", { primaryTint: 0x103418, secondaryTint: 0xA5A17E });
+            yield* dramaShop("UnderneathHomeowner", { tintPrimary: 0x103418, tintSecondary: 0xA5A17E });
         }
         else if (result === 2) {
             yield* show("Be seeing you!");

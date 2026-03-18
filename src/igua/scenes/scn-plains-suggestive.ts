@@ -36,7 +36,7 @@ function enrichDevilBoneMan(lvl: LvlType.PlainsSuggestive) {
     lvl.DevilBoneManHead.mixin(mxnBoilPivot);
 
     lvl.DevilBoneManGroup
-        .mixin(mxnSpeaker, { name: "DevilBoneMan", colorPrimary: 0x1ACC1D, colorSecondary: 0xB396CC })
+        .mixin(mxnSpeaker, { name: "DevilBoneMan", tintPrimary: 0x1ACC1D, tintSecondary: 0xB396CC })
         .mixin(mxnCutscene, function* () {
             yield* show(
                 "You must be smart.",
@@ -45,6 +45,6 @@ function enrichDevilBoneMan(lvl: LvlType.PlainsSuggestive) {
             );
 
             // TODO at least the names should match speaker...
-            yield* dramaShop("SuggestiveSecret", { primaryTint: 0x783289, secondaryTint: 0xB396CC });
+            yield* dramaShop("SuggestiveSecret", { tintPrimary: 0x783289, tintSecondary: 0xB396CC });
         });
 }

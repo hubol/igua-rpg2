@@ -70,7 +70,7 @@ export function scnVaseInhabitant() {
         .masked(vaseMaskObj);
 
     lvl.FillVaseRegion
-        .mixin(mxnSpeaker, { name: "Giant Vase", colorPrimary: 0x0000a0, colorSecondary: 0x0080f0 })
+        .mixin(mxnSpeaker, { name: "Giant Vase", tintPrimary: 0x0000a0, tintSecondary: 0x0080f0 })
         .mixin(mxnCutscene, function* () {
             if (yield* ask("A giant vase... Add moisture?")) {
                 if (Rpg.character.status.conditions.wetness.value <= 0) {

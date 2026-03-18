@@ -56,7 +56,7 @@ function enrichEnemyHearts(lvl: LvlType.GreatTower) {
     lvl.EnemyHeartLeft.mixin(mxnEnemyHeart, { enemyObj: lvl.MiffedLeft, lvl });
     lvl.EnemyHeartRight.mixin(mxnEnemyHeart, { enemyObj: lvl.MiffedRight, lvl });
     lvl.EnemyHeartLarge
-        .mixin(mxnSpeaker, { name: "Heart of Wind", colorPrimary: 0x487723, colorSecondary: 0xD0E840 })
+        .mixin(mxnSpeaker, { name: "Heart of Wind", tintPrimary: 0x487723, tintSecondary: 0xD0E840 })
         .coro(function* (self) {
             self.scaled(0.5, 0.5);
             yield holdf(() => lvl.EnemyHeartLeft.collides(lvl.EnemyHeartRight), 3);
@@ -105,7 +105,7 @@ function enrichEnemyHearts(lvl: LvlType.GreatTower) {
 
 function enrichShopkeeperNpc(lvl: LvlType.GreatTower) {
     lvl.ShopkeeperNpc.mixin(mxnCutscene, function* () {
-        yield* dramaShop("GreatTower", { primaryTint: 0x404040, secondaryTint: 0x707070 });
+        yield* dramaShop("GreatTower", { tintPrimary: 0x404040, tintSecondary: 0x707070 });
     });
 }
 

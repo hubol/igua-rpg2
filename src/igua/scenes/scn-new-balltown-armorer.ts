@@ -188,8 +188,8 @@ function enrichAquarium(lvl: LvlType.NewBalltownArmorer) {
         BLEND_MODES.MULTIPLY;
 
     lvl.AquariumWaterIntake.mixin(mxnSpeaker, {
-        colorPrimary: 0x0B4FA8,
-        colorSecondary: 0x0BC6A8,
+        tintPrimary: 0x0B4FA8,
+        tintSecondary: 0x0BC6A8,
         name: "Automated Water Intake",
     }).mixin(mxnComputer).mixin(mxnCutscene, function* () {
         if (!aquariumService.isFilled) {

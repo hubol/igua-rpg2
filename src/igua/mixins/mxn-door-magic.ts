@@ -10,8 +10,8 @@ export function mxnDoorMagic(obj: ObjDoor, uid: Integer) {
         .mixin(mxnDoorAutoUnlock, () => !Rpg.programmaticFlags.unlockedMagicDoorUids.has(uid))
         .coro(function* () {
             obj.speaker.name = "Magic Door";
-            obj.speaker.colorPrimary = 0x202470;
-            obj.speaker.colorSecondary = 0x4146A8;
+            obj.speaker.tintPrimary = 0x202470;
+            obj.speaker.tintSecondary = 0x4146A8;
             obj.objDoor.style = "Magic";
             obj.objDoor.lockedCutscene = function* () {
                 yield* show("Sealed by magic.");

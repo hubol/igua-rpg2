@@ -26,7 +26,7 @@ export function objCharacterEmoBallista() {
         Sprite.from(txLegs),
         stringObj,
     )
-        .mixin(mxnSpeaker, { name: "Emo Ballista", colorPrimary: 0x404069, colorSecondary: 0xCECEE4 })
+        .mixin(mxnSpeaker, { name: "Emo Ballista", tintPrimary: 0x404069, tintSecondary: 0xCECEE4 })
         .pivoted(47, 34)
         .coro(function* (self) {
             while (true) {

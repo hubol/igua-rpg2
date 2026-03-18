@@ -89,7 +89,7 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
     };
 
     const obj = container(openObj, maskObj0, maskObj1, maskObj2, lockedObj0, lockedObj1, lockedObj2)
-        .mixin(mxnSpeaker, { name: "Door", colorPrimary: 0x342716, colorSecondary: 0x2C251D })
+        .mixin(mxnSpeaker, { name: "Door", tintPrimary: 0x342716, tintSecondary: 0x2C251D })
         .merge({ objDoor: api })
         .mixin(mxnInteract, () => {
             if (api.locked) {

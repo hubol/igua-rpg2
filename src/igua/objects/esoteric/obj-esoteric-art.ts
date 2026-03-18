@@ -69,7 +69,7 @@ export function objEsotericArt(seed: Integer) {
     );
 
     return container(obj, mask)
-        .merge({ objEsotericArt: { seed, colorPrimary: palette[0], colorSecondary: palette.last } })
+        .merge({ objEsotericArt: { seed, tintPrimary: palette[0], tintSecondary: palette.last } })
         .masked(mask);
 }
 
@@ -175,13 +175,13 @@ const interactiveConsts = {
 };
 
 export function mxnEsotericArtInteractive(obj: ObjEsotericArt) {
-    const { colorPrimary, colorSecondary, seed } = obj.objEsotericArt;
+    const { tintPrimary, tintSecondary, seed } = obj.objEsotericArt;
 
     rng.seed = seed;
     const reaction = rng.item(interactiveConsts.reactions);
 
     return obj
-        .mixin(mxnSpeaker, { colorPrimary, colorSecondary, name: createTitle(seed) })
+        .mixin(mxnSpeaker, { tintPrimary, tintSecondary, name: createTitle(seed) })
         .mixin(mxnCutscene, function* () {
             yield* show(reaction);
         });

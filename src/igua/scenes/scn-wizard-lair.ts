@@ -23,7 +23,7 @@ export function scnWizardLair() {
     ];
 
     const wizardObj = container()
-        .mixin(mxnSpeaker, { name: "Voice of Wizard", colorPrimary: 0x130D2A, colorSecondary: 0x352863 })
+        .mixin(mxnSpeaker, { name: "Voice of Wizard", tintPrimary: 0x130D2A, tintSecondary: 0x352863 })
         .show();
 
     scene.stage

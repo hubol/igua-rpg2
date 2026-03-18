@@ -9,8 +9,8 @@ export namespace DramaLib {
     }
 
     function getColors(speaker = Speaker.current) {
-        const primary = speaker?.is(mxnSpeaker) ? speaker.speaker.colorPrimary : 0x600000;
-        const secondary = speaker?.is(mxnSpeaker) ? speaker.speaker.colorSecondary : 0x400000;
+        const primary = speaker?.is(mxnSpeaker) ? speaker.speaker.tintPrimary : 0x600000;
+        const secondary = speaker?.is(mxnSpeaker) ? speaker.speaker.tintSecondary : 0x400000;
         const textPrimary = SubjectiveColorAnalyzer.getPreferredTextColor(primary);
         const textSecondary = SubjectiveColorAnalyzer.getPreferredTextColor(secondary);
 

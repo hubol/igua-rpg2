@@ -22,7 +22,7 @@ export function objNetGift(client: IguaClient) {
     const hitboxObj = new Graphics().beginFill(0xff0000).drawRect(-16, -32, 32, 32).invisible();
     return container(hitboxObj)
         .collisionShape(CollisionShape.DisplayObjects, [hitboxObj])
-        .mixin(mxnSpeaker, { name: "Shoe Altar", colorPrimary: 0xE5BB00, colorSecondary: 0xAD3600 })
+        .mixin(mxnSpeaker, { name: "Shoe Altar", tintPrimary: 0xE5BB00, tintSecondary: 0xAD3600 })
         .coro(function* (self) {
             const figureObj = container().show(self);
 

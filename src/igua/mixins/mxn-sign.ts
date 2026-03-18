@@ -9,5 +9,5 @@ export function mxnSign(obj: DisplayObject, message: string) {
         Sfx.Interact.SignRead.play();
         return show(message);
     })
-        .mixin(mxnSpeaker, { name: "Sign", colorPrimary: 0x600000, colorSecondary: 0x400000 });
+        .mixin(mxnSpeaker, { name: "Sign", tintPrimary: 0x600000, tintSecondary: 0x400000 });
 }

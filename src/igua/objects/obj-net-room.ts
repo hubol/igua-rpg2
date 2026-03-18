@@ -73,7 +73,7 @@ export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger
             lastTime = client.room.time;
         })
         .on("destroyed", () => client.close())
-        .mixin(mxnSpeaker, { name: "Net God", colorPrimary: 0xff0000, colorSecondary: 0xffff00 })
+        .mixin(mxnSpeaker, { name: "Net God", tintPrimary: 0xff0000, tintSecondary: 0xffff00 })
         .coro(function* (self) {
             yield () => !client.isOnline;
             Cutscene.play(function* () {

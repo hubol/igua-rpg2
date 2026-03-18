@@ -7,8 +7,8 @@ import { mxnSpeakingMouth } from "./mxn-speaking-mouth";
 
 interface MxnSpeakerArgs {
     name: string;
-    colorPrimary: number;
-    colorSecondary: number;
+    tintPrimary: number;
+    tintSecondary: number;
 }
 
 export function mxnSpeaker(obj: DisplayObject, args: MxnSpeakerArgs) {

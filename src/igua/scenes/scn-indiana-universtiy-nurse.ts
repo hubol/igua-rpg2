@@ -51,7 +51,7 @@ function enrichDoctorNpc(lvl: LvlType.IndianaUniversityNurse) {
     const obj = objCharacterDoctorSprite();
 
     obj
-        .mixin(mxnSpeaker, { name: "Doctor Sprite", colorPrimary: 0x21AA0D, colorSecondary: 0xEAEA1E })
+        .mixin(mxnSpeaker, { name: "Doctor Sprite", tintPrimary: 0x21AA0D, tintSecondary: 0xEAEA1E })
         .mixin(mxnCutscene, function* () {
             const result = yield* ask(
                 "Can I help you?",
@@ -66,7 +66,7 @@ function enrichDoctorNpc(lvl: LvlType.IndianaUniversityNurse) {
                 );
             }
             else if (result === 1) {
-                yield* dramaShop("DoctorSprite", { primaryTint: 0x21AA0D, secondaryTint: 0xEAEA1E });
+                yield* dramaShop("DoctorSprite", { tintPrimary: 0x21AA0D, tintSecondary: 0xEAEA1E });
             }
             else if (result === 2) {
                 if (

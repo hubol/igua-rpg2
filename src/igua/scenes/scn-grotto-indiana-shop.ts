@@ -28,7 +28,7 @@ function enrichShopkeeper(lvl: LvlType.GrottoIndianaShop) {
                 }
                 else {
                     // TODO setting tints for shops is getting annoying!
-                    yield* dramaShop("GrottoIndiana", { primaryTint: 0x808080, secondaryTint: 0x505050 });
+                    yield* dramaShop("GrottoIndiana", { tintPrimary: 0x808080, tintSecondary: 0x505050 });
                 }
             }
             else {

@@ -58,6 +58,6 @@ function enrichGatekeeper(lvl: LvlType.PlainsSuggestiveCavern) {
 function enrichShopkeeper(lvl: LvlType.PlainsSuggestiveCavern) {
     lvl.Shopkeeper.mixin(mxnCutscene, function* () {
         // TODO extract tints from speaker?
-        yield* dramaShop("SuggestiveCavern", { primaryTint: 0x103418, secondaryTint: 0xA5A17E });
+        yield* dramaShop("SuggestiveCavern", { tintPrimary: 0x103418, tintSecondary: 0xA5A17E });
     });
 }

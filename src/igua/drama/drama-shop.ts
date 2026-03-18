@@ -34,14 +34,14 @@ import { DramaWallet } from "./drama-wallet";
 import { objDramaOwnedCount } from "./objects/obj-drama-owned-count";
 
 export interface DramaShopStyle {
-    primaryTint: RgbInt;
-    secondaryTint: RgbInt;
+    tintPrimary: RgbInt;
+    tintSecondary: RgbInt;
 }
 
 export const CtxDramaShop = new SceneLocal(
     () => ({
         state: { isInteractive: false },
-        style: { primaryTint: 0x802020, secondaryTint: 0xffffff } satisfies DramaShopStyle,
+        style: { tintPrimary: 0x802020, tintSecondary: 0xffffff } satisfies DramaShopStyle,
     }),
     "CtxDramaShop",
 );
@@ -128,8 +128,8 @@ export function* dramaShop(shopId: DataShop.Id, style: DramaShopStyle) {
             selectionIndex: 0,
             startTicking: true,
             maxHeight: renderer.height - 40,
-            scrollbarBgTint: CtxDramaShop.value.style.primaryTint,
-            scrollbarFgTint: CtxDramaShop.value.style.secondaryTint,
+            scrollbarBgTint: CtxDramaShop.value.style.tintPrimary,
+            scrollbarFgTint: CtxDramaShop.value.style.tintSecondary,
             scrollCatchUpSpeed: 10,
         },
     )
@@ -199,7 +199,7 @@ function objDramaShopStock(
     const contextualObj = container();
 
     const obj = container(
-        new Graphics().beginFill(CtxDramaShop.value.style.primaryTint).drawRect(
+        new Graphics().beginFill(CtxDramaShop.value.style.tintPrimary).drawRect(
             0,
             0,
             ItemConsts.width,
@@ -258,7 +258,7 @@ function objDramaShopStock(
 
             while (true) {
                 pen.moveTowards(next, Rng.int(16, 40));
-                self.lineStyle(Rng.int(1, 3), CtxDramaShop.value.style.secondaryTint, 1, 1);
+                self.lineStyle(Rng.int(1, 3), CtxDramaShop.value.style.tintSecondary, 1, 1);
                 self.lineTo(pen.x, pen.y);
                 if (vequals(pen, next)) {
                     if (next === topLeft) {
@@ -315,12 +315,12 @@ function objStockNameDescription(stock: RpgStock) {
     const nameText = DataItem.getName(stock.product);
     const descriptionText = DataItem.getDescription(stock.product);
 
-    const nameTextObj = objText.Large(nameText, { tint: CtxDramaShop.value.style.primaryTint });
+    const nameTextObj = objText.Large(nameText, { tint: CtxDramaShop.value.style.tintPrimary });
 
     const figureObj = DataItem.getFigureObj(stock.product).at(nameTextObj.width + 9, -15);
 
-    const ellipseObj = new Graphics().lineStyle(1, CtxDramaShop.value.style.primaryTint).beginFill(
-        CtxDramaShop.value.style.secondaryTint,
+    const ellipseObj = new Graphics().lineStyle(1, CtxDramaShop.value.style.tintPrimary).beginFill(
+        CtxDramaShop.value.style.tintSecondary,
     ).drawRoundedRect(
         -6,
         -2,
@@ -334,11 +334,11 @@ function objStockNameDescription(stock: RpgStock) {
     return container(
         nameObj,
         figureObj,
-        objText.Medium(descriptionText, { tint: CtxDramaShop.value.style.secondaryTint, maxWidth: 224 }).at(9, 18),
+        objText.Medium(descriptionText, { tint: CtxDramaShop.value.style.tintSecondary, maxWidth: 224 }).at(9, 18),
         objDramaOwnedCount({
             count: Rpg.inventory.count(stock.product),
-            fgTint: CtxDramaShop.value.style.primaryTint,
-            bgTint: CtxDramaShop.value.style.secondaryTint,
+            fgTint: CtxDramaShop.value.style.tintPrimary,
+            bgTint: CtxDramaShop.value.style.tintSecondary,
             visibleWhenZero: false,
         }).at(nameObj.width + 32, 4),
     );
@@ -377,7 +377,7 @@ function objPlayerStatus(stocks: ReadonlyArray<RpgStock>) {
         .map((obj, i) => obj.at(i, renderer.height - 28 - i * 15));
 
     const textsObj = container(
-        objText.Large("You have...", { tint: CtxDramaShop.value.style.secondaryTint }).anchored(0.5, 1).at(
+        objText.Large("You have...", { tint: CtxDramaShop.value.style.tintSecondary }).anchored(0.5, 1).at(
             12,
             statusObjs.last.y - 16,
         ),
@@ -397,7 +397,7 @@ function objPlayerStatus(stocks: ReadonlyArray<RpgStock>) {
     };
 
     return container(
-        new Graphics().beginFill(CtxDramaShop.value.style.primaryTint).drawRoundedRect(
+        new Graphics().beginFill(CtxDramaShop.value.style.tintPrimary).drawRoundedRect(
             -60,
             bounds.y,
             134,
@@ -578,12 +578,12 @@ function objDoneButton() {
     const maskObj = objRoundedRect();
 
     const obj = container(
-        objRoundedRect().tinted(CtxDramaShop.value.style.secondaryTint),
+        objRoundedRect().tinted(CtxDramaShop.value.style.tintSecondary),
         maskObj,
     ).merge({ selected: false });
 
     objText.MediumIrregular("OK! I'm all done looking at your shop.\nThank you!", {
-        tint: CtxDramaShop.value.style.primaryTint,
+        tint: CtxDramaShop.value.style.tintPrimary,
         align: "center",
     }).at(110, 14)
         .show(obj)
@@ -597,7 +597,7 @@ function objDoneButton() {
         self.head.mouth.agape = (obj.selected && scene.ticker.ticks % 24 < 12) ? 1 : 0
     );
 
-    new Graphics().lineStyle(3, CtxDramaShop.value.style.primaryTint, 1, 0).drawRoundedRect(
+    new Graphics().lineStyle(3, CtxDramaShop.value.style.tintPrimary, 1, 0).drawRoundedRect(
         ItemConsts.gutter,
         ItemConsts.gutter,
         ItemConsts.width - ItemConsts.gutter * 2,
@@ -640,7 +640,7 @@ const separatorTxs = (function () {
 })();
 
 function objProductSeparator(kind: DataShop.Product["kind"]) {
-    const filter = new MapRgbFilter(CtxDramaShop.value.style.primaryTint, CtxDramaShop.value.style.secondaryTint);
+    const filter = new MapRgbFilter(CtxDramaShop.value.style.tintPrimary, CtxDramaShop.value.style.tintSecondary);
 
     return container(
         Sprite.from(separatorTxs[kind].bannerTx).filtered(filter),

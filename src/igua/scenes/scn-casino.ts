@@ -117,7 +117,7 @@ export function scnCasino() {
                     );
                 }
                 else if (result === 1) {
-                    yield* dramaShop("CasinoPity", { primaryTint: 0x808080, secondaryTint: 0x404040 });
+                    yield* dramaShop("CasinoPity", { tintPrimary: 0x808080, tintSecondary: 0x404040 });
                 }
                 else {
                     yield* show("Okay! Let me know if you need something!");

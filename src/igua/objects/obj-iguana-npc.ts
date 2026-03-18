@@ -19,8 +19,8 @@ export function objIguanaNpc(npcPersonaId: DataNpcPersona.Id) {
 
 objIguanaNpc.getSpeakerColors = function getSpeakerColors (looks: IguanaLooks.Serializable) {
     return {
-        colorPrimary: looks.head.color,
-        colorSecondary: SubjectiveColorAnalyzer.getColorWithHighestContrast(looks.head.color, [
+        tintPrimary: looks.head.color,
+        tintSecondary: SubjectiveColorAnalyzer.getColorWithHighestContrast(looks.head.color, [
             looks.body.color,
             looks.body.tail.color,
             looks.head.crest.color,

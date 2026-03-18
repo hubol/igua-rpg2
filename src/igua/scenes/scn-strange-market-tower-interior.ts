@@ -19,7 +19,7 @@ export function scnStrangeMarketTowerInterior() {
 
 function enrichMisterMonument(lvl: LvlType.StrangeMarketTowerInterior) {
     lvl.MisterMonument
-        .mixin(mxnSpeaker, { name: "Holy Monument", colorPrimary: 0xB5B5B5, colorSecondary: 0x878787 })
+        .mixin(mxnSpeaker, { name: "Holy Monument", tintPrimary: 0xB5B5B5, tintSecondary: 0x878787 })
         .mixin(mxnCutscene, function* () {
             yield* show("Monument to a noble sprite.");
             if (!(yield* ask("Worship?"))) {

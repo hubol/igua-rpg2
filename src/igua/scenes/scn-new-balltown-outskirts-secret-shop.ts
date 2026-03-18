@@ -9,6 +9,6 @@ export function scnNewBalltownOutskirtsSecretShop() {
     const lvl = Lvl.NewBalltownOutskirtsSecretShop();
 
     lvl.Shopkeeper.mixin(mxnCutscene, function* () {
-        yield* dramaShop("BalltownOutskirtsSecret", { primaryTint: 0x152F12, secondaryTint: 0xE6E8CC });
+        yield* dramaShop("BalltownOutskirtsSecret", { tintPrimary: 0x152F12, tintSecondary: 0xE6E8CC });
     });
 }

@@ -117,7 +117,7 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
     };
 
     lvl.TownUnderneathHeliumCreator
-        .mixin(mxnSpeaker, { name: "Pocket HeHe", colorPrimary: 0x08270E, colorSecondary: 0x3F1C3C })
+        .mixin(mxnSpeaker, { name: "Pocket HeHe", tintPrimary: 0x08270E, tintSecondary: 0x3F1C3C })
         .mixin(mxnComputer)
         .mixin(mxnCutscene, function* () {
             while (true) {
@@ -247,7 +247,7 @@ function enrichMagicRisingFace(lvl: LvlType.NewBalltownUnderneath) {
     let atSummit = false;
 
     groupObj
-        .mixin(mxnSpeaker, { name: "Magical Rising Face", colorPrimary: 0x103418, colorSecondary: 0x698826 })
+        .mixin(mxnSpeaker, { name: "Magical Rising Face", tintPrimary: 0x103418, tintSecondary: 0x698826 })
         .step(self => {
             atSummit = self.y <= minimumY;
 
