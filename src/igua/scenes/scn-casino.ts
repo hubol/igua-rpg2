@@ -30,8 +30,8 @@ export function scnCasino() {
         const { rules, sym } = DataSlotMachines.BasicThreeReel;
         const symbolTxs = createSymbolTxs(
             [sym.cherry, slotTxs.simple[0]],
-            [sym.seven, slotTxs.simple[1]],
-            [sym.bar, slotTxs.simple[2]],
+            [sym.bar, slotTxs.simple[1]],
+            [sym.seven, slotTxs.simple[2]],
             [sym.wild, slotTxs.simple[3]],
         );
 
