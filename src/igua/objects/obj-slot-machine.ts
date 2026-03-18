@@ -3,7 +3,7 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { cyclic } from "../../lib/math/number";
-import { Integer } from "../../lib/math/number-alias-types";
+import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
@@ -24,6 +24,7 @@ interface SlotMachineRenderConfig {
         gap: Integer;
     };
     symbolTxs: Map<RpgSlotMachine.Symbol, Texture>;
+    lineHighlightTint: RgbInt;
 }
 
 export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineRenderConfig) {
@@ -121,21 +122,23 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
                 self.dispatch("objSlotMachine.gameEnded", spinResult);
 
                 if (linePrizes.length) {
-                    objLineHighlighter(reelObjs, reelObj.localTransform).coro(function* (highlighterObj) {
-                        while (true) {
-                            for (const prize of linePrizes) {
-                                self.dispatch("objSlotMachine.showLinePrize", prize);
-                                highlighterObj.controls.line = rules.lines[prize.index];
-                                yield sleep(1000);
-                                highlighterObj.controls.line = null;
-                                if (prize !== linePrizes.last) {
-                                    yield sleep(500);
+                    objLineHighlighter(reelObjs, reelObj.localTransform)
+                        .tinted(config.lineHighlightTint)
+                        .coro(function* (highlighterObj) {
+                            while (true) {
+                                for (const prize of linePrizes) {
+                                    self.dispatch("objSlotMachine.showLinePrize", prize);
+                                    highlighterObj.controls.line = rules.lines[prize.index];
+                                    yield sleep(1000);
+                                    highlighterObj.controls.line = null;
+                                    if (prize !== linePrizes.last) {
+                                        yield sleep(500);
+                                    }
                                 }
+                                self.dispatch("objSlotMachine.showGamePrize", spinResult.totalPrize);
+                                yield sleep(1500);
                             }
-                            self.dispatch("objSlotMachine.showGamePrize", spinResult.totalPrize);
-                            yield sleep(1500);
-                        }
-                    })
+                        })
                         .show(resultsObj);
                 }
 
@@ -209,7 +212,7 @@ function objLineHighlighter(reelObjs: ObjReel[], transform: Matrix) {
                 return;
             }
 
-            gfx.lineStyle({ cap: LINE_CAP.ROUND, color: 0xff0000, width: 6 });
+            gfx.lineStyle({ cap: LINE_CAP.ROUND, color: 0xffffff, width: 6 });
 
             const slotPositions = line.map((yIndex, xIndex) => {
                 const reelObj = reelObjs[xIndex];

@@ -37,7 +37,13 @@ export function scnCasino() {
 
         const slotMachineObj = objSlotMachine(
             rules,
-            { mask: { y: -2, height: 74 }, reel: { gap: 46 }, slot: { gap: 20 }, symbolTxs },
+            {
+                mask: { y: -2, height: 74 },
+                reel: { gap: 46 },
+                slot: { gap: 20 },
+                symbolTxs,
+                lineHighlightTint: 0xFF5200,
+            },
         )
             .at(lvl.SlotMachineDisplay0)
             .zIndexed(ZIndex.Entities)
@@ -61,7 +67,13 @@ export function scnCasino() {
 
         const slotMachineObj = objSlotMachine(
             rules,
-            { mask: { y: 1, height: 98 }, reel: { gap: 46 }, slot: { gap: 33 }, symbolTxs },
+            {
+                mask: { y: 1, height: 98 },
+                reel: { gap: 46 },
+                slot: { gap: 33 },
+                symbolTxs,
+                lineHighlightTint: 0xFF5E42,
+            },
         )
             .at(lvl.SlotMachineDisplay1)
             .zIndexed(ZIndex.Entities)
