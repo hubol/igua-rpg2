@@ -3,29 +3,30 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { RpgEconomy } from "./rpg-economy";
 import { RpgExperience } from "./rpg-experience";
 
+const currencyIdToStateKey: Record<RpgEconomy.Currency.NonExperienceId, keyof RpgPlayerWallet.State> = {
+    casino_pity: "casinoPity",
+    mechanical_idol_credits: "mechanicalIdolCredits",
+    valuables: "valuables",
+};
+
 export class RpgPlayerWallet {
     constructor(private readonly _state: RpgPlayerWallet.State, private readonly _experience: RpgExperience) {
     }
 
     private _update(id: RpgEconomy.Currency.Id, delta: Integer) {
-        if (id === "valuables") {
-            if (delta < 0 && (this._state.valuables + delta) < 0) {
+        if (RpgEconomy.Currency.isNonExperienceId(id)) {
+            const stateKey = currencyIdToStateKey[id];
+            if (delta < 0 && (this._state[stateKey] + delta) < 0) {
                 Logger.logContractViolationError(
                     "RpgPlayerWallet._update",
-                    new Error("Negative delta would set held valuables below 0, setting to 0"),
-                    { valuables: this._state.valuables, delta },
+                    new Error(`Negative delta would set held ${stateKey} below 0, setting to 0`),
+                    { [stateKey]: this._state[stateKey], delta },
                 );
-                this._state.valuables = 0;
+                this._state[stateKey] = 0;
             }
             else {
-                this._state.valuables += delta;
+                this._state[stateKey] += delta;
             }
-        }
-        else if (id === "mechanical_idol_credits") {
-            this._state.mechanicalIdolCredits += delta;
-        }
-        else if (id === "casino_pity") {
-            this._state.casinoPity += delta;
         }
         else {
             if (delta > 0) {
@@ -45,15 +46,8 @@ export class RpgPlayerWallet {
     }
 
     count(id: RpgEconomy.Currency.Id) {
-        // TODO there should be some kind of mapping for this...
-        if (id === "valuables") {
-            return this._state.valuables;
-        }
-        if (id === "mechanical_idol_credits") {
-            return this._state.mechanicalIdolCredits;
-        }
-        if (id === "casino_pity") {
-            return this._state.casinoPity;
+        if (RpgEconomy.Currency.isNonExperienceId(id)) {
+            return this._state[currencyIdToStateKey[id]];
         }
         return this._experience[id];
     }
