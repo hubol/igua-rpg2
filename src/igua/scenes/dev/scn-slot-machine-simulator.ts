@@ -6,7 +6,7 @@ import { RpgSlotMachine } from "../../rpg/rpg-slot-machine";
 
 export function scnSlotMachineSimulator() {
     scene.style.backgroundTint = 0x1c1336;
-    objSlotMachineSimulator(DataSlotMachines.LowVolatilityGrid.rules).show();
+    objSlotMachineSimulator(DataSlotMachines.BasicThreeReel.rules).show();
 }
 
 function objSlotMachineSimulator(rules: RpgSlotMachine.Rules) {

@@ -20,7 +20,7 @@ export namespace DataSlotMachines {
             uberHappy: {
                 identity: "fixed",
                 prizeCondition: "line_from_left_consecutive",
-                countsToPrize: [0, 0, 9, 20],
+                countsToPrize: [0, 0, 7, 15],
             },
             omegaHappy: {
                 identity: "fixed",
@@ -187,7 +187,7 @@ export namespace DataSlotMachines {
             cherry: {
                 identity: "fixed",
                 prizeCondition: "line_from_left_consecutive",
-                countsToPrize: [0, 0, 25],
+                countsToPrize: [0, 0, 20],
             },
             seven: {
                 identity: "fixed",
@@ -197,7 +197,7 @@ export namespace DataSlotMachines {
             wild: {
                 identity: "wild",
                 prizeCondition: "line_from_left_consecutive",
-                countsToPrize: [0, 0, 500],
+                countsToPrize: [0, 0, 400],
             },
         } satisfies Record<string, RpgSlotMachine.Symbol>;
 
