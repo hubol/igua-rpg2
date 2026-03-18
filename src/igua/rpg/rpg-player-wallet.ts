@@ -14,7 +14,18 @@ export class RpgPlayerWallet {
     }
 
     private _update(id: RpgEconomy.Currency.Id, delta: Integer) {
-        if (RpgEconomy.Currency.isNonExperienceId(id)) {
+        if (RpgExperience.isId(id)) {
+            if (delta > 0) {
+                // TODO it probably should be possible to do this for gambling though!
+                Logger.logContractViolationError("RpgPlayerWallet", new Error("The wallet may only spend experience"), {
+                    id,
+                    delta,
+                });
+                return;
+            }
+            this._experience.spend(id, Math.abs(delta));
+        }
+        else {
             const stateKey = currencyIdToStateKey[id];
             if (delta < 0 && (this._state[stateKey] + delta) < 0) {
                 Logger.logContractViolationError(
@@ -28,17 +39,6 @@ export class RpgPlayerWallet {
                 this._state[stateKey] += delta;
             }
         }
-        else {
-            if (delta > 0) {
-                // TODO it probably should be possible to do this for gambling though!
-                Logger.logContractViolationError("RpgPlayerWallet", new Error("The wallet may only spend experience"), {
-                    id,
-                    delta,
-                });
-                return;
-            }
-            this._experience.spend(id, Math.abs(delta));
-        }
     }
 
     canAfford(offer: RpgEconomy.Offer) {
@@ -46,10 +46,10 @@ export class RpgPlayerWallet {
     }
 
     count(id: RpgEconomy.Currency.Id) {
-        if (RpgEconomy.Currency.isNonExperienceId(id)) {
-            return this._state[currencyIdToStateKey[id]];
+        if (RpgExperience.isId(id)) {
+            return this._experience[id];
         }
-        return this._experience[id];
+        return this._state[currencyIdToStateKey[id]];
     }
 
     earn(id: RpgEconomy.Currency.Id, amount: Integer, reason: RpgPlayerWallet.EarnReason = "default") {

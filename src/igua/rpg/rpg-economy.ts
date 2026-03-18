@@ -3,26 +3,16 @@ import { RpgExperience } from "./rpg-experience";
 
 export namespace RpgEconomy {
     export namespace Currency {
-        const nonExperienceIds = [
+        export const Manifest = [
             "valuables",
             "mechanical_idol_credits",
             "casino_pity",
-        ] as const;
-
-        const nonExperienceIdsSet = new Set(nonExperienceIds);
-
-        export type NonExperienceId = typeof nonExperienceIds[number];
-
-        export function isNonExperienceId(id: string): id is NonExperienceId {
-            return nonExperienceIdsSet.has(id as any);
-        }
-
-        export const Manifest = [
-            ...nonExperienceIds,
             ...RpgExperience.Manifest,
         ] as const;
 
         export type Id = typeof Manifest[number];
+
+        export type NonExperienceId = Exclude<Id, RpgExperience.Id>;
     }
 
     export namespace Valuables {
