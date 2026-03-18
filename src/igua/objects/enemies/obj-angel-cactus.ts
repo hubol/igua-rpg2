@@ -11,6 +11,7 @@ import { ValuesOf } from "../../../lib/types/values-of";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
+import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
@@ -80,15 +81,23 @@ const ranks = {
     }),
 };
 
+type Feature = "jumping";
+
 const variants = {
     level0: {
+        features: new Set<Feature>(),
+        rank: ranks.level0,
+        theme: themes.common,
+    },
+    level1: {
+        features: new Set<Feature>(["jumping"]),
         rank: ranks.level0,
         theme: themes.common,
     },
 };
 
 export function objAngelCactus() {
-    const { rank, theme } = variants.level0;
+    const { rank, theme, features } = variants.level0;
 
     const hurtboxObj = new Graphics()
         .beginFill(0xff0000)
@@ -130,6 +139,12 @@ export function objAngelCactus() {
         hurtboxObj,
     )
         .pivoted(0, 10)
+        .mixin(mxnPhysics, { physicsRadius: 10, gravity: 0.2, physicsOffset: [0, -13] })
+        .handles("moved", (self, event) => {
+            if (event.hitGround && event.previousSpeed.y !== 0) {
+                self.speed.x = 0;
+            }
+        })
         .mixin(mxnDetectPlayer)
         .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank, soulAnchorObj })
         .mixin(mxnEnemyDeathBurst, { map: theme.tints.map })
@@ -156,10 +171,25 @@ export function objAngelCactus() {
                     .show(self);
                 yield sleep(500);
                 yield interp(mouthObj.controls, "agapeUnit").to(1).over(50);
-                mouthObj.controls.frowning = false;
+                let doubleJump = false;
+                const jumpHorizontalSpeed = Math.sign(self.mxnDetectPlayer.position.x - self.x) * 2;
                 vibrateObj.destroy();
+                if (features.has("jumping") && self.mxnDetectPlayer.detectionScore > 0) {
+                    self.speed.x = jumpHorizontalSpeed;
+                    self.speed.y = -2;
+                    doubleJump = Math.abs(self.mxnDetectPlayer.position.x - self.x) < 170;
+                }
+                mouthObj.controls.frowning = doubleJump;
                 self.play(Sfx.Enemy.Cactus.SpikesExpose.rate(0.9, 1.1));
                 yield interp(cactusSpikesObj.objAngelCactusSpikes, "scale").to(1).over(250);
+                if (doubleJump) {
+                    yield () => self.isOnGround;
+                    self.speed.x = jumpHorizontalSpeed;
+                    self.speed.y = -2;
+                    self.play(Sfx.Enemy.Cactus.SpikesExpose.rate(1.4, 1.6));
+                    yield () => self.speed.y === 0 && self.isOnGround;
+                    mouthObj.controls.frowning = false;
+                }
                 yield sleep(Rng.int(500, 1500));
                 self.play(Sfx.Enemy.Cactus.SpikesRetract.rate(0.9, 1.1));
                 yield interp(cactusSpikesObj.objAngelCactusSpikes, "scale").to(0).over(250);
