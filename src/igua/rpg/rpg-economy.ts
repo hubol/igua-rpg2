@@ -33,16 +33,19 @@ export namespace RpgEconomy {
     }
 
     export namespace Offer {
+        const nonExperienceNouns: Record<Currency.NonExperienceId, [singular: string, plural: string]> = {
+            casino_pity: ["pity", "pity"],
+            mechanical_idol_credits: ["credit", "credits"],
+            valuables: ["valuable", "valuables"],
+        };
+
         export function getPluralizedNoun(price: Integer, currencyId: Currency.Id) {
             if (RpgExperience.isId(currencyId)) {
                 return currencyId + " XP";
             }
 
-            if (currencyId === "valuables") {
-                return price === 1 ? "valuable" : "valuables";
-            }
-
-            return price === 1 ? "credit" : "credits";
+            const nouns = nonExperienceNouns[currencyId];
+            return price === 1 ? nouns[0] : nouns[1];
         }
 
         export function toString(price: Integer, currencyId: Currency.Id) {
