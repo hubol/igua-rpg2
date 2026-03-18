@@ -1,6 +1,8 @@
 import { DisplayObject } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Environment } from "../../lib/environment";
+import { DebugColors } from "../../lib/game-engine/debug/debug-colors";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../lib/math/number";
 import { PseudoRng } from "../../lib/math/rng";
@@ -13,6 +15,15 @@ export function scnIguanaDesigner() {
     Jukebox.play(Mzk.FirstSong);
 
     const { LightShadowIrregularSmall, ThoughtBubbleGroup } = Lvl.MenuIguanaDesigner();
+
+    if (Environment.isDev) {
+        const tint = DebugColors.getPixi()[7];
+        if (tint) {
+            ThoughtBubbleGroup.visible = false;
+            scene.style.backgroundTint = tint;
+        }
+    }
+
     ThoughtBubbleGroup.children.forEach(x => x.mixin(mxnBoilPivot));
     objUiIguanaDesignerRoot({ leftFacingPreviewPosition: LightShadowIrregularSmall }).show();
 
