@@ -3,7 +3,12 @@ import { RpgExperience } from "./rpg-experience";
 
 export namespace RpgEconomy {
     export namespace Currency {
-        export const Manifest = ["valuables", "mechanical_idol_credits", ...RpgExperience.Manifest] as const;
+        export const Manifest = [
+            "valuables",
+            "mechanical_idol_credits",
+            "casino_pity",
+            ...RpgExperience.Manifest,
+        ] as const;
         export type Id = typeof Manifest[number];
     }
 

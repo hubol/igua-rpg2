@@ -1,13 +1,18 @@
 import { Texture } from "pixi.js";
+import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Tx } from "../../assets/textures";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataSlotMachines } from "../data/data-slot-machines";
+import { dramaShop } from "../drama/drama-shop";
+import { ask, show } from "../drama/show";
+import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSlotMachineBetButton } from "../mixins/mxn-slot-machine-bet-button";
 import { mxnSlotMachineSecondaryDisplay } from "../mixins/mxn-slot-machine-secondary-display";
 import { objSlotMachine } from "../objects/obj-slot-machine";
+import { Rpg } from "../rpg/rpg";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 
 const slotTxs = {
@@ -84,5 +89,39 @@ export function scnCasino() {
 
         lvl.SlotMachineBetButton1
             .mixin(mxnSlotMachineBetButton, slotMachineObj);
+    }
+
+    {
+        objText.MediumIrregular("", { tint: 0xa00000 })
+            .anchored(0.5, 0.5)
+            .step(self => self.text = "Pity: " + Rpg.wallet.count("casino_pity"))
+            .zIndexed(ZIndex.TerrainDecals)
+            .at(lvl.PityMarker)
+            .show();
+    }
+
+    {
+        lvl.PityBossNpc
+            .mixin(mxnCutscene, function* () {
+                const result = yield* ask(
+                    "What's up. I'm the pity boss. What can I do for you?",
+                    "What is pity?",
+                    "Trade",
+                    "Nothing",
+                );
+                if (result === 0) {
+                    yield* show(
+                        "Pity is part of our rewards program at the dang casino.",
+                        "When you lose a bet here, you will receive pity equal to the value of your bet.",
+                        "Hopefully that clears things up.",
+                    );
+                }
+                else if (result === 1) {
+                    yield* dramaShop("CasinoPity", { primaryTint: 0x808080, secondaryTint: 0x404040 });
+                }
+                else {
+                    yield* show("Okay! Let me know if you need something!");
+                }
+            });
     }
 }

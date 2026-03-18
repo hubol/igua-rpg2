@@ -1604,6 +1604,7 @@ export const Lvl = {
       Block_7: e(r["Block"], { x: 48, y: -8, width: 88, height: 192, values: { name: "", depth: 0, visible: true }, tint: 0x5a4103 }, "TerrainEntities"),
       Block_8: e(r["Block"], { x: -72, y: -8, width: 128, height: 192, values: { name: "", depth: 0, visible: true }, tint: 0x251105 }, "TerrainEntities"),
       Slope: e(r["Slope"], { x: 280, y: 0, width: 256, height: 128, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_9: e(r["Block"], { x: 712, y: 272, width: 80, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
       TerrainGrassSparse3px1: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 144, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
       TerrainGrassSparse3px1_1: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 72, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
       TerrainGrassSparse3px1_2: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 0, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
@@ -1645,6 +1646,7 @@ export const Lvl = {
       TerrainGrassSparse3px1_32: d(Tx.Terrain.Grass.Sparse3px1, { x: 1005, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
       TerrainGrassSparse3px1_33: d(Tx.Terrain.Grass.Sparse3px1, { x: 1077, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
       TerrainGrassSparse3px1_34: d(Tx.Terrain.Grass.Sparse3px1, { x: 1165, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      PityBossNpc: e(r["IguanaNpc"], { x: 752, y: 272, flippedX: true, values: { personaName: "", name: "PityBossNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 160, y: 288, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromWizard: e(r["Checkpoint"], { x: 688, y: 48, flippedX: false, values: { name: "fromWizard", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       SlotMachineSecondaryDisplay0: e(r["Region"], { x: 492, y: 128, width: 57, height: 15, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
@@ -1663,6 +1665,7 @@ export const Lvl = {
       EnvironmentSparkleMarker_8: e(r["EnvironmentSparkleMarker"], { x: 954, y: 100, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_9: e(r["EnvironmentSparkleMarker"], { x: 1047, y: 73, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_10: e(r["EnvironmentSparkleMarker"], { x: 1083, y: 83, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      PityMarker: e(r["Marker"], { x: 752, y: 288, values: { name: "PityMarker", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
     };
   },
   IndianaDesert: () => {

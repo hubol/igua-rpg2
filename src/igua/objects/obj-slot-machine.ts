@@ -9,6 +9,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { DramaWallet } from "../drama/drama-wallet";
+import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 
@@ -146,6 +147,9 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
                     self.coro(function* () {
                         yield* DramaWallet.rewardValuables(totalPrize, "gambling");
                     });
+                }
+                else {
+                    Rpg.wallet.earn("casino_pity", pricePerSpin.price);
                 }
 
                 api.paidForGame = false;

@@ -188,6 +188,20 @@ export namespace DataShop {
                     },
                 ],
             },
+            CasinoPity: {
+                stocks: [
+                    {
+                        product: { kind: "equipment", id: "PoisonResistance", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "casino_pity", deltaSold: 0, initial: 999 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "WetnessCapacityUp", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "casino_pity", deltaSold: 0, initial: 999 },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );

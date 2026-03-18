@@ -24,6 +24,9 @@ export class RpgPlayerWallet {
         else if (id === "mechanical_idol_credits") {
             this._state.mechanicalIdolCredits += delta;
         }
+        else if (id === "casino_pity") {
+            this._state.casinoPity += delta;
+        }
         else {
             if (delta > 0) {
                 // TODO it probably should be possible to do this for gambling though!
@@ -42,11 +45,15 @@ export class RpgPlayerWallet {
     }
 
     count(id: RpgEconomy.Currency.Id) {
+        // TODO there should be some kind of mapping for this...
         if (id === "valuables") {
             return this._state.valuables;
         }
         if (id === "mechanical_idol_credits") {
             return this._state.mechanicalIdolCredits;
+        }
+        if (id === "casino_pity") {
+            return this._state.casinoPity;
         }
         return this._experience[id];
     }
@@ -77,6 +84,7 @@ export class RpgPlayerWallet {
         return {
             valuables: 100,
             mechanicalIdolCredits: 10,
+            casinoPity: 0,
         };
     }
 }
@@ -85,6 +93,7 @@ export namespace RpgPlayerWallet {
     export interface State {
         valuables: Integer;
         mechanicalIdolCredits: Integer;
+        casinoPity: Integer;
     }
 
     export type SpendReason = "default" | "gambling";
