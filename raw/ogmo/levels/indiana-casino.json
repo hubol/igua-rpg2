@@ -88,6 +88,66 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "SlotMachineDisplay1", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 7,
+          "_eid": "61143896",
+          "x": 890,
+          "y": 72,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 8,
+          "_eid": "61143896",
+          "x": 1008,
+          "y": 81,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 9,
+          "_eid": "61143896",
+          "x": 961,
+          "y": 57,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 10,
+          "_eid": "61143896",
+          "x": 954,
+          "y": 100,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 11,
+          "_eid": "61143896",
+          "x": 1047,
+          "y": 73,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 12,
+          "_eid": "61143896",
+          "x": 1083,
+          "y": 83,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -1301,6 +1361,18 @@
           "rotation": 0,
           "tint": "#046a5f",
           "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 526,
+          "y": 115,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "casino/slots/title simply sevens.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}

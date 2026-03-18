@@ -1593,6 +1593,7 @@ export const Lvl = {
       ShapesConfetti18x8: d(Tx.Shapes.Confetti18x8, { x: 1064, y: 225, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
       ShapesConfetti18x8_1: d(Tx.Shapes.Confetti18x8, { x: 913, y: 121, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
       ShapesConfetti18x8_2: d(Tx.Shapes.Confetti18x8, { x: 907, y: 253, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      CasinoSlotsTitleSimplySevens: d(Tx.Casino.Slots.TitleSimplySevens, { x: 526, y: 115, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 280, y: 288, width: 912, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 208, y: 288, width: 72, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xc8a401 }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 136, y: 288, width: 72, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x927302 }, "TerrainEntities"),
@@ -1656,6 +1657,12 @@ export const Lvl = {
       EnvironmentSparkleMarker_3: e(r["EnvironmentSparkleMarker"], { x: 596, y: 142, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_4: e(r["EnvironmentSparkleMarker"], { x: 654, y: 175, values: { name: "", depth: 0 } }, "MarkerEntities"),
       SlotMachineDisplay1: e(r["Marker"], { x: 892, y: 122, values: { name: "SlotMachineDisplay1", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      EnvironmentSparkleMarker_5: e(r["EnvironmentSparkleMarker"], { x: 890, y: 72, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_6: e(r["EnvironmentSparkleMarker"], { x: 1008, y: 81, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_7: e(r["EnvironmentSparkleMarker"], { x: 961, y: 57, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_8: e(r["EnvironmentSparkleMarker"], { x: 954, y: 100, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_9: e(r["EnvironmentSparkleMarker"], { x: 1047, y: 73, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_10: e(r["EnvironmentSparkleMarker"], { x: 1083, y: 83, values: { name: "", depth: 0 } }, "MarkerEntities"),
     };
   },
   IndianaDesert: () => {
