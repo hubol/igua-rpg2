@@ -440,6 +440,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromStrangeMarketGuardian", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 19,
+          "_eid": "19953026",
+          "x": 496,
+          "y": 776,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromFlopUniversity", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
         }
       ]
     },
@@ -552,6 +563,19 @@
           "originY": 33,
           "uid": 175280777909200,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "GateMap",
+          "id": 1,
+          "_eid": "53836309",
+          "x": 496,
+          "y": 728,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 270,
+          "uid": 177430696428500,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnFlopCollegeExterior", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         }
       ]
     },

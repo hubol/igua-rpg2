@@ -40,6 +40,9 @@ export function getInitialRpgProgress() {
             ...RpgPlayer.createState(),
         },
         flags: {
+            flopUniversity: {
+                isDirectorVisiting: false,
+            },
             indianaUniversity: {
                 isWaterRunning: false,
             },

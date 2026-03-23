@@ -706,18 +706,17 @@ export const Lvl = {
       GateHorizontal_1: e(r["GateHorizontal"], { x: 456, y: 712, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromErrorRecovery", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
-  FlopCollege: () => {
-    applyLevel({ width: 808, height: 320, backgroundTint: 0x0056ba, terrainTint: 0xffc700 });
+  FlopCollegeExterior: () => {
+    applyLevel({ width: 808, height: 320, backgroundTint: 0x0056ba, terrainTint: 0xfbff20 });
     return {
-      Block: e(r["Block"], { x: 112, y: 272, width: 704, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xffc700 }, "TerrainEntities"),
-      Block_1: e(r["Block"], { x: 304, y: 256, width: 512, height: 24, values: { name: "", depth: 0, visible: true }, tint: 0xffc700 }, "TerrainEntities"),
-      Block_2: e(r["Block"], { x: 544, y: 240, width: 272, height: 24, values: { name: "", depth: 0, visible: true }, tint: 0xffc700 }, "TerrainEntities"),
-      Block_3: e(r["Block"], { x: 600, y: 224, width: 216, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffc700 }, "TerrainEntities"),
-      Block_4: e(r["Block"], { x: 656, y: 208, width: 192, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffc700 }, "TerrainEntities"),
-      Block_5: e(r["Block"], { x: 712, y: 192, width: 192, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffc700 }, "TerrainEntities"),
-      Block_6: e(r["Block"], { x: 0, y: 272, width: 112, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xffc700 }, "TerrainEntities"),
-      Chalkboard: d(Tx.Furniture.Chalkboard, { x: 410, y: 205, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      WeightedPedestal: e(r["WeightedPedestal"], { x: 224, y: 272, uid: 177430527680500, values: { requiredFlopsCount: 15, name: "", depth: 0 } }, "Entities"),
+      Block: e(r["Block"], { x: 112, y: 272, width: 704, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xfbff20 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 0, y: 272, width: 112, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xfbff20 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 224, y: 256, width: 352, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xfbff20 }, "TerrainEntities"),
+      WeightedPedestal: e(r["WeightedPedestal"], { x: 328, y: 256, uid: 177430527680500, values: { requiredFlopsCount: 15, name: "", depth: 0 } }, "Entities"),
+      Sign: e(r["Sign"], { x: 376, y: 256, values: { title: "University", message: "Future site of Flop University.", name: "", depth: 0, isSpecial: false } }, "Entities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -48, y: 144, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromFlopUniversity", name: "", depth: 0 } }, "Entities"),
+      GateHorizontal_1: e(r["GateHorizontal"], { x: 768, y: 144, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromFlopUniversity", name: "", depth: 0 } }, "Entities"),
+      DirectorNpc: e(r["IguanaNpc"], { x: 264, y: 256, flippedX: true, values: { personaName: "IndianaDirector", name: "DirectorNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 112, y: 272, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     };
   },
@@ -7503,6 +7502,7 @@ export const Lvl = {
       EnemySpikeBall: d(Tx.Enemy.SpikeBall, { x: 739, y: 1009, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       EnemySpikeBall_1: d(Tx.Enemy.SpikeBall, { x: 715, y: 1033, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       StashPocket: e(r["StashPocket"], { x: 472, y: 952, uid: 175280777909200, values: { name: "", depth: 0 } }, "Entities"),
+      GateMap: e(r["GateMap"], { x: 496, y: 728, rotation: 270, uid: 177430696428500, values: { sceneName: "scnFlopCollegeExterior", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "Entities"),
       FoliageFlower18: d(Tx.Foliage.Flower18, { x: 442, y: 967, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff8400 }, "AboveEntitiesDecals"),
       FoliageFlower18_1: d(Tx.Foliage.Flower18, { x: 475, y: 973, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb200 }, "AboveEntitiesDecals"),
       FoliageFlower22: d(Tx.Foliage.Flower22, { x: 510, y: 962, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
@@ -7527,18 +7527,19 @@ export const Lvl = {
       fromIndianaDesertRight: e(r["Checkpoint"], { x: 664, y: 256, flippedX: false, values: { name: "fromIndianaDesertRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromIndianaLounge: e(r["Checkpoint"], { x: 632, y: 920, flippedX: false, values: { name: "fromIndianaLounge", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       fromStrangeMarketGuardian: e(r["Checkpoint"], { x: 504, y: 632, flippedX: true, values: { name: "fromStrangeMarketGuardian", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
-      GateMap: e(r["GateMap"], { x: 821, y: 735, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_1: e(r["GateMap"], { x: 637, y: 737, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_2: e(r["GateMap"], { x: 942, y: 844, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
+      fromFlopUniversity: e(r["Checkpoint"], { x: 496, y: 776, flippedX: false, values: { name: "fromFlopUniversity", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
+      GateMap_1: e(r["GateMap"], { x: 821, y: 735, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_2: e(r["GateMap"], { x: 637, y: 737, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_3: e(r["GateMap"], { x: 942, y: 844, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
       StrangeMarketGate: e(r["GateMap"], { x: 551, y: 531, rotation: 540, uid: 175755215936902, values: { sceneName: "scnStrangeMarket", checkpointName: "fromWorldMap", name: "StrangeMarketGate", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_3: e(r["GateMap"], { x: 520, y: 1112, rotation: 90, uid: 175860865618400, values: { sceneName: "scnColosseumMiffed", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_4: e(r["GateMap"], { x: 928, y: 480, rotation: 270, uid: 176021246543005, values: { sceneName: "scnIndianaUniversity", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_5: e(r["GateMap"], { x: 751, y: 264, rotation: 270, uid: 176068565360400, values: { sceneName: "scnGreatTower", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_4: e(r["GateMap"], { x: 520, y: 1112, rotation: 90, uid: 175860865618400, values: { sceneName: "scnColosseumMiffed", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_5: e(r["GateMap"], { x: 928, y: 480, rotation: 270, uid: 176021246543005, values: { sceneName: "scnIndianaUniversity", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_6: e(r["GateMap"], { x: 751, y: 264, rotation: 270, uid: 176068565360400, values: { sceneName: "scnGreatTower", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       SimpleSecretValuablesGate: e(r["GateMap"], { x: 840, y: 1008, rotation: 90, uid: 176310576198900, values: { sceneName: "scnSimpleSecretValuables", checkpointName: "fromWorldMap", name: "SimpleSecretValuablesGate", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_6: e(r["GateMap"], { x: 920, y: 208, rotation: 270, uid: 176569559038300, values: { sceneName: "scnSinSwamp", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_7: e(r["GateMap"], { x: 758, y: 385, rotation: 270, uid: 176975623156307, values: { sceneName: "scnGrottoIndianaShop", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_8: e(r["GateMap"], { x: 488, y: 232, rotation: 0, uid: 177152452563600, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_9: e(r["GateMap"], { x: 632, y: 880, rotation: 180, uid: 177281293625000, values: { sceneName: "scnIndianaLoungeExterior", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_7: e(r["GateMap"], { x: 920, y: 208, rotation: 270, uid: 176569559038300, values: { sceneName: "scnSinSwamp", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_8: e(r["GateMap"], { x: 758, y: 385, rotation: 270, uid: 176975623156307, values: { sceneName: "scnGrottoIndianaShop", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_9: e(r["GateMap"], { x: 488, y: 232, rotation: 0, uid: 177152452563600, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_10: e(r["GateMap"], { x: 632, y: 880, rotation: 180, uid: 177281293625000, values: { sceneName: "scnIndianaLoungeExterior", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       StrangeMarketGuardianGate: e(r["GateMap"], { x: 507, y: 590, rotation: 630, uid: 177427749219800, values: { sceneName: "scnStrangeMarketGuardian", checkpointName: "fromWorldMap", name: "StrangeMarketGuardianGate", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
     };
   },
@@ -7551,7 +7552,7 @@ export namespace LvlType {
   export type Dummy = ReturnType<(typeof Lvl)["Dummy"]>;
   export type EfficientHome = ReturnType<(typeof Lvl)["EfficientHome"]>;
   export type ErrorRecoveryRoom = ReturnType<(typeof Lvl)["ErrorRecoveryRoom"]>;
-  export type FlopCollege = ReturnType<(typeof Lvl)["FlopCollege"]>;
+  export type FlopCollegeExterior = ReturnType<(typeof Lvl)["FlopCollegeExterior"]>;
   export type GiantIguanaStatue = ReturnType<(typeof Lvl)["GiantIguanaStatue"]>;
   export type GreatTowerBalcony = ReturnType<(typeof Lvl)["GreatTowerBalcony"]>;
   export type GreatTower = ReturnType<(typeof Lvl)["GreatTower"]>;

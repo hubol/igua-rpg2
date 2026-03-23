@@ -15,6 +15,11 @@ export function scnIndianaUniversityInterior() {
 function enrichDirector(lvl: LvlType.IndianaUniversityInterior) {
     lvl.ClassroomDoor.objDoor.locked = !Rpg.flags.classrooms.approvedForTeachingBy;
 
+    if (Rpg.flags.flopUniversity.isDirectorVisiting) {
+        lvl.DirectorNpc.destroy();
+        return;
+    }
+
     lvl.DirectorNpc.mixin(mxnCutscene, function* () {
         if (!Rpg.flags.classrooms.approvedForTeachingBy) {
             yield* show(
