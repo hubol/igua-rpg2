@@ -8,6 +8,7 @@ import { objDevPlayer } from "../objects/dev/obj-dev-player";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
 import { objAngelCactus } from "../objects/enemies/obj-angel-cactus";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
+import { objAngelSnail } from "../objects/enemies/obj-angel-snail";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
 import { objStashPocket } from "../objects/interactables/obj-stash-pocket";
 import { objPuddle } from "../objects/nature/obj-puddle";
@@ -76,6 +77,7 @@ export const OgmoEntityResolvers = {
             CtxPocketItems.value.behavior,
         ).at(entity, -1),
     EnemyCactus: (entity) => objAngelCactus(entity).at(1, 3),
+    EnemySnail: () => objAngelSnail(),
     EnemySuggestive: (entity) => objAngelSuggestive(entity).at(0, -38),
     EnemyMiffed: (entity) => objAngelMiffed(entity).at(0, 1),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,
