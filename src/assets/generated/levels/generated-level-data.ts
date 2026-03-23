@@ -706,6 +706,21 @@ export const Lvl = {
       GateHorizontal_1: e(r["GateHorizontal"], { x: 456, y: 712, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromErrorRecovery", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
+  FlopCollege: () => {
+    applyLevel({ width: 808, height: 320, backgroundTint: 0x0056ba, terrainTint: 0xffc700 });
+    return {
+      Block: e(r["Block"], { x: 112, y: 272, width: 704, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xffc700 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 304, y: 256, width: 512, height: 24, values: { name: "", depth: 0, visible: true }, tint: 0xffc700 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 544, y: 240, width: 272, height: 24, values: { name: "", depth: 0, visible: true }, tint: 0xffc700 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 600, y: 224, width: 216, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffc700 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 656, y: 208, width: 192, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffc700 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 712, y: 192, width: 192, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffc700 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 0, y: 272, width: 112, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xffc700 }, "TerrainEntities"),
+      Chalkboard: d(Tx.Furniture.Chalkboard, { x: 410, y: 205, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      WeightedPedestal: e(r["WeightedPedestal"], { x: 224, y: 272, uid: 177430527680500, values: { requiredFlopsCount: 15, name: "", depth: 0 } }, "Entities"),
+      Player: e(r["Player"], { x: 112, y: 272, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    };
+  },
   GiantIguanaStatue: () => {
     applyLevel({ width: 872, height: 440, backgroundTint: 0x4a648b, terrainTint: 0x556516 });
     return {
@@ -6471,10 +6486,14 @@ export const Lvl = {
       SkyCloudLong2_1: d(Tx.Sky.CloudLong2, { x: 288, y: 41, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloudLong2_2: d(Tx.Sky.CloudLong2, { x: -9, y: 139, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloudLong0_1: d(Tx.Sky.CloudLong0, { x: -162, y: 56, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
-      ShapesSquare32_2: d(Tx.Shapes.Square32, { x: 155, y: -145, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x996a34 }, "BackgroundDecals"),
+      ShapesSquare32_2: d(Tx.Shapes.Square32, { x: 129, y: 135, scaleX: 0.25, scaleY: 4, rotation: 0, originX: 0.5, originY: 0, tint: 0x854e31 }, "BackgroundDecals"),
+      ShapesSquare32_3: d(Tx.Shapes.Square32, { x: 155, y: -145, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x996a34 }, "BackgroundDecals"),
       ShapesLumpSmall0: d(Tx.Shapes.LumpSmall0, { x: 165, y: -154, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbe8b52 }, "BackgroundDecals"),
       TerrainEarthSpots: d(Tx.Terrain.Earth.Spots, { x: 237, y: -126, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6b55c3 }, "BackgroundDecals"),
       WorldMapRiver0: d(Tx.WorldMap.River0, { x: 387, y: -129, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x81bde9 }, "BackgroundDecals"),
+      ShapesDashedLine3px: d(Tx.Shapes.DashedLine3px, { x: 130, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa86e4f }, "BackgroundDecals"),
+      ShapesSquare32_4: d(Tx.Shapes.Square32, { x: 182, y: 135, scaleX: 0.25, scaleY: 4, rotation: 0, originX: 0.5, originY: 0, tint: 0x854e31 }, "BackgroundDecals"),
+      ShapesDashedLine3px_1: d(Tx.Shapes.DashedLine3px, { x: 183, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa86e4f }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 312, y: 224, width: 360, height: 24, values: { name: "", depth: 0, visible: true }, tint: 0x996a34 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 120, y: 224, width: 192, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xbab532 }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 672, y: 224, width: 144, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x6b55c3 }, "TerrainEntities"),
@@ -6482,11 +6501,20 @@ export const Lvl = {
       Block_4: e(r["Block"], { x: 256, y: 176, width: 24, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0xbab532 }, "TerrainEntities"),
       Block_5: e(r["Block"], { x: -72, y: 224, width: 192, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xbab532 }, "TerrainEntities"),
       GuardianBlock: e(r["Block"], { x: 696, y: 0, width: 24, height: 224, values: { name: "GuardianBlock", depth: 0, visible: true }, tint: 0x850e0e }, "TerrainEntities"),
-      ShapesSquare32_3: d(Tx.Shapes.Square32, { x: 288, y: 259, scaleX: 12.75, scaleY: 1, rotation: 0, originX: 0, originY: 0, tint: 0x81bde9 }, "TerrainDecals"),
+      Block_6: e(r["Block"], { x: 120, y: 120, width: 72, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x996a34 }, "TerrainEntities"),
+      ShapesSquare32_5: d(Tx.Shapes.Square32, { x: 288, y: 259, scaleX: 12.75, scaleY: 1, rotation: 0, originX: 0, originY: 0, tint: 0x81bde9 }, "TerrainDecals"),
       WaterRipple0: d(Tx.Sky.CloudLong1, { x: 397, y: 267, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x81bde9 }, "TerrainDecals"),
       WaterRipple1: d(Tx.Sky.CloudLong1, { x: 565, y: 267, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x81bde9 }, "TerrainDecals"),
+      StoneRockPointy0: d(Tx.Stone.RockPointy0, { x: 174, y: 114, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockPointy0_1: d(Tx.Stone.RockPointy0, { x: 142, y: 114, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRock0: d(Tx.Stone.Rock0, { x: 158, y: 117, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1: d(Tx.Stone.RockSmallShaded1, { x: 152, y: 112, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_1: d(Tx.Stone.RockSmallShaded1, { x: 132, y: 125, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_2: d(Tx.Stone.RockSmallShaded1, { x: 188, y: 119, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_3: d(Tx.Stone.RockSmallShaded1, { x: 185, y: 129, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       GuardianBoss: e(r["EnemyCactus"], { x: 496, y: 224, values: { variant: "level1", name: "GuardianBoss", depth: 0 } }, "Entities"),
       Sign: e(r["Sign"], { x: 152, y: 224, values: { title: "Bastard", message: "Beware of the bastard of the bridge.", name: "", depth: 0, isSpecial: false } }, "Entities"),
+      Idol: e(r["Idol"], { x: 156, y: 109, uid: 177430535050000, values: { name: "", depth: 0 } }, "Entities"),
       Player: e(r["Player"], { x: 96, y: 224, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -48, y: 96, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromStrangeMarketGuardian", name: "", depth: 0 } }, "RegionEntities"),
       GateHorizontal_1: e(r["GateHorizontal"], { x: 768, y: 96, height: 128, flippedX: false, values: { sceneName: "scnStrangeMarket", checkpointName: "fromStrangeMarketGuardian", name: "", depth: 0 } }, "RegionEntities"),
@@ -7523,6 +7551,7 @@ export namespace LvlType {
   export type Dummy = ReturnType<(typeof Lvl)["Dummy"]>;
   export type EfficientHome = ReturnType<(typeof Lvl)["EfficientHome"]>;
   export type ErrorRecoveryRoom = ReturnType<(typeof Lvl)["ErrorRecoveryRoom"]>;
+  export type FlopCollege = ReturnType<(typeof Lvl)["FlopCollege"]>;
   export type GiantIguanaStatue = ReturnType<(typeof Lvl)["GiantIguanaStatue"]>;
   export type GreatTowerBalcony = ReturnType<(typeof Lvl)["GreatTowerBalcony"]>;
   export type GreatTower = ReturnType<(typeof Lvl)["GreatTower"]>;

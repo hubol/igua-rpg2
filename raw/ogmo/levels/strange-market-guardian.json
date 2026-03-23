@@ -4,8 +4,8 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#baee25",
   "values": {"Terrain Color": "#996a34"},
+  "backgroundColor": "#baee25",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -152,6 +152,17 @@
           "originX": 0,
           "originY": 26,
           "values": {"title": "Bastard", "message": "Beware of the bastard of the bridge.", "name": "", "depth": 0, "isSpecial": false}
+        },
+        {
+          "name": "Idol",
+          "id": 2,
+          "_eid": "79655020",
+          "x": 156,
+          "y": 109,
+          "originX": 32,
+          "originY": 97,
+          "uid": 177430535050000,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -175,7 +186,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 397,
@@ -187,7 +199,8 @@
           "texture": "sky/cloud long 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "WaterRipple0"}
+          "values": {"name": "WaterRipple0"},
+          "groupName": null
         },
         {
           "x": 565,
@@ -199,7 +212,92 @@
           "texture": "sky/cloud long 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "WaterRipple1"}
+          "values": {"name": "WaterRipple1"},
+          "groupName": null
+        },
+        {
+          "x": 174,
+          "y": 114,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock pointy 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 142,
+          "y": 114,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock pointy 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 158,
+          "y": 117,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 152,
+          "y": 112,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 132,
+          "y": 125,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 188,
+          "y": 119,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 185,
+          "y": 129,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -304,6 +402,19 @@
           "originY": 0,
           "tint": "#850e0e",
           "values": {"name": "GuardianBlock", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 7,
+          "_eid": "93117141",
+          "x": 120,
+          "y": 120,
+          "width": 72,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#996a34",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -328,6 +439,18 @@
       "gridCellsX": 102,
       "gridCellsY": 35,
       "decals": [
+        {
+          "x": 129,
+          "y": 135,
+          "scaleX": 0.25,
+          "scaleY": 4,
+          "rotation": 0,
+          "tint": "#854e31",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0,
+          "values": {"name": ""}
+        },
         {
           "x": 155,
           "y": -145,
@@ -379,6 +502,42 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 130,
+          "y": 184,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a86e4f",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 182,
+          "y": 135,
+          "scaleX": 0.25,
+          "scaleY": 4,
+          "rotation": 0,
+          "tint": "#854e31",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 183,
+          "y": 184,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a86e4f",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -403,7 +562,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 622,
@@ -454,7 +614,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 408,
@@ -466,7 +627,8 @@
           "texture": "shapes/circle irregular72.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 424,
@@ -478,7 +640,8 @@
           "texture": "shapes/circle irregular72.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 400,
@@ -490,7 +653,8 @@
           "texture": "shapes/circle irregular72.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 432,
@@ -502,7 +666,8 @@
           "texture": "shapes/circle irregular72.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 408,
@@ -514,7 +679,8 @@
           "texture": "shapes/circle irregular72.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 366,
@@ -526,7 +692,8 @@
           "texture": "sky/cloud long 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 159,
@@ -538,7 +705,8 @@
           "texture": "sky/cloud long 2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 288,
@@ -550,7 +718,8 @@
           "texture": "sky/cloud long 2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": -9,
@@ -562,7 +731,8 @@
           "texture": "sky/cloud long 2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": -162,
@@ -574,7 +744,8 @@
           "texture": "sky/cloud long 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
