@@ -11,6 +11,20 @@ export namespace RpgStatus {
         FullyPoisonedHealth: 5,
     };
 
+    export namespace BodyPart {
+        export interface Model {
+            defenses: {
+                physical: PercentInt;
+            };
+        }
+
+        export const defenseless: Model = {
+            defenses: {
+                physical: 0,
+            },
+        };
+    }
+
     export interface Model {
         faction: RpgFaction;
         health: number;
@@ -192,6 +206,7 @@ export namespace RpgStatus {
 
         damage(
             target: Model,
+            targetBodyPart: BodyPart.Model,
             targetEffects: Effects,
             attack: RpgAttack.Model,
             attacker: RpgStatus.Model | null = null,
@@ -297,8 +312,8 @@ export namespace RpgStatus {
                 attack.physical,
                 DamageKind.Physical,
                 canBeFatal,
-                target.defenses.physical,
-                target.guardingDefenses.physical,
+                Math.max(0, target.defenses.physical + targetBodyPart.defenses.physical),
+                Math.max(0, target.guardingDefenses.physical + targetBodyPart.defenses.physical),
                 factionDefense,
                 target,
                 targetEffects,

@@ -4,6 +4,7 @@ import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgStatus } from "../rpg/rpg-status";
 import { mxnDestroyOnStatusDeath } from "./mxn-destroy-on-status-death";
 import { mxnRpgStatus } from "./mxn-rpg-status";
+import { mxnRpgStatusBodyPart } from "./mxn-rpg-status-body-part";
 
 interface MxnRpgAttackArgs {
     attack: RpgAttack.Model;
@@ -23,10 +24,17 @@ export function mxnRpgAttack(obj: DisplayObject, { attack, attacker }: MxnRpgAtt
                 return;
             }
 
+            // TODO filter by faction here pls
             for (const instance of Instances(mxnRpgStatus)) {
-                // TODO filter by faction here pls
-                if (obj.collidesOne(instance.hurtboxes)) {
-                    const result = instance.damage(self.attack, attacker);
+                const hurtboxObj = obj.collidesOne(instance.hurtboxes);
+                if (hurtboxObj) {
+                    // TODO this is copy-pasted in player
+                    const result = instance.damage(self.attack, {
+                        attacker,
+                        bodyPart: hurtboxObj.is(mxnRpgStatusBodyPart)
+                            ? hurtboxObj.mxnRpgStatusBodyPart.model
+                            : undefined,
+                    });
                     if (!result.rejected) {
                         self.dispatch("mxnRpgAttack.hit");
                     }

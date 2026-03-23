@@ -19,8 +19,11 @@ export function mxnRpgStatus(obj: DisplayObject, args: MxnRpgStatusArgs) {
         .mixin(mxnDripping)
         .merge(args)
         .merge({
-            damage(attack: RpgAttack.Model, attacker?: RpgStatus.Model) {
-                const result = RpgStatus.Methods.damage(args.status, args.effects, attack, attacker);
+            damage(
+                attack: RpgAttack.Model,
+                { bodyPart = RpgStatus.BodyPart.defenseless, attacker }: MxnRpgStatus.DamageAttributes = {},
+            ) {
+                const result = RpgStatus.Methods.damage(args.status, bodyPart, args.effects, attack, attacker);
                 rpgStatusObj.dispatch("damaged", result);
                 return result;
             },
@@ -43,6 +46,13 @@ export function mxnRpgStatus(obj: DisplayObject, args: MxnRpgStatusArgs) {
 }
 
 export type MxnRpgStatus = ReturnType<typeof mxnRpgStatus>;
+
+namespace MxnRpgStatus {
+    export interface DamageAttributes {
+        bodyPart?: RpgStatus.BodyPart.Model;
+        attacker?: RpgStatus.Model;
+    }
+}
 
 function getTargetDripsPerFrame(wetness: number) {
     if (wetness > 300) {

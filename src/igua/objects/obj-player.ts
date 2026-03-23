@@ -14,6 +14,7 @@ import { Cutscene, DevKey, Input, layers, scene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { force } from "../mixins/mxn-physics";
 import { MxnRpgStatus, mxnRpgStatus } from "../mixins/mxn-rpg-status";
+import { mxnRpgStatusBodyPart } from "../mixins/mxn-rpg-status-body-part";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Rpg } from "../rpg/rpg";
@@ -291,7 +292,11 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                         attack = Rpg.character.meleeClawWellTimedAttack;
                     }
 
-                    const result = instance.damage(attack, status);
+                    // TODO this is copy-pasted in mxn-rpg-attack
+                    const result = instance.damage(attack, {
+                        attacker: status,
+                        bodyPart: hurtbox.is(mxnRpgStatusBodyPart) ? hurtbox.mxnRpgStatusBodyPart.model : undefined,
+                    });
 
                     if (
                         attack === Rpg.character.meleeClawWellTimedAttack && (!result.rejected || !result.invulnerable)
