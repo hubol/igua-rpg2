@@ -108,6 +108,7 @@ export function mxnDetectPlayer(obj: Container) {
                         self.y -= 16;
                         force(self, v.at(0, 16));
                         mxnDetectPlayer.position.at(self);
+                        mxnDetectPlayer.relativePosition.at(self).add(obj, -1);
                         mxnDetectPlayer.facing = playerObj.facing;
                         mxnDetectPlayer.speed.at(playerObj.speed);
                     }
