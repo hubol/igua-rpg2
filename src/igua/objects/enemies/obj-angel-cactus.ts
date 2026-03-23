@@ -179,7 +179,6 @@ export function objAngelCactus(entity: OgmoEntities.EnemyCactus) {
         .coro(function* (self) {
             yield sleep(Rng.int(250, 750));
             while (true) {
-                yield* self.mxnRpgStatusBerry.dramaSpawnBerry();
                 self.play(Sfx.Enemy.Cactus.AttackCharge.rate(0.99, 1.01));
                 mouthObj.controls.frowning = true;
                 const vibrateObj = container()

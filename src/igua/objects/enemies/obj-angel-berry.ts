@@ -11,6 +11,7 @@ import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objFxBurst32 } from "../effects/obj-fx-burst-32";
 import { objFxHeart } from "../effects/obj-fx-heart";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 
@@ -34,7 +35,7 @@ const ranks = {
 };
 
 const consts = {
-    healValue: 30,
+    healValue: 20,
 };
 
 export function objAngelBerry(targetObj: MxnRpgStatus) {
@@ -51,6 +52,7 @@ export function objAngelBerry(targetObj: MxnRpgStatus) {
             }
         })
         .mixin(mxnEnemy, { rank: ranks.level0, hurtboxes: [hurtboxObj] })
+        .handles("mxnEnemy.died", (self) => objFxBurst32().at(self).tinted(0xB85BFF).show())
         .pivoted(13, 24)
         .coro(function* (self) {
             yield sleepf(3);

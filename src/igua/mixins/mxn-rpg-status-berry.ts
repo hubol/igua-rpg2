@@ -1,6 +1,6 @@
 import { Container } from "pixi.js";
 import { objText } from "../../assets/fonts";
-import { interpvr } from "../../lib/game-engine/routines/interp";
+import { interpc, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { objAngelBerry } from "../objects/enemies/obj-angel-berry";
@@ -39,7 +39,8 @@ export function mxnRpgStatusBerry(obj: MxnRpgStatus & Container) {
                 .show();
 
             yield () => textObj.text === message;
-            yield sleep(250);
+            yield interpc(textObj, "tint").steps(4).to(0xffffff).over(333);
+            yield sleep(333);
 
             yield interpvr(textObj).translate(0, -100).over(300);
             textObj.destroy();
@@ -59,11 +60,11 @@ export function mxnRpgStatusBerry(obj: MxnRpgStatus & Container) {
             if (obj.is(mxnDetectPlayer) && obj.mxnDetectPlayer.isDetected) {
                 const detectionSign = Math.sign(obj.mxnDetectPlayer.relativePosition.x);
                 if (detectionSign !== 0) {
-                    sign = detectionSign;
+                    sign = -detectionSign;
                 }
             }
 
-            angelBerryObj.speed.x = sign * Rng.float(2, 3);
+            angelBerryObj.speed.x = sign * Rng.float(2.5, 3.75);
             angelBerryObj.speed.y = -Rng.float(4, 5);
 
             berryObjs.push(angelBerryObj);
