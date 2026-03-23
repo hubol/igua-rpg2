@@ -50,7 +50,7 @@ export function objAngelBerry(targetObj: MxnRpgStatus) {
             yield () => self.isOnGround;
             const dirtObj = Sprite.from(txs.txDirt).tinted(scene.style.terrainTint).show(self).at(0, 6);
             yield interpvr(dirtObj).factor(factor.sine).to(0, 0).over(250);
-            const sproutObj = objIndexedSprite(txs.txsSprout);
+            const sproutObj = objIndexedSprite(txs.txsSprout).show(self);
             yield interp(sproutObj, "textureIndex").to(sproutObj.textures.length).over(1000);
         })
         .zIndexed(ZIndex.Entities - 1);
