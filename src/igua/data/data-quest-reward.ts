@@ -131,6 +131,10 @@ export namespace DataQuestReward {
                 reward: { kind: "equipment", id: "IqIndicator", level: 1 },
                 countCompletions: "once",
             },
+            "GreatTower.EfficientHome.Snail.Defeated": {
+                kind: "single",
+                reward: { kind: "equipment", id: "WalkTopSpeedAndMusicTempoDown", level: 1 },
+            },
             SimpleSecretHappy: {
                 kind: "single",
                 reward: { kind: "equipment", id: "WetnessCapacityUp", level: 1 },

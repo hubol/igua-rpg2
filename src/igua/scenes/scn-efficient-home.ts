@@ -4,7 +4,6 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { factor, interpr, interpvr } from "../../lib/game-engine/routines/interp";
-import { onMutate } from "../../lib/game-engine/routines/on-mutate";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
@@ -38,6 +37,7 @@ export function scnEfficientHome() {
     enrichRoom1(lvl);
     enrichRoom2(lvl);
     enrichRoom3(lvl);
+    enrichRoom4(lvl);
 }
 
 function enrichHelium(lvl: LvlType.EfficientHome) {
@@ -269,4 +269,17 @@ function enrichRoom3(lvl: LvlType.EfficientHome) {
 
     lvl.FurnitureArtworkSaying0
         .mixin(mxnSign, "...Interesting sentiment.");
+}
+
+function enrichRoom4(lvl: LvlType.EfficientHome) {
+    if (Rpg.quest("GreatTower.EfficientHome.Snail.Defeated").everCompleted) {
+        lvl.EnemySnail.destroy();
+        return;
+    }
+    lvl.EnemySnail
+        .handles("mxnEnemy.died", () => {
+            Cutscene.play(function* () {
+                yield* DramaQuests.complete("GreatTower.EfficientHome.Snail.Defeated");
+            });
+        });
 }
