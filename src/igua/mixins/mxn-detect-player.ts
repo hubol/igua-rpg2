@@ -18,8 +18,13 @@ export function mxnDetectPlayer(obj: Container) {
     const mxnDetectPlayer = {
         debug: false,
         detectionScore: -1,
+        minDetectionScore: 0,
+        get isDetected() {
+            return this.detectionScore > this.minDetectionScore;
+        },
         facing: 0,
         position: vnew(),
+        relativePosition: vnew(),
         speed: vnew(),
     } satisfies mxnDetectPlayer.Context;
 
@@ -146,8 +151,11 @@ export namespace mxnDetectPlayer {
     export interface Context {
         debug: boolean;
         detectionScore: Integer;
+        minDetectionScore: Integer;
+        readonly isDetected: boolean;
         facing: Polar;
         position: VectorSimple;
+        relativePosition: VectorSimple;
         speed: VectorSimple;
     }
 }

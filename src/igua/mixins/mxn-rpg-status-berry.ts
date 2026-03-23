@@ -1,0 +1,87 @@
+import { Container } from "pixi.js";
+import { objText } from "../../assets/fonts";
+import { sleep } from "../../lib/game-engine/routines/sleep";
+import { Rng } from "../../lib/math/rng";
+import { objAngelBerry } from "../objects/enemies/obj-angel-berry";
+import { mxnDetectPlayer } from "./mxn-detect-player";
+import { mxnPhysics } from "./mxn-physics";
+import { MxnRpgStatus } from "./mxn-rpg-status";
+import { mxnTextTyped } from "./mxn-text-typed";
+
+const consts = {
+    maxStepsSinceBerry: 9999,
+};
+
+export function mxnRpgStatusBerry(obj: MxnRpgStatus & Container) {
+    let stepsSinceBerry = consts.maxStepsSinceBerry;
+    const berryObjs = new Array<Container>();
+
+    const api = {
+        *dramaSpawnBerry() {
+            if (berryObjs.length || stepsSinceBerry < 120) {
+                return;
+            }
+            // TODO sfx
+
+            const message = Rng.choose(
+                "It's berry time",
+                "I'm berry ready to heal",
+                "Berry...!",
+            );
+
+            const textObj = objText.MediumIrregular("", { tint: 0xB85BFF })
+                .anchored(0.5, 1)
+                .at(obj)
+                .add(0, -obj.height / 2)
+                .vround()
+                .mixin(mxnTextTyped, () => message)
+                .show();
+
+            yield () => textObj.text === message;
+            yield sleep(100);
+
+            textObj.destroy();
+
+            if (obj.is(mxnPhysics) && obj.isOnGround) {
+                obj.speed.y = -1;
+            }
+
+            const angelBerryObj = objAngelBerry(obj)
+                .at(obj)
+                .add(0, -obj.height / 2)
+                .vround()
+                .show();
+
+            let sign = Rng.intp();
+
+            if (obj.is(mxnDetectPlayer) && obj.mxnDetectPlayer.isDetected) {
+                const detectionSign = Math.sign(obj.mxnDetectPlayer.relativePosition.x);
+                if (detectionSign !== 0) {
+                    sign = detectionSign;
+                }
+            }
+
+            angelBerryObj.speed.x = sign * Rng.float(1, 2);
+            angelBerryObj.speed.y = -Rng.float(4, 5);
+
+            berryObjs.push(angelBerryObj);
+        },
+    };
+
+    return obj
+        .merge({ mxnRpgStatusBerry: api })
+        .step(() => {
+            if (!berryObjs.length) {
+                if (stepsSinceBerry < consts.maxStepsSinceBerry) {
+                    stepsSinceBerry++;
+                }
+                return;
+            }
+
+            stepsSinceBerry = 0;
+
+            if (berryObjs[0].destroyed) {
+                berryObjs.shift();
+            }
+        });
+}

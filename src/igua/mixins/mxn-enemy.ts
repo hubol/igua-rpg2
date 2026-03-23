@@ -11,6 +11,7 @@ import { Rpg } from "../rpg/rpg";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { RpgStatus } from "../rpg/rpg-status";
 import { mxnRpgStatus } from "./mxn-rpg-status";
+import { mxnRpgStatusBerry } from "./mxn-rpg-status-berry";
 import { mxnRpgStatusPotions } from "./mxn-rpg-status-potions";
 
 interface MxnEnemyArgs {
@@ -47,6 +48,7 @@ export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
     const enemyObj = obj
         .mixin(mxnRpgStatus, { status, effects, hurtboxes: args.hurtboxes })
         .mixin(mxnRpgStatusPotions, { heldPotionIds: [] })
+        .mixin(mxnRpgStatusBerry)
         .dispatches<"mxnEnemy.died">()
         .handles("damaged", (self, result) => {
             if (result.rejected) {

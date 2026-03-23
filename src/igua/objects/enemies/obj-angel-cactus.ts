@@ -100,7 +100,7 @@ const ranks = {
     }),
 };
 
-type Feature = "jumping" | "weak";
+type Feature = "jumping" | "weak" | "berry";
 
 const variants = {
     level0: {
@@ -109,7 +109,7 @@ const variants = {
         theme: themes.common,
     },
     level1: {
-        features: new Set<Feature>(["jumping", "weak"]),
+        features: new Set<Feature>(["jumping", "weak", "berry"]),
         rank: ranks.level1,
         theme: themes.common,
     },
@@ -179,6 +179,7 @@ export function objAngelCactus(entity: OgmoEntities.EnemyCactus) {
         .coro(function* (self) {
             yield sleep(Rng.int(250, 750));
             while (true) {
+                yield* self.mxnRpgStatusBerry.dramaSpawnBerry();
                 self.play(Sfx.Enemy.Cactus.AttackCharge.rate(0.99, 1.01));
                 mouthObj.controls.frowning = true;
                 const vibrateObj = container()
@@ -217,6 +218,9 @@ export function objAngelCactus(entity: OgmoEntities.EnemyCactus) {
                 yield interp(cactusSpikesObj.objAngelCactusSpikes, "scale").to(0).over(250);
                 yield interp(mouthObj.controls, "agapeUnit").to(0).over(250);
                 yield sleep(Rng.int(500, 1500));
+                if (features.has("berry")) {
+                    yield* self.mxnRpgStatusBerry.dramaSpawnBerry();
+                }
             }
         });
 }
