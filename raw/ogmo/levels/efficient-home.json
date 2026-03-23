@@ -121,7 +121,34 @@
       "gridCellHeight": 8,
       "gridCellsX": 192,
       "gridCellsY": 108,
-      "decals": [],
+      "decals": [
+        {
+          "x": 894,
+          "y": 522,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#2d4832",
+          "texture": "foliage/medium0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 912,
+          "y": 518,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#428b4f",
+          "texture": "foliage/medium0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -673,32 +700,6 @@
           "rotation": 0,
           "tint": "#428b4f",
           "texture": "foliage/leaf 18.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 894,
-          "y": 522,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#2d4832",
-          "texture": "foliage/medium0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 912,
-          "y": 518,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#428b4f",
-          "texture": "foliage/medium0.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
