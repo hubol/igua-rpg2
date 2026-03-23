@@ -216,7 +216,12 @@ function* dramaCutscenePreamble(attributes: CutsceneAttributes) {
 
     const npc = attributes.speaker.mxnIguanaSpeaker.rpgIguanaNpc;
 
-    if (npc.knowsPlayerLgbtStatus) {
+    if (npc.knownPlayerLgbtStatus === true) {
+        yield* show("Hi gay!");
+        return;
+    }
+
+    if (npc.knownPlayerLgbtStatus === false) {
         return;
     }
 
@@ -229,8 +234,8 @@ function* dramaCutscenePreamble(attributes: CutsceneAttributes) {
         return;
     }
 
-    yield* ask("Oh, are you LGBT?");
-    npc.onLearnPlayerLgbtStatus();
+    const result = yield* ask("Oh, are you LGBT?");
+    npc.onLearnPlayerLgbtStatus(result);
     yield* show("Got it, I'll remember that for next time!");
     yield sleep(500);
     yield* show("Anyway...");

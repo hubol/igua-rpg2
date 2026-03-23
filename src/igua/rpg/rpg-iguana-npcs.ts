@@ -34,7 +34,7 @@ class RpgIguanaNpc {
 
     private get _state() {
         if (!this._npcsState[this._id]) {
-            return this._npcsState[this._id] = { spokenToTimesCount: 0, knowsPlayerLgbtStatus: false };
+            return this._npcsState[this._id] = { spokenToTimesCount: 0, knownPlayerLgbtStatus: null };
         }
         return this._npcsState[this._id]!;
     }
@@ -62,12 +62,12 @@ class RpgIguanaNpc {
         }
     }
 
-    get knowsPlayerLgbtStatus() {
-        return this._state.knowsPlayerLgbtStatus;
+    get knownPlayerLgbtStatus() {
+        return this._state.knownPlayerLgbtStatus;
     }
 
-    onLearnPlayerLgbtStatus() {
-        this._state.knowsPlayerLgbtStatus = true;
+    onLearnPlayerLgbtStatus(isLgbt: boolean) {
+        this._state.knownPlayerLgbtStatus = isLgbt;
     }
 }
 
@@ -78,6 +78,6 @@ namespace RpgIguanaNpcs {
 namespace RpgIguanaNpc {
     export interface State {
         spokenToTimesCount: Integer;
-        knowsPlayerLgbtStatus: boolean;
+        knownPlayerLgbtStatus: null | boolean;
     }
 }
