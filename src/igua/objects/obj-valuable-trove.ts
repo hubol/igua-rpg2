@@ -1,10 +1,13 @@
 import { DisplayObject } from "pixi.js";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { Empty } from "../../lib/types/empty";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { ValuableChangeMaker } from "../systems/valuable-change-maker";
+import { playerObj } from "./obj-player";
+import { CtxTerrainObj } from "./obj-terrain";
 import { objValuable } from "./obj-valuable";
 
 type Tiers = number[];
@@ -206,8 +209,11 @@ export function objValuableTrove(total: number, animation: "animated" | "instant
         y += vMargin;
     }
 
+    let spawned = false;
+
     if (animation === "instant") {
         c.addChild(...valuableObjs);
+        spawned = true;
     }
     else {
         c.coro(function* () {
@@ -215,8 +221,25 @@ export function objValuableTrove(total: number, animation: "animated" | "instant
                 valuableObj.mixin(mxnNudgeAppear).show(c);
                 yield sleepf(2);
             }
+            spawned = true;
         });
     }
 
-    return c;
+    return c
+        .coro(function* () {
+            yield () => spawned && c.children.length !== count;
+            for (const valuableObj of valuableObjs) {
+                if (!valuableObj.destroyed && valuableObj.collidesOne(CtxTerrainObj.value.children)) {
+                    valuableObj.step(() => {
+                        const delta = v.at(playerObj).add(valuableObj.getWorldPosition(), -1);
+                        if (delta.vlength === 0) {
+                            return;
+                        }
+                        valuableObj.add(delta.normalize());
+                    });
+                }
+            }
+        });
 }
+
+const v = vnew();
