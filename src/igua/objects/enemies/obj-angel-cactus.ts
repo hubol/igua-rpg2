@@ -49,6 +49,28 @@ const themes = (() => {
 
     return {
         common: template.createTheme(),
+        berry: template.createTheme({
+            eyes: {
+                scleraTx: Tx.Enemy.Cactus.Sclera0,
+                pupilsTx: Tx.Enemy.Miffed.Pupil1,
+                gap: 10,
+            },
+            mouth: {
+                txs: objAngelMouth.txs.rounded14,
+            },
+            sprites: {
+                nose: Tx.Enemy.Cactus.Leaf0,
+            },
+            tints: {
+                map: [0xB85BFF, 0xB8C2FF, 0x51AE70],
+            },
+        }, {
+            eyes: (obj) => obj.add(0, 4),
+            mouth: (obj) => obj.add(0, 6),
+            sprites: {
+                nose: (obj) => obj.add(8, -5).zIndexed(1),
+            },
+        }),
     };
 })();
 
@@ -111,7 +133,7 @@ const variants = {
     level1: {
         features: new Set<Feature>(["jumping", "weak", "berry"]),
         rank: ranks.level1,
-        theme: themes.common,
+        theme: themes.berry,
     },
 };
 
@@ -139,9 +161,11 @@ export function objAngelCactus(entity: OgmoEntities.EnemyCactus) {
             .pivoted(32, 27),
         soulAnchorObj,
         theme.createEyesObj()
-            .add(0, -6),
+            .add(0, -6)
+            .zIndexed(2),
         mouthObj
-            .add(0, 0),
+            .add(0, 0)
+            .zIndexed(2),
         theme.createSprite("nose")
             .anchored(0.5, 0.5)
             .add(-1, -4)
@@ -157,6 +181,7 @@ export function objAngelCactus(entity: OgmoEntities.EnemyCactus) {
             }),
         hurtboxObj,
     )
+        .autoSorted()
         .pivoted(0, 10)
         .mixin(mxnPhysics, { physicsRadius: 10, gravity: 0.2, physicsOffset: [0, -13] })
         .handles("moved", (self, event) => {
