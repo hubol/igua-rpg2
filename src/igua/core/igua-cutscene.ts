@@ -2,12 +2,14 @@ import { Container, DisplayObject } from "pixi.js";
 import { EscapeTickerAndExecute } from "../../lib/game-engine/asshat-ticker";
 import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
-import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
+import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { Empty } from "../../lib/types/empty";
 import { Null } from "../../lib/types/null";
-import { clear } from "../drama/show";
+import { ask, clear, show } from "../drama/show";
 import { layers, scene, sceneStack } from "../globals";
+import { mxnIguanaSpeaker } from "../mixins/mxn-iguana-speaker";
 import { Rpg } from "../rpg/rpg";
 
 function getDefaultCutsceneAttributes() {
@@ -160,6 +162,7 @@ function objCutsceneRunner() {
                     if (attributes.camera.start === "pan_to_speaker" && attributes.speaker) {
                         yield scene.camera.auto.panToSubject(attributes.speaker);
                     }
+                    yield* dramaCutscenePreamble(attributes);
                     yield* fn();
                     // TODO I think `clear` might be able to just clear the overlay messages!
                     clear();
@@ -205,3 +208,30 @@ function objCutsceneRunner() {
 }
 
 type ObjCutsceneRunner = ReturnType<typeof objCutsceneRunner>;
+
+function* dramaCutscenePreamble(attributes: CutsceneAttributes) {
+    if (!attributes.speaker?.is(mxnIguanaSpeaker)) {
+        return;
+    }
+
+    const npc = attributes.speaker.mxnIguanaSpeaker.rpgIguanaNpc;
+
+    if (npc.knowsPlayerLgbtStatus) {
+        return;
+    }
+
+    const lgbtQuestionChance = Rpg.character.buffs.esoteric.lgbtFactor;
+    if (lgbtQuestionChance <= 0) {
+        return;
+    }
+
+    if (Rng.float(100) > lgbtQuestionChance) {
+        return;
+    }
+
+    yield* ask("Oh, are you LGBT?");
+    npc.onLearnPlayerLgbtStatus();
+    yield* show("Got it, I'll remember that for next time!");
+    yield sleep(500);
+    yield* show("Anyway...");
+}

@@ -50,6 +50,7 @@ export namespace RpgPlayerBuffs {
             },
             esoteric: {
                 sceneChangeErrorChance: <PercentInt> 0,
+                lgbtFactor: <PercentInt> 0,
             },
             experience: {
                 bonusFactorWhileWet: {
