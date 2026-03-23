@@ -19,7 +19,7 @@ export function mxnRpgStatusBerry(obj: MxnRpgStatus & Container) {
 
     const api = {
         *dramaSpawnBerry() {
-            if (berryObjs.length || stepsSinceBerry < 120) {
+            if (berryObjs.length || stepsSinceBerry < 6 * 60 || obj.status.health >= obj.status.healthMax) {
                 return;
             }
             // TODO sfx
@@ -63,7 +63,7 @@ export function mxnRpgStatusBerry(obj: MxnRpgStatus & Container) {
                 }
             }
 
-            angelBerryObj.speed.x = sign * Rng.float(1, 2);
+            angelBerryObj.speed.x = sign * Rng.float(2, 3);
             angelBerryObj.speed.y = -Rng.float(4, 5);
 
             berryObjs.push(angelBerryObj);

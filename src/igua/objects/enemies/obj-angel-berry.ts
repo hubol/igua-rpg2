@@ -1,14 +1,17 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
-import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
-import { sleepf } from "../../../lib/game-engine/routines/sleep";
+import { factor, interp, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
+import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
+import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { ZIndex } from "../../core/scene/z-index";
 import { scene } from "../../globals";
-import { MxnEnemy, mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnBoilTextureIndex } from "../../mixins/mxn-boil-texture-index";
+import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objFxHeart } from "../effects/obj-fx-heart";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 
 const txs = (() => {
@@ -28,6 +31,10 @@ const ranks = {
             healthMax: 30,
         },
     }),
+};
+
+const consts = {
+    healValue: 30,
 };
 
 export function objAngelBerry(targetObj: MxnRpgStatus) {
@@ -52,6 +59,42 @@ export function objAngelBerry(targetObj: MxnRpgStatus) {
             yield interpvr(dirtObj).factor(factor.sine).to(0, 0).over(250);
             const sproutObj = objIndexedSprite(txs.txsSprout).show(self);
             yield interp(sproutObj, "textureIndex").to(sproutObj.textures.length).over(1000);
+            while (!targetObj.destroyed) {
+                const heartObj = objAngelBerryHeart(targetObj).at(self).add(0, -9).show();
+                yield () => heartObj.destroyed;
+                yield sleep(1000);
+            }
         })
         .zIndexed(ZIndex.Entities - 1);
+}
+
+const v = vnew();
+
+function objAngelBerryHeart(targetObj: MxnRpgStatus) {
+    const speed = vnew();
+
+    return objIndexedSprite(txs.txsHeart)
+        .anchored(0.5, 0.5)
+        .mixin(mxnBoilTextureIndex)
+        .step(self => self.add(speed))
+        .coro(function* (self) {
+            yield interpv(speed).to(0, -1).over(300);
+            self.step(() => {
+                if (targetObj.destroyed) {
+                    return;
+                }
+
+                speed.moveTowards(v.at(targetObj).add(self, -1).normalize(), 0.2);
+
+                if (self.collidesOne(targetObj.hurtboxes)) {
+                    targetObj.heal(consts.healValue);
+                    objFxHeart.objBurst(6, 5).at(self).show();
+                    self.destroy();
+                }
+            });
+            yield () => targetObj.destroyed;
+            yield interpv(speed).to(0, -1).over(300);
+            yield sleep(500);
+            self.destroy();
+        });
 }
