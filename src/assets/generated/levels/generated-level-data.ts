@@ -8,7 +8,7 @@ const { createEntity: e, createDecal: d, applyLevel, createDecalGroup: dg } = Og
 
 export const Lvl = {
   Cobbler0: () => {
-    applyLevel({ width: 704, height: 280, backgroundTint: 0x8781d2 });
+    applyLevel({ width: 704, height: 280, backgroundTint: 0x8781d2, terrainTint: 0x1a0739 });
     return {
       SkyCloud0: d(Tx.Sky.Cloud0, { x: 208, y: 120, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xd3cfff }, "ParallaxDecals"),
       SkyCloud0_1: d(Tx.Sky.Cloud0, { x: 536, y: 144, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xd3cfff }, "ParallaxDecals"),
@@ -185,7 +185,7 @@ export const Lvl = {
     };
   },
   College0: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x68ba8e });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x68ba8e, terrainTint: 0xd55555 });
     return {
       DistantAngel: d(Tx.Characters.ItemRescueAngelDistant, { x: 91, y: 113, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloudPuff1: d(Tx.Sky.CloudPuff1, { x: 203, y: 156, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x98c8ae }, "ParallaxDecals"),
@@ -239,7 +239,7 @@ export const Lvl = {
     };
   },
   ColosseumMiffed: () => {
-    applyLevel({ width: 1184, height: 528, backgroundTint: 0x0b043b });
+    applyLevel({ width: 1184, height: 528, backgroundTint: 0x0b043b, terrainTint: 0x503966 });
     return {
       Group1: dg(-48, 417, "Group 1", "ParallaxDecals"),
       TerrainDistantWaves0: d(Tx.Terrain.Distant.Waves0, { x: 206, y: 417, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0x322c59 }, "ParallaxDecals"),
@@ -359,11 +359,11 @@ export const Lvl = {
     };
   },
   Dummy: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
     return { Block: e(r["Block"], { x: 0, y: 200, width: 504, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"), Player: e(r["Player"], { x: 104, y: 200, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"), DummyMarker: e(r["Marker"], { x: 280, y: 200, values: { name: "DummyMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities") };
   },
   EfficientHome: () => {
-    applyLevel({ width: 1536, height: 864, backgroundTint: 0x408000 });
+    applyLevel({ width: 1536, height: 864, backgroundTint: 0x408000, terrainTint: 0xd71c1c });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 512, y: 0, scaleX: 16, scaleY: 9, rotation: 0, originX: 0, originY: 0, tint: 0x528854 }, "BackgroundDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 0, y: 0, scaleX: 16, scaleY: 9, rotation: 0, originX: 0, originY: 0, tint: 0xffcbd4 }, "BackgroundDecals"),
@@ -663,7 +663,7 @@ export const Lvl = {
     };
   },
   ErrorRecoveryRoom: () => {
-    applyLevel({ width: 500, height: 896, backgroundTint: 0x000d80 });
+    applyLevel({ width: 500, height: 896, backgroundTint: 0x000d80, terrainTint: 0xd5edff });
     return {
       TownSignageWarning: d(Tx.Town.Signage.Warning, { x: 112, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffca0d }, "ParallaxDecals"),
       TownSignageWarning_1: d(Tx.Town.Signage.Warning, { x: 231, y: 317, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff9e0d }, "ParallaxDecals"),
@@ -706,7 +706,7 @@ export const Lvl = {
     };
   },
   GiantIguanaStatue: () => {
-    applyLevel({ width: 872, height: 440, backgroundTint: 0x4a648b });
+    applyLevel({ width: 872, height: 440, backgroundTint: 0x4a648b, terrainTint: 0x556516 });
     return {
       SkyCloud0: d(Tx.Sky.Cloud0, { x: 56, y: 264, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x98b5df }, "ParallaxDecals"),
       SkyCloud0_1: d(Tx.Sky.Cloud0, { x: 376, y: 112, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x98b5df }, "ParallaxDecals"),
@@ -923,7 +923,7 @@ export const Lvl = {
     };
   },
   GreatTowerBalcony: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0xe68ca7 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0xe68ca7, terrainTint: 0xd0e840 });
     return {
       SkyCloud0: d(Tx.Sky.Cloud0, { x: 376, y: 88, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe9215d }, "ParallaxDecals"),
       SkyCloud0_1: d(Tx.Sky.Cloud0, { x: 256, y: 48, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe9215d }, "ParallaxDecals"),
@@ -974,7 +974,7 @@ export const Lvl = {
     };
   },
   GreatTower: () => {
-    applyLevel({ width: 552, height: 2288, backgroundTint: 0xe68ca7 });
+    applyLevel({ width: 552, height: 2288, backgroundTint: 0xe68ca7, terrainTint: 0xd0e840 });
     return {
       SkyCloudEvil0: d(Tx.Sky.CloudEvil0, { x: 83, y: 2000, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe9215d }, "ParallaxDecals"),
       SkyCloudEvil0_1: d(Tx.Sky.CloudEvil0, { x: 83, y: 1640, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe9215d }, "ParallaxDecals"),
@@ -1457,7 +1457,7 @@ export const Lvl = {
     };
   },
   GrottoIndianaShop: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x4888d3 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x4888d3, terrainTint: 0x272e9a });
     return {
       ShapesConfetti18x8: d(Tx.Shapes.Confetti18x8, { x: 311, y: 186, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       ShapesConfetti18x8_1: d(Tx.Shapes.Confetti18x8, { x: 266, y: 147, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
@@ -1548,7 +1548,7 @@ export const Lvl = {
     };
   },
   IndianaCasino: () => {
-    applyLevel({ width: 1184, height: 336, backgroundTint: 0xd8a5f7 });
+    applyLevel({ width: 1184, height: 336, backgroundTint: 0xd8a5f7, terrainTint: 0xffd600 });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: -56, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0xa786b9 }, "ParallaxDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: -112, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0x77677d }, "ParallaxDecals"),
@@ -1671,7 +1671,7 @@ export const Lvl = {
     };
   },
   IndianaDesert: () => {
-    applyLevel({ width: 1552, height: 344, backgroundTint: 0x8dcbe6 });
+    applyLevel({ width: 1552, height: 344, backgroundTint: 0x8dcbe6, terrainTint: 0xffc123 });
     return {
       SkyCloudLong0: d(Tx.Sky.CloudLong0, { x: 296, y: 104, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloudLong1: d(Tx.Sky.CloudLong1, { x: 504, y: 152, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
@@ -1771,7 +1771,7 @@ export const Lvl = {
     };
   },
   IndianaHallOfDoors: () => {
-    applyLevel({ width: 912, height: 280, backgroundTint: 0xa286f3 });
+    applyLevel({ width: 912, height: 280, backgroundTint: 0xa286f3, terrainTint: 0x4146a8 });
     return {
       Block: e(r["Block"], { x: 0, y: 0, width: 912, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 0, y: 248, width: 912, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
@@ -1786,7 +1786,7 @@ export const Lvl = {
     };
   },
   IndianaLoungeExterior: () => {
-    applyLevel({ width: 500, height: 400, backgroundTint: 0x7cb7d8 });
+    applyLevel({ width: 500, height: 400, backgroundTint: 0x7cb7d8, terrainTint: 0x698826 });
     return {
       SkyCloudPuff1: d(Tx.Sky.CloudPuff1, { x: 176, y: 168, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloudBalls0: d(Tx.Sky.CloudBalls0, { x: 104, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
@@ -1847,7 +1847,7 @@ export const Lvl = {
     };
   },
   IndianaLoungeInterior: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x7a1313 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x7a1313, terrainTint: 0x342716 });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: -56, y: 300, scaleX: 1, scaleY: 0.5, rotation: 0, originX: 0, originY: 0, tint: 0x9f2424 }, "BackgroundDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: -56, y: 298, scaleX: 1, scaleY: 0.1, rotation: 0, originX: 0, originY: 0, tint: 0x342716 }, "BackgroundDecals"),
@@ -1933,7 +1933,7 @@ export const Lvl = {
     };
   },
   IndianaUniversityInterior: () => {
-    applyLevel({ width: 688, height: 280, backgroundTint: 0x68ba8e });
+    applyLevel({ width: 688, height: 280, backgroundTint: 0x68ba8e, terrainTint: 0xcbb53f });
     return {
       SkyCloudPuff0: d(Tx.Sky.CloudPuff0, { x: 152, y: 160, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x98c8ae }, "ParallaxDecals"),
       SkyCloudPuff0_1: d(Tx.Sky.CloudPuff0, { x: 540, y: 106, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x98c8ae }, "ParallaxDecals"),
@@ -2005,7 +2005,7 @@ export const Lvl = {
     };
   },
   IndianaUniversityNurse: () => {
-    applyLevel({ width: 740, height: 280, backgroundTint: 0x68ba8e });
+    applyLevel({ width: 740, height: 280, backgroundTint: 0x68ba8e, terrainTint: 0xd55555 });
     return {
       SkyCloudPuff1: d(Tx.Sky.CloudPuff1, { x: 101, y: 168, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x98c8ae }, "ParallaxDecals"),
       SkyCloudPuff1_1: d(Tx.Sky.CloudPuff1, { x: 495, y: 177, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x98c8ae }, "ParallaxDecals"),
@@ -2086,7 +2086,7 @@ export const Lvl = {
     };
   },
   IndianaUniversity: () => {
-    applyLevel({ width: 832, height: 312, backgroundTint: 0x00803b });
+    applyLevel({ width: 832, height: 312, backgroundTint: 0x00803b, terrainTint: 0x215700 });
     return {
       ShapesCircle64: d(Tx.Shapes.Circle64, { x: 408, y: 264, scaleX: 25, scaleY: 2.5, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa0ba68 }, "ParallaxDecals"),
       ShapesCircle64_1: d(Tx.Shapes.Circle64, { x: 424, y: 312, scaleX: 25, scaleY: 2.5, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6a9f51 }, "ParallaxDecals"),
@@ -2230,7 +2230,7 @@ export const Lvl = {
     };
   },
   MenuIguanaDesigner: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x002c38 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x002c38, terrainTint: 0x001c28 });
     return {
       FoliageMedium0: d(Tx.Foliage.Medium0, { x: 254, y: 216, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x1b2714 }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 0, y: 256, width: 224, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x001c28 }, "TerrainEntities"),
@@ -2278,7 +2278,7 @@ export const Lvl = {
     };
   },
   MenuTitleScreen: () => {
-    applyLevel({ width: 1520, height: 280, backgroundTint: 0x002c38 });
+    applyLevel({ width: 1520, height: 280, backgroundTint: 0x002c38, terrainTint: 0x001c28 });
     return {
       Block: e(r["Block"], { x: 8, y: 160, width: 1500, height: 136, values: { name: "", depth: 0, visible: true }, tint: 0x002c38 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 48, y: 336, width: 64, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x001c28 }, "TerrainEntities"),
@@ -2325,7 +2325,7 @@ export const Lvl = {
     };
   },
   NewBalltownArmorer: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x56721c });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x56721c, terrainTint: 0x000000 });
     return {
       TownBallStructure: d(Tx.Town.Ball.Structure, { x: -147, y: 186, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xb48cbe }, "BackgroundDecals"),
       TownBallStructureHighlight: d(Tx.Town.Ball.StructureHighlight, { x: -145, y: 169, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffcac6 }, "BackgroundDecals"),
@@ -2549,7 +2549,7 @@ export const Lvl = {
     };
   },
   NewBalltownFanatic: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x478f79 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x478f79, terrainTint: 0x000000 });
     return {
       TownBallBrick0: d(Tx.Town.Ball.Brick0, { x: 168, y: 88, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2e6d5a }, "BackgroundDecals"),
       TownBallBrick0_1: d(Tx.Town.Ball.Brick0, { x: 208, y: 120, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2e6d5a }, "BackgroundDecals"),
@@ -2635,7 +2635,7 @@ export const Lvl = {
     };
   },
   NewBalltownFishmonger: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0xffa800 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0xffa800, terrainTint: 0xc13314 });
     return {
       TownBallBrick1: d(Tx.Town.Ball.Brick1, { x: 387, y: 73, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc13314 }, "BackgroundDecals"),
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 328, y: 84, scaleX: 2.7, scaleY: 5.5, rotation: 0, originX: 0, originY: 0, tint: 0x91b0ed }, "BackgroundDecals"),
@@ -2717,7 +2717,7 @@ export const Lvl = {
     };
   },
   NewBalltownOutskirtsSecretShop: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0xcdd299 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0xcdd299, terrainTint: 0xb0ba44 });
     return {
       StoneShinyRockWall0: d(Tx.Stone.ShinyRockWall0, { x: 368, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       StoneShinyRockWall0_1: d(Tx.Stone.ShinyRockWall0, { x: 370, y: 210, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
@@ -2843,7 +2843,7 @@ export const Lvl = {
     };
   },
   NewBalltownOutskirts: () => {
-    applyLevel({ width: 1176, height: 544, backgroundTint: 0x520e1a });
+    applyLevel({ width: 1176, height: 544, backgroundTint: 0x520e1a, terrainTint: 0xff8787 });
     return {
       ShapesCircleIrregular72: d(Tx.Shapes.CircleIrregular72, { x: 432, y: 56, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a2534 }, "ParallaxDecals"),
       ShapesCircleIrregular72_1: d(Tx.Shapes.CircleIrregular72, { x: 288, y: 120, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a2534 }, "ParallaxDecals"),
@@ -3265,7 +3265,7 @@ export const Lvl = {
     };
   },
   NewBalltownUnderneathHomeowner: () => {
-    applyLevel({ width: 992, height: 472, backgroundTint: 0x938999 });
+    applyLevel({ width: 992, height: 472, backgroundTint: 0x938999, terrainTint: 0xb4afb7 });
     return {
       TerrainGrassSparse3px: d(Tx.Terrain.Grass.Sparse3px, { x: -231, y: 850, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xb4afb7 }, "BackgroundDecals"),
       ShapesSquare32: d(Tx.Shapes.Square32, { x: -232, y: 808, scaleX: 4.4, scaleY: 2.4, rotation: 0, originX: 0, originY: 0, tint: 0xb4afb7 }, "BackgroundDecals"),
@@ -3571,7 +3571,7 @@ export const Lvl = {
     };
   },
   NewBalltownUnderneathTunnel: () => {
-    applyLevel({ width: 856, height: 368, backgroundTint: 0x132852 });
+    applyLevel({ width: 856, height: 368, backgroundTint: 0x132852, terrainTint: 0x94a66f });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 208, y: 130, scaleX: 5.6, scaleY: 6, rotation: 0, originX: 0, originY: 0, tint: 0x425651 }, "BackgroundDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 204, y: 97, scaleX: 4, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0x132852 }, "BackgroundDecals"),
@@ -3700,7 +3700,7 @@ export const Lvl = {
     };
   },
   NewBalltownUnderneath: () => {
-    applyLevel({ width: 2656, height: 440, backgroundTint: 0xdcc132 });
+    applyLevel({ width: 2656, height: 440, backgroundTint: 0xdcc132, terrainTint: 0x103418 });
     return {
       OutskirtsSeam: dg(830, -421, "OutskirtsSeam", "ParallaxDecals"),
       SkyCloud0: d(Tx.Sky.Cloud0, { x: 861, y: 316, scaleX: -2, scaleY: -2, rotation: 90, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0xc44b17 }, "ParallaxDecals"),
@@ -4356,7 +4356,7 @@ export const Lvl = {
     };
   },
   NewBalltown: () => {
-    applyLevel({ width: 1644, height: 632, backgroundTint: 0xdcc132 });
+    applyLevel({ width: 1644, height: 632, backgroundTint: 0xdcc132, terrainTint: 0x294988 });
     return {
       OutskirtsSeam: dg(1313, -329, "OutskirtsSeam", "ParallaxDecals"),
       SkyCloud0: d(Tx.Sky.Cloud0, { x: 1344, y: 408, scaleX: -2, scaleY: -2, rotation: 90, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0xc44b17 }, "ParallaxDecals"),
@@ -5056,7 +5056,7 @@ export const Lvl = {
     };
   },
   ObstacleCourse: () => {
-    applyLevel({ width: 880, height: 760, backgroundTint: 0x005280 });
+    applyLevel({ width: 880, height: 760, backgroundTint: 0x005280, terrainTint: 0x77b923 });
     return {
       TerrainDistantHillMountainXl: d(Tx.Terrain.Distant.HillMountainXl, { x: 552, y: 104, scaleX: 4, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x0c6da3 }, "ParallaxDecals"),
       TerrainDistantHillMountainXl_1: d(Tx.Terrain.Distant.HillMountainXl, { x: 536, y: 32, scaleX: -3, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x1889c8 }, "ParallaxDecals"),
@@ -5251,7 +5251,7 @@ export const Lvl = {
     };
   },
   PlainsSuggestiveCavern: () => {
-    applyLevel({ width: 2000, height: 648, backgroundTint: 0x190000 });
+    applyLevel({ width: 2000, height: 648, backgroundTint: 0x190000, terrainTint: 0x540707 });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: -16, y: 48, scaleX: 64, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0x47201c }, "ParallaxDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: -16, y: -16, scaleX: 64, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0xa46154 }, "ParallaxDecals"),
@@ -5399,7 +5399,7 @@ export const Lvl = {
     };
   },
   PlainsSuggestiveFlopCollector: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x0a8148 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x0a8148, terrainTint: 0x23591f });
     return {
       TerrainEarthSmallPlatformer: d(Tx.Terrain.Earth.SmallPlatformer, { x: 79, y: 217, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x23591f }, "BackgroundDecals"),
       TerrainEarthSmallPlatformer_1: d(Tx.Terrain.Earth.SmallPlatformer, { x: 136, y: 217, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x23591f }, "BackgroundDecals"),
@@ -5452,7 +5452,7 @@ export const Lvl = {
     };
   },
   PlainsSuggestive: () => {
-    applyLevel({ width: 2176, height: 464, backgroundTint: 0xd28270 });
+    applyLevel({ width: 2176, height: 464, backgroundTint: 0xd28270, terrainTint: 0x680c0c });
     return {
       SkyCloud0: d(Tx.Sky.Cloud0, { x: 656, y: 296, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloud0_1: d(Tx.Sky.Cloud0, { x: 304, y: 360, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
@@ -5757,7 +5757,7 @@ export const Lvl = {
     };
   },
   RaceTrack: () => {
-    applyLevel({ width: 9848, height: 696, backgroundTint: 0xffb904 });
+    applyLevel({ width: 9848, height: 696, backgroundTint: 0xffb904, terrainTint: 0x2b00d7 });
     return {
       SkyCloudLong1: d(Tx.Sky.CloudLong1, { x: 1003, y: 409, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e04 }, "ParallaxDecals"),
       SkyCloudLong0: d(Tx.Sky.CloudLong0, { x: 872, y: 392, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e04 }, "ParallaxDecals"),
@@ -6268,7 +6268,7 @@ export const Lvl = {
     };
   },
   SimpleSecretValuables: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x8b93dc });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x8b93dc, terrainTint: 0xf04830 });
     return {
       CloudsGroup2: dg(413, 48, "CloudsGroup2", "ParallaxDecals"),
       SkyCloudBalls1: d(Tx.Sky.CloudBalls1, { x: 415, y: 60, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CloudsGroup2", tint: 0xb4bbff }, "ParallaxDecals"),
@@ -6400,7 +6400,7 @@ export const Lvl = {
     };
   },
   SinSwamp: () => {
-    applyLevel({ width: 2304, height: 512, backgroundTint: 0x172a03 });
+    applyLevel({ width: 2304, height: 512, backgroundTint: 0x172a03, terrainTint: 0x251105 });
     return {
       TerrainDistantWaves0: d(Tx.Terrain.Distant.Waves0, { x: 496, y: 340, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "ParallaxDecals"),
       TerrainDistantHills500: d(Tx.Terrain.Distant.Hills500, { x: 344, y: 380, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "ParallaxDecals"),
@@ -6452,7 +6452,7 @@ export const Lvl = {
     };
   },
   StrangeMarketGuardian: () => {
-    applyLevel({ width: 816, height: 280, backgroundTint: 0xbaee25 });
+    applyLevel({ width: 816, height: 280, backgroundTint: 0xbaee25, terrainTint: 0x996a34 });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: -144, y: -24, scaleX: 9, scaleY: 13, rotation: 0, originX: 0, originY: 0, tint: 0x5aa5dc }, "ParallaxDecals"),
       Indiana: dg(622, -243, "Indiana", "ParallaxDecals"),
@@ -6492,7 +6492,7 @@ export const Lvl = {
     };
   },
   StrangeMarketRestaurant: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x62c44a });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x62c44a, terrainTint: 0x6b55c3 });
     return {
       SkyCloudQuestionMark0: d(Tx.Sky.CloudQuestionMark0, { x: -11, y: 430, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "ParallaxDecals"),
       SkyCloudQuestionMark0_1: d(Tx.Sky.CloudQuestionMark0, { x: 205, y: 190, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3b8529 }, "ParallaxDecals"),
@@ -6548,7 +6548,7 @@ export const Lvl = {
     };
   },
   StrangeMarketTowerInterior: () => {
-    applyLevel({ width: 500, height: 880, backgroundTint: 0xad3600 });
+    applyLevel({ width: 500, height: 880, backgroundTint: 0xad3600, terrainTint: 0xe5bb00 });
     return {
       TownSignageShoes0: d(Tx.Town.Signage.Shoes0, { x: -253, y: 666, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe5bb00 }, "BackgroundDecals"),
       TownBallBrick0: d(Tx.Town.Ball.Brick0, { x: 178, y: 106, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x8f2d00 }, "BackgroundDecals"),
@@ -6625,7 +6625,7 @@ export const Lvl = {
     };
   },
   StrangeMarket: () => {
-    applyLevel({ width: 1112, height: 816, backgroundTint: 0xbaee25 });
+    applyLevel({ width: 1112, height: 816, backgroundTint: 0xbaee25, terrainTint: 0x6b55c3 });
     return {
       SkyCloudQuestionMark0: d(Tx.Sky.CloudQuestionMark0, { x: 124, y: 377, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "ParallaxDecals"),
       SkyCloudQuestionMark0_1: d(Tx.Sky.CloudQuestionMark0, { x: 325, y: 478, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "ParallaxDecals"),
@@ -6952,7 +6952,7 @@ export const Lvl = {
     };
   },
   VaseInhabitant: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0xffd600 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0xffd600, terrainTint: 0x478d26 });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 379, y: 64, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x8eb7ff }, "BackgroundDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 415, y: 64, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x8eb7ff }, "BackgroundDecals"),
@@ -7020,7 +7020,7 @@ export const Lvl = {
     };
   },
   WizardLair: () => {
-    applyLevel({ width: 500, height: 888, backgroundTint: 0x130d2a });
+    applyLevel({ width: 500, height: 888, backgroundTint: 0x130d2a, terrainTint: 0x575757 });
     return {
       SkyStars0: d(Tx.Sky.Stars0, { x: 50, y: 50, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x826adc }, "ParallaxDecals"),
       SkyStars0_1: d(Tx.Sky.Stars0, { x: 8, y: 148, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x826adc }, "ParallaxDecals"),
@@ -7070,7 +7070,7 @@ export const Lvl = {
     };
   },
   WorldMap: () => {
-    applyLevel({ width: 1368, height: 1368, backgroundTint: 0x81bde9 });
+    applyLevel({ width: 1368, height: 1368, backgroundTint: 0x81bde9, terrainTint: 0x000000 });
     return {
       Indiana: dg(432, 104, "Indiana", "ParallaxDecals"),
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 432, y: 128, scaleX: 19, scaleY: 24, rotation: 0, originX: 0, originY: 0, groupName: "Indiana", tint: 0xbab532 }, "ParallaxDecals"),

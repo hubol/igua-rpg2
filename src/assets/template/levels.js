@@ -95,7 +95,13 @@ module.exports = function ({ files }, { pascal, noext, format }) {
             ];
         });
 
-        const level = { width: json.width, height: json.height, backgroundTint: getSerializableTint(json.backgroundColor) }
+        /** @type {import("../../igua/ogmo/factory").OgmoFactory.Level} */
+        const level = {
+            width: json.width,
+            height: json.height,
+            backgroundTint: getSerializableTint(json.backgroundColor),
+            terrainTint: getSerializableTint(json.values["Terrain Color"] ?? "#000000"),
+        }
         const obj = literal(`() => { applyLevel(${serialize(level, 0)}); return { ${resolveEntities.map(({ key, value }) => `"${key}": ${value},`).join('')} }; }`)
 
         const pascalPath = path.map(pascal);

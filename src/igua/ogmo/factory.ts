@@ -41,6 +41,7 @@ export namespace OgmoFactory {
         width: number;
         height: number;
         backgroundTint: number;
+        terrainTint: number;
     }
 
     export function createEntity<TFn extends (...args: any[]) => any>(
@@ -150,6 +151,7 @@ export namespace OgmoFactory {
         scene.level.width = level.width;
         scene.level.height = level.height;
         scene.style.backgroundTint = level.backgroundTint;
+        scene.style.terrainTint = level.terrainTint;
         decalGroups.clear();
     }
 }

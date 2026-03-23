@@ -5,7 +5,7 @@
   "offsetX": 0,
   "offsetY": 0,
   "backgroundColor": "#baee25",
-  "values": {"Terrain Color": "#000000"},
+  "values": {"Terrain Color": "#996a34"},
   "layers": [
     {
       "name": "MarkerEntities",
