@@ -123,6 +123,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     let stepsSinceOffGround = 0;
     let stepsSinceJumpJustWentDown = 100;
     let landedThenJumpedHorizontalSpeedBoostUnit = 0;
+    let midairJumpsRemaining = Rpg.character.buffs.motion.jump.midairCount;
 
     function getWalkingTopSpeed() {
         let speed = 2.5 * Math.max(0, 1 + Rpg.character.buffs.motion.walk.topSpeedIncreaseFactor / 100);
@@ -135,7 +136,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
         .mixin(mxnRpgStatus, { status, effects, hurtboxes: [iguanaLocomotiveObj] })
         .mixin(mxnSparkling)
         .mixin(mxnSpeaker, { name: "You", ...objIguanaNpc.getSpeakerColors(looks) })
-        .handles("moved", () => {
+        .handles("moved", (_, event) => {
             if (CtxGate.value.isGateTransitionActive) {
                 return;
             }
@@ -148,6 +149,10 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 puppet.speed.x = 0;
                 puppet.pedometer = 0;
                 puppet.gait = 0;
+            }
+
+            if (event.hitGround) {
+                midairJumpsRemaining = Rpg.character.buffs.motion.jump.midairCount;
             }
         })
         .handles("damaged", (_, result) => {
@@ -232,7 +237,13 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 stepsSinceJumpJustWentDown = 0;
             }
 
-            if (hasControl && puppet.isOnGround && stepsSinceJumpJustWentDown < 6) {
+            if (hasControl && (puppet.isOnGround || midairJumpsRemaining > 0) && stepsSinceJumpJustWentDown < 6) {
+                const isMidairJump = !puppet.isOnGround;
+
+                if (isMidairJump) {
+                    midairJumpsRemaining--;
+                }
+
                 stepsSinceJumpJustWentDown = 100;
 
                 const specialBonus = Rpg.character.buffs.motion.jump.bonusAtSpecialSigns;
@@ -255,12 +266,13 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                     Rpg.experience.reward.jump.onJump(ballonsCount, 0);
                 }
 
-                if (stepsSinceOffGround < 6 && (puppet.isMovingLeft || puppet.isMovingRight)) {
+                const isComboJump = stepsSinceOffGround < 6 && (puppet.isMovingLeft || puppet.isMovingRight);
+                if (isMidairJump || isComboJump) {
                     puppet.play(Sfx.Iguana.JumpCombo.rate(0.975, 1.025));
-                    objFxPlayerJumpComboDust().at(puppet.x + Math.sign(puppet.facing) * -4, puppet.y).scaled(
-                        -Math.sign(puppet.facing),
-                        1,
-                    ).show();
+                    objFxPlayerJumpComboDust()
+                        .at(puppet.x + Math.sign(puppet.facing) * -4, puppet.y)
+                        .scaled(-Math.sign(puppet.facing), 1)
+                        .show();
                     puppet.speed.x += Math.sign(puppet.facing) * 2;
                     landedThenJumpedHorizontalSpeedBoostUnit = 1;
                 }
