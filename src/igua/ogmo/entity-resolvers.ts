@@ -75,7 +75,7 @@ export const OgmoEntityResolvers = {
             CtxPocketItems.value.variant,
             CtxPocketItems.value.behavior,
         ).at(entity, -1),
-    EnemyCactus: () => objAngelCactus().at(1, 3),
+    EnemyCactus: (entity) => objAngelCactus(entity).at(1, 3),
     EnemySuggestive: (entity) => objAngelSuggestive(entity).at(0, -38),
     EnemyMiffed: (entity) => objAngelMiffed(entity).at(0, 1),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,

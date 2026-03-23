@@ -98,6 +98,9 @@ export function getInitialRpgProgress() {
                 greeter: {
                     gavePlayerPoisonRing: false,
                 },
+                guardian: {
+                    defeated: false,
+                },
             },
             greatTower: {
                 balcony: {

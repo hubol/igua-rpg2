@@ -1,4 +1,5 @@
 import { Graphics, Sprite } from "pixi.js";
+import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { interp } from "../../../lib/game-engine/routines/interp";
@@ -55,9 +56,16 @@ type Theme = ValuesOf<typeof themes>;
 
 const [txCactusBody, ...txsCactusSpikes] = Tx.Enemy.Cactus.Body.split({ count: 4 });
 
-const atkSpikes = RpgAttack.create({
-    physical: 60,
-});
+const atks = {
+    spikes: {
+        strong: RpgAttack.create({
+            physical: 60,
+        }),
+        weak: RpgAttack.create({
+            physical: 25,
+        }),
+    },
+};
 
 const ranks = {
     level0: RpgEnemyRank.create({
@@ -79,9 +87,20 @@ const ranks = {
             ],
         },
     }),
+    level1: RpgEnemyRank.create({
+        status: {
+            healthMax: 100,
+        },
+        loot: {
+            tier0: [
+                { kind: "valuables", min: 100, max: 150, deltaPride: -10 },
+            ],
+            tier1: [],
+        },
+    }),
 };
 
-type Feature = "jumping";
+type Feature = "jumping" | "weak";
 
 const variants = {
     level0: {
@@ -90,14 +109,14 @@ const variants = {
         theme: themes.common,
     },
     level1: {
-        features: new Set<Feature>(["jumping"]),
-        rank: ranks.level0,
+        features: new Set<Feature>(["jumping", "weak"]),
+        rank: ranks.level1,
         theme: themes.common,
     },
 };
 
-export function objAngelCactus() {
-    const { rank, theme, features } = variants.level0;
+export function objAngelCactus(entity: OgmoEntities.EnemyCactus) {
+    const { rank, theme, features } = variants[entity.values.variant] ?? variants.level0;
 
     const hurtboxObj = new Graphics()
         .beginFill(0xff0000)
@@ -151,7 +170,10 @@ export function objAngelCactus() {
         .filtered(new MapRgbFilter(...theme.tints.map))
         .coro(function* (self) {
             cactusSpikesObj
-                .mixin(mxnRpgAttack, { attacker: self.status, attack: atkSpikes })
+                .mixin(mxnRpgAttack, {
+                    attacker: self.status,
+                    attack: atks.spikes[features.has("weak") ? "weak" : "strong"],
+                })
                 .step(spikesObj => spikesObj.isAttackActive = spikesObj.objAngelCactusSpikes.scale >= 1);
         })
         .coro(function* (self) {
