@@ -78,7 +78,7 @@
           "rotation": 540,
           "uid": 175755215936902,
           "tint": "#ffffff",
-          "values": {"sceneName": "scnStrangeMarket", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": false}
+          "values": {"sceneName": "scnStrangeMarket", "checkpointName": "fromWorldMap", "name": "StrangeMarketGate", "depth": 0, "visible": true}
         },
         {
           "name": "GateMap",
@@ -195,7 +195,7 @@
           "rotation": 630,
           "uid": 177427749219800,
           "tint": "#ffffff",
-          "values": {"sceneName": "scnStrangeMarketGuardian", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+          "values": {"sceneName": "scnStrangeMarketGuardian", "checkpointName": "fromWorldMap", "name": "StrangeMarketGuardianGate", "depth": 0, "visible": true}
         }
       ]
     },

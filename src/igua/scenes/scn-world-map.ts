@@ -10,6 +10,7 @@ import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { playerObj } from "../objects/obj-player";
 import { OgmoFactory } from "../ogmo/factory";
+import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgSaveFiles } from "../rpg/rpg-save-files";
 
@@ -33,6 +34,13 @@ export function scnWorldMap() {
     ).forEach(x => x.mixin(mxnBoilPivot));
 
     enrichSimpleSecretValuables(lvl);
+    enrichStrangeMarketGuardian(lvl);
+}
+
+function enrichStrangeMarketGuardian(lvl: LvlType.WorldMap) {
+    if (!Rpg.flags.strangeMarket.guardian.defeated) {
+        lvl.StrangeMarketGate.destroy();
+    }
 }
 
 function enrichSimpleSecretValuables(lvl: LvlType.WorldMap) {
