@@ -74,7 +74,7 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
     eyesObj.stepsUntilBlink = Rng.int(40, 120);
 
     const averageScleraTxDimension = (args.scleraTx.width + args.scleraTx.height) / 2;
-    const injuredEyeTx = Tx.Enemy.Common.Eyes[averageScleraTxDimension > 30 ? "Injured1" : "Injured0"];
+    const injuredEyeTx = Tx.Enemy.Common.Eyes[averageScleraTxDimension > 27 ? "Injured1" : "Injured0"];
 
     const injuredLeftEyeObj = Sprite.from(injuredEyeTx).anchored(0.5, 0.5).at(leftEyeObj)
         .add(
