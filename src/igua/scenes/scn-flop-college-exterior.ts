@@ -1,11 +1,13 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnWeightedPedestalMask } from "../mixins/mxn-weighted-pedestal-mask";
 import { Rpg } from "../rpg/rpg";
 
 export function scnFlopCollegeExterior() {
     const lvl = Lvl.FlopCollegeExterior();
     enrichDirector(lvl);
+    enrichWeightedPedestal(lvl);
 }
 
 function enrichDirector(lvl: LvlType.FlopCollegeExterior) {
@@ -35,4 +37,10 @@ function enrichDirector(lvl: LvlType.FlopCollegeExterior) {
                 "Think you can help me by providing the necessary flops?",
             );
         });
+}
+
+function enrichWeightedPedestal(lvl: LvlType.FlopCollegeExterior) {
+    lvl.WeightedPedestal
+        .mixin(mxnWeightedPedestalMask, { decalObjs: [lvl.UniversityBuildingGroup], interactObjs: [lvl.CollegeDoor] })
+        .mixin(mxnWeightedPedestalMask, { interactObjs: [lvl.CollegeSign], maskWhenWeighted: false });
 }
