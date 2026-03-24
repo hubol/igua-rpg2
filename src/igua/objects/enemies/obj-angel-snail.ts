@@ -6,6 +6,7 @@ import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { ValuesOf } from "../../../lib/types/values-of";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnRpgStatusBodyPart } from "../../mixins/mxn-rpg-status-body-part";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
@@ -81,6 +82,12 @@ export function objAngelSnail() {
     )
         .mixin(mxnSinePivot);
 
+    const soulAnchorObj = new Graphics()
+        .beginFill(0xff0000)
+        .drawRect(0, 0, 1, 1)
+        .at(152, 101)
+        .invisible();
+
     let stepsSinceDamage = 9999;
 
     return container(
@@ -88,10 +95,12 @@ export function objAngelSnail() {
             .filtered(new MapRgbFilter(...theme.tints.map)),
         hurtboxObj,
         immuneHurtboxObj,
+        soulAnchorObj,
     )
         .pivoted(91, 129)
         .mixin(mxnDetectPlayer)
-        .mixin(mxnEnemy, { rank, hurtboxes: [hurtboxObj, immuneHurtboxObj] })
+        .mixin(mxnEnemy, { rank, hurtboxes: [hurtboxObj, immuneHurtboxObj], soulAnchorObj })
+        .mixin(mxnEnemyDeathBurst, { map: theme.tints.map })
         .handles("damaged", (_, result) => {
             if (!result.rejected) {
                 mouthObj.controls.frowning = result.damaged === true;
