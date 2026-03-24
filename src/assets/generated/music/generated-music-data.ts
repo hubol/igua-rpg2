@@ -12,6 +12,7 @@ export const GeneratedMusicData = {
    "FaithBeam": { ogg: require("./ogg/faith-beam.ogg") },
    "FatFire": { ogg: require("./ogg/fat-fire.ogg") },
    "FirstSong": { ogg: require("./ogg/first-song.ogg") },
+   "FuckerLand": { ogg: require("./ogg/fucker-land.ogg") },
    "GolfResort": { ogg: require("./ogg/golf-resort.ogg") },
    "HomeFine": { ogg: require("./ogg/home-fine.ogg") },
    "HomosexualFeet": { ogg: require("./ogg/homosexual-feet.ogg") },

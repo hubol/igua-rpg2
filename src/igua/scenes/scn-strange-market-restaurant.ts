@@ -1,4 +1,5 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaFoodOrder } from "../drama/drama-food-order";
 import { DramaInventory } from "../drama/drama-inventory";
@@ -8,6 +9,7 @@ import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objEsotericInProgressOrder } from "../objects/esoteric/obj-esoteric-in-progress-order";
+import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgFoodOrder } from "../rpg/rpg-food-order";
 import { RpgInventory } from "../rpg/rpg-inventory";
@@ -15,6 +17,12 @@ import { RpgInventory } from "../rpg/rpg-inventory";
 export function scnStrangeMarketRestaurant() {
     const lvl = Lvl.StrangeMarketRestaurant();
     enrichScenario(lvl);
+    objBossMusicPlayer({
+        bossObjs: [lvl.MiffedAngel],
+        mzkBattle: Mzk.FuckerLand,
+        mzkPeace: Mzk.BigLove,
+    })
+        .show();
 }
 
 function computeItemToDispense(order: RpgFoodOrder): RpgInventory.Item {

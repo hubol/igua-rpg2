@@ -1,7 +1,9 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { interpvr } from "../../lib/game-engine/routines/interp";
 import { scene } from "../globals";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
+import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 import { Rpg } from "../rpg/rpg";
 
 export function scnStrangeMarketGuardian() {
@@ -22,4 +24,11 @@ export function scnStrangeMarketGuardian() {
                 yield interpvr(lvl.GuardianBlock).translate(0, lvl.GuardianBlock.height).over(2000);
             });
     }
+
+    objBossMusicPlayer({
+        bossObjs: [lvl.GuardianBoss],
+        mzkBattle: Mzk.FuckerLand,
+        mzkPeace: Mzk.BigLove,
+    })
+        .show();
 }
