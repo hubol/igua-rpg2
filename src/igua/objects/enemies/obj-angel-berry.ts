@@ -51,12 +51,13 @@ export function objAngelBerry(targetObj: MxnRpgStatus) {
                 self.speed.x = 0;
             }
         })
-        .mixin(mxnEnemy, { rank: ranks.level0, hurtboxes: [hurtboxObj] })
+        .mixin(mxnEnemy, { rank: ranks.level0, hurtboxes: [] })
         .handles("mxnEnemy.died", (self) => objFxBurst32().at(self).tinted(0xB85BFF).show())
         .pivoted(13, 24)
         .coro(function* (self) {
             yield sleepf(3);
             yield () => self.isOnGround;
+            self.hurtboxes.push(hurtboxObj);
             const dirtObj = Sprite.from(txs.txDirt).tinted(scene.style.terrainTint).show(self).at(0, 6);
             yield interpvr(dirtObj).factor(factor.sine).to(0, 0).over(250);
             const sproutObj = objIndexedSprite(txs.txsSprout).show(self);
