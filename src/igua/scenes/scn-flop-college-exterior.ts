@@ -1,10 +1,13 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
+import { Jukebox } from "../core/igua-audio";
 import { show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnWeightedPedestalMask } from "../mixins/mxn-weighted-pedestal-mask";
 import { Rpg } from "../rpg/rpg";
 
 export function scnFlopCollegeExterior() {
+    Jukebox.play(Mzk.DespicableMessage);
     const lvl = Lvl.FlopCollegeExterior();
     enrichDirector(lvl);
     enrichWeightedPedestal(lvl);
