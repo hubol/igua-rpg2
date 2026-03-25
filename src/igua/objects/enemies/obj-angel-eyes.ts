@@ -22,6 +22,7 @@ export interface ObjAngelEyesArgs {
     pupilsMirrored?: boolean;
     scleraTx: Texture;
     sclerasMirrored?: boolean;
+    sclerasTint?: OneOrTwo<RgbInt>;
     eyelidsTint: OneOrTwo<RgbInt>;
     gap: Integer;
     defaultEyelidRestingPosition: Integer;
@@ -46,8 +47,11 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
         .anchored(0.5, 0.5).at(rightPupilPositionConfig.rest)
         .scaled(args.pupilsMirrored ? -1 : 1, 1);
 
-    const leftScleraObj = Sprite.from(args.scleraTx);
-    const rightScleraObj = Sprite.from(args.scleraTx).flipH(args.sclerasMirrored ? -1 : 1);
+    const leftScleraObj = Sprite.from(args.scleraTx)
+        .tinted(args.sclerasTint ? OneOrTwo.get(args.sclerasTint, 0) : 0xffffff);
+    const rightScleraObj = Sprite.from(args.scleraTx)
+        .flipH(args.sclerasMirrored ? -1 : 1)
+        .tinted(args.sclerasTint ? OneOrTwo.get(args.sclerasTint, 1) : 0xffffff);
 
     const leftEyeX = -args.scleraTx.width - Math.ceil(args.gap / 2);
     const rightEyeX = Math.floor(args.gap / 2);

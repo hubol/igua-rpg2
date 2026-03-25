@@ -16,7 +16,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 171,
       "gridCellsY": 171,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 744,
+          "y": 552,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#777777",
+          "values": {"name": "FallenBotMarker", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",

@@ -7569,6 +7569,7 @@ export const Lvl = {
       GateMap_9: e(r["GateMap"], { x: 488, y: 232, rotation: 0, uid: 177152452563600, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_10: e(r["GateMap"], { x: 632, y: 880, rotation: 180, uid: 177281293625000, values: { sceneName: "scnIndianaLoungeExterior", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       StrangeMarketGuardianGate: e(r["GateMap"], { x: 507, y: 590, rotation: 630, uid: 177427749219800, values: { sceneName: "scnStrangeMarketGuardian", checkpointName: "fromWorldMap", name: "StrangeMarketGuardianGate", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      FallenBotMarker: e(r["Marker"], { x: 744, y: 552, values: { name: "FallenBotMarker", depth: 0 }, tint: 0x777777 }, "MarkerEntities"),
     };
   },
 };
