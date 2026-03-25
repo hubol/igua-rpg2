@@ -4,6 +4,7 @@ import { IrregularBitmapText } from "../igua/lib/irregular-bitmap-text";
 import { fntDiggit, fntDiggitMono } from "./bitmap-fonts/fnt-diggit";
 import { fntErotix } from "./bitmap-fonts/fnt-erotix";
 import { fntErotixLight } from "./bitmap-fonts/fnt-erotix-light";
+import { fntErotixLightMono } from "./bitmap-fonts/fnt-erotix-light-mono";
 import { fntFlaccid } from "./bitmap-fonts/fnt-flaccid";
 import { fntGoodBoy } from "./bitmap-fonts/fnt-good-boy";
 
@@ -33,6 +34,9 @@ export const objText = {
     },
     MediumBold(text = "", style: Style = {}) {
         return new BitmapText(text, { fontName: fntErotix.font, ...style });
+    },
+    MediumMono(text = "", style: Style = {}) {
+        return new BitmapText(text, { fontName: fntErotixLightMono.font, ...style });
     },
     Large(text = "", style: Style = {}) {
         return new BitmapText(text, { fontName: fntGoodBoy.font, ...style });
