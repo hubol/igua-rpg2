@@ -8,13 +8,15 @@ import { DataPotion } from "../data/data-potion";
 import { RpgExperience } from "./rpg-experience";
 import { RpgPlayerBuffs } from "./rpg-player-buffs";
 import { RpgPocket } from "./rpg-pocket";
+import { RpgRecords } from "./rpg-records";
 import { RpgStatus } from "./rpg-status";
 
 export class RpgLoot {
-    constructor(private readonly _experience: RpgExperience) {
+    constructor(private readonly _experience: RpgExperience, private readonly _records: RpgRecords) {
     }
 
     drop(table: RpgLoot.Table, dropperStatus: RpgStatus.Model, lootBuffs: RpgPlayerBuffs.Model["loot"]): RpgLoot.Drop {
+        this._records.onDropLoot();
         const equipments: DataEquipment.Id[] = [];
         const keyItems: DataKeyItem.Id[] = [];
         let valuables = lootBuffs.valuables.bonus;

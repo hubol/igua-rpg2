@@ -58,5 +58,5 @@ export function objFallenBot() {
 
 objFallenBot.objImpactSite = function objImpactSite () {
     return Sprite.from(Tx.Characters.FallenBot.ImpactSite)
-        .pivoted(38, 85);
+        .pivoted(38 - 6, 85 - 68);
 };

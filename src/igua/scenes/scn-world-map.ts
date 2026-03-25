@@ -4,6 +4,7 @@ import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Instances } from "../../lib/game-engine/instances";
+import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { ask, show } from "../drama/show";
@@ -67,6 +68,42 @@ function enrichSimpleSecretValuables(lvl: LvlType.WorldMap) {
 }
 
 function enrichFallenBot(lvl: LvlType.WorldMap) {
+    const { fallenBot: flagFallenBot } = Rpg.flags.worldMap;
+
+    if (flagFallenBot.landsWhenTimesDroppedLoot === null) {
+        flagFallenBot.landsWhenTimesDroppedLoot = Rpg.records.timesDroppedLoot + 10;
+    }
+
+    const rootObj = container()
+        .at(lvl.FallenBotMarker)
+        .zIndexed(ZIndex.Entities)
+        .show();
+
+    if (Rpg.records.timesDroppedLoot < flagFallenBot.landsWhenTimesDroppedLoot) {
+        objFallenBot.objImpactSite()
+            .mixin(mxnSpeaker, { name: "Impact Site", tintPrimary: 0x384C0E, tintSecondary: 0x648719 })
+            .mixin(mxnCutscene, function* () {
+                const timesDroppedLootDiff = flagFallenBot.landsWhenTimesDroppedLoot! - Rpg.records.timesDroppedLoot;
+
+                if (Rpg.character.attributes.intelligence < 1) {
+                    yield* show("It looks like something has repeatedly crashed here.");
+                }
+                else if (Rpg.character.attributes.intelligence < 2) {
+                    if (timesDroppedLootDiff < 5) {
+                        yield* show("You get the sense that it won't be much longer until another crash.");
+                    }
+                    else {
+                        yield* show("It looks like something has repeatedly crashed here.");
+                    }
+                }
+                else {
+                    yield* show(`Defeat ${timesDroppedLootDiff} more for a visitation.`);
+                }
+            })
+            .show(rootObj);
+        return;
+    }
+
     const botObj = objFallenBot();
     botObj
         .mixin(mxnSpeaker, { name: "Fallen Bot", tintPrimary: 0x5E45B7, tintSecondary: 0x4BDDEA })
@@ -78,7 +115,5 @@ function enrichFallenBot(lvl: LvlType.WorldMap) {
                 botObj.objFallenBot.mouthObj.controls.frowning = false;
             }
         })
-        .at(lvl.FallenBotMarker)
-        .zIndexed(ZIndex.Entities)
-        .show();
+        .show(rootObj);
 }

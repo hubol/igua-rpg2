@@ -18,6 +18,7 @@ import { RpgPlayerWallet } from "./rpg-player-wallet";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgPotions } from "./rpg-potions";
 import { RpgQuests } from "./rpg-quests";
+import { RpgRecords } from "./rpg-records";
 import { RpgShops } from "./rpg-shops";
 import { RpgStashPockets } from "./rpg-stash-pockets";
 import { RpgWeightedPedestals } from "./rpg-weighted-pedestals";
@@ -37,6 +38,7 @@ export function getInitialRpgProgress() {
             status: RpgPlayerStatus.createState(),
             attributes: RpgPlayerAttributes.createState(),
             experience: RpgExperience.createState(),
+            records: RpgRecords.createState(),
             ...RpgPlayer.createState(),
         },
         flags: {
@@ -122,6 +124,11 @@ export function getInitialRpgProgress() {
                 moistureUnits: 0,
                 cactusFruitTypeA: 0,
                 cactusFruitTypeB: 0,
+            },
+            worldMap: {
+                fallenBot: {
+                    landsWhenTimesDroppedLoot: Null<Integer>(),
+                },
             },
         },
         programmaticFlags: {
