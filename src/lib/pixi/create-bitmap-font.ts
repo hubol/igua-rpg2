@@ -6,6 +6,7 @@ interface CharacterData {
     y: Integer;
     w: Integer;
     h: Integer;
+    xoff?: Integer;
     yoff?: Integer;
     xadv: Integer;
 }
@@ -37,7 +38,7 @@ export function createBitmapFont<TCharacters extends CharactersData>(
         xadvance: character.xadv,
         yoffset: character.yoff ?? 0,
         page: 0,
-        xoffset: 0,
+        xoffset: character.xoff ?? 0,
     }));
     data.kerning = args.kernings.map(([first, second, amount]) => ({
         first: (first as string).charCodeAt(0),
