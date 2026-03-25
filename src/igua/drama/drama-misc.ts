@@ -108,6 +108,7 @@ interface AskIntegerImplOptions {
     multipleOf?: Integer;
     disabledMessage?: string | null;
     rejectMessage?: string | null;
+    align?: "center" | "right";
 }
 
 function* askIntegerImpl(
@@ -119,6 +120,7 @@ function* askIntegerImpl(
         max,
         multipleOf = 1,
         rejectMessage = "Never mind",
+        align = "center",
     }: AskIntegerImplOptions,
 ) {
     const colors = DramaLib.Speaker.getColors();
@@ -162,7 +164,9 @@ function* askIntegerImpl(
         disabledMessage = null;
     }
 
-    const obj = container().show(layers.overlay.messages);
+    const obj = container()
+        .at(align === "right" ? 80 : 0, 0)
+        .show(layers.overlay.messages);
 
     const messageObj = container(
         Sprite.from(Tx.Ui.Dialog.AskRemoveCountBox).tinted(colors.primary).anchored(0.5, 0.5).mixin(mxnBoilPivot),
