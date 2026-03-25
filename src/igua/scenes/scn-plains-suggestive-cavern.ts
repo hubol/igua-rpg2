@@ -2,15 +2,14 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
-import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objAngelChill } from "../objects/enemies/obj-angel-chill";
+import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 
 export function scnPlainsSuggestiveCavern() {
-    Jukebox.play(Mzk.HomeFine);
     const lvl = Lvl.PlainsSuggestiveCavern();
     enrichGatekeeper(lvl);
     enrichShopkeeper(lvl);
@@ -24,6 +23,12 @@ function enrichChillEnemy(lvl: LvlType.PlainsSuggestiveCavern) {
             yield interpvr(self).factor(factor.sine).to(lvl.ExitChillEnemyDoorMarker).over(5000);
         });
     });
+    objBossMusicPlayer({
+        bossObjs: [chillAngelObj],
+        mzkBattle: Mzk.FuckerLand,
+        mzkPeace: Mzk.HomeFine,
+    })
+        .show();
 }
 
 function enrichGatekeeper(lvl: LvlType.PlainsSuggestiveCavern) {

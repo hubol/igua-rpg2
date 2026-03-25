@@ -17,7 +17,7 @@ const v = vnew();
 export function mxnDetectPlayer(obj: Container) {
     const mxnDetectPlayer = {
         debug: false,
-        detectionScore: -1,
+        detectionScore: -999,
         minDetectionScore: 0,
         get isDetected() {
             return this.detectionScore > this.minDetectionScore;
