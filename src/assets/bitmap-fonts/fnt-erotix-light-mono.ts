@@ -89,6 +89,7 @@ export const fntErotixLightMono = createBitmapFont(Tx.Font.ErotixLight, {
         ")": { x: 123, y: 24, w: 3, h: 9, xadv: 7, yoff: -1 },
         "{": { x: 160, y: 23, w: 5, h: 9, xadv: 7, yoff: -1 },
         "}": { x: 166, y: 23, w: 5, h: 9, xadv: 7, yoff: -1 },
+        "|": { x: 174, y: 23, w: 1, h: 9, xadv: 7, xoff: 2, yoff: -1 },
         "-": { x: 127, y: 28, w: 3, h: 1, xadv: 7, yoff: 3 },
         "=": { x: 131, y: 27, w: 3, h: 3, xadv: 7, yoff: 2 },
         "+": { x: 135, y: 27, w: 3, h: 3, xadv: 7, yoff: 2 },
