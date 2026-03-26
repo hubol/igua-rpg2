@@ -1,12 +1,16 @@
-import { Container, DisplayObject } from "pixi.js";
+import { DisplayObject } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Instances } from "../../lib/game-engine/instances";
+import { interpv } from "../../lib/game-engine/routines/interp";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
+import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { dramaQuizComputerScience } from "../drama/drama-quiz-computer-science";
 import { ask, show } from "../drama/show";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -80,6 +84,7 @@ function enrichFallenBot(lvl: LvlType.WorldMap) {
         .show();
 
     if (Rpg.records.timesDroppedLoot < flagFallenBot.landsWhenTimesDroppedLoot) {
+        rootObj.zIndex -= 1;
         objFallenBot.objImpactSite()
             .mixin(mxnSpeaker, { name: "Impact Site", tintPrimary: 0x384C0E, tintSecondary: 0x648719 })
             .mixin(mxnCutscene, function* () {
@@ -112,8 +117,44 @@ function enrichFallenBot(lvl: LvlType.WorldMap) {
             if (!result) {
                 botObj.objFallenBot.mouthObj.controls.frowning = true;
                 yield* show("Oh... How it pains me to hear it.");
+                yield sleep(333);
                 botObj.objFallenBot.mouthObj.controls.frowning = false;
+                return;
             }
+
+            yield* show(
+                "Is that so? Maybe you are a good programmer, then!",
+                "I will show you three simple programs. You must guess their output.",
+                "It won't be so bad. And your experience with computer will grow if you guess correctly!",
+            );
+
+            let correctAnswersCount = 0;
+
+            for (let i = 0; i < 3; i++) {
+                yield* show(`Program #${i + 1}...`);
+                if (yield* dramaQuizComputerScience(flagFallenBot.perfectScoreTimes + i)) {
+                    Rpg.experience.reward.computer.onCorrectQuizAnswer(++correctAnswersCount);
+                }
+            }
+
+            yield* show(`You got ${correctAnswersCount} of 3 correct.`);
+            if (correctAnswersCount < 2) {
+                yield* show("Study hard! Next time you will impress me!");
+            }
+            else if (correctAnswersCount < 3) {
+                yield* show("Keep studying! You're almost there!");
+            }
+            else {
+                yield* show("You've given me some hope.");
+                flagFallenBot.perfectScoreTimes++;
+            }
+
+            yield* show("I will see you later!");
+            flagFallenBot.landsWhenTimesDroppedLoot = Rpg.records.timesDroppedLoot + Rng.intc(10, 20);
+            enrichFallenBot(lvl);
+            yield interpv(botObj.scale).steps(3).to(0, 0).over(500);
+            botObj.destroy();
+            yield sleepf(5);
         })
         .show(rootObj);
 }

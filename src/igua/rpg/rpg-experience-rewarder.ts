@@ -14,6 +14,8 @@ const computerInteractionsToExperience = {
     "medium_task": 14,
 } satisfies Record<ComputerInteractionKind, Integer>;
 
+const computerCorrectQuizAnswerCountsToExperience = [25, 25, 50, 75];
+
 type SpeakKind = "first_ever" | "first_in_cutscene" | "default";
 
 const speaksToExperience = {
@@ -63,6 +65,11 @@ export class RpgExperienceRewarder {
         },
         onInteract(kind: ComputerInteractionKind) {
             increase(computerInteractionsToExperience[kind]);
+        },
+        onCorrectQuizAnswer(count: Integer) {
+            increase(
+                computerCorrectQuizAnswerCountsToExperience[count] ?? computerCorrectQuizAnswerCountsToExperience.last,
+            );
         },
     }));
 
