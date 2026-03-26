@@ -158,7 +158,7 @@ function objProgram(program: Program) {
     return container(
         new Graphics()
             .beginFill(0xffffff)
-            .drawRect(0, 0, 250, 250),
+            .drawRect(0, 0, 250, 256),
         objText.MediumMono(program.text, { tint: 0 })
             .at(3, 3),
     );
