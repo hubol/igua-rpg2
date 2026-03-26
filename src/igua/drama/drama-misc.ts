@@ -165,7 +165,7 @@ function* askIntegerImpl(
     }
 
     const obj = container()
-        .at(align === "right" ? 80 : 0, 0)
+        .at(align === "right" ? 102 : 0, 0)
         .show(layers.overlay.messages);
 
     const messageObj = container(
@@ -185,7 +185,7 @@ function* askIntegerImpl(
     const isDisabled = disabledMessage !== null;
     let isSliderSelected = !isDisabled;
 
-    const sliderObj = objSlider({ max, value: isDisabled ? 0 : min, colors });
+    const sliderObj = objSlider({ max, value: isDisabled ? 0 : min, colors, width: align === "center" ? 224 : 124 });
 
     const sliderContainerObj = container(
         new Graphics().beginFill(0x000000).drawRect(-140, -20, 300, 60)
@@ -201,8 +201,17 @@ function* askIntegerImpl(
             .invisible()
             .step(self => self.visible = !isSliderSelected),
     )
-        .at(renderer.width / 2, 140)
+        .at(renderer.width / 2 + (align === "right" ? 55 : 0), 140)
         .show(obj);
+
+    if (align === "right") {
+        const sliderMaskObj = new Graphics()
+            .beginFill(0xff0000)
+            .drawRect(-160, -30, 210, 100)
+            .show(sliderContainerObj);
+
+        sliderContainerObj.mask = sliderMaskObj;
+    }
 
     const rejectButtonObj = container(
         Sprite.from(Tx.Ui.Dialog.AskRemoveCountRejectBox).tinted(0x000000).anchored(0.5, 0.5).scaled(1.2, 1.2)
@@ -279,13 +288,13 @@ function* askIntegerImpl(
 }
 
 interface ObjSliderArgs {
+    width: Integer;
     max: Integer;
     value: Integer;
     colors: DramaLib.Speaker.Colors;
 }
 
-function objSlider({ max, value, colors }: ObjSliderArgs) {
-    const width = 224;
+function objSlider({ max, value, width, colors }: ObjSliderArgs) {
     const fgGfx = new Graphics().beginFill(0xffffff).drawRect(0, 0, 1, 12).at(14, 26);
 
     const controls = {
@@ -314,7 +323,7 @@ function objSlider({ max, value, colors }: ObjSliderArgs) {
             .drawRect(0, 0, width, 12).at(fgGfx).angled(0.3),
         fgGfx,
         container(valueTextObj)
-            .at(270, 37)
+            .at(width + 46, 37)
             .coro(function* (self) {
                 while (true) {
                     yield onMutate(controls);
