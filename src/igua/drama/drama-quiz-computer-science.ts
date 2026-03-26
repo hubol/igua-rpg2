@@ -1,5 +1,6 @@
 import { Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
+import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { Integer } from "../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
@@ -28,10 +29,16 @@ export function* dramaQuizComputerScience(difficulty: Integer) {
 
     const programObj = objProgram(program)
         .mixin(mxnHudModifiers.mxnHideStatus)
+        .at(-200, 0)
         .show(layers.overlay.messages);
+
+    yield interpvr(programObj).factor(factor.sine).to(0, 0).over(300);
+
     yield () => Input.isUp("Confirm");
     yield () => Input.justWentDown("Confirm");
     const guess = yield* DramaMisc.askInteger("What does the program output?", { max: 99, align: "right" });
+
+    yield interpvr(programObj).factor(factor.sine).to(-200, 0).over(300);
 
     programObj.destroy();
 
@@ -63,7 +70,7 @@ function generateReturnExpressionText(rng: Omit<PseudoRng, "seed">) {
         return `input + ${rng.intc(11, 59)}`;
     }
     if (value === 2) {
-        return `-input + ${rng.intc(41, 89)}`;
+        return `${rng.intc(41, 89)} - input`;
     }
     return rng.intc(1, 99);
 }
@@ -80,8 +87,8 @@ function generateProgramText(rng: Omit<PseudoRng, "seed">, args: Omit<GeneratePr
     const caseExpressionTexts = caseFeatures.map(feature => {
         if (feature === "and") {
             const min = rng.intc(-10, 30);
-            const max = min + rng.intc(10);
-            return `input >= ${min} && input <= ${max}`;
+            const max = min + rng.intc(2, 10);
+            return `input > ${min} && input < ${max}`;
         }
         if (feature === "or") {
             const min = rng.intc(-10, 30);
@@ -99,6 +106,16 @@ function generateProgramText(rng: Omit<PseudoRng, "seed">, args: Omit<GeneratePr
         return `input ${rng.choose("<", ">", "<=", ">=")} ${rng.intc(-10, 40)}`;
     });
 
+    // Crudely attempt to prevent easily-guessed programs
+    for (let i = 0; i < 2; i++) {
+        if (expressionEvaluatesTrueForInput(input, caseExpressionTexts[0])) {
+            rng.shuffle(caseExpressionTexts);
+        }
+        else {
+            break;
+        }
+    }
+
     const caseTexts = caseExpressionTexts
         .map((text) =>
             `  if (${text}) {
@@ -113,6 +130,11 @@ ${caseTexts.join("\n")}
     
 const value = fn(${input});
 return value;`;
+}
+
+function expressionEvaluatesTrueForInput(input: Integer, expressionText: string) {
+    const fn = new Function("input", `return ${expressionText}`);
+    return Boolean(fn(input));
 }
 
 function generateProgram(args: GenerateProgramArgs) {
@@ -136,7 +158,7 @@ function objProgram(program: Program) {
     return container(
         new Graphics()
             .beginFill(0xffffff)
-            .drawRect(0, 0, 240, 250),
+            .drawRect(0, 0, 250, 250),
         objText.MediumMono(program.text, { tint: 0 })
             .at(3, 3),
     );
