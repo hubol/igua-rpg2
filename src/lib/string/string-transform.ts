@@ -3,18 +3,22 @@ import { ForceAliasType } from "../types/force-alias-type";
 type CamelCase = ForceAliasType<string>;
 
 function toEnglish(camel: CamelCase) {
+    return toEnglishWords(camel).join(" ");
+}
+
+function toEnglishWords(camel: CamelCase) {
     if (!camel) {
-        return camel;
+        return [camel];
     }
 
-    let result = camel[0].toUpperCase();
+    const result = [camel[0].toUpperCase()];
 
     for (let i = 1; i < camel.length; i++) {
         const code = camel.charCodeAt(i);
-        if (code >= 65 && code <= 90) {
-            result += " ";
+        if (code >= 65 && code <= 90 && result.last) {
+            result.push("");
         }
-        result += camel[i];
+        result.last += camel[i];
     }
 
     return result;
@@ -22,4 +26,5 @@ function toEnglish(camel: CamelCase) {
 
 export const StringTransform = {
     toEnglish,
+    toEnglishWords,
 };
