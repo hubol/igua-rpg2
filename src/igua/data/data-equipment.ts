@@ -190,7 +190,7 @@ export namespace DataEquipment {
             },
             RecognizeSong: {
                 name: "Audiophile's Shoe",
-                texture: null,
+                texture: Tx.Collectibles.Equipment.RecognizeSong,
                 description: "Wearer can recall song titles",
                 buffs: (model, bonus) => {
                     model.esoteric.recognizeSongFactor += 100 + bonus * 100;
