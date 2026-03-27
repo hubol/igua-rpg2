@@ -1,4 +1,4 @@
-type PrimitiveProvider = (() => boolean) | (() => string) | (() => number);
+type PrimitiveProvider = (() => boolean) | (() => string | null) | (() => number);
 
 export function onPrimitiveMutate(provider: PrimitiveProvider) {
     const value = provider();
