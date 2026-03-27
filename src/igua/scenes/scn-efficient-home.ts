@@ -8,8 +8,10 @@ import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-m
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
+import { range } from "../../lib/range";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { DramaGifts } from "../drama/drama-gifts";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
@@ -38,6 +40,7 @@ export function scnEfficientHome() {
     enrichRoom2(lvl);
     enrichRoom3(lvl);
     enrichRoom4(lvl);
+    enrichRoom5(lvl);
 }
 
 function enrichHelium(lvl: LvlType.EfficientHome) {
@@ -281,5 +284,35 @@ function enrichRoom4(lvl: LvlType.EfficientHome) {
             Cutscene.play(function* () {
                 yield* DramaQuests.complete("GreatTower.EfficientHome.Snail.Defeated");
             });
+        });
+}
+
+function enrichRoom5(lvl: LvlType.EfficientHome) {
+    function generateArtistName() {
+        return Rng.choose("Reeny", "Tenly", "Ricein", "Kleeg", "Vash'norash", "Kiesen", "Chundar") + " "
+            + Rng.choose("Chempsy", "Fareesh", "Pe'il'narsh", "Chuun", "Maeisin", "Tren-Lessen");
+    }
+
+    lvl.CloudHouseMusicianNpc
+        .mixin(mxnCutscene, function* () {
+            if (Rpg.gift("GreatTower.EfficientHome.Musician.SongShoe").isGiven) {
+                yield* show("Music makes the world go round, sucka!!!");
+                return;
+            }
+
+            yield* show(
+                "Ugh!! I'm so obsessed with music!!!",
+                "I'm literally addicted to it!!!",
+            );
+
+            yield* ask("Who is your favorite artist?", ...range(5).map(generateArtistName), "Not sure...");
+            yield* show(
+                `Heh, nice. Have you heard ${generateArtistName()}'s latest album?`,
+                "It's FIRE!!!",
+                "Anyway, I love meeting another music fan.",
+                "Here, this will help you enjoy music even MORE!!!",
+            );
+
+            yield* DramaGifts.give("GreatTower.EfficientHome.Musician.SongShoe");
         });
 }
