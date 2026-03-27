@@ -63,6 +63,7 @@ export class RpgPlayerStatus implements RpgStatus.Model {
                 max: 100,
             },
             poison: {
+                damageScale: 1,
                 immune: false,
                 get max() {
                     return Math.round(

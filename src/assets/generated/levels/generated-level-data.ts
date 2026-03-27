@@ -1689,6 +1689,7 @@ export const Lvl = {
       PocketShopNpc: e(r["IguanaNpc"], { x: 608, y: 296, flippedX: false, values: { personaName: "PocketTeacher", name: "PocketShopNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 192, y: 344, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -64, y: 248, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromGrottoIndianaShop", name: "", depth: 0 } }, "RegionEntities"),
+      BrickEnemyRegion: e(r["Region"], { x: 168, y: 80, width: 56, height: 64, values: { name: "BrickEnemyRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
     };
   },
   IndianaCasino: () => {
