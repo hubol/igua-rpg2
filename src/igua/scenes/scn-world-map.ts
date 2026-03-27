@@ -78,13 +78,7 @@ function enrichFallenBot(lvl: LvlType.WorldMap) {
         flagFallenBot.landsWhenTimesDroppedLoot = Rpg.records.timesDroppedLoot + 10;
     }
 
-    const rootObj = container()
-        .at(lvl.FallenBotMarker)
-        .zIndexed(ZIndex.Entities)
-        .show();
-
     if (Rpg.records.timesDroppedLoot < flagFallenBot.landsWhenTimesDroppedLoot) {
-        rootObj.zIndex -= 1;
         objFallenBot.objImpactSite()
             .mixin(mxnSpeaker, { name: "Bottomless Pit", tintPrimary: 0x384C0E, tintSecondary: 0x648719 })
             .mixin(mxnCutscene, function* () {
@@ -105,13 +99,15 @@ function enrichFallenBot(lvl: LvlType.WorldMap) {
                     yield* show(`Defeat ${timesDroppedLootDiff} more for a visitation.`);
                 }
             })
-            .show(rootObj);
+            .at(lvl.FallenBotMarker)
+            .zIndexed(ZIndex.Entities - 1)
+            .show();
         return;
     }
 
     const botObj = objFallenBot();
     botObj
-        .mixin(mxnSpeaker, { name: "Stray Bot", tintPrimary: 0x5E45B7, tintSecondary: 0x4BDDEA })
+        .mixin(mxnSpeaker, { name: "Bot from the Bottom", tintPrimary: 0x5E45B7, tintSecondary: 0x4BDDEA })
         .mixin(mxnCutscene, function* () {
             const result = yield* ask("Oh please... Answer me, are there any good programmers left in this world?");
             if (!result) {
@@ -156,5 +152,7 @@ function enrichFallenBot(lvl: LvlType.WorldMap) {
             botObj.destroy();
             yield sleepf(5);
         })
-        .show(rootObj);
+        .at(lvl.FallenBotMarker)
+        .zIndexed(ZIndex.Entities)
+        .show();
 }
