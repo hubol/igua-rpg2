@@ -86,19 +86,19 @@ function enrichFallenBot(lvl: LvlType.WorldMap) {
     if (Rpg.records.timesDroppedLoot < flagFallenBot.landsWhenTimesDroppedLoot) {
         rootObj.zIndex -= 1;
         objFallenBot.objImpactSite()
-            .mixin(mxnSpeaker, { name: "Impact Site", tintPrimary: 0x384C0E, tintSecondary: 0x648719 })
+            .mixin(mxnSpeaker, { name: "Bottomless Pit", tintPrimary: 0x384C0E, tintSecondary: 0x648719 })
             .mixin(mxnCutscene, function* () {
                 const timesDroppedLootDiff = flagFallenBot.landsWhenTimesDroppedLoot! - Rpg.records.timesDroppedLoot;
 
                 if (Rpg.character.attributes.intelligence < 1) {
-                    yield* show("It looks like something has repeatedly crashed here.");
+                    yield* show("It looks like something has repeatedly crawled out of this.");
                 }
                 else if (Rpg.character.attributes.intelligence < 2) {
                     if (timesDroppedLootDiff < 5) {
-                        yield* show("You get the sense that it won't be much longer until another crash.");
+                        yield* show("You hear the sound of metal scraping.");
                     }
                     else {
-                        yield* show("It looks like something has repeatedly crashed here.");
+                        yield* show("It looks like something has repeatedly crawled out of this.");
                     }
                 }
                 else {
@@ -111,7 +111,7 @@ function enrichFallenBot(lvl: LvlType.WorldMap) {
 
     const botObj = objFallenBot();
     botObj
-        .mixin(mxnSpeaker, { name: "Fallen Bot", tintPrimary: 0x5E45B7, tintSecondary: 0x4BDDEA })
+        .mixin(mxnSpeaker, { name: "Stray Bot", tintPrimary: 0x5E45B7, tintSecondary: 0x4BDDEA })
         .mixin(mxnCutscene, function* () {
             const result = yield* ask("Oh please... Answer me, are there any good programmers left in this world?");
             if (!result) {
