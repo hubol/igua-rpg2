@@ -2,7 +2,6 @@ import { Container, DisplayObject } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
 import { Rng } from "../../lib/math/rng";
 import { clone } from "../../lib/object/clone";
-import { merge } from "../../lib/object/merge";
 import { layers } from "../globals";
 import { objAngelEyes } from "../objects/enemies/obj-angel-eyes";
 import { objLootDrop } from "../objects/obj-loot-drop";
@@ -24,18 +23,33 @@ interface MxnEnemyArgs {
 export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
     const { status, loot } = clone(args.rank);
 
-    const died = () => {
+    const died = (attacker: RpgStatus.Model) => {
+        if (attacker.quirks.successfulAttacksRewardExperience) {
+            Rpg.experience.reward.combat.onEnemyDefeat(args.rank.level);
+        }
         const drop = Rpg.loot.drop(loot, status, Rpg.character.buffs.loot);
         objLootDrop(drop).at(enemyObj.mxnEnemy.soulAnchorObj.getWorldPosition()).show();
         enemyObj.dispatch("mxnEnemy.died");
         obj.destroy();
     };
 
-    const effects: RpgStatus.Effects = merge(
-        // TODO it might be time to rethink the effects approach
-        { died, ballonHealthDepleted() {}, ballonCreated() {} },
-        layers.overlay.enemyHealthBars.getRpgStatusEffects(args.healthbarAnchorObj ?? obj, status),
+    const { healed, tookDamage: healthBarTookDamage } = layers.overlay.enemyHealthBars.getRpgStatusEffects(
+        args.healthbarAnchorObj ?? obj,
+        status,
     );
+    // TODO it might be time to rethink the effects approach
+    const effects: RpgStatus.Effects = {
+        died,
+        ballonHealthDepleted() {},
+        ballonCreated() {},
+        healed,
+        tookDamage(value, delta, kind, attacker, attack) {
+            if (attacker?.quirks?.successfulAttacksRewardExperience && attack && delta > 0) {
+                Rpg.experience.reward.combat.onAttackDamage(attack, delta);
+            }
+            healthBarTookDamage(value, delta, kind, attacker, attack);
+        },
+    };
 
     // TODO should it expose a way to register hitboxes/hurtboxes
     // Or should that be another mixin?

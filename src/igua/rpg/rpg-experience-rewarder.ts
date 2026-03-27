@@ -49,8 +49,8 @@ export class RpgExperienceRewarder {
                 increase(damageDealtToEnemy);
             }
         },
-        onEnemyDefeat(enemyMaxHealth: Integer) {
-            increase(Math.ceil(enemyMaxHealth / 5));
+        onEnemyDefeat(enemyLevel: Integer) {
+            increase(enemyLevel);
         },
         onPerfectClawAttack(attackExperience: Integer) {
             if (attackExperience) {

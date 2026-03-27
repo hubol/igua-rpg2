@@ -1,3 +1,4 @@
+import { Integer } from "../../lib/math/number-alias-types";
 import { DeepPartial } from "../../lib/types/deep-partial";
 import { RpgFaction } from "./rpg-faction";
 import { RpgLoot } from "./rpg-loot";
@@ -7,15 +8,18 @@ export namespace RpgEnemyRank {
     export interface Model {
         status: RpgStatus.Model;
         loot: RpgLoot.Table;
+        level: Integer;
     }
 
     type CreateArgs = DeepPartial<Omit<Model, "loot">> & { loot?: RpgLoot.Table };
 
-    export function create({ status, loot }: CreateArgs): Model {
+    export function create({ status, loot, level }: CreateArgs): Model {
+        const healthMax = status?.healthMax ?? status?.health ?? 30;
+
         return {
             status: {
                 health: status?.health ?? status?.healthMax ?? 30,
-                healthMax: status?.healthMax ?? status?.health ?? 30,
+                healthMax,
                 invulnerable: status?.invulnerable ?? 0,
                 invulnerableMax: status?.invulnerableMax ?? 10,
                 faction: status?.faction ?? RpgFaction.Enemy,
@@ -52,8 +56,8 @@ export namespace RpgEnemyRank {
                     ailmentsRecoverWhileCutsceneIsPlaying: status?.quirks?.ailmentsRecoverWhileCutsceneIsPlaying
                         ?? true,
                     receivesDamageWhileCutsceneIsPlaying: status?.quirks?.receivesDamageWhileCutsceneIsPlaying ?? true,
-                    attackingRewardsExperience: status?.quirks?.attackingRewardsExperience ?? false,
                     isImmuneToPlayerMeleeAttack: status?.quirks?.isImmuneToPlayerMeleeAttack ?? false,
+                    successfulAttacksRewardExperience: false,
                 },
                 defenses: {
                     physical: status?.defenses?.physical ?? 0,
@@ -77,6 +81,7 @@ export namespace RpgEnemyRank {
                 },
             },
             loot: loot ?? {},
+            level: level ?? Math.ceil(healthMax / 5),
         };
     }
 }

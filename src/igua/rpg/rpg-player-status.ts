@@ -159,8 +159,8 @@ export class RpgPlayerStatus implements RpgStatus.Model {
         guardedDamageIsFatal: false,
         ailmentsRecoverWhileCutsceneIsPlaying: false,
         receivesDamageWhileCutsceneIsPlaying: false,
-        attackingRewardsExperience: true,
         isImmuneToPlayerMeleeAttack: true,
+        successfulAttacksRewardExperience: true,
     };
 
     static createState(): RpgPlayerStatus.State {

@@ -72,8 +72,10 @@ export namespace RpgStatus {
             emotionalDamageIsFatal: boolean;
             roundReceivedDamageUp: boolean;
             guardedDamageIsFatal: boolean;
-            attackingRewardsExperience: boolean;
             isImmuneToPlayerMeleeAttack: boolean;
+            // Feels weird that this quirk is not handled by any of the "methods" in RpgStatus
+            // But maybe it is OK.
+            successfulAttacksRewardExperience: boolean;
         };
         // TODO name is kind of strange
         // In reality, these are kind of like quirks that
@@ -108,8 +110,14 @@ export namespace RpgStatus {
         ballonHealthDepleted(ballon: Ballon): void;
         ballonCreated(ballon: Ballon): void;
         healed(value: number, delta: number): void;
-        tookDamage(value: number, delta: number, kind: DamageKind): void;
-        died(): void;
+        tookDamage(
+            value: number,
+            delta: number,
+            kind: DamageKind,
+            attacker: Model | null,
+            attack: RpgAttack.Model | null,
+        ): void;
+        died(attacker: Model | null): void;
     }
 
     interface DamageAccepted {
@@ -162,7 +170,7 @@ export namespace RpgStatus {
                     const diff = previous - model.health;
 
                     if (diff > 0) {
-                        effects.tookDamage(model.health, diff, DamageKind.Poison);
+                        effects.tookDamage(model.health, diff, DamageKind.Poison, null, null);
                     }
                 }
 
@@ -295,9 +303,8 @@ export namespace RpgStatus {
 
             const canBeFatal = !target.state.isGuarding || target.quirks.guardedDamageIsFatal || target.health <= 1;
 
-            const attackingRewardsExperience = attacker?.quirks?.attackingRewardsExperience ?? false;
-
             const tookEmotionalDamage = takeDamage(
+                attacker,
                 attack,
                 attack.emotional,
                 DamageKind.Emotional,
@@ -308,10 +315,10 @@ export namespace RpgStatus {
                 factionDefense,
                 target,
                 targetEffects,
-                attackingRewardsExperience,
             );
 
             const tookPhysicalDamage = takeDamage(
+                attacker,
                 attack,
                 attack.physical,
                 DamageKind.Physical,
@@ -321,18 +328,13 @@ export namespace RpgStatus {
                 factionDefense,
                 target,
                 targetEffects,
-                attackingRewardsExperience,
             );
 
             const damaged = tookEmotionalDamage || tookPhysicalDamage;
             target.invulnerable = target.invulnerableMax;
 
             if (damaged && target.health <= 0) {
-                if (attackingRewardsExperience) {
-                    // TODO maybe instead have RpgExperience passed?
-                    Rpg.experience.reward.combat.onEnemyDefeat(target.healthMax);
-                }
-                targetEffects.died();
+                targetEffects.died(attacker);
             }
 
             if (damaged && attacker && target.quirks.incrementsAttackerPrideOnDamage) {
@@ -360,6 +362,7 @@ export namespace RpgStatus {
     };
 
     function takeDamage(
+        attacker: Model | null,
         attack: RpgAttack.Model,
         amount: Integer,
         kind: DamageKind,
@@ -369,7 +372,6 @@ export namespace RpgStatus {
         factionDefense: PercentInt,
         target: Model,
         targetEffects: Effects,
-        rewardExperience: boolean,
     ) {
         const previous = target.health;
         const totalDefense: PercentInt = defense
@@ -390,12 +392,7 @@ export namespace RpgStatus {
         target.health = Math.max(minimumHealthAfterDamage, target.health - damage);
         const diff = previous - target.health;
 
-        // TODO I suspect this does not belong here!
-        if (rewardExperience && diff > 0) {
-            Rpg.experience.reward.combat.onAttackDamage(attack, diff);
-        }
-
-        targetEffects.tookDamage(target.health, diff, kind);
+        targetEffects.tookDamage(target.health, diff, kind, attacker, attack);
 
         return diff > 0;
     }

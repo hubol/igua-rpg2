@@ -15,7 +15,7 @@ const rank = RpgEnemyRank.create({
         healthMax: 9999,
         conditions: {
             poison: {
-                damageScale: 50,
+                damageScale: 100,
                 rateFactor: 1000,
             },
         },
@@ -26,6 +26,7 @@ const rank = RpgEnemyRank.create({
             { weight: 90, kind: "nothing" },
         ],
     },
+    level: 1,
 });
 
 export function objAngelBrick({ width, height }: ObjAngelBrickArgs) {
