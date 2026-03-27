@@ -1,10 +1,12 @@
 import { MusicTrack } from "../lib/game-engine/audio/asshat-jukebox";
 import { GeneratedMusicData } from "./generated/music/generated-music-data";
 
-type MusicId = keyof typeof GeneratedMusicData;
+export const Mzk: Record<Mzk.Id, MusicTrack> = <any> {};
 
-export const Mzk: Record<MusicId, MusicTrack> = <any> {};
+export namespace Mzk {
+    export type Id = keyof typeof GeneratedMusicData;
+}
 
 for (const key in GeneratedMusicData) {
-    Mzk[key as MusicId] = GeneratedMusicData[key as MusicId].ogg;
+    Mzk[key as Mzk.Id] = GeneratedMusicData[key as Mzk.Id].ogg;
 }

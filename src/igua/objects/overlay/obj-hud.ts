@@ -2,18 +2,22 @@ import { Container, DisplayObject, Graphics, Point, Rectangle, Sprite, Texture }
 import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
+import { MusicTrack } from "../../../lib/game-engine/audio/asshat-jukebox";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { holdf } from "../../../lib/game-engine/routines/hold";
 import { factor, interp } from "../../../lib/game-engine/routines/interp";
+import { onPrimitiveMutate } from "../../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { TickerContainer } from "../../../lib/game-engine/ticker-container";
 import { approachLinear } from "../../../lib/math/number";
-import { RgbInt } from "../../../lib/math/number-alias-types";
+import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { Null } from "../../../lib/types/null";
+import { Jukebox } from "../../core/igua-audio";
 import { renderer } from "../../current-pixi-renderer";
 import { DataIdol } from "../../data/data-idol";
 import { DataPocketItem } from "../../data/data-pocket-item";
+import { DataSongTitle } from "../../data/data-song-title";
 import { Cutscene } from "../../globals";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
@@ -48,14 +52,17 @@ export function objHud() {
     const valuablesInfoObj = objValuablesInfo();
     const poisonBuildUpObj = objPoisonBuildUp();
     const poisonLevelObj = objPoisonLevel();
+    const { buildUpObj: songInfoBuildUpObj, textObj: songInfoObj } = createSongInfoObjs();
 
     const statusObjs: Array<Container & { advance?: number; effectiveHeight?: number }> = [
         valuablesInfoObj,
         objPocketInfo(),
         objIdolBuff(),
         poisonLevelObj,
+        songInfoObj,
         poisonBuildUpObj,
         objHeliumBuildUp(),
+        songInfoBuildUpObj,
     ];
 
     const statusObjsContainer = container(...statusObjs);
@@ -460,6 +467,58 @@ function objPocketInfo() {
         .merge({ effectiveHeight: 10 });
 }
 
+function createSongInfoObjs() {
+    // TODO is there a clever way for this state to be tracked in the player's RPG status?
+    const state = {
+        recognizedTrack: Null<MusicTrack>(),
+        value: 0,
+        max: 200,
+    };
+
+    return {
+        buildUpObj: objBuildUp({
+            message: "You recognize this song...",
+            get value() {
+                return Math.round(state.value);
+            },
+            get max() {
+                return state.max;
+            },
+        })
+            .coro(function* () {
+                while (true) {
+                    yield onPrimitiveMutate(() => Jukebox.currentTrack);
+                    state.value = 0;
+                    state.recognizedTrack = null;
+                }
+            })
+            .step(() => {
+                if (Rpg.character.buffs.esoteric.recognizeSongFactor <= 0) {
+                    state.value = 0;
+                    state.recognizedTrack = null;
+                    return;
+                }
+                if (Jukebox.currentTrack && state.recognizedTrack !== Jukebox.currentTrack) {
+                    state.value = Math.min(
+                        state.max,
+                        state.value + (Rpg.character.buffs.esoteric.recognizeSongFactor / 100),
+                    );
+                    if (state.value >= state.max) {
+                        state.recognizedTrack = Jukebox.currentTrack;
+                        state.value = 0;
+                    }
+                }
+            }),
+        textObj: objText.MediumIrregular("", { tint: Consts.StatusTextTint })
+            .step(self => {
+                self.visible = Boolean(state.recognizedTrack);
+                self.text = state.recognizedTrack
+                    ? `Listening to: "${DataSongTitle.getByMusicTrack(state.recognizedTrack).title}"`
+                    : "";
+            }),
+    };
+}
+
 function objValuablesInfo() {
     const youHaveTextObj = objText.MediumIrregular("You have 0 valuables", { tint: Consts.StatusTextTint })
         .step(text => {
@@ -496,14 +555,14 @@ function objPoisonLevel() {
 }
 
 function objPoisonBuildUp() {
-    return objBuildUp({
+    return objConditionBuildUp({
         message: "Poison is building...",
         conditionsKey: "poison",
     });
 }
 
 function objHeliumBuildUp() {
-    return objBuildUp({
+    return objConditionBuildUp({
         message: "Helium is potent...",
         conditionsKey: "helium",
     });
@@ -521,20 +580,39 @@ function objIdolBuff() {
         .merge({ effectiveHeight: 9 });
 }
 
-interface ObjBuildUpArgs {
+interface ObjConditionBuildUpArgs {
     message: string;
     conditionsKey: "poison" | "helium";
     // TODO tint
 }
 
-function objBuildUp({ message, conditionsKey }: ObjBuildUpArgs) {
-    let value = Rpg.character.status.conditions[conditionsKey].value;
-    const text = objText.MediumIrregular(message, { tint: Consts.StatusTextTint });
+function objConditionBuildUp({ message, conditionsKey }: ObjConditionBuildUpArgs) {
+    return objBuildUp({
+        message,
+        get value() {
+            return Rpg.character.status.conditions[conditionsKey].value;
+        },
+        get max() {
+            return Rpg.character.status.conditions[conditionsKey].max;
+        },
+    });
+}
+
+interface ObjBuildUpArgs {
+    message: string;
+    value: Integer;
+    max: Integer;
+    // TODO tint
+}
+
+function objBuildUp(args: ObjBuildUpArgs) {
+    let value = args.value;
+    const text = objText.MediumIrregular(args.message, { tint: Consts.StatusTextTint });
     const bar = objStatusBar({
         height: 1,
         width: 85,
         value,
-        maxValue: Rpg.character.status.conditions[conditionsKey].max,
+        maxValue: args.max,
         tintBack: 0x003000,
         tintFront: 0x008000,
         increases: [{ tintBar: 0x00ff00 }],
@@ -545,8 +623,8 @@ function objBuildUp({ message, conditionsKey }: ObjBuildUpArgs) {
 
     return container(bar, text)
         .step(self => {
-            const nextValue = Rpg.character.status.conditions[conditionsKey].value;
-            bar.maxValue = Rpg.character.status.conditions[conditionsKey].max;
+            const nextValue = args.value;
+            bar.maxValue = args.max;
 
             if (nextValue > value) {
                 bar.increase(nextValue, nextValue - value, 0);

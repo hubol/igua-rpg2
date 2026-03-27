@@ -49,8 +49,9 @@ export namespace RpgPlayerBuffs {
                 wetnessMaxIncreaseFactor: <PercentInt> 0,
             },
             esoteric: {
-                sceneChangeErrorChance: <PercentInt> 0,
                 lgbtFactor: <PercentInt> 0,
+                recognizeSongFactor: <PercentInt> 0,
+                sceneChangeErrorChance: <PercentInt> 0,
             },
             experience: {
                 bonusFactorWhileWet: {
