@@ -1,5 +1,6 @@
 import { StorageEntry } from "../../lib/browser/storage-entry";
 import { Integer } from "../../lib/math/number-alias-types";
+import { DataGift } from "../data/data-gift";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataQuestReward } from "../data/data-quest-reward";
 import { DataShop } from "../data/data-shop";
@@ -9,6 +10,7 @@ import { RpgExperience } from "./rpg-experience";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 import { RpgFacts } from "./rpg-facts";
 import { RpgFlops } from "./rpg-flops";
+import { RpgGifts } from "./rpg-gifts";
 import { RpgIdols } from "./rpg-idols";
 import { RpgIguanaNpcs } from "./rpg-iguana-npcs";
 import { RpgInventory } from "./rpg-inventory";
@@ -34,6 +36,7 @@ export namespace RpgFactory {
         const {
             programmaticFlags: {
                 classrooms: classroomsState,
+                gifts: giftsState,
                 idols: idolsState,
                 iguanaNpcs: iguanaNpcsState,
                 shops: shopsState,
@@ -79,6 +82,7 @@ export namespace RpgFactory {
         );
         const shops = new RpgShops(shopsState, wallet, inventory);
         const weightedPedestals = new RpgWeightedPedestals(weightedPedestalsState);
+        const gifts = new RpgGifts(giftsState);
 
         return {
             // TODO rename to player
@@ -89,6 +93,9 @@ export namespace RpgFactory {
             experience: experience as Omit<RpgExperience, "spend">,
             get flags() {
                 return data.flags;
+            },
+            gift(giftId: DataGift.Id) {
+                return gifts.getById(giftId);
             },
             idol(idolId: Integer) {
                 return idols.getById(idolId);

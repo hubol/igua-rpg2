@@ -7,6 +7,7 @@ import { RpgExperience } from "./rpg-experience";
 import { RpgFacts } from "./rpg-facts";
 import { RpgFlops } from "./rpg-flops";
 import { RpgFoodOrder } from "./rpg-food-order";
+import { RpgGifts } from "./rpg-gifts";
 import { RpgIdols } from "./rpg-idols";
 import { RpgIguanaNpcs } from "./rpg-iguana-npcs";
 import { RpgKeyItems } from "./rpg-key-items";
@@ -100,9 +101,6 @@ export function getInitialRpgProgress() {
                 },
             },
             strangeMarket: {
-                greeter: {
-                    gavePlayerPoisonRing: false,
-                },
                 guardian: {
                     defeated: false,
                 },
@@ -134,6 +132,7 @@ export function getInitialRpgProgress() {
         },
         programmaticFlags: {
             classrooms: RpgClassrooms.createState(),
+            gifts: RpgGifts.createState(),
             looseValuables: RpgLooseValuables.createState(),
             idols: RpgIdols.createState(),
             iguanaNpcs: RpgIguanaNpcs.createState(),

@@ -14,7 +14,7 @@ import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataCuesheet } from "../data/data-cuesheet";
 import { DataPotion } from "../data/data-potion";
-import { DramaInventory } from "../drama/drama-inventory";
+import { DramaGifts } from "../drama/drama-gifts";
 import { ask, show } from "../drama/show";
 import { mxnCuesheet } from "../mixins/mxn-cuesheet";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -63,13 +63,12 @@ function enrichGreeter(lvl: LvlType.StrangeMarket) {
         else if (result === 1) {
             yield* show("Oh... Yes, those guys are pretty tough.", "But they can be poisoned like most other sprites.");
 
-            if (Rpg.flags.strangeMarket.greeter.gavePlayerPoisonRing) {
+            if (Rpg.gift("StrangeMarket.GreeterShoe").isGiven) {
                 yield* show("Did you try the shoe I gave you?");
             }
             else {
                 yield* show("You will probably get some more use out of this shoe than me.");
-                yield* DramaInventory.receiveItems([{ kind: "equipment", id: "PoisonRing", level: 1 }]);
-                Rpg.flags.strangeMarket.greeter.gavePlayerPoisonRing = true;
+                yield* DramaGifts.give("StrangeMarket.GreeterShoe");
             }
 
             yield* show("Although, I'm not sure how you'll deliver the final blow...");
