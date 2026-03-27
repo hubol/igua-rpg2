@@ -188,6 +188,14 @@ export namespace DataEquipment {
                     model.esoteric.sceneChangeErrorChance += 1 + bonus;
                 },
             },
+            RecognizeSong: {
+                name: "Audiophile's Shoe",
+                texture: null,
+                description: "Wearer can recall song titles",
+                buffs: (model, bonus) => {
+                    model.esoteric.recognizeSongFactor += 100 + bonus * 100;
+                },
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,
