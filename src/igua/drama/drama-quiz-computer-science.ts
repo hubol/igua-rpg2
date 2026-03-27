@@ -1,4 +1,4 @@
-import { Graphics } from "pixi.js";
+import { DisplayObject, Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { Integer } from "../../lib/math/number-alias-types";
@@ -19,7 +19,12 @@ const difficultyConfigs: Array<Omit<GenerateProgramArgs, "seed">> = [
     { features: new Set(["and", "or", "mod_2", "mod_n"]), cases: 5 },
 ];
 
-export function* dramaQuizComputerScience(difficulty: Integer) {
+interface DramaQuizComputerScienceArgs {
+    difficulty: Integer;
+    messageObj?: DisplayObject;
+}
+
+export function* dramaQuizComputerScience({ difficulty, messageObj }: DramaQuizComputerScienceArgs) {
     const config = difficultyConfigs[difficulty] ?? difficultyConfigs.last;
 
     const program = generateProgram({
@@ -36,7 +41,7 @@ export function* dramaQuizComputerScience(difficulty: Integer) {
 
     yield () => Input.isUp("Confirm");
     yield () => Input.justWentDown("Confirm");
-    const guess = yield* DramaMisc.askInteger("What does the program output?", { max: 99, align: "right" });
+    const guess = yield* DramaMisc.askInteger("What does the program output?", { max: 99, align: "right", messageObj });
 
     yield interpvr(programObj).factor(factor.sine).to(-200, 0).over(300);
 

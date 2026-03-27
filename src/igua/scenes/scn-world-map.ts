@@ -1,4 +1,4 @@
-import { DisplayObject } from "pixi.js";
+import { DisplayObject, Sprite } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
@@ -7,7 +7,6 @@ import { Instances } from "../../lib/game-engine/instances";
 import { interpv } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
-import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { dramaQuizComputerScience } from "../drama/drama-quiz-computer-science";
@@ -128,7 +127,12 @@ function enrichFallenBot(lvl: LvlType.WorldMap) {
 
             for (let i = 0; i < 3; i++) {
                 yield* show(`Program #${i + 1}...`);
-                if (yield* dramaQuizComputerScience(flagFallenBot.perfectScoreTimes + i)) {
+                if (
+                    yield* dramaQuizComputerScience({
+                        difficulty: flagFallenBot.perfectScoreTimes + i,
+                        messageObj: Sprite.from(Tx.Characters.FallenBot.AskIntegerPortrait).pivoted(74, 44),
+                    })
+                ) {
                     Rpg.experience.reward.computer.onCorrectQuizAnswer(++correctAnswersCount);
                 }
             }
