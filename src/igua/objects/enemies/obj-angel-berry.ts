@@ -4,6 +4,7 @@ import { factor, interp, interpv, interpvr } from "../../../lib/game-engine/rout
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
+import { ForceTintFilter } from "../../../lib/pixi/filters/force-tint-filter";
 import { ZIndex } from "../../core/scene/z-index";
 import { scene } from "../../globals";
 import { mxnBoilTextureIndex } from "../../mixins/mxn-boil-texture-index";
@@ -40,6 +41,7 @@ const consts = {
 
 export function objAngelBerry(targetObj: MxnRpgStatus) {
     const hurtboxObj = new Graphics().beginFill(0xff0000).drawRect(6, 10, 12, 17).invisible();
+    const tintFilter = new ForceTintFilter(0x0000ff, 0);
 
     return container(
         hurtboxObj,
@@ -52,7 +54,7 @@ export function objAngelBerry(targetObj: MxnRpgStatus) {
             }
         })
         .mixin(mxnEnemy, { rank: ranks.level0, hurtboxes: [] })
-        .handles("mxnEnemy.died", (self) => objFxBurst32().at(self).tinted(0xB85BFF).show())
+        .handles("mxnEnemy.died", (self) => objFxBurst32().at(self).add(0, -7).tinted(0xB85BFF).show())
         .pivoted(13, 24)
         .coro(function* (self) {
             yield sleepf(3);
@@ -63,11 +65,13 @@ export function objAngelBerry(targetObj: MxnRpgStatus) {
             const sproutObj = objIndexedSprite(txs.txsSprout).show(self);
             yield interp(sproutObj, "textureIndex").to(sproutObj.textures.length).over(1000);
             while (!targetObj.destroyed) {
+                yield interp(tintFilter, "factor").steps(8).to(1).over(1000);
+                tintFilter.factor = 0;
                 const heartObj = objAngelBerryHeart(targetObj).at(self).add(0, -9).show();
                 yield () => heartObj.destroyed;
-                yield sleep(1000);
             }
         })
+        .filtered(tintFilter)
         .zIndexed(ZIndex.Entities - 1);
 }
 
