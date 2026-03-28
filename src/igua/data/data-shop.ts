@@ -266,7 +266,18 @@ export namespace DataShop {
                 ],
             },
             QuestTeacher: {
-                stocks: [],
+                stocks: [
+                    {
+                        product: { kind: "key_item", id: "MagicKey" },
+                        initialQuantity: 1,
+                        price: { currency: "quest", deltaSold: 0, initial: 300 },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "quest", deltaSold: 0, initial: 600 },
+                    },
+                ],
             },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
