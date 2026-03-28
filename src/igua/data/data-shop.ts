@@ -231,8 +231,8 @@ export namespace DataShop {
                     },
                     {
                         product: { kind: "equipment", id: "PoisonRing", level: 1 },
-                        initialQuantity: 2,
-                        price: { currency: "combat", deltaSold: 500, initial: 499 },
+                        initialQuantity: 3,
+                        price: { currency: "combat", deltaSold: 50, initial: 150 },
                     },
                     {
                         product: { kind: "equipment", id: "PoisonResistance", level: 1 },
