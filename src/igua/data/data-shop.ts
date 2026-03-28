@@ -241,6 +241,30 @@ export namespace DataShop {
                     },
                 ],
             },
+            PocketTeacher: {
+                stocks: [
+                    {
+                        product: { kind: "potion", id: "AttributeHealthUp" },
+                        initialQuantity: 3,
+                        price: { currency: "pocket", deltaSold: 50, initial: 50 },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "pocket", deltaSold: 0, initial: 300 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "PoisonResistance", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "pocket", deltaSold: 0, initial: 50 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "NailFile", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "pocket", deltaSold: 0, initial: 50 },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );

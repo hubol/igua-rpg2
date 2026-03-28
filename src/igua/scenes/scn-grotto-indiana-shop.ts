@@ -1,7 +1,10 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
-import { DramaLib } from "../drama/drama-lib";
+import { DataPocketItem } from "../data/data-pocket-item";
+import { DramaInventory } from "../drama/drama-inventory";
+import { DramaQuests } from "../drama/drama-quests";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -12,6 +15,7 @@ export function scnGrottoIndianaShop() {
     const lvl = Lvl.GrottoIndianaShop();
     enrichShopkeeper(lvl);
     enrichCombatTeacher(lvl);
+    enrichPocketTeacher(lvl);
 }
 
 function enrichShopkeeper(lvl: LvlType.GrottoIndianaShop) {
@@ -55,5 +59,88 @@ function enrichCombatTeacher(lvl: LvlType.GrottoIndianaShop) {
             self.mixin(mxnCutscene, function* () {
                 yield* dramaShop("CombatTeacher", self.speaker);
             });
+        });
+}
+
+function enrichPocketTeacher(lvl: LvlType.GrottoIndianaShop) {
+    const flagReceivedPocketItemIds = Rpg.flags.grotto.pocketTeacher.receivedPocketItemIds;
+    const minPocketItemIdsCount = 8;
+
+    lvl.PocketShopNpc
+        .mixin(mxnCutscene, function* () {
+            if (Rpg.quest("Grotto.PocketTeacher.ReceivedManyPocketItems").everCompleted) {
+                yield* dramaShop("PocketTeacher", lvl.PocketShopNpc.speaker);
+                return;
+            }
+
+            yield* show("Pockets! Pockets!");
+
+            if (flagReceivedPocketItemIds.size === 0) {
+                if (!(yield* ask("Are you any good with Pocket?"))) {
+                    yield* show("Oh...");
+                    return;
+                }
+
+                yield* show(
+                    "Oh yeah?! Maybe you should prove it then.",
+                    `If you bring me ${minPocketItemIdsCount} different kinds of pocket items, I'll show you my special wares!`,
+                );
+            }
+            else {
+                const itemNames = [...flagReceivedPocketItemIds]
+                    .map(id => DataPocketItem.getById(id).name);
+
+                yield* show("So far, you've given me...");
+
+                while (itemNames.length) {
+                    yield* show(
+                        itemNames
+                            .splice(0, 3)
+                            .map(name => `- ${name}`)
+                            .join("\n"),
+                    );
+                }
+                yield* show("So, I need " + (minPocketItemIdsCount - flagReceivedPocketItemIds.size) + " more.");
+            }
+
+            if (!(yield* ask("Do you have a pocket item for me?"))) {
+                yield* show("Ah, let me know if you do!");
+                return;
+            }
+
+            yield* show("Great, I'll take one then!");
+
+            if (Rpg.inventory.pocket.countTotal() === 0) {
+                yield sleep(1000);
+                yield* show("...Wait, you don't have any.");
+                return;
+            }
+
+            const heldPocketItemIds = new Set(Rpg.inventory.pocket.peek());
+            let receivedAtLeastOne = false;
+
+            for (const id of heldPocketItemIds) {
+                if (flagReceivedPocketItemIds.has(id)) {
+                    yield sleep(1000);
+                    yield* show("Hmm... but you've already given me " + DataPocketItem.getById(id).name);
+                    continue;
+                }
+                receivedAtLeastOne = true;
+                yield* DramaInventory.removeCount({ kind: "pocket_item", id }, 1);
+                flagReceivedPocketItemIds.add(id);
+
+                if (flagReceivedPocketItemIds.size >= minPocketItemIdsCount) {
+                    yield* show("Good job!");
+                    yield* DramaQuests.complete("Grotto.PocketTeacher.ReceivedManyPocketItems");
+                    yield* show("Talk with me again if you want to buy stuff!!!");
+                    return;
+                }
+            }
+
+            if (receivedAtLeastOne) {
+                yield* show(
+                    "Cool. I still wanna see " + (minPocketItemIdsCount - flagReceivedPocketItemIds.size) + " more!",
+                );
+            }
         });
 }

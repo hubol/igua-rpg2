@@ -161,6 +161,10 @@ export namespace DataQuestReward {
                 kind: "repeat",
                 reward: { kind: "equipment", id: "PatheticCage", level: 1 },
             },
+            "Grotto.PocketTeacher.ReceivedManyPocketItems": {
+                kind: "single",
+                reward: { kind: "potion", id: "AttributeHealthUp" },
+            },
             __Fallback__: {
                 kind: "nothing",
             },

@@ -118,6 +118,12 @@ export class RpgPocket {
         return totalItemsCount;
     }
 
+    peek(): DataPocketItem.Id[] {
+        return this._state.slots
+            .filter(slot => slot.count > 0 && slot.item)
+            .map(slot => slot.item!);
+    }
+
     remove(item: RpgPocket.Item, count: number) {
         for (const slot of this._state.slots) {
             if (slot.item === item) {

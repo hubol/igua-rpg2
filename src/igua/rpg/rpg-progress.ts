@@ -1,6 +1,7 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { Null } from "../../lib/types/null";
 import { DataNpcPersona } from "../data/data-npc-persona";
+import { DataPocketItem } from "../data/data-pocket-item";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgClassrooms } from "./rpg-classrooms";
 import { RpgExperience } from "./rpg-experience";
@@ -45,6 +46,11 @@ export function getInitialRpgProgress() {
         flags: {
             flopUniversity: {
                 isDirectorVisiting: false,
+            },
+            grotto: {
+                pocketTeacher: {
+                    receivedPocketItemIds: new Set<DataPocketItem.Id>(),
+                },
             },
             indianaUniversity: {
                 isWaterRunning: false,

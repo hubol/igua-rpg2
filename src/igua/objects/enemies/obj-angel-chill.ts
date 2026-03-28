@@ -75,12 +75,11 @@ const ranks = {
             ],
             tier1: [
                 { kind: "equipment", id: "NailFile", weight: 10 },
-                { kind: "equipment", id: "PatheticCage", weight: 10 },
                 { kind: "equipment", id: "PoisonRing", weight: 10 },
                 { kind: "equipment", id: "RichesRing", weight: 10 },
                 { kind: "equipment", id: "YellowRichesRing", weight: 10 },
                 { kind: "potion", id: "RestoreHealth", count: 5, weight: 10 },
-                { kind: "nothing", weight: 40 },
+                { kind: "nothing", weight: 50 },
             ],
         },
     }),
