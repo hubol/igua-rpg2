@@ -119,6 +119,7 @@ const ranks = {
             ],
             tier1: [],
         },
+        level: 100,
     }),
 };
 
