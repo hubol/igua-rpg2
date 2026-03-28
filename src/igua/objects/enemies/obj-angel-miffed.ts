@@ -211,6 +211,7 @@ const ranks = {
                 emotionalDamageIsFatal: true,
             },
         },
+        level: 100,
     }),
     level2: RpgEnemyRank.create({
         loot: {
