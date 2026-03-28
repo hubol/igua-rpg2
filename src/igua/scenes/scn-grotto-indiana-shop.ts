@@ -4,7 +4,6 @@ import { Jukebox } from "../core/igua-audio";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { objAngelBrick } from "../objects/enemies/obj-angel-brick";
 import { Rpg } from "../rpg/rpg";
 
 export function scnGrottoIndianaShop() {
@@ -49,5 +48,5 @@ function enrichShopkeeper(lvl: LvlType.GrottoIndianaShop) {
 }
 
 function enrichCombatTeacher(lvl: LvlType.GrottoIndianaShop) {
-    objAngelBrick(lvl.BrickEnemyRegion).at(lvl.BrickEnemyRegion).show();
+    // objAngelBrick(lvl.BrickEnemyRegion).at(lvl.BrickEnemyRegion).show();
 }

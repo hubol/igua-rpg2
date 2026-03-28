@@ -1683,13 +1683,13 @@ export const Lvl = {
       ValuableBlue: e(r["ValuableBlue"], { x: 72, y: 48, uid: 177463402702000, values: { name: "", depth: 0 } }, "Entities"),
       ValuableBlue_1: e(r["ValuableBlue"], { x: 96, y: 48, uid: 177463402740001, values: { name: "", depth: 0 } }, "Entities"),
       ValuableBlue_2: e(r["ValuableBlue"], { x: 120, y: 48, uid: 177463402853902, values: { name: "", depth: 0 } }, "Entities"),
+      EnemyBrick: e(r["EnemyBrick"], { x: 168, y: 80, width: 56, height: 64, uid: 177470868962603, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       ShopkeeperNpc: e(r["IguanaNpc"], { x: 1376, y: 408, flippedX: true, values: { personaName: "GrottoIndianaMerchant", name: "ShopkeeperNpc", depth: 0 } }, "CharacterEntities"),
       CombatShopNpc: e(r["IguanaNpc"], { x: 112, y: 144, flippedX: false, values: { personaName: "CombatTeacher", name: "CombatShopNpc", depth: 0 } }, "CharacterEntities"),
       QuestShopNpc: e(r["IguanaNpc"], { x: 712, y: 168, flippedX: true, values: { personaName: "QuestTeacher", name: "QuestShopNpc", depth: 0 } }, "CharacterEntities"),
       PocketShopNpc: e(r["IguanaNpc"], { x: 608, y: 296, flippedX: false, values: { personaName: "PocketTeacher", name: "PocketShopNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 192, y: 344, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -64, y: 248, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromGrottoIndianaShop", name: "", depth: 0 } }, "RegionEntities"),
-      BrickEnemyRegion: e(r["Region"], { x: 168, y: 80, width: 56, height: 64, values: { name: "BrickEnemyRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
     };
   },
   IndianaCasino: () => {

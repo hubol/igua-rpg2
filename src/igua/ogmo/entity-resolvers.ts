@@ -6,6 +6,7 @@ import { mxnDoorMagic } from "../mixins/mxn-door-magic";
 import { CtxPocketItems, objCollectiblePocketItemSpawner } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objDevPlayer } from "../objects/dev/obj-dev-player";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
+import { objAngelBrick } from "../objects/enemies/obj-angel-brick";
 import { objAngelCactus } from "../objects/enemies/obj-angel-cactus";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { objAngelSnail } from "../objects/enemies/obj-angel-snail";
@@ -76,6 +77,12 @@ export const OgmoEntityResolvers = {
             CtxPocketItems.value.variant,
             CtxPocketItems.value.behavior,
         ).at(entity, -1),
+    EnemyBrick: (entity) => {
+        const brickAngelObj = objAngelBrick(entity);
+        delete entity.width;
+        delete entity.height;
+        return brickAngelObj;
+    },
     EnemyCactus: (entity) => objAngelCactus(entity).at(1, 3),
     EnemySnail: () => objAngelSnail(),
     EnemySuggestive: (entity) => objAngelSuggestive(entity).at(0, -38),

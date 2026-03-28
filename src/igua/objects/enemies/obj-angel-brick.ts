@@ -1,4 +1,5 @@
 import { Graphics, TilingSprite } from "pixi.js";
+import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Tx } from "../../../assets/textures";
 import { approachLinear } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
@@ -75,8 +76,9 @@ const variants = {
     },
 };
 
-export function objAngelBrick({ width, height }: ObjAngelBrickArgs) {
-    const { rank, theme, txPattern } = variants.level0;
+export function objAngelBrick(entity: OgmoEntities.EnemyBrick) {
+    const { rank, theme, txPattern } = variants[entity.values.variant];
+    const { width = 32, height = 32 } = entity;
 
     const hurtboxObj = new Graphics().beginFill(0xff0000).drawRect(0, 0, width, height);
     const patternObj = new TilingSprite(txPattern, width + 2, height + 2);
