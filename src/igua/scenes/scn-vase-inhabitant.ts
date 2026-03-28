@@ -200,7 +200,7 @@ export function scnVaseInhabitant() {
 
                     if (result === 2) {
                         yield* show(
-                            "The " + DataEquipment.getById("PatheticCage").name + " gets better at level 5.",
+                            "The " + DataEquipment.getById("PatheticCage").name + " gets better at level 3.",
                             "Please see the cobbler in the strange market for more infomrations.",
                         );
                     }
