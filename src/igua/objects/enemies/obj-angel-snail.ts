@@ -8,6 +8,7 @@ import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnRpgStatusBodyPart } from "../../mixins/mxn-rpg-status-body-part";
+import { mxnRpgStatusGapeMouthOnDamage } from "../../mixins/mxn-rpg-status-gape-mouth-on-damage";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { AngelThemeTemplate } from "./angel-theme-template";
@@ -88,8 +89,6 @@ export function objAngelSnail() {
         .at(152, 101)
         .invisible();
 
-    let stepsSinceDamage = 9999;
-
     return container(
         container(theme.createSprite("shell"), headObj)
             .filtered(new MapRgbFilter(...theme.tints.map)),
@@ -101,22 +100,5 @@ export function objAngelSnail() {
         .mixin(mxnDetectPlayer)
         .mixin(mxnEnemy, { rank, hurtboxes: [hurtboxObj, immuneHurtboxObj], soulAnchorObj })
         .mixin(mxnEnemyDeathBurst, { map: theme.tints.map })
-        .handles("damaged", (_, result) => {
-            if (!result.rejected) {
-                mouthObj.controls.frowning = result.damaged === true;
-                mouthObj.controls.teethExposedUnit = result.damaged ? 0 : 1;
-            }
-            stepsSinceDamage = 0;
-        })
-        .step(() => {
-            stepsSinceDamage++;
-            mouthObj.controls.agapeUnit = approachLinear(
-                mouthObj.controls.agapeUnit,
-                stepsSinceDamage < 60 ? 1 : 0,
-                0.1,
-            );
-            if (mouthObj.controls.agapeUnit === 0) {
-                mouthObj.controls.frowning = false;
-            }
-        });
+        .mixin(mxnRpgStatusGapeMouthOnDamage, mouthObj);
 }

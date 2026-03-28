@@ -20,6 +20,9 @@ async function createNoAtlasTx(tx: typeof Tx) {
             Noise256: await repeat(tx.Effects.Noise256),
         },
         Enemy: {
+            Brick: {
+                Pattern0: await repeat(tx.Enemy.Brick.Pattern0),
+            },
             Chill: {
                 Aoe: await repeat(tx.Enemy.Chill.Aoe),
             },
