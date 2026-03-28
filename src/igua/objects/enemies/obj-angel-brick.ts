@@ -12,12 +12,9 @@ interface ObjAngelBrickArgs {
 
 const rank = RpgEnemyRank.create({
     status: {
-        healthMax: 9999,
-        conditions: {
-            poison: {
-                damageScale: 100,
-                rateFactor: 1000,
-            },
+        healthMax: 10,
+        defenses: {
+            physical: 99,
         },
     },
     loot: {
