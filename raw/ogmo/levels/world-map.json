@@ -208,6 +208,19 @@
           "uid": 177427749219800,
           "tint": "#ffffff",
           "values": {"sceneName": "scnStrangeMarketGuardian", "checkpointName": "fromWorldMap", "name": "StrangeMarketGuardianGate", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 14,
+          "_eid": "53836309",
+          "x": 632,
+          "y": 232,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 180,
+          "uid": 177472955265013,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnIndianaDesert", "checkpointName": "fromWorldMapRight", "name": "", "depth": 0, "visible": true}
         }
       ]
     },

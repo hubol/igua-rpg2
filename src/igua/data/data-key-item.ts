@@ -76,6 +76,11 @@ export namespace DataKeyItem {
                 description: "Heavy, strong-smelling door key.",
                 texture: Tx.Collectibles.Key.MagicKey,
             },
+            TeenerBot: {
+                name: "Teener Bot",
+                description: "Tiny robot, a typical bauble of nerds.",
+                texture: Tx.Collectibles.Key.Robot,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );

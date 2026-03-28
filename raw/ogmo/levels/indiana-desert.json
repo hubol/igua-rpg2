@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 1552,
+  "width": 1800,
   "height": 344,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 194,
+      "gridCellsX": 225,
       "gridCellsY": 43,
       "entities": []
     },
@@ -25,7 +25,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 194,
+      "gridCellsX": 225,
       "gridCellsY": 43,
       "entities": [
         {
@@ -44,13 +44,26 @@
           "name": "GateHorizontal",
           "id": 1,
           "_eid": "97593426",
-          "x": 1496,
-          "y": 120,
+          "x": 1768,
+          "y": 112,
           "height": 128,
           "originX": 0,
           "originY": 0,
           "flippedX": false,
           "values": {"sceneName": "scnWorldMap", "checkpointName": "fromIndianaDesertRight", "name": "", "depth": 0}
+        },
+        {
+          "name": "Region",
+          "id": 2,
+          "_eid": "11908607",
+          "x": 1512,
+          "y": 0,
+          "width": 136,
+          "height": 248,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "NerdBouncerRegion", "depth": 0}
         }
       ]
     },
@@ -61,7 +74,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 194,
+      "gridCellsX": 225,
       "gridCellsY": 43,
       "decals": [
         {
@@ -438,7 +451,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 194,
+      "gridCellsX": 225,
       "gridCellsY": 43,
       "entities": []
     },
@@ -449,7 +462,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 194,
+      "gridCellsX": 225,
       "gridCellsY": 43,
       "entities": [
         {
@@ -473,6 +486,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromVaseInhabitant", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 2,
+          "_eid": "19953026",
+          "x": 1720,
+          "y": 240,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromWorldMapRight", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -483,9 +507,21 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 194,
+      "gridCellsX": 225,
       "gridCellsY": 43,
-      "entities": []
+      "entities": [
+        {
+          "name": "IguanaNpc",
+          "id": 0,
+          "_eid": "90326278",
+          "x": 1576,
+          "y": 240,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": false,
+          "values": {"personaName": "NerdBouncer", "name": "NerdBouncerNpc", "depth": 0}
+        }
+      ]
     },
     {
       "name": "AboveEntitiesDecals",
@@ -494,7 +530,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 194,
+      "gridCellsX": 225,
       "gridCellsY": 43,
       "decals": [],
       "folder": "../textures"
@@ -506,7 +542,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 194,
+      "gridCellsX": 225,
       "gridCellsY": 43,
       "entities": [
         {
@@ -600,6 +636,16 @@
           "originY": 33,
           "uid": 177160835052001,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Sign",
+          "id": 9,
+          "_eid": "39046554",
+          "x": 1488,
+          "y": 240,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "Nerds only", "message": "Only nerds may pass", "name": "", "depth": 0, "isSpecial": false}
         }
       ]
     },
@@ -610,7 +656,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 194,
+      "gridCellsX": 225,
       "gridCellsY": 43,
       "decals": [
         {
@@ -623,7 +669,8 @@
           "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 681,
@@ -713,7 +760,8 @@
           "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1366,
@@ -725,7 +773,8 @@
           "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1377,
@@ -737,7 +786,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1401,
@@ -749,7 +799,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1326,
@@ -761,7 +812,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 768,
@@ -773,7 +825,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 821,
@@ -800,6 +853,32 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 1632,
+          "y": 242,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffc123",
+          "texture": "terrain/earth/smooth.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1776,
+          "y": 242,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffc123",
+          "texture": "terrain/earth/smooth.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -811,7 +890,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 194,
+      "gridCellsX": 225,
       "gridCellsY": 43,
       "entities": [
         {
@@ -924,8 +1003,8 @@
           "_eid": "93117141",
           "x": 1208,
           "y": 240,
-          "width": 344,
-          "height": 24,
+          "width": 600,
+          "height": 104,
           "originX": 0,
           "originY": 0,
           "tint": "#ffc123",
@@ -958,7 +1037,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 194,
+      "gridCellsX": 225,
       "gridCellsY": 43,
       "entities": []
     },
@@ -969,7 +1048,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 194,
+      "gridCellsX": 225,
       "gridCellsY": 43,
       "decals": [
         {
@@ -1151,7 +1230,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 194,
+      "gridCellsX": 225,
       "gridCellsY": 43,
       "decals": [
         {

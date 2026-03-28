@@ -9,6 +9,7 @@ import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { DramaQuests } from "../drama/drama-quests";
 import { dramaQuizComputerScience } from "../drama/drama-quiz-computer-science";
 import { ask, show } from "../drama/show";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
@@ -146,6 +147,7 @@ function enrichFallenBot(lvl: LvlType.WorldMap) {
             }
             else {
                 yield* show("You've given me some hope.");
+                yield* DramaQuests.complete("FallenBot.PerfectScore");
                 flagFallenBot.perfectScoreTimes++;
             }
 

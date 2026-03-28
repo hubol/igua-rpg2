@@ -45,6 +45,9 @@ export function getInitialRpgProgress() {
             ...RpgPlayer.createState(),
         },
         flags: {
+            desert: {
+                nerdBouncerSatiated: false,
+            },
             flopUniversity: {
                 isDirectorVisiting: false,
             },

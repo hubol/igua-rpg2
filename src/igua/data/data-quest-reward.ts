@@ -169,6 +169,10 @@ export namespace DataQuestReward {
                 kind: "single",
                 reward: { kind: "potion", id: "AttributeHealthUp" },
             },
+            "FallenBot.PerfectScore": {
+                kind: "single",
+                reward: { kind: "key_item", id: "TeenerBot" },
+            },
             __Fallback__: {
                 kind: "nothing",
             },

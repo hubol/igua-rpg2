@@ -1816,7 +1816,7 @@ export const Lvl = {
     };
   },
   IndianaDesert: () => {
-    applyLevel({ width: 1552, height: 344, backgroundTint: 0x8dcbe6, terrainTint: 0xffc123 });
+    applyLevel({ width: 1800, height: 344, backgroundTint: 0x8dcbe6, terrainTint: 0xffc123 });
     return {
       SkyCloudLong0: d(Tx.Sky.CloudLong0, { x: 296, y: 104, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloudLong1: d(Tx.Sky.CloudLong1, { x: 504, y: 152, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
@@ -1853,7 +1853,7 @@ export const Lvl = {
       Slope_2: e(r["Slope"], { x: 152, y: 216, width: 96, height: 24, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xffc123 }, "TerrainEntities"),
       Block_3: e(r["Block"], { x: 0, y: 240, width: 152, height: 104, values: { name: "", depth: 0, visible: true }, tint: 0xffc123 }, "TerrainEntities"),
       Slope_3: e(r["Slope"], { x: 1112, y: 240, width: 96, height: 24, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xffc123 }, "TerrainEntities"),
-      Block_4: e(r["Block"], { x: 1208, y: 240, width: 344, height: 24, values: { name: "", depth: 0, visible: true }, tint: 0xffc123 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 1208, y: 240, width: 600, height: 104, values: { name: "", depth: 0, visible: true }, tint: 0xffc123 }, "TerrainEntities"),
       Pipe: e(r["Pipe"], { x: 1288, y: 170, width: 160, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
       Pipe_1: e(r["Pipe"], { x: 768, y: 88, width: 104, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
       StoneRock0: d(Tx.Stone.Rock0, { x: 1388, y: 166, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
@@ -1871,6 +1871,8 @@ export const Lvl = {
       ShapesSquare32_3: d(Tx.Shapes.Square32, { x: 768, y: 88, scaleX: 3.3, scaleY: 0.3, rotation: 0, originX: 0, originY: 0, tint: 0xffc123 }, "TerrainDecals"),
       TerrainEarthLumpy3px_1: d(Tx.Terrain.Earth.Lumpy3px, { x: 821, y: 95, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffc123 }, "TerrainDecals"),
       TerrainEarthSmooth_5: d(Tx.Terrain.Earth.Smooth, { x: 814, y: 90, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffc123 }, "TerrainDecals"),
+      TerrainEarthSmooth_6: d(Tx.Terrain.Earth.Smooth, { x: 1632, y: 242, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffc123 }, "TerrainDecals"),
+      TerrainEarthSmooth_7: d(Tx.Terrain.Earth.Smooth, { x: 1776, y: 242, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffc123 }, "TerrainDecals"),
       Door: e(r["Door"], { x: 1328, y: 192, values: { sceneName: "scnVaseInhabitant", checkpointName: "", name: "", depth: 0 } }, "Entities"),
       EnemyCactus: e(r["EnemyCactus"], { x: 296, y: 216, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemyCactus_1: e(r["EnemyCactus"], { x: 488, y: 240, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
@@ -1880,8 +1882,11 @@ export const Lvl = {
       Idol: e(r["Idol"], { x: 1365, y: 160, uid: 177160815398100, values: { name: "", depth: 0 } }, "Entities"),
       Sign: e(r["Sign"], { x: 800, y: 264, values: { title: "Sand", message: "This is the desert.\n\nThis sign is special.", name: "", depth: 0, isSpecial: true } }, "Entities"),
       StashPocket: e(r["StashPocket"], { x: 821, y: 88, uid: 177160835052001, values: { name: "", depth: 0 } }, "Entities"),
+      Sign_1: e(r["Sign"], { x: 1488, y: 240, values: { title: "Nerds only", message: "Only nerds may pass", name: "", depth: 0, isSpecial: false } }, "Entities"),
+      NerdBouncerNpc: e(r["IguanaNpc"], { x: 1576, y: 240, flippedX: false, values: { personaName: "NerdBouncer", name: "NerdBouncerNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 104, y: 240, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromVaseInhabitant: e(r["Checkpoint"], { x: 1296, y: 240, flippedX: true, values: { name: "fromVaseInhabitant", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromWorldMapRight: e(r["Checkpoint"], { x: 1720, y: 240, flippedX: false, values: { name: "fromWorldMapRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       FrontCactusGroup: dg(88, 280, "FrontCactusGroup", "FrontDecals"),
       FoliageCactus0: d(Tx.Foliage.Cactus0, { x: 88, y: 288, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
       FoliageCactus1: d(Tx.Foliage.Cactus1, { x: 208, y: 320, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
@@ -1912,7 +1917,8 @@ export const Lvl = {
       FoliageCactus0_20: d(Tx.Foliage.Cactus0, { x: 3136, y: 288, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
       FoliageCactus0_21: d(Tx.Foliage.Cactus0, { x: 3224, y: 312, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FrontCactusGroup", tint: 0xffffff }, "FrontDecals"),
       GateHorizontal: e(r["GateHorizontal"], { x: -24, y: 128, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaDesertLeft", name: "", depth: 0 } }, "RegionEntities"),
-      GateHorizontal_1: e(r["GateHorizontal"], { x: 1496, y: 120, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaDesertRight", name: "", depth: 0 } }, "RegionEntities"),
+      GateHorizontal_1: e(r["GateHorizontal"], { x: 1768, y: 112, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaDesertRight", name: "", depth: 0 } }, "RegionEntities"),
+      NerdBouncerRegion: e(r["Region"], { x: 1512, y: 0, width: 136, height: 248, values: { name: "NerdBouncerRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
     };
   },
   IndianaHallOfDoors: () => {
@@ -7671,6 +7677,7 @@ export const Lvl = {
       GateMap_9: e(r["GateMap"], { x: 488, y: 232, rotation: 0, uid: 177152452563600, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_10: e(r["GateMap"], { x: 632, y: 880, rotation: 180, uid: 177281293625000, values: { sceneName: "scnIndianaLoungeExterior", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       StrangeMarketGuardianGate: e(r["GateMap"], { x: 507, y: 590, rotation: 630, uid: 177427749219800, values: { sceneName: "scnStrangeMarketGuardian", checkpointName: "fromWorldMap", name: "StrangeMarketGuardianGate", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_11: e(r["GateMap"], { x: 632, y: 232, rotation: 180, uid: 177472955265013, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       FallenBotMarker: e(r["Marker"], { x: 744, y: 552, values: { name: "FallenBotMarker", depth: 0 }, tint: 0x777777 }, "MarkerEntities"),
     };
   },
