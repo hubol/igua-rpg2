@@ -1,3 +1,4 @@
+import { Mzk } from "../../assets/music";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Null } from "../../lib/types/null";
 import { DataNpcPersona } from "../data/data-npc-persona";
@@ -48,6 +49,10 @@ export function getInitialRpgProgress() {
                 isDirectorVisiting: false,
             },
             grotto: {
+                questTeacher: {
+                    expectedMzkId: Null<Mzk.Id>(),
+                    correctMzkIds: new Set<Mzk.Id>(),
+                },
                 pocketTeacher: {
                     receivedPocketItemIds: new Set<DataPocketItem.Id>(),
                 },

@@ -265,6 +265,9 @@ export namespace DataShop {
                     },
                 ],
             },
+            QuestTeacher: {
+                stocks: [],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );

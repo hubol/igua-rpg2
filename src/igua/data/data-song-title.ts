@@ -6,7 +6,7 @@ import { StringTransform } from "../../lib/string/string-transform";
 export namespace DataSongTitle {
     const fallback = getModel("UnknownSong" as any);
 
-    const Manifest: Record<MusicTrack, Model> = {
+    export const Manifest: Record<MusicTrack, Model> = {
         ...Object.fromEntries(Object.entries(Mzk).map(([id, track]) => [track, getModel(id as Mzk.Id)])),
         [Mzk.Covid19]: {
             firstWord: "COVID",
@@ -27,7 +27,7 @@ export namespace DataSongTitle {
         return fallback;
     }
 
-    interface Model {
+    export interface Model {
         title: string;
         firstWord: string;
         remainingWords: string;

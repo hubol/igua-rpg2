@@ -165,6 +165,10 @@ export namespace DataQuestReward {
                 kind: "single",
                 reward: { kind: "potion", id: "AttributeHealthUp" },
             },
+            "Grotto.QuestTeacher.GuessedSongsCorrectly": {
+                kind: "single",
+                reward: { kind: "potion", id: "AttributeHealthUp" },
+            },
             __Fallback__: {
                 kind: "nothing",
             },
