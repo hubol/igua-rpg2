@@ -212,6 +212,35 @@ export namespace DataShop {
                     },
                 ],
             },
+            CombatTeacher: {
+                stocks: [
+                    {
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "combat", deltaSold: 1000, initial: 1999 },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeHealthUp" },
+                        initialQuantity: 2,
+                        price: { currency: "combat", deltaSold: 500, initial: 499 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "StrengthUp", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "combat", deltaSold: 0, initial: 999 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "PoisonRing", level: 1 },
+                        initialQuantity: 2,
+                        price: { currency: "combat", deltaSold: 500, initial: 499 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "PoisonResistance", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "combat", deltaSold: 500, initial: 750 },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );

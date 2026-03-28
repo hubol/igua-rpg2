@@ -1,6 +1,7 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
+import { DramaLib } from "../drama/drama-lib";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -48,5 +49,11 @@ function enrichShopkeeper(lvl: LvlType.GrottoIndianaShop) {
 }
 
 function enrichCombatTeacher(lvl: LvlType.GrottoIndianaShop) {
-    // objAngelBrick(lvl.BrickEnemyRegion).at(lvl.BrickEnemyRegion).show();
+    lvl.CombatShopNpc
+        .coro(function* (self) {
+            yield () => lvl.EnemyBrick.destroyed;
+            self.mixin(mxnCutscene, function* () {
+                yield* dramaShop("CombatTeacher", self.speaker);
+            });
+        });
 }
