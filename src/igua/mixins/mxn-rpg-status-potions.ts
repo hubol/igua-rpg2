@@ -56,7 +56,7 @@ function inferPotionToUse(
     return null;
 }
 
-function objUsedPotion(potionId: DataPotion.Id, statusObj: MxnRpgStatus & Container) {
+export function objUsedPotion(potionId: DataPotion.Id, statusObj: MxnRpgStatus & Container) {
     return objFigurePotion(potionId)
         .pivotedUnit(0.5, 0.5)
         .mixin(mxnDestroyOnStatusDeath, statusObj.status)

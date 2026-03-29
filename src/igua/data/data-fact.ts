@@ -32,6 +32,10 @@ export namespace DataFact {
                 heading: "About gambling",
                 messages: ["Gambling is a fun activity devoid of any risks."],
             },
+            WindEnergy: {
+                heading: "About wind",
+                messages: ["Wind energy is a different kind of type of energy.", "Comes from the wind, you see?"],
+            },
             "__Fallback__": {
                 heading: "About a bug",
                 messages: ["If you are reading this, it is a bug with the facts mechanic."],

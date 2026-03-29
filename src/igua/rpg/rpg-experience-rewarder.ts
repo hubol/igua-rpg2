@@ -71,6 +71,9 @@ export class RpgExperienceRewarder {
                 computerCorrectQuizAnswerCountsToExperience[count] ?? computerCorrectQuizAnswerCountsToExperience.last,
             );
         },
+        onCorrectPracticeQuizAnswer() {
+            increase(1);
+        },
     }));
 
     readonly gambling = this._expose("gambling", (increase) => ({

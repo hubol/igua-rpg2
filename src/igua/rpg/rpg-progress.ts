@@ -130,6 +130,9 @@ export function getInitialRpgProgress() {
                     ringer: {
                         toldPlayerAboutDesireForFish: false,
                     },
+                    nerd: {
+                        windEssenceCount: 0,
+                    },
                 },
             },
             vase: {

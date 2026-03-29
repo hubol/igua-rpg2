@@ -175,12 +175,19 @@ function* askWhichAndRemoveCount<TItem extends RpgInventory.RemovableItem>(
     return { item, count };
 }
 
+function* removeAll(item: RpgInventory.RemovableItem) {
+    const count = Rpg.inventory.count(item);
+    yield* removeCountFromPlayer(item, count);
+    return count;
+}
+
 export const DramaInventory = {
     askRemoveCount,
     askWhichAndRemoveOne,
     askWhichAndRemoveCount,
     receiveItems,
     removeCount: removeCountFromPlayer,
+    removeAll,
     pocket: {
         empty: emptyPocket,
     },

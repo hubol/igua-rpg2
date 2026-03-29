@@ -182,7 +182,7 @@ export namespace DataShop {
                         product: { kind: "potion", id: "RestoreHealth" },
                     },
                     {
-                        initialQuantity: 10,
+                        initialQuantity: 99,
                         price: { currency: "valuables", deltaSold: 0, initial: 10 },
                         product: { kind: "potion", id: "AnnoyIguanas" },
                     },
@@ -276,6 +276,25 @@ export namespace DataShop {
                         product: { kind: "potion", id: "AttributeStrengthUp" },
                         initialQuantity: 1,
                         price: { currency: "quest", deltaSold: 0, initial: 600 },
+                    },
+                ],
+            },
+            ComputerNerd: {
+                stocks: [
+                    {
+                        product: { kind: "potion", id: "AttributeHealthUp" },
+                        initialQuantity: 5,
+                        price: { currency: "computer", deltaSold: 200, initial: 100 },
+                    },
+                    {
+                        product: { kind: "key_item", id: "FlopBlindBox" },
+                        initialQuantity: 3,
+                        price: { currency: "computer", deltaSold: 0, initial: 30 },
+                    },
+                    {
+                        product: { kind: "key_item", id: "FlopBlindBoxTypeB" },
+                        initialQuantity: 3,
+                        price: { currency: "computer", deltaSold: 0, initial: 30 },
                     },
                 ],
             },

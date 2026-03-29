@@ -11,9 +11,13 @@ import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { DramaFacts } from "../drama/drama-facts";
 import { DramaGifts } from "../drama/drama-gifts";
 import { DramaInventory } from "../drama/drama-inventory";
+import { DramaPotions } from "../drama/drama-potions";
 import { DramaQuests } from "../drama/drama-quests";
+import { dramaQuizComputerScience } from "../drama/drama-quiz-computer-science";
+import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { Cutscene, layers, scene } from "../globals";
 import { mxnFxAlphaVisibility } from "../mixins/effects/mxn-fx-alpha-visibility";
@@ -41,6 +45,7 @@ export function scnEfficientHome() {
     enrichRoom3(lvl);
     enrichRoom4(lvl);
     enrichRoom5(lvl);
+    enrichRoom6(lvl);
 }
 
 function enrichHelium(lvl: LvlType.EfficientHome) {
@@ -314,5 +319,53 @@ function enrichRoom5(lvl: LvlType.EfficientHome) {
             );
 
             yield* DramaGifts.give("GreatTower.EfficientHome.Musician.SongShoe");
+        });
+}
+
+function enrichRoom6(lvl: LvlType.EfficientHome) {
+    const flagNerd = Rpg.flags.greatTower.efficientHome.nerd;
+
+    lvl.CloudHouseNerdNpc
+        .mixin(mxnCutscene, function* () {
+            const result = yield* ask(
+                "I'm a nerd. Can I help in some way?",
+                "Wind energy?",
+                Rpg.inventory.pocket.has("EssenceWind", 1) ? "I have Wind Essence" : null,
+                "Trade",
+                "Practice quiz",
+                "No, you can't",
+            );
+
+            if (result === 0) {
+                yield* show("I'm glad you asked!");
+                yield* DramaFacts.memorize("WindEnergy");
+                yield* show("Hopefully that makes sense!");
+            }
+            else if (result === 1) {
+                yield* show("Great! I'll use it to power up my computers.");
+                const count = yield* DramaInventory.removeAll({ kind: "pocket_item", id: "EssenceWind" });
+                flagNerd.windEssenceCount += count;
+                yield* show("This wind essence will be put to good use!");
+            }
+            else if (result === 2) {
+                yield* dramaShop("ComputerNerd", lvl.CloudHouseNerdNpc.speaker);
+            }
+            else if (result === 3) {
+                yield* show(
+                    "You want to practice a programming quiz? Ok!",
+                    "Take your time, and pay close attention to the value passed to the function.",
+                );
+
+                const correct = yield* dramaQuizComputerScience({ difficulty: 0 });
+
+                if (correct) {
+                    Rpg.experience.reward.computer.onCorrectPracticeQuizAnswer();
+                    yield* show("Enjoy this little treat!");
+                    yield* DramaPotions.useOnPlayer("RestoreHealth");
+                }
+                else {
+                    yield* show("Maybe you should try again!");
+                }
+            }
         });
 }
