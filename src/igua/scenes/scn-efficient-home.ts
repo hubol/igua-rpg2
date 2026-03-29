@@ -6,7 +6,7 @@ import { Sfx } from "../../assets/sounds";
 import { factor, interpr, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
-import { Rng } from "../../lib/math/rng";
+import { PseudoRng, Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { Jukebox } from "../core/igua-audio";
@@ -23,6 +23,7 @@ import { Cutscene, layers, scene } from "../globals";
 import { mxnFxAlphaVisibility } from "../mixins/effects/mxn-fx-alpha-visibility";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSign } from "../mixins/mxn-sign";
+import { objCharacterWindTurbine } from "../objects/characters/obj-character-wind-turbine";
 import { mxnEsotericArtInteractive, objEsotericArt } from "../objects/esoteric/obj-esoteric-art";
 import { objEsotericRemovedShoes } from "../objects/esoteric/obj-esoteric-removed-shoes";
 import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
@@ -323,6 +324,15 @@ function enrichRoom5(lvl: LvlType.EfficientHome) {
 }
 
 function enrichRoom6(lvl: LvlType.EfficientHome) {
+    const turbineObjs = [lvl.TurbineMarker1, lvl.TurbineMarker2, lvl.TurbineMarker3, lvl.TurbineMarker0]
+        .map(position => objCharacterWindTurbine().at(position).zIndexed(ZIndex.CharacterEntities).show());
+
+    const rng = new PseudoRng(36969696973);
+
+    for (const obj of turbineObjs) {
+        obj.objCharacterWindTurbine.angle = rng.int(360);
+    }
+
     const flagNerd = Rpg.flags.greatTower.efficientHome.nerd;
 
     lvl.CloudHouseNerdNpc

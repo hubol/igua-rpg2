@@ -101,6 +101,50 @@
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 11,
+          "_eid": "73148747",
+          "x": 208,
+          "y": 744,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#fff500",
+          "values": {"name": "TurbineMarker1", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 12,
+          "_eid": "73148747",
+          "x": 120,
+          "y": 808,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#fff500",
+          "values": {"name": "TurbineMarker2", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 13,
+          "_eid": "73148747",
+          "x": 368,
+          "y": 808,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#fff500",
+          "values": {"name": "TurbineMarker3", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 15,
+          "_eid": "73148747",
+          "x": 240,
+          "y": 808,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#fff500",
+          "values": {"name": "TurbineMarker0", "depth": 0}
         }
       ]
     },

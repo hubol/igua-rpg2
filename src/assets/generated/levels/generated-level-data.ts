@@ -736,6 +736,10 @@ export const Lvl = {
       EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 1409, y: 420, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_1: e(r["EnvironmentSparkleMarker"], { x: 1377, y: 447, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_2: e(r["EnvironmentSparkleMarker"], { x: 1381, y: 404, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      TurbineMarker1: e(r["Marker"], { x: 208, y: 744, values: { name: "TurbineMarker1", depth: 0 }, tint: 0xfff500 }, "MarkerEntities"),
+      TurbineMarker2: e(r["Marker"], { x: 120, y: 808, values: { name: "TurbineMarker2", depth: 0 }, tint: 0xfff500 }, "MarkerEntities"),
+      TurbineMarker3: e(r["Marker"], { x: 368, y: 808, values: { name: "TurbineMarker3", depth: 0 }, tint: 0xfff500 }, "MarkerEntities"),
+      TurbineMarker0: e(r["Marker"], { x: 240, y: 808, values: { name: "TurbineMarker0", depth: 0 }, tint: 0xfff500 }, "MarkerEntities"),
     };
   },
   ErrorRecoveryRoom: () => {
