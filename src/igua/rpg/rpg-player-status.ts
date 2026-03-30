@@ -23,7 +23,7 @@ export class RpgPlayerStatus implements RpgStatus.Model {
     }
 
     get healthMax() {
-        return 45 + this._attributes.health * 5;
+        return Math.max(1, 45 + this._attributes.health * 5);
     }
 
     get invulnerable() {

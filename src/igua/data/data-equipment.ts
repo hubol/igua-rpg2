@@ -196,6 +196,16 @@ export namespace DataEquipment {
                     model.esoteric.recognizeSongFactor += 100 + bonus * 100;
                 },
             },
+            DoubleJump: {
+                name: "Holy Shoe",
+                texture: null,
+                description: "Enable midair jumps, but at a cost",
+                buffs: (model, bonus) => {
+                    model.motion.jump.midairCount += 1 + bonus;
+                    model.esoteric.lgbtFactor += 50 + bonus * 25;
+                    model.attributes.health -= 5 + bonus * 5;
+                },
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,
