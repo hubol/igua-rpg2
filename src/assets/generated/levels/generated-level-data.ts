@@ -788,6 +788,10 @@ export const Lvl = {
       TurbineMarker0: e(r["Marker"], { x: 240, y: 808, values: { name: "TurbineMarker0", depth: 0 }, tint: 0xfff500 }, "MarkerEntities"),
     };
   },
+  EndingDemo: () => {
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    return {};
+  },
   ErrorRecoveryRoom: () => {
     applyLevel({ width: 500, height: 896, backgroundTint: 0x000d80, terrainTint: 0xd5edff });
     return {
@@ -6928,6 +6932,7 @@ export const Lvl = {
       EnemyBrick_2: e(r["EnemyBrick"], { x: 648, y: 512, width: 56, height: 72, uid: 177490871957913, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemyCactus: e(r["EnemyCactus"], { x: 832, y: 584, values: { variant: "level1", name: "", depth: 0 } }, "Entities"),
       EnemyCactus_1: e(r["EnemyCactus"], { x: 288, y: 592, values: { variant: "level1", name: "", depth: 0 } }, "Entities"),
+      Door_1: e(r["Door"], { x: 96, y: 544, values: { sceneName: "scnEndingDemo", checkpointName: "fromSwamp", name: "", depth: 0 } }, "Entities"),
       Player: e(r["Player"], { x: 104, y: 392, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromCasino: e(r["Checkpoint"], { x: 2216, y: 408, flippedX: true, values: { name: "fromCasino", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromPit: e(r["Checkpoint"], { x: 2128, y: 304, flippedX: false, values: { name: "fromPit", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
@@ -8033,6 +8038,7 @@ export namespace LvlType {
   export type ColosseumMiffed = ReturnType<(typeof Lvl)["ColosseumMiffed"]>;
   export type Dummy = ReturnType<(typeof Lvl)["Dummy"]>;
   export type EfficientHome = ReturnType<(typeof Lvl)["EfficientHome"]>;
+  export type EndingDemo = ReturnType<(typeof Lvl)["EndingDemo"]>;
   export type ErrorRecoveryRoom = ReturnType<(typeof Lvl)["ErrorRecoveryRoom"]>;
   export type FlopCollegeExterior = ReturnType<(typeof Lvl)["FlopCollegeExterior"]>;
   export type FlopCollegeInterior = ReturnType<(typeof Lvl)["FlopCollegeInterior"]>;
