@@ -22,7 +22,14 @@ export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger
     return container()
         .step(() => {
             if (scene.ticker.ticks % 2 === 0) {
-                client.update(playerObj.x, playerObj.y, playerObj.ducking, playerObj.facing, playerObj.speed);
+                client.update(
+                    playerObj.x,
+                    playerObj.y,
+                    playerObj.ducking,
+                    playerObj.facing,
+                    playerObj.speed,
+                    playerObj.head.mouth.isSmoking,
+                );
             }
         })
         .step(() => {
@@ -58,6 +65,8 @@ export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger
                 if (iguanaObj.speed.isZero && iguanaObj.facing === -iguana.facing) {
                     iguanaObj.facing = iguana.facing;
                 }
+
+                iguanaObj.head.mouth.isSmoking = Boolean(iguana.flags & (0b1));
             }
 
             for (const iguanaIdString in iguanaObjsById) {

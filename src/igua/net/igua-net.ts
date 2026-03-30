@@ -29,6 +29,7 @@ export namespace IguaNet {
                     x: number;
                     y: number;
                 };
+                flags: number;
             }
 
             export interface GiftOffer {
@@ -81,6 +82,7 @@ export namespace IguaNet {
                         x: number;
                         y: number;
                     };
+                    flags: number;
                 }
             }
 
