@@ -668,6 +668,7 @@ export const Lvl = {
       ShapesRightTriangle24px_1: d(Tx.Shapes.RightTriangle24px, { x: 400, y: 666, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xafafaf }, "TerrainDecals"),
       ShapesRightTriangle24px_2: d(Tx.Shapes.RightTriangle24px, { x: 87, y: 804, scaleX: -1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xafafaf }, "TerrainDecals"),
       ShapesRightTriangle24px_3: d(Tx.Shapes.RightTriangle24px, { x: 400, y: 804, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xafafaf }, "TerrainDecals"),
+      NerdTerminal: d(Tx.Characters.WindFarm.Terminal, { x: 160, y: 772, scaleX: 1, scaleY: 1, rotation: 0, originX: 0, originY: 0, tint: 0xffffff }, "TerrainDecals"),
       Door: e(r["Door"], { x: 128, y: 168, values: { sceneName: "scnGreatTowerBalcony", checkpointName: "fromEfficient", name: "", depth: 0 } }, "Entities"),
       Door_1: e(r["Door"], { x: 624, y: 160, values: { sceneName: "scnGreatTowerBalcony", checkpointName: "fromEfficient", name: "", depth: 0 } }, "Entities"),
       Door_2: e(r["Door"], { x: 72, y: 472, values: { sceneName: "scnGreatTowerBalcony", checkpointName: "fromEfficient", name: "", depth: 0 } }, "Entities"),

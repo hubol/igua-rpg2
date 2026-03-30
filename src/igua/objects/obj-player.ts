@@ -219,6 +219,11 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             }
 
             const hasControl = puppet.hasControl;
+
+            if (hasControl) {
+                Rpg.records.onPlayfulGameTick();
+            }
+
             puppet.isMovingLeft = hasControl && Input.isDown("MoveLeft");
             puppet.isMovingRight = hasControl && Input.isDown("MoveRight");
             puppet.isMovingUp = hasControl && scene.isWorldMap && Input.isDown("WorldMap_MoveUp");

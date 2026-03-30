@@ -14,6 +14,7 @@ export function objCharacterWindTurbine() {
             return angle;
         },
         set angle(value) {
+            angle = value;
             bladesObj.angle = Math.round(value / 15) * 15;
         },
     };

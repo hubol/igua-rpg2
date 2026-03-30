@@ -6,6 +6,7 @@ import { Sfx } from "../../assets/sounds";
 import { factor, interpr, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
+import { Integer } from "../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
@@ -19,7 +20,7 @@ import { DramaQuests } from "../drama/drama-quests";
 import { dramaQuizComputerScience } from "../drama/drama-quiz-computer-science";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
-import { Cutscene, layers, scene } from "../globals";
+import { Cutscene, DevKey, layers, scene } from "../globals";
 import { mxnFxAlphaVisibility } from "../mixins/effects/mxn-fx-alpha-visibility";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSign } from "../mixins/mxn-sign";
@@ -324,16 +325,129 @@ function enrichRoom5(lvl: LvlType.EfficientHome) {
 }
 
 function enrichRoom6(lvl: LvlType.EfficientHome) {
+    const flagNerd = (() => {
+        const flag = Rpg.flags.greatTower.efficientHome.nerd;
+        return {
+            get windEssenceCount() {
+                return flag.windEssenceCount;
+            },
+            get downloadedBytesPerTick() {
+                if (this.windEssenceCount < 1) {
+                    return 0;
+                }
+                const value = 128 * Math.round(Math.pow(1.2, this.windEssenceCount)) + 256 * this.windEssenceCount;
+                return Number.isFinite(value) ? value : Number.MAX_SAFE_INTEGER;
+            },
+            addWindEssence(count: Integer) {
+                flag.windEssenceCount += count;
+            },
+            downloadData() {
+                const ticks = Rpg.records.gameTicksPlayed - flag.lastEvaluatedGameTickCount;
+                if (ticks <= 0) {
+                    return;
+                }
+
+                flag.downloadedData = Math.min(
+                    constNerd.maxStoredBytes,
+                    flag.downloadedData + ticks * this.downloadedBytesPerTick,
+                );
+                flag.lastEvaluatedGameTickCount = Rpg.records.gameTicksPlayed;
+            },
+            removeMovies() {
+                const count = this.storedMoviesCount;
+                flag.downloadedData -= count * constNerd.movieBytes;
+                return count;
+            },
+            get storedMoviesCount() {
+                return Math.floor(flag.downloadedData / constNerd.movieBytes);
+            },
+            get isAtCapacity() {
+                return flag.downloadedData >= constNerd.maxStoredBytes;
+            },
+            get remainingBytesForNextMovie() {
+                return constNerd.movieBytes - (flag.downloadedData % constNerd.movieBytes);
+            },
+        };
+    })();
+
+    const constNerd = {
+        kilobyte: 1_000,
+        megabyte: 1_000_000,
+        gigabyte: 1_000_000_000,
+        movieBytes: 2_000_000_000,
+        maxStoredBytes: 64_000_000_000,
+    };
+
+    function bytesText(bytes: number) {
+        if (bytes === 0) {
+            return "0B";
+        }
+        if (bytes < 1) {
+            return "<1B";
+        }
+        if (bytes < constNerd.kilobyte) {
+            return Math.round(bytes) + "B";
+        }
+        if (bytes < constNerd.megabyte) {
+            return (bytes / constNerd.kilobyte).toFixed(1) + "KB";
+        }
+        if (bytes < constNerd.gigabyte) {
+            return (bytes / constNerd.megabyte).toFixed(1) + "MB";
+        }
+        return (bytes / constNerd.gigabyte).toFixed(1) + "GB";
+    }
+
+    {
+        objText.XSmall("", { tint: 0x00ff00 })
+            .step(self => {
+                if (flagNerd.isAtCapacity) {
+                    self.text = "AT MAX";
+                    return;
+                }
+                let text = "";
+                if (flagNerd.storedMoviesCount > 0) {
+                    text += flagNerd.storedMoviesCount + " done\n";
+                }
+                text += bytesText(flagNerd.remainingBytesForNextMovie) + "\n";
+                text += bytesText(flagNerd.downloadedBytesPerTick * 60) + "ps";
+                self.text = text;
+            })
+            .at(lvl.NerdTerminal)
+            .add(3, 3)
+            .zIndexed(ZIndex.TerrainDecals)
+            .show();
+    }
+
     const turbineObjs = [lvl.TurbineMarker1, lvl.TurbineMarker2, lvl.TurbineMarker3, lvl.TurbineMarker0]
         .map(position => objCharacterWindTurbine().at(position).zIndexed(ZIndex.CharacterEntities).show());
 
     const rng = new PseudoRng(36969696973);
 
-    for (const obj of turbineObjs) {
+    for (let i = 0; i < turbineObjs.length; i++) {
+        const obj = turbineObjs[i];
+        const direction = rng.intp();
         obj.objCharacterWindTurbine.angle = rng.int(360);
+        obj
+            .step(() => {
+                const delta = Math.min(20, flagNerd.windEssenceCount * Math.pow(0.8, i) - i * 5);
+
+                if (delta < 1) {
+                    return;
+                }
+                obj.objCharacterWindTurbine.angle += direction * delta;
+            });
     }
 
-    const flagNerd = Rpg.flags.greatTower.efficientHome.nerd;
+    scene.stage
+        .step(() => {
+            if (DevKey.justWentDown("Comma")) {
+                Rpg.inventory.pocket.receive("EssenceWind");
+            }
+
+            flagNerd.downloadData();
+        });
+
+    lvl.NerdTerminal;
 
     lvl.CloudHouseNerdNpc
         .mixin(mxnCutscene, function* () {
@@ -354,7 +468,7 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
             else if (result === 1) {
                 yield* show("Great! I'll use it to power up my computers.");
                 const count = yield* DramaInventory.removeAll({ kind: "pocket_item", id: "EssenceWind" });
-                flagNerd.windEssenceCount += count;
+                flagNerd.addWindEssence(count);
                 yield* show("This wind essence will be put to good use!");
             }
             else if (result === 2) {

@@ -131,6 +131,8 @@ export function getInitialRpgProgress() {
                         toldPlayerAboutDesireForFish: false,
                     },
                     nerd: {
+                        downloadedData: 0,
+                        lastEvaluatedGameTickCount: 0,
                         windEssenceCount: 0,
                     },
                 },
