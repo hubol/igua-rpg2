@@ -52,6 +52,7 @@ export namespace DataNpcPersona {
             Vase: { job: "Cactus Cobbler", name: "Winston", looks: NpcLooks.EasilyTricked },
             PityBoss: { job: "Pity Boss", name: "Ga'hvorth", looks: NpcLooks.LilEmbarrassment },
             CloudHouseMusician: { job: "Music Fan", name: "Treenje", looks: NpcLooks.Foolish },
+            CloudHouseNerd: { job: "Nerd", name: "Thinth", looks: NpcLooks.Smoky },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
         } satisfies Record<string, Model>,
     );
