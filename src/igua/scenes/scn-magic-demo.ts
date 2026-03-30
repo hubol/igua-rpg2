@@ -1,3 +1,5 @@
+import { Graphics } from "pixi.js";
+import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
@@ -152,7 +154,31 @@ export function scnMagicDemo() {
                 yield* show("This is a bug (Type B)");
             }
             else {
+                const textMaskObj = new Graphics()
+                    .beginFill(0xff0000)
+                    .drawRect(0, 0, lvl.SubtitlesRegion.width, lvl.SubtitlesRegion.height)
+                    .at(lvl.SubtitlesRegion)
+                    .show();
+
                 const sfx = speech.sfx.playInstance();
+                objText
+                    .MediumIrregular(speech.text, { tint: 0x4146a8, maxWidth: textMaskObj.width })
+                    .at(lvl.SubtitlesRegion)
+                    .add(0, lvl.SubtitlesRegion.height)
+                    .masked(textMaskObj)
+                    .coro(function* (self) {
+                        const distance = self.height + lvl.SubtitlesRegion.height;
+                        self.step(() => {
+                            if (sfx.ended) {
+                                self.destroy();
+                                textMaskObj.destroy();
+                                return;
+                            }
+                            self.pivot.y = Math.round(distance * (sfx.estimatedPlayheadPosition / sfx.duration));
+                        });
+                    })
+                    .show();
+
                 yield* Coro.race([
                     // Paranoid
                     sleep(42_000),

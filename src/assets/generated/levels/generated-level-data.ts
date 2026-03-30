@@ -2680,6 +2680,7 @@ export const Lvl = {
       StoneRockSmallShaded1_4: d(Tx.Stone.RockSmallShaded1, { x: 232, y: 249, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       StoneRockSmallShaded1_5: d(Tx.Stone.RockSmallShaded1, { x: 259, y: 225, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       Player: e(r["Player"], { x: 88, y: 240, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      SubtitlesRegion: e(r["Region"], { x: 104, y: 64, width: 288, height: 88, values: { name: "SubtitlesRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       IdolMarker: e(r["Marker"], { x: 240, y: 230, values: { name: "IdolMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },

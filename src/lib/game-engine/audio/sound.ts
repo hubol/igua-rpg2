@@ -129,9 +129,14 @@ export class SoundInstance {
         return this;
     }
 
+    /** in seconds */
+    get duration() {
+        return this._sourceNode.buffer?.duration ?? 0;
+    }
+
     /** The approximate playhead position assuming the sound is looping */
     get estimatedPlayheadPosition() {
-        const duration = this._sourceNode.buffer?.duration;
+        const duration = this.duration;
         if (!duration) {
             Logger.logAssertError("SoundInstance.estimatedPlayheadPosition", new Error("duration should be truthy"), {
                 duration,
