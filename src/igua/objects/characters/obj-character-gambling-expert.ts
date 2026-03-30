@@ -1,5 +1,6 @@
 import { Rng } from "../../../lib/math/rng";
 import { DramaFacts } from "../../drama/drama-facts";
+import { DramaInventory } from "../../drama/drama-inventory";
 import { dramaShop } from "../../drama/drama-shop";
 import { ask, show } from "../../drama/show";
 import { scene } from "../../globals";
@@ -58,6 +59,8 @@ export function objCharacterGamblingExpert() {
     npcObj.sparklesPerFrame = 0.1;
     npcObj.sparklesTint = 0xf0f000;
 
+    let gaveTaxiWhistle = false;
+
     return npcObj
         .coro(function* (self) {
             if (!isGamblingExpertInCurrentScene()) {
@@ -66,7 +69,13 @@ export function objCharacterGamblingExpert() {
         })
         .mixin(mxnCutscene, function* () {
             yield* show("I am a proud expert of gambling.");
-            const result = yield* ask("What do you want?", "Gambling tip", "Trade", "Nothin'");
+            const result = yield* ask(
+                "What do you want?",
+                "Gambling tip",
+                "Trade",
+                gaveTaxiWhistle ? null : "Taxi?",
+                "Nothin'",
+            );
             if (result === 0) {
                 yield* DramaFacts.memorize("GamblingTip");
             }
@@ -81,6 +90,15 @@ export function objCharacterGamblingExpert() {
                 );
             }
             else if (result === 2) {
+                yield* show(
+                    "Yeah, there's a taxi to the Swamp Casino.",
+                    "Use this to summon it.",
+                );
+
+                yield* DramaInventory.receiveItems([{ kind: "potion", id: "TaxiWhistleCasino" }]);
+                gaveTaxiWhistle = true;
+            }
+            else if (result === 3) {
                 yield* show("K bye");
             }
         });
