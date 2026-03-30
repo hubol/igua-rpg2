@@ -2026,6 +2026,7 @@ export const Lvl = {
       GamblingExpertNpc: e(r["GamblingExpertNpc"], { x: 1192, y: 272, flippedX: true, values: { name: "", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 160, y: 288, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromWizard: e(r["Checkpoint"], { x: 688, y: 48, flippedX: false, values: { name: "fromWizard", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromTaxi: e(r["Checkpoint"], { x: 688, y: 48, flippedX: false, values: { name: "fromTaxi", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       SlotMachineSecondaryDisplay0: e(r["Region"], { x: 492, y: 128, width: 57, height: 15, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -56, y: 168, height: 128, flippedX: true, values: { sceneName: "scnSinSwamp", checkpointName: "fromCasino", name: "", depth: 0 } }, "RegionEntities"),
       SlotMachineSecondaryDisplay1: e(r["Region"], { x: 893, y: 235, width: 97, height: 19, values: { name: "SlotMachineSecondaryDisplay1", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
