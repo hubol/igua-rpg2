@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 1184,
+  "width": 1344,
   "height": 336,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 148,
+      "gridCellsX": 168,
       "gridCellsY": 42,
       "entities": [
         {
@@ -169,7 +169,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 148,
+      "gridCellsX": 168,
       "gridCellsY": 42,
       "entities": [
         {
@@ -219,7 +219,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 148,
+      "gridCellsX": 168,
       "gridCellsY": 42,
       "decals": [],
       "folder": "../textures"
@@ -231,7 +231,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 148,
+      "gridCellsX": 168,
       "gridCellsY": 42,
       "entities": []
     },
@@ -242,7 +242,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 148,
+      "gridCellsX": 168,
       "gridCellsY": 42,
       "entities": [
         {
@@ -276,7 +276,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 148,
+      "gridCellsX": 168,
       "gridCellsY": 42,
       "entities": [
         {
@@ -289,6 +289,17 @@
           "originY": 52,
           "flippedX": true,
           "values": {"personaName": "PityBoss", "name": "PityBossNpc", "depth": 0}
+        },
+        {
+          "name": "GamblingExpertNpc",
+          "id": 1,
+          "_eid": "87718071",
+          "x": 1192,
+          "y": 272,
+          "originX": 25,
+          "originY": 53,
+          "flippedX": true,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -299,7 +310,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 148,
+      "gridCellsX": 168,
       "gridCellsY": 42,
       "decals": [],
       "folder": "../textures"
@@ -311,7 +322,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 148,
+      "gridCellsX": 168,
       "gridCellsY": 42,
       "entities": []
     },
@@ -322,7 +333,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 148,
+      "gridCellsX": 168,
       "gridCellsY": 42,
       "decals": [
         {
@@ -857,6 +868,19 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 1261,
+          "y": 287,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#ffd600",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -868,7 +892,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 148,
+      "gridCellsX": 168,
       "gridCellsY": 42,
       "entities": [
         {
@@ -1013,6 +1037,45 @@
           "originY": 0,
           "tint": "#ffd600",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 12,
+          "_eid": "93117141",
+          "x": 1192,
+          "y": 288,
+          "width": 152,
+          "height": 56,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ffd600",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 13,
+          "_eid": "93117141",
+          "x": 1296,
+          "y": 0,
+          "width": 48,
+          "height": 288,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ffd600",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 14,
+          "_eid": "93117141",
+          "x": 1152,
+          "y": 272,
+          "width": 88,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ffd600",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -1023,7 +1086,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 148,
+      "gridCellsX": 168,
       "gridCellsY": 42,
       "entities": []
     },
@@ -1034,7 +1097,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 148,
+      "gridCellsX": 168,
       "gridCellsY": 42,
       "decals": [
         {
@@ -1047,7 +1110,8 @@
           "texture": "casino/slots/machine stupid flower.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 544,
@@ -1176,7 +1240,8 @@
           "texture": "casino/slots/ten valuable bet.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1083,
@@ -1188,7 +1253,8 @@
           "texture": "foliage/medium0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 880,
@@ -1200,7 +1266,8 @@
           "texture": "foliage/medium0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 899,
@@ -1212,7 +1279,8 @@
           "texture": "foliage/medium0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1084,
@@ -1302,7 +1370,8 @@
           "texture": "foliage/flower 14.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 884,
@@ -1314,7 +1383,8 @@
           "texture": "foliage/flower 14.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 884,
@@ -1326,7 +1396,8 @@
           "texture": "foliage/flower 22.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1087,
@@ -1338,7 +1409,8 @@
           "texture": "foliage/flower 22.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1032,
@@ -1350,7 +1422,8 @@
           "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1031,
@@ -1375,7 +1448,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 913,
@@ -1387,7 +1461,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 907,
@@ -1399,7 +1474,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 526,
@@ -1411,7 +1487,8 @@
           "texture": "casino/slots/title simply sevens.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -1423,7 +1500,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 148,
+      "gridCellsX": 168,
       "gridCellsY": 42,
       "decals": [
         {

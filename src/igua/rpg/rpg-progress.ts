@@ -1,5 +1,6 @@
 import { Mzk } from "../../assets/music";
 import { Integer } from "../../lib/math/number-alias-types";
+import { Rng } from "../../lib/math/rng";
 import { Null } from "../../lib/types/null";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataPocketItem } from "../data/data-pocket-item";
@@ -118,6 +119,9 @@ export function getInitialRpgProgress() {
                 guardian: {
                     defeated: false,
                 },
+            },
+            gamblingExpert: {
+                locationSeed: Rng.int(999999999),
             },
             greatTower: {
                 balcony: {

@@ -37,6 +37,7 @@ export namespace OgmoEntities {
   export type MagicDoor = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }> & { uid: number };
   export type EnemySnail = OgmoFactory.EntityBase<{ variant: "level0"; name: string; depth: number }>;
   export type EnemyBrick = OgmoFactory.EntityBase<{ variant: "level0"; name: string; depth: number }> & { uid: number };
+  export type GamblingExpertNpc = OgmoFactory.EntityBase<{ name: string; depth: number }>;
 }
 
 export interface OgmoEntityResolverBase {
@@ -74,4 +75,5 @@ export interface OgmoEntityResolverBase {
   MagicDoor: (entity: OgmoEntities.MagicDoor) => unknown;
   EnemySnail: (entity: OgmoEntities.EnemySnail) => unknown;
   EnemyBrick: (entity: OgmoEntities.EnemyBrick) => unknown;
+  GamblingExpertNpc: (entity: OgmoEntities.GamblingExpertNpc) => unknown;
 }

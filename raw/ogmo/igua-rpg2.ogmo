@@ -1219,7 +1219,7 @@
         }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/enemy suggestive.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEUAAABSCAYAAAACXhkKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASMSURBVHhe7Zs9aBRBFIDvVDAGlQOL2MTGgAFFNCjENsF0Qiy0SxcQkRTBxlI7LeSKEESwSycIFlaRi41gQIliFeFsFCEphKDgDxjOvMnM5e3czO7M7JuduWU/GHZu3Z+b7957OzcX6zXPrJ1rdHg3k7EPW97fjwne3oSJjMGJbd6r1X6t7GfbGMTs41tSbKJDIAS5nEsNuRSKQYUWQyol72AGn22zFhov6UNByGghkxJDLaAi2kgJSdRSQkVflFLw/CUEQaWICVtsRF9TQqRQVWgVBJcSYwrFFSmLvEkUnUJV+iiopCggW7vwHeJFrrOQRUosq2YU9E36FFlsq5qigFRKWVKoihQFpZEy83i8p+ao9plALsVnCkGxFY3vYojBU4khH0CRTwlM8+Yo7/WydGPVapxkUkLJEKRJwZgIcpYSo4SN9X+8t8vx0QO8tweplNASMDohC/VP/NUuc51TPWJIpDjLeLjFO5bcbvBONkJOV8gt9nKPxaSY+UfrRg8C7dMHZFgLARGiuYKvYXEdtlilWIuRMRmXUopzdPjAVpBYqOKCVHUFSBtjIpRyybD4VHPB0wvXFVFgH7xqsy1Grj+QQhhVOnUjxasQGIhFreiiOm/nXvJARTQsfz7ImkAcJ4sQXP/+kfeSMEvehWBMIyrjvGZ7vDtYWRJEDk4bOE4IeHrsLNtiIe2vJxLR4ve7jyo6VPtkDM6bH1nVCpaFYEAGFiIkYeo+o+T8hP7S71fUT0bbcyBiAHnwqtRRpYuQgmuLNylpgwNcpAC683QRCDXmSeMt6//+84NtBYcGjvLeHpBK7lJyRAlALgVAYrAMwYtrp3lvl8mlN0oxfmuKRL1+j7UsTI+zgQmBGS9qrZlLieiBKIFWqJSimd26yLYwcNMZL1AuKZqUTqSINONV4U1Kau47kueaV769ZtEiN8zI8BdW0EqdPhiIFnnGC6LkQgtiyiUFPX2mTv7tefosDLRYAxmyEDFfCVZo09KAOu2g2IqCCxJwkxHTfa9SKAfoci3VFF6FfBy7k68JHCBPxkwHZ32eZkaL0X0plKf6+SLF4I3gwdh82q7n2aKKpu7dvC4fSIxN3uU9PWut7GO6GHw4WSS+EPJt7f6RIXcpO0w93+Q9M9LEmApZnh7ivXzc+bmZCMXEi7xiBDaCsJyiZQhSpQBUYjC2UYShFiAjCwF6dgA+xMSISgig3AmUXYxOCKD9B6CMYtJkCDIPAPpZjokEGesTgBgluQxeB9mFdKJas8O8Rwv8jGH7xzimeLkocHn+gtdowr/tUMuJXgoevAkUgqKTYitBB/x0+rL5zml8QaVQCcjCVlBhK28gQG5FYXsvb1JCCaAgyBpt7FRSFJROChRV3MQ+G0ojBUvAwD7bR7O3R7Lr/6AwJevTd52jAH0nRZYBT7a+mOZfnZvuHD6zwV/RIYTkiQITopbiUg8o8HpD1xTytSRgShRSQkWEDq+PZNNPPCYhQDWjVRBcStZ8IwTepUAKxTjwNAqJFFXNAFGxyiq0wMFqHMxAsYzYimzhwKSOdyOmVvsPu0Aj3sKcwTUAAAAASUVORK5CYII="
     },
@@ -1749,9 +1749,54 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/enemy brick.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAABABAMAAAC92amBAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAVUExURb5RHuNiLNa0jgAAAP///7IABf9vUI/M+pQAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAYAAAAAEAAABgAAAAAQAAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAADp1fY4ytpsegAAAVJJREFUSMftlFtuwyAQRQfjBRi1C0Dj5p+aDbiJF1BVYgnt/pfQYYaHSXEfqpqvzgeEe5zgSy4DVMqYAYFrsDQYM1mWG6hMF0IDJ6gw1h5SWajlqcqemhauZUIJal64ljEdrE4LpohIH3lwabHgHAdEWs+RRXWpk2j0XS0qJsijpU0iVHdeXjzKFrxjO9qzrWROGb/E2T+KV9XCPO9hOu1rmGRoH4UeLPN3Ibu6huwb89yv/HfuBSVJkPosQ+NGdfHFjfZR2ARuArcEx4vAtYGrwC1DyL8qkPfMcPsVxIcdjMdSYMxQgWc8hRfEPaxve8bw9lrhyhm6zz4HglB8ppiMDJ8mhsoI/JChEMJxhk7h+cYZ0nIP+hma6erRRTrIkMdlmd1RhjxoB7fqQwlWjw0cfgJx5zAbltOqh/DVLevIluWmQ4jYbTVTp9X896G/yRDAO6zWhmBRbdBeAAAAAElFTkSuQmCC"
+    },
+    {
+      "exportID": "87718071",
+      "name": "GamblingExpertNpc",
+      "limit": 1,
+      "size": {"x": 50, "y": 56},
+      "origin": {"x": 19, "y": 53},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": true,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["Character"],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/character gambling expert.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAA4CAYAAAC/pKvXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALfSURBVGhD3ZlNbhMxGIY9kSqgEkTsEe2yZVtOgMQBIEcAVogN4hiIHWygN2jgGGxgS7fkBAgqgRBSh7yWv6nzjf/rn2keqYozP6kfv5/tSduJBvxZLXrVHHFjb5nUp5l6rYZPwnXeRXURF6kSYFIiRIrQJEVS2BqRya1aOjErWBMRIkQoVKapCOESuhIiW5FITgkw2VUrRgJMsrRiJUBTEZBLZrKlFTKHdJonAnydDkmnaiK8w78+7vUhIx9yTdVEqEP/vn6R73eO7stXF3/nS3Ht50K2cd+txytjn5uIhIKOnz9YDSI6vNyqlRbKiJII4cX+NykBkArnaXe4MShVEoGEag7YyopSsEHpQBR86E+lQzMRGy8Xu6olxOsfp6p1IQBIgoBMcZEYCXDz0XfVEuLZ7J6U0SWu3z2Rx9+fX8h0QLVH8BqkCGOJEeESACLzeS/OPu3L83Qc6DKjyQ4BLgFsx13EpmHi1e1D1XKzIRLS0ViZWgwiMR0Mvda2eZVAiqSMcsg9OUorFO+GiEnOf9Sp7GBCm6DjrvMz18jaOh0qk1Ja1Flakd4sf8tXgt7TeVyP39OliMRQo7wg4i2ty5I64fUdnqOfo893iqQsAjkxydgEnaUFqLxqrkAEdZrmBX+vp+0V4ZOtNjwBkwRwiuSWoEf3mO8lHNuckwdNMiWS4N9BYoR8i4ZRpGQ5mb5QpfxBjiNXrZK7NYenkEMCDB9CqdSe3L6SCWXYR2qmUoKNDfEqyxR/RKmFMYFau3iu+QG2OxFQOpWcaQDrh5XcJHNLAGNpmR5ZbI/PLnAPv28toVp5GY2MSUInNBkusF7aVWsgayrRkz0kGdM16wFSrYGsczA6EcI2wr77SyWTvPwaRjhoEEz35aDJPnL8fCOELCWWU8TZIVok8Pr53YFsM6FLMRLxPTiuxJlqCfGwu6Na7TEmAhmTEEngfxaaEK6jHyOWJbt78rZ33heOEP8B6VJp8BD1wJgAAAAASUVORK5CYII="
     }
   ],
   "tilesets": []

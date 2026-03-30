@@ -488,7 +488,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 171,
       "gridCellsY": 171,
-      "entities": []
+      "entities": [
+        {
+          "name": "GamblingExpertNpc",
+          "id": 0,
+          "_eid": "87718071",
+          "x": 720,
+          "y": 960,
+          "originX": 19,
+          "originY": 53,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "AboveEntitiesDecals",
@@ -4482,7 +4494,8 @@
           "texture": "world map/landmarks/grotto tree.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 786,
@@ -4494,7 +4507,8 @@
           "texture": "foliage/leaf 18.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 726,
@@ -4506,7 +4520,8 @@
           "texture": "foliage/leaf 18.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 700,
@@ -4518,7 +4533,8 @@
           "texture": "foliage/leaf 18.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 763,
@@ -4530,7 +4546,8 @@
           "texture": "foliage/leaf 18.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

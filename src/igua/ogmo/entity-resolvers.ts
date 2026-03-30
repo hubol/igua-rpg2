@@ -3,6 +3,7 @@ import { OgmoEntities, OgmoEntityResolverBase } from "../../assets/generated/lev
 import { Instances } from "../../lib/game-engine/instances";
 import { Vector, vnew } from "../../lib/math/vector-type";
 import { mxnDoorMagic } from "../mixins/mxn-door-magic";
+import { objCharacterGamblingExpert } from "../objects/characters/obj-character-gambling-expert";
 import { CtxPocketItems, objCollectiblePocketItemSpawner } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objDevPlayer } from "../objects/dev/obj-dev-player";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
@@ -17,6 +18,7 @@ import { objCheckpoint } from "../objects/obj-checkpoint";
 import { objDoor } from "../objects/obj-door";
 import { objGate } from "../objects/obj-gate";
 import { objIdol } from "../objects/obj-idol";
+import { ObjIguanaLocomotive } from "../objects/obj-iguana-locomotive";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { objIntelligenceBackground } from "../objects/obj-intelligence-background";
 import { objIntelligenceSign } from "../objects/obj-intelligence-sign";
@@ -43,12 +45,12 @@ export const OgmoEntityResolvers = {
     "IntelligenceBackground": ({ values }) => objIntelligenceBackground(values),
     "IguanaNpc": (entity) => {
         const obj = objIguanaNpc(entity.values.personaName as any);
-        obj.y = 3;
-        obj.facing = entity.flippedX ? -1 : 1;
-        if (entity.flippedX) {
-            obj.x = 1;
-        }
-        delete entity.flippedX;
+        applyEntityToIguanaObj(obj, entity);
+        return obj;
+    },
+    "GamblingExpertNpc": (entity) => {
+        const obj = objCharacterGamblingExpert();
+        applyEntityToIguanaObj(obj, entity);
         return obj;
     },
     "ValuableGreen": ({ uid }) => objValuable("green", uid),
@@ -96,6 +98,15 @@ export const OgmoEntityResolvers = {
     IntelligenceSign: (entity) => objIntelligenceSign(entity.values),
     MagicDoor: (entity) => objDoor(entity.values).mixin(mxnDoorMagic, entity.uid).at(0, 2),
 } satisfies OgmoEntityResolverBase;
+
+function applyEntityToIguanaObj(obj: ObjIguanaLocomotive, entity: OgmoEntities.GamblingExpertNpc) {
+    obj.y = 3;
+    obj.facing = entity.flippedX ? -1 : 1;
+    if (entity.flippedX) {
+        obj.x = 1;
+    }
+    delete entity.flippedX;
+}
 
 function createOrConfigurePlayerObj(
     entity: OgmoEntities.Checkpoint | OgmoEntities.Player,

@@ -61,6 +61,7 @@ export namespace DataNpcPersona {
             FlopStudent1: { job: "Student", name: "Pritz", looks: NpcLooks.Unwell },
             FlopStudent2: { job: "Student", name: "Rise", looks: NpcLooks.HighHorse },
             FlopStudent3: { job: "Student", name: "Reech", looks: NpcLooks.NaiveWizard },
+            GamblingTeacher: { job: "Gambling Expert", name: "Trinz", looks: NpcLooks.Goldilocks },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
         } satisfies Record<string, Model>,
     );

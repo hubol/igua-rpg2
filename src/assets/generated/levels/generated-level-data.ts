@@ -715,6 +715,7 @@ export const Lvl = {
       CloudHouseNeatFreakNpc: e(r["IguanaNpc"], { x: 352, y: 520, flippedX: true, values: { personaName: "CloudHouseNeatFreak", name: "CloudHouseNeatFreakNpc", depth: 0 } }, "CharacterEntities"),
       CloudHouseMusicianNpc: e(r["IguanaNpc"], { x: 1168, y: 520, flippedX: false, values: { personaName: "CloudHouseMusician", name: "CloudHouseMusicianNpc", depth: 0 } }, "CharacterEntities"),
       CloudHouseNerdNpc: e(r["IguanaNpc"], { x: 304, y: 808, flippedX: true, values: { personaName: "CloudHouseNerd", name: "CloudHouseNerdNpc", depth: 0 } }, "CharacterEntities"),
+      GamblingExpertNpc: e(r["GamblingExpertNpc"], { x: 816, y: 792, flippedX: true, values: { name: "", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 200, y: 216, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromEfficient1: e(r["Checkpoint"], { x: 688, y: 208, flippedX: false, values: { name: "fromEfficient1", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromEfficient2: e(r["Checkpoint"], { x: 1160, y: 136, flippedX: false, values: { name: "fromEfficient2", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
@@ -1911,12 +1912,13 @@ export const Lvl = {
       CombatShopNpc: e(r["IguanaNpc"], { x: 112, y: 144, flippedX: false, values: { personaName: "CombatTeacher", name: "CombatShopNpc", depth: 0 } }, "CharacterEntities"),
       QuestShopNpc: e(r["IguanaNpc"], { x: 712, y: 168, flippedX: true, values: { personaName: "QuestTeacher", name: "QuestShopNpc", depth: 0 } }, "CharacterEntities"),
       PocketShopNpc: e(r["IguanaNpc"], { x: 608, y: 296, flippedX: false, values: { personaName: "PocketTeacher", name: "PocketShopNpc", depth: 0 } }, "CharacterEntities"),
+      GamblingExpertNpc: e(r["GamblingExpertNpc"], { x: 856, y: 312, flippedX: true, values: { name: "", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 192, y: 344, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -64, y: 248, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromGrottoIndianaShop", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
   IndianaCasino: () => {
-    applyLevel({ width: 1184, height: 336, backgroundTint: 0xd8a5f7, terrainTint: 0xffd600 });
+    applyLevel({ width: 1344, height: 336, backgroundTint: 0xd8a5f7, terrainTint: 0xffd600 });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: -56, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0xa786b9 }, "ParallaxDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: -112, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0x77677d }, "ParallaxDecals"),
@@ -1975,6 +1977,9 @@ export const Lvl = {
       Block_8: e(r["Block"], { x: -72, y: -8, width: 128, height: 192, values: { name: "", depth: 0, visible: true }, tint: 0x251105 }, "TerrainEntities"),
       Slope: e(r["Slope"], { x: 280, y: 0, width: 256, height: 128, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
       Block_9: e(r["Block"], { x: 712, y: 272, width: 80, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_10: e(r["Block"], { x: 1192, y: 288, width: 152, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_11: e(r["Block"], { x: 1296, y: 0, width: 48, height: 288, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_12: e(r["Block"], { x: 1152, y: 272, width: 88, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
       TerrainGrassSparse3px1: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 144, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
       TerrainGrassSparse3px1_1: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 72, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
       TerrainGrassSparse3px1_2: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 0, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
@@ -2016,7 +2021,9 @@ export const Lvl = {
       TerrainGrassSparse3px1_32: d(Tx.Terrain.Grass.Sparse3px1, { x: 1005, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
       TerrainGrassSparse3px1_33: d(Tx.Terrain.Grass.Sparse3px1, { x: 1077, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
       TerrainGrassSparse3px1_34: d(Tx.Terrain.Grass.Sparse3px1, { x: 1165, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_35: d(Tx.Terrain.Grass.Sparse3px1, { x: 1261, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
       PityBossNpc: e(r["IguanaNpc"], { x: 752, y: 272, flippedX: true, values: { personaName: "PityBoss", name: "PityBossNpc", depth: 0 } }, "CharacterEntities"),
+      GamblingExpertNpc: e(r["GamblingExpertNpc"], { x: 1192, y: 272, flippedX: true, values: { name: "", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 160, y: 288, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromWizard: e(r["Checkpoint"], { x: 688, y: 48, flippedX: false, values: { name: "fromWizard", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       SlotMachineSecondaryDisplay0: e(r["Region"], { x: 492, y: 128, width: 57, height: 15, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
@@ -3208,6 +3215,7 @@ export const Lvl = {
       TerrainGrassSparse3px1_11: d(Tx.Terrain.Grass.Sparse3px1, { x: 86, y: 231, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb0ba44 }, "AboveEntitiesDecals"),
       TerrainGrassSparse3px1_12: d(Tx.Terrain.Grass.Sparse3px1, { x: 176, y: 231, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb0ba44 }, "AboveEntitiesDecals"),
       Shopkeeper: e(r["IguanaNpc"], { x: 368, y: 152, flippedX: true, values: { personaName: "BalltownOutskirtsSecretShopkeeper", name: "Shopkeeper", depth: 0 } }, "CharacterEntities"),
+      GamblingExpertNpc: e(r["GamblingExpertNpc"], { x: 176, y: 232, flippedX: true, values: { name: "", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 112, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 431, y: 192, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_1: e(r["EnvironmentSparkleMarker"], { x: 417, y: 216, values: { name: "", depth: 0 } }, "MarkerEntities"),
@@ -7896,6 +7904,7 @@ export const Lvl = {
       FoliageFlower22: d(Tx.Foliage.Flower22, { x: 510, y: 962, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
       FoliageFlower18_2: d(Tx.Foliage.Flower18, { x: 505, y: 944, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb200 }, "AboveEntitiesDecals"),
       FoliageFlower18_3: d(Tx.Foliage.Flower18, { x: 435, y: 951, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb200 }, "AboveEntitiesDecals"),
+      GamblingExpertNpc: e(r["GamblingExpertNpc"], { x: 720, y: 960, flippedX: false, values: { name: "", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 768, y: 856, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromNewBalltownUnderneathRight: e(r["Checkpoint"], { x: 824, y: 752, flippedX: false, values: { name: "fromNewBalltownUnderneathRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromPlainsSuggestiveLeft: e(r["Checkpoint"], { x: 901, y: 869, flippedX: true, values: { name: "fromPlainsSuggestiveLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),

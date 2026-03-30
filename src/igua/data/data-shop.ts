@@ -91,6 +91,11 @@ export namespace DataShop {
                         price: { currency: "jump", initial: 100, deltaSold: 300 },
                         product: { kind: "equipment", id: "IqIndicator", level: 1 },
                     },
+                    {
+                        initialQuantity: 3,
+                        price: { currency: "valuables", deltaSold: 70, initial: 30 },
+                        product: { kind: "potion", id: "TaxiWhistleCasino" },
+                    },
                 ],
             },
             SuggestiveSecret: {
@@ -295,6 +300,25 @@ export namespace DataShop {
                         product: { kind: "key_item", id: "FlopBlindBoxTypeB" },
                         initialQuantity: 3,
                         price: { currency: "computer", deltaSold: 0, initial: 30 },
+                    },
+                ],
+            },
+            GamblingTeacher: {
+                stocks: [
+                    {
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "gambling", deltaSold: 0, initial: 999 },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeHealthUp" },
+                        initialQuantity: 5,
+                        price: { currency: "gambling", deltaSold: 200, initial: 100 },
+                    },
+                    {
+                        product: { kind: "potion", id: "ForgetLooseValuableCollection" },
+                        initialQuantity: 99,
+                        price: { currency: "gambling", deltaSold: 90, initial: 10 },
                     },
                 ],
             },
