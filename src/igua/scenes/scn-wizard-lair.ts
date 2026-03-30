@@ -18,8 +18,8 @@ export function scnWizardLair() {
     const lvl = Lvl.WizardLair();
 
     const landingOptions = [
-        { gateObj: lvl.BalltownGate, name: "New Balltown" },
-        { gateObj: lvl.CasinoGate, name: "Swamp Casino" },
+        { gateObj: lvl.BalltownGate, name: "New Balltown", mzk: Mzk.TrashDay },
+        { gateObj: lvl.CasinoGate, name: "Swamp Casino", mzk: Mzk.ProfitMotive },
     ];
 
     const wizardObj = container()
@@ -42,6 +42,8 @@ export function scnWizardLair() {
                     "Hypothetically, where would you prefer to land?",
                     ...landingOptions.map(option => option.name),
                 );
+
+                Jukebox.warm(landingOptions[result].mzk);
 
                 for (let i = 0; i < landingOptions.length; i++) {
                     if (result !== i) {
