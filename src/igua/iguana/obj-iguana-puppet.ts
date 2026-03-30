@@ -11,6 +11,7 @@ import { mxnBallonable } from "../mixins/mxn-ballonable";
 import { mxnHasHead } from "../mixins/mxn-has-head";
 import { mxnSpeakingMouth } from "../mixins/mxn-speaking-mouth";
 import { objEye, objEyes } from "../objects/characters/obj-eye";
+import { objFxCigarette } from "../objects/effects/obj-fx-cigarette";
 import { Material, Materials } from "../systems/materials";
 import { IguanaLooks } from "./looks";
 import { IguanaShape, IguanaShapes } from "./shapes";
@@ -541,10 +542,22 @@ function objIguanaMouth(head: Head) {
             .flipV(flipV)
     );
 
+    const fxCigaretteObj = objFxCigarette()
+        .at(IguanaShapes.Mouth[head.mouth.shape].Tx.width / 2 + 15, -5)
+        .add(head.mouth.placement)
+        .vround()
+        .invisible();
+
     let agape: Unit = 0;
 
-    const c = container(...mouths)
+    const c = container(...mouths, fxCigaretteObj)
         .merge({
+            get isSmoking() {
+                return fxCigaretteObj.visible;
+            },
+            set isSmoking(value) {
+                fxCigaretteObj.visible = value;
+            },
             get agape() {
                 return agape;
             },
@@ -620,6 +633,7 @@ export function objIguanaHead(head: Head) {
     inner.addChildAt(crest, head.crest.behind ? 0 : 3);
 
     const c = container(inner)
+        .collisionShape(CollisionShape.DisplayObjects, [crest, noggin, eyes])
         .merge({ crest, noggin, eyes, mouth })
         .merge({
             get isFacingRight() {

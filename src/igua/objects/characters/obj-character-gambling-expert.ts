@@ -56,6 +56,7 @@ const isGamblingExpertInCurrentScene = (function () {
 
 export function objCharacterGamblingExpert() {
     const npcObj = objIguanaNpc("GamblingTeacher").mixin(mxnSparkling);
+    npcObj.head.mouth.isSmoking = true;
     npcObj.sparklesPerFrame = 0.1;
     npcObj.sparklesTint = 0xf0f000;
 
