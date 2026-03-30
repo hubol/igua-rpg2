@@ -1,18 +1,25 @@
 import { Texture } from "pixi.js";
+import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Sound } from "../../lib/game-engine/audio/sound";
 import { Instances } from "../../lib/game-engine/instances";
+import { Coro } from "../../lib/game-engine/routines/coro";
+import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
+import { ForceTintFilter } from "../../lib/pixi/filters/force-tint-filter";
+import { Jukebox } from "../core/igua-audio";
 import { show } from "../drama/show";
-import { Cutscene } from "../globals";
+import { Cutscene, scene } from "../globals";
 import { MxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
+import { scnCasino } from "../scenes/scn-casino";
+import { SceneChanger } from "../systems/scene-changer";
 import { DataLib } from "./data-lib";
 
 export namespace DataPotion {
@@ -117,6 +124,13 @@ export namespace DataPotion {
                 texture: null,
                 sound: null,
             },
+            TaxiWhistleCasino: {
+                name: "Taxi Whistle",
+                description: "Get a ride to the Casino. Exceedingly rare.",
+                stinkLineTint: 0x808080,
+                texture: null,
+                sound: null,
+            },
             __Fallback__: {
                 name: "???",
                 description: "Consume to experience a bug",
@@ -193,6 +207,25 @@ export namespace DataPotion {
                         { speaker: collidedIguanaNpcObj },
                     );
                 }
+                return;
+            case "TaxiWhistleCasino":
+                if (target !== playerObj) {
+                    return;
+                }
+                Cutscene.play(function* () {
+                    scene.camera.mode = "controlled";
+                    playerObj.physicsEnabled = false;
+                    playerObj.speed.y = -4;
+                    playerObj.gravity = 0;
+                    const filter = new ForceTintFilter(0xf0c400, 0);
+                    playerObj.filtered(filter);
+                    Jukebox.warm(Mzk.ProfitMotive);
+                    yield* Coro.all([
+                        interp(playerObj, "sparklesPerFrame").to(1).over(1000),
+                        interp(filter, "factor").steps(6).to(1).over(1000),
+                    ]);
+                    SceneChanger.create({ sceneName: scnCasino.name, checkpointName: "fromTaxi" })!.changeScene();
+                });
                 return;
             case "__Fallback__":
                 return;
