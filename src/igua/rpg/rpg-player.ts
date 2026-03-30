@@ -57,8 +57,11 @@ export class RpgPlayer {
             },
             emotional: 0,
             get physical() {
-                return 3 + player.attributes.strength * 2
-                    + player.buffs.combat.melee.faceAttack.physical;
+                return Math.max(
+                    1,
+                    3 + player.attributes.strength * 2
+                        + player.buffs.combat.melee.faceAttack.physical,
+                );
             },
             versus: RpgFaction.Enemy,
             quirks: {
@@ -78,8 +81,11 @@ export class RpgPlayer {
             },
             emotional: 0,
             get physical() {
-                return 5 + player.attributes.strength * 5
-                    + player.buffs.combat.melee.clawAttack.physical;
+                return Math.max(
+                    1,
+                    5 + player.attributes.strength * 5
+                        + player.buffs.combat.melee.clawAttack.physical,
+                );
             },
             versus: RpgFaction.Enemy,
             quirks: {
@@ -102,7 +108,7 @@ export class RpgPlayer {
             get physical() {
                 const base = player.meleeClawAttack.physical;
                 const bonus = Math.max(3, Math.ceil(base * 0.3));
-                return base + bonus;
+                return Math.max(2, base + bonus);
             },
             versus: RpgFaction.Enemy,
             quirks: {

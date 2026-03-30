@@ -198,11 +198,12 @@ export namespace DataEquipment {
                 },
             },
             DoubleJump: {
-                name: "Holy Shoe",
-                texture: null,
+                name: "Angel's Charm",
+                texture: Tx.Collectibles.Equipment.Angel,
                 description: "Enable midair jumps, but at a cost",
                 buffs: (model, bonus) => {
                     model.esoteric.lgbtFactor += 50 + bonus * 25;
+                    model.attributes.strength -= 5;
 
                     if (bonus === 0) {
                         model.motion.jump.atMaxHealthMidairCount += 1;
@@ -215,7 +216,7 @@ export namespace DataEquipment {
             },
             Cigarette: {
                 name: "Smoky Charm",
-                texture: null,
+                texture: Tx.Collectibles.Equipment.Cigarette,
                 description: "Increased elegance and pity at the casino",
                 buffs: (model, bonus) => {
                     model.cosmetic.cigaretteSmoking += 100;
@@ -224,7 +225,7 @@ export namespace DataEquipment {
             },
             HackerRemnant: {
                 name: "Hacker's Remnant",
-                texture: null,
+                texture: Tx.Collectibles.Equipment.Stupid,
                 description: "Trace of online cheating, bizarre effects",
                 buffs: (() => {
                     const rng = new PseudoRng();
