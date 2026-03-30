@@ -227,6 +227,7 @@ const getBuffInformations = (function () {
         buff("experience.bonusFactorWhileWet.jump", "Jump XP Bonus (While Wet)", "percent", "beneft_when_positive"),
         buff("motion.jump.bonusAtSpecialSigns", "Special Jump", "integer", "beneft_when_positive"),
         buff("motion.jump.midairCount", "Midair Jumps", "integer", "beneft_when_positive"),
+        buff("motion.jump.atMaxHealthMidairCount", "Midair Jumps (At Max HP)", "integer", "beneft_when_positive"),
         buff("motion.walk.topSpeedIncreaseFactor", "Walk Top Speed", "percent", "beneft_when_positive"),
         buff("combat.defense.physical", "Phys DEF", "percent", "beneft_when_positive"),
         buff("combat.defense.faction.miner", "Defense Against Miners", "percent", "beneft_when_positive"),

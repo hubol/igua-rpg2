@@ -201,9 +201,15 @@ export namespace DataEquipment {
                 texture: null,
                 description: "Enable midair jumps, but at a cost",
                 buffs: (model, bonus) => {
-                    model.motion.jump.midairCount += 1 + bonus;
                     model.esoteric.lgbtFactor += 50 + bonus * 25;
-                    model.attributes.health -= 5 + bonus * 5;
+
+                    if (bonus === 0) {
+                        model.motion.jump.atMaxHealthMidairCount += 1;
+                        return;
+                    }
+
+                    model.motion.jump.midairCount += bonus;
+                    model.attributes.health -= bonus * 5;
                 },
             },
             __Fallback__: {

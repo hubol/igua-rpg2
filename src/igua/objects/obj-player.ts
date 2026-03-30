@@ -73,6 +73,13 @@ function getBallonPhysicsLevel(ballonsCount: number) {
     return level;
 }
 
+function getMaxMidarJumpsCount() {
+    return Rpg.character.buffs.motion.jump.midairCount
+        + (Rpg.character.status.health >= Rpg.character.status.healthMax
+            ? Rpg.character.buffs.motion.jump.atMaxHealthMidairCount
+            : 0);
+}
+
 const filterVulnerableObjs = (obj: MxnRpgStatus) => obj.status.faction !== RpgFaction.Player;
 const filterSpecialSignObjs = (obj: ObjSign) => obj.isSpecial;
 
@@ -124,7 +131,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     let stepsSinceOffGround = 0;
     let stepsSinceJumpJustWentDown = 100;
     let landedThenJumpedHorizontalSpeedBoostUnit = 0;
-    let midairJumpsRemaining = Rpg.character.buffs.motion.jump.midairCount;
+    let midairJumpsRemaining = 0;
 
     function getWalkingTopSpeed() {
         let speed = 2.5 * Math.max(0, 1 + Rpg.character.buffs.motion.walk.topSpeedIncreaseFactor / 100);
@@ -150,10 +157,6 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 puppet.speed.x = 0;
                 puppet.pedometer = 0;
                 puppet.gait = 0;
-            }
-
-            if (event.hitGround) {
-                midairJumpsRemaining = Rpg.character.buffs.motion.jump.midairCount;
             }
         })
         .handles("damaged", (_, result) => {
@@ -244,6 +247,10 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             }
 
             if (hasControl && (puppet.isOnGround || midairJumpsRemaining > 0) && stepsSinceJumpJustWentDown < 6) {
+                if (puppet.isOnGround) {
+                    midairJumpsRemaining = getMaxMidarJumpsCount();
+                }
+
                 const isMidairJump = !puppet.isOnGround;
 
                 if (isMidairJump) {

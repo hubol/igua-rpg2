@@ -80,6 +80,7 @@ export namespace RpgPlayerBuffs {
                 jump: {
                     bonusAtSpecialSigns: 0,
                     midairCount: 0,
+                    atMaxHealthMidairCount: 0,
                 },
                 walk: {
                     topSpeedIncreaseFactor: <PercentInt> 0,
