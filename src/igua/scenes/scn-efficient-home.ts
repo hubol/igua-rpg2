@@ -3,6 +3,7 @@ import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
+import { isOnScreen } from "../../lib/game-engine/logic/is-on-screen";
 import { factor, interpr, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -24,6 +25,7 @@ import { Cutscene, DevKey, layers, scene } from "../globals";
 import { mxnFxAlphaVisibility } from "../mixins/effects/mxn-fx-alpha-visibility";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSign } from "../mixins/mxn-sign";
+import { mxnSoundLoop } from "../mixins/mxn-sound-loop";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objCharacterWindTurbine } from "../objects/characters/obj-character-wind-turbine";
 import { mxnEsotericArtInteractive, objEsotericArt } from "../objects/esoteric/obj-esoteric-art";
@@ -430,17 +432,27 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
     const rng = new PseudoRng(36969696973);
 
     for (let i = 0; i < turbineObjs.length; i++) {
-        const obj = turbineObjs[i];
+        const obj = turbineObjs[i].mixin(mxnSoundLoop);
         const direction = rng.intp();
         obj.objCharacterWindTurbine.angle = rng.int(360);
+        let turbineSpeed = 0;
         obj
             .step(() => {
-                const delta = Math.min(20, flagNerd.windEssenceCount * Math.pow(0.8, i) - i * 5);
+                turbineSpeed = Math.max(0, Math.min(20, flagNerd.windEssenceCount * Math.pow(0.8, i) - i * 5));
 
-                if (delta < 1) {
+                if (turbineSpeed < 1) {
                     return;
                 }
-                obj.objCharacterWindTurbine.angle += direction * delta;
+                obj.objCharacterWindTurbine.angle += direction * turbineSpeed;
+            })
+            .coro(function* () {
+                yield () => isOnScreen(obj) && turbineSpeed > 0;
+                const sfx = obj.mxnSoundLoop.playInstance(Sfx.Effect.TurbineSpin.gain(0).rate(turbineSpeed / 15));
+                sfx.linearRamp("gain", 0.3, 0.5);
+                while (true) {
+                    yield onPrimitiveMutate(() => turbineSpeed);
+                    sfx.linearRamp("rate", turbineSpeed / 15, 0.5);
+                }
             });
     }
 
