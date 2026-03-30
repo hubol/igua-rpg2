@@ -1,10 +1,15 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Sound } from "../../lib/game-engine/audio/sound";
+import { Coro } from "../../lib/game-engine/routines/coro";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { RgbInt } from "../../lib/math/number-alias-types";
+import { IguaAudio, Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataGift } from "../data/data-gift";
 import { DataIdol } from "../data/data-idol";
+import { DramaGifts } from "../drama/drama-gifts";
 import { ask, show } from "../drama/show";
 import { Cutscene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -101,6 +106,8 @@ Ok, that is the last shoe for you. See you in the Swamp of Sin!`,
 }
 
 export function scnMagicDemo() {
+    Jukebox.play(Mzk.SodaMachine);
+    IguaAudio.sfxDelayFeedback = 0.2;
     const lvl = Lvl.MagicDemo();
 
     const sceneChanger = SceneChanger.create({
@@ -112,7 +119,7 @@ export function scnMagicDemo() {
     const demo: DataMagicDemo.Model = DataMagicDemo.Manifest[Rpg.character.position.checkpointName];
     if (!demo) {
         Cutscene.play(function* () {
-            yield* show("?");
+            yield* show("This is a bug (Type A)");
             sceneChanger.changeScene();
         });
         return;
@@ -120,6 +127,7 @@ export function scnMagicDemo() {
 
     let isSpiritAdded = false;
     const gift = Rpg.gift(demo.giftId);
+    const speech = getSpeech();
 
     objIdol.objControlled(() => demo.idolId)
         .at(lvl.IdolMarker)
@@ -136,6 +144,26 @@ export function scnMagicDemo() {
             }
 
             isSpiritAdded = true;
+
+            Jukebox.applyGainRamp(Mzk.SodaMachine, 0.5, 500);
+            yield sleep(500);
+
+            if (!speech) {
+                yield* show("This is a bug (Type B)");
+            }
+            else {
+                const sfx = speech.sfx.playInstance();
+                yield* Coro.race([
+                    // Paranoid
+                    sleep(42_000),
+                    () => sfx.ended,
+                ]);
+            }
+
+            Jukebox.applyGainRamp(Mzk.SodaMachine, 1, 500);
+            yield* DramaGifts.give(demo.giftId);
+            yield sleep(1000);
+            sceneChanger.changeScene();
         })
         .coro(function* (self) {
             yield () => isSpiritAdded || gift.isGiven;
@@ -144,4 +172,12 @@ export function scnMagicDemo() {
         })
         .zIndexed(ZIndex.Entities)
         .show();
+}
+
+function getSpeech(): DataMagicDemo.Speech.Model | null {
+    const givenGiftsCount = Object.values(DataMagicDemo.Manifest)
+        .map(model => Rpg.gift(model.giftId).isGiven)
+        .reduce((sum, isGiven) => isGiven ? (sum + 1) : sum, 0);
+
+    return DataMagicDemo.Speech.List[givenGiftsCount] ?? null;
 }
