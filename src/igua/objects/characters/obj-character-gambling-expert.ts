@@ -7,15 +7,15 @@ import { scene } from "../../globals";
 import { mxnCutscene } from "../../mixins/mxn-cutscene";
 import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { Rpg } from "../../rpg/rpg";
-import { scnCasino } from "../../scenes/scn-casino";
 import { scnEfficientHome } from "../../scenes/scn-efficient-home";
 import { scnGrottoIndianaShop } from "../../scenes/scn-grotto-indiana-shop";
+import { scnNewBalltown } from "../../scenes/scn-new-balltown";
 import { scnNewBalltownOutskirtsSecretShop } from "../../scenes/scn-new-balltown-outskirts-secret-shop";
 import { scnWorldMap } from "../../scenes/scn-world-map";
 import { objIguanaNpc } from "../obj-iguana-npc";
 
 const sceneNames = [
-    scnCasino,
+    scnNewBalltown,
     scnNewBalltownOutskirtsSecretShop,
     scnWorldMap,
     scnEfficientHome,
@@ -25,8 +25,8 @@ const sceneNames = [
 
 function* dramaShowFavoritePlaces() {
     yield* show(
-        "MY TOP TEN FAVORITE PLACES TO HANG OUT",
-        "#1 Swamp Casino\nFor obvious reasons",
+        "MY TOP TEN SMOKE SPOTS",
+        "#1 New Balltown Casino\nFor obvious reasons",
         "#2 New Balltown Secret Shop\nGreat items!",
         "#3 Field\nLove that fresh air",
         "#4 My Apartment\nThere's no place like home",

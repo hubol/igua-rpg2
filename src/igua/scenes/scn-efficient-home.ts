@@ -28,6 +28,7 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSign } from "../mixins/mxn-sign";
 import { mxnSoundLoop } from "../mixins/mxn-sound-loop";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { objCharacterGamblingExpert } from "../objects/characters/obj-character-gambling-expert";
 import { objCharacterWindTurbine } from "../objects/characters/obj-character-wind-turbine";
 import { mxnEsotericArtInteractive, objEsotericArt } from "../objects/esoteric/obj-esoteric-art";
 import { objEsotericRemovedShoes } from "../objects/esoteric/obj-esoteric-removed-shoes";
@@ -52,6 +53,7 @@ export function scnEfficientHome() {
     enrichRoom4(lvl);
     enrichRoom5(lvl);
     enrichRoom6(lvl);
+    enrichRoom7(lvl);
 }
 
 function enrichHelium(lvl: LvlType.EfficientHome) {
@@ -529,5 +531,13 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
                     yield* show("Maybe you should try again!");
                 }
             }
+        });
+}
+
+function enrichRoom7(lvl: LvlType.EfficientHome) {
+    lvl.GamblerNote
+        .mixin(mxnSpeaker, { name: "Gambler's Note", tintPrimary: 0xFF5D2B, tintSecondary: 0x640129 })
+        .mixin(mxnCutscene, function* () {
+            yield* objCharacterGamblingExpert.dramaShowFavoritePlaces();
         });
 }

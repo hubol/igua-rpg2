@@ -838,6 +838,17 @@
           "originY": 52,
           "flippedX": false,
           "values": {"personaName": "NewBalltownFishmonger", "name": "Fishmonger", "depth": 0}
+        },
+        {
+          "name": "GamblingExpertNpc",
+          "id": 13,
+          "_eid": "87718071",
+          "x": 912,
+          "y": 352,
+          "originX": 19,
+          "originY": 53,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },

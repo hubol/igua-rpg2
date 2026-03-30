@@ -325,6 +325,11 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
         return;
     }
 
+    lvl.GamblingExpertNpc
+        .coro(function* (self) {
+            self.destroy();
+        });
+
     const bombMessages = {
         defused: "Defused bomb.",
     };
