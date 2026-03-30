@@ -161,7 +161,7 @@
           "name": "GateMap",
           "id": 10,
           "_eid": "53836309",
-          "x": 758,
+          "x": 734,
           "y": 385,
           "originX": 16,
           "originY": 16,
@@ -404,7 +404,7 @@
           "name": "Checkpoint",
           "id": 13,
           "_eid": "19953026",
-          "x": 739,
+          "x": 715,
           "y": 414,
           "originX": 22,
           "originY": 39,
@@ -4417,7 +4417,8 @@
           "texture": "world map/hill 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 475,
@@ -4429,7 +4430,8 @@
           "texture": "world map/traffic cone.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 464,
@@ -4441,7 +4443,8 @@
           "texture": "world map/traffic cone.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 510,
@@ -4453,7 +4456,8 @@
           "texture": "world map/traffic cone.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 539,
@@ -4463,6 +4467,67 @@
           "rotation": 0,
           "tint": "#ffffff",
           "texture": "world map/traffic cone.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 718,
+          "y": 335,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/landmarks/grotto tree.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 786,
+          "y": 388,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#698826",
+          "texture": "foliage/leaf 18.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 726,
+          "y": 375,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#698826",
+          "texture": "foliage/leaf 18.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 700,
+          "y": 384,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#698826",
+          "texture": "foliage/leaf 18.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 763,
+          "y": 405,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#698826",
+          "texture": "foliage/leaf 18.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
