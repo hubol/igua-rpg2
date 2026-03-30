@@ -217,7 +217,7 @@ const ranks = {
         loot: {
             tier0: [
                 { kind: "valuables", deltaPride: -5, max: 70, min: 15, weight: 95 },
-                { kind: "equipment", id: "PatheticCage", weight: 5 },
+                { kind: "equipment", id: "NailFile", weight: 5 },
             ],
             tier1: [
                 // TODO
