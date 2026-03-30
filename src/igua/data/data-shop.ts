@@ -306,6 +306,11 @@ export namespace DataShop {
             GamblingTeacher: {
                 stocks: [
                     {
+                        product: { kind: "equipment", id: "Cigarette", level: 1 },
+                        initialQuantity: 4,
+                        price: { currency: "gambling", deltaSold: -111, initial: 999 },
+                    },
+                    {
                         product: { kind: "potion", id: "AttributeStrengthUp" },
                         initialQuantity: 1,
                         price: { currency: "gambling", deltaSold: 0, initial: 999 },

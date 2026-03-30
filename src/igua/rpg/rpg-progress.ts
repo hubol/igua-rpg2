@@ -121,7 +121,7 @@ export function getInitialRpgProgress() {
                 },
             },
             gamblingExpert: {
-                locationSeed: Rng.int(999999999),
+                locationSeed: 4,
             },
             greatTower: {
                 balcony: {
