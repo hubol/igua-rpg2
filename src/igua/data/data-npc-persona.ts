@@ -56,6 +56,7 @@ export namespace DataNpcPersona {
             CombatTeacher: { job: "Combat Expert", name: "Prince", looks: NpcLooks.CombatRed },
             PocketTeacher: { job: "Pocket Expert", name: "Bishop", looks: NpcLooks.PocketBlue },
             QuestTeacher: { job: "Quest Expert", name: "Picky", looks: NpcLooks.QuestBlue },
+            NerdBouncer: { job: "Nerd Bouncer", name: "Dinz", looks: NpcLooks.SmokyMagenta },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
         } satisfies Record<string, Model>,
     );
