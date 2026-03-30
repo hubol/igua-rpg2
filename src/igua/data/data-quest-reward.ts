@@ -100,7 +100,7 @@ export namespace DataQuestReward {
                 kind: "in_order",
                 rewards: [
                     { kind: "equipment", id: "StrengthUp", level: 1 },
-                    { kind: "equipment", id: "PatheticCage", level: 1 },
+                    { kind: "equipment", id: "NailFile", level: 1 },
                 ],
                 extend: {
                     kind: "repeat",
