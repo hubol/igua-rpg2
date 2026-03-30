@@ -199,9 +199,9 @@ const getBuffInformations = (function () {
         Record<DeepKeyOf.Paths<RpgPlayerBuffs.Model>, BuffInformation>
     > = Object.assign(
         {},
-        buff("attributes.health", "Health", "integer", "beneft_when_positive"),
-        buff("attributes.intelligence", "Intelligence", "integer", "beneft_when_positive"),
-        buff("attributes.strength", "Strength", "integer", "beneft_when_positive"),
+        buff("attributes.health", "Health ATTR", "integer", "beneft_when_positive"),
+        buff("attributes.intelligence", "Intelligence ATTR", "integer", "beneft_when_positive"),
+        buff("attributes.strength", "Strength ATTR", "integer", "beneft_when_positive"),
         buff("combat.melee.faceAttack.physical", "Face Phys ATK", "integer", "beneft_when_positive"),
         buff("combat.melee.clawAttack.physical", "Claw Phys ATK", "integer", "beneft_when_positive"),
         buff(
@@ -237,6 +237,7 @@ const getBuffInformations = (function () {
             "integer",
             "beneft_when_positive",
         ),
+        buff("cosmetic.cigaretteSmoking", "Cigarette", "percent", "beneft_when_positive"),
         // TODO it is not necessarily a benefit
         buff("audio.musicTempoAdjustmentFactor", "Music Tempo Adjust", "percent", "beneft_when_positive"),
         buff("esoteric.sceneChangeErrorChance", "Door Error Chance", "percent", "beneft_when_positive"),
@@ -244,6 +245,7 @@ const getBuffInformations = (function () {
         buff("approval.indianaMerchants", "Indiana Merchants Approval", "percent", "beneft_when_positive"),
         buff("esoteric.recognizeSongFactor", "Recognize Songs", "percent", "beneft_when_positive"),
         buff("esoteric.lgbtFactor", "LGBT", "percent", "beneft_when_positive"),
+        buff("wallet.bonusCasinoPity", "Bonus Casino Pity", "integer", "beneft_when_positive"),
     );
 
     const fn = new Function(

@@ -175,7 +175,7 @@ export namespace DataEquipment {
             ApprovalIndianaMerchants: {
                 name: "Heel of Indiana Merchants",
                 texture: Tx.Collectibles.Equipment.IndianaShoe,
-                description: "Indiana merchants recognize you as worthy.",
+                description: "Indiana merchants recognize you as worthy",
                 buffs: (model, bonus) => {
                     model.approval.indianaMerchants = 100 + bonus * 100;
                 },
@@ -210,6 +210,15 @@ export namespace DataEquipment {
 
                     model.motion.jump.midairCount += bonus;
                     model.attributes.health -= bonus * 5;
+                },
+            },
+            Cigarette: {
+                name: "Smoky Charm",
+                texture: null,
+                description: "Increased elegance and pity at the casino",
+                buffs: (model, bonus) => {
+                    model.cosmetic.cigaretteSmoking += 100;
+                    model.wallet.bonusCasinoPity += 1 + bonus;
                 },
             },
             __Fallback__: {

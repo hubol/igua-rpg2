@@ -48,6 +48,9 @@ export namespace RpgPlayerBuffs {
                 poisonRateReductionFactor: <PercentInt> 0,
                 wetnessMaxIncreaseFactor: <PercentInt> 0,
             },
+            cosmetic: {
+                cigaretteSmoking: <PercentInt> 0,
+            },
             esoteric: {
                 lgbtFactor: <PercentInt> 0,
                 recognizeSongFactor: <PercentInt> 0,
@@ -85,6 +88,9 @@ export namespace RpgPlayerBuffs {
                 walk: {
                     topSpeedIncreaseFactor: <PercentInt> 0,
                 },
+            },
+            wallet: {
+                bonusCasinoPity: <Integer> 0,
             },
         };
     }

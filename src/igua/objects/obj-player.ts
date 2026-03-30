@@ -182,6 +182,8 @@ function objPlayer(looks: IguanaLooks.Serializable) {
 
     const playerAliveObj = container()
         .step(() => {
+            puppet.head.mouth.isSmoking = Rpg.character.buffs.cosmetic.cigaretteSmoking > 0;
+
             if (puppet.isOnGround) {
                 stepsSinceOffGround++;
             }

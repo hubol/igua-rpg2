@@ -149,7 +149,7 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
                     });
                 }
                 else {
-                    Rpg.wallet.earn("casino_pity", pricePerSpin.price);
+                    Rpg.wallet.earn("casino_pity", pricePerSpin.price + Rpg.character.buffs.wallet.bonusCasinoPity);
                 }
 
                 api.paidForGame = false;
