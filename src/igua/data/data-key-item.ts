@@ -81,6 +81,11 @@ export namespace DataKeyItem {
                 description: "Tiny robot, a typical bauble of nerds.",
                 texture: Tx.Collectibles.Key.Robot,
             },
+            IllegalMovie: {
+                name: "Low Quality Movie",
+                description: "Illegitimately sourced, no one wants this.",
+                texture: null,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );

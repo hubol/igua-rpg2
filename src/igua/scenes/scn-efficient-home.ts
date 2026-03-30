@@ -24,6 +24,7 @@ import { Cutscene, DevKey, layers, scene } from "../globals";
 import { mxnFxAlphaVisibility } from "../mixins/effects/mxn-fx-alpha-visibility";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSign } from "../mixins/mxn-sign";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objCharacterWindTurbine } from "../objects/characters/obj-character-wind-turbine";
 import { mxnEsotericArtInteractive, objEsotericArt } from "../objects/esoteric/obj-esoteric-art";
 import { objEsotericRemovedShoes } from "../objects/esoteric/obj-esoteric-removed-shoes";
@@ -335,7 +336,7 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
                 if (this.windEssenceCount < 1) {
                     return 0;
                 }
-                const value = 128 * Math.round(Math.pow(1.2, this.windEssenceCount)) + 256 * this.windEssenceCount;
+                const value = 128 * Math.round(Math.pow(1.3, this.windEssenceCount)) + 256 * this.windEssenceCount;
                 return Number.isFinite(value) ? value : Number.MAX_SAFE_INTEGER;
             },
             addWindEssence(count: Integer) {
@@ -389,26 +390,31 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
             return Math.round(bytes) + "B";
         }
         if (bytes < constNerd.megabyte) {
-            return (bytes / constNerd.kilobyte).toFixed(1) + "KB";
+            return Math.round(bytes / constNerd.kilobyte) + "KB";
         }
         if (bytes < constNerd.gigabyte) {
-            return (bytes / constNerd.megabyte).toFixed(1) + "MB";
+            return Math.round(bytes / constNerd.megabyte) + "MB";
         }
         return (bytes / constNerd.gigabyte).toFixed(1) + "GB";
     }
 
     {
+        const loadingIndicatorTexts = ["I", "/", "-", "\\", "I", "/", "-", "\\"];
+
         objText.XSmall("", { tint: 0x00ff00 })
             .step(self => {
                 if (flagNerd.isAtCapacity) {
-                    self.text = "AT MAX";
+                    self.text = `   
+ AT MAX!`;
                     return;
                 }
                 let text = "";
                 if (flagNerd.storedMoviesCount > 0) {
-                    text += flagNerd.storedMoviesCount + " done\n";
+                    text += " " + flagNerd.storedMoviesCount + " done\n";
                 }
-                text += bytesText(flagNerd.remainingBytesForNextMovie) + "\n";
+                const index = Math.floor(Rpg.records.gameTicksPlayed / 4);
+                const loadingIndicatorText = loadingIndicatorTexts[index % loadingIndicatorTexts.length];
+                text += bytesText(flagNerd.remainingBytesForNextMovie) + " " + loadingIndicatorText + "\n";
                 text += bytesText(flagNerd.downloadedBytesPerTick * 60) + "ps";
                 self.text = text;
             })
@@ -447,7 +453,21 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
             flagNerd.downloadData();
         });
 
-    lvl.NerdTerminal;
+    lvl.NerdTerminal
+        .mixin(mxnSpeaker, { name: "Nerd Terminal", tintPrimary: 0x606060, tintSecondary: 0xAFAFAF })
+        .mixin(mxnCutscene, function* () {
+            if (flagNerd.storedMoviesCount < 1) {
+                yield* show("Nothing downloaded yet.");
+                return;
+            }
+
+            yield* show("Exporting...");
+            const count = flagNerd.removeMovies();
+            yield* DramaInventory.receiveItems(range(count).map(() => ({ kind: "key_item", id: "IllegalMovie" })));
+            for (let i = 0; i < count; i++) {
+                Rpg.experience.reward.computer.onInteract("small_task");
+            }
+        });
 
     lvl.CloudHouseNerdNpc
         .mixin(mxnCutscene, function* () {

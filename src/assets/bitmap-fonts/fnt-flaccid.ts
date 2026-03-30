@@ -80,6 +80,8 @@ export const fntFlaccid = createBitmapFont(Tx.Font.Flaccid, {
         "/": { x: 58, y: 12, w: 2, h: 5, xadv: 3 },
         "(": { x: 61, y: 12, w: 2, h: 5, xadv: 3 },
         ")": { x: 64, y: 12, w: 2, h: 5, xadv: 3 },
+        "\\": { x: 67, y: 12, w: 2, h: 5, xadv: 3 },
+        "-": { x: 70, y: 12, w: 2, h: 5, xadv: 3 },
     },
     kernings: [["L", "o", -1], ["L", "e", -1], ["s", "s", -1], ["r", "s", -1]],
 });
