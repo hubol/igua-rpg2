@@ -1,8 +1,9 @@
-import { BLEND_MODES } from "pixi.js";
+import { BLEND_MODES, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
+import { Tx } from "../../assets/textures";
 import { isOnScreen } from "../../lib/game-engine/logic/is-on-screen";
 import { factor, interpr, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
@@ -512,7 +513,12 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
                     "Take your time, and pay close attention to the value passed to the function.",
                 );
 
-                const correct = yield* dramaQuizComputerScience({ difficulty: 0 });
+                const correct = yield* dramaQuizComputerScience(
+                    {
+                        difficulty: 0,
+                        messageObj: Sprite.from(Tx.Characters.NerdPortrait).anchored(0.5, 0.6),
+                    },
+                );
 
                 if (correct) {
                     Rpg.experience.reward.computer.onCorrectPracticeQuizAnswer();
