@@ -14,7 +14,7 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { IguaClient } from "../net/igua-client";
 import { Rpg } from "../rpg/rpg";
-import { RpgInventory } from "../rpg/rpg-inventory";
+import { RpgSaveFiles } from "../rpg/rpg-save-files";
 
 export function objNetGift(client: IguaClient) {
     let warned = false;
@@ -85,6 +85,7 @@ function* dramaNetGift(client: IguaClient) {
         )?.id ?? -1;
 
         Rpg.inventory.equipment.remove(obtainedId);
+        RpgSaveFiles.Current.save();
 
         const outcome = yield* dramaTransaction(client, client.offer(item));
 
@@ -96,6 +97,7 @@ function* dramaNetGift(client: IguaClient) {
                 yield* show("Someone beat you to it.");
             }
             yield* DramaInventory.receiveItems([item]);
+            RpgSaveFiles.Current.save();
         }
     }
     else {
@@ -106,6 +108,7 @@ function* dramaNetGift(client: IguaClient) {
             const clientItem = IguaClient.sanitizeItem(outcome.item);
             if (clientItem) {
                 yield* DramaInventory.receiveItems([clientItem]);
+                RpgSaveFiles.Current.save();
             }
         }
         else if (outcome?.success === false) {
