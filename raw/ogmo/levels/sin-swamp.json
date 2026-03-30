@@ -286,6 +286,87 @@
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnCasino", "checkpointName": "fromSwamp", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemyBrick",
+          "id": 20,
+          "_eid": "70867241",
+          "x": 1824,
+          "y": 512,
+          "width": 56,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "uid": 177490870542309,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemyMiffed",
+          "id": 21,
+          "_eid": "43434686",
+          "x": 2008,
+          "y": 592,
+          "originX": 22,
+          "originY": 41,
+          "uid": 177490871004110,
+          "values": {"name": "", "depth": 0, "variant": "level3"}
+        },
+        {
+          "name": "EnemyBrick",
+          "id": 22,
+          "_eid": "70867241",
+          "x": 1272,
+          "y": 512,
+          "width": 56,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "uid": 177490871604911,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemyMiffed",
+          "id": 23,
+          "_eid": "43434686",
+          "x": 1456,
+          "y": 592,
+          "originX": 22,
+          "originY": 41,
+          "uid": 177490871604912,
+          "values": {"name": "", "depth": 0, "variant": "level3"}
+        },
+        {
+          "name": "EnemyBrick",
+          "id": 24,
+          "_eid": "70867241",
+          "x": 648,
+          "y": 512,
+          "width": 56,
+          "height": 72,
+          "originX": 0,
+          "originY": 0,
+          "uid": 177490871957913,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemyCactus",
+          "id": 27,
+          "_eid": "60289305",
+          "x": 832,
+          "y": 584,
+          "originX": 32,
+          "originY": 34,
+          "values": {"variant": "level1", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemyCactus",
+          "id": 28,
+          "_eid": "60289305",
+          "x": 288,
+          "y": 592,
+          "originX": 32,
+          "originY": 34,
+          "values": {"variant": "level1", "name": "", "depth": 0}
         }
       ]
     },
@@ -792,6 +873,19 @@
           "y": 408,
           "width": 136,
           "height": 24,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#251105",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 41,
+          "_eid": "93117141",
+          "x": 136,
+          "y": 800,
+          "width": 2368,
+          "height": 128,
           "originX": 0,
           "originY": 0,
           "tint": "#251105",

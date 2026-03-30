@@ -73,7 +73,7 @@ function getBallonPhysicsLevel(ballonsCount: number) {
     return level;
 }
 
-function getMaxMidarJumpsCount() {
+function getMaxMidairJumpsCount() {
     return Rpg.character.buffs.motion.jump.midairCount
         + (Rpg.character.status.health >= Rpg.character.status.healthMax
             ? Rpg.character.buffs.motion.jump.atMaxHealthMidairCount
@@ -248,11 +248,11 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 stepsSinceJumpJustWentDown = 0;
             }
 
-            if (hasControl && (puppet.isOnGround || midairJumpsRemaining > 0) && stepsSinceJumpJustWentDown < 6) {
-                if (puppet.isOnGround) {
-                    midairJumpsRemaining = getMaxMidarJumpsCount();
-                }
+            if (puppet.isOnGround) {
+                midairJumpsRemaining = getMaxMidairJumpsCount();
+            }
 
+            if (hasControl && (puppet.isOnGround || midairJumpsRemaining > 0) && stepsSinceJumpJustWentDown < 6) {
                 const isMidairJump = !puppet.isOnGround;
 
                 if (isMidairJump) {
