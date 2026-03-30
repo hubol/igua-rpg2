@@ -4,6 +4,7 @@ import { Integer, Unit } from "../../lib/math/number-alias-types";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { RethrownError } from "../../lib/rethrown-error";
 import { Null } from "../../lib/types/null";
+import { DataItem } from "../data/data-item";
 import { IguanaLooks } from "../iguana/looks";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
@@ -90,7 +91,8 @@ export class IguaClient {
 
     offer(item: RpgInventory.Item) {
         const transaction = this._offerTransactions.add();
-        this._send({ type: "gift_offer", item });
+        const serverItem: IguaNet.Model.Item = { ...item, level: "level" in item ? item.level : 1 };
+        this._send({ type: "gift_offer", item: serverItem });
         return transaction;
     }
 
@@ -124,6 +126,20 @@ export class IguaClient {
         giftItem: null,
     });
 
+    static sanitizeItem(item: IguaNet.Model.Item | null): RpgInventory.Item | null {
+        if (!item) {
+            return null;
+        }
+
+        const clientItem = item as RpgInventory.Item;
+
+        if (DataItem.isValid(clientItem)) {
+            return clientItem;
+        }
+
+        return { kind: "equipment", id: "HackerRemnant", level: 1 };
+    }
+
     get isOnline() {
         return this._joinRoomAccepted && this._isSocketOpen;
     }
@@ -146,8 +162,7 @@ export class IguaClient {
         if (message.type === "room_accepted") {
             this._clientId = message.clientId;
             this._joinRoomAccepted = true;
-            // @ts-expect-error Eh...
-            this._room.giftItem = message.giftItem;
+            this._room.giftItem = IguaClient.sanitizeItem(message.giftItem);
             this._room.iguanas = message.iguanas;
             this._room.iguanaLooks = message.iguanaLooks;
         }
@@ -173,8 +188,8 @@ export class IguaClient {
                     this._room.iguanas.push(iguana);
                 }
             }
-            // @ts-expect-error Eh...
-            this._room.giftItem = message.giftItem;
+
+            this._room.giftItem = IguaClient.sanitizeItem(message.giftItem);
 
             return;
         }

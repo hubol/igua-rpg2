@@ -9,6 +9,21 @@ import { DataPocketItem } from "./data-pocket-item";
 import { DataPotion } from "./data-potion";
 
 export namespace DataItem {
+    export function isValid(item: RpgInventory.Item) {
+        switch (item.kind) {
+            case "equipment":
+                return item.id in DataEquipment.Manifest;
+            case "key_item":
+                return item.id in DataKeyItem.Manifest;
+            case "pocket_item":
+                return item.id in DataPocketItem.Manifest;
+            case "potion":
+                return item.id in DataPotion.Manifest;
+            default:
+                return false;
+        }
+    }
+
     export function getName(item: RpgInventory.Item) {
         switch (item.kind) {
             case "equipment":

@@ -102,8 +102,11 @@ function* dramaNetGift(client: IguaClient) {
         const outcome = yield* dramaTransaction(client, client.take());
 
         if (outcome?.success) {
-            // TODO shitty
-            yield* DramaInventory.receiveItems([outcome.item as RpgInventory.Item]);
+            // TODO I think that IguaCient should not give us a transaction with an unsanitized item...
+            const clientItem = IguaClient.sanitizeItem(outcome.item);
+            if (clientItem) {
+                yield* DramaInventory.receiveItems([clientItem]);
+            }
         }
         else if (outcome?.success === false) {
             yield* show("Someone beat you to it.");

@@ -1,6 +1,7 @@
 import { Texture } from "pixi.js";
 import { Tx } from "../../assets/textures";
 import { Integer } from "../../lib/math/number-alias-types";
+import { PseudoRng } from "../../lib/math/rng";
 import { RpgPlayerBuffs } from "../rpg/rpg-player-buffs";
 import { DataLib } from "./data-lib";
 
@@ -220,6 +221,22 @@ export namespace DataEquipment {
                     model.cosmetic.cigaretteSmoking += 100;
                     model.wallet.bonusCasinoPity += 1 + bonus;
                 },
+            },
+            HackerRemnant: {
+                name: "Hacker's Remnant",
+                texture: null,
+                description: "Trace of online cheating, bizarre effects",
+                buffs: (() => {
+                    const rng = new PseudoRng();
+                    return (model, bonus) => {
+                        rng.seed = 77777777777 + bonus * 696969;
+                        model.audio.musicTempoAdjustmentFactor += rng.intc(-10, 10);
+                        model.attributes.health += rng.intc(-1, 1);
+                        model.attributes.intelligence += rng.intc(-1, 1);
+                        model.attributes.strength += rng.intc(-1, 1);
+                        model.motion.walk.topSpeedIncreaseFactor += rng.intc(-20, 3);
+                    };
+                })(),
             },
             __Fallback__: {
                 name: "???",

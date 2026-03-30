@@ -7,7 +7,7 @@ export namespace IguaNet {
         export interface Item {
             kind: "equipment" | "key_item" | "potion" | "pocket_item";
             id: string;
-            level?: number;
+            level: number;
         }
     }
 

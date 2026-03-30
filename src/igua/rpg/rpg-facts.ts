@@ -31,7 +31,7 @@ export class RpgFacts {
     }
 
     get totalSlots() {
-        const intelligence = this._attributes.intelligence;
+        const intelligence = Math.max(0, this._attributes.intelligence);
 
         if (intelligence < consts.capacities.length) {
             return consts.capacities[intelligence];
