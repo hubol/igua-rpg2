@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 912,
+  "width": 500,
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,9 +14,21 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 114,
+      "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 240,
+          "y": 230,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "IdolMarker", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",
@@ -25,22 +37,9 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 114,
+      "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": [
-        {
-          "name": "GateHorizontal",
-          "id": 0,
-          "_eid": "97593426",
-          "x": -48,
-          "y": 136,
-          "height": 128,
-          "originX": 0,
-          "originY": 0,
-          "flippedX": true,
-          "values": {"sceneName": "scnPlainsSuggestiveCavern", "checkpointName": "fromHallOfDoors", "name": "", "depth": 0}
-        }
-      ]
+      "entities": []
     },
     {
       "name": "FrontDecals",
@@ -49,7 +48,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 114,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -61,7 +60,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 114,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "entities": []
     },
@@ -72,30 +71,19 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 114,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "entities": [
         {
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
-          "x": 112,
-          "y": 248,
+          "x": 88,
+          "y": 240,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
           "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "Checkpoint",
-          "id": 1,
-          "_eid": "19953026",
-          "x": 800,
-          "y": 80,
-          "originX": 22,
-          "originY": 39,
-          "flippedX": true,
-          "values": {"name": "fromMagicDemo", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -106,7 +94,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 114,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "entities": []
     },
@@ -117,7 +105,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 114,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -129,54 +117,9 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 114,
+      "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": [
-        {
-          "name": "MagicDoor",
-          "id": 0,
-          "_eid": "03703297",
-          "x": 376,
-          "y": 200,
-          "originX": 0,
-          "originY": -2,
-          "uid": 177203717952800,
-          "values": {"sceneName": "scnMagicDemo", "checkpointName": "fromDoor0", "name": "", "depth": 0}
-        },
-        {
-          "name": "MagicDoor",
-          "id": 1,
-          "_eid": "03703297",
-          "x": 480,
-          "y": 200,
-          "originX": 0,
-          "originY": -2,
-          "uid": 177203718158901,
-          "values": {"sceneName": "scnMagicDemo", "checkpointName": "fromDoor1", "name": "", "depth": 0}
-        },
-        {
-          "name": "MagicDoor",
-          "id": 2,
-          "_eid": "03703297",
-          "x": 584,
-          "y": 200,
-          "originX": 0,
-          "originY": -2,
-          "uid": 177203718418602,
-          "values": {"sceneName": "scnMagicDemo", "checkpointName": "fromDoor2", "name": "", "depth": 0}
-        },
-        {
-          "name": "MagicDoor",
-          "id": 3,
-          "_eid": "03703297",
-          "x": 688,
-          "y": 200,
-          "originX": 0,
-          "originY": -2,
-          "uid": 177203722716303,
-          "values": {"sceneName": "scnMagicDemo", "checkpointName": "fromDoor3", "name": "", "depth": 0}
-        }
-      ]
+      "entities": []
     },
     {
       "name": "TerrainDecals",
@@ -185,9 +128,130 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 114,
+      "gridCellsX": 64,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 256,
+          "y": 236,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock large shaded.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 226,
+          "y": 237,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 277,
+          "y": 243,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 210,
+          "y": 245,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 240,
+          "y": 247,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 295,
+          "y": 241,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 196,
+          "y": 240,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 186,
+          "y": 244,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 232,
+          "y": 249,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 259,
+          "y": 225,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "stone/rock small shaded1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -197,7 +261,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 114,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "entities": [
         {
@@ -206,8 +270,8 @@
           "_eid": "93117141",
           "x": 0,
           "y": 0,
-          "width": 912,
-          "height": 32,
+          "width": 504,
+          "height": 40,
           "originX": 0,
           "originY": 0,
           "tint": "#4146a8",
@@ -218,9 +282,9 @@
           "id": 1,
           "_eid": "93117141",
           "x": 0,
-          "y": 248,
-          "width": 912,
-          "height": 32,
+          "y": 240,
+          "width": 504,
+          "height": 40,
           "originX": 0,
           "originY": 0,
           "tint": "#4146a8",
@@ -230,10 +294,10 @@
           "name": "Block",
           "id": 2,
           "_eid": "93117141",
-          "x": 880,
-          "y": 32,
-          "width": 32,
-          "height": 216,
+          "x": 0,
+          "y": 40,
+          "width": 48,
+          "height": 200,
           "originX": 0,
           "originY": 0,
           "tint": "#4146a8",
@@ -243,23 +307,10 @@
           "name": "Block",
           "id": 3,
           "_eid": "93117141",
-          "x": 0,
-          "y": 32,
-          "width": 304,
-          "height": 136,
-          "originX": 0,
-          "originY": 0,
-          "tint": "#4146a8",
-          "values": {"name": "", "depth": 0, "visible": true}
-        },
-        {
-          "name": "Block",
-          "id": 5,
-          "_eid": "93117141",
-          "x": 760,
-          "y": 232,
-          "width": 88,
-          "height": 16,
+          "x": 456,
+          "y": 40,
+          "width": 48,
+          "height": 200,
           "originX": 0,
           "originY": 0,
           "tint": "#4146a8",
@@ -274,7 +325,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 114,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "entities": []
     },
@@ -285,7 +336,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 114,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -297,7 +348,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 114,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"

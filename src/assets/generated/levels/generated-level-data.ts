@@ -2024,7 +2024,7 @@ export const Lvl = {
       Block_10: e(r["Block"], { x: 1192, y: 288, width: 152, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
       Block_11: e(r["Block"], { x: 1296, y: 0, width: 48, height: 288, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
       Block_12: e(r["Block"], { x: 1152, y: 272, width: 88, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
-      Block_13: e(r["Block"], { x: 1164, y: 219, width: 64, height: 56, values: { name: "", depth: 0, visible: false }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_13: e(r["Block"], { x: 1164, y: 219, width: 64, height: 54, values: { name: "", depth: 0, visible: true }, tint: 0xd8a5f7 }, "TerrainEntities"),
       TerrainGrassSparse3px1: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 144, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
       TerrainGrassSparse3px1_1: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 72, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
       TerrainGrassSparse3px1_2: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 0, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
@@ -2208,11 +2208,13 @@ export const Lvl = {
       Block_1: e(r["Block"], { x: 0, y: 248, width: 912, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 880, y: 32, width: 32, height: 216, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
       Block_3: e(r["Block"], { x: 0, y: 32, width: 304, height: 136, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
-      MagicDoor: e(r["MagicDoor"], { x: 376, y: 200, uid: 177203717952800, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
-      MagicDoor_1: e(r["MagicDoor"], { x: 480, y: 200, uid: 177203718158901, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
-      MagicDoor_2: e(r["MagicDoor"], { x: 584, y: 200, uid: 177203718418602, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
-      MagicDoor_3: e(r["MagicDoor"], { x: 688, y: 200, uid: 177203722716303, values: { sceneName: "", checkpointName: "", name: "", depth: 0 } }, "Entities"),
+      Block_4: e(r["Block"], { x: 760, y: 232, width: 88, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
+      MagicDoor: e(r["MagicDoor"], { x: 376, y: 200, uid: 177203717952800, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor0", name: "", depth: 0 } }, "Entities"),
+      MagicDoor_1: e(r["MagicDoor"], { x: 480, y: 200, uid: 177203718158901, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor1", name: "", depth: 0 } }, "Entities"),
+      MagicDoor_2: e(r["MagicDoor"], { x: 584, y: 200, uid: 177203718418602, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor2", name: "", depth: 0 } }, "Entities"),
+      MagicDoor_3: e(r["MagicDoor"], { x: 688, y: 200, uid: 177203722716303, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor3", name: "", depth: 0 } }, "Entities"),
       Player: e(r["Player"], { x: 112, y: 248, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      fromMagicDemo: e(r["Checkpoint"], { x: 800, y: 80, flippedX: true, values: { name: "fromMagicDemo", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -48, y: 136, height: 128, flippedX: true, values: { sceneName: "scnPlainsSuggestiveCavern", checkpointName: "fromHallOfDoors", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
@@ -2658,6 +2660,27 @@ export const Lvl = {
       SpigotPuddle: e(r["Puddle"], { x: 648, y: 264, width: 56, values: { name: "SpigotPuddle", depth: 0 }, tint: 0x68a8d0 }, "FrontEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -32, y: 184, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaUniversity", name: "", depth: 0 } }, "RegionEntities"),
       GateHorizontal_1: e(r["GateHorizontal"], { x: 768, y: 176, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaUniversity", name: "", depth: 0 } }, "RegionEntities"),
+    };
+  },
+  MagicDemo: () => {
+    applyLevel({ width: 500, height: 280, backgroundTint: 0xa286f3, terrainTint: 0x4146a8 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 0, width: 504, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 0, y: 240, width: 504, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 0, y: 40, width: 48, height: 200, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 456, y: 40, width: 48, height: 200, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
+      StoneRockLargeShaded: d(Tx.Stone.RockLargeShaded, { x: 256, y: 236, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRock0: d(Tx.Stone.Rock0, { x: 226, y: 237, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRock0_1: d(Tx.Stone.Rock0, { x: 277, y: 243, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRock0_2: d(Tx.Stone.Rock0, { x: 210, y: 245, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1: d(Tx.Stone.RockSmallShaded1, { x: 240, y: 247, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_1: d(Tx.Stone.RockSmallShaded1, { x: 295, y: 241, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_2: d(Tx.Stone.RockSmallShaded1, { x: 196, y: 240, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_3: d(Tx.Stone.RockSmallShaded1, { x: 186, y: 244, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_4: d(Tx.Stone.RockSmallShaded1, { x: 232, y: 249, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_5: d(Tx.Stone.RockSmallShaded1, { x: 259, y: 225, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      Player: e(r["Player"], { x: 88, y: 240, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      IdolMarker: e(r["Marker"], { x: 240, y: 230, values: { name: "IdolMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   MenuIguanaDesigner: () => {
@@ -8016,6 +8039,7 @@ export namespace LvlType {
   export type IndianaUniversityInterior = ReturnType<(typeof Lvl)["IndianaUniversityInterior"]>;
   export type IndianaUniversityNurse = ReturnType<(typeof Lvl)["IndianaUniversityNurse"]>;
   export type IndianaUniversity = ReturnType<(typeof Lvl)["IndianaUniversity"]>;
+  export type MagicDemo = ReturnType<(typeof Lvl)["MagicDemo"]>;
   export type MenuIguanaDesigner = ReturnType<(typeof Lvl)["MenuIguanaDesigner"]>;
   export type MenuTitleScreen = ReturnType<(typeof Lvl)["MenuTitleScreen"]>;
   export type NewBalltownArmorer = ReturnType<(typeof Lvl)["NewBalltownArmorer"]>;
