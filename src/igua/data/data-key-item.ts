@@ -84,7 +84,7 @@ export namespace DataKeyItem {
             IllegalMovie: {
                 name: "Low Quality Movie",
                 description: "Illegitimately sourced, no one wants this.",
-                texture: null,
+                texture: Tx.Collectibles.Key.VideoTape,
             },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
