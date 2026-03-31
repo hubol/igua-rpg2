@@ -1,6 +1,5 @@
 #header img {
    margin-top: 32px;
-   margin-left: 40px;
 }
 
 .screenshot_list {
@@ -11,7 +10,7 @@ div.formatted_description.user_formatted {
    & > p {
       display: flex;
       flex-direction: column;
-      padding: 0 20px;
+      padding: 0 40px;
       gap: 0;
 
       & > br {
@@ -55,7 +54,7 @@ div.formatted_description.user_formatted {
 }
 
 .view_html_game_page {
-   margin-top: 20px;
+   margin-top: 32px;
    display: grid;
    column-gap: 40px;
    grid-template-columns: 1fr 1fr;
