@@ -120,6 +120,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromPit", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 3,
+          "_eid": "19953026",
+          "x": 160,
+          "y": 592,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromEnding", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -923,7 +934,20 @@
       "gridCellHeight": 8,
       "gridCellsX": 308,
       "gridCellsY": 85,
-      "decals": [],
+      "decals": [
+        {
+          "x": 112,
+          "y": 534,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/signage/the end.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {

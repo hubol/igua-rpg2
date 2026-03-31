@@ -18,7 +18,7 @@ import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgFaction } from "../rpg/rpg-faction";
 
 export function scnSinSwamp() {
-    Jukebox.play(Mzk.SporadicQuest);
+    Jukebox.play(Mzk.SporadicQuest).warm(Mzk.BestSeller);
     const lvl = Lvl.SinSwamp();
     enrichPoison(lvl);
 }
