@@ -53,6 +53,13 @@ div.formatted_description.user_formatted {
    }
 }
 
+.view_game_page .donate .button:before {
+    font-family: "icomoon";
+    content: "\e010";
+    font-weight: normal;
+    margin-right: 5px;
+}
+
 .view_html_game_page {
    margin-top: 32px;
    display: grid;
