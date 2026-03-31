@@ -245,7 +245,7 @@ export namespace DataEquipment {
             },
             Sparkle: {
                 name: "Legendary Charm",
-                texture: null,
+                texture: Tx.Collectibles.Equipment.Hubol,
                 description: "Charm given to the devoted",
                 buffs: (model) => {
                     model.cosmetic.sparkling += 100;
