@@ -593,6 +593,7 @@ function objIguanaMouth(head: Head) {
             set agapeUnit(value) {
                 c.agape = value;
             },
+            baseAnimationDuration: 0,
         });
 
     c.agape = 0;

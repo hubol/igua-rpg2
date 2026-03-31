@@ -34,9 +34,13 @@ export function mxnSpeaker(obj: DisplayObject, args: MxnSpeakerArgs) {
                     speakingStartedCount = speakingHandledCount;
                     const count = Rng.intc(2, 4);
                     for (let i = 0; i < count; i++) {
-                        yield interp(speakingMouthObj.mxnSpeakingMouth, "agapeUnit").to(1).over(Rng.float(150, 225));
+                        yield interp(speakingMouthObj.mxnSpeakingMouth, "agapeUnit")
+                            .to(1)
+                            .over(speakingMouthObj.mxnSpeakingMouth.baseAnimationDuration + Rng.float(150, 225));
                         self.play(Sfx.Iguana.Speak0.rate(0.8, 1.2));
-                        yield interp(speakingMouthObj.mxnSpeakingMouth, "agapeUnit").to(0).over(Rng.float(100, 150));
+                        yield interp(speakingMouthObj.mxnSpeakingMouth, "agapeUnit")
+                            .to(0)
+                            .over(speakingMouthObj.mxnSpeakingMouth.baseAnimationDuration + Rng.float(100, 150));
                         if (!isSpeaking) {
                             break;
                         }

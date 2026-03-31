@@ -1,9 +1,10 @@
 import { DisplayObject } from "pixi.js";
-import { Unit } from "../../lib/math/number-alias-types";
+import { Milliseconds, Unit } from "../../lib/math/number-alias-types";
 
 interface MxnSpeakingMouthArgs {
     /** Should be implemented as a getter/setter */
     agapeUnit: Unit;
+    baseAnimationDuration: Milliseconds;
 }
 
 export function mxnSpeakingMouth(obj: DisplayObject, args: MxnSpeakingMouthArgs) {

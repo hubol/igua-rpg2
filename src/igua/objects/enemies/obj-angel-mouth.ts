@@ -95,6 +95,7 @@ export function objAngelMouth(args: ObjAngelMouthArgs) {
             set agapeUnit(value) {
                 controls.agapeUnit = value;
             },
+            baseAnimationDuration: 0,
         });
 }
 
