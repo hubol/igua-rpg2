@@ -135,22 +135,29 @@ function compileApplyGamepadToInput<TAction extends string>(
 // compileApplyGamepadToInput
 return function applyGamepadToState(gamepad, state) {
 ${
-            Object.entries(controls).flatMap(([action, controls]) => {
+            Object.entries(controls).map(([action, _controls]) => {
+                const controls = _controls as GamepadControlType[];
+
+                if (controls.length === 0) {
+                    return "";
+                }
+
                 return `    state.${action} = ${
-                    (controls as GamepadControlType[]).map(control => {
-                        switch (control.kind) {
-                            case "button":
-                                return `gamepad.buttons[${control.index}].pressed`;
-                            case "axis":
-                                return `(Math.sign(gamepad.axes[${control.index}]) === ${control.sign} && Math.abs(gamepad.axes[${control.index}]) > ${config.stickDeadZone})`;
-                            case "axisUnit":
-                                return `sqDistance(v1.at(gamepad.axes[${control.indices[0]}], gamepad.axes[${
-                                    control.indices[1]
-                                }]), v2.at(${control.unit.x}, ${control.unit.y})) < ${axisUnitDistanceSquared}`;
-                            default:
-                                throw new Error(`Unrecognized Control kind ${(control as any).kind}`);
-                        }
-                    }).join(`
+                    controls
+                        .map(control => {
+                            switch (control.kind) {
+                                case "button":
+                                    return `gamepad.buttons[${control.index}].pressed`;
+                                case "axis":
+                                    return `(Math.sign(gamepad.axes[${control.index}]) === ${control.sign} && Math.abs(gamepad.axes[${control.index}]) > ${config.stickDeadZone})`;
+                                case "axisUnit":
+                                    return `sqDistance(v1.at(gamepad.axes[${control.indices[0]}], gamepad.axes[${
+                                        control.indices[1]
+                                    }]), v2.at(${control.unit.x}, ${control.unit.y})) < ${axisUnitDistanceSquared}`;
+                                default:
+                                    throw new Error(`Unrecognized Control kind ${(control as any).kind}`);
+                            }
+                        }).join(`
         || `)
                 };`;
             }).join("\n")
