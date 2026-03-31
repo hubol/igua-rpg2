@@ -37,23 +37,25 @@ function enrichSecretSymbols(lvl: LvlType.NewBalltownFanatic) {
 }
 
 function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
+    const count = 5;
+
     lvl.BallFruitFanaticNpc.mixin(mxnCutscene, function* () {
         const typePreference = Rpg.flags.newBalltown.ballFruitFanatic.typePreference;
 
         const hasBallFruitTypeA = Rpg.inventory.pocket.has(
             "BallFruitTypeA",
-            10,
+            count,
         );
         const hasBallFruitTypeB = Rpg.inventory.pocket.has(
             "BallFruitTypeB",
-            10,
+            count,
         );
 
         if (typePreference === null) {
             yield* show(
                 "Welcome in. I'm the ballfruit fanatic.",
                 "I moved to New Balltown after eating one of the ballfruit that fell and bounced all the way to the world below.",
-                "Please bring me 10 ballfruit.",
+                `Please bring me ${count} ballfruit.`,
             );
         }
 
@@ -63,7 +65,7 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
             return;
         }
         else if (hasBallFruitTypeA || hasBallFruitTypeB) {
-            yield* show("Wow!! You got 10 ballfruit!");
+            yield* show(`Wow!! You got ${count} ballfruit!`);
             if (
                 (hasBallFruitTypeA && typePreference === "BallFruitTypeA")
                 || (hasBallFruitTypeB && typePreference === "BallFruitTypeB")
@@ -73,7 +75,7 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
                     "These look awesome.",
                     `How much do I owe you? Does ${rewardName} sound good?`,
                 );
-                yield* DramaInventory.removeCount({ kind: "pocket_item", id: typePreference }, 10);
+                yield* DramaInventory.removeCount({ kind: "pocket_item", id: typePreference }, count);
                 yield* DramaQuests.complete("NewBalltown.Fanatic.FruitDelivery");
                 Rpg.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount++;
                 return;
@@ -86,7 +88,7 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
                     "THESE ARE SEEDLESS!!!!",
                     "What the hell is going on?",
                     "I prefer the texture of the seeds.",
-                    "Please bring 10 ballfruit with seeds.",
+                    `Please bring ${count} ballfruit with seeds.`,
                 );
                 Rpg.flags.newBalltown.ballFruitFanatic.typePreference = "BallFruitTypeB";
             }
@@ -95,7 +97,7 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
                     "THESE HAVE SEEDS!!!!",
                     "Um... hello?!?!",
                     "I am terribly allergic to the seeds.",
-                    "Please bring 10 seedless ballfruit.",
+                    `Please bring ${count} seedless ballfruit.`,
                 );
                 Rpg.flags.newBalltown.ballFruitFanatic.typePreference = "BallFruitTypeA";
             }
