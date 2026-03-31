@@ -35,7 +35,7 @@ div.formatted_description.user_formatted {
    font-size: 20px !important;
    padding: 10px 20px !important;
    height: unset !important;
-   border-radius: 6px;
+   border-radius: 4px !important;
    background-color: var(--hubol-dark);
    border: solid 4px var(--hubol-dark) !important;
    color: var(--hubol-lite);
