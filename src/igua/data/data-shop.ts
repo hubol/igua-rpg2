@@ -301,6 +301,11 @@ export namespace DataShop {
                         initialQuantity: 3,
                         price: { currency: "computer", deltaSold: 0, initial: 30 },
                     },
+                    {
+                        product: { kind: "equipment", id: "SceneChangeErrorChanceUp", level: 1 },
+                        initialQuantity: 3,
+                        price: { currency: "computer", deltaSold: 300, initial: 200 },
+                    },
                 ],
             },
             GamblingTeacher: {
@@ -324,6 +329,15 @@ export namespace DataShop {
                         product: { kind: "potion", id: "ForgetLooseValuableCollection" },
                         initialQuantity: 99,
                         price: { currency: "gambling", deltaSold: 90, initial: 10 },
+                    },
+                ],
+            },
+            SocialTeacher: {
+                stocks: [
+                    {
+                        product: { kind: "key_item", id: "MagicKey" },
+                        initialQuantity: 1,
+                        price: { currency: "social", deltaSold: 0, initial: 2500 },
                     },
                 ],
             },
