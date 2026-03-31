@@ -203,15 +203,18 @@ export namespace DataEquipment {
                 description: "Enable midair jumps, but at a cost",
                 buffs: (model, bonus) => {
                     model.esoteric.lgbtFactor += 50 + bonus * 25;
-                    model.attributes.strength -= 5;
+                    model.attributes.strength -= 5 + bonus;
+                    model.esoteric.goodEndingChance += Math.min(95, Math.pow(2, bonus));
 
                     if (bonus === 0) {
                         model.motion.jump.atMaxHealthMidairCount += 1;
                         return;
                     }
 
-                    model.motion.jump.midairCount += bonus;
-                    model.attributes.health -= bonus * 5;
+                    const jumpBonus = Math.min(3, bonus);
+
+                    model.motion.jump.midairCount += jumpBonus;
+                    model.attributes.health -= jumpBonus * 5;
                 },
             },
             Cigarette: {
@@ -236,6 +239,7 @@ export namespace DataEquipment {
                         model.attributes.intelligence += rng.intc(-1, 1);
                         model.attributes.strength += rng.intc(-1, 1);
                         model.motion.walk.topSpeedIncreaseFactor += rng.intc(-20, 3);
+                        model.esoteric.goodEndingChance += rng.intc(5);
                     };
                 })(),
             },
