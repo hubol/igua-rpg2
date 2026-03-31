@@ -16,3 +16,5 @@ export function mxnSparkling(obj: DisplayObject) {
             });
         });
 }
+
+export type MxnSparkling = ReturnType<typeof mxnSparkling>;

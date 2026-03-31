@@ -182,10 +182,12 @@ function objPlayer(looks: IguanaLooks.Serializable) {
 
     const playerAliveObj = container()
         .step(() => {
-            puppet.sparklesPerFrame = Math.max(
-                puppet.sparklesPerFrame,
-                Rpg.character.buffs.cosmetic.sparkling ? 0.1 : 0,
-            );
+            if (Rpg.character.buffs.cosmetic.sparkling) {
+                puppet.sparklesPerFrame = Math.max(puppet.sparklesPerFrame, 0.1);
+            }
+            else if (!Cutscene.isPlaying && puppet.sparklesPerFrame === 0.1) {
+                puppet.sparklesPerFrame = 0;
+            }
             puppet.head.mouth.isSmoking = Rpg.character.buffs.cosmetic.cigaretteSmoking > 0;
 
             if (puppet.isOnGround) {

@@ -8,6 +8,7 @@ import { ZIndex } from "../core/scene/z-index";
 import { DramaMisc } from "../drama/drama-misc";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
+import { MxnSparkling, mxnSparkling } from "../mixins/mxn-sparkling";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { IguaClient } from "../net/igua-client";
 import { SceneChanger } from "../systems/scene-changer";
@@ -16,7 +17,7 @@ import { playerObj } from "./obj-player";
 
 export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger) {
     let lastTime = Null<Integer>();
-    const iguanaObjsById: Record<Integer, ObjIguanaLocomotive> = {};
+    const iguanaObjsById: Record<Integer, ObjIguanaLocomotive & MxnSparkling> = {};
     const iguanaIdsInRoom = new Set<Integer>();
 
     return container()
@@ -29,6 +30,7 @@ export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger
                     playerObj.facing,
                     playerObj.speed,
                     playerObj.head.mouth.isSmoking,
+                    playerObj.sparklesPerFrame > 0,
                 );
             }
         })
@@ -43,6 +45,7 @@ export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger
                 iguanaIdsInRoom.add(iguana.id);
                 if (!iguanaObjsById[iguana.id]) {
                     const newIguanaObj = objIguanaLocomotive(iguana.looks)
+                        .mixin(mxnSparkling)
                         .zIndexed(ZIndex.CharacterEntities)
                         .show();
                     DramaMisc.arriveViaDoor(newIguanaObj);
@@ -67,6 +70,7 @@ export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger
                 }
 
                 iguanaObj.head.mouth.isSmoking = Boolean(iguana.flags & (0b1));
+                iguanaObj.sparklesPerFrame = Boolean(iguana.flags & (0b10)) ? 0.1 : 0;
             }
 
             for (const iguanaIdString in iguanaObjsById) {

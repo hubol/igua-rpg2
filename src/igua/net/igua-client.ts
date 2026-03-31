@@ -62,7 +62,15 @@ export class IguaClient {
 
     private _skippedUpdatesCount = 0;
 
-    update(x: number, y: number, ducking: Unit, facing: Unit, speed: VectorSimple, isSmoking: boolean) {
+    update(
+        x: number,
+        y: number,
+        ducking: Unit,
+        facing: Unit,
+        speed: VectorSimple,
+        isSmoking: boolean,
+        isSparkling: boolean,
+    ) {
         if (!this._isSocketOpen) {
             return;
         }
@@ -74,7 +82,7 @@ export class IguaClient {
             ducking,
             facing: Math.sign(facing) || 1,
             speed: { x: speed.x, y: speed.y },
-            flags: 0 | (Number(isSmoking) << 0),
+            flags: 0 | (Number(isSmoking) << 0) | (Number(isSparkling) << 1),
         };
 
         const updateJson = JSON.stringify(update);
