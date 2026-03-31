@@ -15,9 +15,10 @@ const Consts = {
 
 interface ObjUiBubbleNumberArgs {
     value: Integer;
+    minimumDigitsCount?: Integer;
 }
 
-export function objUiBubbleNumber({ value }: ObjUiBubbleNumberArgs) {
+export function objUiBubbleNumber({ value, minimumDigitsCount }: ObjUiBubbleNumberArgs) {
     const controls = {
         value,
     };
@@ -39,6 +40,9 @@ export function objUiBubbleNumber({ value }: ObjUiBubbleNumberArgs) {
                 yield () => controls.value !== state.renderedValue;
                 const nextRenderedValue = controls.value;
                 const digits = [...String(Math.abs(nextRenderedValue))].map(Number);
+                while (minimumDigitsCount && digits.length < minimumDigitsCount) {
+                    digits.unshift(0);
+                }
                 for (let i = 0; i < Math.max(digits.length, digitObjs.length); i++) {
                     const digit = digits[i];
                     const digitObj = digitObjs[i];
