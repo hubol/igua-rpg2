@@ -1,3 +1,4 @@
+import { BLEND_MODES } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
@@ -10,13 +11,15 @@ import { Null } from "../../lib/types/null";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { ask, show } from "../drama/show";
-import { scene } from "../globals";
+import { Cutscene, layers, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { objCharacterKingSpino } from "../objects/characters/obj-character-king-spino";
 import { objUiBubbleNumber } from "../objects/overlay/obj-ui-bubble-numbers";
 import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
+import { SceneChanger } from "../systems/scene-changer";
+import { scnEndingDemoGood } from "./scn-ending-demo-good";
 
 const atkSpikes = RpgAttack.create({
     physical: 25,
@@ -24,7 +27,7 @@ const atkSpikes = RpgAttack.create({
 });
 
 export function scnEndingDemo() {
-    Jukebox.play(Mzk.BestSeller).warm(Mzk.FuckerLand);
+    Jukebox.play(Mzk.BestSeller).warm(Mzk.FuckerLand, Mzk.DemoGoodEnd);
     const lvl = Lvl.EndingDemo();
     lvl.SpikeRegion
         .mixin(mxnRpgAttack, { attack: atkSpikes });
@@ -104,6 +107,16 @@ export function scnEndingDemo() {
                 yield* killPlayer();
                 return;
             }
+
+            yield* show("You won?!?!?!?!");
+
+            Cutscene.play(function* () {
+                layers.overlay.solid.blendMode = BLEND_MODES.SUBTRACT;
+                yield layers.overlay.solid.fadeIn(500);
+                SceneChanger.create({ sceneName: scnEndingDemoGood.name, checkpointName: "fromEnding" })!
+                    .changeScene();
+                yield layers.overlay.solid.fadeOut(500);
+            });
         })
         .show();
 
