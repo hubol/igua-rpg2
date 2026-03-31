@@ -788,6 +788,34 @@ export const Lvl = {
       TurbineMarker0: e(r["Marker"], { x: 240, y: 808, values: { name: "TurbineMarker0", depth: 0 }, tint: 0xfff500 }, "MarkerEntities"),
     };
   },
+  EndingDemoGood: () => {
+    applyLevel({ width: 500, height: 608, backgroundTint: 0x8dba54, terrainTint: 0x24390e });
+    return {
+      Block: e(r["Block"], { x: -2, y: 0, width: 504, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x24390e }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: -2, y: 32, width: 32, height: 544, values: { name: "", depth: 0, visible: true }, tint: 0x24390e }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 30, y: 96, width: 376, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x24390e }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 470, y: 32, width: 32, height: 552, values: { name: "", depth: 0, visible: true }, tint: 0x24390e }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: -2, y: 576, width: 504, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x24390e }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 94, y: 192, width: 376, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x24390e }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 30, y: 288, width: 376, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x24390e }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 94, y: 384, width: 376, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x24390e }, "TerrainEntities"),
+      Block_8: e(r["Block"], { x: 30, y: 480, width: 376, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x24390e }, "TerrainEntities"),
+      Block_9: e(r["Block"], { x: 94, y: 576, width: 376, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x24390e }, "TerrainEntities"),
+      Door: e(r["Door"], { x: 48, y: 528, values: { sceneName: "scnWorldMap", checkpointName: "fromGoodEnd", name: "", depth: 0 } }, "Entities"),
+      BalltownOutskirtsMiner: e(r["IguanaNpc"], { x: 232, y: 96, flippedX: true, values: { personaName: "BalltownOutskirtsMiner", name: "BalltownOutskirtsMiner", depth: 0 } }, "CharacterEntities"),
+      NewBalltownArmorer: e(r["IguanaNpc"], { x: 328, y: 192, flippedX: false, values: { personaName: "NewBalltownArmorer", name: "NewBalltownArmorer", depth: 0 } }, "CharacterEntities"),
+      UnderneathTunneler: e(r["IguanaNpc"], { x: 160, y: 192, flippedX: false, values: { personaName: "UnderneathTunneler", name: "UnderneathTunneler", depth: 0 } }, "CharacterEntities"),
+      BeetGod: e(r["IguanaNpc"], { x: 312, y: 288, flippedX: true, values: { personaName: "BeetGod", name: "BeetGod", depth: 0 } }, "CharacterEntities"),
+      CavernGatekeeper: e(r["IguanaNpc"], { x: 136, y: 288, flippedX: true, values: { personaName: "CavernGatekeeper", name: "CavernGatekeeper", depth: 0 } }, "CharacterEntities"),
+      IndianaNurse: e(r["IguanaNpc"], { x: 336, y: 384, flippedX: false, values: { personaName: "IndianaNurse", name: "IndianaNurse", depth: 0 } }, "CharacterEntities"),
+      CloudHouseAddict: e(r["IguanaNpc"], { x: 168, y: 384, flippedX: false, values: { personaName: "CloudHouseAddict", name: "CloudHouseAddict", depth: 0 } }, "CharacterEntities"),
+      CloudHouseNeatFreak: e(r["IguanaNpc"], { x: 336, y: 480, flippedX: true, values: { personaName: "CloudHouseNeatFreak", name: "CloudHouseNeatFreak", depth: 0 } }, "CharacterEntities"),
+      IndianaDirector: e(r["IguanaNpc"], { x: 160, y: 480, flippedX: true, values: { personaName: "IndianaDirector", name: "IndianaDirector", depth: 0 } }, "CharacterEntities"),
+      ColosseumWatcher: e(r["IguanaNpc"], { x: 360, y: 576, flippedX: false, values: { personaName: "ColosseumWatcher", name: "ColosseumWatcher", depth: 0 } }, "CharacterEntities"),
+      CloudHouseMusician: e(r["IguanaNpc"], { x: 192, y: 576, flippedX: false, values: { personaName: "CloudHouseMusician", name: "CloudHouseMusician", depth: 0 } }, "CharacterEntities"),
+      Player: e(r["Player"], { x: 80, y: 96, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    };
+  },
   EndingDemo: () => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x382856, terrainTint: 0x000000 });
     return {
@@ -8206,6 +8234,7 @@ export namespace LvlType {
   export type ColosseumMiffed = ReturnType<(typeof Lvl)["ColosseumMiffed"]>;
   export type Dummy = ReturnType<(typeof Lvl)["Dummy"]>;
   export type EfficientHome = ReturnType<(typeof Lvl)["EfficientHome"]>;
+  export type EndingDemoGood = ReturnType<(typeof Lvl)["EndingDemoGood"]>;
   export type EndingDemo = ReturnType<(typeof Lvl)["EndingDemo"]>;
   export type ErrorRecoveryRoom = ReturnType<(typeof Lvl)["ErrorRecoveryRoom"]>;
   export type FlopCollegeExterior = ReturnType<(typeof Lvl)["FlopCollegeExterior"]>;
