@@ -27,7 +27,21 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 76,
-      "entities": []
+      "entities": [
+        {
+          "name": "Region",
+          "id": 0,
+          "_eid": "11908607",
+          "x": 104,
+          "y": 512,
+          "width": 72,
+          "height": 72,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "GiftRegion", "depth": 0}
+        }
+      ]
     },
     {
       "name": "FrontDecals",

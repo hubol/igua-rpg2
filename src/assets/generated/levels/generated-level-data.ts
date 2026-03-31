@@ -814,6 +814,7 @@ export const Lvl = {
       ColosseumWatcher: e(r["IguanaNpc"], { x: 360, y: 576, flippedX: false, values: { personaName: "ColosseumWatcher", name: "ColosseumWatcher", depth: 0 } }, "CharacterEntities"),
       CloudHouseMusician: e(r["IguanaNpc"], { x: 192, y: 576, flippedX: false, values: { personaName: "CloudHouseMusician", name: "CloudHouseMusician", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 80, y: 96, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      GiftRegion: e(r["Region"], { x: 104, y: 512, width: 72, height: 72, values: { name: "GiftRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
     };
   },
   EndingDemo: () => {

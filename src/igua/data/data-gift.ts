@@ -24,6 +24,9 @@ export namespace DataGift {
             "Demo.MagicDoor.3": {
                 item: { kind: "equipment", id: "DoubleJump", level: 1 },
             },
+            "Demo.GoodEnd": {
+                item: { kind: "equipment", id: "Sparkle", level: 1 },
+            },
             __Fallback__: {
                 item: { kind: "potion", id: "RestoreHealth" },
             },

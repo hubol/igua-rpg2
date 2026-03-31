@@ -1,7 +1,10 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
+import { DramaGifts } from "../drama/drama-gifts";
 import { mxnShow } from "../mixins/mxn-show";
+import { playerObj } from "../objects/obj-player";
+import { Rpg } from "../rpg/rpg";
 
 export function scnEndingDemoGood() {
     Jukebox.play(Mzk.DemoGoodEnd);
@@ -18,4 +21,12 @@ export function scnEndingDemoGood() {
     lvl.IndianaNurse.mixin(mxnShow, "Thank you for being a great patient!");
     lvl.NewBalltownArmorer.mixin(mxnShow, "Thank you for giving me a fish and not insulting my floors!");
     lvl.UnderneathTunneler.mixin(mxnShow, "Thank you for fetching my food!");
+
+    lvl.GiftRegion
+        .coro(function* (self) {
+            yield () => playerObj.collides(self);
+            if (!Rpg.gift("Demo.GoodEnd").isGiven) {
+                yield* DramaGifts.give("Demo.GoodEnd");
+            }
+        });
 }

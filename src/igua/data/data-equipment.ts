@@ -243,6 +243,14 @@ export namespace DataEquipment {
                     };
                 })(),
             },
+            Sparkle: {
+                name: "Legendary Charm",
+                texture: null,
+                description: "Charm given to the devoted",
+                buffs: (model) => {
+                    model.cosmetic.sparkling += 100;
+                },
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,

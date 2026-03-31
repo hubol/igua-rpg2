@@ -238,6 +238,7 @@ const getBuffInformations = (function () {
             "beneft_when_positive",
         ),
         buff("cosmetic.cigaretteSmoking", "Cigarette", "percent", "beneft_when_positive"),
+        buff("cosmetic.sparkling", "Sparkles", "percent", "beneft_when_positive"),
         // TODO it is not necessarily a benefit
         buff("audio.musicTempoAdjustmentFactor", "Music Tempo Adjust", "percent", "beneft_when_positive"),
         buff("esoteric.sceneChangeErrorChance", "Door Error Chance", "percent", "beneft_when_positive"),
