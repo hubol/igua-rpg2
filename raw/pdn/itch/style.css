@@ -28,12 +28,25 @@ div.formatted_description.user_formatted {
 }
 
 .html_embed_widget button,
-.view_game_page .button {
+.view_game_page .donate .button {
+    --hubol-dark: #1457c9;
+    --hubol-lite: #ffffff;
    font-family: var(--itchio_font_family);
    font-size: 20px !important;
    padding: 10px 20px !important;
    height: unset !important;
    border-radius: 4px;
+   background-color: var(--hubol-dark);
+   border: solid 4px var(--hubol-dark) !important;
+   color: var(--hubol-lite);
+
+   transition: background-color 0.1s, border 0.1s, color 0.1s;
+
+   &:hover {
+      background-color: var(--hubol-lite);
+      border: solid 4px var(--hubol-dark) !important;
+      color: var(--hubol-dark);
+   }
 }
 
 .view_html_game_page {
