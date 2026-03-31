@@ -22,6 +22,7 @@ const actions = [
     "WorldMap_Interact",
     "WorldMap_MoveUp",
     "WorldMap_MoveDown",
+    "Quit",
 ] as const;
 
 export type Action = typeof actions[number];
@@ -44,6 +45,7 @@ const keyboardControls: KeyboardControls<Action> = {
     WorldMap_Interact: "Space",
     WorldMap_MoveUp: "ArrowUp",
     WorldMap_MoveDown: "ArrowDown",
+    Quit: "Escape",
 };
 
 const { button, axis, axisUnit } = GamepadControl;
@@ -98,6 +100,7 @@ const gamepadControls: GamepadControls<Action> = {
         axis(StandardMapping.Axis.JoystickLeftVertical, -1),
         axis(StandardMapping.Axis.JoystickRightVertical, -1),
     ],
+    Quit: [],
 };
 
 const message = {

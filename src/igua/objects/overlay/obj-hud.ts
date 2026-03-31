@@ -1,6 +1,7 @@
 import { Container, DisplayObject, Graphics, Point, Rectangle, Sprite, Texture } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
+import { Environment } from "../../../lib/environment";
 import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
 import { MusicTrack } from "../../../lib/game-engine/audio/asshat-jukebox";
 import { Coro } from "../../../lib/game-engine/routines/coro";
@@ -18,7 +19,7 @@ import { renderer } from "../../current-pixi-renderer";
 import { DataIdol } from "../../data/data-idol";
 import { DataPocketItem } from "../../data/data-pocket-item";
 import { DataSongTitle } from "../../data/data-song-title";
-import { Cutscene } from "../../globals";
+import { Cutscene, Input } from "../../globals";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { mxnHudModifiers } from "../../mixins/mxn-hud-modifiers";
@@ -63,6 +64,7 @@ export function objHud() {
         poisonBuildUpObj,
         objHeliumBuildUp(),
         songInfoBuildUpObj,
+        ...createQuitObjs(),
     ];
 
     const statusObjsContainer = container(...statusObjs);
@@ -465,6 +467,38 @@ function objPocketInfo() {
             }
         })
         .merge({ effectiveHeight: 10 });
+}
+
+function createQuitObjs() {
+    if (Environment.isElectron) {
+        const max = 180;
+        let value = 0;
+        return [
+            objBuildUp({
+                message: "Keep holding ESCAPE to quit...",
+                get value() {
+                    return value;
+                },
+                max,
+            })
+                .step((self) => {
+                    if (!Cutscene.isPlaying && Input.isDown("Quit")) {
+                        if (self.parent.worldVisible) {
+                            value += 1;
+                        }
+
+                        if (value >= max) {
+                            value = max;
+                            window.close();
+                        }
+                    }
+                    else {
+                        value = 0;
+                    }
+                }),
+        ];
+    }
+    return [];
 }
 
 function createSongInfoObjs() {
