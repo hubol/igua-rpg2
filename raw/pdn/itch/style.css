@@ -1,0 +1,60 @@
+#header img {
+   margin-top: 32px;
+   margin-left: 40px;
+}
+
+.screenshot_list {
+   display: none;
+}
+
+div.formatted_description.user_formatted {
+   & > p {
+      display: flex;
+      flex-direction: column;
+      padding: 0 20px;
+      gap: 0;
+
+      & > br {
+        display: none;
+      }
+   }
+}
+
+.html_embed_widget :has(button) {
+   background-color: white;
+   padding: 0 !important;
+   width: unset !important;
+   height: unset !important;
+}
+
+.html_embed_widget button,
+.view_game_page .button {
+   font-family: var(--itchio_font_family);
+   font-size: 20px !important;
+   padding: 10px 20px !important;
+   height: unset !important;
+   border-radius: 4px;
+}
+
+.view_html_game_page {
+   margin-top: 20px;
+   display: grid;
+   column-gap: 40px;
+   grid-template-columns: 1fr 1fr;
+
+   & > *:nth-child(1) {
+      justify-self: end;
+   }
+
+   & > *:nth-child(2) {
+      justify-self: start;
+   }
+}
+
+.view_html_game_page::before {
+   display: none !important;
+}
+
+.columns {
+   grid-column: span 2;
+}
