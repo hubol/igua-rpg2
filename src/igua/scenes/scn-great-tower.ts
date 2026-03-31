@@ -6,14 +6,17 @@ import { holdf } from "../../lib/game-engine/routines/hold";
 import { interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
+import { ZIndex } from "../core/scene/z-index";
 import { DramaQuests } from "../drama/drama-quests";
 import { dramaShop } from "../drama/drama-shop";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { objCharacterKingSpino } from "../objects/characters/obj-character-king-spino";
 import { CtxPocketItems } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objFxBurstDusty } from "../objects/effects/obj-fx-burst-dusty";
+import { playerObj } from "../objects/obj-player";
 import { objPipe, ObjTerrain } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
 import { SceneChanger } from "../systems/scene-changer";
@@ -155,10 +158,16 @@ function enrichRacePipesRegion(lvl: LvlType.GreatTower) {
 }
 
 function enrichReward(lvl: LvlType.GreatTower) {
-    lvl.EndingRewarder.mixin(mxnCutscene, function* () {
-        yield* show("You did great.");
-        yield* DramaQuests.complete("GreatTower");
-        yield* show("Bye-bye!!");
-        SceneChanger.create({ sceneName: scnWorldMap.name, checkpointName: "" })!.changeScene();
-    });
+    objCharacterKingSpino()
+        .at(lvl.EndingRewarderMarker)
+        .scaled(-1, 1)
+        .zIndexed(ZIndex.CharacterEntities)
+        .mixin(mxnCutscene, function* () {
+            yield* show("You did great.");
+            yield* DramaQuests.complete("GreatTower");
+            yield* show("Bye-bye!!");
+            SceneChanger.create({ sceneName: scnWorldMap.name, checkpointName: "" })!.changeScene();
+        })
+        .step(self => self.interact.enabled = playerObj.isOnGround)
+        .show();
 }

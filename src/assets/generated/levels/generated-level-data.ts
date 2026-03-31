@@ -1394,7 +1394,6 @@ export const Lvl = {
       TerrainGrassMessy28px_7: d(Tx.Terrain.Grass.Messy28px, { x: 107, y: 1929, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xd0e840 }, "TerrainDecals"),
       TerrainGrassMessy28px_8: d(Tx.Terrain.Grass.Messy28px, { x: 106, y: 1962, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xd0e840 }, "TerrainDecals"),
       TerrainGrassMessy28px_9: d(Tx.Terrain.Grass.Messy28px, { x: 106, y: 1995, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xd0e840 }, "TerrainDecals"),
-      EndingRewarder: d(Tx.Characters.ItemRescueAngelDistant, { x: 496, y: 112, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       FoliageLeaf18: d(Tx.Foliage.Leaf18, { x: 148, y: 2224, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x579923 }, "TerrainDecals"),
       FoliageLeaf18_1: d(Tx.Foliage.Leaf18, { x: 190, y: 2223, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x579923 }, "TerrainDecals"),
       FoliageLeaf18_2: d(Tx.Foliage.Leaf18, { x: 260, y: 2224, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x579923 }, "TerrainDecals"),
@@ -1707,6 +1706,7 @@ export const Lvl = {
       GateHorizontal: e(r["GateHorizontal"], { x: -40, y: 2096, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromGreatTower", name: "", depth: 0 } }, "RegionEntities"),
       EnemyHeartRegion: e(r["Region"], { x: 88, y: 864, width: 448, height: 32, values: { name: "EnemyHeartRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       GateHorizontal_1: e(r["GateHorizontal"], { x: -56, y: 1392, height: 88, flippedX: true, values: { sceneName: "scnGreatTowerBalcony", checkpointName: "fromTower", name: "", depth: 0 } }, "RegionEntities"),
+      EndingRewarderMarker: e(r["Marker"], { x: 496, y: 128, values: { name: "EndingRewarderMarker", depth: 0 }, tint: 0x9e00ff }, "MarkerEntities"),
     };
   },
   GrottoIndianaShop: () => {

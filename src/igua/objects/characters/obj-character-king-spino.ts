@@ -89,7 +89,7 @@ export function objCharacterKingSpino() {
     )
         .mixin(mxnHasHead, { obj: headObj })
         .mixin(mxnDetectPlayer)
-        .mixin(mxnSpeaker, { name: "King Spino", tintPrimary: 0xC4C4C4, tintSecondary: 0xFFB600 })
+        .mixin(mxnSpeaker, { name: "King Spino", tintPrimary: 0xA0A0A0, tintSecondary: 0xFFB600 })
         .pivoted(36, 102);
 }
 

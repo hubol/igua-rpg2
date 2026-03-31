@@ -18,7 +18,9 @@ export function scnDevSnail() {
         .mixin(mxnCutscene, function* () {
             yield* show("Hi sucker");
         })
-        .at(playerObj).add(0, -100).show();
+        .at(playerObj)
+        .scaled(-1, 1)
+        .show();
 
     // objAngelSnail().at(playerObj).add(90, 0).show();
 

@@ -16,7 +16,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 69,
       "gridCellsY": 286,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 496,
+          "y": 128,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#9e00ff",
+          "values": {"name": "EndingRewarderMarker", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",
@@ -516,19 +528,6 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 496,
-          "y": 112,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "characters/item rescue angel distant.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": "EndingRewarder"},
           "groupName": null
         },
         {
