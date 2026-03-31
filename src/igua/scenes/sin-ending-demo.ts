@@ -14,4 +14,12 @@ export function scnEndingDemo() {
     const lvl = Lvl.EndingDemo();
     lvl.SpikeRegion
         .mixin(mxnRpgAttack, { attack: atkSpikes });
+
+    function killPlayer() {
+        lvl.Door.objDoor.lock();
+        lvl.Pipe
+            .step(self => self.x -= 1);
+    }
+
+    // killPlayer();
 }
