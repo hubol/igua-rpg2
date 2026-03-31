@@ -2,6 +2,7 @@ import { BLEND_MODES } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Sfx } from "../../assets/sounds";
 import { interpr, interpv } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
@@ -36,14 +37,14 @@ export function scnEndingDemo() {
 
     const state = {
         get needAtLeastToWin() {
-            return 999 - Math.round(Rpg.character.buffs.esoteric.goodEndingChance * 10);
+            return Math.max(0, 999 - Math.round(Rpg.character.buffs.esoteric.goodEndingChance * 10));
         },
         rollingValue: Null<Integer>(),
     };
 
     {
         container(
-            objLabeledBubbleNumber("Need at least:", () => state.needAtLeastToWin),
+            objLabeledBubbleNumber("Need to beat:", () => state.needAtLeastToWin),
         )
             .coro(function* (self) {
                 yield () => state.rollingValue !== null;
@@ -94,14 +95,21 @@ export function scnEndingDemo() {
             yield sleep(500);
 
             for (let i = 0; i < 32; i++) {
+                Sfx.Collect.Valuable1.rate(0.5, 2).play();
                 state.rollingValue = Rng.intc(1, 1000);
                 yield sleep(Rng.int(90, 150));
             }
 
             yield sleep(500);
 
-            if (state.rollingValue! < state.needAtLeastToWin) {
+            if (state.rollingValue! <= state.needAtLeastToWin) {
                 yield* show("Oh no! You lost!");
+                if (state.rollingValue! === state.needAtLeastToWin) {
+                    yield* show(
+                        "Yes, I know, but you had to beat the number.",
+                        "Rules are rules!",
+                    );
+                }
                 yield interpv(kingSpinoObj.scale).steps(4).to(0, 0).over(750);
                 kingSpinoObj.destroy();
                 yield* killPlayer();

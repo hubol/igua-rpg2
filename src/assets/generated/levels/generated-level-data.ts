@@ -933,7 +933,7 @@ export const Lvl = {
       EnemySpikeBall_79: d(Tx.Enemy.SpikeBall, { x: 304, y: 272, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
       EnemySpikeBall_80: d(Tx.Enemy.SpikeBall, { x: 344, y: 304, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc394ff }, "FrontDecals"),
       SpikeRegion: e(r["Region"], { x: 32, y: 225, width: 448, height: 32, values: { name: "SpikeRegion", depth: 0 }, tint: 0xff0000 }, "RegionEntities"),
-      TextMarker: e(r["Marker"], { x: 296, y: 120, values: { name: "TextMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      TextMarker: e(r["Marker"], { x: 293, y: 120, values: { name: "TextMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       KingSpinoMarker: e(r["Marker"], { x: 112, y: 184, values: { name: "KingSpinoMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },

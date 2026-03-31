@@ -239,7 +239,7 @@ export namespace DataEquipment {
                         model.attributes.intelligence += rng.intc(-1, 1);
                         model.attributes.strength += rng.intc(-1, 1);
                         model.motion.walk.topSpeedIncreaseFactor += rng.intc(-20, 3);
-                        model.esoteric.goodEndingChance += rng.intc(5);
+                        model.esoteric.goodEndingChance += rng.intc(4);
                     };
                 })(),
             },
