@@ -789,8 +789,16 @@ export const Lvl = {
     };
   },
   EndingDemo: () => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x382856, terrainTint: 0x000000 });
     return {
+      StoneBrickRows1: d(Tx.Stone.BrickRows1, { x: 69, y: 124, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b1a4b }, "BackgroundDecals"),
+      StoneBrickRows1_1: d(Tx.Stone.BrickRows1, { x: 468, y: 141, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b1a4b }, "BackgroundDecals"),
+      StoneBrickRows1_2: d(Tx.Stone.BrickRows1, { x: 200, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b1a4b }, "BackgroundDecals"),
+      StoneBrickRows0: d(Tx.Stone.BrickRows0, { x: 334, y: 146, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b1a4b }, "BackgroundDecals"),
+      StoneBrickRows0_1: d(Tx.Stone.BrickRows0, { x: 368, y: 237, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b1a4b }, "BackgroundDecals"),
+      StoneBrickRows0_2: d(Tx.Stone.BrickRows0, { x: 35, y: 223, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b1a4b }, "BackgroundDecals"),
+      StoneBrickRows0_3: d(Tx.Stone.BrickRows0, { x: 411, y: 98, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b1a4b }, "BackgroundDecals"),
+      ShapesSquare32: d(Tx.Shapes.Square32, { x: 217, y: 107, scaleX: 4.4, scaleY: 1.15, rotation: 0, originX: 0, originY: 0, tint: 0x2b1a4b }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 0, y: 64, width: 32, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 472, y: 64, width: 32, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 32, y: 64, width: 440, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
@@ -804,6 +812,14 @@ export const Lvl = {
       Slope_1: e(r["Slope"], { x: 240, y: 233, width: 128, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x5d3daa }, "TerrainEntities"),
       Slope_2: e(r["Slope"], { x: 360, y: 228, width: 128, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x5d3daa }, "TerrainEntities"),
       Block_8: e(r["Block"], { x: 0, y: -56, width: 504, height: 120, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      TownSignageTheEnd: d(Tx.Town.Signage.TheEnd, { x: 73, y: 73, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x382856 }, "TerrainDecals"),
+      TownSignageTheEnd_1: d(Tx.Town.Signage.TheEnd, { x: 151, y: 49, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x382856 }, "TerrainDecals"),
+      TownSignageTheEnd_2: d(Tx.Town.Signage.TheEnd, { x: 212, y: 73, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x382856 }, "TerrainDecals"),
+      TownSignageTheEnd_3: d(Tx.Town.Signage.TheEnd, { x: 285, y: 54, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x382856 }, "TerrainDecals"),
+      TownSignageTheEnd_4: d(Tx.Town.Signage.TheEnd, { x: 368, y: 77, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x382856 }, "TerrainDecals"),
+      TownSignageTheEnd_5: d(Tx.Town.Signage.TheEnd, { x: 440, y: 50, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x382856 }, "TerrainDecals"),
+      TownSignageTheEnd_6: d(Tx.Town.Signage.TheEnd, { x: 491, y: 78, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x382856 }, "TerrainDecals"),
+      TownSignageTheEnd_7: d(Tx.Town.Signage.TheEnd, { x: 9, y: 48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x382856 }, "TerrainDecals"),
       Door: e(r["Door"], { x: 408, y: 136, values: { sceneName: "scnSinSwamp", checkpointName: "fromEnding", name: "", depth: 0 } }, "Entities"),
       Player: e(r["Player"], { x: 368, y: 184, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
       EnemySpikeBall: d(Tx.Enemy.SpikeBall, { x: 56, y: 248, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
