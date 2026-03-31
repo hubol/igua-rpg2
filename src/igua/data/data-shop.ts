@@ -27,6 +27,11 @@ export namespace DataShop {
                         initialQuantity: 1,
                         price: { currency: "mechanical_idol_credits", deltaSold: 0, initial: 15 },
                     },
+                    {
+                        product: { kind: "key_item", id: "EquipmentGlue" },
+                        initialQuantity: 10,
+                        price: { currency: "mechanical_idol_credits", deltaSold: 0, initial: 10 },
+                    },
                 ],
             },
             BalltownOutskirtsSecret: {
@@ -114,6 +119,16 @@ export namespace DataShop {
             },
             Gluemaker: {
                 stocks: [
+                    {
+                        initialQuantity: 10,
+                        price: { currency: "combat", deltaSold: 100, initial: 150 },
+                        product: { kind: "key_item", id: "EquipmentGlue" },
+                    },
+                    {
+                        initialQuantity: 10,
+                        price: { currency: "valuables", deltaSold: 100, initial: 50 },
+                        product: { kind: "key_item", id: "EquipmentGlue" },
+                    },
                     {
                         initialQuantity: 10,
                         price: { currency: "pocket", deltaSold: 50, initial: 50 },
