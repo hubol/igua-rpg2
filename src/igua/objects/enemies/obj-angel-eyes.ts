@@ -27,6 +27,7 @@ export interface ObjAngelEyesArgs {
     gap: Integer;
     defaultEyelidRestingPosition: Integer;
     pupilRestStyle: PupilRestStyle;
+    leftOnly?: boolean;
 }
 
 const v = vnew();
@@ -74,6 +75,10 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
     )
         .at(rightEyeX, y);
 
+    if (args.leftOnly) {
+        rightEyeObj.invisible();
+    }
+
     const eyesObj = objEyes(leftEyeObj, rightEyeObj);
     eyesObj.stepsUntilBlink = Rng.int(40, 120);
 
@@ -115,7 +120,9 @@ export function objAngelEyes(args: ObjAngelEyesArgs) {
             },
             set injuredRight(value) {
                 injuredRightEyeObj.visible = value;
-                rightEyeObj.visible = !value;
+                if (!args.leftOnly) {
+                    rightEyeObj.visible = !value;
+                }
             },
             pupilPolarOffsets: Empty<VectorSimple>(),
         })

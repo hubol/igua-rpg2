@@ -4,10 +4,12 @@ import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
+import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { mxnSpeaker } from "../../mixins/mxn-speaker";
 import { mxnSpeakingMouth } from "../../mixins/mxn-speaking-mouth";
+import { objAngelEyes } from "../enemies/obj-angel-eyes";
 
 const [
     txBackLeg,
@@ -66,14 +68,29 @@ export function objCharacterKingSpino() {
             ),
             Sprite.from(txSkull),
             Sprite.from(txLip),
-            Sprite.from(txDemoEye),
+            objAngelEyes({
+                defaultEyelidRestingPosition: 0,
+                eyelidsTint: 0xA0A0A0,
+                gap: 0,
+                pupilRestStyle: {
+                    kind: "cross_eyed",
+                    offsetFromCenter: 3,
+                },
+                pupilsTint: 0x000000,
+                pupilsTx: Tx.Characters.KingSpino.Pupil,
+                scleraTx: Tx.Characters.KingSpino.Sclera,
+                leftOnly: true,
+            })
+                .at(95, 22),
             Sprite.from(txCrown).mixin(mxnSinePivot),
         )
             .mixin(mxnTinyBoilPivot),
         headObj,
     )
         .mixin(mxnHasHead, { obj: headObj })
-        .mixin(mxnSpeaker, { name: "King Spino", tintPrimary: 0xC4C4C4, tintSecondary: 0xFFB600 });
+        .mixin(mxnDetectPlayer)
+        .mixin(mxnSpeaker, { name: "King Spino", tintPrimary: 0xC4C4C4, tintSecondary: 0xFFB600 })
+        .pivoted(36, 102);
 }
 
 function mxnTinyBoilPivot(obj: DisplayObject) {
