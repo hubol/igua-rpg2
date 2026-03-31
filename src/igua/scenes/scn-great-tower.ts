@@ -12,11 +12,11 @@ import { dramaShop } from "../drama/drama-shop";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnInteractOnlyWhenPlayerIsOnGround } from "../mixins/mxn-interact-only-when-player-is-on-ground";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objCharacterKingSpino } from "../objects/characters/obj-character-king-spino";
 import { CtxPocketItems } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objFxBurstDusty } from "../objects/effects/obj-fx-burst-dusty";
-import { playerObj } from "../objects/obj-player";
 import { objPipe, ObjTerrain } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
 import { SceneChanger } from "../systems/scene-changer";
@@ -168,6 +168,6 @@ function enrichReward(lvl: LvlType.GreatTower) {
             yield* show("Bye-bye!!");
             SceneChanger.create({ sceneName: scnWorldMap.name, checkpointName: "" })!.changeScene();
         })
-        .step(self => self.interact.enabled = playerObj.isOnGround)
+        .mixin(mxnInteractOnlyWhenPlayerIsOnGround)
         .show();
 }

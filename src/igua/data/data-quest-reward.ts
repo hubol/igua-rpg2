@@ -135,6 +135,10 @@ export namespace DataQuestReward {
                 kind: "single",
                 reward: { kind: "equipment", id: "WalkTopSpeedAndMusicTempoDown", level: 1 },
             },
+            "GreatTower.Balcony.Fisherman.Appeased": {
+                kind: "single",
+                reward: { kind: "key_item", id: "MagicKey" },
+            },
             SimpleSecretHappy: {
                 kind: "single",
                 reward: { kind: "equipment", id: "WetnessCapacityUp", level: 1 },
