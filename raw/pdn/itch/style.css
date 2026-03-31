@@ -29,6 +29,7 @@ div.formatted_description.user_formatted {
 
 .html_embed_widget button,
 .view_game_page .donate .button {
+    --hubol-blck: #012265;
     --hubol-dark: #1457c9;
     --hubol-lite: #ffffff;
    font-family: var(--itchio_font_family);
@@ -39,13 +40,17 @@ div.formatted_description.user_formatted {
    background-color: var(--hubol-dark);
    border: solid 4px var(--hubol-dark) !important;
    color: var(--hubol-lite);
+   transform: translate(0, -8px);
+   box-shadow: 0 8px 0 var(--hubol-blck) !important;
 
-   transition: background-color 0.1s, border 0.1s, color 0.1s;
+   transition: background-color 0.1s, border 0.1s, color 0.1s, box-shadow 0.1s, transform 0.1s;
 
    &:hover {
       background-color: var(--hubol-lite);
       border: solid 4px var(--hubol-dark) !important;
       color: var(--hubol-dark);
+      transform: translate(0, 0);
+      box-shadow: 0 0px 0 var(--hubol-blck) !important;
    }
 }
 
