@@ -370,16 +370,6 @@
           "values": {"variant": "level1", "name": "", "depth": 0}
         },
         {
-          "name": "EnemyCactus",
-          "id": 28,
-          "_eid": "60289305",
-          "x": 288,
-          "y": 592,
-          "originX": 32,
-          "originY": 34,
-          "values": {"variant": "level1", "name": "", "depth": 0}
-        },
-        {
           "name": "Door",
           "id": 29,
           "_eid": "88296692",
@@ -388,6 +378,16 @@
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnEndingDemo", "checkpointName": "fromSwamp", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemyCactus",
+          "id": 31,
+          "_eid": "60289305",
+          "x": 288,
+          "y": 592,
+          "originX": 32,
+          "originY": 34,
+          "values": {"variant": "level1", "name": "", "depth": 0}
         }
       ]
     },
@@ -1093,12 +1093,24 @@
       "gridCellsY": 85,
       "decals": [
         {
+          "x": 56,
+          "y": 512,
+          "scaleX": 4,
+          "scaleY": 4,
+          "rotation": 0,
+          "tint": "#482c6d",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
           "x": 112,
-          "y": 534,
+          "y": 531,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
-          "tint": "#ffffff",
+          "tint": "#d5c3ed",
           "texture": "town/signage/the end.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -1113,6 +1125,30 @@
           "rotation": 0,
           "tint": "#482c6d",
           "texture": "foliage/tree dead.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 64,
+          "y": 560,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#252525",
+          "texture": "stone/brick rows 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 169,
+          "y": 541,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#252525",
+          "texture": "stone/brick rows 0.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
