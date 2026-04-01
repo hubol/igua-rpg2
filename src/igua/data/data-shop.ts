@@ -79,8 +79,13 @@ export namespace DataShop {
                     // maybe he has two stores instead
                     {
                         initialQuantity: 99,
-                        price: { currency: "valuables", deltaSold: 25, initial: 15 },
+                        price: { currency: "valuables", deltaSold: 5, initial: 15 },
                         product: { kind: "potion", id: "PoisonRestore" },
+                    },
+                    {
+                        initialQuantity: 99,
+                        price: { currency: "valuables", deltaSold: 1, initial: 25 },
+                        product: { kind: "potion", id: "RestoreHealth" },
                     },
                 ],
             },

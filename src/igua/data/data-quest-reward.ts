@@ -52,10 +52,8 @@ export namespace DataQuestReward {
             "NewBalltown.Fanatic.FruitDelivery": {
                 kind: "in_order",
                 rewards: [
-                    { kind: "currency", id: "valuables", count: 50 },
-                    { kind: "currency", id: "valuables", count: 50 },
-                    { kind: "currency", id: "valuables", count: 50 },
-                    { kind: "currency", id: "valuables", count: 50 },
+                    { kind: "potion", id: "RestoreHealth", count: 3 },
+                    { kind: "potion", id: "RestoreHealth", count: 4 },
                     { kind: "potion", id: "AttributeIntelligenceUp" },
                 ],
                 extend: {

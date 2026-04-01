@@ -237,7 +237,7 @@ function enrichMechanicalIdol(lvl: LvlType.NewBalltown) {
                 return `                             ${characters.join(" ")}`;
             }
 
-            const presentStarOnLastAsk = Rpg.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount >= 5;
+            const presentStarOnLastAsk = Rpg.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount >= 3;
 
             for (let i = 0; i < characters.length; i++) {
                 const isLast = i === characters.length - 1;

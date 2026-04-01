@@ -2,7 +2,9 @@ import { BLEND_MODES } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { interpv } from "../../lib/game-engine/routines/interp";
+import { Integer } from "../../lib/math/number-alias-types";
 import { Jukebox } from "../core/igua-audio";
+import { DataPocketItem } from "../data/data-pocket-item";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
 import { show } from "../drama/show";
@@ -23,12 +25,17 @@ export function scnNewBalltownFanatic() {
 function enrichSecretSymbols(lvl: LvlType.NewBalltownFanatic) {
     const { ballFruitFanatic } = Rpg.flags.newBalltown;
 
+    function isRevealed(index: Integer) {
+        const count = ballFruitFanatic.succesfulDeliveriesCount;
+        return count > 0 && (count + 2) > index;
+    }
+
     lvl.SecretSymbols.children.forEach((obj, i) => {
-        if (ballFruitFanatic.succesfulDeliveriesCount > i) {
+        if (isRevealed(i)) {
             return;
         }
         obj.invisible().coro(function* () {
-            yield () => ballFruitFanatic.succesfulDeliveriesCount > i;
+            yield () => isRevealed(i);
             obj.visible = true;
             obj.scale.set(0, 0);
             yield interpv(obj.scale).steps(4).to(1, 1).over(300);
@@ -101,6 +108,9 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
                 );
                 Rpg.flags.newBalltown.ballFruitFanatic.typePreference = "BallFruitTypeA";
             }
+        }
+        else if (typePreference) {
+            yield* show("Please bring me 5: " + DataPocketItem.getById(typePreference).name + ".");
         }
     });
 }
