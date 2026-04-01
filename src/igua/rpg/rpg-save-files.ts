@@ -10,10 +10,10 @@ import { RpgProgressData } from "./rpg-progress";
 export namespace RpgSaveFiles {
     export const saveEvents = new Array<"success" | "error">();
 
-    const lastOpenedIndexStorage = new StorageEntry.Local<Integer>("igua-rpg2-last-loaded-index");
+    const lastOpenedIndexStorage = new StorageEntry.Local<Integer>("igua-rpg2-demo-last-loaded-index");
 
     const saveFileLocalStorageEntries = range(3)
-        .map(i => new StorageEntry.Local<RpgProgressData>("igua-rpg2-save-" + i));
+        .map(i => new StorageEntry.Local<RpgProgressData>("igua-rpg2-demo-save-" + i));
 
     export namespace Current {
         let currentIndex = -1;
