@@ -1,5 +1,6 @@
 import { Container } from "pixi.js";
 import { objText } from "../../assets/fonts";
+import { Sfx } from "../../assets/sounds";
 import { interpc, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
@@ -22,7 +23,8 @@ export function mxnRpgStatusBerry(obj: MxnRpgStatus & Container) {
             if (berryObjs.length || stepsSinceBerry < 6 * 60 || obj.status.health >= obj.status.healthMax) {
                 return;
             }
-            // TODO sfx
+
+            obj.play(Sfx.Enemy.Berry.Announce.rate(0.9, 1.1));
 
             const message = Rng.choose(
                 "It's berry time",

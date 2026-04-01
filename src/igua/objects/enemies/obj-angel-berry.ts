@@ -1,4 +1,5 @@
 import { Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { factor, interp, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
@@ -54,11 +55,15 @@ export function objAngelBerry(targetObj: MxnRpgStatus) {
             }
         })
         .mixin(mxnEnemy, { rank: ranks.level0, hurtboxes: [] })
-        .handles("mxnEnemy.died", (self) => objFxBurst32().at(self).add(0, -7).tinted(0xB85BFF).show())
+        .handles("mxnEnemy.died", (self) => {
+            objFxBurst32().at(self).add(0, -7).tinted(0xB85BFF).show();
+            self.play(Sfx.Enemy.Berry.Die.rate(0.9, 1.1));
+        })
         .pivoted(13, 24)
         .coro(function* (self) {
             yield sleepf(3);
             yield () => self.isOnGround;
+            self.play(Sfx.Enemy.Berry.Land.rate(0.9, 1.1));
             self.hurtboxes.push(hurtboxObj);
             const dirtObj = Sprite.from(txs.txDirt).tinted(scene.style.terrainTint).show(self).at(0, 6);
             yield interpvr(dirtObj).factor(factor.sine).to(0, 0).over(250);
@@ -67,6 +72,7 @@ export function objAngelBerry(targetObj: MxnRpgStatus) {
             while (!targetObj.destroyed) {
                 yield interp(tintFilter, "factor").steps(8).to(1).over(1000);
                 tintFilter.factor = 0;
+                self.play(Sfx.Enemy.Berry.Spawn.rate(0.9, 1.1));
                 const heartObj = objAngelBerryHeart(targetObj).at(self).add(0, -9).show();
                 yield () => heartObj.destroyed;
             }
@@ -95,6 +101,7 @@ function objAngelBerryHeart(targetObj: MxnRpgStatus) {
 
                 if (self.collidesOne(targetObj.hurtboxes)) {
                     targetObj.heal(consts.healValue);
+                    self.play(Sfx.Enemy.Berry.Heal.rate(0.9, 1.1));
                     objFxHeart.objBurst(6, 5).at(self).show();
                     self.destroy();
                 }
