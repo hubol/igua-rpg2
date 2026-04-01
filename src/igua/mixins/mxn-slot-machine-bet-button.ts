@@ -1,4 +1,5 @@
 import { DisplayObject } from "pixi.js";
+import { Sfx } from "../../assets/sounds";
 import { DramaWallet } from "../drama/drama-wallet";
 import { show } from "../drama/show";
 import { Cutscene } from "../globals";
@@ -19,6 +20,7 @@ export function mxnSlotMachineBetButton(obj: DisplayObject, slotMachineObj: ObjS
 
                         if (!Rpg.wallet.canAfford(objSlotMachine.pricePerSpin)) {
                             Cutscene.play(function* () {
+                                Sfx.Interact.Error.play();
                                 yield* show(
                                     "Minimum bet is "
                                         + RpgEconomy.Offer.toString(pricePerSpin.price, pricePerSpin.currency)

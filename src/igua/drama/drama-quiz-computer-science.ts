@@ -1,5 +1,6 @@
 import { DisplayObject, Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
+import { Sfx } from "../../assets/sounds";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { Integer } from "../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../lib/math/rng";
@@ -52,6 +53,7 @@ export function* dramaQuizComputerScience({ difficulty, messageObj }: DramaQuizC
         return true;
     }
 
+    Sfx.Interact.Error.play();
     yield* show(
         `Sorry, the correct answer was:\n${program.correctOuptut}`,
     );

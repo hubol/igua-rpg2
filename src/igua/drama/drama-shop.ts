@@ -1,5 +1,6 @@
 import { Container, Graphics, Rectangle, Sprite, Texture } from "pixi.js";
 import { objText } from "../../assets/fonts";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
@@ -230,13 +231,16 @@ function objDramaShopStock(
                 }
 
                 if (result.failures.cantAfford) {
+                    Sfx.Interact.Error.play();
                     showCantAffordError();
                     objects.stockPriceObj.mxnErrorVibrate.methods.vibrate();
                 }
                 if (result.failures.isSoldOut) {
+                    Sfx.Interact.Error.play();
                     objects.limitedQuantityObj.mxnErrorVibrate.methods.vibrate();
                 }
                 if (result.failures.potionInventoryHasInsufficientSlots) {
+                    Sfx.Interact.Error.play();
                     showPotionInventoryHasInsufficientSlotsError();
                 }
             }
