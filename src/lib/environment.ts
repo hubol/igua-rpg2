@@ -23,6 +23,6 @@ export const Environment = {
         return Environment.isProduction && !Environment.isElectron;
     },
     get includesDevTools() {
-        return !Environment.isElectron && !Environment.isRunningFromItchCdn;
+        return Environment.isDev;
     },
 };
