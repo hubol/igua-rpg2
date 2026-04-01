@@ -1,6 +1,8 @@
 import { Graphics, LINE_CAP, Matrix, Sprite, Texture } from "pixi.js";
+import { Sfx } from "../../assets/sounds";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interp } from "../../lib/game-engine/routines/interp";
+import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { cyclic } from "../../lib/math/number";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
@@ -8,7 +10,9 @@ import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
+import { Null } from "../../lib/types/null";
 import { DramaWallet } from "../drama/drama-wallet";
+import { GenerativeMusicUtils } from "../lib/generative-music-utils";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
@@ -32,8 +36,12 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
     const fallbackSymbolTx = [...config.symbolTxs.values()][0];
     const pricePerSpin: RpgEconomy.Offer = { currency: "valuables", price: rules.price };
 
+    let reelsAdvancedCount = 0;
+
     const reelObjs = rules.reels.map((reel, i) =>
-        objReel({ config, reel, rules }, fallbackSymbolTx).at(i * config.reel.gap, -symbolPadding * config.slot.gap)
+        objReel({ config, reel, rules }, fallbackSymbolTx)
+            .at(i * config.reel.gap, -symbolPadding * config.slot.gap)
+            .handles("objReel.advanced", () => reelsAdvancedCount++)
     );
 
     const maskObj = new Graphics().beginFill(0xffffff).drawRect(
@@ -144,6 +152,7 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
                 }
 
                 if (totalPrize > 0) {
+                    self.play(Sfx.Interact.SlotMachine.Win0);
                     self.coro(function* () {
                         yield* DramaWallet.rewardValuables(totalPrize, "gambling");
                     });
@@ -153,6 +162,13 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
                 }
 
                 api.paidForGame = false;
+            }
+        })
+        .coro(function* (self) {
+            while (true) {
+                yield onPrimitiveMutate(() => reelsAdvancedCount);
+                self.play(Sfx.Interact.SlotMachine.Tone0.rate(GenerativeMusicUtils.getRate("major")));
+                yield sleep(100);
             }
         });
 }
@@ -198,6 +214,13 @@ function objReel(args: ObjReelArgs, fallbackSymbolTx: Texture) {
                     symbolObjs[i].texture = tx;
                 }
                 symbolObjs[i].visible = Boolean(tx);
+            }
+        })
+        .dispatches<"objReel.advanced">()
+        .coro(function* (self) {
+            while (true) {
+                yield onPrimitiveMutate(() => Math.floor(controls.offset));
+                self.dispatch("objReel.advanced");
             }
         });
 }

@@ -82,4 +82,8 @@ export namespace GenerativeMusicUtils {
         }
         yield Rng.bool() ? cScaleRates[ironicRateIndex] : (cScaleRates[rootIndex] * (Rng.bool() ? 0.5 : 2));
     }
+
+    export function getRate(scale: Scale) {
+        return cScaleRates[Rng.item(scales[scale])];
+    }
 }
