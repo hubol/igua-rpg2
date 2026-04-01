@@ -122,14 +122,14 @@ export namespace DataPotion {
                 description: "Terrifying sound. Annoys iguanas.",
                 stinkLineTint: 0x808080,
                 texture: Tx.Collectibles.Potion.Cowbell,
-                sound: null,
+                sound: Sfx.Effect.Potion.AnnoyIguanas,
             },
             TaxiWhistleCasino: {
                 name: "Taxi Whistle",
                 description: "Get a ride to the Casino. Exceedingly rare.",
                 stinkLineTint: 0x808080,
                 texture: Tx.Collectibles.Potion.Whistle,
-                sound: null,
+                sound: Sfx.Effect.Potion.TaxiWhistle,
             },
             __Fallback__: {
                 name: "???",
