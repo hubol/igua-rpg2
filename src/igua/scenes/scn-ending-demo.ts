@@ -134,6 +134,7 @@ export function scnEndingDemo() {
         Jukebox.play(Mzk.FuckerLand, 0);
         const height = scene.level.height;
         yield interpr(scene.level, "height").to(height + 250).over(1000);
+        Sfx.Cutscene.PipeMove.play();
         lvl.Pipe
             .step(self => self.x -= 1);
     }

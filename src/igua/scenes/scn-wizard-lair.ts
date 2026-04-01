@@ -1,5 +1,6 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Sfx } from "../../assets/sounds";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { container } from "../../lib/pixi/container";
@@ -74,6 +75,7 @@ export function scnWizardLair() {
             }, { speaker: wizardObj, camera: { end: "pan_to_player" } })
                 .done;
 
+            Sfx.Cutscene.PipeMove.play();
             yield interpvr(lvl.SpaceStationPipe).factor(factor.sine).translate(-80, 0).over(1000);
         });
 }
