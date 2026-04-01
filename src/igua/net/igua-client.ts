@@ -16,7 +16,7 @@ const url = (function (devServiceEnvironment: "dev" | "prod" = "dev") {
             url: "http://localhost:9999",
         },
         prod: {
-            url: "ws://igua-net-f2fb9b46b4a2.herokuapp.com",
+            url: "wss://igua-net-f2fb9b46b4a2.herokuapp.com",
         },
     };
 
