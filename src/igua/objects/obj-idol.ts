@@ -47,9 +47,11 @@ function getHealthText(idol: RpgIdol) {
 }
 
 export function objIdol({ uid }: OgmoEntities.Idol) {
+    const collisionShapeObj = new Graphics().beginFill(0).drawRect(-10, -10, 20, 20).invisible();
     const idol = Rpg.idol(uid);
 
     const controlledIdolObj = objIdol.objControlled(() => idol.idolId)
+        .collisionShape(CollisionShape.DisplayObjects, [collisionShapeObj])
         .mixin(mxnCutscene, function* () {
             const offer = yield* DramaInventory.askWhichAndRemoveOne(keyItems);
             if (offer) {
@@ -60,7 +62,7 @@ export function objIdol({ uid }: OgmoEntities.Idol) {
 
     const bubbleNumberObj = objUiBubbleNumber({ value: getHealthText(idol) }).at(0, 14).invisible();
 
-    return container(controlledIdolObj, bubbleNumberObj)
+    return container(collisionShapeObj, controlledIdolObj, bubbleNumberObj)
         .step(() => {
             idol.tick();
             bubbleNumberObj.visible = !idol.isEmpty;
@@ -70,19 +72,13 @@ export function objIdol({ uid }: OgmoEntities.Idol) {
 }
 
 function objControlled(idolIdProvider: () => DataIdol.Id | null) {
-    const collisionShapeObj = new Graphics().beginFill(0).drawRect(-10, -10, 20, 20).invisible();
-
-    return container(
-        objTransitionedSprite({
-            txProvider: () => styles.get(idolIdProvider()!)?.tx ?? null,
-            anchorProvider: () => {
-                const style = styles.get(idolIdProvider()!);
-                return style ? vnew(style.pivot).scale(1 / style.tx.width, 1 / style.tx.height) : [0, 0];
-            },
-        })
-            .collisionShape(CollisionShape.DisplayObjects, [collisionShapeObj]),
-        collisionShapeObj,
-    );
+    return objTransitionedSprite({
+        txProvider: () => styles.get(idolIdProvider()!)?.tx ?? null,
+        anchorProvider: () => {
+            const style = styles.get(idolIdProvider()!);
+            return style ? vnew(style.pivot).scale(1 / style.tx.width, 1 / style.tx.height) : [0, 0];
+        },
+    });
 }
 
 objIdol.objControlled = objControlled;
