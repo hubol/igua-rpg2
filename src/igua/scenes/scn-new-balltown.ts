@@ -15,6 +15,7 @@ import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DramaFacts } from "../drama/drama-facts";
+import { DramaGifts } from "../drama/drama-gifts";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
 import { dramaShop } from "../drama/drama-shop";
@@ -110,6 +111,15 @@ function enrichOliveFanatic(lvl: LvlType.NewBalltown) {
                 "Did you know that the olives that grow in New Balltown aren't brined?",
                 "The salt mines directly below us give the olives a delicious flavor!",
             );
+
+            if (Rpg.gift("NewBalltown.OliveFanatic")) {
+                yield* show(
+                    "Thanks for listening to me geek out about olives :-)",
+                    "Here is a food that might help you on your journey!",
+                );
+
+                yield* DramaGifts.give("NewBalltown.OliveFanatic");
+            }
         }
         lvl.OliveFanatic.isDucking = true;
         yield sleep(500);

@@ -6,6 +6,9 @@ export namespace DataGift {
 
     export const Manifest = DataLib.createManifest(
         {
+            "NewBalltown.OliveFanatic": {
+                item: { kind: "potion", id: "AttributeHealthUp" },
+            },
             "StrangeMarket.GreeterShoe": {
                 item: { kind: "equipment", id: "PoisonRing", level: 1 },
             },

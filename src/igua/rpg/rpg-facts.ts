@@ -2,7 +2,7 @@ import { DataFact } from "../data/data-fact";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
 
 const consts = {
-    capacities: [1, 5, 9, 12],
+    capacities: [1, 3, 5, 7, 8],
 };
 
 export class RpgFacts {
