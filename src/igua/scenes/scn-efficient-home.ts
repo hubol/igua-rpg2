@@ -172,7 +172,10 @@ function enrichRoom2(lvl: LvlType.EfficientHome) {
         .show();
 
     lvl.CloudHouseRingerNpc
-        .handles("mxnSpeaker.speakingStarted", self => self.speed.y = -2)
+        .handles("mxnSpeaker.speakingStarted", self => {
+            self.play(Sfx.Cutscene.EfficientHomeRingerBell.rate(0.95, 1.1));
+            self.speed.y = -2;
+        })
         .mixin(mxnCutscene, function* () {
             if (!lvl.CloudHouseRingerNpc.speaker.spokeOnceInCurrentScene) {
                 yield* show(`DING! It's me, ${lvl.CloudHouseRingerNpc.speaker.name}!`);

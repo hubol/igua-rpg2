@@ -1,6 +1,7 @@
 import { Container } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Sfx } from "../../assets/sounds";
 import { Jukebox } from "../core/igua-audio";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
@@ -65,7 +66,10 @@ function enrichEfficientHome(lvl: LvlType.GreatTowerBalcony) {
 
 function mxnLever(obj: Container, key: keyof RpgProgressData["flags"]["greatTower"]["balcony"]) {
     return obj
-        .mixin(mxnInteract, () => Rpg.flags.greatTower.balcony[key] = !Rpg.flags.greatTower.balcony[key])
+        .mixin(mxnInteract, () => {
+            obj.play(Sfx.Interact.EfficientHomeLever.rate(0.5, 0.6));
+            Rpg.flags.greatTower.balcony[key] = !Rpg.flags.greatTower.balcony[key];
+        })
         .step(self => self.flipV(Rpg.flags.greatTower.balcony[key] ? 1 : -1));
 }
 
