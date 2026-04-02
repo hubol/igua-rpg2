@@ -1,8 +1,11 @@
 import { objText } from "../../assets/fonts";
 import { Sfx } from "../../assets/sounds";
+import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
+import { holdf } from "../../lib/game-engine/routines/hold";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { container } from "../../lib/pixi/container";
+import { Null } from "../../lib/types/null";
 import { SceneLibrary } from "../core/scene/scene-library";
 import { DramaMisc } from "../drama/drama-misc";
 import { show } from "../drama/show";
@@ -23,13 +26,20 @@ export function mxnDoorNet(doorObj: ObjDoor) {
             .at(doorObj)
             .add(18, -3)
             .show();
-        const client = IguaClient.create({ roomId: doorObj.objDoor.sceneChanger.sceneName });
+        let client = Null<IguaClient>();
+        try {
+            client = IguaClient.create({ roomId: doorObj.objDoor.sceneChanger.sceneName });
+        }
+        catch (e) {
+            Logger.logUnexpectedError("mxnDoorNet", e as Error);
+        }
         yield* Coro.race([
             sleep(10_000),
-            () => client.isOnline,
+            () => Boolean(client?.isOnline),
+            holdf(() => client === null, 90),
         ]);
         fxConnectingObj.destroy();
-        if (!client.isOnline) {
+        if (!client || !client.isOnline) {
             yield* show("Couldn't go online. Maybe try again later?");
             return;
         }
@@ -37,7 +47,7 @@ export function mxnDoorNet(doorObj: ObjDoor) {
         yield sleep(1000);
         yield* DramaMisc.walkToDoor(playerObj, doorObj);
         const scene: (client: IguaClient) => any = SceneLibrary.findByName(doorObj.objDoor.sceneChanger.sceneName);
-        doorObj.objDoor.sceneChanger.scene = () => scene(client);
+        doorObj.objDoor.sceneChanger.scene = () => scene(client!);
         doorObj.objDoor.changeScene();
     };
 }
