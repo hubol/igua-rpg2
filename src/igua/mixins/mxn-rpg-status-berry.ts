@@ -38,13 +38,12 @@ export function mxnRpgStatusBerry(obj: MxnRpgStatus & Container) {
                 .add(0, -obj.height / 2)
                 .vround()
                 .mixin(mxnTextTyped, () => message)
+                .step(self => {
+                    if (obj.destroyed) {
+                        self.destroy();
+                    }
+                })
                 .show();
-
-            obj.on("destroyed", () => {
-                if (!textObj.destroyed) {
-                    textObj.destroy();
-                }
-            });
 
             yield () => textObj.text === message;
             yield interpc(textObj, "tint").steps(4).to(0xffffff).over(333);
