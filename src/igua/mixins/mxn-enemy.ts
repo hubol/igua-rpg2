@@ -23,8 +23,8 @@ interface MxnEnemyArgs {
 export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
     const { status, loot } = clone(args.rank);
 
-    const died = (attacker: RpgStatus.Model) => {
-        if (attacker.quirks.successfulAttacksRewardExperience) {
+    const died = (attacker: RpgStatus.Model | null) => {
+        if (attacker?.quirks.successfulAttacksRewardExperience) {
             Rpg.experience.reward.combat.onEnemyDefeat(args.rank.level);
         }
         const drop = Rpg.loot.drop(loot, status, Rpg.character.buffs.loot);
