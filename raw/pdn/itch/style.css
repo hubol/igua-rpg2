@@ -41,6 +41,7 @@ div.formatted_description.user_formatted {
    color: var(--hubol-lite);
    transform: translate(0, -8px);
    box-shadow: 0 8px 0 var(--hubol-blck) !important;
+   text-transform: capitalize;
 
    transition: background-color 0.1s, border 0.1s, color 0.1s, box-shadow 0.1s, transform 0.1s;
 
