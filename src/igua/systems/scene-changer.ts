@@ -31,7 +31,7 @@ export class SceneChanger {
         Rpg.character.position.sceneName = this.sceneName;
         Rpg.character.position.checkpointName = this.checkpointName;
         const forceError = Rng.float(100) <= Rpg.character.buffs.esoteric.sceneChangeErrorChance;
-        sceneStack.replace(forceError ? throwBootyError : this.scene, { useGameplay: true });
+        sceneStack.replace(forceError ? throwBootyError : this.scene);
         Logger.logInfo("SceneChanger.changeScene", `Took ${performance.now() - startMs}ms`);
     }
 

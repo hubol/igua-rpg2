@@ -56,7 +56,7 @@ function createSceneSwitcherEl() {
     });
 
     const onChange = (sceneName: string) => {
-        sceneStack.replace(SceneLibrary.findByName(sceneName), { useGameplay: false });
+        sceneStack.replace(SceneLibrary.findByName(sceneName));
         DevGameStartConfig.setExplicitSceneName(sceneName);
     };
 

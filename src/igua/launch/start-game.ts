@@ -24,7 +24,7 @@ export function startGame() {
 
     layers.recreateOverlay();
 
-    sceneStack.push(SceneLibrary.findByName(config.sceneName), { useGameplay: false });
+    sceneStack.push(SceneLibrary.findByName(config.sceneName));
     startAnimator();
 
     if (config.player.position && playerObj) {

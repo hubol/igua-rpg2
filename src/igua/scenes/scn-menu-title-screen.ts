@@ -98,7 +98,7 @@ export function scnMenuTitleScreen() {
 
             obj.objDoor.changeScene = () => {
                 RpgSaveFiles.Current.open(i);
-                sceneStack.replace(scnIguanaDesigner, { useGameplay: false });
+                sceneStack.replace(scnIguanaDesigner);
             };
         });
 

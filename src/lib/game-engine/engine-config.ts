@@ -4,7 +4,7 @@ import { SceneStack } from "./scene-stack";
 
 interface EngineConfigType {
     readonly renderer: PixiRenderer;
-    readonly sceneStack: SceneStack<unknown, unknown>;
+    readonly sceneStack: SceneStack<unknown>;
     readonly showDefaultStage: Container;
     readonly worldStage: Container;
 }

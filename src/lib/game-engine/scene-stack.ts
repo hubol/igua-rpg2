@@ -1,9 +1,9 @@
 import { Logger } from "./logger";
 
-export abstract class SceneStack<TSceneMeta, TSceneInstance> {
+export abstract class SceneStack<TSceneInstance> {
     protected readonly scenes: TSceneInstance[] = [];
 
-    protected abstract convert<T>(populateSceneFn: () => T, meta: TSceneMeta): TSceneInstance & { populateScene(): T };
+    protected abstract convert<T>(populateSceneFn: () => T): TSceneInstance & { populateScene(): T };
 
     protected abstract dispose(scene: TSceneInstance): void;
 
@@ -11,11 +11,11 @@ export abstract class SceneStack<TSceneMeta, TSceneInstance> {
 
     protected fallbackPopulateSceneFn: null | (() => unknown) = null;
 
-    push<T>(populateSceneFn: () => T, meta: TSceneMeta): T {
+    push<T>(populateSceneFn: () => T): T {
         const scenesLength = this.scenes.length;
 
         try {
-            const scene = this.convert(populateSceneFn, meta);
+            const scene = this.convert(populateSceneFn);
             this.scenes.push(scene);
             this.onScenesModified();
             return scene.populateScene();
@@ -24,7 +24,6 @@ export abstract class SceneStack<TSceneMeta, TSceneInstance> {
             const isFallback = populateSceneFn === this.fallbackPopulateSceneFn;
             Logger.logUnexpectedError("SceneStack", e as Error, {
                 populateSceneFn,
-                meta,
                 isFallback,
             });
             while (this.scenes.length > scenesLength) {
@@ -32,7 +31,7 @@ export abstract class SceneStack<TSceneMeta, TSceneInstance> {
             }
 
             if (this.fallbackPopulateSceneFn && !isFallback) {
-                return this.push(this.fallbackPopulateSceneFn, meta) as T;
+                return this.push(this.fallbackPopulateSceneFn) as T;
             }
 
             return null as T;
@@ -47,11 +46,11 @@ export abstract class SceneStack<TSceneMeta, TSceneInstance> {
         this.onScenesModified();
     }
 
-    replace<T>(populateSceneFn: () => T, meta: TSceneMeta) {
+    replace<T>(populateSceneFn: () => T) {
         while (this.scenes.length > 0) {
             this.pop();
         }
-        return this.push(populateSceneFn, meta);
+        return this.push(populateSceneFn);
     }
 
     asArray(): ReadonlyArray<TSceneInstance> {

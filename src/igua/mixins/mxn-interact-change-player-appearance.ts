@@ -22,6 +22,6 @@ export function mxnInteractChangePlayerAppearance(obj: DisplayObject, args: MxnI
                 return;
             }
 
-            sceneStack.replace(() => scnIguanaDesigner(Rpg.character.looks, popSceneChanger), { useGameplay: true });
+            sceneStack.replace(() => scnIguanaDesigner(Rpg.character.looks, popSceneChanger));
         });
 }

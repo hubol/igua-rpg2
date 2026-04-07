@@ -13,11 +13,7 @@ import { scnWorldMap } from "../../scenes/scn-world-map";
 import { Jukebox } from "../igua-audio";
 import { IguaLayers } from "../igua-layers";
 
-interface IguaSceneMeta {
-    useGameplay: boolean;
-}
-
-function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMeta) {
+function createIguaScene(layers: IguaLayers, source: Function) {
     const ticker = new AsshatTicker();
     const root = layers.scene.addChild(new TickerContainer(ticker, false).named(`Scene: ${source.name}`));
 
@@ -66,7 +62,7 @@ function createIguaScene(layers: IguaLayers, source: Function, meta: IguaSceneMe
 
 export type IguaScene = ReturnType<typeof createIguaScene>;
 
-export class IguaSceneStack extends SceneStack<IguaSceneMeta, IguaScene> {
+export class IguaSceneStack extends SceneStack<IguaScene> {
     constructor(
         private readonly _layers: IguaLayers,
         private readonly _setScene: (scene: IguaScene) => void,
@@ -76,8 +72,8 @@ export class IguaSceneStack extends SceneStack<IguaSceneMeta, IguaScene> {
         this.fallbackPopulateSceneFn = scnErrorRecoveryRoom;
     }
 
-    protected convert<T>(populateSceneFn: () => T, meta: IguaSceneMeta) {
-        const iguaScene = createIguaScene(this._layers, populateSceneFn, meta);
+    protected convert<T>(populateSceneFn: () => T) {
+        const iguaScene = createIguaScene(this._layers, populateSceneFn);
 
         return merge(iguaScene, {
             populateScene: populateSceneFn,
