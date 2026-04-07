@@ -5,13 +5,14 @@ import { Coro } from "../../../lib/game-engine/routines/coro";
 import { factor, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { container } from "../../../lib/pixi/container";
-import { mxnBoilMirrorRotate } from "../../mixins/mxn-boil-mirror-rotate";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
+import { mxnMoveIntoCamera } from "../../mixins/mxn-move-into-camera";
 
 const [txBack, txDecoration, txCongratulations, txYourNameIs] = Tx.Effects.NameChange.split({ width: 212 });
 
 export function objFxNameChange(name: string) {
     return container()
+        .mixin(mxnMoveIntoCamera, 3)
         .coro(function* (self) {
             const congratulationsObj = Sprite.from(txCongratulations)
                 .scaled(2, 2)
@@ -20,7 +21,7 @@ export function objFxNameChange(name: string) {
 
             yield* Coro.all([
                 interpv(congratulationsObj.scale).to(1, 1).over(250),
-                interpvr(self).factor(factor.sine).translate(0, -32).over(750),
+                interpvr(self).factor(factor.sine).translate(0, -64).over(750),
             ]);
 
             yield sleep(500);

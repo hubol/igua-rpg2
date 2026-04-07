@@ -28,8 +28,7 @@ export function scnDevDramaItem() {
         .show();
 
     Sprite.from(Tx.Placeholder)
-        .at(playerObj)
-        .add(100, 0)
+        .add(20, playerObj.y)
         .mixin(mxnCutscene, function* () {
             yield* DramaPlayerAttributes.setName(Rng.choose("dumb", "ass", "bitch"));
 
