@@ -3,6 +3,7 @@ import { objText } from "../../../assets/fonts";
 import { Sfx } from "../../../assets/sounds";
 import { ClipboardPojo } from "../../../lib/browser/clipboard-pojo";
 import { Environment } from "../../../lib/environment";
+import { Logger } from "../../../lib/game-engine/logger";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { SceneLocal } from "../../../lib/game-engine/scene-local";
@@ -116,11 +117,24 @@ function createConnectedInput(looks: IguanaLooks.Serializable) {
 
 export const CtxUiIguanaDesigner = new SceneLocal(context, "UiIguanaDesignerContext");
 
-export function objUiIguanaDesignerRoot(layout: Layout, looks?: IguanaLooks.Serializable) {
+interface ObjUiIguanaDesignerRootArgs {
+    layout: Layout;
+    looks: IguanaLooks.Serializable;
+    sceneChanger: SceneChanger | null;
+}
+
+export function objUiIguanaDesignerRoot(args: ObjUiIguanaDesignerRootArgs) {
+    if (Environment.isProduction && !args.sceneChanger) {
+        Logger.logContractViolationError(
+            "objUiIguanaDesignerRoot",
+            new Error("args.sceneChanger must be truthy when player-facing!"),
+        );
+    }
+
     const context = CtxUiIguanaDesigner.value;
 
-    context.layout = layout;
-    context.looks = looks ? clone(looks) : getDefaultLooks();
+    context.layout = args.layout;
+    context.looks = clone(args.looks);
 
     const c = container();
 
@@ -133,6 +147,8 @@ export function objUiIguanaDesignerRoot(layout: Layout, looks?: IguanaLooks.Seri
         c,
     );
 
+    const sceneChanger = args.sceneChanger;
+
     function objUiIguanaDesignerRootPage() {
         return objUiPage(
             UiVerticalLayout.apply(
@@ -140,7 +156,9 @@ export function objUiIguanaDesignerRoot(layout: Layout, looks?: IguanaLooks.Seri
                 UiVerticalLayout.Separator,
                 objUiDesignerNavigationButton("Inspiration", objUiIguanaDesignerInspirationPage),
                 UiVerticalLayout.Separator,
-                objUiDesignerNavigationButton("Done", objUiSavePage),
+                ...sceneChanger
+                    ? [objUiDesignerNavigationButton("Done", () => objUiSavePage(sceneChanger))]
+                    : [],
             ),
             { title: "Choose your looks.", selectionIndex: 0 },
         );
@@ -192,7 +210,7 @@ function objIguanaDesignerDevFeatures() {
     });
 }
 
-function objUiSavePage() {
+function objUiSavePage(sceneChanger: SceneChanger) {
     const horizontalMargin = 140;
     const width = 96;
 
@@ -207,8 +225,7 @@ function objUiSavePage() {
             yield layers.overlay.solid.fadeIn(500);
             const looks = CtxUiIguanaDesigner.value.looks;
             Rpg.character.looks = looks;
-            SceneChanger.create({ sceneName: scnWizardLair.name, checkpointName: "fromGameStart" })
-                .changeScene();
+            sceneChanger.changeScene();
             page.destroy();
             yield layers.overlay.solid.fadeOut(500);
         }, { camera: { end: "none" } });

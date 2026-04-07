@@ -4,6 +4,8 @@ import { Tx } from "../../../assets/textures";
 import { DataEquipment } from "../../data/data-equipment";
 import { DramaItem } from "../../drama/drama-item";
 import { mxnCutscene } from "../../mixins/mxn-cutscene";
+import { mxnInteractChangePlayerAppearance } from "../../mixins/mxn-interact-change-player-appearance";
+import { objCharacterKingSpino } from "../../objects/characters/obj-character-king-spino";
 import { playerObj } from "../../objects/obj-player";
 
 export function scnDevDramaItem() {
@@ -35,5 +37,10 @@ export function scnDevDramaItem() {
             });
         })
         .anchored(0.5, 1)
+        .show();
+
+    objCharacterKingSpino()
+        .at(400, playerObj.y)
+        .mixin(mxnInteractChangePlayerAppearance, { checkpointName: "fromAppearanceChange" })
         .show();
 }

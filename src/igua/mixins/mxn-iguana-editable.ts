@@ -17,7 +17,11 @@ export function mxnIguanaEditable(obj: ObjIguanaLocomotive, looks: IguanaLooks.S
             Cutscene.play(function* () {
                 CtxUiIguanaDesigner.destroy();
 
-                const designer = objUiIguanaDesignerRoot({ leftFacingPreviewPosition: [400, 240] }, looks);
+                const designer = objUiIguanaDesignerRoot({
+                    looks,
+                    layout: { leftFacingPreviewPosition: [400, 240] },
+                    sceneChanger: null,
+                });
                 designer.show(layers.overlay.dev);
                 yield () => DevKey.justWentDown("Escape");
                 designer.destroy();

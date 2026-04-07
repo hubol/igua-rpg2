@@ -8,10 +8,16 @@ import { approachLinear } from "../../lib/math/number";
 import { PseudoRng } from "../../lib/math/rng";
 import { Jukebox } from "../core/igua-audio";
 import { scene } from "../globals";
+import { getDefaultLooks } from "../iguana/get-default-looks";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
+import { SceneChanger } from "../systems/scene-changer";
 import { CtxUiIguanaDesigner, objUiIguanaDesignerRoot } from "../ui/iguana-designer/obj-ui-iguana-designer-root";
+import { scnWizardLair } from "./scn-wizard-lair";
 
-export function scnIguanaDesigner() {
+export function scnIguanaDesigner(
+    looks = getDefaultLooks(),
+    sceneChanger = SceneChanger.create({ sceneName: scnWizardLair.name, checkpointName: "fromGameStart" }),
+) {
     Jukebox.play(Mzk.FirstSong);
 
     const { LightShadowIrregularSmall, ThoughtBubbleGroup } = Lvl.MenuIguanaDesigner();
@@ -25,7 +31,12 @@ export function scnIguanaDesigner() {
     }
 
     ThoughtBubbleGroup.children.forEach(x => x.mixin(mxnBoilPivot));
-    objUiIguanaDesignerRoot({ leftFacingPreviewPosition: LightShadowIrregularSmall }).show();
+    objUiIguanaDesignerRoot({
+        layout: { leftFacingPreviewPosition: LightShadowIrregularSmall },
+        looks,
+        sceneChanger,
+    })
+        .show();
 
     const rng = new PseudoRng(69);
     const objs = rng.shuffle([
