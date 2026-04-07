@@ -1,4 +1,3 @@
-import { BLEND_MODES } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Sfx } from "../../../assets/sounds";
 import { ClipboardPojo } from "../../../lib/browser/clipboard-pojo";
@@ -15,14 +14,14 @@ import { merge } from "../../../lib/object/merge";
 import { container } from "../../../lib/pixi/container";
 import { Force } from "../../../lib/types/force";
 import { renderer } from "../../current-pixi-renderer";
-import { Cutscene, DevKey, layers } from "../../globals";
+import { DramaScene } from "../../drama/drama-scene";
+import { Cutscene, DevKey } from "../../globals";
 import { ConnectedInput } from "../../iguana/connected-input";
 import { getDefaultLooks } from "../../iguana/get-default-looks";
 import { IguanaLooks } from "../../iguana/looks";
 import { objIguanaPuppet } from "../../iguana/obj-iguana-puppet";
 import { mxnBoilSeed } from "../../mixins/mxn-boil-seed";
 import { Rpg } from "../../rpg/rpg";
-import { scnWizardLair } from "../../scenes/scn-wizard-lair";
 import { SceneChanger } from "../../systems/scene-changer";
 import { objUiButton } from "../framework/obj-ui-button";
 import { objUiPage, ObjUiPageRouter, objUiPageRouter, UiPage } from "../framework/obj-ui-page";
@@ -220,14 +219,11 @@ function objUiSavePage(sceneChanger: SceneChanger) {
         yesButton.canPress = false;
         Cutscene.play(function* () {
             yield () => puppet.atYesButton;
-            // TODO this stuff should probably be pulled out
-            layers.overlay.solid.blendMode = BLEND_MODES.SUBTRACT;
-            yield layers.overlay.solid.fadeIn(500);
+
             const looks = CtxUiIguanaDesigner.value.looks;
             Rpg.character.looks = looks;
-            sceneChanger.changeScene();
-            page.destroy();
-            yield layers.overlay.solid.fadeOut(500);
+
+            yield* DramaScene.change(sceneChanger);
         }, { camera: { end: "none" } });
     }, width).jiggle().center().at(horizontalMargin, 160);
 

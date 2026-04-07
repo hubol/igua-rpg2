@@ -1,4 +1,3 @@
-import { BLEND_MODES } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
@@ -11,8 +10,9 @@ import { container } from "../../lib/pixi/container";
 import { Null } from "../../lib/types/null";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { DramaScene } from "../drama/drama-scene";
 import { ask, show } from "../drama/show";
-import { Cutscene, layers, scene } from "../globals";
+import { Cutscene, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { objCharacterKingSpino } from "../objects/characters/obj-character-king-spino";
@@ -119,11 +119,9 @@ export function scnEndingDemo() {
             yield* show("You won?!?!?!?!");
 
             Cutscene.play(function* () {
-                layers.overlay.solid.blendMode = BLEND_MODES.SUBTRACT;
-                yield layers.overlay.solid.fadeIn(500);
-                SceneChanger.create({ sceneName: scnEndingDemoGood.name, checkpointName: "fromEnding" })
-                    .changeScene();
-                yield layers.overlay.solid.fadeOut(500);
+                yield* DramaScene.change(
+                    SceneChanger.create({ sceneName: scnEndingDemoGood.name, checkpointName: "fromEnding" }),
+                );
             });
         })
         .show();
