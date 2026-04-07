@@ -166,7 +166,7 @@ function enrichReward(lvl: LvlType.GreatTower) {
             yield* show("You did great.");
             yield* DramaQuests.complete("GreatTower");
             yield* show("Bye-bye!!");
-            SceneChanger.create({ sceneName: scnWorldMap.name, checkpointName: "" })!.changeScene();
+            SceneChanger.create({ sceneName: scnWorldMap.name, checkpointName: "" }).changeScene();
         })
         .mixin(mxnInteractOnlyWhenPlayerIsOnGround)
         .show();

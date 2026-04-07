@@ -121,7 +121,7 @@ export function scnEndingDemo() {
             Cutscene.play(function* () {
                 layers.overlay.solid.blendMode = BLEND_MODES.SUBTRACT;
                 yield layers.overlay.solid.fadeIn(500);
-                SceneChanger.create({ sceneName: scnEndingDemoGood.name, checkpointName: "fromEnding" })!
+                SceneChanger.create({ sceneName: scnEndingDemoGood.name, checkpointName: "fromEnding" })
                     .changeScene();
                 yield layers.overlay.solid.fadeOut(500);
             });

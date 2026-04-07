@@ -4,6 +4,7 @@ import { SceneLibrary } from "../core/scene/scene-library";
 import { sceneStack } from "../globals";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
+import { scnErrorRecoveryRoom } from "../scenes/scn-error-recovery-room";
 
 interface CreateArgs {
     sceneName: string;
@@ -42,7 +43,7 @@ export class SceneChanger {
                 new Error(`Scene with name "${sceneName}" does not exist!`),
             );
 
-            return null;
+            return new SceneChanger(scnErrorRecoveryRoom, scnErrorRecoveryRoom.name, checkpointName);
         }
 
         return new SceneChanger(scene, sceneName, checkpointName);

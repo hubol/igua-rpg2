@@ -10,7 +10,6 @@ import { Rpg } from "../rpg/rpg";
 import { SceneChanger } from "../systems/scene-changer";
 import { FxPattern } from "./effects/lib/fx-pattern";
 import { objFxAsterisk16Px } from "./effects/obj-fx-asterisk-16px";
-import { objFxBurst32 } from "./effects/obj-fx-burst-32";
 import { playerObj } from "./obj-player";
 
 export function objWorldMapGate(ogmo: OgmoEntities.GateMap) {
@@ -19,7 +18,7 @@ export function objWorldMapGate(ogmo: OgmoEntities.GateMap) {
     return Sprite.from(Tx.WorldMap.Gate)
         .anchored(0.5, 0.5)
         .mixin(mxnInteract, () => {
-            sceneChanger?.changeScene();
+            sceneChanger.changeScene();
         })
         .coro(function* (self) {
             if (ogmo.values.visible || Rpg.programmaticFlags.revealedWorldMapGateUids.has(ogmo.uid)) {

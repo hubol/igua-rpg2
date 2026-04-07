@@ -207,7 +207,7 @@ function objUiSavePage() {
             yield layers.overlay.solid.fadeIn(500);
             const looks = CtxUiIguanaDesigner.value.looks;
             Rpg.character.looks = looks;
-            SceneChanger.create({ sceneName: scnWizardLair.name, checkpointName: "fromGameStart" })!
+            SceneChanger.create({ sceneName: scnWizardLair.name, checkpointName: "fromGameStart" })
                 .changeScene();
             page.destroy();
             yield layers.overlay.solid.fadeOut(500);

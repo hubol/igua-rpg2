@@ -31,6 +31,6 @@ export namespace DataRespawnConfiguration {
     export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataRespawnConfiguration" });
 
     export function getSceneChanger(respawnConfigurationId: Id) {
-        return SceneChanger.create(getById(respawnConfigurationId))!;
+        return SceneChanger.create(getById(respawnConfigurationId));
     }
 }

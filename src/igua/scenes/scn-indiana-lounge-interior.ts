@@ -21,7 +21,7 @@ export function scnIndianaLoungeInterior(client?: IguaClient) {
     const offlineSceneChanger = SceneChanger.create({
         sceneName: scnIndianaLoungeExterior.name,
         checkpointName: "fromLoungeOffline",
-    })!;
+    });
     objNetRoom(client, offlineSceneChanger).show();
     objNetGift(client).at(lvl.NetOfferMarker).show();
 }

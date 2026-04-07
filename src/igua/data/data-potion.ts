@@ -224,7 +224,7 @@ export namespace DataPotion {
                         interp(playerObj, "sparklesPerFrame").to(1).over(1000),
                         interp(filter, "factor").steps(6).to(1).over(1000),
                     ]);
-                    SceneChanger.create({ sceneName: scnCasino.name, checkpointName: "fromTaxi" })!.changeScene();
+                    SceneChanger.create({ sceneName: scnCasino.name, checkpointName: "fromTaxi" }).changeScene();
                 });
                 return;
             case "__Fallback__":

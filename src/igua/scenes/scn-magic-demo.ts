@@ -115,7 +115,7 @@ export function scnMagicDemo() {
     const sceneChanger = SceneChanger.create({
         sceneName: scnIndianaHallOfDoors.name,
         checkpointName: "fromMagicDemo",
-    })!;
+    });
 
     // @ts-expect-error Fu
     const demo: DataMagicDemo.Model = DataMagicDemo.Manifest[Rpg.character.position.checkpointName];

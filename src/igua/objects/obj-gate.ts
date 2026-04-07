@@ -32,46 +32,44 @@ export function objGate(ogmoEntity: OgmoEntities.GateHorizontal | OgmoEntities.G
 
     const sceneChanger = SceneChanger.create({ sceneName, checkpointName });
 
-    if (sceneChanger) {
-        gfx.coro(function* (self) {
-            while (true) {
-                let retry = false;
-                yield () => predicate() && self.collides(playerObj);
-                Cutscene.play(function* () {
-                    // Rather awkward, but since cutscenes, and therefore gate transitions are bufferable,
-                    // then it is possible to touch an upwards gate during a cutscene, and fall back down
-                    // I could see this being a problem for other directions too.
-                    // But let's just patch this one for now I guess, haha.
-                    if (forward === "up") {
-                        if (playerObj.y > 0 && (!predicate() || !self.collides(playerObj))) {
-                            Logger.logInfo(
-                                "objGate.coro",
-                                "Upwards gate transition was aborted because the player appears to have fallen since the Cutscene was requested",
-                                { playerPosition: playerObj.vcpy(), playerSpeed: playerObj.speed.vcpy() },
-                            );
-                            retry = true;
-                            return;
-                        }
+    gfx.coro(function* (self) {
+        while (true) {
+            let retry = false;
+            yield () => predicate() && self.collides(playerObj);
+            Cutscene.play(function* () {
+                // Rather awkward, but since cutscenes, and therefore gate transitions are bufferable,
+                // then it is possible to touch an upwards gate during a cutscene, and fall back down
+                // I could see this being a problem for other directions too.
+                // But let's just patch this one for now I guess, haha.
+                if (forward === "up") {
+                    if (playerObj.y > 0 && (!predicate() || !self.collides(playerObj))) {
+                        Logger.logInfo(
+                            "objGate.coro",
+                            "Upwards gate transition was aborted because the player appears to have fallen since the Cutscene was requested",
+                            { playerPosition: playerObj.vcpy(), playerSpeed: playerObj.speed.vcpy() },
+                        );
+                        retry = true;
+                        return;
                     }
+                }
 
-                    CtxGate.value.isGateTransitionActive = true;
-                    playerObj.isBeingPiloted = true;
-                    playerObj.isDucking = false;
+                CtxGate.value.isGateTransitionActive = true;
+                playerObj.isBeingPiloted = true;
+                playerObj.isDucking = false;
 
-                    if (orientation === "horizontal") {
-                        playerObj.isMovingLeft = false;
-                        playerObj.isMovingRight = false;
-                    }
-                    pilotFn();
-                    yield sleepf(20);
-                    // TODO need to escape ticker and execute?
-                    sceneChanger.changeScene();
-                }, { letterbox: false });
+                if (orientation === "horizontal") {
+                    playerObj.isMovingLeft = false;
+                    playerObj.isMovingRight = false;
+                }
+                pilotFn();
+                yield sleepf(20);
+                // TODO need to escape ticker and execute?
+                sceneChanger.changeScene();
+            }, { letterbox: false });
 
-                yield () => retry;
-            }
-        });
-    }
+            yield () => retry;
+        }
+    });
 
     return gfx.invisible();
 }

@@ -34,9 +34,6 @@ export function scnMenuTitleScreen() {
         obj.objDoor.locked = !saveFiles[fileIndex!];
         obj.objDoor.changeScene = () => {
             const result = RpgSaveFiles.Current.load(fileIndex!);
-            if (!result) {
-                return;
-            }
             layers.recreateOverlay();
             result.changeScene();
         };

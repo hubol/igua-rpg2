@@ -64,10 +64,10 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
             locked = false;
         },
         get checkpointName() {
-            return sceneChanger?.checkpointName ?? null;
+            return sceneChanger.checkpointName;
         },
         set checkpointName(value) {
-            if (sceneChanger && value) {
+            if (value) {
                 sceneChanger.checkpointName = value;
             }
         },
@@ -78,13 +78,11 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
             openObj.texture = Tx.Door[style].Open;
         },
         get sceneChanger() {
-            return sceneChanger!;
+            return sceneChanger;
         },
         changeScene() {
-            if (sceneChanger) {
-                DramaMisc.departRoomViaDoor(null);
-                sceneChanger.changeScene();
-            }
+            DramaMisc.departRoomViaDoor(null);
+            sceneChanger.changeScene();
         },
     };
 
