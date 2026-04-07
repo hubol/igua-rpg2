@@ -2,7 +2,6 @@ import { Graphics } from "pixi.js";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { onMutate } from "../../lib/game-engine/routines/on-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
-import { Rng } from "../../lib/math/rng";
 import { CollisionShape } from "../../lib/pixi/collision";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
@@ -59,14 +58,14 @@ function* dramaNetGift(client: IguaClient) {
     const giftItem = client.room.giftItem;
 
     if (!giftItem) {
-        const options = Rng.shuffle([...Rpg.inventory.equipment.list])
+        const options = Rpg.inventory.equipment.list
             .filter(equipment => equipment.loadoutIndex === null)
+            .uniqueBy(({ equipmentId, level }) => ({ equipmentId, level }))
             .map(({ equipmentId, level }) => ({
                 kind: "equipment" as const,
                 id: equipmentId,
                 level,
             }))
-            .slice(0, 9)
             .map((item) => ({ item, message: DataItem.getName(item) }));
 
         const item = yield* DramaItem.choose({
