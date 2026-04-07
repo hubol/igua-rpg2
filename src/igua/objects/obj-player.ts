@@ -1,6 +1,7 @@
 import { DisplayObject, Rectangle } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
 import { Instances } from "../../lib/game-engine/instances";
+import { Logger } from "../../lib/game-engine/logger";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../lib/math/number";
@@ -10,6 +11,8 @@ import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataRespawnConfiguration } from "../data/data-respawn-configuration";
+import { DramaScene } from "../drama/drama-scene";
+import { show } from "../drama/show";
 import { Cutscene, DevKey, Input, layers, scene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { force } from "../mixins/mxn-physics";
@@ -18,12 +21,14 @@ import { mxnRpgStatusBodyPart } from "../mixins/mxn-rpg-status-body-part";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Rpg } from "../rpg/rpg";
+import { RpgDarkness } from "../rpg/rpg-darkness";
 import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgSaveFiles } from "../rpg/rpg-save-files";
 import { RpgStatus } from "../rpg/rpg-status";
 import { objFxEnemyDefeat } from "./effects/obj-fx-enemy-defeat";
 import { objFxPlayerJumpComboDust } from "./effects/obj-fx-player-jump-combo-dust";
 import { objFxSuperDust } from "./effects/obj-fx-super-dust";
+import { objDarkness } from "./nature/obj-darkness";
 import { CtxGate } from "./obj-gate";
 import { ObjIguanaLocomotive, objIguanaLocomotive } from "./obj-iguana-locomotive";
 import { objIguanaNpc } from "./obj-iguana-npc";
@@ -186,6 +191,21 @@ function objPlayer(looks: IguanaLooks.Serializable) {
         .zIndexed(ZIndex.PlayerEntities);
 
     const playerAliveObj = container()
+        .coro(function* () {
+            yield () => RpgDarkness.isPlayerBlind();
+            const sceneChanger = objDarkness.getDarkness()?.exitSceneChanger;
+            // TODO honestly types here suck
+            if (!sceneChanger) {
+                Logger.logAssertError("objPlayer", new Error("Failed to get existSceneChanger from objDarkness"));
+                return;
+            }
+            Cutscene.play(function* () {
+                yield* show("I can't see a thing!");
+                yield* DramaScene.change(sceneChanger);
+            }, {
+                speaker: puppet,
+            });
+        })
         .step(() => {
             if (Rpg.character.buffs.cosmetic.sparkling) {
                 puppet.sparklesPerFrame = Math.max(puppet.sparklesPerFrame, 0.1);
