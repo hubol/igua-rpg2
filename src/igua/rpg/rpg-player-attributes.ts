@@ -19,6 +19,10 @@ export class RpgPlayerAttributes {
         return this._state.strength + this._buffs.getAggregatedBuffs().attributes.strength;
     }
 
+    get vision() {
+        return this._buffs.getAggregatedBuffs().esoteric.nightVisionLevel;
+    }
+
     get respawnConfiguration() {
         return this._state.respawnConfiguration;
     }

@@ -251,6 +251,14 @@ export namespace DataEquipment {
                     model.cosmetic.sparkling += 100;
                 },
             },
+            NightVision: {
+                name: "Night Vision Shoe",
+                texture: null,
+                description: "Improves vision in dark spaces",
+                buffs: (model, bonus) => {
+                    model.esoteric.nightVisionLevel += 1 + bonus;
+                },
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,

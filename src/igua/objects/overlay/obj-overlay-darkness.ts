@@ -1,6 +1,6 @@
 import { Graphics, Rectangle } from "pixi.js";
 import { renderer } from "../../current-pixi-renderer";
-import { objDarkness } from "../nature/obj-darkness";
+import { RpgDarkness } from "../../rpg/rpg-darkness";
 import { playerObj } from "../obj-player";
 
 const r = new Rectangle();
@@ -9,7 +9,7 @@ export function objOverlayDarkness() {
     return new Graphics()
         .step((self) => {
             self.clear();
-            const level = objDarkness.getDarkness()?.level ?? 0;
+            const level = RpgDarkness.getLevel();
 
             if (level > 0) {
                 self.beginFill(0x000000).drawRect(

@@ -57,6 +57,7 @@ export namespace RpgPlayerBuffs {
                 recognizeSongFactor: <PercentInt> 0,
                 sceneChangeErrorChance: <PercentInt> 0,
                 goodEndingChance: <PercentInt> 0,
+                nightVisionLevel: 0,
             },
             experience: {
                 bonusFactorWhileWet: {

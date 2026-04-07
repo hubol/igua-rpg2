@@ -248,6 +248,7 @@ const getBuffInformations = (function () {
         buff("esoteric.recognizeSongFactor", "Recognize Songs", "percent", "beneft_when_positive"),
         buff("esoteric.lgbtFactor", "LGBT", "percent", "beneft_when_positive"),
         buff("wallet.bonusCasinoPity", "Bonus Casino Pity", "integer", "beneft_when_positive"),
+        buff("esoteric.nightVisionLevel", "Night Vision", "integer", "beneft_when_positive"),
     );
 
     const fn = new Function(
