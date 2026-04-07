@@ -38,6 +38,7 @@ export namespace OgmoEntities {
   export type EnemySnail = OgmoFactory.EntityBase<{ variant: "level0"; name: string; depth: number }>;
   export type EnemyBrick = OgmoFactory.EntityBase<{ variant: "level0"; name: string; depth: number }> & { uid: number };
   export type GamblingExpertNpc = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type Darkness = OgmoFactory.EntityBase<{ exitSceneName: string; exitCheckpointName: string; level: number; name: string; depth: number }>;
 }
 
 export interface OgmoEntityResolverBase {
@@ -76,4 +77,5 @@ export interface OgmoEntityResolverBase {
   EnemySnail: (entity: OgmoEntities.EnemySnail) => unknown;
   EnemyBrick: (entity: OgmoEntities.EnemyBrick) => unknown;
   GamblingExpertNpc: (entity: OgmoEntities.GamblingExpertNpc) => unknown;
+  Darkness: (entity: OgmoEntities.Darkness) => unknown;
 }

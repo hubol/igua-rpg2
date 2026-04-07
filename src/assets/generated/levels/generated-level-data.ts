@@ -6040,6 +6040,7 @@ export const Lvl = {
       ExitChillEnemyDoor: e(r["Door"], { x: 1752, y: 704, values: { sceneName: "scnWorldMap", checkpointName: "fromPlainsSuggestiveCavern", name: "ExitChillEnemyDoor", depth: 0 } }, "Entities"),
       IntelligenceBackground_4: e(r["IntelligenceBackground"], { x: 1104, y: 264, width: 312, height: 32, values: { initialTint: "#4b0303", targetTint: "#190000", min: 1, max: 5, name: "", depth: 0 } }, "Entities"),
       Door: e(r["Door"], { x: 560, y: 288, values: { sceneName: "scnIndianaHallOfDoors", checkpointName: "fromSuggestiveCavern", name: "", depth: 0 } }, "Entities"),
+      Darkness: e(r["Darkness"], { x: 888, y: 56, values: { exitSceneName: "scnPlainsSuggestive", exitCheckpointName: "fromCavern", level: 1, name: "", depth: 0 } }, "Entities"),
       ShapesSquareIrregular10: d(Tx.Shapes.SquareIrregular10, { x: 1070, y: 484, scaleX: 5, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x540707 }, "AboveEntitiesDecals"),
       ShapesSquareIrregular10_1: d(Tx.Shapes.SquareIrregular10, { x: 1072, y: 514, scaleX: 5, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x540707 }, "AboveEntitiesDecals"),
       ShapesSquareIrregular10_2: d(Tx.Shapes.SquareIrregular10, { x: 1075, y: 444, scaleX: 7, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x540707 }, "AboveEntitiesDecals"),

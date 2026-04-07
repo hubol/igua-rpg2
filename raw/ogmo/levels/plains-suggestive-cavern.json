@@ -322,6 +322,16 @@
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnIndianaHallOfDoors", "checkpointName": "fromSuggestiveCavern", "name": "", "depth": 0}
+        },
+        {
+          "name": "Darkness",
+          "id": 8,
+          "_eid": "59550687",
+          "x": 888,
+          "y": 56,
+          "originX": 20,
+          "originY": 19,
+          "values": {"exitSceneName": "scnPlainsSuggestive", "exitCheckpointName": "fromCavern", "level": 1, "name": "", "depth": 0}
         }
       ]
     },

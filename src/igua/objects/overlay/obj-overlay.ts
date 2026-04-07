@@ -3,6 +3,7 @@ import { container } from "../../../lib/pixi/container";
 import { ObjSolidOverlay, objSolidOverlay } from "../../core/scene/obj-solid-overlay";
 import { ObjEnemyHealthBars, objEnemyHealthBars } from "./obj-enemy-health-bars";
 import { ObjHud, objHud } from "./obj-hud";
+import { objOverlayDarkness } from "./obj-overlay-darkness";
 import { ObjSystemMessage, objSystemMessage } from "./obj-system-message";
 import { ObjUiInventory, objUiInventory } from "./obj-ui-inventory";
 
@@ -17,6 +18,7 @@ export function objOverlay() {
     const inventoryObj = objUiInventory();
 
     return container(
+        objOverlayDarkness(),
         hudObj,
         enemyHealthBarsObj,
         solidObjBelowMessages,

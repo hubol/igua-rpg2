@@ -13,6 +13,7 @@ import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { objAngelSnail } from "../objects/enemies/obj-angel-snail";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
 import { objStashPocket } from "../objects/interactables/obj-stash-pocket";
+import { objDarkness } from "../objects/nature/obj-darkness";
 import { objPuddle } from "../objects/nature/obj-puddle";
 import { objCheckpoint } from "../objects/obj-checkpoint";
 import { objDoor } from "../objects/obj-door";
@@ -97,6 +98,7 @@ export const OgmoEntityResolvers = {
     WeightedPedestal: objWeightedPedestal,
     IntelligenceSign: (entity) => objIntelligenceSign(entity.values),
     MagicDoor: (entity) => objDoor(entity.values).mixin(mxnDoorMagic, entity.uid).at(0, 2),
+    Darkness: objDarkness,
 } satisfies OgmoEntityResolverBase;
 
 function applyEntityToIguanaObj(obj: ObjIguanaLocomotive, entity: OgmoEntities.GamblingExpertNpc) {

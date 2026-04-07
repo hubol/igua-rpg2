@@ -1794,9 +1794,57 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/character gambling expert.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAA4CAYAAAC/pKvXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALfSURBVGhD3ZlNbhMxGIY9kSqgEkTsEe2yZVtOgMQBIEcAVogN4hiIHWygN2jgGGxgS7fkBAgqgRBSh7yWv6nzjf/rn2keqYozP6kfv5/tSduJBvxZLXrVHHFjb5nUp5l6rYZPwnXeRXURF6kSYFIiRIrQJEVS2BqRya1aOjErWBMRIkQoVKapCOESuhIiW5FITgkw2VUrRgJMsrRiJUBTEZBLZrKlFTKHdJonAnydDkmnaiK8w78+7vUhIx9yTdVEqEP/vn6R73eO7stXF3/nS3Ht50K2cd+txytjn5uIhIKOnz9YDSI6vNyqlRbKiJII4cX+NykBkArnaXe4MShVEoGEag7YyopSsEHpQBR86E+lQzMRGy8Xu6olxOsfp6p1IQBIgoBMcZEYCXDz0XfVEuLZ7J6U0SWu3z2Rx9+fX8h0QLVH8BqkCGOJEeESACLzeS/OPu3L83Qc6DKjyQ4BLgFsx13EpmHi1e1D1XKzIRLS0ViZWgwiMR0Mvda2eZVAiqSMcsg9OUorFO+GiEnOf9Sp7GBCm6DjrvMz18jaOh0qk1Ja1Flakd4sf8tXgt7TeVyP39OliMRQo7wg4i2ty5I64fUdnqOfo893iqQsAjkxydgEnaUFqLxqrkAEdZrmBX+vp+0V4ZOtNjwBkwRwiuSWoEf3mO8lHNuckwdNMiWS4N9BYoR8i4ZRpGQ5mb5QpfxBjiNXrZK7NYenkEMCDB9CqdSe3L6SCWXYR2qmUoKNDfEqyxR/RKmFMYFau3iu+QG2OxFQOpWcaQDrh5XcJHNLAGNpmR5ZbI/PLnAPv28toVp5GY2MSUInNBkusF7aVWsgayrRkz0kGdM16wFSrYGsczA6EcI2wr77SyWTvPwaRjhoEEz35aDJPnL8fCOELCWWU8TZIVok8Pr53YFsM6FLMRLxPTiuxJlqCfGwu6Na7TEmAhmTEEngfxaaEK6jHyOWJbt78rZ33heOEP8B6VJp8BD1wJgAAAAASUVORK5CYII="
+    },
+    {
+      "exportID": "59550687",
+      "name": "Darkness",
+      "limit": 1,
+      "size": {"x": 40, "y": 38},
+      "origin": {"x": 20, "y": 19},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "exitSceneName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "exitCheckpointName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "level", "definition": "Integer", "display": 1, "defaults": 0, "bounded": false, "min": 1, "max": 100},
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/darkness.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAmCAMAAACBKikvAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAMUExURUIAaX9Cpf///wAAAGXXbq8AAAAEdFJOU////wBAKqn0AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBQYWludC5ORVQgNS4xLjL7vAO2AAAAtmVYSWZJSSoACAAAAAUAGgEFAAEAAABKAAAAGwEFAAEAAABSAAAAKAEDAAEAAAACAAAAMQECABAAAABaAAAAaYcEAAEAAABqAAAAAAAAAGAAAAABAAAAYAAAAAEAAABQYWludC5ORVQgNS4xLjIAAwAAkAcABAAAADAyMzABoAMAAQAAAAEAAAAFoAQAAQAAAJQAAAAAAAAAAgABAAIABAAAAFI5OAACAAcABAAAADAxMDAAAAAA6dX2OMrabHoAAAC9SURBVDhPtZBbEoQgDAR93P/OGyYNCSUote72B3EmXaW4nR1bQFPpMgpQQo4IFVpIkX2ChYjAMsNGtMCuh13hXkxmfWRxgXUTqUe4gEg3RAIi1QR5KyIvffbctIN0g4uEW1Ze6/xetC9cVBduve+7nfqPicOwuozj8MrEMt6IDa/GYmeqMG8ohkmeilaVSzbwXotR6ycaV1Fe1DXMxNbX5+9FWYWUNZUSkkRkTaVAihONhkLgjqCB/4sTzvMDiMgJc3qoo8MAAAAASUVORK5CYII="
     }
   ],
   "tilesets": []
