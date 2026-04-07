@@ -1,3 +1,4 @@
+import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataRespawnConfiguration } from "../data/data-respawn-configuration";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
@@ -30,11 +31,29 @@ export class RpgPlayerAttributes {
         this._state[attributeKey] += delta;
     }
 
+    get name() {
+        return this._state.name;
+    }
+
+    set name(value) {
+        if (!value.trim()) {
+            Logger.logContractViolationError(
+                "RpgPlayerAttributes",
+                new Error("Trying to set name to whitespace only"),
+                { value },
+            );
+            return;
+        }
+
+        this._state.name = value.trim();
+    }
+
     static createState(): RpgPlayerAttributes.State {
         return {
             health: 1,
             intelligence: 0,
             strength: 1,
+            name: "You",
             respawnConfiguration: "Indiana.University.Nurse",
         };
     }
@@ -45,6 +64,7 @@ export namespace RpgPlayerAttributes {
         health: Integer;
         intelligence: Integer;
         strength: Integer;
+        name: string;
         respawnConfiguration: DataRespawnConfiguration.Id;
     }
 

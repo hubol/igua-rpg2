@@ -143,7 +143,12 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     const puppet = iguanaLocomotiveObj
         .mixin(mxnRpgStatus, { status, effects, hurtboxes: [iguanaLocomotiveObj] })
         .mixin(mxnSparkling)
-        .mixin(mxnSpeaker, { name: "You", ...objIguanaNpc.getSpeakerColors(looks) })
+        .mixin(mxnSpeaker, {
+            get name() {
+                return Rpg.character.attributes.name;
+            },
+            ...objIguanaNpc.getSpeakerColors(looks),
+        })
         .handles("moved", (_, event) => {
             if (CtxGate.value.isGateTransitionActive) {
                 return;
