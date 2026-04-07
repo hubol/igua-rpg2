@@ -5,6 +5,7 @@ import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { DramaPlayerAttributes } from "../drama/drama-player-attributes";
 import { dramaShop } from "../drama/drama-shop";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
@@ -90,6 +91,7 @@ function enrichDoctorNpc(lvl: LvlType.IndianaUniversityNurse) {
                     yield* show("All done.");
                     Cutscene.setCurrentSpeaker(obj);
                     Rpg.character.attributes.respawnConfiguration = "Indiana";
+                    yield* DramaPlayerAttributes.setName("Fucka");
                 }
             }
             yield interp(obj.objCharacterDoctorSprite.controls, "armUnit").to(1).over(500);

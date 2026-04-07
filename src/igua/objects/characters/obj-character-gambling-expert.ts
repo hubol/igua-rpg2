@@ -1,6 +1,7 @@
 import { Rng } from "../../../lib/math/rng";
 import { DramaFacts } from "../../drama/drama-facts";
 import { DramaInventory } from "../../drama/drama-inventory";
+import { DramaPlayerAttributes } from "../../drama/drama-player-attributes";
 import { dramaShop } from "../../drama/drama-shop";
 import { ask, show } from "../../drama/show";
 import { scene } from "../../globals";
@@ -89,6 +90,7 @@ export function objCharacterGamblingExpert() {
                     "I won't stick around here, so you might want to buy stuff now.",
                     "Just sayin', sucka!",
                 );
+                yield* DramaPlayerAttributes.setName("Sucka");
             }
             else if (result === 2) {
                 yield* show(

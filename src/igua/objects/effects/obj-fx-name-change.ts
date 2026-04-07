@@ -10,6 +10,8 @@ import { mxnMoveIntoCamera } from "../../mixins/mxn-move-into-camera";
 
 const [txBack, txDecoration, txCongratulations, txYourNameIs] = Tx.Effects.NameChange.split({ width: 212 });
 
+// TODO needs absurd SFX
+
 export function objFxNameChange(name: string) {
     return container()
         .mixin(mxnMoveIntoCamera, 3)

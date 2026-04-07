@@ -2,6 +2,7 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
 import { DramaInventory } from "../drama/drama-inventory";
+import { DramaPlayerAttributes } from "../drama/drama-player-attributes";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { playerObj } from "../objects/obj-player";
@@ -62,6 +63,8 @@ function enrichNerdBouncer(lvl: LvlType.IndianaDesert) {
                             flagDesert.nerdBouncerSatiated = true;
                             self.destroy();
                         }
+
+                        yield* DramaPlayerAttributes.setName("Babygirl");
                     },
                     { speaker: lvl.NerdBouncerNpc },
                 ).done;

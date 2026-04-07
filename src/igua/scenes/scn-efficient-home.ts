@@ -17,6 +17,7 @@ import { ZIndex } from "../core/scene/z-index";
 import { DramaFacts } from "../drama/drama-facts";
 import { DramaGifts } from "../drama/drama-gifts";
 import { DramaInventory } from "../drama/drama-inventory";
+import { DramaPlayerAttributes } from "../drama/drama-player-attributes";
 import { DramaPotions } from "../drama/drama-potions";
 import { DramaQuests } from "../drama/drama-quests";
 import { dramaQuizComputerScience } from "../drama/drama-quiz-computer-science";
@@ -239,6 +240,7 @@ function enrichRoom2(lvl: LvlType.EfficientHome) {
                         "Apartment 6 will reveal the spot when you have two ballons.",
                         "This could be useful for repeatedly getting up the great tower. DING! SUCKA!",
                     );
+                    yield* DramaPlayerAttributes.setName("SUCKA");
                 }
                 else if (result === 3) {
                     yield* show("I'm the guardian of the bell. Also I know a secret about helium.", "D-D-D-DING!");
@@ -313,6 +315,7 @@ function enrichRoom5(lvl: LvlType.EfficientHome) {
         .mixin(mxnCutscene, function* () {
             if (Rpg.gift("GreatTower.EfficientHome.Musician.SongShoe").isGiven) {
                 yield* show("Music makes the world go round, sucka!!!");
+                yield* DramaPlayerAttributes.setName("Sucka");
                 return;
             }
 

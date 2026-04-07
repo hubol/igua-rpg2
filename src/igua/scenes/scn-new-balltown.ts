@@ -18,6 +18,7 @@ import { DramaFacts } from "../drama/drama-facts";
 import { DramaGifts } from "../drama/drama-gifts";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
+import { DramaPlayerAttributes } from "../drama/drama-player-attributes";
 import { dramaShop } from "../drama/drama-shop";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
@@ -310,6 +311,7 @@ That's worth ${count} credit(s). Do you want to deposit them?`)
                     }
 
                     yield* show("Peace, sucka!!");
+                    yield* DramaPlayerAttributes.setName("Sucka");
                     break;
                 }
             }

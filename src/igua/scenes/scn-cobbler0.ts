@@ -2,6 +2,7 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
 import { DramaEquipment } from "../drama/drama-equipment";
+import { DramaPlayerAttributes } from "../drama/drama-player-attributes";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnAlternatePivot } from "../mixins/mxn-alternate-pivot";
@@ -60,6 +61,7 @@ function enrichGluemaker(lvl: LvlType.Cobbler0) {
         }
         else if (result === 2) {
             yield* show("No need to apologize, sucka!");
+            yield* DramaPlayerAttributes.setName("Sucka");
         }
     });
 }

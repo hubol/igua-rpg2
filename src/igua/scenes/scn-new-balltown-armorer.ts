@@ -11,6 +11,7 @@ import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaFacts } from "../drama/drama-facts";
 import { DramaMisc } from "../drama/drama-misc";
+import { DramaPlayerAttributes } from "../drama/drama-player-attributes";
 import { DramaQuests } from "../drama/drama-quests";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
@@ -148,6 +149,7 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
         }
         else if (result === 2) {
             yield* show("You are judgmental, and in many ways a bitch.");
+            yield* DramaPlayerAttributes.setName("Bitch");
         }
     });
 }
