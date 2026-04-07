@@ -135,7 +135,7 @@ export function scnMagicDemo() {
         .at(lvl.IdolMarker)
         .mixin(mxnSpeaker, demo)
         .mixin(mxnCutscene, function* () {
-            if (gift.isGiven) {
+            if (!gift.isGiveable()) {
                 yield* show("Already added spirit.");
                 sceneChanger.changeScene();
                 return;
@@ -187,12 +187,12 @@ export function scnMagicDemo() {
             }
 
             Jukebox.applyGainRamp(Mzk.SodaMachine, 1, 500);
-            yield* DramaGifts.give(demo.giftId);
+            yield* DramaGifts.give(gift);
             yield sleep(1000);
             sceneChanger.changeScene();
         })
         .coro(function* (self) {
-            yield () => isSpiritAdded || gift.isGiven;
+            yield () => isSpiritAdded || !gift.isGiveable();
             const sparklingObj = self.mixin(mxnSparkling);
             sparklingObj.sparklesPerFrame = 0.1;
         })
@@ -202,7 +202,7 @@ export function scnMagicDemo() {
 
 function getSpeech(): DataMagicDemo.Speech.Model | null {
     const givenGiftsCount = Object.values(DataMagicDemo.Manifest)
-        .map(model => Rpg.gift(model.giftId).isGiven)
+        .map(model => !Rpg.gift(model.giftId).isGiveable())
         .reduce((sum, isGiven) => isGiven ? (sum + 1) : sum, 0);
 
     return DataMagicDemo.Speech.List[givenGiftsCount] ?? null;

@@ -25,8 +25,9 @@ export function scnEndingDemoGood() {
     lvl.GiftRegion
         .coro(function* (self) {
             yield () => playerObj.collides(self);
-            if (!Rpg.gift("Demo.GoodEnd").isGiven) {
-                yield* DramaGifts.give("Demo.GoodEnd");
+            const gift = Rpg.gift("Demo.GoodEnd");
+            if (gift.isGiveable()) {
+                yield* DramaGifts.give(gift);
             }
         });
 }

@@ -313,7 +313,8 @@ function enrichRoom5(lvl: LvlType.EfficientHome) {
 
     lvl.CloudHouseMusicianNpc
         .mixin(mxnCutscene, function* () {
-            if (Rpg.gift("GreatTower.EfficientHome.Musician.SongShoe").isGiven) {
+            const gift = Rpg.gift("GreatTower.EfficientHome.Musician.SongShoe");
+            if (!gift.isGiveable()) {
                 yield* show("Music makes the world go round, sucka!!!");
                 yield* DramaPlayerAttributes.setName("Sucka");
                 return;
@@ -332,7 +333,7 @@ function enrichRoom5(lvl: LvlType.EfficientHome) {
                 "Here, this will help you enjoy music even MORE!!!",
             );
 
-            yield* DramaGifts.give("GreatTower.EfficientHome.Musician.SongShoe");
+            yield* DramaGifts.give(gift);
         });
 }
 

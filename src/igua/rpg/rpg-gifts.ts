@@ -4,7 +4,7 @@ import { DataGift } from "../data/data-gift";
 export class RpgGifts {
     private readonly _cacheMap = new CacheMap((giftId: DataGift.Id) => {
         const giftState = this._state[giftId] ?? (this._state[giftId] = RpgGift.createState());
-        return new RpgGift(giftState, DataGift.getById(giftId));
+        return new RpgGift(giftId, giftState, DataGift.getById(giftId));
     });
 
     constructor(
@@ -24,11 +24,15 @@ export namespace RpgGifts {
 }
 
 export class RpgGift {
-    constructor(private readonly _state: RpgGift.State, private readonly _giftItem: DataGift.Model) {
+    constructor(
+        readonly id: string,
+        private readonly _state: RpgGift.State,
+        private readonly _giftItem: DataGift.Model,
+    ) {
     }
 
-    get isGiven() {
-        return this._state.given;
+    isGiveable(): this is RpgGift.Giveable {
+        return !this._state.given;
     }
 
     give(): DataGift.Model | null {
@@ -51,4 +55,6 @@ export namespace RpgGift {
     export interface State {
         given: boolean;
     }
+
+    export type Giveable = RpgGift & { isGiveable(): false };
 }

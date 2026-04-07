@@ -113,13 +113,14 @@ function enrichOliveFanatic(lvl: LvlType.NewBalltown) {
                 "The salt mines directly below us give the olives a delicious flavor!",
             );
 
-            if (!Rpg.gift("NewBalltown.OliveFanatic").isGiven) {
+            const gift = Rpg.gift("NewBalltown.OliveFanatic");
+            if (gift.isGiveable()) {
                 yield* show(
                     "Thanks for listening to me geek out about olives :-)",
                     "Here is a food that might help you on your journey!",
                 );
 
-                yield* DramaGifts.give("NewBalltown.OliveFanatic");
+                yield* DramaGifts.give(gift);
             }
         }
         lvl.OliveFanatic.isDucking = true;

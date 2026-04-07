@@ -1,12 +1,13 @@
 import { Logger } from "../../lib/game-engine/logger";
-import { DataGift } from "../data/data-gift";
-import { Rpg } from "../rpg/rpg";
+import { RpgGift } from "../rpg/rpg-gifts";
 import { DramaInventory } from "./drama-inventory";
 
-export function* give(giftId: DataGift.Id) {
-    const gift = Rpg.gift(giftId).give();
+export function* give(giveable: RpgGift.Giveable) {
+    const gift = giveable.give();
     if (!gift) {
-        Logger.logContractViolationError("DramaGifts.give", new Error("Tried to give already-given gift"), { giftId });
+        Logger.logContractViolationError("DramaGifts.give", new Error("Tried to give already-given gift"), {
+            giftId: giveable.id,
+        });
         return;
     }
     yield* DramaInventory.receiveItems([gift.item]);

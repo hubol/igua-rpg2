@@ -63,12 +63,13 @@ function enrichGreeter(lvl: LvlType.StrangeMarket) {
         else if (result === 1) {
             yield* show("Oh... Yes, those guys are pretty tough.", "But they can be poisoned like most other sprites.");
 
-            if (Rpg.gift("StrangeMarket.GreeterShoe").isGiven) {
+            const gift = Rpg.gift("StrangeMarket.GreeterShoe");
+            if (!gift.isGiveable()) {
                 yield* show("Did you try the shoe I gave you?");
             }
             else {
                 yield* show("You will probably get some more use out of this shoe than me.");
-                yield* DramaGifts.give("StrangeMarket.GreeterShoe");
+                yield* DramaGifts.give(gift);
             }
 
             yield* show("Although, I'm not sure how you'll deliver the final blow...");
