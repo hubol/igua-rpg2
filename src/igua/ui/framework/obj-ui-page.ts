@@ -16,9 +16,14 @@ export type UiPageProps = {
     title?: string;
     selectionIndex: number;
     startTicking?: boolean;
+    scrollbarX?: Integer;
+    scrollbarHeight?: Integer;
     scrollbarBgTint?: RgbInt;
     scrollbarFgTint?: RgbInt;
     scrollCatchUpSpeed?: Integer;
+    scrollSelectedMinY?: Integer;
+    scrollSelectedMaxY?: Integer;
+    scrollBeyond?: boolean;
 };
 export type ObjUiPageElement = Container & { selected: boolean };
 
@@ -194,8 +199,8 @@ export function objUiPage(elements: ObjUiPageElement[], { children = elements, .
         if (c.maxHeight && elementsObj.height > c.maxHeight) {
             mask.height = c.maxHeight;
             mask.visible = true;
-            scrollBarObj.x = elementsObj.width + 3;
-            scrollBarObj.size = c.maxHeight;
+            scrollBarObj.x = props.scrollbarX ?? (elementsObj.width + 3);
+            scrollBarObj.size = props.scrollbarHeight ?? c.maxHeight;
             maskedObj.mask = mask;
             scrollBarObj.visible = true;
 
@@ -203,15 +208,21 @@ export function objUiPage(elements: ObjUiPageElement[], { children = elements, .
                 const { y: rootY } = c.getBounds(false, r);
                 const iterations = props.scrollCatchUpSpeed ?? 3;
 
+                const maxY = props.scrollSelectedMaxY ?? (c.maxHeight * 0.69);
+                const minY = props.scrollSelectedMinY ?? (c.maxHeight * 0.33);
+
                 for (let i = 0; i < iterations; i++) {
                     const bounds = c.selected.getBounds(false, r);
                     bounds.y -= rootY;
 
-                    if (bounds.y > c.maxHeight * 0.69 && c.maxHeight + elementsObj.pivot.y < elementsObj.height) {
+                    if (
+                        bounds.y > maxY
+                        && (props.scrollBeyond || c.maxHeight + elementsObj.pivot.y < elementsObj.height)
+                    ) {
                         elementsObj.pivot.y += 1;
                     }
 
-                    if (bounds.y < c.maxHeight * 0.33 && elementsObj.pivot.y > 0) {
+                    if (bounds.y < minY && elementsObj.pivot.y > 0) {
                         elementsObj.pivot.y -= 1;
                     }
                 }

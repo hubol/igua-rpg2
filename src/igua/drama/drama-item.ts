@@ -8,10 +8,11 @@ import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
+import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataItem } from "../data/data-item";
-import { Input, layers } from "../globals";
+import { Input, layers, scene } from "../globals";
 import { mxnFxFigureTransfer } from "../mixins/effects/mxn-fx-figure-transfer";
 import { mxnBoilRotate } from "../mixins/mxn-boil-rotate";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
@@ -55,6 +56,7 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
 
     const obj = container()
         .mixin(mxnHudModifiers.mxnHideStatus)
+        .autoSorted()
         .show(layers.overlay.messages);
 
     const messageObj = objMessage(objText.MediumIrregular(message, { tint: colors.textPrimary }))
@@ -63,6 +65,7 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
 
     const submessageObj = objMessage(objText.Medium("", { tint: colors.textPrimary }))
         .at(renderer.width / 2, 220)
+        .zIndexed(1)
         .show(obj);
 
     const elementObjs = options.map(({ item, message }) =>
@@ -77,7 +80,7 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
     );
 
     if (noneMessage) {
-        elementObjs.push(
+        elementObjs.unshift(
             container(Sprite.from(Tx.Ui.EmptyLarge).anchored(0.5, 0.5))
                 .mixin(mxnSelect)
                 .step(self => {
@@ -90,30 +93,43 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
     }
 
     for (let i = 0; i < elementObjs.length; i++) {
-        elementObjs[i].at(80 + (i % 5) * 83, 80 + Math.floor(i / 5) * 90);
+        elementObjs[i].at(80 + (i % 5) * 83, 44 + Math.floor(i / 5) * 90);
     }
 
-    const pageObj = objUiPage(elementObjs, { selectionIndex: 0, startTicking: true })
+    const pageObj = objUiPage(elementObjs, {
+        selectionIndex: 0,
+        startTicking: true,
+        maxHeight: 220,
+        scrollbarX: 460,
+        scrollbarHeight: 170,
+        scrollbarBgTint: colors.secondary,
+        scrollbarFgTint: colors.primary,
+        scrollCatchUpSpeed: 8,
+        scrollSelectedMinY: 0,
+        scrollSelectedMaxY: 80,
+        scrollBeyond: true,
+    })
+        .at(0, 40)
         .show(obj);
 
     obj.at(0, -200);
 
     pageObj.navigation = false;
-    pageObj.ticker.doNextUpdate = false;
-
-    yield sleepf(1);
-
-    pageObj.ticker.doNextUpdate = true;
 
     yield interpvr(obj).factor(factor.sine).to(0, 0).over(500);
+
     pageObj.navigation = true;
 
     yield () => Input.justWentDown("Confirm");
 
+    // TODO very crude way to kill scrollbar
+    pageObj.maxHeight = undefined;
     pageObj.navigation = false;
 
     pageObj.selected?.coro(function* (self) {
-        yield interpvr(self).factor(factor.sine).to(renderer.width / 2, renderer.height / 2).over(1000);
+        const target = vnew(renderer.width / 2, renderer.height / 2)
+            .add(vnew(self.getWorldCenter()).add(scene.camera, -1), -1);
+        yield interpvr(self).factor(factor.sine).translate(target).over(1000);
     });
 
     if (elementObjs.length > 1) {
