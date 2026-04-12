@@ -62,6 +62,7 @@ module.exports = function ({ files }, { pascal, noext, format }) {
         const resolveEntities = entities.flatMap(entity => {
             const resolvedEntity = {
                 key: getUniqueName(entity),
+                type: entity.texture ? "Sprite" : `ReturnType<typeof r["${entity.name}"]>`,
                 value: entity.texture
                     ? `d(Tx.${decalTexturePathCache.get(entity.texture)}, ${serialize(getSerializableOgmoDecalArgs(entity), 0)}, "${entity.layerName}")`
                     : `e(r["${entity.name}"], ${serialize(getSerializableOgmoEntityArgs(entity), 0)}, "${entity.layerName}")`,
@@ -80,6 +81,7 @@ module.exports = function ({ files }, { pascal, noext, format }) {
 
             const resolvedGroup = {
                 key: getUniqueName({ name: pascal(entity.groupName) }),
+                type: "Container<Sprite>",
                 x: entity.x,
                 y: entity.y,
                 get value() {
@@ -102,17 +104,22 @@ module.exports = function ({ files }, { pascal, noext, format }) {
             backgroundTint: getSerializableTint(json.backgroundColor),
             terrainTint: getSerializableTint(json.values["Terrain Color"] ?? "#000000"),
         }
-        const obj = literal(`() => { applyLevel(${serialize(level, 0)}); return { ${resolveEntities.map(({ key, value }) => `"${key}": ${value},`).join('')} }; }`)
 
-        const pascalPath = path.map(pascal);
-        node(pascalPath, obj);
-        types.push(`export type ${pascalPath.join('_')} = ReturnType<typeof Lvl${pascalPath.map(pathNode => `["${pathNode}"]`).join("")}>;`)
+        const name = path.map(pascal).join()
+        const obj = literal(`(): LvlType.${name} => { applyLevel(${serialize(level, 0)}); return { ${resolveEntities.map(({ key, value }) => `"${key}": ${value},`).join('')} }; }`)
+
+        node([name], obj);
+        types.push(`export type ${name} = {
+${resolveEntities.map(({ key, type }) => `"${key}": ${type},`).join("\n")}
+}`)
     }
 
     const stringifiedTree = serialize(tree);
 
     const source = `
 // This file is generated
+
+import { Container, Sprite } from "pixi.js";
 
 import { OgmoEntityResolvers as r } from '../../../igua/ogmo/entity-resolvers';
 import { OgmoFactory } from '../../../igua/ogmo/factory';
