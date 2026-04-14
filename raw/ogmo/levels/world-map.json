@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 1368,
+  "width": 2120,
   "height": 1368,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 171,
+      "gridCellsX": 265,
       "gridCellsY": 171,
       "entities": [
         {
@@ -37,7 +37,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 171,
+      "gridCellsX": 265,
       "gridCellsY": 171,
       "entities": [
         {
@@ -221,6 +221,32 @@
           "uid": 177472955265013,
           "tint": "#ffffff",
           "values": {"sceneName": "scnIndianaDesert", "checkpointName": "fromWorldMapRight", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 16,
+          "_eid": "53836309",
+          "x": 992,
+          "y": 336,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 0,
+          "uid": 177612382363803,
+          "tint": "#ff6753",
+          "values": {"sceneName": "scnIndianaOhioBridge", "checkpointName": "fromIndiana", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 17,
+          "_eid": "53836309",
+          "x": 1160,
+          "y": 360,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 180,
+          "uid": 177612384494403,
+          "tint": "#bab532",
+          "values": {"sceneName": "scnIndianaOhioBridge", "checkpointName": "fromOhio", "name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -231,7 +257,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 171,
+      "gridCellsX": 265,
       "gridCellsY": 171,
       "decals": [],
       "folder": "../textures"
@@ -243,7 +269,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 171,
+      "gridCellsX": 265,
       "gridCellsY": 171,
       "entities": []
     },
@@ -254,7 +280,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 171,
+      "gridCellsX": 265,
       "gridCellsY": 171,
       "entities": [
         {
@@ -476,6 +502,28 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromFlopUniversity", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 20,
+          "_eid": "19953026",
+          "x": 960,
+          "y": 360,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromOhioToIndiana", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 21,
+          "_eid": "19953026",
+          "x": 1208,
+          "y": 392,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromIndianaToOhio", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -486,7 +534,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 171,
+      "gridCellsX": 265,
       "gridCellsY": 171,
       "entities": [
         {
@@ -509,7 +557,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 171,
+      "gridCellsX": 265,
       "gridCellsY": 171,
       "decals": [
         {
@@ -587,7 +635,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 171,
+      "gridCellsX": 265,
       "gridCellsY": 171,
       "entities": [
         {
@@ -623,7 +671,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 171,
+      "gridCellsX": 265,
       "gridCellsY": 171,
       "decals": [
         {
@@ -636,7 +684,8 @@
           "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 777,
@@ -960,7 +1009,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1040,
@@ -972,7 +1022,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1080,
@@ -984,7 +1035,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1120,
@@ -996,7 +1048,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 936,
@@ -1008,7 +1061,8 @@
           "texture": "world map/blob 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 872,
@@ -1020,7 +1074,8 @@
           "texture": "light/shadow messy 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 963,
@@ -1032,7 +1087,8 @@
           "texture": "light/shadow messy 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 868,
@@ -1044,7 +1100,8 @@
           "texture": "light/shadow messy 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 992,
@@ -1056,7 +1113,8 @@
           "texture": "light/shadow messy 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 891,
@@ -1068,7 +1126,8 @@
           "texture": "shapes/right triangle 24px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 974,
@@ -1080,7 +1139,8 @@
           "texture": "shapes/right triangle 24px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 904,
@@ -1092,7 +1152,8 @@
           "texture": "shapes/square irregular 10.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 899,
@@ -1104,7 +1165,8 @@
           "texture": "shapes/square irregular 10.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 997,
@@ -1116,7 +1178,8 @@
           "texture": "shapes/confetti corner.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 856,
@@ -1128,7 +1191,8 @@
           "texture": "shapes/confetti corner.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 844,
@@ -1140,7 +1204,8 @@
           "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 855,
@@ -1152,7 +1217,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 836,
@@ -1164,7 +1230,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 985,
@@ -1176,7 +1243,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1006,
@@ -1188,7 +1256,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1014,
@@ -1200,7 +1269,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1021,
@@ -1212,7 +1282,8 @@
           "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 951,
@@ -1224,7 +1295,8 @@
           "texture": "world map/tree dead 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 911,
@@ -1236,7 +1308,8 @@
           "texture": "world map/tree dead 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 879,
@@ -1274,7 +1347,8 @@
           "texture": "shapes/rectangle6.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 935,
@@ -1299,7 +1373,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 171,
+      "gridCellsX": 265,
       "gridCellsY": 171,
       "entities": [
         {
@@ -1613,6 +1687,227 @@
           "originY": 0,
           "tint": "#000000",
           "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 34,
+          "_eid": "93117141",
+          "x": 1104,
+          "y": 88,
+          "width": 336,
+          "height": 40,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 35,
+          "_eid": "93117141",
+          "x": 1264,
+          "y": 928,
+          "width": 336,
+          "height": 40,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 36,
+          "_eid": "93117141",
+          "x": 1624,
+          "y": 1002,
+          "width": 336,
+          "height": 40,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 37,
+          "_eid": "93117141",
+          "x": 1896,
+          "y": 880,
+          "width": 128,
+          "height": 136,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 38,
+          "_eid": "93117141",
+          "x": 1808,
+          "y": 944,
+          "width": 88,
+          "height": 64,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Slope",
+          "id": 39,
+          "_eid": "95675713",
+          "x": 1600,
+          "y": 930,
+          "width": 184,
+          "height": 72,
+          "flippedX": true,
+          "flippedY": false,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Slope",
+          "id": 40,
+          "_eid": "95675713",
+          "x": 1256,
+          "y": 856,
+          "width": 184,
+          "height": 72,
+          "flippedX": true,
+          "flippedY": false,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 41,
+          "_eid": "93117141",
+          "x": 1104,
+          "y": 856,
+          "width": 160,
+          "height": 48,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 42,
+          "_eid": "93117141",
+          "x": 1440,
+          "y": 112,
+          "width": 264,
+          "height": 56,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 43,
+          "_eid": "93117141",
+          "x": 1616,
+          "y": 144,
+          "width": 296,
+          "height": 56,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 44,
+          "_eid": "93117141",
+          "x": 1765,
+          "y": 200,
+          "width": 112,
+          "height": 24,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 45,
+          "_eid": "93117141",
+          "x": 2072,
+          "y": 136,
+          "width": 56,
+          "height": 312,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 46,
+          "_eid": "93117141",
+          "x": 2051,
+          "y": 448,
+          "width": 56,
+          "height": 312,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Slope",
+          "id": 47,
+          "_eid": "95675713",
+          "x": 1912,
+          "y": 120,
+          "width": 168,
+          "height": 80,
+          "flippedX": true,
+          "flippedY": true,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 48,
+          "_eid": "93117141",
+          "x": 2000,
+          "y": 80,
+          "width": 120,
+          "height": 56,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 49,
+          "_eid": "93117141",
+          "x": 1967,
+          "y": 704,
+          "width": 112,
+          "height": 88,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 50,
+          "_eid": "93117141",
+          "x": 1967,
+          "y": 792,
+          "width": 112,
+          "height": 88,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": false}
         }
       ]
     },
@@ -1623,7 +1918,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 171,
+      "gridCellsX": 265,
       "gridCellsY": 171,
       "entities": []
     },
@@ -1634,7 +1929,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 171,
+      "gridCellsX": 265,
       "gridCellsY": 171,
       "decals": [
         {
@@ -3601,8 +3896,8 @@
           "groupName": null
         },
         {
-          "x": 1428,
-          "y": 700,
+          "x": 1404,
+          "y": 1420,
           "scaleX": 30,
           "scaleY": 20,
           "rotation": 0,
@@ -4910,7 +5205,8 @@
           "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 857,
@@ -4922,7 +5218,8 @@
           "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 898,
@@ -4934,7 +5231,208 @@
           "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1064,
+          "y": 193,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "world map/wave 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
           "values": {"name": ""}
+        },
+        {
+          "x": 1087,
+          "y": 251,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "world map/wave 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1064,
+          "y": 306,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "world map/wave 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1085,
+          "y": 380,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "world map/wave 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1067,
+          "y": 446,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "world map/wave 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1072,
+          "y": 576,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "world map/wave 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1085,
+          "y": 662,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "world map/wave 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1067,
+          "y": 728,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "world map/wave 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1097,
+          "y": 454,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1054,
+          "y": 570,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1067,
+          "y": 494,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1098,
+          "y": 526,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1077,
+          "y": 175,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1060,
+          "y": 772,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1059,
+          "y": 814,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1090,
+          "y": 846,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "shapes/rectangle6.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -4946,7 +5444,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 171,
+      "gridCellsX": 265,
       "gridCellsY": 171,
       "decals": [
         {
@@ -6365,6 +6863,18 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 1593,
+          "y": 568,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ff6753",
+          "texture": "world map/states/ohio.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"

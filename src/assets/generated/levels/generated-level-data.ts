@@ -2561,6 +2561,35 @@ export const Lvl = {
       NetOfferMarker: e(r["Marker"], { x: 250, y: 208, values: { name: "NetOfferMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
+  IndianaOhioBridge: (): LvlType.IndianaOhioBridge => {
+    applyLevel({ width: 1400, height: 448, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 0, width: 48, height: 448, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 48, y: 392, width: 1368, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 32, y: -40, width: 1368, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 1360, y: -8, width: 48, height: 448, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 104, y: 144, width: 232, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_1: e(r["Pipe"], { x: 352, y: 208, width: 232, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 584, y: 144, width: 16, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe_2: e(r["Pipe"], { x: 160, y: 272, width: 136, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_3: e(r["Pipe"], { x: 520, y: 272, width: 232, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_4: e(r["Pipe"], { x: 640, y: 336, width: 232, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_5: e(r["Pipe"], { x: 936, y: 272, width: 232, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 1080, y: 152, width: 16, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe_6: e(r["Pipe"], { x: 1096, y: 208, width: 232, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_7: e(r["Pipe"], { x: 864, y: 144, width: 232, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 336, y: 32, width: 528, height: 120, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Darkness: e(r["Darkness"], { x: 544, y: 48, values: { exitSceneName: "scnWorldMap", exitCheckpointName: "fromOhioToIndiana", level: 3, name: "", depth: 0 } }, "Entities"),
+      Door: e(r["Door"], { x: 880, y: 96, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaToOhio", name: "", depth: 0 } }, "Entities"),
+      Door_1: e(r["Door"], { x: 288, y: 96, values: { sceneName: "scnWorldMap", checkpointName: "fromOhioToIndiana", name: "", depth: 0 } }, "Entities"),
+      EnemyCactus: e(r["EnemyCactus"], { x: 160, y: 392, values: { variant: "level1", name: "", depth: 0 } }, "Entities"),
+      EnemyCactus_1: e(r["EnemyCactus"], { x: 520, y: 392, values: { variant: "level1", name: "", depth: 0 } }, "Entities"),
+      EnemySuggestive: e(r["EnemySuggestive"], { x: 808, y: 336, uid: 177612441659600, values: { name: "", depth: 0, variant: "level1" } }, "Entities"),
+      EnemyCactus_2: e(r["EnemyCactus"], { x: 1120, y: 392, values: { variant: "level1", name: "", depth: 0 } }, "Entities"),
+      fromOhio: e(r["Checkpoint"], { x: 960, y: 144, flippedX: false, values: { name: "fromOhio", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      Player: e(r["Player"], { x: 248, y: 144, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    };
+  },
   IndianaUniversityInterior: (): LvlType.IndianaUniversityInterior => {
     applyLevel({ width: 688, height: 280, backgroundTint: 0x68ba8e, terrainTint: 0xcbb53f });
     return {
@@ -7789,7 +7818,7 @@ export const Lvl = {
     };
   },
   WorldMap: (): LvlType.WorldMap => {
-    applyLevel({ width: 1368, height: 1368, backgroundTint: 0x81bde9, terrainTint: 0x000000 });
+    applyLevel({ width: 2120, height: 1368, backgroundTint: 0x81bde9, terrainTint: 0x000000 });
     return {
       Indiana: dg(432, 104, "Indiana", "ParallaxDecals"),
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 432, y: 128, scaleX: 19, scaleY: 24, rotation: 0, originX: 0, originY: 0, groupName: "Indiana", tint: 0xbab532 }, "ParallaxDecals"),
@@ -7902,6 +7931,7 @@ export const Lvl = {
       WorldMapHill0_6: d(Tx.WorldMap.Hill0, { x: 777, y: 352, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "ParallaxDecals"),
       ShapesSquareIrregular10_2: d(Tx.Shapes.SquareIrregular10, { x: 758, y: 358, scaleX: 2, scaleY: 2, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x252525 }, "ParallaxDecals"),
       WorldMapBlob0: d(Tx.WorldMap.Blob0, { x: 588, y: 235, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd25e }, "ParallaxDecals"),
+      WorldMapStatesOhio: d(Tx.WorldMap.States.Ohio, { x: 1593, y: 568, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff6753 }, "ParallaxDecals"),
       ShapesSquare32_7: d(Tx.Shapes.Square32, { x: 507, y: 583, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x996a34 }, "BackgroundDecals"),
       WorldMapHill0_7: d(Tx.WorldMap.Hill0, { x: 985, y: 797, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x680c0c }, "BackgroundDecals"),
       TerrainEarthQuestionMark: d(Tx.Terrain.Earth.QuestionMark, { x: 489, y: 506, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "BackgroundDecals"),
@@ -8054,7 +8084,7 @@ export const Lvl = {
       ShapesSquare32_42: d(Tx.Shapes.Square32, { x: -48, y: 1528, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbab532 }, "BackgroundDecals"),
       TownSignageIWillGrillYourFood: d(Tx.Town.Signage.IWillGrillYourFood, { x: -101, y: 342, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       ShapesSquare32_43: d(Tx.Shapes.Square32, { x: 494, y: 487, scaleX: 0.3, scaleY: 0.4, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x252525 }, "BackgroundDecals"),
-      ShapesSquareIrregular10_12: d(Tx.Shapes.SquareIrregular10, { x: 1428, y: 700, scaleX: 30, scaleY: 20, rotation: 0, originX: 0, originY: 0, tint: 0x0a8148 }, "BackgroundDecals"),
+      ShapesSquareIrregular10_12: d(Tx.Shapes.SquareIrregular10, { x: 1404, y: 1420, scaleX: 30, scaleY: 20, rotation: 0, originX: 0, originY: 0, tint: 0x0a8148 }, "BackgroundDecals"),
       ShapesSquare32_44: d(Tx.Shapes.Square32, { x: 956, y: 786, scaleX: 0.8, scaleY: 0.9, rotation: 0, originX: 0, originY: 0, tint: 0x0a8148 }, "BackgroundDecals"),
       ShapesSquare32_45: d(Tx.Shapes.Square32, { x: 956, y: 784, scaleX: 0.8, scaleY: 0.1, rotation: 0, originX: 0, originY: 0, tint: 0xe6a500 }, "BackgroundDecals"),
       ShapesSquare32_46: d(Tx.Shapes.Square32, { x: 966, y: 796, scaleX: 0.3, scaleY: 0.4, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x252525 }, "BackgroundDecals"),
@@ -8157,6 +8187,22 @@ export const Lvl = {
       ShapesCircleIrregular26_38: d(Tx.Shapes.CircleIrregular26, { x: 992, y: 192, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
       ShapesCircleIrregular26_39: d(Tx.Shapes.CircleIrregular26, { x: 857, y: 172, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
       ShapesCircleIrregular26_40: d(Tx.Shapes.CircleIrregular26, { x: 898, y: 199, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
+      WorldMapWave0: d(Tx.WorldMap.Wave0, { x: 1064, y: 193, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      WorldMapWave0_1: d(Tx.WorldMap.Wave0, { x: 1087, y: 251, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      WorldMapWave0_2: d(Tx.WorldMap.Wave0, { x: 1064, y: 306, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      WorldMapWave0_3: d(Tx.WorldMap.Wave0, { x: 1085, y: 380, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      WorldMapWave0_4: d(Tx.WorldMap.Wave0, { x: 1067, y: 446, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      WorldMapWave0_5: d(Tx.WorldMap.Wave0, { x: 1072, y: 576, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      WorldMapWave0_6: d(Tx.WorldMap.Wave0, { x: 1085, y: 662, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      WorldMapWave0_7: d(Tx.WorldMap.Wave0, { x: 1067, y: 728, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      ShapesRectangle6_36: d(Tx.Shapes.Rectangle6, { x: 1097, y: 454, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      ShapesRectangle6_37: d(Tx.Shapes.Rectangle6, { x: 1054, y: 570, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      ShapesRectangle6_38: d(Tx.Shapes.Rectangle6, { x: 1067, y: 494, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      ShapesRectangle6_39: d(Tx.Shapes.Rectangle6, { x: 1098, y: 526, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      ShapesRectangle6_40: d(Tx.Shapes.Rectangle6, { x: 1077, y: 175, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      ShapesRectangle6_41: d(Tx.Shapes.Rectangle6, { x: 1060, y: 772, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      ShapesRectangle6_42: d(Tx.Shapes.Rectangle6, { x: 1059, y: 814, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
+      ShapesRectangle6_43: d(Tx.Shapes.Rectangle6, { x: 1090, y: 846, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbce3ff }, "BackgroundDecals"),
       Slope: e(r["Slope"], { x: 520, y: 1160, width: 96, height: 48, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Slope_1: e(r["Slope"], { x: 616, y: 1112, width: 96, height: 48, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Slope_2: e(r["Slope"], { x: 712, y: 1064, width: 96, height: 48, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
@@ -8181,6 +8227,23 @@ export const Lvl = {
       Block_13: e(r["Block"], { x: 608, y: 456, width: 16, height: 16, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Block_14: e(r["Block"], { x: 624, y: 472, width: 16, height: 16, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Block_15: e(r["Block"], { x: 638, y: 488, width: 16, height: 64, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Block_16: e(r["Block"], { x: 1104, y: 88, width: 336, height: 40, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Block_17: e(r["Block"], { x: 1264, y: 928, width: 336, height: 40, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Block_18: e(r["Block"], { x: 1624, y: 1002, width: 336, height: 40, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Block_19: e(r["Block"], { x: 1896, y: 880, width: 128, height: 136, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Block_20: e(r["Block"], { x: 1808, y: 944, width: 88, height: 64, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_8: e(r["Slope"], { x: 1600, y: 930, width: 184, height: 72, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_9: e(r["Slope"], { x: 1256, y: 856, width: 184, height: 72, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Block_21: e(r["Block"], { x: 1104, y: 856, width: 160, height: 48, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Block_22: e(r["Block"], { x: 1440, y: 112, width: 264, height: 56, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Block_23: e(r["Block"], { x: 1616, y: 144, width: 296, height: 56, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Block_24: e(r["Block"], { x: 1765, y: 200, width: 112, height: 24, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Block_25: e(r["Block"], { x: 2072, y: 136, width: 56, height: 312, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Block_26: e(r["Block"], { x: 2051, y: 448, width: 56, height: 312, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_10: e(r["Slope"], { x: 1912, y: 120, width: 168, height: 80, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Block_27: e(r["Block"], { x: 2000, y: 80, width: 120, height: 56, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Block_28: e(r["Block"], { x: 1967, y: 704, width: 112, height: 88, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
+      Block_29: e(r["Block"], { x: 1967, y: 792, width: 112, height: 88, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       StoneRock0_6: d(Tx.Stone.Rock0, { x: 881, y: 145, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       TerrainGrassTall3px: d(Tx.Terrain.Grass.Tall3px, { x: 777, y: 748, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
       TerrainGrassTall3px_1: d(Tx.Terrain.Grass.Tall3px, { x: 676, y: 747, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
@@ -8232,7 +8295,7 @@ export const Lvl = {
       WorldMapTreeDead0_1: d(Tx.WorldMap.TreeDead0, { x: 911, y: 168, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x482c6d }, "TerrainDecals"),
       WorldMapCloud0_9: d(Tx.WorldMap.Cloud0, { x: 879, y: 154, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x466b1c }, "TerrainDecals"),
       WorldMapCloud0_10: d(Tx.WorldMap.Cloud0, { x: 969, y: 141, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x466b1c }, "TerrainDecals"),
-      ShapesRectangle6_36: d(Tx.Shapes.Rectangle6, { x: 962, y: 173, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      ShapesRectangle6_44: d(Tx.Shapes.Rectangle6, { x: 962, y: 173, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       WorldMapCloud0_11: d(Tx.WorldMap.Cloud0, { x: 935, y: 181, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x707e25 }, "TerrainDecals"),
       StashPocket: e(r["StashPocket"], { x: 472, y: 952, uid: 175280777909200, values: { name: "", depth: 0 } }, "Entities"),
       GateMap: e(r["GateMap"], { x: 496, y: 728, rotation: 270, uid: 177430696428500, values: { sceneName: "scnFlopCollegeExterior", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "Entities"),
@@ -8262,6 +8325,8 @@ export const Lvl = {
       fromIndianaLounge: e(r["Checkpoint"], { x: 632, y: 920, flippedX: false, values: { name: "fromIndianaLounge", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       fromStrangeMarketGuardian: e(r["Checkpoint"], { x: 504, y: 632, flippedX: true, values: { name: "fromStrangeMarketGuardian", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromFlopUniversity: e(r["Checkpoint"], { x: 496, y: 776, flippedX: false, values: { name: "fromFlopUniversity", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
+      fromOhioToIndiana: e(r["Checkpoint"], { x: 960, y: 360, flippedX: true, values: { name: "fromOhioToIndiana", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromIndianaToOhio: e(r["Checkpoint"], { x: 1208, y: 392, flippedX: false, values: { name: "fromIndianaToOhio", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       GateMap_1: e(r["GateMap"], { x: 821, y: 735, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_2: e(r["GateMap"], { x: 637, y: 737, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_3: e(r["GateMap"], { x: 942, y: 844, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
@@ -8276,6 +8341,8 @@ export const Lvl = {
       GateMap_10: e(r["GateMap"], { x: 632, y: 880, rotation: 180, uid: 177281293625000, values: { sceneName: "scnIndianaLoungeExterior", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       StrangeMarketGuardianGate: e(r["GateMap"], { x: 507, y: 590, rotation: 630, uid: 177427749219800, values: { sceneName: "scnStrangeMarketGuardian", checkpointName: "fromWorldMap", name: "StrangeMarketGuardianGate", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_11: e(r["GateMap"], { x: 632, y: 232, rotation: 180, uid: 177472955265013, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_12: e(r["GateMap"], { x: 992, y: 336, rotation: 0, uid: 177612382363803, values: { sceneName: "scnIndianaOhioBridge", checkpointName: "fromIndiana", name: "", depth: 0, visible: true }, tint: 0xff6753 }, "RegionEntities"),
+      GateMap_13: e(r["GateMap"], { x: 1160, y: 360, rotation: 180, uid: 177612384494403, values: { sceneName: "scnIndianaOhioBridge", checkpointName: "fromOhio", name: "", depth: 0, visible: true }, tint: 0xbab532 }, "RegionEntities"),
       FallenBotMarker: e(r["Marker"], { x: 744, y: 552, values: { name: "FallenBotMarker", depth: 0 }, tint: 0x777777 }, "MarkerEntities"),
     };
   },
@@ -10780,6 +10847,32 @@ export namespace LvlType {
     Player: ReturnType<(typeof r)["Player"]>;
     fromExteriorLeft: ReturnType<(typeof r)["Checkpoint"]>;
     NetOfferMarker: ReturnType<(typeof r)["Marker"]>;
+  };
+  export type IndianaOhioBridge = {
+    Block: ReturnType<(typeof r)["Block"]>;
+    Block_1: ReturnType<(typeof r)["Block"]>;
+    Block_2: ReturnType<(typeof r)["Block"]>;
+    Block_3: ReturnType<(typeof r)["Block"]>;
+    Pipe: ReturnType<(typeof r)["Pipe"]>;
+    Pipe_1: ReturnType<(typeof r)["Pipe"]>;
+    Block_4: ReturnType<(typeof r)["Block"]>;
+    Pipe_2: ReturnType<(typeof r)["Pipe"]>;
+    Pipe_3: ReturnType<(typeof r)["Pipe"]>;
+    Pipe_4: ReturnType<(typeof r)["Pipe"]>;
+    Pipe_5: ReturnType<(typeof r)["Pipe"]>;
+    Block_5: ReturnType<(typeof r)["Block"]>;
+    Pipe_6: ReturnType<(typeof r)["Pipe"]>;
+    Pipe_7: ReturnType<(typeof r)["Pipe"]>;
+    Block_6: ReturnType<(typeof r)["Block"]>;
+    Darkness: ReturnType<(typeof r)["Darkness"]>;
+    Door: ReturnType<(typeof r)["Door"]>;
+    Door_1: ReturnType<(typeof r)["Door"]>;
+    EnemyCactus: ReturnType<(typeof r)["EnemyCactus"]>;
+    EnemyCactus_1: ReturnType<(typeof r)["EnemyCactus"]>;
+    EnemySuggestive: ReturnType<(typeof r)["EnemySuggestive"]>;
+    EnemyCactus_2: ReturnType<(typeof r)["EnemyCactus"]>;
+    fromOhio: ReturnType<(typeof r)["Checkpoint"]>;
+    Player: ReturnType<(typeof r)["Player"]>;
   };
   export type IndianaUniversityInterior = {
     SkyCloudPuff0: Sprite;
@@ -16036,6 +16129,7 @@ export namespace LvlType {
     WorldMapHill0_6: Sprite;
     ShapesSquareIrregular10_2: Sprite;
     WorldMapBlob0: Sprite;
+    WorldMapStatesOhio: Sprite;
     ShapesSquare32_7: Sprite;
     WorldMapHill0_7: Sprite;
     TerrainEarthQuestionMark: Sprite;
@@ -16291,6 +16385,22 @@ export namespace LvlType {
     ShapesCircleIrregular26_38: Sprite;
     ShapesCircleIrregular26_39: Sprite;
     ShapesCircleIrregular26_40: Sprite;
+    WorldMapWave0: Sprite;
+    WorldMapWave0_1: Sprite;
+    WorldMapWave0_2: Sprite;
+    WorldMapWave0_3: Sprite;
+    WorldMapWave0_4: Sprite;
+    WorldMapWave0_5: Sprite;
+    WorldMapWave0_6: Sprite;
+    WorldMapWave0_7: Sprite;
+    ShapesRectangle6_36: Sprite;
+    ShapesRectangle6_37: Sprite;
+    ShapesRectangle6_38: Sprite;
+    ShapesRectangle6_39: Sprite;
+    ShapesRectangle6_40: Sprite;
+    ShapesRectangle6_41: Sprite;
+    ShapesRectangle6_42: Sprite;
+    ShapesRectangle6_43: Sprite;
     Slope: ReturnType<(typeof r)["Slope"]>;
     Slope_1: ReturnType<(typeof r)["Slope"]>;
     Slope_2: ReturnType<(typeof r)["Slope"]>;
@@ -16315,6 +16425,23 @@ export namespace LvlType {
     Block_13: ReturnType<(typeof r)["Block"]>;
     Block_14: ReturnType<(typeof r)["Block"]>;
     Block_15: ReturnType<(typeof r)["Block"]>;
+    Block_16: ReturnType<(typeof r)["Block"]>;
+    Block_17: ReturnType<(typeof r)["Block"]>;
+    Block_18: ReturnType<(typeof r)["Block"]>;
+    Block_19: ReturnType<(typeof r)["Block"]>;
+    Block_20: ReturnType<(typeof r)["Block"]>;
+    Slope_8: ReturnType<(typeof r)["Slope"]>;
+    Slope_9: ReturnType<(typeof r)["Slope"]>;
+    Block_21: ReturnType<(typeof r)["Block"]>;
+    Block_22: ReturnType<(typeof r)["Block"]>;
+    Block_23: ReturnType<(typeof r)["Block"]>;
+    Block_24: ReturnType<(typeof r)["Block"]>;
+    Block_25: ReturnType<(typeof r)["Block"]>;
+    Block_26: ReturnType<(typeof r)["Block"]>;
+    Slope_10: ReturnType<(typeof r)["Slope"]>;
+    Block_27: ReturnType<(typeof r)["Block"]>;
+    Block_28: ReturnType<(typeof r)["Block"]>;
+    Block_29: ReturnType<(typeof r)["Block"]>;
     StoneRock0_6: Sprite;
     TerrainGrassTall3px: Sprite;
     TerrainGrassTall3px_1: Sprite;
@@ -16366,7 +16493,7 @@ export namespace LvlType {
     WorldMapTreeDead0_1: Sprite;
     WorldMapCloud0_9: Sprite;
     WorldMapCloud0_10: Sprite;
-    ShapesRectangle6_36: Sprite;
+    ShapesRectangle6_44: Sprite;
     WorldMapCloud0_11: Sprite;
     StashPocket: ReturnType<(typeof r)["StashPocket"]>;
     GateMap: ReturnType<(typeof r)["GateMap"]>;
@@ -16396,6 +16523,8 @@ export namespace LvlType {
     fromIndianaLounge: ReturnType<(typeof r)["Checkpoint"]>;
     fromStrangeMarketGuardian: ReturnType<(typeof r)["Checkpoint"]>;
     fromFlopUniversity: ReturnType<(typeof r)["Checkpoint"]>;
+    fromOhioToIndiana: ReturnType<(typeof r)["Checkpoint"]>;
+    fromIndianaToOhio: ReturnType<(typeof r)["Checkpoint"]>;
     GateMap_1: ReturnType<(typeof r)["GateMap"]>;
     GateMap_2: ReturnType<(typeof r)["GateMap"]>;
     GateMap_3: ReturnType<(typeof r)["GateMap"]>;
@@ -16410,6 +16539,8 @@ export namespace LvlType {
     GateMap_10: ReturnType<(typeof r)["GateMap"]>;
     StrangeMarketGuardianGate: ReturnType<(typeof r)["GateMap"]>;
     GateMap_11: ReturnType<(typeof r)["GateMap"]>;
+    GateMap_12: ReturnType<(typeof r)["GateMap"]>;
+    GateMap_13: ReturnType<(typeof r)["GateMap"]>;
     FallenBotMarker: ReturnType<(typeof r)["Marker"]>;
   };
 }
