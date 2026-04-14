@@ -17,27 +17,34 @@ type NoAtlasTextures = Awaited<ReturnType<typeof createNoAtlasTx>>;
 async function createNoAtlasTx(tx: typeof Tx) {
     return {
         Effects: {
-            Noise256: await repeat(tx.Effects.Noise256),
+            Noise256: await wrap(tx.Effects.Noise256),
         },
         Enemy: {
             Brick: {
-                Pattern0: await repeat(tx.Enemy.Brick.Pattern0),
+                Pattern0: await wrap(tx.Enemy.Brick.Pattern0),
             },
             Chill: {
-                Aoe: await repeat(tx.Enemy.Chill.Aoe),
+                Aoe: await wrap(tx.Enemy.Chill.Aoe),
+            },
+        },
+        Iguana: {
+            Robot: {
+                Panels: {
+                    Large: await wrap(tx.Iguana.Robot.Panels.Large, WRAP_MODES.MIRRORED_REPEAT),
+                },
             },
         },
         Terrain: {
             Pipe: {
-                Brick: await repeat(tx.Terrain.Pipe.Brick),
-                Gray: await repeat(tx.Terrain.Pipe.Gray),
+                Brick: await wrap(tx.Terrain.Pipe.Brick),
+                Gray: await wrap(tx.Terrain.Pipe.Gray),
             },
         },
     };
 }
 
-function repeat(tx: Texture) {
-    return TextureProcessing.extractFromAtlas(tx, { wrapMode: WRAP_MODES.REPEAT });
+function wrap(tx: Texture, wrapMode = WRAP_MODES.REPEAT) {
+    return TextureProcessing.extractFromAtlas(tx, { wrapMode });
 }
 
 export async function loadNoAtlasTextures(tx: typeof Tx) {

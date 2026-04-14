@@ -81,6 +81,8 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     let landingFrames: Integer = 0;
     let landingFramesMax = 0;
 
+    let isRobotic = false;
+
     const core = container(body, head);
 
     const feetLiftMaximum = Math.max(0, bodyDuckMaximum - 1);
@@ -285,6 +287,18 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
                 }
             },
             groundMaterial: Material.Earth,
+            get isRobotic() {
+                return isRobotic;
+            },
+            set isRobotic(value) {
+                if (isRobotic === value) {
+                    return;
+                }
+
+                for (let i = 0; i < iguanaSprites.length; i++) {
+                    iguanaSprites[i].setIsRobotic(value);
+                }
+            },
         })
         .step(applyAnimation)
         .coro(function* () {
@@ -763,6 +777,7 @@ class IguanaSprite extends Sprite {
     }
 
     private _boiled = false;
+    private _isRobotic = false;
 
     constructor(readonly shape: IguanaShape) {
         super(shape.Tx);
@@ -774,13 +789,31 @@ class IguanaSprite extends Sprite {
             return;
         }
 
-        if (value) {
+        this._boiled = value;
+        this._update();
+    }
+
+    setIsRobotic(value: boolean) {
+        if (value === this._isRobotic) {
+            return;
+        }
+
+        this._isRobotic = value;
+        this._update();
+    }
+
+    private _update() {
+        if (this._boiled && this._isRobotic) {
+            this.texture = this.shape.Robot.BoiledTx;
+        }
+        else if (!this._boiled && this._isRobotic) {
+            this.texture = this.shape.Robot.Tx;
+        }
+        else if (this._boiled) {
             this.texture = this.shape.BoiledTx;
-            this._boiled = true;
         }
         else {
             this.texture = this.shape.Tx;
-            this._boiled = false;
         }
 
         this.anchor.at(this.texture.defaultAnchor);
