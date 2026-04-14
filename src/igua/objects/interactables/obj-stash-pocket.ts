@@ -1,6 +1,7 @@
 import { Sprite, Texture } from "pixi.js";
 import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Tx } from "../../../assets/textures";
+import { Logger } from "../../../lib/game-engine/logger";
 import { holdf } from "../../../lib/game-engine/routines/hold";
 import { interp, interpr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
@@ -42,12 +43,14 @@ export function objStashPocket({ uid }: OgmoEntities.StashPocket) {
         spriteObj
             .mixin(mxnSpeaker, { name: "Pocket Stash", tintPrimary: 0x54BAFF, tintSecondary: 0xFFB200 })
             .mixin(mxnCutscene, function* () {
-                Rpg.stashPocket(uid).discover();
+                const stash = Rpg.stashPocket(uid);
+
+                stash.discover();
 
                 yield interp(spriteObj, "textureIndex").to(3).over(250);
 
-                const deposited = Rpg.stashPocket(uid).check();
-                const operations = Rpg.stashPocket(uid).checkPossibleOperations();
+                const deposited = stash.check();
+                const operations = stash.checkPossibleOperations();
 
                 const message = deposited.kind === "empty"
                     ? "Stash is empty."
@@ -63,13 +66,30 @@ export function objStashPocket({ uid }: OgmoEntities.StashPocket) {
                 );
 
                 if (result === 0) {
-                    Rpg.stashPocket(uid).deposit();
+                    const depositableItems = stash.checkPossibleDeposits();
+                    if (depositableItems.length === 1) {
+                        stash.deposit(depositableItems[0]);
+                    }
+                    else if (depositableItems.length > 1) {
+                        const depositResult = yield* ask(
+                            `What to deposit?`,
+                            ...depositableItems.map(id => DataPocketItem.getById(id).name),
+                        );
+
+                        stash.deposit(depositableItems[depositResult]);
+                    }
+                    else {
+                        Logger.logAssertError(
+                            "objStashPocket",
+                            new Error("Should not be able to deposit when no possible deposits"),
+                        );
+                    }
                 }
                 else if (result === 1) {
-                    Rpg.stashPocket(uid).withdraw();
+                    stash.withdraw();
                 }
                 else if (result === 2) {
-                    Rpg.stashPocket(uid).swap();
+                    stash.swap();
                 }
 
                 yield interp(spriteObj, "textureIndex").to(0).over(250);

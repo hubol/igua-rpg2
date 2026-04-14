@@ -62,7 +62,7 @@ export namespace RpgFactory {
         const classrooms = new RpgClassrooms(classroomsState, experience.reward);
         const iguanaNpcs = new RpgIguanaNpcs(iguanaNpcsState, experience.reward);
         const quests = new RpgQuests(questsState, experience.reward);
-        const pocket = new RpgPocket(data.character.inventory.pocket, experience);
+        const pocket = new RpgPocket(data.character.inventory.pocket, experience, buffs);
         const stashPockets = new RpgStashPockets(stashPocketsState, pocket, experience.reward);
         const facts = new RpgFacts(data.character.facts, attributes);
         const flops = new RpgFlops(data.character.inventory.flops);

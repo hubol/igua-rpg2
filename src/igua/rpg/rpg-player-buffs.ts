@@ -93,6 +93,9 @@ export namespace RpgPlayerBuffs {
                     topSpeedIncreaseFactor: <PercentInt> 0,
                 },
             },
+            pocket: {
+                bonusSlotCount: 0,
+            },
             wallet: {
                 bonusCasinoPity: <Integer> 0,
             },

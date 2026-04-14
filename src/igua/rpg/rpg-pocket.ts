@@ -2,32 +2,38 @@ import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { RpgExperience } from "./rpg-experience";
+import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 
 type RpgPocketSlotPublic = Omit<RpgPocketSlot, "update">;
 
 export class RpgPocket {
     private readonly _slotObjects: RpgPocketSlot[] = [];
 
-    constructor(private readonly _state: RpgPocket.State, private readonly _experience: RpgExperience) {
+    constructor(
+        private readonly _state: RpgPocket.State,
+        private readonly _experience: RpgExperience,
+        private readonly _buffs: RpgPlayerAggregatedBuffs,
+    ) {
     }
 
     private get _slots() {
-        while (this._slotObjects.length < this._state.slots.length) {
+        const slotsCount = Math.max(1, 1 + this._buffs.getAggregatedBuffs().pocket.bonusSlotCount);
+
+        while (this._slotObjects.length < slotsCount) {
             const index = this._slotObjects.length;
+            if (!this._state.slots[index]) {
+                this._state.slots[index] = RpgPocketSlot.createState();
+            }
             this._slotObjects[index] = new RpgPocketSlot(this._state.slots[index]);
         }
 
-        this._slotObjects.length = this._state.slots.length;
+        this._slotObjects.length = slotsCount;
 
         return this._slotObjects;
     }
 
     get slots(): ReadonlyArray<RpgPocketSlotPublic> {
         return this._slots;
-    }
-
-    get receivingSlot() {
-        return this.slots[this._state.receivingSlotIndex];
     }
 
     empty(reason: "default" | "death_tax" = "default") {
@@ -38,14 +44,12 @@ export class RpgPocket {
             return obj;
         }, {} as Record<RpgPocket.Item, Integer>);
 
-        for (const slot of this._state.slots) {
-            if (slot.item !== null) {
-                items[slot.item] += slot.count;
-                totalItems += slot.count;
-                slot.item = null;
+        for (const slot of this.slots) {
+            const { item, count } = slot.empty();
+            if (item !== null) {
+                items[item] += count;
+                totalItems += count;
             }
-
-            slot.count = 0;
         }
 
         this._experience.reward.pocket.onRemoveItems(totalItems, reason);
@@ -57,27 +61,8 @@ export class RpgPocket {
     }
 
     receive(item: RpgPocket.Item) {
-        // TODO assert model, item are valid
-
-        const index = this._state.receivingSlotIndex;
-        const slot = this._state.slots[index];
-        const reset = slot.item !== null && slot.item !== item;
-
-        if (slot.item === null || reset) {
-            slot.item = item;
-            slot.count = 1;
-        }
-        else {
-            slot.count += 1;
-        }
-
-        this._state.receivingSlotIndex = (index + 1) % this._state.slots.length;
-
-        const result = {
-            index,
-            reset,
-            count: slot.count,
-        };
+        const slot = this.findSlotThatCanReceive(item) ?? this.slots[0];
+        const result = slot.receive(item);
 
         this._experience.reward.pocket.onReceive(result);
 
@@ -85,7 +70,7 @@ export class RpgPocket {
     }
 
     has(item: RpgPocket.Item, count: number) {
-        for (const slot of this._state.slots) {
+        for (const slot of this._slots) {
             if (slot.item === item) {
                 count -= slot.count;
             }
@@ -96,7 +81,7 @@ export class RpgPocket {
 
     count(item: RpgPocket.Item) {
         let count = 0;
-        for (const slot of this._state.slots) {
+        for (const slot of this._slots) {
             if (slot.item === item) {
                 count += slot.count;
             }
@@ -109,7 +94,7 @@ export class RpgPocket {
     countTotal(): Integer {
         let totalItemsCount = 0;
 
-        for (const slot of this._state.slots) {
+        for (const slot of this._slots) {
             if (slot.item !== null) {
                 totalItemsCount += slot.count;
             }
@@ -118,45 +103,60 @@ export class RpgPocket {
         return totalItemsCount;
     }
 
+    get totalItemsCount() {
+        return this.countTotal();
+    }
+
+    get isEmpty() {
+        return this.totalItemsCount < 1;
+    }
+
     peek(): DataPocketItem.Id[] {
-        return this._state.slots
+        return this._slots
             .filter(slot => slot.count > 0 && slot.item)
             .map(slot => slot.item!);
     }
 
-    remove(item: RpgPocket.Item, count: number) {
-        for (const slot of this._state.slots) {
+    remove(item: RpgPocket.Item, removedCount: number) {
+        for (const slot of this._slots) {
             if (slot.item === item) {
-                const countToTakeFromSlot = Math.min(count, slot.count);
-                slot.count -= countToTakeFromSlot;
-                if (slot.count === 0) {
-                    slot.item = null;
-                }
-                count -= countToTakeFromSlot;
-                this._experience.reward.pocket.onRemoveItems(countToTakeFromSlot, "default");
+                const slotRemovedCount = Math.min(removedCount, slot.count);
+                slot.remove(slotRemovedCount);
+                removedCount -= slotRemovedCount;
+                this._experience.reward.pocket.onRemoveItems(slotRemovedCount, "default");
             }
-            if (count < 0) {
+            if (removedCount < 0) {
                 Logger.logAssertError(
                     "RpgPocket.Methods.remove",
-                    new Error(`count should not be < 0, got ${count}`),
-                    { state: this._state, item, count },
+                    new Error(`removedCount should not be < 0, got ${removedCount}`),
+                    { state: this._state, item, count: removedCount },
                 );
             }
-            else if (count === 0) {
+            else if (removedCount === 0) {
                 return;
             }
         }
     }
 
+    removeAll(item: RpgPocket.Item) {
+        const count = this.count(item);
+        this.remove(item, count);
+        return count;
+    }
+
+    findSlotThatCanReceive(item: RpgPocket.Item) {
+        for (const slot of this.slots) {
+            if (slot.isEmpty || slot.item === item) {
+                return slot;
+            }
+        }
+
+        return null;
+    }
+
     static createState(): RpgPocket.State {
         return {
-            receivingSlotIndex: 0,
-            slots: [
-                {
-                    item: null,
-                    count: 0,
-                },
-            ],
+            slots: [RpgPocketSlot.createState()],
         };
     }
 }
@@ -165,7 +165,6 @@ export namespace RpgPocket {
     export type Item = DataPocketItem.Id;
 
     export interface State {
-        receivingSlotIndex: number;
         slots: RpgPocketSlot.State[];
     }
 
@@ -189,7 +188,7 @@ class RpgPocketSlot {
         return this._state.item;
     }
 
-    update(item: RpgPocketSlot.State["item"], count: Integer) {
+    private _setState(item: RpgPocketSlot.State["item"], count: Integer) {
         if (!item && count !== 0) {
             Logger.logContractViolationError("RpgPocketSlot", new Error("item is falsy but count is not 0"), {
                 item,
@@ -202,14 +201,63 @@ class RpgPocketSlot {
         this._state.item = item;
     }
 
-    force(item: RpgPocketSlot.State["item"], count: Integer, reason: "stash_pocket_operation") {
-        this.update(item, count);
+    empty(): RpgPocketSlot.EmptyResult {
+        const result: RpgPocketSlot.EmptyResult = {
+            count: this._state.count,
+            item: this._state.item,
+        };
+
+        this._setState(null, 0);
+
+        return result;
+    }
+
+    receive(item: RpgPocket.Item): RpgPocketSlot.ReceiveResult {
+        const reset = this.item !== null && this.item !== item;
+
+        if (this.item === null || reset) {
+            this._setState(item, 1);
+        }
+        else {
+            this._setState(item, this.count + 1);
+        }
+
+        return {
+            reset,
+            count: this.count,
+        };
+    }
+
+    receiveCount(item: RpgPocket.Item, count: Integer) {
+        for (let i = 0; i < count; i++) {
+            this.receive(item);
+        }
+    }
+
+    remove(removedCount: Integer) {
+        const count = Math.max(0, this.count - removedCount);
+        const item = count > 0 ? this.item : null;
+        this._setState(item, count);
+    }
+
+    static createState(): RpgPocketSlot.State {
+        return {
+            count: 0,
+            item: null,
+        };
     }
 }
 
 namespace RpgPocketSlot {
     export interface State {
         item: RpgPocket.Item | null;
+        count: number;
+    }
+
+    export type EmptyResult = State;
+
+    export interface ReceiveResult {
+        reset: boolean;
         count: number;
     }
 }

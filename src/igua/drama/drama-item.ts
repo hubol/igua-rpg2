@@ -268,7 +268,7 @@ function createReceivedItemFigureObjAtSpeaker(item: RpgInventory.Item) {
             }
             else if (item.kind === "pocket_item") {
                 // TODO implementation is not accurate
-                objFxCollectPocketItemNotification({ count: 999, index: 0, reset: false }).at(self).show();
+                objFxCollectPocketItemNotification({ count: 999, reset: false }).at(self).show();
             }
             self.destroy();
         })

@@ -1,3 +1,4 @@
+import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { CacheMap } from "../../lib/object/cache-map";
 import { DataPocketItem } from "../data/data-pocket-item";
@@ -62,31 +63,51 @@ class RpgStashPocket {
 
     checkPossibleOperations(): RpgStashPocket.Operation[] {
         const balance = this.check();
-        const currentSlot = this._pocket.receivingSlot;
 
         if (balance.kind === "empty") {
-            return currentSlot.isEmpty ? [] : ["deposit"];
+            return this._pocket.isEmpty ? [] : ["deposit"];
         }
 
-        if (balance.pocketItemId === currentSlot.item) {
+        if (this._pocket.has(balance.pocketItemId, 1)) {
             return ["deposit", "withdraw"];
         }
 
-        return currentSlot.isEmpty ? ["withdraw"] : ["swap"];
+        if (this._pocket.findSlotThatCanReceive(balance.pocketItemId)) {
+            return ["withdraw"];
+        }
+
+        return ["swap"];
     }
 
-    deposit() {
+    checkPossibleDeposits(): DataPocketItem.Id[] {
         const balance = this.check();
-        const { count, item } = this._pocket.receivingSlot;
 
-        // TODO assert that existing deposit item and deposited item are identical, and that count > 0 and item is truthy
+        if (balance.kind === "empty") {
+            return [
+                ...new Set(
+                    this._pocket.slots
+                        .filter(slot => !slot.isEmpty)
+                        .map(slot => slot.item!),
+                ),
+            ];
+        }
+
+        return [balance.pocketItemId];
+    }
+
+    deposit(itemId: DataPocketItem.Id) {
+        if (!this.checkPossibleDeposits().includes(itemId)) {
+            Logger.logAssertError("RpgStashPocket", new Error("Attempting to deposit unexpected item"), { itemId });
+            return;
+        }
+
+        const balance = this.check();
+        const count = this._pocket.removeAll(itemId);
 
         this._state.balances[this._id] = {
-            pocketItemId: item!,
+            pocketItemId: itemId,
             count: count + balance.count,
         };
-
-        this._pocket.receivingSlot.force(null, 0, "stash_pocket_operation");
     }
 
     discover() {
@@ -98,40 +119,41 @@ class RpgStashPocket {
 
     withdraw() {
         const balance = this.check();
-        const { count } = this._pocket.receivingSlot;
-
-        // TODO assert that existing deposit item and deposited item are identical, and that count > 0 and item is truthy
 
         if (balance.kind === "empty") {
-            // TODO assert fail
+            Logger.logAssertError("RpgStashPocket", new Error("Attempting to withdraw an empty balance"));
+            return;
+        }
+
+        const pocketSlot = this._pocket.findSlotThatCanReceive(balance.pocketItemId);
+
+        if (!pocketSlot) {
+            Logger.logAssertError(
+                "RpgStashPocket",
+                new Error("Attempting to withdraw when no available slot can receive"),
+            );
             return;
         }
 
         delete this._state.balances[this._id];
-        this._pocket.receivingSlot.force(
-            balance.pocketItemId,
-            count + balance.count,
-            "stash_pocket_operation",
-        );
+        pocketSlot.receiveCount(balance.pocketItemId, balance.count);
     }
 
     swap() {
         const balance = this.check();
-        const { count, item, isEmpty } = this._pocket.receivingSlot;
+        // TODO maybe an index can be passed to swap?
+        const slot = this._pocket.slots[0];
 
-        if (isEmpty) {
+        if (slot.isEmpty) {
             delete this._state.balances[this._id];
         }
         else {
+            const { count, item } = slot.empty();
             this._state.balances[this._id] = { count, pocketItemId: item! };
         }
 
         if (balance.kind === "not_empty") {
-            this._pocket.receivingSlot.force(
-                balance.pocketItemId,
-                balance.count,
-                "stash_pocket_operation",
-            );
+            slot.receiveCount(balance.pocketItemId, balance.count);
         }
     }
 }
