@@ -259,6 +259,14 @@ export namespace DataEquipment {
                     model.esoteric.nightVisionLevel += 1 + bonus;
                 },
             },
+            Robotic: {
+                name: "Nerd's True Charm",
+                texture: null,
+                description: "Finally! Become a robot",
+                buffs: (model, bonus) => {
+                    model.cosmetic.roboticism += 100;
+                },
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,

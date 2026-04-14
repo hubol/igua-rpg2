@@ -50,6 +50,7 @@ export namespace RpgPlayerBuffs {
             },
             cosmetic: {
                 cigaretteSmoking: <PercentInt> 0,
+                roboticism: <PercentInt> 0,
                 sparkling: <PercentInt> 0,
             },
             esoteric: {

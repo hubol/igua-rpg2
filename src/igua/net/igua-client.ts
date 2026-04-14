@@ -70,6 +70,7 @@ export class IguaClient {
         speed: VectorSimple,
         isSmoking: boolean,
         isSparkling: boolean,
+        isRobotic: boolean,
     ) {
         if (!this._isSocketOpen) {
             return;
@@ -82,7 +83,7 @@ export class IguaClient {
             ducking,
             facing: Math.sign(facing) || 1,
             speed: { x: speed.x, y: speed.y },
-            flags: 0 | (Number(isSmoking) << 0) | (Number(isSparkling) << 1),
+            flags: 0 | (Number(isSmoking) << 0) | (Number(isSparkling) << 1) | (Number(isRobotic) << 2),
         };
 
         const updateJson = JSON.stringify(update);

@@ -298,6 +298,8 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
                 for (let i = 0; i < iguanaSprites.length; i++) {
                     iguanaSprites[i].setIsRobotic(value);
                 }
+
+                isRobotic = value;
             },
         })
         .step(applyAnimation)

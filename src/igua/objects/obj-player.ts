@@ -214,6 +214,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 puppet.sparklesPerFrame = 0;
             }
             puppet.head.mouth.isSmoking = Rpg.character.buffs.cosmetic.cigaretteSmoking > 0;
+            puppet.isRobotic = Rpg.character.buffs.cosmetic.roboticism > 0;
 
             if (puppet.isOnGround) {
                 stepsSinceOffGround++;
