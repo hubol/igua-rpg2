@@ -1,6 +1,6 @@
 import { build, context } from "esbuild";
 import ImportGlobPlugin from "esbuild-plugin-import-glob";
-import { copyFile, readFile, writeFile } from "fs/promises";
+import { copyFile, mkdir, readFile, writeFile } from "fs/promises";
 import { createServer, request } from "http";
 import path from "path";
 import { cwd } from "process";
@@ -111,6 +111,7 @@ async function handleFsRequest(req, res) {
         }
         else if (req.method === "POST") {
             const body = await readBody(req);
+            await mkdir(path.dirname(absolutePath), { recursive: true });
             await writeFile(absolutePath, body);
             res.writeHead(202);
             res.end("Accepted");
