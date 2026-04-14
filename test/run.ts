@@ -1,8 +1,8 @@
 import * as fs from "fs";
 import * as path from "path";
+import { paint } from "../src/lib/paint";
 import { doGlobalSetup } from "./global-setup";
 import { ErrorPrinter } from "./lib/error-printer";
-import { paint } from "./lib/paint";
 import { TestPromise } from "./lib/test-promise";
 
 function findTestFiles() {

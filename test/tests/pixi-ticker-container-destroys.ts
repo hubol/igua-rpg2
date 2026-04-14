@@ -1,6 +1,6 @@
+import { Assert } from "../../src/lib/assert";
 import { AsshatTicker } from "../../src/lib/game-engine/asshat-ticker";
 import { TickerContainer } from "../../src/lib/game-engine/ticker-container";
-import { Assert } from "../lib/assert";
 
 export function whenTickerContainerDestroyedStopsTicking() {
     const ticker1 = new AsshatTicker();

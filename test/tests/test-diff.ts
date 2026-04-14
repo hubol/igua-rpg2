@@ -1,5 +1,5 @@
+import { Assert } from "../../src/lib/assert";
 import { Diff } from "../../src/lib/object/diff";
-import { Assert } from "../lib/assert";
 
 export function testDiffWorksAsExpected() {
     const previous = {

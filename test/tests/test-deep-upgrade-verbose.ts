@@ -1,5 +1,5 @@
+import { Assert } from "../../src/lib/assert";
 import { deepUpgradeVerbose } from "../../src/lib/object/deep-upgrade-verbose";
-import { Assert } from "../lib/assert";
 
 export function deepUpgradeVerboseWorksAsExpected() {
     const previous = {

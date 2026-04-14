@@ -1,9 +1,9 @@
 import { Container } from "pixi.js";
+import { Assert } from "../../src/lib/assert";
 import { setEngineConfig } from "../../src/lib/game-engine/engine-config";
 import { Instances } from "../../src/lib/game-engine/instances";
 import { SceneStack } from "../../src/lib/game-engine/scene-stack";
 import { range } from "../../src/lib/range";
-import { Assert } from "../lib/assert";
 
 function objTest() {
     return new Container().track(objTest);
@@ -13,8 +13,8 @@ function objTest2() {
     return objTest().track(objTest2);
 }
 
-class TestSceneStack extends SceneStack<{}, {}> {
-    protected convert<T>(populateSceneFn: () => T, meta: {}): { populateScene(): T } {
+class TestSceneStack extends SceneStack<{}> {
+    protected convert<T>(populateSceneFn: () => T): { populateScene(): T } {
         return {
             populateScene: populateSceneFn,
         };
@@ -31,8 +31,9 @@ function configureEngine() {
         renderer: null as any,
         sceneStack,
         showDefaultStage: new Container(),
+        worldStage: new Container(),
     });
-    sceneStack.push(() => ({}), {});
+    sceneStack.push(() => ({}));
 }
 
 export function trackedInstancesAppearInArrayOnceShown() {

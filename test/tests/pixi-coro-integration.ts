@@ -1,8 +1,8 @@
+import { Assert } from "../../src/lib/assert";
 import "../../src/lib/extensions/-load-extensions";
 import { AsshatTicker } from "../../src/lib/game-engine/asshat-ticker";
 import { Coro } from "../../src/lib/game-engine/routines/coro";
 import { TickerContainer } from "../../src/lib/game-engine/ticker-container";
-import { Assert } from "../lib/assert";
 import { createDisplayObject } from "../lib/create-display-object";
 
 export function coroWorks() {

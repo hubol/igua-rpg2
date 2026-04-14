@@ -1,6 +1,6 @@
+import { Assert } from "../../src/lib/assert";
 import { AsshatTaskContext, AsshatTicker } from "../../src/lib/game-engine/asshat-ticker";
 import { CancellationToken } from "../../src/lib/promise/cancellation-token";
-import { Assert } from "../lib/assert";
 
 export function tickerOrderWorksAsExpected() {
     const ticker = new AsshatTicker();

@@ -1,5 +1,5 @@
+import { Assert } from "../../src/lib/assert";
 import { PseudoRng } from "../../src/lib/math/rng";
-import { Assert } from "../lib/assert";
 
 export function pseudoRngReturnsFloatInExpectedRange() {
     const r = new PseudoRng(0).float();

@@ -1,4 +1,4 @@
-import { Undefined } from "../../src/lib/types/undefined";
+import { Undefined } from "./types/undefined";
 
 export const paint = {
     bgRed: paintImpl({ bg: 1 }),

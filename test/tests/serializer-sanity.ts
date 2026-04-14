@@ -1,5 +1,5 @@
+import { Assert } from "../../src/lib/assert";
 import { Serializer } from "../../src/lib/object/serializer";
-import { Assert } from "../lib/assert";
 
 export function serializeDeserializeWorks() {
     const source = {

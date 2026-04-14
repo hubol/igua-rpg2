@@ -1,5 +1,5 @@
+import { Assert } from "../../src/lib/assert";
 import { DeepAccess } from "../../src/lib/object/deep-access";
-import { Assert } from "../lib/assert";
 
 export function deepAccessWorksAsExpected() {
     const object = {

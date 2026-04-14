@@ -1,5 +1,5 @@
+import { Assert } from "../../src/lib/assert";
 import { compileResetter } from "../../src/lib/object/compile-resetter";
-import { Assert } from "../lib/assert";
 
 export function compileResetterWorksAsExpected() {
     const obj = {
