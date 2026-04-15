@@ -135,7 +135,7 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
                     yield* show(tank.isValveOpen ? "Valve opened." : "Valve closed.");
                 }
                 else if (result === 1) {
-                    const pocketItemsCount = Rpg.inventory.pocket.countTotal();
+                    const pocketItemsCount = Rpg.inventory.pocket.totalItemsCount;
 
                     yield* show(
                         "Your pocket items may be converted into helium.",
