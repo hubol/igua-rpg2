@@ -17,6 +17,7 @@ import { ZIndex } from "../core/scene/z-index";
 import { DramaFacts } from "../drama/drama-facts";
 import { DramaGifts } from "../drama/drama-gifts";
 import { DramaInventory } from "../drama/drama-inventory";
+import { DramaMisc } from "../drama/drama-misc";
 import { DramaPlayerAttributes } from "../drama/drama-player-attributes";
 import { DramaPotions } from "../drama/drama-potions";
 import { DramaQuests } from "../drama/drama-quests";
@@ -35,6 +36,7 @@ import { mxnEsotericArtInteractive, objEsotericArt } from "../objects/esoteric/o
 import { objEsotericRemovedShoes } from "../objects/esoteric/obj-esoteric-removed-shoes";
 import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
 import { objFish } from "../objects/obj-fish";
+import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgStatus } from "../rpg/rpg-status";
@@ -351,12 +353,18 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
                 const value = 128 * Math.round(Math.pow(1.3, this.windEssenceCount)) + 256 * this.windEssenceCount;
                 return Number.isFinite(value) ? value : Number.MAX_SAFE_INTEGER;
             },
+            get isTerminalEnabled() {
+                return flag.isTerminalEnabled;
+            },
+            disableTerminalByFbi() {
+                flag.isTerminalEnabled = false;
+            },
             addWindEssence(count: Integer) {
                 flag.windEssenceCount += count;
             },
             downloadData() {
                 const ticks = Rpg.records.gameTicksPlayed - flag.lastEvaluatedGameTickCount;
-                if (ticks <= 0) {
+                if (ticks <= 0 || !flag.isTerminalEnabled) {
                     return;
                 }
 
@@ -389,6 +397,7 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
         gigabyte: 1_000_000_000,
         movieBytes: 2_000_000_000,
         maxStoredBytes: 64_000_000_000,
+        fbiDisablesAfterMoviesCount: 200,
     };
 
     function bytesText(bytes: number) {
@@ -415,6 +424,12 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
 
         objText.XSmall("", { tint: 0x00ff00 })
             .step(self => {
+                if (!flagNerd.isTerminalEnabled) {
+                    self.text = `
+ Disabled
+  by FBI`;
+                    return;
+                }
                 if (flagNerd.isAtCapacity) {
                     self.text = `   
  AT MAX!`;
@@ -478,6 +493,12 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
     lvl.NerdTerminal
         .mixin(mxnSpeaker, { name: "Nerd Terminal", tintPrimary: 0x606060, tintSecondary: 0xAFAFAF })
         .mixin(mxnCutscene, function* () {
+            if (!flagNerd.isTerminalEnabled) {
+                lvl.NerdTerminal.play(Sfx.Interact.Error);
+                yield* show("The federal bureau of iguanas has disabled this terminal.");
+                return;
+            }
+
             if (flagNerd.storedMoviesCount < 1) {
                 yield* show("Nothing downloaded yet.");
                 return;
@@ -489,6 +510,51 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
             for (let i = 0; i < count; i++) {
                 Rpg.experience.reward.computer.onInteract("small_task");
             }
+
+            if (!Rpg.inventory.keyItems.has("IllegalMovie", constNerd.fbiDisablesAfterMoviesCount)) {
+                return;
+            }
+
+            Jukebox.play(Mzk.FuckerLand);
+
+            const fbiNpcObj = objIguanaNpc("FbiAgent").at(lvl.FbiNpcMarker).invisible().show();
+
+            Cutscene.setCurrentSpeaker(fbiNpcObj);
+
+            yield* show(
+                "FBI!!!!!",
+            );
+
+            DramaMisc.arriveViaDoor(fbiNpcObj);
+            yield sleep(500);
+
+            yield* show(
+                "Federal! Bureau! of! Iguanas!",
+                "You!!! Step away from the terminal!",
+            );
+
+            yield* playerObj.walkTo(lvl.PlayerAwayFromTerminalMarker.x);
+            playerObj.auto.facing = -1;
+
+            yield* show("Piracy is a crime!!!!");
+
+            Sfx.Interact.BombDefuse.play();
+            flagNerd.disableTerminalByFbi();
+            yield sleep(250);
+
+            yield* show("That makes you a crimer!!!");
+            yield* DramaPlayerAttributes.setName("Crimer");
+
+            yield* show("I'm going to confiscate those now.");
+
+            yield* DramaInventory.removeAll({ id: "IllegalMovie", kind: "key_item" });
+
+            yield* show("Consider this a warning!!!!");
+
+            yield* DramaMisc.walkToDoor(fbiNpcObj, lvl.NerdDoor);
+            DramaMisc.departRoomViaDoor(fbiNpcObj);
+
+            Jukebox.play(Mzk.UnforgivableToner);
         });
 
     lvl.CloudHouseNerdNpc
@@ -508,10 +574,18 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
                 yield* show("Hopefully that makes sense!");
             }
             else if (result === 1) {
-                yield* show("Great! I'll use it to power up my computers.");
+                if (flagNerd.isTerminalEnabled) {
+                    yield* show("Great! I'll use it to power up my computers.");
+                }
+                else {
+                    yield* show("Oh thanks, even though the terminal is disabled, I'll still take this!");
+                }
                 const count = yield* DramaInventory.removeAll({ kind: "pocket_item", id: "EssenceWind" });
                 flagNerd.addWindEssence(count);
-                yield* show("This wind essence will be put to good use!");
+
+                if (flagNerd.isTerminalEnabled) {
+                    yield* show("This wind essence will be put to good use!");
+                }
             }
             else if (result === 2) {
                 yield* dramaShop("ComputerNerd", lvl.CloudHouseNerdNpc.speaker);

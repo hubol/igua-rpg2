@@ -718,8 +718,8 @@ export const Lvl = {
       Door_3: e(r["Door"], { x: 616, y: 480, values: { sceneName: "scnGreatTowerBalcony", checkpointName: "fromEfficient", name: "", depth: 0 } }, "Entities"),
       Door_4: e(r["Door"], { x: 1088, y: 88, values: { sceneName: "scnGreatTowerBalcony", checkpointName: "fromEfficient", name: "", depth: 0 } }, "Entities"),
       Door_5: e(r["Door"], { x: 1376, y: 472, values: { sceneName: "scnGreatTowerBalcony", checkpointName: "fromEfficient", name: "", depth: 0 } }, "Entities"),
-      Door_6: e(r["Door"], { x: 144, y: 696, values: { sceneName: "scnGreatTowerBalcony", checkpointName: "fromEfficient", name: "", depth: 0 } }, "Entities"),
-      Door_7: e(r["Door"], { x: 688, y: 744, values: { sceneName: "scnGreatTowerBalcony", checkpointName: "fromEfficient", name: "", depth: 0 } }, "Entities"),
+      NerdDoor: e(r["Door"], { x: 144, y: 696, values: { sceneName: "scnGreatTowerBalcony", checkpointName: "fromEfficient", name: "NerdDoor", depth: 0 } }, "Entities"),
+      Door_6: e(r["Door"], { x: 688, y: 744, values: { sceneName: "scnGreatTowerBalcony", checkpointName: "fromEfficient", name: "", depth: 0 } }, "Entities"),
       WaterDripSource: e(r["WaterDripSource"], { x: 1439, y: 92, values: { delayMin: 2000, delayMax: 6000, name: "", depth: 0 } }, "Entities"),
       EnemySnail: e(r["EnemySnail"], { x: 832, y: 536, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       TerrainGrassMessy28px_2: d(Tx.Terrain.Grass.Messy28px, { x: 1115, y: 135, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x96d266 }, "AboveEntitiesDecals"),
@@ -788,6 +788,8 @@ export const Lvl = {
       TurbineMarker2: e(r["Marker"], { x: 120, y: 808, values: { name: "TurbineMarker2", depth: 0 }, tint: 0xfff500 }, "MarkerEntities"),
       TurbineMarker3: e(r["Marker"], { x: 368, y: 808, values: { name: "TurbineMarker3", depth: 0 }, tint: 0xfff500 }, "MarkerEntities"),
       TurbineMarker0: e(r["Marker"], { x: 240, y: 808, values: { name: "TurbineMarker0", depth: 0 }, tint: 0xfff500 }, "MarkerEntities"),
+      FbiNpcMarker: e(r["Marker"], { x: 188, y: 746, values: { name: "FbiNpcMarker", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+      PlayerAwayFromTerminalMarker: e(r["Marker"], { x: 272, y: 808, values: { name: "PlayerAwayFromTerminalMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   EndingDemoGood: (): LvlType.EndingDemoGood => {
@@ -9078,8 +9080,8 @@ export namespace LvlType {
     Door_3: ReturnType<(typeof r)["Door"]>;
     Door_4: ReturnType<(typeof r)["Door"]>;
     Door_5: ReturnType<(typeof r)["Door"]>;
+    NerdDoor: ReturnType<(typeof r)["Door"]>;
     Door_6: ReturnType<(typeof r)["Door"]>;
-    Door_7: ReturnType<(typeof r)["Door"]>;
     WaterDripSource: ReturnType<(typeof r)["WaterDripSource"]>;
     EnemySnail: ReturnType<(typeof r)["EnemySnail"]>;
     TerrainGrassMessy28px_2: Sprite;
@@ -9148,6 +9150,8 @@ export namespace LvlType {
     TurbineMarker2: ReturnType<(typeof r)["Marker"]>;
     TurbineMarker3: ReturnType<(typeof r)["Marker"]>;
     TurbineMarker0: ReturnType<(typeof r)["Marker"]>;
+    FbiNpcMarker: ReturnType<(typeof r)["Marker"]>;
+    PlayerAwayFromTerminalMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type EndingDemoGood = {
     Block: ReturnType<(typeof r)["Block"]>;

@@ -63,6 +63,8 @@ export namespace DataNpcPersona {
             FlopStudent3: { job: "Student", name: "Reech", looks: NpcLooks.NaiveWizard },
             GamblingTeacher: { job: "Gambling Expert", name: "Trinz", looks: NpcLooks.Goldilocks },
             SocialTeacher: { job: "Social Expert", name: "Chrinch", looks: NpcLooks.Plum },
+            // TODO need new looks:
+            FbiAgent: { job: "FBI Agent", name: "Funch", looks: NpcLooks.Plum },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
         } satisfies Record<string, Model>,
     );
