@@ -42,10 +42,10 @@ export function scnDevGenerateRoboticIguanas() {
                 backgroundAlpha: 0,
             });
 
-            const obj = container(Sprite.from(tx));
+            const obj = container(Sprite.from(tx).tinted(0xffffff));
             const panelTx = panelTextures[key] ?? NoAtlasTx.Iguana.Robot.Panels.Large;
             new TilingSprite(panelTx, tx.width, tx.height)
-                .tinted(0xe0e0e0)
+                .tinted(0xffffff)
                 .masked(Sprite.from(tx))
                 .show(obj);
             renderer.render(obj);
