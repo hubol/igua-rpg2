@@ -8267,8 +8267,6 @@ export const Lvl = {
       LightShadowIrregularSmallRound_3: d(Tx.Light.ShadowIrregularSmallRound, { x: 513, y: 966, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
       LightShadowIrregularSmallRound_4: d(Tx.Light.ShadowIrregularSmallRound, { x: 514, y: 963, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
       StoneBrickRows1: d(Tx.Stone.BrickRows1, { x: 447, y: 1430, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3f2756 }, "TerrainDecals"),
-      EnemySpikeBall: d(Tx.Enemy.SpikeBall, { x: 739, y: 1009, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      EnemySpikeBall_1: d(Tx.Enemy.SpikeBall, { x: 715, y: 1033, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       ShapesSquare32_66: d(Tx.Shapes.Square32, { x: 1000, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x172a03 }, "TerrainDecals"),
       ShapesSquare32_67: d(Tx.Shapes.Square32, { x: 1040, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
       ShapesSquare32_68: d(Tx.Shapes.Square32, { x: 1080, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
@@ -8299,6 +8297,8 @@ export const Lvl = {
       WorldMapCloud0_11: d(Tx.WorldMap.Cloud0, { x: 935, y: 181, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x707e25 }, "TerrainDecals"),
       StashPocket: e(r["StashPocket"], { x: 472, y: 952, uid: 175280777909200, values: { name: "", depth: 0 } }, "Entities"),
       GateMap: e(r["GateMap"], { x: 496, y: 728, rotation: 270, uid: 177430696428500, values: { sceneName: "scnFlopCollegeExterior", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "Entities"),
+      EnemySpikeBall: e(r["EnemySpikeBall"], { x: 715, y: 1033, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_1: e(r["EnemySpikeBall"], { x: 739, y: 1009, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       FoliageFlower18: d(Tx.Foliage.Flower18, { x: 442, y: 967, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff8400 }, "AboveEntitiesDecals"),
       FoliageFlower18_1: d(Tx.Foliage.Flower18, { x: 475, y: 973, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb200 }, "AboveEntitiesDecals"),
       FoliageFlower22: d(Tx.Foliage.Flower22, { x: 510, y: 962, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
@@ -16465,8 +16465,6 @@ export namespace LvlType {
     LightShadowIrregularSmallRound_3: Sprite;
     LightShadowIrregularSmallRound_4: Sprite;
     StoneBrickRows1: Sprite;
-    EnemySpikeBall: Sprite;
-    EnemySpikeBall_1: Sprite;
     ShapesSquare32_66: Sprite;
     ShapesSquare32_67: Sprite;
     ShapesSquare32_68: Sprite;
@@ -16497,6 +16495,8 @@ export namespace LvlType {
     WorldMapCloud0_11: Sprite;
     StashPocket: ReturnType<(typeof r)["StashPocket"]>;
     GateMap: ReturnType<(typeof r)["GateMap"]>;
+    EnemySpikeBall: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_1: ReturnType<(typeof r)["EnemySpikeBall"]>;
     FoliageFlower18: Sprite;
     FoliageFlower18_1: Sprite;
     FoliageFlower22: Sprite;

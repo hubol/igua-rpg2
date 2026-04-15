@@ -14,17 +14,13 @@ import { dramaQuizComputerScience } from "../drama/drama-quiz-computer-science";
 import { ask, show } from "../drama/show";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFallenBot } from "../objects/characters/obj-character-fallen-bot";
 import { playerObj } from "../objects/obj-player";
 import { OgmoFactory } from "../ogmo/factory";
 import { Rpg } from "../rpg/rpg";
-import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgSaveFiles } from "../rpg/rpg-save-files";
-
-const atkSpikeBall = RpgAttack.create({ physical: 30 });
 
 export function scnWorldMap() {
     RpgSaveFiles.Current.save();
@@ -35,9 +31,6 @@ export function scnWorldMap() {
     const lvl = Lvl.WorldMap();
     Instances(OgmoFactory.createDecal).filter(x => x.texture === Tx.WorldMap.Cloud0).forEach(x =>
         x.mixin(mxnSinePivot)
-    );
-    Instances(OgmoFactory.createDecal).filter(x => x.texture === Tx.Enemy.SpikeBall).forEach(x =>
-        x.mixin(mxnRpgAttack, { attack: atkSpikeBall })
     );
     Object.entries(lvl).flatMap(([key, value]) =>
         key.endsWith("Label") && value instanceof DisplayObject ? [value] : []

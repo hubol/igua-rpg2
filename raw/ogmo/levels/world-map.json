@@ -661,6 +661,26 @@
           "uid": 177430696428500,
           "tint": "#ffffff",
           "values": {"sceneName": "scnFlopCollegeExterior", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "EnemySpikeBall",
+          "id": 2,
+          "_eid": "22280227",
+          "x": 715,
+          "y": 1033,
+          "originX": 12,
+          "originY": 10,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemySpikeBall",
+          "id": 3,
+          "_eid": "22280227",
+          "x": 739,
+          "y": 1009,
+          "originX": 12,
+          "originY": 10,
+          "values": {"variant": "level0", "name": "", "depth": 0}
         }
       ]
     },
@@ -968,32 +988,6 @@
           "rotation": 0,
           "tint": "#3f2756",
           "texture": "stone/brick rows 1.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 739,
-          "y": 1009,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "enemy/spike ball.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 715,
-          "y": 1033,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "enemy/spike ball.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
@@ -5244,7 +5238,8 @@
           "texture": "world map/wave 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1087,
@@ -5256,7 +5251,8 @@
           "texture": "world map/wave 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1064,
@@ -5268,7 +5264,8 @@
           "texture": "world map/wave 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1085,
@@ -5280,7 +5277,8 @@
           "texture": "world map/wave 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1067,
@@ -5292,7 +5290,8 @@
           "texture": "world map/wave 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1072,
@@ -5304,7 +5303,8 @@
           "texture": "world map/wave 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1085,
@@ -5316,7 +5316,8 @@
           "texture": "world map/wave 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1067,
@@ -5328,7 +5329,8 @@
           "texture": "world map/wave 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1097,
@@ -6874,7 +6876,8 @@
           "texture": "world map/states/ohio.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

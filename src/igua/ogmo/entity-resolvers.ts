@@ -11,6 +11,7 @@ import { objAngelBrick } from "../objects/enemies/obj-angel-brick";
 import { objAngelCactus } from "../objects/enemies/obj-angel-cactus";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { objAngelSnail } from "../objects/enemies/obj-angel-snail";
+import { objAngelSpikeBall } from "../objects/enemies/obj-angel-spike-ball";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
 import { objStashPocket } from "../objects/interactables/obj-stash-pocket";
 import { objDarkness } from "../objects/nature/obj-darkness";
@@ -88,6 +89,7 @@ export const OgmoEntityResolvers = {
     },
     EnemyCactus: (entity) => objAngelCactus(entity).at(1, 3),
     EnemySnail: () => objAngelSnail(),
+    EnemySpikeBall: objAngelSpikeBall,
     EnemySuggestive: (entity) => objAngelSuggestive(entity).at(0, -38),
     EnemyMiffed: (entity) => objAngelMiffed(entity).at(0, 1),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,
