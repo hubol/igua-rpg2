@@ -88,8 +88,7 @@ export class RpgPocket {
         return count;
     }
 
-    // TODO getter?
-    countTotal(): Integer {
+    get totalItemsCount() {
         let totalItemsCount = 0;
 
         for (const slot of this._slots) {
@@ -99,10 +98,6 @@ export class RpgPocket {
         }
 
         return totalItemsCount;
-    }
-
-    get totalItemsCount() {
-        return this.countTotal();
     }
 
     get isEmpty() {

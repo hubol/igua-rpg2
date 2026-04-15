@@ -116,7 +116,7 @@ function enrichPocketTeacher(lvl: LvlType.GrottoIndianaShop) {
 
             yield* show("Great, I'll take one then!");
 
-            if (Rpg.inventory.pocket.countTotal() === 0) {
+            if (Rpg.inventory.pocket.totalItemsCount === 0) {
                 yield sleep(1000);
                 yield* show("...Wait, you don't have any.");
                 return;
