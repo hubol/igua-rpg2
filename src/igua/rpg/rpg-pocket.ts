@@ -4,8 +4,6 @@ import { DataPocketItem } from "../data/data-pocket-item";
 import { RpgExperience } from "./rpg-experience";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 
-type RpgPocketSlotPublic = Omit<RpgPocketSlot, "update">;
-
 export class RpgPocket {
     private readonly _slotObjects: RpgPocketSlot[] = [];
 
@@ -32,7 +30,7 @@ export class RpgPocket {
         return this._slotObjects;
     }
 
-    get slots(): ReadonlyArray<RpgPocketSlotPublic> {
+    get slots(): ReadonlyArray<RpgPocketSlot> {
         return this._slots;
     }
 
@@ -111,10 +109,12 @@ export class RpgPocket {
         return this.totalItemsCount < 1;
     }
 
-    peek(): DataPocketItem.Id[] {
-        return this._slots
-            .filter(slot => slot.count > 0 && slot.item)
-            .map(slot => slot.item!);
+    get uniqueItems(): Set<RpgPocket.Item> {
+        return new Set(
+            this._slots
+                .filter(slot => slot.count > 0 && slot.item)
+                .map(slot => slot.item!),
+        );
     }
 
     remove(item: RpgPocket.Item, removedCount: number) {

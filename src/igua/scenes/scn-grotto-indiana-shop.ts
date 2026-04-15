@@ -122,7 +122,7 @@ function enrichPocketTeacher(lvl: LvlType.GrottoIndianaShop) {
                 return;
             }
 
-            const heldPocketItemIds = new Set(Rpg.inventory.pocket.peek());
+            const heldPocketItemIds = Rpg.inventory.pocket.uniqueItems;
             let receivedAtLeastOne = false;
 
             for (const id of heldPocketItemIds) {
