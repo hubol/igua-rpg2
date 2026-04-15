@@ -267,6 +267,14 @@ export namespace DataEquipment {
                     model.cosmetic.roboticism += 100;
                 },
             },
+            PocketSlot: {
+                name: "Convenient Shoe",
+                texture: null,
+                description: "Grants a convenient extra pocket for items. If you take it off, your items will be lost!",
+                buffs: (model, bonus) => {
+                    model.pocket.bonusSlotCount += 1 + bonus;
+                },
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,
