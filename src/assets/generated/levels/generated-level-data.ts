@@ -2291,6 +2291,35 @@ export const Lvl = {
       PityMarker: e(r["Marker"], { x: 752, y: 288, values: { name: "PityMarker", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
     };
   },
+  IndianaDarkEvilHole: (): LvlType.IndianaDarkEvilHole => {
+    applyLevel({ width: 832, height: 672, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    return {
+      Block: e(r["Block"], { x: 384, y: 432, width: 40, height: 248, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 424, y: 632, width: 216, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 640, y: 424, width: 72, height: 248, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 640, y: 264, width: 192, height: 336, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 640, y: -40, width: 192, height: 336, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 232, y: -40, width: 192, height: 336, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 424, y: 96, width: 176, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 224, y: 432, width: 160, height: 160, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: -8, y: 432, width: 256, height: 168, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      EnemySpikeBall: e(r["EnemySpikeBall"], { x: 437, y: 624, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_1: e(r["EnemySpikeBall"], { x: 461, y: 632, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_2: e(r["EnemySpikeBall"], { x: 485, y: 624, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_3: e(r["EnemySpikeBall"], { x: 509, y: 632, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_4: e(r["EnemySpikeBall"], { x: 533, y: 624, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_5: e(r["EnemySpikeBall"], { x: 557, y: 632, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_6: e(r["EnemySpikeBall"], { x: 581, y: 624, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_7: e(r["EnemySpikeBall"], { x: 605, y: 632, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_8: e(r["EnemySpikeBall"], { x: 629, y: 624, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      Darkness: e(r["Darkness"], { x: 600, y: 280, values: { exitSceneName: "scnWorldMap", exitCheckpointName: "", level: 2, name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_9: e(r["EnemySpikeBall"], { x: 360, y: 424, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_10: e(r["EnemySpikeBall"], { x: 248, y: 424, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_11: e(r["EnemySpikeBall"], { x: 152, y: 424, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      ShoeHaverNpc: e(r["IguanaNpc"], { x: 56, y: 432, flippedX: false, values: { personaName: "", name: "ShoeHaverNpc", depth: 0 } }, "CharacterEntities"),
+      Player: e(r["Player"], { x: 520, y: 96, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    };
+  },
   IndianaDesert: (): LvlType.IndianaDesert => {
     applyLevel({ width: 1800, height: 344, backgroundTint: 0x8dcbe6, terrainTint: 0xffc123 });
     return {
@@ -8343,6 +8372,7 @@ export const Lvl = {
       GateMap_11: e(r["GateMap"], { x: 632, y: 232, rotation: 180, uid: 177472955265013, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_12: e(r["GateMap"], { x: 992, y: 336, rotation: 0, uid: 177612382363803, values: { sceneName: "scnIndianaOhioBridge", checkpointName: "fromIndiana", name: "", depth: 0, visible: true }, tint: 0xff6753 }, "RegionEntities"),
       GateMap_13: e(r["GateMap"], { x: 1160, y: 360, rotation: 180, uid: 177612384494403, values: { sceneName: "scnIndianaOhioBridge", checkpointName: "fromOhio", name: "", depth: 0, visible: true }, tint: 0xbab532 }, "RegionEntities"),
+      GateMap_14: e(r["GateMap"], { x: 560, y: 368, rotation: -90, uid: 177622511424900, values: { sceneName: "scnIndianaDarkEvilHole", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       FallenBotMarker: e(r["Marker"], { x: 744, y: 552, values: { name: "FallenBotMarker", depth: 0 }, tint: 0x777777 }, "MarkerEntities"),
     };
   },
@@ -10589,6 +10619,32 @@ export namespace LvlType {
     EnvironmentSparkleMarker_9: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
     EnvironmentSparkleMarker_10: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
     PityMarker: ReturnType<(typeof r)["Marker"]>;
+  };
+  export type IndianaDarkEvilHole = {
+    Block: ReturnType<(typeof r)["Block"]>;
+    Block_1: ReturnType<(typeof r)["Block"]>;
+    Block_2: ReturnType<(typeof r)["Block"]>;
+    Block_3: ReturnType<(typeof r)["Block"]>;
+    Block_4: ReturnType<(typeof r)["Block"]>;
+    Block_5: ReturnType<(typeof r)["Block"]>;
+    Pipe: ReturnType<(typeof r)["Pipe"]>;
+    Block_6: ReturnType<(typeof r)["Block"]>;
+    Block_7: ReturnType<(typeof r)["Block"]>;
+    EnemySpikeBall: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_1: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_2: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_3: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_4: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_5: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_6: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_7: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_8: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    Darkness: ReturnType<(typeof r)["Darkness"]>;
+    EnemySpikeBall_9: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_10: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_11: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    ShoeHaverNpc: ReturnType<(typeof r)["IguanaNpc"]>;
+    Player: ReturnType<(typeof r)["Player"]>;
   };
   export type IndianaDesert = {
     SkyCloudLong0: Sprite;
@@ -16541,6 +16597,7 @@ export namespace LvlType {
     GateMap_11: ReturnType<(typeof r)["GateMap"]>;
     GateMap_12: ReturnType<(typeof r)["GateMap"]>;
     GateMap_13: ReturnType<(typeof r)["GateMap"]>;
+    GateMap_14: ReturnType<(typeof r)["GateMap"]>;
     FallenBotMarker: ReturnType<(typeof r)["Marker"]>;
   };
 }

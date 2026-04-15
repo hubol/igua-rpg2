@@ -247,6 +247,19 @@
           "uid": 177612384494403,
           "tint": "#bab532",
           "values": {"sceneName": "scnIndianaOhioBridge", "checkpointName": "fromOhio", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 18,
+          "_eid": "53836309",
+          "x": 560,
+          "y": 368,
+          "originX": 16,
+          "originY": 16,
+          "rotation": -90,
+          "uid": 177622511424900,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnIndianaDarkEvilHole", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         }
       ]
     },

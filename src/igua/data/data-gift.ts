@@ -30,6 +30,9 @@ export namespace DataGift {
             "Demo.GoodEnd": {
                 item: { kind: "equipment", id: "Sparkle", level: 1 },
             },
+            "Indiana.DarkEvilHole.Illuminate": {
+                item: { kind: "equipment", id: "NightVision", level: 1 },
+            },
             __Fallback__: {
                 item: { kind: "potion", id: "RestoreHealth" },
             },
