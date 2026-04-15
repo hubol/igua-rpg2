@@ -27,7 +27,7 @@ import { CtxInteract } from "../../mixins/mxn-interact";
 import { Rpg } from "../../rpg/rpg";
 import { RpgExperience } from "../../rpg/rpg-experience";
 import { RpgSceneIdol } from "../../rpg/rpg-player-aggregated-buffs";
-import { RpgPocket } from "../../rpg/rpg-pocket";
+import { RpgPocket, RpgPocketSlot } from "../../rpg/rpg-pocket";
 import { RpgSaveFiles } from "../../rpg/rpg-save-files";
 import { objFigurePocketItem } from "../figures/obj-figure-pocket-item";
 import { objFloppyDisk } from "../obj-floppy-disk";
@@ -423,7 +423,35 @@ function objCutsceneLetterbox() {
 }
 
 function objPocketInfo() {
-    const prefixTextObj = objText.MediumIrregular("Your pocket has ", { tint: Consts.StatusTextTint });
+    return container()
+        .merge({ effectiveHeight: 0 })
+        .coro(function* (self) {
+            while (true) {
+                self.removeAllChildren();
+
+                const count = Rpg.inventory.pocket.slots.length === 1 && Rpg.inventory.pocket.slots[0].isEmpty
+                    ? 0
+                    : Rpg.inventory.pocket.slots.length;
+
+                for (let i = 0; i < count; i++) {
+                    const slot = Rpg.inventory.pocket.slots[i];
+                    objPocketSlotInfo(slot, i > 0)
+                        .at(0, i * 10)
+                        .show(self);
+                }
+
+                self.effectiveHeight = self.children.length * 10;
+
+                yield onPrimitiveMutate(() =>
+                    Number(Rpg.inventory.pocket.slots[0].isEmpty) + Rpg.inventory.pocket.slots.length * 10
+                );
+            }
+        });
+}
+
+function objPocketSlotInfo(slot: RpgPocketSlot, isExtra: boolean) {
+    const prefixText = isExtra ? "Your extra pocket has " : "Your pocket has ";
+    const prefixTextObj = objText.MediumIrregular(prefixText, { tint: Consts.StatusTextTint });
     const suffixTextObj = objText.MediumIrregular("", { tint: Consts.StatusTextTint });
 
     let appliedPocketItemId: RpgPocket.Item | null = null;
@@ -433,11 +461,11 @@ function objPocketInfo() {
     const figureContainerObj = container(
         container()
             .step((self) => {
-                if (appliedPocketItemId === Rpg.inventory.pocket.slots[0].item) {
+                if (appliedPocketItemId === slot.item) {
                     return;
                 }
 
-                const pocketItemId = Rpg.inventory.pocket.slots[0].item;
+                const pocketItemId = slot.item;
                 self.removeAllChildren();
                 if (pocketItemId !== null) {
                     objFigurePocketItem(pocketItemId).show(self);
@@ -447,7 +475,7 @@ function objPocketInfo() {
             .masked(figureMaskObj),
         figureMaskObj,
     )
-        .step(self => self.visible = Rpg.character.attributes.intelligence >= 1)
+        .step(self => self.visible = Rpg.character.attributes.intelligence >= 1 && !slot.isEmpty)
         .at(prefixTextObj.width, -4);
 
     return container(
@@ -455,18 +483,18 @@ function objPocketInfo() {
         suffixTextObj,
         figureContainerObj,
     )
-        .step(self => {
-            const slot = Rpg.inventory.pocket.slots[0];
-            // TODO multiple slots lol
-            self.visible = !slot.isEmpty;
-            if (self.visible) {
-                suffixTextObj.x = figureContainerObj.visible ? (figureContainerObj.x + 24) : prefixTextObj.width;
-                suffixTextObj.text = DataPocketItem.getById(slot.item!).name + "x" + slot.count;
-                prefixTextObj.seed = slot.count + 81_000;
-                suffixTextObj.seed = slot.count + 80_000;
+        .step(() => {
+            suffixTextObj.x = figureContainerObj.visible ? (figureContainerObj.x + 24) : prefixTextObj.width;
+            if (slot.item) {
+                suffixTextObj.text = DataPocketItem.getById(slot.item).name + "x" + slot.count;
             }
-        })
-        .merge({ effectiveHeight: 10 });
+            else {
+                suffixTextObj.text = "nothing";
+            }
+
+            prefixTextObj.seed = slot.count + 81_000;
+            suffixTextObj.seed = slot.count + 80_000;
+        });
 }
 
 function createQuitObjs() {

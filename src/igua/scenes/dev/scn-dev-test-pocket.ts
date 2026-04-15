@@ -35,6 +35,10 @@ export function scnDevTestPocket() {
         Assert(rpg.inventory.pocket.count("BallFruitTypeB")).toStrictlyBe(2);
         Assert(rpg.inventory.pocket.count("Beet")).toStrictlyBe(2);
         Assert(rpg.inventory.pocket.totalItemsCount).toStrictlyBe(4);
+        rpg.inventory.equipment.equip(null, 0);
+        Assert(rpg.inventory.pocket.count("BallFruitTypeB")).toStrictlyBe(0);
+        Assert(rpg.inventory.pocket.count("Beet")).toStrictlyBe(2);
+        Assert(rpg.inventory.pocket.totalItemsCount).toStrictlyBe(2);
     });
 }
 

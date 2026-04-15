@@ -25,6 +25,7 @@ export class RpgPocket {
             this._slotObjects[index] = new RpgPocketSlot(this._state.slots[index]);
         }
 
+        this._state.slots.length = slotsCount;
         this._slotObjects.length = slotsCount;
 
         return this._slotObjects;
@@ -167,7 +168,7 @@ export namespace RpgPocket {
     export type ReceiveResult = ReturnType<RpgPocket["receive"]>;
 }
 
-class RpgPocketSlot {
+export class RpgPocketSlot {
     constructor(private readonly _state: RpgPocketSlot.State) {
     }
 
