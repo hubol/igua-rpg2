@@ -19,6 +19,7 @@ export function mxnRpgAttack(obj: DisplayObject, { attack, attacker }: MxnRpgAtt
     return obj
         .dispatches<"mxnRpgAttack.hit">()
         .merge({ attack, isAttackActive: true })
+        .track(mxnRpgAttack)
         .step(self => {
             if (!self.isAttackActive) {
                 return;
