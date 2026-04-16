@@ -4,10 +4,10 @@ import { show } from "../drama/show";
 import { mxnCutscene } from "./mxn-cutscene";
 import { mxnSpeaker } from "./mxn-speaker";
 
-export function mxnSign(obj: DisplayObject, message: string) {
+export function mxnSign(obj: DisplayObject, message: string | (() => string)) {
     return obj.mixin(mxnCutscene, () => {
         Sfx.Interact.SignRead.play();
-        return show(message);
+        return show(typeof message === "string" ? message : message());
     })
         .mixin(mxnSpeaker, { name: "Sign", tintPrimary: 0x600000, tintSecondary: 0x400000 });
 }

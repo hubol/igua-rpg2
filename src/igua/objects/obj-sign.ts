@@ -10,13 +10,16 @@ interface ObjSignArgs {
     isSpecial: boolean;
 }
 
-export function objSign({ title, message, isSpecial }: ObjSignArgs) {
+export function objSign(args: ObjSignArgs) {
     const spr = Sprite.from(Tx.Wood.Sign);
-    const text = objText.XSmallIrregular(title, { tint: 0x854E31 }).anchored(0.5, 0.5).at(25, 11);
+    const text = objText.XSmallIrregular(args.title, { tint: 0x854E31 })
+        .anchored(0.5, 0.5)
+        .at(25, 11)
+        .step(self => self.text = args.title);
 
     return container(spr, text)
-        .mixin(mxnSign, message)
-        .merge({ isSpecial })
+        .mixin(mxnSign, () => args.message)
+        .merge({ isSpecial: args.isSpecial })
         .track(objSign)
         .at(0, -26);
 }

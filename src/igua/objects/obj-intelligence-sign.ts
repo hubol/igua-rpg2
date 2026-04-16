@@ -5,12 +5,21 @@ import { playerObj } from "./obj-player";
 import { objSign } from "./obj-sign";
 
 export function objIntelligenceSign({ title, message, min, max }: OgmoEntities.IntelligenceSign["values"]) {
-    const signObj = objSign({ title, message, isSpecial: false })
+    const signObj = objSign({
+        get title() {
+            return Rpg.character.attributes.intelligence >= min ? title : "???";
+        },
+        get message() {
+            return Rpg.character.attributes.intelligence >= min
+                ? message
+                : "????????????????????????????????????\n(It's impossible to read with your low intelligence)";
+        },
+        isSpecial: false,
+    })
         .coro(function* () {
             signObj.alpha = getTargetAlpha();
         })
         .step(self => {
-            self.interact.enabled = Rpg.character.attributes.intelligence >= min;
             signObj.alpha = approachLinear(signObj.alpha, getTargetAlpha(), 0.1);
         });
 
