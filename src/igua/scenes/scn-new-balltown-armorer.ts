@@ -149,7 +149,7 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
         }
         else if (result === 2) {
             yield* show("You are judgmental, and in many ways a bitch.");
-            yield* DramaPlayerAttributes.setName("Bitch");
+            yield* DramaPlayerAttributes.callName("Bitch");
         }
     });
 }

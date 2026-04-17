@@ -35,30 +35,15 @@ export class RpgPlayerAttributes {
         this._state[attributeKey] += delta;
     }
 
-    get name() {
-        return this._state.name;
-    }
-
-    set name(value) {
-        if (!value.trim()) {
-            Logger.logContractViolationError(
-                "RpgPlayerAttributes",
-                new Error("Trying to set name to whitespace only"),
-                { value },
-            );
-            return;
-        }
-
-        this._state.name = value.trim();
-    }
+    readonly names = new RpgPlayerNames(this._state.names);
 
     static createState(): RpgPlayerAttributes.State {
         return {
             health: 1,
             intelligence: 0,
             strength: 1,
-            name: "You",
             respawnConfiguration: "Indiana.University.Nurse",
+            names: RpgPlayerNames.createState(),
         };
     }
 }
@@ -68,9 +53,57 @@ export namespace RpgPlayerAttributes {
         health: Integer;
         intelligence: Integer;
         strength: Integer;
-        name: string;
         respawnConfiguration: DataRespawnConfiguration.Id;
+        names: RpgPlayerNames.State;
     }
 
     export type Point = "health" | "intelligence" | "strength";
+}
+
+class RpgPlayerNames {
+    constructor(private readonly _state: RpgPlayerNames.State) {
+    }
+
+    onCalledName(name: string) {
+        name = name.trim();
+
+        if (!name) {
+            Logger.logContractViolationError(
+                "RpgPlayerNames",
+                new Error("Trying to call player falsy name"),
+                { name },
+            );
+            return;
+        }
+
+        if (this._state.availableNames.has(name)) {
+            return false;
+        }
+
+        this._state.availableNames.add(name);
+        this._state.currentName = name;
+        return true;
+    }
+
+    get current() {
+        return this._state.currentName;
+    }
+
+    get availableList(): ReadonlyArray<string> {
+        return new Array(...this._state.availableNames);
+    }
+
+    static createState(): RpgPlayerNames.State {
+        return {
+            availableNames: new Set(["You"]),
+            currentName: "You",
+        };
+    }
+}
+
+namespace RpgPlayerNames {
+    export interface State {
+        availableNames: Set<string>;
+        currentName: string;
+    }
 }

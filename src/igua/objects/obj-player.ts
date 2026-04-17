@@ -150,7 +150,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
         .mixin(mxnSparkling)
         .mixin(mxnSpeaker, {
             get name() {
-                return Rpg.character.attributes.name;
+                return Rpg.character.attributes.names.current;
             },
             ...objIguanaNpc.getSpeakerColors(looks),
         })

@@ -3,6 +3,7 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Jukebox } from "../core/igua-audio";
+import { DramaPlayerAttributes } from "../drama/drama-player-attributes";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -83,6 +84,7 @@ function enrichFisherman(lvl: LvlType.GreatTowerBalcony) {
                 yield* show("Good impression. Nice.");
                 if (yield* DramaQuests.complete("GreatTower.Balcony.Fisherman.Appeased")) {
                     yield* show("I found this stinky little key. Maybe you'll enjoy it, fishy!");
+                    yield* DramaPlayerAttributes.callName("Fishy");
                 }
             }
             else {

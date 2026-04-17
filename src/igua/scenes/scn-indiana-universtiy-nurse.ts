@@ -91,7 +91,7 @@ function enrichDoctorNpc(lvl: LvlType.IndianaUniversityNurse) {
                     yield* show("All done.");
                     Cutscene.setCurrentSpeaker(obj);
                     Rpg.character.attributes.respawnConfiguration = "Indiana";
-                    yield* DramaPlayerAttributes.setName("Fucka");
+                    yield* DramaPlayerAttributes.callName("Fucka");
                 }
             }
             yield interp(obj.objCharacterDoctorSprite.controls, "armUnit").to(1).over(500);

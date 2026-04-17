@@ -30,7 +30,7 @@ export function scnDevDramaItem() {
     Sprite.from(Tx.Placeholder)
         .add(20, playerObj.y)
         .mixin(mxnCutscene, function* () {
-            yield* DramaPlayerAttributes.setName(Rng.choose("dumb", "ass", "bitch"));
+            yield* DramaPlayerAttributes.callName(Rng.choose("dumb", "ass", "bitch"));
 
             // yield sleep(5000);
 

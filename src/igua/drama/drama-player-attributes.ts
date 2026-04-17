@@ -2,12 +2,10 @@ import { objFxNameChange } from "../objects/effects/obj-fx-name-change";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 
-function* setName(name: string) {
-    if (Rpg.character.attributes.name === name) {
+function* callName(name: string) {
+    if (!Rpg.character.attributes.names.onCalledName(name)) {
         return;
     }
-
-    Rpg.character.attributes.name = name;
 
     const fxNameChangeObj = objFxNameChange(name)
         .at(playerObj)
@@ -17,5 +15,5 @@ function* setName(name: string) {
 }
 
 export const DramaPlayerAttributes = {
-    setName,
+    callName,
 };

@@ -242,7 +242,7 @@ function enrichRoom2(lvl: LvlType.EfficientHome) {
                         "Apartment 6 will reveal the spot when you have two ballons.",
                         "This could be useful for repeatedly getting up the great tower. DING! SUCKA!",
                     );
-                    yield* DramaPlayerAttributes.setName("SUCKA");
+                    yield* DramaPlayerAttributes.callName("SUCKA");
                 }
                 else if (result === 3) {
                     yield* show("I'm the guardian of the bell. Also I know a secret about helium.", "D-D-D-DING!");
@@ -318,7 +318,7 @@ function enrichRoom5(lvl: LvlType.EfficientHome) {
             const gift = Rpg.gift("GreatTower.EfficientHome.Musician.SongShoe");
             if (!gift.isGiveable()) {
                 yield* show("Music makes the world go round, sucka!!!");
-                yield* DramaPlayerAttributes.setName("Sucka");
+                yield* DramaPlayerAttributes.callName("Sucka");
                 return;
             }
 
@@ -543,7 +543,7 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
             yield sleep(250);
 
             yield* show("That makes you a crimer!!!");
-            yield* DramaPlayerAttributes.setName("Crimer");
+            yield* DramaPlayerAttributes.callName("Crimer");
 
             yield* show("I'm going to confiscate those now.");
 

@@ -312,7 +312,7 @@ That's worth ${count} credit(s). Do you want to deposit them?`)
                     }
 
                     yield* show("Peace, sucka!!");
-                    yield* DramaPlayerAttributes.setName("Sucka");
+                    yield* DramaPlayerAttributes.callName("Sucka");
                     break;
                 }
             }

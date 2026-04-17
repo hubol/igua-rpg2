@@ -64,7 +64,7 @@ function enrichNerdBouncer(lvl: LvlType.IndianaDesert) {
                             self.destroy();
                         }
 
-                        yield* DramaPlayerAttributes.setName("Babygirl");
+                        yield* DramaPlayerAttributes.callName("Babygirl");
                     },
                     { speaker: lvl.NerdBouncerNpc },
                 ).done;

@@ -90,7 +90,7 @@ export function objCharacterGamblingExpert() {
                     "I won't stick around here, so you might want to buy stuff now.",
                     "Just sayin', sucka!",
                 );
-                yield* DramaPlayerAttributes.setName("Sucka");
+                yield* DramaPlayerAttributes.callName("Sucka");
             }
             else if (result === 2) {
                 yield* show(

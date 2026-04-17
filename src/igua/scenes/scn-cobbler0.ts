@@ -61,7 +61,7 @@ function enrichGluemaker(lvl: LvlType.Cobbler0) {
         }
         else if (result === 2) {
             yield* show("No need to apologize, sucka!");
-            yield* DramaPlayerAttributes.setName("Sucka");
+            yield* DramaPlayerAttributes.callName("Sucka");
         }
     });
 }
