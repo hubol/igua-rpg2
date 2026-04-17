@@ -5998,6 +5998,25 @@ export const Lvl = {
       ResetPlayerMarker: e(r["Marker"], { x: 72, y: 680, values: { name: "ResetPlayerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
+  OhioDmv: (): LvlType.OhioDmv => {
+    applyLevel({ width: 500, height: 392, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 192, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 0, y: 240, width: 32, height: 152, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 472, y: 240, width: 32, height: 152, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 32, y: 360, width: 440, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: -104, y: 192, width: 104, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 504, y: 192, width: 104, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Door: e(r["Door"], { x: 168, y: 144, values: { sceneName: "scnOhioDmv", checkpointName: "fromAbove", name: "", depth: 0 } }, "Entities"),
+      Door_1: e(r["Door"], { x: 416, y: 312, values: { sceneName: "scnOhioDmv", checkpointName: "fromBelow", name: "", depth: 0 } }, "Entities"),
+      DmvClerkNpc: e(r["IguanaNpc"], { x: 72, y: 360, flippedX: false, values: { personaName: "", name: "DmvClerkNpc", depth: 0 } }, "CharacterEntities"),
+      Player: e(r["Player"], { x: 96, y: 192, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      fromAbove: e(r["Checkpoint"], { x: 376, y: 360, flippedX: true, values: { name: "fromAbove", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromBelow: e(r["Checkpoint"], { x: 232, y: 192, flippedX: false, values: { name: "fromBelow", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -48, y: 64, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromOhioDmv", name: "", depth: 0 } }, "RegionEntities"),
+      GateHorizontal_1: e(r["GateHorizontal"], { x: 432, y: 64, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromOhioDmv", name: "", depth: 0 } }, "RegionEntities"),
+    };
+  },
   PlainsSuggestiveCavern: (): LvlType.PlainsSuggestiveCavern => {
     applyLevel({ width: 2000, height: 648, backgroundTint: 0x190000, terrainTint: 0x540707 });
     return {
@@ -8388,6 +8407,7 @@ export const Lvl = {
       fromFlopUniversity: e(r["Checkpoint"], { x: 496, y: 776, flippedX: false, values: { name: "fromFlopUniversity", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       fromOhioToIndiana: e(r["Checkpoint"], { x: 960, y: 360, flippedX: true, values: { name: "fromOhioToIndiana", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromIndianaToOhio: e(r["Checkpoint"], { x: 1208, y: 392, flippedX: false, values: { name: "fromIndianaToOhio", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromOhioDmv: e(r["Checkpoint"], { x: 1208, y: 688, flippedX: false, values: { name: "fromOhioDmv", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       GateMap_1: e(r["GateMap"], { x: 821, y: 735, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_2: e(r["GateMap"], { x: 637, y: 737, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_3: e(r["GateMap"], { x: 942, y: 844, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
@@ -8405,6 +8425,7 @@ export const Lvl = {
       GateMap_12: e(r["GateMap"], { x: 992, y: 336, rotation: 0, uid: 177612382363803, values: { sceneName: "scnIndianaOhioBridge", checkpointName: "fromIndiana", name: "", depth: 0, visible: true }, tint: 0xff6753 }, "RegionEntities"),
       GateMap_13: e(r["GateMap"], { x: 1160, y: 360, rotation: 180, uid: 177612384494403, values: { sceneName: "scnIndianaOhioBridge", checkpointName: "fromOhio", name: "", depth: 0, visible: true }, tint: 0xbab532 }, "RegionEntities"),
       GateMap_14: e(r["GateMap"], { x: 560, y: 368, rotation: -90, uid: 177622511424900, values: { sceneName: "scnIndianaDarkEvilHole", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_15: e(r["GateMap"], { x: 1184, y: 632, rotation: 270, uid: 177644036502700, values: { sceneName: "scnOhioDmv", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       FallenBotMarker: e(r["Marker"], { x: 744, y: 552, values: { name: "FallenBotMarker", depth: 0 }, tint: 0x777777 }, "MarkerEntities"),
     };
   },
@@ -14293,6 +14314,22 @@ export namespace LvlType {
     Player: ReturnType<(typeof r)["Player"]>;
     ResetPlayerMarker: ReturnType<(typeof r)["Marker"]>;
   };
+  export type OhioDmv = {
+    Block: ReturnType<(typeof r)["Block"]>;
+    Block_1: ReturnType<(typeof r)["Block"]>;
+    Block_2: ReturnType<(typeof r)["Block"]>;
+    Block_3: ReturnType<(typeof r)["Block"]>;
+    Block_4: ReturnType<(typeof r)["Block"]>;
+    Block_5: ReturnType<(typeof r)["Block"]>;
+    Door: ReturnType<(typeof r)["Door"]>;
+    Door_1: ReturnType<(typeof r)["Door"]>;
+    DmvClerkNpc: ReturnType<(typeof r)["IguanaNpc"]>;
+    Player: ReturnType<(typeof r)["Player"]>;
+    fromAbove: ReturnType<(typeof r)["Checkpoint"]>;
+    fromBelow: ReturnType<(typeof r)["Checkpoint"]>;
+    GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
+    GateHorizontal_1: ReturnType<(typeof r)["GateHorizontal"]>;
+  };
   export type PlainsSuggestiveCavern = {
     ShapesSquare32: Sprite;
     ShapesSquare32_1: Sprite;
@@ -16645,6 +16682,7 @@ export namespace LvlType {
     fromFlopUniversity: ReturnType<(typeof r)["Checkpoint"]>;
     fromOhioToIndiana: ReturnType<(typeof r)["Checkpoint"]>;
     fromIndianaToOhio: ReturnType<(typeof r)["Checkpoint"]>;
+    fromOhioDmv: ReturnType<(typeof r)["Checkpoint"]>;
     GateMap_1: ReturnType<(typeof r)["GateMap"]>;
     GateMap_2: ReturnType<(typeof r)["GateMap"]>;
     GateMap_3: ReturnType<(typeof r)["GateMap"]>;
@@ -16662,6 +16700,7 @@ export namespace LvlType {
     GateMap_12: ReturnType<(typeof r)["GateMap"]>;
     GateMap_13: ReturnType<(typeof r)["GateMap"]>;
     GateMap_14: ReturnType<(typeof r)["GateMap"]>;
+    GateMap_15: ReturnType<(typeof r)["GateMap"]>;
     FallenBotMarker: ReturnType<(typeof r)["Marker"]>;
   };
 }

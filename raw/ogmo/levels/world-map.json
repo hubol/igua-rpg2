@@ -260,6 +260,19 @@
           "uid": 177622511424900,
           "tint": "#ffffff",
           "values": {"sceneName": "scnIndianaDarkEvilHole", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 19,
+          "_eid": "53836309",
+          "x": 1184,
+          "y": 632,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 270,
+          "uid": 177644036502700,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnOhioDmv", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -537,6 +550,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromIndianaToOhio", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 22,
+          "_eid": "19953026",
+          "x": 1208,
+          "y": 688,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromOhioDmv", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
         }
       ]
     },
