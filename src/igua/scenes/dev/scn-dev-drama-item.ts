@@ -6,13 +6,18 @@ import { Rng } from "../../../lib/math/rng";
 import { DataEquipment } from "../../data/data-equipment";
 import { DramaItem } from "../../drama/drama-item";
 import { DramaPlayerAttributes } from "../../drama/drama-player-attributes";
+import { ask } from "../../drama/show";
 import { mxnCutscene } from "../../mixins/mxn-cutscene";
 import { mxnInteractChangePlayerAppearance } from "../../mixins/mxn-interact-change-player-appearance";
 import { objCharacterKingSpino } from "../../objects/characters/obj-character-king-spino";
 import { playerObj } from "../../objects/obj-player";
+import { Rpg } from "../../rpg/rpg";
 
 export function scnDevDramaItem() {
     Lvl.Dummy();
+    for (const name of ["peanut", "asssss", "cool", "whatever", "epic", "sweet", "lousy"]) {
+        Rpg.character.attributes.names.onCalledName(name);
+    }
 
     Sprite.from(Tx.Placeholder)
         .at(playerObj)
@@ -30,7 +35,12 @@ export function scnDevDramaItem() {
     Sprite.from(Tx.Placeholder)
         .add(20, playerObj.y)
         .mixin(mxnCutscene, function* () {
-            yield* DramaPlayerAttributes.callName(Rng.choose("dumb", "ass", "bitch"));
+            if (yield* ask("Shall I call you something?")) {
+                yield* DramaPlayerAttributes.callName(Rng.choose("dumb", "ass", "bitch"));
+            }
+            else {
+                yield* DramaPlayerAttributes.chooseAvailableName();
+            }
 
             // yield sleep(5000);
 

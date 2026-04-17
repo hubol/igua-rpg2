@@ -85,6 +85,19 @@ class RpgPlayerNames {
         return true;
     }
 
+    chooseNameFromAvailable(name: string) {
+        if (!this._state.availableNames.has(name)) {
+            Logger.logContractViolationError(
+                "RpgPlayerNames",
+                new Error("Trying to select unavailable name"),
+                { name },
+            );
+            return;
+        }
+
+        this._state.currentName = name;
+    }
+
     get current() {
         return this._state.currentName;
     }
