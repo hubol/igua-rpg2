@@ -40,6 +40,18 @@
           "originY": 0,
           "tint": "#00ff00",
           "values": {"name": "MiffedAttacksDestroyRegion", "depth": 0}
+        },
+        {
+          "name": "GateVertical",
+          "id": 1,
+          "_eid": "64222434",
+          "x": 928,
+          "y": -72,
+          "width": 216,
+          "originX": 0,
+          "originY": 0,
+          "flippedY": true,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromIndianaDarkEvilHole", "name": "", "depth": 0}
         }
       ]
     },

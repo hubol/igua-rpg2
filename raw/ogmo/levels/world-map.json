@@ -561,6 +561,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromOhioDmv", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 23,
+          "_eid": "19953026",
+          "x": 584,
+          "y": 400,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromIndianaDarkEvilHole", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
         }
       ]
     },

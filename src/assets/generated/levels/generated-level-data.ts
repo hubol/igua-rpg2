@@ -2350,6 +2350,7 @@ export const Lvl = {
       ShoeHaverNpc: e(r["IguanaNpc"], { x: 72, y: 432, flippedX: false, values: { personaName: "", name: "ShoeHaverNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 1024, y: 96, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       MiffedAttacksDestroyRegion: e(r["Region"], { x: 560, y: 584, width: 136, height: 120, values: { name: "MiffedAttacksDestroyRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      GateVertical: e(r["GateVertical"], { x: 928, y: -72, width: 216, flippedY: true, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaDarkEvilHole", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
   IndianaDesert: (): LvlType.IndianaDesert => {
@@ -8408,6 +8409,7 @@ export const Lvl = {
       fromOhioToIndiana: e(r["Checkpoint"], { x: 960, y: 360, flippedX: true, values: { name: "fromOhioToIndiana", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromIndianaToOhio: e(r["Checkpoint"], { x: 1208, y: 392, flippedX: false, values: { name: "fromIndianaToOhio", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromOhioDmv: e(r["Checkpoint"], { x: 1208, y: 688, flippedX: false, values: { name: "fromOhioDmv", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
+      fromIndianaDarkEvilHole: e(r["Checkpoint"], { x: 584, y: 400, flippedX: false, values: { name: "fromIndianaDarkEvilHole", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       GateMap_1: e(r["GateMap"], { x: 821, y: 735, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_2: e(r["GateMap"], { x: 637, y: 737, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_3: e(r["GateMap"], { x: 942, y: 844, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
@@ -10730,6 +10732,7 @@ export namespace LvlType {
     ShoeHaverNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     MiffedAttacksDestroyRegion: ReturnType<(typeof r)["Region"]>;
+    GateVertical: ReturnType<(typeof r)["GateVertical"]>;
   };
   export type IndianaDesert = {
     SkyCloudLong0: Sprite;
@@ -16683,6 +16686,7 @@ export namespace LvlType {
     fromOhioToIndiana: ReturnType<(typeof r)["Checkpoint"]>;
     fromIndianaToOhio: ReturnType<(typeof r)["Checkpoint"]>;
     fromOhioDmv: ReturnType<(typeof r)["Checkpoint"]>;
+    fromIndianaDarkEvilHole: ReturnType<(typeof r)["Checkpoint"]>;
     GateMap_1: ReturnType<(typeof r)["GateMap"]>;
     GateMap_2: ReturnType<(typeof r)["GateMap"]>;
     GateMap_3: ReturnType<(typeof r)["GateMap"]>;
