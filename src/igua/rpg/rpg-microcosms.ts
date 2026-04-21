@@ -1,11 +1,14 @@
 import { MicrocosmCactusEquipmentMaker } from "./microcosms/microcosm-cactus-equipment-maker";
-import { MicrocosmVase } from "./microcosms/microcosm-vase";
+import { MicrocosmWetnessReceptacle } from "./microcosms/microcosm-wetness-receptacle";
 import { RpgMicrocosm, RpgMicrocosmUnsafeBase } from "./rpg-microcosm";
 
 const Manifest = {
     "VaseInhabitant.CactusEquipment": configure(MicrocosmCactusEquipmentMaker, {}),
-    "VaseInhabitant.Vase": configure(MicrocosmVase, { maxWetnessUnits: 1000 }),
-    "NewBalltown.Armorer.AquariumWater": configure(MicrocosmVase, { maxWetnessUnits: 300, requirePurity: 150 }),
+    "VaseInhabitant.Vase": configure(MicrocosmWetnessReceptacle, { maxWetnessUnits: 1000 }),
+    "NewBalltown.Armorer.AquariumWater": configure(MicrocosmWetnessReceptacle, {
+        maxWetnessUnits: 300,
+        requirePurity: 150,
+    }),
 };
 
 interface RpgMicrocosmClasslike<T> {
