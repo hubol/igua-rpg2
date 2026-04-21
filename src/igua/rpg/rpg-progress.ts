@@ -132,12 +132,6 @@ export function getInitialRpgProgress() {
                     ringer: {
                         toldPlayerAboutDesireForFish: false,
                     },
-                    nerd: {
-                        isTerminalEnabled: true,
-                        downloadedData: 0,
-                        lastEvaluatedGameTickCount: 0,
-                        windEssenceCount: 0,
-                    },
                 },
             },
             worldMap: {

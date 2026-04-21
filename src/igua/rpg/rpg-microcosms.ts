@@ -1,4 +1,5 @@
 import { MicrocosmCactusEquipmentMaker } from "./microcosms/microcosm-cactus-equipment-maker";
+import { MicrocosmDownloadData } from "./microcosms/microcosm-download-data";
 import { MicrocosmWetnessReceptacle } from "./microcosms/microcosm-wetness-receptacle";
 import { RpgMicrocosm, RpgMicrocosmUnsafeBase } from "./rpg-microcosm";
 
@@ -9,6 +10,7 @@ const Manifest = {
         maxWetnessUnits: 300,
         requirePurity: 150,
     }),
+    "GreatTower.EfficientHome.Nerd.DownloadData": configure(MicrocosmDownloadData, {}),
 };
 
 interface RpgMicrocosmClasslike<T> {
