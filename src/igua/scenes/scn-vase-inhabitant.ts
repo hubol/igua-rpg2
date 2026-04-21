@@ -60,13 +60,14 @@ export function scnVaseInhabitant() {
         .mixin(mxnSpeaker, { name: "Giant Vase", tintPrimary: 0x0000a0, tintSecondary: 0x0080f0 })
         .mixin(mxnCutscene, function* () {
             if (yield* ask("A giant vase... Add moisture?")) {
-                if (Rpg.character.status.conditions.wetness.value <= 0) {
+                const result = vaseCosm.checkPlayer();
+
+                if (!result.isSuccess) {
                     yield* show("No moisture to add.");
                 }
                 else {
-                    yield* show(`Added ${Rpg.character.status.conditions.wetness.value} units.`);
-                    vaseCosm.fill(Rpg.character.status.conditions.wetness.value);
-                    Rpg.character.status.conditions.wetness.value = 0;
+                    yield* show(`Added ${result.wetnessUnits} units.`);
+                    vaseCosm.fill(result);
                 }
             }
         })

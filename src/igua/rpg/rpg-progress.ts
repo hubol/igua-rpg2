@@ -70,9 +70,6 @@ export function getInitialRpgProgress() {
             },
             newBalltown: {
                 armorer: {
-                    aquarium: {
-                        moistureUnits: 0,
-                    },
                     toldPlayerAboutDesireForFish: false,
                 },
                 ballFruitFanatic: {
