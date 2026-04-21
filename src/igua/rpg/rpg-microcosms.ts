@@ -1,5 +1,8 @@
+import { Integer } from "../../lib/math/number-alias-types";
+import { Rng } from "../../lib/math/rng";
 import { MicrocosmCactusEquipmentMaker } from "./microcosms/microcosm-cactus-equipment-maker";
 import { MicrocosmDownloadData } from "./microcosms/microcosm-download-data";
+import { MicrocosmTimeDroppedLoot } from "./microcosms/microcosm-time-dropped-loot";
 import { MicrocosmWetnessReceptacle } from "./microcosms/microcosm-wetness-receptacle";
 import { RpgMicrocosm, RpgMicrocosmUnsafeBase } from "./rpg-microcosm";
 
@@ -11,6 +14,9 @@ const Manifest = {
         requirePurity: 150,
     }),
     "GreatTower.EfficientHome.Nerd.DownloadData": configure(MicrocosmDownloadData, {}),
+    "FallenBot.IsSurfaced": configure(MicrocosmTimeDroppedLoot, {
+        replenishFn: (previous: Integer | null) => previous === null ? 10 : Rng.intc(10, 20),
+    }),
 };
 
 interface RpgMicrocosmClasslike<T> {

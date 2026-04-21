@@ -136,7 +136,6 @@ export function getInitialRpgProgress() {
             },
             worldMap: {
                 fallenBot: {
-                    landsWhenTimesDroppedLoot: Null<Integer>(),
                     perfectScoreTimes: 0,
                 },
             },

@@ -65,23 +65,20 @@ function enrichSimpleSecretValuables(lvl: LvlType.WorldMap) {
 }
 
 function enrichFallenBot(lvl: LvlType.WorldMap) {
-    const { fallenBot: flagFallenBot } = Rpg.flags.worldMap;
+    const { fallenBot: fallenBotFlag } = Rpg.flags.worldMap;
+    const isSurfacedCosm = Rpg.microcosms["FallenBot.IsSurfaced"];
 
-    if (flagFallenBot.landsWhenTimesDroppedLoot === null) {
-        flagFallenBot.landsWhenTimesDroppedLoot = Rpg.records.timesDroppedLoot + 10;
-    }
-
-    if (Rpg.records.timesDroppedLoot < flagFallenBot.landsWhenTimesDroppedLoot) {
+    if (!isSurfacedCosm.checkIsActive()) {
         objFallenBot.objImpactSite()
             .mixin(mxnSpeaker, { name: "Bottomless Pit", tintPrimary: 0x384C0E, tintSecondary: 0x648719 })
             .mixin(mxnCutscene, function* () {
-                const timesDroppedLootDiff = flagFallenBot.landsWhenTimesDroppedLoot! - Rpg.records.timesDroppedLoot;
+                const lootDropsUntilActive = isSurfacedCosm.lootDropsUntilActive;
 
                 if (Rpg.character.attributes.intelligence < 1) {
                     yield* show("It looks like something has repeatedly crawled out of this.");
                 }
                 else if (Rpg.character.attributes.intelligence < 2) {
-                    if (timesDroppedLootDiff < 5) {
+                    if (lootDropsUntilActive < 5) {
                         yield* show("You hear the sound of metal scraping.");
                     }
                     else {
@@ -89,7 +86,7 @@ function enrichFallenBot(lvl: LvlType.WorldMap) {
                     }
                 }
                 else {
-                    yield* show(`Defeat ${timesDroppedLootDiff} more for a visitation.`);
+                    yield* show(`Defeat ${lootDropsUntilActive} more for a visitation.`);
                 }
             })
             .at(lvl.FallenBotMarker)
@@ -123,7 +120,7 @@ function enrichFallenBot(lvl: LvlType.WorldMap) {
                 yield* show(`Program #${i + 1}...`);
                 if (
                     yield* dramaQuizComputerScience({
-                        difficulty: flagFallenBot.perfectScoreTimes + i,
+                        difficulty: fallenBotFlag.perfectScoreTimes + i,
                         messageObj: Sprite.from(Tx.Characters.FallenBot.AskIntegerPortrait).pivoted(74, 44),
                     })
                 ) {
@@ -141,11 +138,11 @@ function enrichFallenBot(lvl: LvlType.WorldMap) {
             else {
                 yield* show("You've given me some hope.");
                 yield* DramaQuests.complete("FallenBot.PerfectScore");
-                flagFallenBot.perfectScoreTimes++;
+                fallenBotFlag.perfectScoreTimes++;
             }
 
             yield* show("I will see you later!");
-            flagFallenBot.landsWhenTimesDroppedLoot = Rpg.records.timesDroppedLoot + Rng.intc(10, 20);
+            isSurfacedCosm.reset();
             enrichFallenBot(lvl);
             yield interpv(botObj.scale).steps(3).to(0, 0).over(500);
             botObj.destroy();
