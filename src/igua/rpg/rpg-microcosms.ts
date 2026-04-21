@@ -3,15 +3,23 @@ import { MicrocosmVase } from "./microcosms/microcosm-vase";
 import { RpgMicrocosm, RpgMicrocosmUnsafeBase } from "./rpg-microcosm";
 
 const Manifest = {
-    "VaseInhabitant.CactusEquipment": MicrocosmCactusEquipmentMaker,
-    "VaseInhabitant.Vase": MicrocosmVase,
-} satisfies Record<string, RpgMicrocosmClasslike>;
+    "VaseInhabitant.CactusEquipment": construct(MicrocosmCactusEquipmentMaker, {}),
+    "VaseInhabitant.Vase": construct(MicrocosmVase, {}),
+};
+
+interface RpgMicrocosmClasslike<T> {
+    new(arg: T): RpgMicrocosm<unknown>;
+}
+
+function construct<TArg, TClass extends RpgMicrocosmClasslike<TArg>>(_class: TClass, _arg: TArg): [TClass, TArg] {
+    return [_class, _arg];
+}
 
 export namespace RpgMicrocosms {
     export function create(state: State): Instance {
         return Object.fromEntries(
-            Object.entries(Manifest).map(([key, microcosmClass]) => {
-                const instance = new microcosmClass();
+            Object.entries(Manifest).map(([key, [microcosmClass, microcosmArg]]) => {
+                const instance = new (microcosmClass as RpgMicrocosmClasslike<unknown>)(microcosmArg);
                 const unsafeInstance = instance as unknown as RpgMicrocosmUnsafeBase;
                 if (!state[key]) {
                     state[key] = unsafeInstance.createState();
@@ -31,10 +39,6 @@ export namespace RpgMicrocosms {
     type ManifestType = typeof Manifest;
 
     type Instance = {
-        [k in keyof ManifestType]: InstanceType<ManifestType[k]>;
+        [k in keyof ManifestType]: InstanceType<ManifestType[k][0]>;
     };
-}
-
-interface RpgMicrocosmClasslike {
-    new(): RpgMicrocosm<unknown>;
 }
