@@ -3,23 +3,26 @@ import { MicrocosmVase } from "./microcosms/microcosm-vase";
 import { RpgMicrocosm, RpgMicrocosmUnsafeBase } from "./rpg-microcosm";
 
 const Manifest = {
-    "VaseInhabitant.CactusEquipment": construct(MicrocosmCactusEquipmentMaker, {}),
-    "VaseInhabitant.Vase": construct(MicrocosmVase, {}),
+    "VaseInhabitant.CactusEquipment": configure(MicrocosmCactusEquipmentMaker, {}),
+    "VaseInhabitant.Vase": configure(MicrocosmVase, {}),
 };
 
 interface RpgMicrocosmClasslike<T> {
     new(arg: T): RpgMicrocosm<unknown>;
 }
 
-function construct<TArg, TClass extends RpgMicrocosmClasslike<TArg>>(_class: TClass, _arg: TArg): [TClass, TArg] {
-    return [_class, _arg];
+function configure<TConfig, TClass extends RpgMicrocosmClasslike<TConfig>>(
+    microcosmClass: TClass,
+    config: TConfig,
+): [TClass, TConfig] {
+    return [microcosmClass, config];
 }
 
 export namespace RpgMicrocosms {
     export function create(state: State): Instance {
         return Object.fromEntries(
-            Object.entries(Manifest).map(([key, [microcosmClass, microcosmArg]]) => {
-                const instance = new (microcosmClass as RpgMicrocosmClasslike<unknown>)(microcosmArg);
+            Object.entries(Manifest).map(([key, [microcosmClass, config]]) => {
+                const instance = new (microcosmClass as RpgMicrocosmClasslike<unknown>)(config);
                 const unsafeInstance = instance as unknown as RpgMicrocosmUnsafeBase;
                 if (!state[key]) {
                     state[key] = unsafeInstance.createState();
