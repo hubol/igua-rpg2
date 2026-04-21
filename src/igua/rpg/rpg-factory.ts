@@ -17,6 +17,7 @@ import { RpgInventory } from "./rpg-inventory";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgLooseValuables } from "./rpg-loose-valuables";
 import { RpgLoot } from "./rpg-loot";
+import { RpgMicrocosms } from "./rpg-microcosms";
 import { RpgPlayer } from "./rpg-player";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
@@ -106,6 +107,7 @@ export namespace RpgFactory {
             inventory,
             looseValuables: looseValuables as Omit<RpgLooseValuables, "nextLifetime">,
             loot,
+            microcosms: RpgMicrocosms.create(data.microcosms),
             programmaticFlags,
             quest(questId: DataQuestReward.Id) {
                 return quests.getById(questId);
