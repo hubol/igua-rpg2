@@ -4,8 +4,8 @@ import { StringFromNumber } from "../../../lib/string/string-from-number";
 import { Rpg } from "../rpg";
 import { RpgMicrocosm } from "../rpg-microcosm";
 
-export class MicrocosmVase extends RpgMicrocosm<MicrocosmVase.State> {
-    constructor(private readonly _config: MicrocosmVase.Config) {
+export class MicrocosmWetnessReceptacle extends RpgMicrocosm<MicrocosmWetnessReceptacle.State> {
+    constructor(private readonly _config: MicrocosmWetnessReceptacle.Config) {
         super();
     }
 
@@ -17,7 +17,7 @@ export class MicrocosmVase extends RpgMicrocosm<MicrocosmVase.State> {
         return this.fillUnit >= 1;
     }
 
-    checkPlayer(): MicrocosmVase.PlayerCheck {
+    checkPlayer(): MicrocosmWetnessReceptacle.PlayerCheck {
         const wetness = Rpg.character.status.conditions.wetness;
         if (wetness.value <= 0) {
             return { isSuccess: false, reason: "no_wetness" };
@@ -44,7 +44,7 @@ export class MicrocosmVase extends RpgMicrocosm<MicrocosmVase.State> {
         };
     }
 
-    fill(check: MicrocosmVase.PlayerCheck) {
+    fill(check: MicrocosmWetnessReceptacle.PlayerCheck) {
         if (!check.isSuccess) {
             return;
         }
@@ -59,14 +59,14 @@ export class MicrocosmVase extends RpgMicrocosm<MicrocosmVase.State> {
         return StringFromNumber.getPercentageNoDecimal(this._state.wetnessUnits, this._config.maxWetnessUnits);
     }
 
-    createState(): MicrocosmVase.State {
+    createState(): MicrocosmWetnessReceptacle.State {
         return {
             wetnessUnits: 0,
         };
     }
 }
 
-namespace MicrocosmVase {
+namespace MicrocosmWetnessReceptacle {
     export interface State {
         wetnessUnits: Integer;
     }
