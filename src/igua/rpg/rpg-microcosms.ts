@@ -20,17 +20,20 @@ const Manifest = {
     }),
     "Ohio.Lottery": configure(MicrocosmLottery, {
         normalNumbersCount: 2,
-        normalNumbersMax: 9,
+        normalNumbersMax: 7,
         luckyNumberMax: 3,
         price: 25,
-        prizeFn: (win: MicrocosmLottery.WinCheck) => {
-            if (win.isLuckyNumberCorrect && win.normalNumbersCorrectCount === 0) {
-                return 50;
-            }
+        prizeFn: (() => {
+            const prizeLists = {
+                lucky: [50, 120, 500],
+                default: [0, 40, 200],
+            };
 
-            // TODO
-            return 3;
-        },
+            return (win: MicrocosmLottery.WinCheck) => {
+                const prizeList = win.isLuckyNumberCorrect ? prizeLists.lucky : prizeLists.default;
+                return prizeList[win.normalNumbersCorrectCount] ?? prizeList.last;
+            };
+        })(),
     }),
 };
 

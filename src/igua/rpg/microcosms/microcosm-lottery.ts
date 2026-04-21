@@ -13,11 +13,6 @@ export class MicrocosmLottery extends MicrocosmTimeDroppedLoot<MicrocosmLottery.
     }
 
     pickNumbers(numbers: MicrocosmLottery.Numbers) {
-        if (this.didPlayerPickNumbers) {
-            // Logger
-            return;
-        }
-
         this._state.drawnNumbers = null;
         this._state.pickedNumbers = {
             lucky: numbers.lucky,
