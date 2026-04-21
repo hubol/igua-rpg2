@@ -4,6 +4,7 @@ import { Tx } from "../../../assets/textures";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { DataEquipment } from "../../data/data-equipment";
+import { DramaInventory } from "../../drama/drama-inventory";
 import { DramaItem } from "../../drama/drama-item";
 import { DramaPlayerAttributes } from "../../drama/drama-player-attributes";
 import { ask } from "../../drama/show";
@@ -51,6 +52,36 @@ export function scnDevDramaItem() {
             //         .slice(0, 6)
             //         .map(id => ({ message: "Hi", item: { kind: "equipment", id, level: 1 } })),
             // });
+        })
+        .anchored(0.5, 1)
+        .show();
+
+    Sprite.from(Tx.Placeholder)
+        .add(140, playerObj.y)
+        .mixin(mxnCutscene, function* () {
+            const result = yield* ask(
+                "What to do?",
+                "Get hot dog",
+                "Add ketchup",
+                "Add mustard",
+                "Add onion",
+                "Add relish",
+            );
+            if (result === 0) {
+                yield* DramaInventory.receiveItems([{ kind: "potion", id: "HotDog" }]);
+            }
+            else if (result === 1) {
+                yield* DramaInventory.potions.addToppingToHotDog("ketchup");
+            }
+            else if (result === 2) {
+                yield* DramaInventory.potions.addToppingToHotDog("mustard");
+            }
+            else if (result === 3) {
+                yield* DramaInventory.potions.addToppingToHotDog("onion");
+            }
+            else if (result === 4) {
+                yield* DramaInventory.potions.addToppingToHotDog("relish");
+            }
         })
         .anchored(0.5, 1)
         .show();

@@ -131,6 +131,119 @@ export namespace DataPotion {
                 texture: Tx.Collectibles.Potion.Whistle,
                 sound: Sfx.Effect.Potion.TaxiWhistle,
             },
+            HotDog: {
+                name: "Hot Dog",
+                description: "Unadorned dog. Restores little health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDog,
+            },
+            HotDogKetchup: {
+                name: "Hot Dog (K)",
+                description: "A dog with only ketchup. Sweet. Restores some health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogKetchup,
+            },
+            HotDogMustard: {
+                name: "Hot Dog (M)",
+                description: "A dog with only mustard. Tangy. Restores some health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogMustard,
+            },
+            HotDogOnion: {
+                name: "Hot Dog (O)",
+                description: "A dog with only onions. Pungent. Restores some health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogOnion,
+            },
+            HotDogRelish: {
+                name: "Hot Dog (R)",
+                description: "A dog with only relish. Lovely. Restores some health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogRelish,
+            },
+            HotDogKetchupMustard: {
+                name: "Hot Dog (KM)",
+                description: "A dog with ketchup and mustard. A classic. Restores health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogKetchupMustard,
+            },
+            HotDogKetchupOnion: {
+                name: "Hot Dog (KO)",
+                description: "A dog with ketchup and onions. Interesting. Restores health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogKetchupOnion,
+            },
+            HotDogKetchupRelish: {
+                name: "Hot Dog (KR)",
+                description: "A dog with ketchup and relish. Complementary colors. Restores health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogKetchupRelish,
+            },
+            HotDogMustardOnion: {
+                name: "Hot Dog (MO)",
+                description: "A dog with mustard and onion. Very tangy! Restores health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogMustardOnion,
+            },
+            HotDogMustardRelish: {
+                name: "Hot Dog (MR)",
+                description: "A dog with mustard and relish. Bold colors! Restores health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogMustardRelish,
+            },
+            HotDogOnionRelish: {
+                name: "Hot Dog (OR)",
+                description: "A dog with onion and relish. Boldly aromatic! Restores health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogOnionRelish,
+            },
+            HotDogKetchupMustardOnion: {
+                name: "Hot Dog (KMO)",
+                description: "A dog with ketchup, mustard, and onion. Just look at that! Decently restores health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogKetchupMustardOnion,
+            },
+            HotDogKetchupMustardRelish: {
+                name: "Hot Dog (KMR)",
+                description: "A dog with ketchup, mustard, and relish. Such lovely colors! Decently restores health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogKetchupMustardRelish,
+            },
+            HotDogKetchupOnionRelish: {
+                name: "Hot Dog (KOR)",
+                description:
+                    "A dog with ketchup, onion, and relish. Sweet meets pungent tang! Decently restores health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogKetchupOnionRelish,
+            },
+            HotDogMustardOnionRelish: {
+                name: "Hot Dog (MOR)",
+                description: "A dog with mustard, onion, and relish. A bold combination! Decently restores health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogMustardOnionRelish,
+            },
+            HotDogKetchupMustardOnionRelish: {
+                name: "Hot Dog (Perfected)",
+                description: "A dog with ketchup, mustard, onion, and relish. Unbeatable. Restores plenty of health.",
+                stinkLineTint: 0xD85876,
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.HotDogKetchupMustardOnionRelish,
+            },
             __Fallback__: {
                 name: "???",
                 description: "Consume to experience a bug",
@@ -177,6 +290,32 @@ export namespace DataPotion {
                 return;
             case "RestoreHealthRestaurantLevel2":
                 target.heal(Math.ceil(target.status.healthMax * 0.8));
+                return;
+            case "HotDog":
+                target.heal(10);
+                return;
+            case "HotDogKetchup":
+            case "HotDogMustard":
+            case "HotDogOnion":
+            case "HotDogRelish":
+                target.heal(40);
+                return;
+            case "HotDogKetchupMustard":
+            case "HotDogKetchupOnion":
+            case "HotDogKetchupRelish":
+            case "HotDogMustardOnion":
+            case "HotDogMustardRelish":
+            case "HotDogOnionRelish":
+                target.heal(70);
+                return;
+            case "HotDogKetchupMustardOnion":
+            case "HotDogKetchupMustardRelish":
+            case "HotDogKetchupOnionRelish":
+            case "HotDogMustardOnionRelish":
+                target.heal(100);
+                return;
+            case "HotDogKetchupMustardOnionRelish":
+                target.heal(150);
                 return;
             case "Poison":
                 target.status.conditions.poison.level += 1;

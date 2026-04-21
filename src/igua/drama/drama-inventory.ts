@@ -8,11 +8,13 @@ import { DataPocketItem } from "../data/data-pocket-item";
 import { layers } from "../globals";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
+import { RpgHotDogs } from "../rpg/rpg-hot-dogs";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { DramaItem } from "./drama-item";
 import { DramaLib } from "./drama-lib";
 import { DramaMisc } from "./drama-misc";
 import { objDramaOwnedCount } from "./objects/obj-drama-owned-count";
+import { show } from "./show";
 
 interface AskUseCountOptions {
     min?: Integer;
@@ -181,6 +183,18 @@ function* removeAll(item: RpgInventory.RemovableItem) {
     return count;
 }
 
+function* addToppingToHotDog(toppingId: RpgHotDogs.ToppingId) {
+    const result = RpgHotDogs.apply(Rpg.inventory.potions, toppingId);
+    if (result.isSuccess) {
+        yield* DramaInventory.removeCount({ kind: "potion", id: result.removePotionId }, 1);
+        yield* DramaInventory.receiveItems([{ kind: "potion", id: result.receivePotionId }]);
+        return;
+    }
+    yield* show(
+        result.haveAnyHotDogs ? "None of your hot dogs need that topping." : "You don't have any hot dogs.",
+    );
+}
+
 export const DramaInventory = {
     askRemoveCount,
     askWhichAndRemoveOne,
@@ -190,5 +204,8 @@ export const DramaInventory = {
     removeAll,
     pocket: {
         empty: emptyPocket,
+    },
+    potions: {
+        addToppingToHotDog,
     },
 };
