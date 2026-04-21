@@ -3,10 +3,8 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
+import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
-import { Integer } from "../../lib/math/number-alias-types";
-import { AdjustColor } from "../../lib/pixi/adjust-color";
-import { StringFromNumber } from "../../lib/string/string-from-number";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaFacts } from "../drama/drama-facts";
@@ -130,7 +128,7 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
             yield* DramaFacts.memorize("ZincLoads");
         }
         else if (result === 1) {
-            if (!aquariumService.isFilled) {
+            if (!Rpg.microcosms["NewBalltown.Armorer.AquariumWater"].isFilled) {
                 yield* show("Ah, my fishtank.", "I need water for it.");
                 return;
             }
@@ -154,35 +152,21 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
     });
 }
 
-const aquariumService = {
-    maximumMoistureUnits: 300,
-    get moistureUnits() {
-        return Rpg.flags.newBalltown.armorer.aquarium.moistureUnits;
-    },
-    incrementMoistureUnits(units: Integer) {
-        Rpg.flags.newBalltown.armorer.aquarium.moistureUnits = Math.min(
-            Rpg.flags.newBalltown.armorer.aquarium.moistureUnits + units,
-            this.maximumMoistureUnits,
-        );
-    },
-    get isFilled() {
-        return Rpg.flags.newBalltown.armorer.aquarium.moistureUnits >= this.maximumMoistureUnits;
-    },
-} as const;
-
 function enrichAquarium(lvl: LvlType.NewBalltownArmorer) {
-    const { wetness } = Rpg.character.status.conditions;
+    const aquariumCosm = Rpg.microcosms["NewBalltown.Armorer.AquariumWater"];
 
-    lvl.AquariumWaterLine.merge({ observedMoistureUnits: aquariumService.moistureUnits })
+    lvl.AquariumWaterLine
+        .merge({ observedFillUnit: aquariumCosm.fillUnit })
         .step(self => {
-            self.scale.y = Math.min(1, self.observedMoistureUnits / aquariumService.maximumMoistureUnits);
+            self.scale.y = Math.min(1, self.observedFillUnit);
         })
         .coro(function* (self) {
             while (true) {
-                yield () => aquariumService.moistureUnits !== self.observedMoistureUnits;
-                yield interp(self, "observedMoistureUnits").factor(factor.sine).to(aquariumService.moistureUnits).over(
-                    1000,
-                );
+                yield onPrimitiveMutate(() => aquariumCosm.fillUnit);
+                yield interp(self, "observedFillUnit")
+                    .factor(factor.sine)
+                    .to(aquariumCosm.fillUnit)
+                    .over(1000);
             }
         });
 
@@ -194,34 +178,34 @@ function enrichAquarium(lvl: LvlType.NewBalltownArmorer) {
         tintSecondary: 0x0BC6A8,
         name: "Automated Water Intake",
     }).mixin(mxnComputer).mixin(mxnCutscene, function* () {
-        if (!aquariumService.isFilled) {
-            if (wetness.value === 0) {
+        if (!aquariumCosm.isFilled) {
+            const result = aquariumCosm.checkPlayer();
+
+            if (!result.isSuccess && result.reason === "no_wetness") {
                 yield* show(`--Water analysis
 No moisture detected.`);
                 return;
             }
+
             yield* show(`--Water analysis
-${wetness.value} moisture unit(s) detected.`);
+${result.wetnessUnits} moisture unit(s) detected.`);
 
-            const purity = Math.round(AdjustColor.pixi(wetness.tint).toRgb().b);
+            if (!result.isSuccess && result.reason === "impure") {
+                yield* show(`--Purity analysis
+Got ${result.detectedPurity}
+Need at least ${result.requiredPurity}`);
 
-            yield* show(`--Purity analysis
-Got ${purity}
-Need at least 150`);
-
-            if (purity < 150) {
                 return;
             }
 
             if (
                 (yield* ask(
-                    `Sure you want to deposit ${wetness.value} moisture unit(s) with purity ${purity}?`,
+                    `Sure you want to deposit ${result.wetnessUnits} moisture unit(s) with purity ${result.detectedPurity}?`,
                     "y",
                     "n",
                 )) === 0
             ) {
-                aquariumService.incrementMoistureUnits(wetness.value);
-                wetness.value = 0;
+                aquariumCosm.fill(result);
                 Sfx.Fluid.Slurp.play();
                 yield sleep(1000);
                 Rpg.experience.reward.computer.onInteract("small_task");
@@ -229,11 +213,6 @@ Need at least 150`);
         }
 
         yield* show(`--Fill analysis
-at ${
-            StringFromNumber.getPercentageNoDecimal(
-                aquariumService.moistureUnits,
-                aquariumService.maximumMoistureUnits,
-            )
-        } capacity`);
+at ${aquariumCosm.viewWetnessPercentage} capacity`);
     });
 }

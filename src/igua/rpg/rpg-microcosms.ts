@@ -4,11 +4,12 @@ import { RpgMicrocosm, RpgMicrocosmUnsafeBase } from "./rpg-microcosm";
 
 const Manifest = {
     "VaseInhabitant.CactusEquipment": configure(MicrocosmCactusEquipmentMaker, {}),
-    "VaseInhabitant.Vase": configure(MicrocosmVase, {}),
+    "VaseInhabitant.Vase": configure(MicrocosmVase, { maxWetnessUnits: 1000 }),
+    "NewBalltown.Armorer.AquariumWater": configure(MicrocosmVase, { maxWetnessUnits: 300, requirePurity: 150 }),
 };
 
 interface RpgMicrocosmClasslike<T> {
-    new(arg: T): RpgMicrocosm<unknown>;
+    new(config: T): RpgMicrocosm<unknown>;
 }
 
 function configure<TConfig, TClass extends RpgMicrocosmClasslike<TConfig>>(
