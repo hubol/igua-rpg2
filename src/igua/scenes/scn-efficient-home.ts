@@ -8,7 +8,6 @@ import { isOnScreen } from "../../lib/game-engine/logic/is-on-screen";
 import { factor, interpr, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
-import { Integer } from "../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
@@ -38,6 +37,7 @@ import { objHeliumExhaust } from "../objects/nature/obj-helium-exhaust";
 import { objFish } from "../objects/obj-fish";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
+import { MicrocosmDownloadData } from "../rpg/microcosms/microcosm-download-data";
 import { Rpg } from "../rpg/rpg";
 import { RpgStatus } from "../rpg/rpg-status";
 import { TerrainAttributes } from "../systems/terrain-attributes";
@@ -340,109 +340,33 @@ function enrichRoom5(lvl: LvlType.EfficientHome) {
 }
 
 function enrichRoom6(lvl: LvlType.EfficientHome) {
-    const flagNerd = (() => {
-        const flag = Rpg.flags.greatTower.efficientHome.nerd;
-        return {
-            get windEssenceCount() {
-                return flag.windEssenceCount;
-            },
-            get downloadedBytesPerTick() {
-                if (this.windEssenceCount < 1) {
-                    return 0;
-                }
-                const value = 128 * Math.round(Math.pow(1.3, this.windEssenceCount)) + 256 * this.windEssenceCount;
-                return Number.isFinite(value) ? value : Number.MAX_SAFE_INTEGER;
-            },
-            get isTerminalEnabled() {
-                return flag.isTerminalEnabled;
-            },
-            disableTerminalByFbi() {
-                flag.isTerminalEnabled = false;
-            },
-            addWindEssence(count: Integer) {
-                flag.windEssenceCount += count;
-            },
-            downloadData() {
-                const ticks = Rpg.records.gameTicksPlayed - flag.lastEvaluatedGameTickCount;
-                if (ticks <= 0 || !flag.isTerminalEnabled) {
-                    return;
-                }
-
-                flag.downloadedData = Math.min(
-                    constNerd.maxStoredBytes,
-                    flag.downloadedData + ticks * this.downloadedBytesPerTick,
-                );
-                flag.lastEvaluatedGameTickCount = Rpg.records.gameTicksPlayed;
-            },
-            removeMovies() {
-                const count = this.storedMoviesCount;
-                flag.downloadedData -= count * constNerd.movieBytes;
-                return count;
-            },
-            get storedMoviesCount() {
-                return Math.floor(flag.downloadedData / constNerd.movieBytes);
-            },
-            get isAtCapacity() {
-                return flag.downloadedData >= constNerd.maxStoredBytes;
-            },
-            get remainingBytesForNextMovie() {
-                return constNerd.movieBytes - (flag.downloadedData % constNerd.movieBytes);
-            },
-        };
-    })();
-
-    const constNerd = {
-        kilobyte: 1_000,
-        megabyte: 1_000_000,
-        gigabyte: 1_000_000_000,
-        movieBytes: 2_000_000_000,
-        maxStoredBytes: 64_000_000_000,
-        fbiDisablesAfterMoviesCount: 200,
-    };
-
-    function bytesText(bytes: number) {
-        if (bytes === 0) {
-            return "0B";
-        }
-        if (bytes < 1) {
-            return "<1B";
-        }
-        if (bytes < constNerd.kilobyte) {
-            return Math.round(bytes) + "B";
-        }
-        if (bytes < constNerd.megabyte) {
-            return Math.round(bytes / constNerd.kilobyte) + "KB";
-        }
-        if (bytes < constNerd.gigabyte) {
-            return Math.round(bytes / constNerd.megabyte) + "MB";
-        }
-        return (bytes / constNerd.gigabyte).toFixed(1) + "GB";
-    }
+    const nerdCosm = Rpg.microcosms["GreatTower.EfficientHome.Nerd.DownloadData"];
 
     {
         const loadingIndicatorTexts = ["I", "/", "-", "\\", "I", "/", "-", "\\"];
 
         objText.XSmall("", { tint: 0x00ff00 })
             .step(self => {
-                if (!flagNerd.isTerminalEnabled) {
+                if (!nerdCosm.isTerminalEnabled) {
                     self.text = `
  Disabled
   by FBI`;
                     return;
                 }
-                if (flagNerd.isAtCapacity) {
+                if (nerdCosm.isAtCapacity) {
                     self.text = `   
  AT MAX!`;
                     return;
                 }
                 let text = "";
-                if (flagNerd.storedMoviesCount > 0) {
-                    text += " " + flagNerd.storedMoviesCount + " done\n";
+                if (nerdCosm.storedMoviesCount > 0) {
+                    text += " " + nerdCosm.storedMoviesCount + " done\n";
                 }
                 const index = Math.floor(Rpg.records.gameTicksPlayed / 4);
                 const loadingIndicatorText = loadingIndicatorTexts[index % loadingIndicatorTexts.length];
-                text += bytesText(flagNerd.remainingBytesForNextMovie) + " " + loadingIndicatorText + "\n";
-                text += bytesText(flagNerd.downloadedBytesPerTick * 60) + "ps";
+                text += MicrocosmDownloadData.viewBytes(nerdCosm.remainingBytesForNextMovie) + " "
+                    + loadingIndicatorText + "\n";
+                text += MicrocosmDownloadData.viewBytes(nerdCosm.downloadedBytesPerTick * 60) + "ps";
                 self.text = text;
             })
             .at(lvl.NerdTerminal)
@@ -463,7 +387,7 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
         let turbineSpeed = 0;
         obj
             .step(() => {
-                turbineSpeed = Math.max(0, Math.min(20, flagNerd.windEssenceCount * Math.pow(0.8, i) - i * 5));
+                turbineSpeed = Math.max(0, Math.min(20, nerdCosm.windEssenceCount * Math.pow(0.8, i) - i * 5));
 
                 if (turbineSpeed < 1) {
                     return;
@@ -487,31 +411,31 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
                 Rpg.inventory.pocket.receive("EssenceWind");
             }
 
-            flagNerd.downloadData();
+            nerdCosm.downloadData();
         });
 
     lvl.NerdTerminal
         .mixin(mxnSpeaker, { name: "Nerd Terminal", tintPrimary: 0x606060, tintSecondary: 0xAFAFAF })
         .mixin(mxnCutscene, function* () {
-            if (!flagNerd.isTerminalEnabled) {
+            if (!nerdCosm.isTerminalEnabled) {
                 lvl.NerdTerminal.play(Sfx.Interact.Error);
                 yield* show("The federal bureau of iguanas has disabled this terminal.");
                 return;
             }
 
-            if (flagNerd.storedMoviesCount < 1) {
+            if (nerdCosm.storedMoviesCount < 1) {
                 yield* show("Nothing downloaded yet.");
                 return;
             }
 
             yield* show("Exporting...");
-            const count = flagNerd.removeMovies();
+            const count = nerdCosm.removeMovies();
             yield* DramaInventory.receiveItems(range(count).map(() => ({ kind: "key_item", id: "IllegalMovie" })));
             for (let i = 0; i < count; i++) {
                 Rpg.experience.reward.computer.onInteract("small_task");
             }
 
-            if (!Rpg.inventory.keyItems.has("IllegalMovie", constNerd.fbiDisablesAfterMoviesCount)) {
+            if (!nerdCosm.shouldDisableTerminalByFbi) {
                 return;
             }
 
@@ -539,7 +463,7 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
             yield* show("Piracy is a crime!!!!");
 
             Sfx.Interact.BombDefuse.play();
-            flagNerd.disableTerminalByFbi();
+            nerdCosm.disableTerminalByFbi();
             yield sleep(250);
 
             yield* show("That makes you a crimer!!!");
@@ -574,16 +498,16 @@ function enrichRoom6(lvl: LvlType.EfficientHome) {
                 yield* show("Hopefully that makes sense!");
             }
             else if (result === 1) {
-                if (flagNerd.isTerminalEnabled) {
+                if (nerdCosm.isTerminalEnabled) {
                     yield* show("Great! I'll use it to power up my computers.");
                 }
                 else {
                     yield* show("Oh thanks, even though the terminal is disabled, I'll still take this!");
                 }
                 const count = yield* DramaInventory.removeAll({ kind: "pocket_item", id: "EssenceWind" });
-                flagNerd.addWindEssence(count);
+                nerdCosm.addWindEssence(count);
 
-                if (flagNerd.isTerminalEnabled) {
+                if (nerdCosm.isTerminalEnabled) {
                     yield* show("This wind essence will be put to good use!");
                 }
             }
