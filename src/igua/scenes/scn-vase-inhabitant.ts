@@ -30,23 +30,8 @@ import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { mxnSpeakingMouth } from "../mixins/mxn-speaking-mouth";
 import { Rpg } from "../rpg/rpg";
 
-// TODO I would like this to work differently
-// Perhaps flags expose their own API
-const consts = {
-    maxVaseMoistureUnits: 1000,
-};
-
 export function scnVaseInhabitant() {
     Jukebox.play(Mzk.FatFire);
-
-    const vaseProgress = {
-        get fillUnit() {
-            return Math.max(0, Math.min(1, Rpg.flags.vase.moistureUnits / consts.maxVaseMoistureUnits));
-        },
-        get isFilled() {
-            return this.fillUnit >= 1;
-        },
-    };
 
     const lvl = Lvl.VaseInhabitant();
 
@@ -55,11 +40,11 @@ export function scnVaseInhabitant() {
         .drawRect(0, -lvl.VaseWater.height, lvl.VaseWater.width, lvl.VaseWater.height)
         .scaled(1, 0)
         .coro(function* (self) {
-            self.scale.y = vaseProgress.fillUnit;
+            self.scale.y = Rpg.microcosms.vase.fillUnit;
 
             while (true) {
-                yield onPrimitiveMutate(() => vaseProgress.fillUnit);
-                yield interp(self.scale, "y").to(vaseProgress.fillUnit).over(1000);
+                yield onPrimitiveMutate(() => Rpg.microcosms.vase.fillUnit);
+                yield interp(self.scale, "y").to(Rpg.microcosms.vase.fillUnit).over(1000);
             }
         })
         .at(lvl.VaseWater)
@@ -78,12 +63,12 @@ export function scnVaseInhabitant() {
                 }
                 else {
                     yield* show(`Added ${Rpg.character.status.conditions.wetness.value} units.`);
-                    Rpg.flags.vase.moistureUnits += Rpg.character.status.conditions.wetness.value;
+                    Rpg.microcosms.vase.fill(Rpg.character.status.conditions.wetness.value);
                     Rpg.character.status.conditions.wetness.value = 0;
                 }
             }
         })
-        .step(self => self.interact.enabled = !vaseProgress.isFilled);
+        .step(self => self.interact.enabled = !Rpg.microcosms.vase.isFilled);
 
     const floatingIguanaObj = objIguanaPuppet(lvl.VaseNpc.objIguanaNpc.persona.looks)
         .mixin(mxnIguanaSpeaker, lvl.VaseNpc.objIguanaNpc.persona)
@@ -120,14 +105,14 @@ export function scnVaseInhabitant() {
         surfacedObj: lvl.VaseNpc,
     };
 
-    if (vaseProgress.isFilled) {
+    if (Rpg.microcosms.vase.isFilled) {
         iguanaObjs.floatingObj.destroy();
     }
     else {
         iguanaObjs.surfacedObj.visible = false;
         iguanaObjs.floatingObj
             .coro(function* (self) {
-                yield () => vaseProgress.isFilled;
+                yield () => Rpg.microcosms.vase.isFilled;
                 Cutscene.play(function* () {
                     yield interpvr(self).to(iguanaObjs.surfacedObj).over(400);
                     self.destroy();
@@ -151,15 +136,15 @@ export function scnVaseInhabitant() {
 
             self
                 .mixin(mxnCutscene, function* () {
-                    const routes = [
-                        { vaseStoredKey: "cactusFruitTypeA", pocketItemId: "CactusFruitTypeA" },
-                        { vaseStoredKey: "cactusFruitTypeB", pocketItemId: "CactusFruitTypeB" },
+                    const pocketItemIds = [
+                        "CactusFruitTypeA",
+                        "CactusFruitTypeB",
                     ] as const;
 
                     const result = yield* ask(
                         "I need 5 of each type of Cactus Fruit to make a shoe. I'll store them when you give me 5.",
-                        ...routes
-                            .map(({ pocketItemId }) =>
+                        ...pocketItemIds
+                            .map((pocketItemId) =>
                                 Rpg.inventory.pocket.has(pocketItemId, 5)
                                     ? "Give\n" + DataPocketItem.getById(pocketItemId).name
                                     : null
@@ -168,34 +153,12 @@ export function scnVaseInhabitant() {
                         "I see.",
                     );
 
-                    for (let i = 0; i < routes.length; i++) {
+                    for (let i = 0; i < pocketItemIds.length; i++) {
                         if (result !== i) {
                             continue;
                         }
 
-                        const { pocketItemId, vaseStoredKey } = routes[i];
-
-                        if (Rpg.flags.vase[vaseStoredKey] >= 5) {
-                            yield* show("I already have five.");
-                            return;
-                        }
-
-                        yield* DramaInventory.removeCount({ kind: "pocket_item", id: pocketItemId }, 5);
-                        Rpg.flags.vase[vaseStoredKey] += 5;
-
-                        let receivedReward = false;
-
-                        while (Rpg.flags.vase.cactusFruitTypeA >= 5 && Rpg.flags.vase.cactusFruitTypeB >= 5) {
-                            receivedReward = true;
-                            yield* show("Nice. You've given me enough for a shoe!");
-                            yield* DramaQuests.complete("VaseInhabitant.CombinedCactusFruits");
-                            Rpg.flags.vase.cactusFruitTypeA -= 5;
-                            Rpg.flags.vase.cactusFruitTypeB -= 5;
-                        }
-
-                        if (!receivedReward) {
-                            yield* show("I will store these. Bring me the other ingredients for your shoe!");
-                        }
+                        yield* Rpg.microcosms.cactusEquipmentMaker.dramaTryGive(pocketItemIds[i]);
                     }
 
                     if (result === 2) {
@@ -208,7 +171,7 @@ export function scnVaseInhabitant() {
         });
 
     objVaseVocalPlayback([iguanaObjs.floatingObj, iguanaObjs.surfacedObj])
-        .step(self => self.objVaseVocalPlayback.isStuck = !vaseProgress.isFilled)
+        .step(self => self.objVaseVocalPlayback.isStuck = !Rpg.microcosms.vase.isFilled)
         .show();
 }
 

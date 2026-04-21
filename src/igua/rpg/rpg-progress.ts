@@ -15,6 +15,7 @@ import { RpgIdols } from "./rpg-idols";
 import { RpgIguanaNpcs } from "./rpg-iguana-npcs";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgLooseValuables } from "./rpg-loose-valuables";
+import { RpgMicrocosms } from "./rpg-microcosms";
 import { RpgPlayer } from "./rpg-player";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPlayerStatus } from "./rpg-player-status";
@@ -142,11 +143,6 @@ export function getInitialRpgProgress() {
                     },
                 },
             },
-            vase: {
-                moistureUnits: 0,
-                cactusFruitTypeA: 0,
-                cactusFruitTypeB: 0,
-            },
             worldMap: {
                 fallenBot: {
                     landsWhenTimesDroppedLoot: Null<Integer>(),
@@ -154,6 +150,7 @@ export function getInitialRpgProgress() {
                 },
             },
         },
+        microcosms: RpgMicrocosms.createState(),
         programmaticFlags: {
             classrooms: RpgClassrooms.createState(),
             gifts: RpgGifts.createState(),
