@@ -2,7 +2,9 @@ import { Integer } from "../../../lib/math/number-alias-types";
 import { Rpg } from "../rpg";
 import { RpgMicrocosm } from "../rpg-microcosm";
 
-export class MicrocosmTimeDroppedLoot extends RpgMicrocosm<MicrocosmTimeDroppedLoot.State> {
+export class MicrocosmTimeDroppedLoot<T extends MicrocosmTimeDroppedLoot.State = MicrocosmTimeDroppedLoot.State>
+    extends RpgMicrocosm<T>
+{
     constructor(private readonly _config: MicrocosmTimeDroppedLoot.Config) {
         super();
     }
@@ -29,14 +31,14 @@ export class MicrocosmTimeDroppedLoot extends RpgMicrocosm<MicrocosmTimeDroppedL
             + this._config.replenishFn(this._state.activeAfterTimesDroppedLoot);
     }
 
-    protected createState(): MicrocosmTimeDroppedLoot.State {
+    protected createState(): T {
         return {
             activeAfterTimesDroppedLoot: null,
-        };
+        } as T;
     }
 }
 
-namespace MicrocosmTimeDroppedLoot {
+export namespace MicrocosmTimeDroppedLoot {
     export interface State {
         activeAfterTimesDroppedLoot: Integer | null;
     }

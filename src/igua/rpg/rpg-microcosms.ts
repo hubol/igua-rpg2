@@ -2,6 +2,7 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { MicrocosmCactusEquipmentMaker } from "./microcosms/microcosm-cactus-equipment-maker";
 import { MicrocosmDownloadData } from "./microcosms/microcosm-download-data";
+import { MicrocosmLottery } from "./microcosms/microcosm-lottery";
 import { MicrocosmTimeDroppedLoot } from "./microcosms/microcosm-time-dropped-loot";
 import { MicrocosmWetnessReceptacle } from "./microcosms/microcosm-wetness-receptacle";
 import { RpgMicrocosm, RpgMicrocosmUnsafeBase } from "./rpg-microcosm";
@@ -16,6 +17,20 @@ const Manifest = {
     "GreatTower.EfficientHome.Nerd.DownloadData": configure(MicrocosmDownloadData, {}),
     "FallenBot.IsSurfaced": configure(MicrocosmTimeDroppedLoot, {
         replenishFn: (previous: Integer | null) => previous === null ? 10 : Rng.intc(10, 20),
+    }),
+    "Ohio.Lottery": configure(MicrocosmLottery, {
+        normalNumbersCount: 2,
+        normalNumbersMax: 9,
+        luckyNumberMax: 3,
+        price: 25,
+        prizeFn: (win: MicrocosmLottery.WinCheck) => {
+            if (win.isLuckyNumberCorrect && win.normalNumbersCorrectCount === 0) {
+                return 50;
+            }
+
+            // TODO
+            return 3;
+        },
     }),
 };
 

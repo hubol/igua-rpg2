@@ -86,6 +86,11 @@ export namespace DataKeyItem {
                 description: "Illegitimately sourced, no one wants this.",
                 texture: Tx.Collectibles.Key.VideoTape,
             },
+            LotteryTicket: {
+                name: "Lottery Ticket",
+                description: "Ticket for the Ohio lottery. Are you feeling lucky?!",
+                texture: null,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );

@@ -362,7 +362,7 @@ function objHeader(text: string, tint: RgbInt) {
         objText.MediumBoldIrregular(text.substring(1), { tint })
             .mixin(mxnBoilSeed)
             .at(firstLetterObj.width + 1, 0)
-            .anchored(0, 1),
+            .pivoted(0, 11),
     );
 }
 

@@ -6,6 +6,7 @@ import { Rng } from "../../../lib/math/rng";
 import { DataEquipment } from "../../data/data-equipment";
 import { DramaInventory } from "../../drama/drama-inventory";
 import { DramaItem } from "../../drama/drama-item";
+import { DramaLottery } from "../../drama/drama-lottery";
 import { DramaPlayerAttributes } from "../../drama/drama-player-attributes";
 import { ask } from "../../drama/show";
 import { mxnCutscene } from "../../mixins/mxn-cutscene";
@@ -82,6 +83,14 @@ export function scnDevDramaItem() {
             else if (result === 4) {
                 yield* DramaInventory.potions.addToppingToHotDog("relish");
             }
+        })
+        .anchored(0.5, 1)
+        .show();
+
+    Sprite.from(Tx.Placeholder)
+        .add(200, playerObj.y)
+        .mixin(mxnCutscene, function* () {
+            yield* DramaLottery.pickNumbers(Rpg.microcosms["Ohio.Lottery"]);
         })
         .anchored(0.5, 1)
         .show();
