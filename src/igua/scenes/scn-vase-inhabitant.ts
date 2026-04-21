@@ -17,7 +17,6 @@ import { ZIndex } from "../core/scene/z-index";
 import { DataCuesheet } from "../data/data-cuesheet";
 import { DataEquipment } from "../data/data-equipment";
 import { DataPocketItem } from "../data/data-pocket-item";
-import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { Cutscene } from "../globals";
@@ -33,6 +32,9 @@ import { Rpg } from "../rpg/rpg";
 export function scnVaseInhabitant() {
     Jukebox.play(Mzk.FatFire);
 
+    const vaseCosm = Rpg.microcosms["VaseInhabitant.Vase"];
+    const cactusEquipmentCosm = Rpg.microcosms["VaseInhabitant.CactusEquipment"];
+
     const lvl = Lvl.VaseInhabitant();
 
     const vaseMaskObj = new Graphics()
@@ -40,11 +42,11 @@ export function scnVaseInhabitant() {
         .drawRect(0, -lvl.VaseWater.height, lvl.VaseWater.width, lvl.VaseWater.height)
         .scaled(1, 0)
         .coro(function* (self) {
-            self.scale.y = Rpg.microcosms.vase.fillUnit;
+            self.scale.y = vaseCosm.fillUnit;
 
             while (true) {
-                yield onPrimitiveMutate(() => Rpg.microcosms.vase.fillUnit);
-                yield interp(self.scale, "y").to(Rpg.microcosms.vase.fillUnit).over(1000);
+                yield onPrimitiveMutate(() => vaseCosm.fillUnit);
+                yield interp(self.scale, "y").to(vaseCosm.fillUnit).over(1000);
             }
         })
         .at(lvl.VaseWater)
@@ -63,12 +65,12 @@ export function scnVaseInhabitant() {
                 }
                 else {
                     yield* show(`Added ${Rpg.character.status.conditions.wetness.value} units.`);
-                    Rpg.microcosms.vase.fill(Rpg.character.status.conditions.wetness.value);
+                    vaseCosm.fill(Rpg.character.status.conditions.wetness.value);
                     Rpg.character.status.conditions.wetness.value = 0;
                 }
             }
         })
-        .step(self => self.interact.enabled = !Rpg.microcosms.vase.isFilled);
+        .step(self => self.interact.enabled = !vaseCosm.isFilled);
 
     const floatingIguanaObj = objIguanaPuppet(lvl.VaseNpc.objIguanaNpc.persona.looks)
         .mixin(mxnIguanaSpeaker, lvl.VaseNpc.objIguanaNpc.persona)
@@ -105,14 +107,14 @@ export function scnVaseInhabitant() {
         surfacedObj: lvl.VaseNpc,
     };
 
-    if (Rpg.microcosms.vase.isFilled) {
+    if (vaseCosm.isFilled) {
         iguanaObjs.floatingObj.destroy();
     }
     else {
         iguanaObjs.surfacedObj.visible = false;
         iguanaObjs.floatingObj
             .coro(function* (self) {
-                yield () => Rpg.microcosms.vase.isFilled;
+                yield () => vaseCosm.isFilled;
                 Cutscene.play(function* () {
                     yield interpvr(self).to(iguanaObjs.surfacedObj).over(400);
                     self.destroy();
@@ -158,7 +160,7 @@ export function scnVaseInhabitant() {
                             continue;
                         }
 
-                        yield* Rpg.microcosms.cactusEquipmentMaker.dramaTryGive(pocketItemIds[i]);
+                        yield* cactusEquipmentCosm.dramaTryGive(pocketItemIds[i]);
                     }
 
                     if (result === 2) {
@@ -171,7 +173,7 @@ export function scnVaseInhabitant() {
         });
 
     objVaseVocalPlayback([iguanaObjs.floatingObj, iguanaObjs.surfacedObj])
-        .step(self => self.objVaseVocalPlayback.isStuck = !Rpg.microcosms.vase.isFilled)
+        .step(self => self.objVaseVocalPlayback.isStuck = !vaseCosm.isFilled)
         .show();
 }
 
