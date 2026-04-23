@@ -12,6 +12,7 @@ import { ask } from "../../drama/show";
 import { mxnCutscene } from "../../mixins/mxn-cutscene";
 import { mxnInteractChangePlayerAppearance } from "../../mixins/mxn-interact-change-player-appearance";
 import { objCharacterKingSpino } from "../../objects/characters/obj-character-king-spino";
+import { objEsotericHotDogCondimentDispenser } from "../../objects/esoteric/obj-esoteric-hot-dog-condiment-dispenser";
 import { playerObj } from "../../objects/obj-player";
 import { Rpg } from "../../rpg/rpg";
 
@@ -72,16 +73,16 @@ export function scnDevDramaItem() {
                 yield* DramaInventory.receiveItems([{ kind: "potion", id: "HotDog" }]);
             }
             else if (result === 1) {
-                yield* DramaInventory.potions.addToppingToHotDog("ketchup");
+                yield* DramaInventory.potions.addCondimentToHotDog("ketchup");
             }
             else if (result === 2) {
-                yield* DramaInventory.potions.addToppingToHotDog("mustard");
+                yield* DramaInventory.potions.addCondimentToHotDog("mustard");
             }
             else if (result === 3) {
-                yield* DramaInventory.potions.addToppingToHotDog("onion");
+                yield* DramaInventory.potions.addCondimentToHotDog("onion");
             }
             else if (result === 4) {
-                yield* DramaInventory.potions.addToppingToHotDog("relish");
+                yield* DramaInventory.potions.addCondimentToHotDog("relish");
             }
         })
         .anchored(0.5, 1)
@@ -98,5 +99,9 @@ export function scnDevDramaItem() {
     objCharacterKingSpino()
         .at(400, playerObj.y)
         .mixin(mxnInteractChangePlayerAppearance, { checkpointName: "fromAppearanceChange" })
+        .show();
+
+    objEsotericHotDogCondimentDispenser("onion")
+        .at(300, playerObj.y)
         .show();
 }

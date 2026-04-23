@@ -61,3 +61,6 @@ export function mxnSpeaker(obj: DisplayObject, args: MxnSpeakerArgs) {
 }
 
 export type MxnSpeaker = ReturnType<typeof mxnSpeaker>;
+export namespace MxnSpeaker {
+    export type Args = MxnSpeakerArgs;
+}

@@ -1,4 +1,5 @@
 import { DisplayObject } from "pixi.js";
+import { Coro } from "../../lib/game-engine/routines/coro";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
 import { container } from "../../lib/pixi/container";
@@ -183,15 +184,18 @@ function* removeAll(item: RpgInventory.RemovableItem) {
     return count;
 }
 
-function* addToppingToHotDog(toppingId: RpgHotDogs.ToppingId) {
-    const result = RpgHotDogs.apply(Rpg.inventory.potions, toppingId);
+function* addCondimentToHotDog(condimentId: RpgHotDogs.CondimentId, applyCoro?: Coro.Type) {
+    const result = RpgHotDogs.apply(Rpg.inventory.potions, condimentId);
     if (result.isSuccess) {
         yield* DramaInventory.removeCount({ kind: "potion", id: result.removePotionId }, 1);
+        if (applyCoro) {
+            yield* applyCoro;
+        }
         yield* DramaInventory.receiveItems([{ kind: "potion", id: result.receivePotionId }]);
         return;
     }
     yield* show(
-        result.haveAnyHotDogs ? "None of your hot dogs need that topping." : "You don't have any hot dogs.",
+        result.haveAnyHotDogs ? "None of your hot dogs need that condiment." : "You don't have any hot dogs.",
     );
 }
 
@@ -206,6 +210,6 @@ export const DramaInventory = {
         empty: emptyPocket,
     },
     potions: {
-        addToppingToHotDog,
+        addCondimentToHotDog,
     },
 };
