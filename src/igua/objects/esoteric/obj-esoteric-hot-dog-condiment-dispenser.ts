@@ -20,13 +20,6 @@ const [
     txFront,
 ] = Tx.Esoteric.HotDogToppingDispenser.split({ width: 44 });
 
-const condimentTextures: Record<RpgHotDogs.CondimentId, Texture> = {
-    ketchup: txKetchup,
-    mustard: txMustard,
-    onion: txOnion,
-    relish: txRelish,
-};
-
 interface CondimentConfig extends MxnSpeaker.Args {
     texture: Texture;
 }
