@@ -17,6 +17,7 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFallenBot } from "../objects/characters/obj-character-fallen-bot";
+import { objEsotericHotDogCondimentDispenser } from "../objects/esoteric/obj-esoteric-hot-dog-condiment-dispenser";
 import { playerObj } from "../objects/obj-player";
 import { OgmoFactory } from "../ogmo/factory";
 import { Rpg } from "../rpg/rpg";
@@ -35,6 +36,10 @@ export function scnWorldMap() {
     Object.entries(lvl).flatMap(([key, value]) =>
         key.endsWith("Label") && value instanceof DisplayObject ? [value] : []
     ).forEach(x => x.mixin(mxnBoilPivot));
+
+    objEsotericHotDogCondimentDispenser("relish")
+        .at(lvl.RelishDispenserMarker)
+        .show();
 
     enrichSimpleSecretValuables(lvl);
     enrichStrangeMarketGuardian(lvl);

@@ -8766,6 +8766,8 @@ export const Lvl = {
       WorldMapHill0_14: d(Tx.WorldMap.Hill0, { x: 1471, y: 328, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
       WorldMapHill0_15: d(Tx.WorldMap.Hill0, { x: 1378, y: 380, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
       WorldMapHill0_16: d(Tx.WorldMap.Hill0, { x: 1498, y: 407, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
+      LightShadowMessy0_1: d(Tx.Light.ShadowMessy0, { x: 839, y: 905, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
+      ShapesDitherSquare16: d(Tx.Shapes.DitherSquare16, { x: 823, y: 903, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
       Slope: e(r["Slope"], { x: 520, y: 1160, width: 96, height: 48, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Slope_1: e(r["Slope"], { x: 616, y: 1112, width: 96, height: 48, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Slope_2: e(r["Slope"], { x: 712, y: 1064, width: 96, height: 48, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
@@ -8835,10 +8837,10 @@ export const Lvl = {
       ShapesSquare32_68: d(Tx.Shapes.Square32, { x: 1080, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
       ShapesSquare32_69: d(Tx.Shapes.Square32, { x: 1120, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x482c6d }, "TerrainDecals"),
       WorldMapBlob0_1: d(Tx.WorldMap.Blob0, { x: 936, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x172a03 }, "TerrainDecals"),
-      LightShadowMessy0_1: d(Tx.Light.ShadowMessy0, { x: 872, y: 192, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
-      LightShadowMessy0_2: d(Tx.Light.ShadowMessy0, { x: 963, y: 195, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
-      LightShadowMessy0_3: d(Tx.Light.ShadowMessy0, { x: 868, y: 161, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
-      LightShadowMessy0_4: d(Tx.Light.ShadowMessy0, { x: 992, y: 177, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
+      LightShadowMessy0_2: d(Tx.Light.ShadowMessy0, { x: 872, y: 192, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
+      LightShadowMessy0_3: d(Tx.Light.ShadowMessy0, { x: 963, y: 195, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
+      LightShadowMessy0_4: d(Tx.Light.ShadowMessy0, { x: 868, y: 161, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
+      LightShadowMessy0_5: d(Tx.Light.ShadowMessy0, { x: 992, y: 177, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
       ShapesRightTriangle24px_3: d(Tx.Shapes.RightTriangle24px, { x: 891, y: 157, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
       ShapesRightTriangle24px_4: d(Tx.Shapes.RightTriangle24px, { x: 974, y: 176, scaleX: -1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
       ShapesSquareIrregular10_14: d(Tx.Shapes.SquareIrregular10, { x: 904, y: 163, scaleX: 2, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
@@ -8911,6 +8913,7 @@ export const Lvl = {
       GateMap_14: e(r["GateMap"], { x: 560, y: 368, rotation: -90, uid: 177622511424900, values: { sceneName: "scnIndianaDarkEvilHole", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_15: e(r["GateMap"], { x: 1184, y: 632, rotation: 270, uid: 177644036502700, values: { sceneName: "scnOhioDmv", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       FallenBotMarker: e(r["Marker"], { x: 744, y: 552, values: { name: "FallenBotMarker", depth: 0 }, tint: 0x777777 }, "MarkerEntities"),
+      RelishDispenserMarker: e(r["Marker"], { x: 840, y: 904, values: { name: "RelishDispenserMarker", depth: 0 }, tint: 0xff535d }, "MarkerEntities"),
     };
   },
 };
@@ -17525,6 +17528,8 @@ export namespace LvlType {
     WorldMapHill0_14: Sprite;
     WorldMapHill0_15: Sprite;
     WorldMapHill0_16: Sprite;
+    LightShadowMessy0_1: Sprite;
+    ShapesDitherSquare16: Sprite;
     Slope: ReturnType<(typeof r)["Slope"]>;
     Slope_1: ReturnType<(typeof r)["Slope"]>;
     Slope_2: ReturnType<(typeof r)["Slope"]>;
@@ -17594,10 +17599,10 @@ export namespace LvlType {
     ShapesSquare32_68: Sprite;
     ShapesSquare32_69: Sprite;
     WorldMapBlob0_1: Sprite;
-    LightShadowMessy0_1: Sprite;
     LightShadowMessy0_2: Sprite;
     LightShadowMessy0_3: Sprite;
     LightShadowMessy0_4: Sprite;
+    LightShadowMessy0_5: Sprite;
     ShapesRightTriangle24px_3: Sprite;
     ShapesRightTriangle24px_4: Sprite;
     ShapesSquareIrregular10_14: Sprite;
@@ -17670,5 +17675,6 @@ export namespace LvlType {
     GateMap_14: ReturnType<(typeof r)["GateMap"]>;
     GateMap_15: ReturnType<(typeof r)["GateMap"]>;
     FallenBotMarker: ReturnType<(typeof r)["Marker"]>;
+    RelishDispenserMarker: ReturnType<(typeof r)["Marker"]>;
   };
 }
