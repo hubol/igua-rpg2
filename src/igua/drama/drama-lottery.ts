@@ -11,8 +11,6 @@ import { DramaMisc } from "./drama-misc";
 import { show } from "./show";
 
 function* pickNumbers(lotteryCosm: MicrocosmLottery) {
-    if (lotteryCosm.checkIsActive)
-
     const totalNumbersCount = lotteryCosm.config.normalNumbersCount + 1;
 
     const numbersObj = container()
