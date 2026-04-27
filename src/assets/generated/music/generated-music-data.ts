@@ -34,5 +34,6 @@ export const GeneratedMusicData = {
    "SporadicQuest": { ogg: require("./ogg/sporadic-quest.ogg") },
    "TrashDay": { ogg: require("./ogg/trash-day.ogg") },
    "UnforgivableToner": { ogg: require("./ogg/unforgivable-toner.ogg") },
+   "VenturePig": { ogg: require("./ogg/venture-pig.ogg") },
    "WondrousAmerica": { ogg: require("./ogg/wondrous-america.ogg") }
 }
