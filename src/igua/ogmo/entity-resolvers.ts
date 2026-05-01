@@ -7,6 +7,7 @@ import { objCharacterGamblingExpert } from "../objects/characters/obj-character-
 import { CtxPocketItems, objCollectiblePocketItemSpawner } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objDevPlayer } from "../objects/dev/obj-dev-player";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
+import { objEnvironmentOverheatRegion } from "../objects/effects/environment/obj-environment-overheat-region";
 import { objAngelBrick } from "../objects/enemies/obj-angel-brick";
 import { objAngelCactus } from "../objects/enemies/obj-angel-cactus";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
@@ -101,6 +102,7 @@ export const OgmoEntityResolvers = {
     IntelligenceSign: (entity) => objIntelligenceSign(entity.values),
     MagicDoor: (entity) => objDoor(entity.values).mixin(mxnDoorMagic, entity.uid).at(0, 2),
     Darkness: objDarkness,
+    OverheatRegion: objEnvironmentOverheatRegion,
 } satisfies OgmoEntityResolverBase;
 
 function applyEntityToIguanaObj(obj: ObjIguanaLocomotive, entity: OgmoEntities.GamblingExpertNpc) {

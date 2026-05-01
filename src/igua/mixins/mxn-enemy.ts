@@ -43,11 +43,29 @@ export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
         ballonHealthDepleted() {},
         ballonCreated() {},
         healed,
-        tookDamage(value, delta, kind, attacker, attack) {
-            if (attacker?.quirks?.successfulAttacksRewardExperience && attack && delta > 0) {
-                Rpg.experience.reward.combat.onAttackDamage(attack, delta);
+        tookDamage(
+            remainingHealth,
+            physicalDamage,
+            emotionalDamage,
+            poisonDamage,
+            overheatDamage,
+            attacker,
+            attack,
+        ) {
+            const damage = physicalDamage + emotionalDamage + poisonDamage + overheatDamage;
+
+            if (attacker?.quirks?.successfulAttacksRewardExperience && attack && damage > 0) {
+                Rpg.experience.reward.combat.onAttackDamage(attack, damage);
             }
-            healthBarTookDamage(value, delta, kind, attacker, attack);
+            healthBarTookDamage(
+                remainingHealth,
+                physicalDamage,
+                emotionalDamage,
+                poisonDamage,
+                overheatDamage,
+                attacker,
+                attack,
+            );
         },
     };
 

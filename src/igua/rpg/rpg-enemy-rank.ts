@@ -47,6 +47,10 @@ export namespace RpgEnemyRank {
                         value: status?.conditions?.wetness?.value ?? 0,
                         max: status?.conditions?.wetness?.max ?? 100,
                     },
+                    overheat: {
+                        value: status?.conditions?.overheat?.value ?? 0,
+                        max: status?.conditions?.overheat?.max ?? 100,
+                    },
                 },
                 quirks: {
                     emotionalDamageIsFatal: status?.quirks?.emotionalDamageIsFatal ?? false,

@@ -110,6 +110,17 @@ export class RpgPlayerStatus implements RpgStatus.Model {
                     );
                 },
             },
+            overheat: {
+                get value() {
+                    return state.conditions.overheat.value;
+                },
+                set value(value) {
+                    state.conditions.overheat.value = value;
+                },
+                get max() {
+                    return 100;
+                },
+            },
         });
     })();
 
@@ -178,6 +189,9 @@ export class RpgPlayerStatus implements RpgStatus.Model {
                     tint: 0xffffff,
                     value: 0,
                 },
+                overheat: {
+                    value: 0,
+                },
             },
             health: 50,
             invulnerable: 0,
@@ -200,6 +214,9 @@ export namespace RpgPlayerStatus {
             };
             wetness: {
                 tint: RgbInt;
+                value: Integer;
+            };
+            overheat: {
                 value: Integer;
             };
         };

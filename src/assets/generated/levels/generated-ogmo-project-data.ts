@@ -40,6 +40,7 @@ export namespace OgmoEntities {
   export type GamblingExpertNpc = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type Darkness = OgmoFactory.EntityBase<{ exitSceneName: string; exitCheckpointName: string; level: number; name: string; depth: number }>;
   export type EnemySpikeBall = OgmoFactory.EntityBase<{ variant: "level0"; name: string; depth: number }>;
+  export type OverheatRegion = OgmoFactory.EntityBase<{ name: string; depth: number }>;
 }
 
 export interface OgmoEntityResolverBase {
@@ -80,4 +81,5 @@ export interface OgmoEntityResolverBase {
   GamblingExpertNpc: (entity: OgmoEntities.GamblingExpertNpc) => unknown;
   Darkness: (entity: OgmoEntities.Darkness) => unknown;
   EnemySpikeBall: (entity: OgmoEntities.EnemySpikeBall) => unknown;
+  OverheatRegion: (entity: OgmoEntities.OverheatRegion) => unknown;
 }

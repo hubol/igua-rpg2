@@ -1894,9 +1894,52 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/spike ball.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAUCAYAAACXtf2DAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAH+SURBVEhLtZRLKIRRFMfPKBuyoLBAifJI8lwwoTyaQilWFLEhbGShJFYeTVlYKEkRjYks7FjIIyXGSpI88ipKCAusxOeeO+d+7v2+b4ZRfnU6595b//8955u58B+MujSNSgiizFnfidNOn/v1w7/QU/mk3c4/08pggNwcT8BfTBxp6xqKYz20FGHjmwy9QObHIrSorFBex6a0QFJ4n34+0HigmNonqWA4Mx6oAsiNz1QMTB3c773xLHfiS7z4/YhH936kd4MhiyMmAwRNMNBEES+gYKCwTFHut4mMYlDb/qS4b48vU8UgYXu2N28Ep+rhD8sOkLPdTaq+EeKwT1lA65XDEuWCiGkDP/TS3DgkJ0g3M9z+s60eILmT16UJdoAKViSyOGfBml672MYjjsmgoXCBz9yXARc3QmYyZa4mru1zRAFxMsKTJyiHCwtxhBusNkxrIviuHy4fX6ny4mmeBU8qCyZuhTIiNJi5CuG1MiKExgRblC3onUk3jVwZkdyaCSEsjAxYiSOBfQM0sejgZNANi1qX5XgVV/yJTnW4ITrvhXZ+5q6uFaKrWqA65gOq2dpmG1Y09QU+1ZjxifitCYoLhAlSI5nwQojjC4rvD5rgn82KO08YrLyXK7d0sM6p1I2EiU2Iy6CB8V36DcIITVyxTrNBSf51wKL+AfgC7oTFFNyKRPoAAAAASUVORK5CYII="
+    },
+    {
+      "exportID": "65251079",
+      "name": "OverheatRegion",
+      "limit": -1,
+      "size": {"x": 16, "y": 16},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": true,
+      "resizeableY": true,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["Region"],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": true,
+      "tintable": {"enabled": true, "defaultTint": "#ff0000", "rgbLevelValueName": null, "useDefaultTint": true}
     }
   ],
   "tilesets": []

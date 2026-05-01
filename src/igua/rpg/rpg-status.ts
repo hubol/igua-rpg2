@@ -54,6 +54,10 @@ export namespace RpgStatus {
                 value: Integer;
                 max: Integer;
             };
+            overheat: {
+                value: Integer;
+                max: Integer;
+            };
         };
         guardingDefenses: {
             physical: PercentInt;
@@ -104,6 +108,7 @@ export namespace RpgStatus {
         Physical,
         Poison,
         Emotional,
+        Overheat,
     }
 
     export interface Effects {
@@ -111,9 +116,11 @@ export namespace RpgStatus {
         ballonCreated(ballon: Ballon): void;
         healed(value: number, delta: number): void;
         tookDamage(
-            value: number,
-            delta: number,
-            kind: DamageKind,
+            remainingHealth: Integer,
+            physicalDamage: Integer,
+            emotionalDamage: Integer,
+            poisonDamage: Integer,
+            overheatDamage: Integer,
             attacker: Model | null,
             attack: RpgAttack.Model | null,
         ): void;
@@ -170,7 +177,15 @@ export namespace RpgStatus {
                     const diff = previous - model.health;
 
                     if (diff > 0) {
-                        effects.tookDamage(model.health, diff, DamageKind.Poison, null, null);
+                        effects.tookDamage(
+                            model.health,
+                            0,
+                            0,
+                            diff,
+                            0,
+                            null,
+                            null,
+                        );
                     }
                 }
 
@@ -241,13 +256,26 @@ export namespace RpgStatus {
             const conditions = target.invulnerable === 0
                 && (attack.conditions.helium > 0
                     || attack.conditions.poison.value > 0
-                    || attack.conditions.wetness.value > 0);
+                    || attack.conditions.wetness.value > 0
+                    || attack.conditions.overheat.value > 0);
+
+            let overheatAttack = 0;
 
             if (conditions) {
                 target.conditions.helium.value += attack.conditions.helium;
                 if (target.conditions.helium.value >= target.conditions.helium.max) {
                     target.conditions.helium.value = 0;
                     RpgStatus.Methods.createBallon(target, targetEffects);
+                }
+
+                target.conditions.overheat.value = Math.min(
+                    target.conditions.overheat.value + attack.conditions.overheat.value,
+                    target.conditions.overheat.max - (target.invulnerable > 0 ? 1 : 0),
+                );
+
+                if (target.conditions.overheat.value >= target.conditions.overheat.max) {
+                    target.conditions.overheat.value = 0;
+                    overheatAttack = attack.conditions.overheat.damage;
                 }
 
                 if (!target.conditions.poison.immune) {
@@ -291,7 +319,7 @@ export namespace RpgStatus {
 
             // TODO warn when amount is not an integer
 
-            if (attack.physical === 0 && attack.emotional === 0) {
+            if (attack.physical === 0 && attack.emotional === 0 && overheatAttack === 0) {
                 return { rejected: false, ambient, attacker };
             }
 
@@ -304,34 +332,46 @@ export namespace RpgStatus {
             const canBeFatal = !target.state.isGuarding || target.quirks.guardedDamageIsFatal || target.health <= 1;
 
             const tookEmotionalDamage = takeDamage(
-                attacker,
-                attack,
                 attack.emotional,
-                DamageKind.Emotional,
                 canBeFatal && target.quirks.emotionalDamageIsFatal,
                 // TODO emotional defense
                 0,
                 0,
                 factionDefense,
                 target,
-                targetEffects,
             );
 
             const tookPhysicalDamage = takeDamage(
-                attacker,
-                attack,
                 attack.physical,
-                DamageKind.Physical,
                 canBeFatal,
                 Math.max(0, target.defenses.physical + targetBodyPart.defenses.physical),
                 Math.max(0, target.guardingDefenses.physical + targetBodyPart.defenses.physical),
                 factionDefense,
                 target,
-                targetEffects,
             );
 
-            const damaged = tookEmotionalDamage || tookPhysicalDamage;
+            const tookOverheatDamage = takeDamage(
+                overheatAttack,
+                canBeFatal,
+                // TODO should there be overheat defense
+                0,
+                0,
+                factionDefense,
+                target,
+            );
+
+            const damaged = tookEmotionalDamage > 0 || tookPhysicalDamage > 0 || tookOverheatDamage > 0;
             target.invulnerable = target.invulnerableMax;
+
+            targetEffects.tookDamage(
+                target.health,
+                tookPhysicalDamage,
+                tookEmotionalDamage,
+                0,
+                tookOverheatDamage,
+                attacker,
+                attack,
+            );
 
             if (damaged && target.health <= 0) {
                 targetEffects.died(attacker);
@@ -362,16 +402,12 @@ export namespace RpgStatus {
     };
 
     function takeDamage(
-        attacker: Model | null,
-        attack: RpgAttack.Model,
         amount: Integer,
-        kind: DamageKind,
         canBeFatal: boolean,
         defense: PercentInt,
         guardingDefense: PercentInt,
         factionDefense: PercentInt,
         target: Model,
-        targetEffects: Effects,
     ) {
         const previous = target.health;
         const totalDefense: PercentInt = defense
@@ -392,8 +428,6 @@ export namespace RpgStatus {
         target.health = Math.max(minimumHealthAfterDamage, target.health - damage);
         const diff = previous - target.health;
 
-        targetEffects.tookDamage(target.health, diff, kind, attacker, attack);
-
-        return diff > 0;
+        return diff;
     }
 }

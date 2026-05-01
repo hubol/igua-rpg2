@@ -17,6 +17,10 @@ export namespace RpgAttack {
                 value: Integer;
                 tint: RgbInt;
             };
+            overheat: {
+                value: Integer;
+                damage: Integer;
+            };
         };
         versus: RpgFaction;
         quirks: {
@@ -46,6 +50,10 @@ export namespace RpgAttack {
                     wetness: {
                         value: model.conditions?.wetness?.value ?? 0,
                         tint: model.conditions?.wetness?.tint ?? 0xffffff,
+                    },
+                    overheat: {
+                        damage: model.conditions?.overheat?.damage ?? 20,
+                        value: model.conditions?.overheat?.value ?? 0,
                     },
                 }, model.conditions ?? {}),
             }),

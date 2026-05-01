@@ -27,8 +27,20 @@ export function objEnemyHealthBars() {
             healed(value, delta) {
                 ensureHealthBarObj().effects.healed(value, delta);
             },
-            tookDamage(value, delta, kind) {
-                ensureHealthBarObj().effects.tookDamage(value, delta, kind);
+            tookDamage(
+                remainingHealth,
+                physicalDamage,
+                emotionalDamage,
+                poisonDamage,
+                overheatDamage,
+            ) {
+                ensureHealthBarObj().effects.tookDamage(
+                    remainingHealth,
+                    physicalDamage,
+                    emotionalDamage,
+                    poisonDamage,
+                    overheatDamage,
+                );
             },
         };
     };
