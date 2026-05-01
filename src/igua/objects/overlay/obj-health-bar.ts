@@ -3,7 +3,6 @@ import { RpgStatus } from "../../rpg/rpg-status";
 import { objStatusBar } from "./obj-status-bar";
 
 const DamageIndex: Record<RpgStatus.DamageKind, Integer> = {
-    // TODO should non-status damage types show their own damage chunks? digits?
     [RpgStatus.DamageKind.Emotional]: 1,
     [RpgStatus.DamageKind.Physical]: 1,
     [RpgStatus.DamageKind.Poison]: 0,
