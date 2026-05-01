@@ -509,6 +509,7 @@ function createQuitObjs() {
                     return value;
                 },
                 max,
+                tints: BuildUpTints.Default,
             })
                 .step((self) => {
                     if (!Cutscene.isPlaying && Input.isDown("Quit")) {
@@ -547,6 +548,7 @@ function createSongInfoObjs() {
             get max() {
                 return state.max;
             },
+            tints: BuildUpTints.Default,
         })
             .coro(function* () {
                 while (true) {
@@ -621,6 +623,7 @@ function objPoisonBuildUp() {
     return objConditionBuildUp({
         message: "Poison is building...",
         conditionsKey: "poison",
+        tints: BuildUpTints.Default,
     });
 }
 
@@ -628,6 +631,7 @@ function objHeliumBuildUp() {
     return objConditionBuildUp({
         message: "Helium is potent...",
         conditionsKey: "helium",
+        tints: BuildUpTints.Default,
     });
 }
 
@@ -635,6 +639,13 @@ function objOverheatBuildUp() {
     return objConditionBuildUp({
         message: "You are overheating!",
         conditionsKey: "overheat",
+        tints: {
+            tintBack: 0xb43900,
+            tintFront: 0xffe600,
+            tintDecrease: 0xff8800,
+            tintIncrease: 0xfcff3b,
+            tintMessage: 0xffe600,
+        },
     });
 }
 
@@ -650,13 +661,31 @@ function objIdolBuff() {
         .merge({ effectiveHeight: 9 });
 }
 
+interface BuildUpTints {
+    tintBack: RgbInt;
+    tintFront: RgbInt;
+    tintIncrease: RgbInt;
+    tintDecrease: RgbInt;
+    tintMessage: RgbInt;
+}
+
+namespace BuildUpTints {
+    export const Default: BuildUpTints = {
+        tintBack: 0x003000,
+        tintFront: 0x008000,
+        tintIncrease: 0x00ff00,
+        tintDecrease: 0x003000,
+        tintMessage: Consts.StatusTextTint,
+    };
+}
+
 interface ObjConditionBuildUpArgs {
     message: string;
     conditionsKey: "poison" | "helium" | "overheat";
-    // TODO tint
+    tints: BuildUpTints;
 }
 
-function objConditionBuildUp({ message, conditionsKey }: ObjConditionBuildUpArgs) {
+function objConditionBuildUp({ message, conditionsKey, tints }: ObjConditionBuildUpArgs) {
     return objBuildUp({
         message,
         get value() {
@@ -665,6 +694,7 @@ function objConditionBuildUp({ message, conditionsKey }: ObjConditionBuildUpArgs
         get max() {
             return Rpg.character.status.conditions[conditionsKey].max;
         },
+        tints,
     });
 }
 
@@ -672,21 +702,21 @@ interface ObjBuildUpArgs {
     message: string;
     value: Integer;
     max: Integer;
-    // TODO tint
+    tints: BuildUpTints;
 }
 
 function objBuildUp(args: ObjBuildUpArgs) {
     let value = args.value;
-    const text = objText.MediumIrregular(args.message, { tint: Consts.StatusTextTint });
+    const text = objText.MediumIrregular(args.message, { tint: args.tints.tintMessage });
     const bar = objStatusBar({
         height: 1,
         width: 85,
         value,
         maxValue: args.max,
-        tintBack: 0x003000,
-        tintFront: 0x008000,
-        increases: [{ tintBar: 0x00ff00 }],
-        decreases: [{ tintBar: 0x003000 }],
+        tintBack: args.tints.tintBack,
+        tintFront: args.tints.tintFront,
+        increases: [{ tintBar: args.tints.tintIncrease }],
+        decreases: [{ tintBar: args.tints.tintDecrease }],
     }).at(0, 8);
 
     let visibleSteps = 0;
