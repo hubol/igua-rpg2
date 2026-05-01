@@ -64,6 +64,7 @@ export function objHud() {
         poisonBuildUpObj,
         objHeliumBuildUp(),
         songInfoBuildUpObj,
+        objOverheatBuildUp(),
         ...createQuitObjs(),
     ];
 
@@ -630,6 +631,13 @@ function objHeliumBuildUp() {
     });
 }
 
+function objOverheatBuildUp() {
+    return objConditionBuildUp({
+        message: "You are overheating!",
+        conditionsKey: "overheat",
+    });
+}
+
 function objIdolBuff() {
     return objText.MediumIrregular("", { tint: Consts.StatusTextTint })
         .step(text => {
@@ -644,7 +652,7 @@ function objIdolBuff() {
 
 interface ObjConditionBuildUpArgs {
     message: string;
-    conditionsKey: "poison" | "helium";
+    conditionsKey: "poison" | "helium" | "overheat";
     // TODO tint
 }
 

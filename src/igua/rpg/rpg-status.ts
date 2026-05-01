@@ -212,6 +212,10 @@ export namespace RpgStatus {
                     0,
                     Math.min(model.conditions.wetness.max, model.conditions.wetness.value) - model.recoveries.wetness,
                 );
+                model.conditions.overheat.value = Math.max(
+                    0,
+                    Math.min(model.conditions.overheat.max, model.conditions.overheat.value) - 1,
+                );
             }
             if (model.state.ballonHealthMayDrain) {
                 const healthDelta = -Math.max(1, model.conditions.helium.ballonDrainFactor);
