@@ -118,7 +118,8 @@ export class RpgPlayerStatus implements RpgStatus.Model {
                     state.conditions.overheat.value = value;
                 },
                 get max() {
-                    return 100;
+                    // TODO this seems like enemies should have it too...
+                    return 100 + state.conditions.wetness.value;
                 },
             },
         });
