@@ -1,6 +1,7 @@
 import { Sprite } from "pixi.js";
 import { Lvl } from "../../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../../assets/textures";
+import { interpr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { DataEquipment } from "../../data/data-equipment";
@@ -12,12 +13,26 @@ import { ask } from "../../drama/show";
 import { mxnCutscene } from "../../mixins/mxn-cutscene";
 import { mxnInteractChangePlayerAppearance } from "../../mixins/mxn-interact-change-player-appearance";
 import { objCharacterKingSpino } from "../../objects/characters/obj-character-king-spino";
+import { objFxCrackedEarth } from "../../objects/effects/obj-fx-cracked-earth";
 import { objEsotericHotDogCondimentDispenser } from "../../objects/esoteric/obj-esoteric-hot-dog-condiment-dispenser";
 import { playerObj } from "../../objects/obj-player";
 import { Rpg } from "../../rpg/rpg";
 
 export function scnDevDramaItem() {
     Lvl.Dummy();
+
+    objFxCrackedEarth(99)
+        .at(32, 64)
+        .coro(function* (self) {
+            while (true) {
+                yield interpr(self.objFxCrackedEarth, "width").to(256).over(5000);
+                yield sleep(333);
+                yield interpr(self.objFxCrackedEarth, "width").to(0).over(5000);
+                yield sleep(333);
+            }
+        })
+        .show();
+
     for (const name of ["peanut", "asssss", "cool", "whatever", "epic", "sweet", "lousy"]) {
         Rpg.character.attributes.names.onCalledName(name);
     }

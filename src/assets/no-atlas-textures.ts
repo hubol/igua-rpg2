@@ -18,6 +18,7 @@ async function createNoAtlasTx(tx: typeof Tx) {
     return {
         Effects: {
             Noise256: await wrap(tx.Effects.Noise256),
+            CrackedEarth: await wrap(tx.Effects.CrackedEarth, WRAP_MODES.MIRRORED_REPEAT),
         },
         Enemy: {
             Brick: {
