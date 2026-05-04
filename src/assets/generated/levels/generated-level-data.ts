@@ -365,7 +365,8 @@ export const Lvl = {
     return {
       Block: e(r["Block"], { x: 0, y: 200, width: 504, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Player: e(r["Player"], { x: 104, y: 200, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
-      OverheatRegion: e(r["OverheatRegion"], { x: 160, y: 88, width: 304, height: 152, values: { name: "", depth: 0 }, tint: 0xff0000 }, "RegionEntities"),
+      OverheatRegion: e(r["OverheatRegion"], { x: 176, y: 200, width: 224, values: { name: "", depth: 0 }, tint: 0xff0000 }, "RegionEntities"),
+      OverheatRegion_1: e(r["OverheatRegion"], { x: -56, y: 200, width: 224, values: { name: "", depth: 0 }, tint: 0xff0000 }, "RegionEntities"),
       DummyMarker: e(r["Marker"], { x: 280, y: 200, values: { name: "DummyMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
@@ -9270,6 +9271,7 @@ export namespace LvlType {
     Block: ReturnType<(typeof r)["Block"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     OverheatRegion: ReturnType<(typeof r)["OverheatRegion"]>;
+    OverheatRegion_1: ReturnType<(typeof r)["OverheatRegion"]>;
     DummyMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type EfficientHome = {

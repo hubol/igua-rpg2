@@ -21,7 +21,7 @@ export function ogmoAddToLayer(obj: DisplayObject, layerName: string) {
                 new Error("No ZIndex enumeration for layer name: " + layerName),
             );
         }
-        else {
+        else if (obj.zIndex === 0) {
             obj.zIndex = zIndex;
         }
         obj.show();

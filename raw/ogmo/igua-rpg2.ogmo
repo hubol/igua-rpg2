@@ -935,7 +935,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": true,
-      "tintable": {"enabled": true, "defaultTint": "#00ff00", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#00ff00", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/region.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABPSURBVFhH7dcxCgAgDATB0///WSOKQuxzzS4Ipsq0aZJGPFsb4CLE9gdYv8rOzgyoYtydfc++AAAAAAAAAAAAAAAAACBfRnV9p5mjC7AlTcXvEDMTrZ50AAAAAElFTkSuQmCC"
     },
@@ -1167,7 +1167,7 @@
         {"name": "visible", "definition": "Boolean", "display": 0, "defaults": true}
       ],
       "isRegion": false,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/world map gate.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC7SURBVFhH5ZPRCoQwDARb//+f1UCFUFsMmZUizsuJXLtz2VwtE/aT9vgqW/tcxnKBUAX1pD1K8Hd/swL7BRftVRo8ASohqYBIpARGS5mVQNs9Co38Y/w5VIFiEngHqIRkCYmERMDIStSoKaGX85myCWRZLnDrjTCq82k3ZBOIhvdIBLLhBhYg4QYSoOHG9Mv+8tGlJNyfTU2AhPdIljAbbmABEm5MD/sx05Aef7ekAsJygVAFb/L3Cko5AJ+reA2Dpk05AAAAAElFTkSuQmCC"
     },
@@ -1921,7 +1921,7 @@
       "tileY": false,
       "tileSize": {"x": 16, "y": 16},
       "resizeableX": true,
-      "resizeableY": true,
+      "resizeableY": false,
       "rotatable": false,
       "rotationDegrees": 360,
       "canFlipX": false,
