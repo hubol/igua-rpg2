@@ -292,6 +292,9 @@ export function objStatusBar(config: ObjStatusBarConfig) {
     if (config.height === 9) {
         barsGfx.mask = Sprite.from(Tx.Ui.HorizontalBar9).show(c);
     }
+    else if (config.height === 2) {
+        barsGfx.mask = Sprite.from(Tx.Ui.HorizontalBar2).show(c);
+    }
 
     const increaseTexts = config.increases.map(x => x.digit ? createText(x.digit, true).show(c) : null);
     const decreaseTexts = config.decreases.map(x => x.digit ? createText(x.digit, false).show(c) : null);

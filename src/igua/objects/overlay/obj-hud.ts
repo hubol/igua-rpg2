@@ -55,7 +55,7 @@ export function objHud() {
     const poisonLevelObj = objPoisonLevel();
     const { buildUpObj: songInfoBuildUpObj, textObj: songInfoObj } = createSongInfoObjs();
 
-    const statusObjs: Array<Container & { advance?: number; effectiveHeight?: number }> = [
+    const statusObjs = [
         valuablesInfoObj,
         objPocketInfo(),
         objIdolBuff(),
@@ -96,11 +96,11 @@ export function objHud() {
                 lastVisibleObj = statusObj;
                 y += 3;
                 statusObj.y = y;
-                if (statusObj["effectiveHeight"]) {
-                    y += statusObj.effectiveHeight!;
+                if (statusObj.is(mxnHeight)) {
+                    y += statusObj.mxnHeight.value;
                 }
                 else {
-                    y += statusObj.height + (statusObj["advance"] ?? 0);
+                    y += statusObj.height;
                 }
             }
 
@@ -425,7 +425,7 @@ function objCutsceneLetterbox() {
 
 function objPocketInfo() {
     return container()
-        .merge({ effectiveHeight: 0 })
+        .mixin(mxnHeight, 0)
         .coro(function* (self) {
             while (true) {
                 self.removeAllChildren();
@@ -437,11 +437,12 @@ function objPocketInfo() {
                 for (let i = 0; i < count; i++) {
                     const slot = Rpg.inventory.pocket.slots[i];
                     objPocketSlotInfo(slot, i > 0)
-                        .at(0, i * 10)
+                        .at(0, i * 8)
                         .show(self);
                 }
 
-                self.effectiveHeight = self.children.length * 10;
+                self.mxnHeight.value = self.children.length * 8;
+                self.visible = self.mxnHeight.value > 0;
 
                 yield onPrimitiveMutate(() =>
                     Number(Rpg.inventory.pocket.slots[0].isEmpty) + Rpg.inventory.pocket.slots.length * 10
@@ -575,6 +576,7 @@ function createSongInfoObjs() {
                 }
             }),
         textObj: objText.MediumIrregular("", { tint: Consts.StatusTextTint })
+            .mixin(mxnHeight, 8)
             .step(self => {
                 self.visible = Boolean(state.recognizedTrack);
                 self.text = state.recognizedTrack
@@ -604,12 +606,12 @@ function objValuablesInfo() {
         })
             .step(self => self.x = youHaveTextObj.width + 4),
     )
-        .merge({ effectiveHeight: 8 });
+        .mixin(mxnHeight, 8);
 }
 
 function objPoisonLevel() {
     return objText.MediumIrregular("You are poisoned", { tint: Consts.StatusTextTint })
-        .merge({ advance: -3 })
+        .mixin(mxnHeight, 8)
         .step(text => {
             const level = Rpg.character.status.conditions.poison.level;
             text.visible = level > 0;
@@ -658,7 +660,7 @@ function objIdolBuff() {
                 text.text = DataIdol.getById(idol?.idolId!).hudText;
             }
         })
-        .merge({ effectiveHeight: 9 });
+        .mixin(mxnHeight, 8);
 }
 
 interface BuildUpTints {
@@ -709,7 +711,7 @@ function objBuildUp(args: ObjBuildUpArgs) {
     let value = args.value;
     const text = objText.MediumIrregular(args.message, { tint: args.tints.tintMessage });
     const bar = objStatusBar({
-        height: 1,
+        height: 2,
         width: 85,
         value,
         maxValue: args.max,
@@ -717,9 +719,7 @@ function objBuildUp(args: ObjBuildUpArgs) {
         tintFront: args.tints.tintFront,
         increases: [{ tintBar: args.tints.tintIncrease }],
         decreases: [{ tintBar: args.tints.tintDecrease }],
-    }).at(0, 8);
-
-    let visibleSteps = 0;
+    }).at(0, 9);
 
     return container(bar, text)
         .step(self => {
@@ -733,9 +733,11 @@ function objBuildUp(args: ObjBuildUpArgs) {
                 bar.decrease(nextValue, nextValue - value, 0);
             }
             value = nextValue;
-            // I don't remember what I was trying to accomplish with this.
-            // const maxVisibleSteps = RpgPlayer.status.conditions.poison.level === 0 ? 1 : 2;
-            visibleSteps = value > 0 ? 2 : (visibleSteps - 1);
-            self.visible = visibleSteps > 0;
+            self.visible = value > 0;
         });
+}
+
+function mxnHeight(obj: DisplayObject, value: Integer) {
+    return obj
+        .merge({ mxnHeight: { value } });
 }
