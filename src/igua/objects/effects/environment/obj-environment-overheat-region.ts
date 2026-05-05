@@ -29,12 +29,12 @@ export function objEnvironmentOverheatRegion(entity: OgmoEntities.OverheatRegion
             while (true) {
                 yield sleep(Rng.int(100, 150));
                 yield interpc(self.objFxCrackedEarth, "tint")
-                    .steps(5)
+                    .steps(3)
                     .to(getCrackedEarthTint(Rng.float(0.4)))
                     .over(Rng.int(200, 300));
                 yield sleep(Rng.int(100, 150));
                 yield interpc(self.objFxCrackedEarth, "tint")
-                    .steps(5)
+                    .steps(3)
                     .to(getCrackedEarthTint(Rng.float(0.6, 1)))
                     .over(Rng.int(200, 300));
             }
