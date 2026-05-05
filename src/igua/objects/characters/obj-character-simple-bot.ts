@@ -7,12 +7,33 @@ import { objAngelEyes } from "../enemies/obj-angel-eyes";
 import { objAngelMouth } from "../enemies/obj-angel-mouth";
 
 const [txBody, txNoggin] = Tx.Characters.SimpleBot.Body.split({ count: 2 });
+const [txLeg, txArmRest, txArmT] = Tx.Characters.SimpleBot.Limbs.split({ count: 3 });
 
 export function objCharacterSimpleBot() {
+    const api = {
+        armPoseSeed: 0,
+    };
+
     return container(
         Sprite.from(Tx.Characters.SimpleBot.Mullet)
             .at(8, 30),
         Sprite.from(txBody),
+        Sprite.from(txLeg)
+            .pivoted(5, 35)
+            .at(55, 80),
+        Sprite.from(txLeg)
+            .pivoted(5, 35)
+            .scaled(-1, 1)
+            .at(24, 80),
+        Sprite.from(txArmRest)
+            .pivoted(12, 8)
+            .step(self => self.texture = ((api.armPoseSeed + 8) % 16) < 8 ? txArmT : txArmRest)
+            .at(63, 53),
+        Sprite.from(txArmRest)
+            .pivoted(12, 8)
+            .scaled(-1, 1)
+            .step(self => self.texture = (api.armPoseSeed % 2) === 1 ? txArmT : txArmRest)
+            .at(19, 53),
         container(
             Sprite.from(txNoggin),
             Sprite.from(Tx.Characters.SimpleBot.Wig)
@@ -44,5 +65,6 @@ export function objCharacterSimpleBot() {
         ),
     )
         .pivoted(42, 77)
-        .mixin(mxnDetectPlayer);
+        .mixin(mxnDetectPlayer)
+        .merge({ objCharacterSimpleBot: api });
 }
