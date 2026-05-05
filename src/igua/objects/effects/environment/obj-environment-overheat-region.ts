@@ -7,6 +7,7 @@ import { Rng } from "../../../../lib/math/rng";
 import { ZIndex } from "../../../core/scene/z-index";
 import { mxnRpgAttack } from "../../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../../rpg/rpg-attack";
+import { RpgFaction } from "../../../rpg/rpg-faction";
 import { objFxCrackedEarth } from "../obj-fx-cracked-earth";
 
 const atk = RpgAttack.create({
@@ -16,6 +17,7 @@ const atk = RpgAttack.create({
             value: 1,
         },
     },
+    versus: RpgFaction.Anyone,
 });
 
 export function objEnvironmentOverheatRegion(entity: OgmoEntities.OverheatRegion) {

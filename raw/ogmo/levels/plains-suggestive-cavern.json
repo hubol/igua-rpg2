@@ -1,7 +1,7 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 2000,
-  "height": 648,
+  "width": 3136,
+  "height": 664,
   "offsetX": 0,
   "offsetY": 0,
   "values": {"Terrain Color": "#540707"},
@@ -14,14 +14,14 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 250,
-      "gridCellsY": 81,
+      "gridCellsX": 392,
+      "gridCellsY": 83,
       "entities": [
         {
           "name": "Marker",
           "id": 0,
           "_eid": "73148747",
-          "x": 1640,
+          "x": 2776,
           "y": 608,
           "originX": 8,
           "originY": 8,
@@ -32,7 +32,7 @@
           "name": "Marker",
           "id": 1,
           "_eid": "73148747",
-          "x": 1600,
+          "x": 2736,
           "y": 562,
           "originX": 8,
           "originY": 8,
@@ -48,14 +48,14 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 250,
-      "gridCellsY": 81,
+      "gridCellsX": 392,
+      "gridCellsY": 83,
       "entities": [
         {
           "name": "GateVertical",
           "id": 0,
           "_eid": "64222434",
-          "x": 568,
+          "x": 1704,
           "y": -32,
           "width": 176,
           "originX": 0,
@@ -67,13 +67,25 @@
           "name": "GateVertical",
           "id": 1,
           "_eid": "64222434",
-          "x": 48,
+          "x": 1184,
           "y": -80,
           "width": 440,
           "originX": 0,
           "originY": 0,
           "flippedY": true,
           "values": {"sceneName": "scnWorldMap", "checkpointName": "fromPlainsSuggestiveCavern", "name": "", "depth": 0}
+        },
+        {
+          "name": "OverheatRegion",
+          "id": 2,
+          "_eid": "65251079",
+          "x": 160,
+          "y": 632,
+          "width": 1656,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ff0000",
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -84,8 +96,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 250,
-      "gridCellsY": 81,
+      "gridCellsX": 392,
+      "gridCellsY": 83,
       "decals": [],
       "folder": "../textures"
     },
@@ -96,8 +108,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 250,
-      "gridCellsY": 81,
+      "gridCellsX": 392,
+      "gridCellsY": 83,
       "entities": []
     },
     {
@@ -107,14 +119,14 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 250,
-      "gridCellsY": 81,
+      "gridCellsX": 392,
+      "gridCellsY": 83,
       "entities": [
         {
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
-          "x": 656,
+          "x": 1792,
           "y": 48,
           "originX": 22,
           "originY": 39,
@@ -125,7 +137,7 @@
           "name": "Checkpoint",
           "id": 1,
           "_eid": "19953026",
-          "x": 592,
+          "x": 1728,
           "y": 336,
           "originX": 22,
           "originY": 39,
@@ -141,14 +153,14 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 250,
-      "gridCellsY": 81,
+      "gridCellsX": 392,
+      "gridCellsY": 83,
       "entities": [
         {
           "name": "IguanaNpc",
           "id": 0,
           "_eid": "90326278",
-          "x": 88,
+          "x": 1224,
           "y": 232,
           "originX": 20,
           "originY": 52,
@@ -159,7 +171,7 @@
           "name": "IguanaNpc",
           "id": 1,
           "_eid": "90326278",
-          "x": 896,
+          "x": 2032,
           "y": 600,
           "originX": 20,
           "originY": 52,
@@ -175,11 +187,11 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 250,
-      "gridCellsY": 81,
+      "gridCellsX": 392,
+      "gridCellsY": 83,
       "decals": [
         {
-          "x": 1070,
+          "x": 2206,
           "y": 484,
           "scaleX": 5,
           "scaleY": 1,
@@ -192,7 +204,7 @@
           "groupName": null
         },
         {
-          "x": 1072,
+          "x": 2208,
           "y": 514,
           "scaleX": 5,
           "scaleY": 1,
@@ -205,7 +217,7 @@
           "groupName": null
         },
         {
-          "x": 1075,
+          "x": 2211,
           "y": 444,
           "scaleX": 7,
           "scaleY": 1,
@@ -218,7 +230,7 @@
           "groupName": null
         },
         {
-          "x": 1070,
+          "x": 2206,
           "y": 412,
           "scaleX": 5,
           "scaleY": 1,
@@ -240,14 +252,14 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 250,
-      "gridCellsY": 81,
+      "gridCellsX": 392,
+      "gridCellsY": 83,
       "entities": [
         {
           "name": "IntelligenceBackground",
           "id": 0,
           "_eid": "41461695",
-          "x": 992,
+          "x": 2128,
           "y": 376,
           "width": 96,
           "height": 32,
@@ -259,7 +271,7 @@
           "name": "IntelligenceBackground",
           "id": 1,
           "_eid": "41461695",
-          "x": 1056,
+          "x": 2192,
           "y": 408,
           "width": 32,
           "height": 112,
@@ -271,7 +283,7 @@
           "name": "IntelligenceBackground",
           "id": 2,
           "_eid": "41461695",
-          "x": 744,
+          "x": 1880,
           "y": 264,
           "width": 360,
           "height": 32,
@@ -283,7 +295,7 @@
           "name": "IntelligenceBackground",
           "id": 3,
           "_eid": "41461695",
-          "x": 1384,
+          "x": 2520,
           "y": 296,
           "width": 32,
           "height": 104,
@@ -295,7 +307,7 @@
           "name": "Door",
           "id": 4,
           "_eid": "88296692",
-          "x": 1752,
+          "x": 2888,
           "y": 704,
           "originX": 0,
           "originY": -2,
@@ -305,7 +317,7 @@
           "name": "IntelligenceBackground",
           "id": 6,
           "_eid": "41461695",
-          "x": 1104,
+          "x": 2240,
           "y": 264,
           "width": 312,
           "height": 32,
@@ -317,7 +329,7 @@
           "name": "Door",
           "id": 7,
           "_eid": "88296692",
-          "x": 560,
+          "x": 1696,
           "y": 288,
           "originX": 0,
           "originY": -2,
@@ -327,11 +339,21 @@
           "name": "Darkness",
           "id": 8,
           "_eid": "59550687",
-          "x": 888,
+          "x": 2024,
           "y": 56,
           "originX": 20,
           "originY": 19,
           "values": {"exitSceneName": "scnPlainsSuggestive", "exitCheckpointName": "fromCavern", "level": 1, "name": "", "depth": 0}
+        },
+        {
+          "name": "PocketableItemA",
+          "id": 9,
+          "_eid": "30330516",
+          "x": 224,
+          "y": 584,
+          "originX": 12,
+          "originY": 12,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -342,11 +364,11 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 250,
-      "gridCellsY": 81,
+      "gridCellsX": 392,
+      "gridCellsY": 83,
       "decals": [
         {
-          "x": 552,
+          "x": 1472,
           "y": 481,
           "scaleX": 1,
           "scaleY": 1,
@@ -359,7 +381,7 @@
           "groupName": null
         },
         {
-          "x": 746,
+          "x": 1882,
           "y": 453,
           "scaleX": 1,
           "scaleY": 1,
@@ -372,7 +394,7 @@
           "groupName": null
         },
         {
-          "x": 297,
+          "x": 1433,
           "y": 440,
           "scaleX": -1,
           "scaleY": 1,
@@ -385,7 +407,7 @@
           "groupName": null
         },
         {
-          "x": 129,
+          "x": 1265,
           "y": 272,
           "scaleX": -1,
           "scaleY": -1,
@@ -398,7 +420,7 @@
           "groupName": null
         },
         {
-          "x": 240,
+          "x": 1376,
           "y": -64,
           "scaleX": 1,
           "scaleY": 1,
@@ -411,7 +433,7 @@
           "groupName": null
         },
         {
-          "x": 64,
+          "x": 1200,
           "y": 72,
           "scaleX": 1,
           "scaleY": 1,
@@ -424,7 +446,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 93,
+          "x": 1229,
           "y": 71,
           "scaleX": 1,
           "scaleY": 1,
@@ -437,7 +459,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 121,
+          "x": 1257,
           "y": 70,
           "scaleX": 1,
           "scaleY": -1,
@@ -450,7 +472,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 149,
+          "x": 1285,
           "y": 71,
           "scaleX": 1,
           "scaleY": 1,
@@ -463,7 +485,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 178,
+          "x": 1314,
           "y": 70,
           "scaleX": 1,
           "scaleY": 1,
@@ -476,7 +498,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 206,
+          "x": 1342,
           "y": 69,
           "scaleX": 1,
           "scaleY": -1,
@@ -489,7 +511,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 238,
+          "x": 1374,
           "y": 70,
           "scaleX": 1,
           "scaleY": 1,
@@ -502,7 +524,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 267,
+          "x": 1403,
           "y": 69,
           "scaleX": 1,
           "scaleY": 1,
@@ -515,7 +537,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 295,
+          "x": 1431,
           "y": 68,
           "scaleX": 1,
           "scaleY": -1,
@@ -528,7 +550,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 318,
+          "x": 1454,
           "y": 70,
           "scaleX": 1,
           "scaleY": 1,
@@ -541,7 +563,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 346,
+          "x": 1482,
           "y": 69,
           "scaleX": 1,
           "scaleY": -1,
@@ -554,7 +576,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 378,
+          "x": 1514,
           "y": 70,
           "scaleX": 1,
           "scaleY": 1,
@@ -567,7 +589,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 399,
+          "x": 1535,
           "y": 71,
           "scaleX": 1,
           "scaleY": 1,
@@ -580,7 +602,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 427,
+          "x": 1563,
           "y": 70,
           "scaleX": 1,
           "scaleY": -1,
@@ -593,7 +615,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 459,
+          "x": 1595,
           "y": 71,
           "scaleX": 1,
           "scaleY": 1,
@@ -606,7 +628,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 196,
+          "x": 1332,
           "y": 84,
           "scaleX": 1,
           "scaleY": 1,
@@ -619,7 +641,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 257,
+          "x": 1393,
           "y": 89,
           "scaleX": 1,
           "scaleY": 1,
@@ -632,7 +654,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 124,
+          "x": 1260,
           "y": 89,
           "scaleX": 1,
           "scaleY": 1,
@@ -645,7 +667,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 404,
+          "x": 1540,
           "y": 89,
           "scaleX": 1,
           "scaleY": 1,
@@ -658,7 +680,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 47,
+          "x": 1183,
           "y": 44,
           "scaleX": 1,
           "scaleY": 1,
@@ -671,7 +693,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 480,
+          "x": 1616,
           "y": 40,
           "scaleX": 1,
           "scaleY": 1,
@@ -684,7 +706,7 @@
           "groupName": "MovingCeilingBlockDecals"
         },
         {
-          "x": 334,
+          "x": 1470,
           "y": 471,
           "scaleX": 1,
           "scaleY": 1,
@@ -697,7 +719,7 @@
           "groupName": null
         },
         {
-          "x": 253,
+          "x": 1389,
           "y": 392,
           "scaleX": 1,
           "scaleY": 1,
@@ -710,7 +732,7 @@
           "groupName": null
         },
         {
-          "x": 168,
+          "x": 1304,
           "y": 312,
           "scaleX": 1,
           "scaleY": 1,
@@ -723,7 +745,7 @@
           "groupName": null
         },
         {
-          "x": 86,
+          "x": 1222,
           "y": 231,
           "scaleX": 1,
           "scaleY": 1,
@@ -736,7 +758,20 @@
           "groupName": null
         },
         {
-          "x": 481,
+          "x": 1873,
+          "y": 631,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1529,
           "y": 471,
           "scaleX": -1,
           "scaleY": 1,
@@ -749,20 +784,7 @@
           "groupName": null
         },
         {
-          "x": 609,
-          "y": 471,
-          "scaleX": -1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#540707",
-          "texture": "terrain/grass/sparse 3px 1.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 545,
+          "x": 1681,
           "y": 345,
           "scaleX": -1,
           "scaleY": 1,
@@ -775,7 +797,7 @@
           "groupName": null
         },
         {
-          "x": 545,
+          "x": 1681,
           "y": 217,
           "scaleX": -1,
           "scaleY": 1,
@@ -788,7 +810,7 @@
           "groupName": null
         },
         {
-          "x": 744,
+          "x": 1880,
           "y": 78,
           "scaleX": -1,
           "scaleY": -1,
@@ -801,7 +823,7 @@
           "groupName": null
         },
         {
-          "x": 744,
+          "x": 1880,
           "y": 214,
           "scaleX": -1,
           "scaleY": -1,
@@ -814,7 +836,7 @@
           "groupName": null
         },
         {
-          "x": 744,
+          "x": 1880,
           "y": 334,
           "scaleX": -1,
           "scaleY": -1,
@@ -827,7 +849,7 @@
           "groupName": null
         },
         {
-          "x": 479,
+          "x": 1615,
           "y": 318,
           "scaleX": -1,
           "scaleY": -1,
@@ -840,7 +862,7 @@
           "groupName": null
         },
         {
-          "x": 479,
+          "x": 1615,
           "y": 182,
           "scaleX": -1,
           "scaleY": -1,
@@ -853,7 +875,7 @@
           "groupName": null
         },
         {
-          "x": 49,
+          "x": 1185,
           "y": 136,
           "scaleX": -1,
           "scaleY": -1,
@@ -866,7 +888,7 @@
           "groupName": null
         },
         {
-          "x": 124,
+          "x": 1260,
           "y": 256,
           "scaleX": 1,
           "scaleY": 1,
@@ -879,7 +901,7 @@
           "groupName": null
         },
         {
-          "x": 291,
+          "x": 1427,
           "y": 459,
           "scaleX": -1,
           "scaleY": 1,
@@ -892,7 +914,7 @@
           "groupName": null
         },
         {
-          "x": 514,
+          "x": 1650,
           "y": 382,
           "scaleX": 1,
           "scaleY": 1,
@@ -905,7 +927,7 @@
           "groupName": null
         },
         {
-          "x": 662,
+          "x": 1582,
           "y": 476,
           "scaleX": 1,
           "scaleY": 1,
@@ -918,7 +940,7 @@
           "groupName": null
         },
         {
-          "x": 809,
+          "x": 1945,
           "y": 377,
           "scaleX": -1,
           "scaleY": 1,
@@ -931,7 +953,7 @@
           "groupName": null
         },
         {
-          "x": 937,
+          "x": 2073,
           "y": 377,
           "scaleX": -1,
           "scaleY": 1,
@@ -944,7 +966,7 @@
           "groupName": null
         },
         {
-          "x": 801,
+          "x": 1937,
           "y": 439,
           "scaleX": -1,
           "scaleY": 1,
@@ -957,7 +979,7 @@
           "groupName": null
         },
         {
-          "x": 889,
+          "x": 2025,
           "y": 439,
           "scaleX": -1,
           "scaleY": 1,
@@ -970,7 +992,7 @@
           "groupName": null
         },
         {
-          "x": 889,
+          "x": 2025,
           "y": 521,
           "scaleX": -1,
           "scaleY": 1,
@@ -983,7 +1005,7 @@
           "groupName": null
         },
         {
-          "x": 1137,
+          "x": 2273,
           "y": 521,
           "scaleX": -1,
           "scaleY": 1,
@@ -996,7 +1018,7 @@
           "groupName": null
         },
         {
-          "x": 857,
+          "x": 1993,
           "y": 599,
           "scaleX": -1,
           "scaleY": 1,
@@ -1009,7 +1031,7 @@
           "groupName": null
         },
         {
-          "x": 945,
+          "x": 2081,
           "y": 599,
           "scaleX": -1,
           "scaleY": 1,
@@ -1022,7 +1044,7 @@
           "groupName": null
         },
         {
-          "x": 1049,
+          "x": 2185,
           "y": 599,
           "scaleX": -1,
           "scaleY": 1,
@@ -1035,7 +1057,7 @@
           "groupName": null
         },
         {
-          "x": 1137,
+          "x": 2273,
           "y": 599,
           "scaleX": -1,
           "scaleY": 1,
@@ -1048,7 +1070,7 @@
           "groupName": null
         },
         {
-          "x": 857,
+          "x": 1993,
           "y": 561,
           "scaleX": -1,
           "scaleY": 1,
@@ -1061,7 +1083,7 @@
           "groupName": null
         },
         {
-          "x": 1120,
+          "x": 2256,
           "y": 558,
           "scaleX": -1,
           "scaleY": -1,
@@ -1074,7 +1096,7 @@
           "groupName": null
         },
         {
-          "x": 826,
+          "x": 1962,
           "y": 362,
           "scaleX": 1,
           "scaleY": 1,
@@ -1087,7 +1109,7 @@
           "groupName": null
         },
         {
-          "x": 161,
+          "x": 1297,
           "y": 322,
           "scaleX": 1,
           "scaleY": 1,
@@ -1100,7 +1122,7 @@
           "groupName": null
         },
         {
-          "x": 1026,
+          "x": 2162,
           "y": 505,
           "scaleX": 1,
           "scaleY": 1,
@@ -1113,7 +1135,7 @@
           "groupName": null
         },
         {
-          "x": 554,
+          "x": 1474,
           "y": 470,
           "scaleX": 1,
           "scaleY": 1,
@@ -1126,7 +1148,7 @@
           "groupName": null
         },
         {
-          "x": 569,
+          "x": 1489,
           "y": 477,
           "scaleX": 1,
           "scaleY": 1,
@@ -1139,7 +1161,7 @@
           "groupName": null
         },
         {
-          "x": 535,
+          "x": 1455,
           "y": 480,
           "scaleX": 1,
           "scaleY": 1,
@@ -1152,7 +1174,7 @@
           "groupName": null
         },
         {
-          "x": 541,
+          "x": 1461,
           "y": 486,
           "scaleX": -1,
           "scaleY": 1,
@@ -1165,7 +1187,7 @@
           "groupName": null
         },
         {
-          "x": 755,
+          "x": 1891,
           "y": 437,
           "scaleX": -1,
           "scaleY": 1,
@@ -1178,7 +1200,7 @@
           "groupName": null
         },
         {
-          "x": 741,
+          "x": 1877,
           "y": 449,
           "scaleX": 1,
           "scaleY": 1,
@@ -1191,7 +1213,7 @@
           "groupName": null
         },
         {
-          "x": 729,
+          "x": 1865,
           "y": 447,
           "scaleX": 1,
           "scaleY": 1,
@@ -1204,7 +1226,7 @@
           "groupName": null
         },
         {
-          "x": 728,
+          "x": 1864,
           "y": 458,
           "scaleX": 1,
           "scaleY": -1,
@@ -1217,7 +1239,7 @@
           "groupName": null
         },
         {
-          "x": 719,
+          "x": 1855,
           "y": 456,
           "scaleX": 1,
           "scaleY": 1,
@@ -1230,7 +1252,7 @@
           "groupName": null
         },
         {
-          "x": 89,
+          "x": 1225,
           "y": 255,
           "scaleX": 1,
           "scaleY": 1,
@@ -1243,7 +1265,7 @@
           "groupName": null
         },
         {
-          "x": 897,
+          "x": 2033,
           "y": 623,
           "scaleX": 1,
           "scaleY": 1,
@@ -1256,7 +1278,7 @@
           "groupName": null
         },
         {
-          "x": 1024,
+          "x": 2160,
           "y": 588,
           "scaleX": 1,
           "scaleY": 1,
@@ -1269,7 +1291,7 @@
           "groupName": null
         },
         {
-          "x": 217,
+          "x": 1353,
           "y": 360,
           "scaleX": -1,
           "scaleY": 1,
@@ -1282,10 +1304,23 @@
           "groupName": null
         },
         {
-          "x": 991,
+          "x": 2127,
           "y": 470,
           "scaleX": -1,
           "scaleY": -1,
+          "rotation": 90,
+          "tint": "#540707",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1919,
+          "y": 594,
+          "scaleX": -1,
+          "scaleY": 1,
           "rotation": 90,
           "tint": "#540707",
           "texture": "terrain/grass/sparse 3px 1.png",
@@ -1304,14 +1339,14 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 250,
-      "gridCellsY": 81,
+      "gridCellsX": 392,
+      "gridCellsY": 83,
       "entities": [
         {
           "name": "Block",
           "id": 0,
           "_eid": "93117141",
-          "x": 744,
+          "x": 1880,
           "y": 0,
           "width": 416,
           "height": 264,
@@ -1324,7 +1359,7 @@
           "name": "Block",
           "id": 1,
           "_eid": "93117141",
-          "x": 480,
+          "x": 1616,
           "y": 0,
           "width": 64,
           "height": 368,
@@ -1337,10 +1372,10 @@
           "name": "Block",
           "id": 2,
           "_eid": "93117141",
-          "x": 0,
+          "x": 1136,
           "y": 472,
-          "width": 792,
-          "height": 192,
+          "width": 440,
+          "height": 136,
           "originX": 0,
           "originY": 0,
           "tint": "#540707",
@@ -1348,22 +1383,9 @@
         },
         {
           "name": "Slope",
-          "id": 3,
-          "_eid": "95675713",
-          "x": 680,
-          "y": 440,
-          "width": 64,
-          "height": 32,
-          "flippedX": false,
-          "flippedY": false,
-          "tint": "#540707",
-          "values": {"name": "", "depth": 0, "visible": true}
-        },
-        {
-          "name": "Slope",
           "id": 4,
           "_eid": "95675713",
-          "x": 480,
+          "x": 1616,
           "y": 368,
           "width": 64,
           "height": 32,
@@ -1376,7 +1398,7 @@
           "name": "Block",
           "id": 5,
           "_eid": "93117141",
-          "x": -24,
+          "x": 1112,
           "y": 392,
           "width": 320,
           "height": 80,
@@ -1389,7 +1411,7 @@
           "name": "Block",
           "id": 6,
           "_eid": "93117141",
-          "x": -104,
+          "x": 1032,
           "y": 312,
           "width": 320,
           "height": 80,
@@ -1402,7 +1424,7 @@
           "name": "Block",
           "id": 7,
           "_eid": "93117141",
-          "x": -192,
+          "x": 944,
           "y": 232,
           "width": 320,
           "height": 80,
@@ -1415,7 +1437,7 @@
           "name": "Block",
           "id": 8,
           "_eid": "93117141",
-          "x": -16,
+          "x": 1120,
           "y": -136,
           "width": 64,
           "height": 368,
@@ -1428,7 +1450,7 @@
           "name": "Pipe",
           "id": 10,
           "_eid": "95769929",
-          "x": 264,
+          "x": 1400,
           "y": 184,
           "width": 216,
           "values": {"name": "", "visible": true, "depth": 0}
@@ -1437,7 +1459,7 @@
           "name": "Block",
           "id": 11,
           "_eid": "93117141",
-          "x": 392,
+          "x": 1528,
           "y": 408,
           "width": 16,
           "height": 16,
@@ -1450,7 +1472,7 @@
           "name": "Block",
           "id": 12,
           "_eid": "93117141",
-          "x": 336,
+          "x": 1472,
           "y": 328,
           "width": 16,
           "height": 16,
@@ -1463,7 +1485,7 @@
           "name": "Block",
           "id": 13,
           "_eid": "93117141",
-          "x": 208,
+          "x": 1344,
           "y": 248,
           "width": 16,
           "height": 16,
@@ -1476,7 +1498,7 @@
           "name": "Pipe",
           "id": 14,
           "_eid": "95769929",
-          "x": 48,
+          "x": 1184,
           "y": 128,
           "width": 56,
           "values": {"name": "", "visible": true, "depth": 0}
@@ -1485,7 +1507,7 @@
           "name": "Pipe",
           "id": 15,
           "_eid": "95769929",
-          "x": 432,
+          "x": 1568,
           "y": 120,
           "width": 48,
           "values": {"name": "", "visible": true, "depth": 0}
@@ -1494,7 +1516,7 @@
           "name": "Pipe",
           "id": 16,
           "_eid": "95769929",
-          "x": 432,
+          "x": 1568,
           "y": 64,
           "width": 48,
           "values": {"name": "", "visible": true, "depth": 0}
@@ -1503,7 +1525,7 @@
           "name": "Pipe",
           "id": 17,
           "_eid": "95769929",
-          "x": 432,
+          "x": 1568,
           "y": 8,
           "width": 48,
           "values": {"name": "", "visible": true, "depth": 0}
@@ -1512,7 +1534,7 @@
           "name": "Pipe",
           "id": 18,
           "_eid": "95769929",
-          "x": 48,
+          "x": 1184,
           "y": 64,
           "width": 56,
           "values": {"name": "", "visible": true, "depth": 0}
@@ -1521,7 +1543,7 @@
           "name": "Pipe",
           "id": 19,
           "_eid": "95769929",
-          "x": 48,
+          "x": 1184,
           "y": 8,
           "width": 56,
           "values": {"name": "", "visible": true, "depth": 0}
@@ -1530,7 +1552,7 @@
           "name": "Block",
           "id": 21,
           "_eid": "93117141",
-          "x": 48,
+          "x": 1184,
           "y": 0,
           "width": 432,
           "height": 88,
@@ -1543,7 +1565,7 @@
           "name": "Block",
           "id": 22,
           "_eid": "93117141",
-          "x": 744,
+          "x": 1880,
           "y": 440,
           "width": 192,
           "height": 80,
@@ -1556,7 +1578,7 @@
           "name": "Block",
           "id": 24,
           "_eid": "93117141",
-          "x": 992,
+          "x": 2128,
           "y": 408,
           "width": 64,
           "height": 112,
@@ -1569,7 +1591,7 @@
           "name": "Block",
           "id": 25,
           "_eid": "93117141",
-          "x": 1088,
+          "x": 2224,
           "y": 376,
           "width": 72,
           "height": 144,
@@ -1582,7 +1604,7 @@
           "name": "Pipe",
           "id": 26,
           "_eid": "95769929",
-          "x": 1056,
+          "x": 2192,
           "y": 512,
           "width": 32,
           "values": {"name": "", "visible": false, "depth": 0}
@@ -1591,7 +1613,7 @@
           "name": "Pipe",
           "id": 27,
           "_eid": "95769929",
-          "x": 1056,
+          "x": 2192,
           "y": 408,
           "width": 32,
           "values": {"name": "", "visible": false, "depth": 0}
@@ -1600,7 +1622,7 @@
           "name": "Pipe",
           "id": 28,
           "_eid": "95769929",
-          "x": 1056,
+          "x": 2192,
           "y": 480,
           "width": 32,
           "values": {"name": "", "visible": false, "depth": 0}
@@ -1609,7 +1631,7 @@
           "name": "Pipe",
           "id": 29,
           "_eid": "95769929",
-          "x": 1056,
+          "x": 2192,
           "y": 440,
           "width": 32,
           "values": {"name": "", "visible": false, "depth": 0}
@@ -1618,7 +1640,7 @@
           "name": "Block",
           "id": 30,
           "_eid": "93117141",
-          "x": 784,
+          "x": 1920,
           "y": 520,
           "width": 72,
           "height": 104,
@@ -1631,7 +1653,7 @@
           "name": "Block",
           "id": 31,
           "_eid": "93117141",
-          "x": 784,
+          "x": 1920,
           "y": 600,
           "width": 384,
           "height": 64,
@@ -1644,7 +1666,7 @@
           "name": "Block",
           "id": 32,
           "_eid": "93117141",
-          "x": 1120,
+          "x": 2256,
           "y": 520,
           "width": 32,
           "height": 104,
@@ -1657,7 +1679,7 @@
           "name": "Slope",
           "id": 33,
           "_eid": "95675713",
-          "x": 960,
+          "x": 2096,
           "y": 568,
           "width": 32,
           "height": 32,
@@ -1670,7 +1692,7 @@
           "name": "Block",
           "id": 34,
           "_eid": "93117141",
-          "x": 992,
+          "x": 2128,
           "y": 568,
           "width": 64,
           "height": 32,
@@ -1683,7 +1705,7 @@
           "name": "Slope",
           "id": 35,
           "_eid": "95675713",
-          "x": 1056,
+          "x": 2192,
           "y": 568,
           "width": 32,
           "height": 32,
@@ -1696,7 +1718,7 @@
           "name": "Block",
           "id": 36,
           "_eid": "93117141",
-          "x": 1416,
+          "x": 2552,
           "y": 328,
           "width": 500,
           "height": 72,
@@ -1709,10 +1731,10 @@
           "name": "Block",
           "id": 38,
           "_eid": "93117141",
-          "x": 1384,
+          "x": 2520,
           "y": 608,
-          "width": 500,
-          "height": 72,
+          "width": 660,
+          "height": 80,
           "originX": 0,
           "originY": 0,
           "tint": "#540707",
@@ -1722,7 +1744,7 @@
           "name": "Block",
           "id": 39,
           "_eid": "93117141",
-          "x": 1152,
+          "x": 2288,
           "y": 296,
           "width": 232,
           "height": 672,
@@ -1735,7 +1757,7 @@
           "name": "Block",
           "id": 40,
           "_eid": "93117141",
-          "x": 1884,
+          "x": 3020,
           "y": 0,
           "width": 224,
           "height": 656,
@@ -1748,7 +1770,7 @@
           "name": "Block",
           "id": 41,
           "_eid": "93117141",
-          "x": 1384,
+          "x": 2520,
           "y": -40,
           "width": 508,
           "height": 304,
@@ -1761,7 +1783,7 @@
           "name": "Pipe",
           "id": 42,
           "_eid": "95769929",
-          "x": 1480,
+          "x": 2616,
           "y": 552,
           "width": 32,
           "values": {"name": "", "visible": true, "depth": 0}
@@ -1770,7 +1792,7 @@
           "name": "Pipe",
           "id": 43,
           "_eid": "95769929",
-          "x": 1504,
+          "x": 2640,
           "y": 488,
           "width": 32,
           "values": {"name": "", "visible": true, "depth": 0}
@@ -1779,7 +1801,7 @@
           "name": "Pipe",
           "id": 44,
           "_eid": "95769929",
-          "x": 1760,
+          "x": 2896,
           "y": 488,
           "width": 32,
           "values": {"name": "", "visible": true, "depth": 0}
@@ -1788,7 +1810,7 @@
           "name": "Pipe",
           "id": 45,
           "_eid": "95769929",
-          "x": 1784,
+          "x": 2920,
           "y": 552,
           "width": 32,
           "values": {"name": "", "visible": true, "depth": 0}
@@ -1797,7 +1819,7 @@
           "name": "Block",
           "id": 46,
           "_eid": "93117141",
-          "x": 1416,
+          "x": 2552,
           "y": 304,
           "width": 472,
           "height": 24,
@@ -1810,7 +1832,7 @@
           "name": "Block",
           "id": 47,
           "_eid": "93117141",
-          "x": 1160,
+          "x": 2296,
           "y": -40,
           "width": 224,
           "height": 304,
@@ -1823,7 +1845,7 @@
           "name": "Block",
           "id": 48,
           "_eid": "93117141",
-          "x": 1416,
+          "x": 2552,
           "y": 264,
           "width": 472,
           "height": 40,
@@ -1836,7 +1858,7 @@
           "name": "Block",
           "id": 49,
           "_eid": "93117141",
-          "x": 744,
+          "x": 1880,
           "y": 296,
           "width": 408,
           "height": 80,
@@ -1849,10 +1871,162 @@
           "name": "Pipe",
           "id": 50,
           "_eid": "95769929",
-          "x": 544,
+          "x": 1680,
           "y": 336,
           "width": 64,
           "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Slope",
+          "id": 51,
+          "_eid": "95675713",
+          "x": 1576,
+          "y": 472,
+          "width": 256,
+          "height": 96,
+          "flippedX": true,
+          "flippedY": false,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 52,
+          "_eid": "95675713",
+          "x": 1848,
+          "y": 488,
+          "width": 32,
+          "height": 32,
+          "flippedX": false,
+          "flippedY": true,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 53,
+          "_eid": "95675713",
+          "x": 1888,
+          "y": 520,
+          "width": 32,
+          "height": 32,
+          "flippedX": false,
+          "flippedY": true,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 54,
+          "_eid": "93117141",
+          "x": 1576,
+          "y": 568,
+          "width": 256,
+          "height": 40,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 55,
+          "_eid": "93117141",
+          "x": 1136,
+          "y": 632,
+          "width": 1176,
+          "height": 56,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 57,
+          "_eid": "95769929",
+          "x": 1736,
+          "y": 475,
+          "width": 74,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Slope",
+          "id": 59,
+          "_eid": "95675713",
+          "x": 1784,
+          "y": 440,
+          "width": 96,
+          "height": 48,
+          "flippedX": false,
+          "flippedY": false,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 60,
+          "_eid": "93117141",
+          "x": 288,
+          "y": 0,
+          "width": 848,
+          "height": 608,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 61,
+          "_eid": "93117141",
+          "x": 288,
+          "y": 632,
+          "width": 848,
+          "height": 48,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 69,
+          "_eid": "93117141",
+          "x": -8,
+          "y": 632,
+          "width": 296,
+          "height": 296,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 70,
+          "_eid": "93117141",
+          "x": -8,
+          "y": 224,
+          "width": 296,
+          "height": 296,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 71,
+          "_eid": "93117141",
+          "x": -136,
+          "y": 464,
+          "width": 296,
+          "height": 296,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#540707",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -1863,8 +2037,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 250,
-      "gridCellsY": 81,
+      "gridCellsX": 392,
+      "gridCellsY": 83,
       "entities": []
     },
     {
@@ -1874,11 +2048,11 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 250,
-      "gridCellsY": 81,
+      "gridCellsX": 392,
+      "gridCellsY": 83,
       "decals": [
         {
-          "x": 545,
+          "x": 1681,
           "y": 57,
           "scaleX": -1,
           "scaleY": 1,
@@ -1900,11 +2074,11 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 250,
-      "gridCellsY": 81,
+      "gridCellsX": 392,
+      "gridCellsY": 83,
       "decals": [
         {
-          "x": -16,
+          "x": 856,
           "y": 48,
           "scaleX": 64,
           "scaleY": 2,
@@ -1917,7 +2091,7 @@
           "groupName": null
         },
         {
-          "x": -16,
+          "x": 856,
           "y": -16,
           "scaleX": 64,
           "scaleY": 2,
