@@ -10,9 +10,14 @@ const [txBody, txNoggin] = Tx.Characters.SimpleBot.split({ count: 2 });
 
 export function objCharacterSimpleBot() {
     return container(
+        Sprite.from(Tx.Characters.SimpleBotMullet)
+            .at(8, 30),
         Sprite.from(txBody),
         container(
             Sprite.from(txNoggin),
+            Sprite.from(Tx.Characters.SimpleBotWig)
+                .at(4, -10)
+                .mixin(mxnFacingPivot, { up: -1, left: -1, down: 1, right: 1 }),
             container(
                 objAngelMouth({
                     negativeSpaceTint: 0x715AC4,
