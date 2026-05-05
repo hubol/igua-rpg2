@@ -80,11 +80,13 @@ function txs<T>(tx: (data: TxData) => T) {
         Sclera: tx({ id: "Characters.KingSpino.Sclera", atlas: 0, x: 357, y: 2232, width: 16, height: 18 }),
       },
       NerdPortrait: tx({ id: "Characters.NerdPortrait", atlas: 0, x: 1988, y: 999, width: 158, height: 62 }),
-      SimpleBotMullet: tx({ id: "Characters.SimpleBotMullet", atlas: 0, x: 947, y: 587, width: 64, height: 18 }),
-      SimpleBotPupil: tx({ id: "Characters.SimpleBotPupil", atlas: 0, x: 1727, y: 1432, width: 6, height: 18 }),
-      SimpleBotSclera: tx({ id: "Characters.SimpleBotSclera", atlas: 0, x: 424, y: 1527, width: 16, height: 20 }),
-      SimpleBotWig: tx({ id: "Characters.SimpleBotWig", atlas: 0, x: 2703, y: 414, width: 72, height: 30 }),
-      SimpleBot: tx({ id: "Characters.SimpleBot", atlas: 0, x: 1988, y: 696, width: 160, height: 80 }),
+      SimpleBot: {
+        Body: tx({ id: "Characters.SimpleBot.Body", atlas: 0, x: 1988, y: 696, width: 160, height: 80 }),
+        Mullet: tx({ id: "Characters.SimpleBot.Mullet", atlas: 0, x: 947, y: 587, width: 64, height: 18 }),
+        Pupil: tx({ id: "Characters.SimpleBot.Pupil", atlas: 0, x: 1727, y: 1432, width: 6, height: 18 }),
+        Sclera: tx({ id: "Characters.SimpleBot.Sclera", atlas: 0, x: 424, y: 1527, width: 16, height: 20 }),
+        Wig: tx({ id: "Characters.SimpleBot.Wig", atlas: 0, x: 2703, y: 414, width: 72, height: 30 }),
+      },
       WindFarm: {
         Terminal: tx({ id: "Characters.WindFarm.Terminal", atlas: 0, x: 475, y: 2126, width: 44, height: 38 }),
         Turbine: tx({ id: "Characters.WindFarm.Turbine", atlas: 0, x: 2217, y: 0, width: 174, height: 80 }),

@@ -6,16 +6,16 @@ import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { objAngelEyes } from "../enemies/obj-angel-eyes";
 import { objAngelMouth } from "../enemies/obj-angel-mouth";
 
-const [txBody, txNoggin] = Tx.Characters.SimpleBot.split({ count: 2 });
+const [txBody, txNoggin] = Tx.Characters.SimpleBot.Body.split({ count: 2 });
 
 export function objCharacterSimpleBot() {
     return container(
-        Sprite.from(Tx.Characters.SimpleBotMullet)
+        Sprite.from(Tx.Characters.SimpleBot.Mullet)
             .at(8, 30),
         Sprite.from(txBody),
         container(
             Sprite.from(txNoggin),
-            Sprite.from(Tx.Characters.SimpleBotWig)
+            Sprite.from(Tx.Characters.SimpleBot.Wig)
                 .at(4, -10)
                 .mixin(mxnFacingPivot, { up: -1, left: -1, down: 1, right: 1 }),
             container(
@@ -35,8 +35,8 @@ export function objCharacterSimpleBot() {
                         offsetFromCenter: 3,
                     },
                     pupilsTint: 0x715AC4,
-                    pupilsTx: Tx.Characters.SimpleBotPupil,
-                    scleraTx: Tx.Characters.SimpleBotSclera,
+                    pupilsTx: Tx.Characters.SimpleBot.Pupil,
+                    scleraTx: Tx.Characters.SimpleBot.Sclera,
                 })
                     .at(40, 25),
             )
