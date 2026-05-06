@@ -37,7 +37,7 @@ const Manifest = {
         })(),
     }),
     "SuggestiveCavern.SimpleBot": configure(MicrocosmSimpleBot, {
-        questIds: { RobotHair: "SuggestiveCavern.SimpleBot.Hair" as const },
+        questIds: { RobotHair: "SuggestiveCavern.SimpleBot.Hair" },
     }),
 };
 
@@ -45,11 +45,13 @@ interface RpgMicrocosmClasslike<T> {
     new(config: T): RpgMicrocosm<unknown>;
 }
 
-function configure<TConfig, TClass extends RpgMicrocosmClasslike<TConfig>>(
+type ExtractConfig<T> = T extends RpgMicrocosmClasslike<infer TConfig> ? TConfig : never;
+
+function configure<TClass>(
     microcosmClass: TClass,
-    config: TConfig,
-): [TClass, TConfig] {
-    return [microcosmClass, config];
+    config: ExtractConfig<TClass>,
+) {
+    return [microcosmClass, config] as const;
 }
 
 export namespace RpgMicrocosms {
