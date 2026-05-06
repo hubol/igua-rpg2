@@ -154,6 +154,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromHallOfDoors", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "PlayerDev",
+          "id": 2,
+          "_eid": "98101389",
+          "x": 2536,
+          "y": 312,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },

@@ -6363,6 +6363,7 @@ export const Lvl = {
       Shopkeeper: e(r["IguanaNpc"], { x: 2032, y: 600, flippedX: false, values: { personaName: "CavernShopkeeper", name: "Shopkeeper", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 1792, y: 48, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromHallOfDoors: e(r["Checkpoint"], { x: 1728, y: 336, flippedX: false, values: { name: "fromHallOfDoors", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      PlayerDev: e(r["PlayerDev"], { x: 2536, y: 312, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       GateVertical: e(r["GateVertical"], { x: 1704, y: -32, width: 176, flippedY: true, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromCavern", name: "", depth: 0 } }, "RegionEntities"),
       GateVertical_1: e(r["GateVertical"], { x: 1184, y: -80, width: 440, flippedY: true, values: { sceneName: "scnWorldMap", checkpointName: "fromPlainsSuggestiveCavern", name: "", depth: 0 } }, "RegionEntities"),
       OverheatRegion: e(r["OverheatRegion"], { x: 160, y: 632, width: 1656, values: { name: "", depth: 0 }, tint: 0xff0000 }, "RegionEntities"),
@@ -15178,6 +15179,7 @@ export namespace LvlType {
     Shopkeeper: ReturnType<(typeof r)["IguanaNpc"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     fromHallOfDoors: ReturnType<(typeof r)["Checkpoint"]>;
+    PlayerDev: ReturnType<(typeof r)["PlayerDev"]>;
     GateVertical: ReturnType<(typeof r)["GateVertical"]>;
     GateVertical_1: ReturnType<(typeof r)["GateVertical"]>;
     OverheatRegion: ReturnType<(typeof r)["OverheatRegion"]>;

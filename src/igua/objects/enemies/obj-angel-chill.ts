@@ -1,5 +1,6 @@
 import { DisplayObject, Graphics, TilingSprite } from "pixi.js";
 import { NoAtlasTx } from "../../../assets/no-atlas-textures";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { OneOrTwo } from "../../../lib/array/one-or-two";
 import { factor, interpv } from "../../../lib/game-engine/routines/interp";
@@ -146,6 +147,7 @@ export function objAngelChill() {
             // TODO probably not while (true)
             while (true) {
                 for (const obj of aoeObjs) {
+                    enemyObj.play(Sfx.Enemy.Chill.Build.rate(0.95, 1.05));
                     yield interpv(obj.scale).factor(factor.sine).to(1, 1).over(1000);
                     yield sleep(1000);
                 }
@@ -154,6 +156,7 @@ export function objAngelChill() {
                 aoeMaskObj.pivot.x = aoeMaskObj.scale.x < 0 ? -3 : 0;
 
                 for (const obj of reversedAoeObjs) {
+                    enemyObj.play(Sfx.Enemy.Chill.Unbuild.rate(0.95, 1.05));
                     yield interpv(obj.scale).to(obj.initialScale).over(1000);
                 }
 
