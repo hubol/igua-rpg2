@@ -175,6 +175,17 @@ export namespace DataQuestReward {
                 kind: "single",
                 reward: { kind: "key_item", id: "TeenerBot" },
             },
+            "SuggestiveCavern.SimpleBot.Hair": {
+                kind: "in_order",
+                rewards: [
+                    { kind: "potion", id: "AttributeHealthUp" },
+                    { kind: "potion", id: "AttributeHealthUp" },
+                ],
+                extend: {
+                    kind: "repeat",
+                    reward: { kind: "potion", id: "RestoreHealth", count: 1 },
+                },
+            },
             __Fallback__: {
                 kind: "nothing",
             },

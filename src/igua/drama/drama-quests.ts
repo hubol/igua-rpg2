@@ -26,20 +26,20 @@ function* complete(questId: DataQuestReward.Id) {
     const reward = Rpg.quest(questId).complete();
 
     if (!reward) {
-        return false;
+        return null;
     }
 
     const { count, ...pull } = reward;
 
     if (pull.kind === "currency") {
         yield* DramaWallet.rewardValuables(count);
-        return true;
+        return reward;
     }
 
     const items: Array<RpgInventory.Item> = range(count).map(() => pull);
 
     yield* DramaInventory.receiveItems(items);
-    return true;
+    return reward;
 }
 
 export const DramaQuests = {

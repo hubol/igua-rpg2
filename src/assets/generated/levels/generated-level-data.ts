@@ -6368,6 +6368,7 @@ export const Lvl = {
       OverheatRegion: e(r["OverheatRegion"], { x: 160, y: 632, width: 1656, values: { name: "", depth: 0 }, tint: 0xff0000 }, "RegionEntities"),
       ChillBossMarker: e(r["Marker"], { x: 2776, y: 608, values: { name: "ChillBossMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       ExitChillEnemyDoorMarker: e(r["Marker"], { x: 2736, y: 562, values: { name: "ExitChillEnemyDoorMarker", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+      SimpleBotMarker: e(r["Marker"], { x: 1880, y: 632, values: { name: "SimpleBotMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   PlainsSuggestiveFlopCollector: (): LvlType.PlainsSuggestiveFlopCollector => {
@@ -15182,6 +15183,7 @@ export namespace LvlType {
     OverheatRegion: ReturnType<(typeof r)["OverheatRegion"]>;
     ChillBossMarker: ReturnType<(typeof r)["Marker"]>;
     ExitChillEnemyDoorMarker: ReturnType<(typeof r)["Marker"]>;
+    SimpleBotMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type PlainsSuggestiveFlopCollector = {
     TerrainEarthSmallPlatformer: Sprite;

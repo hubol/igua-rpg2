@@ -19,6 +19,7 @@ export namespace DataPocketItem {
             EssenceWind: { name: "Essence of Wind", texture: Tx.Collectibles.Pocket.EssenceWind },
             CactusFruitTypeA: { name: "Cactus Fruit Type A", texture: Tx.Collectibles.Pocket.CactusFruitA },
             CactusFruitTypeB: { name: "Cactus Fruit Type B", texture: Tx.Collectibles.Pocket.CactusFruitB },
+            RobotHair: { name: "Robot Hair Clump Chakra", texture: Tx.Collectibles.Pocket.RobotHair },
             __Fallback__: { name: "???", texture: Tx.Collectibles.ComputerChip },
         } satisfies Record<string, Model>,
     );

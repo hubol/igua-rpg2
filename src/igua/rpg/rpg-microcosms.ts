@@ -3,6 +3,7 @@ import { Rng } from "../../lib/math/rng";
 import { MicrocosmCactusEquipmentMaker } from "./microcosms/microcosm-cactus-equipment-maker";
 import { MicrocosmDownloadData } from "./microcosms/microcosm-download-data";
 import { MicrocosmLottery } from "./microcosms/microcosm-lottery";
+import { MicrocosmSimpleBot } from "./microcosms/microcosm-simple-bot";
 import { MicrocosmTimeDroppedLoot } from "./microcosms/microcosm-time-dropped-loot";
 import { MicrocosmWetnessReceptacle } from "./microcosms/microcosm-wetness-receptacle";
 import { RpgMicrocosm, RpgMicrocosmUnsafeBase } from "./rpg-microcosm";
@@ -34,6 +35,9 @@ const Manifest = {
                 return prizeList[win.normalNumbersCorrectCount] ?? prizeList.last;
             };
         })(),
+    }),
+    "SuggestiveCavern.SimpleBot": configure(MicrocosmSimpleBot, {
+        questIds: { RobotHair: "SuggestiveCavern.SimpleBot.Hair" as const },
     }),
 };
 
