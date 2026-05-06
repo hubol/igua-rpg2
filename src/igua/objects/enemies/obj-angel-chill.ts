@@ -6,6 +6,7 @@ import { OneOrTwo } from "../../../lib/array/one-or-two";
 import { factor, interpv } from "../../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { RgbInt } from "../../../lib/math/number-alias-types";
+import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
@@ -18,6 +19,9 @@ import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objFxEmoAura24px } from "../effects/obj-fx-emo-aura-24px";
+import { playerObj } from "../obj-player";
+import { objProjectileEvilSpirit } from "../projectiles/obj-projectile-evil-spirit";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
 
@@ -146,6 +150,19 @@ export function objAngelChill() {
 
             // TODO probably not while (true)
             while (true) {
+                // TODO behavior switch for this
+                if (enemyObj.mxnDetectPlayer.isDetected) {
+                    const auraObj = objFxEmoAura24px().at(0, 32).show(enemyObj);
+                    const evilSpiritObj = objProjectileEvilSpirit(playerObj)
+                        .mixin(mxnRpgAttack, { attack: atkAoe, attacker: enemyObj.status })
+                        .at(enemyObj)
+                        .show();
+                    yield sleep(Rng.int(1250, 2000));
+                    auraObj.destroy();
+                    evilSpiritObj.mxnDischargeable.charge();
+                    yield () => evilSpiritObj.mxnDischargeable.isDischarged;
+                }
+
                 for (const obj of aoeObjs) {
                     enemyObj.play(Sfx.Enemy.Chill.Build.rate(0.95, 1.05));
                     yield interpv(obj.scale).factor(factor.sine).to(1, 1).over(1000);
@@ -167,8 +184,10 @@ export function objAngelChill() {
 
     const soulAnchorObj = new Graphics().beginFill(0).drawRect(0, 0, 1, 1).at(0, 10).invisible();
 
-    const enemyObj = container(bodyObj, objAngelChillHead(theme), ...hurtboxes, soulAnchorObj)
-        .filtered(new MapRgbFilter(...theme.tints.map))
+    const rgbObj = container(bodyObj, objAngelChillHead(theme), ...hurtboxes, soulAnchorObj)
+        .filtered(new MapRgbFilter(...theme.tints.map));
+
+    const enemyObj = container(rgbObj)
         .mixin(mxnDetectPlayer)
         .mixin(mxnEnemy, { hurtboxes, rank, soulAnchorObj })
         .mixin(mxnEnemyDeathBurst, { map: theme.tints.map })
