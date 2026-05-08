@@ -3,7 +3,8 @@ import { NoAtlasTx } from "../../../assets/no-atlas-textures";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { OneOrTwo } from "../../../lib/array/one-or-two";
-import { factor, interpv } from "../../../lib/game-engine/routines/interp";
+import { Coro } from "../../../lib/game-engine/routines/coro";
+import { factor, interp, interpv } from "../../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { RgbInt } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
@@ -158,10 +159,14 @@ export function objAngelChill() {
                         .at(enemyObj)
                         .add(0, -32)
                         .show();
-                    yield sleep(Rng.int(1250, 2000));
+                    yield* Coro.all([
+                        interp(headObj.objAngelChillHead.mouthObj.mxnSpeakingMouth, "agapeUnit").to(1).over(333),
+                        sleep(Rng.int(1250, 2000)),
+                    ]);
                     auraObj.destroy();
                     evilSpiritObj.mxnDischargeable.charge();
                     yield () => evilSpiritObj.mxnDischargeable.isDischarged;
+                    yield interp(headObj.objAngelChillHead.mouthObj.mxnSpeakingMouth, "agapeUnit").to(0).over(333);
                 }
 
                 for (const obj of aoeObjs) {
@@ -185,7 +190,8 @@ export function objAngelChill() {
 
     const soulAnchorObj = new Graphics().beginFill(0).drawRect(0, 0, 1, 1).at(0, 10).invisible();
 
-    const rgbObj = container(bodyObj, objAngelChillHead(theme), ...hurtboxes, soulAnchorObj)
+    const headObj = objAngelChillHead(theme);
+    const rgbObj = container(bodyObj, headObj, ...hurtboxes, soulAnchorObj)
         .filtered(new MapRgbFilter(...theme.tints.map));
 
     const enemyObj = container(rgbObj)
@@ -210,17 +216,19 @@ function objAngelChillBody(theme: Theme) {
 }
 
 function objAngelChillHead(theme: Theme) {
+    const mouthObj = theme.createMouthObj();
     return container(
         container(
             theme.createSprite("head").anchored(0.5, 0.8),
             container(
-                theme.createMouthObj().add(0, -8),
+                mouthObj.add(0, -8),
                 theme.createEyesObj().add(0, -24),
             )
                 .mixin(mxnFacingPivot, { down: 6, up: -6, right: 6, left: -6 }),
         ),
     )
-        .mixin(mxnFacingPivot, { down: 3, up: 0, right: 5, left: -5 });
+        .mixin(mxnFacingPivot, { down: 3, up: 0, right: 5, left: -5 })
+        .merge({ objAngelChillHead: { mouthObj } });
 }
 
 function mxnShield(obj: DisplayObject) {
