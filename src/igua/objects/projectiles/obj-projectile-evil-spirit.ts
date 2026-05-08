@@ -5,6 +5,7 @@ import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { scene } from "../../globals";
+import { mxnFxSpriteGhost } from "../../mixins/effects/mxn-fx-sprite-ghost";
 import { mxnDischargeable } from "../../mixins/mxn-dischargeable";
 import { StepOrder } from "../step-order";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
@@ -13,6 +14,7 @@ const txs = Tx.Effects.EvilSpirit.split({ width: 90 });
 
 export function objProjectileEvilSpirit(targetObj: DisplayObject) {
     const spriteObj = objIndexedSprite(txs)
+        .mixin(mxnFxSpriteGhost)
         .anchored(0.5, 1);
     return container(spriteObj)
         .mixin(mxnDischargeable)
@@ -31,6 +33,7 @@ export function objProjectileEvilSpirit(targetObj: DisplayObject) {
             spriteObj.textureIndex = txs.length - 1;
             spriteObj.flipV();
             yield sleep(150);
+            spriteObj.mxnFxSpriteGhost.perFrame = 0.5;
             self.mxnDischargeable.discharge();
             self.step(() => {
                 self.y += 8;

@@ -156,6 +156,7 @@ export function objAngelChill() {
                     const evilSpiritObj = objProjectileEvilSpirit(playerObj)
                         .mixin(mxnRpgAttack, { attack: atkAoe, attacker: enemyObj.status })
                         .at(enemyObj)
+                        .add(0, -32)
                         .show();
                     yield sleep(Rng.int(1250, 2000));
                     auraObj.destroy();
