@@ -9,7 +9,7 @@ import { mxnPhysics } from "./mxn-physics";
 import { MxnRpgStatus } from "./mxn-rpg-status";
 import { mxnTextTyped } from "./mxn-text-typed";
 
-export function mxnRpgStatusBerry(obj: MxnRpgStatus & Container) {
+export function mxnRpgStatusBerry(obj: MxnRpgStatus) {
     const berryObjs = new Array<Container>();
 
     const api = {

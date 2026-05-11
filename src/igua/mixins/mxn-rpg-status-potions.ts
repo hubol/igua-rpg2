@@ -62,7 +62,7 @@ function inferPotionToUse(
 
 const noAnimationRequiredPotionIds = new Set<DataPotion.Id>(["ThrowableBerry"]);
 
-export function objUsedPotion(potionId: DataPotion.Id, statusObj: MxnRpgStatus & Container) {
+export function objUsedPotion(potionId: DataPotion.Id, statusObj: MxnRpgStatus) {
     return objFigurePotion(potionId)
         .pivotedUnit(0.5, 0.5)
         .mixin(mxnDestroyOnStatusDeath, statusObj.status)
@@ -122,7 +122,7 @@ export function objUsedPotion(potionId: DataPotion.Id, statusObj: MxnRpgStatus &
         .vround();
 }
 
-export function mxnRpgStatusPotions(statusObj: MxnRpgStatus & Container, { heldPotionIds }: MxnRpgStatusPotionsArgs) {
+export function mxnRpgStatusPotions(statusObj: MxnRpgStatus, { heldPotionIds }: MxnRpgStatusPotionsArgs) {
     const state: RpgStatusPotionsState = {
         nextPoisonRecoveryRemainingHealthRatio: 0.8,
     };
