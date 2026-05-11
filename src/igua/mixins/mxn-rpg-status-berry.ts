@@ -1,6 +1,5 @@
 import { Container } from "pixi.js";
 import { objText } from "../../assets/fonts";
-import { Sfx } from "../../assets/sounds";
 import { interpc, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
@@ -10,22 +9,14 @@ import { mxnPhysics } from "./mxn-physics";
 import { MxnRpgStatus } from "./mxn-rpg-status";
 import { mxnTextTyped } from "./mxn-text-typed";
 
-const consts = {
-    maxStepsSinceBerry: 9999,
-};
-
 export function mxnRpgStatusBerry(obj: MxnRpgStatus & Container) {
-    let stepsSinceBerry = consts.maxStepsSinceBerry;
     const berryObjs = new Array<Container>();
 
     const api = {
+        get berriesCount() {
+            return berryObjs.length;
+        },
         *dramaSpawnBerry() {
-            if (berryObjs.length || stepsSinceBerry < 6 * 60 || obj.status.health >= obj.status.healthMax) {
-                return;
-            }
-
-            obj.play(Sfx.Enemy.Berry.Announce.rate(0.9, 1.1));
-
             const message = Rng.choose(
                 "It's berry time",
                 "I'm berry ready to heal",
@@ -81,16 +72,7 @@ export function mxnRpgStatusBerry(obj: MxnRpgStatus & Container) {
     return obj
         .merge({ mxnRpgStatusBerry: api })
         .step(() => {
-            if (!berryObjs.length) {
-                if (stepsSinceBerry < consts.maxStepsSinceBerry) {
-                    stepsSinceBerry++;
-                }
-                return;
-            }
-
-            stepsSinceBerry = 0;
-
-            if (berryObjs[0].destroyed) {
+            if (berryObjs[0]?.destroyed) {
                 berryObjs.shift();
             }
         });

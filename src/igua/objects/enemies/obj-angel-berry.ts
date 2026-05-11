@@ -93,7 +93,7 @@ function objAngelBerryHeart(targetObj: MxnRpgStatus) {
         .coro(function* (self) {
             yield interpv(speed).to(0, -1).over(300);
             self.step(() => {
-                if (targetObj.destroyed) {
+                if (targetObj.destroyed || targetObj.status.health <= 0) {
                     return;
                 }
 

@@ -28,6 +28,10 @@ function inferPotionToUse(
 ): DataPotion.Id | null {
     const remainingHealthRatio = status.health / status.healthMax;
 
+    if (remainingHealthRatio < 1 && potionIds.includes("ThrowableBerry")) {
+        return "ThrowableBerry";
+    }
+
     if (
         status.conditions.poison.level
         && remainingHealthRatio < state.nextPoisonRecoveryRemainingHealthRatio
@@ -56,11 +60,25 @@ function inferPotionToUse(
     return null;
 }
 
+const noAnimationRequiredPotionIds = new Set<DataPotion.Id>(["ThrowableBerry"]);
+
 export function objUsedPotion(potionId: DataPotion.Id, statusObj: MxnRpgStatus & Container) {
     return objFigurePotion(potionId)
         .pivotedUnit(0.5, 0.5)
         .mixin(mxnDestroyOnStatusDeath, statusObj.status)
+        .invisible()
         .coro(function* (self) {
+            if (noAnimationRequiredPotionIds.has(potionId)) {
+                const usePotionMaybeCoro = DataPotion.usePotion(potionId, statusObj);
+                if (usePotionMaybeCoro) {
+                    yield usePotionMaybeCoro;
+                }
+                self.destroy();
+                return;
+            }
+
+            self.visible = true;
+
             const { height } = statusObj.getBounds();
 
             if (statusObj.is(mxnPhysics) && statusObj.isOnGround && statusObj.gravity > 0) {

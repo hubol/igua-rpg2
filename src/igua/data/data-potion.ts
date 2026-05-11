@@ -14,6 +14,7 @@ import { Jukebox } from "../core/igua-audio";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { MxnRpgStatus } from "../mixins/mxn-rpg-status";
+import { mxnRpgStatusBerry } from "../mixins/mxn-rpg-status-berry";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
@@ -244,6 +245,13 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupMustardOnionRelish,
             },
+            ThrowableBerry: {
+                name: "Throwing Seedling",
+                description: "When planted, heals over time.",
+                stinkLineTint: 0xB85BFF,
+                sound: Sfx.Enemy.Berry.Announce,
+                texture: Tx.Collectibles.Potion.Seedling,
+            },
             __Fallback__: {
                 name: "???",
                 description: "Consume to experience a bug",
@@ -366,6 +374,14 @@ export namespace DataPotion {
                     SceneChanger.create({ sceneName: scnCasino.name, checkpointName: "fromTaxi" }).changeScene();
                 });
                 return;
+            case "ThrowableBerry":
+                const rpgStatusBerryObj = target.is(mxnRpgStatusBerry) ? target : target.mixin(mxnRpgStatusBerry);
+                let done = false;
+                rpgStatusBerryObj.coro(function* () {
+                    yield* rpgStatusBerryObj.mxnRpgStatusBerry.dramaSpawnBerry();
+                    done = true;
+                });
+                return () => done;
             case "__Fallback__":
                 return;
         }

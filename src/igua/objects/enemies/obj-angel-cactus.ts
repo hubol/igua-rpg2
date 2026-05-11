@@ -2,6 +2,7 @@ import { Graphics, Sprite } from "pixi.js";
 import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
+import { holdf } from "../../../lib/game-engine/routines/hold";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
@@ -243,9 +244,22 @@ export function objAngelCactus(entity: OgmoEntities.EnemyCactus) {
                 yield interp(cactusSpikesObj.objAngelCactusSpikes, "scale").to(0).over(250);
                 yield interp(mouthObj.controls, "agapeUnit").to(0).over(250);
                 yield sleep(Rng.int(500, 1500));
-                if (features.has("berry")) {
-                    yield* self.mxnRpgStatusBerry.dramaSpawnBerry();
-                }
+                yield* self.mxnRpgStatusPotions.dramaUseAppropriatePotion();
+            }
+        })
+        .coro(function* (self) {
+            if (!features.has("berry")) {
+                return;
+            }
+
+            while (true) {
+                self.mxnRpgStatusPotions.heldPotionIds.push("ThrowableBerry");
+                yield holdf(
+                    () =>
+                        self.mxnRpgStatusBerry.berriesCount === 0
+                        && !self.mxnRpgStatusPotions.heldPotionIds.includes("ThrowableBerry"),
+                    6 * 60,
+                );
             }
         });
 }

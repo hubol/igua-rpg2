@@ -1,4 +1,4 @@
-import { DisplayObject } from "pixi.js";
+import { Container, DisplayObject } from "pixi.js";
 import { approachLinear } from "../../lib/math/number";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgStatus } from "../rpg/rpg-status";
@@ -10,7 +10,7 @@ interface MxnRpgStatusArgs {
     hurtboxes: DisplayObject[];
 }
 
-export function mxnRpgStatus(obj: DisplayObject, args: MxnRpgStatusArgs) {
+export function mxnRpgStatus(obj: Container, args: MxnRpgStatusArgs) {
     let tickCount = 0;
 
     const rpgStatusObj = obj
