@@ -6355,6 +6355,7 @@ export const Lvl = {
       Door: e(r["Door"], { x: 1696, y: 288, values: { sceneName: "scnIndianaHallOfDoors", checkpointName: "fromSuggestiveCavern", name: "", depth: 0 } }, "Entities"),
       Darkness: e(r["Darkness"], { x: 2024, y: 56, values: { exitSceneName: "scnPlainsSuggestive", exitCheckpointName: "fromCavern", level: 1, name: "", depth: 0 } }, "Entities"),
       PocketableItemA: e(r["PocketableItemA"], { x: 224, y: 584, values: { name: "", depth: 0 } }, "Entities"),
+      EnemyChill: e(r["EnemyChill"], { x: 2776, y: 608, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       ShapesSquareIrregular10: d(Tx.Shapes.SquareIrregular10, { x: 2206, y: 484, scaleX: 5, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x540707 }, "AboveEntitiesDecals"),
       ShapesSquareIrregular10_1: d(Tx.Shapes.SquareIrregular10, { x: 2208, y: 514, scaleX: 5, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x540707 }, "AboveEntitiesDecals"),
       ShapesSquareIrregular10_2: d(Tx.Shapes.SquareIrregular10, { x: 2211, y: 444, scaleX: 7, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x540707 }, "AboveEntitiesDecals"),
@@ -6367,7 +6368,6 @@ export const Lvl = {
       GateVertical: e(r["GateVertical"], { x: 1704, y: -32, width: 176, flippedY: true, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromCavern", name: "", depth: 0 } }, "RegionEntities"),
       GateVertical_1: e(r["GateVertical"], { x: 1184, y: -80, width: 440, flippedY: true, values: { sceneName: "scnWorldMap", checkpointName: "fromPlainsSuggestiveCavern", name: "", depth: 0 } }, "RegionEntities"),
       OverheatRegion: e(r["OverheatRegion"], { x: 160, y: 632, width: 1656, values: { name: "", depth: 0 }, tint: 0xff0000 }, "RegionEntities"),
-      ChillBossMarker: e(r["Marker"], { x: 2776, y: 608, values: { name: "ChillBossMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       ExitChillEnemyDoorMarker: e(r["Marker"], { x: 2736, y: 562, values: { name: "ExitChillEnemyDoorMarker", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
       SimpleBotMarker: e(r["Marker"], { x: 1880, y: 632, values: { name: "SimpleBotMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
@@ -15171,6 +15171,7 @@ export namespace LvlType {
     Door: ReturnType<(typeof r)["Door"]>;
     Darkness: ReturnType<(typeof r)["Darkness"]>;
     PocketableItemA: ReturnType<(typeof r)["PocketableItemA"]>;
+    EnemyChill: ReturnType<(typeof r)["EnemyChill"]>;
     ShapesSquareIrregular10: Sprite;
     ShapesSquareIrregular10_1: Sprite;
     ShapesSquareIrregular10_2: Sprite;
@@ -15183,7 +15184,6 @@ export namespace LvlType {
     GateVertical: ReturnType<(typeof r)["GateVertical"]>;
     GateVertical_1: ReturnType<(typeof r)["GateVertical"]>;
     OverheatRegion: ReturnType<(typeof r)["OverheatRegion"]>;
-    ChillBossMarker: ReturnType<(typeof r)["Marker"]>;
     ExitChillEnemyDoorMarker: ReturnType<(typeof r)["Marker"]>;
     SimpleBotMarker: ReturnType<(typeof r)["Marker"]>;
   };

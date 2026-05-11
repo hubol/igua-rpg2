@@ -935,7 +935,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": true,
-      "tintable": {"enabled": true, "defaultTint": "#00ff00", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#00ff00", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/region.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABPSURBVFhH7dcxCgAgDATB0///WSOKQuxzzS4Ipsq0aZJGPFsb4CLE9gdYv8rOzgyoYtydfc++AAAAAAAAAAAAAAAAACBfRnV9p5mjC7AlTcXvEDMTrZ50AAAAAElFTkSuQmCC"
     },
@@ -1167,7 +1167,7 @@
         {"name": "visible", "definition": "Boolean", "display": 0, "defaults": true}
       ],
       "isRegion": false,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/world map gate.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC7SURBVFhH5ZPRCoQwDARb//+f1UCFUFsMmZUizsuJXLtz2VwtE/aT9vgqW/tcxnKBUAX1pD1K8Hd/swL7BRftVRo8ASohqYBIpARGS5mVQNs9Co38Y/w5VIFiEngHqIRkCYmERMDIStSoKaGX85myCWRZLnDrjTCq82k3ZBOIhvdIBLLhBhYg4QYSoOHG9Mv+8tGlJNyfTU2AhPdIljAbbmABEm5MD/sx05Aef7ekAsJygVAFb/L3Cko5AJ+reA2Dpk05AAAAAElFTkSuQmCC"
     },
@@ -1503,7 +1503,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/enemy cactus.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD0AAAAqCAYAAAAAsVPKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHvSURBVGhD7ZjNUcMwEIUtGqAbOEAF9hludEEZVBLOcQVwIN1Qgckz2oysSMruWvLYI38zGiv+We3z059jmhXxM7SDrTaPpi+W2509VsUuuhZ20Rww2VCxpzbHLKe3Knzv3hq26LZYdMlNw1KonPaFb83tfUxL2LLbu9NStup2NU7DECpZlh/f4Y/+19ZkvLf3tjaN8dl9q/MM9b4iooFGeEy0C/cFhHIi1KJfjk+ToJTwQ3McjzFe+2dbuwYxJM/HXkBKMOahbGP6HGwsxphLkULuujH8WIf2ayw+EErFnpoAsTTxijPzHQZIwk2MGIbr9lNOA2ksd0iEIKEuIqdDgrW8dadL0aIRDNiipYI1LgPcE3qWC3XjmGCQZUwj0fNLGZOl4oLrHMEEJ96p6eyvfzAfpIS6sG7K2a1Lw1nSFhF9TsTW+MBpDRzR1WxDXUxqIQ+h2WkBidtal8GqnOYKmSOYy6LdG4JiolLXclPl7F3nRGaPN1mb26HPUI7LgC0arEl4aN+ddUfm44v3E+AsayGnJMQ+NjjCZ41pNBxrvDSxF5X6piZUToNU4JJOh8Zt6o8DW52gEi1tJIQbQ/JcjJQJfnxRYznEErlFExzxrDGNQDkFl4STz6yJbG2CCeSVyo2VtO9yDrGluvdtmuYP8WIh938BeAIAAAAASUVORK5CYII="
     },
@@ -1697,7 +1697,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/enemy snail.png",
       "textureImage": "data:image/png;base64,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"
     },
@@ -1749,7 +1749,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "texture": "preview-images/enemy brick.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAABABAMAAAC92amBAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAVUExURb5RHuNiLNa0jgAAAP///7IABf9vUI/M+pQAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAYAAAAAEAAABgAAAAAQAAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAADp1fY4ytpsegAAAVJJREFUSMftlFtuwyAQRQfjBRi1C0Dj5p+aDbiJF1BVYgnt/pfQYYaHSXEfqpqvzgeEe5zgSy4DVMqYAYFrsDQYM1mWG6hMF0IDJ6gw1h5SWajlqcqemhauZUIJal64ljEdrE4LpohIH3lwabHgHAdEWs+RRXWpk2j0XS0qJsijpU0iVHdeXjzKFrxjO9qzrWROGb/E2T+KV9XCPO9hOu1rmGRoH4UeLPN3Ibu6huwb89yv/HfuBSVJkPosQ+NGdfHFjfZR2ARuArcEx4vAtYGrwC1DyL8qkPfMcPsVxIcdjMdSYMxQgWc8hRfEPaxve8bw9lrhyhm6zz4HglB8ppiMDJ8mhsoI/JChEMJxhk7h+cYZ0nIP+hma6erRRTrIkMdlmd1RhjxoB7fqQwlWjw0cfgJx5zAbltOqh/DVLevIluWmQ4jYbTVTp9X896G/yRDAO6zWhmBRbdBeAAAAAElFTkSuQmCC"
     },
@@ -1939,7 +1939,59 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": true,
-      "tintable": {"enabled": true, "defaultTint": "#ff0000", "rgbLevelValueName": null, "useDefaultTint": true}
+      "tintable": {"enabled": true, "defaultTint": "#ff0000", "rgbLevelValueName": "", "useDefaultTint": true}
+    },
+    {
+      "exportID": "53690151",
+      "name": "EnemyChill",
+      "limit": -1,
+      "size": {"x": 106, "y": 108},
+      "origin": {"x": 45, "y": 105},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["Enemy"],
+      "values": [
+        {
+          "name": "variant",
+          "definition": "Enum",
+          "display": 1,
+          "choices": ["level0"],
+          "defaults": 0
+        },
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/enemy chill.png",
+      "textureImage": "data:image/png;base64,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"
     }
   ],
   "tilesets": []

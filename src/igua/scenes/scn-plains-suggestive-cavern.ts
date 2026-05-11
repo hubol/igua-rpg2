@@ -12,7 +12,6 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnShadowFloor } from "../mixins/mxn-shadow-floor";
 import { objCharacterSimpleBot } from "../objects/characters/obj-character-simple-bot";
 import { CtxPocketItems } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
-import { objAngelChill } from "../objects/enemies/obj-angel-chill";
 import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 import { Rpg } from "../rpg/rpg";
 
@@ -27,7 +26,7 @@ export function scnPlainsSuggestiveCavern() {
 }
 
 function enrichChillEnemy(lvl: LvlType.PlainsSuggestiveCavern) {
-    const chillAngelObj = objAngelChill().at(lvl.ChillBossMarker).zIndexed(ZIndex.Entities).show();
+    const chillAngelObj = lvl.EnemyChill;
     chillAngelObj.handles("mxnEnemy.died", () => {
         lvl.ExitChillEnemyDoor.coro(function* (self) {
             yield interpvr(self).factor(factor.sine).to(lvl.ExitChillEnemyDoorMarker).over(5000);

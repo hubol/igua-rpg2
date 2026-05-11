@@ -10,6 +10,7 @@ import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-envi
 import { objEnvironmentOverheatRegion } from "../objects/effects/environment/obj-environment-overheat-region";
 import { objAngelBrick } from "../objects/enemies/obj-angel-brick";
 import { objAngelCactus } from "../objects/enemies/obj-angel-cactus";
+import { objAngelChill } from "../objects/enemies/obj-angel-chill";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { objAngelSnail } from "../objects/enemies/obj-angel-snail";
 import { objAngelSpikeBall } from "../objects/enemies/obj-angel-spike-ball";
@@ -89,6 +90,7 @@ export const OgmoEntityResolvers = {
         return brickAngelObj;
     },
     EnemyCactus: (entity) => objAngelCactus(entity).at(1, 3),
+    EnemyChill: objAngelChill,
     EnemySnail: () => objAngelSnail(),
     EnemySpikeBall: objAngelSpikeBall,
     EnemySuggestive: (entity) => objAngelSuggestive(entity).at(0, -38),

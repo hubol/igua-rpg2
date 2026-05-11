@@ -1,4 +1,5 @@
 import { DisplayObject, Graphics, TilingSprite } from "pixi.js";
+import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { NoAtlasTx } from "../../../assets/no-atlas-textures";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
@@ -93,9 +94,15 @@ const ranks = {
 
 type Theme = ValuesOf<typeof themes>;
 
-export function objAngelChill() {
-    const rank = ranks.level0;
-    const theme = themes.common;
+const variants = {
+    level0: {
+        rank: ranks.level0,
+        theme: themes.common,
+    },
+};
+
+export function objAngelChill(entity: OgmoEntities.EnemyChill) {
+    const { rank, theme } = variants[entity.values.variant] ?? variants.level0;
 
     const bodyObj = objAngelChillBody(theme);
 

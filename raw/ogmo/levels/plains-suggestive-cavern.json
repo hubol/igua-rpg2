@@ -19,17 +19,6 @@
       "entities": [
         {
           "name": "Marker",
-          "id": 0,
-          "_eid": "73148747",
-          "x": 2776,
-          "y": 608,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#00ff00",
-          "values": {"name": "ChillBossMarker", "depth": 0}
-        },
-        {
-          "name": "Marker",
           "id": 1,
           "_eid": "73148747",
           "x": 2736,
@@ -376,6 +365,16 @@
           "originX": 12,
           "originY": 12,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnemyChill",
+          "id": 10,
+          "_eid": "53690151",
+          "x": 2776,
+          "y": 608,
+          "originX": 45,
+          "originY": 105,
+          "values": {"variant": "level0", "name": "", "depth": 0}
         }
       ]
     },
