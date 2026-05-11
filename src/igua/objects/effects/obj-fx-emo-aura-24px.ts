@@ -1,3 +1,4 @@
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
@@ -25,6 +26,7 @@ export function objFxEmoAura24px() {
                     destroyObj.at(position);
                     const dispelObj = objDispel(0);
                     dispelObj.show(destroyObj);
+                    dispelObj.play(Sfx.Enemy.Chill.AuraEnd.rate(0.9, 1.1));
                     yield interp(dispelObj, "textureIndex").to(txsAuraDispel.length).over(500);
                     destroyObj.destroy();
                 })

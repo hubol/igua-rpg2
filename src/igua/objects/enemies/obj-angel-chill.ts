@@ -153,6 +153,7 @@ export function objAngelChill() {
             while (true) {
                 // TODO behavior switch for this
                 if (enemyObj.mxnDetectPlayer.isDetected) {
+                    enemyObj.play(Sfx.Enemy.Chill.EvilSpiritSummon.rate(0.9, 1.1));
                     const auraObj = objFxEmoAura24px().at(0, 32).show(enemyObj);
                     const evilSpiritObj = objProjectileEvilSpirit(playerObj)
                         .mixin(mxnRpgAttack, { attack: atkAoe, attacker: enemyObj.status })

@@ -1,7 +1,9 @@
 import { DisplayObject } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
+import { nlerp } from "../../../lib/math/number";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { scene } from "../../globals";
@@ -27,6 +29,9 @@ export function objProjectileEvilSpirit(targetObj: DisplayObject) {
             yield () => self.mxnDischargeable.isCharged;
             moveObj.destroy();
             for (let i = 0; i < 6; i++) {
+                self.play(
+                    Sfx.Enemy.Chill.EvilSpiritShake.rate(i / 12 + 0.9).gain(nlerp(0.7, 1, i / 5)),
+                );
                 self.x += i % 2 === 0 ? 3 : -3;
                 yield sleepf(5);
             }
@@ -35,6 +40,7 @@ export function objProjectileEvilSpirit(targetObj: DisplayObject) {
             yield sleep(150);
             spriteObj.mxnFxSpriteGhost.perFrame = 0.5;
             self.mxnDischargeable.discharge();
+            self.play(Sfx.Enemy.Chill.EvilSpiritDischarge.rate(0.975, 1.025));
             self.step(() => {
                 self.y += 8;
                 if (self.y >= scene.level.height + 90) {
