@@ -27,6 +27,9 @@ async function createNoAtlasTx(tx: typeof Tx) {
             Chill: {
                 Aoe: await wrap(tx.Enemy.Chill.Aoe),
             },
+            Snow: {
+                Aoe: await wrap(tx.Enemy.Snow.Aoe),
+            },
         },
         Iguana: {
             Robot: {
