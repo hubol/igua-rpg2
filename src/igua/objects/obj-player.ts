@@ -11,6 +11,7 @@ import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataRespawnConfiguration } from "../data/data-respawn-configuration";
+import { devObjHotPineCone } from "../dev/dev-obj-hot-pine-cone";
 import { DramaScene } from "../drama/drama-scene";
 import { show } from "../drama/show";
 import { Cutscene, DevKey, Input, layers, scene } from "../globals";
@@ -253,6 +254,10 @@ function objPlayer(looks: IguanaLooks.Serializable) {
 
             if (DevKey.justWentDown("KeyB")) {
                 RpgStatus.Methods.createBallon(puppet.status, puppet.effects);
+            }
+
+            if (DevKey.justWentDown("KeyP")) {
+                devObjHotPineCone().at(puppet).add(0, -1).show();
             }
 
             const hasControl = puppet.hasControl;
