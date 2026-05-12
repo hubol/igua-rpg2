@@ -6,6 +6,7 @@ import { ZIndex } from "../../core/scene/z-index";
 import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { RpgAttack } from "../../rpg/rpg-attack";
+import { RpgFaction } from "../../rpg/rpg-faction";
 import { objFxFizzle } from "../effects/obj-fx-fizzle";
 import { objProjectileCrackedEarthExpanding } from "./obj-projectile-cracked-earth-expanding";
 
@@ -16,6 +17,7 @@ const atkBurn = RpgAttack.create({
             value: 2,
         },
     },
+    versus: RpgFaction.Anyone,
 });
 
 export function objProjectileHotPineCone() {

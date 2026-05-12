@@ -24,7 +24,7 @@ export function objProjectileCrackedEarthExpanding(args: ObjProjectileCrackedEar
             let x1 = rightObj.x;
             leftObj
                 .handles("moved", (self) => {
-                    if (self.y !== y || !self.isOnGround) {
+                    if (Math.abs(self.y - y) > 3 || !self.isOnGround) {
                         self.destroy();
                         return;
                     }
@@ -36,7 +36,7 @@ export function objProjectileCrackedEarthExpanding(args: ObjProjectileCrackedEar
 
             rightObj
                 .handles("moved", (self) => {
-                    if (self.y !== y || !self.isOnGround) {
+                    if (Math.abs(self.y - y) > 3 || !self.isOnGround) {
                         self.destroy();
                         return;
                     }
