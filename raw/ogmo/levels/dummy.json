@@ -39,32 +39,7 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": [
-        {
-          "name": "OverheatRegion",
-          "id": 1,
-          "_eid": "65251079",
-          "x": 176,
-          "y": 200,
-          "width": 224,
-          "originX": 0,
-          "originY": 0,
-          "tint": "#ff0000",
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "OverheatRegion",
-          "id": 4,
-          "_eid": "65251079",
-          "x": -56,
-          "y": 200,
-          "width": 224,
-          "originX": 0,
-          "originY": 0,
-          "tint": "#ff0000",
-          "values": {"name": "", "depth": 0}
-        }
-      ]
+      "entities": []
     },
     {
       "name": "FrontDecals",
