@@ -1,11 +1,7 @@
 import { objProjectileCrackedEarthExpanding } from "../objects/projectiles/obj-projectile-cracked-earth-expanding";
+import { objProjectileHotPineCone } from "../objects/projectiles/obj-projectile-hot-pine-cone";
 import { RpgAttack } from "../rpg/rpg-attack";
 
 export function devObjHotPineCone() {
-    return objProjectileCrackedEarthExpanding({
-        attack: RpgAttack.create({}),
-        expandDirection: "both",
-        expandSpeed: 8,
-        maxWidth: 96,
-    });
+    return objProjectileHotPineCone();
 }
