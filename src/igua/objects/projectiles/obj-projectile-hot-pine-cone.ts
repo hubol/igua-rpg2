@@ -14,7 +14,7 @@ const atkBurn = RpgAttack.create({
     conditions: {
         overheat: {
             damage: 99,
-            value: 2,
+            value: 1,
         },
     },
     versus: RpgFaction.Anyone,
@@ -34,7 +34,7 @@ export function objProjectileHotPineCone() {
                 )
                     .at(self)
                     .zIndexed(ZIndex.TerrainDecals)
-                    .mixin(mxnDestroyAfterSteps, 4 * 60)
+                    .mixin(mxnDestroyAfterSteps, 3 * 60)
                     .show();
 
                 objFxFizzle()

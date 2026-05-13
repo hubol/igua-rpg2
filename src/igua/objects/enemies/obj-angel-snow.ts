@@ -57,7 +57,7 @@ const themes = (() => {
 const ranks = {
     level0: RpgEnemyRank.create({
         status: {
-            healthMax: 200,
+            healthMax: 500,
             defenses: {
                 physical: 99,
             },
