@@ -33,9 +33,9 @@ import { objFigurePocketItem } from "../figures/obj-figure-pocket-item";
 import { objFloppyDisk } from "../obj-floppy-disk";
 import { playerObj } from "../obj-player";
 import { StepOrder } from "../step-order";
+import { objBuildUpBar } from "./obj-build-up-bar";
 import { objFlopCollectionIndicator } from "./obj-flop-collection-indicator";
 import { objHealthBar } from "./obj-health-bar";
-import { objStatusBar } from "./obj-status-bar";
 import { objUiDelta } from "./obj-ui-delta";
 import { objUiSubdividedBar } from "./obj-ui-subdivided-bar";
 
@@ -642,10 +642,7 @@ function objOverheatBuildUp() {
         message: "You are overheating!",
         conditionsKey: "overheat",
         tints: {
-            tintBack: 0xb43900,
-            tintFront: 0xffe600,
-            tintDecrease: 0xff8800,
-            tintIncrease: 0xfcff3b,
+            ...objBuildUpBar.tints.Overheat,
             tintMessage: 0xffe600,
         },
     });
@@ -663,20 +660,13 @@ function objIdolBuff() {
         .mixin(mxnHeight, 8);
 }
 
-interface BuildUpTints {
-    tintBack: RgbInt;
-    tintFront: RgbInt;
-    tintIncrease: RgbInt;
-    tintDecrease: RgbInt;
+interface BuildUpTints extends objBuildUpBar.Tints {
     tintMessage: RgbInt;
 }
 
 namespace BuildUpTints {
     export const Default: BuildUpTints = {
-        tintBack: 0x003000,
-        tintFront: 0x008000,
-        tintIncrease: 0x00ff00,
-        tintDecrease: 0x003000,
+        ...objBuildUpBar.tints.Default,
         tintMessage: Consts.StatusTextTint,
     };
 }
@@ -708,32 +698,23 @@ interface ObjBuildUpArgs {
 }
 
 function objBuildUp(args: ObjBuildUpArgs) {
-    let value = args.value;
     const text = objText.MediumIrregular(args.message, { tint: args.tints.tintMessage });
-    const bar = objStatusBar({
+    const bar = objBuildUpBar({
+        get value() {
+            return args.value;
+        },
+        get max() {
+            return args.max;
+        },
         height: 2,
         width: 85,
-        value,
-        maxValue: args.max,
-        tintBack: args.tints.tintBack,
-        tintFront: args.tints.tintFront,
-        increases: [{ tintBar: args.tints.tintIncrease }],
-        decreases: [{ tintBar: args.tints.tintDecrease }],
-    }).at(0, 9);
+        tints: args.tints,
+    })
+        .at(0, 9);
 
     return container(bar, text)
         .step(self => {
-            const nextValue = args.value;
-            bar.maxValue = args.max;
-
-            if (nextValue > value) {
-                bar.increase(nextValue, nextValue - value, 0);
-            }
-            else if (nextValue < value) {
-                bar.decrease(nextValue, nextValue - value, 0);
-            }
-            value = nextValue;
-            self.visible = value > 0;
+            self.visible = bar.visible;
         });
 }
 
