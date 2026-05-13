@@ -1,6 +1,7 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
+import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
@@ -26,6 +27,8 @@ export function objEsotericHotPineConeTree() {
         .at(57, 150)
         .invisible();
 
+    let shakesCount = 0;
+
     const api = {
         gainPineCone() {
             const pineConeObj = pineConeObjs.find(obj => !obj.visible);
@@ -37,6 +40,9 @@ export function objEsotericHotPineConeTree() {
         },
         releasePineCone(horizontalDirection: Integer) {
             const pineConeObj = pineConeObjs.find(obj => obj.visible);
+
+            shakesCount = 5;
+
             if (!pineConeObj) {
                 Sfx.Interact.Error.play();
                 return;
@@ -57,7 +63,20 @@ export function objEsotericHotPineConeTree() {
         .map(position => Sprite.from(Tx.Effects.HotPineCone).anchored(0.5, 0.5).at(position).invisible());
 
     return container(
-        Sprite.from(Tx.Esoteric.HotPineConeTree),
+        Sprite.from(Tx.Esoteric.HotPineConeTree)
+            .coro(function* (self) {
+                while (true) {
+                    yield () => shakesCount > 0;
+                    shakesCount--;
+                    if (shakesCount <= 0) {
+                        self.x = 0;
+                    }
+                    else {
+                        self.x = shakesCount % 2 === 0 ? 2 : -2;
+                    }
+                    yield sleepf(3);
+                }
+            }),
         hotspotObj,
         ...pineConeObjs,
     )
