@@ -275,6 +275,21 @@ export namespace DataEquipment {
                     model.pocket.bonusSlotCount += 1 + bonus;
                 },
             },
+            BlueCrystalSock: {
+                name: "Crystal Sock (Blue)",
+                texture: Tx.Collectibles.Equipment.BlueCrystalSock,
+                description: "Significantly increased health, at the cost of strength.",
+                buffs: (() => {
+                    const healthValues = [10, 15, 18, 20];
+                    const strengthValues = [-2, -1];
+
+                    return (model, bonus) => {
+                        model.attributes.health += (healthValues[bonus] ?? healthValues.last)
+                            + Math.max(0, bonus - healthValues.length) * 2;
+                        model.attributes.strength += strengthValues[bonus] ?? strengthValues.last;
+                    };
+                })(),
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,
