@@ -5,9 +5,11 @@ import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { container } from "../../../lib/pixi/container";
+import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { scene } from "../../globals";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
@@ -46,7 +48,9 @@ const themes = (() => {
             body: txBody,
             hat: txHat,
         },
-        tints: {},
+        tints: {
+            map: [0xD1E5FF, 0xE2502F, 0xD1E5FF] as MapRgbFilter.Map,
+        },
     });
 
     return {
@@ -106,6 +110,7 @@ export function objAngelSnow() {
         .mixin(mxnEnemy, { hurtboxes: hurtboxObjs, rank })
         .mixin(mxnDetectPlayer)
         .mixin(mxnPhysics, { gravity: 0.3, physicsRadius: 8, physicsOffset: [0, -8] })
+        .mixin(mxnEnemyDeathBurst, { map: theme.tints.map })
         .pivoted(30, 65)
         .coro(function* (self) {
             while (true) {
