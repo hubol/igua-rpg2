@@ -1,0 +1,34 @@
+import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { sleep } from "../../lib/game-engine/routines/sleep";
+import { Rng } from "../../lib/math/rng";
+import { scene } from "../globals";
+import { objFxFormativeBurst } from "../objects/effects/obj-fx-formative-burst";
+import { objAngelSnow } from "../objects/enemies/obj-angel-snow";
+import { objEsotericHotPineConeTree } from "../objects/esoteric/obj-esoteric-hot-pine-cone-tree";
+
+export function scnIndianaHallSnowman() {
+    const lvl = Lvl.IndianaHallSnowman();
+
+    const treeObjs = [lvl.TreeMarker0, lvl.TreeMarker1]
+        .map(marker => objEsotericHotPineConeTree().at(marker).show());
+
+    treeObjs[0].objEsotericHotPineConeTree.gainPineCone();
+
+    let releasedPineCone = false;
+    treeObjs[0].handles("objEsotericHotPineConeTree.coneReleased", () => releasedPineCone = true);
+
+    scene.stage
+        .coro(function* () {
+            yield () => releasedPineCone;
+            yield sleep(1000);
+            objFxFormativeBurst(0xA286F3)
+                .at(lvl.SnowAngelMarker)
+                .show();
+            yield sleep(1000);
+            const snowAngelObj = objAngelSnow().at(lvl.SnowAngelMarker).show();
+            while (!snowAngelObj.destroyed) {
+                yield sleep(4000);
+                Rng.item(treeObjs).objEsotericHotPineConeTree.gainPineCone();
+            }
+        });
+}

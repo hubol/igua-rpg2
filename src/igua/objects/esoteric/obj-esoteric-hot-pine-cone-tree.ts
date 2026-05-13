@@ -50,6 +50,8 @@ export function objEsotericHotPineConeTree() {
 
             // TODO sfx
 
+            obj.dispatch("objEsotericHotPineConeTree.coneReleased");
+
             objProjectileHotPineCone()
                 .at(pineConeObj.getWorldPosition())
                 .show()
@@ -62,7 +64,7 @@ export function objEsotericHotPineConeTree() {
     const pineConeObjs = Rng.shuffle([...pineConePositions])
         .map(position => Sprite.from(Tx.Effects.HotPineCone).anchored(0.5, 0.5).at(position).invisible());
 
-    return container(
+    const obj = container(
         Sprite.from(Tx.Esoteric.HotPineConeTree)
             .coro(function* (self) {
                 while (true) {
@@ -80,6 +82,9 @@ export function objEsotericHotPineConeTree() {
         hotspotObj,
         ...pineConeObjs,
     )
+        .dispatches<"objEsotericHotPineConeTree.coneReleased">();
+
+    return obj
         .merge({ objEsotericHotPineConeTree: api })
         .mixin(mxnInteract, () => api.releasePineCone(Math.sign(playerObj.facing)), hotspotObj)
         .pivoted(59, 198)

@@ -2651,7 +2651,7 @@ export const Lvl = {
       FoliageFlower18: d(Tx.Foliage.Flower18, { x: 164, y: 79, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa286f3 }, "TerrainDecals"),
       FoliageFlower14: d(Tx.Foliage.Flower14, { x: 180, y: 137, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa286f3 }, "TerrainDecals"),
       FoliageFlower14_1: d(Tx.Foliage.Flower14, { x: 254, y: 44, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa286f3 }, "TerrainDecals"),
-      MagicDoor: e(r["MagicDoor"], { x: 376, y: 200, uid: 177203717952800, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor0", name: "", depth: 0 } }, "Entities"),
+      MagicDoor: e(r["MagicDoor"], { x: 376, y: 200, uid: 177203717952800, values: { sceneName: "scnIndianaHallSnowman", checkpointName: "", name: "", depth: 0 } }, "Entities"),
       MagicDoor_1: e(r["MagicDoor"], { x: 480, y: 200, uid: 177203718158901, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor1", name: "", depth: 0 } }, "Entities"),
       MagicDoor_2: e(r["MagicDoor"], { x: 584, y: 200, uid: 177203718418602, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor2", name: "", depth: 0 } }, "Entities"),
       MagicDoor_3: e(r["MagicDoor"], { x: 688, y: 200, uid: 177203722716303, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor3", name: "", depth: 0 } }, "Entities"),
@@ -2684,6 +2684,11 @@ export const Lvl = {
   IndianaHallSnowman: (): LvlType.IndianaHallSnowman => {
     applyLevel({ width: 808, height: 280, backgroundTint: 0xffd600, terrainTint: 0x720000 });
     return {
+      TerrainDistantHills500: d(Tx.Terrain.Distant.Hills500, { x: 230, y: 120, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc12e00 }, "ParallaxDecals"),
+      TerrainDistantHillMountain: d(Tx.Terrain.Distant.HillMountain, { x: 584, y: 96, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc12e00 }, "ParallaxDecals"),
+      TerrainDistantWaves0: d(Tx.Terrain.Distant.Waves0, { x: 976, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc12e00 }, "ParallaxDecals"),
+      TerrainDistantHills500_1: d(Tx.Terrain.Distant.Hills500, { x: 304, y: 149, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc12e00 }, "ParallaxDecals"),
+      ShapesSquare32: d(Tx.Shapes.Square32, { x: -24, y: 154, scaleX: 30, scaleY: 4, rotation: 0, originX: 0, originY: 0, tint: 0xc12e00 }, "ParallaxDecals"),
       EsotericHotPineConeTree: d(Tx.Esoteric.HotPineConeTree, { x: 456, y: -128, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       EffectsHotPineCone: d(Tx.Effects.HotPineCone, { x: 552, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 0, y: 0, width: 808, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x720000 }, "TerrainEntities"),
@@ -11593,6 +11598,11 @@ export namespace LvlType {
     EnvironmentSparkleMarker_6: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
   };
   export type IndianaHallSnowman = {
+    TerrainDistantHills500: Sprite;
+    TerrainDistantHillMountain: Sprite;
+    TerrainDistantWaves0: Sprite;
+    TerrainDistantHills500_1: Sprite;
+    ShapesSquare32: Sprite;
     EsotericHotPineConeTree: Sprite;
     EffectsHotPineCone: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
