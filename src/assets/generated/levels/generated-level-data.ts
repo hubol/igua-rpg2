@@ -2503,6 +2503,28 @@ export const Lvl = {
       NerdBouncerRegion: e(r["Region"], { x: 1512, y: 0, width: 136, height: 248, values: { name: "NerdBouncerRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
     };
   },
+  IndianaHallEmpty: (): LvlType.IndianaHallEmpty => {
+    applyLevel({ width: 500, height: 280, backgroundTint: 0xa286f3, terrainTint: 0x4146a8 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 0, width: 504, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 0, y: 240, width: 504, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 0, y: 40, width: 48, height: 200, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 456, y: 40, width: 48, height: 200, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
+      StoneRockLargeShaded: d(Tx.Stone.RockLargeShaded, { x: 256, y: 236, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRock0: d(Tx.Stone.Rock0, { x: 226, y: 237, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRock0_1: d(Tx.Stone.Rock0, { x: 277, y: 243, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRock0_2: d(Tx.Stone.Rock0, { x: 210, y: 245, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1: d(Tx.Stone.RockSmallShaded1, { x: 240, y: 247, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_1: d(Tx.Stone.RockSmallShaded1, { x: 295, y: 241, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_2: d(Tx.Stone.RockSmallShaded1, { x: 196, y: 240, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_3: d(Tx.Stone.RockSmallShaded1, { x: 186, y: 244, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_4: d(Tx.Stone.RockSmallShaded1, { x: 232, y: 249, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_5: d(Tx.Stone.RockSmallShaded1, { x: 259, y: 225, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      Player: e(r["Player"], { x: 88, y: 240, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      SubtitlesRegion: e(r["Region"], { x: 104, y: 64, width: 288, height: 88, values: { name: "SubtitlesRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      IdolMarker: e(r["Marker"], { x: 240, y: 230, values: { name: "IdolMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+    };
+  },
   IndianaHallOfDoors: (): LvlType.IndianaHallOfDoors => {
     applyLevel({ width: 912, height: 280, backgroundTint: 0xa286f3, terrainTint: 0x4146a8 });
     return {
@@ -2657,6 +2679,23 @@ export const Lvl = {
       EnvironmentSparkleMarker_4: e(r["EnvironmentSparkleMarker"], { x: 840, y: 231, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_5: e(r["EnvironmentSparkleMarker"], { x: 772, y: 239, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_6: e(r["EnvironmentSparkleMarker"], { x: 815, y: 245, values: { name: "", depth: 0 } }, "MarkerEntities"),
+    };
+  },
+  IndianaHallSnowman: (): LvlType.IndianaHallSnowman => {
+    applyLevel({ width: 808, height: 280, backgroundTint: 0xffd600, terrainTint: 0x720000 });
+    return {
+      EsotericHotPineConeTree: d(Tx.Esoteric.HotPineConeTree, { x: 456, y: -128, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      EffectsHotPineCone: d(Tx.Effects.HotPineCone, { x: 552, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      Block: e(r["Block"], { x: 0, y: 0, width: 808, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x720000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 0, y: 32, width: 32, height: 216, values: { name: "", depth: 0, visible: true }, tint: 0x720000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 776, y: 32, width: 32, height: 216, values: { name: "", depth: 0, visible: true }, tint: 0x720000 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 32, y: 216, width: 96, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x720000 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 680, y: 216, width: 96, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x720000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 0, y: 248, width: 808, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x720000 }, "TerrainEntities"),
+      Player: e(r["Player"], { x: 56, y: 224, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      SnowAngelMarker: e(r["Marker"], { x: 392, y: 88, values: { name: "SnowAngelMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      TreeMarker0: e(r["Marker"], { x: 288, y: 248, values: { name: "TreeMarker0", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+      TreeMarker1: e(r["Marker"], { x: 504, y: 248, values: { name: "TreeMarker1", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
     };
   },
   IndianaLoungeExterior: (): LvlType.IndianaLoungeExterior => {
@@ -11381,6 +11420,25 @@ export namespace LvlType {
     GateHorizontal_1: ReturnType<(typeof r)["GateHorizontal"]>;
     NerdBouncerRegion: ReturnType<(typeof r)["Region"]>;
   };
+  export type IndianaHallEmpty = {
+    Block: ReturnType<(typeof r)["Block"]>;
+    Block_1: ReturnType<(typeof r)["Block"]>;
+    Block_2: ReturnType<(typeof r)["Block"]>;
+    Block_3: ReturnType<(typeof r)["Block"]>;
+    StoneRockLargeShaded: Sprite;
+    StoneRock0: Sprite;
+    StoneRock0_1: Sprite;
+    StoneRock0_2: Sprite;
+    StoneRockSmallShaded1: Sprite;
+    StoneRockSmallShaded1_1: Sprite;
+    StoneRockSmallShaded1_2: Sprite;
+    StoneRockSmallShaded1_3: Sprite;
+    StoneRockSmallShaded1_4: Sprite;
+    StoneRockSmallShaded1_5: Sprite;
+    Player: ReturnType<(typeof r)["Player"]>;
+    SubtitlesRegion: ReturnType<(typeof r)["Region"]>;
+    IdolMarker: ReturnType<(typeof r)["Marker"]>;
+  };
   export type IndianaHallOfDoors = {
     TerrainEarthMass0: Sprite;
     TerrainEarthMass0_1: Sprite;
@@ -11533,6 +11591,20 @@ export namespace LvlType {
     EnvironmentSparkleMarker_4: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
     EnvironmentSparkleMarker_5: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
     EnvironmentSparkleMarker_6: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+  };
+  export type IndianaHallSnowman = {
+    EsotericHotPineConeTree: Sprite;
+    EffectsHotPineCone: Sprite;
+    Block: ReturnType<(typeof r)["Block"]>;
+    Block_1: ReturnType<(typeof r)["Block"]>;
+    Block_2: ReturnType<(typeof r)["Block"]>;
+    Slope: ReturnType<(typeof r)["Slope"]>;
+    Slope_1: ReturnType<(typeof r)["Slope"]>;
+    Block_3: ReturnType<(typeof r)["Block"]>;
+    Player: ReturnType<(typeof r)["Player"]>;
+    SnowAngelMarker: ReturnType<(typeof r)["Marker"]>;
+    TreeMarker0: ReturnType<(typeof r)["Marker"]>;
+    TreeMarker1: ReturnType<(typeof r)["Marker"]>;
   };
   export type IndianaLoungeExterior = {
     SkyCloudPuff1: Sprite;
