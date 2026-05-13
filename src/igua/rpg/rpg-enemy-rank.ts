@@ -82,6 +82,7 @@ export namespace RpgEnemyRank {
                 state: {
                     ballonHealthMayDrain: false,
                     isGuarding: false,
+                    overheatValueThisTick: 0,
                 },
             },
             loot: loot ?? {},

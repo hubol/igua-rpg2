@@ -85,6 +85,7 @@ export namespace RpgStatus {
         // In reality, these are kind of like quirks that
         // can change very frequently
         state: {
+            overheatValueThisTick: Integer;
             ballonHealthMayDrain: boolean;
             isGuarding: boolean;
         };
@@ -146,6 +147,7 @@ export namespace RpgStatus {
     export const Methods = {
         tick(model: Model, effects: Effects, count: number) {
             model.invulnerable = Math.max(0, model.invulnerable - 1);
+            model.state.overheatValueThisTick = 0;
 
             if (RpgCutscene.isPlaying && !model.quirks.ailmentsRecoverWhileCutsceneIsPlaying) {
                 return;
@@ -272,8 +274,15 @@ export namespace RpgStatus {
                     RpgStatus.Methods.createBallon(target, targetEffects);
                 }
 
+                const overheatValue = Math.max(
+                    0,
+                    attack.conditions.overheat.value - target.state.overheatValueThisTick,
+                );
+
+                target.state.overheatValueThisTick += overheatValue;
+
                 target.conditions.overheat.value = Math.min(
-                    target.conditions.overheat.value + attack.conditions.overheat.value,
+                    target.conditions.overheat.value + overheatValue,
                     target.conditions.overheat.max - (target.invulnerable > 0 ? 1 : 0),
                 );
 

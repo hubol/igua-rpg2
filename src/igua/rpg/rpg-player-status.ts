@@ -12,7 +12,11 @@ export class RpgPlayerStatus implements RpgStatus.Model {
     ) {
     }
 
-    readonly state = { ballonHealthMayDrain: false, isGuarding: false };
+    readonly state: RpgStatus.Model["state"] = {
+        ballonHealthMayDrain: false,
+        isGuarding: false,
+        overheatValueThisTick: 0,
+    };
 
     get health() {
         return this._state.health;

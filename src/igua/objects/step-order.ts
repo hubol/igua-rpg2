@@ -1,4 +1,5 @@
 export enum StepOrder {
+    RpgStatusTick = 10,
     TerrainClean = 999,
     Physics = 1000,
     AfterPhysics = 1001,

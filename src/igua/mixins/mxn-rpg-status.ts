@@ -1,5 +1,6 @@
 import { Container, DisplayObject } from "pixi.js";
 import { approachLinear } from "../../lib/math/number";
+import { StepOrder } from "../objects/step-order";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgStatus } from "../rpg/rpg-status";
 import { mxnDripping } from "./mxn-dripping";
@@ -40,7 +41,7 @@ export function mxnRpgStatus(obj: Container, args: MxnRpgStatusArgs) {
                 getTargetDripsPerFrame(args.status.conditions.wetness.value),
                 0.025,
             );
-        });
+        }, StepOrder.RpgStatusTick);
 
     return rpgStatusObj;
 }
