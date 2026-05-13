@@ -105,13 +105,13 @@ export function objAngelSnow() {
     )
         .mixin(mxnEnemy, { hurtboxes: hurtboxObjs, rank })
         .mixin(mxnDetectPlayer)
-        .mixin(mxnPhysics, { gravity: 0.6, physicsRadius: 8, physicsOffset: [0, -8] })
+        .mixin(mxnPhysics, { gravity: 0.3, physicsRadius: 8, physicsOffset: [0, -8] })
         .pivoted(30, 65)
         .coro(function* (self) {
             while (true) {
                 yield () => self.isOnGround && self.mxnDetectPlayer.isDetected;
                 objFxExpressSurprise().at(self).add(0, -30).show();
-                self.speed.y = -4;
+                self.speed.y = -3;
                 yield () => self.speed.y === 0 && self.isOnGround;
 
                 while (true) {
