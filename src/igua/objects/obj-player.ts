@@ -334,7 +334,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             for (const instance of Instances(mxnRpgStatus, filterVulnerableObjs)) {
                 const hurtbox = puppet.collidesOne(instance.hurtboxes);
                 if (hurtbox) {
-                    const collidedWithFeet = bounceIguanaOffObject(puppet, hurtbox);
+                    const collidedWithFeet = !puppet.isOnGround && bounceIguanaOffObject(puppet, hurtbox);
                     let attack = collidedWithFeet
                         ? Rpg.character.meleeClawAttack
                         : Rpg.character.meleeFaceAttack;
