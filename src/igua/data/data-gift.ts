@@ -33,6 +33,18 @@ export namespace DataGift {
             "Indiana.DarkEvilHole.Illuminate": {
                 item: { kind: "equipment", id: "NightVision", level: 1 },
             },
+            "Indiana.MagicDoor.0": {
+                item: { kind: "equipment", id: "BlueCrystalSock", level: 1 },
+            },
+            "Indiana.MagicDoor.1": {
+                item: { kind: "equipment", id: "BlueCrystalSock", level: 1 },
+            },
+            "Indiana.MagicDoor.2": {
+                item: { kind: "equipment", id: "BlueCrystalSock", level: 1 },
+            },
+            "Indiana.MagicDoor.3": {
+                item: { kind: "equipment", id: "BlueCrystalSock", level: 1 },
+            },
             __Fallback__: {
                 item: { kind: "potion", id: "RestoreHealth" },
             },

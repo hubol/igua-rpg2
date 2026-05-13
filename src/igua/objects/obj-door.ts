@@ -24,7 +24,7 @@ interface ObjDoorArgs {
 export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
     let locked = false;
 
-    const sceneChanger = SceneChanger.create({ sceneName, checkpointName });
+    let sceneChanger = SceneChanger.create({ sceneName, checkpointName });
 
     const openObj = Sprite.from(Tx.Door.Normal.Open);
     const maskObj0 = new Graphics().beginFill(0x000000).drawRect(0, 0, 34, 46);
@@ -66,6 +66,7 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
         get checkpointName() {
             return sceneChanger.checkpointName;
         },
+        // TODO I think I regret making sceneChangers mutable
         set checkpointName(value) {
             if (value) {
                 sceneChanger.checkpointName = value;
@@ -79,6 +80,9 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
         },
         get sceneChanger() {
             return sceneChanger;
+        },
+        set sceneChanger(value) {
+            sceneChanger = value;
         },
         changeScene() {
             DramaMisc.departRoomViaDoor(null);

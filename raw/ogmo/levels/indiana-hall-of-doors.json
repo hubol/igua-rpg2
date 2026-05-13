@@ -395,7 +395,7 @@
           "originX": 0,
           "originY": -2,
           "uid": 177203717952800,
-          "values": {"sceneName": "scnIndianaHallSnowman", "checkpointName": "", "name": "", "depth": 0}
+          "values": {"sceneName": "scnIndianaHallSnowman", "checkpointName": "", "name": "MagicDoor0", "depth": 0}
         },
         {
           "name": "MagicDoor",

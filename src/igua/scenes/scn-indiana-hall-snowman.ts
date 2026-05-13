@@ -1,10 +1,12 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
-import { scene } from "../globals";
+import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
+import { Cutscene, scene } from "../globals";
 import { objFxFormativeBurst } from "../objects/effects/obj-fx-formative-burst";
 import { objAngelSnow } from "../objects/enemies/obj-angel-snow";
 import { objEsotericHotPineConeTree } from "../objects/esoteric/obj-esoteric-hot-pine-cone-tree";
+import { Rpg } from "../rpg/rpg";
 
 export function scnIndianaHallSnowman() {
     const lvl = Lvl.IndianaHallSnowman();
@@ -30,5 +32,9 @@ export function scnIndianaHallSnowman() {
                 yield sleep(4000);
                 Rng.item(treeObjs).objEsotericHotPineConeTree.gainPineCone();
             }
+
+            Cutscene.play(function* () {
+                yield* DramaHallOfDoors.complete(Rpg.microcosms["Indiana.HallOfDoors"], 0);
+            });
         });
 }

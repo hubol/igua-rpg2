@@ -2,6 +2,7 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { MicrocosmCactusEquipmentMaker } from "./microcosms/microcosm-cactus-equipment-maker";
 import { MicrocosmDownloadData } from "./microcosms/microcosm-download-data";
+import { MicrocosmHallOfDoors } from "./microcosms/microcosm-hall-of-doors";
 import { MicrocosmLottery } from "./microcosms/microcosm-lottery";
 import { MicrocosmSimpleBot } from "./microcosms/microcosm-simple-bot";
 import { MicrocosmTimeDroppedLoot } from "./microcosms/microcosm-time-dropped-loot";
@@ -38,6 +39,11 @@ const Manifest = {
     }),
     "SuggestiveCavern.SimpleBot": configure(MicrocosmSimpleBot, {
         questIds: { RobotHair: "SuggestiveCavern.SimpleBot.Hair" },
+    }),
+    "Indiana.HallOfDoors": configure(MicrocosmHallOfDoors, {
+        doorGiftIds: ["Indiana.MagicDoor.0", "Indiana.MagicDoor.1", "Indiana.MagicDoor.2", "Indiana.MagicDoor.3"],
+        homeSceneName: "scnIndianaHallOfDoors",
+        emptySceneName: "scnIndianaHallEmpty",
     }),
 };
 
