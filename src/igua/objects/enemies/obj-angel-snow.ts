@@ -3,9 +3,12 @@ import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { approachLinear } from "../../../lib/math/number";
 import { container } from "../../../lib/pixi/container";
+import { scene } from "../../globals";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
@@ -20,9 +23,9 @@ const themes = (() => {
 
     const template = AngelThemeTemplate.create({
         eyes: {
-            defaultEyelidRestingPosition: 0,
+            defaultEyelidRestingPosition: 10,
             eyelidsTint: 0xD1E5FF,
-            gap: 5,
+            gap: 7,
             pupilRestStyle: {
                 kind: "cross_eyed",
                 offsetFromCenter: 3,
@@ -78,16 +81,26 @@ export function objAngelSnow() {
 
     const mouthObj = theme.createMouthObj();
 
-    return container(
-        theme.createSprite("leg"),
-        theme.createSprite("leg").flipH(),
+    const leftLegObj = theme.createSprite("leg");
+    const rightLegObj = theme.createSprite("leg").flipH();
+
+    const bodyObj = container(
         theme.createSprite("body"),
         theme.createSprite("hat"),
         container(
             theme.createEyesObj(),
-            mouthObj.at(0, 12),
+            mouthObj.at(0, 13),
         )
+            .mixin(mxnFacingPivot, { down: 1, left: -4, right: 4, up: -2 })
             .at(30, 27),
+    );
+
+    let legPhase = 0;
+
+    return container(
+        leftLegObj,
+        rightLegObj,
+        bodyObj,
         ...hurtboxObjs,
     )
         .mixin(mxnEnemy, { hurtboxes: hurtboxObjs, rank })
@@ -128,13 +141,15 @@ export function objAngelSnow() {
 
                 const x = Math.sign(self.speed.x);
                 const aoeObj = objProjectileSnowAoe(0)
+                    .mixin(mxnRpgAttack, { attack: atkSnowAoe, attacker: self.status })
                     .step(self => self.x += x)
                     .at(self)
                     .add(0, -64)
                     .show();
 
+                aoeObj.isAttackActive = false;
                 yield interp(aoeObj.objProjectileSnowAoe, "radius").to(64).over(1000);
-                aoeObj.mixin(mxnRpgAttack, { attack: atkSnowAoe, attacker: self.status });
+                aoeObj.isAttackActive = true;
                 yield sleep(500);
                 yield* Coro.all([
                     interp(mouthObj.mxnSpeakingMouth, "agapeUnit").to(0).over(250),
@@ -142,6 +157,25 @@ export function objAngelSnow() {
                 ]);
                 aoeObj.destroy();
             }
+        })
+        .step((self) => {
+            if (self.speed.isZero) {
+                leftLegObj.y = approachLinear(leftLegObj.y, 0, 3);
+                rightLegObj.y = approachLinear(rightLegObj.y, 0, 3);
+            }
+            else if (scene.ticker.ticks % 2 === 0) {
+                const leftTargetY = legPhase % 2 === 0 ? -6 : 0;
+                const rightTargetY = legPhase % 2 === 0 ? 0 : -6;
+
+                leftLegObj.y = approachLinear(leftLegObj.y, leftTargetY, 1);
+                rightLegObj.y = approachLinear(rightLegObj.y, rightTargetY, 1);
+
+                if (self.speed.x !== 0 && leftLegObj.y === leftTargetY && rightLegObj.y === rightTargetY) {
+                    legPhase += 1;
+                }
+            }
+
+            bodyObj.y = leftLegObj.y < -4 || rightLegObj.y < -4 ? 1 : 0;
         });
 }
 
