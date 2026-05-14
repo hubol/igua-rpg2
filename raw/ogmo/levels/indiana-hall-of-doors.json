@@ -180,6 +180,28 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromMagicDemo", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 3,
+          "_eid": "19953026",
+          "x": 800,
+          "y": 80,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromHall", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 5,
+          "_eid": "19953026",
+          "x": 800,
+          "y": 80,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromDoor", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -406,7 +428,7 @@
           "originX": 0,
           "originY": -2,
           "uid": 177203718158901,
-          "values": {"sceneName": "scnMagicDemo", "checkpointName": "fromDoor1", "name": "", "depth": 0}
+          "values": {"sceneName": "scnMagicDemo", "checkpointName": "fromDoor1", "name": "MagicDoor1", "depth": 0}
         },
         {
           "name": "MagicDoor",
@@ -417,7 +439,7 @@
           "originX": 0,
           "originY": -2,
           "uid": 177203718418602,
-          "values": {"sceneName": "scnMagicDemo", "checkpointName": "fromDoor2", "name": "", "depth": 0}
+          "values": {"sceneName": "scnMagicDemo", "checkpointName": "fromDoor2", "name": "MagicDoor2", "depth": 0}
         },
         {
           "name": "MagicDoor",
@@ -428,7 +450,7 @@
           "originX": 0,
           "originY": -2,
           "uid": 177203722716303,
-          "values": {"sceneName": "scnMagicDemo", "checkpointName": "fromDoor3", "name": "", "depth": 0}
+          "values": {"sceneName": "scnMagicDemo", "checkpointName": "fromDoor3", "name": "MagicDoor3", "depth": 0}
         }
       ]
     },

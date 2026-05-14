@@ -1,14 +1,18 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
+import { Jukebox } from "../core/igua-audio";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { Cutscene, scene } from "../globals";
 import { objFxFormativeBurst } from "../objects/effects/obj-fx-formative-burst";
 import { objAngelSnow } from "../objects/enemies/obj-angel-snow";
 import { objEsotericHotPineConeTree } from "../objects/esoteric/obj-esoteric-hot-pine-cone-tree";
+import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 import { Rpg } from "../rpg/rpg";
 
 export function scnIndianaHallSnowman() {
+    Jukebox.play(Mzk.SodaMachine);
     const lvl = Lvl.IndianaHallSnowman();
 
     const treeObjs = [lvl.TreeMarker0, lvl.TreeMarker1]
@@ -28,6 +32,12 @@ export function scnIndianaHallSnowman() {
                 .show();
             yield sleep(1000);
             const snowAngelObj = objAngelSnow().at(lvl.SnowAngelMarker).show();
+            objBossMusicPlayer({
+                bossObjs: [snowAngelObj],
+                mzkBattle: Mzk.FuckerLand,
+                mzkPeace: Mzk.SodaMachine,
+            })
+                .show();
             while (!snowAngelObj.destroyed) {
                 yield sleep(4000);
                 Rng.item(treeObjs).objEsotericHotPineConeTree.gainPineCone();

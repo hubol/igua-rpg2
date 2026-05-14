@@ -2652,9 +2652,9 @@ export const Lvl = {
       FoliageFlower14: d(Tx.Foliage.Flower14, { x: 180, y: 137, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa286f3 }, "TerrainDecals"),
       FoliageFlower14_1: d(Tx.Foliage.Flower14, { x: 254, y: 44, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa286f3 }, "TerrainDecals"),
       MagicDoor0: e(r["MagicDoor"], { x: 376, y: 200, uid: 177203717952800, values: { sceneName: "scnIndianaHallSnowman", checkpointName: "", name: "MagicDoor0", depth: 0 } }, "Entities"),
-      MagicDoor: e(r["MagicDoor"], { x: 480, y: 200, uid: 177203718158901, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor1", name: "", depth: 0 } }, "Entities"),
-      MagicDoor_1: e(r["MagicDoor"], { x: 584, y: 200, uid: 177203718418602, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor2", name: "", depth: 0 } }, "Entities"),
-      MagicDoor_2: e(r["MagicDoor"], { x: 688, y: 200, uid: 177203722716303, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor3", name: "", depth: 0 } }, "Entities"),
+      MagicDoor1: e(r["MagicDoor"], { x: 480, y: 200, uid: 177203718158901, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor1", name: "MagicDoor1", depth: 0 } }, "Entities"),
+      MagicDoor2: e(r["MagicDoor"], { x: 584, y: 200, uid: 177203718418602, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor2", name: "MagicDoor2", depth: 0 } }, "Entities"),
+      MagicDoor3: e(r["MagicDoor"], { x: 688, y: 200, uid: 177203722716303, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor3", name: "MagicDoor3", depth: 0 } }, "Entities"),
       FoliageStemB: d(Tx.Foliage.StemB, { x: 376, y: 139, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x446d4b }, "AboveEntitiesDecals"),
       ShapesCrudeLine176x3_12: d(Tx.Shapes.CrudeLine176x3, { x: 269, y: 250, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x4146a8 }, "AboveEntitiesDecals"),
       ShapesCrudeLine176x3_13: d(Tx.Shapes.CrudeLine176x3, { x: 318, y: 250, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x4146a8 }, "AboveEntitiesDecals"),
@@ -2670,6 +2670,8 @@ export const Lvl = {
       FoliageFlower22_2: d(Tx.Foliage.Flower22, { x: 325, y: 132, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
       Player: e(r["Player"], { x: 112, y: 248, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromMagicDemo: e(r["Checkpoint"], { x: 800, y: 80, flippedX: true, values: { name: "fromMagicDemo", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromHall: e(r["Checkpoint"], { x: 800, y: 80, flippedX: true, values: { name: "fromHall", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromDoor: e(r["Checkpoint"], { x: 800, y: 80, flippedX: true, values: { name: "fromDoor", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       Puddle: e(r["Puddle"], { x: 192, y: 248, width: 56, values: { name: "", depth: 0 }, tint: 0x68a8d0 }, "FrontEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -48, y: 136, height: 128, flippedX: true, values: { sceneName: "scnPlainsSuggestiveCavern", checkpointName: "fromHallOfDoors", name: "", depth: 0 } }, "RegionEntities"),
       EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 827, y: 44, values: { name: "", depth: 0 } }, "MarkerEntities"),
@@ -11569,9 +11571,9 @@ export namespace LvlType {
     FoliageFlower14: Sprite;
     FoliageFlower14_1: Sprite;
     MagicDoor0: ReturnType<(typeof r)["MagicDoor"]>;
-    MagicDoor: ReturnType<(typeof r)["MagicDoor"]>;
-    MagicDoor_1: ReturnType<(typeof r)["MagicDoor"]>;
-    MagicDoor_2: ReturnType<(typeof r)["MagicDoor"]>;
+    MagicDoor1: ReturnType<(typeof r)["MagicDoor"]>;
+    MagicDoor2: ReturnType<(typeof r)["MagicDoor"]>;
+    MagicDoor3: ReturnType<(typeof r)["MagicDoor"]>;
     FoliageStemB: Sprite;
     ShapesCrudeLine176x3_12: Sprite;
     ShapesCrudeLine176x3_13: Sprite;
@@ -11587,6 +11589,8 @@ export namespace LvlType {
     FoliageFlower22_2: Sprite;
     Player: ReturnType<(typeof r)["Player"]>;
     fromMagicDemo: ReturnType<(typeof r)["Checkpoint"]>;
+    fromHall: ReturnType<(typeof r)["Checkpoint"]>;
+    fromDoor: ReturnType<(typeof r)["Checkpoint"]>;
     Puddle: ReturnType<(typeof r)["Puddle"]>;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     EnvironmentSparkleMarker: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;

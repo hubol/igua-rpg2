@@ -9,6 +9,5 @@ export function scnIndianaHallOfDoors() {
     Jukebox.play(Mzk.SodaMachine);
     const lvl = Lvl.IndianaHallOfDoors();
     const cosmHallOfDoors = Rpg.microcosms["Indiana.HallOfDoors"];
-    // TODO this does not work
-    lvl.MagicDoor.mixin(mxnDoorHallEmpty, cosmHallOfDoors, 0);
+    lvl.MagicDoor0.mixin(mxnDoorHallEmpty, cosmHallOfDoors, 0);
 }
