@@ -17,12 +17,19 @@ export function objEnemyHealthBars() {
     ): Pick<RpgStatus.Effects, "healed" | "tookDamage"> => {
         let healthBarObj = Undefined<ObjEnemyHealthBar>();
 
-        const ensureHealthBarObj = () => {
+        const ensureHealthBarObj = (healthVisible = true) => {
             if (!healthBarObj || healthBarObj.destroyed) {
-                healthBarObj = objEnemyHealthBar(obj, status).show(c);
+                healthBarObj = objEnemyHealthBar(obj, status, healthVisible).show(c);
             }
             return healthBarObj;
         };
+
+        c.coro(function* () {
+            yield () => status.conditions.overheat.value > 0 || obj.destroyed;
+            if (!obj.destroyed) {
+                ensureHealthBarObj(false);
+            }
+        });
 
         return {
             healed(value, delta) {
@@ -57,10 +64,15 @@ export function objEnemyHealthBars() {
 const r = new Rectangle();
 const v = vnew();
 
-function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model) {
+function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model, healthVisible: boolean) {
     const vworld = vnew();
 
     const healthBarObj = objHealthBar(32, 9, status.healthMax, status.healthMax);
+
+    if (!healthVisible) {
+        healthBarObj.stepsSinceChange = 60;
+    }
+
     const overheatBarObj = objBuildUpBar({
         width: 32,
         height: 2,
