@@ -39,6 +39,10 @@ objFigureFlop.objFromSeed = function objFromSeed (seed: Integer) {
     return objFigureFlop.objFromPrimitiveFlopArgs(primitiveArgs);
 };
 
+objFigureFlop.getPrimitiveArgsFromDexNumber = function getPrimitiveArgsFromDexNumber (dexNumberZeroIndexed: Integer) {
+    return getPrimitiveArgsFromFlopSeed(flopDexSeeds[dexNumberZeroIndexed] ?? -1);
+};
+
 objFigureFlop.getMutatedPrimitveFlopArgs = function (
     rng: typeof Rng,
     dexNumberZeroIndexed: Integer,

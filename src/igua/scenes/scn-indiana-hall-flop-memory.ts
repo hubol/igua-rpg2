@@ -1,14 +1,23 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
-import { PseudoRng } from "../../lib/math/rng";
+import { Integer } from "../../lib/math/number-alias-types";
+import { PseudoRng, Rng } from "../../lib/math/rng";
 import { Null } from "../../lib/types/null";
 import { objFigureFlop } from "../objects/figures/obj-figure-flop";
 
 export function scnIndianaHallFlopMemory() {
     Lvl.Dummy();
 
-    const prng = new PseudoRng(128_000);
+    // const prng = new PseudoRng(128_000);
+    const prng = Rng;
 
-    const dexNumberZeroIndexed = prng.intc(0, 998);
+    let dexNumberZeroIndexed = Null<Integer>();
+
+    while (
+        dexNumberZeroIndexed === null
+        || !isFlopElligibleForMutation(dexNumberZeroIndexed)
+    ) {
+        dexNumberZeroIndexed = prng.intc(0, 998);
+    }
 
     const sourceFigureObj = objFigureFlop(dexNumberZeroIndexed);
     sourceFigureObj
@@ -33,4 +42,8 @@ export function scnIndianaHallFlopMemory() {
 
         figureObj.filtered(figureObj.objects.filter);
     }
+}
+function isFlopElligibleForMutation(dexNumberZeroIndexed: Integer): boolean {
+    const args = objFigureFlop.getPrimitiveArgsFromDexNumber(dexNumberZeroIndexed);
+    return args.accessory.front !== 14;
 }
