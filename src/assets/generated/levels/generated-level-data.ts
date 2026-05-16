@@ -2898,23 +2898,161 @@ export const Lvl = {
     };
   },
   IndianaOhioBridge: (): LvlType.IndianaOhioBridge => {
-    applyLevel({ width: 1400, height: 448, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    applyLevel({ width: 1400, height: 448, backgroundTint: 0x51cbdc, terrainTint: 0xff7a00 });
     return {
-      Block: e(r["Block"], { x: 0, y: 0, width: 48, height: 448, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_1: e(r["Block"], { x: 48, y: 392, width: 1368, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_2: e(r["Block"], { x: 32, y: -40, width: 1368, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_3: e(r["Block"], { x: 1360, y: -8, width: 48, height: 448, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      TerrainEarthCrack116px108px: d(Tx.Terrain.Earth.Crack116px108px, { x: 264, y: 344, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack116px108px_1: d(Tx.Terrain.Earth.Crack116px108px, { x: 312, y: 236, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack116px108px_2: d(Tx.Terrain.Earth.Crack116px108px, { x: 427, y: 128, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack28px38px: d(Tx.Terrain.Earth.Crack28px38px, { x: 424, y: 200, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack116px108px_3: d(Tx.Terrain.Earth.Crack116px108px, { x: 480, y: 273, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack28px38px_1: d(Tx.Terrain.Earth.Crack28px38px, { x: 348, y: 306, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack116px108px_4: d(Tx.Terrain.Earth.Crack116px108px, { x: 672, y: 352, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack116px108px_5: d(Tx.Terrain.Earth.Crack116px108px, { x: 720, y: 244, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack116px108px_6: d(Tx.Terrain.Earth.Crack116px108px, { x: 835, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack28px38px_2: d(Tx.Terrain.Earth.Crack28px38px, { x: 832, y: 208, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack116px108px_7: d(Tx.Terrain.Earth.Crack116px108px, { x: 888, y: 281, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack28px38px_3: d(Tx.Terrain.Earth.Crack28px38px, { x: 756, y: 314, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack116px108px_8: d(Tx.Terrain.Earth.Crack116px108px, { x: 1160, y: 340, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack116px108px_9: d(Tx.Terrain.Earth.Crack116px108px, { x: 1208, y: 232, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack116px108px_10: d(Tx.Terrain.Earth.Crack116px108px, { x: 1323, y: 124, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack28px38px_4: d(Tx.Terrain.Earth.Crack28px38px, { x: 1320, y: 196, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack116px108px_11: d(Tx.Terrain.Earth.Crack116px108px, { x: 1376, y: 269, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack28px38px_5: d(Tx.Terrain.Earth.Crack28px38px, { x: 1244, y: 302, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      TerrainEarthCrack116px108px_12: d(Tx.Terrain.Earth.Crack116px108px, { x: 1231, y: 89, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
+      ShapesSquare32: d(Tx.Shapes.Square32, { x: 76, y: 572, scaleX: 7.5, scaleY: 0.7, rotation: 0, originX: 0, originY: 0, tint: 0x5bb5c1 }, "BackgroundDecals"),
+      ShapesConfetti18x8: d(Tx.Shapes.Confetti18x8, { x: 93, y: 597, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "BackgroundDecals"),
+      ShapesConfetti18x8_1: d(Tx.Shapes.Confetti18x8, { x: 301, y: 597, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "BackgroundDecals"),
+      ShapesDashedLine3px: d(Tx.Shapes.DashedLine3px, { x: 200, y: 595, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "BackgroundDecals"),
+      ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 364, y: -159, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbab532 }, "BackgroundDecals"),
+      ShapesSquare32_2: d(Tx.Shapes.Square32, { x: 364, y: -199, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff6753 }, "BackgroundDecals"),
+      ShapesSquare32_3: d(Tx.Shapes.Square32, { x: 268, y: -135, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
+      ShapesSquare32_4: d(Tx.Shapes.Square32, { x: 268, y: -175, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
+      ShapesSquare32_5: d(Tx.Shapes.Square32, { x: 48, y: 32, scaleX: 10.5, scaleY: 3.6, rotation: 0, originX: 0, originY: 0, tint: 0x698826 }, "BackgroundDecals"),
+      ShapesStatesIndiana0: d(Tx.Shapes.States.Indiana0, { x: 256, y: 72, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbab532 }, "BackgroundDecals"),
+      ShapesSquare32_6: d(Tx.Shapes.Square32, { x: 760, y: 32, scaleX: 10.5, scaleY: 3.6, rotation: 0, originX: 0, originY: 0, tint: 0xe23c27 }, "BackgroundDecals"),
+      ShapesStatesOhio0: d(Tx.Shapes.States.Ohio0, { x: 952, y: 75, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff6753 }, "BackgroundDecals"),
+      StoneBrickRows1: d(Tx.Stone.BrickRows1, { x: 176, y: 112, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbab532 }, "BackgroundDecals"),
+      StoneBrickRows0: d(Tx.Stone.BrickRows0, { x: 104, y: 72, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbab532 }, "BackgroundDecals"),
+      StoneBrickSingle1: d(Tx.Stone.BrickSingle1, { x: 116, y: 83, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbab532 }, "BackgroundDecals"),
+      StoneBrickSingle1_1: d(Tx.Stone.BrickSingle1, { x: 101, y: 63, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbab532 }, "BackgroundDecals"),
+      StoneBrickRows3B: d(Tx.Stone.BrickRows3B, { x: 74, y: 139, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
+      StoneBrickRows3: d(Tx.Stone.BrickRows3, { x: 305, y: 103, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbab532 }, "BackgroundDecals"),
+      StoneBrickRows3B_1: d(Tx.Stone.BrickRows3B, { x: 326, y: 128, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xbab532 }, "BackgroundDecals"),
+      StoneBrickRows3_1: d(Tx.Stone.BrickRows3, { x: 1083, y: 131, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
+      StoneBrickRows3_2: d(Tx.Stone.BrickRows3, { x: 1093, y: 98, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
+      StoneBrickRows3_3: d(Tx.Stone.BrickRows3, { x: 1100, y: 75, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
+      StoneBrickRows3_4: d(Tx.Stone.BrickRows3, { x: 1093, y: 51, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
+      StoneBrickRows3_5: d(Tx.Stone.BrickRows3, { x: 897, y: 104, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff6753 }, "BackgroundDecals"),
+      StoneBrickRows3B_2: d(Tx.Stone.BrickRows3B, { x: 917, y: 129, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff6753 }, "BackgroundDecals"),
+      StoneBrickRows0_1: d(Tx.Stone.BrickRows0, { x: 1008, y: 104, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff6753 }, "BackgroundDecals"),
+      StoneBrickSingle1_2: d(Tx.Stone.BrickSingle1, { x: 1020, y: 115, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff6753 }, "BackgroundDecals"),
+      StoneBrickSingle1_3: d(Tx.Stone.BrickSingle1, { x: 1005, y: 95, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff6753 }, "BackgroundDecals"),
+      Block: e(r["Block"], { x: 0, y: 0, width: 48, height: 448, values: { name: "", depth: 0, visible: true }, tint: 0xff7a00 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 48, y: 392, width: 1368, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0xff7a00 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 32, y: -40, width: 1368, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0xff7a00 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 1360, y: -8, width: 48, height: 448, values: { name: "", depth: 0, visible: true }, tint: 0xff7a00 }, "TerrainEntities"),
       Pipe: e(r["Pipe"], { x: 104, y: 144, width: 232, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
       Pipe_1: e(r["Pipe"], { x: 352, y: 208, width: 232, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
-      Block_4: e(r["Block"], { x: 584, y: 144, width: 16, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 584, y: 144, width: 16, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0xff7a00 }, "TerrainEntities"),
       Pipe_2: e(r["Pipe"], { x: 160, y: 272, width: 136, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
       Pipe_3: e(r["Pipe"], { x: 520, y: 272, width: 232, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
       Pipe_4: e(r["Pipe"], { x: 640, y: 336, width: 232, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
       Pipe_5: e(r["Pipe"], { x: 936, y: 272, width: 232, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
-      Block_5: e(r["Block"], { x: 1080, y: 152, width: 16, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 1080, y: 152, width: 16, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0xff7a00 }, "TerrainEntities"),
       Pipe_6: e(r["Pipe"], { x: 1096, y: 208, width: 232, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
       Pipe_7: e(r["Pipe"], { x: 864, y: 144, width: 232, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
-      Block_6: e(r["Block"], { x: 336, y: 32, width: 528, height: 120, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 336, y: 32, width: 528, height: 120, values: { name: "", depth: 0, visible: true }, tint: 0xff7a00 }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 344, y: 360, width: 32, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0xff7a00 }, "TerrainEntities"),
+      Block_8: e(r["Block"], { x: 968, y: 360, width: 32, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0xff7a00 }, "TerrainEntities"),
+      TerrainEarthHeart32px: d(Tx.Terrain.Earth.Heart32px, { x: 120, y: 30, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_1: d(Tx.Terrain.Earth.Heart32px, { x: 147, y: 36, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_2: d(Tx.Terrain.Earth.Heart32px, { x: 289, y: 30, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_3: d(Tx.Terrain.Earth.Heart32px, { x: 265, y: 25, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_4: d(Tx.Terrain.Earth.Heart32px, { x: 373, y: 148, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_5: d(Tx.Terrain.Earth.Heart32px, { x: 400, y: 154, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_6: d(Tx.Terrain.Earth.Heart32px, { x: 542, y: 148, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_7: d(Tx.Terrain.Earth.Heart32px, { x: 518, y: 143, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_8: d(Tx.Terrain.Earth.Heart32px, { x: 653, y: 146, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_9: d(Tx.Terrain.Earth.Heart32px, { x: 680, y: 152, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_10: d(Tx.Terrain.Earth.Heart32px, { x: 822, y: 149, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_11: d(Tx.Terrain.Earth.Heart32px, { x: 798, y: 144, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      ShapesDashedLine3px_1: d(Tx.Shapes.DashedLine3px, { x: 583, y: 159, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      ShapesDashedLine3px_2: d(Tx.Shapes.DashedLine3px, { x: 601, y: 158, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainGrassSparse3px1: d(Tx.Terrain.Grass.Sparse3px1, { x: 48, y: 88, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_1: d(Tx.Terrain.Grass.Sparse3px1, { x: 49, y: 184, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_2: d(Tx.Terrain.Grass.Sparse3px1, { x: 48, y: 280, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_3: d(Tx.Terrain.Grass.Sparse3px1, { x: 49, y: 376, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_4: d(Tx.Terrain.Grass.Sparse3px1, { x: 1359, y: 80, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_5: d(Tx.Terrain.Grass.Sparse3px1, { x: 1359, y: 176, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_6: d(Tx.Terrain.Grass.Sparse3px1, { x: 1359, y: 272, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_7: d(Tx.Terrain.Grass.Sparse3px1, { x: 1360, y: 368, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_12: d(Tx.Terrain.Earth.Heart32px, { x: 901, y: 28, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_13: d(Tx.Terrain.Earth.Heart32px, { x: 928, y: 34, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_14: d(Tx.Terrain.Earth.Heart32px, { x: 1070, y: 28, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_15: d(Tx.Terrain.Earth.Heart32px, { x: 1046, y: 23, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_16: d(Tx.Terrain.Earth.Heart32px, { x: 1238, y: 32, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      TerrainEarthHeart32px_17: d(Tx.Terrain.Earth.Heart32px, { x: 1262, y: 23, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      ShapesSquare32_7: d(Tx.Shapes.Square32, { x: 360, y: -66, scaleX: 15, scaleY: 6, rotation: 0, originX: 0, originY: 0, tint: 0xff4d00 }, "TerrainDecals"),
+      ShapesSquare32_8: d(Tx.Shapes.Square32, { x: 248, y: -56, scaleX: 5, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0xff4d00 }, "TerrainDecals"),
+      ShapesSquare32_9: d(Tx.Shapes.Square32, { x: 800, y: -56, scaleX: 5, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0xff4d00 }, "TerrainDecals"),
+      ShapesSquare32_10: d(Tx.Shapes.Square32, { x: 392, y: -94, scaleX: 13, scaleY: 6, rotation: 0, originX: 0, originY: 0, tint: 0xff0000 }, "TerrainDecals"),
+      ShapesConfettiCorner: d(Tx.Shapes.ConfettiCorner, { x: 820, y: -32, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff0000 }, "TerrainDecals"),
+      ShapesConfettiCorner_1: d(Tx.Shapes.ConfettiCorner, { x: 380, y: -29, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff0000 }, "TerrainDecals"),
+      ShapesCircleIrregular26: d(Tx.Shapes.CircleIrregular26, { x: 248, y: -3, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "TerrainDecals"),
+      ShapesCircleIrregular26_1: d(Tx.Shapes.CircleIrregular26, { x: 960, y: -3, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "TerrainDecals"),
+      ShapesSquare32_11: d(Tx.Shapes.Square32, { x: 80, y: 408, scaleX: 38, scaleY: 3, rotation: 0, originX: 0, originY: 0, tint: 0xff4d00 }, "TerrainDecals"),
+      ShapesCircleIrregular26_2: d(Tx.Shapes.CircleIrregular26, { x: 80, y: 421, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "TerrainDecals"),
+      ShapesCircleIrregular26_3: d(Tx.Shapes.CircleIrregular26, { x: 1296, y: 420, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "TerrainDecals"),
+      ShapesCircleIrregular26_4: d(Tx.Shapes.CircleIrregular26, { x: 83, y: 444, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      ShapesCircleIrregular26_5: d(Tx.Shapes.CircleIrregular26, { x: 1294, y: 443, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      ShapesCircleIrregular26_6: d(Tx.Shapes.CircleIrregular26, { x: 78, y: 467, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "TerrainDecals"),
+      ShapesCircleIrregular26_7: d(Tx.Shapes.CircleIrregular26, { x: 1300, y: 466, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "TerrainDecals"),
+      TerrainGrassTall3px: d(Tx.Terrain.Grass.Tall3px, { x: 235, y: 32, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      TerrainGrassTall3px_1: d(Tx.Terrain.Grass.Tall3px, { x: 91, y: 32, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      TerrainGrassTall3px_2: d(Tx.Terrain.Grass.Tall3px, { x: 179, y: 32, scaleX: -1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20: d(Tx.Foliage.Leaf20, { x: 120, y: 160, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_1: d(Tx.Foliage.Leaf20, { x: 118, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_2: d(Tx.Foliage.Leaf20, { x: 105, y: 181, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_3: d(Tx.Foliage.Leaf20, { x: 119, y: 195, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_4: d(Tx.Foliage.Leaf20, { x: 117, y: 216, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_5: d(Tx.Foliage.Leaf20, { x: 104, y: 221, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf18: d(Tx.Foliage.Leaf18, { x: 110, y: 237, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageFlower14: d(Tx.Foliage.Flower14, { x: 107, y: 179, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      FoliageLeaf20_6: d(Tx.Foliage.Leaf20, { x: 400, y: 224, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_7: d(Tx.Foliage.Leaf20, { x: 398, y: 240, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_8: d(Tx.Foliage.Leaf20, { x: 385, y: 245, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_9: d(Tx.Foliage.Leaf20, { x: 399, y: 259, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_10: d(Tx.Foliage.Leaf20, { x: 397, y: 280, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_11: d(Tx.Foliage.Leaf20, { x: 384, y: 285, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf18_1: d(Tx.Foliage.Leaf18, { x: 394, y: 303, scaleX: -1, scaleY: -1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageFlower14_1: d(Tx.Foliage.Flower14, { x: 395, y: 278, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      FoliageLeaf20_12: d(Tx.Foliage.Leaf20, { x: 1048, y: 160, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_13: d(Tx.Foliage.Leaf20, { x: 1046, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_14: d(Tx.Foliage.Leaf20, { x: 1033, y: 181, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_15: d(Tx.Foliage.Leaf20, { x: 1047, y: 195, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_16: d(Tx.Foliage.Leaf20, { x: 1045, y: 216, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf20_17: d(Tx.Foliage.Leaf20, { x: 1032, y: 221, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageLeaf18_2: d(Tx.Foliage.Leaf18, { x: 1037, y: 238, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xb85bff }, "TerrainDecals"),
+      FoliageFlower14_2: d(Tx.Foliage.Flower14, { x: 1043, y: 215, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneBrickRows0_2: d(Tx.Stone.BrickRows0, { x: 363, y: 48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      StoneBrickRows0_3: d(Tx.Stone.BrickRows0, { x: 387, y: 112, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff7a00 }, "TerrainDecals"),
+      StoneBrickRows0_4: d(Tx.Stone.BrickRows0, { x: 413, y: 72, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "TerrainDecals"),
+      TerrainEarthCrack8px12px: d(Tx.Terrain.Earth.Crack8px12px, { x: 432, y: 146, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb800 }, "TerrainDecals"),
+      TerrainEarthCrack10px10px: d(Tx.Terrain.Earth.Crack10px10px, { x: 432, y: 135, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb800 }, "TerrainDecals"),
+      TerrainEarthCrack8px12px_1: d(Tx.Terrain.Earth.Crack8px12px, { x: 736, y: 146, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb800 }, "TerrainDecals"),
+      TerrainEarthCrack10px10px_1: d(Tx.Terrain.Earth.Crack10px10px, { x: 736, y: 135, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb800 }, "TerrainDecals"),
+      StoneRock0: d(Tx.Stone.Rock0, { x: 1056, y: 140, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRock0_1: d(Tx.Stone.Rock0, { x: 1120, y: 205, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1: d(Tx.Stone.RockSmallShaded1, { x: 1139, y: 208, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_1: d(Tx.Stone.RockSmallShaded1, { x: 1150, y: 212, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRock0_2: d(Tx.Stone.Rock0, { x: 939, y: 389, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_2: d(Tx.Stone.RockSmallShaded1, { x: 918, y: 391, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_3: d(Tx.Stone.RockSmallShaded1, { x: 911, y: 399, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockPointy0: d(Tx.Stone.RockPointy0, { x: 480, y: 152, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockPointy0_1: d(Tx.Stone.RockPointy0, { x: 1016, y: 32, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockPointy0_2: d(Tx.Stone.RockPointy0, { x: 1312, y: 32, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      TerrainEarthCrack8px12px_2: d(Tx.Terrain.Earth.Crack8px12px, { x: 1301, y: 23, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "TerrainDecals"),
+      TerrainEarthCrack10px10px_2: d(Tx.Terrain.Earth.Crack10px10px, { x: 1016, y: 37, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x999999 }, "TerrainDecals"),
       Darkness: e(r["Darkness"], { x: 544, y: 48, values: { exitSceneName: "scnWorldMap", exitCheckpointName: "fromOhioToIndiana", level: 3, name: "", depth: 0 } }, "Entities"),
       Door: e(r["Door"], { x: 880, y: 96, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaToOhio", name: "", depth: 0 } }, "Entities"),
       Door_1: e(r["Door"], { x: 288, y: 96, values: { sceneName: "scnWorldMap", checkpointName: "fromOhioToIndiana", name: "", depth: 0 } }, "Entities"),
@@ -2922,8 +3060,10 @@ export const Lvl = {
       EnemyCactus_1: e(r["EnemyCactus"], { x: 520, y: 392, values: { variant: "level1", name: "", depth: 0 } }, "Entities"),
       EnemySuggestive: e(r["EnemySuggestive"], { x: 808, y: 336, uid: 177612441659600, values: { name: "", depth: 0, variant: "level1" } }, "Entities"),
       EnemyCactus_2: e(r["EnemyCactus"], { x: 1120, y: 392, values: { variant: "level1", name: "", depth: 0 } }, "Entities"),
+      IntelligenceSign: e(r["IntelligenceSign"], { x: 504, y: 208, values: { title: "Cock", message: "Whip out that fat cock.", min: 5, max: 6, name: "", depth: 0 } }, "Entities"),
       fromOhio: e(r["Checkpoint"], { x: 960, y: 144, flippedX: false, values: { name: "fromOhio", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       Player: e(r["Player"], { x: 248, y: 144, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      Puddle: e(r["Puddle"], { x: 408, y: 208, width: 64, values: { name: "", depth: 0 }, tint: 0x218d9c }, "FrontEntities"),
     };
   },
   IndianaUniversityInterior: (): LvlType.IndianaUniversityInterior => {
@@ -8874,6 +9014,9 @@ export const Lvl = {
       WorldMapHill0_16: d(Tx.WorldMap.Hill0, { x: 1498, y: 407, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
       LightShadowMessy0_1: d(Tx.Light.ShadowMessy0, { x: 839, y: 905, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
       ShapesDitherSquare16: d(Tx.Shapes.DitherSquare16, { x: 823, y: 903, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
+      ShapesSquare32_66: d(Tx.Shapes.Square32, { x: 452, y: -87, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff6753 }, "BackgroundDecals"),
+      ShapesSquare32_67: d(Tx.Shapes.Square32, { x: 684, y: -47, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "BackgroundDecals"),
+      ShapesSquare32_68: d(Tx.Shapes.Square32, { x: 684, y: -87, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
       Slope: e(r["Slope"], { x: 520, y: 1160, width: 96, height: 48, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Slope_1: e(r["Slope"], { x: 616, y: 1112, width: 96, height: 48, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Slope_2: e(r["Slope"], { x: 712, y: 1064, width: 96, height: 48, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
@@ -8938,10 +9081,10 @@ export const Lvl = {
       LightShadowIrregularSmallRound_3: d(Tx.Light.ShadowIrregularSmallRound, { x: 513, y: 966, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
       LightShadowIrregularSmallRound_4: d(Tx.Light.ShadowIrregularSmallRound, { x: 514, y: 963, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
       StoneBrickRows1: d(Tx.Stone.BrickRows1, { x: 447, y: 1430, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3f2756 }, "TerrainDecals"),
-      ShapesSquare32_66: d(Tx.Shapes.Square32, { x: 1000, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x172a03 }, "TerrainDecals"),
-      ShapesSquare32_67: d(Tx.Shapes.Square32, { x: 1040, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
-      ShapesSquare32_68: d(Tx.Shapes.Square32, { x: 1080, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
-      ShapesSquare32_69: d(Tx.Shapes.Square32, { x: 1120, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x482c6d }, "TerrainDecals"),
+      ShapesSquare32_69: d(Tx.Shapes.Square32, { x: 1000, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x172a03 }, "TerrainDecals"),
+      ShapesSquare32_70: d(Tx.Shapes.Square32, { x: 1040, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
+      ShapesSquare32_71: d(Tx.Shapes.Square32, { x: 1080, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
+      ShapesSquare32_72: d(Tx.Shapes.Square32, { x: 1120, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x482c6d }, "TerrainDecals"),
       WorldMapBlob0_1: d(Tx.WorldMap.Blob0, { x: 936, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x172a03 }, "TerrainDecals"),
       LightShadowMessy0_2: d(Tx.Light.ShadowMessy0, { x: 872, y: 192, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
       LightShadowMessy0_3: d(Tx.Light.ShadowMessy0, { x: 963, y: 195, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
@@ -11852,6 +11995,53 @@ export namespace LvlType {
     NetOfferMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type IndianaOhioBridge = {
+    TerrainEarthCrack116px108px: Sprite;
+    TerrainEarthCrack116px108px_1: Sprite;
+    TerrainEarthCrack116px108px_2: Sprite;
+    TerrainEarthCrack28px38px: Sprite;
+    TerrainEarthCrack116px108px_3: Sprite;
+    TerrainEarthCrack28px38px_1: Sprite;
+    TerrainEarthCrack116px108px_4: Sprite;
+    TerrainEarthCrack116px108px_5: Sprite;
+    TerrainEarthCrack116px108px_6: Sprite;
+    TerrainEarthCrack28px38px_2: Sprite;
+    TerrainEarthCrack116px108px_7: Sprite;
+    TerrainEarthCrack28px38px_3: Sprite;
+    TerrainEarthCrack116px108px_8: Sprite;
+    TerrainEarthCrack116px108px_9: Sprite;
+    TerrainEarthCrack116px108px_10: Sprite;
+    TerrainEarthCrack28px38px_4: Sprite;
+    TerrainEarthCrack116px108px_11: Sprite;
+    TerrainEarthCrack28px38px_5: Sprite;
+    TerrainEarthCrack116px108px_12: Sprite;
+    ShapesSquare32: Sprite;
+    ShapesConfetti18x8: Sprite;
+    ShapesConfetti18x8_1: Sprite;
+    ShapesDashedLine3px: Sprite;
+    ShapesSquare32_1: Sprite;
+    ShapesSquare32_2: Sprite;
+    ShapesSquare32_3: Sprite;
+    ShapesSquare32_4: Sprite;
+    ShapesSquare32_5: Sprite;
+    ShapesStatesIndiana0: Sprite;
+    ShapesSquare32_6: Sprite;
+    ShapesStatesOhio0: Sprite;
+    StoneBrickRows1: Sprite;
+    StoneBrickRows0: Sprite;
+    StoneBrickSingle1: Sprite;
+    StoneBrickSingle1_1: Sprite;
+    StoneBrickRows3B: Sprite;
+    StoneBrickRows3: Sprite;
+    StoneBrickRows3B_1: Sprite;
+    StoneBrickRows3_1: Sprite;
+    StoneBrickRows3_2: Sprite;
+    StoneBrickRows3_3: Sprite;
+    StoneBrickRows3_4: Sprite;
+    StoneBrickRows3_5: Sprite;
+    StoneBrickRows3B_2: Sprite;
+    StoneBrickRows0_1: Sprite;
+    StoneBrickSingle1_2: Sprite;
+    StoneBrickSingle1_3: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Block_1: ReturnType<(typeof r)["Block"]>;
     Block_2: ReturnType<(typeof r)["Block"]>;
@@ -11867,6 +12057,97 @@ export namespace LvlType {
     Pipe_6: ReturnType<(typeof r)["Pipe"]>;
     Pipe_7: ReturnType<(typeof r)["Pipe"]>;
     Block_6: ReturnType<(typeof r)["Block"]>;
+    Block_7: ReturnType<(typeof r)["Block"]>;
+    Block_8: ReturnType<(typeof r)["Block"]>;
+    TerrainEarthHeart32px: Sprite;
+    TerrainEarthHeart32px_1: Sprite;
+    TerrainEarthHeart32px_2: Sprite;
+    TerrainEarthHeart32px_3: Sprite;
+    TerrainEarthHeart32px_4: Sprite;
+    TerrainEarthHeart32px_5: Sprite;
+    TerrainEarthHeart32px_6: Sprite;
+    TerrainEarthHeart32px_7: Sprite;
+    TerrainEarthHeart32px_8: Sprite;
+    TerrainEarthHeart32px_9: Sprite;
+    TerrainEarthHeart32px_10: Sprite;
+    TerrainEarthHeart32px_11: Sprite;
+    ShapesDashedLine3px_1: Sprite;
+    ShapesDashedLine3px_2: Sprite;
+    TerrainGrassSparse3px1: Sprite;
+    TerrainGrassSparse3px1_1: Sprite;
+    TerrainGrassSparse3px1_2: Sprite;
+    TerrainGrassSparse3px1_3: Sprite;
+    TerrainGrassSparse3px1_4: Sprite;
+    TerrainGrassSparse3px1_5: Sprite;
+    TerrainGrassSparse3px1_6: Sprite;
+    TerrainGrassSparse3px1_7: Sprite;
+    TerrainEarthHeart32px_12: Sprite;
+    TerrainEarthHeart32px_13: Sprite;
+    TerrainEarthHeart32px_14: Sprite;
+    TerrainEarthHeart32px_15: Sprite;
+    TerrainEarthHeart32px_16: Sprite;
+    TerrainEarthHeart32px_17: Sprite;
+    ShapesSquare32_7: Sprite;
+    ShapesSquare32_8: Sprite;
+    ShapesSquare32_9: Sprite;
+    ShapesSquare32_10: Sprite;
+    ShapesConfettiCorner: Sprite;
+    ShapesConfettiCorner_1: Sprite;
+    ShapesCircleIrregular26: Sprite;
+    ShapesCircleIrregular26_1: Sprite;
+    ShapesSquare32_11: Sprite;
+    ShapesCircleIrregular26_2: Sprite;
+    ShapesCircleIrregular26_3: Sprite;
+    ShapesCircleIrregular26_4: Sprite;
+    ShapesCircleIrregular26_5: Sprite;
+    ShapesCircleIrregular26_6: Sprite;
+    ShapesCircleIrregular26_7: Sprite;
+    TerrainGrassTall3px: Sprite;
+    TerrainGrassTall3px_1: Sprite;
+    TerrainGrassTall3px_2: Sprite;
+    FoliageLeaf20: Sprite;
+    FoliageLeaf20_1: Sprite;
+    FoliageLeaf20_2: Sprite;
+    FoliageLeaf20_3: Sprite;
+    FoliageLeaf20_4: Sprite;
+    FoliageLeaf20_5: Sprite;
+    FoliageLeaf18: Sprite;
+    FoliageFlower14: Sprite;
+    FoliageLeaf20_6: Sprite;
+    FoliageLeaf20_7: Sprite;
+    FoliageLeaf20_8: Sprite;
+    FoliageLeaf20_9: Sprite;
+    FoliageLeaf20_10: Sprite;
+    FoliageLeaf20_11: Sprite;
+    FoliageLeaf18_1: Sprite;
+    FoliageFlower14_1: Sprite;
+    FoliageLeaf20_12: Sprite;
+    FoliageLeaf20_13: Sprite;
+    FoliageLeaf20_14: Sprite;
+    FoliageLeaf20_15: Sprite;
+    FoliageLeaf20_16: Sprite;
+    FoliageLeaf20_17: Sprite;
+    FoliageLeaf18_2: Sprite;
+    FoliageFlower14_2: Sprite;
+    StoneBrickRows0_2: Sprite;
+    StoneBrickRows0_3: Sprite;
+    StoneBrickRows0_4: Sprite;
+    TerrainEarthCrack8px12px: Sprite;
+    TerrainEarthCrack10px10px: Sprite;
+    TerrainEarthCrack8px12px_1: Sprite;
+    TerrainEarthCrack10px10px_1: Sprite;
+    StoneRock0: Sprite;
+    StoneRock0_1: Sprite;
+    StoneRockSmallShaded1: Sprite;
+    StoneRockSmallShaded1_1: Sprite;
+    StoneRock0_2: Sprite;
+    StoneRockSmallShaded1_2: Sprite;
+    StoneRockSmallShaded1_3: Sprite;
+    StoneRockPointy0: Sprite;
+    StoneRockPointy0_1: Sprite;
+    StoneRockPointy0_2: Sprite;
+    TerrainEarthCrack8px12px_2: Sprite;
+    TerrainEarthCrack10px10px_2: Sprite;
     Darkness: ReturnType<(typeof r)["Darkness"]>;
     Door: ReturnType<(typeof r)["Door"]>;
     Door_1: ReturnType<(typeof r)["Door"]>;
@@ -11874,8 +12155,10 @@ export namespace LvlType {
     EnemyCactus_1: ReturnType<(typeof r)["EnemyCactus"]>;
     EnemySuggestive: ReturnType<(typeof r)["EnemySuggestive"]>;
     EnemyCactus_2: ReturnType<(typeof r)["EnemyCactus"]>;
+    IntelligenceSign: ReturnType<(typeof r)["IntelligenceSign"]>;
     fromOhio: ReturnType<(typeof r)["Checkpoint"]>;
     Player: ReturnType<(typeof r)["Player"]>;
+    Puddle: ReturnType<(typeof r)["Puddle"]>;
   };
   export type IndianaUniversityInterior = {
     SkyCloudPuff0: Sprite;
@@ -17736,6 +18019,9 @@ export namespace LvlType {
     WorldMapHill0_16: Sprite;
     LightShadowMessy0_1: Sprite;
     ShapesDitherSquare16: Sprite;
+    ShapesSquare32_66: Sprite;
+    ShapesSquare32_67: Sprite;
+    ShapesSquare32_68: Sprite;
     Slope: ReturnType<(typeof r)["Slope"]>;
     Slope_1: ReturnType<(typeof r)["Slope"]>;
     Slope_2: ReturnType<(typeof r)["Slope"]>;
@@ -17800,10 +18086,10 @@ export namespace LvlType {
     LightShadowIrregularSmallRound_3: Sprite;
     LightShadowIrregularSmallRound_4: Sprite;
     StoneBrickRows1: Sprite;
-    ShapesSquare32_66: Sprite;
-    ShapesSquare32_67: Sprite;
-    ShapesSquare32_68: Sprite;
     ShapesSquare32_69: Sprite;
+    ShapesSquare32_70: Sprite;
+    ShapesSquare32_71: Sprite;
+    ShapesSquare32_72: Sprite;
     WorldMapBlob0_1: Sprite;
     LightShadowMessy0_2: Sprite;
     LightShadowMessy0_3: Sprite;
