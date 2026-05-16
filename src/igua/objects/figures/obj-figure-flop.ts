@@ -3,10 +3,12 @@ import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { cyclic } from "../../../lib/math/number";
 import { Integer, PolarInt } from "../../../lib/math/number-alias-types";
-import { PseudoRng } from "../../../lib/math/rng";
+import { PseudoRng, Rng } from "../../../lib/math/rng";
+import { clone } from "../../../lib/object/clone";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
+import { range } from "../../../lib/range";
 
 const txs = {
     accessory: {
@@ -26,9 +28,73 @@ export function objFigureFlop(dexNumberZeroIndexed: Integer) {
     return objFigureFlop.objFromSeed(flopDexSeeds[dexNumberZeroIndexed] ?? -1);
 }
 
-objFigureFlop.objFromSeed = function objFromSeed (seed: Integer) {
-    const args = getArgsFromFlopSeed(seed);
+export namespace objFigureFlop {
+    export type PrimitiveFlopArgs = ReturnType<typeof getPrimitiveArgsFromFlopSeed>;
+    export type FlopArgs = ReturnType<typeof getArgsFromPrimitiveArgs>;
+}
 
+objFigureFlop.objFromSeed = function objFromSeed (seed: Integer) {
+    const primitiveArgs = getPrimitiveArgsFromFlopSeed(seed);
+
+    return objFigureFlop.objFromPrimitiveFlopArgs(primitiveArgs);
+};
+
+objFigureFlop.getMutatedPrimitveFlopArgs = function (
+    rng: typeof Rng,
+    dexNumberZeroIndexed: Integer,
+    intensity: Integer,
+): objFigureFlop.PrimitiveFlopArgs {
+    const primitiveArgs = getPrimitiveArgsFromFlopSeed(flopDexSeeds[dexNumberZeroIndexed] ?? -1);
+    const mutantPrimitiveArgs = getPrimitiveArgsFromFlopSeed(flopDexSeeds[dexNumberZeroIndexed] ?? -1);
+
+    const mutateIndices = rng.shuffle(range(8));
+
+    for (let i = 0; i < Math.min(mutateIndices.length, intensity); i++) {
+        const previousPrimitiveArgs = clone(mutantPrimitiveArgs);
+        const mutateIndex = mutateIndices[i];
+        for (let j = 0; j < 10; j++) {
+            const nextArgs = getPrimitiveArgsFromFlopSeed(rng.intc(0, 999_999_999));
+
+            if (mutateIndex === 0) {
+                mutantPrimitiveArgs.accessory.front = nextArgs.accessory.front;
+            }
+            else if (mutateIndex === 1) {
+                mutantPrimitiveArgs.accessory.rear = nextArgs.accessory.rear;
+            }
+            else if (mutateIndex === 2) {
+                mutantPrimitiveArgs.crest = nextArgs.crest;
+            }
+            else if (mutateIndex === 3) {
+                mutantPrimitiveArgs.ears = nextArgs.ears;
+            }
+            else if (mutateIndex === 4) {
+                mutantPrimitiveArgs.eyes = nextArgs.eyes;
+            }
+            else if (mutateIndex === 5) {
+                mutantPrimitiveArgs.feet = nextArgs.feet;
+            }
+            else if (mutateIndex === 6) {
+                mutantPrimitiveArgs.mouth = nextArgs.mouth;
+            }
+            else if (mutateIndex === 7) {
+                mutantPrimitiveArgs.nose = nextArgs.nose;
+            }
+
+            if (JSON.stringify(previousPrimitiveArgs) !== JSON.stringify(mutantPrimitiveArgs)) {
+                break;
+            }
+        }
+    }
+
+    if (JSON.stringify(primitiveArgs) === JSON.stringify(mutantPrimitiveArgs)) {
+        return getPrimitiveArgsFromFlopSeed(rng.intc(5000, 99999));
+    }
+
+    return mutantPrimitiveArgs;
+};
+
+objFigureFlop.objFromPrimitiveFlopArgs = function objFromFlopArgs (primitiveArgs: objFigureFlop.PrimitiveFlopArgs) {
+    const args = getArgsFromPrimitiveArgs(primitiveArgs);
     const filter = new MapRgbFilter(args.tint.red, args.tint.green, args.tint.blue);
 
     return container(
@@ -61,7 +127,7 @@ function printFlopDexNumber(flopDexNumberZeroIndexed: Integer) {
 
 const prng = new PseudoRng();
 
-function getArgsFromFlopSeed(flopSeed: Integer) {
+function getPrimitiveArgsFromFlopSeed(flopSeed: Integer) {
     const seed = flopSeed % 2 === 0
         ? (77_777_777 + flopSeed * 9_999_999)
         : (88_888_888 + flopSeed * 9_919_191);
@@ -77,8 +143,8 @@ function getArgsFromFlopSeed(flopSeed: Integer) {
     const noAccessoryPossibility = prng.int(2);
 
     const accessory = {
-        front: txs.accessory.front[prng.int(noAccessoryPossibility === 0 ? -1 : 0, txs.accessory.front.length)] ?? null,
-        rear: txs.accessory.rear[prng.int(noAccessoryPossibility === 1 ? -1 : 0, txs.accessory.rear.length)] ?? null,
+        front: prng.int(noAccessoryPossibility === 0 ? -1 : 0, txs.accessory.front.length),
+        rear: prng.int(noAccessoryPossibility === 1 ? -1 : 0, txs.accessory.rear.length),
     };
 
     const tint = prng.bool()
@@ -95,13 +161,29 @@ function getArgsFromFlopSeed(flopSeed: Integer) {
 
     return {
         accessory,
-        crest: prng.item(txs.crest),
-        ears: txs.ears[prng.int(-1, txs.ears.length)] ?? null,
-        eyes: prng.item(txs.eyes),
-        feet: prng.item(txs.feet),
-        mouth: prng.item(txs.mouth),
-        nose: txs.nose[prng.int(-1, txs.nose.length)] ?? null,
+        crest: prng.int(txs.crest.length),
+        ears: prng.int(-1, txs.ears.length),
+        eyes: prng.int(txs.eyes.length),
+        feet: prng.int(txs.feet.length),
+        mouth: prng.int(txs.mouth.length),
+        nose: prng.int(-1, txs.nose.length),
         tint,
+    };
+}
+
+function getArgsFromPrimitiveArgs(args: objFigureFlop.PrimitiveFlopArgs) {
+    return {
+        accessory: {
+            front: txs.accessory.front[args.accessory.front] ?? null,
+            rear: txs.accessory.rear[args.accessory.rear] ?? null,
+        },
+        crest: txs.crest[args.crest] ?? txs.crest[0],
+        ears: txs.ears[args.ears] ?? null,
+        eyes: txs.eyes[args.eyes] ?? txs.eyes[0],
+        feet: txs.feet[args.feet] ?? txs.feet[0],
+        mouth: txs.mouth[args.mouth] ?? txs.mouth[0],
+        nose: txs.nose[args.nose] ?? null,
+        tint: args.tint,
     };
 }
 
@@ -1134,4 +1216,4 @@ const flopDexSeeds = [
     2646,
 ];
 
-objFigureFlop.primaryTints = flopDexSeeds.map(seed => getArgsFromFlopSeed(seed).tint.red);
+objFigureFlop.primaryTints = flopDexSeeds.map(seed => getPrimitiveArgsFromFlopSeed(seed).tint.red);
