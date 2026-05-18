@@ -21,6 +21,7 @@ import { RpgMicrocosms } from "./rpg-microcosms";
 import { RpgPlayer } from "./rpg-player";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
+import { RpgPlayerSpells } from "./rpg-player-spells";
 import { RpgPlayerStatus } from "./rpg-player-status";
 import { RpgPlayerWallet } from "./rpg-player-wallet";
 import { RpgPocket } from "./rpg-pocket";
@@ -70,6 +71,7 @@ export namespace RpgFactory {
         const inventory = new RpgInventory(equipment, flops, keyItems, pocket, potions);
         const wallet = new RpgPlayerWallet(data.character.wallet, experience);
         const looseValuables = new RpgLooseValuables(looseValuablesState);
+        const spells = new RpgPlayerSpells(data.character.spells, buffs);
         const player = new RpgPlayer(
             data.character,
             attributes,
@@ -80,6 +82,7 @@ export namespace RpgFactory {
             wallet,
             pocket,
             looseValuables,
+            spells,
         );
         const shops = new RpgShops(shopsState, wallet, inventory);
         const weightedPedestals = new RpgWeightedPedestals(weightedPedestalsState);

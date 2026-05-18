@@ -5,6 +5,7 @@ import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { ZIndex } from "../../core/scene/z-index";
 import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
 import { mxnPhysics } from "../../mixins/mxn-physics";
+import { MxnRpgAttackArgs } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgFaction } from "../../rpg/rpg-faction";
 import { objFxFizzle } from "../effects/obj-fx-fizzle";
@@ -20,7 +21,7 @@ const atkBurn = RpgAttack.create({
     versus: RpgFaction.Anyone,
 });
 
-export function objProjectileHotPineCone() {
+export function objProjectileHotPineCone(args: Partial<MxnRpgAttackArgs> = {}) {
     let spawned = false;
 
     return Sprite.from(Tx.Effects.HotPineCone)
@@ -30,7 +31,13 @@ export function objProjectileHotPineCone() {
             if (!spawned && event.hitGround) {
                 spawned = true;
                 objProjectileCrackedEarthExpanding(
-                    { attack: atkBurn, expandDirection: "both", expandSpeed: 5, maxWidth: 96 },
+                    {
+                        attack: args.attack ?? atkBurn,
+                        attacker: args.attacker,
+                        expandDirection: "both",
+                        expandSpeed: 5,
+                        maxWidth: 96,
+                    },
                 )
                     .at(self)
                     .zIndexed(ZIndex.TerrainDecals)

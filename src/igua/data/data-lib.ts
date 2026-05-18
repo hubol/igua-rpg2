@@ -39,4 +39,12 @@ export namespace DataLib {
         [k in keyof T]: T[k] extends object ? T[k] & { id: keyof T }
             : T[k];
     };
+
+    export type Id<T> = Exclude<T, "__Fallback__">;
+
+    export function createIds<TManifest extends Record<string, unknown>>(
+        manifest: TManifest,
+    ): Array<Id<keyof TManifest>> {
+        return Object.keys(manifest).filter(id => id !== "__Fallback__") as any[];
+    }
 }

@@ -1,4 +1,5 @@
 import { OgmoEntities } from "../../../../assets/generated/levels/generated-ogmo-project-data";
+import { mxnRpgAttack } from "../../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../../rpg/rpg-attack";
 import { RpgFaction } from "../../../rpg/rpg-faction";
 import { objProjectileCrackedEarth } from "../../projectiles/obj-projectile-cracked-earth";
@@ -17,5 +18,6 @@ export function objEnvironmentOverheatRegion(entity: OgmoEntities.OverheatRegion
     const width = entity.width!;
     delete entity.width;
 
-    return objProjectileCrackedEarth(width, atk);
+    return objProjectileCrackedEarth(width)
+        .mixin(mxnRpgAttack, { attack: atk });
 }

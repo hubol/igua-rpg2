@@ -1,11 +1,10 @@
 import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { mxnPhysics } from "../../mixins/mxn-physics";
-import { RpgAttack } from "../../rpg/rpg-attack";
+import { mxnRpgAttack, MxnRpgAttackArgs } from "../../mixins/mxn-rpg-attack";
 import { objProjectileCrackedEarth } from "./obj-projectile-cracked-earth";
 
-interface ObjProjectileCrackedEarthExpandingArgs {
-    attack: RpgAttack.Model;
+interface ObjProjectileCrackedEarthExpandingArgs extends MxnRpgAttackArgs {
     maxWidth: Integer;
     expandDirection: "left" | "right" | "both";
     expandSpeed: Integer;
@@ -52,7 +51,8 @@ export function objProjectileCrackedEarthExpanding(args: ObjProjectileCrackedEar
                 rightObj.speed.x = args.expandSpeed;
             }
             yield () => x0 !== x1;
-            const earthObj = objProjectileCrackedEarth(0, args.attack)
+            const earthObj = objProjectileCrackedEarth(0)
+                .mixin(mxnRpgAttack, args)
                 .step(self => {
                     const width = Math.max(0, Math.min(Math.round(Math.abs((x1 - 4) - (x0 + 4))), args.maxWidth));
                     if (self.objFxCrackedEarth.width < width) {

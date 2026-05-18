@@ -17,6 +17,7 @@ import { show } from "../drama/show";
 import { Cutscene, DevKey, Input, layers, scene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
 import { force } from "../mixins/mxn-physics";
+import { mxnPlayerSpells } from "../mixins/mxn-player-spells";
 import { MxnRpgStatus, mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { mxnRpgStatusBodyPart } from "../mixins/mxn-rpg-status-body-part";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
@@ -155,6 +156,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             },
             ...objIguanaNpc.getSpeakerColors(looks),
         })
+        .mixin(mxnPlayerSpells, Rpg.character.spells)
         .handles("moved", (_, event) => {
             if (CtxGate.value.isGateTransitionActive) {
                 return;

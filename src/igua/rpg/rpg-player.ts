@@ -8,6 +8,7 @@ import { RpgFacts } from "./rpg-facts";
 import { RpgLooseValuables } from "./rpg-loose-valuables";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
+import { RpgPlayerSpells } from "./rpg-player-spells";
 import { RpgPlayerStatus } from "./rpg-player-status";
 import { RpgPlayerWallet } from "./rpg-player-wallet";
 import { RpgPocket } from "./rpg-pocket";
@@ -23,6 +24,7 @@ export class RpgPlayer {
         private readonly _wallet: RpgPlayerWallet,
         private readonly _pocket: RpgPocket,
         private readonly _looseValuables: RpgLooseValuables,
+        readonly spells: RpgPlayerSpells,
     ) {
     }
 

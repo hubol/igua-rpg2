@@ -4,12 +4,11 @@ import { interpc } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
+import { CollisionShape } from "../../../lib/pixi/collision";
 import { ZIndex } from "../../core/scene/z-index";
-import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
-import { RpgAttack } from "../../rpg/rpg-attack";
 import { objFxCrackedEarth } from "../effects/obj-fx-cracked-earth";
 
-export function objProjectileCrackedEarth(width: Integer, attack: RpgAttack.Model) {
+export function objProjectileCrackedEarth(width: Integer) {
     const fxCrackedEarthObj = objFxCrackedEarth(width)
         .coro(function* (self) {
             // TODO should respect attackObj isActive
@@ -32,13 +31,12 @@ export function objProjectileCrackedEarth(width: Integer, attack: RpgAttack.Mode
         .beginFill(0xff0000)
         .drawRect(0, -12, 1, 12)
         .invisible()
-        .mixin(mxnRpgAttack, { attack })
         .step(self => self.scale.x = fxCrackedEarthObj.objFxCrackedEarth.width)
         .show(fxCrackedEarthObj);
 
     return fxCrackedEarthObj
         .zIndexed(ZIndex.TerrainEntities)
-        .merge({ objProjectileCrackedEarth: { attackObj } });
+        .collisionShape(CollisionShape.DisplayObjects, [attackObj]);
 }
 
 function getCrackedEarthTint(blend: number) {

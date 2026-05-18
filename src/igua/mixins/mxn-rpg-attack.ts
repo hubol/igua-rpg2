@@ -6,7 +6,7 @@ import { mxnDestroyOnStatusDeath } from "./mxn-destroy-on-status-death";
 import { mxnRpgStatus } from "./mxn-rpg-status";
 import { mxnRpgStatusBodyPart } from "./mxn-rpg-status-body-part";
 
-interface MxnRpgAttackArgs {
+export interface MxnRpgAttackArgs {
     attack: RpgAttack.Model;
     attacker?: RpgStatus.Model;
 }

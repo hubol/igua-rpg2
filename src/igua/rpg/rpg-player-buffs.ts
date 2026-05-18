@@ -1,5 +1,6 @@
 import { Integer, PercentInt } from "../../lib/math/number-alias-types";
 import { compileResetter } from "../../lib/object/compile-resetter";
+import { DataSpell } from "../data/data-spell";
 import { RpgExperience } from "./rpg-experience";
 
 export namespace RpgPlayerBuffs {
@@ -40,6 +41,11 @@ export namespace RpgPlayerBuffs {
                         },
                         physical: 0,
                     },
+                },
+                spells: {
+                    equipped: {
+                        HotPineCone: 0,
+                    } satisfies Record<DataSpell.Id, Integer>,
                 },
             },
             conditions: {
