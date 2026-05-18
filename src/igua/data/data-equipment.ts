@@ -290,6 +290,14 @@ export namespace DataEquipment {
                     };
                 })(),
             },
+            HotPineCone: {
+                name: "Hot Pine Seed Pack",
+                texture: null,
+                description: "Chuck hot, hot pine cones onto flat surfaces.",
+                buffs: (model, bonus) => {
+                    model.combat.spells.equipped.HotPineCone += 1 + bonus;
+                },
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,
