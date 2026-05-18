@@ -5,6 +5,7 @@ import { Coro } from "../../../lib/game-engine/routines/coro";
 import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
 import { container } from "../../../lib/pixi/container";
 import { DeepKeyOf } from "../../../lib/types/deep-keyof";
+import { DataSpell } from "../../data/data-spell";
 import { Rpg } from "../../rpg/rpg";
 import { RpgCharacterEquipment } from "../../rpg/rpg-character-equipment";
 import { RpgEquipmentLoadout } from "../../rpg/rpg-equipment-loadout";
@@ -178,8 +179,10 @@ type NullishBuffInformation = ReturnType<typeof getBuffInformations>[number];
 type BuffInformation = NonNullable<NullishBuffInformation>;
 
 const getBuffInformations = (function () {
+    type BuffsPath = DeepKeyOf.Paths<RpgPlayerBuffs.Model>;
+
     function buff(
-        path: DeepKeyOf.Paths<RpgPlayerBuffs.Model>,
+        path: BuffsPath,
         name: string,
         units: "integer" | "percent",
         benefit: "beneft_when_positive" | "benefit_when_negative",
@@ -193,6 +196,21 @@ const getBuffInformations = (function () {
         return {
             [path]: { name, units, benefit, getValue },
         };
+    }
+
+    function spellBuff(
+        spellId: DataSpell.Id,
+    ) {
+        // Naive test to "make sure" the concatenation below works
+        const __testBuffsPath: BuffsPath = "combat.spells.equipped.HotPineCone";
+        const spell = DataSpell.getById(spellId);
+
+        return buff(
+            ("combat.spells.equipped." + spellId) as BuffsPath,
+            "Spell: " + spell.name + " Lvl",
+            "integer",
+            "beneft_when_positive",
+        );
     }
 
     const buffInformations: Partial<
@@ -216,6 +234,7 @@ const getBuffInformations = (function () {
             "integer",
             "beneft_when_positive",
         ),
+        ...DataSpell.Ids.map(spellId => spellBuff(spellId)),
         buff("loot.pocket.bonusChance", "Pocket Bonus Chance", "percent", "beneft_when_positive"),
         buff("loot.tiers.nothingRerollCount", "Re-Roll Empty Loot", "integer", "beneft_when_positive"),
         buff("loot.valuables.bonus", "Valuable Bonus", "integer", "beneft_when_positive"),
