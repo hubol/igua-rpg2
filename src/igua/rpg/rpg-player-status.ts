@@ -155,7 +155,7 @@ export class RpgPlayerStatus implements RpgStatus.Model {
         return {
             [RpgFaction.Anyone]: 0,
             [RpgFaction.Enemy]: 0,
-            [RpgFaction.Player]: 100,
+            [RpgFaction.Player]: 0,
             get [RpgFaction.Miner]() {
                 return buffs.getAggregatedBuffs().combat.defense.faction.miner;
             },
