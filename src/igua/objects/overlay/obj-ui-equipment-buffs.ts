@@ -129,7 +129,7 @@ function getEquipmentBuffTint(
     isFocused: boolean,
     benefit: BuffInformation["benefit"],
 ) {
-    const delta = (value - previous) * (benefit === "beneft_when_positive" ? 1 : -1);
+    const delta = (value - previous) * (benefit === "benefit_when_positive" ? 1 : -1);
 
     if (delta === 0) {
         return 0x202020;
@@ -185,7 +185,7 @@ const getBuffInformations = (function () {
         path: BuffsPath,
         name: string,
         units: "integer" | "percent",
-        benefit: "beneft_when_positive" | "benefit_when_negative",
+        benefit: "benefit_when_positive" | "benefit_when_negative",
     ) {
         const getValue = new Function(
             "buffs",
@@ -209,7 +209,7 @@ const getBuffInformations = (function () {
             ("combat.spells.equipped." + spellId) as BuffsPath,
             "Spell: " + spell.name + " Lvl",
             "integer",
-            "beneft_when_positive",
+            "benefit_when_positive",
         );
     }
 
@@ -217,58 +217,63 @@ const getBuffInformations = (function () {
         Record<DeepKeyOf.Paths<RpgPlayerBuffs.Model>, BuffInformation>
     > = Object.assign(
         {},
-        buff("attributes.health", "Health ATTR", "integer", "beneft_when_positive"),
-        buff("attributes.intelligence", "Intelligence ATTR", "integer", "beneft_when_positive"),
-        buff("attributes.strength", "Strength ATTR", "integer", "beneft_when_positive"),
-        buff("combat.melee.faceAttack.physical", "Face Phys ATK", "integer", "beneft_when_positive"),
-        buff("combat.melee.clawAttack.physical", "Claw Phys ATK", "integer", "beneft_when_positive"),
+        buff("attributes.health", "Health ATTR", "integer", "benefit_when_positive"),
+        buff("attributes.intelligence", "Intelligence ATTR", "integer", "benefit_when_positive"),
+        buff("attributes.strength", "Strength ATTR", "integer", "benefit_when_positive"),
+        buff("combat.melee.faceAttack.physical", "Face Phys ATK", "integer", "benefit_when_positive"),
+        buff("combat.melee.clawAttack.physical", "Claw Phys ATK", "integer", "benefit_when_positive"),
         buff(
             "combat.melee.conditions.poison.value",
             "Melee ATK Poison (Buildup)",
             "integer",
-            "beneft_when_positive",
+            "benefit_when_positive",
         ),
         buff(
             "combat.melee.conditions.poison.maxLevel",
             "Melee ATK Poison (Max)",
             "integer",
-            "beneft_when_positive",
+            "benefit_when_positive",
         ),
         ...DataSpell.Ids.map(spellId => spellBuff(spellId)),
-        buff("loot.pocket.bonusChance", "Pocket Bonus Chance", "percent", "beneft_when_positive"),
-        buff("loot.tiers.nothingRerollCount", "Re-Roll Empty Loot", "integer", "beneft_when_positive"),
-        buff("loot.valuables.bonus", "Valuable Bonus", "integer", "beneft_when_positive"),
-        buff("conditions.ballonDrainReductionFactor", "Ballons Drain Slower", "percent", "beneft_when_positive"),
-        buff("conditions.poisonMaxIncreaseFactor", "Poison Builds Slower", "percent", "beneft_when_positive"),
-        buff("conditions.poisonRateReductionFactor", "Poison Drains HP Slower", "percent", "beneft_when_positive"),
-        buff("conditions.wetnessMaxIncreaseFactor", "Wetness Maximum", "percent", "beneft_when_positive"),
-        buff("experience.bonusFactorWhileWet.combat", "Combat XP Bonus (While Wet)", "percent", "beneft_when_positive"),
-        buff("experience.bonusFactorWhileWet.jump", "Jump XP Bonus (While Wet)", "percent", "beneft_when_positive"),
-        buff("motion.jump.bonusAtSpecialSigns", "Special Jump", "integer", "beneft_when_positive"),
-        buff("motion.jump.midairCount", "Midair Jumps", "integer", "beneft_when_positive"),
-        buff("motion.jump.atMaxHealthMidairCount", "Midair Jumps (At Max HP)", "integer", "beneft_when_positive"),
-        buff("motion.walk.topSpeedIncreaseFactor", "Walk Top Speed", "percent", "beneft_when_positive"),
-        buff("combat.defense.physical", "Phys DEF", "percent", "beneft_when_positive"),
-        buff("combat.defense.faction.miner", "Defense Against Miners", "percent", "beneft_when_positive"),
+        buff("loot.pocket.bonusChance", "Pocket Bonus Chance", "percent", "benefit_when_positive"),
+        buff("loot.tiers.nothingRerollCount", "Re-Roll Empty Loot", "integer", "benefit_when_positive"),
+        buff("loot.valuables.bonus", "Valuable Bonus", "integer", "benefit_when_positive"),
+        buff("conditions.ballonDrainReductionFactor", "Ballons Drain Slower", "percent", "benefit_when_positive"),
+        buff("conditions.poisonMaxIncreaseFactor", "Poison Builds Slower", "percent", "benefit_when_positive"),
+        buff("conditions.poisonRateReductionFactor", "Poison Drains HP Slower", "percent", "benefit_when_positive"),
+        buff("conditions.wetnessMaxIncreaseFactor", "Wetness Maximum", "percent", "benefit_when_positive"),
+        buff(
+            "experience.bonusFactorWhileWet.combat",
+            "Combat XP Bonus (While Wet)",
+            "percent",
+            "benefit_when_positive",
+        ),
+        buff("experience.bonusFactorWhileWet.jump", "Jump XP Bonus (While Wet)", "percent", "benefit_when_positive"),
+        buff("motion.jump.bonusAtSpecialSigns", "Special Jump", "integer", "benefit_when_positive"),
+        buff("motion.jump.midairCount", "Midair Jumps", "integer", "benefit_when_positive"),
+        buff("motion.jump.atMaxHealthMidairCount", "Midair Jumps (At Max HP)", "integer", "benefit_when_positive"),
+        buff("motion.walk.topSpeedIncreaseFactor", "Walk Top Speed", "percent", "benefit_when_positive"),
+        buff("combat.defense.physical", "Phys DEF", "percent", "benefit_when_positive"),
+        buff("combat.defense.faction.miner", "Defense Against Miners", "percent", "benefit_when_positive"),
         buff(
             "combat.melee.clawAttack.perfect.combatExperience",
             "Perfect Claw Bonus XP",
             "integer",
-            "beneft_when_positive",
+            "benefit_when_positive",
         ),
-        buff("cosmetic.cigaretteSmoking", "Cigarette", "percent", "beneft_when_positive"),
-        buff("cosmetic.roboticism", "Robotic", "percent", "beneft_when_positive"),
-        buff("cosmetic.sparkling", "Sparkles", "percent", "beneft_when_positive"),
+        buff("cosmetic.cigaretteSmoking", "Cigarette", "percent", "benefit_when_positive"),
+        buff("cosmetic.roboticism", "Robotic", "percent", "benefit_when_positive"),
+        buff("cosmetic.sparkling", "Sparkles", "percent", "benefit_when_positive"),
         // TODO it is not necessarily a benefit
-        buff("audio.musicTempoAdjustmentFactor", "Music Tempo Adjust", "percent", "beneft_when_positive"),
-        buff("esoteric.sceneChangeErrorChance", "Door Error Chance", "percent", "beneft_when_positive"),
-        buff("esoteric.goodEndingChance", "Good End Chance", "percent", "beneft_when_positive"),
+        buff("audio.musicTempoAdjustmentFactor", "Music Tempo Adjust", "percent", "benefit_when_positive"),
+        buff("esoteric.sceneChangeErrorChance", "Door Error Chance", "percent", "benefit_when_positive"),
+        buff("esoteric.goodEndingChance", "Good End Chance", "percent", "benefit_when_positive"),
         // TODO support for booleans?
-        buff("approval.indianaMerchants", "Indiana Merchants Approval", "percent", "beneft_when_positive"),
-        buff("esoteric.recognizeSongFactor", "Recognize Songs", "percent", "beneft_when_positive"),
-        buff("esoteric.lgbtFactor", "LGBT", "percent", "beneft_when_positive"),
-        buff("wallet.bonusCasinoPity", "Bonus Casino Pity", "integer", "beneft_when_positive"),
-        buff("esoteric.nightVisionLevel", "Night Vision", "integer", "beneft_when_positive"),
+        buff("approval.indianaMerchants", "Indiana Merchants Approval", "percent", "benefit_when_positive"),
+        buff("esoteric.recognizeSongFactor", "Recognize Songs", "percent", "benefit_when_positive"),
+        buff("esoteric.lgbtFactor", "LGBT", "percent", "benefit_when_positive"),
+        buff("wallet.bonusCasinoPity", "Bonus Casino Pity", "integer", "benefit_when_positive"),
+        buff("esoteric.nightVisionLevel", "Night Vision", "integer", "benefit_when_positive"),
     );
 
     const fn = new Function(
