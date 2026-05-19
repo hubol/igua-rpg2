@@ -121,7 +121,9 @@ function objUiPlayerSpellsPower() {
         .pivoted(10, 14)
         .step(self => {
             self.objUiSpellsPower.fillUnit = Rpg.character.spells.powerUnit;
-            self.visible = self.objUiSpellsPower.fillUnit > 0 && self.objUiSpellsPower.fillUnit < 1;
+            self.visible = self.objUiSpellsPower.fillUnit > 0
+                && self.objUiSpellsPower.fillUnit < 1
+                && Rpg.character.spells.anyEquipped;
             if (!self.visible) {
                 return;
             }

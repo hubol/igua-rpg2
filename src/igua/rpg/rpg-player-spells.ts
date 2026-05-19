@@ -5,12 +5,24 @@ import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 
 export class RpgPlayerSpells {
     private readonly _equippableSpells: RpgPlayerSpells.EquippableSpells;
+    private readonly _equippableSpellsList: RpgPlayerSpell[];
 
     constructor(
         private readonly _state: RpgPlayerSpells.State,
         private readonly _buffs: RpgPlayerAggregatedBuffs,
     ) {
         this._equippableSpells = createEquippableSpells(this._buffs);
+        this._equippableSpellsList = Object.values(this._equippableSpells);
+    }
+
+    get anyEquipped() {
+        for (let i = 0; i < this._equippableSpellsList.length; i++) {
+            if (this._equippableSpellsList[i].isEquipped) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     cast() {
