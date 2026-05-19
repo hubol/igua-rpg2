@@ -7,11 +7,15 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { Null } from "../../lib/types/null";
+import { ZIndex } from "../core/scene/z-index";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnInteract } from "../mixins/mxn-interact";
+import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { objCharacterFlopQuizMaster } from "../objects/characters/obj-character-flop-quiz-master";
+import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
 import { objFigureFlop } from "../objects/figures/obj-figure-flop";
+import { RpgAttack } from "../rpg/rpg-attack";
 
 export function scnIndianaHallFlopMemory() {
     Lvl.Dummy();
@@ -23,6 +27,7 @@ export function scnIndianaHallFlopMemory() {
             while (true) {
                 const number = picker.next();
                 const testObj = objFlopMemoryTest(number)
+                    .zIndexed(ZIndex.BackgroundEntities)
                     .at(100, 180)
                     .show();
                 yield () => testObj.destroyed;
@@ -57,12 +62,21 @@ class MutateFlopNumberPicker {
     }
 }
 
+const atkIncorrect = RpgAttack.create({
+    physical: 70,
+    conditions: {
+        poison: {
+            value: 100,
+        },
+    },
+});
+
 function objFlopMemoryTest(dexNumberZeroIndexed: Integer) {
     return container()
         .coro(function* (self) {
             const sourceFigureObj = objFigureFlop(dexNumberZeroIndexed)
                 .scaled(2, 2)
-                .at(50, -50)
+                .at(150, -50)
                 .show(self);
             const alphaFilter = new AlphaFilter(0);
             sourceFigureObj.filters = [sourceFigureObj.objects.filter, alphaFilter];
@@ -77,18 +91,24 @@ function objFlopMemoryTest(dexNumberZeroIndexed: Integer) {
 
             objMutantFlops(dexNumberZeroIndexed, 4)
                 .handles("objMutantFlops:correct", () => {
-                    Cutscene.play(function* () {
-                        yield* show("Correct!");
-                        self.destroy();
-                    });
+                    self.coro(
+                        function* () {
+                            yield Cutscene.play(function* () {
+                                yield* show("Correct!");
+                            }).done;
+                            self.destroy();
+                        },
+                    );
                 })
-                .handles("objMutantFlops:incorrect", () => {
-                    Cutscene.play(function* () {
-                        Sfx.Interact.Error.play();
-                        yield* show("WRONG!!!!!!!!!!");
-                        self.destroy();
-                    });
+                .handles("objMutantFlops:incorrect", (_, flopObj) => {
+                    Sfx.Interact.Error.play();
+                    objFxFieryBurst170px()
+                        .at(flopObj.getWorldCenter())
+                        .mixin(mxnRpgAttack, { attack: atkIncorrect })
+                        .show();
+                    flopObj.destroy();
                 })
+                .at(0, -10)
                 .show(self);
         });
 }
@@ -96,17 +116,17 @@ function objFlopMemoryTest(dexNumberZeroIndexed: Integer) {
 function objMutantFlops(dexNumberZeroIndexed: Integer, mutantsCount: Integer) {
     return container()
         .dispatches<"objMutantFlops:correct">()
-        .dispatches<"objMutantFlops:incorrect">()
+        .dispatchesValue<"objMutantFlops:incorrect", DisplayObject>()
         .coro(function* (self) {
             const sourceFigureObj = objFigureFlop(dexNumberZeroIndexed)
                 .mixin(mxnInteract, () => self.dispatch("objMutantFlops:correct"));
             sourceFigureObj.filtered(sourceFigureObj.objects.filter);
 
             const mutantFigureObjs = createMutantFlopObjs(dexNumberZeroIndexed, mutantsCount)
-                .map(obj => obj.mixin(mxnInteract, () => self.dispatch("objMutantFlops:incorrect")));
+                .map(obj => obj.mixin(mxnInteract, () => self.dispatch("objMutantFlops:incorrect", obj)));
 
             Rng.shuffle([sourceFigureObj, ...mutantFigureObjs])
-                .map((obj, i) => obj.at(i * 60, 0).show(self));
+                .map((obj, i) => obj.at(i * 74, 0).show(self));
         });
 }
 
