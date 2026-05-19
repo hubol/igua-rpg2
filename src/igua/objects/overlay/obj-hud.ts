@@ -37,6 +37,7 @@ import { objBuildUpBar } from "./obj-build-up-bar";
 import { objFlopCollectionIndicator } from "./obj-flop-collection-indicator";
 import { objHealthBar } from "./obj-health-bar";
 import { objUiDelta } from "./obj-ui-delta";
+import { objUiSpellsPower } from "./obj-ui-spells-power";
 import { objUiSubdividedBar } from "./obj-ui-subdivided-bar";
 
 const Consts = {
@@ -72,6 +73,7 @@ export function objHud() {
 
     return container(
         objCutsceneLetterbox(),
+        objUiPlayerSpellsPower(),
         container(healthBarObj, statusObjsContainer).at(3, 3),
         objInteractIndicator(),
         objExperienceIndicator(),
@@ -111,6 +113,21 @@ export function objHud() {
                 self.visible = !playerObj.destroyed;
             }
             self.effectiveHeight = self.visible ? self.y + lastVisibleObj.y + lastVisibleObj.height : 0;
+        });
+}
+
+function objUiPlayerSpellsPower() {
+    return objUiSpellsPower()
+        .pivoted(10, 14)
+        .step(self => {
+            self.objUiSpellsPower.fillUnit = Rpg.character.spells.powerUnit;
+            self.visible = self.objUiSpellsPower.fillUnit > 0 && self.objUiSpellsPower.fillUnit < 1;
+            if (!self.visible) {
+                return;
+            }
+            self
+                .at(playerObj.mxnHead.obj.getBounds(false, r))
+                .add(14, -3);
         });
 }
 
