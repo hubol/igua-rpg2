@@ -21,6 +21,7 @@ interface MxnEnemyArgs {
 }
 
 export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
+    obj.cullable = true;
     const { status, loot } = clone(args.rank);
 
     const died = (attacker: RpgStatus.Model | null) => {
