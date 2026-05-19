@@ -91,6 +91,8 @@ export namespace RpgStatus {
         };
     }
 
+    export type ConditionId = keyof Model["conditions"];
+
     export interface Ballon {
         health: Integer;
         healthMax: Integer;

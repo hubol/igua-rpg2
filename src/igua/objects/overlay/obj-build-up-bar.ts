@@ -61,4 +61,10 @@ objBuildUpBar.tints = {
         tintDecrease: 0xff8800,
         tintIncrease: 0xfcff3b,
     },
+    Poison: {
+        tintBack: 0x003000,
+        tintFront: 0x008000,
+        tintIncrease: 0x00ff00,
+        tintDecrease: 0x003000,
+    },
 } satisfies Record<string, objBuildUpBar.Tints>;

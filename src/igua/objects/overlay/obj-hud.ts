@@ -644,7 +644,7 @@ function objPoisonBuildUp() {
     return objConditionBuildUp({
         message: "Poison is building...",
         conditionsKey: "poison",
-        tints: BuildUpTints.Default,
+        tints: BuildUpTints.Poison,
     });
 }
 
@@ -660,10 +660,7 @@ function objOverheatBuildUp() {
     return objConditionBuildUp({
         message: "You are overheating!",
         conditionsKey: "overheat",
-        tints: {
-            ...objBuildUpBar.tints.Overheat,
-            tintMessage: 0xffe600,
-        },
+        tints: BuildUpTints.Overheat,
     });
 }
 
@@ -686,6 +683,16 @@ interface BuildUpTints extends objBuildUpBar.Tints {
 namespace BuildUpTints {
     export const Default: BuildUpTints = {
         ...objBuildUpBar.tints.Default,
+        tintMessage: Consts.StatusTextTint,
+    };
+
+    export const Overheat: BuildUpTints = {
+        ...objBuildUpBar.tints.Overheat,
+        tintMessage: 0xffe600,
+    };
+
+    export const Poison: BuildUpTints = {
+        ...objBuildUpBar.tints.Poison,
         tintMessage: Consts.StatusTextTint,
     };
 }

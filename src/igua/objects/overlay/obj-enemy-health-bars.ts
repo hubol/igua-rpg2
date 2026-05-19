@@ -25,7 +25,10 @@ export function objEnemyHealthBars() {
         };
 
         c.coro(function* () {
-            yield () => status.conditions.overheat.value > 0 || obj.destroyed;
+            yield () =>
+                status.conditions.overheat.value > 0
+                || status.conditions.poison.value > 0
+                || obj.destroyed;
             if (!obj.destroyed) {
                 ensureHealthBarObj(false);
             }
@@ -73,17 +76,13 @@ function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model, healthVi
         healthBarObj.stepsSinceChange = 60;
     }
 
-    const overheatBarObj = objBuildUpBar({
-        width: 32,
-        height: 2,
-        get max() {
-            return status.conditions.overheat.max;
-        },
-        get value() {
-            return status.conditions.overheat.value;
-        },
-        tints: objBuildUpBar.tints.Overheat,
-    });
+    const overheatBarObj = objEnemyBuildUpBar(status, "overheat", objBuildUpBar.tints.Overheat);
+    const poisonBarObj = objEnemyBuildUpBar(status, "poison", objBuildUpBar.tints.Poison);
+
+    const buildUpBarObjs = [
+        poisonBarObj,
+        overheatBarObj,
+    ];
 
     function updateEnemyWorldPosition() {
         if (!obj.destroyed) {
@@ -94,8 +93,18 @@ function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model, healthVi
 
     updateEnemyWorldPosition();
 
-    return container(healthBarObj, overheatBarObj.at(0, -3))
+    return container(healthBarObj, ...buildUpBarObjs)
         .step(self => {
+            let buildUpBarY = -3;
+
+            for (let i = 0; i < buildUpBarObjs.length; i++) {
+                const barObj = buildUpBarObjs[i];
+                if (barObj.visible) {
+                    barObj.y = buildUpBarY;
+                    buildUpBarY -= 3;
+                }
+            }
+
             // TODO should be a cuter in/out animation
             healthBarObj.visible = healthBarObj.stepsSinceChange < 60;
             if (!healthBarObj.visible && obj.destroyed) {
@@ -126,3 +135,21 @@ function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model, healthVi
 
 type ObjEnemyHealthBar = ReturnType<typeof objEnemyHealthBar>;
 export type ObjEnemyHealthBars = ReturnType<typeof objEnemyHealthBars>;
+
+function objEnemyBuildUpBar(
+    status: RpgStatus.Model,
+    conditionId: RpgStatus.ConditionId,
+    tints: objBuildUpBar.Tints,
+) {
+    return objBuildUpBar({
+        width: 32,
+        height: 2,
+        get max() {
+            return status.conditions[conditionId].max;
+        },
+        get value() {
+            return status.conditions[conditionId].value;
+        },
+        tints,
+    });
+}
