@@ -10,6 +10,7 @@ import { Null } from "../../lib/types/null";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnInteract } from "../mixins/mxn-interact";
+import { objCharacterFlopQuizMaster } from "../objects/characters/obj-character-flop-quiz-master";
 import { objFigureFlop } from "../objects/figures/obj-figure-flop";
 
 export function scnIndianaHallFlopMemory() {
@@ -27,6 +28,10 @@ export function scnIndianaHallFlopMemory() {
                 yield () => testObj.destroyed;
             }
         });
+
+    objCharacterFlopQuizMaster()
+        .at(250, 280)
+        .show();
 }
 
 class MutateFlopNumberPicker {
