@@ -15,20 +15,26 @@ export namespace DataSpell {
         {
             HotPineCone: {
                 name: "Hot Pine Cone",
-                attackProvider: (ref) =>
-                    RpgAttack.create({
-                        versus: RpgFaction.Anyone,
-                        conditions: {
-                            overheat: {
-                                get value() {
-                                    return Math.floor((ref.level) / 3) + 1;
-                                },
-                                get damage() {
-                                    return 30 + (ref.level - 1) * 20;
+                attackProvider: (() => {
+                    const values = [0, 1, 1, 2, 2, 2, 3];
+                    const damage = [0, 30, 50, 50];
+
+                    return (ref) =>
+                        RpgAttack.create({
+                            versus: RpgFaction.Anyone,
+                            conditions: {
+                                overheat: {
+                                    get value() {
+                                        return values[ref.level] ?? values.last;
+                                    },
+                                    get damage() {
+                                        return damage[ref.level]
+                                            ?? (damage.last + 5 * (ref.level - (damage.length - 1)));
+                                    },
                                 },
                             },
-                        },
-                    }),
+                        });
+                })(),
             },
             __Fallback__: {
                 name: "???",

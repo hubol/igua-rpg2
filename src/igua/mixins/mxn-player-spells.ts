@@ -27,7 +27,7 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
                 objProjectileHotPineCone({
                     attack: equippableSpells.HotPineCone.attack,
                     attacker,
-                    destroyAfterStepsCount: 200,
+                    destroyAfterStepsCount: 180,
                 })
                     .at(position)
                     .show()
