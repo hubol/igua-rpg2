@@ -235,6 +235,7 @@ const getBuffInformations = (function () {
             "benefit_when_positive",
         ),
         ...DataSpell.Ids.map(spellId => spellBuff(spellId)),
+        buff("combat.spells.maxPower", "Max EmoP", "integer", "benefit_when_negative"),
         buff("loot.pocket.bonusChance", "Pocket Bonus Chance", "percent", "benefit_when_positive"),
         buff("loot.tiers.nothingRerollCount", "Re-Roll Empty Loot", "integer", "benefit_when_positive"),
         buff("loot.valuables.bonus", "Valuable Bonus", "integer", "benefit_when_positive"),

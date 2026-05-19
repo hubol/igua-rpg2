@@ -46,8 +46,7 @@ export class RpgPlayerSpells {
     }
 
     get maxPower() {
-        // TODO derived from attributes, buffs
-        return 100;
+        return this._buffs.getAggregatedBuffs().combat.spells.maxPower;
     }
 
     static createState(): RpgPlayerSpells.State {

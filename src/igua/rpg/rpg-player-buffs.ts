@@ -46,6 +46,7 @@ export namespace RpgPlayerBuffs {
                     equipped: {
                         HotPineCone: 0,
                     } satisfies Record<DataSpell.Id, Integer>,
+                    maxPower: 0,
                 },
             },
             conditions: {

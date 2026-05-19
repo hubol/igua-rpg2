@@ -296,6 +296,7 @@ export namespace DataEquipment {
                 description: "Chuck hot, hot pine cones onto flat surfaces.",
                 buffs: (model, bonus) => {
                     model.combat.spells.equipped.HotPineCone += 1 + bonus;
+                    model.combat.spells.maxPower += 100;
                 },
             },
             __Fallback__: {
