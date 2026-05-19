@@ -70,7 +70,7 @@ function objFlopMemoryTest(dexNumberZeroIndexed: Integer) {
 
             sourceFigureObj.destroy();
 
-            objMutantFlops(dexNumberZeroIndexed, 3)
+            objMutantFlops(dexNumberZeroIndexed, 4)
                 .handles("objMutantFlops:correct", () => {
                     Cutscene.play(function* () {
                         yield* show("Correct!");
@@ -108,11 +108,20 @@ function objMutantFlops(dexNumberZeroIndexed: Integer, mutantsCount: Integer) {
 function createMutantFlopObjs(dexNumberZeroIndexed: Integer, mutantsCount: Integer) {
     const flopObjs = new Array<DisplayObject>();
 
+    const mutantBaseArgs = objFigureFlop.getMutatedPrimitveFlopArgsFromDexNumber(
+        Rng,
+        dexNumberZeroIndexed,
+        Rng.intc(1, 3),
+    );
+
     const mutantJsons = new Set<string>();
     for (let i = 0; i < mutantsCount; i++) {
         let mutantArgs = Null<objFigureFlop.PrimitiveFlopArgs>();
         while (mutantArgs === null || mutantJsons.has(JSON.stringify(mutantArgs))) {
-            mutantArgs = objFigureFlop.getMutatedPrimitveFlopArgs(Rng, dexNumberZeroIndexed, 1 + i);
+            const intensity = 1 + i;
+            mutantArgs = Rng.bool()
+                ? objFigureFlop.getMutatedPrimitveFlopArgsFromDexNumber(Rng, dexNumberZeroIndexed, intensity)
+                : objFigureFlop.getMutatedPrimitveFlopArgs(Rng, mutantBaseArgs, intensity);
         }
 
         mutantJsons.add(JSON.stringify(mutantArgs));

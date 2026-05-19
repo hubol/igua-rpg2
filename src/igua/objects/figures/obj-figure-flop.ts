@@ -43,13 +43,21 @@ objFigureFlop.getPrimitiveArgsFromDexNumber = function getPrimitiveArgsFromDexNu
     return getPrimitiveArgsFromFlopSeed(flopDexSeeds[dexNumberZeroIndexed] ?? -1);
 };
 
-objFigureFlop.getMutatedPrimitveFlopArgs = function (
+objFigureFlop.getMutatedPrimitveFlopArgsFromDexNumber = function (
     rng: typeof Rng,
     dexNumberZeroIndexed: Integer,
     intensity: Integer,
 ): objFigureFlop.PrimitiveFlopArgs {
     const primitiveArgs = getPrimitiveArgsFromFlopSeed(flopDexSeeds[dexNumberZeroIndexed] ?? -1);
-    const mutantPrimitiveArgs = getPrimitiveArgsFromFlopSeed(flopDexSeeds[dexNumberZeroIndexed] ?? -1);
+    return objFigureFlop.getMutatedPrimitveFlopArgs(rng, primitiveArgs, intensity);
+};
+
+objFigureFlop.getMutatedPrimitveFlopArgs = function (
+    rng: typeof Rng,
+    primitiveArgs: objFigureFlop.PrimitiveFlopArgs,
+    intensity: Integer,
+): objFigureFlop.PrimitiveFlopArgs {
+    const mutantPrimitiveArgs = clone(primitiveArgs);
 
     const mutateIndices = rng.shuffle(range(8));
 
