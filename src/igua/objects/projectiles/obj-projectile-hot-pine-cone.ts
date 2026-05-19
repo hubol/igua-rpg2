@@ -2,6 +2,7 @@ import { Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { interpc } from "../../../lib/game-engine/routines/interp";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
+import { Integer } from "../../../lib/math/number-alias-types";
 import { ZIndex } from "../../core/scene/z-index";
 import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
 import { mxnPhysics } from "../../mixins/mxn-physics";
@@ -21,7 +22,11 @@ const atkBurn = RpgAttack.create({
     versus: RpgFaction.Anyone,
 });
 
-export function objProjectileHotPineCone(args: Partial<MxnRpgAttackArgs> = {}) {
+interface ObjProjectileHotPineConeArgs extends Partial<MxnRpgAttackArgs> {
+    destroyAfterStepsCount?: Integer;
+}
+
+export function objProjectileHotPineCone(args: ObjProjectileHotPineConeArgs = {}) {
     let spawned = false;
 
     return Sprite.from(Tx.Effects.HotPineCone)
@@ -41,7 +46,7 @@ export function objProjectileHotPineCone(args: Partial<MxnRpgAttackArgs> = {}) {
                 )
                     .at(self)
                     .zIndexed(ZIndex.TerrainDecals)
-                    .mixin(mxnDestroyAfterSteps, 3 * 60)
+                    .mixin(mxnDestroyAfterSteps, args.destroyAfterStepsCount ?? 3 * 60)
                     .show();
 
                 objFxFizzle()

@@ -21,7 +21,7 @@ export namespace DataSpell {
                         conditions: {
                             overheat: {
                                 get value() {
-                                    return Math.floor(ref.level + 1);
+                                    return Math.floor((ref.level) / 3) + 1;
                                 },
                                 get damage() {
                                     return 30 + (ref.level - 1) * 20;

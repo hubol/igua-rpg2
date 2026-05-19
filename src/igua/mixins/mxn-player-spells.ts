@@ -24,7 +24,11 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
             const attacker = playerObj.status;
 
             if (equippableSpells.HotPineCone.isEquipped) {
-                objProjectileHotPineCone({ attack: equippableSpells.HotPineCone.attack, attacker })
+                objProjectileHotPineCone({
+                    attack: equippableSpells.HotPineCone.attack,
+                    attacker,
+                    destroyAfterStepsCount: 200,
+                })
                     .at(position)
                     .show()
                     .speed.at(horizontalSpeed, -3);
