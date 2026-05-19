@@ -1,13 +1,14 @@
 import { AlphaFilter, DisplayObject } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Sfx } from "../../assets/sounds";
-import { interp } from "../../lib/game-engine/routines/interp";
+import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { Null } from "../../lib/types/null";
 import { ZIndex } from "../core/scene/z-index";
+import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnInteract } from "../mixins/mxn-interact";
@@ -15,6 +16,7 @@ import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { objCharacterFlopQuizMaster } from "../objects/characters/obj-character-flop-quiz-master";
 import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
 import { objFigureFlop } from "../objects/figures/obj-figure-flop";
+import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
 
 export function scnIndianaHallFlopMemory() {
@@ -24,18 +26,48 @@ export function scnIndianaHallFlopMemory() {
 
     scene.stage
         .coro(function* () {
-            while (true) {
+            yield sleep(500);
+            yield interpvr(quizMasterObj).translate(0, -100).over(3000);
+
+            yield sleep(2000);
+
+            yield Cutscene.play(
+                function* () {
+                    yield* show(
+                        "Oh hey.",
+                        "I'm the flop king.",
+                        "Please remember the Flops that I show you.",
+                        "Pick correctly 5 times.",
+                    );
+                },
+                { speaker: quizMasterObj },
+            ).done;
+
+            for (let i = 0; i < 5; i++) {
                 const number = picker.next();
-                const testObj = objFlopMemoryTest(number)
+                const testObj = objFlopMemoryTest(number, quizMasterObj)
                     .zIndexed(ZIndex.BackgroundEntities)
                     .at(100, 180)
                     .show();
                 yield () => testObj.destroyed;
             }
+
+            yield sleep(1000);
+
+            yield Cutscene.play(
+                function* () {
+                    yield* show(
+                        "Good job!!!",
+                    );
+                },
+                { speaker: quizMasterObj },
+            ).done;
+
+            yield* DramaHallOfDoors.complete(Rpg.microcosms["Indiana.HallOfDoors"], 1);
         });
 
-    objCharacterFlopQuizMaster()
-        .at(250, 280)
+    const quizMasterObj = objCharacterFlopQuizMaster()
+        .at(250, 380)
         .show();
 }
 
@@ -71,7 +103,7 @@ const atkIncorrect = RpgAttack.create({
     },
 });
 
-function objFlopMemoryTest(dexNumberZeroIndexed: Integer) {
+function objFlopMemoryTest(dexNumberZeroIndexed: Integer, speakerObj: DisplayObject) {
     return container()
         .coro(function* (self) {
             const sourceFigureObj = objFigureFlop(dexNumberZeroIndexed)
@@ -93,9 +125,12 @@ function objFlopMemoryTest(dexNumberZeroIndexed: Integer) {
                 .handles("objMutantFlops:correct", () => {
                     self.coro(
                         function* () {
-                            yield Cutscene.play(function* () {
-                                yield* show("Correct!");
-                            }).done;
+                            yield Cutscene.play(
+                                function* () {
+                                    yield* show("Correct!");
+                                },
+                                { speaker: speakerObj },
+                            ).done;
                             self.destroy();
                         },
                     );

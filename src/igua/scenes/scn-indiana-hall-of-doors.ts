@@ -10,4 +10,5 @@ export function scnIndianaHallOfDoors() {
     const lvl = Lvl.IndianaHallOfDoors();
     const cosmHallOfDoors = Rpg.microcosms["Indiana.HallOfDoors"];
     lvl.MagicDoor0.mixin(mxnDoorHallEmpty, cosmHallOfDoors, 0);
+    lvl.MagicDoor1.mixin(mxnDoorHallEmpty, cosmHallOfDoors, 1);
 }
