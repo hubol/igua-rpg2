@@ -299,6 +299,22 @@ export namespace DataEquipment {
                     model.combat.spells.maxPower += 100;
                 },
             },
+            MeleeOverheat: {
+                name: "Hot Sock",
+                texture: null,
+                description: "Warming sock. Melee attacks cause enemies to overheat.",
+                buffs: (() => {
+                    const values = [20, 35, 45, 50];
+                    const damages = [25, 40, 60];
+
+                    return (model, bonus) => {
+                        model.combat.melee.conditions.overheat.value += (values[bonus] ?? values.last)
+                            + Math.max(0, bonus - values.length) * 3;
+                        model.combat.melee.conditions.overheat.damage += (damages[bonus] ?? damages.last)
+                            + Math.max(0, bonus - damages.length) * 10;
+                    };
+                })(),
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,

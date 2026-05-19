@@ -48,13 +48,11 @@ export class RpgPlayer {
 
         return RpgAttack.create({
             conditions: {
-                poison: {
-                    get value() {
-                        return player.buffs.combat.melee.conditions.poison.value;
-                    },
-                    get maxLevel() {
-                        return player.buffs.combat.melee.conditions.poison.maxLevel;
-                    },
+                get overheat() {
+                    return player.buffs.combat.melee.conditions.overheat;
+                },
+                get poison() {
+                    return player.buffs.combat.melee.conditions.poison;
                 },
             },
             emotional: 0,
@@ -77,6 +75,9 @@ export class RpgPlayer {
 
         return RpgAttack.create({
             conditions: {
+                get overheat() {
+                    return player.buffs.combat.melee.conditions.overheat;
+                },
                 get poison() {
                     return player.buffs.combat.melee.conditions.poison;
                 },
@@ -102,6 +103,9 @@ export class RpgPlayer {
 
         return RpgAttack.create({
             conditions: {
+                get overheat() {
+                    return player.buffs.combat.melee.conditions.overheat;
+                },
                 get poison() {
                     return player.meleeClawAttack.conditions.poison;
                 },

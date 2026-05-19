@@ -30,6 +30,10 @@ export namespace RpgPlayerBuffs {
                         physical: 0,
                     },
                     conditions: {
+                        overheat: {
+                            value: 0,
+                            damage: 0,
+                        },
                         poison: {
                             value: 0,
                             maxLevel: 0,

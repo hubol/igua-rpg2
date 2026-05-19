@@ -224,13 +224,25 @@ const getBuffInformations = (function () {
         buff("combat.melee.clawAttack.physical", "Claw Phys ATK", "integer", "benefit_when_positive"),
         buff(
             "combat.melee.conditions.poison.value",
-            "Melee ATK Poison (Buildup)",
+            "Melee ATK Poison (BuildUp)",
             "integer",
             "benefit_when_positive",
         ),
         buff(
             "combat.melee.conditions.poison.maxLevel",
             "Melee ATK Poison (Max)",
+            "integer",
+            "benefit_when_positive",
+        ),
+        buff(
+            "combat.melee.conditions.overheat.value",
+            "Melee ATK Overheat (BuildUp)",
+            "integer",
+            "benefit_when_positive",
+        ),
+        buff(
+            "combat.melee.conditions.overheat.damage",
+            "Melee ATK Overheat (Damage)",
             "integer",
             "benefit_when_positive",
         ),
