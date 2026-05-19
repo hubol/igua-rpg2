@@ -204,6 +204,11 @@ const ranks = {
         },
         status: {
             healthMax: 250,
+            conditions: {
+                overheat: {
+                    max: 999,
+                },
+            },
             defenses: {
                 physical: 100,
             },
