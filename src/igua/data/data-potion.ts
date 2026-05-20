@@ -106,7 +106,7 @@ export namespace DataPotion {
             },
             Wetness: {
                 name: "TheWetter",
-                description: "Celebrated beverage. Become drenched.",
+                description: "Celebrated beverage. Become cool and drenched.",
                 stinkLineTint: 0x2149FF,
                 texture: Tx.Collectibles.Potion.Wetness,
                 sound: Sfx.Effect.Potion.Wetness,
@@ -336,6 +336,8 @@ export namespace DataPotion {
                 target.damage(atkBallon);
                 return;
             case "Wetness":
+                // TODO why isn't this in the attack?
+                target.status.conditions.overheat.value = 0;
                 target.damage(atkWetness);
                 return;
             case "ForgetLooseValuableCollection":
