@@ -3,27 +3,38 @@ import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Tx } from "../../assets/textures";
 import { holdf } from "../../lib/game-engine/routines/hold";
-import { interp } from "../../lib/game-engine/routines/interp";
+import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
+import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
+import { ask, show } from "../drama/show";
 import { scene } from "../globals";
+import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { playerObj } from "../objects/obj-player";
 import { objUiAcceptableRange } from "../objects/overlay/obj-ui-acceptable-range";
 import { StepOrder } from "../objects/step-order";
 import { Rpg } from "../rpg/rpg";
 
 export function scnIndianaHallPainting() {
-    Lvl.IndianaHallPainting();
+    const lvl = Lvl.IndianaHallPainting();
 
     const paintingObj = objPainting()
         .at(100, 100)
         .zIndexed(ZIndex.BackgroundEntities)
         .show();
 
-    scene.stage
+    let dramaPainterCutscene = function* () {
+        yield sleep(0);
+    };
+
+    lvl.PainterNpc
+        .mixin(mxnCutscene, function* () {
+            yield* dramaPainterCutscene();
+        })
         .coro(function* () {
             const pickedColorRef = {
                 pickedColor: pickColor(null),
@@ -32,18 +43,61 @@ export function scnIndianaHallPainting() {
             const pickedColorObj = objPickedColor(pickedColorRef)
                 .at(300, 70)
                 .step(self => self.x = playerObj.x, StepOrder.AfterPhysics)
-                .zIndexed(ZIndex.Entities)
-                .show();
+                .zIndexed(ZIndex.Entities);
 
-            for (let i = 0; i < txsPaintingLayer.length; i++) {
-                if (i > 0) {
-                    pickedColorRef.pickedColor = pickColor(pickedColorRef.pickedColor);
+            const dramaCheckPaint = function* () {
+                if (pickedColorObj.objPickedColor.isCorrect) {
+                    yield* show("Hey! You did it!");
+                    playerObj.status.conditions.wetness.value = 0;
+                    paintingObj.objPainting.addPaintLayer(pickedColorRef.pickedColor.color);
+                    yield sleep(1500);
+                    if (paintingObj.objPainting.isComplete) {
+                        yield* dramaComplete();
+                    }
+                    else {
+                        yield* show("OK! Time for the next color.");
+                        pickedColorRef.pickedColor = pickColor(pickedColorRef.pickedColor);
+                    }
+                    return;
                 }
-                yield holdf(() => pickedColorObj.objPickedColor.isCorrect, 30);
-                paintingObj.objPainting.addPaintLayer(pickedColorRef.pickedColor.color);
-            }
 
-            pickedColorObj.destroy();
+                yield* show("It looks like you are not done mixing paint.");
+                const result = yield* ask("Do you need something?", "Never mind.", "Get me out of here!");
+                if (result === 0) {
+                    yield* show("OK! Get mixin'!");
+                }
+                else {
+                    // TODO return to hall
+                }
+            };
+
+            const dramaComplete = function* () {
+                yield* show("Well, it's all done.");
+                const result = yield* ask("What do you think?", "It's great!", "Not so good...");
+                if (result === 0) {
+                    yield* show("Cool.");
+                }
+                else {
+                    yield* show("I appreciate your honesty.");
+                    // TODO tiny gift
+                }
+                yield* DramaHallOfDoors.complete(Rpg.microcosms["Indiana.HallOfDoors"], 2);
+            };
+
+            dramaPainterCutscene = function* () {
+                yield* show(
+                    "I'm an artist.",
+                    "But it's a huge distraction for me to mix my own paint.",
+                    "I need you to do it for me!",
+                );
+
+                pickedColorObj.pivoted(0, 150).show();
+                yield interpvr(pickedColorObj.pivot).factor(factor.sine).to(0, 0).over(3000);
+
+                yield* show("Please mix that color for me.");
+
+                dramaPainterCutscene = dramaCheckPaint;
+            };
         });
 }
 
@@ -192,6 +246,9 @@ function objPainting() {
     const paintTints = new Array<RgbInt>();
 
     const api = {
+        get isComplete() {
+            return paintTints.length >= txsPaintingLayer.length;
+        },
         addPaintLayer(color: RgbInt) {
             paintTints.push(color);
         },
