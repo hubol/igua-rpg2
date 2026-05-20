@@ -1,6 +1,5 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
-import { Instances } from "../../lib/game-engine/instances";
 import { Jukebox } from "../core/igua-audio";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaWallet } from "../drama/drama-wallet";
@@ -85,9 +84,7 @@ function enrichEmoBallista(lvl: LvlType.ColosseumMiffed) {
                 rpgBallista.bolts += count;
             }
 
-            for (const spawnerObj of Instances(objCollectiblePocketItemSpawner)) {
-                spawnerObj.spawn();
-            }
+            objCollectiblePocketItemSpawner.spawnAll();
 
             if (rpgBallista.bolts === 0) {
                 yield* show("No bolts. Look west.");

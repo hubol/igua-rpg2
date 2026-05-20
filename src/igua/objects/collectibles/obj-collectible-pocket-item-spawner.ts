@@ -1,3 +1,4 @@
+import { Instances } from "../../../lib/game-engine/instances";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { SceneLocal } from "../../../lib/game-engine/scene-local";
 import { VectorSimple } from "../../../lib/math/vector-type";
@@ -57,3 +58,9 @@ export function objCollectiblePocketItemSpawner(
 
     return spawnerObj;
 }
+
+objCollectiblePocketItemSpawner.spawnAll = function spawnAll () {
+    for (const spawnerObj of Instances(objCollectiblePocketItemSpawner)) {
+        spawnerObj.spawn();
+    }
+};

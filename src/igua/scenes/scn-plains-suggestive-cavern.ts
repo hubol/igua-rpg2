@@ -11,7 +11,7 @@ import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnShadowFloor } from "../mixins/mxn-shadow-floor";
 import { objCharacterSimpleBot } from "../objects/characters/obj-character-simple-bot";
-import { CtxPocketItems } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
+import { CtxPocketItems, objCollectiblePocketItemSpawner } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 import { Rpg } from "../rpg/rpg";
 
@@ -96,6 +96,17 @@ function enrichSimpleBot(lvl: LvlType.PlainsSuggestiveCavern) {
             if (!reward || reward.isExtended) {
                 yield* show("I already had enough of that. But thanks!");
             }
+            else if (Rpg.quest(questId).peekCompletionReward()) {
+                yield* show(
+                    "Thanks!",
+                    "Can I have another?",
+                );
+            }
+            else {
+                yield* show("Yaaay! I'm so happy!");
+            }
+
+            objCollectiblePocketItemSpawner.spawnAll();
         })
         .step(self => {
             self.objCharacterSimpleBot.wigVisible = botCosm.hairClumpsCount > 0;
