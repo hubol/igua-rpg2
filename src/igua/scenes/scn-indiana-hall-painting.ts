@@ -2,7 +2,6 @@ import { Graphics, Sprite, TilingSprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Tx } from "../../assets/textures";
-import { holdf } from "../../lib/game-engine/routines/hold";
 import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
@@ -12,7 +11,6 @@ import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { ask, show } from "../drama/show";
-import { scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { playerObj } from "../objects/obj-player";
 import { objUiAcceptableRange } from "../objects/overlay/obj-ui-acceptable-range";
@@ -23,7 +21,7 @@ export function scnIndianaHallPainting() {
     const lvl = Lvl.IndianaHallPainting();
 
     const paintingObj = objPainting()
-        .at(100, 100)
+        .at(lvl.PaintingRegion)
         .zIndexed(ZIndex.BackgroundEntities)
         .show();
 

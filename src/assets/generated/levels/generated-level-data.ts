@@ -2701,6 +2701,7 @@ export const Lvl = {
       Puddle_2: e(r["Puddle"], { x: 472, y: 224, width: 56, values: { name: "", depth: 0 }, tint: 0x0000ff }, "FrontEntities"),
       Puddle_3: e(r["Puddle"], { x: 560, y: 224, width: 56, values: { name: "", depth: 0 }, tint: 0xffffff }, "FrontEntities"),
       Puddle_4: e(r["Puddle"], { x: 648, y: 224, width: 56, values: { name: "", depth: 0 }, tint: 0x000000 }, "FrontEntities"),
+      PaintingRegion: e(r["Region"], { x: 136, y: 80, width: 158, height: 94, values: { name: "PaintingRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
     };
   },
   IndianaHallSnowman: (): LvlType.IndianaHallSnowman => {
@@ -11825,6 +11826,7 @@ export namespace LvlType {
     Puddle_2: ReturnType<(typeof r)["Puddle"]>;
     Puddle_3: ReturnType<(typeof r)["Puddle"]>;
     Puddle_4: ReturnType<(typeof r)["Puddle"]>;
+    PaintingRegion: ReturnType<(typeof r)["Region"]>;
   };
   export type IndianaHallSnowman = {
     TerrainDistantHills500: Sprite;
