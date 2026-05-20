@@ -315,6 +315,38 @@ export namespace DataEquipment {
                     };
                 })(),
             },
+            OverheatResistance0: {
+                name: "Ice Cube",
+                texture: null,
+                description: "A cool, cool cube. Increases resistance to overheat.",
+                buffs: (model, bonus) => {
+                    model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
+                },
+            },
+            OverheatResistance1: {
+                name: "Aloe Drops",
+                texture: null,
+                description: "Cooling, heavenly drops. Increases resistance to overheat.",
+                buffs: (model, bonus) => {
+                    model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
+                },
+            },
+            OverheatResistance2: {
+                name: "Fishnets",
+                texture: null,
+                description: "Breezy legwear. Increases resistance to overheat.",
+                buffs: (model, bonus) => {
+                    model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
+                },
+            },
+            OverheatResistance3: {
+                name: "Cooling Bandage",
+                texture: null,
+                description: "Medical cooling product. Increases resistance to overheat.",
+                buffs: (model, bonus) => {
+                    model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
+                },
+            },
             __Fallback__: {
                 name: "???",
                 texture: null,

@@ -122,8 +122,11 @@ export class RpgPlayerStatus implements RpgStatus.Model {
                     state.conditions.overheat.value = value;
                 },
                 get max() {
-                    // TODO this seems like enemies should have it too...
-                    return 100 + state.conditions.wetness.value;
+                    return Math.round(
+                        // TODO this seems like enemies should have it too...
+                        (100 + state.conditions.wetness.value)
+                            * (1 + buffs.getAggregatedBuffs().conditions.overheatMaxIncreaseFactor / 100),
+                    );
                 },
             },
         });
