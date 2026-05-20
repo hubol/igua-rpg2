@@ -9,6 +9,7 @@ import { Rng } from "../../lib/math/rng";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
+import { DramaGifts } from "../drama/drama-gifts";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -77,7 +78,10 @@ export function scnIndianaHallPainting() {
                 }
                 else {
                     yield* show("I appreciate your honesty.");
-                    // TODO tiny gift
+                    const gift = Rpg.gift("Indiana.Hall.Painting.Honesty");
+                    if (gift.isGiveable()) {
+                        yield* DramaGifts.give(gift);
+                    }
                 }
                 yield* DramaHallOfDoors.complete(Rpg.microcosms["Indiana.HallOfDoors"], 2);
             };

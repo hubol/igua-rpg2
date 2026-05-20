@@ -45,6 +45,9 @@ export namespace DataGift {
             "Indiana.MagicDoor.3": {
                 item: { kind: "equipment", id: "BlueCrystalSock", level: 1 },
             },
+            "Indiana.Hall.Painting.Honesty": {
+                item: { kind: "potion", id: "AttributeHealthUp" },
+            },
             __Fallback__: {
                 item: { kind: "potion", id: "RestoreHealth" },
             },
