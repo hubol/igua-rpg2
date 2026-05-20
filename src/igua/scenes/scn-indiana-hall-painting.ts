@@ -109,7 +109,7 @@ function objPickedColor(ref: { pickedColor: PickedColor }) {
         container(
             ...rangeObjs.map((obj, i) => obj.at(0, i * 18)),
         )
-            .at(-50, 4),
+            .at(-50, 6),
     )
         .merge({ objPickedColor: api });
 }
