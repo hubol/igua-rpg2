@@ -1,4 +1,5 @@
 import { Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { container } from "../../../lib/pixi/container";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
@@ -24,5 +25,6 @@ export function objCharacterFlopQuizMaster() {
             .at(0, -10),
     )
         .mixin(mxnDetectPlayer)
-        .mixin(mxnSpeaker, { name: "Flop King", tintPrimary: 0xFF7CCF, tintSecondary: 0x000000 });
+        .mixin(mxnSpeaker, { name: "Flop King", tintPrimary: 0xFF7CCF, tintSecondary: 0x000000 })
+        .handles("mxnSpeaker.speakingStarted", (self) => self.play(Sfx.Character.FlopQuizMasterSpeak.rate(0.9, 1.1)));
 }
