@@ -6593,7 +6593,7 @@ export const Lvl = {
       GateVertical_1: e(r["GateVertical"], { x: 1184, y: -80, width: 440, flippedY: true, values: { sceneName: "scnWorldMap", checkpointName: "fromPlainsSuggestiveCavern", name: "", depth: 0 } }, "RegionEntities"),
       OverheatRegion: e(r["OverheatRegion"], { x: 160, y: 632, width: 1656, values: { name: "", depth: 0 }, tint: 0xff0000 }, "RegionEntities"),
       ExitChillEnemyDoorMarker: e(r["Marker"], { x: 2736, y: 562, values: { name: "ExitChillEnemyDoorMarker", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
-      SimpleBotMarker: e(r["Marker"], { x: 1880, y: 632, values: { name: "SimpleBotMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      SimpleBotMarker: e(r["Marker"], { x: 1877, y: 632, values: { name: "SimpleBotMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   PlainsSuggestiveFlopCollector: (): LvlType.PlainsSuggestiveFlopCollector => {
