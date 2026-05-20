@@ -2683,6 +2683,26 @@ export const Lvl = {
       EnvironmentSparkleMarker_6: e(r["EnvironmentSparkleMarker"], { x: 815, y: 245, values: { name: "", depth: 0 } }, "MarkerEntities"),
     };
   },
+  IndianaHallPainting: (): LvlType.IndianaHallPainting => {
+    applyLevel({ width: 792, height: 280, backgroundTint: 0x408000, terrainTint: 0x54290a });
+    return {
+      Block: e(r["Block"], { x: 152, y: 224, width: 640, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 352, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 264, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 440, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 528, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 616, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 704, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 0, y: 208, width: 152, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
+      PainterNpc: e(r["IguanaNpc"], { x: 96, y: 208, flippedX: false, values: { personaName: "IndianaHallPainter", name: "PainterNpc", depth: 0 } }, "CharacterEntities"),
+      Player: e(r["Player"], { x: 224, y: 224, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      Puddle: e(r["Puddle"], { x: 296, y: 224, width: 56, values: { name: "", depth: 0 }, tint: 0xff0000 }, "FrontEntities"),
+      Puddle_1: e(r["Puddle"], { x: 384, y: 224, width: 56, values: { name: "", depth: 0 }, tint: 0xffff00 }, "FrontEntities"),
+      Puddle_2: e(r["Puddle"], { x: 472, y: 224, width: 56, values: { name: "", depth: 0 }, tint: 0x0000ff }, "FrontEntities"),
+      Puddle_3: e(r["Puddle"], { x: 560, y: 224, width: 56, values: { name: "", depth: 0 }, tint: 0xffffff }, "FrontEntities"),
+      Puddle_4: e(r["Puddle"], { x: 648, y: 224, width: 56, values: { name: "", depth: 0 }, tint: 0x000000 }, "FrontEntities"),
+    };
+  },
   IndianaHallSnowman: (): LvlType.IndianaHallSnowman => {
     applyLevel({ width: 808, height: 280, backgroundTint: 0xffd600, terrainTint: 0x720000 });
     return {
@@ -11788,6 +11808,23 @@ export namespace LvlType {
     EnvironmentSparkleMarker_4: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
     EnvironmentSparkleMarker_5: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
     EnvironmentSparkleMarker_6: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+  };
+  export type IndianaHallPainting = {
+    Block: ReturnType<(typeof r)["Block"]>;
+    Block_1: ReturnType<(typeof r)["Block"]>;
+    Block_2: ReturnType<(typeof r)["Block"]>;
+    Block_3: ReturnType<(typeof r)["Block"]>;
+    Block_4: ReturnType<(typeof r)["Block"]>;
+    Block_5: ReturnType<(typeof r)["Block"]>;
+    Block_6: ReturnType<(typeof r)["Block"]>;
+    Block_7: ReturnType<(typeof r)["Block"]>;
+    PainterNpc: ReturnType<(typeof r)["IguanaNpc"]>;
+    Player: ReturnType<(typeof r)["Player"]>;
+    Puddle: ReturnType<(typeof r)["Puddle"]>;
+    Puddle_1: ReturnType<(typeof r)["Puddle"]>;
+    Puddle_2: ReturnType<(typeof r)["Puddle"]>;
+    Puddle_3: ReturnType<(typeof r)["Puddle"]>;
+    Puddle_4: ReturnType<(typeof r)["Puddle"]>;
   };
   export type IndianaHallSnowman = {
     TerrainDistantHills500: Sprite;
