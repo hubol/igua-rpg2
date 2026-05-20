@@ -1,0 +1,61 @@
+import { Graphics, Sprite } from "pixi.js";
+import { Tx } from "../../../assets/textures";
+import { Integer } from "../../../lib/math/number-alias-types";
+import { container } from "../../../lib/pixi/container";
+import { range } from "../../../lib/range";
+
+interface ObjUiAcceptableRangeArgs {
+    max: Integer;
+    range: {
+        /** Implement as getter */
+        min: Integer;
+        /** Implement as getter */
+        max: Integer;
+    };
+    width: Integer;
+    height: Integer;
+    /** Implement as getter */
+    value: Integer | null;
+}
+
+export function objUiAcceptableRange(args: ObjUiAcceptableRangeArgs) {
+    const api = {
+        get isValueInRange() {
+            return args.value !== null && args.value >= args.range.min && args.value <= args.range.max;
+        },
+    };
+
+    return container(
+        new Graphics().beginFill(0xffffff).drawRect(0, 0, args.width, args.height),
+        new Graphics()
+            .step(self => {
+                const x0 = Math.round(Math.max(0, Math.min(args.range.min / args.max, 1)) * args.width);
+                const x1 = Math.round(Math.max(0, Math.min(args.range.max / args.max, 1)) * args.width);
+                self
+                    .clear()
+                    .beginFill(0xbbbbbb)
+                    .drawRect(x0, 0, x1 - x0, args.height);
+            }),
+        new Graphics()
+            .step(self => {
+                self.clear();
+
+                if (args.value === null) {
+                    return;
+                }
+
+                const x = Math.round(Math.max(0, Math.min(args.value / args.max, 1)) * args.width);
+
+                self
+                    .beginFill(0x000000)
+                    .drawRect(x, 0, 1, args.height);
+            }),
+        Sprite.from(Tx.Ui.Checkmark)
+            .tinted(0x00ff00)
+            .pivoted(1, 8)
+            .at(args.width + 2, Math.round(args.height / 2))
+            .invisible()
+            .step(self => self.visible = api.isValueInRange),
+    )
+        .merge({ objUiAcceptableRange: api });
+}
