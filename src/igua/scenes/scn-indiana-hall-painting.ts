@@ -19,6 +19,7 @@ import { StepOrder } from "../objects/step-order";
 import { Rpg } from "../rpg/rpg";
 
 export function scnIndianaHallPainting() {
+    const cosmHallOfDoors = Rpg.microcosms["Indiana.HallOfDoors"];
     const lvl = Lvl.IndianaHallPainting();
 
     const paintingObj = objPainting()
@@ -66,7 +67,7 @@ export function scnIndianaHallPainting() {
                     yield* show("OK! Get mixin'!");
                 }
                 else {
-                    // TODO return to hall
+                    yield* DramaHallOfDoors.returnToHall(cosmHallOfDoors);
                 }
             };
 
@@ -83,7 +84,7 @@ export function scnIndianaHallPainting() {
                         yield* DramaGifts.give(gift);
                     }
                 }
-                yield* DramaHallOfDoors.complete(Rpg.microcosms["Indiana.HallOfDoors"], 2);
+                yield* DramaHallOfDoors.complete(cosmHallOfDoors, 2);
             };
 
             dramaPainterCutscene = function* () {

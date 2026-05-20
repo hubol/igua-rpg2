@@ -9,9 +9,14 @@ function* complete(cosmHallOfDoors: MicrocosmHallOfDoors, index: MicrocosmHallOf
         yield* DramaGifts.give(gift);
     }
     yield sleep(1000);
+    yield* returnToHall(cosmHallOfDoors);
+}
+
+function* returnToHall(cosmHallOfDoors: MicrocosmHallOfDoors) {
     cosmHallOfDoors.homeSceneChanger.changeScene();
 }
 
 export const DramaHallOfDoors = {
     complete,
+    returnToHall,
 };
