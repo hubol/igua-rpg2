@@ -6,6 +6,7 @@ import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
+import { range } from "../../lib/range";
 import { Null } from "../../lib/types/null";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
@@ -95,7 +96,7 @@ class MutateFlopNumberPicker {
 }
 
 const atkIncorrect = RpgAttack.create({
-    physical: 70,
+    physical: 90,
     conditions: {
         poison: {
             value: 100,
@@ -168,20 +169,26 @@ function objMutantFlops(dexNumberZeroIndexed: Integer, mutantsCount: Integer) {
 function createMutantFlopObjs(dexNumberZeroIndexed: Integer, mutantsCount: Integer) {
     const flopObjs = new Array<DisplayObject>();
 
-    const mutantBaseArgs = objFigureFlop.getMutatedPrimitveFlopArgsFromDexNumber(
-        Rng,
-        dexNumberZeroIndexed,
-        Rng.intc(1, 3),
-    );
+    const dexNumberArgs = objFigureFlop.getPrimitiveArgsFromDexNumber(dexNumberZeroIndexed);
+
+    const baseArgs = [
+        dexNumberArgs,
+        ...range(Rng.intc(1, 3))
+            .map(() =>
+                objFigureFlop.getMutatedPrimitveFlopArgs(
+                    Rng,
+                    dexNumberArgs,
+                    Rng.intc(1, 3),
+                )
+            ),
+    ];
 
     const mutantJsons = new Set<string>();
     for (let i = 0; i < mutantsCount; i++) {
         let mutantArgs = Null<objFigureFlop.PrimitiveFlopArgs>();
         while (mutantArgs === null || mutantJsons.has(JSON.stringify(mutantArgs))) {
             const intensity = 1 + i;
-            mutantArgs = Rng.bool()
-                ? objFigureFlop.getMutatedPrimitveFlopArgsFromDexNumber(Rng, dexNumberZeroIndexed, intensity)
-                : objFigureFlop.getMutatedPrimitveFlopArgs(Rng, mutantBaseArgs, intensity);
+            mutantArgs = objFigureFlop.getMutatedPrimitveFlopArgs(Rng, Rng.item(baseArgs), intensity);
         }
 
         mutantJsons.add(JSON.stringify(mutantArgs));
