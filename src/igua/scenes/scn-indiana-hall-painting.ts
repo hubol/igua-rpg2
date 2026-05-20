@@ -1,8 +1,9 @@
 import { Sprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../assets/textures";
+import { holdf } from "../../lib/game-engine/routines/hold";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
-import { PseudoRng, Rng } from "../../lib/math/rng";
+import { Rng } from "../../lib/math/rng";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
@@ -26,7 +27,11 @@ export function scnIndianaHallPainting() {
                 .step(self => self.x = playerObj.x, StepOrder.AfterPhysics)
                 .zIndexed(ZIndex.Entities)
                 .show();
-            // yield () => pickedColorObj.obj
+
+            for (let i = 0; i < 5; i++) {
+                yield holdf(() => pickedColorObj.objPickedColor.isCorrect, 30);
+                pickedColorRef.pickedColor = pickColor(pickedColorRef.pickedColor);
+            }
         });
 }
 
@@ -77,17 +82,24 @@ function objPickedColor(ref: { pickedColor: PickedColor }) {
         },
     });
 
+    const rangeObjs = [hueRangeObj, saturationRangeObj, valueRangeObj];
+
+    const api = {
+        get isCorrect() {
+            return rangeObjs.every(obj => obj.objUiAcceptableRange.isValueInRange);
+        },
+    };
+
     return container(
         Sprite.from(Tx.Ui.LiquidDrip)
             .step(self => self.tint = ref.pickedColor.color)
             .anchored(0.5, 1),
         container(
-            hueRangeObj,
-            saturationRangeObj.at(0, 18),
-            valueRangeObj.at(0, 36),
+            ...rangeObjs.map((obj, i) => obj.at(0, i * 18)),
         )
             .at(-50, 4),
-    );
+    )
+        .merge({ objPickedColor: api });
 }
 
 function getPlayerWetnessHsv() {
@@ -103,8 +115,8 @@ const consts = {
         0x808080,
         0xb0b0b0,
         0x404040,
+        0x7c470a,
         0xff9100,
-        0x1fdd0d,
         0x6d77ff,
         0xa20ddd,
         0xfa5db9,
