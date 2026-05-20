@@ -34,7 +34,7 @@ export function objUiAcceptableRange(args: ObjUiAcceptableRangeArgs) {
                 self
                     .clear()
                     .beginFill(0xbbbbbb)
-                    .drawRect(x0, 0, x1 - x0, args.height);
+                    .drawRect(x0, -1, x1 - x0, args.height + 2);
             }),
         new Graphics()
             .step(self => {

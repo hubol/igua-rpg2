@@ -1,7 +1,9 @@
-import { Sprite } from "pixi.js";
+import { Graphics, Sprite, TilingSprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Tx } from "../../assets/textures";
 import { holdf } from "../../lib/game-engine/routines/hold";
+import { interp } from "../../lib/game-engine/routines/interp";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
@@ -16,6 +18,11 @@ import { Rpg } from "../rpg/rpg";
 export function scnIndianaHallPainting() {
     Lvl.IndianaHallPainting();
 
+    const paintingObj = objPainting()
+        .at(100, 100)
+        .zIndexed(ZIndex.BackgroundEntities)
+        .show();
+
     scene.stage
         .coro(function* () {
             const pickedColorRef = {
@@ -28,10 +35,15 @@ export function scnIndianaHallPainting() {
                 .zIndexed(ZIndex.Entities)
                 .show();
 
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < txsPaintingLayer.length; i++) {
+                if (i > 0) {
+                    pickedColorRef.pickedColor = pickColor(pickedColorRef.pickedColor);
+                }
                 yield holdf(() => pickedColorObj.objPickedColor.isCorrect, 30);
-                pickedColorRef.pickedColor = pickColor(pickedColorRef.pickedColor);
+                paintingObj.objPainting.addPaintLayer(pickedColorRef.pickedColor.color);
             }
+
+            pickedColorObj.destroy();
         });
 }
 
@@ -117,7 +129,9 @@ const consts = {
         0x404040,
         0x7c470a,
         0xff9100,
+        0xcab600,
         0x6d77ff,
+        0x230b79,
         0xa20ddd,
         0xfa5db9,
     ],
@@ -170,4 +184,49 @@ function pickColor(previousPick: PickedColor | null): PickedColor {
         saturation,
         value,
     };
+}
+
+const txsPaintingLayer = Tx.Esoteric.PaintingLayers.split({ count: 9 });
+
+function objPainting() {
+    const paintTints = new Array<RgbInt>();
+
+    const api = {
+        addPaintLayer(color: RgbInt) {
+            paintTints.push(color);
+        },
+    };
+
+    const padding = 4;
+
+    const canvas = {
+        width: txsPaintingLayer[0].width + padding * 2,
+        height: txsPaintingLayer[0].height + padding * 2,
+    };
+
+    const paintingLayersObj = container();
+
+    return container(
+        container(
+            new Graphics()
+                .beginFill(0xffffff)
+                .drawRect(0, 0, canvas.width, canvas.height),
+            new TilingSprite(NoAtlasTx.Effects.Noise256, canvas.width, canvas.height)
+                .step(self => self.alpha = 5 / 256),
+        )
+            .pivoted(padding, padding),
+        paintingLayersObj,
+    )
+        .merge({ objPainting: api })
+        .coro(function* () {
+            while (true) {
+                yield () => paintingLayersObj.children.length < paintTints.length;
+                const paintIndex = paintingLayersObj.children.length;
+                const layerObj = Sprite.from(txsPaintingLayer[paintIndex])
+                    .tinted(paintTints[paintIndex])
+                    .show(paintingLayersObj);
+                layerObj.alpha = 0;
+                yield interp(layerObj, "alpha").steps(3).to(1).over(333);
+            }
+        });
 }
