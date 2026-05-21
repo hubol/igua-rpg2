@@ -1,17 +1,15 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { sleep } from "../../lib/game-engine/routines/sleep";
-import { Integer } from "../../lib/math/number-alias-types";
-import { Rng } from "../../lib/math/rng";
 import { vlerp } from "../../lib/math/vector";
 import { vnew } from "../../lib/math/vector-type";
 import { Jukebox } from "../core/igua-audio";
-import { DataKeyItem } from "../data/data-key-item";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DevKey, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objCollectibleFlop } from "../objects/collectibles/obj-collectible-flop";
 import { Rpg } from "../rpg/rpg";
+import { RpgFlopBlindBox } from "../rpg/rpg-flop-blind-box";
 
 export function scnPlainsSuggestiveFlopCollector() {
     Jukebox.play(Mzk.WondrousAmerica);
@@ -28,11 +26,6 @@ export function scnPlainsSuggestiveFlopCollector() {
         }
     });
 }
-
-const flopIdRanges = {
-    FlopBlindBox: [99, 198],
-    FlopBlindBoxTypeB: [199, 298],
-} satisfies Partial<Record<DataKeyItem.Id, [start: Integer, end: Integer]>>;
 
 function enrichCollectorNpc(lvl: LvlType.PlainsSuggestiveFlopCollector) {
     const minimumToReachEnd = 6;
@@ -51,7 +44,6 @@ function enrichCollectorNpc(lvl: LvlType.PlainsSuggestiveFlopCollector) {
         }
 
         const flopsCount = removed.count;
-        const range = flopIdRanges[removed.item.id];
 
         const v1 = vnew();
 
@@ -61,7 +53,7 @@ function enrichCollectorNpc(lvl: LvlType.PlainsSuggestiveFlopCollector) {
                 lvl.FlopEndMarker,
                 i / Math.max(minimumToReachEnd, flopsCount),
             );
-            objCollectibleFlop(Rng.intc(...range)).at(position).show();
+            objCollectibleFlop(RpgFlopBlindBox.open(removed.item.id)).at(position).show();
             yield sleep(100);
         }
 
