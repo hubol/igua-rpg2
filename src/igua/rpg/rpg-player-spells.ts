@@ -86,15 +86,15 @@ class RpgPlayerSpell {
 
     get attack() {
         // TODO could be theoretically buffed by attributes
-        this._attackLevelRef.level = this._getEquippedSpellLevel();
+        this._attackLevelRef.level = this.level;
         return this._attack;
     }
 
     get isEquipped() {
-        return this._getEquippedSpellLevel() > 0;
+        return this.level > 0;
     }
 
-    private _getEquippedSpellLevel() {
+    get level() {
         return this._buffs.getAggregatedBuffs().combat.spells.equipped[this._spellId];
     }
 }

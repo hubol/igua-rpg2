@@ -49,6 +49,7 @@ export namespace RpgPlayerBuffs {
                 spells: {
                     equipped: {
                         HotPineCone: 0,
+                        OpenFlopBlindBoxes: 0,
                     } satisfies Record<DataSpell.Id, Integer>,
                     maxPower: 0,
                 },

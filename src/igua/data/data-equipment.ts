@@ -290,7 +290,7 @@ export namespace DataEquipment {
                     };
                 })(),
             },
-            HotPineCone: {
+            SpellHotPineCone: {
                 name: "Hot Pine Seed Pack",
                 texture: null,
                 description: "Chuck hot, hot pine cones onto flat surfaces.",
@@ -345,6 +345,15 @@ export namespace DataEquipment {
                 description: "Medical cooling product. Increases resistance to overheat.",
                 buffs: (model, bonus) => {
                     model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
+                },
+            },
+            SpellOpenFlopBlindBoxes: {
+                name: "Buzzsaw",
+                texture: null,
+                description: "Professionally open your Flop blind boxes.",
+                buffs: (model, bonus) => {
+                    model.combat.spells.equipped.OpenFlopBlindBoxes += 1 + bonus;
+                    model.combat.spells.maxPower += Math.max(1, Math.round(60 * Math.pow(0.5, bonus)));
                 },
             },
             __Fallback__: {

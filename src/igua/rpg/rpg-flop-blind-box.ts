@@ -10,6 +10,8 @@ const flopIdRanges = {
 export namespace RpgFlopBlindBox {
     export type KeyItemId = keyof typeof flopIdRanges;
 
+    export const keyItemIds = Object.keys(flopIdRanges) as ReadonlyArray<KeyItemId>;
+
     export function open(keyItemId: KeyItemId) {
         return Rng.intc(...flopIdRanges[keyItemId]);
     }

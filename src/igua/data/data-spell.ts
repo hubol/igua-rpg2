@@ -36,6 +36,16 @@ export namespace DataSpell {
                         });
                 })(),
             },
+            OpenFlopBlindBoxes: {
+                name: "Open Blind Boxes",
+                attackProvider: (ref) =>
+                    RpgAttack.create({
+                        versus: RpgFaction.Enemy,
+                        get emotional() {
+                            return 10 + ref.level;
+                        },
+                    }),
+            },
             __Fallback__: {
                 name: "???",
                 attackProvider: () => RpgAttack.create({}),
