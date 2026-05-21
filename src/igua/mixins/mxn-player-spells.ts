@@ -47,10 +47,14 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
                 const flopIds = openFlopBlindBoxes(4 + equippableSpells.OpenFlopBlindBoxes.level);
                 for (const flopId of flopIds) {
                     objCollectibleFlop(flopId)
-                        .mixin(mxnRpgAttack, { attack: equippableSpells.OpenFlopBlindBoxes.attack, attacker })
+                        .mixin(mxnRpgAttack, {
+                            attack: equippableSpells.OpenFlopBlindBoxes.attack,
+                            attacker,
+                            damageTargetsOnce: true,
+                        })
                         .at(position)
                         .show()
-                        .speed.x = Rng.float(0, horizontalSpeed) * horizontalDirection * 0.67;
+                        .speed.x = Rng.float(1, horizontalSpeed) * horizontalDirection * 0.67;
                 }
             }
         });
