@@ -1,7 +1,7 @@
 import { Tx } from "../../../assets/textures";
 import { interp, interpc } from "../../../lib/game-engine/routines/interp";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
-import { Integer } from "../../../lib/math/number-alias-types";
+import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { mxnMotion } from "../../mixins/mxn-motion";
 import { objDieOnEmpty } from "../utils/obj-die-on-empty";
@@ -10,7 +10,17 @@ import { FxPattern } from "./lib/fx-pattern";
 
 const txsHeart = Tx.Effects.HeartBurst16px.split({ width: 16 });
 
-export function objFxHeart() {
+export interface ObjFxHeartArgs {
+    tintStart: RgbInt;
+    tintEnd: RgbInt;
+}
+
+const defaultArgs: ObjFxHeartArgs = {
+    tintStart: 0x661312,
+    tintEnd: 0xCC3720,
+};
+
+export function objFxHeart(args = defaultArgs) {
     return objIndexedSprite(txsHeart)
         .anchored(0.5, 0.5)
         .flipH(Rng.intp())
@@ -27,16 +37,16 @@ export function objFxHeart() {
             self.destroy();
         })
         .coro(function* (self) {
-            self.tint = 0x661312;
-            yield interpc(self, "tint").steps(Rng.intc(2, 4)).to(0xCC3720).over(Rng.intc(300, 600));
+            self.tint = args.tintStart;
+            yield interpc(self, "tint").steps(Rng.intc(2, 4)).to(args.tintEnd).over(Rng.intc(300, 600));
         });
 }
 
-objFxHeart.objBurst = function objBurst (radius: Integer, count: Integer) {
+objFxHeart.objBurst = function objBurst (radius: Integer, count: Integer, args = defaultArgs) {
     return objDieOnEmpty()
         .coro(function* (self) {
             for (const { position, normal } of FxPattern.getRadialBurst({ count, radius })) {
-                objFxHeart().at(position).show(self).speed.at(normal);
+                objFxHeart(args).at(position).show(self).speed.at(normal);
                 yield sleepf(1);
             }
         });

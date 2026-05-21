@@ -3,6 +3,7 @@ import { Rng } from "../../lib/math/rng";
 import { range } from "../../lib/range";
 import { Input } from "../globals";
 import { objCollectibleFlop } from "../objects/collectibles/obj-collectible-flop";
+import { objFxHeart, ObjFxHeartArgs } from "../objects/effects/obj-fx-heart";
 import { ObjIguanaLocomotive } from "../objects/obj-iguana-locomotive";
 import { playerObj } from "../objects/obj-player";
 import { objProjectileHotPineCone } from "../objects/projectiles/obj-projectile-hot-pine-cone";
@@ -52,6 +53,10 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
                             attacker,
                             damageTargetsOnce: true,
                         })
+                        .handles("mxnRpgAttack.hit", (self) =>
+                            objFxHeart.objBurst(5, 3, objFxHeartEmotionalArgs)
+                                .at(self.getWorldCenter())
+                                .show())
                         .at(position)
                         .show()
                         .speed.x = Rng.float(1, horizontalSpeed) * horizontalDirection * 0.67;
@@ -59,6 +64,11 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
             }
         });
 }
+
+const objFxHeartEmotionalArgs: ObjFxHeartArgs = {
+    tintStart: 0x404069,
+    tintEnd: 0xCECEE4,
+};
 
 function openFlopBlindBoxes(maxCount: Integer): Array<RpgFlops.Id> {
     const result = new Array<RpgFlops.Id>();
