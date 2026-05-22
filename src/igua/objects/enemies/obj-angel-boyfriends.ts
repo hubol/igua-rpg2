@@ -6,6 +6,9 @@ import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { ZIndex } from "../../core/scene/z-index";
 import { mxnFxVibrate } from "../../mixins/effects/mxn-fx-vibrate";
+import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
+import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
+import { objAngelMouth } from "./obj-angel-mouth";
 
 interface ObjAngelBoyfriendsArgs {
     tints: {
@@ -15,7 +18,9 @@ interface ObjAngelBoyfriendsArgs {
     };
 }
 
-const [txIdle, txMove, txKissStart, txKiss, txPride] = Tx.Enemy.Boyfriends.Bodies.split({ width: 112 });
+const [txIdle, txMove, txKissStart, txKiss, txPride, txFace] = Tx.Enemy.Boyfriends.Bodies.split({ width: 112 });
+
+const bodyTexturesSupportingFace = new Set([txIdle, txMove, txPride]);
 
 export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
     const puppetObj = objAngelBoyfriendsPuppet()
@@ -24,22 +29,49 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
     return container(
         puppetObj,
     )
+        .mixin(mxnDetectPlayer)
+        .pivoted(56, 70)
         .zIndexed(ZIndex.Entities);
 }
 
 function objAngelBoyfriendsPuppet() {
+    const mouthObjs = {
+        angry: objAngelMouth({
+            negativeSpaceTint: 0x000000,
+            teethCount: 2,
+            toothGapWidth: 2,
+            txs: objAngelMouth.txs.rounded16weight3,
+        })
+            .at(34, 39),
+        sad: objAngelMouth({
+            negativeSpaceTint: 0x000000,
+            teethCount: 4,
+            toothGapWidth: 1,
+            txs: objAngelMouth.txs.rounded16weight3,
+        })
+            .at(80, 38),
+    };
+
     const api = {
         movementSpeed: vnew(),
         kissUnit: 0,
         isExpressingPride: false,
+        mouthObjs,
     };
 
     let pedometer = 0;
 
-    const sprite = Sprite.from(txIdle);
+    const bodiesSprite = Sprite.from(txIdle);
+    const faceObj = container(
+        Sprite.from(txFace),
+        mouthObjs.angry,
+        mouthObjs.sad,
+    )
+        .mixin(mxnFacingPivot, { down: 3, left: -3, right: 3, up: -3 });
 
     return container(
-        sprite,
+        bodiesSprite,
+        faceObj,
     )
         .merge({ objAngelBoyfriendsPuppet: api })
         .mixin(mxnFxVibrate)
@@ -53,22 +85,24 @@ function objAngelBoyfriendsPuppet() {
         })
         .step(() => {
             if (api.isExpressingPride) {
-                sprite.texture = txPride;
+                bodiesSprite.texture = txPride;
             }
             else if (api.kissUnit > 0.9) {
-                sprite.texture = txKiss;
+                bodiesSprite.texture = txKiss;
             }
             else if (api.kissUnit > 0) {
-                sprite.texture = txKissStart;
+                bodiesSprite.texture = txKissStart;
             }
             else if (api.movementSpeed.y !== 0) {
-                sprite.texture = txMove;
+                bodiesSprite.texture = txMove;
             }
             else if (pedometer % 30 > 1 && pedometer % 30 < 16) {
-                sprite.texture = txMove;
+                bodiesSprite.texture = txMove;
             }
             else {
-                sprite.texture = txIdle;
+                bodiesSprite.texture = txIdle;
             }
+
+            faceObj.visible = bodyTexturesSupportingFace.has(bodiesSprite.texture);
         });
 }

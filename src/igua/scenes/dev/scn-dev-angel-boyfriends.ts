@@ -1,3 +1,4 @@
+import { Graphics } from "pixi.js";
 import { Lvl } from "../../../assets/generated/levels/generated-level-data";
 import { objAngelBoyfriends } from "../../objects/enemies/obj-angel-boyfriends";
 
@@ -11,6 +12,12 @@ export function scnDevAngelBoyfriends() {
             antlers: 0x0000ff,
         },
     })
+        .at(lvl.Marker)
+        .show();
+
+    new Graphics()
+        .beginFill(0xffffff)
+        .drawRect(0, 0, 1, 1)
         .at(lvl.Marker)
         .show();
 }
