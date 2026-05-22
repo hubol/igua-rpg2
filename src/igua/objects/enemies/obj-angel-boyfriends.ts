@@ -13,6 +13,8 @@ import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
+import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
+import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objAngelMouth } from "./obj-angel-mouth";
 
@@ -31,6 +33,10 @@ const ranks = {
         },
     }),
 };
+
+const atkPitchfork = RpgAttack.create({
+    physical: 60,
+});
 
 const [txIdle, txMove, txKissStart, txKiss, txPride, txFace] = Tx.Enemy.Boyfriends.Bodies.split({ width: 112 });
 
@@ -61,9 +67,20 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                 }
                 yield () => self.mxnDetectPlayer.isDetected;
                 const direction = Math.sign(self.mxnDetectPlayer.relativePosition.x);
-                puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar = direction;
                 if (puppetObj.objAngelBoyfriendsPuppet.pitchfork.appearUnit < 1) {
+                    puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar = direction;
                     yield interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(1).over(1000);
+                }
+                else {
+                    // TODO warning sound!
+                    if (self.speed.x !== 0) {
+                        yield interp(self.speed, "x").to(0).over(333);
+                    }
+                    else {
+                        self.speed.y = -3;
+                        yield () => self.isOnGround && self.speed.y === 0;
+                    }
+                    puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar = direction;
                 }
                 yield interp(self.speed, "x").to(direction * 3).over(1000);
                 yield () => self.speed.x === 0;
@@ -80,6 +97,29 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
         })
         .step(self => {
             puppetObj.objAngelBoyfriendsPuppet.movementSpeed.at(self.speed);
+        })
+        .coro(function* (self) {
+            new Graphics()
+                .beginFill(0xff0000)
+                .drawRect(106, 43, 36, 25)
+                .mixin(mxnRpgAttack, { attack: atkPitchfork, attacker: self.status })
+                .step(attackObj =>
+                    attackObj.isAttackActive = puppetObj.objAngelBoyfriendsPuppet.pitchfork.appearUnit >= 1
+                        && puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar > 0
+                )
+                .invisible()
+                .show(self);
+
+            new Graphics()
+                .beginFill(0xff0000)
+                .drawRect(-30, 43, 36, 25)
+                .mixin(mxnRpgAttack, { attack: atkPitchfork, attacker: self.status })
+                .step(attackObj =>
+                    attackObj.isAttackActive = puppetObj.objAngelBoyfriendsPuppet.pitchfork.appearUnit >= 1
+                        && puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar < 0
+                )
+                .invisible()
+                .show(self);
         });
 }
 
