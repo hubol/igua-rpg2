@@ -1,5 +1,7 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
+import { interp, interpvr } from "../../../lib/game-engine/routines/interp";
+import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { RgbInt } from "../../../lib/math/number-alias-types";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
@@ -8,6 +10,7 @@ import { ZIndex } from "../../core/scene/z-index";
 import { mxnFxVibrate } from "../../mixins/effects/mxn-fx-vibrate";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
+import { mxnPhysics } from "../../mixins/mxn-physics";
 import { objAngelMouth } from "./obj-angel-mouth";
 
 interface ObjAngelBoyfriendsArgs {
@@ -30,8 +33,27 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
         puppetObj,
     )
         .mixin(mxnDetectPlayer)
+        .mixin(mxnPhysics, { gravity: 0.3, physicsRadius: 30, physicsOffset: [0, -30] })
         .pivoted(56, 70)
-        .zIndexed(ZIndex.Entities);
+        .zIndexed(ZIndex.Entities)
+        .coro(function* (self) {
+            while (true) {
+                yield () => self.mxnDetectPlayer.isDetected;
+                const direction = Math.sign(self.mxnDetectPlayer.relativePosition.x);
+                yield interp(self.speed, "x").to(direction * 3).over(1000);
+                yield () => self.speed.x === 0;
+                if (
+                    !self.mxnDetectPlayer.isDetected || Math.sign(self.mxnDetectPlayer.relativePosition.x) === direction
+                ) {
+                    self.speed.at(0, -7);
+                    yield interp(self.speed, "x").to(direction * 3).over(1000);
+                    self.speed.x = 0;
+                }
+            }
+        })
+        .step(self => {
+            puppetObj.objAngelBoyfriendsPuppet.movementSpeed.at(self.speed);
+        });
 }
 
 function objAngelBoyfriendsPuppet() {
