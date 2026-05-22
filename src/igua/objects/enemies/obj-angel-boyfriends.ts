@@ -2,6 +2,7 @@ import { Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { interp, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { nlerp } from "../../../lib/math/number";
 import { RgbInt } from "../../../lib/math/number-alias-types";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
@@ -38,8 +39,15 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
         .zIndexed(ZIndex.Entities)
         .coro(function* (self) {
             while (true) {
+                if (!self.mxnDetectPlayer.isDetected && puppetObj.objAngelBoyfriendsPuppet.pitchfork.appearUnit > 0) {
+                    yield interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(0).over(333);
+                }
                 yield () => self.mxnDetectPlayer.isDetected;
                 const direction = Math.sign(self.mxnDetectPlayer.relativePosition.x);
+                puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar = direction;
+                if (puppetObj.objAngelBoyfriendsPuppet.pitchfork.appearUnit < 1) {
+                    yield interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(1).over(1000);
+                }
                 yield interp(self.speed, "x").to(direction * 3).over(1000);
                 yield () => self.speed.x === 0;
                 if (
@@ -79,6 +87,10 @@ function objAngelBoyfriendsPuppet() {
         kissUnit: 0,
         isExpressingPride: false,
         mouthObjs,
+        pitchfork: {
+            appearUnit: 0,
+            facingPolar: 1,
+        },
     };
 
     let pedometer = 0;
@@ -91,9 +103,22 @@ function objAngelBoyfriendsPuppet() {
     )
         .mixin(mxnFacingPivot, { down: 3, left: -3, right: 3, up: -3 });
 
+    const pitchforkObj = Sprite.from(Tx.Enemy.Boyfriends.Pitchfork)
+        .invisible()
+        .anchored(0.5, 0.5)
+        .at(78, 55)
+        .step(self => {
+            self.alpha = api.pitchfork.appearUnit < 1 ? 0.5 : 1;
+            self.visible = api.pitchfork.appearUnit > 0;
+            self.pivot.y = nlerp(32, 0, api.pitchfork.appearUnit) + (bodiesSprite.texture === txMove ? 1 : 0);
+            self.scale.x = Math.sign(api.pitchfork.facingPolar);
+            self.x = api.pitchfork.facingPolar > 0 ? 78 : 34;
+        });
+
     return container(
         bodiesSprite,
         faceObj,
+        pitchforkObj,
     )
         .merge({ objAngelBoyfriendsPuppet: api })
         .mixin(mxnFxVibrate)
