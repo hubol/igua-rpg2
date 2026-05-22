@@ -1,5 +1,11 @@
+import { Sprite } from "pixi.js";
+import { Sfx } from "../../assets/sounds";
+import { Tx } from "../../assets/textures";
+import { Coro } from "../../lib/game-engine/routines/coro";
+import { factor, interpc, interpvr } from "../../lib/game-engine/routines/interp";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
+import { vnew } from "../../lib/math/vector-type";
 import { range } from "../../lib/range";
 import { Input } from "../globals";
 import { objCollectibleFlop } from "../objects/collectibles/obj-collectible-flop";
@@ -11,6 +17,7 @@ import { Rpg } from "../rpg/rpg";
 import { RpgFlopBlindBox } from "../rpg/rpg-flop-blind-box";
 import { RpgFlops } from "../rpg/rpg-flops";
 import { RpgPlayerSpells } from "../rpg/rpg-player-spells";
+import { mxnDestroyAfterSteps } from "./mxn-destroy-after-steps";
 import { mxnRpgAttack } from "./mxn-rpg-attack";
 
 export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPlayerSpells) {
@@ -29,7 +36,7 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
             const horizontalSpeed = 3 + Math.abs(obj.speed.x);
             const horizontalSpeedScaled = horizontalSpeed * horizontalDirection;
 
-            const position = obj.head.mouth.getWorldCenter();
+            const position = vnew(obj.head.mouth.getWorldCenter());
 
             const attacker = playerObj.status;
 
@@ -46,6 +53,23 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
 
             if (equippableSpells.OpenFlopBlindBoxes.isEquipped) {
                 const flopIds = openFlopBlindBoxes(4 + equippableSpells.OpenFlopBlindBoxes.level);
+
+                if (flopIds.length === 0) {
+                    obj.play(Sfx.Interact.Error);
+                    Sprite.from(Tx.Ui.NoBlindBoxes)
+                        .anchored(0.5, 1)
+                        .at(position)
+                        .tinted(0x404069)
+                        .coro(function* (self) {
+                            yield* Coro.all([
+                                interpvr(self.pivot).factor(factor.sine).to(0, 37).over(333),
+                                interpc(self, "tint").steps(3).to(0xCECEE4).over(666),
+                            ]);
+                        })
+                        .mixin(mxnDestroyAfterSteps, 180)
+                        .show();
+                }
+
                 for (const flopId of flopIds) {
                     objCollectibleFlop(flopId)
                         .mixin(mxnRpgAttack, {
