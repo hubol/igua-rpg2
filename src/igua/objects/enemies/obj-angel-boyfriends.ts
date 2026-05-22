@@ -1,9 +1,11 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
-import { interp, interpvr } from "../../../lib/game-engine/routines/interp";
+import { Coro } from "../../../lib/game-engine/routines/coro";
+import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { nlerp } from "../../../lib/math/number";
 import { RgbInt } from "../../../lib/math/number-alias-types";
+import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
@@ -16,6 +18,7 @@ import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objProjectileLoveVortexAoe } from "../projectiles/obj-projectile-love-vortex-aoe";
 import { objAngelMouth } from "./obj-angel-mouth";
 
 interface ObjAngelBoyfriendsArgs {
@@ -34,9 +37,14 @@ const ranks = {
     }),
 };
 
-const atkPitchfork = RpgAttack.create({
-    physical: 60,
-});
+const atks = {
+    pitchfork: RpgAttack.create({
+        physical: 60,
+    }),
+    loveVortexAoe: RpgAttack.create({
+        emotional: 50,
+    }),
+};
 
 const [txIdle, txMove, txKissStart, txKiss, txPride, txFace] = Tx.Enemy.Boyfriends.Bodies.split({ width: 112 });
 
@@ -50,6 +58,8 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
         .beginFill(0xff0000)
         .drawRect(13, 23, 86, 49)
         .invisible();
+
+    let loveVortexesCount = 0;
 
     return container(
         puppetObj,
@@ -73,13 +83,12 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                 }
                 else {
                     // TODO warning sound!
-                    if (self.speed.x !== 0) {
-                        yield interp(self.speed, "x").to(0).over(333);
-                    }
-                    else {
-                        self.speed.y = -3;
-                        yield () => self.isOnGround && self.speed.y === 0;
-                    }
+                    self.speed.y = -3;
+
+                    yield* Coro.all([
+                        interp(self.speed, "x").to(0).over(333),
+                        () => self.isOnGround && self.speed.y === 0,
+                    ]);
                     puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar = direction;
                 }
                 yield interp(self.speed, "x").to(direction * 3).over(1000);
@@ -93,6 +102,24 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                         yield interp(self.speed, "x").to(0).over(300);
                     }
                 }
+                if (self.mxnDetectPlayer.isDetected && self.mxnDetectPlayer.relativePosition.y < -20 && Rng.bool()) {
+                    puppetObj.objAngelBoyfriendsPuppet.isExpressingPride = true;
+                    yield* Coro.all([
+                        interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(0).over(333),
+                        interp(self.speed, "x").to(0).over(333),
+                    ]);
+                    puppetObj.mxnFxVibrate.direction.at(0, -1);
+                    yield interp(puppetObj.mxnFxVibrate, "frequency").to(0.3).over(300);
+                    const vortexSpeed = loveVortexesCount++ === 0 ? "slow" : Rng.choose("slow", "fast");
+                    const vortexObj = objAngelBoyfriendsLoveVortexAoe(vortexSpeed)
+                        .mixin(mxnRpgAttack, { attack: atks.loveVortexAoe, attacker: self.status })
+                        .zIndexed(ZIndex.TerrainDecals)
+                        .at(self)
+                        .show();
+                    yield () => vortexObj.destroyed;
+                    puppetObj.mxnFxVibrate.frequency = 0;
+                    puppetObj.objAngelBoyfriendsPuppet.isExpressingPride = false;
+                }
             }
         })
         .step(self => {
@@ -102,7 +129,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
             new Graphics()
                 .beginFill(0xff0000)
                 .drawRect(106, 43, 36, 25)
-                .mixin(mxnRpgAttack, { attack: atkPitchfork, attacker: self.status })
+                .mixin(mxnRpgAttack, { attack: atks.pitchfork, attacker: self.status })
                 .step(attackObj =>
                     attackObj.isAttackActive = puppetObj.objAngelBoyfriendsPuppet.pitchfork.appearUnit >= 1
                         && puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar > 0
@@ -113,13 +140,31 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
             new Graphics()
                 .beginFill(0xff0000)
                 .drawRect(-30, 43, 36, 25)
-                .mixin(mxnRpgAttack, { attack: atkPitchfork, attacker: self.status })
+                .mixin(mxnRpgAttack, { attack: atks.pitchfork, attacker: self.status })
                 .step(attackObj =>
                     attackObj.isAttackActive = puppetObj.objAngelBoyfriendsPuppet.pitchfork.appearUnit >= 1
                         && puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar < 0
                 )
                 .invisible()
                 .show(self);
+        });
+}
+
+function objAngelBoyfriendsLoveVortexAoe(speed: "slow" | "fast") {
+    return objProjectileLoveVortexAoe()
+        .coro(function* (self) {
+            // if (speed === "slow") {
+            yield interpvr(self.scale).to(200, 200).over(2000);
+            yield sleep(500);
+            yield interpvr(self.scale).factor(factor.sine).to(0, 0).over(500);
+            // }
+            // else {
+            //     yield interpvr(self.scale).to(90, 90).over(600);
+            //     yield interpvr(self.scale).factor(factor.sine).to(200, 200).over(600);
+            //     yield sleep(300);
+            //     yield interpvr(self.scale).factor(factor.sine).to(0, 0).over(300);
+            // }
+            self.destroy();
         });
 }
 

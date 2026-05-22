@@ -1,20 +1,14 @@
 import { Graphics, TilingSprite } from "pixi.js";
 import { NoAtlasTx } from "../../../assets/no-atlas-textures";
-import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { Null } from "../../../lib/types/null";
-import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
+import { objCirclebox } from "../utils/obj-circlebox";
 
 export function objProjectileSnowAoe(radius: Integer) {
-    const collisionObj = container(
-        new Graphics().beginFill(0xff0000).drawRect(-0.9, -0.3, 1.8, 0.6),
-        new Graphics().beginFill(0xff0000).drawRect(-0.65, -0.65, 1.3, 1.3),
-        new Graphics().beginFill(0xff0000).drawRect(-0.3, -0.9, 0.6, 1.8),
-    )
-        .invisible();
+    const collisionObj = objCirclebox();
 
     const snowMaskObj = new Graphics().beginFill(0xff0000).drawCircle(0, 0, 1);
     const edgeMaskObj = new Graphics().beginFill(0xff0000).drawCircle(0, 0, 1);
