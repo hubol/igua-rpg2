@@ -1,6 +1,7 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { DataKeyItem } from "../data/data-key-item";
+import { Rpg } from "./rpg";
 
 const flopIdRanges = {
     FlopBlindBox: [99, 198],
@@ -13,6 +14,7 @@ export namespace RpgFlopBlindBox {
     export const keyItemIds = Object.keys(flopIdRanges) as ReadonlyArray<KeyItemId>;
 
     export function open(keyItemId: KeyItemId) {
+        Rpg.experience.reward.gambling.onOpenBlindBoxes(1);
         return Rng.intc(...flopIdRanges[keyItemId]);
     }
 }

@@ -56,7 +56,5 @@ function enrichCollectorNpc(lvl: LvlType.PlainsSuggestiveFlopCollector) {
             objCollectibleFlop(RpgFlopBlindBox.open(removed.item.id)).at(position).show();
             yield sleep(100);
         }
-
-        Rpg.experience.reward.gambling.onOpenBlindBoxes(flopsCount);
     });
 }
