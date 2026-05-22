@@ -1,0 +1,329 @@
+{
+  "ogmoVersion": "3.4.0-hubol",
+  "width": 500,
+  "height": 688,
+  "offsetX": 0,
+  "offsetY": 0,
+  "backgroundColor": "#408000",
+  "values": {"Terrain Color": "#000000"},
+  "layers": [
+    {
+      "name": "MarkerEntities",
+      "_eid": "73166939",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 86,
+      "entities": []
+    },
+    {
+      "name": "RegionEntities",
+      "_eid": "01831167",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 86,
+      "entities": []
+    },
+    {
+      "name": "FrontDecals",
+      "_eid": "17577176",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 86,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "FrontEntities",
+      "_eid": "55690179",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 86,
+      "entities": []
+    },
+    {
+      "name": "PlayerEntities",
+      "_eid": "96470627",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 86,
+      "entities": [
+        {
+          "name": "Player",
+          "id": 0,
+          "_eid": "93092164",
+          "x": 88,
+          "y": 656,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 1,
+          "_eid": "19953026",
+          "x": 80,
+          "y": 504,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "wrong0", "depth": 0, "overrideFlipX": "none"}
+        }
+      ]
+    },
+    {
+      "name": "CharacterEntities",
+      "_eid": "07790422",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 86,
+      "entities": []
+    },
+    {
+      "name": "AboveEntitiesDecals",
+      "_eid": "63753160",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 86,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "Entities",
+      "_eid": "93086020",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 86,
+      "entities": [
+        {
+          "name": "Door",
+          "id": 0,
+          "_eid": "88296692",
+          "x": 160,
+          "y": 608,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "wrong0", "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 1,
+          "_eid": "88296692",
+          "x": 232,
+          "y": 608,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level1", "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 2,
+          "_eid": "88296692",
+          "x": 296,
+          "y": 608,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "wrong0", "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 3,
+          "_eid": "88296692",
+          "x": 360,
+          "y": 608,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "wrong1", "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 4,
+          "_eid": "88296692",
+          "x": 160,
+          "y": 456,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 5,
+          "_eid": "88296692",
+          "x": 232,
+          "y": 456,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 6,
+          "_eid": "88296692",
+          "x": 296,
+          "y": 456,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 7,
+          "_eid": "88296692",
+          "x": 360,
+          "y": 456,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "TerrainDecals",
+      "_eid": "02386446",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 86,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "TerrainEntities",
+      "_eid": "02302709",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 86,
+      "entities": [
+        {
+          "name": "Block",
+          "id": 0,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 296,
+          "width": 32,
+          "height": 280,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 1,
+          "_eid": "93117141",
+          "x": 472,
+          "y": 296,
+          "width": 32,
+          "height": 400,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 2,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 656,
+          "width": 512,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 3,
+          "_eid": "93117141",
+          "x": 32,
+          "y": 504,
+          "width": 72,
+          "height": 72,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 4,
+          "_eid": "93117141",
+          "x": 104,
+          "y": 504,
+          "width": 512,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        }
+      ]
+    },
+    {
+      "name": "BackgroundEntities",
+      "_eid": "41483982",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 86,
+      "entities": []
+    },
+    {
+      "name": "BackgroundDecals",
+      "_eid": "64691217",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 86,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxDecals",
+      "_eid": "17093961",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 86,
+      "decals": [],
+      "folder": "../textures"
+    }
+  ]
+}

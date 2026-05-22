@@ -3389,6 +3389,26 @@ export const Lvl = {
       GateHorizontal_1: e(r["GateHorizontal"], { x: 768, y: 240, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromIndianaUniversity", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
+  IntelligenceTower: (): LvlType.IntelligenceTower => {
+    applyLevel({ width: 500, height: 688, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 296, width: 32, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 472, y: 296, width: 32, height: 400, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 0, y: 656, width: 512, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 32, y: 504, width: 72, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 104, y: 504, width: 512, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Door: e(r["Door"], { x: 160, y: 608, values: { sceneName: "scnIntelligenceTower", checkpointName: "wrong0", name: "", depth: 0 } }, "Entities"),
+      Door_1: e(r["Door"], { x: 232, y: 608, values: { sceneName: "scnIntelligenceTower", checkpointName: "level1", name: "", depth: 0 } }, "Entities"),
+      Door_2: e(r["Door"], { x: 296, y: 608, values: { sceneName: "scnIntelligenceTower", checkpointName: "wrong0", name: "", depth: 0 } }, "Entities"),
+      Door_3: e(r["Door"], { x: 360, y: 608, values: { sceneName: "scnIntelligenceTower", checkpointName: "wrong1", name: "", depth: 0 } }, "Entities"),
+      Door_4: e(r["Door"], { x: 160, y: 456, values: { sceneName: "scnIntelligenceTower", checkpointName: "level0", name: "", depth: 0 } }, "Entities"),
+      Door_5: e(r["Door"], { x: 232, y: 456, values: { sceneName: "scnIntelligenceTower", checkpointName: "level0", name: "", depth: 0 } }, "Entities"),
+      Door_6: e(r["Door"], { x: 296, y: 456, values: { sceneName: "scnIntelligenceTower", checkpointName: "level0", name: "", depth: 0 } }, "Entities"),
+      Door_7: e(r["Door"], { x: 360, y: 456, values: { sceneName: "scnIntelligenceTower", checkpointName: "level0", name: "", depth: 0 } }, "Entities"),
+      Player: e(r["Player"], { x: 88, y: 656, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      wrong0: e(r["Checkpoint"], { x: 80, y: 504, flippedX: false, values: { name: "wrong0", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+    };
+  },
   MagicDemo: (): LvlType.MagicDemo => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0xa286f3, terrainTint: 0x4146a8 });
     return {
@@ -12491,6 +12511,23 @@ export namespace LvlType {
     SpigotPuddle: ReturnType<(typeof r)["Puddle"]>;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     GateHorizontal_1: ReturnType<(typeof r)["GateHorizontal"]>;
+  };
+  export type IntelligenceTower = {
+    Block: ReturnType<(typeof r)["Block"]>;
+    Block_1: ReturnType<(typeof r)["Block"]>;
+    Block_2: ReturnType<(typeof r)["Block"]>;
+    Block_3: ReturnType<(typeof r)["Block"]>;
+    Block_4: ReturnType<(typeof r)["Block"]>;
+    Door: ReturnType<(typeof r)["Door"]>;
+    Door_1: ReturnType<(typeof r)["Door"]>;
+    Door_2: ReturnType<(typeof r)["Door"]>;
+    Door_3: ReturnType<(typeof r)["Door"]>;
+    Door_4: ReturnType<(typeof r)["Door"]>;
+    Door_5: ReturnType<(typeof r)["Door"]>;
+    Door_6: ReturnType<(typeof r)["Door"]>;
+    Door_7: ReturnType<(typeof r)["Door"]>;
+    Player: ReturnType<(typeof r)["Player"]>;
+    wrong0: ReturnType<(typeof r)["Checkpoint"]>;
   };
   export type MagicDemo = {
     Block: ReturnType<(typeof r)["Block"]>;

@@ -148,7 +148,8 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
         obj.flipH();
     }
 
-    return obj;
+    return obj
+        .track(objDoor);
 }
 
 export type ObjDoor = ReturnType<typeof objDoor>;
