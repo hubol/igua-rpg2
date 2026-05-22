@@ -360,6 +360,18 @@ export const Lvl = {
       EmoBallistaMarker: e(r["Marker"], { x: 768, y: 472, values: { name: "EmoBallistaMarker", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
     };
   },
+  DummyBumpy: (): LvlType.DummyBumpy => {
+    applyLevel({ width: 748, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    return {
+      Block: e(r["Block"], { x: 248, y: 232, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 432, y: 216, width: 40, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 528, y: 216, width: 40, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 624, y: 216, width: 40, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 0, y: 192, width: 248, height: 88, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Player: e(r["Player"], { x: 312, y: 232, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      Marker: e(r["Marker"], { x: 128, y: 192, values: { name: "", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+    };
+  },
   Dummy: (): LvlType.Dummy => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
     return { Block: e(r["Block"], { x: 0, y: 200, width: 504, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"), Player: e(r["Player"], { x: 104, y: 200, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"), DummyMarker: e(r["Marker"], { x: 280, y: 200, values: { name: "DummyMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities") };
@@ -9550,6 +9562,15 @@ export namespace LvlType {
     Puddle_4: ReturnType<(typeof r)["Puddle"]>;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     EmoBallistaMarker: ReturnType<(typeof r)["Marker"]>;
+  };
+  export type DummyBumpy = {
+    Block: ReturnType<(typeof r)["Block"]>;
+    Block_1: ReturnType<(typeof r)["Block"]>;
+    Block_2: ReturnType<(typeof r)["Block"]>;
+    Block_3: ReturnType<(typeof r)["Block"]>;
+    Block_4: ReturnType<(typeof r)["Block"]>;
+    Player: ReturnType<(typeof r)["Player"]>;
+    Marker: ReturnType<(typeof r)["Marker"]>;
   };
   export type Dummy = {
     Block: ReturnType<(typeof r)["Block"]>;
