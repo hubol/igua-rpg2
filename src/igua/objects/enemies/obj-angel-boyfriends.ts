@@ -1,4 +1,4 @@
-import { Sprite } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { interp, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
@@ -10,8 +10,10 @@ import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { ZIndex } from "../../core/scene/z-index";
 import { mxnFxVibrate } from "../../mixins/effects/mxn-fx-vibrate";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
+import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
+import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objAngelMouth } from "./obj-angel-mouth";
 
 interface ObjAngelBoyfriendsArgs {
@@ -22,6 +24,14 @@ interface ObjAngelBoyfriendsArgs {
     };
 }
 
+const ranks = {
+    level0: RpgEnemyRank.create({
+        status: {
+            healthMax: 500,
+        },
+    }),
+};
+
 const [txIdle, txMove, txKissStart, txKiss, txPride, txFace] = Tx.Enemy.Boyfriends.Bodies.split({ width: 112 });
 
 const bodyTexturesSupportingFace = new Set([txIdle, txMove, txPride]);
@@ -30,9 +40,16 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
     const puppetObj = objAngelBoyfriendsPuppet()
         .filtered(new MapRgbFilter(args.tints.angry, args.tints.sad, args.tints.antlers));
 
+    const hurtboxObj = new Graphics()
+        .beginFill(0xff0000)
+        .drawRect(13, 23, 86, 49)
+        .invisible();
+
     return container(
         puppetObj,
+        hurtboxObj,
     )
+        .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank: ranks.level0 })
         .mixin(mxnDetectPlayer)
         .mixin(mxnPhysics, { gravity: 0.3, physicsRadius: 30, physicsOffset: [0, -30] })
         .pivoted(56, 70)
