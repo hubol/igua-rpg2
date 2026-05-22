@@ -55,7 +55,9 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                 ) {
                     self.speed.at(0, -7);
                     yield interp(self.speed, "x").to(direction * 3).over(1000);
-                    self.speed.x = 0;
+                    if (!self.mxnDetectPlayer.isDetected) {
+                        yield interp(self.speed, "x").to(0).over(300);
+                    }
                 }
             }
         })
