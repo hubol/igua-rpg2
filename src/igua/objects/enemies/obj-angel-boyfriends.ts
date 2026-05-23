@@ -1,13 +1,13 @@
-import { DisplayObject, Graphics, Sprite } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { holdf } from "../../../lib/game-engine/routines/hold";
 import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
-import { nlerp } from "../../../lib/math/number";
+import { approachLinear, nlerp } from "../../../lib/math/number";
 import { RgbInt } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
-import { VectorSimple, vnew } from "../../../lib/math/vector-type";
+import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { ZIndex } from "../../core/scene/z-index";
@@ -23,7 +23,7 @@ import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objFxHeart } from "../effects/obj-fx-heart";
 import { objProjectileLoveVortexAoe } from "../projectiles/obj-projectile-love-vortex-aoe";
-import { ObjAngelMouth, objAngelMouth } from "./obj-angel-mouth";
+import { objAngelMouth } from "./obj-angel-mouth";
 
 interface ObjAngelBoyfriendsArgs {
     tints: {
@@ -62,6 +62,8 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
     const puppetObj = objAngelBoyfriendsPuppet()
         .filtered(new MapRgbFilter(...tintMap));
 
+    const { mouthObjs } = puppetObj.objAngelBoyfriendsPuppet;
+
     const hurtboxObj = new Graphics()
         .beginFill(0xff0000)
         .drawRect(13, 23, 86, 49)
@@ -72,6 +74,8 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
         .drawRect(0, 0, 1, 1)
         .at(56, 40)
         .invisible();
+
+    let mouthsAgapeStepsCount = 0;
 
     const obj = container(
         puppetObj,
@@ -87,10 +91,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                 return;
             }
 
-            const mouthObj = Rng.choose(
-                puppetObj.objAngelBoyfriendsPuppet.mouthObjs.angry,
-                puppetObj.objAngelBoyfriendsPuppet.mouthObjs.sad,
-            );
+            const mouthObj = Rng.choose(mouthObjs.angry, mouthObjs.sad);
 
             mouthObj
                 .coro(function* () {
@@ -102,6 +103,17 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
         .zIndexed(ZIndex.Entities)
         .step(self => {
             puppetObj.objAngelBoyfriendsPuppet.movementSpeed.at(self.speed);
+            const agape = self.speed.y < 0 || mouthsAgapeStepsCount-- > 0;
+            mouthObjs.angry.controls.agapeUnit = approachLinear(
+                mouthObjs.angry.controls.agapeUnit,
+                agape ? 0.5 : 0,
+                0.1,
+            );
+            mouthObjs.sad.controls.agapeUnit = approachLinear(
+                mouthObjs.sad.controls.agapeUnit,
+                agape ? 0.5 : 0,
+                0.1,
+            );
         })
         .coro(function* (self) {
             new Graphics()
@@ -180,6 +192,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
             ]);
             puppetObj.mxnFxVibrate.direction.at(0, -1);
             yield interp(puppetObj.mxnFxVibrate, "frequency").to(0.3).over(300);
+            mouthsAgapeStepsCount = 90;
             const vortexSpeed = movesState.loveVortexesCount++ === 0 ? "slow" : Rng.choose("slow", "fast");
             const vortexObj = objAngelBoyfriendsLoveVortexAoe(vortexSpeed)
                 .mixin(mxnRpgAttack, { attack: atks.loveVortexAoe, attacker: obj.status })
@@ -258,6 +271,7 @@ function objAngelBoyfriendsLoveVortexAoe(speed: "slow" | "fast") {
 function objAngelBoyfriendsPuppet() {
     const mouthObjs = {
         angry: objAngelMouth({
+            frowningOffsetY: [0, 4],
             negativeSpaceTint: 0x000000,
             teethCount: 2,
             toothGapWidth: 2,
@@ -265,6 +279,7 @@ function objAngelBoyfriendsPuppet() {
         })
             .at(34, 38),
         sad: objAngelMouth({
+            frowningOffsetY: [0, 4],
             negativeSpaceTint: 0x000000,
             teethCount: 4,
             toothGapWidth: 1,

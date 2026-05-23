@@ -6,6 +6,7 @@ import { container } from "../../../lib/pixi/container";
 import { mxnSpeakingMouth } from "../../mixins/mxn-speaking-mouth";
 
 export interface ObjAngelMouthArgs {
+    frowningOffsetY?: [minAgapeY: Integer, maxAgapeY: Integer];
     negativeSpaceTint: RgbInt;
     txs: Texture[];
     teethCount: Integer;
@@ -16,6 +17,8 @@ export function objAngelMouth(args: ObjAngelMouthArgs) {
     if (args.txs.length < 1) {
         throw new Error(`objAngelMouth should be passed txs with length >= 1, got: ${args.txs.length}`);
     }
+
+    const { frowningOffsetY = [0, 0] } = args;
 
     const obj = container();
 
@@ -49,6 +52,12 @@ export function objAngelMouth(args: ObjAngelMouthArgs) {
         teethGfx.y = Math.round(nlerp(-height, 0, agapeUnit * teethExposedUnit));
     }
 
+    function applyFrowningPosition() {
+        obj.y = controls.frowning
+            ? Math.round(nlerp(frowningOffsetY[0], frowningOffsetY[1], controls.agapeUnit))
+            : 0;
+    }
+
     const controls = {
         get agapeUnit() {
             return agapeUnit;
@@ -64,16 +73,14 @@ export function objAngelMouth(args: ObjAngelMouthArgs) {
             mouthSpr0.texture = texture;
             mouthSpr1.texture = texture;
             applyTeethPosition();
+            applyFrowningPosition();
         },
         get frowning() {
             return obj.scale.y < 0;
         },
         set frowning(value) {
-            if (value) {
-                obj.scale.y = Math.abs(obj.scale.y) * -1;
-                return;
-            }
-            obj.scale.y = Math.abs(obj.scale.y);
+            obj.scale.y = Math.abs(obj.scale.y) * (value ? -1 : 1);
+            applyFrowningPosition();
         },
         get teethExposedUnit() {
             return teethExposedUnit;
