@@ -18,6 +18,7 @@ import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objFxHeart } from "../effects/obj-fx-heart";
 import { objProjectileLoveVortexAoe } from "../projectiles/obj-projectile-love-vortex-aoe";
 import { objAngelMouth } from "./obj-angel-mouth";
 
@@ -151,6 +152,20 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
             puppetObj.mxnFxVibrate.frequency = 0;
             puppetObj.objAngelBoyfriendsPuppet.isExpressingPride = false;
         },
+        *kiss() {
+            yield* moves.putAwayPitchfork();
+            yield interp(puppetObj.objAngelBoyfriendsPuppet, "kissUnit").to(1).over(500);
+            puppetObj.mxnFxVibrate.direction.at(1, 0);
+            puppetObj.mxnFxVibrate.frequency = 0.2;
+            yield sleep(333);
+            objFxHeart()
+                .at(obj)
+                .add(0, -50)
+                .show();
+            obj.heal(50);
+            yield interp(puppetObj.objAngelBoyfriendsPuppet, "kissUnit").to(0).over(500);
+            puppetObj.mxnFxVibrate.frequency = 0;
+        },
     };
 
     return obj
@@ -158,6 +173,12 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
             while (true) {
                 if (!self.mxnDetectPlayer.isDetected) {
                     yield* moves.putAwayPitchfork();
+                }
+                if (
+                    obj.status.health < obj.status.healthMax
+                    && (!self.mxnDetectPlayer.isDetected || self.mxnDetectPlayer.relativePosition.vlength > 130)
+                ) {
+                    yield* moves.kiss();
                 }
                 yield () => self.mxnDetectPlayer.isDetected;
                 yield* moves.pursuePlayerWithPitchfork();
@@ -173,9 +194,9 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
 function objAngelBoyfriendsLoveVortexAoe(speed: "slow" | "fast") {
     return objProjectileLoveVortexAoe()
         .coro(function* (self) {
-            yield interpvr(self.scale).to(200, 200).over(speed === "slow" ? 2000 : 1000);
-            yield sleep(500);
-            yield interpvr(self.scale).factor(factor.sine).to(0, 0).over(500);
+            yield interpvr(self.scale).to(200, 200).over(speed === "slow" ? 2000 : 1200);
+            yield sleep(Rng.intc(400, 600));
+            yield interpvr(self.scale).factor(factor.sine).to(0, 0).over(666);
             self.destroy();
         });
 }
