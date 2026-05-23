@@ -124,8 +124,9 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                 yield interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(1).over(1000);
             }
             else {
-                // TODO warning sound!
-                obj.speed.y = -3;
+                if (obj.isOnGround) {
+                    obj.speed.y = -3;
+                }
 
                 yield* Coro.all([
                     interp(obj.speed, "x").to(0).over(333),
@@ -133,10 +134,14 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                 ]);
                 puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar = direction;
             }
-            yield interp(obj.speed, "x").to(direction * 3).over(1000);
+            yield* Coro.race([
+                interp(obj.speed, "x").to(direction * 3).over(1000),
+                () => obj.speed.x === 0,
+            ]);
             yield () => obj.speed.x === 0;
             if (
-                !obj.mxnDetectPlayer.isDetected || Math.sign(obj.mxnDetectPlayer.relativePosition.x) === direction
+                obj.isOnGround
+                && (!obj.mxnDetectPlayer.isDetected || Math.sign(obj.mxnDetectPlayer.relativePosition.x) === direction)
             ) {
                 obj.speed.at(0, -7);
                 yield interp(obj.speed, "x").to(direction * 3).over(1000);
