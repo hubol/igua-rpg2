@@ -133,10 +133,10 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                 }
             }
         },
-        *dramaLoveVortexAttack() {
+        *loveVortex() {
             puppetObj.objAngelBoyfriendsPuppet.isExpressingPride = true;
             yield* Coro.all([
-                interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(0).over(333),
+                moves.putAwayPitchfork(),
                 interp(obj.speed, "x").to(0).over(333),
             ]);
             puppetObj.mxnFxVibrate.direction.at(0, -1);
@@ -164,7 +164,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                 if (
                     self.mxnDetectPlayer.isDetected && self.mxnDetectPlayer.relativePosition.vlength < 150 && Rng.bool()
                 ) {
-                    yield* moves.dramaLoveVortexAttack();
+                    yield* moves.loveVortex();
                 }
             }
         });
@@ -173,17 +173,9 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
 function objAngelBoyfriendsLoveVortexAoe(speed: "slow" | "fast") {
     return objProjectileLoveVortexAoe()
         .coro(function* (self) {
-            // if (speed === "slow") {
-            yield interpvr(self.scale).to(200, 200).over(2000);
+            yield interpvr(self.scale).to(200, 200).over(speed === "slow" ? 2000 : 1000);
             yield sleep(500);
             yield interpvr(self.scale).factor(factor.sine).to(0, 0).over(500);
-            // }
-            // else {
-            //     yield interpvr(self.scale).to(90, 90).over(600);
-            //     yield interpvr(self.scale).factor(factor.sine).to(200, 200).over(600);
-            //     yield sleep(300);
-            //     yield interpvr(self.scale).factor(factor.sine).to(0, 0).over(300);
-            // }
             self.destroy();
         });
 }
