@@ -59,7 +59,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
         .drawRect(13, 23, 86, 49)
         .invisible();
 
-    return container(
+    const obj = container(
         puppetObj,
         hurtboxObj,
     )
@@ -68,66 +68,6 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
         .mixin(mxnPhysics, { gravity: 0.3, physicsRadius: 30, physicsOffset: [0, -30] })
         .pivoted(56, 70)
         .zIndexed(ZIndex.Entities)
-        .coro(function* (self) {
-            let loveVortexesCount = 0;
-
-            function* dramaLoveVortexAttack() {
-                puppetObj.objAngelBoyfriendsPuppet.isExpressingPride = true;
-                yield* Coro.all([
-                    interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(0).over(333),
-                    interp(self.speed, "x").to(0).over(333),
-                ]);
-                puppetObj.mxnFxVibrate.direction.at(0, -1);
-                yield interp(puppetObj.mxnFxVibrate, "frequency").to(0.3).over(300);
-                const vortexSpeed = loveVortexesCount++ === 0 ? "slow" : Rng.choose("slow", "fast");
-                const vortexObj = objAngelBoyfriendsLoveVortexAoe(vortexSpeed)
-                    .mixin(mxnRpgAttack, { attack: atks.loveVortexAoe, attacker: self.status })
-                    .zIndexed(ZIndex.TerrainDecals)
-                    .at(self)
-                    .show();
-                yield () => vortexObj.destroyed;
-                puppetObj.mxnFxVibrate.frequency = 0;
-                puppetObj.objAngelBoyfriendsPuppet.isExpressingPride = false;
-            }
-
-            while (true) {
-                if (!self.mxnDetectPlayer.isDetected && puppetObj.objAngelBoyfriendsPuppet.pitchfork.appearUnit > 0) {
-                    yield interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(0).over(333);
-                }
-                yield () => self.mxnDetectPlayer.isDetected;
-                const direction = Math.sign(self.mxnDetectPlayer.relativePosition.x);
-                if (puppetObj.objAngelBoyfriendsPuppet.pitchfork.appearUnit < 1) {
-                    puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar = direction;
-                    yield interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(1).over(1000);
-                }
-                else {
-                    // TODO warning sound!
-                    self.speed.y = -3;
-
-                    yield* Coro.all([
-                        interp(self.speed, "x").to(0).over(333),
-                        () => self.isOnGround && self.speed.y === 0,
-                    ]);
-                    puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar = direction;
-                }
-                yield interp(self.speed, "x").to(direction * 3).over(1000);
-                yield () => self.speed.x === 0;
-                if (
-                    !self.mxnDetectPlayer.isDetected || Math.sign(self.mxnDetectPlayer.relativePosition.x) === direction
-                ) {
-                    self.speed.at(0, -7);
-                    yield interp(self.speed, "x").to(direction * 3).over(1000);
-                    if (!self.mxnDetectPlayer.isDetected) {
-                        yield interp(self.speed, "x").to(0).over(300);
-                    }
-                }
-                if (
-                    self.mxnDetectPlayer.isDetected && self.mxnDetectPlayer.relativePosition.vlength < 150 && Rng.bool()
-                ) {
-                    yield* dramaLoveVortexAttack();
-                }
-            }
-        })
         .step(self => {
             puppetObj.objAngelBoyfriendsPuppet.movementSpeed.at(self.speed);
         })
@@ -153,6 +93,80 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                 )
                 .invisible()
                 .show(self);
+        });
+
+    const movesState = {
+        loveVortexesCount: 0,
+    };
+
+    const moves = {
+        *putAwayPitchfork() {
+            if (puppetObj.objAngelBoyfriendsPuppet.pitchfork.appearUnit > 0) {
+                yield interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(0).over(333);
+            }
+        },
+        *pursuePlayerWithPitchfork() {
+            const direction = Math.sign(obj.mxnDetectPlayer.relativePosition.x);
+            if (puppetObj.objAngelBoyfriendsPuppet.pitchfork.appearUnit < 1) {
+                puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar = direction;
+                yield interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(1).over(1000);
+            }
+            else {
+                // TODO warning sound!
+                obj.speed.y = -3;
+
+                yield* Coro.all([
+                    interp(obj.speed, "x").to(0).over(333),
+                    () => obj.isOnGround && obj.speed.y === 0,
+                ]);
+                puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar = direction;
+            }
+            yield interp(obj.speed, "x").to(direction * 3).over(1000);
+            yield () => obj.speed.x === 0;
+            if (
+                !obj.mxnDetectPlayer.isDetected || Math.sign(obj.mxnDetectPlayer.relativePosition.x) === direction
+            ) {
+                obj.speed.at(0, -7);
+                yield interp(obj.speed, "x").to(direction * 3).over(1000);
+                if (!obj.mxnDetectPlayer.isDetected) {
+                    yield interp(obj.speed, "x").to(0).over(300);
+                }
+            }
+        },
+        *dramaLoveVortexAttack() {
+            puppetObj.objAngelBoyfriendsPuppet.isExpressingPride = true;
+            yield* Coro.all([
+                interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(0).over(333),
+                interp(obj.speed, "x").to(0).over(333),
+            ]);
+            puppetObj.mxnFxVibrate.direction.at(0, -1);
+            yield interp(puppetObj.mxnFxVibrate, "frequency").to(0.3).over(300);
+            const vortexSpeed = movesState.loveVortexesCount++ === 0 ? "slow" : Rng.choose("slow", "fast");
+            const vortexObj = objAngelBoyfriendsLoveVortexAoe(vortexSpeed)
+                .mixin(mxnRpgAttack, { attack: atks.loveVortexAoe, attacker: obj.status })
+                .zIndexed(ZIndex.TerrainDecals)
+                .at(obj)
+                .show();
+            yield () => vortexObj.destroyed;
+            puppetObj.mxnFxVibrate.frequency = 0;
+            puppetObj.objAngelBoyfriendsPuppet.isExpressingPride = false;
+        },
+    };
+
+    return obj
+        .coro(function* (self) {
+            while (true) {
+                if (!self.mxnDetectPlayer.isDetected) {
+                    yield* moves.putAwayPitchfork();
+                }
+                yield () => self.mxnDetectPlayer.isDetected;
+                yield* moves.pursuePlayerWithPitchfork();
+                if (
+                    self.mxnDetectPlayer.isDetected && self.mxnDetectPlayer.relativePosition.vlength < 150 && Rng.bool()
+                ) {
+                    yield* moves.dramaLoveVortexAttack();
+                }
+            }
         });
 }
 
