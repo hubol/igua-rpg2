@@ -191,22 +191,27 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
     return obj
         .coro(function* (self) {
             while (true) {
-                if (!self.mxnDetectPlayer.isDetected) {
-                    yield* moves.putAwayPitchfork();
-                }
-                if (
-                    obj.status.health < obj.status.healthMax
-                    && obj.speed.x === 0
-                    && (!self.mxnDetectPlayer.isDetected || self.mxnDetectPlayer.relativePosition.vlength > 130)
-                ) {
-                    yield* self.mxnEnemy.dramaStagger(moves.kiss);
-                }
-                yield () => self.mxnDetectPlayer.isDetected;
-                yield* moves.pursuePlayerWithPitchfork();
-                if (
-                    self.mxnDetectPlayer.isDetected && self.mxnDetectPlayer.relativePosition.vlength < 150 && Rng.bool()
-                ) {
-                    yield* moves.loveVortex();
+                const loveVortexChances = Rng.shuffle([true, true, false, false]);
+
+                for (const loveVortexChance of loveVortexChances) {
+                    if (!self.mxnDetectPlayer.isDetected) {
+                        yield* moves.putAwayPitchfork();
+                    }
+                    if (
+                        obj.status.health < obj.status.healthMax
+                        && obj.speed.x === 0
+                        && (!self.mxnDetectPlayer.isDetected || self.mxnDetectPlayer.relativePosition.vlength > 130)
+                    ) {
+                        yield* self.mxnEnemy.dramaStagger(moves.kiss);
+                    }
+                    yield () => self.mxnDetectPlayer.isDetected;
+                    yield* moves.pursuePlayerWithPitchfork();
+                    if (
+                        self.mxnDetectPlayer.isDetected && self.mxnDetectPlayer.relativePosition.vlength < 150
+                        && loveVortexChance
+                    ) {
+                        yield* moves.loveVortex();
+                    }
                 }
             }
         });
