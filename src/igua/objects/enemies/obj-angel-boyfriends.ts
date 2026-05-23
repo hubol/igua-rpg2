@@ -59,8 +59,6 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
         .drawRect(13, 23, 86, 49)
         .invisible();
 
-    let loveVortexesCount = 0;
-
     return container(
         puppetObj,
         hurtboxObj,
@@ -71,6 +69,27 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
         .pivoted(56, 70)
         .zIndexed(ZIndex.Entities)
         .coro(function* (self) {
+            let loveVortexesCount = 0;
+
+            function* dramaLoveVortexAttack() {
+                puppetObj.objAngelBoyfriendsPuppet.isExpressingPride = true;
+                yield* Coro.all([
+                    interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(0).over(333),
+                    interp(self.speed, "x").to(0).over(333),
+                ]);
+                puppetObj.mxnFxVibrate.direction.at(0, -1);
+                yield interp(puppetObj.mxnFxVibrate, "frequency").to(0.3).over(300);
+                const vortexSpeed = loveVortexesCount++ === 0 ? "slow" : Rng.choose("slow", "fast");
+                const vortexObj = objAngelBoyfriendsLoveVortexAoe(vortexSpeed)
+                    .mixin(mxnRpgAttack, { attack: atks.loveVortexAoe, attacker: self.status })
+                    .zIndexed(ZIndex.TerrainDecals)
+                    .at(self)
+                    .show();
+                yield () => vortexObj.destroyed;
+                puppetObj.mxnFxVibrate.frequency = 0;
+                puppetObj.objAngelBoyfriendsPuppet.isExpressingPride = false;
+            }
+
             while (true) {
                 if (!self.mxnDetectPlayer.isDetected && puppetObj.objAngelBoyfriendsPuppet.pitchfork.appearUnit > 0) {
                     yield interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(0).over(333);
@@ -102,23 +121,10 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                         yield interp(self.speed, "x").to(0).over(300);
                     }
                 }
-                if (self.mxnDetectPlayer.isDetected && self.mxnDetectPlayer.relativePosition.y < -20 && Rng.bool()) {
-                    puppetObj.objAngelBoyfriendsPuppet.isExpressingPride = true;
-                    yield* Coro.all([
-                        interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(0).over(333),
-                        interp(self.speed, "x").to(0).over(333),
-                    ]);
-                    puppetObj.mxnFxVibrate.direction.at(0, -1);
-                    yield interp(puppetObj.mxnFxVibrate, "frequency").to(0.3).over(300);
-                    const vortexSpeed = loveVortexesCount++ === 0 ? "slow" : Rng.choose("slow", "fast");
-                    const vortexObj = objAngelBoyfriendsLoveVortexAoe(vortexSpeed)
-                        .mixin(mxnRpgAttack, { attack: atks.loveVortexAoe, attacker: self.status })
-                        .zIndexed(ZIndex.TerrainDecals)
-                        .at(self)
-                        .show();
-                    yield () => vortexObj.destroyed;
-                    puppetObj.mxnFxVibrate.frequency = 0;
-                    puppetObj.objAngelBoyfriendsPuppet.isExpressingPride = false;
+                if (
+                    self.mxnDetectPlayer.isDetected && self.mxnDetectPlayer.relativePosition.vlength < 150 && Rng.bool()
+                ) {
+                    yield* dramaLoveVortexAttack();
                 }
             }
         })
