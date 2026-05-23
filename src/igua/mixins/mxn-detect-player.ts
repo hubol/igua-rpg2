@@ -1,6 +1,7 @@
 import { Container, Graphics } from "pixi.js";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { approachLinear } from "../../lib/math/number";
 import { Integer, Polar } from "../../lib/math/number-alias-types";
 import { distance } from "../../lib/math/vector";
 import { VectorSimple, vnew } from "../../lib/math/vector-type";
@@ -32,6 +33,8 @@ export function mxnDetectPlayer(obj: Container) {
 
     let facingPivotObjs = Force<MxnFacingPivot[]>();
     let angelEyesObjs = Force<ObjAngelEyes[]>();
+
+    let maxRayDistance = 200;
 
     return obj
         .merge({ mxnDetectPlayer })
@@ -66,6 +69,8 @@ export function mxnDetectPlayer(obj: Container) {
             for (let i = 0; i < facingPivotObjs.length; i++) {
                 facingPivotObjs[i].polarOffsets[0] = polarOffset;
             }
+
+            maxRayDistance = approachLinear(maxRayDistance, 200, 1);
         })
         .coro(function* (self) {
             const rayObj = objDetectRay().invisible()
@@ -91,7 +96,9 @@ export function mxnDetectPlayer(obj: Container) {
             if (self.is(mxnEnemy)) {
                 self.handles("damaged", (_, result) => {
                     if (!result.rejected && result.damaged && result.attacker === Rpg.character.status) {
-                        rayObj.at(playerObj);
+                        rayObj.at(playerObj).add(0, -rayObj.physicsRadius);
+                        rayObj.speed.at(playerObj.speed);
+                        maxRayDistance = 600;
                     }
                 });
             }
@@ -141,7 +148,7 @@ export function mxnDetectPlayer(obj: Container) {
                 startPos.at(rayObj);
                 yield* Coro.race([
                     sleepf(120),
-                    () => distance(rayObj, startPos) > 200,
+                    () => distance(rayObj, startPos) > maxRayDistance,
                 ]);
             }
         });
