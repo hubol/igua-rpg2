@@ -16,7 +16,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 99,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 216,
+          "y": 152,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "BoyfriendsMarker", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",
@@ -262,9 +274,9 @@
           "id": 4,
           "_eid": "93117141",
           "x": 440,
-          "y": 208,
+          "y": 144,
           "width": 32,
-          "height": 16,
+          "height": 80,
           "originX": 0,
           "originY": 0,
           "tint": "#54290a",
@@ -317,6 +329,32 @@
           "y": 208,
           "width": 152,
           "height": 72,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#54290a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 9,
+          "_eid": "93117141",
+          "x": -128,
+          "y": -24,
+          "width": 128,
+          "height": 256,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#54290a",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 10,
+          "_eid": "93117141",
+          "x": 792,
+          "y": -8,
+          "width": 128,
+          "height": 256,
           "originX": 0,
           "originY": 0,
           "tint": "#54290a",

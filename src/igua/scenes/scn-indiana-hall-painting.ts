@@ -1,5 +1,6 @@
 import { Graphics, Sprite, TilingSprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Tx } from "../../assets/textures";
 import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
@@ -12,7 +13,11 @@ import { ZIndex } from "../core/scene/z-index";
 import { DramaGifts } from "../drama/drama-gifts";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { ask, show } from "../drama/show";
+import { Cutscene, scene } from "../globals";
+import { mxnFxVibrate } from "../mixins/effects/mxn-fx-vibrate";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { objAngelBoyfriends } from "../objects/enemies/obj-angel-boyfriends";
+import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 import { playerObj } from "../objects/obj-player";
 import { objUiAcceptableRange } from "../objects/overlay/obj-ui-acceptable-range";
 import { StepOrder } from "../objects/step-order";
@@ -25,6 +30,7 @@ export function scnIndianaHallPainting() {
     const paintingObj = objPainting()
         .at(lvl.PaintingRegion)
         .zIndexed(ZIndex.BackgroundEntities)
+        .mixin(mxnFxVibrate)
         .show();
 
     let dramaPainterCutscene = function* () {
@@ -35,7 +41,7 @@ export function scnIndianaHallPainting() {
         .mixin(mxnCutscene, function* () {
             yield* dramaPainterCutscene();
         })
-        .coro(function* () {
+        .coro(function* (self) {
             const pickedColorRef = {
                 pickedColor: pickColor(null),
             };
@@ -52,7 +58,7 @@ export function scnIndianaHallPainting() {
                     paintingObj.objPainting.addPaintLayer(pickedColorRef.pickedColor.color);
                     yield sleep(1500);
                     if (paintingObj.objPainting.isComplete) {
-                        yield* dramaComplete();
+                        yield* dramaCompletePainting();
                     }
                     else {
                         yield* show("OK! Time for the next color.");
@@ -71,7 +77,8 @@ export function scnIndianaHallPainting() {
                 }
             };
 
-            const dramaComplete = function* () {
+            const dramaCompletePainting = function* () {
+                pickedColorObj.destroy();
                 yield* show("Well, it's all done.");
                 const result = yield* ask("What do you think?", "It's great!", "Not so good...");
                 if (result === 0) {
@@ -84,7 +91,35 @@ export function scnIndianaHallPainting() {
                         yield* DramaGifts.give(gift);
                     }
                 }
-                yield* DramaHallOfDoors.complete(cosmHallOfDoors, 2);
+
+                paintingObj.mxnFxVibrate.direction.at(1, 0);
+                yield interp(paintingObj.mxnFxVibrate, "frequency").to(0.3).over(1000);
+
+                yield* show("Uh-oh.");
+
+                scene.stage
+                    .coro(function* () {
+                        paintingObj.mxnFxVibrate.direction.at(0, 0);
+
+                        self.destroy();
+
+                        const boyfriendTints = paintingObj.objPainting.createBoyfriends();
+                        const angelObj = objAngelBoyfriends({ tints: boyfriendTints })
+                            .at(lvl.BoyfriendsMarker)
+                            .show();
+
+                        objBossMusicPlayer({
+                            bossObjs: [angelObj],
+                            mzkBattle: Mzk.FuckerLand,
+                            mzkPeace: Mzk.BigLove,
+                        })
+                            .show();
+
+                        yield () => angelObj.destroyed;
+                        Cutscene.play(function* () {
+                            yield* DramaHallOfDoors.complete(cosmHallOfDoors, 2);
+                        });
+                    });
             };
 
             dramaPainterCutscene = function* () {
@@ -254,6 +289,13 @@ function objPainting() {
         },
         addPaintLayer(color: RgbInt) {
             paintTints.push(color);
+        },
+        createBoyfriends() {
+            return {
+                angry: paintTints[paintTints.length - 4] ?? 0xff0000,
+                sad: paintTints[paintTints.length - 3] ?? 0x00ff00,
+                antlers: paintTints[paintTints.length - 1] ?? 0x0000ff,
+            };
         },
     };
 

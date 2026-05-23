@@ -2704,11 +2704,13 @@ export const Lvl = {
       Block: e(r["Block"], { x: 152, y: 224, width: 640, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 352, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 264, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
-      Block_3: e(r["Block"], { x: 440, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 440, y: 144, width: 32, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
       Block_4: e(r["Block"], { x: 528, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
       Block_5: e(r["Block"], { x: 616, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
       Block_6: e(r["Block"], { x: 704, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
       Block_7: e(r["Block"], { x: 0, y: 208, width: 152, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
+      Block_8: e(r["Block"], { x: -128, y: -24, width: 128, height: 256, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
+      Block_9: e(r["Block"], { x: 792, y: -8, width: 128, height: 256, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
       PainterNpc: e(r["IguanaNpc"], { x: 96, y: 208, flippedX: false, values: { personaName: "IndianaHallPainter", name: "PainterNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 224, y: 224, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       Puddle: e(r["Puddle"], { x: 296, y: 224, width: 56, values: { name: "", depth: 0 }, tint: 0xff0000 }, "FrontEntities"),
@@ -2717,6 +2719,7 @@ export const Lvl = {
       Puddle_3: e(r["Puddle"], { x: 560, y: 224, width: 56, values: { name: "", depth: 0 }, tint: 0xffffff }, "FrontEntities"),
       Puddle_4: e(r["Puddle"], { x: 648, y: 224, width: 56, values: { name: "", depth: 0 }, tint: 0x000000 }, "FrontEntities"),
       PaintingRegion: e(r["Region"], { x: 136, y: 80, width: 158, height: 94, values: { name: "PaintingRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      BoyfriendsMarker: e(r["Marker"], { x: 216, y: 152, values: { name: "BoyfriendsMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   IndianaHallSnowman: (): LvlType.IndianaHallSnowman => {
@@ -11866,6 +11869,8 @@ export namespace LvlType {
     Block_5: ReturnType<(typeof r)["Block"]>;
     Block_6: ReturnType<(typeof r)["Block"]>;
     Block_7: ReturnType<(typeof r)["Block"]>;
+    Block_8: ReturnType<(typeof r)["Block"]>;
+    Block_9: ReturnType<(typeof r)["Block"]>;
     PainterNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     Puddle: ReturnType<(typeof r)["Puddle"]>;
@@ -11874,6 +11879,7 @@ export namespace LvlType {
     Puddle_3: ReturnType<(typeof r)["Puddle"]>;
     Puddle_4: ReturnType<(typeof r)["Puddle"]>;
     PaintingRegion: ReturnType<(typeof r)["Region"]>;
+    BoyfriendsMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type IndianaHallSnowman = {
     TerrainDistantHills500: Sprite;
