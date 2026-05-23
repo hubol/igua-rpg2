@@ -195,6 +195,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
 
     return obj
         .coro(function* (self) {
+            yield () => self.isOnGround;
             while (true) {
                 const loveVortexChances = Rng.shuffle([true, true, false, false]);
 
