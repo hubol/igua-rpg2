@@ -152,8 +152,19 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
             puppetObj.mxnFxVibrate.frequency = 0;
             puppetObj.objAngelBoyfriendsPuppet.isExpressingPride = false;
         },
-        *kiss() {
+        *kiss(isStaggered: mxnEnemy.StaggeredPredicate) {
             yield* moves.putAwayPitchfork();
+            yield* Coro.race([
+                moves._kiss(),
+                isStaggered,
+            ]);
+            if (isStaggered()) {
+                obj.speed.y = -3;
+            }
+            yield interp(puppetObj.objAngelBoyfriendsPuppet, "kissUnit").to(0).over(500);
+            puppetObj.mxnFxVibrate.frequency = 0;
+        },
+        *_kiss() {
             yield interp(puppetObj.objAngelBoyfriendsPuppet, "kissUnit").to(1).over(500);
             puppetObj.mxnFxVibrate.direction.at(1, 0);
             puppetObj.mxnFxVibrate.frequency = 0.2;
@@ -163,8 +174,6 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                 .add(0, -50)
                 .show();
             obj.heal(50);
-            yield interp(puppetObj.objAngelBoyfriendsPuppet, "kissUnit").to(0).over(500);
-            puppetObj.mxnFxVibrate.frequency = 0;
         },
     };
 
@@ -176,9 +185,10 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                 }
                 if (
                     obj.status.health < obj.status.healthMax
+                    && obj.speed.x === 0
                     && (!self.mxnDetectPlayer.isDetected || self.mxnDetectPlayer.relativePosition.vlength > 130)
                 ) {
-                    yield* moves.kiss();
+                    yield* self.mxnEnemy.dramaStagger(moves.kiss);
                 }
                 yield () => self.mxnDetectPlayer.isDetected;
                 yield* moves.pursuePlayerWithPitchfork();

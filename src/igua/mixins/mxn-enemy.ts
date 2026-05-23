@@ -1,5 +1,6 @@
 import { Container, DisplayObject } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
+import { Coro } from "../../lib/game-engine/routines/coro";
 import { Rng } from "../../lib/math/rng";
 import { clone } from "../../lib/object/clone";
 import { layers } from "../globals";
@@ -70,6 +71,11 @@ export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
         },
     };
 
+    function* dramaStagger(coro: mxnEnemy.StaggerableMoveCoro, staggerHealthPercentage = 0) {
+        const staggerHealth = Math.max(1, status.health - Math.floor(staggerHealthPercentage * status.healthMax));
+        yield* coro(() => status.health < staggerHealth);
+    }
+
     // TODO should it expose a way to register hitboxes/hurtboxes
     // Or should that be another mixin?
 
@@ -112,6 +118,7 @@ export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
         })
         .merge({
             mxnEnemy: {
+                dramaStagger,
                 soulAnchorObj: args.soulAnchorObj ?? obj,
             },
         })
@@ -135,6 +142,11 @@ export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
     }
 
     return enemyObj;
+}
+
+export namespace mxnEnemy {
+    export type StaggerableMoveCoro = (isStaggered: StaggeredPredicate) => Coro.Type;
+    export type StaggeredPredicate = () => boolean;
 }
 
 export type MxnEnemy = ReturnType<typeof mxnEnemy>;
