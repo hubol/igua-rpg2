@@ -56,8 +56,19 @@ export function scnIndianaHallPainting() {
                     yield* show("Hey! You did it!");
                     playerObj.status.conditions.wetness.value = 0;
                     paintingObj.objPainting.addPaintLayer(pickedColorRef.pickedColor.color);
-                    yield sleep(1500);
+                    if (Rpg.flags.indianaHall.completedPaintingOnce) {
+                        while (!paintingObj.objPainting.isComplete) {
+                            yield sleep(250);
+                            pickedColorRef.pickedColor = pickColor(pickedColorRef.pickedColor);
+                            paintingObj.objPainting.addPaintLayer(pickedColorRef.pickedColor.color);
+                        }
+                    }
+                    else {
+                        yield sleep(1500);
+                    }
+
                     if (paintingObj.objPainting.isComplete) {
+                        Rpg.flags.indianaHall.completedPaintingOnce = true;
                         yield* dramaCompletePainting();
                     }
                     else {

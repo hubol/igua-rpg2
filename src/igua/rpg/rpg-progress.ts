@@ -64,6 +64,9 @@ export function getInitialRpgProgress() {
                     receivedPocketItemIds: new Set<DataPocketItem.Id>(),
                 },
             },
+            indianaHall: {
+                completedPaintingOnce: false,
+            },
             indianaUniversity: {
                 isWaterRunning: false,
             },
