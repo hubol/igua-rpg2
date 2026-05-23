@@ -1,12 +1,13 @@
-import { Graphics, Sprite } from "pixi.js";
+import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
+import { holdf } from "../../../lib/game-engine/routines/hold";
 import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { nlerp } from "../../../lib/math/number";
 import { RgbInt } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
-import { vnew } from "../../../lib/math/vector-type";
+import { VectorSimple, vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { ZIndex } from "../../core/scene/z-index";
@@ -21,7 +22,7 @@ import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objFxHeart } from "../effects/obj-fx-heart";
 import { objProjectileLoveVortexAoe } from "../projectiles/obj-projectile-love-vortex-aoe";
-import { objAngelMouth } from "./obj-angel-mouth";
+import { ObjAngelMouth, objAngelMouth } from "./obj-angel-mouth";
 
 interface ObjAngelBoyfriendsArgs {
     tints: {
@@ -48,7 +49,9 @@ const atks = {
     }),
 };
 
-const [txIdle, txMove, txKissStart, txKiss, txPride, txFace] = Tx.Enemy.Boyfriends.Bodies.split({ width: 112 });
+const [txIdle, txMove, txKissStart, txKiss, txPride, txFaceAngry, txFaceSad] = Tx.Enemy.Boyfriends.Bodies.split({
+    width: 112,
+});
 
 const bodyTexturesSupportingFace = new Set([txIdle, txMove, txPride]);
 
@@ -78,6 +81,22 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
         .mixin(mxnEnemyDeathBurst, { map: tintMap })
         .mixin(mxnDetectPlayer)
         .mixin(mxnPhysics, { gravity: 0.3, physicsRadius: 30, physicsOffset: [0, -30] })
+        .handles("damaged", (_, result) => {
+            if (result.rejected) {
+                return;
+            }
+
+            const mouthObj = Rng.choose(
+                puppetObj.objAngelBoyfriendsPuppet.mouthObjs.angry,
+                puppetObj.objAngelBoyfriendsPuppet.mouthObjs.sad,
+            );
+
+            mouthObj
+                .coro(function* () {
+                    yield holdf(() => mouthObj.controls.frowning = true, 30);
+                    mouthObj.controls.frowning = false;
+                });
+        })
         .pivoted(56, 70)
         .zIndexed(ZIndex.Entities)
         .step(self => {
@@ -241,14 +260,14 @@ function objAngelBoyfriendsPuppet() {
             toothGapWidth: 2,
             txs: objAngelMouth.txs.rounded16weight3,
         })
-            .at(34, 39),
+            .at(34, 38),
         sad: objAngelMouth({
             negativeSpaceTint: 0x000000,
             teethCount: 4,
             toothGapWidth: 1,
             txs: objAngelMouth.txs.rounded16weight3,
         })
-            .at(80, 38),
+            .at(80, 37),
     };
 
     const api = {
@@ -266,7 +285,8 @@ function objAngelBoyfriendsPuppet() {
 
     const bodiesSprite = Sprite.from(txIdle);
     const faceObj = container(
-        Sprite.from(txFace),
+        Sprite.from(txFaceAngry),
+        Sprite.from(txFaceSad),
         mouthObjs.angry,
         mouthObjs.sad,
     )
