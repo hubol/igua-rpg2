@@ -18,6 +18,7 @@ import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
+import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objFxHeart } from "../effects/obj-fx-heart";
@@ -140,7 +141,9 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
             const direction = Math.sign(obj.mxnDetectPlayer.relativePosition.x);
             if (puppetObj.objAngelBoyfriendsPuppet.pitchfork.appearUnit < 1) {
                 puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar = direction;
+                puppetObj.objAngelBoyfriendsPuppet.pitchfork.sparklesPerFrame = 0.3;
                 yield interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(1).over(1000);
+                puppetObj.objAngelBoyfriendsPuppet.pitchfork.sparklesPerFrame = 0;
             }
             else {
                 if (obj.isOnGround) {
@@ -276,6 +279,7 @@ function objAngelBoyfriendsPuppet() {
         isExpressingPride: false,
         mouthObjs,
         pitchfork: {
+            sparklesPerFrame: 0,
             appearUnit: 0,
             facingPolar: 1,
         },
@@ -293,10 +297,12 @@ function objAngelBoyfriendsPuppet() {
         .mixin(mxnFacingPivot, { down: 3, left: -3, right: 3, up: -3 });
 
     const pitchforkObj = Sprite.from(Tx.Enemy.Boyfriends.Pitchfork)
+        .mixin(mxnSparkling)
         .invisible()
         .anchored(0.5, 0.5)
         .at(78, 55)
         .step(self => {
+            self.sparklesPerFrame = api.pitchfork.sparklesPerFrame;
             self.alpha = api.pitchfork.appearUnit < 1 ? 0.5 : 1;
             self.visible = api.pitchfork.appearUnit > 0;
             self.pivot.y = nlerp(32, 0, api.pitchfork.appearUnit) + (bodiesSprite.texture === txMove ? 1 : 0);
