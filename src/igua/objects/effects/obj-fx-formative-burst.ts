@@ -1,12 +1,13 @@
 import { interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
+import { RgbInt } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
 import { objDieOnEmpty } from "../utils/obj-die-on-empty";
 import { FxPattern } from "./lib/fx-pattern";
 import { objFxAsterisk16Px } from "./obj-fx-asterisk-16px";
 
-export function objFxFormativeBurst(tint = 0xffffff) {
+export function objFxFormativeBurst(tint: RgbInt | (() => RgbInt) = 0xffffff) {
     return objDieOnEmpty()
         .coro(function* (self) {
             for (const { normal, position } of FxPattern.getRadialBurst({ count: 16, radius: [60, 70] })) {
@@ -15,7 +16,7 @@ export function objFxFormativeBurst(tint = 0xffffff) {
                     .coro(function* (self) {
                         yield interpvr(self).to(vnew(normal).scale(0.2, 0.2)).over(Rng.float(500, 750));
                     })
-                    .tinted(tint)
+                    .tinted(typeof tint === "number" ? tint : tint())
                     .show(self);
                 yield sleepf(1);
             }
