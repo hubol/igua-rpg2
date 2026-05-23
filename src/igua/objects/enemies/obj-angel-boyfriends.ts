@@ -13,6 +13,7 @@ import { ZIndex } from "../../core/scene/z-index";
 import { mxnFxVibrate } from "../../mixins/effects/mxn-fx-vibrate";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
@@ -52,19 +53,29 @@ const [txIdle, txMove, txKissStart, txKiss, txPride, txFace] = Tx.Enemy.Boyfrien
 const bodyTexturesSupportingFace = new Set([txIdle, txMove, txPride]);
 
 export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
+    const tintMap: MapRgbFilter.Map = [args.tints.angry, args.tints.sad, args.tints.antlers, 0xffffff];
+
     const puppetObj = objAngelBoyfriendsPuppet()
-        .filtered(new MapRgbFilter(args.tints.angry, args.tints.sad, args.tints.antlers));
+        .filtered(new MapRgbFilter(...tintMap));
 
     const hurtboxObj = new Graphics()
         .beginFill(0xff0000)
         .drawRect(13, 23, 86, 49)
         .invisible();
 
+    const soulAnchorObj = new Graphics()
+        .beginFill(0xffffff)
+        .drawRect(0, 0, 1, 1)
+        .at(56, 40)
+        .invisible();
+
     const obj = container(
         puppetObj,
         hurtboxObj,
+        soulAnchorObj,
     )
-        .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank: ranks.level0 })
+        .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank: ranks.level0, soulAnchorObj })
+        .mixin(mxnEnemyDeathBurst, { map: tintMap })
         .mixin(mxnDetectPlayer)
         .mixin(mxnPhysics, { gravity: 0.3, physicsRadius: 30, physicsOffset: [0, -30] })
         .pivoted(56, 70)
