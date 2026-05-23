@@ -16,6 +16,7 @@ import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnFxVibrate } from "../mixins/effects/mxn-fx-vibrate";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { objFxFormativeBurst } from "../objects/effects/obj-fx-formative-burst";
 import { objAngelBoyfriends } from "../objects/enemies/obj-angel-boyfriends";
 import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 import { playerObj } from "../objects/obj-player";
@@ -115,6 +116,15 @@ export function scnIndianaHallPainting() {
                         self.destroy();
 
                         const boyfriendTints = paintingObj.objPainting.createBoyfriends();
+
+                        objFxFormativeBurst(() =>
+                            Rng.choose(boyfriendTints.angry, boyfriendTints.sad, boyfriendTints.antlers)
+                        )
+                            .at(lvl.BoyfriendsMarker)
+                            .show();
+
+                        yield sleep(250);
+
                         const angelObj = objAngelBoyfriends({ tints: boyfriendTints })
                             .at(lvl.BoyfriendsMarker)
                             .show();
@@ -302,6 +312,14 @@ function objPainting() {
             paintTints.push(color);
         },
         createBoyfriends() {
+            for (const offset of [1, 2, 3, 4]) {
+                const index = paintingLayersObj.children.length - offset;
+                const obj = paintingLayersObj.children[index];
+                obj?.coro(function* (self) {
+                    yield interp(self, "alpha").steps(3).to(0).over(Rng.int(333, 500));
+                });
+            }
+
             return {
                 angry: paintTints[paintTints.length - 4] ?? 0xff0000,
                 sad: paintTints[paintTints.length - 3] ?? 0x00ff00,
