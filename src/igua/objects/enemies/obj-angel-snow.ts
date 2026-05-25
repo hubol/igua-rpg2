@@ -1,4 +1,5 @@
 import { Graphics } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { interp } from "../../../lib/game-engine/routines/interp";
@@ -152,10 +153,15 @@ export function objAngelSnow() {
                     .add(0, -64)
                     .show();
 
+                const sfx = aoeObj.playInstance(Sfx.Enemy.Snow.Aoe.rate(0.97, 1.03).gain(0));
+                sfx.linearRamp("gain", 1, 1);
+
                 aoeObj.isAttackActive = false;
                 yield interp(aoeObj.objProjectileSnowAoe, "radius").to(64).over(1000);
                 aoeObj.isAttackActive = true;
                 yield sleep(500);
+
+                sfx.linearRamp("gain", 0, 1);
                 yield* Coro.all([
                     interp(mouthObj.mxnSpeakingMouth, "agapeUnit").to(0).over(250),
                     interp(aoeObj.objProjectileSnowAoe, "radius").to(0).over(1000),
@@ -176,6 +182,7 @@ export function objAngelSnow() {
                 rightLegObj.y = approachLinear(rightLegObj.y, rightTargetY, 1);
 
                 if (self.speed.x !== 0 && leftLegObj.y === leftTargetY && rightLegObj.y === rightTargetY) {
+                    self.play(Sfx.Enemy.Snow.Step.rate(0.75, 1.5));
                     legPhase += 1;
                 }
             }
