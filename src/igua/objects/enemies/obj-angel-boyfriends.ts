@@ -1,4 +1,5 @@
 import { Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { holdf } from "../../../lib/game-engine/routines/hold";
@@ -154,11 +155,13 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
             if (puppetObj.objAngelBoyfriendsPuppet.pitchfork.appearUnit < 1) {
                 puppetObj.objAngelBoyfriendsPuppet.pitchfork.facingPolar = direction;
                 puppetObj.objAngelBoyfriendsPuppet.pitchfork.sparklesPerFrame = 0.3;
+                obj.play(Sfx.Enemy.Boyfriends.PitchforkAppear);
                 yield interp(puppetObj.objAngelBoyfriendsPuppet.pitchfork, "appearUnit").to(1).over(1000);
                 puppetObj.objAngelBoyfriendsPuppet.pitchfork.sparklesPerFrame = 0;
             }
             else {
                 if (obj.isOnGround) {
+                    obj.play(Sfx.Enemy.Boyfriends.Jump.rate(0.95, 1.05));
                     obj.speed.y = -3;
                 }
 
@@ -177,6 +180,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                 obj.isOnGround
                 && (!obj.mxnDetectPlayer.isDetected || Math.sign(obj.mxnDetectPlayer.relativePosition.x) === direction)
             ) {
+                obj.play(Sfx.Enemy.Boyfriends.Jump.rate(1.2, 1.25));
                 obj.speed.at(0, -7);
                 yield interp(obj.speed, "x").to(direction * 3).over(1000);
                 if (!obj.mxnDetectPlayer.isDetected) {
@@ -185,6 +189,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
             }
         },
         *loveVortex() {
+            obj.play(Sfx.Enemy.Boyfriends.LoveVortexStart.rate(0.98, 1.02));
             puppetObj.objAngelBoyfriendsPuppet.isExpressingPride = true;
             yield* Coro.all([
                 moves.putAwayPitchfork(),
@@ -210,6 +215,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                 isStaggered,
             ]);
             if (isStaggered()) {
+                obj.play(Sfx.Enemy.Boyfriends.KissInterrupt.rate(0.95, 1.05));
                 obj.speed.y = -3;
             }
             yield interp(puppetObj.objAngelBoyfriendsPuppet, "kissUnit").to(0).over(500);
@@ -220,6 +226,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
             puppetObj.mxnFxVibrate.direction.at(1, 0);
             puppetObj.mxnFxVibrate.frequency = 0.2;
             yield sleep(333);
+            obj.play(Sfx.Enemy.Boyfriends.Smooch.rate(0.95, 1.05));
             objFxHeart()
                 .at(obj)
                 .add(0, -50)
@@ -340,7 +347,9 @@ function objAngelBoyfriendsPuppet() {
                 pedometer += Math.abs(api.movementSpeed.x);
             }
         })
-        .step(() => {
+        .step((self) => {
+            const previousTexture = bodiesSprite.texture;
+
             if (api.isExpressingPride) {
                 bodiesSprite.texture = txPride;
             }
@@ -358,6 +367,13 @@ function objAngelBoyfriendsPuppet() {
             }
             else {
                 bodiesSprite.texture = txIdle;
+            }
+
+            if (
+                (previousTexture === txIdle && bodiesSprite.texture === txMove)
+                || (previousTexture === txMove && bodiesSprite.texture === txIdle)
+            ) {
+                self.play(Sfx.Enemy.Boyfriends.Step.rate(0.75, 1.3));
             }
 
             faceObj.visible = bodyTexturesSupportingFace.has(bodiesSprite.texture);
