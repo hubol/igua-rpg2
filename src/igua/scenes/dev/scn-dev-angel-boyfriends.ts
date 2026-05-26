@@ -13,6 +13,7 @@ export function scnDevAngelBoyfriends() {
         },
     })
         .at(lvl.BoyfriendsMarker)
+        .add(100, 0)
         .show();
 
     // new Graphics()
