@@ -1,13 +1,9 @@
-import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
-import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack, MxnRpgAttackArgs } from "../../mixins/mxn-rpg-attack";
+import { objGroundExpanding, ObjGroundExpandingArgs } from "../utils/obj-ground-expanding";
 import { objProjectileCrackedEarth } from "./obj-projectile-cracked-earth";
 
-interface ObjProjectileCrackedEarthExpandingArgs extends MxnRpgAttackArgs {
-    maxWidth: Integer;
-    expandDirection: "left" | "right" | "both";
-    expandSpeed: Integer;
+interface ObjProjectileCrackedEarthExpandingArgs extends MxnRpgAttackArgs, ObjGroundExpandingArgs {
 }
 
 export function objProjectileCrackedEarthExpanding(args: ObjProjectileCrackedEarthExpandingArgs) {
@@ -15,60 +11,21 @@ export function objProjectileCrackedEarthExpanding(args: ObjProjectileCrackedEar
         .coro(function* (self) {
             const position = self.vcpy();
             self.at(0, 0);
-            const leftObj = objPhysicsTest().at(position).show(self);
-            const rightObj = objPhysicsTest().at(position).show(self);
-            yield () => leftObj.isOnGround && rightObj.isOnGround;
-            const y = leftObj.y;
-            let x0 = leftObj.x;
-            let x1 = rightObj.x;
-            leftObj
-                .handles("moved", (self) => {
-                    if (Math.abs(self.y - y) > 3 || !self.isOnGround) {
-                        self.destroy();
-                        return;
-                    }
 
-                    if (self.x < x0) {
-                        x0 = self.x;
-                    }
-                });
+            const expandingObj = objGroundExpanding(args).at(position).show(self);
 
-            rightObj
-                .handles("moved", (self) => {
-                    if (Math.abs(self.y - y) > 3 || !self.isOnGround) {
-                        self.destroy();
-                        return;
-                    }
+            yield () => expandingObj.objGroundExpanding.width > 0;
 
-                    if (self.x > x1) {
-                        x1 = self.x;
-                    }
-                });
-            if (args.expandDirection !== "right") {
-                leftObj.speed.x = -args.expandSpeed;
-            }
-            if (args.expandDirection !== "left") {
-                rightObj.speed.x = args.expandSpeed;
-            }
-            yield () => x0 !== x1;
-            const earthObj = objProjectileCrackedEarth(0)
+            objProjectileCrackedEarth(0)
                 .mixin(mxnRpgAttack, args)
                 .step(self => {
-                    const width = Math.max(0, Math.min(Math.round(Math.abs((x1 - 4) - (x0 + 4))), args.maxWidth));
+                    const width = Math.max(0, Math.min(expandingObj.objGroundExpanding.width + 8, args.maxWidth));
                     if (self.objFxCrackedEarth.width < width) {
                         self.objFxCrackedEarth.width = width;
-                        self.x = Math.min(x0 + 4, x1 - 4);
+                        self.x = expandingObj.objGroundExpanding.position.x - 4;
                     }
                 })
-                .at(x0, y)
+                .at(expandingObj.objGroundExpanding.position)
                 .show(self);
-            yield () => earthObj.objFxCrackedEarth.width >= args.maxWidth;
-            leftObj.destroy();
-            rightObj.destroy();
         });
-}
-
-function objPhysicsTest() {
-    return container()
-        .mixin(mxnPhysics, { gravity: 1, physicsRadius: 4, physicsOffset: [0, -4] });
 }
