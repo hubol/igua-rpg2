@@ -24,6 +24,7 @@ import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objFxHeart } from "../effects/obj-fx-heart";
 import { objProjectileLoveVortexAoe } from "../projectiles/obj-projectile-love-vortex-aoe";
+import { objProjectilePuddleDrip } from "../projectiles/obj-projectile-puddle-drip";
 import { objAngelMouth } from "./obj-angel-mouth";
 
 interface ObjAngelBoyfriendsArgs {
@@ -58,6 +59,27 @@ const [txIdle, txMove, txKissStart, txKiss, txPride, txFaceAngry, txFaceSad] = T
 const bodyTexturesSupportingFace = new Set([txIdle, txMove, txPride]);
 
 export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
+    const localAtks = {
+        angryDrip: RpgAttack.create({
+            conditions: {
+                wetness: {
+                    tint: args.tints.angry,
+                    value: 2,
+                },
+            },
+            physical: 30,
+        }),
+        sadDrip: RpgAttack.create({
+            conditions: {
+                wetness: {
+                    tint: args.tints.sad,
+                    value: 2,
+                },
+            },
+            physical: 30,
+        }),
+    };
+
     const tintMap: MapRgbFilter.Map = [args.tints.angry, args.tints.sad, args.tints.antlers, 0xffffff];
 
     const puppetObj = objAngelBoyfriendsPuppet()
@@ -87,7 +109,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
         .mixin(mxnEnemyDeathBurst, { map: tintMap })
         .mixin(mxnDetectPlayer)
         .mixin(mxnPhysics, { gravity: 0.3, physicsRadius: 30, physicsOffset: [0, -30] })
-        .handles("damaged", (_, result) => {
+        .handles("damaged", (self, result) => {
             if (result.rejected) {
                 return;
             }
@@ -99,6 +121,18 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                     yield holdf(() => mouthObj.controls.frowning = true, 30);
                     mouthObj.controls.frowning = false;
                 });
+
+            if ((self.status.health / self.status.healthMax) <= 0.5) {
+                const dripAtk = movesState.dripsCount++ % 2 === 0 ? localAtks.angryDrip : localAtks.sadDrip;
+                const sign = dripAtk === localAtks.angryDrip ? -1 : 1;
+                objProjectilePuddleDrip({
+                    attack: dripAtk,
+                })
+                    .at(self)
+                    .add(38 * sign, -38)
+                    .show()
+                    .speed.at(3 * sign, -4);
+            }
         })
         .pivoted(56, 70)
         .zIndexed(ZIndex.Entities)
@@ -142,6 +176,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
 
     const movesState = {
         loveVortexesCount: 0,
+        dripsCount: 0,
     };
 
     const moves = {
