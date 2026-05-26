@@ -364,7 +364,7 @@ function objExperienceIndicator() {
                 }
             }
 
-            if (xCorrection === 0) {
+            if (xCorrection === 0 || mxnHudModifiers.mxnExperienceIndicatorShowTotals.exists()) {
                 return;
             }
 
