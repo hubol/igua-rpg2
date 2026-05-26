@@ -173,7 +173,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
             }
             yield* Coro.race([
                 interp(obj.speed, "x").to(direction * 3).over(1000),
-                () => obj.speed.x === 0,
+                obj.mxnPhysics.coroHitWall,
             ]);
             yield () => obj.speed.x === 0;
             if (

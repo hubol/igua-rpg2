@@ -63,6 +63,8 @@ export function mxnPhysics(
         cb();
     };
 
+    let hitWallsCount = 0;
+
     return obj
         .track(mxnPhysics)
         .merge({
@@ -77,6 +79,12 @@ export function mxnPhysics(
             groundMaterial: Material.Earth,
             snapToGround: true,
             terrainAttributes,
+            mxnPhysics: {
+                get coroHitWall() {
+                    const previousHitWallsCount = hitWallsCount;
+                    return () => hitWallsCount > previousHitWallsCount;
+                },
+            },
         })
         .dispatchesValue<"moved", MoveEvent>()
         .step(obj => {
@@ -100,6 +108,9 @@ export function mxnPhysics(
             obj.y = Math.round(obj.y);
             setPositionDecimalOnTransformChanged = true;
             obj.dispatch("moved", event);
+            if (event.hitWall) {
+                hitWallsCount++;
+            }
         }, StepOrder.Physics);
 }
 
