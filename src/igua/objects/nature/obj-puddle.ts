@@ -53,6 +53,8 @@ export function objPuddlePoison(width: number, tint = 0x80B020) {
     );
 }
 
+objPuddle.objPuddleBase = objPuddleBase;
+
 const filterFn = (item: MxnPhysics) => item.physicsFaction as unknown as boolean;
 
 function objPuddleBase(width: number, height: number, tint: Integer, attack: RpgAttack.Model) {
@@ -69,10 +71,10 @@ function objPuddleBase(width: number, height: number, tint: Integer, attack: Rpg
         conditions: {
             wetness: {
                 ...attack.conditions.wetness,
-                value: 30,
+                value: attack.conditions.wetness.value * 15,
             },
         },
-        versus: RpgFaction.Anyone,
+        versus: attack.versus,
     });
 
     const c = container(gfx)
