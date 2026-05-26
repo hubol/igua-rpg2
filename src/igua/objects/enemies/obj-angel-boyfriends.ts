@@ -173,7 +173,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
             }
             yield* Coro.race([
                 interp(obj.speed, "x").to(direction * 3).over(1000),
-                obj.mxnPhysics.coroHitWall,
+                obj.mxnPhysics.dramaHitWall(),
             ]);
             yield () => obj.speed.x === 0;
             if (
@@ -250,7 +250,10 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                         && obj.speed.x === 0
                         && (!self.mxnDetectPlayer.isDetected || self.mxnDetectPlayer.relativePosition.vlength > 130)
                     ) {
-                        yield* self.mxnEnemy.dramaStagger(moves.kiss);
+                        const staggered = yield* self.mxnEnemy.dramaStagger(moves.kiss);
+                        if (staggered && !loveVortexChance) {
+                            yield* moves.loveVortex();
+                        }
                     }
                     yield () => self.mxnDetectPlayer.isDetected;
                     yield* moves.pursuePlayerWithPitchfork();

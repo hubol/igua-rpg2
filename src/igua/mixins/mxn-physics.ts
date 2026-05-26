@@ -80,9 +80,9 @@ export function mxnPhysics(
             snapToGround: true,
             terrainAttributes,
             mxnPhysics: {
-                get coroHitWall() {
+                *dramaHitWall() {
                     const previousHitWallsCount = hitWallsCount;
-                    return () => hitWallsCount > previousHitWallsCount;
+                    yield () => hitWallsCount > previousHitWallsCount;
                 },
             },
         })

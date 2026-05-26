@@ -73,7 +73,15 @@ export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
 
     function* dramaStagger(coro: mxnEnemy.StaggerableMoveCoro, staggerHealthPercentage = 0) {
         const staggerHealth = Math.max(1, status.health - Math.floor(staggerHealthPercentage * status.healthMax));
-        yield* coro(() => status.health < staggerHealth);
+        let staggered = false;
+        yield* coro(() => {
+            if (!staggered) {
+                staggered = status.health < staggerHealth;
+            }
+            return staggered;
+        });
+
+        return staggered;
     }
 
     // TODO should it expose a way to register hitboxes/hurtboxes
