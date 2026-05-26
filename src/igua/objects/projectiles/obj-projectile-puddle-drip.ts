@@ -56,12 +56,12 @@ export function objProjectilePuddleDrip(args: ObjProjectilePuddleDripArgs) {
 
             const width = expandingObj.objGroundExpanding.width;
             if (width >= 8) {
-                // TODO args.attacker should be used!
                 objPuddle.objPuddleBase(
                     width,
                     6,
                     tint,
                     args.attack,
+                    args.attacker,
                 )
                     .at(expandingObj.objGroundExpanding.position)
                     .mixin(mxnDestroyAfterSteps, 120)

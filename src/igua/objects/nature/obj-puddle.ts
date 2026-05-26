@@ -8,10 +8,12 @@ import { Rng } from "../../../lib/math/rng";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { scene } from "../../globals";
+import { mxnDestroyOnStatusDeath } from "../../mixins/mxn-destroy-on-status-death";
 import { MxnPhysics, mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgFaction } from "../../rpg/rpg-faction";
+import { RpgStatus } from "../../rpg/rpg-status";
 import { objEphemeralSprite } from "../obj-ephemeral-sprite";
 
 export function objPuddle(width: number, tint = 0x68A8D0) {
@@ -57,7 +59,13 @@ objPuddle.objPuddleBase = objPuddleBase;
 
 const filterFn = (item: MxnPhysics) => item.physicsFaction as unknown as boolean;
 
-function objPuddleBase(width: number, height: number, tint: Integer, attack: RpgAttack.Model) {
+function objPuddleBase(
+    width: number,
+    height: number,
+    tint: Integer,
+    attack: RpgAttack.Model,
+    attacker?: RpgStatus.Model,
+) {
     let stepCount = 0;
 
     const gfx = new Graphics().beginFill(tint)
@@ -77,6 +85,8 @@ function objPuddleBase(width: number, height: number, tint: Integer, attack: Rpg
         versus: attack.versus,
     });
 
+    const damageArgs = { attacker };
+
     const c = container(gfx)
         .collisionShape(CollisionShape.DisplayObjects, [gfx])
         .step(() => {
@@ -89,7 +99,7 @@ function objPuddleBase(width: number, height: number, tint: Integer, attack: Rpg
                 }
 
                 if (obj.is(mxnRpgStatus)) {
-                    obj.damage(Math.abs(obj.speed.y) > 2 ? bigAttack : attack);
+                    obj.damage(Math.abs(obj.speed.y) > 2 ? bigAttack : attack, damageArgs);
                 }
 
                 if ((obj.speed.y < 0) || (!obj.isOnGround && obj.speed.y > 0)) {
@@ -121,6 +131,10 @@ function objPuddleBase(width: number, height: number, tint: Integer, attack: Rpg
                 }
             }
         }, -10);
+
+    if (attacker) {
+        c.mixin(mxnDestroyOnStatusDeath, attacker);
+    }
 
     return c;
 }

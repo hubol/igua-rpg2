@@ -127,6 +127,7 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
                 const sign = dripAtk === localAtks.angryDrip ? -1 : 1;
                 objProjectilePuddleDrip({
                     attack: dripAtk,
+                    attacker: self.status,
                 })
                     .at(self)
                     .add(38 * sign, -38)
@@ -274,7 +275,11 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
         .coro(function* (self) {
             yield () => self.isOnGround;
             while (true) {
-                const loveVortexChances = Rng.shuffle([true, true, false, false]);
+                const loveVortexChances = Rng.shuffle(
+                    (self.status.health / self.status.healthMax) < 0.67
+                        ? [true, true, true, false]
+                        : [true, true, false, false],
+                );
 
                 for (const loveVortexChance of loveVortexChances) {
                     if (!self.mxnDetectPlayer.isDetected) {
