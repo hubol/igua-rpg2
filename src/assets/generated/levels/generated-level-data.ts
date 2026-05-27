@@ -3417,11 +3417,24 @@ export const Lvl = {
   IntelligenceTower: (): LvlType.IntelligenceTower => {
     applyLevel({ width: 500, height: 688, backgroundTint: 0x408000, terrainTint: 0x000000 });
     return {
+      ShapesFontsWeight3A: d(Tx.Shapes.Fonts.Weight3.A, { x: 176, y: 555, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      ShapesFontsWeight3B: d(Tx.Shapes.Fonts.Weight3.B, { x: 248, y: 555, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      ShapesFontsWeight3C: d(Tx.Shapes.Fonts.Weight3.C, { x: 312, y: 557, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      ShapesFontsWeight3B_1: d(Tx.Shapes.Fonts.Weight3.B, { x: 376, y: 555, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      ShapesFontsRune3A: d(Tx.Shapes.Fonts.Rune3.A, { x: 176, y: 589, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      ShapesFontsRune3C: d(Tx.Shapes.Fonts.Rune3.C, { x: 312, y: 589, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      ShapesFontsRune3D: d(Tx.Shapes.Fonts.Rune3.D, { x: 376, y: 589, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 0, y: 296, width: 32, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 472, y: 296, width: 32, height: 400, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 0, y: 656, width: 512, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_3: e(r["Block"], { x: 32, y: 504, width: 72, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_4: e(r["Block"], { x: 104, y: 504, width: 512, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 32, y: 344, width: 72, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 104, y: 344, width: 512, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 0, y: 136, width: 32, height: 280, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_8: e(r["Block"], { x: 472, y: 136, width: 32, height: 400, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_9: e(r["Block"], { x: 32, y: 184, width: 72, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_10: e(r["Block"], { x: 104, y: 184, width: 512, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Door: e(r["Door"], { x: 160, y: 608, values: { sceneName: "scnIntelligenceTower", checkpointName: "wrong0", name: "", depth: 0 } }, "Entities"),
       Door_1: e(r["Door"], { x: 232, y: 608, values: { sceneName: "scnIntelligenceTower", checkpointName: "level1", name: "", depth: 0 } }, "Entities"),
       Door_2: e(r["Door"], { x: 296, y: 608, values: { sceneName: "scnIntelligenceTower", checkpointName: "wrong0", name: "", depth: 0 } }, "Entities"),
@@ -3430,8 +3443,18 @@ export const Lvl = {
       Door_5: e(r["Door"], { x: 232, y: 456, values: { sceneName: "scnIntelligenceTower", checkpointName: "level0", name: "", depth: 0 } }, "Entities"),
       Door_6: e(r["Door"], { x: 296, y: 456, values: { sceneName: "scnIntelligenceTower", checkpointName: "level0", name: "", depth: 0 } }, "Entities"),
       Door_7: e(r["Door"], { x: 360, y: 456, values: { sceneName: "scnIntelligenceTower", checkpointName: "level0", name: "", depth: 0 } }, "Entities"),
+      Door_8: e(r["Door"], { x: 160, y: 296, values: { sceneName: "scnIntelligenceTower", checkpointName: "level0", name: "", depth: 0 } }, "Entities"),
+      Door_9: e(r["Door"], { x: 232, y: 296, values: { sceneName: "scnIntelligenceTower", checkpointName: "level0", name: "", depth: 0 } }, "Entities"),
+      Door_10: e(r["Door"], { x: 296, y: 296, values: { sceneName: "scnIntelligenceTower", checkpointName: "level0", name: "", depth: 0 } }, "Entities"),
+      Door_11: e(r["Door"], { x: 360, y: 296, values: { sceneName: "scnIntelligenceTower", checkpointName: "level0", name: "", depth: 0 } }, "Entities"),
+      Door_12: e(r["Door"], { x: 160, y: 136, values: { sceneName: "scnIntelligenceTower", checkpointName: "level0", name: "", depth: 0 } }, "Entities"),
+      Door_13: e(r["Door"], { x: 232, y: 136, values: { sceneName: "scnIntelligenceTower", checkpointName: "wrong0", name: "", depth: 0 } }, "Entities"),
+      Door_14: e(r["Door"], { x: 296, y: 136, values: { sceneName: "scnIntelligenceTower", checkpointName: "wrong1", name: "", depth: 0 } }, "Entities"),
+      Door_15: e(r["Door"], { x: 360, y: 136, values: { sceneName: "scnIntelligenceTower", checkpointName: "level2", name: "", depth: 0 } }, "Entities"),
       Player: e(r["Player"], { x: 88, y: 656, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       wrong0: e(r["Checkpoint"], { x: 80, y: 504, flippedX: false, values: { name: "wrong0", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      wrong1: e(r["Checkpoint"], { x: 80, y: 344, flippedX: false, values: { name: "wrong1", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      level1: e(r["Checkpoint"], { x: 80, y: 184, flippedX: false, values: { name: "level1", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
     };
   },
   MagicDemo: (): LvlType.MagicDemo => {
@@ -12560,11 +12583,24 @@ export namespace LvlType {
     GateHorizontal_1: ReturnType<(typeof r)["GateHorizontal"]>;
   };
   export type IntelligenceTower = {
+    ShapesFontsWeight3A: Sprite;
+    ShapesFontsWeight3B: Sprite;
+    ShapesFontsWeight3C: Sprite;
+    ShapesFontsWeight3B_1: Sprite;
+    ShapesFontsRune3A: Sprite;
+    ShapesFontsRune3C: Sprite;
+    ShapesFontsRune3D: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Block_1: ReturnType<(typeof r)["Block"]>;
     Block_2: ReturnType<(typeof r)["Block"]>;
     Block_3: ReturnType<(typeof r)["Block"]>;
     Block_4: ReturnType<(typeof r)["Block"]>;
+    Block_5: ReturnType<(typeof r)["Block"]>;
+    Block_6: ReturnType<(typeof r)["Block"]>;
+    Block_7: ReturnType<(typeof r)["Block"]>;
+    Block_8: ReturnType<(typeof r)["Block"]>;
+    Block_9: ReturnType<(typeof r)["Block"]>;
+    Block_10: ReturnType<(typeof r)["Block"]>;
     Door: ReturnType<(typeof r)["Door"]>;
     Door_1: ReturnType<(typeof r)["Door"]>;
     Door_2: ReturnType<(typeof r)["Door"]>;
@@ -12573,8 +12609,18 @@ export namespace LvlType {
     Door_5: ReturnType<(typeof r)["Door"]>;
     Door_6: ReturnType<(typeof r)["Door"]>;
     Door_7: ReturnType<(typeof r)["Door"]>;
+    Door_8: ReturnType<(typeof r)["Door"]>;
+    Door_9: ReturnType<(typeof r)["Door"]>;
+    Door_10: ReturnType<(typeof r)["Door"]>;
+    Door_11: ReturnType<(typeof r)["Door"]>;
+    Door_12: ReturnType<(typeof r)["Door"]>;
+    Door_13: ReturnType<(typeof r)["Door"]>;
+    Door_14: ReturnType<(typeof r)["Door"]>;
+    Door_15: ReturnType<(typeof r)["Door"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     wrong0: ReturnType<(typeof r)["Checkpoint"]>;
+    wrong1: ReturnType<(typeof r)["Checkpoint"]>;
+    level1: ReturnType<(typeof r)["Checkpoint"]>;
   };
   export type MagicDemo = {
     Block: ReturnType<(typeof r)["Block"]>;
