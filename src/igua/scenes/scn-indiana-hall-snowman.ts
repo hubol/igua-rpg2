@@ -7,6 +7,7 @@ import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { Cutscene, scene } from "../globals";
 import { objFxFormativeBurst } from "../objects/effects/obj-fx-formative-burst";
 import { objAngelSnow } from "../objects/enemies/obj-angel-snow";
+import { objEsotericDecorationCampfire } from "../objects/esoteric/obj-esoteric-decoration-campfire";
 import { objEsotericHotPineConeTree } from "../objects/esoteric/obj-esoteric-hot-pine-cone-tree";
 import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 import { Rpg } from "../rpg/rpg";
@@ -22,6 +23,9 @@ export function scnIndianaHallSnowman() {
 
     let releasedPineCone = false;
     treeObjs[0].handles("objEsotericHotPineConeTree.coneReleased", () => releasedPineCone = true);
+
+    [lvl.FireMarker0, lvl.FireMarker1, lvl.FireMarker2]
+        .forEach(obj => objEsotericDecorationCampfire().at(obj).show(scene.parallaxStage));
 
     scene.stage
         .coro(function* () {

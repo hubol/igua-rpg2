@@ -2787,6 +2787,9 @@ export const Lvl = {
       SnowAngelMarker: e(r["Marker"], { x: 392, y: 88, values: { name: "SnowAngelMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       TreeMarker0: e(r["Marker"], { x: 288, y: 248, values: { name: "TreeMarker0", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
       TreeMarker1: e(r["Marker"], { x: 504, y: 248, values: { name: "TreeMarker1", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+      FireMarker0: e(r["Marker"], { x: 128, y: 136, values: { name: "FireMarker0", depth: 0 }, tint: 0x8f8f8f }, "MarkerEntities"),
+      FireMarker1: e(r["Marker"], { x: 344, y: 120, values: { name: "FireMarker1", depth: 0 }, tint: 0x8f8f8f }, "MarkerEntities"),
+      FireMarker2: e(r["Marker"], { x: 656, y: 144, values: { name: "FireMarker2", depth: 0 }, tint: 0x8f8f8f }, "MarkerEntities"),
     };
   },
   IndianaHallTamago: (): LvlType.IndianaHallTamago => {
@@ -11948,6 +11951,9 @@ export namespace LvlType {
     SnowAngelMarker: ReturnType<(typeof r)["Marker"]>;
     TreeMarker0: ReturnType<(typeof r)["Marker"]>;
     TreeMarker1: ReturnType<(typeof r)["Marker"]>;
+    FireMarker0: ReturnType<(typeof r)["Marker"]>;
+    FireMarker1: ReturnType<(typeof r)["Marker"]>;
+    FireMarker2: ReturnType<(typeof r)["Marker"]>;
   };
   export type IndianaHallTamago = {
     Block: ReturnType<(typeof r)["Block"]>;
