@@ -1,4 +1,5 @@
 import { Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { vnew } from "../../../lib/math/vector-type";
@@ -47,6 +48,8 @@ export function objProjectilePuddleDrip(args: ObjProjectilePuddleDripArgs) {
             yield () => self.isOnGround;
 
             self.speed.x = 0;
+
+            self.play(Sfx.Enemy.Boyfriends.DripLand.rate(0.9, 1.1));
 
             const expandingObj = objGroundExpanding({ expandDirection: "both", expandSpeed: 8, maxWidth: 32 })
                 .at(self)
