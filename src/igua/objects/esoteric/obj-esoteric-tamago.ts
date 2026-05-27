@@ -1,4 +1,4 @@
-import { BLEND_MODES, RenderTexture, Sprite } from "pixi.js";
+import { BLEND_MODES, DisplayObject, RenderTexture, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
@@ -6,17 +6,19 @@ import { range } from "../../../lib/range";
 import { renderer } from "../../current-pixi-renderer";
 import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { StepOrder } from "../step-order";
+import { EsotericTamaButtons } from "./tamago/esoteric-tama-buttons";
+import { EsotericTamaPage } from "./tamago/esoteric-tama-page";
 
-export function objEsotericTamago() {
+export function objEsotericTamago(buttons: EsotericTamaButtons, homePage: EsotericTamaPage.Home) {
     const renderTx = RenderTexture.create({ width: 60, height: 30 });
     const renderOptions = { renderTexture: renderTx };
 
-    const api = {
-        screenObj: container(),
-    };
+    const screenObj = container();
+
+    let page: EsotericTamaPage = homePage;
 
     return container(
-        container(api.screenObj)
+        container(screenObj)
             .invisible(),
         Sprite.from(Tx.Esoteric.Tamago.ShellBackground)
             .at(43, 45),
@@ -39,9 +41,17 @@ export function objEsotericTamago() {
             .step(self => self.sparklesPerFrame = Rng.float(0.1))
             .at(14, -7),
     )
-        .merge({ objEsotericTamago: api })
         .step(() => {
-            renderer.render(api.screenObj, renderOptions);
+            const nextPage = page.step(buttons);
+            if (nextPage) {
+                screenObj.removeAllChildren();
+                page = nextPage;
+            }
+            buttons.clear();
+            if (!screenObj.children.length) {
+                page.getDisplayObject().show(screenObj);
+            }
+            renderer.render(screenObj, renderOptions);
         }, StepOrder.BeforeCamera)
         .on("destroyed", () => renderTx.destroy());
 }

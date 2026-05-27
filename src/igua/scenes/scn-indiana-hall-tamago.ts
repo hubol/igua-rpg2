@@ -1,37 +1,32 @@
-import { DisplayObject, Sprite } from "pixi.js";
+import { DisplayObject } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
-import { Tx } from "../../assets/textures";
 import { factor } from "../../lib/game-engine/routines/interp";
-import { sleep } from "../../lib/game-engine/routines/sleep";
 import { ZIndex } from "../core/scene/z-index";
 import { mxnFxVibrate } from "../mixins/effects/mxn-fx-vibrate";
-import { mxnBoilFlipH } from "../mixins/mxn-boil-flip-h";
 import { mxnInteract } from "../mixins/mxn-interact";
 import { objFxRipple } from "../objects/effects/obj-fx-ripple";
 import { objEsotericTamago } from "../objects/esoteric/obj-esoteric-tamago";
+import { EsotericTamaButtons } from "../objects/esoteric/tamago/esoteric-tama-buttons";
+import { EsotericTamaPage } from "../objects/esoteric/tamago/esoteric-tama-page";
 
 export function scnIndianaHallTamago() {
     const lvl = Lvl.IndianaHallTamago();
 
-    const tamagoObj = objEsotericTamago()
+    const buttons = new EsotericTamaButtons();
+    const homePage = new EsotericTamaPage.Home();
+
+    const tamagoObj = objEsotericTamago(buttons, homePage)
         .at(lvl.TamagoShell)
         .zIndexed(ZIndex.BackgroundEntities)
         .show();
 
-    const screenObj = tamagoObj.objEsotericTamago.screenObj;
-
-    Sprite.from(Tx.Esoteric.Tamago.DemoScreen)
-        .mixin(mxnBoilFlipH)
-        .show(screenObj);
-
-    Sprite.from(Tx.Esoteric.Tamago.Icons)
-        .show(screenObj);
+    const buttonIds: EsotericTamaButtons.Id[] = ["a", "b", "c"];
 
     [lvl.ButtonA, lvl.ButtonB, lvl.ButtonC]
-        .forEach(obj => obj.mixin(mxnTamagoButton));
+        .forEach((obj, i) => obj.mixin(mxnTamagoButton, buttons, buttonIds[i]));
 }
 
-function mxnTamagoButton(obj: DisplayObject) {
+function mxnTamagoButton(obj: DisplayObject, buttons: EsotericTamaButtons, id: EsotericTamaButtons.Id) {
     return obj
         .mixin(mxnFxVibrate, "pivot")
         .coro(function* (self) {
@@ -40,6 +35,7 @@ function mxnTamagoButton(obj: DisplayObject) {
             self
                 .step(() => self.mxnFxVibrate.frequency = vibrateStepsCount-- > 0 ? 0.3 : 0)
                 .mixin(mxnInteract, () => {
+                    buttons.press(id);
                     vibrateStepsCount = 15;
 
                     objFxTamagotchiButtonRipple()
