@@ -1,5 +1,7 @@
 import { DisplayObject } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Sfx } from "../../assets/sounds";
+import { Sound } from "../../lib/game-engine/audio/sound";
 import { factor } from "../../lib/game-engine/routines/interp";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
@@ -47,6 +49,12 @@ export function scnIndianaHallTamago() {
         .forEach((obj, i) => obj.mixin(mxnTamagoButton, buttons, buttonIds[i]));
 }
 
+const buttonSfx: Record<EsotericTamaButtons.Id, Sound> = {
+    a: Sfx.Interact.Tamago.ButtonA,
+    b: Sfx.Interact.Tamago.ButtonB,
+    c: Sfx.Interact.Tamago.ButtonC,
+};
+
 function mxnTamagoButton(obj: DisplayObject, buttons: EsotericTamaButtons, id: EsotericTamaButtons.Id) {
     return obj
         .mixin(mxnFxVibrate, "pivot")
@@ -56,6 +64,8 @@ function mxnTamagoButton(obj: DisplayObject, buttons: EsotericTamaButtons, id: E
             self
                 .step(() => self.mxnFxVibrate.frequency = vibrateStepsCount-- > 0 ? 0.3 : 0)
                 .mixin(mxnInteract, () => {
+                    self.play(buttonSfx[id].rate(0.99, 1.01));
+
                     buttons.press(id);
                     vibrateStepsCount = 15;
 
