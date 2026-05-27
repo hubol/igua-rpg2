@@ -4,6 +4,7 @@ import { Tx } from "../../../../assets/textures";
 import { factor, interpvr } from "../../../../lib/game-engine/routines/interp";
 import { Integer } from "../../../../lib/math/number-alias-types";
 import { PseudoRng } from "../../../../lib/math/rng";
+import { CollisionShape } from "../../../../lib/pixi/collision";
 import { container } from "../../../../lib/pixi/container";
 import { range } from "../../../../lib/range";
 import { Null } from "../../../../lib/types/null";
@@ -20,6 +21,7 @@ export abstract class EsotericTamaPage {
 }
 
 const txsIcons = Tx.Esoteric.Tamago.Icons.split({ width: 120 });
+const [txMopWater, txMop] = Tx.Esoteric.Tamago.Mop.split({ count: 2 });
 
 export namespace EsotericTamaPage {
     export class Home extends EsotericTamaPage {
@@ -65,13 +67,16 @@ export namespace EsotericTamaPage {
                 }
                 if (this._selectedIndex === 1) {
                     if (this.state.inventory.foodsCount < 1) {
-                        return new Error("I don't have food!", this);
+                        return new Message("I don't have food!", this);
                     }
                 }
                 if (this._selectedIndex === 2) {
                     if (this.state.inventory.watersCount < 1) {
-                        return new Error("I don't have water!", this);
+                        return new Message("I don't have water!", this);
                     }
+
+                    this.state.inventory.watersCount--;
+                    return new Wash(this, this.state);
                 }
                 if (this._selectedIndex === 5) {
                     return new Exit(this._io);
@@ -80,19 +85,8 @@ export namespace EsotericTamaPage {
         }
 
         getDisplayObject(): DisplayObject {
-            const p = new PseudoRng(23923223);
-
             return container(
-                Sprite.from(Tx.Esoteric.Tamago.DemoScreen)
-                    .mixin(mxnBoilFlipH)
-                    .step(self => self.y = this._selectedIndex === null ? 0 : -4),
-                ...range(5).map(i =>
-                    Sprite.from(Tx.Esoteric.Tamago.Poop)
-                        .mixin(mxnBoilFlipH)
-                        .step(self => self.visible = this.state.poop > i)
-                        .at(p.vunit().scale(30, 10).vround())
-                        .add(50, 30)
-                ),
+                objEsotericTamaHome(this.state),
                 Sprite.from(txsIcons[0])
                     .invisible()
                     .mixin(mxnBoilPivot)
@@ -101,6 +95,49 @@ export namespace EsotericTamaPage {
                         if (this._selectedIndex !== null) {
                             self.texture = txsIcons[this._selectedIndex];
                         }
+                    }),
+            );
+        }
+    }
+
+    export class Wash extends EsotericTamaPage {
+        constructor(
+            private readonly _returnPage: EsotericTamaPage,
+            private readonly _state: State,
+        ) {
+            super();
+        }
+
+        private _stepsCount = 0;
+
+        step(buttons: EsotericTamaButtons.Public): void | EsotericTamaPage {
+            if (this._stepsCount++ >= 200) {
+                this._state.poop = 0;
+                return this._returnPage;
+            }
+        }
+
+        getDisplayObject(): DisplayObject {
+            const homeObj = objEsotericTamaHome(this._state);
+
+            const mopCollisionObj = new Graphics()
+                .beginFill(0xffffff)
+                .drawRect(35, 6, 15, 73)
+                .invisible();
+
+            return container(
+                homeObj,
+                container(
+                    Sprite.from(txMopWater).mixin(mxnBoilPivot),
+                    Sprite.from(txMop),
+                    mopCollisionObj,
+                )
+                    .collisionShape(CollisionShape.DisplayObjects, [mopCollisionObj])
+                    .at(120, -14)
+                    .step(self => self.x -= 1)
+                    .coro(function* (self) {
+                        yield () => self.collides(homeObj);
+                        homeObj.step(() => homeObj.x -= 1);
                     }),
             );
         }
@@ -129,7 +166,7 @@ export namespace EsotericTamaPage {
         }
     }
 
-    class Error extends EsotericTamaPage {
+    class Message extends EsotericTamaPage {
         private _stepsCount = 0;
 
         step(buttons: EsotericTamaButtons.Public): void | EsotericTamaPage {
@@ -210,7 +247,7 @@ export namespace EsotericTamaPage {
         }
     }
 
-    interface State {
+    export interface State {
         stomach: Integer;
         mood: Integer;
         poop: Integer;
@@ -253,4 +290,20 @@ function objEsotericTamaBar(maxValue: Integer, valueProvider: () => Integer) {
         tintFront: 0xffffff,
         width: 105,
     }, valueProvider);
+}
+
+function objEsotericTamaHome(state: EsotericTamaPage.State) {
+    const p = new PseudoRng(23923223);
+
+    return container(
+        Sprite.from(Tx.Esoteric.Tamago.DemoScreen)
+            .mixin(mxnBoilFlipH),
+        ...range(5).map(i =>
+            Sprite.from(Tx.Esoteric.Tamago.Poop)
+                .mixin(mxnBoilFlipH)
+                .step(self => self.visible = state.poop > i)
+                .at(p.vunit().scale(30, 10).vround())
+                .add(50, 30)
+        ),
+    );
 }
