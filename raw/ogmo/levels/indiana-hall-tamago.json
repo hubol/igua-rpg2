@@ -4,8 +4,8 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#408000",
   "values": {"Terrain Color": "#000000"},
+  "backgroundColor": "#408000",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -166,7 +166,56 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 140,
+          "y": 32,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/tamago/shell.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": "TamagoShell"}
+        },
+        {
+          "x": 184,
+          "y": 194,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/tamago/button a.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "ButtonA"}
+        },
+        {
+          "x": 314,
+          "y": 194,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/tamago/button c.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "ButtonC"}
+        },
+        {
+          "x": 248,
+          "y": 202,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/tamago/button b.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "ButtonB"}
+        }
+      ],
       "folder": "../textures"
     },
     {
