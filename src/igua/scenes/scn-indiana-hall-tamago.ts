@@ -24,6 +24,9 @@ export function scnIndianaHallTamago() {
         .mixin(mxnBoilFlipH)
         .show(screenObj);
 
+    Sprite.from(Tx.Esoteric.Tamago.Icons)
+        .show(screenObj);
+
     [lvl.ButtonA, lvl.ButtonB, lvl.ButtonC]
         .forEach(obj => obj.mixin(mxnTamagoButton));
 }
