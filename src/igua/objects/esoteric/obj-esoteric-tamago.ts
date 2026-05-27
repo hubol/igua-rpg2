@@ -10,7 +10,7 @@ import { EsotericTamaButtons } from "./tamago/esoteric-tama-buttons";
 import { EsotericTamaPage } from "./tamago/esoteric-tama-page";
 
 export function objEsotericTamago(buttons: EsotericTamaButtons, homePage: EsotericTamaPage.Home) {
-    const renderTx = RenderTexture.create({ width: 60, height: 30 });
+    const renderTx = RenderTexture.create({ width: 120, height: 60 });
     const renderOptions = { renderTexture: renderTx };
 
     const screenObj = container();
@@ -23,16 +23,13 @@ export function objEsotericTamago(buttons: EsotericTamaButtons, homePage: Esoter
         Sprite.from(Tx.Esoteric.Tamago.ShellBackground)
             .at(43, 45),
         container(
-            ...range(5).map((i) =>
+            ...range(7).map((i) =>
                 Sprite.from(renderTx)
                     .tinted(0)
-                    .scaled(2, 2)
-                    .step(self => self.alpha = 0.3)
-                    .at(i, i)
+                    .step(self => self.alpha = 0.1)
+                    .at(Math.floor(i / 2), Math.ceil(i / 2))
             ),
-            Sprite.from(renderTx)
-                .scaled(2, 2)
-                .step(self => self.blendMode = BLEND_MODES.ADD),
+            Sprite.from(renderTx),
         )
             .at(48, 50),
         Sprite.from(Tx.Esoteric.Tamago.Shell),

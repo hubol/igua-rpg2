@@ -5,6 +5,7 @@ import { Integer } from "../../../../lib/math/number-alias-types";
 import { container } from "../../../../lib/pixi/container";
 import { Null } from "../../../../lib/types/null";
 import { mxnBoilFlipH } from "../../../mixins/mxn-boil-flip-h";
+import { mxnBoilPivot } from "../../../mixins/mxn-boil-pivot";
 import { RpgInventory } from "../../../rpg/rpg-inventory";
 import { EsotericTamaButtons } from "./esoteric-tama-buttons";
 
@@ -13,7 +14,7 @@ export abstract class EsotericTamaPage {
     abstract getDisplayObject(): DisplayObject;
 }
 
-const txsIcons = Tx.Esoteric.Tamago.Icons.split({ width: 60 });
+const txsIcons = Tx.Esoteric.Tamago.Icons.split({ width: 120 });
 
 export namespace EsotericTamaPage {
     export class Home extends EsotericTamaPage {
@@ -57,6 +58,7 @@ export namespace EsotericTamaPage {
                     .step(self => self.y = this._selectedIndex === null ? 0 : -4),
                 Sprite.from(txsIcons[0])
                     .invisible()
+                    .mixin(mxnBoilPivot)
                     .step(self => {
                         self.visible = this._selectedIndex !== null;
                         if (this._selectedIndex !== null) {
@@ -82,7 +84,8 @@ export namespace EsotericTamaPage {
         }
         getDisplayObject(): DisplayObject {
             return Sprite.from(Tx.Esoteric.Tamago.SeeYouLater)
-                .at(60, 0)
+                .at(Tx.Esoteric.Tamago.SeeYouLater.width, 0)
+                .mixin(mxnBoilPivot)
                 .coro(function* (self) {
                     yield interpvr(self).to(0, 0).over(1000);
                 });
