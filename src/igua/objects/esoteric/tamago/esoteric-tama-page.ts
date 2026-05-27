@@ -45,6 +45,9 @@ export namespace EsotericTamaPage {
             }
 
             if (this._selectedIndex !== null && buttons.isPressed("b")) {
+                if (this._selectedIndex === 0) {
+                    return new Info(this);
+                }
                 if (this._selectedIndex === 5) {
                     return new Exit(this._io);
                 }
@@ -89,6 +92,37 @@ export namespace EsotericTamaPage {
                 .coro(function* (self) {
                     yield interpvr(self).to(0, 0).over(1000);
                 });
+        }
+    }
+
+    export class Info extends EsotericTamaPage {
+        private _scrollsCount = 0;
+
+        step(buttons: EsotericTamaButtons.Public): void | EsotericTamaPage {
+            if (buttons.isPressed("a")) {
+                this._scrollsCount++;
+            }
+            if (buttons.isPressed("c")) {
+                return this._home;
+            }
+        }
+
+        getDisplayObject(): DisplayObject {
+            return container(
+                container(
+                    Sprite.from(Tx.Esoteric.Tamago.InfoScreen0),
+                ),
+                Sprite.from(Tx.Esoteric.Tamago.InfoScreen1),
+            )
+                .step(self => {
+                    for (let i = 0; i < self.children.length; i++) {
+                        self.children[i].visible = this._scrollsCount % self.children.length === i;
+                    }
+                });
+        }
+
+        constructor(private readonly _home: Home) {
+            super();
         }
     }
 

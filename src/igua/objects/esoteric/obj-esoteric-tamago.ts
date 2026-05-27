@@ -47,6 +47,7 @@ export function objEsotericTamago(buttons: EsotericTamaButtons, homePage: Esoter
             buttons.clear();
             if (!screenObj.children.length) {
                 page.getDisplayObject().show(screenObj);
+                return;
             }
             renderer.render(screenObj, renderOptions);
         }, StepOrder.BeforeCamera)
