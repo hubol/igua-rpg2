@@ -7,6 +7,7 @@ import { Null } from "../../../../lib/types/null";
 import { mxnBoilFlipH } from "../../../mixins/mxn-boil-flip-h";
 import { mxnBoilPivot } from "../../../mixins/mxn-boil-pivot";
 import { RpgInventory } from "../../../rpg/rpg-inventory";
+import { objStatusBar } from "../../overlay/obj-status-bar";
 import { EsotericTamaButtons } from "./esoteric-tama-buttons";
 
 export abstract class EsotericTamaPage {
@@ -20,6 +21,12 @@ export namespace EsotericTamaPage {
     export class Home extends EsotericTamaPage {
         private _selectedIndex = Null<Integer>();
         private _stepsSinceActivity = 999;
+
+        readonly state: State = {
+            mood: 0,
+            poop: 4,
+            stomach: 0,
+        };
 
         constructor(private readonly _io: IO) {
             super();
@@ -111,6 +118,10 @@ export namespace EsotericTamaPage {
             return container(
                 container(
                     Sprite.from(Tx.Esoteric.Tamago.InfoScreen0),
+                    objEsotericTamaBar(4, () => this._home.state.stomach)
+                        .at(4, 16),
+                    objEsotericTamaBar(4, () => this._home.state.mood)
+                        .at(3, 48),
                 ),
                 Sprite.from(Tx.Esoteric.Tamago.InfoScreen1),
             )
@@ -126,6 +137,12 @@ export namespace EsotericTamaPage {
         }
     }
 
+    interface State {
+        stomach: Integer;
+        mood: Integer;
+        poop: Integer;
+    }
+
     export interface IO {
         beginUpload(): IO.UploadTransaction;
         cancelUpload(): void;
@@ -139,4 +156,24 @@ export namespace EsotericTamaPage {
             uploadedItem: RpgInventory.Item | null;
         }
     }
+}
+
+function objEsotericTamaBar(maxValue: Integer, valueProvider: () => Integer) {
+    return objStatusBar.objAutoUpdated({
+        height: 9,
+        decreases: [
+            {
+                tintBar: 0xff0000,
+            },
+        ],
+        increases: [
+            {
+                tintBar: 0x00ff00,
+            },
+        ],
+        maxValue,
+        tintBack: 0x800000,
+        tintFront: 0x26BA4A,
+        width: 105,
+    }, valueProvider);
 }
