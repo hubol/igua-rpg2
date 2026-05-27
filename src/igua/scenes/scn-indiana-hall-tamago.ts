@@ -2,18 +2,39 @@ import { DisplayObject } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { factor } from "../../lib/game-engine/routines/interp";
 import { ZIndex } from "../core/scene/z-index";
+import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
+import { Cutscene } from "../globals";
 import { mxnFxVibrate } from "../mixins/effects/mxn-fx-vibrate";
 import { mxnInteract } from "../mixins/mxn-interact";
 import { objFxRipple } from "../objects/effects/obj-fx-ripple";
 import { objEsotericTamago } from "../objects/esoteric/obj-esoteric-tamago";
 import { EsotericTamaButtons } from "../objects/esoteric/tamago/esoteric-tama-buttons";
 import { EsotericTamaPage } from "../objects/esoteric/tamago/esoteric-tama-page";
+import { Rpg } from "../rpg/rpg";
 
 export function scnIndianaHallTamago() {
     const lvl = Lvl.IndianaHallTamago();
+    const cosmHallOfDoors = Rpg.microcosms["Indiana.HallOfDoors"];
+
+    const io: EsotericTamaPage.IO = {
+        beginUpload() {
+            return {
+                uploadedItem: null,
+            };
+        },
+        cancelUpload() {
+        },
+        exit() {
+            Cutscene.play(function* () {
+                yield* DramaHallOfDoors.returnToHall(cosmHallOfDoors);
+            });
+        },
+        refundItem(item) {
+        },
+    };
 
     const buttons = new EsotericTamaButtons();
-    const homePage = new EsotericTamaPage.Home();
+    const homePage = new EsotericTamaPage.Home(io);
 
     const tamagoObj = objEsotericTamago(buttons, homePage)
         .at(lvl.TamagoShell)
