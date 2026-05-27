@@ -2789,6 +2789,10 @@ export const Lvl = {
       TreeMarker1: e(r["Marker"], { x: 504, y: 248, values: { name: "TreeMarker1", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
     };
   },
+  IndianaHallTamago: (): LvlType.IndianaHallTamago => {
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    return { Block: e(r["Block"], { x: 0, y: 224, width: 504, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"), Player: e(r["Player"], { x: 80, y: 224, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities") };
+  },
   IndianaLoungeExterior: (): LvlType.IndianaLoungeExterior => {
     applyLevel({ width: 500, height: 400, backgroundTint: 0x7cb7d8, terrainTint: 0x698826 });
     return {
@@ -11944,6 +11948,10 @@ export namespace LvlType {
     SnowAngelMarker: ReturnType<(typeof r)["Marker"]>;
     TreeMarker0: ReturnType<(typeof r)["Marker"]>;
     TreeMarker1: ReturnType<(typeof r)["Marker"]>;
+  };
+  export type IndianaHallTamago = {
+    Block: ReturnType<(typeof r)["Block"]>;
+    Player: ReturnType<(typeof r)["Player"]>;
   };
   export type IndianaLoungeExterior = {
     SkyCloudPuff1: Sprite;
