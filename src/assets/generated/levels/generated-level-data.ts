@@ -2669,7 +2669,7 @@ export const Lvl = {
       MagicDoor0: e(r["MagicDoor"], { x: 376, y: 200, uid: 177203717952800, values: { sceneName: "scnIndianaHallSnowman", checkpointName: "", name: "MagicDoor0", depth: 0 } }, "Entities"),
       MagicDoor1: e(r["MagicDoor"], { x: 480, y: 200, uid: 177203718158901, values: { sceneName: "scnIndianaHallFlopMemory", checkpointName: "", name: "MagicDoor1", depth: 0 } }, "Entities"),
       MagicDoor2: e(r["MagicDoor"], { x: 584, y: 200, uid: 177203718418602, values: { sceneName: "scnIndianaHallPainting", checkpointName: "", name: "MagicDoor2", depth: 0 } }, "Entities"),
-      MagicDoor3: e(r["MagicDoor"], { x: 688, y: 200, uid: 177203722716303, values: { sceneName: "scnMagicDemo", checkpointName: "fromDoor3", name: "MagicDoor3", depth: 0 } }, "Entities"),
+      MagicDoor3: e(r["MagicDoor"], { x: 688, y: 200, uid: 177203722716303, values: { sceneName: "scnIndianaHallTamago", checkpointName: "", name: "MagicDoor3", depth: 0 } }, "Entities"),
       FoliageStemB: d(Tx.Foliage.StemB, { x: 376, y: 139, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x446d4b }, "AboveEntitiesDecals"),
       ShapesCrudeLine176x3_12: d(Tx.Shapes.CrudeLine176x3, { x: 269, y: 250, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x4146a8 }, "AboveEntitiesDecals"),
       ShapesCrudeLine176x3_13: d(Tx.Shapes.CrudeLine176x3, { x: 318, y: 250, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x4146a8 }, "AboveEntitiesDecals"),

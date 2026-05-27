@@ -12,4 +12,5 @@ export function scnIndianaHallOfDoors() {
     lvl.MagicDoor0.mixin(mxnDoorHallEmpty, cosmHallOfDoors, 0);
     lvl.MagicDoor1.mixin(mxnDoorHallEmpty, cosmHallOfDoors, 1);
     lvl.MagicDoor2.mixin(mxnDoorHallEmpty, cosmHallOfDoors, 2);
+    lvl.MagicDoor3.mixin(mxnDoorHallEmpty, cosmHallOfDoors, 3);
 }
