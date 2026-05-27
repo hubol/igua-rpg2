@@ -1,12 +1,11 @@
 import { ColorSource } from "pixi.js";
 import { nlerp } from "../../math/number";
-import { Unit } from "../../math/number-alias-types";
+import { Integer, Unit } from "../../math/number-alias-types";
 import { VectorSimple, vnew } from "../../math/vector-type";
 import { AdjustColor } from "../../pixi/adjust-color";
+import { range } from "../../range";
 import { PropertiesLike } from "../../types/properties-like";
 import { Coro } from "./coro";
-
-type FactorFn = (factor: Unit) => Unit;
 
 export function interp<T>(object: T, key: keyof PropertiesLike<T, number>, round = false) {
     return {
@@ -16,11 +15,11 @@ export function interp<T>(object: T, key: keyof PropertiesLike<T, number>, round
                     object,
                     key,
                     round,
-                    (factor) => Math.floor(factor * count) / count,
+                    factor.steps(count),
                 ),
             };
         },
-        factor: (factorFn: FactorFn) => {
+        factor: (factorFn: factor.Fn) => {
             return {
                 to: toFn(object, key, round, factorFn),
             };
@@ -33,7 +32,7 @@ export function interpr<T>(object: T, key: keyof PropertiesLike<T, number>) {
     return interp(object, key, true);
 }
 
-function toFn<T>(object: T, key: keyof PropertiesLike<T, number>, round: boolean, factorFn?: FactorFn) {
+function toFn<T>(object: T, key: keyof PropertiesLike<T, number>, round: boolean, factorFn?: factor.Fn) {
     return (target: number) => ({
         over: (ms: number) => {
             let currentTick = 0;
@@ -75,11 +74,11 @@ export function interpc<T>(object: T, key: keyof PropertiesLike<T, ColorSource>)
                 to: colorToFn(
                     object,
                     key,
-                    (factor) => Math.floor(factor * count) / count,
+                    factor.steps(count),
                 ),
             };
         },
-        factor: (factorFn: FactorFn) => {
+        factor: (factorFn: factor.Fn) => {
             return {
                 to: colorToFn(object, key, factorFn),
             };
@@ -88,7 +87,7 @@ export function interpc<T>(object: T, key: keyof PropertiesLike<T, ColorSource>)
     };
 }
 
-function colorToFn<T>(object: T, key: keyof PropertiesLike<T, ColorSource>, factorFn?: FactorFn) {
+function colorToFn<T>(object: T, key: keyof PropertiesLike<T, ColorSource>, factorFn?: factor.Fn) {
     return (target: ColorSource) => ({
         over: (ms: number) => {
             let currentTick = 0;
@@ -130,17 +129,17 @@ export function interpv(vector: VectorSimple, round = false) {
                     vector,
                     false,
                     round,
-                    (factor) => Math.floor(factor * count) / count,
+                    factor.steps(count),
                 ),
                 translate: vectorToFn(
                     vector,
                     true,
                     round,
-                    (factor) => Math.floor(factor * count) / count,
+                    factor.steps(count),
                 ),
             };
         },
-        factor: (factorFn: FactorFn) => {
+        factor: (factorFn: factor.Fn) => {
             return {
                 to: vectorToFn(vector, false, round, factorFn),
                 translate: vectorToFn(vector, true, round, factorFn),
@@ -168,7 +167,7 @@ function vectorToFn<T>(
     vectorToUpdate: VectorSimple,
     isTranslate: boolean,
     round: boolean,
-    factorFn?: FactorFn,
+    factorFn?: factor.Fn,
 ) {
     const fn: Interpv_Chain_ToTranslate = (vector_x: VectorSimple | number, y?: number) => ({
         over: (ms: number) => {
@@ -221,8 +220,24 @@ function vectorToFn<T>(
     return fn;
 }
 
+const factorStepsCache = range(17).map(count => createFactorSteps(Math.max(1, count)));
+
 export const factor = {
+    linear(f: number) {
+        return f;
+    },
     sine(f: number) {
         return Math.sin(f * Math.PI / 2);
     },
+    steps(count: Integer) {
+        return factorStepsCache[count] ?? createFactorSteps(count);
+    },
 };
+
+export namespace factor {
+    export type Fn = (factor: Unit) => Unit;
+}
+
+function createFactorSteps(count: Integer): factor.Fn {
+    return (factor) => Math.floor(factor * count) / count;
+}
