@@ -2,7 +2,9 @@ import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../../assets/textures";
 import { interpvr } from "../../../../lib/game-engine/routines/interp";
 import { Integer } from "../../../../lib/math/number-alias-types";
+import { PseudoRng } from "../../../../lib/math/rng";
 import { container } from "../../../../lib/pixi/container";
+import { range } from "../../../../lib/range";
 import { Null } from "../../../../lib/types/null";
 import { mxnBoilFlipH } from "../../../mixins/mxn-boil-flip-h";
 import { mxnBoilPivot } from "../../../mixins/mxn-boil-pivot";
@@ -62,10 +64,19 @@ export namespace EsotericTamaPage {
         }
 
         getDisplayObject(): DisplayObject {
+            const p = new PseudoRng(23923223);
+
             return container(
                 Sprite.from(Tx.Esoteric.Tamago.DemoScreen)
                     .mixin(mxnBoilFlipH)
                     .step(self => self.y = this._selectedIndex === null ? 0 : -4),
+                ...range(5).map(i =>
+                    Sprite.from(Tx.Esoteric.Tamago.Poop)
+                        .mixin(mxnBoilFlipH)
+                        .step(self => self.visible = this.state.poop > i)
+                        .at(p.vunit().scale(30, 10).vround())
+                        .add(50, 30)
+                ),
                 Sprite.from(txsIcons[0])
                     .invisible()
                     .mixin(mxnBoilPivot)
