@@ -177,19 +177,32 @@ export namespace EsotericTamaPage {
         getDisplayObject(): DisplayObject {
             return container(
                 container(
-                    Sprite.from(Tx.Esoteric.Tamago.InfoScreen0),
-                    objEsotericTamaBar(4, () => this._home.state.stomach)
-                        .at(4, 16),
-                    objEsotericTamaBar(4, () => this._home.state.mood)
-                        .at(3, 48),
-                ),
-                Sprite.from(Tx.Esoteric.Tamago.InfoScreen1),
-            )
-                .step(self => {
-                    for (let i = 0; i < self.children.length; i++) {
-                        self.children[i].visible = this._scrollsCount % self.children.length === i;
-                    }
-                });
+                    container(
+                        Sprite.from(Tx.Esoteric.Tamago.InfoScreen0),
+                        objText.MediumBoldIrregular("Eating", { tint: 0x000000 })
+                            .at(4, 4),
+                        objEsotericTamaBar(4, () => this._home.state.stomach)
+                            .at(4, 16),
+                        objText.MediumBoldIrregular("Vibing", { tint: 0x000000 })
+                            .at(4, 29),
+                        objEsotericTamaBar(4, () => this._home.state.mood)
+                            .at(3, 41),
+                    ),
+                    Sprite.from(Tx.Esoteric.Tamago.InfoScreen1),
+                )
+                    .step(self => {
+                        for (let i = 0; i < self.children.length; i++) {
+                            self.children[i].visible = this._scrollsCount % self.children.length === i;
+                        }
+                    }),
+                Sprite.from(Tx.Esoteric.Tamago.InfoArrow)
+                    .coro(function* (self) {
+                        while (true) {
+                            self.y = -4;
+                            yield interpvr(self).to(0, 0).over(333);
+                        }
+                    }),
+            );
         }
 
         constructor(private readonly _home: Home) {
@@ -236,8 +249,8 @@ function objEsotericTamaBar(maxValue: Integer, valueProvider: () => Integer) {
             },
         ],
         maxValue,
-        tintBack: 0x800000,
-        tintFront: 0x26BA4A,
+        tintBack: 0x000000,
+        tintFront: 0xffffff,
         width: 105,
     }, valueProvider);
 }
