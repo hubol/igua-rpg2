@@ -1,6 +1,7 @@
 import { DisplayObject, Graphics, Sprite } from "pixi.js";
+import { objText } from "../../../../assets/fonts";
 import { Tx } from "../../../../assets/textures";
-import { interpvr } from "../../../../lib/game-engine/routines/interp";
+import { factor, interpvr } from "../../../../lib/game-engine/routines/interp";
 import { Integer } from "../../../../lib/math/number-alias-types";
 import { PseudoRng } from "../../../../lib/math/rng";
 import { container } from "../../../../lib/pixi/container";
@@ -8,6 +9,7 @@ import { range } from "../../../../lib/range";
 import { Null } from "../../../../lib/types/null";
 import { mxnBoilFlipH } from "../../../mixins/mxn-boil-flip-h";
 import { mxnBoilPivot } from "../../../mixins/mxn-boil-pivot";
+import { mxnBoilSeed } from "../../../mixins/mxn-boil-seed";
 import { RpgInventory } from "../../../rpg/rpg-inventory";
 import { objStatusBar } from "../../overlay/obj-status-bar";
 import { EsotericTamaButtons } from "./esoteric-tama-buttons";
@@ -28,6 +30,10 @@ export namespace EsotericTamaPage {
             mood: 0,
             poop: 4,
             stomach: 0,
+            inventory: {
+                foodsCount: 0,
+                watersCount: 0,
+            },
         };
 
         constructor(private readonly _io: IO) {
@@ -56,6 +62,16 @@ export namespace EsotericTamaPage {
             if (this._selectedIndex !== null && buttons.isPressed("b")) {
                 if (this._selectedIndex === 0) {
                     return new Info(this);
+                }
+                if (this._selectedIndex === 1) {
+                    if (this.state.inventory.foodsCount < 1) {
+                        return new Error("I don't have food!", this);
+                    }
+                }
+                if (this._selectedIndex === 2) {
+                    if (this.state.inventory.watersCount < 1) {
+                        return new Error("I don't have water!", this);
+                    }
                 }
                 if (this._selectedIndex === 5) {
                     return new Exit(this._io);
@@ -113,6 +129,39 @@ export namespace EsotericTamaPage {
         }
     }
 
+    class Error extends EsotericTamaPage {
+        private _stepsCount = 0;
+
+        step(buttons: EsotericTamaButtons.Public): void | EsotericTamaPage {
+            if (this._stepsCount++ >= 90) {
+                return this._returnPage;
+            }
+        }
+
+        getDisplayObject(): DisplayObject {
+            return container(
+                Sprite.from(Tx.Esoteric.Tamago.Error)
+                    .tinted(0xffff00)
+                    .at(0, -5),
+                objText.MediumBoldIrregular(this._text, { maxWidth: 80, align: "center", tint: 0x000000 })
+                    .mixin(mxnBoilSeed)
+                    .anchored(0.5, 0.5)
+                    .at(60, 34),
+            )
+                .coro(function* (self) {
+                    yield interpvr(self).factor(factor.sine).to(0, 0).over(500);
+                })
+                .at(0, -60);
+        }
+
+        constructor(
+            readonly _text: string,
+            private readonly _returnPage: EsotericTamaPage,
+        ) {
+            super();
+        }
+    }
+
     export class Info extends EsotericTamaPage {
         private _scrollsCount = 0;
 
@@ -152,6 +201,10 @@ export namespace EsotericTamaPage {
         stomach: Integer;
         mood: Integer;
         poop: Integer;
+        inventory: {
+            watersCount: Integer;
+            foodsCount: Integer;
+        };
     }
 
     export interface IO {
