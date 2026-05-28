@@ -177,7 +177,8 @@
           "texture": "esoteric/tamago/shell.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": "TamagoShell"}
+          "values": {"name": "TamagoShell"},
+          "groupName": null
         },
         {
           "x": 184,
@@ -189,7 +190,8 @@
           "texture": "esoteric/tamago/button a.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "ButtonA"}
+          "values": {"name": "ButtonA"},
+          "groupName": null
         },
         {
           "x": 314,
@@ -201,7 +203,8 @@
           "texture": "esoteric/tamago/button c.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "ButtonC"}
+          "values": {"name": "ButtonC"},
+          "groupName": null
         },
         {
           "x": 248,
@@ -213,7 +216,20 @@
           "texture": "esoteric/tamago/button b.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "ButtonB"}
+          "values": {"name": "ButtonB"},
+          "groupName": null
+        },
+        {
+          "x": 416,
+          "y": 224,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/tamago/deposit box.png",
+          "originX": 0.5,
+          "originY": 1,
+          "values": {"name": "DepositBox"}
         }
       ],
       "folder": "../textures"

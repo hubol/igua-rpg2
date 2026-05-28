@@ -2,6 +2,7 @@ import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { objText } from "../../../../assets/fonts";
 import { Tx } from "../../../../assets/textures";
 import { factor, interpvr } from "../../../../lib/game-engine/routines/interp";
+import { sleep } from "../../../../lib/game-engine/routines/sleep";
 import { Integer } from "../../../../lib/math/number-alias-types";
 import { PseudoRng } from "../../../../lib/math/rng";
 import { CollisionShape } from "../../../../lib/pixi/collision";
@@ -77,6 +78,10 @@ export namespace EsotericTamaPage {
 
                     this.state.inventory.watersCount--;
                     return new Wash(this, this.state);
+                }
+                if (this._selectedIndex === 3) {
+                    const uploadTransaction = this._io.beginUpload();
+                    return new Upload(this, this._io, uploadTransaction, this.state);
                 }
                 if (this._selectedIndex === 5) {
                     return new Exit(this._io);
@@ -247,6 +252,76 @@ export namespace EsotericTamaPage {
         }
     }
 
+    export class Upload extends EsotericTamaPage {
+        constructor(
+            private readonly _returnPage: EsotericTamaPage,
+            private readonly _io: IO,
+            private readonly _uploadTransaction: IO.UploadTransaction,
+            private readonly _state: State,
+        ) {
+            super();
+        }
+
+        step(buttons: EsotericTamaButtons.Public): void | EsotericTamaPage {
+            if (this._uploadTransaction.uploadedItem) {
+                const tamaItem = TamaItem.createFromItem(this._uploadTransaction.uploadedItem);
+                if (tamaItem) {
+                    this._io.closeTransaction(this._uploadTransaction, "accepted");
+                    if (tamaItem === "food") {
+                        this._state.inventory.foodsCount++;
+                        return new Message("Food stored: " + this._state.inventory.foodsCount, this._returnPage);
+                    }
+                    else {
+                        this._state.inventory.watersCount++;
+                        return new Message("Water stored: " + this._state.inventory.watersCount, this._returnPage);
+                    }
+                }
+                else {
+                    this._io.closeTransaction(this._uploadTransaction, "refund");
+                }
+
+                return this._returnPage;
+            }
+
+            if (buttons.isPressed("c")) {
+                this._io.closeTransaction(this._uploadTransaction, "canceled");
+                return this._returnPage;
+            }
+        }
+
+        getDisplayObject(): DisplayObject {
+            return container(
+                Sprite.from(Tx.Esoteric.Tamago.UploadScreen),
+                objText.MediumIrregular("Upload now", { tint: 0x000000 })
+                    .at(60, 30)
+                    .anchored(0.5, 0.5)
+                    .coro(function* (self) {
+                        while (true) {
+                            yield sleep(500);
+                            self.visible = !self.visible;
+                        }
+                    }),
+            );
+        }
+    }
+
+    type TamaItem = "food" | "water";
+
+    namespace TamaItem {
+        export function createFromItem(item: RpgInventory.Item): TamaItem | null {
+            if (item.kind === "potion") {
+                if (item.id === "Wetness") {
+                    return "water";
+                }
+                if (item.id === "Poison") {
+                    return "food";
+                }
+            }
+
+            return null;
+        }
+    }
+
     export interface State {
         stomach: Integer;
         mood: Integer;
@@ -259,8 +334,7 @@ export namespace EsotericTamaPage {
 
     export interface IO {
         beginUpload(): IO.UploadTransaction;
-        cancelUpload(): void;
-        refundItem(item: RpgInventory.Item): void;
+        closeTransaction(transaction: IO.UploadTransaction, action: "refund" | "accepted" | "canceled"): void;
 
         exit(): void;
     }

@@ -2799,6 +2799,7 @@ export const Lvl = {
       ButtonA: d(Tx.Esoteric.Tamago.ButtonA, { x: 184, y: 194, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       ButtonC: d(Tx.Esoteric.Tamago.ButtonC, { x: 314, y: 194, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       ButtonB: d(Tx.Esoteric.Tamago.ButtonB, { x: 248, y: 202, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      DepositBox: d(Tx.Esoteric.Tamago.DepositBox, { x: 416, y: 224, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 1, tint: 0xffffff }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 0, y: 224, width: 504, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Player: e(r["Player"], { x: 80, y: 224, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     };
@@ -11990,6 +11991,7 @@ export namespace LvlType {
     ButtonA: Sprite;
     ButtonC: Sprite;
     ButtonB: Sprite;
+    DepositBox: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Player: ReturnType<(typeof r)["Player"]>;
   };

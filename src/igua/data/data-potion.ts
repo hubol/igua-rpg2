@@ -266,6 +266,8 @@ export namespace DataPotion {
 
     export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataPotion" });
 
+    export const Ids = DataLib.createIds(Manifest);
+
     export function usePotion(id: Id, target: MxnRpgStatus) {
         const sound = getById(id).sound;
         if (sound) {

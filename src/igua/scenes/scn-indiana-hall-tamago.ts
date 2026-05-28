@@ -3,10 +3,16 @@ import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Sfx } from "../../assets/sounds";
 import { Sound } from "../../lib/game-engine/audio/sound";
 import { factor } from "../../lib/game-engine/routines/interp";
+import { approachLinear } from "../../lib/math/number";
+import { Null } from "../../lib/types/null";
 import { ZIndex } from "../core/scene/z-index";
+import { DataPotion } from "../data/data-potion";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
+import { DramaInventory } from "../drama/drama-inventory";
+import { show } from "../drama/show";
 import { Cutscene } from "../globals";
 import { mxnFxVibrate } from "../mixins/effects/mxn-fx-vibrate";
+import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnInteract } from "../mixins/mxn-interact";
 import { objFxRipple } from "../objects/effects/obj-fx-ripple";
 import { objEsotericTamago } from "../objects/esoteric/obj-esoteric-tamago";
@@ -18,20 +24,53 @@ export function scnIndianaHallTamago() {
     const lvl = Lvl.IndianaHallTamago();
     const cosmHallOfDoors = Rpg.microcosms["Indiana.HallOfDoors"];
 
+    let uploadTransaction = Null<EsotericTamaPage.IO.UploadTransaction>();
+
+    lvl.DepositBox
+        .anchored(0.5, 0)
+        .mixin(mxnCutscene, function* () {
+            const item = yield* DramaInventory.askWhichAndRemoveOne(
+                DataPotion.Ids.map(id => ({ kind: "potion", id })),
+            );
+
+            if (item === null) {
+                return;
+            }
+
+            uploadTransaction!.uploadedItem = item;
+            uploadTransaction = null;
+        })
+        .step(self => {
+            self.interact.enabled = Boolean(uploadTransaction && !uploadTransaction.uploadedItem);
+            self.anchor.y = approachLinear(self.anchor.y, self.interact.enabled ? 1 : 0, 0.03);
+        });
+
     const io: EsotericTamaPage.IO = {
         beginUpload() {
-            return {
-                uploadedItem: null,
-            };
+            return uploadTransaction ??= { uploadedItem: null };
         },
-        cancelUpload() {
+        closeTransaction(transaction, action) {
+            if (uploadTransaction === transaction) {
+                uploadTransaction = null;
+            }
+
+            const item = transaction.uploadedItem;
+
+            if (item && action !== "accepted") {
+                Cutscene.play(function* () {
+                    yield* DramaInventory.receiveItems([item]);
+                    yield* show(
+                        action === "canceled"
+                            ? "Your item was refunded due to a race condition."
+                            : "Your item was refunded. Only food and water are accepted.",
+                    );
+                });
+            }
         },
         exit() {
             Cutscene.play(function* () {
                 yield* DramaHallOfDoors.returnToHall(cosmHallOfDoors);
             });
-        },
-        refundItem(item) {
         },
     };
 
