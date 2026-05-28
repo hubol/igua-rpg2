@@ -6,12 +6,21 @@ export class MicrocosmTamago extends RpgMicrocosm<MicrocosmTamago.State> {
         super();
     }
 
-    canEat() {
-        return this._state.inventory.food >= 1;
+    checkEat(): MicrocosmTamago.CheckEat {
+        if (this._state.inventory.food < 1) {
+            return { success: false, reason: "no_food" };
+        }
+        if (this._state.poop > 0) {
+            return { success: false, reason: "poop" };
+        }
+        return { success: true };
     }
 
-    canWash() {
-        return this._state.inventory.water >= 1;
+    checkWash(): MicrocosmTamago.CheckWash {
+        if (this._state.inventory.water < 1) {
+            return { success: false, reason: "no_water" };
+        }
+        return { success: true };
     }
 
     eat() {
@@ -65,4 +74,11 @@ export namespace MicrocosmTamago {
     }
 
     export type TamaItemId = "food" | "water";
+
+    type Check<T extends string> =
+        | { success: true }
+        | { success: false; reason: T };
+
+    export type CheckEat = Check<"no_food" | "poop">;
+    export type CheckWash = Check<"no_water">;
 }

@@ -61,16 +61,23 @@ export namespace EsotericTamaPage {
                     return new Info(this, this._cosmTamago);
                 }
                 if (this._selectedIndex === 1) {
-                    if (this._cosmTamago.canEat()) {
+                    const checkEat = this._cosmTamago.checkEat();
+                    if (checkEat.success) {
                         // TODO
                         this._cosmTamago.eat();
                         return;
                     }
 
-                    return new Message("I don't have food!", this);
+                    if (checkEat.reason === "no_food") {
+                        return new Message("I don't have food!", this);
+                    }
+                    else {
+                        return new Message("I don't want to eat with poop around!", this);
+                    }
                 }
                 if (this._selectedIndex === 2) {
-                    if (this._cosmTamago.canWash()) {
+                    const checkWash = this._cosmTamago.checkWash();
+                    if (checkWash.success) {
                         return new Wash(this, this._cosmTamago);
                     }
 
