@@ -178,14 +178,16 @@ function* dramaStarMinigame(args: DramaStarMinigameArgs) {
     const reticleObj = objReticle(args)
         .show();
 
-    for (let f = 0; f < 1; f += 0.04) {
-        const x = Rng.int(nlerp(50, 180, f), nlerp(450, 320, f));
-        const position = vnew(x, 280);
+    for (let f = 0; f < 1; f += 0.04 * 4) {
+        for (const starObj of Rng.shuffle(starObjs.filter(obj => !obj.destroyed))) {
+            const x = Rng.int(nlerp(50, 180, f), nlerp(450, 320, f));
+            const position = vnew(x, 280);
 
-        objTamagoRescue(Rng.item(starObjs.filter(obj => !obj.destroyed)) ?? starObjs[0])
-            .at(position)
-            .show();
-        yield sleep(nlerp(1800, 800, f));
+            objTamagoRescue(starObj)
+                .at(position)
+                .show();
+            yield sleep(nlerp(1800, 800, f));
+        }
     }
 }
 
