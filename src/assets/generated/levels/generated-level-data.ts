@@ -2803,10 +2803,10 @@ export const Lvl = {
       Block: e(r["Block"], { x: 0, y: 224, width: 504, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Player: e(r["Player"], { x: 80, y: 224, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       StarSafeRegion: e(r["Region"], { x: 0, y: 0, width: 500, height: 280, values: { name: "StarSafeRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
-      StarMarker0: e(r["Marker"], { x: 392, y: 40, values: { name: "StarMarker0", depth: 0 }, tint: 0xffff00 }, "MarkerEntities"),
-      StarMarker1: e(r["Marker"], { x: 432, y: 72, values: { name: "StarMarker1", depth: 0 }, tint: 0xffff00 }, "MarkerEntities"),
-      StarMarker2: e(r["Marker"], { x: 408, y: 112, values: { name: "StarMarker2", depth: 0 }, tint: 0xffff00 }, "MarkerEntities"),
-      StarMarker3: e(r["Marker"], { x: 448, y: 152, values: { name: "StarMarker3", depth: 0 }, tint: 0xffff00 }, "MarkerEntities"),
+      StarMarker0: e(r["Marker"], { x: 48, y: 128, values: { name: "StarMarker0", depth: 0 }, tint: 0xffff00 }, "MarkerEntities"),
+      StarMarker1: e(r["Marker"], { x: 96, y: 72, values: { name: "StarMarker1", depth: 0 }, tint: 0xffff00 }, "MarkerEntities"),
+      StarMarker2: e(r["Marker"], { x: 408, y: 80, values: { name: "StarMarker2", depth: 0 }, tint: 0xffff00 }, "MarkerEntities"),
+      StarMarker3: e(r["Marker"], { x: 464, y: 128, values: { name: "StarMarker3", depth: 0 }, tint: 0xffff00 }, "MarkerEntities"),
     };
   },
   IndianaLoungeExterior: (): LvlType.IndianaLoungeExterior => {

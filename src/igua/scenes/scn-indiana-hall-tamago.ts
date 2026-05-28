@@ -7,7 +7,7 @@ import { factor } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { vdeg } from "../../lib/math/angle";
-import { approachLinear } from "../../lib/math/number";
+import { approachLinear, nlerp } from "../../lib/math/number";
 import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { Null } from "../../lib/types/null";
@@ -177,11 +177,14 @@ function* dramaStarMinigame(args: DramaStarMinigameArgs) {
     const reticleObj = objReticle(args)
         .show();
 
-    while (true) {
-        objTamagoRescue(Rng.item(starObjs))
-            .at(-40, Rng.int(0, 280))
+    for (let f = 0; f < 1; f += 0.04) {
+        const x = Rng.int(nlerp(50, 180, f), nlerp(450, 320, f));
+        const position = vnew(x, 280);
+
+        objTamagoRescue(Rng.item(starObjs.filter(obj => !obj.destroyed)) ?? starObjs[0])
+            .at(position)
             .show();
-        yield sleep(1000);
+        yield sleep(nlerp(1800, 800, f));
     }
 }
 
@@ -194,11 +197,12 @@ function objReticle({ aButtonObj, bButtonObj }: DramaStarMinigameArgs) {
         .invisible()
         .step(self => {
             self.visible = true;
+            const offset = vdeg(angle).scale(230, 120);
             self
                 .at(250, 140)
-                .add(vdeg(angle).scale(230, 120))
+                .add(offset.x, -Math.abs(offset.y))
                 .vround();
-            angle += angleDeltaSign * 0.5;
+            angle += angleDeltaSign * 2;
         })
         .coro(function* () {
             while (true) {
@@ -219,9 +223,9 @@ function objReticle({ aButtonObj, bButtonObj }: DramaStarMinigameArgs) {
 
 const rescueRank = RpgEnemyRank.create({
     status: {
-        healthMax: 99,
+        healthMax: 10,
         defenses: {
-            physical: 75,
+            physical: 50,
         },
         quirks: {
             emotionalDamageIsFatal: true,
@@ -230,12 +234,13 @@ const rescueRank = RpgEnemyRank.create({
 });
 
 const atkBlast = RpgAttack.create({
-    emotional: 33,
+    emotional: 7,
     versus: RpgFaction.Enemy,
 });
 
 function objTamagoRescue(targetObj: DisplayObject) {
-    const towSpeed = Rng.bool() ? vnew(-1, 1) : vnew(-2, 0);
+    const towSpeed = vnew(0, -1);
+    // const towSpeed = Rng.bool() ? vnew(-1, 1) : vnew(-2, 0);
     const angelObj = objItemRescueAngel(targetObj, towSpeed, vnew());
 
     const hurtboxObj = new Graphics()
