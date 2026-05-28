@@ -72,7 +72,21 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Region",
+          "id": 0,
+          "_eid": "11908607",
+          "x": 0,
+          "y": 0,
+          "width": 500,
+          "height": 280,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "StarSafeRegion", "depth": 0}
+        }
+      ]
     },
     {
       "name": "FrontDecals",

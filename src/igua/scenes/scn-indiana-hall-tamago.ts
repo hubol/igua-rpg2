@@ -4,7 +4,9 @@ import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Sound } from "../../lib/game-engine/audio/sound";
 import { factor } from "../../lib/game-engine/routines/interp";
+import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
+import { vdeg } from "../../lib/math/angle";
 import { approachLinear } from "../../lib/math/number";
 import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
@@ -19,13 +21,17 @@ import { mxnFxVibrate } from "../mixins/effects/mxn-fx-vibrate";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnEnemy } from "../mixins/mxn-enemy";
 import { mxnInteract } from "../mixins/mxn-interact";
+import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { objItemRescueAngel } from "../objects/characters/obj-item-rescue-angel";
+import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
 import { objFxRipple } from "../objects/effects/obj-fx-ripple";
 import { objEsotericTamago } from "../objects/esoteric/obj-esoteric-tamago";
 import { EsotericTamaButtons } from "../objects/esoteric/tamago/esoteric-tama-buttons";
 import { EsotericTamaPage } from "../objects/esoteric/tamago/esoteric-tama-page";
 import { Rpg } from "../rpg/rpg";
+import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
+import { RpgFaction } from "../rpg/rpg-faction";
 
 export function scnIndianaHallTamago() {
     const lvl = Lvl.IndianaHallTamago();
@@ -77,7 +83,7 @@ export function scnIndianaHallTamago() {
         beginMinigame() {
             scene.stage
                 .coro(function* () {
-                    yield* dramaStarMinigame(lvl);
+                    yield* dramaStarMinigame({ lvl, aButtonObj, bButtonObj });
                 });
         },
         exit() {
@@ -97,8 +103,8 @@ export function scnIndianaHallTamago() {
 
     const buttonIds: EsotericTamaButtons.Id[] = ["a", "b", "c"];
 
-    [lvl.ButtonA, lvl.ButtonB, lvl.ButtonC]
-        .forEach((obj, i) => obj.mixin(mxnTamagoButton, buttons, buttonIds[i]));
+    const [aButtonObj, bButtonObj] = [lvl.ButtonA, lvl.ButtonB, lvl.ButtonC]
+        .map((obj, i) => obj.mixin(mxnTamagoButton, buttons, buttonIds[i]));
 }
 
 const buttonSfx: Record<EsotericTamaButtons.Id, Sound> = {
@@ -110,12 +116,14 @@ const buttonSfx: Record<EsotericTamaButtons.Id, Sound> = {
 function mxnTamagoButton(obj: DisplayObject, buttons: EsotericTamaButtons, id: EsotericTamaButtons.Id) {
     return obj
         .mixin(mxnFxVibrate, "pivot")
+        .merge({ mxnTamagoButton: { pressesCount: 0 } })
         .coro(function* (self) {
             let vibrateStepsCount = 0;
 
             self
                 .step(() => self.mxnFxVibrate.frequency = vibrateStepsCount-- > 0 ? 0.3 : 0)
                 .mixin(mxnInteract, () => {
+                    self.mxnTamagoButton.pressesCount++;
                     self.play(buttonSfx[id].rate(0.99, 1.01));
 
                     buttons.press(id);
@@ -127,6 +135,8 @@ function mxnTamagoButton(obj: DisplayObject, buttons: EsotericTamaButtons, id: E
                 });
         });
 }
+
+type MxnTamagoButton = ReturnType<typeof mxnTamagoButton>;
 
 function objFxTamagotchiButtonRipple() {
     return objFxRipple(
@@ -144,14 +154,28 @@ function objFxTamagotchiButtonRipple() {
         .mxnFxFactor.play(200, factor.sine);
 }
 
-function* dramaStarMinigame(lvl: LvlType.IndianaHallTamago) {
+interface DramaStarMinigameArgs {
+    lvl: LvlType.IndianaHallTamago;
+    aButtonObj: MxnTamagoButton;
+    bButtonObj: MxnTamagoButton;
+}
+
+function* dramaStarMinigame(args: DramaStarMinigameArgs) {
+    const { lvl } = args;
     const starObjs = [lvl.StarMarker0, lvl.StarMarker1, lvl.StarMarker2, lvl.StarMarker3]
         .map(obj =>
             Sprite.from(Tx.Esoteric.Tamago.GameStar)
+                .step(self => {
+                    if (!self.collides(lvl.StarSafeRegion)) {
+                        self.destroy();
+                    }
+                })
                 .anchored(0.5, 0.5)
                 .at(obj)
                 .show()
         );
+    const reticleObj = objReticle(args)
+        .show();
 
     while (true) {
         objTamagoRescue(Rng.item(starObjs))
@@ -161,17 +185,58 @@ function* dramaStarMinigame(lvl: LvlType.IndianaHallTamago) {
     }
 }
 
+function objReticle({ aButtonObj, bButtonObj }: DramaStarMinigameArgs) {
+    let angle = 0;
+    let angleDeltaSign = 1;
+
+    return Sprite.from(Tx.Esoteric.Tamago.Reticle)
+        .anchored(0.5, 0.5)
+        .invisible()
+        .step(self => {
+            self.visible = true;
+            self
+                .at(250, 140)
+                .add(vdeg(angle).scale(230, 120))
+                .vround();
+            angle += angleDeltaSign * 0.5;
+        })
+        .coro(function* () {
+            while (true) {
+                yield onPrimitiveMutate(() => aButtonObj.mxnTamagoButton.pressesCount);
+                angleDeltaSign *= -1;
+            }
+        })
+        .coro(function* (self) {
+            while (true) {
+                yield onPrimitiveMutate(() => bButtonObj.mxnTamagoButton.pressesCount);
+                objFxFieryBurst170px()
+                    .mixin(mxnRpgAttack, { attack: atkBlast, damageTargetsOnce: true })
+                    .at(self)
+                    .show();
+            }
+        });
+}
+
 const rescueRank = RpgEnemyRank.create({
     status: {
-        healthMax: 100,
+        healthMax: 99,
         defenses: {
             physical: 75,
+        },
+        quirks: {
+            emotionalDamageIsFatal: true,
         },
     },
 });
 
+const atkBlast = RpgAttack.create({
+    emotional: 33,
+    versus: RpgFaction.Enemy,
+});
+
 function objTamagoRescue(targetObj: DisplayObject) {
-    const angelObj = objItemRescueAngel(targetObj, vnew(-2, 0), vnew());
+    const towSpeed = Rng.bool() ? vnew(-1, 1) : vnew(-2, 0);
+    const angelObj = objItemRescueAngel(targetObj, towSpeed, vnew());
 
     const hurtboxObj = new Graphics()
         .beginFill(0xff0000)
