@@ -75,7 +75,7 @@ export function scnIndianaHallTamago() {
     };
 
     const buttons = new EsotericTamaButtons();
-    const homePage = new EsotericTamaPage.Home(io);
+    const homePage = new EsotericTamaPage.Home(io, Rpg.microcosms["Indiana.MagicDoor.Tamago"]);
 
     const tamagoObj = objEsotericTamago(buttons, homePage)
         .at(lvl.TamagoShell)

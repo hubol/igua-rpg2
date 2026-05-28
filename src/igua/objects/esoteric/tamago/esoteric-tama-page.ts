@@ -12,6 +12,7 @@ import { Null } from "../../../../lib/types/null";
 import { mxnBoilFlipH } from "../../../mixins/mxn-boil-flip-h";
 import { mxnBoilPivot } from "../../../mixins/mxn-boil-pivot";
 import { mxnBoilSeed } from "../../../mixins/mxn-boil-seed";
+import { MicrocosmTamago } from "../../../rpg/microcosms/microcosm-tamago";
 import { RpgInventory } from "../../../rpg/rpg-inventory";
 import { objStatusBar } from "../../overlay/obj-status-bar";
 import { EsotericTamaButtons } from "./esoteric-tama-buttons";
@@ -29,17 +30,10 @@ export namespace EsotericTamaPage {
         private _selectedIndex = Null<Integer>();
         private _stepsSinceActivity = 999;
 
-        readonly state: State = {
-            mood: 0,
-            poop: 4,
-            stomach: 0,
-            inventory: {
-                foodsCount: 0,
-                watersCount: 0,
-            },
-        };
-
-        constructor(private readonly _io: IO) {
+        constructor(
+            private readonly _io: IO,
+            private readonly _cosmTamago: MicrocosmTamago,
+        ) {
             super();
         }
 
@@ -64,24 +58,27 @@ export namespace EsotericTamaPage {
 
             if (this._selectedIndex !== null && buttons.isPressed("b")) {
                 if (this._selectedIndex === 0) {
-                    return new Info(this);
+                    return new Info(this, this._cosmTamago);
                 }
                 if (this._selectedIndex === 1) {
-                    if (this.state.inventory.foodsCount < 1) {
-                        return new Message("I don't have food!", this);
-                    }
-                }
-                if (this._selectedIndex === 2) {
-                    if (this.state.inventory.watersCount < 1) {
-                        return new Message("I don't have water!", this);
+                    if (this._cosmTamago.canEat()) {
+                        // TODO
+                        this._cosmTamago.eat();
+                        return;
                     }
 
-                    this.state.inventory.watersCount--;
-                    return new Wash(this, this.state);
+                    return new Message("I don't have food!", this);
+                }
+                if (this._selectedIndex === 2) {
+                    if (this._cosmTamago.canWash()) {
+                        return new Wash(this, this._cosmTamago);
+                    }
+
+                    return new Message("I don't have water!", this);
                 }
                 if (this._selectedIndex === 3) {
                     const uploadTransaction = this._io.beginUpload();
-                    return new Upload(this, this._io, uploadTransaction, this.state);
+                    return new Upload(this, this._io, uploadTransaction, this._cosmTamago);
                 }
                 if (this._selectedIndex === 5) {
                     return new Exit(this._io);
@@ -91,7 +88,7 @@ export namespace EsotericTamaPage {
 
         getDisplayObject(): DisplayObject {
             return container(
-                objEsotericTamaHome(this.state),
+                objEsotericTamaHome(this._cosmTamago),
                 Sprite.from(txsIcons[0])
                     .invisible()
                     .mixin(mxnBoilPivot)
@@ -108,7 +105,7 @@ export namespace EsotericTamaPage {
     export class Wash extends EsotericTamaPage {
         constructor(
             private readonly _returnPage: EsotericTamaPage,
-            private readonly _state: State,
+            private readonly _cosmTamago: MicrocosmTamago,
         ) {
             super();
         }
@@ -117,13 +114,13 @@ export namespace EsotericTamaPage {
 
         step(buttons: EsotericTamaButtons.Public): void | EsotericTamaPage {
             if (this._stepsCount++ >= 200) {
-                this._state.poop = 0;
+                this._cosmTamago.wash();
                 return this._returnPage;
             }
         }
 
         getDisplayObject(): DisplayObject {
-            const homeObj = objEsotericTamaHome(this._state);
+            const homeObj = objEsotericTamaHome(this._cosmTamago);
 
             const mopCollisionObj = new Graphics()
                 .beginFill(0xffffff)
@@ -212,7 +209,7 @@ export namespace EsotericTamaPage {
                 this._scrollsCount++;
             }
             if (buttons.isPressed("c")) {
-                return this._home;
+                return this._returnPage;
             }
         }
 
@@ -223,11 +220,11 @@ export namespace EsotericTamaPage {
                         Sprite.from(Tx.Esoteric.Tamago.InfoScreen0),
                         objText.MediumBoldIrregular("Eating", { tint: 0x000000 })
                             .at(4, 4),
-                        objEsotericTamaBar(4, () => this._home.state.stomach)
+                        objEsotericTamaBar(4, () => this._cosmTamago.stomach)
                             .at(4, 16),
                         objText.MediumBoldIrregular("Vibing", { tint: 0x000000 })
                             .at(4, 29),
-                        objEsotericTamaBar(4, () => this._home.state.mood)
+                        objEsotericTamaBar(4, () => this._cosmTamago.mood)
                             .at(3, 41),
                     ),
                     Sprite.from(Tx.Esoteric.Tamago.InfoScreen1),
@@ -247,7 +244,10 @@ export namespace EsotericTamaPage {
             );
         }
 
-        constructor(private readonly _home: Home) {
+        constructor(
+            private readonly _returnPage: EsotericTamaPage,
+            private readonly _cosmTamago: MicrocosmTamago,
+        ) {
             super();
         }
     }
@@ -257,7 +257,7 @@ export namespace EsotericTamaPage {
             private readonly _returnPage: EsotericTamaPage,
             private readonly _io: IO,
             private readonly _uploadTransaction: IO.UploadTransaction,
-            private readonly _state: State,
+            private readonly _cosmTamago: MicrocosmTamago,
         ) {
             super();
         }
@@ -267,14 +267,9 @@ export namespace EsotericTamaPage {
                 const tamaItem = TamaItem.createFromItem(this._uploadTransaction.uploadedItem);
                 if (tamaItem) {
                     this._io.closeTransaction(this._uploadTransaction, "accepted");
-                    if (tamaItem === "food") {
-                        this._state.inventory.foodsCount++;
-                        return new Message("Food stored: " + this._state.inventory.foodsCount, this._returnPage);
-                    }
-                    else {
-                        this._state.inventory.watersCount++;
-                        return new Message("Water stored: " + this._state.inventory.watersCount, this._returnPage);
-                    }
+                    const storedCount = this._cosmTamago.upload(tamaItem);
+                    const prefix = tamaItem === "food" ? "Food stored: " : "Water stored: ";
+                    return new Message(prefix + storedCount, this._returnPage);
                 }
                 else {
                     this._io.closeTransaction(this._uploadTransaction, "refund");
@@ -322,16 +317,6 @@ export namespace EsotericTamaPage {
         }
     }
 
-    export interface State {
-        stomach: Integer;
-        mood: Integer;
-        poop: Integer;
-        inventory: {
-            watersCount: Integer;
-            foodsCount: Integer;
-        };
-    }
-
     export interface IO {
         beginUpload(): IO.UploadTransaction;
         closeTransaction(transaction: IO.UploadTransaction, action: "refund" | "accepted" | "canceled"): void;
@@ -366,7 +351,7 @@ function objEsotericTamaBar(maxValue: Integer, valueProvider: () => Integer) {
     }, valueProvider);
 }
 
-function objEsotericTamaHome(state: EsotericTamaPage.State) {
+function objEsotericTamaHome(cosmTamago: MicrocosmTamago) {
     const p = new PseudoRng(23923223);
 
     return container(
@@ -375,7 +360,7 @@ function objEsotericTamaHome(state: EsotericTamaPage.State) {
         ...range(5).map(i =>
             Sprite.from(Tx.Esoteric.Tamago.Poop)
                 .mixin(mxnBoilFlipH)
-                .step(self => self.visible = state.poop > i)
+                .step(self => self.visible = cosmTamago.poopsCount > i)
                 .at(p.vunit().scale(30, 10).vround())
                 .add(50, 30)
         ),

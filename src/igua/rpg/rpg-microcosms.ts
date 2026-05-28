@@ -5,6 +5,7 @@ import { MicrocosmDownloadData } from "./microcosms/microcosm-download-data";
 import { MicrocosmHallOfDoors } from "./microcosms/microcosm-hall-of-doors";
 import { MicrocosmLottery } from "./microcosms/microcosm-lottery";
 import { MicrocosmSimpleBot } from "./microcosms/microcosm-simple-bot";
+import { MicrocosmTamago } from "./microcosms/microcosm-tamago";
 import { MicrocosmTimeDroppedLoot } from "./microcosms/microcosm-time-dropped-loot";
 import { MicrocosmWetnessReceptacle } from "./microcosms/microcosm-wetness-receptacle";
 import { RpgMicrocosm, RpgMicrocosmUnsafeBase } from "./rpg-microcosm";
@@ -45,6 +46,7 @@ const Manifest = {
         homeSceneName: "scnIndianaHallOfDoors",
         emptySceneName: "scnIndianaHallEmpty",
     }),
+    "Indiana.MagicDoor.Tamago": configure(MicrocosmTamago, {}),
 };
 
 interface RpgMicrocosmClasslike<T> {
