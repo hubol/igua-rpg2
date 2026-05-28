@@ -1,4 +1,5 @@
 import { Integer } from "../../../lib/math/number-alias-types";
+import { EsotericTamaPage } from "../../objects/esoteric/tamago/esoteric-tama-page";
 import { RpgMicrocosm } from "../rpg-microcosm";
 
 export class MicrocosmTamago extends RpgMicrocosm<MicrocosmTamago.State> {
@@ -35,6 +36,10 @@ export class MicrocosmTamago extends RpgMicrocosm<MicrocosmTamago.State> {
 
     upload(id: MicrocosmTamago.TamaItemId): Integer {
         return ++this._state.inventory[id];
+    }
+
+    win(minigameResult: EsotericTamaPage.IO.MinigameSession.Result) {
+        this._state.mood = Math.min(4, this._state.mood + minigameResult.score);
     }
 
     get mood() {

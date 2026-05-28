@@ -19,6 +19,7 @@ import { show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnFxVibrate } from "../mixins/effects/mxn-fx-vibrate";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnDestroyAfterSteps } from "../mixins/mxn-destroy-after-steps";
 import { mxnEnemy } from "../mixins/mxn-enemy";
 import { mxnInteract } from "../mixins/mxn-interact";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
@@ -81,10 +82,14 @@ export function scnIndianaHallTamago() {
             }
         },
         beginMinigame() {
+            const session: EsotericTamaPage.IO.MinigameSession = {
+                result: null,
+            };
             scene.stage
                 .coro(function* () {
-                    yield* dramaStarMinigame({ lvl, aButtonObj, bButtonObj });
+                    yield* dramaStarMinigame({ lvl, aButtonObj, bButtonObj, session });
                 });
+            return session;
         },
         exit() {
             Cutscene.play(function* () {
@@ -158,6 +163,7 @@ interface DramaStarMinigameArgs {
     lvl: LvlType.IndianaHallTamago;
     aButtonObj: MxnTamagoButton;
     bButtonObj: MxnTamagoButton;
+    session: EsotericTamaPage.IO.MinigameSession;
 }
 
 function* dramaStarMinigame(args: DramaStarMinigameArgs) {
@@ -189,6 +195,14 @@ function* dramaStarMinigame(args: DramaStarMinigameArgs) {
             yield sleep(nlerp(1800, 800, f));
         }
     }
+
+    const score = starObjs
+        .filter(obj => !obj.mxnRescueStatus.isBeingRescued && !obj.destroyed)
+        .length;
+    args.session.result = { score };
+
+    reticleObj.destroy();
+    starObjs.forEach(obj => obj.mixin(mxnDestroyAfterSteps, 120));
 }
 
 function objReticle({ aButtonObj, bButtonObj }: DramaStarMinigameArgs) {

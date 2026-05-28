@@ -90,8 +90,8 @@ export namespace EsotericTamaPage {
                     return new Upload(this, this._io, uploadTransaction, this._cosmTamago);
                 }
                 if (this._selectedIndex === 4) {
-                    this._io.beginMinigame();
-                    return new Minigame();
+                    const session = this._io.beginMinigame();
+                    return new Minigame(this, session, this._cosmTamago);
                 }
                 if (this._selectedIndex === 5) {
                     return new Exit(this._io);
@@ -116,11 +116,41 @@ export namespace EsotericTamaPage {
     }
 
     class Minigame extends EsotericTamaPage {
-        step(buttons: EsotericTamaButtons.Public): void | EsotericTamaPage {
-            // throw new Error("Method not implemented.");
+        constructor(
+            private readonly _returnPage: EsotericTamaPage,
+            private readonly _session: IO.MinigameSession,
+            private readonly _cosmTamago: MicrocosmTamago,
+        ) {
+            super();
         }
+
+        private _processedResult = false;
+        private _stepsCount = 0;
+
+        step(buttons: EsotericTamaButtons.Public): void | EsotericTamaPage {
+            if (this._session.result) {
+                if (!this._processedResult) {
+                    this._cosmTamago.win(this._session.result);
+                    this._processedResult = true;
+                }
+                else if (this._stepsCount++ >= 120) {
+                    return this._returnPage;
+                }
+            }
+        }
+
         getDisplayObject(): DisplayObject {
-            return container();
+            return container(
+                container(
+                    objText.MediumBoldIrregular("Results", { tint: 0x000000 })
+                        .at(60, 20)
+                        .anchored(0.5, 1),
+                    objEsotericTamaBar(4, () => this._session.result?.score ?? 0)
+                        .at(25, 40),
+                )
+                    .invisible()
+                    .step(self => self.visible = Boolean(this._session.result)),
+            );
         }
     }
 
@@ -345,7 +375,7 @@ export namespace EsotericTamaPage {
         beginUpload(): IO.UploadTransaction;
         closeTransaction(transaction: IO.UploadTransaction, action: "refund" | "accepted" | "canceled"): void;
 
-        beginMinigame(): void;
+        beginMinigame(): IO.MinigameSession;
 
         exit(): void;
     }
@@ -353,6 +383,16 @@ export namespace EsotericTamaPage {
     export namespace IO {
         export interface UploadTransaction {
             uploadedItem: RpgInventory.Item | null;
+        }
+
+        export interface MinigameSession {
+            result: MinigameSession.Result | null;
+        }
+
+        export namespace MinigameSession {
+            export interface Result {
+                score: Integer;
+            }
         }
     }
 }
