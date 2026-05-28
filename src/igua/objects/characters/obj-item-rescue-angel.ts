@@ -8,6 +8,7 @@ import { Rng } from "../../../lib/math/rng";
 import { vdir } from "../../../lib/math/vector";
 import { VectorSimple, vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
+import { Null } from "../../../lib/types/null";
 import { scene } from "../../globals";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
@@ -159,7 +160,15 @@ export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSim
                     }
                 })
                 .coro(function* (aliveBehaviorObj) {
-                    yield () => aliveBehaviorObj.previousDistance < 60 || aliveBehaviorObj.isOutsideLevel;
+                    yield () =>
+                        (aliveBehaviorObj.previousDistance < 60 || aliveBehaviorObj.isOutsideLevel)
+                        && (!rescueObj.is(objItemRescueAngel.mxnRescueStatus)
+                            || !rescueObj.mxnRescueStatus.isBeingRescued);
+
+                    if (rescueObj.is(objItemRescueAngel.mxnRescueStatus)) {
+                        rescueObj.mxnRescueStatus.rescuerObj = self;
+                    }
+
                     aliveBehaviorObj.speed = 0;
                     self.speed.at(0, 0);
                     yield interpvr(self).factor(factor.sine).to(rescueObj).over(500);
@@ -188,3 +197,14 @@ export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSim
             self.destroy();
         });
 }
+
+objItemRescueAngel.mxnRescueStatus = function mxnRescueStatus (obj: DisplayObject) {
+    const api = {
+        rescuerObj: Null<DisplayObject>(),
+        get isBeingRescued() {
+            return this.rescuerObj && !this.rescuerObj.destroyed;
+        },
+    };
+
+    return obj.merge({ mxnRescueStatus: api });
+};

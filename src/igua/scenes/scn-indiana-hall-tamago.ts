@@ -165,6 +165,7 @@ function* dramaStarMinigame(args: DramaStarMinigameArgs) {
     const starObjs = [lvl.StarMarker0, lvl.StarMarker1, lvl.StarMarker2, lvl.StarMarker3]
         .map(obj =>
             Sprite.from(Tx.Esoteric.Tamago.GameStar)
+                .mixin(objItemRescueAngel.mxnRescueStatus)
                 .step(self => {
                     if (!self.collides(lvl.StarSafeRegion)) {
                         self.destroy();
