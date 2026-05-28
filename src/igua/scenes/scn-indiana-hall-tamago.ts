@@ -1,24 +1,31 @@
-import { DisplayObject } from "pixi.js";
-import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { DisplayObject, Graphics, Sprite } from "pixi.js";
+import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Sfx } from "../../assets/sounds";
+import { Tx } from "../../assets/textures";
 import { Sound } from "../../lib/game-engine/audio/sound";
 import { factor } from "../../lib/game-engine/routines/interp";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../lib/math/number";
+import { Rng } from "../../lib/math/rng";
+import { vnew } from "../../lib/math/vector-type";
 import { Null } from "../../lib/types/null";
 import { ZIndex } from "../core/scene/z-index";
 import { DataPotion } from "../data/data-potion";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { DramaInventory } from "../drama/drama-inventory";
 import { show } from "../drama/show";
-import { Cutscene } from "../globals";
+import { Cutscene, scene } from "../globals";
 import { mxnFxVibrate } from "../mixins/effects/mxn-fx-vibrate";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnEnemy } from "../mixins/mxn-enemy";
 import { mxnInteract } from "../mixins/mxn-interact";
+import { objItemRescueAngel } from "../objects/characters/obj-item-rescue-angel";
 import { objFxRipple } from "../objects/effects/obj-fx-ripple";
 import { objEsotericTamago } from "../objects/esoteric/obj-esoteric-tamago";
 import { EsotericTamaButtons } from "../objects/esoteric/tamago/esoteric-tama-buttons";
 import { EsotericTamaPage } from "../objects/esoteric/tamago/esoteric-tama-page";
 import { Rpg } from "../rpg/rpg";
+import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 
 export function scnIndianaHallTamago() {
     const lvl = Lvl.IndianaHallTamago();
@@ -66,6 +73,12 @@ export function scnIndianaHallTamago() {
                     );
                 });
             }
+        },
+        beginMinigame() {
+            scene.stage
+                .coro(function* () {
+                    yield* dramaStarMinigame(lvl);
+                });
         },
         exit() {
             Cutscene.play(function* () {
@@ -129,4 +142,43 @@ function objFxTamagotchiButtonRipple() {
         },
     )
         .mxnFxFactor.play(200, factor.sine);
+}
+
+function* dramaStarMinigame(lvl: LvlType.IndianaHallTamago) {
+    const starObjs = [lvl.StarMarker0, lvl.StarMarker1, lvl.StarMarker2, lvl.StarMarker3]
+        .map(obj =>
+            Sprite.from(Tx.Esoteric.Tamago.GameStar)
+                .anchored(0.5, 0.5)
+                .at(obj)
+                .show()
+        );
+
+    while (true) {
+        objTamagoRescue(Rng.item(starObjs))
+            .at(-40, Rng.int(0, 280))
+            .show();
+        yield sleep(1000);
+    }
+}
+
+const rescueRank = RpgEnemyRank.create({
+    status: {
+        healthMax: 100,
+        defenses: {
+            physical: 75,
+        },
+    },
+});
+
+function objTamagoRescue(targetObj: DisplayObject) {
+    const angelObj = objItemRescueAngel(targetObj, vnew(-2, 0), vnew());
+
+    const hurtboxObj = new Graphics()
+        .beginFill(0xff0000)
+        .drawRect(25, 20, 40, 30)
+        .invisible()
+        .show(angelObj);
+
+    return angelObj
+        .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank: rescueRank });
 }

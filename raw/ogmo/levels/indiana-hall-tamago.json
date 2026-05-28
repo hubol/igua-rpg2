@@ -16,7 +16,52 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 392,
+          "y": 40,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#ffff00",
+          "values": {"name": "StarMarker0", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 1,
+          "_eid": "73148747",
+          "x": 432,
+          "y": 72,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#ffff00",
+          "values": {"name": "StarMarker1", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 2,
+          "_eid": "73148747",
+          "x": 408,
+          "y": 112,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#ffff00",
+          "values": {"name": "StarMarker2", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 3,
+          "_eid": "73148747",
+          "x": 448,
+          "y": 152,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#ffff00",
+          "values": {"name": "StarMarker3", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",

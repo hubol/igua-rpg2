@@ -89,6 +89,10 @@ export namespace EsotericTamaPage {
                     const uploadTransaction = this._io.beginUpload();
                     return new Upload(this, this._io, uploadTransaction, this._cosmTamago);
                 }
+                if (this._selectedIndex === 4) {
+                    this._io.beginMinigame();
+                    return new Minigame();
+                }
                 if (this._selectedIndex === 5) {
                     return new Exit(this._io);
                 }
@@ -108,6 +112,15 @@ export namespace EsotericTamaPage {
                         }
                     }),
             );
+        }
+    }
+
+    class Minigame extends EsotericTamaPage {
+        step(buttons: EsotericTamaButtons.Public): void | EsotericTamaPage {
+            // throw new Error("Method not implemented.");
+        }
+        getDisplayObject(): DisplayObject {
+            return container();
         }
     }
 
@@ -331,6 +344,8 @@ export namespace EsotericTamaPage {
     export interface IO {
         beginUpload(): IO.UploadTransaction;
         closeTransaction(transaction: IO.UploadTransaction, action: "refund" | "accepted" | "canceled"): void;
+
+        beginMinigame(): void;
 
         exit(): void;
     }
