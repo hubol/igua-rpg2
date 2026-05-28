@@ -38,8 +38,11 @@ export namespace EsotericTamaPage {
         }
 
         step(buttons: EsotericTamaButtons.Public): void | EsotericTamaPage {
-            if (buttons.isPressed("a")) {
+            if (buttons.isPressed("a") || buttons.isPressed("b")) {
                 this._stepsSinceActivity = 0;
+            }
+
+            if (buttons.isPressed("a")) {
                 if (this._selectedIndex === null) {
                     this._selectedIndex = 0;
                 }
