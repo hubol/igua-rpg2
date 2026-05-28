@@ -14,7 +14,6 @@ import { mxnBoilPivot } from "../../../mixins/mxn-boil-pivot";
 import { mxnBoilSeed } from "../../../mixins/mxn-boil-seed";
 import { MicrocosmTamago } from "../../../rpg/microcosms/microcosm-tamago";
 import { RpgInventory } from "../../../rpg/rpg-inventory";
-import { objStatusBar } from "../../overlay/obj-status-bar";
 import { EsotericTamaButtons } from "./esoteric-tama-buttons";
 
 export abstract class EsotericTamaPage {
@@ -229,13 +228,15 @@ export namespace EsotericTamaPage {
                     container(
                         Sprite.from(Tx.Esoteric.Tamago.InfoScreen0),
                         objText.MediumBoldIrregular("Eating", { tint: 0x000000 })
-                            .at(4, 4),
+                            .anchored(0.5, 0)
+                            .at(60, 4),
                         objEsotericTamaBar(4, () => this._cosmTamago.stomach)
-                            .at(4, 16),
+                            .at(25, 14),
                         objText.MediumBoldIrregular("Vibing", { tint: 0x000000 })
-                            .at(4, 29),
+                            .anchored(0.5, 0)
+                            .at(60, 29),
                         objEsotericTamaBar(4, () => this._cosmTamago.mood)
-                            .at(3, 41),
+                            .at(25, 40),
                     ),
                     Sprite.from(Tx.Esoteric.Tamago.InfoScreen1),
                 )
@@ -341,26 +342,6 @@ export namespace EsotericTamaPage {
     }
 }
 
-function objEsotericTamaBar(maxValue: Integer, valueProvider: () => Integer) {
-    return objStatusBar.objAutoUpdated({
-        height: 9,
-        decreases: [
-            {
-                tintBar: 0xff0000,
-            },
-        ],
-        increases: [
-            {
-                tintBar: 0x00ff00,
-            },
-        ],
-        maxValue,
-        tintBack: 0x000000,
-        tintFront: 0xffffff,
-        width: 105,
-    }, valueProvider);
-}
-
 function objEsotericTamaHome(cosmTamago: MicrocosmTamago) {
     const p = new PseudoRng(23923223);
 
@@ -373,6 +354,18 @@ function objEsotericTamaHome(cosmTamago: MicrocosmTamago) {
                 .step(self => self.visible = cosmTamago.poopsCount > i)
                 .at(p.vunit().scale(30, 10).vround())
                 .add(50, 30)
+        ),
+    );
+}
+
+const txsStar = Tx.Esoteric.Tamago.Star.split({ count: 2 });
+
+function objEsotericTamaBar(maxValue: Integer, valueProvider: () => Integer) {
+    return container(
+        ...range(maxValue).map(i =>
+            Sprite.from(txsStar[0])
+                .step(self => self.texture = valueProvider() > i ? txsStar[1] : txsStar[0])
+                .at(18 * i, 0)
         ),
     );
 }
