@@ -24,12 +24,26 @@ import { SceneChanger } from "../systems/scene-changer";
 import { DataLib } from "./data-lib";
 
 export namespace DataPotion {
+    type Flag =
+        | "has_ketchup"
+        | "has_mustard"
+        | "has_onion"
+        | "has_relish"
+        | "is_hot_dog"
+        | "is_foodlike"
+        | "is_waterlike";
+
     export interface Model {
         name: string;
         description: string;
         stinkLineTint: RgbInt;
         texture: Texture | null;
         sound: Sound | null;
+        flags: Set<Flag>;
+    }
+
+    function flags(...attributes: Flag[]) {
+        return new Set(attributes);
     }
 
     export const Manifest = DataLib.createManifest(
@@ -40,6 +54,7 @@ export namespace DataPotion {
                 stinkLineTint: 0x004AFF,
                 texture: Tx.Collectibles.Potion.AttributeHealthUp,
                 sound: Sfx.Effect.Potion.AttributeHealthUp,
+                flags: flags("is_waterlike"),
             },
             AttributeIntelligenceUp: {
                 name: "Foul Stew",
@@ -47,6 +62,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xCEA5AA,
                 texture: Tx.Collectibles.Potion.AttributeIntelligenceUp,
                 sound: Sfx.Effect.Potion.AttributeIntelligenceUp,
+                flags: flags("is_waterlike"),
             },
             AttributeStrengthUp: {
                 name: "Claw Powder",
@@ -54,6 +70,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xB6B2FF,
                 texture: Tx.Collectibles.Potion.AttributeStrengthUp,
                 sound: Sfx.Effect.Potion.AttributeStrengthUp,
+                flags: flags(),
             },
             RestoreHealth: {
                 name: "Sweet Berry",
@@ -61,6 +78,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD882D1,
                 texture: Tx.Collectibles.Potion.RestoreHealth,
                 sound: Sfx.Effect.Potion.RestoreHealth,
+                flags: flags("is_foodlike"),
             },
             RestoreHealthRestaurantLevel0: {
                 name: "Pathetic Meal",
@@ -68,6 +86,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD882D1,
                 texture: Tx.Collectibles.Potion.PatheticMeal,
                 sound: Sfx.Effect.Potion.RestoreHealthBagged0,
+                flags: flags("is_foodlike"),
             },
             RestoreHealthRestaurantLevel1: {
                 name: "Unremarkable Meal",
@@ -75,6 +94,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD882D1,
                 texture: Tx.Collectibles.Potion.UnremarkableMeal,
                 sound: Sfx.Effect.Potion.RestoreHealthBagged1,
+                flags: flags("is_foodlike"),
             },
             RestoreHealthRestaurantLevel2: {
                 name: "Celebratory Meal",
@@ -82,6 +102,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD882D1,
                 texture: Tx.Collectibles.Potion.CelebratoryMeal,
                 sound: Sfx.Effect.Potion.RestoreHealthBagged2,
+                flags: flags("is_foodlike"),
             },
             Poison: {
                 name: "Poison",
@@ -89,6 +110,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xA53609,
                 texture: Tx.Collectibles.Potion.Poison,
                 sound: Sfx.Effect.Potion.Poison,
+                flags: flags("is_foodlike"),
             },
             PoisonRestore: {
                 name: "Bitter Medicine",
@@ -96,6 +118,7 @@ export namespace DataPotion {
                 stinkLineTint: 0x7A42FF,
                 texture: Tx.Collectibles.Potion.PoisonRestore,
                 sound: Sfx.Effect.Potion.PoisonRestore,
+                flags: flags(),
             },
             Ballon: {
                 name: "Ballon Fruit",
@@ -103,6 +126,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xE1282C,
                 texture: Tx.Collectibles.Potion.Ballon,
                 sound: null,
+                flags: flags("is_foodlike"),
             },
             Wetness: {
                 name: "TheWetter",
@@ -110,6 +134,7 @@ export namespace DataPotion {
                 stinkLineTint: 0x2149FF,
                 texture: Tx.Collectibles.Potion.Wetness,
                 sound: Sfx.Effect.Potion.Wetness,
+                flags: flags("is_waterlike"),
             },
             ForgetLooseValuableCollection: {
                 name: "Forgeddit Fruid Snags",
@@ -117,6 +142,7 @@ export namespace DataPotion {
                 stinkLineTint: 0x808080,
                 texture: Tx.Collectibles.Potion.FruitSnacks,
                 sound: Sfx.Effect.Potion.LooseValuablesForget,
+                flags: flags("is_foodlike"),
             },
             AnnoyIguanas: {
                 name: "Nuisance Machine",
@@ -124,6 +150,7 @@ export namespace DataPotion {
                 stinkLineTint: 0x808080,
                 texture: Tx.Collectibles.Potion.Cowbell,
                 sound: Sfx.Effect.Potion.AnnoyIguanas,
+                flags: flags(),
             },
             TaxiWhistleCasino: {
                 name: "Taxi Whistle",
@@ -131,6 +158,7 @@ export namespace DataPotion {
                 stinkLineTint: 0x808080,
                 texture: Tx.Collectibles.Potion.Whistle,
                 sound: Sfx.Effect.Potion.TaxiWhistle,
+                flags: flags(),
             },
             HotDog: {
                 name: "Hot Dog",
@@ -138,6 +166,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDog,
+                flags: flags("is_foodlike", "is_hot_dog"),
             },
             HotDogKetchup: {
                 name: "Hot Dog (K)",
@@ -145,6 +174,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchup,
+                flags: flags("is_foodlike", "is_hot_dog", "has_ketchup"),
             },
             HotDogMustard: {
                 name: "Hot Dog (M)",
@@ -152,6 +182,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogMustard,
+                flags: flags("is_foodlike", "is_hot_dog", "has_mustard"),
             },
             HotDogOnion: {
                 name: "Hot Dog (O)",
@@ -159,6 +190,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogOnion,
+                flags: flags("is_foodlike", "is_hot_dog", "has_onion"),
             },
             HotDogRelish: {
                 name: "Hot Dog (R)",
@@ -166,6 +198,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogRelish,
+                flags: flags("is_foodlike", "is_hot_dog", "has_relish"),
             },
             HotDogKetchupMustard: {
                 name: "Hot Dog (KM)",
@@ -173,6 +206,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupMustard,
+                flags: flags("is_foodlike", "is_hot_dog", "has_ketchup", "has_mustard"),
             },
             HotDogKetchupOnion: {
                 name: "Hot Dog (KO)",
@@ -180,6 +214,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupOnion,
+                flags: flags("is_foodlike", "is_hot_dog", "has_ketchup", "has_onion"),
             },
             HotDogKetchupRelish: {
                 name: "Hot Dog (KR)",
@@ -187,6 +222,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupRelish,
+                flags: flags("is_foodlike", "is_hot_dog", "has_ketchup", "has_relish"),
             },
             HotDogMustardOnion: {
                 name: "Hot Dog (MO)",
@@ -194,6 +230,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogMustardOnion,
+                flags: flags("is_foodlike", "is_hot_dog", "has_mustard", "has_onion"),
             },
             HotDogMustardRelish: {
                 name: "Hot Dog (MR)",
@@ -201,6 +238,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogMustardRelish,
+                flags: flags("is_foodlike", "is_hot_dog", "has_mustard", "has_relish"),
             },
             HotDogOnionRelish: {
                 name: "Hot Dog (OR)",
@@ -208,6 +246,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogOnionRelish,
+                flags: flags("is_foodlike", "is_hot_dog", "has_onion", "has_relish"),
             },
             HotDogKetchupMustardOnion: {
                 name: "Hot Dog (KMO)",
@@ -215,6 +254,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupMustardOnion,
+                flags: flags("is_foodlike", "is_hot_dog", "has_ketchup", "has_mustard", "has_onion"),
             },
             HotDogKetchupMustardRelish: {
                 name: "Hot Dog (KMR)",
@@ -222,6 +262,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupMustardRelish,
+                flags: flags("is_foodlike", "is_hot_dog", "has_ketchup", "has_mustard", "has_relish"),
             },
             HotDogKetchupOnionRelish: {
                 name: "Hot Dog (KOR)",
@@ -230,6 +271,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupOnionRelish,
+                flags: flags("is_foodlike", "is_hot_dog", "has_ketchup", "has_onion", "has_relish"),
             },
             HotDogMustardOnionRelish: {
                 name: "Hot Dog (MOR)",
@@ -237,6 +279,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogMustardOnionRelish,
+                flags: flags("is_foodlike", "is_hot_dog", "has_mustard", "has_onion", "has_relish"),
             },
             HotDogKetchupMustardOnionRelish: {
                 name: "Hot Dog (Perfected)",
@@ -244,6 +287,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xD85876,
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupMustardOnionRelish,
+                flags: flags("is_foodlike", "is_hot_dog", "has_ketchup", "has_mustard", "has_onion", "has_relish"),
             },
             ThrowableBerry: {
                 name: "Throwing Seedling",
@@ -251,6 +295,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xB85BFF,
                 sound: Sfx.Enemy.Berry.Announce,
                 texture: Tx.Collectibles.Potion.Seedling,
+                flags: flags(),
             },
             __Fallback__: {
                 name: "???",
@@ -258,6 +303,7 @@ export namespace DataPotion {
                 stinkLineTint: 0xff00ff,
                 texture: null,
                 sound: null,
+                flags: flags(),
             },
         } satisfies Record<string, Model>,
     );

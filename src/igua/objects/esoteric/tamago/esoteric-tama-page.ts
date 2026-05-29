@@ -9,6 +9,7 @@ import { CollisionShape } from "../../../../lib/pixi/collision";
 import { container } from "../../../../lib/pixi/container";
 import { range } from "../../../../lib/range";
 import { Null } from "../../../../lib/types/null";
+import { DataPotion } from "../../../data/data-potion";
 import { mxnFxTintRotate } from "../../../mixins/effects/mxn-fx-tint-rotate";
 import { mxnBoilFlipH } from "../../../mixins/mxn-boil-flip-h";
 import { mxnBoilPivot } from "../../../mixins/mxn-boil-pivot";
@@ -393,14 +394,13 @@ export namespace EsotericTamaPage {
     type TamaItem = "food" | "water";
 
     namespace TamaItem {
-        export function createFromItem(item: RpgInventory.Item): TamaItem | null {
-            if (item.kind === "potion") {
-                if (item.id === "Wetness") {
-                    return "water";
-                }
-                if (item.id === "Poison") {
-                    return "food";
-                }
+        export function createFromItem(item: RpgInventory.Item.Potion): TamaItem | null {
+            const potionFlags = DataPotion.getById(item.id).flags;
+            if (potionFlags.has("is_waterlike")) {
+                return "water";
+            }
+            if (potionFlags.has("is_foodlike")) {
+                return "food";
             }
 
             return null;
@@ -420,7 +420,7 @@ export namespace EsotericTamaPage {
 
     export namespace IO {
         export interface UploadTransaction {
-            uploadedItem: RpgInventory.Item | null;
+            uploadedItem: RpgInventory.Item.Potion | null;
         }
 
         export interface MinigameSession {
