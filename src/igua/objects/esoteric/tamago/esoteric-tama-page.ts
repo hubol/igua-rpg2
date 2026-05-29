@@ -9,6 +9,7 @@ import { CollisionShape } from "../../../../lib/pixi/collision";
 import { container } from "../../../../lib/pixi/container";
 import { range } from "../../../../lib/range";
 import { Null } from "../../../../lib/types/null";
+import { mxnFxTintRotate } from "../../../mixins/effects/mxn-fx-tint-rotate";
 import { mxnBoilFlipH } from "../../../mixins/mxn-boil-flip-h";
 import { mxnBoilPivot } from "../../../mixins/mxn-boil-pivot";
 import { mxnBoilSeed } from "../../../mixins/mxn-boil-seed";
@@ -37,6 +38,10 @@ export namespace EsotericTamaPage {
         }
 
         step(buttons: EsotericTamaButtons.Public): void | EsotericTamaPage {
+            if (this._cosmTamago.hasReceivedPerfectCare) {
+                return new Reward(this._io);
+            }
+
             if (buttons.isPressed("a") || buttons.isPressed("b")) {
                 this._stepsSinceActivity = 0;
             }
@@ -354,6 +359,37 @@ export namespace EsotericTamaPage {
         }
     }
 
+    class Reward extends EsotericTamaPage {
+        private _steps = 0;
+
+        constructor(
+            private readonly _io: IO,
+        ) {
+            super();
+        }
+
+        step(buttons: EsotericTamaButtons.Public): void | EsotericTamaPage {
+            if (this._steps++ === 60) {
+                this._io.rewardForPerfectCare();
+            }
+        }
+
+        getDisplayObject(): DisplayObject {
+            return container(
+                Sprite.from(Tx.Esoteric.Tamago.WinnerScreen)
+                    .mixin(mxnBoilFlipH)
+                    .at(0, 60)
+                    .coro(function* (self) {
+                        yield interpvr(self).to(0, 0).over(500);
+                    }),
+                objText.Large("Winer")
+                    .anchored(0.5, 0)
+                    .mixin(mxnFxTintRotate)
+                    .at(60, 3),
+            );
+        }
+    }
+
     type TamaItem = "food" | "water";
 
     namespace TamaItem {
@@ -376,6 +412,8 @@ export namespace EsotericTamaPage {
         closeTransaction(transaction: IO.UploadTransaction, action: "refund" | "accepted" | "canceled"): void;
 
         beginMinigame(): IO.MinigameSession;
+
+        rewardForPerfectCare(): void;
 
         exit(): void;
     }

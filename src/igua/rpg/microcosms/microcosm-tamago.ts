@@ -54,6 +54,12 @@ export class MicrocosmTamago extends RpgMicrocosm<MicrocosmTamago.State> {
         return this._state.stomach;
     }
 
+    get hasReceivedPerfectCare() {
+        return this._state.mood >= 4
+            && this._state.stomach >= 4
+            && this._state.poop === 0;
+    }
+
     protected createState(): MicrocosmTamago.State {
         return {
             mood: 0,

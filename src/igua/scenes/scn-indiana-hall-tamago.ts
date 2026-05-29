@@ -93,6 +93,11 @@ export function scnIndianaHallTamago() {
                 });
             return session;
         },
+        rewardForPerfectCare() {
+            Cutscene.play(function* () {
+                yield* DramaHallOfDoors.complete(cosmHallOfDoors, 3);
+            });
+        },
         exit() {
             Cutscene.play(function* () {
                 yield* DramaHallOfDoors.returnToHall(cosmHallOfDoors);
