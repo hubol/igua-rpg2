@@ -3,6 +3,7 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Sound } from "../../lib/game-engine/audio/sound";
+import { Instances } from "../../lib/game-engine/instances";
 import { factor } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -196,6 +197,8 @@ function* dramaStarMinigame(args: DramaStarMinigameArgs) {
         }
     }
 
+    yield () => Instances(objTamagoRescue).length === 0;
+
     const score = starObjs
         .filter(obj => !obj.mxnRescueStatus.isBeingRescued && !obj.destroyed)
         .length;
@@ -267,5 +270,6 @@ function objTamagoRescue(targetObj: DisplayObject) {
         .show(angelObj);
 
     return angelObj
-        .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank: rescueRank });
+        .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank: rescueRank })
+        .track(objTamagoRescue);
 }
