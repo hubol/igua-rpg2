@@ -22,6 +22,7 @@ import { mxnFxVibrate } from "../mixins/effects/mxn-fx-vibrate";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnDestroyAfterSteps } from "../mixins/mxn-destroy-after-steps";
 import { mxnEnemy } from "../mixins/mxn-enemy";
+import { mxnEnemyDeathBurst } from "../mixins/mxn-enemy-death-burst";
 import { mxnInteract } from "../mixins/mxn-interact";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { objItemRescueAngel } from "../objects/characters/obj-item-rescue-angel";
@@ -186,9 +187,10 @@ function* dramaStarMinigame(args: DramaStarMinigameArgs) {
         .show();
 
     for (let f = 0; f < 1; f += 0.04 * 4) {
+        const x = Rng.int(90, 410);
+
         for (const starObj of Rng.shuffle(starObjs.filter(obj => !obj.destroyed))) {
-            const x = Rng.int(nlerp(50, 180, f), nlerp(450, 320, f));
-            const position = vnew(x, 280);
+            const position = vnew(x + Rng.int(-70, 70), 280);
 
             objTamagoRescue(starObj)
                 .at(position)
@@ -260,7 +262,6 @@ const atkBlast = RpgAttack.create({
 
 function objTamagoRescue(targetObj: DisplayObject) {
     const towSpeed = vnew(0, -1);
-    // const towSpeed = Rng.bool() ? vnew(-1, 1) : vnew(-2, 0);
     const angelObj = objItemRescueAngel(targetObj, towSpeed, vnew());
 
     const hurtboxObj = new Graphics()
@@ -271,5 +272,6 @@ function objTamagoRescue(targetObj: DisplayObject) {
 
     return angelObj
         .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank: rescueRank })
+        .mixin(mxnEnemyDeathBurst, { map: [0x7A71E2, 0x6A45C6, 0x7A71E2] })
         .track(objTamagoRescue);
 }
