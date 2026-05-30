@@ -147,6 +147,8 @@ export namespace EsotericTamaPage {
 
         getDisplayObject(): DisplayObject {
             return container(
+                Sprite.from(Tx.Esoteric.Tamago.GameScreen)
+                    .step(self => self.visible = !this._session.result),
                 container(
                     objText.MediumBoldIrregular("Results", { tint: 0x000000 })
                         .at(60, 20)

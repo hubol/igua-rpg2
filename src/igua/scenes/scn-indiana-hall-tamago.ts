@@ -242,12 +242,6 @@ function objReticle({ aButtonObj, bButtonObj }: DramaStarMinigameArgs) {
                 .vround();
             angle += angleDeltaSign * 2;
         })
-        .coro(function* () {
-            while (true) {
-                yield onPrimitiveMutate(() => aButtonObj.mxnTamagoButton.pressesCount);
-                angleDeltaSign *= -1;
-            }
-        })
         .coro(function* (self) {
             while (true) {
                 yield onPrimitiveMutate(() => bButtonObj.mxnTamagoButton.pressesCount);
@@ -261,7 +255,7 @@ function objReticle({ aButtonObj, bButtonObj }: DramaStarMinigameArgs) {
 function objShot() {
     const collisionObj = new Graphics()
         .beginFill(0xff0000)
-        .drawCircle(0, 0, 32)
+        .drawCircle(0, 0, 42)
         .invisible();
 
     const obj = objFxFieryBurst170px();
