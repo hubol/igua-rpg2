@@ -7,28 +7,20 @@ export namespace RpgHotDogs {
 
     export type CondimentId = typeof condimentIds[number];
 
-    type Condiments = Record<CondimentId, boolean>;
+    type Condiments = Set<DataPotion.Flag>;
 
     const potionIds = new Set(
-        [
-            "HotDog",
-            "HotDogKetchup",
-            "HotDogKetchupMustard",
-            "HotDogKetchupMustardOnion",
-            "HotDogKetchupMustardOnionRelish",
-            "HotDogKetchupMustardRelish",
-            "HotDogKetchupOnion",
-            "HotDogKetchupOnionRelish",
-            "HotDogKetchupRelish",
-            "HotDogMustard",
-            "HotDogMustardOnion",
-            "HotDogMustardOnionRelish",
-            "HotDogMustardRelish",
-            "HotDogOnion",
-            "HotDogOnionRelish",
-            "HotDogRelish",
-        ] satisfies Array<DataPotion.Id>,
+        DataPotion
+            .filter(potion => potion.flags.has("is_hot_dog"))
+            .map(potion => potion.id),
     );
+
+    const condimentFlags: Record<CondimentId, DataPotion.Flag> = {
+        ketchup: "has_ketchup",
+        mustard: "has_mustard",
+        onion: "has_onion",
+        relish: "has_relish",
+    };
 
     export function apply(potions: RpgPotions, condimentId: CondimentId) {
         let haveAnyHotDogs = false;
@@ -36,8 +28,7 @@ export namespace RpgHotDogs {
         for (const potionId of potionIds) {
             if (potions.count(potionId) >= 1) {
                 haveAnyHotDogs = true;
-                const condiments = toCondiments(potionId);
-                condiments[condimentId] = true;
+                const condiments = getCondiments(potionId, condimentId);
                 const convertedPotionId = toPotionId(condiments);
                 if (convertedPotionId !== potionId) {
                     return { isSuccess: true as const, removePotionId: potionId, receivePotionId: convertedPotionId };
@@ -48,27 +39,27 @@ export namespace RpgHotDogs {
         return { isSuccess: false as const, haveAnyHotDogs };
     }
 
-    function toCondiments(id: DataPotion.Id): Condiments {
-        return {
-            ketchup: id.includes("Ketchup"),
-            mustard: id.includes("Mustard"),
-            onion: id.includes("Onion"),
-            relish: id.includes("Relish"),
-        };
+    function getCondiments(id: DataPotion.Id, appliedCondimentId: CondimentId): Condiments {
+        const potionFlags = new Set(DataPotion.getById(id).flags);
+        potionFlags.add(condimentFlags[appliedCondimentId]);
+        return potionFlags;
     }
 
     function toPotionId(condiments: Condiments): DataPotion.Id {
-        const id = "HotDog"
-            + (condiments.ketchup ? "Ketchup" : "")
-            + (condiments.mustard ? "Mustard" : "")
-            + (condiments.onion ? "Onion" : "")
-            + (condiments.relish ? "Relish" : "");
+        const potion = DataPotion.find(
+            potion =>
+                potion.flags.has("is_hot_dog")
+                && potion.flags.has("has_ketchup") === condiments.has("has_ketchup")
+                && potion.flags.has("has_mustard") === condiments.has("has_mustard")
+                && potion.flags.has("has_onion") === condiments.has("has_onion")
+                && potion.flags.has("has_relish") === condiments.has("has_relish"),
+        );
 
-        if (!potionIds.has(id as any)) {
+        if (!potion) {
             Logger.logAssertError("RpgHotDogs", new Error("Failed to convert condiments to potion"), { condiments });
             return "HotDog";
         }
 
-        return id as DataPotion.Id;
+        return potion.id;
     }
 }

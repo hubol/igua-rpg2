@@ -1,4 +1,5 @@
 import { Logger } from "../../lib/game-engine/logger";
+import { ValuesOf } from "../../lib/types/values-of";
 
 export namespace DataLib {
     export function createGetById<TModel, TManifest extends Record<"__Fallback__", TModel>>(
@@ -46,5 +47,20 @@ export namespace DataLib {
         manifest: TManifest,
     ): Array<Id<keyof TManifest>> {
         return Object.keys(manifest).filter(id => id !== "__Fallback__") as any[];
+    }
+
+    export function createArrayOperations<TManifest extends Record<string, unknown>>(manifest: TManifest) {
+        type Model = ValuesOf<TManifest>;
+
+        const values = Object.values(manifest);
+
+        return {
+            find(predicate: (value: Model) => boolean): Model | undefined {
+                return values.find(predicate as any);
+            },
+            filter(predicate: (value: Model) => boolean): Model[] {
+                return values.filter(predicate as any);
+            },
+        };
     }
 }

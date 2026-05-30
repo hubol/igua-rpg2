@@ -24,7 +24,7 @@ import { SceneChanger } from "../systems/scene-changer";
 import { DataLib } from "./data-lib";
 
 export namespace DataPotion {
-    type Flag =
+    export type Flag =
         | "has_ketchup"
         | "has_mustard"
         | "has_onion"
@@ -313,6 +313,8 @@ export namespace DataPotion {
     export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataPotion" });
 
     export const Ids = DataLib.createIds(Manifest);
+
+    export const { find, filter } = DataLib.createArrayOperations(Manifest);
 
     export function usePotion(id: Id, target: MxnRpgStatus) {
         const sound = getById(id).sound;
