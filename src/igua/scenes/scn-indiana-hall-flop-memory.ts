@@ -1,5 +1,6 @@
 import { AlphaFilter, DisplayObject } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -8,6 +9,7 @@ import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { Null } from "../../lib/types/null";
+import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { show } from "../drama/show";
@@ -21,7 +23,8 @@ import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
 
 export function scnIndianaHallFlopMemory() {
-    Lvl.Dummy();
+    Jukebox.play(Mzk.InvisibleTape);
+    Lvl.IndianaHallFlopMemory();
 
     const picker = new MutateFlopNumberPicker();
 

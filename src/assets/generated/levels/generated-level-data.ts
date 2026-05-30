@@ -2540,6 +2540,10 @@ export const Lvl = {
       IdolMarker: e(r["Marker"], { x: 240, y: 230, values: { name: "IdolMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
+  IndianaHallFlopMemory: (): LvlType.IndianaHallFlopMemory => {
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    return { Block: e(r["Block"], { x: 0, y: 200, width: 504, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"), Player: e(r["Player"], { x: 104, y: 200, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities") };
+  },
   IndianaHallOfDoors: (): LvlType.IndianaHallOfDoors => {
     applyLevel({ width: 912, height: 280, backgroundTint: 0xa286f3, terrainTint: 0x4146a8 });
     return {
@@ -11747,6 +11751,10 @@ export namespace LvlType {
     Player: ReturnType<(typeof r)["Player"]>;
     SubtitlesRegion: ReturnType<(typeof r)["Region"]>;
     IdolMarker: ReturnType<(typeof r)["Marker"]>;
+  };
+  export type IndianaHallFlopMemory = {
+    Block: ReturnType<(typeof r)["Block"]>;
+    Player: ReturnType<(typeof r)["Player"]>;
   };
   export type IndianaHallOfDoors = {
     TerrainEarthMass0: Sprite;
