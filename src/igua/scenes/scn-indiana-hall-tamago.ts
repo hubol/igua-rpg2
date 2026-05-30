@@ -9,8 +9,10 @@ import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-m
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { vdeg } from "../../lib/math/angle";
 import { approachLinear, nlerp } from "../../lib/math/number";
+import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
+import { CollisionShape } from "../../lib/pixi/collision";
 import { Null } from "../../lib/types/null";
 import { ZIndex } from "../core/scene/z-index";
 import { DataPotion } from "../data/data-potion";
@@ -74,12 +76,15 @@ export function scnIndianaHallTamago() {
 
             if (item && action !== "accepted") {
                 Cutscene.play(function* () {
+                    Sfx.Interact.Error.play();
                     yield* DramaInventory.receiveItems([item]);
                     yield* show(
                         action === "canceled"
                             ? "Your item was refunded due to a race condition."
                             : "Your item was refunded. Only food and water are accepted.",
                     );
+                }, {
+                    speaker: tamagoObj,
                 });
             }
         },
@@ -191,8 +196,14 @@ function* dramaStarMinigame(args: DramaStarMinigameArgs) {
     const reticleObj = objReticle(args)
         .show();
 
+    const origins = new Array<Integer>();
+
     for (let f = 0; f < 1; f += 0.04 * 4) {
-        const x = Rng.int(90, 410);
+        if (origins.length === 0) {
+            origins.push(...Rng.shuffle([100, 250, 400]));
+        }
+
+        const x = origins.shift()!;
 
         for (const starObj of Rng.shuffle(starObjs.filter(obj => !obj.destroyed))) {
             const position = vnew(x + Rng.int(-70, 70), 280);
@@ -240,12 +251,25 @@ function objReticle({ aButtonObj, bButtonObj }: DramaStarMinigameArgs) {
         .coro(function* (self) {
             while (true) {
                 yield onPrimitiveMutate(() => bButtonObj.mxnTamagoButton.pressesCount);
-                objFxFieryBurst170px()
-                    .mixin(mxnRpgAttack, { attack: atkBlast, damageTargetsOnce: true })
+                objShot()
                     .at(self)
                     .show();
             }
         });
+}
+
+function objShot() {
+    const collisionObj = new Graphics()
+        .beginFill(0xff0000)
+        .drawCircle(0, 0, 32)
+        .invisible();
+
+    const obj = objFxFieryBurst170px();
+    collisionObj.show(obj);
+
+    return obj
+        .collisionShape(CollisionShape.DisplayObjects, [collisionObj])
+        .mixin(mxnRpgAttack, { attack: atkBlast, damageTargetsOnce: true });
 }
 
 const rescueRank = RpgEnemyRank.create({
@@ -276,7 +300,7 @@ function objTamagoRescue(targetObj: DisplayObject) {
         .show(angelObj);
 
     return angelObj
-        .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank: rescueRank })
+        .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank: rescueRank, soulAnchorObj: hurtboxObj })
         .mixin(mxnEnemyDeathBurst, { map: [0x7A71E2, 0x6A45C6, 0x7A71E2] })
         .track(objTamagoRescue);
 }

@@ -1,10 +1,11 @@
-import { BLEND_MODES, DisplayObject, RenderTexture, Sprite } from "pixi.js";
+import { RenderTexture, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { renderer } from "../../current-pixi-renderer";
 import { mxnSparkling } from "../../mixins/mxn-sparkling";
+import { mxnSpeaker } from "../../mixins/mxn-speaker";
 import { StepOrder } from "../step-order";
 import { EsotericTamaButtons } from "./tamago/esoteric-tama-buttons";
 import { EsotericTamaPage } from "./tamago/esoteric-tama-page";
@@ -38,6 +39,7 @@ export function objEsotericTamago(buttons: EsotericTamaButtons, homePage: Esoter
             .step(self => self.sparklesPerFrame = Rng.float(0.1))
             .at(14, -7),
     )
+        .mixin(mxnSpeaker, { name: "Creature Pet", tintPrimary: 0x000000, tintSecondary: 0xffffff })
         .step(() => {
             const nextPage = page.step(buttons);
             if (nextPage) {
