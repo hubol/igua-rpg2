@@ -9,6 +9,7 @@ import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { AdjustColor } from "../../lib/pixi/adjust-color";
 import { container } from "../../lib/pixi/container";
+import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaGifts } from "../drama/drama-gifts";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
@@ -25,6 +26,7 @@ import { StepOrder } from "../objects/step-order";
 import { Rpg } from "../rpg/rpg";
 
 export function scnIndianaHallPainting() {
+    Jukebox.play(Mzk.VenturePig);
     const cosmHallOfDoors = Rpg.microcosms["Indiana.HallOfDoors"];
     const lvl = Lvl.IndianaHallPainting();
 
@@ -132,7 +134,7 @@ export function scnIndianaHallPainting() {
                         objBossMusicPlayer({
                             bossObjs: [angelObj],
                             mzkBattle: Mzk.FuckerLand,
-                            mzkPeace: Mzk.BigLove,
+                            mzkPeace: Mzk.VenturePig,
                         })
                             .show();
 
