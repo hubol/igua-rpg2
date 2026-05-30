@@ -84,6 +84,11 @@ export class RpgPotions {
     }
 
     private _removeIndex(index: Integer) {
+        if (index >= Consts.Size) {
+            this._state.splice(index, 1);
+            return;
+        }
+
         const deleted = this._state.splice(Consts.Size, 1);
         this._state[index] = deleted[0] ?? null;
     }
