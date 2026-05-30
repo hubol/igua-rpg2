@@ -14,7 +14,8 @@ export function mxnEnemyDeathBurst(obj: MxnEnemy, args: MxnEnemyDeathBurstArgs) 
         () => {
             obj.play(Sfx.Impact.DefeatEnemy);
             objFxEnemyDefeat(args)
-                .at(obj.mxnEnemy.soulAnchorObj.getWorldPosition())
+                .at(obj.mxnEnemy.soulAnchorObj.getWorldCenter())
+                .vround()
                 .zIndexed(ZIndex.EnemyDeathBursts)
                 .show();
         },
