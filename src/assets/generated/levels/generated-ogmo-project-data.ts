@@ -43,6 +43,7 @@ export namespace OgmoEntities {
   export type OverheatRegion = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type EnemyChill = OgmoFactory.EntityBase<{ variant: "level0"; name: string; depth: number }>;
   export type Clock = OgmoFactory.EntityBase<{ hours: number; minutes: number; name: string; depth: number }>;
+  export type Dial = OgmoFactory.EntityBase<{ maxTicks: number; name: string; depth: number }>;
 }
 
 export interface OgmoEntityResolverBase {
@@ -86,4 +87,5 @@ export interface OgmoEntityResolverBase {
   OverheatRegion: (entity: OgmoEntities.OverheatRegion) => unknown;
   EnemyChill: (entity: OgmoEntities.EnemyChill) => unknown;
   Clock: (entity: OgmoEntities.Clock) => unknown;
+  Dial: (entity: OgmoEntities.Dial) => unknown;
 }

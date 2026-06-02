@@ -16,6 +16,7 @@ import { objAngelSnail } from "../objects/enemies/obj-angel-snail";
 import { objAngelSpikeBall } from "../objects/enemies/obj-angel-spike-ball";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
 import { objEsotericClock } from "../objects/esoteric/obj-esoteric-clock";
+import { objEsotericDial } from "../objects/esoteric/obj-esoteric-dial";
 import { objStashPocket } from "../objects/interactables/obj-stash-pocket";
 import { objDarkness } from "../objects/nature/obj-darkness";
 import { objPuddle } from "../objects/nature/obj-puddle";
@@ -107,6 +108,7 @@ export const OgmoEntityResolvers = {
     Darkness: objDarkness,
     OverheatRegion: objEnvironmentOverheatRegion,
     Clock: (entity) => objEsotericClock({ time: { hours: entity.values.hours, minutes: entity.values.minutes } }),
+    Dial: (entity) => objEsotericDial({ maxTicks: entity.values.maxTicks }),
 } satisfies OgmoEntityResolverBase;
 
 function applyEntityToIguanaObj(obj: ObjIguanaLocomotive, entity: OgmoEntities.GamblingExpertNpc) {

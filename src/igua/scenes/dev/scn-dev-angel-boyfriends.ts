@@ -1,6 +1,8 @@
 import { Graphics } from "pixi.js";
 import { Lvl } from "../../../assets/generated/levels/generated-level-data";
 import { objAngelBoyfriends } from "../../objects/enemies/obj-angel-boyfriends";
+import { objEsotericDial } from "../../objects/esoteric/obj-esoteric-dial";
+import { playerObj } from "../../objects/obj-player";
 
 export function scnDevAngelBoyfriends() {
     const lvl = Lvl.IndianaHallPainting();
@@ -14,6 +16,10 @@ export function scnDevAngelBoyfriends() {
     })
         .at(lvl.BoyfriendsMarker)
         .add(100, 0)
+        .show();
+
+    objEsotericDial({ maxTicks: 60 })
+        .at(playerObj)
         .show();
 
     // new Graphics()

@@ -10,6 +10,7 @@ export function scnIntelligenceTower() {
     const lvl = Lvl.IntelligenceTower();
 
     enrichCheckTime(lvl);
+    enrichMidboss0(lvl);
 
     const checkpointName = Rpg.character.position.checkpointName;
     if (checkpointName.startsWith("level") || checkpointName.startsWith("wrong")) {
@@ -38,4 +39,24 @@ function enrichCheckTime(lvl: LvlType.IntelligenceTower) {
     lvl.TimeCheckClock.objEsotericClock.hours = hours;
     const doorObj = doorObjs[hours];
     doorObj.objDoor.checkpointName = "level2";
+}
+
+function enrichMidboss0(lvl: LvlType.IntelligenceTower) {
+    const dialObj = lvl.MidbossDial0;
+
+    [
+        lvl.Midboss0Pipe0,
+        lvl.Midboss0Pipe1,
+        lvl.Midboss0Pipe2,
+        lvl.Midboss0Pipe3,
+    ]
+        .forEach((obj, i) => {
+            const unit = i / 4;
+            const fadeUnit = unit + 0.05;
+            obj.step(self => {
+                const remainingTicksUnit = dialObj.objEsotericDial.remainingTicksUnit;
+                self.alpha = remainingTicksUnit < fadeUnit ? 0.5 : 1;
+                self.visible = self.enabled = remainingTicksUnit > unit;
+            });
+        });
 }
