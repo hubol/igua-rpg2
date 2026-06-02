@@ -1,7 +1,7 @@
 {
   "ogmoVersion": "3.4.0-hubol",
   "width": 500,
-  "height": 688,
+  "height": 816,
   "offsetX": 0,
   "offsetY": 0,
   "values": {"Terrain Color": "#000000"},
@@ -15,7 +15,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 64,
-      "gridCellsY": 86,
+      "gridCellsY": 102,
       "entities": []
     },
     {
@@ -26,7 +26,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 64,
-      "gridCellsY": 86,
+      "gridCellsY": 102,
       "entities": []
     },
     {
@@ -37,7 +37,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 64,
-      "gridCellsY": 86,
+      "gridCellsY": 102,
       "decals": [],
       "folder": "../textures"
     },
@@ -49,7 +49,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 64,
-      "gridCellsY": 86,
+      "gridCellsY": 102,
       "entities": []
     },
     {
@@ -60,14 +60,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 64,
-      "gridCellsY": 86,
+      "gridCellsY": 102,
       "entities": [
         {
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
           "x": 88,
-          "y": 656,
+          "y": 784,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
@@ -78,7 +78,7 @@
           "id": 1,
           "_eid": "19953026",
           "x": 80,
-          "y": 504,
+          "y": 632,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
@@ -89,7 +89,7 @@
           "id": 2,
           "_eid": "19953026",
           "x": 80,
-          "y": 344,
+          "y": 472,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
@@ -100,11 +100,22 @@
           "id": 3,
           "_eid": "19953026",
           "x": 80,
-          "y": 184,
+          "y": 312,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
           "values": {"name": "level1", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 4,
+          "_eid": "19953026",
+          "x": 80,
+          "y": 144,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "level2", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -116,7 +127,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 64,
-      "gridCellsY": 86,
+      "gridCellsY": 102,
       "entities": []
     },
     {
@@ -127,7 +138,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 64,
-      "gridCellsY": 86,
+      "gridCellsY": 102,
       "decals": [],
       "folder": "../textures"
     },
@@ -139,14 +150,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 64,
-      "gridCellsY": 86,
+      "gridCellsY": 102,
       "entities": [
         {
           "name": "Door",
           "id": 0,
           "_eid": "88296692",
           "x": 160,
-          "y": 608,
+          "y": 736,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "wrong0", "name": "", "depth": 0}
@@ -156,7 +167,7 @@
           "id": 1,
           "_eid": "88296692",
           "x": 232,
-          "y": 608,
+          "y": 736,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level1", "name": "", "depth": 0}
@@ -166,7 +177,7 @@
           "id": 2,
           "_eid": "88296692",
           "x": 296,
-          "y": 608,
+          "y": 736,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "wrong0", "name": "", "depth": 0}
@@ -176,7 +187,7 @@
           "id": 3,
           "_eid": "88296692",
           "x": 360,
-          "y": 608,
+          "y": 736,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "wrong1", "name": "", "depth": 0}
@@ -186,7 +197,7 @@
           "id": 4,
           "_eid": "88296692",
           "x": 160,
-          "y": 456,
+          "y": 584,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "", "depth": 0}
@@ -196,7 +207,7 @@
           "id": 5,
           "_eid": "88296692",
           "x": 232,
-          "y": 456,
+          "y": 584,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "", "depth": 0}
@@ -206,7 +217,7 @@
           "id": 6,
           "_eid": "88296692",
           "x": 296,
-          "y": 456,
+          "y": 584,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "", "depth": 0}
@@ -216,7 +227,7 @@
           "id": 7,
           "_eid": "88296692",
           "x": 360,
-          "y": 456,
+          "y": 584,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "", "depth": 0}
@@ -226,7 +237,7 @@
           "id": 8,
           "_eid": "88296692",
           "x": 160,
-          "y": 296,
+          "y": 424,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "", "depth": 0}
@@ -236,7 +247,7 @@
           "id": 9,
           "_eid": "88296692",
           "x": 232,
-          "y": 296,
+          "y": 424,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "", "depth": 0}
@@ -246,7 +257,7 @@
           "id": 10,
           "_eid": "88296692",
           "x": 296,
-          "y": 296,
+          "y": 424,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "", "depth": 0}
@@ -256,7 +267,7 @@
           "id": 11,
           "_eid": "88296692",
           "x": 360,
-          "y": 296,
+          "y": 424,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "", "depth": 0}
@@ -266,40 +277,62 @@
           "id": 12,
           "_eid": "88296692",
           "x": 160,
-          "y": 136,
+          "y": 264,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "", "depth": 0}
+          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "wrong1", "name": "TimeCheck6Door", "depth": 0}
         },
         {
           "name": "Door",
           "id": 13,
           "_eid": "88296692",
           "x": 232,
-          "y": 136,
+          "y": 264,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "wrong0", "name": "", "depth": 0}
+          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "wrong0", "name": "TimeCheck3Door", "depth": 0}
         },
         {
           "name": "Door",
           "id": 14,
           "_eid": "88296692",
           "x": 296,
-          "y": 136,
+          "y": 264,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "wrong1", "name": "", "depth": 0}
+          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "wrong1", "name": "TimeCheck12Door", "depth": 0}
         },
         {
           "name": "Door",
           "id": 15,
           "_eid": "88296692",
           "x": 360,
-          "y": 136,
+          "y": 264,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level2", "name": "", "depth": 0}
+          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "TimeCheck9Door", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 16,
+          "_eid": "41461695",
+          "x": 432,
+          "y": 504,
+          "width": 72,
+          "height": 216,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#000000", "targetTint": "#808080", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceSign",
+          "id": 17,
+          "_eid": "61823517",
+          "x": 408,
+          "y": 312,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "Clock", "message": "D at 12 o' clock. E at 3 o' clock. F at 6 o' clock. G at 9 o' clock.", "min": 1, "max": 2, "name": "", "depth": 0}
         }
       ]
     },
@@ -311,7 +344,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 64,
-      "gridCellsY": 86,
+      "gridCellsY": 102,
       "decals": [],
       "folder": "../textures"
     },
@@ -323,14 +356,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 64,
-      "gridCellsY": 86,
+      "gridCellsY": 102,
       "entities": [
         {
           "name": "Block",
           "id": 0,
           "_eid": "93117141",
           "x": 0,
-          "y": 296,
+          "y": 424,
           "width": 32,
           "height": 280,
           "originX": 0,
@@ -343,9 +376,9 @@
           "id": 1,
           "_eid": "93117141",
           "x": 472,
-          "y": 296,
-          "width": 32,
-          "height": 400,
+          "y": 424,
+          "width": 40,
+          "height": 136,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
@@ -356,7 +389,7 @@
           "id": 2,
           "_eid": "93117141",
           "x": 0,
-          "y": 656,
+          "y": 784,
           "width": 512,
           "height": 32,
           "originX": 0,
@@ -369,7 +402,7 @@
           "id": 3,
           "_eid": "93117141",
           "x": 32,
-          "y": 504,
+          "y": 632,
           "width": 72,
           "height": 72,
           "originX": 0,
@@ -382,8 +415,8 @@
           "id": 4,
           "_eid": "93117141",
           "x": 104,
-          "y": 504,
-          "width": 512,
+          "y": 632,
+          "width": 328,
           "height": 32,
           "originX": 0,
           "originY": 0,
@@ -395,7 +428,7 @@
           "id": 5,
           "_eid": "93117141",
           "x": 32,
-          "y": 344,
+          "y": 472,
           "width": 72,
           "height": 72,
           "originX": 0,
@@ -408,7 +441,7 @@
           "id": 6,
           "_eid": "93117141",
           "x": 104,
-          "y": 344,
+          "y": 472,
           "width": 512,
           "height": 32,
           "originX": 0,
@@ -421,7 +454,7 @@
           "id": 7,
           "_eid": "93117141",
           "x": 0,
-          "y": 136,
+          "y": 264,
           "width": 32,
           "height": 280,
           "originX": 0,
@@ -434,9 +467,9 @@
           "id": 8,
           "_eid": "93117141",
           "x": 472,
-          "y": 136,
-          "width": 32,
-          "height": 400,
+          "y": 264,
+          "width": 40,
+          "height": 136,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
@@ -447,7 +480,7 @@
           "id": 9,
           "_eid": "93117141",
           "x": 32,
-          "y": 184,
+          "y": 312,
           "width": 72,
           "height": 72,
           "originX": 0,
@@ -460,7 +493,85 @@
           "id": 10,
           "_eid": "93117141",
           "x": 104,
-          "y": 184,
+          "y": 312,
+          "width": 512,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 12,
+          "_eid": "93117141",
+          "x": 408,
+          "y": 504,
+          "width": 24,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 14,
+          "_eid": "93117141",
+          "x": 432,
+          "y": 648,
+          "width": 32,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 15,
+          "_eid": "93117141",
+          "x": 432,
+          "y": 720,
+          "width": 72,
+          "height": 64,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 16,
+          "_eid": "93117141",
+          "x": 0,
+          "y": -16,
+          "width": 32,
+          "height": 280,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 17,
+          "_eid": "93117141",
+          "x": 472,
+          "y": -16,
+          "width": 32,
+          "height": 280,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 18,
+          "_eid": "93117141",
+          "x": 32,
+          "y": 144,
           "width": 512,
           "height": 32,
           "originX": 0,
@@ -478,8 +589,29 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 64,
-      "gridCellsY": 86,
-      "entities": []
+      "gridCellsY": 102,
+      "entities": [
+        {
+          "name": "Clock",
+          "id": 0,
+          "_eid": "37539959",
+          "x": 104,
+          "y": 576,
+          "originX": 21,
+          "originY": 20,
+          "values": {"hours": 6, "minutes": 7, "name": "", "depth": 0}
+        },
+        {
+          "name": "Clock",
+          "id": 1,
+          "_eid": "37539959",
+          "x": 112,
+          "y": 232,
+          "originX": 21,
+          "originY": 20,
+          "values": {"hours": 7, "minutes": 0, "name": "TimeCheckClock", "depth": 0}
+        }
+      ]
     },
     {
       "name": "BackgroundDecals",
@@ -489,11 +621,11 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 64,
-      "gridCellsY": 86,
+      "gridCellsY": 102,
       "decals": [
         {
           "x": 176,
-          "y": 555,
+          "y": 683,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -501,11 +633,12 @@
           "texture": "shapes/fonts/weight3/a.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 248,
-          "y": 555,
+          "y": 683,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -513,11 +646,12 @@
           "texture": "shapes/fonts/weight3/b.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 312,
-          "y": 557,
+          "y": 685,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -525,11 +659,12 @@
           "texture": "shapes/fonts/weight3/c.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 376,
-          "y": 555,
+          "y": 683,
           "scaleX": -1,
           "scaleY": 1,
           "rotation": 0,
@@ -537,11 +672,12 @@
           "texture": "shapes/fonts/weight3/b.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 176,
-          "y": 589,
+          "y": 717,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -549,11 +685,12 @@
           "texture": "shapes/fonts/rune3/a.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 312,
-          "y": 589,
+          "y": 717,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -561,16 +698,170 @@
           "texture": "shapes/fonts/rune3/c.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 376,
-          "y": 589,
+          "y": 717,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
           "tint": "#ffffff",
           "texture": "shapes/fonts/rune3/d.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 376,
+          "y": 528,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/fonts/weight3/e.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 176,
+          "y": 528,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/fonts/weight3/h.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 317,
+          "y": 527,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/fonts/weight3/f.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 248,
+          "y": 531,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/fonts/weight3/g.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 378,
+          "y": 560,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/fonts/rune3/e.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 315,
+          "y": 561,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/fonts/rune3/f.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 250,
+          "y": 566,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/fonts/rune3/g.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 176,
+          "y": 564,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/fonts/rune3/h.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 176,
+          "y": 232,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/fonts/rune3/f.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 248,
+          "y": 232,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/fonts/rune3/e.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 312,
+          "y": 232,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/fonts/rune3/d.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 376,
+          "y": 232,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/fonts/rune3/g.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -586,7 +877,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 64,
-      "gridCellsY": 86,
+      "gridCellsY": 102,
       "decals": [],
       "folder": "../textures"
     }

@@ -15,6 +15,7 @@ import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { objAngelSnail } from "../objects/enemies/obj-angel-snail";
 import { objAngelSpikeBall } from "../objects/enemies/obj-angel-spike-ball";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
+import { objEsotericClock } from "../objects/esoteric/obj-esoteric-clock";
 import { objStashPocket } from "../objects/interactables/obj-stash-pocket";
 import { objDarkness } from "../objects/nature/obj-darkness";
 import { objPuddle } from "../objects/nature/obj-puddle";
@@ -105,6 +106,7 @@ export const OgmoEntityResolvers = {
     MagicDoor: (entity) => objDoor(entity.values).mixin(mxnDoorMagic, entity.uid).at(0, 2),
     Darkness: objDarkness,
     OverheatRegion: objEnvironmentOverheatRegion,
+    Clock: (entity) => objEsotericClock({ time: { hours: entity.values.hours, minutes: entity.values.minutes } }),
 } satisfies OgmoEntityResolverBase;
 
 function applyEntityToIguanaObj(obj: ObjIguanaLocomotive, entity: OgmoEntities.GamblingExpertNpc) {
