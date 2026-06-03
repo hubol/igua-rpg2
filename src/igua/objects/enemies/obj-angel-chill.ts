@@ -58,6 +58,7 @@ const themes = (function () {
                 torso: torsoTx,
                 legs: legsTx,
                 arms: armsTx,
+                armsRaised: Tx.Enemy.Chill.ArmsRaised,
                 head: Tx.Enemy.Chill.Head0,
             },
             tints: {
@@ -182,12 +183,14 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
             };
         },
         *emoVortex() {
+            bodyObj.objAngelChillBody.armsRaised = true;
             const vortexObj = objAngelChillEmoVortex()
                 .mixin(mxnRpgAttack, { attack: atks.emoVortex, attacker: enemyObj.status })
                 .at(enemyObj)
                 .add(0, -430)
                 .show();
             yield () => vortexObj.destroyed;
+            bodyObj.objAngelChillBody.armsRaised = false;
         },
         *shieldWithWeakpoint() {
             const leftAoeObj = new Graphics()
@@ -254,7 +257,8 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
 
     const soulAnchorObj = new Graphics().beginFill(0).drawRect(0, 0, 1, 1).at(0, 10).invisible();
 
-    const headObj = objAngelChillHead(theme);
+    const headObj = objAngelChillHead(theme)
+        .at(-6, 8);
     const rgbObj = container(bodyObj, headObj, ...hurtboxes, soulAnchorObj)
         .filtered(new MapRgbFilter(...theme.tints.map));
 
@@ -307,12 +311,22 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
 }
 
 function objAngelChillBody(theme: Theme) {
+    const api = {
+        armsRaised: false,
+    };
+
     return container(
         theme.createSprite("torso"),
         theme.createSprite("legs"),
-        theme.createSprite("arms").mixin(mxnFacingPivot, { down: 1, up: -3, right: 3, left: -3 }),
+        theme.createSprite("arms")
+            .mixin(mxnFacingPivot, { down: 1, up: -3, right: 3, left: -3 })
+            .step(self => self.visible = !api.armsRaised),
+        theme.createSprite("armsRaised")
+            .at(-27, -9)
+            .step(self => self.visible = api.armsRaised),
     )
-        .pivotedUnit(0.5, 0);
+        .merge({ objAngelChillBody: api })
+        .pivoted(50, -10);
 }
 
 function objAngelChillHead(theme: Theme) {
