@@ -27,10 +27,13 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
             if (!Input.justWentDown("CastSpell")) {
                 return;
             }
-            const equippableSpells = rpgPlayerSpells.cast();
-            if (!equippableSpells) {
+            const cast = rpgPlayerSpells.cast();
+            if (!cast) {
                 return;
             }
+
+            // TODO use cost to show that a charge was consumed
+            const { cost, spells } = cast;
 
             const horizontalDirection = Math.sign(obj.speed.x) || Math.sign(obj.facing);
             const horizontalSpeed = 3 + Math.abs(obj.speed.x);
@@ -40,9 +43,9 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
 
             const attacker = playerObj.status;
 
-            if (equippableSpells.HotPineCone.isEquipped) {
+            if (spells.HotPineCone.isEquipped) {
                 objProjectileHotPineCone({
-                    attack: equippableSpells.HotPineCone.attack,
+                    attack: spells.HotPineCone.attack,
                     attacker,
                     destroyAfterStepsCount: 180,
                 })
@@ -51,8 +54,8 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
                     .speed.at(horizontalSpeedScaled, -3);
             }
 
-            if (equippableSpells.OpenFlopBlindBoxes.isEquipped) {
-                const flopIds = openFlopBlindBoxes(4 + equippableSpells.OpenFlopBlindBoxes.level);
+            if (spells.OpenFlopBlindBoxes.isEquipped) {
+                const flopIds = openFlopBlindBoxes(4 + spells.OpenFlopBlindBoxes.level);
 
                 if (flopIds.length === 0) {
                     obj.play(Sfx.Interact.Error);
@@ -73,7 +76,7 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
                 for (const flopId of flopIds) {
                     objCollectibleFlop(flopId)
                         .mixin(mxnRpgAttack, {
-                            attack: equippableSpells.OpenFlopBlindBoxes.attack,
+                            attack: spells.OpenFlopBlindBoxes.attack,
                             attacker,
                             damageTargetsOnce: true,
                         })

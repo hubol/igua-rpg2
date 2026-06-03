@@ -296,7 +296,9 @@ export namespace DataEquipment {
                 description: "Chuck hot, hot pine cones onto flat surfaces.",
                 buffs: (model, bonus) => {
                     model.combat.spells.equipped.HotPineCone += 1 + bonus;
-                    model.combat.spells.maxPower += 100;
+                    model.combat.spells.maxPower += 20;
+                    model.combat.spells.requirements.minPocketItemsCount += 1;
+                    model.combat.spells.cost.pocketItemChance += Math.max(10, 60 - bonus * 20);
                 },
             },
             MeleeOverheat: {

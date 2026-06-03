@@ -51,6 +51,12 @@ export namespace RpgPlayerBuffs {
                         HotPineCone: 0,
                         OpenFlopBlindBoxes: 0,
                     } satisfies Record<DataSpell.Id, Integer>,
+                    requirements: {
+                        minPocketItemsCount: 0,
+                    },
+                    cost: {
+                        pocketItemChance: <PercentInt> 0,
+                    },
                     maxPower: 0,
                 },
             },

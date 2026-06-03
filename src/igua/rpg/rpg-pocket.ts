@@ -1,5 +1,6 @@
 import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
+import { Rng } from "../../lib/math/rng";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { RpgExperience } from "./rpg-experience";
 import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
@@ -51,6 +52,7 @@ export class RpgPocket {
             }
         }
 
+        // TODO wonder if the calls to these should be in RpgPocketSlot
         this._experience.reward.pocket.onRemoveItems(totalItems, reason);
 
         return {
@@ -148,6 +150,15 @@ export class RpgPocket {
         }
 
         return null;
+    }
+
+    tryRemoveItemFromRandomSlot() {
+        const slot = Rng.item(this.slots);
+        if (slot.count > 0) {
+            slot.remove(1);
+            // TODO might need a special reason, passed in
+            this._experience.reward.pocket.onRemoveItems(1, "default");
+        }
     }
 
     static createState(): RpgPocket.State {
