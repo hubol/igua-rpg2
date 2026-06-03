@@ -108,7 +108,7 @@ const variants = {
     level0: {
         rank: ranks.level0,
         theme: themes.common,
-        features: new Set<Feature>(["shield"]),
+        features: new Set<Feature>(["shield", "evil_spirit"]),
     },
     level1: {
         rank: ranks.level0,
@@ -124,7 +124,7 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
 
     const hurtboxes = [
         new Graphics().beginFill(0xff0000).drawRect(-50, -32, 100, 42).invisible(),
-        new Graphics().beginFill(0xffff00).drawRect(-32, 10, 64, 48).invisible(),
+        new Graphics().beginFill(0xffff00).drawRect(-32, 10, 64, 53).invisible(),
     ];
 
     const moves = {
@@ -225,6 +225,11 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
                 .at(enemyObj)
                 .show();
 
+            function flipShield() {
+                rootObj.scale.x *= -1;
+                rootObj.pivot.x = rootObj.scale.x < 0 ? -3 : 0;
+            }
+
             const aoeObjs = [rightAoeObj, topAoeObj, leftAoeObj];
             const reversedAoeObjs = [...aoeObjs].reverse();
 
@@ -232,30 +237,30 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
                 obj.scale.at(obj.initialScale);
             }
 
-            // TODO probably not while (true)
-            while (true) {
-                // TODO behavior switch for this
-                if (enemyObj.mxnDetectPlayer.isDetected) {
-                    yield* moves.summonEvilSpirit();
-                }
-
-                for (const obj of aoeObjs) {
-                    enemyObj.play(Sfx.Enemy.Chill.Build.rate(0.95, 1.05));
-                    yield interpv(obj.scale).factor(factor.sine).to(1, 1).over(1000);
-                    yield sleep(1000);
-                }
-
-                rootObj.scale.x *= -1;
-                rootObj.pivot.x = rootObj.scale.x < 0 ? -3 : 0;
-
-                for (const obj of reversedAoeObjs) {
-                    enemyObj.play(Sfx.Enemy.Chill.Unbuild.rate(0.95, 1.05));
-                    yield interpv(obj.scale).to(obj.initialScale).over(1000);
-                }
-
-                yield* enemyObj.mxnRpgStatusPotions.dramaUseAppropriatePotion();
+            if (movesState.shieldsCount % 2 === 1) {
+                flipShield();
             }
+
+            for (const obj of aoeObjs) {
+                enemyObj.play(Sfx.Enemy.Chill.Build.rate(0.95, 1.05));
+                yield interpv(obj.scale).factor(factor.sine).to(1, 1).over(1000);
+                yield sleep(1000);
+            }
+
+            flipShield();
+
+            for (const obj of reversedAoeObjs) {
+                enemyObj.play(Sfx.Enemy.Chill.Unbuild.rate(0.95, 1.05));
+                yield interpv(obj.scale).to(obj.initialScale).over(1000);
+            }
+
+            rootObj.destroy();
+            movesState.shieldsCount++;
         },
+    };
+
+    const movesState = {
+        shieldsCount: 0,
     };
 
     const soulAnchorObj = new Graphics().beginFill(0).drawRect(0, 0, 1, 1).at(0, 10).invisible();
@@ -271,11 +276,6 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
         .mixin(mxnEnemy, { hurtboxes, rank, soulAnchorObj })
         .mixin(mxnEnemyDeathBurst, { map: theme.tints.map })
         .coro(function* (self) {
-            // TODO ehhh... weird switch
-            if (features.has("shield")) {
-                yield* moves.shieldWithWeakpoint();
-            }
-
             let previousFeature = Null<Feature>();
 
             while (true) {
@@ -308,8 +308,13 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
                     else if (feature === "evil_spirit") {
                         yield* moves.summonEvilSpirit();
                     }
+                    else if (feature === "shield") {
+                        yield* moves.shieldWithWeakpoint();
+                    }
                     previousFeature = feature;
                 }
+
+                yield* enemyObj.mxnRpgStatusPotions.dramaUseAppropriatePotion();
             }
         });
 

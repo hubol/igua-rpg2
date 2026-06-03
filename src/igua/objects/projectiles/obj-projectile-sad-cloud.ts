@@ -55,7 +55,7 @@ export function objProjectileSadCloud(args: ObjProjectileSadCloudArgs) {
                 api.dripsCount++;
                 objProjectilePuddleDrip(args)
                     .at(self)
-                    .add(Rng.intc(-16, 16), 15)
+                    .add(0, 15)
                     .zIndexed(ZIndex.FrontDecals)
                     .show();
                 yield sleep(200);
