@@ -12,6 +12,7 @@ import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { ZIndex } from "../../core/scene/z-index";
+import { mxnFxLoveExpand } from "../../mixins/effects/mxn-fx-love-expand";
 import { mxnFxVibrate } from "../../mixins/effects/mxn-fx-vibrate";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
@@ -23,7 +24,7 @@ import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objFxHeart } from "../effects/obj-fx-heart";
-import { objProjectileLoveVortexAoe } from "../projectiles/obj-projectile-love-vortex-aoe";
+import { objProjectileCircle } from "../projectiles/obj-projectile-circle";
 import { objProjectilePuddleDrip } from "../projectiles/obj-projectile-puddle-drip";
 import { objAngelMouth } from "./obj-angel-mouth";
 
@@ -309,7 +310,8 @@ export function objAngelBoyfriends(args: ObjAngelBoyfriendsArgs) {
 }
 
 function objAngelBoyfriendsLoveVortexAoe(speed: "slow" | "fast") {
-    return objProjectileLoveVortexAoe()
+    return objProjectileCircle()
+        .mixin(mxnFxLoveExpand)
         .coro(function* (self) {
             yield interpvr(self.scale).to(200, 200).over(speed === "slow" ? 2000 : 1200);
             yield sleep(Rng.intc(400, 600));

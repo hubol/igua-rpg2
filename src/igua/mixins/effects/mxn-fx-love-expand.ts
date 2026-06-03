@@ -1,22 +1,11 @@
-import { Graphics } from "pixi.js";
+import { DisplayObject } from "pixi.js";
 import { Sfx } from "../../../assets/sounds";
 import { holdf } from "../../../lib/game-engine/routines/hold";
 import { Rng } from "../../../lib/math/rng";
-import { CollisionShape } from "../../../lib/pixi/collision";
-import { container } from "../../../lib/pixi/container";
-import { objFxHeart } from "../effects/obj-fx-heart";
-import { objCirclebox } from "../utils/obj-circlebox";
+import { objFxHeart } from "../../objects/effects/obj-fx-heart";
 
-export function objProjectileLoveVortexAoe() {
-    const collisionObj = objCirclebox();
-    const gfx = new Graphics().beginFill(0xffffff).drawCircle(0, 0, 256).scaled(1 / 256, 1 / 256);
-
-    return container(
-        gfx,
-        collisionObj,
-    )
-        .scaled(0, 0)
-        .collisionShape(CollisionShape.DisplayObjects, collisionObj.children)
+export function mxnFxLoveExpand(obj: DisplayObject) {
+    return obj
         .coro(function* (self) {
             let iterationsCount = 0;
 
