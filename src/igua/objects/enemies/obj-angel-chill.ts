@@ -1,4 +1,4 @@
-import { DisplayObject, Graphics } from "pixi.js";
+import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
@@ -14,6 +14,7 @@ import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { Null } from "../../../lib/types/null";
 import { ValuesOf } from "../../../lib/types/values-of";
 import { ZIndex } from "../../core/scene/z-index";
+import { scene } from "../../globals";
 import { mxnFxEmo } from "../../mixins/effects/mxn-fx-emo";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
@@ -28,6 +29,7 @@ import { playerObj } from "../obj-player";
 import { objProjectileCircle } from "../projectiles/obj-projectile-circle";
 import { objProjectileEvilSpirit } from "../projectiles/obj-projectile-evil-spirit";
 import { objProjectileSadCloud } from "../projectiles/obj-projectile-sad-cloud";
+import { StepOrder } from "../step-order";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelEyes } from "./obj-angel-eyes";
 import { objAngelMouth } from "./obj-angel-mouth";
@@ -354,15 +356,38 @@ function objAngelChillEmoVortex() {
     return objProjectileCircle()
         .mixin(mxnFxEmo)
         .coro(function* (self) {
+            const auraObj = objAngelChillEmoVortexAura(self)
+                .zIndexed(ZIndex.TerrainDecals - 1)
+                .show();
             yield* Coro.all([
                 interpv(self.scale).to(100, 100).over(4000),
                 interpvr(self).factor(factor.sine).translate(0, 350).over(4000),
             ]);
+            auraObj.objAngelChillEmoVortexAura.dying = true;
             yield sleep(333);
             yield interpv(self.scale).factor(factor.sine).to(0, 0).over(200);
             self.destroy();
         })
         .zIndexed(ZIndex.TerrainDecals);
+}
+
+function objAngelChillEmoVortexAura(parentObj: DisplayObject) {
+    const api = {
+        dying: false,
+    };
+
+    return Sprite.from(Tx.Enemy.Chill.VortexAura)
+        .merge({ objAngelChillEmoVortexAura: api })
+        .anchored(0.5, 0.5)
+        .scaled(600, 5)
+        .step(self => self.at(scene.camera.x + 250, Math.max(scene.camera.y - 40, parentObj.y)), StepOrder.BeforeCamera)
+        .coro(function* (self) {
+            self.alpha = 0;
+            yield interp(self, "alpha").steps(4).to(0.5).over(500);
+            yield () => parentObj.destroyed || api.dying;
+            yield interp(self, "alpha").steps(4).to(0).over(500);
+            self.destroy();
+        });
 }
 
 function mxnShield(obj: DisplayObject) {
