@@ -1,6 +1,5 @@
-import { DisplayObject, Graphics, Sprite, TilingSprite } from "pixi.js";
+import { DisplayObject, Graphics } from "pixi.js";
 import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
-import { NoAtlasTx } from "../../../assets/no-atlas-textures";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { OneOrTwo } from "../../../lib/array/one-or-two";
@@ -12,8 +11,8 @@ import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
-import { Null } from "../../../lib/types/null";
 import { ValuesOf } from "../../../lib/types/values-of";
+import { mxnFxEmo } from "../../mixins/effects/mxn-fx-emo";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
@@ -25,9 +24,7 @@ import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objFxEmoAura24px } from "../effects/obj-fx-emo-aura-24px";
 import { playerObj } from "../obj-player";
 import { objProjectileEvilSpirit } from "../projectiles/obj-projectile-evil-spirit";
-import { objProjectilePuddleDrip } from "../projectiles/obj-projectile-puddle-drip";
 import { objProjectileSadCloud } from "../projectiles/obj-projectile-sad-cloud";
-import { StepOrder } from "../step-order";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
 
@@ -182,15 +179,6 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
             };
         },
         *shieldWithWeakpoint() {
-            const aoeSprite = new TilingSprite(NoAtlasTx.Enemy.Chill.Aoe, 300, 300)
-                .at(-90, -134)
-                .coro(function* (self) {
-                    while (true) {
-                        yield sleepf(5);
-                        self.tilePosition.add(1, 1);
-                    }
-                });
-
             const leftAoeObj = new Graphics()
                 .beginFill(0xff0000)
                 .drawRect(0, 0, 32, 134)
@@ -215,8 +203,10 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
                 .mixin(mxnShield)
                 .merge({ initialScale: vnew(1, 0) });
 
-            const aoeMaskObj = container(leftAoeObj, topAoeObj, rightAoeObj);
-            const rootObj = container(aoeMaskObj, aoeSprite.masked(aoeMaskObj)).at(enemyObj).show();
+            const rootObj = container(leftAoeObj, topAoeObj, rightAoeObj)
+                .mixin(mxnFxEmo)
+                .at(enemyObj)
+                .show();
 
             const aoeObjs = [rightAoeObj, topAoeObj, leftAoeObj];
             const reversedAoeObjs = [...aoeObjs].reverse();
@@ -238,8 +228,8 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
                     yield sleep(1000);
                 }
 
-                aoeMaskObj.scale.x *= -1;
-                aoeMaskObj.pivot.x = aoeMaskObj.scale.x < 0 ? -3 : 0;
+                rootObj.scale.x *= -1;
+                rootObj.pivot.x = rootObj.scale.x < 0 ? -3 : 0;
 
                 for (const obj of reversedAoeObjs) {
                     enemyObj.play(Sfx.Enemy.Chill.Unbuild.rate(0.95, 1.05));
