@@ -3559,7 +3559,6 @@ export const Lvl = {
       level4: e(r["Checkpoint"], { x: 80, y: 664, flippedX: false, values: { name: "level4", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       level5: e(r["Checkpoint"], { x: 80, y: 480, flippedX: false, values: { name: "level5", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       midboss0: e(r["Checkpoint"], { x: 80, y: 328, flippedX: false, values: { name: "midboss0", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
-      PlayerDev: e(r["PlayerDev"], { x: 80, y: 328, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     };
   },
   MagicDemo: (): LvlType.MagicDemo => {
@@ -12828,7 +12827,6 @@ export namespace LvlType {
     level4: ReturnType<(typeof r)["Checkpoint"]>;
     level5: ReturnType<(typeof r)["Checkpoint"]>;
     midboss0: ReturnType<(typeof r)["Checkpoint"]>;
-    PlayerDev: ReturnType<(typeof r)["PlayerDev"]>;
   };
   export type MagicDemo = {
     Block: ReturnType<(typeof r)["Block"]>;

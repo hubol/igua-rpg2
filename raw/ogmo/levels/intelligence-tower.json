@@ -160,17 +160,6 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "midboss0", "depth": 0, "overrideFlipX": "none"}
-        },
-        {
-          "name": "PlayerDev",
-          "id": 9,
-          "_eid": "98101389",
-          "x": 80,
-          "y": 328,
-          "originX": 22,
-          "originY": 39,
-          "flippedX": false,
-          "values": {"name": "", "depth": 0}
         }
       ]
     },
