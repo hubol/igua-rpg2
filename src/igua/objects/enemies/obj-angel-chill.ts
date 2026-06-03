@@ -1,4 +1,4 @@
-import { DisplayObject, Graphics, TilingSprite } from "pixi.js";
+import { DisplayObject, Graphics, Sprite, TilingSprite } from "pixi.js";
 import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { NoAtlasTx } from "../../../assets/no-atlas-textures";
 import { Sfx } from "../../../assets/sounds";
@@ -12,6 +12,7 @@ import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
+import { Null } from "../../../lib/types/null";
 import { ValuesOf } from "../../../lib/types/values-of";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
@@ -24,6 +25,9 @@ import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objFxEmoAura24px } from "../effects/obj-fx-emo-aura-24px";
 import { playerObj } from "../obj-player";
 import { objProjectileEvilSpirit } from "../projectiles/obj-projectile-evil-spirit";
+import { objProjectilePuddleDrip } from "../projectiles/obj-projectile-puddle-drip";
+import { objProjectileSadCloud } from "../projectiles/obj-projectile-sad-cloud";
+import { StepOrder } from "../step-order";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
 
@@ -92,17 +96,25 @@ const ranks = {
     }),
 };
 
+type Feature = "shield" | "cry";
+
 type Theme = ValuesOf<typeof themes>;
 
 const variants = {
     level0: {
         rank: ranks.level0,
         theme: themes.common,
+        features: new Set<Feature>(["shield"]),
+    },
+    level1: {
+        rank: ranks.level0,
+        theme: themes.common,
+        features: new Set<Feature>(["cry"]),
     },
 };
 
 export function objAngelChill(entity: OgmoEntities.EnemyChill) {
-    const { rank, theme } = variants[entity.values.variant] ?? variants.level0;
+    const { rank, theme, features } = variants[entity.values.variant] ?? variants.level0;
 
     const bodyObj = objAngelChillBody(theme);
 
@@ -112,6 +124,63 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
     ];
 
     const moves = {
+        *summonEvilSpirit() {
+            enemyObj.play(Sfx.Enemy.Chill.EvilSpiritSummon.rate(0.9, 1.1));
+            const auraObj = objFxEmoAura24px().at(0, 32).show(enemyObj);
+            const evilSpiritObj = objProjectileEvilSpirit(playerObj)
+                .mixin(mxnRpgAttack, { attack: atkAoe, attacker: enemyObj.status })
+                .at(enemyObj)
+                .add(0, -32)
+                .show();
+            yield* Coro.all([
+                interp(headObj.objAngelChillHead.mouthObj.mxnSpeakingMouth, "agapeUnit").to(1).over(333),
+                sleep(Rng.int(1250, 2000)),
+            ]);
+            auraObj.destroy();
+            evilSpiritObj.mxnDischargeable.charge();
+            yield () => evilSpiritObj.mxnDischargeable.isDischarged;
+            yield interp(headObj.objAngelChillHead.mouthObj.mxnSpeakingMouth, "agapeUnit").to(0).over(333);
+        },
+        *cry() {
+            const auraObj = objFxEmoAura24px()
+                .at(0, 32)
+                .mixin(mxnSparkling)
+                .show(enemyObj);
+            auraObj.sparklesTint = 0x404069;
+            auraObj.sparklesPerFrame = 0.2;
+
+            const cloudObj = objProjectileSadCloud({
+                target: enemyObj.mxnDetectPlayer,
+                attack: atks.cryDrip,
+                attacker: enemyObj.status,
+            })
+                .at(enemyObj)
+                .coro(function* (self) {
+                    yield () => self.objProjectileSadCloud.dripsCount >= 3 && !enemyObj.mxnDetectPlayer.isDetected;
+                    yield* finish();
+                });
+
+            headObj.objAngelChillHead.mouthObj.controls.frowning = true;
+
+            function* finish() {
+                yield sleepf(0);
+                if (isFinished()) {
+                    return;
+                }
+                headObj.objAngelChillHead.mouthObj.controls.frowning = false;
+                cloudObj.destroy();
+                auraObj.destroy();
+            }
+
+            function isFinished() {
+                return cloudObj.destroyed;
+            }
+
+            return {
+                finish,
+                isFinished,
+            };
+        },
         *shieldWithWeakpoint() {
             const aoeSprite = new TilingSprite(NoAtlasTx.Enemy.Chill.Aoe, 300, 300)
                 .at(-90, -134)
@@ -160,21 +229,7 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
             while (true) {
                 // TODO behavior switch for this
                 if (enemyObj.mxnDetectPlayer.isDetected) {
-                    enemyObj.play(Sfx.Enemy.Chill.EvilSpiritSummon.rate(0.9, 1.1));
-                    const auraObj = objFxEmoAura24px().at(0, 32).show(enemyObj);
-                    const evilSpiritObj = objProjectileEvilSpirit(playerObj)
-                        .mixin(mxnRpgAttack, { attack: atkAoe, attacker: enemyObj.status })
-                        .at(enemyObj)
-                        .add(0, -32)
-                        .show();
-                    yield* Coro.all([
-                        interp(headObj.objAngelChillHead.mouthObj.mxnSpeakingMouth, "agapeUnit").to(1).over(333),
-                        sleep(Rng.int(1250, 2000)),
-                    ]);
-                    auraObj.destroy();
-                    evilSpiritObj.mxnDischargeable.charge();
-                    yield () => evilSpiritObj.mxnDischargeable.isDischarged;
-                    yield interp(headObj.objAngelChillHead.mouthObj.mxnSpeakingMouth, "agapeUnit").to(0).over(333);
+                    yield* moves.summonEvilSpirit();
                 }
 
                 for (const obj of aoeObjs) {
@@ -207,8 +262,25 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
         .mixin(mxnEnemy, { hurtboxes, rank, soulAnchorObj })
         .mixin(mxnEnemyDeathBurst, { map: theme.tints.map })
         .pivoted(0, bodyObj.height - 3)
-        .coro(function* () {
-            yield* moves.shieldWithWeakpoint();
+        .coro(function* (self) {
+            // TODO ehhh... weird switch
+            if (features.has("shield")) {
+                yield* moves.shieldWithWeakpoint();
+            }
+
+            while (true) {
+                yield () => self.mxnDetectPlayer.isDetected;
+                yield* moves.summonEvilSpirit();
+                yield () => self.mxnDetectPlayer.isDetected;
+                const { finish, isFinished } = yield* moves.cry();
+                yield* Coro.race([
+                    isFinished,
+                    Coro.chain([
+                        sleep(3000),
+                        finish(),
+                    ]),
+                ]);
+            }
         });
 
     return enemyObj;
@@ -254,3 +326,15 @@ function mxnShield(obj: DisplayObject) {
 const atkAoe = RpgAttack.create({
     emotional: 30,
 });
+
+const atks = {
+    cryDrip: RpgAttack.create({
+        emotional: 20,
+        conditions: {
+            wetness: {
+                tint: 0xCECEE4,
+                value: 10,
+            },
+        },
+    }),
+};

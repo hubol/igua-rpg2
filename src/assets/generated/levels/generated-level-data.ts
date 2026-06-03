@@ -3549,7 +3549,7 @@ export const Lvl = {
       Door_25: e(r["Door"], { x: 232, y: 432, values: { sceneName: "scnIntelligenceTower", checkpointName: "midboss0", name: "", depth: 0 } }, "Entities"),
       Door_26: e(r["Door"], { x: 296, y: 432, values: { sceneName: "scnIntelligenceTower", checkpointName: "wrong1", name: "", depth: 0 } }, "Entities"),
       Door_27: e(r["Door"], { x: 360, y: 432, values: { sceneName: "scnIntelligenceTower", checkpointName: "level2", name: "", depth: 0 } }, "Entities"),
-      EnemyChill: e(r["EnemyChill"], { x: 248, y: 272, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemyChill: e(r["EnemyChill"], { x: 248, y: 272, values: { variant: "level1", name: "", depth: 0 } }, "Entities"),
       Player: e(r["Player"], { x: 88, y: 1640, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       wrong0: e(r["Checkpoint"], { x: 80, y: 1488, flippedX: false, values: { name: "wrong0", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       wrong1: e(r["Checkpoint"], { x: 80, y: 1328, flippedX: false, values: { name: "wrong1", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
@@ -3559,6 +3559,7 @@ export const Lvl = {
       level4: e(r["Checkpoint"], { x: 80, y: 664, flippedX: false, values: { name: "level4", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       level5: e(r["Checkpoint"], { x: 80, y: 480, flippedX: false, values: { name: "level5", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       midboss0: e(r["Checkpoint"], { x: 80, y: 328, flippedX: false, values: { name: "midboss0", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      PlayerDev: e(r["PlayerDev"], { x: 80, y: 328, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     };
   },
   MagicDemo: (): LvlType.MagicDemo => {
@@ -12826,6 +12827,7 @@ export namespace LvlType {
     level4: ReturnType<(typeof r)["Checkpoint"]>;
     level5: ReturnType<(typeof r)["Checkpoint"]>;
     midboss0: ReturnType<(typeof r)["Checkpoint"]>;
+    PlayerDev: ReturnType<(typeof r)["PlayerDev"]>;
   };
   export type MagicDemo = {
     Block: ReturnType<(typeof r)["Block"]>;
