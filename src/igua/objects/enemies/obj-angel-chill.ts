@@ -4,7 +4,7 @@ import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { OneOrTwo } from "../../../lib/array/one-or-two";
 import { Coro } from "../../../lib/game-engine/routines/coro";
-import { factor, interp, interpv } from "../../../lib/game-engine/routines/interp";
+import { factor, interp, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { RgbInt } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
@@ -12,6 +12,7 @@ import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { ValuesOf } from "../../../lib/types/values-of";
+import { ZIndex } from "../../core/scene/z-index";
 import { mxnFxEmo } from "../../mixins/effects/mxn-fx-emo";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
@@ -23,9 +24,11 @@ import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objFxEmoAura24px } from "../effects/obj-fx-emo-aura-24px";
 import { playerObj } from "../obj-player";
+import { objProjectileCircle } from "../projectiles/obj-projectile-circle";
 import { objProjectileEvilSpirit } from "../projectiles/obj-projectile-evil-spirit";
 import { objProjectileSadCloud } from "../projectiles/obj-projectile-sad-cloud";
 import { AngelThemeTemplate } from "./angel-theme-template";
+import { objAngelEyes } from "./obj-angel-eyes";
 import { objAngelMouth } from "./obj-angel-mouth";
 
 const themes = (function () {
@@ -93,7 +96,7 @@ const ranks = {
     }),
 };
 
-type Feature = "shield" | "cry";
+type Feature = "shield" | "cry" | "vortex" | "evil_spirit";
 
 type Theme = ValuesOf<typeof themes>;
 
@@ -106,7 +109,7 @@ const variants = {
     level1: {
         rank: ranks.level0,
         theme: themes.common,
-        features: new Set<Feature>(["cry"]),
+        features: new Set<Feature>(["cry", "vortex", "evil_spirit"]),
     },
 };
 
@@ -177,6 +180,14 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
                 finish,
                 isFinished,
             };
+        },
+        *emoVortex() {
+            const vortexObj = objAngelChillEmoVortex()
+                .mixin(mxnRpgAttack, { attack: atks.emoVortex, attacker: enemyObj.status })
+                .at(enemyObj)
+                .add(0, -430)
+                .show();
+            yield () => vortexObj.destroyed;
         },
         *shieldWithWeakpoint() {
             const leftAoeObj = new Graphics()
@@ -259,17 +270,36 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
             }
 
             while (true) {
-                yield () => self.mxnDetectPlayer.isDetected;
-                yield* moves.summonEvilSpirit();
-                yield () => self.mxnDetectPlayer.isDetected;
-                const { finish, isFinished } = yield* moves.cry();
-                yield* Coro.race([
-                    isFinished,
-                    Coro.chain([
-                        sleep(3000),
-                        finish(),
-                    ]),
-                ]);
+                const cycleFeaturesSet = new Set(features);
+                const remainingHealthUnit = self.status.health / self.status.healthMax;
+                if (remainingHealthUnit < 0.5) {
+                    cycleFeaturesSet.delete("cry");
+                }
+
+                for (const feature of Rng.shuffle([...cycleFeaturesSet])) {
+                    yield () => self.mxnDetectPlayer.isDetected;
+                    if (remainingHealthUnit < 0.5 && feature === "vortex") {
+                        const cryMove = yield* moves.cry();
+                        yield* moves.emoVortex();
+                        yield* cryMove.finish();
+                    }
+                    else if (feature === "vortex") {
+                        yield* moves.emoVortex();
+                    }
+                    else if (feature === "cry") {
+                        const cryMove = yield* moves.cry();
+                        yield* Coro.race([
+                            cryMove.isFinished,
+                            Coro.chain([
+                                sleep(3000),
+                                cryMove.finish(),
+                            ]),
+                        ]);
+                    }
+                    else if (feature === "evil_spirit") {
+                        yield* moves.summonEvilSpirit();
+                    }
+                }
             }
         });
 
@@ -287,18 +317,34 @@ function objAngelChillBody(theme: Theme) {
 
 function objAngelChillHead(theme: Theme) {
     const mouthObj = theme.createMouthObj();
+    const eyesObj = theme.createEyesObj();
     return container(
         container(
             theme.createSprite("head").anchored(0.5, 0.8),
             container(
                 mouthObj.add(0, -8),
-                theme.createEyesObj().add(0, -24),
+                eyesObj.add(0, -24),
             )
                 .mixin(mxnFacingPivot, { down: 6, up: -6, right: 6, left: -6 }),
         ),
     )
         .mixin(mxnFacingPivot, { down: 3, up: 0, right: 5, left: -5 })
-        .merge({ objAngelChillHead: { mouthObj } });
+        .merge({ objAngelChillHead: { eyesObj, mouthObj } });
+}
+
+function objAngelChillEmoVortex() {
+    return objProjectileCircle()
+        .mixin(mxnFxEmo)
+        .coro(function* (self) {
+            yield* Coro.all([
+                interpv(self.scale).to(100, 100).over(4000),
+                interpvr(self).factor(factor.sine).translate(0, 350).over(4000),
+            ]);
+            yield sleep(333);
+            yield interpv(self.scale).factor(factor.sine).to(0, 0).over(200);
+            self.destroy();
+        })
+        .zIndexed(ZIndex.TerrainDecals);
 }
 
 function mxnShield(obj: DisplayObject) {
@@ -326,5 +372,8 @@ const atks = {
                 value: 10,
             },
         },
+    }),
+    emoVortex: RpgAttack.create({
+        emotional: 90,
     }),
 };

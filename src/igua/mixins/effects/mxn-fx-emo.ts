@@ -9,7 +9,9 @@ export function mxnFxEmo(obj: Container) {
     const offset = vnew();
 
     new TilingSprite(NoAtlasTx.Enemy.Chill.Aoe, 500, 280)
+        .zIndexed(obj.zIndex)
         .step(self => {
+            self.zIndex = obj.zIndex;
             self.at(scene.camera);
             self.tilePosition.at(scene.camera, -1).add(offset);
             if (obj.destroyed) {
