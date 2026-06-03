@@ -11,6 +11,7 @@ import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
+import { Null } from "../../../lib/types/null";
 import { ValuesOf } from "../../../lib/types/values-of";
 import { ZIndex } from "../../core/scene/z-index";
 import { mxnFxEmo } from "../../mixins/effects/mxn-fx-emo";
@@ -127,7 +128,7 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
     const moves = {
         *summonEvilSpirit() {
             enemyObj.play(Sfx.Enemy.Chill.EvilSpiritSummon.rate(0.9, 1.1));
-            const auraObj = objFxEmoAura24px().at(0, 32).show(enemyObj);
+            const auraObj = objFxEmoAura24px().at(0, -26).show(enemyObj);
             const evilSpiritObj = objProjectileEvilSpirit(playerObj)
                 .mixin(mxnRpgAttack, { attack: atkAoe, attacker: enemyObj.status })
                 .at(enemyObj)
@@ -144,7 +145,7 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
         },
         *cry() {
             const auraObj = objFxEmoAura24px()
-                .at(0, 32)
+                .at(0, -26)
                 .mixin(mxnSparkling)
                 .show(enemyObj);
             auraObj.sparklesTint = 0x404069;
@@ -260,18 +261,20 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
     const headObj = objAngelChillHead(theme)
         .at(-6, 8);
     const rgbObj = container(bodyObj, headObj, ...hurtboxes, soulAnchorObj)
+        .pivoted(-6, bodyObj.height - 3)
         .filtered(new MapRgbFilter(...theme.tints.map));
 
     const enemyObj = container(rgbObj)
         .mixin(mxnDetectPlayer)
         .mixin(mxnEnemy, { hurtboxes, rank, soulAnchorObj })
         .mixin(mxnEnemyDeathBurst, { map: theme.tints.map })
-        .pivoted(0, bodyObj.height - 3)
         .coro(function* (self) {
             // TODO ehhh... weird switch
             if (features.has("shield")) {
                 yield* moves.shieldWithWeakpoint();
             }
+
+            let previousFeature = Null<Feature>();
 
             while (true) {
                 const cycleFeaturesSet = new Set(features);
@@ -290,7 +293,7 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
                     else if (feature === "vortex") {
                         yield* moves.emoVortex();
                     }
-                    else if (feature === "cry") {
+                    else if (feature === "cry" && previousFeature !== "cry") {
                         const cryMove = yield* moves.cry();
                         yield* Coro.race([
                             cryMove.isFinished,
@@ -303,6 +306,7 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
                     else if (feature === "evil_spirit") {
                         yield* moves.summonEvilSpirit();
                     }
+                    previousFeature = feature;
                 }
             }
         });
