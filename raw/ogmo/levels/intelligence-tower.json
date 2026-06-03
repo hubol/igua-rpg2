@@ -27,7 +27,20 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 209,
-      "entities": []
+      "entities": [
+        {
+          "name": "GateHorizontal",
+          "id": 0,
+          "_eid": "97593426",
+          "x": -48,
+          "y": 1528,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "flippedX": true,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromIntelligenceTower", "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "FrontDecals",
@@ -1007,6 +1020,19 @@
           "y": 208,
           "width": 32,
           "values": {"name": "Midboss0Pipe3", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 39,
+          "_eid": "93117141",
+          "x": -392,
+          "y": 1640,
+          "width": 512,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
