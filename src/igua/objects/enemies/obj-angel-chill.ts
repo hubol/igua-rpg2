@@ -385,7 +385,11 @@ function objAngelChillEmoVortexAura(parentObj: DisplayObject) {
         .merge({ objAngelChillEmoVortexAura: api })
         .anchored(0.5, 0.5)
         .scaled(600, 5)
-        .step(self => self.at(scene.camera.x + 250, Math.max(scene.camera.y - 40, parentObj.y)), StepOrder.BeforeCamera)
+        .step(self => {
+            if (!parentObj.destroyed) {
+                self.at(scene.camera.x + 250, Math.max(scene.camera.y - 40, parentObj.y));
+            }
+        }, StepOrder.BeforeCamera)
         .coro(function* (self) {
             self.alpha = 0;
             yield interp(self, "alpha").steps(4).to(0.5).over(500);
