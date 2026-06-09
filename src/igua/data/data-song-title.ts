@@ -6,7 +6,7 @@ import { StringTransform } from "../../lib/string/string-transform";
 export namespace DataSongTitle {
     const fallback = getModel("UnknownSong" as any);
 
-    export const Manifest: Record<MusicTrack, Model> = {
+    export const manifest: Record<MusicTrack, Model> = {
         ...Object.fromEntries(Object.entries(Mzk).map(([id, track]) => [track, getModel(id as Mzk.Id)])),
         [Mzk.Covid19]: {
             firstWord: "COVID",
@@ -16,8 +16,8 @@ export namespace DataSongTitle {
     };
 
     export function getByMusicTrack(track: MusicTrack) {
-        if (Manifest[track]) {
-            return Manifest[track];
+        if (manifest[track]) {
+            return manifest[track];
         }
         Logger.logContractViolationError(
             "DataSongTitle.getByMusicTrack",

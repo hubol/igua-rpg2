@@ -10,7 +10,7 @@ import { MicrocosmTimeDroppedLoot } from "./microcosms/microcosm-time-dropped-lo
 import { MicrocosmWetnessReceptacle } from "./microcosms/microcosm-wetness-receptacle";
 import { RpgMicrocosm, RpgMicrocosmUnsafeBase } from "./rpg-microcosm";
 
-const Manifest = {
+const manifest = {
     "VaseInhabitant.CactusEquipment": configure(MicrocosmCactusEquipmentMaker, {}),
     "VaseInhabitant.Vase": configure(MicrocosmWetnessReceptacle, { maxWetnessUnits: 1000 }),
     "NewBalltown.Armorer.AquariumWater": configure(MicrocosmWetnessReceptacle, {
@@ -65,7 +65,7 @@ function configure<TClass>(
 export namespace RpgMicrocosms {
     export function create(state: State): Instance {
         return Object.fromEntries(
-            Object.entries(Manifest).map(([key, [microcosmClass, config]]) => {
+            Object.entries(manifest).map(([key, [microcosmClass, config]]) => {
                 const instance = new (microcosmClass as RpgMicrocosmClasslike<unknown>)(config);
                 const unsafeInstance = instance as unknown as RpgMicrocosmUnsafeBase;
                 if (!state[key]) {
@@ -83,7 +83,7 @@ export namespace RpgMicrocosms {
 
     type State = Record<string, any>;
 
-    type ManifestType = typeof Manifest;
+    type ManifestType = typeof manifest;
 
     type Instance = {
         [k in keyof ManifestType]: InstanceType<ManifestType[k][0]>;

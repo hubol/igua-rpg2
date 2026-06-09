@@ -3,14 +3,14 @@ import { RpgExperience } from "./rpg-experience";
 
 export namespace RpgEconomy {
     export namespace Currency {
-        export const Manifest = [
+        export const manifest = [
             "valuables",
             "mechanical_idol_credits",
             "casino_pity",
-            ...RpgExperience.Manifest,
+            ...RpgExperience.manifest,
         ] as const;
 
-        export type Id = typeof Manifest[number];
+        export type Id = typeof manifest[number];
 
         export type NonExperienceId = Exclude<Id, RpgExperience.Id>;
     }

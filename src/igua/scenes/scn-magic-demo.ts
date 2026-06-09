@@ -31,7 +31,7 @@ namespace DataMagicDemo {
         giftId: DataGift.Id;
     }
 
-    export const Manifest = {
+    export const manifest = {
         fromDoor0: {
             idolId: "Yellow",
             name: "Idol of Wealth",
@@ -118,7 +118,7 @@ export function scnMagicDemo() {
     });
 
     // @ts-expect-error Fu
-    const demo: DataMagicDemo.Model = DataMagicDemo.Manifest[Rpg.character.position.checkpointName];
+    const demo: DataMagicDemo.Model = DataMagicDemo.manifest[Rpg.character.position.checkpointName];
     if (!demo) {
         Cutscene.play(function* () {
             yield* show("This is a bug (Type A)");
@@ -201,7 +201,7 @@ export function scnMagicDemo() {
 }
 
 function getSpeech(): DataMagicDemo.Speech.Model | null {
-    const givenGiftsCount = Object.values(DataMagicDemo.Manifest)
+    const givenGiftsCount = Object.values(DataMagicDemo.manifest)
         .map(model => !Rpg.gift(model.giftId).isGiveable())
         .reduce((sum, isGiven) => isGiven ? (sum + 1) : sum, 0);
 

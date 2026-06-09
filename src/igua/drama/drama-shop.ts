@@ -357,11 +357,11 @@ function objStockPrice(item: RpgStock) {
 
 const possibleCurrencyIndices: Record<RpgEconomy.Currency.Id, Integer> = Object.assign(
     {},
-    ...RpgEconomy.Currency.Manifest.map((currency, index) => ({ [currency]: index })),
+    ...RpgEconomy.Currency.manifest.map((currency, index) => ({ [currency]: index })),
 );
 
 function objPlayerStatus(stocks: ReadonlyArray<RpgStock>) {
-    const currenciesInStocks = RpgEconomy.Currency.Manifest.filter(currency =>
+    const currenciesInStocks = RpgEconomy.Currency.manifest.filter(currency =>
         stocks.some(item => item.currency === currency)
     );
     const currencyObjs = currenciesInStocks.reverse().map((currency, i) =>

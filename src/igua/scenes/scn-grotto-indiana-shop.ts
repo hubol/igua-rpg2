@@ -260,7 +260,7 @@ function enrichQuestTeacher(lvl: LvlType.GrottoIndianaShop) {
 function getSongTitleQuizOptions(songTitleKey: "firstWord" | "remainingWords", expectedSongTitle: DataSongTitle.Model) {
     const expectedOption = expectedSongTitle[songTitleKey];
     const set = new Set(
-        Object.values(DataSongTitle.Manifest).map(model => model[songTitleKey]).filter(string => string),
+        Object.values(DataSongTitle.manifest).map(model => model[songTitleKey]).filter(string => string),
     );
     set.delete(expectedOption);
     return Rng.shuffle([
