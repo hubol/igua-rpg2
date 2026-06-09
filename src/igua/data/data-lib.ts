@@ -2,38 +2,58 @@ import { Logger } from "../../lib/game-engine/logger";
 import { ValuesOf } from "../../lib/types/values-of";
 
 export namespace DataLib {
-    export function createGetById<TModel, TManifest extends Record<"__Fallback__", TModel>>(
-        { manifest, namespace }: {
-            manifest: Manifest<TManifest>;
-            namespace: string;
-        },
+    export function create<TManifest extends Record<"__Fallback__", unknown>>(
+        namespace: string,
+        rawManifest: TManifest,
     ) {
-        return function getById<TId extends keyof TManifest> (id: TId): TManifest[TId] {
-            const model = manifest[id];
+        for (const id in rawManifest) {
+            // @ts-expect-error Leave me alone
+            rawManifest[id].id = id;
+        }
+
+        type ThisManifest = Manifest<Omit<TManifest, "__Fallback__">>;
+        type ThisId = keyof ThisManifest;
+        type ThisModel = ValuesOf<ThisManifest>;
+
+        // @ts-expect-error It's ok
+        const manifest: ThisManifest = rawManifest;
+        // @ts-expect-error It's ok
+        const ids = Object.keys(rawManifest).filter(id => id !== "__Fallback__") as ReadonlyArray<ThisId>;
+        const noFallbackValues = Object.values(manifest).filter(item =>
+            (item as Record<string, string>).id !== "__Fallback__"
+        );
+
+        function getById<TId extends ThisId>(id: TId): TManifest[TId] {
+            const model = rawManifest[id];
             if (!model) {
                 Logger.logContractViolationError(
                     `${namespace}.getById`,
-                    new Error(`Attempted to access ${namespace}.Manifest.${String(id)}, returning fallback`),
+                    new Error(`Attempted to access ${namespace}.manifest.${String(id)}, returning fallback`),
                     { id },
                 );
 
+                const fallback = rawManifest.__Fallback__;
                 // @ts-expect-error Leave me alone
-                return manifest.__Fallback__;
+                return fallback;
             }
 
             return model;
-        };
-    }
-
-    export function createManifest<TModel, TManifest extends Record<"__Fallback__", TModel>>(
-        manifestWithoutIds: TManifest,
-    ): Manifest<TManifest> {
-        for (const id in manifestWithoutIds) {
-            // @ts-expect-error Leave me alone
-            manifestWithoutIds[id].id = id;
         }
-        // @ts-expect-error Leave me alone
-        return manifestWithoutIds;
+
+        return {
+            find(predicate: (value: ThisModel) => boolean): ThisModel | undefined {
+                return noFallbackValues.find(predicate as any);
+            },
+            filter(predicate: (value: ThisModel) => boolean): ThisModel[] {
+                return noFallbackValues.filter(predicate as any);
+            },
+            map<T>(transform: (value: ThisModel) => T): T[] {
+                return noFallbackValues.map(transform as any);
+            },
+            getById,
+            ids,
+            manifest,
+        };
     }
 
     type Manifest<T extends Record<string, unknown>> = {
@@ -41,26 +61,6 @@ export namespace DataLib {
             : T[k];
     };
 
-    export type Id<T> = Exclude<T, "__Fallback__">;
-
-    export function createIds<TManifest extends Record<string, unknown>>(
-        manifest: TManifest,
-    ): Array<Id<keyof TManifest>> {
-        return Object.keys(manifest).filter(id => id !== "__Fallback__") as any[];
-    }
-
-    export function createArrayOperations<TManifest extends Record<string, unknown>>(manifest: TManifest) {
-        type Model = ValuesOf<TManifest>;
-
-        const values = Object.values(manifest);
-
-        return {
-            find(predicate: (value: Model) => boolean): Model | undefined {
-                return values.find(predicate as any);
-            },
-            filter(predicate: (value: Model) => boolean): Model[] {
-                return values.filter(predicate as any);
-            },
-        };
-    }
+    export type Id<T> = Exclude<keyof T, "__Fallback__">;
+    export type Type<T> = T[Id<T>];
 }

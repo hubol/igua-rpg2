@@ -6,7 +6,7 @@ import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 import { RpgPocket } from "./rpg-pocket";
 
 const empty: RpgStashPocket.CheckBalance.Empty = { kind: "empty", count: 0 };
-const notEmpty: RpgStashPocket.CheckBalance.NotEmpty = { kind: "not_empty", pocketItemId: "__Fallback__", count: 0 };
+const notEmpty: RpgStashPocket.CheckBalance.NotEmpty = { kind: "not_empty", pocketItemId: "BallFruitTypeA", count: 0 };
 
 export class RpgStashPockets {
     private readonly _cacheMap = new CacheMap((stashPocketId: Integer) =>

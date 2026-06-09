@@ -47,7 +47,7 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
             "DramaItem.choose",
             new Error("items must not be empty when noneMessage is empty"),
         );
-        options.push({ item: { kind: "potion", id: "__Fallback__" }, message: "This is a bug" });
+        options.push({ item: { kind: "potion", id: "Poison" }, message: "This is a bug" });
     }
 
     let value = options[0] ? options[0].item : null;

@@ -11,7 +11,8 @@ export namespace DataSpell {
         attackProvider: (levelRef: LevelRef) => RpgAttack.Model;
     }
 
-    export const Manifest = DataLib.createManifest(
+    export const { manifest, getById, ids: Ids } = DataLib.create(
+        "DataSpell",
         {
             HotPineCone: {
                 name: "Hot Pine Cone",
@@ -53,9 +54,5 @@ export namespace DataSpell {
         } satisfies Record<string, Model>,
     );
 
-    export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataSpell" });
-
-    export type Id = DataLib.Id<keyof typeof Manifest>;
-
-    export const Ids = DataLib.createIds(Manifest);
+    export type Id = DataLib.Id<typeof manifest>;
 }

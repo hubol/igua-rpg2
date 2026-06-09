@@ -4,7 +4,8 @@ import { DataLib } from "./data-lib";
 export namespace DataGift {
     export type Model = { item: RpgInventory.Item };
 
-    export const Manifest = DataLib.createManifest(
+    export const { manifest, getById } = DataLib.create(
+        "DataGift",
         {
             "NewBalltown.OliveFanatic": {
                 item: { kind: "potion", id: "AttributeHealthUp" },
@@ -54,7 +55,5 @@ export namespace DataGift {
         } satisfies Record<string, Model>,
     );
 
-    export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataGift" });
-
-    export type Id = keyof typeof Manifest;
+    export type Id = DataLib.Id<typeof manifest>;
 }

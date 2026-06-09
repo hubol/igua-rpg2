@@ -39,10 +39,11 @@ export class RpgPocket {
     empty(reason: "default" | "death_tax" = "default") {
         let totalItems = 0;
 
-        const items = Object.keys(DataPocketItem.Manifest).reduce((obj, key) => {
-            obj[key as RpgPocket.Item] = 0;
-            return obj;
-        }, {} as Record<RpgPocket.Item, Integer>);
+        const items = DataPocketItem.ids
+            .reduce((obj, pocketItemId) => {
+                obj[pocketItemId] = 0;
+                return obj;
+            }, {} as Record<RpgPocket.Item, Integer>);
 
         for (const slot of this.slots) {
             const { item, count } = slot.empty();

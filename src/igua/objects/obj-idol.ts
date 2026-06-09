@@ -37,9 +37,8 @@ styles.set("Purple", {
     pivot: [36, 70],
 });
 
-const keyItems: RpgInventory.Item.KeyItem[] = Object.values(DataIdol.Manifest)
+const keyItems: RpgInventory.Item.KeyItem[] = DataIdol
     .map(({ keyItemId }) => keyItemId)
-    .filter(keyItemId => keyItemId !== "__Fallback__")
     .map(id => ({ kind: "key_item", id }));
 
 function getHealthText(idol: RpgIdol) {
@@ -55,7 +54,7 @@ export function objIdol({ uid }: OgmoEntities.Idol) {
         .mixin(mxnCutscene, function* () {
             const offer = yield* DramaInventory.askWhichAndRemoveOne(keyItems);
             if (offer) {
-                const dataIdol = Object.values(DataIdol.Manifest).find(idol => idol.keyItemId === offer.id);
+                const dataIdol = DataIdol.find(idol => idol.keyItemId === offer.id);
                 idol.upload(dataIdol?.id!);
             }
         });

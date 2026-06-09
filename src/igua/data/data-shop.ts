@@ -8,7 +8,8 @@ export namespace DataShop {
         stocks: Stock[];
     }
 
-    export const Manifest = DataLib.createManifest(
+    export const { manifest, getById } = DataLib.create(
+        "DataShop",
         {
             BalltownMechanicalIdol: {
                 stocks: [
@@ -365,9 +366,7 @@ export namespace DataShop {
         } satisfies Record<string, Model>,
     );
 
-    export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataShop" });
-
-    export type Id = keyof typeof Manifest;
+    export type Id = DataLib.Id<typeof manifest>;
 
     // TODO can you buy pocket items?
     // probably...?

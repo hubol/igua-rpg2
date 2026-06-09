@@ -46,7 +46,8 @@ export namespace DataPotion {
         return new Set(attributes);
     }
 
-    export const Manifest = DataLib.createManifest(
+    export const { manifest: Manifest, find, filter, getById, ids: Ids } = DataLib.create(
+        "DataPotion",
         {
             AttributeHealthUp: {
                 name: "Spiced Nectar",
@@ -308,13 +309,7 @@ export namespace DataPotion {
         } satisfies Record<string, Model>,
     );
 
-    export type Id = keyof typeof Manifest;
-
-    export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataPotion" });
-
-    export const Ids = DataLib.createIds(Manifest);
-
-    export const { find, filter } = DataLib.createArrayOperations(Manifest);
+    export type Id = DataLib.Id<typeof Manifest>;
 
     export function usePotion(id: Id, target: MxnRpgStatus) {
         const sound = getById(id).sound;
@@ -434,7 +429,7 @@ export namespace DataPotion {
                     done = true;
                 });
                 return () => done;
-            case "__Fallback__":
+            default:
                 return;
         }
     }

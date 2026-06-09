@@ -9,7 +9,8 @@ export namespace DataNpcPersona {
         looks: IguanaLooks.Serializable;
     }
 
-    export const Manifest = DataLib.createManifest(
+    export const { manifest: Manifest, getById } = DataLib.create(
+        "DataNpcPersona",
         {
             BalltownOutskirtsMiner: { job: "Miner", name: "Dante", looks: NpcLooks.Miner },
             BalltownOutskirtsFarmer: { job: "Farmer", name: "Lars", looks: NpcLooks.Farmer },
@@ -69,9 +70,7 @@ export namespace DataNpcPersona {
         } satisfies Record<string, Model>,
     );
 
-    export type Id = keyof typeof Manifest;
+    export type Id = DataLib.Id<typeof Manifest>;
 
-    export type Type = typeof Manifest[Id];
-
-    export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataNpcPersona" });
+    export type Type = DataLib.Type<typeof Manifest>;
 }

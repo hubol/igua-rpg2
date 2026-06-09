@@ -43,7 +43,8 @@ export namespace DataQuestReward {
 
     export type Model = (Model.InOrder | Model.Repeat | Model.Single | Model.Nothing) & Model.Base;
 
-    export const Manifest = DataLib.createManifest(
+    export const { manifest, getById } = DataLib.create(
+        "DataQuestReward",
         {
             "NewBalltown.Armorer.ReceivedFish": {
                 kind: "single",
@@ -192,7 +193,5 @@ export namespace DataQuestReward {
         } satisfies Record<string, Model>,
     );
 
-    export type Id = keyof typeof Manifest;
-
-    export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataRewardPool" });
+    export type Id = DataLib.Id<typeof manifest>;
 }

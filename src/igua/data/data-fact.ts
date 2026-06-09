@@ -6,7 +6,8 @@ export namespace DataFact {
         messages: string[];
     }
 
-    export const Manifest = DataLib.createManifest(
+    export const { manifest, getById } = DataLib.create(
+        "DataFact",
         {
             NewBalltownOlives: {
                 heading: "About New Balltown Olives",
@@ -47,7 +48,5 @@ export namespace DataFact {
         } satisfies Record<string, Model>,
     );
 
-    export type Id = keyof typeof Manifest;
-
-    export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataFact" });
+    export type Id = DataLib.Id<typeof manifest>;
 }

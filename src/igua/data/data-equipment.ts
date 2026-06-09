@@ -13,365 +13,364 @@ export namespace DataEquipment {
         texture: Texture | null;
     }
 
-    export const Manifest = DataLib.createManifest(
-        {
-            JumpAtSpecialSignsRing: {
-                name: "Special Jump God Icon",
-                texture: Tx.Collectibles.Equipment.JumpSpecialSigns,
-                description: "Increase jump height at special signs",
-                buffs: (model, bonus) => model.motion.jump.bonusAtSpecialSigns += 2 * (1 + bonus),
-            },
-            PoisonRing: {
-                name: "Green Drip",
-                texture: Tx.Collectibles.Equipment.Poison0,
-                description: "Melee attacks apply poison to enemy",
-                buffs: (model, bonus) => {
-                    model.combat.melee.conditions.poison.value += Math.round(((2 + 1 * bonus) / 3) * 100);
-                    model.combat.melee.conditions.poison.maxLevel += 2 + Math.round(bonus * 1.5);
+    export const { manifest: Manifest, ids, getById } = DataLib
+        .create(
+            "DataEquipment",
+            {
+                JumpAtSpecialSignsRing: {
+                    name: "Special Jump God Icon",
+                    texture: Tx.Collectibles.Equipment.JumpSpecialSigns,
+                    description: "Increase jump height at special signs",
+                    buffs: (model, bonus) => model.motion.jump.bonusAtSpecialSigns += 2 * (1 + bonus),
                 },
-            },
-            RichesRing: {
-                name: "Luck Coin",
-                texture: Tx.Collectibles.Equipment.Wealth0,
-                description: "Reduced chance of looting nothing, bonus valuables",
-                buffs: (model, bonus) => {
-                    model.loot.tiers.nothingRerollCount += 1 + bonus;
-                    model.loot.valuables.bonus += 6 + 4 * bonus;
+                PoisonRing: {
+                    name: "Green Drip",
+                    texture: Tx.Collectibles.Equipment.Poison0,
+                    description: "Melee attacks apply poison to enemy",
+                    buffs: (model, bonus) => {
+                        model.combat.melee.conditions.poison.value += Math.round(((2 + 1 * bonus) / 3) * 100);
+                        model.combat.melee.conditions.poison.maxLevel += 2 + Math.round(bonus * 1.5);
+                    },
                 },
-            },
-            YellowRichesRing: {
-                name: "Luck Coin (Oxidized)",
-                texture: Tx.Collectibles.Equipment.Wealth1,
-                description: "Increased chance of doubled pocket item loot, bonus valuables",
-                buffs: (model, bonus) => {
-                    model.loot.pocket.bonusChance += Math.round((0.2 + Math.sqrt(bonus / 5) * 0.8) * 100);
-                    model.loot.valuables.bonus += 1 + 2 * bonus;
+                RichesRing: {
+                    name: "Luck Coin",
+                    texture: Tx.Collectibles.Equipment.Wealth0,
+                    description: "Reduced chance of looting nothing, bonus valuables",
+                    buffs: (model, bonus) => {
+                        model.loot.tiers.nothingRerollCount += 1 + bonus;
+                        model.loot.valuables.bonus += 6 + 4 * bonus;
+                    },
                 },
-            },
-            NailFile: {
-                name: "Vicious Cleat",
-                texture: Tx.Collectibles.Equipment.Melee1,
-                description: "Bonus claw physical attack",
-                // TODO would be cool if stats could be based on player attributes here...
-                buffs: (model, bonus) => model.combat.melee.clawAttack.physical += 5 + bonus * 2,
-            },
-            PatheticCage: {
-                name: "Foolish Little Cactus",
-                texture: Tx.Collectibles.Equipment.Melee0,
-                description: "Modest bonus to physical attack",
-                // TODO would be cool if stats could be based on player attributes here...
-                buffs: (model, bonus) => {
-                    bonus += Math.floor((bonus + 1) / 3) * 5;
-                    model.combat.melee.faceAttack.physical += 1 + bonus;
-                    model.combat.melee.clawAttack.physical += 1 + bonus;
+                YellowRichesRing: {
+                    name: "Luck Coin (Oxidized)",
+                    texture: Tx.Collectibles.Equipment.Wealth1,
+                    description: "Increased chance of doubled pocket item loot, bonus valuables",
+                    buffs: (model, bonus) => {
+                        model.loot.pocket.bonusChance += Math.round((0.2 + Math.sqrt(bonus / 5) * 0.8) * 100);
+                        model.loot.valuables.bonus += 1 + 2 * bonus;
+                    },
                 },
-            },
-            IqIndicator: {
-                name: "IQ Indicator",
-                texture: Tx.Collectibles.Equipment.Intelligence0,
-                description: "Raises intelligence while worn",
-                buffs: (model, bonus) => {
-                    model.attributes.intelligence += 1 + bonus;
+                NailFile: {
+                    name: "Vicious Cleat",
+                    texture: Tx.Collectibles.Equipment.Melee1,
+                    description: "Bonus claw physical attack",
+                    // TODO would be cool if stats could be based on player attributes here...
+                    buffs: (model, bonus) => model.combat.melee.clawAttack.physical += 5 + bonus * 2,
                 },
-            },
-            FactionDefenseMiner: {
-                name: "Commemorative Pillow (Generator Festival)",
-                texture: Tx.Collectibles.Equipment.DefenseMiner,
-                description: "Defends from attacks from miners",
-                buffs: (model, bonus) => {
-                    model.combat.defense.faction.miner += Math.min(100, 99 + bonus);
-                    if (bonus > 1) {
-                        model.loot.valuables.bonus += bonus - 1;
-                    }
+                PatheticCage: {
+                    name: "Foolish Little Cactus",
+                    texture: Tx.Collectibles.Equipment.Melee0,
+                    description: "Modest bonus to physical attack",
+                    // TODO would be cool if stats could be based on player attributes here...
+                    buffs: (model, bonus) => {
+                        bonus += Math.floor((bonus + 1) / 3) * 5;
+                        model.combat.melee.faceAttack.physical += 1 + bonus;
+                        model.combat.melee.clawAttack.physical += 1 + bonus;
+                    },
                 },
-            },
-            BallonLastLonger: {
-                name: "Float Kernel",
-                texture: Tx.Collectibles.Equipment.Bubbles,
-                description: "Ballons drain slower",
-                buffs: (() => {
-                    const values = [50, 67, 75, 80, 85, 90, 93, 95, 97, 98, 99];
-
-                    return (model, bonus) => {
-                        const value = values[bonus] ?? values.last;
-                        model.conditions.ballonDrainReductionFactor += value;
-                        const additionalBonuses = bonus - values.length + 1;
-                        if (additionalBonuses > 0) {
-                            model.loot.pocket.bonusChance += additionalBonuses;
-                            model.loot.valuables.bonus += Math.round(additionalBonuses / 2);
-                            model.loot.tiers.nothingRerollCount += Math.round(additionalBonuses / 3);
+                IqIndicator: {
+                    name: "IQ Indicator",
+                    texture: Tx.Collectibles.Equipment.Intelligence0,
+                    description: "Raises intelligence while worn",
+                    buffs: (model, bonus) => {
+                        model.attributes.intelligence += 1 + bonus;
+                    },
+                },
+                FactionDefenseMiner: {
+                    name: "Commemorative Pillow (Generator Festival)",
+                    texture: Tx.Collectibles.Equipment.DefenseMiner,
+                    description: "Defends from attacks from miners",
+                    buffs: (model, bonus) => {
+                        model.combat.defense.faction.miner += Math.min(100, 99 + bonus);
+                        if (bonus > 1) {
+                            model.loot.valuables.bonus += bonus - 1;
                         }
-                    };
-                })(),
-            },
-            DefensePhysicalAndPerfectBonus: {
-                name: "Def. Charm",
-                texture: Tx.Collectibles.Equipment.Brick,
-                description: "Increases physical defense, increases combat XP on perfect claw attack",
-                buffs: (() => {
-                    const values = [20, 25, 30, 32, 34, 36, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50];
+                    },
+                },
+                BallonLastLonger: {
+                    name: "Float Kernel",
+                    texture: Tx.Collectibles.Equipment.Bubbles,
+                    description: "Ballons drain slower",
+                    buffs: (() => {
+                        const values = [50, 67, 75, 80, 85, 90, 93, 95, 97, 98, 99];
 
-                    return (model, bonus) => {
-                        model.combat.defense.physical += values[bonus] ?? values.last;
-                        model.combat.melee.clawAttack.perfect.combatExperience += 15 + bonus * 5;
-                    };
-                })(),
-            },
-            StrengthUp: {
-                name: "Strong Icon",
-                texture: Tx.Collectibles.Equipment.Dumbell,
-                description: "Increases strength",
-                buffs: (model, bonus) => model.attributes.strength += 1 + bonus,
-            },
-            HealthUp: {
-                name: "Healthy Icon",
-                texture: Tx.Collectibles.Equipment.Heart,
-                description: "Increases health",
-                buffs: (model, bonus) => model.attributes.health += 5 + bonus * 2,
-            },
-            WetnessCapacityUp: {
-                name: "Sponge",
-                texture: Tx.Collectibles.Equipment.Sponge,
-                description: "Increases maximum wetness",
-                buffs: (model, bonus) => {
-                    model.conditions.wetnessMaxIncreaseFactor += (1 + bonus) * 100;
-                    model.experience.bonusFactorWhileWet.combat += (1 + bonus) * 50;
-                    model.experience.bonusFactorWhileWet.jump += (1 + bonus) * 50;
+                        return (model, bonus) => {
+                            const value = values[bonus] ?? values.last;
+                            model.conditions.ballonDrainReductionFactor += value;
+                            const additionalBonuses = bonus - values.length + 1;
+                            if (additionalBonuses > 0) {
+                                model.loot.pocket.bonusChance += additionalBonuses;
+                                model.loot.valuables.bonus += Math.round(additionalBonuses / 2);
+                                model.loot.tiers.nothingRerollCount += Math.round(additionalBonuses / 3);
+                            }
+                        };
+                    })(),
                 },
-            },
-            PoisonResistance: {
-                name: "Vaccine Shoe",
-                texture: Tx.Collectibles.Equipment.VaccinatedShoe,
-                description: "Increases resistance to poison, poison damage is applied more slowly",
-                buffs: (() => {
-                    const maxValues = [50, 75, 95, 110, 120, 129, 137, 144, 150];
+                DefensePhysicalAndPerfectBonus: {
+                    name: "Def. Charm",
+                    texture: Tx.Collectibles.Equipment.Brick,
+                    description: "Increases physical defense, increases combat XP on perfect claw attack",
+                    buffs: (() => {
+                        const values = [20, 25, 30, 32, 34, 36, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50];
 
-                    const rateValues = [25, 40, 50, 60, 70, 75, 77, 79, 80];
-                    for (let i = 81; i <= 99; i++) {
-                        rateValues.push(i);
-                    }
+                        return (model, bonus) => {
+                            model.combat.defense.physical += values[bonus] ?? values.last;
+                            model.combat.melee.clawAttack.perfect.combatExperience += 15 + bonus * 5;
+                        };
+                    })(),
+                },
+                StrengthUp: {
+                    name: "Strong Icon",
+                    texture: Tx.Collectibles.Equipment.Dumbell,
+                    description: "Increases strength",
+                    buffs: (model, bonus) => model.attributes.strength += 1 + bonus,
+                },
+                HealthUp: {
+                    name: "Healthy Icon",
+                    texture: Tx.Collectibles.Equipment.Heart,
+                    description: "Increases health",
+                    buffs: (model, bonus) => model.attributes.health += 5 + bonus * 2,
+                },
+                WetnessCapacityUp: {
+                    name: "Sponge",
+                    texture: Tx.Collectibles.Equipment.Sponge,
+                    description: "Increases maximum wetness",
+                    buffs: (model, bonus) => {
+                        model.conditions.wetnessMaxIncreaseFactor += (1 + bonus) * 100;
+                        model.experience.bonusFactorWhileWet.combat += (1 + bonus) * 50;
+                        model.experience.bonusFactorWhileWet.jump += (1 + bonus) * 50;
+                    },
+                },
+                PoisonResistance: {
+                    name: "Vaccine Shoe",
+                    texture: Tx.Collectibles.Equipment.VaccinatedShoe,
+                    description: "Increases resistance to poison, poison damage is applied more slowly",
+                    buffs: (() => {
+                        const maxValues = [50, 75, 95, 110, 120, 129, 137, 144, 150];
 
-                    return (model, bonus) => {
-                        model.conditions.poisonMaxIncreaseFactor += maxValues[bonus] ?? maxValues.last;
-                        model.conditions.poisonRateReductionFactor += rateValues[bonus] ?? rateValues.last;
-                        model.loot.pocket.bonusChance += bonus > 5 ? (10 + (bonus - 6) * 3) : 0;
-                    };
-                })(),
-            },
-            MusicTempoUp: {
-                name: "Artifact of Allegro",
-                texture: Tx.Collectibles.Equipment.Spedometer,
-                description: "World feels faster",
-                buffs: (model, bonus) => model.audio.musicTempoAdjustmentFactor += 10 * (bonus + 1),
-            },
-            WalkTopSpeedAndMusicTempoDown: {
-                name: "Anvilled Shoe",
-                texture: Tx.Collectibles.Equipment.Anvil,
-                description: "World feels slower, also move slower",
-                buffs: (model, bonus) => {
-                    model.audio.musicTempoAdjustmentFactor -= 10 * (bonus + 1);
-                    model.motion.walk.topSpeedIncreaseFactor -= 20 * (bonus + 1);
-                },
-            },
-            ApprovalIndianaMerchants: {
-                name: "Heel of Indiana Merchants",
-                texture: Tx.Collectibles.Equipment.IndianaShoe,
-                description: "Indiana merchants recognize you as worthy",
-                buffs: (model, bonus) => {
-                    model.approval.indianaMerchants = 100 + bonus * 100;
-                },
-            },
-            SceneChangeErrorChanceUp: {
-                name: "Error Sandal",
-                texture: Tx.Collectibles.Equipment.ErrorSandal,
-                description: "Increased chance of error while using doors",
-                buffs: (model, bonus) => {
-                    model.esoteric.sceneChangeErrorChance += 1 + bonus;
-                },
-            },
-            RecognizeSong: {
-                name: "Audiophile's Shoe",
-                texture: Tx.Collectibles.Equipment.RecognizeSong,
-                description: "Wearer can recall song titles",
-                buffs: (model, bonus) => {
-                    model.esoteric.recognizeSongFactor += 100 + bonus * 100;
-                },
-            },
-            DoubleJump: {
-                name: "Angel's Charm",
-                texture: Tx.Collectibles.Equipment.Angel,
-                description: "Enable midair jumps, but at a cost",
-                buffs: (model, bonus) => {
-                    model.esoteric.lgbtFactor += 50 + bonus * 25;
-                    model.attributes.strength -= 5 + bonus;
-                    model.esoteric.goodEndingChance += Math.min(95, Math.pow(2, bonus));
+                        const rateValues = [25, 40, 50, 60, 70, 75, 77, 79, 80];
+                        for (let i = 81; i <= 99; i++) {
+                            rateValues.push(i);
+                        }
 
-                    if (bonus === 0) {
-                        model.motion.jump.atMaxHealthMidairCount += 1;
-                        return;
-                    }
+                        return (model, bonus) => {
+                            model.conditions.poisonMaxIncreaseFactor += maxValues[bonus] ?? maxValues.last;
+                            model.conditions.poisonRateReductionFactor += rateValues[bonus] ?? rateValues.last;
+                            model.loot.pocket.bonusChance += bonus > 5 ? (10 + (bonus - 6) * 3) : 0;
+                        };
+                    })(),
+                },
+                MusicTempoUp: {
+                    name: "Artifact of Allegro",
+                    texture: Tx.Collectibles.Equipment.Spedometer,
+                    description: "World feels faster",
+                    buffs: (model, bonus) => model.audio.musicTempoAdjustmentFactor += 10 * (bonus + 1),
+                },
+                WalkTopSpeedAndMusicTempoDown: {
+                    name: "Anvilled Shoe",
+                    texture: Tx.Collectibles.Equipment.Anvil,
+                    description: "World feels slower, also move slower",
+                    buffs: (model, bonus) => {
+                        model.audio.musicTempoAdjustmentFactor -= 10 * (bonus + 1);
+                        model.motion.walk.topSpeedIncreaseFactor -= 20 * (bonus + 1);
+                    },
+                },
+                ApprovalIndianaMerchants: {
+                    name: "Heel of Indiana Merchants",
+                    texture: Tx.Collectibles.Equipment.IndianaShoe,
+                    description: "Indiana merchants recognize you as worthy",
+                    buffs: (model, bonus) => {
+                        model.approval.indianaMerchants = 100 + bonus * 100;
+                    },
+                },
+                SceneChangeErrorChanceUp: {
+                    name: "Error Sandal",
+                    texture: Tx.Collectibles.Equipment.ErrorSandal,
+                    description: "Increased chance of error while using doors",
+                    buffs: (model, bonus) => {
+                        model.esoteric.sceneChangeErrorChance += 1 + bonus;
+                    },
+                },
+                RecognizeSong: {
+                    name: "Audiophile's Shoe",
+                    texture: Tx.Collectibles.Equipment.RecognizeSong,
+                    description: "Wearer can recall song titles",
+                    buffs: (model, bonus) => {
+                        model.esoteric.recognizeSongFactor += 100 + bonus * 100;
+                    },
+                },
+                DoubleJump: {
+                    name: "Angel's Charm",
+                    texture: Tx.Collectibles.Equipment.Angel,
+                    description: "Enable midair jumps, but at a cost",
+                    buffs: (model, bonus) => {
+                        model.esoteric.lgbtFactor += 50 + bonus * 25;
+                        model.attributes.strength -= 5 + bonus;
+                        model.esoteric.goodEndingChance += Math.min(95, Math.pow(2, bonus));
 
-                    const jumpBonus = Math.min(3, bonus);
+                        if (bonus === 0) {
+                            model.motion.jump.atMaxHealthMidairCount += 1;
+                            return;
+                        }
 
-                    model.motion.jump.midairCount += jumpBonus;
-                    model.attributes.health -= jumpBonus * 5;
-                },
-            },
-            Cigarette: {
-                name: "Smoky Charm",
-                texture: Tx.Collectibles.Equipment.Cigarette,
-                description: "Increased elegance and pity at the casino",
-                buffs: (model, bonus) => {
-                    model.cosmetic.cigaretteSmoking += 100;
-                    model.wallet.bonusCasinoPity += 1 + bonus;
-                },
-            },
-            HackerRemnant: {
-                name: "Hacker's Remnant",
-                texture: Tx.Collectibles.Equipment.Stupid,
-                description: "Trace of online cheating, bizarre effects",
-                buffs: (() => {
-                    const rng = new PseudoRng();
-                    return (model, bonus) => {
-                        rng.seed = 77777777777 + bonus * 696969;
-                        model.audio.musicTempoAdjustmentFactor += rng.intc(-10, 10);
-                        model.attributes.health += rng.intc(-1, 1);
-                        model.attributes.intelligence += rng.intc(-1, 1);
-                        model.attributes.strength += rng.intc(-1, 1);
-                        model.motion.walk.topSpeedIncreaseFactor += rng.intc(-20, 3);
-                        model.esoteric.goodEndingChance += rng.intc(4);
-                    };
-                })(),
-            },
-            Sparkle: {
-                name: "Legendary Charm",
-                texture: Tx.Collectibles.Equipment.Hubol,
-                description: "Charm given to the devoted",
-                buffs: (model) => {
-                    model.cosmetic.sparkling += 100;
-                },
-            },
-            NightVision: {
-                name: "Night Vision Shoe",
-                texture: null,
-                description: "Improves vision in dark spaces",
-                buffs: (model, bonus) => {
-                    model.esoteric.nightVisionLevel += 1 + bonus;
-                },
-            },
-            Robotic: {
-                name: "Nerd's True Charm",
-                texture: null,
-                description: "Finally! Become a robot",
-                buffs: (model, bonus) => {
-                    model.cosmetic.roboticism += 100;
-                },
-            },
-            PocketSlot: {
-                name: "Convenient Shoe",
-                texture: null,
-                description: "Grants a convenient extra pocket for items. If you take it off, your items will be lost!",
-                buffs: (model, bonus) => {
-                    model.pocket.bonusSlotCount += 1 + bonus;
-                },
-            },
-            BlueCrystalSock: {
-                name: "Crystal Sock (Blue)",
-                texture: Tx.Collectibles.Equipment.BlueCrystalSock,
-                description: "Significantly increased health, at the cost of strength.",
-                buffs: (() => {
-                    const healthValues = [10, 15, 18, 20];
-                    const strengthValues = [-2, -1];
+                        const jumpBonus = Math.min(3, bonus);
 
-                    return (model, bonus) => {
-                        model.attributes.health += (healthValues[bonus] ?? healthValues.last)
-                            + Math.max(0, bonus - healthValues.length) * 2;
-                        model.attributes.strength += strengthValues[bonus] ?? strengthValues.last;
-                    };
-                })(),
-            },
-            SpellHotPineCone: {
-                name: "Hot Pine Seed Pack",
-                texture: null,
-                description: "Chuck hot, hot pine cones onto flat surfaces.",
-                buffs: (model, bonus) => {
-                    model.combat.spells.equipped.HotPineCone += 1 + bonus;
-                    model.combat.spells.maxPower += 20;
-                    model.combat.spells.requirements.minPocketItemsCount += 1;
-                    model.combat.spells.cost.pocketItemChance += Math.max(10, 60 - bonus * 20);
+                        model.motion.jump.midairCount += jumpBonus;
+                        model.attributes.health -= jumpBonus * 5;
+                    },
                 },
-            },
-            MeleeOverheat: {
-                name: "Hot Sock",
-                texture: null,
-                description: "Warming sock. Melee attacks cause enemies to overheat.",
-                buffs: (() => {
-                    const values = [20, 35, 45, 50];
-                    const damages = [25, 40, 60];
+                Cigarette: {
+                    name: "Smoky Charm",
+                    texture: Tx.Collectibles.Equipment.Cigarette,
+                    description: "Increased elegance and pity at the casino",
+                    buffs: (model, bonus) => {
+                        model.cosmetic.cigaretteSmoking += 100;
+                        model.wallet.bonusCasinoPity += 1 + bonus;
+                    },
+                },
+                HackerRemnant: {
+                    name: "Hacker's Remnant",
+                    texture: Tx.Collectibles.Equipment.Stupid,
+                    description: "Trace of online cheating, bizarre effects",
+                    buffs: (() => {
+                        const rng = new PseudoRng();
+                        return (model, bonus) => {
+                            rng.seed = 77777777777 + bonus * 696969;
+                            model.audio.musicTempoAdjustmentFactor += rng.intc(-10, 10);
+                            model.attributes.health += rng.intc(-1, 1);
+                            model.attributes.intelligence += rng.intc(-1, 1);
+                            model.attributes.strength += rng.intc(-1, 1);
+                            model.motion.walk.topSpeedIncreaseFactor += rng.intc(-20, 3);
+                            model.esoteric.goodEndingChance += rng.intc(4);
+                        };
+                    })(),
+                },
+                Sparkle: {
+                    name: "Legendary Charm",
+                    texture: Tx.Collectibles.Equipment.Hubol,
+                    description: "Charm given to the devoted",
+                    buffs: (model) => {
+                        model.cosmetic.sparkling += 100;
+                    },
+                },
+                NightVision: {
+                    name: "Night Vision Shoe",
+                    texture: null,
+                    description: "Improves vision in dark spaces",
+                    buffs: (model, bonus) => {
+                        model.esoteric.nightVisionLevel += 1 + bonus;
+                    },
+                },
+                Robotic: {
+                    name: "Nerd's True Charm",
+                    texture: null,
+                    description: "Finally! Become a robot",
+                    buffs: (model, bonus) => {
+                        model.cosmetic.roboticism += 100;
+                    },
+                },
+                PocketSlot: {
+                    name: "Convenient Shoe",
+                    texture: null,
+                    description:
+                        "Grants a convenient extra pocket for items. If you take it off, your items will be lost!",
+                    buffs: (model, bonus) => {
+                        model.pocket.bonusSlotCount += 1 + bonus;
+                    },
+                },
+                BlueCrystalSock: {
+                    name: "Crystal Sock (Blue)",
+                    texture: Tx.Collectibles.Equipment.BlueCrystalSock,
+                    description: "Significantly increased health, at the cost of strength.",
+                    buffs: (() => {
+                        const healthValues = [10, 15, 18, 20];
+                        const strengthValues = [-2, -1];
 
-                    return (model, bonus) => {
-                        model.combat.melee.conditions.overheat.value += (values[bonus] ?? values.last)
-                            + Math.max(0, bonus - values.length) * 3;
-                        model.combat.melee.conditions.overheat.damage += (damages[bonus] ?? damages.last)
-                            + Math.max(0, bonus - damages.length) * 10;
-                    };
-                })(),
-            },
-            OverheatResistance0: {
-                name: "Ice Cube",
-                texture: null,
-                description: "A cool, cool cube. Increases resistance to overheat.",
-                buffs: (model, bonus) => {
-                    model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
+                        return (model, bonus) => {
+                            model.attributes.health += (healthValues[bonus] ?? healthValues.last)
+                                + Math.max(0, bonus - healthValues.length) * 2;
+                            model.attributes.strength += strengthValues[bonus] ?? strengthValues.last;
+                        };
+                    })(),
                 },
-            },
-            OverheatResistance1: {
-                name: "Aloe Drops",
-                texture: null,
-                description: "Cooling, heavenly drops. Increases resistance to overheat.",
-                buffs: (model, bonus) => {
-                    model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
+                SpellHotPineCone: {
+                    name: "Hot Pine Seed Pack",
+                    texture: null,
+                    description: "Chuck hot, hot pine cones onto flat surfaces.",
+                    buffs: (model, bonus) => {
+                        model.combat.spells.equipped.HotPineCone += 1 + bonus;
+                        model.combat.spells.maxPower += 20;
+                        model.combat.spells.requirements.minPocketItemsCount += 1;
+                        model.combat.spells.cost.pocketItemChance += Math.max(10, 60 - bonus * 20);
+                    },
                 },
-            },
-            OverheatResistance2: {
-                name: "Fishnets",
-                texture: null,
-                description: "Breezy legwear. Increases resistance to overheat.",
-                buffs: (model, bonus) => {
-                    model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
-                },
-            },
-            OverheatResistance3: {
-                name: "Cooling Bandage",
-                texture: null,
-                description: "Medical cooling product. Increases resistance to overheat.",
-                buffs: (model, bonus) => {
-                    model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
-                },
-            },
-            SpellOpenFlopBlindBoxes: {
-                name: "Buzzsaw",
-                texture: null,
-                description: "Professionally open your Flop blind boxes.",
-                buffs: (model, bonus) => {
-                    model.combat.spells.equipped.OpenFlopBlindBoxes += 1 + bonus;
-                    model.combat.spells.maxPower += Math.max(1, Math.round(60 * Math.pow(0.5, bonus)));
-                },
-            },
-            __Fallback__: {
-                name: "???",
-                texture: null,
-                description: "If you are reading this, it is an error",
-                buffs: RpgPlayerBuffs.voidMutator,
-            },
-        } satisfies Record<string, Model>,
-    );
+                MeleeOverheat: {
+                    name: "Hot Sock",
+                    texture: null,
+                    description: "Warming sock. Melee attacks cause enemies to overheat.",
+                    buffs: (() => {
+                        const values = [20, 35, 45, 50];
+                        const damages = [25, 40, 60];
 
-    export type Id = keyof typeof Manifest;
+                        return (model, bonus) => {
+                            model.combat.melee.conditions.overheat.value += (values[bonus] ?? values.last)
+                                + Math.max(0, bonus - values.length) * 3;
+                            model.combat.melee.conditions.overheat.damage += (damages[bonus] ?? damages.last)
+                                + Math.max(0, bonus - damages.length) * 10;
+                        };
+                    })(),
+                },
+                OverheatResistance0: {
+                    name: "Ice Cube",
+                    texture: null,
+                    description: "A cool, cool cube. Increases resistance to overheat.",
+                    buffs: (model, bonus) => {
+                        model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
+                    },
+                },
+                OverheatResistance1: {
+                    name: "Aloe Drops",
+                    texture: null,
+                    description: "Cooling, heavenly drops. Increases resistance to overheat.",
+                    buffs: (model, bonus) => {
+                        model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
+                    },
+                },
+                OverheatResistance2: {
+                    name: "Fishnets",
+                    texture: null,
+                    description: "Breezy legwear. Increases resistance to overheat.",
+                    buffs: (model, bonus) => {
+                        model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
+                    },
+                },
+                OverheatResistance3: {
+                    name: "Cooling Bandage",
+                    texture: null,
+                    description: "Medical cooling product. Increases resistance to overheat.",
+                    buffs: (model, bonus) => {
+                        model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
+                    },
+                },
+                SpellOpenFlopBlindBoxes: {
+                    name: "Buzzsaw",
+                    texture: null,
+                    description: "Professionally open your Flop blind boxes.",
+                    buffs: (model, bonus) => {
+                        model.combat.spells.equipped.OpenFlopBlindBoxes += 1 + bonus;
+                        model.combat.spells.maxPower += Math.max(1, Math.round(60 * Math.pow(0.5, bonus)));
+                    },
+                },
+                __Fallback__: {
+                    name: "???",
+                    texture: null,
+                    description: "If you are reading this, it is an error",
+                    buffs: RpgPlayerBuffs.voidMutator,
+                },
+            } satisfies Record<string, Model>,
+        );
 
-    export const ids = Object.keys(Manifest) as Id[];
-
-    export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataEquipment" });
+    export type Id = DataLib.Id<typeof Manifest>;
 
     export const getName = (id: Id, level: Integer) =>
         DataEquipment.getById(id).name + (level < 2 ? "" : (" Lvl." + level));

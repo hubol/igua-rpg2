@@ -9,7 +9,8 @@ export namespace DataIdol {
         hudText: string;
     }
 
-    export const Manifest = DataLib.createManifest(
+    export const { manifest, getById, filter, find, map } = DataLib.create(
+        "DataIdol",
         {
             Yellow: {
                 buffs: (model) => {
@@ -45,15 +46,11 @@ export namespace DataIdol {
             __Fallback__: {
                 buffs: () => {},
                 hudText: "Power of the idol is a bug",
-                keyItemId: "__Fallback__",
+                // TODO idk feels weird
+                keyItemId: "IllegalMovie",
             },
         } satisfies Record<string, Model>,
     );
 
-    export type Id = keyof typeof Manifest;
-
-    export const getById = DataLib.createGetById({
-        manifest: Manifest,
-        namespace: "DataIdol",
-    });
+    export type Id = DataLib.Id<typeof manifest>;
 }

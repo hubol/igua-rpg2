@@ -9,7 +9,8 @@ export namespace DataRespawnConfiguration {
         checkpointName: string;
     }
 
-    export const Manifest = DataLib.createManifest(
+    export const { manifest, getById } = DataLib.create(
+        "DataRespawnConfiguration",
         {
             Indiana: {
                 sceneName: scnWorldMap.name,
@@ -26,9 +27,7 @@ export namespace DataRespawnConfiguration {
         } satisfies Record<string, Model>,
     );
 
-    export type Id = keyof typeof Manifest;
-
-    export const getById = DataLib.createGetById({ manifest: Manifest, namespace: "DataRespawnConfiguration" });
+    export type Id = DataLib.Id<typeof manifest>;
 
     export function getSceneChanger(respawnConfigurationId: Id) {
         return SceneChanger.create(getById(respawnConfigurationId));
