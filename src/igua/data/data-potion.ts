@@ -46,7 +46,7 @@ export namespace DataPotion {
         return new Set(attributes);
     }
 
-    export const { manifest: Manifest, find, filter, getById, ids: Ids } = DataLib.create(
+    export const { manifest, find, filter, getById, ids: Ids } = DataLib.create(
         "DataPotion",
         {
             AttributeHealthUp: {
@@ -309,7 +309,7 @@ export namespace DataPotion {
         } satisfies Record<string, Model>,
     );
 
-    export type Id = DataLib.Id<typeof Manifest>;
+    export type Id = DataLib.Id<typeof manifest>;
 
     export function usePotion(id: Id, target: MxnRpgStatus) {
         const sound = getById(id).sound;

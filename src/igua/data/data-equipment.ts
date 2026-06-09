@@ -13,7 +13,7 @@ export namespace DataEquipment {
         texture: Texture | null;
     }
 
-    export const { manifest: Manifest, ids, getById } = DataLib
+    export const { manifest, ids, getById } = DataLib
         .create(
             "DataEquipment",
             {
@@ -370,7 +370,7 @@ export namespace DataEquipment {
             } satisfies Record<string, Model>,
         );
 
-    export type Id = DataLib.Id<typeof Manifest>;
+    export type Id = DataLib.Id<typeof manifest>;
 
     export const getName = (id: Id, level: Integer) =>
         DataEquipment.getById(id).name + (level < 2 ? "" : (" Lvl." + level));

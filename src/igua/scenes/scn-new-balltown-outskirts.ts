@@ -54,7 +54,7 @@ function enrichFarmer(lvl: LvlType.NewBalltownOutskirts) {
         if (!Rpg.flags.outskirts.farmer.hasBagOfSeeds) {
             yield* show(
                 "I need to jump-start my farming career.",
-                `But I need a ${DataKeyItem.Manifest.BagOfSeeds.name}...`,
+                `But I need a ${DataKeyItem.manifest.BagOfSeeds.name}...`,
             );
 
             const offer = yield* DramaInventory.askWhichAndRemoveOne([{ kind: "key_item", id: "BagOfSeeds" }]);
@@ -186,7 +186,7 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
         }
 
         if (Rpg.inventory.keyItems.has("UpgradedPickaxe", 1)) {
-            yield* show(`Oh! I see that you have the ${DataKeyItem.Manifest.UpgradedPickaxe.name}!`);
+            yield* show(`Oh! I see that you have the ${DataKeyItem.manifest.UpgradedPickaxe.name}!`);
             if (yield* ask("Will you give it to me? You can have any valuables I mine")) {
                 yield* DramaInventory.removeCount({ kind: "key_item", id: "UpgradedPickaxe" }, 1);
                 yield* show("...?!", "Thank you so much!", "I will get right to work.");

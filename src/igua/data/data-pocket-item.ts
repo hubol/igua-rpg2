@@ -8,7 +8,7 @@ export namespace DataPocketItem {
         texture: Texture;
     }
 
-    export const { manifest: Manifest, filter, getById, ids } = DataLib.create(
+    export const { manifest, filter, getById, ids } = DataLib.create(
         "DataPocketItem",
         {
             BallFruitTypeA: { name: "Ball Fruit Type A", texture: Tx.Collectibles.BallFruitTypeA },
@@ -25,5 +25,5 @@ export namespace DataPocketItem {
         } satisfies Record<string, Model>,
     );
 
-    export type Id = DataLib.Id<typeof Manifest>;
+    export type Id = DataLib.Id<typeof manifest>;
 }

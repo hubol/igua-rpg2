@@ -349,7 +349,7 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
 
     Cutscene.play(function* () {
         yield* show(
-            `To make the delivery more challenging, I am placing bombs along the route to ${DataNpcPersona.Manifest.NewBalltownArmorer.name}'s place.`,
+            `To make the delivery more challenging, I am placing bombs along the route to ${DataNpcPersona.manifest.NewBalltownArmorer.name}'s place.`,
         );
 
         yield sleep(500);

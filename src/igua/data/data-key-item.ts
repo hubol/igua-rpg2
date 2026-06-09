@@ -9,7 +9,7 @@ export namespace DataKeyItem {
         texture: Texture | null;
     }
 
-    export const { manifest: Manifest, getById } = DataLib.create(
+    export const { manifest, getById } = DataLib.create(
         "DataKeyItem",
         {
             BagOfSeeds: {
@@ -96,5 +96,5 @@ export namespace DataKeyItem {
         } satisfies Record<string, Model>,
     );
 
-    export type Id = DataLib.Id<typeof Manifest>;
+    export type Id = DataLib.Id<typeof manifest>;
 }

@@ -67,11 +67,11 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
                 "You want a fish delivered? That's great! Who wants a fish?",
                 Rpg.flags.newBalltown.armorer.toldPlayerAboutDesireForFish
                     && !deliveries.armorer
-                    ? DataNpcPersona.Manifest.NewBalltownArmorer.name
+                    ? DataNpcPersona.manifest.NewBalltownArmorer.name
                     : null,
                 Rpg.flags.greatTower.efficientHome.ringer.toldPlayerAboutDesireForFish
                     && !deliveries.ringer
-                    ? DataNpcPersona.Manifest.CloudHouseRinger.name
+                    ? DataNpcPersona.manifest.CloudHouseRinger.name
                     : null,
                 "I don't know",
             );
@@ -83,7 +83,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
 
             if (fishRecipient === 1) {
                 yield* show(
-                    `${DataNpcPersona.Manifest.CloudHouseRinger.name} in the cloud house apartment?`,
+                    `${DataNpcPersona.manifest.CloudHouseRinger.name} in the cloud house apartment?`,
                     "He's a bit unusual... Maybe a fish could improve him.",
                 );
 
@@ -101,7 +101,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
 
             if (fishRecipient === 0) {
                 yield* show(
-                    `${DataNpcPersona.Manifest.NewBalltownArmorer.name}...? Oh yeah, he had a fishtank!`,
+                    `${DataNpcPersona.manifest.NewBalltownArmorer.name}...? Oh yeah, he had a fishtank!`,
                     "Since he's in town, let's deliver the fish together!",
                 );
                 if (yield* ask("Ready to make the delivery with me?")) {
