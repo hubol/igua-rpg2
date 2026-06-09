@@ -1,11 +1,11 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 2512,
+  "width": 2552,
   "height": 648,
   "offsetX": 0,
   "offsetY": 0,
   "backgroundColor": "#408000",
-  "values": {"Terrain Color": "#000000"},
+  "values": {"Terrain Color": "#ab21c1"},
   "layers": [
     {
       "name": "MarkerEntities",
@@ -14,9 +14,21 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 314,
+      "gridCellsX": 319,
       "gridCellsY": 81,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 1248,
+          "y": 224,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "FlowerMarker", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",
@@ -25,9 +37,34 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 314,
+      "gridCellsX": 319,
       "gridCellsY": 81,
-      "entities": []
+      "entities": [
+        {
+          "name": "GateHorizontal",
+          "id": 0,
+          "_eid": "97593426",
+          "x": 2504,
+          "y": 480,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "flippedX": false,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromMountFlopRight", "name": "", "depth": 0}
+        },
+        {
+          "name": "GateHorizontal",
+          "id": 3,
+          "_eid": "97593426",
+          "x": -40,
+          "y": 480,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "flippedX": true,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromMountFlopLeft", "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "FrontDecals",
@@ -36,7 +73,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 314,
+      "gridCellsX": 319,
       "gridCellsY": 81,
       "decals": [],
       "folder": "../textures"
@@ -48,7 +85,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 314,
+      "gridCellsX": 319,
       "gridCellsY": 81,
       "entities": []
     },
@@ -59,7 +96,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 314,
+      "gridCellsX": 319,
       "gridCellsY": 81,
       "entities": [
         {
@@ -82,7 +119,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 314,
+      "gridCellsX": 319,
       "gridCellsY": 81,
       "entities": []
     },
@@ -93,7 +130,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 314,
+      "gridCellsX": 319,
       "gridCellsY": 81,
       "decals": [],
       "folder": "../textures"
@@ -105,7 +142,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 314,
+      "gridCellsX": 319,
       "gridCellsY": 81,
       "entities": []
     },
@@ -116,7 +153,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 314,
+      "gridCellsX": 319,
       "gridCellsY": 81,
       "decals": [],
       "folder": "../textures"
@@ -128,20 +165,20 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 314,
+      "gridCellsX": 319,
       "gridCellsY": 81,
       "entities": [
         {
           "name": "Block",
           "id": 0,
           "_eid": "93117141",
-          "x": 0,
+          "x": -200,
           "y": 608,
           "width": 3000,
           "height": 56,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#ab21c1",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -154,7 +191,7 @@
           "height": 96,
           "flippedX": true,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#ab21c1",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -167,7 +204,7 @@
           "height": 96,
           "flippedX": true,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#ab21c1",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -180,7 +217,7 @@
           "height": 96,
           "flippedX": true,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#ab21c1",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -193,7 +230,7 @@
           "height": 40,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#ab21c1",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -217,7 +254,7 @@
           "height": 96,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#ab21c1",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -241,7 +278,7 @@
           "height": 96,
           "flippedX": false,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#ab21c1",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -263,7 +300,7 @@
           "height": 96,
           "flippedX": false,
           "flippedY": false,
-          "tint": "#000000",
+          "tint": "#ab21c1",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -284,7 +321,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 314,
+      "gridCellsX": 319,
       "gridCellsY": 81,
       "entities": []
     },
@@ -295,9 +332,22 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 314,
+      "gridCellsX": 319,
       "gridCellsY": 81,
-      "decals": [],
+      "decals": [
+        {
+          "x": 1368,
+          "y": 752,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ab21c1",
+          "texture": "world map/mountain 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -307,7 +357,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 314,
+      "gridCellsX": 319,
       "gridCellsY": 81,
       "decals": [],
       "folder": "../textures"

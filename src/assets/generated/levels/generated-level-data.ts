@@ -3681,21 +3681,25 @@ export const Lvl = {
     };
   },
   MountFlop: (): LvlType.MountFlop => {
-    applyLevel({ width: 2512, height: 648, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    applyLevel({ width: 2552, height: 648, backgroundTint: 0x408000, terrainTint: 0xab21c1 });
     return {
-      Block: e(r["Block"], { x: 0, y: 608, width: 3000, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope: e(r["Slope"], { x: 2144, y: 512, width: 256, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_1: e(r["Slope"], { x: 1888, y: 416, width: 256, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_2: e(r["Slope"], { x: 1376, y: 224, width: 256, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_1: e(r["Block"], { x: 1120, y: 224, width: 256, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      WorldMapMountain0: d(Tx.WorldMap.Mountain0, { x: 1368, y: 752, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xab21c1 }, "BackgroundDecals"),
+      Block: e(r["Block"], { x: -200, y: 608, width: 3000, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 2144, y: 512, width: 256, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 1888, y: 416, width: 256, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Slope_2: e(r["Slope"], { x: 1376, y: 224, width: 256, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 1120, y: 224, width: 256, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
       PipeSlope: e(r["PipeSlope"], { x: 736, y: 272, width: 256, height: 96, flippedX: false, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
-      Block_2: e(r["Block"], { x: 608, y: 416, width: 1280, height: 96, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 608, y: 416, width: 1280, height: 96, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
       PipeSlope_1: e(r["PipeSlope"], { x: 248, y: 456, width: 256, height: 96, flippedX: false, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
-      Slope_3: e(r["Slope"], { x: 352, y: 416, width: 256, height: 96, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_3: e(r["Slope"], { x: 352, y: 416, width: 256, height: 96, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
       Pipe: e(r["Pipe"], { x: 232, y: 552, width: 16, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
-      Slope_4: e(r["Slope"], { x: 864, y: 224, width: 256, height: 96, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_4: e(r["Slope"], { x: 864, y: 224, width: 256, height: 96, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
       Pipe_1: e(r["Pipe"], { x: 720, y: 368, width: 16, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
       Player: e(r["Player"], { x: 2448, y: 608, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: 2504, y: 480, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopRight", name: "", depth: 0 } }, "RegionEntities"),
+      GateHorizontal_1: e(r["GateHorizontal"], { x: -40, y: 480, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopLeft", name: "", depth: 0 } }, "RegionEntities"),
+      FlowerMarker: e(r["Marker"], { x: 1248, y: 224, values: { name: "FlowerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   NewBalltownArmorer: (): LvlType.NewBalltownArmorer => {
@@ -9262,6 +9266,16 @@ export const Lvl = {
       FoliageVine0: d(Tx.Foliage.Vine0, { x: 1392, y: 429, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e9f5a }, "BackgroundDecals"),
       FoliageStem16: d(Tx.Foliage.Stem16, { x: 1392, y: 447, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e9f5a }, "BackgroundDecals"),
       ShapesConfetti18x8_17: d(Tx.Shapes.Confetti18x8, { x: 1370, y: 561, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
+      WorldMapMountain0: d(Tx.WorldMap.Mountain0, { x: 1368, y: 752, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xab21c1 }, "BackgroundDecals"),
+      WorldMapTree1_10: d(Tx.WorldMap.Tree1, { x: 1361, y: 705, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xf0d029 }, "BackgroundDecals"),
+      WorldMapTree0_18: d(Tx.WorldMap.Tree0, { x: 1350, y: 732, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xf0d029 }, "BackgroundDecals"),
+      WorldMapTree0_19: d(Tx.WorldMap.Tree0, { x: 1329, y: 733, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xf0d029 }, "BackgroundDecals"),
+      StoneRockSmallShaded1_13: d(Tx.Stone.RockSmallShaded1, { x: 1342, y: 744, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      StoneRockSmallShaded1_14: d(Tx.Stone.RockSmallShaded1, { x: 1321, y: 751, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      TerrainGrassTall3px: d(Tx.Terrain.Grass.Tall3px, { x: 1294, y: 781, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
+      TerrainGrassTall3px_1: d(Tx.Terrain.Grass.Tall3px, { x: 1327, y: 786, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
+      TerrainGrassTall3px_2: d(Tx.Terrain.Grass.Tall3px, { x: 1442, y: 783, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
+      TerrainGrassTall3px_3: d(Tx.Terrain.Grass.Tall3px, { x: 1406, y: 789, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe23c27 }, "BackgroundDecals"),
       Slope: e(r["Slope"], { x: 520, y: 1160, width: 96, height: 48, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Slope_1: e(r["Slope"], { x: 616, y: 1112, width: 96, height: 48, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Slope_2: e(r["Slope"], { x: 712, y: 1064, width: 96, height: 48, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
@@ -9305,8 +9319,8 @@ export const Lvl = {
       Block_29: e(r["Block"], { x: 1967, y: 792, width: 112, height: 88, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       Block_30: e(r["Block"], { x: 1312, y: 504, width: 120, height: 80, values: { name: "", depth: 0, visible: false }, tint: 0x000000 }, "TerrainEntities"),
       StoneRock0_10: d(Tx.Stone.Rock0, { x: 881, y: 145, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      TerrainGrassTall3px: d(Tx.Terrain.Grass.Tall3px, { x: 777, y: 748, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
-      TerrainGrassTall3px_1: d(Tx.Terrain.Grass.Tall3px, { x: 676, y: 747, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
+      TerrainGrassTall3px_4: d(Tx.Terrain.Grass.Tall3px, { x: 777, y: 748, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
+      TerrainGrassTall3px_5: d(Tx.Terrain.Grass.Tall3px, { x: 676, y: 747, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
       ShapesConfetti18x8_18: d(Tx.Shapes.Confetti18x8, { x: 706, y: 751, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
       ShapesConfetti18x8_19: d(Tx.Shapes.Confetti18x8, { x: 749, y: 754, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
       ShapesConfetti18x8_20: d(Tx.Shapes.Confetti18x8, { x: 796, y: 759, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x698826 }, "TerrainDecals"),
@@ -9343,11 +9357,11 @@ export const Lvl = {
       ShapesConfettiCorner: d(Tx.Shapes.ConfettiCorner, { x: 997, y: 194, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
       ShapesConfettiCorner_1: d(Tx.Shapes.ConfettiCorner, { x: 856, y: 173, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "TerrainDecals"),
       StoneRock0_11: d(Tx.Stone.Rock0, { x: 844, y: 193, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      StoneRockSmallShaded1_13: d(Tx.Stone.RockSmallShaded1, { x: 855, y: 202, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      StoneRockSmallShaded1_14: d(Tx.Stone.RockSmallShaded1, { x: 836, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      StoneRockSmallShaded1_15: d(Tx.Stone.RockSmallShaded1, { x: 985, y: 203, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      StoneRockSmallShaded1_16: d(Tx.Stone.RockSmallShaded1, { x: 1006, y: 186, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      StoneRockSmallShaded1_17: d(Tx.Stone.RockSmallShaded1, { x: 1014, y: 185, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_15: d(Tx.Stone.RockSmallShaded1, { x: 855, y: 202, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_16: d(Tx.Stone.RockSmallShaded1, { x: 836, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_17: d(Tx.Stone.RockSmallShaded1, { x: 985, y: 203, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_18: d(Tx.Stone.RockSmallShaded1, { x: 1006, y: 186, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_19: d(Tx.Stone.RockSmallShaded1, { x: 1014, y: 185, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       StoneRock0_12: d(Tx.Stone.Rock0, { x: 1021, y: 168, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       WorldMapTreeDead0: d(Tx.WorldMap.TreeDead0, { x: 951, y: 180, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x482c6d }, "TerrainDecals"),
       WorldMapTreeDead0_1: d(Tx.WorldMap.TreeDead0, { x: 911, y: 168, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x482c6d }, "TerrainDecals"),
@@ -9359,6 +9373,7 @@ export const Lvl = {
       GateMap: e(r["GateMap"], { x: 496, y: 728, rotation: 270, uid: 177430696428500, values: { sceneName: "scnFlopCollegeExterior", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "Entities"),
       EnemySpikeBall: e(r["EnemySpikeBall"], { x: 715, y: 1033, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySpikeBall_1: e(r["EnemySpikeBall"], { x: 739, y: 1009, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      GateMap_1: e(r["GateMap"], { x: 1448, y: 776, rotation: 180, uid: 178097826142800, values: { sceneName: "scnMountFlop", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "Entities"),
       FoliageFlower18: d(Tx.Foliage.Flower18, { x: 442, y: 967, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff8400 }, "AboveEntitiesDecals"),
       FoliageFlower18_1: d(Tx.Foliage.Flower18, { x: 475, y: 973, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb200 }, "AboveEntitiesDecals"),
       FoliageFlower22: d(Tx.Foliage.Flower22, { x: 510, y: 962, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
@@ -9390,25 +9405,27 @@ export const Lvl = {
       fromOhioDmv: e(r["Checkpoint"], { x: 1208, y: 688, flippedX: false, values: { name: "fromOhioDmv", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       fromIndianaDarkEvilHole: e(r["Checkpoint"], { x: 584, y: 400, flippedX: false, values: { name: "fromIndianaDarkEvilHole", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
       fromIntelligenceTower: e(r["Checkpoint"], { x: 1360, y: 640, flippedX: true, values: { name: "fromIntelligenceTower", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
-      GateMap_1: e(r["GateMap"], { x: 821, y: 735, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_2: e(r["GateMap"], { x: 637, y: 737, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_3: e(r["GateMap"], { x: 942, y: 844, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
+      fromMountFlopRight: e(r["Checkpoint"], { x: 1448, y: 816, flippedX: false, values: { name: "fromMountFlopRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromMountFlopLeft: e(r["Checkpoint"], { x: 1280, y: 808, flippedX: true, values: { name: "fromMountFlopLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      GateMap_2: e(r["GateMap"], { x: 821, y: 735, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_3: e(r["GateMap"], { x: 637, y: 737, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_4: e(r["GateMap"], { x: 942, y: 844, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
       StrangeMarketGate: e(r["GateMap"], { x: 551, y: 531, rotation: 540, uid: 175755215936902, values: { sceneName: "scnStrangeMarket", checkpointName: "fromWorldMap", name: "StrangeMarketGate", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_4: e(r["GateMap"], { x: 520, y: 1112, rotation: 90, uid: 175860865618400, values: { sceneName: "scnColosseumMiffed", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_5: e(r["GateMap"], { x: 928, y: 480, rotation: 270, uid: 176021246543005, values: { sceneName: "scnIndianaUniversity", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_6: e(r["GateMap"], { x: 751, y: 264, rotation: 270, uid: 176068565360400, values: { sceneName: "scnGreatTower", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_5: e(r["GateMap"], { x: 520, y: 1112, rotation: 90, uid: 175860865618400, values: { sceneName: "scnColosseumMiffed", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_6: e(r["GateMap"], { x: 928, y: 480, rotation: 270, uid: 176021246543005, values: { sceneName: "scnIndianaUniversity", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_7: e(r["GateMap"], { x: 751, y: 264, rotation: 270, uid: 176068565360400, values: { sceneName: "scnGreatTower", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       SimpleSecretValuablesGate: e(r["GateMap"], { x: 840, y: 1008, rotation: 90, uid: 176310576198900, values: { sceneName: "scnSimpleSecretValuables", checkpointName: "fromWorldMap", name: "SimpleSecretValuablesGate", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_7: e(r["GateMap"], { x: 920, y: 208, rotation: 270, uid: 176569559038300, values: { sceneName: "scnSinSwamp", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_8: e(r["GateMap"], { x: 734, y: 385, rotation: 270, uid: 176975623156307, values: { sceneName: "scnGrottoIndianaShop", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_9: e(r["GateMap"], { x: 488, y: 232, rotation: 0, uid: 177152452563600, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_10: e(r["GateMap"], { x: 632, y: 880, rotation: 180, uid: 177281293625000, values: { sceneName: "scnIndianaLoungeExterior", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_8: e(r["GateMap"], { x: 920, y: 208, rotation: 270, uid: 176569559038300, values: { sceneName: "scnSinSwamp", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_9: e(r["GateMap"], { x: 734, y: 385, rotation: 270, uid: 176975623156307, values: { sceneName: "scnGrottoIndianaShop", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_10: e(r["GateMap"], { x: 488, y: 232, rotation: 0, uid: 177152452563600, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_11: e(r["GateMap"], { x: 632, y: 880, rotation: 180, uid: 177281293625000, values: { sceneName: "scnIndianaLoungeExterior", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       StrangeMarketGuardianGate: e(r["GateMap"], { x: 507, y: 590, rotation: 630, uid: 177427749219800, values: { sceneName: "scnStrangeMarketGuardian", checkpointName: "fromWorldMap", name: "StrangeMarketGuardianGate", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_11: e(r["GateMap"], { x: 632, y: 232, rotation: 180, uid: 177472955265013, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_12: e(r["GateMap"], { x: 992, y: 336, rotation: 0, uid: 177612382363803, values: { sceneName: "scnIndianaOhioBridge", checkpointName: "fromIndiana", name: "", depth: 0, visible: true }, tint: 0xff6753 }, "RegionEntities"),
-      GateMap_13: e(r["GateMap"], { x: 1160, y: 360, rotation: 180, uid: 177612384494403, values: { sceneName: "scnIndianaOhioBridge", checkpointName: "fromOhio", name: "", depth: 0, visible: true }, tint: 0xbab532 }, "RegionEntities"),
-      GateMap_14: e(r["GateMap"], { x: 560, y: 368, rotation: -90, uid: 177622511424900, values: { sceneName: "scnIndianaDarkEvilHole", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_15: e(r["GateMap"], { x: 1184, y: 632, rotation: 270, uid: 177644036502700, values: { sceneName: "scnOhioDmv", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_16: e(r["GateMap"], { x: 1368, y: 603, rotation: -90, uid: 178050843572718, values: { sceneName: "scnIntelligenceTower", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_12: e(r["GateMap"], { x: 632, y: 232, rotation: 180, uid: 177472955265013, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_13: e(r["GateMap"], { x: 992, y: 336, rotation: 0, uid: 177612382363803, values: { sceneName: "scnIndianaOhioBridge", checkpointName: "fromIndiana", name: "", depth: 0, visible: true }, tint: 0xff6753 }, "RegionEntities"),
+      GateMap_14: e(r["GateMap"], { x: 1160, y: 360, rotation: 180, uid: 177612384494403, values: { sceneName: "scnIndianaOhioBridge", checkpointName: "fromOhio", name: "", depth: 0, visible: true }, tint: 0xbab532 }, "RegionEntities"),
+      GateMap_15: e(r["GateMap"], { x: 560, y: 368, rotation: -90, uid: 177622511424900, values: { sceneName: "scnIndianaDarkEvilHole", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_16: e(r["GateMap"], { x: 1184, y: 632, rotation: 270, uid: 177644036502700, values: { sceneName: "scnOhioDmv", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_17: e(r["GateMap"], { x: 1368, y: 603, rotation: -90, uid: 178050843572718, values: { sceneName: "scnIntelligenceTower", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       FallenBotMarker: e(r["Marker"], { x: 744, y: 552, values: { name: "FallenBotMarker", depth: 0 }, tint: 0x777777 }, "MarkerEntities"),
       RelishDispenserMarker: e(r["Marker"], { x: 840, y: 904, values: { name: "RelishDispenserMarker", depth: 0 }, tint: 0xff535d }, "MarkerEntities"),
     };
@@ -12993,6 +13010,7 @@ export namespace LvlType {
     fromLoad: ReturnType<(typeof r)["Checkpoint"]>;
   };
   export type MountFlop = {
+    WorldMapMountain0: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Slope: ReturnType<(typeof r)["Slope"]>;
     Slope_1: ReturnType<(typeof r)["Slope"]>;
@@ -13006,6 +13024,9 @@ export namespace LvlType {
     Slope_4: ReturnType<(typeof r)["Slope"]>;
     Pipe_1: ReturnType<(typeof r)["Pipe"]>;
     Player: ReturnType<(typeof r)["Player"]>;
+    GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
+    GateHorizontal_1: ReturnType<(typeof r)["GateHorizontal"]>;
+    FlowerMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type NewBalltownArmorer = {
     TownBallStructure: Sprite;
@@ -18500,6 +18521,16 @@ export namespace LvlType {
     FoliageVine0: Sprite;
     FoliageStem16: Sprite;
     ShapesConfetti18x8_17: Sprite;
+    WorldMapMountain0: Sprite;
+    WorldMapTree1_10: Sprite;
+    WorldMapTree0_18: Sprite;
+    WorldMapTree0_19: Sprite;
+    StoneRockSmallShaded1_13: Sprite;
+    StoneRockSmallShaded1_14: Sprite;
+    TerrainGrassTall3px: Sprite;
+    TerrainGrassTall3px_1: Sprite;
+    TerrainGrassTall3px_2: Sprite;
+    TerrainGrassTall3px_3: Sprite;
     Slope: ReturnType<(typeof r)["Slope"]>;
     Slope_1: ReturnType<(typeof r)["Slope"]>;
     Slope_2: ReturnType<(typeof r)["Slope"]>;
@@ -18543,8 +18574,8 @@ export namespace LvlType {
     Block_29: ReturnType<(typeof r)["Block"]>;
     Block_30: ReturnType<(typeof r)["Block"]>;
     StoneRock0_10: Sprite;
-    TerrainGrassTall3px: Sprite;
-    TerrainGrassTall3px_1: Sprite;
+    TerrainGrassTall3px_4: Sprite;
+    TerrainGrassTall3px_5: Sprite;
     ShapesConfetti18x8_18: Sprite;
     ShapesConfetti18x8_19: Sprite;
     ShapesConfetti18x8_20: Sprite;
@@ -18581,11 +18612,11 @@ export namespace LvlType {
     ShapesConfettiCorner: Sprite;
     ShapesConfettiCorner_1: Sprite;
     StoneRock0_11: Sprite;
-    StoneRockSmallShaded1_13: Sprite;
-    StoneRockSmallShaded1_14: Sprite;
     StoneRockSmallShaded1_15: Sprite;
     StoneRockSmallShaded1_16: Sprite;
     StoneRockSmallShaded1_17: Sprite;
+    StoneRockSmallShaded1_18: Sprite;
+    StoneRockSmallShaded1_19: Sprite;
     StoneRock0_12: Sprite;
     WorldMapTreeDead0: Sprite;
     WorldMapTreeDead0_1: Sprite;
@@ -18597,6 +18628,7 @@ export namespace LvlType {
     GateMap: ReturnType<(typeof r)["GateMap"]>;
     EnemySpikeBall: ReturnType<(typeof r)["EnemySpikeBall"]>;
     EnemySpikeBall_1: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    GateMap_1: ReturnType<(typeof r)["GateMap"]>;
     FoliageFlower18: Sprite;
     FoliageFlower18_1: Sprite;
     FoliageFlower22: Sprite;
@@ -18628,25 +18660,27 @@ export namespace LvlType {
     fromOhioDmv: ReturnType<(typeof r)["Checkpoint"]>;
     fromIndianaDarkEvilHole: ReturnType<(typeof r)["Checkpoint"]>;
     fromIntelligenceTower: ReturnType<(typeof r)["Checkpoint"]>;
-    GateMap_1: ReturnType<(typeof r)["GateMap"]>;
+    fromMountFlopRight: ReturnType<(typeof r)["Checkpoint"]>;
+    fromMountFlopLeft: ReturnType<(typeof r)["Checkpoint"]>;
     GateMap_2: ReturnType<(typeof r)["GateMap"]>;
     GateMap_3: ReturnType<(typeof r)["GateMap"]>;
-    StrangeMarketGate: ReturnType<(typeof r)["GateMap"]>;
     GateMap_4: ReturnType<(typeof r)["GateMap"]>;
+    StrangeMarketGate: ReturnType<(typeof r)["GateMap"]>;
     GateMap_5: ReturnType<(typeof r)["GateMap"]>;
     GateMap_6: ReturnType<(typeof r)["GateMap"]>;
-    SimpleSecretValuablesGate: ReturnType<(typeof r)["GateMap"]>;
     GateMap_7: ReturnType<(typeof r)["GateMap"]>;
+    SimpleSecretValuablesGate: ReturnType<(typeof r)["GateMap"]>;
     GateMap_8: ReturnType<(typeof r)["GateMap"]>;
     GateMap_9: ReturnType<(typeof r)["GateMap"]>;
     GateMap_10: ReturnType<(typeof r)["GateMap"]>;
-    StrangeMarketGuardianGate: ReturnType<(typeof r)["GateMap"]>;
     GateMap_11: ReturnType<(typeof r)["GateMap"]>;
+    StrangeMarketGuardianGate: ReturnType<(typeof r)["GateMap"]>;
     GateMap_12: ReturnType<(typeof r)["GateMap"]>;
     GateMap_13: ReturnType<(typeof r)["GateMap"]>;
     GateMap_14: ReturnType<(typeof r)["GateMap"]>;
     GateMap_15: ReturnType<(typeof r)["GateMap"]>;
     GateMap_16: ReturnType<(typeof r)["GateMap"]>;
+    GateMap_17: ReturnType<(typeof r)["GateMap"]>;
     FallenBotMarker: ReturnType<(typeof r)["Marker"]>;
     RelishDispenserMarker: ReturnType<(typeof r)["Marker"]>;
   };

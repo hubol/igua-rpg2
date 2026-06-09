@@ -49,6 +49,9 @@ export namespace DataGift {
             "Indiana.Hall.Painting.Honesty": {
                 item: { kind: "potion", id: "AttributeHealthUp" },
             },
+            "MountFlop.Flower": {
+                item: { kind: "equipment", id: "SpellOpenFlopBlindBoxes", level: 1 },
+            },
             __Fallback__: {
                 item: { kind: "potion", id: "RestoreHealth" },
             },
