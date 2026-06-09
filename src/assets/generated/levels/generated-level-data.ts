@@ -3680,6 +3680,24 @@ export const Lvl = {
       fromLoad: e(r["Checkpoint"], { x: 392, y: 160, flippedX: true, values: { name: "fromLoad", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
     };
   },
+  MountFlop: (): LvlType.MountFlop => {
+    applyLevel({ width: 2512, height: 648, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 608, width: 3000, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 2144, y: 512, width: 256, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 1888, y: 416, width: 256, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_2: e(r["Slope"], { x: 1376, y: 224, width: 256, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 1120, y: 224, width: 256, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      PipeSlope: e(r["PipeSlope"], { x: 736, y: 272, width: 256, height: 96, flippedX: false, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 608, y: 416, width: 1280, height: 96, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      PipeSlope_1: e(r["PipeSlope"], { x: 248, y: 456, width: 256, height: 96, flippedX: false, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
+      Slope_3: e(r["Slope"], { x: 352, y: 416, width: 256, height: 96, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 232, y: 552, width: 16, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Slope_4: e(r["Slope"], { x: 864, y: 224, width: 256, height: 96, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe_1: e(r["Pipe"], { x: 720, y: 368, width: 16, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Player: e(r["Player"], { x: 2448, y: 608, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    };
+  },
   NewBalltownArmorer: (): LvlType.NewBalltownArmorer => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x56721c, terrainTint: 0x000000 });
     return {
@@ -12973,6 +12991,21 @@ export namespace LvlType {
     load: ReturnType<(typeof r)["Checkpoint"]>;
     fromNew: ReturnType<(typeof r)["Checkpoint"]>;
     fromLoad: ReturnType<(typeof r)["Checkpoint"]>;
+  };
+  export type MountFlop = {
+    Block: ReturnType<(typeof r)["Block"]>;
+    Slope: ReturnType<(typeof r)["Slope"]>;
+    Slope_1: ReturnType<(typeof r)["Slope"]>;
+    Slope_2: ReturnType<(typeof r)["Slope"]>;
+    Block_1: ReturnType<(typeof r)["Block"]>;
+    PipeSlope: ReturnType<(typeof r)["PipeSlope"]>;
+    Block_2: ReturnType<(typeof r)["Block"]>;
+    PipeSlope_1: ReturnType<(typeof r)["PipeSlope"]>;
+    Slope_3: ReturnType<(typeof r)["Slope"]>;
+    Pipe: ReturnType<(typeof r)["Pipe"]>;
+    Slope_4: ReturnType<(typeof r)["Slope"]>;
+    Pipe_1: ReturnType<(typeof r)["Pipe"]>;
+    Player: ReturnType<(typeof r)["Player"]>;
   };
   export type NewBalltownArmorer = {
     TownBallStructure: Sprite;
