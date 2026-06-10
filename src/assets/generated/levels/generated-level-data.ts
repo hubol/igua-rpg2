@@ -6649,6 +6649,31 @@ export const Lvl = {
       GateHorizontal_1: e(r["GateHorizontal"], { x: 432, y: 64, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromOhioDmv", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
+  OpenMarket: (): LvlType.OpenMarket => {
+    applyLevel({ width: 712, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    return {
+      Block: e(r["Block"], { x: 0, y: 232, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 120, y: 216, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 184, y: 216, width: 320, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 408, y: 200, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 336, y: 112, width: 344, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 384, y: 128, width: 296, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_2: e(r["Slope"], { x: 352, y: 128, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 472, y: 144, width: 208, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_3: e(r["Slope"], { x: 440, y: 144, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 680, y: 112, width: 32, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_1: e(r["Pipe"], { x: 680, y: 152, width: 32, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 472, y: 200, width: 240, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 80, y: 96, width: 216, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 120, y: 112, width: 136, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_4: e(r["Slope"], { x: 88, y: 112, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_5: e(r["Slope"], { x: 256, y: 112, width: 32, height: 16, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      MarketNpc0: e(r["IguanaNpc"], { x: 160, y: 96, flippedX: false, values: { personaName: "", name: "MarketNpc0", depth: 0 } }, "CharacterEntities"),
+      MarketNpc1: e(r["IguanaNpc"], { x: 304, y: 216, flippedX: true, values: { personaName: "", name: "MarketNpc1", depth: 0 } }, "CharacterEntities"),
+      MarketNpc2: e(r["IguanaNpc"], { x: 544, y: 112, flippedX: false, values: { personaName: "", name: "MarketNpc2", depth: 0 } }, "CharacterEntities"),
+      Player: e(r["Player"], { x: 56, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+    };
+  },
   PlainsSuggestiveCavern: (): LvlType.PlainsSuggestiveCavern => {
     applyLevel({ width: 3136, height: 664, backgroundTint: 0x190000, terrainTint: 0x540707 });
     return {
@@ -15941,6 +15966,28 @@ export namespace LvlType {
     fromBelow: ReturnType<(typeof r)["Checkpoint"]>;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     GateHorizontal_1: ReturnType<(typeof r)["GateHorizontal"]>;
+  };
+  export type OpenMarket = {
+    Block: ReturnType<(typeof r)["Block"]>;
+    Slope: ReturnType<(typeof r)["Slope"]>;
+    Block_1: ReturnType<(typeof r)["Block"]>;
+    Slope_1: ReturnType<(typeof r)["Slope"]>;
+    Block_2: ReturnType<(typeof r)["Block"]>;
+    Block_3: ReturnType<(typeof r)["Block"]>;
+    Slope_2: ReturnType<(typeof r)["Slope"]>;
+    Block_4: ReturnType<(typeof r)["Block"]>;
+    Slope_3: ReturnType<(typeof r)["Slope"]>;
+    Pipe: ReturnType<(typeof r)["Pipe"]>;
+    Pipe_1: ReturnType<(typeof r)["Pipe"]>;
+    Block_5: ReturnType<(typeof r)["Block"]>;
+    Block_6: ReturnType<(typeof r)["Block"]>;
+    Block_7: ReturnType<(typeof r)["Block"]>;
+    Slope_4: ReturnType<(typeof r)["Slope"]>;
+    Slope_5: ReturnType<(typeof r)["Slope"]>;
+    MarketNpc0: ReturnType<(typeof r)["IguanaNpc"]>;
+    MarketNpc1: ReturnType<(typeof r)["IguanaNpc"]>;
+    MarketNpc2: ReturnType<(typeof r)["IguanaNpc"]>;
+    Player: ReturnType<(typeof r)["Player"]>;
   };
   export type PlainsSuggestiveCavern = {
     ShapesSquare32: Sprite;
