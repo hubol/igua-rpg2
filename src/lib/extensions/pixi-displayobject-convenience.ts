@@ -35,6 +35,7 @@ declare module "pixi.js" {
         masked(value: Container | MaskData | null): this;
         zIndexed(value: number): this;
 
+        getWorldBounds(): Rectangle;
         getWorldCenter(): VectorSimple;
         // Not totally sure why passing a Point would be useful...
         getWorldPosition(point?: Point): VectorSimple;
@@ -173,6 +174,13 @@ Object.defineProperties(DisplayObject.prototype, {
         value: function (this: DisplayObject, zIndex: number) {
             this.zIndex = zIndex;
             return this;
+        },
+    },
+    getWorldBounds: {
+        value: function (this: DisplayObject) {
+            const stage = EngineConfig.worldStage;
+            return this.getBounds(false, r)
+                .add(-stage.x, -stage.y);
         },
     },
     getWorldCenter: {
