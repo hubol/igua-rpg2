@@ -17,22 +17,19 @@ const prng = new PseudoRng();
 const maxBallonDrainY = 21;
 
 export function objFxBallon(seed: Integer, inflation: Unit) {
-    prng.seed = seed;
+    const tints = objFxBallon.getTints(seed);
     const txFace = prng.choose(...txBallonFaces);
-    const hue = prng.float(360);
     const flip = prng.intp();
     const offset = prng.intc(-2, 2);
 
     let life = 1;
 
-    const tint = AdjustColor.hsv(hue, 92, 80).toPixi();
-    const transparentTint = AdjustColor.hsv(hue, 85, 40).toPixi();
-    const highlightTint = hue < 125
-        ? AdjustColor.hsv(approachLinear(hue, 60, 36), 100, 100).toPixi()
-        : AdjustColor.hsv(hue, 46, 100).toPixi();
-    const faceTint = AdjustColor.hsv(hue, 95, 53).toPixi();
+    const transparentTint = AdjustColor.hsv(tints.hue, 85, 40).toPixi();
+    const highlightTint = tints.hue < 125
+        ? AdjustColor.hsv(approachLinear(tints.hue, 60, 36), 100, 100).toPixi()
+        : AdjustColor.hsv(tints.hue, 46, 100).toPixi();
 
-    const inflatingObj = objIndexedSprite(txsBallonInflate).tinted(tint);
+    const inflatingObj = objIndexedSprite(txsBallonInflate).tinted(tints.rubber);
 
     const transparentObj = Sprite.from(txBallon).tinted(transparentTint);
     transparentObj.alpha = 0.5;
@@ -52,9 +49,9 @@ export function objFxBallon(seed: Integer, inflation: Unit) {
     const ballonObj = container(
         maskObj,
         transparentObj,
-        Sprite.from(txBallon).tinted(tint).masked(maskObj),
+        Sprite.from(txBallon).tinted(tints.rubber).masked(maskObj),
         Sprite.from(txBallonHighlight).tinted(highlightTint).step(self => self.alpha = Math.max(0.3, life)),
-        Sprite.from(txFace).tinted(faceTint).flipH(flip).at(offset, Math.abs(offset)),
+        Sprite.from(txFace).tinted(tints.face).flipH(flip).at(offset, Math.abs(offset)),
     )
         .invisible();
 
@@ -67,7 +64,7 @@ export function objFxBallon(seed: Integer, inflation: Unit) {
                 life = value;
             },
             inflation,
-            tint,
+            tint: tints.rubber,
         })
         .step(self => inflatingObj.textureIndex = self.inflation * inflatingObj.textures.length)
         .coro(function* (self) {
@@ -78,5 +75,15 @@ export function objFxBallon(seed: Integer, inflation: Unit) {
             ballonObj.visible = true;
         });
 }
+
+objFxBallon.getTints = function getTints (seed: Integer) {
+    prng.seed = seed;
+    const hue = prng.float(360);
+    return {
+        hue,
+        rubber: AdjustColor.hsv(hue, 92, 80).toPixi(),
+        face: AdjustColor.hsv(hue, 95, 53).toPixi(),
+    };
+};
 
 export type ObjFxBallon = ReturnType<typeof objFxBallon>;

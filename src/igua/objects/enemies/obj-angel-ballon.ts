@@ -1,6 +1,7 @@
 import { Graphics } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
+import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
@@ -8,6 +9,8 @@ import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objFxBallon } from "../effects/obj-fx-ballon";
+import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
 
@@ -39,9 +42,7 @@ const themes = (() => {
             noggin: txBallonNoggin,
             nose: Tx.Enemy.Ballon.Nose,
         },
-        tints: {
-            map: [0xff0000, 0x00ff00, 0x0000ff] as MapRgbFilter.Map,
-        },
+        tints: {},
     });
 
     return {
@@ -80,9 +81,18 @@ export function objAngelBallon() {
 
     let targetSpeed = down;
 
+    const shineObj = objIndexedSprite(txsBallonShine);
+    shineObj.alpha = 0.67;
+
+    const tints = objFxBallon.getTints(Rng.intc(999_999_999));
+
     return container(
         theme.createSprite("noggin")
             .anchored(0.5, 0.5),
+        shineObj
+            .anchored(0.5, 0.5)
+            .scaled(1, -1)
+            .add(0, -8),
         container(
             theme.createMouthObj()
                 .add(0, 19),
@@ -95,7 +105,7 @@ export function objAngelBallon() {
             .add(0, -22),
         hurtboxObj,
     )
-        .filtered(new MapRgbFilter(...theme.tints.map))
+        .filtered(new MapRgbFilter(tints.rubber, tints.face, tints.face))
         .mixin(mxnEnemy, { rank, hurtboxes: [hurtboxObj] })
         .mixin(mxnDetectPlayer)
         .mixin(mxnPhysics, { gravity: 0, physicsRadius: 16 })
@@ -104,7 +114,10 @@ export function objAngelBallon() {
                 self.speed.add(value.impactSpeed);
             }
         })
-        .step(self => self.speed.moveTowards(targetSpeed, 0.05))
+        .step(self => {
+            self.speed.moveTowards(targetSpeed, 0.05);
+            shineObj.textureIndex = Math.round(Math.sin(self.x * 0.1 + self.y * 0.1) + 1);
+        })
         .coro(function* (self) {
             while (true) {
                 yield () => self.isOnGround;
