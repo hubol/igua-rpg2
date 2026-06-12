@@ -1,7 +1,9 @@
 import { DisplayObject } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Instances } from "../../lib/game-engine/instances";
 import { Rng } from "../../lib/math/rng";
+import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 import { ObjDoor, objDoor } from "../objects/obj-door";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
@@ -23,6 +25,13 @@ export function scnIntelligenceTower() {
         playerObj.x = Rng.item(doorObjs).x;
         playerObj.auto.setFacingImmediately(-1);
     }
+
+    objBossMusicPlayer({
+        bossObjs: [lvl.EnemyChill],
+        mzkBattle: Mzk.FuckerLand,
+        mzkPeace: Mzk.FaithBeam,
+    })
+        .show();
 }
 
 function enrichCheckTime(lvl: LvlType.IntelligenceTower) {
