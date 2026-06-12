@@ -336,6 +336,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             for (const instance of Instances(mxnRpgStatus, filterVulnerableObjs)) {
                 const hurtbox = puppet.collidesOne(instance.hurtboxes);
                 if (hurtbox) {
+                    const impactSpeed = puppet.speed.vcpy();
                     const collidedWithFeet = bounceIguanaOffObject(puppet, hurtbox);
                     let attack = collidedWithFeet
                         ? Rpg.character.meleeClawAttack
@@ -349,6 +350,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                     const result = instance.damage(attack, {
                         attacker: status,
                         bodyPart: hurtbox.is(mxnRpgStatusBodyPart) ? hurtbox.mxnRpgStatusBodyPart.model : undefined,
+                        impactSpeed,
                     });
 
                     if (

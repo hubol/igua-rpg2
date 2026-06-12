@@ -1,5 +1,6 @@
 import { Container, DisplayObject } from "pixi.js";
 import { approachLinear } from "../../lib/math/number";
+import { VectorSimple } from "../../lib/math/vector-type";
 import { StepOrder } from "../objects/step-order";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgStatus } from "../rpg/rpg-status";
@@ -16,15 +17,23 @@ export function mxnRpgStatus(obj: Container, args: MxnRpgStatusArgs) {
 
     const rpgStatusObj = obj
         .track(mxnRpgStatus)
-        .dispatchesValue<"damaged", RpgStatus.DamageResult>()
+        .dispatchesValue<"damaged", MxnRpgStatus.DamagedEventValue>()
         .mixin(mxnDripping)
         .merge(args)
         .merge({
             damage(
                 attack: RpgAttack.Model,
-                { bodyPart = RpgStatus.BodyPart.defenseless, attacker }: MxnRpgStatus.DamageAttributes = {},
+                { bodyPart = RpgStatus.BodyPart.defenseless, attacker, impactSpeed }: MxnRpgStatus.DamageAttributes =
+                    {},
             ) {
-                const result = RpgStatus.Methods.damage(args.status, bodyPart, args.effects, attack, attacker);
+                const result: MxnRpgStatus.DamagedEventValue = RpgStatus.Methods.damage(
+                    args.status,
+                    bodyPart,
+                    args.effects,
+                    attack,
+                    attacker,
+                );
+                result.impactSpeed = impactSpeed;
                 rpgStatusObj.dispatch("damaged", result);
                 return result;
             },
@@ -52,7 +61,10 @@ namespace MxnRpgStatus {
     export interface DamageAttributes {
         bodyPart?: RpgStatus.BodyPart.Model;
         attacker?: RpgStatus.Model;
+        impactSpeed?: VectorSimple;
     }
+
+    export type DamagedEventValue = RpgStatus.DamageResult & { impactSpeed?: VectorSimple };
 }
 
 function getTargetDripsPerFrame(wetness: number) {

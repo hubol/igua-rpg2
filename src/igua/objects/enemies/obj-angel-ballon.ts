@@ -1,9 +1,12 @@
 import { Graphics } from "pixi.js";
 import { Tx } from "../../../assets/textures";
+import { sleepf } from "../../../lib/game-engine/routines/sleep";
+import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnPhysics } from "../../mixins/mxn-physics";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
@@ -75,6 +78,8 @@ export function objAngelBallon() {
         .drawRect(-19, -20, 38, 34)
         .invisible();
 
+    let targetSpeed = down;
+
     return container(
         theme.createSprite("noggin")
             .anchored(0.5, 0.5),
@@ -92,5 +97,23 @@ export function objAngelBallon() {
     )
         .filtered(new MapRgbFilter(...theme.tints.map))
         .mixin(mxnEnemy, { rank, hurtboxes: [hurtboxObj] })
-        .mixin(mxnDetectPlayer);
+        .mixin(mxnDetectPlayer)
+        .mixin(mxnPhysics, { gravity: 0, physicsRadius: 16 })
+        .handles("damaged", (self, value) => {
+            if (!value.rejected && value.impactSpeed) {
+                self.speed.add(value.impactSpeed);
+            }
+        })
+        .step(self => self.speed.moveTowards(targetSpeed, 0.05))
+        .coro(function* (self) {
+            while (true) {
+                yield () => self.isOnGround;
+                targetSpeed = up;
+                yield sleepf(64);
+                targetSpeed = down;
+            }
+        });
 }
+
+const down = vnew(0, 0.3);
+const up = vnew(0, -0.6);

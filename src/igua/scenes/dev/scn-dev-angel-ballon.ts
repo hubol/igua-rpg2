@@ -4,6 +4,6 @@ import { objAngelBallon } from "../../objects/enemies/obj-angel-ballon";
 export function scnDevAngelBallon() {
     Lvl.Dummy();
     objAngelBallon()
-        .at(100, 100)
+        .at(200, 160)
         .show();
 }
