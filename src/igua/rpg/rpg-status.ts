@@ -271,8 +271,8 @@ export namespace RpgStatus {
 
             if (conditions) {
                 target.conditions.helium.value += attack.conditions.helium;
-                while (target.conditions.helium.value >= target.conditions.helium.max) {
-                    target.conditions.helium.value -= target.conditions.helium.max;
+                if (target.conditions.helium.value >= target.conditions.helium.max) {
+                    target.conditions.helium.value = 0;
                     RpgStatus.Methods.createBallon(target, targetEffects);
                 }
 
