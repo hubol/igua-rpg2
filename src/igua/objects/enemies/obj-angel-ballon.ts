@@ -38,7 +38,7 @@ const themes = (() => {
             pupilsMirrored: true,
         },
         mouth: {
-            negativeSpaceTint: 0x000000,
+            negativeSpaceTint: 0x00ff00,
             teethCount: 3,
             toothGapWidth: 1,
             txs: objAngelMouth.txs.w18,
