@@ -44,6 +44,7 @@ export namespace OgmoEntities {
   export type EnemyChill = OgmoFactory.EntityBase<{ variant: "level0" | "level1"; name: string; depth: number }>;
   export type Clock = OgmoFactory.EntityBase<{ hours: number; minutes: number; name: string; depth: number }>;
   export type Dial = OgmoFactory.EntityBase<{ maxTicks: number; name: string; depth: number }>;
+  export type EnemyBallon = OgmoFactory.EntityBase<{ variant: "level0"; name: string; depth: number }>;
 }
 
 export interface OgmoEntityResolverBase {
@@ -88,4 +89,5 @@ export interface OgmoEntityResolverBase {
   EnemyChill: (entity: OgmoEntities.EnemyChill) => unknown;
   Clock: (entity: OgmoEntities.Clock) => unknown;
   Dial: (entity: OgmoEntities.Dial) => unknown;
+  EnemyBallon: (entity: OgmoEntities.EnemyBallon) => unknown;
 }

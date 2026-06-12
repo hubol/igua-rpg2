@@ -4,8 +4,8 @@
   "height": 648,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#408000",
   "values": {"Terrain Color": "#ab21c1"},
+  "backgroundColor": "#408000",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -144,7 +144,48 @@
       "gridCellHeight": 8,
       "gridCellsX": 319,
       "gridCellsY": 81,
-      "entities": []
+      "entities": [
+        {
+          "name": "EnemyBallon",
+          "id": 0,
+          "_eid": "23510996",
+          "x": 1728,
+          "y": 296,
+          "originX": 22,
+          "originY": 24,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemyBallon",
+          "id": 1,
+          "_eid": "23510996",
+          "x": 1864,
+          "y": 296,
+          "originX": 22,
+          "originY": 24,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemyBallon",
+          "id": 2,
+          "_eid": "23510996",
+          "x": 1976,
+          "y": 296,
+          "originX": 22,
+          "originY": 24,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemyBallon",
+          "id": 3,
+          "_eid": "23510996",
+          "x": 2104,
+          "y": 296,
+          "originX": 22,
+          "originY": 24,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "TerrainDecals",
@@ -345,7 +386,8 @@
           "texture": "world map/mountain 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

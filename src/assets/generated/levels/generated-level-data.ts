@@ -3696,6 +3696,10 @@ export const Lvl = {
       Pipe: e(r["Pipe"], { x: 232, y: 552, width: 16, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
       Slope_4: e(r["Slope"], { x: 864, y: 224, width: 256, height: 96, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
       Pipe_1: e(r["Pipe"], { x: 720, y: 368, width: 16, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      EnemyBallon: e(r["EnemyBallon"], { x: 1728, y: 296, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemyBallon_1: e(r["EnemyBallon"], { x: 1864, y: 296, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemyBallon_2: e(r["EnemyBallon"], { x: 1976, y: 296, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemyBallon_3: e(r["EnemyBallon"], { x: 2104, y: 296, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       Player: e(r["Player"], { x: 2448, y: 608, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: 2504, y: 480, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopRight", name: "", depth: 0 } }, "RegionEntities"),
       GateHorizontal_1: e(r["GateHorizontal"], { x: -40, y: 480, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopLeft", name: "", depth: 0 } }, "RegionEntities"),
@@ -13048,6 +13052,10 @@ export namespace LvlType {
     Pipe: ReturnType<(typeof r)["Pipe"]>;
     Slope_4: ReturnType<(typeof r)["Slope"]>;
     Pipe_1: ReturnType<(typeof r)["Pipe"]>;
+    EnemyBallon: ReturnType<(typeof r)["EnemyBallon"]>;
+    EnemyBallon_1: ReturnType<(typeof r)["EnemyBallon"]>;
+    EnemyBallon_2: ReturnType<(typeof r)["EnemyBallon"]>;
+    EnemyBallon_3: ReturnType<(typeof r)["EnemyBallon"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     GateHorizontal_1: ReturnType<(typeof r)["GateHorizontal"]>;

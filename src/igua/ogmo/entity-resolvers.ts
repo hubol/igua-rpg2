@@ -8,6 +8,7 @@ import { CtxPocketItems, objCollectiblePocketItemSpawner } from "../objects/coll
 import { objDevPlayer } from "../objects/dev/obj-dev-player";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
 import { objEnvironmentOverheatRegion } from "../objects/effects/environment/obj-environment-overheat-region";
+import { objAngelBallon } from "../objects/enemies/obj-angel-ballon";
 import { objAngelBrick } from "../objects/enemies/obj-angel-brick";
 import { objAngelCactus } from "../objects/enemies/obj-angel-cactus";
 import { objAngelChill } from "../objects/enemies/obj-angel-chill";
@@ -85,6 +86,7 @@ export const OgmoEntityResolvers = {
             CtxPocketItems.value.variant,
             CtxPocketItems.value.behavior,
         ).at(entity, -1),
+    EnemyBallon: objAngelBallon,
     EnemyBrick: (entity) => {
         const brickAngelObj = objAngelBrick(entity);
         delete entity.width;

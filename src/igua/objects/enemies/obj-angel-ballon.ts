@@ -137,8 +137,11 @@ export function objAngelBallon() {
             shineObj.textureIndex = Math.round(Math.sin(self.x * 0.1 + self.y * 0.1) + 1);
         })
         .coro(function* (self) {
+            let groundY = self.y;
+
             while (true) {
-                yield () => self.isOnGround;
+                yield () => self.isOnGround || self.y >= groundY;
+                groundY = Math.min(self.y, groundY);
                 targetSpeed = up;
                 yield sleepf(64);
                 targetSpeed = down;
