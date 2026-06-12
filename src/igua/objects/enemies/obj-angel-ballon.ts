@@ -1,3 +1,4 @@
+import { Graphics } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
@@ -69,6 +70,10 @@ const variants = {
 
 export function objAngelBallon() {
     const { theme, rank } = variants.level0;
+    const hurtboxObj = new Graphics()
+        .beginFill(0x000000)
+        .drawRect(-19, -20, 38, 34)
+        .invisible();
 
     return container(
         theme.createSprite("noggin")
@@ -83,8 +88,9 @@ export function objAngelBallon() {
                 .add(0, 10),
         )
             .add(0, -22),
+        hurtboxObj,
     )
         .filtered(new MapRgbFilter(...theme.tints.map))
-        .mixin(mxnEnemy, { rank, hurtboxes: [] })
+        .mixin(mxnEnemy, { rank, hurtboxes: [hurtboxObj] })
         .mixin(mxnDetectPlayer);
 }
