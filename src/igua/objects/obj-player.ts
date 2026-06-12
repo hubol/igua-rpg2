@@ -5,6 +5,7 @@ import { Logger } from "../../lib/game-engine/logger";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../lib/math/number";
+import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { merge } from "../../lib/object/merge";
 import { container } from "../../lib/pixi/container";
@@ -162,7 +163,9 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 return;
             }
 
-            status.state.ballonHealthMayDrain = !scene.isWorldMap && !puppet.isOnGround;
+            status.state.ballonHealthMayDrain = Rng.float(100) < ((scene.isWorldMap || puppet.isOnGround)
+                ? Rpg.character.buffs.conditions.ballonDrainOnGround
+                : (100 - Rpg.character.buffs.conditions.ballonDrainOnGround));
 
             const xPrevious = puppet.x;
             puppet.x = Math.max(24, Math.min(puppet.x, scene.level.width - 24));

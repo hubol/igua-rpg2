@@ -361,6 +361,15 @@ export namespace DataEquipment {
                         model.combat.spells.maxPower += Math.max(1, Math.round(60 * Math.pow(0.5, bonus)));
                     },
                 },
+                BallonDrainOnGround: {
+                    name: "Dark Magnet",
+                    texture: null,
+                    description: "Unique object. Causes ballon health to drain while grounded instead of airborne.",
+                    buffs: (model, bonus) => {
+                        model.conditions.ballonDrainOnGround += 100;
+                        model.combat.defense.physical += bonus;
+                    },
+                },
                 __Fallback__: {
                     name: "???",
                     texture: null,

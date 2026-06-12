@@ -264,6 +264,7 @@ const getBuffInformations = (function () {
         buff("loot.tiers.nothingRerollCount", "Re-Roll Empty Loot", "integer", "benefit_when_positive"),
         buff("loot.valuables.bonus", "Valuable Bonus", "integer", "benefit_when_positive"),
         buff("conditions.ballonDrainReductionFactor", "Ballons Drain Slower", "percent", "benefit_when_positive"),
+        buff("conditions.ballonDrainOnGround", "Ballons Drain On Ground", "percent", "benefit_when_negative"),
         buff("conditions.overheatMaxIncreaseFactor", "Overheat Max", "percent", "benefit_when_positive"),
         buff("conditions.poisonMaxIncreaseFactor", "Poison Builds Slower", "percent", "benefit_when_positive"),
         buff("conditions.poisonRateReductionFactor", "Poison Drains HP Slower", "percent", "benefit_when_positive"),
