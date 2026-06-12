@@ -3,13 +3,18 @@ import { Tx } from "../../../assets/textures";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
+import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnPhysics } from "../../mixins/mxn-physics";
+import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
+import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { FxPattern } from "../effects/lib/fx-pattern";
 import { objFxBallon } from "../effects/obj-fx-ballon";
+import { objFxHelium } from "../effects/obj-fx-helium";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
@@ -110,9 +115,22 @@ export function objAngelBallon() {
         .mixin(mxnDetectPlayer)
         .mixin(mxnPhysics, { gravity: 0, physicsRadius: 16 })
         .handles("damaged", (self, value) => {
-            if (!value.rejected && value.impactSpeed) {
-                self.speed.add(value.impactSpeed);
+            if (!value.rejected) {
+                const burstObj = objAngelBallonHeliumBurst("small")
+                    .at(self)
+                    .show();
+
+                if (value.impactSpeed) {
+                    self.speed.add(value.impactSpeed);
+                    const offset = vnew(value.impactSpeed).normalize().scale(-16);
+                    burstObj.add(offset);
+                }
             }
+        })
+        .handles("mxnEnemy.died", (self) => {
+            objAngelBallonHeliumBurst("large")
+                .at(self)
+                .show();
         })
         .step(self => {
             self.speed.moveTowards(targetSpeed, 0.05);
@@ -125,6 +143,39 @@ export function objAngelBallon() {
                 yield sleepf(64);
                 targetSpeed = down;
             }
+        });
+}
+
+const heliumAtks = {
+    small: RpgAttack.create({
+        conditions: {
+            helium: 20,
+        },
+    }),
+    large: RpgAttack.create({
+        conditions: {
+            helium: 100,
+        },
+    }),
+};
+
+function objAngelBallonHeliumBurst(size: keyof typeof heliumAtks) {
+    const attack = heliumAtks[size];
+    const count = size === "small" ? 2 : 10;
+    const radius = size === "small" ? 8 : 18;
+
+    const maskObj = new Graphics().beginFill(0x000000).drawCircle(0, 0, radius * 2).invisible();
+
+    return container(
+        maskObj,
+        ...FxPattern.getRadialBurst({ count, radius })
+            .map(node => objFxHelium().at(node.position)),
+    )
+        .mixin(mxnRpgAttack, { attack, damageTargetsOnce: true })
+        .collisionShape(CollisionShape.Children)
+        .coro(function* (self) {
+            yield () => self.children.length === 1;
+            self.destroy();
         });
 }
 

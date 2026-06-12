@@ -6,4 +6,12 @@ export function scnDevAngelBallon() {
     objAngelBallon()
         .at(200, 160)
         .show();
+
+    objAngelBallon()
+        .at(260, 160)
+        .show();
+
+    objAngelBallon()
+        .at(320, 160)
+        .show();
 }
