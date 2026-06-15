@@ -52,6 +52,9 @@ export namespace DataGift {
             "MountFlop.Flower": {
                 item: { kind: "equipment", id: "SpellOpenFlopBlindBoxes", level: 1 },
             },
+            "Ohio.Market.Flip": {
+                item: { kind: "potion", id: "HotDogKetchupMustardOnionRelish" },
+            },
             __Fallback__: {
                 item: { kind: "potion", id: "RestoreHealth" },
             },

@@ -6654,29 +6654,37 @@ export const Lvl = {
     };
   },
   OpenMarket: (): LvlType.OpenMarket => {
-    applyLevel({ width: 712, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    applyLevel({ width: 1208, height: 360, backgroundTint: 0x408000, terrainTint: 0x000000 });
     return {
-      Block: e(r["Block"], { x: 0, y: 232, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope: e(r["Slope"], { x: 120, y: 216, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_1: e(r["Block"], { x: 184, y: 216, width: 320, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_1: e(r["Slope"], { x: 408, y: 200, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_2: e(r["Block"], { x: 336, y: 112, width: 344, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_3: e(r["Block"], { x: 384, y: 128, width: 296, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_2: e(r["Slope"], { x: 352, y: 128, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_4: e(r["Block"], { x: 472, y: 144, width: 208, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_3: e(r["Slope"], { x: 440, y: 144, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Pipe: e(r["Pipe"], { x: 680, y: 112, width: 32, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
-      Pipe_1: e(r["Pipe"], { x: 680, y: 152, width: 32, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
-      Block_5: e(r["Block"], { x: 472, y: 200, width: 240, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_6: e(r["Block"], { x: 80, y: 96, width: 216, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_7: e(r["Block"], { x: 120, y: 112, width: 136, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_4: e(r["Slope"], { x: 88, y: 112, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_5: e(r["Slope"], { x: 256, y: 112, width: 32, height: 16, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      GateHorizontal: e(r["GateHorizontal"], { x: -40, y: 104, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromOpenMarket", name: "", depth: 0 } }, "Entities"),
-      JumpNpc: e(r["IguanaNpc"], { x: 160, y: 96, flippedX: false, values: { personaName: "OpenJump", name: "JumpNpc", depth: 0 } }, "CharacterEntities"),
-      FoodNpc: e(r["IguanaNpc"], { x: 304, y: 216, flippedX: true, values: { personaName: "OpenFood", name: "FoodNpc", depth: 0 } }, "CharacterEntities"),
-      CombatNpc: e(r["IguanaNpc"], { x: 544, y: 112, flippedX: false, values: { personaName: "OpenCombat", name: "CombatNpc", depth: 0 } }, "CharacterEntities"),
-      Player: e(r["Player"], { x: 56, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      Block: e(r["Block"], { x: 0, y: 312, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 120, y: 296, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 184, y: 296, width: 320, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 408, y: 280, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 336, y: 192, width: 344, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 384, y: 208, width: 296, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_2: e(r["Slope"], { x: 352, y: 208, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 472, y: 224, width: 208, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_3: e(r["Slope"], { x: 440, y: 224, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 680, y: 192, width: 64, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_1: e(r["Pipe"], { x: 680, y: 232, width: 64, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 472, y: 280, width: 320, height: 88, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 80, y: 176, width: 216, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 120, y: 192, width: 136, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_4: e(r["Slope"], { x: 88, y: 192, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_5: e(r["Slope"], { x: 256, y: 192, width: 32, height: 16, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_6: e(r["Slope"], { x: 792, y: 280, width: 128, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_8: e(r["Block"], { x: 792, y: 312, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_9: e(r["Block"], { x: 744, y: 192, width: 192, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_7: e(r["Slope"], { x: 840, y: 160, width: 96, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_10: e(r["Block"], { x: 936, y: 160, width: 192, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_8: e(r["Slope"], { x: 936, y: 208, width: 64, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -40, y: 184, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromOpenMarket", name: "", depth: 0 } }, "Entities"),
+      FlipDial: e(r["Dial"], { x: 984, y: 288, values: { maxTicks: 5, name: "FlipDial", depth: 0 } }, "Entities"),
+      JumpNpc: e(r["IguanaNpc"], { x: 160, y: 176, flippedX: false, values: { personaName: "OpenJump", name: "JumpNpc", depth: 0 } }, "CharacterEntities"),
+      FoodNpc: e(r["IguanaNpc"], { x: 304, y: 296, flippedX: true, values: { personaName: "OpenFood", name: "FoodNpc", depth: 0 } }, "CharacterEntities"),
+      CombatNpc: e(r["IguanaNpc"], { x: 544, y: 192, flippedX: false, values: { personaName: "OpenCombat", name: "CombatNpc", depth: 0 } }, "CharacterEntities"),
+      FlipNpc: e(r["IguanaNpc"], { x: 1120, y: 312, flippedX: false, values: { personaName: "OpenFlip", name: "FlipNpc", depth: 0 } }, "CharacterEntities"),
+      Player: e(r["Player"], { x: 56, y: 312, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     };
   },
   PlainsSuggestiveCavern: (): LvlType.PlainsSuggestiveCavern => {
@@ -15993,10 +16001,18 @@ export namespace LvlType {
     Block_7: ReturnType<(typeof r)["Block"]>;
     Slope_4: ReturnType<(typeof r)["Slope"]>;
     Slope_5: ReturnType<(typeof r)["Slope"]>;
+    Slope_6: ReturnType<(typeof r)["Slope"]>;
+    Block_8: ReturnType<(typeof r)["Block"]>;
+    Block_9: ReturnType<(typeof r)["Block"]>;
+    Slope_7: ReturnType<(typeof r)["Slope"]>;
+    Block_10: ReturnType<(typeof r)["Block"]>;
+    Slope_8: ReturnType<(typeof r)["Slope"]>;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
+    FlipDial: ReturnType<(typeof r)["Dial"]>;
     JumpNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     FoodNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     CombatNpc: ReturnType<(typeof r)["IguanaNpc"]>;
+    FlipNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     Player: ReturnType<(typeof r)["Player"]>;
   };
   export type PlainsSuggestiveCavern = {
