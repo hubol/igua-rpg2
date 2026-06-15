@@ -296,7 +296,7 @@
           "rotation": -90,
           "uid": 178050843572718,
           "tint": "#ffffff",
-          "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+          "values": {"sceneName": "scnIntelligenceTowerEntrance", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
         {
           "name": "GateMap",

@@ -38,7 +38,7 @@
           "originX": 0,
           "originY": 0,
           "flippedX": true,
-          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromIntelligenceTower", "name": "", "depth": 0}
+          "values": {"sceneName": "scnIntelligenceTowerEntrance", "checkpointName": "fromIntelligenceTower", "name": "", "depth": 0}
         }
       ]
     },
