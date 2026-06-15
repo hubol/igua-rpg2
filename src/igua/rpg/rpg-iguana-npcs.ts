@@ -44,6 +44,10 @@ class RpgIguanaNpc {
     }
 
     onSpeak() {
+        if (!RpgCutscene.isPlaying) {
+            return;
+        }
+
         const globalCount = ++this._state.spokenToTimesCount;
         const sceneCount = CtxIguanaSpeakers.value.personaIdsSpoken.increment(this._id);
 

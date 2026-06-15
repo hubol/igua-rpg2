@@ -4,8 +4,8 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#408000",
   "values": {"Terrain Color": "#000000"},
+  "backgroundColor": "#408000",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -94,7 +94,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": false,
-          "values": {"personaName": "", "name": "MarketNpc0", "depth": 0}
+          "values": {"personaName": "OpenJump", "name": "JumpNpc", "depth": 0}
         },
         {
           "name": "IguanaNpc",
@@ -105,7 +105,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": true,
-          "values": {"personaName": "", "name": "MarketNpc1", "depth": 0}
+          "values": {"personaName": "OpenFood", "name": "FoodNpc", "depth": 0}
         },
         {
           "name": "IguanaNpc",
@@ -116,7 +116,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": false,
-          "values": {"personaName": "", "name": "MarketNpc2", "depth": 0}
+          "values": {"personaName": "OpenCombat", "name": "CombatNpc", "depth": 0}
         }
       ]
     },
@@ -141,7 +141,20 @@
       "gridCellHeight": 8,
       "gridCellsX": 89,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "GateHorizontal",
+          "id": 0,
+          "_eid": "97593426",
+          "x": -40,
+          "y": 104,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "flippedX": true,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromOpenMarket", "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "TerrainDecals",

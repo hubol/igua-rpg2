@@ -362,6 +362,74 @@ export namespace DataShop {
                     },
                 ],
             },
+            OpenCombat: {
+                stocks: [
+                    {
+                        product: { kind: "equipment", id: "DefensePhysicalAndPerfectBonus", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "valuables", deltaSold: 0, initial: 250 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "HealthUp", level: 1 },
+                        initialQuantity: 3,
+                        price: { currency: "valuables", deltaSold: 50, initial: 250 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "StrengthUp", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "valuables", deltaSold: 0, initial: 250 },
+                    },
+
+                    {
+                        product: { kind: "potion", id: "AttributeHealthUp" },
+                        initialQuantity: 3,
+                        price: { currency: "valuables", deltaSold: 100, initial: 300 },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "valuables", deltaSold: 0, initial: 750 },
+                    },
+                ],
+            },
+            OpenJump: {
+                stocks: [
+                    {
+                        product: { kind: "equipment", id: "BallonDrainOnGround", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "valuables", deltaSold: 0, initial: 250 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "JumpAtSpecialSignsRing", level: 1 },
+                        initialQuantity: 2,
+                        price: { currency: "valuables", deltaSold: 50, initial: 250 },
+                    },
+                    {
+                        product: { kind: "potion", id: "Ballon" },
+                        initialQuantity: 99,
+                        price: { currency: "valuables", deltaSold: 0, initial: 30 },
+                    },
+                ],
+            },
+            OpenFood: {
+                stocks: [
+                    {
+                        product: { kind: "potion", id: "RestoreHealth" },
+                        initialQuantity: 25,
+                        price: { currency: "valuables", deltaSold: 3, initial: 10 },
+                    },
+                    {
+                        product: { kind: "potion", id: "PoisonRestore" },
+                        initialQuantity: 99,
+                        price: { currency: "valuables", deltaSold: 20, initial: 10 },
+                    },
+                    {
+                        product: { kind: "potion", id: "ThrowableBerry" },
+                        initialQuantity: 9,
+                        price: { currency: "valuables", deltaSold: 70, initial: 30 },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );

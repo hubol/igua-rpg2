@@ -18,7 +18,7 @@ export function mxnYell(obj: DisplayObject) {
             if (obj.is(mxnSpeaker)) {
                 obj.dispatch("mxnSpeaker.speakingStarted");
                 obj.coro(function* () {
-                    yield sleep(250);
+                    yield sleep(2000);
                     obj.dispatch("mxnSpeaker.speakingEnded");
                 });
             }

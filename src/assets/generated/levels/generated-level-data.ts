@@ -6672,9 +6672,10 @@ export const Lvl = {
       Block_7: e(r["Block"], { x: 120, y: 112, width: 136, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Slope_4: e(r["Slope"], { x: 88, y: 112, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Slope_5: e(r["Slope"], { x: 256, y: 112, width: 32, height: 16, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      MarketNpc0: e(r["IguanaNpc"], { x: 160, y: 96, flippedX: false, values: { personaName: "", name: "MarketNpc0", depth: 0 } }, "CharacterEntities"),
-      MarketNpc1: e(r["IguanaNpc"], { x: 304, y: 216, flippedX: true, values: { personaName: "", name: "MarketNpc1", depth: 0 } }, "CharacterEntities"),
-      MarketNpc2: e(r["IguanaNpc"], { x: 544, y: 112, flippedX: false, values: { personaName: "", name: "MarketNpc2", depth: 0 } }, "CharacterEntities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -40, y: 104, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromOpenMarket", name: "", depth: 0 } }, "Entities"),
+      JumpNpc: e(r["IguanaNpc"], { x: 160, y: 96, flippedX: false, values: { personaName: "OpenJump", name: "JumpNpc", depth: 0 } }, "CharacterEntities"),
+      FoodNpc: e(r["IguanaNpc"], { x: 304, y: 216, flippedX: true, values: { personaName: "OpenFood", name: "FoodNpc", depth: 0 } }, "CharacterEntities"),
+      CombatNpc: e(r["IguanaNpc"], { x: 544, y: 112, flippedX: false, values: { personaName: "OpenCombat", name: "CombatNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 56, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     };
   },
@@ -15992,9 +15993,10 @@ export namespace LvlType {
     Block_7: ReturnType<(typeof r)["Block"]>;
     Slope_4: ReturnType<(typeof r)["Slope"]>;
     Slope_5: ReturnType<(typeof r)["Slope"]>;
-    MarketNpc0: ReturnType<(typeof r)["IguanaNpc"]>;
-    MarketNpc1: ReturnType<(typeof r)["IguanaNpc"]>;
-    MarketNpc2: ReturnType<(typeof r)["IguanaNpc"]>;
+    GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
+    JumpNpc: ReturnType<(typeof r)["IguanaNpc"]>;
+    FoodNpc: ReturnType<(typeof r)["IguanaNpc"]>;
+    CombatNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     Player: ReturnType<(typeof r)["Player"]>;
   };
   export type PlainsSuggestiveCavern = {
