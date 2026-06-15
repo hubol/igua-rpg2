@@ -55,6 +55,9 @@ export namespace DataGift {
             "Ohio.Market.Flip": {
                 item: { kind: "potion", id: "HotDogKetchupMustardOnionRelish" },
             },
+            "Ohio.IntelligenceTower.Entrance.Gift": {
+                item: { kind: "potion", id: "AttributeHealthUp" },
+            },
             __Fallback__: {
                 item: { kind: "potion", id: "RestoreHealth" },
             },

@@ -3484,7 +3484,10 @@ export const Lvl = {
       FoliageVine2_1: d(Tx.Foliage.Vine2, { x: 705, y: 51, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e9f5a }, "TerrainDecals"),
       FoliageVine2_2: d(Tx.Foliage.Vine2, { x: 699, y: 88, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e9f5a }, "TerrainDecals"),
       FoliageLeaf14: d(Tx.Foliage.Leaf14, { x: 692, y: 82, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e9f5a }, "TerrainDecals"),
-      ShapesSquare32_2: d(Tx.Shapes.Square32, { x: 0, y: 240, scaleX: 25, scaleY: 5, rotation: 0, originX: 0, originY: 0, tint: 0x81bde9 }, "AboveEntitiesDecals"),
+      ShapesSquare32_2: d(Tx.Shapes.Square32, { x: 652, y: 56, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x919191 }, "TerrainDecals"),
+      ShapesConfetti18x8_1: d(Tx.Shapes.Confetti18x8, { x: 651, y: 74, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x919191 }, "TerrainDecals"),
+      Gift: d(Tx.Esoteric.GiftBox, { x: 651, y: 56, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      ShapesSquare32_3: d(Tx.Shapes.Square32, { x: 0, y: 240, scaleX: 25, scaleY: 5, rotation: 0, originX: 0, originY: 0, tint: 0x81bde9 }, "AboveEntitiesDecals"),
       ShapesDashedLine3px: d(Tx.Shapes.DashedLine3px, { x: 230, y: 244, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
       ShapesDashedLine3px_1: d(Tx.Shapes.DashedLine3px, { x: 390, y: 260, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
       ShapesDashedLine3px_2: d(Tx.Shapes.DashedLine3px, { x: 62, y: 247, scaleX: 1, scaleY: -1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
@@ -12933,6 +12936,9 @@ export namespace LvlType {
     FoliageVine2_2: Sprite;
     FoliageLeaf14: Sprite;
     ShapesSquare32_2: Sprite;
+    ShapesConfetti18x8_1: Sprite;
+    Gift: Sprite;
+    ShapesSquare32_3: Sprite;
     ShapesDashedLine3px: Sprite;
     ShapesDashedLine3px_1: Sprite;
     ShapesDashedLine3px_2: Sprite;
