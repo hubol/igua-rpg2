@@ -8,6 +8,36 @@ export namespace DataShop {
         stocks: Stock[];
     }
 
+    const defaultGluemaker: Model = {
+        stocks: [
+            {
+                initialQuantity: 10,
+                price: { currency: "combat", deltaSold: 100, initial: 150 },
+                product: { kind: "key_item", id: "EquipmentGlue" },
+            },
+            {
+                initialQuantity: 10,
+                price: { currency: "valuables", deltaSold: 100, initial: 50 },
+                product: { kind: "key_item", id: "EquipmentGlue" },
+            },
+            {
+                initialQuantity: 10,
+                price: { currency: "pocket", deltaSold: 50, initial: 50 },
+                product: { kind: "key_item", id: "EquipmentGlue" },
+            },
+            {
+                initialQuantity: 10,
+                price: { currency: "jump", deltaSold: 400, initial: 100 },
+                product: { kind: "key_item", id: "EquipmentGlue" },
+            },
+            {
+                initialQuantity: 10,
+                price: { currency: "gambling", deltaSold: 130, initial: 100 },
+                product: { kind: "key_item", id: "EquipmentGlue" },
+            },
+        ],
+    };
+
     export const { manifest, getById } = DataLib.create(
         "DataShop",
         {
@@ -123,35 +153,8 @@ export namespace DataShop {
                     },
                 ],
             },
-            Gluemaker: {
-                stocks: [
-                    {
-                        initialQuantity: 10,
-                        price: { currency: "combat", deltaSold: 100, initial: 150 },
-                        product: { kind: "key_item", id: "EquipmentGlue" },
-                    },
-                    {
-                        initialQuantity: 10,
-                        price: { currency: "valuables", deltaSold: 100, initial: 50 },
-                        product: { kind: "key_item", id: "EquipmentGlue" },
-                    },
-                    {
-                        initialQuantity: 10,
-                        price: { currency: "pocket", deltaSold: 50, initial: 50 },
-                        product: { kind: "key_item", id: "EquipmentGlue" },
-                    },
-                    {
-                        initialQuantity: 10,
-                        price: { currency: "jump", deltaSold: 400, initial: 100 },
-                        product: { kind: "key_item", id: "EquipmentGlue" },
-                    },
-                    {
-                        initialQuantity: 10,
-                        price: { currency: "gambling", deltaSold: 130, initial: 100 },
-                        product: { kind: "key_item", id: "EquipmentGlue" },
-                    },
-                ],
-            },
+            GluemakerIndiana: defaultGluemaker,
+            GluemakerOhio: defaultGluemaker,
             GreatTower: {
                 stocks: [
                     {

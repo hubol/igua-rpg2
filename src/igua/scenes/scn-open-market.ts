@@ -2,6 +2,7 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { DataShop } from "../data/data-shop";
+import { DramaEquipment } from "../drama/drama-equipment";
 import { DramaGifts } from "../drama/drama-gifts";
 import { DramaLib } from "../drama/drama-lib";
 import { dramaShop } from "../drama/drama-shop";
@@ -41,6 +42,20 @@ export function scnOpenMarket() {
                 "Need to be tougher? I have some stuff for you!",
             ],
             shopId: "OpenCombat",
+        });
+
+    lvl.GluemakerNpc
+        .mixin(mxnShopkeeper, {
+            messages: [
+                "Selling glue for combining shoes!",
+                "I've got loads of glue! Useful for improving shoes!",
+            ],
+            shopId: "GluemakerOhio",
+        });
+
+    lvl.CobblerNpc
+        .mixin(mxnCutscene, function* () {
+            yield* DramaEquipment.upgrade();
         });
 
     enrichFlipNpc(lvl);

@@ -50,7 +50,7 @@ function enrichGluemaker(lvl: LvlType.Cobbler0) {
         );
 
         if (result === 0) {
-            yield* dramaShop("Gluemaker", { tintPrimary: 0x100327, tintSecondary: 0xD1EBFF });
+            yield* dramaShop("GluemakerIndiana", { tintPrimary: 0x100327, tintSecondary: 0xD1EBFF });
         }
         else if (result === 1) {
             yield* show(
