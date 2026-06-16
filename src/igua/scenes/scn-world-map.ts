@@ -3,10 +3,8 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
-import { Instances } from "../../lib/game-engine/instances";
 import { interpv } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
-import { Rng } from "../../lib/math/rng";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaQuests } from "../drama/drama-quests";
@@ -19,9 +17,9 @@ import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFallenBot } from "../objects/characters/obj-character-fallen-bot";
 import { objEsotericHotDogCondimentDispenser } from "../objects/esoteric/obj-esoteric-hot-dog-condiment-dispenser";
 import { playerObj } from "../objects/obj-player";
-import { OgmoFactory } from "../ogmo/factory";
 import { Rpg } from "../rpg/rpg";
 import { RpgSaveFiles } from "../rpg/rpg-save-files";
+import { Search } from "../utils/search";
 
 export function scnWorldMap() {
     RpgSaveFiles.Current.save();
@@ -30,9 +28,7 @@ export function scnWorldMap() {
     }
 
     const lvl = Lvl.WorldMap();
-    Instances(OgmoFactory.createDecal).filter(x => x.texture === Tx.WorldMap.Cloud0).forEach(x =>
-        x.mixin(mxnSinePivot)
-    );
+    Search.findDecals(Tx.WorldMap.Cloud0).forEach(x => x.mixin(mxnSinePivot));
     Object.entries(lvl).flatMap(([key, value]) =>
         key.endsWith("Label") && value instanceof DisplayObject ? [value] : []
     ).forEach(x => x.mixin(mxnBoilPivot));

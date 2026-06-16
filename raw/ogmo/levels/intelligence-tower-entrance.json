@@ -4,8 +4,8 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#83e224",
   "values": {"Terrain Color": "#ff6753"},
+  "backgroundColor": "#83e224",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -133,7 +133,20 @@
       "gridCellsY": 35,
       "decals": [
         {
-          "x": 0,
+          "x": 88,
+          "y": 242,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#81bde9",
+          "texture": "terrain/earth/smooth.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": -8,
           "y": 240,
           "scaleX": 25,
           "scaleY": 5,
@@ -142,10 +155,11 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
         },
         {
-          "x": 230,
+          "x": 222,
           "y": 244,
           "scaleX": 1,
           "scaleY": 1,
@@ -154,10 +168,11 @@
           "texture": "shapes/dashed line 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
         },
         {
-          "x": 390,
+          "x": 382,
           "y": 260,
           "scaleX": 1,
           "scaleY": 1,
@@ -166,10 +181,11 @@
           "texture": "shapes/dashed line 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
         },
         {
-          "x": 62,
+          "x": 54,
           "y": 247,
           "scaleX": 1,
           "scaleY": -1,
@@ -178,10 +194,11 @@
           "texture": "shapes/dashed line 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
         },
         {
-          "x": 566,
+          "x": 558,
           "y": 246,
           "scaleX": 1,
           "scaleY": 1,
@@ -190,10 +207,11 @@
           "texture": "shapes/dashed line 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
         },
         {
-          "x": 758,
+          "x": 750,
           "y": 262,
           "scaleX": -1,
           "scaleY": -1,
@@ -202,7 +220,47 @@
           "texture": "shapes/dashed line 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 432,
+          "y": 242,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#81bde9",
+          "texture": "terrain/earth/smooth.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 328,
+          "y": 242,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#81bde9",
+          "texture": "terrain/earth/smooth.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 688,
+          "y": 242,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#81bde9",
+          "texture": "terrain/earth/smooth.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
         }
       ],
       "folder": "../textures"
@@ -238,7 +296,8 @@
           "texture": "stone/brick rows 3.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 672,
@@ -250,7 +309,8 @@
           "texture": "stone/brick rows 3 b.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 616,
@@ -262,7 +322,8 @@
           "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 660,
@@ -274,7 +335,8 @@
           "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 591,
@@ -286,7 +348,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 634,
@@ -298,7 +361,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 712,
@@ -310,7 +374,8 @@
           "texture": "foliage/vine2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 705,
@@ -322,7 +387,8 @@
           "texture": "foliage/vine2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 699,
@@ -334,7 +400,8 @@
           "texture": "foliage/vine2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 692,
@@ -346,7 +413,8 @@
           "texture": "foliage/leaf 14.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 652,
@@ -358,7 +426,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 651,
@@ -370,7 +439,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 651,
@@ -382,7 +452,8 @@
           "texture": "esoteric/gift box.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "Gift"}
+          "values": {"name": "Gift"},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -898,7 +969,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -923,7 +995,8 @@
           "texture": "sky/cloud0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 346,
@@ -935,7 +1008,8 @@
           "texture": "sky/cloud0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 582,
@@ -947,7 +1021,8 @@
           "texture": "sky/cloud0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

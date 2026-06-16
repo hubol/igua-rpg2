@@ -3,7 +3,6 @@ import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Tx } from "../../assets/textures";
-import { Instances } from "../../lib/game-engine/instances";
 import { interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
@@ -24,8 +23,8 @@ import { mxnWeightedPedestalMask } from "../mixins/mxn-weighted-pedestal-mask";
 import { objMusician } from "../objects/characters/obj-musician";
 import { objCollectiblePotion } from "../objects/collectibles/obj-collectible-potion";
 import { objFxEighthNote } from "../objects/effects/obj-fx-eighth-note";
-import { OgmoFactory } from "../ogmo/factory";
 import { Rpg } from "../rpg/rpg";
+import { Search } from "../utils/search";
 
 export function scnStrangeMarket() {
     Jukebox.play(Rpg.character.position.checkpointName === "fromTowerBelow" ? Mzk.SoldierBoyDemo : Mzk.BigLove);
@@ -128,8 +127,7 @@ function enrichMusicians(lvl: LvlType.StrangeMarket) {
             .speed.at(target.x * -2.3, target.y * 2);
     }
 
-    const heartObjs = Instances(OgmoFactory.createDecal)
-        .filter(x => x.texture === Tx.Terrain.Earth.Heart24px)
+    const heartObjs = Search.findDecals(Tx.Terrain.Earth.Heart24px)
         .map(obj => obj.mixin(mxnHeartbeat));
 
     function twitchHeartDecalObjs() {
