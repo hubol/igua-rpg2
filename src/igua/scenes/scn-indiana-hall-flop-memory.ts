@@ -25,7 +25,7 @@ import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
 
 export function scnIndianaHallFlopMemory() {
-    Jukebox.play(Mzk.InvisibleTape);
+    Jukebox.play(Mzk.UnimaginableUrge);
     const lvl = Lvl.IndianaHallFlopMemory();
 
     const picker = new MutateFlopNumberPicker();

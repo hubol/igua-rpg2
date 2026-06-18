@@ -1,5 +1,6 @@
 import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Sound } from "../../lib/game-engine/audio/sound";
@@ -14,6 +15,7 @@ import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { CollisionShape } from "../../lib/pixi/collision";
 import { Null } from "../../lib/types/null";
+import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataPotion } from "../data/data-potion";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
@@ -41,6 +43,7 @@ import { RpgFaction } from "../rpg/rpg-faction";
 import { Search } from "../utils/search";
 
 export function scnIndianaHallTamago() {
+    Jukebox.play(Mzk.InvisibleTape);
     const lvl = Lvl.IndianaHallTamago();
     const cosmHallOfDoors = Rpg.microcosms["Indiana.HallOfDoors"];
 
