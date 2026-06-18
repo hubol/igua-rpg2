@@ -17,16 +17,48 @@ import { Cutscene, scene } from "../globals";
 import { mxnInteract } from "../mixins/mxn-interact";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { objCharacterFlopQuizMaster } from "../objects/characters/obj-character-flop-quiz-master";
+import { objCharacterWindTurbine } from "../objects/characters/obj-character-wind-turbine";
 import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
+import { objFxSparkle40Px } from "../objects/effects/obj-fx-sparkle-40px";
 import { objFigureFlop } from "../objects/figures/obj-figure-flop";
 import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
 
 export function scnIndianaHallFlopMemory() {
     Jukebox.play(Mzk.InvisibleTape);
-    Lvl.IndianaHallFlopMemory();
+    const lvl = Lvl.IndianaHallFlopMemory();
 
     const picker = new MutateFlopNumberPicker();
+
+    [lvl.TurbineMarker0, lvl.TurbineMarker1]
+        .forEach(position => {
+            const turbineObj = objCharacterWindTurbine()
+                .at(position)
+                .zIndexed(ZIndex.BackgroundDecals)
+                .step(self => self.objCharacterWindTurbine.angle += Rng.float(1))
+                .show();
+
+            turbineObj.objCharacterWindTurbine.angle = Rng.int(360);
+        });
+
+    [
+        lvl.StarMarker0,
+        lvl.StarMarker1,
+        lvl.StarMarker2,
+        lvl.StarMarker3,
+        lvl.StarMarker4,
+        lvl.StarMarker5,
+        lvl.StarMarker6,
+        lvl.StarMarker7,
+        lvl.StarMarker8,
+    ]
+        .forEach(markerObj =>
+            objFxSparkle40Px()
+                .tinted(markerObj.tint)
+                .at(markerObj)
+                .zIndexed(ZIndex.BackgroundDecals - 1)
+                .show()
+        );
 
     scene.stage
         .coro(function* () {
