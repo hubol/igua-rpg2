@@ -2803,7 +2803,24 @@ export const Lvl = {
       ShapesRectangleScribbled176X98_8: d(Tx.Shapes.RectangleScribbled176X98, { x: 829, y: 21, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
       ShapesRectangleScribbled176X98_9: d(Tx.Shapes.RectangleScribbled176X98, { x: 215, y: 120, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
       ShapesRectangleScribbled176X98_10: d(Tx.Shapes.RectangleScribbled176X98, { x: 215, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
-      ShapesSquare32: d(Tx.Shapes.Square32, { x: 435, y: 138, scaleX: 1.4, scaleY: 3.7, rotation: 0, originX: 0, originY: 0, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_11: d(Tx.Shapes.RectangleScribbled176X98, { x: 88, y: -40, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_12: d(Tx.Shapes.RectangleScribbled176X98, { x: 256, y: -40, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_13: d(Tx.Shapes.RectangleScribbled176X98, { x: 424, y: -40, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_14: d(Tx.Shapes.RectangleScribbled176X98, { x: 592, y: -40, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_15: d(Tx.Shapes.RectangleScribbled176X98, { x: 760, y: -40, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled58X46: d(Tx.Shapes.RectangleScribbled58X46, { x: 458, y: 209, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled58X46_1: d(Tx.Shapes.RectangleScribbled58X46, { x: 457, y: 184, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled58X46_2: d(Tx.Shapes.RectangleScribbled58X46, { x: 455, y: 155, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled58X46_3: d(Tx.Shapes.RectangleScribbled58X46, { x: 369, y: 222, scaleX: -1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled58X46_4: d(Tx.Shapes.RectangleScribbled58X46, { x: 542, y: 226, scaleX: 1, scaleY: -1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled58X46_5: d(Tx.Shapes.RectangleScribbled58X46, { x: 279, y: 225, scaleX: 1, scaleY: -1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled58X46_6: d(Tx.Shapes.RectangleScribbled58X46, { x: 635, y: 220, scaleX: -1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled58X46_7: d(Tx.Shapes.RectangleScribbled58X46, { x: 719, y: 219, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled58X46_8: d(Tx.Shapes.RectangleScribbled58X46, { x: 283, y: 155, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled58X46_9: d(Tx.Shapes.RectangleScribbled58X46, { x: 150, y: 107, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled58X46_10: d(Tx.Shapes.RectangleScribbled58X46, { x: 175, y: 166, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled58X46_11: d(Tx.Shapes.RectangleScribbled58X46, { x: 147, y: 139, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled58X46_12: d(Tx.Shapes.RectangleScribbled58X46, { x: 280, y: 108, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 152, y: 224, width: 640, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 352, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 264, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
@@ -2814,6 +2831,8 @@ export const Lvl = {
       Block_7: e(r["Block"], { x: 0, y: 208, width: 152, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
       Block_8: e(r["Block"], { x: -128, y: -24, width: 128, height: 256, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
       Block_9: e(r["Block"], { x: 792, y: -8, width: 128, height: 256, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
+      TerrainEarthMass0: d(Tx.Terrain.Earth.Mass0, { x: 741, y: 289, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e3e3e }, "TerrainDecals"),
+      TerrainEarthMass0_1: d(Tx.Terrain.Earth.Mass0, { x: 284, y: 289, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e3e3e }, "TerrainDecals"),
       LightGlassMetalSheen20px: d(Tx.Light.GlassMetalSheen20px, { x: 139, y: 224, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
       LightGlassMetalSheen20px_1: d(Tx.Light.GlassMetalSheen20px, { x: 285, y: 224, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
       LightGlassMetalSheen20px_2: d(Tx.Light.GlassMetalSheen20px, { x: 373, y: 223, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
@@ -2823,6 +2842,31 @@ export const Lvl = {
       LightGlassMetalSheen20px_6: d(Tx.Light.GlassMetalSheen20px, { x: 638, y: 221, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
       LightGlassMetalSheen20px_7: d(Tx.Light.GlassMetalSheen20px, { x: 725, y: 222, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
       LightGlassMetalSheen20px_8: d(Tx.Light.GlassMetalSheen20px, { x: 782, y: 239, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
+      TerrainEarthMass0_2: d(Tx.Terrain.Earth.Mass0, { x: 48, y: 264, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e3e3e }, "TerrainDecals"),
+      TerrainEarthMass0_3: d(Tx.Terrain.Earth.Mass0, { x: 167, y: 280, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e3e3e }, "TerrainDecals"),
+      TerrainEarthMass0_4: d(Tx.Terrain.Earth.Mass0, { x: 389, y: 289, scaleX: -1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e3e3e }, "TerrainDecals"),
+      TerrainEarthMass0_5: d(Tx.Terrain.Earth.Mass0, { x: 509, y: 289, scaleX: -1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e3e3e }, "TerrainDecals"),
+      TerrainEarthMass0_6: d(Tx.Terrain.Earth.Mass0, { x: 629, y: 289, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e3e3e }, "TerrainDecals"),
+      TerrainEarthMass0_7: d(Tx.Terrain.Earth.Mass0, { x: -72, y: 256, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e3e3e }, "TerrainDecals"),
+      TerrainEarthMass0_8: d(Tx.Terrain.Earth.Mass0, { x: 859, y: 264, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3e3e3e }, "TerrainDecals"),
+      TerrainEarthMass0_9: d(Tx.Terrain.Earth.Mass0, { x: 56, y: 296, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2d2d2d }, "TerrainDecals"),
+      TerrainEarthMass0_10: d(Tx.Terrain.Earth.Mass0, { x: 160, y: 312, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2d2d2d }, "TerrainDecals"),
+      TerrainEarthMass0_11: d(Tx.Terrain.Earth.Mass0, { x: 288, y: 328, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2d2d2d }, "TerrainDecals"),
+      TerrainEarthMass0_12: d(Tx.Terrain.Earth.Mass0, { x: 408, y: 344, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2d2d2d }, "TerrainDecals"),
+      TerrainEarthMass0_13: d(Tx.Terrain.Earth.Mass0, { x: -72, y: 280, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2d2d2d }, "TerrainDecals"),
+      FoliageFlower14: d(Tx.Foliage.Flower14, { x: 26, y: 226, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x0000ff }, "TerrainDecals"),
+      FoliageFlower18: d(Tx.Foliage.Flower18, { x: 60, y: 241, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffff00 }, "TerrainDecals"),
+      FoliageFlower22: d(Tx.Foliage.Flower22, { x: 102, y: 226, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff0000 }, "TerrainDecals"),
+      StoneRockSmallShaded1: d(Tx.Stone.RockSmallShaded1, { x: 65, y: 209, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_1: d(Tx.Stone.RockSmallShaded1, { x: 46, y: 219, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_2: d(Tx.Stone.RockSmallShaded1, { x: 126, y: 210, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRock0: d(Tx.Stone.Rock0, { x: 32, y: 205, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_3: d(Tx.Stone.RockSmallShaded1, { x: 194, y: 224, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_4: d(Tx.Stone.RockSmallShaded1, { x: 207, y: 236, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_5: d(Tx.Stone.RockSmallShaded1, { x: 286, y: 208, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_6: d(Tx.Stone.RockSmallShaded1, { x: 750, y: 223, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_7: d(Tx.Stone.RockSmallShaded1, { x: 765, y: 231, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_8: d(Tx.Stone.RockSmallShaded1, { x: 780, y: 224, scaleX: -1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       PainterNpc: e(r["IguanaNpc"], { x: 96, y: 208, flippedX: false, values: { personaName: "IndianaHallPainter", name: "PainterNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 224, y: 224, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       Puddle: e(r["Puddle"], { x: 296, y: 224, width: 56, values: { name: "", depth: 0 }, tint: 0xff0000 }, "FrontEntities"),
@@ -12463,7 +12507,24 @@ export namespace LvlType {
     ShapesRectangleScribbled176X98_8: Sprite;
     ShapesRectangleScribbled176X98_9: Sprite;
     ShapesRectangleScribbled176X98_10: Sprite;
-    ShapesSquare32: Sprite;
+    ShapesRectangleScribbled176X98_11: Sprite;
+    ShapesRectangleScribbled176X98_12: Sprite;
+    ShapesRectangleScribbled176X98_13: Sprite;
+    ShapesRectangleScribbled176X98_14: Sprite;
+    ShapesRectangleScribbled176X98_15: Sprite;
+    ShapesRectangleScribbled58X46: Sprite;
+    ShapesRectangleScribbled58X46_1: Sprite;
+    ShapesRectangleScribbled58X46_2: Sprite;
+    ShapesRectangleScribbled58X46_3: Sprite;
+    ShapesRectangleScribbled58X46_4: Sprite;
+    ShapesRectangleScribbled58X46_5: Sprite;
+    ShapesRectangleScribbled58X46_6: Sprite;
+    ShapesRectangleScribbled58X46_7: Sprite;
+    ShapesRectangleScribbled58X46_8: Sprite;
+    ShapesRectangleScribbled58X46_9: Sprite;
+    ShapesRectangleScribbled58X46_10: Sprite;
+    ShapesRectangleScribbled58X46_11: Sprite;
+    ShapesRectangleScribbled58X46_12: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Block_1: ReturnType<(typeof r)["Block"]>;
     Block_2: ReturnType<(typeof r)["Block"]>;
@@ -12474,6 +12535,8 @@ export namespace LvlType {
     Block_7: ReturnType<(typeof r)["Block"]>;
     Block_8: ReturnType<(typeof r)["Block"]>;
     Block_9: ReturnType<(typeof r)["Block"]>;
+    TerrainEarthMass0: Sprite;
+    TerrainEarthMass0_1: Sprite;
     LightGlassMetalSheen20px: Sprite;
     LightGlassMetalSheen20px_1: Sprite;
     LightGlassMetalSheen20px_2: Sprite;
@@ -12483,6 +12546,31 @@ export namespace LvlType {
     LightGlassMetalSheen20px_6: Sprite;
     LightGlassMetalSheen20px_7: Sprite;
     LightGlassMetalSheen20px_8: Sprite;
+    TerrainEarthMass0_2: Sprite;
+    TerrainEarthMass0_3: Sprite;
+    TerrainEarthMass0_4: Sprite;
+    TerrainEarthMass0_5: Sprite;
+    TerrainEarthMass0_6: Sprite;
+    TerrainEarthMass0_7: Sprite;
+    TerrainEarthMass0_8: Sprite;
+    TerrainEarthMass0_9: Sprite;
+    TerrainEarthMass0_10: Sprite;
+    TerrainEarthMass0_11: Sprite;
+    TerrainEarthMass0_12: Sprite;
+    TerrainEarthMass0_13: Sprite;
+    FoliageFlower14: Sprite;
+    FoliageFlower18: Sprite;
+    FoliageFlower22: Sprite;
+    StoneRockSmallShaded1: Sprite;
+    StoneRockSmallShaded1_1: Sprite;
+    StoneRockSmallShaded1_2: Sprite;
+    StoneRock0: Sprite;
+    StoneRockSmallShaded1_3: Sprite;
+    StoneRockSmallShaded1_4: Sprite;
+    StoneRockSmallShaded1_5: Sprite;
+    StoneRockSmallShaded1_6: Sprite;
+    StoneRockSmallShaded1_7: Sprite;
+    StoneRockSmallShaded1_8: Sprite;
     PainterNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     Puddle: ReturnType<(typeof r)["Puddle"]>;
