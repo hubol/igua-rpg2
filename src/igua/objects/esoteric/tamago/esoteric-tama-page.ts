@@ -1,6 +1,7 @@
 import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { objText } from "../../../../assets/fonts";
 import { Tx } from "../../../../assets/textures";
+import { Coro } from "../../../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../../lib/game-engine/routines/sleep";
 import { Integer } from "../../../../lib/math/number-alias-types";
@@ -16,6 +17,7 @@ import { mxnBoilPivot } from "../../../mixins/mxn-boil-pivot";
 import { mxnBoilSeed } from "../../../mixins/mxn-boil-seed";
 import { MicrocosmTamago } from "../../../rpg/microcosms/microcosm-tamago";
 import { RpgInventory } from "../../../rpg/rpg-inventory";
+import { objIndexedSprite } from "../../utils/obj-indexed-sprite";
 import { EsotericTamaButtons } from "./esoteric-tama-buttons";
 
 export abstract class EsotericTamaPage {
@@ -71,9 +73,7 @@ export namespace EsotericTamaPage {
                 if (this._selectedIndex === 1) {
                     const checkEat = this._cosmTamago.checkEat();
                     if (checkEat.success) {
-                        // TODO
-                        this._cosmTamago.eat();
-                        return;
+                        return new Eat(this, this._cosmTamago);
                     }
 
                     if (checkEat.reason === "no_food") {
@@ -159,6 +159,63 @@ export namespace EsotericTamaPage {
                     .invisible()
                     .step(self => self.visible = Boolean(this._session.result)),
             );
+        }
+    }
+
+    export class Eat extends EsotericTamaPage {
+        constructor(
+            private readonly _returnPage: EsotericTamaPage,
+            private readonly _cosmTamago: MicrocosmTamago,
+        ) {
+            super();
+        }
+
+        private _isAnimationComplete = false;
+
+        step() {
+            if (this._isAnimationComplete) {
+                this._cosmTamago.eat();
+                return this._returnPage;
+            }
+        }
+
+        getDisplayObject() {
+            const beetObj = objIndexedSprite(txsBeet)
+                .pivoted(0, 60)
+                .at(80, 0);
+            const characterObj = objIndexedSprite(txsEating)
+                .pivoted(0, -90);
+
+            const page = this;
+
+            return container(
+                beetObj,
+                characterObj,
+            )
+                .coro(function* () {
+                    yield* Coro.all([
+                        interpvr(beetObj.pivot).to(0, 0).over(500),
+                        interpvr(characterObj.pivot).factor(factor.sine).to(0, 0).over(500),
+                    ]);
+
+                    yield sleep(500);
+
+                    for (let i = 1; i < 5; i++) {
+                        if (i === 4) {
+                            beetObj.visible = false;
+                        }
+                        else {
+                            beetObj.textureIndex = i;
+                        }
+                        characterObj.textureIndex = 1;
+                        yield sleep(500);
+                        characterObj.textureIndex = 0;
+                        yield sleep(500);
+                    }
+
+                    yield sleep(500);
+                    page._isAnimationComplete = true;
+                });
         }
     }
 
@@ -453,6 +510,8 @@ function objEsotericTamaHome(cosmTamago: MicrocosmTamago) {
     );
 }
 
+const txsEating = Tx.Esoteric.Tamago.EatingCharacter.split({ count: 2 });
+const txsBeet = Tx.Esoteric.Tamago.EatingBeet.split({ count: 4 });
 const txsStar = Tx.Esoteric.Tamago.Star.split({ count: 2 });
 
 function objEsotericTamaBar(maxValue: Integer, valueProvider: () => Integer) {
