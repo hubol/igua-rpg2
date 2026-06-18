@@ -237,7 +237,7 @@
           "id": 4,
           "_eid": "95769929",
           "x": 352,
-          "y": 191,
+          "y": 188,
           "width": 64,
           "values": {"name": "", "visible": false, "depth": 0}
         }
@@ -264,6 +264,18 @@
       "gridCellsX": 64,
       "gridCellsY": 35,
       "decals": [
+        {
+          "x": 32,
+          "y": 16,
+          "scaleX": 13.5,
+          "scaleY": 7.5,
+          "rotation": 0,
+          "tint": "#2e0d33",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
         {
           "x": 80,
           "y": 64,

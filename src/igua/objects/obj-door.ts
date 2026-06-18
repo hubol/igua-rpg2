@@ -26,7 +26,7 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
 
     let sceneChanger = SceneChanger.create({ sceneName, checkpointName });
 
-    const openObj = Sprite.from(Tx.Door.Normal.Open);
+    const openObj = Sprite.from(Tx.Door.Normal.Open).tinted(0x252525);
     const maskObj0 = new Graphics().beginFill(0x000000).drawRect(0, 0, 34, 46);
     const maskObj1 = new Graphics().beginFill(0x000000).drawRect(0, 0, 34, 46);
     const maskObj2 = new Graphics().beginFill(0x000000).drawRect(0, 0, 34, 46);
@@ -87,6 +87,12 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
         changeScene() {
             DramaMisc.departRoomViaDoor(null);
             sceneChanger.changeScene();
+        },
+        get openTint() {
+            return openObj.tint;
+        },
+        set openTint(value) {
+            openObj.tint = value;
         },
     };
 

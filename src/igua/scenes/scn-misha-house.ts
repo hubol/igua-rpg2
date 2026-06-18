@@ -6,6 +6,7 @@ import { ZIndex } from "../core/scene/z-index";
 import { DramaQuests } from "../drama/drama-quests";
 import { show } from "../drama/show";
 import { Cutscene } from "../globals";
+import { mxnFxTintRotate } from "../mixins/effects/mxn-fx-tint-rotate";
 import { mxnBoilTextureIndex } from "../mixins/mxn-boil-texture-index";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnEnemy } from "../mixins/mxn-enemy";
@@ -29,7 +30,13 @@ export function scnMishaHouse() {
                 "I am very sad...",
                 "Problems in production...",
             );
+        })
+        .coro(function* (self) {
+            yield () => quest.everCompleted;
+            self.head.mouth.emote.happy();
         });
+
+    lvl.Door.objDoor.openTint = 0x000000;
 
     if (quest.everCompleted) {
         return;
@@ -67,7 +74,9 @@ function objMishaComputer() {
     const computerObj = Sprite.from(txComputer);
     return container(
         computerObj,
-        objIndexedSprite(txsComputerLayers).mixin(mxnBoilTextureIndex),
+        objIndexedSprite(txsComputerLayers)
+            .mixin(mxnBoilTextureIndex)
+            .mixin(mxnFxTintRotate),
     )
         .pivoted(29, 30)
         .mixin(mxnEnemy, { hurtboxes: [computerObj], rank: rankComputer })

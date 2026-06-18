@@ -3756,7 +3756,8 @@ export const Lvl = {
   MishaHouse: (): LvlType.MishaHouse => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x000000, terrainTint: 0x39175b });
     return {
-      ShapesSquare32: d(Tx.Shapes.Square32, { x: 80, y: 64, scaleX: 11, scaleY: 5, rotation: 0, originX: 0, originY: 0, tint: 0x19062d }, "BackgroundDecals"),
+      ShapesSquare32: d(Tx.Shapes.Square32, { x: 32, y: 16, scaleX: 13.5, scaleY: 7.5, rotation: 0, originX: 0, originY: 0, tint: 0x2e0d33 }, "BackgroundDecals"),
+      ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 80, y: 64, scaleX: 11, scaleY: 5, rotation: 0, originX: 0, originY: 0, tint: 0x19062d }, "BackgroundDecals"),
       StoneBrickRows1: d(Tx.Stone.BrickRows1, { x: 120, y: 104, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x000000 }, "BackgroundDecals"),
       StoneBrickRows1_1: d(Tx.Stone.BrickRows1, { x: 242, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x000000 }, "BackgroundDecals"),
       StoneBrickRows1_2: d(Tx.Stone.BrickRows1, { x: 284, y: 121, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x000000 }, "BackgroundDecals"),
@@ -3765,7 +3766,7 @@ export const Lvl = {
       Block_1: e(r["Block"], { x: 416, y: 32, width: 32, height: 208, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 80, y: 32, width: 336, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
       Block_3: e(r["Block"], { x: 80, y: 208, width: 336, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
-      Pipe: e(r["Pipe"], { x: 352, y: 191, width: 64, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 352, y: 188, width: 64, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
       FurnitureTable0: d(Tx.Furniture.Table0, { x: 381, y: 200, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x39175b }, "TerrainDecals"),
       Door: e(r["Door"], { x: 112, y: 160, values: { sceneName: "", checkpointName: "fromMishaHouse", name: "", depth: 0 } }, "Entities"),
       MishaNpc: e(r["IguanaNpc"], { x: 320, y: 208, flippedX: false, values: { personaName: "Misha", name: "MishaNpc", depth: 0 } }, "CharacterEntities"),
@@ -13218,6 +13219,7 @@ export namespace LvlType {
   };
   export type MishaHouse = {
     ShapesSquare32: Sprite;
+    ShapesSquare32_1: Sprite;
     StoneBrickRows1: Sprite;
     StoneBrickRows1_1: Sprite;
     StoneBrickRows1_2: Sprite;
