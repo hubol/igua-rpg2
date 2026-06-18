@@ -2797,15 +2797,66 @@ export const Lvl = {
     };
   },
   IndianaHallTamago: (): LvlType.IndianaHallTamago => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x06c2dc, terrainTint: 0x06790b });
     return {
+      SkyCloudBalls1: d(Tx.Sky.CloudBalls1, { x: 48, y: 168, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      SkyCloudBalls1_1: d(Tx.Sky.CloudBalls1, { x: 103, y: 71, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      SkyCloudBalls1_2: d(Tx.Sky.CloudBalls1, { x: 408, y: 127, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      SkyCloudBalls1_3: d(Tx.Sky.CloudBalls1, { x: 484, y: 47, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      SkyCloudBalls1_4: d(Tx.Sky.CloudBalls1, { x: 39, y: 227, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x068fdc }, "ParallaxDecals"),
+      SkyCloudBalls1_5: d(Tx.Sky.CloudBalls1, { x: 158, y: 229, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x068fdc }, "ParallaxDecals"),
+      SkyCloudBalls1_6: d(Tx.Sky.CloudBalls1, { x: 280, y: 230, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x068fdc }, "ParallaxDecals"),
+      SkyCloudBalls1_7: d(Tx.Sky.CloudBalls1, { x: 401, y: 229, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x068fdc }, "ParallaxDecals"),
+      SkyCloudBalls1_8: d(Tx.Sky.CloudBalls1, { x: 519, y: 231, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x068fdc }, "ParallaxDecals"),
+      EsotericTamagoWire: d(Tx.Esoteric.Tamago.Wire, { x: 299, y: 212, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      EsotericTamagoWire_1: d(Tx.Esoteric.Tamago.Wire, { x: 262, y: 220, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      EsotericTamagoWire_2: d(Tx.Esoteric.Tamago.Wire, { x: 198, y: 213, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       TamagoShell: d(Tx.Esoteric.Tamago.Shell, { x: 140, y: 32, scaleX: 1, scaleY: 1, rotation: 0, originX: 0, originY: 0, tint: 0xffffff }, "BackgroundDecals"),
       ButtonA: d(Tx.Esoteric.Tamago.ButtonA, { x: 184, y: 194, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       ButtonC: d(Tx.Esoteric.Tamago.ButtonC, { x: 314, y: 194, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       ButtonB: d(Tx.Esoteric.Tamago.ButtonB, { x: 248, y: 202, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       DepositBox: d(Tx.Esoteric.Tamago.DepositBox, { x: 416, y: 224, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 1, tint: 0xffffff }, "BackgroundDecals"),
-      Block: e(r["Block"], { x: 0, y: 224, width: 504, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      ShapesSquare32: d(Tx.Shapes.Square32, { x: 216, y: 168, scaleX: 0.2, scaleY: 4, rotation: 0, originX: 0.5, originY: 0, tint: 0x000000 }, "BackgroundDecals"),
+      ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 280, y: 168, scaleX: 0.2, scaleY: 4, rotation: 0, originX: 0.5, originY: 0, tint: 0x000000 }, "BackgroundDecals"),
+      ShapesSquare32_2: d(Tx.Shapes.Square32, { x: 344, y: 128, scaleX: 0.2, scaleY: 4, rotation: 0, originX: 0.5, originY: 0, tint: 0x000000 }, "BackgroundDecals"),
+      ShapesSquare32_3: d(Tx.Shapes.Square32, { x: 152, y: 128, scaleX: 0.2, scaleY: 4, rotation: 0, originX: 0.5, originY: 0, tint: 0x000000 }, "BackgroundDecals"),
+      Block: e(r["Block"], { x: 0, y: 224, width: 504, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x06790b }, "TerrainEntities"),
+      TerrainGrassJagged: d(Tx.Terrain.Grass.Jagged, { x: 27, y: 226, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x06790b }, "TerrainDecals"),
+      TerrainGrassJagged_1: d(Tx.Terrain.Grass.Jagged, { x: 107, y: 226, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x06790b }, "TerrainDecals"),
+      TerrainGrassJagged_2: d(Tx.Terrain.Grass.Jagged, { x: 187, y: 226, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x06790b }, "TerrainDecals"),
+      TerrainGrassJagged_3: d(Tx.Terrain.Grass.Jagged, { x: 267, y: 226, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x06790b }, "TerrainDecals"),
+      TerrainGrassJagged_4: d(Tx.Terrain.Grass.Jagged, { x: 347, y: 225, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x06790b }, "TerrainDecals"),
+      TerrainGrassJagged_5: d(Tx.Terrain.Grass.Jagged, { x: 471, y: 226, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x06790b }, "TerrainDecals"),
+      TerrainGrassSparse3px1: d(Tx.Terrain.Grass.Sparse3px1, { x: 424, y: 223, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x06790b }, "TerrainDecals"),
+      TerrainEarthQuestionMark: d(Tx.Terrain.Earth.QuestionMark, { x: 25, y: 250, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2ba631 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_1: d(Tx.Terrain.Earth.QuestionMark, { x: 74, y: 264, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2ba631 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_2: d(Tx.Terrain.Earth.QuestionMark, { x: 136, y: 251, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2ba631 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_3: d(Tx.Terrain.Earth.QuestionMark, { x: 185, y: 265, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2ba631 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_4: d(Tx.Terrain.Earth.QuestionMark, { x: 233, y: 250, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2ba631 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_5: d(Tx.Terrain.Earth.QuestionMark, { x: 284, y: 265, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2ba631 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_6: d(Tx.Terrain.Earth.QuestionMark, { x: 329, y: 250, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2ba631 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_7: d(Tx.Terrain.Earth.QuestionMark, { x: 378, y: 264, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2ba631 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_8: d(Tx.Terrain.Earth.QuestionMark, { x: 440, y: 251, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2ba631 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_9: d(Tx.Terrain.Earth.QuestionMark, { x: 489, y: 265, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2ba631 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_10: d(Tx.Terrain.Earth.QuestionMark, { x: 537, y: 250, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2ba631 }, "TerrainDecals"),
+      TerrainEarthQuestionMark_11: d(Tx.Terrain.Earth.QuestionMark, { x: 588, y: 265, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2ba631 }, "TerrainDecals"),
+      FoliageLeaf18: d(Tx.Foliage.Leaf18, { x: 389, y: 223, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe0ed53 }, "TerrainDecals"),
+      FoliageLeaf18_1: d(Tx.Foliage.Leaf18, { x: 448, y: 223, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa5d53f }, "TerrainDecals"),
+      FoliageLeaf18_2: d(Tx.Foliage.Leaf18, { x: 438, y: 227, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe0ed53 }, "TerrainDecals"),
+      StoneRockSmallShaded1: d(Tx.Stone.RockSmallShaded1, { x: 379, y: 228, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StoneRockSmallShaded1_1: d(Tx.Stone.RockSmallShaded1, { x: 451, y: 229, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      ShapesCircleIrregular26: d(Tx.Shapes.CircleIrregular26, { x: 336, y: 80, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x59526a }, "TerrainDecals"),
+      ShapesConfetti18x8: d(Tx.Shapes.Confetti18x8, { x: 329, y: 68, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x59526a }, "TerrainDecals"),
+      ShapesConfetti18x8_1: d(Tx.Shapes.Confetti18x8, { x: 342, y: 95, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x59526a }, "TerrainDecals"),
       Player: e(r["Player"], { x: 80, y: 224, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      FoliageMedium0: d(Tx.Foliage.Medium0, { x: 37, y: 218, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe0ed53 }, "FrontDecals"),
+      FoliageMedium0_1: d(Tx.Foliage.Medium0, { x: 56, y: 228, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa5d53f }, "FrontDecals"),
+      FoliageMedium0_2: d(Tx.Foliage.Medium0, { x: 132, y: 217, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe0ed53 }, "FrontDecals"),
+      FoliageMedium0_3: d(Tx.Foliage.Medium0, { x: 112, y: 224, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa5d53f }, "FrontDecals"),
+      StoneRockSmallShaded1_2: d(Tx.Stone.RockSmallShaded1, { x: 19, y: 231, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
+      StoneRockSmallShaded1_3: d(Tx.Stone.RockSmallShaded1, { x: 38, y: 238, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
+      StoneRockSmallShaded1_4: d(Tx.Stone.RockSmallShaded1, { x: 122, y: 239, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
+      StoneRock0: d(Tx.Stone.Rock0, { x: 147, y: 229, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
       StarSafeRegion: e(r["Region"], { x: 0, y: 0, width: 500, height: 280, values: { name: "StarSafeRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       StarMarker0: e(r["Marker"], { x: 48, y: 128, values: { name: "StarMarker0", depth: 0 }, tint: 0xffff00 }, "MarkerEntities"),
       StarMarker1: e(r["Marker"], { x: 96, y: 72, values: { name: "StarMarker1", depth: 0 }, tint: 0xffff00 }, "MarkerEntities"),
@@ -12297,13 +12348,64 @@ export namespace LvlType {
     FireMarker2: ReturnType<(typeof r)["Marker"]>;
   };
   export type IndianaHallTamago = {
+    SkyCloudBalls1: Sprite;
+    SkyCloudBalls1_1: Sprite;
+    SkyCloudBalls1_2: Sprite;
+    SkyCloudBalls1_3: Sprite;
+    SkyCloudBalls1_4: Sprite;
+    SkyCloudBalls1_5: Sprite;
+    SkyCloudBalls1_6: Sprite;
+    SkyCloudBalls1_7: Sprite;
+    SkyCloudBalls1_8: Sprite;
+    EsotericTamagoWire: Sprite;
+    EsotericTamagoWire_1: Sprite;
+    EsotericTamagoWire_2: Sprite;
     TamagoShell: Sprite;
     ButtonA: Sprite;
     ButtonC: Sprite;
     ButtonB: Sprite;
     DepositBox: Sprite;
+    ShapesSquare32: Sprite;
+    ShapesSquare32_1: Sprite;
+    ShapesSquare32_2: Sprite;
+    ShapesSquare32_3: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
+    TerrainGrassJagged: Sprite;
+    TerrainGrassJagged_1: Sprite;
+    TerrainGrassJagged_2: Sprite;
+    TerrainGrassJagged_3: Sprite;
+    TerrainGrassJagged_4: Sprite;
+    TerrainGrassJagged_5: Sprite;
+    TerrainGrassSparse3px1: Sprite;
+    TerrainEarthQuestionMark: Sprite;
+    TerrainEarthQuestionMark_1: Sprite;
+    TerrainEarthQuestionMark_2: Sprite;
+    TerrainEarthQuestionMark_3: Sprite;
+    TerrainEarthQuestionMark_4: Sprite;
+    TerrainEarthQuestionMark_5: Sprite;
+    TerrainEarthQuestionMark_6: Sprite;
+    TerrainEarthQuestionMark_7: Sprite;
+    TerrainEarthQuestionMark_8: Sprite;
+    TerrainEarthQuestionMark_9: Sprite;
+    TerrainEarthQuestionMark_10: Sprite;
+    TerrainEarthQuestionMark_11: Sprite;
+    FoliageLeaf18: Sprite;
+    FoliageLeaf18_1: Sprite;
+    FoliageLeaf18_2: Sprite;
+    StoneRockSmallShaded1: Sprite;
+    StoneRockSmallShaded1_1: Sprite;
+    ShapesCircleIrregular26: Sprite;
+    ShapesConfetti18x8: Sprite;
+    ShapesConfetti18x8_1: Sprite;
     Player: ReturnType<(typeof r)["Player"]>;
+    FoliageMedium0: Sprite;
+    FoliageMedium0_1: Sprite;
+    FoliageMedium0_2: Sprite;
+    FoliageMedium0_3: Sprite;
+    StoneRockSmallShaded1_2: Sprite;
+    StoneRockSmallShaded1_3: Sprite;
+    StoneRockSmallShaded1_4: Sprite;
+    StoneRock0: Sprite;
     StarSafeRegion: ReturnType<(typeof r)["Region"]>;
     StarMarker0: ReturnType<(typeof r)["Marker"]>;
     StarMarker1: ReturnType<(typeof r)["Marker"]>;
