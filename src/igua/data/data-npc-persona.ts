@@ -67,6 +67,7 @@ export namespace DataNpcPersona {
             // TODO need new looks:
             FbiAgent: { job: "FBI Agent", name: "Funch", looks: NpcLooks.Plum },
             Misha: { job: "Staff Engineer", name: "Misha", looks: NpcLooks.SadMisha },
+            IndianaHallPainter: { job: "Creative Director", name: "Painch", looks: NpcLooks.PrimaryMess },
             __Fallback__: { job: "???", name: "???", looks: NpcLooks.MintyJourney },
         } satisfies Record<string, Model>,
     );
