@@ -148,13 +148,17 @@ export namespace EsotericTamaPage {
         getDisplayObject(): DisplayObject {
             return container(
                 Sprite.from(Tx.Esoteric.Tamago.GameScreen)
-                    .step(self => self.visible = !this._session.result),
+                    .step(self =>
+                        self.texture = this._session.result
+                            ? Tx.Esoteric.Tamago.ResultsScreen
+                            : Tx.Esoteric.Tamago.GameScreen
+                    ),
                 container(
                     objText.MediumBoldIrregular("Results", { tint: 0x000000 })
-                        .at(60, 20)
+                        .at(60, 30)
                         .anchored(0.5, 1),
                     objEsotericTamaBar(4, () => this._session.result?.score ?? 0)
-                        .at(25, 40),
+                        .at(25, 30),
                 )
                     .invisible()
                     .step(self => self.visible = Boolean(this._session.result)),
@@ -406,8 +410,8 @@ export namespace EsotericTamaPage {
         getDisplayObject(): DisplayObject {
             return container(
                 Sprite.from(Tx.Esoteric.Tamago.UploadScreen),
-                objText.MediumIrregular("Upload now", { tint: 0x000000 })
-                    .at(60, 30)
+                objText.MediumIrregular("Upload\nnow", { tint: 0x000000, align: "center" })
+                    .at(89, 29)
                     .anchored(0.5, 0.5)
                     .coro(function* (self) {
                         while (true) {
