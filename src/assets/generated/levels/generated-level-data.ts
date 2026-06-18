@@ -3770,6 +3770,7 @@ export const Lvl = {
       Door: e(r["Door"], { x: 112, y: 160, values: { sceneName: "", checkpointName: "fromMishaHouse", name: "", depth: 0 } }, "Entities"),
       MishaNpc: e(r["IguanaNpc"], { x: 320, y: 208, flippedX: false, values: { personaName: "Misha", name: "MishaNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 184, y: 208, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      ComputerMarker: e(r["Marker"], { x: 382, y: 187, values: { name: "ComputerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   MountFlop: (): LvlType.MountFlop => {
@@ -13230,6 +13231,7 @@ export namespace LvlType {
     Door: ReturnType<(typeof r)["Door"]>;
     MishaNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     Player: ReturnType<(typeof r)["Player"]>;
+    ComputerMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type MountFlop = {
     WorldMapMountain0: Sprite;

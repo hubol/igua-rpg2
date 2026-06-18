@@ -187,6 +187,10 @@ export namespace DataQuestReward {
                     reward: { kind: "potion", id: "RestoreHealth", count: 1 },
                 },
             },
+            "MishaHouse.DestroyedComputer": {
+                kind: "single",
+                reward: { kind: "equipment", id: "Robotic", level: 1 },
+            },
             __Fallback__: {
                 kind: "nothing",
             },
