@@ -27,6 +27,7 @@ import { mxnEnemy } from "../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../mixins/mxn-enemy-death-burst";
 import { mxnInteract } from "../mixins/mxn-interact";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
+import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { objItemRescueAngel } from "../objects/characters/obj-item-rescue-angel";
 import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
 import { objFxRipple } from "../objects/effects/obj-fx-ripple";
@@ -37,6 +38,7 @@ import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { RpgFaction } from "../rpg/rpg-faction";
+import { Search } from "../utils/search";
 
 export function scnIndianaHallTamago() {
     const lvl = Lvl.IndianaHallTamago();
@@ -122,6 +124,21 @@ export function scnIndianaHallTamago() {
 
     const [aButtonObj, bButtonObj] = [lvl.ButtonA, lvl.ButtonB, lvl.ButtonC]
         .map((obj, i) => obj.mixin(mxnTamagoButton, buttons, buttonIds[i]));
+
+    Search.findDecals(Tx.Sky.CloudBalls1)
+        .filter(obj => obj.tint === 0xffffff)
+        .forEach(obj =>
+            obj
+                .mixin(mxnSinePivot)
+                .step(() => {
+                    if (Rng.float() < 0.05) {
+                        obj.x += 1;
+                    }
+                    if (obj.x >= 600) {
+                        obj.x = -100;
+                    }
+                })
+        );
 }
 
 const buttonSfx: Record<EsotericTamaButtons.Id, Sound> = {
