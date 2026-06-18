@@ -503,7 +503,15 @@ function objEsotericTamaHome(cosmTamago: MicrocosmTamago) {
 
     return container(
         Sprite.from(Tx.Esoteric.Tamago.DemoScreen)
-            .mixin(mxnBoilFlipH),
+            .mixin(mxnBoilFlipH)
+            .coro(function* (self) {
+                while (true) {
+                    yield sleep(1000);
+                    yield interpvr(self).factor(factor.sine).to(70, 0).over(5000);
+                    yield sleep(1000);
+                    yield interpvr(self).factor(factor.sine).to(0, 0).over(5000);
+                }
+            }),
         ...range(5).map(i =>
             Sprite.from(Tx.Esoteric.Tamago.Poop)
                 .mixin(mxnBoilFlipH)
