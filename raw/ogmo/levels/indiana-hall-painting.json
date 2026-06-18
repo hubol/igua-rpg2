@@ -4,8 +4,8 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#54290a"},
-  "backgroundColor": "#408000",
+  "values": {"Terrain Color": "#545454"},
+  "backgroundColor": "#959595",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -217,7 +217,116 @@
       "gridCellHeight": 8,
       "gridCellsX": 99,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 139,
+          "y": 224,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#959595",
+          "texture": "light/glass metal sheen 20px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 285,
+          "y": 224,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#959595",
+          "texture": "light/glass metal sheen 20px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 373,
+          "y": 223,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#959595",
+          "texture": "light/glass metal sheen 20px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 256,
+          "y": 240,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#959595",
+          "texture": "light/glass metal sheen 20px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 462,
+          "y": 158,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#959595",
+          "texture": "light/glass metal sheen 20px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 550,
+          "y": 222,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#959595",
+          "texture": "light/glass metal sheen 20px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 638,
+          "y": 221,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#959595",
+          "texture": "light/glass metal sheen 20px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 725,
+          "y": 222,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#959595",
+          "texture": "light/glass metal sheen 20px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 782,
+          "y": 239,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#959595",
+          "texture": "light/glass metal sheen 20px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -240,7 +349,7 @@
           "height": 56,
           "originX": 0,
           "originY": 0,
-          "tint": "#54290a",
+          "tint": "#545454",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -253,7 +362,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#54290a",
+          "tint": "#545454",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -266,7 +375,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#54290a",
+          "tint": "#545454",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -279,7 +388,7 @@
           "height": 80,
           "originX": 0,
           "originY": 0,
-          "tint": "#54290a",
+          "tint": "#545454",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -292,7 +401,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#54290a",
+          "tint": "#545454",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -305,7 +414,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#54290a",
+          "tint": "#545454",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -318,7 +427,7 @@
           "height": 16,
           "originX": 0,
           "originY": 0,
-          "tint": "#54290a",
+          "tint": "#545454",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -331,7 +440,7 @@
           "height": 72,
           "originX": 0,
           "originY": 0,
-          "tint": "#54290a",
+          "tint": "#545454",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -344,7 +453,7 @@
           "height": 256,
           "originX": 0,
           "originY": 0,
-          "tint": "#54290a",
+          "tint": "#545454",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -357,7 +466,7 @@
           "height": 256,
           "originX": 0,
           "originY": 0,
-          "tint": "#54290a",
+          "tint": "#545454",
           "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
@@ -382,7 +491,152 @@
       "gridCellHeight": 8,
       "gridCellsX": 99,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 72,
+          "y": 248,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/rectangle scribbled 176 x 98.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 224,
+          "y": 264,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/rectangle scribbled 176 x 98.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 368,
+          "y": 264,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/rectangle scribbled 176 x 98.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 528,
+          "y": 264,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/rectangle scribbled 176 x 98.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 712,
+          "y": 264,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/rectangle scribbled 176 x 98.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": -40,
+          "y": 120,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#7a7a7a",
+          "texture": "shapes/rectangle scribbled 176 x 98.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": -40,
+          "y": -56,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#7a7a7a",
+          "texture": "shapes/rectangle scribbled 176 x 98.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 829,
+          "y": 194,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#7a7a7a",
+          "texture": "shapes/rectangle scribbled 176 x 98.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 829,
+          "y": 21,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#7a7a7a",
+          "texture": "shapes/rectangle scribbled 176 x 98.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 215,
+          "y": 120,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/rectangle scribbled 176 x 98.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 215,
+          "y": 136,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/rectangle scribbled 176 x 98.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 435,
+          "y": 138,
+          "scaleX": 1.4,
+          "scaleY": 3.7,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -394,7 +648,296 @@
       "gridCellHeight": 8,
       "gridCellsX": 99,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 40,
+          "y": 40,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/l.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 88,
+          "y": 64,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/e.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 48,
+          "y": 104,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/t.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 88,
+          "y": 136,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/s.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 152,
+          "y": 32,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/s.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 200,
+          "y": 48,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/u.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 248,
+          "y": 24,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/c.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 280,
+          "y": 48,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/k.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 344,
+          "y": 32,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/e.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 328,
+          "y": 80,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/a.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 368,
+          "y": 96,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/c.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 336,
+          "y": 136,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/h.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 376,
+          "y": 176,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/o.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 424,
+          "y": 112,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/t.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 440,
+          "y": 64,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/h.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 504,
+          "y": 32,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/e.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 520,
+          "y": 80,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/r.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 576,
+          "y": 48,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/o.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 608,
+          "y": 96,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/f.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 648,
+          "y": 128,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#7a7a7a",
+          "texture": "shapes/fonts/rune3/f.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 544,
+          "y": 144,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#545454",
+          "texture": "shapes/fonts/rune3/o.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 600,
+          "y": 176,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#545454",
+          "texture": "shapes/fonts/rune3/k.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 672,
+          "y": 64,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#545454",
+          "texture": "shapes/fonts/rune3/o.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 728,
+          "y": 96,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#545454",
+          "texture": "shapes/fonts/rune3/k.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     }
   ]

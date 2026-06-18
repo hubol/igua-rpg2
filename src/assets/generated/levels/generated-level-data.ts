@@ -2766,18 +2766,63 @@ export const Lvl = {
     };
   },
   IndianaHallPainting: (): LvlType.IndianaHallPainting => {
-    applyLevel({ width: 792, height: 280, backgroundTint: 0x408000, terrainTint: 0x54290a });
+    applyLevel({ width: 792, height: 280, backgroundTint: 0x959595, terrainTint: 0x545454 });
     return {
-      Block: e(r["Block"], { x: 152, y: 224, width: 640, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
-      Block_1: e(r["Block"], { x: 352, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
-      Block_2: e(r["Block"], { x: 264, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
-      Block_3: e(r["Block"], { x: 440, y: 144, width: 32, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
-      Block_4: e(r["Block"], { x: 528, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
-      Block_5: e(r["Block"], { x: 616, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
-      Block_6: e(r["Block"], { x: 704, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
-      Block_7: e(r["Block"], { x: 0, y: 208, width: 152, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
-      Block_8: e(r["Block"], { x: -128, y: -24, width: 128, height: 256, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
-      Block_9: e(r["Block"], { x: 792, y: -8, width: 128, height: 256, values: { name: "", depth: 0, visible: true }, tint: 0x54290a }, "TerrainEntities"),
+      ShapesFontsRune3L: d(Tx.Shapes.Fonts.Rune3.L, { x: 40, y: 40, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3E: d(Tx.Shapes.Fonts.Rune3.E, { x: 88, y: 64, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3T: d(Tx.Shapes.Fonts.Rune3.T, { x: 48, y: 104, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3S: d(Tx.Shapes.Fonts.Rune3.S, { x: 88, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3S_1: d(Tx.Shapes.Fonts.Rune3.S, { x: 152, y: 32, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3U: d(Tx.Shapes.Fonts.Rune3.U, { x: 200, y: 48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3C: d(Tx.Shapes.Fonts.Rune3.C, { x: 248, y: 24, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3K: d(Tx.Shapes.Fonts.Rune3.K, { x: 280, y: 48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3E_1: d(Tx.Shapes.Fonts.Rune3.E, { x: 344, y: 32, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3A: d(Tx.Shapes.Fonts.Rune3.A, { x: 328, y: 80, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3C_1: d(Tx.Shapes.Fonts.Rune3.C, { x: 368, y: 96, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3H: d(Tx.Shapes.Fonts.Rune3.H, { x: 336, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3O: d(Tx.Shapes.Fonts.Rune3.O, { x: 376, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3T_1: d(Tx.Shapes.Fonts.Rune3.T, { x: 424, y: 112, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3H_1: d(Tx.Shapes.Fonts.Rune3.H, { x: 440, y: 64, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3E_2: d(Tx.Shapes.Fonts.Rune3.E, { x: 504, y: 32, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3R: d(Tx.Shapes.Fonts.Rune3.R, { x: 520, y: 80, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3O_1: d(Tx.Shapes.Fonts.Rune3.O, { x: 576, y: 48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3F: d(Tx.Shapes.Fonts.Rune3.F, { x: 608, y: 96, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3F_1: d(Tx.Shapes.Fonts.Rune3.F, { x: 648, y: 128, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
+      ShapesFontsRune3O_2: d(Tx.Shapes.Fonts.Rune3.O, { x: 544, y: 144, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x545454 }, "ParallaxDecals"),
+      ShapesFontsRune3K_1: d(Tx.Shapes.Fonts.Rune3.K, { x: 600, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x545454 }, "ParallaxDecals"),
+      ShapesFontsRune3O_3: d(Tx.Shapes.Fonts.Rune3.O, { x: 672, y: 64, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x545454 }, "ParallaxDecals"),
+      ShapesFontsRune3K_2: d(Tx.Shapes.Fonts.Rune3.K, { x: 728, y: 96, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x545454 }, "ParallaxDecals"),
+      ShapesRectangleScribbled176X98: d(Tx.Shapes.RectangleScribbled176X98, { x: 72, y: 248, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_1: d(Tx.Shapes.RectangleScribbled176X98, { x: 224, y: 264, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_2: d(Tx.Shapes.RectangleScribbled176X98, { x: 368, y: 264, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_3: d(Tx.Shapes.RectangleScribbled176X98, { x: 528, y: 264, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_4: d(Tx.Shapes.RectangleScribbled176X98, { x: 712, y: 264, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_5: d(Tx.Shapes.RectangleScribbled176X98, { x: -40, y: 120, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_6: d(Tx.Shapes.RectangleScribbled176X98, { x: -40, y: -56, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_7: d(Tx.Shapes.RectangleScribbled176X98, { x: 829, y: 194, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_8: d(Tx.Shapes.RectangleScribbled176X98, { x: 829, y: 21, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_9: d(Tx.Shapes.RectangleScribbled176X98, { x: 215, y: 120, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesRectangleScribbled176X98_10: d(Tx.Shapes.RectangleScribbled176X98, { x: 215, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "BackgroundDecals"),
+      ShapesSquare32: d(Tx.Shapes.Square32, { x: 435, y: 138, scaleX: 1.4, scaleY: 3.7, rotation: 0, originX: 0, originY: 0, tint: 0x7a7a7a }, "BackgroundDecals"),
+      Block: e(r["Block"], { x: 152, y: 224, width: 640, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 352, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 264, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 440, y: 144, width: 32, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 528, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 616, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 704, y: 208, width: 32, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 0, y: 208, width: 152, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
+      Block_8: e(r["Block"], { x: -128, y: -24, width: 128, height: 256, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
+      Block_9: e(r["Block"], { x: 792, y: -8, width: 128, height: 256, values: { name: "", depth: 0, visible: true }, tint: 0x545454 }, "TerrainEntities"),
+      LightGlassMetalSheen20px: d(Tx.Light.GlassMetalSheen20px, { x: 139, y: 224, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
+      LightGlassMetalSheen20px_1: d(Tx.Light.GlassMetalSheen20px, { x: 285, y: 224, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
+      LightGlassMetalSheen20px_2: d(Tx.Light.GlassMetalSheen20px, { x: 373, y: 223, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
+      LightGlassMetalSheen20px_3: d(Tx.Light.GlassMetalSheen20px, { x: 256, y: 240, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
+      LightGlassMetalSheen20px_4: d(Tx.Light.GlassMetalSheen20px, { x: 462, y: 158, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
+      LightGlassMetalSheen20px_5: d(Tx.Light.GlassMetalSheen20px, { x: 550, y: 222, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
+      LightGlassMetalSheen20px_6: d(Tx.Light.GlassMetalSheen20px, { x: 638, y: 221, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
+      LightGlassMetalSheen20px_7: d(Tx.Light.GlassMetalSheen20px, { x: 725, y: 222, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
+      LightGlassMetalSheen20px_8: d(Tx.Light.GlassMetalSheen20px, { x: 782, y: 239, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x959595 }, "TerrainDecals"),
       PainterNpc: e(r["IguanaNpc"], { x: 96, y: 208, flippedX: false, values: { personaName: "IndianaHallPainter", name: "PainterNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 224, y: 224, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       Puddle: e(r["Puddle"], { x: 296, y: 224, width: 56, values: { name: "", depth: 0 }, tint: 0xff0000 }, "FrontEntities"),
@@ -12383,6 +12428,42 @@ export namespace LvlType {
     EnvironmentSparkleMarker_6: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
   };
   export type IndianaHallPainting = {
+    ShapesFontsRune3L: Sprite;
+    ShapesFontsRune3E: Sprite;
+    ShapesFontsRune3T: Sprite;
+    ShapesFontsRune3S: Sprite;
+    ShapesFontsRune3S_1: Sprite;
+    ShapesFontsRune3U: Sprite;
+    ShapesFontsRune3C: Sprite;
+    ShapesFontsRune3K: Sprite;
+    ShapesFontsRune3E_1: Sprite;
+    ShapesFontsRune3A: Sprite;
+    ShapesFontsRune3C_1: Sprite;
+    ShapesFontsRune3H: Sprite;
+    ShapesFontsRune3O: Sprite;
+    ShapesFontsRune3T_1: Sprite;
+    ShapesFontsRune3H_1: Sprite;
+    ShapesFontsRune3E_2: Sprite;
+    ShapesFontsRune3R: Sprite;
+    ShapesFontsRune3O_1: Sprite;
+    ShapesFontsRune3F: Sprite;
+    ShapesFontsRune3F_1: Sprite;
+    ShapesFontsRune3O_2: Sprite;
+    ShapesFontsRune3K_1: Sprite;
+    ShapesFontsRune3O_3: Sprite;
+    ShapesFontsRune3K_2: Sprite;
+    ShapesRectangleScribbled176X98: Sprite;
+    ShapesRectangleScribbled176X98_1: Sprite;
+    ShapesRectangleScribbled176X98_2: Sprite;
+    ShapesRectangleScribbled176X98_3: Sprite;
+    ShapesRectangleScribbled176X98_4: Sprite;
+    ShapesRectangleScribbled176X98_5: Sprite;
+    ShapesRectangleScribbled176X98_6: Sprite;
+    ShapesRectangleScribbled176X98_7: Sprite;
+    ShapesRectangleScribbled176X98_8: Sprite;
+    ShapesRectangleScribbled176X98_9: Sprite;
+    ShapesRectangleScribbled176X98_10: Sprite;
+    ShapesSquare32: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Block_1: ReturnType<(typeof r)["Block"]>;
     Block_2: ReturnType<(typeof r)["Block"]>;
@@ -12393,6 +12474,15 @@ export namespace LvlType {
     Block_7: ReturnType<(typeof r)["Block"]>;
     Block_8: ReturnType<(typeof r)["Block"]>;
     Block_9: ReturnType<(typeof r)["Block"]>;
+    LightGlassMetalSheen20px: Sprite;
+    LightGlassMetalSheen20px_1: Sprite;
+    LightGlassMetalSheen20px_2: Sprite;
+    LightGlassMetalSheen20px_3: Sprite;
+    LightGlassMetalSheen20px_4: Sprite;
+    LightGlassMetalSheen20px_5: Sprite;
+    LightGlassMetalSheen20px_6: Sprite;
+    LightGlassMetalSheen20px_7: Sprite;
+    LightGlassMetalSheen20px_8: Sprite;
     PainterNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     Puddle: ReturnType<(typeof r)["Puddle"]>;

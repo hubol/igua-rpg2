@@ -16,6 +16,7 @@ import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnFxVibrate } from "../mixins/effects/mxn-fx-vibrate";
+import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objFxFormativeBurst } from "../objects/effects/obj-fx-formative-burst";
 import { objAngelBoyfriends } from "../objects/enemies/obj-angel-boyfriends";
@@ -219,6 +220,7 @@ function objPickedColor(ref: { pickedColor: PickedColor }) {
 
     return container(
         Sprite.from(Tx.Ui.LiquidDrip)
+            .mixin(mxnBoilPivot)
             .step(self => self.tint = ref.pickedColor.color)
             .anchored(0.5, 1),
         container(

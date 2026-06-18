@@ -1,4 +1,4 @@
-import { Graphics, Sprite } from "pixi.js";
+import { BLEND_MODES, Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
@@ -29,7 +29,7 @@ export function objUiAcceptableRange(args: ObjUiAcceptableRangeArgs) {
     const valueObj = new Graphics();
 
     return container(
-        new Graphics().beginFill(0xffffff).drawRect(0, 0, args.width, args.height),
+        new Graphics().lineStyle(2, 0x808080).beginFill(0xffffff).drawRect(0, 0, args.width, args.height),
         rangeObj,
         valueObj,
         Sprite.from(Tx.Ui.Checkmark)
@@ -46,7 +46,8 @@ export function objUiAcceptableRange(args: ObjUiAcceptableRangeArgs) {
             rangeObj
                 .clear()
                 .beginFill(0xbbbbbb)
-                .drawRect(x0, -1, x1 - x0, args.height + 2);
+                .drawRect(x0, -1, x1 - x0, args.height + 2)
+                .blendMode = BLEND_MODES.MULTIPLY;
 
             valueObj.clear();
 
