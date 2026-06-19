@@ -1,4 +1,4 @@
-import { Sprite } from "pixi.js";
+import { BLEND_MODES, Sprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../assets/textures";
 import { container } from "../../lib/pixi/container";
@@ -35,6 +35,17 @@ export function scnMishaHouse() {
             yield () => quest.everCompleted;
             self.head.mouth.emote.happy();
         });
+
+    lvl.Dummy.mixin(mxnFxTintRotate);
+
+    [
+        lvl.StringLights,
+        lvl.Lights,
+    ]
+        .forEach(obj => obj.step(() => obj.tint = lvl.Dummy.tint));
+
+    lvl.Lights.alpha = 0.5;
+    lvl.Lights.blendMode = BLEND_MODES.ADD;
 
     lvl.Door.objDoor.openTint = 0x000000;
 

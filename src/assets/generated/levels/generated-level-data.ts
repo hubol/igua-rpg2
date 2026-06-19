@@ -3971,9 +3971,13 @@ export const Lvl = {
       Block_3: e(r["Block"], { x: 80, y: 208, width: 336, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
       Pipe: e(r["Pipe"], { x: 352, y: 188, width: 64, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
       FurnitureTable0: d(Tx.Furniture.Table0, { x: 381, y: 200, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x39175b }, "TerrainDecals"),
+      StringLights: d(Tx.Esoteric.MishaComputer.StringLights, { x: 248, y: 128, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      StringLights_1: d(Tx.Esoteric.MishaComputer.String, { x: 248, y: 128, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x703da3 }, "TerrainDecals"),
       Door: e(r["Door"], { x: 112, y: 160, values: { sceneName: "", checkpointName: "fromMishaHouse", name: "", depth: 0 } }, "Entities"),
       MishaNpc: e(r["IguanaNpc"], { x: 320, y: 208, flippedX: false, values: { personaName: "Misha", name: "MishaNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 184, y: 208, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      Lights: d(Tx.Esoteric.MishaComputer.Lights, { x: 248, y: 122, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
+      Dummy: d(Tx.Esoteric.ClockFace40px, { x: -48, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
       ComputerMarker: e(r["Marker"], { x: 382, y: 187, values: { name: "ComputerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
@@ -13776,9 +13780,13 @@ export namespace LvlType {
     Block_3: ReturnType<(typeof r)["Block"]>;
     Pipe: ReturnType<(typeof r)["Pipe"]>;
     FurnitureTable0: Sprite;
+    StringLights: Sprite;
+    StringLights_1: Sprite;
     Door: ReturnType<(typeof r)["Door"]>;
     MishaNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     Player: ReturnType<(typeof r)["Player"]>;
+    Lights: Sprite;
+    Dummy: Sprite;
     ComputerMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type MountFlop = {

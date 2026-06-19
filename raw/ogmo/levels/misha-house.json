@@ -50,7 +50,32 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 248,
+          "y": 122,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/misha computer/lights.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "Lights"}
+        },
+        {
+          "x": -48,
+          "y": -48,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/clock face 40px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "Dummy"}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -166,6 +191,30 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 248,
+          "y": 128,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/misha computer/string lights.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "StringLights"}
+        },
+        {
+          "x": 248,
+          "y": 128,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#703da3",
+          "texture": "esoteric/misha computer/string.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "StringLights"}
         }
       ],
       "folder": "../textures"
@@ -274,7 +323,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 80,
