@@ -169,6 +169,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromBelow", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 4,
+          "_eid": "19953026",
+          "x": 272,
+          "y": 360,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromAppearanceChange", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -891,6 +902,18 @@
           "originX": 0.5,
           "originY": 0,
           "values": {"name": ""}
+        },
+        {
+          "x": 240,
+          "y": 329,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "furniture/mirror 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "Mirror"}
         }
       ],
       "folder": "../textures"
