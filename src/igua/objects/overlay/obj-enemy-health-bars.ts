@@ -70,7 +70,7 @@ const v = vnew();
 function objEnemyHealthBar(obj: DisplayObject, status: RpgStatus.Model, healthVisible: boolean) {
     const vworld = vnew();
 
-    const healthBarObj = objHealthBar(32, 9, status.healthMax, status.healthMax);
+    const healthBarObj = objHealthBar(32, 9, status.health, status.healthMax);
 
     if (!healthVisible) {
         healthBarObj.stepsSinceChange = 60;
