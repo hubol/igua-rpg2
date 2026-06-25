@@ -98,7 +98,7 @@ export function scnMishaHouse() {
                     "I think that helps.",
                 );
 
-                yield* DramaQuests.complete("MishaHouse.DestroyedComputer");
+                yield* DramaQuests.complete(computerQuest);
             }, { speaker: lvl.MishaNpc }))
         .show();
 }

@@ -3,11 +3,20 @@ import { DataItem } from "../data/data-item";
 import { DataQuestReward } from "../data/data-quest-reward";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
+import { RpgQuest } from "../rpg/rpg-quests";
 import { DramaInventory } from "./drama-inventory";
 import { DramaWallet } from "./drama-wallet";
 
-function peekCompletionRewardName(questId: DataQuestReward.Id) {
-    const reward = Rpg.quest(questId).peekCompletionReward();
+function getQuest(maybeQuest: getQuest.Maybe) {
+    return typeof maybeQuest === "string" ? Rpg.quest(maybeQuest) : maybeQuest;
+}
+
+namespace getQuest {
+    export type Maybe = DataQuestReward.Id | RpgQuest;
+}
+
+function peekCompletionRewardName(maybeQuest: getQuest.Maybe) {
+    const reward = getQuest(maybeQuest).peekCompletionReward();
 
     if (reward === null) {
         return "nothing";
@@ -22,8 +31,8 @@ function peekCompletionRewardName(questId: DataQuestReward.Id) {
     return reward.count > 1 ? `${itemName} x${reward.count}` : itemName;
 }
 
-function* complete(questId: DataQuestReward.Id) {
-    const reward = Rpg.quest(questId).complete();
+function* complete(maybeQuest: getQuest.Maybe) {
+    const reward = getQuest(maybeQuest).complete();
 
     if (!reward) {
         return null;
