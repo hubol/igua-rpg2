@@ -5,7 +5,7 @@ import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaQuests } from "../drama/drama-quests";
-import { show } from "../drama/show";
+import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnFxTintRotate } from "../mixins/effects/mxn-fx-tint-rotate";
 import { mxnBoilTextureIndex } from "../mixins/mxn-boil-texture-index";
@@ -21,12 +21,20 @@ import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 export function scnMishaHouse() {
     scene.camera.framing = "snap_to_renderer_size";
     const computerQuest = Rpg.quest("MishaHouse.DestroyedComputer");
+    const waterHeaterQuest = Rpg.quest("MishaHouse.WarmedWaterHeater");
     const lvl = Lvl.MishaHouse();
 
     lvl.MishaNpc
         .mixin(mxnCutscene, function* () {
             if (computerQuest.everCompleted) {
-                yield* show("I'm not aware of any problems in production.");
+                if (Rpg.flags.misha.waterHeater.warmed && !waterHeaterQuest.everCompleted) {
+                    yield* ask("I'm not aware of any problems in production.", "You have hot water now");
+                    yield* show("Oh, thank you!!!");
+                    yield* DramaQuests.complete(waterHeaterQuest);
+                }
+                else {
+                    yield* show("I'm not aware of any problems in production.");
+                }
                 return;
             }
             yield* show(
