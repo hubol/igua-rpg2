@@ -32,6 +32,10 @@ export function scnMishaHouse() {
                     yield* show("Oh, thank you!!!");
                     yield* lvl.MishaNpc.walkTo(lvl.MishaShowerMarker.x);
                     isShowerRunning = true;
+                    yield sleep(1000);
+                    lvl.MishaNpc.isDucking = true;
+                    yield sleep(1000);
+                    yield* show("Good jobber!");
                     yield* DramaQuests.complete(waterHeaterQuest);
                 }
                 else {
@@ -68,6 +72,8 @@ export function scnMishaHouse() {
         isShowerRunning = true;
         lvl.MishaNpc.at(lvl.MishaShowerMarker);
         lvl.MishaNpc.auto.setFacingImmediately(-1);
+        lvl.MishaNpc.isDucking = true;
+        lvl.MishaNpc.ducking = 1;
     }
 
     scene.stage
