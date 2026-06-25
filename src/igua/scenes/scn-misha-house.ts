@@ -20,12 +20,12 @@ import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 
 export function scnMishaHouse() {
     scene.camera.framing = "snap_to_renderer_size";
-    const quest = Rpg.quest("MishaHouse.DestroyedComputer");
+    const computerQuest = Rpg.quest("MishaHouse.DestroyedComputer");
     const lvl = Lvl.MishaHouse();
 
     lvl.MishaNpc
         .mixin(mxnCutscene, function* () {
-            if (quest.everCompleted) {
+            if (computerQuest.everCompleted) {
                 yield* show("I'm not aware of any problems in production.");
                 return;
             }
@@ -35,7 +35,7 @@ export function scnMishaHouse() {
             );
         })
         .coro(function* (self) {
-            yield () => quest.everCompleted;
+            yield () => computerQuest.everCompleted;
             self.head.mouth.emote.happy();
         });
 
@@ -82,7 +82,7 @@ export function scnMishaHouse() {
 
     enrichWaterHeater(lvl);
 
-    if (quest.everCompleted) {
+    if (computerQuest.everCompleted) {
         return;
     }
 
