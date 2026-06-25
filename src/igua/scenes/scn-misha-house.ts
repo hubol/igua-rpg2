@@ -30,6 +30,8 @@ export function scnMishaHouse() {
                 if (Rpg.flags.misha.waterHeater.warmed && !waterHeaterQuest.everCompleted) {
                     yield* ask("I'm not aware of any problems in production.", "You have hot water now");
                     yield* show("Oh, thank you!!!");
+                    yield* lvl.MishaNpc.walkTo(lvl.MishaShowerMarker.x);
+                    isShowerRunning = true;
                     yield* DramaQuests.complete(waterHeaterQuest);
                 }
                 else {
@@ -60,19 +62,45 @@ export function scnMishaHouse() {
 
     lvl.Door.objDoor.openTint = 0x000000;
 
+    let isShowerRunning = false;
+
+    if (waterHeaterQuest.everCompleted) {
+        isShowerRunning = true;
+        lvl.MishaNpc.at(lvl.MishaShowerMarker);
+        lvl.MishaNpc.auto.setFacingImmediately(-1);
+    }
+
+    scene.stage
+        .coro(function* () {
+            const dripSourceObjs = [lvl.WaterDripSource0, lvl.WaterDripSource1, lvl.WaterDripSource2];
+            while (true) {
+                yield () => isShowerRunning;
+
+                // TODO sfx
+                for (const obj of dripSourceObjs) {
+                    obj.objWaterDripSource.delayMin = 100;
+                    obj.objWaterDripSource.delayMax = 300;
+                    yield sleepf(3);
+                }
+
+                yield () => !isShowerRunning;
+
+                for (const obj of dripSourceObjs.reverse()) {
+                    obj.objWaterDripSource.delayMin = Number.MAX_SAFE_INTEGER;
+                    obj.objWaterDripSource.delayMax = Number.MAX_SAFE_INTEGER;
+                    yield sleepf(3);
+                }
+            }
+        });
+
     lvl.ShowerLeverRegion
         .mixin(mxnCutscene, function* () {
-            yield () => playerObj.isOnGround;
-            const dripSourceObjs = [lvl.WaterDripSource0, lvl.WaterDripSource1, lvl.WaterDripSource2];
+            const wasShowerRunning = isShowerRunning;
 
-            // TODO sfx
-            for (const obj of dripSourceObjs) {
-                obj.objWaterDripSource.delayMin = 100;
-                obj.objWaterDripSource.delayMax = 300;
-                yield sleepf(3);
+            if (!wasShowerRunning) {
+                isShowerRunning = true;
+                yield sleep(2000);
             }
-
-            yield sleep(2000);
 
             Cutscene.setCurrentSpeaker(playerObj);
             yield* show(
@@ -81,11 +109,7 @@ export function scnMishaHouse() {
                     : "The water is extremely cold.",
             );
 
-            for (const obj of dripSourceObjs.reverse()) {
-                obj.objWaterDripSource.delayMin = Number.MAX_SAFE_INTEGER;
-                obj.objWaterDripSource.delayMax = Number.MAX_SAFE_INTEGER;
-                yield sleepf(3);
-            }
+            isShowerRunning = wasShowerRunning;
         });
 
     enrichWaterHeater(lvl);

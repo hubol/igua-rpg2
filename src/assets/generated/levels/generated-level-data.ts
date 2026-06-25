@@ -4005,6 +4005,7 @@ export const Lvl = {
       ShowerLeverRegion: e(r["Region"], { x: 211, y: 168, width: 26, height: 32, values: { name: "ShowerLeverRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       WaterHeaterRegion: e(r["Region"], { x: 721, y: 106, width: 56, height: 96, values: { name: "WaterHeaterRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       ComputerMarker: e(r["Marker"], { x: 382, y: 187, values: { name: "ComputerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      MishaShowerMarker: e(r["Marker"], { x: 216, y: 208, values: { name: "MishaShowerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   MountFlop: (): LvlType.MountFlop => {
@@ -13840,6 +13841,7 @@ export namespace LvlType {
     ShowerLeverRegion: ReturnType<(typeof r)["Region"]>;
     WaterHeaterRegion: ReturnType<(typeof r)["Region"]>;
     ComputerMarker: ReturnType<(typeof r)["Marker"]>;
+    MishaShowerMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type MountFlop = {
     WorldMapMountain0: Sprite;
