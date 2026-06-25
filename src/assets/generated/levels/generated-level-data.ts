@@ -4003,7 +4003,7 @@ export const Lvl = {
       FurnitureBottle1_2: d(Tx.Furniture.Bottle1, { x: 136, y: 98, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb1bbf0 }, "TerrainDecals"),
       FurnitureBottle1_3: d(Tx.Furniture.Bottle1, { x: 168, y: 98, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb1bbf0 }, "TerrainDecals"),
       FurnitureBottle1_4: d(Tx.Furniture.Bottle1, { x: 152, y: 106, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xd4daff }, "TerrainDecals"),
-      Door: e(r["Door"], { x: 112, y: 160, values: { sceneName: "", checkpointName: "fromMishaHouse", name: "", depth: 0 } }, "Entities"),
+      Door: e(r["Door"], { x: 112, y: 160, values: { sceneName: "scnOpenMarket", checkpointName: "fromMishaHouse", name: "", depth: 0 } }, "Entities"),
       WaterDripSource0: e(r["WaterDripSource"], { x: 205, y: 145, values: { delayMin: 999999999, delayMax: 999999999, name: "WaterDripSource0", depth: 0 } }, "Entities"),
       WaterDripSource1: e(r["WaterDripSource"], { x: 211, y: 147, values: { delayMin: 999999999, delayMax: 999999999, name: "WaterDripSource1", depth: 0 } }, "Entities"),
       WaterDripSource2: e(r["WaterDripSource"], { x: 217, y: 146, values: { delayMin: 999999999, delayMax: 999999999, name: "WaterDripSource2", depth: 0 } }, "Entities"),
@@ -6998,6 +6998,10 @@ export const Lvl = {
   OpenMarket: (): LvlType.OpenMarket => {
     applyLevel({ width: 1208, height: 480, backgroundTint: 0x408000, terrainTint: 0x000000 });
     return {
+      ShapesLineVertical16: d(Tx.Shapes.LineVertical16, { x: 376, y: 120, scaleX: 1, scaleY: 12, rotation: 0, originX: 0, originY: 0, tint: 0x000000 }, "BackgroundDecals"),
+      ShapesLineVertical16_1: d(Tx.Shapes.LineVertical16, { x: 256, y: 120, scaleX: 1, scaleY: 12, rotation: 0, originX: 0, originY: 0, tint: 0x000000 }, "BackgroundDecals"),
+      SkyCloudPuff2: d(Tx.Sky.CloudPuff2, { x: 312, y: 80, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      EsotericMishaComputerLagavulin: d(Tx.Esoteric.MishaComputer.Lagavulin, { x: 364, y: 53, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 0, y: 432, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Slope: e(r["Slope"], { x: 120, y: 416, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 184, y: 416, width: 320, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
@@ -7022,8 +7026,14 @@ export const Lvl = {
       Slope_8: e(r["Slope"], { x: 936, y: 328, width: 64, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Pipe_2: e(r["Pipe"], { x: 936, y: 216, width: 192, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
       Pipe_3: e(r["Pipe"], { x: 936, y: 152, width: 192, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      PipeSlope: e(r["PipeSlope"], { x: 256, y: 216, width: 120, height: 52, flippedX: false, values: { name: "", depth: 0, visible: false } }, "TerrainEntities"),
+      PipeSlope_1: e(r["PipeSlope"], { x: 256, y: 152, width: 120, height: 52, flippedX: false, values: { name: "", depth: 0, visible: false } }, "TerrainEntities"),
+      Pipe_4: e(r["Pipe"], { x: 256, y: 120, width: 120, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
+      ShapesLineVertical16_2: d(Tx.Shapes.LineVertical16, { x: 376, y: 216, scaleX: 1, scaleY: 8.15, rotation: 66.67, originX: 0, originY: 0, tint: 0x000000 }, "TerrainDecals"),
+      ShapesLineVertical16_3: d(Tx.Shapes.LineVertical16, { x: 376, y: 152, scaleX: 1, scaleY: 8.15, rotation: 66.67, originX: 0, originY: 0, tint: 0x000000 }, "TerrainDecals"),
       GateHorizontal: e(r["GateHorizontal"], { x: -40, y: 304, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromOpenMarket", name: "", depth: 0 } }, "Entities"),
       FlipDial: e(r["Dial"], { x: 984, y: 408, values: { maxTicks: 5, name: "FlipDial", depth: 0 } }, "Entities"),
+      Door: e(r["Door"], { x: 296, y: 72, values: { sceneName: "scnMishaHouse", checkpointName: "fromOpenMarket", name: "", depth: 0 } }, "Entities"),
       JumpNpc: e(r["IguanaNpc"], { x: 160, y: 296, flippedX: false, values: { personaName: "OpenJump", name: "JumpNpc", depth: 0 } }, "CharacterEntities"),
       FoodNpc: e(r["IguanaNpc"], { x: 304, y: 416, flippedX: true, values: { personaName: "OpenFood", name: "FoodNpc", depth: 0 } }, "CharacterEntities"),
       CombatNpc: e(r["IguanaNpc"], { x: 544, y: 312, flippedX: false, values: { personaName: "OpenCombat", name: "CombatNpc", depth: 0 } }, "CharacterEntities"),
@@ -7031,6 +7041,9 @@ export const Lvl = {
       GluemakerNpc: e(r["IguanaNpc"], { x: 1096, y: 216, flippedX: true, values: { personaName: "GluemakerOhio", name: "GluemakerNpc", depth: 0 } }, "CharacterEntities"),
       CobblerNpc: e(r["IguanaNpc"], { x: 960, y: 152, flippedX: false, values: { personaName: "CobblerOhio", name: "CobblerNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 56, y: 432, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      fromMishaHouse: e(r["Checkpoint"], { x: 280, y: 120, flippedX: true, values: { name: "fromMishaHouse", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      TerrainEarthLumpy3px: d(Tx.Terrain.Earth.Lumpy3px, { x: 297, y: 120, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2c8fcc }, "FrontDecals"),
+      TerrainEarthLumpy3px_1: d(Tx.Terrain.Earth.Lumpy3px, { x: 339, y: 120, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2c8fcc }, "FrontDecals"),
     };
   },
   PlainsSuggestiveCavern: (): LvlType.PlainsSuggestiveCavern => {
@@ -16809,6 +16822,10 @@ export namespace LvlType {
     GateHorizontal_1: ReturnType<(typeof r)["GateHorizontal"]>;
   };
   export type OpenMarket = {
+    ShapesLineVertical16: Sprite;
+    ShapesLineVertical16_1: Sprite;
+    SkyCloudPuff2: Sprite;
+    EsotericMishaComputerLagavulin: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Slope: ReturnType<(typeof r)["Slope"]>;
     Block_1: ReturnType<(typeof r)["Block"]>;
@@ -16833,8 +16850,14 @@ export namespace LvlType {
     Slope_8: ReturnType<(typeof r)["Slope"]>;
     Pipe_2: ReturnType<(typeof r)["Pipe"]>;
     Pipe_3: ReturnType<(typeof r)["Pipe"]>;
+    PipeSlope: ReturnType<(typeof r)["PipeSlope"]>;
+    PipeSlope_1: ReturnType<(typeof r)["PipeSlope"]>;
+    Pipe_4: ReturnType<(typeof r)["Pipe"]>;
+    ShapesLineVertical16_2: Sprite;
+    ShapesLineVertical16_3: Sprite;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     FlipDial: ReturnType<(typeof r)["Dial"]>;
+    Door: ReturnType<(typeof r)["Door"]>;
     JumpNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     FoodNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     CombatNpc: ReturnType<(typeof r)["IguanaNpc"]>;
@@ -16842,6 +16865,9 @@ export namespace LvlType {
     GluemakerNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     CobblerNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     Player: ReturnType<(typeof r)["Player"]>;
+    fromMishaHouse: ReturnType<(typeof r)["Checkpoint"]>;
+    TerrainEarthLumpy3px: Sprite;
+    TerrainEarthLumpy3px_1: Sprite;
   };
   export type PlainsSuggestiveCavern = {
     ShapesSquare32: Sprite;

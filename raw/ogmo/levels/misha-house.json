@@ -262,7 +262,7 @@
           "y": 160,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "", "checkpointName": "fromMishaHouse", "name": "", "depth": 0}
+          "values": {"sceneName": "scnOpenMarket", "checkpointName": "fromMishaHouse", "name": "", "depth": 0}
         },
         {
           "name": "WaterDripSource",
