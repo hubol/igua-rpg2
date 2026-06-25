@@ -144,6 +144,11 @@ export function getInitialRpgProgress() {
                     perfectScoreTimes: 0,
                 },
             },
+            misha: {
+                waterHeater: {
+                    warmed: false,
+                },
+            },
         },
         microcosms: RpgMicrocosms.createState(),
         programmaticFlags: {

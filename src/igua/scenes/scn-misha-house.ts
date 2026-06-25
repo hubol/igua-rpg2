@@ -12,6 +12,7 @@ import { mxnBoilTextureIndex } from "../mixins/mxn-boil-texture-index";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnEnemy } from "../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../mixins/mxn-enemy-death-burst";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { playerObj } from "../objects/obj-player";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { Rpg } from "../rpg/rpg";
@@ -66,7 +67,11 @@ export function scnMishaHouse() {
             yield sleep(2000);
 
             Cutscene.setCurrentSpeaker(playerObj);
-            yield* show("The water is extremely cold.");
+            yield* show(
+                Rpg.flags.misha.waterHeater.warmed
+                    ? "Perfect temperature."
+                    : "The water is extremely cold.",
+            );
 
             for (const obj of dripSourceObjs.reverse()) {
                 obj.objWaterDripSource.delayMin = Number.MAX_SAFE_INTEGER;
@@ -101,7 +106,7 @@ export function scnMishaHouse() {
 function enrichWaterHeater(lvl: LvlType.MishaHouse) {
     const rank = RpgEnemyRank.create({
         status: {
-            health: 50,
+            health: Rpg.flags.misha.waterHeater.warmed ? undefined : 50,
             healthMax: 130,
             defenses: {
                 physical: 100,
@@ -111,7 +116,20 @@ function enrichWaterHeater(lvl: LvlType.MishaHouse) {
     });
 
     lvl.WaterHeater
-        .mixin(mxnEnemy, { rank, hurtboxes: [lvl.WaterHeaterRegion] });
+        .mixin(mxnEnemy, { rank, hurtboxes: [lvl.WaterHeaterRegion] })
+        .mixin(mxnSpeaker, { name: "Water Heater", tintPrimary: 0xC46729, tintSecondary: 0x999999 })
+        .coro(function* (self) {
+            if (Rpg.flags.misha.waterHeater.warmed) {
+                return;
+            }
+
+            yield () => self.status.health >= self.status.healthMax;
+
+            Rpg.flags.misha.waterHeater.warmed = true;
+            Cutscene.play(function* () {
+                yield* show("Pilot flame restored.");
+            }, { speaker: self });
+        });
 }
 
 const [txComputer, ...txsComputerLayers] = Tx.Esoteric.MishaComputer.Layers.split({ count: 3 });
