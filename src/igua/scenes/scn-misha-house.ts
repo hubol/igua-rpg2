@@ -105,6 +105,7 @@ function enrichWaterHeater(lvl: LvlType.MishaHouse) {
             healthMax: 130,
             defenses: {
                 physical: 100,
+                overheat: -100,
             },
         },
     });

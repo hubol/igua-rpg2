@@ -68,7 +68,7 @@ export function objAngelSnail() {
     const immuneHurtboxObj = new Graphics()
         .beginFill(0xffff00)
         .drawRect(16, 5, 105, 112)
-        .mixin(mxnRpgStatusBodyPart, { defenses: { physical: 100 } })
+        .mixin(mxnRpgStatusBodyPart, { defenses: { physical: 100, overheat: 0 } })
         .invisible();
 
     const mouthObj = theme.createMouthObj();

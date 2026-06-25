@@ -132,22 +132,28 @@ export class RpgPlayerStatus implements RpgStatus.Model {
         });
     })();
 
-    readonly guardingDefenses = (() => {
+    readonly guardingDefenses = ((): RpgStatus.Defenses => {
         const self = this;
 
         return {
             get physical() {
                 return 20;
             },
+            get overheat() {
+                return 0;
+            },
         };
     })();
 
-    readonly defenses = (() => {
+    readonly defenses = ((): RpgStatus.Defenses => {
         const buffs = this._buffs;
 
         return {
             get physical() {
                 return buffs.getAggregatedBuffs().combat.defense.physical;
+            },
+            get overheat() {
+                return 0;
             },
         };
     })();

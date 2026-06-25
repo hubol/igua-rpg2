@@ -65,9 +65,11 @@ export namespace RpgEnemyRank {
                 },
                 defenses: {
                     physical: status?.defenses?.physical ?? 0,
+                    overheat: status?.defenses?.overheat ?? 0,
                 },
                 guardingDefenses: {
                     physical: status?.guardingDefenses?.physical ?? 0,
+                    overheat: status?.guardingDefenses?.overheat ?? 0,
                 },
                 factionDefenses: {
                     [RpgFaction.Anyone]: 0,
