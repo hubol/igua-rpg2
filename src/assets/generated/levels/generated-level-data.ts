@@ -3975,6 +3975,8 @@ export const Lvl = {
       StoneBrickRows0_1: d(Tx.Stone.BrickRows0, { x: 833, y: 101, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x000000 }, "BackgroundDecals"),
       StoneBrickRows0_2: d(Tx.Stone.BrickRows0, { x: 885, y: 174, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x000000 }, "BackgroundDecals"),
       StoneBrickRows1_5: d(Tx.Stone.BrickRows1, { x: 786, y: 134, scaleX: -1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x000000 }, "BackgroundDecals"),
+      FurnitureShelf0: d(Tx.Furniture.Shelf0, { x: 319, y: 136, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x39175b }, "BackgroundDecals"),
+      FurnitureShelf0_1: d(Tx.Furniture.Shelf0, { x: 145, y: 119, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x39175b }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 48, y: 32, width: 32, height: 208, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 416, y: 32, width: 32, height: 130, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 80, y: 32, width: 336, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
@@ -3989,9 +3991,18 @@ export const Lvl = {
       Block_10: e(r["Block"], { x: 576, y: 32, width: 336, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
       Block_11: e(r["Block"], { x: 576, y: 208, width: 336, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
       Block_12: e(r["Block"], { x: 912, y: 32, width: 32, height: 208, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
+      Pipe_1: e(r["Pipe"], { x: 109, y: 111, width: 72, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
+      Pipe_2: e(r["Pipe"], { x: 283, y: 128, width: 72, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
       FurnitureTable0: d(Tx.Furniture.Table0, { x: 381, y: 200, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x39175b }, "TerrainDecals"),
       StringLights: d(Tx.Esoteric.MishaComputer.StringLights, { x: 248, y: 128, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       StringLights_1: d(Tx.Esoteric.MishaComputer.String, { x: 248, y: 128, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x703da3 }, "TerrainDecals"),
+      FurnitureBottle0: d(Tx.Furniture.Bottle0, { x: 296, y: 118, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa3b0f3 }, "TerrainDecals"),
+      FurnitureBottle1: d(Tx.Furniture.Bottle1, { x: 312, y: 115, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xd2d9ff }, "TerrainDecals"),
+      FurnitureBottle0_1: d(Tx.Furniture.Bottle0, { x: 328, y: 124, scaleX: 1, scaleY: 1, rotation: -90, originX: 0.5, originY: 0.5, tint: 0xa3b0f3 }, "TerrainDecals"),
+      FurnitureBottle1_1: d(Tx.Furniture.Bottle1, { x: 120, y: 98, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa3b0f3 }, "TerrainDecals"),
+      FurnitureBottle1_2: d(Tx.Furniture.Bottle1, { x: 136, y: 98, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb1bbf0 }, "TerrainDecals"),
+      FurnitureBottle1_3: d(Tx.Furniture.Bottle1, { x: 168, y: 98, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb1bbf0 }, "TerrainDecals"),
+      FurnitureBottle1_4: d(Tx.Furniture.Bottle1, { x: 152, y: 106, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xd4daff }, "TerrainDecals"),
       Door: e(r["Door"], { x: 112, y: 160, values: { sceneName: "", checkpointName: "fromMishaHouse", name: "", depth: 0 } }, "Entities"),
       WaterDripSource0: e(r["WaterDripSource"], { x: 205, y: 145, values: { delayMin: 999999999, delayMax: 999999999, name: "WaterDripSource0", depth: 0 } }, "Entities"),
       WaterDripSource1: e(r["WaterDripSource"], { x: 211, y: 147, values: { delayMin: 999999999, delayMax: 999999999, name: "WaterDripSource1", depth: 0 } }, "Entities"),
@@ -4006,6 +4017,9 @@ export const Lvl = {
       WaterHeaterRegion: e(r["Region"], { x: 721, y: 106, width: 56, height: 96, values: { name: "WaterHeaterRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       ComputerMarker: e(r["Marker"], { x: 382, y: 187, values: { name: "ComputerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       MishaShowerMarker: e(r["Marker"], { x: 216, y: 208, values: { name: "MishaShowerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 124, y: 96, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_1: e(r["EnvironmentSparkleMarker"], { x: 156, y: 107, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_2: e(r["EnvironmentSparkleMarker"], { x: 316, y: 112, values: { name: "", depth: 0 } }, "MarkerEntities"),
     };
   },
   MountFlop: (): LvlType.MountFlop => {
@@ -13811,6 +13825,8 @@ export namespace LvlType {
     StoneBrickRows0_1: Sprite;
     StoneBrickRows0_2: Sprite;
     StoneBrickRows1_5: Sprite;
+    FurnitureShelf0: Sprite;
+    FurnitureShelf0_1: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Block_1: ReturnType<(typeof r)["Block"]>;
     Block_2: ReturnType<(typeof r)["Block"]>;
@@ -13825,9 +13841,18 @@ export namespace LvlType {
     Block_10: ReturnType<(typeof r)["Block"]>;
     Block_11: ReturnType<(typeof r)["Block"]>;
     Block_12: ReturnType<(typeof r)["Block"]>;
+    Pipe_1: ReturnType<(typeof r)["Pipe"]>;
+    Pipe_2: ReturnType<(typeof r)["Pipe"]>;
     FurnitureTable0: Sprite;
     StringLights: Sprite;
     StringLights_1: Sprite;
+    FurnitureBottle0: Sprite;
+    FurnitureBottle1: Sprite;
+    FurnitureBottle0_1: Sprite;
+    FurnitureBottle1_1: Sprite;
+    FurnitureBottle1_2: Sprite;
+    FurnitureBottle1_3: Sprite;
+    FurnitureBottle1_4: Sprite;
     Door: ReturnType<(typeof r)["Door"]>;
     WaterDripSource0: ReturnType<(typeof r)["WaterDripSource"]>;
     WaterDripSource1: ReturnType<(typeof r)["WaterDripSource"]>;
@@ -13842,6 +13867,9 @@ export namespace LvlType {
     WaterHeaterRegion: ReturnType<(typeof r)["Region"]>;
     ComputerMarker: ReturnType<(typeof r)["Marker"]>;
     MishaShowerMarker: ReturnType<(typeof r)["Marker"]>;
+    EnvironmentSparkleMarker: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    EnvironmentSparkleMarker_1: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    EnvironmentSparkleMarker_2: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
   };
   export type MountFlop = {
     WorldMapMountain0: Sprite;
