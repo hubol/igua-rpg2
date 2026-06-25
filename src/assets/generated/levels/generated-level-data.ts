@@ -3957,7 +3957,7 @@ export const Lvl = {
     };
   },
   MishaHouse: (): LvlType.MishaHouse => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x000000, terrainTint: 0x39175b });
+    applyLevel({ width: 1000, height: 280, backgroundTint: 0x000000, terrainTint: 0x39175b });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 32, y: 16, scaleX: 13.5, scaleY: 7.5, rotation: 0, originX: 0, originY: 0, tint: 0x2e0d33 }, "BackgroundDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 80, y: 64, scaleX: 11, scaleY: 5, rotation: 0, originX: 0, originY: 0, tint: 0x19062d }, "BackgroundDecals"),
@@ -3967,12 +3967,15 @@ export const Lvl = {
       StoneBrickRows0: d(Tx.Stone.BrickRows0, { x: 411, y: 144, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x000000 }, "BackgroundDecals"),
       EsotericMishaComputerShowerWall: d(Tx.Esoteric.MishaComputer.ShowerWall, { x: 224, y: 163, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       EsotericMishaComputerShower: d(Tx.Esoteric.MishaComputer.Shower, { x: 216, y: 161, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      ShapesSquare32_2: d(Tx.Shapes.Square32, { x: 464, y: 176, scaleX: 4, scaleY: 1, rotation: 0, originX: 0, originY: 0.5, tint: 0x2e0d33 }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 48, y: 32, width: 32, height: 208, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 416, y: 32, width: 32, height: 130, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 80, y: 32, width: 336, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
       Block_3: e(r["Block"], { x: 80, y: 208, width: 336, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
       Pipe: e(r["Pipe"], { x: 352, y: 188, width: 64, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
       Block_4: e(r["Block"], { x: 416, y: 188, width: 32, height: 52, values: { name: "", depth: 0, visible: true }, tint: 0x39175b }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 448, y: 130, width: 128, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x2e0d33 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 448, y: 188, width: 128, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x2e0d33 }, "TerrainEntities"),
       FurnitureTable0: d(Tx.Furniture.Table0, { x: 381, y: 200, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x39175b }, "TerrainDecals"),
       StringLights: d(Tx.Esoteric.MishaComputer.StringLights, { x: 248, y: 128, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       StringLights_1: d(Tx.Esoteric.MishaComputer.String, { x: 248, y: 128, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x703da3 }, "TerrainDecals"),
@@ -13784,12 +13787,15 @@ export namespace LvlType {
     StoneBrickRows0: Sprite;
     EsotericMishaComputerShowerWall: Sprite;
     EsotericMishaComputerShower: Sprite;
+    ShapesSquare32_2: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Block_1: ReturnType<(typeof r)["Block"]>;
     Block_2: ReturnType<(typeof r)["Block"]>;
     Block_3: ReturnType<(typeof r)["Block"]>;
     Pipe: ReturnType<(typeof r)["Pipe"]>;
     Block_4: ReturnType<(typeof r)["Block"]>;
+    Block_5: ReturnType<(typeof r)["Block"]>;
+    Block_6: ReturnType<(typeof r)["Block"]>;
     FurnitureTable0: Sprite;
     StringLights: Sprite;
     StringLights_1: Sprite;

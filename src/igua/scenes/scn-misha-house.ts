@@ -6,7 +6,7 @@ import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaQuests } from "../drama/drama-quests";
 import { show } from "../drama/show";
-import { Cutscene } from "../globals";
+import { Cutscene, scene } from "../globals";
 import { mxnFxTintRotate } from "../mixins/effects/mxn-fx-tint-rotate";
 import { mxnBoilTextureIndex } from "../mixins/mxn-boil-texture-index";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -18,6 +18,7 @@ import { Rpg } from "../rpg/rpg";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 
 export function scnMishaHouse() {
+    scene.camera.framing = "snap_to_renderer_size";
     const quest = Rpg.quest("MishaHouse.DestroyedComputer");
     const lvl = Lvl.MishaHouse();
 

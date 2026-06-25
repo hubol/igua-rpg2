@@ -10,13 +10,23 @@ import { scene } from "../globals";
 import { playerObj } from "./obj-player";
 import { StepOrder } from "./step-order";
 
-type CameraMode = "follow_player" | "follow_subject" | "controlled" | "move_towards_player";
-
-function getCameraPositionToFrameSubject(vector: DisplayObject | Vector, subjectObj: DisplayObject) {
+function getCameraPositionToFrameSubject(
+    vector: DisplayObject | Vector,
+    subjectObj: DisplayObject,
+    framing: objCamera.Framing,
+) {
     if (subjectObj && !subjectObj.destroyed) {
+        if (framing === "snap_to_renderer_size") {
+            vector.at(subjectObj);
+            vector.x = Math.floor(vector.x / renderer.width) * renderer.width;
+            vector.y = Math.floor(vector.y / renderer.height) * renderer.height;
+            return vector;
+        }
+
         vector.at(subjectObj).add(-renderer.width / 2, -renderer.height / 2);
         vector.x = Math.max(0, Math.min(vector.x, scene.level.width - renderer.width));
         vector.y = Math.max(0, Math.min(vector.y, scene.level.height - renderer.height));
+
         return vector;
     }
 
@@ -37,7 +47,7 @@ export function objCamera(isWorldMap: boolean) {
         },
         panToSubject(subjectObj: DisplayObject) {
             obj.mode = "controlled";
-            const position = getCameraPositionToFrameSubject(vnew(), subjectObj) ?? obj;
+            const position = getCameraPositionToFrameSubject(vnew(), subjectObj, framing) ?? obj;
 
             return () => {
                 obj.moveTowards(position, 6);
@@ -48,18 +58,19 @@ export function objCamera(isWorldMap: boolean) {
             return this.panToSubject(playerObj);
         },
         get isFramingPlayer() {
-            const playerCameraPosition = getCameraPositionToFrameSubject(v, playerObj);
+            const playerCameraPosition = getCameraPositionToFrameSubject(v, playerObj, framing);
             return !playerCameraPosition || distance(playerCameraPosition, obj) < 2;
         },
     };
 
     const parallaxFactor = isWorldMap ? 1 : 0.8;
 
-    let mode = Null<CameraMode>();
+    let mode = Null<objCamera.Mode>();
+    let framing: objCamera.Framing = "default";
 
     // TODO not sure if mode should be exposed...
     const obj = container().merge({
-        defaultMode: <CameraMode> "follow_player",
+        defaultMode: <objCamera.Mode> "follow_player",
         get mode() {
             if (!mode) {
                 mode = this.defaultMode;
@@ -69,13 +80,19 @@ export function objCamera(isWorldMap: boolean) {
         set mode(value) {
             mode = value;
         },
+        get framing() {
+            return framing;
+        },
+        set framing(value) {
+            framing = value;
+        },
         auto,
     }).step(self => {
         if (self.mode === "follow_player") {
-            getCameraPositionToFrameSubject(self, playerObj);
+            getCameraPositionToFrameSubject(self, playerObj, framing);
         }
         else if (self.mode === "move_towards_player") {
-            getCameraPositionToFrameSubject(v, playerObj);
+            getCameraPositionToFrameSubject(v, playerObj, framing);
             self.moveTowards(v, 2);
         }
         else if (self.mode === "follow_subject") {
@@ -86,7 +103,7 @@ export function objCamera(isWorldMap: boolean) {
                 );
             }
             else if (!subjectToFollowObj.destroyed) {
-                getCameraPositionToFrameSubject(self, subjectToFollowObj);
+                getCameraPositionToFrameSubject(self, subjectToFollowObj, framing);
             }
         }
 
@@ -102,4 +119,9 @@ export function objCamera(isWorldMap: boolean) {
     }, StepOrder.Camera);
 
     return obj;
+}
+
+namespace objCamera {
+    export type Mode = "follow_player" | "follow_subject" | "controlled" | "move_towards_player";
+    export type Framing = "default" | "snap_to_renderer_size";
 }
