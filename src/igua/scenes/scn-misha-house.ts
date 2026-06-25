@@ -12,11 +12,21 @@ import { mxnBoilTextureIndex } from "../mixins/mxn-boil-texture-index";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnEnemy } from "../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../mixins/mxn-enemy-death-burst";
+import { mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { playerObj } from "../objects/obj-player";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { Rpg } from "../rpg/rpg";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
+import { RpgFaction } from "../rpg/rpg-faction";
+
+const ranks = {
+    misha: RpgEnemyRank.create({
+        status: {
+            faction: RpgFaction.Player,
+        },
+    }),
+};
 
 export function scnMishaHouse() {
     scene.camera.framing = "snap_to_renderer_size";
@@ -25,6 +35,7 @@ export function scnMishaHouse() {
     const lvl = Lvl.MishaHouse();
 
     lvl.MishaNpc
+        .mixin(mxnRpgStatus, { status: ranks.misha.status, hurtboxes: [lvl.MishaNpc] })
         .mixin(mxnCutscene, function* () {
             if (computerQuest.everCompleted) {
                 if (Rpg.flags.misha.waterHeater.warmed && !waterHeaterQuest.everCompleted) {
