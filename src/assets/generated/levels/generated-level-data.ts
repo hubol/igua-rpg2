@@ -3996,13 +3996,14 @@ export const Lvl = {
       WaterDripSource0: e(r["WaterDripSource"], { x: 205, y: 145, values: { delayMin: 999999999, delayMax: 999999999, name: "WaterDripSource0", depth: 0 } }, "Entities"),
       WaterDripSource1: e(r["WaterDripSource"], { x: 211, y: 147, values: { delayMin: 999999999, delayMax: 999999999, name: "WaterDripSource1", depth: 0 } }, "Entities"),
       WaterDripSource2: e(r["WaterDripSource"], { x: 217, y: 146, values: { delayMin: 999999999, delayMax: 999999999, name: "WaterDripSource2", depth: 0 } }, "Entities"),
-      EsotericMishaComputerWaterHeater: d(Tx.Esoteric.MishaComputer.WaterHeater, { x: 638, y: 145, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
+      WaterHeater: d(Tx.Esoteric.MishaComputer.WaterHeater, { x: 638, y: 145, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
       MishaNpc: e(r["IguanaNpc"], { x: 320, y: 208, flippedX: false, values: { personaName: "Misha", name: "MishaNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 184, y: 208, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       Puddle: e(r["Puddle"], { x: 192, y: 208, width: 32, values: { name: "", depth: 0 }, tint: 0x68a8d0 }, "FrontEntities"),
       Lights: d(Tx.Esoteric.MishaComputer.Lights, { x: 248, y: 122, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
       Dummy: d(Tx.Esoteric.ClockFace40px, { x: -48, y: -48, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
       ShowerLeverRegion: e(r["Region"], { x: 211, y: 168, width: 26, height: 32, values: { name: "ShowerLeverRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      WaterHeaterRegion: e(r["Region"], { x: 721, y: 106, width: 56, height: 96, values: { name: "WaterHeaterRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       ComputerMarker: e(r["Marker"], { x: 382, y: 187, values: { name: "ComputerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
@@ -13830,13 +13831,14 @@ export namespace LvlType {
     WaterDripSource0: ReturnType<(typeof r)["WaterDripSource"]>;
     WaterDripSource1: ReturnType<(typeof r)["WaterDripSource"]>;
     WaterDripSource2: ReturnType<(typeof r)["WaterDripSource"]>;
-    EsotericMishaComputerWaterHeater: Sprite;
+    WaterHeater: Sprite;
     MishaNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     Puddle: ReturnType<(typeof r)["Puddle"]>;
     Lights: Sprite;
     Dummy: Sprite;
     ShowerLeverRegion: ReturnType<(typeof r)["Region"]>;
+    WaterHeaterRegion: ReturnType<(typeof r)["Region"]>;
     ComputerMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type MountFlop = {

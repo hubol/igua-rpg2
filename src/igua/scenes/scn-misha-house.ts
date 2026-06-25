@@ -1,5 +1,5 @@
 import { BLEND_MODES, Sprite } from "pixi.js";
-import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../assets/textures";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { container } from "../../lib/pixi/container";
@@ -75,6 +75,8 @@ export function scnMishaHouse() {
             }
         });
 
+    enrichWaterHeater(lvl);
+
     if (quest.everCompleted) {
         return;
     }
@@ -94,6 +96,21 @@ export function scnMishaHouse() {
                 yield* DramaQuests.complete("MishaHouse.DestroyedComputer");
             }, { speaker: lvl.MishaNpc }))
         .show();
+}
+
+function enrichWaterHeater(lvl: LvlType.MishaHouse) {
+    const rank = RpgEnemyRank.create({
+        status: {
+            health: 50,
+            healthMax: 130,
+            defenses: {
+                physical: 100,
+            },
+        },
+    });
+
+    lvl.WaterHeater
+        .mixin(mxnEnemy, { rank, hurtboxes: [lvl.WaterHeaterRegion] });
 }
 
 const [txComputer, ...txsComputerLayers] = Tx.Esoteric.MishaComputer.Layers.split({ count: 3 });
