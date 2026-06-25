@@ -39,7 +39,21 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Region",
+          "id": 0,
+          "_eid": "11908607",
+          "x": 211,
+          "y": 168,
+          "width": 26,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "ShowerLeverRegion", "depth": 0}
+        }
+      ]
     },
     {
       "name": "FrontDecals",
@@ -61,7 +75,8 @@
           "texture": "esoteric/misha computer/lights.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "Lights"}
+          "values": {"name": "Lights"},
+          "groupName": null
         },
         {
           "x": -48,
@@ -73,7 +88,8 @@
           "texture": "esoteric/clock face 40px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "Dummy"}
+          "values": {"name": "Dummy"},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -87,7 +103,20 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Puddle",
+          "id": 0,
+          "_eid": "55698237",
+          "x": 192,
+          "y": 208,
+          "width": 32,
+          "originX": 0,
+          "originY": 1,
+          "tint": "#68a8d0",
+          "values": {"name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "PlayerEntities",
@@ -166,6 +195,36 @@
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "", "checkpointName": "fromMishaHouse", "name": "", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 1,
+          "_eid": "38869661",
+          "x": 205,
+          "y": 145,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 999999999, "delayMax": 999999999, "name": "WaterDripSource0", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 2,
+          "_eid": "38869661",
+          "x": 211,
+          "y": 147,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 999999999, "delayMax": 999999999, "name": "WaterDripSource1", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 3,
+          "_eid": "38869661",
+          "x": 217,
+          "y": 146,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 999999999, "delayMax": 999999999, "name": "WaterDripSource2", "depth": 0}
         }
       ]
     },
@@ -202,7 +261,8 @@
           "texture": "esoteric/misha computer/string lights.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "StringLights"}
+          "values": {"name": "StringLights"},
+          "groupName": null
         },
         {
           "x": 248,
@@ -214,7 +274,8 @@
           "texture": "esoteric/misha computer/string.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "StringLights"}
+          "values": {"name": "StringLights"},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -249,7 +310,7 @@
           "x": 416,
           "y": 32,
           "width": 32,
-          "height": 208,
+          "height": 130,
           "originX": 0,
           "originY": 0,
           "tint": "#39175b",
@@ -289,6 +350,19 @@
           "y": 188,
           "width": 64,
           "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 5,
+          "_eid": "93117141",
+          "x": 416,
+          "y": 188,
+          "width": 32,
+          "height": 52,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#39175b",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -390,6 +464,30 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 224,
+          "y": 163,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/misha computer/shower wall.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 216,
+          "y": 161,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/misha computer/shower.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"

@@ -1,6 +1,7 @@
 import { BLEND_MODES, Sprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../assets/textures";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { container } from "../../lib/pixi/container";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaQuests } from "../drama/drama-quests";
@@ -48,6 +49,30 @@ export function scnMishaHouse() {
     lvl.Lights.blendMode = BLEND_MODES.ADD;
 
     lvl.Door.objDoor.openTint = 0x000000;
+
+    lvl.ShowerLeverRegion
+        .mixin(mxnCutscene, function* () {
+            yield () => playerObj.isOnGround;
+            const dripSourceObjs = [lvl.WaterDripSource0, lvl.WaterDripSource1, lvl.WaterDripSource2];
+
+            // TODO sfx
+            for (const obj of dripSourceObjs) {
+                obj.objWaterDripSource.delayMin = 100;
+                obj.objWaterDripSource.delayMax = 300;
+                yield sleepf(3);
+            }
+
+            yield sleep(2000);
+
+            Cutscene.setCurrentSpeaker(playerObj);
+            yield* show("The water is extremely cold.");
+
+            for (const obj of dripSourceObjs.reverse()) {
+                obj.objWaterDripSource.delayMin = Number.MAX_SAFE_INTEGER;
+                obj.objWaterDripSource.delayMax = Number.MAX_SAFE_INTEGER;
+                yield sleepf(3);
+            }
+        });
 
     if (quest.everCompleted) {
         return;
