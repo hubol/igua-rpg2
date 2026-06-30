@@ -8,12 +8,23 @@ import { mxnDripping } from "./mxn-dripping";
 
 interface MxnRpgStatusArgs {
     status: RpgStatus.Model;
-    effects: RpgStatus.Effects;
+    effects?: RpgStatus.Effects;
     hurtboxes: DisplayObject[];
 }
 
-export function mxnRpgStatus(obj: Container, args: MxnRpgStatusArgs) {
+const dummyEffects: RpgStatus.Effects = {
+    ballonCreated() {},
+    ballonHealthDepleted() {},
+    died() {},
+    healed() {},
+    tookDamage() {},
+};
+
+export function mxnRpgStatus(obj: Container, rawArgs: MxnRpgStatusArgs) {
     let tickCount = 0;
+
+    rawArgs.effects ??= dummyEffects;
+    const args = rawArgs as Required<MxnRpgStatusArgs>;
 
     const rpgStatusObj = obj
         .track(mxnRpgStatus)

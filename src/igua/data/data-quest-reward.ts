@@ -189,6 +189,10 @@ export namespace DataQuestReward {
             },
             "MishaHouse.DestroyedComputer": {
                 kind: "single",
+                reward: { kind: "equipment", id: "IqIndicator", level: 1 },
+            },
+            "MishaHouse.WarmedWaterHeater": {
+                kind: "single",
                 reward: { kind: "equipment", id: "Robotic", level: 1 },
             },
             __Fallback__: {

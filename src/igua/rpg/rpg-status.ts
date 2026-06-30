@@ -11,16 +11,20 @@ export namespace RpgStatus {
         FullyPoisonedHealth: 5,
     };
 
+    export interface Defenses {
+        physical: PercentInt;
+        overheat: PercentInt;
+    }
+
     export namespace BodyPart {
         export interface Model {
-            defenses: {
-                physical: PercentInt;
-            };
+            defenses: Defenses;
         }
 
         export const defenseless: Model = {
             defenses: {
                 physical: 0,
+                overheat: 0,
             },
         };
     }
@@ -59,12 +63,8 @@ export namespace RpgStatus {
                 max: Integer;
             };
         };
-        guardingDefenses: {
-            physical: PercentInt;
-        };
-        defenses: {
-            physical: PercentInt;
-        };
+        guardingDefenses: Defenses;
+        defenses: Defenses;
         factionDefenses: Record<RpgFaction, PercentInt>;
         recoveries: {
             wetness: Integer;
@@ -359,18 +359,18 @@ export namespace RpgStatus {
             const tookPhysicalDamage = takeDamage(
                 attack.physical,
                 canBeFatal,
-                Math.max(0, target.defenses.physical + targetBodyPart.defenses.physical),
-                Math.max(0, target.guardingDefenses.physical + targetBodyPart.defenses.physical),
+                target.defenses.physical + targetBodyPart.defenses.physical,
+                target.guardingDefenses.physical + targetBodyPart.defenses.physical,
                 factionDefense,
                 target,
             );
 
+            // TODO copy-paste feels bad
             const tookOverheatDamage = takeDamage(
                 overheatAttack,
                 canBeFatal,
-                // TODO should there be overheat defense
-                0,
-                0,
+                target.defenses.overheat + targetBodyPart.defenses.overheat,
+                target.guardingDefenses.overheat + targetBodyPart.defenses.overheat,
                 factionDefense,
                 target,
             );
@@ -378,15 +378,22 @@ export namespace RpgStatus {
             const damaged = tookEmotionalDamage > 0 || tookPhysicalDamage > 0 || tookOverheatDamage > 0;
             target.invulnerable = target.invulnerableMax;
 
-            targetEffects.tookDamage(
-                target.health,
-                tookPhysicalDamage,
-                tookEmotionalDamage,
-                0,
-                tookOverheatDamage,
-                attacker,
-                attack,
-            );
+            const netHealing = -tookEmotionalDamage - tookPhysicalDamage - tookOverheatDamage;
+
+            if (netHealing >= 1) {
+                targetEffects.healed(target.health, netHealing);
+            }
+            else {
+                targetEffects.tookDamage(
+                    target.health,
+                    tookPhysicalDamage,
+                    tookEmotionalDamage,
+                    0,
+                    tookOverheatDamage,
+                    attacker,
+                    attack,
+                );
+            }
 
             if (damaged && target.health <= 0) {
                 targetEffects.died(attacker);
@@ -430,17 +437,21 @@ export namespace RpgStatus {
             + factionDefense;
 
         const minimumDamage = totalDefense >= 100 ? 0 : Math.sign(amount);
+        const defenseNumerator = totalDefense >= 0 ? 100 - totalDefense : totalDefense;
 
         const damage = Math.max(
-            minimumDamage,
+            defenseNumerator < 0 ? Number.MIN_SAFE_INTEGER : minimumDamage,
             Math[target.quirks.roundReceivedDamageUp ? "ceil" : "floor"](
-                amount * ((100 - totalDefense) / 100),
+                amount * (defenseNumerator / 100),
             ),
         );
 
         const minimumHealthAfterDamage = Math.min(canBeFatal ? 0 : 1, target.health);
 
-        target.health = Math.max(minimumHealthAfterDamage, target.health - damage);
+        target.health = Math.min(
+            target.healthMax,
+            Math.max(minimumHealthAfterDamage, target.health - damage),
+        );
         const diff = previous - target.health;
 
         return diff;

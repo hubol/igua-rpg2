@@ -1,5 +1,7 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../assets/textures";
+import { Coro } from "../../lib/game-engine/routines/coro";
+import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
@@ -16,10 +18,16 @@ interface ObjWaterDripSourceArgs {
 export function objWaterDripSource({ delayMin, delayMax }: ObjWaterDripSourceArgs) {
     return container()
         .track(objWaterDripSource)
+        .merge({ objWaterDripSource: { delayMin, delayMax } })
         .merge({ poison: false, atkDrip })
         .coro(function* (self) {
             while (true) {
-                yield sleep(Rng.intc(delayMin, delayMax));
+                yield* Coro.race([
+                    onPrimitiveMutate(() =>
+                        self.objWaterDripSource.delayMax * 0.67 + self.objWaterDripSource.delayMin * 0.2
+                    ),
+                    sleep(Rng.intc(self.objWaterDripSource.delayMin, self.objWaterDripSource.delayMax)),
+                ]);
                 objWaterDrip(self.poison ? atkPoisonDrip : self.atkDrip).at(self).show(self.parent);
             }
         });

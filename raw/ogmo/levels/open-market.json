@@ -38,7 +38,32 @@
       "gridCellHeight": 8,
       "gridCellsX": 151,
       "gridCellsY": 60,
-      "decals": [],
+      "decals": [
+        {
+          "x": 297,
+          "y": 120,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#2c8fcc",
+          "texture": "terrain/earth/lumpy 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 339,
+          "y": 120,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#2c8fcc",
+          "texture": "terrain/earth/lumpy 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -72,6 +97,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 1,
+          "_eid": "19953026",
+          "x": 280,
+          "y": 120,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromMishaHouse", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -196,6 +232,16 @@
           "originX": 15,
           "originY": 15,
           "values": {"maxTicks": 5, "name": "FlipDial", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 2,
+          "_eid": "88296692",
+          "x": 296,
+          "y": 72,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnMishaHouse", "checkpointName": "fromOpenMarket", "name": "", "depth": 0}
         }
       ]
     },
@@ -208,7 +254,32 @@
       "gridCellHeight": 8,
       "gridCellsX": 151,
       "gridCellsY": 60,
-      "decals": [],
+      "decals": [
+        {
+          "x": 376,
+          "y": 216,
+          "scaleX": 1,
+          "scaleY": 8.15,
+          "rotation": 66.67,
+          "tint": "#000000",
+          "texture": "shapes/line vertical16.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 376,
+          "y": 152,
+          "scaleX": 1,
+          "scaleY": 8.15,
+          "rotation": 66.67,
+          "tint": "#000000",
+          "texture": "shapes/line vertical16.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -516,6 +587,37 @@
           "y": 152,
           "width": 192,
           "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "PipeSlope",
+          "id": 25,
+          "_eid": "95781942",
+          "x": 256,
+          "y": 216,
+          "width": 120,
+          "height": 52,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "PipeSlope",
+          "id": 26,
+          "_eid": "95781942",
+          "x": 256,
+          "y": 152,
+          "width": 120,
+          "height": 52,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Pipe",
+          "id": 27,
+          "_eid": "95769929",
+          "x": 256,
+          "y": 120,
+          "width": 120,
+          "values": {"name": "", "visible": false, "depth": 0}
         }
       ]
     },
@@ -539,7 +641,56 @@
       "gridCellHeight": 8,
       "gridCellsX": 151,
       "gridCellsY": 60,
-      "decals": [],
+      "decals": [
+        {
+          "x": 376,
+          "y": 120,
+          "scaleX": 1,
+          "scaleY": 12,
+          "rotation": 0,
+          "tint": "#000000",
+          "texture": "shapes/line vertical16.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 256,
+          "y": 120,
+          "scaleX": 1,
+          "scaleY": 12,
+          "rotation": 0,
+          "tint": "#000000",
+          "texture": "shapes/line vertical16.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 312,
+          "y": 80,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "sky/cloud puff 2.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 364,
+          "y": 53,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/misha computer/lagavulin.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {

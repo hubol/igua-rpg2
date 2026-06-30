@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 500,
+  "width": 1000,
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 125,
       "gridCellsY": 35,
       "entities": [
         {
@@ -27,6 +27,47 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "ComputerMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 1,
+          "_eid": "73148747",
+          "x": 216,
+          "y": 208,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "MishaShowerMarker", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 2,
+          "_eid": "61143896",
+          "x": 124,
+          "y": 96,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 3,
+          "_eid": "61143896",
+          "x": 156,
+          "y": 107,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 4,
+          "_eid": "61143896",
+          "x": 316,
+          "y": 112,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -37,9 +78,36 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 125,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Region",
+          "id": 0,
+          "_eid": "11908607",
+          "x": 211,
+          "y": 168,
+          "width": 26,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "ShowerLeverRegion", "depth": 0}
+        },
+        {
+          "name": "Region",
+          "id": 1,
+          "_eid": "11908607",
+          "x": 721,
+          "y": 106,
+          "width": 56,
+          "height": 96,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "WaterHeaterRegion", "depth": 0}
+        }
+      ]
     },
     {
       "name": "FrontDecals",
@@ -48,7 +116,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 125,
       "gridCellsY": 35,
       "decals": [
         {
@@ -61,7 +129,8 @@
           "texture": "esoteric/misha computer/lights.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "Lights"}
+          "values": {"name": "Lights"},
+          "groupName": null
         },
         {
           "x": -48,
@@ -73,7 +142,8 @@
           "texture": "esoteric/clock face 40px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "Dummy"}
+          "values": {"name": "Dummy"},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -85,9 +155,22 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 125,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Puddle",
+          "id": 0,
+          "_eid": "55698237",
+          "x": 192,
+          "y": 208,
+          "width": 32,
+          "originX": 0,
+          "originY": 1,
+          "tint": "#68a8d0",
+          "values": {"name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "PlayerEntities",
@@ -96,7 +179,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 125,
       "gridCellsY": 35,
       "entities": [
         {
@@ -119,7 +202,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 125,
       "gridCellsY": 35,
       "entities": [
         {
@@ -142,9 +225,23 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 125,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 638,
+          "y": 145,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/misha computer/water heater.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "WaterHeater"},
+          "groupName": null
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -154,7 +251,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 125,
       "gridCellsY": 35,
       "entities": [
         {
@@ -165,7 +262,37 @@
           "y": 160,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "", "checkpointName": "fromMishaHouse", "name": "", "depth": 0}
+          "values": {"sceneName": "scnOpenMarket", "checkpointName": "fromMishaHouse", "name": "", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 1,
+          "_eid": "38869661",
+          "x": 205,
+          "y": 145,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 999999999, "delayMax": 999999999, "name": "WaterDripSource0", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 2,
+          "_eid": "38869661",
+          "x": 211,
+          "y": 147,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 999999999, "delayMax": 999999999, "name": "WaterDripSource1", "depth": 0}
+        },
+        {
+          "name": "WaterDripSource",
+          "id": 3,
+          "_eid": "38869661",
+          "x": 217,
+          "y": 146,
+          "originX": 2,
+          "originY": 0,
+          "values": {"delayMin": 999999999, "delayMax": 999999999, "name": "WaterDripSource2", "depth": 0}
         }
       ]
     },
@@ -176,7 +303,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 125,
       "gridCellsY": 35,
       "decals": [
         {
@@ -202,7 +329,8 @@
           "texture": "esoteric/misha computer/string lights.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "StringLights"}
+          "values": {"name": "StringLights"},
+          "groupName": null
         },
         {
           "x": 248,
@@ -214,7 +342,92 @@
           "texture": "esoteric/misha computer/string.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "StringLights"}
+          "values": {"name": "StringLights"},
+          "groupName": null
+        },
+        {
+          "x": 296,
+          "y": 118,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a3b0f3",
+          "texture": "furniture/bottle 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 312,
+          "y": 115,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#d2d9ff",
+          "texture": "furniture/bottle 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 328,
+          "y": 124,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": -90,
+          "tint": "#a3b0f3",
+          "texture": "furniture/bottle 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 120,
+          "y": 98,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a3b0f3",
+          "texture": "furniture/bottle 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 136,
+          "y": 98,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#b1bbf0",
+          "texture": "furniture/bottle 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 168,
+          "y": 98,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#b1bbf0",
+          "texture": "furniture/bottle 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 152,
+          "y": 106,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#d4daff",
+          "texture": "furniture/bottle 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -226,7 +439,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 125,
       "gridCellsY": 35,
       "entities": [
         {
@@ -249,7 +462,7 @@
           "x": 416,
           "y": 32,
           "width": 32,
-          "height": 208,
+          "height": 130,
           "originX": 0,
           "originY": 0,
           "tint": "#39175b",
@@ -289,6 +502,141 @@
           "y": 188,
           "width": 64,
           "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 5,
+          "_eid": "93117141",
+          "x": 416,
+          "y": 188,
+          "width": 32,
+          "height": 52,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#39175b",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 6,
+          "_eid": "93117141",
+          "x": 448,
+          "y": 130,
+          "width": 96,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#2e0d33",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 7,
+          "_eid": "93117141",
+          "x": 448,
+          "y": 188,
+          "width": 96,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#2e0d33",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 8,
+          "_eid": "93117141",
+          "x": 500,
+          "y": -32,
+          "width": 16,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#39175b",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 9,
+          "_eid": "93117141",
+          "x": 544,
+          "y": 32,
+          "width": 32,
+          "height": 130,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#39175b",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 10,
+          "_eid": "93117141",
+          "x": 544,
+          "y": 188,
+          "width": 32,
+          "height": 52,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#39175b",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 11,
+          "_eid": "93117141",
+          "x": 576,
+          "y": 32,
+          "width": 336,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#39175b",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 12,
+          "_eid": "93117141",
+          "x": 576,
+          "y": 208,
+          "width": 336,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#39175b",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 13,
+          "_eid": "93117141",
+          "x": 912,
+          "y": 32,
+          "width": 32,
+          "height": 208,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#39175b",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 14,
+          "_eid": "95769929",
+          "x": 109,
+          "y": 111,
+          "width": 72,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 15,
+          "_eid": "95769929",
+          "x": 283,
+          "y": 128,
+          "width": 72,
+          "values": {"name": "", "visible": false, "depth": 0}
         }
       ]
     },
@@ -299,7 +647,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 125,
       "gridCellsY": 35,
       "entities": []
     },
@@ -310,9 +658,22 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 125,
       "gridCellsY": 35,
       "decals": [
+        {
+          "x": 528,
+          "y": 16,
+          "scaleX": 13.5,
+          "scaleY": 7.5,
+          "rotation": 0,
+          "tint": "#2e0d33",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""},
+          "groupName": null
+        },
         {
           "x": 32,
           "y": 16,
@@ -390,6 +751,147 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 224,
+          "y": 163,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/misha computer/shower wall.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 216,
+          "y": 161,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/misha computer/shower.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 464,
+          "y": 176,
+          "scaleX": 2,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#2e0d33",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 568,
+          "y": 64,
+          "scaleX": 11,
+          "scaleY": 5,
+          "rotation": 0,
+          "tint": "#19062d",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 620,
+          "y": 113,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#000000",
+          "texture": "stone/brick rows 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 673,
+          "y": 173,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#000000",
+          "texture": "stone/brick rows 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 833,
+          "y": 101,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#000000",
+          "texture": "stone/brick rows 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 885,
+          "y": 174,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#000000",
+          "texture": "stone/brick rows 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 786,
+          "y": 134,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#000000",
+          "texture": "stone/brick rows 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 319,
+          "y": 136,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#39175b",
+          "texture": "furniture/shelf 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 145,
+          "y": 119,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#39175b",
+          "texture": "furniture/shelf 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -401,7 +903,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
+      "gridCellsX": 125,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
