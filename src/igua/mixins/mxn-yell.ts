@@ -24,7 +24,7 @@ export function mxnYell(obj: DisplayObject) {
             }
             const head = obj.is(mxnHasHead) ? obj.mxnHead.obj : obj;
             const bounds = head.getWorldBounds();
-            textObj.at(bounds.getCenter().x, bounds.top);
+            textObj.at(bounds.getCenter().x, bounds.top).vround();
             textObj.text = message;
             life = 120;
         },
