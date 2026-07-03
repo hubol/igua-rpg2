@@ -8268,6 +8268,7 @@ export const Lvl = {
       TerrainGrassJagged_113: d(Tx.Terrain.Grass.Jagged, { x: 7381, y: 442, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b00d7 }, "TerrainDecals"),
       TerrainGrassLumpy0: d(Tx.Terrain.Grass.Lumpy0, { x: 6232, y: 560, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b00d7 }, "TerrainDecals"),
       TerrainGrassLumpy0_1: d(Tx.Terrain.Grass.Lumpy0, { x: 6246, y: 564, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b00d7 }, "TerrainDecals"),
+      TownColossusGuy3: d(Tx.Town.Colossus.Guy3, { x: 7976, y: 352, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       Door: e(r["Door"], { x: 24, y: 272, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromRaceTrack", name: "", depth: 0 } }, "Entities"),
       IntelligenceSign: e(r["IntelligenceSign"], { x: 2824, y: 376, values: { title: "Ballons", message: "That many ballons.", min: 5, max: 6, name: "", depth: 0 } }, "Entities"),
       TerrainGrassJagged_114: d(Tx.Terrain.Grass.Jagged, { x: -11, y: 319, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b00d7 }, "AboveEntitiesDecals"),
@@ -8275,6 +8276,7 @@ export const Lvl = {
       MysteriousNpc: e(r["IguanaNpc"], { x: 1496, y: 320, flippedX: false, values: { personaName: "BugGlitch0", name: "MysteriousNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 80, y: 320, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromRestart: e(r["Checkpoint"], { x: 216, y: 104, flippedX: false, values: { name: "fromRestart", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
+      PlayerDev: e(r["PlayerDev"], { x: 8112, y: 416, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       GateVertical: e(r["GateVertical"], { x: 0, y: 656, width: 9864, flippedY: false, values: { sceneName: "scnRaceTrack", checkpointName: "fromRestart", name: "", depth: 0 } }, "RegionEntities"),
       WinRegion: e(r["Region"], { x: 9640, y: 336, width: 208, height: 120, values: { name: "WinRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       PlayerStartMarker: e(r["Marker"], { x: 215, y: 376, values: { name: "PlayerStartMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
@@ -18149,6 +18151,7 @@ export namespace LvlType {
     TerrainGrassJagged_113: Sprite;
     TerrainGrassLumpy0: Sprite;
     TerrainGrassLumpy0_1: Sprite;
+    TownColossusGuy3: Sprite;
     Door: ReturnType<(typeof r)["Door"]>;
     IntelligenceSign: ReturnType<(typeof r)["IntelligenceSign"]>;
     TerrainGrassJagged_114: Sprite;
@@ -18156,6 +18159,7 @@ export namespace LvlType {
     MysteriousNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     fromRestart: ReturnType<(typeof r)["Checkpoint"]>;
+    PlayerDev: ReturnType<(typeof r)["PlayerDev"]>;
     GateVertical: ReturnType<(typeof r)["GateVertical"]>;
     WinRegion: ReturnType<(typeof r)["Region"]>;
     PlayerStartMarker: ReturnType<(typeof r)["Marker"]>;
