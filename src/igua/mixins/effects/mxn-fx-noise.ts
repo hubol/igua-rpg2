@@ -11,6 +11,7 @@ const hw = Math.round(renderer.width / 2);
 const hh = Math.round(renderer.height / 2);
 
 export function mxnFxNoise(obj: DisplayObject) {
+    obj.cullable = true;
     const matrix = new Matrix();
     const renderTx = RenderTexture.create({ width: renderer.width, height: renderer.height });
     const renderOptions = { renderTexture: renderTx, transform: matrix };
