@@ -123,6 +123,11 @@ const ranks = {
     level0: RpgEnemyRank.create({
         status: {
             healthMax: 25,
+            conditions: {
+                overheat: {
+                    max: 30,
+                },
+            },
         },
         loot: {
             tier0: [
@@ -143,6 +148,11 @@ const ranks = {
     level1: RpgEnemyRank.create({
         status: {
             healthMax: 39,
+            conditions: {
+                overheat: {
+                    max: 60,
+                },
+            },
         },
         loot: {
             tier0: [

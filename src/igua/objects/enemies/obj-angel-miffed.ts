@@ -185,6 +185,11 @@ const ranks = {
         },
         status: {
             healthMax: 60,
+            conditions: {
+                overheat: {
+                    max: 60,
+                },
+            },
         },
     }),
     level1: RpgEnemyRank.create({
