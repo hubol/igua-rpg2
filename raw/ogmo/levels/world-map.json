@@ -38,6 +38,17 @@
           "originY": 8,
           "tint": "#ff535d",
           "values": {"name": "RelishDispenserMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 2,
+          "_eid": "73148747",
+          "x": 2696,
+          "y": 1896,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "BaldMikeMarker", "depth": 0}
         }
       ]
     },
@@ -653,6 +664,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromOpenMarket", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 28,
+          "_eid": "19953026",
+          "x": 2528,
+          "y": 1936,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromIndianaBaldMike", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },

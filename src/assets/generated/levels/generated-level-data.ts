@@ -10379,6 +10379,7 @@ export const Lvl = {
       fromMountFlopRight: e(r["Checkpoint"], { x: 3688, y: 1520, flippedX: false, values: { name: "fromMountFlopRight", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromMountFlopLeft: e(r["Checkpoint"], { x: 3520, y: 1512, flippedX: true, values: { name: "fromMountFlopLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromOpenMarket: e(r["Checkpoint"], { x: 3840, y: 1576, flippedX: true, values: { name: "fromOpenMarket", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromIndianaBaldMike: e(r["Checkpoint"], { x: 2528, y: 1936, flippedX: true, values: { name: "fromIndianaBaldMike", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       GateMap_2: e(r["GateMap"], { x: 3061, y: 1439, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_3: e(r["GateMap"], { x: 2877, y: 1441, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_4: e(r["GateMap"], { x: 3182, y: 1548, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
@@ -10401,6 +10402,7 @@ export const Lvl = {
       GateMap_18: e(r["GateMap"], { x: 3848, y: 1536, rotation: -90, uid: 178149584065600, values: { sceneName: "scnOpenMarket", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       FallenBotMarker: e(r["Marker"], { x: 2984, y: 1256, values: { name: "FallenBotMarker", depth: 0 }, tint: 0x777777 }, "MarkerEntities"),
       RelishDispenserMarker: e(r["Marker"], { x: 3080, y: 1608, values: { name: "RelishDispenserMarker", depth: 0 }, tint: 0xff535d }, "MarkerEntities"),
+      BaldMikeMarker: e(r["Marker"], { x: 2696, y: 1896, values: { name: "BaldMikeMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
 };
@@ -20595,6 +20597,7 @@ export namespace LvlType {
     fromMountFlopRight: ReturnType<(typeof r)["Checkpoint"]>;
     fromMountFlopLeft: ReturnType<(typeof r)["Checkpoint"]>;
     fromOpenMarket: ReturnType<(typeof r)["Checkpoint"]>;
+    fromIndianaBaldMike: ReturnType<(typeof r)["Checkpoint"]>;
     GateMap_2: ReturnType<(typeof r)["GateMap"]>;
     GateMap_3: ReturnType<(typeof r)["GateMap"]>;
     GateMap_4: ReturnType<(typeof r)["GateMap"]>;
@@ -20617,5 +20620,6 @@ export namespace LvlType {
     GateMap_18: ReturnType<(typeof r)["GateMap"]>;
     FallenBotMarker: ReturnType<(typeof r)["Marker"]>;
     RelishDispenserMarker: ReturnType<(typeof r)["Marker"]>;
+    BaldMikeMarker: ReturnType<(typeof r)["Marker"]>;
   };
 }

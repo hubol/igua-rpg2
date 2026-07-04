@@ -11,16 +11,19 @@ import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaQuests } from "../drama/drama-quests";
 import { dramaQuizComputerScience } from "../drama/drama-quiz-computer-science";
+import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFallenBot } from "../objects/characters/obj-character-fallen-bot";
+import { objCharacterNutcase } from "../objects/characters/obj-character-nutcase";
 import { objEsotericHotDogCondimentDispenser } from "../objects/esoteric/obj-esoteric-hot-dog-condiment-dispenser";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgSaveFiles } from "../rpg/rpg-save-files";
+import { SceneChanger } from "../systems/scene-changer";
 import { Search } from "../utils/search";
 
 export function scnWorldMap() {
@@ -43,6 +46,7 @@ export function scnWorldMap() {
     enrichStrangeMarketGuardian(lvl);
     enrichFallenBot(lvl);
     objFxWaterShimmer().show();
+    enrichBaldMike(lvl);
 }
 
 function objFxWaterShimmer() {
@@ -56,6 +60,48 @@ function objFxWaterShimmer() {
             const decalObj = Rng.item(decalObjs);
             decalObj.pivoted(Rng.intc(-1, 1), Rng.intc(-1, 1));
         });
+}
+
+function enrichBaldMike(lvl: LvlType.WorldMap) {
+    const checkpointName: keyof typeof lvl = "fromIndianaBaldMike";
+    const toIllinoisSceneChanger = SceneChanger.create({ sceneName: scnWorldMap.name, checkpointName });
+
+    objCharacterNutcase()
+        .mixin(mxnSpeaker, { name: "Bald Mike", tintPrimary: 0x8438FF, tintSecondary: 0xC199FF })
+        .mixin(mxnCutscene, function* () {
+            const result = yield* ask(
+                "What's up?? Wanna go to Illinois? It's a total wasteland! So there's no reason to go.",
+                "Take me there",
+                "Wasteland?!",
+                "Nothing is up, I'm leaving",
+            );
+
+            if (result === 0) {
+                yield* show(
+                    "OK it also costs 50 valuables to go over there. I know that might seem weird, but I want to go buy some stuff.",
+                );
+                if (
+                    yield* DramaWallet.askSpendValuables(
+                        "Whaddaya say? Is 50 valuables cool?",
+                        50,
+                    )
+                ) {
+                    toIllinoisSceneChanger.changeScene();
+                }
+            }
+            else if (result === 1) {
+                yield* show(
+                    "Yep, total wasteland.",
+                    "The wizard of emotion absorbed most of the entire world's and a portion of Illinois' energy to create his council of homunculi.",
+                    "The rest of the world sunk into the sea, but Illinois is still there, like some proud vestigial toe bone or something-something.",
+                    "I think somebody might live there still, and it is the only way to get to Iowa.",
+                    "So I am kind of fibbing when I say that there is no reason to go.",
+                );
+            }
+        })
+        .at(lvl.BaldMikeMarker)
+        .zIndexed(ZIndex.CharacterEntities)
+        .show();
 }
 
 function enrichStrangeMarketGuardian(lvl: LvlType.WorldMap) {
