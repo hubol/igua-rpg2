@@ -316,7 +316,7 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
 
                 yield* enemyObj.mxnRpgStatusPotions.dramaUseAppropriatePotion();
             }
-        });
+        }, -2);
 
     return enemyObj;
 }
@@ -408,7 +408,7 @@ function mxnShield(obj: DisplayObject) {
             if (obj.is(mxnRpgAttack)) {
                 obj.isAttackActive = hasScale;
             }
-        });
+        }, -1);
 }
 
 const atkAoe = RpgAttack.create({
