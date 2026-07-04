@@ -5,6 +5,8 @@ import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { interpv } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
+import { Rng } from "../../lib/math/rng";
+import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaQuests } from "../drama/drama-quests";
@@ -40,6 +42,20 @@ export function scnWorldMap() {
     enrichSimpleSecretValuables(lvl);
     enrichStrangeMarketGuardian(lvl);
     enrichFallenBot(lvl);
+    objFxWaterShimmer().show();
+}
+
+function objFxWaterShimmer() {
+    const decalObjs = [
+        ...Search.findDecals(Tx.WorldMap.Wave0),
+        ...Search.findDecals(Tx.Shapes.Rectangle6).filter(obj => obj.tint === 0xbce3ff),
+    ];
+
+    return container()
+        .step(() => {
+            const decalObj = Rng.item(decalObjs);
+            decalObj.pivoted(Rng.intc(-1, 1), Rng.intc(-1, 1));
+        });
 }
 
 function enrichStrangeMarketGuardian(lvl: LvlType.WorldMap) {
