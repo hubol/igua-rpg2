@@ -18,7 +18,9 @@ export function scnIguanaDesigner(
     looks = getDefaultLooks(),
     sceneChanger = SceneChanger.create({ sceneName: scnWizardLair.name, checkpointName: "fromGameStart" }),
 ) {
-    Jukebox.play(Mzk.FirstSong);
+    if (!Jukebox.currentTrack) {
+        Jukebox.play(Mzk.FirstSong);
+    }
 
     const { LightShadowIrregularSmall, ThoughtBubbleGroup } = Lvl.MenuIguanaDesigner();
 
