@@ -69,34 +69,41 @@ function enrichBaldMike(lvl: LvlType.WorldMap) {
     objCharacterNutcase()
         .mixin(mxnSpeaker, { name: "Bald Mike", tintPrimary: 0x8438FF, tintSecondary: 0xC199FF })
         .mixin(mxnCutscene, function* () {
-            const result = yield* ask(
-                "What's up?? Wanna go to Illinois? It's a total wasteland! So there's no reason to go.",
-                "Take me there",
-                "Wasteland?!",
-                "Nothing is up, I'm leaving",
-            );
+            while (true) {
+                const result = yield* ask(
+                    "What's up?? Wanna go to Illinois? It's a total wasteland! So there's no reason to go.",
+                    "Take me there",
+                    "Wasteland?!",
+                    "Nothing is up, I'm leaving",
+                );
 
-            if (result === 0) {
-                yield* show(
-                    "OK it also costs 50 valuables to go over there. I know that might seem weird, but I want to go buy some stuff.",
-                );
-                if (
-                    yield* DramaWallet.askSpendValuables(
-                        "Whaddaya say? Is 50 valuables cool?",
-                        50,
-                    )
-                ) {
-                    toIllinoisSceneChanger.changeScene();
+                if (result === 0) {
+                    yield* show(
+                        "OK it also costs 50 valuables to go over there. I know that might seem weird, but I want to go buy some stuff.",
+                    );
+                    if (
+                        yield* DramaWallet.askSpendValuables(
+                            "Whaddaya say? Is 50 valuables cool?",
+                            50,
+                        )
+                    ) {
+                        toIllinoisSceneChanger.changeScene();
+                    }
                 }
-            }
-            else if (result === 1) {
-                yield* show(
-                    "Yep, total wasteland.",
-                    "The wizard of emotion absorbed most of the entire world's and a portion of Illinois' energy to create his council of homunculi.",
-                    "The rest of the world sunk into the sea, but Illinois is still there, like some proud vestigial toe bone or something-something.",
-                    "I think somebody might live there still, and it is the only way to get to Iowa.",
-                    "So I am kind of fibbing when I say that there is no reason to go.",
-                );
+                else if (result === 1) {
+                    yield* show(
+                        "Yep, total wasteland.",
+                        "The wizard of emotion absorbed most of the entire world's and a portion of Illinois' energy to create his council of homunculi.",
+                        "The rest of the world sunk into the sea, but Illinois is still there, like some proud vestigial toe bone or something-something.",
+                        "I think somebody might live there still, and it is the only way to get to Iowa.",
+                        "So I am kind of fibbing when I say that there is no reason to go.",
+                        "Soooo...",
+                    );
+                }
+
+                if (result !== 1) {
+                    break;
+                }
             }
         })
         .at(lvl.BaldMikeMarker)
