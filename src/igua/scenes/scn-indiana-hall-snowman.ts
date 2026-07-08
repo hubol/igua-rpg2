@@ -13,7 +13,7 @@ import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 import { Rpg } from "../rpg/rpg";
 
 export function scnIndianaHallSnowman() {
-    Jukebox.play(Mzk.SodaMachine);
+    Jukebox.play(Mzk.EducatedIntrigue);
     const lvl = Lvl.IndianaHallSnowman();
 
     const treeObjs = [lvl.TreeMarker0, lvl.TreeMarker1]

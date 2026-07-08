@@ -10,6 +10,7 @@ export const GeneratedMusicData = {
    "Covid19": { ogg: require("./ogg/covid-19.ogg") },
    "DemoGoodEnd": { ogg: require("./ogg/demo good end.ogg") },
    "DespicableMessage": { ogg: require("./ogg/despicable-message.ogg") },
+   "EducatedIntrigue": { ogg: require("./ogg/educated-intrigue.ogg") },
    "FaithBeam": { ogg: require("./ogg/faith-beam.ogg") },
    "FatFire": { ogg: require("./ogg/fat-fire.ogg") },
    "FirstSong": { ogg: require("./ogg/first-song.ogg") },
