@@ -23,7 +23,7 @@ import { Rpg } from "../rpg/rpg";
 
 export function scnRaceTrack() {
     Jukebox.play(Mzk.ArticulateReunion);
-    // Rpg.character.status.conditions.poison.level = 10;
+    Rpg.character.status.conditions.poison.level = 10;
     const lvl = Lvl.RaceTrack();
     // objGhostRecord(lvl).show();
     enrichMysteriousIguana(lvl);

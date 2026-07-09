@@ -7054,41 +7054,57 @@ export const Lvl = {
     };
   },
   OpenMarket: (): LvlType.OpenMarket => {
-    applyLevel({ width: 1208, height: 480, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    applyLevel({ width: 1208, height: 480, backgroundTint: 0x9a39d5, terrainTint: 0xffd600 });
     return {
-      ShapesLineVertical16: d(Tx.Shapes.LineVertical16, { x: 376, y: 120, scaleX: 1, scaleY: 12, rotation: 0, originX: 0, originY: 0, tint: 0x000000 }, "BackgroundDecals"),
-      ShapesLineVertical16_1: d(Tx.Shapes.LineVertical16, { x: 256, y: 120, scaleX: 1, scaleY: 12, rotation: 0, originX: 0, originY: 0, tint: 0x000000 }, "BackgroundDecals"),
+      ShapesLineVertical16: d(Tx.Shapes.LineVertical16, { x: 376, y: 120, scaleX: 1, scaleY: 12, rotation: 0, originX: 0, originY: 0, tint: 0x7bc44e }, "BackgroundDecals"),
+      ShapesLineVertical16_1: d(Tx.Shapes.LineVertical16, { x: 256, y: 120, scaleX: 1, scaleY: 12, rotation: 0, originX: 0, originY: 0, tint: 0xffd600 }, "BackgroundDecals"),
       SkyCloudPuff2: d(Tx.Sky.CloudPuff2, { x: 312, y: 80, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       EsotericMishaComputerLagavulin: d(Tx.Esoteric.MishaComputer.Lagavulin, { x: 364, y: 53, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
-      Block: e(r["Block"], { x: 0, y: 432, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope: e(r["Slope"], { x: 120, y: 416, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_1: e(r["Block"], { x: 184, y: 416, width: 320, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_1: e(r["Slope"], { x: 408, y: 400, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_2: e(r["Block"], { x: 336, y: 312, width: 344, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_3: e(r["Block"], { x: 384, y: 328, width: 296, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_2: e(r["Slope"], { x: 352, y: 328, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_4: e(r["Block"], { x: 472, y: 344, width: 208, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_3: e(r["Slope"], { x: 440, y: 344, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      ShapesSquare32: d(Tx.Shapes.Square32, { x: 108, y: 312, scaleX: 5, scaleY: 5, rotation: 0, originX: 0, originY: 0, tint: 0xff4d00 }, "BackgroundDecals"),
+      ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 370, y: 328, scaleX: 8.5, scaleY: 5.7, rotation: 0, originX: 0, originY: 0, tint: 0xff4d00 }, "BackgroundDecals"),
+      ShapesSquare32_2: d(Tx.Shapes.Square32, { x: 778, y: 320, scaleX: 9.8, scaleY: 6.5, rotation: 0, originX: 0, originY: 0, tint: 0xff4d00 }, "BackgroundDecals"),
+      ShapesSquare32_3: d(Tx.Shapes.Square32, { x: 936, y: 120, scaleX: 6, scaleY: 5, rotation: 0, originX: 0, originY: 0, tint: 0x39742b }, "BackgroundDecals"),
+      Block: e(r["Block"], { x: 0, y: 432, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 120, y: 416, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 184, y: 416, width: 320, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 408, y: 400, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 336, y: 312, width: 344, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x7bc44e }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 384, y: 328, width: 296, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x7bc44e }, "TerrainEntities"),
+      Slope_2: e(r["Slope"], { x: 352, y: 328, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x7bc44e }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 472, y: 344, width: 208, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x7bc44e }, "TerrainEntities"),
+      Slope_3: e(r["Slope"], { x: 440, y: 344, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x7bc44e }, "TerrainEntities"),
       Pipe: e(r["Pipe"], { x: 680, y: 312, width: 64, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
       Pipe_1: e(r["Pipe"], { x: 680, y: 352, width: 64, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
-      Block_5: e(r["Block"], { x: 472, y: 400, width: 320, height: 88, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_6: e(r["Block"], { x: 80, y: 296, width: 216, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_7: e(r["Block"], { x: 120, y: 312, width: 136, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_4: e(r["Slope"], { x: 88, y: 312, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_5: e(r["Slope"], { x: 256, y: 312, width: 32, height: 16, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_6: e(r["Slope"], { x: 792, y: 400, width: 128, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_8: e(r["Block"], { x: 792, y: 432, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_9: e(r["Block"], { x: 744, y: 312, width: 192, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_7: e(r["Slope"], { x: 840, y: 280, width: 96, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_10: e(r["Block"], { x: 936, y: 280, width: 192, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Slope_8: e(r["Slope"], { x: 936, y: 328, width: 64, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 472, y: 400, width: 320, height: 88, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 80, y: 296, width: 216, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 120, y: 312, width: 136, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Slope_4: e(r["Slope"], { x: 88, y: 312, width: 32, height: 16, flippedX: false, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Slope_5: e(r["Slope"], { x: 256, y: 312, width: 32, height: 16, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Slope_6: e(r["Slope"], { x: 792, y: 400, width: 128, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_8: e(r["Block"], { x: 792, y: 432, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_9: e(r["Block"], { x: 744, y: 312, width: 192, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x7bc44e }, "TerrainEntities"),
+      Slope_7: e(r["Slope"], { x: 840, y: 280, width: 96, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x7bc44e }, "TerrainEntities"),
+      Block_10: e(r["Block"], { x: 936, y: 280, width: 192, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x7bc44e }, "TerrainEntities"),
+      Slope_8: e(r["Slope"], { x: 936, y: 328, width: 64, height: 32, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0x7bc44e }, "TerrainEntities"),
       Pipe_2: e(r["Pipe"], { x: 936, y: 216, width: 192, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
       Pipe_3: e(r["Pipe"], { x: 936, y: 152, width: 192, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
       PipeSlope: e(r["PipeSlope"], { x: 256, y: 216, width: 120, height: 52, flippedX: false, values: { name: "", depth: 0, visible: false } }, "TerrainEntities"),
       PipeSlope_1: e(r["PipeSlope"], { x: 256, y: 152, width: 120, height: 52, flippedX: false, values: { name: "", depth: 0, visible: false } }, "TerrainEntities"),
       Pipe_4: e(r["Pipe"], { x: 256, y: 120, width: 120, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
-      ShapesLineVertical16_2: d(Tx.Shapes.LineVertical16, { x: 376, y: 216, scaleX: 1, scaleY: 8.15, rotation: 66.67, originX: 0, originY: 0, tint: 0x000000 }, "TerrainDecals"),
-      ShapesLineVertical16_3: d(Tx.Shapes.LineVertical16, { x: 376, y: 152, scaleX: 1, scaleY: 8.15, rotation: 66.67, originX: 0, originY: 0, tint: 0x000000 }, "TerrainDecals"),
+      ShapesLineVertical16_2: d(Tx.Shapes.LineVertical16, { x: 376, y: 216, scaleX: 1, scaleY: 8.15, rotation: 66.67, originX: 0, originY: 0, tint: 0xffd600 }, "TerrainDecals"),
+      ShapesLineVertical16_3: d(Tx.Shapes.LineVertical16, { x: 376, y: 152, scaleX: 1, scaleY: 8.15, rotation: 66.67, originX: 0, originY: 0, tint: 0xffd600 }, "TerrainDecals"),
+      ShapesLineVertical16_4: d(Tx.Shapes.LineVertical16, { x: 376, y: 216, scaleX: 1, scaleY: 4, rotation: 66.67, originX: 0, originY: 0, tint: 0x7bc44e }, "TerrainDecals"),
+      ShapesLineVertical16_5: d(Tx.Shapes.LineVertical16, { x: 376, y: 152, scaleX: 1, scaleY: 4, rotation: 66.67, originX: 0, originY: 0, tint: 0x7bc44e }, "TerrainDecals"),
+      TerrainGrassPrickly0: d(Tx.Terrain.Grass.Prickly0, { x: 394, y: 310, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassPrickly0_1: d(Tx.Terrain.Grass.Prickly0, { x: 506, y: 310, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassPrickly0_2: d(Tx.Terrain.Grass.Prickly0, { x: 619, y: 310, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassPrickly0_3: d(Tx.Terrain.Grass.Prickly0, { x: 803, y: 310, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassPrickly0_4: d(Tx.Terrain.Grass.Prickly0, { x: 989, y: 278, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassPrickly0_5: d(Tx.Terrain.Grass.Prickly0, { x: 1071, y: 278, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px: d(Tx.Terrain.Grass.Sparse3px, { x: 105, y: 296, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "TerrainDecals"),
+      TerrainGrassSparse3px_1: d(Tx.Terrain.Grass.Sparse3px, { x: 159, y: 296, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "TerrainDecals"),
+      TerrainGrassSparse3px_2: d(Tx.Terrain.Grass.Sparse3px, { x: 215, y: 296, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "TerrainDecals"),
+      TerrainGrassSparse3px_3: d(Tx.Terrain.Grass.Sparse3px, { x: 271, y: 296, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "TerrainDecals"),
       GateHorizontal: e(r["GateHorizontal"], { x: -40, y: 304, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromOpenMarket", name: "", depth: 0 } }, "Entities"),
       FlipDial: e(r["Dial"], { x: 984, y: 408, values: { maxTicks: 5, name: "FlipDial", depth: 0 } }, "Entities"),
       Door: e(r["Door"], { x: 296, y: 72, values: { sceneName: "scnMishaHouse", checkpointName: "fromOpenMarket", name: "", depth: 0 } }, "Entities"),
@@ -17317,6 +17333,10 @@ export namespace LvlType {
     ShapesLineVertical16_1: Sprite;
     SkyCloudPuff2: Sprite;
     EsotericMishaComputerLagavulin: Sprite;
+    ShapesSquare32: Sprite;
+    ShapesSquare32_1: Sprite;
+    ShapesSquare32_2: Sprite;
+    ShapesSquare32_3: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Slope: ReturnType<(typeof r)["Slope"]>;
     Block_1: ReturnType<(typeof r)["Block"]>;
@@ -17346,6 +17366,18 @@ export namespace LvlType {
     Pipe_4: ReturnType<(typeof r)["Pipe"]>;
     ShapesLineVertical16_2: Sprite;
     ShapesLineVertical16_3: Sprite;
+    ShapesLineVertical16_4: Sprite;
+    ShapesLineVertical16_5: Sprite;
+    TerrainGrassPrickly0: Sprite;
+    TerrainGrassPrickly0_1: Sprite;
+    TerrainGrassPrickly0_2: Sprite;
+    TerrainGrassPrickly0_3: Sprite;
+    TerrainGrassPrickly0_4: Sprite;
+    TerrainGrassPrickly0_5: Sprite;
+    TerrainGrassSparse3px: Sprite;
+    TerrainGrassSparse3px_1: Sprite;
+    TerrainGrassSparse3px_2: Sprite;
+    TerrainGrassSparse3px_3: Sprite;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     FlipDial: ReturnType<(typeof r)["Dial"]>;
     Door: ReturnType<(typeof r)["Door"]>;
