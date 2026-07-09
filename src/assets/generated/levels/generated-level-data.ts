@@ -7092,6 +7092,8 @@ export const Lvl = {
       WorldMapBlob0_5: d(Tx.WorldMap.Blob0, { x: 1317, y: 212, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdfaaff }, "ParallaxDecals"),
       ShapesCircleIrregular26_4: d(Tx.Shapes.CircleIrregular26, { x: 1256, y: 145, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdfaaff }, "ParallaxDecals"),
       ShapesCircleIrregular26_5: d(Tx.Shapes.CircleIrregular26, { x: 1443, y: 190, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdfaaff }, "ParallaxDecals"),
+      TerrainGrassSparse3px1: d(Tx.Terrain.Grass.Sparse3px1, { x: 1093, y: 393, scaleX: 1.5, scaleY: 1, rotation: -90, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "BackgroundDecals"),
+      TerrainGrassSparse3px1_1: d(Tx.Terrain.Grass.Sparse3px1, { x: 269, y: 376, scaleX: 1.5, scaleY: 1, rotation: -90, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "BackgroundDecals"),
       ShapesLineVertical16: d(Tx.Shapes.LineVertical16, { x: 376, y: 120, scaleX: 3, scaleY: 12, rotation: 0, originX: 0, originY: 0, tint: 0x7bc44e }, "BackgroundDecals"),
       ShapesLineVertical16_1: d(Tx.Shapes.LineVertical16, { x: 256, y: 120, scaleX: 3, scaleY: 12, rotation: 0, originX: 0, originY: 0, tint: 0xffd600 }, "BackgroundDecals"),
       SkyCloudPuff2: d(Tx.Sky.CloudPuff2, { x: 312, y: 80, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
@@ -7121,9 +7123,9 @@ export const Lvl = {
       StoneBrickRows1_1: d(Tx.Stone.BrickRows1, { x: 975, y: 184, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x245917 }, "BackgroundDecals"),
       StoneBrickRows1_2: d(Tx.Stone.BrickRows1, { x: 1023, y: 274, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x245917 }, "BackgroundDecals"),
       StoneBrickRows1_3: d(Tx.Stone.BrickRows1, { x: 1102, y: 248, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x245917 }, "BackgroundDecals"),
-      TerrainGrassSparse3px1: d(Tx.Terrain.Grass.Sparse3px1, { x: 976, y: 74, scaleX: 1, scaleY: 2, rotation: 0, originX: 0.5, originY: 1, tint: 0x39742b }, "BackgroundDecals"),
-      TerrainGrassSparse3px1_1: d(Tx.Terrain.Grass.Sparse3px1, { x: 1043, y: 66, scaleX: 1, scaleY: -2, rotation: 0, originX: 0.5, originY: 1, tint: 0x39742b }, "BackgroundDecals"),
-      TerrainGrassSparse3px1_2: d(Tx.Terrain.Grass.Sparse3px1, { x: 1088, y: 74, scaleX: -1, scaleY: 2, rotation: 0, originX: 0.5, originY: 1, tint: 0x39742b }, "BackgroundDecals"),
+      TerrainGrassSparse3px1_2: d(Tx.Terrain.Grass.Sparse3px1, { x: 976, y: 74, scaleX: 1, scaleY: 2, rotation: 0, originX: 0.5, originY: 1, tint: 0x39742b }, "BackgroundDecals"),
+      TerrainGrassSparse3px1_3: d(Tx.Terrain.Grass.Sparse3px1, { x: 1043, y: 66, scaleX: 1, scaleY: -2, rotation: 0, originX: 0.5, originY: 1, tint: 0x39742b }, "BackgroundDecals"),
+      TerrainGrassSparse3px1_4: d(Tx.Terrain.Grass.Sparse3px1, { x: 1088, y: 74, scaleX: -1, scaleY: 2, rotation: 0, originX: 0.5, originY: 1, tint: 0x39742b }, "BackgroundDecals"),
       StoneBrickRows0_3: d(Tx.Stone.BrickRows0, { x: 817, y: 382, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc10000 }, "BackgroundDecals"),
       StoneBrickRows0_4: d(Tx.Stone.BrickRows0, { x: 881, y: 411, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc10000 }, "BackgroundDecals"),
       StoneBrickRows1_4: d(Tx.Stone.BrickRows1, { x: 952, y: 360, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc10000 }, "BackgroundDecals"),
@@ -7139,6 +7141,11 @@ export const Lvl = {
       StoneBrickRows0_7: d(Tx.Stone.BrickRows0, { x: 153, y: 401, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc10000 }, "BackgroundDecals"),
       StoneBrickRows0_8: d(Tx.Stone.BrickRows0, { x: 208, y: 360, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc10000 }, "BackgroundDecals"),
       StoneBrickRows0_9: d(Tx.Stone.BrickRows0, { x: 249, y: 336, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc10000 }, "BackgroundDecals"),
+      ShapesCrudeLine176x3: d(Tx.Shapes.CrudeLine176x3, { x: 314, y: 418, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "BackgroundDecals"),
+      TerrainGrassSparse3px1_5: d(Tx.Terrain.Grass.Sparse3px1, { x: 107, y: 376, scaleX: 1.5, scaleY: 1, rotation: -90, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "BackgroundDecals"),
+      TerrainGrassSparse3px1_6: d(Tx.Terrain.Grass.Sparse3px1, { x: 369, y: 392, scaleX: 1.5, scaleY: 1, rotation: -90, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "BackgroundDecals"),
+      TerrainGrassSparse3px1_7: d(Tx.Terrain.Grass.Sparse3px1, { x: 644, y: 400, scaleX: 1.5, scaleY: 1, rotation: -90, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "BackgroundDecals"),
+      TerrainGrassSparse3px1_8: d(Tx.Terrain.Grass.Sparse3px1, { x: 777, y: 386, scaleX: 1.5, scaleY: 1, rotation: -90, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 0, y: 432, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
       Slope: e(r["Slope"], { x: 120, y: 416, width: 64, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 184, y: 416, width: 320, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
@@ -7166,6 +7173,16 @@ export const Lvl = {
       PipeSlope: e(r["PipeSlope"], { x: 256, y: 216, width: 120, height: 52, flippedX: false, values: { name: "", depth: 0, visible: false } }, "TerrainEntities"),
       PipeSlope_1: e(r["PipeSlope"], { x: 256, y: 152, width: 120, height: 52, flippedX: false, values: { name: "", depth: 0, visible: false } }, "TerrainEntities"),
       Pipe_4: e(r["Pipe"], { x: 256, y: 120, width: 120, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
+      Pipe_5: e(r["Pipe"], { x: 936, y: 73, width: 192, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
+      ShapesFontsWeight3A: d(Tx.Shapes.Fonts.Weight3.A, { x: 601, y: 458, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc10000 }, "TerrainDecals"),
+      ShapesFontsWeight3R: d(Tx.Shapes.Fonts.Weight3.R, { x: 625, y: 458, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc10000 }, "TerrainDecals"),
+      ShapesFontsWeight3K: d(Tx.Shapes.Fonts.Weight3.K, { x: 649, y: 452, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc10000 }, "TerrainDecals"),
+      ShapesFontsWeight3E: d(Tx.Shapes.Fonts.Weight3.E, { x: 673, y: 457, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc10000 }, "TerrainDecals"),
+      ShapesFontsWeight3T: d(Tx.Shapes.Fonts.Weight3.T, { x: 697, y: 453, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc10000 }, "TerrainDecals"),
+      ShapesFontsWeight3M: d(Tx.Shapes.Fonts.Weight3.M, { x: 573, y: 459, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc10000 }, "TerrainDecals"),
+      TerrainEarthAsterisk: d(Tx.Terrain.Earth.Asterisk, { x: 542, y: 458, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "TerrainDecals"),
+      TerrainEarthAsterisk_1: d(Tx.Terrain.Earth.Asterisk, { x: 724, y: 457, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff4d00 }, "TerrainDecals"),
+      ShapesSquare32_8: d(Tx.Shapes.Square32, { x: 535, y: 410, scaleX: 6.125, scaleY: 0.925, rotation: 0, originX: 0, originY: 0, tint: 0xc10000 }, "TerrainDecals"),
       TerrainGrassLumpy1: d(Tx.Terrain.Grass.Lumpy1, { x: 1063, y: 323, scaleX: -1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7bc44e }, "TerrainDecals"),
       ShapesLineVertical16_2: d(Tx.Shapes.LineVertical16, { x: 376, y: 216, scaleX: 3, scaleY: 8.15, rotation: 66.67, originX: 0, originY: 0, tint: 0xffd600 }, "TerrainDecals"),
       ShapesLineVertical16_3: d(Tx.Shapes.LineVertical16, { x: 376, y: 152, scaleX: 3, scaleY: 8.15, rotation: 66.67, originX: 0, originY: 0, tint: 0xffd600 }, "TerrainDecals"),
@@ -7214,9 +7231,11 @@ export const Lvl = {
       TownSignageFood0: d(Tx.Town.Signage.Food0, { x: 306, y: 436, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       TownSignageJump0: d(Tx.Town.Signage.Jump0, { x: 158, y: 313, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       TownSignageCombat0: d(Tx.Town.Signage.Combat0, { x: 544, y: 329, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      TownSignageGlue0: d(Tx.Town.Signage.Glue0, { x: 1096, y: 244, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      TownSignageGlue0: d(Tx.Town.Signage.Glue0, { x: 1107, y: 249, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       TownSignageShoes1: d(Tx.Town.Signage.Shoes1, { x: 995, y: 119, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       TownSignageShoes1_1: d(Tx.Town.Signage.Shoes1, { x: 1017, y: 133, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      TownSignageGlue0_1: d(Tx.Town.Signage.Glue0, { x: 1088, y: 238, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      TownSignageLegendary: d(Tx.Town.Signage.Legendary, { x: 633, y: 424, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       GateHorizontal: e(r["GateHorizontal"], { x: -40, y: 304, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromOpenMarket", name: "", depth: 0 } }, "Entities"),
       FlipDial: e(r["Dial"], { x: 984, y: 408, values: { maxTicks: 5, name: "FlipDial", depth: 0 } }, "Entities"),
       Door: e(r["Door"], { x: 296, y: 72, values: { sceneName: "scnMishaHouse", checkpointName: "fromOpenMarket", name: "", depth: 0 } }, "Entities"),
@@ -17477,6 +17496,8 @@ export namespace LvlType {
     WorldMapBlob0_5: Sprite;
     ShapesCircleIrregular26_4: Sprite;
     ShapesCircleIrregular26_5: Sprite;
+    TerrainGrassSparse3px1: Sprite;
+    TerrainGrassSparse3px1_1: Sprite;
     ShapesLineVertical16: Sprite;
     ShapesLineVertical16_1: Sprite;
     SkyCloudPuff2: Sprite;
@@ -17506,9 +17527,9 @@ export namespace LvlType {
     StoneBrickRows1_1: Sprite;
     StoneBrickRows1_2: Sprite;
     StoneBrickRows1_3: Sprite;
-    TerrainGrassSparse3px1: Sprite;
-    TerrainGrassSparse3px1_1: Sprite;
     TerrainGrassSparse3px1_2: Sprite;
+    TerrainGrassSparse3px1_3: Sprite;
+    TerrainGrassSparse3px1_4: Sprite;
     StoneBrickRows0_3: Sprite;
     StoneBrickRows0_4: Sprite;
     StoneBrickRows1_4: Sprite;
@@ -17524,6 +17545,11 @@ export namespace LvlType {
     StoneBrickRows0_7: Sprite;
     StoneBrickRows0_8: Sprite;
     StoneBrickRows0_9: Sprite;
+    ShapesCrudeLine176x3: Sprite;
+    TerrainGrassSparse3px1_5: Sprite;
+    TerrainGrassSparse3px1_6: Sprite;
+    TerrainGrassSparse3px1_7: Sprite;
+    TerrainGrassSparse3px1_8: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Slope: ReturnType<(typeof r)["Slope"]>;
     Block_1: ReturnType<(typeof r)["Block"]>;
@@ -17551,6 +17577,16 @@ export namespace LvlType {
     PipeSlope: ReturnType<(typeof r)["PipeSlope"]>;
     PipeSlope_1: ReturnType<(typeof r)["PipeSlope"]>;
     Pipe_4: ReturnType<(typeof r)["Pipe"]>;
+    Pipe_5: ReturnType<(typeof r)["Pipe"]>;
+    ShapesFontsWeight3A: Sprite;
+    ShapesFontsWeight3R: Sprite;
+    ShapesFontsWeight3K: Sprite;
+    ShapesFontsWeight3E: Sprite;
+    ShapesFontsWeight3T: Sprite;
+    ShapesFontsWeight3M: Sprite;
+    TerrainEarthAsterisk: Sprite;
+    TerrainEarthAsterisk_1: Sprite;
+    ShapesSquare32_8: Sprite;
     TerrainGrassLumpy1: Sprite;
     ShapesLineVertical16_2: Sprite;
     ShapesLineVertical16_3: Sprite;
@@ -17602,6 +17638,8 @@ export namespace LvlType {
     TownSignageGlue0: Sprite;
     TownSignageShoes1: Sprite;
     TownSignageShoes1_1: Sprite;
+    TownSignageGlue0_1: Sprite;
+    TownSignageLegendary: Sprite;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     FlipDial: ReturnType<(typeof r)["Dial"]>;
     Door: ReturnType<(typeof r)["Door"]>;
