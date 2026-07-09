@@ -320,6 +320,8 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
         iguanaSprites.push(sprite);
     }
 
+    c.cullable = true;
+
     return c;
 }
 
