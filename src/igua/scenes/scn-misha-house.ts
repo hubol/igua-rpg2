@@ -1,8 +1,10 @@
 import { BLEND_MODES, Sprite } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Tx } from "../../assets/textures";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { container } from "../../lib/pixi/container";
+import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
@@ -33,6 +35,7 @@ export function scnMishaHouse() {
     const computerQuest = Rpg.quest("MishaHouse.DestroyedComputer");
     const waterHeaterQuest = Rpg.quest("MishaHouse.WarmedWaterHeater");
     const lvl = Lvl.MishaHouse();
+    Jukebox.play(Mzk.OldSailor);
 
     lvl.MishaNpc
         .mixin(mxnRpgStatus, { status: ranks.misha.status, hurtboxes: [lvl.MishaNpc] })
