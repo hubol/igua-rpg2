@@ -379,6 +379,10 @@ export const Lvl = {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
     return { Block: e(r["Block"], { x: 0, y: 200, width: 504, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"), Player: e(r["Player"], { x: 104, y: 200, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"), DummyMarker: e(r["Marker"], { x: 280, y: 200, values: { name: "DummyMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities") };
   },
+  DungeonBones: (): LvlType.DungeonBones => {
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    return { Block: e(r["Block"], { x: 0, y: 216, width: 512, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"), Player: e(r["Player"], { x: 88, y: 216, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"), Marker: e(r["Marker"], { x: 320, y: 216, values: { name: "", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities") };
+  },
   EfficientHome: (): LvlType.EfficientHome => {
     applyLevel({ width: 1536, height: 864, backgroundTint: 0x408000, terrainTint: 0xd71c1c });
     return {
@@ -10913,6 +10917,11 @@ export namespace LvlType {
     Block: ReturnType<(typeof r)["Block"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     DummyMarker: ReturnType<(typeof r)["Marker"]>;
+  };
+  export type DungeonBones = {
+    Block: ReturnType<(typeof r)["Block"]>;
+    Player: ReturnType<(typeof r)["Player"]>;
+    Marker: ReturnType<(typeof r)["Marker"]>;
   };
   export type EfficientHome = {
     ShapesSquare32: Sprite;
