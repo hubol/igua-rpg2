@@ -7,16 +7,30 @@ type IguanaTxs = PropertiesLike<typeof Tx["Iguana"], Texture>;
 
 function shape(key: keyof IguanaTxs, width: number, pixelDefaultAnchor: Vector) {
     const texture = Tx.Iguana[key];
+    const textures = texture.split({ width, trimFrame: { pixelDefaultAnchor } });
     const boiledTextures = Tx.Iguana.Boiled[key].split({ width, trimFrame: { pixelDefaultAnchor } });
     const robotTextures = Tx.Iguana.Robot[key].split({ width, trimFrame: { pixelDefaultAnchor } });
     const robotBoiledTextures = Tx.Iguana.Robot.Boiled[key].split({ width, trimFrame: { pixelDefaultAnchor } });
 
-    return texture.split({ width, trimFrame: { pixelDefaultAnchor } }).map((Tx, index) => ({
+    const skeletonTextures = key in Tx.Iguana.Skeleton
+        ? (Tx.Iguana.Skeleton as Record<keyof IguanaTxs, Texture>)[key].split({
+            width,
+            trimFrame: { pixelDefaultAnchor },
+        })
+        : textures;
+
+    const skeletonBoiledTextures = skeletonTextures === textures ? boiledTextures : skeletonTextures;
+
+    return textures.map((Tx, index) => ({
         Tx,
         BoiledTx: boiledTextures[index],
         Robot: {
             Tx: robotTextures[index],
             BoiledTx: robotBoiledTextures[index],
+        },
+        Skeleton: {
+            Tx: skeletonTextures[index],
+            BoiledTx: skeletonBoiledTextures[index],
         },
     }));
 }
