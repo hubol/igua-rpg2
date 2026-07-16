@@ -29,13 +29,13 @@ const themes = (() => {
         // TODO not used yet
         eyes: {
             defaultEyelidRestingPosition: 0,
-            eyelidsTint: 0xc80000,
-            gap: 11,
+            eyelidsTint: 0xFFB5E3,
+            gap: 9,
             pupilRestStyle: { kind: "cross_eyed", offsetFromCenter: 0 },
-            pupilsTx: Tx.Enemy.Miffed.Pupil0,
+            pupilsTx: Tx.Enemy.Heatmeat.PupilSad,
             pupilsTint: 0x000000,
             pupilsMirrored: true,
-            scleraTx: Tx.Enemy.Miffed.Sclera0,
+            scleraTx: Tx.Enemy.Heatmeat.ScleraSad,
             sclerasMirrored: true,
         },
         // TODO not used yet
@@ -63,11 +63,16 @@ const themes = (() => {
         ),
         meat: heatTemplate.createTheme(
             {
+                eyes: {
+                    pupilsTx: Tx.Enemy.Heatmeat.PupilAngry,
+                    scleraTx: Tx.Enemy.Heatmeat.ScleraAngry,
+                },
                 sprites: {
                     horn: txDuocorn,
                 },
             },
             {
+                eyes: obj => obj.add(0, -1),
                 sprites: {
                     hair: obj => obj.tinted(0x00DB19),
                 },
@@ -90,9 +95,13 @@ export function objAngelHeatmeat(themeId: themes.Id) {
             Sprite.from(txEars),
             theme.createSprite("horn"),
             theme.createSprite("hair"),
-            Sprite.from(txEyes),
-            Sprite.from(txNose),
-            Sprite.from(txMouth),
+            container(
+                theme.createEyesObj()
+                    .add(27, 27),
+                Sprite.from(txNose),
+                Sprite.from(txMouth),
+            )
+                .mixin(mxnFacingPivot, { up: -2, left: -2, down: 2, right: 2 }),
         )
             .mixin(mxnFacingPivot, { up: -3, left: -3, down: 3, right: 3 }),
     )
