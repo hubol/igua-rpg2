@@ -1,0 +1,85 @@
+import { Sprite } from "pixi.js";
+import { Tx } from "../../../assets/textures";
+import { container } from "../../../lib/pixi/container";
+import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
+import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
+import { AngelThemeTemplate } from "./angel-theme-template";
+import { objAngelMouth } from "./obj-angel-mouth";
+
+const [
+    txNoggin,
+    txUnicorn,
+    txDuocorn,
+    txEars,
+    txHair,
+    txEyes,
+    txNose,
+    txMouth,
+] = Tx.Enemy.Heatmeat.Head.split({ width: 56 });
+
+const [
+    txTorsoGrounded,
+    txTorsoAirborne,
+] = Tx.Enemy.Heatmeat.Torso.split({ width: 56 });
+
+const txsArms = Tx.Enemy.Heatmeat.Arms.split({ width: 56 });
+
+const themes = (() => {
+    const heatTemplate = AngelThemeTemplate.create({
+        // TODO not used yet
+        eyes: {
+            defaultEyelidRestingPosition: 0,
+            eyelidsTint: 0xc80000,
+            gap: 11,
+            pupilRestStyle: { kind: "cross_eyed", offsetFromCenter: 0 },
+            pupilsTx: Tx.Enemy.Miffed.Pupil0,
+            pupilsTint: 0x000000,
+            pupilsMirrored: true,
+            scleraTx: Tx.Enemy.Miffed.Sclera0,
+            sclerasMirrored: true,
+        },
+        // TODO not used yet
+        mouth: {
+            negativeSpaceTint: 0x000000,
+            teethCount: 2,
+            toothGapWidth: 1,
+            txs: objAngelMouth.txs.w14,
+        },
+        sprites: {
+            horn: txUnicorn,
+        },
+        tints: {},
+    });
+
+    return {
+        heat: heatTemplate.createTheme(),
+        meat: heatTemplate.createTheme({
+            sprites: {
+                horn: txDuocorn,
+            },
+        }),
+    };
+})();
+
+namespace themes {
+    export type Id = keyof typeof themes;
+}
+
+export function objAngelHeatmeat(themeId: themes.Id) {
+    const theme = themes[themeId];
+    return container(
+        Sprite.from(txsArms[0]),
+        Sprite.from(txTorsoAirborne),
+        container(
+            Sprite.from(txNoggin),
+            Sprite.from(txEars),
+            theme.createSprite("horn"),
+            Sprite.from(txHair),
+            Sprite.from(txEyes),
+            Sprite.from(txNose),
+            Sprite.from(txMouth),
+        )
+            .mixin(mxnFacingPivot, { up: -3, left: -3, down: 3, right: 3 }),
+    )
+        .mixin(mxnDetectPlayer);
+}
