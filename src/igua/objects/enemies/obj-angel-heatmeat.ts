@@ -1,10 +1,10 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
-import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { AngelThemeTemplate } from "./angel-theme-template";
@@ -54,19 +54,17 @@ const themes = (() => {
             horn: txUnicorn,
         },
         tints: {
-            map: [0xFFB5E3, 0xFF3D50, 0xCD4423],
+            burstMap: [0xFFB5E3, 0xCD4423, 0x305DFF] as MapRgbFilter.Map,
+            map: [0xFFB5E3, 0xFF3D50, 0xCD4423] as MapRgbFilter.Map,
+        },
+    }, {
+        sprites: {
+            hair: obj => obj.tinted(0x305DFF),
         },
     });
 
     return {
-        heat: heatTemplate.createTheme(
-            {},
-            {
-                sprites: {
-                    hair: obj => obj.tinted(0x305DFF),
-                },
-            },
-        ),
+        heat: heatTemplate.createTheme(),
         meat: heatTemplate.createTheme(
             {
                 eyes: {
@@ -77,6 +75,7 @@ const themes = (() => {
                     horn: txDuocorn,
                 },
                 tints: {
+                    burstMap: [0xFFB5E3, 0x657823, 0x00DB19],
                     map: [0xFFB5E3, 0xFF3D50, 0x657823],
                 },
             },
@@ -146,5 +145,6 @@ export function objAngelHeatmeat(variantId: variants.Id) {
         ...hurtboxObjs,
     )
         .mixin(mxnDetectPlayer)
-        .mixin(mxnEnemy, { hurtboxes: hurtboxObjs, rank });
+        .mixin(mxnEnemy, { hurtboxes: hurtboxObjs, rank })
+        .mixin(mxnEnemyDeathBurst, { map: theme.tints.burstMap });
 }
