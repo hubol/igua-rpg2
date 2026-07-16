@@ -1,6 +1,7 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { container } from "../../../lib/pixi/container";
+import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { AngelThemeTemplate } from "./angel-theme-template";
@@ -49,7 +50,9 @@ const themes = (() => {
             hair: txHair,
             horn: txUnicorn,
         },
-        tints: {},
+        tints: {
+            map: [0xFFB5E3, 0xFF3D50, 0xCD4423],
+        },
     });
 
     return {
@@ -70,6 +73,9 @@ const themes = (() => {
                 sprites: {
                     horn: txDuocorn,
                 },
+                tints: {
+                    map: [0xFFB5E3, 0xFF3D50, 0x657823],
+                },
             },
             {
                 eyes: obj => obj.add(0, -1),
@@ -88,11 +94,17 @@ namespace themes {
 export function objAngelHeatmeat(themeId: themes.Id) {
     const theme = themes[themeId];
     return container(
-        Sprite.from(txsArms[0]),
-        Sprite.from(txTorsoAirborne),
         container(
-            Sprite.from(txNoggin),
-            Sprite.from(txEars),
+            Sprite.from(txsArms[0]),
+            Sprite.from(txTorsoAirborne),
+            container(
+                Sprite.from(txNoggin),
+                Sprite.from(txEars),
+            )
+                .mixin(mxnFacingPivot, { up: -3, left: -3, down: 3, right: 3 }),
+        )
+            .filtered(new MapRgbFilter(...theme.tints.map)),
+        container(
             theme.createSprite("horn"),
             theme.createSprite("hair"),
             container(
