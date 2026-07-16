@@ -1,9 +1,12 @@
-import { Sprite } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
+import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
+import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
+import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
 
@@ -87,12 +90,35 @@ const themes = (() => {
     };
 })();
 
-namespace themes {
-    export type Id = keyof typeof themes;
+const ranks = {
+    heat: RpgEnemyRank.create({}),
+    meat: RpgEnemyRank.create({}),
+};
+
+const variants = {
+    heat: {
+        rank: ranks.heat,
+        theme: themes.heat,
+    },
+    meat: {
+        rank: ranks.meat,
+        theme: themes.meat,
+    },
+};
+
+namespace variants {
+    export type Id = keyof typeof variants;
 }
 
-export function objAngelHeatmeat(themeId: themes.Id) {
-    const theme = themes[themeId];
+export function objAngelHeatmeat(variantId: variants.Id) {
+    const { rank, theme } = variants[variantId];
+
+    const hurtboxObjs = [
+        new Graphics().beginFill(0xff0000).drawRect(6, 17, 43, 25),
+        new Graphics().beginFill(0xff0000).drawRect(15, 37, 25, 44),
+    ]
+        .map(obj => obj.invisible());
+
     return container(
         container(
             Sprite.from(txsArms[0]),
@@ -117,6 +143,8 @@ export function objAngelHeatmeat(themeId: themes.Id) {
                 .mixin(mxnFacingPivot, { up: -2, left: -2, down: 2, right: 2 }),
         )
             .mixin(mxnFacingPivot, { up: -3, left: -3, down: 3, right: 3 }),
+        ...hurtboxObjs,
     )
-        .mixin(mxnDetectPlayer);
+        .mixin(mxnDetectPlayer)
+        .mixin(mxnEnemy, { hurtboxes: hurtboxObjs, rank });
 }
