@@ -13,13 +13,13 @@ const [
     txDuocorn,
     txEars,
     txHair,
-    txEyes,
+    _,
     txNose,
-    txMouth,
+    __,
 ] = Tx.Enemy.Heatmeat.Head.split({ width: 56 });
 
 const [
-    txTorsoGrounded,
+    ___,
     txTorsoAirborne,
 ] = Tx.Enemy.Heatmeat.Torso.split({ width: 56 });
 
@@ -44,7 +44,7 @@ const themes = (() => {
             negativeSpaceTint: 0x000000,
             teethCount: 2,
             toothGapWidth: 1,
-            txs: objAngelMouth.txs.w14,
+            txs: objAngelMouth.txs.rounded14b,
         },
         sprites: {
             hair: txHair,
@@ -111,7 +111,8 @@ export function objAngelHeatmeat(themeId: themes.Id) {
                 theme.createEyesObj()
                     .add(27, 27),
                 Sprite.from(txNose),
-                Sprite.from(txMouth),
+                theme.createMouthObj()
+                    .add(27, 35),
             )
                 .mixin(mxnFacingPivot, { up: -2, left: -2, down: 2, right: 2 }),
         )

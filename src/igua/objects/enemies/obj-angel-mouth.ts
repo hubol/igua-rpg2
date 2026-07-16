@@ -110,6 +110,7 @@ objAngelMouth.txs = {
     horizontal10: Tx.Enemy.Common.Mouths.Horizontal10.split({ width: 10 }),
     rounded11: Tx.Enemy.Common.Mouths.Rounded11.split({ width: 11 }),
     rounded14: Tx.Enemy.Common.Mouths.Rounded14.split({ width: 14 }),
+    rounded14b: Tx.Enemy.Common.Mouths.Rounded14B.split({ width: 14 }),
     rounded16weight3: Tx.Enemy.Common.Mouths.Rounded16Weight3.split({ width: 16 }),
     w14: Tx.Enemy.Common.Mouths.W14.split({ width: 14 }),
     w14b: Tx.Enemy.Common.Mouths.W14B.split({ width: 14 }),

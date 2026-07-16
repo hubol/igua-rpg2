@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 890 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 891 }];
 
 interface TxData {
   id: string;
@@ -342,10 +342,11 @@ function txs<T>(tx: (data: TxData) => T) {
         Mouths: {
           Horizontal10: tx({ id: "Enemy.Common.Mouths.Horizontal10", atlas: 0, x: 163, y: 2564, width: 40, height: 8 }),
           Rounded11: tx({ id: "Enemy.Common.Mouths.Rounded11", atlas: 0, x: 204, y: 2499, width: 33, height: 6 }),
-          Rounded14: tx({ id: "Enemy.Common.Mouths.Rounded14", atlas: 0, x: 1611, y: 1083, width: 70, height: 6 }),
+          Rounded14B: tx({ id: "Enemy.Common.Mouths.Rounded14B", atlas: 0, x: 1611, y: 1083, width: 70, height: 6 }),
+          Rounded14: tx({ id: "Enemy.Common.Mouths.Rounded14", atlas: 0, x: 1514, y: 1283, width: 70, height: 6 }),
           Rounded16Weight3: tx({ id: "Enemy.Common.Mouths.Rounded16Weight3", atlas: 0, x: 3790, y: 1569, width: 80, height: 16 }),
           W14B: tx({ id: "Enemy.Common.Mouths.W14B", atlas: 0, x: 3804, y: 2024, width: 70, height: 8 }),
-          W14: tx({ id: "Enemy.Common.Mouths.W14", atlas: 0, x: 1514, y: 1283, width: 70, height: 6 }),
+          W14: tx({ id: "Enemy.Common.Mouths.W14", atlas: 0, x: 1682, y: 1083, width: 70, height: 6 }),
           W18: tx({ id: "Enemy.Common.Mouths.W18", atlas: 0, x: 1423, y: 1283, width: 90, height: 6 }),
           W36: tx({ id: "Enemy.Common.Mouths.W36", atlas: 0, x: 2131, y: 1903, width: 216, height: 16 }),
         },
@@ -405,7 +406,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Face: tx({ id: "Enemy.Suggestive.Face", atlas: 0, x: 956, y: 2260, width: 38, height: 24 }),
         Gear: tx({ id: "Enemy.Suggestive.Gear", atlas: 0, x: 835, y: 2239, width: 32, height: 16 }),
         Pupil: tx({ id: "Enemy.Suggestive.Pupil", atlas: 0, x: 1127, y: 1716, width: 2, height: 8 }),
-        ScleraWide: tx({ id: "Enemy.Suggestive.ScleraWide", atlas: 0, x: 1585, y: 1283, width: 14, height: 6 }),
+        ScleraWide: tx({ id: "Enemy.Suggestive.ScleraWide", atlas: 0, x: 1753, y: 1083, width: 14, height: 6 }),
         Sclera: tx({ id: "Enemy.Suggestive.Sclera", atlas: 0, x: 280, y: 2530, width: 8, height: 16 }),
         Torso: tx({ id: "Enemy.Suggestive.Torso", atlas: 0, x: 333, y: 2496, width: 86, height: 23 }),
       },
@@ -979,7 +980,7 @@ function txs<T>(tx: (data: TxData) => T) {
         HeliumCreator: tx({ id: "Town.Underneath.HeliumCreator", atlas: 0, x: 533, y: 2689, width: 36, height: 38 }),
         HeliumPipe: tx({ id: "Town.Underneath.HeliumPipe", atlas: 0, x: 201, y: 2682, width: 46, height: 30 }),
         HeliumTank: tx({ id: "Town.Underneath.HeliumTank", atlas: 0, x: 172, y: 2730, width: 44, height: 34 }),
-        OpenIndicator: tx({ id: "Town.Underneath.OpenIndicator", atlas: 0, x: 1682, y: 1083, width: 16, height: 6 }),
+        OpenIndicator: tx({ id: "Town.Underneath.OpenIndicator", atlas: 0, x: 1585, y: 1283, width: 16, height: 6 }),
         RiserFaceHappy: tx({ id: "Town.Underneath.RiserFaceHappy", atlas: 0, x: 1047, y: 2363, width: 28, height: 20 }),
         RiserFaceSurprise: tx({ id: "Town.Underneath.RiserFaceSurprise", atlas: 0, x: 603, y: 2737, width: 28, height: 20 }),
         RiserFace: tx({ id: "Town.Underneath.RiserFace", atlas: 0, x: 603, y: 2758, width: 28, height: 20 }),
