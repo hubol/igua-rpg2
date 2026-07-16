@@ -46,18 +46,33 @@ const themes = (() => {
             txs: objAngelMouth.txs.w14,
         },
         sprites: {
+            hair: txHair,
             horn: txUnicorn,
         },
         tints: {},
     });
 
     return {
-        heat: heatTemplate.createTheme(),
-        meat: heatTemplate.createTheme({
-            sprites: {
-                horn: txDuocorn,
+        heat: heatTemplate.createTheme(
+            {},
+            {
+                sprites: {
+                    hair: obj => obj.tinted(0x305DFF),
+                },
             },
-        }),
+        ),
+        meat: heatTemplate.createTheme(
+            {
+                sprites: {
+                    horn: txDuocorn,
+                },
+            },
+            {
+                sprites: {
+                    hair: obj => obj.tinted(0x00DB19),
+                },
+            },
+        ),
     };
 })();
 
@@ -74,7 +89,7 @@ export function objAngelHeatmeat(themeId: themes.Id) {
             Sprite.from(txNoggin),
             Sprite.from(txEars),
             theme.createSprite("horn"),
-            Sprite.from(txHair),
+            theme.createSprite("hair"),
             Sprite.from(txEyes),
             Sprite.from(txNose),
             Sprite.from(txMouth),
