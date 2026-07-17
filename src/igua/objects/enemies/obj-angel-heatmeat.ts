@@ -118,6 +118,8 @@ export function objAngelHeatmeat(variantId: variants.Id) {
     ]
         .map(obj => obj.invisible());
 
+    const soulAnchorObj = new Graphics().beginFill(0xff0000).drawRect(26, 52, 1, 1).invisible();
+
     return container(
         container(
             Sprite.from(txsArms[0]),
@@ -143,8 +145,9 @@ export function objAngelHeatmeat(variantId: variants.Id) {
         )
             .mixin(mxnFacingPivot, { up: -3, left: -3, down: 3, right: 3 }),
         ...hurtboxObjs,
+        soulAnchorObj,
     )
         .mixin(mxnDetectPlayer)
-        .mixin(mxnEnemy, { hurtboxes: hurtboxObjs, rank })
+        .mixin(mxnEnemy, { hurtboxes: hurtboxObjs, rank, soulAnchorObj })
         .mixin(mxnEnemyDeathBurst, { map: theme.tints.burstMap });
 }
