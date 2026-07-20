@@ -226,9 +226,15 @@ function objQuestionOptionBoxes(speaker: DisplayObject | null, options: AskOptio
     const offset = vnew(64, 20);
     const v = vnew();
 
+    const selectedOutlineTint = DramaLib.Speaker.isDarkMode ? 0xf0f0f0 : 0x000000;
+
     return container(
         pageObj,
-        Sprite.from(txQuestionOptionSelected).at(offset).anchored(0.5, 0.5).mixin(mxnBoilMirrorRotate).tinted(0x000000)
+        Sprite.from(txQuestionOptionSelected)
+            .at(offset)
+            .anchored(0.5, 0.5)
+            .mixin(mxnBoilMirrorRotate)
+            .tinted(selectedOutlineTint)
             .step(
                 self => {
                     if (!pageObj.selected) {

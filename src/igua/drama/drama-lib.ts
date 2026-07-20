@@ -1,4 +1,5 @@
 import { SubjectiveColorAnalyzer } from "../../lib/color/subjective-color-analyzer";
+import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { renderer } from "../current-pixi-renderer";
 import { Cutscene, scene } from "../globals";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
@@ -27,6 +28,8 @@ export namespace DramaLib {
             ?? scene.camera.vcpy().add(renderer.width / 2, renderer.height / 2);
     }
 
+    const CtxSpeakerDarkMode = new SceneLocal(() => ({ isEnabled: false }), "CtxSpeakerDarkMode");
+
     export const Speaker = {
         get current() {
             return Cutscene.current?.attributes?.speaker?.destroyed
@@ -36,6 +39,12 @@ export namespace DramaLib {
         getName,
         getColors,
         getWorldCenter,
+        get isDarkMode() {
+            return CtxSpeakerDarkMode.value.isEnabled;
+        },
+        set isDarkMode(value) {
+            CtxSpeakerDarkMode.value.isEnabled = value;
+        },
     };
 
     export namespace Speaker {
