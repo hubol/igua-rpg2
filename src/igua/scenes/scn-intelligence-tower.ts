@@ -1,4 +1,3 @@
-import { DisplayObject } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Instances } from "../../lib/game-engine/instances";
@@ -29,7 +28,7 @@ export function scnIntelligenceTower() {
     objBossMusicPlayer({
         bossObjs: [lvl.EnemyChill],
         mzkBattle: Mzk.FuckerLand,
-        mzkPeace: Mzk.FaithBeam,
+        mzkPeace: Mzk.RochesterDetour,
     })
         .show();
 }
