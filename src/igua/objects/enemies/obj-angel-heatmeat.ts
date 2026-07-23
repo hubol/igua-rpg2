@@ -2,10 +2,11 @@ import { Graphics, Sprite } from "pixi.js";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Sound } from "../../../lib/game-engine/audio/sound";
-import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
+import { interp } from "../../../lib/game-engine/routines/interp";
+import { approachLinear, nlerp } from "../../../lib/math/number";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
-import { Null } from "../../../lib/types/null";
+import { scene } from "../../globals";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
@@ -122,10 +123,28 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
     const soulAnchorObj = new Graphics().beginFill(0xff0000).drawRect(26, 52, 1, 1).invisible();
 
     const mouthObj = theme.createMouthObj()
-        .mixin(mxnVoiceActed);
+        .mixin(mxnVoiceActed)
+        .coro(function* (self) {
+            while (true) {
+                yield () => self.mxnVoiceActed.isPlaying;
+                const manipulateObj = container()
+                    .step(() => {
+                        const target = nlerp(0.1, 1, (Math.sin(scene.ticker.ticks / 3) + 1) / 2);
+                        self.controls.agapeUnit = approachLinear(self.controls.agapeUnit, target, 0.1);
+                    })
+                    .show(self);
+                yield () => !self.mxnVoiceActed.isPlaying;
+                manipulateObj.destroy();
+                yield interp(self.controls, "agapeUnit").to(0).over(150);
+                mouthObj.controls.frowning = false;
+            }
+        });
 
     const api = {
         playMessage(messageId: objAngelHeatmeat.MessageId) {
+            if (messageId === "Lament" && !mouthObj.destroyed) {
+                mouthObj.controls.frowning = true;
+            }
             const sfx = messageSfxs[variantId][messageId];
             return mouthObj.mxnVoiceActed.play(sfx);
         },
