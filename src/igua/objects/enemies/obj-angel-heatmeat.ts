@@ -1,11 +1,16 @@
 import { Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
+import { Sound } from "../../../lib/game-engine/audio/sound";
+import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
+import { Null } from "../../../lib/types/null";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
+import { mxnVoiceActed } from "../../mixins/mxn-voice-acted";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
@@ -105,11 +110,7 @@ const variants = {
     },
 };
 
-namespace variants {
-    export type Id = keyof typeof variants;
-}
-
-export function objAngelHeatmeat(variantId: variants.Id) {
+export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
     const { rank, theme } = variants[variantId];
 
     const hurtboxObjs = [
@@ -119,6 +120,16 @@ export function objAngelHeatmeat(variantId: variants.Id) {
         .map(obj => obj.invisible());
 
     const soulAnchorObj = new Graphics().beginFill(0xff0000).drawRect(26, 52, 1, 1).invisible();
+
+    const mouthObj = theme.createMouthObj()
+        .mixin(mxnVoiceActed);
+
+    const api = {
+        playMessage(messageId: objAngelHeatmeat.MessageId) {
+            const sfx = messageSfxs[variantId][messageId];
+            return mouthObj.mxnVoiceActed.play(sfx);
+        },
+    };
 
     return container(
         container(
@@ -138,7 +149,7 @@ export function objAngelHeatmeat(variantId: variants.Id) {
                 theme.createEyesObj()
                     .add(27, 27),
                 Sprite.from(txNose),
-                theme.createMouthObj()
+                mouthObj
                     .add(27, 35),
             )
                 .mixin(mxnFacingPivot, { up: -2, left: -2, down: 2, right: 2 }),
@@ -149,5 +160,16 @@ export function objAngelHeatmeat(variantId: variants.Id) {
     )
         .mixin(mxnDetectPlayer)
         .mixin(mxnEnemy, { hurtboxes: hurtboxObjs, rank, soulAnchorObj })
-        .mixin(mxnEnemyDeathBurst, { map: theme.tints.burstMap });
+        .mixin(mxnEnemyDeathBurst, { map: theme.tints.burstMap })
+        .merge({ objAngelHeatmeat: api });
 }
+
+export namespace objAngelHeatmeat {
+    export type MessageId = "YouAreEvil" | "AndYouMustBeDestroyed" | "Lament";
+    export type VariantId = keyof typeof variants;
+}
+
+const messageSfxs: Record<objAngelHeatmeat.VariantId, Record<objAngelHeatmeat.MessageId, Sound>> = {
+    heat: Sfx.Enemy.Heatmeat.Heat,
+    meat: Sfx.Enemy.Heatmeat.Meat,
+};
