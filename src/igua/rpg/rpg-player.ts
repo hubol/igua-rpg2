@@ -1,4 +1,4 @@
-import { PolarInt } from "../../lib/math/number-alias-types";
+import { Integer, PolarInt } from "../../lib/math/number-alias-types";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { IguanaLooks } from "../iguana/looks";
 import { RpgAttack } from "./rpg-attack";
@@ -136,6 +136,10 @@ export class RpgPlayer {
         return this._state.position;
     }
 
+    get previousAdventuresCount() {
+        return this._state.previousAdventuresCount;
+    }
+
     die() {
         const valuablesCount = this._wallet.count("valuables");
         this._wallet.spend("valuables", valuablesCount);
@@ -160,6 +164,7 @@ export class RpgPlayer {
                 checkpointName: "",
                 sceneName: "",
             },
+            previousAdventuresCount: 0,
         };
     }
 }
@@ -168,6 +173,7 @@ export namespace RpgPlayer {
     export interface State {
         looks: IguanaLooks.Serializable;
         position: Position;
+        previousAdventuresCount: Integer;
     }
 
     interface Position {

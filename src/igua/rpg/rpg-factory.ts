@@ -6,6 +6,7 @@ import { DataQuestReward } from "../data/data-quest-reward";
 import { DataShop } from "../data/data-shop";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgClassrooms } from "./rpg-classrooms";
+import { RpgDifficulty } from "./rpg-difficulty";
 import { RpgExperience } from "./rpg-experience";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 import { RpgFacts } from "./rpg-facts";
@@ -85,6 +86,7 @@ export namespace RpgFactory {
             looseValuables,
             spells,
         );
+        const difficulty = new RpgDifficulty(player);
         const shops = new RpgShops(shopsState, wallet, inventory);
         const weightedPedestals = new RpgWeightedPedestals(weightedPedestalsState);
         const gifts = new RpgGifts(giftsState);
@@ -95,6 +97,7 @@ export namespace RpgFactory {
             classroom(classroomId: string) {
                 return classrooms.getById(classroomId);
             },
+            difficulty,
             experience: experience as Omit<RpgExperience, "spend">,
             get flags() {
                 return data.flags;

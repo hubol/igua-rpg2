@@ -24,7 +24,7 @@ interface MxnEnemyArgs {
 export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
     obj.cullable = true;
     const { difficultyScaling, status: unscaledStatus, loot } = clone(args.rank);
-    const status = RpgEnemyRank.DifficultyScaling.getRpgStatus(difficultyScaling, unscaledStatus, 0);
+    const status = RpgEnemyRank.DifficultyScaling.getRpgStatus(difficultyScaling, unscaledStatus, Rpg.difficulty.level);
 
     const died = (attacker: RpgStatus.Model | null) => {
         if (attacker?.quirks.successfulAttacksRewardExperience) {
