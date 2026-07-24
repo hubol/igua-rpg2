@@ -2,6 +2,7 @@ import { Container, DisplayObject, Sprite, Texture } from "pixi.js";
 import { Logger } from "../../lib/game-engine/logger";
 import { container } from "../../lib/pixi/container";
 import { scene } from "../globals";
+import { Rpg } from "../rpg/rpg";
 import { RpgRegion } from "../rpg/rpg-region";
 import { ogmoAddToLayer } from "./add-to-layer";
 
@@ -157,6 +158,7 @@ export namespace OgmoFactory {
         decalGroups.clear();
 
         if (level.regionId) {
+            Rpg.character.position.currentRegionId = level.regionId;
         }
     }
 }

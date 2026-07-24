@@ -142,6 +142,10 @@ export class RpgPlayer {
         return this._state.previousAdventuresCount;
     }
 
+    get startingRegionId() {
+        return this._state.startingRegionId;
+    }
+
     die() {
         const valuablesCount = this._wallet.count("valuables");
         this._wallet.spend("valuables", valuablesCount);
