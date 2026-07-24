@@ -1,4 +1,5 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { clone } from "../../lib/object/clone";
 import { DeepPartial } from "../../lib/types/deep-partial";
 import { RpgFaction } from "./rpg-faction";
 import { RpgLoot } from "./rpg-loot";
@@ -6,6 +7,7 @@ import { RpgStatus } from "./rpg-status";
 
 export namespace RpgEnemyRank {
     export interface Model {
+        difficultyScaling: DifficultyScaling.Id;
         status: RpgStatus.Model;
         loot: RpgLoot.Table;
         level: Integer;
@@ -13,10 +15,11 @@ export namespace RpgEnemyRank {
 
     type CreateArgs = DeepPartial<Omit<Model, "loot">> & { loot?: RpgLoot.Table };
 
-    export function create({ status, loot, level }: CreateArgs): Model {
+    export function create({ difficultyScaling, status, loot, level }: CreateArgs): Model {
         const healthMax = status?.healthMax ?? status?.health ?? 30;
 
         return {
+            difficultyScaling: difficultyScaling ?? "common",
             status: {
                 health: status?.health ?? status?.healthMax ?? 30,
                 healthMax,
@@ -90,5 +93,39 @@ export namespace RpgEnemyRank {
             loot: loot ?? {},
             level: level ?? Math.ceil(healthMax / 5),
         };
+    }
+
+    export namespace DifficultyScaling {
+        export type Id = "none" | "health_only" | "common";
+
+        export function getRpgStatus(id: Id, status: RpgStatus.Model, level: Integer): RpgStatus.Model {
+            const result = clone(status);
+
+            if (level === 0 || id === "none") {
+                return result;
+            }
+
+            const healthFactor = 1 + level * 0.3;
+            result.health = Math.floor(result.health * healthFactor);
+            result.healthMax = Math.floor(result.healthMax * healthFactor);
+
+            if (id === "common") {
+                const conditionsFactor = 1 + level * 0.125;
+                result.conditions.overheat.max = Math.floor(result.conditions.overheat.max * conditionsFactor);
+                result.conditions.poison.max = Math.floor(result.conditions.poison.max * conditionsFactor);
+
+                const defenseBonus = Math.floor(Math.sqrt(level * 25));
+                result.defenses.overheat = Math.min(
+                    Math.max(result.defenses.overheat, 99),
+                    result.defenses.overheat + defenseBonus,
+                );
+                result.defenses.physical = Math.min(
+                    Math.max(result.defenses.physical, 99),
+                    result.defenses.physical + defenseBonus,
+                );
+            }
+
+            return result;
+        }
     }
 }

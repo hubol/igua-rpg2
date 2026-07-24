@@ -23,7 +23,8 @@ interface MxnEnemyArgs {
 
 export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
     obj.cullable = true;
-    const { status, loot } = clone(args.rank);
+    const { difficultyScaling, status: unscaledStatus, loot } = clone(args.rank);
+    const status = RpgEnemyRank.DifficultyScaling.getRpgStatus(difficultyScaling, unscaledStatus, 0);
 
     const died = (attacker: RpgStatus.Model | null) => {
         if (attacker?.quirks.successfulAttacksRewardExperience) {
