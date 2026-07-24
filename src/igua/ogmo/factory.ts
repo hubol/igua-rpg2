@@ -2,6 +2,7 @@ import { Container, DisplayObject, Sprite, Texture } from "pixi.js";
 import { Logger } from "../../lib/game-engine/logger";
 import { container } from "../../lib/pixi/container";
 import { scene } from "../globals";
+import { RpgRegion } from "../rpg/rpg-region";
 import { ogmoAddToLayer } from "./add-to-layer";
 
 export namespace OgmoFactory {
@@ -42,6 +43,7 @@ export namespace OgmoFactory {
         height: number;
         backgroundTint: number;
         terrainTint: number;
+        regionId: RpgRegion.Id | null;
     }
 
     export function createEntity<TFn extends (...args: any[]) => any>(
@@ -153,5 +155,8 @@ export namespace OgmoFactory {
         scene.style.backgroundTint = level.backgroundTint;
         scene.style.terrainTint = level.terrainTint;
         decalGroups.clear();
+
+        if (level.regionId) {
+        }
     }
 }

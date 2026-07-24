@@ -10,7 +10,7 @@ const { createEntity: e, createDecal: d, applyLevel, createDecalGroup: dg } = Og
 
 export const Lvl = {
   Cobbler0: (): LvlType.Cobbler0 => {
-    applyLevel({ width: 704, height: 280, backgroundTint: 0x8781d2, terrainTint: 0x1a0739 });
+    applyLevel({ width: 704, height: 280, backgroundTint: 0x8781d2, terrainTint: 0x1a0739, regionId: null });
     return {
       SkyCloud0: d(Tx.Sky.Cloud0, { x: 208, y: 120, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xd3cfff }, "ParallaxDecals"),
       SkyCloud0_1: d(Tx.Sky.Cloud0, { x: 536, y: 144, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xd3cfff }, "ParallaxDecals"),
@@ -187,7 +187,7 @@ export const Lvl = {
     };
   },
   College0: (): LvlType.College0 => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x68ba8e, terrainTint: 0xd55555 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x68ba8e, terrainTint: 0xd55555, regionId: null });
     return {
       DistantAngel: d(Tx.Characters.ItemRescueAngelDistant, { x: 91, y: 113, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloudPuff1: d(Tx.Sky.CloudPuff1, { x: 203, y: 156, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x98c8ae }, "ParallaxDecals"),
@@ -241,7 +241,7 @@ export const Lvl = {
     };
   },
   ColosseumMiffed: (): LvlType.ColosseumMiffed => {
-    applyLevel({ width: 1184, height: 528, backgroundTint: 0x0b043b, terrainTint: 0x503966 });
+    applyLevel({ width: 1184, height: 528, backgroundTint: 0x0b043b, terrainTint: 0x503966, regionId: "Indiana" });
     return {
       Group1: dg(-48, 417, "Group 1", "ParallaxDecals"),
       TerrainDistantWaves0: d(Tx.Terrain.Distant.Waves0, { x: 206, y: 417, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "Group 1", tint: 0x322c59 }, "ParallaxDecals"),
@@ -361,7 +361,7 @@ export const Lvl = {
     };
   },
   DummyBumpy: (): LvlType.DummyBumpy => {
-    applyLevel({ width: 748, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    applyLevel({ width: 748, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000, regionId: null });
     return {
       Block: e(r["Block"], { x: 248, y: 232, width: 504, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 432, y: 216, width: 40, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
@@ -376,15 +376,15 @@ export const Lvl = {
     };
   },
   Dummy: (): LvlType.Dummy => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000, regionId: null });
     return { Block: e(r["Block"], { x: 0, y: 200, width: 504, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"), Player: e(r["Player"], { x: 104, y: 200, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"), DummyMarker: e(r["Marker"], { x: 280, y: 200, values: { name: "DummyMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities") };
   },
   DungeonBones: (): LvlType.DungeonBones => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000, regionId: null });
     return { Block: e(r["Block"], { x: 0, y: 216, width: 512, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"), Player: e(r["Player"], { x: 88, y: 216, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"), Marker: e(r["Marker"], { x: 320, y: 216, values: { name: "", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities") };
   },
   EfficientHome: (): LvlType.EfficientHome => {
-    applyLevel({ width: 1536, height: 864, backgroundTint: 0x408000, terrainTint: 0xd71c1c });
+    applyLevel({ width: 1536, height: 864, backgroundTint: 0x408000, terrainTint: 0xd71c1c, regionId: "Indiana" });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 512, y: 0, scaleX: 16, scaleY: 9, rotation: 0, originX: 0, originY: 0, tint: 0x528854 }, "BackgroundDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 0, y: 0, scaleX: 16, scaleY: 9, rotation: 0, originX: 0, originY: 0, tint: 0xffcbd4 }, "BackgroundDecals"),
@@ -812,7 +812,7 @@ export const Lvl = {
     };
   },
   EndingDemoGood: (): LvlType.EndingDemoGood => {
-    applyLevel({ width: 500, height: 608, backgroundTint: 0x8dba54, terrainTint: 0x24390e });
+    applyLevel({ width: 500, height: 608, backgroundTint: 0x8dba54, terrainTint: 0x24390e, regionId: null });
     return {
       Block: e(r["Block"], { x: -2, y: 0, width: 504, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0x24390e }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: -2, y: 32, width: 32, height: 544, values: { name: "", depth: 0, visible: true }, tint: 0x24390e }, "TerrainEntities"),
@@ -841,7 +841,7 @@ export const Lvl = {
     };
   },
   EndingDemo: (): LvlType.EndingDemo => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x382856, terrainTint: 0x000000 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x382856, terrainTint: 0x000000, regionId: null });
     return {
       StoneBrickRows1: d(Tx.Stone.BrickRows1, { x: 69, y: 124, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b1a4b }, "BackgroundDecals"),
       StoneBrickRows1_1: d(Tx.Stone.BrickRows1, { x: 468, y: 141, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2b1a4b }, "BackgroundDecals"),
@@ -961,7 +961,7 @@ export const Lvl = {
     };
   },
   ErrorRecoveryRoom: (): LvlType.ErrorRecoveryRoom => {
-    applyLevel({ width: 500, height: 896, backgroundTint: 0x000d80, terrainTint: 0xd5edff });
+    applyLevel({ width: 500, height: 896, backgroundTint: 0x000d80, terrainTint: 0xd5edff, regionId: null });
     return {
       TownSignageWarning: d(Tx.Town.Signage.Warning, { x: 112, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffca0d }, "ParallaxDecals"),
       TownSignageWarning_1: d(Tx.Town.Signage.Warning, { x: 231, y: 317, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff9e0d }, "ParallaxDecals"),
@@ -1004,7 +1004,7 @@ export const Lvl = {
     };
   },
   FlopCollegeExterior: (): LvlType.FlopCollegeExterior => {
-    applyLevel({ width: 808, height: 344, backgroundTint: 0x0056ba, terrainTint: 0xfbff20 });
+    applyLevel({ width: 808, height: 344, backgroundTint: 0x0056ba, terrainTint: 0xfbff20, regionId: null });
     return {
       SkyCloudBalls0: d(Tx.Sky.CloudBalls0, { x: 64, y: 144, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb2d2f7 }, "ParallaxDecals"),
       SkyCloudBalls0_1: d(Tx.Sky.CloudBalls0, { x: 240, y: 216, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb2d2f7 }, "ParallaxDecals"),
@@ -1069,7 +1069,7 @@ export const Lvl = {
     };
   },
   FlopCollegeInterior: (): LvlType.FlopCollegeInterior => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x0056ba, terrainTint: 0xff95f4 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x0056ba, terrainTint: 0xff95f4, regionId: null });
     return {
       DistantAngel: d(Tx.Characters.ItemRescueAngelDistant, { x: 91, y: 113, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloudPuff1: d(Tx.Sky.CloudPuff1, { x: 203, y: 156, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb2d2f7 }, "ParallaxDecals"),
@@ -1132,7 +1132,7 @@ export const Lvl = {
     };
   },
   GiantIguanaStatue: (): LvlType.GiantIguanaStatue => {
-    applyLevel({ width: 872, height: 440, backgroundTint: 0x4a648b, terrainTint: 0x556516 });
+    applyLevel({ width: 872, height: 440, backgroundTint: 0x4a648b, terrainTint: 0x556516, regionId: null });
     return {
       SkyCloud0: d(Tx.Sky.Cloud0, { x: 56, y: 264, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x98b5df }, "ParallaxDecals"),
       SkyCloud0_1: d(Tx.Sky.Cloud0, { x: 376, y: 112, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x98b5df }, "ParallaxDecals"),
@@ -1349,7 +1349,7 @@ export const Lvl = {
     };
   },
   GreatTowerBalcony: (): LvlType.GreatTowerBalcony => {
-    applyLevel({ width: 500, height: 856, backgroundTint: 0xe68ca7, terrainTint: 0xd0e840 });
+    applyLevel({ width: 500, height: 856, backgroundTint: 0xe68ca7, terrainTint: 0xd0e840, regionId: null });
     return {
       SkyCloud0: d(Tx.Sky.Cloud0, { x: 376, y: 88, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe9215d }, "ParallaxDecals"),
       SkyCloud0_1: d(Tx.Sky.Cloud0, { x: 256, y: 48, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe9215d }, "ParallaxDecals"),
@@ -1484,7 +1484,7 @@ export const Lvl = {
     };
   },
   GreatTower: (): LvlType.GreatTower => {
-    applyLevel({ width: 552, height: 2288, backgroundTint: 0xe68ca7, terrainTint: 0xd0e840 });
+    applyLevel({ width: 552, height: 2288, backgroundTint: 0xe68ca7, terrainTint: 0xd0e840, regionId: "Indiana" });
     return {
       SkyCloudEvil0: d(Tx.Sky.CloudEvil0, { x: 83, y: 2000, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe9215d }, "ParallaxDecals"),
       SkyCloudEvil0_1: d(Tx.Sky.CloudEvil0, { x: 83, y: 1640, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe9215d }, "ParallaxDecals"),
@@ -1967,7 +1967,7 @@ export const Lvl = {
     };
   },
   GrottoIndianaShop: (): LvlType.GrottoIndianaShop => {
-    applyLevel({ width: 1476, height: 456, backgroundTint: 0xbedcff, terrainTint: 0x272e9a });
+    applyLevel({ width: 1476, height: 456, backgroundTint: 0xbedcff, terrainTint: 0x272e9a, regionId: "Indiana" });
     return {
       SkyCloudLong0: d(Tx.Sky.CloudLong0, { x: 96, y: 248, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloudLong0_1: d(Tx.Sky.CloudLong0, { x: 280, y: 192, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
@@ -2223,7 +2223,7 @@ export const Lvl = {
     };
   },
   IndianaCasino: (): LvlType.IndianaCasino => {
-    applyLevel({ width: 1344, height: 336, backgroundTint: 0xd8a5f7, terrainTint: 0xffd600 });
+    applyLevel({ width: 1344, height: 336, backgroundTint: 0xd8a5f7, terrainTint: 0xffd600, regionId: null });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: -56, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0xa786b9 }, "ParallaxDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: -112, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0x77677d }, "ParallaxDecals"),
@@ -2357,7 +2357,7 @@ export const Lvl = {
     };
   },
   IndianaDarkEvilHole: (): LvlType.IndianaDarkEvilHole => {
-    applyLevel({ width: 1336, height: 768, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    applyLevel({ width: 1336, height: 768, backgroundTint: 0x408000, terrainTint: 0x000000, regionId: "Indiana" });
     return {
       Block: e(r["Block"], { x: 888, y: 432, width: 40, height: 256, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 928, y: 632, width: 216, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
@@ -2417,7 +2417,7 @@ export const Lvl = {
     };
   },
   IndianaDesert: (): LvlType.IndianaDesert => {
-    applyLevel({ width: 1800, height: 344, backgroundTint: 0x8dcbe6, terrainTint: 0xffc123 });
+    applyLevel({ width: 1800, height: 344, backgroundTint: 0x8dcbe6, terrainTint: 0xffc123, regionId: "Indiana" });
     return {
       SkyCloudLong0: d(Tx.Sky.CloudLong0, { x: 296, y: 104, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloudLong1: d(Tx.Sky.CloudLong1, { x: 504, y: 152, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
@@ -2523,7 +2523,7 @@ export const Lvl = {
     };
   },
   IndianaHallEmpty: (): LvlType.IndianaHallEmpty => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0xa286f3, terrainTint: 0x4146a8 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0xa286f3, terrainTint: 0x4146a8, regionId: null });
     return {
       Block: e(r["Block"], { x: 0, y: 0, width: 504, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 0, y: 240, width: 504, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
@@ -2545,7 +2545,7 @@ export const Lvl = {
     };
   },
   IndianaHallFlopMemory: (): LvlType.IndianaHallFlopMemory => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x290080, terrainTint: 0xffe600 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x290080, terrainTint: 0xffe600, regionId: "Indiana" });
     return {
       CharactersFlopQuizMasterHead: d(Tx.Characters.FlopQuizMaster.Head, { x: 240, y: 400, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       TerrainDistantHillMountainXl: d(Tx.Terrain.Distant.HillMountainXl, { x: 16, y: 232, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xb7b234 }, "BackgroundDecals"),
@@ -2612,7 +2612,7 @@ export const Lvl = {
     };
   },
   IndianaHallOfDoors: (): LvlType.IndianaHallOfDoors => {
-    applyLevel({ width: 912, height: 280, backgroundTint: 0xa286f3, terrainTint: 0x4146a8 });
+    applyLevel({ width: 912, height: 280, backgroundTint: 0xa286f3, terrainTint: 0x4146a8, regionId: null });
     return {
       TerrainEarthMass0: d(Tx.Terrain.Earth.Mass0, { x: 22, y: 215, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x7f64b6 }, "BackgroundDecals"),
       TerrainEarthMass0_1: d(Tx.Terrain.Earth.Mass0, { x: 6, y: 208, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x5d4279 }, "BackgroundDecals"),
@@ -2770,7 +2770,7 @@ export const Lvl = {
     };
   },
   IndianaHallPainting: (): LvlType.IndianaHallPainting => {
-    applyLevel({ width: 792, height: 280, backgroundTint: 0x959595, terrainTint: 0x545454 });
+    applyLevel({ width: 792, height: 280, backgroundTint: 0x959595, terrainTint: 0x545454, regionId: "Indiana" });
     return {
       ShapesFontsRune3L: d(Tx.Shapes.Fonts.Rune3.L, { x: 40, y: 40, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
       ShapesFontsRune3E: d(Tx.Shapes.Fonts.Rune3.E, { x: 88, y: 64, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a7a7a }, "ParallaxDecals"),
@@ -2883,7 +2883,7 @@ export const Lvl = {
     };
   },
   IndianaHallSnowman: (): LvlType.IndianaHallSnowman => {
-    applyLevel({ width: 808, height: 280, backgroundTint: 0xffd600, terrainTint: 0x720000 });
+    applyLevel({ width: 808, height: 280, backgroundTint: 0xffd600, terrainTint: 0x720000, regionId: "Indiana" });
     return {
       TerrainDistantHills500: d(Tx.Terrain.Distant.Hills500, { x: 230, y: 120, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc12e00 }, "ParallaxDecals"),
       TerrainDistantHillMountain: d(Tx.Terrain.Distant.HillMountain, { x: 584, y: 96, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc12e00 }, "ParallaxDecals"),
@@ -2953,7 +2953,7 @@ export const Lvl = {
     };
   },
   IndianaHallTamago: (): LvlType.IndianaHallTamago => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x06c2dc, terrainTint: 0x06790b });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x06c2dc, terrainTint: 0x06790b, regionId: "Indiana" });
     return {
       SkyCloudBalls1: d(Tx.Sky.CloudBalls1, { x: 48, y: 168, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloudBalls1_1: d(Tx.Sky.CloudBalls1, { x: 103, y: 71, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
@@ -3021,7 +3021,7 @@ export const Lvl = {
     };
   },
   IndianaLoungeExterior: (): LvlType.IndianaLoungeExterior => {
-    applyLevel({ width: 500, height: 400, backgroundTint: 0x7cb7d8, terrainTint: 0x698826 });
+    applyLevel({ width: 500, height: 400, backgroundTint: 0x7cb7d8, terrainTint: 0x698826, regionId: null });
     return {
       SkyCloudPuff1: d(Tx.Sky.CloudPuff1, { x: 176, y: 168, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloudBalls0: d(Tx.Sky.CloudBalls0, { x: 104, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
@@ -3082,7 +3082,7 @@ export const Lvl = {
     };
   },
   IndianaLoungeInterior: (): LvlType.IndianaLoungeInterior => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x7a1313, terrainTint: 0x342716 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x7a1313, terrainTint: 0x342716, regionId: null });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: -56, y: 300, scaleX: 1, scaleY: 0.5, rotation: 0, originX: 0, originY: 0, tint: 0x9f2424 }, "BackgroundDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: -56, y: 298, scaleX: 1, scaleY: 0.1, rotation: 0, originX: 0, originY: 0, tint: 0x342716 }, "BackgroundDecals"),
@@ -3168,7 +3168,7 @@ export const Lvl = {
     };
   },
   IndianaOhioBridge: (): LvlType.IndianaOhioBridge => {
-    applyLevel({ width: 1400, height: 448, backgroundTint: 0x51cbdc, terrainTint: 0xff7a00 });
+    applyLevel({ width: 1400, height: 448, backgroundTint: 0x51cbdc, terrainTint: 0xff7a00, regionId: "BetweenIndianaOhio" });
     return {
       TerrainEarthCrack116px108px: d(Tx.Terrain.Earth.Crack116px108px, { x: 264, y: 344, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
       TerrainEarthCrack116px108px_1: d(Tx.Terrain.Earth.Crack116px108px, { x: 312, y: 236, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5bb5c1 }, "ParallaxDecals"),
@@ -3337,7 +3337,7 @@ export const Lvl = {
     };
   },
   IndianaUniversityInterior: (): LvlType.IndianaUniversityInterior => {
-    applyLevel({ width: 688, height: 280, backgroundTint: 0x68ba8e, terrainTint: 0xcbb53f });
+    applyLevel({ width: 688, height: 280, backgroundTint: 0x68ba8e, terrainTint: 0xcbb53f, regionId: null });
     return {
       SkyCloudPuff0: d(Tx.Sky.CloudPuff0, { x: 152, y: 160, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x98c8ae }, "ParallaxDecals"),
       SkyCloudPuff0_1: d(Tx.Sky.CloudPuff0, { x: 540, y: 106, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x98c8ae }, "ParallaxDecals"),
@@ -3409,7 +3409,7 @@ export const Lvl = {
     };
   },
   IndianaUniversityNurse: (): LvlType.IndianaUniversityNurse => {
-    applyLevel({ width: 740, height: 280, backgroundTint: 0x68ba8e, terrainTint: 0xd55555 });
+    applyLevel({ width: 740, height: 280, backgroundTint: 0x68ba8e, terrainTint: 0xd55555, regionId: null });
     return {
       SkyCloudPuff1: d(Tx.Sky.CloudPuff1, { x: 101, y: 168, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x98c8ae }, "ParallaxDecals"),
       SkyCloudPuff1_1: d(Tx.Sky.CloudPuff1, { x: 495, y: 177, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x98c8ae }, "ParallaxDecals"),
@@ -3490,7 +3490,7 @@ export const Lvl = {
     };
   },
   IndianaUniversity: (): LvlType.IndianaUniversity => {
-    applyLevel({ width: 832, height: 376, backgroundTint: 0x00803b, terrainTint: 0x215700 });
+    applyLevel({ width: 832, height: 376, backgroundTint: 0x00803b, terrainTint: 0x215700, regionId: null });
     return {
       ShapesCircle64: d(Tx.Shapes.Circle64, { x: 408, y: 328, scaleX: 25, scaleY: 2.5, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xa0ba68 }, "ParallaxDecals"),
       ShapesCircle64_1: d(Tx.Shapes.Circle64, { x: 424, y: 376, scaleX: 25, scaleY: 2.5, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6a9f51 }, "ParallaxDecals"),
@@ -3639,7 +3639,7 @@ export const Lvl = {
     };
   },
   IntelligenceTowerEntrance: (): LvlType.IntelligenceTowerEntrance => {
-    applyLevel({ width: 728, height: 280, backgroundTint: 0x83e224, terrainTint: 0xff6753 });
+    applyLevel({ width: 728, height: 280, backgroundTint: 0x83e224, terrainTint: 0xff6753, regionId: "Ohio" });
     return {
       SkyCloud0: d(Tx.Sky.Cloud0, { x: 112, y: 56, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloud0_1: d(Tx.Sky.Cloud0, { x: 346, y: 148, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
@@ -3712,7 +3712,7 @@ export const Lvl = {
     };
   },
   IntelligenceTower: (): LvlType.IntelligenceTower => {
-    applyLevel({ width: 500, height: 1672, backgroundTint: 0x408000, terrainTint: 0x000000 });
+    applyLevel({ width: 500, height: 1672, backgroundTint: 0x408000, terrainTint: 0x000000, regionId: "Ohio" });
     return {
       ShapesFontsWeight3A: d(Tx.Shapes.Fonts.Weight3.A, { x: 176, y: 1539, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       ShapesFontsWeight3B: d(Tx.Shapes.Fonts.Weight3.B, { x: 248, y: 1539, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
@@ -3844,7 +3844,7 @@ export const Lvl = {
     };
   },
   MagicDemo: (): LvlType.MagicDemo => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0xa286f3, terrainTint: 0x4146a8 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0xa286f3, terrainTint: 0x4146a8, regionId: null });
     return {
       Block: e(r["Block"], { x: 0, y: 0, width: 504, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 0, y: 240, width: 504, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x4146a8 }, "TerrainEntities"),
@@ -3866,7 +3866,7 @@ export const Lvl = {
     };
   },
   MenuIguanaDesigner: (): LvlType.MenuIguanaDesigner => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x002c38, terrainTint: 0x001c28 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x002c38, terrainTint: 0x001c28, regionId: null });
     return {
       FoliageMedium0: d(Tx.Foliage.Medium0, { x: 254, y: 216, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x1b2714 }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 0, y: 256, width: 224, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0x001c28 }, "TerrainEntities"),
@@ -3914,7 +3914,7 @@ export const Lvl = {
     };
   },
   MenuTitleScreen: (): LvlType.MenuTitleScreen => {
-    applyLevel({ width: 1520, height: 280, backgroundTint: 0x002c38, terrainTint: 0x001c28 });
+    applyLevel({ width: 1520, height: 280, backgroundTint: 0x002c38, terrainTint: 0x001c28, regionId: null });
     return {
       Block: e(r["Block"], { x: 8, y: 160, width: 1500, height: 136, values: { name: "", depth: 0, visible: true }, tint: 0x002c38 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 48, y: 336, width: 64, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x001c28 }, "TerrainEntities"),
@@ -3961,7 +3961,7 @@ export const Lvl = {
     };
   },
   MishaHouse: (): LvlType.MishaHouse => {
-    applyLevel({ width: 1000, height: 280, backgroundTint: 0x000000, terrainTint: 0x39175b });
+    applyLevel({ width: 1000, height: 280, backgroundTint: 0x000000, terrainTint: 0x39175b, regionId: null });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 528, y: 16, scaleX: 13.5, scaleY: 7.5, rotation: 0, originX: 0, originY: 0, tint: 0x2e0d33 }, "BackgroundDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 32, y: 16, scaleX: 13.5, scaleY: 7.5, rotation: 0, originX: 0, originY: 0, tint: 0x2e0d33 }, "BackgroundDecals"),
@@ -4027,7 +4027,7 @@ export const Lvl = {
     };
   },
   MountFlop: (): LvlType.MountFlop => {
-    applyLevel({ width: 2552, height: 648, backgroundTint: 0x408000, terrainTint: 0xab21c1 });
+    applyLevel({ width: 2552, height: 648, backgroundTint: 0x408000, terrainTint: 0xab21c1, regionId: "Ohio" });
     return {
       WorldMapMountain0: d(Tx.WorldMap.Mountain0, { x: 1368, y: 752, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xab21c1 }, "BackgroundDecals"),
       Block: e(r["Block"], { x: -200, y: 608, width: 3000, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
@@ -4053,7 +4053,7 @@ export const Lvl = {
     };
   },
   NewBalltownArmorer: (): LvlType.NewBalltownArmorer => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x56721c, terrainTint: 0x000000 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x56721c, terrainTint: 0x000000, regionId: null });
     return {
       TownBallStructure: d(Tx.Town.Ball.Structure, { x: -147, y: 186, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xb48cbe }, "BackgroundDecals"),
       TownBallStructureHighlight: d(Tx.Town.Ball.StructureHighlight, { x: -145, y: 169, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffcac6 }, "BackgroundDecals"),
@@ -4277,7 +4277,7 @@ export const Lvl = {
     };
   },
   NewBalltownFanatic: (): LvlType.NewBalltownFanatic => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x478f79, terrainTint: 0x000000 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x478f79, terrainTint: 0x000000, regionId: null });
     return {
       TownBallBrick0: d(Tx.Town.Ball.Brick0, { x: 168, y: 88, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2e6d5a }, "BackgroundDecals"),
       TownBallBrick0_1: d(Tx.Town.Ball.Brick0, { x: 208, y: 120, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x2e6d5a }, "BackgroundDecals"),
@@ -4363,7 +4363,7 @@ export const Lvl = {
     };
   },
   NewBalltownFishmonger: (): LvlType.NewBalltownFishmonger => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0xffa800, terrainTint: 0xc13314 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0xffa800, terrainTint: 0xc13314, regionId: null });
     return {
       TownBallBrick1: d(Tx.Town.Ball.Brick1, { x: 387, y: 73, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc13314 }, "BackgroundDecals"),
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 328, y: 84, scaleX: 2.7, scaleY: 5.5, rotation: 0, originX: 0, originY: 0, tint: 0x91b0ed }, "BackgroundDecals"),
@@ -4445,7 +4445,7 @@ export const Lvl = {
     };
   },
   NewBalltownOutskirtsSecretShop: (): LvlType.NewBalltownOutskirtsSecretShop => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0xcdd299, terrainTint: 0xb0ba44 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0xcdd299, terrainTint: 0xb0ba44, regionId: null });
     return {
       StoneShinyRockWall0: d(Tx.Stone.ShinyRockWall0, { x: 368, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       StoneShinyRockWall0_1: d(Tx.Stone.ShinyRockWall0, { x: 370, y: 210, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
@@ -4572,7 +4572,7 @@ export const Lvl = {
     };
   },
   NewBalltownOutskirts: (): LvlType.NewBalltownOutskirts => {
-    applyLevel({ width: 1176, height: 544, backgroundTint: 0x520e1a, terrainTint: 0xff8787 });
+    applyLevel({ width: 1176, height: 544, backgroundTint: 0x520e1a, terrainTint: 0xff8787, regionId: "Indiana" });
     return {
       ShapesCircleIrregular72: d(Tx.Shapes.CircleIrregular72, { x: 432, y: 56, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a2534 }, "ParallaxDecals"),
       ShapesCircleIrregular72_1: d(Tx.Shapes.CircleIrregular72, { x: 288, y: 120, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a2534 }, "ParallaxDecals"),
@@ -4994,7 +4994,7 @@ export const Lvl = {
     };
   },
   NewBalltownUnderneathHomeowner: (): LvlType.NewBalltownUnderneathHomeowner => {
-    applyLevel({ width: 992, height: 472, backgroundTint: 0x938999, terrainTint: 0xb4afb7 });
+    applyLevel({ width: 992, height: 472, backgroundTint: 0x938999, terrainTint: 0xb4afb7, regionId: "Indiana" });
     return {
       TerrainGrassSparse3px: d(Tx.Terrain.Grass.Sparse3px, { x: -231, y: 850, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xb4afb7 }, "BackgroundDecals"),
       ShapesSquare32: d(Tx.Shapes.Square32, { x: -232, y: 808, scaleX: 4.4, scaleY: 2.4, rotation: 0, originX: 0, originY: 0, tint: 0xb4afb7 }, "BackgroundDecals"),
@@ -5300,7 +5300,7 @@ export const Lvl = {
     };
   },
   NewBalltownUnderneathTunnel: (): LvlType.NewBalltownUnderneathTunnel => {
-    applyLevel({ width: 856, height: 368, backgroundTint: 0x132852, terrainTint: 0x94a66f });
+    applyLevel({ width: 856, height: 368, backgroundTint: 0x132852, terrainTint: 0x94a66f, regionId: null });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 208, y: 130, scaleX: 5.6, scaleY: 6, rotation: 0, originX: 0, originY: 0, tint: 0x425651 }, "BackgroundDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 204, y: 97, scaleX: 4, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0x132852 }, "BackgroundDecals"),
@@ -5429,7 +5429,7 @@ export const Lvl = {
     };
   },
   NewBalltownUnderneath: (): LvlType.NewBalltownUnderneath => {
-    applyLevel({ width: 2656, height: 440, backgroundTint: 0xdcc132, terrainTint: 0x103418 });
+    applyLevel({ width: 2656, height: 440, backgroundTint: 0xdcc132, terrainTint: 0x103418, regionId: "Indiana" });
     return {
       OutskirtsSeam: dg(830, -421, "OutskirtsSeam", "ParallaxDecals"),
       SkyCloud0: d(Tx.Sky.Cloud0, { x: 861, y: 316, scaleX: -2, scaleY: -2, rotation: 90, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0xc44b17 }, "ParallaxDecals"),
@@ -6085,7 +6085,7 @@ export const Lvl = {
     };
   },
   NewBalltown: (): LvlType.NewBalltown => {
-    applyLevel({ width: 1644, height: 632, backgroundTint: 0xdcc132, terrainTint: 0x294988 });
+    applyLevel({ width: 1644, height: 632, backgroundTint: 0xdcc132, terrainTint: 0x294988, regionId: "Indiana" });
     return {
       OutskirtsSeam: dg(1313, -329, "OutskirtsSeam", "ParallaxDecals"),
       SkyCloud0: d(Tx.Sky.Cloud0, { x: 1344, y: 408, scaleX: -2, scaleY: -2, rotation: 90, originX: 0.5, originY: 0.5, groupName: "OutskirtsSeam", tint: 0xc44b17 }, "ParallaxDecals"),
@@ -6786,7 +6786,7 @@ export const Lvl = {
     };
   },
   ObstacleCourse: (): LvlType.ObstacleCourse => {
-    applyLevel({ width: 880, height: 760, backgroundTint: 0x005280, terrainTint: 0x77b923 });
+    applyLevel({ width: 880, height: 760, backgroundTint: 0x005280, terrainTint: 0x77b923, regionId: null });
     return {
       TerrainDistantHillMountainXl: d(Tx.Terrain.Distant.HillMountainXl, { x: 552, y: 104, scaleX: 4, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x0c6da3 }, "ParallaxDecals"),
       TerrainDistantHillMountainXl_1: d(Tx.Terrain.Distant.HillMountainXl, { x: 536, y: 32, scaleX: -3, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x1889c8 }, "ParallaxDecals"),
@@ -6981,7 +6981,7 @@ export const Lvl = {
     };
   },
   OhioDmv: (): LvlType.OhioDmv => {
-    applyLevel({ width: 500, height: 392, backgroundTint: 0xf00404, terrainTint: 0x000000 });
+    applyLevel({ width: 500, height: 392, backgroundTint: 0xf00404, terrainTint: 0x000000, regionId: null });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: -24, y: 92, scaleX: 18, scaleY: 11, rotation: 0, originX: 0, originY: 0, tint: 0xcb0808 }, "ParallaxDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: -24, y: 235, scaleX: 18, scaleY: 11, rotation: 0, originX: 0, originY: 0, tint: 0x950000 }, "ParallaxDecals"),
@@ -7049,6 +7049,8 @@ export const Lvl = {
       fromAbove: e(r["Checkpoint"], { x: 376, y: 360, flippedX: true, values: { name: "fromAbove", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromBelow: e(r["Checkpoint"], { x: 264, y: 168, flippedX: false, values: { name: "fromBelow", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromAppearanceChange: e(r["Checkpoint"], { x: 272, y: 360, flippedX: true, values: { name: "fromAppearanceChange", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromWizard: e(r["Checkpoint"], { x: 336, y: -24, flippedX: false, values: { name: "fromWizard", depth: 0, overrideFlipX: "retainFromPreviousScene" } }, "PlayerEntities"),
+      restart: e(r["Checkpoint"], { x: 168, y: 360, flippedX: false, values: { name: "restart", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       Puddle: e(r["Puddle"], { x: 272, y: 360, width: 64, values: { name: "", depth: 0 }, tint: 0xcb0707 }, "FrontEntities"),
       Puddle_1: e(r["Puddle"], { x: 240, y: 360, width: 24, values: { name: "", depth: 0 }, tint: 0xcb0707 }, "FrontEntities"),
       StoneRockSmallShaded1: d(Tx.Stone.RockSmallShaded1, { x: 409, y: 360, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
@@ -7058,7 +7060,7 @@ export const Lvl = {
     };
   },
   OpenMarket: (): LvlType.OpenMarket => {
-    applyLevel({ width: 1208, height: 480, backgroundTint: 0x9a39d5, terrainTint: 0xffd600 });
+    applyLevel({ width: 1208, height: 480, backgroundTint: 0x9a39d5, terrainTint: 0xffd600, regionId: null });
     return {
       TerrainDistantHillMountain: d(Tx.Terrain.Distant.HillMountain, { x: 448, y: 296, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a1db4 }, "ParallaxDecals"),
       TerrainDistantHillMountain_1: d(Tx.Terrain.Distant.HillMountain, { x: 192, y: 280, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x7a1db4 }, "ParallaxDecals"),
@@ -7256,7 +7258,7 @@ export const Lvl = {
     };
   },
   PlainsSuggestiveCavern: (): LvlType.PlainsSuggestiveCavern => {
-    applyLevel({ width: 3136, height: 664, backgroundTint: 0x190000, terrainTint: 0x540707 });
+    applyLevel({ width: 3136, height: 664, backgroundTint: 0x190000, terrainTint: 0x540707, regionId: "Indiana" });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 856, y: 48, scaleX: 64, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0x47201c }, "ParallaxDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 856, y: -16, scaleX: 64, scaleY: 2, rotation: 0, originX: 0, originY: 0, tint: 0xa46154 }, "ParallaxDecals"),
@@ -7481,7 +7483,7 @@ export const Lvl = {
     };
   },
   PlainsSuggestiveFlopCollector: (): LvlType.PlainsSuggestiveFlopCollector => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x0a8148, terrainTint: 0x23591f });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x0a8148, terrainTint: 0x23591f, regionId: null });
     return {
       TerrainEarthSmallPlatformer: d(Tx.Terrain.Earth.SmallPlatformer, { x: 79, y: 217, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x23591f }, "BackgroundDecals"),
       TerrainEarthSmallPlatformer_1: d(Tx.Terrain.Earth.SmallPlatformer, { x: 136, y: 217, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x23591f }, "BackgroundDecals"),
@@ -7534,7 +7536,7 @@ export const Lvl = {
     };
   },
   PlainsSuggestive: (): LvlType.PlainsSuggestive => {
-    applyLevel({ width: 2176, height: 464, backgroundTint: 0xd28270, terrainTint: 0x680c0c });
+    applyLevel({ width: 2176, height: 464, backgroundTint: 0xd28270, terrainTint: 0x680c0c, regionId: "Indiana" });
     return {
       SkyCloud0: d(Tx.Sky.Cloud0, { x: 656, y: 296, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       SkyCloud0_1: d(Tx.Sky.Cloud0, { x: 304, y: 360, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
@@ -7839,7 +7841,7 @@ export const Lvl = {
     };
   },
   RaceTrack: (): LvlType.RaceTrack => {
-    applyLevel({ width: 9848, height: 696, backgroundTint: 0xffb904, terrainTint: 0x2b00d7 });
+    applyLevel({ width: 9848, height: 696, backgroundTint: 0xffb904, terrainTint: 0x2b00d7, regionId: null });
     return {
       SkyCloudLong1: d(Tx.Sky.CloudLong1, { x: 1003, y: 409, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e04 }, "ParallaxDecals"),
       SkyCloudLong0: d(Tx.Sky.CloudLong0, { x: 872, y: 392, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e04 }, "ParallaxDecals"),
@@ -8691,7 +8693,7 @@ export const Lvl = {
     };
   },
   SimpleSecretValuables: (): LvlType.SimpleSecretValuables => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x8b93dc, terrainTint: 0xf04830 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x8b93dc, terrainTint: 0xf04830, regionId: null });
     return {
       CloudsGroup2: dg(413, 48, "CloudsGroup2", "ParallaxDecals"),
       SkyCloudBalls1: d(Tx.Sky.CloudBalls1, { x: 415, y: 60, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CloudsGroup2", tint: 0xb4bbff }, "ParallaxDecals"),
@@ -8823,7 +8825,7 @@ export const Lvl = {
     };
   },
   SinSwamp: (): LvlType.SinSwamp => {
-    applyLevel({ width: 2464, height: 680, backgroundTint: 0x172a03, terrainTint: 0x251105 });
+    applyLevel({ width: 2464, height: 680, backgroundTint: 0x172a03, terrainTint: 0x251105, regionId: "Indiana" });
     return {
       TerrainDistantWaves0: d(Tx.Terrain.Distant.Waves0, { x: 496, y: 340, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "ParallaxDecals"),
       TerrainDistantHills500: d(Tx.Terrain.Distant.Hills500, { x: 344, y: 380, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "ParallaxDecals"),
@@ -9156,7 +9158,7 @@ export const Lvl = {
     };
   },
   StrangeMarketGuardian: (): LvlType.StrangeMarketGuardian => {
-    applyLevel({ width: 816, height: 280, backgroundTint: 0xbaee25, terrainTint: 0x996a34 });
+    applyLevel({ width: 816, height: 280, backgroundTint: 0xbaee25, terrainTint: 0x996a34, regionId: "Indiana" });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: -144, y: -24, scaleX: 9, scaleY: 13, rotation: 0, originX: 0, originY: 0, tint: 0x5aa5dc }, "ParallaxDecals"),
       Indiana: dg(622, -243, "Indiana", "ParallaxDecals"),
@@ -9256,7 +9258,7 @@ export const Lvl = {
     };
   },
   StrangeMarketRestaurant: (): LvlType.StrangeMarketRestaurant => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x62c44a, terrainTint: 0x6b55c3 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0x62c44a, terrainTint: 0x6b55c3, regionId: "Indiana" });
     return {
       SkyCloudQuestionMark0: d(Tx.Sky.CloudQuestionMark0, { x: -11, y: 430, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "ParallaxDecals"),
       SkyCloudQuestionMark0_1: d(Tx.Sky.CloudQuestionMark0, { x: 205, y: 190, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x3b8529 }, "ParallaxDecals"),
@@ -9312,7 +9314,7 @@ export const Lvl = {
     };
   },
   StrangeMarketTowerInterior: (): LvlType.StrangeMarketTowerInterior => {
-    applyLevel({ width: 500, height: 880, backgroundTint: 0xad3600, terrainTint: 0xe5bb00 });
+    applyLevel({ width: 500, height: 880, backgroundTint: 0xad3600, terrainTint: 0xe5bb00, regionId: null });
     return {
       TownSignageShoes0: d(Tx.Town.Signage.Shoes0, { x: -253, y: 666, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xe5bb00 }, "BackgroundDecals"),
       TownBallBrick0: d(Tx.Town.Ball.Brick0, { x: 178, y: 106, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x8f2d00 }, "BackgroundDecals"),
@@ -9389,7 +9391,7 @@ export const Lvl = {
     };
   },
   StrangeMarket: (): LvlType.StrangeMarket => {
-    applyLevel({ width: 1112, height: 816, backgroundTint: 0xbaee25, terrainTint: 0x6b55c3 });
+    applyLevel({ width: 1112, height: 816, backgroundTint: 0xbaee25, terrainTint: 0x6b55c3, regionId: null });
     return {
       SkyCloudQuestionMark0: d(Tx.Sky.CloudQuestionMark0, { x: 124, y: 377, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "ParallaxDecals"),
       SkyCloudQuestionMark0_1: d(Tx.Sky.CloudQuestionMark0, { x: 325, y: 478, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x62c44a }, "ParallaxDecals"),
@@ -9716,7 +9718,7 @@ export const Lvl = {
     };
   },
   VaseInhabitant: (): LvlType.VaseInhabitant => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0xffd600, terrainTint: 0x478d26 });
+    applyLevel({ width: 500, height: 280, backgroundTint: 0xffd600, terrainTint: 0x478d26, regionId: null });
     return {
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 379, y: 64, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x8eb7ff }, "BackgroundDecals"),
       ShapesSquare32_1: d(Tx.Shapes.Square32, { x: 415, y: 64, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x8eb7ff }, "BackgroundDecals"),
@@ -9784,7 +9786,7 @@ export const Lvl = {
     };
   },
   WizardLair: (): LvlType.WizardLair => {
-    applyLevel({ width: 500, height: 888, backgroundTint: 0x130d2a, terrainTint: 0x575757 });
+    applyLevel({ width: 500, height: 888, backgroundTint: 0x130d2a, terrainTint: 0x575757, regionId: null });
     return {
       SkyStars0: d(Tx.Sky.Stars0, { x: 50, y: 50, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x826adc }, "ParallaxDecals"),
       SkyStars0_1: d(Tx.Sky.Stars0, { x: 8, y: 148, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x826adc }, "ParallaxDecals"),
@@ -9831,10 +9833,11 @@ export const Lvl = {
       Player: e(r["Player"], { x: 252, y: 208, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       BalltownGate: e(r["GateVertical"], { x: -16, y: 848, width: 536, flippedY: false, values: { sceneName: "scnNewBalltownOutskirts", checkpointName: "fromWizard", name: "BalltownGate", depth: 0 } }, "RegionEntities"),
       CasinoGate: e(r["GateVertical"], { x: -16, y: 848, width: 536, flippedY: false, values: { sceneName: "scnCasino", checkpointName: "fromWizard", name: "CasinoGate", depth: 0 } }, "RegionEntities"),
+      OhioDmvGate: e(r["GateVertical"], { x: 0, y: 840, width: 504, flippedY: false, values: { sceneName: "scnOhioDmv", checkpointName: "fromWizard", name: "OhioDmvGate", depth: 0 } }, "RegionEntities"),
     };
   },
   WorldMap: (): LvlType.WorldMap => {
-    applyLevel({ width: 4576, height: 2424, backgroundTint: 0x81bde9, terrainTint: 0x000000 });
+    applyLevel({ width: 4576, height: 2424, backgroundTint: 0x81bde9, terrainTint: 0x000000, regionId: null });
     return {
       Indiana: dg(2672, 808, "Indiana", "ParallaxDecals"),
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 2672, y: 832, scaleX: 19, scaleY: 24, rotation: 0, originX: 0, originY: 0, groupName: "Indiana", tint: 0xbab532 }, "ParallaxDecals"),
@@ -10496,6 +10499,11 @@ export const Lvl = {
       EnemySpikeBall: e(r["EnemySpikeBall"], { x: 2955, y: 1737, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySpikeBall_1: e(r["EnemySpikeBall"], { x: 2979, y: 1713, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       GateMap_1: e(r["GateMap"], { x: 3688, y: 1480, rotation: 180, uid: 178097826142800, values: { sceneName: "scnMountFlop", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "Entities"),
+      EnemySpikeBall_2: e(r["EnemySpikeBall"], { x: 3787, y: 1425, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_3: e(r["EnemySpikeBall"], { x: 3807, y: 1456, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_4: e(r["EnemySpikeBall"], { x: 3830, y: 1419, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_5: e(r["EnemySpikeBall"], { x: 3876, y: 1457, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_6: e(r["EnemySpikeBall"], { x: 3899, y: 1429, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       FoliageFlower18: d(Tx.Foliage.Flower18, { x: 2682, y: 1671, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff8400 }, "AboveEntitiesDecals"),
       FoliageFlower18_1: d(Tx.Foliage.Flower18, { x: 2715, y: 1677, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb200 }, "AboveEntitiesDecals"),
       FoliageFlower22: d(Tx.Foliage.Flower22, { x: 2750, y: 1666, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
@@ -17461,6 +17469,8 @@ export namespace LvlType {
     fromAbove: ReturnType<(typeof r)["Checkpoint"]>;
     fromBelow: ReturnType<(typeof r)["Checkpoint"]>;
     fromAppearanceChange: ReturnType<(typeof r)["Checkpoint"]>;
+    fromWizard: ReturnType<(typeof r)["Checkpoint"]>;
+    restart: ReturnType<(typeof r)["Checkpoint"]>;
     Puddle: ReturnType<(typeof r)["Puddle"]>;
     Puddle_1: ReturnType<(typeof r)["Puddle"]>;
     StoneRockSmallShaded1: Sprite;
@@ -20204,6 +20214,7 @@ export namespace LvlType {
     Player: ReturnType<(typeof r)["Player"]>;
     BalltownGate: ReturnType<(typeof r)["GateVertical"]>;
     CasinoGate: ReturnType<(typeof r)["GateVertical"]>;
+    OhioDmvGate: ReturnType<(typeof r)["GateVertical"]>;
   };
   export type WorldMap = {
     Indiana: Container<Sprite>;
@@ -20866,6 +20877,11 @@ export namespace LvlType {
     EnemySpikeBall: ReturnType<(typeof r)["EnemySpikeBall"]>;
     EnemySpikeBall_1: ReturnType<(typeof r)["EnemySpikeBall"]>;
     GateMap_1: ReturnType<(typeof r)["GateMap"]>;
+    EnemySpikeBall_2: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_3: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_4: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_5: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_6: ReturnType<(typeof r)["EnemySpikeBall"]>;
     FoliageFlower18: Sprite;
     FoliageFlower18_1: Sprite;
     FoliageFlower22: Sprite;

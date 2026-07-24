@@ -1,4 +1,5 @@
 import { Integer, PolarInt } from "../../lib/math/number-alias-types";
+import { DataRespawnConfiguration } from "../data/data-respawn-configuration";
 import { getDefaultLooks } from "../iguana/get-default-looks";
 import { IguanaLooks } from "../iguana/looks";
 import { RpgAttack } from "./rpg-attack";
@@ -12,6 +13,7 @@ import { RpgPlayerSpells } from "./rpg-player-spells";
 import { RpgPlayerStatus } from "./rpg-player-status";
 import { RpgPlayerWallet } from "./rpg-player-wallet";
 import { RpgPocket } from "./rpg-pocket";
+import { RpgRegion } from "./rpg-region";
 
 export class RpgPlayer {
     constructor(
@@ -156,15 +158,27 @@ export class RpgPlayer {
         this._looseValuables.nextLifetime();
     }
 
+    setStartingRegion(regionId: RpgRegion.StartingId) {
+        const respawnConfigurations = {
+            Indiana: "Indiana.University.Nurse",
+            Ohio: "Ohio.Dmv",
+        } satisfies Partial<Record<RpgRegion.Id, DataRespawnConfiguration.Id>>;
+
+        this._state.startingRegionId = regionId;
+        this.attributes.respawnConfiguration = respawnConfigurations[regionId];
+    }
+
     static createState(): RpgPlayer.State {
         return {
             looks: getDefaultLooks(),
             position: {
+                currentRegionId: "OuterSpace",
                 facing: 1,
                 checkpointName: "",
                 sceneName: "",
             },
             previousAdventuresCount: 0,
+            startingRegionId: "Indiana",
         };
     }
 }
@@ -174,9 +188,11 @@ export namespace RpgPlayer {
         looks: IguanaLooks.Serializable;
         position: Position;
         previousAdventuresCount: Integer;
+        startingRegionId: RpgRegion.StartingId;
     }
 
     interface Position {
+        currentRegionId: RpgRegion.Id;
         facing: PolarInt;
         sceneName: string;
         checkpointName: string;

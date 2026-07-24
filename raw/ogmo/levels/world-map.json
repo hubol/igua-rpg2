@@ -845,6 +845,56 @@
           "uid": 178097826142800,
           "tint": "#ffffff",
           "values": {"sceneName": "scnMountFlop", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "EnemySpikeBall",
+          "id": 5,
+          "_eid": "22280227",
+          "x": 3787,
+          "y": 1425,
+          "originX": 12,
+          "originY": 10,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemySpikeBall",
+          "id": 6,
+          "_eid": "22280227",
+          "x": 3807,
+          "y": 1456,
+          "originX": 12,
+          "originY": 10,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemySpikeBall",
+          "id": 7,
+          "_eid": "22280227",
+          "x": 3830,
+          "y": 1419,
+          "originX": 12,
+          "originY": 10,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemySpikeBall",
+          "id": 8,
+          "_eid": "22280227",
+          "x": 3876,
+          "y": 1457,
+          "originX": 12,
+          "originY": 10,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemySpikeBall",
+          "id": 9,
+          "_eid": "22280227",
+          "x": 3899,
+          "y": 1429,
+          "originX": 12,
+          "originY": 10,
+          "values": {"variant": "level0", "name": "", "depth": 0}
         }
       ]
     },

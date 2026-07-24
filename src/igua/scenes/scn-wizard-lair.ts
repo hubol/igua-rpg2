@@ -1,6 +1,8 @@
+import { DisplayObject } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
+import { MusicTrack } from "../../lib/game-engine/audio/asshat-jukebox";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { container } from "../../lib/pixi/container";
@@ -10,6 +12,8 @@ import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { playerObj } from "../objects/obj-player";
+import { Rpg } from "../rpg/rpg";
+import { RpgRegion } from "../rpg/rpg-region";
 import { RpgSaveFiles } from "../rpg/rpg-save-files";
 
 export function scnWizardLair() {
@@ -19,9 +23,10 @@ export function scnWizardLair() {
     const lvl = Lvl.WizardLair();
 
     const landingOptions = [
-        { gateObj: lvl.BalltownGate, name: "New Balltown", mzk: Mzk.TrashDay },
-        { gateObj: lvl.CasinoGate, name: "Swamp Casino", mzk: Mzk.ProfitMotive },
-    ];
+        { gateObj: lvl.BalltownGate, name: "Indiana\nNew Balltown", mzk: Mzk.TrashDay, regionId: "Indiana" },
+        { gateObj: lvl.CasinoGate, name: "Indiana\nSwamp Casino", mzk: Mzk.ProfitMotive, regionId: "Indiana" },
+        { gateObj: lvl.OhioDmvGate, name: "Ohio\nDMV", mzk: Mzk.NorthernCream, regionId: "Ohio" },
+    ] satisfies Array<{ gateObj: DisplayObject; name: string; mzk: MusicTrack; regionId: RpgRegion.StartingId }>;
 
     const wizardObj = container()
         .mixin(mxnSpeaker, { name: "Voice of Wizard", tintPrimary: 0x130D2A, tintSecondary: 0x352863 })
@@ -44,7 +49,9 @@ export function scnWizardLair() {
                     ...landingOptions.map(option => option.name),
                 );
 
-                Jukebox.warm(landingOptions[result].mzk);
+                const landingOption = landingOptions[result];
+                Jukebox.warm(landingOption.mzk);
+                Rpg.character.setStartingRegion(landingOption.regionId);
 
                 for (let i = 0; i < landingOptions.length; i++) {
                     if (result !== i) {

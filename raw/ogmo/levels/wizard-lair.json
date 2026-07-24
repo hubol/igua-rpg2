@@ -51,6 +51,18 @@
           "originY": 0,
           "flippedY": false,
           "values": {"sceneName": "scnCasino", "checkpointName": "fromWizard", "name": "CasinoGate", "depth": 0}
+        },
+        {
+          "name": "GateVertical",
+          "id": 3,
+          "_eid": "64222434",
+          "x": 0,
+          "y": 840,
+          "width": 504,
+          "originX": 0,
+          "originY": 0,
+          "flippedY": false,
+          "values": {"sceneName": "scnOhioDmv", "checkpointName": "fromWizard", "name": "OhioDmvGate", "depth": 0}
         }
       ]
     },

@@ -182,6 +182,28 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromAppearanceChange", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 5,
+          "_eid": "19953026",
+          "x": 336,
+          "y": -24,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromWizard", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 6,
+          "_eid": "19953026",
+          "x": 168,
+          "y": 360,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "restart", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
