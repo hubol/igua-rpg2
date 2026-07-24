@@ -122,6 +122,24 @@ const ranks = {
         },
         level: 100,
     }),
+    level2: RpgEnemyRank.create({
+        status: {
+            healthMax: 120,
+        },
+        loot: {
+            tier0: [
+                { kind: "valuables", min: 70, max: 120, deltaPride: -10 },
+            ],
+            tier1: [
+                { kind: "potion", id: "ThrowableBerry", count: 1, weight: 10 },
+                { kind: "potion", id: "ThrowableBerry", count: 2, weight: 10 },
+                { kind: "potion", id: "RestoreHealth", count: 1, weight: 10 },
+                { kind: "potion", id: "RestoreHealth", count: 2, weight: 10 },
+                { kind: "nothing", weight: 60 },
+            ],
+        },
+        level: 100,
+    }),
 };
 
 type Feature = "jumping" | "weak" | "berry";
@@ -135,6 +153,11 @@ const variants = {
     level1: {
         features: new Set<Feature>(["jumping", "weak", "berry"]),
         rank: ranks.level1,
+        theme: themes.berry,
+    },
+    level2: {
+        features: new Set<Feature>(["jumping", "weak", "berry"]),
+        rank: ranks.level2,
         theme: themes.berry,
     },
 };

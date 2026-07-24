@@ -170,7 +170,7 @@
           "y": 392,
           "originX": 32,
           "originY": 34,
-          "values": {"variant": "level1", "name": "", "depth": 0}
+          "values": {"variant": "level2", "name": "", "depth": 0}
         },
         {
           "name": "EnemyCactus",
@@ -180,7 +180,7 @@
           "y": 392,
           "originX": 32,
           "originY": 34,
-          "values": {"variant": "level1", "name": "", "depth": 0}
+          "values": {"variant": "level2", "name": "", "depth": 0}
         },
         {
           "name": "EnemySuggestive",
@@ -201,7 +201,7 @@
           "y": 392,
           "originX": 32,
           "originY": 34,
-          "values": {"variant": "level1", "name": "", "depth": 0}
+          "values": {"variant": "level2", "name": "", "depth": 0}
         },
         {
           "name": "IntelligenceSign",
