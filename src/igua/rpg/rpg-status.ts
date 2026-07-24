@@ -63,6 +63,7 @@ export namespace RpgStatus {
                 max: Integer;
             };
         };
+        damageFactor: PercentInt;
         guardingDefenses: Defenses;
         defenses: Defenses;
         factionDefenses: Record<RpgFaction, PercentInt>;
@@ -346,8 +347,11 @@ export namespace RpgStatus {
 
             const canBeFatal = !target.state.isGuarding || target.quirks.guardedDamageIsFatal || target.health <= 1;
 
+            const damageFactor = attacker?.damageFactor ?? 100;
+
             const tookEmotionalDamage = takeDamage(
                 attack.emotional,
+                damageFactor,
                 canBeFatal && target.quirks.emotionalDamageIsFatal,
                 // TODO emotional defense
                 0,
@@ -358,6 +362,7 @@ export namespace RpgStatus {
 
             const tookPhysicalDamage = takeDamage(
                 attack.physical,
+                damageFactor,
                 canBeFatal,
                 target.defenses.physical + targetBodyPart.defenses.physical,
                 target.guardingDefenses.physical + targetBodyPart.defenses.physical,
@@ -368,6 +373,7 @@ export namespace RpgStatus {
             // TODO copy-paste feels bad
             const tookOverheatDamage = takeDamage(
                 overheatAttack,
+                damageFactor,
                 canBeFatal,
                 target.defenses.overheat + targetBodyPart.defenses.overheat,
                 target.guardingDefenses.overheat + targetBodyPart.defenses.overheat,
@@ -424,13 +430,15 @@ export namespace RpgStatus {
     };
 
     function takeDamage(
-        amount: Integer,
+        rawAmount: Integer,
+        amountFactor: PercentInt,
         canBeFatal: boolean,
         defense: PercentInt,
         guardingDefense: PercentInt,
         factionDefense: PercentInt,
         target: Model,
     ) {
+        const amount = Math.round(rawAmount * (amountFactor / 100));
         const previous = target.health;
         const totalDefense: PercentInt = defense
             + (target.state.isGuarding ? guardingDefense : 0)

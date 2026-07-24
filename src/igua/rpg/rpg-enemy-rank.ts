@@ -15,11 +15,11 @@ export namespace RpgEnemyRank {
 
     type CreateArgs = DeepPartial<Omit<Model, "loot">> & { loot?: RpgLoot.Table };
 
-    export function create({ difficultyScaling, status, loot, level }: CreateArgs): Model {
+    export function create({ difficultyScaling = "common", status, loot, level }: CreateArgs): Model {
         const healthMax = status?.healthMax ?? status?.health ?? 30;
 
         return {
-            difficultyScaling: difficultyScaling ?? "common",
+            difficultyScaling,
             status: {
                 health: status?.health ?? status?.healthMax ?? 30,
                 healthMax,
@@ -55,6 +55,7 @@ export namespace RpgEnemyRank {
                         max: status?.conditions?.overheat?.max ?? 100,
                     },
                 },
+                damageFactor: status?.damageFactor ?? 100,
                 quirks: {
                     emotionalDamageIsFatal: status?.quirks?.emotionalDamageIsFatal ?? false,
                     incrementsAttackerPrideOnDamage: status?.quirks?.incrementsAttackerPrideOnDamage ?? false,
@@ -123,6 +124,8 @@ export namespace RpgEnemyRank {
                     Math.max(result.defenses.physical, 99),
                     result.defenses.physical + defenseBonus,
                 );
+
+                result.damageFactor += Math.floor(Math.sqrt(1089 + (level - 1) * 3400));
             }
 
             return result;

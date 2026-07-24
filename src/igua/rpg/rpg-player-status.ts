@@ -43,6 +43,7 @@ export class RpgPlayerStatus implements RpgStatus.Model {
     }
 
     readonly invulnerableMax = 60;
+    readonly damageFactor = 100;
 
     pride = 0;
 
