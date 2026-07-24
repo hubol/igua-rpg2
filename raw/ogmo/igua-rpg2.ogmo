@@ -11,7 +11,14 @@
   "levelMinSize": {"x": 500, "y": 280},
   "levelMaxSize": {"x": 16384, "y": 8192},
   "levelValues": [
-    {"name": "Terrain Color", "definition": "RGB", "display": 0, "defaults": "#000000"}
+    {"name": "Terrain Color", "definition": "RGB", "display": 0, "defaults": "#000000"},
+    {
+      "name": "Region ID",
+      "definition": "Enum",
+      "display": 0,
+      "choices": ["~Unset~", "Indiana", "Ohio", "Illinois", "Iowa", "BetweenIndianaOhio"],
+      "defaults": 0
+    }
   ],
   "defaultExportMode": ".json",
   "compactExport": false,
@@ -2134,7 +2141,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/enemy ballon.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAwCAMAAABdTmjTAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAVUExURc7XEf///4GHBwAAAP//GP//KAAAAASiCBwAAAAHdFJOU////////wAaSwNGAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBQYWludC5ORVQgNS4xLjL7vAO2AAAAtmVYSWZJSSoACAAAAAUAGgEFAAEAAABKAAAAGwEFAAEAAABSAAAAKAEDAAEAAAACAAAAMQECABAAAABaAAAAaYcEAAEAAABqAAAAAAAAAGAAAAABAAAAYAAAAAEAAABQYWludC5ORVQgNS4xLjIAAwAAkAcABAAAADAyMzABoAMAAQAAAAEAAAAFoAQAAQAAAJQAAAAAAAAAAgABAAIABAAAAFI5OAACAAcABAAAADAxMDAAAAAA6dX2OMrabHoAAAEfSURBVEhLzZRREoIwDERBkfsf2WSzadK0BfXLN05JNm86BZXtrGwNBkFN6BGGTtdT6eAIRMPhBAo/yswXuKTL/gC7wjFI8U55p+sxLFlKLPqW3GZrGW7YLvuqaCU1lhT/KBvIWCcQU25jy9jY1orFkOW2GTOzRlu/AnnaKhdMwdPrmX5zC3fBN+6HPJ8sSO0L3fRa9b3yeokY7XNP3fY4Dla3iKqwu4KmwmQJpBf4SDa1yev/dXJNnv3qSJxBuJE794VTiLywOxcy3hs2rHT72sYqT+3hwBDxWhpJcnNNntghh0t5tF2Wq7a07DLoIhFpqIRcdariciyksuiDWuTJjXJg9F3VGTq1zzqDYExcZ5OZZObO7CGiCRg1/kI+zzeJ7hLflnJiKwAAAABJRU5ErkJggg=="
     }

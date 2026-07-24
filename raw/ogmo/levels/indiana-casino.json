@@ -4,7 +4,7 @@
   "height": 336,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#ffd600"},
+  "values": {"Terrain Color": "#ffd600", "Region ID": "~Unset~"},
   "backgroundColor": "#d8a5f7",
   "layers": [
     {
@@ -892,7 +892,8 @@
           "texture": "town/monument/lazarus.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1164,
@@ -904,7 +905,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1228,
@@ -916,7 +918,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1196,
@@ -928,7 +931,8 @@
           "texture": "shapes/line vertical16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1213,
@@ -940,7 +944,8 @@
           "texture": "light/glass metal sheen 20px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

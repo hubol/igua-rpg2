@@ -4,7 +4,7 @@
   "height": 816,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#6b55c3"},
+  "values": {"Terrain Color": "#6b55c3", "Region ID": "~Unset~"},
   "backgroundColor": "#baee25",
   "layers": [
     {
@@ -3797,7 +3797,8 @@
           "texture": "town/signage/meal soul.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 411,
@@ -3809,7 +3810,8 @@
           "texture": "stone/brick rows 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 338,
@@ -3821,7 +3823,8 @@
           "texture": "stone/brick rows 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 345,
@@ -3833,7 +3836,8 @@
           "texture": "stone/brick single 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 405,
@@ -3845,7 +3849,8 @@
           "texture": "stone/brick single 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 307,
@@ -3857,7 +3862,8 @@
           "texture": "town/signage/i will grill your food.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

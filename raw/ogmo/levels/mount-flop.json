@@ -4,7 +4,7 @@
   "height": 648,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#ab21c1"},
+  "values": {"Terrain Color": "#ab21c1", "Region ID": "Ohio"},
   "backgroundColor": "#408000",
   "layers": [
     {

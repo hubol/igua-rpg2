@@ -4,7 +4,7 @@
   "height": 344,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#fbff20"},
+  "values": {"Terrain Color": "#fbff20", "Region ID": "~Unset~"},
   "backgroundColor": "#0056ba",
   "layers": [
     {
@@ -208,7 +208,8 @@
           "texture": "town/signage/traffic cone.png",
           "originX": 0.5,
           "originY": 1,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 176,
@@ -220,7 +221,8 @@
           "texture": "town/signage/traffic cone.png",
           "originX": 0.5,
           "originY": 1,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 176,
@@ -232,7 +234,8 @@
           "texture": "town/signage/traffic cone.png",
           "originX": 0.5,
           "originY": 1,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 72,
@@ -244,7 +247,8 @@
           "texture": "town/signage/traffic cone.png",
           "originX": 0.5,
           "originY": 1,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 536,
@@ -256,7 +260,8 @@
           "texture": "town/signage/traffic cone.png",
           "originX": 0.5,
           "originY": 1,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 480,
@@ -268,7 +273,8 @@
           "texture": "town/signage/traffic cone.png",
           "originX": 0.5,
           "originY": 1,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 480,
@@ -280,7 +286,8 @@
           "texture": "town/signage/traffic cone.png",
           "originX": 0.5,
           "originY": 1,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 480,
@@ -292,7 +299,8 @@
           "texture": "town/signage/traffic cone.png",
           "originX": 0.5,
           "originY": 1,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 648,
@@ -304,7 +312,8 @@
           "texture": "town/signage/traffic cone.png",
           "originX": 0.5,
           "originY": 1,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 712,
@@ -316,7 +325,8 @@
           "texture": "town/signage/traffic cone.png",
           "originX": 0.5,
           "originY": 1,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -741,7 +751,8 @@
           "texture": "shapes/circle64.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 344,
@@ -753,7 +764,8 @@
           "texture": "shapes/circle64.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 384,
@@ -765,7 +777,8 @@
           "texture": "shapes/circle64.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 424,
@@ -777,7 +790,8 @@
           "texture": "shapes/circle64.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 464,
@@ -789,7 +803,8 @@
           "texture": "shapes/circle64.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 520,
@@ -801,7 +816,8 @@
           "texture": "shapes/circle64.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -826,7 +842,8 @@
           "texture": "sky/cloud balls 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 240,
@@ -838,7 +855,8 @@
           "texture": "sky/cloud balls 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 312,
@@ -850,7 +868,8 @@
           "texture": "sky/cloud balls 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 512,
@@ -862,7 +881,8 @@
           "texture": "sky/cloud balls 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 688,
@@ -874,7 +894,8 @@
           "texture": "sky/cloud balls 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 760,
@@ -886,7 +907,8 @@
           "texture": "sky/cloud balls 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

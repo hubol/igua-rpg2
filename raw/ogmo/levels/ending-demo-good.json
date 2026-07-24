@@ -4,8 +4,8 @@
   "height": 608,
   "offsetX": 0,
   "offsetY": 0,
+  "values": {"Terrain Color": "#24390e", "Region ID": "~Unset~"},
   "backgroundColor": "#8dba54",
-  "values": {"Terrain Color": "#24390e"},
   "layers": [
     {
       "name": "MarkerEntities",

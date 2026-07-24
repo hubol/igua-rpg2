@@ -4,7 +4,7 @@
   "height": 456,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#272e9a"},
+  "values": {"Terrain Color": "#272e9a", "Region ID": "Indiana"},
   "backgroundColor": "#bedcff",
   "layers": [
     {

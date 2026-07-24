@@ -4,7 +4,7 @@
   "height": 2424,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#000000"},
+  "values": {"Terrain Color": "#000000", "Region ID": "~Unset~"},
   "backgroundColor": "#81bde9",
   "layers": [
     {
@@ -9367,7 +9367,8 @@
           "texture": "world map/states/illinois.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1128,
@@ -9379,7 +9380,8 @@
           "texture": "world map/states/iowa.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

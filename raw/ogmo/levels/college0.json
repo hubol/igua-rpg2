@@ -4,7 +4,7 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#d55555"},
+  "values": {"Terrain Color": "#d55555", "Region ID": "~Unset~"},
   "backgroundColor": "#68ba8e",
   "layers": [
     {
@@ -393,7 +393,8 @@
           "texture": "esoteric/spigot interior.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

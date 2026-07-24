@@ -4,7 +4,7 @@
   "height": 376,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#215700"},
+  "values": {"Terrain Color": "#215700", "Region ID": "~Unset~"},
   "backgroundColor": "#00803b",
   "layers": [
     {
