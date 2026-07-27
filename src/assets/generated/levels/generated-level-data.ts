@@ -386,7 +386,11 @@ export const Lvl = {
       Block_1: e(r["Block"], { x: 432, y: 200, width: 16, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: -40, y: 72, width: 40, height: 160, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_3: e(r["Block"], { x: 504, y: 80, width: 40, height: 160, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Player: e(r["Player"], { x: 88, y: 216, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      Block_4: e(r["Block"], { x: -152, y: 192, width: 264, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: -152, y: 88, width: 264, height: 104, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 376, y: 120, width: 264, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 200, y: 88, width: 264, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Player: e(r["Player"], { x: 80, y: 88, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       Marker: e(r["Marker"], { x: 320, y: 216, values: { name: "", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
@@ -10938,6 +10942,10 @@ export namespace LvlType {
     Block_1: ReturnType<(typeof r)["Block"]>;
     Block_2: ReturnType<(typeof r)["Block"]>;
     Block_3: ReturnType<(typeof r)["Block"]>;
+    Block_4: ReturnType<(typeof r)["Block"]>;
+    Block_5: ReturnType<(typeof r)["Block"]>;
+    Block_6: ReturnType<(typeof r)["Block"]>;
+    Block_7: ReturnType<(typeof r)["Block"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     Marker: ReturnType<(typeof r)["Marker"]>;
   };

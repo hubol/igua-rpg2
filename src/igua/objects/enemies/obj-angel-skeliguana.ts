@@ -6,10 +6,15 @@ import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { ZIndex } from "../../core/scene/z-index";
 import { NpcLooks } from "../../data/data-npc-looks";
+import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
+import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
+import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objIguanaLocomotive } from "../obj-iguana-locomotive";
+import { objProjectileCrackedEarth } from "../projectiles/obj-projectile-cracked-earth";
 
 const ranks = {
     level0: RpgEnemyRank.create({
@@ -22,13 +27,24 @@ const ranks = {
     }),
 };
 
-type Feature = "fire_breath";
+type Feature = "overheat_trail";
 
 const variants = {
     level0: {
         rank: ranks.level0,
-        features: new Set<Feature>(["fire_breath"]),
+        features: new Set<Feature>(["overheat_trail"]),
     },
+};
+
+const atks = {
+    overheatTrail: RpgAttack.create({
+        conditions: {
+            overheat: {
+                value: 5,
+                damage: 30,
+            },
+        },
+    }),
 };
 
 export function objAngelSkeliguana() {
@@ -38,7 +54,8 @@ export function objAngelSkeliguana() {
 
     const obj = objIguanaLocomotive(NpcLooks.Skeleton0)
         .mixin(mxnEnemy, { rank, hurtboxes: hurtboxObjs })
-        .mixin(mxnDetectPlayer);
+        .mixin(mxnDetectPlayer)
+        .mixin(mxnEnemyDeathBurst, { map: [0xffffff, 0xE8E3E3, 0xbdbdbd] });
 
     const moves = {
         *idle() {
@@ -99,6 +116,26 @@ export function objAngelSkeliguana() {
         .coro(function* (self) {
             while (true) {
                 yield* moves.idle();
+            }
+        })
+        .coro(function* (self) {
+            if (!features.has("overheat_trail")) {
+                return;
+            }
+
+            while (true) {
+                yield () => self.isOnGround;
+
+                const trailObj = objProjectileCrackedEarth(100)
+                    .at(self)
+                    .add(-50, -3)
+                    .mixin(mxnDestroyAfterSteps, 90)
+                    .mixin(mxnRpgAttack, { attacker: self.status, attack: atks.overheatTrail })
+                    .show();
+
+                yield sleep(500);
+
+                trailObj.alpha = 0.7;
             }
         })
         .zIndexed(ZIndex.CharacterEntities);
