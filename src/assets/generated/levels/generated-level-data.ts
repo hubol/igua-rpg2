@@ -381,7 +381,14 @@ export const Lvl = {
   },
   DungeonBones: (): LvlType.DungeonBones => {
     applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000, regionId: null });
-    return { Block: e(r["Block"], { x: 0, y: 216, width: 512, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"), Player: e(r["Player"], { x: 88, y: 216, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"), Marker: e(r["Marker"], { x: 320, y: 216, values: { name: "", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities") };
+    return {
+      Block: e(r["Block"], { x: 0, y: 216, width: 512, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 432, y: 200, width: 16, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: -40, y: 72, width: 40, height: 160, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 504, y: 80, width: 40, height: 160, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Player: e(r["Player"], { x: 88, y: 216, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      Marker: e(r["Marker"], { x: 320, y: 216, values: { name: "", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+    };
   },
   EfficientHome: (): LvlType.EfficientHome => {
     applyLevel({ width: 1536, height: 864, backgroundTint: 0x408000, terrainTint: 0xd71c1c, regionId: "Indiana" });
@@ -10928,6 +10935,9 @@ export namespace LvlType {
   };
   export type DungeonBones = {
     Block: ReturnType<(typeof r)["Block"]>;
+    Block_1: ReturnType<(typeof r)["Block"]>;
+    Block_2: ReturnType<(typeof r)["Block"]>;
+    Block_3: ReturnType<(typeof r)["Block"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     Marker: ReturnType<(typeof r)["Marker"]>;
   };
