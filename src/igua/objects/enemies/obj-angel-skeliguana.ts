@@ -11,6 +11,9 @@ const ranks = {
         status: {
             healthMax: 30,
         },
+        loot: {
+            tier0: [{ kind: "pocket_item", id: "BoneTypeA" }],
+        },
     }),
 };
 
