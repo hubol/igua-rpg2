@@ -13,6 +13,7 @@ import { objAngelBrick } from "../objects/enemies/obj-angel-brick";
 import { objAngelCactus } from "../objects/enemies/obj-angel-cactus";
 import { objAngelChill } from "../objects/enemies/obj-angel-chill";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
+import { objAngelSkeliguana } from "../objects/enemies/obj-angel-skeliguana";
 import { objAngelSnail } from "../objects/enemies/obj-angel-snail";
 import { objAngelSpikeBall } from "../objects/enemies/obj-angel-spike-ball";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
@@ -95,6 +96,11 @@ export const OgmoEntityResolvers = {
     },
     EnemyCactus: (entity) => objAngelCactus(entity).at(1, 3),
     EnemyChill: objAngelChill,
+    EnemySkeliguana: (entity) => {
+        const obj = objAngelSkeliguana();
+        applyEntityToIguanaObj(obj, entity);
+        return obj;
+    },
     EnemySnail: () => objAngelSnail(),
     EnemySpikeBall: objAngelSpikeBall,
     EnemySuggestive: (entity) => objAngelSuggestive(entity).at(0, -38),

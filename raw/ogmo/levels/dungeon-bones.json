@@ -16,19 +16,7 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": [
-        {
-          "name": "Marker",
-          "id": 0,
-          "_eid": "73148747",
-          "x": 320,
-          "y": 216,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#00ff00",
-          "values": {"name": "", "depth": 0}
-        }
-      ]
+      "entities": []
     },
     {
       "name": "RegionEntities",
@@ -119,7 +107,41 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "EnemySkeliguana",
+          "id": 0,
+          "_eid": "19563576",
+          "x": 248,
+          "y": 216,
+          "originX": 18,
+          "originY": 37,
+          "flippedX": false,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemySkeliguana",
+          "id": 1,
+          "_eid": "19563576",
+          "x": 376,
+          "y": 216,
+          "originX": 18,
+          "originY": 37,
+          "flippedX": false,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemySkeliguana",
+          "id": 2,
+          "_eid": "19563576",
+          "x": 336,
+          "y": 88,
+          "originX": 18,
+          "originY": 37,
+          "flippedX": true,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "TerrainDecals",

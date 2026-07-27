@@ -390,8 +390,10 @@ export const Lvl = {
       Block_5: e(r["Block"], { x: -152, y: 88, width: 264, height: 104, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_6: e(r["Block"], { x: 376, y: 120, width: 264, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_7: e(r["Block"], { x: 200, y: 88, width: 264, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      EnemySkeliguana: e(r["EnemySkeliguana"], { x: 248, y: 216, flippedX: false, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySkeliguana_1: e(r["EnemySkeliguana"], { x: 376, y: 216, flippedX: false, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySkeliguana_2: e(r["EnemySkeliguana"], { x: 336, y: 88, flippedX: true, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       Player: e(r["Player"], { x: 80, y: 88, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
-      Marker: e(r["Marker"], { x: 320, y: 216, values: { name: "", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   EfficientHome: (): LvlType.EfficientHome => {
@@ -10946,8 +10948,10 @@ export namespace LvlType {
     Block_5: ReturnType<(typeof r)["Block"]>;
     Block_6: ReturnType<(typeof r)["Block"]>;
     Block_7: ReturnType<(typeof r)["Block"]>;
+    EnemySkeliguana: ReturnType<(typeof r)["EnemySkeliguana"]>;
+    EnemySkeliguana_1: ReturnType<(typeof r)["EnemySkeliguana"]>;
+    EnemySkeliguana_2: ReturnType<(typeof r)["EnemySkeliguana"]>;
     Player: ReturnType<(typeof r)["Player"]>;
-    Marker: ReturnType<(typeof r)["Marker"]>;
   };
   export type EfficientHome = {
     ShapesSquare32: Sprite;
