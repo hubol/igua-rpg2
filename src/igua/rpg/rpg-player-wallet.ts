@@ -7,6 +7,7 @@ const currencyIdToStateKey: Record<RpgEconomy.Currency.NonExperienceId, keyof Rp
     casino_pity: "casinoPity",
     mechanical_idol_credits: "mechanicalIdolCredits",
     valuables: "valuables",
+    bone_dusts: "boneDusts",
 };
 
 export class RpgPlayerWallet {
@@ -79,6 +80,7 @@ export class RpgPlayerWallet {
             valuables: 100,
             mechanicalIdolCredits: 10,
             casinoPity: 0,
+            boneDusts: 0,
         };
     }
 }
@@ -88,6 +90,7 @@ export namespace RpgPlayerWallet {
         valuables: Integer;
         mechanicalIdolCredits: Integer;
         casinoPity: Integer;
+        boneDusts: Integer;
     }
 
     export type SpendReason = "default" | "gambling";

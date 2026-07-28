@@ -10,6 +10,7 @@ import { mxnSlotMachineBetButton } from "../mixins/mxn-slot-machine-bet-button";
 import { mxnSlotMachineSecondaryDisplay } from "../mixins/mxn-slot-machine-secondary-display";
 import { objSlotMachine } from "../objects/obj-slot-machine";
 import { Rpg } from "../rpg/rpg";
+import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 
 // TODO this is all copy-paste from indiana casino
@@ -28,6 +29,7 @@ function createSymbolTxs(...symbolTxs: Array<[symbol: RpgSlotMachine.Symbol, tex
 
 export function scnOhioCasino() {
     const lvl = Lvl.OhioCasino();
+    const currencyId: RpgEconomy.Currency.Id = "bone_dusts";
 
     {
         const { rules, sym } = DataSlotMachines.BasicThreeReel;
@@ -47,7 +49,7 @@ export function scnOhioCasino() {
                 symbolTxs,
                 lineHighlightTint: 0xFF5200,
             },
-            "mechanical_idol_credits",
+            currencyId,
         )
             .at(lvl.SlotMachineDisplay0)
             .zIndexed(ZIndex.Entities)
@@ -78,7 +80,7 @@ export function scnOhioCasino() {
                 symbolTxs,
                 lineHighlightTint: 0xFF5E42,
             },
-            "mechanical_idol_credits",
+            currencyId,
         )
             .at(lvl.SlotMachineDisplay1)
             .zIndexed(ZIndex.Entities)
@@ -93,13 +95,13 @@ export function scnOhioCasino() {
 
     lvl.PityBossNpc
         .mixin(mxnCutscene, function* () {
-            yield* show("Bones for credits.");
-            const bonesCount = yield* DramaInventory.removeAll({ kind: "pocket_item", id: "BoneTypeA" });
-            const creditsGained = bonesCount * 3;
-            Rpg.wallet.earn("mechanical_idol_credits", creditsGained);
+            yield* show("Bones for bone dusts.");
+            const removedBonesCount = yield* DramaInventory.removeAll({ kind: "pocket_item", id: "BoneTypeA" });
+            const dustsGained = removedBonesCount * 3;
+            Rpg.wallet.earn("bone_dusts", dustsGained);
             yield* show(
-                `Gained ${creditsGained} credit(s).`,
-                `Now you have ${Rpg.wallet.count("mechanical_idol_credits")} credit(s).`,
+                `Gained ${RpgEconomy.Offer.toString(dustsGained, currencyId)}.`,
+                `Now you have ${RpgEconomy.Offer.toString(Rpg.wallet.count(currencyId), currencyId)}.`,
             );
         });
 }
