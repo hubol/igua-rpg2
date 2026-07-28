@@ -400,7 +400,7 @@ export const Lvl = {
       FurnitureChainMetal_15: d(Tx.Furniture.ChainMetal, { x: 1368, y: 72, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       FurnitureChainMetal_16: d(Tx.Furniture.ChainMetal, { x: 1368, y: 17, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       FurnitureChainMetal_17: d(Tx.Furniture.ChainMetal, { x: 1368, y: -38, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
-      Block: e(r["Block"], { x: 232, y: 128, width: 600, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block: e(r["Block"], { x: 232, y: 128, width: 256, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 656, y: 88, width: 56, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 824, y: 256, width: 712, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_3: e(r["Block"], { x: 824, y: 232, width: 56, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
@@ -413,6 +413,22 @@ export const Lvl = {
       Block_9: e(r["Block"], { x: 824, y: 336, width: 712, height: 120, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_10: e(r["Block"], { x: 824, y: 544, width: 712, height: 240, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_11: e(r["Block"], { x: 1536, y: 608, width: 208, height: 160, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_12: e(r["Block"], { x: 528, y: 128, width: 304, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 488, y: 128, width: 40, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_1: e(r["Pipe"], { x: 488, y: 153, width: 40, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_2: e(r["Pipe"], { x: 488, y: 181, width: 40, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      PipeSlope: e(r["PipeSlope"], { x: 728, y: 512, width: 96, height: 32, flippedX: true, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
+      PipeSlope_1: e(r["PipeSlope"], { x: 728, y: 480, width: 96, height: 32, flippedX: false, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
+      PipeSlope_2: e(r["PipeSlope"], { x: 728, y: 448, width: 96, height: 32, flippedX: true, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
+      PipeSlope_3: e(r["PipeSlope"], { x: 728, y: 416, width: 96, height: 32, flippedX: false, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
+      PipeSlope_4: e(r["PipeSlope"], { x: 728, y: 384, width: 96, height: 32, flippedX: true, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
+      PipeSlope_5: e(r["PipeSlope"], { x: 728, y: 352, width: 96, height: 32, flippedX: false, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
+      PipeSlope_6: e(r["PipeSlope"], { x: 728, y: 320, width: 96, height: 32, flippedX: true, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
+      PipeSlope_7: e(r["PipeSlope"], { x: 728, y: 288, width: 96, height: 32, flippedX: false, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
+      PipeSlope_8: e(r["PipeSlope"], { x: 728, y: 256, width: 96, height: 32, flippedX: true, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
+      Pipe_3: e(r["Pipe"], { x: 728, y: 232, width: 96, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_13: e(r["Block"], { x: 456, y: 232, width: 272, height: 224, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_14: e(r["Block"], { x: 456, y: 192, width: 32, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       EnemySkeliguana: e(r["EnemySkeliguana"], { x: 936, y: 256, flippedX: false, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySkeliguana_1: e(r["EnemySkeliguana"], { x: 1064, y: 256, flippedX: false, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySkeliguana_2: e(r["EnemySkeliguana"], { x: 568, y: 128, flippedX: true, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
@@ -439,7 +455,6 @@ export const Lvl = {
       EnemySpikeBall_14: e(r["EnemySpikeBall"], { x: 1720, y: 600, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySpikeBall_15: e(r["EnemySpikeBall"], { x: 1744, y: 608, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       Player: e(r["Player"], { x: 82, y: 105, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
-      PlayerDev: e(r["PlayerDev"], { x: 1512, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     };
   },
   EfficientHome: (): LvlType.EfficientHome => {
@@ -11017,6 +11032,22 @@ export namespace LvlType {
     Block_9: ReturnType<(typeof r)["Block"]>;
     Block_10: ReturnType<(typeof r)["Block"]>;
     Block_11: ReturnType<(typeof r)["Block"]>;
+    Block_12: ReturnType<(typeof r)["Block"]>;
+    Pipe: ReturnType<(typeof r)["Pipe"]>;
+    Pipe_1: ReturnType<(typeof r)["Pipe"]>;
+    Pipe_2: ReturnType<(typeof r)["Pipe"]>;
+    PipeSlope: ReturnType<(typeof r)["PipeSlope"]>;
+    PipeSlope_1: ReturnType<(typeof r)["PipeSlope"]>;
+    PipeSlope_2: ReturnType<(typeof r)["PipeSlope"]>;
+    PipeSlope_3: ReturnType<(typeof r)["PipeSlope"]>;
+    PipeSlope_4: ReturnType<(typeof r)["PipeSlope"]>;
+    PipeSlope_5: ReturnType<(typeof r)["PipeSlope"]>;
+    PipeSlope_6: ReturnType<(typeof r)["PipeSlope"]>;
+    PipeSlope_7: ReturnType<(typeof r)["PipeSlope"]>;
+    PipeSlope_8: ReturnType<(typeof r)["PipeSlope"]>;
+    Pipe_3: ReturnType<(typeof r)["Pipe"]>;
+    Block_13: ReturnType<(typeof r)["Block"]>;
+    Block_14: ReturnType<(typeof r)["Block"]>;
     EnemySkeliguana: ReturnType<(typeof r)["EnemySkeliguana"]>;
     EnemySkeliguana_1: ReturnType<(typeof r)["EnemySkeliguana"]>;
     EnemySkeliguana_2: ReturnType<(typeof r)["EnemySkeliguana"]>;
@@ -11043,7 +11074,6 @@ export namespace LvlType {
     EnemySpikeBall_14: ReturnType<(typeof r)["EnemySpikeBall"]>;
     EnemySpikeBall_15: ReturnType<(typeof r)["EnemySpikeBall"]>;
     Player: ReturnType<(typeof r)["Player"]>;
-    PlayerDev: ReturnType<(typeof r)["PlayerDev"]>;
   };
   export type EfficientHome = {
     ShapesSquare32: Sprite;
