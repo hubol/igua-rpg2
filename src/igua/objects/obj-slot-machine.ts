@@ -10,7 +10,6 @@ import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
-import { Null } from "../../lib/types/null";
 import { DramaWallet } from "../drama/drama-wallet";
 import { GenerativeMusicUtils } from "../lib/generative-music-utils";
 import { Rpg } from "../rpg/rpg";
@@ -32,9 +31,13 @@ interface SlotMachineRenderConfig {
     lineHighlightTint: RgbInt;
 }
 
-export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineRenderConfig) {
+export function objSlotMachine(
+    rules: RpgSlotMachine.Rules,
+    config: SlotMachineRenderConfig,
+    currencyId: RpgEconomy.Currency.Id = "valuables",
+) {
     const fallbackSymbolTx = [...config.symbolTxs.values()][0];
-    const pricePerSpin: RpgEconomy.Offer = { currency: "valuables", price: rules.price };
+    const pricePerSpin: RpgEconomy.Offer = { currency: currencyId, price: rules.price };
 
     let reelsAdvancedCount = 0;
 
@@ -154,7 +157,7 @@ export function objSlotMachine(rules: RpgSlotMachine.Rules, config: SlotMachineR
                 if (totalPrize > 0) {
                     self.play(Sfx.Interact.SlotMachine.Win0);
                     self.coro(function* () {
-                        yield* DramaWallet.rewardValuables(totalPrize, "gambling");
+                        yield* DramaWallet.earn(currencyId, totalPrize, "gambling");
                     });
                 }
                 else {

@@ -44,6 +44,20 @@ function* rewardValuables(
     yield sleep(800 - (msDelayGenerator.next().value!));
 }
 
+function* earn(
+    id: RpgEconomy.Currency.Id,
+    amount: number,
+    reason: RpgPlayerWallet.EarnReason = "default",
+) {
+    if (id === "valuables") {
+        yield* rewardValuables(amount, reason);
+        return;
+    }
+
+    // TODO needs animation dawg
+    Rpg.wallet.earn(id, amount, reason);
+}
+
 /** Before calling this function, you must assert that the player has the demanded amount */
 function* spendValuables(
     total: number,
@@ -156,4 +170,5 @@ export const DramaWallet = {
     createSpentValuables,
     rewardValuables,
     spendValuables,
+    earn,
 };

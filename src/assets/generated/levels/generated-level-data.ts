@@ -7061,6 +7061,140 @@ export const Lvl = {
       ResetPlayerMarker: e(r["Marker"], { x: 72, y: 680, values: { name: "ResetPlayerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
+  OhioCasino: (): LvlType.OhioCasino => {
+    applyLevel({ width: 1344, height: 336, backgroundTint: 0xd8a5f7, terrainTint: 0xffd600, regionId: null });
+    return {
+      ShapesSquare32: d(Tx.Shapes.Square32, { x: -56, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0xa786b9 }, "ParallaxDecals"),
+      ShapesSquare32_1: d(Tx.Shapes.Square32, { x: -112, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0x77677d }, "ParallaxDecals"),
+      ShapesSquare32_2: d(Tx.Shapes.Square32, { x: -176, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0x46483f }, "ParallaxDecals"),
+      ShapesSquare32_3: d(Tx.Shapes.Square32, { x: -248, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0x172a03 }, "ParallaxDecals"),
+      TerrainGrassCloudy: d(Tx.Terrain.Grass.Cloudy, { x: 232, y: 210, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xa786b9 }, "ParallaxDecals"),
+      TerrainGrassCloudy_1: d(Tx.Terrain.Grass.Cloudy, { x: 232, y: 280, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xa786b9 }, "ParallaxDecals"),
+      TerrainGrassCloudy_2: d(Tx.Terrain.Grass.Cloudy, { x: 176, y: 218, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x77677d }, "ParallaxDecals"),
+      TerrainGrassCloudy_3: d(Tx.Terrain.Grass.Cloudy, { x: 176, y: 282, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x77677d }, "ParallaxDecals"),
+      TerrainGrassCloudy_4: d(Tx.Terrain.Grass.Cloudy, { x: 112, y: 206, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x46483f }, "ParallaxDecals"),
+      TerrainGrassCloudy_5: d(Tx.Terrain.Grass.Cloudy, { x: 112, y: 274, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x46483f }, "ParallaxDecals"),
+      TerrainGrassCloudy_6: d(Tx.Terrain.Grass.Cloudy, { x: 40, y: 202, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x172a03 }, "ParallaxDecals"),
+      TerrainGrassCloudy_7: d(Tx.Terrain.Grass.Cloudy, { x: 40, y: 266, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x172a03 }, "ParallaxDecals"),
+      TerrainDistantWaves0: d(Tx.Terrain.Distant.Waves0, { x: -204, y: 272, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "ParallaxDecals"),
+      TerrainDistantWaves0_1: d(Tx.Terrain.Distant.Waves0, { x: -124, y: 293, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "ParallaxDecals"),
+      TerrainGrassLumpy0: d(Tx.Terrain.Grass.Lumpy0, { x: 116, y: 233, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x46483f }, "ParallaxDecals"),
+      TerrainGrassLumpy0_1: d(Tx.Terrain.Grass.Lumpy0, { x: 180, y: 175, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x77677d }, "ParallaxDecals"),
+      CasinoSlotsMachineStupidFlower: d(Tx.Casino.Slots.MachineStupidFlower, { x: 984, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      CasinoSlotsMachineSimple: d(Tx.Casino.Slots.MachineSimple, { x: 544, y: 216, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      CasinoSlotsMachineSimpleSecondaryDisplay: d(Tx.Casino.Slots.MachineSimpleSecondaryDisplay, { x: 521, y: 131, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      CasinoSlotsFiveValuableBet: d(Tx.Casino.Slots.FiveValuableBet, { x: 523, y: 261, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "BackgroundDecals"),
+      ShapesExaggerate16px: d(Tx.Shapes.Exaggerate16px, { x: 552, y: 261, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd800 }, "BackgroundDecals"),
+      ShapesExaggerate16px_1: d(Tx.Shapes.Exaggerate16px, { x: 491, y: 259, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd800 }, "BackgroundDecals"),
+      TerrainDistantWaves0_2: d(Tx.Terrain.Distant.Waves0, { x: -135, y: 302, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "BackgroundDecals"),
+      TerrainDistantWaves0_3: d(Tx.Terrain.Distant.Waves0, { x: -215, y: 281, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "BackgroundDecals"),
+      ShapesCircleIrregular26: d(Tx.Shapes.CircleIrregular26, { x: 584, y: 261, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x65bf21 }, "BackgroundDecals"),
+      SlotMachineBetButton0: d(Tx.Casino.Slots.OkButton, { x: 583, y: 257, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd800 }, "BackgroundDecals"),
+      CasinoSlotsTenValuableBet: d(Tx.Casino.Slots.TenValuableBet, { x: 943, y: 268, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FoliageMedium0: d(Tx.Foliage.Medium0, { x: 1083, y: 275, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageMedium0_1: d(Tx.Foliage.Medium0, { x: 880, y: 277, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageMedium0_2: d(Tx.Foliage.Medium0, { x: 899, y: 285, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2: d(Tx.Foliage.Vine2, { x: 1084, y: 131, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_1: d(Tx.Foliage.Vine2, { x: 1079, y: 169, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_2: d(Tx.Foliage.Vine2, { x: 1083, y: 208, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_3: d(Tx.Foliage.Vine2, { x: 886, y: 134, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_4: d(Tx.Foliage.Vine2, { x: 883, y: 173, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_5: d(Tx.Foliage.Vine2, { x: 886, y: 213, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageFlower14: d(Tx.Foliage.Flower14, { x: 1088, y: 152, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xefc655 }, "BackgroundDecals"),
+      FoliageFlower14_1: d(Tx.Foliage.Flower14, { x: 884, y: 191, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xefc655 }, "BackgroundDecals"),
+      FoliageFlower22: d(Tx.Foliage.Flower22, { x: 884, y: 130, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e42 }, "BackgroundDecals"),
+      FoliageFlower22_1: d(Tx.Foliage.Flower22, { x: 1087, y: 230, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e42 }, "BackgroundDecals"),
+      ShapesCircleIrregular26_1: d(Tx.Shapes.CircleIrregular26, { x: 1032, y: 253, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e42 }, "BackgroundDecals"),
+      SlotMachineBetButton1: d(Tx.Casino.Slots.OkButton, { x: 1031, y: 249, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xefc655 }, "BackgroundDecals"),
+      ShapesConfetti18x8: d(Tx.Shapes.Confetti18x8, { x: 1064, y: 225, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      ShapesConfetti18x8_1: d(Tx.Shapes.Confetti18x8, { x: 913, y: 121, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      ShapesConfetti18x8_2: d(Tx.Shapes.Confetti18x8, { x: 907, y: 253, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      CasinoSlotsTitleSimplySevens: d(Tx.Casino.Slots.TitleSimplySevens, { x: 526, y: 115, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      Block: e(r["Block"], { x: 280, y: 288, width: 912, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 208, y: 288, width: 72, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xc8a401 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 136, y: 288, width: 72, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x927302 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 56, y: 288, width: 80, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x5a4103 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: -64, y: 288, width: 120, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x251105 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 200, y: -8, width: 80, height: 192, values: { name: "", depth: 0, visible: true }, tint: 0xc8a401 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 128, y: -8, width: 80, height: 192, values: { name: "", depth: 0, visible: true }, tint: 0x927302 }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 48, y: -8, width: 88, height: 192, values: { name: "", depth: 0, visible: true }, tint: 0x5a4103 }, "TerrainEntities"),
+      Block_8: e(r["Block"], { x: -72, y: -8, width: 128, height: 192, values: { name: "", depth: 0, visible: true }, tint: 0x251105 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 280, y: 0, width: 256, height: 128, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_9: e(r["Block"], { x: 712, y: 272, width: 80, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_10: e(r["Block"], { x: 1192, y: 288, width: 152, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_11: e(r["Block"], { x: 1296, y: 0, width: 48, height: 288, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_12: e(r["Block"], { x: 1152, y: 272, width: 88, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
+      Block_13: e(r["Block"], { x: 1164, y: 219, width: 64, height: 54, values: { name: "", depth: 0, visible: true }, tint: 0xd8a5f7 }, "TerrainEntities"),
+      TerrainGrassSparse3px1: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 144, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_1: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 72, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_2: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 0, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_3: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 328, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_4: d(Tx.Terrain.Grass.Sparse3px1, { x: 136, y: 328, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x5a4103 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_5: d(Tx.Terrain.Grass.Sparse3px1, { x: 136, y: 144, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x5a4103 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_6: d(Tx.Terrain.Grass.Sparse3px1, { x: 137, y: 80, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x5a4103 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_7: d(Tx.Terrain.Grass.Sparse3px1, { x: 137, y: 16, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x5a4103 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_8: d(Tx.Terrain.Grass.Sparse3px1, { x: 208, y: 144, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x927302 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_9: d(Tx.Terrain.Grass.Sparse3px1, { x: 209, y: 80, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x927302 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_10: d(Tx.Terrain.Grass.Sparse3px1, { x: 209, y: 16, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x927302 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_11: d(Tx.Terrain.Grass.Sparse3px1, { x: 208, y: 328, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x927302 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_12: d(Tx.Terrain.Grass.Sparse3px1, { x: 281, y: 88, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xc8a401 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_13: d(Tx.Terrain.Grass.Sparse3px1, { x: 281, y: 24, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xc8a401 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_14: d(Tx.Terrain.Grass.Sparse3px1, { x: 280, y: 328, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xc8a401 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_15: d(Tx.Terrain.Grass.Sparse3px1, { x: 245, y: 288, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc8a401 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_16: d(Tx.Terrain.Grass.Sparse3px1, { x: 173, y: 288, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x927302 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_17: d(Tx.Terrain.Grass.Sparse3px1, { x: 96, y: 288, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5a4103 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_18: d(Tx.Terrain.Grass.Sparse3px1, { x: 16, y: 287, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_19: d(Tx.Terrain.Grass.Sparse3px1, { x: 172, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x927302 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_20: d(Tx.Terrain.Grass.Sparse3px1, { x: 99, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5a4103 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_21: d(Tx.Terrain.Grass.Sparse3px1, { x: 19, y: 183, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_22: d(Tx.Terrain.Grass.Sparse3px1, { x: 241, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc8a401 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_23: d(Tx.Terrain.Grass.Sparse3px1, { x: 281, y: 137, scaleX: 1, scaleY: -1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xc8a401 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_24: d(Tx.Terrain.Grass.Sparse3px1, { x: 333, y: 287, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_25: d(Tx.Terrain.Grass.Sparse3px1, { x: 421, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_26: d(Tx.Terrain.Grass.Sparse3px1, { x: 493, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_27: d(Tx.Terrain.Grass.Sparse3px1, { x: 581, y: 287, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_28: d(Tx.Terrain.Grass.Sparse3px1, { x: 669, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_29: d(Tx.Terrain.Grass.Sparse3px1, { x: 741, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      ShapesFontsWeight3C: d(Tx.Shapes.Fonts.Weight3.C, { x: 304, y: 88, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
+      ShapesFontsWeight3A: d(Tx.Shapes.Fonts.Weight3.A, { x: 336, y: 72, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
+      ShapesFontsWeight3S: d(Tx.Shapes.Fonts.Weight3.S, { x: 368, y: 56, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
+      ShapesFontsWeight3I: d(Tx.Shapes.Fonts.Weight3.I, { x: 394, y: 43, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
+      ShapesFontsWeight3N: d(Tx.Shapes.Fonts.Weight3.N, { x: 424, y: 29, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
+      ShapesFontsWeight3O: d(Tx.Shapes.Fonts.Weight3.O, { x: 459, y: 18, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_30: d(Tx.Terrain.Grass.Sparse3px1, { x: 829, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_31: d(Tx.Terrain.Grass.Sparse3px1, { x: 917, y: 287, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_32: d(Tx.Terrain.Grass.Sparse3px1, { x: 1005, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_33: d(Tx.Terrain.Grass.Sparse3px1, { x: 1077, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_34: d(Tx.Terrain.Grass.Sparse3px1, { x: 1165, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TerrainGrassSparse3px1_35: d(Tx.Terrain.Grass.Sparse3px1, { x: 1261, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
+      TownMonumentLazarus: d(Tx.Town.Monument.Lazarus, { x: 1197, y: 254, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      ShapesLineVertical16: d(Tx.Shapes.LineVertical16, { x: 1164, y: 246, scaleX: 3, scaleY: 3.5, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      ShapesLineVertical16_1: d(Tx.Shapes.LineVertical16, { x: 1228, y: 246, scaleX: 3, scaleY: 3.5, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      ShapesLineVertical16_2: d(Tx.Shapes.LineVertical16, { x: 1196, y: 219, scaleX: 3, scaleY: 4, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      LightGlassMetalSheen20px: d(Tx.Light.GlassMetalSheen20px, { x: 1213, y: 235, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
+      PityBossNpc: e(r["IguanaNpc"], { x: 752, y: 272, flippedX: true, values: { personaName: "PityBoss", name: "PityBossNpc", depth: 0 } }, "CharacterEntities"),
+      Player: e(r["Player"], { x: 160, y: 288, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      fromWizard: e(r["Checkpoint"], { x: 688, y: 48, flippedX: false, values: { name: "fromWizard", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromTaxi: e(r["Checkpoint"], { x: 688, y: 48, flippedX: false, values: { name: "fromTaxi", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      SlotMachineSecondaryDisplay0: e(r["Region"], { x: 492, y: 128, width: 57, height: 15, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -56, y: 168, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromOhioCasino", name: "", depth: 0 } }, "RegionEntities"),
+      SlotMachineSecondaryDisplay1: e(r["Region"], { x: 893, y: 235, width: 97, height: 19, values: { name: "SlotMachineSecondaryDisplay1", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      SlotMachineDisplay0: e(r["Marker"], { x: 456, y: 157, values: { name: "SlotMachineDisplay0", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 442, y: 141, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_1: e(r["EnvironmentSparkleMarker"], { x: 432, y: 219, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_2: e(r["EnvironmentSparkleMarker"], { x: 595, y: 234, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_3: e(r["EnvironmentSparkleMarker"], { x: 596, y: 142, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_4: e(r["EnvironmentSparkleMarker"], { x: 654, y: 175, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      SlotMachineDisplay1: e(r["Marker"], { x: 892, y: 122, values: { name: "SlotMachineDisplay1", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      EnvironmentSparkleMarker_5: e(r["EnvironmentSparkleMarker"], { x: 890, y: 72, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_6: e(r["EnvironmentSparkleMarker"], { x: 1008, y: 81, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_7: e(r["EnvironmentSparkleMarker"], { x: 961, y: 57, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_8: e(r["EnvironmentSparkleMarker"], { x: 954, y: 100, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_9: e(r["EnvironmentSparkleMarker"], { x: 1047, y: 73, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_10: e(r["EnvironmentSparkleMarker"], { x: 1083, y: 83, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      PityMarker: e(r["Marker"], { x: 752, y: 288, values: { name: "PityMarker", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+    };
+  },
   OhioDmv: (): LvlType.OhioDmv => {
     applyLevel({ width: 500, height: 392, backgroundTint: 0xf00404, terrainTint: 0x000000, regionId: null });
     return {
@@ -10585,6 +10719,7 @@ export const Lvl = {
       EnemySpikeBall_4: e(r["EnemySpikeBall"], { x: 3830, y: 1419, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySpikeBall_5: e(r["EnemySpikeBall"], { x: 3876, y: 1457, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySpikeBall_6: e(r["EnemySpikeBall"], { x: 3899, y: 1429, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      GateMap_2: e(r["GateMap"], { x: 4048, y: 1368, rotation: 0, uid: 178520557013000, values: { sceneName: "scnOhioCasino", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "Entities"),
       FoliageFlower18: d(Tx.Foliage.Flower18, { x: 2682, y: 1671, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff8400 }, "AboveEntitiesDecals"),
       FoliageFlower18_1: d(Tx.Foliage.Flower18, { x: 2715, y: 1677, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffb200 }, "AboveEntitiesDecals"),
       FoliageFlower22: d(Tx.Foliage.Flower22, { x: 2750, y: 1666, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "AboveEntitiesDecals"),
@@ -10621,27 +10756,28 @@ export const Lvl = {
       fromOpenMarket: e(r["Checkpoint"], { x: 3840, y: 1576, flippedX: true, values: { name: "fromOpenMarket", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromIndianaBaldMike: e(r["Checkpoint"], { x: 2528, y: 1936, flippedX: true, values: { name: "fromIndianaBaldMike", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromDungeonBones: e(r["Checkpoint"], { x: 4144, y: 1536, flippedX: true, values: { name: "fromDungeonBones", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
-      GateMap_2: e(r["GateMap"], { x: 3061, y: 1439, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_3: e(r["GateMap"], { x: 2877, y: 1441, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_4: e(r["GateMap"], { x: 3182, y: 1548, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
+      fromOhioCasino: e(r["Checkpoint"], { x: 4008, y: 1432, flippedX: true, values: { name: "fromOhioCasino", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      GateMap_3: e(r["GateMap"], { x: 3061, y: 1439, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_4: e(r["GateMap"], { x: 2877, y: 1441, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_5: e(r["GateMap"], { x: 3182, y: 1548, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
       StrangeMarketGate: e(r["GateMap"], { x: 2791, y: 1235, rotation: 540, uid: 175755215936902, values: { sceneName: "scnStrangeMarket", checkpointName: "fromWorldMap", name: "StrangeMarketGate", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_5: e(r["GateMap"], { x: 2760, y: 1816, rotation: 90, uid: 175860865618400, values: { sceneName: "scnColosseumMiffed", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_6: e(r["GateMap"], { x: 3168, y: 1184, rotation: 270, uid: 176021246543005, values: { sceneName: "scnIndianaUniversity", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_7: e(r["GateMap"], { x: 2991, y: 968, rotation: 270, uid: 176068565360400, values: { sceneName: "scnGreatTower", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_6: e(r["GateMap"], { x: 2760, y: 1816, rotation: 90, uid: 175860865618400, values: { sceneName: "scnColosseumMiffed", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_7: e(r["GateMap"], { x: 3168, y: 1184, rotation: 270, uid: 176021246543005, values: { sceneName: "scnIndianaUniversity", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_8: e(r["GateMap"], { x: 2991, y: 968, rotation: 270, uid: 176068565360400, values: { sceneName: "scnGreatTower", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       SimpleSecretValuablesGate: e(r["GateMap"], { x: 3080, y: 1712, rotation: 90, uid: 176310576198900, values: { sceneName: "scnSimpleSecretValuables", checkpointName: "fromWorldMap", name: "SimpleSecretValuablesGate", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_8: e(r["GateMap"], { x: 3160, y: 912, rotation: 270, uid: 176569559038300, values: { sceneName: "scnSinSwamp", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_9: e(r["GateMap"], { x: 2974, y: 1089, rotation: 270, uid: 176975623156307, values: { sceneName: "scnGrottoIndianaShop", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_10: e(r["GateMap"], { x: 2728, y: 936, rotation: 0, uid: 177152452563600, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_11: e(r["GateMap"], { x: 2872, y: 1584, rotation: 180, uid: 177281293625000, values: { sceneName: "scnIndianaLoungeExterior", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_9: e(r["GateMap"], { x: 3160, y: 912, rotation: 270, uid: 176569559038300, values: { sceneName: "scnSinSwamp", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_10: e(r["GateMap"], { x: 2974, y: 1089, rotation: 270, uid: 176975623156307, values: { sceneName: "scnGrottoIndianaShop", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_11: e(r["GateMap"], { x: 2728, y: 936, rotation: 0, uid: 177152452563600, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_12: e(r["GateMap"], { x: 2872, y: 1584, rotation: 180, uid: 177281293625000, values: { sceneName: "scnIndianaLoungeExterior", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       StrangeMarketGuardianGate: e(r["GateMap"], { x: 2747, y: 1294, rotation: 630, uid: 177427749219800, values: { sceneName: "scnStrangeMarketGuardian", checkpointName: "fromWorldMap", name: "StrangeMarketGuardianGate", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_12: e(r["GateMap"], { x: 2872, y: 936, rotation: 180, uid: 177472955265013, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_13: e(r["GateMap"], { x: 3232, y: 1040, rotation: 0, uid: 177612382363803, values: { sceneName: "scnIndianaOhioBridge", checkpointName: "fromIndiana", name: "", depth: 0, visible: true }, tint: 0xff6753 }, "RegionEntities"),
-      GateMap_14: e(r["GateMap"], { x: 3400, y: 1064, rotation: 180, uid: 177612384494403, values: { sceneName: "scnIndianaOhioBridge", checkpointName: "fromOhio", name: "", depth: 0, visible: true }, tint: 0xbab532 }, "RegionEntities"),
-      GateMap_15: e(r["GateMap"], { x: 2800, y: 1072, rotation: -90, uid: 177622511424900, values: { sceneName: "scnIndianaDarkEvilHole", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_16: e(r["GateMap"], { x: 3424, y: 1336, rotation: 270, uid: 177644036502700, values: { sceneName: "scnOhioDmv", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_17: e(r["GateMap"], { x: 3608, y: 1307, rotation: -90, uid: 178050843572718, values: { sceneName: "scnIntelligenceTowerEntrance", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_18: e(r["GateMap"], { x: 3848, y: 1536, rotation: -90, uid: 178149584065600, values: { sceneName: "scnOpenMarket", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
-      GateMap_19: e(r["GateMap"], { x: 4176, y: 1552, rotation: 90, uid: 178520085797500, values: { sceneName: "scnDungeonBones", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_13: e(r["GateMap"], { x: 2872, y: 936, rotation: 180, uid: 177472955265013, values: { sceneName: "scnIndianaDesert", checkpointName: "fromWorldMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_14: e(r["GateMap"], { x: 3232, y: 1040, rotation: 0, uid: 177612382363803, values: { sceneName: "scnIndianaOhioBridge", checkpointName: "fromIndiana", name: "", depth: 0, visible: true }, tint: 0xff6753 }, "RegionEntities"),
+      GateMap_15: e(r["GateMap"], { x: 3400, y: 1064, rotation: 180, uid: 177612384494403, values: { sceneName: "scnIndianaOhioBridge", checkpointName: "fromOhio", name: "", depth: 0, visible: true }, tint: 0xbab532 }, "RegionEntities"),
+      GateMap_16: e(r["GateMap"], { x: 2800, y: 1072, rotation: -90, uid: 177622511424900, values: { sceneName: "scnIndianaDarkEvilHole", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_17: e(r["GateMap"], { x: 3424, y: 1336, rotation: 270, uid: 177644036502700, values: { sceneName: "scnOhioDmv", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_18: e(r["GateMap"], { x: 3608, y: 1307, rotation: -90, uid: 178050843572718, values: { sceneName: "scnIntelligenceTowerEntrance", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_19: e(r["GateMap"], { x: 3848, y: 1536, rotation: -90, uid: 178149584065600, values: { sceneName: "scnOpenMarket", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_20: e(r["GateMap"], { x: 4176, y: 1552, rotation: 90, uid: 178520085797500, values: { sceneName: "scnDungeonBones", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       FallenBotMarker: e(r["Marker"], { x: 2984, y: 1256, values: { name: "FallenBotMarker", depth: 0 }, tint: 0x777777 }, "MarkerEntities"),
       RelishDispenserMarker: e(r["Marker"], { x: 3080, y: 1608, values: { name: "RelishDispenserMarker", depth: 0 }, tint: 0xff535d }, "MarkerEntities"),
       BaldMikeMarker: e(r["Marker"], { x: 2696, y: 1896, values: { name: "BaldMikeMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
@@ -17562,6 +17698,137 @@ export namespace LvlType {
     Player: ReturnType<(typeof r)["Player"]>;
     ResetPlayerMarker: ReturnType<(typeof r)["Marker"]>;
   };
+  export type OhioCasino = {
+    ShapesSquare32: Sprite;
+    ShapesSquare32_1: Sprite;
+    ShapesSquare32_2: Sprite;
+    ShapesSquare32_3: Sprite;
+    TerrainGrassCloudy: Sprite;
+    TerrainGrassCloudy_1: Sprite;
+    TerrainGrassCloudy_2: Sprite;
+    TerrainGrassCloudy_3: Sprite;
+    TerrainGrassCloudy_4: Sprite;
+    TerrainGrassCloudy_5: Sprite;
+    TerrainGrassCloudy_6: Sprite;
+    TerrainGrassCloudy_7: Sprite;
+    TerrainDistantWaves0: Sprite;
+    TerrainDistantWaves0_1: Sprite;
+    TerrainGrassLumpy0: Sprite;
+    TerrainGrassLumpy0_1: Sprite;
+    CasinoSlotsMachineStupidFlower: Sprite;
+    CasinoSlotsMachineSimple: Sprite;
+    CasinoSlotsMachineSimpleSecondaryDisplay: Sprite;
+    CasinoSlotsFiveValuableBet: Sprite;
+    ShapesExaggerate16px: Sprite;
+    ShapesExaggerate16px_1: Sprite;
+    TerrainDistantWaves0_2: Sprite;
+    TerrainDistantWaves0_3: Sprite;
+    ShapesCircleIrregular26: Sprite;
+    SlotMachineBetButton0: Sprite;
+    CasinoSlotsTenValuableBet: Sprite;
+    FoliageMedium0: Sprite;
+    FoliageMedium0_1: Sprite;
+    FoliageMedium0_2: Sprite;
+    FoliageVine2: Sprite;
+    FoliageVine2_1: Sprite;
+    FoliageVine2_2: Sprite;
+    FoliageVine2_3: Sprite;
+    FoliageVine2_4: Sprite;
+    FoliageVine2_5: Sprite;
+    FoliageFlower14: Sprite;
+    FoliageFlower14_1: Sprite;
+    FoliageFlower22: Sprite;
+    FoliageFlower22_1: Sprite;
+    ShapesCircleIrregular26_1: Sprite;
+    SlotMachineBetButton1: Sprite;
+    ShapesConfetti18x8: Sprite;
+    ShapesConfetti18x8_1: Sprite;
+    ShapesConfetti18x8_2: Sprite;
+    CasinoSlotsTitleSimplySevens: Sprite;
+    Block: ReturnType<(typeof r)["Block"]>;
+    Block_1: ReturnType<(typeof r)["Block"]>;
+    Block_2: ReturnType<(typeof r)["Block"]>;
+    Block_3: ReturnType<(typeof r)["Block"]>;
+    Block_4: ReturnType<(typeof r)["Block"]>;
+    Block_5: ReturnType<(typeof r)["Block"]>;
+    Block_6: ReturnType<(typeof r)["Block"]>;
+    Block_7: ReturnType<(typeof r)["Block"]>;
+    Block_8: ReturnType<(typeof r)["Block"]>;
+    Slope: ReturnType<(typeof r)["Slope"]>;
+    Block_9: ReturnType<(typeof r)["Block"]>;
+    Block_10: ReturnType<(typeof r)["Block"]>;
+    Block_11: ReturnType<(typeof r)["Block"]>;
+    Block_12: ReturnType<(typeof r)["Block"]>;
+    Block_13: ReturnType<(typeof r)["Block"]>;
+    TerrainGrassSparse3px1: Sprite;
+    TerrainGrassSparse3px1_1: Sprite;
+    TerrainGrassSparse3px1_2: Sprite;
+    TerrainGrassSparse3px1_3: Sprite;
+    TerrainGrassSparse3px1_4: Sprite;
+    TerrainGrassSparse3px1_5: Sprite;
+    TerrainGrassSparse3px1_6: Sprite;
+    TerrainGrassSparse3px1_7: Sprite;
+    TerrainGrassSparse3px1_8: Sprite;
+    TerrainGrassSparse3px1_9: Sprite;
+    TerrainGrassSparse3px1_10: Sprite;
+    TerrainGrassSparse3px1_11: Sprite;
+    TerrainGrassSparse3px1_12: Sprite;
+    TerrainGrassSparse3px1_13: Sprite;
+    TerrainGrassSparse3px1_14: Sprite;
+    TerrainGrassSparse3px1_15: Sprite;
+    TerrainGrassSparse3px1_16: Sprite;
+    TerrainGrassSparse3px1_17: Sprite;
+    TerrainGrassSparse3px1_18: Sprite;
+    TerrainGrassSparse3px1_19: Sprite;
+    TerrainGrassSparse3px1_20: Sprite;
+    TerrainGrassSparse3px1_21: Sprite;
+    TerrainGrassSparse3px1_22: Sprite;
+    TerrainGrassSparse3px1_23: Sprite;
+    TerrainGrassSparse3px1_24: Sprite;
+    TerrainGrassSparse3px1_25: Sprite;
+    TerrainGrassSparse3px1_26: Sprite;
+    TerrainGrassSparse3px1_27: Sprite;
+    TerrainGrassSparse3px1_28: Sprite;
+    TerrainGrassSparse3px1_29: Sprite;
+    ShapesFontsWeight3C: Sprite;
+    ShapesFontsWeight3A: Sprite;
+    ShapesFontsWeight3S: Sprite;
+    ShapesFontsWeight3I: Sprite;
+    ShapesFontsWeight3N: Sprite;
+    ShapesFontsWeight3O: Sprite;
+    TerrainGrassSparse3px1_30: Sprite;
+    TerrainGrassSparse3px1_31: Sprite;
+    TerrainGrassSparse3px1_32: Sprite;
+    TerrainGrassSparse3px1_33: Sprite;
+    TerrainGrassSparse3px1_34: Sprite;
+    TerrainGrassSparse3px1_35: Sprite;
+    TownMonumentLazarus: Sprite;
+    ShapesLineVertical16: Sprite;
+    ShapesLineVertical16_1: Sprite;
+    ShapesLineVertical16_2: Sprite;
+    LightGlassMetalSheen20px: Sprite;
+    PityBossNpc: ReturnType<(typeof r)["IguanaNpc"]>;
+    Player: ReturnType<(typeof r)["Player"]>;
+    fromWizard: ReturnType<(typeof r)["Checkpoint"]>;
+    fromTaxi: ReturnType<(typeof r)["Checkpoint"]>;
+    SlotMachineSecondaryDisplay0: ReturnType<(typeof r)["Region"]>;
+    GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
+    SlotMachineSecondaryDisplay1: ReturnType<(typeof r)["Region"]>;
+    SlotMachineDisplay0: ReturnType<(typeof r)["Marker"]>;
+    EnvironmentSparkleMarker: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    EnvironmentSparkleMarker_1: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    EnvironmentSparkleMarker_2: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    EnvironmentSparkleMarker_3: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    EnvironmentSparkleMarker_4: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    SlotMachineDisplay1: ReturnType<(typeof r)["Marker"]>;
+    EnvironmentSparkleMarker_5: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    EnvironmentSparkleMarker_6: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    EnvironmentSparkleMarker_7: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    EnvironmentSparkleMarker_8: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    EnvironmentSparkleMarker_9: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    EnvironmentSparkleMarker_10: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    PityMarker: ReturnType<(typeof r)["Marker"]>;
+  };
   export type OhioDmv = {
     ShapesSquare32: Sprite;
     ShapesSquare32_1: Sprite;
@@ -21042,6 +21309,7 @@ export namespace LvlType {
     EnemySpikeBall_4: ReturnType<(typeof r)["EnemySpikeBall"]>;
     EnemySpikeBall_5: ReturnType<(typeof r)["EnemySpikeBall"]>;
     EnemySpikeBall_6: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    GateMap_2: ReturnType<(typeof r)["GateMap"]>;
     FoliageFlower18: Sprite;
     FoliageFlower18_1: Sprite;
     FoliageFlower22: Sprite;
@@ -21078,20 +21346,20 @@ export namespace LvlType {
     fromOpenMarket: ReturnType<(typeof r)["Checkpoint"]>;
     fromIndianaBaldMike: ReturnType<(typeof r)["Checkpoint"]>;
     fromDungeonBones: ReturnType<(typeof r)["Checkpoint"]>;
-    GateMap_2: ReturnType<(typeof r)["GateMap"]>;
+    fromOhioCasino: ReturnType<(typeof r)["Checkpoint"]>;
     GateMap_3: ReturnType<(typeof r)["GateMap"]>;
     GateMap_4: ReturnType<(typeof r)["GateMap"]>;
-    StrangeMarketGate: ReturnType<(typeof r)["GateMap"]>;
     GateMap_5: ReturnType<(typeof r)["GateMap"]>;
+    StrangeMarketGate: ReturnType<(typeof r)["GateMap"]>;
     GateMap_6: ReturnType<(typeof r)["GateMap"]>;
     GateMap_7: ReturnType<(typeof r)["GateMap"]>;
-    SimpleSecretValuablesGate: ReturnType<(typeof r)["GateMap"]>;
     GateMap_8: ReturnType<(typeof r)["GateMap"]>;
+    SimpleSecretValuablesGate: ReturnType<(typeof r)["GateMap"]>;
     GateMap_9: ReturnType<(typeof r)["GateMap"]>;
     GateMap_10: ReturnType<(typeof r)["GateMap"]>;
     GateMap_11: ReturnType<(typeof r)["GateMap"]>;
-    StrangeMarketGuardianGate: ReturnType<(typeof r)["GateMap"]>;
     GateMap_12: ReturnType<(typeof r)["GateMap"]>;
+    StrangeMarketGuardianGate: ReturnType<(typeof r)["GateMap"]>;
     GateMap_13: ReturnType<(typeof r)["GateMap"]>;
     GateMap_14: ReturnType<(typeof r)["GateMap"]>;
     GateMap_15: ReturnType<(typeof r)["GateMap"]>;
@@ -21099,6 +21367,7 @@ export namespace LvlType {
     GateMap_17: ReturnType<(typeof r)["GateMap"]>;
     GateMap_18: ReturnType<(typeof r)["GateMap"]>;
     GateMap_19: ReturnType<(typeof r)["GateMap"]>;
+    GateMap_20: ReturnType<(typeof r)["GateMap"]>;
     FallenBotMarker: ReturnType<(typeof r)["Marker"]>;
     RelishDispenserMarker: ReturnType<(typeof r)["Marker"]>;
     BaldMikeMarker: ReturnType<(typeof r)["Marker"]>;

@@ -699,6 +699,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromDungeonBones", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 30,
+          "_eid": "19953026",
+          "x": 4008,
+          "y": 1432,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromOhioCasino", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -919,6 +930,19 @@
           "originX": 12,
           "originY": 10,
           "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "GateMap",
+          "id": 10,
+          "_eid": "53836309",
+          "x": 4048,
+          "y": 1368,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 0,
+          "uid": 178520557013000,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnOhioCasino", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         }
       ]
     },
