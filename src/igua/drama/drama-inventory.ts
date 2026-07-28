@@ -11,6 +11,7 @@ import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgHotDogs } from "../rpg/rpg-hot-dogs";
 import { RpgInventory } from "../rpg/rpg-inventory";
+import { RpgPocket } from "../rpg/rpg-pocket";
 import { DramaItem } from "./drama-item";
 import { DramaLib } from "./drama-lib";
 import { DramaMisc } from "./drama-misc";
@@ -142,7 +143,14 @@ function* askWhich<TItem extends RpgInventory.RemovableItem>(message: string, it
 }
 
 function* receiveItems(items: RpgInventory.Item[]) {
-    for (const item of items) {
+    const pocketReceiveResults = new Map<RpgInventory.Item, RpgPocket.ReceiveResult>();
+
+    const pocketItems = items.filter(item => item.kind === "pocket_item") as RpgInventory.Item.PocketItem[];
+    for (const item of pocketItems) {
+        pocketReceiveResults.set(item, Rpg.inventory.pocket.receive(item.id));
+    }
+
+    for (const item of items.filter(item => item.kind !== "pocket_item")) {
         Rpg.inventory.receive(item);
     }
 
@@ -150,7 +158,8 @@ function* receiveItems(items: RpgInventory.Item[]) {
 
     // TODO improve FX
     for (let i = 0; i < items.length; i++) {
-        lastObj = DramaItem.createReceivedItemFigureObjAtSpeaker(items[i]);
+        const item = items[i];
+        lastObj = DramaItem.createReceivedItemFigureObjAtSpeaker(item, pocketReceiveResults.get(item));
         yield DramaItem.sleepAfterRemoveIteration(i);
     }
 

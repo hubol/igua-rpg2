@@ -25,6 +25,7 @@ import { objFxCollectPotionNotification } from "../objects/effects/obj-fx-collec
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
+import { RpgPocket } from "../rpg/rpg-pocket";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { DramaLib } from "./drama-lib";
 
@@ -254,7 +255,7 @@ function createRemovedItemFigureObjAtPlayer(item: RpgInventory.Item) {
         .show();
 }
 
-function createReceivedItemFigureObjAtSpeaker(item: RpgInventory.Item) {
+function createReceivedItemFigureObjAtSpeaker(item: RpgInventory.Item, pocketReceiveResult?: RpgPocket.ReceiveResult) {
     return objItemFigureWithTarget(item, playerObj)
         .handles("mxnFigureTransfer:transfered", (self) => {
             if (item.kind === "equipment") {
@@ -268,8 +269,8 @@ function createReceivedItemFigureObjAtSpeaker(item: RpgInventory.Item) {
                 objFxCollectPotionNotification().at(self).show();
             }
             else if (item.kind === "pocket_item") {
-                const count = Rpg.inventory.pocket.count(item.id);
-                objFxCollectPocketItemNotification({ count, reset: false }).at(self).show();
+                pocketReceiveResult ??= { count: Rpg.inventory.pocket.count(item.id), reset: false };
+                objFxCollectPocketItemNotification(pocketReceiveResult).at(self).show();
             }
             self.destroy();
         })
