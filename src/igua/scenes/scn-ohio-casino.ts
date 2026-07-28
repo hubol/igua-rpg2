@@ -2,12 +2,14 @@ import { Texture } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../assets/textures";
 import { ZIndex } from "../core/scene/z-index";
+import { renderer } from "../current-pixi-renderer";
 import { DataSlotMachines } from "../data/data-slot-machines";
 import { DramaInventory } from "../drama/drama-inventory";
 import { show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSlotMachineBetButton } from "../mixins/mxn-slot-machine-bet-button";
 import { mxnSlotMachineSecondaryDisplay } from "../mixins/mxn-slot-machine-secondary-display";
+import { objEsotericBoneDusts } from "../objects/esoteric/obj-esoteric-bone-dusts";
 import { objSlotMachine } from "../objects/obj-slot-machine";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
@@ -91,6 +93,10 @@ export function scnOhioCasino() {
 
         lvl.SlotMachineBetButton1
             .mixin(mxnSlotMachineBetButton, slotMachineObj);
+
+        objEsotericBoneDusts()
+            .at(renderer.width, 50)
+            .show();
     }
 
     lvl.PityBossNpc
