@@ -1,9 +1,11 @@
 import { Sprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { range } from "../../lib/range";
+import { Jukebox } from "../core/igua-audio";
 import { DramaInventory } from "../drama/drama-inventory";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -12,6 +14,7 @@ import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { playerObj } from "../objects/obj-player";
 
 export function scnDungeonBones() {
+    Jukebox.play(Mzk.UndergroundRucksack);
     const lvl = Lvl.DungeonBones();
     lvl.Skeleton0.mixin(mxnDungeonSkeleton, "Skeleton of Saint (Red)");
     lvl.Skeleton1.mixin(mxnDungeonSkeleton, "Skeleton of Saint (Yellow)");
