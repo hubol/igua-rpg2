@@ -64,6 +64,7 @@ export function objAngelSkeliguana() {
     const { rank, features } = variants.level0;
     const hurtboxObjs = new Array<DisplayObject>();
     let sinceDamagedStepsCount = 999;
+    let isBreathingFire = false;
 
     const locomotiveObj = objIguanaLocomotive(NpcLooks.Skeleton0);
 
@@ -123,6 +124,8 @@ export function objAngelSkeliguana() {
             for (let i = 0; i < 3; i++) {
                 const healthBeforeThisBreath = obj.status.health;
 
+                isBreathingFire = true;
+
                 const rippleObj = objFxRipple({
                     radius: 16,
                     stroke: 0,
@@ -149,7 +152,7 @@ export function objAngelSkeliguana() {
 
                     orbObj.speed.at(
                         nlerp(dx * 1, dx * 4, f),
-                        nlerp(-1, -2, f),
+                        nlerp(-1, -3, f),
                     );
 
                     yield sleepf(3);
@@ -158,6 +161,8 @@ export function objAngelSkeliguana() {
                         break;
                     }
                 }
+
+                isBreathingFire = false;
 
                 const tookDamage = obj.status.health < healthBeforeThisBreath;
                 const speedLevel = tookDamage ? 1 : 0;
@@ -225,10 +230,12 @@ export function objAngelSkeliguana() {
         .step(() => sinceDamagedStepsCount++)
         .coro(function* (self) {
             while (true) {
-                yield () => sinceDamagedStepsCount < 30;
-                self.head.mouth.emote.sad();
+                yield () => sinceDamagedStepsCount < 30 || isBreathingFire;
+                if (!isBreathingFire) {
+                    self.head.mouth.emote.sad();
+                }
                 yield interp(self.head.mouth, "agape").to(1).over(200);
-                yield () => sinceDamagedStepsCount > 30;
+                yield () => sinceDamagedStepsCount > 30 && !isBreathingFire;
                 yield interp(self.head.mouth, "agape").to(0).over(200);
                 self.head.mouth.emote.clear();
             }
