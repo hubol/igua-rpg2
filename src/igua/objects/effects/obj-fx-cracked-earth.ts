@@ -68,5 +68,8 @@ export function objFxCrackedEarth(width: Integer) {
         centerObj,
         rightObj,
     )
-        .merge({ objFxCrackedEarth: api });
+        .merge({ objFxCrackedEarth: api })
+        .coro(function* (self) {
+            self.cullable = true;
+        });
 }
