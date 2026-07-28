@@ -1,4 +1,5 @@
 import { DisplayObject } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { blendColor } from "../../../lib/color/blend-color";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { holdf } from "../../../lib/game-engine/routines/hold";
@@ -138,6 +139,8 @@ export function objAngelSkeliguana(variantId: keyof typeof variants) {
             const mouthObj = obj.head.mouth;
 
             for (let i = 0; i < 3; i++) {
+                obj.play(Sfx.Enemy.Skeliguana.BreatheFireStart.rate(0.99, 1.01));
+
                 const healthBeforeThisBreath = obj.status.health;
 
                 isBreathingFire = true;
@@ -158,6 +161,10 @@ export function objAngelSkeliguana(variantId: keyof typeof variants) {
                 yield () => rippleObj.destroyed;
 
                 for (let f = 0; f < 1; f += 0.05) {
+                    if (Rng.float() < 0.3) {
+                        obj.play(Sfx.Enemy.Skeliguana.FireOrb.rate(1 + f + Rng.float(-0.1, 0.1)));
+                    }
+
                     const orbObj = objProjectileFlameOrb(
                         blendColor(0x8b2214, 0xf1dc1c, f),
                         blendColor(0x575757, 0x909090, Rng.float()),
