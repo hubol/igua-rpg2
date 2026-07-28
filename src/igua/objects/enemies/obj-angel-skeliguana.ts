@@ -31,6 +31,18 @@ const ranks = {
             tier0: [{ kind: "pocket_item", id: "BoneTypeA" }],
         },
     }),
+    level1: RpgEnemyRank.create({
+        status: {
+            healthMax: 66,
+        },
+        loot: {
+            tier0: [
+                { kind: "pocket_item", id: "BoneTypeA", count: 7, weight: 50 },
+                { kind: "pocket_item", id: "BoneTypeA", count: 10, weight: 30 },
+                { kind: "pocket_item", id: "BoneTypeA", count: 12, weight: 20 },
+            ],
+        },
+    }),
 };
 
 type Feature = "overheat_trail" | "fire_breath";
@@ -38,11 +50,13 @@ type Feature = "overheat_trail" | "fire_breath";
 const variants = {
     level0: {
         rank: ranks.level0,
-        features: new Set<Feature>(["fire_breath"]),
+        features: new Set<Feature>(["overheat_trail"]),
+        looks: NpcLooks.Skeleton0,
     },
     level1: {
-        rank: ranks.level0,
-        features: new Set<Feature>(["overheat_trail"]),
+        rank: ranks.level1,
+        features: new Set<Feature>(["fire_breath"]),
+        looks: NpcLooks.Skeleton1,
     },
 };
 
@@ -60,13 +74,13 @@ const atks = {
     }),
 };
 
-export function objAngelSkeliguana() {
-    const { rank, features } = variants.level0;
+export function objAngelSkeliguana(variantId: keyof typeof variants) {
+    const { rank, features, looks } = variants[variantId];
     const hurtboxObjs = new Array<DisplayObject>();
     let sinceDamagedStepsCount = 999;
     let isBreathingFire = false;
 
-    const locomotiveObj = objIguanaLocomotive(NpcLooks.Skeleton0);
+    const locomotiveObj = objIguanaLocomotive(looks);
 
     const obj = locomotiveObj
         .mixin(mxnEnemy, { rank, hurtboxes: hurtboxObjs, soulAnchorObj: locomotiveObj })
@@ -118,6 +132,8 @@ export function objAngelSkeliguana() {
         *breatheFire() {
             const dx = Math.sign(obj.mxnDetectPlayer.relativePosition.x);
             obj.auto.facing = dx;
+
+            yield () => obj.facing === dx;
 
             const mouthObj = obj.head.mouth;
 
@@ -255,16 +271,19 @@ export function objAngelSkeliguana() {
             }
 
             while (true) {
-                yield* Coro.race([
-                    moves.idle(),
-                    () => self.mxnDetectPlayer.isDetected,
-                ]);
-
                 if (!self.mxnDetectPlayer.isDetected) {
-                    continue;
+                    yield* Coro.race([
+                        moves.idle(),
+                        () => self.mxnDetectPlayer.isDetected,
+                    ]);
+
+                    if (!self.mxnDetectPlayer.isDetected) {
+                        continue;
+                    }
+
+                    yield* moves.expressSurprise();
                 }
 
-                yield* moves.expressSurprise();
                 yield* moves.breatheFire();
             }
         })

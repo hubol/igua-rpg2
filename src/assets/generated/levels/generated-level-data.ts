@@ -429,6 +429,12 @@ export const Lvl = {
       Pipe_3: e(r["Pipe"], { x: 728, y: 232, width: 96, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
       Block_13: e(r["Block"], { x: 456, y: 232, width: 272, height: 224, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       Block_14: e(r["Block"], { x: 456, y: 192, width: 32, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 568, y: 544, width: 256, height: 32, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_15: e(r["Block"], { x: 504, y: 552, width: 64, height: 24, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_16: e(r["Block"], { x: 112, y: 552, width: 128, height: 24, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_17: e(r["Block"], { x: 0, y: 296, width: 456, height: 160, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_18: e(r["Block"], { x: -64, y: 456, width: 176, height: 304, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_19: e(r["Block"], { x: 176, y: 576, width: 648, height: 184, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
       EnemySkeliguana: e(r["EnemySkeliguana"], { x: 936, y: 256, flippedX: false, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySkeliguana_1: e(r["EnemySkeliguana"], { x: 1064, y: 256, flippedX: false, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySkeliguana_2: e(r["EnemySkeliguana"], { x: 568, y: 128, flippedX: true, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
@@ -454,6 +460,7 @@ export const Lvl = {
       EnemySpikeBall_13: e(r["EnemySpikeBall"], { x: 1656, y: 608, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySpikeBall_14: e(r["EnemySpikeBall"], { x: 1720, y: 600, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySpikeBall_15: e(r["EnemySpikeBall"], { x: 1744, y: 608, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySkeliguana_5: e(r["EnemySkeliguana"], { x: 408, y: 576, flippedX: false, values: { variant: "level1", name: "", depth: 0 } }, "Entities"),
       Skeleton2: d(Tx.Town.Bones.HornedBoy1, { x: 1316, y: 529, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x1400ff }, "AboveEntitiesDecals"),
       Skeleton1: d(Tx.Town.Bones.HornedBoy1, { x: 1188, y: 529, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "AboveEntitiesDecals"),
       Skeleton0: d(Tx.Town.Bones.HornedBoy1, { x: 1052, y: 529, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff0000 }, "AboveEntitiesDecals"),
@@ -11193,6 +11200,12 @@ export namespace LvlType {
     Pipe_3: ReturnType<(typeof r)["Pipe"]>;
     Block_13: ReturnType<(typeof r)["Block"]>;
     Block_14: ReturnType<(typeof r)["Block"]>;
+    Slope_1: ReturnType<(typeof r)["Slope"]>;
+    Block_15: ReturnType<(typeof r)["Block"]>;
+    Block_16: ReturnType<(typeof r)["Block"]>;
+    Block_17: ReturnType<(typeof r)["Block"]>;
+    Block_18: ReturnType<(typeof r)["Block"]>;
+    Block_19: ReturnType<(typeof r)["Block"]>;
     EnemySkeliguana: ReturnType<(typeof r)["EnemySkeliguana"]>;
     EnemySkeliguana_1: ReturnType<(typeof r)["EnemySkeliguana"]>;
     EnemySkeliguana_2: ReturnType<(typeof r)["EnemySkeliguana"]>;
@@ -11218,6 +11231,7 @@ export namespace LvlType {
     EnemySpikeBall_13: ReturnType<(typeof r)["EnemySpikeBall"]>;
     EnemySpikeBall_14: ReturnType<(typeof r)["EnemySpikeBall"]>;
     EnemySpikeBall_15: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySkeliguana_5: ReturnType<(typeof r)["EnemySkeliguana"]>;
     Skeleton2: Sprite;
     Skeleton1: Sprite;
     Skeleton0: Sprite;

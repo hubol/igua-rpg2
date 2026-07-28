@@ -2186,7 +2186,7 @@
           "name": "variant",
           "definition": "Enum",
           "display": 1,
-          "choices": ["level0"],
+          "choices": ["level0", "level1"],
           "defaults": 0
         },
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},

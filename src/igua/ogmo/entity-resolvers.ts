@@ -97,7 +97,7 @@ export const OgmoEntityResolvers = {
     EnemyCactus: (entity) => objAngelCactus(entity).at(1, 3),
     EnemyChill: objAngelChill,
     EnemySkeliguana: (entity) => {
-        const obj = objAngelSkeliguana();
+        const obj = objAngelSkeliguana(entity.values.variant);
         applyEntityToIguanaObj(obj, entity);
         return obj;
     },
