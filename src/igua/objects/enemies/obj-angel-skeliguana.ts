@@ -5,6 +5,7 @@ import { holdf } from "../../../lib/game-engine/routines/hold";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { nlerp } from "../../../lib/math/number";
+import { Integer, Polar, Unit } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { ZIndex } from "../../core/scene/z-index";
 import { NpcLooks } from "../../data/data-npc-looks";
@@ -119,37 +120,91 @@ export function objAngelSkeliguana() {
 
             const mouthObj = obj.head.mouth;
 
-            const rippleObj = objFxRipple({
-                radius: 16,
-                stroke: 0,
-                tint: 0x8b2214,
-            }, {
-                radius: 1,
-                stroke: 4,
-                tint: 0xf1dc1c,
-            })
-                .mxnFxFactor.play(333)
-                .at(mouthObj.getWorldCenter())
-                .show();
+            for (let i = 0; i < 3; i++) {
+                const healthBeforeThisBreath = obj.status.health;
 
-            yield () => rippleObj.destroyed;
-
-            for (let f = 0; f < 1; f += 0.05) {
-                const orbObj = objProjectileFlameOrb(
-                    blendColor(0x8b2214, 0xf1dc1c, f),
-                    blendColor(0x575757, 0x909090, Rng.float()),
-                )
-                    .mixin(mxnRpgAttack, { attack: atks.fireBreath, attacker: obj.status })
+                const rippleObj = objFxRipple({
+                    radius: 16,
+                    stroke: 0,
+                    tint: 0x8b2214,
+                }, {
+                    radius: 1,
+                    stroke: 4,
+                    tint: 0xf1dc1c,
+                })
+                    .mxnFxFactor.play(333)
                     .at(mouthObj.getWorldCenter())
                     .show();
 
-                orbObj.speed.at(
-                    nlerp(dx * 1, dx * 4, f),
-                    nlerp(-1, -2, f),
+                yield () => rippleObj.destroyed;
+
+                for (let f = 0; f < 1; f += 0.05) {
+                    const orbObj = objProjectileFlameOrb(
+                        blendColor(0x8b2214, 0xf1dc1c, f),
+                        blendColor(0x575757, 0x909090, Rng.float()),
+                    )
+                        .mixin(mxnRpgAttack, { attack: atks.fireBreath, attacker: obj.status })
+                        .at(mouthObj.getWorldCenter())
+                        .show();
+
+                    orbObj.speed.at(
+                        nlerp(dx * 1, dx * 4, f),
+                        nlerp(-1, -2, f),
+                    );
+
+                    yield sleepf(3);
+
+                    if (obj.status.health < healthBeforeThisBreath) {
+                        break;
+                    }
+                }
+
+                const tookDamage = obj.status.health < healthBeforeThisBreath;
+                const speedLevel = tookDamage ? 1 : 0;
+
+                const walkDistance = tookDamage
+                    ? Rng.int(60, 100)
+                    : Math.min(Math.max(1, Math.abs(obj.mxnDetectPlayer.relativePosition.x) - 50), 120);
+
+                const staggered = yield* obj.mxnEnemy.dramaStagger(
+                    (isStaggered) =>
+                        Coro.race([
+                            moves.walkTowards(
+                                dx * (tookDamage ? -1 : 1),
+                                speedLevel,
+                                walkDistance,
+                            ),
+                            isStaggered,
+                        ]),
                 );
 
-                yield sleepf(3);
+                if (staggered) {
+                    yield* moves.walkTowards(dx * -1, speedLevel + 1, 90);
+                }
+
+                obj.isMovingLeft = false;
+                obj.isMovingRight = false;
+
+                if (tookDamage || staggered) {
+                    break;
+                }
             }
+        },
+        *walkTowards(dx: Polar, speedLevel: Integer, distance: number) {
+            obj.walkingTopSpeed = 1 + speedLevel * 1.5;
+            obj.isMovingLeft = dx < 0;
+            obj.isMovingRight = !obj.isMovingLeft;
+
+            const walkSteps = Math.ceil(Math.abs(distance) / obj.walkingTopSpeed);
+
+            yield* Coro.race([
+                Coro.chain([
+                    holdf(() => obj.speed.x === 0, 2),
+                    () => (obj.speed.y = -3, true),
+                    () => obj.speed.y >= 0 && obj.isOnGround,
+                ]),
+                holdf(() => obj.isOnGround, walkSteps),
+            ]);
         },
     };
 
