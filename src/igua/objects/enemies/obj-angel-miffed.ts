@@ -1,4 +1,4 @@
-import { Graphics, Sprite } from "pixi.js";
+import { Graphics } from "pixi.js";
 import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
@@ -8,7 +8,7 @@ import { factor, interp, interpc, interpv, interpvr } from "../../../lib/game-en
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { vrad } from "../../../lib/math/angle";
 import { approachLinear } from "../../../lib/math/number";
-import { PolarInt, RgbInt } from "../../../lib/math/number-alias-types";
+import { PolarInt } from "../../../lib/math/number-alias-types";
 import { IRectangle } from "../../../lib/math/rectangle";
 import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
@@ -29,13 +29,13 @@ import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objFxExpressSurprise } from "../effects/obj-fx-express-surprise";
-import { objFxFizzle } from "../effects/obj-fx-fizzle";
 import { objFxFormativeBurst } from "../effects/obj-fx-formative-burst";
 import { objFxHeart } from "../effects/obj-fx-heart";
 import { objFxSpiritualRelease } from "../effects/obj-fx-spiritual-release";
 import { objFxStarburst54 } from "../effects/obj-fx-startburst-54";
 import { objGroundSpawner } from "../obj-ground-spawner";
 import { objProjectileFlameColumn } from "../projectiles/obj-projectile-flame-column";
+import { objProjectileFlameOrb } from "../projectiles/obj-projectile-flame-orb";
 import { objProjectileIndicatedBox } from "../projectiles/obj-projectile-indicated-box";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { AngelThemeTemplate } from "./angel-theme-template";
@@ -767,11 +767,11 @@ function objAngelMiffedFlameSprayAttack(attacker: MxnRpgStatus, signX: PolarInt)
             for (let i = 0; i < 0.5; i += 0.05) {
                 self.parent.play(Sfx.Enemy.Miffed.SweepOrb.rate(i + 0.5));
                 const tintBlend = i * 2;
-                const orbObj = objAngelMiffedFlameSprayAttackOrb(
-                    attacker,
+                const orbObj = objProjectileFlameOrb(
                     blendColor(tintStart, tintEnd, tintBlend),
                     blendColor(fizzleTintStart, fizzleTintEnd, tintBlend),
                 )
+                    .mixin(mxnRpgAttack, { attacker: attacker.status, attack: atkSweepOrb })
                     .at(self.getWorldPosition())
                     .show();
 
@@ -780,31 +780,5 @@ function objAngelMiffedFlameSprayAttack(attacker: MxnRpgStatus, signX: PolarInt)
                 yield sleepf(4);
             }
             self.destroy();
-        });
-}
-
-const orbTxs = Tx.Enemy.Miffed.SweepOrb.split({ width: 16 });
-
-function objAngelMiffedFlameSprayAttackOrb(attacker: MxnRpgStatus, tint: RgbInt, fizzleTint: RgbInt) {
-    const sprite = objIndexedSprite(orbTxs).anchored(0.5, 0.5).at(0, 8).tinted(tint);
-    return container(sprite)
-        .pivoted(0, 8)
-        .mixin(mxnRpgAttack, { attacker: attacker.status, attack: atkSweepOrb })
-        .mixin(mxnPhysics, { physicsRadius: 8, gravity: 0.2, physicsOffset: [0, -8] })
-        .mixin(mxnDestroyAfterSteps, 120)
-        .handles("moved", (self, event) => {
-            if (event.hitGround) {
-                objFxFizzle().tinted(fizzleTint).at(self).show();
-                self.destroy();
-            }
-        })
-        .coro(function* (self) {
-            sprite.scale.x = Math.sign(self.speed.x) || 1;
-            yield interp(sprite, "textureIndex").to(sprite.textures.length).over(Rng.int(100, 200));
-            yield sleepf(5);
-            while (true) {
-                sprite.angle += 90;
-                yield sleepf(5);
-            }
         });
 }
