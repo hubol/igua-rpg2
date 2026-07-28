@@ -111,7 +111,7 @@
         {
           "x": 1188,
           "y": 529,
-          "scaleX": 1,
+          "scaleX": -1,
           "scaleY": 1,
           "rotation": 0,
           "tint": "#ffd600",
@@ -131,6 +131,42 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": "Skeleton0"}
+        },
+        {
+          "x": 1051,
+          "y": 508,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#c60000",
+          "texture": "terrain/earth/crack 8px 12px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1201,
+          "y": 516,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#c6a600",
+          "texture": "terrain/earth/crack small0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1301,
+          "y": 507,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1000c6",
+          "texture": "terrain/earth/crack 10px 10px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
