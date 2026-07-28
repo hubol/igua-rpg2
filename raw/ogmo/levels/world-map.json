@@ -321,6 +321,19 @@
           "uid": 178149584065600,
           "tint": "#ffffff",
           "values": {"sceneName": "scnOpenMarket", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 22,
+          "_eid": "53836309",
+          "x": 4176,
+          "y": 1552,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 90,
+          "uid": 178520085797500,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnDungeonBones", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -675,6 +688,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromIndianaBaldMike", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 29,
+          "_eid": "19953026",
+          "x": 4144,
+          "y": 1536,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromDungeonBones", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },

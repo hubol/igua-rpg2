@@ -461,6 +461,7 @@ export const Lvl = {
       TerrainEarthCrackSmall0: d(Tx.Terrain.Earth.CrackSmall0, { x: 1201, y: 516, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xc6a600 }, "AboveEntitiesDecals"),
       TerrainEarthCrack10px10px: d(Tx.Terrain.Earth.Crack10px10px, { x: 1301, y: 507, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x1000c6 }, "AboveEntitiesDecals"),
       Player: e(r["Player"], { x: 82, y: 105, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -56, y: -16, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromDungeonBones", name: "", depth: 0 } }, "RegionEntities"),
     };
   },
   EfficientHome: (): LvlType.EfficientHome => {
@@ -10619,6 +10620,7 @@ export const Lvl = {
       fromMountFlopLeft: e(r["Checkpoint"], { x: 3520, y: 1512, flippedX: true, values: { name: "fromMountFlopLeft", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromOpenMarket: e(r["Checkpoint"], { x: 3840, y: 1576, flippedX: true, values: { name: "fromOpenMarket", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromIndianaBaldMike: e(r["Checkpoint"], { x: 2528, y: 1936, flippedX: true, values: { name: "fromIndianaBaldMike", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromDungeonBones: e(r["Checkpoint"], { x: 4144, y: 1536, flippedX: true, values: { name: "fromDungeonBones", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       GateMap_2: e(r["GateMap"], { x: 3061, y: 1439, rotation: 2340, uid: 175755215936800, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapRight", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_3: e(r["GateMap"], { x: 2877, y: 1441, rotation: 0, uid: 175755215936900, values: { sceneName: "scnNewBalltownUnderneath", checkpointName: "fromMapLeft", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_4: e(r["GateMap"], { x: 3182, y: 1548, rotation: 270, uid: 175755215936901, values: { sceneName: "scnPlainsSuggestive", checkpointName: "fromWorldMap", name: "", depth: 0, visible: false }, tint: 0xffffff }, "RegionEntities"),
@@ -10639,6 +10641,7 @@ export const Lvl = {
       GateMap_16: e(r["GateMap"], { x: 3424, y: 1336, rotation: 270, uid: 177644036502700, values: { sceneName: "scnOhioDmv", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_17: e(r["GateMap"], { x: 3608, y: 1307, rotation: -90, uid: 178050843572718, values: { sceneName: "scnIntelligenceTowerEntrance", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       GateMap_18: e(r["GateMap"], { x: 3848, y: 1536, rotation: -90, uid: 178149584065600, values: { sceneName: "scnOpenMarket", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
+      GateMap_19: e(r["GateMap"], { x: 4176, y: 1552, rotation: 90, uid: 178520085797500, values: { sceneName: "scnDungeonBones", checkpointName: "fromWorldMap", name: "", depth: 0, visible: true }, tint: 0xffffff }, "RegionEntities"),
       FallenBotMarker: e(r["Marker"], { x: 2984, y: 1256, values: { name: "FallenBotMarker", depth: 0 }, tint: 0x777777 }, "MarkerEntities"),
       RelishDispenserMarker: e(r["Marker"], { x: 3080, y: 1608, values: { name: "RelishDispenserMarker", depth: 0 }, tint: 0xff535d }, "MarkerEntities"),
       BaldMikeMarker: e(r["Marker"], { x: 2696, y: 1896, values: { name: "BaldMikeMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
@@ -11086,6 +11089,7 @@ export namespace LvlType {
     TerrainEarthCrackSmall0: Sprite;
     TerrainEarthCrack10px10px: Sprite;
     Player: ReturnType<(typeof r)["Player"]>;
+    GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
   };
   export type EfficientHome = {
     ShapesSquare32: Sprite;
@@ -21073,6 +21077,7 @@ export namespace LvlType {
     fromMountFlopLeft: ReturnType<(typeof r)["Checkpoint"]>;
     fromOpenMarket: ReturnType<(typeof r)["Checkpoint"]>;
     fromIndianaBaldMike: ReturnType<(typeof r)["Checkpoint"]>;
+    fromDungeonBones: ReturnType<(typeof r)["Checkpoint"]>;
     GateMap_2: ReturnType<(typeof r)["GateMap"]>;
     GateMap_3: ReturnType<(typeof r)["GateMap"]>;
     GateMap_4: ReturnType<(typeof r)["GateMap"]>;
@@ -21093,6 +21098,7 @@ export namespace LvlType {
     GateMap_16: ReturnType<(typeof r)["GateMap"]>;
     GateMap_17: ReturnType<(typeof r)["GateMap"]>;
     GateMap_18: ReturnType<(typeof r)["GateMap"]>;
+    GateMap_19: ReturnType<(typeof r)["GateMap"]>;
     FallenBotMarker: ReturnType<(typeof r)["Marker"]>;
     RelishDispenserMarker: ReturnType<(typeof r)["Marker"]>;
     BaldMikeMarker: ReturnType<(typeof r)["Marker"]>;

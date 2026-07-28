@@ -36,7 +36,7 @@ function mxnDungeonSkeleton(obj: Sprite, name: string) {
                 playerObj.isDucking = false;
                 playerObj.isBeingPiloted = false;
 
-                const count = Rng.int(5);
+                const count = Rng.int(8);
 
                 if (count === 0) {
                     yield* show("Found nothing.");
