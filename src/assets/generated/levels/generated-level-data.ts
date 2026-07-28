@@ -380,20 +380,66 @@ export const Lvl = {
     return { Block: e(r["Block"], { x: 0, y: 200, width: 504, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"), Player: e(r["Player"], { x: 104, y: 200, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"), DummyMarker: e(r["Marker"], { x: 280, y: 200, values: { name: "DummyMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities") };
   },
   DungeonBones: (): LvlType.DungeonBones => {
-    applyLevel({ width: 500, height: 280, backgroundTint: 0x408000, terrainTint: 0x000000, regionId: null });
+    applyLevel({ width: 1896, height: 760, backgroundTint: 0x408000, terrainTint: 0x000000, regionId: null });
     return {
-      Block: e(r["Block"], { x: 0, y: 216, width: 512, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_1: e(r["Block"], { x: 432, y: 200, width: 16, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_2: e(r["Block"], { x: -40, y: 72, width: 40, height: 160, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_3: e(r["Block"], { x: 504, y: 80, width: 40, height: 160, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_4: e(r["Block"], { x: -152, y: 192, width: 264, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_5: e(r["Block"], { x: -152, y: 88, width: 264, height: 104, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_6: e(r["Block"], { x: 376, y: 120, width: 264, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      Block_7: e(r["Block"], { x: 200, y: 88, width: 264, height: 72, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
-      EnemySkeliguana: e(r["EnemySkeliguana"], { x: 248, y: 216, flippedX: false, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
-      EnemySkeliguana_1: e(r["EnemySkeliguana"], { x: 376, y: 216, flippedX: false, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
-      EnemySkeliguana_2: e(r["EnemySkeliguana"], { x: 336, y: 88, flippedX: true, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
-      Player: e(r["Player"], { x: 80, y: 88, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      FurnitureChainMetal: d(Tx.Furniture.ChainMetal, { x: 561, y: 32, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_1: d(Tx.Furniture.ChainMetal, { x: 561, y: -23, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_2: d(Tx.Furniture.ChainMetal, { x: 945, y: 128, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_3: d(Tx.Furniture.ChainMetal, { x: 943, y: 73, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_4: d(Tx.Furniture.ChainMetal, { x: 944, y: 18, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_5: d(Tx.Furniture.ChainMetal, { x: 944, y: -37, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_6: d(Tx.Furniture.ChainMetal, { x: 1073, y: 127, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_7: d(Tx.Furniture.ChainMetal, { x: 1072, y: 72, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_8: d(Tx.Furniture.ChainMetal, { x: 1072, y: 17, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_9: d(Tx.Furniture.ChainMetal, { x: 1072, y: -38, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_10: d(Tx.Furniture.ChainMetal, { x: 1233, y: 127, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_11: d(Tx.Furniture.ChainMetal, { x: 1232, y: 72, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_12: d(Tx.Furniture.ChainMetal, { x: 1232, y: 17, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_13: d(Tx.Furniture.ChainMetal, { x: 1232, y: -38, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_14: d(Tx.Furniture.ChainMetal, { x: 1368, y: 127, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_15: d(Tx.Furniture.ChainMetal, { x: 1368, y: 72, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_16: d(Tx.Furniture.ChainMetal, { x: 1368, y: 17, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FurnitureChainMetal_17: d(Tx.Furniture.ChainMetal, { x: 1368, y: -38, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      Block: e(r["Block"], { x: 232, y: 128, width: 600, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 656, y: 88, width: 56, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 824, y: 256, width: 712, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 824, y: 232, width: 56, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 1480, y: 232, width: 56, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: -192, y: 128, width: 600, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: -96, y: 96, width: 512, height: 32, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 1744, y: 136, width: 88, height: 632, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_7: e(r["Block"], { x: 1120, y: 232, width: 56, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_8: e(r["Block"], { x: 1480, y: -56, width: 352, height: 192, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_9: e(r["Block"], { x: 824, y: 336, width: 712, height: 120, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_10: e(r["Block"], { x: 824, y: 544, width: 712, height: 240, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      Block_11: e(r["Block"], { x: 1536, y: 608, width: 208, height: 160, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"),
+      EnemySkeliguana: e(r["EnemySkeliguana"], { x: 936, y: 256, flippedX: false, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySkeliguana_1: e(r["EnemySkeliguana"], { x: 1064, y: 256, flippedX: false, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySkeliguana_2: e(r["EnemySkeliguana"], { x: 568, y: 128, flippedX: true, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySkeliguana_3: e(r["EnemySkeliguana"], { x: 1224, y: 256, flippedX: false, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySkeliguana_4: e(r["EnemySkeliguana"], { x: 1360, y: 256, flippedX: false, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall: e(r["EnemySpikeBall"], { x: 728, y: 124, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_1: e(r["EnemySpikeBall"], { x: 560, y: 64, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_2: e(r["EnemySpikeBall"], { x: 944, y: 160, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_3: e(r["EnemySpikeBall"], { x: 1072, y: 160, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_4: e(r["EnemySpikeBall"], { x: 1232, y: 160, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_5: e(r["EnemySpikeBall"], { x: 1368, y: 160, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemyBallon: e(r["EnemyBallon"], { x: 1640, y: 256, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemyBallon_1: e(r["EnemyBallon"], { x: 1704, y: 360, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemyBallon_2: e(r["EnemyBallon"], { x: 1640, y: 448, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemyBallon_3: e(r["EnemyBallon"], { x: 1576, y: 536, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_6: e(r["EnemySpikeBall"], { x: 1544, y: 600, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_7: e(r["EnemySpikeBall"], { x: 1584, y: 600, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_8: e(r["EnemySpikeBall"], { x: 1608, y: 608, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_9: e(r["EnemySpikeBall"], { x: 1568, y: 608, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_10: e(r["EnemySpikeBall"], { x: 1632, y: 600, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_11: e(r["EnemySpikeBall"], { x: 1672, y: 600, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_12: e(r["EnemySpikeBall"], { x: 1696, y: 608, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_13: e(r["EnemySpikeBall"], { x: 1656, y: 608, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_14: e(r["EnemySpikeBall"], { x: 1720, y: 600, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySpikeBall_15: e(r["EnemySpikeBall"], { x: 1744, y: 608, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      Player: e(r["Player"], { x: 82, y: 105, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      PlayerDev: e(r["PlayerDev"], { x: 1512, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     };
   },
   EfficientHome: (): LvlType.EfficientHome => {
@@ -10940,18 +10986,64 @@ export namespace LvlType {
     DummyMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type DungeonBones = {
+    FurnitureChainMetal: Sprite;
+    FurnitureChainMetal_1: Sprite;
+    FurnitureChainMetal_2: Sprite;
+    FurnitureChainMetal_3: Sprite;
+    FurnitureChainMetal_4: Sprite;
+    FurnitureChainMetal_5: Sprite;
+    FurnitureChainMetal_6: Sprite;
+    FurnitureChainMetal_7: Sprite;
+    FurnitureChainMetal_8: Sprite;
+    FurnitureChainMetal_9: Sprite;
+    FurnitureChainMetal_10: Sprite;
+    FurnitureChainMetal_11: Sprite;
+    FurnitureChainMetal_12: Sprite;
+    FurnitureChainMetal_13: Sprite;
+    FurnitureChainMetal_14: Sprite;
+    FurnitureChainMetal_15: Sprite;
+    FurnitureChainMetal_16: Sprite;
+    FurnitureChainMetal_17: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Block_1: ReturnType<(typeof r)["Block"]>;
     Block_2: ReturnType<(typeof r)["Block"]>;
     Block_3: ReturnType<(typeof r)["Block"]>;
     Block_4: ReturnType<(typeof r)["Block"]>;
     Block_5: ReturnType<(typeof r)["Block"]>;
+    Slope: ReturnType<(typeof r)["Slope"]>;
     Block_6: ReturnType<(typeof r)["Block"]>;
     Block_7: ReturnType<(typeof r)["Block"]>;
+    Block_8: ReturnType<(typeof r)["Block"]>;
+    Block_9: ReturnType<(typeof r)["Block"]>;
+    Block_10: ReturnType<(typeof r)["Block"]>;
+    Block_11: ReturnType<(typeof r)["Block"]>;
     EnemySkeliguana: ReturnType<(typeof r)["EnemySkeliguana"]>;
     EnemySkeliguana_1: ReturnType<(typeof r)["EnemySkeliguana"]>;
     EnemySkeliguana_2: ReturnType<(typeof r)["EnemySkeliguana"]>;
+    EnemySkeliguana_3: ReturnType<(typeof r)["EnemySkeliguana"]>;
+    EnemySkeliguana_4: ReturnType<(typeof r)["EnemySkeliguana"]>;
+    EnemySpikeBall: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_1: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_2: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_3: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_4: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_5: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemyBallon: ReturnType<(typeof r)["EnemyBallon"]>;
+    EnemyBallon_1: ReturnType<(typeof r)["EnemyBallon"]>;
+    EnemyBallon_2: ReturnType<(typeof r)["EnemyBallon"]>;
+    EnemyBallon_3: ReturnType<(typeof r)["EnemyBallon"]>;
+    EnemySpikeBall_6: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_7: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_8: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_9: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_10: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_11: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_12: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_13: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_14: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    EnemySpikeBall_15: ReturnType<(typeof r)["EnemySpikeBall"]>;
     Player: ReturnType<(typeof r)["Player"]>;
+    PlayerDev: ReturnType<(typeof r)["PlayerDev"]>;
   };
   export type EfficientHome = {
     ShapesSquare32: Sprite;

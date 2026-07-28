@@ -14,7 +14,7 @@ import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objIguanaLocomotive } from "../obj-iguana-locomotive";
-import { objProjectileCrackedEarth } from "../projectiles/obj-projectile-cracked-earth";
+import { objProjectileCrackedEarthExpanding } from "../projectiles/obj-projectile-cracked-earth-expanding";
 
 const ranks = {
     level0: RpgEnemyRank.create({
@@ -52,8 +52,10 @@ export function objAngelSkeliguana() {
     const hurtboxObjs = new Array<DisplayObject>();
     let sinceDamagedStepsCount = 999;
 
-    const obj = objIguanaLocomotive(NpcLooks.Skeleton0)
-        .mixin(mxnEnemy, { rank, hurtboxes: hurtboxObjs })
+    const locomotiveObj = objIguanaLocomotive(NpcLooks.Skeleton0);
+
+    const obj = locomotiveObj
+        .mixin(mxnEnemy, { rank, hurtboxes: hurtboxObjs, soulAnchorObj: locomotiveObj })
         .mixin(mxnDetectPlayer)
         .mixin(mxnEnemyDeathBurst, { map: [0xffffff, 0xE8E3E3, 0xbdbdbd] });
 
@@ -126,12 +128,39 @@ export function objAngelSkeliguana() {
             while (true) {
                 yield () => self.isOnGround;
 
-                const trailObj = objProjectileCrackedEarth(100)
+                const trailObj = objProjectileCrackedEarthExpanding({
+                    attacker: self.status,
+                    attack: atks.overheatTrail,
+                    maxWidth: 100,
+                    expandDirection: "both",
+                    expandSpeed: 10,
+                })
                     .at(self)
-                    .add(-50, -3)
-                    .mixin(mxnDestroyAfterSteps, 90)
-                    .mixin(mxnRpgAttack, { attacker: self.status, attack: atks.overheatTrail })
+                    .add(0, -3)
+                    .zIndexed(ZIndex.TerrainDecals)
                     .show();
+
+                trailObj.visible = false;
+
+                yield* Coro.race([
+                    sleep(100),
+                    () => trailObj.findIs(mxnRpgAttack).length > 0,
+                ]);
+
+                const attackObj = trailObj.findIs(mxnRpgAttack)[0];
+
+                if (!attackObj) {
+                    continue;
+                }
+
+                attackObj.isAttackActive = false;
+
+                yield sleep(200);
+
+                trailObj.visible = true;
+                attackObj.isAttackActive = true;
+                trailObj
+                    .mixin(mxnDestroyAfterSteps, 90);
 
                 yield sleep(500);
 
