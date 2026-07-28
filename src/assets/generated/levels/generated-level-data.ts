@@ -454,6 +454,9 @@ export const Lvl = {
       EnemySpikeBall_13: e(r["EnemySpikeBall"], { x: 1656, y: 608, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySpikeBall_14: e(r["EnemySpikeBall"], { x: 1720, y: 600, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySpikeBall_15: e(r["EnemySpikeBall"], { x: 1744, y: 608, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      Skeleton2: d(Tx.Town.Bones.HornedBoy1, { x: 1316, y: 529, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x1400ff }, "AboveEntitiesDecals"),
+      Skeleton1: d(Tx.Town.Bones.HornedBoy1, { x: 1188, y: 529, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "AboveEntitiesDecals"),
+      Skeleton0: d(Tx.Town.Bones.HornedBoy1, { x: 1052, y: 529, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff0000 }, "AboveEntitiesDecals"),
       Player: e(r["Player"], { x: 82, y: 105, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
     };
   },
@@ -11073,6 +11076,9 @@ export namespace LvlType {
     EnemySpikeBall_13: ReturnType<(typeof r)["EnemySpikeBall"]>;
     EnemySpikeBall_14: ReturnType<(typeof r)["EnemySpikeBall"]>;
     EnemySpikeBall_15: ReturnType<(typeof r)["EnemySpikeBall"]>;
+    Skeleton2: Sprite;
+    Skeleton1: Sprite;
+    Skeleton0: Sprite;
     Player: ReturnType<(typeof r)["Player"]>;
   };
   export type EfficientHome = {

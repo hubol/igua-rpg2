@@ -95,7 +95,44 @@
       "gridCellHeight": 8,
       "gridCellsX": 237,
       "gridCellsY": 95,
-      "decals": [],
+      "decals": [
+        {
+          "x": 1316,
+          "y": 529,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1400ff",
+          "texture": "town/bones/horned boy 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "Skeleton2"}
+        },
+        {
+          "x": 1188,
+          "y": 529,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffd600",
+          "texture": "town/bones/horned boy 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "Skeleton1"}
+        },
+        {
+          "x": 1052,
+          "y": 529,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ff0000",
+          "texture": "town/bones/horned boy 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "Skeleton0"}
+        }
+      ],
       "folder": "../textures"
     },
     {
