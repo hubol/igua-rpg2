@@ -27,10 +27,14 @@ const ranks = {
     }),
 };
 
-type Feature = "overheat_trail";
+type Feature = "overheat_trail" | "fire_breath";
 
 const variants = {
     level0: {
+        rank: ranks.level0,
+        features: new Set<Feature>(["fire_breath"]),
+    },
+    level1: {
         rank: ranks.level0,
         features: new Set<Feature>(["overheat_trail"]),
     },
@@ -116,8 +120,37 @@ export function objAngelSkeliguana() {
             }
         })
         .coro(function* (self) {
+            if (features.has("fire_breath")) {
+                return;
+            }
+
             while (true) {
                 yield* moves.idle();
+            }
+        })
+        .coro(function* (self) {
+            if (!features.has("fire_breath")) {
+                return;
+            }
+
+            while (true) {
+                yield* Coro.race([
+                    moves.idle(),
+                    () => self.mxnDetectPlayer.isDetected,
+                ]);
+
+                if (!self.mxnDetectPlayer.isDetected) {
+                    continue;
+                }
+
+                self.auto.facingMode = "check_moving";
+                self.isMovingLeft = false;
+                self.isMovingRight = false;
+                self.auto.facing = Math.sign(self.mxnDetectPlayer.relativePosition.x);
+                self.speed.y = -1.6;
+                yield () => self.speed.y >= 0 && self.isOnGround;
+                self.auto.facingMode = "check_speed_x";
+                yield () => !self.mxnDetectPlayer.isDetected;
             }
         })
         .coro(function* (self) {
