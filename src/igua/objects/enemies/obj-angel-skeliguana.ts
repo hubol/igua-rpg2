@@ -1,8 +1,10 @@
 import { DisplayObject } from "pixi.js";
+import { blendColor } from "../../../lib/color/blend-color";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { holdf } from "../../../lib/game-engine/routines/hold";
 import { interp } from "../../../lib/game-engine/routines/interp";
-import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
+import { nlerp } from "../../../lib/math/number";
 import { Rng } from "../../../lib/math/rng";
 import { ZIndex } from "../../core/scene/z-index";
 import { NpcLooks } from "../../data/data-npc-looks";
@@ -13,8 +15,11 @@ import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objFxExpressSurprise } from "../effects/obj-fx-express-surprise";
+import { objFxRipple } from "../effects/obj-fx-ripple";
 import { objIguanaLocomotive } from "../obj-iguana-locomotive";
 import { objProjectileCrackedEarthExpanding } from "../projectiles/obj-projectile-cracked-earth-expanding";
+import { objProjectileFlameOrb } from "../projectiles/obj-projectile-flame-orb";
 
 const ranks = {
     level0: RpgEnemyRank.create({
@@ -48,6 +53,9 @@ const atks = {
                 damage: 30,
             },
         },
+    }),
+    fireBreath: RpgAttack.create({
+        physical: 50,
     }),
 };
 
@@ -94,7 +102,58 @@ export function objAngelSkeliguana() {
                 yield sleep(Rng.int(333, 666));
             }
         },
+        *expressSurprise() {
+            objFxExpressSurprise()
+                .at(obj.head.getWorldCenter())
+                .show();
+
+            obj.isMovingLeft = false;
+            obj.isMovingRight = false;
+            obj.auto.facing = Math.sign(obj.mxnDetectPlayer.relativePosition.x);
+            obj.speed.y = -1.6;
+            yield () => obj.speed.y >= 0 && obj.isOnGround;
+        },
+        *breatheFire() {
+            const dx = Math.sign(obj.mxnDetectPlayer.relativePosition.x);
+            obj.auto.facing = dx;
+
+            const mouthObj = obj.head.mouth;
+
+            const rippleObj = objFxRipple({
+                radius: 16,
+                stroke: 0,
+                tint: 0x8b2214,
+            }, {
+                radius: 1,
+                stroke: 4,
+                tint: 0xf1dc1c,
+            })
+                .mxnFxFactor.play(333)
+                .at(mouthObj.getWorldCenter())
+                .show();
+
+            yield () => rippleObj.destroyed;
+
+            for (let f = 0; f < 1; f += 0.05) {
+                const orbObj = objProjectileFlameOrb(
+                    blendColor(0x8b2214, 0xf1dc1c, f),
+                    blendColor(0x575757, 0x909090, Rng.float()),
+                )
+                    .mixin(mxnRpgAttack, { attack: atks.fireBreath, attacker: obj.status })
+                    .at(mouthObj.getWorldCenter())
+                    .show();
+
+                orbObj.speed.at(
+                    nlerp(dx * 1, dx * 4, f),
+                    nlerp(-1, -2, f),
+                );
+
+                yield sleepf(3);
+            }
+        },
     };
+
+    obj.auto.facingMode = "check_moving";
 
     return obj
         .handles("damaged", (_, event) => {
@@ -143,14 +202,8 @@ export function objAngelSkeliguana() {
                     continue;
                 }
 
-                self.auto.facingMode = "check_moving";
-                self.isMovingLeft = false;
-                self.isMovingRight = false;
-                self.auto.facing = Math.sign(self.mxnDetectPlayer.relativePosition.x);
-                self.speed.y = -1.6;
-                yield () => self.speed.y >= 0 && self.isOnGround;
-                self.auto.facingMode = "check_speed_x";
-                yield () => !self.mxnDetectPlayer.isDetected;
+                yield* moves.expressSurprise();
+                yield* moves.breatheFire();
             }
         })
         .coro(function* (self) {
