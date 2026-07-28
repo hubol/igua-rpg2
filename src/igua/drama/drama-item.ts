@@ -23,6 +23,7 @@ import { objFxCollectKeyItemNotification } from "../objects/effects/obj-fx-colle
 import { objFxCollectPocketItemNotification } from "../objects/effects/obj-fx-collect-pocket-item-notification";
 import { objFxCollectPotionNotification } from "../objects/effects/obj-fx-collect-potion-notification";
 import { playerObj } from "../objects/obj-player";
+import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { DramaLib } from "./drama-lib";
@@ -267,8 +268,8 @@ function createReceivedItemFigureObjAtSpeaker(item: RpgInventory.Item) {
                 objFxCollectPotionNotification().at(self).show();
             }
             else if (item.kind === "pocket_item") {
-                // TODO implementation is not accurate
-                objFxCollectPocketItemNotification({ count: 999, reset: false }).at(self).show();
+                const count = Rpg.inventory.pocket.count(item.id);
+                objFxCollectPocketItemNotification({ count, reset: false }).at(self).show();
             }
             self.destroy();
         })
