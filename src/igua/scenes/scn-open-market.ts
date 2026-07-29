@@ -1,6 +1,8 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
+import { Jukebox } from "../core/igua-audio";
 import { DataShop } from "../data/data-shop";
 import { DramaEquipment } from "../drama/drama-equipment";
 import { DramaGifts } from "../drama/drama-gifts";
@@ -13,6 +15,7 @@ import { ObjIguanaNpc } from "../objects/obj-iguana-npc";
 import { Rpg } from "../rpg/rpg";
 
 export function scnOpenMarket() {
+    Jukebox.play(Mzk.PreciousInstructions);
     const lvl = Lvl.OpenMarket();
 
     lvl.FoodNpc
