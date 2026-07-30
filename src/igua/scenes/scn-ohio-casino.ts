@@ -1,15 +1,21 @@
 import { Texture } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
+import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { Rng } from "../../lib/math/rng";
 import { ZIndex } from "../core/scene/z-index";
 import { renderer } from "../current-pixi-renderer";
 import { DataSlotMachines } from "../data/data-slot-machines";
 import { DramaInventory } from "../drama/drama-inventory";
-import { show } from "../drama/show";
+import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSlotMachineBetButton } from "../mixins/mxn-slot-machine-bet-button";
 import { mxnSlotMachineSecondaryDisplay } from "../mixins/mxn-slot-machine-secondary-display";
+import { mxnSparkling } from "../mixins/mxn-sparkling";
+import { objCharacterGuardianCat } from "../objects/characters/obj-character-guardian-cat";
 import { objEsotericBoneDusts } from "../objects/esoteric/obj-esoteric-bone-dusts";
+import { playerObj } from "../objects/obj-player";
 import { objSlotMachine } from "../objects/obj-slot-machine";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
@@ -93,21 +99,47 @@ export function scnOhioCasino() {
 
         lvl.SlotMachineBetButton1
             .mixin(mxnSlotMachineBetButton, slotMachineObj);
-
-        objEsotericBoneDusts()
-            .at(renderer.width, 50)
-            .show();
     }
 
-    lvl.PityBossNpc
+    const boneDustsObj = objEsotericBoneDusts()
+        .mixin(mxnSparkling)
+        .at(renderer.width, 50)
+        .show();
+
+    objCharacterGuardianCat()
         .mixin(mxnCutscene, function* () {
-            yield* show("Bones for bone dusts.");
+            yield* show("I'll take your bones and turn them into dust.");
+
+            const count = Rpg.inventory.pocket.count("BoneTypeA");
+
+            if (count === 0) {
+                yield* show("But you don't have any right now.");
+                return;
+            }
+
+            if (!(yield* ask("Do you want that? Dust?"))) {
+                yield* show("Ok.");
+                return;
+            }
+
             const removedBonesCount = yield* DramaInventory.removeAll({ kind: "pocket_item", id: "BoneTypeA" });
             const dustsGained = removedBonesCount * 3;
-            Rpg.wallet.earn("bone_dusts", dustsGained);
-            yield* show(
-                `Gained ${RpgEconomy.Offer.toString(dustsGained, currencyId)}.`,
-                `Now you have ${RpgEconomy.Offer.toString(Rpg.wallet.count(currencyId), currencyId)}.`,
-            );
-        });
+
+            const sfxs = Object.values(Sfx.Cutscene.BoneDust);
+
+            for (let i = 0; i < dustsGained; i++) {
+                Rng.item(sfxs).rate(0.5, 1).play();
+                Rpg.wallet.earn("bone_dusts", 1);
+                yield sleepf(Math.max(3, 15 - i * 0.5));
+            }
+
+            yield* show(`Gained ${RpgEconomy.Offer.toString(dustsGained, currencyId)}.`);
+
+            boneDustsObj.sparklesTint = 0xffff00;
+            boneDustsObj.sparklesPerFrame = 0.4;
+            yield* show("Look up there to see how many you have in total.");
+            boneDustsObj.sparklesPerFrame = 0;
+        })
+        .at(lvl.GuardianCatMarker)
+        .show();
 }

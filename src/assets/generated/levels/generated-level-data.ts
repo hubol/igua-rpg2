@@ -7179,7 +7179,6 @@ export const Lvl = {
       ShapesLineVertical16_1: d(Tx.Shapes.LineVertical16, { x: 1228, y: 246, scaleX: 3, scaleY: 3.5, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       ShapesLineVertical16_2: d(Tx.Shapes.LineVertical16, { x: 1196, y: 219, scaleX: 3, scaleY: 4, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
       LightGlassMetalSheen20px: d(Tx.Light.GlassMetalSheen20px, { x: 1213, y: 235, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      PityBossNpc: e(r["IguanaNpc"], { x: 752, y: 272, flippedX: true, values: { personaName: "PityBoss", name: "PityBossNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 160, y: 288, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromWizard: e(r["Checkpoint"], { x: 688, y: 48, flippedX: false, values: { name: "fromWizard", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromTaxi: e(r["Checkpoint"], { x: 688, y: 48, flippedX: false, values: { name: "fromTaxi", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
@@ -7200,6 +7199,7 @@ export const Lvl = {
       EnvironmentSparkleMarker_9: e(r["EnvironmentSparkleMarker"], { x: 1047, y: 73, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_10: e(r["EnvironmentSparkleMarker"], { x: 1083, y: 83, values: { name: "", depth: 0 } }, "MarkerEntities"),
       PityMarker: e(r["Marker"], { x: 752, y: 288, values: { name: "PityMarker", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+      GuardianCatMarker: e(r["Marker"], { x: 752, y: 272, values: { name: "GuardianCatMarker", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
     };
   },
   OhioDmv: (): LvlType.OhioDmv => {
@@ -17821,7 +17821,6 @@ export namespace LvlType {
     ShapesLineVertical16_1: Sprite;
     ShapesLineVertical16_2: Sprite;
     LightGlassMetalSheen20px: Sprite;
-    PityBossNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     fromWizard: ReturnType<(typeof r)["Checkpoint"]>;
     fromTaxi: ReturnType<(typeof r)["Checkpoint"]>;
@@ -17842,6 +17841,7 @@ export namespace LvlType {
     EnvironmentSparkleMarker_9: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
     EnvironmentSparkleMarker_10: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
     PityMarker: ReturnType<(typeof r)["Marker"]>;
+    GuardianCatMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type OhioDmv = {
     ShapesSquare32: Sprite;
