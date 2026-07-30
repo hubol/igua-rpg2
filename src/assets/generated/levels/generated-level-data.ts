@@ -7071,6 +7071,61 @@ export const Lvl = {
   OhioCasino: (): LvlType.OhioCasino => {
     applyLevel({ width: 1344, height: 280, backgroundTint: 0x604194, terrainTint: 0xffd600, regionId: null });
     return {
+      FarSlotMachineGroup: dg(-164, 81, "FarSlotMachineGroup", "ParallaxDecals"),
+      FurnitureGiantCurtainDistant0: d(Tx.Furniture.GiantCurtainDistant0, { x: 1146, y: 81, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0xffffff }, "ParallaxDecals"),
+      FurnitureGiantCurtainDistant0_1: d(Tx.Furniture.GiantCurtainDistant0, { x: 557, y: 97, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0xffffff }, "ParallaxDecals"),
+      FurnitureGiantCurtainDistant0_2: d(Tx.Furniture.GiantCurtainDistant0, { x: 36, y: 95, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0xffffff }, "ParallaxDecals"),
+      TerrainDistantSteps486: d(Tx.Terrain.Distant.Steps486, { x: -17, y: 199, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x9887b7 }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0: d(Tx.Terrain.Distant.SlotMachine0, { x: -164, y: 132, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_1: d(Tx.Terrain.Distant.SlotMachine0, { x: -108, y: 132, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_2: d(Tx.Terrain.Distant.SlotMachine0, { x: -52, y: 132, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_3: d(Tx.Terrain.Distant.SlotMachine0, { x: 54, y: 147, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_4: d(Tx.Terrain.Distant.SlotMachine0, { x: 110, y: 147, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_5: d(Tx.Terrain.Distant.SlotMachine0, { x: 166, y: 147, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSteps486_1: d(Tx.Terrain.Distant.Steps486, { x: 463, y: 192, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x9887b7 }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_6: d(Tx.Terrain.Distant.SlotMachine0, { x: 500, y: 127, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_7: d(Tx.Terrain.Distant.SlotMachine0, { x: 556, y: 127, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_8: d(Tx.Terrain.Distant.SlotMachine0, { x: 612, y: 127, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_9: d(Tx.Terrain.Distant.SlotMachine0, { x: 302, y: 139, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_10: d(Tx.Terrain.Distant.SlotMachine0, { x: 358, y: 139, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_11: d(Tx.Terrain.Distant.SlotMachine0, { x: 414, y: 139, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSteps486_2: d(Tx.Terrain.Distant.Steps486, { x: 943, y: 192, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x9887b7 }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_12: d(Tx.Terrain.Distant.SlotMachine0, { x: 980, y: 127, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_13: d(Tx.Terrain.Distant.SlotMachine0, { x: 1036, y: 127, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_14: d(Tx.Terrain.Distant.SlotMachine0, { x: 1092, y: 127, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_15: d(Tx.Terrain.Distant.SlotMachine0, { x: 782, y: 139, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_16: d(Tx.Terrain.Distant.SlotMachine0, { x: 838, y: 139, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_17: d(Tx.Terrain.Distant.SlotMachine0, { x: 894, y: 139, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      FurnitureColumn: d(Tx.Furniture.Column, { x: 344, y: 106, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0xffffff }, "ParallaxDecals"),
+      FurnitureColumn_1: d(Tx.Furniture.Column, { x: 799, y: 106, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0xffffff }, "ParallaxDecals"),
+      FoliageVine2: d(Tx.Foliage.Vine2, { x: 334, y: 97, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x6f569c }, "ParallaxDecals"),
+      FoliageLeaf16: d(Tx.Foliage.Leaf16, { x: 327, y: 88, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      FoliageLeaf16_1: d(Tx.Foliage.Leaf16, { x: 343, y: 102, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0x77629c }, "ParallaxDecals"),
+      TerrainEarthCrack8px12px: d(Tx.Terrain.Earth.Crack8px12px, { x: 789, y: 107, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "FarSlotMachineGroup", tint: 0xc6b4d5 }, "ParallaxDecals"),
+      TerrainDistantSteps486_3: d(Tx.Terrain.Distant.Steps486, { x: 1064, y: 232, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSteps486_4: d(Tx.Terrain.Distant.Steps486, { x: 584, y: 232, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSteps486_5: d(Tx.Terrain.Distant.Steps486, { x: 104, y: 256, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x77629c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_18: d(Tx.Terrain.Distant.SlotMachine0, { x: 1015, y: 179, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_19: d(Tx.Terrain.Distant.SlotMachine0, { x: 959, y: 179, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_20: d(Tx.Terrain.Distant.SlotMachine0, { x: 903, y: 179, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_21: d(Tx.Terrain.Distant.SlotMachine0, { x: 1213, y: 167, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_22: d(Tx.Terrain.Distant.SlotMachine0, { x: 1157, y: 167, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_23: d(Tx.Terrain.Distant.SlotMachine0, { x: 1101, y: 167, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_24: d(Tx.Terrain.Distant.SlotMachine0, { x: 535, y: 179, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_25: d(Tx.Terrain.Distant.SlotMachine0, { x: 479, y: 179, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_26: d(Tx.Terrain.Distant.SlotMachine0, { x: 423, y: 179, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_27: d(Tx.Terrain.Distant.SlotMachine0, { x: 733, y: 167, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      FurnitureGiantCurtainDistant0_3: d(Tx.Furniture.GiantCurtainDistant0, { x: 653, y: 97, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_28: d(Tx.Terrain.Distant.SlotMachine0, { x: 677, y: 167, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_29: d(Tx.Terrain.Distant.SlotMachine0, { x: 621, y: 167, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_30: d(Tx.Terrain.Distant.SlotMachine0, { x: 55, y: 203, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_31: d(Tx.Terrain.Distant.SlotMachine0, { x: -1, y: 203, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_32: d(Tx.Terrain.Distant.SlotMachine0, { x: -57, y: 203, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_33: d(Tx.Terrain.Distant.SlotMachine0, { x: 253, y: 191, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_34: d(Tx.Terrain.Distant.SlotMachine0, { x: 197, y: 191, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      TerrainDistantSlotMachine0_35: d(Tx.Terrain.Distant.SlotMachine0, { x: 141, y: 191, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
+      FurnitureGiantCurtainDistant0_4: d(Tx.Furniture.GiantCurtainDistant0, { x: 274, y: 112, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      FurnitureGiantCurtainDistant0_5: d(Tx.Furniture.GiantCurtainDistant0, { x: 844, y: 115, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       CasinoSlotsMachineStupidFlower: d(Tx.Casino.Slots.MachineStupidFlower, { x: 984, y: 120, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       ShapesCircleIrregular26: d(Tx.Shapes.CircleIrregular26, { x: 987, y: 192, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x167055 }, "BackgroundDecals"),
       CasinoSlotsMachineSimple: d(Tx.Casino.Slots.MachineSimple, { x: 544, y: 160, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
@@ -7084,12 +7139,12 @@ export const Lvl = {
       FoliageMedium0: d(Tx.Foliage.Medium0, { x: 1083, y: 219, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
       FoliageMedium0_1: d(Tx.Foliage.Medium0, { x: 880, y: 221, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
       FoliageMedium0_2: d(Tx.Foliage.Medium0, { x: 899, y: 229, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageVine2: d(Tx.Foliage.Vine2, { x: 1084, y: 75, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageVine2_1: d(Tx.Foliage.Vine2, { x: 1079, y: 113, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageVine2_2: d(Tx.Foliage.Vine2, { x: 1083, y: 152, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageVine2_3: d(Tx.Foliage.Vine2, { x: 886, y: 78, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageVine2_4: d(Tx.Foliage.Vine2, { x: 883, y: 117, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageVine2_5: d(Tx.Foliage.Vine2, { x: 886, y: 157, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_1: d(Tx.Foliage.Vine2, { x: 1084, y: 75, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_2: d(Tx.Foliage.Vine2, { x: 1079, y: 113, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_3: d(Tx.Foliage.Vine2, { x: 1083, y: 152, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_4: d(Tx.Foliage.Vine2, { x: 886, y: 78, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_5: d(Tx.Foliage.Vine2, { x: 883, y: 117, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_6: d(Tx.Foliage.Vine2, { x: 886, y: 157, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
       FoliageFlower14: d(Tx.Foliage.Flower14, { x: 1088, y: 96, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xefc655 }, "BackgroundDecals"),
       FoliageFlower14_1: d(Tx.Foliage.Flower14, { x: 884, y: 135, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xefc655 }, "BackgroundDecals"),
       FoliageFlower22: d(Tx.Foliage.Flower22, { x: 884, y: 74, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e42 }, "BackgroundDecals"),
@@ -7110,6 +7165,9 @@ export const Lvl = {
       Player: e(r["Player"], { x: 160, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromWizard: e(r["Checkpoint"], { x: 688, y: -8, flippedX: false, values: { name: "fromWizard", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromTaxi: e(r["Checkpoint"], { x: 688, y: -8, flippedX: false, values: { name: "fromTaxi", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      FurnitureColumnGiant0: d(Tx.Furniture.ColumnGiant0, { x: 1216, y: 118, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
+      FurnitureColumnGiant0_1: d(Tx.Furniture.ColumnGiant0, { x: 840, y: 118, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
+      FurnitureColumnGiant0_2: d(Tx.Furniture.ColumnGiant0, { x: 312, y: 116, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
       CurtainsGroup: dg(80, -76, "CurtainsGroup", "FrontDecals"),
       FurnitureGiantCurtain0: d(Tx.Furniture.GiantCurtain0, { x: 1070, y: -76, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
       FurnitureGiantCurtain0_1: d(Tx.Furniture.GiantCurtain0, { x: 872, y: -61, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
@@ -17652,6 +17710,61 @@ export namespace LvlType {
     ResetPlayerMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type OhioCasino = {
+    FarSlotMachineGroup: Container<Sprite>;
+    FurnitureGiantCurtainDistant0: Sprite;
+    FurnitureGiantCurtainDistant0_1: Sprite;
+    FurnitureGiantCurtainDistant0_2: Sprite;
+    TerrainDistantSteps486: Sprite;
+    TerrainDistantSlotMachine0: Sprite;
+    TerrainDistantSlotMachine0_1: Sprite;
+    TerrainDistantSlotMachine0_2: Sprite;
+    TerrainDistantSlotMachine0_3: Sprite;
+    TerrainDistantSlotMachine0_4: Sprite;
+    TerrainDistantSlotMachine0_5: Sprite;
+    TerrainDistantSteps486_1: Sprite;
+    TerrainDistantSlotMachine0_6: Sprite;
+    TerrainDistantSlotMachine0_7: Sprite;
+    TerrainDistantSlotMachine0_8: Sprite;
+    TerrainDistantSlotMachine0_9: Sprite;
+    TerrainDistantSlotMachine0_10: Sprite;
+    TerrainDistantSlotMachine0_11: Sprite;
+    TerrainDistantSteps486_2: Sprite;
+    TerrainDistantSlotMachine0_12: Sprite;
+    TerrainDistantSlotMachine0_13: Sprite;
+    TerrainDistantSlotMachine0_14: Sprite;
+    TerrainDistantSlotMachine0_15: Sprite;
+    TerrainDistantSlotMachine0_16: Sprite;
+    TerrainDistantSlotMachine0_17: Sprite;
+    FurnitureColumn: Sprite;
+    FurnitureColumn_1: Sprite;
+    FoliageVine2: Sprite;
+    FoliageLeaf16: Sprite;
+    FoliageLeaf16_1: Sprite;
+    TerrainEarthCrack8px12px: Sprite;
+    TerrainDistantSteps486_3: Sprite;
+    TerrainDistantSteps486_4: Sprite;
+    TerrainDistantSteps486_5: Sprite;
+    TerrainDistantSlotMachine0_18: Sprite;
+    TerrainDistantSlotMachine0_19: Sprite;
+    TerrainDistantSlotMachine0_20: Sprite;
+    TerrainDistantSlotMachine0_21: Sprite;
+    TerrainDistantSlotMachine0_22: Sprite;
+    TerrainDistantSlotMachine0_23: Sprite;
+    TerrainDistantSlotMachine0_24: Sprite;
+    TerrainDistantSlotMachine0_25: Sprite;
+    TerrainDistantSlotMachine0_26: Sprite;
+    TerrainDistantSlotMachine0_27: Sprite;
+    FurnitureGiantCurtainDistant0_3: Sprite;
+    TerrainDistantSlotMachine0_28: Sprite;
+    TerrainDistantSlotMachine0_29: Sprite;
+    TerrainDistantSlotMachine0_30: Sprite;
+    TerrainDistantSlotMachine0_31: Sprite;
+    TerrainDistantSlotMachine0_32: Sprite;
+    TerrainDistantSlotMachine0_33: Sprite;
+    TerrainDistantSlotMachine0_34: Sprite;
+    TerrainDistantSlotMachine0_35: Sprite;
+    FurnitureGiantCurtainDistant0_4: Sprite;
+    FurnitureGiantCurtainDistant0_5: Sprite;
     CasinoSlotsMachineStupidFlower: Sprite;
     ShapesCircleIrregular26: Sprite;
     CasinoSlotsMachineSimple: Sprite;
@@ -17665,12 +17778,12 @@ export namespace LvlType {
     FoliageMedium0: Sprite;
     FoliageMedium0_1: Sprite;
     FoliageMedium0_2: Sprite;
-    FoliageVine2: Sprite;
     FoliageVine2_1: Sprite;
     FoliageVine2_2: Sprite;
     FoliageVine2_3: Sprite;
     FoliageVine2_4: Sprite;
     FoliageVine2_5: Sprite;
+    FoliageVine2_6: Sprite;
     FoliageFlower14: Sprite;
     FoliageFlower14_1: Sprite;
     FoliageFlower22: Sprite;
@@ -17691,6 +17804,9 @@ export namespace LvlType {
     Player: ReturnType<(typeof r)["Player"]>;
     fromWizard: ReturnType<(typeof r)["Checkpoint"]>;
     fromTaxi: ReturnType<(typeof r)["Checkpoint"]>;
+    FurnitureColumnGiant0: Sprite;
+    FurnitureColumnGiant0_1: Sprite;
+    FurnitureColumnGiant0_2: Sprite;
     CurtainsGroup: Container<Sprite>;
     FurnitureGiantCurtain0: Sprite;
     FurnitureGiantCurtain0_1: Sprite;

@@ -105,7 +105,12 @@ export function scnOhioCasino() {
     {
         lvl.CurtainsGroup
             .step(self => {
-                self.x = scene.camera.x * -0.2;
+                self.x = Math.round(scene.camera.x * -0.2);
+            }, StepOrder.Camera);
+
+        lvl.FarSlotMachineGroup
+            .step(self => {
+                self.x = Math.round(scene.camera.x * 0.2);
             }, StepOrder.Camera);
     }
 
