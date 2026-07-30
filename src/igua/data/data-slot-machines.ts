@@ -10,6 +10,8 @@ function interlace<T>(array: T[], item: T): T[] {
 }
 
 export namespace DataSlotMachines {
+    export type SymbolsManifest = Record<string, RpgSlotMachine.Symbol>;
+
     export namespace LowVolatilityGrid {
         export const sym = {
             happy: {
@@ -32,7 +34,7 @@ export namespace DataSlotMachines {
                 prizeCondition: "line_from_left_consecutive",
                 countsToPrize: [0, 0, 0, 300],
             },
-        } satisfies Record<string, RpgSlotMachine.Symbol>;
+        } satisfies SymbolsManifest;
 
         export const rules: RpgSlotMachine.Rules = {
             price: 10,
@@ -199,7 +201,7 @@ export namespace DataSlotMachines {
                 prizeCondition: "line_from_left_consecutive",
                 countsToPrize: [0, 0, 400],
             },
-        } satisfies Record<string, RpgSlotMachine.Symbol>;
+        } satisfies SymbolsManifest;
 
         export const rules: RpgSlotMachine.Rules = {
             price: 5,

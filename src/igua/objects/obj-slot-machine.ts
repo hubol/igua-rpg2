@@ -1,5 +1,6 @@
 import { Graphics, LINE_CAP, Matrix, Sprite, Texture } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
+import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interp } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
@@ -10,13 +11,14 @@ import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
+import { DataSlotMachines } from "../data/data-slot-machines";
 import { DramaWallet } from "../drama/drama-wallet";
 import { GenerativeMusicUtils } from "../lib/generative-music-utils";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 
-interface SlotMachineRenderConfig {
+interface SlotMachineRenderConfigBase {
     mask: {
         y: Integer;
         height: Integer;
@@ -27,22 +29,54 @@ interface SlotMachineRenderConfig {
     slot: {
         gap: Integer;
     };
-    symbolTxs: Map<RpgSlotMachine.Symbol, Texture>;
     lineHighlightTint: RgbInt;
 }
 
-export function objSlotMachine(
+interface SlotMachineRenderConfig<TSymbols extends DataSlotMachines.SymbolsManifest>
+    extends SlotMachineRenderConfigBase
+{
+    sym: TSymbols;
+    symbolTxs: Partial<Record<keyof TSymbols, Texture>>;
+}
+
+namespace SymbolTextures {
+    export function create(config: SlotMachineRenderConfig<DataSlotMachines.SymbolsManifest>) {
+        const map = new Map<RpgSlotMachine.Symbol, Texture>(
+            // @ts-expect-error Don't care
+            Object.entries(config.sym)
+                .filter(([key]) => key in config.symbolTxs)
+                .map(([key, symbol]) => [symbol, config.symbolTxs[key]]),
+        );
+
+        if (map.size === 0) {
+            Logger.logContractViolationError(
+                "SymbolTextures.create",
+                new Error("symbolTxs appears to be empty"),
+                { config },
+            );
+        }
+
+        return {
+            map,
+            fallback: [...map.values()][0],
+        };
+    }
+
+    export type Type = ReturnType<typeof create>;
+}
+
+export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest>(
     rules: RpgSlotMachine.Rules,
-    config: SlotMachineRenderConfig,
+    config: SlotMachineRenderConfig<TSymbols>,
     currencyId: RpgEconomy.Currency.Id = "valuables",
 ) {
-    const fallbackSymbolTx = [...config.symbolTxs.values()][0];
+    const symbolTxs = SymbolTextures.create(config);
     const pricePerSpin: RpgEconomy.Offer = { currency: currencyId, price: rules.price };
 
     let reelsAdvancedCount = 0;
 
     const reelObjs = rules.reels.map((reel, i) =>
-        objReel({ config, reel, rules }, fallbackSymbolTx)
+        objReel({ config, reel, rules }, symbolTxs)
             .at(i * config.reel.gap, -symbolPadding * config.slot.gap)
             .handles("objReel.advanced", () => reelsAdvancedCount++)
     );
@@ -179,16 +213,16 @@ export function objSlotMachine(
 export type ObjSlotMachine = ReturnType<typeof objSlotMachine>;
 
 interface ObjReelArgs {
-    config: SlotMachineRenderConfig;
+    config: SlotMachineRenderConfigBase;
     reel: RpgSlotMachine.Reel;
     rules: RpgSlotMachine.Rules;
 }
 
 const symbolPadding = 2;
 
-function objReel(args: ObjReelArgs, fallbackSymbolTx: Texture) {
+function objReel(args: ObjReelArgs, symbolTxs: SymbolTextures.Type) {
     // Before, height and width came from slot config. I am not totally sure why.
-    const { width, height } = fallbackSymbolTx;
+    const { width, height } = symbolTxs.fallback;
     const { gap } = args.config.slot;
 
     const reelLength = args.reel.length;
@@ -212,7 +246,7 @@ function objReel(args: ObjReelArgs, fallbackSymbolTx: Texture) {
             for (let i = 0; i < symbolObjs.length; i++) {
                 const reelIndex = cyclic(i + reelIndexOffset, 0, reelLength);
                 const symbol = args.reel[reelIndex];
-                const tx = args.config.symbolTxs.get(symbol);
+                const tx = symbolTxs.map.get(symbol);
                 if (tx) {
                     symbolObjs[i].texture = tx;
                 }
