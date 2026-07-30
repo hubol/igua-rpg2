@@ -131,9 +131,12 @@ export function scnOhioCasino() {
 
                     const sfxs = Object.values(Sfx.Cutscene.BoneDust);
 
-                    for (let i = 0; i < dustsGained; i++) {
+                    for (let i = 0; i < dustsGained;) {
                         Rng.item(sfxs).rate(0.5, 1).play();
-                        Rpg.wallet.earn("bone_dusts", 1);
+                        for (let j = 0; j < 1 + Math.floor(i / 12) && i < dustsGained; j++, i++) {
+                            Rpg.wallet.earn("bone_dusts", 1);
+                        }
+
                         yield sleepf(Math.max(3, 15 - i * 0.5));
                     }
 
