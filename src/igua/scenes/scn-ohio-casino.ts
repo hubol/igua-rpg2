@@ -31,7 +31,7 @@ export function scnOhioCasino() {
     const currencyId: RpgEconomy.Currency.Id = "bone_dusts";
 
     {
-        const { rules, sym } = DataSlotMachines.BasicThreeReel;
+        const { rules, sym } = DataSlotMachines.SingleLineThreeReel;
 
         const slotMachineObj = objSlotMachine(
             rules,

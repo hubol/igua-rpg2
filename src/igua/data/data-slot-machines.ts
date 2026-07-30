@@ -253,4 +253,70 @@ export namespace DataSlotMachines {
             ],
         };
     }
+
+    export namespace SingleLineThreeReel {
+        export const sym = {
+            bar: {
+                identity: "fixed",
+                prizeCondition: "line_from_left_consecutive",
+                countsToPrize: [0, 0, 5],
+            },
+            cherry: {
+                identity: "fixed",
+                prizeCondition: "line_from_left_consecutive",
+                countsToPrize: [0, 0, 15],
+            },
+            seven: {
+                identity: "fixed",
+                prizeCondition: "line_from_left_consecutive",
+                countsToPrize: [0, 0, 44],
+            },
+            wild: {
+                identity: "wild",
+                prizeCondition: "line_from_left_consecutive",
+                countsToPrize: [0, 0, 150],
+            },
+        } satisfies SymbolsManifest;
+
+        export const rules: RpgSlotMachine.Rules = {
+            price: 3,
+            height: 1,
+            lines: [
+                [0, 0, 0],
+            ],
+            reels: [
+                [
+                    sym.seven,
+                    sym.cherry,
+                    sym.cherry,
+                    sym.bar,
+                    sym.seven,
+                    sym.bar,
+                    sym.wild,
+                    sym.bar,
+                ],
+                [
+                    sym.bar,
+                    sym.cherry,
+                    sym.seven,
+                    sym.bar,
+                    sym.cherry,
+                    sym.bar,
+                    sym.cherry,
+                    sym.wild,
+                ],
+
+                [
+                    sym.bar,
+                    sym.cherry,
+                    sym.bar,
+                    sym.bar,
+                    sym.seven,
+                    sym.bar,
+                    sym.wild,
+                    sym.bar,
+                ],
+            ],
+        };
+    }
 }
