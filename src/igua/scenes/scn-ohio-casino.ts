@@ -107,38 +107,45 @@ export function scnOhioCasino() {
         .show();
 
     objCharacterGuardianCat()
-        .mixin(mxnCutscene, function* () {
-            yield* show("I'll take your bones and turn them into dust.");
+        .coro(function* (self) {
+            self
+                .mixin(mxnCutscene, function* () {
+                    yield* show("I'll take your bones and turn them into dust.");
 
-            const count = Rpg.inventory.pocket.count("BoneTypeA");
+                    const count = Rpg.inventory.pocket.count("BoneTypeA");
 
-            if (count === 0) {
-                yield* show("But you don't have any right now.");
-                return;
-            }
+                    if (count === 0) {
+                        yield* show("But you don't have any right now.");
+                        return;
+                    }
 
-            if (!(yield* ask("Do you want that? Dust?"))) {
-                yield* show("Ok.");
-                return;
-            }
+                    if (!(yield* ask("Do you want that? Dust?"))) {
+                        yield* show("Ok.");
+                        return;
+                    }
 
-            const removedBonesCount = yield* DramaInventory.removeAll({ kind: "pocket_item", id: "BoneTypeA" });
-            const dustsGained = removedBonesCount * 3;
+                    const removedBonesCount = yield* DramaInventory.removeAll({ kind: "pocket_item", id: "BoneTypeA" });
+                    const dustsGained = removedBonesCount * 3;
 
-            const sfxs = Object.values(Sfx.Cutscene.BoneDust);
+                    self.objChararcterGuardianCat.frontLegsRaised = true;
 
-            for (let i = 0; i < dustsGained; i++) {
-                Rng.item(sfxs).rate(0.5, 1).play();
-                Rpg.wallet.earn("bone_dusts", 1);
-                yield sleepf(Math.max(3, 15 - i * 0.5));
-            }
+                    const sfxs = Object.values(Sfx.Cutscene.BoneDust);
 
-            yield* show(`Gained ${RpgEconomy.Offer.toString(dustsGained, currencyId)}.`);
+                    for (let i = 0; i < dustsGained; i++) {
+                        Rng.item(sfxs).rate(0.5, 1).play();
+                        Rpg.wallet.earn("bone_dusts", 1);
+                        yield sleepf(Math.max(3, 15 - i * 0.5));
+                    }
 
-            boneDustsObj.sparklesTint = 0xffff00;
-            boneDustsObj.sparklesPerFrame = 0.4;
-            yield* show("Look up there to see how many you have in total.");
-            boneDustsObj.sparklesPerFrame = 0;
+                    self.objChararcterGuardianCat.frontLegsRaised = false;
+
+                    yield* show(`Gained ${RpgEconomy.Offer.toString(dustsGained, currencyId)}.`);
+
+                    boneDustsObj.sparklesTint = 0xffff00;
+                    boneDustsObj.sparklesPerFrame = 0.4;
+                    yield* show("Look up there to see how many you have in total.");
+                    boneDustsObj.sparklesPerFrame = 0;
+                });
         })
         .at(lvl.GuardianCatMarker)
         .show();

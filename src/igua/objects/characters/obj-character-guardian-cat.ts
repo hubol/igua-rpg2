@@ -19,14 +19,19 @@ const [
     txWhiskers,
     txEye,
     txEyebrow,
+    txLegsFrontRaised,
 ] = Tx.Characters.GuardianCat.Layers.split({ width: 88 });
 
 export function objCharacterGuardianCat() {
+    const api = {
+        frontLegsRaised: false,
+    };
+
     return container(
         Sprite.from(txTail).mixin(mxnBoilPivot),
         Sprite.from(txBody),
         Sprite.from(txLegsRear),
-        Sprite.from(txLegsFront),
+        Sprite.from(txLegsFront).step(self => self.texture = api.frontLegsRaised ? txLegsFrontRaised : txLegsFront),
         container(
             Sprite.from(txNoggin),
             Sprite.from(txEars),
@@ -53,5 +58,6 @@ export function objCharacterGuardianCat() {
         .mixin(mxnSpeaker, { name: "Guardian Cat", tintPrimary: 0x000000, tintSecondary: 0xffffff })
         .mixin(mxnDetectPlayer)
         .pivoted(43, 64)
+        .merge({ objChararcterGuardianCat: api })
         .zIndexed(ZIndex.CharacterEntities);
 }
