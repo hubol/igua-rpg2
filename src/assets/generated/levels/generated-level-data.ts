@@ -7126,15 +7126,10 @@ export const Lvl = {
       TerrainDistantSlotMachine0_35: d(Tx.Terrain.Distant.SlotMachine0, { x: 141, y: 191, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x6f569c }, "ParallaxDecals"),
       FurnitureGiantCurtainDistant0_4: d(Tx.Furniture.GiantCurtainDistant0, { x: 274, y: 112, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
       FurnitureGiantCurtainDistant0_5: d(Tx.Furniture.GiantCurtainDistant0, { x: 844, y: 115, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "ParallaxDecals"),
+      CasinoSlotsMachineEvilSkeleton: d(Tx.Casino.Slots.MachineEvilSkeleton, { x: 536, y: 135, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       CasinoSlotsMachineStupidFlower: d(Tx.Casino.Slots.MachineStupidFlower, { x: 984, y: 120, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       ShapesCircleIrregular26: d(Tx.Shapes.CircleIrregular26, { x: 987, y: 192, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x167055 }, "BackgroundDecals"),
-      CasinoSlotsMachineSimple: d(Tx.Casino.Slots.MachineSimple, { x: 544, y: 160, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
-      CasinoSlotsMachineSimpleSecondaryDisplay: d(Tx.Casino.Slots.MachineSimpleSecondaryDisplay, { x: 521, y: 75, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
-      CasinoSlotsFiveValuableBet: d(Tx.Casino.Slots.FiveValuableBet, { x: 523, y: 205, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "BackgroundDecals"),
-      ShapesExaggerate16px: d(Tx.Shapes.Exaggerate16px, { x: 552, y: 205, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd800 }, "BackgroundDecals"),
-      ShapesExaggerate16px_1: d(Tx.Shapes.Exaggerate16px, { x: 491, y: 203, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd800 }, "BackgroundDecals"),
-      ShapesCircleIrregular26_1: d(Tx.Shapes.CircleIrregular26, { x: 584, y: 205, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x65bf21 }, "BackgroundDecals"),
-      SlotMachineBetButton0: d(Tx.Casino.Slots.OkButton, { x: 583, y: 201, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd800 }, "BackgroundDecals"),
+      SlotMachineBetButton0: d(Tx.Casino.Slots.SpinButton, { x: 613, y: 212, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       CasinoSlotsTenValuableBet: d(Tx.Casino.Slots.TenValuableBet, { x: 943, y: 212, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       FoliageMedium0: d(Tx.Foliage.Medium0, { x: 1083, y: 219, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
       FoliageMedium0_1: d(Tx.Foliage.Medium0, { x: 880, y: 221, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
@@ -7149,12 +7144,11 @@ export const Lvl = {
       FoliageFlower14_1: d(Tx.Foliage.Flower14, { x: 884, y: 135, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xefc655 }, "BackgroundDecals"),
       FoliageFlower22: d(Tx.Foliage.Flower22, { x: 884, y: 74, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e42 }, "BackgroundDecals"),
       FoliageFlower22_1: d(Tx.Foliage.Flower22, { x: 1087, y: 174, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e42 }, "BackgroundDecals"),
-      ShapesCircleIrregular26_2: d(Tx.Shapes.CircleIrregular26, { x: 1032, y: 197, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e42 }, "BackgroundDecals"),
+      ShapesCircleIrregular26_1: d(Tx.Shapes.CircleIrregular26, { x: 1032, y: 197, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e42 }, "BackgroundDecals"),
       SlotMachineBetButton1: d(Tx.Casino.Slots.OkButton, { x: 1031, y: 193, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xefc655 }, "BackgroundDecals"),
       ShapesConfetti18x8: d(Tx.Shapes.Confetti18x8, { x: 1064, y: 169, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
       ShapesConfetti18x8_1: d(Tx.Shapes.Confetti18x8, { x: 913, y: 65, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
       ShapesConfetti18x8_2: d(Tx.Shapes.Confetti18x8, { x: 907, y: 197, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      CasinoSlotsTitleSimplySevens: d(Tx.Casino.Slots.TitleSimplySevens, { x: 526, y: 59, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       Block: e(r["Block"], { x: 280, y: 232, width: 912, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
       Block_1: e(r["Block"], { x: 208, y: 232, width: 72, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
       Block_2: e(r["Block"], { x: 136, y: 232, width: 72, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
@@ -7175,14 +7169,14 @@ export const Lvl = {
       FurnitureGiantCurtain0_3: d(Tx.Furniture.GiantCurtain0, { x: 80, y: -72, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
       FurnitureGiantCurtain0_4: d(Tx.Furniture.GiantCurtain0, { x: 278, y: -69, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
       FurnitureGiantCurtain0_5: d(Tx.Furniture.GiantCurtain0, { x: 476, y: -60, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
-      ShapesCircleIrregular26_3: d(Tx.Shapes.CircleIrregular26, { x: 377, y: 16, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0x167055 }, "FrontDecals"),
+      ShapesCircleIrregular26_2: d(Tx.Shapes.CircleIrregular26, { x: 377, y: 16, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0x167055 }, "FrontDecals"),
       FurnitureGiantCurtain0_6: d(Tx.Furniture.GiantCurtain0, { x: 1265, y: -72, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
       FurnitureGiantCurtain0_7: d(Tx.Furniture.GiantCurtain0, { x: 1463, y: -73, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
       FurnitureGiantCurtain0_8: d(Tx.Furniture.GiantCurtain0, { x: 1661, y: -67, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
-      SlotMachineSecondaryDisplay0: e(r["Region"], { x: 492, y: 72, width: 57, height: 15, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      SlotMachineSecondaryDisplay0: e(r["Region"], { x: 462, y: 202, width: 100, height: 20, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -56, y: 112, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromOhioCasino", name: "", depth: 0 } }, "RegionEntities"),
       SlotMachineSecondaryDisplay1: e(r["Region"], { x: 893, y: 179, width: 97, height: 19, values: { name: "SlotMachineSecondaryDisplay1", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
-      SlotMachineDisplay0: e(r["Marker"], { x: 456, y: 101, values: { name: "SlotMachineDisplay0", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      SlotMachineDisplay0: e(r["Marker"], { x: 472, y: 133, values: { name: "SlotMachineDisplay0", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 442, y: 85, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_1: e(r["EnvironmentSparkleMarker"], { x: 432, y: 163, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_2: e(r["EnvironmentSparkleMarker"], { x: 595, y: 178, values: { name: "", depth: 0 } }, "MarkerEntities"),
@@ -17765,14 +17759,9 @@ export namespace LvlType {
     TerrainDistantSlotMachine0_35: Sprite;
     FurnitureGiantCurtainDistant0_4: Sprite;
     FurnitureGiantCurtainDistant0_5: Sprite;
+    CasinoSlotsMachineEvilSkeleton: Sprite;
     CasinoSlotsMachineStupidFlower: Sprite;
     ShapesCircleIrregular26: Sprite;
-    CasinoSlotsMachineSimple: Sprite;
-    CasinoSlotsMachineSimpleSecondaryDisplay: Sprite;
-    CasinoSlotsFiveValuableBet: Sprite;
-    ShapesExaggerate16px: Sprite;
-    ShapesExaggerate16px_1: Sprite;
-    ShapesCircleIrregular26_1: Sprite;
     SlotMachineBetButton0: Sprite;
     CasinoSlotsTenValuableBet: Sprite;
     FoliageMedium0: Sprite;
@@ -17788,12 +17777,11 @@ export namespace LvlType {
     FoliageFlower14_1: Sprite;
     FoliageFlower22: Sprite;
     FoliageFlower22_1: Sprite;
-    ShapesCircleIrregular26_2: Sprite;
+    ShapesCircleIrregular26_1: Sprite;
     SlotMachineBetButton1: Sprite;
     ShapesConfetti18x8: Sprite;
     ShapesConfetti18x8_1: Sprite;
     ShapesConfetti18x8_2: Sprite;
-    CasinoSlotsTitleSimplySevens: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Block_1: ReturnType<(typeof r)["Block"]>;
     Block_2: ReturnType<(typeof r)["Block"]>;
@@ -17814,7 +17802,7 @@ export namespace LvlType {
     FurnitureGiantCurtain0_3: Sprite;
     FurnitureGiantCurtain0_4: Sprite;
     FurnitureGiantCurtain0_5: Sprite;
-    ShapesCircleIrregular26_3: Sprite;
+    ShapesCircleIrregular26_2: Sprite;
     FurnitureGiantCurtain0_6: Sprite;
     FurnitureGiantCurtain0_7: Sprite;
     FurnitureGiantCurtain0_8: Sprite;
