@@ -9,14 +9,15 @@ import { renderer } from "../current-pixi-renderer";
 import { DataSlotMachines } from "../data/data-slot-machines";
 import { DramaInventory } from "../drama/drama-inventory";
 import { ask, show } from "../drama/show";
+import { scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSlotMachineBetButton } from "../mixins/mxn-slot-machine-bet-button";
 import { mxnSlotMachineSecondaryDisplay } from "../mixins/mxn-slot-machine-secondary-display";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { objCharacterGuardianCat } from "../objects/characters/obj-character-guardian-cat";
 import { objEsotericBoneDusts } from "../objects/esoteric/obj-esoteric-bone-dusts";
-import { playerObj } from "../objects/obj-player";
 import { objSlotMachine } from "../objects/obj-slot-machine";
+import { StepOrder } from "../objects/step-order";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
@@ -101,9 +102,16 @@ export function scnOhioCasino() {
             .mixin(mxnSlotMachineBetButton, slotMachineObj);
     }
 
+    {
+        lvl.CurtainsGroup
+            .step(self => {
+                self.x = scene.camera.x * -0.2;
+            }, StepOrder.Camera);
+    }
+
     const boneDustsObj = objEsotericBoneDusts()
         .mixin(mxnSparkling)
-        .at(renderer.width, 50)
+        .at(renderer.width, 10)
         .show();
 
     objCharacterGuardianCat()

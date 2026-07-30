@@ -7069,137 +7069,76 @@ export const Lvl = {
     };
   },
   OhioCasino: (): LvlType.OhioCasino => {
-    applyLevel({ width: 1344, height: 336, backgroundTint: 0xd8a5f7, terrainTint: 0xffd600, regionId: null });
+    applyLevel({ width: 1344, height: 280, backgroundTint: 0x604194, terrainTint: 0xffd600, regionId: null });
     return {
-      ShapesSquare32: d(Tx.Shapes.Square32, { x: -56, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0xa786b9 }, "ParallaxDecals"),
-      ShapesSquare32_1: d(Tx.Shapes.Square32, { x: -112, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0x77677d }, "ParallaxDecals"),
-      ShapesSquare32_2: d(Tx.Shapes.Square32, { x: -176, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0x46483f }, "ParallaxDecals"),
-      ShapesSquare32_3: d(Tx.Shapes.Square32, { x: -248, y: -72, scaleX: 9, scaleY: 17, rotation: 0, originX: 0, originY: 0, tint: 0x172a03 }, "ParallaxDecals"),
-      TerrainGrassCloudy: d(Tx.Terrain.Grass.Cloudy, { x: 232, y: 210, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xa786b9 }, "ParallaxDecals"),
-      TerrainGrassCloudy_1: d(Tx.Terrain.Grass.Cloudy, { x: 232, y: 280, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xa786b9 }, "ParallaxDecals"),
-      TerrainGrassCloudy_2: d(Tx.Terrain.Grass.Cloudy, { x: 176, y: 218, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x77677d }, "ParallaxDecals"),
-      TerrainGrassCloudy_3: d(Tx.Terrain.Grass.Cloudy, { x: 176, y: 282, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x77677d }, "ParallaxDecals"),
-      TerrainGrassCloudy_4: d(Tx.Terrain.Grass.Cloudy, { x: 112, y: 206, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x46483f }, "ParallaxDecals"),
-      TerrainGrassCloudy_5: d(Tx.Terrain.Grass.Cloudy, { x: 112, y: 274, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x46483f }, "ParallaxDecals"),
-      TerrainGrassCloudy_6: d(Tx.Terrain.Grass.Cloudy, { x: 40, y: 202, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x172a03 }, "ParallaxDecals"),
-      TerrainGrassCloudy_7: d(Tx.Terrain.Grass.Cloudy, { x: 40, y: 266, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x172a03 }, "ParallaxDecals"),
-      TerrainDistantWaves0: d(Tx.Terrain.Distant.Waves0, { x: -204, y: 272, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "ParallaxDecals"),
-      TerrainDistantWaves0_1: d(Tx.Terrain.Distant.Waves0, { x: -124, y: 293, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "ParallaxDecals"),
-      TerrainGrassLumpy0: d(Tx.Terrain.Grass.Lumpy0, { x: 116, y: 233, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x46483f }, "ParallaxDecals"),
-      TerrainGrassLumpy0_1: d(Tx.Terrain.Grass.Lumpy0, { x: 180, y: 175, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x77677d }, "ParallaxDecals"),
-      CasinoSlotsMachineStupidFlower: d(Tx.Casino.Slots.MachineStupidFlower, { x: 984, y: 176, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
-      CasinoSlotsMachineSimple: d(Tx.Casino.Slots.MachineSimple, { x: 544, y: 216, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
-      CasinoSlotsMachineSimpleSecondaryDisplay: d(Tx.Casino.Slots.MachineSimpleSecondaryDisplay, { x: 521, y: 131, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
-      CasinoSlotsFiveValuableBet: d(Tx.Casino.Slots.FiveValuableBet, { x: 523, y: 261, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "BackgroundDecals"),
-      ShapesExaggerate16px: d(Tx.Shapes.Exaggerate16px, { x: 552, y: 261, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd800 }, "BackgroundDecals"),
-      ShapesExaggerate16px_1: d(Tx.Shapes.Exaggerate16px, { x: 491, y: 259, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd800 }, "BackgroundDecals"),
-      TerrainDistantWaves0_2: d(Tx.Terrain.Distant.Waves0, { x: -135, y: 302, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "BackgroundDecals"),
-      TerrainDistantWaves0_3: d(Tx.Terrain.Distant.Waves0, { x: -215, y: 281, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x85b421 }, "BackgroundDecals"),
-      ShapesCircleIrregular26: d(Tx.Shapes.CircleIrregular26, { x: 584, y: 261, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x65bf21 }, "BackgroundDecals"),
-      SlotMachineBetButton0: d(Tx.Casino.Slots.OkButton, { x: 583, y: 257, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd800 }, "BackgroundDecals"),
-      CasinoSlotsTenValuableBet: d(Tx.Casino.Slots.TenValuableBet, { x: 943, y: 268, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
-      FoliageMedium0: d(Tx.Foliage.Medium0, { x: 1083, y: 275, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageMedium0_1: d(Tx.Foliage.Medium0, { x: 880, y: 277, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageMedium0_2: d(Tx.Foliage.Medium0, { x: 899, y: 285, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageVine2: d(Tx.Foliage.Vine2, { x: 1084, y: 131, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageVine2_1: d(Tx.Foliage.Vine2, { x: 1079, y: 169, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageVine2_2: d(Tx.Foliage.Vine2, { x: 1083, y: 208, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageVine2_3: d(Tx.Foliage.Vine2, { x: 886, y: 134, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageVine2_4: d(Tx.Foliage.Vine2, { x: 883, y: 173, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageVine2_5: d(Tx.Foliage.Vine2, { x: 886, y: 213, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      FoliageFlower14: d(Tx.Foliage.Flower14, { x: 1088, y: 152, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xefc655 }, "BackgroundDecals"),
-      FoliageFlower14_1: d(Tx.Foliage.Flower14, { x: 884, y: 191, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xefc655 }, "BackgroundDecals"),
-      FoliageFlower22: d(Tx.Foliage.Flower22, { x: 884, y: 130, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e42 }, "BackgroundDecals"),
-      FoliageFlower22_1: d(Tx.Foliage.Flower22, { x: 1087, y: 230, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e42 }, "BackgroundDecals"),
-      ShapesCircleIrregular26_1: d(Tx.Shapes.CircleIrregular26, { x: 1032, y: 253, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e42 }, "BackgroundDecals"),
-      SlotMachineBetButton1: d(Tx.Casino.Slots.OkButton, { x: 1031, y: 249, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xefc655 }, "BackgroundDecals"),
-      ShapesConfetti18x8: d(Tx.Shapes.Confetti18x8, { x: 1064, y: 225, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      ShapesConfetti18x8_1: d(Tx.Shapes.Confetti18x8, { x: 913, y: 121, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      ShapesConfetti18x8_2: d(Tx.Shapes.Confetti18x8, { x: 907, y: 253, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
-      CasinoSlotsTitleSimplySevens: d(Tx.Casino.Slots.TitleSimplySevens, { x: 526, y: 115, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
-      Block: e(r["Block"], { x: 280, y: 288, width: 912, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
-      Block_1: e(r["Block"], { x: 208, y: 288, width: 72, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xc8a401 }, "TerrainEntities"),
-      Block_2: e(r["Block"], { x: 136, y: 288, width: 72, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x927302 }, "TerrainEntities"),
-      Block_3: e(r["Block"], { x: 56, y: 288, width: 80, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x5a4103 }, "TerrainEntities"),
-      Block_4: e(r["Block"], { x: -64, y: 288, width: 120, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x251105 }, "TerrainEntities"),
-      Block_5: e(r["Block"], { x: 200, y: -8, width: 80, height: 192, values: { name: "", depth: 0, visible: true }, tint: 0xc8a401 }, "TerrainEntities"),
-      Block_6: e(r["Block"], { x: 128, y: -8, width: 80, height: 192, values: { name: "", depth: 0, visible: true }, tint: 0x927302 }, "TerrainEntities"),
-      Block_7: e(r["Block"], { x: 48, y: -8, width: 88, height: 192, values: { name: "", depth: 0, visible: true }, tint: 0x5a4103 }, "TerrainEntities"),
-      Block_8: e(r["Block"], { x: -72, y: -8, width: 128, height: 192, values: { name: "", depth: 0, visible: true }, tint: 0x251105 }, "TerrainEntities"),
-      Slope: e(r["Slope"], { x: 280, y: 0, width: 256, height: 128, flippedX: true, flippedY: true, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
-      Block_9: e(r["Block"], { x: 712, y: 272, width: 80, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
-      Block_10: e(r["Block"], { x: 1192, y: 288, width: 152, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
-      Block_11: e(r["Block"], { x: 1296, y: 0, width: 48, height: 288, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
-      Block_12: e(r["Block"], { x: 1152, y: 272, width: 88, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0xffd600 }, "TerrainEntities"),
-      Block_13: e(r["Block"], { x: 1164, y: 219, width: 64, height: 54, values: { name: "", depth: 0, visible: true }, tint: 0xd8a5f7 }, "TerrainEntities"),
-      TerrainGrassSparse3px1: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 144, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_1: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 72, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_2: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 0, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_3: d(Tx.Terrain.Grass.Sparse3px1, { x: 56, y: 328, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_4: d(Tx.Terrain.Grass.Sparse3px1, { x: 136, y: 328, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x5a4103 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_5: d(Tx.Terrain.Grass.Sparse3px1, { x: 136, y: 144, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x5a4103 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_6: d(Tx.Terrain.Grass.Sparse3px1, { x: 137, y: 80, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x5a4103 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_7: d(Tx.Terrain.Grass.Sparse3px1, { x: 137, y: 16, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x5a4103 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_8: d(Tx.Terrain.Grass.Sparse3px1, { x: 208, y: 144, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x927302 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_9: d(Tx.Terrain.Grass.Sparse3px1, { x: 209, y: 80, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x927302 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_10: d(Tx.Terrain.Grass.Sparse3px1, { x: 209, y: 16, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x927302 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_11: d(Tx.Terrain.Grass.Sparse3px1, { x: 208, y: 328, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0x927302 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_12: d(Tx.Terrain.Grass.Sparse3px1, { x: 281, y: 88, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xc8a401 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_13: d(Tx.Terrain.Grass.Sparse3px1, { x: 281, y: 24, scaleX: 1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xc8a401 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_14: d(Tx.Terrain.Grass.Sparse3px1, { x: 280, y: 328, scaleX: -1, scaleY: 1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xc8a401 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_15: d(Tx.Terrain.Grass.Sparse3px1, { x: 245, y: 288, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc8a401 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_16: d(Tx.Terrain.Grass.Sparse3px1, { x: 173, y: 288, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x927302 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_17: d(Tx.Terrain.Grass.Sparse3px1, { x: 96, y: 288, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5a4103 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_18: d(Tx.Terrain.Grass.Sparse3px1, { x: 16, y: 287, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_19: d(Tx.Terrain.Grass.Sparse3px1, { x: 172, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x927302 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_20: d(Tx.Terrain.Grass.Sparse3px1, { x: 99, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x5a4103 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_21: d(Tx.Terrain.Grass.Sparse3px1, { x: 19, y: 183, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x251105 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_22: d(Tx.Terrain.Grass.Sparse3px1, { x: 241, y: 184, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xc8a401 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_23: d(Tx.Terrain.Grass.Sparse3px1, { x: 281, y: 137, scaleX: 1, scaleY: -1, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xc8a401 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_24: d(Tx.Terrain.Grass.Sparse3px1, { x: 333, y: 287, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_25: d(Tx.Terrain.Grass.Sparse3px1, { x: 421, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_26: d(Tx.Terrain.Grass.Sparse3px1, { x: 493, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_27: d(Tx.Terrain.Grass.Sparse3px1, { x: 581, y: 287, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_28: d(Tx.Terrain.Grass.Sparse3px1, { x: 669, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_29: d(Tx.Terrain.Grass.Sparse3px1, { x: 741, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
-      ShapesFontsWeight3C: d(Tx.Shapes.Fonts.Weight3.C, { x: 304, y: 88, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
-      ShapesFontsWeight3A: d(Tx.Shapes.Fonts.Weight3.A, { x: 336, y: 72, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
-      ShapesFontsWeight3S: d(Tx.Shapes.Fonts.Weight3.S, { x: 368, y: 56, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
-      ShapesFontsWeight3I: d(Tx.Shapes.Fonts.Weight3.I, { x: 394, y: 43, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
-      ShapesFontsWeight3N: d(Tx.Shapes.Fonts.Weight3.N, { x: 424, y: 29, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
-      ShapesFontsWeight3O: d(Tx.Shapes.Fonts.Weight3.O, { x: 459, y: 18, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_30: d(Tx.Terrain.Grass.Sparse3px1, { x: 829, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_31: d(Tx.Terrain.Grass.Sparse3px1, { x: 917, y: 287, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_32: d(Tx.Terrain.Grass.Sparse3px1, { x: 1005, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_33: d(Tx.Terrain.Grass.Sparse3px1, { x: 1077, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_34: d(Tx.Terrain.Grass.Sparse3px1, { x: 1165, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
-      TerrainGrassSparse3px1_35: d(Tx.Terrain.Grass.Sparse3px1, { x: 1261, y: 287, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "TerrainDecals"),
-      TownMonumentLazarus: d(Tx.Town.Monument.Lazarus, { x: 1197, y: 254, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      ShapesLineVertical16: d(Tx.Shapes.LineVertical16, { x: 1164, y: 246, scaleX: 3, scaleY: 3.5, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      ShapesLineVertical16_1: d(Tx.Shapes.LineVertical16, { x: 1228, y: 246, scaleX: 3, scaleY: 3.5, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      ShapesLineVertical16_2: d(Tx.Shapes.LineVertical16, { x: 1196, y: 219, scaleX: 3, scaleY: 4, rotation: 90, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      LightGlassMetalSheen20px: d(Tx.Light.GlassMetalSheen20px, { x: 1213, y: 235, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "TerrainDecals"),
-      Player: e(r["Player"], { x: 160, y: 288, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
-      fromWizard: e(r["Checkpoint"], { x: 688, y: 48, flippedX: false, values: { name: "fromWizard", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
-      fromTaxi: e(r["Checkpoint"], { x: 688, y: 48, flippedX: false, values: { name: "fromTaxi", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
-      SlotMachineSecondaryDisplay0: e(r["Region"], { x: 492, y: 128, width: 57, height: 15, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
-      GateHorizontal: e(r["GateHorizontal"], { x: -56, y: 168, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromOhioCasino", name: "", depth: 0 } }, "RegionEntities"),
-      SlotMachineSecondaryDisplay1: e(r["Region"], { x: 893, y: 235, width: 97, height: 19, values: { name: "SlotMachineSecondaryDisplay1", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
-      SlotMachineDisplay0: e(r["Marker"], { x: 456, y: 157, values: { name: "SlotMachineDisplay0", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
-      EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 442, y: 141, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      EnvironmentSparkleMarker_1: e(r["EnvironmentSparkleMarker"], { x: 432, y: 219, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      EnvironmentSparkleMarker_2: e(r["EnvironmentSparkleMarker"], { x: 595, y: 234, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      EnvironmentSparkleMarker_3: e(r["EnvironmentSparkleMarker"], { x: 596, y: 142, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      EnvironmentSparkleMarker_4: e(r["EnvironmentSparkleMarker"], { x: 654, y: 175, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      SlotMachineDisplay1: e(r["Marker"], { x: 892, y: 122, values: { name: "SlotMachineDisplay1", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
-      EnvironmentSparkleMarker_5: e(r["EnvironmentSparkleMarker"], { x: 890, y: 72, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      EnvironmentSparkleMarker_6: e(r["EnvironmentSparkleMarker"], { x: 1008, y: 81, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      EnvironmentSparkleMarker_7: e(r["EnvironmentSparkleMarker"], { x: 961, y: 57, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      EnvironmentSparkleMarker_8: e(r["EnvironmentSparkleMarker"], { x: 954, y: 100, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      EnvironmentSparkleMarker_9: e(r["EnvironmentSparkleMarker"], { x: 1047, y: 73, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      EnvironmentSparkleMarker_10: e(r["EnvironmentSparkleMarker"], { x: 1083, y: 83, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      PityMarker: e(r["Marker"], { x: 752, y: 288, values: { name: "PityMarker", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
-      GuardianCatMarker: e(r["Marker"], { x: 752, y: 272, values: { name: "GuardianCatMarker", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
+      CasinoSlotsMachineStupidFlower: d(Tx.Casino.Slots.MachineStupidFlower, { x: 984, y: 120, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      ShapesCircleIrregular26: d(Tx.Shapes.CircleIrregular26, { x: 987, y: 192, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x167055 }, "BackgroundDecals"),
+      CasinoSlotsMachineSimple: d(Tx.Casino.Slots.MachineSimple, { x: 544, y: 160, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      CasinoSlotsMachineSimpleSecondaryDisplay: d(Tx.Casino.Slots.MachineSimpleSecondaryDisplay, { x: 521, y: 75, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      CasinoSlotsFiveValuableBet: d(Tx.Casino.Slots.FiveValuableBet, { x: 523, y: 205, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xdb3020 }, "BackgroundDecals"),
+      ShapesExaggerate16px: d(Tx.Shapes.Exaggerate16px, { x: 552, y: 205, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd800 }, "BackgroundDecals"),
+      ShapesExaggerate16px_1: d(Tx.Shapes.Exaggerate16px, { x: 491, y: 203, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd800 }, "BackgroundDecals"),
+      ShapesCircleIrregular26_1: d(Tx.Shapes.CircleIrregular26, { x: 584, y: 205, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x65bf21 }, "BackgroundDecals"),
+      SlotMachineBetButton0: d(Tx.Casino.Slots.OkButton, { x: 583, y: 201, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd800 }, "BackgroundDecals"),
+      CasinoSlotsTenValuableBet: d(Tx.Casino.Slots.TenValuableBet, { x: 943, y: 212, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      FoliageMedium0: d(Tx.Foliage.Medium0, { x: 1083, y: 219, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageMedium0_1: d(Tx.Foliage.Medium0, { x: 880, y: 221, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageMedium0_2: d(Tx.Foliage.Medium0, { x: 899, y: 229, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2: d(Tx.Foliage.Vine2, { x: 1084, y: 75, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_1: d(Tx.Foliage.Vine2, { x: 1079, y: 113, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_2: d(Tx.Foliage.Vine2, { x: 1083, y: 152, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_3: d(Tx.Foliage.Vine2, { x: 886, y: 78, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_4: d(Tx.Foliage.Vine2, { x: 883, y: 117, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageVine2_5: d(Tx.Foliage.Vine2, { x: 886, y: 157, scaleX: 1, scaleY: -1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      FoliageFlower14: d(Tx.Foliage.Flower14, { x: 1088, y: 96, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xefc655 }, "BackgroundDecals"),
+      FoliageFlower14_1: d(Tx.Foliage.Flower14, { x: 884, y: 135, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xefc655 }, "BackgroundDecals"),
+      FoliageFlower22: d(Tx.Foliage.Flower22, { x: 884, y: 74, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e42 }, "BackgroundDecals"),
+      FoliageFlower22_1: d(Tx.Foliage.Flower22, { x: 1087, y: 174, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e42 }, "BackgroundDecals"),
+      ShapesCircleIrregular26_2: d(Tx.Shapes.CircleIrregular26, { x: 1032, y: 197, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff5e42 }, "BackgroundDecals"),
+      SlotMachineBetButton1: d(Tx.Casino.Slots.OkButton, { x: 1031, y: 193, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xefc655 }, "BackgroundDecals"),
+      ShapesConfetti18x8: d(Tx.Shapes.Confetti18x8, { x: 1064, y: 169, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      ShapesConfetti18x8_1: d(Tx.Shapes.Confetti18x8, { x: 913, y: 65, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      ShapesConfetti18x8_2: d(Tx.Shapes.Confetti18x8, { x: 907, y: 197, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x046a5f }, "BackgroundDecals"),
+      CasinoSlotsTitleSimplySevens: d(Tx.Casino.Slots.TitleSimplySevens, { x: 526, y: 59, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      Block: e(r["Block"], { x: 280, y: 232, width: 912, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 208, y: 232, width: 72, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 136, y: 232, width: 72, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 56, y: 232, width: 80, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: -64, y: 232, width: 120, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 712, y: 216, width: 80, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
+      Block_6: e(r["Block"], { x: 1192, y: 232, width: 152, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
+      Player: e(r["Player"], { x: 160, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      fromWizard: e(r["Checkpoint"], { x: 688, y: -8, flippedX: false, values: { name: "fromWizard", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      fromTaxi: e(r["Checkpoint"], { x: 688, y: -8, flippedX: false, values: { name: "fromTaxi", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
+      CurtainsGroup: dg(80, -76, "CurtainsGroup", "FrontDecals"),
+      FurnitureGiantCurtain0: d(Tx.Furniture.GiantCurtain0, { x: 1070, y: -76, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
+      FurnitureGiantCurtain0_1: d(Tx.Furniture.GiantCurtain0, { x: 872, y: -61, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
+      FurnitureGiantCurtain0_2: d(Tx.Furniture.GiantCurtain0, { x: 674, y: -64, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
+      FurnitureGiantCurtain0_3: d(Tx.Furniture.GiantCurtain0, { x: 80, y: -72, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
+      FurnitureGiantCurtain0_4: d(Tx.Furniture.GiantCurtain0, { x: 278, y: -69, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
+      FurnitureGiantCurtain0_5: d(Tx.Furniture.GiantCurtain0, { x: 476, y: -60, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
+      ShapesCircleIrregular26_3: d(Tx.Shapes.CircleIrregular26, { x: 377, y: 16, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0x167055 }, "FrontDecals"),
+      FurnitureGiantCurtain0_6: d(Tx.Furniture.GiantCurtain0, { x: 1265, y: -72, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
+      FurnitureGiantCurtain0_7: d(Tx.Furniture.GiantCurtain0, { x: 1463, y: -73, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
+      FurnitureGiantCurtain0_8: d(Tx.Furniture.GiantCurtain0, { x: 1661, y: -67, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
+      SlotMachineSecondaryDisplay0: e(r["Region"], { x: 492, y: 72, width: 57, height: 15, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: -56, y: 112, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromOhioCasino", name: "", depth: 0 } }, "RegionEntities"),
+      SlotMachineSecondaryDisplay1: e(r["Region"], { x: 893, y: 179, width: 97, height: 19, values: { name: "SlotMachineSecondaryDisplay1", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      SlotMachineDisplay0: e(r["Marker"], { x: 456, y: 101, values: { name: "SlotMachineDisplay0", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 442, y: 85, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_1: e(r["EnvironmentSparkleMarker"], { x: 432, y: 163, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_2: e(r["EnvironmentSparkleMarker"], { x: 595, y: 178, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_3: e(r["EnvironmentSparkleMarker"], { x: 596, y: 86, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_4: e(r["EnvironmentSparkleMarker"], { x: 654, y: 119, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      SlotMachineDisplay1: e(r["Marker"], { x: 892, y: 66, values: { name: "SlotMachineDisplay1", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      EnvironmentSparkleMarker_5: e(r["EnvironmentSparkleMarker"], { x: 890, y: 16, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_6: e(r["EnvironmentSparkleMarker"], { x: 1008, y: 25, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_7: e(r["EnvironmentSparkleMarker"], { x: 961, y: 1, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_8: e(r["EnvironmentSparkleMarker"], { x: 954, y: 44, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_9: e(r["EnvironmentSparkleMarker"], { x: 1047, y: 17, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_10: e(r["EnvironmentSparkleMarker"], { x: 1083, y: 27, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      PityMarker: e(r["Marker"], { x: 752, y: 232, values: { name: "PityMarker", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+      GuardianCatMarker: e(r["Marker"], { x: 752, y: 216, values: { name: "GuardianCatMarker", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
     };
   },
   OhioDmv: (): LvlType.OhioDmv => {
@@ -17713,31 +17652,14 @@ export namespace LvlType {
     ResetPlayerMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type OhioCasino = {
-    ShapesSquare32: Sprite;
-    ShapesSquare32_1: Sprite;
-    ShapesSquare32_2: Sprite;
-    ShapesSquare32_3: Sprite;
-    TerrainGrassCloudy: Sprite;
-    TerrainGrassCloudy_1: Sprite;
-    TerrainGrassCloudy_2: Sprite;
-    TerrainGrassCloudy_3: Sprite;
-    TerrainGrassCloudy_4: Sprite;
-    TerrainGrassCloudy_5: Sprite;
-    TerrainGrassCloudy_6: Sprite;
-    TerrainGrassCloudy_7: Sprite;
-    TerrainDistantWaves0: Sprite;
-    TerrainDistantWaves0_1: Sprite;
-    TerrainGrassLumpy0: Sprite;
-    TerrainGrassLumpy0_1: Sprite;
     CasinoSlotsMachineStupidFlower: Sprite;
+    ShapesCircleIrregular26: Sprite;
     CasinoSlotsMachineSimple: Sprite;
     CasinoSlotsMachineSimpleSecondaryDisplay: Sprite;
     CasinoSlotsFiveValuableBet: Sprite;
     ShapesExaggerate16px: Sprite;
     ShapesExaggerate16px_1: Sprite;
-    TerrainDistantWaves0_2: Sprite;
-    TerrainDistantWaves0_3: Sprite;
-    ShapesCircleIrregular26: Sprite;
+    ShapesCircleIrregular26_1: Sprite;
     SlotMachineBetButton0: Sprite;
     CasinoSlotsTenValuableBet: Sprite;
     FoliageMedium0: Sprite;
@@ -17753,7 +17675,7 @@ export namespace LvlType {
     FoliageFlower14_1: Sprite;
     FoliageFlower22: Sprite;
     FoliageFlower22_1: Sprite;
-    ShapesCircleIrregular26_1: Sprite;
+    ShapesCircleIrregular26_2: Sprite;
     SlotMachineBetButton1: Sprite;
     ShapesConfetti18x8: Sprite;
     ShapesConfetti18x8_1: Sprite;
@@ -17766,64 +17688,20 @@ export namespace LvlType {
     Block_4: ReturnType<(typeof r)["Block"]>;
     Block_5: ReturnType<(typeof r)["Block"]>;
     Block_6: ReturnType<(typeof r)["Block"]>;
-    Block_7: ReturnType<(typeof r)["Block"]>;
-    Block_8: ReturnType<(typeof r)["Block"]>;
-    Slope: ReturnType<(typeof r)["Slope"]>;
-    Block_9: ReturnType<(typeof r)["Block"]>;
-    Block_10: ReturnType<(typeof r)["Block"]>;
-    Block_11: ReturnType<(typeof r)["Block"]>;
-    Block_12: ReturnType<(typeof r)["Block"]>;
-    Block_13: ReturnType<(typeof r)["Block"]>;
-    TerrainGrassSparse3px1: Sprite;
-    TerrainGrassSparse3px1_1: Sprite;
-    TerrainGrassSparse3px1_2: Sprite;
-    TerrainGrassSparse3px1_3: Sprite;
-    TerrainGrassSparse3px1_4: Sprite;
-    TerrainGrassSparse3px1_5: Sprite;
-    TerrainGrassSparse3px1_6: Sprite;
-    TerrainGrassSparse3px1_7: Sprite;
-    TerrainGrassSparse3px1_8: Sprite;
-    TerrainGrassSparse3px1_9: Sprite;
-    TerrainGrassSparse3px1_10: Sprite;
-    TerrainGrassSparse3px1_11: Sprite;
-    TerrainGrassSparse3px1_12: Sprite;
-    TerrainGrassSparse3px1_13: Sprite;
-    TerrainGrassSparse3px1_14: Sprite;
-    TerrainGrassSparse3px1_15: Sprite;
-    TerrainGrassSparse3px1_16: Sprite;
-    TerrainGrassSparse3px1_17: Sprite;
-    TerrainGrassSparse3px1_18: Sprite;
-    TerrainGrassSparse3px1_19: Sprite;
-    TerrainGrassSparse3px1_20: Sprite;
-    TerrainGrassSparse3px1_21: Sprite;
-    TerrainGrassSparse3px1_22: Sprite;
-    TerrainGrassSparse3px1_23: Sprite;
-    TerrainGrassSparse3px1_24: Sprite;
-    TerrainGrassSparse3px1_25: Sprite;
-    TerrainGrassSparse3px1_26: Sprite;
-    TerrainGrassSparse3px1_27: Sprite;
-    TerrainGrassSparse3px1_28: Sprite;
-    TerrainGrassSparse3px1_29: Sprite;
-    ShapesFontsWeight3C: Sprite;
-    ShapesFontsWeight3A: Sprite;
-    ShapesFontsWeight3S: Sprite;
-    ShapesFontsWeight3I: Sprite;
-    ShapesFontsWeight3N: Sprite;
-    ShapesFontsWeight3O: Sprite;
-    TerrainGrassSparse3px1_30: Sprite;
-    TerrainGrassSparse3px1_31: Sprite;
-    TerrainGrassSparse3px1_32: Sprite;
-    TerrainGrassSparse3px1_33: Sprite;
-    TerrainGrassSparse3px1_34: Sprite;
-    TerrainGrassSparse3px1_35: Sprite;
-    TownMonumentLazarus: Sprite;
-    ShapesLineVertical16: Sprite;
-    ShapesLineVertical16_1: Sprite;
-    ShapesLineVertical16_2: Sprite;
-    LightGlassMetalSheen20px: Sprite;
     Player: ReturnType<(typeof r)["Player"]>;
     fromWizard: ReturnType<(typeof r)["Checkpoint"]>;
     fromTaxi: ReturnType<(typeof r)["Checkpoint"]>;
+    CurtainsGroup: Container<Sprite>;
+    FurnitureGiantCurtain0: Sprite;
+    FurnitureGiantCurtain0_1: Sprite;
+    FurnitureGiantCurtain0_2: Sprite;
+    FurnitureGiantCurtain0_3: Sprite;
+    FurnitureGiantCurtain0_4: Sprite;
+    FurnitureGiantCurtain0_5: Sprite;
+    ShapesCircleIrregular26_3: Sprite;
+    FurnitureGiantCurtain0_6: Sprite;
+    FurnitureGiantCurtain0_7: Sprite;
+    FurnitureGiantCurtain0_8: Sprite;
     SlotMachineSecondaryDisplay0: ReturnType<(typeof r)["Region"]>;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     SlotMachineSecondaryDisplay1: ReturnType<(typeof r)["Region"]>;
