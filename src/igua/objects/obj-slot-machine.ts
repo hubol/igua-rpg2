@@ -126,8 +126,7 @@ export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest
                 }
                 else {
                     Rpg.wallet.spend(pricePerSpin.currency, pricePerSpin.price, "gambling");
-                    // TODO doesn't respect currency
-                    DramaWallet.createSpentValuables(pricePerSpin.price);
+                    DramaWallet.createSpentCurrency(pricePerSpin.currency, pricePerSpin.price);
                     fastSpinRequested = false;
                     paidForGame = true;
                 }

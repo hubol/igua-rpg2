@@ -94,6 +94,13 @@ function createSpentValuables(total: number) {
     return objValuableSpender(total, () => {}).show();
 }
 
+function createSpentCurrency(id: RpgEconomy.Currency.Id, total: number) {
+    if (id === "valuables") {
+        objValuableSpender(total, () => {}).show();
+    }
+    // TODO render non-valuables?
+}
+
 function objValuableSpender(total: number, onSpend: (valuablesKind: RpgEconomy.Valuables.Kind) => void) {
     const currentSpeaker = DramaLib.Speaker.current;
     const currencyToSpawn = getCurrencyToSpawn(total);
@@ -167,6 +174,7 @@ function mxnValuableMotion(obj: Container, targetPosition: VectorSimple) {
 
 export const DramaWallet = {
     askSpendValuables,
+    createSpentCurrency,
     createSpentValuables,
     rewardValuables,
     spendValuables,
