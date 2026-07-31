@@ -2,6 +2,7 @@ import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { fntErotix } from "../../assets/bitmap-fonts/fnt-erotix";
 import { fntErotixLight } from "../../assets/bitmap-fonts/fnt-erotix-light";
 import { objText } from "../../assets/fonts";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
@@ -131,6 +132,7 @@ function* startSpeaking(text: string) {
 export function* show(...messageTexts: string[]) {
     for (const messageText of messageTexts) {
         yield* showOneMessage(messageText);
+        Sfx.Ui.MessageAdvance.rate(0.9, 1.1).play();
     }
 }
 
@@ -206,7 +208,10 @@ function objQuestionOptionBoxes(speaker: DisplayObject | null, options: AskOptio
     )
         .coro(function* (self) {
             yield () => Boolean(self.selected) && Input.isDown("Confirm");
+            Sfx.Ui.MessageConfirmPrime.rate(0.95, 1.05).play();
             yield () => Input.isUp("Confirm");
+
+            Sfx.Ui.MessageConfirm.rate(0.95, 1.05).play();
 
             self.navigation = false;
             const selectedOptionObj = self.selected as ObjQuestionOptionBox;
