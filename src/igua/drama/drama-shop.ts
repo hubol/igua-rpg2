@@ -152,6 +152,7 @@ export function* dramaShop(shopId: DataShop.Id, style: DramaShopStyle) {
     playerStatusObj.add(exitPositions.playerStatusObj);
 
     yield sleepf(1);
+    Sfx.Ui.Shop.Open.play();
     shopObj.visible = true;
 
     yield* Coro.all([
@@ -163,7 +164,7 @@ export function* dramaShop(shopId: DataShop.Id, style: DramaShopStyle) {
     CtxDramaShop.value.state.isInteractive = true;
 
     yield () => done;
-
+    Sfx.Ui.Shop.Close.play();
     pageObj.navigation = false;
     CtxDramaShop.value.state.isInteractive = false;
 
@@ -217,6 +218,7 @@ function objDramaShopStock(
                 const result = stock.tryPurchase();
 
                 if (result.success) {
+                    Sfx.Ui.Shop.Purchase.play();
                     refreshStocks();
 
                     scene.stage.coro(function* () {

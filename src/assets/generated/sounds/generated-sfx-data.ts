@@ -193,6 +193,9 @@ async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
       "ui/navigate back.ogg",
       "ui/navigate into.ogg",
       "ui/select.ogg",
+      "ui/shop/close.ogg",
+      "ui/shop/open.ogg",
+      "ui/shop/purchase.ogg",
     ].map(sfx),
   );
   return {
@@ -443,6 +446,11 @@ async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
       NavigateBack: sounds[187],
       NavigateInto: sounds[188],
       Select: sounds[189],
+      Shop: {
+        Close: sounds[190],
+        Open: sounds[191],
+        Purchase: sounds[192],
+      },
     },
   };
 }
