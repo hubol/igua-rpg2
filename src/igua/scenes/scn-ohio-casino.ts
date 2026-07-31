@@ -1,8 +1,10 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
+import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { renderer } from "../current-pixi-renderer";
 import { DataSlotMachines } from "../data/data-slot-machines";
@@ -30,6 +32,7 @@ const slotTxs = {
 
 export function scnOhioCasino() {
     const lvl = Lvl.OhioCasino();
+    Jukebox.play(Mzk.BogusWorld);
     const currencyId: RpgEconomy.Currency.Id = "bone_dusts";
 
     {

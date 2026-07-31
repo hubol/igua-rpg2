@@ -12,6 +12,8 @@ export class Sound {
         pan: 0 as Polar,
         rate: 1,
         loop: false,
+        loopStart: 0 as Seconds,
+        loopEnd: 0 as Seconds,
     };
 
     constructor(private readonly _buffer: AudioBuffer, destination: AudioNode) {
@@ -36,8 +38,10 @@ export class Sound {
         return this;
     }
 
-    loop(value = true) {
+    loop(value = true, start = 0, end = 0) {
         this._params.loop = value;
+        this._params.loopStart = start;
+        this._params.loopEnd = end;
         return this;
     }
 
@@ -61,6 +65,8 @@ export class Sound {
         source.buffer = this._buffer;
         source.playbackRate.value = this._params.rate;
         source.loop = this._params.loop;
+        source.loopStart = this._params.loopStart;
+        source.loopEnd = this._params.loopEnd;
         return source;
     }
 
@@ -74,6 +80,8 @@ export class Sound {
     private _resetParams() {
         this._params.gain = 1;
         this._params.loop = false;
+        this._params.loopStart = 0;
+        this._params.loopEnd = 0;
         this._params.pan = 0;
         this._params.rate = 1;
     }

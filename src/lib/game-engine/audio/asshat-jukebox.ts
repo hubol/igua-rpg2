@@ -1,3 +1,4 @@
+import { MusicTrackConfig } from "../../../assets/music-track-config";
 import { intervalWait } from "../../browser/interval-wait";
 import { timeoutSleep } from "../../browser/timeout-sleep";
 import { Milliseconds, Unit } from "../../math/number-alias-types";
@@ -86,7 +87,11 @@ export class AsshatJukebox {
         ]);
         if (this._latestPlayRequest === track) {
             this._nowPlaying?.instance?.stop();
-            const instance = sound.loop(true).rate(this._rate).playInstance();
+            const config = MusicTrackConfig.get(track);
+            const instance = sound
+                .loop(true, config.loopStart, config.loopEnd)
+                .rate(this._rate)
+                .playInstance();
             this._nowPlaying = { track, instance };
         }
     }
