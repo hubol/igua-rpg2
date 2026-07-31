@@ -73,7 +73,7 @@ export function scnVaseInhabitant() {
         })
         .step(self => self.interact.enabled = !vaseCosm.isFilled);
 
-    const floatingIguanaObj = objIguanaPuppet(lvl.VaseNpc.objIguanaNpc.persona.looks)
+    const floatingIguanaObj = objIguanaPuppet(lvl.VaseNpc.objIguanaNpc.looks)
         .mixin(mxnIguanaSpeaker, lvl.VaseNpc.objIguanaNpc.persona)
         .coro(function* (self) {
             const y = self.y;

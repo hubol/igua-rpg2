@@ -1,4 +1,5 @@
 import { DisplayObject } from "pixi.js";
+import { DataNpcLooks } from "../data/data-npc-looks";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { Rpg } from "../rpg/rpg";
@@ -11,7 +12,7 @@ export function mxnIguanaSpeaker(obj: DisplayObject, persona: DataNpcPersona.Typ
                 rpgIguanaNpc: Rpg.iguanaNpc(persona.id),
             },
         })
-        .mixin(mxnSpeaker, { name: persona.name, ...objIguanaNpc.getSpeakerColors(persona.looks) })
+        .mixin(mxnSpeaker, { name: persona.name, ...objIguanaNpc.getSpeakerColors(DataNpcLooks[persona.looksId]) })
         .handles("mxnSpeaker.speakingStarted", (self) => {
             self.mxnIguanaSpeaker.rpgIguanaNpc.onSpeak();
         });

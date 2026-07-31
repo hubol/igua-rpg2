@@ -23,8 +23,8 @@ export namespace DataLib {
             (item as Record<string, string>).id !== "__Fallback__"
         );
 
-        function getById<TId extends ThisId>(id: TId): TManifest[TId] {
-            const model = rawManifest[id];
+        function getById<TId extends ThisId>(id: TId): TManifest[TId] & { id: TId } {
+            const model: TManifest[TId] = rawManifest[id];
             if (!model) {
                 Logger.logContractViolationError(
                     `${namespace}.getById`,
@@ -37,6 +37,7 @@ export namespace DataLib {
                 return fallback;
             }
 
+            // @ts-expect-error Don't care
             return model;
         }
 

@@ -9,7 +9,7 @@ import { nlerp } from "../../../lib/math/number";
 import { Integer, Polar, Unit } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { ZIndex } from "../../core/scene/z-index";
-import { NpcLooks } from "../../data/data-npc-looks";
+import { DataNpcLooks } from "../../data/data-npc-looks";
 import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
@@ -52,12 +52,12 @@ const variants = {
     level0: {
         rank: ranks.level0,
         features: new Set<Feature>(["overheat_trail"]),
-        looks: NpcLooks.Skeleton0,
+        looks: DataNpcLooks.Skeleton0,
     },
     level1: {
         rank: ranks.level1,
         features: new Set<Feature>(["fire_breath"]),
-        looks: NpcLooks.Skeleton1,
+        looks: DataNpcLooks.Skeleton1,
     },
 };
 
