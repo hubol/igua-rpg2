@@ -32,8 +32,15 @@ export function objUiDelta({ valueProvider, bgNegativeTint, bgPositiveTint, fgTi
             while (true) {
                 yield () => nextValue !== valueProvider();
                 nextValue = valueProvider();
-                visibleForStepsCount = 120;
                 const delta = nextValue - previousValue;
+
+                if (delta === 0) {
+                    visibleForStepsCount = 0;
+                    continue;
+                }
+
+                visibleForStepsCount = 120;
+
                 textObj.text = (delta > 0 ? "+" : "") + delta;
                 const bgTint = delta < 0 ? bgNegativeTint : bgPositiveTint;
 
