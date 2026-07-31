@@ -214,7 +214,7 @@ function objUiSavePage(sceneChanger: SceneChanger) {
     const width = 96;
 
     const yesButton = objUiButton("Yes", () => {
-        // TODO confirm sfx?
+        Sfx.Ui.Looks.Finalize.play();
         page.navigation = false;
         yesButton.canPress = false;
         Cutscene.play(function* () {

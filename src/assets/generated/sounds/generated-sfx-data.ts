@@ -185,6 +185,7 @@ async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
       "terrain/metal step1.ogg",
       "terrain/metal step2.ogg",
       "terrain/metal step3.ogg",
+      "ui/looks/finalize.ogg",
       "ui/looks/updated.ogg",
       "ui/message advance.ogg",
       "ui/message confirm prime.ogg",
@@ -433,14 +434,15 @@ async function sfxs<T>(sfx: (ogg: string) => Promise<T>) {
     },
     Ui: {
       Looks: {
-        Updated: sounds[182],
+        Finalize: sounds[182],
+        Updated: sounds[183],
       },
-      MessageAdvance: sounds[183],
-      MessageConfirmPrime: sounds[184],
-      MessageConfirm: sounds[185],
-      NavigateBack: sounds[186],
-      NavigateInto: sounds[187],
-      Select: sounds[188],
+      MessageAdvance: sounds[184],
+      MessageConfirmPrime: sounds[185],
+      MessageConfirm: sounds[186],
+      NavigateBack: sounds[187],
+      NavigateInto: sounds[188],
+      Select: sounds[189],
     },
   };
 }
