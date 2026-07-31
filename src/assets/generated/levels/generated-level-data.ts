@@ -7260,7 +7260,7 @@ export const Lvl = {
       Door: e(r["Door"], { x: 200, y: 120, values: { sceneName: "scnOhioDmv", checkpointName: "fromAbove", name: "", depth: 0 } }, "Entities"),
       Door_1: e(r["Door"], { x: 416, y: 312, values: { sceneName: "scnOhioDmv", checkpointName: "fromBelow", name: "", depth: 0 } }, "Entities"),
       Sign: e(r["Sign"], { x: 256, y: 168, values: { title: "Services", message: "Update your name and appearance here.", name: "", depth: 0, isSpecial: false } }, "Entities"),
-      DmvClerkNpc: e(r["IguanaNpc"], { x: 72, y: 360, flippedX: false, values: { personaName: "", name: "DmvClerkNpc", depth: 0 } }, "CharacterEntities"),
+      DmvClerkNpc: e(r["IguanaNpc"], { x: 72, y: 360, flippedX: false, values: { personaName: "OhioDmvClerk", name: "DmvClerkNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 72, y: 184, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromAbove: e(r["Checkpoint"], { x: 376, y: 360, flippedX: true, values: { name: "fromAbove", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromBelow: e(r["Checkpoint"], { x: 264, y: 168, flippedX: false, values: { name: "fromBelow", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),

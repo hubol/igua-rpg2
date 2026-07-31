@@ -158,12 +158,15 @@ function objQuestionOptionBox(text: string, color: RgbInt, textColor: RgbInt) {
                 self.scale.set(obj.selected && Input.isDown("Confirm") ? -0.9 : 1, 1)
             ),
         ).mixin(mxnBoilPivot),
-        objText.MediumIrregular(text, { tint: textColor, align: "center" }).anchored(0.5, 0.5).at(64, 22).step(self => {
-            self.fontName = obj.selected ? fntErotix.font : fntErotixLight.font;
-            if (obj.selected && scene.ticker.ticks % 7 === 0) {
-                self.seed = (self.seed * 100_000) % 99_998;
-            }
-        }),
+        objText.MediumIrregular(text, { tint: textColor, align: "center", maxWidth: 110 })
+            .anchored(0.5, 0.5)
+            .at(64, 22)
+            .step(self => {
+                self.fontName = obj.selected ? fntErotix.font : fntErotixLight.font;
+                if (obj.selected && scene.ticker.ticks % 7 === 0) {
+                    self.seed = (self.seed * 100_000) % 99_998;
+                }
+            }),
     )
         .step(self => self.pivot.y = obj.selected ? 2 : 0)
         .show(obj);

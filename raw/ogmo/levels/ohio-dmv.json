@@ -226,7 +226,7 @@
           "originX": 20,
           "originY": 52,
           "flippedX": false,
-          "values": {"personaName": "", "name": "DmvClerkNpc", "depth": 0}
+          "values": {"personaName": "OhioDmvClerk", "name": "DmvClerkNpc", "depth": 0}
         }
       ]
     },
