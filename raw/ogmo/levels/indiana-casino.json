@@ -182,7 +182,7 @@
           "height": 15,
           "originX": 0,
           "originY": 0,
-          "tint": "#00ff00",
+          "tint": "#ffffff",
           "values": {"name": "SlotMachineSecondaryDisplay0", "depth": 0}
         },
         {
@@ -207,7 +207,7 @@
           "height": 19,
           "originX": 0,
           "originY": 0,
-          "tint": "#00ff00",
+          "tint": "#ffffff",
           "values": {"name": "SlotMachineSecondaryDisplay1", "depth": 0}
         }
       ]

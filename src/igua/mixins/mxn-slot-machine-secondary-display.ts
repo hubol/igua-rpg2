@@ -10,7 +10,7 @@ export function mxnSlotMachineSecondaryDisplay(regionObj: Graphics, slotMachineO
         .coro(function* () {
             regionObj.visible = true;
 
-            const textObj = objText.MediumIrregular("")
+            const textObj = objText.MediumIrregular("", { tint: regionObj.tint })
                 .mixin(mxnBoilSeed)
                 .at(regionObj.x + Math.round(regionObj.width / 2), regionObj.y + Math.round(regionObj.height / 2) + 2)
                 .anchored(0.5, 0.5)

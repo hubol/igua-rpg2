@@ -22,7 +22,7 @@ import { RpgEconomy } from "../rpg/rpg-economy";
 
 // TODO this is all copy-paste from indiana casino
 const slotTxs = {
-    simple: Tx.Casino.Slots.Simple.split({ count: 4 }),
+    evil: Tx.Casino.Slots.Evil.split({ count: 4 }),
     happiness: Tx.Casino.Slots.Happiness.split({ count: 4 }),
 };
 
@@ -36,17 +36,17 @@ export function scnOhioCasino() {
         const slotMachineObj = objSlotMachine(
             rules,
             {
-                mask: { y: -2, height: 74 },
-                reel: { gap: 46 },
-                slot: { gap: 20 },
+                mask: { y: -1, height: 67 },
+                reel: { gap: 57 },
+                slot: { gap: 55 },
                 sym,
                 symbolTxs: {
-                    cherry: slotTxs.simple[0],
-                    bar: slotTxs.simple[1],
-                    seven: slotTxs.simple[2],
-                    wild: slotTxs.simple[3],
+                    cherry: slotTxs.evil[1],
+                    bar: slotTxs.evil[2],
+                    seven: slotTxs.evil[3],
+                    wild: slotTxs.evil[0],
                 },
-                lineHighlightTint: 0xFF5200,
+                lineHighlightTint: 0x000000,
             },
             currencyId,
         )

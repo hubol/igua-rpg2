@@ -18,17 +18,6 @@
       "gridCellsY": 35,
       "entities": [
         {
-          "name": "Marker",
-          "id": 0,
-          "_eid": "73148747",
-          "x": 472,
-          "y": 133,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#00ff00",
-          "values": {"name": "SlotMachineDisplay0", "depth": 0}
-        },
-        {
           "name": "EnvironmentSparkleMarker",
           "id": 1,
           "_eid": "61143896",
@@ -193,7 +182,7 @@
           "height": 20,
           "originX": 0,
           "originY": 0,
-          "tint": "#00ff00",
+          "tint": "#cd0004",
           "values": {"name": "SlotMachineSecondaryDisplay0", "depth": 0}
         },
         {
@@ -220,6 +209,19 @@
           "originY": 0,
           "tint": "#00ff00",
           "values": {"name": "SlotMachineSecondaryDisplay1", "depth": 0}
+        },
+        {
+          "name": "Region",
+          "id": 3,
+          "_eid": "11908607",
+          "x": 475,
+          "y": 130,
+          "width": 32,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "SlotMachineDisplay0", "depth": 0}
         }
       ]
     },
@@ -604,6 +606,15 @@
           "originY": 0,
           "tint": "#6a050b",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 16,
+          "_eid": "95769929",
+          "x": 417,
+          "y": 103,
+          "width": 232,
+          "values": {"name": "", "visible": false, "depth": 0}
         }
       ]
     },

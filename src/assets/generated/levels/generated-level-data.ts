@@ -2425,9 +2425,9 @@ export const Lvl = {
       Player: e(r["Player"], { x: 160, y: 288, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromWizard: e(r["Checkpoint"], { x: 688, y: 48, flippedX: false, values: { name: "fromWizard", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromTaxi: e(r["Checkpoint"], { x: 688, y: 48, flippedX: false, values: { name: "fromTaxi", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
-      SlotMachineSecondaryDisplay0: e(r["Region"], { x: 492, y: 128, width: 57, height: 15, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      SlotMachineSecondaryDisplay0: e(r["Region"], { x: 492, y: 128, width: 57, height: 15, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0xffffff }, "RegionEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -56, y: 168, height: 128, flippedX: true, values: { sceneName: "scnSinSwamp", checkpointName: "fromCasino", name: "", depth: 0 } }, "RegionEntities"),
-      SlotMachineSecondaryDisplay1: e(r["Region"], { x: 893, y: 235, width: 97, height: 19, values: { name: "SlotMachineSecondaryDisplay1", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      SlotMachineSecondaryDisplay1: e(r["Region"], { x: 893, y: 235, width: 97, height: 19, values: { name: "SlotMachineSecondaryDisplay1", depth: 0 }, tint: 0xffffff }, "RegionEntities"),
       SlotMachineDisplay0: e(r["Marker"], { x: 456, y: 157, values: { name: "SlotMachineDisplay0", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 442, y: 141, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_1: e(r["EnvironmentSparkleMarker"], { x: 432, y: 219, values: { name: "", depth: 0 } }, "MarkerEntities"),
@@ -7156,6 +7156,7 @@ export const Lvl = {
       Block_4: e(r["Block"], { x: -64, y: 232, width: 120, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
       Block_5: e(r["Block"], { x: 712, y: 216, width: 80, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
       Block_6: e(r["Block"], { x: 1192, y: 232, width: 152, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 417, y: 103, width: 232, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
       Player: e(r["Player"], { x: 160, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromWizard: e(r["Checkpoint"], { x: 688, y: -8, flippedX: false, values: { name: "fromWizard", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromTaxi: e(r["Checkpoint"], { x: 688, y: -8, flippedX: false, values: { name: "fromTaxi", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
@@ -7173,10 +7174,10 @@ export const Lvl = {
       FurnitureGiantCurtain0_6: d(Tx.Furniture.GiantCurtain0, { x: 1265, y: -72, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
       FurnitureGiantCurtain0_7: d(Tx.Furniture.GiantCurtain0, { x: 1463, y: -73, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
       FurnitureGiantCurtain0_8: d(Tx.Furniture.GiantCurtain0, { x: 1661, y: -67, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, groupName: "CurtainsGroup", tint: 0xffffff }, "FrontDecals"),
-      SlotMachineSecondaryDisplay0: e(r["Region"], { x: 462, y: 202, width: 100, height: 20, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      SlotMachineSecondaryDisplay0: e(r["Region"], { x: 462, y: 202, width: 100, height: 20, values: { name: "SlotMachineSecondaryDisplay0", depth: 0 }, tint: 0xcd0004 }, "RegionEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: -56, y: 112, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromOhioCasino", name: "", depth: 0 } }, "RegionEntities"),
       SlotMachineSecondaryDisplay1: e(r["Region"], { x: 893, y: 179, width: 97, height: 19, values: { name: "SlotMachineSecondaryDisplay1", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
-      SlotMachineDisplay0: e(r["Marker"], { x: 472, y: 133, values: { name: "SlotMachineDisplay0", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      SlotMachineDisplay0: e(r["Region"], { x: 475, y: 130, width: 32, height: 32, values: { name: "SlotMachineDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 442, y: 85, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_1: e(r["EnvironmentSparkleMarker"], { x: 432, y: 163, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_2: e(r["EnvironmentSparkleMarker"], { x: 595, y: 178, values: { name: "", depth: 0 } }, "MarkerEntities"),
@@ -17789,6 +17790,7 @@ export namespace LvlType {
     Block_4: ReturnType<(typeof r)["Block"]>;
     Block_5: ReturnType<(typeof r)["Block"]>;
     Block_6: ReturnType<(typeof r)["Block"]>;
+    Pipe: ReturnType<(typeof r)["Pipe"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     fromWizard: ReturnType<(typeof r)["Checkpoint"]>;
     fromTaxi: ReturnType<(typeof r)["Checkpoint"]>;
@@ -17809,7 +17811,7 @@ export namespace LvlType {
     SlotMachineSecondaryDisplay0: ReturnType<(typeof r)["Region"]>;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     SlotMachineSecondaryDisplay1: ReturnType<(typeof r)["Region"]>;
-    SlotMachineDisplay0: ReturnType<(typeof r)["Marker"]>;
+    SlotMachineDisplay0: ReturnType<(typeof r)["Region"]>;
     EnvironmentSparkleMarker: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
     EnvironmentSparkleMarker_1: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
     EnvironmentSparkleMarker_2: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
