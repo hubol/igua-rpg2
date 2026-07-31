@@ -7178,11 +7178,11 @@ export const Lvl = {
       GateHorizontal: e(r["GateHorizontal"], { x: -56, y: 112, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromOhioCasino", name: "", depth: 0 } }, "RegionEntities"),
       SlotMachineSecondaryDisplay1: e(r["Region"], { x: 893, y: 179, width: 97, height: 19, values: { name: "SlotMachineSecondaryDisplay1", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       SlotMachineDisplay0: e(r["Region"], { x: 475, y: 130, width: 32, height: 32, values: { name: "SlotMachineDisplay0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
-      EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 442, y: 85, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      EnvironmentSparkleMarker_1: e(r["EnvironmentSparkleMarker"], { x: 432, y: 163, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      EnvironmentSparkleMarker_2: e(r["EnvironmentSparkleMarker"], { x: 595, y: 178, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      EnvironmentSparkleMarker_3: e(r["EnvironmentSparkleMarker"], { x: 596, y: 86, values: { name: "", depth: 0 } }, "MarkerEntities"),
-      EnvironmentSparkleMarker_4: e(r["EnvironmentSparkleMarker"], { x: 654, y: 119, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker: e(r["EnvironmentSparkleMarker"], { x: 433, y: 95, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_1: e(r["EnvironmentSparkleMarker"], { x: 453, y: 157, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_2: e(r["EnvironmentSparkleMarker"], { x: 384, y: 153, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_3: e(r["EnvironmentSparkleMarker"], { x: 626, y: 74, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_4: e(r["EnvironmentSparkleMarker"], { x: 395, y: 120, values: { name: "", depth: 0 } }, "MarkerEntities"),
       SlotMachineDisplay1: e(r["Marker"], { x: 892, y: 66, values: { name: "SlotMachineDisplay1", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
       EnvironmentSparkleMarker_5: e(r["EnvironmentSparkleMarker"], { x: 890, y: 16, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_6: e(r["EnvironmentSparkleMarker"], { x: 1008, y: 25, values: { name: "", depth: 0 } }, "MarkerEntities"),
@@ -7192,6 +7192,8 @@ export const Lvl = {
       EnvironmentSparkleMarker_10: e(r["EnvironmentSparkleMarker"], { x: 1083, y: 27, values: { name: "", depth: 0 } }, "MarkerEntities"),
       PityMarker: e(r["Marker"], { x: 752, y: 232, values: { name: "PityMarker", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
       GuardianCatMarker: e(r["Marker"], { x: 752, y: 216, values: { name: "GuardianCatMarker", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
+      EnvironmentSparkleMarker_11: e(r["EnvironmentSparkleMarker"], { x: 643, y: 199, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      EnvironmentSparkleMarker_12: e(r["EnvironmentSparkleMarker"], { x: 583, y: 223, values: { name: "", depth: 0 } }, "MarkerEntities"),
     };
   },
   OhioDmv: (): LvlType.OhioDmv => {
@@ -17826,6 +17828,8 @@ export namespace LvlType {
     EnvironmentSparkleMarker_10: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
     PityMarker: ReturnType<(typeof r)["Marker"]>;
     GuardianCatMarker: ReturnType<(typeof r)["Marker"]>;
+    EnvironmentSparkleMarker_11: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    EnvironmentSparkleMarker_12: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
   };
   export type OhioDmv = {
     ShapesSquare32: Sprite;

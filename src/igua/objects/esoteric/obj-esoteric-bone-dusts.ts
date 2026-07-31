@@ -8,6 +8,7 @@ import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnBoilTextureIndex } from "../../mixins/mxn-boil-texture-index";
 import { Rpg } from "../../rpg/rpg";
 import { playerObj } from "../obj-player";
+import { objUiDelta } from "../overlay/obj-ui-delta";
 import { StepOrder } from "../step-order";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 
@@ -32,6 +33,13 @@ export function objEsotericBoneDusts() {
             .anchored(0.5, 0.5)
             .at(28, 43)
             .step(self => self.text = String(Rpg.wallet.count("bone_dusts"))),
+        objUiDelta({
+            bgNegativeTint: 0xff0000,
+            bgPositiveTint: 0x000000,
+            fgTint: 0xffffff,
+            valueProvider: () => Rpg.wallet.count("bone_dusts"),
+        })
+            .at(40, 51),
     )
         .step(
             self => self.x = approachLinear(self.x, Math.min(playerObj.x + 130, scene.level.width - 120), 2),
