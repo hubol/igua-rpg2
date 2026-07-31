@@ -14,6 +14,8 @@ import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { DataSlotMachines } from "../data/data-slot-machines";
 import { DramaWallet } from "../drama/drama-wallet";
+import { show } from "../drama/show";
+import { Cutscene } from "../globals";
 import { GenerativeMusicUtils } from "../lib/generative-music-utils";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
@@ -97,18 +99,48 @@ export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest
     const reelObj = container(...reelObjs, maskObj).masked(maskObj);
     const resultsObj = container();
 
+    let paidForGame = false;
+    let fastSpinRequested = false;
+
     const api = {
         get rules() {
             return rules;
         },
-        paidForGame: false,
         get pricePerSpin() {
             return pricePerSpin;
         },
-        fastSpinRequested: false,
+        get canRequestSpin() {
+            return !paidForGame || !fastSpinRequested;
+        },
+        requestSpin() {
+            if (!paidForGame) {
+                if (!Rpg.wallet.canAfford(pricePerSpin)) {
+                    Cutscene.play(function* () {
+                        Sfx.Interact.Error.play();
+                        yield* show(
+                            "Minimum bet is "
+                                + RpgEconomy.Offer.toString(pricePerSpin.price, pricePerSpin.currency)
+                                + ".",
+                        );
+                    }, { speaker: obj });
+                }
+                else {
+                    Rpg.wallet.spend(pricePerSpin.currency, pricePerSpin.price, "gambling");
+                    // TODO doesn't respect currency
+                    DramaWallet.createSpentValuables(pricePerSpin.price);
+                    fastSpinRequested = false;
+                    paidForGame = true;
+                }
+            }
+            else if (!fastSpinRequested) {
+                fastSpinRequested = true;
+            }
+        },
     };
 
-    return container(reelObj, resultsObj)
+    const obj = container(reelObj, resultsObj);
+
+    return obj
         .merge({ objSlotMachine: api })
         .dispatches<"objSlotMachine.gameStarted">()
         .dispatches<"objSlotMachine.fastSpinOpportunityEnded">()
@@ -117,7 +149,7 @@ export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest
         .dispatchesValue<"objSlotMachine.showGamePrize", Integer>()
         .coro(function* (self) {
             while (true) {
-                yield () => api.paidForGame;
+                yield () => paidForGame;
 
                 resultsObj.removeAllChildren();
                 self.dispatch("objSlotMachine.gameStarted");
@@ -145,12 +177,12 @@ export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest
 
                 yield* Coro.race([
                     spinReels(),
-                    () => api.fastSpinRequested,
+                    () => fastSpinRequested,
                 ]);
 
                 self.dispatch("objSlotMachine.fastSpinOpportunityEnded");
 
-                if (api.fastSpinRequested) {
+                if (fastSpinRequested) {
                     const coros: Coro.Type[] = [];
 
                     for (let i = 0; i < reelOffsets.length; i++) {
@@ -205,7 +237,7 @@ export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest
                     Rpg.wallet.earn("casino_pity", pricePerSpin.price + Rpg.character.buffs.wallet.bonusCasinoPity);
                 }
 
-                api.paidForGame = false;
+                paidForGame = false;
             }
         })
         .coro(function* (self) {
