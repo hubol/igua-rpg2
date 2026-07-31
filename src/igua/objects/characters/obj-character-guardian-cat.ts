@@ -1,6 +1,7 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { container } from "../../../lib/pixi/container";
+import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { ZIndex } from "../../core/scene/z-index";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
@@ -22,7 +23,7 @@ const [
     txLegsFrontRaised,
 ] = Tx.Characters.GuardianCat.Layers.split({ width: 88 });
 
-export function objCharacterGuardianCat() {
+export function objCharacterGuardianCat(rgbMap: MapRgbFilter.Map) {
     const api = {
         frontLegsRaised: false,
     };
@@ -47,7 +48,7 @@ export function objCharacterGuardianCat() {
                     txs: objAngelMouth.txs.w20,
                     toothGapWidth: 2,
                     teethCount: 2,
-                    negativeSpaceTint: 0x000000,
+                    negativeSpaceTint: 0x00ff00,
                 })
                     .at(43, 36),
             )
@@ -55,8 +56,13 @@ export function objCharacterGuardianCat() {
         )
             .mixin(mxnFacingPivot, { left: -3, right: 3, down: 0, up: 0 }),
     )
-        .mixin(mxnSpeaker, { name: "Guardian Cat", tintPrimary: 0x000000, tintSecondary: 0xffffff })
+        .mixin(mxnSpeaker, {
+            name: "Guardian Cat",
+            tintPrimary: rgbMap[1] ?? 0x000000,
+            tintSecondary: rgbMap[0] ?? 0xffffff,
+        })
         .mixin(mxnDetectPlayer)
+        .filtered(new MapRgbFilter(...rgbMap))
         .pivoted(43, 64)
         .merge({ objChararcterGuardianCat: api })
         .zIndexed(ZIndex.CharacterEntities);

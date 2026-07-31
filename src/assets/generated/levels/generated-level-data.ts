@@ -380,7 +380,7 @@ export const Lvl = {
     return { Block: e(r["Block"], { x: 0, y: 200, width: 504, height: 80, values: { name: "", depth: 0, visible: true }, tint: 0x000000 }, "TerrainEntities"), Player: e(r["Player"], { x: 104, y: 200, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"), DummyMarker: e(r["Marker"], { x: 280, y: 200, values: { name: "DummyMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities") };
   },
   DungeonBones: (): LvlType.DungeonBones => {
-    applyLevel({ width: 1896, height: 760, backgroundTint: 0x408000, terrainTint: 0x000000, regionId: null });
+    applyLevel({ width: 1896, height: 760, backgroundTint: 0x408000, terrainTint: 0x000000, regionId: "Ohio" });
     return {
       FurnitureChainMetal: d(Tx.Furniture.ChainMetal, { x: 561, y: 32, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       FurnitureChainMetal_1: d(Tx.Furniture.ChainMetal, { x: 561, y: -23, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
@@ -461,6 +461,7 @@ export const Lvl = {
       EnemySpikeBall_14: e(r["EnemySpikeBall"], { x: 1720, y: 600, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySpikeBall_15: e(r["EnemySpikeBall"], { x: 1744, y: 608, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySkeliguana_5: e(r["EnemySkeliguana"], { x: 408, y: 576, flippedX: false, values: { variant: "level1", name: "", depth: 0 } }, "Entities"),
+      Idol: e(r["Idol"], { x: 685, y: 88, uid: 178551880654000, values: { name: "", depth: 0 } }, "Entities"),
       Skeleton2: d(Tx.Town.Bones.HornedBoy1, { x: 1316, y: 529, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0x1400ff }, "AboveEntitiesDecals"),
       Skeleton1: d(Tx.Town.Bones.HornedBoy1, { x: 1188, y: 529, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffd600 }, "AboveEntitiesDecals"),
       Skeleton0: d(Tx.Town.Bones.HornedBoy1, { x: 1052, y: 529, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xff0000 }, "AboveEntitiesDecals"),
@@ -7157,7 +7158,7 @@ export const Lvl = {
       Block_5: e(r["Block"], { x: 712, y: 216, width: 80, height: 16, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
       Block_6: e(r["Block"], { x: 1192, y: 232, width: 152, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0x6a050b }, "TerrainEntities"),
       Pipe: e(r["Pipe"], { x: 417, y: 103, width: 232, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
-      Player: e(r["Player"], { x: 160, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      Player: e(r["Player"], { x: 104, y: 232, flippedX: false, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromWizard: e(r["Checkpoint"], { x: 688, y: -8, flippedX: false, values: { name: "fromWizard", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       fromTaxi: e(r["Checkpoint"], { x: 688, y: -8, flippedX: false, values: { name: "fromTaxi", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       FurnitureColumnGiant0: d(Tx.Furniture.ColumnGiant0, { x: 1216, y: 118, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
@@ -7194,6 +7195,7 @@ export const Lvl = {
       GuardianCatMarker: e(r["Marker"], { x: 752, y: 216, values: { name: "GuardianCatMarker", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
       EnvironmentSparkleMarker_11: e(r["EnvironmentSparkleMarker"], { x: 643, y: 199, values: { name: "", depth: 0 } }, "MarkerEntities"),
       EnvironmentSparkleMarker_12: e(r["EnvironmentSparkleMarker"], { x: 583, y: 223, values: { name: "", depth: 0 } }, "MarkerEntities"),
+      ShopKeeperMarker: e(r["Marker"], { x: 192, y: 232, values: { name: "ShopKeeperMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
     };
   },
   OhioDmv: (): LvlType.OhioDmv => {
@@ -11226,6 +11228,7 @@ export namespace LvlType {
     EnemySpikeBall_14: ReturnType<(typeof r)["EnemySpikeBall"]>;
     EnemySpikeBall_15: ReturnType<(typeof r)["EnemySpikeBall"]>;
     EnemySkeliguana_5: ReturnType<(typeof r)["EnemySkeliguana"]>;
+    Idol: ReturnType<(typeof r)["Idol"]>;
     Skeleton2: Sprite;
     Skeleton1: Sprite;
     Skeleton0: Sprite;
@@ -17830,6 +17833,7 @@ export namespace LvlType {
     GuardianCatMarker: ReturnType<(typeof r)["Marker"]>;
     EnvironmentSparkleMarker_11: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
     EnvironmentSparkleMarker_12: ReturnType<(typeof r)["EnvironmentSparkleMarker"]>;
+    ShopKeeperMarker: ReturnType<(typeof r)["Marker"]>;
   };
   export type OhioDmv = {
     ShapesSquare32: Sprite;

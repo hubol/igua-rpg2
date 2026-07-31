@@ -4,7 +4,7 @@
   "height": 760,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#000000", "Region ID": "~Unset~"},
+  "values": {"Terrain Color": "#000000", "Region ID": "Ohio"},
   "backgroundColor": "#408000",
   "layers": [
     {
@@ -465,6 +465,17 @@
           "originY": 37,
           "flippedX": false,
           "values": {"variant": "level1", "name": "", "depth": 0}
+        },
+        {
+          "name": "Idol",
+          "id": 35,
+          "_eid": "79655020",
+          "x": 685,
+          "y": 88,
+          "originX": 32,
+          "originY": 97,
+          "uid": 178551880654000,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },

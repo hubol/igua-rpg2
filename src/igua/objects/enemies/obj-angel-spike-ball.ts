@@ -1,6 +1,8 @@
-import { Sprite } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Tx } from "../../../assets/textures";
+import { CollisionShape } from "../../../lib/pixi/collision";
+import { container } from "../../../lib/pixi/container";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { RpgAttack } from "../../rpg/rpg-attack";
 
@@ -13,7 +15,13 @@ const variants = {
 export function objAngelSpikeBall(entity: OgmoEntities.EnemySpikeBall) {
     const variant = variants[entity.values.variant] ?? variants.level0;
 
-    return Sprite.from(Tx.Enemy.SpikeBall)
-        .anchored(0.5, 0.5)
+    const collisionShapeObj = new Graphics().beginFill(0xff0000).drawRect(4, 3, 16, 15).invisible();
+
+    return container(
+        Sprite.from(Tx.Enemy.SpikeBall)
+            .anchored(0.5, 0.5),
+        collisionShapeObj,
+    )
+        .collisionShape(CollisionShape.DisplayObjects, [collisionShapeObj])
         .mixin(mxnRpgAttack, { attack: variant.atk });
 }

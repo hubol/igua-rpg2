@@ -433,6 +433,30 @@ export namespace DataShop {
                     },
                 ],
             },
+            OhioCasino: {
+                stocks: [
+                    {
+                        product: { kind: "key_item", id: "SeedBlue" },
+                        initialQuantity: 99,
+                        price: { currency: "bone_dusts", deltaSold: 1, initial: 1 },
+                    },
+                    {
+                        product: { kind: "key_item", id: "SeedPurple" },
+                        initialQuantity: 99,
+                        price: { currency: "bone_dusts", deltaSold: 1, initial: 1 },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeHealthUp" },
+                        initialQuantity: 5,
+                        price: { currency: "bone_dusts", deltaSold: 150, initial: 100 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "StrengthUp", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "bone_dusts", deltaSold: 0, initial: 300 },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );

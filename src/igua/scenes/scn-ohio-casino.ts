@@ -7,6 +7,7 @@ import { ZIndex } from "../core/scene/z-index";
 import { renderer } from "../current-pixi-renderer";
 import { DataSlotMachines } from "../data/data-slot-machines";
 import { DramaInventory } from "../drama/drama-inventory";
+import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -120,7 +121,7 @@ export function scnOhioCasino() {
         .at(renderer.width, 10)
         .show();
 
-    objCharacterGuardianCat()
+    objCharacterGuardianCat([0xffffff, 0x000000])
         .coro(function* (self) {
             self
                 .mixin(mxnCutscene, function* () {
@@ -165,5 +166,14 @@ export function scnOhioCasino() {
                 });
         })
         .at(lvl.GuardianCatMarker)
+        .show();
+
+    objCharacterGuardianCat([0x91B7FF, 0x1B56C4])
+        .coro(function* (self) {
+            self.mixin(mxnCutscene, function* () {
+                yield* dramaShop("OhioCasino", self.speaker);
+            });
+        })
+        .at(lvl.ShopKeeperMarker)
         .show();
 }
