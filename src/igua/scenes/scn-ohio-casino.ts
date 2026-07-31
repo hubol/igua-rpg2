@@ -48,6 +48,10 @@ export function scnOhioCasino() {
                 },
                 lineHighlightTint: 0x000000,
             },
+            {
+                tone: Sfx.Interact.SlotMachine.Tone1,
+                win: Sfx.Interact.SlotMachine.Win1,
+            },
             currencyId,
         )
             .at(lvl.SlotMachineDisplay0)
@@ -79,6 +83,7 @@ export function scnOhioCasino() {
                 },
                 lineHighlightTint: 0xFF5E42,
             },
+            undefined,
             currencyId,
         )
             .at(lvl.SlotMachineDisplay1)

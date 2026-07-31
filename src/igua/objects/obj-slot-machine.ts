@@ -1,5 +1,6 @@
 import { Graphics, LINE_CAP, Matrix, Sprite, Texture } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
+import { Sound } from "../../lib/game-engine/audio/sound";
 import { Logger } from "../../lib/game-engine/logger";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interp } from "../../lib/game-engine/routines/interp";
@@ -39,6 +40,11 @@ interface SlotMachineRenderConfig<TSymbols extends DataSlotMachines.SymbolsManif
     symbolTxs: Partial<Record<keyof TSymbols, Texture>>;
 }
 
+interface SlotMachineSfx {
+    tone: Sound;
+    win: Sound;
+}
+
 namespace SymbolTextures {
     export function create(config: SlotMachineRenderConfig<DataSlotMachines.SymbolsManifest>) {
         const map = new Map<RpgSlotMachine.Symbol, Texture>(
@@ -68,6 +74,7 @@ namespace SymbolTextures {
 export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest>(
     rules: RpgSlotMachine.Rules,
     config: SlotMachineRenderConfig<TSymbols>,
+    sfx: SlotMachineSfx = { tone: Sfx.Interact.SlotMachine.Tone0, win: Sfx.Interact.SlotMachine.Win0 },
     currencyId: RpgEconomy.Currency.Id = "valuables",
 ) {
     const symbolTxs = SymbolTextures.create(config);
@@ -189,7 +196,7 @@ export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest
                 }
 
                 if (totalPrize > 0) {
-                    self.play(Sfx.Interact.SlotMachine.Win0);
+                    self.play(sfx.win);
                     self.coro(function* () {
                         yield* DramaWallet.earn(currencyId, totalPrize, "gambling");
                     });
@@ -204,7 +211,7 @@ export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest
         .coro(function* (self) {
             while (true) {
                 yield onPrimitiveMutate(() => reelsAdvancedCount);
-                self.play(Sfx.Interact.SlotMachine.Tone0.rate(GenerativeMusicUtils.getRate("major")));
+                self.play(sfx.tone.rate(GenerativeMusicUtils.getRate("major")));
                 yield sleep(100);
             }
         });
