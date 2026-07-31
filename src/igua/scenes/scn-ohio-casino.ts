@@ -13,6 +13,7 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSlotMachineBetButton } from "../mixins/mxn-slot-machine-bet-button";
 import { mxnSlotMachineSecondaryDisplay } from "../mixins/mxn-slot-machine-secondary-display";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objCharacterGuardianCat } from "../objects/characters/obj-character-guardian-cat";
 import { objEsotericBoneDusts } from "../objects/esoteric/obj-esoteric-bone-dusts";
 import { objSlotMachine } from "../objects/obj-slot-machine";
@@ -54,6 +55,11 @@ export function scnOhioCasino() {
             },
             currencyId,
         )
+            .mixin(mxnSpeaker, {
+                name: "The Evil, Evil Skeleton who came from Hell",
+                tintPrimary: 0xCD0004,
+                tintSecondary: 0x000000,
+            })
             .at(lvl.SlotMachineDisplay0)
             .zIndexed(ZIndex.Entities)
             .show();
