@@ -274,7 +274,7 @@ export namespace DataSlotMachines {
             wild: {
                 identity: "wild",
                 prizeCondition: "line_from_left_consecutive",
-                countsToPrize: [0, 0, 150],
+                countsToPrize: [0, 0, 222],
             },
         } satisfies SymbolsManifest;
 
