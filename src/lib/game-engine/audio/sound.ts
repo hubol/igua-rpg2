@@ -60,6 +60,10 @@ export class Sound {
         return new SoundInstance(source, stereoGainNode, offset ?? 0);
     }
 
+    get duration() {
+        return this._buffer.duration;
+    }
+
     private _createSourceNode() {
         const source = this._context.createBufferSource();
         source.buffer = this._buffer;

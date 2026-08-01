@@ -88,8 +88,11 @@ export class AsshatJukebox {
         if (this._latestPlayRequest === track) {
             this._nowPlaying?.instance?.stop();
             const config = MusicTrackConfig.get(track);
+
+            const loopEnd = config.loopEnd === MusicTrackConfig.EndOfFile ? sound.duration : config.loopEnd;
+
             const instance = sound
-                .loop(true, config.loopStart, config.loopEnd)
+                .loop(true, config.loopStart, loopEnd)
                 .rate(this._rate)
                 .playInstance();
             this._nowPlaying = { track, instance };

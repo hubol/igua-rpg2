@@ -3,9 +3,15 @@ import { Seconds } from "../lib/math/number-alias-types";
 import { Mzk } from "./music";
 
 export namespace MusicTrackConfig {
+    export const EndOfFile: unique symbol = Symbol.for("EndOfFile");
+
+    export namespace EndOfFile {
+        export type Type = typeof EndOfFile;
+    }
+
     interface Model {
         loopStart: Seconds;
-        loopEnd: Seconds;
+        loopEnd: Seconds | EndOfFile.Type;
     }
 
     const defaultValue: Model = {
@@ -26,7 +32,7 @@ export namespace MusicTrackConfig {
     })({
         BogusWorld: {
             loopStart: .6894,
-            loopEnd: 44.8275,
+            loopEnd: EndOfFile,
         },
     });
 }
