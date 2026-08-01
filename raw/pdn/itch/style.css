@@ -19,67 +19,69 @@ div.formatted_description.user_formatted {
    }
 }
 
-.html_embed_widget :has(button) {
-   background-color: white;
-   padding: 0 !important;
-   width: unset !important;
-   height: unset !important;
-}
-
-.html_embed_widget button,
-.view_game_page .donate .button {
-    --hubol-blck: #012265;
-    --hubol-dark: #1457c9;
-    --hubol-lite: #ffffff;
-   font-family: var(--itchio_font_family);
-   font-size: 20px !important;
-   padding: 10px 20px !important;
-   height: unset !important;
-   border-radius: 4px !important;
-   background-color: var(--hubol-dark);
-   border: solid 4px var(--hubol-dark) !important;
-   color: var(--hubol-lite);
-   transform: translate(0, -8px);
-   box-shadow: 0 8px 0 var(--hubol-blck) !important;
-   text-transform: capitalize;
-
-   transition: background-color 0.1s, border 0.1s, color 0.1s, box-shadow 0.1s, transform 0.1s;
-
-   &:hover {
-      background-color: var(--hubol-lite);
+body :not(:has(.app_play_btn)) {
+   .html_embed_widget :has(button) {
+      background-color: white;
+      padding: 0 !important;
+      width: unset !important;
+      height: unset !important;
+   }
+   
+   .html_embed_widget button,
+   .view_game_page .donate .button {
+       --hubol-blck: #012265;
+       --hubol-dark: #1457c9;
+       --hubol-lite: #ffffff;
+      font-family: var(--itchio_font_family);
+      font-size: 20px !important;
+      padding: 10px 20px !important;
+      height: unset !important;
+      border-radius: 4px !important;
+      background-color: var(--hubol-dark);
       border: solid 4px var(--hubol-dark) !important;
-      color: var(--hubol-dark);
-      transform: translate(0, 0);
-      box-shadow: 0 0px 0 var(--hubol-blck) !important;
+      color: var(--hubol-lite);
+      transform: translate(0, -8px);
+      box-shadow: 0 8px 0 var(--hubol-blck) !important;
+      text-transform: capitalize;
+   
+      transition: background-color 0.1s, border 0.1s, color 0.1s, box-shadow 0.1s, transform 0.1s;
+   
+      &:hover {
+         background-color: var(--hubol-lite);
+         border: solid 4px var(--hubol-dark) !important;
+         color: var(--hubol-dark);
+         transform: translate(0, 0);
+         box-shadow: 0 0px 0 var(--hubol-blck) !important;
+      }
    }
-}
-
-.view_game_page .donate .button:before {
-    font-family: "icomoon";
-    content: "\e010";
-    font-weight: normal;
-    margin-right: 5px;
-}
-
-.view_html_game_page {
-   margin-top: 32px;
-   display: grid;
-   column-gap: 40px;
-   grid-template-columns: 1fr 1fr;
-
-   & > *:nth-child(1) {
-      justify-self: end;
+   
+   .view_game_page .donate .button:before {
+       font-family: "icomoon";
+       content: "\e010";
+       font-weight: normal;
+       margin-right: 5px;
    }
-
-   & > *:nth-child(2) {
-      justify-self: start;
+   
+   .view_html_game_page {
+      margin-top: 32px;
+      display: grid;
+      column-gap: 40px;
+      grid-template-columns: 1fr 1fr;
+   
+      & > *:nth-child(1) {
+         justify-self: end;
+      }
+   
+      & > *:nth-child(2) {
+         justify-self: start;
+      }
    }
-}
-
-.view_html_game_page::before {
-   display: none !important;
-}
-
-.columns {
-   grid-column: span 2;
+   
+   .view_html_game_page::before {
+      display: none !important;
+   }
+   
+   .columns {
+      grid-column: span 2;
+   }
 }
