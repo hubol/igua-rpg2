@@ -222,7 +222,7 @@ const ranks = {
     }),
 };
 
-type Feature = "electrical_pulse" | "spiked_canonball" | "teleportation";
+type Feature = "electrical_pulse" | "spiked_canonball" | "teleportation" | "spiked_canonball:many";
 
 const variants = {
     level0: {
@@ -236,7 +236,7 @@ const variants = {
         rank: ranks.level1,
     },
     level2: {
-        features: new Set<Feature>(["electrical_pulse", "teleportation"]),
+        features: new Set<Feature>(["electrical_pulse", "teleportation", "spiked_canonball"]),
         theme: themes.uberMongo,
         rank: ranks.level2,
     },
@@ -445,13 +445,31 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
             bodyObj.bulge.unit = 0;
             yield interp(bodyObj.bulge, "unit").to(1).over(1000);
             yield sleep(500);
-            obj.play(Sfx.Enemy.Suggestive.Flick.rate(0.9, 1.1));
-            const canonballObj = objAngelSuggestiveSpikedCanonball(obj.status).at(obj).show();
-            canonballObj.speed.x = obj.mxnDetectPlayer.position.x > obj.x ? 2 : -2;
-            canonballObj.speed.y = -8;
-            bodyObj.bulge.phase = "recovering";
-            bodyObj.bulge.unit = 0;
-            yield interp(bodyObj.bulge, "unit").to(1).over(1000);
+            if (features.has("spiked_canonball:many")) {
+                for (let i = 0; i < 10; i++) {
+                    const f = nlerp(-1, 1, i / 9);
+                    obj.play(Sfx.Enemy.Suggestive.Flick.rate(0.8 + i * 0.1));
+                    const canonballObj = objAngelSuggestiveSpikedCanonball(obj.status)
+                        .at(obj)
+                        .show();
+
+                    canonballObj.speed.at(f * 2.3, -8);
+                    yield sleepf(3);
+                }
+
+                bodyObj.bulge.phase = "recovering";
+                bodyObj.bulge.unit = 0;
+                yield interp(bodyObj.bulge, "unit").to(1).over(500);
+            }
+            else {
+                obj.play(Sfx.Enemy.Suggestive.Flick.rate(0.9, 1.1));
+                const canonballObj = objAngelSuggestiveSpikedCanonball(obj.status).at(obj).show();
+                canonballObj.speed.x = obj.mxnDetectPlayer.position.x > obj.x ? 2 : -2;
+                canonballObj.speed.y = -8;
+                bodyObj.bulge.phase = "recovering";
+                bodyObj.bulge.unit = 0;
+                yield interp(bodyObj.bulge, "unit").to(1).over(1000);
+            }
         },
         *fireElectricalPulse() {
             if (
