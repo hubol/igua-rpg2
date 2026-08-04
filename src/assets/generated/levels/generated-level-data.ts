@@ -4119,6 +4119,10 @@ export const Lvl = {
     applyLevel({ width: 3248, height: 1280, backgroundTint: 0x408000, terrainTint: 0xab21c1, regionId: "Ohio" });
     return {
       WorldMapMountain0: d(Tx.WorldMap.Mountain0, { x: 1368, y: 1384, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xab21c1 }, "BackgroundDecals"),
+      SkyCloudBalls1: d(Tx.Sky.CloudBalls1, { x: 2705, y: 1094, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      SkyCloudBalls1_1: d(Tx.Sky.CloudBalls1, { x: 969, y: 574, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      SkyCloudBalls1_2: d(Tx.Sky.CloudBalls1, { x: 737, y: 686, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
+      SkyCloudBalls1_3: d(Tx.Sky.CloudBalls1, { x: 737, y: 790, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       Block: e(r["Block"], { x: -200, y: 1240, width: 3472, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
       Slope: e(r["Slope"], { x: 2584, y: 1144, width: 320, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
       Slope_1: e(r["Slope"], { x: 1800, y: 1048, width: 320, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
@@ -4132,7 +4136,7 @@ export const Lvl = {
       Slope_4: e(r["Slope"], { x: 1328, y: 368, width: 256, height: 96, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
       Pipe_1: e(r["Pipe"], { x: 1184, y: 512, width: 16, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
       Block_3: e(r["Block"], { x: 2088, y: 1144, width: 496, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
-      Pipe_2: e(r["Pipe"], { x: 2672, y: 1088, width: 64, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Pipe_2: e(r["Pipe"], { x: 2640, y: 1088, width: 128, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
       Slope_5: e(r["Slope"], { x: 2224, y: 848, width: 320, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
       Block_4: e(r["Block"], { x: 1032, y: 848, width: 1200, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
       PipeSlope_2: e(r["PipeSlope"], { x: 672, y: 888, width: 256, height: 96, flippedX: false, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
@@ -4141,10 +4145,13 @@ export const Lvl = {
       Block_5: e(r["Block"], { x: 1552, y: 832, width: 208, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
       Slope_7: e(r["Slope"], { x: 1760, y: 832, width: 32, height: 16, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
       Slope_8: e(r["Slope"], { x: 1520, y: 832, width: 32, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
-      EnemyBallon: e(r["EnemyBallon"], { x: 2168, y: 480, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
-      EnemyBallon_1: e(r["EnemyBallon"], { x: 2304, y: 480, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
-      EnemyBallon_2: e(r["EnemyBallon"], { x: 2416, y: 480, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
-      EnemyBallon_3: e(r["EnemyBallon"], { x: 2544, y: 480, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      Pipe_4: e(r["Pipe"], { x: 904, y: 568, width: 128, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
+      Pipe_5: e(r["Pipe"], { x: 672, y: 680, width: 128, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
+      Pipe_6: e(r["Pipe"], { x: 672, y: 784, width: 128, values: { name: "", visible: false, depth: 0 } }, "TerrainEntities"),
+      EnemyBallon: e(r["EnemyBallon"], { x: 1648, y: 1192, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemyBallon_1: e(r["EnemyBallon"], { x: 1784, y: 1192, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemyBallon_2: e(r["EnemyBallon"], { x: 1896, y: 1192, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemyBallon_3: e(r["EnemyBallon"], { x: 2024, y: 1192, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemySuggestive: e(r["EnemySuggestive"], { x: 2480, y: 1144, uid: 178585529777102, values: { name: "", depth: 0, variant: "level2", safeTint: "#ffffff" } }, "Entities"),
       EnemySuggestive_1: e(r["EnemySuggestive"], { x: 1248, y: 1048, uid: 178586010424500, values: { name: "", depth: 0, variant: "level2", safeTint: "#ff0000" } }, "Entities"),
       EnemySuggestive_2: e(r["EnemySuggestive"], { x: 2272, y: 1144, uid: 178586016850202, values: { name: "", depth: 0, variant: "level2", safeTint: "#61ff00" } }, "Entities"),
@@ -4154,6 +4161,10 @@ export const Lvl = {
       EnemySuggestive_6: e(r["EnemySuggestive"], { x: 1384, y: 848, uid: 178586293895706, values: { name: "", depth: 0, variant: "level2", safeTint: "#000000" } }, "Entities"),
       EnemySuggestive_7: e(r["EnemySuggestive"], { x: 1960, y: 848, uid: 178586294664107, values: { name: "", depth: 0, variant: "level2", safeTint: "#000000" } }, "Entities"),
       Player: e(r["Player"], { x: 3008, y: 1240, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      SkyCloudWormlike0: d(Tx.Sky.CloudWormlike0, { x: 2705, y: 1091, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
+      SkyCloudWormlike0_1: d(Tx.Sky.CloudWormlike0, { x: 969, y: 572, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
+      SkyCloudWormlike0_2: d(Tx.Sky.CloudWormlike0, { x: 737, y: 684, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
+      SkyCloudWormlike0_3: d(Tx.Sky.CloudWormlike0, { x: 737, y: 788, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
       GateHorizontal: e(r["GateHorizontal"], { x: 3184, y: 1112, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopRight", name: "", depth: 0 } }, "RegionEntities"),
       GateHorizontal_1: e(r["GateHorizontal"], { x: -40, y: 1112, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopLeft", name: "", depth: 0 } }, "RegionEntities"),
       FlowerMarker: e(r["Marker"], { x: 1704, y: 368, values: { name: "FlowerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
@@ -14827,6 +14838,10 @@ export namespace LvlType {
   };
   export type MountFlop = {
     WorldMapMountain0: Sprite;
+    SkyCloudBalls1: Sprite;
+    SkyCloudBalls1_1: Sprite;
+    SkyCloudBalls1_2: Sprite;
+    SkyCloudBalls1_3: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Slope: ReturnType<(typeof r)["Slope"]>;
     Slope_1: ReturnType<(typeof r)["Slope"]>;
@@ -14849,6 +14864,9 @@ export namespace LvlType {
     Block_5: ReturnType<(typeof r)["Block"]>;
     Slope_7: ReturnType<(typeof r)["Slope"]>;
     Slope_8: ReturnType<(typeof r)["Slope"]>;
+    Pipe_4: ReturnType<(typeof r)["Pipe"]>;
+    Pipe_5: ReturnType<(typeof r)["Pipe"]>;
+    Pipe_6: ReturnType<(typeof r)["Pipe"]>;
     EnemyBallon: ReturnType<(typeof r)["EnemyBallon"]>;
     EnemyBallon_1: ReturnType<(typeof r)["EnemyBallon"]>;
     EnemyBallon_2: ReturnType<(typeof r)["EnemyBallon"]>;
@@ -14862,6 +14880,10 @@ export namespace LvlType {
     EnemySuggestive_6: ReturnType<(typeof r)["EnemySuggestive"]>;
     EnemySuggestive_7: ReturnType<(typeof r)["EnemySuggestive"]>;
     Player: ReturnType<(typeof r)["Player"]>;
+    SkyCloudWormlike0: Sprite;
+    SkyCloudWormlike0_1: Sprite;
+    SkyCloudWormlike0_2: Sprite;
+    SkyCloudWormlike0_3: Sprite;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     GateHorizontal_1: ReturnType<(typeof r)["GateHorizontal"]>;
     FlowerMarker: ReturnType<(typeof r)["Marker"]>;

@@ -284,7 +284,56 @@
       "gridCellHeight": 8,
       "gridCellsX": 406,
       "gridCellsY": 160,
-      "decals": [],
+      "decals": [
+        {
+          "x": 2705,
+          "y": 1091,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "sky/cloud wormlike 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 969,
+          "y": 572,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "sky/cloud wormlike 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 737,
+          "y": 684,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "sky/cloud wormlike 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 737,
+          "y": 788,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "sky/cloud wormlike 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -358,8 +407,8 @@
           "name": "EnemyBallon",
           "id": 0,
           "_eid": "23510996",
-          "x": 2168,
-          "y": 480,
+          "x": 1648,
+          "y": 1192,
           "originX": 22,
           "originY": 24,
           "values": {"variant": "level0", "name": "", "depth": 0}
@@ -368,8 +417,8 @@
           "name": "EnemyBallon",
           "id": 1,
           "_eid": "23510996",
-          "x": 2304,
-          "y": 480,
+          "x": 1784,
+          "y": 1192,
           "originX": 22,
           "originY": 24,
           "values": {"variant": "level0", "name": "", "depth": 0}
@@ -378,8 +427,8 @@
           "name": "EnemyBallon",
           "id": 2,
           "_eid": "23510996",
-          "x": 2416,
-          "y": 480,
+          "x": 1896,
+          "y": 1192,
           "originX": 22,
           "originY": 24,
           "values": {"variant": "level0", "name": "", "depth": 0}
@@ -388,8 +437,8 @@
           "name": "EnemyBallon",
           "id": 3,
           "_eid": "23510996",
-          "x": 2544,
-          "y": 480,
+          "x": 2024,
+          "y": 1192,
           "originX": 22,
           "originY": 24,
           "values": {"variant": "level0", "name": "", "depth": 0}
@@ -667,10 +716,10 @@
           "name": "Pipe",
           "id": 22,
           "_eid": "95769929",
-          "x": 2672,
+          "x": 2640,
           "y": 1088,
-          "width": 64,
-          "values": {"name": "", "visible": true, "depth": 0}
+          "width": 128,
+          "values": {"name": "", "visible": false, "depth": 0}
         },
         {
           "name": "Slope",
@@ -769,6 +818,33 @@
           "flippedY": false,
           "tint": "#ab21c1",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 32,
+          "_eid": "95769929",
+          "x": 904,
+          "y": 568,
+          "width": 128,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 33,
+          "_eid": "95769929",
+          "x": 672,
+          "y": 680,
+          "width": 128,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 34,
+          "_eid": "95769929",
+          "x": 672,
+          "y": 784,
+          "width": 128,
+          "values": {"name": "", "visible": false, "depth": 0}
         }
       ]
     },
@@ -805,6 +881,54 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 2705,
+          "y": 1094,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "sky/cloud balls 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 969,
+          "y": 574,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "sky/cloud balls 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 737,
+          "y": 686,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "sky/cloud balls 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 737,
+          "y": 790,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "sky/cloud balls 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
