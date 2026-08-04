@@ -170,16 +170,21 @@ const ranks = {
     }),
 };
 
-type Feature = "electrical_pulse";
+type Feature = "electrical_pulse" | "spiked_canonball" | "teleportation";
 
 const variants = {
     level0: {
-        features: new Set<Feature>([]),
+        features: new Set<Feature>(["spiked_canonball"]),
         theme: themes.common,
         rank: ranks.level0,
     },
     level1: {
-        features: new Set<Feature>(["electrical_pulse"]),
+        features: new Set<Feature>(["spiked_canonball", "electrical_pulse"]),
+        theme: themes.freakish,
+        rank: ranks.level1,
+    },
+    level2: {
+        features: new Set<Feature>(["spiked_canonball", "electrical_pulse", "teleportation"]),
         theme: themes.freakish,
         rank: ranks.level1,
     },
@@ -363,7 +368,7 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
 
     const legsObj = objAngelPlantLegs({ objToBounce: actualHeadObj }).pivoted(18, -17);
 
-    const enemyObj = container(
+    const obj = container(
         legsObj,
         actualHeadObj,
         healthbarAnchorObj,
@@ -374,25 +379,51 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
             healthbarAnchorObj,
         })
         .mixin(mxnEnemyDeathBurst, { map: theme.tints.spirit })
+        .mixin(mxnDetectPlayer);
+
+    const moves = {
+        *launchCanonball() {
+            bodyObj.bulge.phase = "inflating";
+            bodyObj.bulge.unit = 0;
+            yield interp(bodyObj.bulge, "unit").to(1).over(1000);
+            yield sleep(500);
+            bodyObj.bulge.phase = "bursting";
+            bodyObj.bulge.unit = 0;
+            yield interp(bodyObj.bulge, "unit").to(1).over(1000);
+            yield sleep(500);
+            obj.play(Sfx.Enemy.Suggestive.Flick.rate(0.9, 1.1));
+            const canonballObj = objAngelSuggestiveSpikedCanonball(obj.status).at(obj).show();
+            canonballObj.speed.x = obj.mxnDetectPlayer.position.x > obj.x ? 2 : -2;
+            canonballObj.speed.y = -8;
+            bodyObj.bulge.phase = "recovering";
+            bodyObj.bulge.unit = 0;
+            yield interp(bodyObj.bulge, "unit").to(1).over(1000);
+        },
+        *fireElectricalPulse() {
+            faceObj.mouthObj.controls.frowning = true;
+            obj.play(Sfx.Enemy.Suggestive.Lift.rate(0.9, 1.1));
+            yield interpvr(obj.pivot).factor(factor.sine).to(0, 16).over(250);
+            objAngelSuggestiveElectricalPulseGround(obj).at(obj).show().zIndexed(
+                ZIndex.Entities - 1,
+            );
+            yield sleep(500);
+            faceObj.mouthObj.controls.frowning = false;
+            obj.play(Sfx.Enemy.Suggestive.Unlift.rate(0.9, 1.1));
+            yield interpvr(obj.pivot).factor(factor.sine).to(0, 0).over(250);
+            yield sleep(1000);
+        },
+    };
+
+    return obj
         .filtered(new MapRgbFilter(...theme.tints.map))
-        .mixin(mxnDetectPlayer)
         .coro(function* (self) {
             while (true) {
-                bodyObj.bulge.phase = "inflating";
-                bodyObj.bulge.unit = 0;
-                yield interp(bodyObj.bulge, "unit").to(1).over(1000);
-                yield sleep(500);
-                bodyObj.bulge.phase = "bursting";
-                bodyObj.bulge.unit = 0;
-                yield interp(bodyObj.bulge, "unit").to(1).over(1000);
-                yield sleep(500);
-                self.play(Sfx.Enemy.Suggestive.Flick.rate(0.9, 1.1));
-                const canonballObj = objAngelSuggestiveSpikedCanonball(self.status).at(self).show();
-                canonballObj.speed.x = self.mxnDetectPlayer.position.x > self.x ? 2 : -2;
-                canonballObj.speed.y = -8;
-                bodyObj.bulge.phase = "recovering";
-                bodyObj.bulge.unit = 0;
-                yield interp(bodyObj.bulge, "unit").to(1).over(1000);
+                if (features.has("spiked_canonball")) {
+                    yield* moves.launchCanonball();
+                }
+                else {
+                    yield sleep(4000);
+                }
 
                 yield* self.mxnRpgStatusPotions.dramaUseAppropriatePotion();
 
@@ -405,17 +436,7 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
                     && Math.abs(self.mxnDetectPlayer.position.y - self.y) < 60
                     && self.mxnDetectPlayer.speed.y >= 0
                 ) {
-                    faceObj.mouthObj.controls.frowning = true;
-                    self.play(Sfx.Enemy.Suggestive.Lift.rate(0.9, 1.1));
-                    yield interpvr(self.pivot).factor(factor.sine).to(0, 16).over(250);
-                    objAngelSuggestiveElectricalPulseGround(self).at(self).show().zIndexed(
-                        ZIndex.Entities - 1,
-                    );
-                    yield sleep(500);
-                    faceObj.mouthObj.controls.frowning = false;
-                    self.play(Sfx.Enemy.Suggestive.Unlift.rate(0.9, 1.1));
-                    yield interpvr(self.pivot).factor(factor.sine).to(0, 0).over(250);
-                    yield sleep(1000);
+                    yield* moves.fireElectricalPulse();
                 }
             }
         })
@@ -433,8 +454,6 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
                 yield () => self.mxnDetectPlayer.detectionScore <= 0;
             }
         });
-
-    return enemyObj;
 }
 
 const atkAngelSuggestiveSpikedCanonball = RpgAttack.create({
