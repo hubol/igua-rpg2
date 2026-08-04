@@ -25,7 +25,7 @@ export namespace OgmoEntities {
   export type PocketableItemB = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type GateVertical = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
   export type GateMap = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number; visible: boolean }> & { uid: number };
-  export type EnemySuggestive = OgmoFactory.EntityBase<{ name: string; depth: number; variant: "level0" | "level1" }> & { uid: number };
+  export type EnemySuggestive = OgmoFactory.EntityBase<{ name: string; depth: number; variant: "level0" | "level1" | "level2"; safeTint: string }> & { uid: number };
   export type EnvironmentSparkleMarker = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type Idol = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
   export type StashPocket = OgmoFactory.EntityBase<{ name: string; depth: number }> & { uid: number };
@@ -46,6 +46,7 @@ export namespace OgmoEntities {
   export type Dial = OgmoFactory.EntityBase<{ maxTicks: number; name: string; depth: number }>;
   export type EnemyBallon = OgmoFactory.EntityBase<{ variant: "level0"; name: string; depth: number }>;
   export type EnemySkeliguana = OgmoFactory.EntityBase<{ variant: "level0" | "level1"; name: string; depth: number }>;
+  export type SafeMarker = OgmoFactory.EntityBase<{ name: string; depth: number }>;
 }
 
 export interface OgmoEntityResolverBase {
@@ -92,4 +93,5 @@ export interface OgmoEntityResolverBase {
   Dial: (entity: OgmoEntities.Dial) => unknown;
   EnemyBallon: (entity: OgmoEntities.EnemyBallon) => unknown;
   EnemySkeliguana: (entity: OgmoEntities.EnemySkeliguana) => unknown;
+  SafeMarker: (entity: OgmoEntities.SafeMarker) => unknown;
 }

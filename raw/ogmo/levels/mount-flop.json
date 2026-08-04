@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 2552,
+  "width": 3248,
   "height": 648,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 319,
+      "gridCellsX": 406,
       "gridCellsY": 81,
       "entities": [
         {
@@ -27,6 +27,50 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "FlowerMarker", "depth": 0}
+        },
+        {
+          "name": "SafeMarker",
+          "id": 1,
+          "_eid": "85618544",
+          "x": 2200,
+          "y": 512,
+          "originX": 7,
+          "originY": 7,
+          "tint": "#ffffff",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "SafeMarker",
+          "id": 2,
+          "_eid": "85618544",
+          "x": 2488,
+          "y": 512,
+          "originX": 7,
+          "originY": 7,
+          "tint": "#ffffff",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "SafeMarker",
+          "id": 3,
+          "_eid": "85618544",
+          "x": 1944,
+          "y": 456,
+          "originX": 7,
+          "originY": 7,
+          "tint": "#ffffff",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "SafeMarker",
+          "id": 4,
+          "_eid": "85618544",
+          "x": 2336,
+          "y": 512,
+          "originX": 7,
+          "originY": 7,
+          "tint": "#ffffff",
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -37,14 +81,14 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 319,
+      "gridCellsX": 406,
       "gridCellsY": 81,
       "entities": [
         {
           "name": "GateHorizontal",
           "id": 0,
           "_eid": "97593426",
-          "x": 2504,
+          "x": 3184,
           "y": 480,
           "height": 128,
           "originX": 0,
@@ -73,7 +117,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 319,
+      "gridCellsX": 406,
       "gridCellsY": 81,
       "decals": [],
       "folder": "../textures"
@@ -85,7 +129,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 319,
+      "gridCellsX": 406,
       "gridCellsY": 81,
       "entities": []
     },
@@ -96,14 +140,14 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 319,
+      "gridCellsX": 406,
       "gridCellsY": 81,
       "entities": [
         {
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
-          "x": 2448,
+          "x": 3008,
           "y": 608,
           "originX": 22,
           "originY": 39,
@@ -119,7 +163,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 319,
+      "gridCellsX": 406,
       "gridCellsY": 81,
       "entities": []
     },
@@ -130,7 +174,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 319,
+      "gridCellsX": 406,
       "gridCellsY": 81,
       "decals": [],
       "folder": "../textures"
@@ -142,7 +186,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 319,
+      "gridCellsX": 406,
       "gridCellsY": 81,
       "entities": [
         {
@@ -184,6 +228,17 @@
           "originX": 22,
           "originY": 24,
           "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemySuggestive",
+          "id": 6,
+          "_eid": "25633201",
+          "x": 2336,
+          "y": 512,
+          "originX": 33,
+          "originY": 78,
+          "uid": 178585529777102,
+          "values": {"name": "", "depth": 0, "variant": "level2"}
         }
       ]
     },
@@ -194,7 +249,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 319,
+      "gridCellsX": 406,
       "gridCellsY": 81,
       "decals": [],
       "folder": "../textures"
@@ -206,7 +261,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 319,
+      "gridCellsX": 406,
       "gridCellsY": 81,
       "entities": [
         {
@@ -215,8 +270,8 @@
           "_eid": "93117141",
           "x": -200,
           "y": 608,
-          "width": 3000,
-          "height": 56,
+          "width": 3472,
+          "height": 64,
           "originX": 0,
           "originY": 0,
           "tint": "#ab21c1",
@@ -226,9 +281,9 @@
           "name": "Slope",
           "id": 1,
           "_eid": "95675713",
-          "x": 2144,
+          "x": 2584,
           "y": 512,
-          "width": 256,
+          "width": 320,
           "height": 96,
           "flippedX": true,
           "flippedY": false,
@@ -239,9 +294,9 @@
           "name": "Slope",
           "id": 2,
           "_eid": "95675713",
-          "x": 1888,
+          "x": 1800,
           "y": 416,
-          "width": 256,
+          "width": 320,
           "height": 96,
           "flippedX": true,
           "flippedY": false,
@@ -291,7 +346,7 @@
           "_eid": "93117141",
           "x": 608,
           "y": 416,
-          "width": 1280,
+          "width": 1192,
           "height": 96,
           "originX": 0,
           "originY": 0,
@@ -352,6 +407,28 @@
           "y": 368,
           "width": 16,
           "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 21,
+          "_eid": "93117141",
+          "x": 2088,
+          "y": 512,
+          "width": 496,
+          "height": 56,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ab21c1",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 22,
+          "_eid": "95769929",
+          "x": 2672,
+          "y": 456,
+          "width": 64,
+          "values": {"name": "", "visible": true, "depth": 0}
         }
       ]
     },
@@ -362,7 +439,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 319,
+      "gridCellsX": 406,
       "gridCellsY": 81,
       "entities": []
     },
@@ -373,7 +450,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 319,
+      "gridCellsX": 406,
       "gridCellsY": 81,
       "decals": [
         {
@@ -399,7 +476,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 319,
+      "gridCellsX": 406,
       "gridCellsY": 81,
       "decals": [],
       "folder": "../textures"

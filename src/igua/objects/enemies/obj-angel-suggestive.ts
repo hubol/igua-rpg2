@@ -1,15 +1,18 @@
-import { Graphics, Sprite } from "pixi.js";
+import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
+import { Instances } from "../../../lib/game-engine/instances";
 import { Coro } from "../../../lib/game-engine/routines/coro";
-import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
+import { factor, interp, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear, nlerp } from "../../../lib/math/number";
-import { Integer } from "../../../lib/math/number-alias-types";
+import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
+import { VectorSimple, vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
+import { StringConvert } from "../../../lib/string/string-convert";
 import { ValuesOf } from "../../../lib/types/values-of";
 import { ZIndex } from "../../core/scene/z-index";
 import { scene } from "../../globals";
@@ -24,6 +27,9 @@ import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { RpgStatus } from "../../rpg/rpg-status";
 import { objFxExpressSurprise } from "../effects/obj-fx-express-surprise";
+import { objFxFormativeBurst } from "../effects/obj-fx-formative-burst";
+import { playerObj } from "../obj-player";
+import { objSafeMarker } from "../obj-safe-marker";
 import { objProjectileElectricalPulseGround } from "../projectiles/obj-projectile-electrical-pulse-ground";
 import { objSpikedCanonball } from "../projectiles/obj-spiked-canonball";
 import { AngelThemeTemplate } from "./angel-theme-template";
@@ -184,7 +190,7 @@ const variants = {
         rank: ranks.level1,
     },
     level2: {
-        features: new Set<Feature>(["spiked_canonball", "electrical_pulse", "teleportation"]),
+        features: new Set<Feature>(["electrical_pulse", "teleportation"]),
         theme: themes.freakish,
         rank: ranks.level1,
     },
@@ -335,6 +341,8 @@ function objAngelSuggestiveBody() {
 
 export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
     const { features, rank, theme } = variants[entity.values.variant];
+    // TODO I feel like levels.js should handle this conversion...
+    const safeTint = StringConvert.toRgbInt(entity.values.safeTint ?? "#ffffff");
 
     const faceObj = objAngelSuggestiveFace(theme);
 
@@ -400,6 +408,13 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
             yield interp(bodyObj.bulge, "unit").to(1).over(1000);
         },
         *fireElectricalPulse() {
+            if (
+                Math.abs(obj.mxnDetectPlayer.position.x - obj.x) > 300
+                || Math.abs(obj.mxnDetectPlayer.position.y - obj.y) > 60
+            ) {
+                return;
+            }
+
             faceObj.mouthObj.controls.frowning = true;
             obj.play(Sfx.Enemy.Suggestive.Lift.rate(0.9, 1.1));
             yield interpvr(obj.pivot).factor(factor.sine).to(0, 16).over(250);
@@ -412,31 +427,65 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
             yield interpvr(obj.pivot).factor(factor.sine).to(0, 0).over(250);
             yield sleep(1000);
         },
+        *teleport() {
+            if (!obj.mxnDetectPlayer.isDetected) {
+                return;
+            }
+
+            const maybePosition = findTeleportPosition(safeTint);
+
+            if (!maybePosition) {
+                return;
+            }
+
+            const position = vnew(maybePosition).add(0, -38);
+
+            objFxFormativeBurst(0xf020f0)
+                .at(obj)
+                .show();
+
+            objFxFormativeBurst(0xf020f0)
+                .at(position)
+                .show();
+
+            yield interpv(obj.scale).steps(3).to(0, 0).over(666);
+            obj.at(position);
+            yield interpv(obj.scale).steps(3).to(1, 1).over(666);
+            yield sleep(2000);
+        },
     };
 
     return obj
         .filtered(new MapRgbFilter(...theme.tints.map))
         .coro(function* (self) {
+            if (!features.has("spiked_canonball")) {
+                bodyObj.bulge.phase = "inflating";
+                bodyObj.bulge.unit = 1;
+            }
+
             while (true) {
-                if (features.has("spiked_canonball")) {
-                    yield* moves.launchCanonball();
+                let move: Coro.Type | Coro.Predicate = () => true;
+
+                if (self.mxnRpgStatusPotions.hasPotionToUse()) {
+                    move = self.mxnRpgStatusPotions.dramaUseAppropriatePotion();
                 }
-                else {
-                    yield sleep(4000);
+                else if (features.has("spiked_canonball")) {
+                    move = moves.launchCanonball();
+                }
+                else if (features.has("electrical_pulse")) {
+                    move = moves.fireElectricalPulse();
                 }
 
-                yield* self.mxnRpgStatusPotions.dramaUseAppropriatePotion();
+                yield* Coro.all([
+                    sleep(4000),
+                    move,
+                ]);
 
-                if (!features.has("electrical_pulse")) {
-                    continue;
-                }
-
-                if (
-                    Math.abs(self.mxnDetectPlayer.position.x - self.x) < 300
-                    && Math.abs(self.mxnDetectPlayer.position.y - self.y) < 60
-                    && self.mxnDetectPlayer.speed.y >= 0
-                ) {
+                if (features.has("spiked_canonball") && features.has("electrical_pulse")) {
                     yield* moves.fireElectricalPulse();
+                }
+                if (features.has("teleportation")) {
+                    yield* moves.teleport();
                 }
             }
         })
@@ -486,4 +535,31 @@ function objAngelSuggestiveElectricalPulseGround(attacker: MxnRpgStatus & MxnDet
             self.mxnDischargeable.discharge();
         })
         .show();
+}
+
+const safeMarkerClaims = new WeakMap<DisplayObject, Integer>();
+const teleportPreventionObjs = new Array<DisplayObject>();
+
+const offset = vnew(0, -6);
+
+function findTeleportPosition(tint: RgbInt): VectorSimple | null {
+    teleportPreventionObjs.length = 0;
+    teleportPreventionObjs.push(...Instances(mxnEnemy));
+    teleportPreventionObjs.push(playerObj);
+
+    for (const safeMarkerObj of Instances(objSafeMarker, obj => obj.tint === tint)) {
+        const claimTick = safeMarkerClaims.get(safeMarkerObj) ?? -999;
+        if (scene.ticker.ticks - claimTick < 180) {
+            continue;
+        }
+
+        if (safeMarkerObj.collidesOne(teleportPreventionObjs, offset)) {
+            continue;
+        }
+
+        safeMarkerClaims.set(safeMarkerObj, scene.ticker.ticks);
+        return safeMarkerObj;
+    }
+
+    return null;
 }

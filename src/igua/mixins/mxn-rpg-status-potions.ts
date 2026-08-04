@@ -26,6 +26,10 @@ function inferPotionToUse(
     potionIds: ReadonlyArray<DataPotion.Id>,
     state: RpgStatusPotionsState,
 ): DataPotion.Id | null {
+    if (potionIds.length === 0) {
+        return null;
+    }
+
     const remainingHealthRatio = status.health / status.healthMax;
 
     if (remainingHealthRatio < 1 && potionIds.includes("ThrowableBerry")) {
@@ -127,12 +131,10 @@ export function mxnRpgStatusPotions(statusObj: MxnRpgStatus, { heldPotionIds }: 
         nextPoisonRecoveryRemainingHealthRatio: 0.8,
     };
 
-    const dramaUseAppropriatePotion: () => Coro.Type<void> = function* () {
-        if (heldPotionIds.length === 0) {
-            return;
-        }
+    const inferPotionToUseForThis = () => inferPotionToUse(statusObj.status, heldPotionIds, state);
 
-        const potionId = inferPotionToUse(statusObj.status, heldPotionIds, state);
+    const dramaUseAppropriatePotion: () => Coro.Type<void> = function* () {
+        const potionId = inferPotionToUseForThis();
         if (!potionId) {
             return;
         }
@@ -146,6 +148,9 @@ export function mxnRpgStatusPotions(statusObj: MxnRpgStatus, { heldPotionIds }: 
         .merge({
             mxnRpgStatusPotions: {
                 dramaUseAppropriatePotion,
+                hasPotionToUse() {
+                    return Boolean(inferPotionToUseForThis());
+                },
                 heldPotionIds,
             },
         });

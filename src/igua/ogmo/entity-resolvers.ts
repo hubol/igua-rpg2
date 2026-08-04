@@ -31,6 +31,7 @@ import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { objIntelligenceBackground } from "../objects/obj-intelligence-background";
 import { objIntelligenceSign } from "../objects/obj-intelligence-sign";
 import { createPlayerObj, playerObj } from "../objects/obj-player";
+import { objSafeMarker } from "../objects/obj-safe-marker";
 import { objSign } from "../objects/obj-sign";
 import { objPipe, objPipeSlope, objSolidBlock, objSolidSlope } from "../objects/obj-terrain";
 import { objValuable } from "../objects/obj-valuable";
@@ -115,6 +116,7 @@ export const OgmoEntityResolvers = {
     MagicDoor: (entity) => objDoor(entity.values).mixin(mxnDoorMagic, entity.uid).at(0, 2),
     Darkness: objDarkness,
     OverheatRegion: objEnvironmentOverheatRegion,
+    SafeMarker: objSafeMarker,
     Clock: (entity) => objEsotericClock({ time: { hours: entity.values.hours, minutes: entity.values.minutes } }),
     Dial: (entity) => objEsotericDial({ maxTicks: entity.values.maxTicks }),
 } satisfies OgmoEntityResolverBase;
