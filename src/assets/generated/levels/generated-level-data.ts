@@ -4116,46 +4116,66 @@ export const Lvl = {
     };
   },
   MountFlop: (): LvlType.MountFlop => {
-    applyLevel({ width: 3248, height: 648, backgroundTint: 0x408000, terrainTint: 0xab21c1, regionId: "Ohio" });
+    applyLevel({ width: 3248, height: 1280, backgroundTint: 0x408000, terrainTint: 0xab21c1, regionId: "Ohio" });
     return {
-      WorldMapMountain0: d(Tx.WorldMap.Mountain0, { x: 1368, y: 752, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xab21c1 }, "BackgroundDecals"),
-      Block: e(r["Block"], { x: -200, y: 608, width: 3472, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
-      Slope: e(r["Slope"], { x: 2584, y: 512, width: 320, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
-      Slope_1: e(r["Slope"], { x: 1800, y: 416, width: 320, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
-      Slope_2: e(r["Slope"], { x: 1376, y: 224, width: 256, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
-      Block_1: e(r["Block"], { x: 1120, y: 224, width: 256, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
-      PipeSlope: e(r["PipeSlope"], { x: 736, y: 272, width: 256, height: 96, flippedX: false, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
-      Block_2: e(r["Block"], { x: 608, y: 416, width: 1192, height: 96, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
-      PipeSlope_1: e(r["PipeSlope"], { x: 248, y: 456, width: 256, height: 96, flippedX: false, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
-      Slope_3: e(r["Slope"], { x: 352, y: 416, width: 256, height: 96, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
-      Pipe: e(r["Pipe"], { x: 232, y: 552, width: 16, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
-      Slope_4: e(r["Slope"], { x: 864, y: 224, width: 256, height: 96, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
-      Pipe_1: e(r["Pipe"], { x: 720, y: 368, width: 16, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
-      Block_3: e(r["Block"], { x: 2088, y: 512, width: 496, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
-      Pipe_2: e(r["Pipe"], { x: 2672, y: 456, width: 64, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
-      EnemyBallon: e(r["EnemyBallon"], { x: 1728, y: 296, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
-      EnemyBallon_1: e(r["EnemyBallon"], { x: 1864, y: 296, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
-      EnemyBallon_2: e(r["EnemyBallon"], { x: 1976, y: 296, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
-      EnemyBallon_3: e(r["EnemyBallon"], { x: 2104, y: 296, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
-      EnemySuggestive: e(r["EnemySuggestive"], { x: 2480, y: 512, uid: 178585529777102, values: { name: "", depth: 0, variant: "level2", safeTint: "#ffffff" } }, "Entities"),
-      EnemySuggestive_1: e(r["EnemySuggestive"], { x: 1248, y: 416, uid: 178586010424500, values: { name: "", depth: 0, variant: "level2", safeTint: "#ff0000" } }, "Entities"),
-      EnemySuggestive_2: e(r["EnemySuggestive"], { x: 2272, y: 512, uid: 178586016850202, values: { name: "", depth: 0, variant: "level2", safeTint: "#5dff00" } }, "Entities"),
-      EnemySuggestive_3: e(r["EnemySuggestive"], { x: 1008, y: 416, uid: 178586031251800, values: { name: "", depth: 0, variant: "level2", safeTint: "#f4c700" } }, "Entities"),
-      Player: e(r["Player"], { x: 3008, y: 608, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
-      GateHorizontal: e(r["GateHorizontal"], { x: 3184, y: 480, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopRight", name: "", depth: 0 } }, "RegionEntities"),
-      GateHorizontal_1: e(r["GateHorizontal"], { x: -40, y: 480, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopLeft", name: "", depth: 0 } }, "RegionEntities"),
-      FlowerMarker: e(r["Marker"], { x: 1248, y: 224, values: { name: "FlowerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
-      SafeMarker: e(r["SafeMarker"], { x: 2160, y: 512, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
-      SafeMarker_1: e(r["SafeMarker"], { x: 2488, y: 512, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
-      SafeMarker_2: e(r["SafeMarker"], { x: 2384, y: 512, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
-      SafeMarker_3: e(r["SafeMarker"], { x: 1248, y: 416, values: { name: "", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
-      SafeMarker_4: e(r["SafeMarker"], { x: 1336, y: 416, values: { name: "", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
-      SafeMarker_5: e(r["SafeMarker"], { x: 1152, y: 416, values: { name: "", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
-      SafeMarker_6: e(r["SafeMarker"], { x: 2280, y: 512, values: { name: "", depth: 0 }, tint: 0x61ff00 }, "MarkerEntities"),
-      SafeMarker_7: e(r["SafeMarker"], { x: 2032, y: 482, values: { name: "", depth: 0 }, tint: 0x61ff00 }, "MarkerEntities"),
-      SafeMarker_8: e(r["SafeMarker"], { x: 1008, y: 416, values: { name: "", depth: 0 }, tint: 0xffc700 }, "MarkerEntities"),
-      SafeMarker_9: e(r["SafeMarker"], { x: 872, y: 416, values: { name: "", depth: 0 }, tint: 0xffc700 }, "MarkerEntities"),
-      SafeMarker_10: e(r["SafeMarker"], { x: 1456, y: 416, values: { name: "", depth: 0 }, tint: 0xffc700 }, "MarkerEntities"),
+      WorldMapMountain0: d(Tx.WorldMap.Mountain0, { x: 1368, y: 1384, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xab21c1 }, "BackgroundDecals"),
+      Block: e(r["Block"], { x: -200, y: 1240, width: 3472, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Slope: e(r["Slope"], { x: 2584, y: 1144, width: 320, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Slope_1: e(r["Slope"], { x: 1800, y: 1048, width: 320, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Slope_2: e(r["Slope"], { x: 1840, y: 368, width: 256, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Block_1: e(r["Block"], { x: 1584, y: 368, width: 256, height: 40, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      PipeSlope: e(r["PipeSlope"], { x: 1200, y: 416, width: 256, height: 96, flippedX: false, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
+      Block_2: e(r["Block"], { x: 608, y: 1048, width: 1192, height: 96, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      PipeSlope_1: e(r["PipeSlope"], { x: 248, y: 1088, width: 256, height: 96, flippedX: false, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
+      Slope_3: e(r["Slope"], { x: 352, y: 1048, width: 256, height: 96, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Pipe: e(r["Pipe"], { x: 232, y: 1184, width: 16, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Slope_4: e(r["Slope"], { x: 1328, y: 368, width: 256, height: 96, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Pipe_1: e(r["Pipe"], { x: 1184, y: 512, width: 16, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Block_3: e(r["Block"], { x: 2088, y: 1144, width: 496, height: 56, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Pipe_2: e(r["Pipe"], { x: 2672, y: 1088, width: 64, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Slope_5: e(r["Slope"], { x: 2224, y: 848, width: 320, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Block_4: e(r["Block"], { x: 1032, y: 848, width: 1200, height: 48, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      PipeSlope_2: e(r["PipeSlope"], { x: 672, y: 888, width: 256, height: 96, flippedX: false, values: { name: "", depth: 0, visible: true } }, "TerrainEntities"),
+      Pipe_3: e(r["Pipe"], { x: 656, y: 984, width: 16, values: { name: "", visible: true, depth: 0 } }, "TerrainEntities"),
+      Slope_6: e(r["Slope"], { x: 904, y: 848, width: 128, height: 48, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Block_5: e(r["Block"], { x: 1552, y: 832, width: 208, height: 32, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Slope_7: e(r["Slope"], { x: 1760, y: 832, width: 32, height: 16, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      Slope_8: e(r["Slope"], { x: 1520, y: 832, width: 32, height: 16, flippedX: false, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
+      EnemyBallon: e(r["EnemyBallon"], { x: 2168, y: 480, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemyBallon_1: e(r["EnemyBallon"], { x: 2304, y: 480, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemyBallon_2: e(r["EnemyBallon"], { x: 2416, y: 480, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemyBallon_3: e(r["EnemyBallon"], { x: 2544, y: 480, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
+      EnemySuggestive: e(r["EnemySuggestive"], { x: 2480, y: 1144, uid: 178585529777102, values: { name: "", depth: 0, variant: "level2", safeTint: "#ffffff" } }, "Entities"),
+      EnemySuggestive_1: e(r["EnemySuggestive"], { x: 1248, y: 1048, uid: 178586010424500, values: { name: "", depth: 0, variant: "level2", safeTint: "#ff0000" } }, "Entities"),
+      EnemySuggestive_2: e(r["EnemySuggestive"], { x: 2272, y: 1144, uid: 178586016850202, values: { name: "", depth: 0, variant: "level2", safeTint: "#61ff00" } }, "Entities"),
+      EnemySuggestive_3: e(r["EnemySuggestive"], { x: 1008, y: 1048, uid: 178586031251800, values: { name: "", depth: 0, variant: "level2", safeTint: "#ffc700" } }, "Entities"),
+      EnemySuggestive_4: e(r["EnemySuggestive"], { x: 1680, y: 1048, uid: 178586258967100, values: { name: "", depth: 0, variant: "level2", safeTint: "#2400ff" } }, "Entities"),
+      EnemySuggestive_5: e(r["EnemySuggestive"], { x: 1192, y: 848, uid: 178586282479500, values: { name: "", depth: 0, variant: "level3", safeTint: "#ff00e6" } }, "Entities"),
+      EnemySuggestive_6: e(r["EnemySuggestive"], { x: 1384, y: 848, uid: 178586293895706, values: { name: "", depth: 0, variant: "level2", safeTint: "#000000" } }, "Entities"),
+      EnemySuggestive_7: e(r["EnemySuggestive"], { x: 1960, y: 848, uid: 178586294664107, values: { name: "", depth: 0, variant: "level2", safeTint: "#000000" } }, "Entities"),
+      Player: e(r["Player"], { x: 3008, y: 1240, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
+      GateHorizontal: e(r["GateHorizontal"], { x: 3184, y: 1112, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopRight", name: "", depth: 0 } }, "RegionEntities"),
+      GateHorizontal_1: e(r["GateHorizontal"], { x: -40, y: 1112, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopLeft", name: "", depth: 0 } }, "RegionEntities"),
+      FlowerMarker: e(r["Marker"], { x: 1704, y: 368, values: { name: "FlowerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
+      SafeMarker: e(r["SafeMarker"], { x: 2160, y: 1144, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
+      SafeMarker_1: e(r["SafeMarker"], { x: 2488, y: 1144, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
+      SafeMarker_2: e(r["SafeMarker"], { x: 2384, y: 1144, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
+      SafeMarker_3: e(r["SafeMarker"], { x: 1248, y: 1048, values: { name: "", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+      SafeMarker_4: e(r["SafeMarker"], { x: 1376, y: 1048, values: { name: "", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+      SafeMarker_5: e(r["SafeMarker"], { x: 1112, y: 1048, values: { name: "", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+      SafeMarker_6: e(r["SafeMarker"], { x: 2280, y: 1144, values: { name: "", depth: 0 }, tint: 0x61ff00 }, "MarkerEntities"),
+      SafeMarker_7: e(r["SafeMarker"], { x: 2032, y: 1114, values: { name: "", depth: 0 }, tint: 0x61ff00 }, "MarkerEntities"),
+      SafeMarker_8: e(r["SafeMarker"], { x: 1008, y: 1048, values: { name: "", depth: 0 }, tint: 0xffc700 }, "MarkerEntities"),
+      SafeMarker_9: e(r["SafeMarker"], { x: 872, y: 1048, values: { name: "", depth: 0 }, tint: 0xffc700 }, "MarkerEntities"),
+      SafeMarker_10: e(r["SafeMarker"], { x: 1456, y: 1048, values: { name: "", depth: 0 }, tint: 0xffc700 }, "MarkerEntities"),
+      SafeMarker_11: e(r["SafeMarker"], { x: 1552, y: 1048, values: { name: "", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+      SafeMarker_12: e(r["SafeMarker"], { x: 1784, y: 1048, values: { name: "", depth: 0 }, tint: 0x2400ff }, "MarkerEntities"),
+      SafeMarker_13: e(r["SafeMarker"], { x: 1879, y: 1071, values: { name: "", depth: 0 }, tint: 0x2400ff }, "MarkerEntities"),
+      SafeMarker_14: e(r["SafeMarker"], { x: 1464, y: 848, values: { name: "", depth: 0 }, tint: 0xff00e6 }, "MarkerEntities"),
+      SafeMarker_15: e(r["SafeMarker"], { x: 1656, y: 832, values: { name: "", depth: 0 }, tint: 0xff00e6 }, "MarkerEntities"),
+      SafeMarker_16: e(r["SafeMarker"], { x: 1856, y: 848, values: { name: "", depth: 0 }, tint: 0xff00e6 }, "MarkerEntities"),
+      SafeMarker_17: e(r["SafeMarker"], { x: 1280, y: 848, values: { name: "", depth: 0 }, tint: 0xff00e6 }, "MarkerEntities"),
+      SafeMarker_18: e(r["SafeMarker"], { x: 2064, y: 848, values: { name: "", depth: 0 }, tint: 0xff00e6 }, "MarkerEntities"),
     };
   },
   NewBalltownArmorer: (): LvlType.NewBalltownArmorer => {
@@ -14821,6 +14841,14 @@ export namespace LvlType {
     Pipe_1: ReturnType<(typeof r)["Pipe"]>;
     Block_3: ReturnType<(typeof r)["Block"]>;
     Pipe_2: ReturnType<(typeof r)["Pipe"]>;
+    Slope_5: ReturnType<(typeof r)["Slope"]>;
+    Block_4: ReturnType<(typeof r)["Block"]>;
+    PipeSlope_2: ReturnType<(typeof r)["PipeSlope"]>;
+    Pipe_3: ReturnType<(typeof r)["Pipe"]>;
+    Slope_6: ReturnType<(typeof r)["Slope"]>;
+    Block_5: ReturnType<(typeof r)["Block"]>;
+    Slope_7: ReturnType<(typeof r)["Slope"]>;
+    Slope_8: ReturnType<(typeof r)["Slope"]>;
     EnemyBallon: ReturnType<(typeof r)["EnemyBallon"]>;
     EnemyBallon_1: ReturnType<(typeof r)["EnemyBallon"]>;
     EnemyBallon_2: ReturnType<(typeof r)["EnemyBallon"]>;
@@ -14829,6 +14857,10 @@ export namespace LvlType {
     EnemySuggestive_1: ReturnType<(typeof r)["EnemySuggestive"]>;
     EnemySuggestive_2: ReturnType<(typeof r)["EnemySuggestive"]>;
     EnemySuggestive_3: ReturnType<(typeof r)["EnemySuggestive"]>;
+    EnemySuggestive_4: ReturnType<(typeof r)["EnemySuggestive"]>;
+    EnemySuggestive_5: ReturnType<(typeof r)["EnemySuggestive"]>;
+    EnemySuggestive_6: ReturnType<(typeof r)["EnemySuggestive"]>;
+    EnemySuggestive_7: ReturnType<(typeof r)["EnemySuggestive"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     GateHorizontal_1: ReturnType<(typeof r)["GateHorizontal"]>;
@@ -14844,6 +14876,14 @@ export namespace LvlType {
     SafeMarker_8: ReturnType<(typeof r)["SafeMarker"]>;
     SafeMarker_9: ReturnType<(typeof r)["SafeMarker"]>;
     SafeMarker_10: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_11: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_12: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_13: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_14: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_15: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_16: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_17: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_18: ReturnType<(typeof r)["SafeMarker"]>;
   };
   export type NewBalltownArmorer = {
     TownBallStructure: Sprite;

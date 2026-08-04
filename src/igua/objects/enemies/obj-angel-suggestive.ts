@@ -223,6 +223,22 @@ const ranks = {
             ],
         },
     }),
+    level3: RpgEnemyRank.create({
+        status: {
+            healthMax: 99,
+        },
+        loot: {
+            tier0: [
+                { kind: "valuables", max: 40, min: 25, deltaPride: -10 },
+            ],
+            tier1: [
+                { kind: "potion", id: "RestoreHealth", weight: 20, count: 2 },
+                { kind: "key_item", id: "FlopBlindBoxTypeB", weight: 35, count: 3 },
+                { kind: "key_item", id: "FlopBlindBoxTypeB", weight: 30, count: 4 },
+                { kind: "key_item", id: "FlopBlindBoxTypeB", weight: 15, count: 6 },
+            ],
+        },
+    }),
 };
 
 type Feature = "electrical_pulse" | "spiked_canonball" | "teleportation" | "spiked_canonball:many";
@@ -242,6 +258,11 @@ const variants = {
         features: new Set<Feature>(["electrical_pulse", "teleportation"]),
         theme: themes.uberMongo,
         rank: ranks.level2,
+    },
+    level3: {
+        features: new Set<Feature>(["electrical_pulse", "teleportation", "spiked_canonball", "spiked_canonball:many"]),
+        theme: themes.uberMongo,
+        rank: ranks.level3,
     },
 };
 
