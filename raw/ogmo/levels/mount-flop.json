@@ -32,7 +32,7 @@
           "name": "SafeMarker",
           "id": 1,
           "_eid": "85618544",
-          "x": 2200,
+          "x": 2160,
           "y": 512,
           "originX": 7,
           "originY": 7,
@@ -52,10 +52,10 @@
         },
         {
           "name": "SafeMarker",
-          "id": 3,
+          "id": 4,
           "_eid": "85618544",
-          "x": 1944,
-          "y": 456,
+          "x": 2384,
+          "y": 512,
           "originX": 7,
           "originY": 7,
           "tint": "#ffffff",
@@ -63,13 +63,90 @@
         },
         {
           "name": "SafeMarker",
-          "id": 4,
+          "id": 5,
           "_eid": "85618544",
-          "x": 2336,
+          "x": 1248,
+          "y": 416,
+          "originX": 7,
+          "originY": 7,
+          "tint": "#ff0000",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "SafeMarker",
+          "id": 6,
+          "_eid": "85618544",
+          "x": 1336,
+          "y": 416,
+          "originX": 7,
+          "originY": 7,
+          "tint": "#ff0000",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "SafeMarker",
+          "id": 7,
+          "_eid": "85618544",
+          "x": 1152,
+          "y": 416,
+          "originX": 7,
+          "originY": 7,
+          "tint": "#ff0000",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "SafeMarker",
+          "id": 8,
+          "_eid": "85618544",
+          "x": 2280,
           "y": 512,
           "originX": 7,
           "originY": 7,
-          "tint": "#ffffff",
+          "tint": "#61ff00",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "SafeMarker",
+          "id": 9,
+          "_eid": "85618544",
+          "x": 2032,
+          "y": 482,
+          "originX": 7,
+          "originY": 7,
+          "tint": "#61ff00",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "SafeMarker",
+          "id": 12,
+          "_eid": "85618544",
+          "x": 1008,
+          "y": 416,
+          "originX": 7,
+          "originY": 7,
+          "tint": "#ffc700",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "SafeMarker",
+          "id": 13,
+          "_eid": "85618544",
+          "x": 872,
+          "y": 416,
+          "originX": 7,
+          "originY": 7,
+          "tint": "#ffc700",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "SafeMarker",
+          "id": 14,
+          "_eid": "85618544",
+          "x": 1456,
+          "y": 416,
+          "originX": 7,
+          "originY": 7,
+          "tint": "#ffc700",
           "values": {"name": "", "depth": 0}
         }
       ]
@@ -233,12 +310,45 @@
           "name": "EnemySuggestive",
           "id": 6,
           "_eid": "25633201",
-          "x": 2336,
+          "x": 2480,
           "y": 512,
           "originX": 33,
           "originY": 78,
           "uid": 178585529777102,
-          "values": {"name": "", "depth": 0, "variant": "level2"}
+          "values": {"name": "", "depth": 0, "variant": "level2", "safeTint": "#ffffff"}
+        },
+        {
+          "name": "EnemySuggestive",
+          "id": 7,
+          "_eid": "25633201",
+          "x": 1248,
+          "y": 416,
+          "originX": 33,
+          "originY": 78,
+          "uid": 178586010424500,
+          "values": {"name": "", "depth": 0, "variant": "level2", "safeTint": "#ff0000"}
+        },
+        {
+          "name": "EnemySuggestive",
+          "id": 8,
+          "_eid": "25633201",
+          "x": 2272,
+          "y": 512,
+          "originX": 33,
+          "originY": 78,
+          "uid": 178586016850202,
+          "values": {"name": "", "depth": 0, "variant": "level2", "safeTint": "#5dff00"}
+        },
+        {
+          "name": "EnemySuggestive",
+          "id": 9,
+          "_eid": "25633201",
+          "x": 1008,
+          "y": 416,
+          "originX": 33,
+          "originY": 78,
+          "uid": 178586031251800,
+          "values": {"name": "", "depth": 0, "variant": "level2", "safeTint": "#f4c700"}
         }
       ]
     },

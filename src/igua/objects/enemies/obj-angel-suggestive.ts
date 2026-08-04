@@ -120,6 +120,35 @@ const themes = (function () {
                 },
             },
         ),
+        uberMongo: template.createTheme(
+            {
+                eyes: {
+                    defaultEyelidRestingPosition: 7,
+                    scleraTx: Tx.Enemy.Suggestive.ScleraDiagonal,
+                    pupilsTx: Tx.Enemy.Suggestive.PupilWack,
+                    eyelidsTint: 0xd00000,
+                    gap: 20,
+                },
+                mouth: {
+                    txs: objAngelMouth.txs.w14,
+                },
+
+                sprites: {
+                    face: Tx.Enemy.Suggestive.FaceIrregular,
+                },
+                tints: {
+                    map: [0x6800f0, 0xeeff03, 0xae38cc],
+                    spirit: [0x6800F0, 0xC027FF, 0xEEFF03],
+                },
+            },
+            {
+                eyes: obj => obj.add(-8, -8),
+                mouth: obj => obj.add(-8, -8),
+                sprites: {
+                    face: obj => obj.tinted(0xb000b0).add(-8, -4),
+                },
+            },
+        ),
     };
 })();
 
@@ -174,6 +203,23 @@ const ranks = {
             ],
         },
     }),
+    level2: RpgEnemyRank.create({
+        status: {
+            healthMax: 55,
+        },
+        loot: {
+            tier0: [
+                { kind: "valuables", max: 8, min: 2, deltaPride: -3 },
+            ],
+            tier1: [
+                { kind: "potion", id: "RestoreHealth", weight: 20 },
+                { kind: "key_item", id: "SeedPurple", weight: 15 },
+                { kind: "key_item", id: "FlopBlindBoxTypeB", weight: 30 },
+                { kind: "key_item", id: "FlopBlindBoxTypeB", weight: 25, count: 2 },
+                { kind: "nothing", weight: 10 },
+            ],
+        },
+    }),
 };
 
 type Feature = "electrical_pulse" | "spiked_canonball" | "teleportation";
@@ -191,8 +237,8 @@ const variants = {
     },
     level2: {
         features: new Set<Feature>(["electrical_pulse", "teleportation"]),
-        theme: themes.freakish,
-        rank: ranks.level1,
+        theme: themes.uberMongo,
+        rank: ranks.level2,
     },
 };
 
@@ -451,7 +497,6 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
             yield interpv(obj.scale).steps(3).to(0, 0).over(666);
             obj.at(position);
             yield interpv(obj.scale).steps(3).to(1, 1).over(666);
-            yield sleep(2000);
         },
     };
 
@@ -486,6 +531,10 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
                 }
                 if (features.has("teleportation")) {
                     yield* moves.teleport();
+
+                    if (features.has("electrical_pulse")) {
+                        yield* moves.fireElectricalPulse();
+                    }
                 }
             }
         })

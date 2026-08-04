@@ -4137,15 +4137,25 @@ export const Lvl = {
       EnemyBallon_1: e(r["EnemyBallon"], { x: 1864, y: 296, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemyBallon_2: e(r["EnemyBallon"], { x: 1976, y: 296, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
       EnemyBallon_3: e(r["EnemyBallon"], { x: 2104, y: 296, values: { variant: "level0", name: "", depth: 0 } }, "Entities"),
-      EnemySuggestive: e(r["EnemySuggestive"], { x: 2336, y: 512, uid: 178585529777102, values: { name: "", depth: 0, variant: "level2" } }, "Entities"),
+      EnemySuggestive: e(r["EnemySuggestive"], { x: 2480, y: 512, uid: 178585529777102, values: { name: "", depth: 0, variant: "level2", safeTint: "#ffffff" } }, "Entities"),
+      EnemySuggestive_1: e(r["EnemySuggestive"], { x: 1248, y: 416, uid: 178586010424500, values: { name: "", depth: 0, variant: "level2", safeTint: "#ff0000" } }, "Entities"),
+      EnemySuggestive_2: e(r["EnemySuggestive"], { x: 2272, y: 512, uid: 178586016850202, values: { name: "", depth: 0, variant: "level2", safeTint: "#5dff00" } }, "Entities"),
+      EnemySuggestive_3: e(r["EnemySuggestive"], { x: 1008, y: 416, uid: 178586031251800, values: { name: "", depth: 0, variant: "level2", safeTint: "#f4c700" } }, "Entities"),
       Player: e(r["Player"], { x: 3008, y: 608, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
       GateHorizontal: e(r["GateHorizontal"], { x: 3184, y: 480, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopRight", name: "", depth: 0 } }, "RegionEntities"),
       GateHorizontal_1: e(r["GateHorizontal"], { x: -40, y: 480, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopLeft", name: "", depth: 0 } }, "RegionEntities"),
       FlowerMarker: e(r["Marker"], { x: 1248, y: 224, values: { name: "FlowerMarker", depth: 0 }, tint: 0x00ff00 }, "MarkerEntities"),
-      SafeMarker: e(r["SafeMarker"], { x: 2200, y: 512, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
+      SafeMarker: e(r["SafeMarker"], { x: 2160, y: 512, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
       SafeMarker_1: e(r["SafeMarker"], { x: 2488, y: 512, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
-      SafeMarker_2: e(r["SafeMarker"], { x: 1944, y: 456, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
-      SafeMarker_3: e(r["SafeMarker"], { x: 2336, y: 512, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
+      SafeMarker_2: e(r["SafeMarker"], { x: 2384, y: 512, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
+      SafeMarker_3: e(r["SafeMarker"], { x: 1248, y: 416, values: { name: "", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+      SafeMarker_4: e(r["SafeMarker"], { x: 1336, y: 416, values: { name: "", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+      SafeMarker_5: e(r["SafeMarker"], { x: 1152, y: 416, values: { name: "", depth: 0 }, tint: 0xff0000 }, "MarkerEntities"),
+      SafeMarker_6: e(r["SafeMarker"], { x: 2280, y: 512, values: { name: "", depth: 0 }, tint: 0x61ff00 }, "MarkerEntities"),
+      SafeMarker_7: e(r["SafeMarker"], { x: 2032, y: 482, values: { name: "", depth: 0 }, tint: 0x61ff00 }, "MarkerEntities"),
+      SafeMarker_8: e(r["SafeMarker"], { x: 1008, y: 416, values: { name: "", depth: 0 }, tint: 0xffc700 }, "MarkerEntities"),
+      SafeMarker_9: e(r["SafeMarker"], { x: 872, y: 416, values: { name: "", depth: 0 }, tint: 0xffc700 }, "MarkerEntities"),
+      SafeMarker_10: e(r["SafeMarker"], { x: 1456, y: 416, values: { name: "", depth: 0 }, tint: 0xffc700 }, "MarkerEntities"),
     };
   },
   NewBalltownArmorer: (): LvlType.NewBalltownArmorer => {
@@ -14816,6 +14826,9 @@ export namespace LvlType {
     EnemyBallon_2: ReturnType<(typeof r)["EnemyBallon"]>;
     EnemyBallon_3: ReturnType<(typeof r)["EnemyBallon"]>;
     EnemySuggestive: ReturnType<(typeof r)["EnemySuggestive"]>;
+    EnemySuggestive_1: ReturnType<(typeof r)["EnemySuggestive"]>;
+    EnemySuggestive_2: ReturnType<(typeof r)["EnemySuggestive"]>;
+    EnemySuggestive_3: ReturnType<(typeof r)["EnemySuggestive"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     GateHorizontal_1: ReturnType<(typeof r)["GateHorizontal"]>;
@@ -14824,6 +14837,13 @@ export namespace LvlType {
     SafeMarker_1: ReturnType<(typeof r)["SafeMarker"]>;
     SafeMarker_2: ReturnType<(typeof r)["SafeMarker"]>;
     SafeMarker_3: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_4: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_5: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_6: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_7: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_8: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_9: ReturnType<(typeof r)["SafeMarker"]>;
+    SafeMarker_10: ReturnType<(typeof r)["SafeMarker"]>;
   };
   export type NewBalltownArmorer = {
     TownBallStructure: Sprite;
