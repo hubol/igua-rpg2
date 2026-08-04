@@ -95,7 +95,7 @@ function sourceCollidesWithTargets<TInstance>(
         : (sourceBoundRectangles.length === 1 ? sourceBoundRectangles[0] : null);
 
     for (let i = 0; i < targets.length; i += 1) {
-        if (targets[i].destroyed) {
+        if (targets[i].destroyed || source === targets[i]) {
             continue;
         }
 
