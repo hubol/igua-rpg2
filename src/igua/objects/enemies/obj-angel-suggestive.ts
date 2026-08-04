@@ -72,6 +72,7 @@ const themes = (function () {
             },
             sprites: {
                 face: Tx.Enemy.Suggestive.Face,
+                arms: Tx.Empty16,
             },
             tints: {
                 gear0: 0x0000ff,
@@ -134,6 +135,7 @@ const themes = (function () {
                 },
 
                 sprites: {
+                    arms: Tx.Enemy.Suggestive.Arms0,
                     face: Tx.Enemy.Suggestive.FaceIrregular,
                 },
                 tints: {
@@ -145,6 +147,7 @@ const themes = (function () {
                 eyes: obj => obj.add(-8, -8),
                 mouth: obj => obj.add(-8, -8),
                 sprites: {
+                    arms: obj => obj.pivoted(14, 0),
                     face: obj => obj.tinted(0xb000b0).add(-8, -4),
                 },
             },
@@ -236,7 +239,7 @@ const variants = {
         rank: ranks.level1,
     },
     level2: {
-        features: new Set<Feature>(["electrical_pulse", "teleportation", "spiked_canonball"]),
+        features: new Set<Feature>(["electrical_pulse", "teleportation"]),
         theme: themes.uberMongo,
         rank: ranks.level2,
     },
@@ -405,8 +408,11 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
 
     const healthbarAnchorObj = new Graphics().beginFill(0xff0000).drawRect(-11, -45, 17, 30).invisible();
 
+    const armsObj = theme.createSprite("arms").add(2, 16);
+
     const actualHeadObj = container(
         bodyObj,
+        armsObj,
         faceObj,
         irregularShadowObj,
         objAngelSuggestiveGears(theme).at(24, -5),
@@ -434,6 +440,14 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
         })
         .mixin(mxnEnemyDeathBurst, { map: theme.tints.spirit })
         .mixin(mxnDetectPlayer);
+
+    armsObj
+        .step(self => {
+            const dx = Math.sign(obj.mxnDetectPlayer.relativePosition.x);
+            if (dx !== 0) {
+                self.scale.x = dx;
+            }
+        });
 
     const moves = {
         *launchCanonball() {
