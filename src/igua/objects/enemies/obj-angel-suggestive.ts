@@ -72,6 +72,7 @@ const themes = (function () {
             },
             sprites: {
                 face: Tx.Enemy.Suggestive.Face,
+                frontDecoration: Tx.Empty16,
                 arms: Tx.Empty16,
             },
             tints: {
@@ -149,6 +150,37 @@ const themes = (function () {
                 sprites: {
                     arms: obj => obj.pivoted(14, 0),
                     face: obj => obj.tinted(0xb000b0).add(-8, -4),
+                },
+            },
+        ),
+        fallen: template.createTheme(
+            {
+                eyes: {
+                    pupilsMirrored: true,
+                    defaultEyelidRestingPosition: 7,
+                    pupilsTx: Tx.Enemy.Suggestive.PupilWack,
+                    scleraTx: Tx.Enemy.Suggestive.ScleraAngy,
+                    gap: 20,
+                },
+                mouth: {
+                    txs: objAngelMouth.txs.rounded14,
+                },
+                sprites: {
+                    arms: Tx.Enemy.Suggestive.ArmsGrumpy,
+                    face: Tx.Enemy.Suggestive.FaceUnruly,
+                    frontDecoration: Tx.Enemy.Suggestive.Ruff,
+                },
+                tints: {
+                    map: [0x6800f0, 0xeeff03, 0xae38cc],
+                    spirit: [0x6800F0, 0xC027FF, 0xEEFF03],
+                },
+            },
+            {
+                eyes: obj => obj.add(-5, -10),
+                mouth: (obj) => obj.add(-5, -6),
+                sprites: {
+                    arms: obj => obj.pivoted(32, 0),
+                    face: obj => obj.add(-5, -6).tinted(0x0000ff),
                 },
             },
         ),
@@ -261,7 +293,7 @@ const variants = {
     },
     level3: {
         features: new Set<Feature>(["electrical_pulse", "teleportation", "spiked_canonball", "spiked_canonball:many"]),
-        theme: themes.uberMongo,
+        theme: themes.fallen,
         rank: ranks.level3,
     },
 };
@@ -434,6 +466,7 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
     const actualHeadObj = container(
         bodyObj,
         armsObj,
+        theme.createSprite("frontDecoration").add(-22, 14),
         faceObj,
         irregularShadowObj,
         objAngelSuggestiveGears(theme).at(24, -5),
