@@ -537,6 +537,7 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
                 return;
             }
 
+            obj.play(Sfx.Enemy.Suggestive.Teleport.rate(0.9, 1));
             const position = vnew(maybePosition).add(0, -38);
 
             objFxFormativeBurst(0xf020f0)
