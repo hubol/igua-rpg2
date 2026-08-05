@@ -61,6 +61,10 @@ function inferPotionToUse(
         return "Wetness";
     }
 
+    if (potionIds.includes("AttributeStrengthUp")) {
+        return "AttributeStrengthUp";
+    }
+
     return null;
 }
 

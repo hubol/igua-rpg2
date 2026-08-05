@@ -18,17 +18,6 @@
       "gridCellsY": 160,
       "entities": [
         {
-          "name": "Marker",
-          "id": 0,
-          "_eid": "73148747",
-          "x": 1704,
-          "y": 368,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#00ff00",
-          "values": {"name": "FlowerMarker", "depth": 0}
-        },
-        {
           "name": "SafeMarker",
           "id": 1,
           "_eid": "85618544",
@@ -295,7 +284,8 @@
           "texture": "sky/cloud wormlike 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 969,
@@ -307,7 +297,8 @@
           "texture": "sky/cloud wormlike 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 737,
@@ -319,7 +310,8 @@
           "texture": "sky/cloud wormlike 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 737,
@@ -331,7 +323,8 @@
           "texture": "sky/cloud wormlike 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -367,6 +360,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 1,
+          "_eid": "19953026",
+          "x": 1624,
+          "y": 368,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromHouse", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -530,6 +534,16 @@
           "originY": 78,
           "uid": 178586294664107,
           "values": {"name": "", "depth": 0, "variant": "level2", "safeTint": "#000000"}
+        },
+        {
+          "name": "Door",
+          "id": 14,
+          "_eid": "88296692",
+          "x": 1664,
+          "y": 320,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnMountFlopHouseInterior", "checkpointName": "fromMountain", "name": "", "depth": 0}
         }
       ]
     },
@@ -892,7 +906,8 @@
           "texture": "sky/cloud balls 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 969,
@@ -904,7 +919,8 @@
           "texture": "sky/cloud balls 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 737,
@@ -916,7 +932,8 @@
           "texture": "sky/cloud balls 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 737,
@@ -928,6 +945,19 @@
           "texture": "sky/cloud balls 1.png",
           "originX": 0.5,
           "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 1616,
+          "y": 280,
+          "scaleX": 6,
+          "scaleY": 3,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
           "values": {"name": ""}
         }
       ],

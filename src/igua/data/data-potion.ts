@@ -317,6 +317,8 @@ export namespace DataPotion {
             target.play(sound);
         }
 
+        const targetIsPlayer = target === playerObj;
+
         switch (id) {
             // TODO attributes do not exist on MxnRpgStatus
             // Maybe they should?
@@ -332,7 +334,12 @@ export namespace DataPotion {
                 Rpg.character.attributes.update("intelligence", 1);
                 return;
             case "AttributeStrengthUp":
-                Rpg.character.attributes.update("strength", 1);
+                if (targetIsPlayer) {
+                    Rpg.character.attributes.update("strength", 1);
+                }
+                else {
+                    target.status.damageFactor += 25;
+                }
                 return;
             case "RestoreHealthRestaurantLevel0":
                 target.heal(1);
@@ -403,7 +410,7 @@ export namespace DataPotion {
                 }
                 return;
             case "TaxiWhistleCasino":
-                if (target !== playerObj) {
+                if (!targetIsPlayer) {
                     return;
                 }
                 Cutscene.play(function* () {

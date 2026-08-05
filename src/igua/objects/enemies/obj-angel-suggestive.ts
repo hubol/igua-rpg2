@@ -28,6 +28,7 @@ import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { RpgStatus } from "../../rpg/rpg-status";
 import { objFxExpressSurprise } from "../effects/obj-fx-express-surprise";
 import { objFxFormativeBurst } from "../effects/obj-fx-formative-burst";
+import { objFxRipple } from "../effects/obj-fx-ripple";
 import { playerObj } from "../obj-player";
 import { objSafeMarker } from "../obj-safe-marker";
 import { objProjectileElectricalPulseGround } from "../projectiles/obj-projectile-electrical-pulse-ground";
@@ -271,9 +272,24 @@ const ranks = {
             ],
         },
     }),
+    level4: RpgEnemyRank.create({
+        status: {
+            healthMax: 300,
+        },
+        loot: {
+            tier0: [
+                { kind: "valuables", max: 100, min: 60, deltaPride: -10 },
+            ],
+        },
+    }),
 };
 
-type Feature = "electrical_pulse" | "spiked_canonball" | "teleportation" | "spiked_canonball:many";
+type Feature =
+    | "electrical_pulse"
+    | "spiked_canonball"
+    | "teleportation"
+    | "spiked_canonball:many"
+    | "spiked_canonball:quick";
 
 const variants = {
     level0: {
@@ -295,6 +311,17 @@ const variants = {
         features: new Set<Feature>(["electrical_pulse", "teleportation", "spiked_canonball", "spiked_canonball:many"]),
         theme: themes.fallen,
         rank: ranks.level3,
+    },
+    level4: {
+        features: new Set<Feature>([
+            "electrical_pulse",
+            "teleportation",
+            "spiked_canonball",
+            "spiked_canonball:many",
+            "spiked_canonball:quick",
+        ]),
+        theme: themes.fallen,
+        rank: ranks.level4,
     },
 };
 
@@ -504,16 +531,39 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
         });
 
     const moves = {
-        *launchCanonball() {
+        *launchCanonball(timeScale = 1) {
+            if (timeScale < 1) {
+                objFxRipple(
+                    {
+                        radius: 0,
+                        stroke: 3,
+                        tint: 0xC027FF,
+                    },
+                    {
+                        radius: 100,
+                        stroke: 0,
+                        tint: 0xEEFF03,
+                    },
+                )
+                    .mxnFxFactor
+                    .play(3000 * timeScale)
+                    .at(obj)
+                    .add(0, -30)
+                    .show();
+                obj.play(Sfx.Enemy.Suggestive.Quick.rate(0.95, 1.05));
+            }
+
             bodyObj.bulge.phase = "inflating";
             bodyObj.bulge.unit = 0;
-            yield interp(bodyObj.bulge, "unit").to(1).over(1000);
-            yield sleep(500);
+            yield interp(bodyObj.bulge, "unit").to(1).over(1000 * timeScale);
+            yield sleep(500 * timeScale);
             bodyObj.bulge.phase = "bursting";
             bodyObj.bulge.unit = 0;
-            yield interp(bodyObj.bulge, "unit").to(1).over(1000);
-            yield sleep(500);
+            yield interp(bodyObj.bulge, "unit").to(1).over(1000 * timeScale);
+            yield sleep(500 * timeScale);
             if (features.has("spiked_canonball:many")) {
+                bodyObj.bulge.phase = "recovering";
+                bodyObj.bulge.unit = 0;
                 for (let i = 0; i < 10; i++) {
                     const f = nlerp(-1, 1, i / 9);
                     obj.play(Sfx.Enemy.Suggestive.Flick.rate(0.8 + i * 0.1));
@@ -522,12 +572,10 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
                         .show();
 
                     canonballObj.speed.at(f * 2.3, -8);
+                    bodyObj.bulge.unit += 0.05;
                     yield sleepf(3);
                 }
-
-                bodyObj.bulge.phase = "recovering";
-                bodyObj.bulge.unit = 0;
-                yield interp(bodyObj.bulge, "unit").to(1).over(500);
+                yield interp(bodyObj.bulge, "unit").to(1).over(500 * timeScale);
             }
             else {
                 obj.play(Sfx.Enemy.Suggestive.Flick.rate(0.9, 1.1));
@@ -536,7 +584,7 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
                 canonballObj.speed.y = -8;
                 bodyObj.bulge.phase = "recovering";
                 bodyObj.bulge.unit = 0;
-                yield interp(bodyObj.bulge, "unit").to(1).over(1000);
+                yield interp(bodyObj.bulge, "unit").to(1).over(1000 * timeScale);
             }
         },
         *fireElectricalPulse() {
@@ -585,6 +633,15 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
             obj.at(position);
             yield interpv(obj.scale).steps(3).to(1, 1).over(666);
         },
+        *usePotionAndMaybeAttack() {
+            yield* obj.mxnRpgStatusPotions.dramaUseAppropriatePotion();
+            if (features.has("spiked_canonball:quick")) {
+                yield* moves.launchCanonball(0.3);
+            }
+            else if (features.has("electrical_pulse")) {
+                yield* moves.fireElectricalPulse();
+            }
+        },
     };
 
     return obj
@@ -599,7 +656,7 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
                 let move: Coro.Type | Coro.Predicate = () => true;
 
                 if (self.mxnRpgStatusPotions.hasPotionToUse()) {
-                    move = self.mxnRpgStatusPotions.dramaUseAppropriatePotion();
+                    move = moves.usePotionAndMaybeAttack();
                 }
                 else if (features.has("spiked_canonball")) {
                     move = moves.launchCanonball();
@@ -613,8 +670,20 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
                     move,
                 ]);
 
-                if (features.has("spiked_canonball") && features.has("electrical_pulse")) {
+                if (
+                    features.has("spiked_canonball")
+                    && features.has("electrical_pulse")
+                ) {
+                    const playerDistanceBeforePulse = Math.abs(self.mxnDetectPlayer.relativePosition.x);
                     yield* moves.fireElectricalPulse();
+
+                    const fireQuickCanonball =
+                        Math.abs(self.mxnDetectPlayer.relativePosition.x) < playerDistanceBeforePulse
+                        || Rng.bool();
+
+                    if (features.has("spiked_canonball:quick") && fireQuickCanonball) {
+                        yield* moves.launchCanonball(0.3);
+                    }
                 }
                 if (features.has("teleportation")) {
                     yield* moves.teleport();
