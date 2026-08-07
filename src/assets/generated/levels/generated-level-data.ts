@@ -4144,6 +4144,7 @@ export const Lvl = {
       SkyCloudBalls1_2: d(Tx.Sky.CloudBalls1, { x: 737, y: 686, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       SkyCloudBalls1_3: d(Tx.Sky.CloudBalls1, { x: 737, y: 790, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       ShapesSquare32: d(Tx.Shapes.Square32, { x: 1616, y: 280, scaleX: 6, scaleY: 3, rotation: 0, originX: 0, originY: 0, tint: 0xffffff }, "BackgroundDecals"),
+      TownSignageHelp: d(Tx.Town.Signage.Help, { x: 1854, y: 272, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "BackgroundDecals"),
       Block: e(r["Block"], { x: -200, y: 1240, width: 3472, height: 64, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
       Slope: e(r["Slope"], { x: 2584, y: 1144, width: 320, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
       Slope_1: e(r["Slope"], { x: 1800, y: 1048, width: 320, height: 96, flippedX: true, flippedY: false, values: { name: "", depth: 0, visible: true }, tint: 0xab21c1 }, "TerrainEntities"),
@@ -4182,6 +4183,7 @@ export const Lvl = {
       EnemySuggestive_6: e(r["EnemySuggestive"], { x: 1384, y: 848, uid: 178586293895706, values: { name: "", depth: 0, variant: "level2", safeTint: "#000000" } }, "Entities"),
       EnemySuggestive_7: e(r["EnemySuggestive"], { x: 1960, y: 848, uid: 178586294664107, values: { name: "", depth: 0, variant: "level2", safeTint: "#000000" } }, "Entities"),
       Door: e(r["Door"], { x: 1664, y: 320, values: { sceneName: "scnMountFlopHouseInterior", checkpointName: "fromMountain", name: "", depth: 0 } }, "Entities"),
+      BestFriendHaverNpc: e(r["IguanaNpc"], { x: 2736, y: 1088, flippedX: true, values: { personaName: "", name: "BestFriendHaverNpc", depth: 0 } }, "CharacterEntities"),
       Player: e(r["Player"], { x: 3008, y: 1240, flippedX: true, values: { name: "", depth: 0 } }, "PlayerEntities"),
       fromHouse: e(r["Checkpoint"], { x: 1624, y: 368, flippedX: true, values: { name: "fromHouse", depth: 0, overrideFlipX: "none" } }, "PlayerEntities"),
       SkyCloudWormlike0: d(Tx.Sky.CloudWormlike0, { x: 2705, y: 1091, scaleX: 1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
@@ -4190,6 +4192,7 @@ export const Lvl = {
       SkyCloudWormlike0_3: d(Tx.Sky.CloudWormlike0, { x: 737, y: 788, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
       GateHorizontal: e(r["GateHorizontal"], { x: 3184, y: 1112, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopRight", name: "", depth: 0 } }, "RegionEntities"),
       GateHorizontal_1: e(r["GateHorizontal"], { x: -40, y: 1112, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopLeft", name: "", depth: 0 } }, "RegionEntities"),
+      PanToHouseRegion: e(r["Region"], { x: 1456, y: 160, width: 500, height: 280, values: { name: "PanToHouseRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       SafeMarker: e(r["SafeMarker"], { x: 2160, y: 1144, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
       SafeMarker_1: e(r["SafeMarker"], { x: 2488, y: 1144, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
       SafeMarker_2: e(r["SafeMarker"], { x: 2384, y: 1144, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
@@ -14882,6 +14885,7 @@ export namespace LvlType {
     SkyCloudBalls1_2: Sprite;
     SkyCloudBalls1_3: Sprite;
     ShapesSquare32: Sprite;
+    TownSignageHelp: Sprite;
     Block: ReturnType<(typeof r)["Block"]>;
     Slope: ReturnType<(typeof r)["Slope"]>;
     Slope_1: ReturnType<(typeof r)["Slope"]>;
@@ -14920,6 +14924,7 @@ export namespace LvlType {
     EnemySuggestive_6: ReturnType<(typeof r)["EnemySuggestive"]>;
     EnemySuggestive_7: ReturnType<(typeof r)["EnemySuggestive"]>;
     Door: ReturnType<(typeof r)["Door"]>;
+    BestFriendHaverNpc: ReturnType<(typeof r)["IguanaNpc"]>;
     Player: ReturnType<(typeof r)["Player"]>;
     fromHouse: ReturnType<(typeof r)["Checkpoint"]>;
     SkyCloudWormlike0: Sprite;
@@ -14928,6 +14933,7 @@ export namespace LvlType {
     SkyCloudWormlike0_3: Sprite;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     GateHorizontal_1: ReturnType<(typeof r)["GateHorizontal"]>;
+    PanToHouseRegion: ReturnType<(typeof r)["Region"]>;
     SafeMarker: ReturnType<(typeof r)["SafeMarker"]>;
     SafeMarker_1: ReturnType<(typeof r)["SafeMarker"]>;
     SafeMarker_2: ReturnType<(typeof r)["SafeMarker"]>;
