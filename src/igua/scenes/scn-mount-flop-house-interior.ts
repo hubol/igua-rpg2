@@ -19,7 +19,7 @@ export function scnMountFlopHouseInterior() {
     objBossMusicPlayer({
         bossObjs: [lvl.EnemySuggestive],
         mzkBattle: Mzk.FuckerLand,
-        mzkPeace: Mzk.EditableMoog,
+        mzkPeace: Mzk.LingeringStraw,
     })
         .show();
 
