@@ -4,6 +4,7 @@ import { Tx } from "../../../assets/textures";
 import { Rng } from "../../../lib/math/rng";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { mxnPhysics } from "../../mixins/mxn-physics";
+import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { objFxBurst32 } from "../effects/obj-fx-burst-32";
 
 const burstTints = [0x845FD3, 0xBEC71D, 0x5DE478, 0xBC362F];
@@ -14,6 +15,9 @@ export function objSpikedCanonball() {
         .anchored(0.5, 0.5)
         .mixin(mxnPhysics, { gravity: 0.3, physicsRadius: 8 })
         .coro(function* (self) {
+            if (self.is(mxnRpgAttack) && self.attack.conditions.poison.value > 0) {
+                self.texture = Tx.Enemy.SpikeBallPoisoned;
+            }
             yield () => self.speed.y < 0;
             yield () => self.speed.y > 0;
             const speedX = self.speed.x;

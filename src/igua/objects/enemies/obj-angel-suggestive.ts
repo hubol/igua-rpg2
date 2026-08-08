@@ -289,6 +289,7 @@ type Feature =
     | "spiked_canonball"
     | "teleportation"
     | "spiked_canonball:many"
+    | "spiked_canonball:poisonous"
     | "spiked_canonball:quick";
 
 const variants = {
@@ -318,6 +319,7 @@ const variants = {
             "teleportation",
             "spiked_canonball",
             "spiked_canonball:many",
+            "spiked_canonball:poisonous",
             "spiked_canonball:quick",
         ]),
         theme: themes.fallen,
@@ -532,6 +534,9 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
 
     const moves = {
         *launchCanonball(timeScale = 1) {
+            const poisonous = features.has("spiked_canonball:poisonous") && timeScale < 1;
+            const attack = poisonous ? atks.spikedCanonballPoisonous : atks.spikedCanonball;
+
             if (timeScale < 1) {
                 objFxRipple(
                     {
@@ -567,7 +572,7 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
                 for (let i = 0; i < 10; i++) {
                     const f = nlerp(-1, 1, i / 9);
                     obj.play(Sfx.Enemy.Suggestive.Flick.rate(0.8 + i * 0.1));
-                    const canonballObj = objAngelSuggestiveSpikedCanonball(obj.status)
+                    const canonballObj = objAngelSuggestiveSpikedCanonball(obj.status, attack)
                         .at(obj)
                         .show();
 
@@ -579,7 +584,7 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
             }
             else {
                 obj.play(Sfx.Enemy.Suggestive.Flick.rate(0.9, 1.1));
-                const canonballObj = objAngelSuggestiveSpikedCanonball(obj.status).at(obj).show();
+                const canonballObj = objAngelSuggestiveSpikedCanonball(obj.status, attack).at(obj).show();
                 canonballObj.speed.x = obj.mxnDetectPlayer.position.x > obj.x ? 2 : -2;
                 canonballObj.speed.y = -8;
                 bodyObj.bulge.phase = "recovering";
@@ -710,23 +715,32 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
         });
 }
 
-const atkAngelSuggestiveSpikedCanonball = RpgAttack.create({
-    physical: 30,
-});
+const atks = {
+    spikedCanonball: RpgAttack.create({
+        physical: 30,
+    }),
+    spikedCanonballPoisonous: RpgAttack.create({
+        physical: 30,
+        conditions: {
+            poison: {
+                value: 100,
+            },
+        },
+    }),
+    electricalPulseGround: RpgAttack.create({
+        emotional: 40,
+    }),
+};
 
-const atkAngelSuggestiveElectricalPulseGround = RpgAttack.create({
-    emotional: 40,
-});
-
-function objAngelSuggestiveSpikedCanonball(status: RpgStatus.Model) {
+function objAngelSuggestiveSpikedCanonball(status: RpgStatus.Model, attack: RpgAttack.Model) {
     return objSpikedCanonball()
-        .mixin(mxnRpgAttack, { attack: atkAngelSuggestiveSpikedCanonball, attacker: status })
+        .mixin(mxnRpgAttack, { attack, attacker: status })
         .mixin(mxnStopAndDieWhenHitGround);
 }
 
 function objAngelSuggestiveElectricalPulseGround(attacker: MxnRpgStatus & MxnDetectPlayer) {
     return objProjectileElectricalPulseGround(32)
-        .mixin(mxnRpgAttack, { attack: atkAngelSuggestiveElectricalPulseGround, attacker: attacker.status })
+        .mixin(mxnRpgAttack, { attack: atks.electricalPulseGround, attacker: attacker.status })
         .coro(function* (self) {
             yield () => self.mxnDischargeable.isCharged;
             self.speed.x = (Math.sign(attacker.mxnDetectPlayer.position.x - self.x) || 1) * 3;

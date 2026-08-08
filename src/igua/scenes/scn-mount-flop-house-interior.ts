@@ -43,8 +43,13 @@ export function scnMountFlopHouseInterior() {
 
                 yield () => lvl.EnemySuggestive.destroyed;
 
+                lvl.Door.objDoor.lock();
                 pipeObjs.forEach(ObjTerrain.toggle);
                 enrichFlowerNpc(lvl, gift);
+
+                yield () => !gift.isGiveable();
+
+                lvl.Door.objDoor.unlock();
             });
     }
     else {
