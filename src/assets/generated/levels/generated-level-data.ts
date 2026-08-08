@@ -4192,7 +4192,9 @@ export const Lvl = {
       SkyCloudWormlike0_3: d(Tx.Sky.CloudWormlike0, { x: 737, y: 788, scaleX: -1, scaleY: 1, rotation: 0, originX: 0.5, originY: 0.5, tint: 0xffffff }, "FrontDecals"),
       GateHorizontal: e(r["GateHorizontal"], { x: 3184, y: 1112, height: 128, flippedX: false, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopRight", name: "", depth: 0 } }, "RegionEntities"),
       GateHorizontal_1: e(r["GateHorizontal"], { x: -40, y: 1112, height: 128, flippedX: true, values: { sceneName: "scnWorldMap", checkpointName: "fromMountFlopLeft", name: "", depth: 0 } }, "RegionEntities"),
-      PanToHouseRegion: e(r["Region"], { x: 1456, y: 160, width: 500, height: 280, values: { name: "PanToHouseRegion", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      PanToHouseRegion2: e(r["Region"], { x: 1456, y: 160, width: 500, height: 280, values: { name: "PanToHouseRegion2", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      PanToHouseRegion0: e(r["Region"], { x: 1112, y: 600, width: 500, height: 280, values: { name: "PanToHouseRegion0", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
+      PanToHouseRegion1: e(r["Region"], { x: 1712, y: 600, width: 500, height: 280, values: { name: "PanToHouseRegion1", depth: 0 }, tint: 0x00ff00 }, "RegionEntities"),
       SafeMarker: e(r["SafeMarker"], { x: 2160, y: 1144, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
       SafeMarker_1: e(r["SafeMarker"], { x: 2488, y: 1144, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
       SafeMarker_2: e(r["SafeMarker"], { x: 2384, y: 1144, values: { name: "", depth: 0 }, tint: 0xffffff }, "MarkerEntities"),
@@ -14933,7 +14935,9 @@ export namespace LvlType {
     SkyCloudWormlike0_3: Sprite;
     GateHorizontal: ReturnType<(typeof r)["GateHorizontal"]>;
     GateHorizontal_1: ReturnType<(typeof r)["GateHorizontal"]>;
-    PanToHouseRegion: ReturnType<(typeof r)["Region"]>;
+    PanToHouseRegion2: ReturnType<(typeof r)["Region"]>;
+    PanToHouseRegion0: ReturnType<(typeof r)["Region"]>;
+    PanToHouseRegion1: ReturnType<(typeof r)["Region"]>;
     SafeMarker: ReturnType<(typeof r)["SafeMarker"]>;
     SafeMarker_1: ReturnType<(typeof r)["SafeMarker"]>;
     SafeMarker_2: ReturnType<(typeof r)["SafeMarker"]>;

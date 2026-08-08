@@ -1,5 +1,6 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { Jukebox } from "../core/igua-audio";
 import { ask, show } from "../drama/show";
@@ -28,11 +29,14 @@ function enrichBestFriendHaverNpc(lvl: LvlType.MountFlop) {
             yield* ask("That foolish wizard...", "What's wrong?");
             yield* show(
                 "Oh nothing...",
-                "It's just that my friend is in trouble because of all of the sprites on Mount Flop.",
             );
 
             scene.camera.mode = "controlled";
-            yield interpvr(scene.camera).factor(factor.sine).to(lvl.PanToHouseRegion).over(1000);
+            yield* Coro.all([
+                show("It's just that my friend is in trouble because of all of the sprites on Mount Flop."),
+                interpvr(scene.camera).factor(factor.sine).to(lvl.PanToHouseRegion0).over(3000),
+            ]);
+            yield interpvr(scene.camera).factor(factor.sine).to(lvl.PanToHouseRegion2).over(3000);
 
             yield* ask("Think you can help him?", "I will try!");
             yield* show("Thank you. He is known to have really cool items. Maybe he'll give you something nice.");
