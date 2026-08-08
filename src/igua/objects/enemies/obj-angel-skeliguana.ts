@@ -6,7 +6,7 @@ import { holdf } from "../../../lib/game-engine/routines/hold";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
 import { nlerp } from "../../../lib/math/number";
-import { Integer, Polar, Unit } from "../../../lib/math/number-alias-types";
+import { Integer, Polar } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { ZIndex } from "../../core/scene/z-index";
 import { DataNpcLooks } from "../../data/data-npc-looks";
@@ -104,7 +104,7 @@ export function objAngelSkeliguana(variantId: keyof typeof variants) {
                 let hitWall = false;
 
                 yield* Coro.race([
-                    Coro.chain([holdf(() => obj.speed.x === 0, 2), () => hitWall = true]),
+                    Coro.chain([obj.mxnPhysics.dramaHitWall(), () => hitWall = true]),
                     sleep(Rng.int(2000, 3000)),
                 ]);
 
@@ -227,7 +227,7 @@ export function objAngelSkeliguana(variantId: keyof typeof variants) {
 
             yield* Coro.race([
                 Coro.chain([
-                    holdf(() => obj.speed.x === 0, 2),
+                    obj.mxnPhysics.dramaHitWall(),
                     () => (obj.speed.y = -3, true),
                     () => obj.speed.y >= 0 && obj.isOnGround,
                 ]),
