@@ -26,7 +26,7 @@ const getSerializableOgmoDecalArgs = ({ layerName, texture, values, tint, decal,
 @param {import("@hubol/smooch/template-api").TemplateContext.JsonAggregate} context;
 @param {import("@hubol/smooch/template-api").Utils} utils;
 */
-module.exports = function ({ files }, { pascal, noext, format }) {
+module.exports = function ({ files }, { pascal, noext }) {
     const { tree, node } = createTree();
 
     const decalNameCache = new Cache(texture => pascal(noext(texture)));
@@ -137,5 +137,5 @@ ${types.join('\n')}
 }
 `;
 
-    return format(source, { parser: 'typescript', printWidth: 500 });
+    return source;
 }
