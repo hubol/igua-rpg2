@@ -42,46 +42,48 @@ import { objMarker } from "../objects/utils/obj-marker";
 import { Rpg } from "../rpg/rpg";
 
 export const OgmoEntityResolvers = {
-    "Player": (entity) => createOrConfigurePlayerObj(entity),
-    "Checkpoint": (entity) => createOrConfigurePlayerObj(entity, entity.values.name),
+    "Player": (entity: OgmoEntities.Player) => createOrConfigurePlayerObj(entity),
+    "Checkpoint": (entity: OgmoEntities.Checkpoint) => createOrConfigurePlayerObj(entity, entity.values.name),
     "Block": objSolidBlock,
     "Slope": objSolidSlope,
     "Pipe": objPipe,
     "PipeSlope": objPipeSlope,
-    "Door": ({ values: { checkpointName, sceneName } }) => objDoor({ checkpointName, sceneName }).at(0, 2),
-    "WaterDripSource": ({ values: { delayMin, delayMax } }) => objWaterDripSource({ delayMin, delayMax }),
-    "Sign": ({ values }) => objSign(values),
-    "IntelligenceBackground": ({ values }) => objIntelligenceBackground(values),
-    "IguanaNpc": (entity) => {
+    "Door": ({ values: { checkpointName, sceneName } }: OgmoEntities.Door) =>
+        objDoor({ checkpointName, sceneName }).at(0, 2),
+    "WaterDripSource": ({ values: { delayMin, delayMax } }: OgmoEntities.WaterDripSource) =>
+        objWaterDripSource({ delayMin, delayMax }),
+    "Sign": ({ values }: OgmoEntities.Sign) => objSign(values),
+    "IntelligenceBackground": ({ values }: OgmoEntities.IntelligenceBackground) => objIntelligenceBackground(values),
+    "IguanaNpc": (entity: OgmoEntities.IguanaNpc) => {
         const obj = objIguanaNpc(entity.values.personaName as any);
         applyEntityToIguanaObj(obj, entity);
         return obj;
     },
-    "GamblingExpertNpc": (entity) => {
+    "GamblingExpertNpc": (entity: OgmoEntities.GamblingExpertNpc) => {
         const obj = objCharacterGamblingExpert();
         applyEntityToIguanaObj(obj, entity);
         return obj;
     },
-    "ValuableGreen": ({ uid }) => objValuable("green", uid),
-    "ValuableOrange": ({ uid }) => objValuable("orange", uid),
-    "ValuableBlue": ({ uid }) => objValuable("blue", uid),
-    "Puddle": (entity) => {
+    "ValuableGreen": ({ uid }: OgmoEntities.ValuableGreen) => objValuable("green", uid),
+    "ValuableOrange": ({ uid }: OgmoEntities.ValuableOrange) => objValuable("orange", uid),
+    "ValuableBlue": ({ uid }: OgmoEntities.ValuableBlue) => objValuable("blue", uid),
+    "Puddle": (entity: OgmoEntities.Puddle) => {
         const obj = objPuddle(entity.width!, entity.tint);
         delete entity.width;
         return obj;
     },
     "Marker": objMarker,
     "Region": () => new Graphics().beginFill(0x00ff00).drawRect(0, 0, 1, 1).invisible(),
-    "GateHorizontal": (entity) => objGate(entity, "horizontal"),
-    "GateVertical": (entity) => objGate(entity, "vertical"),
-    "PocketableItemA": (entity) =>
+    "GateHorizontal": (entity: OgmoEntities.GateHorizontal) => objGate(entity, "horizontal"),
+    "GateVertical": (entity: OgmoEntities.GateVertical) => objGate(entity, "vertical"),
+    "PocketableItemA": (entity: OgmoEntities.PocketableItemA) =>
         objCollectiblePocketItemSpawner(
             vnew(entity),
             CtxPocketItems.value.pocketItemIds.typeA,
             CtxPocketItems.value.variant,
             CtxPocketItems.value.behavior,
         ).at(entity, -1),
-    "PocketableItemB": (entity) =>
+    "PocketableItemB": (entity: OgmoEntities.PocketableItemA) =>
         objCollectiblePocketItemSpawner(
             vnew(entity),
             CtxPocketItems.value.pocketItemIds.typeB,
@@ -89,37 +91,40 @@ export const OgmoEntityResolvers = {
             CtxPocketItems.value.behavior,
         ).at(entity, -1),
     EnemyBallon: objAngelBallon,
-    EnemyBrick: (entity) => {
+    EnemyBrick: (entity: OgmoEntities.EnemyBrick) => {
         const brickAngelObj = objAngelBrick(entity);
         delete entity.width;
         delete entity.height;
         return brickAngelObj;
     },
-    EnemyCactus: (entity) => objAngelCactus(entity).at(1, 3),
+    EnemyCactus: (entity: OgmoEntities.EnemyCactus) => objAngelCactus(entity).at(1, 3),
     EnemyChill: objAngelChill,
-    EnemySkeliguana: (entity) => {
+    EnemySkeliguana: (entity: OgmoEntities.EnemySkeliguana) => {
         const obj = objAngelSkeliguana(entity.values.variant);
         applyEntityToIguanaObj(obj, entity);
         return obj;
     },
     EnemySnail: () => objAngelSnail(),
     EnemySpikeBall: objAngelSpikeBall,
-    EnemySuggestive: (entity) => objAngelSuggestive(entity).at(0, -38),
-    EnemyMiffed: (entity) => objAngelMiffed(entity).at(0, 1),
+    EnemySuggestive: (entity: OgmoEntities.EnemySuggestive) => objAngelSuggestive(entity).at(0, -38),
+    EnemyMiffed: (entity: OgmoEntities.EnemyMiffed) => objAngelMiffed(entity).at(0, 1),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,
     Idol: objIdol,
     GateMap: objWorldMapGate,
     StashPocket: objStashPocket,
     PlayerDev: objDevPlayer,
     WeightedPedestal: objWeightedPedestal,
-    IntelligenceSign: (entity) => objIntelligenceSign(entity.values),
-    MagicDoor: (entity) => objDoor(entity.values).mixin(mxnDoorMagic, entity.uid).at(0, 2),
+    IntelligenceSign: (entity: OgmoEntities.IntelligenceSign) => objIntelligenceSign(entity.values),
+    MagicDoor: (entity: OgmoEntities.MagicDoor) => objDoor(entity.values).mixin(mxnDoorMagic, entity.uid).at(0, 2),
     Darkness: objDarkness,
     OverheatRegion: objEnvironmentOverheatRegion,
     SafeMarker: objSafeMarker,
-    Clock: (entity) => objEsotericClock({ time: { hours: entity.values.hours, minutes: entity.values.minutes } }),
-    Dial: (entity) => objEsotericDial({ maxTicks: entity.values.maxTicks }),
-} satisfies OgmoEntityResolverBase;
+    Clock: (entity: OgmoEntities.Clock) =>
+        objEsotericClock({ time: { hours: entity.values.hours, minutes: entity.values.minutes } }),
+    Dial: (entity: OgmoEntities.Dial) => objEsotericDial({ maxTicks: entity.values.maxTicks }),
+};
+
+const __checkedOgmoEntityResolvers = OgmoEntityResolvers satisfies OgmoEntityResolverBase;
 
 function applyEntityToIguanaObj(obj: ObjIguanaLocomotive, entity: OgmoEntities.GamblingExpertNpc) {
     obj.y = 3;
