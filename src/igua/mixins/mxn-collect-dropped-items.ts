@@ -24,7 +24,7 @@ export function mxnCollectDroppedItems(obj: DisplayObject) {
             while (true) {
                 yield holdf(() => {
                     const droppedItemObj = self.collidesOne(Instances(objDroppedItem));
-                    if (!droppedItemObj) {
+                    if (!droppedItemObj || droppedItemObj.objDroppedItem.isDeflected) {
                         return false;
                     }
 
