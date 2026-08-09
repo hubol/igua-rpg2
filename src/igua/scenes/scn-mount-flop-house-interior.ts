@@ -1,11 +1,12 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { DataPotion } from "../data/data-potion";
 import { DramaGifts } from "../drama/drama-gifts";
 import { show } from "../drama/show";
 import { scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objCharacterFlower } from "../objects/characters/obj-character-flower";
-import { objItemAngelDropper } from "../objects/characters/obj-item-angel-dropper";
+import { objItemAngelDropperQueue } from "../objects/characters/obj-item-angel-dropper-queue";
 import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 import { ObjTerrain } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
@@ -26,10 +27,13 @@ export function scnMountFlopHouseInterior() {
 
     if (gift.isGiveable()) {
         const pipeObjs = [lvl.Pipe, lvl.Pipe_1];
+        const queueObj = objItemAngelDropperQueue().show();
 
-        objItemAngelDropper(lvl.EnemySuggestive, { id: "RestoreHealth", kind: "potion" })
-            .at(-100, 100)
-            .show();
+        function pushPotions(...potionIds: DataPotion.Id[]) {
+            for (const potionId of potionIds) {
+                queueObj.objItemAngelDropperQueue.push(lvl.EnemySuggestive, { kind: "potion", id: potionId });
+            }
+        }
 
         scene.stage
             .coro(function* () {
@@ -39,12 +43,15 @@ export function scnMountFlopHouseInterior() {
 
                 yield () => lvl.EnemySuggestive.status.health < lvl.EnemySuggestive.status.healthMax * 0.9;
 
-                lvl.EnemySuggestive.mxnRpgStatusPotions.heldPotionIds.push("AttributeStrengthUp");
-                lvl.EnemySuggestive.mxnRpgStatusPotions.heldPotionIds.push("RestoreHealth");
+                pushPotions("RestoreHealth", "RestoreHealth");
 
                 yield () => lvl.EnemySuggestive.status.health < lvl.EnemySuggestive.status.healthMax * 0.5;
 
-                lvl.EnemySuggestive.mxnRpgStatusPotions.heldPotionIds.push("RestoreHealth");
+                pushPotions("RestoreHealth", "AttributeStrengthUp", "RestoreHealth");
+
+                yield () => lvl.EnemySuggestive.status.health < lvl.EnemySuggestive.status.healthMax * 0.3;
+
+                pushPotions("RestoreHealth", "RestoreHealth");
 
                 yield () => lvl.EnemySuggestive.destroyed;
 

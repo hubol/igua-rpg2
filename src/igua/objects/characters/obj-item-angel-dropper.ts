@@ -91,6 +91,10 @@ export function objItemAngelDropper(receiverObj: DisplayObject, item: RpgInvento
 }
 
 objItemAngelDropper.areAnyTargeting = function areAnyTargeting (obj: DisplayObject) {
+    if (obj.destroyed) {
+        return false;
+    }
+
     for (const dropperObj of Instances(objItemAngelDropper)) {
         if (dropperObj.objItemAngelDropper.isTargeting(obj)) {
             return true;

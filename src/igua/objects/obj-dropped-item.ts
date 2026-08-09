@@ -4,6 +4,7 @@ import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { DataItem } from "../data/data-item";
 import { scene } from "../globals";
+import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { playerObj } from "./obj-player";
 
@@ -24,7 +25,7 @@ export function objDroppedItem(item: RpgInventory.Item) {
                 self.y++;
             }
 
-            if (playerObj.collides(self)) {
+            if (Rpg.character.status.isAlive && playerObj.collides(self)) {
                 api.isDeflected = true;
                 speed.x += playerObj.speed.x || playerObj.facing;
                 speed.y += Math.min(playerObj.speed.y, -1);
