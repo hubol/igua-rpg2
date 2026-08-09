@@ -59,7 +59,10 @@ export function objItemAngelDropper(receiverObj: DisplayObject, item: RpgInvento
 
             const moveObj = container()
                 .step(() => {
-                    if (Math.abs(self.x - receiverObj.x) < 5 || receiverObj.destroyed) {
+                    if (
+                        receiverObj.destroyed
+                        || (Math.abs(self.x - receiverObj.x) < 5 && self.y < receiverObj.y - 100)
+                    ) {
                         moveObj.destroy();
                         return;
                     }
