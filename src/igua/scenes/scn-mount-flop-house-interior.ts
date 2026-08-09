@@ -25,6 +25,8 @@ export function scnMountFlopHouseInterior() {
         .show();
 
     if (gift.isGiveable()) {
+        lvl.EnemySuggestive.mxnDetectPlayer.defaultRayDistance = 500;
+
         const pipeObjs = [lvl.Pipe, lvl.Pipe_1];
         const pushPotions = objItemAngelDropperQueue()
             .show()

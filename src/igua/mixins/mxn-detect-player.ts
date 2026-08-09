@@ -18,6 +18,7 @@ const v = vnew();
 export function mxnDetectPlayer(obj: Container) {
     const mxnDetectPlayer = {
         debug: false,
+        defaultRayDistance: 200,
         detectionScore: -999,
         minDetectionScore: 0,
         get isDetected() {
@@ -34,7 +35,7 @@ export function mxnDetectPlayer(obj: Container) {
     let facingPivotObjs = Force<MxnFacingPivot[]>();
     let angelEyesObjs = Force<ObjAngelEyes[]>();
 
-    let maxRayDistance = 200;
+    let maxRayDistance = mxnDetectPlayer.defaultRayDistance;
 
     return obj
         .merge({ mxnDetectPlayer })
@@ -70,7 +71,7 @@ export function mxnDetectPlayer(obj: Container) {
                 facingPivotObjs[i].polarOffsets[0] = polarOffset;
             }
 
-            maxRayDistance = approachLinear(maxRayDistance, 200, 1);
+            maxRayDistance = approachLinear(maxRayDistance, mxnDetectPlayer.defaultRayDistance, 1);
         })
         .coro(function* (self) {
             const rayObj = objDetectRay().invisible()
@@ -158,6 +159,7 @@ export namespace mxnDetectPlayer {
     export type Type = ReturnType<typeof mxnDetectPlayer>;
     export interface Context {
         debug: boolean;
+        defaultRayDistance: Integer;
         detectionScore: Integer;
         minDetectionScore: Integer;
         readonly isDetected: boolean;
