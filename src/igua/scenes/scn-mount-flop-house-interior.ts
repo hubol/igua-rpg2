@@ -1,6 +1,5 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
-import { DataPotion } from "../data/data-potion";
 import { DramaGifts } from "../drama/drama-gifts";
 import { show } from "../drama/show";
 import { scene } from "../globals";
@@ -27,13 +26,9 @@ export function scnMountFlopHouseInterior() {
 
     if (gift.isGiveable()) {
         const pipeObjs = [lvl.Pipe, lvl.Pipe_1];
-        const queueObj = objItemAngelDropperQueue().show();
-
-        function pushPotions(...potionIds: DataPotion.Id[]) {
-            for (const potionId of potionIds) {
-                queueObj.objItemAngelDropperQueue.push(lvl.EnemySuggestive, { kind: "potion", id: potionId });
-            }
-        }
+        const pushPotions = objItemAngelDropperQueue()
+            .show()
+            .objItemAngelDropperQueue.createPushPotions(lvl.EnemySuggestive);
 
         scene.stage
             .coro(function* () {

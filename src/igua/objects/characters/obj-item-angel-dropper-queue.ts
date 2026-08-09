@@ -1,5 +1,6 @@
 import { DisplayObject } from "pixi.js";
 import { container } from "../../../lib/pixi/container";
+import { DataPotion } from "../../data/data-potion";
 import { scene } from "../../globals";
 import { RpgInventory } from "../../rpg/rpg-inventory";
 import { objItemAngelDropper } from "./obj-item-angel-dropper";
@@ -14,6 +15,13 @@ export function objItemAngelDropperQueue() {
     let requestsStartedCount = 0;
 
     const api = {
+        createPushPotions(obj: DisplayObject) {
+            return function pushPotions (...potionIds: DataPotion.Id[]) {
+                for (const potionId of potionIds) {
+                    api.push(obj, { kind: "potion", id: potionId });
+                }
+            };
+        },
         push(obj: DisplayObject, item: RpgInventory.Item) {
             requests.push({ obj, item });
         },
