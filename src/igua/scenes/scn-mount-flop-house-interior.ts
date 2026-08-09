@@ -5,6 +5,7 @@ import { show } from "../drama/show";
 import { scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objCharacterFlower } from "../objects/characters/obj-character-flower";
+import { objItemAngelDropper } from "../objects/characters/obj-item-angel-dropper";
 import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 import { ObjTerrain } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
@@ -25,6 +26,10 @@ export function scnMountFlopHouseInterior() {
 
     if (gift.isGiveable()) {
         const pipeObjs = [lvl.Pipe, lvl.Pipe_1];
+
+        objItemAngelDropper(lvl.EnemySuggestive, { id: "RestoreHealth", kind: "potion" })
+            .at(-100, 100)
+            .show();
 
         scene.stage
             .coro(function* () {

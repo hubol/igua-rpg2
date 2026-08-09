@@ -30,7 +30,9 @@ export function objItemAngelDropper(receiverObj: DisplayObject, item: RpgInvento
                 return false;
             }
 
-            if (droppedItemObj?.y ?? Number.MIN_SAFE_INTEGER > receiverObj.getWorldBounds().bottom + 16) {
+            const droppedItemY = droppedItemObj?.y ?? Number.MIN_SAFE_INTEGER;
+
+            if (droppedItemY > receiverObj.getWorldBounds().bottom + 16) {
                 return false;
             }
 
@@ -56,19 +58,25 @@ export function objItemAngelDropper(receiverObj: DisplayObject, item: RpgInvento
                 .show();
 
             const moveObj = container()
-                .step(() => self.moveTowards(v.at(receiverObj).add(0, -130), 2))
+                .step(() => {
+                    if (Math.abs(self.x - receiverObj.x) < 5 || receiverObj.destroyed) {
+                        moveObj.destroy();
+                        return;
+                    }
+                    self.moveTowards(v.at(receiverObj).add(0, -130), 2);
+                })
                 .show(self);
 
-            yield () => Math.abs(self.x - receiverObj.x) < 5;
-
-            moveObj.destroy();
+            yield () => moveObj.destroyed;
 
             yield sleep(100);
 
-            figureObj.destroy();
-            objDroppedItem(item)
-                .at(self)
-                .show();
+            if (!receiverObj.destroyed) {
+                figureObj.destroy();
+                droppedItemObj = objDroppedItem(item)
+                    .at(self)
+                    .show();
+            }
 
             self
                 .step(() => self.y -= 2);
