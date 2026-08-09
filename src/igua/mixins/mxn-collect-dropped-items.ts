@@ -5,13 +5,21 @@ import { holdf } from "../../lib/game-engine/routines/hold";
 import { Rng } from "../../lib/math/rng";
 import { DataPotion } from "../data/data-potion";
 import { scene } from "../globals";
+import { objItemAngelDropper } from "../objects/characters/obj-item-angel-dropper";
 import { objFxHeart } from "../objects/effects/obj-fx-heart";
 import { objValuableSparkle } from "../objects/effects/obj-valuable-sparkle";
 import { objDroppedItem } from "../objects/obj-dropped-item";
 import { mxnRpgStatusPotions } from "./mxn-rpg-status-potions";
 
 export function mxnCollectDroppedItems(obj: DisplayObject) {
+    const api = {
+        get isTargetedForDrop(): boolean {
+            return objItemAngelDropper.areAnyTargeting(obj);
+        },
+    };
+
     return obj
+        .merge({ mxnCollectDroppedItems: api })
         .coro(function* (self) {
             while (true) {
                 yield holdf(() => {

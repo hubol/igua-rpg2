@@ -613,7 +613,7 @@ export function objAngelSuggestive(entity: OgmoEntities.EnemySuggestive) {
             yield sleep(1000);
         },
         *teleport() {
-            if (!obj.mxnDetectPlayer.isDetected) {
+            if (!obj.mxnDetectPlayer.isDetected || obj.mxnCollectDroppedItems.isTargetedForDrop) {
                 return;
             }
 
