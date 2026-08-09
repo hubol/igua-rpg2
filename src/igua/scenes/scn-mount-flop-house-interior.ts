@@ -1,6 +1,6 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
-import { DramaGifts } from "../drama/drama-gifts";
+import { DramaQuests } from "../drama/drama-quests";
 import { show } from "../drama/show";
 import { scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -9,11 +9,11 @@ import { objItemAngelDropperQueue } from "../objects/characters/obj-item-angel-d
 import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 import { ObjTerrain } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
-import { RpgGift } from "../rpg/rpg-gifts";
+import { RpgQuest } from "../rpg/rpg-quests";
 
 export function scnMountFlopHouseInterior() {
     // TODO should be quest
-    const gift = Rpg.gift("MountFlop.Flower");
+    const quest = Rpg.quest("MountFlop.Flower");
 
     const lvl = Lvl.MountFlopHouseInterior();
 
@@ -24,7 +24,7 @@ export function scnMountFlopHouseInterior() {
     })
         .show();
 
-    if (gift.isGiveable()) {
+    if (quest.isCompletable) {
         lvl.EnemySuggestive.mxnDetectPlayer.defaultRayDistance = 500;
 
         const pipeObjs = [lvl.Pipe, lvl.Pipe_1];
@@ -54,23 +54,23 @@ export function scnMountFlopHouseInterior() {
 
                 lvl.Door.objDoor.lock();
                 pipeObjs.forEach(ObjTerrain.toggle);
-                enrichFlowerNpc(lvl, gift);
+                enrichFlowerNpc(lvl, quest);
 
-                yield () => !gift.isGiveable();
+                yield () => !quest.isCompletable;
 
                 lvl.Door.objDoor.unlock();
             });
     }
     else {
         lvl.EnemySuggestive.destroy();
-        enrichFlowerNpc(lvl, gift);
+        enrichFlowerNpc(lvl, quest);
     }
 }
 
-function enrichFlowerNpc(lvl: LvlType.MountFlopHouseInterior, gift: RpgGift) {
+function enrichFlowerNpc(lvl: LvlType.MountFlopHouseInterior, quest: RpgQuest) {
     objCharacterFlower()
         .mixin(mxnCutscene, function* () {
-            if (!gift.isGiveable()) {
+            if (!quest.isCompletable) {
                 yield* show("Have you been opening a bunch of flops?");
                 return;
             }
@@ -80,7 +80,7 @@ function enrichFlowerNpc(lvl: LvlType.MountFlopHouseInterior, gift: RpgGift) {
                 "If so, this will help you open them.",
             );
 
-            yield* DramaGifts.give(gift);
+            yield* DramaQuests.complete(quest);
         })
         .at(lvl.NiceGuyMarker)
         .show();

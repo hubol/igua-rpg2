@@ -87,6 +87,10 @@ export class RpgQuest {
         return Boolean(this.timesCompleted);
     }
 
+    get isCompletable() {
+        return this.peekCompletionReward() !== null;
+    }
+
     static createState(): RpgQuest.State {
         return {
             timesCompleted: 0,

@@ -17,11 +17,11 @@ export function scnMountFlop() {
 }
 
 function enrichBestFriendHaverNpc(lvl: LvlType.MountFlop) {
-    const gift = Rpg.gift("MountFlop.Flower");
+    const quest = Rpg.quest("MountFlop.Flower");
 
     lvl.BestFriendHaverNpc
         .mixin(mxnCutscene, function* () {
-            if (!gift.isGiveable()) {
+            if (!quest.isCompletable) {
                 yield* show("That foolish wizard...");
                 return;
             }
@@ -42,7 +42,7 @@ function enrichBestFriendHaverNpc(lvl: LvlType.MountFlop) {
             yield* show("Thank you. He is known to have really cool items. Maybe he'll give you something nice.");
         });
 
-    if (!gift.isGiveable()) {
+    if (!quest.isCompletable) {
         lvl.TownSignageHelp.destroy();
         return;
     }

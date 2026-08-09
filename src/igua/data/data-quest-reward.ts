@@ -195,6 +195,10 @@ export namespace DataQuestReward {
                 kind: "single",
                 reward: { kind: "equipment", id: "Robotic", level: 1 },
             },
+            "MountFlop.Flower": {
+                kind: "single",
+                reward: { kind: "equipment", id: "SpellOpenFlopBlindBoxes", level: 1 },
+            },
             __Fallback__: {
                 kind: "nothing",
             },
