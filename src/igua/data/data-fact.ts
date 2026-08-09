@@ -41,6 +41,10 @@ export namespace DataFact {
                 heading: "Gambling tip",
                 messages: ["When gambling, the best strategy is to make bets that are both safe yet risky."],
             },
+            Lagavulin: {
+                heading: "About liquor",
+                messages: ["Lagavulin exists in this world."],
+            },
             "__Fallback__": {
                 heading: "About a bug",
                 messages: ["If you are reading this, it is a bug with the facts mechanic."],

@@ -16,6 +16,7 @@ import { mxnEnemy } from "../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../mixins/mxn-enemy-death-burst";
 import { mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { objFxExpressSurprise } from "../objects/effects/obj-fx-express-surprise";
 import { playerObj } from "../objects/obj-player";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { Rpg } from "../rpg/rpg";
@@ -133,6 +134,36 @@ export function scnMishaHouse() {
         });
 
     enrichWaterHeater(lvl);
+
+    lvl.Calendar
+        .mixin(mxnSpeaker, { name: "Misha's Calendar", tintPrimary: 0x848AE0, tintSecondary: 0x2E0D33 })
+        .mixin(mxnCutscene, function* () {
+            yield* show(
+                "Seven Days Ago ... Work",
+                "Six Days Ago ... Work",
+                "Five Days Ago ... Work",
+                "Four Days Ago ... Work",
+                "Three Days Ago ... Work",
+                "Two Days Ago ... Work",
+                "Yesterday ... Work",
+                "Today ...",
+            );
+
+            objFxExpressSurprise()
+                .at(playerObj.head.getWorldCenter())
+                .show();
+
+            playerObj.speed.y = -2;
+            yield sleep(500);
+            yield* show("Today ... Birthday");
+
+            yield sleep(1000);
+
+            Cutscene.setCurrentSpeaker(playerObj);
+            yield* show("Oh... I wonder how I could surprise Misha for his birthday.");
+
+            // TODO set some flag
+        });
 
     if (computerQuest.everCompleted) {
         return;
