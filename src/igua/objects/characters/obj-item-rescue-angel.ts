@@ -22,12 +22,9 @@ const [propellerTx0, propellerTx1, propellerTx2, bagTx, legsTx, armTx, dressTx, 
         width: 74,
     });
 
-function objItemRescueAngelPuppet() {
-    const controls = {
+function objItemAngelPuppet() {
+    const api = {
         animatePivot: true,
-    };
-
-    const coros = {
         *removeBag() {
             yield interp(bagObj, "alpha").steps(2).to(0).over(333);
             yield sleep(333);
@@ -50,12 +47,41 @@ function objItemRescueAngelPuppet() {
         Sprite.from(nogginTx),
         Sprite.from(faceTx).mixin(mxnSinePivot),
     )
+        .merge({ objItemAngelPuppet: api })
         .step(self => {
-            if (controls.animatePivot) {
+            if (api.animatePivot) {
                 self.pivot.y = Math.round(Math.sin(scene.ticker.ticks * 0.1) * 3);
             }
+        });
+}
+
+function objItemAngelCommon() {
+    const puppetObj = objItemAngelPuppet().invisible();
+
+    const api = {
+        flapSfxBaseRate: 1,
+        puppetObj,
+        get isReady() {
+            return puppetObj.visible;
+        },
+    };
+
+    return container(puppetObj)
+        .pivoted(21, 65)
+        .merge({ objItemAngelCommon: api })
+        .coro(function* (self) {
+            while (true) {
+                yield () => self.visible;
+                self.play(Sfx.Character.RescueAngelFlap.rate(api.flapSfxBaseRate + Rng.float(-.1, .1)));
+                yield sleepf(8);
+            }
         })
-        .merge({ controls, coros });
+        .coro(function* (self) {
+            self.play(Sfx.Character.RescueAngelAppear.rate(0.95, 1.05));
+            objFxFormativeBurst().at(33, 33).show(self);
+            yield sleep(500);
+            puppetObj.visible = true;
+        });
 }
 
 const v = vnew();
@@ -65,31 +91,15 @@ export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSim
         return v.at(rescueObj.getWorldPosition()).add(objCenterOffset);
     }
 
-    const puppetObj = objItemRescueAngelPuppet().invisible();
-
-    let flapBaseRate = 1;
-
     const state = {
         isRescued: false,
     };
 
-    return container(puppetObj)
-        .pivoted(21, 65)
+    return objItemAngelCommon()
         .merge({ state })
         .mixin(mxnPhysics, { gravity: 0, physicsRadius: 8 })
         .coro(function* (self) {
-            while (true) {
-                yield () => puppetObj.visible;
-                self.play(Sfx.Character.RescueAngelFlap.rate(flapBaseRate + Rng.float(-.1, .1)));
-                yield sleepf(8);
-            }
-        })
-        .coro(function* (self) {
-            self.play(Sfx.Character.RescueAngelAppear.rate(0.95, 1.05));
-            objFxFormativeBurst().at(33, 33).show(self);
-            yield sleep(500);
-
-            puppetObj.visible = true;
+            yield () => self.objItemAngelCommon.isReady;
             yield sleep(333);
 
             self.physicsEnabled = false;
@@ -172,9 +182,9 @@ export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSim
                     aliveBehaviorObj.speed = 0;
                     self.speed.at(0, 0);
                     yield interpvr(self).factor(factor.sine).to(rescueObj).over(500);
-                    flapBaseRate = 0.8;
+                    self.objItemAngelCommon.flapSfxBaseRate = 0.8;
                     state.isRescued = true;
-                    puppetObj.controls.animatePivot = false;
+                    self.objItemAngelCommon.puppetObj.objItemAngelPuppet.animatePivot = false;
                     aliveBehaviorObj.step(() => {
                         if (!rescueObj.destroyed) {
                             rescueObj.at(self).add(objCenterOffset);
@@ -186,9 +196,9 @@ export function objItemRescueAngel(rescueObj: DisplayObject, towSpeed: VectorSim
 
             yield () => aliveBehaviorObj.destroyed;
             aliveBehaviorObj.destroy();
-            yield* puppetObj.coros.removeBag();
+            yield* self.objItemAngelCommon.puppetObj.objItemAngelPuppet.removeBag();
 
-            flapBaseRate = 1;
+            self.objItemAngelCommon.flapSfxBaseRate = 1;
 
             self.speed.at(0, -0.5);
             self.step(self => self.speed.y -= 0.1);
