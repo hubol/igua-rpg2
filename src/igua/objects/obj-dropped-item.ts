@@ -52,3 +52,7 @@ export function objDroppedItem(item: RpgInventory.Item) {
             }
         });
 }
+
+export namespace objDroppedItem {
+    export type Type = ReturnType<typeof objDroppedItem>;
+}

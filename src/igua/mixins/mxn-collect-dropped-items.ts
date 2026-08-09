@@ -11,6 +11,10 @@ import { objValuableSparkle } from "../objects/effects/obj-valuable-sparkle";
 import { objDroppedItem } from "../objects/obj-dropped-item";
 import { mxnRpgStatusPotions } from "./mxn-rpg-status-potions";
 
+function skipDeflectedItems(obj: objDroppedItem.Type) {
+    return !obj.objDroppedItem.isDeflected;
+}
+
 export function mxnCollectDroppedItems(obj: DisplayObject) {
     const api = {
         get isTargetedForDrop(): boolean {
@@ -23,8 +27,8 @@ export function mxnCollectDroppedItems(obj: DisplayObject) {
         .coro(function* (self) {
             while (true) {
                 yield holdf(() => {
-                    const droppedItemObj = self.collidesOne(Instances(objDroppedItem));
-                    if (!droppedItemObj || droppedItemObj.objDroppedItem.isDeflected) {
+                    const droppedItemObj = self.collidesOne(Instances(objDroppedItem, skipDeflectedItems));
+                    if (!droppedItemObj) {
                         return false;
                     }
 
@@ -36,7 +40,7 @@ export function mxnCollectDroppedItems(obj: DisplayObject) {
                     }
                     return true;
                 }, 60);
-                const droppedItemObj = self.collidesOne(Instances(objDroppedItem));
+                const droppedItemObj = self.collidesOne(Instances(objDroppedItem, skipDeflectedItems));
                 if (!droppedItemObj) {
                     continue;
                 }
