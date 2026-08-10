@@ -116,7 +116,7 @@ export namespace RpgFactory {
             loot,
             microcosms: RpgMicrocosms.create(data.microcosms),
             programmaticFlags,
-            quest(questId: DataQuest.Id) {
+            quest<TId extends DataQuest.Id>(questId: TId) {
                 return quests.getById(questId);
             },
             records: records as Omit<RpgRecords, "onDropLoot">,

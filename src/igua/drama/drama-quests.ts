@@ -22,13 +22,18 @@ function peekCompletionRewardName(maybeQuest: getQuest.Maybe) {
         return "nothing";
     }
 
-    if (reward.kind === "currency") {
-        return reward.count === 1 ? "1 valuable" : `${reward.count} valuables`;
-    }
+    return reward.drops
+        .map(drop => {
+            const count = drop.count;
 
-    const itemName = DataItem.getName(reward);
+            if (drop.kind === "currency") {
+                return count === 1 ? "1 valuable" : `${count} valuables`;
+            }
 
-    return reward.count > 1 ? `${itemName} x${reward.count}` : itemName;
+            const itemName = DataItem.getName(drop);
+            return count > 1 ? `${itemName} x${count}` : itemName;
+        })
+        .join(", ");
 }
 
 function* complete(maybeQuest: getQuest.Maybe) {
@@ -38,16 +43,18 @@ function* complete(maybeQuest: getQuest.Maybe) {
         return null;
     }
 
-    const { count, ...pull } = reward;
+    for (const drop of reward.drops) {
+        const count = drop.count;
 
-    if (pull.kind === "currency") {
-        yield* DramaWallet.rewardValuables(count);
-        return reward;
+        if (drop.kind === "currency") {
+            yield* DramaWallet.rewardValuables(count);
+        }
+        else {
+            const items: Array<RpgInventory.Item> = range(count).map(() => drop);
+            yield* DramaInventory.receiveItems(items);
+        }
     }
 
-    const items: Array<RpgInventory.Item> = range(count).map(() => pull);
-
-    yield* DramaInventory.receiveItems(items);
     return reward;
 }
 
