@@ -29,6 +29,7 @@ import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgSaveFiles } from "../rpg/rpg-save-files";
 import { RpgStatus } from "../rpg/rpg-status";
 import { objFxEnemyDefeat } from "./effects/obj-fx-enemy-defeat";
+import { objFxOverheated } from "./effects/obj-fx-overheated";
 import { objFxPlayerJumpComboDust } from "./effects/obj-fx-player-jump-combo-dust";
 import { objFxSuperDust } from "./effects/obj-fx-super-dust";
 import { objDarkness } from "./nature/obj-darkness";
@@ -129,10 +130,24 @@ function objPlayer(looks: IguanaLooks.Serializable) {
     };
 
     // TODO truly wretched
-    const effects: RpgStatus.Effects = merge(
-        merge({ died: onDied }, iguanaLocomotiveObj.mxnBallonable.rpgStatusEffects),
-        layers.overlay.hud.healthBarObj.effects,
-    );
+    const effects: RpgStatus.Effects = {
+        ...iguanaLocomotiveObj.mxnBallonable.rpgStatusEffects,
+        died: onDied,
+        healed: layers.overlay.hud.healthBarObj.effects.healed,
+        tookDamage(remainingHealth, physicalDamage, emotionalDamage, poisonDamage, overheatDamage, attacker, attack) {
+            if (overheatDamage) {
+                objFxOverheated.createBurstForObject(puppet);
+            }
+
+            layers.overlay.hud.healthBarObj.effects.tookDamage(
+                remainingHealth,
+                physicalDamage,
+                emotionalDamage,
+                poisonDamage,
+                overheatDamage,
+            );
+        },
+    };
 
     const status = Rpg.character.status;
 
@@ -262,7 +277,8 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             }
 
             if (DevKey.justWentDown("KeyP")) {
-                devObjHotPineCone().at(puppet).add(0, -1).show();
+                objFxOverheated.createBurstForObject(puppet);
+                // devObjHotPineCone().at(puppet).add(0, -1).show();
             }
 
             const hasControl = puppet.hasControl;

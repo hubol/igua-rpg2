@@ -4,6 +4,7 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { Rng } from "../../lib/math/rng";
 import { clone } from "../../lib/object/clone";
 import { layers } from "../globals";
+import { objFxOverheated } from "../objects/effects/obj-fx-overheated";
 import { objAngelEyes } from "../objects/enemies/obj-angel-eyes";
 import { objLootDrop } from "../objects/obj-loot-drop";
 import { playerObj } from "../objects/obj-player";
@@ -61,6 +62,11 @@ export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
             if (attacker?.quirks?.successfulAttacksRewardExperience && attack && damage > 0) {
                 Rpg.experience.reward.combat.onAttackDamage(attack, damage);
             }
+
+            if (overheatDamage) {
+                objFxOverheated.createBurstForObject(obj);
+            }
+
             healthBarTookDamage(
                 remainingHealth,
                 physicalDamage,
