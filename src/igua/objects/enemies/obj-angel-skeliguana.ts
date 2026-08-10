@@ -27,6 +27,11 @@ const ranks = {
     level0: RpgEnemyRank.create({
         status: {
             healthMax: 30,
+            conditions: {
+                overheat: {
+                    max: 70,
+                },
+            },
         },
         loot: {
             tier0: [{ kind: "pocket_item", id: "BoneTypeA" }],

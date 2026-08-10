@@ -196,7 +196,7 @@ const ranks = {
             healthMax: 25,
             conditions: {
                 overheat: {
-                    max: 30,
+                    max: 40,
                 },
             },
         },
