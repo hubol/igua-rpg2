@@ -23,10 +23,8 @@ export function scnNewBalltownFanatic() {
 }
 
 function enrichSecretSymbols(lvl: LvlType.NewBalltownFanatic) {
-    const { ballFruitFanatic } = Rpg.flags.newBalltown;
-
     function isRevealed(index: Integer) {
-        const count = ballFruitFanatic.succesfulDeliveriesCount;
+        const count = Rpg.quest("NewBalltown.Fanatic.FruitDelivery").timesCompleted;
         return count > 0 && (count + 2) > index;
     }
 
@@ -45,9 +43,10 @@ function enrichSecretSymbols(lvl: LvlType.NewBalltownFanatic) {
 
 function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
     const count = 5;
+    const quest = Rpg.quest("NewBalltown.Fanatic.FruitDelivery");
 
     lvl.BallFruitFanaticNpc.mixin(mxnCutscene, function* () {
-        const typePreference = Rpg.flags.newBalltown.ballFruitFanatic.typePreference;
+        const typePreference = quest.flags.preferredFruitPocketId;
 
         const hasBallFruitTypeA = Rpg.inventory.pocket.has(
             "BallFruitTypeA",
@@ -84,7 +83,6 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
                 );
                 yield* DramaInventory.removeCount({ kind: "pocket_item", id: typePreference }, count);
                 yield* DramaQuests.complete("NewBalltown.Fanatic.FruitDelivery");
-                Rpg.flags.newBalltown.ballFruitFanatic.succesfulDeliveriesCount++;
                 return;
             }
 
@@ -97,7 +95,7 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
                     "I prefer the texture of the seeds.",
                     `Please bring ${count} ballfruit with seeds.`,
                 );
-                Rpg.flags.newBalltown.ballFruitFanatic.typePreference = "BallFruitTypeB";
+                quest.flags.preferredFruitPocketId = "BallFruitTypeB";
             }
             else if (hasBallFruitTypeB && typePreference !== "BallFruitTypeB") {
                 yield* show(
@@ -106,7 +104,7 @@ function enrichBallFruitFanaticNpc(lvl: LvlType.NewBalltownFanatic) {
                     "I am terribly allergic to the seeds.",
                     `Please bring ${count} seedless ballfruit.`,
                 );
-                Rpg.flags.newBalltown.ballFruitFanatic.typePreference = "BallFruitTypeA";
+                quest.flags.preferredFruitPocketId = "BallFruitTypeA";
             }
         }
         else if (typePreference) {

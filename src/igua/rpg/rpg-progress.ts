@@ -75,10 +75,6 @@ export function getInitialRpgProgress() {
                 armorer: {
                     toldPlayerAboutDesireForFish: false,
                 },
-                ballFruitFanatic: {
-                    typePreference: Null<RpgPocket.Item>(),
-                    succesfulDeliveriesCount: 0,
-                },
                 fishmonger: {
                     deliveries: {
                         armorer: Null<"ready" | "arrived" | "delivered">(),

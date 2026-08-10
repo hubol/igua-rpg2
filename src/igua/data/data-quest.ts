@@ -2,6 +2,7 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { Null } from "../../lib/types/null";
 import { RpgFoodOrder } from "../rpg/rpg-food-order";
 import { RpgInventory } from "../rpg/rpg-inventory";
+import { RpgPocket } from "../rpg/rpg-pocket";
 import { DataLib } from "./data-lib";
 
 export namespace DataQuest {
@@ -17,7 +18,9 @@ export namespace DataQuest {
                 },
             },
             "NewBalltown.Fanatic.FruitDelivery": {
-                flags: null,
+                flags: {
+                    preferredFruitPocketId: Null<RpgPocket.Item>(),
+                },
                 reward: {
                     kind: "in_order",
                     drops: [
