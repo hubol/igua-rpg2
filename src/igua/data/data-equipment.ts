@@ -309,8 +309,8 @@ export namespace DataEquipment {
                     texture: null,
                     description: "Warming sock. Melee attacks cause enemies to overheat.",
                     buffs: (() => {
-                        const values = [20, 35, 45, 50];
-                        const damages = [25, 40, 60];
+                        const values = [35, 40, 45, 50];
+                        const damages = [10, 25, 40, 60];
 
                         return (model, bonus) => {
                             model.combat.melee.conditions.overheat.value += (values[bonus] ?? values.last)
