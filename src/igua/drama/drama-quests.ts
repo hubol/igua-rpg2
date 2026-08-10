@@ -1,6 +1,6 @@
 import { range } from "../../lib/range";
 import { DataItem } from "../data/data-item";
-import { DataQuestReward } from "../data/data-quest-reward";
+import { DataQuest } from "../data/data-quest";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { RpgQuest } from "../rpg/rpg-quests";
@@ -12,7 +12,7 @@ function getQuest(maybeQuest: getQuest.Maybe) {
 }
 
 namespace getQuest {
-    export type Maybe = DataQuestReward.Id | RpgQuest;
+    export type Maybe = DataQuest.Id | RpgQuest;
 }
 
 function peekCompletionRewardName(maybeQuest: getQuest.Maybe) {

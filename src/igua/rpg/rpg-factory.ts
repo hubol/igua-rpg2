@@ -2,7 +2,7 @@ import { StorageEntry } from "../../lib/browser/storage-entry";
 import { Integer } from "../../lib/math/number-alias-types";
 import { DataGift } from "../data/data-gift";
 import { DataNpcPersona } from "../data/data-npc-persona";
-import { DataQuestReward } from "../data/data-quest-reward";
+import { DataQuest } from "../data/data-quest";
 import { DataShop } from "../data/data-shop";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgClassrooms } from "./rpg-classrooms";
@@ -116,7 +116,7 @@ export namespace RpgFactory {
             loot,
             microcosms: RpgMicrocosms.create(data.microcosms),
             programmaticFlags,
-            quest(questId: DataQuestReward.Id) {
+            quest(questId: DataQuest.Id) {
                 return quests.getById(questId);
             },
             records: records as Omit<RpgRecords, "onDropLoot">,

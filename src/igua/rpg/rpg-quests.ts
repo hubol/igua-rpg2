@@ -1,12 +1,12 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { CacheMap } from "../../lib/object/cache-map";
-import { DataQuestReward } from "../data/data-quest-reward";
+import { DataQuest } from "../data/data-quest";
 import { RpgExperienceRewarder } from "./rpg-experience-rewarder";
 
 export class RpgQuests {
-    private readonly _cacheMap = new CacheMap((questId: DataQuestReward.Id) => {
+    private readonly _cacheMap = new CacheMap((questId: DataQuest.Id) => {
         const questState = this._state[questId] ?? (this._state[questId] = RpgQuest.createState());
-        return new RpgQuest(questState, DataQuestReward.getById(questId), this._reward);
+        return new RpgQuest(questState, DataQuest.getById(questId), this._reward);
     });
 
     constructor(
@@ -23,13 +23,13 @@ export class RpgQuests {
 }
 
 namespace RpgQuests {
-    export type State = Partial<Record<DataQuestReward.Id, RpgQuest.State>>;
+    export type State = Partial<Record<DataQuest.Id, RpgQuest.State>>;
 }
 
 export class RpgQuest {
     constructor(
         private readonly _state: RpgQuest.State,
-        private readonly _data: DataQuestReward.Model,
+        private readonly _data: DataQuest.Model,
         private readonly _reward: RpgExperienceRewarder,
     ) {
     }
@@ -103,5 +103,5 @@ export namespace RpgQuest {
         timesCompleted: Integer;
     }
 
-    export type Reward = (Required<DataQuestReward.Reward> & { isExtended: boolean }) | null;
+    export type Reward = (Required<DataQuest.Reward> & { isExtended: boolean }) | null;
 }

@@ -1,4 +1,4 @@
-import { DataQuestReward } from "../../data/data-quest-reward";
+import { DataQuest } from "../../data/data-quest";
 import { Rpg } from "../rpg";
 import { RpgMicrocosm } from "../rpg-microcosm";
 
@@ -7,7 +7,7 @@ export class MicrocosmSimpleBot extends RpgMicrocosm<MicrocosmSimpleBot.State> {
         super();
     }
 
-    getQuestIdForPocketItem(id: MicrocosmSimpleBot.PocketItemId): DataQuestReward.Id {
+    getQuestIdForPocketItem(id: MicrocosmSimpleBot.PocketItemId): DataQuest.Id {
         return this._config.questIds[id];
     }
 
@@ -27,6 +27,6 @@ namespace MicrocosmSimpleBot {
     }
 
     export interface Config {
-        questIds: Record<PocketItemId, DataQuestReward.Id>;
+        questIds: Record<PocketItemId, DataQuest.Id>;
     }
 }

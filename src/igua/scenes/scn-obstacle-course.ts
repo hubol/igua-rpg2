@@ -12,7 +12,7 @@ import { ZIndex } from "../core/scene/z-index";
 import { renderer } from "../current-pixi-renderer";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataPocketItem } from "../data/data-pocket-item";
-import { DataQuestReward } from "../data/data-quest-reward";
+import { DataQuest } from "../data/data-quest";
 import { DramaFacts } from "../drama/drama-facts";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
@@ -156,7 +156,7 @@ function* dramaEndMinigame(lvl: LvlType.ObstacleCourse) {
 interface CoroAwardPrizeForCollectionArgs {
     pocketItemId: DataPocketItem.Id;
     npcPersonaId: DataNpcPersona.Id;
-    questRewardId: DataQuestReward.Id;
+    questRewardId: DataQuest.Id;
 }
 
 function* coroAwardPrizeForCollection({ npcPersonaId, pocketItemId, questRewardId }: CoroAwardPrizeForCollectionArgs) {

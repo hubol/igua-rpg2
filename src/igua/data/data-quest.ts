@@ -2,13 +2,13 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { DataLib } from "./data-lib";
 
-export namespace DataQuestReward {
+export namespace DataQuest {
     export type Reward = (RpgInventory.Item | { kind: "currency"; id: "valuables" }) & { count?: Integer };
 
     namespace Extend {
         export interface Repeat {
             kind: "repeat";
-            reward: DataQuestReward.Reward;
+            reward: DataQuest.Reward;
         }
     }
 
@@ -17,18 +17,18 @@ export namespace DataQuestReward {
     namespace Model {
         export interface InOrder {
             kind: "in_order";
-            rewards: Array<DataQuestReward.Reward>;
+            rewards: Array<DataQuest.Reward>;
             extend: Extend;
         }
 
         export interface Repeat {
             kind: "repeat";
-            reward: DataQuestReward.Reward;
+            reward: DataQuest.Reward;
         }
 
         export interface Single {
             kind: "single";
-            reward: DataQuestReward.Reward;
+            reward: DataQuest.Reward;
         }
 
         export interface Nothing {
