@@ -1,3 +1,4 @@
+import { DataPocketItem } from "../../data/data-pocket-item";
 import { DataQuest } from "../../data/data-quest";
 import { Rpg } from "../rpg";
 import { RpgMicrocosm } from "../rpg-microcosm";
@@ -21,7 +22,7 @@ export class MicrocosmSimpleBot extends RpgMicrocosm<MicrocosmSimpleBot.State> {
 }
 
 namespace MicrocosmSimpleBot {
-    export type PocketItemId = "RobotHair";
+    export type PocketItemId = Extract<DataPocketItem.Id, "RobotHair">;
 
     export interface State {
     }
