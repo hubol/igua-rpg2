@@ -256,6 +256,17 @@ export namespace DataQuest {
                     drop: { kind: "equipment", id: "Robotic", level: 1 },
                 },
             },
+            "MishaHouse.Birthday": {
+                flags: {
+                    readCalendar: false,
+                    spokeWithBaker: false,
+                },
+                reward: {
+                    // TODO
+                    kind: "nothing",
+                    countCompletions: "once",
+                },
+            },
             "MountFlop.Flower": {
                 flags: null,
                 reward: {

@@ -162,7 +162,7 @@ export function scnMishaHouse() {
             Cutscene.setCurrentSpeaker(playerObj);
             yield* show("Oh... I wonder how I could surprise Misha for his birthday.");
 
-            // TODO set some flag
+            Rpg.quest("MishaHouse.Birthday").flags.readCalendar = true;
         });
 
     if (computerQuest.everCompleted) {

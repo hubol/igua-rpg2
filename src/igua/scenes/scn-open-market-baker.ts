@@ -3,6 +3,7 @@ import { DramaFacts } from "../drama/drama-facts";
 import { DramaMisc } from "../drama/drama-misc";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { Rpg } from "../rpg/rpg";
 
 export function scnOpenMarketBaker() {
     const lvl = Lvl.OpenMarketBaker();
@@ -10,6 +11,8 @@ export function scnOpenMarketBaker() {
 }
 
 function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
+    const mishaBirthdayQuest = Rpg.quest("MishaHouse.Birthday");
+
     lvl.BakerNpc
         .mixin(mxnCutscene, function* () {
             yield* show(
@@ -20,19 +23,32 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
             const response = yield* ask(
                 "Anything I can get for you?",
                 "Cake, please!",
-                "Something for Misha's birthday", // TODO need to read calendar first
+                mishaBirthdayQuest.flags.spokeWithBaker ? "Where is Aidar?" : null,
+                !mishaBirthdayQuest.flags.spokeWithBaker && mishaBirthdayQuest.flags.readCalendar
+                    ? "Something for Misha's birthday"
+                    : null,
                 "Nothing right now!",
             );
 
-            if (response === 2) {
+            if (response === 3) {
                 yield* show("All good!!! See you around!!!");
                 return;
             }
 
             if (response === 0) {
-                // TODO
+                // TODO Cake shop
                 return;
             }
+
+            if (response === 1) {
+                yield* show(
+                    "Aidar, Misha's good friend, spends a lot of time in the lumberyard.",
+                    "He will probably know how old Misha is.",
+                );
+                return;
+            }
+
+            mishaBirthdayQuest.flags.spokeWithBaker = true;
 
             const shouldMakeCakeResponse = yield* ask(
                 "Oh, it's Misha's birthday?! I should totally make him a cake, shouldn't I?",
