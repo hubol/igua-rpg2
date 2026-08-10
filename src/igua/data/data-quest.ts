@@ -48,7 +48,6 @@ export namespace DataQuest {
                 },
             },
             "NewBalltown.Tunneler.ReceivedOrder": {
-                // TODO Not used
                 flags: {
                     foodOrder: Null<{ seed: Integer; difficulty: RpgFoodOrder.Difficulty }>(),
                 },

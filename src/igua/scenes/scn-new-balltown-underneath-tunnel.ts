@@ -19,6 +19,7 @@ export function scnNewBalltownUnderneathTunnel() {
 
 function enrichTunneler(lvl: LvlType.NewBalltownUnderneathTunnel) {
     const { tunneler } = Rpg.flags.underneath;
+    const quest = Rpg.quest("NewBalltown.Tunneler.ReceivedOrder");
 
     lvl.LeftDoor.objDoor.locked = tunneler.isLeftDoorLocked;
     lvl.Tunneler.mixin(mxnCutscene, function* () {
@@ -29,8 +30,8 @@ function enrichTunneler(lvl: LvlType.NewBalltownUnderneathTunnel) {
         const result = yield* ask(
             "Can I help you somehow?",
             tunneler.isLeftDoorLocked ? "Unlock the door" : null,
-            !playerHasOrder && tunneler.foodOrder === null ? "Any errands?" : null,
-            tunneler.foodOrder !== null ? "Your order?" : null,
+            !playerHasOrder && quest.flags.foodOrder === null ? "Any errands?" : null,
+            quest.flags.foodOrder !== null ? "Your order?" : null,
             playerHasOrder ? "Your order!!" : null,
             "No, thanks",
         );
@@ -60,7 +61,7 @@ function enrichTunneler(lvl: LvlType.NewBalltownUnderneathTunnel) {
                 "You might want to write it down or something.",
             );
 
-            const difficulty = Rpg.quest("NewBalltown.Tunneler.ReceivedOrder").everCompleted ? "hard" : "normal";
+            const difficulty = quest.everCompleted ? "hard" : "normal";
             const { order, seed } = yield* DramaFoodOrder.requestOrderFromPlayer(difficulty);
 
             yield* show(
@@ -71,12 +72,12 @@ function enrichTunneler(lvl: LvlType.NewBalltownUnderneathTunnel) {
 
             yield* show(`Thanks so much for doing this. I can't wait to dig in!!!`);
 
-            tunneler.foodOrder = { difficulty, seed };
+            quest.flags.foodOrder = { difficulty, seed };
         }
         else if (result === 2) {
             yield* show("You forgot my Meal Soul order? That's okay, it's pretty complicated.");
 
-            const order = RpgFoodOrder.fromSeed(tunneler.foodOrder!);
+            const order = RpgFoodOrder.fromSeed(quest.flags.foodOrder!);
             yield* DramaFoodOrder.explainOrder(order);
 
             yield* show(`Dude I am salivating!!!!`);
@@ -89,7 +90,7 @@ function enrichTunneler(lvl: LvlType.NewBalltownUnderneathTunnel) {
                 "Allow me to show my gratitude with a tip.",
             );
 
-            yield* DramaQuests.complete("NewBalltown.Tunneler.ReceivedOrder");
+            yield* DramaQuests.complete(quest);
         }
     });
 }

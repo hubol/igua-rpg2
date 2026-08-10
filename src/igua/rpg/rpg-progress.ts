@@ -1,6 +1,5 @@
 import { Mzk } from "../../assets/music";
 import { Integer } from "../../lib/math/number-alias-types";
-import { Rng } from "../../lib/math/rng";
 import { Null } from "../../lib/types/null";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataPocketItem } from "../data/data-pocket-item";
@@ -9,7 +8,6 @@ import { RpgClassrooms } from "./rpg-classrooms";
 import { RpgExperience } from "./rpg-experience";
 import { RpgFacts } from "./rpg-facts";
 import { RpgFlops } from "./rpg-flops";
-import { RpgFoodOrder } from "./rpg-food-order";
 import { RpgGifts } from "./rpg-gifts";
 import { RpgIdols } from "./rpg-idols";
 import { RpgIguanaNpcs } from "./rpg-iguana-npcs";
@@ -106,7 +104,6 @@ export function getInitialRpgProgress() {
                     },
                 },
                 tunneler: {
-                    foodOrder: Null<{ seed: Integer; difficulty: RpgFoodOrder.Difficulty }>(),
                     isLeftDoorLocked: true,
                 },
             },
