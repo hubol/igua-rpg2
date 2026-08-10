@@ -42,7 +42,7 @@ export function scnMishaHouse() {
         .mixin(mxnRpgStatus, { status: ranks.misha.status, hurtboxes: [lvl.MishaNpc] })
         .mixin(mxnCutscene, function* () {
             if (computerQuest.everCompleted) {
-                if (Rpg.flags.misha.waterHeater.warmed && !waterHeaterQuest.everCompleted) {
+                if (waterHeaterQuest.flags.pilotFlameLit && !waterHeaterQuest.everCompleted) {
                     yield* ask("I'm not aware of any problems in production.", "You have hot water now");
                     yield* show("Oh, thank you!!!");
                     yield* lvl.MishaNpc.walkTo(lvl.MishaShowerMarker.x);
@@ -125,7 +125,7 @@ export function scnMishaHouse() {
 
             Cutscene.setCurrentSpeaker(playerObj);
             yield* show(
-                Rpg.flags.misha.waterHeater.warmed
+                waterHeaterQuest.flags.pilotFlameLit
                     ? "Perfect temperature."
                     : "The water is extremely cold.",
             );
@@ -187,9 +187,11 @@ export function scnMishaHouse() {
 }
 
 function enrichWaterHeater(lvl: LvlType.MishaHouse) {
+    const quest = Rpg.quest("MishaHouse.WarmedWaterHeater");
+
     const rank = RpgEnemyRank.create({
         status: {
-            health: Rpg.flags.misha.waterHeater.warmed ? undefined : 50,
+            health: quest.flags.pilotFlameLit ? undefined : 50,
             healthMax: 130,
             defenses: {
                 physical: 100,
@@ -202,13 +204,13 @@ function enrichWaterHeater(lvl: LvlType.MishaHouse) {
         .mixin(mxnEnemy, { rank, hurtboxes: [lvl.WaterHeaterRegion] })
         .mixin(mxnSpeaker, { name: "Water Heater", tintPrimary: 0xC46729, tintSecondary: 0x999999 })
         .coro(function* (self) {
-            if (Rpg.flags.misha.waterHeater.warmed) {
+            if (quest.flags.pilotFlameLit) {
                 return;
             }
 
             yield () => self.status.health >= self.status.healthMax;
 
-            Rpg.flags.misha.waterHeater.warmed = true;
+            quest.flags.pilotFlameLit = true;
             Cutscene.play(function* () {
                 yield* show("Pilot flame restored.");
             }, { speaker: self });

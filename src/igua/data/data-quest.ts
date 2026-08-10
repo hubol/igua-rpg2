@@ -247,7 +247,9 @@ export namespace DataQuest {
                 },
             },
             "MishaHouse.WarmedWaterHeater": {
-                flags: null,
+                flags: {
+                    pilotFlameLit: false,
+                },
                 reward: {
                     countCompletions: "once",
                     kind: "single",
