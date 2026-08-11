@@ -107,7 +107,7 @@ export const OgmoEntityResolvers = {
     EnemySnail: () => objAngelSnail(),
     EnemySpikeBall: objAngelSpikeBall,
     EnemySuggestive: (entity: OgmoEntities.EnemySuggestive) => objAngelSuggestive(entity).at(0, -38),
-    EnemyMiffed: (entity: OgmoEntities.EnemyMiffed) => objAngelMiffed(entity).at(0, 1),
+    EnemyMiffed: (entity: OgmoEntities.EnemyMiffed) => objAngelMiffed(entity.values.variant).at(0, 1),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,
     Idol: objIdol,
     GateMap: objWorldMapGate,

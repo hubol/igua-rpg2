@@ -162,6 +162,37 @@ const themes = (function () {
                 },
             },
         ),
+        dreamer: template.createTheme(
+            {
+                eyes: {
+                    gap: 20,
+                    pupilsTx: Tx.Enemy.Miffed.Pupil0,
+                    scleraTx: Tx.Enemy.Miffed.Sclera1,
+                },
+                mouth: {
+                    txs: objAngelMouth.txs.w14b,
+                    teethCount: 4,
+                },
+                sprites: {
+                    faceBehind: Tx.Enemy.Miffed.FaceBehind0,
+                    leg: Tx.Enemy.Miffed.Leg2,
+                    noggin: Tx.Enemy.Miffed.Noggin0,
+                    torso: Tx.Enemy.Miffed.Torso2,
+                },
+                tints: {
+                    map: [0x3287b8, 0xa76cdf, 0xff00ea],
+                },
+            },
+            {
+                eyes: (obj) => obj.at(0, -10),
+                mouth: (obj) => obj.at(0, -1),
+                sprites: {
+                    faceBehind: (obj) => obj.add(-30, -16),
+                    noggin: (obj) => obj.pivoted(9, 2),
+                    torso: (obj) => obj.add(-5, -4),
+                },
+            },
+        ),
     };
 })();
 
@@ -267,6 +298,22 @@ const ranks = {
             },
         },
     }),
+    level4: RpgEnemyRank.create({
+        loot: {
+            tier0: [
+                { kind: "key_item", id: "SeedPurple", weight: 100 },
+            ],
+            tier1: [
+                { kind: "pocket_item", id: "FishFood", count: 1, weight: 25 },
+                { kind: "pocket_item", id: "FishFood", count: 3, weight: 25 },
+                { kind: "pocket_item", id: "FishFood", count: 5, weight: 25 },
+                { kind: "pocket_item", id: "FishFood", count: 9, weight: 25 },
+            ],
+        },
+        status: {
+            healthMax: 150,
+        },
+    }),
 } satisfies Record<string, RpgEnemyRank.Model>;
 
 type Feature = "homing_magic_poison" | "homing_magic_flame" | "flame_spray";
@@ -292,10 +339,17 @@ const variants = {
         rank: ranks.level3,
         theme: themes.zombieNudist,
     },
+    level4: {
+        features: new Set<Feature>([]),
+        rank: ranks.level4,
+        theme: themes.dreamer,
+    },
 };
 
-export function objAngelMiffed(entity: OgmoEntities.EnemyMiffed) {
-    const { features, rank, theme } = variants[entity.values.variant];
+type VariantId = keyof typeof variants;
+
+export function objAngelMiffed(variantId: VariantId) {
+    const { features, rank, theme } = variants[variantId];
 
     const hurtboxObjs = [
         new Graphics().beginFill(0).drawRect(4, 10, 40, 16).invisible(),

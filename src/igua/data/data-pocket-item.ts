@@ -22,6 +22,7 @@ export namespace DataPocketItem {
             CactusFruitTypeB: { name: "Cactus Fruit Type B", texture: Tx.Collectibles.Pocket.CactusFruitB },
             RobotHair: { name: "Robot Hair Clump Chakra", texture: Tx.Collectibles.Pocket.RobotHair },
             BoneTypeA: { name: "Boner (Femur)", texture: Tx.Collectibles.Pocket.BoneA },
+            FishFood: { name: "Ethereal Fish Food", texture: Tx.Collectibles.Pocket.BoneA },
             __Fallback__: { name: "???", texture: Tx.Collectibles.ComputerChip },
         } satisfies Record<string, Model>,
     );
