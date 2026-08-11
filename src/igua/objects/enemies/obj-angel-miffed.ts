@@ -16,6 +16,7 @@ import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { ValuesOf } from "../../../lib/types/values-of";
+import { ZIndex } from "../../core/scene/z-index";
 import { scene } from "../../globals";
 import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
 import { MxnDetectPlayer, mxnDetectPlayer } from "../../mixins/mxn-detect-player";
@@ -165,31 +166,29 @@ const themes = (function () {
         dreamer: template.createTheme(
             {
                 eyes: {
-                    gap: 20,
-                    pupilsTx: Tx.Enemy.Miffed.Pupil0,
-                    scleraTx: Tx.Enemy.Miffed.Sclera1,
+                    gap: 10,
+                    pupilsTx: Tx.Enemy.Miffed.Pupil2,
+                    scleraTx: Tx.Enemy.Miffed.Sclera2,
                 },
                 mouth: {
-                    txs: objAngelMouth.txs.w14b,
-                    teethCount: 4,
+                    txs: objAngelMouth.txs.w18,
                 },
                 sprites: {
-                    faceBehind: Tx.Enemy.Miffed.FaceBehind0,
-                    leg: Tx.Enemy.Miffed.Leg2,
-                    noggin: Tx.Enemy.Miffed.Noggin0,
-                    torso: Tx.Enemy.Miffed.Torso2,
+                    noggin: Tx.Enemy.Miffed.Noggin4,
+                    torso: Tx.Enemy.Miffed.Torso3,
+                    faceBehind: Tx.Enemy.Miffed.FaceAbove1,
                 },
                 tints: {
-                    map: [0x3287b8, 0xa76cdf, 0xff00ea],
+                    map: [0x34a570, 0x3824ce, 0xec5199],
                 },
             },
             {
-                eyes: (obj) => obj.at(0, -10),
-                mouth: (obj) => obj.at(0, -1),
+                eyes: obj => obj.add(0, -8),
+                mouth: obj => obj.add(0, -3),
                 sprites: {
-                    faceBehind: (obj) => obj.add(-30, -16),
-                    noggin: (obj) => obj.pivoted(9, 2),
-                    torso: (obj) => obj.add(-5, -4),
+                    faceBehind: obj => obj.add(-26, -38),
+                    noggin: obj => obj.add(-10, 0),
+                    torso: obj => obj.add(-10, 0),
                 },
             },
         ),
@@ -550,6 +549,7 @@ export function objAngelMiffed(variantId: VariantId) {
     };
 
     return obj
+        .zIndexed(ZIndex.CharacterEntities)
         .coro(function* (self) {
             const startPosition = self.vcpy();
 
