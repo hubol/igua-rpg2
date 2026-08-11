@@ -27,6 +27,7 @@ import { mxnIndexedCollisionShape } from "../../mixins/mxn-indexed-collision-sha
 import { mxnPhysics, PhysicsFaction } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
+import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objFxExpressSurprise } from "../effects/obj-fx-express-surprise";
@@ -37,6 +38,7 @@ import { objFxStarburst54 } from "../effects/obj-fx-startburst-54";
 import { objGroundSpawner } from "../obj-ground-spawner";
 import { objProjectileFlameColumn } from "../projectiles/obj-projectile-flame-column";
 import { objProjectileFlameOrb } from "../projectiles/obj-projectile-flame-orb";
+import { objProjectileHellSnake } from "../projectiles/obj-projectile-hell-snake";
 import { objProjectileIndicatedBox } from "../projectiles/obj-projectile-indicated-box";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { AngelThemeTemplate } from "./angel-theme-template";
@@ -315,7 +317,7 @@ const ranks = {
     }),
 } satisfies Record<string, RpgEnemyRank.Model>;
 
-type Feature = "homing_magic_poison" | "homing_magic_flame" | "flame_spray";
+type Feature = "homing_magic_poison" | "homing_magic_flame" | "flame_spray" | "hell_snake";
 
 const variants = {
     level0: {
@@ -339,7 +341,7 @@ const variants = {
         theme: themes.zombieNudist,
     },
     level4: {
-        features: new Set<Feature>([]),
+        features: new Set<Feature>(["hell_snake"]),
         rank: ranks.level4,
         theme: themes.dreamer,
     },
@@ -390,6 +392,7 @@ export function objAngelMiffed(variantId: VariantId) {
             physicsOffset: [0, -7],
             physicsFaction: PhysicsFaction.Enemy,
         })
+        .mixin(mxnSparkling)
         .mixin(mxnDetectPlayer)
         .step(self => {
             let bodyObjY = 0;
@@ -546,6 +549,35 @@ export function objAngelMiffed(variantId: VariantId) {
             obj.speed.y = -2;
             yield () => obj.speed.y >= 0 && obj.isOnGround;
         },
+        *summonHellSnake() {
+            obj.sparklesPerFrame = 0.3;
+            obj.sparklesTint = 0x800000;
+            const eyeRollerObj = objAngelEyes.objEyeRoller(headObj.objects.faceObj.objects.eyesObj).show(obj);
+            obj.speed.y = -2;
+            headObj.objects.faceObj.objects.mouthObj.controls.frowning = true;
+            yield () => obj.speed.y >= 0 && obj.isOnGround;
+            const detectedPositionX = obj.mxnDetectPlayer.position.x;
+            const snakeObj = objProjectileHellSnake(Math.max(0.5, obj.status.health / obj.status.healthMax))
+                .at(detectedPositionX, Math.max(obj.mxnDetectPlayer.position.y, obj.y) + 104)
+                .mixin(mxnRpgAttack, { attacker: obj.status, attack: atkHellSnake })
+                .show();
+
+            objFxFormativeBurst(0xff0000)
+                .at(snakeObj)
+                .show();
+
+            yield () => snakeObj.mxnDischargeable.isCharged;
+            yield sleep(100);
+            yield* Coro.race([
+                sleep(900),
+                () => Math.abs(obj.mxnDetectPlayer.position.x - detectedPositionX) > 20,
+            ]);
+            snakeObj.mxnDischargeable.discharge();
+            obj.sparklesPerFrame = 0;
+            yield sleep(1000);
+            eyeRollerObj.destroy();
+            headObj.objects.faceObj.objects.mouthObj.controls.frowning = false;
+        },
     };
 
     return obj
@@ -588,6 +620,10 @@ export function objAngelMiffed(variantId: VariantId) {
 
                 for (const fistObj of fistObjs) {
                     yield* moves.slamFist(fistObj);
+                }
+
+                if (obj.status.health < obj.status.healthMax && features.has("hell_snake")) {
+                    yield* moves.summonHellSnake();
                 }
 
                 yield* moves.dive(obj.status.health / obj.status.healthMax < 0.67 ? "flame_column" : "default");
@@ -755,6 +791,10 @@ const atkFlameBox = RpgAttack.create({
 
 const atkSweepOrb = RpgAttack.create({
     physical: 40,
+});
+
+const atkHellSnake = RpgAttack.create({
+    physical: 90,
 });
 
 const getPoisonBoxTargetPosition = function () {

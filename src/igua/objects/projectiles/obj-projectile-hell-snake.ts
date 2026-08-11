@@ -1,23 +1,25 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { factor, interp, interpvr } from "../../../lib/game-engine/routines/interp";
+import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnDischargeable } from "../../mixins/mxn-dischargeable";
 
 const [txNoggin, txEye, txTeethLeft, txTeethRight, txTeethMask] = Tx.Enemy.Miffed.HellSnake.split({ width: 194 });
 
-export function objProjectileHellSnake() {
+// TODO timeScale really feels like it should be a feature of dischargeable...
+export function objProjectileHellSnake(timeScale = 1) {
     return objPuppetHellSnake()
         .pivoted(97, 108)
         .mixin(mxnDischargeable)
         .coro(function* (self) {
             self.alpha = 0;
             self.y += 128;
-            yield interp(self, "alpha").steps(3).to(1).over(200);
-            yield interpvr(self).factor(factor.sine).translate(0, -128).over(1000);
-            yield interp(self.objPuppetHellSnake, "leftTeethExposedUnit").to(1).over(400);
-            yield interp(self.objPuppetHellSnake, "rightTeethExposedUnit").to(1).over(400);
+            yield interp(self, "alpha").steps(3).to(1).over(200 * timeScale);
+            yield interpvr(self).factor(factor.sine).translate(0, -128).over(1000 * timeScale);
+            yield interp(self.objPuppetHellSnake, "leftTeethExposedUnit").to(1).over(400 * timeScale);
+            yield interp(self.objPuppetHellSnake, "rightTeethExposedUnit").to(1).over(400 * timeScale);
             self.mxnDischargeable.charge();
             const twitchObj = container()
                 .coro(function* () {
@@ -32,6 +34,8 @@ export function objProjectileHellSnake() {
             yield () => self.mxnDischargeable.isDischarged;
             twitchObj.destroy();
             yield interpvr(self).factor(factor.sine).translate(0, -1000).over(1000);
+            yield interp(self, "alpha").steps(3).to(0).over(200);
+            self.destroy();
         });
 }
 
@@ -43,7 +47,10 @@ function objPuppetHellSnake() {
 
     const maskObj = Sprite.from(txTeethMask);
 
+    const collisionObj = new Graphics().beginFill(0xff0000).drawRect(20, 13, 154, 93).invisible();
+
     return container(
+        collisionObj,
         new Graphics()
             .at(62, 128 - 35)
             .beginFill(0xD50000)
@@ -59,5 +66,6 @@ function objPuppetHellSnake() {
         )
             .masked(maskObj),
     )
+        .collisionShape(CollisionShape.DisplayObjects, [collisionObj])
         .merge({ objPuppetHellSnake: api });
 }
