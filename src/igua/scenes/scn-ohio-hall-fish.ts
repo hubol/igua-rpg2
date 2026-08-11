@@ -8,6 +8,7 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { DataItem } from "../data/data-item";
 import { scene } from "../globals";
+import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnEnemy } from "../mixins/mxn-enemy";
 import { mxnPhysics } from "../mixins/mxn-physics";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
@@ -74,6 +75,13 @@ function objEmptiedFood() {
         .step(self => {
             self.textureIndex += 0.05;
             self.y += 1;
+            if (self.y >= scene.level.height + 60) {
+                self.destroy();
+            }
+        })
+        .coro(function* (self) {
+            yield () => self.textureIndex >= 3;
+            self.mixin(mxnBoilPivot);
         });
 }
 
@@ -85,8 +93,10 @@ function objRoamingFish(id: Integer) {
         .coro(function* (self) {
             let dir = Rng.intp();
             while (true) {
-                self.scale.x *= 0.67;
-                yield sleep(200);
+                if (self.scale.x !== -dir) {
+                    self.scale.x *= 0.67;
+                    yield sleep(200);
+                }
                 self.scale.x = -dir;
                 yield sleep(200);
                 yield interp(self.speed, "x").to(dir * 1).over(500);
