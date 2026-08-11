@@ -1,5 +1,6 @@
 import { Sprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
@@ -14,6 +15,7 @@ import { objCharacterFeederFish } from "../objects/characters/obj-character-feed
 import { objFxFormativeBurst } from "../objects/effects/obj-fx-formative-burst";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { playerObj } from "../objects/obj-player";
+import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { Rpg } from "../rpg/rpg";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { RpgInventory } from "../rpg/rpg-inventory";
@@ -65,6 +67,16 @@ const fishRank = RpgEnemyRank.create({
     difficultyScaling: "none",
 });
 
+const txsFood = Tx.Characters.FeederFish.Food.split({ width: 24, trimFrame: { pixelDefaultAnchor: [13, 20] } });
+
+function objEmptiedFood() {
+    return objIndexedSprite(txsFood)
+        .step(self => {
+            self.textureIndex += 0.05;
+            self.y += 1;
+        });
+}
+
 function objRoamingFish(id: Integer) {
     const fishObj = objCharacterFeederFish(69 + id * 420);
     return fishObj
@@ -114,6 +126,11 @@ function mxnEmptiesFishFood(obj: Sprite) {
 
                 for (let i = 0; i < 10; i++) {
                     figureObj.y += i % 2 === 0 ? 3 : -3;
+                    if (i % 4 === 0) {
+                        objEmptiedFood()
+                            .at(figureObj)
+                            .show();
+                    }
                     yield sleepf(9);
                 }
 
