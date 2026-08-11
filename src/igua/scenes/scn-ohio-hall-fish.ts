@@ -1,6 +1,7 @@
 import { Sprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../assets/textures";
+import { Instances } from "../../lib/game-engine/instances";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
@@ -11,6 +12,7 @@ import { scene } from "../globals";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnEnemy } from "../mixins/mxn-enemy";
 import { mxnPhysics } from "../mixins/mxn-physics";
+import { mxnRpgHeal } from "../mixins/mxn-rpg-heal";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { objCharacterFeederFish } from "../objects/characters/obj-character-feeder-fish";
 import { objFxFormativeBurst } from "../objects/effects/obj-fx-formative-burst";
@@ -72,6 +74,8 @@ const txsFood = Tx.Characters.FeederFish.Food.split({ width: 24, trimFrame: { pi
 
 function objEmptiedFood() {
     return objIndexedSprite(txsFood)
+        .mixin(mxnRpgHeal, Instances(objRoamingFish), 10)
+        .handles("mxnRpgHeal:healed", (self) => self.destroy())
         .step(self => {
             self.textureIndex += 0.05;
             self.y += 1;
@@ -112,7 +116,8 @@ function objRoamingFish(id: Integer) {
                     dir *= -1;
                 }
             }
-        });
+        })
+        .track(objRoamingFish);
 }
 
 function mxnEmptiesFishFood(obj: Sprite) {
