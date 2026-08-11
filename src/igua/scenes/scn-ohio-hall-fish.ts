@@ -7,6 +7,7 @@ import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { DataItem } from "../data/data-item";
 import { scene } from "../globals";
+import { mxnEnemy } from "../mixins/mxn-enemy";
 import { mxnPhysics } from "../mixins/mxn-physics";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { objCharacterFeederFish } from "../objects/characters/obj-character-feeder-fish";
@@ -14,6 +15,7 @@ import { objFxFormativeBurst } from "../objects/effects/obj-fx-formative-burst";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
+import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnOhioHallFish() {
@@ -55,9 +57,19 @@ export function scnOhioHallFish() {
         });
 }
 
+const fishRank = RpgEnemyRank.create({
+    status: {
+        healthMax: 100,
+        health: 10,
+    },
+    difficultyScaling: "none",
+});
+
 function objRoamingFish(id: Integer) {
-    return objCharacterFeederFish(69 + id * 420)
+    const fishObj = objCharacterFeederFish(69 + id * 420);
+    return fishObj
         .mixin(mxnPhysics, { gravity: 0, physicsRadius: 10 })
+        .mixin(mxnEnemy, { rank: fishRank, hurtboxes: [fishObj] })
         .coro(function* (self) {
             let dir = Rng.intp();
             while (true) {
