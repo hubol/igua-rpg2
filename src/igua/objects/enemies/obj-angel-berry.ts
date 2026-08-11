@@ -11,6 +11,7 @@ import { scene } from "../../globals";
 import { mxnBoilTextureIndex } from "../../mixins/mxn-boil-texture-index";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnPhysics } from "../../mixins/mxn-physics";
+import { mxnRpgHeal } from "../../mixins/mxn-rpg-heal";
 import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { objFxBurst32 } from "../effects/obj-fx-burst-32";
@@ -92,20 +93,20 @@ function objAngelBerryHeart(targetObj: MxnRpgStatus) {
         .step(self => self.add(speed))
         .coro(function* (self) {
             yield interpv(speed).to(0, -1).over(300);
-            self.step(() => {
-                if (targetObj.destroyed || targetObj.status.health <= 0) {
-                    return;
-                }
+            self
+                .step(() => {
+                    if (targetObj.destroyed || targetObj.status.health <= 0) {
+                        return;
+                    }
 
-                speed.moveTowards(v.at(targetObj).add(self, -1).normalize(), 0.2);
-
-                if (self.collidesOne(targetObj.hurtboxes)) {
-                    targetObj.heal(consts.healValue);
+                    speed.moveTowards(v.at(targetObj).add(self, -1).normalize(), 0.2);
+                })
+                .mixin(mxnRpgHeal, [targetObj], consts.healValue)
+                .handles("mxnRpgHeal:healed", () => {
                     self.play(Sfx.Enemy.Berry.Heal.rate(0.9, 1.1));
                     objFxHeart.objBurst(6, 5).at(self).show();
                     self.destroy();
-                }
-            });
+                });
             yield () => targetObj.destroyed;
             yield interpv(speed).to(0, -1).over(300);
             yield sleep(500);
