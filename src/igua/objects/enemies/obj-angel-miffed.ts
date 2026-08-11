@@ -549,7 +549,8 @@ export function objAngelMiffed(variantId: VariantId) {
             obj.speed.y = -2;
             yield () => obj.speed.y >= 0 && obj.isOnGround;
         },
-        *summonHellSnake() {
+        *summonHellSnake(firstTime: boolean) {
+            obj.play(Sfx.Enemy.Miffed.Snake.rate(0.9, 1.1));
             obj.sparklesPerFrame = 0.3;
             obj.sparklesTint = 0x800000;
             const eyeRollerObj = objAngelEyes.objEyeRoller(headObj.objects.faceObj.objects.eyesObj).show(obj);
@@ -557,7 +558,9 @@ export function objAngelMiffed(variantId: VariantId) {
             headObj.objects.faceObj.objects.mouthObj.controls.frowning = true;
             yield () => obj.speed.y >= 0 && obj.isOnGround;
             const detectedPositionX = obj.mxnDetectPlayer.position.x;
-            const snakeObj = objProjectileHellSnake(Math.max(0.5, obj.status.health / obj.status.healthMax))
+            const snakeObj = objProjectileHellSnake(
+                firstTime ? 1 : Math.max(Rng.float(0.5, 0.7), obj.status.health / obj.status.healthMax),
+            )
                 .at(detectedPositionX, Math.max(obj.mxnDetectPlayer.position.y, obj.y) + 104)
                 .mixin(mxnRpgAttack, { attacker: obj.status, attack: atkHellSnake })
                 .show();
@@ -587,6 +590,7 @@ export function objAngelMiffed(variantId: VariantId) {
 
             let minDetectionScore = 0;
             let iterationsCount = 0;
+            let usedHellSnakeFeature = false;
 
             while (true) {
                 if (self.mxnDetectPlayer.detectionScore <= minDetectionScore) {
@@ -622,8 +626,13 @@ export function objAngelMiffed(variantId: VariantId) {
                     yield* moves.slamFist(fistObj);
                 }
 
-                if (obj.status.health < obj.status.healthMax && features.has("hell_snake")) {
-                    yield* moves.summonHellSnake();
+                if (
+                    features.has("hell_snake")
+                    && obj.status.health < obj.status.healthMax
+                    && self.mxnDetectPlayer.isDetected
+                ) {
+                    yield* moves.summonHellSnake(!usedHellSnakeFeature);
+                    usedHellSnakeFeature = true;
                 }
 
                 yield* moves.dive(obj.status.health / obj.status.healthMax < 0.67 ? "flame_column" : "default");
