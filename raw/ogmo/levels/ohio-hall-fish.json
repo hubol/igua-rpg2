@@ -118,6 +118,17 @@
           "originY": 41,
           "uid": 178640728363100,
           "values": {"name": "", "depth": 0, "variant": "level4"}
+        },
+        {
+          "name": "Idol",
+          "id": 1,
+          "_eid": "79655020",
+          "x": 424,
+          "y": 136,
+          "originX": 32,
+          "originY": 97,
+          "uid": 178641677804200,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
