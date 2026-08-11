@@ -5,6 +5,7 @@ import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { DataItem } from "../data/data-item";
 import { scene } from "../globals";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
+import { objCharacterFeederFish } from "../objects/characters/obj-character-feeder-fish";
 import { objFxFormativeBurst } from "../objects/effects/obj-fx-formative-burst";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { playerObj } from "../objects/obj-player";
@@ -21,6 +22,13 @@ export function scnOhioHallFish() {
     lvl.ArrowDownGroup
         .children
         .forEach(obj => obj.mixin(mxnEmptiesFishFood));
+
+    [lvl.FishMarker0, lvl.FishMarker1, lvl.FishMarker2]
+        .forEach((obj, i) =>
+            objCharacterFeederFish(69 + i * 420)
+                .at(obj)
+                .show()
+        );
 
     scene.stage
         .coro(function* () {
