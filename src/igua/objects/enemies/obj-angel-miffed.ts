@@ -1,5 +1,4 @@
-import { Graphics } from "pixi.js";
-import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
+import { Graphics, Sprite } from "pixi.js";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { blendColor } from "../../../lib/color/blend-color";
@@ -361,12 +360,17 @@ export function objAngelMiffed(variantId: VariantId) {
     const wrappedHeadObj = container(headObj);
     const slammingFistRightObj = objSlammingFist("right");
     const slammingFistLeftObj = objSlammingFist("left");
+    const raisedFistsObj = Sprite.from(Tx.Enemy.Miffed.FistsRaised)
+        .pivoted(43, 23)
+        .at(23, 32)
+        .scaled(0, 0);
     const soulAnchorObj = new Graphics().beginFill(0).drawRect(0, 0, 1, 1).at(21, 18).invisible();
 
     const bodyObj = objAngelBody(theme);
 
     const puppetObj = container(
         bodyObj,
+        raisedFistsObj,
         wrappedHeadObj,
         slammingFistRightObj,
         slammingFistLeftObj,
@@ -556,7 +560,12 @@ export function objAngelMiffed(variantId: VariantId) {
             const eyeRollerObj = objAngelEyes.objEyeRoller(headObj.objects.faceObj.objects.eyesObj).show(obj);
             obj.speed.y = -2;
             headObj.objects.faceObj.objects.mouthObj.controls.frowning = true;
-            yield () => obj.speed.y >= 0 && obj.isOnGround;
+
+            raisedFistsObj.scale.set(0.75, 0.75);
+            yield* Coro.all([
+                interpv(raisedFistsObj.scale).steps(2).to(1, 1).over(500),
+                () => obj.speed.y >= 0 && obj.isOnGround,
+            ]);
             const detectedPositionX = obj.mxnDetectPlayer.position.x;
             const snakeObj = objProjectileHellSnake(
                 firstTime ? 1 : Math.max(Rng.float(0.5, 0.7), obj.status.health / obj.status.healthMax),
@@ -577,7 +586,9 @@ export function objAngelMiffed(variantId: VariantId) {
             ]);
             snakeObj.mxnDischargeable.discharge();
             obj.sparklesPerFrame = 0;
-            yield sleep(1000);
+            yield interpv(raisedFistsObj.scale).steps(2).to(0.75, 0.75).over(500);
+            raisedFistsObj.scale.set(0, 0);
+            yield sleep(500);
             eyeRollerObj.destroy();
             headObj.objects.faceObj.objects.mouthObj.controls.frowning = false;
         },
