@@ -75,8 +75,10 @@ const fishRank = RpgEnemyRank.create({
 const txsFood = Tx.Characters.FeederFish.Food.split({ width: 24, trimFrame: { pixelDefaultAnchor: [13, 20] } });
 
 function objEmptiedFood() {
+    const amount = Math.ceil(1 * (100 + Rpg.character.buffs.esoteric.fishFood.healingIncreaseFactor) / 100);
+
     return objIndexedSprite(txsFood)
-        .mixin(mxnRpgHeal, Instances(objRoamingFish), 10)
+        .mixin(mxnRpgHeal, Instances(objRoamingFish), amount)
         .handles("mxnRpgHeal:healed", (self) => {
             self.play(Sfx.Hall.Fish.EatFood.rate(0.8, 1.25));
             self.destroy();
@@ -145,15 +147,16 @@ function mxnEmptiesFishFood(obj: Sprite) {
                 yield interp(figureObj, "angle").steps(4).to(180).over(250);
                 yield sleep(200);
 
-                for (let i = 0; i < 10; i++) {
-                    figureObj.y += i % 2 === 0 ? 3 : -3;
-                    if (i % 4 === 0) {
-                        obj.play(Sfx.Hall.Fish.ShakeFood.rate(0.5, 0.9));
-                        objEmptiedFood()
-                            .at(figureObj)
-                            .show();
+                for (let j = 0; j < 2 + Rpg.character.buffs.esoteric.fishFood.bonusClumpsCount; j++) {
+                    for (let i = 0; i < 4; i++) {
+                        figureObj.y += i % 2 === 0 ? 3 : -3;
+                        yield sleepf(9);
                     }
-                    yield sleepf(9);
+
+                    obj.play(Sfx.Hall.Fish.ShakeFood.rate(0.5, 0.9));
+                    objEmptiedFood()
+                        .at(figureObj)
+                        .show();
                 }
 
                 figureObj.destroy();

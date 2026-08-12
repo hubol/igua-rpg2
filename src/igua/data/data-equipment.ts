@@ -370,6 +370,21 @@ export namespace DataEquipment {
                         model.combat.defense.physical += bonus;
                     },
                 },
+                FishFood: {
+                    name: "Starfish Sock",
+                    texture: Tx.Collectibles.Equipment.FishFood,
+                    description:
+                        "Adorable sock coveted by marine biologists and aquarium owners. Increases fish food quality.",
+                    buffs: (() => {
+                        const healthIncreaseFactor = [200, 900, 2400];
+
+                        return (model, bonus) => {
+                            model.esoteric.fishFood.healingIncreaseFactor += healthIncreaseFactor[bonus]
+                                ?? healthIncreaseFactor.last;
+                            model.esoteric.fishFood.bonusClumpsCount += 1 + bonus;
+                        };
+                    })(),
+                },
                 __Fallback__: {
                     name: "???",
                     texture: null,

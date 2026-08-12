@@ -301,6 +301,8 @@ const getBuffInformations = (function () {
         buff("esoteric.lgbtFactor", "LGBT", "percent", "benefit_when_positive"),
         buff("wallet.bonusCasinoPity", "Bonus Casino Pity", "integer", "benefit_when_positive"),
         buff("esoteric.nightVisionLevel", "Night Vision", "integer", "benefit_when_positive"),
+        buff("esoteric.fishFood.bonusClumpsCount", "Fish Food: Bonus Clumps", "integer", "benefit_when_positive"),
+        buff("esoteric.fishFood.healingIncreaseFactor", "Fish Food: Healing Bonus", "percent", "benefit_when_positive"),
     );
 
     const fn = new Function(

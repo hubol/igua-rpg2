@@ -79,6 +79,10 @@ export namespace RpgPlayerBuffs {
                 sceneChangeErrorChance: <PercentInt> 0,
                 goodEndingChance: <PercentInt> 0,
                 nightVisionLevel: 0,
+                fishFood: {
+                    healingIncreaseFactor: <PercentInt> 0,
+                    bonusClumpsCount: <Integer> 0,
+                },
             },
             experience: {
                 bonusFactorWhileWet: {

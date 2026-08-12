@@ -301,7 +301,8 @@ const ranks = {
     level4: RpgEnemyRank.create({
         loot: {
             tier0: [
-                { kind: "key_item", id: "SeedPurple", weight: 100 },
+                { kind: "key_item", id: "SeedPurple", weight: 50 },
+                { kind: "equipment", id: "FishFood", weight: 50 },
             ],
             tier1: [
                 { kind: "pocket_item", id: "FishFood", count: 1, weight: 25 },
