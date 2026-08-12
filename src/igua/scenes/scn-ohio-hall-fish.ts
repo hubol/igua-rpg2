@@ -77,7 +77,10 @@ const txsFood = Tx.Characters.FeederFish.Food.split({ width: 24, trimFrame: { pi
 function objEmptiedFood() {
     return objIndexedSprite(txsFood)
         .mixin(mxnRpgHeal, Instances(objRoamingFish), 10)
-        .handles("mxnRpgHeal:healed", (self) => self.destroy())
+        .handles("mxnRpgHeal:healed", (self) => {
+            self.play(Sfx.Hall.Fish.EatFood.rate(0.8, 1.25));
+            self.destroy();
+        })
         .step(self => {
             self.textureIndex += 0.05;
             self.y += 1;
@@ -129,6 +132,7 @@ function mxnEmptiesFishFood(obj: Sprite) {
 
             while (true) {
                 yield () => Rpg.inventory.count(item) > 0 && playerObj.collides(obj);
+                obj.play(Sfx.Hall.Fish.TakeFromPocket.rate(0.6, 0.9));
                 Rpg.inventory.remove(item, 1);
 
                 const figureObj = DataItem.getFigureObj(item)
@@ -144,6 +148,7 @@ function mxnEmptiesFishFood(obj: Sprite) {
                 for (let i = 0; i < 10; i++) {
                     figureObj.y += i % 2 === 0 ? 3 : -3;
                     if (i % 4 === 0) {
+                        obj.play(Sfx.Hall.Fish.ShakeFood.rate(0.5, 0.9));
                         objEmptiedFood()
                             .at(figureObj)
                             .show();
