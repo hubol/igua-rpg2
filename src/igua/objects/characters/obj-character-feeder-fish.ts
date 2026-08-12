@@ -1,7 +1,6 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { Integer } from "../../../lib/math/number-alias-types";
-import { PseudoRng } from "../../../lib/math/rng";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
@@ -9,11 +8,8 @@ import { ZIndex } from "../../core/scene/z-index";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { objFigureFlop } from "../figures/obj-figure-flop";
 
-const prng = new PseudoRng();
-
-export function objCharacterFeederFish(seed: Integer) {
-    prng.seed = seed;
-    const { tint } = objFigureFlop.getPrimitiveArgsFromDexNumber(prng.int(999));
+export function objCharacterFeederFish(dexNumber: Integer) {
+    const { tint } = objFigureFlop.getPrimitiveArgsFromDexNumber(dexNumber);
 
     const collisionObj = new Graphics().beginFill(0xff0000).drawRect(2, 9, 30, 20);
 

@@ -16,7 +16,9 @@ import { mxnPhysics } from "../mixins/mxn-physics";
 import { mxnRpgHeal } from "../mixins/mxn-rpg-heal";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { objCharacterFeederFish } from "../objects/characters/obj-character-feeder-fish";
+import { objCollectibleFlop } from "../objects/collectibles/obj-collectible-flop";
 import { objFxFormativeBurst } from "../objects/effects/obj-fx-formative-burst";
+import { objFxHeart } from "../objects/effects/obj-fx-heart";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { playerObj } from "../objects/obj-player";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
@@ -96,8 +98,11 @@ function objEmptiedFood() {
         });
 }
 
+const flopDexNumbers = [880, 881, 882];
+
 function objRoamingFish(id: Integer) {
-    const fishObj = objCharacterFeederFish(69 + id * 420);
+    const flopDexNumber = flopDexNumbers[id];
+    const fishObj = objCharacterFeederFish(flopDexNumber);
     return fishObj
         .mixin(mxnPhysics, { gravity: 0, physicsRadius: 10 })
         .mixin(mxnEnemy, { rank: fishRank, hurtboxes: [fishObj] })
@@ -123,6 +128,25 @@ function objRoamingFish(id: Integer) {
                     dir *= -1;
                 }
             }
+        })
+        .coro(function* (self) {
+            yield () => self.status.health >= self.status.healthMax;
+            const flopObj = objCollectibleFlop(flopDexNumber)
+                .at(self)
+                .coro(function* (flopObj) {
+                    yield () => flopObj.y < 100;
+                    flopObj.physicsEnabled = true;
+                })
+                .show();
+
+            objFxHeart.objBurst(20, 5)
+                .at(self)
+                .show();
+            self.play(Sfx.Hall.Fish.Satisfied.rate(0.9, 1.1));
+            self.destroy();
+
+            flopObj.speed.y = -5;
+            flopObj.physicsEnabled = false;
         })
         .track(objRoamingFish);
 }
