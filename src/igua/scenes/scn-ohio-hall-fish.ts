@@ -1,5 +1,6 @@
 import { Sprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Instances } from "../../lib/game-engine/instances";
 import { Coro } from "../../lib/game-engine/routines/coro";
@@ -51,6 +52,7 @@ export function scnOhioHallFish() {
             while (true) {
                 yield () => enemyObj.destroyed;
                 yield sleep(3000);
+                Sfx.Enemy.Miffed.Appear.rate(0.95, 1.05).play();
                 objFxFormativeBurst()
                     .at(position)
                     .show();
