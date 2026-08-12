@@ -55,6 +55,19 @@ export namespace DataGift {
             "Ohio.IntelligenceTower.Entrance.Gift": {
                 item: { kind: "potion", id: "AttributeHealthUp" },
             },
+            // TODO need a cool gift!
+            "Ohio.MagicDoor.0": {
+                item: { kind: "equipment", id: "BlueCrystalSock", level: 1 },
+            },
+            "Ohio.MagicDoor.1": {
+                item: { kind: "equipment", id: "BlueCrystalSock", level: 1 },
+            },
+            "Ohio.MagicDoor.2": {
+                item: { kind: "equipment", id: "BlueCrystalSock", level: 1 },
+            },
+            "Ohio.MagicDoor.3": {
+                item: { kind: "equipment", id: "BlueCrystalSock", level: 1 },
+            },
             __Fallback__: {
                 item: { kind: "potion", id: "RestoreHealth" },
             },

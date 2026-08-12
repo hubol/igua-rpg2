@@ -93,5 +93,6 @@ export function objCollectibleFlop(flopDexNumberZeroIndexed: Integer) {
                 yield sleep(100);
             }
             self.destroy();
-        });
+        })
+        .track(objCollectibleFlop);
 }

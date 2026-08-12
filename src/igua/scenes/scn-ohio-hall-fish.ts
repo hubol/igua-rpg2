@@ -4,11 +4,13 @@ import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Instances } from "../../lib/game-engine/instances";
 import { Coro } from "../../lib/game-engine/routines/coro";
+import { holdf } from "../../lib/game-engine/routines/hold";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { DataItem } from "../data/data-item";
+import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { scene } from "../globals";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnEnemy } from "../mixins/mxn-enemy";
@@ -63,6 +65,12 @@ export function scnOhioHallFish() {
                     .at(position)
                     .show();
             }
+        })
+        .coro(function* () {
+            yield holdf(() =>
+                Instances(objRoamingFish).length === 0
+                && Instances(objCollectibleFlop).length === 0, 20);
+            yield* DramaHallOfDoors.complete(Rpg.microcosms["Ohio.HallOfDoors"], 0);
         });
 }
 
