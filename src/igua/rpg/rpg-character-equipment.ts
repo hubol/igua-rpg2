@@ -88,6 +88,21 @@ export class RpgCharacterEquipment {
         return this._state.list;
     }
 
+    listLowestLevelForEquipmentId(
+        id: DataEquipment.Id,
+    ): ReadonlyArray<Readonly<RpgCharacterEquipment.ObtainedEquipment>> {
+        const sorted = this._state.list
+            .filter(equipment => equipment.equipmentId === id)
+            .sort((a, b) => a.level - b.level);
+
+        if (sorted.length < 1) {
+            return [];
+        }
+
+        const lowestLevel = sorted[0].level;
+        return sorted.filter(equipment => equipment.level === lowestLevel);
+    }
+
     readonly loadout = (() => {
         const self = this;
 

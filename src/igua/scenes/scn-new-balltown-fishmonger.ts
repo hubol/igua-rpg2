@@ -4,6 +4,7 @@ import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
+import { DataEquipment } from "../data/data-equipment";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
@@ -54,7 +55,13 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
 
     lvl.Fishmonger.mixin(mxnCutscene, function* () {
         yield* show("Hello! I deal in fish.");
-        const result = yield* ask("Can I help you somehow?", "Favorite fish aspect", "Fish delivery", "No");
+        const result = yield* ask(
+            "Can I help you somehow?",
+            "Favorite fish aspect",
+            "Fish delivery",
+            Rpg.inventory.equipment.count("FishFood") > 0 ? "Want my socks?" : null,
+            "No",
+        );
         if (result === 0) {
             yield* show(
                 "Fish are very entertaining to watch.",
@@ -118,6 +125,14 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
             }
         }
         else if (result === 2) {
+            yield* show(
+                `You have ${DataEquipment.getName("FishFood", 1)}?!`,
+                "I would love a pair!",
+            );
+
+            // TODO use new equipment API
+        }
+        else if (result === 3) {
             yield* show("Okay! See you around!");
         }
     });
