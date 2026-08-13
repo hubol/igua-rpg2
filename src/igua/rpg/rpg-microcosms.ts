@@ -49,9 +49,8 @@ const manifest = {
     "Indiana.MagicDoor.Tamago": configure(MicrocosmTamago, {}),
     "Ohio.HallOfDoors": configure(MicrocosmHallOfDoors, {
         doorGiftIds: ["Ohio.MagicDoor.0", "Ohio.MagicDoor.1", "Ohio.MagicDoor.2", "Ohio.MagicDoor.3"],
-        // TODO Need scenes dude!
-        homeSceneName: "scnIndianaHallOfDoors",
-        emptySceneName: "scnIndianaHallEmpty",
+        homeSceneName: "scnOhioHallOfDoors",
+        emptySceneName: "scnOhioHallEmpty",
     }),
 };
 

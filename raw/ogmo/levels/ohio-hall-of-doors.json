@@ -72,6 +72,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 1,
+          "_eid": "19953026",
+          "x": 64,
+          "y": 176,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromDoor", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -117,7 +128,7 @@
           "originX": 0,
           "originY": -2,
           "uid": 178658985858500,
-          "values": {"sceneName": "scnOhioHallFish", "checkpointName": "", "name": "", "depth": 0}
+          "values": {"sceneName": "scnOhioHallFish", "checkpointName": "", "name": "MagicDoor0", "depth": 0}
         },
         {
           "name": "MagicDoor",
@@ -128,7 +139,7 @@
           "originX": 0,
           "originY": -2,
           "uid": 178658985893001,
-          "values": {"sceneName": "", "checkpointName": "", "name": "", "depth": 0}
+          "values": {"sceneName": "", "checkpointName": "", "name": "MagicDoor1", "depth": 0}
         },
         {
           "name": "MagicDoor",
@@ -139,7 +150,7 @@
           "originX": 0,
           "originY": -2,
           "uid": 178658986057802,
-          "values": {"sceneName": "", "checkpointName": "", "name": "", "depth": 0}
+          "values": {"sceneName": "", "checkpointName": "", "name": "MagicDoor2", "depth": 0}
         },
         {
           "name": "MagicDoor",
@@ -150,7 +161,7 @@
           "originX": 0,
           "originY": -2,
           "uid": 178658986180003,
-          "values": {"sceneName": "", "checkpointName": "", "name": "", "depth": 0}
+          "values": {"sceneName": "", "checkpointName": "", "name": "MagicDoor3", "depth": 0}
         }
       ]
     },
@@ -314,6 +325,58 @@
           "y": 112,
           "width": 24,
           "height": 64,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 12,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 0,
+          "width": 192,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 13,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 208,
+          "width": 192,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 14,
+          "_eid": "93117141",
+          "x": 624,
+          "y": 208,
+          "width": 192,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 15,
+          "_eid": "93117141",
+          "x": 624,
+          "y": 0,
+          "width": 192,
+          "height": 80,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
