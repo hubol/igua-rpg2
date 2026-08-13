@@ -1,16 +1,51 @@
 import { objText } from "../../../assets/fonts";
+import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
+import { cyclic } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { DataSlotMachines } from "../../data/data-slot-machines";
-import { scene } from "../../globals";
+import { DevKey, scene } from "../../globals";
 import { RpgSlotMachine } from "../../rpg/rpg-slot-machine";
+
+function entry(id: string, rules: RpgSlotMachine.Rules<unknown>) {
+    return { id, rules };
+}
+
+const rulesManifest = [
+    entry("BasicThreeReel", DataSlotMachines.BasicThreeReel.rules),
+    entry("LowVolatilityGrid", DataSlotMachines.LowVolatilityGrid.rules),
+    entry("SingleLineThreeReel", DataSlotMachines.SingleLineThreeReel.rules),
+];
 
 export function scnSlotMachineSimulator() {
     scene.style.backgroundTint = 0x1c1336;
-    objSlotMachineSimulator(DataSlotMachines.SingleLineThreeReel.rules).show();
+
+    scene.stage
+        .coro(function* () {
+            const rules = DataSlotMachines.SingleLineThreeReel.rules;
+            let index = rulesManifest.findIndex(entry => entry.rules === rules);
+
+            while (true) {
+                const entry = rulesManifest[index];
+                const simObj = objSlotMachineSimulator(entry.id ?? "???", entry.rules ?? rules)
+                    .show();
+
+                yield sleepf(1);
+                yield () => DevKey.justWentDown("ArrowLeft") || DevKey.justWentDown("ArrowRight");
+
+                simObj.destroy();
+
+                if (DevKey.justWentDown("ArrowLeft")) {
+                    index = Math.max(0, index - 1);
+                }
+                else {
+                    index = Math.min(rulesManifest.length - 1, index + 1);
+                }
+            }
+        });
 }
 
-function objSlotMachineSimulator<TMaterial>(rules: RpgSlotMachine.Rules<TMaterial>) {
+function objSlotMachineSimulator<TMaterial>(id: string, rules: RpgSlotMachine.Rules<TMaterial>) {
     let spins = 0;
     let won = 0;
 
@@ -45,7 +80,7 @@ function objSlotMachineSimulator<TMaterial>(rules: RpgSlotMachine.Rules<TMateria
             const mostFrequentCreditPrizes = getMostFrequentEvents(prizeCreditCounts);
             const mostFrequentMaterialPrizes = getMostFrequentEvents(prizeMaterialCounts);
 
-            creditTextObj.text = `Spins: ${spins}
+            creditTextObj.text = `${id} Spins: ${spins}
 
 CREDITS
 Paid: ${paid}
