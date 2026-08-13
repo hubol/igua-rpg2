@@ -14,7 +14,8 @@ function objSlotMachineSimulator<TMaterial>(rules: RpgSlotMachine.Rules<TMateria
     let won = 0;
 
     let maxPrize = 0;
-    const prizeCounts = new Map<Integer, Integer>();
+    const prizeCreditCounts = new Map<Integer, Integer>();
+    const prizeMaterialCounts = new Map<TMaterial, Integer>();
     const linePrizeCounts = new Map<Integer, Integer>();
 
     return objText.Medium().step(self => {
@@ -24,34 +25,45 @@ function objSlotMachineSimulator<TMaterial>(rules: RpgSlotMachine.Rules<TMateria
             spins += 1;
             won += totalPrize;
             maxPrize = Math.max(totalPrize, maxPrize);
-            prizeCounts.set(totalPrize, (prizeCounts.get(totalPrize) ?? 0) + 1);
-            for (const { index } of linePrizes) {
+            prizeCreditCounts.set(totalPrize, (prizeCreditCounts.get(totalPrize) ?? 0) + 1);
+            for (const { index, material } of linePrizes) {
                 linePrizeCounts.set(index, (linePrizeCounts.get(index) ?? 0) + 1);
+                if (material) {
+                    prizeMaterialCounts.set(material, (prizeMaterialCounts.get(material) ?? 0) + 1);
+                }
             }
         }
 
         const paid = spins * rules.price;
         const returnToPlayer = won / paid;
 
-        const mostFrequentPrizes = [...prizeCounts.entries()].map(([prize, count]) => ({ prize, count })).sort((a, b) =>
-            b.count - a.count
-        );
+        const mostFrequentCreditPrizes = getMostFrequentEvents(prizeCreditCounts);
+        const mostFrequentMaterialPrizes = getMostFrequentEvents(prizeMaterialCounts);
 
         self.text = `Spins: ${spins}
 Paid: ${paid}
 Won: ${won}
 Return-to-player: ${(returnToPlayer * 100).toFixed(4)}%
-Maximum prize: ${maxPrize} (${((prizeCounts.get(maxPrize)! / spins) * 100).toFixed(5)}%)
+Maximum prize: ${maxPrize} (${((prizeCreditCounts.get(maxPrize)! / spins) * 100).toFixed(5)}%)
 Line 1 wins: ${linePrizeCounts.get(0) ?? 0}
 Line 2 wins: ${linePrizeCounts.get(1) ?? 0}
 Line 3 wins: ${linePrizeCounts.get(2) ?? 0}
-Most frequent prizes:
-${
-            mostFrequentPrizes.slice(0, 10).map(({ count, prize }) =>
-                `${prize}: ${((count / spins) * 100).toFixed(2)}%`
-            )
-                .join("\n")
-        }
+Most frequent CREDIT prizes:
+${printMostFrequentEvents(mostFrequentCreditPrizes, spins)}
+Most frequent MATERIAL prizes:
+${printMostFrequentEvents(mostFrequentMaterialPrizes, spins)}
 `;
     });
+}
+
+function getMostFrequentEvents<TKey>(frequencyEventMap: Map<TKey, Integer>) {
+    return [...frequencyEventMap.entries()]
+        .map(([event, count]) => ({ event, count }))
+        .sort((a, b) => b.count - a.count);
+}
+
+function printMostFrequentEvents(events: ReturnType<typeof getMostFrequentEvents<unknown>>, chances: Integer) {
+    return events.slice(0, 10)
+        .map(({ count, event }) => `${event}: ${((count / chances) * 100).toFixed(2)}%`)
+        .join("\n");
 }
