@@ -17,17 +17,18 @@ const rulesManifest = [
     entry("SingleLineThreeReel", DataSlotMachines.SingleLineThreeReel.rules),
 ];
 
+const defaultRules = DataSlotMachines.SingleLineThreeReel.rules;
+
 export function scnSlotMachineSimulator() {
     scene.style.backgroundTint = 0x1c1336;
 
     scene.stage
         .coro(function* () {
-            const rules = DataSlotMachines.SingleLineThreeReel.rules;
-            let index = rulesManifest.findIndex(entry => entry.rules === rules);
+            let index = rulesManifest.findIndex(entry => entry.rules === defaultRules);
 
             while (true) {
                 const entry = rulesManifest[index];
-                const simObj = objSlotMachineSimulator(entry.id ?? "???", entry.rules ?? rules)
+                const simObj = objSlotMachineSimulator(entry.id ?? "???", entry.rules ?? defaultRules)
                     .show();
 
                 yield sleepf(1);
@@ -52,7 +53,8 @@ function objSlotMachineSimulator<TMaterial>(id: string, rules: RpgSlotMachine.Ru
     let maxPrize = 0;
     const prizeCreditCounts = new Map<Integer, Integer>();
     const prizeMaterialCounts = new Map<TMaterial, Integer>();
-    const linePrizeCounts = new Map<Integer, Integer>();
+    const linePrizeCreditCounts = new Map<Integer, Integer>();
+    const linePrizeMaterialCounts = new Map<Integer, Integer>();
 
     const creditTextObj = objText.Medium();
     const materialTextObj = objText.Medium().at(250, 0);
@@ -67,9 +69,10 @@ function objSlotMachineSimulator<TMaterial>(id: string, rules: RpgSlotMachine.Ru
                 maxPrize = Math.max(totalPrize, maxPrize);
                 prizeCreditCounts.set(totalPrize, (prizeCreditCounts.get(totalPrize) ?? 0) + 1);
                 for (const { index, material } of linePrizes) {
-                    linePrizeCounts.set(index, (linePrizeCounts.get(index) ?? 0) + 1);
+                    linePrizeCreditCounts.set(index, (linePrizeCreditCounts.get(index) ?? 0) + 1);
                     if (material) {
                         prizeMaterialCounts.set(material, (prizeMaterialCounts.get(material) ?? 0) + 1);
+                        linePrizeMaterialCounts.set(index, (linePrizeMaterialCounts.get(index) ?? 0) + 1);
                     }
                 }
             }
@@ -88,12 +91,19 @@ Won: ${won}
 Return-to-player: ${(returnToPlayer * 100).toFixed(4)}%
 Maximum prize: ${maxPrize} (${printOccurrencePercentage(prizeCreditCounts.get(maxPrize)!, spins, 5)})
 
-Line 1 wins: ${printOccurrencePercentage(linePrizeCounts.get(0) ?? 0, spins, 5)}
-Line 2 wins: ${printOccurrencePercentage(linePrizeCounts.get(1) ?? 0, spins, 5)}
-Line 3 wins: ${printOccurrencePercentage(linePrizeCounts.get(2) ?? 0, spins, 5)}
+Line 1 wins: ${printOccurrencePercentage(linePrizeCreditCounts.get(0) ?? 0, spins, 5)}
+Line 2 wins: ${printOccurrencePercentage(linePrizeCreditCounts.get(1) ?? 0, spins, 5)}
+Line 3 wins: ${printOccurrencePercentage(linePrizeCreditCounts.get(2) ?? 0, spins, 5)}
 
 Most frequent CREDIT prizes:
 ${printMostFrequentEvents(mostFrequentCreditPrizes, spins)}
+`;
+
+            materialTextObj.text = `\n\n\n\n\n\n\n
+Line 1 wins: ${printOccurrencePercentage(linePrizeMaterialCounts.get(0) ?? 0, spins, 5)}
+Line 2 wins: ${printOccurrencePercentage(linePrizeMaterialCounts.get(1) ?? 0, spins, 5)}
+Line 3 wins: ${printOccurrencePercentage(linePrizeMaterialCounts.get(2) ?? 0, spins, 5)}
+
 Most frequent MATERIAL prizes:
 ${printMostFrequentEvents(mostFrequentMaterialPrizes, spins)}
 `;
