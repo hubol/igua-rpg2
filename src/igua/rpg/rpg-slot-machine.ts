@@ -4,25 +4,28 @@ import { Rng } from "../../lib/math/rng";
 import { Undefined } from "../../lib/types/undefined";
 
 export namespace RpgSlotMachine {
-    export type Reel = Symbol[];
+    export type Reel<TMaterial> = Symbol<TMaterial>[];
 
-    export interface Symbol {
+    export interface Symbol<TMaterial> {
         prizeCondition: "line_from_left_consecutive"; // | "scatter";
         // TODO another indentity: "flexible" for matching certain symbols to each other?
         identity: "fixed" | "wild";
-        countsToPrize: Integer[];
+        countsToPrize: Array<Integer>;
+        countsToMaterial?: Array<TMaterial | null>;
     }
 
     export type Line = Integer[];
 
-    export interface Rules {
+    export interface Rules<TMaterial> {
         price: Integer;
         lines: Line[];
-        reels: Reel[];
+        reels: Reel<TMaterial>[];
         height: Integer;
     }
 
-    export function spin(rules: Rules) {
+    export function spin<TMaterial>(rules: Rules<TMaterial>) {
+        type Symbol = RpgSlotMachine.Symbol<TMaterial>;
+
         verifyRules(rules);
 
         const reelsWithOffsets = rules.reels.map(reel => ({ reel, offset: Rng.int(reel.length) }));
@@ -35,7 +38,8 @@ export namespace RpgSlotMachine {
             return effectiveReel;
         });
 
-        const linePrizes: Array<{ index: Integer; prize: Integer }> = [];
+        let totalMaterialsCount = 0;
+        const linePrizes = new Array<SpinResult.LinePrize<TMaterial>>();
 
         for (let i = 0; i < rules.lines.length; i++) {
             const line = rules.lines[i];
@@ -67,19 +71,26 @@ export namespace RpgSlotMachine {
 
             const prizeSymbol = symbolToMatch ? symbolToMatch : leftmostWildSymbol;
 
-            const prize = prizeSymbol?.countsToPrize[symbolCount - 1] ?? null;
-            if (prize) {
-                linePrizes.push({ index: i, prize });
+            const credits = prizeSymbol?.countsToPrize[symbolCount - 1] ?? null;
+            const material = prizeSymbol?.countsToMaterial?.[symbolCount - 1] ?? null;
+
+            if (credits || material) {
+                linePrizes.push({ index: i, credits, material });
+            }
+
+            if (material) {
+                totalMaterialsCount++;
             }
         }
 
         // TODO const scatterSymbolCounts = new Map<Symbol, Integer>();
 
-        const totalPrize = linePrizes.reduce((sum, { prize }) => sum + prize, 0);
+        const totalPrize = linePrizes.reduce((sum, { credits }) => sum + (credits ?? 0), 0);
 
         return {
             reelOffsets: reelsWithOffsets.map(({ offset }) => offset),
             linePrizes,
+            totalMaterialsCount,
             totalPrize,
         };
     }
@@ -87,14 +98,18 @@ export namespace RpgSlotMachine {
     export type SpinResult = ReturnType<typeof spin>;
 
     export namespace SpinResult {
-        export type LinePrize = SpinResult["linePrizes"][number];
+        export interface LinePrize<TMaterial> {
+            index: Integer;
+            credits: Integer | null;
+            material: TMaterial | null;
+        }
     }
 
-    function verifyRules(rules: Rules) {
-        if (rules.reels.length < 2) {
+    function verifyRules(rules: Rules<unknown>) {
+        if (rules.reels.length < 1) {
             Logger.logContractViolationError(
                 "RpgSlotMachine",
-                new Error("There must be at least 2 reels"),
+                new Error("There must be at least 1 reel"),
                 rules,
             );
         }

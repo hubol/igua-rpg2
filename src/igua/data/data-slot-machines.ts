@@ -10,9 +10,14 @@ function interlace<T>(array: T[], item: T): T[] {
 }
 
 export namespace DataSlotMachines {
-    export type SymbolsManifest = Record<string, RpgSlotMachine.Symbol>;
+    export type SymbolsManifest<TMaterial> = Record<string, RpgSlotMachine.Symbol<TMaterial>>;
+    export type MaterialIds<T> = T extends SymbolsManifest<infer TMaterial>
+        ? (TMaterial extends string ? TMaterial : never)
+        : never;
 
     export namespace LowVolatilityGrid {
+        type Material = never;
+
         export const sym = {
             happy: {
                 identity: "fixed",
@@ -34,9 +39,9 @@ export namespace DataSlotMachines {
                 prizeCondition: "line_from_left_consecutive",
                 countsToPrize: [0, 0, 0, 300],
             },
-        } satisfies SymbolsManifest;
+        } satisfies SymbolsManifest<Material>;
 
-        export const rules: RpgSlotMachine.Rules = {
+        export const rules: RpgSlotMachine.Rules<Material> = {
             price: 10,
             height: 3,
             lines: [
@@ -175,6 +180,8 @@ export namespace DataSlotMachines {
     }
 
     export namespace BasicThreeReel {
+        type Material = never;
+
         export const sym = {
             empty: {
                 identity: "fixed",
@@ -201,9 +208,9 @@ export namespace DataSlotMachines {
                 prizeCondition: "line_from_left_consecutive",
                 countsToPrize: [0, 0, 400],
             },
-        } satisfies SymbolsManifest;
+        } satisfies SymbolsManifest<Material>;
 
-        export const rules: RpgSlotMachine.Rules = {
+        export const rules: RpgSlotMachine.Rules<Material> = {
             price: 5,
             height: 3,
             lines: [
@@ -255,6 +262,8 @@ export namespace DataSlotMachines {
     }
 
     export namespace SingleLineThreeReel {
+        type Material = never;
+
         export const sym = {
             bar: {
                 identity: "fixed",
@@ -276,9 +285,9 @@ export namespace DataSlotMachines {
                 prizeCondition: "line_from_left_consecutive",
                 countsToPrize: [0, 0, 222],
             },
-        } satisfies SymbolsManifest;
+        } satisfies SymbolsManifest<Material>;
 
-        export const rules: RpgSlotMachine.Rules = {
+        export const rules: RpgSlotMachine.Rules<Material> = {
             price: 3,
             height: 1,
             lines: [

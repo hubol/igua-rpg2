@@ -52,6 +52,7 @@ export function scnOhioCasino() {
                     wild: slotTxs.evil[0],
                 },
                 lineHighlightTint: 0x000000,
+                materialTexts: {},
             },
             {
                 tone: Sfx.Interact.SlotMachine.Tone1,
@@ -92,6 +93,7 @@ export function scnOhioCasino() {
                     wild: slotTxs.happiness[3],
                 },
                 lineHighlightTint: 0xFF5E42,
+                materialTexts: {},
             },
             undefined,
             currencyId,

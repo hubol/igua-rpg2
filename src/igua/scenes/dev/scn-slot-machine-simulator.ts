@@ -9,7 +9,7 @@ export function scnSlotMachineSimulator() {
     objSlotMachineSimulator(DataSlotMachines.SingleLineThreeReel.rules).show();
 }
 
-function objSlotMachineSimulator(rules: RpgSlotMachine.Rules) {
+function objSlotMachineSimulator<TMaterial>(rules: RpgSlotMachine.Rules<TMaterial>) {
     let spins = 0;
     let won = 0;
 

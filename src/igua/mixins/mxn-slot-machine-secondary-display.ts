@@ -2,7 +2,7 @@ import { Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { interpvr } from "../../lib/game-engine/routines/interp";
 import { ZIndex } from "../core/scene/z-index";
-import { ObjSlotMachine } from "../objects/obj-slot-machine";
+import { ObjSlotMachine, objSlotMachine } from "../objects/obj-slot-machine";
 import { mxnBoilSeed } from "./mxn-boil-seed";
 
 export function mxnSlotMachineSecondaryDisplay(regionObj: Graphics, slotMachineObj: ObjSlotMachine) {
@@ -33,17 +33,33 @@ export function mxnSlotMachineSecondaryDisplay(regionObj: Graphics, slotMachineO
             slotMachineObj
                 .handles("objSlotMachine.gameStarted", () => textObj.text = "Good luck!")
                 .handles("objSlotMachine.gameEnded", (_, result) => {
-                    if (result.totalPrize <= 0) {
+                    if (result.totalPrize <= 0 && result.totalMaterialsCount <= 0) {
                         textObj.text = "Try again";
                     }
                 })
                 .handles(
                     "objSlotMachine.showLinePrize",
-                    (_, linePrize) => textObj.text = `Line ${linePrize.index + 1} pays ${linePrize.prize}`,
+                    (_, event) => textObj.text = getShowLinePrizeText(event),
                 )
                 .handles(
                     "objSlotMachine.showGamePrize",
-                    (_, totalPrize) => textObj.text = `Game pays ${totalPrize}`,
+                    (_, event) => {
+                        if (event.totalPrize > 0) {
+                            textObj.text = `Game pays ${event}`;
+                        }
+                    },
                 );
         });
+}
+
+function getShowLinePrizeText(event: objSlotMachine.ShowLinePrizeEvent<any>) {
+    const name = `Line ${event.prize.index + 1}`;
+    const materialText = event.materialTexts[event.prize.material] ?? event.prize.material;
+    if (event.prize.credits && event.prize.material) {
+        return `${name} pays ${event.prize.credits}, ${materialText}`;
+    }
+    if (event.prize.credits) {
+        return `${name} pays ${event.prize.credits}`;
+    }
+    return `${name} ${materialText}`;
 }
