@@ -268,12 +268,12 @@ export namespace DataSlotMachines {
             bar: {
                 identity: "fixed",
                 prizeCondition: "line_from_left_consecutive",
-                countsToPrize: [0, 0, 5],
+                countsToPrize: [0, 0, 4],
             },
             cherry: {
                 identity: "fixed",
                 prizeCondition: "line_from_left_consecutive",
-                countsToPrize: [0, 0, 15],
+                countsToPrize: [0, 0, 14],
             },
             seven: {
                 identity: "fixed",
@@ -283,7 +283,7 @@ export namespace DataSlotMachines {
             wild: {
                 identity: "wild",
                 prizeCondition: "line_from_left_consecutive",
-                countsToPrize: [0, 0, 222],
+                countsToPrize: [0, 0, 333],
             },
         } satisfies SymbolsManifest<Material>;
 
