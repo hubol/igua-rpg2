@@ -49,7 +49,7 @@ export class RpgInventory {
         }
     }
 
-    remove(item: RpgInventory.RemovableItem, count: Integer) {
+    remove(item: RpgInventory.Item, count: Integer) {
         switch (item.kind) {
             case "key_item":
                 this.keyItems.remove(item.id, count);
@@ -59,6 +59,9 @@ export class RpgInventory {
                 return;
             case "pocket_item":
                 this.pocket.remove(item.id, count);
+                return;
+            case "equipment":
+                this.equipment.removeLoose(item.id, item.level);
                 return;
         }
     }
@@ -90,6 +93,4 @@ export namespace RpgInventory {
             id: DataPocketItem.Id;
         }
     }
-
-    export type RemovableItem = Item.KeyItem | Item.PocketItem | Item.Potion;
 }

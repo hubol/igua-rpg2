@@ -76,6 +76,7 @@ export function getInitialRpgProgress() {
                     toldPlayerAboutDesireForFish: false,
                 },
                 fishmonger: {
+                    deliveredEquipmentsCount: 0,
                     deliveries: {
                         armorer: Null<"ready" | "arrived" | "delivered">(),
                         ringer: Null<"handed_off_to_player">(),

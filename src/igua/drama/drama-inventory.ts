@@ -4,6 +4,7 @@ import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
 import { container } from "../../lib/pixi/container";
 import { Null } from "../../lib/types/null";
+import { DataEquipment } from "../data/data-equipment";
 import { DataItem } from "../data/data-item";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { layers } from "../globals";
@@ -27,7 +28,7 @@ interface AskUseCountOptions {
 
 function* askRemoveCount(
     message: string,
-    item: RpgInventory.RemovableItem,
+    item: RpgInventory.Item,
     { min = 1, max: rawMax, multipleOf = 1, rejectMessage = "Never mind" }: AskUseCountOptions = {},
 ) {
     const heldCount = Rpg.inventory.count(item);
@@ -56,7 +57,7 @@ function* askRemoveCount(
 }
 
 /** Before calling this function, you must assert that the player has the demanded amount */
-function* removeCountFromPlayer(item: RpgInventory.RemovableItem, count: Integer) {
+function* removeCountFromPlayer(item: RpgInventory.Item, count: Integer) {
     if (count <= 0) {
         return;
     }
@@ -69,7 +70,7 @@ function* removeCountFromPlayer(item: RpgInventory.RemovableItem, count: Integer
 }
 
 function* visualizeRemoveCountFromPlayer(
-    item: RpgInventory.RemovableItem,
+    item: RpgInventory.Item,
     initialCount: Integer,
     endingCount: Integer,
 ) {
@@ -116,7 +117,7 @@ function* emptyPocket() {
     return result;
 }
 
-function* askWhichAndRemoveOne<TItem extends RpgInventory.RemovableItem>(items: TItem[]) {
+function* askWhichAndRemoveOne<TItem extends RpgInventory.Item>(items: TItem[]) {
     const item = yield* askWhich<TItem>("Which to offer?", items);
 
     if (item === null) {
@@ -128,7 +129,7 @@ function* askWhichAndRemoveOne<TItem extends RpgInventory.RemovableItem>(items: 
     return item;
 }
 
-function* askWhich<TItem extends RpgInventory.RemovableItem>(message: string, items: TItem[]) {
+function* askWhich<TItem extends RpgInventory.Item>(message: string, items: TItem[]) {
     return yield* DramaItem.choose({
         message,
         noneMessage: "Nothing, sorry",
@@ -171,7 +172,7 @@ interface AskWhichAndRemoveCountOptions extends AskUseCountOptions {
     countMessage?: string;
 }
 
-function* askWhichAndRemoveCount<TItem extends RpgInventory.RemovableItem>(
+function* askWhichAndRemoveCount<TItem extends RpgInventory.Item>(
     items: TItem[],
     options: AskWhichAndRemoveCountOptions = {},
 ) {
@@ -187,7 +188,17 @@ function* askWhichAndRemoveCount<TItem extends RpgInventory.RemovableItem>(
     return { item, count };
 }
 
-function* removeAll(item: RpgInventory.RemovableItem) {
+function* askWhichAndRemoveCountEquipment(
+    id: DataEquipment.Id,
+    options: AskWhichAndRemoveCountOptions = {},
+) {
+    const items = Rpg.inventory.equipment.getLevelCounts(id)
+        .map(({ level }): RpgInventory.Item.Equipment => ({ kind: "equipment", id, level }));
+
+    return yield* askWhichAndRemoveCount(items, options);
+}
+
+function* removeAll(item: RpgInventory.Item) {
     const count = Rpg.inventory.count(item);
     yield* removeCountFromPlayer(item, count);
     return count;
@@ -212,6 +223,9 @@ export const DramaInventory = {
     askRemoveCount,
     askWhichAndRemoveOne,
     askWhichAndRemoveCount,
+    equipment: {
+        askWhichAndRemoveCount: askWhichAndRemoveCountEquipment,
+    },
     receiveItems,
     removeCount: removeCountFromPlayer,
     removeAll,

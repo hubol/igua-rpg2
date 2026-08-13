@@ -51,7 +51,7 @@ function enrichNerdBouncer(lvl: LvlType.IndianaDesert) {
 
                         if (hasRobot) {
                             yield* show("I'm sorry, you can't go this way. Nerds o--");
-                            const item: RpgInventory.RemovableItem = { kind: "key_item", id: "TeenerBot" };
+                            const item: RpgInventory.Item = { kind: "key_item", id: "TeenerBot" };
                             yield* DramaInventory.removeCount(item, 1);
                             yield* show(
                                 "Holy F! A teener bot?!",

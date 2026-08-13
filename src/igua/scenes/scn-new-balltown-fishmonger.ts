@@ -3,6 +3,7 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { sleep } from "../../lib/game-engine/routines/sleep";
+import { range } from "../../lib/range";
 import { Jukebox } from "../core/igua-audio";
 import { DataEquipment } from "../data/data-equipment";
 import { DataNpcPersona } from "../data/data-npc-persona";
@@ -40,6 +41,8 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
     const { fishObjs } = enrichAquarium(lvl);
     const { deliveries } = Rpg.flags.newBalltown.fishmonger;
 
+    const desiredEquipmentId: DataEquipment.Id = "FishFood";
+
     if (deliveries.armorer) {
         fishObjs[0].destroy();
     }
@@ -59,7 +62,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
             "Can I help you somehow?",
             "Favorite fish aspect",
             "Fish delivery",
-            Rpg.inventory.equipment.count("FishFood") > 0 ? "Want my socks?" : null,
+            Rpg.inventory.equipment.count(desiredEquipmentId) > 0 ? "Want my socks?" : null,
             "No",
         );
         if (result === 0) {
@@ -126,11 +129,28 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
         }
         else if (result === 2) {
             yield* show(
-                `You have ${DataEquipment.getName("FishFood", 1)}?!`,
-                "I would love a pair!",
+                `You have ${DataEquipment.getName(desiredEquipmentId, 1)}?!`,
+                Rpg.flags.newBalltown.fishmonger.deliveredEquipmentsCount === 0
+                    ? "I've always wanted one!"
+                    : "Yay, I want more!!!",
+                "I'll give you ten blind boxes for each one...! (Plus a little bonus if you leveled them up like a freak)",
             );
 
-            // TODO use new equipment API
+            const removed = yield* DramaInventory.equipment.askWhichAndRemoveCount(desiredEquipmentId);
+
+            if (!removed) {
+                yield* show("Changed your mind, did ye?!?! Avast!!! Landlubber!!!");
+                return;
+            }
+
+            const base = 10 + (removed.item.level === 1 ? 0 : Math.ceil(Math.pow(1.4, removed.item.level)));
+            const count = base * removed.count;
+
+            Rpg.flags.newBalltown.fishmonger.deliveredEquipmentsCount += removed.count;
+
+            yield* DramaInventory.receiveItems(range(count).map(() => ({ kind: "key_item", id: "FlopBlindBoxTypeB" })));
+
+            yield* show(removed.count === 1 ? "Thanks for the sock!" : "Thanks so much for the socks!!!");
         }
         else if (result === 3) {
             yield* show("Okay! See you around!");

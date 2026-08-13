@@ -67,6 +67,23 @@ export class RpgCharacterEquipment {
         return count;
     }
 
+    getLevelCounts(equipmentId: DataEquipment.Id): Array<RpgCharacterEquipment.LevelCount> {
+        const { list } = this._state;
+        const levelCounts: Record<Integer, Integer> = {};
+
+        for (const equipment of list) {
+            if (equipment.equipmentId !== equipmentId) {
+                continue;
+            }
+
+            levelCounts[equipment.level] = (levelCounts[equipment.level] ?? 0) + 1;
+        }
+
+        return Object.entries(levelCounts)
+            .map(([levelString, count]): RpgCharacterEquipment.LevelCount => ({ level: Number(levelString), count }))
+            .sort((a, b) => a.level - b.level);
+    }
+
     equip(id: Integer | null, loadoutIndex: Integer) {
         const { list } = this._state;
 
@@ -86,21 +103,6 @@ export class RpgCharacterEquipment {
 
     get list(): ReadonlyArray<Readonly<RpgCharacterEquipment.ObtainedEquipment>> {
         return this._state.list;
-    }
-
-    listLowestLevelForEquipmentId(
-        id: DataEquipment.Id,
-    ): ReadonlyArray<Readonly<RpgCharacterEquipment.ObtainedEquipment>> {
-        const sorted = this._state.list
-            .filter(equipment => equipment.equipmentId === id)
-            .sort((a, b) => a.level - b.level);
-
-        if (sorted.length < 1) {
-            return [];
-        }
-
-        const lowestLevel = sorted[0].level;
-        return sorted.filter(equipment => equipment.level === lowestLevel);
     }
 
     readonly loadout = (() => {
@@ -163,6 +165,23 @@ export class RpgCharacterEquipment {
         this._updateLoadout();
     }
 
+    removeLoose(equipmentId: DataEquipment.Id, level: Integer) {
+        const equipment = this._state.list.find(obtainedEquipment =>
+            obtainedEquipment.equipmentId === equipmentId && obtainedEquipment.level === level
+        );
+
+        if (!equipment) {
+            Logger.logContractViolationError(
+                "RpgCharacterEquipment.removeLoose",
+                new Error("Attempted to remove an equipment with failing loose criteria"),
+                { equipmentId, level },
+            );
+            return;
+        }
+
+        this.remove(equipment.id);
+    }
+
     static Preview = class RpgCharacterEquipmentPreview extends RpgCharacterEquipment {
         private readonly _stateToRestoreBeforeEquip: RpgCharacterEquipment.State;
 
@@ -196,5 +215,10 @@ export namespace RpgCharacterEquipment {
     export interface State {
         nextId: Integer;
         list: Array<RpgCharacterEquipment.ObtainedEquipment>;
+    }
+
+    export interface LevelCount {
+        level: Integer;
+        count: Integer;
     }
 }
