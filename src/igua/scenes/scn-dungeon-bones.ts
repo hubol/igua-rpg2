@@ -1,6 +1,7 @@
 import { Sprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Sfx } from "../../assets/sounds";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
@@ -19,6 +20,13 @@ export function scnDungeonBones() {
     lvl.Skeleton0.mixin(mxnDungeonSkeleton, "Skeleton of Saint (Red)");
     lvl.Skeleton1.mixin(mxnDungeonSkeleton, "Skeleton of Saint (Yellow)");
     lvl.Skeleton2.mixin(mxnDungeonSkeleton, "Skeleton of Saint (Blue)");
+
+    lvl.MidbossBlock
+        .coro(function* (self) {
+            yield () => lvl.MidbossSkeliguana.destroyed && !playerObj.collides(lvl.MidbossUnsafeRegion);
+            self.play(Sfx.Cutscene.MysteriousDisappearance.rate(0.95, 1.05));
+            self.destroy();
+        });
 }
 
 function mxnDungeonSkeleton(obj: Sprite, name: string) {

@@ -100,6 +100,11 @@ export function scnOhioCasino() {
             },
             currencyId,
         )
+            .mixin(mxnSpeaker, {
+                name: "Damn! That guy is lucky",
+                tintPrimary: 0x191760,
+                tintSecondary: 0xCE58BE,
+            })
             .at(lvl.SlotDisplay1)
             .zIndexed(ZIndex.Entities)
             .show();

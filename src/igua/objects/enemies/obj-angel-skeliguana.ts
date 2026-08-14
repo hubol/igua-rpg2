@@ -35,6 +35,10 @@ const ranks = {
         },
         loot: {
             tier0: [{ kind: "pocket_item", id: "BoneTypeA" }],
+            tier1: [
+                { kind: "equipment", id: "RichesRing", weight: 5 },
+                { kind: "nothing", weight: 95 },
+            ],
         },
     }),
     level1: RpgEnemyRank.create({
@@ -46,6 +50,10 @@ const ranks = {
                 { kind: "pocket_item", id: "BoneTypeA", count: 7, weight: 50 },
                 { kind: "pocket_item", id: "BoneTypeA", count: 10, weight: 30 },
                 { kind: "pocket_item", id: "BoneTypeA", count: 12, weight: 20 },
+            ],
+            tier1: [
+                { kind: "equipment", id: "YellowRichesRing", weight: 10 },
+                { kind: "nothing", weight: 90 },
             ],
         },
     }),

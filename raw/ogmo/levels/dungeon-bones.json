@@ -1,7 +1,7 @@
 {
   "ogmoVersion": "3.4.0-hubol",
   "width": 1896,
-  "height": 760,
+  "height": 1136,
   "offsetX": 0,
   "offsetY": 0,
   "values": {"Terrain Color": "#000000", "Region ID": "Ohio"},
@@ -15,7 +15,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 237,
-      "gridCellsY": 95,
+      "gridCellsY": 142,
       "entities": []
     },
     {
@@ -26,7 +26,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 237,
-      "gridCellsY": 95,
+      "gridCellsY": 142,
       "entities": [
         {
           "name": "GateHorizontal",
@@ -39,6 +39,19 @@
           "originY": 0,
           "flippedX": true,
           "values": {"sceneName": "scnWorldMap", "checkpointName": "fromDungeonBones", "name": "", "depth": 0}
+        },
+        {
+          "name": "Region",
+          "id": 1,
+          "_eid": "11908607",
+          "x": 88,
+          "y": 448,
+          "width": 104,
+          "height": 152,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "MidbossUnsafeRegion", "depth": 0}
         }
       ]
     },
@@ -50,7 +63,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 237,
-      "gridCellsY": 95,
+      "gridCellsY": 142,
       "decals": [],
       "folder": "../textures"
     },
@@ -62,7 +75,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 237,
-      "gridCellsY": 95,
+      "gridCellsY": 142,
       "entities": []
     },
     {
@@ -73,7 +86,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 237,
-      "gridCellsY": 95,
+      "gridCellsY": 142,
       "entities": [
         {
           "name": "Player",
@@ -96,7 +109,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 237,
-      "gridCellsY": 95,
+      "gridCellsY": 142,
       "entities": []
     },
     {
@@ -107,7 +120,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 237,
-      "gridCellsY": 95,
+      "gridCellsY": 142,
       "decals": [
         {
           "x": 1316,
@@ -198,7 +211,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 237,
-      "gridCellsY": 95,
+      "gridCellsY": 142,
       "entities": [
         {
           "name": "EnemySkeliguana",
@@ -464,7 +477,7 @@
           "originX": 18,
           "originY": 37,
           "flippedX": false,
-          "values": {"variant": "level1", "name": "", "depth": 0}
+          "values": {"variant": "level1", "name": "MidbossSkeliguana", "depth": 0}
         },
         {
           "name": "Idol",
@@ -476,6 +489,60 @@
           "originY": 97,
           "uid": 178551880654000,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Darkness",
+          "id": 36,
+          "_eid": "59550687",
+          "x": 296,
+          "y": 24,
+          "originX": 20,
+          "originY": 19,
+          "values": {"exitSceneName": "scnWorldMap", "exitCheckpointName": "fromDungeonBones", "level": 1, "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemySkeliguana",
+          "id": 37,
+          "_eid": "19563576",
+          "x": 400,
+          "y": 1032,
+          "originX": 18,
+          "originY": 37,
+          "flippedX": false,
+          "values": {"variant": "level1", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemySkeliguana",
+          "id": 38,
+          "_eid": "19563576",
+          "x": 648,
+          "y": 1032,
+          "originX": 18,
+          "originY": 37,
+          "flippedX": false,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemySkeliguana",
+          "id": 39,
+          "_eid": "19563576",
+          "x": 872,
+          "y": 1032,
+          "originX": 18,
+          "originY": 37,
+          "flippedX": false,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemySkeliguana",
+          "id": 40,
+          "_eid": "19563576",
+          "x": 1072,
+          "y": 1032,
+          "originX": 18,
+          "originY": 37,
+          "flippedX": false,
+          "values": {"variant": "level1", "name": "", "depth": 0}
         }
       ]
     },
@@ -487,7 +554,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 237,
-      "gridCellsY": 95,
+      "gridCellsY": 142,
       "decals": [],
       "folder": "../textures"
     },
@@ -499,7 +566,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 237,
-      "gridCellsY": 95,
+      "gridCellsY": 142,
       "entities": [
         {
           "name": "Block",
@@ -881,7 +948,7 @@
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
-          "values": {"name": "", "depth": 0, "visible": true}
+          "values": {"name": "MidbossBlock", "depth": 0, "visible": true}
         },
         {
           "name": "Block",
@@ -903,7 +970,7 @@
           "x": -64,
           "y": 456,
           "width": 176,
-          "height": 304,
+          "height": 680,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
@@ -921,6 +988,71 @@
           "originY": 0,
           "tint": "#000000",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 46,
+          "_eid": "93117141",
+          "x": 112,
+          "y": 1032,
+          "width": 1160,
+          "height": 136,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 47,
+          "_eid": "93117141",
+          "x": 184,
+          "y": 760,
+          "width": 704,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 48,
+          "_eid": "93117141",
+          "x": 224,
+          "y": 1008,
+          "width": 72,
+          "height": 40,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 49,
+          "_eid": "93117141",
+          "x": 736,
+          "y": 1008,
+          "width": 72,
+          "height": 40,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 50,
+          "_eid": "93117141",
+          "x": 1176,
+          "y": 992,
+          "width": 456,
+          "height": 192,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -932,7 +1064,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 237,
-      "gridCellsY": 95,
+      "gridCellsY": 142,
       "entities": []
     },
     {
@@ -943,7 +1075,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 237,
-      "gridCellsY": 95,
+      "gridCellsY": 142,
       "decals": [
         {
           "x": 561,
@@ -1190,7 +1322,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 237,
-      "gridCellsY": 95,
+      "gridCellsY": 142,
       "decals": [],
       "folder": "../textures"
     }
