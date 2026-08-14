@@ -1,3 +1,4 @@
+import { Integer } from "../../lib/math/number-alias-types";
 import { objFigureEquipment } from "../objects/figures/obj-figure-equipment";
 import { objFigureKeyItem } from "../objects/figures/obj-figure-key-item";
 import { objFigurePocketItem } from "../objects/figures/obj-figure-pocket-item";
@@ -35,6 +36,11 @@ export namespace DataItem {
             case "potion":
                 return DataPotion.getById(item.id).name;
         }
+    }
+
+    export function getNameQuantity(item: RpgInventory.Item, count: Integer) {
+        const name = DataItem.getName(item);
+        return count > 1 ? `${name} x${count}` : name;
     }
 
     export function getFigureObj(item: RpgInventory.Item) {

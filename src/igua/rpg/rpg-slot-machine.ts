@@ -2,30 +2,45 @@ import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { Undefined } from "../../lib/types/undefined";
+import { DataPotion } from "../data/data-potion";
+import { RpgInventory } from "./rpg-inventory";
 
 export namespace RpgSlotMachine {
-    export type Reel<TMaterial> = Symbol<TMaterial>[];
+    export namespace Material {
+        export interface ConsumePotion {
+            kind: "consume_potion";
+            id: DataPotion.Id;
+        }
 
-    export interface Symbol<TMaterial> {
+        export interface ReceiveItem {
+            kind: "receive_item";
+            item: RpgInventory.Item;
+            count: Integer;
+        }
+    }
+
+    export type Material = Material.ConsumePotion | Material.ReceiveItem;
+
+    export type Reel = Symbol[];
+
+    export interface Symbol {
         prizeCondition: "line_from_left_consecutive"; // | "scatter";
         // TODO another indentity: "flexible" for matching certain symbols to each other?
         identity: "fixed" | "wild";
         countsToPrize: Array<Integer>;
-        countsToMaterial?: Array<TMaterial | null>;
+        countsToMaterial?: Array<Material | null>;
     }
 
     export type Line = Integer[];
 
-    export interface Rules<TMaterial> {
+    export interface Rules {
         price: Integer;
         lines: Line[];
-        reels: Reel<TMaterial>[];
+        reels: Reel[];
         height: Integer;
     }
 
-    export function spin<TMaterial>(rules: Rules<TMaterial>) {
-        type Symbol = RpgSlotMachine.Symbol<TMaterial>;
-
+    export function spin(rules: Rules) {
         verifyRules(rules);
 
         const reelsWithOffsets = rules.reels.map(reel => ({ reel, offset: Rng.int(reel.length) }));
@@ -39,7 +54,7 @@ export namespace RpgSlotMachine {
         });
 
         let totalMaterialsCount = 0;
-        const linePrizes = new Array<SpinResult.LinePrize<TMaterial>>();
+        const linePrizes = new Array<SpinResult.LinePrize>();
 
         for (let i = 0; i < rules.lines.length; i++) {
             const line = rules.lines[i];
@@ -98,14 +113,14 @@ export namespace RpgSlotMachine {
     export type SpinResult = ReturnType<typeof spin>;
 
     export namespace SpinResult {
-        export interface LinePrize<TMaterial> {
+        export interface LinePrize {
             index: Integer;
             credits: Integer | null;
-            material: TMaterial | null;
+            material: Material | null;
         }
     }
 
-    function verifyRules(rules: Rules<unknown>) {
+    function verifyRules(rules: Rules) {
         if (rules.reels.length < 1) {
             Logger.logContractViolationError(
                 "RpgSlotMachine",

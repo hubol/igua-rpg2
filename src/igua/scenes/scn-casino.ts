@@ -39,7 +39,6 @@ export function scnCasino() {
                     wild: slotTxs.simple[3],
                 },
                 lineHighlightTint: 0xFF5200,
-                materialTexts: {},
             },
         )
             .at(lvl.SlotMachineDisplay0)
@@ -70,7 +69,6 @@ export function scnCasino() {
                     wild: slotTxs.happiness[3],
                 },
                 lineHighlightTint: 0xFF5E42,
-                materialTexts: {},
             },
         )
             .at(lvl.SlotMachineDisplay1)

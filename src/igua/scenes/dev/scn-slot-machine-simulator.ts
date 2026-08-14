@@ -7,7 +7,7 @@ import { DataSlotMachines } from "../../data/data-slot-machines";
 import { DevKey, scene } from "../../globals";
 import { RpgSlotMachine } from "../../rpg/rpg-slot-machine";
 
-function entry(id: string, rules: RpgSlotMachine.Rules<unknown>) {
+function entry(id: string, rules: RpgSlotMachine.Rules) {
     return { id, rules };
 }
 
@@ -46,13 +46,20 @@ export function scnSlotMachineSimulator() {
         });
 }
 
-function objSlotMachineSimulator<TMaterial>(id: string, rules: RpgSlotMachine.Rules<TMaterial>) {
+function getMaterialIdentity(material: RpgSlotMachine.Material) {
+    if (material.kind === "consume_potion") {
+        return `consume(${material.id})`;
+    }
+    return `receive(${material.item}, ${material.count})`;
+}
+
+function objSlotMachineSimulator(id: string, rules: RpgSlotMachine.Rules) {
     let spins = 0;
     let won = 0;
 
     let maxPrize = 0;
     const prizeCreditCounts = new Map<Integer, Integer>();
-    const prizeMaterialCounts = new Map<TMaterial, Integer>();
+    const prizeMaterialCounts = new Map<string, Integer>();
     const linePrizeCreditCounts = new Map<Integer, Integer>();
     const linePrizeMaterialCounts = new Map<Integer, Integer>();
 
@@ -71,7 +78,8 @@ function objSlotMachineSimulator<TMaterial>(id: string, rules: RpgSlotMachine.Ru
                 for (const { index, material } of linePrizes) {
                     linePrizeCreditCounts.set(index, (linePrizeCreditCounts.get(index) ?? 0) + 1);
                     if (material) {
-                        prizeMaterialCounts.set(material, (prizeMaterialCounts.get(material) ?? 0) + 1);
+                        const materialIdentity = getMaterialIdentity(material);
+                        prizeMaterialCounts.set(materialIdentity, (prizeMaterialCounts.get(materialIdentity) ?? 0) + 1);
                         linePrizeMaterialCounts.set(index, (linePrizeMaterialCounts.get(index) ?? 0) + 1);
                     }
                 }

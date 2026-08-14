@@ -13,6 +13,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { DataSlotMachines } from "../data/data-slot-machines";
+import { DramaSlotMachine } from "../drama/drama-slot-machine";
 import { DramaWallet } from "../drama/drama-wallet";
 import { show } from "../drama/show";
 import { Cutscene } from "../globals";
@@ -35,12 +36,11 @@ interface SlotMachineRenderConfigBase {
     lineHighlightTint: RgbInt;
 }
 
-interface SlotMachineRenderConfig<TSymbols extends DataSlotMachines.SymbolsManifest<unknown>>
+interface SlotMachineRenderConfig<TSymbols extends DataSlotMachines.SymbolsManifest>
     extends SlotMachineRenderConfigBase
 {
     sym: TSymbols;
     symbolTxs: Partial<Record<keyof TSymbols, Texture>>;
-    materialTexts: Record<DataSlotMachines.MaterialIds<TSymbols>, string>;
 }
 
 interface SlotMachineSfx {
@@ -49,8 +49,8 @@ interface SlotMachineSfx {
 }
 
 namespace SymbolTextures {
-    export function create(config: SlotMachineRenderConfig<DataSlotMachines.SymbolsManifest<unknown>>) {
-        const map = new Map<RpgSlotMachine.Symbol<unknown>, Texture>(
+    export function create(config: SlotMachineRenderConfig<DataSlotMachines.SymbolsManifest>) {
+        const map = new Map<RpgSlotMachine.Symbol, Texture>(
             // @ts-expect-error Don't care
             Object.entries(config.sym)
                 .filter(([key]) => key in config.symbolTxs)
@@ -74,14 +74,12 @@ namespace SymbolTextures {
     export type Type = ReturnType<typeof create>;
 }
 
-export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest<unknown>>(
-    rules: RpgSlotMachine.Rules<DataSlotMachines.MaterialIds<TSymbols>>,
+export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest>(
+    rules: RpgSlotMachine.Rules,
     config: SlotMachineRenderConfig<TSymbols>,
     sfx: SlotMachineSfx = { tone: Sfx.Interact.SlotMachine.Tone0, win: Sfx.Interact.SlotMachine.Win0 },
     currencyId: RpgEconomy.Currency.Id = "valuables",
 ) {
-    type Material = DataSlotMachines.MaterialIds<TSymbols>;
-
     const symbolTxs = SymbolTextures.create(config);
     const pricePerSpin: RpgEconomy.Offer = { currency: currencyId, price: rules.price };
 
@@ -147,7 +145,7 @@ export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest
         .dispatches<"objSlotMachine.gameStarted">()
         .dispatches<"objSlotMachine.fastSpinOpportunityEnded">()
         .dispatchesValue<"objSlotMachine.gameEnded", RpgSlotMachine.SpinResult>()
-        .dispatchesValue<"objSlotMachine.showLinePrize", objSlotMachine.ShowLinePrizeEvent<Material>>()
+        .dispatchesValue<"objSlotMachine.showLinePrize", objSlotMachine.ShowLinePrizeEvent>()
         .dispatchesValue<"objSlotMachine.showGamePrize", objSlotMachine.ShowGamePrizeEvent>()
         .coro(function* (self) {
             while (true) {
@@ -157,7 +155,7 @@ export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest
                 self.dispatch("objSlotMachine.gameStarted");
 
                 const spinResult = RpgSlotMachine.spin(rules);
-                const { totalPrize, reelOffsets, linePrizes } = spinResult;
+                const { totalPrize, totalMaterialsCount, reelOffsets, linePrizes } = spinResult;
 
                 for (const reelObj of reelObjs) {
                     reelObj.controls.offsetDelta = Rng.float(0.175, 0.3);
@@ -214,10 +212,7 @@ export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest
                         .coro(function* (highlighterObj) {
                             while (true) {
                                 for (const prize of linePrizes) {
-                                    self.dispatch("objSlotMachine.showLinePrize", {
-                                        prize,
-                                        materialTexts: config.materialTexts,
-                                    });
+                                    self.dispatch("objSlotMachine.showLinePrize", prize);
                                     highlighterObj.controls.line = rules.lines[prize.index];
                                     yield sleep(1000);
                                     highlighterObj.controls.line = null;
@@ -238,7 +233,17 @@ export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest
                         yield* DramaWallet.earn(currencyId, totalPrize, "gambling");
                     });
                 }
-                else {
+                if (totalMaterialsCount > 0) {
+                    self.play(sfx.win);
+                    self.coro(function* () {
+                        for (const prize of linePrizes) {
+                            if (prize.material) {
+                                yield* DramaSlotMachine.winMaterial(prize.material);
+                            }
+                        }
+                    });
+                }
+                if (totalPrize <= 0 && totalMaterialsCount <= 0) {
                     Rpg.wallet.earn("casino_pity", pricePerSpin.price + Rpg.character.buffs.wallet.bonusCasinoPity);
                 }
 
@@ -255,11 +260,7 @@ export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest
 }
 
 export namespace objSlotMachine {
-    export interface ShowLinePrizeEvent<TMaterial extends string> {
-        materialTexts: Record<TMaterial, string>;
-        prize: RpgSlotMachine.SpinResult.LinePrize<TMaterial>;
-    }
-
+    export type ShowLinePrizeEvent = RpgSlotMachine.SpinResult.LinePrize;
     export type ShowGamePrizeEvent = Pick<RpgSlotMachine.SpinResult, "totalMaterialsCount" | "totalPrize">;
 }
 
@@ -267,8 +268,8 @@ export type ObjSlotMachine = ReturnType<typeof objSlotMachine>;
 
 interface ObjReelArgs {
     config: SlotMachineRenderConfigBase;
-    reel: RpgSlotMachine.Reel<unknown>;
-    rules: RpgSlotMachine.Rules<unknown>;
+    reel: RpgSlotMachine.Reel;
+    rules: RpgSlotMachine.Rules;
 }
 
 const symbolPadding = 2;

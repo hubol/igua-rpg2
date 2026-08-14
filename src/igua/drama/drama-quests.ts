@@ -30,8 +30,7 @@ function peekCompletionRewardName(maybeQuest: getQuest.Maybe) {
                 return count === 1 ? "1 valuable" : `${count} valuables`;
             }
 
-            const itemName = DataItem.getName(drop);
-            return count > 1 ? `${itemName} x${count}` : itemName;
+            return DataItem.getNameQuantity(drop, count);
         })
         .join(", ");
 }

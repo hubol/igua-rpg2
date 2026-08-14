@@ -2,7 +2,10 @@ import { Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { interpvr } from "../../lib/game-engine/routines/interp";
 import { ZIndex } from "../core/scene/z-index";
+import { DataItem } from "../data/data-item";
+import { DataPotion } from "../data/data-potion";
 import { ObjSlotMachine, objSlotMachine } from "../objects/obj-slot-machine";
+import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 import { mxnBoilSeed } from "./mxn-boil-seed";
 
 export function mxnSlotMachineSecondaryDisplay(regionObj: Graphics, slotMachineObj: ObjSlotMachine) {
@@ -52,14 +55,22 @@ export function mxnSlotMachineSecondaryDisplay(regionObj: Graphics, slotMachineO
         });
 }
 
-function getShowLinePrizeText(event: objSlotMachine.ShowLinePrizeEvent<any>) {
-    const name = `Line ${event.prize.index + 1}`;
-    const materialText = event.materialTexts[event.prize.material] ?? event.prize.material;
-    if (event.prize.credits && event.prize.material) {
-        return `${name} pays ${event.prize.credits}, ${materialText}`;
+function getShowLinePrizeText(prize: objSlotMachine.ShowLinePrizeEvent) {
+    const name = `Line ${prize.index + 1}`;
+    const materialText = prize.material ? getMaterialText(prize.material) : "This is a bug";
+    if (prize.credits && prize.material) {
+        return `${name} pays ${prize.credits}, ${materialText}`;
     }
-    if (event.prize.credits) {
-        return `${name} pays ${event.prize.credits}`;
+    if (prize.credits) {
+        return `${name} pays ${prize.credits}`;
     }
     return `${name} ${materialText}`;
+}
+
+function getMaterialText(material: RpgSlotMachine.Material) {
+    if (material.kind === "consume_potion") {
+        return "feeds " + DataPotion.getById(material.id).name;
+    }
+
+    return "awards " + DataItem.getNameQuantity(material.item, material.count);
 }
