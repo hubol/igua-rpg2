@@ -58,6 +58,23 @@ const ranks = {
             ],
         },
     }),
+    level2: RpgEnemyRank.create({
+        status: {
+            healthMax: 99,
+        },
+        loot: {
+            tier0: [
+                { kind: "pocket_item", id: "BoneTypeA", count: 9, weight: 50 },
+                { kind: "pocket_item", id: "BoneTypeA", count: 12, weight: 30 },
+                { kind: "pocket_item", id: "BoneTypeA", count: 15, weight: 20 },
+            ],
+            tier1: [
+                { kind: "equipment", id: "YellowRichesRing", weight: 10 },
+                { kind: "equipment", id: "RichesRing", weight: 10 },
+                { kind: "nothing", weight: 80 },
+            ],
+        },
+    }),
 };
 
 type Feature = "overheat_trail" | "fire_breath" | "throw_skull";
@@ -70,8 +87,13 @@ const variants = {
     },
     level1: {
         rank: ranks.level1,
-        features: new Set<Feature>(["fire_breath", "throw_skull"]),
+        features: new Set<Feature>(["fire_breath"]),
         looks: DataNpcLooks.Skeleton1,
+    },
+    level2: {
+        rank: ranks.level2,
+        features: new Set<Feature>(["fire_breath", "throw_skull"]),
+        looks: DataNpcLooks.Skeleton2,
     },
 };
 
@@ -208,11 +230,18 @@ export function objAngelSkeliguana(variantId: keyof typeof variants) {
                 isBreathingFire = false;
 
                 const tookDamage = obj.status.health < healthBeforeThisBreath;
+                const distanceToPlayerX = Math.abs(obj.mxnDetectPlayer.relativePosition.x);
+
+                if (!tookDamage && features.has("throw_skull") && distanceToPlayerX > 90) {
+                    yield sleep(200);
+                    yield* moves.throwSkull();
+                }
+
                 const speedLevel = tookDamage ? 1 : 0;
 
                 const walkDistance = tookDamage
                     ? Rng.int(60, 100)
-                    : Math.min(Math.max(1, Math.abs(obj.mxnDetectPlayer.relativePosition.x) - 50), 120);
+                    : Math.min(Math.max(1, distanceToPlayerX - 50), 120);
 
                 const staggered = yield* obj.mxnEnemy.dramaStagger(
                     (isStaggered) =>

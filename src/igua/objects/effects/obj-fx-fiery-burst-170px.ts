@@ -1,20 +1,24 @@
 import { Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { Rng } from "../../../lib/math/rng";
+import { CollisionShape } from "../../../lib/pixi/collision";
 import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
 import { mxnMotion } from "../../mixins/mxn-motion";
 import { objEphemeralSprite } from "../obj-ephemeral-sprite";
 import { FxPattern } from "./lib/fx-pattern";
 
-const txs = Tx.Effects.FieryBurst170px.split({ width: 170 });
+const txs = Tx.Effects.FieryBurst170px.split({ width: 170, trimFrame: true });
 
 export function objFxFieryBurst170px() {
-    return objEphemeralSprite(txs, 0.125).anchored(93 / 170, 83 / 150).coro(function* (self) {
-        yield () => self.index >= 1;
-        for (const { position, normal } of FxPattern.getRadialBurst({ count: 6, radius: [24, 48] })) {
-            objFxBoom().at(position).show(self).speed.at(normal, Rng.float(2, 4.5));
-        }
-    });
+    return objEphemeralSprite(txs, 0.125)
+        .collisionShape(CollisionShape.Children)
+        .anchored(93 / 170, 83 / 150)
+        .coro(function* (self) {
+            yield () => self.index >= 1;
+            for (const { position, normal } of FxPattern.getRadialBurst({ count: 6, radius: [24, 48] })) {
+                objFxBoom().at(position).show(self).speed.at(normal, Rng.float(2, 4.5));
+            }
+        });
 }
 
 const boomTints = [

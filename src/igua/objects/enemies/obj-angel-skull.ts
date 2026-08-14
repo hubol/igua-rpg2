@@ -84,6 +84,7 @@ export function objAngelSkull(args: objAngelSkull.Args) {
                 .coro(function* () {
                     let i = 0;
                     while (!rippleObj.destroyed) {
+                        self.speed.y = -1;
                         self.x += Rng.intp();
                         self.play(Sfx.Enemy.Skeliguana.SkullTick.rate(0.5 + (i++) * 0.2));
                         yield sleep(333);
