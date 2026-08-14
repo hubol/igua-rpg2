@@ -68,6 +68,7 @@ export namespace DataNpcPersona {
             Misha: { job: "Staff Engineer", name: "Misha", looksId: "SadMisha" },
             IndianaHallPainter: { job: "Creative Director", name: "Painch", looksId: "PrimaryMess" },
             OhioDmvClerk: { job: "Clerk", name: "Thenra'ahshi", looksId: "Hellion" },
+            OpenFood: { job: "Fooder", name: "Ribbit", looksId: "FriendlyGreen" },
             __Fallback__: { job: "???", name: "???", looksId: "MintyJourney" },
         } satisfies Record<string, Model>,
     );
