@@ -1,6 +1,7 @@
 import { Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
-import { approachLinear } from "../../../lib/math/number";
+import { approachLinear, nlerp } from "../../../lib/math/number";
 import { Integer, Unit } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
 import { mxnInteract } from "../../mixins/mxn-interact";
@@ -40,13 +41,14 @@ export function objEsotericDial(args: ObjEsotericDialArgs) {
     const dialObj = Sprite.from(txDial)
         .anchored(0.5, 0.5)
         .mixin(mxnInteract, () => {
-            // TODO sfx
+            dialObj.play(Sfx.Interact.DialReset.rate(0.9, 1.1));
             ticks = args.maxTicks;
             subticks = consts.maxSubticks;
         })
         .step(self => {
             if (ticks > 0 && --subticks <= 0) {
-                // TODO sfx
+                const f = ticks / args.maxTicks;
+                self.play(Sfx.Interact.DialTick.rate(nlerp(2, 0.5, f)));
                 subticks = consts.maxSubticks;
                 ticks -= 1;
             }
