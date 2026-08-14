@@ -1,20 +1,24 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { NoAtlasTx } from "../../assets/no-atlas-textures";
+import { ZIndex } from "../core/scene/z-index";
 import { DramaQuests } from "../drama/drama-quests";
 import { show } from "../drama/show";
 import { scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objCharacterFlower } from "../objects/characters/obj-character-flower";
 import { objItemAngelDropperQueue } from "../objects/characters/obj-item-angel-dropper-queue";
+import { objFigureFlop } from "../objects/figures/obj-figure-flop";
 import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
-import { ObjTerrain } from "../objects/obj-terrain";
+import { CtxTerrainPipe, ObjTerrain } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
 import { RpgQuest } from "../rpg/rpg-quests";
 
 export function scnMountFlopHouseInterior() {
-    // TODO should be quest
     const quest = Rpg.quest("MountFlop.Flower");
 
+    CtxTerrainPipe.value.texture = NoAtlasTx.Terrain.Pipe.Grate;
     const lvl = Lvl.MountFlopHouseInterior();
 
     objBossMusicPlayer({
@@ -23,6 +27,44 @@ export function scnMountFlopHouseInterior() {
         mzkPeace: Mzk.LingeringStraw,
     })
         .show();
+
+    const flopDexNumbers = [233, 528, 833];
+    const flopMessages = [
+        [
+            "The wizard is forever looking to the past.",
+            "Attempting to recreate whatever pathetic, convenient memory of that time remains.",
+        ],
+        [
+            "Perhaps the wizard is acting out of generations-long grief. After all, his companions were slain.",
+            "His cohorts were all masters of their elements. But he is not.",
+        ],
+        [
+            "At the depth of his hubris, he separated himself into the homunculi.",
+            "And they will also never master the elements. They are doomed to flounder in disfigured mediocrity.",
+        ],
+    ];
+
+    [lvl.FlopMarker0, lvl.FlopMarker1, lvl.FlopMarker2]
+        .forEach((position, i) => {
+            const flopObj = objFigureFlop.objFiltered(flopDexNumbers[i]);
+            flopObj
+                .mixin(mxnSpeaker, {
+                    name: "Flop Poster",
+                    tintPrimary: flopObj.state.tint.red,
+                    tintSecondary: flopObj.state.tint.green,
+                })
+                .mixin(mxnCutscene, function* () {
+                    yield* show(
+                        "A poster of a beloved Flop.",
+                        "A message is printed here:",
+                        ...flopMessages[i],
+                    );
+                })
+                .step(self => self.interact.enabled = !quest.isCompletable)
+                .at(position)
+                .zIndexed(ZIndex.BackgroundDecals)
+                .show();
+        });
 
     if (quest.isCompletable) {
         lvl.EnemySuggestive.mxnDetectPlayer.defaultRayDistance = 500;

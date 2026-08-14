@@ -33,6 +33,11 @@ export namespace objFigureFlop {
     export type FlopArgs = ReturnType<typeof getArgsFromPrimitiveArgs>;
 }
 
+objFigureFlop.objFiltered = function objFiltered (dexNumberZeroIndexed: Integer) {
+    const flopObj = objFigureFlop(dexNumberZeroIndexed);
+    return flopObj.filtered(flopObj.objects.filter);
+};
+
 objFigureFlop.objFromSeed = function objFromSeed (seed: Integer) {
     const primitiveArgs = getPrimitiveArgsFromFlopSeed(seed);
 
