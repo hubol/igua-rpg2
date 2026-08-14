@@ -22,6 +22,7 @@ import { objFxRipple } from "../effects/obj-fx-ripple";
 import { objIguanaLocomotive } from "../obj-iguana-locomotive";
 import { objProjectileCrackedEarthExpanding } from "../projectiles/obj-projectile-cracked-earth-expanding";
 import { objProjectileFlameOrb } from "../projectiles/obj-projectile-flame-orb";
+import { objAngelSkull } from "./obj-angel-skull";
 
 const ranks = {
     level0: RpgEnemyRank.create({
@@ -59,7 +60,7 @@ const ranks = {
     }),
 };
 
-type Feature = "overheat_trail" | "fire_breath";
+type Feature = "overheat_trail" | "fire_breath" | "throw_skull";
 
 const variants = {
     level0: {
@@ -69,7 +70,7 @@ const variants = {
     },
     level1: {
         rank: ranks.level1,
-        features: new Set<Feature>(["fire_breath"]),
+        features: new Set<Feature>(["fire_breath", "throw_skull"]),
         looks: DataNpcLooks.Skeleton1,
     },
 };
@@ -86,10 +87,16 @@ const atks = {
     fireBreath: RpgAttack.create({
         physical: 50,
     }),
+    skullExplode: RpgAttack.create({
+        physical: 70,
+    }),
 };
 
 export function objAngelSkeliguana(variantId: keyof typeof variants) {
     const { rank, features, looks } = variants[variantId];
+
+    const featuresDetectPlayer = features.has("fire_breath") || features.has("throw_skull");
+
     const hurtboxObjs = new Array<DisplayObject>();
     let sinceDamagedStepsCount = 999;
     let isBreathingFire = false;
@@ -247,6 +254,26 @@ export function objAngelSkeliguana(variantId: keyof typeof variants) {
                 holdf(() => obj.isOnGround, walkSteps),
             ]);
         },
+        *throwSkull() {
+            obj.isMovingLeft = false;
+            obj.isMovingRight = false;
+
+            yield () => obj.isOnGround;
+
+            const dir = Math.sign(obj.mxnDetectPlayer.relativePosition.x) || obj.facing;
+            obj.auto.facing = dir;
+            obj.speed.y = -2;
+
+            const skullObj = objAngelSkull({ attacker: obj.status, attack: atks.skullExplode })
+                .at(obj)
+                .add(0, -30)
+                .show();
+
+            skullObj.speed.x = dir * 4;
+            skullObj.speed.y = -3;
+
+            yield () => obj.speed.y >= 0 && obj.isOnGround;
+        },
     };
 
     obj.auto.facingMode = "check_moving";
@@ -277,7 +304,7 @@ export function objAngelSkeliguana(variantId: keyof typeof variants) {
             }
         })
         .coro(function* (self) {
-            if (features.has("fire_breath")) {
+            if (featuresDetectPlayer) {
                 return;
             }
 
@@ -286,7 +313,7 @@ export function objAngelSkeliguana(variantId: keyof typeof variants) {
             }
         })
         .coro(function* (self) {
-            if (!features.has("fire_breath")) {
+            if (!featuresDetectPlayer) {
                 return;
             }
 
@@ -304,7 +331,13 @@ export function objAngelSkeliguana(variantId: keyof typeof variants) {
                     yield* moves.expressSurprise();
                 }
 
-                yield* moves.breatheFire();
+                if (features.has("throw_skull") && Math.abs(self.mxnDetectPlayer.relativePosition.x) > 50) {
+                    yield* moves.throwSkull();
+                }
+
+                if (features.has("fire_breath")) {
+                    yield* moves.breatheFire();
+                }
             }
         })
         .coro(function* (self) {

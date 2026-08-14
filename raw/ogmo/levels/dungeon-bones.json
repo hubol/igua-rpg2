@@ -16,7 +16,41 @@
       "gridCellHeight": 8,
       "gridCellsX": 237,
       "gridCellsY": 142,
-      "entities": []
+      "entities": [
+        {
+          "name": "SafeMarker",
+          "id": 2,
+          "_eid": "85618544",
+          "x": 352,
+          "y": 512,
+          "originX": 7,
+          "originY": 7,
+          "tint": "#ffffff",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "SafeMarker",
+          "id": 3,
+          "_eid": "85618544",
+          "x": 520,
+          "y": 960,
+          "originX": 7,
+          "originY": 7,
+          "tint": "#ffffff",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "SafeMarker",
+          "id": 4,
+          "_eid": "85618544",
+          "x": 1000,
+          "y": 960,
+          "originX": 7,
+          "originY": 7,
+          "tint": "#ffffff",
+          "values": {"name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",
@@ -94,6 +128,17 @@
           "_eid": "93092164",
           "x": 82,
           "y": 105,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "PlayerDev",
+          "id": 1,
+          "_eid": "98101389",
+          "x": 672,
+          "y": 536,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
