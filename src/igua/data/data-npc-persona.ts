@@ -70,6 +70,9 @@ export namespace DataNpcPersona {
             OhioDmvClerk: { job: "Clerk", name: "Thenra'ahshi", looksId: "Hellion" },
             OpenFood: { job: "Fooder", name: "Ribbit", looksId: "FriendlyGreen" },
             OpenFlip: { job: "Fanatic", name: "Nice-One", looksId: "GenerousGum" },
+            OpenJump: { job: "Jumper", name: "Rash", looksId: "ButterFace" },
+            OpenCombat: { job: "Fighter", name: "Alfamayill", looksId: "AlphaMale" },
+            GluemakerOhio: { job: "Gluemaker", name: "Zaza", looksId: "LeekHead" },
             __Fallback__: { job: "???", name: "???", looksId: "MintyJourney" },
         } satisfies Record<string, Model>,
     );
