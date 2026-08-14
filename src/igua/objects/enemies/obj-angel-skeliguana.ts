@@ -258,21 +258,28 @@ export function objAngelSkeliguana(variantId: keyof typeof variants) {
             obj.isMovingLeft = false;
             obj.isMovingRight = false;
 
-            yield () => obj.isOnGround;
+            const remainingHealthUnit = obj.status.health / obj.status.healthMax;
+            const count = Rng.float() > remainingHealthUnit ? 2 : 1;
 
-            const dir = Math.sign(obj.mxnDetectPlayer.relativePosition.x) || obj.facing;
-            obj.auto.facing = dir;
-            obj.speed.y = -2;
+            for (let i = 0; i < count; i++) {
+                yield () => obj.isOnGround;
 
-            const skullObj = objAngelSkull({ attacker: obj.status, attack: atks.skullExplode })
-                .at(obj)
-                .add(0, -30)
-                .show();
+                const dir = Math.sign(obj.mxnDetectPlayer.relativePosition.x) || obj.facing;
+                obj.auto.facing = dir;
+                obj.speed.y = -2;
 
-            skullObj.speed.x = dir * 4;
-            skullObj.speed.y = -3;
+                obj.play(Sfx.Enemy.Skeliguana.Throw.rate(0.9, 1.1));
 
-            yield () => obj.speed.y >= 0 && obj.isOnGround;
+                const skullObj = objAngelSkull({ attacker: obj.status, attack: atks.skullExplode })
+                    .at(obj)
+                    .add(0, -30)
+                    .show();
+
+                skullObj.speed.x = dir * (i === 0 ? 4 : 2);
+                skullObj.speed.y = i === 0 ? -3 : -3;
+
+                yield () => obj.speed.y >= 0 && obj.isOnGround;
+            }
         },
     };
 
@@ -287,7 +294,7 @@ export function objAngelSkeliguana(variantId: keyof typeof variants) {
             sinceDamagedStepsCount = 0;
         })
         .coro(function* (self) {
-            self.isSkeleton = true;
+            self.mxnIguanaSprites.isSkeleton = true;
             hurtboxObjs.push(self.head, self.body);
         })
         .step(() => sinceDamagedStepsCount++)
