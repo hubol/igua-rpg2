@@ -8,7 +8,7 @@ import { ObjSlotMachine, objSlotMachine } from "../objects/obj-slot-machine";
 import { RpgSlotMachine } from "../rpg/rpg-slot-machine";
 import { mxnBoilSeed } from "./mxn-boil-seed";
 
-export function mxnSlotMachineSecondaryDisplay(regionObj: Graphics, slotMachineObj: ObjSlotMachine) {
+export function mxnSlotMachineSecondaryDisplay(regionObj: Graphics, slotMachineObj: ObjSlotMachine, timeScale = 1) {
     return slotMachineObj
         .coro(function* () {
             regionObj.visible = true;
@@ -25,8 +25,8 @@ export function mxnSlotMachineSecondaryDisplay(regionObj: Graphics, slotMachineO
                             if (scroll > 0) {
                                 scroll += 2;
                             }
-                            yield interpvr(self.pivot).to(scroll, 0).over(300);
-                            yield interpvr(self.pivot).to(-scroll, 0).over(300);
+                            yield interpvr(self.pivot).to(scroll, 0).over(300 * timeScale);
+                            yield interpvr(self.pivot).to(-scroll, 0).over(300 * timeScale);
                         }
                     }
                 })

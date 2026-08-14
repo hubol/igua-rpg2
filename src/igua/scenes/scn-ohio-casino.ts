@@ -94,7 +94,10 @@ export function scnOhioCasino() {
                 },
                 lineHighlightTint: 0xFF5E42,
             },
-            undefined,
+            {
+                tone: Sfx.Interact.SlotMachine.Tone2,
+                win: Sfx.Interact.SlotMachine.Win2,
+            },
             currencyId,
         )
             .at(lvl.SlotDisplay1)
@@ -102,7 +105,7 @@ export function scnOhioCasino() {
             .show();
 
         lvl.SlotMessage1
-            .mixin(mxnSlotMachineSecondaryDisplay, slotMachineObj);
+            .mixin(mxnSlotMachineSecondaryDisplay, slotMachineObj, 5);
 
         lvl.SlotBetButton1
             .mixin(mxnSlotMachineBetButton, slotMachineObj);
