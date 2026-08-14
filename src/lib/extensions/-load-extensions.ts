@@ -3,6 +3,7 @@ import "./js-array-vector";
 import "./pixi-anchored";
 import "./pixi-collision";
 import "./pixi-color";
+import "./pixi-container-find";
 import "./pixi-container-flip";
 import "./pixi-displayobject-coro";
 import "./pixi-displayobject-convenience";
