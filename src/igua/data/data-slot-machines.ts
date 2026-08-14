@@ -175,8 +175,6 @@ export namespace DataSlotMachines {
     }
 
     export namespace BasicThreeReel {
-        type Material = never;
-
         export const sym = {
             empty: {
                 identity: "fixed",
@@ -257,8 +255,6 @@ export namespace DataSlotMachines {
     }
 
     export namespace SingleLineThreeReel {
-        type Material = never;
-
         export const sym = {
             bar: {
                 identity: "fixed",
@@ -319,6 +315,66 @@ export namespace DataSlotMachines {
                     sym.bar,
                     sym.wild,
                     sym.bar,
+                ],
+            ],
+        };
+    }
+
+    export namespace SingleReelMaterial {
+        export const sym = {
+            patheticRefund: {
+                countsToPrize: [1],
+                prizeCondition: "line_from_left_consecutive",
+                identity: "fixed",
+            },
+            heal: {
+                countsToPrize: [],
+                prizeCondition: "line_from_left_consecutive",
+                identity: "fixed",
+                countsToMaterial: [{ kind: "consume_potion", id: "RestoreHealth" }],
+            },
+            cure: {
+                countsToPrize: [],
+                prizeCondition: "line_from_left_consecutive",
+                identity: "fixed",
+                countsToMaterial: [{ kind: "consume_potion", id: "PoisonRestore" }],
+            },
+            flop: {
+                countsToPrize: [],
+                prizeCondition: "line_from_left_consecutive",
+                identity: "fixed",
+                countsToMaterial: [{
+                    kind: "receive_item",
+                    item: { kind: "key_item", id: "FlopBlindBoxTypeB" },
+                    count: 1,
+                }],
+            },
+            flopMany: {
+                countsToPrize: [],
+                prizeCondition: "line_from_left_consecutive",
+                identity: "fixed",
+                countsToMaterial: [{
+                    kind: "receive_item",
+                    item: { kind: "key_item", id: "FlopBlindBoxTypeB" },
+                    count: 7,
+                }],
+            },
+        } satisfies SymbolsManifest;
+
+        export const rules: RpgSlotMachine.Rules = {
+            height: 1,
+            lines: [
+                [0],
+            ],
+            price: 5,
+            reels: [
+                [
+                    sym.heal,
+                    sym.cure,
+                    sym.flop,
+                    sym.cure,
+                    sym.flopMany,
+                    sym.patheticRefund,
                 ],
             ],
         };

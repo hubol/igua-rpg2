@@ -15,9 +15,10 @@ const rulesManifest = [
     entry("BasicThreeReel", DataSlotMachines.BasicThreeReel.rules),
     entry("LowVolatilityGrid", DataSlotMachines.LowVolatilityGrid.rules),
     entry("SingleLineThreeReel", DataSlotMachines.SingleLineThreeReel.rules),
+    entry("SingleReelMaterial", DataSlotMachines.SingleReelMaterial.rules),
 ];
 
-const defaultRules = DataSlotMachines.SingleLineThreeReel.rules;
+const defaultRules = DataSlotMachines.SingleReelMaterial.rules;
 
 export function scnSlotMachineSimulator() {
     scene.style.backgroundTint = 0x1c1336;
@@ -50,7 +51,7 @@ function getMaterialIdentity(material: RpgSlotMachine.Material) {
     if (material.kind === "consume_potion") {
         return `consume(${material.id})`;
     }
-    return `receive(${material.item}, ${material.count})`;
+    return `receive(${material.item.id}, ${material.count})`;
 }
 
 function objSlotMachineSimulator(id: string, rules: RpgSlotMachine.Rules) {
@@ -75,8 +76,10 @@ function objSlotMachineSimulator(id: string, rules: RpgSlotMachine.Rules) {
                 won += totalPrize;
                 maxPrize = Math.max(totalPrize, maxPrize);
                 prizeCreditCounts.set(totalPrize, (prizeCreditCounts.get(totalPrize) ?? 0) + 1);
-                for (const { index, material } of linePrizes) {
-                    linePrizeCreditCounts.set(index, (linePrizeCreditCounts.get(index) ?? 0) + 1);
+                for (const { index, material, credits } of linePrizes) {
+                    if (credits) {
+                        linePrizeCreditCounts.set(index, (linePrizeCreditCounts.get(index) ?? 0) + 1);
+                    }
                     if (material) {
                         const materialIdentity = getMaterialIdentity(material);
                         prizeMaterialCounts.set(materialIdentity, (prizeMaterialCounts.get(materialIdentity) ?? 0) + 1);

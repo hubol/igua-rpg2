@@ -326,7 +326,7 @@ function objLineHighlighter(reelObjs: ObjReel[], transform: Matrix) {
             line = value;
             gfx.clear();
 
-            if (!line) {
+            if (!line || reelObjs.length < 2) {
                 return;
             }
 

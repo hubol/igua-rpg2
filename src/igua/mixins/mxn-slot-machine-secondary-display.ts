@@ -48,7 +48,7 @@ export function mxnSlotMachineSecondaryDisplay(regionObj: Graphics, slotMachineO
                     "objSlotMachine.showGamePrize",
                     (_, event) => {
                         if (event.totalPrize > 0) {
-                            textObj.text = `Game pays ${event}`;
+                            textObj.text = `Game pays ${event.totalPrize}`;
                         }
                     },
                 );

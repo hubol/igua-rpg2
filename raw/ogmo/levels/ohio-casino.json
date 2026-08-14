@@ -68,22 +68,11 @@
           "values": {"name": "", "depth": 0}
         },
         {
-          "name": "Marker",
-          "id": 6,
-          "_eid": "73148747",
-          "x": 892,
-          "y": 66,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#00ff00",
-          "values": {"name": "SlotMachineDisplay1", "depth": 0}
-        },
-        {
           "name": "EnvironmentSparkleMarker",
           "id": 7,
           "_eid": "61143896",
-          "x": 890,
-          "y": 16,
+          "x": 938,
+          "y": 64,
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
@@ -92,8 +81,8 @@
           "name": "EnvironmentSparkleMarker",
           "id": 8,
           "_eid": "61143896",
-          "x": 1008,
-          "y": 25,
+          "x": 1085,
+          "y": 74,
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
@@ -102,8 +91,8 @@
           "name": "EnvironmentSparkleMarker",
           "id": 9,
           "_eid": "61143896",
-          "x": 961,
-          "y": 1,
+          "x": 1124,
+          "y": 207,
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
@@ -112,8 +101,8 @@
           "name": "EnvironmentSparkleMarker",
           "id": 10,
           "_eid": "61143896",
-          "x": 954,
-          "y": 44,
+          "x": 994,
+          "y": 76,
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
@@ -122,8 +111,8 @@
           "name": "EnvironmentSparkleMarker",
           "id": 11,
           "_eid": "61143896",
-          "x": 1047,
-          "y": 17,
+          "x": 1135,
+          "y": 106,
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
@@ -132,8 +121,8 @@
           "name": "EnvironmentSparkleMarker",
           "id": 12,
           "_eid": "61143896",
-          "x": 1083,
-          "y": 27,
+          "x": 1063,
+          "y": 119,
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
@@ -230,19 +219,6 @@
         },
         {
           "name": "Region",
-          "id": 2,
-          "_eid": "11908607",
-          "x": 893,
-          "y": 179,
-          "width": 97,
-          "height": 19,
-          "originX": 0,
-          "originY": 0,
-          "tint": "#00ff00",
-          "values": {"name": "SlotMachineSecondaryDisplay1", "depth": 0}
-        },
-        {
-          "name": "Region",
           "id": 3,
           "_eid": "11908607",
           "x": 475,
@@ -253,6 +229,45 @@
           "originY": 0,
           "tint": "#00ff00",
           "values": {"name": "SlotMachineDisplay0", "depth": 0}
+        },
+        {
+          "name": "Region",
+          "id": 4,
+          "_eid": "11908607",
+          "x": 936,
+          "y": 192,
+          "width": 96,
+          "height": 24,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "SlotBetButton1", "depth": 0}
+        },
+        {
+          "name": "Region",
+          "id": 5,
+          "_eid": "11908607",
+          "x": 1081,
+          "y": 160,
+          "width": 90,
+          "height": 32,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "SlotMessage1", "depth": 0}
+        },
+        {
+          "name": "Region",
+          "id": 6,
+          "_eid": "11908607",
+          "x": 979,
+          "y": 111,
+          "width": 49,
+          "height": 35,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "SlotDisplay1", "depth": 0}
         }
       ]
     },
@@ -276,7 +291,8 @@
           "texture": "furniture/column giant 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 840,
@@ -288,7 +304,8 @@
           "texture": "furniture/column giant 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 312,
@@ -300,7 +317,8 @@
           "texture": "furniture/column giant 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1070,
@@ -534,7 +552,20 @@
       "gridCellHeight": 8,
       "gridCellsX": 168,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 1040,
+          "y": 143,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "casino/slots/lucky guy.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -680,32 +711,8 @@
           "texture": "casino/slots/machine evil skeleton.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
-        },
-        {
-          "x": 984,
-          "y": 120,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "casino/slots/machine stupid flower.png",
-          "originX": 0.5,
-          "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
-        },
-        {
-          "x": 987,
-          "y": 192,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#167055",
-          "texture": "shapes/circle irregular26.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""}
         },
         {
           "x": 613,
@@ -718,253 +725,6 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": "SlotMachineBetButton0"},
-          "groupName": null
-        },
-        {
-          "x": 943,
-          "y": 212,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ffffff",
-          "texture": "casino/slots/ten valuable bet.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 1083,
-          "y": 219,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#046a5f",
-          "texture": "foliage/medium0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 880,
-          "y": 221,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#046a5f",
-          "texture": "foliage/medium0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 899,
-          "y": 229,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#046a5f",
-          "texture": "foliage/medium0.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 1084,
-          "y": 75,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#046a5f",
-          "texture": "foliage/vine2.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 1079,
-          "y": 113,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#046a5f",
-          "texture": "foliage/vine2.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 1083,
-          "y": 152,
-          "scaleX": 1,
-          "scaleY": -1,
-          "rotation": 0,
-          "tint": "#046a5f",
-          "texture": "foliage/vine2.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 886,
-          "y": 78,
-          "scaleX": 1,
-          "scaleY": -1,
-          "rotation": 0,
-          "tint": "#046a5f",
-          "texture": "foliage/vine2.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 883,
-          "y": 117,
-          "scaleX": 1,
-          "scaleY": -1,
-          "rotation": 0,
-          "tint": "#046a5f",
-          "texture": "foliage/vine2.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 886,
-          "y": 157,
-          "scaleX": 1,
-          "scaleY": -1,
-          "rotation": 0,
-          "tint": "#046a5f",
-          "texture": "foliage/vine2.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 1088,
-          "y": 96,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#efc655",
-          "texture": "foliage/flower 14.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 884,
-          "y": 135,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#efc655",
-          "texture": "foliage/flower 14.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 884,
-          "y": 74,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ff5e42",
-          "texture": "foliage/flower 22.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 1087,
-          "y": 174,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ff5e42",
-          "texture": "foliage/flower 22.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 1032,
-          "y": 197,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#ff5e42",
-          "texture": "shapes/circle irregular26.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 1031,
-          "y": 193,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#efc655",
-          "texture": "casino/slots/ok button.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": "SlotMachineBetButton1"},
-          "groupName": null
-        },
-        {
-          "x": 1064,
-          "y": 169,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#046a5f",
-          "texture": "shapes/confetti18x8.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 913,
-          "y": 65,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#046a5f",
-          "texture": "shapes/confetti18x8.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 907,
-          "y": 197,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#046a5f",
-          "texture": "shapes/confetti18x8.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
           "groupName": null
         }
       ],
@@ -1380,7 +1140,8 @@
           "texture": "terrain/distant/steps 486.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 584,
@@ -1392,7 +1153,8 @@
           "texture": "terrain/distant/steps 486.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 104,
@@ -1404,7 +1166,8 @@
           "texture": "terrain/distant/steps 486.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1015,
@@ -1416,7 +1179,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 959,
@@ -1428,7 +1192,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 903,
@@ -1440,7 +1205,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1213,
@@ -1452,7 +1218,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1157,
@@ -1464,7 +1231,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1101,
@@ -1476,7 +1244,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 535,
@@ -1488,7 +1257,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 479,
@@ -1500,7 +1270,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 423,
@@ -1512,7 +1283,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 733,
@@ -1524,7 +1296,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 653,
@@ -1536,7 +1309,8 @@
           "texture": "furniture/giant curtain distant 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 677,
@@ -1548,7 +1322,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 621,
@@ -1560,7 +1335,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 55,
@@ -1572,7 +1348,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": -1,
@@ -1584,7 +1361,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": -57,
@@ -1596,7 +1374,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 253,
@@ -1608,7 +1387,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 197,
@@ -1620,7 +1400,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 141,
@@ -1632,7 +1413,8 @@
           "texture": "terrain/distant/slot machine 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 274,
@@ -1644,7 +1426,8 @@
           "texture": "furniture/giant curtain distant 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 844,
@@ -1656,7 +1439,8 @@
           "texture": "furniture/giant curtain distant 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

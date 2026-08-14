@@ -27,7 +27,7 @@ import { RpgEconomy } from "../rpg/rpg-economy";
 // TODO this is all copy-paste from indiana casino
 const slotTxs = {
     evil: Tx.Casino.Slots.Evil.split({ count: 4 }),
-    happiness: Tx.Casino.Slots.Happiness.split({ count: 4 }),
+    someMaterials: Tx.Casino.Slots.SomeMaterials.split({ width: 50 }),
 };
 
 export function scnOhioCasino() {
@@ -76,34 +76,35 @@ export function scnOhioCasino() {
     }
 
     {
-        const { rules, sym } = DataSlotMachines.LowVolatilityGrid;
+        const { rules, sym } = DataSlotMachines.SingleReelMaterial;
 
         const slotMachineObj = objSlotMachine(
             rules,
             {
-                mask: { y: 1, height: 98 },
-                reel: { gap: 46 },
-                slot: { gap: 33 },
+                mask: { y: -4, height: 41 },
+                reel: { gap: 54 },
+                slot: { gap: 36 },
                 sym,
                 symbolTxs: {
-                    happy: slotTxs.happiness[0],
-                    uberHappy: slotTxs.happiness[1],
-                    omegaHappy: slotTxs.happiness[2],
-                    wild: slotTxs.happiness[3],
+                    heal: slotTxs.someMaterials[0],
+                    flop: slotTxs.someMaterials[1],
+                    patheticRefund: slotTxs.someMaterials[2],
+                    flopMany: slotTxs.someMaterials[3],
+                    cure: slotTxs.someMaterials[4],
                 },
                 lineHighlightTint: 0xFF5E42,
             },
             undefined,
             currencyId,
         )
-            .at(lvl.SlotMachineDisplay1)
+            .at(lvl.SlotDisplay1)
             .zIndexed(ZIndex.Entities)
             .show();
 
-        lvl.SlotMachineSecondaryDisplay1
+        lvl.SlotMessage1
             .mixin(mxnSlotMachineSecondaryDisplay, slotMachineObj);
 
-        lvl.SlotMachineBetButton1
+        lvl.SlotBetButton1
             .mixin(mxnSlotMachineBetButton, slotMachineObj);
     }
 
