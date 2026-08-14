@@ -1618,6 +1618,18 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 3175,
+          "y": 2568,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#eeff03",
+          "texture": "foliage/tree simple 112px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -6796,7 +6808,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
-          "tint": "#f0d029",
+          "tint": "#eeff03",
           "texture": "world map/tree 1.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -6809,7 +6821,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
-          "tint": "#f0d029",
+          "tint": "#eeff03",
           "texture": "world map/tree 0.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -6822,7 +6834,7 @@
           "scaleX": -1,
           "scaleY": 1,
           "rotation": 0,
-          "tint": "#f0d029",
+          "tint": "#eeff03",
           "texture": "world map/tree 0.png",
           "originX": 0.5,
           "originY": 0.5,

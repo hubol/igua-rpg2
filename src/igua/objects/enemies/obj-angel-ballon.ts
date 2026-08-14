@@ -115,7 +115,7 @@ export function objAngelBallon() {
         .mixin(mxnDetectPlayer)
         .mixin(mxnPhysics, { gravity: 0, physicsRadius: 16 })
         .handles("damaged", (self, value) => {
-            if (!value.rejected) {
+            if (!value.rejected && value.damaged) {
                 const burstObj = objAngelBallonHeliumBurst("small")
                     .at(self)
                     .show();

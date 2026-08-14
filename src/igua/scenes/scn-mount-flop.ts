@@ -1,5 +1,6 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { Jukebox } from "../core/igua-audio";
@@ -8,10 +9,12 @@ import { scene } from "../globals";
 import { mxnFxBlink } from "../mixins/effects/mxn-fx-blink";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { CtxTerrainPipe } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
 
 export function scnMountFlop() {
     Jukebox.play(Mzk.EditableMoog);
+    CtxTerrainPipe.value.texture = NoAtlasTx.Terrain.Pipe.Grate;
     const lvl = Lvl.MountFlop();
     enrichBestFriendHaverNpc(lvl);
 }
