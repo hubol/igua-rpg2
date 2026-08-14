@@ -73,6 +73,7 @@ export namespace DataNpcPersona {
             OpenJump: { job: "Jumper", name: "Rash", looksId: "ButterFace" },
             OpenCombat: { job: "Fighter", name: "Alfamayill", looksId: "AlphaMale" },
             GluemakerOhio: { job: "Gluemaker", name: "Zaza", looksId: "LeekHead" },
+            CobblerOhio: { job: "Cobbler", name: "Zika", looksId: "StuffedOlive" },
             __Fallback__: { job: "???", name: "???", looksId: "MintyJourney" },
         } satisfies Record<string, Model>,
     );
