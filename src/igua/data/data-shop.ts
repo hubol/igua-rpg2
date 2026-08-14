@@ -368,6 +368,26 @@ export namespace DataShop {
             OpenCombat: {
                 stocks: [
                     {
+                        product: { kind: "equipment", id: "OverheatResistance0", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "valuables", deltaSold: 0, initial: 25 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "OverheatResistance1", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "valuables", deltaSold: 0, initial: 50 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "OverheatResistance2", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "valuables", deltaSold: 0, initial: 100 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "OverheatResistance3", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "valuables", deltaSold: 0, initial: 150 },
+                    },
+                    {
                         product: { kind: "equipment", id: "DefensePhysicalAndPerfectBonus", level: 1 },
                         initialQuantity: 1,
                         price: { currency: "valuables", deltaSold: 0, initial: 250 },
@@ -382,16 +402,10 @@ export namespace DataShop {
                         initialQuantity: 1,
                         price: { currency: "valuables", deltaSold: 0, initial: 250 },
                     },
-
                     {
                         product: { kind: "potion", id: "AttributeHealthUp" },
                         initialQuantity: 3,
                         price: { currency: "valuables", deltaSold: 100, initial: 300 },
-                    },
-                    {
-                        product: { kind: "potion", id: "AttributeStrengthUp" },
-                        initialQuantity: 1,
-                        price: { currency: "valuables", deltaSold: 0, initial: 750 },
                     },
                 ],
             },
