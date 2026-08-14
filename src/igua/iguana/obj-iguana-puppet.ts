@@ -1,4 +1,4 @@
-import { DisplayObject, Rectangle, Sprite } from "pixi.js";
+import { Container, DisplayObject, Rectangle, Sprite } from "pixi.js";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer, Polar, Unit, ZeroOrGreater } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
@@ -7,6 +7,7 @@ import { CollisionShape } from "../../lib/pixi/collision";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { Force } from "../../lib/types/force";
+import { Null } from "../../lib/types/null";
 import { mxnBallonable } from "../mixins/mxn-ballonable";
 import { mxnHasHead } from "../mixins/mxn-has-head";
 import { mxnSpeakingMouth } from "../mixins/mxn-speaking-mouth";
@@ -50,9 +51,6 @@ function getFlippableOffsetX(src: DisplayObject | undefined, dst: DisplayObject,
 }
 
 export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
-    const iguanaSprites: IguanaSprite[] = [];
-    IguanaSprite.resetList();
-
     const { back, front, controller: feetController, feet } = objIguanaFeet(looks.feet);
     const body = objIguanaBody(looks.body);
     const head = objIguanaHead(looks.head);
@@ -80,9 +78,6 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
     let isLanding = false;
     let landingFrames: Integer = 0;
     let landingFramesMax = 0;
-
-    let isRobotic = false;
-    let isSkeleton = false;
 
     const core = container(body, head);
 
@@ -288,52 +283,9 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
                 }
             },
             groundMaterial: Material.Earth,
-            get isRobotic() {
-                return isRobotic;
-            },
-            set isRobotic(value) {
-                if (isRobotic === value) {
-                    return;
-                }
-
-                for (let i = 0; i < iguanaSprites.length; i++) {
-                    iguanaSprites[i].setIsRobotic(value);
-                }
-
-                isRobotic = value;
-            },
-            get isSkeleton() {
-                return isSkeleton;
-            },
-            set isSkeleton(value) {
-                if (isSkeleton === value) {
-                    return;
-                }
-
-                for (let i = 0; i < iguanaSprites.length; i++) {
-                    iguanaSprites[i].setIsSkeleton(value);
-                }
-
-                isSkeleton = value;
-            },
         })
         .step(applyAnimation)
-        .coro(function* () {
-            while (true) {
-                for (let i = 0; i < iguanaSprites.length; i++) {
-                    iguanaSprites[i].setBoiled(Rng.bool());
-                    if (Rng.bool()) {
-                        yield sleep(20);
-                    }
-                }
-
-                yield sleep(40);
-            }
-        });
-
-    for (const sprite of IguanaSprite.getList()) {
-        iguanaSprites.push(sprite);
-    }
+        .mixin(mxnIguanaSprites);
 
     c.cullable = true;
 
@@ -706,6 +658,65 @@ function objIguanaCrest(crest: Crest) {
     return c;
 }
 
+export function mxnIguanaSprites(obj: Container) {
+    let isRobotic = false;
+    let isSkeleton = false;
+
+    let iguanaSprites = Null<Array<IguanaSprite>>();
+
+    const api = {
+        get isRobotic() {
+            return isRobotic;
+        },
+        set isRobotic(value) {
+            if (isRobotic === value) {
+                return;
+            }
+
+            iguanaSprites ??= obj.findInstancesOf(IguanaSprite);
+
+            for (let i = 0; i < iguanaSprites.length; i++) {
+                iguanaSprites[i].setIsRobotic(value);
+            }
+
+            isRobotic = value;
+        },
+        get isSkeleton() {
+            return isSkeleton;
+        },
+        set isSkeleton(value) {
+            if (isSkeleton === value) {
+                return;
+            }
+
+            iguanaSprites ??= obj.findInstancesOf(IguanaSprite);
+
+            for (let i = 0; i < iguanaSprites.length; i++) {
+                iguanaSprites[i].setIsSkeleton(value);
+            }
+
+            isSkeleton = value;
+        },
+    };
+
+    return obj
+        .merge({ mxnIguanaSprites: api })
+        .coro(function* () {
+            while (true) {
+                iguanaSprites ??= obj.findInstancesOf(IguanaSprite);
+
+                for (let i = 0; i < iguanaSprites.length; i++) {
+                    iguanaSprites[i].setBoiled(Rng.bool());
+                    if (Rng.bool()) {
+                        yield sleep(20);
+                    }
+                }
+
+                yield sleep(40);
+            }
+        });
+}
+
 type Eye = Head["eyes"]["left"];
 
 const scleraTx = IguanaShapes.Eye[0];
@@ -785,23 +796,12 @@ function objIguanaEyes(head: Head) {
 }
 
 class IguanaSprite extends Sprite {
-    private static readonly _list: IguanaSprite[] = [];
-
-    static resetList() {
-        this._list.length = 0;
-    }
-
-    static getList() {
-        return this._list;
-    }
-
     private _boiled = false;
     private _isRobotic = false;
     private _isSkeleton = false;
 
     constructor(readonly shape: IguanaShape) {
         super(shape.Tx);
-        IguanaSprite._list.push(this);
     }
 
     setBoiled(value: boolean) {

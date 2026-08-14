@@ -31,7 +31,7 @@ export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger
                     playerObj.speed,
                     playerObj.head.mouth.isSmoking,
                     playerObj.sparklesPerFrame > 0,
-                    playerObj.isRobotic,
+                    playerObj.mxnIguanaSprites.isRobotic,
                 );
             }
         })
@@ -72,7 +72,7 @@ export function objNetRoom(client: IguaClient, offlineSceneChanger: SceneChanger
 
                 iguanaObj.head.mouth.isSmoking = Boolean(iguana.flags & (0b1));
                 iguanaObj.sparklesPerFrame = Boolean(iguana.flags & (0b10)) ? 0.1 : 0;
-                iguanaObj.isRobotic = Boolean(iguana.flags & (0b100));
+                iguanaObj.mxnIguanaSprites.isRobotic = Boolean(iguana.flags & (0b100));
             }
 
             for (const iguanaIdString in iguanaObjsById) {
