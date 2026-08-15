@@ -9,6 +9,7 @@ import { scene } from "../globals";
 import { mxnFxBlink } from "../mixins/effects/mxn-fx-blink";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { objCharacterBoxer } from "../objects/characters/obj-character-boxer";
 import { CtxTerrainPipe } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
 
@@ -17,6 +18,13 @@ export function scnMountFlop() {
     CtxTerrainPipe.value.texture = NoAtlasTx.Terrain.Pipe.Grate;
     const lvl = Lvl.MountFlop();
     enrichBestFriendHaverNpc(lvl);
+    enrichBoxer(lvl);
+}
+
+function enrichBoxer(lvl: LvlType.MountFlop) {
+    objCharacterBoxer()
+        .at(lvl.BoxerMarker)
+        .show();
 }
 
 function enrichBestFriendHaverNpc(lvl: LvlType.MountFlop) {

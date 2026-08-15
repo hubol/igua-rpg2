@@ -405,6 +405,17 @@
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 41,
+          "_eid": "73148747",
+          "x": 2512,
+          "y": 1239,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "BoxerMarker", "depth": 0}
         }
       ]
     },
@@ -993,7 +1004,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
-          "tint": "#ffffff",
+          "tint": "#a3a3a3",
           "texture": "stone/rock large shaded.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -1001,8 +1012,8 @@
           "groupName": null
         },
         {
-          "x": 2512,
-          "y": 1237,
+          "x": 2546,
+          "y": 1226,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1053,8 +1064,8 @@
           "groupName": null
         },
         {
-          "x": 2551,
-          "y": 1202,
+          "x": 2544,
+          "y": 1186,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1066,8 +1077,8 @@
           "groupName": null
         },
         {
-          "x": 2565,
-          "y": 1198,
+          "x": 2558,
+          "y": 1185,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1657,7 +1668,7 @@
           "_eid": "93117141",
           "x": 2088,
           "y": 1144,
-          "width": 496,
+          "width": 376,
           "height": 56,
           "originX": 0,
           "originY": 0,
@@ -1806,6 +1817,19 @@
           "y": 240,
           "width": 128,
           "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 36,
+          "_eid": "93117141",
+          "x": 2464,
+          "y": 1144,
+          "width": 120,
+          "height": 40,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ab21c1",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -3194,6 +3218,18 @@
           "originY": 0,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 2472,
+          "y": 1189,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ab21c1",
+          "texture": "shapes/right triangle 24px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
