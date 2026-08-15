@@ -25,7 +25,7 @@ export function scnIndianaHallSnowman() {
     treeObjs[0].handles("objEsotericHotPineConeTree.coneReleased", () => releasedPineCone = true);
 
     [lvl.FireMarker0, lvl.FireMarker1, lvl.FireMarker2]
-        .forEach(obj => objEsotericDecorationCampfire().at(obj).show(scene.parallaxStage));
+        .forEach(obj => objEsotericDecorationCampfire().at(obj).show(scene.parallaxStages[0]));
 
     scene.stage
         .coro(function* () {

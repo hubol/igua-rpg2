@@ -35,6 +35,11 @@ function getCameraPositionToFrameSubject(
 
 const v = vnew();
 
+const parallaxFactors = [
+    0.8,
+    0.6,
+];
+
 export function objCamera(isWorldMap: boolean) {
     // TODO need way to snap to desired position e.g. on level load
 
@@ -114,8 +119,12 @@ export function objCamera(isWorldMap: boolean) {
         scene.stage.x = Math.round(-self.x);
         scene.stage.y = Math.round(-self.y);
 
-        scene.parallaxStage.x = Math.round(-self.x * parallaxFactor);
-        scene.parallaxStage.y = Math.round(-self.y * parallaxFactor);
+        for (let i = 0; i < scene.parallaxStages.length; i++) {
+            const factor = isWorldMap ? 1 : parallaxFactors[i];
+            const stage = scene.parallaxStages[i];
+            stage.x = Math.round(-self.x * factor);
+            stage.y = Math.round(-self.y * factor);
+        }
     }, StepOrder.Camera);
 
     return obj;

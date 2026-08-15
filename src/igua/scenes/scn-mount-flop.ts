@@ -63,7 +63,7 @@ function enrichBoxer(lvl: LvlType.MountFlop) {
 
             while (true) {
                 const result = yield* ask(
-                    "Do you want to play a game? If you win, I'll give you something nice. If you lose, I will punch you. It will hurt very bad.",
+                    "Do you want to play a game? If you win, I'll give you something nice. If you lose, I will punch you.",
                     "Yes",
                     "No",
                     "How bad will it hurt?",

@@ -9,7 +9,11 @@ export function ogmoAddToLayer(obj: DisplayObject, layerName: string) {
     }
 
     if (layerName === "ParallaxDecals") {
-        obj.show(scene.parallaxStage);
+        obj.show(scene.parallaxStages[0]);
+    }
+
+    if (layerName === "ParallaxFarDecals") {
+        obj.show(scene.parallaxStages[1]);
     }
 
     if (!obj.parent) {

@@ -90,6 +90,8 @@ export const fntErotixLight = createBitmapFont(Tx.Font.ErotixLight, {
         "+": { x: 135, y: 27, w: 3, h: 3, xadv: 4, yoff: 2 },
         _: { x: 132, y: 21, w: 7, h: 1, xadv: 8, yoff: 6 },
         "#": { x: 154, y: 0, w: 6, h: 9, xadv: 7, yoff: -1 },
+        "{": { x: 160, y: 23, w: 5, h: 9, xadv: 6, yoff: -1 },
+        "}": { x: 166, y: 23, w: 5, h: 9, xadv: 6, yoff: -1 },
     },
     kernings: [
         ["b", "j", -2],
@@ -106,5 +108,6 @@ export const fntErotixLight = createBitmapFont(Tx.Font.ErotixLight, {
         ["J", "m", -1],
         ["J", "u", -2],
         ["T", "o", -1],
+        ["}", ",", -1],
     ],
 });

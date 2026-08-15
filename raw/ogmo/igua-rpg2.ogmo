@@ -155,7 +155,21 @@
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
+      ]
+    },
+    {
+      "definition": "decal",
+      "name": "ParallaxFarDecals",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "79996540",
+      "folder": "../textures",
+      "includeImageSequence": true,
+      "scaleable": true,
+      "rotatable": true,
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
       ]
@@ -2284,7 +2298,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/binocular viewer.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAmCAYAAACCjRgBAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIsSURBVFhH7Za7TgJBFIYH7KSwN6INuBTGEisLE7Wi0lZM9An0DXwDfQJNxNhpRWVMLKykNBQgNAqxt9BS5MzOmMMy971J5Es2M7vZPfP/Z+bMDpl0MqzV0qktDlg3MYrVN60+7QtJCS/svbIeId2rJdbzURnJslZIGlkHsBlApUNqIC3xHFMT0qmRGrhjbQwULkdFA3g5iZaScgmNAMJjFA9090fXvgl6AwkIx4yZ0IytXkKKj72bZdbzae++sJ45VjG2xUuIPsDrnb8kM4AHnc+vsB4h770mbU2MOMVABrBe+mAwhN4NyZeOaftQvqUtJpgxPnhubpW0ng5ofya3pTQRJsZGY4e2vdYpbQFaA1Dp/LKBZywMLjGwXuNdKJg5Dgj4/HgmpbULekFGZe9GESPImAEIZpsVeL/TvKYiXDGJIdLmG+BbpWbL0iEawBajGEivb2BY4fz6/rrPwEWfB8A7hithYvxqQ3qFQoFOdfwoAesSBOgypNuFXGMUa2GOEoi0ZwIjnQFANguALIuq7HNcYoiyD1gb4AS3OdWPBzD5MarMOxkAVCZ06AyYIhMPaGsAPlYFiBOTsa2FmcwIzjwGzjt174TdybFJWOSZ9crnUoOP9QpZr9RJu3EY2bhO2+hfYmogbSbeQORFvOAdSYsYdiE4LvfbZ9Mi5jhnIju76fyHliE7xquw/iAO4UFsjPyvJaQq0KgxLXRjA0mK55iYmP7I0mbCDRDyA2ykF95YWPogAAAAAElFTkSuQmCC"
     }
