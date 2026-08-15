@@ -228,6 +228,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             });
         })
         .step(() => {
+            puppet.physicsEnabled = DevKey.isUp("ControlLeft");
             if (Rpg.character.buffs.cosmetic.sparkling) {
                 puppet.sparklesPerFrame = Math.max(puppet.sparklesPerFrame, 0.1);
             }
