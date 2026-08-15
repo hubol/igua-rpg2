@@ -17,6 +17,7 @@ import { objAngelSkeliguana } from "../objects/enemies/obj-angel-skeliguana";
 import { objAngelSnail } from "../objects/enemies/obj-angel-snail";
 import { objAngelSpikeBall } from "../objects/enemies/obj-angel-spike-ball";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
+import { objEsotericBinocularViewer } from "../objects/esoteric/obj-esoteric-binocular-viewer";
 import { objEsotericClock } from "../objects/esoteric/obj-esoteric-clock";
 import { objEsotericDial } from "../objects/esoteric/obj-esoteric-dial";
 import { objStashPocket } from "../objects/interactables/obj-stash-pocket";
@@ -122,6 +123,7 @@ export const OgmoEntityResolvers = {
     Clock: (entity: OgmoEntities.Clock) =>
         objEsotericClock({ time: { hours: entity.values.hours, minutes: entity.values.minutes } }),
     Dial: (entity: OgmoEntities.Dial) => objEsotericDial({ maxTicks: entity.values.maxTicks }),
+    BinocularViewer: objEsotericBinocularViewer,
 };
 
 const __checkedOgmoEntityResolvers = OgmoEntityResolvers satisfies OgmoEntityResolverBase;

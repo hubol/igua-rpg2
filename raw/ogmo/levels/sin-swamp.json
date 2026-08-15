@@ -305,7 +305,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 176559394272601,
-          "values": {"name": "", "depth": 0, "variant": "level1"}
+          "values": {"name": "", "depth": 0, "variant": "level1", "safeTint": "#ffffff"}
         },
         {
           "name": "EnemyMiffed",
@@ -393,7 +393,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 176569555435000,
-          "values": {"name": "", "depth": 0, "variant": "level1"}
+          "values": {"name": "", "depth": 0, "variant": "level1", "safeTint": "#ffffff"}
         },
         {
           "name": "Door",
@@ -659,6 +659,16 @@
           "originX": 8,
           "originY": 6,
           "uid": 177681380131517,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "BinocularViewer",
+          "id": 50,
+          "_eid": "75198163",
+          "x": 535,
+          "y": 328,
+          "originX": 24,
+          "originY": 35,
           "values": {"name": "", "depth": 0}
         }
       ]
@@ -2960,6 +2970,18 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 2343,
+          "y": 86,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#704a32",
+          "texture": "town/colossus/guy 4.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"

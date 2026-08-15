@@ -2194,7 +2194,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/enemy skeliguana.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAAoCAYAAACxbNkLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKeSURBVGhD7ZZNTiMxFISbnAEpQYILZA1r2M4RuCFHYAlrWOcCIJFIcweGslxWxfG/3c38fVJo97Pd/cr17Gb6TyX7t7dP/Ng2wRk5s9fhpJLfXF3N9t7Vbrcbvmo5J+Z0aoU/I0WVJjuXqNV2u53N/hxziHJi6FKPwJYER+8nU3LKHHuKIHn9IfZZgXlIhhNBS4EE15eX9q4Mo+oLexskajecaim/WNmpIyYwgLMvbNNxEtCSqxWU2kMQVCLm8P5uW9MUc1DHcKHIYiVXKwb498CP+Ys4VJC/WjWEki9FRZ0IQpnxZ0Pd1G7+HoLHds/R3eJSjzuELs2yh1TUku6AYWUVo+UwUPwFSY3FQjqHekttKXKOG0F/gpBSmkpOywhfa7+sQrEcoVIq+bASjMV7nUOpkkNyxIaKaT3BUqXl91EM2uaPCvG/PyoCk3xRsRiuiENQKrlR8J3GIYrIibFNB2OhPnwX6E6LS6k5fp++351yEKOlp2JqCIlrJSQqtzhOEIj9uzMiyVqXWKY6j20tYT+3aKKhcvNdC8U1FhJRu5/8Z6TEgKGCeA8Y04SYDMaxvwV9j09WkE7WJEJxxkrHAR2bQ+fFiA7IvZzx0hhgXGOjOToU/gb+DUEoDZQFsKETXp6eXFkpLKvvIupQaWIp0WBpgcFkNAk/Ye17fX6ebu7uskcwn6GuYp5tDqVrDyEpJAlhvwtZQf7q1yb/+PBgW8fE9mAvUdspBOWioiDo+vbWtFlKQBNkv44F+iy0/RLkfU85Jk85e+tADAnSpf1+7xIi6A+5grl87uFwOHKeYnD9+fHR5V5wJfgyvNwELJoE+iBovV5PSHCz2ZixJXMxXuepAAg6v7gw1x/398H8UjQfCiF3SoCIGBDRxzT9AjwZPgBgbgkLAAAAAElFTkSuQmCC"
     },
@@ -2242,6 +2242,51 @@
       "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/safe marker.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACJSURBVDhPpVBBDoAwCBue/f9LvU+LlDDimMYmc62hlCFtRLd7hqE+in702ruLlruHZGkkYoMNny+wEP2gw7vIB3gyOsbRM6fOdXgvlB/qfGeuyVjC9RPUUWlyHzs3sK06oiZXM0w42TADQ35tm1FYhNE1bELhm+XtyBHZUU4QAu5opSOq+UN9aydWn2JAy6PKkAAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "75198163",
+      "name": "BinocularViewer",
+      "limit": -1,
+      "size": {"x": 48, "y": 38},
+      "origin": {"x": 24, "y": 35},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/binocular viewer.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAmCAYAAACCjRgBAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIsSURBVFhH7Za7TgJBFIYH7KSwN6INuBTGEisLE7Wi0lZM9An0DXwDfQJNxNhpRWVMLKykNBQgNAqxt9BS5MzOmMMy971J5Es2M7vZPfP/Z+bMDpl0MqzV0qktDlg3MYrVN60+7QtJCS/svbIeId2rJdbzURnJslZIGlkHsBlApUNqIC3xHFMT0qmRGrhjbQwULkdFA3g5iZaScgmNAMJjFA9090fXvgl6AwkIx4yZ0IytXkKKj72bZdbzae++sJ45VjG2xUuIPsDrnb8kM4AHnc+vsB4h770mbU2MOMVABrBe+mAwhN4NyZeOaftQvqUtJpgxPnhubpW0ng5ofya3pTQRJsZGY4e2vdYpbQFaA1Dp/LKBZywMLjGwXuNdKJg5Dgj4/HgmpbULekFGZe9GESPImAEIZpsVeL/TvKYiXDGJIdLmG+BbpWbL0iEawBajGEivb2BY4fz6/rrPwEWfB8A7hithYvxqQ3qFQoFOdfwoAesSBOgypNuFXGMUa2GOEoi0ZwIjnQFANguALIuq7HNcYoiyD1gb4AS3OdWPBzD5MarMOxkAVCZ06AyYIhMPaGsAPlYFiBOTsa2FmcwIzjwGzjt174TdybFJWOSZ9crnUoOP9QpZr9RJu3EY2bhO2+hfYmogbSbeQORFvOAdSYsYdiE4LvfbZ9Mi5jhnIju76fyHliE7xquw/iAO4UFsjPyvJaQq0KgxLXRjA0mK55iYmP7I0mbCDRDyA2ykF95YWPogAAAAAElFTkSuQmCC"
     }
   ],
   "tilesets": []
