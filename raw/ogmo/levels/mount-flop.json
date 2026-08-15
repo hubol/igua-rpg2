@@ -656,11 +656,11 @@
           "id": 0,
           "_eid": "90326278",
           "x": 2736,
-          "y": 1088,
+          "y": 1089,
           "originX": 20,
           "originY": 52,
           "flippedX": true,
-          "values": {"personaName": "", "name": "BestFriendHaverNpc", "depth": 0}
+          "values": {"personaName": "BestFriendHaver", "name": "BestFriendHaverNpc", "depth": 0}
         }
       ]
     },

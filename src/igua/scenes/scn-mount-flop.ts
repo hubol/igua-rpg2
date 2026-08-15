@@ -1,7 +1,9 @@
+import { Sprite } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Sfx } from "../../assets/sounds";
+import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -111,6 +113,7 @@ function enrichBoxer(lvl: LvlType.MountFlop) {
             const guessedNumber = yield* DramaMisc.askInteger("What number is\nthis fucker thinking of?", {
                 max: 10,
                 min: 1,
+                messageObj: Sprite.from(Tx.Characters.Boxer.Portrait).anchored(0.46, 0.7),
             });
             if (guessedNumber === actualNumber) {
                 yield* show("Heh, you got it right!");
