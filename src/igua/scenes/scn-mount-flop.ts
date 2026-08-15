@@ -3,6 +3,7 @@ import { Mzk } from "../../assets/music";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { ask, show } from "../drama/show";
 import { scene } from "../globals";
@@ -23,6 +24,9 @@ export function scnMountFlop() {
 
 function enrichBoxer(lvl: LvlType.MountFlop) {
     objCharacterBoxer()
+        .mixin(mxnCutscene, function* () {
+            yield* show("Hi");
+        })
         .at(lvl.BoxerMarker)
         .show();
 }

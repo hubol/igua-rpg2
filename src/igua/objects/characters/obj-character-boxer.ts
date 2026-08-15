@@ -9,6 +9,8 @@ import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { mxnSpeaker } from "../../mixins/mxn-speaker";
+import { objAngelEyes } from "../enemies/obj-angel-eyes";
+import { objAngelMouth } from "../enemies/obj-angel-mouth";
 
 const [
     txTail,
@@ -60,9 +62,26 @@ export function objCharacterBoxer() {
         container(
             Sprite.from(txNoggin),
             container(
-                Sprite.from(txEyesDemo),
+                objAngelEyes({
+                    defaultEyelidRestingPosition: 0,
+                    eyelidsTint: 0xFF6BA1,
+                    gap: 0,
+                    pupilRestStyle: { kind: "cross_eyed", offsetFromCenter: 0 },
+                    pupilsTint: 0x000000,
+                    pupilsTx: Tx.Characters.Boxer.Pupil,
+                    scleraTx: Tx.Characters.Boxer.Sclera,
+                    pupilsMirrored: true,
+                    sclerasMirrored: true,
+                })
+                    .at(46, 36),
                 Sprite.from(txNose),
-                Sprite.from(txMouthDemo),
+                objAngelMouth({
+                    txs: objAngelMouth.txs.perturbed20,
+                    negativeSpaceTint: 0x000000,
+                    teethCount: 3,
+                    toothGapWidth: 1,
+                })
+                    .at(46, 46),
             )
                 .mixin(mxnFacingPivot, { left: -3, right: 3, down: 0, up: 0 }),
             Sprite.from(txHat),
