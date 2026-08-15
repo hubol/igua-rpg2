@@ -3,7 +3,7 @@ import { Mzk } from "../../assets/music";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Sfx } from "../../assets/sounds";
 import { Coro } from "../../lib/game-engine/routines/coro";
-import { factor, interpvr } from "../../lib/game-engine/routines/interp";
+import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { Jukebox } from "../core/igua-audio";
@@ -15,6 +15,7 @@ import { mxnFxBlink } from "../mixins/effects/mxn-fx-blink";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objCharacterBoxer } from "../objects/characters/obj-character-boxer";
+import { objFxExpressSurprise } from "../objects/effects/obj-fx-express-surprise";
 import { playerObj } from "../objects/obj-player";
 import { CtxTerrainPipe } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
@@ -87,7 +88,24 @@ function enrichBoxer(lvl: LvlType.MountFlop) {
 
             yield* showLaughTrack("OK. The rules are so simple that even a jock like me could understand them.");
             yield* show("I will think of a number between 1 and 10, and you need to guess what it is!");
+            Jukebox.applyGainRamp(Mzk.EditableMoog, 0, 1000);
+            yield interp(boxerObj.objCharacterBoxer, "thinking").to(1).over(1000);
             yield sleep(1000);
+            for (let i = 0; i < 10; i++) {
+                boxerObj.play(Sfx.Cutscene.ThinkTiny.rate(0.9, 1.1));
+                boxerObj.x += i % 2 === 0 ? 1 : -1;
+                yield sleep(333);
+            }
+            yield sleep(666);
+            Jukebox.applyGainRamp(Mzk.EditableMoog, 1, 1000);
+            boxerObj.play(Sfx.Cutscene.ThinkDone.rate(0.9, 1.1));
+            yield interp(boxerObj.objCharacterBoxer, "thinking").to(0).over(66);
+            objFxExpressSurprise()
+                .at(playerObj.head.getWorldCenter())
+                .add(0, -16)
+                .show();
+            playerObj.speed.y = -2;
+            yield sleep(500);
             const actualNumber = Rng.intc(1, 10);
             yield* showLaughTrack("That was tricky, but I think I came up with a number.");
             const guessedNumber = yield* DramaMisc.askInteger("What number is\nthis fucker thinking of?", {

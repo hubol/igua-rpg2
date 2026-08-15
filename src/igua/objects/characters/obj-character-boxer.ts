@@ -34,6 +34,8 @@ export function objCharacterBoxer() {
 
     const fxObj = container().mixin(mxnBoilPivot);
 
+    let thinking = 0;
+
     const api = {
         *dramaThrow() {
             // TODO SFX
@@ -49,7 +51,38 @@ export function objCharacterBoxer() {
             handDomObj.visible = true;
             handDomThrowObj.visible = false;
         },
+        get thinking() {
+            return thinking;
+        },
+        set thinking(value) {
+            if (thinking === value) {
+                return;
+            }
+            if (value <= 0) {
+                eyesObj.stepsUntilBlink = 60;
+            }
+            else {
+                eyesObj.stepsUntilBlink = -1;
+                eyesObj.eyelidMotion = 0;
+            }
+
+            eyesObj.closed = value;
+
+            thinking = value;
+        },
     };
+
+    const eyesObj = objAngelEyes({
+        defaultEyelidRestingPosition: 0,
+        eyelidsTint: 0xFF4F87,
+        gap: 0,
+        pupilRestStyle: { kind: "cross_eyed", offsetFromCenter: 0 },
+        pupilsTint: 0x000000,
+        pupilsTx: Tx.Characters.Boxer.Pupil,
+        scleraTx: Tx.Characters.Boxer.Sclera,
+        pupilsMirrored: true,
+        sclerasMirrored: true,
+    });
 
     return container(
         Sprite.from(txTail)
@@ -62,17 +95,7 @@ export function objCharacterBoxer() {
         container(
             Sprite.from(txNoggin),
             container(
-                objAngelEyes({
-                    defaultEyelidRestingPosition: 0,
-                    eyelidsTint: 0xFF6BA1,
-                    gap: 0,
-                    pupilRestStyle: { kind: "cross_eyed", offsetFromCenter: 0 },
-                    pupilsTint: 0x000000,
-                    pupilsTx: Tx.Characters.Boxer.Pupil,
-                    scleraTx: Tx.Characters.Boxer.Sclera,
-                    pupilsMirrored: true,
-                    sclerasMirrored: true,
-                })
+                eyesObj
                     .at(46, 36),
                 Sprite.from(txNose),
                 objAngelMouth({
