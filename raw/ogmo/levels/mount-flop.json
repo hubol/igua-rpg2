@@ -416,6 +416,17 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "BoxerMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 42,
+          "_eid": "73148747",
+          "x": 2423,
+          "y": 1240,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "PlayerPunchMarker", "depth": 0}
         }
       ]
     },

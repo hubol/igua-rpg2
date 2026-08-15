@@ -275,6 +275,19 @@ export namespace DataQuest {
                     drop: { kind: "equipment", id: "SpellOpenFlopBlindBoxes", level: 1 },
                 },
             },
+            "MountFlop.Boxer": {
+                flags: null,
+                reward: {
+                    kind: "in_order",
+                    drops: [
+                        { kind: "potion", id: "AttributeHealthUp", count: 2 },
+                    ],
+                    extend: {
+                        kind: "repeat",
+                        drop: { kind: "potion", id: "HotDog", count: 3 },
+                    },
+                },
+            },
             __Fallback__: {
                 flags: null,
                 reward: {
