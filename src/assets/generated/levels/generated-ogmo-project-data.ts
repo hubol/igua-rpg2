@@ -36,7 +36,7 @@ export namespace OgmoEntities {
   export type IntelligenceSign = OgmoFactory.EntityBase<{ title: string; message: string; min: number; max: number; name: string; depth: number }>;
   export type MagicDoor = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }> & { uid: number };
   export type EnemySnail = OgmoFactory.EntityBase<{ variant: "level0"; name: string; depth: number }>;
-  export type EnemyBrick = OgmoFactory.EntityBase<{ variant: "level0"; name: string; depth: number }> & { uid: number };
+  export type EnemyBrick = OgmoFactory.EntityBase<{ variant: "level0" | "level1"; name: string; depth: number }> & { uid: number };
   export type GamblingExpertNpc = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type Darkness = OgmoFactory.EntityBase<{ exitSceneName: string; exitCheckpointName: string; level: number; name: string; depth: number }>;
   export type EnemySpikeBall = OgmoFactory.EntityBase<{ variant: "level0"; name: string; depth: number }>;

@@ -334,6 +334,32 @@
           "uid": 178520085797500,
           "tint": "#ffffff",
           "values": {"sceneName": "scnDungeonBones", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 23,
+          "_eid": "53836309",
+          "x": 3240,
+          "y": 1424,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 0,
+          "uid": 178699722912000,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnLibraryOnTheBorder", "checkpointName": "fromIndiana", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 24,
+          "_eid": "53836309",
+          "x": 3389,
+          "y": 1424,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 180,
+          "uid": 178699730851822,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnLibraryOnTheBorder", "checkpointName": "fromOhio", "name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -710,6 +736,28 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromOhioCasino", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 31,
+          "_eid": "19953026",
+          "x": 3192,
+          "y": 1448,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromLibraryIndiana", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 32,
+          "_eid": "19953026",
+          "x": 3440,
+          "y": 1448,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromLibraryOhio", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -1629,7 +1677,8 @@
           "texture": "foliage/tree simple 112px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -9494,6 +9543,18 @@
           "groupName": null
         }
       ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 572,
+      "gridCellsY": 303,
+      "decals": [],
       "folder": "../textures"
     }
   ]

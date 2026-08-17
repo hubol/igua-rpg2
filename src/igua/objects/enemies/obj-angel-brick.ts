@@ -66,11 +66,32 @@ const ranks = {
         },
         level: 1,
     }),
+    level1: RpgEnemyRank.create({
+        status: {
+            healthMax: 99999,
+            defenses: {
+                physical: 99,
+                overheat: 99,
+            },
+        },
+        loot: {
+            tier0: [
+                { weight: 100, kind: "potion", id: "HotDogKetchupMustardOnionRelish" },
+            ],
+        },
+        level: 1,
+    }),
 };
 
 const variants = {
     level0: {
         rank: ranks.level0,
+        theme: themes.common,
+        txPattern: Tx.Enemy.Brick.Pattern0,
+    },
+    level1: {
+        rank: ranks.level1,
+        // TODO new theme
         theme: themes.common,
         txPattern: Tx.Enemy.Brick.Pattern0,
     },
