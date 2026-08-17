@@ -5,12 +5,11 @@ import { Sfx } from "../../assets/sounds";
 import { MusicTrack } from "../../lib/game-engine/audio/asshat-jukebox";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
-import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { DataPotion } from "../data/data-potion";
+import { DramaWizard } from "../drama/drama-wizard";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
-import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgRegion } from "../rpg/rpg-region";
@@ -28,8 +27,7 @@ export function scnWizardLair() {
         { gateObj: lvl.OhioDmvGate, name: "Ohio\nDMV", mzk: Mzk.NorthernCream, regionId: "Ohio" },
     ] satisfies Array<{ gateObj: DisplayObject; name: string; mzk: MusicTrack; regionId: RpgRegion.StartingId }>;
 
-    const wizardObj = container()
-        .mixin(mxnSpeaker, { name: "Voice of Wizard", tintPrimary: 0x130D2A, tintSecondary: 0x352863 })
+    const wizardObj = DramaWizard.objSpeaker()
         .show();
 
     scene.stage

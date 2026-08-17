@@ -146,6 +146,10 @@ export class RpgPlayer {
         return this._state.startingRegionId;
     }
 
+    get receivedSpellEducation() {
+        return this._state.receivedSpellEducation;
+    }
+
     die() {
         const valuablesCount = this._wallet.count("valuables");
         this._wallet.spend("valuables", valuablesCount);
@@ -172,8 +176,13 @@ export class RpgPlayer {
         this.attributes.respawnConfiguration = respawnConfigurations[regionId];
     }
 
+    receiveSpellEducation() {
+        this._state.receivedSpellEducation = true;
+    }
+
     static createState(): RpgPlayer.State {
         return {
+            receivedSpellEducation: false,
             looks: getDefaultLooks(),
             position: {
                 currentRegionId: "OuterSpace",
@@ -189,6 +198,7 @@ export class RpgPlayer {
 
 export namespace RpgPlayer {
     export interface State {
+        receivedSpellEducation: boolean;
         looks: IguanaLooks.Serializable;
         position: Position;
         previousAdventuresCount: Integer;

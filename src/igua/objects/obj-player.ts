@@ -7,13 +7,12 @@ import { sleep } from "../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../lib/math/number";
 import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
-import { merge } from "../../lib/object/merge";
 import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataRespawnConfiguration } from "../data/data-respawn-configuration";
-import { devObjHotPineCone } from "../dev/dev-obj-hot-pine-cone";
 import { DramaScene } from "../drama/drama-scene";
+import { DramaWizard } from "../drama/drama-wizard";
 import { show } from "../drama/show";
 import { Cutscene, DevKey, Input, layers, scene } from "../globals";
 import { IguanaLooks } from "../iguana/looks";
@@ -226,6 +225,11 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             }, {
                 speaker: puppet,
             });
+        })
+        .coro(function* () {
+            yield () => puppet.canInteract && Rpg.character.spells.anyEquipped && !Rpg.character.receivedSpellEducation;
+            yield Cutscene.play(DramaWizard.provideSpellEducation).done;
+            Rpg.character.receiveSpellEducation();
         })
         .step(() => {
             puppet.physicsEnabled = DevKey.isUp("ControlLeft");
