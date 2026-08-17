@@ -12,35 +12,46 @@ import { Input } from "../../globals";
 import { StepOrder } from "../step-order";
 
 export function objFigureInputActionControl(action: Action) {
-    return container<Container>()
+    const rootObj = container<Container>();
+
+    function updateGraph() {
+        const control = Input.getControl(action);
+
+        const figureControlObjs = new Array<Container>();
+
+        if (typeof control === "string" || Array.isArray(control)) {
+            figureControlObjs.push(...getFigureControlObjs(control));
+        }
+        else {
+            figureControlObjs.push(...getFigureControlObjs(control.keyboard));
+            figureControlObjs.push(...getFigureControlObjs(control.gamepad));
+        }
+
+        let x = 0;
+        for (let i = 0; i < figureControlObjs.length; i++) {
+            const obj = figureControlObjs[i];
+            obj.x = x;
+
+            obj.show(rootObj);
+
+            if (i < figureControlObjs.length - 1) {
+                x += obj.width + 2;
+                Sprite.from(Tx.Ui.Controls.Slash).at(x, -3).show(rootObj);
+                x += 6;
+            }
+        }
+    }
+
+    updateGraph();
+
+    return rootObj
         .coro(function* (self) {
             while (true) {
+                yield onMutate.Provider(() => Input.getControl(action));
+
                 self.removeAllChildren();
-                const control = Input.getControl(action);
 
-                const figureControlObjs = new Array<Container>();
-
-                if (typeof control === "string" || Array.isArray(control)) {
-                    figureControlObjs.push(...getFigureControlObjs(control));
-                }
-                else {
-                    figureControlObjs.push(...getFigureControlObjs(control.keyboard));
-                    figureControlObjs.push(...getFigureControlObjs(control.gamepad));
-                }
-
-                let x = 0;
-                for (let i = 0; i < figureControlObjs.length; i++) {
-                    const obj = figureControlObjs[i];
-                    obj.x = x;
-
-                    obj.show(self);
-
-                    if (i < figureControlObjs.length - 1) {
-                        x += obj.width + 2;
-                        Sprite.from(Tx.Ui.Controls.Slash).at(x, -3).show(self);
-                        x += 6;
-                    }
-                }
+                updateGraph();
 
                 let container = self.parent;
 
@@ -52,8 +63,6 @@ export function objFigureInputActionControl(action: Action) {
 
                     container = container.parent;
                 }
-
-                yield onMutate.Provider(() => Input.getControl(action));
             }
         }, StepOrder.BeforeCamera);
 }
