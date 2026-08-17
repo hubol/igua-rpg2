@@ -368,11 +368,6 @@ export namespace DataShop {
             OpenCombat: {
                 stocks: [
                     {
-                        product: { kind: "equipment", id: "OverheatResistance0", level: 1 },
-                        initialQuantity: 1,
-                        price: { currency: "valuables", deltaSold: 0, initial: 25 },
-                    },
-                    {
                         product: { kind: "equipment", id: "OverheatResistance1", level: 1 },
                         initialQuantity: 1,
                         price: { currency: "valuables", deltaSold: 0, initial: 50 },

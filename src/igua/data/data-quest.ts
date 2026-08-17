@@ -288,6 +288,14 @@ export namespace DataQuest {
                     },
                 },
             },
+            "MountFlop.Cloud": {
+                flags: null,
+                reward: {
+                    countCompletions: "once",
+                    kind: "single",
+                    drop: { kind: "equipment", id: "OverheatResistance0", level: 1, count: 2 },
+                },
+            },
             __Fallback__: {
                 flags: null,
                 reward: {

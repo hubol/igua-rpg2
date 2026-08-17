@@ -184,8 +184,27 @@ function enrichBestFriendHaverNpc(lvl: LvlType.MountFlop) {
 }
 
 function enrichCloudMonkNpc(lvl: LvlType.MountFlop) {
+    const quest = Rpg.quest("MountFlop.Cloud");
+
     lvl.CloudNpc
         .mixin(mxnCutscene, function* () {
-            yield* show("Hello!");
+            const result = yield* ask(
+                "It's chilly up here!",
+                "I know!",
+                quest.isCompletable ? "What do you do for fun?" : null,
+            );
+
+            if (result === 0) {
+                yield* show("Hehehehe");
+            }
+            else {
+                yield* show(
+                    "Well, the other day a storm blew in and I got pelted by hail.",
+                    "It was kind of fun!",
+                    "Here, maybe some of the ice would be useful for you",
+                );
+
+                yield* DramaQuests.complete(quest);
+            }
         });
 }

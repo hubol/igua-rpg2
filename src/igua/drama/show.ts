@@ -181,12 +181,15 @@ function objQuestionOptionBoxes(speaker: DisplayObject | null, options: AskOptio
     const state = { confirmedIndex: -1 };
 
     let layoutIndex = 0;
+
+    const nonNullOptionsCount = options.filter(option => option).length;
+
     const optionObjs = options.map((option, index) => {
         if (option === null) {
             return null;
         }
         const position = vnew((layoutIndex % 2) * 140, Math.floor(layoutIndex / 2) * 45);
-        if (index === options.length - 1 && layoutIndex % 2 === 0) {
+        if (index === nonNullOptionsCount - 1 && layoutIndex % 2 === 0) {
             position.x += 70;
         }
 
