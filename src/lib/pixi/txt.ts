@@ -1,6 +1,6 @@
 import { Container, Texture } from "pixi.js";
 
-export function txt(strings: TemplateStringsArray, ...values: txt.TemplateValue[]): string & txt.Type {
+export function txt(strings: TemplateStringsArray | string[], ...values: txt.TemplateValue[]): string & txt.Type {
     const data = new Array<txt.Data>();
 
     const sanitizedStrings: string[] = strings.map(txt.sanitizeNewLine);

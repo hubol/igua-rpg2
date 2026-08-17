@@ -49,6 +49,17 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "BaldMikeMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 3,
+          "_eid": "73148747",
+          "x": 2248,
+          "y": 2184,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "MrIndianaMarker", "depth": 0}
         }
       ]
     },
@@ -758,6 +769,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromLibraryOhio", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 33,
+          "_eid": "19953026",
+          "x": 2704,
+          "y": 1752,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromIllinoisViaMrIndiana", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },

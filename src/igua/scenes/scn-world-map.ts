@@ -1,4 +1,5 @@
 import { DisplayObject, Sprite } from "pixi.js";
+import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
@@ -7,8 +8,10 @@ import { interpv } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
+import { txt } from "../../lib/pixi/txt";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { DataPocketItem } from "../data/data-pocket-item";
 import { DramaQuests } from "../drama/drama-quests";
 import { dramaQuizComputerScience } from "../drama/drama-quiz-computer-science";
 import { DramaWallet } from "../drama/drama-wallet";
@@ -18,8 +21,10 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFallenBot } from "../objects/characters/obj-character-fallen-bot";
+import { objCharacterMrIndiana } from "../objects/characters/obj-character-mr-indiana";
 import { objCharacterNutcase } from "../objects/characters/obj-character-nutcase";
 import { objEsotericHotDogCondimentDispenser } from "../objects/esoteric/obj-esoteric-hot-dog-condiment-dispenser";
+import { objFigurePocketItem } from "../objects/figures/obj-figure-pocket-item";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgSaveFiles } from "../rpg/rpg-save-files";
@@ -47,6 +52,53 @@ export function scnWorldMap() {
     enrichFallenBot(lvl);
     objFxWaterShimmer().show();
     enrichBaldMike(lvl);
+    enrichMrIndiana(lvl);
+}
+
+function enrichMrIndiana(lvl: LvlType.WorldMap) {
+    const pocketItemIds: DataPocketItem.Id[] = [
+        "BallFruitTypeA",
+        "BallFruitTypeB",
+        "Beet",
+        "CactusFruitTypeA",
+        "CactusFruitTypeB",
+        "ComputerChip",
+        "EmoBallistaBolt",
+        "EssenceWind",
+        "RobotHair",
+        "Wheat",
+    ];
+
+    const checkpointName: keyof typeof lvl = "fromIllinoisViaMrIndiana";
+    const toIndianaSceneChanger = SceneChanger.create({ sceneName: scnWorldMap.name, checkpointName });
+
+    objCharacterMrIndiana()
+        .at(lvl.MrIndianaMarker)
+        .mixin(mxnCutscene, function* () {
+            yield* show(
+                txt`${objText.Large("H")}ello.`,
+                txt`I'm ${objText.Large("Mr. Indiana")}`,
+                txt`Did ${objText.Large("Bald Mike")} charge you money?\n\nHe sucks.`,
+            );
+
+            const result = yield* ask("Shall I take you back? (FREE OF CHARGE)");
+
+            if (result) {
+                yield* show(
+                    txt`One, two, ${objText.Large("Three")}`,
+                    txt`If you follow ${objText.Large("Me")}`,
+                    txt`You'll see many ${objText.Large("Items")}`,
+                    txt`Such as ${objText.Large("These")}`,
+                    txt(
+                        [...pocketItemIds.map((_, i) => i % 2 === 0 ? " La " : " Dee "), ""],
+                        ...pocketItemIds.map(id => objFigurePocketItem(id).scaled(0.67, 0.67).mixin(mxnSinePivot)),
+                    ),
+                );
+
+                toIndianaSceneChanger.changeScene();
+            }
+        })
+        .show();
 }
 
 function objFxWaterShimmer() {
