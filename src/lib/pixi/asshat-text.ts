@@ -257,11 +257,13 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
         let spaceCount = 0;
 
         const iterable = typeof this._text === "object" ? this._text : txt.sanitizeNewLine(this._text);
-        let value: txt.IterateResult = null;
+        let value: string | Texture | null = null;
 
-        for (let i = 0; (value = txt.iterate(iterable, i)) !== null; i += 1) {
+        for (let i = 0; i < iterable.length; i += 1) {
             let charCode: number | null = null;
             let charData: IBitmapFontCharacter | null = null;
+
+            value = iterable.charAt(i);
 
             if (typeof value === "string") {
                 if ((/(?:\s)/).test(value)) {

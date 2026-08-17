@@ -1,18 +1,45 @@
-import { Texture } from "pixi.js";
-import { Integer } from "../math/number-alias-types";
+import { Resource, Texture } from "pixi.js";
 
 export function txt(strings: TemplateStringsArray, ...values: txt.TemplateValue[]): string & txt.Type {
-    return new Txt(
-        strings.map(txt.sanitizeNewLine),
-        values.map(value => typeof value === "number" ? String(value) : value),
-    ) as any;
+    const data = new Array<string | Texture>();
+
+    const sanitizedStrings: string[] = strings.map(txt.sanitizeNewLine);
+
+    for (let i = 0; i < sanitizedStrings.length; i++) {
+        data.push(...sanitizedStrings[i]);
+        const value = values[i];
+        if (values[i]) {
+            if (typeof value === "number") {
+                data.push(String(value));
+            }
+            else if (typeof value === "string") {
+                data.push(txt.sanitizeNewLine(value));
+            }
+            else {
+                data.push(value);
+            }
+        }
+    }
+
+    return new Txt(data) as any;
 }
 
 class Txt implements txt.Type {
     constructor(
-        readonly strings: Array<string>,
-        readonly values: Array<string | Texture>,
+        private readonly _data: Array<string | Texture>,
     ) {
+    }
+
+    get length() {
+        return this._data.length;
+    }
+
+    charAt(index: number): string | Texture<Resource> {
+        return this._data[index] ?? "";
+    }
+
+    substring(start: number, end: number): txt.Type {
+        return new Txt(this._data.slice(start, end));
     }
 
     toString() {
@@ -24,52 +51,12 @@ txt.sanitizeNewLine = function sanitizeNewLine (text: string) {
     return text.replace(/(?:\r\n|\r)/g, "\n");
 };
 
-txt.iterate = function iterate (iterable: txt.Iterable, position: Integer): txt.IterateResult {
-    if (typeof iterable === "string") {
-        return position < iterable.length ? iterable.charAt(position) : null;
-    }
-
-    for (let i = 0; i < iterable.strings.length; i++) {
-        const string = iterable.strings[i];
-        if (position < string.length) {
-            return string.charAt(position);
-        }
-
-        position -= string.length;
-        const value = iterable.values[i];
-
-        if (!value) {
-            return null;
-        }
-
-        if (typeof value === "string") {
-            if (position < value.length) {
-                return value.charAt(position);
-            }
-
-            position -= value.length;
-        }
-        else {
-            if (position === 0) {
-                return value;
-            }
-
-            position -= 1;
-        }
-    }
-
-    return null;
-};
-
 export namespace txt {
     export interface Type {
-        strings: Array<string>;
-        values: Array<string | Texture>;
+        charAt(index: number): string | Texture;
+        readonly length: number;
+        substring(start: number, end: number): Type;
     }
 
     export type TemplateValue = string | number | Texture;
-
-    export type Iterable = Type | string;
-
-    export type IterateResult = string | Texture | null;
 }
