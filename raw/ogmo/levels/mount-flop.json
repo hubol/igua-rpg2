@@ -661,6 +661,17 @@
           "originY": 52,
           "flippedX": true,
           "values": {"personaName": "BestFriendHaver", "name": "BestFriendHaverNpc", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 1,
+          "_eid": "90326278",
+          "x": 224,
+          "y": 240,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": false,
+          "values": {"personaName": "CloudMonk", "name": "CloudNpc", "depth": 0}
         }
       ]
     },
