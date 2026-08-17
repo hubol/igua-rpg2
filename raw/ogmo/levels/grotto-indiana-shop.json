@@ -16,7 +16,36 @@
       "gridCellHeight": 8,
       "gridCellsX": 186,
       "gridCellsY": 57,
-      "entities": []
+      "entities": [
+        {
+          "name": "IguanaNpcPatrolMarker",
+          "id": 0,
+          "_eid": "98763038",
+          "x": 608,
+          "y": 296,
+          "originX": 15,
+          "originY": 12,
+          "nodes": [
+            {"x": 504, "y": 304},
+            {"x": 720, "y": 304}
+          ],
+          "values": {"speed": 1.1, "delayMin": 1500, "delayMax": 5000, "name": "", "depth": 0}
+        },
+        {
+          "name": "IguanaNpcPatrolMarker",
+          "id": 3,
+          "_eid": "98763038",
+          "x": 712,
+          "y": 168,
+          "originX": 15,
+          "originY": 12,
+          "nodes": [
+            {"x": 616, "y": 168},
+            {"x": 504, "y": 192}
+          ],
+          "values": {"speed": 1.1, "delayMin": 1500, "delayMax": 5000, "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",
@@ -3360,6 +3389,18 @@
           "groupName": null
         }
       ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 186,
+      "gridCellsY": 57,
+      "decals": [],
       "folder": "../textures"
     }
   ]

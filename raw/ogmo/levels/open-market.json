@@ -16,7 +16,36 @@
       "gridCellHeight": 8,
       "gridCellsX": 151,
       "gridCellsY": 60,
-      "entities": []
+      "entities": [
+        {
+          "name": "IguanaNpcPatrolMarker",
+          "id": 0,
+          "_eid": "98763038",
+          "x": 544,
+          "y": 312,
+          "originX": 15,
+          "originY": 12,
+          "nodes": [
+            {"x": 592, "y": 312},
+            {"x": 432, "y": 312}
+          ],
+          "values": {"speed": 1.3, "delayMin": 333, "delayMax": 3000, "name": "", "depth": 0}
+        },
+        {
+          "name": "IguanaNpcPatrolMarker",
+          "id": 1,
+          "_eid": "98763038",
+          "x": 304,
+          "y": 416,
+          "originX": 15,
+          "originY": 12,
+          "nodes": [
+            {"x": 368, "y": 416},
+            {"x": 224, "y": 416}
+          ],
+          "values": {"speed": 1.3, "delayMin": 333, "delayMax": 3000, "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",
@@ -2169,7 +2198,8 @@
           "texture": "town/market/dome house.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 668,
@@ -2181,7 +2211,8 @@
           "texture": "town/ball/frame.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 704,
@@ -2232,7 +2263,8 @@
           "texture": "town/market/window.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 754,
@@ -2244,7 +2276,8 @@
           "texture": "light/glass metal sheen 20px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 782,
@@ -2256,7 +2289,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 645,
@@ -2268,7 +2302,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 708,
@@ -2280,7 +2315,8 @@
           "texture": "town/signage/cake world.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -2764,6 +2800,18 @@
           "groupName": null
         }
       ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 151,
+      "gridCellsY": 60,
+      "decals": [],
       "folder": "../textures"
     }
   ]

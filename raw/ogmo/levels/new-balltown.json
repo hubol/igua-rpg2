@@ -213,6 +213,20 @@
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "IguanaNpcPatrolMarker",
+          "id": 33,
+          "_eid": "98763038",
+          "x": 952,
+          "y": 536,
+          "originX": 15,
+          "originY": 12,
+          "nodes": [
+            {"x": 824, "y": 520},
+            {"x": 1008, "y": 536}
+          ],
+          "values": {"speed": 1.3, "delayMin": 333, "delayMax": 3000, "name": "", "depth": 0}
         }
       ]
     },
@@ -9082,6 +9096,18 @@
           "groupName": null
         }
       ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 207,
+      "gridCellsY": 79,
+      "decals": [],
       "folder": "../textures"
     }
   ]

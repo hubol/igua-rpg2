@@ -67,6 +67,20 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "HomeownerLandPosition", "depth": 0}
+        },
+        {
+          "name": "IguanaNpcPatrolMarker",
+          "id": 5,
+          "_eid": "98763038",
+          "x": 240,
+          "y": 320,
+          "originX": 15,
+          "originY": 12,
+          "nodes": [
+            {"x": 112, "y": 320},
+            {"x": 320, "y": 320}
+          ],
+          "values": {"speed": 1.3, "delayMin": 333, "delayMax": 3000, "name": "", "depth": 0}
         }
       ]
     },
@@ -306,7 +320,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 174070327046700,
-          "values": {"name": "", "depth": 0, "variant": "level0"}
+          "values": {"name": "", "depth": 0, "variant": "level0", "safeTint": "#ffffff"}
         },
         {
           "name": "EnemySuggestive",
@@ -317,7 +331,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 174070327961901,
-          "values": {"name": "", "depth": 0, "variant": "level1"}
+          "values": {"name": "", "depth": 0, "variant": "level1", "safeTint": "#ffffff"}
         },
         {
           "name": "EnemySuggestive",
@@ -328,7 +342,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 174070342045103,
-          "values": {"name": "", "depth": 0, "variant": "level0"}
+          "values": {"name": "", "depth": 0, "variant": "level0", "safeTint": "#ffffff"}
         },
         {
           "name": "EnemySuggestive",
@@ -339,7 +353,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 174070342045104,
-          "values": {"name": "", "depth": 0, "variant": "level1"}
+          "values": {"name": "", "depth": 0, "variant": "level1", "safeTint": "#ffffff"}
         },
         {
           "name": "EnemySuggestive",
@@ -350,7 +364,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 174070342045105,
-          "values": {"name": "", "depth": 0, "variant": "level1"}
+          "values": {"name": "", "depth": 0, "variant": "level1", "safeTint": "#ffffff"}
         },
         {
           "name": "EnemySuggestive",
@@ -361,7 +375,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 174070342442606,
-          "values": {"name": "", "depth": 0, "variant": "level0"}
+          "values": {"name": "", "depth": 0, "variant": "level0", "safeTint": "#ffffff"}
         },
         {
           "name": "WaterDripSource",
@@ -3988,6 +4002,18 @@
     {
       "name": "ParallaxDecals",
       "_eid": "17093961",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 124,
+      "gridCellsY": 59,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
       "offsetX": 0,
       "offsetY": 0,
       "gridCellWidth": 8,

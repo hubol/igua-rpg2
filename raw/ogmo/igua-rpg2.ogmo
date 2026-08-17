@@ -2339,9 +2339,9 @@
       "nodeGhost": true,
       "tags": ["Marker"],
       "values": [
-        {"name": "speed", "definition": "Float", "display": 2, "defaults": 2, "bounded": false, "min": 0.2, "max": 9},
+        {"name": "speed", "definition": "Float", "display": 2, "defaults": 1.3, "bounded": false, "min": 0.2, "max": 9},
         {"name": "delayMin", "definition": "Integer", "display": 1, "defaults": 333, "bounded": true, "min": 33, "max": 9999},
-        {"name": "delayMax", "definition": "Integer", "display": 1, "defaults": 333, "bounded": true, "min": 33, "max": 9999},
+        {"name": "delayMax", "definition": "Integer", "display": 1, "defaults": 3000, "bounded": true, "min": 33, "max": 9999},
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
