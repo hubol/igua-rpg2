@@ -1,7 +1,5 @@
-import { Sprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
-import { container } from "../../../lib/pixi/container";
 import { txt } from "../../../lib/pixi/txt";
 import { DataNpcLooks } from "../../data/data-npc-looks";
 import { DevKey } from "../../globals";
@@ -10,6 +8,11 @@ import { objFigureInputActionControl } from "../../objects/figures/obj-figure-ac
 
 export function scnDevTxt() {
     const puppetObj = objIguanaPuppet(DataNpcLooks.AlphaMale);
+
+    objFigureInputActionControl("Confirm")
+        .at(20, 20)
+        .show();
+
     objText.MediumBold(
         txt`ABXY LB RB Press ${objFigureInputActionControl("CastSpell")} to cast a spell.
 

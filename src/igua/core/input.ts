@@ -1,7 +1,9 @@
+import { KeyCode } from "../../lib/browser/key-listener";
 import { AsshatInput, InputModalityType } from "../../lib/game-engine/input/asshat-input";
 import { GamepadControl, GamepadControls } from "../../lib/game-engine/input/gamepad-controls";
 import { MappedGamepad } from "../../lib/game-engine/input/mapped-gamepad";
 import { KeyboardControls, MappedKeyboard } from "../../lib/game-engine/input/mapped-keyboard";
+import { Force } from "../../lib/types/force";
 import { layers } from "../globals";
 
 const actions = [
@@ -108,6 +110,11 @@ const message = {
     [InputModalityType.Gamepad]: "Using gamepad controls",
 };
 
+const eitherModalityControlBuffer = {
+    keyboard: Force<KeyCode>(),
+    gamepad: Force<GamepadControl.Type[]>(),
+};
+
 export class IguaInput extends AsshatInput<Action> {
     constructor() {
         super([new MappedKeyboard(keyboardControls), new MappedGamepad(gamepadControls)]);
@@ -115,7 +122,9 @@ export class IguaInput extends AsshatInput<Action> {
 
     getControl(action: Action) {
         if (!this._currentModality) {
-            return null;
+            eitherModalityControlBuffer.keyboard = keyboardControls[action];
+            eitherModalityControlBuffer.gamepad = gamepadControls[action];
+            return eitherModalityControlBuffer;
         }
 
         if (this._currentModality instanceof MappedKeyboard) {

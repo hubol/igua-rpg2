@@ -1,4 +1,4 @@
-import { Sprite, Texture } from "pixi.js";
+import { Container, Sprite, Texture } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { KeyCode } from "../../../lib/browser/key-listener";
@@ -9,16 +9,38 @@ import { AsshatText } from "../../../lib/pixi/asshat-text";
 import { container } from "../../../lib/pixi/container";
 import { Action } from "../../core/input";
 import { Input } from "../../globals";
+import { StepOrder } from "../step-order";
 
 export function objFigureInputActionControl(action: Action) {
-    const control = Input.getControl(action);
-
-    return container(objFigureControl(control))
+    return container<Container>()
         .coro(function* (self) {
             while (true) {
-                yield onMutate.Provider(() => Input.getControl(action));
                 self.removeAllChildren();
-                objFigureControl(Input.getControl(action)).show(self);
+                const control = Input.getControl(action);
+
+                const figureControlObjs = new Array<Container>();
+
+                if (typeof control === "string" || Array.isArray(control)) {
+                    figureControlObjs.push(...getFigureControlObjs(control));
+                }
+                else {
+                    figureControlObjs.push(...getFigureControlObjs(control.keyboard));
+                    figureControlObjs.push(...getFigureControlObjs(control.gamepad));
+                }
+
+                let x = 0;
+                for (let i = 0; i < figureControlObjs.length; i++) {
+                    const obj = figureControlObjs[i];
+                    obj.x = x;
+
+                    obj.show(self);
+
+                    if (i < figureControlObjs.length - 1) {
+                        x += obj.width + 2;
+                        Sprite.from(Tx.Ui.Controls.Slash).at(x, -3).show(self);
+                        x += 6;
+                    }
+                }
 
                 let container = self.parent;
 
@@ -30,23 +52,23 @@ export function objFigureInputActionControl(action: Action) {
 
                     container = container.parent;
                 }
+
+                yield onMutate.Provider(() => Input.getControl(action));
             }
-        });
+        }, StepOrder.BeforeCamera);
 }
 
-function objFigureControl(control: ReturnType<typeof Input["getControl"]>) {
+function getFigureControlObjs(control: KeyCode | GamepadControl.Type[]): Container[] {
     if (typeof control === "string") {
-        return container(
-            Sprite.from(Tx.Ui.Controls.KeyboardKey),
-            objText.MediumBold(keyCodeToFigureData[control] ?? control, { tint: 0x3439BC })
-                .anchored(0.5, 0.5)
-                .at(9, 8),
-        )
-            .pivoted(0, 2);
-    }
-
-    if (!control) {
-        return container();
+        return [
+            container(
+                Sprite.from(Tx.Ui.Controls.KeyboardKey),
+                objText.MediumBold(keyCodeToFigureData[control] ?? control, { tint: 0x3439BC })
+                    .anchored(0.5, 0.5)
+                    .at(9, 8),
+            )
+                .pivoted(0, 1),
+        ];
     }
 
     const displayObjs = control.flatMap(gamepadControl => {
@@ -54,22 +76,14 @@ function objFigureControl(control: ReturnType<typeof Input["getControl"]>) {
             return [
                 Sprite.from(Tx.Ui.Controls[buttonIndexToTextureKey[gamepadControl.index]] ?? Texture.EMPTY)
                     .anchored(0, 0.5)
-                    .at(0, 8),
+                    .at(0, 7),
             ];
         }
 
         return [];
     });
 
-    let x = 0;
-    for (const obj of displayObjs) {
-        obj.x = x;
-        x += obj.width + 1;
-    }
-
-    return container(
-        ...displayObjs,
-    );
+    return displayObjs;
 }
 
 const keyCodeToFigureData: Record<KeyCode, string> = {

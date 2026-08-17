@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 964 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 965 }];
 
 interface TxData {
   id: string;
@@ -120,7 +120,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Body: tx({ id: "Characters.SimpleBot.Body", atlas: 0, x: 3785, y: 2502, width: 160, height: 80 }),
         Limbs: tx({ id: "Characters.SimpleBot.Limbs", atlas: 0, x: 3785, y: 2453, width: 162, height: 48 }),
         Mullet: tx({ id: "Characters.SimpleBot.Mullet", atlas: 0, x: 3966, y: 2820, width: 64, height: 18 }),
-        Pupil: tx({ id: "Characters.SimpleBot.Pupil", atlas: 0, x: 2460, y: 2475, width: 6, height: 18 }),
+        Pupil: tx({ id: "Characters.SimpleBot.Pupil", atlas: 0, x: 1706, y: 1596, width: 6, height: 18 }),
         Sclera: tx({ id: "Characters.SimpleBot.Sclera", atlas: 0, x: 221, y: 2239, width: 16, height: 20 }),
         Wig: tx({ id: "Characters.SimpleBot.Wig", atlas: 0, x: 3331, y: 2739, width: 72, height: 30 }),
       },
@@ -262,7 +262,7 @@ function txs<T>(tx: (data: TxData) => T) {
       Ballon: tx({ id: "Effects.Ballon", atlas: 0, x: 785, y: 1487, width: 110, height: 24 }),
       BandaidFormation: tx({ id: "Effects.BandaidFormation", atlas: 0, x: 3898, y: 2056, width: 198, height: 14 }),
       BoomText: tx({ id: "Effects.BoomText", atlas: 0, x: 1006, y: 2498, width: 44, height: 16 }),
-      Bubble4: tx({ id: "Effects.Bubble4", atlas: 0, x: 3183, y: 2714, width: 4, height: 4 }),
+      Bubble4: tx({ id: "Effects.Bubble4", atlas: 0, x: 1664, y: 1615, width: 4, height: 4 }),
       Burst32: tx({ id: "Effects.Burst32", atlas: 0, x: 492, y: 2511, width: 32, height: 22 }),
       BurstDusty: tx({ id: "Effects.BurstDusty", atlas: 0, x: 3141, y: 1787, width: 470, height: 86 }),
       BurstRound24: tx({ id: "Effects.BurstRound24", atlas: 0, x: 3258, y: 2753, width: 72, height: 24 }),
@@ -342,7 +342,7 @@ function txs<T>(tx: (data: TxData) => T) {
       Cactus: {
         Body: tx({ id: "Enemy.Cactus.Body", atlas: 0, x: 3641, y: 2185, width: 248, height: 44 }),
         Leaf0: tx({ id: "Enemy.Cactus.Leaf0", atlas: 0, x: 1996, y: 426, width: 20, height: 14 }),
-        Nose: tx({ id: "Enemy.Cactus.Nose", atlas: 0, x: 1664, y: 1615, width: 4, height: 4 }),
+        Nose: tx({ id: "Enemy.Cactus.Nose", atlas: 0, x: 1920, y: 1022, width: 4, height: 4 }),
         Sclera0: tx({ id: "Enemy.Cactus.Sclera0", atlas: 0, x: 3126, y: 2586, width: 14, height: 10 }),
       },
       Chill: {
@@ -353,7 +353,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Pupil0: tx({ id: "Enemy.Chill.Pupil0", atlas: 0, x: 668, y: 1701, width: 12, height: 22 }),
         SadCloudBody: tx({ id: "Enemy.Chill.SadCloudBody", atlas: 0, x: 3404, y: 2751, width: 72, height: 24 }),
         SadCloudFace: tx({ id: "Enemy.Chill.SadCloudFace", atlas: 0, x: 1713, y: 1518, width: 288, height: 24 }),
-        SadCloudPuff: tx({ id: "Enemy.Chill.SadCloudPuff", atlas: 0, x: 3700, y: 2637, width: 6, height: 6 }),
+        SadCloudPuff: tx({ id: "Enemy.Chill.SadCloudPuff", atlas: 0, x: 1910, y: 2309, width: 6, height: 6 }),
         SadCloud: tx({ id: "Enemy.Chill.SadCloud", atlas: 0, x: 3331, y: 2770, width: 72, height: 24 }),
         Sclera0: tx({ id: "Enemy.Chill.Sclera0", atlas: 0, x: 179, y: 2340, width: 40, height: 24 }),
         VortexAura: tx({ id: "Enemy.Chill.VortexAura", atlas: 0, x: 1742, y: 1918, width: 1, height: 32 }),
@@ -361,7 +361,7 @@ function txs<T>(tx: (data: TxData) => T) {
       CommonClown: tx({ id: "Enemy.CommonClown", atlas: 0, x: 570, y: 2504, width: 44, height: 32 }),
       Common: {
         Eyes: {
-          Injured0: tx({ id: "Enemy.Common.Eyes.Injured0", atlas: 0, x: 1706, y: 1596, width: 6, height: 10 }),
+          Injured0: tx({ id: "Enemy.Common.Eyes.Injured0", atlas: 0, x: 3700, y: 2637, width: 6, height: 10 }),
           Injured1: tx({ id: "Enemy.Common.Eyes.Injured1", atlas: 0, x: 1440, y: 2486, width: 16, height: 18 }),
         },
         Mouths: {
@@ -424,7 +424,7 @@ function txs<T>(tx: (data: TxData) => T) {
         GiantBody: tx({ id: "Enemy.Snail.GiantBody", atlas: 0, x: 1611, y: 312, width: 384, height: 132 }),
         GiantPupil0: tx({ id: "Enemy.Snail.GiantPupil0", atlas: 0, x: 1341, y: 2499, width: 16, height: 18 }),
         GiantSclera0: tx({ id: "Enemy.Snail.GiantSclera0", atlas: 0, x: 330, y: 2765, width: 28, height: 28 }),
-        Pupil0: tx({ id: "Enemy.Snail.Pupil0", atlas: 0, x: 1910, y: 2309, width: 6, height: 4 }),
+        Pupil0: tx({ id: "Enemy.Snail.Pupil0", atlas: 0, x: 3183, y: 2714, width: 6, height: 4 }),
         Sclera0: tx({ id: "Enemy.Snail.Sclera0", atlas: 0, x: 791, y: 2572, width: 12, height: 6 }),
       },
       Snow: {
@@ -1074,6 +1074,7 @@ function txs<T>(tx: (data: TxData) => T) {
         GamepadControlLeft: tx({ id: "Ui.Controls.GamepadControlLeft", atlas: 0, x: 3227, y: 2768, width: 14, height: 16 }),
         GamepadControlRight: tx({ id: "Ui.Controls.GamepadControlRight", atlas: 0, x: 3242, y: 2768, width: 14, height: 16 }),
         KeyboardKey: tx({ id: "Ui.Controls.KeyboardKey", atlas: 0, x: 4077, y: 2435, width: 18, height: 16 }),
+        Slash: tx({ id: "Ui.Controls.Slash", atlas: 0, x: 2460, y: 2475, width: 6, height: 20 }),
       },
       CurrentlyEquippedSlot: tx({ id: "Ui.CurrentlyEquippedSlot", atlas: 0, x: 2640, y: 2368, width: 40, height: 10 }),
       CurrentlyEquipped: tx({ id: "Ui.CurrentlyEquipped", atlas: 0, x: 2003, y: 594, width: 12, height: 12 }),
