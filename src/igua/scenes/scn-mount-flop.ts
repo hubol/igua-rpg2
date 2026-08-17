@@ -190,7 +190,7 @@ function enrichCloudMonkNpc(lvl: LvlType.MountFlop) {
         .mixin(mxnCutscene, function* () {
             const result = yield* ask(
                 "It's chilly up here!",
-                "I know!",
+                "Girl, I know!",
                 quest.isCompletable ? "What do you do for fun?" : null,
             );
 
