@@ -1,6 +1,8 @@
-import { BitmapFont, BitmapText, IBitmapFontCharacter, IBitmapTextStyle, Texture } from "pixi.js";
+import { BitmapFont, IBitmapFontCharacter, IBitmapTextStyle, Texture } from "pixi.js";
 import { Integer } from "../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../lib/math/rng";
+import { AsshatText } from "../../lib/pixi/asshat-text";
+import { txt } from "../../lib/pixi/txt";
 
 interface IrregularBitmapFont {
     rng: PseudoRng;
@@ -54,10 +56,10 @@ class IrregularBitmapFontCharacter implements Omit<IBitmapFontCharacter, "page">
     }
 }
 
-export class IrregularBitmapText extends BitmapText {
+export class IrregularBitmapText extends AsshatText {
     private _seed: Integer = Rng.int(10000);
 
-    constructor(text: string, style: Partial<IBitmapTextStyle> = {}) {
+    constructor(text: txt.Type | string, style: Partial<IBitmapTextStyle> = {}) {
         super(text, style);
     }
 

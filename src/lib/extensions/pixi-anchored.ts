@@ -1,14 +1,16 @@
 import { BitmapText, ObservablePoint, Sprite } from "pixi.js";
 import { VectorSimple } from "../math/vector-type";
 
-interface Anchorable {
-    anchored(vector: VectorSimple): this;
-    anchored(x: number, y: number): this;
+export namespace PixiAnchored {
+    export interface Anchorable {
+        anchored(vector: VectorSimple): this;
+        anchored(x: number, y: number): this;
+    }
 }
 
 declare module "pixi.js" {
-    interface Sprite extends Anchorable {}
-    interface BitmapText extends Anchorable {}
+    interface Sprite extends PixiAnchored.Anchorable {}
+    interface BitmapText extends PixiAnchored.Anchorable {}
 }
 
 for (const proto of [BitmapText.prototype, Sprite.prototype]) {

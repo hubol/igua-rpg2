@@ -1,6 +1,6 @@
 import { IBitmapTextStyle } from "pixi.js";
-import { BitmapText } from "pixi.js";
 import { IrregularBitmapText } from "../igua/lib/irregular-bitmap-text";
+import { AsshatText } from "../lib/pixi/asshat-text";
 import { fntDiggit, fntDiggitMono } from "./bitmap-fonts/fnt-diggit";
 import { fntErotix } from "./bitmap-fonts/fnt-erotix";
 import { fntErotixLight } from "./bitmap-fonts/fnt-erotix-light";
@@ -15,30 +15,30 @@ export const objText = {
         return new IrregularBitmapText(text, { fontName: fntFlaccid.font, ...style });
     },
     XSmall(text = "", style: Style = {}) {
-        return new BitmapText(text, { fontName: fntFlaccid.font, ...style });
+        return new AsshatText(text, { fontName: fntFlaccid.font, ...style });
     },
     SmallDigits(text = "", style: Style = {}) {
-        return new BitmapText(text, { fontName: fntDiggit.font, ...style });
+        return new AsshatText(text, { fontName: fntDiggit.font, ...style });
     },
     SmallDigitsMono(text = "", style: Style = {}) {
-        return new BitmapText(text, { fontName: fntDiggitMono.font, ...style });
+        return new AsshatText(text, { fontName: fntDiggitMono.font, ...style });
     },
     MediumIrregular(text = "", style: Style = {}) {
         return new IrregularBitmapText(text, { fontName: fntErotixLight.font, ...style });
     },
     Medium(text = "", style: Style = {}) {
-        return new BitmapText(text, { fontName: fntErotixLight.font, ...style });
+        return new AsshatText(text, { fontName: fntErotixLight.font, ...style });
     },
     MediumBoldIrregular(text = "", style: Style = {}) {
         return new IrregularBitmapText(text, { fontName: fntErotix.font, ...style });
     },
     MediumBold(text = "", style: Style = {}) {
-        return new BitmapText(text, { fontName: fntErotix.font, ...style });
+        return new AsshatText(text, { fontName: fntErotix.font, ...style });
     },
     MediumMono(text = "", style: Style = {}) {
-        return new BitmapText(text, { fontName: fntErotixLightMono.font, ...style });
+        return new AsshatText(text, { fontName: fntErotixLightMono.font, ...style });
     },
     Large(text = "", style: Style = {}) {
-        return new BitmapText(text, { fontName: fntGoodBoy.font, ...style });
+        return new AsshatText(text, { fontName: fntGoodBoy.font, ...style });
     },
 };

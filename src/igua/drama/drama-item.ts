@@ -1,4 +1,4 @@
-import { BitmapText, Container, DisplayObject, Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
+import { Container, DisplayObject, Graphics, LINE_CAP, LINE_JOIN, Sprite } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
@@ -9,6 +9,7 @@ import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
+import { AsshatText } from "../../lib/pixi/asshat-text";
 import { container } from "../../lib/pixi/container";
 import { renderer } from "../current-pixi-renderer";
 import { DataItem } from "../data/data-item";
@@ -168,7 +169,7 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
     return value;
 }
 
-function objMessage(textObj: BitmapText) {
+function objMessage(textObj: AsshatText) {
     const colors = DramaLib.Speaker.getColors();
 
     return container(
