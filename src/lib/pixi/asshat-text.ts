@@ -1,8 +1,39 @@
-import { BitmapFont, BLEND_MODES, Color, ColorSource, Container, IBitmapFontCharacter, IBitmapTextStyle, IDestroyOptions, Mesh, MeshGeometry, MeshMaterial, ObservablePoint, Point, Program, Rectangle, Renderer, settings, TextStyleAlign, Texture, utils } from "pixi.js";
+import { BitmapFont, BLEND_MODES, Buffer, Color, ColorSource, Container, IBitmapFontCharacter, IBitmapTextStyle, IDestroyOptions, Mesh, MeshGeometry, MeshMaterial, ObservablePoint, Point, Program, Rectangle, Renderer, settings, TextStyleAlign, Texture, TYPES, utils } from "pixi.js";
 import { PixiAnchored } from "../extensions/pixi-anchored";
 import { Integer } from "../math/number-alias-types";
 import { VectorSimple } from "../math/vector-type";
 import { txt } from "./txt";
+
+const fragSrc = `varying vec2 vTextureCoord;
+varying vec4 vColor;
+
+uniform sampler2D uSampler;
+
+void main(void)
+{
+    gl_FragColor = texture2D(uSampler, vTextureCoord) * vColor;
+}`;
+
+const vertSrc = `attribute vec2 aVertexPosition;
+attribute vec2 aTextureCoord;
+attribute float aColorBlend;
+
+uniform mat3 projectionMatrix;
+uniform mat3 translationMatrix;
+uniform vec4 uColor;
+uniform mat3 uTextureMatrix;
+
+varying vec2 vTextureCoord;
+varying vec4 vColor;
+
+void main(void)
+{
+    gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);
+
+    vTextureCoord = (uTextureMatrix * vec3(aTextureCoord, 1.0)).xy;
+    vColor = mix(vec4(1.0), uColor, aColorBlend);
+}
+`;
 
 interface PageMeshData {
     index: number;
@@ -14,12 +45,14 @@ interface PageMeshData {
     vertices: Float32Array;
     uvs: Float32Array;
     indices: Uint16Array;
+    colors: Float32Array;
 }
 interface CharRenderData {
     texture: Texture;
     line: number;
     position: Point;
     prevSpaces: number;
+    blend: number;
 }
 
 // If we ever need more than two pools, please make a Dict or something better.
@@ -307,6 +340,7 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
                 line: 0,
                 prevSpaces: 0,
                 position: new Point(),
+                blend: 1,
             };
 
             charRenderData.texture = charData.texture;
@@ -314,6 +348,7 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
             charRenderData.position.x = Math.round(pos.x + charData.xOffset + (this._letterSpacing / 2));
             charRenderData.position.y = Math.round(pos.y + charData.yOffset);
             charRenderData.prevSpaces = spaceCount;
+            charRenderData.blend = charCode !== null ? 1 : 0;
 
             chars.push(charRenderData);
 
@@ -387,8 +422,18 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
                 let pageMeshData = pageMeshDataPool.pop();
 
                 if (!pageMeshData) {
-                    const geometry = new MeshGeometry();
-                    const material = new MeshMaterial(Texture.EMPTY);
+                    const geometry = new MeshGeometry()
+                        .addAttribute(
+                            "aColorBlend",
+                            new Buffer(undefined, true),
+                            1,
+                            false,
+                            TYPES.FLOAT,
+                            0,
+                        );
+                    const material = new MeshMaterial(Texture.EMPTY, {
+                        program: Program.from(vertSrc, fragSrc, "AsshatText"),
+                    });
                     const meshBlendMode = BLEND_MODES.NORMAL;
 
                     const mesh = new Mesh(geometry, material);
@@ -408,6 +453,8 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
                         uvs: null,
                         // @ts-expect-error Stupid x3
                         indices: null,
+                        // @ts-expect-error Stupid x4
+                        colors: null,
                     };
                 }
 
@@ -462,6 +509,7 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
             if (!(pageMeshData.indices?.length > 6 * total) || pageMeshData.vertices.length < Mesh.BATCHABLE_SIZE * 2) {
                 pageMeshData.vertices = new Float32Array(4 * 2 * total);
                 pageMeshData.uvs = new Float32Array(4 * 2 * total);
+                pageMeshData.colors = new Float32Array(4 * total);
                 pageMeshData.indices = new Uint16Array(6 * total);
             }
             else {
@@ -529,6 +577,11 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
 
             pageMesh.uvs[(index * 8) + 6] = textureUvs.x3;
             pageMesh.uvs[(index * 8) + 7] = textureUvs.y3;
+
+            pageMesh.colors[(index * 4) + 0] = char.blend;
+            pageMesh.colors[(index * 4) + 1] = char.blend;
+            pageMesh.colors[(index * 4) + 2] = char.blend;
+            pageMesh.colors[(index * 4) + 3] = char.blend;
         }
 
         this._textWidth = maxLineWidth * scale;
@@ -563,14 +616,17 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
 
             const vertexBuffer = pageMeshData.mesh.geometry.getBuffer("aVertexPosition");
             const textureBuffer = pageMeshData.mesh.geometry.getBuffer("aTextureCoord");
+            const colorBuffer = pageMeshData.mesh.geometry.getBuffer("aColorBlend");
             const indexBuffer = pageMeshData.mesh.geometry.getIndex();
 
             vertexBuffer.data = pageMeshData.vertices;
             textureBuffer.data = pageMeshData.uvs;
+            colorBuffer.data = pageMeshData.colors;
             indexBuffer.data = pageMeshData.indices;
 
             vertexBuffer.update();
             textureBuffer.update();
+            colorBuffer.update();
             indexBuffer.update();
         }
 
