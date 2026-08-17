@@ -60,10 +60,16 @@ export function objFigureInputActionControl(action: Action) {
 
 function getFigureControlObjs(control: KeyCode | GamepadControl.Type[]): Container[] {
     if (typeof control === "string") {
+        const figureData = keyCodeToFigureData[control] ?? control;
+
+        if (figureData instanceof Texture) {
+            return [Sprite.from(figureData).pivoted(0, 1)];
+        }
+
         return [
             container(
                 Sprite.from(Tx.Ui.Controls.KeyboardKey),
-                objText.MediumBold(keyCodeToFigureData[control] ?? control, { tint: 0x3439BC })
+                objText.MediumBold(figureData, { tint: 0x3439BC })
                     .anchored(0.5, 0.5)
                     .at(9, 8),
             )
@@ -86,11 +92,11 @@ function getFigureControlObjs(control: KeyCode | GamepadControl.Type[]): Contain
     return displayObjs;
 }
 
-const keyCodeToFigureData: Record<KeyCode, string> = {
-    ArrowDown: "",
-    ArrowLeft: "",
-    ArrowRight: "",
-    ArrowUp: "",
+const keyCodeToFigureData: Record<KeyCode, string | Texture> = {
+    ArrowDown: Tx.Ui.Controls.KeyboardKeyDown,
+    ArrowLeft: Tx.Ui.Controls.KeyboardKeyLeft,
+    ArrowRight: Tx.Ui.Controls.KeyboardKeyRight,
+    ArrowUp: Tx.Ui.Controls.KeyboardKeyUp,
     Backquote: "",
     Backslash: "",
     Backspace: "",
@@ -165,12 +171,13 @@ const keyCodeToFigureData: Record<KeyCode, string> = {
     ShiftLeft: "",
     ShiftRight: "",
     Slash: "",
-    Space: "",
+    Space: Tx.Ui.Controls.KeyboardSpace,
     Tab: "",
 };
 
 const { StandardMapping: { Button } } = GamepadControl;
 
+// TODO need d-pad icons
 const buttonIndexToTextureKey: Record<Integer, keyof typeof Tx["Ui"]["Controls"]> = {
     [Button.Right]: "GamepadButtonB",
     [Button.Bottom]: "GamepadButtonA",

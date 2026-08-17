@@ -14,9 +14,13 @@ export function scnDevTxt() {
         .show();
 
     objText.MediumBold(
-        txt`ABXY LB RB Press ${objFigureInputActionControl("CastSpell")} to cast a spell.
+        txt`Press ${objFigureInputActionControl("CastSpell")} to cast a spell.
 
-Press ${objFigureInputActionControl("InventoryMenuToggle")} to view inventory.`,
+Press ${objFigureInputActionControl("InventoryMenuToggle")} to view inventory.
+
+Press ${objFigureInputActionControl("Confirm")} to confirm.
+
+Press ${objFigureInputActionControl("Duck")} to duck.`,
     )
         .at(100, 100)
         .coro(function* (self) {
