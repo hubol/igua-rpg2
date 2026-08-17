@@ -3,6 +3,6 @@ import { Tx } from "../../../assets/textures";
 import { txt } from "../../../lib/pixi/txt";
 
 export function scnDevTxt() {
-    objText.MediumIrregular(txt`Hello sucka, ${Tx.Collectibles.BallFruitTypeA} it's awesome now\nHave sex with me?`)
+    objText.Large(txt`Hello sucka, ${Tx.Collectibles.BallFruitTypeA} it's awesome now\nBe cool and lovely`)
         .show();
 }

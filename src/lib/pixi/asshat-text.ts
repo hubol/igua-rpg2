@@ -1,5 +1,6 @@
 import { BitmapFont, BLEND_MODES, Color, ColorSource, Container, IBitmapFontCharacter, IBitmapTextStyle, IDestroyOptions, Mesh, MeshGeometry, MeshMaterial, ObservablePoint, Point, Program, Rectangle, Renderer, settings, TextStyleAlign, Texture, utils } from "pixi.js";
 import { PixiAnchored } from "../extensions/pixi-anchored";
+import { Integer } from "../math/number-alias-types";
 import { VectorSimple } from "../math/vector-type";
 import { txt } from "./txt";
 
@@ -290,7 +291,7 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
                 charData = data.chars[charCode];
             }
             else {
-                charData = TextureCharacterData.create(value);
+                charData = TextureCharacterData.create(value, data.lineHeight);
             }
 
             if (!charData) {
@@ -869,9 +870,10 @@ namespace TextureCharacterData {
         yOffset: 0,
     };
 
-    export function create(texture: Texture): IBitmapFontCharacter {
+    export function create(texture: Texture, lineHeight: Integer): IBitmapFontCharacter {
         buffer.texture = texture;
         buffer.xAdvance = texture.width + 1;
+        buffer.yOffset = Math.floor((texture.height - lineHeight) / -2);
         return buffer;
     }
 }
