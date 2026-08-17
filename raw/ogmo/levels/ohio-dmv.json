@@ -193,17 +193,6 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromWizard", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
-        },
-        {
-          "name": "Checkpoint",
-          "id": 6,
-          "_eid": "19953026",
-          "x": 168,
-          "y": 360,
-          "originX": 22,
-          "originY": 39,
-          "flippedX": false,
-          "values": {"name": "restart", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -1098,6 +1087,18 @@
           "groupName": null
         }
       ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 49,
+      "decals": [],
       "folder": "../textures"
     }
   ]

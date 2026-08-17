@@ -333,7 +333,7 @@
           "rotation": 90,
           "uid": 178520085797500,
           "tint": "#ffffff",
-          "values": {"sceneName": "scnDungeonBones", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+          "values": {"sceneName": "scnOhioCemetery", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
         {
           "name": "GateMap",
@@ -724,7 +724,7 @@
           "originX": 22,
           "originY": 39,
           "flippedX": true,
-          "values": {"name": "fromDungeonBones", "depth": 0, "overrideFlipX": "none"}
+          "values": {"name": "fromOhioCemetery", "depth": 0, "overrideFlipX": "none"}
         },
         {
           "name": "Checkpoint",

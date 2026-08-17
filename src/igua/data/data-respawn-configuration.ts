@@ -1,5 +1,5 @@
 import { scnIndianaUniversityNurse } from "../scenes/scn-indiana-universtiy-nurse";
-import { scnOhioDmv } from "../scenes/scn-ohio-dmv";
+import { scnOhioCemetery } from "../scenes/scn-ohio-cemetery";
 import { scnWorldMap } from "../scenes/scn-world-map";
 import { SceneChanger } from "../systems/scene-changer";
 import { DataLib } from "./data-lib";
@@ -21,8 +21,8 @@ export namespace DataRespawnConfiguration {
                 sceneName: scnIndianaUniversityNurse.name,
                 checkpointName: "restart",
             },
-            ["Ohio.Dmv"]: {
-                sceneName: scnOhioDmv.name,
+            ["Ohio.Cemetery"]: {
+                sceneName: scnOhioCemetery.name,
                 checkpointName: "restart",
             },
             __Fallback__: {

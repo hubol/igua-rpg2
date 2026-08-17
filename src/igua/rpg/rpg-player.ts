@@ -169,7 +169,7 @@ export class RpgPlayer {
     setStartingRegion(regionId: RpgRegion.StartingId) {
         const respawnConfigurations = {
             Indiana: "Indiana.University.Nurse",
-            Ohio: "Ohio.Dmv",
+            Ohio: "Ohio.Cemetery",
         } satisfies Partial<Record<RpgRegion.Id, DataRespawnConfiguration.Id>>;
 
         this._state.startingRegionId = regionId;

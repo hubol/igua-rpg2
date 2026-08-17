@@ -72,7 +72,7 @@
           "originX": 0,
           "originY": 0,
           "flippedX": true,
-          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromDungeonBones", "name": "", "depth": 0}
+          "values": {"sceneName": "scnOhioCemetery", "checkpointName": "fromDungeonBones", "name": "", "depth": 0}
         },
         {
           "name": "Region",
@@ -128,17 +128,6 @@
           "_eid": "93092164",
           "x": 82,
           "y": 105,
-          "originX": 22,
-          "originY": 39,
-          "flippedX": false,
-          "values": {"name": "", "depth": 0}
-        },
-        {
-          "name": "PlayerDev",
-          "id": 1,
-          "_eid": "98101389",
-          "x": 672,
-          "y": 536,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
@@ -1362,6 +1351,18 @@
     {
       "name": "ParallaxDecals",
       "_eid": "17093961",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 237,
+      "gridCellsY": 142,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
       "offsetX": 0,
       "offsetY": 0,
       "gridCellWidth": 8,
