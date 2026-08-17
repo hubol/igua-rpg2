@@ -1,5 +1,5 @@
 import { AsshatInput, InputModalityType } from "../../lib/game-engine/input/asshat-input";
-import { GamepadControl, GamepadControls, StandardMapping } from "../../lib/game-engine/input/gamepad-controls";
+import { GamepadControl, GamepadControls } from "../../lib/game-engine/input/gamepad-controls";
 import { MappedGamepad } from "../../lib/game-engine/input/mapped-gamepad";
 import { KeyboardControls, MappedKeyboard } from "../../lib/game-engine/input/mapped-keyboard";
 import { layers } from "../globals";
@@ -48,7 +48,7 @@ const keyboardControls: KeyboardControls<Action> = {
     Quit: "Escape",
 };
 
-const { button, axis, axisUnit } = GamepadControl;
+const { button, axis, axisUnit, StandardMapping } = GamepadControl;
 
 const gamepadControls: GamepadControls<Action> = {
     CastSpell: [button(StandardMapping.Button.Top), button(StandardMapping.Button.BumperRight)],

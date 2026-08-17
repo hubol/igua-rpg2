@@ -2,7 +2,7 @@ import { sqDistance } from "../../math/vector";
 import { vnew } from "../../math/vector-type";
 import { Undefined } from "../../types/undefined";
 import { InputModalityType, MappedInputModality } from "./asshat-input";
-import { GamepadControls, GamepadControlType } from "./gamepad-controls";
+import { GamepadControl, GamepadControls } from "./gamepad-controls";
 
 export class MappedGamepad<TAction extends string> implements MappedInputModality<TAction> {
     private readonly _keys: string[];
@@ -136,7 +136,7 @@ function compileApplyGamepadToInput<TAction extends string>(
 return function applyGamepadToState(gamepad, state) {
 ${
             Object.entries(controls).map(([action, _controls]) => {
-                const controls = _controls as GamepadControlType[];
+                const controls = _controls as GamepadControl.Type[];
 
                 if (controls.length === 0) {
                     return "";

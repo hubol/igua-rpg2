@@ -1,8 +1,10 @@
-import { Sprite } from "pixi.js";
+import { Sprite, Texture } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Tx } from "../../../assets/textures";
 import { KeyCode } from "../../../lib/browser/key-listener";
+import { GamepadControl } from "../../../lib/game-engine/input/gamepad-controls";
 import { onMutate } from "../../../lib/game-engine/routines/on-mutate";
+import { Integer } from "../../../lib/math/number-alias-types";
 import { AsshatText } from "../../../lib/pixi/asshat-text";
 import { container } from "../../../lib/pixi/container";
 import { Action } from "../../core/input";
@@ -43,7 +45,31 @@ function objFigureControl(control: ReturnType<typeof Input["getControl"]>) {
             .pivoted(0, 2);
     }
 
-    return container();
+    if (!control) {
+        return container();
+    }
+
+    const displayObjs = control.flatMap(gamepadControl => {
+        if (gamepadControl.kind === "button") {
+            return [
+                Sprite.from(Tx.Ui.Controls[buttonIndexToTextureKey[gamepadControl.index]] ?? Texture.EMPTY)
+                    .anchored(0, 0.5)
+                    .at(0, 8),
+            ];
+        }
+
+        return [];
+    });
+
+    let x = 0;
+    for (const obj of displayObjs) {
+        obj.x = x;
+        x += obj.width + 1;
+    }
+
+    return container(
+        ...displayObjs,
+    );
 }
 
 const keyCodeToFigureData: Record<KeyCode, string> = {
@@ -127,4 +153,17 @@ const keyCodeToFigureData: Record<KeyCode, string> = {
     Slash: "",
     Space: "",
     Tab: "",
+};
+
+const { StandardMapping: { Button } } = GamepadControl;
+
+const buttonIndexToTextureKey: Record<Integer, keyof typeof Tx["Ui"]["Controls"]> = {
+    [Button.Right]: "GamepadButtonB",
+    [Button.Bottom]: "GamepadButtonA",
+    [Button.Left]: "GamepadButtonX",
+    [Button.Top]: "GamepadButtonY",
+    [Button.BumperLeft]: "GamepadButtonLb",
+    [Button.BumperRight]: "GamepadButtonRb",
+    [Button.ControlLeft]: "GamepadControlLeft",
+    [Button.ControlRight]: "GamepadControlRight",
 };

@@ -10,8 +10,8 @@ import { objFigureInputActionControl } from "../../objects/figures/obj-figure-ac
 
 export function scnDevTxt() {
     const puppetObj = objIguanaPuppet(DataNpcLooks.AlphaMale);
-    objText.Medium(
-        txt`Press ${objFigureInputActionControl("CastSpell")} to cast a spell.
+    objText.MediumBold(
+        txt`ABXY LB RB Press ${objFigureInputActionControl("CastSpell")} to cast a spell.
 
 Press ${objFigureInputActionControl("InventoryMenuToggle")} to view inventory.`,
     )
