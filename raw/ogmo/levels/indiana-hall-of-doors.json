@@ -2109,6 +2109,18 @@
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 114,
+      "gridCellsY": 35,
+      "decals": [],
+      "folder": "../textures"
     }
   ]
 }
