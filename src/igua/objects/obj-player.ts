@@ -232,7 +232,8 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             Rpg.character.receiveSpellEducation();
         })
         .step(() => {
-            puppet.physicsEnabled = DevKey.isUp("ControlLeft");
+            const freeMove = DevKey.isDown("ControlLeft");
+            puppet.physicsEnabled = !freeMove;
             if (Rpg.character.buffs.cosmetic.sparkling) {
                 puppet.sparklesPerFrame = Math.max(puppet.sparklesPerFrame, 0.1);
             }
@@ -292,22 +293,24 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 Rpg.records.onPlayfulGameTick();
             }
 
+            const allowMoveYAxis = scene.isWorldMap || freeMove;
+
             puppet.isMovingLeft = hasControl && Input.isDown("MoveLeft");
             puppet.isMovingRight = hasControl && Input.isDown("MoveRight");
-            puppet.isMovingUp = hasControl && scene.isWorldMap && Input.isDown("WorldMap_MoveUp");
-            puppet.isMovingDown = hasControl && scene.isWorldMap && Input.isDown("WorldMap_MoveDown");
-            puppet.isDucking = hasControl && puppet.isOnGround && !scene.isWorldMap && Input.isDown("Duck");
+            puppet.isMovingUp = hasControl && allowMoveYAxis && Input.isDown("WorldMap_MoveUp");
+            puppet.isMovingDown = hasControl && allowMoveYAxis && Input.isDown("WorldMap_MoveDown");
+            puppet.isDucking = hasControl && puppet.isOnGround && !allowMoveYAxis && Input.isDown("Duck");
             status.state.isGuarding = puppet.isDucking;
 
             if (
                 hasControl && !puppet.isOnGround && puppet.speed.y < PlayerConsts.VariableJumpSpeedMaximum
-                && !scene.isWorldMap
+                && !allowMoveYAxis
                 && Input.isDown("Jump")
             ) {
                 puppet.speed.y += PlayerConsts.VariableJumpDelta;
             }
 
-            if (hasControl && !scene.isWorldMap && Input.justWentDown("Jump")) {
+            if (hasControl && !allowMoveYAxis && Input.justWentDown("Jump")) {
                 stepsSinceJumpJustWentDown = 0;
             }
 
