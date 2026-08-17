@@ -19,7 +19,7 @@ export interface MappedInputModality<TAction extends string> {
 }
 
 export class AsshatInput<TAction extends string> {
-    private _currentModality?: MappedInputModality<TAction>;
+    protected _currentModality?: MappedInputModality<TAction>;
 
     constructor(private readonly _modalities: MappedInputModality<TAction>[]) {
         console.log(...Logging.componentArgs(this));

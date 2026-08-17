@@ -113,6 +113,18 @@ export class IguaInput extends AsshatInput<Action> {
         super([new MappedKeyboard(keyboardControls), new MappedGamepad(gamepadControls)]);
     }
 
+    getControl(action: Action) {
+        if (!this._currentModality) {
+            return null;
+        }
+
+        if (this._currentModality instanceof MappedKeyboard) {
+            return keyboardControls[action];
+        }
+
+        return gamepadControls[action];
+    }
+
     protected onModalityChanged(from: InputModalityType, to: InputModalityType): void {
         layers.overlay.systemMessage.setMessage(message[to]);
     }

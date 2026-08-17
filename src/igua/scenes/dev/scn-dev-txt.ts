@@ -6,14 +6,14 @@ import { txt } from "../../../lib/pixi/txt";
 import { DataNpcLooks } from "../../data/data-npc-looks";
 import { DevKey } from "../../globals";
 import { objIguanaPuppet } from "../../iguana/obj-iguana-puppet";
+import { objFigureInputActionControl } from "../../objects/figures/obj-figure-action-control";
 
 export function scnDevTxt() {
     const puppetObj = objIguanaPuppet(DataNpcLooks.AlphaMale);
     objText.Medium(
-        txt`Hello sucka, ${Tx.Collectibles.BallFruitTypeA} it's awesome now
+        txt`Press ${objFigureInputActionControl("CastSpell")} to cast a spell.
 
-Be cool right now ${container(puppetObj).pivoted(-23, -40)} and lovely
-so ${Sprite.from(Tx.Collectibles.Pocket.CactusFruitA).scaled(0.5, 0.5)} wonderful`,
+Press ${objFigureInputActionControl("InventoryMenuToggle")} to view inventory.`,
     )
         .at(100, 100)
         .coro(function* (self) {

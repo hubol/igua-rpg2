@@ -8,7 +8,7 @@ import { IguaScene, IguaSceneStack } from "./core/scene/igua-scene-stack";
 export let layers: IguaLayers;
 export let scene: IguaScene;
 export let sceneStack: IguaSceneStack;
-export let Input: Pick<IguaInput, "isDown" | "isUp" | "justWentDown" | "justWentUp">;
+export let Input: Pick<IguaInput, "isDown" | "isUp" | "justWentDown" | "justWentUp" | "getControl">;
 export let Cutscene: IguaCutscene;
 export let forceGameLoop: () => void;
 export let startAnimator: () => void;
