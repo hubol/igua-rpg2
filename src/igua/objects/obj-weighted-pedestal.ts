@@ -1,4 +1,4 @@
-import { Sprite } from "pixi.js";
+import { DisplayObject, Sprite } from "pixi.js";
 import { OgmoEntities } from "../../assets/generated/levels/generated-ogmo-project-data";
 import { Tx } from "../../assets/textures";
 import { Logger } from "../../lib/game-engine/logger";
@@ -10,6 +10,7 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Rpg } from "../rpg/rpg";
 import { objFigureFlop } from "./figures/obj-figure-flop";
+import { objPipe } from "./obj-terrain";
 
 export function objWeightedPedestal({ uid, values: { requiredFlopsCount } }: OgmoEntities.WeightedPedestal) {
     const rpgWeightedPedestal = Rpg.weightedPedestals.getById(uid, { requiredFlopsCount });
@@ -53,16 +54,28 @@ What to do?`,
             }),
         container()
             .coro(function* (self) {
+                const pipeObjs = new Array<DisplayObject>();
+
                 while (true) {
                     self.removeAllChildren();
+                    for (const pipeObj of pipeObjs) {
+                        pipeObj.destroy();
+                    }
                     const list = rpgWeightedPedestal.list;
-                    for (let i = 0; i < list.length; i++) {
-                        const flopObj = objFigureFlop(list[i]);
-                        flopObj
-                            .filtered(flopObj.objects.filter)
-                            .at(0, i * -30)
-                            .zIndexed(-i)
-                            .show(self);
+                    for (let i = -1; i < list.length; i++) {
+                        if (i >= 0) {
+                            const flopObj = objFigureFlop(list[i]);
+                            flopObj
+                                .filtered(flopObj.objects.filter)
+                                .at(0, i * -30)
+                                .zIndexed(-i)
+                                .show(self);
+                        }
+
+                        const pipeObj = objPipe().at(self.parent).add(-20, i * -30 - 55).invisible();
+                        pipeObj.width = 40;
+
+                        pipeObjs.push(pipeObj);
                     }
                     yield onPrimitiveMutate(() => rpgWeightedPedestal.weight);
                 }
