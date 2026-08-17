@@ -1,5 +1,6 @@
 import { Container, DisplayObject, Sprite, Texture } from "pixi.js";
 import { Logger } from "../../lib/game-engine/logger";
+import { VectorSimple } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { scene } from "../globals";
 import { Rpg } from "../rpg/rpg";
@@ -17,6 +18,7 @@ export namespace OgmoFactory {
         height?: number;
         rotation?: number;
         tint?: number;
+        nodes?: ReadonlyArray<VectorSimple>;
         values: TValues;
     }
 

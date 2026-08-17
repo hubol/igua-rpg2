@@ -29,6 +29,7 @@ export function scnMountFlop() {
     const lvl = Lvl.MountFlop();
     enrichBestFriendHaverNpc(lvl);
     enrichBoxer(lvl);
+    enrichCloudMonkNpc(lvl);
 }
 
 const atkBoxerPunch = RpgAttack.create({
@@ -180,4 +181,11 @@ function enrichBestFriendHaverNpc(lvl: LvlType.MountFlop) {
     lvl.TownSignageHelp
         .mixin(mxnBoilPivot)
         .mixin(mxnFxBlink, 1.5);
+}
+
+function enrichCloudMonkNpc(lvl: LvlType.MountFlop) {
+    lvl.CloudNpc
+        .mixin(mxnCutscene, function* () {
+            yield* show("Hello!");
+        });
 }

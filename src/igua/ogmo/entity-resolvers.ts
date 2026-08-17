@@ -29,6 +29,7 @@ import { objGate } from "../objects/obj-gate";
 import { objIdol } from "../objects/obj-idol";
 import { ObjIguanaLocomotive } from "../objects/obj-iguana-locomotive";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
+import { objIguanaNpcPatrolMarker } from "../objects/obj-iguana-npc-patrol-marker";
 import { objIntelligenceBackground } from "../objects/obj-intelligence-background";
 import { objIntelligenceSign } from "../objects/obj-intelligence-sign";
 import { createPlayerObj, playerObj } from "../objects/obj-player";
@@ -124,6 +125,7 @@ export const OgmoEntityResolvers = {
         objEsotericClock({ time: { hours: entity.values.hours, minutes: entity.values.minutes } }),
     Dial: (entity: OgmoEntities.Dial) => objEsotericDial({ maxTicks: entity.values.maxTicks }),
     BinocularViewer: objEsotericBinocularViewer,
+    IguanaNpcPatrolMarker: objIguanaNpcPatrolMarker,
 };
 
 const __checkedOgmoEntityResolvers = OgmoEntityResolvers satisfies OgmoEntityResolverBase;

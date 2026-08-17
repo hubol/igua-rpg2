@@ -155,7 +155,7 @@
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
       ]
@@ -169,7 +169,7 @@
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "values": [
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
       ]
@@ -2301,6 +2301,54 @@
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/binocular viewer.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAmCAYAAACCjRgBAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIsSURBVFhH7Za7TgJBFIYH7KSwN6INuBTGEisLE7Wi0lZM9An0DXwDfQJNxNhpRWVMLKykNBQgNAqxt9BS5MzOmMMy971J5Es2M7vZPfP/Z+bMDpl0MqzV0qktDlg3MYrVN60+7QtJCS/svbIeId2rJdbzURnJslZIGlkHsBlApUNqIC3xHFMT0qmRGrhjbQwULkdFA3g5iZaScgmNAMJjFA9090fXvgl6AwkIx4yZ0IytXkKKj72bZdbzae++sJ45VjG2xUuIPsDrnb8kM4AHnc+vsB4h770mbU2MOMVABrBe+mAwhN4NyZeOaftQvqUtJpgxPnhubpW0ng5ofya3pTQRJsZGY4e2vdYpbQFaA1Dp/LKBZywMLjGwXuNdKJg5Dgj4/HgmpbULekFGZe9GESPImAEIZpsVeL/TvKYiXDGJIdLmG+BbpWbL0iEawBajGEivb2BY4fz6/rrPwEWfB8A7hithYvxqQ3qFQoFOdfwoAesSBOgypNuFXGMUa2GOEoi0ZwIjnQFANguALIuq7HNcYoiyD1gb4AS3OdWPBzD5MarMOxkAVCZ06AyYIhMPaGsAPlYFiBOTsa2FmcwIzjwGzjt174TdybFJWOSZ9crnUoOP9QpZr9RJu3EY2bhO2+hfYmogbSbeQORFvOAdSYsYdiE4LvfbZ9Mi5jhnIju76fyHliE7xquw/iAO4UFsjPyvJaQq0KgxLXRjA0mK55iYmP7I0mbCDRDyA2ykF95YWPogAAAAAElFTkSuQmCC"
+    },
+    {
+      "exportID": "98763038",
+      "name": "IguanaNpcPatrolMarker",
+      "limit": -1,
+      "size": {"x": 30, "y": 24},
+      "origin": {"x": 15, "y": 12},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": true,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 2,
+      "nodeGhost": true,
+      "tags": ["Marker"],
+      "values": [
+        {"name": "speed", "definition": "Float", "display": 2, "defaults": 2, "bounded": false, "min": 0.2, "max": 9},
+        {"name": "delayMin", "definition": "Integer", "display": 1, "defaults": 333, "bounded": true, "min": 33, "max": 9999},
+        {"name": "delayMax", "definition": "Integer", "display": 1, "defaults": 333, "bounded": true, "min": 33, "max": 9999},
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/iguana npc patrol.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAYCAYAAADtaU2/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD3SURBVEhLxZZBEsIgDEWhZ9KFbvXYutWF3kkb5GdCGgq2hb6ZDoFKHwGK9a7AZySGi/AjMUwwG9fKLPQAJuIWUiDlHLQUSiBn8eF0Y/HrcYmRc8fzPZRoQ11C92R7qf/7ef15KVsSA8RWG5irz/WnkpxDMO/AQKOIcVeSjGn+6dJrhHUqYfXPkYipg+5kteXAb2sGussa0wYb5Eu9NcheTj+V9DoFac8NhmUIU90y6xyJsHXmctNNMm0h17uc1xhsKdUygHN6tTgn0PAfQ4QrOWntgy20TBJuWNJ/hHOCHL5GuuTBJRJxDyHgs7qnNIEObnwdtMe5L8MO6bfZwI+FAAAAAElFTkSuQmCC"
     }
   ],
   "tilesets": []

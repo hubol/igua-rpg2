@@ -48,6 +48,7 @@ export namespace OgmoEntities {
   export type EnemySkeliguana = OgmoFactory.EntityBase<{ variant: "level0" | "level1" | "level2"; name: string; depth: number }>;
   export type SafeMarker = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type BinocularViewer = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type IguanaNpcPatrolMarker = OgmoFactory.EntityBase<{ speed: number; delayMin: number; delayMax: number; name: string; depth: number }>;
 }
 
 export interface OgmoEntityResolverBase {
@@ -96,4 +97,5 @@ export interface OgmoEntityResolverBase {
   EnemySkeliguana: (entity: OgmoEntities.EnemySkeliguana) => unknown;
   SafeMarker: (entity: OgmoEntities.SafeMarker) => unknown;
   BinocularViewer: (entity: OgmoEntities.BinocularViewer) => unknown;
+  IguanaNpcPatrolMarker: (entity: OgmoEntities.IguanaNpcPatrolMarker) => unknown;
 }

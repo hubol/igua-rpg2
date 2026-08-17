@@ -42,6 +42,7 @@ export interface OgmoEntityResolverBase ${serialize(Object.assign({}, ...entitie
 
 const ogmoEntityDefinitionToLiterals = {
     "Boolean": literal("boolean"),
+    "Float": literal("number"),
     "Integer": literal("number"),
     "RGB": literal("string"),
     "String": literal("string"),

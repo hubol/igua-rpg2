@@ -101,6 +101,16 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
         },
     };
 
+    // TODO migrate everything here?
+    const api = {
+        abortWalkTo() {
+            puppet.isBeingPiloted = false;
+            puppet.isMovingLeft = false;
+            puppet.isMovingRight = false;
+            currentWalkToTarget = undefined;
+        },
+    };
+
     const puppet = objIguanaPuppet(looks)
         // TODO not sure if that is the correct physics faction...
         .mixin(mxnPhysics, {
@@ -134,6 +144,7 @@ export function objIguanaLocomotive(looks: IguanaLooks.Serializable) {
             walkTo,
             auto,
         })
+        .merge({ objIguanaLocomotive: api })
         .step(() => {
             const effectiveWalkingSpeed = scene.isWorldMap ? puppet.speed.vlength : Math.abs(puppet.speed.x);
 
