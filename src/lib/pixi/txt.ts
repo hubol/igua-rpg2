@@ -1,7 +1,7 @@
-import { Resource, Texture } from "pixi.js";
+import { Container, Texture } from "pixi.js";
 
 export function txt(strings: TemplateStringsArray, ...values: txt.TemplateValue[]): string & txt.Type {
-    const data = new Array<string | Texture>();
+    const data = new Array<txt.Data>();
 
     const sanitizedStrings: string[] = strings.map(txt.sanitizeNewLine);
 
@@ -26,7 +26,7 @@ export function txt(strings: TemplateStringsArray, ...values: txt.TemplateValue[
 
 class Txt implements txt.Type {
     constructor(
-        private readonly _data: Array<string | Texture>,
+        private readonly _data: Array<txt.Data>,
     ) {
     }
 
@@ -34,7 +34,7 @@ class Txt implements txt.Type {
         return this._data.length;
     }
 
-    charAt(index: number): string | Texture<Resource> {
+    charAt(index: number): txt.Data {
         return this._data[index] ?? "";
     }
 
@@ -53,10 +53,16 @@ txt.sanitizeNewLine = function sanitizeNewLine (text: string) {
 
 export namespace txt {
     export interface Type {
-        charAt(index: number): string | Texture;
+        charAt(index: number): Data;
         readonly length: number;
         substring(start: number, end: number): Type;
     }
 
-    export type TemplateValue = string | number | Texture;
+    export type Data = string | Data.Pixi;
+
+    export namespace Data {
+        export type Pixi = Container | Texture;
+    }
+
+    export type TemplateValue = number | Data;
 }

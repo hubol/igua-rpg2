@@ -1,7 +1,8 @@
-import { BitmapFont, BLEND_MODES, Buffer, Color, ColorSource, Container, IBitmapFontCharacter, IBitmapTextStyle, IDestroyOptions, Mesh, MeshGeometry, MeshMaterial, ObservablePoint, Point, Program, Rectangle, Renderer, settings, TextStyleAlign, Texture, TYPES, utils } from "pixi.js";
+import { BitmapFont, BLEND_MODES, Buffer, Color, ColorSource, Container, DisplayObject, IBitmapFontCharacter, IBitmapTextStyle, IDestroyOptions, Mesh, MeshGeometry, MeshMaterial, ObservablePoint, Point, Program, Rectangle, Renderer, settings, Sprite, TextStyleAlign, Texture, TYPES, utils } from "pixi.js";
 import { PixiAnchored } from "../extensions/pixi-anchored";
 import { Integer } from "../math/number-alias-types";
 import { VectorSimple } from "../math/vector-type";
+import { Null } from "../types/null";
 import { txt } from "./txt";
 
 const fragSrc = `varying vec2 vTextureCoord;
@@ -47,7 +48,9 @@ interface PageMeshData {
     indices: Uint16Array;
     colors: Float32Array;
 }
+
 interface CharRenderData {
+    displayObject?: Container | null;
     texture: Texture;
     line: number;
     position: Point;
@@ -199,6 +202,9 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
     /** Cached char texture is destroyed when BitmapText is destroyed. */
     private _textureCache: Record<number, Texture>;
 
+    private _textureTokensContainer = Null<Container>();
+    private _textureTokenObjectsToRemove = new Set<DisplayObject>();
+
     /**
      * @param text - A string that you would like the text to display.
      * @param style - The style parameters.
@@ -291,11 +297,12 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
         let spaceCount = 0;
 
         const iterable = typeof this._text === "object" ? this._text : txt.sanitizeNewLine(this._text);
-        let value: string | Texture | null = null;
+        let value: txt.Data | null = null;
 
         for (let i = 0; i < iterable.length; i += 1) {
             let charCode: number | null = null;
-            let charData: IBitmapFontCharacter | null = null;
+            let charData: AsshatBitmapFontCharacter | null = null;
+            let isCharPixiData = false;
 
             value = iterable.charAt(i);
 
@@ -324,7 +331,8 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
                 charData = data.chars[charCode];
             }
             else {
-                charData = TextureCharacterData.create(value, data.lineHeight);
+                charData = AsshatBitmapFontCharacter.create(value, data.lineHeight);
+                isCharPixiData = true;
             }
 
             if (!charData) {
@@ -336,6 +344,7 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
             }
 
             const charRenderData: CharRenderData = charRenderDataPool.pop() || {
+                displayObject: null,
                 texture: Texture.EMPTY,
                 line: 0,
                 prevSpaces: 0,
@@ -343,12 +352,13 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
                 blend: 1,
             };
 
+            charRenderData.displayObject = charData.displayObject;
             charRenderData.texture = charData.texture;
             charRenderData.line = line;
             charRenderData.position.x = Math.round(pos.x + charData.xOffset + (this._letterSpacing / 2));
             charRenderData.position.y = Math.round(pos.y + charData.yOffset);
             charRenderData.prevSpaces = spaceCount;
-            charRenderData.blend = charCode !== null ? 1 : 0;
+            charRenderData.blend = isCharPixiData ? 0 : 1;
 
             chars.push(charRenderData);
 
@@ -478,7 +488,9 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
                 pagesMeshData[baseTextureUid] = pageMeshData!;
             }
 
-            pagesMeshData[baseTextureUid].total++;
+            if (!chars[i].displayObject) {
+                pagesMeshData[baseTextureUid].total++;
+            }
         }
 
         // lets find any previously active pageMeshDatas that are no longer required for
@@ -527,6 +539,13 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
             pageMeshData.mesh.size = 6 * total;
         }
 
+        if (this._textureTokensContainer) {
+            this._textureTokenObjectsToRemove.clear();
+            for (const child of this._textureTokensContainer.children) {
+                this._textureTokenObjectsToRemove.add(child);
+            }
+        }
+
         for (let i = 0; i < lenChars; i++) {
             const char = chars[i];
             let offset = char.position.x
@@ -538,6 +557,17 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
 
             const xPos = offset * scale;
             const yPos = char.position.y * scale;
+
+            if (char.displayObject) {
+                this._textureTokensContainer ??= new Container().show(this);
+                char.displayObject.position.set(xPos, yPos);
+                this._textureTokenObjectsToRemove.delete(char.displayObject);
+                if (!char.displayObject.parent) {
+                    this._textureTokensContainer.addChild(char.displayObject);
+                }
+                continue;
+            }
+
             const texture = char.texture;
 
             const pageMesh = pagesMeshData[texture.baseTexture.uid];
@@ -582,6 +612,10 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
             pageMesh.colors[(index * 4) + 1] = char.blend;
             pageMesh.colors[(index * 4) + 2] = char.blend;
             pageMesh.colors[(index * 4) + 3] = char.blend;
+        }
+
+        for (const obj of this._textureTokenObjectsToRemove) {
+            obj.destroy();
         }
 
         this._textWidth = maxLineWidth * scale;
@@ -916,8 +950,13 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
     }
 }
 
-namespace TextureCharacterData {
-    const buffer: IBitmapFontCharacter = {
+interface AsshatBitmapFontCharacter extends IBitmapFontCharacter {
+    displayObject?: Container | null;
+}
+
+namespace AsshatBitmapFontCharacter {
+    const buffer: AsshatBitmapFontCharacter = {
+        displayObject: null,
         kerning: {},
         page: 0,
         texture: null as any,
@@ -926,10 +965,17 @@ namespace TextureCharacterData {
         yOffset: 0,
     };
 
-    export function create(texture: Texture, lineHeight: Integer): IBitmapFontCharacter {
-        buffer.texture = texture;
-        buffer.xAdvance = texture.width + 1;
-        buffer.yOffset = Math.floor((texture.height - lineHeight) / -2);
+    export function create(data: txt.Data.Pixi, lineHeight: Integer): IBitmapFontCharacter {
+        if (data instanceof Texture) {
+            buffer.texture = data;
+            buffer.displayObject = null;
+        }
+        else {
+            buffer.texture = Texture.EMPTY;
+            buffer.displayObject = data;
+        }
+        buffer.xAdvance = data.width + 1;
+        buffer.yOffset = Math.floor((data.height - lineHeight) / -2);
         return buffer;
     }
 }
