@@ -3,12 +3,11 @@ import { Tx } from "../../../assets/textures";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
-import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { mxnSpeaker } from "../../mixins/mxn-speaker";
-import { mxnSpeakingMouth } from "../../mixins/mxn-speaking-mouth";
+import { mxnSpeakingMouthJaw } from "../../mixins/mxn-speaking-mouth-jaw";
 import { objAngelEyes } from "../enemies/obj-angel-eyes";
 
 const [
@@ -52,20 +51,8 @@ export function objCharacterKingSpino() {
                 }
             }),
         container(
-            lowerJawObj.mixin(
-                mxnSpeakingMouth,
-                {
-                    get agapeUnit() {
-                        return agapeUnit;
-                    },
-                    set agapeUnit(value) {
-                        agapeUnit = value;
-                        lowerJawObj.y = Math.round(value * 4);
-                        lowerJawObj.x = Math.round(value * -2);
-                    },
-                    baseAnimationDuration: 60,
-                },
-            ),
+            lowerJawObj
+                .mixin(mxnSpeakingMouthJaw, [-2, 4], 60),
             Sprite.from(txSkull),
             Sprite.from(txLip),
             objAngelEyes({
