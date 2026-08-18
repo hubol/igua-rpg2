@@ -2673,6 +2673,18 @@
       "gridCellsY": 303,
       "decals": [
         {
+          "x": 3280,
+          "y": 1419,
+          "scaleX": 2.1,
+          "scaleY": 0.5,
+          "rotation": 0,
+          "tint": "#4d94c8",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
           "x": 3576,
           "y": 1195,
           "scaleX": 1,
@@ -8554,6 +8566,102 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 3280,
+          "y": 1414,
+          "scaleX": 2.1,
+          "scaleY": 0.5,
+          "rotation": 0,
+          "tint": "#8e8e8e",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3280,
+          "y": 1415,
+          "scaleX": 2.1,
+          "scaleY": 0.3,
+          "rotation": 0,
+          "tint": "#afafaf",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3288,
+          "y": 1416,
+          "scaleX": 1.5,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ac84c4",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3488,
+          "y": 2568,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ac84c4",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3420,
+          "y": 2561,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/roof/takstein 16.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3504,
+          "y": 2584,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#8e8e8e",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3520,
+          "y": 2600,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#afafaf",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3312,
+          "y": 1406,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/landmarks/library on the border.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
