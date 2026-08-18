@@ -6,7 +6,8 @@ import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { DataPocketItem } from "../data/data-pocket-item";
-import { show } from "../drama/show";
+import { dramaShop } from "../drama/drama-shop";
+import { ask, show } from "../drama/show";
 import { scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnRpgKill } from "../mixins/mxn-rpg-kill";
@@ -33,8 +34,26 @@ function enrichTheOwl(lvl: LvlType.OhioCemetery) {
     const owlObj = objCharacterTheOwl();
     owlObj
         .mixin(mxnCutscene, function* () {
+            if (Rpg.character.isRecentlyRevived) {
+                yield* show(
+                    "Welcome.",
+                    "Your spirit chose this place to return to.",
+                );
+            }
             owlObj.objCharacterTheOwl.wingsRaised = true;
-            yield* show("Hi bitch");
+            const result = yield* ask(
+                "What can I do for you?",
+                "Trade",
+                "Nothing, sorry",
+            );
+
+            if (result === 0) {
+                yield* dramaShop("TheOwl", owlObj.speaker);
+            }
+            else {
+                yield* show("That's all right.");
+            }
+
             owlObj.objCharacterTheOwl.wingsRaised = false;
         })
         .at(lvl.OwlMarker)

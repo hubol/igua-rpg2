@@ -27,7 +27,7 @@ export function scnIndianaUniversityNurse() {
 }
 
 function enrichDoor(lvl: LvlType.IndianaUniversityNurse) {
-    if (Rpg.character.position.checkpointName !== "restart") {
+    if (!Rpg.character.isRecentlyRevived) {
         return;
     }
 

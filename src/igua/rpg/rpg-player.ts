@@ -150,6 +150,12 @@ export class RpgPlayer {
         return this._state.receivedSpellEducation;
     }
 
+    get isRecentlyRevived() {
+        const respawnConfigurationData = DataRespawnConfiguration.getById(this.attributes.respawnConfiguration);
+        return this.position.sceneName === respawnConfigurationData.sceneName
+            && this.position.checkpointName === respawnConfigurationData.checkpointName;
+    }
+
     die() {
         const valuablesCount = this._wallet.count("valuables");
         this._wallet.spend("valuables", valuablesCount);

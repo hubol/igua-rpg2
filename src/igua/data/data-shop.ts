@@ -466,6 +466,15 @@ export namespace DataShop {
                     },
                 ],
             },
+            TheOwl: {
+                stocks: [
+                    {
+                        initialQuantity: 5,
+                        price: { currency: "spirit", deltaSold: 50, initial: 100 },
+                        product: { kind: "potion", id: "AttributeHealthUp" },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );
