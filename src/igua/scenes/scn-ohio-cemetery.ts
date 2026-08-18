@@ -44,22 +44,36 @@ function enrichEctoplasmActivity(regionTint: RgbInt) {
     interface SpawnData {
         id: DataPocketItem.Id;
         index: Integer;
+        direction: Integer;
     }
 
-    function getPocketItemSpawnData(index: Integer): Array<SpawnData> {
+    function getPocketItemSpawnData(index: Integer, direction: Integer): Array<SpawnData> {
+        const preferredPocketItemId = getPreferredPocketItemId();
+
         if (index === 0) {
             return [{
-                id: getPreferredPocketItemId(),
+                id: preferredPocketItemId,
                 index: 1,
+                direction: 1,
             }];
         }
         if (index === maxIndex) {
             return [{
-                id: getPreferredPocketItemId(),
+                id: preferredPocketItemId,
                 index: maxIndex - 1,
+                direction: -1,
             }];
         }
-        return Rng.shuffle([...pocketItemIds]).map((id, offset) => ({ id, index: index + (offset === 0 ? -1 : 1) }));
+
+        return pocketItemIds.map((id) => {
+            const thisDirection = id === preferredPocketItemId ? direction : -direction;
+
+            return ({
+                id,
+                index: index + thisDirection,
+                direction: thisDirection,
+            });
+        });
     }
 
     function getSpawnPosition(index: Integer) {
@@ -76,11 +90,13 @@ function enrichEctoplasmActivity(regionTint: RgbInt) {
                 yield () => headstoneObj.mxnHeadstone.isPlayerPerched;
                 headstoneObj.sparklesPerFrame = 0;
 
+                let direction = Rng.intp();
+
                 for (let i = 0; i < 5; i++) {
-                    const pocketItemObjs = getPocketItemSpawnData(index)
+                    const pocketItemObjs = getPocketItemSpawnData(index, direction)
                         .map(data =>
                             objCollectiblePocketItem.objGliding(data.id, getSpawnPosition(data.index))
-                                .merge({ enrichEctoplasmActivity: { index: data.index } })
+                                .merge({ enrichEctoplasmActivity: { index: data.index, direction: data.direction } })
                                 .at(getSpawnPosition(index))
                                 .show()
                         );
@@ -89,7 +105,9 @@ function enrichEctoplasmActivity(regionTint: RgbInt) {
 
                     yield* Coro.race(pocketItemObjs.map(obj => () => obj.destroyed));
 
-                    index = pocketItemObjs.find(obj => obj.destroyed)!.enrichEctoplasmActivity.index;
+                    const data = pocketItemObjs.find(obj => obj.destroyed)!.enrichEctoplasmActivity;
+                    index = data.index;
+                    direction = data.direction;
 
                     for (const obj of pocketItemObjs) {
                         if (!obj.destroyed) {
@@ -98,6 +116,10 @@ function enrichEctoplasmActivity(regionTint: RgbInt) {
                     }
 
                     if (scene.ticker.ticks - startTicks > 75) {
+                        const previousIndex = index;
+                        while (index === previousIndex) {
+                            index = Rng.int(headstoneObjs.length);
+                        }
                         break;
                     }
                 }
