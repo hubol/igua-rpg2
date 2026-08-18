@@ -21,6 +21,7 @@ export function scnOhioCemetery() {
 
 function enrichEctoplasmActivity(regionTint: RgbInt) {
     const headstoneObjs = Search.findRegions(regionTint)
+        .sort((a, b) => a.x - b.x)
         .map(mxnHeadstone);
 
     container()

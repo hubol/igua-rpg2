@@ -621,6 +621,19 @@
           "originY": 0,
           "tint": "#ff007a",
           "values": {"name": "EctoplasmRegion6", "depth": 0}
+        },
+        {
+          "name": "Region",
+          "id": 9,
+          "_eid": "11908607",
+          "x": 561,
+          "y": 176,
+          "width": 32,
+          "height": 16,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ff007a",
+          "values": {"name": "EctoplasmRegion3", "depth": 0}
         }
       ]
     },
