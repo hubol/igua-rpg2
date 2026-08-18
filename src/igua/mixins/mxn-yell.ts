@@ -1,6 +1,7 @@
 import { DisplayObject } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { sleep } from "../../lib/game-engine/routines/sleep";
+import { StepOrder } from "../objects/step-order";
 import { mxnHasHead } from "./mxn-has-head";
 import { mxnSpeaker } from "./mxn-speaker";
 
@@ -11,6 +12,15 @@ export function mxnYell(obj: DisplayObject) {
         .anchored(0.5, 1)
         .invisible()
         .step(self => self.visible = life-- > 0)
+        .step(self => {
+            if (!self.visible) {
+                return;
+            }
+            const head = obj.is(mxnHasHead) ? obj.mxnHead.obj : obj;
+            const bounds = head.getWorldBounds();
+            self.at(bounds.getCenter().x, bounds.top)
+                .vround();
+        }, StepOrder.BeforeCamera)
         .show();
 
     const api = {
@@ -22,9 +32,7 @@ export function mxnYell(obj: DisplayObject) {
                     obj.dispatch("mxnSpeaker.speakingEnded");
                 });
             }
-            const head = obj.is(mxnHasHead) ? obj.mxnHead.obj : obj;
-            const bounds = head.getWorldBounds();
-            textObj.at(bounds.getCenter().x, bounds.top).vround();
+
             textObj.text = message;
             life = 120;
         },
