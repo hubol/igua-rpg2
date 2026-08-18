@@ -41,6 +41,7 @@ import { objWaterDripSource } from "../objects/obj-water-drip-source";
 import { objWeightedPedestal } from "../objects/obj-weighted-pedestal";
 import { objWorldMapGate } from "../objects/obj-world-map-gate";
 import { objMarker } from "../objects/utils/obj-marker";
+import { objRegion } from "../objects/utils/obj-region";
 import { Rpg } from "../rpg/rpg";
 
 export const OgmoEntityResolvers = {
@@ -75,7 +76,7 @@ export const OgmoEntityResolvers = {
         return obj;
     },
     "Marker": objMarker,
-    "Region": () => new Graphics().beginFill(0x00ff00).drawRect(0, 0, 1, 1).invisible(),
+    "Region": objRegion,
     "GateHorizontal": (entity: OgmoEntities.GateHorizontal) => objGate(entity, "horizontal"),
     "GateVertical": (entity: OgmoEntities.GateVertical) => objGate(entity, "vertical"),
     "PocketableItemA": (entity: OgmoEntities.PocketableItemA) =>
