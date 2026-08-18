@@ -41,9 +41,17 @@ export namespace DataFact {
                 heading: "Gambling tip",
                 messages: ["When gambling, the best strategy is to make bets that are both safe yet risky."],
             },
+            // TODO unused
             Lagavulin: {
                 heading: "About liquor",
                 messages: ["Lagavulin exists in this world."],
+            },
+            DungeonBonesHistory: {
+                heading: "About Dungeon of Bones",
+                messages: [
+                    "The ecotplasm-rich ground in the Ohio cemetery reanimates the dead.",
+                    "This has resulted in a mausoleum being named \"Dungeon of Bones\".",
+                ],
             },
             "__Fallback__": {
                 heading: "About a bug",

@@ -6,6 +6,7 @@ import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { DataPocketItem } from "../data/data-pocket-item";
+import { DramaFacts } from "../drama/drama-facts";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { scene } from "../globals";
@@ -42,13 +43,29 @@ function enrichTheOwl(lvl: LvlType.OhioCemetery) {
             }
             owlObj.objCharacterTheOwl.wingsRaised = true;
             const result = yield* ask(
-                "What can I do for you?",
+                "Koo-weet! Koo-weet!\nWhat can I do for you?",
                 "Trade",
+                "About mausoleum",
                 "Nothing, sorry",
             );
 
             if (result === 0) {
                 yield* dramaShop("TheOwl", owlObj.speaker);
+            }
+            if (result === 1) {
+                owlObj.objCharacterTheOwl.wingsRaised = false;
+                yield* show(
+                    "The mausoleum? Do you mean the Dungeon of Bones?",
+                    "You'll find terrifying creatures there.",
+                );
+
+                yield* DramaFacts.memorize(
+                    "DungeonBonesHistory",
+                    "Famously, the ecotplasm-rich ground in our cemetery reanimates the dead.",
+                );
+                yield* show(
+                    "Some say that tremendous rewards are at the bottom of the dungeon, but you'll need a means of escape.",
+                );
             }
             else {
                 yield* show("That's all right.");
