@@ -2,9 +2,11 @@ import { Sprite } from "pixi.js";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { holdf } from "../../../lib/game-engine/routines/hold";
+import { factor, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { Rng } from "../../../lib/math/rng";
+import { VectorSimple } from "../../../lib/math/vector-type";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { ZIndex } from "../../core/scene/z-index";
@@ -29,6 +31,14 @@ objCollectiblePocketItem.objBouncing = function objBouncing (item: RpgPocket.Ite
 
 objCollectiblePocketItem.objFloating = function objFloating (item: RpgPocket.Item) {
     return objPocketableItemBase(item, true, false).merge({ isCollectible: true });
+};
+
+objCollectiblePocketItem.objGliding = function objGliding (item: RpgPocket.Item, targetPosition: VectorSimple) {
+    return objPocketableItemBase(item, true, true)
+        .coro(function* (self) {
+            yield interpvr(self).factor(factor.sine).to(targetPosition).over(333);
+            self.isCollectible = true;
+        });
 };
 
 objCollectiblePocketItem.objParachuting = function objParachuting (item: RpgPocket.Item) {
