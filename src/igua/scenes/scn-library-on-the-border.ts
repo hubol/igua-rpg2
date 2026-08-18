@@ -5,10 +5,17 @@ import { DataPotion } from "../data/data-potion";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { playerObj } from "../objects/obj-player";
 
 export function scnLibraryOnTheBorder() {
     const lvl = Lvl.LibraryOnTheBorder();
+
+    [
+        ...lvl.WaterGroup.children,
+        ...lvl.BehindWaterGroup.children,
+    ]
+        .forEach(obj => obj.mixin(mxnSinePivot));
 
     const playerCameFromIndiana = playerObj.x < scene.level.width / 2;
     const patrollerNpc = playerCameFromIndiana ? lvl.BouncerNpc0 : lvl.BouncerNpc1;
