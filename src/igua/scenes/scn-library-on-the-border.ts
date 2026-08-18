@@ -1,12 +1,57 @@
+import { Sprite, Texture } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Tx } from "../../assets/textures";
+import { blendColor } from "../../lib/color/blend-color";
 import { sleep } from "../../lib/game-engine/routines/sleep";
+import { Integer, RgbInt } from "../../lib/math/number-alias-types";
+import { PseudoRng, Rng } from "../../lib/math/rng";
 import { range } from "../../lib/range";
 import { DataPotion } from "../data/data-potion";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
+import { mxnSparkling } from "../mixins/mxn-sparkling";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { playerObj } from "../objects/obj-player";
+
+const prng = new PseudoRng();
+
+type Subject = "combat";
+
+namespace Subject {
+    export interface Catalog {
+        locationSeed: Integer;
+        books: Book[];
+    }
+
+    export interface Book {
+        pages: string[];
+    }
+
+    export const catalogs: Record<Subject, Subject.Catalog> = {
+        combat: {
+            locationSeed: 69,
+            books: [
+                {
+                    pages: [
+                        "This is a book about ducking.",
+                    ],
+                },
+                {
+                    pages: [
+                        "This is a book about perfect claw attacks.",
+                    ],
+                },
+                {
+                    pages: [
+                        "This is a book about conditions.",
+                    ],
+                },
+            ],
+        },
+    };
+}
 
 export function scnLibraryOnTheBorder() {
     const lvl = Lvl.LibraryOnTheBorder();
@@ -19,7 +64,25 @@ export function scnLibraryOnTheBorder() {
 
     const playerCameFromIndiana = playerObj.x < scene.level.width / 2;
     const patrollerNpc = playerCameFromIndiana ? lvl.BouncerNpc0 : lvl.BouncerNpc1;
-    const librarianNpc = lvl.IndianaLibrarianNpc;
+    const librarianNpc = playerCameFromIndiana ? lvl.IndianaLibrarianNpc : lvl.OhioLibrarianNpc;
+    const bookObjs = (playerCameFromIndiana ? lvl.SpecialBookIndianaGroup : lvl.SpecialBookOhioGroup)
+        .children
+        .map(obj => obj.mixin(mxnLibraryBook));
+
+    function* dramaHighlightBooksOnSubject(subject: Subject) {
+        for (const book of bookObjs) {
+            book.mxnLibraryBook.clear();
+        }
+
+        const catalog = Subject.catalogs[subject];
+        prng.seed = catalog.locationSeed;
+        const shuffledBookObjs = prng.shuffle([...bookObjs]);
+
+        for (let i = 0; i < Math.min(shuffledBookObjs.length, catalog.books.length); i++) {
+            shuffledBookObjs[i].mxnLibraryBook.setContents(catalog.books[i]);
+            yield sleep(200);
+        }
+    }
 
     lvl.EnemyBrick
         .mxnRpgStatusPotions.heldPotionIds.push(
@@ -46,7 +109,7 @@ export function scnLibraryOnTheBorder() {
             }
         });
 
-    lvl.IndianaLibrarianNpc
+    librarianNpc
         .mixin(mxnCutscene, function* () {
             yield* show(
                 "Welcome to the library on the border!",
@@ -73,8 +136,51 @@ export function scnLibraryOnTheBorder() {
                     "OK, give me one moment and I will highlight the books you should check out if you are interested in combat.",
                 );
                 yield sleep(1000);
-                // TODO ok
+                yield* dramaHighlightBooksOnSubject("combat");
                 yield* show("OK, that should be all of them. Enjoy!");
             }
+        });
+}
+
+const bookTints = new Map<Texture, [RgbInt, RgbInt]>([
+    [Tx.Furniture.Library.Book0, [0x404040, 0x7F7F7F]],
+    [Tx.Furniture.Library.Book1, [0xE0210F, 0xE07C0F]],
+    [Tx.Furniture.Library.Book2, [0xE0590F, 0xF0AA0F]],
+    [Tx.Furniture.Library.Book3, [0xEFBF13, 0xEFD500]],
+    [Tx.Furniture.Library.Book4, [0x74C900, 0x74E800]],
+    [Tx.Furniture.Library.Book5, [0x432ECC, 0x43A3CC]],
+    [Tx.Furniture.Library.Book6, [0x722FCC, 0xA369E0]],
+]);
+
+function mxnLibraryBook(obj: Sprite) {
+    const [tintPrimary, tintSecondary] = bookTints.get(obj.texture) ?? [0xf0f0f0, 0x202020];
+
+    const sparklingObj = obj
+        .mixin(mxnSparkling);
+
+    const pages = new Array<string>();
+
+    const api = {
+        clear() {
+            pages.length = 0;
+        },
+        setContents(book: Subject.Book) {
+            pages.length = 0;
+            pages.push(...book.pages);
+        },
+    };
+
+    const sparkleTint = blendColor(tintSecondary, 0xffffff, 0.5);
+
+    return sparklingObj
+        .merge({ mxnLibraryBook: api })
+        .mixin(mxnSpeaker, { name: "Tome", tintPrimary, tintSecondary })
+        .mixin(mxnCutscene, function* () {
+            yield* show(...pages);
+        })
+        .step(self => {
+            self.interact.enabled = pages.length > 0;
+            self.sparklesTint = Rng.bool() ? sparkleTint : 0xffffff;
+            self.sparklesPerFrame = self.interact.enabled ? 0.075 : 0;
         });
 }

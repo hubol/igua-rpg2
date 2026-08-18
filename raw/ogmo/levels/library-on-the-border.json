@@ -220,6 +220,17 @@
           "originY": 52,
           "flippedX": true,
           "values": {"personaName": "IndianaLibrarian", "name": "IndianaLibrarianNpc", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 3,
+          "_eid": "90326278",
+          "x": 960,
+          "y": 240,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": false,
+          "values": {"personaName": "OhioLibrarian", "name": "OhioLibrarianNpc", "depth": 0}
         }
       ]
     },
@@ -300,6 +311,66 @@
       "gridCellsX": 152,
       "gridCellsY": 39,
       "decals": [
+        {
+          "x": 916,
+          "y": 287,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#9561b4",
+          "texture": "terrain/grass/lumpy 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 617,
+          "y": 287,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#9561b4",
+          "texture": "terrain/grass/lumpy 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 391,
+          "y": 286,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#9561b4",
+          "texture": "terrain/grass/sparse 3px 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 297,
+          "y": 302,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#9561b4",
+          "texture": "shapes/rectangle scribbled 58 x 46.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 234,
+          "y": 286,
+          "scaleX": 23.3,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#9561b4",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
         {
           "x": 27,
           "y": 308,
