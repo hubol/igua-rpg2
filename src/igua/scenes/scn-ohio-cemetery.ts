@@ -138,6 +138,11 @@ function enrichEctoplasmActivity(regionTint: RgbInt) {
         .show();
 }
 
+const headstoneSparkleTints = [
+    0xD1D9FF,
+    0x47FFDA,
+];
+
 function mxnHeadstone(obj: Container) {
     const api = {
         get isPlayerPerched() {
@@ -147,5 +152,6 @@ function mxnHeadstone(obj: Container) {
 
     return obj
         .merge({ mxnHeadstone: api })
-        .mixin(mxnSparkling);
+        .mixin(mxnSparkling)
+        .step(self => self.sparklesTint = Rng.item(headstoneSparkleTints));
 }
