@@ -38,7 +38,12 @@ export function scnWorldMap() {
     }
 
     const lvl = Lvl.WorldMap();
-    Search.findDecals(Tx.WorldMap.Cloud0).forEach(x => x.mixin(mxnSinePivot));
+    [
+        ...Search.findDecals(Tx.WorldMap.Cloud0),
+        ...Search.findDecals(Tx.WorldMap.Cloud1),
+        ...Search.findDecals(Tx.WorldMap.Cloud2),
+    ]
+        .forEach(x => x.mixin(mxnSinePivot));
     Object.entries(lvl).flatMap(([key, value]) =>
         key.endsWith("Label") && value instanceof DisplayObject ? [value] : []
     ).forEach(x => x.mixin(mxnBoilPivot));
