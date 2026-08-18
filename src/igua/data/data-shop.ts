@@ -470,8 +470,13 @@ export namespace DataShop {
                 stocks: [
                     {
                         initialQuantity: 5,
-                        price: { currency: "spirit", deltaSold: 50, initial: 100 },
+                        price: { currency: "spirit", deltaSold: 100, initial: 100 },
                         product: { kind: "potion", id: "AttributeHealthUp" },
+                    },
+                    {
+                        initialQuantity: 99,
+                        price: { currency: "spirit", deltaSold: 5, initial: 10 },
+                        product: { kind: "potion", id: "PoisonRestore" },
                     },
                 ],
             },

@@ -159,9 +159,9 @@ export class RpgPlayer {
     die() {
         const valuablesCount = this._wallet.count("valuables");
         this._wallet.spend("valuables", valuablesCount);
-        const { totalItems: pocketItemsCount } = this._pocket.empty("death_tax");
+        const emptied = this._pocket.empty("death_tax");
 
-        this._reward.spirit.onTaxPocketItemsCount(pocketItemsCount);
+        this._reward.spirit.onTaxPocketItemsCount(emptied);
         this._reward.spirit.onTaxValuables(valuablesCount);
     }
 

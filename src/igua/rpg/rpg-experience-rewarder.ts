@@ -147,8 +147,10 @@ export class RpgExperienceRewarder {
     }));
 
     readonly spirit = this._expose("spirit", (increase) => ({
-        onTaxPocketItemsCount(pocketItemsCount: Integer) {
-            increase(pocketItemsCount);
+        onTaxPocketItemsCount(emptied: RpgPocket.EmptyResult) {
+            const ectoplasmCount = emptied.items["EctoplasmTypeA"] + emptied.items["EctoplasmTypeB"];
+            const flatRateCount = emptied.totalItems - ectoplasmCount;
+            increase(flatRateCount + computeEctoplasmSpiritExperienceValue(ectoplasmCount));
         },
         onTaxValuables(valuablesCount: Integer) {
             increase(valuablesCount);
@@ -172,4 +174,28 @@ export class RpgExperienceRewarder {
     private _expose<T>(id: RpgExperience.Id, impl: (increase: IncreaseFn) => T) {
         return impl(amount => this._state[id] += this._getIncreaseAmount(id, amount));
     }
+}
+
+function computeEctoplasmSpiritExperienceValue(ectoplasmCount: Integer) {
+    let experience = 0;
+    while (ectoplasmCount >= 100) {
+        ectoplasmCount -= 100;
+        experience += 399;
+    }
+    while (ectoplasmCount >= 50) {
+        ectoplasmCount -= 50;
+        experience += 180;
+    }
+    while (ectoplasmCount >= 10) {
+        ectoplasmCount -= 10;
+        experience += 30;
+    }
+    while (ectoplasmCount >= 5) {
+        ectoplasmCount -= 5;
+        experience += 13;
+    }
+    if (ectoplasmCount > 0) {
+        experience += ectoplasmCount + 1;
+    }
+    return experience;
 }

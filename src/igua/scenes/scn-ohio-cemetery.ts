@@ -52,8 +52,9 @@ function enrichTheOwl(lvl: LvlType.OhioCemetery) {
 
             if (result === 0) {
                 yield* dramaShop("TheOwl", owlObj.speaker);
+                yield* show("Koo-weet! Koo-weet! See ya!");
             }
-            if (result === 1) {
+            else if (result === 1) {
                 owlObj.objCharacterTheOwl.wingsRaised = false;
                 yield* show(
                     "The mausoleum? Do you mean the Dungeon of Bones?",
@@ -73,7 +74,7 @@ function enrichTheOwl(lvl: LvlType.OhioCemetery) {
                 yield* show(
                     "Ectoplasm is bountiful here.",
                     "You can collect it by playing around with the headstones and stuff.",
-                    "It is generally not a useful resource, but it can be transformed into additional spirit energy on death.",
+                    "It is generally not a useful resource, but it can be transformed into additional spirit experience on death.",
                 );
             }
             else {
