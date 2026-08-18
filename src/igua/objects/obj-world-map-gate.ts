@@ -21,6 +21,12 @@ export function objWorldMapGate(ogmo: OgmoEntities.GateMap) {
             sceneChanger.changeScene();
         })
         .coro(function* (self) {
+            if (Math.abs(45 - Math.abs(self.angle % 90)) < 1) {
+                self.angle = Math.floor(self.angle / 90) * 90;
+                self.texture = Tx.WorldMap.Gate45deg;
+                self.anchor.set(18 / 42, 17 / 42);
+            }
+
             if (ogmo.values.visible || Rpg.programmaticFlags.revealedWorldMapGateUids.has(ogmo.uid)) {
                 self.visible = true;
                 // TODO kind of a hack

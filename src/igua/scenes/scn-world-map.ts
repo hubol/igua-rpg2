@@ -105,6 +105,7 @@ function objFxWaterShimmer() {
     const decalObjs = [
         ...Search.findDecals(Tx.WorldMap.Wave0),
         ...Search.findDecals(Tx.Shapes.Rectangle6).filter(obj => obj.tint === 0xbce3ff),
+        ...Search.findDecals(Tx.Shapes.CircleIrregular72).filter(obj => obj.tint === 0x73779f),
     ];
 
     return container()

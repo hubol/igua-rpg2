@@ -337,11 +337,11 @@
           "name": "GateMap",
           "id": 22,
           "_eid": "53836309",
-          "x": 4176,
-          "y": 1552,
+          "x": 4136,
+          "y": 1520,
           "originX": 16,
           "originY": 16,
-          "rotation": 90,
+          "rotation": 405,
           "uid": 178520085797500,
           "tint": "#ffffff",
           "values": {"sceneName": "scnOhioCemetery", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
@@ -730,8 +730,8 @@
           "name": "Checkpoint",
           "id": 29,
           "_eid": "19953026",
-          "x": 4144,
-          "y": 1536,
+          "x": 4096,
+          "y": 1512,
           "originX": 22,
           "originY": 39,
           "flippedX": true,
@@ -8315,6 +8315,208 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 4212,
+          "y": 1468,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "world map/wave 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 4163,
+          "y": 1633,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "world map/wave 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 4196,
+          "y": 1646,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "world map/wave 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 4257,
+          "y": 1598,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "world map/wave 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 4255,
+          "y": 1499,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bce3ff",
+          "texture": "world map/wave 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 4245,
+          "y": 1542,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#aeb1ce",
+          "texture": "world map/wave 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 4185,
+          "y": 1519,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1b0834",
+          "texture": "world map/tree dead 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 4171,
+          "y": 1505,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1b0834",
+          "texture": "world map/tree dead 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 4137,
+          "y": 1545,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1b0834",
+          "texture": "world map/tree dead 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 4127,
+          "y": 1562,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1b0834",
+          "texture": "world map/tree dead 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 4176,
+          "y": 1523,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#aeb1ce",
+          "texture": "world map/headstone.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 4182,
+          "y": 1530,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#73779f",
+          "texture": "world map/headstone.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 4200,
+          "y": 1552,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1b0834",
+          "texture": "world map/tree dead 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 4178,
+          "y": 1550,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#73779f",
+          "texture": "world map/headstone.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 4184,
+          "y": 1566,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#73779f",
+          "texture": "world map/headstone.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 4154,
+          "y": 1544,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#aeb1ce",
+          "texture": "world map/headstone.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -9795,7 +9997,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4159,
@@ -9807,7 +10010,8 @@
           "texture": "world map/ohio peninsula.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -9832,7 +10036,8 @@
           "texture": "shapes/circle irregular72.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4177,
@@ -9844,7 +10049,8 @@
           "texture": "shapes/circle irregular72.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4217,
@@ -9856,7 +10062,8 @@
           "texture": "shapes/circle irregular72.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4181,
@@ -9868,7 +10075,8 @@
           "texture": "shapes/circle irregular72.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4205,
@@ -9880,7 +10088,8 @@
           "texture": "shapes/circle irregular72.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4188,
@@ -9892,7 +10101,8 @@
           "texture": "light/blob 40 x 46.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4210,
@@ -9904,7 +10114,8 @@
           "texture": "light/blob 40 x 46.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4131,
@@ -9916,7 +10127,8 @@
           "texture": "light/blob 40 x 46.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
