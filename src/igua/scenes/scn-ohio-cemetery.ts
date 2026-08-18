@@ -46,6 +46,7 @@ function enrichTheOwl(lvl: LvlType.OhioCemetery) {
                 "Koo-weet! Koo-weet!\nWhat can I do for you?",
                 "Trade",
                 "About mausoleum",
+                "About ectoplasm",
                 "Nothing, sorry",
             );
 
@@ -65,6 +66,14 @@ function enrichTheOwl(lvl: LvlType.OhioCemetery) {
                 );
                 yield* show(
                     "Some say that tremendous rewards are at the bottom of the dungeon, but you'll need a means of escape.",
+                );
+            }
+            else if (result === 2) {
+                owlObj.objCharacterTheOwl.wingsRaised = false;
+                yield* show(
+                    "Ectoplasm is bountiful here.",
+                    "You can collect it by playing around with the headstones and stuff.",
+                    "It is generally not a useful resource, but it can be transformed into additional spirit energy on death.",
                 );
             }
             else {
@@ -144,7 +153,7 @@ function enrichEctoplasmActivity(regionTint: RgbInt) {
 
                 let direction = Rng.intp();
 
-                for (let i = 0; i < 5; i++) {
+                for (let i = 5; i > 0; i--) {
                     const pocketItemObjs = getPocketItemSpawnData(index, direction)
                         .map(data =>
                             objCollectiblePocketItem.objGliding(data.id, getSpawnPosition(data.index))
@@ -174,16 +183,17 @@ function enrichEctoplasmActivity(regionTint: RgbInt) {
                         }
                         break;
                     }
-                }
-
-                if (index === 0) {
-                    index += 1;
-                }
-                else if (index === headstoneObjs.length - 1) {
-                    index -= 1;
-                }
-                else {
-                    index += Rng.intp();
+                    else if (i === 1) {
+                        if (index === 0) {
+                            index += 1;
+                        }
+                        else if (index === headstoneObjs.length - 1) {
+                            index -= 1;
+                        }
+                        else {
+                            index += Rng.intp();
+                        }
+                    }
                 }
             }
         })
