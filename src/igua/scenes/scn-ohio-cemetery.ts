@@ -1,4 +1,5 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { mxnRpgKill } from "../mixins/mxn-rpg-kill";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 
 export function scnOhioCemetery() {
@@ -6,4 +7,6 @@ export function scnOhioCemetery() {
     lvl.WaterGroup
         .children
         .forEach(obj => obj.mixin(mxnSinePivot));
+
+    lvl.PlayerKillRegion.mixin(mxnRpgKill);
 }

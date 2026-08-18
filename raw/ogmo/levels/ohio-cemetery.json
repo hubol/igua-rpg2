@@ -53,6 +53,30 @@
       "gridCellsY": 42,
       "decals": [
         {
+          "x": 1466,
+          "y": 292,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#341d52",
+          "texture": "shapes/circle irregular26.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1352,
+          "y": 288,
+          "scaleX": 4,
+          "scaleY": 4,
+          "rotation": 0,
+          "tint": "#341d52",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
           "x": 393,
           "y": 228,
           "scaleX": 1,
@@ -276,6 +300,71 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
+        },
+        {
+          "x": 1467,
+          "y": 289,
+          "scaleX": 4,
+          "scaleY": 2,
+          "rotation": 0,
+          "tint": "#73779f",
+          "texture": "shapes/rectangle irregular 82 x 46.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 1565,
+          "y": 300,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#aeb1ce",
+          "texture": "shapes/crude line 176x3.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 1694,
+          "y": 292,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#aeb1ce",
+          "texture": "shapes/crude line 176x3.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 1672,
+          "y": 300,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#aeb1ce",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 1484,
+          "y": 308,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#aeb1ce",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
         }
       ],
       "folder": "../textures"
@@ -289,7 +378,20 @@
       "gridCellHeight": 8,
       "gridCellsX": 214,
       "gridCellsY": 42,
-      "entities": []
+      "entities": [
+        {
+          "name": "Puddle",
+          "id": 0,
+          "_eid": "55698237",
+          "x": 1480,
+          "y": 296,
+          "width": 248,
+          "originX": 0,
+          "originY": 1,
+          "tint": "#73779f",
+          "values": {"name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "PlayerEntities",
@@ -415,6 +517,19 @@
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnDungeonBones", "checkpointName": "fromCemetery", "name": "", "depth": 0}
+        },
+        {
+          "name": "Region",
+          "id": 1,
+          "_eid": "11908607",
+          "x": 1480,
+          "y": 296,
+          "width": 240,
+          "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "PlayerKillRegion", "depth": 0}
         }
       ]
     },
@@ -428,71 +543,6 @@
       "gridCellsX": 214,
       "gridCellsY": 42,
       "decals": [
-        {
-          "x": 1467,
-          "y": 289,
-          "scaleX": 4,
-          "scaleY": 2,
-          "rotation": 0,
-          "tint": "#73779f",
-          "texture": "shapes/rectangle irregular 82 x 46.png",
-          "originX": 0,
-          "originY": 0,
-          "values": {"name": ""},
-          "groupName": "WaterGroup"
-        },
-        {
-          "x": 1565,
-          "y": 300,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#aeb1ce",
-          "texture": "shapes/crude line 176x3.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": "WaterGroup"
-        },
-        {
-          "x": 1694,
-          "y": 292,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#aeb1ce",
-          "texture": "shapes/crude line 176x3.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": "WaterGroup"
-        },
-        {
-          "x": 1672,
-          "y": 300,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#aeb1ce",
-          "texture": "shapes/confetti18x8.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": "WaterGroup"
-        },
-        {
-          "x": 1484,
-          "y": 308,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#aeb1ce",
-          "texture": "shapes/confetti18x8.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": "WaterGroup"
-        },
         {
           "x": 1360,
           "y": 172,
@@ -1136,6 +1186,19 @@
           "y": 184,
           "width": 128,
           "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 23,
+          "_eid": "93117141",
+          "x": 1456,
+          "y": 352,
+          "width": 328,
+          "height": 72,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
