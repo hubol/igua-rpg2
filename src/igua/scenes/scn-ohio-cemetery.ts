@@ -30,9 +30,12 @@ export function scnOhioCemetery() {
 }
 
 function enrichTheOwl(lvl: LvlType.OhioCemetery) {
-    objCharacterTheOwl()
+    const owlObj = objCharacterTheOwl();
+    owlObj
         .mixin(mxnCutscene, function* () {
+            owlObj.objCharacterTheOwl.wingsRaised = true;
             yield* show("Hi bitch");
+            owlObj.objCharacterTheOwl.wingsRaised = false;
         })
         .at(lvl.OwlMarker)
         .show();

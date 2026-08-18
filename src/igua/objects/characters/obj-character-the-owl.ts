@@ -3,9 +3,11 @@ import { Tx } from "../../../assets/textures";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
 import { ZIndex } from "../../core/scene/z-index";
+import { scene } from "../../globals";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
+import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { mxnSpeaker } from "../../mixins/mxn-speaker";
 import { mxnSpeakingMouthJaw } from "../../mixins/mxn-speaking-mouth-jaw";
 import { objAngelEyes } from "../enemies/obj-angel-eyes";
@@ -31,8 +33,14 @@ export function objCharacterTheOwl() {
     const bodyObj = Sprite.from(txBody).at(20, 7).trimmed();
 
     return container(
-        Sprite.from(txWingsDown)
-            .step(self => self.texture = api.wingsRaised ? txWingsUp : txWingsDown)
+        container(
+            Sprite.from(txWingsDown).step(self => self.visible = !api.wingsRaised),
+            Sprite.from(txWingsUp)
+                .step(self => {
+                    self.visible = api.wingsRaised;
+                    self.y = Math.floor((scene.ticker.ticks % 60) / 30);
+                }),
+        )
             .mixin(mxnFacingPivot, { left: 2, right: -2, up: 0, down: 0 }),
         Sprite.from(txFeet),
         bodyObj,
@@ -66,5 +74,6 @@ export function objCharacterTheOwl() {
         .pivoted(42, 50)
         .mixin(mxnSpeaker, { name: "The Owl", tintPrimary: 0xffffff, tintSecondary: 0xFF237F })
         .mixin(mxnDetectPlayer)
+        .merge({ objCharacterTheOwl: api })
         .zIndexed(ZIndex.CharacterEntities);
 }
