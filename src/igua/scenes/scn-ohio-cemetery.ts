@@ -1,15 +1,18 @@
 import { Container } from "pixi.js";
-import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { DataPocketItem } from "../data/data-pocket-item";
+import { show } from "../drama/show";
 import { scene } from "../globals";
+import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnRpgKill } from "../mixins/mxn-rpg-kill";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
+import { objCharacterTheOwl } from "../objects/characters/obj-character-the-owl";
 import { objCollectiblePocketItem } from "../objects/collectibles/obj-collectible-pocket-item";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
@@ -23,6 +26,16 @@ export function scnOhioCemetery() {
 
     lvl.PlayerKillRegion.mixin(mxnRpgKill);
     enrichEctoplasmActivity(0xff007a);
+    enrichTheOwl(lvl);
+}
+
+function enrichTheOwl(lvl: LvlType.OhioCemetery) {
+    objCharacterTheOwl()
+        .mixin(mxnCutscene, function* () {
+            yield* show("Hi bitch");
+        })
+        .at(lvl.OwlMarker)
+        .show();
 }
 
 function enrichEctoplasmActivity(regionTint: RgbInt) {

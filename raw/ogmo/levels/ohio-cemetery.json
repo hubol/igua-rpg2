@@ -16,7 +16,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 214,
       "gridCellsY": 42,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 1298,
+          "y": 112,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "OwlMarker", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",
@@ -62,7 +74,8 @@
           "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1352,
@@ -74,7 +87,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 393,
@@ -203,7 +217,8 @@
           "texture": "foliage/roots 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 985,
@@ -215,7 +230,8 @@
           "texture": "foliage/roots 2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 908,
@@ -227,7 +243,8 @@
           "texture": "foliage/roots 2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 478,
@@ -239,7 +256,8 @@
           "texture": "foliage/roots 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 393,
@@ -251,7 +269,8 @@
           "texture": "foliage/roots 2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 514,
@@ -263,7 +282,8 @@
           "texture": "foliage/roots 2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 49,
@@ -275,7 +295,8 @@
           "texture": "foliage/roots 2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 119,
@@ -287,7 +308,8 @@
           "texture": "foliage/roots 2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 172,
@@ -299,7 +321,8 @@
           "texture": "foliage/roots 2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1467,
@@ -469,7 +492,8 @@
           "texture": "stone/brick rows 3.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 590,
@@ -481,7 +505,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 556,
@@ -493,7 +518,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -670,7 +696,8 @@
           "texture": "terrain/earth/mass0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 49,
@@ -682,7 +709,8 @@
           "texture": "light/shadow messy 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 117,
@@ -694,7 +722,8 @@
           "texture": "light/shadow messy 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 166,
@@ -706,7 +735,8 @@
           "texture": "light/shadow messy 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 393,
@@ -718,7 +748,8 @@
           "texture": "light/shadow messy 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 470,
@@ -730,7 +761,8 @@
           "texture": "light/shadow messy 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 508,
@@ -742,7 +774,8 @@
           "texture": "light/shadow messy 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 905,
@@ -754,7 +787,8 @@
           "texture": "light/shadow messy 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 979,
@@ -766,7 +800,8 @@
           "texture": "light/shadow messy 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1038,
@@ -778,7 +813,8 @@
           "texture": "light/shadow messy 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 36,
@@ -790,7 +826,8 @@
           "texture": "terrain/grass/prickly 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 148,
@@ -802,7 +839,8 @@
           "texture": "terrain/grass/prickly 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 246,
@@ -814,7 +852,8 @@
           "texture": "terrain/grass/tall 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 429,
@@ -826,7 +865,8 @@
           "texture": "terrain/grass/tall 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 838,
@@ -838,7 +878,8 @@
           "texture": "terrain/grass/tall 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1248,
@@ -850,7 +891,8 @@
           "texture": "terrain/grass/tall 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1372,
@@ -862,7 +904,8 @@
           "texture": "shapes/circle irregular26.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 638,
@@ -874,7 +917,8 @@
           "texture": "stone/rock0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 604,
@@ -886,7 +930,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 612,
@@ -898,7 +943,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 541,
@@ -910,7 +956,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 969,
@@ -922,7 +969,8 @@
           "texture": "terrain/grass/prickly 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 924,
@@ -934,7 +982,8 @@
           "texture": "terrain/grass/prickly 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 978,
@@ -946,7 +995,8 @@
           "texture": "terrain/grass/prickly 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 926,
@@ -958,7 +1008,8 @@
           "texture": "terrain/grass/prickly 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1047,
@@ -970,7 +1021,8 @@
           "texture": "terrain/grass/prickly 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1095,
@@ -982,7 +1034,8 @@
           "texture": "terrain/grass/prickly 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1106,
@@ -994,7 +1047,8 @@
           "texture": "terrain/grass/prickly 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -1303,6 +1357,59 @@
           "originY": 0,
           "tint": "#000000",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "PipeSlope",
+          "id": 24,
+          "_eid": "95781942",
+          "x": 1384,
+          "y": 136,
+          "width": 50,
+          "height": 32,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "PipeSlope",
+          "id": 25,
+          "_eid": "95781942",
+          "x": 1367,
+          "y": 98,
+          "width": 50,
+          "height": 32,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "PipeSlope",
+          "id": 26,
+          "_eid": "95781942",
+          "x": 1312,
+          "y": 114,
+          "width": 50,
+          "height": 32,
+          "flippedX": true,
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "PipeSlope",
+          "id": 27,
+          "_eid": "95781942",
+          "x": 1262,
+          "y": 107,
+          "width": 50,
+          "height": 7,
+          "flippedX": true,
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Pipe",
+          "id": 29,
+          "_eid": "95769929",
+          "x": 1417,
+          "y": 98,
+          "width": 40,
+          "values": {"name": "", "visible": false, "depth": 0}
         }
       ]
     },
