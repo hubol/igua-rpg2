@@ -6,6 +6,7 @@ import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../lib/math/rng";
 import { range } from "../../lib/range";
+import { DataLibraryBook } from "../data/data-library-book";
 import { DataPotion } from "../data/data-potion";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
@@ -16,42 +17,6 @@ import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { playerObj } from "../objects/obj-player";
 
 const prng = new PseudoRng();
-
-type Subject = "combat";
-
-namespace Subject {
-    export interface Catalog {
-        locationSeed: Integer;
-        books: Book[];
-    }
-
-    export interface Book {
-        pages: string[];
-    }
-
-    export const catalogs: Record<Subject, Subject.Catalog> = {
-        combat: {
-            locationSeed: 69,
-            books: [
-                {
-                    pages: [
-                        "This is a book about ducking.",
-                    ],
-                },
-                {
-                    pages: [
-                        "This is a book about perfect claw attacks.",
-                    ],
-                },
-                {
-                    pages: [
-                        "This is a book about conditions.",
-                    ],
-                },
-            ],
-        },
-    };
-}
 
 export function scnLibraryOnTheBorder() {
     const lvl = Lvl.LibraryOnTheBorder();
@@ -69,12 +34,12 @@ export function scnLibraryOnTheBorder() {
         .children
         .map(obj => obj.mixin(mxnLibraryBook));
 
-    function* dramaHighlightBooksOnSubject(subject: Subject) {
+    function* dramaHighlightBooksOnSubject(subject: DataLibraryBook.SubjectId) {
         for (const book of bookObjs) {
             book.mxnLibraryBook.clear();
         }
 
-        const catalog = Subject.catalogs[subject];
+        const catalog = DataLibraryBook.catalogs[subject];
         prng.seed = catalog.locationSeed;
         const shuffledBookObjs = prng.shuffle([...bookObjs]);
 
@@ -155,8 +120,9 @@ const bookTints = new Map<Texture, [RgbInt, RgbInt]>([
 function mxnLibraryBook(obj: Sprite) {
     const [tintPrimary, tintSecondary] = bookTints.get(obj.texture) ?? [0xf0f0f0, 0x202020];
 
-    const sparklingObj = obj
-        .mixin(mxnSparkling);
+    const mixedObj = obj
+        .mixin(mxnSparkling)
+        .mixin(mxnSpeaker, { name: "Tome", tintPrimary, tintSecondary });
 
     const pages = new Array<string>();
 
@@ -164,7 +130,8 @@ function mxnLibraryBook(obj: Sprite) {
         clear() {
             pages.length = 0;
         },
-        setContents(book: Subject.Book) {
+        setContents(book: DataLibraryBook.Book) {
+            mixedObj.speaker.name = book.title;
             pages.length = 0;
             pages.push(...book.pages);
         },
@@ -172,11 +139,12 @@ function mxnLibraryBook(obj: Sprite) {
 
     const sparkleTint = blendColor(tintSecondary, 0xffffff, 0.5);
 
-    return sparklingObj
+    return mixedObj
         .merge({ mxnLibraryBook: api })
-        .mixin(mxnSpeaker, { name: "Tome", tintPrimary, tintSecondary })
         .mixin(mxnCutscene, function* () {
-            yield* show(...pages);
+            if (yield* ask(`Read the ${pages.length}-page book?`)) {
+                yield* show(...pages);
+            }
         })
         .step(self => {
             self.interact.enabled = pages.length > 0;
