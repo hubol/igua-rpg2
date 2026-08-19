@@ -1,6 +1,8 @@
 import { Container } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Sfx } from "../../assets/sounds";
 import { Coro } from "../../lib/game-engine/routines/coro";
+import { nlerp } from "../../lib/math/number";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
@@ -145,6 +147,7 @@ function enrichEctoplasmActivity(regionTint: RgbInt) {
 
     container()
         .coro(function* () {
+            const maxEctoplasmsStreak = 5;
             let index = Rng.int(headstoneObjs.length);
             while (true) {
                 const headstoneObj = headstoneObjs[index];
@@ -154,7 +157,9 @@ function enrichEctoplasmActivity(regionTint: RgbInt) {
 
                 let direction = Rng.intp();
 
-                for (let i = 5; i > 0; i--) {
+                for (let i = maxEctoplasmsStreak; i > 0; i--) {
+                    Sfx.Interact.Cemetery.EctoplasmAppear.rate(nlerp(2, 1, (i - 1) / (maxEctoplasmsStreak - 1))).play();
+
                     const pocketItemObjs = getPocketItemSpawnData(index, direction)
                         .map(data =>
                             objCollectiblePocketItem.objGliding(data.id, getSpawnPosition(data.index))
@@ -182,6 +187,9 @@ function enrichEctoplasmActivity(regionTint: RgbInt) {
                         while (index === previousIndex) {
                             index = Rng.int(headstoneObjs.length);
                         }
+
+                        headstoneObjs[index].play(Sfx.Interact.Cemetery.PerformanceSlow, false);
+
                         break;
                     }
                     else if (i === 1) {
@@ -194,6 +202,8 @@ function enrichEctoplasmActivity(regionTint: RgbInt) {
                         else {
                             index += Rng.intp();
                         }
+
+                        headstoneObjs[index].play(Sfx.Interact.Cemetery.PerformanceOk);
                     }
                 }
             }
