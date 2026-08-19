@@ -78,6 +78,8 @@ export namespace DataNpcPersona {
             CloudMonk: { job: "Monk", name: "Fresh", looksId: "Poodle" },
             OhioLibrarian: { job: "Librarian", name: "Chunch", looksId: "GoogleDotCom" },
             IndianaLibrarian: { job: "Librarian", name: "Leighgan", looksId: "Yahooligan" },
+            LibraryBouncer0: { job: "Contractor", name: "Skrip", looksId: "Hapless" },
+            LibraryBouncer1: { job: "Contractor", name: "Bulala", looksId: "Aggro" },
             __Fallback__: { job: "???", name: "???", looksId: "MintyJourney" },
         } satisfies Record<string, Model>,
     );
