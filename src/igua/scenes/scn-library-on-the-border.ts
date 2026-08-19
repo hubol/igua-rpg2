@@ -133,7 +133,7 @@ function mxnLibraryBook(obj: Sprite) {
         setContents(book: DataLibraryBook.Book) {
             mixedObj.speaker.name = book.title;
             pages.length = 0;
-            pages.push(...book.pages);
+            pages.push(...book.pages.map(page => typeof page === "string" ? page : page()));
         },
     };
 
