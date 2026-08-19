@@ -7,7 +7,7 @@ import { areRectanglesOverlapping, IRectangle } from "../math/rectangle";
 declare module "pixi.js" {
     interface DisplayObject {
         muted: boolean;
-        play(sound: Sound): void;
+        play(sound: Sound, allowMuteAtDistance?: boolean): void;
         playInstance(sound: Sound): SoundInstance;
     }
 }
@@ -27,12 +27,12 @@ Object.defineProperties(DisplayObject.prototype, {
         configurable: true,
     },
     play: {
-        value: function (this: DisplayObject & DisplayObjectPrivate, sound: Sound) {
+        value: function (this: DisplayObject & DisplayObjectPrivate, sound: Sound, allowMuteAtDistance = true) {
             if (this._muted) {
                 return;
             }
 
-            if (applyDisplayObjectPositionToSound(this, sound)) {
+            if (applyDisplayObjectPositionToSound(this, sound, allowMuteAtDistance)) {
                 sound.play();
             }
         },
@@ -40,7 +40,7 @@ Object.defineProperties(DisplayObject.prototype, {
     },
     playInstance: {
         value: function (this: DisplayObject & DisplayObjectPrivate, sound: Sound) {
-            const result = applyDisplayObjectPositionToSound(this, sound);
+            const result = applyDisplayObjectPositionToSound(this, sound, true);
             if (this._muted || !result) {
                 sound.gain(0);
             }
@@ -69,7 +69,7 @@ function updateRendererRectangles() {
 
 const objBoundsRectangle = new Rectangle();
 
-function applyDisplayObjectPositionToSound(obj: DisplayObject, sound: Sound) {
+function applyDisplayObjectPositionToSound(obj: DisplayObject, sound: Sound, allowMuteAtDistance: boolean) {
     if (obj.destroyed) {
         // TODO might need to actually apply something in this case
         return false;
@@ -78,7 +78,7 @@ function applyDisplayObjectPositionToSound(obj: DisplayObject, sound: Sound) {
     updateRendererRectangles();
 
     const bounds = obj.getBounds(false, objBoundsRectangle);
-    if (areRectanglesOverlapping(bounds, audibleRectangle)) {
+    if (!allowMuteAtDistance || areRectanglesOverlapping(bounds, audibleRectangle)) {
         const center = bounds.getCenter();
         sound.pan(Math.max(
             -0.9,
