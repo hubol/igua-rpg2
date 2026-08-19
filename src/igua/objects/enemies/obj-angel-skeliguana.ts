@@ -37,7 +37,8 @@ const ranks = {
         loot: {
             tier0: [{ kind: "pocket_item", id: "BoneTypeA" }],
             tier1: [
-                { kind: "equipment", id: "RichesRing", weight: 5 },
+                { kind: "equipment", id: "EctoplasmStreak", weight: 3 },
+                { kind: "equipment", id: "RichesRing", weight: 2 },
                 { kind: "nothing", weight: 95 },
             ],
         },
@@ -53,7 +54,8 @@ const ranks = {
                 { kind: "pocket_item", id: "BoneTypeA", count: 12, weight: 20 },
             ],
             tier1: [
-                { kind: "equipment", id: "YellowRichesRing", weight: 10 },
+                { kind: "equipment", id: "EctoplasmStreak", weight: 6 },
+                { kind: "equipment", id: "YellowRichesRing", weight: 4 },
                 { kind: "nothing", weight: 90 },
             ],
         },
@@ -69,8 +71,9 @@ const ranks = {
                 { kind: "pocket_item", id: "BoneTypeA", count: 15, weight: 20 },
             ],
             tier1: [
-                { kind: "equipment", id: "YellowRichesRing", weight: 10 },
-                { kind: "equipment", id: "RichesRing", weight: 10 },
+                { kind: "equipment", id: "EctoplasmStreak", weight: 10 },
+                { kind: "equipment", id: "YellowRichesRing", weight: 5 },
+                { kind: "equipment", id: "RichesRing", weight: 5 },
                 { kind: "nothing", weight: 80 },
             ],
         },

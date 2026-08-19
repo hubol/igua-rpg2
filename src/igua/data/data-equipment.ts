@@ -385,6 +385,14 @@ export namespace DataEquipment {
                         };
                     })(),
                 },
+                EctoplasmStreak: {
+                    name: "Aura Absorber",
+                    texture: null,
+                    description: "Mysterious object. Increases potential for ectoplasm while headstone-hopping.",
+                    buffs: (model, bonus) => {
+                        model.esoteric.bonusCemeteryEctoplasmStreak += 1 + bonus;
+                    },
+                },
                 __Fallback__: {
                     name: "???",
                     texture: null,

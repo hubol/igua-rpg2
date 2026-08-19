@@ -303,6 +303,7 @@ const getBuffInformations = (function () {
         buff("esoteric.nightVisionLevel", "Night Vision", "integer", "benefit_when_positive"),
         buff("esoteric.fishFood.bonusClumpsCount", "Fish Food: Bonus Clumps", "integer", "benefit_when_positive"),
         buff("esoteric.fishFood.healingIncreaseFactor", "Fish Food: Healing Bonus", "percent", "benefit_when_positive"),
+        buff("esoteric.bonusCemeteryEctoplasmStreak", "Max Ectoplasm Streak", "integer", "benefit_when_positive"),
     );
 
     const fn = new Function(

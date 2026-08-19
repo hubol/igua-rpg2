@@ -147,7 +147,6 @@ function enrichEctoplasmActivity(regionTint: RgbInt) {
 
     container()
         .coro(function* () {
-            const maxEctoplasmsStreak = 5;
             let index = Rng.int(headstoneObjs.length);
             while (true) {
                 const headstoneObj = headstoneObjs[index];
@@ -156,6 +155,8 @@ function enrichEctoplasmActivity(regionTint: RgbInt) {
                 headstoneObj.sparklesPerFrame = 0;
 
                 let direction = Rng.intp();
+
+                const maxEctoplasmsStreak = Rpg.character.buffs.esoteric.bonusCemeteryEctoplasmStreak + 5;
 
                 for (let i = maxEctoplasmsStreak; i > 0; i--) {
                     Sfx.Interact.Cemetery.EctoplasmAppear.rate(nlerp(2, 1, (i - 1) / (maxEctoplasmsStreak - 1))).play();

@@ -74,6 +74,7 @@ export namespace RpgPlayerBuffs {
                 sparkling: <PercentInt> 0,
             },
             esoteric: {
+                bonusCemeteryEctoplasmStreak: 0,
                 lgbtFactor: <PercentInt> 0,
                 recognizeSongFactor: <PercentInt> 0,
                 sceneChangeErrorChance: <PercentInt> 0,
