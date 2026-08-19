@@ -76,6 +76,8 @@ export namespace DataNpcPersona {
             CobblerOhio: { job: "Cobbler", name: "Zika", looksId: "StuffedOlive" },
             BestFriendHaver: { job: "Friend", name: "Stat", looksId: "RottenGrapes" },
             CloudMonk: { job: "Monk", name: "Fresh", looksId: "Poodle" },
+            OhioLibrarian: { job: "Librarian", name: "Chunch", looksId: "GoogleDotCom" },
+            IndianaLibrarian: { job: "Librarian", name: "Leighgan", looksId: "Yahooligan" },
             __Fallback__: { job: "???", name: "???", looksId: "MintyJourney" },
         } satisfies Record<string, Model>,
     );

@@ -85,6 +85,7 @@ export function scnLibraryOnTheBorder() {
                 "Is there anything I can help you with?",
                 "What is going on here?",
                 "I want to learn about fighting",
+                // TODO these are unimplemented
                 "I want to learn about angels",
                 "I want to learn about shoes",
             );
