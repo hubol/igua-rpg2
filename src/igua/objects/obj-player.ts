@@ -239,7 +239,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             Rpg.character.receiveSpellEducation();
         })
         .step(() => {
-            const freeMove = DevKey.isDown("ControlLeft");
+            const freeMove = DevKey.isDown("ShiftLeft");
             puppet.physicsEnabled = !freeMove;
             if (Rpg.character.buffs.cosmetic.sparkling) {
                 puppet.sparklesPerFrame = Math.max(puppet.sparklesPerFrame, 0.1);
