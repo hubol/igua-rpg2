@@ -296,6 +296,15 @@ export namespace DataQuest {
                     drop: { kind: "equipment", id: "OverheatResistance0", level: 1, count: 2 },
                 },
             },
+            "PlateauIndustry.SoupMaker.AteSoup": {
+                flags: {
+                    removedOutOfOrderSign: false,
+                },
+                reward: {
+                    countCompletions: "once",
+                    kind: "nothing",
+                },
+            },
             __Fallback__: {
                 flags: null,
                 reward: {

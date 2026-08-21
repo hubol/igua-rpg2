@@ -3,12 +3,11 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaPotions } from "../drama/drama-potions";
+import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
-import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
-import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnOhioPlateauOfIndustry() {
@@ -16,20 +15,14 @@ export function scnOhioPlateauOfIndustry() {
     enrichSoupMakerNpc(lvl);
 }
 
-const ranks = {
-    soupMaker: RpgEnemyRank.create({
-        status: {
-            faction: RpgFaction.Player,
-        },
-    }),
-};
-
 function enrichSoupMakerNpc(lvl: LvlType.OhioPlateauOfIndustry) {
     const items = {
         soupBowlBroken: { kind: "key_item", id: "SoupBowlBroken" },
         soupBowl: { kind: "key_item", id: "SoupBowl" },
         intelligenceUp: { kind: "potion", id: "AttributeIntelligenceUp" },
     } satisfies Record<string, RpgInventory.Item>;
+
+    const quest = Rpg.quest("PlateauIndustry.SoupMaker.AteSoup");
 
     lvl.SoupMakerNpc
         .mixin(mxnCutscene, function* () {
@@ -41,6 +34,15 @@ function enrichSoupMakerNpc(lvl: LvlType.OhioPlateauOfIndustry) {
             );
 
             if (result === 0) {
+                if (quest.everCompleted) {
+                    yield* show(
+                        "Yep, that's my soup on the ground.",
+                        "It didn't taste very good.",
+                        "I'll have to adjust the recipe.",
+                    );
+                    return;
+                }
+
                 const brokenCount = Rpg.inventory.count(items.soupBowlBroken);
                 const fixedCount = Rpg.inventory.count(items.soupBowl);
                 const soupBowlsCount = brokenCount + fixedCount;
@@ -58,7 +60,7 @@ function enrichSoupMakerNpc(lvl: LvlType.OhioPlateauOfIndustry) {
                 );
 
                 if (result === 1) {
-                    yield* show("OK. Please try harder. We should have two bowls to share a meal.");
+                    yield* show("OK. Please try harder. We need two bowls to share a meal.");
                     if (fixedCount === 0) {
                         yield* show("Also that bowl is broken. It won't work.");
                     }
@@ -68,8 +70,10 @@ function enrichSoupMakerNpc(lvl: LvlType.OhioPlateauOfIndustry) {
                     if (fixedCount < 2) {
                         yield sleep(500);
                         yield* show(
-                            "Wait, these bowls are broken. This won't do.",
-                            "Isn't there someone who could improve them with glue?",
+                            fixedCount === 0
+                                ? "Wait, these bowls are broken. This won't do."
+                                : "Wait, one bowl is broken. This won't do.",
+                            "Isn't there someone who could make improvements with glue?",
                         );
                     }
                     else {
@@ -85,15 +89,28 @@ function enrichSoupMakerNpc(lvl: LvlType.OhioPlateauOfIndustry) {
                             "That was putrid.",
                             "But I feel smarter now.",
                         );
+                        yield* DramaQuests.complete(quest);
                     }
                 }
             }
             else if (result === 1) {
-                yield* show(
-                    "Sorry, my sign is out of order right now.",
-                    "I'm really concerned about my soup.",
-                    "Once that's taken care of, I think I can fix my sign.",
-                );
+                if (!quest.everCompleted) {
+                    yield* show(
+                        "Sorry, my sign is out of order right now.",
+                        "I'm really concerned about my soup.",
+                        "Once that's taken care of, I think I can fix my sign.",
+                    );
+                }
+                else if (quest.flags.removedOutOfOrderSign) {
+                    yield* show("Yep, that's my sign.");
+                }
+                else if (!quest.flags.removedOutOfOrderSign) {
+                    // TODO !
+                    yield* show(
+                        "Oh, right!",
+                        "I can remove the out of order sign now.",
+                    );
+                }
             }
             else if (result === 2) {
                 yield* show("OK. Great. Awesome.");
