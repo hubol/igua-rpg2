@@ -1,7 +1,7 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
-import { DramaEquipment } from "../drama/drama-equipment";
+import { DramaCobbler } from "../drama/drama-equipment";
 import { DramaPlayerAttributes } from "../drama/drama-player-attributes";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
@@ -36,7 +36,7 @@ function enrichGlueDripSources(lvl: LvlType.Cobbler0) {
 
 function enrichCobbler(lvl: LvlType.Cobbler0) {
     lvl.CobblerNpc.mixin(mxnCutscene, function* () {
-        yield* DramaEquipment.upgrade();
+        yield* DramaCobbler.upgradeOrFix();
     });
 }
 

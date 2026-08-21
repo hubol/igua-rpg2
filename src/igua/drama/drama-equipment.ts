@@ -1,4 +1,5 @@
 import { Logger } from "../../lib/game-engine/logger";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { isNotNullish } from "../../lib/types/guards/is-not-nullish";
 import { DataEquipment } from "../data/data-equipment";
 import { DataItem } from "../data/data-item";
@@ -7,13 +8,43 @@ import { RpgCharacterEquipment } from "../rpg/rpg-character-equipment";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { DramaInventory } from "./drama-inventory";
 import { DramaItem } from "./drama-item";
-import { show } from "./show";
+import { ask, show } from "./show";
 
-function* upgrade() {
-    const hasGlue = Rpg.inventory.count({ kind: "key_item", id: "EquipmentGlue" }) >= 1;
+function* upgradeOrFix() {
+    const glueItem: RpgInventory.Item = { kind: "key_item", id: "EquipmentGlue" };
+    const soupBowlBrokenItem: RpgInventory.Item = { kind: "key_item", id: "SoupBowlBroken" };
+    const soupBowlItem: RpgInventory.Item = { kind: "key_item", id: "SoupBowl" };
+
+    const hasGlue = Rpg.inventory.count(glueItem) >= 1;
     const upgradeableEquipments = findUpgradeableEquipments(Rpg.inventory.equipment);
 
     const hasUpgradeableEquipments = upgradeableEquipments.length > 0;
+
+    const fixWhat = yield* ask(
+        "I'm a cobbler. Can I help you?",
+        "Upgrade shoes",
+        Rpg.inventory.count(soupBowlBrokenItem) >= 1 ? "Fix my bowl?" : null,
+    );
+
+    if (fixWhat === 1) {
+        yield* show("Yes, I can fix your bowl. I just need some Shoe Glue.");
+        if (!hasGlue) {
+            yield sleep(500);
+            yield* show("It looks like you don't have any Shoe Glue.");
+        }
+        else {
+            if (yield* ask("Want me to repair your Broken Soup Bowl with Shoe Glue?")) {
+                yield* show("OK! Let's do this!");
+                yield* DramaInventory.removeCount(soupBowlBrokenItem, 1);
+                yield* DramaInventory.removeCount(glueItem, 1);
+                yield* DramaInventory.receiveItems([soupBowlItem]);
+            }
+            else {
+                yield* show("OK! Let me know if you change your mind.");
+            }
+        }
+        return;
+    }
 
     if (!hasGlue && !hasUpgradeableEquipments) {
         yield* show("Sorry!\nTo upgrade shoes, Shoe Glue and two shoes of the same type are required.");
@@ -64,7 +95,7 @@ function* upgrade() {
         return;
     }
 
-    yield* DramaInventory.removeCount({ kind: "key_item", id: "EquipmentGlue" }, 1);
+    yield* DramaInventory.removeCount(glueItem, 1);
 
     for (const obtainedEquipment of equipmentToUpgrade.obtainedEquipments) {
         Rpg.inventory.equipment.remove(obtainedEquipment.id);
@@ -150,6 +181,6 @@ function findUpgradeableEquipments(characterEquipment: RpgCharacterEquipment): A
         .filter(isNotNullish);
 }
 
-export const DramaEquipment = {
-    upgrade,
+export const DramaCobbler = {
+    upgradeOrFix,
 };
