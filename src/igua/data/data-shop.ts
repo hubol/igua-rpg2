@@ -440,6 +440,11 @@ export namespace DataShop {
                         initialQuantity: 9,
                         price: { currency: "valuables", deltaSold: 70, initial: 30 },
                     },
+                    {
+                        product: { kind: "key_item", id: "SoupBowlBroken" },
+                        initialQuantity: 2,
+                        price: { currency: "valuables", deltaSold: 0, initial: 1 },
+                    },
                 ],
             },
             OhioCasino: {

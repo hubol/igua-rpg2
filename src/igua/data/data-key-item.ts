@@ -92,6 +92,16 @@ export namespace DataKeyItem {
                 description: "Ticket for the Ohio lottery. Are you feeling lucky?!",
                 texture: null,
             },
+            SoupBowl: {
+                name: "Soup Bowl",
+                description: "Bowl for holding soup",
+                texture: Tx.Collectibles.Key.SoupBowl,
+            },
+            SoupBowlBroken: {
+                name: "Broken Soup Bowl",
+                description: "A bowl tragically unable to perform. Someone who works with glue might be able to help.",
+                texture: Tx.Collectibles.Key.SoupBowlBroken,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );

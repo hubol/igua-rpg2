@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 1344,
+  "width": 1440,
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 168,
+      "gridCellsX": 180,
       "gridCellsY": 35,
       "entities": [
         {
@@ -189,7 +189,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 168,
+      "gridCellsX": 180,
       "gridCellsY": 35,
       "entities": [
         {
@@ -215,7 +215,7 @@
           "originX": 0,
           "originY": 0,
           "flippedX": true,
-          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromOhioCasino", "name": "", "depth": 0}
+          "values": {"sceneName": "scnOhioPlateauOfIndustry", "checkpointName": "fromCasinoLeft", "name": "", "depth": 0}
         },
         {
           "name": "Region",
@@ -268,6 +268,18 @@
           "originY": 0,
           "tint": "#00ff00",
           "values": {"name": "SlotDisplay1", "depth": 0}
+        },
+        {
+          "name": "GateHorizontal",
+          "id": 7,
+          "_eid": "97593426",
+          "x": 1392,
+          "y": 104,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "flippedX": false,
+          "values": {"sceneName": "scnOhioPlateauOfIndustry", "checkpointName": "fromCasinoRight", "name": "", "depth": 0}
         }
       ]
     },
@@ -278,7 +290,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 168,
+      "gridCellsX": 180,
       "gridCellsY": 35,
       "decals": [
         {
@@ -460,7 +472,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 168,
+      "gridCellsX": 180,
       "gridCellsY": 35,
       "entities": []
     },
@@ -471,7 +483,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 168,
+      "gridCellsX": 180,
       "gridCellsY": 35,
       "entities": [
         {
@@ -506,6 +518,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromTaxi", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 4,
+          "_eid": "19953026",
+          "x": 1328,
+          "y": 232,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromRight", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -516,7 +539,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 168,
+      "gridCellsX": 180,
       "gridCellsY": 35,
       "entities": []
     },
@@ -527,7 +550,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 168,
+      "gridCellsX": 180,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -539,7 +562,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 168,
+      "gridCellsX": 180,
       "gridCellsY": 35,
       "entities": []
     },
@@ -550,7 +573,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 168,
+      "gridCellsX": 180,
       "gridCellsY": 35,
       "decals": [
         {
@@ -563,7 +586,8 @@
           "texture": "casino/slots/lucky guy.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -575,7 +599,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 168,
+      "gridCellsX": 180,
       "gridCellsY": 35,
       "entities": [
         {
@@ -662,7 +686,7 @@
           "_eid": "93117141",
           "x": 1192,
           "y": 232,
-          "width": 152,
+          "width": 264,
           "height": 56,
           "originX": 0,
           "originY": 0,
@@ -687,7 +711,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 168,
+      "gridCellsX": 180,
       "gridCellsY": 35,
       "entities": []
     },
@@ -698,7 +722,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 168,
+      "gridCellsX": 180,
       "gridCellsY": 35,
       "decals": [
         {
@@ -737,7 +761,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 168,
+      "gridCellsX": 180,
       "gridCellsY": 35,
       "decals": [
         {
@@ -1443,6 +1467,18 @@
           "groupName": null
         }
       ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 180,
+      "gridCellsY": 35,
+      "decals": [],
       "folder": "../textures"
     }
   ]

@@ -1045,7 +1045,7 @@
           "rotation": 0,
           "uid": 178520557013000,
           "tint": "#ffffff",
-          "values": {"sceneName": "scnOhioCasino", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+          "values": {"sceneName": "scnOhioPlateauOfIndustry", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
         {
           "name": "BinocularViewer",

@@ -1,0 +1,335 @@
+{
+  "ogmoVersion": "3.4.0-hubol",
+  "width": 1480,
+  "height": 944,
+  "offsetX": 0,
+  "offsetY": 0,
+  "values": {"Terrain Color": "#000000", "Region ID": "~Unset~"},
+  "backgroundColor": "#408000",
+  "layers": [
+    {
+      "name": "MarkerEntities",
+      "_eid": "73166939",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 185,
+      "gridCellsY": 118,
+      "entities": []
+    },
+    {
+      "name": "RegionEntities",
+      "_eid": "01831167",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 185,
+      "gridCellsY": 118,
+      "entities": [
+        {
+          "name": "GateHorizontal",
+          "id": 0,
+          "_eid": "97593426",
+          "x": 1416,
+          "y": 752,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "flippedX": false,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromOhioPlateauRight", "name": "", "depth": 0}
+        },
+        {
+          "name": "GateHorizontal",
+          "id": 1,
+          "_eid": "97593426",
+          "x": -24,
+          "y": 752,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "flippedX": true,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromOhioPlateauLeft", "name": "", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "FrontDecals",
+      "_eid": "17577176",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 185,
+      "gridCellsY": 118,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "FrontEntities",
+      "_eid": "55690179",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 185,
+      "gridCellsY": 118,
+      "entities": [
+        {
+          "name": "Puddle",
+          "id": 0,
+          "_eid": "55698237",
+          "x": 1096,
+          "y": 816,
+          "width": 72,
+          "originX": 0,
+          "originY": 1,
+          "tint": "#cea5aa",
+          "values": {"name": "", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "PlayerEntities",
+      "_eid": "96470627",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 185,
+      "gridCellsY": 118,
+      "entities": [
+        {
+          "name": "Player",
+          "id": 0,
+          "_eid": "93092164",
+          "x": 184,
+          "y": 880,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 1,
+          "_eid": "19953026",
+          "x": 424,
+          "y": 816,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromCasinoLeft", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 2,
+          "_eid": "19953026",
+          "x": 904,
+          "y": 816,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromCasinoRight", "depth": 0, "overrideFlipX": "none"}
+        }
+      ]
+    },
+    {
+      "name": "CharacterEntities",
+      "_eid": "07790422",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 185,
+      "gridCellsY": 118,
+      "entities": [
+        {
+          "name": "IguanaNpc",
+          "id": 0,
+          "_eid": "90326278",
+          "x": 1064,
+          "y": 816,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": false,
+          "values": {"personaName": "OhioSoupMaker", "name": "SoupMakerNpc", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "AboveEntitiesDecals",
+      "_eid": "63753160",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 185,
+      "gridCellsY": 118,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "Entities",
+      "_eid": "93086020",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 185,
+      "gridCellsY": 118,
+      "entities": [
+        {
+          "name": "Sign",
+          "id": 0,
+          "_eid": "39046554",
+          "x": 968,
+          "y": 816,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "Industry", "message": "Place of Ohio industry.", "name": "", "depth": 0, "isSpecial": true}
+        },
+        {
+          "name": "Door",
+          "id": 3,
+          "_eid": "88296692",
+          "x": 464,
+          "y": 768,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnOhioCasino", "checkpointName": "fromLeft", "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 4,
+          "_eid": "88296692",
+          "x": 832,
+          "y": 768,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnOhioCasino", "checkpointName": "fromRight", "name": "", "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "TerrainDecals",
+      "_eid": "02386446",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 185,
+      "gridCellsY": 118,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "TerrainEntities",
+      "_eid": "02302709",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 185,
+      "gridCellsY": 118,
+      "entities": [
+        {
+          "name": "Block",
+          "id": 0,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 880,
+          "width": 1488,
+          "height": 64,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 1,
+          "_eid": "93117141",
+          "x": 328,
+          "y": 816,
+          "width": 888,
+          "height": 136,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 2,
+          "_eid": "95769929",
+          "x": 384,
+          "y": 624,
+          "width": 576,
+          "values": {"name": "", "visible": true, "depth": 0}
+        }
+      ]
+    },
+    {
+      "name": "BackgroundEntities",
+      "_eid": "41483982",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 185,
+      "gridCellsY": 118,
+      "entities": []
+    },
+    {
+      "name": "BackgroundDecals",
+      "_eid": "64691217",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 185,
+      "gridCellsY": 118,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxDecals",
+      "_eid": "17093961",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 185,
+      "gridCellsY": 118,
+      "decals": [
+        {
+          "x": 88,
+          "y": 1024,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "collectibles/potion/attribute intelligence up.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 185,
+      "gridCellsY": 118,
+      "decals": [],
+      "folder": "../textures"
+    }
+  ]
+}
