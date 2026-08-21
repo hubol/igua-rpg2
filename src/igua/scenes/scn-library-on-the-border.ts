@@ -3,9 +3,10 @@ import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../assets/textures";
 import { blendColor } from "../../lib/color/blend-color";
 import { sleep } from "../../lib/game-engine/routines/sleep";
-import { Integer, RgbInt } from "../../lib/math/number-alias-types";
+import { RgbInt } from "../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../lib/math/rng";
 import { range } from "../../lib/range";
+import { Null } from "../../lib/types/null";
 import { DataLibraryBook } from "../data/data-library-book";
 import { DataPotion } from "../data/data-potion";
 import { ask, show } from "../drama/show";
@@ -125,16 +126,15 @@ function mxnLibraryBook(obj: Sprite) {
         .mixin(mxnSparkling)
         .mixin(mxnSpeaker, { name: "Tome", tintPrimary, tintSecondary });
 
-    const pages = new Array<string>();
+    let currentBook = Null<DataLibraryBook.Book>();
 
     const api = {
         clear() {
-            pages.length = 0;
+            currentBook = null;
         },
         setContents(book: DataLibraryBook.Book) {
             mixedObj.speaker.name = book.title;
-            pages.length = 0;
-            pages.push(...book.pages.map(page => typeof page === "string" ? page : page()));
+            currentBook = book;
         },
     };
 
@@ -143,12 +143,14 @@ function mxnLibraryBook(obj: Sprite) {
     return mixedObj
         .merge({ mxnLibraryBook: api })
         .mixin(mxnCutscene, function* () {
-            if (yield* ask(`Read the ${pages.length}-page book?`)) {
-                yield* show(...pages);
+            if (yield* ask(`Read the ${currentBook!.pages.length}-page book?`)) {
+                for (const page of currentBook!.pages) {
+                    yield* show(typeof page === "string" ? page : page());
+                }
             }
         })
         .step(self => {
-            self.interact.enabled = pages.length > 0;
+            self.interact.enabled = Boolean(currentBook);
             self.sparklesTint = Rng.bool() ? sparkleTint : 0xffffff;
             self.sparklesPerFrame = self.interact.enabled ? 0.075 : 0;
         });
