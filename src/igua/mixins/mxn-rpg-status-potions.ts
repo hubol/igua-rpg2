@@ -1,4 +1,4 @@
-import { Container } from "pixi.js";
+import { Container, DisplayObject } from "pixi.js";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { interpr, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -11,7 +11,7 @@ import { objFigurePotion } from "../objects/figures/obj-figure-potion";
 import { RpgStatus } from "../rpg/rpg-status";
 import { mxnDestroyOnStatusDeath } from "./mxn-destroy-on-status-death";
 import { mxnPhysics } from "./mxn-physics";
-import { MxnRpgStatus } from "./mxn-rpg-status";
+import { MxnRpgStatus, mxnRpgStatus } from "./mxn-rpg-status";
 
 interface MxnRpgStatusPotionsArgs {
     heldPotionIds: Array<DataPotion.Id>;
@@ -70,34 +70,37 @@ function inferPotionToUse(
 
 const noAnimationRequiredPotionIds = new Set<DataPotion.Id>(["ThrowableBerry"]);
 
-export function objUsedPotion(potionId: DataPotion.Id, statusObj: MxnRpgStatus) {
+export function objUsedPotion(potionId: DataPotion.Id, targetObj: Container) {
     return objFigurePotion(potionId)
         .pivotedUnit(0.5, 0.5)
-        .mixin(mxnDestroyOnStatusDeath, statusObj.status)
         .invisible()
         .coro(function* (self) {
-            if (noAnimationRequiredPotionIds.has(potionId)) {
-                const usePotionMaybeCoro = DataPotion.usePotion(potionId, statusObj);
-                if (usePotionMaybeCoro) {
-                    yield usePotionMaybeCoro;
+            if (targetObj.is(mxnRpgStatus)) {
+                targetObj.mixin(mxnDestroyOnStatusDeath, targetObj.status);
+
+                if (noAnimationRequiredPotionIds.has(potionId)) {
+                    const usePotionMaybeCoro = DataPotion.usePotion(potionId, targetObj);
+                    if (usePotionMaybeCoro) {
+                        yield usePotionMaybeCoro;
+                    }
+                    self.destroy();
+                    return;
                 }
-                self.destroy();
-                return;
             }
 
             self.visible = true;
 
-            const { height } = statusObj.getBounds();
+            const { height } = targetObj.getBounds();
 
-            if (statusObj.is(mxnPhysics) && statusObj.isOnGround && statusObj.gravity > 0) {
-                statusObj.speed.y = -2;
+            if (targetObj.is(mxnPhysics) && targetObj.isOnGround && targetObj.gravity > 0) {
+                targetObj.speed.y = -2;
             }
 
             // TODO this should be less awkward, maybe each "pupil polar offset" should be weighted on the eyes...
             const pupilPolarOffset = vnew();
             const pupilPolarOffsetStart = vnew();
 
-            const angelEyesObj = statusObj.findIs(objAngelEyes).last;
+            const angelEyesObj = targetObj.findIs(objAngelEyes).last;
             if (angelEyesObj) {
                 if (angelEyesObj.pupilPolarOffsets[0]) {
                     pupilPolarOffsetStart.at(angelEyesObj.pupilPolarOffsets[0]);
@@ -114,7 +117,9 @@ export function objUsedPotion(potionId: DataPotion.Id, statusObj: MxnRpgStatus) 
 
             yield sleep(300);
 
-            DataPotion.usePotion(potionId, statusObj);
+            if (targetObj.is(mxnRpgStatus)) {
+                DataPotion.usePotion(potionId, targetObj);
+            }
             self.visible = false;
 
             yield interpv(pupilPolarOffset).to(pupilPolarOffsetStart).over(300);
@@ -125,8 +130,8 @@ export function objUsedPotion(potionId: DataPotion.Id, statusObj: MxnRpgStatus) 
 
             self.destroy();
         })
-        .at(statusObj)
-        .add(0, statusObj.getBounds().height * -0.5)
+        .at(targetObj)
+        .add(0, targetObj.getBounds().height * -0.5)
         .vround();
 }
 

@@ -1,13 +1,36 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Coro } from "../../lib/game-engine/routines/coro";
+import { sleep } from "../../lib/game-engine/routines/sleep";
+import { DramaInventory } from "../drama/drama-inventory";
+import { DramaPotions } from "../drama/drama-potions";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { playerObj } from "../objects/obj-player";
+import { Rpg } from "../rpg/rpg";
+import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
+import { RpgFaction } from "../rpg/rpg-faction";
+import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnOhioPlateauOfIndustry() {
     const lvl = Lvl.OhioPlateauOfIndustry();
     enrichSoupMakerNpc(lvl);
 }
 
+const ranks = {
+    soupMaker: RpgEnemyRank.create({
+        status: {
+            faction: RpgFaction.Player,
+        },
+    }),
+};
+
 function enrichSoupMakerNpc(lvl: LvlType.OhioPlateauOfIndustry) {
+    const items = {
+        soupBowlBroken: { kind: "key_item", id: "SoupBowlBroken" },
+        soupBowl: { kind: "key_item", id: "SoupBowl" },
+        intelligenceUp: { kind: "potion", id: "AttributeIntelligenceUp" },
+    } satisfies Record<string, RpgInventory.Item>;
+
     lvl.SoupMakerNpc
         .mixin(mxnCutscene, function* () {
             const result = yield* ask(
@@ -18,11 +41,52 @@ function enrichSoupMakerNpc(lvl: LvlType.OhioPlateauOfIndustry) {
             );
 
             if (result === 0) {
+                const brokenCount = Rpg.inventory.count(items.soupBowlBroken);
+                const fixedCount = Rpg.inventory.count(items.soupBowl);
+                const soupBowlsCount = brokenCount + fixedCount;
+
                 yield* show(
                     "Indeed, that is my soup on the ground.",
                     "When I combined and heated my ingredients, I forgot to bring a bowl.",
-                    "If you bring me two soup bowls, we can share a meal together.",
                 );
+
+                const result = yield* ask(
+                    "If you bring me two soup bowls, we can share a meal together.",
+                    soupBowlsCount < 1 ? "OK" : null,
+                    soupBowlsCount === 1 ? "I have a bowl!" : null,
+                    soupBowlsCount >= 2 ? "I have bowls!" : null,
+                );
+
+                if (result === 1) {
+                    yield* show("OK. Please try harder. We should have two bowls to share a meal.");
+                    if (fixedCount === 0) {
+                        yield* show("Also that bowl is broken. It won't work.");
+                    }
+                }
+                else if (result === 2) {
+                    yield* show("Yay!!!!");
+                    if (fixedCount < 2) {
+                        yield sleep(500);
+                        yield* show(
+                            "Wait, these bowls are broken. This won't do.",
+                            "Isn't there someone who could improve them with glue?",
+                        );
+                    }
+                    else {
+                        yield* DramaInventory.removeCount(items.soupBowl, 2);
+                        yield* playerObj.walkTo(lvl.PlayerEatMarker.x);
+                        playerObj.auto.facing = -1;
+                        yield* show("Cheers!");
+                        yield* Coro.all([
+                            DramaPotions.useOnTarget(items.intelligenceUp.id, lvl.SoupMakerNpc),
+                            DramaPotions.useOnPlayer(items.intelligenceUp.id),
+                        ]);
+                        yield* show(
+                            "That was putrid.",
+                            "But I feel smarter now.",
+                        );
+                    }
+                }
             }
             else if (result === 1) {
                 yield* show(
