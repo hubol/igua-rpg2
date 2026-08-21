@@ -27,6 +27,7 @@ import { objEsotericHotDogCondimentDispenser } from "../objects/esoteric/obj-eso
 import { objFigurePocketItem } from "../objects/figures/obj-figure-pocket-item";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
+import { RpgRegion } from "../rpg/rpg-region";
 import { RpgSaveFiles } from "../rpg/rpg-save-files";
 import { SceneChanger } from "../systems/scene-changer";
 import { Search } from "../utils/search";
@@ -58,6 +59,29 @@ export function scnWorldMap() {
     objFxWaterShimmer().show();
     enrichBaldMike(lvl);
     enrichMrIndiana(lvl);
+    maybePanicUpdatePlayerPosition(lvl);
+}
+
+function maybePanicUpdatePlayerPosition(lvl: LvlType.WorldMap) {
+    if (playerObj.objPlayer.startedRoomAtCheckpointName) {
+        return;
+    }
+
+    const panicCheckpoints: Record<RpgRegion.Id, keyof LvlType.WorldMap> = {
+        Illinois: "__regionDefault__illinois",
+        Indiana: "__regionDefault__indiana",
+        Iowa: "__regionDefault__iowa",
+        Ohio: "__regionDefault__ohio",
+        get BetweenIndianaOhio() {
+            return this[Rpg.character.startingRegionId];
+        },
+        get OuterSpace() {
+            return this[Rpg.character.startingRegionId];
+        },
+    };
+
+    const panicPosition = lvl[panicCheckpoints[Rpg.character.position.currentRegionId]];
+    playerObj.at(panicPosition);
 }
 
 function enrichMrIndiana(lvl: LvlType.WorldMap) {

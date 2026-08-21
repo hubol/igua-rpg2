@@ -565,12 +565,12 @@
           "name": "Checkpoint",
           "id": 14,
           "_eid": "19953026",
-          "x": 2728,
-          "y": 1072,
+          "x": 3008,
+          "y": 1560,
           "originX": 22,
           "originY": 39,
-          "flippedX": false,
-          "values": {"name": "fromErrorRecovery", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+          "flippedX": true,
+          "values": {"name": "__regionDefault__indiana", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
         },
         {
           "name": "Checkpoint",
@@ -780,6 +780,39 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromIllinoisViaMrIndiana", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 34,
+          "_eid": "19953026",
+          "x": 3848,
+          "y": 1336,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "__regionDefault__ohio", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 35,
+          "_eid": "19953026",
+          "x": 2312,
+          "y": 1520,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "__regionDefault__illinois", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 36,
+          "_eid": "19953026",
+          "x": 1552,
+          "y": 824,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "__regionDefault__iowa", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
         }
       ]
     },
@@ -1712,7 +1745,8 @@
           "texture": "world map/cloud 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4124,
@@ -1724,7 +1758,8 @@
           "texture": "world map/cloud 2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -2682,7 +2717,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3576,
@@ -8492,7 +8528,8 @@
           "texture": "world map/headstone.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4182,
@@ -8504,7 +8541,8 @@
           "texture": "world map/headstone.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4200,
@@ -8516,7 +8554,8 @@
           "texture": "world map/tree dead 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4178,
@@ -8528,7 +8567,8 @@
           "texture": "world map/headstone.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4184,
@@ -8540,7 +8580,8 @@
           "texture": "world map/headstone.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4154,
@@ -8552,7 +8593,8 @@
           "texture": "world map/headstone.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4171,
@@ -8577,7 +8619,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3280,
@@ -8589,7 +8632,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3288,
@@ -8601,7 +8645,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3488,
@@ -8613,7 +8658,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3420,
@@ -8625,7 +8671,8 @@
           "texture": "town/roof/takstein 16.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3504,
@@ -8637,7 +8684,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3520,
@@ -8649,7 +8697,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 3312,
@@ -8661,7 +8710,8 @@
           "texture": "world map/landmarks/library on the border.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4696,
@@ -8673,7 +8723,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4712,
@@ -8685,7 +8736,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4728,
@@ -8697,7 +8749,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4744,
@@ -8709,7 +8762,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4760,
@@ -8721,7 +8775,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4776,
@@ -8733,7 +8788,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -10357,7 +10413,8 @@
           "texture": "shapes/confetti corner.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4230,
@@ -10369,7 +10426,8 @@
           "texture": "shapes/confetti 45deg.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

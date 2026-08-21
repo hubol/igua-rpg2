@@ -169,5 +169,9 @@ function createOrConfigurePlayerObj(
         playerObj.facing = checkpointObj ? checkpointObj.facing : facing;
     }
 
+    if (checkpointObj) {
+        playerObj.objPlayer.startedRoomAtCheckpointName = checkpointObj.checkpointName;
+    }
+
     return pos;
 }

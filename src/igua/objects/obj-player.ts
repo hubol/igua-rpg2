@@ -8,6 +8,7 @@ import { approachLinear } from "../../lib/math/number";
 import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
+import { Null } from "../../lib/types/null";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataRespawnConfiguration } from "../data/data-respawn-configuration";
@@ -162,6 +163,11 @@ function objPlayer(looks: IguanaLooks.Serializable) {
         return speed + landedThenJumpedHorizontalSpeedBoostUnit * 2;
     }
 
+    // TODO one day more things should go here
+    const api = {
+        startedRoomAtCheckpointName: Null<string>(),
+    };
+
     const puppet = iguanaLocomotiveObj
         .mixin(mxnRpgStatus, { status, effects, hurtboxes: [iguanaLocomotiveObj] })
         .mixin(mxnSparkling)
@@ -208,6 +214,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 return getWalkingTopSpeed();
             },
         })
+        .merge({ objPlayer: api })
         .zIndexed(ZIndex.PlayerEntities);
 
     const playerAliveObj = container()
