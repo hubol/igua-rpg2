@@ -4,7 +4,7 @@ import { sleepf } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { Jukebox } from "../core/igua-audio";
 import { DataShop } from "../data/data-shop";
-import { DramaCobbler } from "../drama/drama-equipment";
+import { DramaCobbler } from "../drama/drama-cobbler";
 import { DramaGifts } from "../drama/drama-gifts";
 import { DramaLib } from "../drama/drama-lib";
 import { dramaShop } from "../drama/drama-shop";

@@ -1,7 +1,7 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
-import { DramaCobbler } from "../drama/drama-equipment";
+import { DramaCobbler } from "../drama/drama-cobbler";
 import { DramaPlayerAttributes } from "../drama/drama-player-attributes";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
