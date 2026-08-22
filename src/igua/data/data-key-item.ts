@@ -105,7 +105,7 @@ export namespace DataKeyItem {
             EssenceForest: {
                 name: "Essence of Forest (Key Ver.)",
                 description: "Essence of the Forest. Useful to someone who creates with nature.",
-                texture: null,
+                texture: Tx.Collectibles.Key.EssenceForest,
             },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,

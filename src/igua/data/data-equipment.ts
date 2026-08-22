@@ -50,6 +50,14 @@ export namespace DataEquipment {
                         model.loot.valuables.bonus += 1 + 2 * bonus;
                     },
                 },
+                BoneCoin: {
+                    name: "Bone Coin",
+                    texture: Tx.Collectibles.Equipment.Wealth2,
+                    description: "A retirement gift from the council. Loot yields a modest amount of bonus valuables.",
+                    buffs: (model, bonus) => {
+                        model.loot.valuables.bonus += 1 + 1 * bonus;
+                    },
+                },
                 NailFile: {
                     name: "Vicious Cleat",
                     texture: Tx.Collectibles.Equipment.Melee1,
