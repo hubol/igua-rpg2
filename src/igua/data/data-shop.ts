@@ -412,11 +412,6 @@ export namespace DataShop {
                         price: { currency: "valuables", deltaSold: 0, initial: 250 },
                     },
                     {
-                        product: { kind: "equipment", id: "JumpAtSpecialSignsRing", level: 1 },
-                        initialQuantity: 2,
-                        price: { currency: "valuables", deltaSold: 50, initial: 250 },
-                    },
-                    {
                         product: { kind: "potion", id: "Ballon" },
                         initialQuantity: 99,
                         price: { currency: "valuables", deltaSold: 0, initial: 30 },
@@ -468,6 +463,11 @@ export namespace DataShop {
                         product: { kind: "equipment", id: "StrengthUp", level: 1 },
                         initialQuantity: 1,
                         price: { currency: "bone_dusts", deltaSold: 0, initial: 300 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "JumpAtSpecialSignsRing", level: 1 },
+                        initialQuantity: 2,
+                        price: { currency: "bone_dusts", deltaSold: 50, initial: 100 },
                     },
                 ],
             },

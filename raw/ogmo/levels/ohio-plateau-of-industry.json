@@ -1,7 +1,7 @@
 {
   "ogmoVersion": "3.4.0-hubol",
   "width": 1480,
-  "height": 944,
+  "height": 1104,
   "offsetX": 0,
   "offsetY": 0,
   "values": {"Terrain Color": "#000000", "Region ID": "~Unset~"},
@@ -15,14 +15,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 185,
-      "gridCellsY": 118,
+      "gridCellsY": 138,
       "entities": [
         {
           "name": "Marker",
           "id": 0,
           "_eid": "73148747",
           "x": 1168,
-          "y": 816,
+          "y": 976,
           "originX": 8,
           "originY": 8,
           "tint": "#00ff00",
@@ -38,14 +38,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 185,
-      "gridCellsY": 118,
+      "gridCellsY": 138,
       "entities": [
         {
           "name": "GateHorizontal",
           "id": 0,
           "_eid": "97593426",
           "x": 1416,
-          "y": 752,
+          "y": 912,
           "height": 128,
           "originX": 0,
           "originY": 0,
@@ -57,7 +57,7 @@
           "id": 1,
           "_eid": "97593426",
           "x": -24,
-          "y": 752,
+          "y": 912,
           "height": 128,
           "originX": 0,
           "originY": 0,
@@ -74,7 +74,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 185,
-      "gridCellsY": 118,
+      "gridCellsY": 138,
       "decals": [],
       "folder": "../textures"
     },
@@ -86,14 +86,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 185,
-      "gridCellsY": 118,
+      "gridCellsY": 138,
       "entities": [
         {
           "name": "Puddle",
           "id": 0,
           "_eid": "55698237",
           "x": 1096,
-          "y": 816,
+          "y": 976,
           "width": 72,
           "originX": 0,
           "originY": 1,
@@ -110,14 +110,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 185,
-      "gridCellsY": 118,
+      "gridCellsY": 138,
       "entities": [
         {
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
           "x": 184,
-          "y": 880,
+          "y": 1040,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
@@ -128,7 +128,7 @@
           "id": 1,
           "_eid": "19953026",
           "x": 424,
-          "y": 816,
+          "y": 976,
           "originX": 22,
           "originY": 39,
           "flippedX": true,
@@ -139,7 +139,7 @@
           "id": 2,
           "_eid": "19953026",
           "x": 904,
-          "y": 816,
+          "y": 976,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
@@ -155,14 +155,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 185,
-      "gridCellsY": 118,
+      "gridCellsY": 138,
       "entities": [
         {
           "name": "IguanaNpc",
           "id": 0,
           "_eid": "90326278",
           "x": 1064,
-          "y": 816,
+          "y": 976,
           "originX": 20,
           "originY": 52,
           "flippedX": false,
@@ -178,7 +178,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 185,
-      "gridCellsY": 118,
+      "gridCellsY": 138,
       "decals": [],
       "folder": "../textures"
     },
@@ -190,14 +190,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 185,
-      "gridCellsY": 118,
+      "gridCellsY": 138,
       "entities": [
         {
           "name": "Sign",
           "id": 0,
           "_eid": "39046554",
           "x": 968,
-          "y": 816,
+          "y": 976,
           "originX": 0,
           "originY": 26,
           "values": {"title": "Industry", "message": "Place of Ohio industry.", "name": "", "depth": 0, "isSpecial": true}
@@ -207,7 +207,7 @@
           "id": 3,
           "_eid": "88296692",
           "x": 464,
-          "y": 768,
+          "y": 928,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnOhioCasino", "checkpointName": "fromLeft", "name": "", "depth": 0}
@@ -217,10 +217,30 @@
           "id": 4,
           "_eid": "88296692",
           "x": 832,
-          "y": 768,
+          "y": 928,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnOhioCasino", "checkpointName": "fromRight", "name": "", "depth": 0}
+        },
+        {
+          "name": "Sign",
+          "id": 5,
+          "_eid": "39046554",
+          "x": 440,
+          "y": 784,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "College", "message": "", "name": "", "depth": 0, "isSpecial": true}
+        },
+        {
+          "name": "Sign",
+          "id": 6,
+          "_eid": "39046554",
+          "x": 888,
+          "y": 400,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "Costco", "message": "", "name": "", "depth": 0, "isSpecial": true}
         }
       ]
     },
@@ -232,7 +252,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 185,
-      "gridCellsY": 118,
+      "gridCellsY": 138,
       "decals": [],
       "folder": "../textures"
     },
@@ -244,14 +264,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 185,
-      "gridCellsY": 118,
+      "gridCellsY": 138,
       "entities": [
         {
           "name": "Block",
           "id": 0,
           "_eid": "93117141",
           "x": 0,
-          "y": 880,
+          "y": 1040,
           "width": 1488,
           "height": 64,
           "originX": 0,
@@ -264,7 +284,7 @@
           "id": 1,
           "_eid": "93117141",
           "x": 328,
-          "y": 816,
+          "y": 976,
           "width": 888,
           "height": 136,
           "originX": 0,
@@ -277,7 +297,16 @@
           "id": 2,
           "_eid": "95769929",
           "x": 384,
-          "y": 624,
+          "y": 784,
+          "width": 576,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 5,
+          "_eid": "95769929",
+          "x": 384,
+          "y": 400,
           "width": 576,
           "values": {"name": "", "visible": true, "depth": 0}
         }
@@ -291,7 +320,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 185,
-      "gridCellsY": 118,
+      "gridCellsY": 138,
       "entities": []
     },
     {
@@ -302,7 +331,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 185,
-      "gridCellsY": 118,
+      "gridCellsY": 138,
       "decals": [],
       "folder": "../textures"
     },
@@ -314,11 +343,11 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 185,
-      "gridCellsY": 118,
+      "gridCellsY": 138,
       "decals": [
         {
           "x": 88,
-          "y": 1024,
+          "y": 1184,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -339,7 +368,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 185,
-      "gridCellsY": 118,
+      "gridCellsY": 138,
       "decals": [],
       "folder": "../textures"
     }
