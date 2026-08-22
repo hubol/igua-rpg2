@@ -398,7 +398,7 @@ export namespace DataEquipment {
                     texture: null,
                     description: "Lovingly-crafted wooden shoe. Worn to attract Forest Spirits at the cost of vanity.",
                     buffs: (model, bonus) => {
-                        model.loot.specialEvents.replaceItemsWithForestSpritChance += 1 + bonus;
+                        model.loot.specialEvents.replaceItemsWithForestSpritChance += 2 + bonus;
                     },
                 },
                 __Fallback__: {
