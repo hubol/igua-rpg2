@@ -16,18 +16,6 @@ export namespace DataGift {
             "GreatTower.EfficientHome.Musician.SongShoe": {
                 item: { kind: "equipment", id: "RecognizeSong", level: 1 },
             },
-            "Demo.MagicDoor.0": {
-                item: { kind: "equipment", id: "DoubleJump", level: 1 },
-            },
-            "Demo.MagicDoor.1": {
-                item: { kind: "equipment", id: "DoubleJump", level: 1 },
-            },
-            "Demo.MagicDoor.2": {
-                item: { kind: "equipment", id: "DoubleJump", level: 1 },
-            },
-            "Demo.MagicDoor.3": {
-                item: { kind: "equipment", id: "DoubleJump", level: 1 },
-            },
             "Demo.GoodEnd": {
                 item: { kind: "equipment", id: "Sparkle", level: 1 },
             },
