@@ -371,6 +371,19 @@
           "uid": 178699730851822,
           "tint": "#ffffff",
           "values": {"sceneName": "scnLibraryOnTheBorder", "checkpointName": "fromOhio", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 25,
+          "_eid": "53836309",
+          "x": 3944,
+          "y": 1184,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 0,
+          "uid": 178742078491300,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnOhioLumberyard", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -813,6 +826,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "__regionDefault__iowa", "depth": 0, "overrideFlipX": "retainFromPreviousScene"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 37,
+          "_eid": "19953026",
+          "x": 3896,
+          "y": 1216,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromOhioLumberyard", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },

@@ -577,6 +577,17 @@
           "originY": 37,
           "flippedX": false,
           "values": {"variant": "level2", "name": "", "depth": 0}
+        },
+        {
+          "name": "WeightedPedestal",
+          "id": 41,
+          "_eid": "60046263",
+          "x": 136,
+          "y": 1032,
+          "originX": 23,
+          "originY": 24,
+          "uid": 178742087519200,
+          "values": {"requiredFlopsCount": 14, "name": "", "depth": 0}
         }
       ]
     },
@@ -1054,7 +1065,7 @@
           "id": 48,
           "_eid": "93117141",
           "x": 224,
-          "y": 1008,
+          "y": 992,
           "width": 72,
           "height": 40,
           "originX": 0,
