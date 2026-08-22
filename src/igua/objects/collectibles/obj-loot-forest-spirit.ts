@@ -1,5 +1,7 @@
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { interpv } from "../../../lib/game-engine/routines/interp";
+import { onPrimitiveMutate } from "../../../lib/game-engine/routines/on-primitive-mutate";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { Rng } from "../../../lib/math/rng";
@@ -31,6 +33,14 @@ export function objLootForestSpirit() {
             yield interpv(npcObj.scale).steps(3).to(1, 1).over(400);
             yield () => npcObj.destroyed;
             api.isCollected = true;
+            self.visible = true;
+            self.physicsEnabled = false;
+            self.step(() => {
+                self.speed.y = approachLinear(self.speed.y, -8, 0.1);
+                if (self.y <= -99) {
+                    self.destroy();
+                }
+            });
         });
 }
 
@@ -47,8 +57,8 @@ function objForestSpiritNpc() {
 
     let isDying = false;
 
-    // TODO voice SFX
     return objCharacterForestSpirit()
+        .handles("mxnSpeaker.speakingStarted", (self) => self.play(Sfx.Character.ForestSpiritSpeak.rate(0.8, 1.1)))
         .mixin(mxnCutscene, function* () {
             if (isDying) {
                 return;
@@ -60,8 +70,8 @@ function objForestSpiritNpc() {
                     i === 0
                         ? "In my travels, I've found some Essence. Would you like some?"
                         : "So, where do you want it?",
-                    i === 0 ? "6 in pocket" : "Yes, 6 in pocket",
-                    i === 0 ? "3 on keyring" : "Yes, 3 on keyring",
+                    i === 0 ? "Yes, 6 in pocket" : "6 in pocket",
+                    i === 0 ? "Yes, 3 on keyring" : "3 on keyring",
                     i === 0 ? "What is essence?" : null,
                 );
 
@@ -80,7 +90,9 @@ function objForestSpiritNpc() {
                         "It's impossible to believe that the council has a clue what they are doing.",
                         "So to give it to you is, without a doubt, an act that leaves it in more capable hands.",
                     );
+                    continue;
                 }
+                break;
             }
 
             yield* show(
@@ -92,7 +104,6 @@ function objForestSpiritNpc() {
         })
         .coro(function* (self) {
             yield () => !Cutscene.isPlaying && isDying;
-            // TODO SFX
             objFxBurstDusty()
                 .at(self.getWorldCenter())
                 .show();
@@ -127,6 +138,19 @@ function objLeaf() {
             yield () => self.speed.y >= 0;
             let ticks = 0;
             const swishObj = container()
+                .coro(function* () {
+                    let iterationsCount = 0;
+                    const startRate = Rng.float(0.9, 1.3);
+                    const deltaRate = -Rng.float(0.2, 0.3);
+                    while (true) {
+                        yield onPrimitiveMutate(() => Math.sign(self.speed.x));
+                        if (self.speed.x !== 0) {
+                            const rate = Math.max(0.5, startRate + iterationsCount * deltaRate);
+                            self.play(Sfx.Effect.LeafGlide.rate(rate));
+                            iterationsCount++;
+                        }
+                    }
+                })
                 .step(() => {
                     ticks++;
                     const t = Math.PI * (ticks / 60);
