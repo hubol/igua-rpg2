@@ -200,7 +200,7 @@
           "y": 976,
           "originX": 0,
           "originY": 26,
-          "values": {"title": "Industry", "message": "Place of Ohio industry.", "name": "", "depth": 0, "isSpecial": true}
+          "values": {"title": "Industry", "message": "Place of Ohio industry.\\n\\nThis sign is special.", "name": "", "depth": 0, "isSpecial": true}
         },
         {
           "name": "Door",
@@ -230,7 +230,7 @@
           "y": 784,
           "originX": 0,
           "originY": 26,
-          "values": {"title": "College", "message": "", "name": "", "depth": 0, "isSpecial": true}
+          "values": {"title": "College", "message": "The quizzes here are so hard.\\n\\nThis sign is special.", "name": "", "depth": 0, "isSpecial": true}
         },
         {
           "name": "Sign",
@@ -240,7 +240,7 @@
           "y": 400,
           "originX": 0,
           "originY": 26,
-          "values": {"title": "Costco", "message": "", "name": "", "depth": 0, "isSpecial": true}
+          "values": {"title": "Costco", "message": "", "name": "", "depth": 0, "isSpecial": false}
         }
       ]
     },
