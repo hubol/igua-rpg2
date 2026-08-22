@@ -46,6 +46,8 @@ function enrichBoxer(lvl: LvlType.MountFlop) {
         yield* show(message);
     }
 
+    let maxInteger = 10;
+
     const boxerObj = objCharacterBoxer();
     boxerObj
         .mixin(mxnCutscene, function* () {
@@ -90,7 +92,7 @@ function enrichBoxer(lvl: LvlType.MountFlop) {
             }
 
             yield* showLaughTrack("OK. The rules are so simple that even a jock like me could understand them.");
-            yield* show("I will think of a number between 1 and 10, and you need to guess what it is!");
+            yield* show(`I will think of a number between 1 and ${maxInteger}, and you need to guess what it is!`);
             Jukebox.applyGainRamp(Mzk.EditableMoog, 0, 1000);
             yield interp(boxerObj.objCharacterBoxer, "thinking").to(1).over(1000);
             yield sleep(1000);
@@ -109,10 +111,10 @@ function enrichBoxer(lvl: LvlType.MountFlop) {
                 .show();
             playerObj.speed.y = -2;
             yield sleep(500);
-            const actualNumber = Rng.intc(1, 10);
+            const actualNumber = Rng.intc(1, maxInteger);
             yield* showLaughTrack("That was tricky, but I think I came up with a number.");
             const guessedNumber = yield* DramaMisc.askInteger("What number is\nthis fucker thinking of?", {
-                max: 10,
+                max: maxInteger,
                 min: 1,
                 messageObj: Sprite.from(Tx.Characters.Boxer.Portrait).anchored(0.46, 0.7),
             });
@@ -135,6 +137,7 @@ function enrichBoxer(lvl: LvlType.MountFlop) {
                 playerObj.auto.facing = 1;
                 yield sleep(1000);
                 yield* boxerObj.objCharacterBoxer.dramaThrow();
+                maxInteger = Math.max(2, maxInteger - 1);
                 scene.stage
                     .coro(function* () {
                         yield () => !Cutscene.isPlaying;

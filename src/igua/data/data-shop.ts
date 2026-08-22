@@ -395,7 +395,7 @@ export namespace DataShop {
                     {
                         product: { kind: "equipment", id: "StrengthUp", level: 1 },
                         initialQuantity: 1,
-                        price: { currency: "valuables", deltaSold: 0, initial: 250 },
+                        price: { currency: "valuables", deltaSold: 0, initial: 777 },
                     },
                     {
                         product: { kind: "potion", id: "AttributeHealthUp" },

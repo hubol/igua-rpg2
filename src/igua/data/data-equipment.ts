@@ -56,6 +56,7 @@ export namespace DataEquipment {
                     description: "A retirement gift from the council. Loot yields a modest amount of bonus valuables.",
                     buffs: (model, bonus) => {
                         model.loot.valuables.bonus += 1 + 1 * bonus;
+                        model.combat.defense.physical += 1 + bonus;
                     },
                 },
                 NailFile: {

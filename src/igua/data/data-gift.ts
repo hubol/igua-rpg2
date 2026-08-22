@@ -56,6 +56,9 @@ export namespace DataGift {
             "Ohio.MagicDoor.3": {
                 item: { kind: "equipment", id: "BlueCrystalSock", level: 1 },
             },
+            "Ohio.Lumberyard.Aidar.Introduced": {
+                item: { kind: "equipment", id: "ForestSpiritChance", level: 1 },
+            },
             __Fallback__: {
                 item: { kind: "potion", id: "RestoreHealth" },
             },
