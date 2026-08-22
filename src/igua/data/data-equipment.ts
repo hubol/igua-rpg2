@@ -393,6 +393,14 @@ export namespace DataEquipment {
                         model.esoteric.bonusCemeteryEctoplasmStreak += 1 + bonus;
                     },
                 },
+                ForestSpiritChance: {
+                    name: "Charged Clog",
+                    texture: null,
+                    description: "Lovingly-crafted wooden shoe. Worn to attract Forest Spirits at the cost of vanity.",
+                    buffs: (model, bonus) => {
+                        model.loot.specialEvents.replaceItemsWithForestSpritChance += 1 + bonus;
+                    },
+                },
                 __Fallback__: {
                     name: "???",
                     texture: null,

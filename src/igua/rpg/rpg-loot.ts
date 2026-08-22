@@ -2,6 +2,7 @@ import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { Empty } from "../../lib/types/empty";
+import { Null } from "../../lib/types/null";
 import { DataEquipment } from "../data/data-equipment";
 import { DataKeyItem } from "../data/data-key-item";
 import { DataPotion } from "../data/data-potion";
@@ -77,6 +78,27 @@ export class RpgLoot {
 
         const rerolledTimes = rerollCounts.reduce((sum, count) => sum + count, 0);
 
+        let specialEvent = Null<RpgLoot.SpecialEvent>();
+
+        if (Rng.float() < .001) {
+            specialEvent = "forest_spirit";
+        }
+        else if (lootBuffs.specialEvents.replaceItemsWithForestSpritChance > 0) {
+            for (const itemList of [equipments, keyItems, pocketItems, flops, potions]) {
+                if (specialEvent) {
+                    break;
+                }
+
+                while (itemList.length > 0) {
+                    itemList.shift();
+                    if (Rng.float(100) <= lootBuffs.specialEvents.replaceItemsWithForestSpritChance) {
+                        specialEvent = "forest_spirit";
+                        break;
+                    }
+                }
+            }
+        }
+
         return {
             equipments,
             keyItems,
@@ -85,6 +107,7 @@ export class RpgLoot {
             flops,
             potions,
             rerolledTimes,
+            specialEvent,
         };
     }
 }
@@ -144,7 +167,10 @@ export namespace RpgLoot {
         potions: DataPotion.Id[];
         flops: Integer[];
         rerolledTimes: Integer;
+        specialEvent: null | SpecialEvent;
     }
+
+    export type SpecialEvent = "forest_spirit";
 
     export type Table = {
         // Structure allows for implicit quirks on each tier

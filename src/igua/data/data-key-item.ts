@@ -102,6 +102,11 @@ export namespace DataKeyItem {
                 description: "A bowl tragically unable to perform. Someone who works with glue might be able to help.",
                 texture: Tx.Collectibles.Key.SoupBowlBroken,
             },
+            EssenceForest: {
+                name: "Essence of Forest (Key Ver.)",
+                description: "Essence of the Forest. Useful to someone who creates with nature.",
+                texture: null,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );

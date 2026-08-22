@@ -107,6 +107,9 @@ export namespace RpgPlayerBuffs {
                 valuables: {
                     bonus: 0,
                 },
+                specialEvents: {
+                    replaceItemsWithForestSpritChance: <PercentInt> 0,
+                },
             },
             motion: {
                 jump: {

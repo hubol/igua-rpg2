@@ -261,6 +261,12 @@ const getBuffInformations = (function () {
             "benefit_when_negative",
         ),
         buff("loot.pocket.bonusChance", "Pocket Bonus Chance", "percent", "benefit_when_positive"),
+        buff(
+            "loot.specialEvents.replaceItemsWithForestSpritChance",
+            "Risk Loot For Special Chance",
+            "percent",
+            "benefit_when_positive",
+        ),
         buff("loot.tiers.nothingRerollCount", "Re-Roll Empty Loot", "integer", "benefit_when_positive"),
         buff("loot.valuables.bonus", "Valuable Bonus", "integer", "benefit_when_positive"),
         buff("conditions.ballonDrainReductionFactor", "Ballons Drain Slower", "percent", "benefit_when_positive"),

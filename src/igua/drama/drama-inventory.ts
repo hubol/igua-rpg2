@@ -3,6 +3,7 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
 import { container } from "../../lib/pixi/container";
+import { range } from "../../lib/range";
 import { Null } from "../../lib/types/null";
 import { DataEquipment } from "../data/data-equipment";
 import { DataItem } from "../data/data-item";
@@ -167,6 +168,10 @@ function* receiveItems(items: RpgInventory.Item[]) {
     yield () => !lastObj || lastObj.destroyed;
 }
 
+function* receiveCount(item: RpgInventory.Item, count: Integer) {
+    yield* receiveItems(range(count).map(() => item));
+}
+
 interface AskWhichAndRemoveCountOptions extends AskUseCountOptions {
     message?: string;
     countMessage?: string;
@@ -226,6 +231,7 @@ export const DramaInventory = {
     equipment: {
         askWhichAndRemoveCount: askWhichAndRemoveCountEquipment,
     },
+    receiveCount,
     receiveItems,
     removeCount: removeCountFromPlayer,
     removeAll,

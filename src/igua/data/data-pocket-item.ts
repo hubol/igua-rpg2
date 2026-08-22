@@ -17,6 +17,7 @@ export namespace DataPocketItem {
             Wheat: { name: "Wizened Wheat", texture: Tx.Collectibles.Pocket.Wheat },
             Beet: { name: "Bittered Beet", texture: Tx.Collectibles.Pocket.Beet },
             EmoBallistaBolt: { name: "Emo Ballista Bolt", texture: Tx.Collectibles.Pocket.EmoBallistaBolt },
+            EssenceForest: { name: "Essence of Forest (Pocket Ver.)", texture: Tx.Collectibles.Pocket.EssenceWind },
             EssenceWind: { name: "Essence of Wind", texture: Tx.Collectibles.Pocket.EssenceWind },
             CactusFruitTypeA: { name: "Cactus Fruit Type A", texture: Tx.Collectibles.Pocket.CactusFruitA },
             CactusFruitTypeB: { name: "Cactus Fruit Type B", texture: Tx.Collectibles.Pocket.CactusFruitB },
