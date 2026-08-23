@@ -274,7 +274,18 @@
       "gridCellHeight": 8,
       "gridCellsX": 91,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Sign",
+          "id": 0,
+          "_eid": "39046554",
+          "x": 568,
+          "y": 200,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "Intelligence", "message": "This tower will test your intelligence.", "name": "", "depth": 0, "isSpecial": false}
+        }
+      ]
     },
     {
       "name": "TerrainDecals",
@@ -1025,6 +1036,18 @@
           "groupName": null
         }
       ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 91,
+      "gridCellsY": 35,
+      "decals": [],
       "folder": "../textures"
     }
   ]

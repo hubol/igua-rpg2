@@ -708,7 +708,8 @@
           "texture": "sky/cloud long 2.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2904,
@@ -720,7 +721,8 @@
           "texture": "sky/cloud wormlike 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2641,
@@ -732,7 +734,8 @@
           "texture": "sky/cloud wormlike 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -775,7 +778,7 @@
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
-          "x": 3008,
+          "x": 3064,
           "y": 1240,
           "originX": 22,
           "originY": 39,
@@ -910,6 +913,19 @@
           "rotation": 0,
           "tint": "#94e2e2",
           "texture": "terrain/grass/sparse 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 2969,
+          "y": 1241,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#b3c002",
+          "texture": "terrain/grass/prickly 0.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
@@ -1136,6 +1152,16 @@
           "originY": 24,
           "uid": 178700387394508,
           "values": {"requiredFlopsCount": 20, "name": "", "depth": 0}
+        },
+        {
+          "name": "Sign",
+          "id": 23,
+          "_eid": "39046554",
+          "x": 2920,
+          "y": 1240,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "Mountain", "message": "This is Mount Flop.", "name": "", "depth": 0, "isSpecial": false}
         }
       ]
     },
@@ -1443,19 +1469,6 @@
           "rotation": 0,
           "tint": "#b3c002",
           "texture": "terrain/grass/messy 28px.png",
-          "originX": 0.5,
-          "originY": 0.5,
-          "values": {"name": ""},
-          "groupName": null
-        },
-        {
-          "x": 2969,
-          "y": 1241,
-          "scaleX": 1,
-          "scaleY": 1,
-          "rotation": 0,
-          "tint": "#b3c002",
-          "texture": "terrain/grass/prickly 0.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
@@ -4038,7 +4051,8 @@
           "texture": "sky/cloud balls 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2905,
@@ -4050,7 +4064,8 @@
           "texture": "sky/cloud balls 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2744,
@@ -4062,7 +4077,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2904,
@@ -4074,7 +4090,8 @@
           "texture": "town/ball/frame.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2772,
@@ -4086,7 +4103,8 @@
           "texture": "town/ball/brick1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2864,
@@ -4098,7 +4116,8 @@
           "texture": "town/ball/brick0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2924,
@@ -4110,7 +4129,8 @@
           "texture": "town/ball/brick1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2791,
@@ -4122,7 +4142,8 @@
           "texture": "town/ball/brick1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2894,
@@ -4134,7 +4155,8 @@
           "texture": "stone/brick rows 3.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2811,
@@ -4146,7 +4168,8 @@
           "texture": "stone/brick rows 3 b.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2762,
@@ -4158,7 +4181,8 @@
           "texture": "stone/brick rows 3.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2880,
@@ -4170,7 +4194,8 @@
           "texture": "foliage/moss 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2752,
@@ -4182,7 +4207,8 @@
           "texture": "foliage/moss 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2937,
@@ -4194,7 +4220,8 @@
           "texture": "foliage/moss hanging 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2912,
@@ -4206,7 +4233,8 @@
           "texture": "foliage/moss hanging 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2640,
@@ -4218,7 +4246,8 @@
           "texture": "sky/cloud balls 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
