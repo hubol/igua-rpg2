@@ -4,6 +4,7 @@ import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { Null } from "../../lib/types/null";
 import { Action } from "../core/input";
 import { Input, scene } from "../globals";
+import { objEsotericOutOfOrderSign } from "../objects/esoteric/obj-esoteric-out-of-order-sign";
 import { playerObj } from "../objects/obj-player";
 import { mxnHasHead } from "./mxn-has-head";
 
@@ -63,8 +64,16 @@ function getPlayerOverlapScore(interactObj: MxnInteract) {
 }
 
 export function mxnInteract(obj: DisplayObject, interactFn: () => void, hotspotObj = Null<DisplayObject>()) {
+    let enabled = true;
+    let isOutOfOrder = false;
+
     const interact = {
-        enabled: true,
+        get enabled() {
+            return enabled && !isOutOfOrder;
+        },
+        set enabled(value) {
+            enabled = value;
+        },
         hotspotObj,
         // TOOD should this be an event?!?!!?
         onInteract: interactFn,
@@ -72,7 +81,16 @@ export function mxnInteract(obj: DisplayObject, interactFn: () => void, hotspotO
 
     return obj
         .track(mxnInteract)
-        .merge({ interact });
+        .merge({ interact })
+        .step(() => {
+            // TODO admittedly bizarre circular dependency
+            // Also, iguanas patrolling in front of these signs will become disabled
+            // So that is maybe strange
+            if (obj.is(objEsotericOutOfOrderSign)) {
+                return;
+            }
+            isOutOfOrder = Boolean(obj.collidesOne(Instances(objEsotericOutOfOrderSign)));
+        });
 }
 
 export type MxnInteract = ReturnType<typeof mxnInteract>;

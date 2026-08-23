@@ -1771,7 +1771,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/enemy brick.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAABABAMAAAC92amBAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAVUExURb5RHuNiLNa0jgAAAP///7IABf9vUI/M+pQAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAYAAAAAEAAABgAAAAAQAAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAADp1fY4ytpsegAAAVJJREFUSMftlFtuwyAQRQfjBRi1C0Dj5p+aDbiJF1BVYgnt/pfQYYaHSXEfqpqvzgeEe5zgSy4DVMqYAYFrsDQYM1mWG6hMF0IDJ6gw1h5SWajlqcqemhauZUIJal64ljEdrE4LpohIH3lwabHgHAdEWs+RRXWpk2j0XS0qJsijpU0iVHdeXjzKFrxjO9qzrWROGb/E2T+KV9XCPO9hOu1rmGRoH4UeLPN3Ibu6huwb89yv/HfuBSVJkPosQ+NGdfHFjfZR2ARuArcEx4vAtYGrwC1DyL8qkPfMcPsVxIcdjMdSYMxQgWc8hRfEPaxve8bw9lrhyhm6zz4HglB8ppiMDJ8mhsoI/JChEMJxhk7h+cYZ0nIP+hma6erRRTrIkMdlmd1RhjxoB7fqQwlWjw0cfgJx5zAbltOqh/DVLevIluWmQ4jYbTVTp9X896G/yRDAO6zWhmBRbdBeAAAAAElFTkSuQmCC"
     },
@@ -2349,6 +2349,51 @@
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/iguana npc patrol.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAYCAYAAADtaU2/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD3SURBVEhLxZZBEsIgDEWhZ9KFbvXYutWF3kkb5GdCGgq2hb6ZDoFKHwGK9a7AZySGi/AjMUwwG9fKLPQAJuIWUiDlHLQUSiBn8eF0Y/HrcYmRc8fzPZRoQ11C92R7qf/7ef15KVsSA8RWG5irz/WnkpxDMO/AQKOIcVeSjGn+6dJrhHUqYfXPkYipg+5kteXAb2sGussa0wYb5Eu9NcheTj+V9DoFac8NhmUIU90y6xyJsHXmctNNMm0h17uc1xhsKdUygHN6tTgn0PAfQ4QrOWntgy20TBJuWNJ/hHOCHL5GuuTBJRJxDyHgs7qnNIEObnwdtMe5L8MO6bfZwI+FAAAAAElFTkSuQmCC"
+    },
+    {
+      "exportID": "51541146",
+      "name": "OutOfOrderSign",
+      "limit": -1,
+      "size": {"x": 28, "y": 24},
+      "origin": {"x": 14, "y": 12},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/out of order sign.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAYCAMAAADeQm2wAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURY4mINs6Mv///3ogHAAAAG1KDr4AAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAOwwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAUGFpbnQuTkVUIDUuMS4y+7wDtgAAALZlWElmSUkqAAgAAAAFABoBBQABAAAASgAAABsBBQABAAAAUgAAACgBAwABAAAAAgAAADEBAgAQAAAAWgAAAGmHBAABAAAAagAAAAAAAABgAAAAAQAAAGAAAAABAAAAUGFpbnQuTkVUIDUuMS4yAAMAAJAHAAQAAAAwMjMwAaADAAEAAAABAAAABaAEAAEAAACUAAAAAAAAAAIAAQACAAQAAABSOTgAAgAHAAQAAAAwMTAwAAAAAOnV9jjK2mx6AAAAgklEQVQoU42SjQ5AQAyDN7z/M+uPcReGSubTLr0Esb2owohr7eSyMvOggT/CRUKVATqZYWYZAHrFCDFtXncocU0hDhNxEir0I50DuNeHgK9QR3gMs8JWwffRSeHY7CFQSGMehr+hGotutfRMXvlRqy37oqpw2Am/ydqJ/xA+/KNi2wHrjgUJJp1tTAAAAABJRU5ErkJggg=="
     }
   ],
   "tilesets": []

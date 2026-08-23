@@ -20,6 +20,7 @@ import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
 import { objEsotericBinocularViewer } from "../objects/esoteric/obj-esoteric-binocular-viewer";
 import { objEsotericClock } from "../objects/esoteric/obj-esoteric-clock";
 import { objEsotericDial } from "../objects/esoteric/obj-esoteric-dial";
+import { objEsotericOutOfOrderSign } from "../objects/esoteric/obj-esoteric-out-of-order-sign";
 import { objStashPocket } from "../objects/interactables/obj-stash-pocket";
 import { objDarkness } from "../objects/nature/obj-darkness";
 import { objPuddle } from "../objects/nature/obj-puddle";
@@ -127,6 +128,7 @@ export const OgmoEntityResolvers = {
     Dial: (entity: OgmoEntities.Dial) => objEsotericDial({ maxTicks: entity.values.maxTicks }),
     BinocularViewer: objEsotericBinocularViewer,
     IguanaNpcPatrolMarker: objIguanaNpcPatrolMarker,
+    OutOfOrderSign: objEsotericOutOfOrderSign,
 };
 
 const __checkedOgmoEntityResolvers = OgmoEntityResolvers satisfies OgmoEntityResolverBase;
