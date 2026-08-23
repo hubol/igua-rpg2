@@ -1,5 +1,6 @@
 import { Logger } from "../../lib/game-engine/logger";
 import { Integer } from "../../lib/math/number-alias-types";
+import { Rng } from "../../lib/math/rng";
 import { range } from "../../lib/range";
 import { DataPotion } from "../data/data-potion";
 import { playerObj } from "../objects/obj-player";
@@ -20,7 +21,7 @@ export class RpgPotions {
     private _updateLists() {
         this._listSize = 0;
         for (let i = 0; i < Consts.Size; i++) {
-            this._list[i] = this._state[i] ?? null;
+            this._list[i] = this._state[i]?.id ?? null;
             if (this._list[i]) {
                 this._listSize++;
             }
@@ -29,7 +30,7 @@ export class RpgPotions {
         this._excessList.length = 0;
         for (let i = Consts.Size; i < this._state.length; i++) {
             if (this._state[i]) {
-                this._excessList.push(this._state[i]);
+                this._excessList.push(this._state[i]?.id ?? null);
             }
         }
     }
@@ -64,7 +65,7 @@ export class RpgPotions {
     count(potionId: DataPotion.Id) {
         let count = 0;
         for (let i = 0; i < this._state.length; i++) {
-            if (this._state[i] === potionId) {
+            if (this._state[i]?.id === potionId) {
                 count++;
             }
         }
@@ -72,13 +73,18 @@ export class RpgPotions {
         return count;
     }
 
-    receive(potionId: DataPotion.Id) {
+    receive(potion: RpgPotion.State): void;
+    receive(potionId: DataPotion.Id): void;
+    receive(potionOrId: DataPotion.Id | RpgPotion.State) {
         const freeIndex = this._state.findIndex(value => value === null);
+        const potion: RpgPotion.State = typeof potionOrId === "string"
+            ? { id: potionOrId, containsMetal: Rng.float(100) < 1 }
+            : potionOrId;
         if (freeIndex === -1) {
-            this._state.push(potionId);
+            this._state.push(potion);
         }
         else {
-            this._state[freeIndex] = potionId;
+            this._state[freeIndex] = potion;
         }
         this._updateLists();
     }
@@ -97,7 +103,7 @@ export class RpgPotions {
         let removedCount = 0;
 
         for (let i = 0; i < this._state.length;) {
-            if (this._state[i] === potionId) {
+            if (this._state[i]?.id === potionId) {
                 this._removeIndex(i);
 
                 if (++removedCount >= count) {
@@ -119,6 +125,20 @@ export class RpgPotions {
         }
     }
 
+    removeAll(): Array<RpgPotion.State> {
+        const result = new Array<RpgPotion.State>();
+
+        for (let i = this._state.length - 1; i >= 0; i--) {
+            const potion = this._state[i];
+            this._removeIndex(i);
+            if (potion) {
+                result.push(potion);
+            }
+        }
+
+        return result.reverse();
+    }
+
     use(index: Integer) {
         if (!(index in this._list)) {
             Logger.logContractViolationError("RpgPotions", new Error("use() received out-of-bounds index"), {
@@ -127,14 +147,15 @@ export class RpgPotions {
             return;
         }
 
-        const potionId = this._state[index];
+        const potion = this._state[index];
 
-        if (!potionId) {
+        if (!potion) {
             return;
         }
 
         // TODO ehhhh feels bad to have the game object here...
-        DataPotion.usePotion(potionId, playerObj);
+        // I think it could easily be passed in to RpgPotions.use :-)
+        DataPotion.usePotion(potion.id, playerObj);
 
         this._removeIndex(index);
         this._updateLists();
@@ -146,5 +167,12 @@ export class RpgPotions {
 }
 
 export namespace RpgPotions {
-    export type State = Array<DataPotion.Id | null>;
+    export type State = Array<RpgPotion.State | null>;
+}
+
+export namespace RpgPotion {
+    export interface State {
+        id: DataPotion.Id;
+        containsMetal: boolean;
+    }
 }
