@@ -23,7 +23,7 @@ export namespace DataFact {
             },
             FarmingGods: {
                 heading: "About farming gods",
-                messages: ["Beet and Wheat are farming gods created by the Wizard of Emotion."],
+                messages: ["Beet and Wheat are farming gods created by the Homunculus of Forest."],
             },
             Poison: {
                 heading: "About poison",
@@ -41,10 +41,9 @@ export namespace DataFact {
                 heading: "Gambling tip",
                 messages: ["When gambling, the best strategy is to make bets that are both safe yet risky."],
             },
-            // TODO unused
-            Lagavulin: {
-                heading: "About liquor",
-                messages: ["Lagavulin exists in this world."],
+            ForestSpirits: {
+                heading: "About Forest Spirits",
+                messages: ["The council of homunculi commands Forest Spirits to find Essence of Forest."],
             },
             DungeonBonesHistory: {
                 heading: "About Dungeon of Bones",

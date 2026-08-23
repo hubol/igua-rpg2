@@ -50,10 +50,12 @@ function enrichSecretNpc(lvl: LvlType.ObstacleCourse) {
     lvl.SecretNpc.mixin(mxnCutscene, function* () {
         yield* DramaFacts.memorize("FarmingGods");
         yield* show(
-            "That wizard is such an epic fail...",
+            "Homunculus... The state of things is an existential embarrassment...",
+            "And the wizard... He is a destructive fool...",
             "In his arrogance, he thought he could restore and maintain the world himself.",
-            "But he forgot about the power of friendship!!!",
-            "His sychophantic familiars, untrue friends, now do the bare minimum in maintaining the balance of the world.",
+            "And the homunculi are only extensions of himself...",
+            "...sychophantic familiars, decorated and untrue friends who sit on their thrones, unable to bring balance to the world.",
+            "blep :-P",
         );
     });
 }
