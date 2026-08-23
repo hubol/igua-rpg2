@@ -56,7 +56,32 @@
       "gridCellHeight": 8,
       "gridCellsX": 151,
       "gridCellsY": 60,
-      "entities": []
+      "entities": [
+        {
+          "name": "GateHorizontal",
+          "id": 0,
+          "_eid": "97593426",
+          "x": -40,
+          "y": 304,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "flippedX": true,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromOpenMarket", "name": "", "depth": 0}
+        },
+        {
+          "name": "GateHorizontal",
+          "id": 1,
+          "_eid": "97593426",
+          "x": 1184,
+          "y": 304,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "flippedX": false,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromOpenMarketRight", "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "FrontDecals",
@@ -267,18 +292,6 @@
       "gridCellsX": 151,
       "gridCellsY": 60,
       "entities": [
-        {
-          "name": "GateHorizontal",
-          "id": 0,
-          "_eid": "97593426",
-          "x": -40,
-          "y": 304,
-          "height": 128,
-          "originX": 0,
-          "originY": 0,
-          "flippedX": true,
-          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromOpenMarket", "name": "", "depth": 0}
-        },
         {
           "name": "Dial",
           "id": 1,
@@ -2328,7 +2341,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 144,
@@ -2340,7 +2354,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 160,
@@ -2352,7 +2367,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 176,
@@ -2364,7 +2380,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 192,
@@ -2376,7 +2393,8 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 208,
@@ -2388,7 +2406,21 @@
           "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 224,
+          "y": 656,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#c10000",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
