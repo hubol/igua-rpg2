@@ -1,9 +1,10 @@
 import { Environment } from "../../lib/environment";
 import { Logging } from "../../lib/logging";
+import { Force } from "../../lib/types/force";
 import { RpgFactory } from "./rpg-factory";
-import { getInitialRpgProgress, RpgProgressData } from "./rpg-progress";
+import { RpgProgressData } from "./rpg-progress";
 
-export let Rpg: Rpg.Public = RpgFactory.create(getInitialRpgProgress());
+export let Rpg = Force<Rpg.Public>();
 
 namespace Rpg {
     export type Private = RpgFactory.Type;

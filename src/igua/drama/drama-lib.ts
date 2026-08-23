@@ -3,6 +3,7 @@ import { SceneLocal } from "../../lib/game-engine/scene-local";
 import { renderer } from "../current-pixi-renderer";
 import { Cutscene, scene } from "../globals";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { RpgDarkness } from "../rpg/rpg-darkness";
 
 export namespace DramaLib {
     function getName(speaker = Speaker.current) {
@@ -40,7 +41,7 @@ export namespace DramaLib {
         getColors,
         getWorldCenter,
         get isDarkMode() {
-            return CtxSpeakerDarkMode.value.isEnabled;
+            return CtxSpeakerDarkMode.value.isEnabled || RpgDarkness.getLevel() >= 2;
         },
         set isDarkMode(value) {
             CtxSpeakerDarkMode.value.isEnabled = value;

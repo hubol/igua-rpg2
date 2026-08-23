@@ -16,8 +16,6 @@ export class IguaLayers {
         this.scene = new Container().named("SceneStack");
         this._overlayParentObj = new Container().named("OverlayParent");
 
-        this.recreateOverlay();
-
         _root.addChild(this.scene, this._overlayParentObj);
 
         console.log(...Logging.componentArgs(this));

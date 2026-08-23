@@ -6,7 +6,7 @@ import { layers, sceneStack, startAnimator } from "../globals";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { setRpgProgressData } from "../rpg/rpg";
-import { RpgProgressData } from "../rpg/rpg-progress";
+import { getInitialRpgProgress, RpgProgressData } from "../rpg/rpg-progress";
 
 export function startGame() {
     const config = getConfig();
@@ -14,6 +14,9 @@ export function startGame() {
     if (config.progress) {
         setRpgProgressData(config.progress);
         Rpg.character.status.health = Rpg.character.status.healthMax;
+    }
+    else {
+        setRpgProgressData(getInitialRpgProgress());
     }
 
     if (Environment.isDev) {
