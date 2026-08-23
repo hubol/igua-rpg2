@@ -24,6 +24,9 @@ function enrichSoupMakerNpc(lvl: LvlType.OhioPlateauOfIndustry) {
 
     const quest = Rpg.quest("PlateauIndustry.SoupMaker.AteSoup");
 
+    lvl.OutOfOrderSign
+        .step(self => self.objEsotericOutOfOrderSign.isActive = !quest.flags.removedOutOfOrderSign);
+
     lvl.SoupMakerNpc
         .mixin(mxnCutscene, function* () {
             const result = yield* ask(
@@ -105,10 +108,21 @@ function enrichSoupMakerNpc(lvl: LvlType.OhioPlateauOfIndustry) {
                     yield* show("Yep, that's my sign.");
                 }
                 else if (!quest.flags.removedOutOfOrderSign) {
-                    // TODO !
                     yield* show(
                         "Oh, right!",
                         "I can remove the out of order sign now.",
+                    );
+
+                    lvl.SoupMakerNpc.auto.facing = -1;
+                    yield sleep(500);
+                    quest.flags.removedOutOfOrderSign = true;
+                    yield sleep(500);
+
+                    lvl.SoupMakerNpc.auto.facing = 1;
+
+                    yield* show(
+                        "OK it's done.",
+                        "Isn't that cool?",
                     );
                 }
             }

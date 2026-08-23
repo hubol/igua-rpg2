@@ -89,7 +89,9 @@ export function mxnInteract(obj: DisplayObject, interactFn: () => void, hotspotO
             if (obj.is(objEsotericOutOfOrderSign)) {
                 return;
             }
-            isOutOfOrder = Boolean(obj.collidesOne(Instances(objEsotericOutOfOrderSign)));
+            isOutOfOrder = Boolean(
+                obj.collidesOne(Instances(objEsotericOutOfOrderSign))?.objEsotericOutOfOrderSign?.isActive,
+            );
         });
 }
 
