@@ -73,12 +73,12 @@ export class RpgPotions {
         return count;
     }
 
-    receive(potion: RpgPotion.State): void;
+    receive(potion: RpgPotion): void;
     receive(potionId: DataPotion.Id): void;
-    receive(potionOrId: DataPotion.Id | RpgPotion.State) {
+    receive(potionOrId: DataPotion.Id | RpgPotion) {
         const freeIndex = this._state.findIndex(value => value === null);
-        const potion: RpgPotion.State = typeof potionOrId === "string"
-            ? { id: potionOrId, containsMetal: Rng.float(100) < 1 }
+        const potion: RpgPotion = typeof potionOrId === "string"
+            ? { id: potionOrId, state: { containsMetal: Rng.float(100) < 1 } }
             : potionOrId;
         if (freeIndex === -1) {
             this._state.push(potion);
@@ -125,8 +125,8 @@ export class RpgPotions {
         }
     }
 
-    removeAll(): Array<RpgPotion.State> {
-        const result = new Array<RpgPotion.State>();
+    removeAll(): Array<RpgPotion> {
+        const result = new Array<RpgPotion>();
 
         for (let i = this._state.length - 1; i >= 0; i--) {
             const potion = this._state[i];
@@ -167,12 +167,16 @@ export class RpgPotions {
 }
 
 export namespace RpgPotions {
-    export type State = Array<RpgPotion.State | null>;
+    export type State = Array<RpgPotion | null>;
+}
+
+export interface RpgPotion {
+    id: DataPotion.Id;
+    state: RpgPotion.State;
 }
 
 export namespace RpgPotion {
     export interface State {
-        id: DataPotion.Id;
         containsMetal: boolean;
     }
 }

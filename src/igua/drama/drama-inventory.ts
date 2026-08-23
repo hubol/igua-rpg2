@@ -71,7 +71,7 @@ function* removeCountFromPlayer(item: RpgInventory.Item, count: Integer) {
 }
 
 function* visualizeRemoveCountFromPlayer(
-    item: RpgInventory.Item,
+    itemOrItems: RpgInventory.Item | RpgInventory.Item[],
     initialCount: Integer,
     endingCount: Integer,
 ) {
@@ -97,8 +97,10 @@ function* visualizeRemoveCountFromPlayer(
 
     let removedFigureObj: DisplayObject | null = null;
 
+    const items = Array.isArray(itemOrItems) ? itemOrItems : [itemOrItems];
     for (let i = 0; i < count; i++) {
         ownedObj.controls.count = initialCount - i - 1;
+        const item = items[i] ?? items.last;
         removedFigureObj = DramaItem.createRemovedItemFigureObjAtPlayer(item);
         yield DramaItem.sleepAfterRemoveIteration(i);
     }
@@ -224,6 +226,16 @@ function* addCondimentToHotDog(condimentId: RpgHotDogs.CondimentId, applyCoro?: 
     );
 }
 
+function* removeAllPotions() {
+    const potions = Rpg.inventory.potions.removeAll();
+    yield* visualizeRemoveCountFromPlayer(
+        potions.map(({ id }) => ({ kind: "potion", id })),
+        potions.length,
+        0,
+    );
+    return potions;
+}
+
 export const DramaInventory = {
     askRemoveCount,
     askWhichAndRemoveOne,
@@ -240,5 +252,6 @@ export const DramaInventory = {
     },
     potions: {
         addCondimentToHotDog,
+        removeAll: removeAllPotions,
     },
 };

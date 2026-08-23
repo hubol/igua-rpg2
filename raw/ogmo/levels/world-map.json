@@ -82,7 +82,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 2340,
-          "uid": 175755215936800,
+          "uid": 178750890084000,
           "tint": "#ffffff",
           "values": {"sceneName": "scnNewBalltownUnderneath", "checkpointName": "fromMapRight", "name": "", "depth": 0, "visible": true}
         },
@@ -95,7 +95,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 0,
-          "uid": 175755215936900,
+          "uid": 178750890084001,
           "tint": "#ffffff",
           "values": {"sceneName": "scnNewBalltownUnderneath", "checkpointName": "fromMapLeft", "name": "", "depth": 0, "visible": true}
         },
@@ -108,7 +108,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 270,
-          "uid": 175755215936901,
+          "uid": 178750890084002,
           "tint": "#ffffff",
           "values": {"sceneName": "scnPlainsSuggestive", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": false}
         },
@@ -121,7 +121,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 540,
-          "uid": 175755215936902,
+          "uid": 178750890084003,
           "tint": "#ffffff",
           "values": {"sceneName": "scnStrangeMarket", "checkpointName": "fromWorldMap", "name": "StrangeMarketGate", "depth": 0, "visible": true}
         },
@@ -134,7 +134,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 90,
-          "uid": 175860865618400,
+          "uid": 178750890084004,
           "tint": "#ffffff",
           "values": {"sceneName": "scnColosseumMiffed", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": false}
         },
@@ -147,7 +147,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 270,
-          "uid": 176021246543005,
+          "uid": 178750890084005,
           "tint": "#ffffff",
           "values": {"sceneName": "scnIndianaUniversity", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
@@ -160,7 +160,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 270,
-          "uid": 176068565360400,
+          "uid": 178750890084006,
           "tint": "#ffffff",
           "values": {"sceneName": "scnGreatTower", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
@@ -173,7 +173,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 90,
-          "uid": 176310576198900,
+          "uid": 178750890084007,
           "tint": "#ffffff",
           "values": {"sceneName": "scnSimpleSecretValuables", "checkpointName": "fromWorldMap", "name": "SimpleSecretValuablesGate", "depth": 0, "visible": false}
         },
@@ -186,7 +186,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 270,
-          "uid": 176569559038300,
+          "uid": 178750890084008,
           "tint": "#ffffff",
           "values": {"sceneName": "scnSinSwamp", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
@@ -199,7 +199,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 270,
-          "uid": 176975623156307,
+          "uid": 178750890084009,
           "tint": "#ffffff",
           "values": {"sceneName": "scnGrottoIndianaShop", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
@@ -212,7 +212,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 0,
-          "uid": 177152452563600,
+          "uid": 178750890084010,
           "tint": "#ffffff",
           "values": {"sceneName": "scnIndianaDesert", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
@@ -225,7 +225,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 180,
-          "uid": 177281293625000,
+          "uid": 178750890084011,
           "tint": "#ffffff",
           "values": {"sceneName": "scnIndianaLoungeExterior", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
@@ -238,7 +238,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 630,
-          "uid": 177427749219800,
+          "uid": 178750890084012,
           "tint": "#ffffff",
           "values": {"sceneName": "scnStrangeMarketGuardian", "checkpointName": "fromWorldMap", "name": "StrangeMarketGuardianGate", "depth": 0, "visible": true}
         },
@@ -251,7 +251,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 180,
-          "uid": 177472955265013,
+          "uid": 178750890084013,
           "tint": "#ffffff",
           "values": {"sceneName": "scnIndianaDesert", "checkpointName": "fromWorldMapRight", "name": "", "depth": 0, "visible": true}
         },
@@ -264,7 +264,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 0,
-          "uid": 177612382363803,
+          "uid": 178750890084014,
           "tint": "#ff6753",
           "values": {"sceneName": "scnIndianaOhioBridge", "checkpointName": "fromIndiana", "name": "", "depth": 0, "visible": true}
         },
@@ -277,7 +277,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 180,
-          "uid": 177612384494403,
+          "uid": 178750890084015,
           "tint": "#bab532",
           "values": {"sceneName": "scnIndianaOhioBridge", "checkpointName": "fromOhio", "name": "", "depth": 0, "visible": true}
         },
@@ -290,7 +290,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": -90,
-          "uid": 177622511424900,
+          "uid": 178750890084016,
           "tint": "#ffffff",
           "values": {"sceneName": "scnIndianaDarkEvilHole", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
@@ -303,7 +303,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 270,
-          "uid": 177644036502700,
+          "uid": 178750890084017,
           "tint": "#ffffff",
           "values": {"sceneName": "scnOhioDmv", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
@@ -316,7 +316,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": -90,
-          "uid": 178050843572718,
+          "uid": 178750890084018,
           "tint": "#ffffff",
           "values": {"sceneName": "scnIntelligenceTowerEntrance", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
@@ -329,7 +329,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": -90,
-          "uid": 178149584065600,
+          "uid": 178750890084019,
           "tint": "#ffffff",
           "values": {"sceneName": "scnOpenMarket", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
@@ -342,7 +342,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 405,
-          "uid": 178520085797500,
+          "uid": 178750890084020,
           "tint": "#ffffff",
           "values": {"sceneName": "scnOhioCemetery", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
@@ -355,7 +355,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 0,
-          "uid": 178699722912000,
+          "uid": 178750890084021,
           "tint": "#ffffff",
           "values": {"sceneName": "scnLibraryOnTheBorder", "checkpointName": "fromIndiana", "name": "", "depth": 0, "visible": true}
         },
@@ -368,7 +368,7 @@
           "originX": 16,
           "originY": 16,
           "rotation": 180,
-          "uid": 178699730851822,
+          "uid": 178750890084022,
           "tint": "#ffffff",
           "values": {"sceneName": "scnLibraryOnTheBorder", "checkpointName": "fromOhio", "name": "", "depth": 0, "visible": true}
         },
@@ -381,9 +381,35 @@
           "originX": 16,
           "originY": 16,
           "rotation": 0,
-          "uid": 178742078491300,
+          "uid": 178750890084023,
           "tint": "#ffffff",
           "values": {"sceneName": "scnOhioLumberyard", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 26,
+          "_eid": "53836309",
+          "x": 3456,
+          "y": 936,
+          "originX": 16,
+          "originY": 16,
+          "rotation": -135,
+          "uid": 178750890084024,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnFoodSafetyDepartment", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "GateMap",
+          "id": 27,
+          "_eid": "53836309",
+          "x": 4041,
+          "y": 1382,
+          "originX": 16,
+          "originY": 16,
+          "rotation": -45,
+          "uid": 178750890084025,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnOhioPlateauOfIndustry", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -759,7 +785,7 @@
           "originX": 22,
           "originY": 39,
           "flippedX": true,
-          "values": {"name": "fromOhioCasino", "depth": 0, "overrideFlipX": "none"}
+          "values": {"name": "fromPlateauOfIndustry", "depth": 0, "overrideFlipX": "none"}
         },
         {
           "name": "Checkpoint",
@@ -837,6 +863,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromOhioLumberyard", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 38,
+          "_eid": "19953026",
+          "x": 3496,
+          "y": 976,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromFoodSafetyDepartment", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -1057,19 +1094,6 @@
           "originX": 12,
           "originY": 10,
           "values": {"variant": "level0", "name": "", "depth": 0}
-        },
-        {
-          "name": "GateMap",
-          "id": 10,
-          "_eid": "53836309",
-          "x": 4048,
-          "y": 1368,
-          "originX": 16,
-          "originY": 16,
-          "rotation": 0,
-          "uid": 178520557013000,
-          "tint": "#ffffff",
-          "values": {"sceneName": "scnOhioPlateauOfIndustry", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
         {
           "name": "BinocularViewer",
@@ -8950,6 +8974,43 @@
           "rotation": 0,
           "tint": "#636363",
           "texture": "shapes/square irregular 10.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 3424,
+          "y": 912,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#000000",
+          "texture": "shapes/circle irregular26.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3413,
+          "y": 908,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e23c27",
+          "texture": "shapes/confetti corner.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 3436,
+          "y": 918,
+          "scaleX": -1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#e23c27",
+          "texture": "shapes/confetti corner.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}

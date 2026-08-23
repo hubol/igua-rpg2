@@ -53,6 +53,12 @@ export namespace DataFact {
                     "This has resulted in a mausoleum being named \"Dungeon of Bones\".",
                 ],
             },
+            FoodMetal: {
+                heading: "About metal in food",
+                messages: [
+                    "Sometimes, food can contain metal. This is generally harmless and sometimes even exciting.",
+                ],
+            },
             "__Fallback__": {
                 heading: "About a bug",
                 messages: ["If you are reading this, it is a bug with the facts mechanic."],

@@ -1,11 +1,11 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 976,
+  "width": 500,
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#000000", "Region ID": "~Unset~"},
   "backgroundColor": "#408000",
+  "values": {"Terrain Color": "#000000", "Region ID": "~Unset~"},
   "layers": [
     {
       "name": "MarkerEntities",
@@ -14,21 +14,9 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 122,
+      "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": [
-        {
-          "name": "Marker",
-          "id": 0,
-          "_eid": "73148747",
-          "x": 216,
-          "y": 232,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#00ff00",
-          "values": {"name": "DevSpiritMarker", "depth": 0}
-        }
-      ]
+      "entities": []
     },
     {
       "name": "RegionEntities",
@@ -37,22 +25,9 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 122,
+      "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": [
-        {
-          "name": "GateHorizontal",
-          "id": 0,
-          "_eid": "97593426",
-          "x": -48,
-          "y": 72,
-          "height": 128,
-          "originX": 0,
-          "originY": 0,
-          "flippedX": true,
-          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromOhioLumberyard", "name": "", "depth": 0}
-        }
-      ]
+      "entities": []
     },
     {
       "name": "FrontDecals",
@@ -61,7 +36,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 122,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -73,7 +48,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 122,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "entities": []
     },
@@ -84,15 +59,15 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 122,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "entities": [
         {
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
-          "x": 104,
-          "y": 200,
+          "x": 152,
+          "y": 224,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
@@ -107,19 +82,19 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 122,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "entities": [
         {
           "name": "IguanaNpc",
           "id": 0,
           "_eid": "90326278",
-          "x": 392,
-          "y": 232,
+          "x": 312,
+          "y": 224,
           "originX": 20,
           "originY": 52,
-          "flippedX": false,
-          "values": {"personaName": "Aidar", "name": "AidarNpc", "depth": 0}
+          "flippedX": true,
+          "values": {"personaName": "FoodChecker", "name": "FoodCheckerNpc", "depth": 0}
         }
       ]
     },
@@ -130,7 +105,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 122,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -142,9 +117,30 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 122,
+      "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Door",
+          "id": 0,
+          "_eid": "88296692",
+          "x": 80,
+          "y": 176,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromFoodSafetyDepartment", "name": "", "depth": 0}
+        },
+        {
+          "name": "Darkness",
+          "id": 1,
+          "_eid": "59550687",
+          "x": 40,
+          "y": 32,
+          "originX": 20,
+          "originY": 19,
+          "values": {"exitSceneName": "scnWorldMap", "exitCheckpointName": "fromFoodSafetyDepartment", "level": 2, "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "TerrainDecals",
@@ -153,7 +149,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 122,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -165,7 +161,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 122,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "entities": [
         {
@@ -173,9 +169,9 @@
           "id": 0,
           "_eid": "93117141",
           "x": 0,
-          "y": 200,
-          "width": 152,
-          "height": 80,
+          "y": 224,
+          "width": 504,
+          "height": 56,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
@@ -185,10 +181,10 @@
           "name": "Block",
           "id": 1,
           "_eid": "93117141",
-          "x": 152,
-          "y": 232,
-          "width": 672,
-          "height": 88,
+          "x": 0,
+          "y": 0,
+          "width": 504,
+          "height": 56,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
@@ -198,12 +194,51 @@
           "name": "Block",
           "id": 2,
           "_eid": "93117141",
-          "x": 824,
-          "y": 200,
-          "width": 152,
-          "height": 80,
+          "x": 0,
+          "y": 56,
+          "width": 56,
+          "height": 168,
           "originX": 0,
           "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 3,
+          "_eid": "93117141",
+          "x": 448,
+          "y": 56,
+          "width": 56,
+          "height": 168,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 4,
+          "_eid": "95675713",
+          "x": 56,
+          "y": 56,
+          "width": 32,
+          "height": 32,
+          "flippedX": true,
+          "flippedY": true,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 5,
+          "_eid": "95675713",
+          "x": 416,
+          "y": 56,
+          "width": 32,
+          "height": 32,
+          "flippedX": false,
+          "flippedY": true,
           "tint": "#000000",
           "values": {"name": "", "depth": 0, "visible": true}
         }
@@ -216,7 +251,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 122,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "entities": []
     },
@@ -227,7 +262,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 122,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -239,7 +274,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 122,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -251,7 +286,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 122,
+      "gridCellsX": 64,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"

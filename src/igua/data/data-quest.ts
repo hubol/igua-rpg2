@@ -305,6 +305,19 @@ export namespace DataQuest {
                     kind: "nothing",
                 },
             },
+            "FoodSafetyDeparment.MetalDiscovered": {
+                flags: null,
+                reward: {
+                    kind: "in_order",
+                    drops: [
+                        { kind: "key_item", id: "MagicKey" },
+                    ],
+                    extend: {
+                        kind: "repeat",
+                        drop: { kind: "currency", id: "valuables", count: 100 },
+                    },
+                },
+            },
             __Fallback__: {
                 flags: null,
                 reward: {

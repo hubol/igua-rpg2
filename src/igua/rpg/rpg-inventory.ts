@@ -7,7 +7,7 @@ import { RpgCharacterEquipment } from "./rpg-character-equipment";
 import { RpgFlops } from "./rpg-flops";
 import { RpgKeyItems } from "./rpg-key-items";
 import { RpgPocket } from "./rpg-pocket";
-import { RpgPotions } from "./rpg-potions";
+import { RpgPotion, RpgPotions } from "./rpg-potions";
 
 export class RpgInventory {
     constructor(
@@ -32,7 +32,7 @@ export class RpgInventory {
         }
     }
 
-    receive(item: RpgInventory.Item) {
+    receive(item: RpgInventory.ReceivableItem) {
         switch (item.kind) {
             case "equipment":
                 this.equipment.receive(item.id, item.level);
@@ -41,7 +41,12 @@ export class RpgInventory {
                 this.keyItems.receive(item.id);
                 return;
             case "potion":
-                this.potions.receive(item.id);
+                if (item.state) {
+                    this.potions.receive({ id: item.id, state: item.state! });
+                }
+                else {
+                    this.potions.receive(item.id);
+                }
                 return;
             case "pocket_item":
                 this.pocket.receive(item.id);
@@ -69,6 +74,7 @@ export class RpgInventory {
 
 export namespace RpgInventory {
     export type Item = Item.Equipment | Item.KeyItem | Item.PocketItem | Item.Potion;
+    export type ReceivableItem = Item.Equipment | Item.KeyItem | Item.PocketItem | ReceivableItem.Potion;
 
     // TODO probably need to model them all
     export namespace Item {
@@ -91,6 +97,14 @@ export namespace RpgInventory {
         export interface PocketItem {
             kind: "pocket_item";
             id: DataPocketItem.Id;
+        }
+    }
+
+    export namespace ReceivableItem {
+        export interface Potion {
+            kind: "potion";
+            id: DataPotion.Id;
+            state?: RpgPotion.State;
         }
     }
 }
