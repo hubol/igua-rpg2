@@ -413,11 +413,11 @@ export namespace DataEquipment {
                 DestructiveAutoJump: {
                     name: "Dangerous Spring",
                     texture: null,
-                    description: "",
+                    description: "Perpetually jump, but inflict damage to wearer.",
                     buffs: (model, bonus) => {
                         model.motion.jump.automaticallyJump += 100;
-                        model.motion.jump.takeDamageChance += Math.max(1, 25 - bonus * 2);
-                        model.motion.jump.takeDamageAmount += Math.max(1, 10 - bonus);
+                        model.motion.jump.takeDamageChance += Math.max(1, 95 - bonus * 5);
+                        model.motion.jump.takeDamageAmount += Math.max(1, 2 - bonus);
                     },
                 },
                 __Fallback__: {

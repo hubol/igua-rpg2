@@ -160,7 +160,20 @@
       "gridCellHeight": 8,
       "gridCellsX": 178,
       "gridCellsY": 107,
-      "entities": []
+      "entities": [
+        {
+          "name": "Puddle",
+          "id": 0,
+          "_eid": "55698237",
+          "x": 736,
+          "y": 183,
+          "width": 36,
+          "originX": 0,
+          "originY": 1,
+          "tint": "#68a8d0",
+          "values": {"name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "PlayerEntities",
@@ -194,7 +207,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 178,
       "gridCellsY": 107,
-      "entities": []
+      "entities": [
+        {
+          "name": "IguanaNpc",
+          "id": 0,
+          "_eid": "90326278",
+          "x": 256,
+          "y": 800,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": true,
+          "values": {"personaName": "JumpGoon", "name": "GoonNpc", "depth": 0}
+        }
+      ]
     },
     {
       "name": "AboveEntitiesDecals",
@@ -226,7 +251,7 @@
           "y": 768,
           "originX": 23,
           "originY": 24,
-          "uid": 178759914618700,
+          "uid": 178760543536100,
           "values": {"requiredFlopsCount": 1, "name": "", "depth": 0}
         },
         {
@@ -237,7 +262,7 @@
           "y": 664,
           "originX": 23,
           "originY": 24,
-          "uid": 178759956327601,
+          "uid": 178760543536101,
           "values": {"requiredFlopsCount": 1, "name": "", "depth": 0}
         },
         {
@@ -248,7 +273,7 @@
           "y": 563,
           "originX": 23,
           "originY": 24,
-          "uid": 178759971542302,
+          "uid": 178760543536102,
           "values": {"requiredFlopsCount": 1, "name": "", "depth": 0}
         },
         {
@@ -259,7 +284,7 @@
           "y": 465,
           "originX": 23,
           "originY": 24,
-          "uid": 178759972749003,
+          "uid": 178760543536103,
           "values": {"requiredFlopsCount": 1, "name": "", "depth": 0}
         },
         {
@@ -270,7 +295,7 @@
           "y": 370,
           "originX": 23,
           "originY": 24,
-          "uid": 178759973308404,
+          "uid": 178760543536104,
           "values": {"requiredFlopsCount": 1, "name": "", "depth": 0}
         },
         {
@@ -281,7 +306,7 @@
           "y": 276,
           "originX": 23,
           "originY": 24,
-          "uid": 178760016684905,
+          "uid": 178760543536105,
           "values": {"requiredFlopsCount": 1, "name": "", "depth": 0}
         },
         {
@@ -292,7 +317,7 @@
           "y": 183,
           "originX": 23,
           "originY": 24,
-          "uid": 178760017189306,
+          "uid": 178760543536106,
           "values": {"requiredFlopsCount": 1, "name": "", "depth": 0}
         },
         {
@@ -304,6 +329,36 @@
           "originX": 0,
           "originY": 26,
           "values": {"title": "Jump", "message": "Jump experience is awarded on each jump. Experience is increased per ballon.", "min": 1, "max": 2, "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemyBallon",
+          "id": 9,
+          "_eid": "23510996",
+          "x": 1175,
+          "y": 622,
+          "originX": 22,
+          "originY": 24,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemyBallon",
+          "id": 10,
+          "_eid": "23510996",
+          "x": 1231,
+          "y": 638,
+          "originX": 22,
+          "originY": 24,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnemyBallon",
+          "id": 11,
+          "_eid": "23510996",
+          "x": 1287,
+          "y": 654,
+          "originX": 22,
+          "originY": 24,
+          "values": {"variant": "level0", "name": "", "depth": 0}
         }
       ]
     },
@@ -325,6 +380,18 @@
           "rotation": 0,
           "tint": "#19a859",
           "texture": "town/signage/jump 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 251,
+          "y": 821,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/signage/jump 0.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}

@@ -534,6 +534,15 @@ export namespace DataShop {
                     },
                 ],
             },
+            JumpGoon: {
+                stocks: [
+                    {
+                        initialQuantity: 3,
+                        price: { currency: "valuables", deltaSold: 500, initial: 499 },
+                        product: { kind: "equipment", id: "DestructiveAutoJump", level: 1 },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );
