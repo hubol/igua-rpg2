@@ -304,7 +304,7 @@ export namespace DataPotion {
                 description: "Tastes like violence. Restores health.",
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.CakeSliceCombat,
-                flags: flags(),
+                flags: flags("is_foodlike"),
             },
             CakeComputer: {
                 stinkLineTint: 0xFF7B00,
@@ -312,7 +312,7 @@ export namespace DataPotion {
                 description: "Tastes like escapism. Restores health.",
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.CakeSliceComputer,
-                flags: flags(),
+                flags: flags("is_foodlike"),
             },
             CakeGambling: {
                 stinkLineTint: 0xEABB00,
@@ -320,7 +320,7 @@ export namespace DataPotion {
                 description: "Tastes like risk-reward. Restores health.",
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.CakeSliceGambling,
-                flags: flags(),
+                flags: flags("is_foodlike"),
             },
             CakeJump: {
                 stinkLineTint: 0x19A859,
@@ -328,7 +328,7 @@ export namespace DataPotion {
                 description: "Tastes like acrobatics. Restores health.",
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.CakeSliceJump,
-                flags: flags(),
+                flags: flags("is_foodlike"),
             },
             CakePocket: {
                 stinkLineTint: 0x54BAFF,
@@ -336,7 +336,7 @@ export namespace DataPotion {
                 description: "Tastes like organization. Restores health.",
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.CakeSlicePocket,
-                flags: flags(),
+                flags: flags("is_foodlike"),
             },
             CakeQuest: {
                 stinkLineTint: 0x3775E8,
@@ -344,7 +344,7 @@ export namespace DataPotion {
                 description: "Tastes like accomplishment. Restores health.",
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.CakeSliceQuest,
-                flags: flags(),
+                flags: flags("is_foodlike"),
             },
             CakeSocial: {
                 stinkLineTint: 0xA074E8,
@@ -352,7 +352,7 @@ export namespace DataPotion {
                 description: "Tastes like friendship. Restores health.",
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.CakeSliceSocial,
-                flags: flags(),
+                flags: flags("is_foodlike"),
             },
             CakeSpirit: {
                 stinkLineTint: 0x2e2e2e,
@@ -360,7 +360,7 @@ export namespace DataPotion {
                 description: "Tastes like rebirth. Restores health.",
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.CakeSliceSpirit,
-                flags: flags(),
+                flags: flags("is_foodlike"),
             },
             __Fallback__: {
                 name: "???",
