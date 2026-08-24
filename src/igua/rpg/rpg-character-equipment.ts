@@ -135,7 +135,7 @@ export class RpgCharacterEquipment {
     })();
 
     receive(equipmentId: DataEquipment.Id, level: Integer) {
-        if (level < 1) {
+        if (level < 1 || !level) {
             Logger.logContractViolationError(
                 "RpgCharacterEquipment.receive",
                 new Error("Attempting to receive an equipment with level < 1, setting to 1."),
