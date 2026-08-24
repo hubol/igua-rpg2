@@ -388,6 +388,10 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
         pageMeshDataPool.push(...activePagesMeshData);
 
         for (let i = 0; i < lenChars; i++) {
+            if (chars[i].displayObject) {
+                continue;
+            }
+
             const texture = chars[i].texture;
             const baseTextureUid = texture.baseTexture.uid;
 
@@ -439,9 +443,7 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
                 pagesMeshData[baseTextureUid] = pageMeshData!;
             }
 
-            if (!chars[i].displayObject) {
-                pagesMeshData[baseTextureUid].total++;
-            }
+            pagesMeshData[baseTextureUid].total++;
         }
 
         // lets find any previously active pageMeshDatas that are no longer required for
