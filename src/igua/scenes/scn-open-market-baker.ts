@@ -1,11 +1,13 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
-import { DramaFacts } from "../drama/drama-facts";
-import { DramaMisc } from "../drama/drama-misc";
+import { Mzk } from "../../assets/music";
+import { Jukebox } from "../core/igua-audio";
+import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { Rpg } from "../rpg/rpg";
 
 export function scnOpenMarketBaker() {
+    Jukebox.play(Mzk.PreciousInstructions);
     const lvl = Lvl.OpenMarketBaker();
     enrichBakerNpc(lvl);
 }
@@ -36,7 +38,7 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
             }
 
             if (response === 0) {
-                // TODO Cake shop
+                yield* dramaShop("OpenBaker", lvl.BakerNpc.speaker);
                 return;
             }
 

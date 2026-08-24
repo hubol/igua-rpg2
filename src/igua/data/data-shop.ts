@@ -212,7 +212,7 @@ export namespace DataShop {
                     },
                     {
                         initialQuantity: 99,
-                        price: { currency: "valuables", deltaSold: 0, initial: 10 },
+                        price: { currency: "valuables", deltaSold: 0, initial: 5 },
                         product: { kind: "potion", id: "AnnoyIguanas" },
                     },
                 ],
@@ -482,6 +482,55 @@ export namespace DataShop {
                         initialQuantity: 99,
                         price: { currency: "spirit", deltaSold: 5, initial: 10 },
                         product: { kind: "potion", id: "PoisonRestore" },
+                    },
+                ],
+            },
+            OpenBaker: {
+                stocks: [
+                    {
+                        initialQuantity: 99,
+                        price: { currency: "valuables", deltaSold: 0, initial: 10 },
+                        product: { kind: "potion", id: "AnnoyIguanas" },
+                    },
+                    {
+                        initialQuantity: 10,
+                        price: { currency: "combat", deltaSold: 0, initial: 30 },
+                        product: { kind: "potion", id: "CakeCombat" },
+                    },
+                    {
+                        initialQuantity: 10,
+                        price: { currency: "computer", deltaSold: 0, initial: 1 },
+                        product: { kind: "potion", id: "CakeComputer" },
+                    },
+                    {
+                        initialQuantity: 10,
+                        price: { currency: "gambling", deltaSold: 0, initial: 20 },
+                        product: { kind: "potion", id: "CakeGambling" },
+                    },
+                    {
+                        initialQuantity: 10,
+                        price: { currency: "jump", deltaSold: 0, initial: 30 },
+                        product: { kind: "potion", id: "CakeJump" },
+                    },
+                    {
+                        initialQuantity: 10,
+                        price: { currency: "pocket", deltaSold: 0, initial: 30 },
+                        product: { kind: "potion", id: "CakePocket" },
+                    },
+                    {
+                        initialQuantity: 10,
+                        price: { currency: "quest", deltaSold: 0, initial: 1 },
+                        product: { kind: "potion", id: "CakeQuest" },
+                    },
+                    {
+                        initialQuantity: 10,
+                        price: { currency: "social", deltaSold: 0, initial: 10 },
+                        product: { kind: "potion", id: "CakeSocial" },
+                    },
+                    {
+                        initialQuantity: 10,
+                        price: { currency: "spirit", deltaSold: 0, initial: 20 },
+                        product: { kind: "potion", id: "CakeSpirit" },
                     },
                 ],
             },
