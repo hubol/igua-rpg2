@@ -410,6 +410,16 @@ export namespace DataEquipment {
                         model.loot.specialEvents.replaceItemsWithForestSpritChance += 2 + bonus;
                     },
                 },
+                DestructiveAutoJump: {
+                    name: "Dangerous Spring",
+                    texture: null,
+                    description: "",
+                    buffs: (model, bonus) => {
+                        model.motion.jump.automaticallyJump += 100;
+                        model.motion.jump.takeDamageChance += Math.max(1, 25 - bonus * 2);
+                        model.motion.jump.takeDamageAmount += Math.max(1, 10 - bonus);
+                    },
+                },
                 __Fallback__: {
                     name: "???",
                     texture: null,

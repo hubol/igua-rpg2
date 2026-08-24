@@ -317,7 +317,9 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 puppet.speed.y += PlayerConsts.VariableJumpDelta;
             }
 
-            if (hasControl && !allowMoveYAxis && Input.justWentDown("Jump")) {
+            const isJumping = Input.justWentDown("Jump") || Rpg.character.buffs.motion.jump.automaticallyJump > 0;
+
+            if (hasControl && !allowMoveYAxis && isJumping) {
                 stepsSinceJumpJustWentDown = 0;
             }
 
@@ -326,6 +328,10 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             }
 
             if (hasControl && (puppet.isOnGround || midairJumpsRemaining > 0) && stepsSinceJumpJustWentDown < 6) {
+                if (Rng.float(100) < Rpg.character.buffs.motion.jump.takeDamageChance) {
+                    puppet.damage(Rpg.character.selfInflictedJumpAttack);
+                }
+
                 const isMidairJump = !puppet.isOnGround;
 
                 if (isMidairJump) {

@@ -116,6 +116,9 @@ export namespace RpgPlayerBuffs {
                     bonusAtSpecialSigns: 0,
                     midairCount: 0,
                     atMaxHealthMidairCount: 0,
+                    automaticallyJump: <PercentInt> 0,
+                    takeDamageChance: <PercentInt> 0,
+                    takeDamageAmount: 0,
                 },
                 walk: {
                     topSpeedIncreaseFactor: <PercentInt> 0,

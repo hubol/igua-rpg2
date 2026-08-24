@@ -126,6 +126,16 @@ export class RpgPlayer {
         });
     })();
 
+    readonly selfInflictedJumpAttack = (() => {
+        const player = this;
+
+        return RpgAttack.create({
+            get physical() {
+                return player.buffs.motion.jump.takeDamageAmount;
+            },
+        });
+    })();
+
     get looks() {
         return this._state.looks;
     }
