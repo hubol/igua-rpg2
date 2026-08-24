@@ -18,10 +18,10 @@ export function objAngelSpikeBall(entity: OgmoEntities.EnemySpikeBall) {
     const collisionShapeObj = new Graphics().beginFill(0xff0000).drawRect(4, 3, 16, 15).invisible();
 
     return container(
-        Sprite.from(Tx.Enemy.SpikeBall)
-            .anchored(0.5, 0.5),
+        Sprite.from(Tx.Enemy.SpikeBall),
         collisionShapeObj,
     )
+        .pivoted(12, 10)
         .collisionShape(CollisionShape.DisplayObjects, [collisionShapeObj])
         .mixin(mxnRpgAttack, { attack: variant.atk });
 }
