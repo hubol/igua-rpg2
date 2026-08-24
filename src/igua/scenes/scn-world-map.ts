@@ -43,6 +43,7 @@ export function scnWorldMap() {
         ...Search.findDecals(Tx.WorldMap.Cloud0),
         ...Search.findDecals(Tx.WorldMap.Cloud1),
         ...Search.findDecals(Tx.WorldMap.Cloud2),
+        ...Search.findDecals(Tx.WorldMap.Cloud3),
     ]
         .forEach(x => x.mixin(mxnSinePivot));
     Object.entries(lvl).flatMap(([key, value]) =>
