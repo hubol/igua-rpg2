@@ -11,11 +11,16 @@ export function scnOhioLumberyard() {
 
 function enrichAidar(lvl: LvlType.OhioLumberyard) {
     const introducedGift = Rpg.gift("Ohio.Lumberyard.Aidar.Introduced");
+    const mishaBirthdayQuest = Rpg.quest("MishaHouse.Birthday");
 
     lvl.AidarNpc
         .mixin(mxnCutscene, function* () {
-            // TODO do you know mishas birthday
-            const result = yield* ask("Hello", introducedGift.isGiveable() ? "What's going on?" : null, "Bye");
+            const result = yield* ask(
+                "Hello",
+                introducedGift.isGiveable() ? "What's going on?" : null,
+                mishaBirthdayQuest.flags.spokeWithBaker ? "About Misha's age" : null,
+                "Bye",
+            );
             if (result === 0) {
                 yield* show(
                     "I just want to work on my sculpture.",
@@ -29,9 +34,17 @@ function enrichAidar(lvl: LvlType.OhioLumberyard) {
 
                 yield* show(
                     "The fairies will give you essence.",
-                    "Bring it to me and I can make my sculpture.",
+                    "Bring it and I can make my sculpture.",
                     "Maybe it will make you happy too.",
                 );
+            }
+            else if (result === 1) {
+                yield* show(
+                    "Misha's age? No, I don't know it.",
+                    "His wife, Olga, will know.",
+                    "She works at the second floor college.",
+                );
+                mishaBirthdayQuest.flags.spokeWithAidar = true;
             }
         });
 }

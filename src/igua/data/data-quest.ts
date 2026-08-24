@@ -260,6 +260,7 @@ export namespace DataQuest {
                 flags: {
                     readCalendar: false,
                     spokeWithBaker: false,
+                    spokeWithAidar: false,
                 },
                 reward: {
                     // TODO

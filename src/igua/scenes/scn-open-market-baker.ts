@@ -67,20 +67,15 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
                 "The only problem is... I don't know how old Misha is turning...",
                 "So I don't know how many candles to put on the cake.",
             );
-            if (yield* ask("Do you know how old Misha is turning?")) {
-                const predictedAge = yield* DramaMisc.askInteger("So, how old is Misha turning?", {
-                    min: 55,
-                    max: 100,
-                });
 
-                // TODO
-            }
-            else {
-                yield* show(
-                    "Hmmmm...",
-                    "There's a guy named Aidar who is good friends with Misha.",
-                );
+            yield* ask("Do you know how old Misha is turning?", "No");
 
+            yield* show(
+                "Hmmmm...",
+                "There's a guy named Aidar who is good friends with Misha.",
+            );
+
+            {
                 const response = yield* ask(
                     "Maybe he will know how old Misha is!",
                     "OK, great",
@@ -95,8 +90,8 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
                         "Anyway...",
                     );
                 }
-
-                yield* show("Good luck figuring out how old Misha is!");
             }
+
+            yield* show("Good luck figuring out how old Misha is!");
         });
 }

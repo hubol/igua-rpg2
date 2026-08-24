@@ -6,6 +6,7 @@ import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
+import { DramaFacts } from "../../drama/drama-facts";
 import { DramaInventory } from "../../drama/drama-inventory";
 import { ask, show } from "../../drama/show";
 import { Cutscene } from "../../globals";
@@ -82,14 +83,16 @@ function objForestSpiritNpc() {
                     yield* DramaInventory.receiveCount({ kind: "key_item", id: "EssenceForest" }, 3);
                 }
                 else if (result === 2) {
-                    yield* show(
+                    const messages = [
                         "The council's forest division sends us around to find Essence.",
                         "The council is always looking to the past.",
                         "So, I think the Essence is a trace of the Wizard of Forest who left this world so long ago.",
                         "But its nature has never been explained to us. Always keeping secrets, of course.",
                         "It's impossible to believe that the council has a clue what they are doing.",
                         "So to give it to you is, without a doubt, an act that leaves it in more capable hands.",
-                    );
+                    ];
+
+                    yield* DramaFacts.memorize("ForestSpirits", ...messages);
                     continue;
                 }
                 break;
