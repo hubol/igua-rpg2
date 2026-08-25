@@ -81,6 +81,8 @@ export namespace DataNpcPersona {
             LibraryBouncer1: { job: "Contractor", name: "Bulala", looksId: "Aggro" },
             JumpGoon: { job: "Jumper", name: "Franky", looksId: "Herblore" },
             FoodChecker: { job: "Checker", name: "R'ahith-no-k'ahsh", looksId: "Recluse" },
+            OpenBaker: { job: "Baker", name: "Trinity", looksId: "Quirked" },
+            Aidar: { job: "Sculptor", name: "Aidar", looksId: "Druid" },
             __Fallback__: { job: "???", name: "???", looksId: "MintyJourney" },
         } satisfies Record<string, Model>,
     );
