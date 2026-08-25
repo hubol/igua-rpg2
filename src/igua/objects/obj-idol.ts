@@ -52,7 +52,7 @@ export function objIdol({ uid }: OgmoEntities.Idol) {
     const controlledIdolObj = objIdol.objControlled(() => idol.idolId)
         .collisionShape(CollisionShape.DisplayObjects, [collisionShapeObj])
         .mixin(mxnCutscene, function* () {
-            const offer = yield* DramaInventory.askWhichAndRemoveOne(keyItems);
+            const offer = yield* DramaInventory.askWhichAndRemoveOne(keyItems, { message: "Plant what?" });
             if (offer) {
                 const dataIdol = DataIdol.find(idol => idol.keyItemId === offer.id);
                 idol.upload(dataIdol?.id!);

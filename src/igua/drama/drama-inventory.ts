@@ -120,8 +120,15 @@ function* emptyPocket() {
     return result;
 }
 
-function* askWhichAndRemoveOne<TItem extends RpgInventory.Item>(items: TItem[]) {
-    const item = yield* askWhich<TItem>("Which to offer?", items);
+interface AskWhichAndRemoveOneOptions {
+    message?: string;
+}
+
+function* askWhichAndRemoveOne<TItem extends RpgInventory.Item>(
+    items: TItem[],
+    options: AskWhichAndRemoveOneOptions = {},
+) {
+    const item = yield* askWhich<TItem>(options?.message ?? "Which to offer?", items);
 
     if (item === null) {
         return null;
