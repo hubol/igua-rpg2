@@ -63,8 +63,7 @@ export namespace DataNpcPersona {
             FlopStudent3: { job: "Student", name: "Reech", looksId: "NaiveWizard" },
             GamblingTeacher: { job: "Gambling Expert", name: "Trinz", looksId: "Goldilocks" },
             SocialTeacher: { job: "Social Expert", name: "Chrinch", looksId: "Plum" },
-            // TODO need new looks:
-            FbiAgent: { job: "FBI Agent", name: "Funch", looksId: "Plum" },
+            FbiAgent: { job: "FBI Agent", name: "Funch", looksId: "Decorated" },
             Misha: { job: "Staff Engineer", name: "Misha", looksId: "SadMisha" },
             IndianaHallPainter: { job: "Creative Director", name: "Painch", looksId: "PrimaryMess" },
             OhioDmvClerk: { job: "Clerk", name: "Thenra'ahshi", looksId: "Hellion" },
@@ -80,6 +79,8 @@ export namespace DataNpcPersona {
             IndianaLibrarian: { job: "Librarian", name: "Leighgan", looksId: "Yahooligan" },
             LibraryBouncer0: { job: "Contractor", name: "Skrip", looksId: "Hapless" },
             LibraryBouncer1: { job: "Contractor", name: "Bulala", looksId: "Aggro" },
+            JumpGoon: { job: "Jumper", name: "Franky", looksId: "Herblore" },
+            FoodChecker: { job: "Checker", name: "R'ahith-no-k'ahsh", looksId: "Recluse" },
             __Fallback__: { job: "???", name: "???", looksId: "MintyJourney" },
         } satisfies Record<string, Model>,
     );

@@ -6,6 +6,7 @@ import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { Rpg } from "../rpg/rpg";
+import { RpgDarkness } from "../rpg/rpg-darkness";
 import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnFoodSafetyDepartment() {
@@ -18,7 +19,7 @@ export function scnFoodSafetyDepartment() {
                 "Hey there. I work with food safety. Need something?",
                 "Check my food!",
                 "What is the point of this?",
-                "Why is it dark in here?",
+                RpgDarkness.getLevel() >= 2 ? "Why is it dark in here?" : null,
                 "Don't need nothin'",
             );
 
