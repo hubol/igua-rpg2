@@ -1,4 +1,4 @@
-import { DisplayObject } from "pixi.js";
+import { DisplayObject, Graphics } from "pixi.js";
 import { Sfx } from "../../../assets/sounds";
 import { blendColor } from "../../../lib/color/blend-color";
 import { Coro } from "../../../lib/game-engine/routines/coro";
@@ -130,9 +130,15 @@ export function objAngelSkeliguana(variantId: keyof typeof variants) {
     let isBreathingFire = false;
 
     const locomotiveObj = objIguanaLocomotive(looks);
+    const soulAnchorObj = new Graphics()
+        .beginFill(0xff0000)
+        .drawRect(0, 0, 1, 1)
+        .at(0, -16)
+        .invisible()
+        .show(locomotiveObj);
 
     const obj = locomotiveObj
-        .mixin(mxnEnemy, { rank, hurtboxes: hurtboxObjs, soulAnchorObj: locomotiveObj })
+        .mixin(mxnEnemy, { rank, hurtboxes: hurtboxObjs, soulAnchorObj })
         .mixin(mxnDetectPlayer)
         .mixin(mxnEnemyDeathBurst, { map: [0xffffff, 0xE8E3E3, 0xbdbdbd] });
 
