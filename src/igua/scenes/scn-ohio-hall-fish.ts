@@ -1,5 +1,6 @@
 import { Sprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Instances } from "../../lib/game-engine/instances";
@@ -23,12 +24,14 @@ import { objFxFormativeBurst } from "../objects/effects/obj-fx-formative-burst";
 import { objFxHeart } from "../objects/effects/obj-fx-heart";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { playerObj } from "../objects/obj-player";
+import { CtxTerrainPipe } from "../objects/obj-terrain";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { Rpg } from "../rpg/rpg";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnOhioHallFish() {
+    CtxTerrainPipe.value.texture = NoAtlasTx.Terrain.Pipe.Grate;
     const lvl = Lvl.OhioHallFish();
 
     lvl.WaterRippleGroup
