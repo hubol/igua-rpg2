@@ -3,13 +3,20 @@ import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
+import { Cutscene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 
 export function scnOpenMarketBaker() {
     Jukebox.play(Mzk.PreciousInstructions);
     const lvl = Lvl.OpenMarketBaker();
     enrichBakerNpc(lvl);
+    lvl.FlourRegion
+        .mixin(mxnCutscene, function* () {
+            Cutscene.setCurrentSpeaker(playerObj);
+            yield* show("Opened bags of flour everywhere--a good indicator of high quality cakes.");
+        });
 }
 
 function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
