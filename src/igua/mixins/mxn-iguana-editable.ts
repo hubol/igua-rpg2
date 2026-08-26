@@ -6,7 +6,7 @@ import { playerObj } from "../objects/obj-player";
 import { CtxUiIguanaDesigner, objUiIguanaDesignerRoot } from "../ui/iguana-designer/obj-ui-iguana-designer-root";
 
 export function mxnIguanaEditable(obj: ObjIguanaLocomotive, looks: IguanaLooks.Serializable) {
-    if (!Environment.isDev) {
+    if (!Environment.hasDevFeatures) {
         return obj;
     }
     return obj.step(self => {

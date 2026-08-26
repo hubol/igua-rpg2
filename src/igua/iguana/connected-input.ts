@@ -18,7 +18,7 @@ export namespace ConnectedInput {
             }
         });
 
-        if (Environment.isDev) {
+        if (Environment.hasDevFeatures) {
             for (const color of DebugColors.getPixi()) {
                 set.add(color);
             }

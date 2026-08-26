@@ -62,7 +62,7 @@ async function initialize() {
 
         require("./igua/launch/prepare-game-engine").prepareGameEngine(renderer);
 
-        if (Environment.includesDevTools) {
+        if (Environment.hasDevFeatures) {
             require("./igua/launch/install-dev-tools").installDevTools();
         }
 

@@ -23,7 +23,7 @@ export function devGetRpgProgressData(): RpgProgressData {
 }
 
 function devExposeRpg() {
-    if (!Environment.isDev) {
+    if (!Environment.hasDevFeatures) {
         return;
     }
     // @ts-expect-error Who cares

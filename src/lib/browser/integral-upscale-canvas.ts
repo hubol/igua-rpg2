@@ -16,7 +16,7 @@ function createDoUpscale(canvas: HTMLCanvasElement) {
     return function () {
         const padding = 20;
 
-        const container = Environment.isDev ? canvas.parentElement!.getBoundingClientRect() : Viewport;
+        const container = Environment.hasDevFeatures ? canvas.parentElement!.getBoundingClientRect() : Viewport;
 
         const availableWidth = container.width - padding;
         const availableHeight = container.height - padding;

@@ -123,7 +123,7 @@ interface ObjUiIguanaDesignerRootArgs {
 }
 
 export function objUiIguanaDesignerRoot(args: ObjUiIguanaDesignerRootArgs) {
-    if (Environment.isProduction && !args.sceneChanger) {
+    if (!Environment.hasDevFeatures && !args.sceneChanger) {
         Logger.logContractViolationError(
             "objUiIguanaDesignerRoot",
             new Error("args.sceneChanger must be truthy when player-facing!"),
@@ -167,7 +167,7 @@ export function objUiIguanaDesignerRoot(args: ObjUiIguanaDesignerRootArgs) {
 
     objUiNoteText(router).show(c);
 
-    if (Environment.isDev) {
+    if (Environment.hasDevFeatures) {
         objIguanaDesignerDevFeatures().show(c);
     }
 

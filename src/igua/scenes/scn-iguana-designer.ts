@@ -24,7 +24,7 @@ export function scnIguanaDesigner(
 
     const { LightShadowIrregularSmall, ThoughtBubbleGroup } = Lvl.MenuIguanaDesigner();
 
-    if (Environment.isDev) {
+    if (Environment.hasDevFeatures) {
         const tint = DebugColors.getPixi()[7];
         if (tint) {
             ThoughtBubbleGroup.visible = false;

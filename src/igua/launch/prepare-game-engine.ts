@@ -30,7 +30,7 @@ export function prepareGameEngine(renderer: PixiRenderer) {
     setIguaGlobals(rootStage, iguaInput, forceGameLoop, animator.start.bind(animator), devKeyListener);
 
     iguaInput.start();
-    if (Environment.isDev) {
+    if (Environment.hasDevFeatures) {
         devKeyListener.start();
     }
 
@@ -42,7 +42,7 @@ export function prepareGameEngine(renderer: PixiRenderer) {
             rootTicker.tick();
             Collision.recycleRectangles();
             iguaInput.tick();
-            if (Environment.isDev) {
+            if (Environment.hasDevFeatures) {
                 devKeyListener.tick();
             }
         }

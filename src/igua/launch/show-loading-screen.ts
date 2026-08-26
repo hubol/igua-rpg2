@@ -4,7 +4,7 @@ import { JobProgress } from "../../lib/game-engine/job-progress";
 import { approachLinear } from "../../lib/math/number";
 
 export async function showLoadingScreen(progress: JobProgress) {
-    if (Environment.isProduction) {
+    if (!Environment.hasDevFeatures) {
         await showAnimatedLoadingScreen(progress);
     }
 

@@ -1,9 +1,13 @@
 import packageJson from "../../package.json";
+import { DevUrl } from "../igua/dev/dev-url";
 
 export const Environment = {
     isProduction: IS_PRODUCTION,
     get isDev() {
         return !Environment.isProduction;
+    },
+    get hasDevFeatures() {
+        return Environment.isDev || DevUrl.hasDevFeatures;
     },
     get isElectron() {
         // https://github.com/electron/electron/issues/2288#issuecomment-337858978
@@ -21,9 +25,5 @@ export const Environment = {
     },
     get requiresUserGestureForSound() {
         return Environment.isProduction && !Environment.isElectron;
-    },
-    get includesDevTools() {
-        const params = new URLSearchParams(window.location.search);
-        return Environment.isDev || params.has("dev");
     },
 };

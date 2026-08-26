@@ -19,7 +19,7 @@ export function startGame() {
         setRpgProgressData(getInitialRpgProgress());
     }
 
-    if (Environment.isDev) {
+    if (Environment.hasDevFeatures) {
         executeDevRpg();
     }
 
@@ -45,11 +45,11 @@ function executeDevRpg() {
 }
 
 function getConfig(): GameStartConfig {
-    const devConfig = Environment.isDev ? DevGameStartConfig.get() : null;
+    const devConfig = Environment.hasDevFeatures ? DevGameStartConfig.get() : null;
 
     if (devConfig === null) {
         return {
-            sceneName: Environment.isDev ? "scnWorldMap" : "scnMenuTitleScreen",
+            sceneName: Environment.hasDevFeatures ? "scnWorldMap" : "scnMenuTitleScreen",
             player: { position: null },
             progress: null,
         };

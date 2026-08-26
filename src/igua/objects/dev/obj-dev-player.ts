@@ -5,7 +5,7 @@ import { playerObj } from "../obj-player";
 
 export function objDevPlayer() {
     const obj = container();
-    if (Environment.isDev) {
+    if (Environment.hasDevFeatures) {
         obj.coro(function* () {
             yield sleepf(2);
             playerObj.at(obj);
