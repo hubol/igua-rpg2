@@ -1,4 +1,5 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { DramaInventory } from "../drama/drama-inventory";
@@ -7,10 +8,12 @@ import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { playerObj } from "../objects/obj-player";
+import { CtxTerrainPipe } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnOhioPlateauOfIndustry() {
+    CtxTerrainPipe.value.texture = NoAtlasTx.Terrain.Pipe.Grate;
     const lvl = Lvl.OhioPlateauOfIndustry();
     enrichSoupMakerNpc(lvl);
 }
