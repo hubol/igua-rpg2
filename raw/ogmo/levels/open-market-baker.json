@@ -779,7 +779,7 @@
       "gridCellsY": 35,
       "decals": [
         {
-          "x": 32,
+          "x": 45,
           "y": 64,
           "scaleX": 2,
           "scaleY": 5,
@@ -791,7 +791,7 @@
           "values": {"name": ""}
         },
         {
-          "x": 137,
+          "x": 150,
           "y": 120,
           "scaleX": 1,
           "scaleY": 1,
@@ -803,7 +803,7 @@
           "values": {"name": ""}
         },
         {
-          "x": 178,
+          "x": 191,
           "y": 64,
           "scaleX": 20,
           "scaleY": 5,
@@ -815,7 +815,7 @@
           "values": {"name": ""}
         },
         {
-          "x": 96,
+          "x": 109,
           "y": -81,
           "scaleX": 3,
           "scaleY": 5,
@@ -827,7 +827,7 @@
           "values": {"name": ""}
         },
         {
-          "x": 95,
+          "x": 108,
           "y": 161,
           "scaleX": 3,
           "scaleY": 5,
@@ -917,6 +917,30 @@
           "scaleY": 2,
           "rotation": 0,
           "tint": "#39742b",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 78,
+          "y": 143,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/signage/no smoking.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": -19,
+          "y": 64,
+          "scaleX": 2,
+          "scaleY": 5,
+          "rotation": 0,
+          "tint": "#7bc44e",
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
