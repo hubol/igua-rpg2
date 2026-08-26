@@ -23,6 +23,7 @@ export const Environment = {
         return Environment.isProduction && !Environment.isElectron;
     },
     get includesDevTools() {
-        return Environment.isDev;
+        const params = new URLSearchParams(window.location.search);
+        return Environment.isDev || params.has("dev");
     },
 };
