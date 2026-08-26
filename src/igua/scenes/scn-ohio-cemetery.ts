@@ -1,5 +1,6 @@
 import { Container } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { nlerp } from "../../lib/math/number";
@@ -7,6 +8,7 @@ import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
+import { Jukebox } from "../core/igua-audio";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { DramaFacts } from "../drama/drama-facts";
 import { dramaShop } from "../drama/drama-shop";
@@ -15,6 +17,7 @@ import { scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnRpgKill } from "../mixins/mxn-rpg-kill";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
+import { mxnSoundLoop } from "../mixins/mxn-sound-loop";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { objCharacterTheOwl } from "../objects/characters/obj-character-the-owl";
 import { objCollectiblePocketItem } from "../objects/collectibles/obj-collectible-pocket-item";
@@ -23,6 +26,11 @@ import { Rpg } from "../rpg/rpg";
 import { Search } from "../utils/search";
 
 export function scnOhioCemetery() {
+    Jukebox.play(Mzk.HissMacaroni);
+    scene.stage
+        .mixin(mxnSoundLoop)
+        .mxnSoundLoop
+        .playInstance(Sfx.Environment.Night);
     const lvl = Lvl.OhioCemetery();
     lvl.WaterGroup
         .children

@@ -18,6 +18,7 @@ export const GeneratedMusicData = {
    "FirstSong": { ogg: require("./ogg/first-song.ogg") },
    "FuckerLand": { ogg: require("./ogg/fucker-land.ogg") },
    "GolfResort": { ogg: require("./ogg/golf-resort.ogg") },
+   "HissMacaroni": { ogg: require("./ogg/hiss-macaroni.ogg") },
    "HomeFine": { ogg: require("./ogg/home-fine.ogg") },
    "HomosexualFeet": { ogg: require("./ogg/homosexual-feet.ogg") },
    "InvisibleTape": { ogg: require("./ogg/invisible-tape.ogg") },
