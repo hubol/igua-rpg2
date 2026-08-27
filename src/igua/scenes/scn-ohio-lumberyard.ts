@@ -1,10 +1,13 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
+import { Jukebox } from "../core/igua-audio";
 import { DramaGifts } from "../drama/drama-gifts";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { Rpg } from "../rpg/rpg";
 
 export function scnOhioLumberyard() {
+    Jukebox.play(Mzk.SomberToothpick);
     const lvl = Lvl.OhioLumberyard();
     enrichAidar(lvl);
 }

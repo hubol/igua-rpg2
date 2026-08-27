@@ -39,6 +39,7 @@ export const GeneratedMusicData = {
    "SharedBaby": { ogg: require("./ogg/shared-baby.ogg") },
    "SodaMachine": { ogg: require("./ogg/soda-machine.ogg") },
    "SoldierBoyDemo": { ogg: require("./ogg/soldier-boy-demo.ogg") },
+   "SomberToothpick": { ogg: require("./ogg/somber-toothpick.ogg") },
    "SporadicQuest": { ogg: require("./ogg/sporadic-quest.ogg") },
    "TrashDay": { ogg: require("./ogg/trash-day.ogg") },
    "UndergroundRucksack": { ogg: require("./ogg/underground-rucksack.ogg") },
