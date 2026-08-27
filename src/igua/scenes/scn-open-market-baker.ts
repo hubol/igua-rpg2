@@ -20,12 +20,19 @@ export function scnOpenMarketBaker() {
 }
 
 function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
+    let everSmokedInHere = false;
     const mishaBirthdayQuest = Rpg.quest("MishaHouse.Birthday");
 
     lvl.BakerNpc
         .mixin(mxnCutscene, function* () {
+            if (Rpg.character.buffs.cosmetic.cigaretteSmoking > 0) {
+                yield* show("Please do not smoke in here.");
+                everSmokedInHere = true;
+                return;
+            }
+
             yield* show(
-                "Oh, hey!!!! Welcome to the bakery!!!!",
+                everSmokedInHere ? "Thank you for not smoking." : "Oh, hey!!!! Welcome to the bakery!!!!",
                 "I just moved my shop to the market. So, PLEASE excuse the mess!!!",
             );
 
