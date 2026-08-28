@@ -351,6 +351,7 @@ function objAngelChillEmoVortex() {
     return objProjectileCircle()
         .mixin(mxnFxEmo)
         .coro(function* (self) {
+            Sfx.Enemy.Chill.VortexSummon.play();
             const auraObj = objAngelChillEmoVortexAura(self)
                 .zIndexed(ZIndex.TerrainDecals - 1)
                 .show();
@@ -359,7 +360,9 @@ function objAngelChillEmoVortex() {
                 interpvr(self).factor(factor.sine).translate(0, 350).over(4000),
             ]);
             auraObj.objAngelChillEmoVortexAura.dying = true;
+            self.play(Sfx.Enemy.Chill.VortexHold.rate(0.95, 1.05));
             yield sleep(333);
+            self.play(Sfx.Enemy.Chill.VortexFinish.rate(0.95, 1.05));
             yield interpv(self.scale).factor(factor.sine).to(0, 0).over(200);
             self.destroy();
         })
