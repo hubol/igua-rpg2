@@ -163,6 +163,8 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
                 enemyObj.mxnDetectPlayer.position.y - 30,
             );
 
+            enemyObj.play(Sfx.Enemy.Chill.CloudSummon.rate(0.9, 1.1));
+
             const cloudObj = objProjectileSadCloud({
                 target,
                 attack: atks.cryDrip,

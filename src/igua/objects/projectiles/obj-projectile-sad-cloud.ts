@@ -1,4 +1,5 @@
 import { Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { interp, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
@@ -56,6 +57,7 @@ export function objProjectileSadCloud(args: ObjProjectileSadCloudArgs) {
             self.mxnDischargeable.charge();
             yield () => self.mxnDischargeable.isDischarged;
             while (true) {
+                self.play(Sfx.Enemy.Chill.CloudRain.rate(0.75, 1), false);
                 api.dripsCount++;
                 objProjectilePuddleDrip.objFast(args)
                     .at(self)
