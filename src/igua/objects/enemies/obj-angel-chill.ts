@@ -5,7 +5,7 @@ import { Tx } from "../../../assets/textures";
 import { OneOrTwo } from "../../../lib/array/one-or-two";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { factor, interp, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
-import { sleep, sleepf } from "../../../lib/game-engine/routines/sleep";
+import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { RgbInt } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
@@ -31,7 +31,6 @@ import { objProjectileEvilSpirit } from "../projectiles/obj-projectile-evil-spir
 import { objProjectileSadCloud } from "../projectiles/obj-projectile-sad-cloud";
 import { StepOrder } from "../step-order";
 import { AngelThemeTemplate } from "./angel-theme-template";
-import { objAngelEyes } from "./obj-angel-eyes";
 import { objAngelMouth } from "./obj-angel-mouth";
 
 const themes = (function () {
@@ -153,37 +152,34 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
             auraObj.sparklesTint = 0x404069;
             auraObj.sparklesPerFrame = 0.2;
 
+            const dx = Rng.intp();
+
+            const target = {
+                position: vnew(enemyObj).add(dx * 250, -50),
+            };
+
+            target.position.y = Math.min(
+                target.position.y,
+                enemyObj.mxnDetectPlayer.position.y - 30,
+            );
+
             const cloudObj = objProjectileSadCloud({
-                target: enemyObj.mxnDetectPlayer,
+                target,
                 attack: atks.cryDrip,
                 attacker: enemyObj.status,
             })
                 .at(enemyObj)
-                .coro(function* (self) {
-                    yield () => self.objProjectileSadCloud.dripsCount >= 3 && !enemyObj.mxnDetectPlayer.isDetected;
-                    yield* finish();
-                });
+                .show();
 
             headObj.objAngelChillHead.mouthObj.controls.frowning = true;
 
-            function* finish() {
-                yield sleepf(0);
-                if (isFinished()) {
-                    return;
-                }
-                headObj.objAngelChillHead.mouthObj.controls.frowning = false;
-                cloudObj.destroy();
-                auraObj.destroy();
-            }
+            yield () => cloudObj.mxnDischargeable.isCharged;
+            cloudObj.mxnDischargeable.discharge();
+            yield interpvr(target.position).translate(500 * -dx, 0).over(3000);
 
-            function isFinished() {
-                return cloudObj.destroyed;
-            }
-
-            return {
-                finish,
-                isFinished,
-            };
+            headObj.objAngelChillHead.mouthObj.controls.frowning = false;
+            cloudObj.destroy();
+            auraObj.destroy();
         },
         *emoVortex() {
             bodyObj.objAngelChillBody.armsRaised = true;
@@ -288,22 +284,16 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
                 for (const feature of Rng.shuffle([...cycleFeaturesSet])) {
                     yield () => self.mxnDetectPlayer.isDetected;
                     if (remainingHealthUnit < 0.5 && feature === "vortex") {
-                        const cryMove = yield* moves.cry();
-                        yield* moves.emoVortex();
-                        yield* cryMove.finish();
+                        yield* Coro.all([
+                            moves.emoVortex(),
+                            moves.cry(),
+                        ]);
                     }
                     else if (feature === "vortex") {
                         yield* moves.emoVortex();
                     }
                     else if (feature === "cry" && previousFeature !== "cry") {
-                        const cryMove = yield* moves.cry();
-                        yield* Coro.race([
-                            cryMove.isFinished,
-                            Coro.chain([
-                                sleep(3000),
-                                cryMove.finish(),
-                            ]),
-                        ]);
+                        yield* moves.cry();
                     }
                     else if (feature === "evil_spirit") {
                         yield* moves.summonEvilSpirit();

@@ -8,6 +8,7 @@ import { container } from "../../../lib/pixi/container";
 import { ZIndex } from "../../core/scene/z-index";
 import { mxnFxSpawnMany } from "../../mixins/effects/mxn-fx-spawn-many";
 import { mxnDestroyOnStatusDeath } from "../../mixins/mxn-destroy-on-status-death";
+import { mxnDischargeable } from "../../mixins/mxn-dischargeable";
 import { MxnRpgAttackArgs } from "../../mixins/mxn-rpg-attack";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { StepOrder } from "../step-order";
@@ -34,6 +35,7 @@ export function objProjectileSadCloud(args: ObjProjectileSadCloudArgs) {
         faceObj,
     )
         .mixin(mxnFxSpawnMany, { perFrame: 0.2, spawnObj: objFxSadCloudPuff })
+        .mixin(mxnDischargeable)
         .pivoted(36, 12)
         .merge({ objProjectileSadCloud: api })
         .step(
@@ -44,33 +46,33 @@ export function objProjectileSadCloud(args: ObjProjectileSadCloudArgs) {
             if (args.attacker) {
                 self.mixin(mxnDestroyOnStatusDeath, args.attacker);
             }
-            yield sleep(500);
+            yield sleep(300);
             faceObj.alpha = 0.5;
             yield sleep(250);
             faceObj.alpha = 1;
             yield sleep(250);
-            yield interp(faceObj, "textureIndex").to(0).over(500);
-            yield sleep(500);
+            yield interp(faceObj, "textureIndex").to(0).over(300);
+            yield sleep(300);
+            self.mxnDischargeable.charge();
+            yield () => self.mxnDischargeable.isDischarged;
             while (true) {
                 api.dripsCount++;
-                objProjectilePuddleDrip(args)
+                objProjectilePuddleDrip.objFast(args)
                     .at(self)
                     .add(0, 15)
                     .zIndexed(ZIndex.FrontDecals)
                     .show();
-                yield sleep(200);
+                yield sleep(100);
             }
         })
-        .zIndexed(ZIndex.EnemyDeathBursts)
-        .show();
+        .zIndexed(ZIndex.EnemyDeathBursts);
 }
 
 function objFxSadCloudPuff() {
     return Sprite.from(Tx.Enemy.Chill.SadCloudPuff)
         .anchored(0.5, 0.5)
+        .angled(Rng.int(4) * 90)
         .coro(function* (self) {
-            yield interpvr(self).translate(Rng.vunit().scale(8).vround()).over(300);
-            self.alpha = 0.5;
             yield sleep(200);
             self.destroy();
         });

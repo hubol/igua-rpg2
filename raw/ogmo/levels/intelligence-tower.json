@@ -173,6 +173,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "midboss0", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "PlayerDev",
+          "id": 9,
+          "_eid": "98101389",
+          "x": 352,
+          "y": 176,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -1653,6 +1664,18 @@
     {
       "name": "ParallaxDecals",
       "_eid": "17093961",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 64,
+      "gridCellsY": 209,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
       "offsetX": 0,
       "offsetY": 0,
       "gridCellWidth": 8,

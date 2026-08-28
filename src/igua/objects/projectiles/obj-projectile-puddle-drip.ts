@@ -2,10 +2,11 @@ import { Sprite } from "pixi.js";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { sleepf } from "../../../lib/game-engine/routines/sleep";
+import { Rng } from "../../../lib/math/rng";
 import { vnew } from "../../../lib/math/vector-type";
 import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
 import { mxnPhysics } from "../../mixins/mxn-physics";
-import { MxnRpgAttackArgs } from "../../mixins/mxn-rpg-attack";
+import { mxnRpgAttack, MxnRpgAttackArgs } from "../../mixins/mxn-rpg-attack";
 import { objPuddle } from "../nature/obj-puddle";
 import { StepOrder } from "../step-order";
 import { objGroundExpanding } from "../utils/obj-ground-expanding";
@@ -16,12 +17,28 @@ interface ObjProjectilePuddleDripArgs extends MxnRpgAttackArgs {
 const n = vnew();
 
 export function objProjectilePuddleDrip(args: ObjProjectilePuddleDripArgs) {
+    return Sprite.from(Tx.Enemy.Boyfriends.Drip)
+        .mixin(mxnProjectilePuddleDrip, args);
+}
+
+objProjectilePuddleDrip.objFast = function objFast (args: ObjProjectilePuddleDripArgs) {
+    return Sprite.from(Tx.Enemy.Chill.Drip)
+        .scaled(Rng.intp(), 1)
+        .mixin(mxnRpgAttack, args)
+        .mixin(mxnProjectilePuddleDrip, args)
+        .handles("mxnProjectilePuddleDrip.landed", (self) => {
+            self.scale.y = 0.5;
+        });
+};
+
+function mxnProjectilePuddleDrip(sprite: Sprite, args: ObjProjectilePuddleDripArgs) {
     const tint = args.attack.conditions.wetness.tint;
 
-    return Sprite.from(Tx.Enemy.Boyfriends.Drip)
+    return sprite
         .tinted(tint)
         .anchored(0.5, 0.75)
         .mixin(mxnPhysics, { physicsRadius: 6, gravity: 0.3 })
+        .dispatches<"mxnProjectilePuddleDrip.landed">()
         .step(self => {
             if (self.isOnGround) {
                 self.angle = 0;
@@ -47,6 +64,7 @@ export function objProjectilePuddleDrip(args: ObjProjectilePuddleDripArgs) {
         .coro(function* (self) {
             yield () => self.isOnGround;
 
+            self.dispatch("mxnProjectilePuddleDrip.landed");
             self.speed.x = 0;
 
             self.play(Sfx.Enemy.Boyfriends.DripLand.rate(0.9, 1.1));
