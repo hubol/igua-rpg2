@@ -1,4 +1,4 @@
-import { DisplayObject, Graphics, Sprite } from "pixi.js";
+import { DisplayObject, Graphics, Sprite, Texture } from "pixi.js";
 import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
@@ -21,6 +21,7 @@ import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
+import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
@@ -34,7 +35,8 @@ import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
 
 const themes = (function () {
-    const [torsoTx, legsTx, armsTx] = Tx.Enemy.Chill.Body.split({ count: 3 });
+    const [torsoTx0, legsTx0, armsTx0] = Tx.Enemy.Chill.Body.split({ count: 3 });
+    const [torsoTx1, _, armsTx1] = Tx.Enemy.Chill.Body1.split({ count: 3 });
 
     const template = AngelThemeTemplate.create(
         {
@@ -57,21 +59,55 @@ const themes = (function () {
                 txs: objAngelMouth.txs.w36,
             },
             sprites: {
-                torso: torsoTx,
-                legs: legsTx,
-                arms: armsTx,
+                torso: torsoTx0,
+                legs: legsTx0,
+                arms: armsTx0,
                 armsRaised: Tx.Enemy.Chill.ArmsRaised,
                 head: Tx.Enemy.Chill.Head0,
+                face: Texture.EMPTY,
+                eyebrow0: Texture.EMPTY,
+                eyebrow1: Texture.EMPTY,
             },
             tints: {
                 map: [0x990000, 0xff6600, 0xffd000] as MapRgbFilter.Map,
-                pupils: [0x000000, 0x000000] as OneOrTwo<RgbInt>,
             },
         },
     );
 
     return {
         common: template.createTheme(),
+        elderGay: template.createTheme(
+            {
+                eyes: {
+                    eyelidsTint: 0xC20046,
+                    pupilsTint: 0x0000ff,
+                },
+                mouth: {
+                    txs: objAngelMouth.txs.rounded16weight3,
+                    negativeSpaceTint: 0x0000ff,
+                },
+                sprites: {
+                    torso: torsoTx1,
+                    legs: Tx.Enemy.Chill.LegsHanging,
+                    arms: armsTx1,
+                    armsRaised: Tx.Enemy.Chill.ArmsRaised1,
+                    face: Tx.Enemy.Chill.Face1,
+                    eyebrow0: Tx.Enemy.Chill.Eyebrow0,
+                    eyebrow1: Tx.Enemy.Chill.Eyebrow1,
+                    head: Tx.Enemy.Chill.Head1,
+                },
+                tints: {
+                    map: [0x947dcc, 0x4d150e, 0x150c68] as MapRgbFilter.Map,
+                },
+            },
+            {
+                eyes: obj => obj.add(0, 15),
+                mouth: (obj) => obj.add(0, 10),
+                sprites: {
+                    legs: (obj) => obj.add(0, 38),
+                },
+            },
+        ),
     };
 })();
 
@@ -111,7 +147,7 @@ const variants = {
     },
     level1: {
         rank: ranks.level0,
-        theme: themes.common,
+        theme: themes.elderGay,
         features: new Set<Feature>(["cry", "vortex", "evil_spirit"]),
     },
 };
@@ -266,7 +302,7 @@ export function objAngelChill(entity: OgmoEntities.EnemyChill) {
     const headObj = objAngelChillHead(theme)
         .at(-6, 8);
     const rgbObj = container(bodyObj, headObj, ...hurtboxes, soulAnchorObj)
-        .pivoted(-6, bodyObj.height - 3)
+        .pivoted(-6, 70)
         .filtered(new MapRgbFilter(...theme.tints.map));
 
     const enemyObj = container(rgbObj)
@@ -339,8 +375,15 @@ function objAngelChillHead(theme: Theme) {
         container(
             theme.createSprite("head").anchored(0.5, 0.8),
             container(
+                theme.createSprite("face").anchored(0.5, 0.8),
                 mouthObj.add(0, -8),
                 eyesObj.add(0, -24),
+                theme.createSprite("eyebrow0")
+                    .add(-51, -48)
+                    .mixin(mxnSinePivot),
+                theme.createSprite("eyebrow1")
+                    .add(-51, -48)
+                    .mixin(mxnSinePivot),
             )
                 .mixin(mxnFacingPivot, { down: 6, up: -6, right: 6, left: -6 }),
         ),
