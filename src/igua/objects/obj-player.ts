@@ -94,6 +94,10 @@ const filterSpecialSignObjs = (obj: ObjSign) => obj.isSpecial;
 
 function objPlayer(looks: IguanaLooks.Serializable) {
     const iguanaLocomotiveObj = objIguanaLocomotive(looks);
+
+    const defaultPhysicsOffset = iguanaLocomotiveObj.physicsOffset.vcpy();
+    const freeMovePhysicsOffset = vnew(-999_999_999, -999_999_999);
+
     iguanaLocomotiveObj.snapToGround = !scene.isWorldMap;
 
     iguanaLocomotiveObj.mxnBallonable.setInitialBallons(Rpg.character.status.conditions.helium.ballons);
@@ -239,8 +243,6 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             Rpg.character.receiveSpellEducation();
         })
         .step(() => {
-            const freeMove = DevKey.isDown("ShiftLeft");
-            puppet.physicsEnabled = !freeMove;
             if (Rpg.character.buffs.cosmetic.sparkling) {
                 puppet.sparklesPerFrame = Math.max(puppet.sparklesPerFrame, 0.1);
             }
@@ -280,6 +282,17 @@ function objPlayer(looks: IguanaLooks.Serializable) {
                 PlayerConsts.Gravity + PlayerConsts.BallonLevelModifiers.Gravity.Delta * ballonPhysicsLevel,
                 PlayerConsts.BallonLevelModifiers.Gravity.Minimum,
             );
+
+            const freeMove = DevKey.isDown("ShiftLeft");
+
+            if (freeMove) {
+                puppet.gravity = 0;
+            }
+
+            const physicsOffset = freeMove ? freeMovePhysicsOffset : defaultPhysicsOffset;
+            // Why not .at? Because of polluted prototype-Array nonsense. I sort of regret it...
+            puppet.physicsOffset.x = physicsOffset.x;
+            puppet.physicsOffset.y = physicsOffset.y;
 
             if (puppet.isBeingPiloted) {
                 return;
