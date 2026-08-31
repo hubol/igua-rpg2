@@ -19,6 +19,7 @@ import { renderer } from "../../current-pixi-renderer";
 import { DataIdol } from "../../data/data-idol";
 import { DataPocketItem } from "../../data/data-pocket-item";
 import { DataSongTitle } from "../../data/data-song-title";
+import { DataTemporaryEffect } from "../../data/data-temporary-effect";
 import { Cutscene, Input } from "../../globals";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
@@ -59,7 +60,7 @@ export function objHud() {
     const statusObjs = [
         valuablesInfoObj,
         objPocketInfo(),
-        objIdolBuff(),
+        objLocalTemporaryBuffs(),
         poisonLevelObj,
         songInfoObj,
         poisonBuildUpObj,
@@ -664,13 +665,26 @@ function objOverheatBuildUp() {
     });
 }
 
-function objIdolBuff() {
+function objLocalTemporaryBuffs() {
+    const buffTexts = new Array<string>();
+
     return objText.MediumIrregular("", { tint: Consts.StatusTextTint })
         .step(text => {
+            // TODO buff up/down SFX by comparing previous length?
             const idol = RpgSceneIdol.value.idol;
-            text.visible = Boolean(idol && !idol.isEmpty);
+            buffTexts.length = 0;
+
+            if (idol?.isEmpty === false) {
+                buffTexts.push(DataIdol.getById(idol?.idolId!).hudText);
+            }
+
+            for (const effect of Rpg.character.temporaryEffects.effects) {
+                buffTexts.push(DataTemporaryEffect.getById(effect.id).hudText);
+            }
+
+            text.visible = buffTexts.length > 0;
             if (text.visible) {
-                text.text = DataIdol.getById(idol?.idolId!).hudText;
+                text.text = buffTexts.join(", ");
             }
         })
         .mixin(mxnHeight, 8);

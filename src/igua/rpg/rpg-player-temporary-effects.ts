@@ -19,6 +19,10 @@ export class RpgPlayerTemporaryEffects {
         return this._buffMutatorFns;
     }
 
+    get effects(): ReadonlyArray<Readonly<RpgPlayerTemporaryEffects.TemporaryEffect>> {
+        return this._state.effects;
+    }
+
     clear() {
         this._state.effects.length = 0;
         this._computeBuffMutatorFns();

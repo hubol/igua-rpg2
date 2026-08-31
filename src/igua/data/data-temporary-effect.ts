@@ -3,7 +3,7 @@ import { DataLib } from "./data-lib";
 
 export namespace DataTemporaryEffect {
     export interface Model {
-        name: string;
+        hudText: string;
         buffs: RpgPlayerBuffs.MutatorFn;
     }
 
@@ -11,13 +11,13 @@ export namespace DataTemporaryEffect {
         "DataTemporaryEffect",
         {
             IntelligenceFromLibraryBook: {
-                name: "Library book makes you feel smarter",
+                hudText: "Library book makes you feel smarter",
                 buffs: (model) => {
                     model.attributes.intelligence += 1;
                 },
             },
             __Fallback__: {
-                name: "This is a bug",
+                hudText: "This is a bug",
                 buffs: () => {},
             },
         } satisfies Record<string, Model>,
