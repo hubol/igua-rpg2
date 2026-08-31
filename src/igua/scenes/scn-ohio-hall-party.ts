@@ -1,6 +1,7 @@
 import { DisplayObject } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Sfx } from "../../assets/sounds";
 import { Instances } from "../../lib/game-engine/instances";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
@@ -201,6 +202,7 @@ function mxnVendingMachine(obj: DisplayObject, id: DataVendingMachine.Id) {
             if (result === 1) {
                 const count = yield* DramaInventory.removeAll(item);
                 if (count === 0) {
+                    Sfx.Interact.Error.rate(0.9, 1.1).play();
                     yield* show("No compatible medicine detected.");
                 }
                 return;

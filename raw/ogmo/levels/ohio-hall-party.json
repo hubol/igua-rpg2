@@ -4,8 +4,8 @@
   "height": 1096,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#408000",
   "values": {"Terrain Color": "#000000", "Region ID": "~Unset~"},
+  "backgroundColor": "#408000",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -141,7 +141,8 @@
           "texture": "shapes/fonts/weight3/i.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 302,
@@ -153,7 +154,8 @@
           "texture": "shapes/fonts/weight3/s.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 354,
@@ -165,7 +167,8 @@
           "texture": "shapes/fonts/weight3/a.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 266,
@@ -177,7 +180,8 @@
           "texture": "shapes/fonts/weight3/b.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 289,
@@ -189,7 +193,8 @@
           "texture": "shapes/fonts/weight3/o.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 313,
@@ -201,7 +206,8 @@
           "texture": "shapes/fonts/weight3/c.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 337,
@@ -213,7 +219,8 @@
           "texture": "shapes/fonts/weight3/t.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 360,
@@ -225,7 +232,8 @@
           "texture": "shapes/fonts/weight3/o.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 383,
@@ -237,7 +245,8 @@
           "texture": "shapes/fonts/weight3/r.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 216,
@@ -249,7 +258,8 @@
           "texture": "esoteric/tamago/game star.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 271,
@@ -261,7 +271,8 @@
           "texture": "esoteric/tamago/game star.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 325,
@@ -273,7 +284,8 @@
           "texture": "esoteric/tamago/game star.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 383,
@@ -285,7 +297,8 @@
           "texture": "esoteric/tamago/game star.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 436,
@@ -297,7 +310,8 @@
           "texture": "esoteric/tamago/game star.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -438,6 +452,26 @@
           "originX": 14,
           "originY": 12,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentBallons",
+          "id": 8,
+          "_eid": "21595347",
+          "x": 296,
+          "y": 192,
+          "originX": 15,
+          "originY": 45,
+          "values": {"count": 2, "seed": 0, "name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentBallons",
+          "id": 9,
+          "_eid": "21595347",
+          "x": 488,
+          "y": 192,
+          "originX": 15,
+          "originY": 45,
+          "values": {"count": 2, "seed": 0, "name": "", "depth": 0}
         }
       ]
     },
@@ -461,7 +495,8 @@
           "texture": "esoteric/party/vending machine.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "MagentaMachine"}
+          "values": {"name": "MagentaMachine"},
+          "groupName": null
         },
         {
           "x": 255,
@@ -473,7 +508,8 @@
           "texture": "esoteric/party/pills.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 391,
@@ -485,7 +521,8 @@
           "texture": "esoteric/party/vending machine.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "YellowMachine"}
+          "values": {"name": "YellowMachine"},
+          "groupName": null
         },
         {
           "x": 391,
@@ -497,7 +534,8 @@
           "texture": "esoteric/party/pills.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 527,
@@ -509,7 +547,8 @@
           "texture": "esoteric/party/vending machine.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "CyanMachine"}
+          "values": {"name": "CyanMachine"},
+          "groupName": null
         },
         {
           "x": 527,
@@ -521,7 +560,8 @@
           "texture": "esoteric/party/pills.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -878,7 +918,98 @@
       "gridCellHeight": 8,
       "gridCellsX": 85,
       "gridCellsY": 137,
-      "entities": []
+      "entities": [
+        {
+          "name": "EnvironmentBallons",
+          "id": 0,
+          "_eid": "21595347",
+          "x": 488,
+          "y": 640,
+          "originX": 15,
+          "originY": 45,
+          "values": {"count": 1, "seed": 0, "name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentBallons",
+          "id": 1,
+          "_eid": "21595347",
+          "x": 608,
+          "y": 640,
+          "originX": 15,
+          "originY": 45,
+          "values": {"count": 2, "seed": 0, "name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentBallons",
+          "id": 2,
+          "_eid": "21595347",
+          "x": 432,
+          "y": 576,
+          "originX": 15,
+          "originY": 45,
+          "values": {"count": 2, "seed": 0, "name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentBallons",
+          "id": 3,
+          "_eid": "21595347",
+          "x": 528,
+          "y": 488,
+          "originX": 15,
+          "originY": 45,
+          "values": {"count": 3, "seed": 0, "name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentBallons",
+          "id": 4,
+          "_eid": "21595347",
+          "x": 168,
+          "y": 512,
+          "originX": 15,
+          "originY": 45,
+          "values": {"count": 3, "seed": 0, "name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentBallons",
+          "id": 5,
+          "_eid": "21595347",
+          "x": 112,
+          "y": 640,
+          "originX": 15,
+          "originY": 45,
+          "values": {"count": 2, "seed": 0, "name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentBallons",
+          "id": 6,
+          "_eid": "21595347",
+          "x": 392,
+          "y": 320,
+          "originX": 15,
+          "originY": 45,
+          "values": {"count": 2, "seed": 0, "name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentBallons",
+          "id": 9,
+          "_eid": "21595347",
+          "x": 112,
+          "y": 256,
+          "originX": 15,
+          "originY": 45,
+          "values": {"count": 2, "seed": 0, "name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentBallons",
+          "id": 10,
+          "_eid": "21595347",
+          "x": 168,
+          "y": 320,
+          "originX": 15,
+          "originY": 45,
+          "values": {"count": 4, "seed": 0, "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "BackgroundDecals",

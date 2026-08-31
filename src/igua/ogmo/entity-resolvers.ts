@@ -115,7 +115,10 @@ export const OgmoEntityResolvers = {
     EnemyMiffed: (entity: OgmoEntities.EnemyMiffed) => objAngelMiffed(entity.values.variant).at(0, 1),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,
     EnvironmentBallons: (entity: OgmoEntities.EnvironmentBallons) =>
-        objEnvironmentFxBallons(entity.values.count, entity.values.seed),
+        objEnvironmentFxBallons(
+            entity.values.count,
+            entity.values.seed === 0 ? (entity.x + entity.y) : entity.values.seed,
+        ),
     Idol: objIdol,
     GateMap: objWorldMapGate,
     StashPocket: objStashPocket,
