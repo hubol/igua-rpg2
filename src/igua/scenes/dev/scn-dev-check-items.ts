@@ -2,6 +2,8 @@ import { Integer } from "../../../lib/math/number-alias-types";
 import { DataEquipment } from "../../data/data-equipment";
 import { DataGift } from "../../data/data-gift";
 import { DataKeyItem } from "../../data/data-key-item";
+import { DataNpcLooks } from "../../data/data-npc-looks";
+import { DataNpcPersona } from "../../data/data-npc-persona";
 import { DataPocketItem } from "../../data/data-pocket-item";
 import { DataPotion } from "../../data/data-potion";
 import { DataQuest } from "../../data/data-quest";
@@ -38,6 +40,22 @@ export function scnDevCheckItems() {
             .map(({ item }) => item.id)
             .join("\n"),
     );
+
+    console.warn(
+        "Unused NPC looks\n",
+        listUnusedNpcLooks()
+            .join("\n"),
+    );
+}
+
+function listUnusedNpcLooks() {
+    const looksIds = new Set(Object.keys(DataNpcLooks));
+
+    for (const persona of Object.values(DataNpcPersona.manifest)) {
+        looksIds.delete(persona.looksId);
+    }
+
+    return Array.from(looksIds);
 }
 
 function listItems() {
