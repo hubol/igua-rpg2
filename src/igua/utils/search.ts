@@ -5,6 +5,7 @@ import { distance } from "../../lib/math/vector";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { Null } from "../../lib/types/null";
 import { objSafeMarker } from "../objects/obj-safe-marker";
+import { objMarker } from "../objects/utils/obj-marker";
 import { objRegion } from "../objects/utils/obj-region";
 import { OgmoFactory } from "../ogmo/factory";
 
@@ -12,6 +13,10 @@ export namespace Search {
     export function findDecals(tx: Texture, ...txs: Texture[]): Sprite[] {
         const txsSet = new Set([tx, ...txs]);
         return Instances(OgmoFactory.createDecal).filter(obj => txsSet.has(obj.texture));
+    }
+
+    export function findMarkers(tint: RgbInt): Container[] {
+        return Instances(objMarker).filter(obj => obj.tint === tint);
     }
 
     export function findRegions(tint: RgbInt): Container[] {
