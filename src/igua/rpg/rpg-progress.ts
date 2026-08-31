@@ -18,6 +18,7 @@ import { RpgPlayer } from "./rpg-player";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPlayerSpells } from "./rpg-player-spells";
 import { RpgPlayerStatus } from "./rpg-player-status";
+import { RpgPlayerTemporaryEffects } from "./rpg-player-temporary-effects";
 import { RpgPlayerWallet } from "./rpg-player-wallet";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgPotions } from "./rpg-potions";
@@ -44,6 +45,7 @@ export function getInitialRpgProgress() {
             experience: RpgExperience.createState(),
             records: RpgRecords.createState(),
             spells: RpgPlayerSpells.createState(),
+            temporaryEffects: RpgPlayerTemporaryEffects.createState(),
             ...RpgPlayer.createState(),
         },
         flags: {

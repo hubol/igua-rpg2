@@ -24,6 +24,7 @@ import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPlayerSpellRequirements, RpgPlayerSpells } from "./rpg-player-spells";
 import { RpgPlayerStatus } from "./rpg-player-status";
+import { RpgPlayerTemporaryEffects } from "./rpg-player-temporary-effects";
 import { RpgPlayerWallet } from "./rpg-player-wallet";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgPotions } from "./rpg-potions";
@@ -52,7 +53,8 @@ export namespace RpgFactory {
         } = data;
 
         const equipment = new RpgCharacterEquipment(data.character.inventory.equipment);
-        const buffs = new RpgPlayerAggregatedBuffs(equipment);
+        const temporaryEffects = new RpgPlayerTemporaryEffects(data.character.temporaryEffects);
+        const buffs = new RpgPlayerAggregatedBuffs(equipment, temporaryEffects);
         const idols = new RpgIdols(idolsState);
         const potions = new RpgPotions(data.character.inventory.potions);
         const keyItems = new RpgKeyItems(data.character.inventory.keyItems);
@@ -85,6 +87,7 @@ export namespace RpgFactory {
             pocket,
             looseValuables,
             spells,
+            temporaryEffects,
         );
         const difficulty = new RpgDifficulty(player);
         const shops = new RpgShops(shopsState, wallet, inventory);

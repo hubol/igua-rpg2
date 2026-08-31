@@ -11,6 +11,7 @@ import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPlayerAttributes } from "./rpg-player-attributes";
 import { RpgPlayerSpells } from "./rpg-player-spells";
 import { RpgPlayerStatus } from "./rpg-player-status";
+import { RpgPlayerTemporaryEffects } from "./rpg-player-temporary-effects";
 import { RpgPlayerWallet } from "./rpg-player-wallet";
 import { RpgPocket } from "./rpg-pocket";
 import { RpgRegion } from "./rpg-region";
@@ -27,6 +28,7 @@ export class RpgPlayer {
         private readonly _pocket: RpgPocket,
         private readonly _looseValuables: RpgLooseValuables,
         readonly spells: RpgPlayerSpells,
+        readonly temporaryEffects: RpgPlayerTemporaryEffects,
     ) {
     }
 

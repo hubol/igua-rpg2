@@ -310,6 +310,7 @@ function objPlayer(looks: IguanaLooks.Serializable) {
             const hasControl = puppet.hasControl;
 
             if (hasControl) {
+                Rpg.character.temporaryEffects.tick();
                 Rpg.records.onPlayfulGameTick();
             }
 

@@ -8,6 +8,7 @@ export type Float255 = ForceAliasType<number>;
 
 export type Bitfield = ForceAliasType<number>;
 
+export type Ticks = ForceAliasType<number>;
 export type Seconds = ForceAliasType<number>;
 export type Milliseconds = ForceAliasType<number>;
 export type PercentInt = ForceAliasType<number>;

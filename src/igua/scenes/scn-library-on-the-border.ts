@@ -16,6 +16,7 @@ import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { playerObj } from "../objects/obj-player";
+import { Rpg } from "../rpg/rpg";
 
 const prng = new PseudoRng();
 
@@ -147,6 +148,7 @@ function mxnLibraryBook(obj: Sprite) {
                 for (const page of currentBook!.pages) {
                     yield* show(typeof page === "string" ? page : page());
                 }
+                Rpg.character.temporaryEffects.add("IntelligenceFromLibraryBook", 60);
             }
         })
         .step(self => {
