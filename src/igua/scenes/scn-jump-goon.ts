@@ -1,10 +1,13 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
+import { Jukebox } from "../core/igua-audio";
 import { dramaShop } from "../drama/drama-shop";
 import { show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnDetectPlayer } from "../mixins/mxn-detect-player";
 
 export function scnJumpGoon() {
+    Jukebox.play(Mzk.JumpingQueen);
     const lvl = Lvl.JumpGoon();
     lvl.GoonNpc
         .mixin(mxnDetectPlayer)

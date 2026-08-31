@@ -23,6 +23,7 @@ export const GeneratedMusicData = {
    "HomosexualFeet": { ogg: require("./ogg/homosexual-feet.ogg") },
    "InvisibleTape": { ogg: require("./ogg/invisible-tape.ogg") },
    "IronSkittle": { ogg: require("./ogg/iron-skittle.ogg") },
+   "JumpingQueen": { ogg: require("./ogg/jumping-queen.ogg") },
    "LingeringStraw": { ogg: require("./ogg/lingering-straw.ogg") },
    "NorthernCream": { ogg: require("./ogg/northern-cream.ogg") },
    "OldSailor": { ogg: require("./ogg/old-sailor.ogg") },
