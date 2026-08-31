@@ -3,7 +3,7 @@ import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { ZIndex } from "../core/scene/z-index";
 import { DataNpcPersona } from "../data/data-npc-persona";
-import { objCharacterKingSpino } from "../objects/characters/obj-character-king-spino";
+import { objCharacterPrinceSpino } from "../objects/characters/obj-character-prince-spino";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
 import { StepOrder } from "../objects/step-order";
@@ -13,9 +13,10 @@ export function scnOhioHallParty() {
     const lvl = Lvl.OhioHallParty();
     enrichOutOfOrderSign(lvl);
     enrichDoctorNpcs();
-    // objCharacterKingSpino()
-    //     .at(lvl.DemoMarker)
-    //     .show();
+
+    objCharacterPrinceSpino()
+        .at(lvl.DemoMarker)
+        .show();
 }
 
 function enrichOutOfOrderSign(lvl: LvlType.OhioHallParty) {
