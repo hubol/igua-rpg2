@@ -2,6 +2,7 @@ import { DisplayObject } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Instances } from "../../lib/game-engine/instances";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { ZIndex } from "../core/scene/z-index";
@@ -15,8 +16,11 @@ import { mxnEsotericBreakGlassAndSeek } from "../mixins/esoteric/mxn-esoteric-br
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objCharacterPrinceSpino } from "../objects/characters/obj-character-prince-spino";
+import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
+import { objFxHeart } from "../objects/effects/obj-fx-heart";
 import { objEsotericOutOfOrderSign } from "../objects/esoteric/obj-esoteric-out-of-order-sign";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
+import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { Search } from "../utils/search";
 
@@ -24,17 +28,65 @@ export function scnOhioHallParty() {
     const lvl = Lvl.OhioHallParty();
     const state: HallPartyState = { awareOfPrinceIllness: false };
     enrichOutOfOrderSigns();
-    enrichDoctorNpcs(lvl, state);
+    const doctors = enrichDoctorNpcs(lvl, state);
     enrichVendingMachines(lvl);
 
-    objCharacterPrinceSpino()
+    const items: RpgInventory.Item.KeyItem[] = [
+        { kind: "key_item", id: "MedicineCyan" },
+        { kind: "key_item", id: "MedicineYellow" },
+        { kind: "key_item", id: "MedicineMagenta" },
+    ];
+
+    const princeObj = objCharacterPrinceSpino();
+    princeObj
         .mixin(mxnCutscene, function* () {
-            yield* show(
-                "I ate too much cake...",
-                "My tummy hurts so bad.",
-                "Please talk with the doctors to find out what to do.",
+            if (!state.awareOfPrinceIllness) {
+                yield* show(
+                    "I ate too much cake...",
+                    "My tummy hurts so bad.",
+                    "Please talk with the doctors to find out what to do.",
+                );
+                state.awareOfPrinceIllness = true;
+                return;
+            }
+
+            const count = items.reduce((sum, item) => sum + Rpg.inventory.count(item), 0);
+            const result = yield* ask(
+                "Urgh... Do you know how to help me yet?",
+                count > 0 ? "Yes, take this" : null,
+                "Not yet",
             );
-            state.awareOfPrinceIllness = true;
+            if (result === 0) {
+                yield* show("OK!");
+                // TODO feels bad
+                const cyan = yield* DramaInventory.removeAll(items[0]);
+                const yellow = yield* DramaInventory.removeAll(items[1]);
+                const magenta = yield* DramaInventory.removeAll(items[2]);
+
+                const isCorrect = doctors.correctCocktail.cyan === cyan
+                    && doctors.correctCocktail.yellow === yellow
+                    && doctors.correctCocktail.magenta === magenta;
+
+                yield sleep(1000);
+
+                if (isCorrect) {
+                    objFxHeart.objBurst(20, 10)
+                        .at(princeObj)
+                        .show();
+                }
+                else {
+                    objFxFieryBurst170px()
+                        .at(princeObj)
+                        .show();
+                }
+
+                yield sleep(500);
+
+                yield* show(isCorrect ? "Oh yes, I already feel better!" : "No, that did not work.");
+            }
+            else {
+                yield* show("Urgh... I see... Please hurry.");
+            }
         })
         .at(lvl.DemoMarker)
         .show();
