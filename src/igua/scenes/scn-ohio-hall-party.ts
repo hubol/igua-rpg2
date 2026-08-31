@@ -3,6 +3,8 @@ import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { ZIndex } from "../core/scene/z-index";
 import { DataNpcPersona } from "../data/data-npc-persona";
+import { show } from "../drama/show";
+import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objCharacterPrinceSpino } from "../objects/characters/obj-character-prince-spino";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
@@ -11,10 +13,16 @@ import { Search } from "../utils/search";
 
 export function scnOhioHallParty() {
     const lvl = Lvl.OhioHallParty();
-    enrichOutOfOrderSign(lvl);
+    // enrichOutOfOrderSign(lvl);
     enrichDoctorNpcs();
 
     objCharacterPrinceSpino()
+        .mixin(mxnCutscene, function* () {
+            yield* show(
+                "I'm very sick...",
+                "Please help",
+            );
+        })
         .at(lvl.DemoMarker)
         .show();
 }
