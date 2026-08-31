@@ -543,6 +543,33 @@ export namespace DataShop {
                     },
                 ],
             },
+            OhioPartyMedicineCyan: {
+                stocks: [
+                    {
+                        initialQuantity: 9999,
+                        price: { currency: "jump", deltaSold: 0, initial: 1 },
+                        product: { kind: "key_item", id: "MedicineCyan" },
+                    },
+                ],
+            },
+            OhioPartyMedicineYellow: {
+                stocks: [
+                    {
+                        initialQuantity: 9999,
+                        price: { currency: "jump", deltaSold: 0, initial: 1 },
+                        product: { kind: "key_item", id: "MedicineYellow" },
+                    },
+                ],
+            },
+            OhioPartyMedicineMagenta: {
+                stocks: [
+                    {
+                        initialQuantity: 9999,
+                        price: { currency: "jump", deltaSold: 0, initial: 1 },
+                        product: { kind: "key_item", id: "MedicineMagenta" },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );

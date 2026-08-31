@@ -1,21 +1,30 @@
+import { DisplayObject } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Instances } from "../../lib/game-engine/instances";
+import { RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { ZIndex } from "../core/scene/z-index";
+import { DataKeyItem } from "../data/data-key-item";
 import { DataNpcPersona } from "../data/data-npc-persona";
-import { show } from "../drama/show";
+import { DataShop } from "../data/data-shop";
+import { DramaInventory } from "../drama/drama-inventory";
+import { dramaShop } from "../drama/drama-shop";
+import { ask, show } from "../drama/show";
 import { mxnEsotericBreakGlassAndSeek } from "../mixins/esoteric/mxn-esoteric-break-glass-and-seek";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objCharacterPrinceSpino } from "../objects/characters/obj-character-prince-spino";
 import { objEsotericOutOfOrderSign } from "../objects/esoteric/obj-esoteric-out-of-order-sign";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
+import { RpgInventory } from "../rpg/rpg-inventory";
 import { Search } from "../utils/search";
 
 export function scnOhioHallParty() {
     const lvl = Lvl.OhioHallParty();
     enrichOutOfOrderSigns();
     enrichDoctorNpcs(lvl);
+    enrichVendingMachines(lvl);
 
     objCharacterPrinceSpino()
         .mixin(mxnCutscene, function* () {
@@ -26,6 +35,12 @@ export function scnOhioHallParty() {
         })
         .at(lvl.DemoMarker)
         .show();
+}
+
+function enrichVendingMachines(lvl: LvlType.OhioHallParty) {
+    lvl.CyanMachine.mixin(mxnVendingMachine, "cyan");
+    lvl.YellowMachine.mixin(mxnVendingMachine, "yellow");
+    lvl.MagentaMachine.mixin(mxnVendingMachine, "magenta");
 }
 
 function enrichOutOfOrderSigns() {
@@ -67,4 +82,57 @@ function enrichDoctorNpcs(lvl: LvlType.OhioHallParty) {
         .add(lvl.CorrectDoctorNameRegion.width / 2, lvl.CorrectDoctorNameRegion.height / 2)
         .vround()
         .show();
+}
+
+function mxnVendingMachine(obj: DisplayObject, id: DataVendingMachine.Id) {
+    const data = DataVendingMachine.manifest[id];
+    const item: RpgInventory.Item.KeyItem = { kind: "key_item", id: data.keyItemId };
+
+    const speakerObj = obj
+        .mixin(mxnSpeaker, { name: data.name, tintSecondary: data.tint, tintPrimary: 0x727272 });
+    return speakerObj
+        .mixin(mxnCutscene, function* () {
+            const result = yield* ask("BZZZZZZRT... The prince needs medicine? What to do?", "Take", "Deposit");
+            if (result === 1) {
+                const count = yield* DramaInventory.removeAll(item);
+                if (count === 0) {
+                    yield* show("No compatible medicine detected.");
+                }
+                return;
+            }
+
+            yield* dramaShop(data.shopId, speakerObj.speaker);
+        });
+}
+
+namespace DataVendingMachine {
+    interface Model {
+        name: string;
+        keyItemId: DataKeyItem.Id;
+        shopId: DataShop.Id;
+        tint: RgbInt;
+    }
+
+    export const manifest = {
+        cyan: {
+            name: "Prince's Medicine Dispenser (Cyan)",
+            keyItemId: "MedicineCyan",
+            shopId: "OhioPartyMedicineCyan",
+            tint: 0x00ffff,
+        },
+        yellow: {
+            name: "Prince's Medicine Dispenser (Yellow)",
+            keyItemId: "MedicineYellow",
+            shopId: "OhioPartyMedicineYellow",
+            tint: 0xffff00,
+        },
+        magenta: {
+            name: "Prince's Medicine Dispenser (Magenta)",
+            keyItemId: "MedicineMagenta",
+            shopId: "OhioPartyMedicineMagenta",
+            tint: 0xff00ff,
+        },
+    } satisfies Record<string, Model>;
+
+    export type Id = keyof typeof manifest;
 }

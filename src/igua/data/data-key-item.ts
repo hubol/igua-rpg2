@@ -107,6 +107,21 @@ export namespace DataKeyItem {
                 description: "Essence of the Forest. Easily mistaken for lumber.",
                 texture: Tx.Collectibles.Key.EssenceForest,
             },
+            MedicineCyan: {
+                name: "Prince's Medicine (Cyan)",
+                description: "Prince Spino's cyan-colored medicine. The best doctor knows the best dosage.",
+                texture: Tx.Collectibles.Key.MedicineCyan,
+            },
+            MedicineYellow: {
+                name: "Prince's Medicine (Yellow)",
+                description: "Prince Spino's yellow-colored medicine. The best doctor knows the best dosage.",
+                texture: Tx.Collectibles.Key.MedicineYellow,
+            },
+            MedicineMagenta: {
+                name: "Prince's Medicine (Magenta)",
+                description: "Prince Spino's magenta-colored medicine. The best doctor knows the best dosage.",
+                texture: Tx.Collectibles.Key.MedicineMagenta,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );
