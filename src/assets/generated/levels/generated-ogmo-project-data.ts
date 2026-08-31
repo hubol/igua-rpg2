@@ -50,6 +50,7 @@ export namespace OgmoEntities {
   export type BinocularViewer = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type IguanaNpcPatrolMarker = OgmoFactory.EntityBase<{ speed: number; delayMin: number; delayMax: number; name: string; depth: number }>;
   export type OutOfOrderSign = OgmoFactory.EntityBase<{ name: string; depth: number }>;
+  export type EnvironmentBallons = OgmoFactory.EntityBase<{ count: number; seed: number; name: string; depth: number }>;
 }
 
 export interface OgmoEntityResolverBase {
@@ -100,4 +101,5 @@ export interface OgmoEntityResolverBase {
   BinocularViewer: (entity: OgmoEntities.BinocularViewer) => unknown;
   IguanaNpcPatrolMarker: (entity: OgmoEntities.IguanaNpcPatrolMarker) => unknown;
   OutOfOrderSign: (entity: OgmoEntities.OutOfOrderSign) => unknown;
+  EnvironmentBallons: (entity: OgmoEntities.EnvironmentBallons) => unknown;
 }

@@ -2391,9 +2391,56 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/out of order sign.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAYCAMAAADeQm2wAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURY4mINs6Mv///3ogHAAAAG1KDr4AAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAOwwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAUGFpbnQuTkVUIDUuMS4y+7wDtgAAALZlWElmSUkqAAgAAAAFABoBBQABAAAASgAAABsBBQABAAAAUgAAACgBAwABAAAAAgAAADEBAgAQAAAAWgAAAGmHBAABAAAAagAAAAAAAABgAAAAAQAAAGAAAAABAAAAUGFpbnQuTkVUIDUuMS4yAAMAAJAHAAQAAAAwMjMwAaADAAEAAAABAAAABaAEAAEAAACUAAAAAAAAAAIAAQACAAQAAABSOTgAAgAHAAQAAAAwMTAwAAAAAOnV9jjK2mx6AAAAgklEQVQoU42SjQ5AQAyDN7z/M+uPcReGSubTLr0Esb2owohr7eSyMvOggT/CRUKVATqZYWYZAHrFCDFtXncocU0hDhNxEir0I50DuNeHgK9QR3gMs8JWwffRSeHY7CFQSGMehr+hGotutfRMXvlRqy37oqpw2Am/ydqJ/xA+/KNi2wHrjgUJJp1tTAAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "21595347",
+      "name": "EnvironmentBallons",
+      "limit": -1,
+      "size": {"x": 34, "y": 46},
+      "origin": {"x": 15, "y": 45},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "count", "definition": "Integer", "display": 0, "defaults": 1, "bounded": true, "min": 1, "max": 100},
+        {"name": "seed", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": 999999, "max": 100},
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/environment fx ballons.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAuCAMAAAB6WzuLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkUExURakQzL453cxlENRh7t2YC+mK/4dBB+7MBW8Hh///ALCwsAAAAGQSiIMAAAAMdFJOU///////////////ABLfzs4AAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAYAAAAAEAAABgAAAAAQAAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAADp1fY4ytpsegAAASFJREFUOE+90kGWhCAMBFAVDPR4//tOUikgMOqiF1MLJcl/8Lpxu5DN48USdAn2fSc6PF5Yr4uUYAhyzkBbA0rSearZDqEoRcRJrd3UM9kUJpePSJZD96jDVN3HpmpE1IiUSPRRdR8KbJRFPpKPsYs+1FB0U4wMYQ+bjuSiv8oGMT6yk3CaCid2Bs5pxAEOJHGAo7w7Jfx1CNsxK/lr7I44YzgYidfoaZfYYnc0G6048+AaJ4OKUwuGaDbjxTCoWjeKm68OiYKG69GPAoarsMueuPJ0EQ/auUL0O+BqkB++Gf1WuHokoWzkWXxPporkZZN7MleNTN1bMnVn0UnsP5EweCZtsohAunkhbfZGOHwlmK5iITb/H7JcFvIN4bvnun4BFesu9jaN5A8AAAAASUVORK5CYII="
     }
   ],
   "tilesets": []

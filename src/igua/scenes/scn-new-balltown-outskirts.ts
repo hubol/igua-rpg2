@@ -12,7 +12,6 @@ import { DataKeyItem } from "../data/data-key-item";
 import { DramaInventory } from "../drama/drama-inventory";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
-import { mxnBallonable } from "../mixins/mxn-ballonable";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnNudgeAppear } from "../mixins/mxn-nudge-appear";
@@ -26,7 +25,6 @@ import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgPocket } from "../rpg/rpg-pocket";
-import { RpgStatus } from "../rpg/rpg-status";
 
 export function scnNewBalltownOutskirts() {
     Jukebox.play(Mzk.TrashDay);
@@ -201,10 +199,5 @@ function enrichMiner(lvl: LvlType.NewBalltownOutskirts) {
 }
 
 function enrichSecretShopExterior(lvl: LvlType.NewBalltownOutskirts) {
-    const ballons = [69_100_000, 420_000_000].map((seed): RpgStatus.Ballon => ({ health: 1, healthMax: 1, seed }));
-    lvl.MarketingBallonsMarker.zIndexed(ZIndex.TerrainDecals).mixin(mxnBallonable, {
-        attachPoint: lvl.MarketingBallonsMarker,
-        ballons,
-    });
     lvl.SecretShopSign.mixin(mxnSign, "The Secret Shop\n\nShhh! It's a secret!");
 }

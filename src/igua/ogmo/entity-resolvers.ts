@@ -6,6 +6,7 @@ import { mxnDoorMagic } from "../mixins/mxn-door-magic";
 import { objCharacterGamblingExpert } from "../objects/characters/obj-character-gambling-expert";
 import { CtxPocketItems, objCollectiblePocketItemSpawner } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objDevPlayer } from "../objects/dev/obj-dev-player";
+import { objEnvironmentFxBallons } from "../objects/effects/environment/obj-environment-fx-ballons";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
 import { objEnvironmentOverheatRegion } from "../objects/effects/environment/obj-environment-overheat-region";
 import { objAngelBallon } from "../objects/enemies/obj-angel-ballon";
@@ -113,6 +114,8 @@ export const OgmoEntityResolvers = {
     EnemySuggestive: (entity: OgmoEntities.EnemySuggestive) => objAngelSuggestive(entity).at(0, -38),
     EnemyMiffed: (entity: OgmoEntities.EnemyMiffed) => objAngelMiffed(entity.values.variant).at(0, 1),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,
+    EnvironmentBallons: (entity: OgmoEntities.EnvironmentBallons) =>
+        objEnvironmentFxBallons(entity.values.count, entity.values.seed),
     Idol: objIdol,
     GateMap: objWorldMapGate,
     StashPocket: objStashPocket,

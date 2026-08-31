@@ -73,17 +73,6 @@
           "values": {"name": "FarmerMoveToMarker", "depth": 0}
         },
         {
-          "name": "Marker",
-          "id": 7,
-          "_eid": "73148747",
-          "x": 311,
-          "y": 497,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#00ff00",
-          "values": {"name": "MarketingBallonsMarker", "depth": 0}
-        },
-        {
           "name": "EnvironmentSparkleMarker",
           "id": 8,
           "_eid": "61143896",
@@ -888,7 +877,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 174025646673900,
-          "values": {"name": "", "depth": 0, "variant": "level0"}
+          "values": {"name": "", "depth": 0, "variant": "level0", "safeTint": "#ffffff"}
         },
         {
           "name": "Door",
@@ -899,6 +888,16 @@
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnNewBalltownOutskirtsSecretShop", "checkpointName": "", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentBallons",
+          "id": 39,
+          "_eid": "21595347",
+          "x": 312,
+          "y": 497,
+          "originX": 15,
+          "originY": 45,
+          "values": {"count": 2, "seed": 879848479, "name": "", "depth": 0}
         }
       ]
     },
@@ -5417,6 +5416,18 @@
           "groupName": "YellowSeam"
         }
       ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 147,
+      "gridCellsY": 68,
+      "decals": [],
       "folder": "../textures"
     }
   ]
