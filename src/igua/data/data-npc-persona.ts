@@ -84,12 +84,12 @@ export namespace DataNpcPersona {
             OpenBaker: { job: "Baker", name: "Trinity", looksId: "Quirked" },
             Aidar: { job: "Sculptor", name: "Aidar", looksId: "Druid" },
             OhioSoupMaker: { job: "Souper", name: "Morn", looksId: "Mourner" },
-            OhioPartierBestDoctor: { job: "Doctor", name: "Icky", looksId: "Trance" },
             OhioPartier0: { job: "Doctor", name: "Itchy", looksId: "Trance" },
             OhioPartier1: { job: "Doctor", name: "Licky", looksId: "Trance" },
             OhioPartier2: { job: "Doctor", name: "Mickey", looksId: "Trance" },
             OhioPartier3: { job: "Doctor", name: "Nicky", looksId: "Trance" },
             OhioPartier4: { job: "Doctor", name: "Orkie", looksId: "Trance" },
+            OhioPartier5: { job: "Doctor", name: "Icky", looksId: "Trance" },
             __Fallback__: { job: "???", name: "???", looksId: "MintyJourney" },
         } satisfies Record<string, Model>,
     );
