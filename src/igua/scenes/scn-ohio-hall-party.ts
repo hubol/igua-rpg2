@@ -23,7 +23,7 @@ import { objCharacterPrinceSpino } from "../objects/characters/obj-character-pri
 import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
 import { objFxHeart } from "../objects/effects/obj-fx-heart";
 import { objEsotericOutOfOrderSign } from "../objects/esoteric/obj-esoteric-out-of-order-sign";
-import { objIguanaNpc } from "../objects/obj-iguana-npc";
+import { ObjIguanaNpc, objIguanaNpc } from "../objects/obj-iguana-npc";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { Search } from "../utils/search";
@@ -31,9 +31,14 @@ import { Search } from "../utils/search";
 export function scnOhioHallParty() {
     Jukebox.play(Mzk.PaperParty);
     const lvl = Lvl.OhioHallParty();
-    const state: HallPartyState = { awareOfPrinceIllness: false };
+    const state: scnOhioHallParty.State = {
+        princeIllness: {
+            isCured: false,
+            isPlayerAware: false,
+        },
+    };
     enrichOutOfOrderSigns();
-    const doctors = enrichDoctorNpcs(lvl, state);
+    const scenario = enrichDoctorNpcs(lvl, state);
     enrichVendingMachines(lvl);
 
     const items: RpgInventory.Item.KeyItem[] = [
@@ -45,13 +50,13 @@ export function scnOhioHallParty() {
     const princeObj = objCharacterPrinceSpino();
     princeObj
         .mixin(mxnCutscene, function* () {
-            if (!state.awareOfPrinceIllness) {
+            if (!state.princeIllness.isPlayerAware) {
                 yield* show(
                     "I ate too much cake...",
                     "My tummy hurts so bad.",
                     "Please talk with the doctors to find out what to do.",
                 );
-                state.awareOfPrinceIllness = true;
+                state.princeIllness.isPlayerAware = true;
                 return;
             }
 
@@ -68,9 +73,9 @@ export function scnOhioHallParty() {
                 const yellow = yield* DramaInventory.removeAll(items[1]);
                 const magenta = yield* DramaInventory.removeAll(items[2]);
 
-                const isCorrect = doctors.correctCocktail.cyan === cyan
-                    && doctors.correctCocktail.yellow === yellow
-                    && doctors.correctCocktail.magenta === magenta;
+                const isCorrect = scenario.correctCocktail.cyan === cyan
+                    && scenario.correctCocktail.yellow === yellow
+                    && scenario.correctCocktail.magenta === magenta;
 
                 yield sleep(1000);
 
@@ -90,6 +95,7 @@ export function scnOhioHallParty() {
                 yield* show(isCorrect ? "Oh yes, I already feel better!" : "No, that did not work.");
 
                 if (isCorrect) {
+                    state.princeIllness.isCured = true;
                     princeObj.objCharacterPrinceSpino.isUpright = true;
                 }
             }
@@ -101,8 +107,18 @@ export function scnOhioHallParty() {
         .show();
 }
 
-interface HallPartyState {
-    awareOfPrinceIllness: boolean;
+namespace scnOhioHallParty {
+    export interface State {
+        princeIllness: {
+            isPlayerAware: boolean;
+            isCured: boolean;
+        };
+    }
+
+    export interface Scenario {
+        correctCocktail: HallMedicineCocktail.Model;
+        badDoctors: Array<ObjIguanaNpc>;
+    }
 }
 
 function enrichVendingMachines(lvl: LvlType.OhioHallParty) {
@@ -120,8 +136,8 @@ function enrichOutOfOrderSigns() {
 
 function enrichDoctorNpcs(
     lvl: LvlType.OhioHallParty,
-    state: HallPartyState,
-): { correctCocktail: HallMedicineCocktail.Model } {
+    state: scnOhioHallParty.State,
+): scnOhioHallParty.Scenario {
     const personaIds = [
         "OhioPartier0",
         "OhioPartier1",
@@ -141,7 +157,7 @@ function enrichDoctorNpcs(
 
     const correctData = Rng.item(data);
 
-    Rng.shuffle(
+    const doctorObjs = Rng.shuffle(
         Search.findMarkers(0x00ff00),
     )
         .map((position, i) => {
@@ -156,15 +172,20 @@ function enrichDoctorNpcs(
 
             const thisData = data[i];
 
-            objIguanaNpc(thisData.personaId)
+            const api = {
+                isCorrect: thisData === correctData,
+            };
+
+            return objIguanaNpc(thisData.personaId)
                 .at(position)
                 .add(0, 3)
                 .zIndexed(ZIndex.CharacterEntities)
                 .coro(function* (self) {
                     self.auto.setFacingImmediately(Rng.bool() ? 1 : -1);
                 })
+                .merge({ enrichDoctorNpcs: api })
                 .mixin(mxnCutscene, function* () {
-                    if (!state.awareOfPrinceIllness) {
+                    if (!state.princeIllness.isPlayerAware) {
                         yield* show(greetingMessage);
                         return;
                     }
@@ -195,6 +216,7 @@ function enrichDoctorNpcs(
 
     return {
         correctCocktail: correctData.cocktail,
+        badDoctors: doctorObjs.filter(obj => !obj.enrichDoctorNpcs.isCorrect),
     };
 }
 
