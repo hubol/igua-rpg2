@@ -1,16 +1,16 @@
-import { DisplayObject, Graphics, Sprite } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
-import { sleep } from "../../../lib/game-engine/routines/sleep";
-import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
 import { ZIndex } from "../../core/scene/z-index";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
+import { mxnTinyBoilPivot } from "../../mixins/mxn-boil-tiny-pivot";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { mxnSpeaker } from "../../mixins/mxn-speaker";
 import { mxnSpeakingMouthJaw } from "../../mixins/mxn-speaking-mouth-jaw";
 import { objAngelEyes } from "../enemies/obj-angel-eyes";
+import { objCharacterKingSpino } from "./obj-character-king-spino";
 
 const [
     txLimbsFar,
@@ -33,24 +33,13 @@ export function objCharacterPrinceSpino() {
 
     return container(
         Sprite.from(txLimbsFar)
-            .mixin(mxnFxBoilTiny),
+            .mixin(mxnTinyBoilPivot, "x"),
         Sprite.from(txCrown)
             .mixin(mxnSinePivot),
-        Sprite.from(txTail0)
-            .coro(function* (self) {
-                while (true) {
-                    const duration = Rng.intc(333, 500);
-                    for (let i = 0; i < 3; i++) {
-                        yield sleep(duration);
-                        self.x = Rng.intc(-3, 0);
-                        self.y = Rng.intc(0, 1);
-                    }
-                    self.texture = self.texture === txTail0 ? txTail1 : txTail0;
-                }
-            }),
+        Sprite.from(txTail0).mixin(objCharacterKingSpino.mxnFxTail, txTail0, txTail1),
         Sprite.from(txTorso),
         Sprite.from(txLimbsNear)
-            .mixin(mxnFxBoilTiny),
+            .mixin(mxnTinyBoilPivot, "x"),
         Sprite.from(txJaw)
             .mixin(mxnSpeakingMouthJaw, [-2, 3], 30),
         Sprite.from(txNoggin),
@@ -78,14 +67,4 @@ export function objCharacterPrinceSpino() {
         .mixin(mxnSpeaker, { name: "Prince Spino", tintPrimary: 0xA0A0A0, tintSecondary: 0xFFB600 })
         .pivoted(86, 51)
         .zIndexed(ZIndex.CharacterEntities);
-}
-
-function mxnFxBoilTiny(obj: DisplayObject) {
-    return obj
-        .coro(function* (self) {
-            while (true) {
-                yield sleep(Rng.int(333, 1000));
-                self.pivot.x = Rng.intc(-1, 1);
-            }
-        });
 }

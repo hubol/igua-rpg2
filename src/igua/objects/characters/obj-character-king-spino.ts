@@ -1,8 +1,9 @@
-import { DisplayObject, Graphics, Sprite } from "pixi.js";
+import { Graphics, Sprite, Texture } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
+import { mxnTinyBoilPivot } from "../../mixins/mxn-boil-tiny-pivot";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
@@ -29,27 +30,15 @@ const [
 export function objCharacterKingSpino() {
     const headObj = new Graphics().beginFill(0xff0000).drawRect(71, 14, 45, 26).invisible();
     const lowerJawObj = Sprite.from(txLowerJaw);
-    let agapeUnit = 0;
 
     return container(
         Sprite.from(txBackLeg),
-        Sprite.from(txBackArm).mixin(mxnTinyBoilPivot),
+        Sprite.from(txBackArm).mixin(mxnTinyBoilPivot, "y"),
         Sprite.from(txSpine),
         Sprite.from(txSail),
         Sprite.from(txFrontLeg),
-        Sprite.from(txFrontArm).mixin(mxnTinyBoilPivot),
-        Sprite.from(txTail0)
-            .coro(function* (self) {
-                while (true) {
-                    const duration = Rng.intc(333, 500);
-                    for (let i = 0; i < 3; i++) {
-                        yield sleep(duration);
-                        self.x = Rng.intc(-3, 0);
-                        self.y = Rng.intc(0, 1);
-                    }
-                    self.texture = self.texture === txTail0 ? txTail1 : txTail0;
-                }
-            }),
+        Sprite.from(txFrontArm).mixin(mxnTinyBoilPivot, "y"),
+        Sprite.from(txTail0).mixin(objCharacterKingSpino.mxnFxTail, txTail0, txTail1),
         container(
             lowerJawObj
                 .mixin(mxnSpeakingMouthJaw, [-2, 4], 60),
@@ -71,7 +60,7 @@ export function objCharacterKingSpino() {
                 .at(95, 22),
             Sprite.from(txCrown).mixin(mxnSinePivot),
         )
-            .mixin(mxnTinyBoilPivot),
+            .mixin(mxnTinyBoilPivot, "y"),
         headObj,
     )
         .mixin(mxnHasHead, { obj: headObj })
@@ -80,13 +69,17 @@ export function objCharacterKingSpino() {
         .pivoted(36, 102);
 }
 
-function mxnTinyBoilPivot(obj: DisplayObject) {
-    return obj
-        .coro(function* () {
+objCharacterKingSpino.mxnFxTail = function mxnFxTail (sprite: Sprite, tx0: Texture, tx1: Texture) {
+    return sprite
+        .coro(function* (self) {
             while (true) {
-                yield sleep(Rng.intc(333, 500));
-                let dir = Rng.intp();
-                obj.pivot.y = Math.max(-1, Math.min(1, obj.pivot.y + dir));
+                const duration = Rng.intc(333, 500);
+                for (let i = 0; i < 3; i++) {
+                    yield sleep(duration);
+                    self.x = Rng.intc(-3, 0);
+                    self.y = Rng.intc(0, 1);
+                }
+                self.texture = self.texture === tx0 ? tx1 : tx0;
             }
         });
-}
+};
