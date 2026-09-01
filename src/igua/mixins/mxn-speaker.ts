@@ -20,33 +20,13 @@ export function mxnSpeaker(obj: DisplayObject, args: MxnSpeakerArgs) {
     speakerObj.handles("mxnSpeaker.speakingEnded", () => speaker.spokeOnceInCurrentScene = true);
 
     if (obj instanceof Container) {
-        const speakingMouthObj = obj.findIs(mxnSpeakingMouth).last;
+        const speakingMouthObjs = obj.findIs(mxnSpeakingMouth);
 
-        if (speakingMouthObj) {
+        if (speakingMouthObjs.length) {
             let speakingStartedCount = 0;
             let isSpeaking = false;
 
-            speakerObj.coro(function* (self) {
-                let speakingHandledCount = 0;
-
-                while (true) {
-                    yield () => isSpeaking && speakingStartedCount > speakingHandledCount;
-                    speakingStartedCount = speakingHandledCount;
-                    const count = Rng.intc(2, 4);
-                    for (let i = 0; i < count; i++) {
-                        yield interp(speakingMouthObj.mxnSpeakingMouth, "agapeUnit")
-                            .to(1)
-                            .over(speakingMouthObj.mxnSpeakingMouth.baseAnimationDuration + Rng.float(150, 225));
-                        self.play(Sfx.Iguana.Speak0.rate(0.8, 1.2));
-                        yield interp(speakingMouthObj.mxnSpeakingMouth, "agapeUnit")
-                            .to(0)
-                            .over(speakingMouthObj.mxnSpeakingMouth.baseAnimationDuration + Rng.float(100, 150));
-                        if (!isSpeaking) {
-                            break;
-                        }
-                    }
-                }
-            })
+            speakerObj
                 .handles("mxnSpeaker.speakingStarted", (self) => {
                     speakingStartedCount++;
                     isSpeaking = true;
@@ -54,6 +34,31 @@ export function mxnSpeaker(obj: DisplayObject, args: MxnSpeakerArgs) {
                 .handles("mxnSpeaker.speakingEnded", () => {
                     isSpeaking = false;
                 });
+
+            for (const speakingMouthObj of speakingMouthObjs) {
+                speakingMouthObj
+                    .coro(function* (self) {
+                        let speakingHandledCount = 0;
+
+                        while (true) {
+                            yield () => isSpeaking && speakingStartedCount > speakingHandledCount && self.worldVisible;
+                            speakingHandledCount = speakingStartedCount;
+                            const count = Rng.intc(2, 4);
+                            for (let i = 0; i < count; i++) {
+                                yield interp(self.mxnSpeakingMouth, "agapeUnit")
+                                    .to(1)
+                                    .over(self.mxnSpeakingMouth.baseAnimationDuration + Rng.float(150, 225));
+                                self.play(Sfx.Iguana.Speak0.rate(0.8, 1.2));
+                                yield interp(self.mxnSpeakingMouth, "agapeUnit")
+                                    .to(0)
+                                    .over(self.mxnSpeakingMouth.baseAnimationDuration + Rng.float(100, 150));
+                                if (!isSpeaking) {
+                                    break;
+                                }
+                            }
+                        }
+                    });
+            }
         }
     }
 

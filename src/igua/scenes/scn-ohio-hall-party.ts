@@ -84,6 +84,10 @@ export function scnOhioHallParty() {
                 yield sleep(500);
 
                 yield* show(isCorrect ? "Oh yes, I already feel better!" : "No, that did not work.");
+
+                if (isCorrect) {
+                    princeObj.objCharacterPrinceSpino.isUpright = true;
+                }
             }
             else {
                 yield* show("Urgh... I see... Please hurry.");
