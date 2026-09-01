@@ -182,7 +182,7 @@ function enrichDoctorNpcs(
                 .show();
         });
 
-    objText.Large(DataNpcPersona.getById(correctData.personaId).name)
+    objText.XLargeIrregular(DataNpcPersona.getById(correctData.personaId).name)
         .anchored(0.5, 0.5)
         .at(lvl.CorrectDoctorNameRegion)
         .add(lvl.CorrectDoctorNameRegion.width / 2, lvl.CorrectDoctorNameRegion.height / 2)
