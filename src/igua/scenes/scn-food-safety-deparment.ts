@@ -1,7 +1,5 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
-import { Mzk } from "../../assets/music";
 import { sleep } from "../../lib/game-engine/routines/sleep";
-import { Jukebox } from "../core/igua-audio";
 import { DramaFacts } from "../drama/drama-facts";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
@@ -12,7 +10,6 @@ import { RpgDarkness } from "../rpg/rpg-darkness";
 import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnFoodSafetyDepartment() {
-    Jukebox.play(Mzk.JumpingQueen);
     const lvl = Lvl.FoodSafetyDepartment();
     const quest = Rpg.quest("FoodSafetyDeparment.MetalDiscovered");
 

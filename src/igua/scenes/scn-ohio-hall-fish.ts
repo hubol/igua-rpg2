@@ -1,5 +1,6 @@
 import { Sprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
@@ -10,6 +11,7 @@ import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
+import { Jukebox } from "../core/igua-audio";
 import { DataItem } from "../data/data-item";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { scene } from "../globals";
@@ -31,6 +33,7 @@ import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnOhioHallFish() {
+    Jukebox.play(Mzk.JumpingQueen);
     CtxTerrainPipe.value.texture = NoAtlasTx.Terrain.Pipe.Grate;
     const lvl = Lvl.OhioHallFish();
 
