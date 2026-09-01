@@ -1,11 +1,13 @@
 import { DisplayObject } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Instances } from "../../lib/game-engine/instances";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
+import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataKeyItem } from "../data/data-key-item";
 import { DataNpcPersona } from "../data/data-npc-persona";
@@ -27,6 +29,7 @@ import { RpgInventory } from "../rpg/rpg-inventory";
 import { Search } from "../utils/search";
 
 export function scnOhioHallParty() {
+    Jukebox.play(Mzk.PaperParty);
     const lvl = Lvl.OhioHallParty();
     const state: HallPartyState = { awareOfPrinceIllness: false };
     enrichOutOfOrderSigns();
