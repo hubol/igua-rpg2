@@ -14,6 +14,7 @@ import { DramaInventory } from "../drama/drama-inventory";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnEsotericBreakGlassAndSeek } from "../mixins/esoteric/mxn-esoteric-break-glass-and-seek";
+import { mxnComputer } from "../mixins/mxn-computer";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objCharacterPrinceSpino } from "../objects/characters/obj-character-prince-spino";
@@ -201,7 +202,9 @@ function mxnVendingMachine(obj: DisplayObject, id: DataVendingMachine.Id) {
     const speakerObj = obj
         .mixin(mxnSpeaker, { name: data.name, tintSecondary: data.tint, tintPrimary: 0x727272 });
     return speakerObj
+        .mixin(mxnComputer)
         .mixin(mxnCutscene, function* () {
+            Sfx.Interact.MedicineVendingMachine.rate(0.9, 1.1).play();
             const result = yield* ask("AUTHORIZED PERSONNEL ONLY\n\nPlease make your selection.", "Take", "Deposit");
             if (result === 1) {
                 const count = yield* DramaInventory.removeAll(item);

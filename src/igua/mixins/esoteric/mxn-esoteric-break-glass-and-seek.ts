@@ -39,6 +39,7 @@ export function mxnEsotericBreakGlassAndSeek(obj: DisplayObject, seekPlayerOffse
             glassObj.destroy();
 
             for (let i = 0; i < 8; i++) {
+                self.play(Sfx.Effect.GlassBeginSeek.rate(0.8 + i * Rng.float(0.05, 0.15)));
                 obj.add(Rng.intp(), Rng.intp());
                 yield sleep(70);
             }
