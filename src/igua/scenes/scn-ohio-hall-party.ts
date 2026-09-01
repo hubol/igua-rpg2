@@ -12,9 +12,11 @@ import { ZIndex } from "../core/scene/z-index";
 import { DataKeyItem } from "../data/data-key-item";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataShop } from "../data/data-shop";
+import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { DramaInventory } from "../drama/drama-inventory";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
+import { scene } from "../globals";
 import { mxnEsotericBreakGlassAndSeek } from "../mixins/esoteric/mxn-esoteric-break-glass-and-seek";
 import { mxnComputer } from "../mixins/mxn-computer";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -22,6 +24,7 @@ import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objCharacterPrinceSpino } from "../objects/characters/obj-character-prince-spino";
 import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
 import { objFxHeart } from "../objects/effects/obj-fx-heart";
+import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { objEsotericOutOfOrderSign } from "../objects/esoteric/obj-esoteric-out-of-order-sign";
 import { ObjIguanaNpc, objIguanaNpc } from "../objects/obj-iguana-npc";
 import { Rpg } from "../rpg/rpg";
@@ -105,6 +108,22 @@ export function scnOhioHallParty() {
         })
         .at(lvl.DemoMarker)
         .show();
+
+    scene.stage
+        .coro(function* () {
+            yield () => state.princeIllness.isCured;
+
+            for (const doctorObj of scenario.badDoctorObjs) {
+                const angelObj = objAngelMiffed("level4")
+                    .at(doctorObj)
+                    .show();
+
+                doctorObj.destroy();
+                yield () => angelObj.destroyed;
+            }
+
+            yield* DramaHallOfDoors.complete(Rpg.microcosms["Ohio.HallOfDoors"], 1);
+        });
 }
 
 namespace scnOhioHallParty {
@@ -117,7 +136,7 @@ namespace scnOhioHallParty {
 
     export interface Scenario {
         correctCocktail: HallMedicineCocktail.Model;
-        badDoctors: Array<ObjIguanaNpc>;
+        badDoctorObjs: Array<ObjIguanaNpc>;
     }
 }
 
@@ -216,7 +235,7 @@ function enrichDoctorNpcs(
 
     return {
         correctCocktail: correctData.cocktail,
-        badDoctors: doctorObjs.filter(obj => !obj.enrichDoctorNpcs.isCorrect),
+        badDoctorObjs: doctorObjs.filter(obj => !obj.enrichDoctorNpcs.isCorrect),
     };
 }
 
