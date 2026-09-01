@@ -1,4 +1,5 @@
 import { DisplayObject, Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
@@ -24,7 +25,7 @@ export function mxnEsotericBreakGlassAndSeek(obj: DisplayObject, seekPlayerOffse
 
             yield () => playerObj.collides(glassObj);
 
-            // TODO glass break sfx
+            self.play(Sfx.Impact.GlassBreak.rate(0.9, 1.1));
             for (const { position, normal } of FxPattern.getRadialBurst({ count: 10, radius: [15, 21] })) {
                 objFxAsterisk16Px()
                     .mixin(mxnMotion)
