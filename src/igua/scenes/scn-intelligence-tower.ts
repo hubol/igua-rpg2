@@ -1,7 +1,12 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Instances } from "../../lib/game-engine/instances";
+import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { Rng } from "../../lib/math/rng";
+import { DramaQuests } from "../drama/drama-quests";
+import { show } from "../drama/show";
+import { scene } from "../globals";
+import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objBossMusicPlayer } from "../objects/obj-boss-music-player";
 import { ObjDoor, objDoor } from "../objects/obj-door";
 import { playerObj } from "../objects/obj-player";
@@ -12,6 +17,7 @@ export function scnIntelligenceTower() {
 
     enrichCheckTime(lvl);
     enrichMidboss0(lvl);
+    enrichMageNpcs(lvl);
 
     const checkpointName = Rpg.character.position.checkpointName;
     if (checkpointName.startsWith("level") || checkpointName.startsWith("wrong")) {
@@ -31,6 +37,27 @@ export function scnIntelligenceTower() {
         mzkPeace: Mzk.RochesterDetour,
     })
         .show();
+}
+
+function enrichMageNpcs(lvl: LvlType.IntelligenceTower) {
+    const defeatMidbossQuest0 = Rpg.quest("IntelligenceTower.DefeatMidboss0");
+
+    lvl.MageNpc0
+        .mixin(mxnCutscene, function* () {
+            yield* show("You have done well to get here.");
+            if (defeatMidbossQuest0.isCompletable) {
+                yield* show("Please take this.");
+                yield* DramaQuests.complete(defeatMidbossQuest0);
+            }
+        });
+
+    lvl.MageNpc1
+        .mixin(mxnCutscene, function* () {
+            yield* show(
+                "We study magic here.",
+                "Maybe someone has a cool discovery to share with you.",
+            );
+        });
 }
 
 function enrichCheckTime(lvl: LvlType.IntelligenceTower) {
@@ -67,4 +94,15 @@ function enrichMidboss0(lvl: LvlType.IntelligenceTower) {
                 self.visible = self.enabled = remainingTicksUnit > unit;
             });
         });
+
+    if (playerObj.y < lvl.EnemyChill.y) {
+        lvl.EnemyChill.destroy();
+    }
+    else {
+        scene.stage
+            .coro(function* () {
+                yield () => lvl.EnemyChill.destroyed;
+                yield interpvr(lvl.MidbossDoor0).factor(factor.sine).to(lvl.MidbossDoorMarker0).over(3000);
+            });
+    }
 }

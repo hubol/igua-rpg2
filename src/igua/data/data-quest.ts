@@ -319,6 +319,14 @@ export namespace DataQuest {
                     },
                 },
             },
+            "IntelligenceTower.DefeatMidboss0": {
+                flags: null,
+                reward: {
+                    kind: "single",
+                    countCompletions: "once",
+                    drop: { kind: "key_item", id: "MagicKey" },
+                },
+            },
             __Fallback__: {
                 flags: null,
                 reward: {
