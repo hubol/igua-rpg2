@@ -7,6 +7,7 @@ import { Instances } from "../../lib/game-engine/instances";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
+import { Force } from "../../lib/types/force";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataKeyItem } from "../data/data-key-item";
@@ -16,7 +17,7 @@ import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { DramaInventory } from "../drama/drama-inventory";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
-import { scene } from "../globals";
+import { Cutscene, scene } from "../globals";
 import { mxnEsotericBreakGlassAndSeek } from "../mixins/esoteric/mxn-esoteric-break-glass-and-seek";
 import { mxnComputer } from "../mixins/mxn-computer";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -24,7 +25,7 @@ import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objCharacterPrinceSpino } from "../objects/characters/obj-character-prince-spino";
 import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
 import { objFxHeart } from "../objects/effects/obj-fx-heart";
-import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
+import { objAngelStupid } from "../objects/enemies/obj-angel-stupid";
 import { objEsotericOutOfOrderSign } from "../objects/esoteric/obj-esoteric-out-of-order-sign";
 import { ObjIguanaNpc, objIguanaNpc } from "../objects/obj-iguana-npc";
 import { Rpg } from "../rpg/rpg";
@@ -53,6 +54,11 @@ export function scnOhioHallParty() {
     const princeObj = objCharacterPrinceSpino();
     princeObj
         .mixin(mxnCutscene, function* () {
+            if (state.princeIllness.isCured) {
+                yield* show("Please use your claws to uphold the standards.");
+                return;
+            }
+
             if (!state.princeIllness.isPlayerAware) {
                 yield* show(
                     "I ate too much cake...",
@@ -97,10 +103,19 @@ export function scnOhioHallParty() {
 
                 yield* show(isCorrect ? "Oh yes, I already feel better!" : "No, that did not work.");
 
-                if (isCorrect) {
-                    state.princeIllness.isCured = true;
-                    princeObj.objCharacterPrinceSpino.isUpright = true;
+                if (!isCorrect) {
+                    return;
                 }
+
+                state.princeIllness.isCured = true;
+                princeObj.objCharacterPrinceSpino.isUpright = true;
+
+                yield sleep(1000);
+
+                yield* show(
+                    "See, imagine the danger if my medical care were in the hands of an inadequate doctor.",
+                    "We all must be held to certain standards.",
+                );
             }
             else {
                 yield* show("Urgh... I see... Please hurry.");
@@ -111,14 +126,42 @@ export function scnOhioHallParty() {
 
     scene.stage
         .coro(function* () {
-            yield () => state.princeIllness.isCured;
+            function transformIntoAngelObj(doctorObj: DisplayObject) {
+                doctorObj.play(Sfx.Cutscene.QuackTransform.rate(0.9, 1.1), false);
 
-            for (const doctorObj of scenario.badDoctorObjs) {
-                const angelObj = objAngelMiffed("level4")
+                const angelObj = objAngelStupid()
                     .at(doctorObj)
                     .show();
 
                 doctorObj.destroy();
+
+                return angelObj;
+            }
+
+            yield () => state.princeIllness.isCured;
+
+            for (let i = 0; i < scenario.badDoctorObjs.length; i++) {
+                const doctorObj = scenario.badDoctorObjs[i];
+
+                let angelObj = Force<DisplayObject>();
+
+                if (i === 0) {
+                    yield Cutscene.play(
+                        function* () {
+                            yield* show("Quack!");
+                            angelObj = transformIntoAngelObj(doctorObj);
+                            yield sleep(1000);
+                        },
+                        {
+                            camera: { start: "pan_to_speaker", end: "pan_to_player" },
+                            speaker: doctorObj,
+                        },
+                    ).done;
+                }
+                else {
+                    angelObj = transformIntoAngelObj(doctorObj);
+                }
+
                 yield () => angelObj.destroyed;
             }
 
@@ -204,6 +247,15 @@ function enrichDoctorNpcs(
                 })
                 .merge({ enrichDoctorNpcs: api })
                 .mixin(mxnCutscene, function* () {
+                    if (state.princeIllness.isCured) {
+                        yield* show(
+                            api.isCorrect
+                                ? "It looks like I will have some leverage for my next performance review. Thanks!"
+                                : "Oh no!! The prince knows I'm a fraud!! My salary!!",
+                        );
+                        return;
+                    }
+
                     if (!state.princeIllness.isPlayerAware) {
                         yield* show(greetingMessage);
                         return;
