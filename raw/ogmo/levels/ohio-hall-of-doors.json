@@ -139,7 +139,7 @@
           "originX": 0,
           "originY": -2,
           "uid": 178658985893001,
-          "values": {"sceneName": "", "checkpointName": "", "name": "MagicDoor1", "depth": 0}
+          "values": {"sceneName": "scnOhioHallParty", "checkpointName": "", "name": "MagicDoor1", "depth": 0}
         },
         {
           "name": "MagicDoor",
