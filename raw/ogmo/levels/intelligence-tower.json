@@ -79,6 +79,18 @@
           "originY": 0,
           "flippedX": true,
           "values": {"sceneName": "scnIntelligenceTowerEntrance", "checkpointName": "fromIntelligenceTower", "name": "", "depth": 0}
+        },
+        {
+          "name": "GateHorizontal",
+          "id": 1,
+          "_eid": "97593426",
+          "x": 480,
+          "y": 192,
+          "height": 40,
+          "originX": 0,
+          "originY": 0,
+          "flippedX": false,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromIntelligenceTower", "name": "", "depth": 0}
         }
       ]
     },
