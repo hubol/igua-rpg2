@@ -43,6 +43,7 @@ export const GeneratedMusicData = {
    "SoldierBoyDemo": { ogg: require("./ogg/soldier-boy-demo.ogg") },
    "SomberToothpick": { ogg: require("./ogg/somber-toothpick.ogg") },
    "SporadicQuest": { ogg: require("./ogg/sporadic-quest.ogg") },
+   "SubterraneanBrick": { ogg: require("./ogg/subterranean-brick.ogg") },
    "TrashDay": { ogg: require("./ogg/trash-day.ogg") },
    "UndergroundRucksack": { ogg: require("./ogg/underground-rucksack.ogg") },
    "UnforgivableToner": { ogg: require("./ogg/unforgivable-toner.ogg") },
