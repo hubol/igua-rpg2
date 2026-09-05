@@ -456,18 +456,6 @@
           "values": {"sceneName": "scnIntelligenceTower", "checkpointName": "level0", "name": "TimeCheck9Door", "depth": 0}
         },
         {
-          "name": "IntelligenceBackground",
-          "id": 16,
-          "_eid": "41461695",
-          "x": 432,
-          "y": 1616,
-          "width": 72,
-          "height": 216,
-          "originX": 0,
-          "originY": 0,
-          "values": {"initialTint": "#000000", "targetTint": "#808080", "min": 1, "max": 5, "name": "", "depth": 0}
-        },
-        {
           "name": "IntelligenceSign",
           "id": 17,
           "_eid": "61823517",
@@ -1313,6 +1301,18 @@
           "originX": 15,
           "originY": 15,
           "values": {"maxTicks": 60, "name": "MidbossDial0", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 3,
+          "_eid": "41461695",
+          "x": 432,
+          "y": 1616,
+          "width": 72,
+          "height": 216,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#000000", "targetTint": "#808080", "min": 1, "max": 5, "name": "", "depth": 0}
         }
       ]
     },
