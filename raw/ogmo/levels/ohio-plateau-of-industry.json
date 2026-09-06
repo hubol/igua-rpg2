@@ -295,6 +295,8 @@
           "_eid": "88296692",
           "x": 464,
           "y": 928,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnOhioCasino", "checkpointName": "fromLeft", "name": "", "depth": 0}
@@ -305,6 +307,8 @@
           "_eid": "88296692",
           "x": 832,
           "y": 928,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnOhioCasino", "checkpointName": "fromRight", "name": "", "depth": 0}
@@ -345,8 +349,10 @@
           "_eid": "88296692",
           "x": 618,
           "y": 676,
+          "width": 80,
+          "height": 106,
           "originX": 0,
-          "originY": -2,
+          "originY": -4.416666666666666,
           "values": {"sceneName": "scnOhioUniversityInterior", "checkpointName": "fromPlateau", "name": "CollegeDoor", "depth": 0}
         }
       ]
@@ -1370,7 +1376,8 @@
           "texture": "shapes/square32.png",
           "originX": 0,
           "originY": 0,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 466,
@@ -1382,7 +1389,8 @@
           "texture": "terrain/earth/large rocks 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 626,
@@ -1394,7 +1402,8 @@
           "texture": "terrain/earth/large rocks 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 846,
@@ -1406,7 +1415,8 @@
           "texture": "terrain/earth/large rocks 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 718,
@@ -1418,7 +1428,8 @@
           "texture": "terrain/earth/large rocks 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 660,
@@ -1924,7 +1935,8 @@
           "texture": "shapes/states/ohio 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "FamousLogo"}
+          "values": {"name": "FamousLogo"},
+          "groupName": null
         },
         {
           "x": 552,
@@ -1936,7 +1948,8 @@
           "texture": "shapes/fonts/weight3/o.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 422,
@@ -1948,7 +1961,8 @@
           "texture": "stone/brick rows 3.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 402,
@@ -1960,7 +1974,8 @@
           "texture": "stone/brick rows 3.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 908,
@@ -1972,7 +1987,8 @@
           "texture": "stone/brick rows 3.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 908,
@@ -1984,7 +2000,8 @@
           "texture": "stone/brick rows 3.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 909,
@@ -1996,7 +2013,8 @@
           "texture": "stone/brick rows 3.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 402,
@@ -2008,7 +2026,8 @@
           "texture": "stone/brick rows 3 b.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 433,
@@ -2020,7 +2039,8 @@
           "texture": "shapes/dashed line 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 441,
@@ -2032,7 +2052,8 @@
           "texture": "shapes/dashed line 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 871,
@@ -2044,7 +2065,8 @@
           "texture": "shapes/dashed line 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 879,
@@ -2056,7 +2078,8 @@
           "texture": "shapes/dashed line 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 872,
@@ -2068,7 +2091,8 @@
           "texture": "shapes/dashed line 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 880,
@@ -2080,7 +2104,8 @@
           "texture": "shapes/dashed line 3px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

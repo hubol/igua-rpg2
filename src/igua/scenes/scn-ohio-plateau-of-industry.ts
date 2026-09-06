@@ -18,9 +18,6 @@ export function scnOhioPlateauOfIndustry() {
     const lvl = Lvl.OhioPlateauOfIndustry();
     enrichSoupMakerNpc(lvl);
 
-    lvl.CollegeDoor
-        .scaled(2.25, 2.25);
-
     lvl.FamousLogo
         .mixin(mxnSign, "Very famous logo for the Ohio College of School.");
 }

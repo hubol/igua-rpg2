@@ -177,6 +177,53 @@
   ],
   "entities": [
     {
+      "exportID": "88296692",
+      "name": "Door",
+      "limit": -1,
+      "size": {"x": 34, "y": 48},
+      "origin": {"x": 0, "y": -2},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": true,
+      "resizeableY": true,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "sceneName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "checkpointName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": false,
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/door.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAuCAYAAABNhcu5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAABKSURBVFhH7c6hAYAADMCwwS/7/0QwGPoAiMTU9tjda37gfPo5I2WkjJSRMlJGykgZKSNlpIyUkTJSRspIGSkjZaSMlJEyUkbeZm60VQHKmVU0iQAAAABJRU5ErkJggg=="
+    },
+    {
       "exportID": "93092164",
       "name": "Player",
       "limit": 1,
@@ -402,53 +449,6 @@
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/pipe slope.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAsCAYAAAAEuLqPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAD2SURBVFhHxdXJDYMwFEVRoBNapBBaoSSXkuhaicVk8PCHswhZ4NwngZTB07Ztn/H33Rxxri4D/vEQgv2AfXyeZ9sB5zjMBtzFYTIgFzd5B57iUB3wFofagJI4VAaUxiE+oCYO0QG1cYgNaIkvyzKKDGiNc+0e0BNH14DeOJoHSMTRNEAqjuoBknFUDZCOo3iARhxFA7TieL1JM47HG7XjyN5sEcftAas4Locs4zgctI4jHfaII/6AVxyjZxwTH15xTJ5xTJ5xxEcAjzjSO5CjGUd8B3K040iP4MwijtsBVnFcBljGcRhgHUca4BGP1nWN/wU+huELWt5AQF4RmxAAAAAASUVORK5CYII="
-    },
-    {
-      "exportID": "88296692",
-      "name": "Door",
-      "limit": -1,
-      "size": {"x": 34, "y": 48},
-      "origin": {"x": 0, "y": -2},
-      "originAnchored": true,
-      "shape": {
-        "label": "Rectangle",
-        "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
-        ]
-      },
-      "color": "#ff0000ff",
-      "tileX": false,
-      "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
-      "resizeableX": false,
-      "resizeableY": false,
-      "rotatable": false,
-      "rotationDegrees": 360,
-      "canFlipX": false,
-      "canFlipY": false,
-      "flipOnlyScales": false,
-      "canSetColor": false,
-      "hasNodes": false,
-      "hasUid": false,
-      "nodeLimit": 0,
-      "nodeDisplay": 0,
-      "nodeGhost": true,
-      "tags": [],
-      "values": [
-        {"name": "sceneName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "checkpointName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
-      ],
-      "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
-      "texture": "preview-images/door.png",
-      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAuCAYAAABNhcu5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAABKSURBVFhH7c6hAYAADMCwwS/7/0QwGPoAiMTU9tjda37gfPo5I2WkjJSRMlJGykgZKSNlpIyUkTJSRspIGSkjZaSMlJEyUkbeZm60VQHKmVU0iQAAAABJRU5ErkJggg=="
     },
     {
       "exportID": "19953026",
@@ -2438,7 +2438,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/environment fx ballons.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAuCAMAAAB6WzuLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkUExURakQzL453cxlENRh7t2YC+mK/4dBB+7MBW8Hh///ALCwsAAAAGQSiIMAAAAMdFJOU///////////////ABLfzs4AAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAYAAAAAEAAABgAAAAAQAAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAADp1fY4ytpsegAAASFJREFUOE+90kGWhCAMBFAVDPR4//tOUikgMOqiF1MLJcl/8Lpxu5DN48USdAn2fSc6PF5Yr4uUYAhyzkBbA0rSearZDqEoRcRJrd3UM9kUJpePSJZD96jDVN3HpmpE1IiUSPRRdR8KbJRFPpKPsYs+1FB0U4wMYQ+bjuSiv8oGMT6yk3CaCid2Bs5pxAEOJHGAo7w7Jfx1CNsxK/lr7I44YzgYidfoaZfYYnc0G6048+AaJ4OKUwuGaDbjxTCoWjeKm68OiYKG69GPAoarsMueuPJ0EQ/auUL0O+BqkB++Gf1WuHokoWzkWXxPporkZZN7MleNTN1bMnVn0UnsP5EweCZtsohAunkhbfZGOHwlmK5iITb/H7JcFvIN4bvnun4BFesu9jaN5A8AAAAASUVORK5CYII="
     }

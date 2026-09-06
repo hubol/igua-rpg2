@@ -3,12 +3,12 @@
 import { OgmoFactory } from "../../../igua/ogmo/factory";
 
 export namespace OgmoEntities {
+  export type Door = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
   export type Player = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type Block = OgmoFactory.EntityBase<{ name: string; depth: number; visible: boolean }>;
   export type Slope = OgmoFactory.EntityBase<{ name: string; depth: number; visible: boolean }>;
   export type Pipe = OgmoFactory.EntityBase<{ name: string; visible: boolean; depth: number }>;
   export type PipeSlope = OgmoFactory.EntityBase<{ name: string; depth: number; visible: boolean }>;
-  export type Door = OgmoFactory.EntityBase<{ sceneName: string; checkpointName: string; name: string; depth: number }>;
   export type Checkpoint = OgmoFactory.EntityBase<{ name: string; depth: number; overrideFlipX: "none" | "retainFromPreviousScene" }>;
   export type WaterDripSource = OgmoFactory.EntityBase<{ delayMin: number; delayMax: number; name: string; depth: number }>;
   export type Sign = OgmoFactory.EntityBase<{ title: string; message: string; name: string; depth: number; isSpecial: boolean }>;
@@ -54,12 +54,12 @@ export namespace OgmoEntities {
 }
 
 export interface OgmoEntityResolverBase {
+  Door: (entity: OgmoEntities.Door) => unknown;
   Player: (entity: OgmoEntities.Player) => unknown;
   Block: (entity: OgmoEntities.Block) => unknown;
   Slope: (entity: OgmoEntities.Slope) => unknown;
   Pipe: (entity: OgmoEntities.Pipe) => unknown;
   PipeSlope: (entity: OgmoEntities.PipeSlope) => unknown;
-  Door: (entity: OgmoEntities.Door) => unknown;
   Checkpoint: (entity: OgmoEntities.Checkpoint) => unknown;
   WaterDripSource: (entity: OgmoEntities.WaterDripSource) => unknown;
   Sign: (entity: OgmoEntities.Sign) => unknown;

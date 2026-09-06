@@ -53,8 +53,19 @@ export const OgmoEntityResolvers = {
     "Slope": objSolidSlope,
     "Pipe": objPipe,
     "PipeSlope": objPipeSlope,
-    "Door": ({ values: { checkpointName, sceneName } }: OgmoEntities.Door) =>
-        objDoor({ checkpointName, sceneName }).at(0, 2),
+    "Door": (entity: OgmoEntities.Door) => {
+        const { values: { checkpointName, sceneName } } = entity;
+        const doorObj = objDoor({ checkpointName, sceneName }).at(0, 2);
+        if ((entity.width ?? 34) !== 34) {
+            doorObj.scale.x = entity.width! / 34;
+        }
+        if ((entity.height ?? 48) !== 48) {
+            doorObj.scale.y = (entity.height! - 2) / 46;
+        }
+        entity.width = undefined;
+        entity.height = undefined;
+        return doorObj;
+    },
     "WaterDripSource": ({ values: { delayMin, delayMax } }: OgmoEntities.WaterDripSource) =>
         objWaterDripSource({ delayMin, delayMax }),
     "Sign": ({ values }: OgmoEntities.Sign) => objSign(values),
