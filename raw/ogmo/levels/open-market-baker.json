@@ -29,17 +29,16 @@
       "gridCellsY": 35,
       "entities": [
         {
-          "name": "Region",
-          "id": 0,
-          "_eid": "11908607",
+          "name": "EnvironmentSpeakerPlayerRegion",
+          "id": 1,
+          "_eid": "73364153",
           "x": 416,
           "y": 112,
           "width": 56,
           "height": 40,
           "originX": 0,
           "originY": 0,
-          "tint": "#00ff00",
-          "values": {"name": "FlourRegion", "depth": 0}
+          "values": {"messages": "Opened bags of flour everywhere--a good indicator of high quality cakes.", "name": "", "depth": 0}
         }
       ]
     },
@@ -154,6 +153,8 @@
           "_eid": "88296692",
           "x": 56,
           "y": 168,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnOpenMarket", "checkpointName": "fromBaker", "name": "", "depth": 0}

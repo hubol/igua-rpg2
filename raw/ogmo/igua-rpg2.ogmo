@@ -2481,14 +2481,60 @@
       "values": [
         {"name": "speakerName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "speakerTintSecondary", "definition": "RGB", "display": 0, "defaults": "#000000"},
-        {"name": "messages", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100},
+        {"name": "messages", "definition": "Text", "display": 0, "defaults": ""}
+      ],
+      "isRegion": true,
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/environment speaker region.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURf///wAAAAAruronHwAAALHogNAAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAOwwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAUGFpbnQuTkVUIDUuMS4y+7wDtgAAALZlWElmSUkqAAgAAAAFABoBBQABAAAASgAAABsBBQABAAAAUgAAACgBAwABAAAAAgAAADEBAgAQAAAAWgAAAGmHBAABAAAAagAAAAAAAABgAAAAAQAAAGAAAAABAAAAUGFpbnQuTkVUIDUuMS4yAAMAAJAHAAQAAAAwMjMwAaADAAEAAAABAAAABaAEAAEAAACUAAAAAAAAAAIAAQACAAQAAABSOTgAAgAHAAQAAAAwMTAwAAAAAOnV9jjK2mx6AAAAnUlEQVQ4T6WRWw7DIAzAgOX+Z15DnECaMk2bP/qIXahEk6A9g3Xf7baB9u+PAW8RrPAQLErQu0ZlhfgH7Dng8kNA8U9gxacg/iODM5glUAazhMgICHJr/qWMYZNEW94C5sEMprTg2idDQKQgnC2Y+jm4iAXOAQ/34utgAwMRrCUwUAOEU7dAOJzFgnmQTlNhHujhoCY23bDTw1Yt8gagRQiK1EnBzwAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "73364153",
+      "name": "EnvironmentSpeakerPlayerRegion",
+      "limit": -1,
+      "size": {"x": 32, "y": 32},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": true,
+      "resizeableY": true,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["Region"],
+      "values": [
+        {"name": "messages", "definition": "Text", "display": 0, "defaults": ""},
         {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
-      "texture": "preview-images/region.png",
-      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABPSURBVFhH7dcxCgAgDATB0///WSOKQuxzzS4Ipsq0aZJGPFsb4CLE9gdYv8rOzgyoYtydfc++AAAAAAAAAAAAAAAAACBfRnV9p5mjC7AlTcXvEDMTrZ50AAAAAElFTkSuQmCC"
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/environment speaker player region.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAASUExURf///wAAAMwsQsyuCplXrwAAAMftmCkAAAAGdFJOU///////ALO/pL8AAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAYAAAAAEAAABgAAAAAQAAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAADp1fY4ytpsegAAAJlJREFUOE+tkIEOwiAMBUG2//9lR3t9wIC4qJdYYu/ciOkUaQ02fPajAx2/3wZ8U9DCTdCYgpxrND1Bd8DuA8YXAcUvgRdz8EJXWI0UsSmwxseg+Gp8nczohQcmfLIXFpghuBePgpSOSrG5usM/AiNODDwK3OjEgAXV6EQELnoQQQRHTPZCT6hF/bAX7RXX/3BN1o3uDit/nm946Qm/HkFjuQAAAABJRU5ErkJggg=="
     }
   ],
   "tilesets": []

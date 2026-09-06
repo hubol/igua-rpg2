@@ -9,6 +9,7 @@ import { objDevPlayer } from "../objects/dev/obj-dev-player";
 import { objEnvironmentFxBallons } from "../objects/effects/environment/obj-environment-fx-ballons";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
 import { objEnvironmentOverheatRegion } from "../objects/effects/environment/obj-environment-overheat-region";
+import { objEnvironmentSpeakerPlayerRegion } from "../objects/effects/environment/obj-environment-speaker-player-region";
 import { objEnvironmentSpeakerRegion } from "../objects/effects/environment/obj-environment-speaker-region";
 import { objAngelBallon } from "../objects/enemies/obj-angel-ballon";
 import { objAngelBrick } from "../objects/enemies/obj-angel-brick";
@@ -132,6 +133,7 @@ export const OgmoEntityResolvers = {
             entity.values.seed === 0 ? (entity.x + entity.y) : entity.values.seed,
         ),
     EnvironmentSpeakerRegion: objEnvironmentSpeakerRegion,
+    EnvironmentSpeakerPlayerRegion: objEnvironmentSpeakerPlayerRegion,
     Idol: objIdol,
     GateMap: objWorldMapGate,
     StashPocket: objStashPocket,

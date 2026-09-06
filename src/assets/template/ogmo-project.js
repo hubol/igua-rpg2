@@ -46,6 +46,7 @@ const ogmoEntityDefinitionToLiterals = {
     "Integer": literal("number"),
     "RGB": literal("string"),
     "String": literal("string"),
+    "Text": literal("string"),
 }
 
 const unknownLiteral = literal("unknown");
