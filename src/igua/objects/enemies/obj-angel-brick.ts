@@ -1,6 +1,7 @@
 import { Graphics, TilingSprite } from "pixi.js";
 import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Tx } from "../../../assets/textures";
+import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { container } from "../../../lib/pixi/container";
@@ -124,5 +125,12 @@ export function objAngelBrick(entity: OgmoEntities.EnemyBrick) {
         .mixin(mxnRpgStatusGapeMouthOnDamage, mouthObj)
         .handles("damaged", () => faceObj.pivot.y = 2)
         .step(() => faceObj.pivot.y = approachLinear(faceObj.pivot.y, 0, 0.2))
+        .coro(function* (self) {
+            while (true) {
+                yield () => self.mxnRpgStatusPotions.hasPotionToUse();
+                yield* self.mxnRpgStatusPotions.dramaUseAppropriatePotion();
+                yield sleep(1000);
+            }
+        })
         .filtered(new MapRgbFilter(...theme.tints.map));
 }

@@ -5,10 +5,8 @@ import { blendColor } from "../../lib/color/blend-color";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { RgbInt } from "../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../lib/math/rng";
-import { range } from "../../lib/range";
 import { Null } from "../../lib/types/null";
 import { DataLibraryBook } from "../data/data-library-book";
-import { DataPotion } from "../data/data-potion";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -52,9 +50,12 @@ export function scnLibraryOnTheBorder() {
     }
 
     lvl.EnemyBrick
-        .mxnRpgStatusPotions.heldPotionIds.push(
-            ...range(99).map((): DataPotion.Id => "HotDogKetchupMustardOnionRelish"),
-        );
+        .coro(function* (self) {
+            while (true) {
+                yield () => self.mxnRpgStatusPotions.heldPotionIds.length === 0;
+                self.mxnRpgStatusPotions.heldPotionIds.push("HotDogKetchupMustardOnionRelish");
+            }
+        });
 
     patrollerNpc
         .coro(function* (self) {

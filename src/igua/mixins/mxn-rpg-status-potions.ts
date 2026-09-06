@@ -1,4 +1,4 @@
-import { Container, DisplayObject } from "pixi.js";
+import { Container } from "pixi.js";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { interpr, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -45,16 +45,17 @@ function inferPotionToUse(
         return "PoisonRestore";
     }
 
-    if (remainingHealthRatio < 0.6 && potionIds.includes("RestoreHealth")) {
-        return "RestoreHealth";
-    }
+    const healthRestoreMax = remainingHealthRatio < 0.34
+        ? Number.MAX_SAFE_INTEGER
+        : Math.max(0, (status.healthMax - status.health) * 1.2);
 
-    if (remainingHealthRatio < 0.6 && potionIds.includes("RestoreHealthRestaurantLevel1")) {
-        return "RestoreHealthRestaurantLevel1";
-    }
+    const healthRestoringPotionId = potionIds.find(id => {
+        const restoreValue = DataPotion.getById(id).healthRestore?.(status) ?? 0;
+        return restoreValue < healthRestoreMax && restoreValue > 0;
+    });
 
-    if (remainingHealthRatio < 0.5 && potionIds.includes("RestoreHealthRestaurantLevel2")) {
-        return "RestoreHealthRestaurantLevel2";
+    if (healthRestoringPotionId) {
+        return healthRestoringPotionId;
     }
 
     if (status.conditions.wetness.value <= 0 && Rng.float() < 0.3 && potionIds.includes("Wetness")) {
