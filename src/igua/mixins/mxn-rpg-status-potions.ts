@@ -66,6 +66,10 @@ function inferPotionToUse(
         return "AttributeStrengthUp";
     }
 
+    if (remainingHealthRatio < 0.1) {
+        return Rng.item(potionIds);
+    }
+
     return null;
 }
 
