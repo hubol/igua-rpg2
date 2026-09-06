@@ -7,6 +7,7 @@ import { DramaPotions } from "../drama/drama-potions";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnSign } from "../mixins/mxn-sign";
 import { playerObj } from "../objects/obj-player";
 import { CtxTerrainPipe } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
@@ -16,6 +17,12 @@ export function scnOhioPlateauOfIndustry() {
     CtxTerrainPipe.value.texture = NoAtlasTx.Terrain.Pipe.Grate;
     const lvl = Lvl.OhioPlateauOfIndustry();
     enrichSoupMakerNpc(lvl);
+
+    lvl.CollegeDoor
+        .scaled(2.25, 2.25);
+
+    lvl.FamousLogo
+        .mixin(mxnSign, "Very famous logo for the Ohio College of School.");
 }
 
 function enrichSoupMakerNpc(lvl: LvlType.OhioPlateauOfIndustry) {
