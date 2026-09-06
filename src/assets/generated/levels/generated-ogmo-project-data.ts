@@ -51,6 +51,7 @@ export namespace OgmoEntities {
   export type IguanaNpcPatrolMarker = OgmoFactory.EntityBase<{ speed: number; delayMin: number; delayMax: number; name: string; depth: number }>;
   export type OutOfOrderSign = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type EnvironmentBallons = OgmoFactory.EntityBase<{ count: number; seed: number; name: string; depth: number }>;
+  export type EnvironmentSpeakerRegion = OgmoFactory.EntityBase<{ speakerName: string; speakerTintSecondary: string; messages: string; name: string; depth: number }>;
 }
 
 export interface OgmoEntityResolverBase {
@@ -102,4 +103,5 @@ export interface OgmoEntityResolverBase {
   IguanaNpcPatrolMarker: (entity: OgmoEntities.IguanaNpcPatrolMarker) => unknown;
   OutOfOrderSign: (entity: OgmoEntities.OutOfOrderSign) => unknown;
   EnvironmentBallons: (entity: OgmoEntities.EnvironmentBallons) => unknown;
+  EnvironmentSpeakerRegion: (entity: OgmoEntities.EnvironmentSpeakerRegion) => unknown;
 }

@@ -264,7 +264,7 @@
         {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": false},
+      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": false},
       "texture": "preview-images/iguana.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAqCAYAAAAeeGN5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKCSURBVGhD3Ze9LwRBFMD3rkSj1IpKdHdKIhIViY+GRM21/gaFWotKIUHhEJ1ERKU4najEXyDRoD33xjzm5mbmzcebPfFLLvt2dnZ2fvNmZ/YqRUZaE7NtGQrqjzdZn5elcV1CJacQe8MuEZUcUqwN+oog3EJsjYWKIJxCVXn8F7CMSmxWEK7s9Fdm+14GNPWVT7Kv/ZEJkNBxSVkv7K02uzrYOFm21vWWSZDQMUn1FOgSOjYpUihQpLb8IaOieGgOyqi7vNJBhoKu1YwSAXzq9JAgAuC5Xt7uIEPBj0xIJ011uVYkvcMUqpCQiRltbyHG94RCPNwlY3pHsL7XohAgg1nZXzsXR5Xa6nrxcHIkz37ZPF4SR3h/qqEigEsCEVkqMStA9OeMj1DZiA7FZMeX1tmAtW0d18sPy7PrOjnNUgkR4aBCyWBmWlvX4R2bXpSBP6bRt22aCFyHLwJSpjYyJKNIEoVUEUS/jp82TplkESBCJhSUqdpecBYR4O5CBuGY9hVALVc/OI1LM5tIIqaNEs6h3ISQyb5nJGRHFdJF9L8BPZnJlhUGIZcI0FUAi0EpUyxhUTBJID0XovaTWAKkXBJIf2U61HfnyE76YmyoLCFOESD6q/kvYh2Z3NnhzgrQl8xMXp4WldEN9sFyjo6anZnnYXG8HXsTRx9M94CISvvlgC1DZEMghJ1CfIT0e96v6uJZtoxwSJHTTO8UYCqjGFpoteEnT7PgHA3q4R9PezL6ZXC8ISMzpnuQ1OxYb/YdRbVzlAiSS8g4zUKmAwr4igBq3fmppozSiVqadza/O4NHH6i6HFKl7zOqFGdWgGAZ0whT89x2z9Xhq/hhnLYAFMUXU801m+qL9IoAAAAASUVORK5CYII="
     },
@@ -2441,6 +2441,54 @@
       "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
       "texture": "preview-images/environment fx ballons.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAuCAMAAAB6WzuLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkUExURakQzL453cxlENRh7t2YC+mK/4dBB+7MBW8Hh///ALCwsAAAAGQSiIMAAAAMdFJOU///////////////ABLfzs4AAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAYAAAAAEAAABgAAAAAQAAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAADp1fY4ytpsegAAASFJREFUOE+90kGWhCAMBFAVDPR4//tOUikgMOqiF1MLJcl/8Lpxu5DN48USdAn2fSc6PF5Yr4uUYAhyzkBbA0rSearZDqEoRcRJrd3UM9kUJpePSJZD96jDVN3HpmpE1IiUSPRRdR8KbJRFPpKPsYs+1FB0U4wMYQ+bjuSiv8oGMT6yk3CaCid2Bs5pxAEOJHGAo7w7Jfx1CNsxK/lr7I44YzgYidfoaZfYYnc0G6048+AaJ4OKUwuGaDbjxTCoWjeKm68OiYKG69GPAoarsMueuPJ0EQ/auUL0O+BqkB++Gf1WuHokoWzkWXxPporkZZN7MleNTN1bMnVn0UnsP5EweCZtsohAunkhbfZGOHwlmK5iITb/H7JcFvIN4bvnun4BFesu9jaN5A8AAAAASUVORK5CYII="
+    },
+    {
+      "exportID": "73290192",
+      "name": "EnvironmentSpeakerRegion",
+      "limit": -1,
+      "size": {"x": 32, "y": 32},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": true,
+      "resizeableY": true,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["Region"],
+      "values": [
+        {"name": "speakerName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "speakerTintSecondary", "definition": "RGB", "display": 0, "defaults": "#000000"},
+        {"name": "messages", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+      ],
+      "isRegion": true,
+      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "texture": "preview-images/region.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABPSURBVFhH7dcxCgAgDATB0///WSOKQuxzzS4Ipsq0aZJGPFsb4CLE9gdYv8rOzgyoYtydfc++AAAAAAAAAAAAAAAAACBfRnV9p5mjC7AlTcXvEDMTrZ50AAAAAElFTkSuQmCC"
     }
   ],
   "tilesets": []
