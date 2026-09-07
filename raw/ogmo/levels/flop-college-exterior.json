@@ -172,6 +172,8 @@
           "_eid": "88296692",
           "x": 384,
           "y": 232,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnFlopCollegeInterior", "checkpointName": "fromExterior", "name": "CollegeDoor", "depth": 0}
@@ -327,6 +329,30 @@
           "originY": 1,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 235,
+          "y": 301,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#93ce48",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 566,
+          "y": 298,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#93ce48",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -909,6 +935,103 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 128,
+          "y": 135,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "terrain/earth/asterisk.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 454,
+          "y": 132,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "terrain/earth/asterisk.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 577,
+          "y": 159,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "terrain/earth/asterisk.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 749,
+          "y": 207,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "terrain/earth/asterisk.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 101,
+      "gridCellsY": 43,
+      "decals": [
+        {
+          "x": 212,
+          "y": 298,
+          "scaleX": 3,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#93ce48",
+          "texture": "terrain/distant/hills 500.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 84,
+          "y": 244,
+          "scaleX": 4.1,
+          "scaleY": 2.7,
+          "rotation": 0,
+          "tint": "#93ce48",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 527,
+          "y": 236,
+          "scaleX": 4.1,
+          "scaleY": 2.7,
+          "rotation": 0,
+          "tint": "#93ce48",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"

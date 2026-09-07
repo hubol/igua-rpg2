@@ -90,6 +90,7 @@ export namespace DataNpcPersona {
             OhioPartier3: { job: "Doctor", name: "Nicky", looksId: "Trance" },
             OhioPartier4: { job: "Doctor", name: "Orkie", looksId: "Trance" },
             OhioPartier5: { job: "Doctor", name: "Icky", looksId: "Trance" },
+            GamblingOmen: { job: "Gambler", name: "Roy", looksId: "SuspiciousHat" },
             __Fallback__: { job: "???", name: "???", looksId: "MintyJourney" },
         } satisfies Record<string, Model>,
     );

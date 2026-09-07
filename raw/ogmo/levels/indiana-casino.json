@@ -159,6 +159,20 @@
           "originY": 8,
           "tint": "#ff0000",
           "values": {"name": "PityMarker", "depth": 0}
+        },
+        {
+          "name": "IguanaNpcPatrolMarker",
+          "id": 14,
+          "_eid": "98763038",
+          "x": 344,
+          "y": 280,
+          "originX": 15,
+          "originY": 12,
+          "nodes": [
+            {"x": 416, "y": 280},
+            {"x": 232, "y": 280}
+          ],
+          "values": {"speed": 1.3, "delayMin": 333, "delayMax": 3000, "name": "", "depth": 0}
         }
       ]
     },
@@ -300,6 +314,17 @@
           "originY": 52,
           "flippedX": true,
           "values": {"personaName": "PityBoss", "name": "PityBossNpc", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 1,
+          "_eid": "90326278",
+          "x": 344,
+          "y": 288,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": false,
+          "values": {"personaName": "GamblingOmen", "name": "GamblingOmenNpc", "depth": 0}
         }
       ]
     },
@@ -324,7 +349,20 @@
       "gridCellHeight": 8,
       "gridCellsX": 168,
       "gridCellsY": 42,
-      "entities": []
+      "entities": [
+        {
+          "name": "EnvironmentSpeakerPlayerRegion",
+          "id": 0,
+          "_eid": "73364153",
+          "x": 1157,
+          "y": 211,
+          "width": 80,
+          "height": 72,
+          "originX": 0,
+          "originY": 0,
+          "values": {"messages": "A fantastic little worm.", "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "TerrainDecals",
@@ -1788,6 +1826,127 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 1128,
+          "y": 184,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#c16ff3",
+          "texture": "casino/decoration/mister 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 856,
+          "y": 192,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#c16ff3",
+          "texture": "casino/decoration/mister 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 624,
+          "y": 248,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#c16ff3",
+          "texture": "casino/decoration/mister 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 512,
+          "y": 96,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#c16ff3",
+          "texture": "casino/decoration/mister 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 384,
+          "y": 272,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#c16ff3",
+          "texture": "casino/decoration/mister 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 168,
+      "gridCellsY": 42,
+      "decals": [
+        {
+          "x": 1128,
+          "y": 80,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#c16ff3",
+          "texture": "casino/decoration/mister 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 840,
+          "y": 80,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#c16ff3",
+          "texture": "casino/decoration/mister 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 624,
+          "y": 144,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#c16ff3",
+          "texture": "casino/decoration/mister 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 280,
+          "y": 48,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#c16ff3",
+          "texture": "casino/decoration/mister 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"

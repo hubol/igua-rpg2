@@ -9,8 +9,10 @@ import { DramaFacts } from "../drama/drama-facts";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnShow } from "../mixins/mxn-show";
 import { mxnSlotMachineBetButton } from "../mixins/mxn-slot-machine-bet-button";
 import { mxnSlotMachineSecondaryDisplay } from "../mixins/mxn-slot-machine-secondary-display";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objSlotMachine } from "../objects/obj-slot-machine";
 import { Rpg } from "../rpg/rpg";
 
@@ -41,6 +43,7 @@ export function scnCasino() {
                 lineHighlightTint: 0xFF5200,
             },
         )
+            .mixin(mxnSpeaker, { name: "Simply 7's", tintPrimary: 0xFFBF00, tintSecondary: 0x65BF21 })
             .at(lvl.SlotMachineDisplay0)
             .zIndexed(ZIndex.Entities)
             .show();
@@ -71,6 +74,7 @@ export function scnCasino() {
                 lineHighlightTint: 0xFF5E42,
             },
         )
+            .mixin(mxnSpeaker, { name: "Stupid Flower", tintPrimary: 0xFF5E42, tintSecondary: 0x009E8E })
             .at(lvl.SlotMachineDisplay1)
             .zIndexed(ZIndex.Entities)
             .show();
@@ -118,5 +122,14 @@ export function scnCasino() {
                     yield* show("Okay! Let me know if you need something!");
                 }
             });
+    }
+
+    {
+        lvl.GamblingOmenNpc
+            .mixin(
+                mxnShow,
+                "I had a great time at the casino!",
+                "I lost all of my valuables and there is a poisonous hell outside.",
+            );
     }
 }
