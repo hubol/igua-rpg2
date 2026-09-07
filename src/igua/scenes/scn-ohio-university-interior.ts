@@ -1,4 +1,5 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { DataFact } from "../data/data-fact";
 import { DramaClassroom } from "../drama/drama-classroom";
 import { DramaPotions } from "../drama/drama-potions";
@@ -8,11 +9,13 @@ import { Cutscene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnDoorAutoUnlock } from "../mixins/mxn-door-auto-unlock";
 import { mxnRpgStatus } from "../mixins/mxn-rpg-status";
+import { CtxTerrainPipe } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { RpgQuest } from "../rpg/rpg-quests";
 
 export function scnOhioUniversityInterior() {
+    CtxTerrainPipe.value.texture = NoAtlasTx.Terrain.Pipe.BlackSolidLine2px;
     const lvl = Lvl.OhioUniversityInterior();
     const quest = Rpg.quest("OhioUniversity.Bouncer.ReachedTop");
     enrichOlgaClassroom(lvl, quest);

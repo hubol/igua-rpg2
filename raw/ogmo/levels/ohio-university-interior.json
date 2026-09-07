@@ -233,7 +233,7 @@
           "id": 10,
           "_eid": "90326278",
           "x": 1712,
-          "y": 168,
+          "y": 175,
           "originX": 20,
           "originY": 52,
           "flippedX": true,
@@ -1838,7 +1838,7 @@
           "id": 56,
           "_eid": "95769929",
           "x": 1688,
-          "y": 168,
+          "y": 175,
           "width": 48,
           "values": {"name": "", "visible": true, "depth": 0}
         }
@@ -2015,7 +2015,7 @@
         },
         {
           "x": 983,
-          "y": 93,
+          "y": 81,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -2039,7 +2039,7 @@
         },
         {
           "x": 937,
-          "y": 197,
+          "y": 208,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -2053,7 +2053,7 @@
           "x": 614,
           "y": 51,
           "scaleX": 10.25,
-          "scaleY": 3.3,
+          "scaleY": 3.625,
           "rotation": 0,
           "tint": "#ffd600",
           "texture": "shapes/square32.png",
@@ -2098,10 +2098,10 @@
           "values": {"name": ""}
         },
         {
-          "x": 938,
-          "y": 134,
+          "x": 942,
+          "y": 122,
           "scaleX": 4,
-          "scaleY": 0.7,
+          "scaleY": 1.4125,
           "rotation": 0,
           "tint": "#ffd600",
           "texture": "shapes/square32.png",
@@ -2158,7 +2158,7 @@
           "values": {"name": ""}
         },
         {
-          "x": 1711,
+          "x": 1703,
           "y": 177,
           "scaleX": 1,
           "scaleY": 1,
@@ -2182,7 +2182,7 @@
           "values": {"name": ""}
         },
         {
-          "x": 1344,
+          "x": 1352,
           "y": 226,
           "scaleX": 12,
           "scaleY": 5.125,
@@ -2194,7 +2194,7 @@
           "values": {"name": ""}
         },
         {
-          "x": 1706,
+          "x": 1714,
           "y": 218,
           "scaleX": 2,
           "scaleY": 7,
@@ -2206,7 +2206,7 @@
           "values": {"name": ""}
         },
         {
-          "x": 1666,
+          "x": 1661,
           "y": 218,
           "scaleX": 4,
           "scaleY": 0.7,
@@ -2218,7 +2218,7 @@
           "values": {"name": ""}
         },
         {
-          "x": 1385,
+          "x": 1393,
           "y": 185,
           "scaleX": 1,
           "scaleY": 1,
@@ -2230,9 +2230,9 @@
           "values": {"name": ""}
         },
         {
-          "x": 1426,
+          "x": 1434,
           "y": 135,
-          "scaleX": 7.625,
+          "scaleX": 7.125,
           "scaleY": 3,
           "rotation": 0,
           "tint": "#ffd600",
@@ -2242,7 +2242,7 @@
           "values": {"name": ""}
         },
         {
-          "x": 1569,
+          "x": 1577,
           "y": 244,
           "scaleX": 1,
           "scaleY": 1,
@@ -2315,7 +2315,7 @@
         },
         {
           "x": 963,
-          "y": 76,
+          "y": 68,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -2327,7 +2327,7 @@
         },
         {
           "x": 956,
-          "y": 215,
+          "y": 222,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -2338,7 +2338,7 @@
           "values": {"name": ""}
         },
         {
-          "x": 1362,
+          "x": 1367,
           "y": 170,
           "scaleX": 1,
           "scaleY": 1,
@@ -2350,7 +2350,7 @@
           "values": {"name": ""}
         },
         {
-          "x": 1728,
+          "x": 1726,
           "y": 192,
           "scaleX": 1,
           "scaleY": 1,
@@ -2359,6 +2359,42 @@
           "texture": "light/glass metal sheen 20px.png",
           "originX": 0.5,
           "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 580,
+          "y": 160,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/signage/rainbow gradient.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1744,
+          "y": 135,
+          "scaleX": 7.125,
+          "scaleY": 3,
+          "rotation": 0,
+          "tint": "#ffd600",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 1124,
+          "y": 143,
+          "scaleX": 7.125,
+          "scaleY": 3,
+          "rotation": 0,
+          "tint": "#ffd600",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
           "values": {"name": ""}
         }
       ],
