@@ -931,6 +931,8 @@
           "_eid": "88296692",
           "x": 128,
           "y": 168,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnGreatTowerBalcony", "checkpointName": "fromEfficient", "name": "", "depth": 0}
@@ -941,6 +943,8 @@
           "_eid": "88296692",
           "x": 624,
           "y": 160,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnGreatTowerBalcony", "checkpointName": "fromEfficient", "name": "", "depth": 0}
@@ -951,6 +955,8 @@
           "_eid": "88296692",
           "x": 72,
           "y": 472,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnGreatTowerBalcony", "checkpointName": "fromEfficient", "name": "", "depth": 0}
@@ -961,6 +967,8 @@
           "_eid": "88296692",
           "x": 616,
           "y": 480,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnGreatTowerBalcony", "checkpointName": "fromEfficient", "name": "", "depth": 0}
@@ -971,6 +979,8 @@
           "_eid": "88296692",
           "x": 1088,
           "y": 88,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnGreatTowerBalcony", "checkpointName": "fromEfficient", "name": "", "depth": 0}
@@ -981,6 +991,8 @@
           "_eid": "88296692",
           "x": 1376,
           "y": 472,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnGreatTowerBalcony", "checkpointName": "fromEfficient", "name": "", "depth": 0}
@@ -991,6 +1003,8 @@
           "_eid": "88296692",
           "x": 144,
           "y": 696,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnGreatTowerBalcony", "checkpointName": "fromEfficient", "name": "NerdDoor", "depth": 0}
@@ -1001,6 +1015,8 @@
           "_eid": "88296692",
           "x": 688,
           "y": 744,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnGreatTowerBalcony", "checkpointName": "fromEfficient", "name": "", "depth": 0}
@@ -1024,6 +1040,18 @@
           "originX": 91,
           "originY": 129,
           "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSpeakerPlayerRegion",
+          "id": 12,
+          "_eid": "73364153",
+          "x": 136,
+          "y": 398,
+          "width": 184,
+          "height": 72,
+          "originX": 0,
+          "originY": 0,
+          "values": {"messages": "...Interesting sentiment.", "name": "", "depth": 0}
         }
       ]
     },
@@ -5556,6 +5584,18 @@
     {
       "name": "ParallaxDecals",
       "_eid": "17093961",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 192,
+      "gridCellsY": 108,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
       "offsetX": 0,
       "offsetY": 0,
       "gridCellWidth": 8,

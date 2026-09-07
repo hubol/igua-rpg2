@@ -26,7 +26,6 @@ import { ask, show } from "../drama/show";
 import { Cutscene, DevKey, layers, scene } from "../globals";
 import { mxnFxAlphaVisibility } from "../mixins/effects/mxn-fx-alpha-visibility";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { mxnSign } from "../mixins/mxn-sign";
 import { mxnSoundLoop } from "../mixins/mxn-sound-loop";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objCharacterGamblingExpert } from "../objects/characters/obj-character-gambling-expert";
@@ -289,9 +288,6 @@ function enrichRoom3(lvl: LvlType.EfficientHome) {
             yield* show("Thank you for not wearing your shoes in my apartment.");
             yield* DramaQuests.complete("GreatTower.EfficientHome.NeatFreak.DidntWearEquipment");
         });
-
-    lvl.FurnitureArtworkSaying0
-        .mixin(mxnSign, "...Interesting sentiment.");
 }
 
 function enrichRoom4(lvl: LvlType.EfficientHome) {
