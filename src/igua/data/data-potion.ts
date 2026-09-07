@@ -472,7 +472,15 @@ export namespace DataPotion {
                 return;
             case "AnnoyIguanas":
                 const iguanaNpcObjs = Instances(objIguanaNpc).filter(obj => obj.visible);
-                iguanaNpcObjs.forEach(obj => obj.speed.y = -2);
+                iguanaNpcObjs.forEach(obj => {
+                    // @ts-expect-error Shut up
+                    if (target !== obj) {
+                        obj.speed.y = -2;
+                    }
+                });
+                if (target !== playerObj) {
+                    return;
+                }
                 const collidedIguanaNpcObj = playerObj.collidesOne(iguanaNpcObjs);
                 if (collidedIguanaNpcObj) {
                     Cutscene.play(

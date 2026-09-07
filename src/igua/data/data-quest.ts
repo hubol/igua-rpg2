@@ -327,6 +327,15 @@ export namespace DataQuest {
                     drop: { kind: "key_item", id: "MagicKey" },
                 },
             },
+            "OhioUniversity.Bouncer.ReachedTop": {
+                flags: {
+                    y: Null<Integer>(),
+                },
+                reward: {
+                    kind: "nothing",
+                    countCompletions: "once",
+                },
+            },
             __Fallback__: {
                 flags: null,
                 reward: {

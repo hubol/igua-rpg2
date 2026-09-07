@@ -175,7 +175,7 @@
           "originX": 0,
           "originY": 0,
           "tint": "#ff5c00",
-          "values": {"speakerName": "Logo", "speakerTintSecondary": "#ffffff", "messages": "Very famous logo for the Ohio College of School.", "name": "", "depth": 0}
+          "values": {"speakerName": "Logo", "speakerTintSecondary": "#ffffff", "name": "", "depth": 0, "messages": "Very famous logo for the Ohio College of School."}
         },
         {
           "name": "EnvironmentSpeakerRegion",
@@ -188,7 +188,7 @@
           "originX": 0,
           "originY": 0,
           "tint": "#858585",
-          "values": {"speakerName": "Statue", "speakerTintSecondary": "#373737", "messages": "For some reason he is here.", "name": "", "depth": 0}
+          "values": {"speakerName": "Statue", "speakerTintSecondary": "#373737", "name": "", "depth": 0, "messages": "For some reason he is here."}
         }
       ]
     },
@@ -270,6 +270,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromCasinoRight", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 3,
+          "_eid": "19953026",
+          "x": 688,
+          "y": 784,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromUniversity", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -606,7 +617,7 @@
         },
         {
           "name": "Door",
-          "id": 9,
+          "id": 13,
           "_eid": "88296692",
           "x": 618,
           "y": 676,
@@ -614,7 +625,7 @@
           "height": 106,
           "originX": 0,
           "originY": -4.416666666666666,
-          "values": {"sceneName": "scnOhioUniversityInterior", "checkpointName": "fromPlateau", "name": "CollegeDoor", "depth": 0}
+          "values": {"sceneName": "scnOhioUniversityInterior", "checkpointName": "fromPlateau", "name": "", "depth": 0}
         }
       ]
     },
@@ -2875,6 +2886,58 @@
           "rotation": 0,
           "tint": "#ff5c00",
           "texture": "shapes/rectangle scribbled 58 x 46.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 672,
+          "y": 1232,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffd600",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 688,
+          "y": 1248,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ff5c00",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 704,
+          "y": 1264,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#2474ae",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 720,
+          "y": 1280,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#75a9ce",
+          "texture": "shapes/square32.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},

@@ -23,6 +23,10 @@ function* memorize(factId: DataFact.Id, ...messages: string[]) {
     const [message, ...rest] = messages;
     yield* show(message, ...rest);
 
+    yield* memorize.silently(factId);
+}
+
+memorize.silently = function* memorizeSilently (factId: DataFact.Id) {
     const result = Rpg.character.facts.memorize(factId);
 
     const factObj = objFxFact(playerObj).at(DramaLib.Speaker.getWorldCenter());
@@ -70,7 +74,7 @@ function* memorize(factId: DataFact.Id, ...messages: string[]) {
             yield () => factObj.destroyed;
         }
     }
-}
+};
 
 const factTxs = Tx.Effects.FactFigure.split({ count: 3 });
 

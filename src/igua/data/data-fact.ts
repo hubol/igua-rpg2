@@ -58,6 +58,10 @@ export namespace DataFact {
                     "Sometimes, food can contain metal. This is generally harmless and sometimes even exciting.",
                 ],
             },
+            PerfectHotDog: {
+                heading: "About perfect hot dog",
+                messages: ["The perfect hot dog requires ketchup, mustard, onion, and relish."],
+            },
             "__Fallback__": {
                 heading: "About a bug",
                 messages: ["If you are reading this, it is a bug with the facts mechanic."],

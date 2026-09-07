@@ -13,7 +13,7 @@ import { Rpg } from "../rpg/rpg";
 import { DramaFacts } from "./drama-facts";
 import { ask, show } from "./show";
 
-function* teach(classroomId: string) {
+function* teach(classroomId: string, studentObjs: DisplayObject[] = Instances(objIguanaNpc)) {
     const classroom = Rpg.classroom(classroomId);
 
     Cutscene.setCurrentSpeaker(playerObj);
@@ -27,33 +27,40 @@ function* teach(classroomId: string) {
 
     for (const factId of Rpg.character.facts.memorized) {
         if (classroom.teach(factId).accepted) {
-            const [message, ...messages] = DataFact.getById(factId).messages;
-            yield* show(message, ...messages);
-
-            const npcObjs = Instances(objIguanaNpc);
-
-            for (let i = 0; i < npcObjs.length; i++) {
-                const npcObj = npcObjs[i];
-
-                const fxFactObj = DramaFacts.objFxFact(npcObj)
-                    .mixin(mxnMakesTargetBounce, npcObj)
-                    .at(playerObj)
-                    .add(i * -20, 0)
-                    .show();
-
-                if (i === npcObjs.length - 1) {
-                    yield () => fxFactObj.destroyed;
-                }
-                else {
-                    yield sleep(200);
-                }
-            }
+            yield* fxTeachFactToStudentObjs(factId, studentObjs);
         }
     }
 
     yield sleep(1000);
 
     yield* show("And that concludes my lecture.");
+}
+
+function* teachToPlayerAndStudentObjs(factId: DataFact.Id, studentObjs: DisplayObject[]) {
+    yield* fxTeachFactToStudentObjs(factId, studentObjs);
+    yield* DramaFacts.memorize.silently(factId);
+}
+
+function* fxTeachFactToStudentObjs(factId: DataFact.Id, studentObjs: DisplayObject[]) {
+    const [message, ...messages] = DataFact.getById(factId).messages;
+    yield* show(message, ...messages);
+
+    for (let i = 0; i < studentObjs.length; i++) {
+        const npcObj = studentObjs[i];
+
+        const fxFactObj = DramaFacts.objFxFact(npcObj)
+            .mixin(mxnMakesTargetBounce, npcObj)
+            .at(playerObj)
+            .add(i * -20, 0)
+            .show();
+
+        if (i === studentObjs.length - 1) {
+            yield () => fxFactObj.destroyed;
+        }
+        else {
+            yield sleep(200);
+        }
+    }
 }
 
 function* teachSingleFact(prompt: string) {
@@ -97,4 +104,5 @@ function mxnMakesTargetBounce(obj: MxnFxFigureTransfer, targetObj: DisplayObject
 export const DramaClassroom = {
     teach,
     teachSingleFact,
+    teachToPlayerAndStudentObjs,
 };
