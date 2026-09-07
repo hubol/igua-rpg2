@@ -146,13 +146,14 @@ export function objDoor({ sceneName, checkpointName }: ObjDoorArgs) {
                     yield sleepf(f0);
                 }
             }
+        })
+        .coro(function* (self) {
+            const seed = (sceneName.charCodeAt(sceneName.length - 1) || 0)
+                + (checkpointName.charCodeAt(checkpointName.length - 1) || 0);
+            if (seed % 2 === 0) {
+                self.flipH();
+            }
         });
-
-    const seed = (sceneName.charCodeAt(sceneName.length - 1) || 0)
-        + (checkpointName.charCodeAt(checkpointName.length - 1) || 0);
-    if (seed % 2 === 0) {
-        obj.flipH();
-    }
 
     return obj
         .track(objDoor);
