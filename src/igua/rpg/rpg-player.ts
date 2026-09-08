@@ -169,6 +169,8 @@ export class RpgPlayer {
     }
 
     die() {
+        this.temporaryEffects.clear();
+
         const valuablesCount = this._wallet.count("valuables");
         this._wallet.spend("valuables", valuablesCount);
         const emptied = this._pocket.empty("death_tax");
