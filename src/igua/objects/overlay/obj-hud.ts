@@ -1,5 +1,6 @@
 import { Container, DisplayObject, Graphics, Point, Rectangle, Sprite, Texture } from "pixi.js";
 import { objText } from "../../../assets/fonts";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Environment } from "../../../lib/environment";
 import { AsshatTicker } from "../../../lib/game-engine/asshat-ticker";
@@ -667,10 +668,12 @@ function objOverheatBuildUp() {
 
 function objLocalTemporaryBuffs() {
     const buffTexts = new Array<string>();
+    let previousBuffTextsLength = 0;
+    let stepsCount = 0;
 
     return objText.MediumIrregular("", { tint: Consts.StatusTextTint })
         .step(text => {
-            // TODO buff up/down SFX by comparing previous length?
+            stepsCount++;
             const idol = RpgSceneIdol.value.idol;
             buffTexts.length = 0;
 
@@ -681,6 +684,16 @@ function objLocalTemporaryBuffs() {
             for (const effect of Rpg.character.temporaryEffects.effects) {
                 buffTexts.push(DataTemporaryEffect.getById(effect.id).hudText);
             }
+
+            if (stepsCount > 3 && buffTexts.length !== previousBuffTextsLength) {
+                (buffTexts.length > previousBuffTextsLength
+                    ? Sfx.Effect.TemporaryEffectGain
+                    : Sfx.Effect.TemporaryEffectLose)
+                    .rate(0.95, 1.05)
+                    .play();
+            }
+
+            previousBuffTextsLength = buffTexts.length;
 
             text.visible = buffTexts.length > 0;
             if (text.visible) {
