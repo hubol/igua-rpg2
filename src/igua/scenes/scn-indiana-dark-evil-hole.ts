@@ -7,11 +7,13 @@ import { Cutscene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { objEsotericWizardOfLightStatue } from "../objects/esoteric/obj-esoteric-wizard-of-light-statue";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 
 export function scnIndianaDarkEvilHole() {
     const lvl = Lvl.IndianaDarkEvilHole();
+    objEsotericWizardOfLightStatue().at(lvl.WizardStatueMarker).show();
     enrichShoeHaverNpc(lvl);
     enrichEnemies(lvl);
 }

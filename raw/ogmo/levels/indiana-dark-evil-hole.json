@@ -16,7 +16,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 167,
       "gridCellsY": 96,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 656,
+          "y": 240,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "WizardStatueMarker", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",
@@ -285,7 +297,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 177635116849500,
-          "values": {"name": "AngelSuggestive", "depth": 0, "variant": "level0"}
+          "values": {"name": "AngelSuggestive", "depth": 0, "variant": "level0", "safeTint": "#ffffff"}
         },
         {
           "name": "EnemySpikeBall",
@@ -377,17 +389,6 @@
           "originY": 41,
           "uid": 177635122437101,
           "values": {"name": "AngelMiffed", "depth": 0, "variant": "level3"}
-        },
-        {
-          "name": "Idol",
-          "id": 23,
-          "_eid": "79655020",
-          "x": 656,
-          "y": 240,
-          "originX": 32,
-          "originY": 97,
-          "uid": 177635176488102,
-          "values": {"name": "", "depth": 0}
         },
         {
           "name": "IntelligenceSign",
@@ -753,6 +754,18 @@
     {
       "name": "ParallaxDecals",
       "_eid": "17093961",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 167,
+      "gridCellsY": 96,
+      "decals": [],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
       "offsetX": 0,
       "offsetY": 0,
       "gridCellWidth": 8,

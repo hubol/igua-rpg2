@@ -28,6 +28,26 @@ export class RpgPlayerTemporaryEffects {
         this._computeBuffMutatorFns();
     }
 
+    getRemainingUnit(id: DataTemporaryEffect.Id) {
+        for (const effect of this._state.effects) {
+            if (effect.id === id) {
+                return effect.duration.remaining / effect.duration.initial;
+            }
+        }
+
+        return 0;
+    }
+
+    has(id: DataTemporaryEffect.Id) {
+        for (const effect of this._state.effects) {
+            if (effect.id === id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     add(id: DataTemporaryEffect.Id, durationSeconds: Seconds) {
         const durationTicks = Math.ceil(durationSeconds * 60);
         for (const effect of this._state.effects) {

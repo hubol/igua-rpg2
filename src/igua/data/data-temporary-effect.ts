@@ -16,6 +16,12 @@ export namespace DataTemporaryEffect {
                     model.attributes.intelligence += 1;
                 },
             },
+            LightFromWizardStatue: {
+                hudText: "Wizard's likeness improves vision in dark",
+                buffs: (model) => {
+                    model.esoteric.nightVisionLevel += 1;
+                },
+            },
             __Fallback__: {
                 hudText: "This is a bug",
                 buffs: () => {},
