@@ -261,6 +261,7 @@ export namespace DataQuest {
                     readCalendar: false,
                     spokeWithBaker: false,
                     spokeWithAidar: false,
+                    learnedMishasAge: Null<Integer>(),
                 },
                 reward: {
                     // TODO

@@ -1,5 +1,6 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
+import { Rng } from "../../lib/math/rng";
 import { DataFact } from "../data/data-fact";
 import { DramaClassroom } from "../drama/drama-classroom";
 import { DramaPotions } from "../drama/drama-potions";
@@ -27,6 +28,7 @@ function enrichOlgaClassroom(
     lvl: LvlType.OhioUniversityInterior,
     classroomUnlockedQuest: RpgQuest<"OhioUniversity.Bouncer.ReachedTop">,
 ) {
+    const mishaBirthdayQuest = Rpg.quest("MishaHouse.Birthday");
     const studentObjs = [
         lvl.OlgaStudentNpc0,
         lvl.OlgaStudentNpc1,
@@ -42,6 +44,7 @@ function enrichOlgaClassroom(
                 `Hello, ${Rpg.character.attributes.names.current}.`,
                 "Teach me something",
                 classroomUnlockedQuest.isCompletable ? "I want to teach" : null,
+                mishaBirthdayQuest.flags.spokeWithAidar ? "About Misha's age" : null,
                 "Bye, Olga!",
             );
 
@@ -62,6 +65,14 @@ function enrichOlgaClassroom(
                     "However, the classroom door is locked.",
                     "Someone went into the vents to try and unlock it...",
                     "Maybe there is a way to encourage them to unlock it sooner?",
+                );
+            }
+            else if (response === 2) {
+                mishaBirthdayQuest.flags.learnedMishasAge ??= Rng.intc(56, 95);
+
+                yield* show(
+                    "Misha's age?",
+                    `He is turning ${mishaBirthdayQuest.flags.learnedMishasAge} today!`,
                 );
             }
             else {
