@@ -1,6 +1,8 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Instances } from "../../lib/game-engine/instances";
 import { container } from "../../lib/pixi/container";
+import { Jukebox } from "../core/igua-audio";
 import { DramaGifts } from "../drama/drama-gifts";
 import { show } from "../drama/show";
 import { Cutscene } from "../globals";
@@ -11,6 +13,7 @@ import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 
 export function scnIndianaDarkEvilHole() {
+    Jukebox.play(Mzk.UndergroundRucksack);
     const lvl = Lvl.IndianaDarkEvilHole();
     enrichShoeHaverNpc(lvl);
     enrichEnemies(lvl);

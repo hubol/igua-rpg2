@@ -1,6 +1,8 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Rng } from "../../lib/math/rng";
+import { Jukebox } from "../core/igua-audio";
 import { DataFact } from "../data/data-fact";
 import { DramaClassroom } from "../drama/drama-classroom";
 import { DramaPotions } from "../drama/drama-potions";
@@ -16,6 +18,7 @@ import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { RpgQuest } from "../rpg/rpg-quests";
 
 export function scnOhioUniversityInterior() {
+    Jukebox.play(Mzk.DespicableMessage);
     CtxTerrainPipe.value.texture = NoAtlasTx.Terrain.Pipe.BlackSolidLine2px;
     const lvl = Lvl.OhioUniversityInterior();
     const quest = Rpg.quest("OhioUniversity.Bouncer.ReachedTop");
