@@ -100,6 +100,7 @@ export namespace DataNpcPersona {
             OhioStudent2: { job: "Student", name: "K'eer'ies'n", looksId: "Khaki" },
             OhioStudent3: { job: "Student", name: "Pleef", looksId: "Fruit" },
             Bounce: { job: "Repairman", name: "Tripe", looksId: "ShadowPrince" },
+            Olga: { job: "Instructor", name: "Olga", looksId: "Olga" },
             __Fallback__: { job: "???", name: "???", looksId: "MintyJourney" },
         } satisfies Record<string, Model>,
     );
