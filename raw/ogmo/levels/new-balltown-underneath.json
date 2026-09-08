@@ -1133,7 +1133,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 175350180634400,
-          "values": {"name": "", "depth": 0, "variant": "level1"}
+          "values": {"name": "", "depth": 0, "variant": "level1", "safeTint": "#ffffff"}
         },
         {
           "name": "EnemySuggestive",
@@ -1144,7 +1144,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 175350180634401,
-          "values": {"name": "", "depth": 0, "variant": "level1"}
+          "values": {"name": "", "depth": 0, "variant": "level1", "safeTint": "#ffffff"}
         },
         {
           "name": "Door",
@@ -1152,6 +1152,8 @@
           "_eid": "88296692",
           "x": 240,
           "y": 280,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnNewBalltownUnderneathHomeowner", "checkpointName": "", "name": "ToHomeownerDoor", "depth": 0}
@@ -1172,6 +1174,8 @@
           "_eid": "88296692",
           "x": 456,
           "y": 120,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnNewBalltownUnderneathTunnel", "checkpointName": "fromLeft", "name": "TunnelLeftDoor", "depth": 0}
@@ -1182,6 +1186,8 @@
           "_eid": "88296692",
           "x": 680,
           "y": 24,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnNewBalltownUnderneathTunnel", "checkpointName": "fromRight", "name": "", "depth": 0}
@@ -8463,6 +8469,18 @@
           "groupName": null
         }
       ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 332,
+      "gridCellsY": 55,
+      "decals": [],
       "folder": "../textures"
     }
   ]

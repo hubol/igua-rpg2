@@ -2,6 +2,7 @@ import { Environment } from "../../lib/environment";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { SceneLibrary } from "../core/scene/scene-library";
 import { DevGameStartConfig } from "../dev/dev-game-start-config";
+import { devUpdateOgmoProject } from "../dev/dev-update-ogmo-project";
 import { layers, sceneStack, startAnimator } from "../globals";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
@@ -17,6 +18,10 @@ export function startGame() {
     }
     else {
         setRpgProgressData(getInitialRpgProgress());
+    }
+
+    if (Environment.isDev) {
+        setTimeout(devUpdateOgmoProject);
     }
 
     if (Environment.hasDevFeatures) {

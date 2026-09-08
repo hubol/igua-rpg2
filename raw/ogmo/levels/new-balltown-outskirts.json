@@ -885,6 +885,8 @@
           "_eid": "88296692",
           "x": 232,
           "y": 464,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnNewBalltownOutskirtsSecretShop", "checkpointName": "", "name": "", "depth": 0}

@@ -1,22 +1,48 @@
 {
   "name": "IguaRPG 2",
   "ogmoVersion": "3.4.0-hubol",
-  "levelPaths": ["./levels"],
+  "levelPaths": [
+    "./levels"
+  ],
   "backgroundColor": "#408000",
   "gridColor": "#3c4049cc",
   "anglesRadians": false,
   "directoryDepth": 5,
-  "layerGridDefaultSize": {"x": 8, "y": 8},
-  "levelDefaultSize": {"x": 256, "y": 256},
-  "levelMinSize": {"x": 500, "y": 280},
-  "levelMaxSize": {"x": 16384, "y": 8192},
+  "layerGridDefaultSize": {
+    "x": 8,
+    "y": 8
+  },
+  "levelDefaultSize": {
+    "x": 256,
+    "y": 256
+  },
+  "levelMinSize": {
+    "x": 500,
+    "y": 280
+  },
+  "levelMaxSize": {
+    "x": 16384,
+    "y": 8192
+  },
   "levelValues": [
-    {"name": "Terrain Color", "definition": "RGB", "display": 0, "defaults": "#000000"},
+    {
+      "name": "Terrain Color",
+      "definition": "RGB",
+      "display": 0,
+      "defaults": "#000000"
+    },
     {
       "name": "Region ID",
       "definition": "Enum",
       "display": 0,
-      "choices": ["~Unset~", "Indiana", "Ohio", "Illinois", "Iowa", "BetweenIndianaOhio"],
+      "choices": [
+        "~Unset~",
+        "Indiana",
+        "Ohio",
+        "Illinois",
+        "Iowa",
+        "BetweenIndianaOhio"
+      ],
       "defaults": 0
     }
   ],
@@ -24,154 +50,296 @@
   "compactExport": false,
   "externalScript": "igua-rpg2-ogmo.js",
   "playCommand": "",
-  "entityTags": ["Terrain", "Player", "Front", "Marker", "Character", "Region", "Enemy"],
+  "entityTags": [
+    "Terrain",
+    "Player",
+    "Front",
+    "Marker",
+    "Character",
+    "Region",
+    "Enemy"
+  ],
   "layers": [
     {
       "definition": "entity",
       "name": "MarkerEntities",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {
+        "x": 8,
+        "y": 8
+      },
       "exportID": "73166939",
-      "requiredTags": ["Marker"],
+      "requiredTags": [
+        "Marker"
+      ],
       "excludedTags": []
     },
     {
       "definition": "entity",
       "name": "RegionEntities",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {
+        "x": 8,
+        "y": 8
+      },
       "exportID": "01831167",
-      "requiredTags": ["Region"],
+      "requiredTags": [
+        "Region"
+      ],
       "excludedTags": []
     },
     {
       "definition": "decal",
       "name": "FrontDecals",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {
+        "x": 8,
+        "y": 8
+      },
       "exportID": "17577176",
       "folder": "../textures",
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": false},
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": false
+      },
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        }
       ]
     },
     {
       "definition": "entity",
       "name": "FrontEntities",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {
+        "x": 8,
+        "y": 8
+      },
       "exportID": "55690179",
-      "requiredTags": ["Front"],
+      "requiredTags": [
+        "Front"
+      ],
       "excludedTags": []
     },
     {
       "definition": "entity",
       "name": "PlayerEntities",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {
+        "x": 8,
+        "y": 8
+      },
       "exportID": "96470627",
-      "requiredTags": ["Player"],
+      "requiredTags": [
+        "Player"
+      ],
       "excludedTags": []
     },
     {
       "definition": "entity",
       "name": "CharacterEntities",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {
+        "x": 8,
+        "y": 8
+      },
       "exportID": "07790422",
-      "requiredTags": ["Character"],
+      "requiredTags": [
+        "Character"
+      ],
       "excludedTags": []
     },
     {
       "definition": "decal",
       "name": "AboveEntitiesDecals",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {
+        "x": 8,
+        "y": 8
+      },
       "exportID": "63753160",
       "folder": "../textures",
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        }
       ]
     },
     {
       "definition": "entity",
       "name": "Entities",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {
+        "x": 8,
+        "y": 8
+      },
       "exportID": "93086020",
       "requiredTags": [],
-      "excludedTags": ["Terrain", "Player", "Marker", "Character"]
+      "excludedTags": [
+        "Terrain",
+        "Player",
+        "Marker",
+        "Character"
+      ]
     },
     {
       "definition": "decal",
       "name": "TerrainDecals",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {
+        "x": 8,
+        "y": 8
+      },
       "exportID": "02386446",
       "folder": "../textures",
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        }
       ]
     },
     {
       "definition": "entity",
       "name": "TerrainEntities",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {
+        "x": 8,
+        "y": 8
+      },
       "exportID": "02302709",
-      "requiredTags": ["Terrain"],
+      "requiredTags": [
+        "Terrain"
+      ],
       "excludedTags": []
     },
     {
       "definition": "entity",
       "name": "BackgroundEntities",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {
+        "x": 8,
+        "y": 8
+      },
       "exportID": "41483982",
       "requiredTags": [],
-      "excludedTags": ["Terrain", "Player"]
+      "excludedTags": [
+        "Terrain",
+        "Player"
+      ]
     },
     {
       "definition": "decal",
       "name": "BackgroundDecals",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {
+        "x": 8,
+        "y": 8
+      },
       "exportID": "64691217",
       "folder": "../textures",
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        }
       ]
     },
     {
       "definition": "decal",
       "name": "ParallaxDecals",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {
+        "x": 8,
+        "y": 8
+      },
       "exportID": "17093961",
       "folder": "../textures",
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        }
       ]
     },
     {
       "definition": "decal",
       "name": "ParallaxFarDecals",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {
+        "x": 8,
+        "y": 8
+      },
       "exportID": "79996540",
       "folder": "../textures",
       "includeImageSequence": true,
       "scaleable": true,
       "rotatable": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        }
       ]
     }
   ],
@@ -180,24 +348,51 @@
       "exportID": "88296692",
       "name": "Door",
       "limit": -1,
-      "size": {"x": 34, "y": 48},
-      "origin": {"x": 0, "y": -2},
+      "size": {
+        "x": 34,
+        "y": 48
+      },
+      "origin": {
+        "x": 0,
+        "y": -2
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": true,
       "resizeableY": true,
       "rotatable": false,
@@ -213,13 +408,47 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "sceneName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "checkpointName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "sceneName",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "checkpointName",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": null,
+        "useDefaultTint": true
+      },
       "texture": "preview-images/door.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAuCAYAAABNhcu5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAABKSURBVFhH7c6hAYAADMCwwS/7/0QwGPoAiMTU9tjda37gfPo5I2WkjJSRMlJGykgZKSNlpIyUkTJSRspIGSkjZaSMlJEyUkbeZm60VQHKmVU0iQAAAABJRU5ErkJggg=="
     },
@@ -227,24 +456,51 @@
       "exportID": "93092164",
       "name": "Player",
       "limit": 1,
-      "size": {"x": 51, "y": 42},
-      "origin": {"x": 22, "y": 39},
+      "size": {
+        "x": 51,
+        "y": 42
+      },
+      "origin": {
+        "x": 22,
+        "y": 39
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -258,13 +514,35 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Player"],
+      "tags": [
+        "Player"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": false},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": false
+      },
       "texture": "preview-images/iguana.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAqCAYAAAAeeGN5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKCSURBVGhD3Ze9LwRBFMD3rkSj1IpKdHdKIhIViY+GRM21/gaFWotKIUHhEJ1ERKU4najEXyDRoD33xjzm5mbmzcebPfFLLvt2dnZ2fvNmZ/YqRUZaE7NtGQrqjzdZn5elcV1CJacQe8MuEZUcUqwN+oog3EJsjYWKIJxCVXn8F7CMSmxWEK7s9Fdm+14GNPWVT7Kv/ZEJkNBxSVkv7K02uzrYOFm21vWWSZDQMUn1FOgSOjYpUihQpLb8IaOieGgOyqi7vNJBhoKu1YwSAXzq9JAgAuC5Xt7uIEPBj0xIJ011uVYkvcMUqpCQiRltbyHG94RCPNwlY3pHsL7XohAgg1nZXzsXR5Xa6nrxcHIkz37ZPF4SR3h/qqEigEsCEVkqMStA9OeMj1DZiA7FZMeX1tmAtW0d18sPy7PrOjnNUgkR4aBCyWBmWlvX4R2bXpSBP6bRt22aCFyHLwJSpjYyJKNIEoVUEUS/jp82TplkESBCJhSUqdpecBYR4O5CBuGY9hVALVc/OI1LM5tIIqaNEs6h3ISQyb5nJGRHFdJF9L8BPZnJlhUGIZcI0FUAi0EpUyxhUTBJID0XovaTWAKkXBJIf2U61HfnyE76YmyoLCFOESD6q/kvYh2Z3NnhzgrQl8xMXp4WldEN9sFyjo6anZnnYXG8HXsTRx9M94CISvvlgC1DZEMghJ1CfIT0e96v6uJZtoxwSJHTTO8UYCqjGFpoteEnT7PgHA3q4R9PezL6ZXC8ISMzpnuQ1OxYb/YdRbVzlAiSS8g4zUKmAwr4igBq3fmppozSiVqadza/O4NHH6i6HFKl7zOqFGdWgGAZ0whT89x2z9Xhq/hhnLYAFMUXU801m+qL9IoAAAAASUVORK5CYII="
     },
@@ -272,24 +550,51 @@
       "exportID": "93117141",
       "name": "Block",
       "limit": -1,
-      "size": {"x": 16, "y": 16},
-      "origin": {"x": 0, "y": 0},
+      "size": {
+        "x": 16,
+        "y": 16
+      },
+      "origin": {
+        "x": 0,
+        "y": 0
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": true,
       "resizeableY": true,
       "rotatable": false,
@@ -303,37 +608,91 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Terrain"],
+      "tags": [
+        "Terrain"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100},
-        {"name": "visible", "definition": "Boolean", "display": 0, "defaults": true}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        },
+        {
+          "name": "visible",
+          "definition": "Boolean",
+          "display": 0,
+          "defaults": true
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "Terrain Color", "useDefaultTint": false}
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "Terrain Color",
+        "useDefaultTint": false
+      }
     },
     {
       "exportID": "95675713",
       "name": "Slope",
       "limit": -1,
-      "size": {"x": 32, "y": 32},
-      "origin": {"x": 0, "y": 0},
+      "size": {
+        "x": 32,
+        "y": 32
+      },
+      "origin": {
+        "x": 0,
+        "y": 0
+      },
       "originAnchored": false,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": true,
       "resizeableY": true,
       "rotatable": false,
@@ -347,14 +706,41 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Terrain"],
+      "tags": [
+        "Terrain"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100},
-        {"name": "visible", "definition": "Boolean", "display": 0, "defaults": true}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        },
+        {
+          "name": "visible",
+          "definition": "Boolean",
+          "display": 0,
+          "defaults": true
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "Terrain Color", "useDefaultTint": false},
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "Terrain Color",
+        "useDefaultTint": false
+      },
       "texture": "preview-images/slope.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURf///wAAAFXC034AAAACdFJOU/8A5bcwSgAAAAlwSFlzAAAOwQAADsEBuJFr7QAAAHhJREFUOE+FykkCgCAMBEH8/6dlKRFQSJ1gOuk6S8FBCg5yPx6Ufjqo/XDQ+v5A3x7I2wM1MyzEwjLTKtNEamwjBeNAeFhf9s7cmV/2h3UgYBwpjW0iVaaZVlgWYmZYqdveD3y/ou7A50/U64Hnv6jnA4+dqAdSugFtuwHxO+a3awAAAABJRU5ErkJggg=="
     },
@@ -362,24 +748,51 @@
       "exportID": "95769929",
       "name": "Pipe",
       "limit": -1,
-      "size": {"x": 16, "y": 9},
-      "origin": {"x": 0, "y": 0},
+      "size": {
+        "x": 16,
+        "y": 9
+      },
+      "origin": {
+        "x": 0,
+        "y": 0
+      },
       "originAnchored": false,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": true,
       "resizeableY": false,
       "rotatable": false,
@@ -393,14 +806,41 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Terrain"],
+      "tags": [
+        "Terrain"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "visible", "definition": "Boolean", "display": 0, "defaults": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "visible",
+          "definition": "Boolean",
+          "display": 0,
+          "defaults": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/pipe.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAAmSURBVChTY1y/fv1/BgoAE5QmGzD29fVR5IKB98LAh8FAe4GBAQBQ2gt5H0/w0QAAAABJRU5ErkJggg=="
     },
@@ -408,24 +848,51 @@
       "exportID": "95781942",
       "name": "PipeSlope",
       "limit": -1,
-      "size": {"x": 32, "y": 32},
-      "origin": {"x": 0, "y": 0},
+      "size": {
+        "x": 32,
+        "y": 32
+      },
+      "origin": {
+        "x": 0,
+        "y": 0
+      },
       "originAnchored": false,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": true,
       "resizeableY": true,
       "rotatable": false,
@@ -439,14 +906,41 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Terrain"],
+      "tags": [
+        "Terrain"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100},
-        {"name": "visible", "definition": "Boolean", "display": 0, "defaults": true}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        },
+        {
+          "name": "visible",
+          "definition": "Boolean",
+          "display": 0,
+          "defaults": true
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/pipe slope.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAsCAYAAAAEuLqPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAD2SURBVFhHxdXJDYMwFEVRoBNapBBaoSSXkuhaicVk8PCHswhZ4NwngZTB07Ztn/H33Rxxri4D/vEQgv2AfXyeZ9sB5zjMBtzFYTIgFzd5B57iUB3wFofagJI4VAaUxiE+oCYO0QG1cYgNaIkvyzKKDGiNc+0e0BNH14DeOJoHSMTRNEAqjuoBknFUDZCOo3iARhxFA7TieL1JM47HG7XjyN5sEcftAas4Locs4zgctI4jHfaII/6AVxyjZxwTH15xTJ5xTJ5xxEcAjzjSO5CjGUd8B3K040iP4MwijtsBVnFcBljGcRhgHUca4BGP1nWN/wU+huELWt5AQF4RmxAAAAAASUVORK5CYII="
     },
@@ -454,24 +948,51 @@
       "exportID": "19953026",
       "name": "Checkpoint",
       "limit": -1,
-      "size": {"x": 51, "y": 42},
-      "origin": {"x": 22, "y": 39},
+      "size": {
+        "x": 51,
+        "y": 42
+      },
+      "origin": {
+        "x": 22,
+        "y": 39
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -485,20 +1006,45 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Player"],
+      "tags": [
+        "Player"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100},
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        },
         {
           "name": "overrideFlipX",
           "definition": "Enum",
           "display": 0,
-          "choices": ["none", "retainFromPreviousScene"],
+          "choices": [
+            "none",
+            "retainFromPreviousScene"
+          ],
           "defaults": 0
         }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/checkpoint.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAqCAYAAAAeeGN5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIESURBVGhD3Zc9UsQwDIWTXIKLcAJKWmoKWg5BwSFoKahpKTkBF+EUy7zFb0fryFaylvKz3wyIiRxbz5Ll0EXy+vR5+Pl+O9Cmx2EMybpCAfePv93Xx01HGy3IXQwClgI0QRCahrviKsYSIm2EoD7ZZlhCCFaCwCW5/+X9wS2GkDOzFi5iWg52y7s5LimWAc0ts6n+27tnM1aXzDAAWC4ug/TwY8OsplEUw4uONj1WwcIMJNrW4hmJoYB8otrOoAS0hSOtJuhMDAZYE5UEWe9F2FzQ6VDRgUESvCihX7sfuBmS0vvEw8/mcMyMljILLUNTOk4kZjdDgPLHurHh97zVp8BkDLWslIKaEuzSgsAxM6xDWNZoXqs5c4K15vfyDxyg2UvOkqQ0b4QFgzWwhdq83hb02gUpLTuUNW5tizj7vJTglGCgZIt+brjZmvfEQFV7RcZ/XZnBL6pDPbJGZa2yTrfmz++6U2Y4cC9WOx5nD7befmFrXx4jx1YFTWlUqpj05xFMJMHkkla/5wfpqJst+bXrvdb1teacJbITsUYxM7LWWec8jKDV3/rvhUZ1d7AgA4iynp9T5kReglhWpfk8ys5sANrCl1i0/NrGeFDdDV6gEiwu8fS3llwxM/nluQStTUEVs4YQD8wzsydWu2dK/hbUAze3HaOtsllMGQ/reb/803V/QWIoUM387UgAAAAASUVORK5CYII="
     },
@@ -506,24 +1052,51 @@
       "exportID": "38869661",
       "name": "WaterDripSource",
       "limit": -1,
-      "size": {"x": 5, "y": 6},
-      "origin": {"x": 2, "y": 0},
+      "size": {
+        "x": 5,
+        "y": 6
+      },
+      "origin": {
+        "x": 2,
+        "y": 0
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -539,13 +1112,49 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "delayMin", "definition": "Integer", "display": 1, "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "delayMax", "definition": "Integer", "display": 1, "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "delayMin",
+          "definition": "Integer",
+          "display": 1,
+          "defaults": 0,
+          "bounded": false,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "name": "delayMax",
+          "definition": "Integer",
+          "display": 1,
+          "defaults": 0,
+          "bounded": false,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/drip source.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAGCAYAAAAL+1RLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAnSURBVBhXY4ABh6nn/kOZDExQGgUwgghkVQeyjRgZkQVggFjtRowAHpMNTLrbmowAAAAASUVORK5CYII="
     },
@@ -553,24 +1162,51 @@
       "exportID": "39046554",
       "name": "Sign",
       "limit": -1,
-      "size": {"x": 50, "y": 29},
-      "origin": {"x": 0, "y": 26},
+      "size": {
+        "x": 50,
+        "y": 29
+      },
+      "origin": {
+        "x": 0,
+        "y": 26
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -586,14 +1222,53 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "title", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "message", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100},
-        {"name": "isSpecial", "definition": "Boolean", "display": 2, "defaults": false}
+        {
+          "name": "title",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "message",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        },
+        {
+          "name": "isSpecial",
+          "definition": "Boolean",
+          "display": 2,
+          "defaults": false
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/sign.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAdCAYAAADoxT9SAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFPSURBVFhHY2SgIliR5/8fyqQriJi0kRHukYFyBCXA1kcGymJgAHuEFp4QFxaAskgDapY8UBYqeKgMZaABnecsYJppoGJCio8LKyYXMNLbIzJCvFAWdqBoxQ9loQJcMSJ/F0Iz7m+MJ+iRl28/QFmUAUKegAFSPPNv8UeGJ+8+MzBB+UMCgEIfhkEeAGEYoGvSIjZGSAWgGKF7HsEFyPUkyBMgMKSSFjIAeQDmCRAYNDFCKRiyMYIOiCp+qQWoVYxjA8MnRkbzyCADIydpvfz4FcpCBeL83FAWbQCp3QCCMQJyMDY82MCwyew08QioDw1lkgRa/QxR3KKsIAdl4QfwPjsxnrn74BGUBQHVm85TdeACBNA9AgLE2kNQETbDQWCweWRQFb88gsIYmFgwcipEbKEEwoMNjJwYGSqA6JJnYrwLSomSv3AP1Ust8gEDAwBIVG4j090eZwAAAABJRU5ErkJggg=="
     },
@@ -601,24 +1276,51 @@
       "exportID": "41461695",
       "name": "IntelligenceBackground",
       "limit": -1,
-      "size": {"x": 16, "y": 16},
-      "origin": {"x": 0, "y": 0},
+      "size": {
+        "x": 16,
+        "y": 16
+      },
+      "origin": {
+        "x": 0,
+        "y": 0
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#00ff007f",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": true,
       "resizeableY": true,
       "rotatable": false,
@@ -634,38 +1336,111 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "initialTint", "definition": "RGB", "display": 0, "defaults": "#000000"},
-        {"name": "targetTint", "definition": "RGB", "display": 0, "defaults": "#000000"},
-        {"name": "min", "definition": "Integer", "display": 1, "defaults": 1, "bounded": true, "min": 1, "max": 100},
-        {"name": "max", "definition": "Integer", "display": 1, "defaults": 5, "bounded": true, "min": 1, "max": 100},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "initialTint",
+          "definition": "RGB",
+          "display": 0,
+          "defaults": "#000000"
+        },
+        {
+          "name": "targetTint",
+          "definition": "RGB",
+          "display": 0,
+          "defaults": "#000000"
+        },
+        {
+          "name": "min",
+          "definition": "Integer",
+          "display": 1,
+          "defaults": 1,
+          "bounded": true,
+          "min": 1,
+          "max": 100
+        },
+        {
+          "name": "max",
+          "definition": "Integer",
+          "display": 1,
+          "defaults": 5,
+          "bounded": true,
+          "min": 1,
+          "max": 100
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true}
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      }
     },
     {
       "exportID": "90326278",
       "name": "IguanaNpc",
       "limit": -1,
-      "size": {"x": 50, "y": 55},
-      "origin": {"x": 20, "y": 52},
+      "size": {
+        "x": 50,
+        "y": 55
+      },
+      "origin": {
+        "x": 20,
+        "y": 52
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -679,14 +1454,43 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Character"],
+      "tags": [
+        "Character"
+      ],
       "values": [
-        {"name": "personaName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "personaName",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/npc.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAA3CAYAAABO8hkCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMiSURBVGhD7ZoxaxRBFIBnI4qVRUAEEUwlUeH8CRYKemJhZ2EQxMLKoDFqipQpIsZTtLIQQWJhZyEqiIXgH/BEDVoYQQ1apLASRNZ7m/fOmdk3szOzs3ubcB8s+27u9jLfvDczu0cSMWA6L++kGIqpQ+eD+zNQEVmCCJUZwXPtcBJlGJhIbIYiTWMo0jSGIk2jcSLy/jKzOOu819S6s/tsgrDDk8j8xFxhPxtbWr6ZaWxGgJ8rPzBS4TK0YSZ7rRkB5KysbD+CEc+m7gOMVLiM1C4CXO5+dCoxTsQ08WsVcRUgdJG/rdMYCXG9tUfpe20ivhL3rl7ASIiz125hpLavPnva738tImUkCJDh2kmmcasW11kbo+1j2SBVnhHfbKSt3Rj15kG6BSMhrrz9JB7ev4uv/vOtsyCSHsaM7Lx4KZUPbK4UWcKHtEdOxNTxECHfbJRBEXHpqK9MXfRFfDro+ll9ra+STCRklF2uGVhpcXy/eSPRD2hfOsHfmZYh6X7BSAVWLODUmXPZWQfeH7GNLHVahyR+vZqwjnhIaZEMLb0kQegy8D78nSRERBbYdnDR2tk6ygtECktLR89CFVkBbHuKsmni91tFQhaBmHAyJkFraQFUXnBPszwzmrVxQInRfQ+HfAfrCnWa5o3+Ws62VeT30geM1rCJjM2vYmSmjAzBSQBeIgAn4yIhEyJEmOZc1sjJcBKELOMrIeMjVLRosCI2CQJkykgQ8lNeGbJVy7Rf2IghEZPc8uuSjSbSFwnJSpNQMgIyW8f34qv1xYYpLbacbDt0TGKtWEAuI+sVViTWSM1Ot7OD43X7BUZxqCwjJgEgtgRgFIGdmw5fXCXe394cbS6yJWR6WHLZzU0SR99NYaSyb/JPlDLOZcT2xBeSnbrIjUbRoyvw9c0jjFSe7+9glMeUEaJsZoIm+64DJzFyByRtomXnS/CqxckUjTrAybTm1kq2jEy05Rc6YxtxYOHJcnY2fQ6+I1QmJ1L0O9X44x0YCXH482R2phF1BYRIRr82dK5YL9InPknAL40U67f/pn8KoGxMHx/L4riPDUL8AxUIckKyIap8AAAAAElFTkSuQmCC"
     },
@@ -694,24 +1498,51 @@
       "exportID": "69755853",
       "name": "ValuableGreen",
       "limit": -1,
-      "size": {"x": 7, "y": 6},
-      "origin": {"x": 3, "y": 3},
+      "size": {
+        "x": 7,
+        "y": 6
+      },
+      "origin": {
+        "x": 3,
+        "y": 3
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -727,11 +1558,31 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "../textures/collectibles/valuable green.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAGCAMAAAA40HREAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAASUExURRjIkMjgkPDgkBjgkBiokAAAAPluvnIAAAAGdFJOU///////ALO/pL8AAAAJcEhZcwAADsIAAA7CARUoSoAAAAAlSURBVBhXFcZBAgAABITAsP3/y7jUIFTPNcyBJiewHqJD/Bt1AQlrAHueldyiAAAAAElFTkSuQmCC"
     },
@@ -739,24 +1590,51 @@
       "exportID": "69757920",
       "name": "ValuableOrange",
       "limit": -1,
-      "size": {"x": 17, "y": 13},
-      "origin": {"x": 8, "y": 6},
+      "size": {
+        "x": 17,
+        "y": 13
+      },
+      "origin": {
+        "x": 8,
+        "y": 6
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -772,11 +1650,31 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "../textures/collectibles/valuable orange.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAANCAMAAAB4p3UoAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAVUExURfCAMPDQMPDoWPCwMPBIMP///wAAAFDQncMAAAAHdFJOU////////wAaSwNGAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAWUlEQVQYV13OAQ7AIAgDQArY/z95Rbstm4kJPQkYZMwBkFlViozujlAAVq6ahldyqe0j01ORedCswJ9oMgG92GY1hx5Rmkt4g35joWXXR7jllBZqiqtbaCAvHRADALH7B+AAAAAASUVORK5CYII="
     },
@@ -784,24 +1682,51 @@
       "exportID": "69755574",
       "name": "ValuableBlue",
       "limit": -1,
-      "size": {"x": 17, "y": 13},
-      "origin": {"x": 8, "y": 6},
+      "size": {
+        "x": 17,
+        "y": 13
+      },
+      "origin": {
+        "x": 8,
+        "y": 6
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -817,11 +1742,31 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "../textures/collectibles/valuable blue.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAANCAMAAAB4p3UoAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAVUExURQDA2Jjg4Kjw8ADg2ACo2P///wAAALolqk8AAAAHdFJOU////////wAaSwNGAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAWUlEQVQYV13OAQ7AIAgDQArY/z95Rbstm4kJPQkYZMwBkFlViozujlAAVq6ahldyqe0j01ORedCswJ9oMgG92GY1hx5Rmkt4g35joWXXR7jllBZqiqtbaCAvHRADALH7B+AAAAAASUVORK5CYII="
     },
@@ -829,24 +1774,51 @@
       "exportID": "55698237",
       "name": "Puddle",
       "limit": -1,
-      "size": {"x": 16, "y": 8},
-      "origin": {"x": 0, "y": 1},
+      "size": {
+        "x": 16,
+        "y": 8
+      },
+      "origin": {
+        "x": 0,
+        "y": 1
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": true,
       "resizeableY": false,
       "rotatable": false,
@@ -860,13 +1832,35 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Front"],
+      "tags": [
+        "Front"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": true, "defaultTint": "#68a8d0", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#68a8d0",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/puddle.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAICAYAAADwdn+XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAZSURBVChTY/wPBAwUACYoTTYYNWDgAQMDAB8kBAj1akM5AAAAAElFTkSuQmCC"
     },
@@ -874,24 +1868,51 @@
       "exportID": "73148747",
       "name": "Marker",
       "limit": -1,
-      "size": {"x": 17, "y": 17},
-      "origin": {"x": 8, "y": 8},
+      "size": {
+        "x": 17,
+        "y": 17
+      },
+      "origin": {
+        "x": 8,
+        "y": 8
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -905,13 +1926,35 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Marker"],
+      "tags": [
+        "Marker"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": true, "defaultTint": "#00ff00", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#00ff00",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/marker.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAACZSURBVDhPlZIBEoAgCASx///ZPBQDBaWdUVOPHWoqRFTbELDPMuseTLVWHnjElKDFZ02XCEkRCzTSvrkohY+9V3NzOngThfc6BKJgKACrBGwFJwHwJMCIBE8AIgnYOsLCm4VI8qsT858MvA6Ycb7ZV4knaMtZpFtzBbzphPcSugkEN4c5KxC2vPkmCQFoMRvB7tPeBZpRR/QC+6xtAAiXvLgAAAAASUVORK5CYII="
     },
@@ -919,24 +1962,51 @@
       "exportID": "11908607",
       "name": "Region",
       "limit": -1,
-      "size": {"x": 32, "y": 32},
-      "origin": {"x": 0, "y": 0},
+      "size": {
+        "x": 32,
+        "y": 32
+      },
+      "origin": {
+        "x": 0,
+        "y": 0
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": true,
       "resizeableY": true,
       "rotatable": false,
@@ -950,13 +2020,35 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Region"],
+      "tags": [
+        "Region"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": true,
-      "tintable": {"enabled": true, "defaultTint": "#00ff00", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#00ff00",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/region.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABPSURBVFhH7dcxCgAgDATB0///WSOKQuxzzS4Ipsq0aZJGPFsb4CLE9gdYv8rOzgyoYtydfc++AAAAAAAAAAAAAAAAACBfRnV9p5mjC7AlTcXvEDMTrZ50AAAAAElFTkSuQmCC"
     },
@@ -964,24 +2056,51 @@
       "exportID": "97593426",
       "name": "GateHorizontal",
       "limit": -1,
-      "size": {"x": 96, "y": 128},
-      "origin": {"x": 0, "y": 0},
+      "size": {
+        "x": 96,
+        "y": 128
+      },
+      "origin": {
+        "x": 0,
+        "y": 0
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": true,
       "rotatable": false,
@@ -995,15 +2114,51 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Region"],
+      "tags": [
+        "Region"
+      ],
       "values": [
-        {"name": "sceneName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "checkpointName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "sceneName",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "checkpointName",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/gate horizontal.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAACACAYAAAD03Gy6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAPlSURBVHhe7ZhRjtswDESzPUm/e4Wev1fY796kDZ1ISCQFMKUhCcrzAGcRY5Nnc0wq9tftdvt330gQRwA/f38/3hFX/v75dfyVAKQLuDlupeY/7i+vSEdws98qbQDEmaUApI3K9tzlyg5+WAdEFaGQ1Q8dQQxB74evAQxB518K4P479ku259uKVxF28EM6ILIIQmY/bAQxhDk/dA34dBBehcjohy/Co4PwJJtf/lkSkg+W9wcWV43m4Db315p3HSBiC/lZruaHjyCioxtBbfqatn1l9nsu4q81l51vAcjLKqiTmCWBv9YcPoJauTfZ/NAARnLPqy+jHxYAiz/nN/sV5HnyI7L4IQG06XuffGa/WQeQc8ADyNL6Vsz4y613t4gQM2rNOYKCYQDBMIBgGEAwDCAYBhAMAwiGAQTDAIJhAMEsBSC302V77nJlBz+sA6KKUMjqh44ghqD3w9cAhqDzLwUgz75Hz7+9irCDH9IBkUUQMvthI4ghzPmha8Cng/AqREY/fBEeHYQn2fzyz5KQfLC8P7C4ajQHt7m/1rzrABFbyM9yNT98BBEd3Qhq09e07Suz33MRf6257HwLQF5WQZ3ELAn8tebwEdTKvcnmhwYwkntefRn9sABY/Dm/2a8gz5MfkcUPCaBN3/vkM/vNOoCcAx5Alta3YsZfbr27RYSYUWvOERQMAwiGAQTDAIJhAMEwgGAYQDAMIBgGEAwDCGYpALmdLttzlys7+GEdEFWEQlY/dAQxBL0fvgYwBJ1/KQB59j16/u1VhB38kA6ILIKQ2Q8bQQxhzg9dAz4dhFchMvrhi/DoIDzJ5pd/loTkg+X9gcVVozm4zf215l0HiNhCfpar+eEjiOjoRlCbvqZtX5n9nov4a81l51sA8rIK6iRmSeCvNYePoFbuTTY/NICR3PPqy+iHBcDiz/nNfgV5nvyILH5IAG363ief2W/WAeQc8ACytL4VM/5y690tIsSMWnOOoGAYQDAMIBgGEAwDCIYBBMMAgmEAwTCAYBhAMEsByO102Z67XNnBD+uAqCIUsvqhI4gh6P3wNYAh6PxLAciz79Hzb68i7OCHdEBkEYTMftgIYghzfuga8OkgvAqR0Q9fhEcH4Uk2v/yzJCQfLO8PLK4azcFt7q817zpAxBbys1zNDx9BREc3gtr0NW37yuz3XMRfay473wKQl1VQJzFLAn+tOXwEtXJvsvmhAYzknldfRj8sABZ/zm/2K8jz5Edk8UMCaNP3PvnMfrMOIOeAB5Cl9a2Y8Zdb724RIWbUmnMEBcMAgmkDKKOIm+1WkQXjeC5B/Lkv2I8AHm+JP7fbf1JOtgXscPzRAAAAAElFTkSuQmCC"
     },
@@ -1011,24 +2166,51 @@
       "exportID": "30330516",
       "name": "PocketableItemA",
       "limit": -1,
-      "size": {"x": 24, "y": 24},
-      "origin": {"x": 12, "y": 12},
+      "size": {
+        "x": 24,
+        "y": 24
+      },
+      "origin": {
+        "x": 12,
+        "y": 12
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1044,11 +2226,31 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/pocket item a.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADdSURBVEhLvZSBDcIwDAQDU5RVYDBWoIMxC2OAvtJXH+M4Dig9qW3cfv12kva0PK7vMpEzTq/7czuUVmyvAGO9r/FmAC7rrRJ5sYd9xjGvu0GUxGK10btVBwRjfYkx0Zgafa5MX+TKgFV71bS6YAfAxmCfIgUiCnUMbExTryjgGkQgkSaDmVc5GTawHYBWcvB3Bz2O+VVkGa0epA008YhJysBLmDXpGmgiu4MyJukp0sTRtrSEBpkKe5rmNs3OMRj+0EaSg0j/1YGKM3Pd0zfXILuQPV16F/3K5H9RKR+h7Jp3nTaEQwAAAABJRU5ErkJggg=="
     },
@@ -1056,24 +2258,51 @@
       "exportID": "30599782",
       "name": "PocketableItemB",
       "limit": -1,
-      "size": {"x": 24, "y": 24},
-      "origin": {"x": 12, "y": 12},
+      "size": {
+        "x": 24,
+        "y": 24
+      },
+      "origin": {
+        "x": 12,
+        "y": 12
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1089,11 +2318,31 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/pocket item b.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADQSURBVEhLvZOLDYMwDERDF+ly7VRdrp2E6pAOXSzHMXLTJ0FiYnz+wPZ+tL0t5Ibb/bUflzKy7Qqw1+dqHwLg89w6J8/2sGfccz0FoiAW6xu921VAsNeXaBO16aPnyvIhdwLM2stmVAUrANYGZ4sUONFR98DaFPWSAq5ABAJpMIh5mZPLArYCMAoOyhXM+O9XNCLKOGoPCAWyrYhE0gJeEJ6XhxwFn/GT/yCiNINZcHC5AiXTplQFNlMbuDxkCwJm2gOW/welGYBZJWEFdVr7AvoDojLY+AjxAAAAAElFTkSuQmCC"
     },
@@ -1101,24 +2350,51 @@
       "exportID": "64222434",
       "name": "GateVertical",
       "limit": -1,
-      "size": {"x": 128, "y": 96},
-      "origin": {"x": 0, "y": 0},
+      "size": {
+        "x": 128,
+        "y": 96
+      },
+      "origin": {
+        "x": 0,
+        "y": 0
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": true,
       "resizeableY": false,
       "rotatable": false,
@@ -1132,15 +2408,51 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Region"],
+      "tags": [
+        "Region"
+      ],
       "values": [
-        {"name": "sceneName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "checkpointName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "sceneName",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "checkpointName",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/gate vertical.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAABgCAYAAADVenpJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAM6SURBVHhe7ZxLbtwwFAQnuUSuk21OnK2vk1MkbnlIMJqR+NGjBKirANrQjMTiMxukwIW/PR6Pv58NTFkC8OPj19cVWPHn5+/ltwKgVYBm1NKcf//8UaIVgXb/ltHFsgU8l4P/vtzjmaCFz2ebn4sC/yF/nvP1CgBmhASgTOMV4B/3swKYMxyAK/a9EvwxflYAcwiAOQTAHAJgDgEwhwCYMzUAOqAo2/Pj08Bf97MCmLMZgFpyaow+l8B/jr9pBegdyLt7j5xc4Z/n79oCWgYRXXwJ/nj/ZgC2HtobRGTx+M/x60stL7oxXb+w1fHeYMRo8Wvwh/vznOuGagBETbYmqvgE/lB/nvPmd4CegqKLF/jn+LteAls6nlF8An+8vysAQoKZRdbAH+tXR03vAO8o96Ur/ij4h/3lnC8X6ih3Brcnz3n3FgD3ggCYQwDMIQDmEABzCIA5BMAcAmCOTo+GTgIPnEKFgP+QP885K4A5IQEo03gF+Mf9rADmDAfgin2vBH+MnxXAHAJgDgEwhwCYQwDMIQDmTA2ADijK9vz4NPDX/awA5mwGoJacGqPPJfCf429aAXoH8u7eIydX+Of5u7aAlkFEF1+CP96/GYCth/YGEVk8/nP8+lLLi25M1y9sdbw3GDFa/Br84f4857qhGgBRk62JKj6BP9Sf57z5HaCnoOjiBf45/q6XwJaOZxSfwB/v7wqAkGBmkTXw8/8BMviH/eWcLxfqKHcGtyfPefcWAPeCAJhDAMwhAOYQAHMIgDkEwBwCYI5Oj4ZOAg+cQoWA/5A/zzkrgDkhASjTeAX4x/2sAOYMB+CKfa8Ef4yfFcAcAmAOATCHAJhDAMwhAOZMDYAOKMr2/Pg08Nf9rADmbAaglpwao88l8J/jb1oBegfy7t4jJ1f45/m7toCWQUQXX4I/3r8ZgK2H9gYRWTz+c/z6UsuLbkzXL2x1vDcYMVr8Gvzh/jznuqEaAFGTrYkqPoE/1J/nvPkdoKeg6OIF/jn+rpfAlo5nFJ/AH+/vCoCQYGaRNfDz/wEy+If95ZwvF+oodwa3J8959xYA92IdgLQS0O7dMto3lv0A/NA7wBKAr0vw4/H4B/7Z/of1/OTMAAAAAElFTkSuQmCC"
     },
@@ -1148,24 +2460,51 @@
       "exportID": "53836309",
       "name": "GateMap",
       "limit": -1,
-      "size": {"x": 32, "y": 32},
-      "origin": {"x": 16, "y": 16},
+      "size": {
+        "x": 32,
+        "y": 32
+      },
+      "origin": {
+        "x": 16,
+        "y": 16
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": true,
@@ -1179,16 +2518,57 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Region"],
+      "tags": [
+        "Region"
+      ],
       "values": [
-        {"name": "sceneName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "checkpointName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100},
-        {"name": "visible", "definition": "Boolean", "display": 0, "defaults": true}
+        {
+          "name": "sceneName",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "checkpointName",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        },
+        {
+          "name": "visible",
+          "definition": "Boolean",
+          "display": 0,
+          "defaults": true
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/world map gate.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC7SURBVFhH5ZPRCoQwDARb//+f1UCFUFsMmZUizsuJXLtz2VwtE/aT9vgqW/tcxnKBUAX1pD1K8Hd/swL7BRftVRo8ASohqYBIpARGS5mVQNs9Co38Y/w5VIFiEngHqIRkCYmERMDIStSoKaGX85myCWRZLnDrjTCq82k3ZBOIhvdIBLLhBhYg4QYSoOHG9Mv+8tGlJNyfTU2AhPdIljAbbmABEm5MD/sx05Aef7ekAsJygVAFb/L3Cko5AJ+reA2Dpk05AAAAAElFTkSuQmCC"
     },
@@ -1196,24 +2576,51 @@
       "exportID": "25633201",
       "name": "EnemySuggestive",
       "limit": -1,
-      "size": {"x": 69, "y": 82},
-      "origin": {"x": 33, "y": 78},
+      "size": {
+        "x": 69,
+        "y": 82
+      },
+      "origin": {
+        "x": 33,
+        "y": 78
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1227,21 +2634,54 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Enemy"],
+      "tags": [
+        "Enemy"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100},
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        },
         {
           "name": "variant",
           "definition": "Enum",
           "display": 1,
-          "choices": ["level0", "level1", "level2", "level3", "level4"],
+          "choices": [
+            "level0",
+            "level1",
+            "level2",
+            "level3",
+            "level4"
+          ],
           "defaults": 0
         },
-        {"name": "safeTint", "definition": "RGB", "display": 0, "defaults": "#ffffff"}
+        {
+          "name": "safeTint",
+          "definition": "RGB",
+          "display": 0,
+          "defaults": "#ffffff"
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/enemy suggestive.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEUAAABSCAYAAAACXhkKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASMSURBVHhe7Zs9aBRBFIDvVDAGlQOL2MTGgAFFNCjENsF0Qiy0SxcQkRTBxlI7LeSKEESwSycIFlaRi41gQIliFeFsFCEphKDgDxjOvMnM5e3czO7M7JuduWU/GHZu3Z+b7957OzcX6zXPrJ1rdHg3k7EPW97fjwne3oSJjMGJbd6r1X6t7GfbGMTs41tSbKJDIAS5nEsNuRSKQYUWQyol72AGn22zFhov6UNByGghkxJDLaAi2kgJSdRSQkVflFLw/CUEQaWICVtsRF9TQqRQVWgVBJcSYwrFFSmLvEkUnUJV+iiopCggW7vwHeJFrrOQRUosq2YU9E36FFlsq5qigFRKWVKoihQFpZEy83i8p+ao9plALsVnCkGxFY3vYojBU4khH0CRTwlM8+Yo7/WydGPVapxkUkLJEKRJwZgIcpYSo4SN9X+8t8vx0QO8tweplNASMDohC/VP/NUuc51TPWJIpDjLeLjFO5bcbvBONkJOV8gt9nKPxaSY+UfrRg8C7dMHZFgLARGiuYKvYXEdtlilWIuRMRmXUopzdPjAVpBYqOKCVHUFSBtjIpRyybD4VHPB0wvXFVFgH7xqsy1Grj+QQhhVOnUjxasQGIhFreiiOm/nXvJARTQsfz7ImkAcJ4sQXP/+kfeSMEvehWBMIyrjvGZ7vDtYWRJEDk4bOE4IeHrsLNtiIe2vJxLR4ve7jyo6VPtkDM6bH1nVCpaFYEAGFiIkYeo+o+T8hP7S71fUT0bbcyBiAHnwqtRRpYuQgmuLNylpgwNcpAC683QRCDXmSeMt6//+84NtBYcGjvLeHpBK7lJyRAlALgVAYrAMwYtrp3lvl8mlN0oxfmuKRL1+j7UsTI+zgQmBGS9qrZlLieiBKIFWqJSimd26yLYwcNMZL1AuKZqUTqSINONV4U1Kau47kueaV769ZtEiN8zI8BdW0EqdPhiIFnnGC6LkQgtiyiUFPX2mTv7tefosDLRYAxmyEDFfCVZo09KAOu2g2IqCCxJwkxHTfa9SKAfoci3VFF6FfBy7k68JHCBPxkwHZ32eZkaL0X0plKf6+SLF4I3gwdh82q7n2aKKpu7dvC4fSIxN3uU9PWut7GO6GHw4WSS+EPJt7f6RIXcpO0w93+Q9M9LEmApZnh7ivXzc+bmZCMXEi7xiBDaCsJyiZQhSpQBUYjC2UYShFiAjCwF6dgA+xMSISgig3AmUXYxOCKD9B6CMYtJkCDIPAPpZjokEGesTgBgluQxeB9mFdKJas8O8Rwv8jGH7xzimeLkocHn+gtdowr/tUMuJXgoevAkUgqKTYitBB/x0+rL5zml8QaVQCcjCVlBhK28gQG5FYXsvb1JCCaAgyBpt7FRSFJROChRV3MQ+G0ojBUvAwD7bR7O3R7Lr/6AwJevTd52jAH0nRZYBT7a+mOZfnZvuHD6zwV/RIYTkiQITopbiUg8o8HpD1xTytSRgShRSQkWEDq+PZNNPPCYhQDWjVRBcStZ8IwTepUAKxTjwNAqJFFXNAFGxyiq0wMFqHMxAsYzYimzhwKSOdyOmVvsPu0Aj3sKcwTUAAAAASUVORK5CYII="
     },
@@ -1249,24 +2689,51 @@
       "exportID": "61143896",
       "name": "EnvironmentSparkleMarker",
       "limit": -1,
-      "size": {"x": 8, "y": 8},
-      "origin": {"x": 4, "y": 4},
+      "size": {
+        "x": 8,
+        "y": 8
+      },
+      "origin": {
+        "x": 4,
+        "y": 4
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1280,13 +2747,35 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Marker"],
+      "tags": [
+        "Marker"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/sparkle.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAABDSURBVChTY1zfk8pANPgPBFAmGIA0M0HZOAFcAUw3uilMIAEQgPLBACoEFmNihAKwDBRAhcBicCtgAjAaBgg4koEBAF7yH0rzM5CdAAAAAElFTkSuQmCC"
     },
@@ -1294,24 +2783,51 @@
       "exportID": "79655020",
       "name": "Idol",
       "limit": 1,
-      "size": {"x": 82, "y": 104},
-      "origin": {"x": 32, "y": 97},
+      "size": {
+        "x": 82,
+        "y": 104
+      },
+      "origin": {
+        "x": 32,
+        "y": 97
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1327,11 +2843,31 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/idol.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFIAAABoCAMAAABVE1diAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAMUExURf+3KP///5k4IAAAAN/yNbgAAAAEdFJOU////wBAKqn0AAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAGHRFWHRTb2Z0d2FyZQBQYWludC5ORVQgNS4xLjL7vAO2AAAAtmVYSWZJSSoACAAAAAUAGgEFAAEAAABKAAAAGwEFAAEAAABSAAAAKAEDAAEAAAACAAAAMQECABAAAABaAAAAaYcEAAEAAABqAAAAAAAAAPJ2AQDoAwAA8nYBAOgDAABQYWludC5ORVQgNS4xLjIAAwAAkAcABAAAADAyMzABoAMAAQAAAAEAAAAFoAQAAQAAAJQAAAAAAAAAAgABAAIABAAAAFI5OAACAAcABAAAADAxMDAAAAAAjjvBV9MXvE4AAAMqSURBVGhDzZeJctswDAV9/P8/lwCWEniAoGRNpttpQoAPG0qW3fT1zXm9dlIHG+FifF75fl9x5tlyxoeVctkC5QZZFOGDSnzlyvedyyRCUV5wxkFsSlHuO+c5TAe/KtE0qHLT2cfMMGDKPWeXYtwEHjrEloxKNQ7KA4IL2ojMFN/n89HxKURjmoRMmHGmrKcnHHJDmTn9PnNiROmWZrSSfMC2shq1ZGBOoJRloSzqi/+TUpBlQQROKca7SlkJx3F14zD+onTcV4aYkh/GwJxQeV6yoaevx2dgTqz0Tl2fSvIBC+XhdEuFeESzz4hRX4v6/YR0RKxUl0EDCIe0AYYqM2Fq7JS9c4Tcij7DZASpJbMQ4yPsJ8QxNEBzhz9UYjqhH+D351E0HWzOSJUoRtgfaLauKQUyDU17lrDRGGKOphvs70BcaDqjku3uM7h/p0eIwDwO9m4zKtm4yvmZNSi1ex1sMt4rdSdicT/tjDjsW4XEnFgpO5+qapUWiPh+PvOE3UUckXJ6IFEOUqk/kkfRKS1Uf6rhlsUX4IStkkm516xaiGXMlSw6iGW4HIMFt/SQyzhzzMnde1z5Ch6Vy0rGhKZwkMyoOaYKbeXRYA45hoSudGgyx3LMCGfdPEpS6FZOfyhtonROXdteiuRsSqFpnO+iurDthJKytFKbYE77LFTYX+OVtFynOq3aVpL2eRqFW8oTOgUaBT3mYXxIWf6/c1U5yVMLcsrzup9S6rUDgTUo5SudRqlOlgUCaxJl699W2p+nleqk4y1NUbD9BPnHWZXUAvOFttpWmvNZpfwS0cB8oSv3lT3MF7ryf1IyLrT1W8uUqbI8Ue/zUTWfEP6a1RAp3RtKCuMXZdHJX6/UltYZU6U8p+qpdUE+P7RMmSjdlXa1lRm5kgMLuptyRambOWOuP5XcROvdfnmYF2p9oI2MydUwXpTqoFQskBArlaOUQz+iPGtVapkyUR4Or1S0TFkqXSlYmRJe+N8oN52jkvGZck+6UFYBjcLZWzEomQ6Ux9EX9EqGlaH1vyiZFegIdAx6MaGSxgHt3BgpKW8xvZesbzJTsrzH9/sPMDJEWu+EBvoAAAAASUVORK5CYII="
     },
@@ -1339,24 +2875,51 @@
       "exportID": "63818363",
       "name": "StashPocket",
       "limit": -1,
-      "size": {"x": 46, "y": 36},
-      "origin": {"x": 23, "y": 33},
+      "size": {
+        "x": 46,
+        "y": 36
+      },
+      "origin": {
+        "x": 23,
+        "y": 33
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1372,11 +2935,31 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/stash pocket.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAkCAYAAAD2IghRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAI6SURBVFhH1Zc9UsMwEEYtKs7AESgoKGjpKBmK5C4UlBT0cIukoqSjpaBgGI6QM9AZr6x11rL2R5KD4c04iR1iPa0+ScY1C9I+N2346HHXjdlnMfFYGrHKLyJOpVE0dU2iWHz10vYNvfvXLDanfbPr4/4W2ys3kreIH4X3f8efEecyz1EflQI23/uoQExy8w0UiwOl8iie4ldXldwOpMStwki1OB1mXCU4JsIf/Zu7y/eoF78P4mf+NY8gzv1WGoX5xJGSDghw8sXiNNebN3Ibg/j6q/8pbkRALKitNFni7CQUdk8qh8LI6LuwNIZTj7STmjYgEC5Z+qhYCtoRmLirh66d7giXRMQ7g+zlSTgJvO7CB4XUkjdZdcJIpUZFihHAVjwlbYVKa0tkDAhr0kBS/PGTl9Y6UyINVY7zD8A1LjqT3lgqzcWFk8brXFRUzvePvsjoBCdgibhUaVY8Eyo/RIWuGtIEzJWeE+o4iEOV8cihVJq2F7fJXad4cdoTibjaNdIpNFkAXdnlUGPueGjCMY6rdnwjWu3h2aR7LrFIx5PTKinNNVPFk9IAPpZmIgkB8L32N8VRqUGquCaMuMnO1C32Glj1p5v+p1pjJVGZpeLQEB7A+qIdpOfCVGnYacOxSFQoIGyNB8UUFTq0JY1gtGCkqiDPNv6OI3lDxnMYrUIdVfJBfHvr3DQqJEfDsSSMhxeHHvizA0ArXB2VDnQdCbP/780cnyxIpWmBk5VmO0A5RGeYWE4T0TQ/ZsobswwTEPEAAAAASUVORK5CYII="
     },
@@ -1384,24 +2967,51 @@
       "exportID": "98101389",
       "name": "PlayerDev",
       "limit": 1,
-      "size": {"x": 51, "y": 42},
-      "origin": {"x": 22, "y": 39},
+      "size": {
+        "x": 51,
+        "y": 42
+      },
+      "origin": {
+        "x": 22,
+        "y": 39
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1415,13 +3025,35 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Player"],
+      "tags": [
+        "Player"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": false},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": false
+      },
       "texture": "preview-images/player dev.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAqCAYAAAAeeGN5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAMDSURBVGhD3Zc9jxMxEIY3KTka/gKiQnQJJRJCdFBwNIdEzV0Lf4GClvqgokDiKAhC14EQJUXSISrEL0Ci4WjDvo4nNzsZjz/Wm0g80siz/lq/nrE3GTUDMr92a+ldx/Tb50HfN8jkUgRnSEHVJ7aEcIYQVXXCVCFEbUHVJssVQtQUNPblf0GVXSmNClErOrsV8/Srd+JM7/+NrnU3YjJESCxRwYbjg1lngUcn+8G+yWJ6iJBoojYqpAhJSFRUUKaQyf6Z95pmMdvzXrd+1OJdR+c2iwkBKX026CEE0LOsX7Z417EWk7NIrW+tG0kuOAYX5MSU7HayoIrnJIZ7uSVGOyPUP+lSyBBDUXnx4L0rOZODh83i5LV/OufwzT1X4vyMc4UASwThorTFqIDinzMpgraNW1BJdFKZv7sQnFtiHX5cz1Y70mzEhVD+WWCMdx3yesyBfz9AXzEbaYa1hgxg8WD++KOz2BgYodVJtD4kWoonqD7rzPCXTJ7fduXQSAHaM/20KboAagniaWOlkAQCyDhj64C32eRMg6cBh8Zw09DGh+aU8O8N/8GZFBlrURqLJ5+6JnYwB/mhxDM+oCa41UDrrg3QQSdkO9DqONZ4XN0wINsA2rA2XpK1/ToknxnscApIFW5EaDzOSui8UETppwyPiPZ/Zi1mF190Lpb7GiQEIjQhIDky27qKQ1giiE4jcpTvUPvovRVy96jdGgMoxWhDYlFg89odBUmRwZyZ83YgEannDuQKAaYYS4QWAUBjuElCY4HVFiP5zHDohTk7TaSMaTegKA2yxEBEHyFDsyGGFqwZgAgpROvLjXP9w1tXav1gfYiGE1/vmz8u+acVX6789l4YOebP6dS9a3T5kbri5c+XRanFiaaZXBTQ6mJcvDtfwvzjIJi7EXv52fdj752zd/XIezraGKJvdIKDU3eRLy4mhBhKkJpmOelAAlKFAN73zo2Z9/pT9J15drhaDJUpxPrWEFUkpg9cVM2ogGwx2g7H8jw05vTVL2fk97sAmuYfjc0n/DbZiIoAAAAASUVORK5CYII="
     },
@@ -1429,24 +3061,51 @@
       "exportID": "43434686",
       "name": "EnemyMiffed",
       "limit": -1,
-      "size": {"x": 48, "y": 42},
-      "origin": {"x": 22, "y": 41},
+      "size": {
+        "x": 48,
+        "y": 42
+      },
+      "origin": {
+        "x": 22,
+        "y": 41
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1460,20 +3119,48 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Enemy"],
+      "tags": [
+        "Enemy"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100},
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        },
         {
           "name": "variant",
           "definition": "Enum",
           "display": 1,
-          "choices": ["level0", "level1", "level2", "level3", "level4"],
+          "choices": [
+            "level0",
+            "level1",
+            "level2",
+            "level3",
+            "level4"
+          ],
           "defaults": 0
         }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/enemy miffed.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAqCAYAAAD1T9h6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKlSURBVGhD1Zk/Th0xEMZ3kahSpKZBSFwgipTQ5gbQ0NLQQLogRckBKIIigWiAhoaChgaOAUgkF0iUjjqRotC9eAbPyus3tme8s+jxkyx7V97x9/nPzj69xprJp8sJFH85Oq2vTYiFt3trpvE55nz9bDGbod7sLy34huPX/agrYb8CoXggvjbGZGaSs0+4VQDGWIlBAdm3TcZAiJWZqiDF12R0BhDuXkCtoeJDRbEScueAMQNIDbGdpkR/WfUNz+cr3xDCGdh66xuek5vHWmmou9kTHQtOITUSGoiFp0jEjo30DUiFE5qVIBNSA0TBCOaBkvi2bdmiMgxbw4nn4kBJUhijmMhywbMDM1THgtWLzhFt+bmpAzvLMCaKKzCZpP25AL4lI9c/N06PyIToWwiCTxWleAKe4+LV0sIy+LbsUGpzQA7JeJQfQoJc0TdAhIEzgt2rTLUSxf6pccNtEyU63oAQEARITGj6ahj0e4DEkLgUY4kH8OU7ZBWAnMAxxQNd9hhqAuBWYizhxFT6szDyVLgJS+fvWTcC4rHGqwSzYoLEcmQN5BjLXE4sR5WBDxv1uf/Vsm84vv9omoMz5SdthOrhnPD905e+1TQ7m7+xju+F4kOGGBE9JJlxEvv3+g3WwIuVW9/KGwDABKA1UszEQ7ZLDdrxBn1KaKFZtsTcAGybj4dfsXBwJoYYK+63mi308O8b1kfn77AG6GBL0JwDs0NshfYQSzujAWcEL8Zgf+FKncQAjQHoC/9/Ne9/LuJNC44vXndfrE9iAC/cgG6wbmCNIRAMxDGQ3Q2s2vk/YiMax739Ew68c7+KiUwwsEWMHuLOdJDdIaNrrAnJ4bOIESPKxOHA8aAE9eGwiJGiaADe6VS21++6d3x4n0qKsE9tDJ6m+Q9c04zTkg2/CgAAAABJRU5ErkJggg=="
     },
@@ -1481,24 +3168,51 @@
       "exportID": "60289305",
       "name": "EnemyCactus",
       "limit": -1,
-      "size": {"x": 61, "y": 42},
-      "origin": {"x": 32, "y": 34},
+      "size": {
+        "x": 61,
+        "y": 42
+      },
+      "origin": {
+        "x": 32,
+        "y": 34
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1512,20 +3226,46 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Enemy"],
+      "tags": [
+        "Enemy"
+      ],
       "values": [
         {
           "name": "variant",
           "definition": "Enum",
           "display": 1,
-          "choices": ["level0", "level1", "level2"],
+          "choices": [
+            "level0",
+            "level1",
+            "level2"
+          ],
           "defaults": 0
         },
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/enemy cactus.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD0AAAAqCAYAAAAAsVPKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHvSURBVGhD7ZjNUcMwEIUtGqAbOEAF9hludEEZVBLOcQVwIN1Qgckz2oysSMruWvLYI38zGiv+We3z059jmhXxM7SDrTaPpi+W2509VsUuuhZ20Rww2VCxpzbHLKe3Knzv3hq26LZYdMlNw1KonPaFb83tfUxL2LLbu9NStup2NU7DECpZlh/f4Y/+19ZkvLf3tjaN8dl9q/MM9b4iooFGeEy0C/cFhHIi1KJfjk+ToJTwQ3McjzFe+2dbuwYxJM/HXkBKMOahbGP6HGwsxphLkULuujH8WIf2ayw+EErFnpoAsTTxijPzHQZIwk2MGIbr9lNOA2ksd0iEIKEuIqdDgrW8dadL0aIRDNiipYI1LgPcE3qWC3XjmGCQZUwj0fNLGZOl4oLrHMEEJ96p6eyvfzAfpIS6sG7K2a1Lw1nSFhF9TsTW+MBpDRzR1WxDXUxqIQ+h2WkBidtal8GqnOYKmSOYy6LdG4JiolLXclPl7F3nRGaPN1mb26HPUI7LgC0arEl4aN+ddUfm44v3E+AsayGnJMQ+NjjCZ41pNBxrvDSxF5X6piZUToNU4JJOh8Zt6o8DW52gEi1tJIQbQ/JcjJQJfnxRYznEErlFExzxrDGNQDkFl4STz6yJbG2CCeSVyo2VtO9yDrGluvdtmuYP8WIh938BeAIAAAAASUVORK5CYII="
     },
@@ -1533,24 +3273,51 @@
       "exportID": "60046263",
       "name": "WeightedPedestal",
       "limit": -1,
-      "size": {"x": 46, "y": 24},
-      "origin": {"x": 23, "y": 24},
+      "size": {
+        "x": 46,
+        "y": 24
+      },
+      "origin": {
+        "x": 23,
+        "y": 24
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1566,12 +3333,40 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "requiredFlopsCount", "definition": "Integer", "display": 1, "defaults": 1, "bounded": true, "min": 1, "max": 100},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "requiredFlopsCount",
+          "definition": "Integer",
+          "display": 1,
+          "defaults": 1,
+          "bounded": true,
+          "min": 1,
+          "max": 100
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/weighted pedestal.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAYCAYAAACFms+HAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACJSURBVFhHYxiqgBFKowD/2P//ocwBBxsXM2J1IxOUHnJg1OH0BqMOpzfAmmPxgVwe1BJn8hfsuR4foIYZo0mF3gAjiiT/bxo0lQ8MPGf0w3Dn8AjxwRjaMIAe6nDOYHY0DCA7HswYCo6GAZjjGYeSo2EA5PjRcpzeYNTh9AajDqc3GHU4fQEDAwBxPSAoXHzJ7gAAAABJRU5ErkJggg=="
     },
@@ -1579,24 +3374,51 @@
       "exportID": "61823517",
       "name": "IntelligenceSign",
       "limit": -1,
-      "size": {"x": 50, "y": 29},
-      "origin": {"x": 0, "y": 26},
+      "size": {
+        "x": 50,
+        "y": 29
+      },
+      "origin": {
+        "x": 0,
+        "y": 26
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1612,15 +3434,65 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "title", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "message", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "min", "definition": "Integer", "display": 2, "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "max", "definition": "Integer", "display": 2, "defaults": 1, "bounded": false, "min": 1, "max": 100},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "title",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "message",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "min",
+          "definition": "Integer",
+          "display": 2,
+          "defaults": 0,
+          "bounded": false,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "name": "max",
+          "definition": "Integer",
+          "display": 2,
+          "defaults": 1,
+          "bounded": false,
+          "min": 1,
+          "max": 100
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/intelligence sign.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAdCAMAAADfG89gAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAeUExURYFPqNRr5f/YAJZfv91rreBv8pdcxHBEkWAxhQAAAApODFYAAAAKdFJOU////////////wCyzCzPAAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAGHRFWHRTb2Z0d2FyZQBQYWludC5ORVQgNS4xLjL7vAO2AAAAtmVYSWZJSSoACAAAAAUAGgEFAAEAAABKAAAAGwEFAAEAAABSAAAAKAEDAAEAAAACAAAAMQECABAAAABaAAAAaYcEAAEAAABqAAAAAAAAAPJ2AQDoAwAA8nYBAOgDAABQYWludC5ORVQgNS4xLjIAAwAAkAcABAAAADAyMzABoAMAAQAAAAEAAAAFoAQAAQAAAJQAAAAAAAAAAgABAAIABAAAAFI5OAACAAcABAAAADAxMDAAAAAAjjvBV9MXvE4AAADGSURBVDhPvZRREoIwDAUbFbT3v7Av6UqL0IKj4/4Q8rKlZQZS3pKGZCmU5zAzSYWLQ53SdSH6jt2CaWKE9uIwX4W+Up/jzDNdB0Ubq6uFx3AwF0UX08WKM7+2UIa3Cripg5upJoShQrlWPKBsOTB2lQh2hL7Se7o4HZQ35iihAiYGygYmBnQ31uf0WSofK/eAmzVSOF1A9wimA1rfw08AHoJA6NunSskThtZ40CTLgtH/mRLvklp8o0S/CRrekj8rJaEckPMTnt0TDxB9PckAAAAASUVORK5CYII="
     },
@@ -1628,24 +3500,51 @@
       "exportID": "03703297",
       "name": "MagicDoor",
       "limit": -1,
-      "size": {"x": 34, "y": 46},
-      "origin": {"x": 0, "y": -2},
+      "size": {
+        "x": 34,
+        "y": 46
+      },
+      "origin": {
+        "x": 0,
+        "y": -2
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1661,13 +3560,47 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "sceneName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "checkpointName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "sceneName",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "checkpointName",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/door magic.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAuBAMAAAC/q9aKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURUFGqAAAAD4P/AUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAv3YBAOgDAAC/dgEA6AMAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAAAOPXXShIpetwAAADtJREFUOMtjYGQAAwEwCeYQIyKIDojURx0RbLaj6mCgochg8zv97MYV8nQKeCy2o8gLYOigqgia3YKCAH2oCvRuz8MZAAAAAElFTkSuQmCC"
     },
@@ -1675,24 +3608,51 @@
       "exportID": "30165546",
       "name": "EnemySnail",
       "limit": -1,
-      "size": {"x": 210, "y": 132},
-      "origin": {"x": 91, "y": 129},
+      "size": {
+        "x": 210,
+        "y": 132
+      },
+      "origin": {
+        "x": 91,
+        "y": 129
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1706,20 +3666,44 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Enemy"],
+      "tags": [
+        "Enemy"
+      ],
       "values": [
         {
           "name": "variant",
           "definition": "Enum",
           "display": 1,
-          "choices": ["level0"],
+          "choices": [
+            "level0"
+          ],
           "defaults": 0
         },
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/enemy snail.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANIAAACECAMAAADSkIWaAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkUExURRoLkm1ymxYJebnFDEd6DP///3aoL7rnaYqTCc7iL5ihCgAAAI6CQ40AAAAMdFJOU///////////////ABLfzs4AAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAYAAAAAEAAABgAAAAAQAAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAADp1fY4ytpsegAAB0ZJREFUeF7tm4lSHTkMRSEQMiT//79jScfdXmS33ctbgFM1YEty+556DwJJzcu/vbxk1Pu7seduUg/AgdsyfSthx+Hc7Zi7kZRTvL6+cvpGzCiRcZKg9HrTl2r8MhJOo0q3fP+NXmXxdmFKt5Mau0gjHeGWr9TINZbqELd8pbYv0ShHiUq3kNq8giRnELyCGM+9jo0bCHMOonQDqf7zyXISphSkePpFdB9PlLPA6Gqnuyhd+xNST4kk54FQgBsuoaNEjhPBR+COK2grEeNU8Alc+OV0ptIvhY0PQgFuuYCmEhmGMJcCegUIeS8TEwolhZJCqcthJQR8mEnBqH6Z6APFAAWg2KM1wxP6EHylLjGZgFHxMtFceQO2Kxxos1+JzAY1ReImXaorZpQr0UrAqFbadNqtROAAhQWJS3C3j1N6M42MltGmU6PP4SaaNcA2Q+Iur4U7ZK3lajd3R2nDaZ+S6rg+Cxa75xSv9mObE8sSTvrsUVKfDSNBg/uzq1I797lKnPTxQ7pIcHdcleTuduyeUtdpXsmN2MOd52UKqd/ff/uI0u93gUIKQT1mlTTfjJDwS9IF2AqqpEU/coDmlpI+RKEwqbTD6PWVGwVqpqSVRuRA7PoDJE2MotMeJdaDpEaBWI2mjcSB2PUHLKg+YkVrc0rzQpXS6mTbRmIzik6UUjSnzSRoeG0VcGvFjtco/pGZYOXEyIss1Y+Pj7aSOtkzUiS9dErs0ppTjHBi3Yis1Y+PP3/+6IpqhgTlIQmSXjolemfNSUaqxLKhZFVV+pAV5QwJykNSbqn0n6CrtKzZG0rvXaXPxWh5sDKjdPBFUiW9Oi1r9JaSfDW1lT5NaX2u4SoRp+Q8Jd0bmryppIQZyhmfn/oAe+w+pT1GafgAd28qUYUwRD3DlNQnEQrcQynFUpMykinJEPWMVUk+JwwrbRrJQIRSqSQBWBk2VCqFBjqCzNEAOZMoyacUR0mvqciSVqhICnVu8WFGIKxgvcRHoRmIJ/haqplRYuVgGjna4BYXHQDiBmhW0I5GLy+fLaczlExBfluQn0blP9lri1tcdCBCYFouNsG8PPqg0hKyRlqhmSotTtzioocjGpdGk0zp5Tol6UgvUxInaXKLi56OUNuG+cBb4503ocSqxIRSUNIy13jYMFDbhvnA29tfahneH7WcyKlyR4iekSh1supoJOzTb3BC9h1P0D3zgauUluglS4ObIutexyJhLwqJg27LfaHkOTlKHCjYCl6QfDnlTslWm5Gw18yLBLtiWyr9rX6/CAKIrHCgoKPEMkOUghO7xUMqLHMlLRBbLFgpeWc9do1Syyj7rmeEvT2EqwN0BCokh3ovcCIqFU4iYB4JHCiYVKpeJk8pexMZhFe8vbAeUaXUyQT0YwonCppKrCpMKW+H/a9UaXFiqxQCxTbDlBYnjX9QSSO2GFHCic00KBXcVEmfQpwzGFTi8pKWEiuHy5WC0BGlkOU7KslMUglKwYmNEB1JdJiG0YQSq5S0KjYGha+hFEMb+S7ZE+koDaPTlRKLptJJTg2j85QEUQqx1105cJ6SvOsuVwoG6vQkSiHKkJJprIWG0glObaNDSnm1UgqUx+KeXAc4Q4lVSq4Eaa0aWPck24HICOStOajEKlK818K6pbTfacvociVWcBclLiy4QGleCheFtC7DSo6TV8xq1UBeIOoo2AiE9TmoVFbzUtWvCqQdAp2+T2BMqc4i5PkFqUwpzUiNCc0oDTjJPjfaVuo6mUVK/AuGDoeV1rLu0qliG6gKAdK74JFwnpIbJg8t63yo2AbqSoD4g5Czw4RSy0nruihGyv0TKa1QNarCgymNOFGK+CVWCWQdhJwdjiqtUmwXGjVWCWQdhJwdhpX8OB2eQ2nGyR1/aiWZHlMi6jAEbTOuNOfkDz+zUmP20ZQmnGTyCyqxzHg4pWGn5tzTKsnYQynp38c1aGZNkaHGlNcg6TAEbTOvtOnUmfE6JB2GoG3mlHpxI72ROyn12XKS/mMpdV8iwSK3Mve7D6oUUwcorFBvGz2oUuIERVW3Dbw2SYchaZtaaY9VAiM+3gBJhyFpm0RJvtcZXNZF85fQa+LNkHQY0rYJSjxav30b7IdQFYF9H2eOpMMQvE2txOYabq10A1wl+UvUcQje5kfpKN9D6eVHieBtHkFpnCC//W9mP0oHCUa1kr7txt58P0q3wDP6skpjPIOSZPz2SuTu8KN0kG+iRNo+aq6Qu8OXVGL0ThB5C6ZHjP69yEMZvweWeBOmR4zurWR59WMXxgndp/FzcDi+LCJWWFgr1jYoORQD5YZVA50eM7pEiU8F1g8d/WBb67ROJOg0kbeY+W0lJ0+krFtWKTYSOvohxykpegIIvM1+pZJwa7Vy2WiniIpB3BHOUzoRNFYIO8YzKBF1lJfqf/J+AFCZljHCD0Q854Eg206C0oM4WZ4TEKWmk040YGQ/POd8VKkKaMUJODcABy7j37//AVJfw3PapM7PAAAAAElFTkSuQmCC"
     },
@@ -1727,24 +3711,51 @@
       "exportID": "70867241",
       "name": "EnemyBrick",
       "limit": -1,
-      "size": {"x": 56, "y": 64},
-      "origin": {"x": 0, "y": 0},
+      "size": {
+        "x": 56,
+        "y": 64
+      },
+      "origin": {
+        "x": 0,
+        "y": 0
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": true,
       "resizeableY": true,
       "rotatable": false,
@@ -1758,20 +3769,45 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Enemy"],
+      "tags": [
+        "Enemy"
+      ],
       "values": [
         {
           "name": "variant",
           "definition": "Enum",
           "display": 1,
-          "choices": ["level0", "level1"],
+          "choices": [
+            "level0",
+            "level1"
+          ],
           "defaults": 0
         },
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/enemy brick.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAABABAMAAAC92amBAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAVUExURb5RHuNiLNa0jgAAAP///7IABf9vUI/M+pQAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAYAAAAAEAAABgAAAAAQAAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAADp1fY4ytpsegAAAVJJREFUSMftlFtuwyAQRQfjBRi1C0Dj5p+aDbiJF1BVYgnt/pfQYYaHSXEfqpqvzgeEe5zgSy4DVMqYAYFrsDQYM1mWG6hMF0IDJ6gw1h5SWajlqcqemhauZUIJal64ljEdrE4LpohIH3lwabHgHAdEWs+RRXWpk2j0XS0qJsijpU0iVHdeXjzKFrxjO9qzrWROGb/E2T+KV9XCPO9hOu1rmGRoH4UeLPN3Ibu6huwb89yv/HfuBSVJkPosQ+NGdfHFjfZR2ARuArcEx4vAtYGrwC1DyL8qkPfMcPsVxIcdjMdSYMxQgWc8hRfEPaxve8bw9lrhyhm6zz4HglB8ppiMDJ8mhsoI/JChEMJxhk7h+cYZ0nIP+hma6erRRTrIkMdlmd1RhjxoB7fqQwlWjw0cfgJx5zAbltOqh/DVLevIluWmQ4jYbTVTp9X896G/yRDAO6zWhmBRbdBeAAAAAElFTkSuQmCC"
     },
@@ -1779,24 +3815,51 @@
       "exportID": "87718071",
       "name": "GamblingExpertNpc",
       "limit": 1,
-      "size": {"x": 50, "y": 56},
-      "origin": {"x": 19, "y": 53},
+      "size": {
+        "x": 50,
+        "y": 56
+      },
+      "origin": {
+        "x": 19,
+        "y": 53
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1810,13 +3873,35 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Character"],
+      "tags": [
+        "Character"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/character gambling expert.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAA4CAYAAAC/pKvXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALfSURBVGhD3ZlNbhMxGIY9kSqgEkTsEe2yZVtOgMQBIEcAVogN4hiIHWygN2jgGGxgS7fkBAgqgRBSh7yWv6nzjf/rn2keqYozP6kfv5/tSduJBvxZLXrVHHFjb5nUp5l6rYZPwnXeRXURF6kSYFIiRIrQJEVS2BqRya1aOjErWBMRIkQoVKapCOESuhIiW5FITgkw2VUrRgJMsrRiJUBTEZBLZrKlFTKHdJonAnydDkmnaiK8w78+7vUhIx9yTdVEqEP/vn6R73eO7stXF3/nS3Ht50K2cd+txytjn5uIhIKOnz9YDSI6vNyqlRbKiJII4cX+NykBkArnaXe4MShVEoGEag7YyopSsEHpQBR86E+lQzMRGy8Xu6olxOsfp6p1IQBIgoBMcZEYCXDz0XfVEuLZ7J6U0SWu3z2Rx9+fX8h0QLVH8BqkCGOJEeESACLzeS/OPu3L83Qc6DKjyQ4BLgFsx13EpmHi1e1D1XKzIRLS0ViZWgwiMR0Mvda2eZVAiqSMcsg9OUorFO+GiEnOf9Sp7GBCm6DjrvMz18jaOh0qk1Ja1Flakd4sf8tXgt7TeVyP39OliMRQo7wg4i2ty5I64fUdnqOfo893iqQsAjkxydgEnaUFqLxqrkAEdZrmBX+vp+0V4ZOtNjwBkwRwiuSWoEf3mO8lHNuckwdNMiWS4N9BYoR8i4ZRpGQ5mb5QpfxBjiNXrZK7NYenkEMCDB9CqdSe3L6SCWXYR2qmUoKNDfEqyxR/RKmFMYFau3iu+QG2OxFQOpWcaQDrh5XcJHNLAGNpmR5ZbI/PLnAPv28toVp5GY2MSUInNBkusF7aVWsgayrRkz0kGdM16wFSrYGsczA6EcI2wr77SyWTvPwaRjhoEEz35aDJPnL8fCOELCWWU8TZIVok8Pr53YFsM6FLMRLxPTiuxJlqCfGwu6Na7TEmAhmTEEngfxaaEK6jHyOWJbt78rZ33heOEP8B6VJp8BD1wJgAAAAASUVORK5CYII="
     },
@@ -1824,24 +3909,51 @@
       "exportID": "59550687",
       "name": "Darkness",
       "limit": 1,
-      "size": {"x": 40, "y": 38},
-      "origin": {"x": 20, "y": 19},
+      "size": {
+        "x": 40,
+        "y": 38
+      },
+      "origin": {
+        "x": 20,
+        "y": 19
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1857,14 +3969,56 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "exitSceneName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "exitCheckpointName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "level", "definition": "Integer", "display": 1, "defaults": 0, "bounded": false, "min": 1, "max": 100},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "exitSceneName",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "exitCheckpointName",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "level",
+          "definition": "Integer",
+          "display": 1,
+          "defaults": 0,
+          "bounded": false,
+          "min": 1,
+          "max": 100
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/darkness.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAmCAMAAACBKikvAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAMUExURUIAaX9Cpf///wAAAGXXbq8AAAAEdFJOU////wBAKqn0AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBQYWludC5ORVQgNS4xLjL7vAO2AAAAtmVYSWZJSSoACAAAAAUAGgEFAAEAAABKAAAAGwEFAAEAAABSAAAAKAEDAAEAAAACAAAAMQECABAAAABaAAAAaYcEAAEAAABqAAAAAAAAAGAAAAABAAAAYAAAAAEAAABQYWludC5ORVQgNS4xLjIAAwAAkAcABAAAADAyMzABoAMAAQAAAAEAAAAFoAQAAQAAAJQAAAAAAAAAAgABAAIABAAAAFI5OAACAAcABAAAADAxMDAAAAAA6dX2OMrabHoAAAC9SURBVDhPtZBbEoQgDAR93P/OGyYNCSUote72B3EmXaW4nR1bQFPpMgpQQo4IFVpIkX2ChYjAMsNGtMCuh13hXkxmfWRxgXUTqUe4gEg3RAIi1QR5KyIvffbctIN0g4uEW1Ze6/xetC9cVBduve+7nfqPicOwuozj8MrEMt6IDa/GYmeqMG8ohkmeilaVSzbwXotR6ycaV1Fe1DXMxNbX5+9FWYWUNZUSkkRkTaVAihONhkLgjqCB/4sTzvMDiMgJc3qoo8MAAAAASUVORK5CYII="
     },
@@ -1872,24 +4026,51 @@
       "exportID": "22280227",
       "name": "EnemySpikeBall",
       "limit": -1,
-      "size": {"x": 24, "y": 20},
-      "origin": {"x": 12, "y": 10},
+      "size": {
+        "x": 24,
+        "y": 20
+      },
+      "origin": {
+        "x": 12,
+        "y": 10
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1903,20 +4084,44 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Enemy"],
+      "tags": [
+        "Enemy"
+      ],
       "values": [
         {
           "name": "variant",
           "definition": "Enum",
           "display": 0,
-          "choices": ["level0"],
+          "choices": [
+            "level0"
+          ],
           "defaults": 0
         },
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/spike ball.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAUCAYAAACXtf2DAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAH+SURBVEhLtZRLKIRRFMfPKBuyoLBAifJI8lwwoTyaQilWFLEhbGShJFYeTVlYKEkRjYks7FjIIyXGSpI88ipKCAusxOeeO+d+7v2+b4ZRfnU6595b//8955u58B+MujSNSgiizFnfidNOn/v1w7/QU/mk3c4/08pggNwcT8BfTBxp6xqKYz20FGHjmwy9QObHIrSorFBex6a0QFJ4n34+0HigmNonqWA4Mx6oAsiNz1QMTB3c773xLHfiS7z4/YhH936kd4MhiyMmAwRNMNBEES+gYKCwTFHut4mMYlDb/qS4b48vU8UgYXu2N28Ep+rhD8sOkLPdTaq+EeKwT1lA65XDEuWCiGkDP/TS3DgkJ0g3M9z+s60eILmT16UJdoAKViSyOGfBml672MYjjsmgoXCBz9yXARc3QmYyZa4mru1zRAFxMsKTJyiHCwtxhBusNkxrIviuHy4fX6ny4mmeBU8qCyZuhTIiNJi5CuG1MiKExgRblC3onUk3jVwZkdyaCSEsjAxYiSOBfQM0sejgZNANi1qX5XgVV/yJTnW4ITrvhXZ+5q6uFaKrWqA65gOq2dpmG1Y09QU+1ZjxifitCYoLhAlSI5nwQojjC4rvD5rgn82KO08YrLyXK7d0sM6p1I2EiU2Iy6CB8V36DcIITVyxTrNBSf51wKL+AfgC7oTFFNyKRPoAAAAASUVORK5CYII="
     },
@@ -1924,24 +4129,51 @@
       "exportID": "65251079",
       "name": "OverheatRegion",
       "limit": -1,
-      "size": {"x": 16, "y": 16},
-      "origin": {"x": 0, "y": 0},
+      "size": {
+        "x": 16,
+        "y": 16
+      },
+      "origin": {
+        "x": 0,
+        "y": 0
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": true,
       "resizeableY": false,
       "rotatable": false,
@@ -1955,36 +4187,85 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Region"],
+      "tags": [
+        "Region"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": true,
-      "tintable": {"enabled": true, "defaultTint": "#ff0000", "rgbLevelValueName": "", "useDefaultTint": true}
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#ff0000",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      }
     },
     {
       "exportID": "53690151",
       "name": "EnemyChill",
       "limit": -1,
-      "size": {"x": 106, "y": 108},
-      "origin": {"x": 45, "y": 105},
+      "size": {
+        "x": 106,
+        "y": 108
+      },
+      "origin": {
+        "x": 45,
+        "y": 105
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -1998,20 +4279,45 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Enemy"],
+      "tags": [
+        "Enemy"
+      ],
       "values": [
         {
           "name": "variant",
           "definition": "Enum",
           "display": 1,
-          "choices": ["level0", "level1"],
+          "choices": [
+            "level0",
+            "level1"
+          ],
           "defaults": 0
         },
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/enemy chill.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGoAAABsCAYAAACCeCeKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAXDSURBVHhe7Z29jiNFEIDtS1YiI+Qisr3kQoIj4CJiApBIiI1EiHgAHoAYCcckSEdATATJBSRIJHcvsIRkSI6WKbtrKc/2f1d1Vdv9SaPp03k8M/VNVdeMd72byRhs33ODEfh2s7l3w2yWbbZuOCx/L4tpUTVichhNnklRUnJCjCDNlKjegtZYFmZClLagEJbEqYiyKiaGtrQuokYUk0NPeWKiLlVODElxUVE/39oN9l9v3YCR57duYJAP3262T9x4YpwpahCCoj5d0s0NrwKJcsrJzKhBiHZ9d/f3Kg3FdhtP5h/cmpudzukmz3dhNhOj4BUF90Gw7NOmLwrL5/tI1DXerI7AmagpyS5zjhqEB1GhbLJWt6U6PsTa+S5d+fGAjqJmybPPkxxJs/vTZ6g5SrrsWQPLHpAtSvsq6y1J+3ypJKAoo7QOXiuTtM53LQkwX/quudxRikX1vMosSLJyvtvlP6tbc6mnzdrzQ4ge57t04Y9O/vgzEy2iEK4ToAf8pVsDNZlFtwda34NuL3G+SEgUyxwFO8RFAgjYOvAxfK8t3T72eunz9WG+maCkAgjE/j9n29RrtGApfVKkgkbLUWmAS7atKZu1iM5R0tRe5Rjg1u17IjpHSVMTMLpN6/YWGCKj1sQyJBXglm17MHTpuyaGLn2TKWoYpqhBmKIM4ZufkClqEKaoQYAfbgmm28QOx4yasvRJOZilbxAeRM2s0iMn9mcZBRtMYTbxlr4pqx+5sY7+aujyJvOBrRAlyXB8eh4TRZnS+CitWEWiKFNaHaWCkGpRlCktj1pJAIsoypR2ToscCrsoZArjkwSIicrhbqcj8+meL4C9AFEqj5Du/tTLOM19t9BdlIVAjSirmygodWcB+sqte0L2CceiVX5rEBd1FGQ4INaPDxFrJoInv86k791amsz9Wmw2RLo+Kuj1b26w8OKlG/hKnrSsin3SY9f+kkkRUbEvDVaR1ShpjYY09vY89c3ODwHwBcoX0FaYJQFa317NJorlBCCwHMK43ieAhiwWUVUHvlzZb75z4zUtQQ5se9wXY3ntLat5jqo5YJyr3vx7Wj/75rT2khvciFy8IJ69c1qHSJU9Hz3mrKZmouWKemgqFlAWUCUsQxDSKurFT25AeP35aS0prLqZ4Ex7GrxgKQR8Qhgl1YLypEuh+JOJUiDAQWEghi4eotsL4cs0bopFSVw5vqu9JtihbaSyiQKyJLOqSJTkgUAw1wHNzY7Y6zgl4XwUQypG2c0E5wHQZsIHbTAov//oBo6PvnCDAKWScru+UKmjIjmbi+yuj/sqSYlCUNha0O6T/2Ow/+X+kbDaLCppz3vKYn+ExI2vHPqgIjlLXYycMshJUpRWNiH7vRsEoNnVKqn02FKyOGNnOqNGAGTRRYqoKKkOphWYl0aBK4ZBURKSSkuLBhLHyBHLYUsfZBUuqTb9EugqCtpfXHLZ7dxAmJpj64n3PsrK3IRlCO6n1vdSAM2kWMdnJfi191XBG16rTcS7H7jBirUkq1nRImqoOeqfP04LhUqyXLpaMZVRsY8L6D1KqDOzLok1o6yWPSrRJ2SETGqJ7bDtOZY5XC6dYUVdG49EcX6OUkrpszL4++7W/8Y7pSW25jJK+uHmqAQ/OLTaVFAwm57fntaWacmm5Ce8pb803Ttgo4hqnU6SN7ylAcA5gy7XDlcMohmVKn81B8F59eP+tTMqFYfWrzJofoQEAbJediQBQdKSkKaMopRkF5dciYwqOY8cOEQN91BWGouSEBVREBDuoLRiWRIwM2rB2kXjY4oSgDubgKgozed+KWgWWMoICUlAtOujSNxTIaVdW2hfXO9Ti5Skoq4vlV0tLbJGRnDuEwRJSUKyM4oSyi6NgGsiLQdJPpRNsRZ2LaJ6CUKOoj67uTn9q5Kv3z9ctKxfb266SvHx6nBoF+Xj48O5POtYkBFDTBSQI8t6gKzw6nDY/AeIW/rxAQB64gAAAABJRU5ErkJggg=="
     },
@@ -2019,24 +4325,51 @@
       "exportID": "37539959",
       "name": "Clock",
       "limit": -1,
-      "size": {"x": 42, "y": 40},
-      "origin": {"x": 21, "y": 20},
+      "size": {
+        "x": 42,
+        "y": 40
+      },
+      "origin": {
+        "x": 21,
+        "y": 20
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -2052,13 +4385,49 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "hours", "definition": "Integer", "display": 2, "defaults": 0, "bounded": false, "min": 0, "max": 12},
-        {"name": "minutes", "definition": "Integer", "display": 2, "defaults": 0, "bounded": false, "min": 0, "max": 60},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "hours",
+          "definition": "Integer",
+          "display": 2,
+          "defaults": 0,
+          "bounded": false,
+          "min": 0,
+          "max": 12
+        },
+        {
+          "name": "minutes",
+          "definition": "Integer",
+          "display": 2,
+          "defaults": 0,
+          "bounded": false,
+          "min": 0,
+          "max": 60
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/clock face.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAoCAMAAAC/1ZhiAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJUExURf///wAAAAAAAH5RqV0AAAADdFJOU///ANfKDUEAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAYAAAAAEAAABgAAAAAQAAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAADp1fY4ytpsegAAALVJREFUOE/N1EEOgzAMRFHg/ofG45lQuw6KWVT0S4UkfuqG0u1oN6ebp80o70liGqCw1nDf8bG41dC6lhxYZlwWO1Y8Rk55ZxKD6hSJXt9qyfAaIolS1q86YG6y/FDtFdCXpJ3SIt3eUaQDj1Sb0ZzCFXoTqJbLfkP/ovpoSoM8oK/24AG8/hsw2rV96m9Bz/ap3tgGduR0ZWn8uqAyvGVb/gJIdE82Uc0DRRrGNEGJFqtjdBwnaI8DFnix6HIAAAAASUVORK5CYII="
     },
@@ -2066,24 +4435,51 @@
       "exportID": "44270482",
       "name": "Dial",
       "limit": -1,
-      "size": {"x": 30, "y": 30},
-      "origin": {"x": 15, "y": 15},
+      "size": {
+        "x": 30,
+        "y": 30
+      },
+      "origin": {
+        "x": 15,
+        "y": 15
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -2099,12 +4495,40 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "maxTicks", "definition": "Integer", "display": 1, "defaults": 60, "bounded": false, "min": 1, "max": 9999},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "maxTicks",
+          "definition": "Integer",
+          "display": 1,
+          "defaults": 60,
+          "bounded": false,
+          "min": 1,
+          "max": 9999
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/dial.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJUExURc7O5EBAaQAAAHogDLcAAAADdFJOU///ANfKDUEAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAYAAAAAEAAABgAAAAAQAAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAADp1fY4ytpsegAAAI5JREFUOE/V0FkOhCAQBFDs+x/argUakMz4ayWK1BNcWvzMwk3xDKlrm+JusOuKaw89F8Ir9TqPkNPzGGzqgeMWs9uKd0g7Mj0Hspo14nZkrH3LbBR8xfYuH2bO6lOX9N/ynznfAoYf12Jp8WFvcnra0yHgAGuH6RYCma+3PUE9z/Y5rjVkXCvuJs5sFhE36+oCjSygOBcAAAAASUVORK5CYII="
     },
@@ -2112,24 +4536,51 @@
       "exportID": "23510996",
       "name": "EnemyBallon",
       "limit": -1,
-      "size": {"x": 44, "y": 48},
-      "origin": {"x": 22, "y": 24},
+      "size": {
+        "x": 44,
+        "y": 48
+      },
+      "origin": {
+        "x": 22,
+        "y": 24
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -2143,20 +4594,44 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Enemy"],
+      "tags": [
+        "Enemy"
+      ],
       "values": [
         {
           "name": "variant",
           "definition": "Enum",
           "display": 1,
-          "choices": ["level0"],
+          "choices": [
+            "level0"
+          ],
           "defaults": 0
         },
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/enemy ballon.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAwCAMAAABdTmjTAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAVUExURc7XEf///4GHBwAAAP//GP//KAAAAASiCBwAAAAHdFJOU////////wAaSwNGAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBQYWludC5ORVQgNS4xLjL7vAO2AAAAtmVYSWZJSSoACAAAAAUAGgEFAAEAAABKAAAAGwEFAAEAAABSAAAAKAEDAAEAAAACAAAAMQECABAAAABaAAAAaYcEAAEAAABqAAAAAAAAAGAAAAABAAAAYAAAAAEAAABQYWludC5ORVQgNS4xLjIAAwAAkAcABAAAADAyMzABoAMAAQAAAAEAAAAFoAQAAQAAAJQAAAAAAAAAAgABAAIABAAAAFI5OAACAAcABAAAADAxMDAAAAAA6dX2OMrabHoAAAEfSURBVEhLzZRREoIwDERBkfsf2WSzadK0BfXLN05JNm86BZXtrGwNBkFN6BGGTtdT6eAIRMPhBAo/yswXuKTL/gC7wjFI8U55p+sxLFlKLPqW3GZrGW7YLvuqaCU1lhT/KBvIWCcQU25jy9jY1orFkOW2GTOzRlu/AnnaKhdMwdPrmX5zC3fBN+6HPJ8sSO0L3fRa9b3yeokY7XNP3fY4Dla3iKqwu4KmwmQJpBf4SDa1yev/dXJNnv3qSJxBuJE794VTiLywOxcy3hs2rHT72sYqT+3hwBDxWhpJcnNNntghh0t5tF2Wq7a07DLoIhFpqIRcdariciyksuiDWuTJjXJg9F3VGTq1zzqDYExcZ5OZZObO7CGiCRg1/kI+zzeJ7hLflnJiKwAAAABJRU5ErkJggg=="
     },
@@ -2164,24 +4639,51 @@
       "exportID": "19563576",
       "name": "EnemySkeliguana",
       "limit": -1,
-      "size": {"x": 52, "y": 40},
-      "origin": {"x": 18, "y": 37},
+      "size": {
+        "x": 52,
+        "y": 40
+      },
+      "origin": {
+        "x": 18,
+        "y": 37
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -2195,20 +4697,46 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Enemy"],
+      "tags": [
+        "Enemy"
+      ],
       "values": [
         {
           "name": "variant",
           "definition": "Enum",
           "display": 1,
-          "choices": ["level0", "level1", "level2"],
+          "choices": [
+            "level0",
+            "level1",
+            "level2"
+          ],
           "defaults": 0
         },
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/enemy skeliguana.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAAoCAYAAACxbNkLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKeSURBVGhD7ZZNTiMxFISbnAEpQYILZA1r2M4RuCFHYAlrWOcCIJFIcweGslxWxfG/3c38fVJo97Pd/cr17Gb6TyX7t7dP/Ng2wRk5s9fhpJLfXF3N9t7Vbrcbvmo5J+Z0aoU/I0WVJjuXqNV2u53N/hxziHJi6FKPwJYER+8nU3LKHHuKIHn9IfZZgXlIhhNBS4EE15eX9q4Mo+oLexskajecaim/WNmpIyYwgLMvbNNxEtCSqxWU2kMQVCLm8P5uW9MUc1DHcKHIYiVXKwb498CP+Ys4VJC/WjWEki9FRZ0IQpnxZ0Pd1G7+HoLHds/R3eJSjzuELs2yh1TUku6AYWUVo+UwUPwFSY3FQjqHekttKXKOG0F/gpBSmkpOywhfa7+sQrEcoVIq+bASjMV7nUOpkkNyxIaKaT3BUqXl91EM2uaPCvG/PyoCk3xRsRiuiENQKrlR8J3GIYrIibFNB2OhPnwX6E6LS6k5fp++351yEKOlp2JqCIlrJSQqtzhOEIj9uzMiyVqXWKY6j20tYT+3aKKhcvNdC8U1FhJRu5/8Z6TEgKGCeA8Y04SYDMaxvwV9j09WkE7WJEJxxkrHAR2bQ+fFiA7IvZzx0hhgXGOjOToU/gb+DUEoDZQFsKETXp6eXFkpLKvvIupQaWIp0WBpgcFkNAk/Ye17fX6ebu7uskcwn6GuYp5tDqVrDyEpJAlhvwtZQf7q1yb/+PBgW8fE9mAvUdspBOWioiDo+vbWtFlKQBNkv44F+iy0/RLkfU85Jk85e+tADAnSpf1+7xIi6A+5grl87uFwOHKeYnD9+fHR5V5wJfgyvNwELJoE+iBovV5PSHCz2ZixJXMxXuepAAg6v7gw1x/398H8UjQfCiF3SoCIGBDRxzT9AjwZPgBgbgkLAAAAAElFTkSuQmCC"
     },
@@ -2216,24 +4744,51 @@
       "exportID": "85618544",
       "name": "SafeMarker",
       "limit": -1,
-      "size": {"x": 15, "y": 15},
-      "origin": {"x": 7, "y": 7},
+      "size": {
+        "x": 15,
+        "y": 15
+      },
+      "origin": {
+        "x": 7,
+        "y": 7
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -2247,13 +4802,35 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Marker"],
+      "tags": [
+        "Marker"
+      ],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/safe marker.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACJSURBVDhPpVBBDoAwCBue/f9LvU+LlDDimMYmc62hlCFtRLd7hqE+in702ruLlruHZGkkYoMNny+wEP2gw7vIB3gyOsbRM6fOdXgvlB/qfGeuyVjC9RPUUWlyHzs3sK06oiZXM0w42TADQ35tm1FYhNE1bELhm+XtyBHZUU4QAu5opSOq+UN9aydWn2JAy6PKkAAAAABJRU5ErkJggg=="
     },
@@ -2261,24 +4838,51 @@
       "exportID": "75198163",
       "name": "BinocularViewer",
       "limit": -1,
-      "size": {"x": 48, "y": 38},
-      "origin": {"x": 24, "y": 35},
+      "size": {
+        "x": 48,
+        "y": 38
+      },
+      "origin": {
+        "x": 24,
+        "y": 35
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -2294,11 +4898,31 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/binocular viewer.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAmCAYAAACCjRgBAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIsSURBVFhH7Za7TgJBFIYH7KSwN6INuBTGEisLE7Wi0lZM9An0DXwDfQJNxNhpRWVMLKykNBQgNAqxt9BS5MzOmMMy971J5Es2M7vZPfP/Z+bMDpl0MqzV0qktDlg3MYrVN60+7QtJCS/svbIeId2rJdbzURnJslZIGlkHsBlApUNqIC3xHFMT0qmRGrhjbQwULkdFA3g5iZaScgmNAMJjFA9090fXvgl6AwkIx4yZ0IytXkKKj72bZdbzae++sJ45VjG2xUuIPsDrnb8kM4AHnc+vsB4h770mbU2MOMVABrBe+mAwhN4NyZeOaftQvqUtJpgxPnhubpW0ng5ofya3pTQRJsZGY4e2vdYpbQFaA1Dp/LKBZywMLjGwXuNdKJg5Dgj4/HgmpbULekFGZe9GESPImAEIZpsVeL/TvKYiXDGJIdLmG+BbpWbL0iEawBajGEivb2BY4fz6/rrPwEWfB8A7hithYvxqQ3qFQoFOdfwoAesSBOgypNuFXGMUa2GOEoi0ZwIjnQFANguALIuq7HNcYoiyD1gb4AS3OdWPBzD5MarMOxkAVCZ06AyYIhMPaGsAPlYFiBOTsa2FmcwIzjwGzjt174TdybFJWOSZ9crnUoOP9QpZr9RJu3EY2bhO2+hfYmogbSbeQORFvOAdSYsYdiE4LvfbZ9Mi5jhnIju76fyHliE7xquw/iAO4UFsjPyvJaQq0KgxLXRjA0mK55iYmP7I0mbCDRDyA2ykF95YWPogAAAAAElFTkSuQmCC"
     },
@@ -2306,24 +4930,51 @@
       "exportID": "98763038",
       "name": "IguanaNpcPatrolMarker",
       "limit": -1,
-      "size": {"x": 30, "y": 24},
-      "origin": {"x": 15, "y": 12},
+      "size": {
+        "x": 30,
+        "y": 24
+      },
+      "origin": {
+        "x": 15,
+        "y": 12
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -2337,16 +4988,62 @@
       "nodeLimit": 0,
       "nodeDisplay": 2,
       "nodeGhost": true,
-      "tags": ["Marker"],
+      "tags": [
+        "Marker"
+      ],
       "values": [
-        {"name": "speed", "definition": "Float", "display": 2, "defaults": 1.3, "bounded": false, "min": 0.2, "max": 9},
-        {"name": "delayMin", "definition": "Integer", "display": 1, "defaults": 333, "bounded": true, "min": 33, "max": 9999},
-        {"name": "delayMax", "definition": "Integer", "display": 1, "defaults": 3000, "bounded": true, "min": 33, "max": 9999},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "speed",
+          "definition": "Float",
+          "display": 2,
+          "defaults": 1.3,
+          "bounded": false,
+          "min": 0.2,
+          "max": 9
+        },
+        {
+          "name": "delayMin",
+          "definition": "Integer",
+          "display": 1,
+          "defaults": 333,
+          "bounded": true,
+          "min": 33,
+          "max": 9999
+        },
+        {
+          "name": "delayMax",
+          "definition": "Integer",
+          "display": 1,
+          "defaults": 3000,
+          "bounded": true,
+          "min": 33,
+          "max": 9999
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/iguana npc patrol.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAYCAYAAADtaU2/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD3SURBVEhLxZZBEsIgDEWhZ9KFbvXYutWF3kkb5GdCGgq2hb6ZDoFKHwGK9a7AZySGi/AjMUwwG9fKLPQAJuIWUiDlHLQUSiBn8eF0Y/HrcYmRc8fzPZRoQ11C92R7qf/7ef15KVsSA8RWG5irz/WnkpxDMO/AQKOIcVeSjGn+6dJrhHUqYfXPkYipg+5kteXAb2sGussa0wYb5Eu9NcheTj+V9DoFac8NhmUIU90y6xyJsHXmctNNMm0h17uc1xhsKdUygHN6tTgn0PAfQ4QrOWntgy20TBJuWNJ/hHOCHL5GuuTBJRJxDyHgs7qnNIEObnwdtMe5L8MO6bfZwI+FAAAAAElFTkSuQmCC"
     },
@@ -2354,24 +5051,51 @@
       "exportID": "51541146",
       "name": "OutOfOrderSign",
       "limit": -1,
-      "size": {"x": 28, "y": 24},
-      "origin": {"x": 14, "y": 12},
+      "size": {
+        "x": 28,
+        "y": 24
+      },
+      "origin": {
+        "x": 14,
+        "y": 12
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -2387,11 +5111,31 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/out of order sign.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAYCAMAAADeQm2wAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURY4mINs6Mv///3ogHAAAAG1KDr4AAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAOwwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAUGFpbnQuTkVUIDUuMS4y+7wDtgAAALZlWElmSUkqAAgAAAAFABoBBQABAAAASgAAABsBBQABAAAAUgAAACgBAwABAAAAAgAAADEBAgAQAAAAWgAAAGmHBAABAAAAagAAAAAAAABgAAAAAQAAAGAAAAABAAAAUGFpbnQuTkVUIDUuMS4yAAMAAJAHAAQAAAAwMjMwAaADAAEAAAABAAAABaAEAAEAAACUAAAAAAAAAAIAAQACAAQAAABSOTgAAgAHAAQAAAAwMTAwAAAAAOnV9jjK2mx6AAAAgklEQVQoU42SjQ5AQAyDN7z/M+uPcReGSubTLr0Esb2owohr7eSyMvOggT/CRUKVATqZYWYZAHrFCDFtXncocU0hDhNxEir0I50DuNeHgK9QR3gMs8JWwffRSeHY7CFQSGMehr+hGotutfRMXvlRqy37oqpw2Am/ydqJ/xA+/KNi2wHrjgUJJp1tTAAAAABJRU5ErkJggg=="
     },
@@ -2399,24 +5143,51 @@
       "exportID": "21595347",
       "name": "EnvironmentBallons",
       "limit": -1,
-      "size": {"x": 34, "y": 46},
-      "origin": {"x": 15, "y": 45},
+      "size": {
+        "x": 34,
+        "y": 46
+      },
+      "origin": {
+        "x": 15,
+        "y": 45
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -2432,13 +5203,49 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "count", "definition": "Integer", "display": 0, "defaults": 1, "bounded": true, "min": 1, "max": 100},
-        {"name": "seed", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": 999999, "max": 100},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "count",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 1,
+          "bounded": true,
+          "min": 1,
+          "max": 100
+        },
+        {
+          "name": "seed",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": 999999,
+          "max": 100
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": false,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": "", "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/environment fx ballons.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAuCAMAAAB6WzuLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkUExURakQzL453cxlENRh7t2YC+mK/4dBB+7MBW8Hh///ALCwsAAAAGQSiIMAAAAMdFJOU///////////////ABLfzs4AAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAYAAAAAEAAABgAAAAAQAAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAADp1fY4ytpsegAAASFJREFUOE+90kGWhCAMBFAVDPR4//tOUikgMOqiF1MLJcl/8Lpxu5DN48USdAn2fSc6PF5Yr4uUYAhyzkBbA0rSearZDqEoRcRJrd3UM9kUJpePSJZD96jDVN3HpmpE1IiUSPRRdR8KbJRFPpKPsYs+1FB0U4wMYQ+bjuSiv8oGMT6yk3CaCid2Bs5pxAEOJHGAo7w7Jfx1CNsxK/lr7I44YzgYidfoaZfYYnc0G6048+AaJ4OKUwuGaDbjxTCoWjeKm68OiYKG69GPAoarsMueuPJ0EQ/auUL0O+BqkB++Gf1WuHokoWzkWXxPporkZZN7MleNTN1bMnVn0UnsP5EweCZtsohAunkhbfZGOHwlmK5iITb/H7JcFvIN4bvnun4BFesu9jaN5A8AAAAASUVORK5CYII="
     },
@@ -2446,24 +5253,51 @@
       "exportID": "73290192",
       "name": "EnvironmentSpeakerRegion",
       "limit": -1,
-      "size": {"x": 32, "y": 32},
-      "origin": {"x": 0, "y": 0},
+      "size": {
+        "x": 32,
+        "y": 32
+      },
+      "origin": {
+        "x": 0,
+        "y": 0
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": true,
       "resizeableY": true,
       "rotatable": false,
@@ -2477,16 +5311,55 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Region"],
+      "tags": [
+        "Region"
+      ],
       "values": [
-        {"name": "speakerName", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "speakerTintSecondary", "definition": "RGB", "display": 0, "defaults": "#000000"},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100},
-        {"name": "messages", "definition": "Text", "display": 0, "defaults": ""}
+        {
+          "name": "speakerName",
+          "definition": "String",
+          "display": 1,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "speakerTintSecondary",
+          "definition": "RGB",
+          "display": 0,
+          "defaults": "#000000"
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        },
+        {
+          "name": "messages",
+          "definition": "Text",
+          "display": 0,
+          "defaults": ""
+        }
       ],
       "isRegion": true,
-      "tintable": {"enabled": true, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {
+        "enabled": true,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/environment speaker region.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURf///wAAAAAruronHwAAALHogNAAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAOwwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAUGFpbnQuTkVUIDUuMS4y+7wDtgAAALZlWElmSUkqAAgAAAAFABoBBQABAAAASgAAABsBBQABAAAAUgAAACgBAwABAAAAAgAAADEBAgAQAAAAWgAAAGmHBAABAAAAagAAAAAAAABgAAAAAQAAAGAAAAABAAAAUGFpbnQuTkVUIDUuMS4yAAMAAJAHAAQAAAAwMjMwAaADAAEAAAABAAAABaAEAAEAAACUAAAAAAAAAAIAAQACAAQAAABSOTgAAgAHAAQAAAAwMTAwAAAAAOnV9jjK2mx6AAAAnUlEQVQ4T6WRWw7DIAzAgOX+Z15DnECaMk2bP/qIXahEk6A9g3Xf7baB9u+PAW8RrPAQLErQu0ZlhfgH7Dng8kNA8U9gxacg/iODM5glUAazhMgICHJr/qWMYZNEW94C5sEMprTg2idDQKQgnC2Y+jm4iAXOAQ/34utgAwMRrCUwUAOEU7dAOJzFgnmQTlNhHujhoCY23bDTw1Yt8gagRQiK1EnBzwAAAABJRU5ErkJggg=="
     },
@@ -2494,24 +5367,51 @@
       "exportID": "73364153",
       "name": "EnvironmentSpeakerPlayerRegion",
       "limit": -1,
-      "size": {"x": 32, "y": 32},
-      "origin": {"x": 0, "y": 0},
+      "size": {
+        "x": 32,
+        "y": 32
+      },
+      "origin": {
+        "x": 0,
+        "y": 0
+      },
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
         "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
         ]
       },
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
       "resizeableX": true,
       "resizeableY": true,
       "rotatable": false,
@@ -2525,16 +5425,234 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["Region"],
+      "tags": [
+        "Region"
+      ],
       "values": [
-        {"name": "messages", "definition": "Text", "display": 0, "defaults": ""},
-        {"name": "name", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true},
-        {"name": "depth", "definition": "Integer", "display": 0, "defaults": 0, "bounded": false, "min": -100, "max": 100}
+        {
+          "name": "messages",
+          "definition": "Text",
+          "display": 0,
+          "defaults": ""
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
       ],
       "isRegion": true,
-      "tintable": {"enabled": false, "defaultTint": "#ffffff", "rgbLevelValueName": null, "useDefaultTint": true},
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": "",
+        "useDefaultTint": true
+      },
       "texture": "preview-images/environment speaker player region.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAASUExURf///wAAAMwsQsyuCplXrwAAAMftmCkAAAAGdFJOU///////ALO/pL8AAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMvu8A7YAAAC2ZVhJZklJKgAIAAAABQAaAQUAAQAAAEoAAAAbAQUAAQAAAFIAAAAoAQMAAQAAAAIAAAAxAQIAEAAAAFoAAABphwQAAQAAAGoAAAAAAAAAYAAAAAEAAABgAAAAAQAAAFBhaW50Lk5FVCA1LjEuMgADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlAAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAADp1fY4ytpsegAAAJlJREFUOE+tkIEOwiAMBUG2//9lR3t9wIC4qJdYYu/ciOkUaQ02fPajAx2/3wZ8U9DCTdCYgpxrND1Bd8DuA8YXAcUvgRdz8EJXWI0UsSmwxseg+Gp8nczohQcmfLIXFpghuBePgpSOSrG5usM/AiNODDwK3OjEgAXV6EQELnoQQQRHTPZCT6hF/bAX7RXX/3BN1o3uDit/nm946Qm/HkFjuQAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "90592852",
+      "name": "AnyObject",
+      "limit": -1,
+      "size": {
+        "x": 25,
+        "y": 24
+      },
+      "origin": {
+        "x": 13,
+        "y": 12
+      },
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {
+          "name": "objId",
+          "definition": "Enum",
+          "display": 1,
+          "choices": [
+            "objAngelBallon",
+            "objAngelBouncing",
+            "objAngelSnail",
+            "objAngelSnow",
+            "objAngelStupid",
+            "objCasinoLewdFinger",
+            "objCasinoLewdJo",
+            "objCasinoLewdSlap",
+            "objCharacterBoxer",
+            "objCharacterDoctorSprite",
+            "objCharacterEmoBallista",
+            "objCharacterFlopQuizMaster",
+            "objCharacterFlower",
+            "objCharacterForestSpirit",
+            "objCharacterGamblingExpert",
+            "objCharacterKingSpino",
+            "objCharacterMrIndiana",
+            "objCharacterNutcase",
+            "objCharacterPrinceSpino",
+            "objCharacterSimpleBot",
+            "objCharacterTheOwl",
+            "objCharacterWindTurbine",
+            "objCirclebox",
+            "objDevPlayer",
+            "objDevPotions",
+            "objDieOnEmpty",
+            "objEnemyHealthBars",
+            "objEnvironmentFxSparkle",
+            "objEsotericBinocularViewer",
+            "objEsotericBoneDusts",
+            "objEsotericDecorationCampfire",
+            "objEsotericHotPineConeTree",
+            "objEsotericInProgressOrder",
+            "objEsotericOutOfOrderSign",
+            "objEsotericRemovedShoes",
+            "objEsotericWizardOfLightStatue",
+            "objFallenBot",
+            "objFlopCollectionIndicator",
+            "objFloppyDisk",
+            "objFxAsterisk16Px",
+            "objFxBallonPop",
+            "objFxBubble4",
+            "objFxBurst32",
+            "objFxBurstDusty",
+            "objFxBurstRound24",
+            "objFxCigarette",
+            "objFxCollectEquipmentNotification",
+            "objFxCollectPotionNotification",
+            "objFxEighthNote",
+            "objFxEmoAura24px",
+            "objFxExpressSurprise",
+            "objFxFactCantFit",
+            "objFxFactNew",
+            "objFxFieryBurst170px",
+            "objFxFizzle",
+            "objFxFormativeBurst",
+            "objFxHeart",
+            "objFxHelium",
+            "objFxOverheated",
+            "objFxOwnerDefeat",
+            "objFxPlayerJumpComboDust",
+            "objFxRerollNotification",
+            "objFxSmoke66Px",
+            "objFxSparkle40Px",
+            "objFxSparkleMany",
+            "objFxSpiritualRelease",
+            "objFxStarburst54",
+            "objFxSuperDust",
+            "objHeliumExhaust",
+            "objHud",
+            "objItemAngelCommon",
+            "objItemAngelDropperQueue",
+            "objLootForestSpirit",
+            "objMarker",
+            "objMusician",
+            "objOverlay",
+            "objOverlayDarkness",
+            "objPipe",
+            "objPipeSlope",
+            "objProjectileCircle",
+            "objProjectileFlameColumn",
+            "objProjectileHellSnake",
+            "objProjectileHotPineCone",
+            "objRegion",
+            "objSolidBlock",
+            "objSolidSlope",
+            "objSpikedCanonball",
+            "objSystemMessage",
+            "objUiInventory",
+            "objUiSpellsPower",
+            "objValuableSparkle"
+          ],
+          "defaults": 0
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
+      ],
+      "isRegion": false,
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": null,
+        "useDefaultTint": true
+      },
+      "texture": "preview-images/any.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAYCAYAAAAPtVbGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADJSURBVEhLxZMBDoQgDATR///5ZAnLldJyKiU3CQqlMFDjkW7wydTuwJGpXRc3Ybaxhyc0g28ExBINgRUB0aJuECEgUtQ6kQJCUXnsEBCIztrfiikR5WzoGMdWLpDxU5cKkwhZi70NZ2D/5XJZB+JBSSeRk9ZiKwZkXAvAcBMksT2BIi0ATcIE3bTMiv1i+ZvcoRwpn268YxD51n/8GaNpX3BHyVCq8i6jSqSIAtBJQIRICsAgASsiLQCmBLwRWQLgSiQzobfxl5QugpNwLeONzbsAAAAASUVORK5CYII="
     }
   ],
   "tilesets": []

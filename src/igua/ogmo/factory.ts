@@ -49,9 +49,10 @@ export namespace OgmoFactory {
         regionId: RpgRegion.Id | null;
     }
 
-    export function createEntity<TFn extends (...args: any[]) => any>(
+    export function createEntity<TFn extends (...args: any[]) => any, TParams extends Parameters<TFn>[0]>(
         fn: TFn,
-        entity: OgmoFactory.EntityBase,
+        entity: TParams extends { values: unknown } ? OgmoFactory.EntityBase<TParams["values"]>
+            : OgmoFactory.EntityBase,
         layerName: string,
     ): ReturnType<TFn> {
         if (typeof fn !== "function") {

@@ -1,7 +1,7 @@
-import { Graphics } from "pixi.js";
 import { OgmoEntities, OgmoEntityResolverBase } from "../../assets/generated/levels/generated-ogmo-project-data";
 import { Instances } from "../../lib/game-engine/instances";
 import { Vector, vnew } from "../../lib/math/vector-type";
+import { ObjectLibrary } from "../core/object-library";
 import { mxnDoorMagic } from "../mixins/mxn-door-magic";
 import { objCharacterGamblingExpert } from "../objects/characters/obj-character-gambling-expert";
 import { CtxPocketItems, objCollectiblePocketItemSpawner } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
@@ -49,6 +49,7 @@ import { objRegion } from "../objects/utils/obj-region";
 import { Rpg } from "../rpg/rpg";
 
 export const OgmoEntityResolvers = {
+    "AnyObject": (entity: OgmoEntities.AnyObject) => ObjectLibrary.findByName(entity.values.objId)(),
     "Player": (entity: OgmoEntities.Player) => createOrConfigurePlayerObj(entity),
     "Checkpoint": (entity: OgmoEntities.Checkpoint) => createOrConfigurePlayerObj(entity, entity.values.name),
     "Block": objSolidBlock,

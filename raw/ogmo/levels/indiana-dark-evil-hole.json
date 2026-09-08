@@ -16,19 +16,7 @@
       "gridCellHeight": 8,
       "gridCellsX": 167,
       "gridCellsY": 96,
-      "entities": [
-        {
-          "name": "Marker",
-          "id": 0,
-          "_eid": "73148747",
-          "x": 656,
-          "y": 240,
-          "originX": 8,
-          "originY": 8,
-          "tint": "#00ff00",
-          "values": {"name": "WizardStatueMarker", "depth": 0}
-        }
-      ]
+      "entities": []
     },
     {
       "name": "RegionEntities",
@@ -399,6 +387,16 @@
           "originX": 0,
           "originY": 26,
           "values": {"title": "Ballon", "message": "One ballon. Fall. Immediate left.", "min": 1, "max": 3, "name": "", "depth": 0}
+        },
+        {
+          "name": "AnyObject",
+          "id": 25,
+          "_eid": "90592852",
+          "x": 656,
+          "y": 240,
+          "originX": 13,
+          "originY": 12,
+          "values": {"objId": "objEsotericWizardOfLightStatue", "name": "", "depth": 0}
         }
       ]
     },

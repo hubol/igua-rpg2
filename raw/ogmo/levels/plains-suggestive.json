@@ -365,7 +365,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 175644435369000,
-          "values": {"name": "", "depth": 0, "variant": "level0"}
+          "values": {"name": "", "depth": 0, "variant": "level0", "safeTint": "#ffffff"}
         },
         {
           "name": "EnemySuggestive",
@@ -376,7 +376,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 175644435369001,
-          "values": {"name": "", "depth": 0, "variant": "level0"}
+          "values": {"name": "", "depth": 0, "variant": "level0", "safeTint": "#ffffff"}
         },
         {
           "name": "EnemySuggestive",
@@ -387,7 +387,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 175644435369002,
-          "values": {"name": "", "depth": 0, "variant": "level0"}
+          "values": {"name": "", "depth": 0, "variant": "level0", "safeTint": "#ffffff"}
         },
         {
           "name": "EnemySuggestive",
@@ -398,7 +398,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 175644435369003,
-          "values": {"name": "", "depth": 0, "variant": "level0"}
+          "values": {"name": "", "depth": 0, "variant": "level0", "safeTint": "#ffffff"}
         },
         {
           "name": "StashPocket",
@@ -428,6 +428,8 @@
           "_eid": "88296692",
           "x": 1544,
           "y": 96,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnPlainsSuggestiveFlopCollector", "checkpointName": "", "name": "", "depth": 0}
@@ -481,6 +483,8 @@
           "_eid": "88296692",
           "x": 768,
           "y": 232,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnRaceTrack", "checkpointName": "fromPlainsSuggestive", "name": "", "depth": 0}
@@ -3971,6 +3975,18 @@
           "groupName": null
         }
       ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 272,
+      "gridCellsY": 58,
+      "decals": [],
       "folder": "../textures"
     }
   ]

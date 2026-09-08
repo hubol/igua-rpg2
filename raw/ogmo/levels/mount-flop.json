@@ -4263,7 +4263,8 @@
           "texture": "town/signage/flop 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1454,
@@ -4275,7 +4276,8 @@
           "texture": "town/signage/flop 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2552,
@@ -4287,7 +4289,8 @@
           "texture": "town/signage/flop 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

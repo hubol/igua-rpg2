@@ -148,6 +148,8 @@
           "_eid": "88296692",
           "x": 880,
           "y": 96,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnWorldMap", "checkpointName": "fromIndianaToOhio", "name": "", "depth": 0}
@@ -158,6 +160,8 @@
           "_eid": "88296692",
           "x": 288,
           "y": 96,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnWorldMap", "checkpointName": "fromOhioToIndiana", "name": "", "depth": 0}
@@ -191,7 +195,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 177612441659600,
-          "values": {"name": "", "depth": 0, "variant": "level1"}
+          "values": {"name": "", "depth": 0, "variant": "level1", "safeTint": "#ffffff"}
         },
         {
           "name": "EnemyCactus",
@@ -2232,6 +2236,18 @@
           "groupName": null
         }
       ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 175,
+      "gridCellsY": 56,
+      "decals": [],
       "folder": "../textures"
     }
   ]
