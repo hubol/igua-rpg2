@@ -1,4 +1,4 @@
-import { BitmapFont, BLEND_MODES, Buffer, Color, ColorSource, Container, DisplayObject, IBitmapFontCharacter, IBitmapTextStyle, IDestroyOptions, Mesh, MeshGeometry, MeshMaterial, ObservablePoint, Point, Program, Rectangle, Renderer, settings, Sprite, TextStyleAlign, Texture, TYPES, utils } from "pixi.js";
+import { BitmapFont, BLEND_MODES, Color, ColorSource, Container, DisplayObject, IBitmapFontCharacter, IBitmapTextStyle, IDestroyOptions, Mesh, MeshGeometry, MeshMaterial, ObservablePoint, Point, Rectangle, Renderer, settings, Sprite, TextStyleAlign, Texture, utils } from "pixi.js";
 import { PixiAnchored } from "../extensions/pixi-anchored";
 import { Integer } from "../math/number-alias-types";
 import { VectorSimple } from "../math/vector-type";
@@ -26,8 +26,7 @@ interface CharRenderData {
 }
 
 // If we ever need more than two pools, please make a Dict or something better.
-const pageMeshDataDefaultPageMeshData: PageMeshData[] = [];
-const pageMeshDataMSDFPageMeshData: PageMeshData[] = [];
+const pageMeshDataPool: PageMeshData[] = [];
 const charRenderDataPool: CharRenderData[] = [];
 
 /**
@@ -249,9 +248,6 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
         const lineWidths = [];
         const lineSpaces = [];
         const maxWidth = this._maxWidth * data.size / fontSize;
-        const pageMeshDataPool = data.distanceFieldType === "none"
-            ? pageMeshDataDefaultPageMeshData
-            : pageMeshDataMSDFPageMeshData;
 
         let prevCharCode: number | null = null;
         let lastLineWidth = 0;
@@ -859,10 +855,6 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
 
     destroy(options?: boolean | IDestroyOptions): void {
         const { _textureCache } = this;
-        const data = BitmapFont.available[this._fontName];
-        const pageMeshDataPool = data.distanceFieldType === "none"
-            ? pageMeshDataDefaultPageMeshData
-            : pageMeshDataMSDFPageMeshData;
 
         pageMeshDataPool.push(...this._activePagesMeshData);
         for (const pageMeshData of this._activePagesMeshData) {
