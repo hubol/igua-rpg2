@@ -1,11 +1,13 @@
 import { Sprite, Texture } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Tx } from "../../assets/textures";
 import { blendColor } from "../../lib/color/blend-color";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { RgbInt } from "../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../lib/math/rng";
 import { Null } from "../../lib/types/null";
+import { Jukebox } from "../core/igua-audio";
 import { DataLibraryBook } from "../data/data-library-book";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
@@ -19,6 +21,7 @@ import { Rpg } from "../rpg/rpg";
 const prng = new PseudoRng();
 
 export function scnLibraryOnTheBorder() {
+    Jukebox.play(Mzk.RedBoots);
     const lvl = Lvl.LibraryOnTheBorder();
 
     [

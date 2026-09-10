@@ -35,6 +35,7 @@ export const GeneratedMusicData = {
    "PoopPainter": { ogg: require("./ogg/poop-painter.ogg") },
    "PreciousInstructions": { ogg: require("./ogg/precious-instructions.ogg") },
    "ProfitMotive": { ogg: require("./ogg/profit-motive.ogg") },
+   "RedBoots": { ogg: require("./ogg/red-boots.ogg") },
    "RiceRoyalty": { ogg: require("./ogg/rice-royalty.ogg") },
    "RochesterDetour": { ogg: require("./ogg/rochester-detour.ogg") },
    "Roundabout": { ogg: require("./ogg/roundabout.ogg") },
