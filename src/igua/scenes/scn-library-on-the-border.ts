@@ -1,6 +1,7 @@
 import { Sprite, Texture } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { blendColor } from "../../lib/color/blend-color";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -45,8 +46,10 @@ export function scnLibraryOnTheBorder() {
         const catalog = DataLibraryBook.catalogs[subject];
         prng.seed = catalog.locationSeed;
         const shuffledBookObjs = prng.shuffle([...bookObjs]);
+        const baseSfxRate = prng.float(0.5, 1);
 
         for (let i = 0; i < Math.min(shuffledBookObjs.length, catalog.books.length); i++) {
+            Sfx.Effect.LibraryBookReveal.rate(baseSfxRate + i * 0.1).play();
             shuffledBookObjs[i].mxnLibraryBook.setContents(catalog.books[i]);
             yield sleep(200);
         }
@@ -107,8 +110,10 @@ export function scnLibraryOnTheBorder() {
                 yield* show(
                     "OK, give me one moment and I will highlight the books you should check out if you are interested in combat.",
                 );
+                librarianNpc.auto.facing = -librarianNpc.facing;
                 yield sleep(1000);
                 yield* dramaHighlightBooksOnSubject("combat");
+                librarianNpc.auto.facing = -librarianNpc.facing;
                 yield* show("OK, that should be all of them. Enjoy!");
             }
         });
@@ -152,6 +157,7 @@ function mxnLibraryBook(obj: Sprite) {
                 for (const page of currentBook!.pages) {
                     yield* show(typeof page === "string" ? page : page());
                 }
+                yield sleep(500);
                 Rpg.character.temporaryEffects.add("IntelligenceFromLibraryBook", 60);
             }
         })
