@@ -652,7 +652,7 @@ function objPoisonBuildUp() {
 
 function objHeliumBuildUp() {
     return objConditionBuildUp({
-        message: "Helium is potent...",
+        message: "You hear the hiss of helium...",
         conditionsKey: "helium",
         tints: BuildUpTints.Default,
     });
