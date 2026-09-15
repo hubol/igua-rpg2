@@ -7,7 +7,7 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { onMutate } from "../../lib/game-engine/routines/on-mutate";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
-import { approachLinear } from "../../lib/math/number";
+import { approachLinear, nlerp } from "../../lib/math/number";
 import { Integer, PolarInt, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
@@ -164,6 +164,8 @@ function* askIntegerImpl(
         disabledMessage = null;
     }
 
+    Sfx.Ui.Integer.Enter.rate(0.9, 1.1).play();
+
     const obj = container()
         .at(align === "right" ? 102 : 0, 0)
         .show(layers.overlay.messages);
@@ -181,6 +183,8 @@ function* askIntegerImpl(
 
     yield () => Input.isUp("Confirm");
     yield () => Input.justWentDown("Confirm");
+
+    Sfx.Ui.Integer.Advance.rate(0.9, 1.1).play();
 
     const isDisabled = disabledMessage !== null;
     let isSliderSelected = !isDisabled;
@@ -251,6 +255,7 @@ function* askIntegerImpl(
 
             if (Input.justWentDown("SelectUp") || Input.justWentDown("SelectDown")) {
                 isSliderSelected = !isSliderSelected;
+                Sfx.Ui.Integer.Select.rate(0.9, 1.1).play();
             }
         })
         .mixin(mxnActionRepeater, ["SelectLeft", "SelectRight"])
@@ -259,11 +264,18 @@ function* askIntegerImpl(
                 return;
             }
 
+            const previousValue = sliderObj.controls.value;
+
             if (self.mxnActionRepeater.justWentDown("SelectLeft")) {
                 sliderObj.controls.value = Math.max(min, sliderObj.controls.value - multipleOf);
             }
             else if (self.mxnActionRepeater.justWentDown("SelectRight")) {
                 sliderObj.controls.value = Math.min(max, sliderObj.controls.value + multipleOf);
+            }
+
+            if (sliderObj.controls.value !== previousValue) {
+                const rate = nlerp(0.5, 1.2, nlerp.inverse(min, max, sliderObj.controls.value));
+                Sfx.Ui.Integer.Adjust.rate(rate).play();
             }
         })
         .show(obj);
@@ -275,6 +287,8 @@ function* askIntegerImpl(
 
     const sliderValue = sliderObj.controls.value;
     const value = isSliderSelected && sliderValue ? sliderValue : null;
+
+    (value === null ? Sfx.Ui.Integer.Cancel : Sfx.Ui.Integer.Submit).rate(0.9, 1.1).play();
 
     yield* Coro.all([
         interpvr(messageObj).translate(0, -128).over(400),

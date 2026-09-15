@@ -2,6 +2,10 @@ export function nlerp(a: number, b: number, factor: number) {
     return a * (1 - factor) + b * factor;
 }
 
+nlerp.inverse = function nlerpInverse (a: number, b: number, value: number) {
+    return (value - a) / (b - a);
+};
+
 export function approachLinear(a: number, b: number, factor: number) {
     if (a < b) {
         return Math.min(a + factor, b);
