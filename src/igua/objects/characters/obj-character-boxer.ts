@@ -1,4 +1,5 @@
 import { Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { container } from "../../../lib/pixi/container";
@@ -38,7 +39,7 @@ export function objCharacterBoxer() {
 
     const api = {
         *dramaThrow() {
-            // TODO SFX
+            handDomObj.play(Sfx.Character.BoxerPunch.rate(0.9, 1.1));
             handDomObj.visible = false;
             handDomThrowObj.visible = true;
 

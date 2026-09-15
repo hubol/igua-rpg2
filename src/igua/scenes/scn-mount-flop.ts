@@ -10,6 +10,7 @@ import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { Jukebox } from "../core/igua-audio";
 import { DramaMisc } from "../drama/drama-misc";
+import { DramaPlayerAttributes } from "../drama/drama-player-attributes";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
@@ -47,10 +48,16 @@ function enrichBoxer(lvl: LvlType.MountFlop) {
     }
 
     let maxInteger = 10;
+    let won = false;
 
     const boxerObj = objCharacterBoxer();
     boxerObj
         .mixin(mxnCutscene, function* () {
+            if (won) {
+                yield* showLaughTrack("Hello, brainiac.");
+                yield* DramaPlayerAttributes.callName("Brainiac");
+                return;
+            }
             yield () => playerObj.isOnGround;
             playerObj.auto.facing = 1;
             yield* show(
@@ -122,6 +129,7 @@ function enrichBoxer(lvl: LvlType.MountFlop) {
                 yield* show("Heh, you got it right!");
                 yield* showLaughTrack("What are the odds of that, like a one-in-a-million?!");
                 yield* DramaQuests.complete("MountFlop.Boxer");
+                won = true;
             }
             else {
                 yield* show(
