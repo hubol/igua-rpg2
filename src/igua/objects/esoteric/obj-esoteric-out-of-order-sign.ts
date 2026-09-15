@@ -1,6 +1,7 @@
 import { Sprite } from "pixi.js";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
+import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { show } from "../../drama/show";
 import { mxnCutscene } from "../../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../../mixins/mxn-speaker";
@@ -20,5 +21,13 @@ export function objEsotericOutOfOrderSign() {
             yield* show("It's out of order.");
         })
         .merge({ objEsotericOutOfOrderSign: api })
-        .step(self => self.interact.enabled = self.visible = api.isActive);
+        .step(self => self.interact.enabled = self.visible = api.isActive)
+        .coro(function* (self) {
+            yield sleepf(3);
+            while (true) {
+                yield () => api.isActive;
+                yield () => !api.isActive;
+                self.play(Sfx.Effect.OutOfOrderRemove.rate(0.9, 1.1));
+            }
+        });
 }
