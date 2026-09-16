@@ -48,9 +48,18 @@ class IguaAudioImpl {
         this._stereoDelay.rightGain.value = value;
     }
 
-    set globalGain(value: Unit) {
-        this._globalGainNode.gain.value = value;
-    }
+    readonly dev = (() => {
+        const self = this;
+
+        return {
+            set globalGain(value: Unit) {
+                self._globalGainNode.gain.value = value;
+            },
+            set jukeboxGain(value: Unit) {
+                self._jukeboxGainNode.gain.value = value;
+            },
+        };
+    })();
 }
 
 export let IguaAudio: IguaAudioImpl;

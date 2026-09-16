@@ -12,9 +12,16 @@ export function installDevTools() {
     // @ts-expect-error
     const el = document.body.appendChild(createDebugPanel(layers._root));
     createDebugKey("KeyM", "globalMute", (x, keydown) => {
-        IguaAudio.globalGain = x ? 0 : 1;
+        IguaAudio.dev.globalGain = x ? 0 : 1;
         if (keydown) {
-            Toast.info(x ? "Muted" : "Unmuted", "^_^");
+            Toast.info(x ? "Muted (Global)" : "Unmuted (Global)", "^_^");
+        }
+    });
+
+    createDebugKey("KeyJ", "jukeboxMute", (x, keydown) => {
+        IguaAudio.dev.jukeboxGain = x ? 0 : 1;
+        if (keydown) {
+            Toast.info(x ? "Muted (Jukebox)" : "Unmuted (Jukebox)", "^_^");
         }
     });
 
