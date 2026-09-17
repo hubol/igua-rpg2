@@ -2,6 +2,7 @@ import { DisplayObject } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Sfx } from "../../assets/sounds";
 import { Instances } from "../../lib/game-engine/instances";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -28,12 +29,14 @@ import { objFxHeart } from "../objects/effects/obj-fx-heart";
 import { objAngelStupid } from "../objects/enemies/obj-angel-stupid";
 import { objEsotericOutOfOrderSign } from "../objects/esoteric/obj-esoteric-out-of-order-sign";
 import { ObjIguanaNpc, objIguanaNpc } from "../objects/obj-iguana-npc";
+import { CtxTerrainPipe } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { Search } from "../utils/search";
 
 export function scnOhioHallParty() {
     Jukebox.play(Mzk.PaperParty);
+    CtxTerrainPipe.value.texture = NoAtlasTx.Terrain.Pipe.Cloud0;
     const lvl = Lvl.OhioHallParty();
     const state: scnOhioHallParty.State = {
         princeIllness: {
