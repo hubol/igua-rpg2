@@ -19,7 +19,7 @@ export function installDevTools() {
     });
 
     createDebugKey("KeyJ", "jukeboxMute", (x, keydown) => {
-        IguaAudio.dev.jukeboxGain = x ? 0 : 1;
+        IguaAudio.dev.jukeboxGain = x ? 0 : 0.5;
         if (keydown) {
             Toast.info(x ? "Muted (Jukebox)" : "Unmuted (Jukebox)", "^_^");
         }
