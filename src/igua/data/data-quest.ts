@@ -1,5 +1,6 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { Null } from "../../lib/types/null";
+import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgFoodOrder } from "../rpg/rpg-food-order";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { RpgPocket } from "../rpg/rpg-pocket";
@@ -153,6 +154,13 @@ export namespace DataQuest {
                     countCompletions: "once",
                     kind: "single",
                     drop: { kind: "key_item", id: "MagicKey" },
+                },
+            },
+            "DarkEvilHole.Rescue": {
+                flags: null,
+                reward: {
+                    kind: "repeat",
+                    drop: { kind: "currency", id: "rescue_credits", count: 1 },
                 },
             },
             SimpleSecretHappy: {
@@ -356,7 +364,9 @@ export namespace DataQuest {
         export type Drop = Drop.Type | Drop.Type[];
 
         export namespace Drop {
-            export type Type = (RpgInventory.Item | { kind: "currency"; id: "valuables" }) & { count?: Integer };
+            export type Type =
+                & (RpgInventory.Item | { kind: "currency"; id: RpgEconomy.Currency.Id })
+                & { count?: Integer };
 
             export namespace Type {
                 export type Flattened = Required<Type>[];

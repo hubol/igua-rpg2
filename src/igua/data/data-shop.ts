@@ -570,6 +570,16 @@ export namespace DataShop {
                     },
                 ],
             },
+            IndianaRescued: {
+                stocks: [
+                    {
+                        // TODO not right at all
+                        initialQuantity: 9999,
+                        price: { currency: "rescue_credits", deltaSold: 0, initial: 1 },
+                        product: { kind: "key_item", id: "MedicineMagenta" },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );

@@ -46,7 +46,7 @@ function* complete(maybeQuest: getQuest.Maybe) {
         const count = drop.count;
 
         if (drop.kind === "currency") {
-            yield* DramaWallet.rewardValuables(count);
+            yield* DramaWallet.earn(drop.id, count);
         }
         else {
             const items: Array<RpgInventory.Item> = range(count).map(() => drop);

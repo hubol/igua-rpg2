@@ -3,7 +3,8 @@ import { Mzk } from "../../assets/music";
 import { Instances } from "../../lib/game-engine/instances";
 import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
-import { DramaGifts } from "../drama/drama-gifts";
+import { DramaQuests } from "../drama/drama-quests";
+import { dramaShop } from "../drama/drama-shop";
 import { show } from "../drama/show";
 import { Cutscene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -15,17 +16,26 @@ import { Rpg } from "../rpg/rpg";
 export function scnIndianaDarkEvilHole() {
     Jukebox.play(Mzk.UndergroundRucksack);
     const lvl = Lvl.IndianaDarkEvilHole();
-    enrichShoeHaverNpc(lvl);
+    enrichLostNpc(lvl);
     enrichEnemies(lvl);
 }
 
-function enrichShoeHaverNpc(lvl: LvlType.IndianaDarkEvilHole) {
-    lvl.ShoeHaverNpc
+function enrichLostNpc(lvl: LvlType.IndianaDarkEvilHole) {
+    const quest = Rpg.quest("DarkEvilHole.Rescue");
+    let completedQuest = false;
+
+    lvl.LostNpc
         .mixin(mxnCutscene, function* () {
-            const gift = Rpg.gift("Indiana.DarkEvilHole.Illuminate");
-            if (gift.isGiveable()) {
-                yield* DramaGifts.give(gift);
+            if (!completedQuest) {
+                yield* show(
+                    "Thanks for your help!",
+                );
+
+                yield* DramaQuests.complete(quest);
+                completedQuest = true;
             }
+
+            yield* dramaShop("IndianaRescued", lvl.LostNpc.speaker);
         });
 }
 

@@ -8,6 +8,7 @@ export namespace RpgEconomy {
             "mechanical_idol_credits",
             "casino_pity",
             "bone_dusts",
+            "rescue_credits",
             ...RpgExperience.manifest,
         ] as const;
 
@@ -39,6 +40,7 @@ export namespace RpgEconomy {
             mechanical_idol_credits: ["credit", "credits"],
             valuables: ["valuable", "valuables"],
             bone_dusts: ["bone dust", "bone dusts"],
+            rescue_credits: ["rescue credit", "rescue credits"],
         };
 
         export function getPluralizedNoun(price: Integer, currencyId: Currency.Id) {

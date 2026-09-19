@@ -115,12 +115,23 @@
           "name": "IguanaNpc",
           "id": 0,
           "_eid": "90326278",
-          "x": 72,
-          "y": 520,
+          "x": 64,
+          "y": 464,
           "originX": 20,
           "originY": 52,
           "flippedX": false,
-          "values": {"personaName": "", "name": "ShoeHaverNpc", "depth": 0}
+          "values": {"personaName": "Lost", "name": "LostNpc", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 1,
+          "_eid": "90326278",
+          "x": 976,
+          "y": 120,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": false,
+          "values": {"personaName": "FriendOfLost", "name": "FriendNpc", "depth": 0}
         }
       ]
     },
@@ -392,11 +403,110 @@
           "name": "AnyObject",
           "id": 25,
           "_eid": "90592852",
-          "x": 656,
-          "y": 328,
+          "x": 808,
+          "y": 520,
           "originX": 13,
           "originY": 12,
           "values": {"objId": "objEsotericWizardOfLightStatue", "name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableBlue",
+          "id": 26,
+          "_eid": "69755574",
+          "x": 680,
+          "y": 296,
+          "originX": 8,
+          "originY": 6,
+          "uid": 178978433062302,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableOrange",
+          "id": 27,
+          "_eid": "69757920",
+          "x": 680,
+          "y": 312,
+          "originX": 8,
+          "originY": 6,
+          "uid": 178978433290303,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableOrange",
+          "id": 28,
+          "_eid": "69757920",
+          "x": 704,
+          "y": 296,
+          "originX": 8,
+          "originY": 6,
+          "uid": 178978433437404,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableOrange",
+          "id": 29,
+          "_eid": "69757920",
+          "x": 656,
+          "y": 296,
+          "originX": 8,
+          "originY": 6,
+          "uid": 178978433555705,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableOrange",
+          "id": 30,
+          "_eid": "69757920",
+          "x": 680,
+          "y": 280,
+          "originX": 8,
+          "originY": 6,
+          "uid": 178978433689206,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 31,
+          "_eid": "69755853",
+          "x": 696,
+          "y": 280,
+          "originX": 3,
+          "originY": 3,
+          "uid": 178978433968407,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 32,
+          "_eid": "69755853",
+          "x": 696,
+          "y": 312,
+          "originX": 3,
+          "originY": 3,
+          "uid": 178978434071008,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 33,
+          "_eid": "69755853",
+          "x": 664,
+          "y": 312,
+          "originX": 3,
+          "originY": 3,
+          "uid": 178978434243009,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "ValuableGreen",
+          "id": 34,
+          "_eid": "69755853",
+          "x": 664,
+          "y": 280,
+          "originX": 3,
+          "originY": 3,
+          "uid": 178978434360910,
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
@@ -732,6 +842,45 @@
           "y": 120,
           "width": 176,
           "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 31,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 464,
+          "width": 160,
+          "height": 56,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 32,
+          "_eid": "95675713",
+          "x": 160,
+          "y": 464,
+          "width": 96,
+          "height": 58,
+          "flippedX": true,
+          "flippedY": false,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 33,
+          "_eid": "93117141",
+          "x": -16,
+          "y": 64,
+          "width": 40,
+          "height": 400,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
