@@ -573,10 +573,29 @@ export namespace DataShop {
             IndianaRescued: {
                 stocks: [
                     {
-                        // TODO not right at all
-                        initialQuantity: 9999,
+                        initialQuantity: 44,
                         price: { currency: "rescue_credits", deltaSold: 0, initial: 1 },
-                        product: { kind: "key_item", id: "MedicineMagenta" },
+                        product: { kind: "potion", id: "RestoreHealthFull0" },
+                    },
+                    {
+                        initialQuantity: 44,
+                        price: { currency: "rescue_credits", deltaSold: 0, initial: 1 },
+                        product: { kind: "potion", id: "RestoreHealthFull1" },
+                    },
+                    {
+                        initialQuantity: 3,
+                        price: { currency: "rescue_credits", deltaSold: 1, initial: 1 },
+                        product: { kind: "potion", id: "AttributeHealthUp" },
+                    },
+                    {
+                        initialQuantity: 1,
+                        price: { currency: "rescue_credits", deltaSold: 0, initial: 1 },
+                        product: { kind: "equipment", id: "PoisonResistance", level: 1 },
+                    },
+                    {
+                        initialQuantity: 1,
+                        price: { currency: "rescue_credits", deltaSold: 0, initial: 1 },
+                        product: { kind: "equipment", id: "DefensePhysicalAndPerfectBonus", level: 1 },
                     },
                 ],
             },

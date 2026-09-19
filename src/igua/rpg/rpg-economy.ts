@@ -40,7 +40,7 @@ export namespace RpgEconomy {
             mechanical_idol_credits: ["credit", "credits"],
             valuables: ["valuable", "valuables"],
             bone_dusts: ["bone dust", "bone dusts"],
-            rescue_credits: ["rescue credit", "rescue credits"],
+            rescue_credits: ["rescue cash", "rescue cash"],
         };
 
         export function getPluralizedNoun(price: Integer, currencyId: Currency.Id) {
