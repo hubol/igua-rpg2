@@ -122,6 +122,11 @@ export namespace DataKeyItem {
                 description: "Prince Spino's magenta-colored medicine. The best doctor knows the best dosage.",
                 texture: Tx.Collectibles.Key.MedicineMagenta,
             },
+            RescueRope: {
+                name: "Rope (for Rescue)",
+                description: "Rope that can be used to rescue lost souls in the Dark, Evil Hole.",
+                texture: Tx.Collectibles.Key.Rope,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );
