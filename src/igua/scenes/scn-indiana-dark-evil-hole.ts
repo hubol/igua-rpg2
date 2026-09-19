@@ -44,7 +44,9 @@ function enrichFriendNpc(lvl: LvlType.IndianaDarkEvilHole) {
             if (yield* ask("Will you continue this cycle by rescuing my friend?")) {
                 yield* show("Great!");
                 yield* DramaInventory.receiveCount(ropeItem, 1);
-                yield* show("I appreciate you.");
+                yield* show(
+                    "Give this to him. He'll use it to climb out and then forget to bring it when he comes back.",
+                );
             }
             else {
                 yield* show("Okay. Let me know if you reconsider or need a reminder of the situation.");
