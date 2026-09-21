@@ -1,6 +1,10 @@
 import { Pojo } from "../../lib/types/pojo";
 
 export namespace DevFsClient {
+    export async function readGitCommitDate(): Promise<Date> {
+        return new Date(await (await fetch(`/git/commit_date`)).text());
+    }
+
     export async function readText(path: string): Promise<string> {
         return await (await fetch(`/fs/${path}`)).text();
     }

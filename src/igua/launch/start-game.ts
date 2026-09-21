@@ -3,6 +3,7 @@ import { VectorSimple } from "../../lib/math/vector-type";
 import { SceneLibrary } from "../core/scene/scene-library";
 import { DevGameStartConfig } from "../dev/dev-game-start-config";
 import { devUpdateOgmoProject } from "../dev/dev-update-ogmo-project";
+import { devUpdateStatistics } from "../dev/dev-update-statistics";
 import { layers, sceneStack, startAnimator } from "../globals";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
@@ -22,6 +23,7 @@ export function startGame() {
 
     if (Environment.isDev) {
         setTimeout(devUpdateOgmoProject);
+        setTimeout(devUpdateStatistics);
     }
 
     if (Environment.hasDevFeatures) {
