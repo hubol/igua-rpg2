@@ -5536,7 +5536,6 @@
             "objAngelBouncing",
             "objAngelSnail",
             "objAngelSnow",
-            "objAngelStupid",
             "objCasinoLewdFinger",
             "objCasinoLewdJo",
             "objCasinoLewdSlap",
@@ -5648,11 +5647,115 @@
       "tintable": {
         "enabled": false,
         "defaultTint": "#ffffff",
-        "rgbLevelValueName": null,
+        "rgbLevelValueName": "",
         "useDefaultTint": true
       },
       "texture": "preview-images/any.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAYCAYAAAAPtVbGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADJSURBVEhLxZMBDoQgDATR///5ZAnLldJyKiU3CQqlMFDjkW7wydTuwJGpXRc3Ybaxhyc0g28ExBINgRUB0aJuECEgUtQ6kQJCUXnsEBCIztrfiikR5WzoGMdWLpDxU5cKkwhZi70NZ2D/5XJZB+JBSSeRk9ZiKwZkXAvAcBMksT2BIi0ATcIE3bTMiv1i+ZvcoRwpn268YxD51n/8GaNpX3BHyVCq8i6jSqSIAtBJQIRICsAgASsiLQCmBLwRWQLgSiQzobfxl5QugpNwLeONzbsAAAAASUVORK5CYII="
+    },
+    {
+      "exportID": "03165252",
+      "name": "EnemyStupid",
+      "limit": -1,
+      "size": {
+        "x": 62,
+        "y": 52
+      },
+      "origin": {
+        "x": 31,
+        "y": 50
+      },
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [
+        "Enemy"
+      ],
+      "values": [
+        {
+          "name": "variant",
+          "definition": "Enum",
+          "display": 1,
+          "choices": [
+            "level0",
+            "level1"
+          ],
+          "defaults": 0
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
+      ],
+      "isRegion": false,
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": null,
+        "useDefaultTint": true
+      },
+      "texture": "preview-images/enemy stupid.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAAA0CAYAAADSWosiAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALHSURBVGhD5Zk9bhUxEID3RShXoKEKASkXoKXkCkhIKVJwAioKEBRUnICCIhISV6Ck5QKRkpCKhitESA/mZQZ5J2PvzHjs3VU+6enZu961vxnb+36Gu8oG36t48PL5FotFfn36GtJfBF3FiSUEYA/fu2INVAvCIu+RmTPzs2R8CYRGfE1Znz3jc633UPElPa6maDLQNUz5JlN9DZlvtsaXLt9lcJqp3ztQ3Tqbkt9/dTRcfzzDWvtANLv5wfm7kWgqpQECAVw9fttkjOE35cKAJM0zLEHyQHQAwm4mCRM5QRKbOp8SFYDqXR2ES9LRRPVXFT3NAKxrmyNlnajJvutCS8R/Pnqzez85+DB8vnq9KwNQB/gxXv/+7Q/W8ngC0OVLChcCoF6SBng9ErO4dX1JQhxNmxKeNW8Sr91UQJBeOTRtJKxj6zLVARCBrJYyq2kTRTdxkKFMUpmjaRNFN3EAZOBVQtMmAlF8m4EeTRakzPG6ps0UMDYc5i2wyYjR8y/XKOXhxXss2Xj67B6WbkQBkEuzm8pqnt8pmqRs/oHFG3GNcIpHng8MJElOGrSlD+tMhAC4xAFv5qOxSgPgveeRBjwdptNdYuo8xzMGAJw3XnHCmnmSS9ewdGwKrzQhipOM5ebeAACthEset8RTAWtUrfJWasbDr82KWzsBtk8OsTTm8MsxlnRcvjjF0pjNj0ss6cn5iN9jeTC05MSj8IgD9PRK6fqRdUm4xWEKtV7TJWr7d4nPKczxjkUUl9aEhGcDjELbd86lKMg3OX4Tfr735jY1Hn4+pTjV4cIUPPwf6VgvcuNJwcMi1bs69rEDDzUDu9mBh9xUi6+Vplm6/n2U/SC0f/9s1HfpV9IW/5je2Yw3Ey9l20rt7/kSTcQjpYlo+fC1o5Hm65vQyC3m//G10jXjuUxzeuzw4eIAl9cKc3gA4h5rw/AXn0KdkGcp5BQAAAAASUVORK5CYII="
     }
   ],
   "tilesets": []

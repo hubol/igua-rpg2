@@ -59,7 +59,6 @@ export namespace OgmoEntities {
       | "objAngelBouncing"
       | "objAngelSnail"
       | "objAngelSnow"
-      | "objAngelStupid"
       | "objCasinoLewdFinger"
       | "objCasinoLewdJo"
       | "objCasinoLewdSlap"
@@ -149,6 +148,7 @@ export namespace OgmoEntities {
     name: string;
     depth: number;
   }>;
+  export type EnemyStupid = OgmoFactory.EntityBase<{ variant: "level0" | "level1"; name: string; depth: number }>;
 }
 
 export interface OgmoEntityResolverBase {
@@ -203,4 +203,5 @@ export interface OgmoEntityResolverBase {
   EnvironmentSpeakerRegion: (entity: OgmoEntities.EnvironmentSpeakerRegion) => unknown;
   EnvironmentSpeakerPlayerRegion: (entity: OgmoEntities.EnvironmentSpeakerPlayerRegion) => unknown;
   AnyObject: (entity: OgmoEntities.AnyObject) => unknown;
+  EnemyStupid: (entity: OgmoEntities.EnemyStupid) => unknown;
 }

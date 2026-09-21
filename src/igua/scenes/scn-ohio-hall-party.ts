@@ -132,7 +132,7 @@ export function scnOhioHallParty() {
             function transformIntoAngelObj(doctorObj: DisplayObject) {
                 doctorObj.play(Sfx.Cutscene.QuackTransform.rate(0.9, 1.1), false);
 
-                const angelObj = objAngelStupid()
+                const angelObj = objAngelStupid("level0")
                     .at(doctorObj)
                     .show();
 

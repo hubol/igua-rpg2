@@ -19,6 +19,7 @@ import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
 import { objAngelSkeliguana } from "../objects/enemies/obj-angel-skeliguana";
 import { objAngelSnail } from "../objects/enemies/obj-angel-snail";
 import { objAngelSpikeBall } from "../objects/enemies/obj-angel-spike-ball";
+import { objAngelStupid } from "../objects/enemies/obj-angel-stupid";
 import { objAngelSuggestive } from "../objects/enemies/obj-angel-suggestive";
 import { objEsotericBinocularViewer } from "../objects/esoteric/obj-esoteric-binocular-viewer";
 import { objEsotericClock } from "../objects/esoteric/obj-esoteric-clock";
@@ -125,6 +126,7 @@ export const OgmoEntityResolvers = {
     },
     EnemySnail: () => objAngelSnail(),
     EnemySpikeBall: objAngelSpikeBall,
+    EnemyStupid: (entity: OgmoEntities.EnemyStupid) => objAngelStupid(entity.values.variant),
     EnemySuggestive: (entity: OgmoEntities.EnemySuggestive) => objAngelSuggestive(entity).at(0, -38),
     EnemyMiffed: (entity: OgmoEntities.EnemyMiffed) => objAngelMiffed(entity.values.variant).at(0, 1),
     EnvironmentSparkleMarker: objEnvironmentFxSparkle,

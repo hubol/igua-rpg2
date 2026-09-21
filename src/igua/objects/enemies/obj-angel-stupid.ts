@@ -15,6 +15,7 @@ import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { TerrainAttributes } from "../../systems/terrain-attributes";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
 
@@ -76,6 +77,14 @@ const ranks = {
             ],
         },
     }),
+    level1: RpgEnemyRank.create({
+        loot: {
+            tier0: [
+                { kind: "potion", id: "Ballon", weight: 50 },
+                { kind: "nothing", weight: 50 },
+            ],
+        },
+    }),
 };
 
 const variants = {
@@ -83,10 +92,14 @@ const variants = {
         theme: themes.common,
         rank: ranks.level0,
     },
+    level1: {
+        theme: themes.common,
+        rank: ranks.level1,
+    },
 };
 
-export function objAngelStupid() {
-    const { rank, theme } = variants.level0;
+export function objAngelStupid(variantId: keyof typeof variants) {
+    const { rank, theme } = variants[variantId];
 
     const wingsObj = theme.createSprite("wings");
 
@@ -129,7 +142,12 @@ export function objAngelStupid() {
         soulAnchorObj,
     )
         .mixin(mxnDetectPlayer)
-        .mixin(mxnPhysics, { gravity: 0.04, physicsRadius: 14, physicsOffset: [0, -14] })
+        .mixin(mxnPhysics, {
+            gravity: 0.04,
+            physicsRadius: 14,
+            physicsOffset: [0, -14],
+            terrainAttributes: TerrainAttributes.Default | TerrainAttributes.Enemy,
+        })
         .mixin(mxnEnemy, { hurtboxes: [hurtboxObj], rank, soulAnchorObj })
         .mixin(mxnEnemyDeathBurst, { map: theme.tints.map })
         .handles("damaged", (self, event) => {

@@ -1,32 +1,64 @@
+import { DisplayObject } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Instances } from "../../lib/game-engine/instances";
 import { container } from "../../lib/pixi/container";
+import { Force } from "../../lib/types/force";
 import { Jukebox } from "../core/igua-audio";
 import { DataItem } from "../data/data-item";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
-import { Cutscene } from "../globals";
+import { Cutscene, scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnEnemy } from "../mixins/mxn-enemy";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
+import { RpgQuest } from "../rpg/rpg-quests";
+import { TerrainAttributes } from "../systems/terrain-attributes";
 
 const ropeItem: RpgInventory.Item.KeyItem = { kind: "key_item", id: "RescueRope" };
 
 export function scnIndianaDarkEvilHole() {
     Jukebox.play(Mzk.UndergroundRucksack);
-    const lvl = Lvl.IndianaDarkEvilHole();
-    enrichEnemies(lvl);
+    let lvl = Force<LvlDarkEvilHole>();
+
+    const spiritObj = objCaveSpirit();
+    const quest = Rpg.quest("DarkEvilHole.Rescue");
+
+    const variantIndex = (quest.timesCompleted + 1) % 2;
+
+    if (variantIndex === 0) {
+        lvl = Lvl.IndianaDarkEvilHole();
+        enrichVariant0Enemies(lvl, spiritObj);
+    }
+    else {
+        lvl = Lvl.IndianaDarkEvilHoleSpelling();
+        enrichVariant1Enemies(lvl, spiritObj);
+    }
+
     enrichFriendNpc(lvl);
-    enrichLostNpc(lvl);
+    enrichLostNpc(lvl, quest);
 }
 
-function enrichFriendNpc(lvl: LvlType.IndianaDarkEvilHole) {
+function enrichVariant1Enemies(lvl: LvlType.IndianaDarkEvilHoleSpelling, spiritObj: objCaveSpirit.Type) {
+    [lvl.AngelBlock0, lvl.AngelBlock1, lvl.AngelBlock2]
+        .forEach(obj => obj.attributes = TerrainAttributes.Enemy);
+
+    scene.stage
+        .coro(function* () {
+            yield () => Instances(mxnEnemy).length === 0;
+            spiritObj.objCaveSpirit.destroy([lvl.SuggestiveAngelBlock], "a large block");
+        });
+}
+
+type LvlDarkEvilHole = LvlType.IndianaDarkEvilHole | LvlType.IndianaDarkEvilHoleSpelling;
+
+function enrichFriendNpc(lvl: LvlDarkEvilHole) {
     lvl.FriendNpc
         .mixin(mxnCutscene, function* () {
             yield* show(
@@ -54,10 +86,9 @@ function enrichFriendNpc(lvl: LvlType.IndianaDarkEvilHole) {
         });
 }
 
-function enrichLostNpc(lvl: LvlType.IndianaDarkEvilHole) {
+function enrichLostNpc(lvl: LvlDarkEvilHole, quest: RpgQuest) {
     lvl.RopeGroup.visible = false;
 
-    const quest = Rpg.quest("DarkEvilHole.Rescue");
     let completedQuest = false;
 
     lvl.LostNpc
@@ -100,27 +131,40 @@ function enrichLostNpc(lvl: LvlType.IndianaDarkEvilHole) {
         });
 }
 
-function enrichEnemies(lvl: LvlType.IndianaDarkEvilHole) {
+function enrichVariant0Enemies(lvl: LvlType.IndianaDarkEvilHole, spiritObj: objCaveSpirit.Type) {
     const spikeObjs = [...lvl.MiffedAttacksDestroyRegion.collidesAll(Instances(mxnRpgAttack))];
-
-    const speakerObj = container()
-        .mixin(mxnSpeaker, { name: "Spirit of Dark, Evil Hole", tintPrimary: 0x202020, tintSecondary: 0x404040 });
 
     lvl.AngelMiffed
         .handles("mxnEnemy.died", () => {
-            Cutscene.play(function* () {
-                spikeObjs.forEach(obj => obj.destroy());
-                yield () => playerObj.isOnGround;
-                yield* show("You hear the sound of several spikes disappearing from the world.");
-            }, { speaker: speakerObj });
+            spiritObj.objCaveSpirit.destroy(spikeObjs, "several spikes");
         });
 
     lvl.AngelSuggestive
         .handles("mxnEnemy.died", () => {
-            Cutscene.play(function* () {
-                lvl.SuggestiveAngelBlock.destroy();
-                yield () => playerObj.isOnGround;
-                yield* show("You hear the sound of a large block disappearing from the world.");
-            }, { speaker: speakerObj });
+            spiritObj.objCaveSpirit.destroy([lvl.SuggestiveAngelBlock], "a large block");
         });
+}
+
+function objCaveSpirit() {
+    const api = {
+        destroy(objs: DisplayObject[], objectsDescription: string) {
+            Cutscene.play(function* () {
+                for (const obj of objs) {
+                    obj.destroy();
+                }
+                yield () => playerObj.isOnGround;
+                yield* show(`You hear the sound of ${objectsDescription} disappearing from the world.`);
+            }, { speaker: obj });
+        },
+    };
+
+    const obj = container()
+        .mixin(mxnSpeaker, { name: "Spirit of Dark, Evil Hole", tintPrimary: 0x202020, tintSecondary: 0x404040 });
+
+    return obj
+        .merge({ objCaveSpirit: api });
+}
+
+namespace objCaveSpirit {
+    export type Type = ReturnType<typeof objCaveSpirit>;
 }
