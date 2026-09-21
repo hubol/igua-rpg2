@@ -1,3 +1,4 @@
+import { exec } from "child_process";
 import { build, context } from "esbuild";
 import ImportGlobPlugin from "esbuild-plugin-import-glob";
 import { copyFile, mkdir, readFile, writeFile } from "fs/promises";
@@ -68,10 +69,23 @@ else {
 
     const port = await findFreePort(8000);
 
+    const requestHandlers = [
+        [isFsRequest, handleFsRequest],
+        [isGitRequest, handleGitRequest],
+    ];
+
     const server = createServer((req, res) => {
-        if (isFsRequest(req)) {
-            void handleFsRequest(req, res);
-            return;
+        for (const [isRequest, handleRequest] of requestHandlers) {
+            if (isRequest(req)) {
+                void handleRequest(req, res)
+                    .catch(error => {
+                        console.error(`${req.method} ${req.url} failed:`);
+                        console.error(error);
+                        res.writeHead(500);
+                        res.end(`${error}`);
+                    });
+                return;
+            }
         }
 
         proxy.inject(req, res);
@@ -80,6 +94,39 @@ else {
             console.clear();
             console.log(`Listening on ${getServerAddressText(server)}`);
         });
+}
+
+/**
+ * @param {import("http").IncomingMessage} req
+ */
+function isGitRequest(req) {
+    return Boolean(req.url) && req.url.startsWith("/git/");
+}
+
+/**
+ * @param {import("http").IncomingMessage} req
+ * @param {import("http").ServerResponse} res
+ */
+async function handleGitRequest(req, res) {
+    const result = await new Promise((resolve, reject) => {
+        exec(
+            `git show -s --format="%ci"`,
+            (error, stdout, stderr) => {
+                if (stdout?.trim()) {
+                    resolve(stdout);
+                }
+                else if (error) {
+                    reject(error);
+                }
+                else {
+                    reject(new Error(stderr));
+                }
+            },
+        );
+    });
+
+    res.writeHead(200);
+    res.end(result);
 }
 
 /**
@@ -103,29 +150,21 @@ async function handleFsRequest(req, res) {
         return;
     }
 
-    try {
-        if (req.method === "GET") {
-            const buffer = await readFile(absolutePath);
-            res.writeHead(200);
-            res.end(buffer);
-        }
-        else if (req.method === "POST") {
-            const body = await readBody(req);
-            await mkdir(path.dirname(absolutePath), { recursive: true });
-            await writeFile(absolutePath, body);
-            res.writeHead(202);
-            res.end("Accepted");
-        }
-        else {
-            res.writeHead(404);
-            res.end("Not found");
-        }
+    if (req.method === "GET") {
+        const buffer = await readFile(absolutePath);
+        res.writeHead(200);
+        res.end(buffer);
     }
-    catch (error) {
-        console.error(`${req.method} ${req.url} failed:`);
-        console.error(error);
-        res.writeHead(500);
-        res.end(`${error}`);
+    else if (req.method === "POST") {
+        const body = await readBody(req);
+        await mkdir(path.dirname(absolutePath), { recursive: true });
+        await writeFile(absolutePath, body);
+        res.writeHead(202);
+        res.end("Accepted");
+    }
+    else {
+        res.writeHead(404);
+        res.end("Not found");
     }
 }
 
