@@ -1,8 +1,8 @@
 import { Graphics } from "pixi.js";
+import { objText } from "../../../assets/fonts";
 import { Lvl } from "../../../assets/generated/levels/generated-level-data";
 import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
-import { PseudoRng } from "../../../lib/math/rng";
-import { Vector, vnew } from "../../../lib/math/vector-type";
+import { Vector, VectorSimple, vnew } from "../../../lib/math/vector-type";
 import { AdjustColor } from "../../../lib/pixi/adjust-color";
 import { container } from "../../../lib/pixi/container";
 import { Null } from "../../../lib/types/null";
@@ -19,12 +19,14 @@ export function scnDevQuality() {
     const lineGraphObjs: Record<string, objLineGraph.Type> = {};
 
     let firstTime = Null<Integer>();
+    let lastTime = -1;
 
     for (const [dateString, sliceData] of Object.entries(statisticsJson)) {
         const time = new Date(dateString).getTime();
         if (firstTime === null) {
             firstTime = time;
         }
+        lastTime = time;
         const x = 16 * (time - firstTime) / oneMonthMilliseconds;
         for (const [entityId, entityCount] of Object.entries(sliceData)) {
             lineGraphObjs[entityId] ??= objLineGraph(metadata[entityId].tint).show(obj);
@@ -41,8 +43,49 @@ export function scnDevQuality() {
         .at(16, 200)
         .show();
 
-    console.log(metadata);
+    // Interesting, the transform is outdated without this
+    // Reason #99999 to build my own renderer
+    obj.updateTransform();
+
+    function getTimeWorldX(time: number): VectorSimple {
+        const point = vnew(16 * (time - firstTime!) / oneMonthMilliseconds, 0);
+        const result = obj.worldTransform.apply(point);
+        return result;
+    }
+
+    {
+        let time = firstTime!;
+        while (time < lastTime) {
+            const rawDate = new Date(time);
+            const monthIndex = (rawDate.getMonth() + 1) % 12;
+            const year = rawDate.getFullYear() + (monthIndex === 0 ? 1 : 0);
+            const date = new Date(year, monthIndex);
+            time = date.getTime();
+
+            objText.Medium("- " + monthStrings[monthIndex] + " " + year)
+                .at(getTimeWorldX(time).x, 210)
+                .anchored(0, 0.5)
+                .angled(90)
+                .zIndexed(ZIndex.BackgroundEntities)
+                .show();
+        }
+    }
 }
+
+const monthStrings = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+];
 
 function objLineGraph(tint: RgbInt) {
     let previousPosition = Null<Vector>();
@@ -88,19 +131,4 @@ function getEntityMetadata() {
         obj[id] = { tint };
         return obj;
     }, {} as Record<string, { tint: RgbInt }>);
-}
-
-const factors = [
-    999,
-    444,
-    555,
-];
-
-function toInteger(string: string) {
-    let result = 0;
-    for (let i = 0; i < string.length; i++) {
-        result += string.charCodeAt(i) * (factors[i % factors.length]);
-    }
-
-    return result;
 }
