@@ -110,6 +110,7 @@ function isGitRequest(req) {
 async function handleGitRequest(req, res) {
     const result = await new Promise((resolve, reject) => {
         exec(
+            // https://stackoverflow.com/questions/3814926/how-to-see-the-date-of-a-commit#comment4047911_3815007
             `git show -s --format="%ci"`,
             (error, stdout, stderr) => {
                 if (stdout?.trim()) {
