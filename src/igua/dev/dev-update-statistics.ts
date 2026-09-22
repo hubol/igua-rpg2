@@ -37,6 +37,7 @@ export async function devUpdateStatistics() {
     });
 
     const existing = await DevFsClient.readJson(path);
+
     const date = await DevFsClient.readGitCommitDate();
     const next = getObjectSortedByKeys(
         {
@@ -44,6 +45,18 @@ export async function devUpdateStatistics() {
             [date.toISOString().substring(0, 10)]: statistics,
         },
     );
+
+    const values = Object.values(next);
+
+    for (let i = 0; i < values.length - 1; i++) {
+        if (values[i + 1] !== statistics) {
+            continue;
+        }
+
+        if (JSON.stringify(values[i]) === JSON.stringify(values[i + 1])) {
+            return;
+        }
+    }
 
     if (JSON.stringify(existing) === JSON.stringify(next)) {
         return;
