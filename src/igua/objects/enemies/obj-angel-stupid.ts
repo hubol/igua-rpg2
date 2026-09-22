@@ -1,4 +1,4 @@
-import { Graphics } from "pixi.js";
+import { Graphics, Texture } from "pixi.js";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
@@ -20,24 +20,19 @@ import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
 
 const themes = (() => {
-    const [
-        txWings,
-        txNoggin,
-        txLegLeft,
-        txLegRight,
-        txTorso,
-        txLeaf,
-    ] = Tx.Enemy.Stupid.Layers.split({ width: 66 });
+    function createSprites(txs: Texture[]) {
+        return {
+            wings: txs[0],
+            noggin: txs[1],
+            legLeft: txs[2],
+            legRight: txs[3],
+            torso: txs[4],
+            leaf: txs[5],
+        };
+    }
 
     const template = AngelThemeTemplate.create({
-        sprites: {
-            wings: txWings,
-            noggin: txNoggin,
-            legLeft: txLegLeft,
-            legRight: txLegRight,
-            torso: txTorso,
-            leaf: txLeaf,
-        },
+        sprites: createSprites(Tx.Enemy.Stupid.Layers.split({ width: 66 })),
         eyes: {
             defaultEyelidRestingPosition: 6,
             eyelidsTint: 0x1C6658,
@@ -64,6 +59,29 @@ const themes = (() => {
 
     return {
         common: template.createTheme(),
+        fecaBat: template.createTheme(
+            {
+                sprites: createSprites(Tx.Enemy.Stupid.BatLayers.split({ width: 66 })),
+                eyes: {
+                    pupilsTx: Tx.Enemy.Stupid.Pupil1,
+                    scleraTx: Tx.Enemy.Stupid.Sclera1,
+                    defaultEyelidRestingPosition: 0,
+                    pupilsTint: 0x4C1690,
+                    eyelidsTint: 0x4C1690,
+                },
+                mouth: {
+                    negativeSpaceTint: 0xffffff,
+                    txs: objAngelMouth.txs.rounded11,
+                },
+                tints: {
+                    map: [0x51391A, 0x4C1690, 0x4C1690],
+                },
+            },
+            {
+                eyes: obj => obj.add(0, -8),
+                mouth: obj => obj.add(0, -12),
+            },
+        ),
     };
 })();
 
@@ -95,7 +113,7 @@ const variants = {
         rank: ranks.level0,
     },
     level1: {
-        theme: themes.common,
+        theme: themes.fecaBat,
         rank: ranks.level1,
     },
 };
@@ -135,9 +153,9 @@ export function objAngelStupid(variantId: keyof typeof variants) {
             .mixin(mxnFacingPivot, { left: 2, right: -2, down: -1, up: 1 }),
         container(
             theme.createEyesObj()
-                .at(33, 23),
+                .add(33, 23),
             theme.createMouthObj()
-                .at(33, 33),
+                .add(33, 33),
         )
             .mixin(mxnFacingPivot, { left: -2, right: 2, down: 2, up: -2 }),
         hurtboxObj,

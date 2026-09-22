@@ -5,7 +5,7 @@
   "offsetX": 0,
   "offsetY": 0,
   "values": {"Terrain Color": "#000000", "Region ID": "Indiana"},
-  "backgroundColor": "#408000",
+  "backgroundColor": "#260b48",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -979,7 +979,32 @@
       "gridCellHeight": 8,
       "gridCellsX": 201,
       "gridCellsY": 107,
-      "decals": [],
+      "decals": [
+        {
+          "x": 512,
+          "y": 1000,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#270b4a",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 528,
+          "y": 1016,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#190334",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
