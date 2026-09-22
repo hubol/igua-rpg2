@@ -80,8 +80,10 @@ const ranks = {
     level1: RpgEnemyRank.create({
         loot: {
             tier0: [
-                { kind: "potion", id: "Ballon", weight: 50 },
-                { kind: "nothing", weight: 50 },
+                { kind: "potion", id: "Ballon", weight: 5 },
+                { kind: "pocket_item", id: "PoopTypeA", weight: 35 },
+                { kind: "pocket_item", id: "PoopTypeA", weight: 30, count: 2 },
+                { kind: "nothing", weight: 30 },
             ],
         },
     }),

@@ -97,6 +97,7 @@ function enrichMrIndiana(lvl: LvlType.WorldMap) {
         "EssenceWind",
         "RobotHair",
         "Wheat",
+        "PoopTypeA",
     ];
 
     const checkpointName: keyof typeof lvl = "fromIllinoisViaMrIndiana";
