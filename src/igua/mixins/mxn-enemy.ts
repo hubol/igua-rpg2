@@ -33,7 +33,7 @@ export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
             Rpg.experience.reward.combat.onEnemyDefeat(args.rank.level);
         }
         const drop = Rpg.loot.drop(loot, status, Rpg.character.buffs.loot);
-        objLootDrop(drop).at(enemyObj.mxnEnemy.soulAnchorObj.getWorldPosition()).show();
+        objLootDrop(drop).at(enemyObj.mxnEnemy.soulAnchorObj.getWorldCenter()).show();
         enemyObj.dispatch("mxnEnemy.died");
         obj.destroy();
     };
