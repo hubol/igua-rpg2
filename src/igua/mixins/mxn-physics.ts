@@ -300,13 +300,13 @@ function push(obj: MxnPhysics, edgesOnly: boolean, correctPosition = true, resul
 
                 // The edgesOnly condition was added to prevent ugly snapping when falling down past a ceiling
                 // But then this appeared to cause problems with sloped ceilings
-                if (segment.isCeiling && (edgesOnly || isSlope)) {
+                if (segment.isCeiling) {
                     // Previously, the statements here were guarded by a check to determine
                     // whether the physics object was moving down OR the segment was a slope
                     // (See Git history for fewer lies)
                     // This was not sufficient to keep the physics object out of ceiling slopes
                     // that overlapped with other ceilings
-                    {
+                    if ((edgesOnly || isSlope)) {
                         // Computes the expected Y-coordinate where the object should
                         // touch this segment at its current X-coordinate
                         const touchY = Math.min(Math.max(y0, y1), y0 + (y1 - y0) * f + vCat);
