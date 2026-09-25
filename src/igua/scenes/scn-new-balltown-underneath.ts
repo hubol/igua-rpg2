@@ -2,6 +2,7 @@ import { Container, Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpr } from "../../lib/game-engine/routines/interp";
@@ -121,6 +122,7 @@ function enrichHeliumCreator(lvl: LvlType.NewBalltownUnderneath) {
         .mixin(mxnComputer)
         .mixin(mxnCutscene, function* () {
             while (true) {
+                Sfx.Character.HeliumMachineSpeak.play();
                 const result = yield* ask(
                     `         -=-=-=-=-=-=- Tank status -=-=-=-=-=-=-
                           Valve open: ${tank.isValveOpen ? "Yes" : "No"}

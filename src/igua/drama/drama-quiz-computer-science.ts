@@ -49,6 +49,7 @@ export function* dramaQuizComputerScience({ difficulty, messageObj }: DramaQuizC
     programObj.destroy();
 
     if (guess === program.correctOuptut) {
+        Sfx.Character.FlopQuizMasterCorrect.play();
         yield* show("You are smart!");
         return true;
     }

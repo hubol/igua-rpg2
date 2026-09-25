@@ -2,6 +2,7 @@ import { DisplayObject } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
+import { Sfx } from "../../assets/sounds";
 import { Instances } from "../../lib/game-engine/instances";
 import { container } from "../../lib/pixi/container";
 import { Force } from "../../lib/types/force";
@@ -105,7 +106,7 @@ function enrichLostNpc(lvl: LvlDarkEvilHole, quest: RpgQuest) {
                     return;
                 }
 
-                // TODO sfx
+                Sfx.Esoteric.DarkEvilHoleRopeAppear.rate(0.95, 1.05).play();
                 lvl.RopeGroup.visible = true;
 
                 lvl.EscapeRegion
@@ -116,6 +117,7 @@ function enrichLostNpc(lvl: LvlDarkEvilHole, quest: RpgQuest) {
                     })
                     .mixin(mxnCutscene, function* () {
                         if (yield* ask("Ready to go?")) {
+                            Sfx.Esoteric.DarkEvilHoleEscape.rate(0.98, 1.02).play();
                             playerObj.sparklesPerFrame = 0.3;
                             playerObj.speed.y = -15;
                         }
@@ -152,6 +154,7 @@ function objCaveSpirit() {
     const api = {
         destroy(objs: DisplayObject[], objectsDescription: string) {
             Cutscene.play(function* () {
+                Sfx.Esoteric.DarkEvilHoleDestroyObjects.rate(0.95, 1.05).play();
                 for (const obj of objs) {
                     obj.destroy();
                 }

@@ -119,11 +119,13 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
 
     pageObj.navigation = false;
 
+    Sfx.Cutscene.Inventory.ChooseShow.rate(0.95, 1.05).play();
     yield interpvr(obj).factor(factor.sine).to(0, 0).over(500);
 
     pageObj.navigation = true;
 
     yield () => Input.justWentDown("Confirm");
+    Sfx.Cutscene.Inventory.ChooseConfirm.rate(0.95, 1.05).play();
 
     // TODO very crude way to kill scrollbar
     pageObj.maxHeight = undefined;
@@ -155,6 +157,8 @@ function* choose({ message = "", options = [], noneMessage }: Partial<ChooseArgs
     else {
         yield sleep(400);
     }
+
+    Sfx.Cutscene.Inventory.ChooseHide.rate(0.95, 1.05).play();
 
     yield* Coro.all([
         interpvr(messageObj).factor(factor.sine).translate(-renderer.width, 0).over(500),
@@ -249,6 +253,7 @@ function createRemovedItemFigureObjAtPlayer(item: RpgInventory.Item) {
     return objItemFigureWithTarget(item, DramaLib.Speaker.current)
         .handles("mxnFigureTransfer:transfered", (self) => {
             objFxBurst32().at(self).show();
+            self.play(Sfx.Cutscene.Inventory.ItemDeliver.rate(0.9, 1.1));
             self.destroy();
         })
         .at(playerObj)
@@ -286,7 +291,11 @@ function sleepAfterRemoveIteration(index: Integer) {
 
 function objItemFigureWithTarget(item: RpgInventory.Item, targetObj: DisplayObject | null) {
     return DataItem.getFigureObj(item)
-        .mixin(mxnFxFigureTransfer, { targetObj });
+        .mixin(mxnFxFigureTransfer, { targetObj })
+        .coro(function* (self) {
+            yield sleepf(2);
+            self.play(Sfx.Cutscene.Inventory.ItemSummon.rate(0.9, 1.1));
+        });
 }
 
 export const DramaItem = {

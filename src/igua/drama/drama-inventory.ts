@@ -1,4 +1,5 @@
 import { DisplayObject } from "pixi.js";
+import { Sfx } from "../../assets/sounds";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
@@ -82,6 +83,7 @@ function* visualizeRemoveCountFromPlayer(
     const colors = DramaLib.Speaker.getColors();
     const count = initialCount - endingCount;
 
+    Sfx.Cutscene.Inventory.CountShow.rate(0.95, 1.05).play();
     const ownedObj = objDramaOwnedCount({
         bgTint: colors.primary,
         fgTint: colors.textPrimary,
@@ -106,6 +108,7 @@ function* visualizeRemoveCountFromPlayer(
     }
 
     yield () => !removedFigureObj || removedFigureObj.destroyed;
+    Sfx.Cutscene.Inventory.CountHide.rate(0.95, 1.05).play();
     ownedObj.destroy();
 }
 

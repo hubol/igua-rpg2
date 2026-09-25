@@ -1,4 +1,5 @@
 import { Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { CollisionShape } from "../../../lib/pixi/collision";
 import { container } from "../../../lib/pixi/container";
@@ -22,7 +23,10 @@ export function objEsotericWizardOfLightStatue() {
         collisionObj,
     )
         .collisionShape(CollisionShape.DisplayObjects, [collisionObj])
-        .mixin(mxnInteract, () => Rpg.character.temporaryEffects.add(effectId, 60))
+        .mixin(mxnInteract, () => {
+            Sfx.Esoteric.WizardOfLightStatue.rate(0.95, 1.05).play();
+            Rpg.character.temporaryEffects.add(effectId, 60);
+        })
         .mixin(mxnHasHead, { obj: collisionObj })
         .pivoted(41, 82)
         .zIndexed(ZIndex.CharacterEntities);
