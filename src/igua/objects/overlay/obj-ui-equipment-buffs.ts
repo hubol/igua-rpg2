@@ -256,7 +256,7 @@ const getBuffInformations = (function () {
         ),
         buff(
             "combat.spells.cost.pocketItemChance",
-            "Spell Consumes: Pocket Item Chance",
+            "Spell Costs: Pocket Item Chance",
             "percent",
             "benefit_when_negative",
         ),
@@ -318,6 +318,7 @@ const getBuffInformations = (function () {
         buff("esoteric.fishFood.bonusClumpsCount", "Fish Food: Bonus Clumps", "integer", "benefit_when_positive"),
         buff("esoteric.fishFood.healingIncreaseFactor", "Fish Food: Healing Bonus", "percent", "benefit_when_positive"),
         buff("esoteric.bonusCemeteryEctoplasmStreak", "Max Ectoplasm Streak", "integer", "benefit_when_positive"),
+        buff("pocket.bonusSlotCount", "Extra Pocket Slots", "integer", "benefit_when_positive"),
     );
 
     const fn = new Function(

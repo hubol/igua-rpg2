@@ -264,7 +264,7 @@ export namespace DataEquipment {
                 },
                 NightVision: {
                     name: "Night Vision Shoe",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.NightVision,
                     description: "Improves vision in dark spaces",
                     buffs: (model, bonus) => {
                         model.esoteric.nightVisionLevel += 1 + bonus;
@@ -272,7 +272,7 @@ export namespace DataEquipment {
                 },
                 Robotic: {
                     name: "Nerd's True Charm",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.RobotHead,
                     description: "Finally! Become a robot",
                     buffs: (model, bonus) => {
                         model.cosmetic.roboticism += 100;
@@ -280,7 +280,7 @@ export namespace DataEquipment {
                 },
                 PocketSlot: {
                     name: "Convenient Shoe",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.PocketShoe,
                     description:
                         "Grants a convenient extra pocket for items. If you take it off, your items will be lost!",
                     buffs: (model, bonus) => {
@@ -304,7 +304,7 @@ export namespace DataEquipment {
                 },
                 SpellHotPineCone: {
                     name: "Hot Pine Seed Pack",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.HotPineConePack,
                     description: "Chuck hot, hot pine cones onto flat surfaces.",
                     buffs: (model, bonus) => {
                         model.combat.spells.equipped.HotPineCone += 1 + bonus;
