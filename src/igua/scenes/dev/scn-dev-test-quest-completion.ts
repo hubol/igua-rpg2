@@ -30,6 +30,14 @@ export function scnDevTestQuestCompletion() {
             Assert(Rpg.inventory.equipment.list.length).toStrictlyBe(2);
             Assert(Rpg.inventory.keyItems.count("FlopBlindBox")).toStrictlyBe(10);
             Assert(Rpg.experience.quest).toStrictlyBe(77);
+
+            setRpgProgressData(getInitialRpgProgress());
+            yield* DramaQuests.complete("FallenBot.PerfectScore");
+            Assert(Rpg.inventory.keyItems.count("TeenerBot")).toStrictlyBe(1);
+            Assert(Rpg.experience.quest).toStrictlyBe(50);
+            yield* DramaQuests.complete("FallenBot.PerfectScore");
+            Assert(Rpg.inventory.keyItems.count("TeenerBot")).toStrictlyBe(1);
+            Assert(Rpg.experience.quest).toStrictlyBe(75);
         })
         .show();
 }

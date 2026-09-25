@@ -46,16 +46,20 @@ export class RpgQuest<TId extends DataQuest.Id | unknown = unknown> {
 
     peekCompletionReward(): RpgQuest.Reward {
         const reward = this._data.reward;
+        const isFirstCompletion = this._state.timesCompleted === 0;
 
         if (reward.kind === "nothing") {
-            return this._state.timesCompleted === 0 || reward.countCompletions === "always"
+            return isFirstCompletion || reward.countCompletions === "always"
                 ? { drops: [], isExtended: false }
                 : null;
         }
 
         if (reward.kind === "single") {
-            return this._state.timesCompleted === 0 || reward.countCompletions === "always"
-                ? { drops: DataQuest.Reward.Drop.flatten(reward.drop), isExtended: false }
+            return isFirstCompletion || reward.countCompletions === "always"
+                ? {
+                    drops: isFirstCompletion ? DataQuest.Reward.Drop.flatten(reward.drop) : [],
+                    isExtended: false,
+                }
                 : null;
         }
 
@@ -84,9 +88,7 @@ export class RpgQuest<TId extends DataQuest.Id | unknown = unknown> {
 
     complete(): RpgQuest.Reward {
         const reward = this.peekCompletionReward();
-        // TODO Previously, there was a flag on the quest that indicated whether or not XP should always be awarded on completion
-        // I think this can be safely inferred from the reward for now
-        if (reward || this._state.timesCompleted === 0) {
+        if (reward) {
             this._state.timesCompleted += 1;
             this._reward.quest.onComplete(this._state.timesCompleted, reward?.isExtended ?? false);
         }

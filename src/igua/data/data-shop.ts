@@ -597,6 +597,11 @@ export namespace DataShop {
                         price: { currency: "rescue_credits", deltaSold: 0, initial: 1 },
                         product: { kind: "equipment", id: "DefensePhysicalAndPerfectBonus", level: 1 },
                     },
+                    {
+                        initialQuantity: 1,
+                        price: { currency: "rescue_credits", deltaSold: 0, initial: 2 },
+                        product: { kind: "equipment", id: "FaceAttack", level: 1 },
+                    },
                 ],
             },
             __Fallback__: { stocks: [] },

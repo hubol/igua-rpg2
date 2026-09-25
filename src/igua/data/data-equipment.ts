@@ -420,6 +420,14 @@ export namespace DataEquipment {
                         model.motion.jump.takeDamageAmount += Math.max(1, 2 - bonus);
                     },
                 },
+                FaceAttack: {
+                    name: "Face Charm",
+                    texture: null,
+                    description: "Unusual charm. Increases face attack damage.",
+                    buffs: (model, bonus) => {
+                        model.combat.melee.faceAttack.physical += 4 + bonus;
+                    },
+                },
                 __Fallback__: {
                     name: "???",
                     texture: null,
