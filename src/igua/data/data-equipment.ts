@@ -315,7 +315,7 @@ export namespace DataEquipment {
                 },
                 MeleeOverheat: {
                     name: "Hot Sock",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.HotSock,
                     description: "Warming sock. Melee attacks cause enemies to overheat.",
                     buffs: (() => {
                         const values = [35, 40, 45, 50];
@@ -331,7 +331,7 @@ export namespace DataEquipment {
                 },
                 OverheatResistance0: {
                     name: "Ice Cube",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.IceCube,
                     description: "A cool, cool cube. Increases resistance to overheat.",
                     buffs: (model, bonus) => {
                         model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
@@ -339,7 +339,7 @@ export namespace DataEquipment {
                 },
                 OverheatResistance1: {
                     name: "Aloe Drops",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.AloeDrop,
                     description: "Cooling, heavenly drops. Increases resistance to overheat.",
                     buffs: (model, bonus) => {
                         model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
