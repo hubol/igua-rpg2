@@ -11,10 +11,15 @@ export const paint = {
 };
 
 function paintImpl({ bg = Undefined<number>(), fg = Undefined<number>() }) {
-    const prefix = "\x1b"
+    let prefix = "\x1b"
         + (bg === undefined ? "" : `[48;5;${bg}m`)
         + (fg === undefined ? "" : `[38;5;${fg}m`);
-    const suffix = "\x1b[0m";
+    let suffix = "\x1b[0m";
+
+    if ("window" in globalThis) {
+        prefix = "";
+        suffix = "";
+    }
 
     return function (literals: TemplateStringsArray | string, ...placeholders: string[]) {
         if (typeof literals === "string") {
