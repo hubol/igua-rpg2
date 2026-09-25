@@ -1,6 +1,7 @@
 import { DisplayObject } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { Instances } from "../../lib/game-engine/instances";
 import { container } from "../../lib/pixi/container";
 import { Force } from "../../lib/types/force";
@@ -16,6 +17,7 @@ import { mxnEnemy } from "../mixins/mxn-enemy";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { playerObj } from "../objects/obj-player";
+import { CtxTerrainPipe } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { RpgQuest } from "../rpg/rpg-quests";
@@ -25,6 +27,7 @@ const ropeItem: RpgInventory.Item.KeyItem = { kind: "key_item", id: "RescueRope"
 
 export function scnIndianaDarkEvilHole() {
     Jukebox.play(Mzk.UndergroundRucksack);
+    CtxTerrainPipe.value.texture = NoAtlasTx.Terrain.Pipe.AbstractBlack;
     let lvl = Force<LvlDarkEvilHole>();
 
     const spiritObj = objCaveSpirit();

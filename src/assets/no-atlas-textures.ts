@@ -40,6 +40,7 @@ async function createNoAtlasTx(tx: typeof Tx) {
         },
         Terrain: {
             Pipe: {
+                AbstractBlack: await wrap(tx.Terrain.Pipe.AbstractBlack),
                 BlackSolidLine2px: await wrap(tx.Terrain.Pipe.BlackSolidLine2px),
                 Brick: await wrap(tx.Terrain.Pipe.Brick),
                 Cloud0: await wrap(tx.Terrain.Pipe.Cloud0),

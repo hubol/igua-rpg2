@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 1081 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 1083 }];
 
 interface TxData {
   id: string;
@@ -815,6 +815,7 @@ function txs<T>(tx: (data: TxData) => T) {
       ShadowIrregularSmallRound: tx({ id: "Light.ShadowIrregularSmallRound", atlas: 0, x: 1950, y: 2839, width: 12, height: 10 }),
       ShadowIrregularSmall: tx({ id: "Light.ShadowIrregularSmall", atlas: 0, x: 573, y: 2735, width: 16, height: 8 }),
       ShadowMessy0: tx({ id: "Light.ShadowMessy0", atlas: 0, x: 1270, y: 2410, width: 58, height: 12 }),
+      Stage8: tx({ id: "Light.Stage8", atlas: 0, x: 2220, y: 2654, width: 8, height: 8 }),
     },
     Placeholder: tx({ id: "Placeholder", atlas: 0, x: 4081, y: 2240, width: 14, height: 14 }),
     Shapes: {
@@ -1021,7 +1022,8 @@ function txs<T>(tx: (data: TxData) => T) {
         Sheets: tx({ id: "Terrain.Metal.Sheets", atlas: 0, x: 1119, y: 2769, width: 76, height: 48 }),
       },
       Pipe: {
-        BlackSolidLine2px: tx({ id: "Terrain.Pipe.BlackSolidLine2px", atlas: 0, x: 4079, y: 1723, width: 16, height: 16 }),
+        AbstractBlack: tx({ id: "Terrain.Pipe.AbstractBlack", atlas: 0, x: 4079, y: 1723, width: 16, height: 16 }),
+        BlackSolidLine2px: tx({ id: "Terrain.Pipe.BlackSolidLine2px", atlas: 0, x: 4079, y: 1740, width: 16, height: 16 }),
         Brick: tx({ id: "Terrain.Pipe.Brick", atlas: 0, x: 513, y: 2574, width: 32, height: 14 }),
         Cloud0: tx({ id: "Terrain.Pipe.Cloud0", atlas: 0, x: 1582, y: 2835, width: 64, height: 16 }),
         Grate: tx({ id: "Terrain.Pipe.Grate", atlas: 0, x: 1647, y: 2850, width: 64, height: 16 }),
@@ -1240,7 +1242,7 @@ function txs<T>(tx: (data: TxData) => T) {
       LiquidDrip: tx({ id: "Ui.LiquidDrip", atlas: 0, x: 3882, y: 2273, width: 48, height: 60 }),
       NewIndicator: tx({ id: "Ui.NewIndicator", atlas: 0, x: 4076, y: 845, width: 20, height: 12 }),
       NoBlindBoxes: tx({ id: "Ui.NoBlindBoxes", atlas: 0, x: 2809, y: 2318, width: 74, height: 10 }),
-      NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 2220, y: 2654, width: 8, height: 8 }),
+      NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 1876, y: 2893, width: 8, height: 8 }),
       OwnerDefeat: tx({ id: "Ui.OwnerDefeat", atlas: 0, x: 2223, y: 2873, width: 30, height: 16 }),
       PlacementReticle: tx({ id: "Ui.PlacementReticle", atlas: 0, x: 2424, y: 2442, width: 6, height: 6 }),
       Pocket: {
