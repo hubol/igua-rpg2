@@ -103,6 +103,8 @@ export namespace DataNpcPersona {
             Olga: { job: "Instructor", name: "Olga", looksId: "Olga" },
             FriendOfLost: { job: "Enabler", name: "Rice", looksId: "Booger" },
             Lost: { job: "Explorer", name: "Trew", looksId: "Felinish" },
+            MageIdler: { job: "Mage", name: "Idyll", looksId: "LooksPurple" },
+            MageGreeter: { job: "Mage", name: "Greta", looksId: "UnbotheredAxolotl" },
             __Fallback__: { job: "???", name: "???", looksId: "MintyJourney" },
         } satisfies Record<string, Model>,
     );
