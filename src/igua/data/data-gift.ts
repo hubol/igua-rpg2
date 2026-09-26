@@ -19,9 +19,6 @@ export namespace DataGift {
             "Demo.GoodEnd": {
                 item: { kind: "equipment", id: "Sparkle", level: 1 },
             },
-            "Indiana.DarkEvilHole.Illuminate": {
-                item: { kind: "equipment", id: "NightVision", level: 1 },
-            },
             "Indiana.MagicDoor.0": {
                 item: { kind: "equipment", id: "BlueCrystalSock", level: 1 },
             },
