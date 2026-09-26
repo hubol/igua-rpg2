@@ -347,7 +347,7 @@ export namespace DataEquipment {
                 },
                 OverheatResistance2: {
                     name: "Fishnets",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.Fishnets,
                     description: "Breezy legwear. Increases resistance to overheat.",
                     buffs: (model, bonus) => {
                         model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
@@ -355,7 +355,7 @@ export namespace DataEquipment {
                 },
                 OverheatResistance3: {
                     name: "Cooling Bandage",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.Bandage,
                     description: "Medical cooling product. Increases resistance to overheat.",
                     buffs: (model, bonus) => {
                         model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
@@ -363,7 +363,7 @@ export namespace DataEquipment {
                 },
                 SpellOpenFlopBlindBoxes: {
                     name: "Buzzsaw",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.Buzzsaw,
                     description: "Professionally open your Flop blind boxes.",
                     buffs: (model, bonus) => {
                         model.combat.spells.equipped.OpenFlopBlindBoxes += 1 + bonus;
@@ -372,7 +372,7 @@ export namespace DataEquipment {
                 },
                 BallonDrainOnGround: {
                     name: "Dark Magnet",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.MagnetSad,
                     description: "Unique object. Causes ballon health to drain while grounded instead of airborne.",
                     buffs: (model, bonus) => {
                         model.conditions.ballonDrainOnGround += 100;
@@ -396,7 +396,7 @@ export namespace DataEquipment {
                 },
                 EctoplasmStreak: {
                     name: "Aura Absorber",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.Ectoplasm,
                     description: "Mysterious object. Increases potential for ectoplasm while headstone-hopping.",
                     buffs: (model, bonus) => {
                         model.esoteric.bonusCemeteryEctoplasmStreak += 1 + bonus;
@@ -404,7 +404,7 @@ export namespace DataEquipment {
                 },
                 ForestSpiritChance: {
                     name: "Charged Clog",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.ClogForest,
                     description: "Lovingly-crafted wooden shoe. Worn to attract Forest Spirits at the cost of vanity.",
                     buffs: (model, bonus) => {
                         model.loot.specialEvents.replaceItemsWithForestSpritChance += 2 + bonus;
@@ -412,7 +412,7 @@ export namespace DataEquipment {
                 },
                 DestructiveAutoJump: {
                     name: "Dangerous Spring",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.Spring,
                     description: "Perpetually jump, but inflict damage to wearer.",
                     buffs: (model, bonus) => {
                         model.motion.jump.automaticallyJump += 100;
@@ -422,7 +422,7 @@ export namespace DataEquipment {
                 },
                 FaceAttack: {
                     name: "Face Charm",
-                    texture: null,
+                    texture: Tx.Collectibles.Equipment.IguanaFace,
                     description: "Unusual charm. Increases face attack damage.",
                     buffs: (model, bonus) => {
                         model.combat.melee.faceAttack.physical += 4 + bonus;
