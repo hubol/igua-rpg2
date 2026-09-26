@@ -103,7 +103,9 @@ function objLineGraph(tint: RgbInt) {
                 previousPosition = vnew();
             }
 
-            pointsGfx.drawCircle(x, y, 1.5);
+            if (!previousPosition || Math.abs(x - previousPosition.x) > 6) {
+                pointsGfx.drawCircle(x, y, 1.5);
+            }
 
             previousPosition.at(x, y);
         },
