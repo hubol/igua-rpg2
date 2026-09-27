@@ -244,7 +244,12 @@ export function objSlotMachine<TSymbols extends DataSlotMachines.SymbolsManifest
                     });
                 }
                 if (totalPrize <= 0 && totalMaterialsCount <= 0) {
-                    Rpg.wallet.earn("casino_pity", pricePerSpin.price + Rpg.character.buffs.wallet.bonusCasinoPity);
+                    self.coro(function* () {
+                        yield* DramaWallet.earn(
+                            "casino_pity",
+                            pricePerSpin.price + Rpg.character.buffs.wallet.bonusCasinoPity,
+                        );
+                    });
                 }
 
                 paidForGame = false;

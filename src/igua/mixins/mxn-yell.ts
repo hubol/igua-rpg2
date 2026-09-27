@@ -16,10 +16,7 @@ export function mxnYell(obj: DisplayObject) {
             if (!self.visible) {
                 return;
             }
-            const head = obj.is(mxnHasHead) ? obj.mxnHead.obj : obj;
-            const bounds = head.getWorldBounds();
-            self.at(bounds.getCenter().x, bounds.top)
-                .vround();
+            mxnYell.applyOverheadPosition(obj, self);
         }, StepOrder.BeforeCamera)
         .show();
 
@@ -41,3 +38,10 @@ export function mxnYell(obj: DisplayObject) {
     return obj
         .merge({ mxnYell: api });
 }
+
+mxnYell.applyOverheadPosition = function applyOverheadPosition (speakerObj: DisplayObject, textObj: DisplayObject) {
+    const head = speakerObj.is(mxnHasHead) ? speakerObj.mxnHead.obj : speakerObj;
+    const bounds = head.getWorldBounds();
+    textObj.at(bounds.getCenter().x, bounds.top)
+        .vround();
+};

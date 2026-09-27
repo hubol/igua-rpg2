@@ -1,5 +1,5 @@
 import { Container } from "pixi.js";
-import { Logger } from "../../lib/game-engine/logger";
+import { objText } from "../../assets/fonts";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
@@ -7,6 +7,10 @@ import { Rng } from "../../lib/math/rng";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
+import { Cutscene } from "../globals";
+import { mxnDestroyAfterSteps } from "../mixins/mxn-destroy-after-steps";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { mxnYell } from "../mixins/mxn-yell";
 import { objFigureValuable } from "../objects/figures/obj-figure-valuable";
 import { playerObj } from "../objects/obj-player";
 import { objValuable } from "../objects/obj-valuable";
@@ -15,7 +19,7 @@ import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgPlayerWallet } from "../rpg/rpg-player-wallet";
 import { ValuableChangeMaker } from "../systems/valuable-change-maker";
 import { DramaLib } from "./drama-lib";
-import { ask } from "./show";
+import { ask, show } from "./show";
 
 function getCurrencyToSpawn(total: number) {
     const counts = ValuableChangeMaker.solveCounts(total);
@@ -44,6 +48,15 @@ function* rewardValuables(
     yield sleep(800 - (msDelayGenerator.next().value!));
 }
 
+const walletDummyObj = container().mixin(mxnSpeaker, {
+    name: "Your Wallet",
+    tintPrimary: 0x00ff00,
+    tintSecondary: 0x000000,
+});
+
+const showEarningsDialogCurrencyIds = new Set<RpgEconomy.Currency.Id>(["rescue_credits"]);
+const showEarningsOverPlayerHeadCurrencyIds = new Set<RpgEconomy.Currency.Id>(["casino_pity"]);
+
 function* earn(
     id: RpgEconomy.Currency.Id,
     amount: number,
@@ -54,8 +67,30 @@ function* earn(
         return;
     }
 
-    // TODO needs animation dawg
     Rpg.wallet.earn(id, amount, reason);
+
+    if (showEarningsOverPlayerHeadCurrencyIds.has(id)) {
+        const textObj = objText.MediumIrregular(`+${RpgEconomy.Offer.toString(amount, id)}`, { tint: 0x303030 })
+            .anchored(0.5, 1)
+            .step(self => self.y -= 1)
+            .mixin(mxnDestroyAfterSteps, 280);
+
+        mxnYell.applyOverheadPosition(playerObj, textObj);
+
+        textObj.show();
+    }
+
+    if (showEarningsDialogCurrencyIds.has(id)) {
+        // TODO need to invent speaker push/pop?
+        const previousSpeaker = DramaLib.Speaker.current;
+        Cutscene.setCurrentSpeaker(walletDummyObj);
+        yield sleep(500);
+        yield* show(`Received ${RpgEconomy.Offer.toString(amount, id)}.`);
+        if (previousSpeaker) {
+            Cutscene.setCurrentSpeaker(previousSpeaker);
+        }
+        yield sleep(500);
+    }
 }
 
 /** Before calling this function, you must assert that the player has the demanded amount */
