@@ -10,17 +10,15 @@ import { container } from "../../lib/pixi/container";
 import { Null } from "../../lib/types/null";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
-import { DramaScene } from "../drama/drama-scene";
+import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
-import { Cutscene, scene } from "../globals";
+import { scene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { objCharacterKingSpino } from "../objects/characters/obj-character-king-spino";
 import { objUiBubbleNumber } from "../objects/overlay/obj-ui-bubble-numbers";
 import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
-import { SceneChanger } from "../systems/scene-changer";
-import { scnEndingDemoGood } from "./scn-ending-demo-good";
 
 const atkSpikes = RpgAttack.create({
     physical: 25,
@@ -28,7 +26,10 @@ const atkSpikes = RpgAttack.create({
 });
 
 export function scnEndingDemo() {
-    Jukebox.play(Mzk.BestSeller).warm(Mzk.FuckerLand, Mzk.DemoGoodEnd);
+    const quest = Rpg.quest("SinSwamp.FunHouse");
+    Jukebox
+        .play(quest.everCompleted ? Mzk.DemoGoodEnd : Mzk.BestSeller)
+        .warm(Mzk.FuckerLand, Mzk.DemoGoodEnd);
     const lvl = Lvl.EndingDemo();
     lvl.SpikeRegion
         .mixin(mxnRpgAttack, { attack: atkSpikes });
@@ -62,9 +63,17 @@ export function scnEndingDemo() {
         .at(lvl.KingSpinoMarker)
         .zIndexed(ZIndex.CharacterEntities)
         .mixin(mxnCutscene, function* () {
+            if (quest.everCompleted) {
+                yield* show(
+                    "I'm so impressed that you won my game.",
+                    "You are a living legend!",
+                );
+                return;
+            }
+
             if (!gaveSpiel) {
                 yield* show(
-                    "Wow! You made it here.",
+                    "Welcome to my fun house!!!",
                     "Why am I here? Let's not worry about that for now.",
                     "Anyway...",
                 );
@@ -76,7 +85,7 @@ export function scnEndingDemo() {
                 "Let's play a game!",
                 "You'll roll a number on my 1000-sided die.",
                 "If your number is higher than the number over there...",
-                "Then you get the good ending for the IguaRPG 2 Demo!",
+                "Then you will receive a very nice prize!",
                 "Otherwise, something not great will happen.",
                 "It might be obvious what that will be.",
             );
@@ -118,11 +127,9 @@ export function scnEndingDemo() {
 
             yield* show("You won?!?!?!?!");
 
-            Cutscene.play(function* () {
-                yield* DramaScene.change(
-                    SceneChanger.create({ sceneName: scnEndingDemoGood.name, checkpointName: "fromEnding" }),
-                );
-            });
+            yield* DramaQuests.complete(quest);
+
+            Jukebox.play(Mzk.DemoGoodEnd);
         })
         .show();
 

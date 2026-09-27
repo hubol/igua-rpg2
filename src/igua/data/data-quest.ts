@@ -345,6 +345,15 @@ export namespace DataQuest {
                     countCompletions: "once",
                 },
             },
+            "SinSwamp.FunHouse": {
+                flags: null,
+                reward: {
+                    kind: "single",
+                    countCompletions: "once",
+                    // TODO should be a special kind of currency
+                    drop: { kind: "pocket_item", id: "BallFruitTypeA" },
+                },
+            },
             __Fallback__: {
                 flags: null,
                 reward: {

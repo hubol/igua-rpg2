@@ -401,6 +401,8 @@
           "_eid": "88296692",
           "x": 2232,
           "y": 360,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnCasino", "checkpointName": "fromSwamp", "name": "", "depth": 0}
@@ -482,6 +484,8 @@
           "_eid": "88296692",
           "x": 96,
           "y": 544,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnEndingDemo", "checkpointName": "fromSwamp", "name": "", "depth": 0}
@@ -2981,7 +2985,8 @@
           "texture": "town/colossus/guy 4.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -3606,13 +3611,13 @@
           "groupName": null
         },
         {
-          "x": 112,
-          "y": 531,
+          "x": 115,
+          "y": 529,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
           "tint": "#d5c3ed",
-          "texture": "town/signage/the end.png",
+          "texture": "town/signage/fun.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
@@ -4347,6 +4352,18 @@
           "groupName": null
         }
       ],
+      "folder": "../textures"
+    },
+    {
+      "name": "ParallaxFarDecals",
+      "_eid": "79996540",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 308,
+      "gridCellsY": 85,
+      "decals": [],
       "folder": "../textures"
     }
   ]
