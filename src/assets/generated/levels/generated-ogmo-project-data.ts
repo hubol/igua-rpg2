@@ -115,6 +115,7 @@ export namespace OgmoEntities {
       | "objFxOverheated"
       | "objFxOwnerDefeat"
       | "objFxPlayerJumpComboDust"
+      | "objFxPoisonCloud"
       | "objFxRerollNotification"
       | "objFxSmoke66Px"
       | "objFxSparkle40Px"

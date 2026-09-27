@@ -588,6 +588,18 @@
           "originY": 24,
           "uid": 178742087519200,
           "values": {"requiredFlopsCount": 14, "name": "", "depth": 0}
+        },
+        {
+          "name": "Door",
+          "id": 42,
+          "_eid": "88296692",
+          "x": 1464,
+          "y": 960,
+          "width": 34,
+          "height": 48,
+          "originX": 0,
+          "originY": -2,
+          "values": {"sceneName": "scnDungeonBonesDeeper", "checkpointName": "fromFirst", "name": "DeeperDoor", "depth": 0}
         }
       ]
     },

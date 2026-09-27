@@ -10,6 +10,7 @@ import { Jukebox } from "../core/igua-audio";
 import { DramaInventory } from "../drama/drama-inventory";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnDoorPoisonous } from "../mixins/mxn-door-poisonous";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { playerObj } from "../objects/obj-player";
@@ -27,6 +28,8 @@ export function scnDungeonBones() {
             self.play(Sfx.Cutscene.MysteriousDisappearance.rate(0.95, 1.05));
             self.destroy();
         });
+
+    lvl.DeeperDoor.mixin(mxnDoorPoisonous);
 }
 
 function mxnDungeonSkeleton(obj: Sprite, name: string) {
