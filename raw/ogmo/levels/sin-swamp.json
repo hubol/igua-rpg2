@@ -488,7 +488,7 @@
           "height": 48,
           "originX": 0,
           "originY": -2,
-          "values": {"sceneName": "scnEndingDemo", "checkpointName": "fromSwamp", "name": "", "depth": 0}
+          "values": {"sceneName": "scnSinSwampFunHouse", "checkpointName": "fromSwamp", "name": "", "depth": 0}
         },
         {
           "name": "EnemyCactus",

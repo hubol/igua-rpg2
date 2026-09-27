@@ -25,12 +25,12 @@ const atkSpikes = RpgAttack.create({
     emotional: 25,
 });
 
-export function scnEndingDemo() {
+export function scnSinSwampFunHouse() {
     const quest = Rpg.quest("SinSwamp.FunHouse");
     Jukebox
         .play(quest.everCompleted ? Mzk.DemoGoodEnd : Mzk.BestSeller)
         .warm(Mzk.FuckerLand, Mzk.DemoGoodEnd);
-    const lvl = Lvl.EndingDemo();
+    const lvl = Lvl.SinSwampFunHouse();
     lvl.SpikeRegion
         .mixin(mxnRpgAttack, { attack: atkSpikes });
 
