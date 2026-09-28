@@ -261,7 +261,10 @@ function createRemovedItemFigureObjAtPlayer(item: RpgInventory.Item) {
         .show();
 }
 
-function createReceivedItemFigureObjAtSpeaker(item: RpgInventory.Item, pocketReceiveResult?: RpgPocket.ReceiveResult) {
+function createReceivedItemFigureObjAtSpeaker(
+    item: RpgInventory.ReceivableItem,
+    pocketReceiveResult?: RpgPocket.ReceiveResult,
+) {
     return objItemFigureWithTarget(item, playerObj)
         .handles("mxnFigureTransfer:transfered", (self) => {
             if (item.kind === "equipment") {
@@ -278,6 +281,9 @@ function createReceivedItemFigureObjAtSpeaker(item: RpgInventory.Item, pocketRec
                 pocketReceiveResult ??= { count: Rpg.inventory.pocket.count(item.id), reset: false };
                 objFxCollectPocketItemNotification(pocketReceiveResult).at(self).show();
             }
+            else if (item.kind === "flop") {
+                self.play(Sfx.Collect.Flop.rate(0.9, 1.1));
+            }
             self.destroy();
         })
         .at(DramaLib.Speaker.getWorldCenter())
@@ -289,7 +295,7 @@ function sleepAfterRemoveIteration(index: Integer) {
     return sleepf(Math.max(1, 10 - index * 0.1));
 }
 
-function objItemFigureWithTarget(item: RpgInventory.Item, targetObj: DisplayObject | null) {
+function objItemFigureWithTarget(item: RpgInventory.ReceivableItem, targetObj: DisplayObject | null) {
     return DataItem.getFigureObj(item)
         .mixin(mxnFxFigureTransfer, { targetObj })
         .coro(function* (self) {

@@ -2,7 +2,7 @@ import { RpgInventory } from "../rpg/rpg-inventory";
 import { DataLib } from "./data-lib";
 
 export namespace DataGift {
-    export type Model = { item: RpgInventory.Item };
+    export type Model = { item: RpgInventory.ReceivableItem };
 
     export const { manifest, getById } = DataLib.create(
         "DataGift",
@@ -55,6 +55,9 @@ export namespace DataGift {
             },
             "Ohio.Lumberyard.Aidar.Introduced": {
                 item: { kind: "equipment", id: "ForestSpiritChance", level: 1 },
+            },
+            "DungeonBones.ExplorerNovice": {
+                item: { kind: "flop", id: 776 },
             },
             __Fallback__: {
                 item: { kind: "potion", id: "RestoreHealth" },

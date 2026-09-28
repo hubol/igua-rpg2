@@ -37,6 +37,9 @@ export class RpgInventory {
             case "equipment":
                 this.equipment.receive(item.id, item.level);
                 return;
+            case "flop":
+                this.flops.receive(item.id);
+                return;
             case "key_item":
                 this.keyItems.receive(item.id);
                 return;
@@ -74,7 +77,12 @@ export class RpgInventory {
 
 export namespace RpgInventory {
     export type Item = Item.Equipment | Item.KeyItem | Item.PocketItem | Item.Potion;
-    export type ReceivableItem = Item.Equipment | Item.KeyItem | Item.PocketItem | ReceivableItem.Potion;
+    export type ReceivableItem =
+        | Item.Equipment
+        | Item.KeyItem
+        | Item.PocketItem
+        | ReceivableItem.Potion
+        | ReceivableItem.Flop;
 
     // TODO probably need to model them all
     export namespace Item {
@@ -105,6 +113,11 @@ export namespace RpgInventory {
             kind: "potion";
             id: DataPotion.Id;
             state?: RpgPotion.State;
+        }
+
+        export interface Flop {
+            kind: "flop";
+            id: RpgFlops.Id;
         }
     }
 }

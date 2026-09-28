@@ -156,8 +156,8 @@ function* askWhich<TItem extends RpgInventory.Item>(message: string, items: TIte
     });
 }
 
-function* receiveItems(items: RpgInventory.Item[]) {
-    const pocketReceiveResults = new Map<RpgInventory.Item, RpgPocket.ReceiveResult>();
+function* receiveItems(items: RpgInventory.ReceivableItem[]) {
+    const pocketReceiveResults = new Map<RpgInventory.ReceivableItem, RpgPocket.ReceiveResult>();
 
     const pocketItems = items.filter(item => item.kind === "pocket_item") as RpgInventory.Item.PocketItem[];
     for (const item of pocketItems) {

@@ -61,7 +61,7 @@ const ranks = {
         },
         loot: {
             tier0: [
-                { weight: 10, kind: "flop", min: 98, max: 99 },
+                { weight: 10, kind: "flop", min: 97, max: 98 },
                 { weight: 90, kind: "nothing" },
             ],
         },

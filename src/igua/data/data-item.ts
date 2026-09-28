@@ -1,5 +1,6 @@
 import { Integer } from "../../lib/math/number-alias-types";
 import { objFigureEquipment } from "../objects/figures/obj-figure-equipment";
+import { objFigureFlop } from "../objects/figures/obj-figure-flop";
 import { objFigureKeyItem } from "../objects/figures/obj-figure-key-item";
 import { objFigurePocketItem } from "../objects/figures/obj-figure-pocket-item";
 import { objFigurePotion } from "../objects/figures/obj-figure-potion";
@@ -43,12 +44,14 @@ export namespace DataItem {
         return count > 1 ? `${name} x${count}` : name;
     }
 
-    export function getFigureObj(item: RpgInventory.Item) {
+    export function getFigureObj(item: RpgInventory.ReceivableItem) {
         switch (item.kind) {
             case "key_item":
                 return objFigureKeyItem(item.id);
             case "equipment":
                 return objFigureEquipment(item.id, item.level);
+            case "flop":
+                return objFigureFlop.objFiltered(item.id).pivotedUnit(14, 30);
             case "pocket_item":
                 return objFigurePocketItem(item.id);
             case "potion":

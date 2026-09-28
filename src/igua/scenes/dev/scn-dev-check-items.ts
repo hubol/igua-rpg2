@@ -113,7 +113,7 @@ function listQuestRewards() {
 
 type QuestRewards = ReturnType<typeof listQuestRewards>;
 
-function listItemSources(item: RpgInventory.Item, questRewards: QuestRewards): Array<ItemSource> {
+function listItemSources(item: RpgInventory.ReceivableItem, questRewards: QuestRewards): Array<ItemSource> {
     const result = new Array<ItemSource>();
     for (const shop of Object.values(DataShop.manifest)) {
         const quantity = shop.stocks
@@ -148,6 +148,6 @@ interface ItemSource {
     quantity: Integer;
 }
 
-function areEqual(a: RpgInventory.Item, b: RpgInventory.Item) {
+function areEqual(a: RpgInventory.ReceivableItem, b: RpgInventory.ReceivableItem) {
     return a.kind === b.kind && a.id === b.id;
 }
