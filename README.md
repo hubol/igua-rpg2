@@ -30,9 +30,9 @@ Starts `@hubol/smooch`, the tool responsible for monitoring binary assets and tu
 
 Starts the project in development mode
 
-## Play an alpha?!
-You can play an extremely early version of the game. The most recent commit to this repository is hosted on Heroku.
-At the time of writing this, the "game" includes a character editor and a small town to explore.
+## Play an early version?!
+You can. The most recent commit to this repository is hosted on Heroku.
+At the time of writing this, the game has approximately half of the experiences intended for the final release.
 
 [Play alpha version on Heroku](https://igua-rpg2-d76be5c97e6f.herokuapp.com/)
 
