@@ -308,7 +308,7 @@ const getBuffInformations = (function () {
         // TODO it is not necessarily a benefit
         buff("audio.musicTempoAdjustmentFactor", "Music Tempo Adjust", "percent", "benefit_when_positive"),
         buff("esoteric.sceneChangeErrorChance", "Door Error Chance", "percent", "benefit_when_positive"),
-        buff("esoteric.goodEndingChance", "Good End Chance", "percent", "benefit_when_positive"),
+        buff("esoteric.funHouseWinChance", "Fun House Chance", "percent", "benefit_when_positive"),
         // TODO support for booleans?
         buff("approval.indianaMerchants", "Indiana Merchants Approval", "percent", "benefit_when_positive"),
         buff("esoteric.recognizeSongFactor", "Recognize Songs", "percent", "benefit_when_positive"),

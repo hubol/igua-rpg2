@@ -215,7 +215,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.esoteric.lgbtFactor += 50 + bonus * 25;
                         model.attributes.strength -= 5 + bonus;
-                        model.esoteric.goodEndingChance += Math.min(95, Math.pow(2, bonus));
+                        model.esoteric.funHouseWinChance += Math.min(95, Math.pow(2, bonus));
 
                         if (bonus === 0) {
                             model.motion.jump.atMaxHealthMidairCount += 1;
@@ -250,7 +250,7 @@ export namespace DataEquipment {
                             model.attributes.intelligence += rng.intc(-1, 1);
                             model.attributes.strength += rng.intc(-1, 1);
                             model.motion.walk.topSpeedIncreaseFactor += rng.intc(-20, 3);
-                            model.esoteric.goodEndingChance += rng.intc(4);
+                            model.esoteric.funHouseWinChance += rng.intc(4);
                         };
                     })(),
                 },

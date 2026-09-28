@@ -78,7 +78,7 @@ export namespace RpgPlayerBuffs {
                 lgbtFactor: <PercentInt> 0,
                 recognizeSongFactor: <PercentInt> 0,
                 sceneChangeErrorChance: <PercentInt> 0,
-                goodEndingChance: <PercentInt> 0,
+                funHouseWinChance: <PercentInt> 0,
                 nightVisionLevel: 0,
                 fishFood: {
                     healingIncreaseFactor: <PercentInt> 0,

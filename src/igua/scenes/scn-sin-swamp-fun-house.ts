@@ -38,7 +38,7 @@ export function scnSinSwampFunHouse() {
 
     const state = {
         get needAtLeastToWin() {
-            return Math.max(0, 999 - Math.round(Rpg.character.buffs.esoteric.goodEndingChance * 10));
+            return Math.max(0, 999 - Math.round(Rpg.character.buffs.esoteric.funHouseWinChance * 10));
         },
         rollingValue: Null<Integer>(),
     };
