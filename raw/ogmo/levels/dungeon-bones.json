@@ -1,6 +1,6 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 2136,
+  "width": 2152,
   "height": 1136,
   "offsetX": 0,
   "offsetY": 0,
@@ -14,7 +14,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 267,
+      "gridCellsX": 269,
       "gridCellsY": 142,
       "entities": [
         {
@@ -74,7 +74,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 267,
+      "gridCellsX": 269,
       "gridCellsY": 142,
       "entities": [
         {
@@ -112,7 +112,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 267,
+      "gridCellsX": 269,
       "gridCellsY": 142,
       "decals": [
         {
@@ -190,7 +190,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 267,
+      "gridCellsX": 269,
       "gridCellsY": 142,
       "entities": []
     },
@@ -201,7 +201,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 267,
+      "gridCellsX": 269,
       "gridCellsY": 142,
       "entities": [
         {
@@ -224,7 +224,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 267,
+      "gridCellsX": 269,
       "gridCellsY": 142,
       "entities": [
         {
@@ -247,7 +247,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 267,
+      "gridCellsX": 269,
       "gridCellsY": 142,
       "decals": [
         {
@@ -338,7 +338,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 267,
+      "gridCellsX": 269,
       "gridCellsY": 142,
       "entities": [
         {
@@ -847,7 +847,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 267,
+      "gridCellsX": 269,
       "gridCellsY": 142,
       "decals": [],
       "folder": "../textures"
@@ -859,7 +859,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 267,
+      "gridCellsX": 269,
       "gridCellsY": 142,
       "entities": [
         {
@@ -1261,7 +1261,7 @@
           "name": "Block",
           "id": 45,
           "_eid": "93117141",
-          "x": 416,
+          "x": 424,
           "y": 576,
           "width": 648,
           "height": 184,
@@ -1438,6 +1438,132 @@
           "originY": 0,
           "tint": "#341d52",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 59,
+          "_eid": "95769929",
+          "x": 2096,
+          "y": 168,
+          "width": 16,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 60,
+          "_eid": "95769929",
+          "x": 2104,
+          "y": 232,
+          "width": 16,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 62,
+          "_eid": "95769929",
+          "x": 2072,
+          "y": 296,
+          "width": 16,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 64,
+          "_eid": "95769929",
+          "x": 2136,
+          "y": 360,
+          "width": 16,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 66,
+          "_eid": "95769929",
+          "x": 2096,
+          "y": 424,
+          "width": 16,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 67,
+          "_eid": "95769929",
+          "x": 2104,
+          "y": 488,
+          "width": 16,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 69,
+          "_eid": "95769929",
+          "x": 2072,
+          "y": 552,
+          "width": 16,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 70,
+          "_eid": "95769929",
+          "x": 2096,
+          "y": 616,
+          "width": 16,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 71,
+          "_eid": "95769929",
+          "x": 2104,
+          "y": 680,
+          "width": 16,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 72,
+          "_eid": "95769929",
+          "x": 2072,
+          "y": 744,
+          "width": 16,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 74,
+          "_eid": "95769929",
+          "x": 2072,
+          "y": 808,
+          "width": 16,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 75,
+          "_eid": "95769929",
+          "x": 2040,
+          "y": 848,
+          "width": 16,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 76,
+          "_eid": "95769929",
+          "x": 1984,
+          "y": 896,
+          "width": 16,
+          "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 77,
+          "_eid": "95769929",
+          "x": 1920,
+          "y": 952,
+          "width": 16,
+          "values": {"name": "", "visible": false, "depth": 0}
         }
       ]
     },
@@ -1448,7 +1574,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 267,
+      "gridCellsX": 269,
       "gridCellsY": 142,
       "entities": [
         {
@@ -1462,6 +1588,174 @@
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnOhioCemetery", "checkpointName": "fromDungeonBones", "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 1,
+          "_eid": "41461695",
+          "x": 1920,
+          "y": 952,
+          "width": 16,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#1b0834", "targetTint": "#341d52", "min": 2, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 2,
+          "_eid": "41461695",
+          "x": 1984,
+          "y": 896,
+          "width": 16,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#1b0834", "targetTint": "#341d52", "min": 2, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 3,
+          "_eid": "41461695",
+          "x": 2040,
+          "y": 848,
+          "width": 16,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#1b0834", "targetTint": "#341d52", "min": 2, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 4,
+          "_eid": "41461695",
+          "x": 2072,
+          "y": 808,
+          "width": 16,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#1b0834", "targetTint": "#341d52", "min": 2, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 5,
+          "_eid": "41461695",
+          "x": 2072,
+          "y": 744,
+          "width": 16,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#1b0834", "targetTint": "#341d52", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 6,
+          "_eid": "41461695",
+          "x": 2104,
+          "y": 680,
+          "width": 16,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#1b0834", "targetTint": "#341d52", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 7,
+          "_eid": "41461695",
+          "x": 2096,
+          "y": 616,
+          "width": 16,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#1b0834", "targetTint": "#341d52", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 8,
+          "_eid": "41461695",
+          "x": 2072,
+          "y": 552,
+          "width": 16,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#1b0834", "targetTint": "#341d52", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 9,
+          "_eid": "41461695",
+          "x": 2104,
+          "y": 488,
+          "width": 16,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#1b0834", "targetTint": "#341d52", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 10,
+          "_eid": "41461695",
+          "x": 2096,
+          "y": 424,
+          "width": 16,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#1b0834", "targetTint": "#341d52", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 11,
+          "_eid": "41461695",
+          "x": 2136,
+          "y": 360,
+          "width": 16,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#1b0834", "targetTint": "#341d52", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 12,
+          "_eid": "41461695",
+          "x": 2072,
+          "y": 296,
+          "width": 16,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#1b0834", "targetTint": "#341d52", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 13,
+          "_eid": "41461695",
+          "x": 2104,
+          "y": 232,
+          "width": 16,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#1b0834", "targetTint": "#341d52", "min": 1, "max": 5, "name": "", "depth": 0}
+        },
+        {
+          "name": "IntelligenceBackground",
+          "id": 14,
+          "_eid": "41461695",
+          "x": 2096,
+          "y": 168,
+          "width": 16,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "values": {"initialTint": "#1b0834", "targetTint": "#341d52", "min": 1, "max": 5, "name": "", "depth": 0}
         }
       ]
     },
@@ -1472,7 +1766,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 267,
+      "gridCellsX": 269,
       "gridCellsY": 142,
       "decals": [
         {
@@ -1803,7 +2097,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 267,
+      "gridCellsX": 269,
       "gridCellsY": 142,
       "decals": [],
       "folder": "../textures"
@@ -1815,7 +2109,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 267,
+      "gridCellsX": 269,
       "gridCellsY": 142,
       "decals": [],
       "folder": "../textures"
