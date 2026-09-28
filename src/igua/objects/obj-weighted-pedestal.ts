@@ -1,5 +1,6 @@
 import { DisplayObject, Sprite } from "pixi.js";
 import { OgmoEntities } from "../../assets/generated/levels/generated-ogmo-project-data";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Logger } from "../../lib/game-engine/logger";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
@@ -31,6 +32,7 @@ What to do?`,
 
                 if (result === 0) {
                     if (!Rpg.inventory.flops.availableFlopIds.length) {
+                        Sfx.Interact.Error.play();
                         yield* show("But you don't have any Flops to add.");
                         return;
                     }
@@ -41,6 +43,7 @@ What to do?`,
 
                     const loan = Rpg.inventory.flops.createLoan(flopId);
                     if (loan.accepted) {
+                        Sfx.Esoteric.PedestalAdd.rate(0.95, 1.05).play();
                         rpgWeightedPedestal.receive(loan);
                     }
                     else {
@@ -48,6 +51,7 @@ What to do?`,
                     }
                 }
                 else if (result === 1) {
+                    Sfx.Esoteric.PedestalRemove.play();
                     const request = rpgWeightedPedestal.empty();
                     Rpg.inventory.flops.processReturn(request);
                 }
