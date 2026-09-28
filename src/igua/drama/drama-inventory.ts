@@ -71,6 +71,44 @@ function* removeCountFromPlayer(item: RpgInventory.Item, count: Integer) {
     return yield* visualizeRemoveCountFromPlayer(item, initialCount, endingCount);
 }
 
+function* tryRemoveCountFromPlayer(itemOrItems: RpgInventory.Item | RpgInventory.Item[], count: Integer) {
+    if (count <= 0) {
+        return true;
+    }
+
+    const items = Array.isArray(itemOrItems) ? itemOrItems : [itemOrItems];
+    const counts = items.reduce((map, item) => {
+        map.set(item, Rpg.inventory.count(item));
+        return map;
+    }, new Map<RpgInventory.Item, Integer>());
+    const countsToTake = new Map<RpgInventory.Item, Integer>();
+
+    let remainingCount = count;
+    while (remainingCount > 0) {
+        const previousRemainingCount = remainingCount;
+        for (const item of items) {
+            const nextCountToTake = (countsToTake.get(item) ?? 0) + 1;
+            if (counts.get(item)! >= nextCountToTake) {
+                countsToTake.set(item, nextCountToTake);
+                remainingCount--;
+            }
+
+            if (remainingCount <= 0) {
+                break;
+            }
+        }
+        if (previousRemainingCount === remainingCount) {
+            return false;
+        }
+    }
+
+    for (const item of items) {
+        yield* removeCountFromPlayer(item, countsToTake.get(item) ?? 0);
+    }
+
+    return true;
+}
+
 function* visualizeRemoveCountFromPlayer(
     itemOrItems: RpgInventory.Item | RpgInventory.Item[],
     initialCount: Integer,
@@ -264,4 +302,5 @@ export const DramaInventory = {
         addCondimentToHotDog,
         removeAll: removeAllPotions,
     },
+    tryRemoveCount: tryRemoveCountFromPlayer,
 };
