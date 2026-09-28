@@ -354,6 +354,16 @@ export namespace DataQuest {
                     drop: { kind: "pocket_item", id: "BallFruitTypeA" },
                 },
             },
+            "DungeonBones.Researcher": {
+                flags: {
+                    toldPlayer: false,
+                },
+                reward: {
+                    kind: "single",
+                    countCompletions: "once",
+                    drop: { kind: "equipment", id: "NightVision", level: 1 },
+                },
+            },
             __Fallback__: {
                 flags: null,
                 reward: {

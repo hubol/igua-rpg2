@@ -9,6 +9,8 @@ import { range } from "../../lib/range";
 import { Jukebox } from "../core/igua-audio";
 import { DramaGifts } from "../drama/drama-gifts";
 import { DramaInventory } from "../drama/drama-inventory";
+import { DramaPlayerAttributes } from "../drama/drama-player-attributes";
+import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnDoorPoisonous } from "../mixins/mxn-door-poisonous";
@@ -19,6 +21,7 @@ import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { mxnWeightedPedestalMask } from "../mixins/mxn-weighted-pedestal-mask";
 import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
+import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnDungeonBones() {
     Jukebox.play(Mzk.UndergroundRucksack);
@@ -52,6 +55,64 @@ export function scnDungeonBones() {
         });
 
     enrichNoviceNpc(lvl);
+    enrichResearcherNpc(lvl);
+}
+
+function enrichResearcherNpc(lvl: LvlType.DungeonBones) {
+    const quest = Rpg.quest("DungeonBones.Researcher");
+
+    lvl.ResearcherNpc
+        .mixin(mxnCutscene, function* () {
+            if (quest.everCompleted) {
+                yield* show(
+                    "I hope you enjoy the shoes I made.",
+                    "I will continue my research here.",
+                );
+                return;
+            }
+
+            if (quest.flags.toldPlayer) {
+                if (yield* ask("Oh, do you have the 20 ectoplasm I need to create a light-emitting shoe?")) {
+                    const items: RpgInventory.Item[] = [
+                        {
+                            kind: "pocket_item",
+                            id: "EctoplasmTypeA",
+                        },
+                        {
+                            kind: "pocket_item",
+                            id: "EctoplasmTypeB",
+                        },
+                    ];
+                    if (yield* DramaInventory.tryRemoveCount(items, 20)) {
+                        yield* show(
+                            "Yes! Yes! Perfect!",
+                            "One moment...!",
+                        );
+                        yield sleep(1000);
+                        yield* show(
+                            "My creation!!!!",
+                            "Fierce! Mama!!! The boots!!!!",
+                        );
+                        yield* DramaQuests.complete("DungeonBones.Researcher");
+                    }
+                    else {
+                        yield* show("Okay, little girl, you don't have enough plasm for me...");
+                        yield* DramaPlayerAttributes.callName("Little girl");
+                    }
+                }
+
+                return;
+            }
+
+            yield* show(
+                "I'm a researcher.",
+                "I'm trying to get my master's degree in Dungeons.",
+                "For my thesis project, I am creating a shoe that emits light.",
+                "But I need 20 ectoplasm...",
+            );
+
+            quest.flags.toldPlayer = true;
+        });
 }
 
 function enrichNoviceNpc(lvl: LvlType.DungeonBones) {
