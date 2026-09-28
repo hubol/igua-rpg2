@@ -34,6 +34,6 @@ Starts the project in development mode
 You can. The most recent commit to this repository is hosted on Heroku.
 At the time of writing this, the game has approximately half of the experiences intended for the final release.
 
-[Play alpha version on Heroku](https://igua-rpg2-d76be5c97e6f.herokuapp.com/)
+[Play on Heroku](https://igua-rpg2-d76be5c97e6f.herokuapp.com/)
 
 **Note:** it may take several seconds for the Heroku app to load, as I have paid for the cheapest tier available.
