@@ -11,6 +11,8 @@ import { DramaInventory } from "../drama/drama-inventory";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnDoorPoisonous } from "../mixins/mxn-door-poisonous";
+import { mxnRpgKill } from "../mixins/mxn-rpg-kill";
+import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { playerObj } from "../objects/obj-player";
@@ -30,6 +32,12 @@ export function scnDungeonBones() {
         });
 
     lvl.DeeperDoor.mixin(mxnDoorPoisonous);
+
+    lvl.WaterGroup
+        .children
+        .forEach(obj => obj.mixin(mxnSinePivot));
+
+    lvl.PlayerKillRegion.mixin(mxnRpgKill);
 }
 
 function mxnDungeonSkeleton(obj: Sprite, name: string) {

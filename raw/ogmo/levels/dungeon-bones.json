@@ -86,6 +86,19 @@
           "originY": 0,
           "tint": "#00ff00",
           "values": {"name": "MidbossUnsafeRegion", "depth": 0}
+        },
+        {
+          "name": "Region",
+          "id": 2,
+          "_eid": "11908607",
+          "x": 1632,
+          "y": 1064,
+          "width": 264,
+          "height": 72,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#00ff00",
+          "values": {"name": "PlayerKillRegion", "depth": 0}
         }
       ]
     },
@@ -98,7 +111,73 @@
       "gridCellHeight": 8,
       "gridCellsX": 237,
       "gridCellsY": 142,
-      "decals": [],
+      "decals": [
+        {
+          "x": 1627,
+          "y": 1057,
+          "scaleX": 4,
+          "scaleY": 2,
+          "rotation": 0,
+          "tint": "#73779f",
+          "texture": "shapes/rectangle irregular 82 x 46.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 1725,
+          "y": 1068,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#aeb1ce",
+          "texture": "shapes/crude line 176x3.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 1854,
+          "y": 1060,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#aeb1ce",
+          "texture": "shapes/crude line 176x3.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 1832,
+          "y": 1068,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#aeb1ce",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 1644,
+          "y": 1076,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#aeb1ce",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -1106,6 +1185,19 @@
           "y": 1008,
           "width": 456,
           "height": 192,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 51,
+          "_eid": "93117141",
+          "x": 1632,
+          "y": 1136,
+          "width": 272,
+          "height": 32,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
