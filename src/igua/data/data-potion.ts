@@ -547,6 +547,9 @@ const atkBallon = RpgAttack.create({
     conditions: {
         helium: 99999999,
     },
+    quirks: {
+        ignoreCutscenePlaying: true,
+    },
 });
 
 const atkWetness = RpgAttack.create({
@@ -555,5 +558,8 @@ const atkWetness = RpgAttack.create({
             tint: 0x0080ff,
             value: 999999,
         },
+    },
+    quirks: {
+        ignoreCutscenePlaying: true,
     },
 });

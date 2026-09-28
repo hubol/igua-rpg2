@@ -13,7 +13,7 @@ import { DramaMisc } from "../drama/drama-misc";
 import { DramaPlayerAttributes } from "../drama/drama-player-attributes";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
-import { Cutscene, scene } from "../globals";
+import { scene } from "../globals";
 import { mxnFxBlink } from "../mixins/effects/mxn-fx-blink";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -35,6 +35,9 @@ export function scnMountFlop() {
 
 const atkBoxerPunch = RpgAttack.create({
     physical: 1,
+    quirks: {
+        ignoreCutscenePlaying: true,
+    },
 });
 
 function enrichBoxer(lvl: LvlType.MountFlop) {
@@ -146,12 +149,8 @@ function enrichBoxer(lvl: LvlType.MountFlop) {
                 yield sleep(1000);
                 yield* boxerObj.objCharacterBoxer.dramaThrow();
                 maxInteger = Math.max(2, maxInteger - 1);
-                scene.stage
-                    .coro(function* () {
-                        yield () => !Cutscene.isPlaying;
-                        Sfx.Cutscene.LaughTrack.play();
-                        playerObj.damage(atkBoxerPunch);
-                    });
+                Sfx.Cutscene.LaughTrack.play();
+                playerObj.damage(atkBoxerPunch);
             }
         })
         .at(lvl.BoxerMarker)

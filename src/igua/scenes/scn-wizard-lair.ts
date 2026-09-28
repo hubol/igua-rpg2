@@ -63,16 +63,13 @@ export function scnWizardLair() {
                     "It wasn't hypothetical.",
                     "But don't worry, I have landing gear for you!",
                 );
-            }, { speaker: wizardObj, camera: { end: "none" } })
-                .done;
 
-            yield sleep(500);
+                yield sleep(500);
 
-            DataPotion.usePotion("Ballon", playerObj);
+                DataPotion.usePotion("Ballon", playerObj);
 
-            yield sleep(1000);
+                yield sleep(1000);
 
-            yield Cutscene.play(function* () {
                 yield* show(
                     "Seems good, right?",
                     "OK! Bye-bye now!!!!",

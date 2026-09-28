@@ -247,7 +247,11 @@ export namespace RpgStatus {
             attack: RpgAttack.Model,
             attacker: RpgStatus.Model | null = null,
         ): DamageResult {
-            if (RpgCutscene.isPlaying && !target.quirks.receivesDamageWhileCutsceneIsPlaying) {
+            if (
+                RpgCutscene.isPlaying
+                && !target.quirks.receivesDamageWhileCutsceneIsPlaying
+                && !attack.quirks.ignoreCutscenePlaying
+            ) {
                 return { rejected: true, doesntReceiveDamageWhileCutsceneIsPlaying: true };
             }
 

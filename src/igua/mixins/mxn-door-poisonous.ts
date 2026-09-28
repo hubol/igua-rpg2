@@ -1,7 +1,6 @@
 import { interp } from "../../lib/game-engine/routines/interp";
 import { ZIndex } from "../core/scene/z-index";
 import { ask } from "../drama/show";
-import { Cutscene } from "../globals";
 import { objFxPoisonCloud } from "../objects/effects/obj-fx-poison-cloud";
 import { ObjDoor } from "../objects/obj-door";
 import { playerObj } from "../objects/obj-player";
@@ -10,7 +9,6 @@ import { mxnFxSpawnMany } from "./effects/mxn-fx-spawn-many";
 import { mxnDoorAutoUnlock } from "./mxn-door-auto-unlock";
 
 export function mxnDoorPoisonous(doorObj: ObjDoor) {
-    let isOpening = false;
     let isOpened = false;
 
     doorObj.speaker.name = "Suspicious Door";
@@ -21,21 +19,13 @@ export function mxnDoorPoisonous(doorObj: ObjDoor) {
     };
 
     doorObj.objDoor.lockedCutscene = function* () {
-        if (isOpening) {
-            return;
-        }
         if (yield* ask("The stench of poison is present. Open anyway?")) {
-            isOpening = true;
+            isOpened = true;
+            playerObj.damage(atkPoison);
             doorObj
                 .coro(function* () {
                     fxSpawnState.perFrame = 0.2;
                     yield interp(fxSpawnState, "perFrame").to(0).over(2000);
-                })
-                .coro(function* () {
-                    // TODO i think there should be an attack quirk that ignores cutscene playing
-                    yield () => !Cutscene.isPlaying;
-                    playerObj.damage(atkPoison);
-                    isOpened = true;
                 });
         }
     };
@@ -50,5 +40,8 @@ const atkPoison = RpgAttack.create({
         poison: {
             value: 100,
         },
+    },
+    quirks: {
+        ignoreCutscenePlaying: true,
     },
 });

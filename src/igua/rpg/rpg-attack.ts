@@ -26,6 +26,7 @@ export namespace RpgAttack {
         quirks: {
             isPlayerMeleeAttack: boolean;
             isPlayerClawMeleeAttack: boolean;
+            ignoreCutscenePlaying: boolean;
         };
     }
 
@@ -38,6 +39,7 @@ export namespace RpgAttack {
                 quirks: {
                     isPlayerClawMeleeAttack: model.quirks?.isPlayerClawMeleeAttack ?? false,
                     isPlayerMeleeAttack: model.quirks?.isPlayerMeleeAttack ?? false,
+                    ignoreCutscenePlaying: model.quirks?.ignoreCutscenePlaying ?? false,
                 },
             },
             merge(model, {
