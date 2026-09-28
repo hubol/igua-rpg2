@@ -105,7 +105,20 @@
       "gridCellHeight": 8,
       "gridCellsX": 308,
       "gridCellsY": 85,
-      "decals": [],
+      "decals": [
+        {
+          "x": 2146,
+          "y": 305,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "furniture/bird cage.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -155,8 +168,8 @@
           "name": "Checkpoint",
           "id": 2,
           "_eid": "19953026",
-          "x": 2128,
-          "y": 304,
+          "x": 2144,
+          "y": 329,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
@@ -3521,6 +3534,54 @@
           "y": 344,
           "width": 105,
           "values": {"name": "", "visible": false, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 44,
+          "_eid": "93117141",
+          "x": 2115,
+          "y": 329,
+          "width": 62,
+          "height": 6,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#251105",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 45,
+          "_eid": "93117141",
+          "x": 2174,
+          "y": 287,
+          "width": 4,
+          "height": 46,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#251105",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 46,
+          "_eid": "93117141",
+          "x": 2114,
+          "y": 287,
+          "width": 4,
+          "height": 46,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#251105",
+          "values": {"name": "", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Pipe",
+          "id": 47,
+          "_eid": "95769929",
+          "x": 2118,
+          "y": 287,
+          "width": 56,
+          "values": {"name": "", "visible": false, "depth": 0}
         }
       ]
     },
@@ -4194,6 +4255,18 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 2147,
+          "y": 251,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "furniture/chain metal.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
