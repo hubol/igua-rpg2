@@ -129,7 +129,7 @@ export function scnSinSwampFunHouse() {
 
             yield* DramaQuests.complete(quest);
 
-            Jukebox.play(Mzk.DemoGoodEnd);
+            Jukebox.play(Mzk.DemoGoodEnd, 0);
         })
         .show();
 
