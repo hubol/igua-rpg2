@@ -1,3 +1,4 @@
+import { Sfx } from "../../assets/sounds";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { ZIndex } from "../core/scene/z-index";
 import { ask } from "../drama/show";
@@ -20,6 +21,7 @@ export function mxnDoorPoisonous(doorObj: ObjDoor) {
 
     doorObj.objDoor.lockedCutscene = function* () {
         if (yield* ask("The stench of poison is present. Open anyway?")) {
+            Sfx.Esoteric.PoisonousDoorOpen.rate(0.95, 1.05).play();
             isOpened = true;
             playerObj.damage(atkPoison);
             doorObj
