@@ -50,7 +50,7 @@ export function objLootDrop(drop: RpgLoot.Drop) {
             objValuableTrove(drop.valuables).at(self).show(self.parent);
 
             for (let i = 0; i < drop.pocketItems.length; i++) {
-                const hspeed = dropSpeedH[i % dropSpeedH.length];
+                const hspeed = dropSpeedH[i] ?? Rng.float(-1, 1);
                 objCollectiblePocketItem.objParachuting(drop.pocketItems[i])
                     .at(self)
                     .show(self.parent)
