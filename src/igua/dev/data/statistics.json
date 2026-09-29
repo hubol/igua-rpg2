@@ -313,5 +313,23 @@
     "SongTitle": 50,
     "Spell": 2,
     "TemporaryEffect": 2
+  },
+  "2026-09-29": {
+    "Enemy": 19,
+    "Equipment": 41,
+    "Fact": 12,
+    "Gift": 17,
+    "Idol": 4,
+    "KeyItem": 24,
+    "NpcPersona": 96,
+    "PocketItem": 16,
+    "Potion": 41,
+    "Quest": 37,
+    "RespawnConfiguration": 3,
+    "Scene": 93,
+    "Shop": 28,
+    "SongTitle": 50,
+    "Spell": 2,
+    "TemporaryEffect": 2
   }
 }

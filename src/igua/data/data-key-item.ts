@@ -127,6 +127,11 @@ export namespace DataKeyItem {
                 description: "Rope that can be used to rescue lost souls in the Dark, Evil Hole.",
                 texture: Tx.Collectibles.Key.Rope,
             },
+            MishaCake: {
+                name: "Misha's Birthday Cake",
+                description: "A birthday cake with the exact number of candles for Misha's birthday.",
+                texture: null,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );

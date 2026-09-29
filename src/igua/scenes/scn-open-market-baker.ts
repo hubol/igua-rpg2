@@ -1,10 +1,14 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Sfx } from "../../assets/sounds";
 import { Jukebox } from "../core/igua-audio";
+import { DramaInventory } from "../drama/drama-inventory";
+import { DramaMisc } from "../drama/drama-misc";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { Rpg } from "../rpg/rpg";
+import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnOpenMarketBaker() {
     Jukebox.play(Mzk.PreciousInstructions);
@@ -15,6 +19,7 @@ export function scnOpenMarketBaker() {
 function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
     let everSmokedInHere = false;
     const mishaBirthdayQuest = Rpg.quest("MishaHouse.Birthday");
+    const cakeItem: RpgInventory.Item.KeyItem = { kind: "key_item", id: "MishaCake" };
 
     lvl.BakerNpc
         .mixin(mxnCutscene, function* () {
@@ -32,15 +37,60 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
             const response = yield* ask(
                 "Anything I can get for you?",
                 "Cake, please!",
-                mishaBirthdayQuest.flags.spokeWithBaker ? "Where is Aidar?" : null,
+                mishaBirthdayQuest.flags.spokeWithBaker && !mishaBirthdayQuest.flags.learnedMishasAge
+                    ? "Where is Aidar?"
+                    : null,
                 !mishaBirthdayQuest.flags.spokeWithBaker && mishaBirthdayQuest.flags.readCalendar
                     ? "Something for Misha's birthday"
                     : null,
+                mishaBirthdayQuest.flags.learnedMishasAge ? "I know Misha's age!" : null,
                 "Nothing right now!",
             );
 
-            if (response === 3) {
+            if (response === 4) {
                 yield* show("All good!!! See you around!!!");
+                return;
+            }
+
+            if (response === 3) {
+                if (Rpg.inventory.count(cakeItem) >= 1) {
+                    yield* show("Yes, and I gave you a cake with the exact number of candles.");
+                    return;
+                }
+
+                yield* show("You do? Tell me, then!");
+                const age = yield* DramaMisc.askNullableInteger(
+                    "How old is Misha today?",
+                    {
+                        max: 100,
+                        min: 1,
+                        rejectMessage: "Not sure, actually...",
+                    },
+                );
+                if (age === null) {
+                    yield* show("Oh, I see.");
+                    return;
+                }
+                else if (age < 50) {
+                    yield* show("No, that can't be right.");
+                    return;
+                }
+                yield* show("Oh, great! Let me get to work!");
+                // TODO FX
+                yield* show("Now, let's run the cake through the cake checker, just to be sure.");
+                if (age === mishaBirthdayQuest.flags.learnedMishasAge) {
+                    Sfx.Character.FlopQuizMasterCorrect.play();
+                    yield* show("Yep, looks good to me!");
+                    yield* DramaInventory.receiveCount(cakeItem, 1);
+                    yield* show("Take that to Misha right away!!!");
+                }
+                else {
+                    Sfx.Interact.Error.play();
+                    yield* show(
+                        "No, something is wrong.",
+                        "Are you sure that is Misha's age?",
+                    );
+                }
                 return;
             }
 
