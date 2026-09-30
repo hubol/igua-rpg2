@@ -372,8 +372,8 @@ export namespace RpgStatus {
                 attack.physical,
                 damageFactor,
                 canBeFatal,
-                target.defenses.physical + targetBodyPart.defenses.physical,
-                target.guardingDefenses.physical + targetBodyPart.defenses.physical,
+                sumDefense(target.defenses.physical, targetBodyPart.defenses.physical, 0),
+                sumDefense(target.guardingDefenses.physical, targetBodyPart.defenses.physical, 0),
                 factionDefense,
                 target,
             );
@@ -383,8 +383,8 @@ export namespace RpgStatus {
                 overheatAttack,
                 damageFactor,
                 canBeFatal,
-                target.defenses.overheat + targetBodyPart.defenses.overheat,
-                target.guardingDefenses.overheat + targetBodyPart.defenses.overheat,
+                sumDefense(target.defenses.overheat, targetBodyPart.defenses.overheat, 0),
+                sumDefense(target.guardingDefenses.overheat, targetBodyPart.defenses.overheat, 0),
                 factionDefense,
                 target,
             );
@@ -437,6 +437,10 @@ export namespace RpgStatus {
         },
     };
 
+    function sumDefense(a: Integer, b: Integer, c: Integer) {
+        return Math.min(a + b + c, Math.max(a, b, c) >= 100 ? 100 : 99);
+    }
+
     function takeDamage(
         rawAmount: Integer,
         amountFactor: PercentInt,
@@ -448,9 +452,11 @@ export namespace RpgStatus {
     ) {
         const amount = Math.round(rawAmount * (amountFactor / 100));
         const previous = target.health;
-        const totalDefense: PercentInt = defense
-            + (target.state.isGuarding ? guardingDefense : 0)
-            + factionDefense;
+        const totalDefense: PercentInt = sumDefense(
+            defense,
+            target.state.isGuarding ? guardingDefense : 0,
+            factionDefense,
+        );
 
         const minimumDamage = totalDefense >= 100 ? 0 : Math.sign(amount);
         const defenseNumerator = totalDefense >= 0 ? 100 - totalDefense : totalDefense;
