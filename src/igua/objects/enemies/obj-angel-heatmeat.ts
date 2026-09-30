@@ -198,7 +198,7 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
         })
         .step(self => {
             // TODO I think it's time to invent a knockback mixin or something...
-            self.speed.x = approachLinear(self.speed.x, 0, 0.067);
+            self.speed.x = approachLinear(self.speed.x, 0, self.isOnGround ? 0.4 : 0.067);
             const sparkleFactor = (state.wallHitsUntilFall - 1) / (consts.wallHitsUntilFallStart - 1);
             self.sparklesPerFrame = state.isFlying ? nlerp(0.2, 0.1, sparkleFactor) : 0;
             puppetObj.objPuppetHeatmeat.armsRaisedUnit = approachLinear(
