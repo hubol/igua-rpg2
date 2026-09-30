@@ -481,8 +481,6 @@ export namespace DataPotion {
                 target.damage(atkBallon);
                 return;
             case "Wetness":
-                // TODO why isn't this in the attack?
-                target.status.conditions.overheat.value = 0;
                 target.damage(atkWetness);
                 return;
             case "ForgetLooseValuableCollection":

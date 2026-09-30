@@ -281,6 +281,27 @@ export namespace RpgStatus {
                     RpgStatus.Methods.createBallon(target, targetEffects);
                 }
 
+                if (attack.conditions.wetness.value > 0) {
+                    target.conditions.overheat.value = Math.max(
+                        0,
+                        target.conditions.overheat.value - attack.conditions.wetness.value,
+                    );
+                    if (target.conditions.wetness.value === 0) {
+                        target.conditions.wetness.tint = attack.conditions.wetness.tint;
+                    }
+                    else {
+                        target.conditions.wetness.tint = blendColorDelta(
+                            target.conditions.wetness.tint,
+                            attack.conditions.wetness.tint,
+                            Math.min(255, 4 + Math.max(attack.conditions.wetness.value - 30, 0)),
+                        );
+                    }
+                }
+                target.conditions.wetness.value = Math.min(
+                    target.conditions.wetness.value + attack.conditions.wetness.value,
+                    target.conditions.wetness.max,
+                );
+
                 const overheatValue = Math.max(
                     0,
                     attack.conditions.overheat.value - target.state.overheatValueThisTick,
@@ -318,23 +339,6 @@ export namespace RpgStatus {
                         );
                     }
                 }
-
-                if (attack.conditions.wetness.value > 0) {
-                    if (target.conditions.wetness.value === 0) {
-                        target.conditions.wetness.tint = attack.conditions.wetness.tint;
-                    }
-                    else {
-                        target.conditions.wetness.tint = blendColorDelta(
-                            target.conditions.wetness.tint,
-                            attack.conditions.wetness.tint,
-                            Math.min(255, 4 + Math.max(attack.conditions.wetness.value - 30, 0)),
-                        );
-                    }
-                }
-                target.conditions.wetness.value = Math.min(
-                    target.conditions.wetness.value + attack.conditions.wetness.value,
-                    target.conditions.wetness.max,
-                );
             }
 
             // TODO warn when amount is not an integer
