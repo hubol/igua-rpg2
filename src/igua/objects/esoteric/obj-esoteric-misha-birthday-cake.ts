@@ -3,7 +3,7 @@ import { Tx } from "../../../assets/textures";
 import { blendColor } from "../../../lib/color/blend-color";
 import { nlerp } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
-import { PseudoRng } from "../../../lib/math/rng";
+import { PseudoRng, Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 
@@ -23,7 +23,7 @@ export function objEsotericMishaBirthdayCake(candlesCount: Integer) {
         visibleUnit: 0,
     };
 
-    prng.seed = 999999;
+    prng.seed = 999999999993;
 
     function getVisiblePhase(index: Integer) {
         return Math.max(0, Math.min(1, (api.visibleUnit * 7) - index));
@@ -55,6 +55,8 @@ export function objEsotericMishaBirthdayCake(candlesCount: Integer) {
     )
         .autoSorted();
 
+    const candleObjs = Rng.shuffle([...candlesObj.children]);
+
     return container(
         layerObj0,
         creamObj0,
@@ -75,9 +77,9 @@ export function objEsotericMishaBirthdayCake(candlesCount: Integer) {
             maskObj1.pivot.y = (1 - getVisiblePhase(3)) * 1;
             maskObj2.pivot.x = (1 - getVisiblePhase(4)) * 1;
             maskObj3.pivot.x = (1 - getVisiblePhase(5)) * -1;
-            const candlesVisible = getVisiblePhase(6) * candlesObj.children.length;
-            for (let i = 0; i < candlesObj.children.length; i++) {
-                candlesObj.children[i].visible = candlesVisible > i;
+            const candlesVisible = getVisiblePhase(6) * candleObjs.length;
+            for (let i = 0; i < candleObjs.length; i++) {
+                candleObjs[i].visible = candlesVisible > i;
             }
         })
         .merge({ objEsotericMishaBirthdayCake: api });
