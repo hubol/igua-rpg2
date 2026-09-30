@@ -95,6 +95,10 @@ const themes = (() => {
     };
 })();
 
+namespace themes {
+    export type Type = typeof themes["heat"];
+}
+
 const ranks = {
     heat: RpgEnemyRank.create({}),
     meat: RpgEnemyRank.create({}),
@@ -122,6 +126,30 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
 
     const soulAnchorObj = new Graphics().beginFill(0xff0000).drawRect(26, 52, 1, 1).invisible();
 
+    const puppetObj = objPuppetHeatmeat(theme);
+
+    const api = {
+        playMessage(messageId: objAngelHeatmeat.MessageId) {
+            if (messageId === "Lament" && !puppetObj.objPuppetHeatmeat.mouthObj.destroyed) {
+                puppetObj.objPuppetHeatmeat.mouthObj.controls.frowning = true;
+            }
+            const sfx = messageSfxs[variantId][messageId];
+            return puppetObj.objPuppetHeatmeat.mouthObj.mxnVoiceActed.play(sfx);
+        },
+    };
+
+    return container(
+        puppetObj,
+        ...hurtboxObjs,
+        soulAnchorObj,
+    )
+        .mixin(mxnDetectPlayer)
+        .mixin(mxnEnemy, { hurtboxes: hurtboxObjs, rank, soulAnchorObj })
+        .mixin(mxnEnemyDeathBurst, { map: theme.tints.burstMap })
+        .merge({ objAngelHeatmeat: api });
+}
+
+function objPuppetHeatmeat(theme: themes.Type) {
     const mouthObj = theme.createMouthObj()
         .mixin(mxnVoiceActed)
         .coro(function* (self) {
@@ -141,13 +169,7 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
         });
 
     const api = {
-        playMessage(messageId: objAngelHeatmeat.MessageId) {
-            if (messageId === "Lament" && !mouthObj.destroyed) {
-                mouthObj.controls.frowning = true;
-            }
-            const sfx = messageSfxs[variantId][messageId];
-            return mouthObj.mxnVoiceActed.play(sfx);
-        },
+        mouthObj,
     };
 
     return container(
@@ -174,13 +196,8 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
                 .mixin(mxnFacingPivot, { up: -2, left: -2, down: 2, right: 2 }),
         )
             .mixin(mxnFacingPivot, { up: -3, left: -3, down: 3, right: 3 }),
-        ...hurtboxObjs,
-        soulAnchorObj,
     )
-        .mixin(mxnDetectPlayer)
-        .mixin(mxnEnemy, { hurtboxes: hurtboxObjs, rank, soulAnchorObj })
-        .mixin(mxnEnemyDeathBurst, { map: theme.tints.burstMap })
-        .merge({ objAngelHeatmeat: api });
+        .merge({ objPuppetHeatmeat: api });
 }
 
 export namespace objAngelHeatmeat {
