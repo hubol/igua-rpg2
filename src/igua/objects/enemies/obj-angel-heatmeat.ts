@@ -16,6 +16,7 @@ import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
+import { mxnRpgStatusBodyPart } from "../../mixins/mxn-rpg-status-body-part";
 import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { mxnVoiceActed } from "../../mixins/mxn-voice-acted";
 import { RpgAttack } from "../../rpg/rpg-attack";
@@ -140,7 +141,8 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
 
     const hurtboxObjs = [
         new Graphics().beginFill(0xff0000).drawRect(6, 17, 43, 25),
-        new Graphics().beginFill(0xff0000).drawRect(15, 37, 25, 44),
+        new Graphics().beginFill(0xff0000).drawRect(15, 37, 25, 44)
+            .mixin(mxnRpgStatusBodyPart, { defenses: { physical: 99, overheat: 0 } }),
     ]
         .map(obj => obj.invisible());
 
