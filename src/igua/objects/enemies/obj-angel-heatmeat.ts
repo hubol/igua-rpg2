@@ -33,7 +33,7 @@ const [
 ] = Tx.Enemy.Heatmeat.Head.split({ width: 56 });
 
 const [
-    ___,
+    txTorso,
     txTorsoAirborne,
 ] = Tx.Enemy.Heatmeat.Torso.split({ width: 56 });
 
@@ -120,6 +120,10 @@ const variants = {
     },
 };
 
+const consts = {
+    wallHitsUntilFallStart: 2,
+};
+
 export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
     const { rank, theme } = variants[variantId];
 
@@ -145,6 +149,7 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
 
     const state = {
         isFlying: true,
+        wallHitsUntilFall: consts.wallHitsUntilFallStart,
     };
 
     return container(
@@ -162,7 +167,12 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
         .mixin(mxnEnemyDeathBurst, { map: theme.tints.burstMap })
         .handles("moved", (self, event) => {
             if (event.hitWall && state.isFlying) {
+                state.wallHitsUntilFall--;
                 self.speed.x = -0.7 * event.previousSpeed.x;
+
+                if (state.wallHitsUntilFall <= 0) {
+                    state.isFlying = false;
+                }
             }
         })
         .handles("damaged", (self, event) => {
@@ -189,12 +199,14 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
         .step(self => {
             // TODO I think it's time to invent a knockback mixin or something...
             self.speed.x = approachLinear(self.speed.x, 0, 0.067);
-            self.sparklesPerFrame = state.isFlying ? 0.1 : 0;
+            const sparkleFactor = (state.wallHitsUntilFall - 1) / (consts.wallHitsUntilFallStart - 1);
+            self.sparklesPerFrame = state.isFlying ? nlerp(0.2, 0.1, sparkleFactor) : 0;
             puppetObj.objPuppetHeatmeat.armsRaisedUnit = approachLinear(
                 puppetObj.objPuppetHeatmeat.armsRaisedUnit,
-                self.speed.y > 0 ? 2 : 0,
+                (state.isFlying ? self.speed.y : Math.sin(scene.ticker.ticks / 20)) > 0 ? 2 : 0,
                 0.02,
             );
+            puppetObj.objPuppetHeatmeat.isOnGround = self.isOnGround;
         })
         .merge({ objAngelHeatmeat: api });
 }
@@ -230,12 +242,13 @@ function objPuppetHeatmeat(theme: themes.Type) {
             armsObj.textureIndex = value * txsArms.length;
             armsRaisedUnit = value;
         },
+        isOnGround: false,
     };
 
     return container(
         container(
             armsObj,
-            Sprite.from(txTorsoAirborne),
+            Sprite.from(txTorsoAirborne).step(self => self.texture = api.isOnGround ? txTorso : txTorsoAirborne),
             container(
                 Sprite.from(txNoggin),
                 Sprite.from(txEars),
@@ -255,7 +268,7 @@ function objPuppetHeatmeat(theme: themes.Type) {
             )
                 .mixin(mxnFacingPivot, { up: -2, left: -2, down: 2, right: 2 }),
         )
-            .mixin(mxnFacingPivot, { up: -3, left: -3, down: 3, right: 3 }),
+            .mixin(mxnFacingPivot, { up: -1, left: -3, down: 3, right: 3 }),
     )
         .merge({ objPuppetHeatmeat: api });
 }
