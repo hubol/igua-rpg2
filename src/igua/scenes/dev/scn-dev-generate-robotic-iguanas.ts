@@ -7,7 +7,6 @@ import { createPixiRenderer } from "../../../lib/game-engine/pixi-renderer";
 import { container } from "../../../lib/pixi/container";
 
 const panelTextures: Record<string, Texture> = {
-    "Eye": Tx.Iguana.Robot.Panels.Empty,
     "Head": Tx.Iguana.Robot.Panels.Medium,
     "Pupil": Tx.Iguana.Robot.Panels.Empty,
     "Mouth": Tx.Iguana.Robot.Panels.Empty,

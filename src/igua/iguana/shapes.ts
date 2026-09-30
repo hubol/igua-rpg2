@@ -6,19 +6,17 @@ import { PropertiesLike } from "../../lib/types/properties-like";
 type IguanaTxs = PropertiesLike<typeof Tx["Iguana"], Texture>;
 
 function shape(key: keyof IguanaTxs, width: number, pixelDefaultAnchor: Vector) {
-    const texture = Tx.Iguana[key];
-    const textures = texture.split({ width, trimFrame: { pixelDefaultAnchor } });
-    const boiledTextures = Tx.Iguana.Boiled[key].split({ width, trimFrame: { pixelDefaultAnchor } });
-    const robotTextures = Tx.Iguana.Robot[key].split({ width, trimFrame: { pixelDefaultAnchor } });
-    const robotBoiledTextures = Tx.Iguana.Robot.Boiled[key].split({ width, trimFrame: { pixelDefaultAnchor } });
+    function split(txs: Partial<IguanaTxs>) {
+        return txs[key]
+            ? txs[key]!.split({ width, trimFrame: { pixelDefaultAnchor } })
+            : null;
+    }
 
-    const skeletonTextures = key in Tx.Iguana.Skeleton
-        ? (Tx.Iguana.Skeleton as Record<keyof IguanaTxs, Texture>)[key].split({
-            width,
-            trimFrame: { pixelDefaultAnchor },
-        })
-        : textures;
-
+    const textures = split(Tx.Iguana)!;
+    const boiledTextures = split(Tx.Iguana.Boiled) ?? textures;
+    const robotTextures = split(Tx.Iguana.Robot) ?? textures;
+    const robotBoiledTextures = split(Tx.Iguana.Robot.Boiled) ?? boiledTextures;
+    const skeletonTextures = split(Tx.Iguana.Skeleton) ?? textures;
     const skeletonBoiledTextures = skeletonTextures === textures ? boiledTextures : skeletonTextures;
 
     return textures.map((Tx, index) => ({
