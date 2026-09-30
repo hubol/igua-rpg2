@@ -1,7 +1,11 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
+import { blendColor } from "../../../lib/color/blend-color";
+import { nlerp } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
+import { PseudoRng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
+import { range } from "../../../lib/range";
 
 const [
     txLayer0,
@@ -12,13 +16,17 @@ const [
     txIcingFront,
 ] = Tx.Esoteric.MishaBirthday.Cake.split({ count: 6 });
 
+const prng = new PseudoRng();
+
 export function objEsotericMishaBirthdayCake(candlesCount: Integer) {
     const api = {
         visibleUnit: 0,
     };
 
+    prng.seed = 999999;
+
     function getVisiblePhase(index: Integer) {
-        return Math.max(0, Math.min(1, (api.visibleUnit * 6) - index));
+        return Math.max(0, Math.min(1, (api.visibleUnit * 7) - index));
     }
 
     const maskObj0 = objMask();
@@ -33,12 +41,27 @@ export function objEsotericMishaBirthdayCake(candlesCount: Integer) {
     const icingBackObj = Sprite.from(txIcingBack).masked(maskObj2);
     const icingFrontObj = Sprite.from(txIcingFront).masked(maskObj3);
 
+    const candlesObj = container(
+        ...range(candlesCount)
+            .map(() => {
+                const yUnit = prng.float();
+                const y = Math.round(nlerp(7, 15, yUnit));
+                return Sprite.from(Tx.Esoteric.MishaBirthday.Candle)
+                    .anchored(0.5, 1)
+                    .tinted(blendColor(0xffffff, 0x99afdd, 1 - yUnit))
+                    .at(prng.intc(5, 81), y)
+                    .zIndexed(y);
+            }),
+    )
+        .autoSorted();
+
     return container(
         layerObj0,
         creamObj0,
         layerObj1,
         creamObj1,
         icingBackObj,
+        candlesObj,
         icingFrontObj,
         maskObj0,
         maskObj1,
@@ -52,6 +75,10 @@ export function objEsotericMishaBirthdayCake(candlesCount: Integer) {
             maskObj1.pivot.y = (1 - getVisiblePhase(3)) * 1;
             maskObj2.pivot.x = (1 - getVisiblePhase(4)) * 1;
             maskObj3.pivot.x = (1 - getVisiblePhase(5)) * -1;
+            const candlesVisible = getVisiblePhase(6) * candlesObj.children.length;
+            for (let i = 0; i < candlesObj.children.length; i++) {
+                candlesObj.children[i].visible = candlesVisible > i;
+            }
         })
         .merge({ objEsotericMishaBirthdayCake: api });
 }
