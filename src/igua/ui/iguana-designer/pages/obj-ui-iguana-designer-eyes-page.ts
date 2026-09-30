@@ -86,6 +86,10 @@ function objUiIguanaDesignerPupilsPage() {
 function objUiIguanaDesignerEyesAdvancedPage() {
     const eyes = CtxUiIguanaDesigner.value.connectedInput.head.eyes;
 
-    const { tilt, left, right } = eyes;
+    const {
+        tilt,
+        left: { sclera: _scleraLeft, ...left },
+        right: { sclera: _scleraRight, ...right },
+    } = eyes;
     return objUiConnectedInputPage("Advanced", { tilt, leftEye: left, rightEye: right });
 }
