@@ -45,7 +45,7 @@ export function objEsotericMishaBirthdayCake(candlesCount: Integer) {
         ...range(candlesCount)
             .map(() => {
                 const yUnit = prng.float();
-                const y = Math.round(nlerp(7, 15, yUnit));
+                const y = Math.round(nlerp(7, 17, yUnit));
                 return Sprite.from(Tx.Esoteric.MishaBirthday.Candle)
                     .anchored(0.5, 1)
                     .tinted(blendColor(0xffffff, 0x99afdd, 1 - yUnit))
