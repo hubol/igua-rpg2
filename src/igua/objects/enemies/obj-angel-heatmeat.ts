@@ -3,7 +3,9 @@ import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Sound } from "../../../lib/game-engine/audio/sound";
 import { interp } from "../../../lib/game-engine/routines/interp";
+import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear, nlerp } from "../../../lib/math/number";
+import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { scene } from "../../globals";
@@ -11,8 +13,11 @@ import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
+import { mxnPhysics } from "../../mixins/mxn-physics";
+import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { mxnVoiceActed } from "../../mixins/mxn-voice-acted";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
 
@@ -138,14 +143,46 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
         },
     };
 
+    const state = {
+        isFlying: true,
+    };
+
     return container(
-        puppetObj,
-        ...hurtboxObjs,
-        soulAnchorObj,
+        container(
+            puppetObj,
+            ...hurtboxObjs,
+            soulAnchorObj,
+        )
+            .pivoted(27, 60),
     )
+        .mixin(mxnSparkling)
+        .mixin(mxnPhysics, { gravity: 0, physicsRadius: 15, debug: false })
         .mixin(mxnDetectPlayer)
         .mixin(mxnEnemy, { hurtboxes: hurtboxObjs, rank, soulAnchorObj })
         .mixin(mxnEnemyDeathBurst, { map: theme.tints.burstMap })
+        .coro(function* (self) {
+            while (true) {
+                let ticks = Rng.int(9999);
+                const ghostlyObj = container()
+                    .step(() => self.speed.y = Math.sin(ticks++ / 14) * 0.3)
+                    .show(self);
+                yield () => !state.isFlying;
+                ghostlyObj.destroy();
+                self.gravity = 0.3;
+                yield () => state.isFlying;
+                self.gravity = 0;
+                yield interp(self.speed, "y").to(-1).over(1000);
+                yield sleep(500);
+            }
+        })
+        .step(self => {
+            self.sparklesPerFrame = state.isFlying ? 0.1 : 0;
+            puppetObj.objPuppetHeatmeat.armsRaisedUnit = approachLinear(
+                puppetObj.objPuppetHeatmeat.armsRaisedUnit,
+                self.speed.y > 0 ? 2 : 0,
+                0.02,
+            );
+        })
         .merge({ objAngelHeatmeat: api });
 }
 
@@ -168,13 +205,23 @@ function objPuppetHeatmeat(theme: themes.Type) {
             }
         });
 
+    let armsRaisedUnit = 0;
+    const armsObj = objIndexedSprite(txsArms);
+
     const api = {
         mouthObj,
+        get armsRaisedUnit() {
+            return armsRaisedUnit;
+        },
+        set armsRaisedUnit(value) {
+            armsObj.textureIndex = value * txsArms.length;
+            armsRaisedUnit = value;
+        },
     };
 
     return container(
         container(
-            Sprite.from(txsArms[0]),
+            armsObj,
             Sprite.from(txTorsoAirborne),
             container(
                 Sprite.from(txNoggin),
