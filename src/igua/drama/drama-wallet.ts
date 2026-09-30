@@ -54,7 +54,7 @@ const walletDummyObj = container().mixin(mxnSpeaker, {
     tintSecondary: 0x000000,
 });
 
-const showEarningsDialogCurrencyIds = new Set<RpgEconomy.Currency.Id>(["rescue_credits"]);
+const showEarningsDialogCurrencyIds = new Set<RpgEconomy.Currency.Id>(["rescue_credits", "homunculus_bucks"]);
 const showEarningsOverPlayerHeadCurrencyIds = new Set<RpgEconomy.Currency.Id>(["casino_pity"]);
 
 function* earn(

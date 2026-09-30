@@ -350,8 +350,7 @@ export namespace DataQuest {
                 reward: {
                     kind: "single",
                     countCompletions: "once",
-                    // TODO should be a special kind of currency
-                    drop: { kind: "pocket_item", id: "BallFruitTypeA" },
+                    drop: { kind: "currency", id: "homunculus_bucks", count: 1 },
                 },
             },
             "DungeonBones.Researcher": {

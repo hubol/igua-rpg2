@@ -106,8 +106,6 @@ export namespace DataShop {
                         price: { currency: "valuables", deltaSold: 1, initial: 5 },
                         product: { kind: "key_item", id: "SeedPurple" },
                     },
-                    // TODO not sure if restore poison should appear in the art store
-                    // maybe he has two stores instead
                     {
                         initialQuantity: 99,
                         price: { currency: "valuables", deltaSold: 5, initial: 15 },
