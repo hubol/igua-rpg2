@@ -6,6 +6,7 @@ import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear, nlerp } from "../../../lib/math/number";
 import { Rng } from "../../../lib/math/rng";
+import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { scene } from "../../globals";
@@ -14,9 +15,13 @@ import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnPhysics } from "../../mixins/mxn-physics";
+import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { mxnVoiceActed } from "../../mixins/mxn-voice-acted";
+import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { objFxRipple } from "../effects/obj-fx-ripple";
+import { objProjectileSaw } from "../projectiles/obj-projectile-saw";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
@@ -124,6 +129,12 @@ const consts = {
     wallHitsUntilFallStart: 2,
 };
 
+const atks = {
+    saw: RpgAttack.create({
+        physical: 40,
+    }),
+};
+
 export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
     const { rank, theme } = variants[variantId];
 
@@ -191,9 +202,47 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
                 ghostlyObj.destroy();
                 self.gravity = 0.3;
                 yield () => state.isFlying;
+                state.wallHitsUntilFall = consts.wallHitsUntilFallStart;
                 self.gravity = 0;
                 yield interp(self.speed, "y").to(-1).over(1000);
                 yield sleep(500);
+            }
+        })
+        .coro(function* (self) {
+            while (true) {
+                yield () => !state.isFlying && self.isOnGround;
+                yield sleep(Rng.int(500, 1100));
+
+                const position = vnew(0, -16);
+
+                const rippleObj = objFxRipple(
+                    {
+                        radius: 0,
+                        stroke: 1,
+                        tint: 0xffffff,
+                    },
+                    {
+                        radius: 55,
+                        stroke: 2,
+                        tint: 0x9BC9FF,
+                    },
+                )
+                    .mxnFxFactor
+                    .play(666)
+                    .at(position)
+                    .show(self);
+
+                yield () => rippleObj.destroyed;
+                const sawObj = objProjectileSaw()
+                    .mixin(mxnRpgAttack, { attack: atks.saw, attacker: self.status })
+                    .at(position)
+                    .show(self);
+                self.status.quirks.isImmuneToPlayerMeleeAttack = true;
+                yield sleep(1000);
+                // TODO jump or somethin
+                sawObj.destroy();
+                self.status.quirks.isImmuneToPlayerMeleeAttack = false;
+                state.isFlying = true;
             }
         })
         .step(self => {

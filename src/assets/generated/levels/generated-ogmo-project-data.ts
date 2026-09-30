@@ -138,6 +138,7 @@ export namespace OgmoEntities {
       | "objProjectileFlameColumn"
       | "objProjectileHellSnake"
       | "objProjectileHotPineCone"
+      | "objProjectileSaw"
       | "objRegion"
       | "objSolidBlock"
       | "objSolidSlope"
