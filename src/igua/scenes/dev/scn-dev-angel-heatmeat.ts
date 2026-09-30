@@ -5,7 +5,7 @@ import { container } from "../../../lib/pixi/container";
 import { objAngelHeatmeat } from "../../objects/enemies/obj-angel-heatmeat";
 
 export function scnDevAngelHeatmeat() {
-    Lvl.Dummy();
+    Lvl.DevAngelHeatmeat();
     const heatObj = objAngelHeatmeat("heat")
         .at(100, 100)
         .show();

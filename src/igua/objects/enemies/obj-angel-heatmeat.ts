@@ -160,6 +160,17 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
         .mixin(mxnDetectPlayer)
         .mixin(mxnEnemy, { hurtboxes: hurtboxObjs, rank, soulAnchorObj })
         .mixin(mxnEnemyDeathBurst, { map: theme.tints.burstMap })
+        .handles("moved", (self, event) => {
+            if (event.hitWall && state.isFlying) {
+                self.speed.x = -0.7 * event.previousSpeed.x;
+            }
+        })
+        .handles("damaged", (self, event) => {
+            // TODO I think it's time to invent a knockback mixin or something...
+            if (!self.isOnGround && event.impactSpeed) {
+                self.speed.add(event.impactSpeed);
+            }
+        })
         .coro(function* (self) {
             while (true) {
                 let ticks = Rng.int(9999);
@@ -176,6 +187,8 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
             }
         })
         .step(self => {
+            // TODO I think it's time to invent a knockback mixin or something...
+            self.speed.x = approachLinear(self.speed.x, 0, 0.067);
             self.sparklesPerFrame = state.isFlying ? 0.1 : 0;
             puppetObj.objPuppetHeatmeat.armsRaisedUnit = approachLinear(
                 puppetObj.objPuppetHeatmeat.armsRaisedUnit,
