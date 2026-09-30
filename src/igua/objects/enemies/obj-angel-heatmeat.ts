@@ -203,7 +203,7 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
             self.sparklesPerFrame = state.isFlying ? nlerp(0.2, 0.1, sparkleFactor) : 0;
             puppetObj.objPuppetHeatmeat.armsRaisedUnit = approachLinear(
                 puppetObj.objPuppetHeatmeat.armsRaisedUnit,
-                (state.isFlying ? self.speed.y : Math.sin(scene.ticker.ticks / 20)) > 0 ? 2 : 0,
+                (state.isFlying ? self.speed.y : Math.sin(scene.ticker.ticks / 30)) > 0 ? 2 : 0,
                 0.02,
             );
             puppetObj.objPuppetHeatmeat.isOnGround = self.isOnGround;
