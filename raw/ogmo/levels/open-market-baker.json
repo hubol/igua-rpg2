@@ -16,7 +16,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 149,
+          "y": 216,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "MishaCakeMarker", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",

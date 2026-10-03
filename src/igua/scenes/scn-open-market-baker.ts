@@ -1,12 +1,14 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
+import { interp } from "../../lib/game-engine/routines/interp";
 import { Jukebox } from "../core/igua-audio";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { objEsotericMishaBirthdayCake } from "../objects/esoteric/obj-esoteric-misha-birthday-cake";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 
@@ -76,11 +78,18 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
                     return;
                 }
                 yield* show("Oh, great! Let me get to work!");
-                // TODO FX
+                const cakeObj = objEsotericMishaBirthdayCake(age)
+                    .at(lvl.MishaCakeMarker)
+                    .show();
+
+                Sfx.Esoteric.MishaCakeBuild.play();
+                yield interp(cakeObj.objEsotericMishaBirthdayCake, "visibleUnit").to(1).over(2000);
+
                 yield* show("Now, let's run the cake through the cake checker, just to be sure.");
                 if (age === mishaBirthdayQuest.flags.learnedMishasAge) {
                     Sfx.Character.FlopQuizMasterCorrect.play();
                     yield* show("Yep, looks good to me!");
+                    cakeObj.destroy();
                     yield* DramaInventory.receiveCount(cakeItem, 1);
                     yield* show("Take that to Misha right away!!!");
                 }
@@ -90,6 +99,7 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
                         "No, something is wrong.",
                         "Are you sure that is Misha's age?",
                     );
+                    cakeObj.destroy();
                 }
                 return;
             }

@@ -70,7 +70,8 @@ export function objEsotericMishaBirthdayCake(candlesCount: Integer) {
         maskObj2,
         maskObj3,
     )
-        .step(() => {
+        .step(self => {
+            self.visible = true;
             layerObj0.y = (1 - getVisiblePhase(0)) * -280;
             maskObj0.pivot.y = (1 - getVisiblePhase(1)) * 1;
             layerObj1.y = (1 - getVisiblePhase(2)) * -280;
@@ -82,7 +83,9 @@ export function objEsotericMishaBirthdayCake(candlesCount: Integer) {
                 candleObjs[i].visible = candlesVisible > i;
             }
         })
-        .merge({ objEsotericMishaBirthdayCake: api });
+        .merge({ objEsotericMishaBirthdayCake: api })
+        .invisible()
+        .pivoted(43, 28);
 }
 
 function objMask() {
