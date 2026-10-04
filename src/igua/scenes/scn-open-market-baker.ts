@@ -1,6 +1,8 @@
+import { Sprite } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
+import { Tx } from "../../assets/textures";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { Jukebox } from "../core/igua-audio";
 import { DramaInventory } from "../drama/drama-inventory";
@@ -67,6 +69,7 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
                         max: 100,
                         min: 1,
                         rejectMessage: "Not sure, actually...",
+                        messageObj: Sprite.from(Tx.Characters.BakerPortrait).anchored(0.5, 0.825),
                     },
                 );
                 if (age === null) {
