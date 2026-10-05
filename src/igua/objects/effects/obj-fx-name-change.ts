@@ -1,21 +1,26 @@
 import { Graphics, Sprite, TilingSprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { factor, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { container } from "../../../lib/pixi/container";
+import { Jukebox } from "../../core/igua-audio";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnMoveIntoCamera } from "../../mixins/mxn-move-into-camera";
 
 const [txBack, txDecoration, txCongratulations, txYourNameIs] = Tx.Effects.NameChange.split({ width: 212 });
 
-// TODO needs absurd SFX
-
 export function objFxNameChange(name: string) {
     return container()
         .mixin(mxnMoveIntoCamera, 3)
         .coro(function* (self) {
+            const currentMusicTrack = Jukebox.currentTrack!;
+
+            Jukebox.applyGainRamp(currentMusicTrack, 0, 250);
+            Sfx.Fanfare.NameChange.play();
+
             const congratulationsObj = Sprite.from(txCongratulations)
                 .scaled(2, 2)
                 .anchored(0.5, 0.5)
@@ -66,6 +71,8 @@ export function objFxNameChange(name: string) {
                 interpvr(frontObj).translate(0, -280).over(500),
                 interpvr(backObj).translate(0, 280).over(333),
             ]);
+
+            Jukebox.applyGainRamp(currentMusicTrack, 1, 1000);
 
             self.destroy();
         });

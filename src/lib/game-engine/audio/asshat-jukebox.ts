@@ -48,6 +48,7 @@ export class AsshatJukebox {
         this._latestPlayRequest = null;
     }
 
+    // TODO this should be reworked to not require music track
     applyGainRamp(track: MusicTrack, value: Unit, durationMs: Milliseconds) {
         if (this._nowPlaying?.track !== track) {
             return;
