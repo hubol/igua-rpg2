@@ -107,6 +107,8 @@ export namespace DataNpcPersona {
             MageGreeter: { job: "Mage", name: "Greta", looksId: "UnbotheredAxolotl" },
             DungeonExplorerNovice: { job: "Explorer", name: "Lark", looksId: "HappyLark" },
             DungeonResearcher: { job: "Researcher", name: "Reed", looksId: "AngryOne" },
+            IndianaClawPowderer: { job: "Powderer", name: "Zhan", looksId: "ClawPowderAddict" },
+            OhioClawPowderer: { job: "Powderer", name: "Dash", looksId: "ClawPowderAddict" },
             __Fallback__: { job: "???", name: "???", looksId: "MintyJourney" },
         } satisfies Record<string, Model>,
     );

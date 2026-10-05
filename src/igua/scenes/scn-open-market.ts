@@ -1,17 +1,11 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
-import { sleepf } from "../../lib/game-engine/routines/sleep";
-import { Rng } from "../../lib/math/rng";
 import { Jukebox } from "../core/igua-audio";
-import { DataShop } from "../data/data-shop";
 import { DramaCobbler } from "../drama/drama-cobbler";
 import { DramaGifts } from "../drama/drama-gifts";
-import { DramaLib } from "../drama/drama-lib";
-import { dramaShop } from "../drama/drama-shop";
 import { show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
-import { mxnYell } from "../mixins/mxn-yell";
-import { ObjIguanaNpc } from "../objects/obj-iguana-npc";
+import { mxnIguanaShopkeeper } from "../mixins/mxn-iguana-shopkeeper";
 import { Rpg } from "../rpg/rpg";
 
 export function scnOpenMarket() {
@@ -19,7 +13,7 @@ export function scnOpenMarket() {
     const lvl = Lvl.OpenMarket();
 
     lvl.FoodNpc
-        .mixin(mxnShopkeeper, {
+        .mixin(mxnIguanaShopkeeper, {
             messages: [
                 "Food! Get your food here!",
                 "Nutritious food!",
@@ -30,7 +24,7 @@ export function scnOpenMarket() {
         });
 
     lvl.JumpNpc
-        .mixin(mxnShopkeeper, {
+        .mixin(mxnIguanaShopkeeper, {
             messages: [
                 "Jump differently with my products!",
                 "Love jumping? My wares are for you!",
@@ -39,7 +33,7 @@ export function scnOpenMarket() {
         });
 
     lvl.CombatNpc
-        .mixin(mxnShopkeeper, {
+        .mixin(mxnIguanaShopkeeper, {
             messages: [
                 "Are angels beating your ass? Talk with me!",
                 "Need to be tougher? I have some stuff for you!",
@@ -48,7 +42,7 @@ export function scnOpenMarket() {
         });
 
     lvl.GluemakerNpc
-        .mixin(mxnShopkeeper, {
+        .mixin(mxnIguanaShopkeeper, {
             messages: [
                 "Selling glue for combining shoes!",
                 "I've got loads of glue! Useful for improving shoes!",
@@ -62,28 +56,6 @@ export function scnOpenMarket() {
         });
 
     enrichFlipNpc(lvl);
-}
-
-interface MxnShopkeeperArgs {
-    messages: string[];
-    shopId: DataShop.Id;
-}
-
-function mxnShopkeeper(obj: ObjIguanaNpc, args: MxnShopkeeperArgs) {
-    return obj
-        .mixin(mxnYell)
-        .mixin(mxnCutscene, function* () {
-            yield* dramaShop(args.shopId, obj.speaker);
-        })
-        .coro(function* (self) {
-            while (true) {
-                yield sleepf(Rng.intc(60, 300));
-                if (DramaLib.Speaker.current !== self) {
-                    self.mxnYell.yell(Rng.item(args.messages));
-                }
-                yield sleepf(120);
-            }
-        });
 }
 
 function enrichFlipNpc(lvl: LvlType.OpenMarket) {

@@ -199,11 +199,6 @@ export namespace DataShop {
                         product: { kind: "potion", id: "AttributeHealthUp" },
                     },
                     {
-                        initialQuantity: 1,
-                        price: { currency: "valuables", deltaSold: 500, initial: 500 },
-                        product: { kind: "potion", id: "AttributeStrengthUp" },
-                    },
-                    {
                         initialQuantity: 50,
                         price: { currency: "valuables", deltaSold: 0, initial: 10 },
                         product: { kind: "potion", id: "RestoreHealth" },
@@ -242,11 +237,6 @@ export namespace DataShop {
             CombatTeacher: {
                 stocks: [
                     {
-                        product: { kind: "potion", id: "AttributeStrengthUp" },
-                        initialQuantity: 1,
-                        price: { currency: "combat", deltaSold: 1000, initial: 1999 },
-                    },
-                    {
                         product: { kind: "potion", id: "AttributeHealthUp" },
                         initialQuantity: 2,
                         price: { currency: "combat", deltaSold: 500, initial: 499 },
@@ -276,11 +266,6 @@ export namespace DataShop {
                         price: { currency: "pocket", deltaSold: 50, initial: 50 },
                     },
                     {
-                        product: { kind: "potion", id: "AttributeStrengthUp" },
-                        initialQuantity: 1,
-                        price: { currency: "pocket", deltaSold: 0, initial: 300 },
-                    },
-                    {
                         product: { kind: "equipment", id: "PoisonResistance", level: 1 },
                         initialQuantity: 1,
                         price: { currency: "pocket", deltaSold: 0, initial: 50 },
@@ -298,11 +283,6 @@ export namespace DataShop {
                         product: { kind: "key_item", id: "MagicKey" },
                         initialQuantity: 1,
                         price: { currency: "quest", deltaSold: 0, initial: 300 },
-                    },
-                    {
-                        product: { kind: "potion", id: "AttributeStrengthUp" },
-                        initialQuantity: 1,
-                        price: { currency: "quest", deltaSold: 0, initial: 600 },
                     },
                 ],
             },
@@ -336,11 +316,6 @@ export namespace DataShop {
                         product: { kind: "equipment", id: "Cigarette", level: 1 },
                         initialQuantity: 4,
                         price: { currency: "gambling", deltaSold: -111, initial: 999 },
-                    },
-                    {
-                        product: { kind: "potion", id: "AttributeStrengthUp" },
-                        initialQuantity: 1,
-                        price: { currency: "gambling", deltaSold: 0, initial: 999 },
                     },
                     {
                         product: { kind: "potion", id: "AttributeHealthUp" },
@@ -599,6 +574,64 @@ export namespace DataShop {
                         initialQuantity: 1,
                         price: { currency: "rescue_credits", deltaSold: 0, initial: 2 },
                         product: { kind: "equipment", id: "FaceAttack", level: 1 },
+                    },
+                ],
+            },
+            StrengthUp0: {
+                stocks: [
+                    {
+                        initialQuantity: 1,
+                        price: { currency: "valuables", deltaSold: 0, initial: 500 },
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "combat", deltaSold: 0, initial: 1999 },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "pocket", deltaSold: 0, initial: 300 },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "quest", deltaSold: 0, initial: 600 },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "gambling", deltaSold: 0, initial: 999 },
+                    },
+                ],
+            },
+            StrengthUp1: {
+                stocks: [
+                    {
+                        initialQuantity: 1,
+                        price: { currency: "valuables", deltaSold: 0, initial: 999 },
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "combat", deltaSold: 0, initial: 3999 },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "pocket", deltaSold: 0, initial: 999 },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "quest", deltaSold: 0, initial: 999 },
+                    },
+                    {
+                        product: { kind: "potion", id: "AttributeStrengthUp" },
+                        initialQuantity: 1,
+                        price: { currency: "gambling", deltaSold: 0, initial: 1999 },
                     },
                 ],
             },

@@ -954,6 +954,28 @@
           "originY": 53,
           "flippedX": false,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 1,
+          "_eid": "90326278",
+          "x": 3224,
+          "y": 1296,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": true,
+          "values": {"personaName": "IndianaClawPowderer", "name": "IndianaClawPowdererNpc", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 2,
+          "_eid": "90326278",
+          "x": 3408,
+          "y": 1216,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": false,
+          "values": {"personaName": "OhioClawPowderer", "name": "OhioClawPowdererNpc", "depth": 0}
         }
       ]
     },
@@ -10357,7 +10379,8 @@
           "texture": "world map/landmarks/plateau.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4077,
@@ -10434,7 +10457,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4081,
@@ -10446,7 +10470,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

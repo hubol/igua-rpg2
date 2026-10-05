@@ -18,6 +18,7 @@ import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnIguanaShopkeeper } from "../mixins/mxn-iguana-shopkeeper";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objFallenBot } from "../objects/characters/obj-character-fallen-bot";
@@ -61,6 +62,27 @@ export function scnWorldMap() {
     enrichBaldMike(lvl);
     enrichMrIndiana(lvl);
     maybePanicUpdatePlayerPosition(lvl);
+    enrichStrengthShopkeeperNpcs(lvl);
+}
+
+function enrichStrengthShopkeeperNpcs(lvl: LvlType.WorldMap) {
+    const startedInIndiana = Rpg.character.startingRegionId === "Indiana";
+
+    lvl.IndianaClawPowdererNpc
+        .mixin(mxnIguanaShopkeeper, {
+            messages: [
+                "I'm selling Claw Powder!",
+            ],
+            shopId: startedInIndiana ? "StrengthUp0" : "StrengthUp1",
+        });
+
+    lvl.OhioClawPowdererNpc
+        .mixin(mxnIguanaShopkeeper, {
+            messages: [
+                "I'm selling Claw Powder!",
+            ],
+            shopId: startedInIndiana ? "StrengthUp1" : "StrengthUp0",
+        });
 }
 
 function maybePanicUpdatePlayerPosition(lvl: LvlType.WorldMap) {
