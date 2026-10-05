@@ -82,6 +82,7 @@ export namespace OgmoEntities {
       | "objDieOnEmpty"
       | "objEnemyHealthBars"
       | "objEnvironmentFxSparkle"
+      | "objEsotericBakerCakeChecker"
       | "objEsotericBinocularViewer"
       | "objEsotericBoneDusts"
       | "objEsotericDecorationCampfire"

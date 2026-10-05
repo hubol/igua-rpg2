@@ -3,13 +3,15 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
-import { interp } from "../../lib/game-engine/routines/interp";
+import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { Jukebox } from "../core/igua-audio";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
+import { objEsotericBakerCakeChecker } from "../objects/esoteric/obj-esoteric-baker-cake-checker";
 import { objEsotericMishaBirthdayCake } from "../objects/esoteric/obj-esoteric-misha-birthday-cake";
 import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
@@ -89,21 +91,63 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
                 yield interp(cakeObj.objEsotericMishaBirthdayCake, "visibleUnit").to(1).over(2000);
 
                 yield* show("Now, let's run the cake through the cake checker, just to be sure.");
-                if (age === mishaBirthdayQuest.flags.learnedMishasAge) {
-                    Sfx.Character.FlopQuizMasterCorrect.play();
+
+                const checkerObj = objEsotericBakerCakeChecker()
+                    .at(99, -174)
+                    .show();
+
+                Sfx.Esoteric.CakeCheckAppear.play();
+
+                yield interpvr(checkerObj).translate(0, 174).over(4300);
+
+                yield* show("Let's check the bake first.");
+
+                yield* checkerObj.objEsotericBakerCakeChecker.dramaRunHead();
+                yield* checkerObj.objEsotericBakerCakeChecker.dramaShowLight("ok");
+
+                yield* show("Nice, bake is good.");
+
+                yield* checkerObj.objEsotericBakerCakeChecker.dramaReset();
+
+                yield* show("Next, let's check color accuracy.");
+
+                yield* checkerObj.objEsotericBakerCakeChecker.dramaRunHead();
+                yield* checkerObj.objEsotericBakerCakeChecker.dramaShowLight("ok");
+
+                yield* show("Awesome, color checks out.");
+
+                yield* checkerObj.objEsotericBakerCakeChecker.dramaReset();
+
+                yield* show(`Now let's check factual correctness. Is Misha really turning ${age}?`);
+
+                const isCorrect = age === mishaBirthdayQuest.flags.learnedMishasAge;
+
+                yield* checkerObj.objEsotericBakerCakeChecker.dramaRunHead();
+                yield* checkerObj.objEsotericBakerCakeChecker.dramaShowLight(isCorrect ? "ok" : "bad");
+
+                yield* checkerObj.objEsotericBakerCakeChecker.dramaReset();
+
+                if (isCorrect) {
                     yield* show("Yep, looks good to me!");
                     cakeObj.destroy();
                     yield* DramaInventory.receiveCount(cakeItem, 1);
                     yield* show("Take that to Misha right away!!!");
                 }
                 else {
-                    Sfx.Interact.Error.play();
                     yield* show(
                         "No, something is wrong.",
                         "Are you sure that is Misha's age?",
                     );
+
+                    Sfx.Interact.BombExplode.rate(0.95, 1.05);
+                    objFxFieryBurst170px().at(cakeObj.getWorldCenter()).show();
                     cakeObj.destroy();
                 }
+
+                Sfx.Esoteric.DarkEvilHoleEscape.rate(1.4).play();
+                yield interpvr(checkerObj).translate(0, -174).over(1000);
+                checkerObj.destroy();
+
                 return;
             }
 

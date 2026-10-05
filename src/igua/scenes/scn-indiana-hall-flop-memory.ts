@@ -161,7 +161,7 @@ function objFlopMemoryTest(dexNumberZeroIndexed: Integer, speakerObj: DisplayObj
                 .handles("objMutantFlops:correct", () => {
                     self.coro(
                         function* () {
-                            Sfx.Character.FlopQuizMasterCorrect.play();
+                            Sfx.Interact.Correct.play();
                             yield Cutscene.play(
                                 function* () {
                                     yield sleep(1000);
