@@ -30,6 +30,10 @@ function inferPotionToUse(
         return null;
     }
 
+    if (potionIds.includes("Fairy")) {
+        return "Fairy";
+    }
+
     const remainingHealthRatio = status.health / status.healthMax;
 
     if (remainingHealthRatio < 1 && potionIds.includes("ThrowableBerry")) {

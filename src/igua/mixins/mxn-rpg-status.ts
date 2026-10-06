@@ -1,4 +1,5 @@
 import { Container, DisplayObject } from "pixi.js";
+import { Sfx } from "../../assets/sounds";
 import { approachLinear } from "../../lib/math/number";
 import { VectorSimple } from "../../lib/math/vector-type";
 import { objRpgStatusFirefly } from "../objects/obj-rpg-status-firefly";
@@ -66,9 +67,10 @@ export function mxnRpgStatus(obj: Container, rawArgs: MxnRpgStatusArgs) {
         .coro(function* () {
             const fairyObjs = new Array<objRpgStatusFirefly.Type>();
             while (true) {
-                // TODO SFX
                 while (fairyObjs.length > args.status.conditions.fairy.count) {
-                    fairyObjs.shift()!.objRpgStatusFirefly.isFleeing = true;
+                    const fairyObj = fairyObjs.shift()!;
+                    fairyObj.play(Sfx.Effect.FairyFlee.rate(0.9, 1.05));
+                    fairyObj.objRpgStatusFirefly.isFleeing = true;
                 }
                 while (fairyObjs.length < args.status.conditions.fairy.count) {
                     fairyObjs.push(objRpgStatusFirefly(obj, fairyObjs.length).show());

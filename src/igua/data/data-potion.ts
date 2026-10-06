@@ -183,7 +183,7 @@ export namespace DataPotion {
                 stinkLineTint: 0x808080,
                 texture: Tx.Collectibles.Potion.Cowbell,
                 sound: Sfx.Effect.Potion.AnnoyIguanas,
-                flags: flags(),
+                flags: flags("is_foodlike"),
                 healthRestore: null,
             },
             TaxiWhistleCasino: {
@@ -192,7 +192,7 @@ export namespace DataPotion {
                 stinkLineTint: 0x808080,
                 texture: Tx.Collectibles.Potion.Whistle,
                 sound: Sfx.Effect.Potion.TaxiWhistle,
-                flags: flags(),
+                flags: flags("is_foodlike"),
                 healthRestore: null,
             },
             HotDog: {
@@ -421,6 +421,15 @@ export namespace DataPotion {
                 flags: flags("is_foodlike"),
                 healthRestore: () => 40,
             },
+            Fairy: {
+                stinkLineTint: 0x890000,
+                name: "Warm Bean",
+                description: "Vibrating, warm legume. Summons a familiar of the True Wizard of Flame for protection.",
+                sound: Sfx.Effect.Potion.Fairy,
+                texture: Tx.Collectibles.Potion.Fairy,
+                flags: flags("is_foodlike"),
+                healthRestore: null,
+            },
             __Fallback__: {
                 name: "???",
                 description: "Consume to experience a bug",
@@ -535,6 +544,9 @@ export namespace DataPotion {
                     done = true;
                 });
                 return () => done;
+            case "Fairy":
+                target.status.conditions.fairy.count += 1;
+                return;
             default:
                 return;
         }
