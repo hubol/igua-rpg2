@@ -1,7 +1,8 @@
 import { blendColorDelta } from "../../lib/color/blend-color";
 import { Integer, PercentInt, RgbInt } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
-import { Rpg } from "./rpg";
+import { Force } from "../../lib/types/force";
+import { PropertiesLike } from "../../lib/types/properties-like";
 import { RpgAttack } from "./rpg-attack";
 import { RpgCutscene } from "./rpg-cutscene";
 import { RpgFaction } from "./rpg-faction";
@@ -37,6 +38,9 @@ export namespace RpgStatus {
         invulnerableMax: number;
         pride: number;
         conditions: {
+            fairy: {
+                count: Integer;
+            };
             helium: {
                 ballonDrainFactor: PercentInt;
                 ballons: Ballon[];
@@ -92,7 +96,7 @@ export namespace RpgStatus {
         };
     }
 
-    export type ConditionId = keyof Model["conditions"];
+    export type ConditionId = keyof PropertiesLike<Model["conditions"], { value: Integer; max: Integer }>;
 
     export interface Ballon {
         health: Integer;
@@ -357,6 +361,8 @@ export namespace RpgStatus {
 
             const damageFactor = attacker?.damageFactor ?? 100;
 
+            const takeDamageContext = TakeDamageContext.get(target);
+
             const tookEmotionalDamage = takeDamage(
                 attack.emotional,
                 damageFactor,
@@ -365,7 +371,7 @@ export namespace RpgStatus {
                 0,
                 0,
                 factionDefense,
-                target,
+                takeDamageContext,
             );
 
             const tookPhysicalDamage = takeDamage(
@@ -375,7 +381,7 @@ export namespace RpgStatus {
                 sumDefense(target.defenses.physical, targetBodyPart.defenses.physical, 0),
                 sumDefense(target.guardingDefenses.physical, targetBodyPart.defenses.physical, 0),
                 factionDefense,
-                target,
+                takeDamageContext,
             );
 
             // TODO copy-paste feels bad
@@ -386,16 +392,21 @@ export namespace RpgStatus {
                 sumDefense(target.defenses.overheat, targetBodyPart.defenses.overheat, 0),
                 sumDefense(target.guardingDefenses.overheat, targetBodyPart.defenses.overheat, 0),
                 factionDefense,
-                target,
+                takeDamageContext,
             );
 
-            const damaged = tookEmotionalDamage > 0 || tookPhysicalDamage > 0 || tookOverheatDamage > 0;
+            const totalDamageTaken = tookEmotionalDamage + tookPhysicalDamage + tookOverheatDamage;
+
+            if (takeDamageContext.protectedByFairy) {
+                // TODO should this have an "effect"?
+                target.conditions.fairy.count = Math.max(0, target.conditions.fairy.count - 1);
+            }
+
+            const damaged = totalDamageTaken > 0;
             target.invulnerable = target.invulnerableMax;
 
-            const netHealing = -tookEmotionalDamage - tookPhysicalDamage - tookOverheatDamage;
-
-            if (netHealing >= 1) {
-                targetEffects.healed(target.health, netHealing);
+            if (totalDamageTaken <= -1) {
+                targetEffects.healed(target.health, -totalDamageTaken);
             }
             else {
                 targetEffects.tookDamage(
@@ -448,10 +459,11 @@ export namespace RpgStatus {
         defense: PercentInt,
         guardingDefense: PercentInt,
         factionDefense: PercentInt,
-        target: Model,
+        context: TakeDamageContext,
     ) {
+        const target = context.target;
+
         const amount = Math.round(rawAmount * (amountFactor / 100));
-        const previous = target.health;
         const totalDefense: PercentInt = sumDefense(
             defense,
             target.state.isGuarding ? guardingDefense : 0,
@@ -470,12 +482,37 @@ export namespace RpgStatus {
 
         const minimumHealthAfterDamage = Math.min(canBeFatal ? 0 : 1, target.health);
 
-        target.health = Math.min(
+        const next = Math.min(
             target.healthMax,
             Math.max(minimumHealthAfterDamage, target.health - damage),
         );
-        const diff = previous - target.health;
+        let damageTaken = target.health - next;
 
-        return diff;
+        if (damageTaken > 0) {
+            if (target.conditions.fairy.count >= 1) {
+                context.protectedByFairy = true;
+                damageTaken = 0;
+            }
+            else {
+                target.health = next;
+            }
+        }
+
+        return damageTaken;
+    }
+
+    interface TakeDamageContext {
+        target: Model;
+        protectedByFairy: boolean;
+    }
+
+    namespace TakeDamageContext {
+        const context: TakeDamageContext = { target: Force<Model>(), protectedByFairy: false };
+
+        export function get(target: Model) {
+            context.target = target;
+            context.protectedByFairy = false;
+            return context;
+        }
     }
 }

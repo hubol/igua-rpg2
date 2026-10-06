@@ -52,6 +52,14 @@ export class RpgPlayerStatus implements RpgStatus.Model {
         const state = this._state;
 
         return ({
+            fairy: {
+                get count() {
+                    return state.conditions.fairy.count;
+                },
+                set count(value) {
+                    state.conditions.fairy.count = value;
+                },
+            },
             helium: {
                 get ballonDrainFactor() {
                     return 100 - buffs.getAggregatedBuffs().conditions.ballonDrainReductionFactor;
@@ -192,6 +200,9 @@ export class RpgPlayerStatus implements RpgStatus.Model {
     static createState(): RpgPlayerStatus.State {
         return {
             conditions: {
+                fairy: {
+                    count: 0,
+                },
                 helium: {
                     ballons: [],
                     value: 0,
@@ -219,6 +230,9 @@ export namespace RpgPlayerStatus {
         health: Integer;
         invulnerable: Integer;
         conditions: {
+            fairy: {
+                count: Integer;
+            };
             helium: {
                 ballons: RpgStatus.Ballon[];
                 value: Integer;

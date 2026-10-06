@@ -1,6 +1,7 @@
 import { Container, DisplayObject } from "pixi.js";
 import { approachLinear } from "../../lib/math/number";
 import { VectorSimple } from "../../lib/math/vector-type";
+import { objRpgStatusFirefly } from "../objects/obj-rpg-status-firefly";
 import { StepOrder } from "../objects/step-order";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgStatus } from "../rpg/rpg-status";
@@ -61,7 +62,23 @@ export function mxnRpgStatus(obj: Container, rawArgs: MxnRpgStatusArgs) {
                 getTargetDripsPerFrame(args.status.conditions.wetness.value),
                 0.025,
             );
-        }, StepOrder.RpgStatusTick);
+        }, StepOrder.RpgStatusTick)
+        .coro(function* () {
+            const fairyObjs = new Array<objRpgStatusFirefly.Type>();
+            while (true) {
+                // TODO SFX
+                while (fairyObjs.length > args.status.conditions.fairy.count) {
+                    fairyObjs.shift()!.objRpgStatusFirefly.isFleeing = true;
+                }
+                while (fairyObjs.length < args.status.conditions.fairy.count) {
+                    fairyObjs.push(objRpgStatusFirefly(obj, fairyObjs.length).show());
+                }
+                for (let i = 0; i < fairyObjs.length; i++) {
+                    fairyObjs[i].objRpgStatusFirefly.index = i;
+                }
+                yield () => fairyObjs.length !== Math.floor(args.status.conditions.fairy.count);
+            }
+        });
 
     return rpgStatusObj;
 }

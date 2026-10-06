@@ -289,7 +289,8 @@ export function objIguanaPuppet(looks: IguanaLooks.Serializable) {
 
     c.cullable = true;
 
-    return c;
+    return c
+        .identify(objIguanaPuppet);
 }
 
 type Feet = IguanaLooks.Serializable["feet"];

@@ -28,6 +28,9 @@ export namespace RpgEnemyRank {
                 faction: status?.faction ?? RpgFaction.Enemy,
                 pride: status?.pride ?? 0,
                 conditions: {
+                    fairy: {
+                        count: status?.conditions?.fairy?.count ?? 0,
+                    },
                     helium: {
                         ballonDrainFactor: status?.conditions?.helium?.ballonDrainFactor ?? 100,
                         value: status?.conditions?.helium?.value ?? 0,
