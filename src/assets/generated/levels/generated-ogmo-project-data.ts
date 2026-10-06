@@ -65,6 +65,7 @@ export namespace OgmoEntities {
       | "objCharacterBoxer"
       | "objCharacterDoctorSprite"
       | "objCharacterEmoBallista"
+      | "objCharacterFirefly"
       | "objCharacterFlopQuizMaster"
       | "objCharacterFlower"
       | "objCharacterForestSpirit"
