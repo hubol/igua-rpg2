@@ -1,6 +1,6 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../assets/textures";
-import { Integer } from "../../lib/math/number-alias-types";
+import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { Input, layers } from "../globals";
@@ -9,10 +9,71 @@ import { RpgFlops } from "../rpg/rpg-flops";
 
 // TODO implement
 function* askFlop(flopAvailabilities: ReadonlyArray<boolean>) {
-    const flopGridObj = objFlopGrid(flopAvailabilities).show(layers.overlay.messages);
+    const flopGridObj = objFlopWheel(flopAvailabilities, { radius: 100 })
+        .at(100, 100)
+        .show(layers.overlay.messages);
     yield () => !Input.isDown("Confirm");
     yield () => Input.isDown("Confirm");
     flopGridObj.destroy();
+}
+
+function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlopWheel.Config) {
+    const api = {};
+
+    const availableFlopIds = flopAvailabilities
+        .flatMap((isAvailable, id) => isAvailable ? [id] : []);
+
+    const drawData = new Array<drawWheelSlice.Data>();
+
+    const slicesCount = availableFlopIds.length;
+    const pointsCount = Math.max(2, 180 / slicesCount);
+
+    for (let i = 0; i < slicesCount; i++) {
+        const id = availableFlopIds[i];
+        const points: drawWheelSlice.Data["points"] = [];
+
+        for (let j = 0; j <= pointsCount; j++) {
+            const f = Math.PI * 2 * (i + (j / pointsCount)) / slicesCount;
+            points.push([Math.sin(f) * config.radius, Math.cos(f) * config.radius]);
+        }
+
+        drawData.push({
+            color: objFigureFlop.primaryTints[id],
+            points,
+            rotation: Math.PI * 2 * (i + 0.5) / slicesCount,
+        });
+    }
+
+    const wheelObj = new Graphics();
+
+    for (const data of drawData) {
+        wheelObj.beginFill(data.color);
+        drawWheelSlice(wheelObj, data);
+    }
+
+    return wheelObj;
+}
+
+namespace objFlopWheel {
+    export interface Config {
+        radius: Integer;
+    }
+}
+
+function drawWheelSlice(gfx: Graphics, data: drawWheelSlice.Data) {
+    gfx.moveTo(0, 0);
+    for (const [x, y] of data.points) {
+        gfx.lineTo(x, y);
+    }
+    gfx.lineTo(0, 0);
+}
+
+namespace drawWheelSlice {
+    export interface Data {
+        color: RgbInt;
+        points: Array<[x: Integer, y: Integer]>;
+        rotation: number;
+    }
 }
 
 function objFlopGrid(flopAvailabilities: ReadonlyArray<boolean>) {
