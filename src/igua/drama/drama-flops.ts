@@ -2,21 +2,23 @@ import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../assets/textures";
 import { factor, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
-import { cyclic } from "../../lib/math/number";
+import { approachLinear, cyclic } from "../../lib/math/number";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { distance } from "../../lib/math/vector";
-import { Vector, VectorSimple, vnew } from "../../lib/math/vector-type";
+import { Vector, vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { Null } from "../../lib/types/null";
 import { Input, layers } from "../globals";
 import { mxnActionRepeater } from "../mixins/mxn-action-repeater";
+import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { objFigureFlop } from "../objects/figures/obj-figure-flop";
 import { RpgFlops } from "../rpg/rpg-flops";
 
 // TODO implement
 function* askFlop(flopAvailabilities: ReadonlyArray<boolean>) {
     const flopGridObj = objFlopWheel(flopAvailabilities, { radius: 100 })
-        .at(100, 100)
+        .at(180, 130)
+        .mixin(mxnHudModifiers.mxnHideStatus)
         .show(layers.overlay.messages);
     yield () => !Input.isDown("Confirm");
     yield () => Input.isDown("Confirm");
@@ -60,7 +62,9 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
     }
 
     const wheelObj = new Graphics();
-    const highlightObj = new Graphics();
+    const shadowObj = new Graphics();
+    const highlightObj = new Graphics()
+        .step(self => self.pivot.y = approachLinear(self.pivot.y, 8, 1));
     const arrowObj = Sprite.from(Tx.Ui.Dialog.WhichFlopArrow)
         .merge({ objArrow: { targetPosition: Null<Vector>() } })
         .step(self => {
@@ -85,8 +89,9 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
 
     return container(
         wheelObj,
-        highlightObj,
+        shadowObj,
         arrowObj,
+        highlightObj,
     )
         .mixin(mxnActionRepeater, ["SelectLeft", "SelectRight"])
         .step(self => {
@@ -109,6 +114,11 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
             while (true) {
                 highlightObj.clear();
                 highlightObj.lineStyle(1, 0xffffff, 1, 1);
+
+                shadowObj.clear();
+                shadowObj.lineStyle(1, 0x000000, 1, 1);
+                shadowObj.beginFill(0x000000);
+
                 const data = drawData[state.selectedIndex];
                 if (data) {
                     const position = vnew(Math.sin(data.rotation), -Math.cos(data.rotation)).scale(config.radius + 1);
@@ -121,7 +131,9 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
                     }
                     arrowObj.rotation = Math.round((data.rotation - Math.PI / 2) / (Math.PI / 6)) * Math.PI / 6;
                     highlightObj.beginFill(data.color);
+                    highlightObj.pivot.y = 0;
                     drawWheelSlice(highlightObj, data);
+                    drawWheelSlice(shadowObj, data);
                 }
                 yield onPrimitiveMutate(() => state.selectedIndex);
             }
