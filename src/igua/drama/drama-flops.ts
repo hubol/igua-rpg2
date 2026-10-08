@@ -64,7 +64,10 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
     const wheelObj = new Graphics();
     const shadowObj = new Graphics();
     const highlightObj = new Graphics()
-        .step(self => self.pivot.y = approachLinear(self.pivot.y, 8, 1));
+        .step(self => {
+            self.pivot.y = approachLinear(self.pivot.y, 8, 1);
+            flopContainerObj.pivot.y = self.pivot.y;
+        });
     const arrowObj = Sprite.from(Tx.Ui.Dialog.WhichFlopArrow)
         .merge({ objArrow: { targetPosition: Null<Vector>() } })
         .step(self => {
@@ -87,11 +90,14 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
         drawWheelSlice(wheelObj, data);
     }
 
+    const flopContainerObj = container();
+
     return container(
         wheelObj,
         shadowObj,
         arrowObj,
         highlightObj,
+        flopContainerObj,
     )
         .mixin(mxnActionRepeater, ["SelectLeft", "SelectRight"])
         .step(self => {
@@ -119,6 +125,8 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
                 shadowObj.lineStyle(1, 0x000000, 1, 1);
                 shadowObj.beginFill(0x000000);
 
+                flopContainerObj.removeAllChildren();
+
                 const data = drawData[state.selectedIndex];
                 if (data) {
                     const position = vnew(Math.sin(data.rotation), -Math.cos(data.rotation)).scale(config.radius + 1);
@@ -134,6 +142,9 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
                     highlightObj.pivot.y = 0;
                     drawWheelSlice(highlightObj, data);
                     drawWheelSlice(shadowObj, data);
+
+                    flopContainerObj.position.at(position).scale(0.5).add(0, -16);
+                    objFigureFlop.objFiltered(api.selectedFlopId).show(flopContainerObj);
                 }
                 yield onPrimitiveMutate(() => state.selectedIndex);
             }
