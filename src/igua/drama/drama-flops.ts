@@ -55,6 +55,7 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
             color: objFigureFlop.primaryTints[id],
             points,
             rotation: Math.PI * 2 * (i + 0.5) / slicesCount,
+            isCircle: slicesCount === 1,
         });
     }
 
@@ -134,11 +135,24 @@ namespace objFlopWheel {
 }
 
 function drawWheelSlice(gfx: Graphics, data: drawWheelSlice.Data) {
-    gfx.moveTo(0, 0);
-    for (const [x, y] of data.points) {
-        gfx.lineTo(x, y);
+    let moved = false;
+    if (!data.isCircle) {
+        gfx.moveTo(0, 0);
+        moved = true;
     }
-    gfx.lineTo(0, 0);
+
+    for (const [x, y] of data.points) {
+        if (!moved) {
+            gfx.moveTo(x, y);
+            moved = true;
+        }
+        else {
+            gfx.lineTo(x, y);
+        }
+    }
+
+    const [x, y] = data.isCircle ? data.points[0] : [0, 0];
+    gfx.lineTo(x, y);
 }
 
 namespace drawWheelSlice {
@@ -146,6 +160,7 @@ namespace drawWheelSlice {
         color: RgbInt;
         points: Array<[x: Integer, y: Integer]>;
         rotation: number;
+        isCircle: boolean;
     }
 }
 
