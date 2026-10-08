@@ -41,6 +41,7 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
 
     const drawData = new Array<drawWheelSlice.Data>();
 
+    // TODO looks bad when 28? lol
     const slicesCount = availableFlopIds.length;
     const pointsCount = Math.max(2, 180 / slicesCount);
 
@@ -67,7 +68,7 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
         .step(self => {
             self.pivot.y = approachLinear(self.pivot.y, 8, 1);
             flopContainerObj.pivot.y = self.pivot.y;
-        });
+        }, 1);
     const arrowObj = Sprite.from(Tx.Ui.Dialog.WhichFlopArrow)
         .merge({ objArrow: { targetPosition: Null<Vector>() } })
         .step(self => {
