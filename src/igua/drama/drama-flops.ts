@@ -1,9 +1,15 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../assets/textures";
+import { factor, interpvr } from "../../lib/game-engine/routines/interp";
+import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
+import { cyclic } from "../../lib/math/number";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
-import { vnew } from "../../lib/math/vector-type";
+import { distance } from "../../lib/math/vector";
+import { Vector, VectorSimple, vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
+import { Null } from "../../lib/types/null";
 import { Input, layers } from "../globals";
+import { mxnActionRepeater } from "../mixins/mxn-action-repeater";
 import { objFigureFlop } from "../objects/figures/obj-figure-flop";
 import { RpgFlops } from "../rpg/rpg-flops";
 
@@ -18,7 +24,15 @@ function* askFlop(flopAvailabilities: ReadonlyArray<boolean>) {
 }
 
 function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlopWheel.Config) {
-    const api = {};
+    const api = {
+        get selectedFlopId() {
+            return availableFlopIds[state.selectedIndex];
+        },
+    };
+
+    const state = {
+        selectedIndex: 0,
+    };
 
     const availableFlopIds = flopAvailabilities
         .flatMap((isAvailable, id) => isAvailable ? [id] : []);
@@ -34,7 +48,7 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
 
         for (let j = 0; j <= pointsCount; j++) {
             const f = Math.PI * 2 * (i + (j / pointsCount)) / slicesCount;
-            points.push([Math.sin(f) * config.radius, Math.cos(f) * config.radius]);
+            points.push([Math.sin(f) * config.radius, -Math.cos(f) * config.radius]);
         }
 
         drawData.push({
@@ -45,13 +59,72 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
     }
 
     const wheelObj = new Graphics();
+    const highlightObj = new Graphics();
+    const arrowObj = Sprite.from(Tx.Ui.Dialog.WhichFlopArrow)
+        .merge({ objArrow: { targetPosition: Null<Vector>() } })
+        .step(self => {
+            if (self.objArrow.targetPosition) {
+                const d = distance(self.objArrow.targetPosition, self);
+                self.moveTowards(self.objArrow.targetPosition, 1 + d / 8);
+            }
+        })
+        .coro(function* (self) {
+            while (true) {
+                self.pivot.at(0, 0);
+                yield interpvr(self.pivot).factor(factor.sine).to(-7, 0).over(400);
+            }
+        })
+        .anchored(0, 0.5);
 
     for (const data of drawData) {
+        wheelObj.lineStyle(1, data.color, 1, 0.5);
         wheelObj.beginFill(data.color);
         drawWheelSlice(wheelObj, data);
     }
 
-    return wheelObj;
+    return container(
+        wheelObj,
+        highlightObj,
+        arrowObj,
+    )
+        .mixin(mxnActionRepeater, ["SelectLeft", "SelectRight"])
+        .step(self => {
+            const previousSelectedIndex = state.selectedIndex;
+
+            if (self.mxnActionRepeater.justWentDown("SelectLeft")) {
+                state.selectedIndex -= 1;
+            }
+            if (self.mxnActionRepeater.justWentDown("SelectRight")) {
+                state.selectedIndex += 1;
+            }
+
+            if (state.selectedIndex === previousSelectedIndex) {
+                return;
+            }
+
+            state.selectedIndex = cyclic(state.selectedIndex, 0, availableFlopIds.length);
+        })
+        .coro(function* () {
+            while (true) {
+                highlightObj.clear();
+                highlightObj.lineStyle(1, 0xffffff, 1, 1);
+                const data = drawData[state.selectedIndex];
+                if (data) {
+                    const position = vnew(Math.sin(data.rotation), -Math.cos(data.rotation)).scale(config.radius + 1);
+                    if (arrowObj.objArrow.targetPosition) {
+                        arrowObj.objArrow.targetPosition.at(position);
+                    }
+                    else {
+                        arrowObj.at(position);
+                        arrowObj.objArrow.targetPosition = position;
+                    }
+                    arrowObj.rotation = Math.round((data.rotation - Math.PI / 2) / (Math.PI / 6)) * Math.PI / 6;
+                    highlightObj.beginFill(data.color);
+                    drawWheelSlice(highlightObj, data);
+                }
+                yield onPrimitiveMutate(() => state.selectedIndex);
+            }
+        });
 }
 
 namespace objFlopWheel {

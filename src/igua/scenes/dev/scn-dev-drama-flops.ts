@@ -12,7 +12,7 @@ export function scnDevDramaFlops() {
     objCharacterBoxer()
         .at(lvl.DummyMarker)
         .mixin(mxnCutscene, function* () {
-            yield* DramaFlops.askFlop(range(1000).map(() => Rng.float() > 0.8));
+            yield* DramaFlops.askFlop(range(1).map(() => true));
         })
         .show();
 }
