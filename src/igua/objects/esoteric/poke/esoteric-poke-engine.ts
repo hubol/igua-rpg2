@@ -80,6 +80,16 @@ export namespace EsotericPokeEngine {
         get isAlive() {
             return this.health > 0;
         }
+
+        tryReplenishMoves() {
+            if (this.moves.find(x => !x.isUsed)) {
+                return;
+            }
+
+            for (const move of this.moves) {
+                move.isUsed = false;
+            }
+        }
     }
 
     export namespace Animal {
@@ -136,6 +146,9 @@ export namespace EsotericPokeEngine {
 
         export function* coroExecute({ trainers, events }: coroExecute.Config): Coro.Type<{ winningTrainer: Trainer }> {
             while (true) {
+                for (const trainer of trainers) {
+                    trainer.animal.tryReplenishMoves();
+                }
                 yield* events.handle({ kind: "round_started" });
                 const plans = yield* Coro.all(
                     trainers.map((trainer, i) => trainer.coroGetPlan(trainers[(i + 1) % trainers.length].animal)),
