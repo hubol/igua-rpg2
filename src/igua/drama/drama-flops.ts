@@ -1,14 +1,16 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../assets/textures";
-import { factor, interpvr } from "../../lib/game-engine/routines/interp";
+import { Coro } from "../../lib/game-engine/routines/coro";
+import { factor, interpv, interpvr } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { approachLinear, cyclic } from "../../lib/math/number";
 import { Integer, RgbInt } from "../../lib/math/number-alias-types";
 import { distance } from "../../lib/math/vector";
 import { Vector, vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { Null } from "../../lib/types/null";
-import { Input, layers } from "../globals";
+import { Input, layers, scene } from "../globals";
 import { mxnActionRepeater } from "../mixins/mxn-action-repeater";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
@@ -20,7 +22,7 @@ function* askFlop(flopAvailabilities: ReadonlyArray<boolean>) {
     const askObj = container()
         .show(layers.overlay.messages);
 
-    objFlopSpeechBubble()
+    const bubbleObj = objFlopSpeechBubble()
         .at(262, 0)
         .pivoted(0, 108)
         .coro(function* (self) {
@@ -35,11 +37,16 @@ function* askFlop(flopAvailabilities: ReadonlyArray<boolean>) {
 
     yield () => !Input.isDown("Confirm");
     yield () => Input.isDown("Confirm");
+
+    flopWheelObj.objFlopWheel.isConfirmed = true;
+    yield interpvr(bubbleObj).translate(0, -120).over(500);
+    yield sleep(1000);
     askObj.destroy();
 }
 
 function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlopWheel.Config) {
     const api = {
+        isConfirmed: false,
         get selectedFlopId() {
             return availableFlopIds[state.selectedIndex];
         },
@@ -74,12 +81,23 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
         });
     }
 
-    const wheelObj = new Graphics();
-    const shadowObj = new Graphics();
+    const wheelObj = new Graphics()
+        .coro(function* (self) {
+            yield () => api.isConfirmed;
+            self.step(() => self.angle += 2);
+            yield interpv(self.scale).to(0, 0).over(500);
+        });
+    const shadowObj = new Graphics()
+        .step(self => self.visible = !api.isConfirmed);
+
     const highlightObj = new Graphics()
+        .step(self => self.visible = !api.isConfirmed)
         .step(self => {
+            if (!self.visible) {
+                return;
+            }
             self.pivot.y = approachLinear(self.pivot.y, 8, 1);
-            flopContainerObj.pivot.y = self.pivot.y;
+            flopContainerObj.pivot.at(self.pivot);
         }, 1);
     const arrowObj = Sprite.from(Tx.Ui.Dialog.WhichFlopArrow)
         .merge({ objArrow: { targetPosition: Null<Vector>() } })
@@ -95,6 +113,7 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
                 yield interpvr(self.pivot).factor(factor.sine).to(-7, 0).over(400);
             }
         })
+        .step(self => self.visible = !api.isConfirmed)
         .anchored(0, 0.5);
 
     for (const data of drawData) {
@@ -103,7 +122,15 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
         drawWheelSlice(wheelObj, data);
     }
 
-    const flopContainerObj = container();
+    const flopContainerObj = container()
+        .coro(function* (self) {
+            yield () => api.isConfirmed;
+            self.step(() => self.pivot.y = Math.sin(scene.ticker.ticks / 6) * 3);
+            yield* Coro.all([
+                interpvr(self).factor(factor.sine).to(0, 0).over(500),
+                interpv(self.scale).steps(2).to(2, 2).over(500),
+            ]);
+        });
 
     return container(
         wheelObj,
@@ -114,6 +141,10 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
     )
         .mixin(mxnActionRepeater, ["SelectLeft", "SelectRight"])
         .step(self => {
+            if (api.isConfirmed) {
+                return;
+            }
+
             const previousSelectedIndex = state.selectedIndex;
 
             if (self.mxnActionRepeater.justWentDown("SelectLeft")) {
@@ -152,7 +183,7 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
                     }
                     arrowObj.rotation = Math.round((data.rotation - Math.PI / 2) / (Math.PI / 6)) * Math.PI / 6;
                     highlightObj.beginFill(data.color);
-                    highlightObj.pivot.y = 0;
+                    highlightObj.pivoted(0, 0);
                     drawWheelSlice(highlightObj, data);
                     drawWheelSlice(shadowObj, data);
 
@@ -161,7 +192,8 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
                 }
                 yield onPrimitiveMutate(() => state.selectedIndex);
             }
-        });
+        })
+        .merge({ objFlopWheel: api });
 }
 
 namespace objFlopWheel {
