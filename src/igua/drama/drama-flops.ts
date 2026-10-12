@@ -19,7 +19,6 @@ import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { objFigureFlop } from "../objects/figures/obj-figure-flop";
 import { DramaLib } from "./drama-lib";
 
-// TODO implement
 function* askFlop(flopAvailabilities: ReadonlyArray<boolean>) {
     const askObj = container()
         .show(layers.overlay.messages);
@@ -51,6 +50,8 @@ function* askFlop(flopAvailabilities: ReadonlyArray<boolean>) {
     yield interpvr(bubbleObj).translate(0, -120).over(500);
     yield sleep(1000);
     askObj.destroy();
+
+    return flopWheelObj.objFlopWheel.selectedFlopId;
 }
 
 function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlopWheel.Config) {

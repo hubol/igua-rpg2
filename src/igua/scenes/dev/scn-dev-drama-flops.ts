@@ -6,13 +6,17 @@ import { range } from "../../../lib/range";
 import { DramaFlops } from "../../drama/drama-flops";
 import { mxnCutscene } from "../../mixins/mxn-cutscene";
 import { objCharacterBoxer } from "../../objects/characters/obj-character-boxer";
+import { objCollectibleFlop } from "../../objects/collectibles/obj-collectible-flop";
 
 export function scnDevDramaFlops() {
     const lvl = Lvl.Dummy();
     objCharacterBoxer()
         .at(lvl.DummyMarker)
         .mixin(mxnCutscene, function* () {
-            yield* DramaFlops.askFlop(range(1000).map(() => Rng.float() < 30 / 1000));
+            const flopId = yield* DramaFlops.askFlop(range(1000).map(() => Rng.float() < 30 / 1000));
+            objCollectibleFlop(flopId)
+                .at(lvl.DummyMarker)
+                .show();
         })
         .show();
 }
