@@ -10,19 +10,34 @@ import { container } from "../../lib/pixi/container";
 import { Null } from "../../lib/types/null";
 import { Input, layers } from "../globals";
 import { mxnActionRepeater } from "../mixins/mxn-action-repeater";
+import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
+import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { objFigureFlop } from "../objects/figures/obj-figure-flop";
 import { RpgFlops } from "../rpg/rpg-flops";
+import { DramaLib } from "./drama-lib";
 
 // TODO implement
 function* askFlop(flopAvailabilities: ReadonlyArray<boolean>) {
-    const flopGridObj = objFlopWheel(flopAvailabilities, { radius: 100 })
-        .at(180, 130)
-        .mixin(mxnHudModifiers.mxnHideStatus)
+    const askObj = container()
         .show(layers.overlay.messages);
+
+    objFlopSpeechBubble()
+        .at(262, 0)
+        .pivoted(0, 108)
+        .coro(function* (self) {
+            yield interpvr(self.pivot).factor(factor.sine).to(0, 0).over(400);
+        })
+        .show(askObj);
+
+    const flopWheelObj = objFlopWheel(flopAvailabilities, { radius: 100 })
+        .at(142, 130)
+        .mixin(mxnHudModifiers.mxnHideStatus)
+        .show(askObj);
+
     yield () => !Input.isDown("Confirm");
     yield () => Input.isDown("Confirm");
-    flopGridObj.destroy();
+    askObj.destroy();
 }
 
 function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlopWheel.Config) {
@@ -185,6 +200,26 @@ namespace drawWheelSlice {
         rotation: number;
         isCircle: boolean;
     }
+}
+
+const txsWhichFlopText = Tx.Ui.Dialog.WhichFlopText.split({ width: 130 });
+
+function objFlopSpeechBubble() {
+    const colors = DramaLib.Speaker.getColors();
+
+    return container(
+        Sprite.from(Tx.Ui.Dialog.WhichFlopSpeechBubble)
+            .tinted(colors.primary)
+            .at(0, -12),
+        container(
+            ...txsWhichFlopText.map(tx =>
+                Sprite.from(tx)
+                    .tinted(colors.textPrimary)
+                    .mixin(mxnSinePivot)
+            ),
+        )
+            .at(36, 5),
+    );
 }
 
 function objFlopGrid(flopAvailabilities: ReadonlyArray<boolean>) {
