@@ -41,7 +41,6 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
 
     const drawData = new Array<drawWheelSlice.Data>();
 
-    // TODO looks bad when 28? lol
     const slicesCount = availableFlopIds.length;
     const pointsCount = Math.max(2, 180 / slicesCount);
 
@@ -86,7 +85,7 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
         .anchored(0, 0.5);
 
     for (const data of drawData) {
-        wheelObj.lineStyle(1, data.color, 1, 0.5);
+        wheelObj.lineStyle(2, data.color, 1, 0.5);
         wheelObj.beginFill(data.color);
         drawWheelSlice(wheelObj, data);
     }
