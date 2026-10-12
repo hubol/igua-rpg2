@@ -1,4 +1,5 @@
 import { Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { blendColor } from "../../lib/color/blend-color";
 import { Coro } from "../../lib/game-engine/routines/coro";
@@ -36,11 +37,15 @@ function* askFlop(flopAvailabilities: ReadonlyArray<boolean>) {
         .mixin(mxnHudModifiers.mxnHideStatus)
         .show(askObj);
 
+    Sfx.Ui.Flops.AskWhichEnter.rate(0.99, 1.01).play();
+
     yield interpvr(flopWheelObj).factor(factor.sine).to(142, 130).over(500);
     flopWheelObj.objFlopWheel.isReady = true;
 
     yield () => !Input.isDown("Confirm");
     yield () => Input.isDown("Confirm");
+
+    Sfx.Ui.Flops.AskWhichExit.rate(0.99, 1.01).play();
 
     flopWheelObj.objFlopWheel.isConfirmed = true;
     yield interpvr(bubbleObj).translate(0, -120).over(500);
@@ -163,6 +168,7 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
                 return;
             }
 
+            Sfx.Ui.Flops.AskWhichSelect.rate(0.5, 1.3).play();
             state.selectedIndex = cyclic(state.selectedIndex, 0, availableFlopIds.length);
         })
         .coro(function* () {
