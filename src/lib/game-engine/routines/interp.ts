@@ -222,13 +222,19 @@ function vectorToFn<T>(
 
 const factorStepsCache = range(17).map(count => createFactorSteps(Math.max(1, count)));
 
+function factorSine(f: number) {
+    return Math.sin(f * Math.PI / 2);
+}
+
+factorSine.inverted = function factorSineInverted (f: number) {
+    return 1 - Math.sin((1 - f) * Math.PI / 2);
+};
+
 export const factor = {
     linear(f: number) {
         return f;
     },
-    sine(f: number) {
-        return Math.sin(f * Math.PI / 2);
-    },
+    sine: factorSine,
     steps(count: Integer) {
         return factorStepsCache[count] ?? createFactorSteps(count);
     },
