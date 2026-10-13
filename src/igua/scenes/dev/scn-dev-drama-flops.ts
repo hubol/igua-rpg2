@@ -10,12 +10,14 @@ import { container } from "../../../lib/pixi/container";
 import { txt } from "../../../lib/pixi/txt";
 import { range } from "../../../lib/range";
 import { DramaFlops } from "../../drama/drama-flops";
+import { objDramaNameTag } from "../../drama/objects/obj-drama-name-tag";
 import { ask, show } from "../../drama/show";
 import { mxnCutscene } from "../../mixins/mxn-cutscene";
 import { mxnHudModifiers } from "../../mixins/mxn-hud-modifiers";
 import { objCharacterBoxer } from "../../objects/characters/obj-character-boxer";
 import { EsotericPokeData } from "../../objects/esoteric/poke/esoteric-poke-data";
 import { EsotericPokeEngine } from "../../objects/esoteric/poke/esoteric-poke-engine";
+import { playerObj } from "../../objects/obj-player";
 import { Rpg } from "../../rpg/rpg";
 
 export function scnDevDramaFlops() {
@@ -45,7 +47,9 @@ export function scnDevDramaFlops() {
     //     }
     // }
 
-    objCharacterBoxer()
+    const boxerObj = objCharacterBoxer();
+
+    boxerObj
         .at(lvl.DummyMarker)
         .mixin(mxnCutscene, function* () {
             const playerBattleObj = lvl.PlayerPedestal;
@@ -89,8 +93,8 @@ export function scnDevDramaFlops() {
             }
 
             const battleOverlayObj = container(
-                objAnimalState(Rpg.character.attributes.names.current, playerTrainer.animal).at(20, 0),
-                objAnimalState("ENEMY", enemyTrainer.animal).at(400, 0),
+                objAnimalState(playerObj, playerTrainer.animal).at(20, 0),
+                objAnimalState(boxerObj, enemyTrainer.animal).at(400, 0),
                 Sprite.from(Tx.Esoteric.Poke.TypeGrid).at(175, 132),
             )
                 .mixin(mxnHudModifiers.mxnHideStatus)
@@ -154,22 +158,25 @@ function printMove(move: EsotericPokeData.Move, separator = " ") {
     return txt`${move.name} ${Sprite.from(typeIconTxs[move.type]).pivoted(0, 3)}${separator}(Sp${move.speed})`;
 }
 
-function objAnimalState(name: string, animal: EsotericPokeEngine.Animal) {
-    return objText.Medium()
-        .step(self =>
-            self.text = txt`${name}
-HP: ${animal.health} / ${animal.healthMax}
+function objAnimalState(speakerObj: DisplayObject, animal: EsotericPokeEngine.Animal) {
+    return container(
+        objText.Medium()
+            .step(self =>
+                self.text = txt`HP: ${animal.health} / ${animal.healthMax}
 STANCE: ${Sprite.from(typeIconTxs[animal.stanceType]).pivoted(0, 3)}
 MOVES:
 ${
-                txt.join(
-                    animal.moves
-                        .filter(move => !move.isUsed)
-                        .map(move => txt`- ${printMove(move.data)}\n`),
-                )
-            }
+                    txt.join(
+                        animal.moves
+                            .filter(move => !move.isUsed)
+                            .map(move => txt`- ${printMove(move.data)}\n`),
+                    )
+                }
 `
-        );
+            )
+            .at(0, 14),
+        objDramaNameTag(speakerObj),
+    );
 }
 
 const drama = {

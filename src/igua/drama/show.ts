@@ -23,12 +23,12 @@ import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { objUiPage } from "../ui/framework/obj-ui-page";
 import { DramaLib } from "./drama-lib";
+import { objDramaNameTag } from "./objects/obj-drama-name-tag";
 
 const [txSpeakBox, txSpeakBoxOutline, txSpeakBoxTail] = Tx.Ui.Dialog.SpeakBox.split({ count: 3 });
 
 function objSpeakerMessageBox(speaker: DisplayObject | null) {
     const colors = DramaLib.Speaker.getColors(speaker);
-    const name = DramaLib.Speaker.getName(speaker);
 
     const state = {
         beingDestroyed: false,
@@ -47,13 +47,9 @@ function objSpeakerMessageBox(speaker: DisplayObject | null) {
             yield sleepf(4);
             spr.texture = txSpeakBox;
             yield sleepf(4);
-            const nameTextObj = objText.MediumBoldIrregular(name, { tint: colors.textSecondary });
-            const nameObj = container(
-                new Graphics().beginFill(colors.secondary).drawRect(-4, -3, nameTextObj.width + 8, 13).mixin(
-                    mxnBoilPivot,
-                ),
-                nameTextObj,
-            ).at(37, 26).show(rootObj);
+            const nameObj = objDramaNameTag(speaker)
+                .at(37, 26)
+                .show(rootObj);
 
             yield sleepf(4);
             state.isReadyToReceiveText = true;
