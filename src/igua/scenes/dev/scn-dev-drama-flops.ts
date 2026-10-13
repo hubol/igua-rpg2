@@ -141,8 +141,17 @@ export function scnDevDramaFlops() {
             yield* show(`${printName(winningTrainer)} wins!`);
             battleOverlayObj.destroy();
 
-            const pedestalObj = winningTrainer === playerTrainer ? enemyBattleObj : playerBattleObj;
-            pedestalObj.objWeightedPedestal.destroy();
+            if (winningTrainer === playerTrainer) {
+                playerBattleObj.objWeightedPedestal.destroy();
+                enemyBattleObj.objWeightedPedestal.destroy();
+                yield sleep(1000);
+                yield* show("Victor and opponent have ascended to the ChristianHeaven.");
+            }
+            else {
+                playerBattleObj.objWeightedPedestal.destroy();
+                yield sleep(1000);
+                yield* show("Loser has been expelled.");
+            }
         })
         .show();
 }
