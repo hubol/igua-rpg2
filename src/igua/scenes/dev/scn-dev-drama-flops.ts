@@ -26,6 +26,11 @@ export function scnDevDramaFlops() {
         allSpecies.filter(species => species.moves.filter(move => move.speed <= 2).length === 4).length,
     );
 
+    console.log(
+        "3 swords or more",
+        allSpecies.filter(species => species.moves.filter(move => move.type === "sword").length >= 2),
+    );
+
     // for (let i = 0; i <= 998; i++) {
     //     const species = EsotericPokeData.Species.createFromFlopId(i);
     //     if (species.moves.filter(move => move.speed >= 3).length === 4) {

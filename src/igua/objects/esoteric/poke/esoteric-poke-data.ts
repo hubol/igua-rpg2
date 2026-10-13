@@ -74,6 +74,8 @@ export namespace EsotericPokeData {
     }
 
     export namespace Species {
+        const nerfedTypeManifest: Move.Type[] = ["laugh", "soul"];
+
         export function createFromFlopId(id: RpgFlops.Id): Species {
             prng.seed = id;
             prng.bool();
@@ -87,7 +89,12 @@ export namespace EsotericPokeData {
                     const min = Math.max(1, Math.floor(f * 0.45 * availableSpeedPoints));
                     const max = Math.min(4, Math.ceil(f * availableSpeedPoints));
                     const speed = prng.intc(min, max) as Move.Speed;
-                    return Move.find(prng.item(Move.Type.manifest), speed);
+
+                    const typeManifest = prng.float(100) >= Math.pow(health, 2.15)
+                        ? Move.Type.manifest
+                        : nerfedTypeManifest;
+
+                    return Move.find(prng.item(typeManifest), speed);
                 });
 
             return {
