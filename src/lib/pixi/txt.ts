@@ -10,10 +10,10 @@ export function txt(strings: TemplateStringsArray | string[], ...values: txt.Tem
         const value = values[i];
         if (values[i]) {
             if (typeof value === "number") {
-                data.push(String(value));
+                data.push(...String(value));
             }
             else if (typeof value === "string") {
-                data.push(txt.sanitizeNewLine(value));
+                data.push(...txt.sanitizeNewLine(value));
             }
             else {
                 data.push(value);
