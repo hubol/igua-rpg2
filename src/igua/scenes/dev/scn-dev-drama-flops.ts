@@ -1,7 +1,10 @@
-import { Sprite, Texture } from "pixi.js";
+import { DisplayObject, Sprite, Texture } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Lvl } from "../../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../../assets/textures";
+import { Coro } from "../../../lib/game-engine/routines/coro";
+import { factor, interpvr } from "../../../lib/game-engine/routines/interp";
+import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
 import { txt } from "../../../lib/pixi/txt";
@@ -45,8 +48,11 @@ export function scnDevDramaFlops() {
     objCharacterBoxer()
         .at(lvl.DummyMarker)
         .mixin(mxnCutscene, function* () {
-            const playerFlopId = lvl.PlayerPedestal.rpgWeightedPedestal.list[0];
-            const enemyFlopId = lvl.EnemyPedestal.rpgWeightedPedestal.list[0];
+            const playerBattleObj = lvl.PlayerPedestal;
+            const enemyBattleObj = lvl.EnemyPedestal;
+
+            const playerFlopId = playerBattleObj.rpgWeightedPedestal.list[0];
+            const enemyFlopId = enemyBattleObj.rpgWeightedPedestal.list[0];
 
             if (!playerFlopId || !enemyFlopId) {
                 yield* show("Please place a flop on both pedestals so that we can battle!!");
@@ -100,12 +106,20 @@ export function scnDevDramaFlops() {
                             yield* show("The flops ready themselfzs.");
                             return;
                         case "moves_failed":
+                            yield* Coro.all([playerBattleObj, enemyBattleObj].map(drama.hop));
                             yield* show("The attacks miss!");
                             return;
                         case "round_ended":
                             return;
                         case "move_start":
                             yield* show(`${printName(event.actingAnimal)} attacks with ${event.move.name}!`);
+                            const actingObj = event.actingAnimal === playerTrainer.animal
+                                ? playerBattleObj
+                                : enemyBattleObj;
+                            yield* drama.attack(
+                                actingObj,
+                                actingObj === playerBattleObj ? enemyBattleObj : playerBattleObj,
+                            );
                             return;
                         case "move_outcome":
                             yield* show(`${printName(event.targetAnimal)} takes ${event.damage} damage!`);
@@ -122,7 +136,7 @@ export function scnDevDramaFlops() {
             yield* show(`${printName(winningTrainer)} wins!`);
             battleOverlayObj.destroy();
 
-            const pedestalObj = winningTrainer === playerTrainer ? lvl.EnemyPedestal : lvl.PlayerPedestal;
+            const pedestalObj = winningTrainer === playerTrainer ? enemyBattleObj : playerBattleObj;
             pedestalObj.objWeightedPedestal.destroy();
         })
         .show();
@@ -157,3 +171,21 @@ ${
 `
         );
 }
+
+const drama = {
+    *hop(obj: DisplayObject) {
+        // TODO sfx
+        yield interpvr(obj).factor(factor.sine).translate(0, -20).over(333);
+        yield interpvr(obj).factor(factor.sine.inverted).translate(0, 20).over(200);
+    },
+    *attack(attackerObj: DisplayObject, targetObj: DisplayObject) {
+        // TODO sfx
+        const dx = Math.sign(targetObj.x - attackerObj.x);
+        yield interpvr(attackerObj).factor(factor.sine).translate(dx * 50, 0).over(333);
+        for (let i = 0; i < 4; i++) {
+            targetObj.visible = !targetObj.visible;
+            yield sleep(100);
+        }
+        yield interpvr(attackerObj).factor(factor.sine).translate(dx * -50, 0).over(333);
+    },
+};
