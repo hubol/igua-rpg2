@@ -1,9 +1,10 @@
-import { Sprite } from "pixi.js";
+import { Sprite, Texture } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Lvl } from "../../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../../assets/textures";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
+import { txt } from "../../../lib/pixi/txt";
 import { range } from "../../../lib/range";
 import { DramaFlops } from "../../drama/drama-flops";
 import { ask, show } from "../../drama/show";
@@ -12,6 +13,7 @@ import { mxnHudModifiers } from "../../mixins/mxn-hud-modifiers";
 import { objCharacterBoxer } from "../../objects/characters/obj-character-boxer";
 import { EsotericPokeData } from "../../objects/esoteric/poke/esoteric-poke-data";
 import { EsotericPokeEngine } from "../../objects/esoteric/poke/esoteric-poke-engine";
+import { Rpg } from "../../rpg/rpg";
 
 export function scnDevDramaFlops() {
     const lvl = Lvl.OhioHallPoke();
@@ -75,13 +77,13 @@ export function scnDevDramaFlops() {
 
             function printName(entity: EsotericPokeEngine.Animal | EsotericPokeEngine.Trainer) {
                 if (entity instanceof EsotericPokeEngine.Trainer) {
-                    return entity === playerTrainer ? "PLAYER" : "ENEMY";
+                    return entity === playerTrainer ? Rpg.character.attributes.names.current : "ENEMY";
                 }
-                return entity === playerTrainer.animal ? "PLAYER" : "ENEMY";
+                return entity === playerTrainer.animal ? `${Rpg.character.attributes.names.current}'s Flop` : "ENEMY";
             }
 
             const battleOverlayObj = container(
-                objAnimalState("PLAYER", playerTrainer.animal).at(20, 0),
+                objAnimalState(Rpg.character.attributes.names.current, playerTrainer.animal).at(20, 0),
                 objAnimalState("ENEMY", enemyTrainer.animal).at(400, 0),
                 Sprite.from(Tx.Esoteric.Poke.TypeGrid).at(175, 132),
             )
@@ -126,22 +128,31 @@ export function scnDevDramaFlops() {
         .show();
 }
 
+const txsType = Tx.Esoteric.Poke.Types.split({ count: 3 });
+
+const typeIconTxs: Record<EsotericPokeData.Move.Type, Texture> = {
+    laugh: txsType[1],
+    sword: txsType[0],
+    soul: txsType[2],
+};
+
 function printMove(move: EsotericPokeData.Move, separator = " ") {
-    return `${move.name}${separator}(${move.type} ${move.speed})`;
+    return txt`${move.name} ${Sprite.from(typeIconTxs[move.type]).pivoted(0, 3)}${separator}(Sp${move.speed})`;
 }
 
 function objAnimalState(name: string, animal: EsotericPokeEngine.Animal) {
     return objText.Medium()
         .step(self =>
-            self.text = `${name}
+            self.text = txt`${name}
 HP: ${animal.health} / ${animal.healthMax}
-STANCE: ${animal.stanceType}
+STANCE: ${Sprite.from(typeIconTxs[animal.stanceType]).pivoted(0, 3)}
 MOVES:
 ${
-                animal.moves
-                    .filter(move => !move.isUsed)
-                    .map(move => `- ${printMove(move.data)}`)
-                    .join("\n")
+                txt.join(
+                    animal.moves
+                        .filter(move => !move.isUsed)
+                        .map(move => txt`- ${printMove(move.data)}\n`),
+                )
             }
 `
         );

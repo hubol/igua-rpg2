@@ -8,12 +8,17 @@ export function txt(strings: TemplateStringsArray | string[], ...values: txt.Tem
     for (let i = 0; i < sanitizedStrings.length; i++) {
         data.push(...sanitizedStrings[i]);
         const value = values[i];
-        if (values[i]) {
+        if (values[i] !== undefined) {
             if (typeof value === "number") {
                 data.push(...String(value));
             }
             else if (typeof value === "string") {
                 data.push(...txt.sanitizeNewLine(value));
+            }
+            else if (value instanceof Txt) {
+                for (let i = 0; i < value.length; i++) {
+                    data.push(value.charAt(i));
+                }
             }
             else {
                 data.push(value);
@@ -49,6 +54,13 @@ class Txt implements txt.Type {
 
 txt.sanitizeNewLine = function sanitizeNewLine (text: string) {
     return text.replace(/(?:\r\n|\r)/g, "\n");
+};
+
+txt.join = function join (values: txt.Data[]) {
+    return txt(
+        values.map(() => ""),
+        ...values,
+    );
 };
 
 export namespace txt {
