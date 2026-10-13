@@ -50,7 +50,44 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 248,
+          "y": 108,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "light/beam 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "CenterLightBeam"}
+        },
+        {
+          "x": 400,
+          "y": 108,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "light/beam 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "RightLightBeam"}
+        },
+        {
+          "x": 96,
+          "y": 108,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "light/beam 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "LeftLightBeam"}
+        }
+      ],
       "folder": "../textures"
     },
     {

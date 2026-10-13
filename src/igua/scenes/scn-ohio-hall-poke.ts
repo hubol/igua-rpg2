@@ -2,7 +2,7 @@ import { DisplayObject, Sprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
-import { factor, interpvr } from "../../lib/game-engine/routines/interp";
+import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
@@ -22,6 +22,23 @@ export function scnOhioHallPoke() {
 
     const playerBattleObj = lvl.PlayerPedestal;
     const enemyBattleObj = lvl.EnemyPedestal;
+
+    const state = {
+        isBattling: false,
+    };
+
+    lvl.LeftLightBeam
+        .mixin(mxnLightPredicate, () => state.isBattling);
+    lvl.RightLightBeam
+        .mixin(mxnLightPredicate, () => state.isBattling);
+    lvl.CenterLightBeam
+        .mixin(
+            mxnLightPredicate,
+            () =>
+                !state.isBattling
+                && playerBattleObj.rpgWeightedPedestal.isSufficientlyWeighted
+                && enemyBattleObj.rpgWeightedPedestal.isSufficientlyWeighted,
+        );
 
     const announcerObj = objCharacterBoxer();
 
@@ -53,6 +70,8 @@ export function scnOhioHallPoke() {
                 yield* show("Please place a flop on both pedestals so that we can battle!!");
                 return;
             }
+
+            state.isBattling = true;
 
             const playerTrainer = new EsotericPokeEngine.Trainer(
                 {
@@ -142,6 +161,8 @@ export function scnOhioHallPoke() {
                 yield sleep(1000);
                 yield* show("Loser has been expelled.");
             }
+
+            state.isBattling = false;
         })
         .show();
 }
@@ -171,3 +192,16 @@ const drama = {
         yield interpvr(attackerObj).factor(factor.sine).translate(dx * -50, 0).over(333);
     },
 };
+
+function mxnLightPredicate(obj: DisplayObject, predicate: () => boolean) {
+    obj.alpha = 0;
+    return obj
+        .coro(function* (self) {
+            while (true) {
+                yield predicate;
+                yield interp(self, "alpha").steps(3).to(0.33).over(750);
+                yield () => !predicate();
+                yield interp(self, "alpha").steps(3).to(0).over(500);
+            }
+        });
+}
