@@ -74,7 +74,7 @@ export namespace EsotericPokeData {
     }
 
     export namespace Species {
-        const nerfedTypeManifest: Move.Type[] = ["laugh", "soul"];
+        const nerfedTypeManifest: Move.Type[] = ["laugh", "laugh", "soul", "soul", "soul"];
 
         export function createFromFlopId(id: RpgFlops.Id): Species {
             prng.seed = id;
