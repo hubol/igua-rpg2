@@ -20,14 +20,32 @@ import { Rpg } from "../rpg/rpg";
 export function scnOhioHallPoke() {
     const lvl = Lvl.OhioHallPoke();
 
+    const playerBattleObj = lvl.PlayerPedestal;
+    const enemyBattleObj = lvl.EnemyPedestal;
+
     const announcerObj = objCharacterBoxer();
+
+    lvl.OpponentNpc
+        .mixin(mxnCutscene, function* () {
+            if (!enemyBattleObj.rpgWeightedPedestal.isSufficientlyWeighted) {
+                yield* show(
+                    "Psst... Can you spot me a Flop? I really want to battle.",
+                    "Just go ahead and place it on the pedestal on my side of the arena.",
+                );
+                return;
+            }
+
+            if (!playerBattleObj.rpgWeightedPedestal.isSufficientlyWeighted) {
+                yield* show("Once you add a Flop to your pedestal, we can battle!");
+                return;
+            }
+
+            yield* show("Arrr! I'm gonna wipe the floors with you!");
+        });
 
     announcerObj
         .at(lvl.DummyMarker)
         .mixin(mxnCutscene, function* () {
-            const playerBattleObj = lvl.PlayerPedestal;
-            const enemyBattleObj = lvl.EnemyPedestal;
-
             const playerFlopId = playerBattleObj.rpgWeightedPedestal.list[0];
             const enemyFlopId = enemyBattleObj.rpgWeightedPedestal.list[0];
 
