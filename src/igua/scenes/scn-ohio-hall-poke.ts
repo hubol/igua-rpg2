@@ -23,6 +23,11 @@ export function scnOhioHallPoke() {
     const playerBattleObj = lvl.PlayerPedestal;
     const enemyBattleObj = lvl.EnemyPedestal;
 
+    const battleObjs = [playerBattleObj, enemyBattleObj];
+
+    battleObjs
+        .forEach(obj => obj.objWeightedPedestal.askFlopConfig.showPokeSpeciesStatistics = true);
+
     const state = {
         isBattling: false,
     };
@@ -36,8 +41,7 @@ export function scnOhioHallPoke() {
             mxnLightPredicate,
             () =>
                 !state.isBattling
-                && playerBattleObj.rpgWeightedPedestal.isSufficientlyWeighted
-                && enemyBattleObj.rpgWeightedPedestal.isSufficientlyWeighted,
+                && battleObjs.every(obj => obj.rpgWeightedPedestal.isSufficientlyWeighted),
         );
 
     const announcerObj = objCharacterBoxer();
@@ -151,8 +155,7 @@ export function scnOhioHallPoke() {
             battleOverlayObj.destroy();
 
             if (winningTrainer === playerTrainer) {
-                playerBattleObj.objWeightedPedestal.destroy();
-                enemyBattleObj.objWeightedPedestal.destroy();
+                battleObjs.forEach(obj => obj.objWeightedPedestal.destroy());
                 yield sleep(1000);
                 yield* show("Victor and opponent have ascended to the ChristianHeaven.");
             }

@@ -24,6 +24,8 @@ import { RpgFlops } from "../rpg/rpg-flops";
 import { DramaLib } from "./drama-lib";
 
 function* askFlopImpl(availableFlopIds: ReadonlyArray<RpgFlops.Id>, config?: DramaFlops.askFlop.Config) {
+    const colors = DramaLib.Speaker.getColors();
+
     const askObj = container()
         .show(layers.overlay.messages);
 
@@ -41,17 +43,26 @@ function* askFlopImpl(availableFlopIds: ReadonlyArray<RpgFlops.Id>, config?: Dra
         .show(askObj);
 
     if (config?.showPokeSpeciesStatistics) {
-        container()
-            .coro(function* (self) {
-                while (true) {
-                    self.removeAllChildren();
-                    const species = EsotericPokeData.Species.createFromFlopId(flopWheelObj.objFlopWheel.selectedFlopId);
-                    objEsotericPokeOverlay.objStatistics.objFromSpecies(species)
-                        .show(self);
-                    yield onPrimitiveMutate(() => flopWheelObj.objFlopWheel.selectedFlopId);
-                }
-            })
-            .at(295, 120)
+        container(
+            Sprite.from(Tx.Esoteric.Poke.StatisticsBackground)
+                .tinted(colors.secondary)
+                .mixin(mxnSinePivot),
+            container()
+                .coro(function* (self) {
+                    while (true) {
+                        self.removeAllChildren();
+                        const species = EsotericPokeData.Species.createFromFlopId(
+                            flopWheelObj.objFlopWheel.selectedFlopId,
+                        );
+                        objEsotericPokeOverlay.objStatistics.objFromSpecies(species)
+                            .show(self)
+                            .tint = colors.textSecondary;
+                        yield onPrimitiveMutate(() => flopWheelObj.objFlopWheel.selectedFlopId);
+                    }
+                })
+                .at(26, 26),
+        )
+            .at(295, 110)
             .show(askObj);
     }
 
