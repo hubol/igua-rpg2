@@ -17,9 +17,11 @@ import { mxnActionRepeater } from "../mixins/mxn-action-repeater";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { objFigureFlop } from "../objects/figures/obj-figure-flop";
+import { Rpg } from "../rpg/rpg";
+import { RpgFlops } from "../rpg/rpg-flops";
 import { DramaLib } from "./drama-lib";
 
-function* askFlop(flopAvailabilities: ReadonlyArray<boolean>) {
+function* askFlop(availableFlopIds: ReadonlyArray<RpgFlops.Id>) {
     const askObj = container()
         .show(layers.overlay.messages);
 
@@ -31,7 +33,7 @@ function* askFlop(flopAvailabilities: ReadonlyArray<boolean>) {
         })
         .show(askObj);
 
-    const flopWheelObj = objFlopWheel(flopAvailabilities, { radius: 100 })
+    const flopWheelObj = objFlopWheel(availableFlopIds, { radius: 100 })
         .at(-100, 130)
         .mixin(mxnHudModifiers.mxnHideStatus)
         .show(askObj);
@@ -54,7 +56,10 @@ function* askFlop(flopAvailabilities: ReadonlyArray<boolean>) {
     return flopWheelObj.objFlopWheel.selectedFlopId;
 }
 
-function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlopWheel.Config) {
+function objFlopWheel(rawAvailableFlopIds: ReadonlyArray<RpgFlops.Id>, config: objFlopWheel.Config) {
+    const availableFlopIds = [...new Set(rawAvailableFlopIds)]
+        .sort((a, b) => a - b);
+
     const api = {
         isConfirmed: false,
         isReady: false,
@@ -66,9 +71,6 @@ function objFlopWheel(flopAvailabilities: ReadonlyArray<boolean>, config: objFlo
     const state = {
         selectedIndex: 0,
     };
-
-    const availableFlopIds = flopAvailabilities
-        .flatMap((isAvailable, id) => isAvailable ? [id] : []);
 
     const drawData = new Array<drawWheelSlice.Data>();
 
@@ -265,6 +267,10 @@ function objFlopSpeechBubble() {
             .at(36, 5),
     );
 }
+
+askFlop.fromInventory = function* askFlopFromInventory () {
+    return yield* askFlop(Rpg.inventory.flops.availableFlopIds);
+};
 
 export const DramaFlops = {
     askFlop,

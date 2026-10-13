@@ -35,8 +35,8 @@ export function scnDevDramaFlops() {
     objCharacterBoxer()
         .at(lvl.DummyMarker)
         .mixin(mxnCutscene, function* () {
-            const playerFlopId = yield* DramaFlops.askFlop(range(999).map(() => Rng.float() < 30 / 1000));
-            const enemyFlopId = yield* DramaFlops.askFlop(range(999).map(() => Rng.float() < 30 / 1000));
+            const playerFlopId = yield* DramaFlops.askFlop(range(30).map(() => Rng.intc(0, 998)));
+            const enemyFlopId = yield* DramaFlops.askFlop(range(30).map(() => Rng.intc(0, 998)));
 
             const playerTrainer = new EsotericPokeEngine.Trainer(
                 {
