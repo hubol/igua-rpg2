@@ -6,12 +6,13 @@ import { range } from "../../../lib/range";
 import { DramaFlops } from "../../drama/drama-flops";
 import { ask, show } from "../../drama/show";
 import { mxnCutscene } from "../../mixins/mxn-cutscene";
+import { mxnHudModifiers } from "../../mixins/mxn-hud-modifiers";
 import { objCharacterBoxer } from "../../objects/characters/obj-character-boxer";
 import { EsotericPokeData } from "../../objects/esoteric/poke/esoteric-poke-data";
 import { EsotericPokeEngine } from "../../objects/esoteric/poke/esoteric-poke-engine";
 
 export function scnDevDramaFlops() {
-    const lvl = Lvl.Dummy();
+    const lvl = Lvl.OhioHallPoke();
 
     const allSpecies = range(999).map(id => EsotericPokeData.Species.createFromFlopId(id));
 
@@ -35,8 +36,13 @@ export function scnDevDramaFlops() {
     objCharacterBoxer()
         .at(lvl.DummyMarker)
         .mixin(mxnCutscene, function* () {
-            const playerFlopId = yield* DramaFlops.askFlop(range(30).map(() => Rng.intc(0, 998)));
-            const enemyFlopId = yield* DramaFlops.askFlop(range(30).map(() => Rng.intc(0, 998)));
+            const playerFlopId = lvl.PlayerPedestal.rpgWeightedPedestal.list[0];
+            const enemyFlopId = lvl.EnemyPedestal.rpgWeightedPedestal.list[0];
+
+            if (!playerFlopId || !enemyFlopId) {
+                yield* show("Please place a flop on both pedestals so that we can battle!!");
+                return;
+            }
 
             const playerTrainer = new EsotericPokeEngine.Trainer(
                 {
@@ -68,9 +74,11 @@ export function scnDevDramaFlops() {
             }
 
             const animalStatesObj = container(
-                objAnimalState("PLAYER", playerTrainer.animal).at(20, 100),
-                objAnimalState("ENEMY", enemyTrainer.animal).at(400, 100),
+                objAnimalState("PLAYER", playerTrainer.animal).at(20, 0),
+                objAnimalState("ENEMY", enemyTrainer.animal).at(400, 0),
             )
+                .mixin(mxnHudModifiers.mxnHideStatus)
+                .at(0, 20)
                 .show();
 
             const events: EsotericPokeEngine.Battle.EventHandler = {
@@ -103,6 +111,8 @@ export function scnDevDramaFlops() {
 
             yield* show(`${printName(winningTrainer)} wins!`);
             animalStatesObj.destroy();
+
+            // TODO destroy pedestal flop
         })
         .show();
 }

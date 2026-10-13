@@ -6,6 +6,7 @@ import { Logger } from "../../lib/game-engine/logger";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
+import { DramaFlops } from "../drama/drama-flops";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
@@ -37,9 +38,9 @@ What to do?`,
                         return;
                     }
 
-                    // TODO picker?
-
-                    const flopId = Rng.item(Rpg.inventory.flops.availableFlopIds);
+                    const flopId = requiredFlopsCount === 1
+                        ? yield* DramaFlops.askFlop.fromInventory()
+                        : Rng.item(Rpg.inventory.flops.availableFlopIds);
 
                     const loan = Rpg.inventory.flops.createLoan(flopId);
                     if (loan.accepted) {
