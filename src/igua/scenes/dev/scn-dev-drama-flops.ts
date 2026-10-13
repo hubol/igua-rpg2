@@ -1,5 +1,7 @@
+import { Sprite } from "pixi.js";
 import { objText } from "../../../assets/fonts";
 import { Lvl } from "../../../assets/generated/levels/generated-level-data";
+import { Tx } from "../../../assets/textures";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
@@ -28,7 +30,7 @@ export function scnDevDramaFlops() {
 
     console.log(
         "3 swords or more",
-        allSpecies.filter(species => species.moves.filter(move => move.type === "sword").length >= 2),
+        allSpecies.filter(species => species.moves.filter(move => move.type === "sword").length >= 3).length,
     );
 
     // for (let i = 0; i <= 998; i++) {
@@ -78,9 +80,10 @@ export function scnDevDramaFlops() {
                 return entity === playerTrainer.animal ? "PLAYER" : "ENEMY";
             }
 
-            const animalStatesObj = container(
+            const battleOverlayObj = container(
                 objAnimalState("PLAYER", playerTrainer.animal).at(20, 0),
                 objAnimalState("ENEMY", enemyTrainer.animal).at(400, 0),
+                Sprite.from(Tx.Esoteric.Poke.TypeGrid).at(175, 132),
             )
                 .mixin(mxnHudModifiers.mxnHideStatus)
                 .at(0, 20)
@@ -115,7 +118,7 @@ export function scnDevDramaFlops() {
             });
 
             yield* show(`${printName(winningTrainer)} wins!`);
-            animalStatesObj.destroy();
+            battleOverlayObj.destroy();
 
             const pedestalObj = winningTrainer === playerTrainer ? lvl.EnemyPedestal : lvl.PlayerPedestal;
             pedestalObj.objWeightedPedestal.destroy();
