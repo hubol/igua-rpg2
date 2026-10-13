@@ -1,5 +1,4 @@
-import { DisplayObject, Sprite, Texture } from "pixi.js";
-import { objText } from "../../../assets/fonts";
+import { DisplayObject, Sprite } from "pixi.js";
 import { Lvl } from "../../../assets/generated/levels/generated-level-data";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
@@ -7,14 +6,13 @@ import { factor, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
-import { txt } from "../../../lib/pixi/txt";
 import { range } from "../../../lib/range";
-import { DramaFlops } from "../../drama/drama-flops";
 import { objDramaNameTag } from "../../drama/objects/obj-drama-name-tag";
 import { ask, show } from "../../drama/show";
 import { mxnCutscene } from "../../mixins/mxn-cutscene";
 import { mxnHudModifiers } from "../../mixins/mxn-hud-modifiers";
 import { objCharacterBoxer } from "../../objects/characters/obj-character-boxer";
+import { objEsotericPokeOverlay } from "../../objects/esoteric/obj-esoteric-poke-overlay";
 import { EsotericPokeData } from "../../objects/esoteric/poke/esoteric-poke-data";
 import { EsotericPokeEngine } from "../../objects/esoteric/poke/esoteric-poke-engine";
 import { playerObj } from "../../objects/obj-player";
@@ -68,7 +66,7 @@ export function scnDevDramaFlops() {
                     *coroChooseMove(moves) {
                         const index = yield* ask(
                             "What move to use?",
-                            ...moves.map(move => move.isUsed ? null : printMove(move.data, "\n")),
+                            ...moves.map(move => move.isUsed ? null : objEsotericPokeOverlay.txtMove(move.data, "\n")),
                         );
                         return moves[index];
                     },
@@ -146,34 +144,9 @@ export function scnDevDramaFlops() {
         .show();
 }
 
-const txsType = Tx.Esoteric.Poke.Types.split({ count: 3 });
-
-const typeIconTxs: Record<EsotericPokeData.Move.Type, Texture> = {
-    laugh: txsType[1],
-    sword: txsType[0],
-    soul: txsType[2],
-};
-
-function printMove(move: EsotericPokeData.Move, separator = " ") {
-    return txt`${move.name} ${Sprite.from(typeIconTxs[move.type]).pivoted(0, 3)}${separator}(Sp${move.speed})`;
-}
-
 function objAnimalState(speakerObj: DisplayObject, animal: EsotericPokeEngine.Animal) {
     return container(
-        objText.Medium()
-            .step(self =>
-                self.text = txt`HP: ${animal.health} / ${animal.healthMax}
-STANCE: ${Sprite.from(typeIconTxs[animal.stanceType]).pivoted(0, 3)}
-MOVES:
-${
-                    txt.join(
-                        animal.moves
-                            .filter(move => !move.isUsed)
-                            .map(move => txt`- ${printMove(move.data)}\n`),
-                    )
-                }
-`
-            )
+        objEsotericPokeOverlay.objStatistics.objFromAnimal(animal)
             .at(0, 14),
         objDramaNameTag(speakerObj),
     );
