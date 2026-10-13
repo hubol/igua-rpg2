@@ -101,12 +101,12 @@ export class RpgFlops {
         return { flopId, accepted: true };
     }
 
-    processReturn(request: RpgFlops.Return) {
-        for (const flopId of request.returnedFlopIds) {
+    private _unloanFlops(flopIds: ReadonlyArray<RpgFlops.Id>) {
+        for (const flopId of flopIds) {
             const index = this._state.loanedFlopIds.indexOf(flopId);
             if (index === -1) {
                 Logger.logContractViolationError(
-                    "RpgFlops.processReturn",
+                    "RpgFlops._unloanFlops",
                     new Error("id must be on loan to be unloaned"),
                     { flopId },
                 );
@@ -115,7 +115,28 @@ export class RpgFlops {
 
             this._state.loanedFlopIds.splice(index, 1);
         }
+    }
 
+    processReturn(request: RpgFlops.Return) {
+        this._unloanFlops(request.returnedFlopIds);
+        this._clean();
+    }
+
+    processDestruction(request: RpgFlops.Destruction) {
+        this._unloanFlops(request.destroyedFlopIds);
+        for (const flopId of request.destroyedFlopIds) {
+            const index = this._state.collectedFlopIds.indexOf(flopId);
+            if (index === -1) {
+                Logger.logContractViolationError(
+                    "RpgFlops.processDestruction",
+                    new Error("id must be collected to be destroyed"),
+                    { flopId },
+                );
+                continue;
+            }
+
+            this._state.collectedFlopIds.splice(index, 1);
+        }
         this._clean();
     }
 
@@ -154,5 +175,9 @@ export namespace RpgFlops {
 
     export interface Return {
         returnedFlopIds: ReadonlyArray<RpgFlops.Id>;
+    }
+
+    export interface Destruction {
+        destroyedFlopIds: ReadonlyArray<RpgFlops.Id>;
     }
 }

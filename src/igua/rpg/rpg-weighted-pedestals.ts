@@ -54,6 +54,12 @@ export class RpgWeightedPedestal {
         return request;
     }
 
+    destroy(): RpgFlops.Destruction {
+        const request: RpgFlops.Destruction = { destroyedFlopIds: [...this._state.placedFlopIds] };
+        this._state.placedFlopIds.length = 0;
+        return request;
+    }
+
     receive(loan: RpgFlops.Loan.Accepted) {
         this._state.placedFlopIds.push(loan.flopId);
     }

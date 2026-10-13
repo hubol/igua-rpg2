@@ -11,84 +11,108 @@ import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Rpg } from "../rpg/rpg";
+import { objFxFieryBurst170px } from "./effects/obj-fx-fiery-burst-170px";
 import { objFigureFlop } from "./figures/obj-figure-flop";
 import { objPipe } from "./obj-terrain";
 
 export function objWeightedPedestal({ uid, values: { requiredFlopsCount } }: OgmoEntities.WeightedPedestal) {
     const rpgWeightedPedestal = Rpg.weightedPedestals.getById(uid, { requiredFlopsCount });
-    return container(
-        Sprite.from(Tx.Esoteric.WeightedPedestal)
-            .mixin(mxnSpeaker, { name: "Weighted Pedestal", tintPrimary: 0xC450D3, tintSecondary: 0x35145C })
-            .mixin(mxnCutscene, function* () {
-                const message =
-                    `A weighted pedestal for presenting Flops. The scale reads ${rpgWeightedPedestal.weight}f.`;
-                yield* show(message);
-                const result = yield* ask(
-                    `${message}
+
+    const api = {
+        destroy() {
+            if (rpgWeightedPedestal.isEmpty) {
+                return;
+            }
+
+            obj.play(Sfx.Interact.BombExplode.rate(0.95, 1.05));
+
+            objFxFieryBurst170px()
+                .at(obj)
+                .add(0, -20)
+                .show();
+
+            const request = rpgWeightedPedestal.destroy();
+            Rpg.inventory.flops.processDestruction(request);
+        },
+    };
+
+    const obj = container();
+
+    Sprite.from(Tx.Esoteric.WeightedPedestal)
+        .mixin(mxnSpeaker, { name: "Weighted Pedestal", tintPrimary: 0xC450D3, tintSecondary: 0x35145C })
+        .mixin(mxnCutscene, function* () {
+            const message = `A weighted pedestal for presenting Flops. The scale reads ${rpgWeightedPedestal.weight}f.`;
+            yield* show(message);
+            const result = yield* ask(
+                `${message}
 What to do?`,
-                    rpgWeightedPedestal.isSufficientlyWeighted ? null : "Add a Flop",
-                    rpgWeightedPedestal.isEmpty ? null : "Remove Flops",
-                    "Nothing",
-                );
+                rpgWeightedPedestal.isSufficientlyWeighted ? null : "Add a Flop",
+                rpgWeightedPedestal.isEmpty ? null : "Remove Flops",
+                "Nothing",
+            );
 
-                if (result === 0) {
-                    if (!Rpg.inventory.flops.availableFlopIds.length) {
-                        Sfx.Interact.Error.play();
-                        yield* show("But you don't have any Flops to add.");
-                        return;
-                    }
-
-                    const flopId = requiredFlopsCount === 1
-                        ? yield* DramaFlops.askFlop.fromInventory()
-                        : Rng.item(Rpg.inventory.flops.availableFlopIds);
-
-                    const loan = Rpg.inventory.flops.createLoan(flopId);
-                    if (loan.accepted) {
-                        Sfx.Esoteric.PedestalAdd.rate(0.95, 1.05).play();
-                        rpgWeightedPedestal.receive(loan);
-                    }
-                    else {
-                        Logger.logAssertError("Failed to create flop loan", loan.error);
-                    }
+            if (result === 0) {
+                if (!Rpg.inventory.flops.availableFlopIds.length) {
+                    Sfx.Interact.Error.play();
+                    yield* show("But you don't have any Flops to add.");
+                    return;
                 }
-                else if (result === 1) {
-                    Sfx.Esoteric.PedestalRemove.play();
-                    const request = rpgWeightedPedestal.empty();
-                    Rpg.inventory.flops.processReturn(request);
+
+                const flopId = requiredFlopsCount === 1
+                    ? yield* DramaFlops.askFlop.fromInventory()
+                    : Rng.item(Rpg.inventory.flops.availableFlopIds);
+
+                const loan = Rpg.inventory.flops.createLoan(flopId);
+                if (loan.accepted) {
+                    Sfx.Esoteric.PedestalAdd.rate(0.95, 1.05).play();
+                    rpgWeightedPedestal.receive(loan);
                 }
-            }),
-        container()
-            .coro(function* (self) {
-                const pipeObjs = new Array<DisplayObject>();
-
-                while (true) {
-                    self.removeAllChildren();
-                    for (const pipeObj of pipeObjs) {
-                        pipeObj.destroy();
-                    }
-                    const list = rpgWeightedPedestal.list;
-                    for (let i = -1; i < list.length; i++) {
-                        if (i >= 0) {
-                            const flopObj = objFigureFlop(list[i]);
-                            flopObj
-                                .filtered(flopObj.objects.filter)
-                                .at(0, i * -30)
-                                .zIndexed(-i)
-                                .show(self);
-                        }
-
-                        const pipeObj = objPipe().at(self.parent).add(-20, i * -30 - 55).invisible();
-                        pipeObj.width = 40;
-
-                        pipeObjs.push(pipeObj);
-                    }
-                    yield onPrimitiveMutate(() => rpgWeightedPedestal.weight);
+                else {
+                    Logger.logAssertError("Failed to create flop loan", loan.error);
                 }
-            })
-            .autoSorted()
-            .at(23, -14),
-    )
-        .merge({ rpgWeightedPedestal })
+            }
+            else if (result === 1) {
+                Sfx.Esoteric.PedestalRemove.play();
+                const request = rpgWeightedPedestal.empty();
+                Rpg.inventory.flops.processReturn(request);
+            }
+        })
+        .show(obj);
+
+    container()
+        .coro(function* (self) {
+            const pipeObjs = new Array<DisplayObject>();
+
+            while (true) {
+                self.removeAllChildren();
+                for (const pipeObj of pipeObjs) {
+                    pipeObj.destroy();
+                }
+                const list = rpgWeightedPedestal.list;
+                for (let i = -1; i < list.length; i++) {
+                    if (i >= 0) {
+                        const flopObj = objFigureFlop(list[i]);
+                        flopObj
+                            .filtered(flopObj.objects.filter)
+                            .at(0, i * -30)
+                            .zIndexed(-i)
+                            .show(self);
+                    }
+
+                    const pipeObj = objPipe().at(self.parent).add(-20, i * -30 - 55).invisible();
+                    pipeObj.width = 40;
+
+                    pipeObjs.push(pipeObj);
+                }
+                yield onPrimitiveMutate(() => rpgWeightedPedestal.weight);
+            }
+        })
+        .autoSorted()
+        .at(23, -14)
+        .show(obj);
+
+    return obj
+        .merge({ rpgWeightedPedestal, objWeightedPedestal: api })
         .pivoted(23, 24);
 }
 

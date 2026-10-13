@@ -112,7 +112,8 @@ export function scnDevDramaFlops() {
             yield* show(`${printName(winningTrainer)} wins!`);
             animalStatesObj.destroy();
 
-            // TODO destroy pedestal flop
+            const pedestalObj = winningTrainer === playerTrainer ? lvl.EnemyPedestal : lvl.PlayerPedestal;
+            pedestalObj.objWeightedPedestal.destroy();
         })
         .show();
 }
