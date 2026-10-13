@@ -16,12 +16,14 @@ import { Input, layers, scene } from "../globals";
 import { mxnActionRepeater } from "../mixins/mxn-action-repeater";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
+import { objEsotericPokeOverlay } from "../objects/esoteric/obj-esoteric-poke-overlay";
+import { EsotericPokeData } from "../objects/esoteric/poke/esoteric-poke-data";
 import { objFigureFlop } from "../objects/figures/obj-figure-flop";
 import { Rpg } from "../rpg/rpg";
 import { RpgFlops } from "../rpg/rpg-flops";
 import { DramaLib } from "./drama-lib";
 
-function* askFlop(availableFlopIds: ReadonlyArray<RpgFlops.Id>) {
+function* askFlopImpl(availableFlopIds: ReadonlyArray<RpgFlops.Id>, config?: DramaFlops.askFlop.Config) {
     const askObj = container()
         .show(layers.overlay.messages);
 
@@ -37,6 +39,21 @@ function* askFlop(availableFlopIds: ReadonlyArray<RpgFlops.Id>) {
         .at(-100, 130)
         .mixin(mxnHudModifiers.mxnHideStatus)
         .show(askObj);
+
+    if (config?.showPokeSpeciesStatistics) {
+        container()
+            .coro(function* (self) {
+                while (true) {
+                    self.removeAllChildren();
+                    const species = EsotericPokeData.Species.createFromFlopId(flopWheelObj.objFlopWheel.selectedFlopId);
+                    objEsotericPokeOverlay.objStatistics.objFromSpecies(species)
+                        .show(self);
+                    yield onPrimitiveMutate(() => flopWheelObj.objFlopWheel.selectedFlopId);
+                }
+            })
+            .at(295, 120)
+            .show(askObj);
+    }
 
     Sfx.Ui.Flops.AskWhichEnter.rate(0.99, 1.01).play();
 
@@ -268,10 +285,16 @@ function objFlopSpeechBubble() {
     );
 }
 
-askFlop.fromInventory = function* askFlopFromInventory () {
-    return yield* askFlop(Rpg.inventory.flops.availableFlopIds);
+askFlopImpl.fromInventory = function* askFlopFromInventory (config?: DramaFlops.askFlop.Config) {
+    return yield* askFlopImpl(Rpg.inventory.flops.availableFlopIds, config);
 };
 
-export const DramaFlops = {
-    askFlop,
-};
+export namespace DramaFlops {
+    export const askFlop = askFlopImpl;
+
+    export namespace askFlop {
+        export interface Config {
+            showPokeSpeciesStatistics?: boolean;
+        }
+    }
+}

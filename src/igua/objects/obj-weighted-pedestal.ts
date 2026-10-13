@@ -6,6 +6,7 @@ import { Logger } from "../../lib/game-engine/logger";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
+import { Check } from "../../lib/types/check";
 import { DramaFlops } from "../drama/drama-flops";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -19,6 +20,7 @@ export function objWeightedPedestal({ uid, values: { requiredFlopsCount } }: Ogm
     const rpgWeightedPedestal = Rpg.weightedPedestals.getById(uid, { requiredFlopsCount });
 
     const api = {
+        askFlopConfig: Check<DramaFlops.askFlop.Config>({}),
         destroy() {
             if (rpgWeightedPedestal.isEmpty) {
                 return;
@@ -59,7 +61,7 @@ What to do?`,
                 }
 
                 const flopId = requiredFlopsCount === 1
-                    ? yield* DramaFlops.askFlop.fromInventory()
+                    ? yield* DramaFlops.askFlop.fromInventory(api.askFlopConfig)
                     : Rng.item(Rpg.inventory.flops.availableFlopIds);
 
                 const loan = Rpg.inventory.flops.createLoan(flopId);

@@ -38,6 +38,9 @@ export function scnDevDramaFlops() {
         allSpecies.filter(species => species.moves.filter(move => move.type === "sword").length >= 3).length,
     );
 
+    [lvl.EnemyPedestal, lvl.PlayerPedestal]
+        .forEach(obj => obj.objWeightedPedestal.askFlopConfig.showPokeSpeciesStatistics = true);
+
     // for (let i = 0; i <= 998; i++) {
     //     const species = EsotericPokeData.Species.createFromFlopId(i);
     //     if (species.moves.filter(move => move.speed >= 3).length === 4) {
