@@ -69,5 +69,6 @@ export function objCharacterBattleMaster() {
         .mixin(mxnDetectPlayer)
         .mixin(mxnHasHead, { obj: headObj })
         .mixin(mxnSpeaker, { name: "Battle Master Warren", tintPrimary: 0xFFC700, tintSecondary: 0x3E4EA8 })
+        .merge({ objCharacterBattleMaster: api })
         .zIndexed(ZIndex.CharacterEntities);
 }

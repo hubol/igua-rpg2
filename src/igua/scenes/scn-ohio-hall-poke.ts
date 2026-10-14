@@ -1,5 +1,6 @@
 import { DisplayObject, Sprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
@@ -129,10 +130,13 @@ export function scnOhioHallPoke() {
                 return;
             }
 
+            announcerObj.objCharacterBattleMaster.swordRaised = true;
+
             state.isBattling = true;
 
             yield* playerObj.walkTo(lvl.PlayerBattleMarker.x);
             playerObj.auto.facing = 1;
+            announcerObj.objCharacterBattleMaster.swordRaised = false;
 
             const playerTrainer = new EsotericPokeEngine.Trainer(
                 {
@@ -239,14 +243,15 @@ function objAnimalState(speakerObj: DisplayObject, animal: EsotericPokeEngine.An
 
 const drama = {
     *hop(obj: DisplayObject) {
-        // TODO sfx
+        Sfx.Esoteric.Poke.AttackMiss.rate(0.95, 1.05).play();
         yield interpvr(obj).factor(factor.sine).translate(0, -20).over(333);
         yield interpvr(obj).factor(factor.sine.inverted).translate(0, 20).over(200);
     },
     *attack(attackerObj: DisplayObject, targetObj: DisplayObject) {
-        // TODO sfx
+        attackerObj.play(Sfx.Esoteric.Poke.AttackStart.rate(0.99, 1.01));
         const dx = Math.sign(targetObj.x - attackerObj.x);
         yield interpvr(attackerObj).factor(factor.sine).translate(dx * 50, 0).over(333);
+        targetObj.play(Sfx.Esoteric.Poke.AttackDamage.rate(0.99, 1.01));
         for (let i = 0; i < 4; i++) {
             targetObj.visible = !targetObj.visible;
             yield sleep(100);
