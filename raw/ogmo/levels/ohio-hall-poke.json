@@ -27,6 +27,17 @@
           "originY": 8,
           "tint": "#00ff00",
           "values": {"name": "DummyMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 1,
+          "_eid": "73148747",
+          "x": 120,
+          "y": 200,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "PlayerBattleMarker", "depth": 0}
         }
       ]
     },

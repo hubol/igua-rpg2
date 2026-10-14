@@ -80,6 +80,9 @@ export function scnOhioHallPoke() {
 
             state.isBattling = true;
 
+            yield* playerObj.walkTo(lvl.PlayerBattleMarker.x);
+            playerObj.auto.facing = 1;
+
             const playerTrainer = new EsotericPokeEngine.Trainer(
                 {
                     *coroChooseMove(moves) {
