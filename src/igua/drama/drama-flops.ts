@@ -150,6 +150,7 @@ function objFlopWheel(rawAvailableFlopIds: ReadonlyArray<RpgFlops.Id>, config: o
             if (self.objArrow.targetPosition) {
                 const d = distance(self.objArrow.targetPosition, self);
                 self.moveTowards(self.objArrow.targetPosition, 1 + d / 8);
+                self.position.vlength = Math.max(config.radius * 0.8, self.position.vlength);
             }
         })
         .coro(function* (self) {
