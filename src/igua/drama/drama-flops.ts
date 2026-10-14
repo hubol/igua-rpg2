@@ -63,6 +63,10 @@ function* askFlopImpl(availableFlopIds: ReadonlyArray<RpgFlops.Id>, config?: Dra
                 .at(26, 26),
         )
             .at(295, 110)
+            .coro(function* (self) {
+                yield () => flopWheelObj.objFlopWheel.isConfirmed;
+                yield interpvr(self).factor(factor.sine).translate(240, 0).over(750);
+            })
             .show(askObj);
     }
 
