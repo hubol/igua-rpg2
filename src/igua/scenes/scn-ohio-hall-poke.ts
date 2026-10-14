@@ -10,7 +10,7 @@ import { objDramaNameTag } from "../drama/objects/obj-drama-name-tag";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
-import { objCharacterBoxer } from "../objects/characters/obj-character-boxer";
+import { objCharacterBattleMaster } from "../objects/characters/obj-character-battle-master";
 import { objEsotericPokeOverlay } from "../objects/esoteric/obj-esoteric-poke-overlay";
 import { EsotericPokeData } from "../objects/esoteric/poke/esoteric-poke-data";
 import { EsotericPokeEngine } from "../objects/esoteric/poke/esoteric-poke-engine";
@@ -47,7 +47,7 @@ export function scnOhioHallPoke() {
                 && battleObjs.every(obj => obj.rpgWeightedPedestal.isSufficientlyWeighted),
         );
 
-    const announcerObj = objCharacterBoxer();
+    const announcerObj = objCharacterBattleMaster();
 
     lvl.OpponentNpc
         .mixin(mxnCutscene, function* () {
