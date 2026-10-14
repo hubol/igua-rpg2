@@ -564,6 +564,13 @@ export class AsshatText extends Container implements PixiAnchored.Anchorable {
         this._textWidth = maxLineWidth * scale;
         this._textHeight = (pos.y + data.lineHeight) * scale;
 
+        if (this._textureTokensContainer) {
+            this._textureTokensContainer.at(
+                -Math.round(this._textWidth * this.anchor.x),
+                -Math.round(this._textHeight * this.anchor.y),
+            );
+        }
+
         for (const i in pagesMeshData) {
             const pageMeshData = pagesMeshData[i];
 
