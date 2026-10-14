@@ -70,6 +70,9 @@ export function getInitialRpgProgress() {
             indianaUniversity: {
                 isWaterRunning: false,
             },
+            ohioHall: {
+                pokeBattleRank: 0,
+            },
             classrooms: {
                 approvedForTeachingBy: Null<DataNpcPersona.Id>(),
             },

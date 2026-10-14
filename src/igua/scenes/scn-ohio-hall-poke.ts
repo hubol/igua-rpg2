@@ -20,6 +20,9 @@ import { Rpg } from "../rpg/rpg";
 export function scnOhioHallPoke() {
     const lvl = Lvl.OhioHallPoke();
 
+    lvl.RankIndicatorGroup.children
+        .forEach((obj, i) => obj.step(self => self.tint = Rpg.flags.ohioHall.pokeBattleRank > i ? 0xffffff : 0x3b3b3b));
+
     const playerBattleObj = lvl.PlayerPedestal;
     const enemyBattleObj = lvl.EnemyPedestal;
 
@@ -158,11 +161,13 @@ export function scnOhioHallPoke() {
                 battleObjs.forEach(obj => obj.objWeightedPedestal.destroy());
                 yield sleep(1000);
                 yield* show("Victor and opponent have ascended to the ChristianHeaven.");
+                Rpg.flags.ohioHall.pokeBattleRank = Math.min(5, Rpg.flags.ohioHall.pokeBattleRank + 2);
             }
             else {
                 playerBattleObj.objWeightedPedestal.destroy();
                 yield sleep(1000);
                 yield* show("Loser has been expelled.");
+                Rpg.flags.ohioHall.pokeBattleRank = Math.max(0, Rpg.flags.ohioHall.pokeBattleRank - 1);
             }
 
             state.isBattling = false;

@@ -61,7 +61,8 @@
           "texture": "light/beam 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "CenterLightBeam"}
+          "values": {"name": "CenterLightBeam"},
+          "groupName": null
         },
         {
           "x": 400,
@@ -73,7 +74,8 @@
           "texture": "light/beam 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "RightLightBeam"}
+          "values": {"name": "RightLightBeam"},
+          "groupName": null
         },
         {
           "x": 96,
@@ -85,7 +87,8 @@
           "texture": "light/beam 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": "LeftLightBeam"}
+          "values": {"name": "LeftLightBeam"},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -202,7 +205,85 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 178,
+          "y": 248,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/poke/rank.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 248,
+          "y": 248,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#3b3b3b",
+          "texture": "esoteric/poke/cross.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "RankIndicatorGroup"
+        },
+        {
+          "x": 280,
+          "y": 248,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#3b3b3b",
+          "texture": "esoteric/poke/cross.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "RankIndicatorGroup"
+        },
+        {
+          "x": 312,
+          "y": 248,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#3b3b3b",
+          "texture": "esoteric/poke/cross.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "RankIndicatorGroup"
+        },
+        {
+          "x": 344,
+          "y": 248,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#3b3b3b",
+          "texture": "esoteric/poke/cross.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "RankIndicatorGroup"
+        },
+        {
+          "x": 376,
+          "y": 248,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#3b3b3b",
+          "texture": "esoteric/poke/cross.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "RankIndicatorGroup"
+        }
+      ],
       "folder": "../textures"
     },
     {
