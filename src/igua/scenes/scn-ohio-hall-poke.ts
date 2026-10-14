@@ -114,7 +114,7 @@ export function scnOhioHallPoke() {
 
             const battleOverlayObj = container(
                 objAnimalState(playerObj, playerTrainer.animal).at(20, 0),
-                objAnimalState(announcerObj, enemyTrainer.animal).at(400, 0),
+                objAnimalState(lvl.OpponentNpc, enemyTrainer.animal).at(400, 0),
                 Sprite.from(Tx.Esoteric.Poke.TypeGrid).at(175, 132),
             )
                 .mixin(mxnHudModifiers.mxnHideStatus)

@@ -8,6 +8,7 @@ import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { mxnSpeaker } from "../../mixins/mxn-speaker";
 import { objAngelEyes } from "../enemies/obj-angel-eyes";
+import { objAngelMouth } from "../enemies/obj-angel-mouth";
 
 const [
     txTorsoDefault,
@@ -18,6 +19,8 @@ const [
     txNose,
     txEyesDemo,
 ] = Tx.Characters.BattleMaster.Layers.split({ width: 120 });
+
+const txsMouth = Tx.Characters.BattleMaster.Mouth.split({ count: 3 });
 
 export function objCharacterBattleMaster() {
     const api = {
@@ -47,7 +50,13 @@ export function objCharacterBattleMaster() {
                 sclerasMirrored: false,
             })
                 .at(71, 54),
-            Sprite.from(txMouthDemo),
+            objAngelMouth({
+                negativeSpaceTint: 0xffffff,
+                teethCount: 1,
+                toothGapWidth: 0,
+                txs: txsMouth,
+            })
+                .at(71, 67),
         )
             .mixin(mxnFacingPivot, { left: -2, right: 2, up: 0, down: 0 }),
         Sprite.from(txSoulAmulet)
