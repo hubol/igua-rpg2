@@ -25,10 +25,18 @@ export function scnOhioHallPoke() {
             return Rpg.flags.ohioHall.pokeBattleRank;
         },
         onWin() {
+            const previousRank = Rpg.flags.ohioHall.pokeBattleRank;
             Rpg.flags.ohioHall.pokeBattleRank = Math.min(5, Rpg.flags.ohioHall.pokeBattleRank + 2);
+            if (previousRank !== Rpg.flags.ohioHall.pokeBattleRank) {
+                Sfx.Esoteric.Poke.RankUp.play();
+            }
         },
         onLose() {
+            const previousRank = Rpg.flags.ohioHall.pokeBattleRank;
             Rpg.flags.ohioHall.pokeBattleRank = Math.max(0, Rpg.flags.ohioHall.pokeBattleRank - 1);
+            if (previousRank !== Rpg.flags.ohioHall.pokeBattleRank) {
+                Sfx.Esoteric.Poke.RankDown.play();
+            }
         },
         get isElligibleForReward() {
             return this.currentRank >= 5;
@@ -126,6 +134,7 @@ export function scnOhioHallPoke() {
             const enemyFlopId = enemyBattleObj.rpgWeightedPedestal.list[0];
 
             if (!playerFlopId || !enemyFlopId) {
+                Sfx.Interact.Error.play();
                 yield* show("Please place a flop on both pedestals so that we can battle!!");
                 return;
             }
@@ -154,7 +163,25 @@ export function scnOhioHallPoke() {
             const enemyTrainer = new EsotericPokeEngine.Trainer(
                 {
                     *coroChooseMove(moves) {
-                        return Rng.item(moves.filter(move => !move.isUsed));
+                        const availableMoves = moves.filter(move => !move.isUsed);
+
+                        const playerTrainerAnimalMaxMoveSpeed = playerTrainer.animal.availableMovesData
+                            .reduce((speed, move) => Math.max(speed, move.speed), 0);
+
+                        const guaranteedFatalMoves = availableMoves
+                            .filter(move =>
+                                move.data.speed >= playerTrainerAnimalMaxMoveSpeed
+                                && EsotericPokeData.Move.Type.getEffectiveness(
+                                        move.data.type,
+                                        playerTrainer.animal.stanceType,
+                                    ) >= playerTrainer.animal.health
+                            );
+
+                        if (guaranteedFatalMoves.length) {
+                            return Rng.item(guaranteedFatalMoves);
+                        }
+
+                        return Rng.item(availableMoves);
                     },
                 },
                 new EsotericPokeEngine.Animal(EsotericPokeData.Species.createFromFlopId(enemyFlopId)),
@@ -243,7 +270,7 @@ function objAnimalState(speakerObj: DisplayObject, animal: EsotericPokeEngine.An
 
 const drama = {
     *hop(obj: DisplayObject) {
-        Sfx.Esoteric.Poke.AttackMiss.rate(0.95, 1.05).play();
+        Sfx.Esoteric.Poke.AttackMiss.rate(0.95, 1.05).gain(0.8).play();
         yield interpvr(obj).factor(factor.sine).translate(0, -20).over(333);
         yield interpvr(obj).factor(factor.sine.inverted).translate(0, 20).over(200);
     },

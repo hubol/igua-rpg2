@@ -17,11 +17,9 @@ function txtMove(move: EsotericPokeData.Move, separator = " ") {
     return txt`${move.name} ${Sprite.from(typeIconTxs[move.type]).pivoted(0, 3)}${separator}(Sp${move.speed})`;
 }
 
-function txtMoves(moves: ReadonlyArray<EsotericPokeData.Move | EsotericPokeEngine.Animal.Move>) {
+function txtMoves(moves: ReadonlyArray<EsotericPokeData.Move>) {
     return txt.join(
-        moves
-            .filter(move => move instanceof EsotericPokeEngine.Animal.Move ? !move.isUsed : true)
-            .map(move => txt`- ${txtMove(move instanceof EsotericPokeEngine.Animal.Move ? move.data : move)}\n`),
+        moves.map(move => txt`- ${txtMove(move)}\n`),
     );
 }
 
@@ -42,7 +40,7 @@ function objStatisticsFromAnimal(animal: EsotericPokeEngine.Animal) {
             self.text = txt`HP: ${animal.health} / ${animal.healthMax}
 STANCE: ${objTypeIcon(animal.stanceType)}
 MOVES:
-${txtMoves(animal.moves)}`
+${txtMoves(animal.availableMovesData)}`
         );
 }
 

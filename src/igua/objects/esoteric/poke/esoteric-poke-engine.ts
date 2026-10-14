@@ -81,6 +81,12 @@ export namespace EsotericPokeEngine {
             return this.health > 0;
         }
 
+        get availableMovesData() {
+            return this.moves
+                .filter(move => !move.isUsed)
+                .map(move => move.data);
+        }
+
         tryReplenishMoves() {
             if (this.moves.find(x => !x.isUsed)) {
                 return;
