@@ -6,6 +6,7 @@ import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp"
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
+import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { objDramaNameTag } from "../drama/objects/obj-drama-name-tag";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
@@ -18,10 +19,27 @@ import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 
 export function scnOhioHallPoke() {
+    const rpgFlag = {
+        get currentRank() {
+            return Rpg.flags.ohioHall.pokeBattleRank;
+        },
+        onWin() {
+            Rpg.flags.ohioHall.pokeBattleRank = Math.min(5, Rpg.flags.ohioHall.pokeBattleRank + 2);
+        },
+        onLose() {
+            Rpg.flags.ohioHall.pokeBattleRank = Math.max(0, Rpg.flags.ohioHall.pokeBattleRank - 1);
+        },
+        get isElligibleForReward() {
+            return this.currentRank >= 5;
+        },
+    };
+
+    const cosmHallOfDoors = Rpg.microcosms["Ohio.HallOfDoors"];
+
     const lvl = Lvl.OhioHallPoke();
 
     lvl.RankIndicatorGroup.children
-        .forEach((obj, i) => obj.step(self => self.tint = Rpg.flags.ohioHall.pokeBattleRank > i ? 0xffffff : 0x3b3b3b));
+        .forEach((obj, i) => obj.step(self => self.tint = rpgFlag.currentRank > i ? 0xffffff : 0x3b3b3b));
 
     const playerBattleObj = lvl.PlayerPedestal;
     const enemyBattleObj = lvl.EnemyPedestal;
@@ -70,6 +88,39 @@ export function scnOhioHallPoke() {
     announcerObj
         .at(lvl.DummyMarker)
         .mixin(mxnCutscene, function* () {
+            const result = yield* ask(
+                "Welcome to the arena! What can I do for you?",
+                "Let's battle!",
+                "Want my prize!",
+                "Get me out of here!",
+                "Teach me about battle.",
+                "Nevermind.",
+            );
+
+            if (result === 1) {
+                if (!rpgFlag.isElligibleForReward) {
+                    yield* show("Sorry you are not elligible for a reward.", "You need a rank of at least 5.");
+                    return;
+                }
+
+                yield* show("Your prize?! Yes, you are rank 5.", "Here you go!");
+                yield* DramaHallOfDoors.complete(cosmHallOfDoors, 2);
+                return;
+            }
+            else if (result === 2) {
+                yield* show("Okay! Your rank in the arena will be unaffected!");
+                yield* DramaHallOfDoors.returnToHall(cosmHallOfDoors);
+                return;
+            }
+            else if (result === 3) {
+                // TODO
+                return;
+            }
+            else if (result === 4) {
+                yield* show("Ok!");
+                return;
+            }
+
             const playerFlopId = playerBattleObj.rpgWeightedPedestal.list[0];
             const enemyFlopId = enemyBattleObj.rpgWeightedPedestal.list[0];
 
@@ -87,7 +138,7 @@ export function scnOhioHallPoke() {
                 {
                     *coroChooseMove(moves) {
                         const index = yield* ask(
-                            "What move to use?",
+                            `What move will you use, ${Rpg.character.attributes.names.current}?`,
                             ...moves.map(move => move.isUsed ? null : objEsotericPokeOverlay.txtMove(move.data, "\n")),
                         );
                         return moves[index];
@@ -164,13 +215,13 @@ export function scnOhioHallPoke() {
                 battleObjs.forEach(obj => obj.objWeightedPedestal.destroy());
                 yield sleep(1000);
                 yield* show("Victor and opponent have ascended to the ChristianHeaven.");
-                Rpg.flags.ohioHall.pokeBattleRank = Math.min(5, Rpg.flags.ohioHall.pokeBattleRank + 2);
+                rpgFlag.onWin();
             }
             else {
                 playerBattleObj.objWeightedPedestal.destroy();
                 yield sleep(1000);
                 yield* show("Loser has been expelled.");
-                Rpg.flags.ohioHall.pokeBattleRank = Math.max(0, Rpg.flags.ohioHall.pokeBattleRank - 1);
+                rpgFlag.onLose();
             }
 
             state.isBattling = false;
