@@ -81,14 +81,13 @@ export namespace EsotericPokeData {
             prng.bool();
 
             const health = prng.intc(4, 8);
-            const availableSpeedPoints = 30 - Math.pow(health, 1.3);
+            const availableSpeedPoints = 40 - Math.pow(health, 1.3);
 
             // TODO sort at this level?
             const moves = [.26, .21, .19, .168]
                 .map(f => {
-                    const min = Math.max(1, Math.floor(f * 0.45 * availableSpeedPoints));
                     const max = Math.min(4, Math.ceil(f * availableSpeedPoints));
-                    const speed = prng.intc(min, max) as Move.Speed;
+                    const speed = prng.intc(1, max) as Move.Speed;
 
                     const typeManifest = prng.float(100) >= Math.pow(health, 2.15)
                         ? Move.Type.manifest
