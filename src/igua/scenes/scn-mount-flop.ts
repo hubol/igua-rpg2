@@ -8,6 +8,7 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
+import { vnew } from "../../lib/math/vector-type";
 import { Jukebox } from "../core/igua-audio";
 import { DramaMisc } from "../drama/drama-misc";
 import { DramaPlayerAttributes } from "../drama/drama-player-attributes";
@@ -19,6 +20,7 @@ import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objCharacterBoxer } from "../objects/characters/obj-character-boxer";
 import { objFxExpressSurprise } from "../objects/effects/obj-fx-express-surprise";
+import { objFxLight } from "../objects/effects/obj-fx-light";
 import { playerObj } from "../objects/obj-player";
 import { CtxTerrainPipe } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
@@ -31,6 +33,13 @@ export function scnMountFlop() {
     enrichBestFriendHaverNpc(lvl);
     enrichBoxer(lvl);
     enrichCloudMonkNpc(lvl);
+
+    lvl.LightBeam0.masked(
+        objFxLight({
+            direction: vnew(-0.7, 1).normalize(),
+            shadowCasterObjs: [playerObj, lvl.ShadowCastEnemy],
+        }),
+    );
 }
 
 const atkBoxerPunch = RpgAttack.create({

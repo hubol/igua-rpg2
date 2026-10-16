@@ -6,6 +6,7 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { factor, interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
+import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { objDramaNameTag } from "../drama/objects/obj-drama-name-tag";
@@ -260,12 +261,10 @@ export function scnOhioHallPoke() {
         })
         .show();
 
-    const lightObj = objFxLight();
-
-    lightObj
-        .objFxLight
-        .shadowCasterObjs
-        .push(playerObj, lvl.OpponentNpc, lvl.EnemyPedestal, lvl.PlayerPedestal);
+    const lightObj = objFxLight({
+        shadowCasterObjs: [playerObj, lvl.OpponentNpc, lvl.EnemyPedestal, lvl.PlayerPedestal],
+        direction: vnew(0, 1),
+    });
 
     lvl.LightGroup.masked(lightObj);
 }

@@ -1015,7 +1015,7 @@
           "originX": 33,
           "originY": 78,
           "uid": 178698792487302,
-          "values": {"name": "", "depth": 0, "variant": "level2", "safeTint": "#61ff00"}
+          "values": {"name": "ShadowCastEnemy", "depth": 0, "variant": "level2", "safeTint": "#61ff00"}
         },
         {
           "name": "EnemySuggestive",
@@ -3627,7 +3627,7 @@
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""},
-          "groupName": null
+          "groupName": "LightGroup"
         },
         {
           "x": 2112,
