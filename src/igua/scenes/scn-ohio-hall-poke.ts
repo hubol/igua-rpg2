@@ -13,6 +13,7 @@ import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { objCharacterBattleMaster } from "../objects/characters/obj-character-battle-master";
+import { objFxLight } from "../objects/effects/obj-fx-light";
 import { objEsotericPokeOverlay } from "../objects/esoteric/obj-esoteric-poke-overlay";
 import { EsotericPokeData } from "../objects/esoteric/poke/esoteric-poke-data";
 import { EsotericPokeEngine } from "../objects/esoteric/poke/esoteric-poke-engine";
@@ -258,6 +259,15 @@ export function scnOhioHallPoke() {
             state.isBattling = false;
         })
         .show();
+
+    const lightObj = objFxLight();
+
+    lightObj
+        .objFxLight
+        .shadowCasterObjs
+        .push(playerObj, lvl.OpponentNpc, lvl.EnemyPedestal, lvl.PlayerPedestal);
+
+    lvl.LightGroup.masked(lightObj);
 }
 
 function objAnimalState(speakerObj: DisplayObject, animal: EsotericPokeEngine.Animal) {

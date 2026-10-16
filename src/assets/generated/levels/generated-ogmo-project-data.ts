@@ -115,6 +115,7 @@ export namespace OgmoEntities {
       | "objFxFormativeBurst"
       | "objFxHeart"
       | "objFxHelium"
+      | "objFxLight"
       | "objFxOverheated"
       | "objFxOwnerDefeat"
       | "objFxPlayerJumpComboDust"

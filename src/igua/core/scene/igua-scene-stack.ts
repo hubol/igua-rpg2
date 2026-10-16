@@ -27,8 +27,9 @@ function createIguaScene(layers: IguaLayers, source: Function) {
 
     const isWorldMap = source === scnWorldMap;
     const camera = objCamera(isWorldMap);
+    const staticStage = new Container().named("Static Stage");
 
-    root.addChild(background, ...[...parallaxStages].reverse(), stage, camera);
+    root.addChild(background, ...[...parallaxStages].reverse(), stage, camera, staticStage);
 
     const backgroundGfx = new Graphics().tinted(0x000000).beginFill(0xffffff).drawRect(
         0,
@@ -42,6 +43,7 @@ function createIguaScene(layers: IguaLayers, source: Function) {
         source,
         parallaxStages,
         stage,
+        staticStage,
         camera,
         ticker,
         isWorldMap,
