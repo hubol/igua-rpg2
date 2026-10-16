@@ -50,7 +50,13 @@ export function scnOhioHallPoke() {
     const lvl = Lvl.OhioHallPoke();
 
     lvl.RankIndicatorGroup.children
-        .forEach((obj, i) => obj.step(self => self.tint = rpgFlag.currentRank > i ? 0xffffff : 0x3b3b3b));
+        .forEach((obj, i) =>
+            obj
+                .coro(function* (self) {
+                    const defaultTint = self.tint;
+                    self.step(self => self.tint = rpgFlag.currentRank > i ? 0xffffff : defaultTint);
+                })
+        );
 
     const playerBattleObj = lvl.PlayerPedestal;
     const enemyBattleObj = lvl.EnemyPedestal;

@@ -5,7 +5,7 @@
   "offsetX": 0,
   "offsetY": 0,
   "values": {"Terrain Color": "#000000", "Region ID": "~Unset~"},
-  "backgroundColor": "#408000",
+  "backgroundColor": "#59366b",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -294,6 +294,78 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": "RankIndicatorGroup"
+        },
+        {
+          "x": 160,
+          "y": 201,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffc700",
+          "texture": "terrain/earth/stones 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 16,
+          "y": 201,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffc700",
+          "texture": "terrain/earth/stones 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 344,
+          "y": 203,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffc700",
+          "texture": "terrain/earth/stones 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 478,
+          "y": 202,
+          "scaleX": -1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffc700",
+          "texture": "terrain/earth/stones 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 471,
+          "y": 217,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#ffc700",
+          "texture": "terrain/earth/stones 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": -1,
+          "y": 217,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 0,
+          "tint": "#ffc700",
+          "texture": "terrain/earth/stones 1.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
@@ -318,7 +390,7 @@
           "height": 80,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#cc422c",
           "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
@@ -343,7 +415,32 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 328,
+          "y": 408,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "characters/battle master/layers.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 250,
+          "y": 105,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#2c2231",
+          "texture": "esoteric/starburst.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
