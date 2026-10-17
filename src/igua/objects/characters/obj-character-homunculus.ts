@@ -9,6 +9,7 @@ import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
+import { mxnSpeaker } from "../../mixins/mxn-speaker";
 import { objAngelEyes } from "../enemies/obj-angel-eyes";
 import { objAngelMouth } from "../enemies/obj-angel-mouth";
 
@@ -29,6 +30,8 @@ const variants = {
             eyelids: 0xF2CD00,
             mouth: 0x890000,
             pupils: 0x890000,
+            primary: 0xF28000,
+            secondary: 0xF2CD00,
         },
     },
     earth: {
@@ -44,6 +47,8 @@ const variants = {
             eyelids: 0xBC6F31,
             mouth: 0xDDB99B,
             pupils: 0x7F3D07,
+            primary: 0x7F3D07,
+            secondary: 0xDDB99B,
         },
     },
     forest: {
@@ -60,6 +65,8 @@ const variants = {
             eyelids: 0x9E8B48,
             mouth: 0x4B683F,
             pupils: 0x4B683F,
+            primary: 0x4B683F,
+            secondary: 0x9E8B48,
         },
     },
     water: {
@@ -75,6 +82,8 @@ const variants = {
             eyelids: 0x372C99,
             mouth: 0xffffff,
             pupils: 0x5E76FF,
+            primary: 0x372C99,
+            secondary: 0x77C2FF,
         },
     },
     light: {
@@ -90,6 +99,8 @@ const variants = {
             eyelids: 0xC5C8E0,
             mouth: 0x000000,
             pupils: 0x000000,
+            primary: 0x5B46A0,
+            secondary: 0x9B94F7,
         },
     },
     skies: {
@@ -108,6 +119,8 @@ const variants = {
             mouth: 0x548DFF,
             pupils: 0x548DFF,
             eyelids: 0x93D0FF,
+            primary: 0x93D0FF,
+            secondary: 0xffffff,
         },
     },
 } satisfies Record<string, variants.Type>;
@@ -124,6 +137,8 @@ namespace variants {
             pupils: RgbInt;
             mouth: RgbInt;
             eyelids: RgbInt;
+            primary: RgbInt;
+            secondary: RgbInt;
         };
         // TODO name and speaker stuff
     }
@@ -175,6 +190,7 @@ export function objCharacterHomunculus(id: objCharacterHomunculus.Id) {
         .merge({ objCharacterHomunculus: api })
         .mixin(mxnDetectPlayer)
         .mixin(mxnHasHead, { obj: headObj })
+        .mixin(mxnSpeaker, { name: "???", tintPrimary: variant.tints.primary, tintSecondary: variant.tints.secondary })
         .pivoted(variant.assPivot)
         .zIndexed(ZIndex.CharacterEntities);
 }
