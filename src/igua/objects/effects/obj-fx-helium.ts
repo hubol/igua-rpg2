@@ -6,15 +6,21 @@ import { Rng } from "../../../lib/math/rng";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 
 const txsHelium = Tx.Effects.Helium.split({ width: 12 });
+const txsHeart = Tx.Effects.Heart12px.split({ width: 12 });
 
-export function objFxHelium() {
-    return objIndexedSprite(txsHelium)
+const textureVariants = {
+    helium: txsHelium,
+    heart: txsHeart,
+};
+
+export function objFxHelium(id: objFxHelium.VariantId = "helium") {
+    return objIndexedSprite(textureVariants[id])
         .anchored(0.5, 0.5)
         .coro(function* (self) {
             const duration = Rng.intc(500, 800);
             yield* Coro.all([
                 Coro.chain([
-                    interp(self, "textureIndex").to(txsHelium.length).over(duration / 3),
+                    interp(self, "textureIndex").to(self.textures.length).over(duration / 3),
                     sleep(duration / 3),
                     interp(self, "textureIndex").to(0).over(duration / 3),
                 ]),
@@ -22,4 +28,8 @@ export function objFxHelium() {
             ]);
             self.destroy();
         });
+}
+
+export namespace objFxHelium {
+    export type VariantId = keyof typeof textureVariants;
 }

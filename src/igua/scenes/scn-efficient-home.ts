@@ -59,8 +59,8 @@ export function scnEfficientHome() {
 }
 
 function enrichHelium(lvl: LvlType.EfficientHome) {
-    [lvl.HeliumMarker1, lvl.HeliumMarker2].forEach((obj, index) =>
-        objHeliumExhaust()
+    [lvl.HeliumMarker1, lvl.HeliumMarker2].forEach((obj, index) => {
+        const heliumObj = objHeliumExhaust()
             .step(
                 self =>
                     self.isAttackActive = Rpg.quest("GreatTower.EfficientHome.Ringer.ReceivedFish").everCompleted
@@ -68,8 +68,12 @@ function enrichHelium(lvl: LvlType.EfficientHome) {
                 -1,
             )
             .at(obj)
-            .show()
-    );
+            .show();
+
+        if (index === 0) {
+            heliumObj.objHeliumExhaust.mode = "heal";
+        }
+    });
 }
 
 function enrichRoom0(lvl: LvlType.EfficientHome) {
