@@ -141,7 +141,10 @@ export function scnOhioHallPoke() {
             const playerFlopId = playerBattleObj.rpgWeightedPedestal.list[0];
             const enemyFlopId = enemyBattleObj.rpgWeightedPedestal.list[0];
 
-            if (!playerFlopId || !enemyFlopId) {
+            if (
+                !playerBattleObj.rpgWeightedPedestal.isSufficientlyWeighted
+                || !enemyBattleObj.rpgWeightedPedestal.isSufficientlyWeighted
+            ) {
                 Sfx.Interact.Error.play();
                 yield* show("Please place a flop on both pedestals so that we can battle!!");
                 return;
