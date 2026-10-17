@@ -236,7 +236,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
-          "tint": "#3b3b3b",
+          "tint": "#741c0e",
           "texture": "esoteric/poke/cross.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -249,7 +249,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
-          "tint": "#3b3b3b",
+          "tint": "#741c0e",
           "texture": "esoteric/poke/cross.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -262,7 +262,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
-          "tint": "#3b3b3b",
+          "tint": "#741c0e",
           "texture": "esoteric/poke/cross.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -275,7 +275,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
-          "tint": "#3b3b3b",
+          "tint": "#741c0e",
           "texture": "esoteric/poke/cross.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -288,7 +288,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
-          "tint": "#3b3b3b",
+          "tint": "#741c0e",
           "texture": "esoteric/poke/cross.png",
           "originX": 0.5,
           "originY": 0.5,
@@ -305,7 +305,8 @@
           "texture": "terrain/earth/stones 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 16,
@@ -317,7 +318,8 @@
           "texture": "terrain/earth/stones 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 344,
@@ -329,7 +331,8 @@
           "texture": "terrain/earth/stones 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 478,
@@ -341,7 +344,8 @@
           "texture": "terrain/earth/stones 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 471,
@@ -353,7 +357,8 @@
           "texture": "terrain/earth/stones 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": -1,
@@ -365,7 +370,8 @@
           "texture": "terrain/earth/stones 1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
@@ -426,7 +432,8 @@
           "texture": "characters/battle master/layers.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 250,
@@ -438,7 +445,8 @@
           "texture": "esoteric/starburst.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
