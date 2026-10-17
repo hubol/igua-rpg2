@@ -66,7 +66,7 @@ export function scnDevQuality() {
                 .at(getTimeWorldX(time).x, 210)
                 .anchored(0, 0.5)
                 .angled(90)
-                .zIndexed(ZIndex.BackgroundEntities)
+                .zIndexed(ZIndex.TerrainDecals)
                 .show();
         }
     }
