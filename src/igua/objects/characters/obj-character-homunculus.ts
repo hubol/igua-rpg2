@@ -19,7 +19,7 @@ const variants = {
         txs: Tx.Characters.Homunculus.Flame.split({ width: 56 }),
         controlIndices: {
             0: "sine_pivot",
-            2: "pivot1",
+            2: "arms",
             3: "head",
             4: "demo_face",
         },
@@ -35,7 +35,7 @@ const variants = {
         staffIndex: 2,
         txs: Tx.Characters.Homunculus.Earth.split({ width: 56 }),
         controlIndices: {
-            1: "pivot1",
+            1: "arms",
             2: "head",
             3: "demo_face",
         },
@@ -51,7 +51,7 @@ const variants = {
         txs: Tx.Characters.Homunculus.Forest.split({ width: 56 }),
         controlIndices: {
             0: "pivot1",
-            2: "pivot1",
+            2: "arms",
             3: "head",
             4: "demo_face",
         },
@@ -66,14 +66,14 @@ const variants = {
         staffIndex: 4,
         txs: Tx.Characters.Homunculus.Water.split({ width: 58 }),
         controlIndices: {
-            1: "pivot1",
+            1: "arms",
             2: "head",
             3: "demo_face",
         },
         tints: {
             eyelids: 0x372C99,
             mouth: 0xffffff,
-            pupils: 0x372C99,
+            pupils: 0x5E76FF,
         },
     },
     light: {
@@ -81,7 +81,7 @@ const variants = {
         staffIndex: 5,
         txs: Tx.Characters.Homunculus.Light.split({ width: 56 }),
         controlIndices: {
-            1: "pivot1",
+            1: "arms",
             2: "head",
             3: "demo_face",
         },
@@ -98,7 +98,7 @@ const variants = {
         controlIndices: {
             0: "sine_pivot",
             1: "pivot1",
-            3: "pivot1",
+            3: "arms",
             4: "head",
             5: "demo_face",
             6: "pivot1",
@@ -112,7 +112,7 @@ const variants = {
 } satisfies Record<string, variants.Type>;
 
 namespace variants {
-    export type Control = "pivot1" | "sine_pivot" | "head" | "demo_face";
+    export type Control = "pivot1" | "sine_pivot" | "head" | "demo_face" | "arms";
 
     export interface Type {
         assPivot: VectorSimple;
@@ -133,20 +133,37 @@ const applyControlToSprite: Record<variants.Control, (obj: Sprite, variant: vari
     head: (obj) => obj.mixin(mxnFacingPivot, { left: -1, right: 1, up: -1, down: 0 }),
     pivot1: (obj) => obj.mixin(mxnBoilPivot.mxnOne),
     sine_pivot: (obj) => obj.mixin(mxnSinePivot),
+    arms: (obj) => obj,
 };
 
 export function objCharacterHomunculus(id: objCharacterHomunculus.Id) {
     const variant = variants[id];
+
+    const api = {
+        hasStaff: true,
+    };
+
     return container(
         ...variant.txs.map((tx, i) => {
             const sprite = Sprite.from(tx);
             const control = (variant.controlIndices as Record<any, variants.Control>)[i] ?? null;
-            if (control) {
+            if (control === "arms") {
+                return container(
+                    sprite,
+                    Sprite.from(txsStaff[variant.staffIndex])
+                        .add(variant.assPivot)
+                        .add(-36, -53)
+                        .step(self => self.visible = api.hasStaff),
+                )
+                    .mixin(mxnBoilPivot.mxnOne);
+            }
+            else if (control) {
                 return applyControlToSprite[control](sprite, variant);
             }
             return sprite;
         }),
     )
+        .merge({ objCharacterHomunculus: api })
         .mixin(mxnDetectPlayer)
         .pivoted(variant.assPivot)
         .zIndexed(ZIndex.CharacterEntities);
