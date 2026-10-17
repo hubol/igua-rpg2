@@ -1,4 +1,4 @@
-import { DisplayObject, Sprite, Texture } from "pixi.js";
+import { DisplayObject, Graphics, Sprite, Texture } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
 import { VectorSimple } from "../../../lib/math/vector-type";
@@ -7,6 +7,7 @@ import { ZIndex } from "../../core/scene/z-index";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
+import { mxnHasHead } from "../../mixins/mxn-has-head";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { objAngelEyes } from "../enemies/obj-angel-eyes";
 import { objAngelMouth } from "../enemies/obj-angel-mouth";
@@ -143,6 +144,13 @@ export function objCharacterHomunculus(id: objCharacterHomunculus.Id) {
         hasStaff: true,
     };
 
+    const headObj = new Graphics()
+        .beginFill(0xff0000)
+        .drawRect(0, 0, 16, 12)
+        .add(variant.assPivot)
+        .add(-5, -50)
+        .invisible();
+
     return container(
         ...variant.txs.map((tx, i) => {
             const sprite = Sprite.from(tx);
@@ -162,9 +170,11 @@ export function objCharacterHomunculus(id: objCharacterHomunculus.Id) {
             }
             return sprite;
         }),
+        headObj,
     )
         .merge({ objCharacterHomunculus: api })
         .mixin(mxnDetectPlayer)
+        .mixin(mxnHasHead, { obj: headObj })
         .pivoted(variant.assPivot)
         .zIndexed(ZIndex.CharacterEntities);
 }

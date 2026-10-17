@@ -1,4 +1,6 @@
 import { Lvl } from "../../../assets/generated/levels/generated-level-data";
+import { show } from "../../drama/show";
+import { mxnCutscene } from "../../mixins/mxn-cutscene";
 import { objCharacterHomunculus } from "../../objects/characters/obj-character-homunculus";
 
 export function scnDevHomunculus() {
@@ -9,6 +11,9 @@ export function scnDevHomunculus() {
             objCharacterHomunculus(id)
                 .at(lvl.DummyMarker)
                 .add(-220 + i * 70, 0)
+                .mixin(mxnCutscene, function* () {
+                    yield* show("Hi!!!");
+                })
                 .show();
         });
 }
