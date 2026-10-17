@@ -33,6 +33,7 @@ const variants = {
             primary: 0xF28000,
             secondary: 0xF2CD00,
         },
+        name: "Homunculus of Flame",
     },
     earth: {
         assPivot: [25, 46],
@@ -50,6 +51,7 @@ const variants = {
             primary: 0x7F3D07,
             secondary: 0xDDB99B,
         },
+        name: "Homunculus of Earth",
     },
     forest: {
         assPivot: [25, 54],
@@ -68,6 +70,7 @@ const variants = {
             primary: 0x4B683F,
             secondary: 0x9E8B48,
         },
+        name: "Homunculus of the Forest",
     },
     water: {
         assPivot: [26, 55],
@@ -85,6 +88,7 @@ const variants = {
             primary: 0x372C99,
             secondary: 0x77C2FF,
         },
+        name: "Homunculus of Water",
     },
     light: {
         assPivot: [25, 46],
@@ -102,6 +106,7 @@ const variants = {
             primary: 0x5B46A0,
             secondary: 0x9B94F7,
         },
+        name: "Homunculus of Light",
     },
     skies: {
         assPivot: [36, 50],
@@ -122,6 +127,7 @@ const variants = {
             primary: 0x93D0FF,
             secondary: 0xffffff,
         },
+        name: "Homunculus of the Skies",
     },
 } satisfies Record<string, variants.Type>;
 
@@ -140,7 +146,7 @@ namespace variants {
             primary: RgbInt;
             secondary: RgbInt;
         };
-        // TODO name and speaker stuff
+        name: string;
     }
 }
 
@@ -190,7 +196,11 @@ export function objCharacterHomunculus(id: objCharacterHomunculus.Id) {
         .merge({ objCharacterHomunculus: api })
         .mixin(mxnDetectPlayer)
         .mixin(mxnHasHead, { obj: headObj })
-        .mixin(mxnSpeaker, { name: "???", tintPrimary: variant.tints.primary, tintSecondary: variant.tints.secondary })
+        .mixin(mxnSpeaker, {
+            name: variant.name,
+            tintPrimary: variant.tints.primary,
+            tintSecondary: variant.tints.secondary,
+        })
         .pivoted(variant.assPivot)
         .zIndexed(ZIndex.CharacterEntities);
 }
