@@ -1,13 +1,16 @@
-import { Sprite, Texture } from "pixi.js";
+import { DisplayObject, Sprite, Texture } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
-import { Integer } from "../../../lib/math/number-alias-types";
+import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { VectorSimple } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { ZIndex } from "../../core/scene/z-index";
+import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
+import { objAngelEyes } from "../enemies/obj-angel-eyes";
+import { objAngelMouth } from "../enemies/obj-angel-mouth";
 
 const txsStaff = Tx.Characters.Homunculus.Staves.split({ width: 32 });
 
@@ -22,6 +25,11 @@ const variants = {
             4: "demo_face",
         },
         staffIndex: 1,
+        tints: {
+            eyelids: 0xF2CD00,
+            mouth: 0x890000,
+            pupils: 0x890000,
+        },
     },
     earth: {
         assPivot: [25, 46],
@@ -31,6 +39,11 @@ const variants = {
             1: "pivot1",
             2: "head",
             3: "demo_face",
+        },
+        tints: {
+            eyelids: 0xBC6F31,
+            mouth: 0xDDB99B,
+            pupils: 0x7F3D07,
         },
     },
     forest: {
@@ -43,6 +56,11 @@ const variants = {
             3: "head",
             4: "demo_face",
         },
+        tints: {
+            eyelids: 0x9E8B48,
+            mouth: 0x4B683F,
+            pupils: 0x4B683F,
+        },
     },
     water: {
         assPivot: [26, 55],
@@ -53,6 +71,11 @@ const variants = {
             2: "head",
             3: "demo_face",
         },
+        tints: {
+            eyelids: 0x372C99,
+            mouth: 0xffffff,
+            pupils: 0x372C99,
+        },
     },
     light: {
         assPivot: [25, 46],
@@ -62,6 +85,11 @@ const variants = {
             1: "pivot1",
             2: "head",
             3: "demo_face",
+        },
+        tints: {
+            eyelids: 0xC5C8E0,
+            mouth: 0x000000,
+            pupils: 0x000000,
         },
     },
     skies: {
@@ -76,6 +104,11 @@ const variants = {
             5: "demo_face",
             6: "pivot1",
         },
+        tints: {
+            mouth: 0x548DFF,
+            pupils: 0x548DFF,
+            eyelids: 0x93D0FF,
+        },
     },
 } satisfies Record<string, variants.Type>;
 
@@ -87,14 +120,17 @@ namespace variants {
         txs: Texture[];
         controlIndices: Record<string, Control>;
         staffIndex: Integer;
+        tints: {
+            pupils: RgbInt;
+            mouth: RgbInt;
+            eyelids: RgbInt;
+        };
         // TODO name and speaker stuff
     }
-
-    export type Id = keyof typeof variants;
 }
 
-const applyControlToSprite: Record<variants.Control, (obj: Sprite) => Sprite> = {
-    demo_face: (obj) => obj.mixin(mxnFacingPivot, { left: -2, right: 2, up: -1, down: 0 }),
+const applyControlToSprite: Record<variants.Control, (obj: Sprite, variant: variants.Type) => DisplayObject> = {
+    demo_face: (_, variant) => objCharacterHomunculusFace(variant).add(variant.assPivot).add(3, -39),
     head: (obj) => obj.mixin(mxnFacingPivot, { left: -1, right: 1, up: -1, down: 0 }),
     pivot1: (obj) =>
         obj.coro(function* (self) {
@@ -106,18 +142,50 @@ const applyControlToSprite: Record<variants.Control, (obj: Sprite) => Sprite> = 
     sine_pivot: (obj) => obj.mixin(mxnSinePivot),
 };
 
-export function objCharacterHomunculus(id: variants.Id) {
+export function objCharacterHomunculus(id: objCharacterHomunculus.Id) {
     const variant = variants[id];
     return container(
         ...variant.txs.map((tx, i) => {
             const sprite = Sprite.from(tx);
             const control = (variant.controlIndices as Record<any, variants.Control>)[i] ?? null;
             if (control) {
-                applyControlToSprite[control](sprite);
+                return applyControlToSprite[control](sprite, variant);
             }
             return sprite;
         }),
     )
+        .mixin(mxnDetectPlayer)
         .pivoted(variant.assPivot)
         .zIndexed(ZIndex.CharacterEntities);
+}
+
+export namespace objCharacterHomunculus {
+    export type Id = keyof typeof variants;
+}
+
+objCharacterHomunculus.ids = Object.keys(variants) as objCharacterHomunculus.Id[];
+
+function objCharacterHomunculusFace(variant: variants.Type) {
+    return container(
+        objAngelEyes({
+            defaultEyelidRestingPosition: 0,
+            eyelidsTint: variant.tints.eyelids,
+            gap: 1,
+            pupilRestStyle: {
+                kind: "cross_eyed",
+                offsetFromCenter: 0,
+            },
+            pupilsTint: variant.tints.pupils,
+            pupilsTx: Tx.Characters.Homunculus.Pupil,
+            scleraTx: Tx.Characters.Homunculus.Sclera,
+        }),
+        objAngelMouth({
+            negativeSpaceTint: variant.tints.mouth,
+            teethCount: 1,
+            toothGapWidth: 0,
+            txs: objAngelMouth.txs.horizontal3,
+        })
+            .at(-1, 5),
+    )
+        .mixin(mxnFacingPivot, { left: -2, right: 2, up: -1, down: 0 });
 }

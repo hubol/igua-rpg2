@@ -108,6 +108,7 @@ export function objAngelMouth(args: ObjAngelMouthArgs) {
 
 objAngelMouth.txs = {
     horizontal10: Tx.Enemy.Common.Mouths.Horizontal10.split({ width: 10 }),
+    horizontal3: Tx.Enemy.Common.Mouths.Horizontal1px3.split({ width: 4 }),
     perturbed20: Tx.Enemy.Common.Mouths.Perturbed20.split({ width: 20 }),
     rounded11: Tx.Enemy.Common.Mouths.Rounded11.split({ width: 11 }),
     rounded14: Tx.Enemy.Common.Mouths.Rounded14.split({ width: 14 }),

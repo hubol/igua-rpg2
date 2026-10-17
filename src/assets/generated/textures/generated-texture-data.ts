@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 1132 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 1135 }];
 
 interface TxData {
   id: string;
@@ -132,6 +132,8 @@ function txs<T>(tx: (data: TxData) => T) {
         Flame: tx({ id: "Characters.Homunculus.Flame", atlas: 0, x: 3816, y: 1565, width: 280, height: 86 }),
         Forest: tx({ id: "Characters.Homunculus.Forest", atlas: 0, x: 281, y: 2201, width: 280, height: 72 }),
         Light: tx({ id: "Characters.Homunculus.Light", atlas: 0, x: 855, y: 2371, width: 224, height: 64 }),
+        Pupil: tx({ id: "Characters.Homunculus.Pupil", atlas: 0, x: 3825, y: 1934, width: 8, height: 2 }),
+        Sclera: tx({ id: "Characters.Homunculus.Sclera", atlas: 0, x: 1423, y: 406, width: 8, height: 2 }),
         Skies: tx({ id: "Characters.Homunculus.Skies", atlas: 0, x: 3022, y: 1374, width: 546, height: 68 }),
         Staves: tx({ id: "Characters.Homunculus.Staves", atlas: 0, x: 3899, y: 1719, width: 192, height: 76 }),
         Water: tx({ id: "Characters.Homunculus.Water", atlas: 0, x: 1987, y: 2148, width: 232, height: 74 }),
@@ -459,6 +461,7 @@ function txs<T>(tx: (data: TxData) => T) {
           Injured1: tx({ id: "Enemy.Common.Eyes.Injured1", atlas: 0, x: 4077, y: 2959, width: 16, height: 18 }),
         },
         Mouths: {
+          Horizontal1px3: tx({ id: "Enemy.Common.Mouths.Horizontal1px3", atlas: 0, x: 1301, y: 1888, width: 12, height: 4 }),
           Horizontal10: tx({ id: "Enemy.Common.Mouths.Horizontal10", atlas: 0, x: 1148, y: 2326, width: 40, height: 8 }),
           Perturbed20: tx({ id: "Enemy.Common.Mouths.Perturbed20", atlas: 0, x: 2494, y: 2577, width: 120, height: 12 }),
           Rounded11: tx({ id: "Enemy.Common.Mouths.Rounded11", atlas: 0, x: 3026, y: 0, width: 33, height: 6 }),
@@ -952,7 +955,7 @@ function txs<T>(tx: (data: TxData) => T) {
       },
       Line2px45deg: tx({ id: "Shapes.Line2px45deg", atlas: 0, x: 528, y: 3089, width: 32, height: 32 }),
       LineVertical16: tx({ id: "Shapes.LineVertical16", atlas: 0, x: 2461, y: 2112, width: 1, height: 16 }),
-      LumpSmall0: tx({ id: "Shapes.LumpSmall0", atlas: 0, x: 1301, y: 1888, width: 12, height: 4 }),
+      LumpSmall0: tx({ id: "Shapes.LumpSmall0", atlas: 0, x: 4050, y: 2561, width: 12, height: 4 }),
       Quad22deg0: tx({ id: "Shapes.Quad22deg0", atlas: 0, x: 1472, y: 2495, width: 140, height: 78 }),
       RectangleIrregular82X46: tx({ id: "Shapes.RectangleIrregular82X46", atlas: 0, x: 1467, y: 2747, width: 82, height: 46 }),
       RectangleScribbled58X46: tx({ id: "Shapes.RectangleScribbled58X46", atlas: 0, x: 707, y: 2907, width: 58, height: 46 }),
@@ -1034,7 +1037,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Crack28px38px: tx({ id: "Terrain.Earth.Crack28px38px", atlas: 0, x: 1582, y: 2635, width: 28, height: 38 }),
         Crack116px108px: tx({ id: "Terrain.Earth.Crack116px108px", atlas: 0, x: 2978, y: 2687, width: 116, height: 108 }),
         Crack198px102px: tx({ id: "Terrain.Earth.Crack198px102px", atlas: 0, x: 3800, y: 2566, width: 198, height: 102 }),
-        CrackSmall0: tx({ id: "Terrain.Earth.CrackSmall0", atlas: 0, x: 4050, y: 2561, width: 8, height: 4 }),
+        CrackSmall0: tx({ id: "Terrain.Earth.CrackSmall0", atlas: 0, x: 1921, y: 2960, width: 8, height: 4 }),
         ExposedDirt: tx({ id: "Terrain.Earth.ExposedDirt", atlas: 0, x: 4003, y: 1359, width: 80, height: 14 }),
         Face1px0: tx({ id: "Terrain.Earth.Face1px0", atlas: 0, x: 1811, y: 3003, width: 38, height: 18 }),
         Face1px1: tx({ id: "Terrain.Earth.Face1px1", atlas: 0, x: 561, y: 3111, width: 32, height: 20 }),

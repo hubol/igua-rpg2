@@ -4,5 +4,11 @@ import { objCharacterHomunculus } from "../../objects/characters/obj-character-h
 export function scnDevHomunculus() {
     const lvl = Lvl.Dummy();
 
-    objCharacterHomunculus("skies").at(lvl.DummyMarker).show();
+    objCharacterHomunculus.ids
+        .map((id, i) => {
+            objCharacterHomunculus(id)
+                .at(lvl.DummyMarker)
+                .add(-220 + i * 70, 0)
+                .show();
+        });
 }
