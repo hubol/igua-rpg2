@@ -16,9 +16,10 @@ export function objFxLight(args: objFxLight.Args) {
     const renderTx1 = RenderTexture.create({ width: renderer.width, height: renderer.height });
 
     const shadowCastObj = container(
-        ...range(100).map(() => {
+        ...range(40).map((i) => {
             const obj = Sprite.from(renderTx0).tinted(0x000000);
-            obj.alpha = 0.4;
+            const f = 1 - (i / 40);
+            obj.alpha = 0.4 * f;
             return obj;
         }),
     );
@@ -67,7 +68,7 @@ export function objFxLight(args: objFxLight.Args) {
 
             for (let i = 0; i < shadowCastObj.children.length; i++) {
                 shadowCastObj.children[i].position
-                    .at(api.direction, i * 2.8 + 1)
+                    .at(api.direction, i * 1.4 + 1)
                     .add(v)
                     .vround();
 
