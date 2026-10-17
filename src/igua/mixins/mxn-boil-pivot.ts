@@ -10,3 +10,12 @@ export function mxnBoilPivot(obj: DisplayObject) {
         }
     });
 }
+
+mxnBoilPivot.mxnOne = function mxnBoilPivotOne (obj: DisplayObject) {
+    return obj.coro(function* (self) {
+        while (true) {
+            yield sleep(Rng.intc(250, 666));
+            self.pivot.y = self.pivot.y === 0 ? 1 : 0;
+        }
+    });
+};

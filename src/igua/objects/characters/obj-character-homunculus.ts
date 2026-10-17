@@ -1,11 +1,10 @@
 import { DisplayObject, Sprite, Texture } from "pixi.js";
 import { Tx } from "../../../assets/textures";
-import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
-import { Rng } from "../../../lib/math/rng";
 import { VectorSimple } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { ZIndex } from "../../core/scene/z-index";
+import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
@@ -132,13 +131,7 @@ namespace variants {
 const applyControlToSprite: Record<variants.Control, (obj: Sprite, variant: variants.Type) => DisplayObject> = {
     demo_face: (_, variant) => objCharacterHomunculusFace(variant).add(variant.assPivot).add(3, -39),
     head: (obj) => obj.mixin(mxnFacingPivot, { left: -1, right: 1, up: -1, down: 0 }),
-    pivot1: (obj) =>
-        obj.coro(function* (self) {
-            while (true) {
-                yield sleep(Rng.intc(250, 666));
-                self.pivot.y = self.pivot.y === 0 ? 1 : 0;
-            }
-        }),
+    pivot1: (obj) => obj.mixin(mxnBoilPivot.mxnOne),
     sine_pivot: (obj) => obj.mixin(mxnSinePivot),
 };
 
