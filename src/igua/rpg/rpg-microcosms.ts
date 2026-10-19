@@ -45,12 +45,14 @@ const manifest = {
         doorGiftIds: ["Indiana.MagicDoor.0", "Indiana.MagicDoor.1", "Indiana.MagicDoor.2", "Indiana.MagicDoor.3"],
         homeSceneName: "scnIndianaHallOfDoors",
         emptySceneName: "scnIndianaHallEmpty",
+        questId: "Indiana.HallOfDoors",
     }),
     "Indiana.MagicDoor.Tamago": configure(MicrocosmTamago, {}),
     "Ohio.HallOfDoors": configure(MicrocosmHallOfDoors, {
         doorGiftIds: ["Ohio.MagicDoor.0", "Ohio.MagicDoor.1", "Ohio.MagicDoor.2", "Ohio.MagicDoor.3"],
         homeSceneName: "scnOhioHallOfDoors",
         emptySceneName: "scnOhioHallEmpty",
+        questId: "Ohio.HallOfDoors",
     }),
 };
 

@@ -363,6 +363,28 @@ export namespace DataQuest {
                     drop: { kind: "equipment", id: "NightVision", level: 1 },
                 },
             },
+            "Indiana.HallOfDoors": {
+                flags: null,
+                reward: {
+                    kind: "single",
+                    countCompletions: "once",
+                    drop: [
+                        { kind: "key_item", id: "StaffEarth" },
+                        { kind: "key_item", id: "StaffFlame" },
+                    ],
+                },
+            },
+            "Ohio.HallOfDoors": {
+                flags: null,
+                reward: {
+                    kind: "single",
+                    countCompletions: "once",
+                    drop: [
+                        { kind: "key_item", id: "StaffForest" },
+                        { kind: "key_item", id: "StaffWater" },
+                    ],
+                },
+            },
             __Fallback__: {
                 flags: null,
                 reward: {

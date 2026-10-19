@@ -2,6 +2,7 @@ import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { IguaAudio, Jukebox } from "../core/igua-audio";
 import { mxnDoorHallEmpty } from "../mixins/mxn-door-hall-empty";
+import { objEsotericHallComplete } from "../objects/esoteric/obj-esoteric-hall-complete";
 import { Rpg } from "../rpg/rpg";
 
 export function scnIndianaHallOfDoors() {
@@ -13,4 +14,6 @@ export function scnIndianaHallOfDoors() {
     lvl.MagicDoor1.mixin(mxnDoorHallEmpty, cosmHallOfDoors, 1);
     lvl.MagicDoor2.mixin(mxnDoorHallEmpty, cosmHallOfDoors, 2);
     lvl.MagicDoor3.mixin(mxnDoorHallEmpty, cosmHallOfDoors, 3);
+    objEsotericHallComplete(cosmHallOfDoors)
+        .show();
 }

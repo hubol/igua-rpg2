@@ -1,4 +1,6 @@
 import { DataGift } from "../../data/data-gift";
+import { DataQuest } from "../../data/data-quest";
+import { DramaQuests } from "../../drama/drama-quests";
 import { SceneChanger } from "../../systems/scene-changer";
 import { Rpg } from "../rpg";
 import { RpgMicrocosm } from "../rpg-microcosm";
@@ -17,8 +19,26 @@ export class MicrocosmHallOfDoors extends RpgMicrocosm<MicrocosmHallOfDoors.Stat
         return Rpg.gift(this._config.doorGiftIds[index]);
     }
 
-    isComplete(index: MicrocosmHallOfDoors.Index) {
+    isDoorComplete(index: MicrocosmHallOfDoors.Index) {
         return !this.getGift(index).isGiveable();
+    }
+
+    get areDoorsComplete() {
+        for (let i = 0; i < this._config.doorGiftIds.length; i++) {
+            if (!this.isDoorComplete(i as MicrocosmHallOfDoors.Index)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    get isComplete() {
+        return Rpg.quest(this._config.questId).everCompleted;
+    }
+
+    *dramaComplete() {
+        DramaQuests.complete(this._config.questId);
     }
 
     protected createState(): MicrocosmHallOfDoors.State {
@@ -34,6 +54,7 @@ export namespace MicrocosmHallOfDoors {
         homeSceneName: string;
         emptySceneName: string;
         doorGiftIds: [DataGift.Id, DataGift.Id, DataGift.Id, DataGift.Id];
+        questId: DataQuest.Id;
     }
 
     export type Index = 0 | 1 | 2 | 3;

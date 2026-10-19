@@ -6,7 +6,7 @@ export function mxnDoorHallEmpty(
     cosmHallOfDoors: MicrocosmHallOfDoors,
     index: MicrocosmHallOfDoors.Index,
 ) {
-    if (cosmHallOfDoors.isComplete(index)) {
+    if (cosmHallOfDoors.isDoorComplete(index)) {
         obj.objDoor.sceneChanger = cosmHallOfDoors.emptySceneChanger;
     }
     return obj;

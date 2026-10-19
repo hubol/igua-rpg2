@@ -132,6 +132,36 @@ export namespace DataKeyItem {
                 description: "A birthday cake with the exact number of candles for Misha's birthday.",
                 texture: null,
             },
+            StaffFlame: {
+                name: "Staff of Flame",
+                description: "",
+                texture: null,
+            },
+            StaffEarth: {
+                name: "Staff of Earth",
+                description: "",
+                texture: null,
+            },
+            StaffForest: {
+                name: "Staff of the Forest",
+                description: "",
+                texture: null,
+            },
+            StaffWater: {
+                name: "Staff of Water",
+                description: "",
+                texture: null,
+            },
+            StaffLight: {
+                name: "Staff of Light",
+                description: "",
+                texture: null,
+            },
+            StaffSkies: {
+                name: "Staff of the Skies",
+                description: "",
+                texture: null,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );
