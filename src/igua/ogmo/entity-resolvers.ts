@@ -4,6 +4,7 @@ import { Vector, vnew } from "../../lib/math/vector-type";
 import { ObjectLibrary } from "../core/object-library";
 import { mxnDoorMagic } from "../mixins/mxn-door-magic";
 import { objCharacterGamblingExpert } from "../objects/characters/obj-character-gambling-expert";
+import { objCharacterHomunculus } from "../objects/characters/obj-character-homunculus";
 import { CtxPocketItems, objCollectiblePocketItemSpawner } from "../objects/collectibles/obj-collectible-pocket-item-spawner";
 import { objDevPlayer } from "../objects/dev/obj-dev-player";
 import { objEnvironmentFxBallons } from "../objects/effects/environment/obj-environment-fx-ballons";
@@ -153,9 +154,10 @@ export const OgmoEntityResolvers = {
     BinocularViewer: objEsotericBinocularViewer,
     IguanaNpcPatrolMarker: objIguanaNpcPatrolMarker,
     OutOfOrderSign: objEsotericOutOfOrderSign,
+    HomunculusNpc: (entity: OgmoEntities.HomunculusNpc) => objCharacterHomunculus(entity.values.variantId),
 };
 
-const __checkedOgmoEntityResolvers = OgmoEntityResolvers satisfies OgmoEntityResolverBase;
+const __checkedOgmoEntityResolvers: OgmoEntityResolverBase = OgmoEntityResolvers;
 
 function applyEntityToIguanaObj(obj: ObjIguanaLocomotive, entity: OgmoEntities.GamblingExpertNpc) {
     obj.y = 3;

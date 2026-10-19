@@ -5756,11 +5756,119 @@
       "tintable": {
         "enabled": false,
         "defaultTint": "#ffffff",
-        "rgbLevelValueName": null,
+        "rgbLevelValueName": "",
         "useDefaultTint": true
       },
       "texture": "preview-images/enemy stupid.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAAA0CAYAAADSWosiAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALHSURBVGhD5Zk9bhUxEID3RShXoKEKASkXoKXkCkhIKVJwAioKEBRUnICCIhISV6Ck5QKRkpCKhitESA/mZQZ5J2PvzHjs3VU+6enZu961vxnb+36Gu8oG36t48PL5FotFfn36GtJfBF3FiSUEYA/fu2INVAvCIu+RmTPzs2R8CYRGfE1Znz3jc633UPElPa6maDLQNUz5JlN9DZlvtsaXLt9lcJqp3ztQ3Tqbkt9/dTRcfzzDWvtANLv5wfm7kWgqpQECAVw9fttkjOE35cKAJM0zLEHyQHQAwm4mCRM5QRKbOp8SFYDqXR2ES9LRRPVXFT3NAKxrmyNlnajJvutCS8R/Pnqzez85+DB8vnq9KwNQB/gxXv/+7Q/W8ngC0OVLChcCoF6SBng9ErO4dX1JQhxNmxKeNW8Sr91UQJBeOTRtJKxj6zLVARCBrJYyq2kTRTdxkKFMUpmjaRNFN3EAZOBVQtMmAlF8m4EeTRakzPG6ps0UMDYc5i2wyYjR8y/XKOXhxXss2Xj67B6WbkQBkEuzm8pqnt8pmqRs/oHFG3GNcIpHng8MJElOGrSlD+tMhAC4xAFv5qOxSgPgveeRBjwdptNdYuo8xzMGAJw3XnHCmnmSS9ewdGwKrzQhipOM5ebeAACthEset8RTAWtUrfJWasbDr82KWzsBtk8OsTTm8MsxlnRcvjjF0pjNj0ss6cn5iN9jeTC05MSj8IgD9PRK6fqRdUm4xWEKtV7TJWr7d4nPKczxjkUUl9aEhGcDjELbd86lKMg3OX4Tfr735jY1Hn4+pTjV4cIUPPwf6VgvcuNJwcMi1bs69rEDDzUDu9mBh9xUi6+Vplm6/n2U/SC0f/9s1HfpV9IW/5je2Yw3Ey9l20rt7/kSTcQjpYlo+fC1o5Hm65vQyC3m//G10jXjuUxzeuzw4eIAl9cKc3gA4h5rw/AXn0KdkGcp5BQAAAAASUVORK5CYII="
+    },
+    {
+      "exportID": "42913618",
+      "name": "HomunculusNpc",
+      "limit": -1,
+      "size": {
+        "x": 58,
+        "y": 84
+      },
+      "origin": {
+        "x": 27,
+        "y": 67
+      },
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {
+            "x": -1,
+            "y": -1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": -1
+          },
+          {
+            "x": -1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {
+        "x": 16,
+        "y": 16
+      },
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "flipOnlyScales": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "hasUid": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [
+        "Character"
+      ],
+      "values": [
+        {
+          "name": "variantId",
+          "definition": "Enum",
+          "display": 1,
+          "choices": [
+            "flame",
+            "earth",
+            "forest",
+            "water",
+            "light",
+            "skies"
+          ],
+          "defaults": 0
+        },
+        {
+          "name": "name",
+          "definition": "String",
+          "display": 0,
+          "defaults": "",
+          "maxLength": 0,
+          "trimWhitespace": true
+        },
+        {
+          "name": "depth",
+          "definition": "Integer",
+          "display": 0,
+          "defaults": 0,
+          "bounded": false,
+          "min": -100,
+          "max": 100
+        }
+      ],
+      "isRegion": false,
+      "tintable": {
+        "enabled": false,
+        "defaultTint": "#ffffff",
+        "rgbLevelValueName": null,
+        "useDefaultTint": true
+      },
+      "texture": "preview-images/homunculus.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADoAAABUCAYAAADTRSQCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQgSURBVHhe7ZkxbtwwEEVlp46BVG5yivgCvkCuEWC77dJum86dgVwj53BOkcZVAKc2HH2GXIwozmhIDinJ8QOI1UoUxc8/HHK1F7e3h+GNRnwbhhd/2I1L/9mNNUSC7kLXoqvQGjdrI2FzjqYEWYT7poS2nL+7mqM1A9FNaEu3NKzmqCS8xaDsKnS/DsOFP8zGVCicWDtEOXbjaI2bYFehW4OZUBqy1uFb6yZY1dGe85kV+nSy64RGUGvRoqOS2KWO4Xoo/lQxFu2snoxSIuictBgoMBH69JDXqFUnesBmsxC2V6d5HSowjL5G9OHBHyS4v/EHHrQrOZ2LWehKnYBASSSI61hHy2LophKSdmQ1AmNK7tFQ5eiSizVI98PtXMdNQjd+qJUjls4mhWo2C7Gb1nOKo/Q5U6E//CeDZgBSLrz/9OIKMmucXQNcHdpezWAmHU0tKZzIXk7WchaqcauUPz8vXIE73LzT1KHkrqmqZMTtmPbiJnBCqZszZz/7T09L5zXAyVw3gcrRGIjl3OSSTSlW7V2mHJqdW8jGJYTsaj0wHFNHozB1FIjUdD4kHSnxWA7CVChEQSwVHH/3lMyTHKydludoymFCKjFol4clrNoJXKY2B45R5PPHo/8yJb4niLXsWIC2WRNFrKOcSA50CPeEYonFADqhsUO0o+6YJCQuAqzFxdTmhMnNdFl5PhyHd7/uVCJ/Px5nS5S715irm3KxyRvjdZSdxyPYHsZuthAZKBU7m6NuX4tENDoalhac4/a7MS1F1jBPRtwGoWDjsCXYMKB7WS4RaF22piR80wIwRxG2C4lo90LBkqMQSZNQ77mZK1beAr4ikqOiCd29OcpWlkJ3rbkZkyP2LXSl0N2jo2xFLnS3IjKgFSuGbvzzaGsigbZP8hzd+baPok5GW3QzoOnb/511AZLR4TQM92PRvsqQ3tx9eSSbi/t/mwv3U9Dz/ZrfcEjPp5uWD9d3rB4zR5dEQkgoEIhCz9GBiNG++pRC2ERozjtYCIKjKJK4GM0zpPdWXeZoEOVEjntiTAcUHJ/P+3CuhXM1GdOojBHUzFFXb+E6BaIQqvFxoORZ3I8LupmodlTqGKDXY2Hx3MxpK5eZ0BbrpaaDNSLgYigUqmUitIVIShymIHWuFoRyKEFTl2QEJMdq3NRyFtrazTWBtm6OSuugdK2E1JztIhRC8JtWKtZiY5oLxVoGIf4rC+rkvDHI5Sy05UPWBtomjkpicW2Lg7HUr3BtFrqpm7YoMGap38k5ugdhKdBvWvxpR/NktBVkoXi3+0oQhabWti2FdU5f2IpuS+hfd6b+YPKHi+QOTKu22YpWfzJtXuiboyOvRqj2j2B/KNJKaG67xeto7oMsKXl2WmjkZul6WtKhVgNY3Wgq1Kw6a9f2MPwFlSbpxC4JJkYAAAAASUVORK5CYII="
     }
   ],
   "tilesets": []

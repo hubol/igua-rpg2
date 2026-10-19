@@ -97,14 +97,14 @@ module.exports = function ({ files }, { pascal, noext }) {
             ];
         });
 
-        const regionId = json.values["Region ID"]
+        const regionId = json.values?.["Region ID"]
 
         /** @type {import("../../igua/ogmo/factory").OgmoFactory.Level} */
         const level = {
             width: json.width,
             height: json.height,
             backgroundTint: getSerializableTint(json.backgroundColor),
-            terrainTint: getSerializableTint(json.values["Terrain Color"] ?? "#000000"),
+            terrainTint: getSerializableTint(json.values?.["Terrain Color"] ?? "#000000"),
             regionId: regionId && regionId.toLowerCase().trim() !== "~unset~" ? regionId : null,
         }
 

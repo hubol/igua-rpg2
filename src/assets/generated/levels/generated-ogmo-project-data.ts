@@ -154,6 +154,7 @@ export namespace OgmoEntities {
     depth: number;
   }>;
   export type EnemyStupid = OgmoFactory.EntityBase<{ variant: "level0" | "level1"; name: string; depth: number }>;
+  export type HomunculusNpc = OgmoFactory.EntityBase<{ variantId: "flame" | "earth" | "forest" | "water" | "light" | "skies"; name: string; depth: number }>;
 }
 
 export interface OgmoEntityResolverBase {
@@ -209,4 +210,5 @@ export interface OgmoEntityResolverBase {
   EnvironmentSpeakerPlayerRegion: (entity: OgmoEntities.EnvironmentSpeakerPlayerRegion) => unknown;
   AnyObject: (entity: OgmoEntities.AnyObject) => unknown;
   EnemyStupid: (entity: OgmoEntities.EnemyStupid) => unknown;
+  HomunculusNpc: (entity: OgmoEntities.HomunculusNpc) => unknown;
 }
