@@ -38,7 +38,7 @@ export async function devUpdateStatistics() {
 
     const existing = await DevFsClient.readJson(path);
 
-    const date = await DevFsClient.readGitCommitDate();
+    const date = new Date();
     const next = getObjectSortedByKeys(
         {
             ...existing,
