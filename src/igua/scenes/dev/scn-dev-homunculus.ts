@@ -10,7 +10,7 @@ export function scnDevHomunculus() {
         .map((id, i) => {
             objCharacterHomunculus(id)
                 .at(lvl.DummyMarker)
-                .add(-220 + i * 70, 0)
+                .add(-224 + i * 74, 0)
                 .mixin(mxnCutscene, function* () {
                     yield* show("Hi!!!");
                 })
