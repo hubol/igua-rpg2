@@ -7,10 +7,12 @@ import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 
 const txsHelium = Tx.Effects.Helium.split({ width: 12 });
 const txsHeart = Tx.Effects.Heart12px.split({ width: 12 });
+const txsMystery = Tx.Effects.Mystery12px.split({ width: 12 });
 
 const textureVariants = {
     helium: txsHelium,
     heart: txsHeart,
+    mystery: txsMystery,
 };
 
 export function objFxHelium(id: objFxHelium.VariantId = "helium") {

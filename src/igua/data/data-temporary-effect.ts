@@ -22,6 +22,12 @@ export namespace DataTemporaryEffect {
                     model.esoteric.nightVisionLevel += 1;
                 },
             },
+            MidairJumpFromHelium: {
+                hudText: "Unusual helium enables midair jump",
+                buffs: (model) => {
+                    model.motion.jump.midairCount += 1;
+                },
+            },
             __Fallback__: {
                 hudText: "This is a bug",
                 buffs: () => {},

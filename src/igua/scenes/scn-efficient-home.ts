@@ -73,6 +73,9 @@ function enrichHelium(lvl: LvlType.EfficientHome) {
         if (index === 0) {
             heliumObj.objHeliumExhaust.mode = "heal";
         }
+        else {
+            heliumObj.objHeliumExhaust.mode = "MidairJumpFromHelium";
+        }
     });
 }
 
