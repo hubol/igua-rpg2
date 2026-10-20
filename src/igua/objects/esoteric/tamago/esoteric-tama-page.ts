@@ -1,5 +1,6 @@
 import { DisplayObject, Graphics, Sprite } from "pixi.js";
 import { objText } from "../../../../assets/fonts";
+import { Sfx } from "../../../../assets/sounds";
 import { Tx } from "../../../../assets/textures";
 import { Coro } from "../../../../lib/game-engine/routines/coro";
 import { factor, interpvr } from "../../../../lib/game-engine/routines/interp";
@@ -205,6 +206,7 @@ export namespace EsotericTamaPage {
                     yield sleep(500);
 
                     for (let i = 1; i < 5; i++) {
+                        Sfx.Interact.Tamago.Eat.rate(0.7, 1).play();
                         if (i === 4) {
                             beetObj.visible = false;
                         }
@@ -259,6 +261,7 @@ export namespace EsotericTamaPage {
                     .at(120, -14)
                     .step(self => self.x -= 1)
                     .coro(function* (self) {
+                        Sfx.Interact.Tamago.Wash.play();
                         yield () => self.collides(homeObj);
                         homeObj.step(() => homeObj.x -= 1);
                     }),
@@ -444,6 +447,7 @@ export namespace EsotericTamaPage {
                     .mixin(mxnBoilFlipH)
                     .at(0, 60)
                     .coro(function* (self) {
+                        Sfx.Interact.Tamago.Win.play();
                         yield interpvr(self).to(0, 0).over(500);
                     }),
                 objText.Large("Winer")
