@@ -15,5 +15,6 @@ export function scnIndianaHallOfDoors() {
     lvl.MagicDoor2.mixin(mxnDoorHallEmpty, cosmHallOfDoors, 2);
     lvl.MagicDoor3.mixin(mxnDoorHallEmpty, cosmHallOfDoors, 3);
     objEsotericHallComplete(cosmHallOfDoors)
+        .at(lvl.CompleteMarker)
         .show();
 }

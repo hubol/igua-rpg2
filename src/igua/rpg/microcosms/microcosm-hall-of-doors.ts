@@ -38,7 +38,7 @@ export class MicrocosmHallOfDoors extends RpgMicrocosm<MicrocosmHallOfDoors.Stat
     }
 
     *dramaComplete() {
-        DramaQuests.complete(this._config.questId);
+        yield* DramaQuests.complete(this._config.questId);
     }
 
     protected createState(): MicrocosmHallOfDoors.State {

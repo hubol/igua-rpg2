@@ -121,6 +121,7 @@ export namespace OgmoEntities {
       | "objFxPoisonCloud"
       | "objFxRerollNotification"
       | "objFxSmoke66Px"
+      | "objFxSparkle24Px"
       | "objFxSparkle40Px"
       | "objFxSparkleMany"
       | "objFxSpiritualRelease"
