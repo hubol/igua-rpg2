@@ -1,7 +1,10 @@
 import { Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Integer } from "../../lib/math/number-alias-types";
+import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
+import { range } from "../../lib/range";
 import { Check } from "../../lib/types/check";
 import { ZIndex } from "../core/scene/z-index";
 import { DataEquipment } from "../data/data-equipment";
@@ -23,10 +26,35 @@ const consts = {
 
 export function scnOhioHallPoison() {
     const lvl = Lvl.OhioHallPoison();
+    const enemyMarkers = [lvl.EnemyMarker0, lvl.EnemyMarker1];
 
-    objAngelCactus("level3")
-        .mixin(mxnShowPoisonLevel)
-        .at(lvl.EnemyMarker)
+    container()
+        .coro(function* () {
+            const values = [
+                Rng.choose(5, 7, 9),
+                Rng.choose(11, 13, 15),
+                Rng.intc(16, 30),
+                Rng.intc(16, 30),
+            ];
+            for (const value of values) {
+                const count = value > 15 ? 2 : 1;
+                const objs = range(count)
+                    .map(i =>
+                        objAngelCactus("level3")
+                            .at(enemyMarkers[i])
+                            .mixin(mxnShowPoisonLevel)
+                            .show()
+                    );
+                const goalObj = objGoal(value, objs)
+                    .at(lvl.GoalMarker)
+                    .show();
+                yield () => goalObj.objGoal.value === 0;
+                for (const obj of objs) {
+                    // TODO FX
+                    obj.destroy();
+                }
+            }
+        })
         .show();
 
     container()
@@ -96,4 +124,22 @@ function mxnShowPoisonLevel(obj: MxnRpgStatus) {
                 .zIndexed(ZIndex.BackgroundEntities)
                 .show();
         });
+}
+
+function objGoal(offset: Integer, objs: MxnRpgStatus[]) {
+    const api = {
+        get value() {
+            return offset - objs.reduce((value, obj) => value + obj.status.conditions.poison.level, 0);
+        },
+    };
+
+    return container(
+        new Graphics()
+            .beginFill(objBuildUpBar.tints.Poison.tintFront)
+            .drawCircle(0, 0, 32),
+        objText.XLargeIrregular("0", { tint: objBuildUpBar.tints.Poison.tintBack })
+            .anchored(0.5, 0.5)
+            .step(self => self.text = String(api.value)),
+    )
+        .merge({ objGoal: api });
 }

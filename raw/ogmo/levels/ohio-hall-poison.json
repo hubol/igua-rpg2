@@ -26,7 +26,29 @@
           "originX": 8,
           "originY": 8,
           "tint": "#00ff00",
-          "values": {"name": "EnemyMarker", "depth": 0}
+          "values": {"name": "EnemyMarker0", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 1,
+          "_eid": "73148747",
+          "x": 304,
+          "y": 80,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "EnemyMarker1", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 2,
+          "_eid": "73148747",
+          "x": 176,
+          "y": 96,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "GoalMarker", "depth": 0}
         }
       ]
     },
