@@ -635,6 +635,42 @@ export namespace DataShop {
                     },
                 ],
             },
+            // TODO all these shops need cool stuff!
+            HomunculusEarth: {
+                stocks: [],
+            },
+            HomunculusFlame: {
+                stocks: [
+                    {
+                        product: { kind: "equipment", id: "MeleeOverheat", level: 1 },
+                        initialQuantity: 6,
+                        price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
+                    },
+                    {
+                        product: { kind: "equipment", id: "SpellHotPineCone", level: 1 },
+                        initialQuantity: 6,
+                        price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
+                    },
+                ],
+            },
+            HomunculusForest: {
+                stocks: [],
+            },
+            HomunculusSkies: {
+                stocks: [
+                    {
+                        product: { kind: "equipment", id: "DoubleJump", level: 1 },
+                        initialQuantity: 6,
+                        price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
+                    },
+                ],
+            },
+            HomunculusLight: {
+                stocks: [],
+            },
+            HomunculusWater: {
+                stocks: [],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );

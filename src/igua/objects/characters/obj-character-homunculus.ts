@@ -4,6 +4,7 @@ import { Integer, RgbInt } from "../../../lib/math/number-alias-types";
 import { VectorSimple } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { ZIndex } from "../../core/scene/z-index";
+import { DataHomunculus } from "../../data/data-homunculus";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
@@ -15,8 +16,8 @@ import { objAngelMouth } from "../enemies/obj-angel-mouth";
 
 const txsStaff = Tx.Characters.Homunculus.Staves.split({ width: 32 });
 
-const variants = {
-    flame: {
+const variants: Record<DataHomunculus.Id, variants.Type> = {
+    Flame: {
         assPivot: [25, 67],
         txs: Tx.Characters.Homunculus.Flame.split({ width: 56 }),
         controlIndices: {
@@ -33,9 +34,8 @@ const variants = {
             primary: 0xF28000,
             secondary: 0xF2CD00,
         },
-        name: "Homunculus of Flame",
     },
-    earth: {
+    Earth: {
         assPivot: [25, 46],
         staffIndex: 2,
         txs: Tx.Characters.Homunculus.Earth.split({ width: 56 }),
@@ -51,9 +51,8 @@ const variants = {
             primary: 0x7F3D07,
             secondary: 0xDDB99B,
         },
-        name: "Homunculus of Earth",
     },
-    forest: {
+    Forest: {
         assPivot: [25, 54],
         staffIndex: 0,
         txs: Tx.Characters.Homunculus.Forest.split({ width: 56 }),
@@ -70,9 +69,8 @@ const variants = {
             primary: 0x4B683F,
             secondary: 0x9E8B48,
         },
-        name: "Homunculus of the Forest",
     },
-    water: {
+    Water: {
         assPivot: [26, 55],
         staffIndex: 4,
         txs: Tx.Characters.Homunculus.Water.split({ width: 58 }),
@@ -88,9 +86,8 @@ const variants = {
             primary: 0x372C99,
             secondary: 0x77C2FF,
         },
-        name: "Homunculus of Water",
     },
-    light: {
+    Light: {
         assPivot: [25, 46],
         staffIndex: 5,
         txs: Tx.Characters.Homunculus.Light.split({ width: 56 }),
@@ -106,9 +103,8 @@ const variants = {
             primary: 0x5B46A0,
             secondary: 0x9B94F7,
         },
-        name: "Homunculus of Light",
     },
-    skies: {
+    Skies: {
         assPivot: [36, 50],
         staffIndex: 3,
         txs: Tx.Characters.Homunculus.Skies.split({ width: 78 }),
@@ -127,9 +123,8 @@ const variants = {
             primary: 0x93D0FF,
             secondary: 0xffffff,
         },
-        name: "Homunculus of the Skies",
     },
-} satisfies Record<string, variants.Type>;
+};
 
 namespace variants {
     export type Control = "pivot1" | "sine_pivot" | "head" | "demo_face" | "arms";
@@ -146,7 +141,6 @@ namespace variants {
             primary: RgbInt;
             secondary: RgbInt;
         };
-        name: string;
     }
 }
 
@@ -158,10 +152,13 @@ const applyControlToSprite: Record<variants.Control, (obj: Sprite, variant: vari
     arms: (obj) => obj,
 };
 
-export function objCharacterHomunculus(id: objCharacterHomunculus.Id) {
+export function objCharacterHomunculus(id: DataHomunculus.Id) {
     const variant = variants[id];
 
     const api = {
+        get id() {
+            return id;
+        },
         hasStaff: true,
     };
 
@@ -197,7 +194,7 @@ export function objCharacterHomunculus(id: objCharacterHomunculus.Id) {
         .mixin(mxnDetectPlayer)
         .mixin(mxnHasHead, { obj: headObj })
         .mixin(mxnSpeaker, {
-            name: variant.name,
+            name: DataHomunculus.getById(id).name,
             tintPrimary: variant.tints.primary,
             tintSecondary: variant.tints.secondary,
         })
@@ -206,10 +203,8 @@ export function objCharacterHomunculus(id: objCharacterHomunculus.Id) {
 }
 
 export namespace objCharacterHomunculus {
-    export type Id = keyof typeof variants;
+    export type Type = ReturnType<typeof objCharacterHomunculus>;
 }
-
-objCharacterHomunculus.ids = Object.keys(variants) as objCharacterHomunculus.Id[];
 
 function objCharacterHomunculusFace(variant: variants.Type) {
     return container(

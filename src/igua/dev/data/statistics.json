@@ -445,6 +445,7 @@
     "Equipment": 42,
     "Fact": 12,
     "Gift": 17,
+    "Homunculus": 6,
     "Idol": 4,
     "KeyItem": 30,
     "NpcPersona": 100,
@@ -453,7 +454,7 @@
     "Quest": 39,
     "RespawnConfiguration": 3,
     "Scene": 98,
-    "Shop": 30,
+    "Shop": 36,
     "SongTitle": 51,
     "Spell": 2,
     "TemporaryEffect": 4

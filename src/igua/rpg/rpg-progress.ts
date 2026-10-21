@@ -1,6 +1,7 @@
 import { Mzk } from "../../assets/music";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Null } from "../../lib/types/null";
+import { DataHomunculus } from "../data/data-homunculus";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DataPocketItem } from "../data/data-pocket-item";
 import { RpgCharacterEquipment } from "./rpg-character-equipment";
@@ -142,6 +143,13 @@ export function getInitialRpgProgress() {
                 fallenBot: {
                     perfectScoreTimes: 0,
                 },
+            },
+            homunculus: {
+                // TODO I wonder if flags should be destroyed and replaced with "quests"
+                receivedStaff: DataHomunculus.ids.reduce((obj, id) => {
+                    obj[id] = false;
+                    return obj;
+                }, {} as Record<DataHomunculus.Id, boolean>),
             },
         },
         microcosms: RpgMicrocosms.createState(),

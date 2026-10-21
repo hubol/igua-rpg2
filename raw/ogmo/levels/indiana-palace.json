@@ -4,6 +4,7 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
+  "values": {"Terrain Color": "#000000", "Region ID": "~Unset~"},
   "backgroundColor": "#408000",
   "layers": [
     {
@@ -92,7 +93,7 @@
           "y": 168,
           "originX": 27,
           "originY": 67,
-          "values": {"variantId": "flame", "name": "", "depth": 0}
+          "values": {"variantId": "Flame", "name": "FlameNpc", "depth": 0}
         },
         {
           "name": "HomunculusNpc",
@@ -102,7 +103,7 @@
           "y": 168,
           "originX": 27,
           "originY": 67,
-          "values": {"variantId": "forest", "name": "", "depth": 0}
+          "values": {"variantId": "Forest", "name": "ForestNpc", "depth": 0}
         }
       ]
     },
@@ -241,7 +242,8 @@
           "texture": "esoteric/demo/homunculus.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
