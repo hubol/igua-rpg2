@@ -72,7 +72,12 @@ export function scnWizardLair() {
 
                 yield* show(
                     "Seems good, right?",
-                    "OK! Bye-bye now!!!!",
+                    "OK! Now listen close.",
+                    "If you're a goal-oriented... critter...",
+                    "Seek the Palace.",
+                    "My councilmembers need your help.",
+                    "They will reward you handsomely.",
+                    "OK. That's all. Bye-bye!!!",
                 );
             }, { speaker: wizardObj, camera: { end: "pan_to_player" } })
                 .done;
