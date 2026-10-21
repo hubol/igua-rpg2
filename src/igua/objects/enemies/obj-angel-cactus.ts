@@ -142,9 +142,9 @@ const ranks = {
     }),
     level3: RpgEnemyRank.create({
         status: {
-            healthMax: 999,
+            healthMax: 50,
             defenses: {
-                physical: 99,
+                physical: 100,
             },
         },
         loot: {},
