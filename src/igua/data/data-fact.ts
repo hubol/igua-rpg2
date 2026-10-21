@@ -23,7 +23,7 @@ export namespace DataFact {
             },
             FarmingGods: {
                 heading: "About farming gods",
-                messages: ["Beet and Wheat are farming gods created by the Homunculus of Forest."],
+                messages: ["Beet and Wheat are farming gods created by the Homunculus of the Forest."],
             },
             Poison: {
                 heading: "About poison",
