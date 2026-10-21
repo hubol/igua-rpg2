@@ -63,7 +63,7 @@ export class RpgPlayer {
             get physical() {
                 return Math.max(
                     1,
-                    3 + player.attributes.strength * 2
+                    Math.max(0, 3 + player.attributes.strength * 2)
                         + player.buffs.combat.melee.faceAttack.physical,
                 );
             },
@@ -90,7 +90,7 @@ export class RpgPlayer {
             get physical() {
                 return Math.max(
                     1,
-                    5 + player.attributes.strength * 5
+                    Math.max(0, 5 + player.attributes.strength * 5)
                         + player.buffs.combat.melee.clawAttack.physical,
                 );
             },
