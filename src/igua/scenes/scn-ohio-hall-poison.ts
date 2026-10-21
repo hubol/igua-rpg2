@@ -1,6 +1,9 @@
 import { Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Sfx } from "../../assets/sounds";
+import { holdf } from "../../lib/game-engine/routines/hold";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
@@ -8,6 +11,7 @@ import { range } from "../../lib/range";
 import { Check } from "../../lib/types/check";
 import { ZIndex } from "../core/scene/z-index";
 import { DataEquipment } from "../data/data-equipment";
+import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { DramaInventory } from "../drama/drama-inventory";
 import { show } from "../drama/show";
 import { Cutscene } from "../globals";
@@ -32,11 +36,11 @@ export function scnOhioHallPoison() {
         .coro(function* () {
             const values = [
                 Rng.choose(5, 7, 9),
-                Rng.choose(11, 13, 15),
-                Rng.intc(16, 30),
-                Rng.intc(16, 30),
+                Rng.intc(11, 15),
+                ...Rng.shuffle([16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]).slice(-2),
             ];
-            for (const value of values) {
+            for (let i = 0; i < values.length;) {
+                const value = values[i];
                 const count = value > 15 ? 2 : 1;
                 const objs = range(count)
                     .map(i =>
@@ -48,12 +52,25 @@ export function scnOhioHallPoison() {
                 const goalObj = objGoal(value, objs)
                     .at(lvl.GoalMarker)
                     .show();
-                yield () => goalObj.objGoal.value === 0;
+                yield holdf(() => goalObj.objGoal.value <= 0, 60);
+
+                if (goalObj.objGoal.value === 0) {
+                    i += 1;
+                    Sfx.Interact.Correct.play();
+                }
+                else {
+                    Sfx.Interact.Error.play();
+                }
+
                 for (const obj of objs) {
                     // TODO FX
                     obj.destroy();
                 }
+                yield sleep(1000);
+                goalObj.destroy();
             }
+
+            yield* DramaHallOfDoors.complete(Rpg.microcosms["Ohio.HallOfDoors"], 3);
         })
         .show();
 
@@ -139,7 +156,8 @@ function objGoal(offset: Integer, objs: MxnRpgStatus[]) {
             .drawCircle(0, 0, 32),
         objText.XLargeIrregular("0", { tint: objBuildUpBar.tints.Poison.tintBack })
             .anchored(0.5, 0.5)
-            .step(self => self.text = String(api.value)),
+            .step(self => self.text = String(offset)),
     )
-        .merge({ objGoal: api });
+        .merge({ objGoal: api })
+        .zIndexed(ZIndex.BackgroundEntities);
 }
