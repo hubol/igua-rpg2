@@ -1,5 +1,4 @@
 import { Graphics, Sprite } from "pixi.js";
-import { OgmoEntities } from "../../../assets/generated/levels/generated-ogmo-project-data";
 import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { holdf } from "../../../lib/game-engine/routines/hold";
@@ -70,6 +69,33 @@ const themes = (() => {
             mouth: (obj) => obj.add(0, 6),
             sprites: {
                 nose: (obj) => obj.add(8, -5).zIndexed(1),
+            },
+        }),
+        onion: template.createTheme({
+            eyes: {
+                gap: 18,
+                eyelidsTint: 0x0000ff,
+                sclerasMirrored: false,
+                pupilsMirrored: false,
+                pupilsTx: Tx.Enemy.Cactus.Pupil0,
+                scleraTx: Tx.Enemy.Cactus.Sclera1,
+                pupilRestStyle: {
+                    kind: "cross_eyed",
+                    offsetFromCenter: 0,
+                },
+            },
+            mouth: {
+                txs: objAngelMouth.txs.v14,
+                frowningOffsetY: [-2, -2],
+            },
+            tints: {
+                map: [0x8F645F, 0xa3bd6c, 0x7A4741],
+            },
+        }, {
+            eyes: obj => obj.add(-1, 4),
+            mouth: (obj) => obj.add(0, 6),
+            sprites: {
+                nose: obj => obj.add(0, 2).invisible(),
             },
         }),
     };
@@ -177,8 +203,7 @@ const variants = {
     level3: {
         features: new Set<Feature>(),
         rank: ranks.level3,
-        // TODO special theme?
-        theme: themes.common,
+        theme: themes.onion,
     },
 };
 
