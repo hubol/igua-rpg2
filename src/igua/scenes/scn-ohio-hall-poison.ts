@@ -6,10 +6,11 @@ import { Coro } from "../../lib/game-engine/routines/coro";
 import { holdf } from "../../lib/game-engine/routines/hold";
 import { interpc, interpv } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
-import { sleep } from "../../lib/game-engine/routines/sleep";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../lib/math/number";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
+import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { Check } from "../../lib/types/check";
@@ -20,11 +21,16 @@ import { DramaInventory } from "../drama/drama-inventory";
 import { show } from "../drama/show";
 import { Cutscene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { mxnRpgAttack } from "../mixins/mxn-rpg-attack";
 import { MxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
+import { mxnStopAndDieWhenHitGround } from "../mixins/mxn-stop-and-die-when-hit-ground";
+import { mxnYell } from "../mixins/mxn-yell";
 import { objFxFormativeBlob } from "../objects/effects/obj-fx-formative-blob";
 import { objAngelCactus } from "../objects/enemies/obj-angel-cactus";
+import { playerObj } from "../objects/obj-player";
 import { objBuildUpBar } from "../objects/overlay/obj-build-up-bar";
+import { objSpikedCanonball } from "../objects/projectiles/obj-spiked-canonball";
 import { Rpg } from "../rpg/rpg";
 import { RpgAttack } from "../rpg/rpg-attack";
 import { RpgFaction } from "../rpg/rpg-faction";
@@ -40,9 +46,16 @@ const atkDestroyCactus = RpgAttack.create({
     versus: RpgFaction.Enemy,
 });
 
+const atkPunishPlayer = RpgAttack.create({
+    physical: 25,
+});
+
 export function scnOhioHallPoison() {
     const lvl = Lvl.OhioHallPoison();
     const enemyMarkers = [lvl.EnemyMarker0, lvl.EnemyMarker1];
+
+    const facilitatorObj = lvl.FacilitatorNpc
+        .mixin(mxnYell);
 
     [lvl.CloudGroup0, lvl.CloudGroup1]
         .forEach(obj =>
@@ -90,7 +103,8 @@ export function scnOhioHallPoison() {
                     () => objs.every(obj => obj.destroyed),
                 ]);
 
-                if (goalObj.objGoal.value === 0) {
+                const isCorrect = goalObj.objGoal.value === 0;
+                if (isCorrect) {
                     i += 1;
                     Sfx.Interact.Correct.play();
                 }
@@ -101,6 +115,31 @@ export function scnOhioHallPoison() {
                 for (const obj of objs) {
                     obj.damage(atkDestroyCactus);
                 }
+
+                if (!isCorrect) {
+                    facilitatorObj.mxnYell.yell("That's not how it's done!!!");
+
+                    const position = vnew(playerObj.x, 40);
+
+                    objFxFormativeBlob()
+                        .tinted(0x003000)
+                        .at(position)
+                        .show();
+
+                    yield sleep(400);
+
+                    for (let dx = 40; dx >= -40; dx -= 20) {
+                        const ballObj = objSpikedCanonball()
+                            .mixin(mxnRpgAttack, { attack: atkPunishPlayer })
+                            .mixin(mxnStopAndDieWhenHitGround)
+                            .at(position)
+                            .add(Math.round(dx / 8), 0)
+                            .show();
+                        ballObj.speed.at(dx / 33, -2);
+                        yield sleepf(8);
+                    }
+                }
+
                 yield sleep(1000);
                 goalObj.destroy();
             }
