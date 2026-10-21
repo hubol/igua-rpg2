@@ -1,4 +1,4 @@
-import { Graphics } from "pixi.js";
+import { DisplayObject, Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Sfx } from "../../assets/sounds";
@@ -46,7 +46,7 @@ const atkDestroyCactus = RpgAttack.create({
     versus: RpgFaction.Enemy,
 });
 
-const atkPunishPlayer = RpgAttack.create({
+const atkTrapPlayer = RpgAttack.create({
     physical: 25,
 });
 
@@ -116,9 +116,16 @@ export function scnOhioHallPoison() {
                     obj.damage(atkDestroyCactus);
                 }
 
-                if (!isCorrect) {
-                    facilitatorObj.mxnYell.yell("That's not how it's done!!!");
+                function getYellMessage() {
+                    if (!isCorrect) {
+                        return "That's not how it's done!!!";
+                    }
+                    return i < values.length ? "Yes! The ceremony progresses!" : "Yes! We're at the end!";
+                }
 
+                facilitatorObj.mxnYell.yell(getYellMessage());
+
+                if (isCorrect) {
                     const position = vnew(playerObj.x, 40);
 
                     objFxFormativeBlob()
@@ -128,19 +135,25 @@ export function scnOhioHallPoison() {
 
                     yield sleep(400);
 
+                    const ballObjs = new Array<DisplayObject>();
+
                     for (let dx = 40; dx >= -40; dx -= 20) {
                         const ballObj = objSpikedCanonball()
-                            .mixin(mxnRpgAttack, { attack: atkPunishPlayer })
+                            .mixin(mxnRpgAttack, { attack: atkTrapPlayer })
                             .mixin(mxnStopAndDieWhenHitGround)
                             .at(position)
                             .add(Math.round(dx / 8), 0)
                             .show();
                         ballObj.speed.at(dx / 33, -2);
+                        ballObjs.push(ballObj);
                         yield sleepf(8);
                     }
+                    yield () => ballObjs.last.destroyed;
+                }
+                else {
+                    yield sleep(1000);
                 }
 
-                yield sleep(1000);
                 goalObj.destroy();
             }
 
