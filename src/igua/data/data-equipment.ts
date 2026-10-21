@@ -6,11 +6,18 @@ import { RpgPlayerBuffs } from "../rpg/rpg-player-buffs";
 import { DataLib } from "./data-lib";
 
 export namespace DataEquipment {
+    export type Flag = "is_statically_enchanted";
+
+    function flags(...flags: Flag[]) {
+        return new Set(flags);
+    }
+
     export interface Model {
         name: string;
         description: string;
         buffs: RpgPlayerBuffs.MutatorFn;
         texture: Texture | null;
+        flags: Set<Flag>;
     }
 
     export const { manifest, ids, getById } = DataLib
@@ -22,6 +29,7 @@ export namespace DataEquipment {
                     texture: Tx.Collectibles.Equipment.JumpSpecialSigns,
                     description: "Increase jump height at special signs",
                     buffs: (model, bonus) => model.motion.jump.bonusAtSpecialSigns += 2 * (1 + bonus),
+                    flags: flags(),
                 },
                 PoisonRing: {
                     name: "Green Drip",
@@ -31,6 +39,7 @@ export namespace DataEquipment {
                         model.combat.melee.conditions.poison.value += Math.round(((2 + 1 * bonus) / 3) * 100);
                         model.combat.melee.conditions.poison.maxLevel += 2 + Math.round(bonus * 1.5);
                     },
+                    flags: flags(),
                 },
                 RichesRing: {
                     name: "Luck Coin",
@@ -40,6 +49,7 @@ export namespace DataEquipment {
                         model.loot.tiers.nothingRerollCount += 1 + bonus;
                         model.loot.valuables.bonus += 6 + 4 * bonus;
                     },
+                    flags: flags(),
                 },
                 YellowRichesRing: {
                     name: "Luck Coin (Oxidized)",
@@ -49,6 +59,7 @@ export namespace DataEquipment {
                         model.loot.pocket.bonusChance += Math.round((0.2 + Math.sqrt(bonus / 5) * 0.8) * 100);
                         model.loot.valuables.bonus += 1 + 2 * bonus;
                     },
+                    flags: flags(),
                 },
                 BoneCoin: {
                     name: "Bone Coin",
@@ -58,6 +69,7 @@ export namespace DataEquipment {
                         model.loot.valuables.bonus += 1 + 1 * bonus;
                         model.combat.defense.physical += 1 + bonus;
                     },
+                    flags: flags(),
                 },
                 NailFile: {
                     name: "Vicious Cleat",
@@ -65,6 +77,7 @@ export namespace DataEquipment {
                     description: "Bonus claw physical attack",
                     // TODO would be cool if stats could be based on player attributes here...
                     buffs: (model, bonus) => model.combat.melee.clawAttack.physical += 5 + bonus * 2,
+                    flags: flags(),
                 },
                 PatheticCage: {
                     name: "Foolish Little Cactus",
@@ -76,6 +89,7 @@ export namespace DataEquipment {
                         model.combat.melee.faceAttack.physical += 1 + bonus;
                         model.combat.melee.clawAttack.physical += 1 + bonus;
                     },
+                    flags: flags(),
                 },
                 IqIndicator: {
                     name: "IQ Indicator",
@@ -84,6 +98,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.attributes.intelligence += 1 + bonus;
                     },
+                    flags: flags(),
                 },
                 FactionDefenseMiner: {
                     name: "Commemorative Pillow (Generator Festival)",
@@ -95,6 +110,7 @@ export namespace DataEquipment {
                             model.loot.valuables.bonus += bonus - 1;
                         }
                     },
+                    flags: flags(),
                 },
                 BallonLastLonger: {
                     name: "Float Kernel",
@@ -114,6 +130,7 @@ export namespace DataEquipment {
                             }
                         };
                     })(),
+                    flags: flags(),
                 },
                 DefensePhysicalAndPerfectBonus: {
                     name: "Def. Charm",
@@ -127,18 +144,21 @@ export namespace DataEquipment {
                             model.combat.melee.clawAttack.perfect.combatExperience += 15 + bonus * 5;
                         };
                     })(),
+                    flags: flags(),
                 },
                 StrengthUp: {
                     name: "Strong Icon",
                     texture: Tx.Collectibles.Equipment.Dumbell,
                     description: "Increases strength",
                     buffs: (model, bonus) => model.attributes.strength += 1 + bonus,
+                    flags: flags(),
                 },
                 HealthUp: {
                     name: "Healthy Icon",
                     texture: Tx.Collectibles.Equipment.Heart,
                     description: "Increases health",
                     buffs: (model, bonus) => model.attributes.health += 5 + bonus * 2,
+                    flags: flags(),
                 },
                 WetnessCapacityUp: {
                     name: "Sponge",
@@ -149,6 +169,7 @@ export namespace DataEquipment {
                         model.experience.bonusFactorWhileWet.combat += (1 + bonus) * 50;
                         model.experience.bonusFactorWhileWet.jump += (1 + bonus) * 50;
                     },
+                    flags: flags(),
                 },
                 PoisonResistance: {
                     name: "Vaccine Shoe",
@@ -168,12 +189,14 @@ export namespace DataEquipment {
                             model.loot.pocket.bonusChance += bonus > 5 ? (10 + (bonus - 6) * 3) : 0;
                         };
                     })(),
+                    flags: flags(),
                 },
                 MusicTempoUp: {
                     name: "Artifact of Allegro",
                     texture: Tx.Collectibles.Equipment.Spedometer,
                     description: "World feels faster",
                     buffs: (model, bonus) => model.audio.musicTempoAdjustmentFactor += 10 * (bonus + 1),
+                    flags: flags(),
                 },
                 WalkTopSpeedAndMusicTempoDown: {
                     name: "Anvilled Shoe",
@@ -183,6 +206,7 @@ export namespace DataEquipment {
                         model.audio.musicTempoAdjustmentFactor -= 10 * (bonus + 1);
                         model.motion.walk.topSpeedIncreaseFactor -= 20 * (bonus + 1);
                     },
+                    flags: flags(),
                 },
                 ApprovalIndianaMerchants: {
                     name: "Heel of Indiana Merchants",
@@ -191,6 +215,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.approval.indianaMerchants = 100 + bonus * 100;
                     },
+                    flags: flags(),
                 },
                 SceneChangeErrorChanceUp: {
                     name: "Error Sandal",
@@ -199,6 +224,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.esoteric.sceneChangeErrorChance += 1 + bonus;
                     },
+                    flags: flags(),
                 },
                 RecognizeSong: {
                     name: "Audiophile's Shoe",
@@ -207,6 +233,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.esoteric.recognizeSongFactor += 100 + bonus * 100;
                     },
+                    flags: flags(),
                 },
                 DoubleJump: {
                     name: "Angel's Charm",
@@ -227,6 +254,7 @@ export namespace DataEquipment {
                         model.motion.jump.midairCount += jumpBonus;
                         model.attributes.health -= jumpBonus * 5;
                     },
+                    flags: flags(),
                 },
                 Cigarette: {
                     name: "Smoky Charm",
@@ -236,6 +264,7 @@ export namespace DataEquipment {
                         model.cosmetic.cigaretteSmoking += 100;
                         model.wallet.bonusCasinoPity += 1 + bonus;
                     },
+                    flags: flags(),
                 },
                 HackerRemnant: {
                     name: "Hacker's Remnant",
@@ -253,6 +282,7 @@ export namespace DataEquipment {
                             model.esoteric.funHouseWinChance += rng.intc(4);
                         };
                     })(),
+                    flags: flags(),
                 },
                 Sparkle: {
                     name: "Legendary Charm",
@@ -261,6 +291,7 @@ export namespace DataEquipment {
                     buffs: (model) => {
                         model.cosmetic.sparkling += 100;
                     },
+                    flags: flags(),
                 },
                 NightVision: {
                     name: "Night Vision Shoe",
@@ -269,6 +300,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.esoteric.nightVisionLevel += 1 + bonus;
                     },
+                    flags: flags(),
                 },
                 Robotic: {
                     name: "Nerd's True Charm",
@@ -277,6 +309,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.cosmetic.roboticism += 100;
                     },
+                    flags: flags(),
                 },
                 PocketSlot: {
                     name: "Convenient Shoe",
@@ -286,6 +319,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.pocket.bonusSlotCount += 1 + bonus;
                     },
+                    flags: flags(),
                 },
                 BlueCrystalSock: {
                     name: "Crystal Sock (Blue)",
@@ -301,6 +335,7 @@ export namespace DataEquipment {
                             model.attributes.strength += strengthValues[bonus] ?? strengthValues.last;
                         };
                     })(),
+                    flags: flags(),
                 },
                 SpellHotPineCone: {
                     name: "Hot Pine Seed Pack",
@@ -312,6 +347,7 @@ export namespace DataEquipment {
                         model.combat.spells.requirements.minPocketItemsCount += 1;
                         model.combat.spells.cost.pocketItemChance += Math.max(10, 60 - bonus * 20);
                     },
+                    flags: flags(),
                 },
                 MeleeOverheat: {
                     name: "Hot Sock",
@@ -328,6 +364,7 @@ export namespace DataEquipment {
                                 + Math.max(0, bonus - damages.length) * 10;
                         };
                     })(),
+                    flags: flags(),
                 },
                 OverheatResistance0: {
                     name: "Ice Cube",
@@ -336,6 +373,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
                     },
+                    flags: flags(),
                 },
                 OverheatResistance1: {
                     name: "Aloe Drops",
@@ -344,6 +382,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
                     },
+                    flags: flags(),
                 },
                 OverheatResistance2: {
                     name: "Fishnets",
@@ -352,6 +391,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
                     },
+                    flags: flags(),
                 },
                 OverheatResistance3: {
                     name: "Cooling Bandage",
@@ -360,6 +400,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.conditions.overheatMaxIncreaseFactor += 200 + bonus * 100;
                     },
+                    flags: flags(),
                 },
                 SpellOpenFlopBlindBoxes: {
                     name: "Buzzsaw",
@@ -369,6 +410,7 @@ export namespace DataEquipment {
                         model.combat.spells.equipped.OpenFlopBlindBoxes += 1 + bonus;
                         model.combat.spells.maxPower += Math.max(1, Math.round(60 * Math.pow(0.5, bonus)));
                     },
+                    flags: flags(),
                 },
                 BallonDrainOnGround: {
                     name: "Dark Magnet",
@@ -378,6 +420,7 @@ export namespace DataEquipment {
                         model.conditions.ballonDrainOnGround += 100;
                         model.combat.defense.physical += bonus;
                     },
+                    flags: flags(),
                 },
                 FishFood: {
                     name: "Starfish Sock",
@@ -393,6 +436,7 @@ export namespace DataEquipment {
                             model.esoteric.fishFood.bonusClumpsCount += 1 + bonus;
                         };
                     })(),
+                    flags: flags(),
                 },
                 EctoplasmStreak: {
                     name: "Aura Absorber",
@@ -401,6 +445,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.esoteric.bonusCemeteryEctoplasmStreak += 1 + bonus;
                     },
+                    flags: flags(),
                 },
                 ForestSpiritChance: {
                     name: "Charged Clog",
@@ -409,6 +454,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.loot.specialEvents.replaceItemsWithForestSpritChance += 2 + bonus;
                     },
+                    flags: flags(),
                 },
                 DestructiveAutoJump: {
                     name: "Dangerous Spring",
@@ -419,6 +465,7 @@ export namespace DataEquipment {
                         model.motion.jump.takeDamageChance += Math.max(1, 95 - bonus * 5);
                         model.motion.jump.takeDamageAmount += Math.max(1, 2 - bonus);
                     },
+                    flags: flags(),
                 },
                 FaceAttack: {
                     name: "Face Charm",
@@ -427,6 +474,7 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.combat.melee.faceAttack.physical += 4 + bonus;
                     },
+                    flags: flags(),
                 },
                 WeakeningPoisonRing: {
                     name: "???",
@@ -435,14 +483,16 @@ export namespace DataEquipment {
                     buffs: (model, bonus) => {
                         model.attributes.strength -= 999;
                         model.combat.melee.conditions.poison.maxLevel += 1 + bonus;
-                        model.combat.melee.conditions.poison.value += 9;
+                        model.combat.melee.conditions.poison.value += 33;
                     },
+                    flags: flags("is_statically_enchanted"),
                 },
                 __Fallback__: {
                     name: "???",
                     texture: null,
                     description: "If you are reading this, it is an error",
                     buffs: RpgPlayerBuffs.voidMutator,
+                    flags: flags(),
                 },
             } satisfies Record<string, Model>,
         );

@@ -81,6 +81,11 @@ function* upgradeOrFix() {
         return;
     }
 
+    if (DataEquipment.getById(chosenEquipment.id).flags.has("is_statically_enchanted")) {
+        yield* show("Sorry, those shoes are statically enchanted and cannot be upgraded.");
+        return;
+    }
+
     const equipmentToUpgrade = upgradeableEquipments.find(upgradeable =>
         upgradeable.resultingEquipment === chosenEquipment
     );
