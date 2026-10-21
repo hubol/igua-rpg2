@@ -2,8 +2,9 @@ import { Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Sfx } from "../../assets/sounds";
+import { Coro } from "../../lib/game-engine/routines/coro";
 import { holdf } from "../../lib/game-engine/routines/hold";
-import { interpc } from "../../lib/game-engine/routines/interp";
+import { interpc, interpv } from "../../lib/game-engine/routines/interp";
 import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../lib/math/number";
@@ -24,6 +25,8 @@ import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
 import { objAngelCactus } from "../objects/enemies/obj-angel-cactus";
 import { objBuildUpBar } from "../objects/overlay/obj-build-up-bar";
 import { Rpg } from "../rpg/rpg";
+import { RpgAttack } from "../rpg/rpg-attack";
+import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgInventory } from "../rpg/rpg-inventory";
 
 const consts = {
@@ -31,9 +34,24 @@ const consts = {
     levels: [1, 2, 4, 8],
 };
 
+const atkDestroyCactus = RpgAttack.create({
+    emotional: 999,
+    versus: RpgFaction.Enemy,
+});
+
 export function scnOhioHallPoison() {
     const lvl = Lvl.OhioHallPoison();
     const enemyMarkers = [lvl.EnemyMarker0, lvl.EnemyMarker1];
+
+    [lvl.CloudGroup0, lvl.CloudGroup1]
+        .forEach(obj =>
+            obj.coro(function* (self) {
+                while (true) {
+                    yield sleep(Rng.intc(666, 1111));
+                    self.pivot.y = self.pivot.y === 0 ? 1 : 0;
+                }
+            })
+        );
 
     container()
         .coro(function* () {
@@ -55,7 +73,10 @@ export function scnOhioHallPoison() {
                 const goalObj = objGoal(value, objs)
                     .at(lvl.GoalMarker)
                     .show();
-                yield holdf(() => goalObj.objGoal.value <= 0, 60);
+                yield* Coro.race([
+                    holdf(() => goalObj.objGoal.value <= 0, 60),
+                    () => objs.every(obj => obj.destroyed),
+                ]);
 
                 if (goalObj.objGoal.value === 0) {
                     i += 1;
@@ -66,8 +87,7 @@ export function scnOhioHallPoison() {
                 }
 
                 for (const obj of objs) {
-                    // TODO FX
-                    obj.destroy();
+                    obj.damage(atkDestroyCactus);
                 }
                 yield sleep(1000);
                 goalObj.destroy();
@@ -92,8 +112,15 @@ export function scnOhioHallPoison() {
                 .filter(item => Rpg.inventory.count(item) < 1);
 
             if (itemsToReceive.length > 0) {
-                yield* show("Oh!", "You'll need these for my little challenge!");
+                yield* show(
+                    "What a beautiful night for this occasion!",
+                    "Oh hey!",
+                    "You'll need these for the ceremony!",
+                );
                 yield* DramaInventory.receiveItems(itemsToReceive);
+            }
+            else {
+                yield* show("You have everything you need!", "Get to work!");
             }
         });
 
@@ -182,19 +209,25 @@ function objGoal(offset: Integer, objs: MxnRpgStatus[]) {
                     self.tint = 0x800000;
                 }
             }),
-        objText.XLargeIrregular("0", { tint: objBuildUpBar.tints.Poison.tintBack })
-            .anchored(0.5, 0.5)
-            .mixin(mxnSinePivot)
-            .step(self => {
-                self.text = String(offset);
-                if (api.value === 0) {
-                    self.tint = 0x00ff00;
-                }
-                else if (api.value < 0) {
-                    self.tint = 0xff0000;
-                }
-            }),
     )
+        .scaled(0, 0)
+        .coro(function* (self) {
+            yield interpv(self.scale).steps(2).to(1, 1).over(500);
+
+            objText.XLargeIrregular("0", { tint: objBuildUpBar.tints.Poison.tintBack })
+                .anchored(0.5, 0.5)
+                .mixin(mxnSinePivot)
+                .step(self => {
+                    self.text = String(offset);
+                    if (api.value === 0) {
+                        self.tint = 0x00ff00;
+                    }
+                    else if (api.value < 0) {
+                        self.tint = 0xff0000;
+                    }
+                })
+                .show(self);
+        })
         .merge({ objGoal: api })
         .zIndexed(ZIndex.BackgroundEntities);
 }

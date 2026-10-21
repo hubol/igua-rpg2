@@ -146,9 +146,13 @@ const ranks = {
             defenses: {
                 physical: 100,
             },
+            quirks: {
+                emotionalDamageIsFatal: true,
+            },
         },
         loot: {},
         level: 1,
+        difficultyScaling: "none",
     }),
 };
 

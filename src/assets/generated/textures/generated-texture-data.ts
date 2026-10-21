@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 1140 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 1141 }];
 
 interface TxData {
   id: string;
@@ -999,6 +999,7 @@ function txs<T>(tx: (data: TxData) => T) {
       LittleAngel0: tx({ id: "Sky.LittleAngel0", atlas: 0, x: 2465, y: 1966, width: 14, height: 16 }),
       Mist0: tx({ id: "Sky.Mist0", atlas: 0, x: 3060, y: 0, width: 1024, height: 484 }),
       Stars0: tx({ id: "Sky.Stars0", atlas: 0, x: 3188, y: 2036, width: 44, height: 90 }),
+      Stars1: tx({ id: "Sky.Stars1", atlas: 0, x: 2389, y: 2939, width: 12, height: 12 }),
     },
     Stone: {
       BrickLump0: tx({ id: "Stone.BrickLump0", atlas: 0, x: 2993, y: 331, width: 66, height: 12 }),
@@ -1102,7 +1103,7 @@ function txs<T>(tx: (data: TxData) => T) {
     },
     Town: {
       Ball: {
-        Ball0: tx({ id: "Town.Ball.Ball0", atlas: 0, x: 2389, y: 2939, width: 12, height: 12 }),
+        Ball0: tx({ id: "Town.Ball.Ball0", atlas: 0, x: 2869, y: 3167, width: 12, height: 12 }),
         Ball1: tx({ id: "Town.Ball.Ball1", atlas: 0, x: 2389, y: 2926, width: 14, height: 12 }),
         Beam: tx({ id: "Town.Ball.Beam", atlas: 0, x: 4001, y: 3180, width: 10, height: 18 }),
         Brick0: tx({ id: "Town.Ball.Brick0", atlas: 0, x: 1471, y: 2960, width: 36, height: 30 }),
@@ -1155,7 +1156,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Nose0: tx({ id: "Town.Colossus.Nose0", atlas: 0, x: 3117, y: 2900, width: 18, height: 12 }),
         Pupil0: tx({ id: "Town.Colossus.Pupil0", atlas: 0, x: 3779, y: 2896, width: 8, height: 16 }),
         Pupil1: tx({ id: "Town.Colossus.Pupil1", atlas: 0, x: 3811, y: 2628, width: 34, height: 14 }),
-        Pupil2: tx({ id: "Town.Colossus.Pupil2", atlas: 0, x: 2869, y: 3167, width: 12, height: 12 }),
+        Pupil2: tx({ id: "Town.Colossus.Pupil2", atlas: 0, x: 1717, y: 2798, width: 12, height: 12 }),
         Sclera0: tx({ id: "Town.Colossus.Sclera0", atlas: 0, x: 2709, y: 3143, width: 18, height: 24 }),
         Sclera1: tx({ id: "Town.Colossus.Sclera1", atlas: 0, x: 3491, y: 2988, width: 60, height: 36 }),
         Sclera2: tx({ id: "Town.Colossus.Sclera2", atlas: 0, x: 2561, y: 3122, width: 36, height: 40 }),
@@ -1273,7 +1274,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Slash: tx({ id: "Ui.Controls.Slash", atlas: 0, x: 3108, y: 2650, width: 6, height: 20 }),
       },
       CurrentlyEquippedSlot: tx({ id: "Ui.CurrentlyEquippedSlot", atlas: 0, x: 4008, y: 1298, width: 40, height: 10 }),
-      CurrentlyEquipped: tx({ id: "Ui.CurrentlyEquipped", atlas: 0, x: 1717, y: 2798, width: 12, height: 12 }),
+      CurrentlyEquipped: tx({ id: "Ui.CurrentlyEquipped", atlas: 0, x: 1717, y: 2811, width: 12, height: 12 }),
       Dialog: {
         AskRemoveCountBox: tx({ id: "Ui.Dialog.AskRemoveCountBox", atlas: 0, x: 1152, y: 1893, width: 272, height: 150 }),
         AskRemoveCountRejectBox: tx({ id: "Ui.Dialog.AskRemoveCountRejectBox", atlas: 0, x: 763, y: 2169, width: 112, height: 28 }),
