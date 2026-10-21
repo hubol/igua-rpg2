@@ -3,7 +3,10 @@ import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Sfx } from "../../assets/sounds";
 import { holdf } from "../../lib/game-engine/routines/hold";
+import { interpc } from "../../lib/game-engine/routines/interp";
+import { onPrimitiveMutate } from "../../lib/game-engine/routines/on-primitive-mutate";
 import { sleep } from "../../lib/game-engine/routines/sleep";
+import { approachLinear } from "../../lib/math/number";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
@@ -128,7 +131,15 @@ function mxnShowPoisonLevel(obj: MxnRpgStatus) {
                 objText.MediumBold("0", { tint: objBuildUpBar.tints.Poison.tintFront })
                     .at(0, 2)
                     .anchored(0.5, 0.5)
-                    .step(self => self.text = String(obj.status.conditions.poison.level)),
+                    .step(self => self.text = String(obj.status.conditions.poison.level))
+                    .coro(function* (self) {
+                        while (true) {
+                            const defaultTint = self.tint;
+                            yield onPrimitiveMutate(() => self.text as string);
+                            self.tint = 0x00ff00;
+                            yield interpc(self, "tint").steps(3).to(defaultTint).over(333);
+                        }
+                    }),
             )
                 .mixin(mxnSinePivot)
                 .step(self => {
@@ -152,11 +163,37 @@ function objGoal(offset: Integer, objs: MxnRpgStatus[]) {
 
     return container(
         new Graphics()
-            .beginFill(objBuildUpBar.tints.Poison.tintFront)
-            .drawCircle(0, 0, 32),
+            .merge({ radius: 0 })
+            .step(self =>
+                self
+                    .clear()
+                    .lineStyle(1, 0x00ff00)
+                    .drawCircle(0, 0, self.radius)
+            )
+            .mixin(mxnSinePivot)
+            .step(self => self.radius = approachLinear(self.radius, api.value === 0 ? 40 : 0, 3)),
+        new Graphics()
+            .beginFill(0xffffff)
+            .drawCircle(0, 0, 32)
+            .mixin(mxnSinePivot)
+            .tinted(objBuildUpBar.tints.Poison.tintFront)
+            .step(self => {
+                if (api.value < 0) {
+                    self.tint = 0x800000;
+                }
+            }),
         objText.XLargeIrregular("0", { tint: objBuildUpBar.tints.Poison.tintBack })
             .anchored(0.5, 0.5)
-            .step(self => self.text = String(offset)),
+            .mixin(mxnSinePivot)
+            .step(self => {
+                self.text = String(offset);
+                if (api.value === 0) {
+                    self.tint = 0x00ff00;
+                }
+                else if (api.value < 0) {
+                    self.tint = 0xff0000;
+                }
+            }),
     )
         .merge({ objGoal: api })
         .zIndexed(ZIndex.BackgroundEntities);
