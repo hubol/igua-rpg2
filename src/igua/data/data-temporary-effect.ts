@@ -28,6 +28,12 @@ export namespace DataTemporaryEffect {
                     model.motion.jump.midairCount += 1;
                 },
             },
+            MeleePoisonValueFromHall: {
+                hudText: "Magic room increases poison build up",
+                buffs: (model) => {
+                    model.combat.melee.conditions.poison.value += 9990;
+                },
+            },
             __Fallback__: {
                 hudText: "This is a bug",
                 buffs: () => {},

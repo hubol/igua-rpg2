@@ -118,7 +118,7 @@ export const OgmoEntityResolvers = {
         delete entity.height;
         return brickAngelObj;
     },
-    EnemyCactus: (entity: OgmoEntities.EnemyCactus) => objAngelCactus(entity).at(1, 3),
+    EnemyCactus: (entity: OgmoEntities.EnemyCactus) => objAngelCactus(entity.values.variant).at(1, 3),
     EnemyChill: objAngelChill,
     EnemySkeliguana: (entity: OgmoEntities.EnemySkeliguana) => {
         const obj = objAngelSkeliguana(entity.values.variant);

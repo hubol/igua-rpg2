@@ -428,6 +428,16 @@ export namespace DataEquipment {
                         model.combat.melee.faceAttack.physical += 4 + bonus;
                     },
                 },
+                WeakeningPoisonRing: {
+                    name: "???",
+                    texture: null,
+                    description: "Reduces strength, but adds poison to melee attacks.",
+                    buffs: (model, bonus) => {
+                        model.attributes.strength -= 999;
+                        model.combat.melee.conditions.poison.maxLevel += 1 + bonus;
+                        model.combat.melee.conditions.poison.value += 9;
+                    },
+                },
                 __Fallback__: {
                     name: "???",
                     texture: null,

@@ -442,7 +442,7 @@
   },
   "2026-10-21": {
     "Enemy": 19,
-    "Equipment": 41,
+    "Equipment": 42,
     "Fact": 12,
     "Gift": 17,
     "Idol": 4,
@@ -452,10 +452,10 @@
     "Potion": 42,
     "Quest": 39,
     "RespawnConfiguration": 3,
-    "Scene": 97,
+    "Scene": 98,
     "Shop": 30,
     "SongTitle": 51,
     "Spell": 2,
-    "TemporaryEffect": 3
+    "TemporaryEffect": 4
   }
 }

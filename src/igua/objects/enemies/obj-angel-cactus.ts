@@ -140,6 +140,16 @@ const ranks = {
         },
         level: 100,
     }),
+    level3: RpgEnemyRank.create({
+        status: {
+            healthMax: 999,
+            defenses: {
+                physical: 99,
+            },
+        },
+        loot: {},
+        level: 1,
+    }),
 };
 
 type Feature = "jumping" | "weak" | "berry";
@@ -160,10 +170,16 @@ const variants = {
         rank: ranks.level2,
         theme: themes.berry,
     },
+    level3: {
+        features: new Set<Feature>(),
+        rank: ranks.level3,
+        // TODO special theme?
+        theme: themes.common,
+    },
 };
 
-export function objAngelCactus(entity: OgmoEntities.EnemyCactus) {
-    const { rank, theme, features } = variants[entity.values.variant] ?? variants.level0;
+export function objAngelCactus(variantId: keyof typeof variants) {
+    const { rank, theme, features } = variants[variantId] ?? variants.level0;
 
     const hurtboxObj = new Graphics()
         .beginFill(0xff0000)
