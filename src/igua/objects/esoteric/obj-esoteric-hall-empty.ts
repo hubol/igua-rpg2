@@ -5,7 +5,7 @@ import { Cutscene } from "../../globals";
 import { MicrocosmHallOfDoors } from "../../rpg/microcosms/microcosm-hall-of-doors";
 import { playerObj } from "../obj-player";
 
-export function objEsotericEmptyHall(cosmHallOfDoors: MicrocosmHallOfDoors) {
+export function objEsotericHallEmpty(cosmHallOfDoors: MicrocosmHallOfDoors) {
     const cutsceneFn = function* () {
         yield* show("Nothing here.");
         cosmHallOfDoors.homeSceneChanger.changeScene();
