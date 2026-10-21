@@ -2,6 +2,7 @@ import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { IguaAudio, Jukebox } from "../core/igua-audio";
 import { mxnDoorHallEmpty } from "../mixins/mxn-door-hall-empty";
+import { mxnGift } from "../mixins/mxn-gift";
 import { objEsotericHallComplete } from "../objects/esoteric/obj-esoteric-hall-complete";
 import { Rpg } from "../rpg/rpg";
 
@@ -17,4 +18,6 @@ export function scnIndianaHallOfDoors() {
     objEsotericHallComplete(cosmHallOfDoors)
         .at(lvl.CompleteMarker)
         .show();
+    lvl.GiftBox
+        .mixin(mxnGift, "Indiana.Hall.Hanging");
 }

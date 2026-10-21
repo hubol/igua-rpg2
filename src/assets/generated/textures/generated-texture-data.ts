@@ -1,6 +1,6 @@
 // This file is generated
 
-const atlases = [{ url: require("./atlas0.png"), texturesCount: 1155 }];
+const atlases = [{ url: require("./atlas0.png"), texturesCount: 1156 }];
 
 interface TxData {
   id: string;
@@ -493,7 +493,7 @@ function txs<T>(tx: (data: TxData) => T) {
         Arms: tx({ id: "Enemy.Heatmeat.Arms", atlas: 0, x: 2561, y: 2731, width: 168, height: 84 }),
         Head: tx({ id: "Enemy.Heatmeat.Head", atlas: 0, x: 3462, y: 1727, width: 448, height: 84 }),
         PupilAngry: tx({ id: "Enemy.Heatmeat.PupilAngry", atlas: 0, x: 2882, y: 2943, width: 8, height: 8 }),
-        PupilSad: tx({ id: "Enemy.Heatmeat.PupilSad", atlas: 0, x: 3171, y: 3053, width: 8, height: 8 }),
+        PupilSad: tx({ id: "Enemy.Heatmeat.PupilSad", atlas: 0, x: 2826, y: 2109, width: 8, height: 8 }),
         Saw: tx({ id: "Enemy.Heatmeat.Saw", atlas: 0, x: 1869, y: 2565, width: 114, height: 108 }),
         ScleraAngry: tx({ id: "Enemy.Heatmeat.ScleraAngry", atlas: 0, x: 2853, y: 2033, width: 12, height: 12 }),
         ScleraSad: tx({ id: "Enemy.Heatmeat.ScleraSad", atlas: 0, x: 4083, y: 1441, width: 12, height: 12 }),
@@ -515,9 +515,9 @@ function txs<T>(tx: (data: TxData) => T) {
         Noggin2: tx({ id: "Enemy.Miffed.Noggin2", atlas: 0, x: 2426, y: 2927, width: 56, height: 34 }),
         Noggin3: tx({ id: "Enemy.Miffed.Noggin3", atlas: 0, x: 3798, y: 3160, width: 66, height: 28 }),
         Noggin4: tx({ id: "Enemy.Miffed.Noggin4", atlas: 0, x: 2304, y: 2854, width: 66, height: 40 }),
-        Pupil0: tx({ id: "Enemy.Miffed.Pupil0", atlas: 0, x: 2826, y: 2109, width: 8, height: 8 }),
+        Pupil0: tx({ id: "Enemy.Miffed.Pupil0", atlas: 0, x: 3075, y: 3252, width: 8, height: 8 }),
         Pupil1: tx({ id: "Enemy.Miffed.Pupil1", atlas: 0, x: 4092, y: 1886, width: 4, height: 12 }),
-        Pupil2: tx({ id: "Enemy.Miffed.Pupil2", atlas: 0, x: 4085, y: 23, width: 10, height: 14 }),
+        Pupil2: tx({ id: "Enemy.Miffed.Pupil2", atlas: 0, x: 3171, y: 3040, width: 10, height: 14 }),
         Sclera0: tx({ id: "Enemy.Miffed.Sclera0", atlas: 0, x: 2538, y: 3075, width: 14, height: 10 }),
         Sclera1: tx({ id: "Enemy.Miffed.Sclera1", atlas: 0, x: 2987, y: 3127, width: 8, height: 14 }),
         Sclera2: tx({ id: "Enemy.Miffed.Sclera2", atlas: 0, x: 1779, y: 2755, width: 10, height: 18 }),
@@ -553,7 +553,7 @@ function txs<T>(tx: (data: TxData) => T) {
       Stupid: {
         BatLayers: tx({ id: "Enemy.Stupid.BatLayers", atlas: 0, x: 2536, y: 1699, width: 462, height: 46 }),
         Layers: tx({ id: "Enemy.Stupid.Layers", atlas: 0, x: 2999, y: 1727, width: 462, height: 56 }),
-        Pupil0: tx({ id: "Enemy.Stupid.Pupil0", atlas: 0, x: 3171, y: 3040, width: 10, height: 12 }),
+        Pupil0: tx({ id: "Enemy.Stupid.Pupil0", atlas: 0, x: 1191, y: 2660, width: 10, height: 12 }),
         Pupil1: tx({ id: "Enemy.Stupid.Pupil1", atlas: 0, x: 2769, y: 42, width: 14, height: 6 }),
         Sclera0: tx({ id: "Enemy.Stupid.Sclera0", atlas: 0, x: 2708, y: 2917, width: 8, height: 16 }),
         Sclera1: tx({ id: "Enemy.Stupid.Sclera1", atlas: 0, x: 1692, y: 1265, width: 14, height: 6 }),
@@ -613,6 +613,7 @@ function txs<T>(tx: (data: TxData) => T) {
       FlourBag: tx({ id: "Esoteric.FlourBag", atlas: 0, x: 3199, y: 2816, width: 22, height: 24 }),
       GiftBox: tx({ id: "Esoteric.GiftBox", atlas: 0, x: 1596, y: 1463, width: 22, height: 26 }),
       GlueVat: tx({ id: "Esoteric.GlueVat", atlas: 0, x: 1432, y: 2806, width: 76, height: 72 }),
+      Hook: tx({ id: "Esoteric.Hook", atlas: 0, x: 4085, y: 23, width: 10, height: 16 }),
       HotDogToppingDispenser: tx({ id: "Esoteric.HotDogToppingDispenser", atlas: 0, x: 2684, y: 322, width: 308, height: 28 }),
       HotPineConeTree: tx({ id: "Esoteric.HotPineConeTree", atlas: 0, x: 3974, y: 687, width: 122, height: 210 }),
       Message: {
@@ -653,7 +654,7 @@ function txs<T>(tx: (data: TxData) => T) {
         TypeGrid: tx({ id: "Esoteric.Poke.TypeGrid", atlas: 0, x: 3803, y: 2662, width: 150, height: 120 }),
         Types: tx({ id: "Esoteric.Poke.Types", atlas: 0, x: 1736, y: 2755, width: 42, height: 14 }),
       },
-      SpigotExterior: tx({ id: "Esoteric.SpigotExterior", atlas: 0, x: 1191, y: 2660, width: 10, height: 12 }),
+      SpigotExterior: tx({ id: "Esoteric.SpigotExterior", atlas: 0, x: 606, y: 2038, width: 10, height: 12 }),
       SpigotInterior: tx({ id: "Esoteric.SpigotInterior", atlas: 0, x: 4049, y: 2891, width: 40, height: 18 }),
       Starburst: tx({ id: "Esoteric.Starburst", atlas: 0, x: 2149, y: 1482, width: 500, height: 210 }),
       StashPocket: tx({ id: "Esoteric.StashPocket", atlas: 0, x: 3616, y: 2722, width: 150, height: 44 }),
@@ -696,7 +697,7 @@ function txs<T>(tx: (data: TxData) => T) {
       RescueRope: tx({ id: "Fiber.RescueRope", atlas: 0, x: 4086, y: 1298, width: 10, height: 102 }),
       RopeFrame: tx({ id: "Fiber.RopeFrame", atlas: 0, x: 2774, y: 3124, width: 37, height: 28 }),
       RopeRed: tx({ id: "Fiber.RopeRed", atlas: 0, x: 2600, y: 3067, width: 42, height: 12 }),
-      StringOnStake0: tx({ id: "Fiber.StringOnStake0", atlas: 0, x: 2784, y: 42, width: 8, height: 6 }),
+      StringOnStake0: tx({ id: "Fiber.StringOnStake0", atlas: 0, x: 3171, y: 3055, width: 8, height: 6 }),
     },
     Foliage: {
       BranchCut0: tx({ id: "Foliage.BranchCut0", atlas: 0, x: 3146, y: 3131, width: 24, height: 14 }),
@@ -894,7 +895,7 @@ function txs<T>(tx: (data: TxData) => T) {
       ShadowIrregularSmallRound: tx({ id: "Light.ShadowIrregularSmallRound", atlas: 0, x: 3048, y: 2805, width: 12, height: 10 }),
       ShadowIrregularSmall: tx({ id: "Light.ShadowIrregularSmall", atlas: 0, x: 1369, y: 2726, width: 16, height: 8 }),
       ShadowMessy0: tx({ id: "Light.ShadowMessy0", atlas: 0, x: 4038, y: 1795, width: 58, height: 12 }),
-      Stage8: tx({ id: "Light.Stage8", atlas: 0, x: 3075, y: 3252, width: 8, height: 8 }),
+      Stage8: tx({ id: "Light.Stage8", atlas: 0, x: 1717, y: 2295, width: 8, height: 8 }),
     },
     Placeholder: tx({ id: "Placeholder", atlas: 0, x: 874, y: 2385, width: 14, height: 14 }),
     Shapes: {
@@ -1328,7 +1329,7 @@ function txs<T>(tx: (data: TxData) => T) {
       LiquidDrip: tx({ id: "Ui.LiquidDrip", atlas: 0, x: 1736, y: 2694, width: 48, height: 60 }),
       NewIndicator: tx({ id: "Ui.NewIndicator", atlas: 0, x: 2046, y: 395, width: 20, height: 12 }),
       NoBlindBoxes: tx({ id: "Ui.NoBlindBoxes", atlas: 0, x: 3884, y: 1298, width: 74, height: 10 }),
-      NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 1717, y: 2295, width: 8, height: 8 }),
+      NoneChoice: tx({ id: "Ui.NoneChoice", atlas: 0, x: 4088, y: 2866, width: 8, height: 8 }),
       OwnerDefeat: tx({ id: "Ui.OwnerDefeat", atlas: 0, x: 3755, y: 2345, width: 30, height: 16 }),
       PlacementReticle: tx({ id: "Ui.PlacementReticle", atlas: 0, x: 1589, y: 1604, width: 6, height: 6 }),
       Pocket: {

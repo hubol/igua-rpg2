@@ -59,6 +59,9 @@ export namespace DataGift {
             "DungeonBones.ExplorerNovice": {
                 item: { kind: "flop", id: 776 },
             },
+            "Indiana.Hall.Hanging": {
+                item: { kind: "equipment", id: "FaceAttack", level: 1 },
+            },
             __Fallback__: {
                 item: { kind: "potion", id: "RestoreHealth" },
             },
