@@ -384,7 +384,7 @@ function objPlayerStatus(stocks: ReadonlyArray<RpgStock>) {
     const textsObj = container(
         objText.Large("You have...", { tint: CtxDramaShop.value.style.tintSecondary }).anchored(0.5, 1).at(
             12,
-            statusObjs.last.y - 16,
+            (statusObjs.last?.y ?? 0) - 16,
         ),
         ...statusObjs,
     );
