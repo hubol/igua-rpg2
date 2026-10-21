@@ -369,7 +369,7 @@ export namespace DataQuest {
                     kind: "single",
                     countCompletions: "once",
                     drop: [
-                        { kind: "key_item", id: "StaffEarth" },
+                        { kind: "key_item", id: "StaffLight" },
                         { kind: "key_item", id: "StaffFlame" },
                     ],
                 },

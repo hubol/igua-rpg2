@@ -8,15 +8,15 @@ export function scnIndianaPalace() {
         .mixin(mxnEsotericPalaceHomunculus)
         .coro(function* (self) {
             self.mixin(mxnCutscene, function* () {
-                yield* self.mxnEsotericPalaceHomunculus.greet("Whoosh! Hello. What can I do for you?", "Nothing");
+                yield* self.mxnEsotericPalaceHomunculus.greet("Meow! Hello. What can I do for you?", "Nothing");
             });
         });
 
-    lvl.ForestNpc
+    lvl.LightNpc
         .mixin(mxnEsotericPalaceHomunculus)
         .coro(function* (self) {
             self.mixin(mxnCutscene, function* () {
-                yield* self.mxnEsotericPalaceHomunculus.greet("Ribbit! Hello. Do you need something?", "Nothing");
+                yield* self.mxnEsotericPalaceHomunculus.greet("Hoot! Hello. Do you need something?", "Nothing");
             });
         });
 }

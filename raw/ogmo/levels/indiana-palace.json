@@ -103,7 +103,7 @@
           "y": 168,
           "originX": 27,
           "originY": 67,
-          "values": {"variantId": "Forest", "name": "ForestNpc", "depth": 0}
+          "values": {"variantId": "Light", "name": "LightNpc", "depth": 0}
         }
       ]
     },
@@ -128,7 +128,20 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Door",
+          "id": 0,
+          "_eid": "88296692",
+          "x": 424,
+          "y": 128,
+          "width": 64,
+          "height": 88,
+          "originX": 0,
+          "originY": -3.6666666666666665,
+          "values": {"sceneName": "scnWorldMap", "checkpointName": "fromIndianaPalace", "name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "TerrainDecals",
@@ -244,6 +257,18 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 456,
+          "y": 136,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#252525",
+          "texture": "shapes/circle64.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"

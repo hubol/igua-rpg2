@@ -423,6 +423,19 @@
           "uid": 178760214153300,
           "tint": "#ffffff",
           "values": {"sceneName": "scnJumpGoon", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 29,
+          "_eid": "53836309",
+          "x": 2864,
+          "y": 1727,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 270,
+          "uid": 179261556570805,
+          "tint": "#cecee4",
+          "values": {"sceneName": "scnIndianaPalace", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -931,6 +944,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromOhioPlateauRight", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 44,
+          "_eid": "19953026",
+          "x": 2864,
+          "y": 1752,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromIndianaPalace", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -2998,6 +3022,18 @@
       "gridCellsX": 572,
       "gridCellsY": 303,
       "decals": [
+        {
+          "x": 2864,
+          "y": 1707,
+          "scaleX": 2,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#698826",
+          "texture": "world map/landmarks/splatter.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
         {
           "x": 4225,
           "y": 899,
@@ -10472,6 +10508,126 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 3984,
+          "y": -80,
+          "scaleX": 8,
+          "scaleY": 8,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "esoteric/demo/homunculus.png",
+          "originX": 0,
+          "originY": 1,
+          "values": {"name": ""}
+        },
+        {
+          "x": 2864,
+          "y": 1672,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/landmarks/palace.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 2827,
+          "y": 1694,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#f28000",
+          "texture": "world map/window 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 2901,
+          "y": 1694,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#5b46a0",
+          "texture": "world map/window 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 2873,
+          "y": 1672,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bab532",
+          "texture": "terrain/earth/crack 8px 12px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 2841,
+          "y": 1707,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#bab532",
+          "texture": "terrain/earth/crack small0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 2833,
+          "y": 1714,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#698826",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 2901,
+          "y": 1715,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#698826",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 2815,
+          "y": 1716,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#698826",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 2912,
+          "y": 2560,
+          "scaleX": 12,
+          "scaleY": 12,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "ui/spells power front.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"

@@ -666,7 +666,13 @@ export namespace DataShop {
                 ],
             },
             HomunculusLight: {
-                stocks: [],
+                stocks: [
+                    {
+                        product: { kind: "equipment", id: "NightVision", level: 1 },
+                        initialQuantity: 2,
+                        price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
+                    },
+                ],
             },
             HomunculusWater: {
                 stocks: [],
