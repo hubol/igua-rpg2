@@ -4,8 +4,8 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#000000", "Region ID": "~Unset~"},
-  "backgroundColor": "#408000",
+  "values": {"Terrain Color": "#ffffff", "Region ID": "~Unset~"},
+  "backgroundColor": "#cecee4",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -133,7 +133,7 @@
           "name": "Door",
           "id": 0,
           "_eid": "88296692",
-          "x": 424,
+          "x": 408,
           "y": 128,
           "width": 64,
           "height": 88,
@@ -152,7 +152,32 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 53,
+          "y": 160,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "furniture/marble throne.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 149,
+          "y": 160,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "furniture/marble throne.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -175,7 +200,7 @@
           "height": 128,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#ffffff",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -188,7 +213,7 @@
           "height": 128,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#ffffff",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -221,6 +246,45 @@
           "y": 168,
           "width": 48,
           "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Block",
+          "id": 5,
+          "_eid": "93117141",
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 184,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ffffff",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 6,
+          "_eid": "93117141",
+          "x": 488,
+          "y": 0,
+          "width": 16,
+          "height": 216,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ffffff",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 7,
+          "_eid": "93117141",
+          "x": 16,
+          "y": 0,
+          "width": 472,
+          "height": 48,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ffffff",
+          "values": {"name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -259,13 +323,25 @@
           "groupName": null
         },
         {
-          "x": 456,
+          "x": 440,
           "y": 136,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
           "tint": "#252525",
           "texture": "shapes/circle64.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 608,
+          "y": 400,
+          "scaleX": 12,
+          "scaleY": 12,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "ui/spells power front.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
