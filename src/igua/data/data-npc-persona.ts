@@ -110,6 +110,7 @@ export namespace DataNpcPersona {
             IndianaClawPowderer: { job: "Powderer", name: "Zhan", looksId: "ClawPowderAddict" },
             OhioClawPowderer: { job: "Powderer", name: "Dash", looksId: "ClawPowderAddict" },
             OhioPokeOpponent: { job: "Trainer", name: "Claude", looksId: "HeadTurner" },
+            PoisonFacilitator: { job: "Overseer", name: "Marsh", looksId: "NervousOnTheSurface" },
             __Fallback__: { job: "???", name: "???", looksId: "MintyJourney" },
         } satisfies Record<string, Model>,
     );

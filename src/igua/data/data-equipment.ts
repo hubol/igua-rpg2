@@ -479,7 +479,7 @@ export namespace DataEquipment {
                 WeakeningPoisonRing: {
                     name: "\"Disgusting!\" Medal",
                     texture: Tx.Collectibles.Equipment.Poison1,
-                    description: "Reduces strength, but adds poison to melee attacks.",
+                    description: "Ceremoniously reduces strength, but adds poison to melee attacks.",
                     buffs: (model, bonus) => {
                         model.attributes.strength -= 999;
                         model.combat.melee.conditions.poison.maxLevel += 1 + bonus;

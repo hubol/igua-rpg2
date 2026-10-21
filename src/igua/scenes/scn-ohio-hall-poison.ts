@@ -22,6 +22,7 @@ import { Cutscene } from "../globals";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { MxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
+import { objFxFormativeBlob } from "../objects/effects/obj-fx-formative-blob";
 import { objAngelCactus } from "../objects/enemies/obj-angel-cactus";
 import { objBuildUpBar } from "../objects/overlay/obj-build-up-bar";
 import { Rpg } from "../rpg/rpg";
@@ -63,13 +64,24 @@ export function scnOhioHallPoison() {
             for (let i = 0; i < values.length;) {
                 const value = values[i];
                 const count = value > 15 ? 2 : 1;
-                const objs = range(count)
-                    .map(i =>
-                        objAngelCactus("level3")
-                            .at(enemyMarkers[i])
-                            .mixin(mxnShowPoisonLevel)
-                            .show()
-                    );
+                const objs = yield* Coro.all(
+                    range(count)
+                        .map(i => {
+                            return (function* () {
+                                objFxFormativeBlob()
+                                    .tinted(0x003000)
+                                    .at(enemyMarkers[i])
+                                    .show();
+
+                                yield sleep(450);
+
+                                return objAngelCactus("level3")
+                                    .at(enemyMarkers[i])
+                                    .mixin(mxnShowPoisonLevel)
+                                    .show();
+                            })();
+                        }),
+                );
                 const goalObj = objGoal(value, objs)
                     .at(lvl.GoalMarker)
                     .show();
@@ -93,7 +105,11 @@ export function scnOhioHallPoison() {
                 goalObj.destroy();
             }
 
-            yield* DramaHallOfDoors.complete(Rpg.microcosms["Ohio.HallOfDoors"], 3);
+            Cutscene.play(function* () {
+                yield sleep(500);
+                yield* show("What a great ceremony!");
+                yield* DramaHallOfDoors.complete(Rpg.microcosms["Ohio.HallOfDoors"], 3);
+            }, { speaker: lvl.FacilitatorNpc });
         })
         .show();
 
@@ -113,7 +129,7 @@ export function scnOhioHallPoison() {
 
             if (itemsToReceive.length > 0) {
                 yield* show(
-                    "What a beautiful night for this occasion!",
+                    "What a beautiful night!",
                     "Oh hey!",
                     "You'll need these for the ceremony!",
                 );
