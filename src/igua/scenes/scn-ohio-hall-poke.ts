@@ -1,5 +1,6 @@
 import { DisplayObject, Sprite } from "pixi.js";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
@@ -8,6 +9,7 @@ import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
+import { Jukebox } from "../core/igua-audio";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { objDramaNameTag } from "../drama/objects/obj-drama-name-tag";
 import { ask, show } from "../drama/show";
@@ -47,6 +49,7 @@ export function scnOhioHallPoke() {
 
     const cosmHallOfDoors = Rpg.microcosms["Ohio.HallOfDoors"];
 
+    Jukebox.play(Mzk.AnimalActivism);
     const lvl = Lvl.OhioHallPoke();
 
     lvl.RankIndicatorGroup.children
