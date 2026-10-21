@@ -32,6 +32,10 @@ export class RpgInventory {
         }
     }
 
+    has(item: RpgInventory.Item) {
+        return this.count(item) >= 1;
+    }
+
     receive(item: RpgInventory.ReceivableItem) {
         switch (item.kind) {
             case "equipment":
