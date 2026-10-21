@@ -436,6 +436,19 @@
           "uid": 179261556570805,
           "tint": "#cecee4",
           "values": {"sceneName": "scnIndianaPalace", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 30,
+          "_eid": "53836309",
+          "x": 3866,
+          "y": 968,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 270,
+          "uid": 179261999975128,
+          "tint": "#cecee4",
+          "values": {"sceneName": "scnOhioPalace", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -955,6 +968,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromIndianaPalace", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 45,
+          "_eid": "19953026",
+          "x": 3864,
+          "y": 1008,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromOhioPalace", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
@@ -3032,7 +3056,8 @@
           "texture": "world map/landmarks/splatter.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4225,
@@ -10519,7 +10544,8 @@
           "texture": "esoteric/demo/homunculus.png",
           "originX": 0,
           "originY": 1,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2864,
@@ -10531,7 +10557,8 @@
           "texture": "world map/landmarks/palace.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2827,
@@ -10543,7 +10570,8 @@
           "texture": "world map/window 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2901,
@@ -10555,7 +10583,8 @@
           "texture": "world map/window 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2873,
@@ -10567,7 +10596,8 @@
           "texture": "terrain/earth/crack 8px 12px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2841,
@@ -10579,7 +10609,8 @@
           "texture": "terrain/earth/crack small0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2833,
@@ -10591,7 +10622,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2901,
@@ -10603,7 +10635,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2815,
@@ -10615,7 +10648,8 @@
           "texture": "shapes/confetti18x8.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 2912,
@@ -10627,7 +10661,125 @@
           "texture": "ui/spells power front.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 3864,
+          "y": 947,
+          "scaleX": 2,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e23c27",
+          "texture": "world map/landmarks/splatter.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 3864,
+          "y": 912,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "world map/landmarks/palace.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 3827,
+          "y": 934,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#77c2ff",
+          "texture": "world map/window 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 3901,
+          "y": 934,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#9e8b48",
+          "texture": "world map/window 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 3856,
+          "y": 920,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ff6753",
+          "texture": "terrain/earth/crack 8px 12px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 3914,
+          "y": 931,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#ff6753",
+          "texture": "terrain/earth/crack small0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 3833,
+          "y": 954,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e23c27",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 3901,
+          "y": 955,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e23c27",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 3815,
+          "y": 956,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e23c27",
+          "texture": "shapes/confetti18x8.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"
