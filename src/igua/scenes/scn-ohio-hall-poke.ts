@@ -13,6 +13,7 @@ import { Jukebox } from "../core/igua-audio";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
 import { objDramaNameTag } from "../drama/objects/obj-drama-name-tag";
 import { ask, show } from "../drama/show";
+import { mxnTinyBoilPivot } from "../mixins/mxn-boil-tiny-pivot";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnHudModifiers } from "../mixins/mxn-hud-modifiers";
 import { objCharacterBattleMaster } from "../objects/characters/obj-character-battle-master";
@@ -51,6 +52,9 @@ export function scnOhioHallPoke() {
 
     Jukebox.play(Mzk.AnimalActivism);
     const lvl = Lvl.OhioHallPoke();
+
+    lvl.EsotericStarburst
+        .mixin(mxnTinyBoilPivot, "y");
 
     lvl.RankIndicatorGroup.children
         .forEach((obj, i) =>
