@@ -110,6 +110,18 @@ export namespace RpgInventory {
             kind: "pocket_item";
             id: DataPocketItem.Id;
         }
+
+        export function areEqual(a: Item, b: Item) {
+            if (a.id !== b.id || a.kind !== b.kind) {
+                return false;
+            }
+
+            if (a.kind === "equipment" && b.kind === "equipment") {
+                return a.level === b.level;
+            }
+
+            return true;
+        }
     }
 
     export namespace ReceivableItem {
