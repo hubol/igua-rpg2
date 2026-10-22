@@ -43,6 +43,10 @@ export class RpgShop {
         );
     }
 
+    hasAnyStock(item: RpgInventory.Item) {
+        return this.stocks.some(stock => stock.quantity > 0 && RpgInventory.Item.areEqual(stock.product, item));
+    }
+
     static createState(): RpgShop.State {
         return {
             stockSales: {},
