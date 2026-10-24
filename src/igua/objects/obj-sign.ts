@@ -12,7 +12,7 @@ interface ObjSignArgs {
 
 export function objSign(args: ObjSignArgs) {
     const spr = Sprite.from(Tx.Wood.Sign);
-    const text = objText.XSmallIrregular(args.title, { tint: 0x854E31 })
+    const text = objText.XSmallIrregular(args.title, { tint: 0x854E31, align: "center" })
         .anchored(0.5, 0.5)
         .at(25, 11)
         .step(self => self.text = args.title);
