@@ -11,7 +11,11 @@ export function scnIndianaPalace() {
     Jukebox.play(Mzk.SodaMachine);
     const lvl = Lvl.IndianaPalace();
     lvl.FlameNpc
-        .mixin(mxnEsotericPalaceHomunculus)
+        .mixin(mxnEsotericPalaceHomunculus, {
+            progressKey: "indiana",
+            kind: "key_locations",
+            hintIds: ["Indiana.MagicKey0", "Indiana.MagicKey1", "Indiana.MagicKey2", "Indiana.MagicKey3"],
+        })
         .coro(function* (self) {
             self.mixin(mxnCutscene, function* () {
                 yield* self.mxnEsotericPalaceHomunculus.greet("Meow! Hello. What can I do for you?", "Nothing");
@@ -19,7 +23,11 @@ export function scnIndianaPalace() {
         });
 
     lvl.LightNpc
-        .mixin(mxnEsotericPalaceHomunculus)
+        .mixin(mxnEsotericPalaceHomunculus, {
+            progressKey: "indiana",
+            kind: "hall_location",
+            messages: ["The crystall hall is located in the cavern below the Red Plains."],
+        })
         .coro(function* (self) {
             self.mixin(mxnCutscene, function* () {
                 yield* self.mxnEsotericPalaceHomunculus.greet("Hoot! Hello. Do you need something?", "Nothing");

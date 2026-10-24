@@ -150,6 +150,12 @@ export function getInitialRpgProgress() {
                     obj[id] = false;
                     return obj;
                 }, {} as Record<DataHomunculus.Id, boolean>),
+                indiana: {
+                    toldPlayerAboutNeeds: false,
+                },
+                ohio: {
+                    toldPlayerAboutNeeds: false,
+                },
             },
         },
         microcosms: RpgMicrocosms.createState(),

@@ -11,7 +11,11 @@ export function scnOhioPalace() {
     Jukebox.play(Mzk.SodaMachine);
     const lvl = Lvl.OhioPalace();
     lvl.WaterNpc
-        .mixin(mxnEsotericPalaceHomunculus)
+        .mixin(mxnEsotericPalaceHomunculus, {
+            progressKey: "ohio",
+            kind: "key_locations",
+            hintIds: ["Ohio.MagicKey0", "Ohio.MagicKey1"],
+        })
         .coro(function* (self) {
             self.mixin(mxnCutscene, function* () {
                 yield* self.mxnEsotericPalaceHomunculus.greet(
@@ -22,7 +26,11 @@ export function scnOhioPalace() {
         });
 
     lvl.ForestNpc
-        .mixin(mxnEsotericPalaceHomunculus)
+        .mixin(mxnEsotericPalaceHomunculus, {
+            progressKey: "ohio",
+            kind: "hall_location",
+            messages: ["The crystal hall is located in the skies above Mount Flop."],
+        })
         .coro(function* (self) {
             self.mixin(mxnCutscene, function* () {
                 yield* self.mxnEsotericPalaceHomunculus.greet("Bark! Hello. What do you want?", "Nothing");

@@ -354,7 +354,7 @@
           "y": 296,
           "originX": 0,
           "originY": 26,
-          "values": {"title": "Red", "message": "This is the red plains.\\n\\nThis sign is special.", "name": "", "depth": 0, "isSpecial": true}
+          "values": {"title": "Red", "message": "This is the Red Plains.\\n\\nThis sign is special.", "name": "", "depth": 0, "isSpecial": true}
         },
         {
           "name": "EnemySuggestive",

@@ -1,3 +1,4 @@
+import { Rpg } from "../rpg/rpg";
 import { RpgInventory } from "../rpg/rpg-inventory";
 import { DataLib } from "./data-lib";
 import { DataNpcPersona } from "./data-npc-persona";
@@ -24,7 +25,7 @@ export namespace DataHint {
         }
     }
 
-    export const {} = DataLib.create(
+    export const { manifest, getById } = DataLib.create(
         "DataHint",
         {
             "Indiana.MagicKey0": {
@@ -65,7 +66,9 @@ export namespace DataHint {
             "Ohio.MagicKey0": {
                 kind: "quest",
                 messages: [
-                    `One can be found in your food by utlizing ${DataNpcPersona.getById("FoodChecker")}'s services.`,
+                    `One can be found in your food by utlizing ${
+                        DataNpcPersona.getById("FoodChecker").name
+                    }'s services.`,
                 ],
                 questId: "FoodSafetyDeparment.MetalDiscovered",
             },
@@ -83,4 +86,16 @@ export namespace DataHint {
             },
         } satisfies Record<string, Model>,
     );
+
+    export type Id = DataLib.Id<typeof manifest>;
+
+    export function isNecessary(id: Id) {
+        const data = getById(id);
+        if (data.kind === "quest") {
+            return !Rpg.quest(data.questId).everCompleted;
+        }
+        else {
+            return Rpg.shop(data.shopId).hasAnyStock(data.stockItem);
+        }
+    }
 }
