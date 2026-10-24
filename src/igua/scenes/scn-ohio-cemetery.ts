@@ -55,6 +55,7 @@ function enrichTheOwl(lvl: LvlType.OhioCemetery) {
             const result = yield* ask(
                 "Koo-weet! Koo-weet!\nWhat can I do for you?",
                 "Trade",
+                "About death",
                 "About mausoleum",
                 "About ectoplasm",
                 "Nothing, sorry",
@@ -65,6 +66,13 @@ function enrichTheOwl(lvl: LvlType.OhioCemetery) {
                 yield* show("Koo-weet! Koo-weet! See ya!");
             }
             else if (result === 1) {
+                yield* show(
+                    "When you are fatally injured, you become a spirit.",
+                    "Your valuables and pocket items are permanently lost and turned into spirit experience.",
+                    "I can dispense useful items in return for this experience.",
+                );
+            }
+            else if (result === 2) {
                 owlObj.objCharacterTheOwl.wingsRaised = false;
                 yield* show(
                     "The mausoleum? Do you mean the Dungeon of Bones?",
@@ -79,7 +87,7 @@ function enrichTheOwl(lvl: LvlType.OhioCemetery) {
                     "Some say that tremendous rewards are at the bottom of the dungeon, but you'll need a means of escape.",
                 );
             }
-            else if (result === 2) {
+            else if (result === 3) {
                 owlObj.objCharacterTheOwl.wingsRaised = false;
                 yield* show(
                     "Ectoplasm is bountiful here.",
