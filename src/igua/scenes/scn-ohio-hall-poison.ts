@@ -1,6 +1,7 @@
 import { DisplayObject, Graphics } from "pixi.js";
 import { objText } from "../../assets/fonts";
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { Sfx } from "../../assets/sounds";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { holdf } from "../../lib/game-engine/routines/hold";
@@ -14,6 +15,7 @@ import { vnew } from "../../lib/math/vector-type";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { Check } from "../../lib/types/check";
+import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataEquipment } from "../data/data-equipment";
 import { DramaHallOfDoors } from "../drama/drama-hall-of-doors";
@@ -51,6 +53,7 @@ const atkTrapPlayer = RpgAttack.create({
 });
 
 export function scnOhioHallPoison() {
+    Jukebox.play(Mzk.ToxicTrait);
     const lvl = Lvl.OhioHallPoison();
     const enemyMarkers = [lvl.EnemyMarker0, lvl.EnemyMarker1];
 
