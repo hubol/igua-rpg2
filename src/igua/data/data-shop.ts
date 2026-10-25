@@ -684,6 +684,11 @@ export namespace DataShop {
                         initialQuantity: 1,
                         price: { currency: "valuables", initial: 100, deltaSold: 0 },
                     },
+                    {
+                        product: { kind: "equipment", id: "Meow", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "valuables", initial: 25, deltaSold: 0 },
+                    },
                 ],
             },
             __Fallback__: { stocks: [] },
