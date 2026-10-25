@@ -5,6 +5,7 @@ import { VectorSimple } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { ZIndex } from "../../core/scene/z-index";
 import { DataHomunculus } from "../../data/data-homunculus";
+import { mxnEsotericMeowable } from "../../mixins/esoteric/mxn-esoteric-meowable";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
@@ -197,6 +198,11 @@ export function objCharacterHomunculus(id: DataHomunculus.Id) {
             name: DataHomunculus.getById(id).name,
             tintPrimary: variant.tints.primary,
             tintSecondary: variant.tints.secondary,
+        })
+        .coro(function* (self) {
+            if (id === "Flame") {
+                self.mixin(mxnEsotericMeowable.mxnDefault);
+            }
         })
         .pivoted(variant.assPivot)
         .zIndexed(ZIndex.CharacterEntities);

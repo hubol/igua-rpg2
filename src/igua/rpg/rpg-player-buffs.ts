@@ -50,6 +50,7 @@ export namespace RpgPlayerBuffs {
                     equipped: {
                         HotPineCone: 0,
                         OpenFlopBlindBoxes: 0,
+                        Meow: 0,
                     } satisfies Record<DataSpell.Id, Integer>,
                     requirements: {
                         minPocketItemsCount: 0,

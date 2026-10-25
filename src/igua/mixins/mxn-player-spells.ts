@@ -1,8 +1,11 @@
 import { Sprite } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
+import { Instances } from "../../lib/game-engine/instances";
 import { Coro } from "../../lib/game-engine/routines/coro";
-import { factor, interpc, interpvr } from "../../lib/game-engine/routines/interp";
+import { factor, interp, interpc, interpvr } from "../../lib/game-engine/routines/interp";
+import { sleepf } from "../../lib/game-engine/routines/sleep";
+import { approachLinear } from "../../lib/math/number";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
@@ -17,7 +20,9 @@ import { Rpg } from "../rpg/rpg";
 import { RpgFlopBlindBox } from "../rpg/rpg-flop-blind-box";
 import { RpgFlops } from "../rpg/rpg-flops";
 import { RpgPlayerSpells } from "../rpg/rpg-player-spells";
+import { mxnEsotericMeowable } from "./esoteric/mxn-esoteric-meowable";
 import { mxnDestroyAfterSteps } from "./mxn-destroy-after-steps";
+import { mxnMotion } from "./mxn-motion";
 import { mxnRpgAttack } from "./mxn-rpg-attack";
 
 export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPlayerSpells) {
@@ -38,6 +43,8 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
             const horizontalDirection = Math.sign(obj.speed.x) || Math.sign(obj.facing);
             const horizontalSpeed = 3 + Math.abs(obj.speed.x);
             const horizontalSpeedScaled = horizontalSpeed * horizontalDirection;
+
+            let syllables = 0;
 
             const position = vnew(obj.head.mouth.getWorldCenter());
 
@@ -88,6 +95,37 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
                         .show()
                         .speed.x = Rng.float(1, horizontalSpeed) * horizontalDirection * 0.67;
                 }
+            }
+
+            if (spells.Meow.isEquipped) {
+                syllables = Math.max(1, syllables);
+                obj.play(Sfx.Iguana.Meow.rate(0.95, 1.05));
+                Sprite.from(Tx.Ui.Meow)
+                    .anchored(0.5, 0.5)
+                    .at(position)
+                    .mixin(mxnMotion)
+                    .step(self => self.speed.x = approachLinear(self.speed.x, 0, 0.05))
+                    .coro(function* (self) {
+                        yield sleepf(40);
+                        self.alpha = 0.5;
+                        yield sleepf(10);
+                        self.destroy();
+                    })
+                    .show()
+                    .speed.at(Math.sign(obj.facing) * 2, -1);
+                for (const meowableObj of obj.collidesAll(Instances(mxnEsotericMeowable))) {
+                    meowableObj.dispatch("mxnEsotericMeowable:meow");
+                }
+            }
+
+            if (syllables > 0) {
+                obj
+                    .coro(function* () {
+                        for (let i = 0; i < syllables; i++) {
+                            yield interp(obj.head.mouth, "agape").to(1).over(300);
+                            yield interp(obj.head.mouth, "agape").to(0).over(300);
+                        }
+                    });
             }
         });
 }

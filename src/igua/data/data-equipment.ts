@@ -487,6 +487,17 @@ export namespace DataEquipment {
                     },
                     flags: flags("is_statically_enchanted"),
                 },
+                Meow: {
+                    name: "Faux Paw",
+                    texture: Tx.Collectibles.Equipment.Paw,
+                    description: "Cutie! Enables deeper interspecies communication.",
+                    buffs: (model, bonus) => {
+                        model.attributes.health += bonus;
+                        model.combat.spells.equipped.Meow += 1;
+                        model.combat.spells.maxPower += Math.max(5, 30 - bonus * 5);
+                    },
+                    flags: flags(),
+                },
                 __Fallback__: {
                     name: "???",
                     texture: null,

@@ -481,7 +481,7 @@
   },
   "2026-10-25": {
     "Enemy": 19,
-    "Equipment": 42,
+    "Equipment": 43,
     "Fact": 12,
     "Gift": 18,
     "Hint": 7,
@@ -496,7 +496,7 @@
     "Scene": 100,
     "Shop": 37,
     "SongTitle": 52,
-    "Spell": 2,
+    "Spell": 3,
     "TemporaryEffect": 10
   }
 }

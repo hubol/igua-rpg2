@@ -3,6 +3,7 @@ import { Tx } from "../../../assets/textures";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { ZIndex } from "../../core/scene/z-index";
+import { mxnEsotericMeowable } from "../../mixins/esoteric/mxn-esoteric-meowable";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
@@ -56,6 +57,7 @@ export function objCharacterGuardianCat(rgbMap: MapRgbFilter.Map) {
         )
             .mixin(mxnFacingPivot, { left: -3, right: 3, down: 0, up: 0 }),
     )
+        .mixin(mxnEsotericMeowable.mxnDefault)
         .mixin(mxnSpeaker, {
             name: "Guardian Cat",
             tintPrimary: rgbMap[1] ?? 0x000000,

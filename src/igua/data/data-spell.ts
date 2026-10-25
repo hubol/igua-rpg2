@@ -47,6 +47,10 @@ export namespace DataSpell {
                         },
                     }),
             },
+            Meow: {
+                name: "Meow",
+                attackProvider: () => RpgAttack.create({}),
+            },
             __Fallback__: {
                 name: "???",
                 attackProvider: () => RpgAttack.create({}),
