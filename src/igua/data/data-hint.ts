@@ -79,6 +79,16 @@ export namespace DataHint {
                 ],
                 questId: "IntelligenceTower.DefeatMidboss0",
             },
+            "Ohio.MagicKey2": {
+                kind: "shop_stock_purchase",
+                messages: [
+                    `One can be purchased for valuables from ${
+                        DataNpcPersona.getById("DungeonExplorer").name
+                    } deep in the Dungeon of Bones.`,
+                ],
+                shopId: "DungeonExplorer",
+                stockItem: { kind: "key_item", id: "MagicKey" },
+            },
             __Fallback__: {
                 kind: "quest",
                 messages: ["This is a bug"],

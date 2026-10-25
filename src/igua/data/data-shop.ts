@@ -677,6 +677,15 @@ export namespace DataShop {
             HomunculusWater: {
                 stocks: [],
             },
+            DungeonExplorer: {
+                stocks: [
+                    {
+                        product: { kind: "key_item", id: "MagicKey" },
+                        initialQuantity: 1,
+                        price: { currency: "valuables", initial: 100, deltaSold: 0 },
+                    },
+                ],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );

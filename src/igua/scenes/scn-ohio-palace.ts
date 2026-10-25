@@ -14,7 +14,7 @@ export function scnOhioPalace() {
         .mixin(mxnEsotericPalaceHomunculus, {
             progressKey: "ohio",
             kind: "key_locations",
-            hintIds: ["Ohio.MagicKey0", "Ohio.MagicKey1"],
+            hintIds: ["Ohio.MagicKey0", "Ohio.MagicKey1", "Ohio.MagicKey2"],
         })
         .coro(function* (self) {
             self.mixin(mxnCutscene, function* () {
