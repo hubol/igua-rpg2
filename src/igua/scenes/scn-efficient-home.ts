@@ -63,7 +63,7 @@ function enrichHelium(lvl: LvlType.EfficientHome) {
         const heliumObj = objHeliumExhaust()
             .step(
                 self =>
-                    self.isAttackActive = Rpg.quest("GreatTower.EfficientHome.Ringer.ReceivedFish").everCompleted
+                    self.isAttackActive = Rpg.quest("FishDelivery.Ringer").everCompleted
                         && Rpg.character.status.conditions.helium.ballons.length === index + 1,
                 -1,
             )
@@ -156,10 +156,10 @@ function enrichRoom1(lvl: LvlType.EfficientHome) {
 }
 
 function enrichRoom2(lvl: LvlType.EfficientHome) {
-    const receivedFishQuest = Rpg.quest("GreatTower.EfficientHome.Ringer.ReceivedFish");
+    const fishQuest = Rpg.quest("FishDelivery.Ringer");
     const ballons = [{ health: 100, healthMax: 100, seed: 0xc01e }];
 
-    let exhaustPrerequisitesMet = receivedFishQuest.everCompleted;
+    let exhaustPrerequisitesMet = fishQuest.everCompleted;
 
     objHeliumExhaust()
         .step(
@@ -177,7 +177,7 @@ function enrichRoom2(lvl: LvlType.EfficientHome) {
     objFish.forRinger()
         .at(lvl.FishMarker)
         .zIndexed(ZIndex.FrontDecals)
-        .step(self => self.visible = receivedFishQuest.everCompleted)
+        .step(self => self.visible = fishQuest.everCompleted)
         .show();
 
     lvl.CloudHouseRingerNpc
@@ -191,26 +191,26 @@ function enrichRoom2(lvl: LvlType.EfficientHome) {
             }
 
             while (true) {
-                const playerHasFish = Rpg.inventory.count({ kind: "key_item", id: "RingerFish" }) >= 1;
+                const playerHasFish = Rpg.inventory.has(fishQuest.data.items.fishKeyItem);
 
                 const result = yield* ask(
                     "What do you need? DING?",
-                    (playerHasFish || receivedFishQuest.everCompleted)
+                    (playerHasFish || fishQuest.everCompleted)
                         ? null
                         : "An errand!",
                     playerHasFish ? "Your fish is here!" : null,
-                    receivedFishQuest.everCompleted ? "Secret helium help" : null,
+                    fishQuest.everCompleted ? "Secret helium help" : null,
                     "Tell me about yourself",
                     "Nothing",
                 );
 
                 if (result === 0) {
                     yield* show("I would love a fish.", "It would really enhance the natural dwelling vibe. DING!");
-                    Rpg.flags.greatTower.efficientHome.ringer.toldPlayerAboutDesireForFish = true;
+                    fishQuest.flags.toldPlayerAboutDesire = true;
                 }
                 else if (result === 1) {
-                    yield* DramaInventory.removeCount({ kind: "key_item", id: "RingerFish" }, 1);
-                    yield* DramaQuests.complete("GreatTower.EfficientHome.Ringer.ReceivedFish");
+                    yield* DramaInventory.removeAll(fishQuest.data.items.fishKeyItem);
+                    yield* DramaQuests.complete(fishQuest);
                     yield* show("Wow! Fantastic!", "What a fish! A damn good fish, indeed!", "DING! DING! DING! DING!");
                     yield sleep(333);
                     yield* show("I will now give you access to a local helium secret.");
@@ -246,6 +246,7 @@ function enrichRoom2(lvl: LvlType.EfficientHome) {
                         "My apartment, apartment 2, will reveal a helium spot when you have no ballons. DING!",
                         "Apartment 5 will reveal the spot when you have one ballon.",
                         "Apartment 6 will reveal the spot when you have two ballons.",
+                        "DING! DING! IMPORTANT! The spots in 5 and 6 have interesting quirks.",
                         "This could be useful for repeatedly getting up the great tower. DING! SUCKA!",
                     );
                     yield* DramaPlayerAttributes.callName("SUCKA");

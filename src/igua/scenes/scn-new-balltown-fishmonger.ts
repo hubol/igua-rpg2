@@ -16,6 +16,7 @@ import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objFxBurst32 } from "../objects/effects/obj-fx-burst-32";
 import { objFish } from "../objects/obj-fish";
 import { Rpg } from "../rpg/rpg";
+import { RpgQuest } from "../rpg/rpg-quests";
 
 export function scnNewBalltownFishmonger() {
     Jukebox.play(Mzk.BreadCrumbPool);
@@ -44,17 +45,26 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
 
     const rpgQuest = {
         homunuculus: Rpg.quest("FishDelivery.HomunculusWater"),
+        ringer: Rpg.quest("FishDelivery.Ringer"),
     };
+
+    function getFishState(quest: RpgQuest<"FishDelivery.HomunculusWater" | "FishDelivery.Ringer">) {
+        const isHere = !Rpg.inventory.has(quest.data.items.fishKeyItem) && !quest.everCompleted;
+        return {
+            isHere,
+            canBeTakenForDelivery: isHere && quest.flags.toldPlayerAboutDesire,
+        };
+    }
 
     if (deliveries.armorer) {
         fishObjs[0].destroy();
     }
 
-    if (deliveries.ringer) {
+    if (!getFishState(rpgQuest.ringer).isHere) {
         fishObjs[1].destroy();
     }
 
-    if (Rpg.inventory.has(rpgQuest.homunuculus.data.items.fishKeyItem)) {
+    if (!getFishState(rpgQuest.homunuculus).isHere) {
         fishObjs[2].destroy();
     }
 
@@ -86,13 +96,10 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
                     && !deliveries.armorer
                     ? DataNpcPersona.manifest.NewBalltownArmorer.name
                     : null,
-                Rpg.flags.greatTower.efficientHome.ringer.toldPlayerAboutDesireForFish
-                    && !deliveries.ringer
+                getFishState(rpgQuest.ringer).canBeTakenForDelivery
                     ? DataNpcPersona.manifest.CloudHouseRinger.name
                     : null,
-                rpgQuest.homunuculus.flags.toldPlayerAboutDesire
-                    && !rpgQuest.homunuculus.everCompleted
-                    && !Rpg.inventory.has(rpgQuest.homunuculus.data.items.fishKeyItem)
+                getFishState(rpgQuest.homunuculus).canBeTakenForDelivery
                     ? DataHomunculus.manifest.Water.name
                     : null,
                 "I don't know",
@@ -124,8 +131,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
 
                 yield* dramaTakeFish(fishObjs[1]);
 
-                yield* DramaInventory.receiveItems([{ kind: "key_item", id: "RingerFish" }]);
-                deliveries.ringer = "handed_off_to_player";
+                yield* DramaInventory.receiveItems([rpgQuest.ringer.data.items.fishKeyItem]);
 
                 yield* show(
                     "It's kind of a long walk...",

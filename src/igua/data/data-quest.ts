@@ -136,14 +136,6 @@ export namespace DataQuest {
                     drop: { kind: "equipment", id: "DefensePhysicalAndPerfectBonus", level: 3 },
                 },
             },
-            "GreatTower.EfficientHome.Ringer.ReceivedFish": {
-                items: null,
-                flags: null,
-                reward: {
-                    kind: "nothing",
-                    countCompletions: "once",
-                },
-            },
             "GreatTower.EfficientHome.NeatFreak.DidntWearEquipment": {
                 items: null,
                 flags: null,
@@ -423,6 +415,18 @@ export namespace DataQuest {
                         { kind: "key_item", id: "StaffForest" },
                         { kind: "key_item", id: "StaffWater" },
                     ],
+                },
+            },
+            "FishDelivery.Ringer": {
+                items: {
+                    fishKeyItem: { kind: "key_item", id: "RingerFish" },
+                },
+                flags: {
+                    toldPlayerAboutDesire: false,
+                },
+                reward: {
+                    kind: "nothing",
+                    countCompletions: "once",
                 },
             },
             "FishDelivery.HomunculusWater": {
