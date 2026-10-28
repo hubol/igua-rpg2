@@ -137,7 +137,48 @@ export function scnOhioHallPoke() {
                 return;
             }
             else if (result === 3) {
-                // TODO
+                while (true) {
+                    const subject = yield* ask("What battle subject can I help with?", "Flops", "Moves", "Nothing");
+
+                    if (subject === 2) {
+                        yield* show("Don't worry! I think you can handle this!");
+                        break;
+                    }
+
+                    if (subject === 0) {
+                        yield* show(
+                            "Flops can be found in the non-crystal world, and used on the pedestals here to battle.",
+                            "Flops have HP. When it is 0 they will die.",
+                            "Flops have a Stance Type. This affects their defensive capabilities.",
+                            "Flops have 4 Moves. Moves reduce the defender Flop's HP and alter the attacker Flop's Stance Type.",
+                        );
+                    }
+                    else {
+                        yield* show(
+                            "Moves have a Speed, indicated with (SP). They also have a Type.",
+                            "Each turn, Moves are picked by each Flop's Trainer.",
+                            "When a Move is picked, it cannot be picked again until it is replenished.",
+                            "A Flop's Moves are replenished after they are all picked.",
+                            "The Moves are performed in the order dictated by their Speed.",
+                            "e.g. a Move with Speed 4 will be performed before a Move with Speed 3.",
+                            "When both Trainers pick Moves with equal Speed, both Moves will miss, and Stance Types will remain unchanged.",
+                        );
+
+                        const dramaShowTable = show(
+                            "When a Move is performed, the attacker Flop's Stance Type is changed to the Move's Type. And the defender Flop's HP is reduced:",
+                        );
+
+                        const typeGridObj = Sprite.from(Tx.Esoteric.Poke.TypeGrid)
+                            .at(175, 152)
+                            .mixin(mxnHudModifiers.mxnHideStatus)
+                            .show();
+
+                        yield* dramaShowTable;
+
+                        typeGridObj.destroy();
+                    }
+                }
+
                 return;
             }
             else if (result === 4) {
