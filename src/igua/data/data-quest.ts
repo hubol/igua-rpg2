@@ -435,8 +435,10 @@ export namespace DataQuest {
                 reward: {
                     kind: "single",
                     countCompletions: "once",
-                    // TODO something nice
-                    drop: [],
+                    drop: [
+                        { kind: "potion", id: "AttributeHealthUp" },
+                        { kind: "potion", id: "AttributeHealthUp" },
+                    ],
                 },
             },
             __Fallback__: {
