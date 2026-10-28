@@ -32,6 +32,10 @@ export function scnDungeonBones() {
 
     lvl.MidbossBlock
         .coro(function* (self) {
+            if (Rpg.character.position.checkpointName !== "fromCemetery") {
+                self.destroy();
+                return;
+            }
             yield () => lvl.MidbossSkeliguana.destroyed && !playerObj.collides(lvl.MidbossUnsafeRegion);
             self.play(Sfx.Cutscene.MysteriousDisappearance.rate(0.95, 1.05));
             self.destroy();
