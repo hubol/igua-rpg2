@@ -1,11 +1,12 @@
 import { Integer } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { range } from "../../../lib/range";
+import { RpgRegion } from "../rpg-region";
 import { MicrocosmTimeDroppedLoot } from "./microcosm-time-dropped-loot";
 
 export class MicrocosmLottery extends MicrocosmTimeDroppedLoot<MicrocosmLottery.State> {
     constructor(readonly config: MicrocosmLottery.Config) {
-        super({ replenishFn: () => 10 });
+        super({ regionId: config.regionId, replenishFn: () => 10 });
     }
 
     get didPlayerPickNumbers() {
@@ -88,6 +89,7 @@ export namespace MicrocosmLottery {
         luckyNumberMax: Integer;
         price: Integer;
         prizeFn: PrizeFn;
+        regionId: RpgRegion.Id;
     }
 
     export interface Numbers {

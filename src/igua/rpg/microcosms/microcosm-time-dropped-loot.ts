@@ -1,6 +1,7 @@
 import { Integer } from "../../../lib/math/number-alias-types";
 import { Rpg } from "../rpg";
 import { RpgMicrocosm } from "../rpg-microcosm";
+import { RpgRegion } from "../rpg-region";
 
 export class MicrocosmTimeDroppedLoot<T extends MicrocosmTimeDroppedLoot.State = MicrocosmTimeDroppedLoot.State>
     extends RpgMicrocosm<T>
@@ -14,7 +15,7 @@ export class MicrocosmTimeDroppedLoot<T extends MicrocosmTimeDroppedLoot.State =
             return 999;
         }
 
-        return Rpg.records.timesDroppedLoot - this._state.activeAfterTimesDroppedLoot;
+        return Rpg.records.timesDroppedLoot[this._config.regionId] - this._state.activeAfterTimesDroppedLoot;
     }
 
     checkIsActive() {
@@ -23,11 +24,11 @@ export class MicrocosmTimeDroppedLoot<T extends MicrocosmTimeDroppedLoot.State =
             return false;
         }
 
-        return Rpg.records.timesDroppedLoot >= this._state.activeAfterTimesDroppedLoot;
+        return Rpg.records.timesDroppedLoot[this._config.regionId] >= this._state.activeAfterTimesDroppedLoot;
     }
 
     reset() {
-        this._state.activeAfterTimesDroppedLoot = Rpg.records.timesDroppedLoot
+        this._state.activeAfterTimesDroppedLoot = Rpg.records.timesDroppedLoot[this._config.regionId]
             + this._config.replenishFn(this._state.activeAfterTimesDroppedLoot);
     }
 
@@ -44,6 +45,7 @@ export namespace MicrocosmTimeDroppedLoot {
     }
 
     export interface Config {
+        regionId: RpgRegion.Id;
         replenishFn: (previous: Integer | null) => Integer;
     }
 }

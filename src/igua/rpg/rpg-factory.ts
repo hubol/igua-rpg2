@@ -62,8 +62,6 @@ export namespace RpgFactory {
         const status = new RpgPlayerStatus(data.character.status, attributes, buffs);
         const experienceRewarder = new RpgExperienceRewarder(data.character.experience, buffs, status);
         const experience = new RpgExperience(data.character.experience, experienceRewarder);
-        const records = new RpgRecords(data.character.records);
-        const loot = new RpgLoot(experience, records);
         const classrooms = new RpgClassrooms(classroomsState, experience.reward);
         const iguanaNpcs = new RpgIguanaNpcs(iguanaNpcsState, experience.reward);
         const quests = new RpgQuests(questsState, experience.reward);
@@ -89,6 +87,8 @@ export namespace RpgFactory {
             spells,
             temporaryEffects,
         );
+        const records = new RpgRecords(data.character.records, player);
+        const loot = new RpgLoot(experience, records);
         const difficulty = new RpgDifficulty(player);
         const shops = new RpgShops(shopsState, wallet, inventory);
         const weightedPedestals = new RpgWeightedPedestals(weightedPedestalsState);

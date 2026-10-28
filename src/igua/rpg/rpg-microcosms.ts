@@ -19,6 +19,7 @@ const manifest = {
     }),
     "GreatTower.EfficientHome.Nerd.DownloadData": configure(MicrocosmDownloadData, {}),
     "FallenBot.IsSurfaced": configure(MicrocosmTimeDroppedLoot, {
+        regionId: "Indiana",
         replenishFn: (previous: Integer | null) => previous === null ? 10 : Rng.intc(10, 20),
     }),
     "Ohio.Lottery": configure(MicrocosmLottery, {
@@ -37,6 +38,7 @@ const manifest = {
                 return prizeList[win.normalNumbersCorrectCount] ?? prizeList.last;
             };
         })(),
+        regionId: "Ohio",
     }),
     "SuggestiveCavern.SimpleBot": configure(MicrocosmSimpleBot, {
         questIds: { RobotHair: "SuggestiveCavern.SimpleBot.Hair" },
