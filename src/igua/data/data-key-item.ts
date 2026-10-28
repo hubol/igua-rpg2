@@ -75,7 +75,7 @@ export namespace DataKeyItem {
             HomunculusWaterFish: {
                 name: "Homunculus of Water's Fish",
                 description: "Fish for the Homunculus of Water.",
-                texture: null,
+                texture: Tx.Collectibles.Key.HomunculusFish,
             },
             MagicKey: {
                 name: "Magic Key",
